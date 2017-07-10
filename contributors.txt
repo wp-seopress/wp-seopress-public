@@ -1,0 +1,21 @@
+Great people who contributed to this plugin :
+
+Developers:
+- Benjamin Denis: contact@seopress.org / @wp_seopress
+
+SEO consultant:
+- Alan Cladx: @cladxxx
+
+Beta testers / feedbacks:
+- Mickael Gris: mickael.gris@gmail.com / @mickaelgris
+- Aurélien Denis: contact@wp-alacarte.com / @wpchannel
+- Sébastien Serre: @sebastienserre
+- Ludovic Riaudel: @lriaudel
+
+Translators:
+- French: Didier Wolforg, @rainbowgeek, and Clément Polito
+- English: @rainbowgeek
+- Italian: Déborah Donnier @deborahdonnier
+- Spanish: Rafael Salguero
+- German: @likemike2425
+- Japan: @s_tayama and @miccweb

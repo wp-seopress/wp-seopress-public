@@ -1,0 +1,3864 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SEOPress\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
+"POT-Creation-Date: 2017-07-01 14:35+0200\n"
+"PO-Revision-Date: 2017-07-01 14:35+0200\n"
+"Last-Translator: \n"
+"Language-Team: Benjamin DENIS <contact@seopress.org>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_attr__;esc_attr_e\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/admin/admin-header.php:11
+msgid "SEOPress"
+msgstr "SEOPress"
+
+#: inc/admin/admin-header.php:15 inc/admin/adminbar.php:72
+msgid "PRO"
+msgstr "PRO"
+
+#: inc/admin/admin-header.php:27 inc/admin/admin.php:179
+#: inc/admin/adminbar.php:22
+msgid "Titles & Metas"
+msgstr "Titres et Métas"
+
+#: inc/admin/admin-header.php:33 inc/admin/admin.php:180
+#: inc/admin/adminbar.php:28
+msgid "XML / HTML Sitemap"
+msgstr "Sitemap XML / HTML"
+
+#: inc/admin/admin-header.php:39 inc/admin/admin.php:181
+#: inc/admin/admin.php:1212 inc/admin/adminbar.php:34
+msgid "Social Networks"
+msgstr "Réseaux Sociaux"
+
+#: inc/admin/admin-header.php:45 inc/admin/admin.php:182
+#: inc/admin/admin.php:1241 inc/admin/adminbar.php:40
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: inc/admin/admin-header.php:51 inc/admin/admin-metaboxes-form.php:124
+#: inc/admin/admin.php:183 inc/admin/admin.php:273 inc/admin/admin.php:547
+#: inc/admin/admin.php:1270 inc/admin/adminbar.php:46
+msgid "Advanced"
+msgstr "Avancé"
+
+#: inc/admin/admin-header.php:59 inc/admin/admin.php:1299
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: inc/admin/admin-header.php:65 inc/admin/admin.php:1327
+msgid "Local Business"
+msgstr "Local Business"
+
+#: inc/admin/admin-header.php:71 inc/admin/admin.php:1355
+msgid "Dublin Core"
+msgstr "Dublin Core"
+
+#: inc/admin/admin-header.php:77 inc/admin/admin.php:1383
+msgid "Structured Data Types"
+msgstr "Types de données structurées"
+
+#: inc/admin/admin-header.php:83 inc/admin/admin.php:1411
+msgid "Breadcrumbs"
+msgstr "Fil d'Ariane"
+
+#: inc/admin/admin-header.php:89 inc/admin/admin.php:1440
+msgid "Google Page Speed"
+msgstr "Google Page Speed"
+
+#: inc/admin/admin-header.php:95 inc/admin/admin.php:1451
+msgid "robots.txt"
+msgstr "robots.txt"
+
+#: inc/admin/admin-header.php:101 inc/admin/admin.php:1480
+msgid "Google News Sitemap"
+msgstr "Google News Sitemap"
+
+#: inc/admin/admin-header.php:107 inc/admin/admin.php:1508
+#: inc/admin/adminbar.php:78
+msgid "Redirections"
+msgstr "Redirections"
+
+#: inc/admin/admin-header.php:113 inc/admin/admin.php:1538
+msgid "SEOPress BOT - Broken links"
+msgstr "SEOPress BOT - Liens cassés"
+
+#: inc/admin/admin-header.php:119 inc/admin/admin.php:1549
+msgid ".htaccess"
+msgstr ".htaccess"
+
+#: inc/admin/admin-header.php:125 inc/admin/admin.php:1560
+msgid "RSS"
+msgstr "RSS"
+
+#: inc/admin/admin-header.php:131 inc/admin/admin.php:1584
+#: inc/admin/adminbar.php:66
+msgid "License"
+msgstr "Licence"
+
+#: inc/admin/admin-header.php:138 inc/admin/admin.php:184
+#: inc/admin/admin.php:1572 inc/admin/adminbar.php:52
+msgid "Tools"
+msgstr "Outils"
+
+#: inc/admin/admin-header.php:147
+msgid "See the changelog (new window)"
+msgstr "Voir le journal des modifications (ouvrir dans une nouvelle fenêtre)"
+
+#: inc/admin/admin-header.php:149
+msgid "See the changelog"
+msgstr "Voir le journal des modifications"
+
+#: inc/admin/admin-header.php:151 inc/admin/admin-header.php:153
+msgid "Send feedback"
+msgstr "Envoyer un retour d'expérience"
+
+#: inc/admin/admin-header.php:155
+msgid "Follow us on Twitter (new window)"
+msgstr "Suivez-nous sur Twitter (nouvelle fenêtre)"
+
+#: inc/admin/admin-header.php:157
+msgid "Follow us on Twitter"
+msgstr "Suivez-nous sur Twitter"
+
+#: inc/admin/admin-header.php:159
+msgid "Official website (new window)"
+msgstr "Site officiel (nouvelle fenêtre)"
+
+#: inc/admin/admin-header.php:161
+msgid "Official website"
+msgstr "Site Officiel"
+
+#: inc/admin/admin-header.php:163
+msgid "Support (new window)"
+msgstr "Support (nouvelle fenêtre)"
+
+#: inc/admin/admin-header.php:165
+msgid "Support"
+msgstr "Support"
+
+#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:31
+#: inc/admin/admin-metaboxes.php:33 inc/admin/adminbar.php:16
+#: inc/functions/options-advanced-admin.php:523
+msgid "SEO"
+msgstr "SEO"
+
+#: inc/admin/admin-metaboxes-form.php:123
+msgid "Titles settings"
+msgstr "Paramètres de titres"
+
+#: inc/admin/admin-metaboxes-form.php:125
+msgid "Social"
+msgstr "Social"
+
+#: inc/admin/admin-metaboxes-form.php:127
+msgid "Redirection"
+msgstr "Redirection"
+
+#: inc/admin/admin-metaboxes-form.php:131
+msgid "Google News"
+msgstr "Google News"
+
+#: inc/admin/admin-metaboxes-form.php:141
+msgid "Title"
+msgstr "Titre"
+
+#: inc/admin/admin-metaboxes-form.php:142
+msgid "Enter your title"
+msgstr "Entrez votre titre"
+
+#: inc/admin/admin-metaboxes-form.php:146
+#: inc/admin/admin-metaboxes-form.php:154
+msgid "(maximum recommended limit)"
+msgstr "(limite maximale recommandée)"
+
+#: inc/admin/admin-metaboxes-form.php:149 inc/admin/admin.php:641
+#: inc/admin/admin.php:1662 inc/functions/options-advanced-admin.php:533
+msgid "Meta description"
+msgstr "Meta description"
+
+#: inc/admin/admin-metaboxes-form.php:150
+msgid "Enter your meta description"
+msgstr "Entrez votre méta description"
+
+#: inc/admin/admin-metaboxes-form.php:159
+msgid "Google Snippet Preview"
+msgstr "Aperçu Google Snippet"
+
+#: inc/admin/admin-metaboxes-form.php:160
+msgid "This is what your page will look like in Google search results"
+msgstr ""
+"Voilà à quoi ressemblera votre page dans les résultats de recherche Google"
+
+#: inc/admin/admin-metaboxes-form.php:185 inc/admin/admin.php:1838
+#: inc/admin/admin.php:2805 inc/admin/admin.php:2938 inc/admin/admin.php:3030
+#: inc/admin/admin.php:3105 inc/admin/admin.php:3174 inc/admin/admin.php:3276
+msgid "noindex"
+msgstr "noindex"
+
+#: inc/admin/admin-metaboxes-form.php:186 inc/admin/admin.php:3278
+msgid ""
+"Do not display all pages of the site in Google search results and do not "
+"display \"Cached\" links in search results."
+msgstr ""
+"Ne pas afficher toutes les pages du site dans les résultats de recherche "
+"<br>et ne pas afficher de lien \"En cache\" dans les résultats de recherche."
+
+#: inc/admin/admin-metaboxes-form.php:191 inc/admin/admin.php:1846
+#: inc/admin/admin.php:2824 inc/admin/admin.php:2957 inc/admin/admin.php:3049
+#: inc/admin/admin.php:3295
+msgid "nofollow"
+msgstr "nofollow"
+
+#: inc/admin/admin-metaboxes-form.php:192 inc/admin/admin.php:3297
+msgid "Do not follow links for all pages."
+msgstr "Ne pas suivre les liens de tout le site."
+
+#: inc/admin/admin-metaboxes-form.php:197 inc/admin/admin.php:1854
+#: inc/admin/admin.php:3314
+msgid "noodp"
+msgstr "noodp"
+
+#: inc/admin/admin-metaboxes-form.php:198 inc/admin/admin.php:3316
+msgid ""
+"Do not use Open Directory project metadata for titles or excerpts for all "
+"pages."
+msgstr ""
+"Ne pas utiliser les métadonnées de l'Open Directory project pour les titres "
+"ou les extraits de tout le site."
+
+#: inc/admin/admin-metaboxes-form.php:203 inc/admin/admin.php:1862
+#: inc/admin/admin.php:3333
+msgid "noimageindex"
+msgstr "noimageindex"
+
+#: inc/admin/admin-metaboxes-form.php:204 inc/admin/admin.php:3335
+msgid "Do not index images from the entire site."
+msgstr "Ne pas indexer les images de tout le site."
+
+#: inc/admin/admin-metaboxes-form.php:209 inc/admin/admin.php:1870
+#: inc/admin/admin.php:3352
+msgid "noarchive"
+msgstr "noarchive"
+
+#: inc/admin/admin-metaboxes-form.php:210 inc/admin/admin.php:3354
+msgid "Do not display a \"Cached\" link in the Google search results."
+msgstr "Ne pas afficher de lien \"En cache\" dans les résultats de recherche."
+
+#: inc/admin/admin-metaboxes-form.php:215 inc/admin/admin.php:1878
+#: inc/admin/admin.php:3371
+msgid "nosnippet"
+msgstr "nosnippet"
+
+#: inc/admin/admin-metaboxes-form.php:216 inc/admin/admin.php:3373
+msgid ""
+"Do not display a description in the Google search results for all pages."
+msgstr ""
+"Ne pas afficher de description dans les résultats de recherche pour toutes "
+"les pages du site."
+
+#: inc/admin/admin-metaboxes-form.php:219 inc/admin/admin.php:645
+msgid "Canonical URL"
+msgstr "URL Canonique"
+
+#: inc/admin/admin-metaboxes-form.php:220
+msgid "Default value: "
+msgstr "Valeur par défaut: "
+
+#: inc/admin/admin-metaboxes-form.php:226
+msgid "Facebook Title"
+msgstr "Titre Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:227
+msgid "Enter your Facebook title"
+msgstr "Entrez votre titre Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:230
+msgid "Facebook description"
+msgstr "Description Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:231
+msgid "Enter your Facebook description"
+msgstr "Entrez votre description Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:234
+msgid "Facebook Thumbnail"
+msgstr "Miniature Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:235
+msgid "Minimum size: 200x200px"
+msgstr "Taille minimum : 200x200px"
+
+#: inc/admin/admin-metaboxes-form.php:236
+#: inc/admin/admin-metaboxes-form.php:252 inc/admin/admin.php:3841
+#: inc/admin/admin.php:3901
+msgid "Select your default thumbnail"
+msgstr "Sélectionnez votre miniature par défaut"
+
+#: inc/admin/admin-metaboxes-form.php:237
+#: inc/admin/admin-metaboxes-form.php:253 inc/admin/admin.php:3599
+#: inc/admin/admin.php:3843 inc/admin/admin.php:3903
+msgid "Upload an Image"
+msgstr "Envoyer une image"
+
+#: inc/admin/admin-metaboxes-form.php:242
+msgid "Twitter Title"
+msgstr "Titre Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:243
+msgid "Enter your Twitter title"
+msgstr "Entrez votre titre Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:246
+msgid "Twitter description"
+msgstr "Description Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:247
+msgid "Enter your Twitter description"
+msgstr "Entrez votre description Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:250
+msgid "Twitter Thumbnail"
+msgstr "Miniature Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:251
+msgid "Minimum size: 160x160px"
+msgstr "Taille minimum : 160x160px"
+
+#: inc/admin/admin-metaboxes-form.php:262
+msgid "Enable redirection?"
+msgstr "Activer la redirection ?"
+
+#: inc/admin/admin-metaboxes-form.php:266
+msgid "URL redirection"
+msgstr "URL de redirection"
+
+#: inc/admin/admin-metaboxes-form.php:268
+msgid "301 Moved Permanently"
+msgstr "301 Redirection permanente"
+
+#: inc/admin/admin-metaboxes-form.php:269
+msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
+msgstr "302 Trouvée (HTTP 1.1) / Redirection temporaire (HTTP 1.0)"
+
+#: inc/admin/admin-metaboxes-form.php:270
+msgid "307 Moved Temporarily (HTTP 1.1 Only)"
+msgstr "307 Redirection temporaire (HTTP 1.1 seulement)"
+
+#: inc/admin/admin-metaboxes-form.php:272
+msgid "Enter your new URL"
+msgstr "Saisissez votre nouvelle URL"
+
+#: inc/admin/admin-metaboxes-form.php:275
+#: inc/admin/admin-metaboxes-form.php:277
+msgid "Test your URL"
+msgstr "Tester votre URL"
+
+#: inc/admin/admin-metaboxes-form.php:287
+msgid "Exclude this post from Google News Sitemap?"
+msgstr "Exclure cet article du sitemap Google News ?"
+
+#: inc/admin/admin-metaboxes-form.php:291
+msgid "Google News Genres"
+msgstr "Genres Google News"
+
+#: inc/admin/admin-metaboxes-form.php:293 inc/admin/admin.php:4115
+#: inc/admin/admin.php:4192 inc/admin/admin.php:4269 inc/admin/admin.php:4346
+#: inc/admin/admin.php:4423
+msgid "None"
+msgstr "Aucun"
+
+#: inc/admin/admin-metaboxes-form.php:294
+msgid "Press Release"
+msgstr "Press Release"
+
+#: inc/admin/admin-metaboxes-form.php:295
+msgid "Satire"
+msgstr "Satire"
+
+#: inc/admin/admin-metaboxes-form.php:296
+msgid "Blog"
+msgstr "Blog"
+
+#: inc/admin/admin-metaboxes-form.php:297
+msgid "OpEd"
+msgstr "OpEd"
+
+#: inc/admin/admin-metaboxes-form.php:298
+msgid "Opinion"
+msgstr "Opinion"
+
+#: inc/admin/admin-metaboxes-form.php:299
+msgid "UserGenerated"
+msgstr "UserGenerated"
+
+#: inc/admin/admin-metaboxes-form.php:304
+msgid "Google News Keywords <em>(max recommended limit: 12)</em>"
+msgstr "Mots clés Google News <em>(limite max recommandée: 12)</em>"
+
+#: inc/admin/admin-metaboxes-form.php:305
+msgid "Enter your Google News Keywords"
+msgstr "Entrez vos mots clés Google News"
+
+#: inc/admin/admin.php:107
+msgid "404 - Page not found"
+msgstr "404 - Page non trouvée"
+
+#: inc/admin/admin.php:178
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#: inc/admin/admin.php:180 inc/admin/admin.php:1183
+msgid "XML / Image / HTML Sitemap"
+msgstr "Plan de site XML / Image / HTML"
+
+#: inc/admin/admin.php:191
+#, php-format
+msgid "%%sitetitle%%"
+msgstr "%%sitetitle%%"
+
+#: inc/admin/admin.php:191 inc/admin/admin.php:2722 inc/admin/admin.php:2773
+#: inc/admin/admin.php:2890 inc/admin/admin.php:2998 inc/admin/admin.php:3074
+#: inc/admin/admin.php:3144 inc/admin/admin.php:3213 inc/admin/admin.php:3245
+msgid "Site Title"
+msgstr "Titre du Site"
+
+#: inc/admin/admin.php:192
+#, php-format
+msgid "%%tagline%%"
+msgstr "%%tagline%%"
+
+#: inc/admin/admin.php:192 inc/admin/admin.php:2723 inc/admin/admin.php:2734
+msgid "Tagline"
+msgstr "Slogan du site"
+
+#: inc/admin/admin.php:193
+#, php-format
+msgid "%%post_title%%"
+msgstr "%%post_title%%"
+
+#: inc/admin/admin.php:193
+msgid "Post Title (post, page, custom post type)"
+msgstr "Titre du post (article, page, type d'article personnalisé)"
+
+#: inc/admin/admin.php:194
+#, php-format
+msgid "%%post_excerpt%%"
+msgstr "%%post_excerpt%%"
+
+#: inc/admin/admin.php:194
+msgid "Post excerpt"
+msgstr "Extrait du post"
+
+#: inc/admin/admin.php:195
+#, php-format
+msgid "%%post_date%%"
+msgstr "%%post_date%%"
+
+#: inc/admin/admin.php:195
+msgid "Post date"
+msgstr "Date du post"
+
+#: inc/admin/admin.php:196
+#, php-format
+msgid "%%post_author%%"
+msgstr "%%post_author%%"
+
+#: inc/admin/admin.php:196 inc/admin/admin.php:3073
+msgid "Post author"
+msgstr "Auteur du post"
+
+#: inc/admin/admin.php:197
+#, php-format
+msgid "%%_category_title%%"
+msgstr "%%_category_title%%"
+
+#: inc/admin/admin.php:197
+msgid "Category title"
+msgstr "Titre de catégorie"
+
+#: inc/admin/admin.php:198
+#, php-format
+msgid "%%_category_description%%"
+msgstr "%%_category_description%%"
+
+#: inc/admin/admin.php:198
+msgid "Category description"
+msgstr "Description de la catégorie"
+
+#: inc/admin/admin.php:199
+#, php-format
+msgid "%%tag_title%%"
+msgstr "%%tag_title%%"
+
+#: inc/admin/admin.php:199
+msgid "Tag title"
+msgstr "Titre de l'étiquette"
+
+#: inc/admin/admin.php:200
+#, php-format
+msgid "%%tag_description%%"
+msgstr "%%tag_description%%"
+
+#: inc/admin/admin.php:200
+msgid "Tag description"
+msgstr "Description de l'étiquette"
+
+#: inc/admin/admin.php:201
+#, php-format
+msgid "%%term_title%%"
+msgstr "%%term_title%%"
+
+#: inc/admin/admin.php:201
+msgid "Term title"
+msgstr "Titre du terme"
+
+#: inc/admin/admin.php:202
+#, php-format
+msgid "%%term_description%%"
+msgstr "%%term_description%%"
+
+#: inc/admin/admin.php:202
+msgid "Term description"
+msgstr "Description du terme"
+
+#: inc/admin/admin.php:203
+#, php-format
+msgid "%%search_keywords%%"
+msgstr "%%search_keywords%%"
+
+#: inc/admin/admin.php:203
+msgid "Search keywords"
+msgstr "Mots clés de recherche"
+
+#: inc/admin/admin.php:204
+#, php-format
+msgid "%%current_pagination%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/admin.php:204
+msgid "Current number page"
+msgstr "Numéro de page actuel"
+
+#: inc/admin/admin.php:205
+#, php-format
+msgid "%%cpt_plural%%"
+msgstr "%%cpt_plural%%"
+
+#: inc/admin/admin.php:205
+msgid "Plural Post Type Archive name"
+msgstr "Nom pluriel archives type d'article personnalisé"
+
+#: inc/admin/admin.php:206
+#, php-format
+msgid "%%date_archive%%"
+msgstr "%%date_archive%%"
+
+#: inc/admin/admin.php:206
+msgid "Date Archive"
+msgstr "Date d'archive"
+
+#: inc/admin/admin.php:212
+msgid "Templates variables"
+msgstr "Modèles de variables"
+
+#: inc/admin/admin.php:230
+msgid ""
+"Discourage search engines from indexing this site is <strong>ON!</strong> "
+"None of the following settings will be applied."
+msgstr ""
+"Décourager les moteurs de recherche d’indexer ce site est <strong>actif !</"
+"strong> Aucun des paramètres suivants ne s’appliqueront."
+
+#: inc/admin/admin.php:231 inc/admin/admin.php:2614
+msgid "Change this settings"
+msgstr "Changer ce paramètre"
+
+#: inc/admin/admin.php:251 inc/admin/admin.php:255 inc/admin/admin.php:318
+#: inc/admin/admin.php:322 inc/admin/admin.php:383 inc/admin/admin.php:387
+#: inc/admin/admin.php:450 inc/admin/admin.php:454 inc/admin/admin.php:529
+#: inc/admin/admin.php:533 inc/admin/admin.php:1168 inc/admin/admin.php:1172
+#: inc/admin/admin.php:1197 inc/admin/admin.php:1201 inc/admin/admin.php:1226
+#: inc/admin/admin.php:1230 inc/admin/admin.php:1255 inc/admin/admin.php:1259
+#: inc/admin/admin.php:1284 inc/admin/admin.php:1288 inc/admin/admin.php:1313
+#: inc/admin/admin.php:1317 inc/admin/admin.php:1341 inc/admin/admin.php:1345
+#: inc/admin/admin.php:1369 inc/admin/admin.php:1373 inc/admin/admin.php:1397
+#: inc/admin/admin.php:1401 inc/admin/admin.php:1425 inc/admin/admin.php:1429
+#: inc/admin/admin.php:1465 inc/admin/admin.php:1469 inc/admin/admin.php:1494
+#: inc/admin/admin.php:1498 inc/admin/admin.php:1523 inc/admin/admin.php:1527
+msgid "Click to disable this feature"
+msgstr "Cliquez pour désactiver cette fonctionnalité"
+
+#: inc/admin/admin.php:252 inc/admin/admin.php:254 inc/admin/admin.php:319
+#: inc/admin/admin.php:321 inc/admin/admin.php:384 inc/admin/admin.php:386
+#: inc/admin/admin.php:451 inc/admin/admin.php:453 inc/admin/admin.php:530
+#: inc/admin/admin.php:532 inc/admin/admin.php:1169 inc/admin/admin.php:1171
+#: inc/admin/admin.php:1198 inc/admin/admin.php:1200 inc/admin/admin.php:1227
+#: inc/admin/admin.php:1229 inc/admin/admin.php:1256 inc/admin/admin.php:1258
+#: inc/admin/admin.php:1285 inc/admin/admin.php:1287 inc/admin/admin.php:1314
+#: inc/admin/admin.php:1316 inc/admin/admin.php:1342 inc/admin/admin.php:1344
+#: inc/admin/admin.php:1370 inc/admin/admin.php:1372 inc/admin/admin.php:1398
+#: inc/admin/admin.php:1400 inc/admin/admin.php:1426 inc/admin/admin.php:1428
+#: inc/admin/admin.php:1466 inc/admin/admin.php:1468 inc/admin/admin.php:1495
+#: inc/admin/admin.php:1497 inc/admin/admin.php:1524 inc/admin/admin.php:1526
+msgid "Click to enable this feature"
+msgstr "Cliquez pour activer cette fonctionnalité"
+
+#: inc/admin/admin.php:269
+msgid "Home"
+msgstr "Accueil"
+
+#: inc/admin/admin.php:270
+msgid "Single Post Types"
+msgstr "Détail Types de contenus"
+
+#: inc/admin/admin.php:271
+msgid "Archives"
+msgstr "Archives"
+
+#: inc/admin/admin.php:272 inc/admin/admin.php:338
+msgid "Taxonomies"
+msgstr "Taxonomies"
+
+#: inc/admin/admin.php:336 inc/admin/admin.php:469 inc/admin/admin.php:477
+msgid "General"
+msgstr "Général"
+
+#: inc/admin/admin.php:337
+msgid "Post Types"
+msgstr "Types de contenus"
+
+#: inc/admin/admin.php:339
+msgid "HTML Sitemap"
+msgstr "Sitemap HTML"
+
+#: inc/admin/admin.php:401
+msgid "Knowledge Graph"
+msgstr "Knowledge Graph"
+
+#: inc/admin/admin.php:402
+msgid "Your social accounts"
+msgstr "Vos comptes sociaux"
+
+#: inc/admin/admin.php:403
+msgid "Facebook"
+msgstr "Facebook"
+
+#: inc/admin/admin.php:404
+msgid "Twitter"
+msgstr "Twitter"
+
+#: inc/admin/admin.php:470 inc/admin/admin.php:478
+msgid "Tracking"
+msgstr "Suivi"
+
+#: inc/admin/admin.php:471 inc/admin/admin.php:479
+msgid "Events"
+msgstr "Evénements"
+
+#: inc/admin/admin.php:472 inc/admin/admin.php:480
+msgid "Custom Dimensions"
+msgstr "Dimensions personnalisées"
+
+#: inc/admin/admin.php:473
+msgid "Stats in Dashboard"
+msgstr "Stats dans le Tableau de bord"
+
+#: inc/admin/admin.php:548
+msgid "Appearance"
+msgstr "Apparence"
+
+#: inc/admin/admin.php:549
+msgid "Security"
+msgstr "Sécurité"
+
+#: inc/admin/admin.php:581
+msgid "Export Settings"
+msgstr "Exporter Paramètres"
+
+#: inc/admin/admin.php:583
+msgid ""
+"Export the plugin settings for this site as a .json file. This allows you to "
+"easily import the configuration into another site."
+msgstr ""
+"Exporter les paramètres du plugin pour ce site comme un fichier JSON. Cela "
+"vous permet d'importer facilement votre configuration dans un autre site "
+"WordPress."
+
+#: inc/admin/admin.php:588
+msgid "Export"
+msgstr "Exporter"
+
+#: inc/admin/admin.php:595
+msgid "Import Settings"
+msgstr "Importer Paramètres"
+
+#: inc/admin/admin.php:597
+msgid ""
+"Import the plugin settings from a .json file. This file can be obtained by "
+"exporting the settings on another site using the form above."
+msgstr ""
+"Importer les paramètres du plugin depuis un fichier JSON. Ce fichier peut "
+"être obtenu en exportant les paramètres depuis un autre site en utilisant le "
+"formulaire ci-dessus."
+
+#: inc/admin/admin.php:605 inc/admin/admin.php:628
+msgid "Import"
+msgstr "Importer"
+
+#: inc/admin/admin.php:613
+msgid "Import Redirections"
+msgstr "Importez des redirections"
+
+#: inc/admin/admin.php:615
+msgid ""
+"Import your own redirections from a .csv file (separator \";\"). You must "
+"have 3 columns in this order: url to match (without your domain name), url "
+"to redirect in absolute and type of redirection (301, 302 or 307)."
+msgstr ""
+"Importez vos propres redirections depuis un fichier .csv (séparateur « ; »). "
+"Vous devez avoir 3 colonnes dans l’ordre suivant : url à matcher (sans votre "
+"nom de domaine), l’url de redirection en absolu et le type de redirection "
+"(301, 302 ou 307)."
+
+#: inc/admin/admin.php:618
+msgid "Download a CSV example"
+msgstr "Télécharger un fichier CSV d'exemple"
+
+#: inc/admin/admin.php:636
+msgid "Import posts and terms metadata from Yoast"
+msgstr ""
+"Importer les méta données des articles, pages, types d'articles "
+"personnalisés, terms de taxonomies depuis Yoast"
+
+#: inc/admin/admin.php:638
+msgid "By clicking Migrate, we'll import:"
+msgstr "En cliquant sur Migrer, vous importerez :"
+
+#: inc/admin/admin.php:640
+msgid "Title tags"
+msgstr "Balises titres"
+
+#: inc/admin/admin.php:642
+msgid "Facebook Open Graph tags (title, description and image thumbnail)"
+msgstr "Balises Facebook Open Graph (titre, description et miniature)"
+
+#: inc/admin/admin.php:643
+msgid "Twitter tags (title, description and image thumbnail)"
+msgstr "Balises Twitter (titre, description et miniature)"
+
+#: inc/admin/admin.php:644
+msgid "Meta Robots (noindex, nofollow...)"
+msgstr "Meta Robots (noindex, nofollow...)"
+
+#: inc/admin/admin.php:647
+msgid ""
+"<strong>WARNING:</strong> Migration will delete all SEOPress posts metadata"
+msgstr ""
+"<strong>ATTENTION :</strong> La migration supprimera toutes les méta-données "
+"de SEOPress"
+
+#: inc/admin/admin.php:648
+msgid "Migrate now"
+msgstr "Migrer maintenant"
+
+#: inc/admin/admin.php:655
+msgid "Reset All Notices From Notifications Center"
+msgstr "Réinitialiser toutes les notices du Centre de Notifications"
+
+#: inc/admin/admin.php:657
+msgid ""
+"By clicking Reset Notices, you'll see all notices again in notifications "
+"center."
+msgstr ""
+"En cliquant sur Réinitialiser Notices, vous verrez à nouveau les notices "
+"dans le centre de notifications."
+
+#: inc/admin/admin.php:662
+msgid "Reset notices"
+msgstr "Réinitialiser Notices"
+
+#: inc/admin/admin.php:669
+msgid "Reset All Settings"
+msgstr "Tout réinitialiser"
+
+#: inc/admin/admin.php:671
+msgid ""
+"<strong>WARNING:</strong> Delete all options related to SEOPress in your "
+"database AND set settings to their default values."
+msgstr ""
+"<strong>AVERTISSEMENT:</strong> Supprime toutes les options liées à SEOPress "
+"dans la base de données et redéfini ces derniers à leurs valeurs par défaut."
+
+#: inc/admin/admin.php:676
+msgid "Reset settings"
+msgstr "Réinitialiser les paramètres"
+
+#: inc/admin/admin.php:717 inc/admin/admin.php:723
+msgid "SEO Tools"
+msgstr "Outils SEO"
+
+#: inc/admin/admin.php:718 inc/admin/admin.php:724 inc/admin/admin.php:730
+#: inc/admin/admin.php:735
+msgid "Useful links"
+msgstr "Liens utiles"
+
+#: inc/admin/admin.php:722 inc/admin/admin.php:734
+msgid "Notifications Center"
+msgstr "Centre de Notifications"
+
+#: inc/admin/admin.php:755
+msgid ""
+"We notice that you use Yoast SEO plugin. <br>Do you want to migrate all your "
+"posts metadata to SEOPress?"
+msgstr ""
+"Nous avons noté que vous utilisez Yoast SEO. <br>Souhaitez vous migrer les "
+"méta données de vos articles, pages et types d'articles personnalisés vers "
+"SEOPress ?"
+
+#: inc/admin/admin.php:757
+msgid "Migrate!"
+msgstr "Migrer !"
+
+#: inc/admin/admin.php:778
+msgid "Your site doesn't use an SSL certificate!"
+msgstr "Votre site n'utilise pas de certificat SSL !"
+
+#: inc/admin/admin.php:779 inc/admin/admin.php:3996 inc/admin/admin.php:4017
+#: inc/admin/admin.php:4038 inc/admin/admin.php:4059
+msgid "Learn more"
+msgstr "En savoir plus"
+
+#: inc/admin/admin.php:780
+msgid "Low impact"
+msgstr "Impact faible"
+
+#: inc/admin/admin.php:782
+msgid "Buy an SSL!"
+msgstr "Acheter un SSL !"
+
+#: inc/admin/admin.php:792
+msgid "Your site is not visible to Search Engines!"
+msgstr "Votre site n'est pas visible aux moteurs de recherche !"
+
+#: inc/admin/admin.php:793 inc/admin/admin.php:803 inc/admin/admin.php:813
+msgid "High impact"
+msgstr "Impact élevé"
+
+#: inc/admin/admin.php:795 inc/admin/admin.php:805 inc/admin/admin.php:815
+#: inc/admin/admin.php:839 inc/admin/admin.php:893 inc/admin/admin.php:906
+#: inc/admin/admin.php:978
+msgid "Fix this!"
+msgstr "Régler !"
+
+#: inc/admin/admin.php:802
+msgid "Your site title is empty!"
+msgstr "Le titre de votre site est vide !"
+
+#: inc/admin/admin.php:812 inc/admin/admin.php:2613
+msgid ""
+"Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
+msgstr ""
+"Vos permaliens ne sont pas SEO Friendly ! Veuillez activer la réécriture "
+"d'URL pour résoudre cela."
+
+#: inc/admin/admin.php:836
+msgid "You RSS feed show full text!"
+msgstr "Votre flux RSS affiche le texte complet !"
+
+#: inc/admin/admin.php:837 inc/admin/admin.php:891 inc/admin/admin.php:904
+msgid "Medium impact"
+msgstr "Impact modéré"
+
+#: inc/admin/admin.php:863
+msgid "Break comments into pages is ON!"
+msgstr "Diviser les commentaires en plusieurs pages est actif !"
+
+#: inc/admin/admin.php:864 inc/admin/admin.php:928 inc/admin/admin.php:964
+msgid "Huge impact"
+msgstr "Impact élevé"
+
+#: inc/admin/admin.php:866
+msgid "Disable this!"
+msgstr "Désactiver !"
+
+#: inc/admin/admin.php:890
+msgid "Display more posts per page on homepage and archives"
+msgstr ""
+"Afficher davantage d'articles par page sur votre page d'accueil et archives"
+
+#: inc/admin/admin.php:903
+msgid "You don't have an XML Sitemap!"
+msgstr "Vous n'avez pas de Sitemap XML !"
+
+#: inc/admin/admin.php:927
+msgid "Do you have a Google Business page? It's free!"
+msgstr "Avez vous une page Google Business ? C'est gratuit !"
+
+#: inc/admin/admin.php:930
+msgid "Create your page now!"
+msgstr "Créez votre page !"
+
+#: inc/admin/admin.php:963
+msgid "Add your site to Google. It's free!"
+msgstr "Ajoutez votre site à Google. C’est gratuit !"
+
+#: inc/admin/admin.php:966
+msgid "Add your site to Search Console!"
+msgstr "Ajoutez à Search Console !"
+
+#: inc/admin/admin.php:976
+msgid "You have to enter your licence key to get updates and support"
+msgstr ""
+"Vous devez entrer votre clé de licence pour obtenir mises à jour et support"
+
+#: inc/admin/admin.php:991
+msgid "Check websites setup on your server"
+msgstr "Vérifier les sites présents sur votre hébergeur"
+
+#: inc/admin/admin.php:993
+msgid "Host IP: "
+msgstr "IP de l'hôte : "
+
+#: inc/admin/admin.php:999
+msgid "Server IP Address: "
+msgstr "Adresse IP du serveur : "
+
+#: inc/admin/admin.php:1001
+msgid "Last scrape: "
+msgstr "Dernière exploration : "
+
+#: inc/admin/admin.php:1002
+msgid "Number of websites on your server: "
+msgstr "Nombre de sites présents sur votre serveur : "
+
+#: inc/admin/admin.php:1014
+msgid "Get list"
+msgstr "Obtenir la liste"
+
+#: inc/admin/admin.php:1022
+msgid "Check your domain expiration date"
+msgstr "Vérifier la date d'expiration de votre nom de domaine"
+
+#: inc/admin/admin.php:1053
+msgid "Your domain name: "
+msgstr "Votre nom de domaine : "
+
+#: inc/admin/admin.php:1056
+msgid "Your registrar: "
+msgstr "Votre registraire de noms de domaine : "
+
+#: inc/admin/admin.php:1059
+msgid "Last updated date: "
+msgstr "Date de dernière mise à jour : "
+
+#: inc/admin/admin.php:1062
+msgid "Domain creation date: "
+msgstr "Date de création du domaine : "
+
+#: inc/admin/admin.php:1065
+msgid "Your domain expires: "
+msgstr "Votre domaine expire le : "
+
+#: inc/admin/admin.php:1070
+msgid "Sorry, you domain name can't be verified :("
+msgstr "Désolé, votre nom de domaine ne peut être vérifié :("
+
+#: inc/admin/admin.php:1073
+msgid "Email me before expiration"
+msgstr "M'alerter avant expiration"
+
+#: inc/admin/admin.php:1082
+msgid "Check your Alexa Rank (Amazon index)"
+msgstr "Vérifier votre rang Alexa (Indice Amazon)"
+
+#: inc/admin/admin.php:1097
+msgid "Your Alexa Rank"
+msgstr "Votre rang Alexa"
+
+#: inc/admin/admin.php:1119
+msgid "Country Rank: "
+msgstr "Rang Pays : "
+
+#: inc/admin/admin.php:1128
+msgid "The lower, the best"
+msgstr "Le plus faible, le mieux"
+
+#: inc/admin/admin.php:1132
+msgid "Get Alexa Rank"
+msgstr "Obtenir votre rang Alexa"
+
+#: inc/admin/admin.php:1140
+msgid "Upload a list of links to disavow to Google"
+msgstr "Téléverser une liste de liens à désavouer à Google"
+
+#: inc/admin/admin.php:1141
+msgid "Google Trends"
+msgstr "Google Tendances"
+
+#: inc/admin/admin.php:1154
+msgid "Titles & metas"
+msgstr "Titres et Métas"
+
+#: inc/admin/admin.php:1155
+msgid "Manage all your titles & metas"
+msgstr "Gérez tous vos titres et métas"
+
+#: inc/admin/admin.php:1156 inc/admin/admin.php:1185 inc/admin/admin.php:1214
+#: inc/admin/admin.php:1243 inc/admin/admin.php:1272 inc/admin/admin.php:1301
+#: inc/admin/admin.php:1329 inc/admin/admin.php:1357 inc/admin/admin.php:1385
+#: inc/admin/admin.php:1413 inc/admin/admin.php:1442 inc/admin/admin.php:1453
+#: inc/admin/admin.php:1482 inc/admin/admin.php:1511 inc/admin/admin.php:1551
+#: inc/admin/admin.php:1562 inc/admin/admin.php:1574 inc/admin/admin.php:1586
+msgid "Manage"
+msgstr "Gérer"
+
+#: inc/admin/admin.php:1184
+msgid "Manage your XML / Image / HTML Sitemap"
+msgstr "Gérer votre plan de site XML / Image / HTML"
+
+#: inc/admin/admin.php:1213
+msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
+msgstr "Open Graph, Twitter Card, Google Knowledge Graph et plus..."
+
+#: inc/admin/admin.php:1242
+msgid "Track everything about your visitors with Google Analytics"
+msgstr "Suivez tout ce qui concerne vos visiteurs avec Google Analytics"
+
+#: inc/admin/admin.php:1271
+msgid "Advanced SEO options for advanced users!"
+msgstr "Options SEO avancées pour utilisateurs avancés !"
+
+#: inc/admin/admin.php:1300
+msgid "Improve WooCommerce SEO"
+msgstr "Améliorer le SEO de WooCommerce"
+
+#: inc/admin/admin.php:1328
+msgid "Add Google Local Business data type"
+msgstr "Ajoutez le type de données Google Local Business"
+
+#: inc/admin/admin.php:1356
+msgid "Add Dublin Core meta tags"
+msgstr "Ajout des balises Dublin Core"
+
+#: inc/admin/admin.php:1384
+msgid ""
+"Add data types to your content: articles, courses, recipes, videos, events "
+"and products"
+msgstr ""
+"Ajout des types de données à vos contenus : articles, cours, recettes, "
+"vidéos, événements et produits"
+
+#: inc/admin/admin.php:1412
+msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
+msgstr ""
+"Activer le fil d'Ariane pour votre thème et améliorer votre SEO dans les "
+"résultats de recherche "
+
+#: inc/admin/admin.php:1441
+msgid "Track your website performance to improve SEO with Google Page Speed"
+msgstr ""
+"Suivez les performances de votre site Web afin d’améliorer le SEO avec "
+"Google Page Speed"
+
+#: inc/admin/admin.php:1452
+msgid "Edit your robots.txt file"
+msgstr "Editer votre fichier robots.txt"
+
+#: inc/admin/admin.php:1481
+msgid "Optimize your site for Google News"
+msgstr "Optimisez votre site pour Google Actualités"
+
+#: inc/admin/admin.php:1509
+msgid "Monitor 404, create 301, 302 and 307 redirections"
+msgstr "Surveiller les 404, créer des redirections 301, 302 et 307"
+
+#: inc/admin/admin.php:1510
+msgid "See redirects"
+msgstr "Voir les redirections"
+
+#: inc/admin/admin.php:1539
+msgid "Scan your site to find SEO problems."
+msgstr "Analyser votre site pour trouver des problèmes de SEO."
+
+#: inc/admin/admin.php:1540
+msgid "See broken links"
+msgstr "Voir les liens cassés"
+
+#: inc/admin/admin.php:1541
+msgid "Scan"
+msgstr "Scan"
+
+#: inc/admin/admin.php:1550
+msgid "Edit your htaccess file."
+msgstr "Modifier votre fichier htaccess."
+
+#: inc/admin/admin.php:1561
+msgid "Configure default WordPress RSS."
+msgstr "Configuration des liens RSS par défaut de WordPress."
+
+#: inc/admin/admin.php:1573
+msgid "Import / export SEOPress settings from site to site."
+msgstr "Importer / Exporter les paramètres d'un site à un autre"
+
+#: inc/admin/admin.php:1585
+msgid "Edit your SEOPress license key."
+msgstr "Modifier votre clé de licence SEOPress."
+
+#: inc/admin/admin.php:1654
+msgid "Site title"
+msgstr "Titre du site"
+
+#: inc/admin/admin.php:1886
+msgid "Indicate paginated content to Google"
+msgstr "Indiquer à Google le contenu paginé"
+
+#: inc/admin/admin.php:1903 inc/admin/admin.php:3409
+msgid "Enable XML Sitemap"
+msgstr "Activez le Sitemap XML"
+
+#: inc/admin/admin.php:1911
+msgid "Enable XML Image Sitemaps"
+msgstr "Activer le Sitemap XML Images"
+
+#: inc/admin/admin.php:1919 inc/admin/admin.php:3447
+msgid "Enable HTML Sitemap"
+msgstr "Activez le Sitemap HTML"
+
+#: inc/admin/admin.php:1935
+msgid "Check to INCLUDE Post Types"
+msgstr "Cochez pour INCLURE les Types d'article"
+
+#: inc/admin/admin.php:1951
+msgid "Check to INCLUDE Taxonomies"
+msgstr "Cochez pour INCLURE les Taxonomies"
+
+#: inc/admin/admin.php:1967
+msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
+msgstr ""
+"Saisissez un ID d'article, de page ou de type de contenu où afficher le plan "
+"de site."
+
+#: inc/admin/admin.php:1975
+msgid "Exclude some Posts, Pages or Custom Post Types"
+msgstr "Exclure certains  articles, pages ou types de contenus."
+
+#: inc/admin/admin.php:1992
+msgid "Person or organization"
+msgstr "Personne ou Organisation"
+
+#: inc/admin/admin.php:2000
+msgid "Your name / organization"
+msgstr "Votre nom / organisation"
+
+#: inc/admin/admin.php:2008
+msgid "Your photo / organization logo"
+msgstr "Votre photo / logo"
+
+#: inc/admin/admin.php:2016
+msgid "Organization Phone number (only for Organization)"
+msgstr ""
+"Numéro de téléphone de l'organisation (seulement pour les organisations)"
+
+#: inc/admin/admin.php:2024
+msgid "Contact type (only for Organization)"
+msgstr "Type de contact (seulement pour les organisations)"
+
+#: inc/admin/admin.php:2032
+msgid "Contact option (only for Organization)"
+msgstr "Option de contact (seulement pour les organisations)"
+
+#: inc/admin/admin.php:2049
+msgid "Facebook Page URL"
+msgstr "URL de la page Facebook"
+
+#: inc/admin/admin.php:2057
+msgid "Twitter Username"
+msgstr "Compte utilisateur Twitter"
+
+#: inc/admin/admin.php:2065
+msgid "Google + URL"
+msgstr "URL Google +"
+
+#: inc/admin/admin.php:2073
+msgid "Pinterest URL"
+msgstr "URL Pinterest"
+
+#: inc/admin/admin.php:2081
+msgid "Instagram URL"
+msgstr "URL Instagram"
+
+#: inc/admin/admin.php:2089
+msgid "YouTube URL"
+msgstr "URL YouTube"
+
+#: inc/admin/admin.php:2097
+msgid "LinkedIn URL"
+msgstr "URL LinkedIn"
+
+#: inc/admin/admin.php:2105
+msgid "MySpace URL"
+msgstr "URL MySpace"
+
+#: inc/admin/admin.php:2113
+msgid "Soundcloud URL"
+msgstr "URL Soundcloud"
+
+#: inc/admin/admin.php:2121
+msgid "Tumblr URL"
+msgstr "URL Tumblr"
+
+#: inc/admin/admin.php:2138
+msgid "Enable Open Graph Data"
+msgstr "Activez les données Open Graph"
+
+#: inc/admin/admin.php:2146
+msgid "Select a default image"
+msgstr "Sélectionnez une image par défaut"
+
+#: inc/admin/admin.php:2154
+msgid "Facebook Admin ID"
+msgstr "Facebook Admin ID"
+
+#: inc/admin/admin.php:2162
+msgid "Facebook App ID"
+msgstr "Facebook App ID"
+
+#: inc/admin/admin.php:2179
+msgid "Enable Twitter Card"
+msgstr "Activez Twitter Card"
+
+#: inc/admin/admin.php:2187
+msgid "Default Twitter Image"
+msgstr "Image Twitter par défaut"
+
+#: inc/admin/admin.php:2195
+msgid "Image size for Twitter Summary card"
+msgstr "Taille d'image pour Twitter Summary Card"
+
+#: inc/admin/admin.php:2212 inc/admin/admin.php:3940
+msgid "Enable Google Analytics tracking"
+msgstr "Activer le suivi Google Analytics"
+
+#: inc/admin/admin.php:2220
+msgid "Enter your tracking ID"
+msgstr "Saisissez votre ID de suivi"
+
+#: inc/admin/admin.php:2228
+msgid "Exclude user roles from tracking"
+msgstr "Exclure des rôles utilisateurs du suivi"
+
+#: inc/admin/admin.php:2246 inc/admin/admin.php:3993
+msgid "Enable remarketing, demographics and interest reporting"
+msgstr ""
+"Activer le remarketing, les rapports démographiques et centres d'intérêts"
+
+#: inc/admin/admin.php:2254 inc/admin/admin.php:4014
+msgid "Enable IP Anonymization"
+msgstr "Activer l'anonymisation des IP"
+
+#: inc/admin/admin.php:2262 inc/admin/admin.php:4035
+msgid "Enhanced Link Attribution"
+msgstr "Améliorer l'attribution des liens"
+
+#: inc/admin/admin.php:2270 inc/admin/admin.php:4056
+msgid "Enable cross-domain tracking"
+msgstr "Activer le suivi cross-domain"
+
+#: inc/admin/admin.php:2278
+msgid "Cross domains"
+msgstr "Cross domains"
+
+#: inc/admin/admin.php:2296
+msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
+msgstr "Activer le suivi des téléchargements (ex: PDF, XLSX, DOCX...)"
+
+#: inc/admin/admin.php:2304
+msgid "Track click downloads"
+msgstr "Suivi des clics de téléchargements"
+
+#: inc/admin/admin.php:2322
+msgid "Track Authors"
+msgstr "Suivre les Auteurs"
+
+#: inc/admin/admin.php:2330
+msgid "Track Categories"
+msgstr "Suivre les Catégories"
+
+#: inc/admin/admin.php:2338
+msgid "Track Tags"
+msgstr "Suivre les Etiquettes"
+
+#: inc/admin/admin.php:2346
+msgid "Track Post Types"
+msgstr "Suivre les Types d'articles personnalisés"
+
+#: inc/admin/admin.php:2354
+msgid "Track Logged In Users"
+msgstr "Suivre les utilisateurs connectés"
+
+#: inc/admin/admin.php:2371
+msgid "Redirect attachment pages to post parent"
+msgstr ""
+"Rediriger les pages de type pièces jointes vers la page parent (attachment)"
+
+#: inc/admin/admin.php:2379
+msgid "Remove stop words from URL"
+msgstr "Supprimer les mots inutiles des URL"
+
+#: inc/admin/admin.php:2387
+msgid "Remove /category/ in URL"
+msgstr "Supprimer /category/ dans les URLs"
+
+#: inc/admin/admin.php:2395 inc/admin/admin.php:4552
+msgid "Disable trailing slash for metas"
+msgstr "Désactiver la barre oblique pour metas"
+
+#: inc/admin/admin.php:2403
+msgid "Google site verification"
+msgstr "Vérification de site Google"
+
+#: inc/admin/admin.php:2411
+msgid "Bing site verification"
+msgstr "Vérification de site Bing"
+
+#: inc/admin/admin.php:2419
+msgid "Pinterest site verification"
+msgstr "Vérification de site Pinterest :"
+
+#: inc/admin/admin.php:2427
+msgid "Yandex site verification"
+msgstr "Vérification de site Yandex"
+
+#: inc/admin/admin.php:2444
+msgid "SEOPress in admin bar"
+msgstr "SEOPress dans la barre d’admin"
+
+#: inc/admin/admin.php:2452
+msgid "Move SEOPress metaboxe position"
+msgstr "Déplacer la position de la metaboxe SEOPress"
+
+#: inc/admin/admin.php:2460
+msgid "Hide SEOPress Notifications Center"
+msgstr "Cacher le Centre de Notifications SEOPress"
+
+#: inc/admin/admin.php:2468
+msgid "Show Title tag column in post types"
+msgstr "Afficher la balise Titre dans les colonnes des articles personnalisés"
+
+#: inc/admin/admin.php:2476
+msgid "Show Meta description column in post types"
+msgstr ""
+"Afficher la meta description dans les colonnes des articles personnalisés"
+
+#: inc/admin/admin.php:2484
+msgid "Show noindex column in post types"
+msgstr "Afficher la colonne noindex dans les types d'articles"
+
+#: inc/admin/admin.php:2492
+msgid "Show nofollow column in post types"
+msgstr "Afficher la colonne nofollow dans les types d'articles"
+
+#: inc/admin/admin.php:2500
+msgid "Show total number of words column in post types"
+msgstr "Affichez la colonne du nombre total de mots pour vos types de contenus"
+
+#: inc/admin/admin.php:2508
+msgid "Show W3C validator column in post types"
+msgstr "Voir la colonne du validateur W3C dans les types d'articles"
+
+#: inc/admin/admin.php:2516
+msgid "Show Google Page Speed column in post types"
+msgstr "Voir la colonne Google Page Speed dans les types d'articles"
+
+#: inc/admin/admin.php:2525
+msgid "Hide Genesis SEO Metaboxe"
+msgstr "Cacher la metaboxe Genesis SEO"
+
+#: inc/admin/admin.php:2542
+msgid "Block SEO metaboxe to user roles"
+msgstr "Bloquer la metaboxe SEO pour des rôles utilisateurs"
+
+#: inc/admin/admin.php:2586
+msgid "<p>Customize your titles & metas for homepage</p>"
+msgstr "<p>Personnalisez vos titres et métas pour l'accueil</p>"
+
+#: inc/admin/admin.php:2591
+msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
+msgstr ""
+"<p>Personnalisez vos titres et métas pour les singles des Types d'article</p>"
+
+#: inc/admin/admin.php:2596
+msgid "<p>Customize your metas for all pages</p>"
+msgstr "<p>Personnalisez vos métas pour toutes les pages</p>"
+
+#: inc/admin/admin.php:2601
+msgid "<p>Customize your metas for all taxonomies archives</p>"
+msgstr "<p>Personnalisez vos métas pour toutes les archives de taxonomies</p>"
+
+#: inc/admin/admin.php:2606
+msgid "<p>Customize your metas for all archives</p>"
+msgstr "<p>Personnalisez vos métas pour les archives</p>"
+
+#: inc/admin/admin.php:2617
+msgid ""
+"To view your sitemap, enable permalinks (not default one), and save settings "
+"to flush them."
+msgstr ""
+"Pour voir votre sitemap, activez les permaliens (pas ceux par défaut), et "
+"sauvegardez les paramètres pour les mettre à jour."
+
+#: inc/admin/admin.php:2618
+msgid ""
+"Only the last 1000 items are listed in Sitemaps for performances issues."
+msgstr ""
+"Seuls les 1000 derniers éléments sont répertoriés dans les Sitemaps pour des "
+"raisons de performances."
+
+#: inc/admin/admin.php:2620
+msgid ""
+"Your server use NGINX. If XML Sitemaps doesn't work, you have to add this "
+"rules to your configuration:"
+msgstr ""
+"Votre serveur utilise NGINX. Si le plan de site XML ne fonctionne pas, vous "
+"devez ajouter ces règles à votre configuration:"
+
+#: inc/admin/admin.php:2630
+msgid "Noindex content will not be displayed in Sitemaps."
+msgstr "Le contenu en noindex ne sera pas affiché dans les Sitemaps."
+
+#: inc/admin/admin.php:2632
+msgid "View your sitemap"
+msgstr "Voir votre sitemap"
+
+#: inc/admin/admin.php:2634
+msgid "Ping Google manually"
+msgstr "Pinger Google manuellement"
+
+#: inc/admin/admin.php:2636
+msgid "Flush permalinks"
+msgstr "Mettre à jour les permaliens"
+
+#: inc/admin/admin.php:2642
+msgid "<p>Create an HTML for your visitors and boost your SEO</p>"
+msgstr ""
+"<p>Créez un plan de site HTML pour vos visiteurs et boostez votre SEO</p>"
+
+#: inc/admin/admin.php:2647
+msgid "<p>Include / Exclude Post Types</p>"
+msgstr "<p>Inclure / Exclure les Types d'article</p>"
+
+#: inc/admin/admin.php:2652
+msgid "<p>Include / Exclude Taxonomies</p>"
+msgstr "<p>Inclure / Exclure les Taxonomies</p>"
+
+#: inc/admin/admin.php:2657
+msgid "<p>Configure Google Knowledge Graph</p>"
+msgstr "<p>Configurer Google Knowledge Graph</p>"
+
+#: inc/admin/admin.php:2662
+msgid "<p>Link your site with your social accounts</p>"
+msgstr "<p>Lier votre site à vos comptes sociaux</p>"
+
+#: inc/admin/admin.php:2667
+msgid "<p>Manage Open Graph datas</p>"
+msgstr "<p>Gérer l'Open Graph datas</p>"
+
+#: inc/admin/admin.php:2672
+msgid "<p>Manage your Twitter card</p>"
+msgstr "<p>Gérer votre Twitter card</p>"
+
+#: inc/admin/admin.php:2677
+msgid "<p>Link your Google Analytics to your website</p>"
+msgstr "<p>Lier Google Analytics à votre site</p>"
+
+#: inc/admin/admin.php:2682
+msgid "<p>Configure your Google Analytics tracking code</p>"
+msgstr "<p>Configurer votre code de suivi Google Analytics</p>"
+
+#: inc/admin/admin.php:2687
+msgid "<p>Track events in Google Analytics</p>"
+msgstr "<p>Suivez les événements dans Google Analytics</p>"
+
+#: inc/admin/admin.php:2692
+msgid ""
+"<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions "
+"and custom metrics are like default dimensions and metrics in your Analytics "
+"account,<br> except you create them yourself. You can use them to collect "
+"and analyze data that Analytics doesn't automatically track.<br> Notice that "
+"you have to setup your custom dimensions in your Google Analytics account "
+"too. More info by clicking on help icon."
+msgstr ""
+"<p>Configurez vos dimensions personnalisées Google Analytics. <br> Les "
+"dimensions personnalisées et les paramètres personnalisés sont comme les "
+"dimensions et les mesures par défaut dans votre compte Google Analytics, "
+"sauf que vous les créez vous-même. Vous pouvez les utiliser pour collecter "
+"et analyser les données que Google Analytics ne suit pas automatiquement. "
+"Remarque: vous devez également configurer vos dimensions personnalisées dans "
+"votre compte Google Analytics. Plus d'informations en cliquant sur l'icône "
+"d'aide."
+
+#: inc/admin/admin.php:2698
+msgid "<p>Advanced SEO options</p>"
+msgstr "<p>Options avancées de SEO</p>"
+
+#: inc/admin/admin.php:2703
+msgid "<p>Customize SEOPress to fit your needs</p>"
+msgstr "<p>Personnaliser SEOPress pour correspondre à vos besoins</p>"
+
+#: inc/admin/admin.php:2708
+msgid "<p>Manage security</p>"
+msgstr "<p>Gérer la sécurité</p>"
+
+#: inc/admin/admin.php:2719
+msgid "My awesome website"
+msgstr "Mon super site"
+
+#: inc/admin/admin.php:2724 inc/admin/admin.php:2735 inc/admin/admin.php:2775
+#: inc/admin/admin.php:2892 inc/admin/admin.php:2923 inc/admin/admin.php:3000
+#: inc/admin/admin.php:3075 inc/admin/admin.php:3145 inc/admin/admin.php:3214
+#: inc/admin/admin.php:3246
+msgid "More tags"
+msgstr "Plus de balises"
+
+#: inc/admin/admin.php:2730
+msgid "This is a cool website about Wookiees"
+msgstr "Un site cool sur les Wookies"
+
+#: inc/admin/admin.php:2738
+msgid "Looking for editing your blog page?"
+msgstr "Vous cherchez à modifier votre page de blog ?"
+
+#: inc/admin/admin.php:2752 inc/admin/admin.php:2863 inc/admin/admin.php:2977
+#: inc/admin/admin.php:3064 inc/admin/admin.php:3134 inc/admin/admin.php:3203
+#: inc/admin/admin.php:3237
+msgid "Title template"
+msgstr "Template de Titre"
+
+#: inc/admin/admin.php:2771
+msgid "Post Title"
+msgstr "Titre du post"
+
+#: inc/admin/admin.php:2782 inc/admin/admin.php:2899 inc/admin/admin.php:3007
+#: inc/admin/admin.php:3081 inc/admin/admin.php:3151 inc/admin/admin.php:3220
+#: inc/admin/admin.php:3252
+msgid "Meta description template"
+msgstr "Template de Méta Description"
+
+#: inc/admin/admin.php:2843
+msgid "Display date in Google search results?"
+msgstr "Afficher la date dans les résultats de recherche Google ?"
+
+#: inc/admin/admin.php:2883
+msgid "Category Title"
+msgstr "Titre de catégorie"
+
+#: inc/admin/admin.php:2885
+msgid "Tag Title"
+msgstr "Titre de l'étiquette"
+
+#: inc/admin/admin.php:2887
+msgid "Term Title"
+msgstr "Titre du terme"
+
+#: inc/admin/admin.php:2916
+msgid "Category Description"
+msgstr "Description de la catégorie"
+
+#: inc/admin/admin.php:2918
+msgid "Tag Description"
+msgstr "Description du tag"
+
+#: inc/admin/admin.php:2920
+msgid "Term Description"
+msgstr "Description du terme"
+
+#: inc/admin/admin.php:2996
+msgid "Post Type Archive Name"
+msgstr "Nom d'archive du Type d'article"
+
+#: inc/admin/admin.php:3062
+msgid "Author archives"
+msgstr "Archives de l'auteur"
+
+#: inc/admin/admin.php:3123
+msgid "Disable author archives"
+msgstr "Désactiver les archives de l’auteur"
+
+#: inc/admin/admin.php:3132
+msgid "Date archives"
+msgstr "Archives par date"
+
+#: inc/admin/admin.php:3143
+msgid "Archive date"
+msgstr "Date d'archive"
+
+#: inc/admin/admin.php:3192
+msgid "Disable date archives"
+msgstr "Désactiver les archives par date"
+
+#: inc/admin/admin.php:3201
+msgid "Search archives"
+msgstr "Archives de recherche"
+
+#: inc/admin/admin.php:3212
+msgid "Search Keywords"
+msgstr "Mots clés recherchés"
+
+#: inc/admin/admin.php:3235
+msgid "404 archives"
+msgstr "Page 404"
+
+#: inc/admin/admin.php:3390
+msgid "Add rel next/prev link in head of paginated archive pages"
+msgstr ""
+"Ajouter le lien rel suivant/précédent en tête des pages d’archives paginées"
+
+#: inc/admin/admin.php:3392
+msgid "Learn more on Google website"
+msgstr "En savoir plus sur le site Web de Google"
+
+#: inc/admin/admin.php:3428
+msgid "Enable Image Sitemaps"
+msgstr "Activer le plan de site Images"
+
+#: inc/admin/admin.php:3489 inc/admin/admin.php:3529
+msgid "Include"
+msgstr "Inclure"
+
+#: inc/admin/admin.php:3544
+msgid "eg: 2, 28, 68"
+msgstr "ex : 2, 28, 68"
+
+#: inc/admin/admin.php:3554
+msgid "eg: 13, 8, 38"
+msgstr "ex : 13, 8, 38"
+
+#: inc/admin/admin.php:3568
+msgid "Person"
+msgstr "Personne"
+
+#: inc/admin/admin.php:3571
+msgid "Organization"
+msgstr "Organisation"
+
+#: inc/admin/admin.php:3584
+msgid "eg: Apple"
+msgstr "ex : Apple"
+
+#: inc/admin/admin.php:3597
+msgid "Select your logo"
+msgstr "Sélectionnez votre logo"
+
+#: inc/admin/admin.php:3625
+msgid "eg: +33123456789 (internationalized version required)"
+msgstr "par exemple:  +33123456789 (version internationalisée nécessaire)"
+
+#: inc/admin/admin.php:3640
+msgid "Customer support"
+msgstr "Support client"
+
+#: inc/admin/admin.php:3643
+msgid "Technical support"
+msgstr "Support technique"
+
+#: inc/admin/admin.php:3646
+msgid "Billing support"
+msgstr "Support facturation"
+
+#: inc/admin/admin.php:3649
+msgid "Bill payment"
+msgstr "Paiement facturation"
+
+#: inc/admin/admin.php:3652
+msgid "Sales"
+msgstr "Ventes"
+
+#: inc/admin/admin.php:3655
+msgid "Credit card support"
+msgstr "Support carte de crédit"
+
+#: inc/admin/admin.php:3658
+msgid "Emergency"
+msgstr "Urgence"
+
+#: inc/admin/admin.php:3661
+msgid "Baggage tracking"
+msgstr "Suivi des bagages"
+
+#: inc/admin/admin.php:3664
+msgid "Roadside assistance"
+msgstr "Assistance routière"
+
+#: inc/admin/admin.php:3667
+msgid "Package tracking"
+msgstr "Suivi des colis"
+
+#: inc/admin/admin.php:3684
+msgid "Toll Free"
+msgstr "Gratuit"
+
+#: inc/admin/admin.php:3687
+msgid "Hearing impaired supported"
+msgstr "Support pour les personnes souffrant d'une déficience auditive"
+
+#: inc/admin/admin.php:3700
+msgid "eg: https://www.facebook.com/your-page"
+msgstr "ex : https://www.facebook.com/your-page"
+
+#: inc/admin/admin.php:3713
+msgid "eg: @wp_seopress"
+msgstr "ex : @wp_seopress"
+
+#: inc/admin/admin.php:3725
+msgid "eg: https://plus.google.com/+BenjaminDenis"
+msgstr "ex : https://plus.google.com/+BenjaminDenis"
+
+#: inc/admin/admin.php:3737
+msgid "eg: https://pinterest.com/wpbuy/"
+msgstr "ex : https://pinterest.com/wpbuy/"
+
+#: inc/admin/admin.php:3749
+msgid "eg: https://www.instagram.com/rainbowgeek64/"
+msgstr "ex : https://www.instagram.com/rainbowgeek64/"
+
+#: inc/admin/admin.php:3761
+msgid "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+msgstr "ex : https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+
+#: inc/admin/admin.php:3773
+msgid "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
+msgstr "ex : https://www.linkedin.com/in/benjamin-denis-70672b3b"
+
+#: inc/admin/admin.php:3785
+msgid "eg: https://myspace.com/your-page"
+msgstr "ex : https://myspace.com/your-page"
+
+#: inc/admin/admin.php:3797
+msgid "eg: https://soundcloud.com/michaelmccannmusic"
+msgstr "ex : https://soundcloud.com/michaelmccannmusic"
+
+#: inc/admin/admin.php:3809
+msgid "eg: https://your-site.tumblr.com"
+msgstr "ex : https://your-site.tumblr.com"
+
+#: inc/admin/admin.php:3826
+msgid "Enable OG data"
+msgstr "Activer les données OG"
+
+#: inc/admin/admin.php:3872
+msgid "How-to create a Facebook App ID"
+msgstr "Tutoriel pour créer un Facebook App ID"
+
+#: inc/admin/admin.php:3886
+msgid "Enable Twitter card"
+msgstr "Activer Twitter Card"
+
+#: inc/admin/admin.php:3919
+msgid "Default"
+msgstr "Défaut"
+
+#: inc/admin/admin.php:3922
+msgid "Large"
+msgstr "Grande"
+
+#: inc/admin/admin.php:3950
+msgid "Enter your Tracking ID (UA-XXXX-XX)"
+msgstr "Entrer votre ID de tracking (UA-XXXX-XX)"
+
+#: inc/admin/admin.php:3954
+msgid "Find your tracking ID"
+msgstr "Trouvez votre ID de suivi"
+
+#: inc/admin/admin.php:3995
+msgid ""
+"A remarketing audience is a list of cookies or mobile-advertising IDs that "
+"represents a group of users you want to re-engage because of their "
+"likelihood to convert."
+msgstr ""
+"Un public de remarketing est une liste de cookies ou d'ID de publicité "
+"mobile qui représente un groupe d'utilisateurs que vous souhaitez réengager "
+"en raison de leur probabilité de conversion."
+
+#: inc/admin/admin.php:4016
+msgid ""
+"When a customer of Analytics requests IP address anonymization, Analytics "
+"anonymizes the address as soon as technically feasible at the earliest "
+"possible stage of the collection network."
+msgstr ""
+"Lorsqu'un client d'Analytics demande l'anonymisation de l'adresse IP, "
+"Analytics anonymise l'adresse dès que c'est techniquement possible et ce, le "
+"plus tôt possible dans le réseau de collecte."
+
+#: inc/admin/admin.php:4037
+msgid ""
+"Enhanced Link Attribution improves the accuracy of your In-Page Analytics "
+"report by automatically differentiating between multiple links to the same "
+"URL on a single page by using link element IDs."
+msgstr ""
+"L'attribution de lien améliorée améliore la précision de votre rapport In-"
+"Page Analytics en différenciant automatiquement plusieurs liens vers la même "
+"URL sur une seule page en utilisant des ID d'élément de lien."
+
+#: inc/admin/admin.php:4058
+msgid ""
+"Cross domain tracking makes it possible for Analytics to see sessions on two "
+"related sites (such as an ecommerce site and a separate shopping cart site) "
+"as a single session. This is sometimes called site linking."
+msgstr ""
+"Le suivi de domaine croisé permet à Analytics de voir des sessions sur deux "
+"sites connexes (comme un site de commerce électronique et un site de panier "
+"d'achat séparé) en une seule session. Ceci est parfois appelé liaisons de "
+"sites."
+
+#: inc/admin/admin.php:4070
+msgid "Enter yours domains"
+msgstr "Saisissez vos domaines"
+
+#: inc/admin/admin.php:4087
+msgid "Enable download tracking"
+msgstr "Activer le suivi des téléchargements"
+
+#: inc/admin/admin.php:4097
+msgid "pdf|docx|pptx|zip"
+msgstr "pdf|docx|pptx|zip"
+
+#: inc/admin/admin.php:4101
+msgid "Separate each file type extensions with a pipe \"|\""
+msgstr "Séparer chaque extensions de type de fichier avec un pipe « | »"
+
+#: inc/admin/admin.php:4118 inc/admin/admin.php:4195 inc/admin/admin.php:4272
+#: inc/admin/admin.php:4349 inc/admin/admin.php:4426
+msgid "Custom Dimension #1"
+msgstr "Dimension personnalisée #1"
+
+#: inc/admin/admin.php:4121 inc/admin/admin.php:4198 inc/admin/admin.php:4275
+#: inc/admin/admin.php:4352 inc/admin/admin.php:4429
+msgid "Custom Dimension #2"
+msgstr "Dimension personnalisée #2"
+
+#: inc/admin/admin.php:4124 inc/admin/admin.php:4201 inc/admin/admin.php:4278
+#: inc/admin/admin.php:4355 inc/admin/admin.php:4432
+msgid "Custom Dimension #3"
+msgstr "Dimension personnalisée #3"
+
+#: inc/admin/admin.php:4127 inc/admin/admin.php:4204 inc/admin/admin.php:4281
+#: inc/admin/admin.php:4358 inc/admin/admin.php:4435
+msgid "Custom Dimension #4"
+msgstr "Dimension personnalisée #4"
+
+#: inc/admin/admin.php:4130 inc/admin/admin.php:4207 inc/admin/admin.php:4284
+#: inc/admin/admin.php:4361 inc/admin/admin.php:4438
+msgid "Custom Dimension #5"
+msgstr "Dimension personnalisée #5"
+
+#: inc/admin/admin.php:4133 inc/admin/admin.php:4210 inc/admin/admin.php:4287
+#: inc/admin/admin.php:4364 inc/admin/admin.php:4441
+msgid "Custom Dimension #6"
+msgstr "Dimension personnalisée #6"
+
+#: inc/admin/admin.php:4136 inc/admin/admin.php:4213 inc/admin/admin.php:4290
+#: inc/admin/admin.php:4367 inc/admin/admin.php:4444
+msgid "Custom Dimension #7"
+msgstr "Dimension personnalisée #7"
+
+#: inc/admin/admin.php:4139 inc/admin/admin.php:4216 inc/admin/admin.php:4293
+#: inc/admin/admin.php:4370 inc/admin/admin.php:4447
+msgid "Custom Dimension #8"
+msgstr "Dimension personnalisée #8"
+
+#: inc/admin/admin.php:4142 inc/admin/admin.php:4219 inc/admin/admin.php:4296
+#: inc/admin/admin.php:4373 inc/admin/admin.php:4450
+msgid "Custom Dimension #9"
+msgstr "Dimension personnalisée #9"
+
+#: inc/admin/admin.php:4145 inc/admin/admin.php:4222 inc/admin/admin.php:4299
+#: inc/admin/admin.php:4376 inc/admin/admin.php:4453
+msgid "Custom Dimension #10"
+msgstr "Dimension personnalisée #10"
+
+#: inc/admin/admin.php:4148 inc/admin/admin.php:4225 inc/admin/admin.php:4302
+#: inc/admin/admin.php:4379 inc/admin/admin.php:4456
+msgid "Custom Dimension #11"
+msgstr "Dimension personnalisée #11"
+
+#: inc/admin/admin.php:4151 inc/admin/admin.php:4228 inc/admin/admin.php:4305
+#: inc/admin/admin.php:4382 inc/admin/admin.php:4459
+msgid "Custom Dimension #12"
+msgstr "Dimension personnalisée #12"
+
+#: inc/admin/admin.php:4154 inc/admin/admin.php:4231 inc/admin/admin.php:4308
+#: inc/admin/admin.php:4385 inc/admin/admin.php:4462
+msgid "Custom Dimension #13"
+msgstr "Dimension personnalisée #13"
+
+#: inc/admin/admin.php:4157 inc/admin/admin.php:4234 inc/admin/admin.php:4311
+#: inc/admin/admin.php:4388 inc/admin/admin.php:4465
+msgid "Custom Dimension #14"
+msgstr "Dimension personnalisée #14"
+
+#: inc/admin/admin.php:4160 inc/admin/admin.php:4237 inc/admin/admin.php:4314
+#: inc/admin/admin.php:4391 inc/admin/admin.php:4468
+msgid "Custom Dimension #15"
+msgstr "Dimension personnalisée #15"
+
+#: inc/admin/admin.php:4163 inc/admin/admin.php:4240 inc/admin/admin.php:4317
+#: inc/admin/admin.php:4394 inc/admin/admin.php:4471
+msgid "Custom Dimension #16"
+msgstr "Dimension personnalisée #16"
+
+#: inc/admin/admin.php:4166 inc/admin/admin.php:4243 inc/admin/admin.php:4320
+#: inc/admin/admin.php:4397 inc/admin/admin.php:4474
+msgid "Custom Dimension #17"
+msgstr "Dimension personnalisée #17"
+
+#: inc/admin/admin.php:4169 inc/admin/admin.php:4246 inc/admin/admin.php:4323
+#: inc/admin/admin.php:4400 inc/admin/admin.php:4477
+msgid "Custom Dimension #18"
+msgstr "Dimension personnalisée #18"
+
+#: inc/admin/admin.php:4172 inc/admin/admin.php:4249 inc/admin/admin.php:4326
+#: inc/admin/admin.php:4403 inc/admin/admin.php:4480
+msgid "Custom Dimension #19"
+msgstr "Dimension personnalisée #19"
+
+#: inc/admin/admin.php:4175 inc/admin/admin.php:4252 inc/admin/admin.php:4329
+#: inc/admin/admin.php:4406 inc/admin/admin.php:4483
+msgid "Custom Dimension #20"
+msgstr "Dimension personnalisée #20"
+
+#: inc/admin/admin.php:4501
+msgid "Redirect attachment pages to post parent (or homepage if none)"
+msgstr ""
+"Rediriger les pages de pièces jointes vers le post parent (si aucun, "
+"rediriger vers page d'accueil)"
+
+#: inc/admin/admin.php:4518
+msgid "Remove stop words in permalinks"
+msgstr "Supprimer les mots clés inutiles des permaliens"
+
+#: inc/admin/admin.php:4518
+msgid ""
+"Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
+msgstr ""
+"Réglage basé sur la langue du site. Langue prise en charge EN, FR, ES, DE, "
+"IT, PT."
+
+#: inc/admin/admin.php:4535
+msgid "Remove /category/ in your permalinks"
+msgstr "Supprimer /category/ dans vos permaliens"
+
+#: inc/admin/admin.php:4552
+msgid ""
+"You must check this box if the structure of your permalinks DOES NOT contain "
+"a slash at the end (eg: /%postname%)"
+msgstr ""
+"Vous devez cocher cette case si la structure de vos permaliens NE contient "
+"PAS une barre oblique à la fin (par exemple : /%postname%)"
+
+#: inc/admin/admin.php:4564
+msgid "Enter Google meta value site verification"
+msgstr "Entrer la meta de vérification de site Google"
+
+#: inc/admin/admin.php:4576
+msgid "Enter Bing meta value site verification"
+msgstr "Entrer la meta de vérification de site Bing"
+
+#: inc/admin/admin.php:4588
+msgid "Enter Pinterest meta value site verification"
+msgstr "Entrer la meta de vérification de site Pinterest"
+
+#: inc/admin/admin.php:4600
+msgid "Enter Yandex meta value site verification"
+msgstr "Entrer la meta de vérification de site Yandex"
+
+#: inc/admin/admin.php:4617
+msgid "Remove SEOPress from Admin Bar in backend"
+msgstr "Supprimer SEOPress de la barre d'outils dans l'administration"
+
+#: inc/admin/admin.php:4633
+msgid "High priority (top)"
+msgstr "Priorité élevée (max)"
+
+#: inc/admin/admin.php:4636
+msgid "Normal priority (default)"
+msgstr "Priorité normale (défaut)"
+
+#: inc/admin/admin.php:4639
+msgid "Low priority"
+msgstr "Priorité faible"
+
+#: inc/admin/admin.php:4657
+msgid "Hide Notifications Center in SEOPress Dashboard page"
+msgstr "Masquer le Centre de Notifications du Tableau de Bord de SEOPress"
+
+#: inc/admin/admin.php:4674
+msgid "Add title column"
+msgstr "Ajouter la colonne Titre"
+
+#: inc/admin/admin.php:4691
+msgid "Add meta description column"
+msgstr "Ajouter la colonne meta description"
+
+#: inc/admin/admin.php:4708
+msgid "Display noindex status"
+msgstr "Affiche le statut noindex"
+
+#: inc/admin/admin.php:4725
+msgid "Display nofollow status"
+msgstr "Affiche le statut nofollow"
+
+#: inc/admin/admin.php:4742
+msgid "Display total number of words in content"
+msgstr "Affiche le nombre total de mots du contenu"
+
+#: inc/admin/admin.php:4759
+msgid "Display W3C column to check code quality"
+msgstr "Afficher la colonne W3C pour vérifier la qualité du code"
+
+#: inc/admin/admin.php:4777
+msgid "Display Page Speed column to check performances"
+msgstr "Afficher la colonne Page Speed pour vérifier les performances"
+
+#: inc/admin/admin.php:4795
+msgid "Remove Genesis SEO Metaboxe"
+msgstr "Supprimer la metaboxe Genesis SEO"
+
+#: inc/admin/adminbar.php:60
+msgid "BOT"
+msgstr "BOT"
+
+#: inc/admin/adminbar.php:84
+msgid "Broken Links"
+msgstr "Liens cassés"
+
+#: inc/functions/options-advanced-admin.php:119
+#: inc/functions/options-advanced-admin.php:525
+msgid "Title tag"
+msgstr "Balise Titre"
+
+#: inc/functions/options-advanced-admin.php:122
+msgid "Meta Desc."
+msgstr "Meta Desc."
+
+#: inc/functions/options-advanced-admin.php:125
+msgid "Noindex?"
+msgstr "Noindex ?"
+
+#: inc/functions/options-advanced-admin.php:128
+msgid "Nofollow?"
+msgstr "Nofollow ?"
+
+#: inc/functions/options-advanced-admin.php:131
+msgid "Count words?"
+msgstr "Compteur de mots?"
+
+#: inc/functions/options-advanced-admin.php:134
+msgid "W3C check"
+msgstr "W3C check"
+
+#: inc/functions/options-advanced-admin.php:137
+msgid "Page Speed"
+msgstr "Page Speed"
+
+#: inc/functions/options-advanced-admin.php:165
+msgid "Check code quality of this page"
+msgstr "Analyser la qualité du code de cette page"
+
+#: inc/functions/options-advanced-admin.php:168
+msgid "Analyse this page with Google Page Speed"
+msgstr "Analyser cette page avec Google Page Speed"
+
+#: inc/functions/options-advanced-admin.php:352
+msgid "Enable noindex"
+msgstr "Définir sur noindex"
+
+#: inc/functions/options-advanced-admin.php:391
+msgid "Enable index"
+msgstr "Définir sur index"
+
+#: inc/functions/options-advanced-admin.php:431
+msgid "Enable nofollow"
+msgstr "Définir sur nofollow"
+
+#: inc/functions/options-advanced-admin.php:470
+msgid "Enable follow"
+msgstr "Définir sur follow"
+
+#: inc/functions/options-import-export.php:49
+msgid "Please upload a valid .json file"
+msgstr "Veuillez uploader un fichier JSON valide"
+
+#: inc/functions/options-import-export.php:53
+#: inc/functions/options-import-export.php:88
+msgid "Please upload a file to import"
+msgstr "Uploader un fichier à importer SVP"
+
+#: inc/functions/options-import-export.php:84
+msgid "Please upload a valid .csv file"
+msgstr "Veuillez uploader un fichier CSV valide"
+
+#: inc/functions/options-redirections.php:120
+msgid "Once per day"
+msgstr "Une fois par jour"
+
+#: seopress.php:296
+msgid "You like SEOPress? Don't forget to rate it 5 stars!"
+msgstr "Vous aimez SEOPress ? N'oubliez pas de nous noter 5 étoiles !"
+
+#: seopress.php:343
+msgid "Settings"
+msgstr "Paramètres"
+
+#: seopress.php:344
+msgid "SEOPress.org"
+msgstr "SEOPress.org"
+
+#: seopress.php:346
+msgid "GO PRO!"
+msgstr "PASSEZ PRO !"
+
+#~ msgid "Download an example CSV"
+#~ msgstr "Télécharger un fichier CSV d'exemple"
+
+#~ msgid "Import posts metadata from Yoast"
+#~ msgstr ""
+#~ "Importer les méta données des articles, pages, types d'articles "
+#~ "personnalisés depuis Yoast"
+
+#~ msgid ""
+#~ "Disable trailing slash for metas <br>if your pemarlink structure doesn't "
+#~ "have a trailing slash"
+#~ msgstr ""
+#~ "Désactiver le slash pour vos métas<br>si votre structure de permaliens "
+#~ "n’a pas de barre oblique de fin"
+
+#~ msgid ""
+#~ "You must check this box if the structure of your permalinks contains a "
+#~ "slash at the end (eg: /%postname%/)"
+#~ msgstr ""
+#~ "Vous devez cocher cette case si la structure de vos permaliens contient "
+#~ "une barre oblique à la fin (par exemple : /%postname%/)"
+
+#~ msgid "Add trailing slash for metas"
+#~ msgstr "Ajoutez un slash pour les metas"
+
+#~ msgid "Add a trailing slash for metas"
+#~ msgstr "Ajoutez un slash pour les metas"
+
+#~ msgid "Add trailing slash at the end of each URL"
+#~ msgstr "Ajouter un slash à la fin de chaque URL"
+
+#~ msgid "Add a trailing slash at the end of your permalinks"
+#~ msgstr "Ajouter un slash à la fin de vos permaliens"
+
+#~ msgid "<p>Configure your Google Analytics custom dimensions"
+#~ msgstr "<p>Configurer vos dimensions personnalisées pour Google Analytics"
+
+#~ msgid "Robots"
+#~ msgstr "Robots"
+
+#~ msgid "SEOPress BOT"
+#~ msgstr "SEOPress BOT"
+
+#~ msgid "htaccess"
+#~ msgstr "htaccess"
+
+#~ msgid "Import / Export / Reset"
+#~ msgstr "Importer / Exporter / Réinitialiser"
+
+#~ msgid "301"
+#~ msgstr "301"
+
+#~ msgid "302"
+#~ msgstr "302"
+
+#~ msgid "307"
+#~ msgstr "307"
+
+#~ msgid "Enter your URL"
+#~ msgstr "Saisissez votre URL"
+
+#~ msgid "Social networks"
+#~ msgstr "Réseaux sociaux"
+
+#~ msgid "Import / Export / Reset settings"
+#~ msgstr "Import / Export / Réinitialisation des paramètres"
+
+#~ msgid "eg: https://www.instagram.com/your-name/"
+#~ msgstr "ex: https://www.instagram.com/your-name/"
+
+#~ msgid "Manage your XML / HTML Sitemap"
+#~ msgstr "Gérez votre plan de site XML / HTML"
+
+#~ msgid "eg: @wpcloudy"
+#~ msgstr "ex: @wpcloudy"
+
+#~ msgid "XML Sitemap"
+#~ msgstr "Sitemap XML"
+
+#~ msgid "Notifications center"
+#~ msgstr "Centre de notifications"
+
+#~ msgid "Manage your XML Sitemap"
+#~ msgstr "Gérer votre Sitemap XML"
+
+#~ msgid "<p>Enable your Sitemap</p>"
+#~ msgstr "<p>Activez votre Sitemap</p>"
+
+#~ msgid "<p>Configure your Google Analytics custom dimensions</p>"
+#~ msgstr ""
+#~ "<p>Configurer vos dimensions personnalisées pour Google Analytics</p>"
+
+#~ msgid "Import Yoast Settings"
+#~ msgstr "Importer les paramètres de Yoast"
+
+#~ msgid "Import Yoast settings from an INI file."
+#~ msgstr "Importer les paramètres de Yoast depuis un fichier INI."
+
+#~ msgid "Learn how to export Yoast settings"
+#~ msgstr "Apprenez à exporter vos paramètres Yoast"
+
+#~ msgid "Import Yoast settings"
+#~ msgstr "Importer les paramètres Yoast"
+
+#~ msgid "Please upload a valid .ini file"
+#~ msgstr "Veuillez uploader un fichier INI valide"
+
+#~ msgid "Your name/organization"
+#~ msgstr "Votre nom/organisation"
+
+#~ msgid "Import / Export Settings"
+#~ msgstr "Paramètres Import / Export"
+
+#~ msgid "Import / Export SEOPress settings from site to site"
+#~ msgstr "Importer / Exporter les paramètres SEOPress d'un site à un autre"
+
+#~ msgid ""
+#~ "<strong>WARNING:</strong> Delete all options related to SEOPress in your "
+#~ "database."
+#~ msgstr ""
+#~ "<strong>AVERTISSEMENT:</strong> Supprime toutes les options liées à "
+#~ "SEOPress de votre base de données."
+
+#~ msgid "Paged archives"
+#~ msgstr "Archives paginées"
+
+#~ msgid ""
+#~ "Redirect attachment pages to post parent (if none, redirect to homepage)"
+#~ msgstr ""
+#~ "Rediriger les pages de pièces jointes vers le post parent (si aucun, "
+#~ "rediriger vers page d'accueil)"
+
+#~ msgid "This is cool website about Wookiees"
+#~ msgstr "Un site cool sur les Wookies"
+
+#~ msgid "The ultimate plugin to optimize your SEO!"
+#~ msgstr "Le plugin ultime pour optimiser votre SEO !"
+
+#~ msgid "Follow us on Twitter!"
+#~ msgstr "Suivez-nous sur Twitter !"
+
+#~ msgid "Our website"
+#~ msgstr "Notre site web"
+
+#~ msgid "Knowledge base"
+#~ msgstr "Base de connaissances"
+
+#~ msgid "Enter your Canonical URL"
+#~ msgstr "Entrez votre URL canonique"
+
+#~ msgid "Login"
+#~ msgstr "Ecran de connexion"
+
+#~ msgid "Global"
+#~ msgstr "Global"
+
+#~ msgid "Admin Menu"
+#~ msgstr "Menu d'admin"
+
+#~ msgid "Admin Bar"
+#~ msgstr "Barre d'admin"
+
+#~ msgid "Editor"
+#~ msgstr "Editeur"
+
+#~ msgid "Media Library"
+#~ msgstr "Bibliothèque de médias"
+
+#~ msgid "Profil"
+#~ msgstr "Profil"
+
+#~ msgid "Role Manager"
+#~ msgstr "Rôles"
+
+#~ msgid "Import / Export settings"
+#~ msgstr "Paramètres Import / Export"
+
+#~ msgid "Import / Export"
+#~ msgstr "Import / Export"
+
+#~ msgid "Display"
+#~ msgstr "Affichage"
+
+#~ msgid "Updates"
+#~ msgstr "Mises à jour"
+
+#~ msgid "Front"
+#~ msgstr "Front"
+
+#~ msgid "Debug"
+#~ msgstr "Debug"
+
+#~ msgid "Base"
+#~ msgstr "Basique"
+
+#~ msgid "Filters"
+#~ msgstr "Filtres"
+
+#~ msgid "Import / Export WP Admin UI settings from site to site"
+#~ msgstr "Importer / Exporter les paramètres WP Admin UI d'un site à un autre"
+
+#~ msgid "WP Admin UI"
+#~ msgstr "WP Admin UI"
+
+#~ msgid ""
+#~ "The ultimate plugin to customize, manage and optimize your WordPress "
+#~ "backend!"
+#~ msgstr ""
+#~ "Le plugin ultime pour personnaliser, gérer et optimiser l'administration "
+#~ "WordPress!"
+
+#~ msgid "You like WP Admin UI? Don't forget to rate it 5 stars!"
+#~ msgstr "Vous aimez WP Admin UI ? N'oubliez pas de nous noter 5 étoiles !"
+
+#~ msgid "Custom logo, custom background image, custom css..."
+#~ msgstr "Logo, image d'arrière plan et feuille de styles personnalisés..."
+
+#~ msgid "Custom footer credits, remove screen options, revisions..."
+#~ msgstr ""
+#~ "Crédits du pied de page perso, supprimer l'onglet Options de l'écran, "
+#~ "révisions..."
+
+#~ msgid "Remove widgets, remove welcome panel..."
+#~ msgstr "Supprimer widgets, panneau de bienvenue..."
+
+#~ msgid "Hide menus/submenus, reorder them with drag and drop..."
+#~ msgstr "Masquer menus/sous-menus, réordonner les en glisser-déposer..."
+
+#~ msgid "Remove items in admin bar..."
+#~ msgstr "Supprimer des items de la barre d'admin..."
+
+#~ msgid "Full TinyMCE, add new buttons, add quicktags..."
+#~ msgstr "TinyMCE complet, ajouter de nouveaux boutons, ajout de quicktags..."
+
+#~ msgid "Metaboxes"
+#~ msgstr "Metaboxes"
+
+#~ msgid "Hide metaboxes from your custom post types..."
+#~ msgstr "Masquer les metaboxes de vos types d'articles personnalisés..."
+
+#~ msgid "Hide metaboxes..."
+#~ msgstr "Masquer metaboxes..."
+
+#~ msgid "Get it"
+#~ msgstr "Obtenir"
+
+#~ msgid "Columns"
+#~ msgstr "Colonnes"
+
+#~ msgid "Hide columns from list view, add post ID column..."
+#~ msgstr ""
+#~ "Masquer des colonnes de la vue liste, ajouter la colonne ID du post..."
+
+#~ msgid "Library"
+#~ msgstr "Bibliothèque média"
+
+#~ msgid "JPEG quality, add filters type (PDF, DOCX...)"
+#~ msgstr "Qualité JPEG, ajout des filtres par type (PDF, DOCX...)"
+
+#~ msgid "Color scheme, add custom field in profil..."
+#~ msgstr ""
+#~ "Schémas de couleurs, ajout de champs personnalisés dans le Profil..."
+
+#~ msgid "Plugins"
+#~ msgstr "Extensions"
+
+#~ msgid "Remove WP SEO notifications, WPML Ads, WooThemes updater..."
+#~ msgstr ""
+#~ "Supprimer les notifications de WP SEO, WooThemes Updater plugin, et les "
+#~ "publicités de WPML..."
+
+#~ msgid "Remove WP SEO notifications, WPML Ads, WooThemes updater plugin..."
+#~ msgstr ""
+#~ "Supprimer les notifications de WP SEO, WooThemes Updater plugin, et les "
+#~ "publicités de WPML..."
+
+#~ msgid "Themes"
+#~ msgstr "Thèmes"
+
+#~ msgid "Create your own admin theme, or choose a preset one."
+#~ msgstr "Créez votre propre thème d'admin, ou choisissez un prédéfini."
+
+#~ msgid "Role manager"
+#~ msgstr "Rôles"
+
+#~ msgid "Apply WP Admin UI settings to specific roles."
+#~ msgstr "Appliquer les paramètres de WP Admin UI à certains rôles."
+
+#~ msgid "Import / export WP Admin UI settings from site to site."
+#~ msgstr "Importer / Exporter les paramètres WP Admin UI d'un site à un autre"
+
+#~ msgid "Login settings"
+#~ msgstr "Paramètres de l'écran de connexion"
+
+#~ msgid "Custom login CSS"
+#~ msgstr "CSS personnalisée pour l'écran de connexion"
+
+#~ msgid "Custom logo url"
+#~ msgstr "URL du logo personnalisée"
+
+#~ msgid "Custom logo (recommanded width: 320px, height: 75px"
+#~ msgstr ""
+#~ "Logo personnalisé (taille recommandée : 320px de large, 75px de haut)"
+
+#~ msgid "Custom logo title"
+#~ msgstr "Infobulle du logo"
+
+#~ msgid "Custom background image"
+#~ msgstr "Image d'arrière plan personnalisée"
+
+#~ msgid "Always checked remember me"
+#~ msgstr "Toujours cocher Se souvenir de moi"
+
+#~ msgid "Remove error message for security"
+#~ msgstr "Supprimer les messages d'erreur par sécurité"
+
+#~ msgid "Disable Shake Effect if wrong login"
+#~ msgstr "Désactiver l’effet de secousse si login faux"
+
+#~ msgid "Redirect users to a specific url after logout"
+#~ msgstr ""
+#~ "Rediriger les utilisateurs vers une url spécifique après déconnexion"
+
+#~ msgid "Redirect users to a specific url after registration"
+#~ msgstr ""
+#~ "Rediriger les utilisateurs vers une url spécifique après l'inscription"
+
+#~ msgid "Disable login by email for users"
+#~ msgstr "Désactiver la connexion par email pour les utilisateurs"
+
+#~ msgid "Custom admin CSS"
+#~ msgstr "Feuille de styles perso pour l'admin"
+
+#~ msgid "Remove WordPress version in footer"
+#~ msgstr "Supprimer la version de WordPress dans le pied de page"
+
+#~ msgid "Custom WordPress version in footer"
+#~ msgstr "Version de WordPress personnalisée dans le pied de page"
+
+#~ msgid "Remove WordPress credits in footer"
+#~ msgstr "Supprimer les crédits WordPress du pied de page"
+
+#~ msgid "Custom WordPress credits in footer"
+#~ msgstr "Crédits WordPress personnalisé dans le pied de page"
+
+#~ msgid "Custom favicon in admin"
+#~ msgstr "Favicon personnalisé dans l'admin"
+
+#~ msgid "Remove help tab"
+#~ msgstr "Supprimer l'onglet Aide"
+
+#~ msgid "Remove screen options tab"
+#~ msgstr "Supprimer l'onglet Options de l'écran"
+
+#~ msgid "Disable Open Sans loading from Google"
+#~ msgstr "Désactiver le chargement d'Open Sans depuis Google"
+
+#~ msgid "Define a new avatar for comments"
+#~ msgstr "Définir un nouvel avatar pour les commentaires"
+
+#~ msgid "Hide autogenerated password message"
+#~ msgstr "Masquer \"Vous utilisez un mot de passe auto généré\""
+
+#~ msgid "Number of items per page in list view (default 20)"
+#~ msgstr "Nombre d'items par page dans les vues listes (défaut 20)"
+
+#~ msgid "Define default view mode in view list"
+#~ msgstr "Définir le mode d’affichage par défaut dans la vue liste"
+
+#~ msgid "Disable file editor for themes and plugins"
+#~ msgstr "Désactiver l'éditeur de fichiers de thèmes et plugins"
+
+#~ msgid "Disable Plugin and Theme Update, and Installation"
+#~ msgstr "Désactiver les mises à jours et l'installation de thèmes et plugins"
+
+#~ msgid "Block WordPress admin for specific user roles"
+#~ msgstr ""
+#~ "Bloquer l’admin de WordPress pour des rôles d’utilisateurs spécifiques"
+
+#~ msgid "Disable WordPress updates notifications"
+#~ msgstr "Désactiver les notifications de mises à jour WordPress"
+
+#~ msgid "Disable all updates"
+#~ msgstr "Désactiver toutes les mises à jour"
+
+#~ msgid "Disable core updates"
+#~ msgstr "Désactiver les mises à jour du core"
+
+#~ msgid "Disable core development updates"
+#~ msgstr "Désactiver les mises à jour du core (dev)"
+
+#~ msgid "Disable minor core updates"
+#~ msgstr "Désactiver les mises à jour mineures du core"
+
+#~ msgid "Disable major core updates"
+#~ msgstr "Désactiver les mises à jour majeures du core"
+
+#~ msgid "Enable automatic updates on Versioning Control System (GIT/SVN)"
+#~ msgstr ""
+#~ "Activer les mises à jour automatiques sur des systèmes de contrôle de "
+#~ "versions (GIT/SVN)"
+
+#~ msgid "Disable automatic updates for all plugins"
+#~ msgstr "Désactiver les mises à jour automatiques pour tous les plugins"
+
+#~ msgid "Disable automatic updates for all themes"
+#~ msgstr "Désactiver les mises à jour automatiques pour tous les thèmes"
+
+#~ msgid "Disable automatic updates for all translations"
+#~ msgstr "Désactiver les mises à jour automatiques pour tous les traductions"
+
+#~ msgid "Disable update emails notifications"
+#~ msgstr "Désactiver les notifications par mail des mises à jour"
+
+#~ msgid "Disable Emoji support for old browsers"
+#~ msgstr "Désactiver le support des Emoji pour les anciens navigateurs"
+
+#~ msgid "Disable JSON REST API"
+#~ msgstr "Désactiver l’API REST JSON"
+
+#~ msgid "Disable XML RPC"
+#~ msgstr "Désactiver XML RPC"
+
+#~ msgid "Disable JS/CSS concatenation"
+#~ msgstr "Désactiver la concaténation JS/CSS"
+
+#~ msgid "Dashboard settings"
+#~ msgstr "Paramètres du Tableau de bord"
+
+#~ msgid "Remove Welcome Panel"
+#~ msgstr "Supprimer le Panneau de bienvenue"
+
+#~ msgid "Display Dashboard in a single column"
+#~ msgstr "Afficher le tableau de bord en une seule colonne"
+
+#~ msgid "Remove dashboard widgets"
+#~ msgstr "Supprimer les widgets du Tableau de bord"
+
+#~ msgid ""
+#~ "Disable drag and drop for dashboard widgets (block disabling widgets from "
+#~ "Screen options too)"
+#~ msgstr ""
+#~ "Désactiver le glisser-déposer des widgets du Tableau de bord (cela "
+#~ "bloquera la désactivation des widgets depuis l'onglet Options d'écran)"
+
+#~ msgid "Display all custom post types in At a glance dashboard widget"
+#~ msgstr ""
+#~ "Afficher les types d'articles personnalisés dans le widget D'un coup "
+#~ "d'oeil dans le Tableau de bord"
+
+#~ msgid "Display number of users in At a glance dashboard widget"
+#~ msgstr ""
+#~ "Afficher le nombre d'utilisateurs dans le widget D'un coup d'oeil du "
+#~ "Tableau de bord"
+
+#~ msgid "Display your custom widget title"
+#~ msgstr "Afficher votre titre de widget perso"
+
+#~ msgid "Display your custom widget"
+#~ msgstr "Afficher votre widget perso"
+
+#~ msgid "Admin menu settings"
+#~ msgstr "Paramètres des menus d'admin"
+
+#~ msgid "Menu Structure"
+#~ msgstr "Structure du menu"
+
+#~ msgid "Display all settings in menu"
+#~ msgstr "Afficher Tous les paramètres dans le menu"
+
+#~ msgid "Admin bar settings"
+#~ msgstr "Paramètres de la barre d'admin"
+
+#~ msgid "Remove WordPress logo in admin bar"
+#~ msgstr "Supprimer le logo WordPress dans la barre d'admin"
+
+#~ msgid "Custom logo in admin bar"
+#~ msgstr "Logo personnalisé dans l'admin bar"
+
+#~ msgid "Remove Site Name in admin bar"
+#~ msgstr "Supprimer le nom du site dans la barre d'admin"
+
+#~ msgid "Remove My Account in admin bar"
+#~ msgstr "Supprimer Mon compte dans la barre d'admin"
+
+#~ msgid "Remove Menu Toggle in admin bar"
+#~ msgstr "Supprimer Masquer menu dans la barre d'admin"
+
+#~ msgid "Remove Edit in admin bar"
+#~ msgstr "Supprimer Editer dans la barre d'admin"
+
+#~ msgid "Remove View in admin bar"
+#~ msgstr "Supprimer Voir dans la barre d'admin"
+
+#~ msgid "Remove Preview in admin bar"
+#~ msgstr "Supprimer Prévisualiser dans la barre d'admin"
+
+#~ msgid "Remove Comments in admin bar"
+#~ msgstr "Supprimer Commentaires dans la barre d'admin"
+
+#~ msgid "Remove New Content in admin bar"
+#~ msgstr "Supprimer Nouveau dans la barre d'admin"
+
+#~ msgid "Remove View Site in admin bar"
+#~ msgstr "Supprimer Voir le site dans la barre d'admin"
+
+#~ msgid "Remove Updates in admin bar"
+#~ msgstr "Supprimer Mises à jour dans la barre d'admin"
+
+#~ msgid "Remove customize in admin bar"
+#~ msgstr "Supprimer Personnaliser dans la barre d'admin"
+
+#~ msgid "Remove search in admin bar"
+#~ msgstr "Supprimer Recherche dans la barre d'admin"
+
+#~ msgid "Remove Howdy in admin bar"
+#~ msgstr "Supprimer Salutations de la barre d'admin"
+
+#~ msgid "Remove WP Admin UI in admin bar"
+#~ msgstr "Supprimer WP Admin UI de la barre d'admin"
+
+#~ msgid "Disable admin bar in front-end"
+#~ msgstr "Désactiver la barre d'admin en front-end"
+
+#~ msgid "Editor settings"
+#~ msgstr "Paramètres d'éditeur"
+
+#~ msgid "Enable Full TinyMCE by default"
+#~ msgstr "Activer l'éditeur TinyMCE complet par défaut"
+
+#~ msgid "Add Font Size select"
+#~ msgstr "Ajouter la liste déroulante Taille de la police"
+
+#~ msgid "Add Font Family select"
+#~ msgstr "Ajouter la liste déroulante Famille de Police"
+
+#~ msgid "Add custom Fonts select"
+#~ msgstr "Ajouter la liste déroulante Polices personnalisées"
+
+#~ msgid "Add Formats select (styles)"
+#~ msgstr "Ajouter la liste déroulante Formats (styles)"
+
+#~ msgid "Remove Get Shortlink button"
+#~ msgstr "Supprimer le bouton Obtenir le lien court"
+
+#~ msgid "Add New Document button"
+#~ msgstr "Ajouter bouton Nouveau document"
+
+#~ msgid "Add Cut button"
+#~ msgstr "Ajouter bouton Couper"
+
+#~ msgid "Add Copy button"
+#~ msgstr "Ajouter bouton Copier"
+
+#~ msgid "Add Paste button"
+#~ msgstr "Ajouter bouton Coller"
+
+#~ msgid "Add Backcolor button"
+#~ msgstr "Ajouter le bouton Surlignage"
+
+#~ msgid "Remove Insert Media in Media Modal"
+#~ msgstr "Supprimer Insérer Média dans la modal Media"
+
+#~ msgid "Remove Upload Files in Media Modal"
+#~ msgstr "Supprimer Mettre en ligne dans la modal Media"
+
+#~ msgid "Remove Media Library in Media Modal"
+#~ msgstr "Supprimer Bibliothèque des médias dans la modal Media"
+
+#~ msgid "Remove Create Gallery in Media Modal"
+#~ msgstr "Supprimer Créer galerie dans la modal Media"
+
+#~ msgid "Remove Create Playlist in Media Modal"
+#~ msgstr "Supprimer Créer Playlist dans la modal Media"
+
+#~ msgid "Remove Set Featured Image in Media Modal"
+#~ msgstr "Supprimer Définir comme image à la une dans la modal Media"
+
+#~ msgid "Remove Insert From URL in Media Modal"
+#~ msgstr "Supprimer Insérer depuis une URL dans la modal Media"
+
+#~ msgid "Add \"p\" quicktags in Text Editor"
+#~ msgstr "Ajouter la balise Paragraphe dans la vue Texte de l'éditeur"
+
+#~ msgid "Add \"hr\" quicktags in Text Editor"
+#~ msgstr "Ajouter la balise HR dans la vue Texte de l'éditeur"
+
+#~ msgid "Add \"pre\" quicktags in Text Editor"
+#~ msgstr "Ajouter la balise PRE dans la vue Texte de l'éditeur"
+
+#~ msgid "Disable formatting_shortcuts in Text Editor"
+#~ msgstr "Désactiver le formatage des raccourcis dans l'éditeur"
+
+#~ msgid "Set a default image alignment in Text Editor"
+#~ msgstr "Définir un alignement d'image par défaut dans l'éditeur de texte"
+
+#~ msgid "Set a default link type on images in Text Editor"
+#~ msgstr ""
+#~ "Définir un type de lien par défaut sur les images dans l'éditeur de texte"
+
+#~ msgid "Set a default image size in Text Editor"
+#~ msgstr "Définir une taille d'image par défaut dans l'éditeur de texte"
+
+#~ msgid "Profil settings"
+#~ msgstr "Paramètres du Profil"
+
+#~ msgid "Remove Disable the visual editor when writing"
+#~ msgstr "Supprimer Désactiver l'éditeur visuel lors de l'écriture"
+
+#~ msgid "Remove Admin Color Scheme"
+#~ msgstr "Supprimer les schémas de couleurs"
+
+#~ msgid "Set a default admin color scheme"
+#~ msgstr "Définir un schéma de couleur d'admin par défaut"
+
+#~ msgid "Remove Enable Keyboard Shortcuts for comment moderation"
+#~ msgstr ""
+#~ "Supprimer Activer les raccourcis claviers pour la modération des "
+#~ "commentaires"
+
+#~ msgid "Remove Show Toolbar when viewing site"
+#~ msgstr ""
+#~ "Supprimer Afficher la barre d'outils lors de la visualisation du site"
+
+#~ msgid "Add Facebook field in user profil"
+#~ msgstr "Ajouter le champ Facebook dans le profil utilisateur"
+
+#~ msgid "Add Twitter field in user profil"
+#~ msgstr "Ajouter le champ Twitter dans le profil utilisateur"
+
+#~ msgid "Add Instagram field in user profil"
+#~ msgstr "Ajouter le champ Instagram dans le profil utilisateur"
+
+#~ msgid "Add LinkedIn field in user profil"
+#~ msgstr "Ajouter le champ LinkedIn dans le profil utilisateur"
+
+#~ msgid "Define JPG image quality (default 90%)"
+#~ msgstr "Définir la qualité d'image JPG (défaut 90%)"
+
+#~ msgid "Clean filenames when uploading files to WordPress"
+#~ msgstr ""
+#~ "Nettoyer les noms de fichiers lors l'envoi de fichiers dans WordPress"
+
+#~ msgid "Allow SVG file in media library"
+#~ msgstr "Autoriser les fichiers SVG dans la Bibliothèque de médias"
+
+#~ msgid "Add URL column in media library"
+#~ msgstr "Ajouter la colonne URL dans la Bibliothèque de médias"
+
+#~ msgid "Add dimensions column in media library"
+#~ msgstr "Ajouter la colonne dimensions dans la Bibliothèque de médias"
+
+#~ msgid "Add EXIF metadata column in media library"
+#~ msgstr "Ajouter la colonne metadata EXIF dans la Bibliothèque de médias"
+
+#~ msgid "Add ID column in media library"
+#~ msgstr "Ajouter la colonne ID dans la Bibliothèque de médias"
+
+#~ msgid "Add PDF filtering to media library"
+#~ msgstr "Ajouter le filtrage PDF dans la bibliothèque des médias"
+
+#~ msgid "Add ZIP filtering to media library"
+#~ msgstr "Ajouter le filtrage ZIP dans la bibliothèque des médias"
+
+#~ msgid "Add RAR filtering to media library"
+#~ msgstr "Ajouter le filtrage RAR dans la bibliothèque des médias"
+
+#~ msgid "Add 7Z filtering to media library"
+#~ msgstr "Ajouter le filtrage 7Z dans la bibliothèque des médias"
+
+#~ msgid "Add TAR filtering to media library"
+#~ msgstr "Ajouter le filtrage TAR dans la bibliothèque des médias"
+
+#~ msgid "Add SWF filtering to media library"
+#~ msgstr "Ajouter le filtrage SWF dans la bibliothèque des médias"
+
+#~ msgid "Add DOC filtering to media library"
+#~ msgstr "Ajouter le filtrage DOC dans la bibliothèque des médias"
+
+#~ msgid "Add DOCX filtering to media library"
+#~ msgstr "Ajouter le filtrage DOCX dans la bibliothèque des médias"
+
+#~ msgid "Add PPT filtering to media library"
+#~ msgstr "Ajouter le filtrage PPT dans la bibliothèque des médias"
+
+#~ msgid "Add PPTX filtering to media library"
+#~ msgstr "Ajouter le filtrage PPTX dans la bibliothèque des médias"
+
+#~ msgid "Add XLS filtering to media library"
+#~ msgstr "Ajouter le filtrage XLS dans la bibliothèque des médias"
+
+#~ msgid "Add XLSX filtering to media library"
+#~ msgstr "Ajouter le filtrage XLSX dans la bibliothèque des médias"
+
+#~ msgid "Roles settings"
+#~ msgstr "Paramètres des Rôles"
+
+#~ msgid "&nbsp;"
+#~ msgstr "&nbsp;"
+
+#~ msgid "<p>Customize your login screen</p>"
+#~ msgstr "<p>Personnaliser votre Ecran de Connexion</p>"
+
+#~ msgid "<p>Customize your Dashboard</p>"
+#~ msgstr "<p>Personnaliser votre Tableau de bord</p>"
+
+#~ msgid ""
+#~ "<p>Drag each item into the order you prefer.<br />Click the arrow on the "
+#~ "right of the item to reveal submenus.<br />Check an item to <strong>HIDE</"
+#~ "strong> in WP admin.<br /><strong>NOTE:</strong> Admin Menu Settings does "
+#~ "not apply to this specific page to avoid conflicts.<br /><span style="
+#~ "\"color:red\"><strong>WARNING:</strong> Be careful if you hide WP Admin "
+#~ "UI menu for admins too!</span></p>"
+#~ msgstr ""
+#~ "<p>Faites glisser chaque élément dans l'ordre que vous préférez."
+#~ "<br>Cliquez sur la flèche à droite de l'élément pour révéler des sous-"
+#~ "menus.<br>Cochez un élément à <strong>Masquer</strong> dans l'admin WP."
+#~ "<br><strong>Remarque :</strong> Les réglages du menu d'admin ne "
+#~ "s'appliquent pas à cette page spécifique pour éviter des conflits."
+#~ "<br><span style=\"color:red\"><strong>Avertissement :</strong> Soyez "
+#~ "prudent si vous masquez le menu WP Admin UI pour les admins aussi !</"
+#~ "span></p>"
+
+#~ msgid "<p>Customize your Admin bar</p>"
+#~ msgstr "<p>Personnaliser votre Barre d'Admin</p>"
+
+#~ msgid "<p>Customize TINY MCE Editor</p>"
+#~ msgstr "<p>Personnaliser l'éditeur TINY MCE</p>"
+
+#~ msgid "<p>Manage Profil</p>"
+#~ msgstr "<p>Gérer le Profil</p>"
+
+#~ msgid "<p>Customize your Media Library</p>"
+#~ msgstr "<p>Personnaliser votre Bibliothèque des Médias</p>"
+
+#~ msgid "<p>Apply settings for specific Roles</p>"
+#~ msgstr "<p>Appliquez les paramètres à des rôles spécifiques</p>"
+
+#~ msgid "Link URL when you click on the logo, default WordPress.org"
+#~ msgstr "URL du lien quand vous cliquez sur le logo, défaut, WordPress.org"
+
+#~ msgid "Image URL of your custom logo"
+#~ msgstr "URL de l'image de votre logo"
+
+#~ msgid "Default: Powered by WordPress.org"
+#~ msgstr "Défaut: Propulsé par WordPress.org"
+
+#~ msgid "Eg: http://example.com/"
+#~ msgstr "Ex: http://example.com/"
+
+#~ msgid "Eg: http://example.com/thank-you"
+#~ msgstr "Ex: http://example.com/merci"
+
+#~ msgid "Disable login by Email for users"
+#~ msgstr "Désactiver la connexion par email pour les utilisateurs"
+
+#~ msgid "Remove WordPress update notifications"
+#~ msgstr "Supprimer les notifications de mises à jour WordPress"
+
+#~ msgid "Users who have defined their own settings will be overwritten"
+#~ msgstr ""
+#~ "Les utilisateurs qui ont défini leurs propres paramètres seront effacés"
+
+#~ msgid "List view mode (default)"
+#~ msgstr "Mode vue liste (défaut)"
+
+#~ msgid "Users who have defined their own settings will NOT be overwritten"
+#~ msgstr ""
+#~ "Les utilisateurs qui ont défini leurs propres paramètres ne seront PAS "
+#~ "effacés"
+
+#~ msgid "Excerpt view mode"
+#~ msgstr "Mode vue extrait"
+
+#~ msgid "Disable file editor"
+#~ msgstr "Désactiver l'éditeur de fichiers"
+
+#~ msgid "Disable file modifications"
+#~ msgstr "Désactiver les modifications de fichiers"
+
+#~ msgid "Block WordPress backend for specific roles"
+#~ msgstr ""
+#~ "Bloquer l’admin de WordPress pour des rôles utilisateurs spécifiques"
+
+#~ msgid ""
+#~ "Don't forget to assign this option to specific user roles in the Role "
+#~ "manager page"
+#~ msgstr ""
+#~ "N'oubliez pas d'assigner cette option à des rôles utilisateurs "
+#~ "spécifiques dans la page Rôle du plugin"
+
+#~ msgid "Disable all WordPress updates"
+#~ msgstr "Désactiver toutes les mises à jour WP"
+
+#~ msgid "Disable WordPress core updates"
+#~ msgstr "Désactiver les mises à jour du core"
+
+#~ msgid "Disable WordPress core minor updates"
+#~ msgstr "Désactiver les mises à jour mineures du core"
+
+#~ msgid "Disable WordPress core major updates"
+#~ msgstr "Désactiver les mises à jour majeures du core"
+
+#~ msgid "Enable core updates on a VCS"
+#~ msgstr "Activer les mises à jour du core sur un SCV (GIT/SVN)"
+
+#~ msgid "Disable all plugins updates"
+#~ msgstr "Désactiver les mises à jour des plugins"
+
+#~ msgid "Disable all themes updates"
+#~ msgstr "Désactiver les mises à jour des thèmes"
+
+#~ msgid "Disable all translations updates"
+#~ msgstr "Désactiver les mises à jour des traductions"
+
+#~ msgid "Disable emails notifications"
+#~ msgstr "Désactiver les notifications par mail"
+
+#~ msgid "Disable Emoji support for old browsers (improve performances)"
+#~ msgstr ""
+#~ "Désactiver le support des Emoji pour les anciens navigateurs (améliore "
+#~ "les performances)"
+
+#~ msgid ""
+#~ "Emojis will still continue to work with modern browsers. This setting "
+#~ "applies to every user/visitor in front AND backend."
+#~ msgstr ""
+#~ "Les Emojis continueront de fonctionner avec les navigateurs modernes. Ces "
+#~ "paramètres s'appliquent à l'ensemble des utilisateurs/visiteurs du site, "
+#~ "front ET backend."
+
+#~ msgid "Disable XML RPC is strongly recommended for security reasons!"
+#~ msgstr ""
+#~ "Désactiver XML RPC est fortement recommandé pour des raisons de sécurité !"
+
+#~ msgid "Disable Open Sans"
+#~ msgstr "Désactiver Open Sans"
+
+#~ msgid "Enter your avatar url"
+#~ msgstr "URL de l'image de votre avatar"
+
+#~ msgid "Display dashboard widgets in a single column"
+#~ msgstr "Afficher les widgets du Tableau de bord en une seule colonne"
+
+#~ msgid ""
+#~ "You need to Refresh in order to initialize the dashboard widgets list."
+#~ msgstr ""
+#~ "Vous devez d'abord Rafraichir pour générer la liste des widgets du "
+#~ "Tableau de bord."
+
+#~ msgid "Disable Drag and drop for dashboard widgets"
+#~ msgstr "Désactiver le glisser / déposer des widgets dans le Tableau de bord"
+
+#~ msgid "My widget title"
+#~ msgstr "Mon titre de widget"
+
+#~ msgid "Enter your own menu name"
+#~ msgstr "Entrez votre propre nom de menu"
+
+#~ msgid "Display all settings (required manage_options capability)"
+#~ msgstr "Afficher Tous les paramètres (requiert la capacité manage_options)"
+
+#~ msgid "Recommended size: 32x32 pixels"
+#~ msgstr "Taille recommandée: 32x32 pixels"
+
+#~ msgid "Remove Menu Toggle (hamburger icon in responsive mode)"
+#~ msgstr "Supprimer Masquer Menu (icône hamburger en mode responsive)"
+
+#~ msgid "Enable full TinyMCE by default"
+#~ msgstr "Activer l'éditeur TinyMCE complet par défaut"
+
+#~ msgid "Add Custom Fonts select"
+#~ msgstr "Ajouter la liste déroulante Polices personnalisées"
+
+#~ msgid "Remove Get shortlink button"
+#~ msgstr "Supprimer le bouton Obtenir le lien court"
+
+#~ msgid " Add New Document button"
+#~ msgstr "Ajouter bouton Nouveau document"
+
+#~ msgid " Add Cut button"
+#~ msgstr "Ajouter bouton Couper"
+
+#~ msgid " Add Copy button"
+#~ msgstr "Ajouter bouton Copier"
+
+#~ msgid " Add Paste button"
+#~ msgstr "Ajouter bouton Coller"
+
+#~ msgid " Add Backcolor button"
+#~ msgstr "Ajouter le bouton Surlignage"
+
+#~ msgid "Add Paragraph tag in text editor"
+#~ msgstr "Ajouter la balise Paragraphe dans la vue Texte de l'éditeur"
+
+#~ msgid "Add HR tag in text editor"
+#~ msgstr "Ajouter la balise HR dans la vue Texte de l'éditeur"
+
+#~ msgid "Add PRE tag in text editor"
+#~ msgstr "Ajouter la balise PRE dans la vue Texte de l'éditeur"
+
+#~ msgid "Disable WP formatting shortcuts in text editor"
+#~ msgstr "Désactiver le formatage des raccourcis dans l'éditeur"
+
+#~ msgid "Left"
+#~ msgstr "Gauche"
+
+#~ msgid "Center"
+#~ msgstr "Centre"
+
+#~ msgid "Right"
+#~ msgstr "Droite"
+
+#~ msgid "File"
+#~ msgstr "Fichier"
+
+#~ msgid "Custom"
+#~ msgstr "Personnalisé"
+
+#~ msgid "Post"
+#~ msgstr "Article"
+
+#~ msgid ""
+#~ "<strong>WARNING:</strong> To apply color scheme properly, set in the role "
+#~ "manager, what role should apply this setting, then define the default "
+#~ "color scheme and save. If a user has already changed its color scheme, it "
+#~ "will be erased by the selected one."
+#~ msgstr ""
+#~ "<strong>ATTENTION:</strong> Pour appliquer le schéma de couleur "
+#~ "proprement, définissez dans la page Rôle, quels rôles doivent appliquer "
+#~ "ce paramètre, puis appliquez un schéma de couleur par défaut et "
+#~ "sauvegardez. Si un utilisateur a déjà modifier son schéma de couleur, "
+#~ "celui ci sera effacé par le nouveau sélectionné."
+
+#~ msgid "Light"
+#~ msgstr "Light"
+
+#~ msgid "Blue"
+#~ msgstr "Blue"
+
+#~ msgid "Coffee"
+#~ msgstr "Coffee"
+
+#~ msgid "Ectoplasm"
+#~ msgstr "Ectoplasm"
+
+#~ msgid "Midnight"
+#~ msgstr "Midnight"
+
+#~ msgid "Ocean"
+#~ msgstr "Ocean"
+
+#~ msgid "Sunrise"
+#~ msgstr "Sunrise"
+
+#~ msgid "WPUI Algua"
+#~ msgstr "WPUI Algua"
+
+#~ msgid "WPUI Dark"
+#~ msgstr "WPUI Dark"
+
+#~ msgid "WPUI Teal"
+#~ msgstr "WPUI Teal"
+
+#~ msgid "WPUI Ice"
+#~ msgstr "WPUI Ice"
+
+#~ msgid "WPUI Army"
+#~ msgstr "WPUI Army"
+
+#~ msgid "WPUI Bayonne"
+#~ msgstr "WPUI Bayonne"
+
+#~ msgid "WPUI Fashion"
+#~ msgstr "WPUI Fashion"
+
+#~ msgid "WPUI Cafe"
+#~ msgstr "WPUI Cafe"
+
+#~ msgid ""
+#~ "Use get_the_author_meta('wpui-facebook'); to retreive this value in front-"
+#~ "end"
+#~ msgstr ""
+#~ "Utilisez get_the_author_meta('wpui-facebook'); pour récupérer la valeur "
+#~ "en front-end"
+
+#~ msgid ""
+#~ "Use get_the_author_meta('wpui-twitter'); to retreive this value in front-"
+#~ "end"
+#~ msgstr ""
+#~ "Utilisez get_the_author_meta('wpui-twitter'); pour récupérer la valeur en "
+#~ "front-end"
+
+#~ msgid ""
+#~ "Use get_the_author_meta('wpui-instagram'); to retreive this value in "
+#~ "front-end"
+#~ msgstr ""
+#~ "Utilisez get_the_author_meta('wpui-instagram'); pour récupérer la valeur "
+#~ "en front-end"
+
+#~ msgid ""
+#~ "Use get_the_author_meta('wpui-linkedin'); to retreive this value in front-"
+#~ "end"
+#~ msgstr ""
+#~ "Utilisez get_the_author_meta('wpui-linkedin'); pour récupérer la valeur "
+#~ "en front-end"
+
+#~ msgid "Existing images must be regenerate to apply new image quality."
+#~ msgstr ""
+#~ "Les images existantes doivent être régénérées pour appliquer les nouveaux "
+#~ "paramètres d'image."
+
+#~ msgid "Clean filenames when upload files to media library"
+#~ msgstr ""
+#~ "Nettoyer les noms de fichiers lors de l'envoi de fichiers dans la "
+#~ "Bibliothèque de médias"
+
+#~ msgid "Allow SVG file in media library (can present a security risk)"
+#~ msgstr ""
+#~ "Autoriser les fichiers SVG dans la Bibliothèque de médias (peut présenter "
+#~ "un risque pour la sécurité)"
+
+#~ msgid ""
+#~ "This option can not be changed because it's bypassed by a plugin, a mu-"
+#~ "plugin or your theme."
+#~ msgstr ""
+#~ "Cette option ne peut être appliquée car elle est déjà surpassée par un "
+#~ "plugin, un mu-plugin ou votre thème."
+
+#~ msgid "Add PDF filter"
+#~ msgstr "Ajouter le filtre PDF"
+
+#~ msgid "Add ZIP filter"
+#~ msgstr "Ajouter le filtre ZIP"
+
+#~ msgid "Add RAR filter"
+#~ msgstr "Ajouter le filtre RAR"
+
+#~ msgid "Add 7Z filter"
+#~ msgstr "Ajouter le filtre 7Z"
+
+#~ msgid "Add TAR filter"
+#~ msgstr "Ajouter le filtre TAR"
+
+#~ msgid "Add SWF filter"
+#~ msgstr "Ajouter le filtre SWF"
+
+#~ msgid "Add DOC filter"
+#~ msgstr "Ajouter le filtre DOC"
+
+#~ msgid "Add DOCX filter"
+#~ msgstr "Ajouter le filtre DOCX"
+
+#~ msgid "Add PPT filter"
+#~ msgstr "Ajouter le filtre PPT"
+
+#~ msgid "Add PPTX filter"
+#~ msgstr "Ajouter le filtre PPTX"
+
+#~ msgid "Add XLS filter"
+#~ msgstr "Ajouter le filtre XLS"
+
+#~ msgid "Add XLSX filter"
+#~ msgstr "Ajouter le filtre XLSX"
+
+#~ msgid "Define default view mode in list view (default list view mode)"
+#~ msgstr ""
+#~ "Définir le mode d'affichage par défaut dans les vues listes (mode de vue "
+#~ "par défaut)"
+
+#~ msgid "Block WordPress admin for user roles"
+#~ msgstr ""
+#~ "Bloquer l’admin de WordPress pour des rôles d’utilisateurs spécifiques"
+
+#~ msgid "Disable JS concatenation"
+#~ msgstr "Désactiver la concaténation JS"
+
+#~ msgid "Enable custom avatar"
+#~ msgstr "Activer l'avatar personnalisé"
+
+#~ msgid "Disable drag and drop for dashboard widgets"
+#~ msgstr "Désactiver le glisser / déposer des widgets dans le Tableau de bord"
+
+#~ msgid "Display a custom widget in Dashboard"
+#~ msgstr "Afficher un widget personnalisé dans le Tableau de bord"
+
+#~ msgid "Remove metaboxes"
+#~ msgstr "Supprimer les metaboxes"
+
+#~ msgid "Remove columns"
+#~ msgstr "Supprimer les colonnes"
+
+#~ msgid "Show post ID column"
+#~ msgstr "Afficher la colonne ID du post"
+
+#~ msgid "Show Thumbnail column"
+#~ msgstr "Afficher la colonne miniature"
+
+#~ msgid "Show Page Template column"
+#~ msgstr "Afficher la colonne template de page"
+
+#~ msgid "Clean filenames when uploading files to media library"
+#~ msgstr ""
+#~ "Nettoyer les noms de fichiers lors l'envoi de fichiers dans WordPress"
+
+#~ msgid "Add Dimensions column in media library"
+#~ msgstr "Ajouter la colonne dimensions dans la Bibliothèque de médias"
+
+#~ msgid "Add Facebook field in Profil"
+#~ msgstr "Ajouter le champ Facebook dans le profil utilisateur"
+
+#~ msgid "Add Twitter field in Profil"
+#~ msgstr "Ajouter le champ Twitter dans le profil utilisateur"
+
+#~ msgid "Add Instagram field in Profil"
+#~ msgstr "Ajouter le champ Instagram dans le profil utilisateur"
+
+#~ msgid "Add LinkedIn field in Profil"
+#~ msgstr "Ajouter le champ LinkedIn dans le profil utilisateur"
+
+#~ msgid "Remove WP SEO columns in list view"
+#~ msgstr "Supprimer les colonnes WP SEO dans la vue liste"
+
+#~ msgid "Remove WP SEO in admin bar"
+#~ msgstr "Supprimer WP SEO de la barre d'admin"
+
+#~ msgid "Move WP SEO Metabox to low position"
+#~ msgstr "Déplacer la metaboxe WP SEO vers le bas"
+
+#~ msgid "Remove WP SEO admin notices"
+#~ msgstr "Supprimer les notices d'admin de WP SEO"
+
+#~ msgid "Remove WPML advert in publish metabox"
+#~ msgstr "Supprimer la publicité WPML dans la metaboxe Publier"
+
+#~ msgid "Remove WPML in admin bar"
+#~ msgstr "Supprimer WPML dans la barre d'admin"
+
+#~ msgid "Remove WPML in dashboard widget"
+#~ msgstr "Supprimer le widget WPML du Tableau de bord"
+
+#~ msgid "Remove Install the WooThemes Updater plugin"
+#~ msgstr "Supprimer la notification Installer le plugin WooThemes Updater"
+
+#~ msgid "Enable field label visibility in Gravity Forms"
+#~ msgstr "Activez la visibilité du label des champs dans Gravity Forms"
+
+#~ msgid "Disable Just in Time messages from Jetpack"
+#~ msgstr "Supprimez les messages de notification Jetpack 'Just in Time'"
+
+#~ msgid "Enable custom admin Themes"
+#~ msgstr "Activez les thèmes d'admin personnalisés"
+
+#~ msgid "Toggle All"
+#~ msgstr "Tout sélectionner"
+
+#~ msgid ""
+#~ "Before starting: define which roles to apply settings using Role Manager "
+#~ "page."
+#~ msgstr ""
+#~ "Avant de commencer: définissez à quels rôles utilisateurs doivent "
+#~ "s'appliquer chaque paramètre via la page Rôles."
+
+#~ msgid "Howdy,"
+#~ msgstr "Salutations,"
+
+#~ msgid "All Settings"
+#~ msgstr "Tous les paramètres"
+
+#~ msgid " Users"
+#~ msgstr "Utilisateurs"
+
+#~ msgid "My custom widget"
+#~ msgstr "Mon widget perso"
+
+#~ msgid "Your credentials are incorrect"
+#~ msgstr "Vos identifiants sont incorrects"
+
+#~ msgid "EXIF"
+#~ msgstr "EXIF"
+
+#~ msgid " second"
+#~ msgstr "seconde"
+
+#~ msgid " seconds"
+#~ msgstr "secondes"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "PDFs"
+#~ msgstr "PDFs"
+
+#~ msgid "Manage PDFs"
+#~ msgstr "Gérer PDFs"
+
+#~ msgid "ZIPs"
+#~ msgstr "ZIPs"
+
+#~ msgid "Manage ZIPs"
+#~ msgstr "Gérer ZIPs"
+
+#~ msgid "RARs"
+#~ msgstr "RARs"
+
+#~ msgid "Manage RARs"
+#~ msgstr "Gérer RARs"
+
+#~ msgid "7Zs"
+#~ msgstr "7Zs"
+
+#~ msgid "Manage 7Zs"
+#~ msgstr "Gérer 7Zs"
+
+#~ msgid "TARs"
+#~ msgstr "TARs"
+
+#~ msgid "Manage TARs"
+#~ msgstr "Gérer TARs"
+
+#~ msgid "SWFs"
+#~ msgstr "SWFs"
+
+#~ msgid "Manage SWFs"
+#~ msgstr "Gérer SWFs"
+
+#~ msgid "DOCs"
+#~ msgstr "DOCs"
+
+#~ msgid "Manage DOCs"
+#~ msgstr "Gérer DOCs"
+
+#~ msgid "DOCXs"
+#~ msgstr "DOCXs"
+
+#~ msgid "Manage DOCXs"
+#~ msgstr "Gérer DOCXs"
+
+#~ msgid "PPTs"
+#~ msgstr "PPTs"
+
+#~ msgid "Manage PPTs"
+#~ msgstr "Gérer PPTs"
+
+#~ msgid "PPTXs"
+#~ msgstr "PPTXs"
+
+#~ msgid "Manage PPTXs"
+#~ msgstr "Gérer PPTXs"
+
+#~ msgid "XLSs"
+#~ msgstr "XLSs"
+
+#~ msgid "Manage XLSs"
+#~ msgstr "Gérer XLSs"
+
+#~ msgid "XLSXs"
+#~ msgstr "XLSXs"
+
+#~ msgid "Manage XLSXs"
+#~ msgstr "Gérer XLSXs"
+
+#~ msgid "Facebook URL"
+#~ msgstr "Facebook URL"
+
+#~ msgid "Twitter URL"
+#~ msgstr "Twitter URL"
+
+#~ msgid "Revisions"
+#~ msgstr "Révisions"
+
+#~ msgid "Comments"
+#~ msgstr "Commentaires"
+
+#~ msgid "Media Library settings"
+#~ msgstr "Paramètres de la Bibliothèque de médias ?"
+
+#~ msgid "Apply settings to specific roles:"
+#~ msgstr "Appliquer les paramètres à des rôles spécifiques :"
+
+#~ msgid ""
+#~ "<p>Drag each item into the order you prefer.<br />Click the arrow on the "
+#~ "right of the item to reveal submenus.<br />Check an item to <strong>HIDE</"
+#~ "strong> in WP admin.</p>"
+#~ msgstr ""
+#~ "<p>Glisser-déposer chaque item dans l'ordre souhaité.<br />Cliquez sur la "
+#~ "flèche dans le coin supérieur droit de l'item pour afficher les sous-"
+#~ "menus.<br />Cochez un item pour <strong>MASQUER</strong> ce dernier de "
+#~ "l'admin WP.</p>"
+
+#~ msgid "Custom logo"
+#~ msgstr "Logo personnalisé"
+
+#~ msgid "Custom login CSS?"
+#~ msgstr "CSS personnalisée pour l'écran de connexion"
+
+#~ msgid "Custom logo url?"
+#~ msgstr "URL du logo personnalisé ?"
+
+#~ msgid "Custom logo?"
+#~ msgstr "Logo personnalisé ?"
+
+#~ msgid "Custom logo title?"
+#~ msgstr "Titre (infobulle) du logo personnalisée ?"
+
+#~ msgid "Custom background image?"
+#~ msgstr "Image d'arrière plan personnalisée ?"
+
+#~ msgid "Always checked remember me?"
+#~ msgstr "Toujours cocher Se souvenir de moi ?"
+
+#~ msgid "Remove error message for security?"
+#~ msgstr "Supprimer les messages d'erreur par sécurité ?"
+
+#~ msgid "Custom admin CSS?"
+#~ msgstr "Feuille de styles perso pour l'admin ?"
+
+#~ msgid "Remove WordPress version in footer?"
+#~ msgstr "Supprimer la version de WordPress dans le pied de page ?"
+
+#~ msgid "Custom WordPress version in footer?"
+#~ msgstr "Version de WordPress personnalisée dans le pied de page ?"
+
+#~ msgid "Remove WordPress credits in footer?"
+#~ msgstr "Supprimer les crédits WordPress du pied de page ?"
+
+#~ msgid "Custom WordPress credits in footer?"
+#~ msgstr "Crédits WordPress personnalisé dans le pied de page ?"
+
+#~ msgid "Custom favicon in admin?"
+#~ msgstr "Favicon personnalisé dans l'admin ?"
+
+#~ msgid "Remove help tab?"
+#~ msgstr "Supprimer l'onglet Aide ?"
+
+#~ msgid "Remove screen options tab?"
+#~ msgstr "Supprimer l'onglet Options de l'écran ?"
+
+#~ msgid "Disable Open Sans loading from Google?"
+#~ msgstr "Désactiver le chargement d'Open Sans depuis Google ?"
+
+#~ msgid "Hide autogenerated password message?"
+#~ msgstr "Masquer \"Vous utilisez un mot de passe auto généré\" ?"
+
+#~ msgid "Number of items per page in list view? (default 20)"
+#~ msgstr "Nombre d'items par page dans les vues listes (défaut 20)"
+
+#~ msgid "Disable file editor for themes and plugins?"
+#~ msgstr "Désactiver l'éditeur de fichiers de thèmes et plugins ?"
+
+#~ msgid "Disable Plugin and Theme Update, and Installation?"
+#~ msgstr ""
+#~ "Désactiver les mises à jours et l'installation de thèmes et plugins ?"
+
+#~ msgid "Disable WordPress updates notifications?"
+#~ msgstr "Désactiver les notifications de mises à jour WordPress ?"
+
+#~ msgid "Disable all updates?"
+#~ msgstr "Désactiver toutes les mises à jour ?"
+
+#~ msgid "Disable core updates?"
+#~ msgstr "Désactiver les mises à jour du core ?"
+
+#~ msgid "Disable core development updates?"
+#~ msgstr "Désactiver les mises à jour du core (dev) ?"
+
+#~ msgid "Disable minor core updates?"
+#~ msgstr "Désactiver les mises à jour mineures du core ?"
+
+#~ msgid "Disable major core updates?"
+#~ msgstr "Désactiver les mises à jour majeures du core ?"
+
+#~ msgid "Enable automatic updates on Versioning Control System (GIT/SVN)?"
+#~ msgstr ""
+#~ "Activer les mises à jour automatiques sur des systèmes de contrôle de "
+#~ "versions (GIT/SVN) ?"
+
+#~ msgid "Disable automatic updates for all plugins?"
+#~ msgstr "Désactiver les mises à jour automatiques pour tous les plugins ?"
+
+#~ msgid "Disable automatic updates for all themes?"
+#~ msgstr "Désactiver les mises à jour automatiques pour tous les thèmes ?"
+
+#~ msgid "Disable automatic updates for all translations?"
+#~ msgstr ""
+#~ "Désactiver les mises à jour automatiques pour tous les traductions ?"
+
+#~ msgid "Disable update emails notifications?"
+#~ msgstr "Désactiver les notifications par mail des mises à jour ?"
+
+#~ msgid "Disable JS concatenation?"
+#~ msgstr "Désactiver la concaténation JS ?"
+
+#~ msgid "Remove Welcome Panel?"
+#~ msgstr "Supprimer le Panneau de bienvenue"
+
+#~ msgid "Remove dashboard widgets?"
+#~ msgstr "Supprimer les widgets du Tableau de bord"
+
+#~ msgid "Display all settings in menu?"
+#~ msgstr "Afficher Tous les paramètres dans le menu ?"
+
+#~ msgid "Remove WordPress logo in admin bar?"
+#~ msgstr "Supprimer le logo WordPress dans la barre d'admin"
+
+#~ msgid "Remove Site Name in admin bar?"
+#~ msgstr "Supprimer le nom du site dans la barre d'admin ?"
+
+#~ msgid "Remove My Account in admin bar?"
+#~ msgstr "Supprimer Mon compte dans la barre d'admin ?"
+
+#~ msgid "Remove Menu Toggle in admin bar?"
+#~ msgstr "Supprimer Masquer menu dans la barre d'admin ?"
+
+#~ msgid "Remove Edit in admin bar?"
+#~ msgstr "Supprimer Editer dans la barre d'admin"
+
+#~ msgid "Remove View in admin bar?"
+#~ msgstr "Supprimer Voir dans la barre d'admin ?"
+
+#~ msgid "Remove Preview in admin bar?"
+#~ msgstr "Supprimer Prévisualiser dans la barre d'admin ?"
+
+#~ msgid "Remove Comments in admin bar?"
+#~ msgstr "Supprimer Commentaires dans la barre d'admin ?"
+
+#~ msgid "Remove New Content in admin bar?"
+#~ msgstr "Supprimer Nouveau dans la barre d'admin ?"
+
+#~ msgid "Remove View Site in admin bar?"
+#~ msgstr "Supprimer Voir le site dans la barre d'admin ?"
+
+#~ msgid "Remove Updates in admin bar?"
+#~ msgstr "Supprimer Mises à jour dans la barre d'admin ?"
+
+#~ msgid "Remove customize in admin bar?"
+#~ msgstr "Supprimer Personnaliser dans la barre d'admin ?"
+
+#~ msgid "Remove search in admin bar?"
+#~ msgstr "Supprimer Recherche dans la barre d'admin"
+
+#~ msgid "Disable admin bar in front-end?"
+#~ msgstr "Désactiver la barre d'admin en front-end ?"
+
+#~ msgid "Enable Full TinyMCE by default?"
+#~ msgstr "Activer l'éditeur TinyMCE complet par défaut ?"
+
+#~ msgid "Add Font Size select?"
+#~ msgstr "Ajouter la liste déroulante Taille de la police ?"
+
+#~ msgid "Add Font Family select?"
+#~ msgstr "Ajouter la liste déroulante Famille de Police ?"
+
+#~ msgid "Add custom Fonts select?"
+#~ msgstr "Ajouter la liste déroulante Polices personnalisées ?"
+
+#~ msgid "Add Formats select (styles)?"
+#~ msgstr "Ajouter la liste déroulante Formats (styles) ?"
+
+#~ msgid "Remove Get Shortlink button?"
+#~ msgstr "Supprimer le bouton Obtenir le lien court ?"
+
+#~ msgid "Add New Document button?"
+#~ msgstr "Ajouter bouton Nouveau document ?"
+
+#~ msgid "Add Cut button?"
+#~ msgstr "Ajouter bouton Couper ?"
+
+#~ msgid "Add Copy button?"
+#~ msgstr "Ajouter bouton Copier ?"
+
+#~ msgid "Add Paste button?"
+#~ msgstr "Ajouter bouton Coller ?"
+
+#~ msgid "Add Backcolor button?"
+#~ msgstr "Ajouter le bouton Surlignage ?"
+
+#~ msgid "Remove Insert Media in Media Modal?"
+#~ msgstr "Supprimer Insérer Média dans la modal Media ?"
+
+#~ msgid "Remove Upload Files in Media Modal?"
+#~ msgstr "Supprimer Mettre en ligne dans la modal Media ?"
+
+#~ msgid "Remove Media Library in Media Modal?"
+#~ msgstr "Supprimer Bibliothèque des médias dans la modal Media ?"
+
+#~ msgid "Remove Create Gallery in Media Modal?"
+#~ msgstr "Supprimer Créer galerie dans la modal Media ?"
+
+#~ msgid "Remove Create Playlist in Media Modal?"
+#~ msgstr "Supprimer Créer Playlist dans la modal Media ?"
+
+#~ msgid "Remove Set Featured Image in Media Modal?"
+#~ msgstr "Supprimer Définir comme image à la une dans la modal Media ?"
+
+#~ msgid "Remove Insert From URL in Media Modal?"
+#~ msgstr "Supprimer Insérer depuis une URL dans la modal Media ?"
+
+#~ msgid "Add \"p\" quicktags in Text Editor?"
+#~ msgstr "Ajouter la balise Paragraphe dans la vue Texte de l'éditeur ?"
+
+#~ msgid "Add \"hr\" quicktags in Text Editor?"
+#~ msgstr "Ajouter la balise HR dans la vue Texte de l'éditeur ?"
+
+#~ msgid "Add \"pre\" quicktags in Text Editor?"
+#~ msgstr "Ajouter la balise PRE dans la vue Texte de l'éditeur ?"
+
+#~ msgid "Remove Disable the visual editor when writing?"
+#~ msgstr "Supprimer Désactiver l'éditeur visuel lors de l'écriture ?"
+
+#~ msgid "Remove Admin Color Scheme?"
+#~ msgstr "Supprimer les schémas de couleurs ?"
+
+#~ msgid "Set a default admin color scheme?"
+#~ msgstr "Définir un schéma de couleur d'admin par défaut ?"
+
+#~ msgid "Remove Enable Keyboard Shortcuts for comment moderation?"
+#~ msgstr ""
+#~ "Supprimer Activer les raccourcis claviers pour la modération des "
+#~ "commentaires ?"
+
+#~ msgid "Remove Show Toolbar when viewing site?"
+#~ msgstr ""
+#~ "Supprimer Afficher la barre d'outils lors de la visualisation du site ?"
+
+#~ msgid "Define JPG image quality (default 90%)?"
+#~ msgstr "Définir la qualité d'image JPG (défaut 90%) ?"
+
+#~ msgid "Add PDF filtering to media library?"
+#~ msgstr "Ajouter le filtrage PDF dans la bibliothèque des médias ?"
+
+#~ msgid "Add ZIP filtering to media library?"
+#~ msgstr "Ajouter le filtrage ZIP dans la bibliothèque des médias ?"
+
+#~ msgid "Add RAR filtering to media library?"
+#~ msgstr "Ajouter le filtrage RAR dans la bibliothèque des médias ?"
+
+#~ msgid "Add 7Z filtering to media library?"
+#~ msgstr "Ajouter le filtrage 7Z dans la bibliothèque des médias ?"
+
+#~ msgid "Add TAR filtering to media library?"
+#~ msgstr "Ajouter le filtrage TAR dans la bibliothèque des médias ?"
+
+#~ msgid "Add SWF filtering to media library?"
+#~ msgstr "Ajouter le filtrage SWF dans la bibliothèque des médias ?"
+
+#~ msgid "Add DOC filtering to media library?"
+#~ msgstr "Ajouter le filtrage DOC dans la bibliothèque des médias ?"
+
+#~ msgid "Add DOCX filtering to media library?"
+#~ msgstr "Ajouter le filtrage DOCX dans la bibliothèque des médias ?"
+
+#~ msgid "Add PPT filtering to media library?"
+#~ msgstr "Ajouter le filtrage PPT dans la bibliothèque des médias ?"
+
+#~ msgid "Add PPTX filtering to media library?"
+#~ msgstr "Ajouter le filtrage PPTX dans la bibliothèque des médias ?"
+
+#~ msgid "Add XLS filtering to media library?"
+#~ msgstr "Ajouter le filtrage XLS dans la bibliothèque des médias ?"
+
+#~ msgid "Add XLSX filtering to media library?"
+#~ msgstr "Ajouter le filtrage XLSX dans la bibliothèque des médias ?"
+
+#~ msgid "Remove WordPress update notifications?"
+#~ msgstr "Supprimer les notifications de mises à jour WordPress ?"
+
+#~ msgid "Disable file editor?"
+#~ msgstr "Désactiver l'éditeur de fichiers ?"
+
+#~ msgid "Disable file modifications?"
+#~ msgstr "Désactiver les modifications de fichiers ?"
+
+#~ msgid "Disable all WordPress updates?"
+#~ msgstr "Désactiver toutes les mises à jour WP ?"
+
+#~ msgid "Disable WordPress core updates?"
+#~ msgstr "Désactiver les mises à jour du core ?"
+
+#~ msgid "Disable WordPress core minor updates?"
+#~ msgstr "Désactiver les mises à jour mineures du core ?"
+
+#~ msgid "Disable WordPress core major updates?"
+#~ msgstr "Désactiver les mises à jour majeures du core ?"
+
+#~ msgid "Enable core updates on a VCS?"
+#~ msgstr "Activer les mises à jour du core sur un SCV (GIT/SVN) ?"
+
+#~ msgid "Disable all plugins updates?"
+#~ msgstr "Désactiver les mises à jour des plugins ?"
+
+#~ msgid "Disable all themes updates?"
+#~ msgstr "Désactiver les mises à jour des thèmes ?"
+
+#~ msgid "Disable all translations updates?"
+#~ msgstr "Désactiver les mises à jour des traductions ?"
+
+#~ msgid "Disable emails notifications?"
+#~ msgstr "Désactiver les notifications par mail ?"
+
+#~ msgid "Disable Open Sans?"
+#~ msgstr "Désactiver Open Sans ?"
+
+#~ msgid "Display all settings (required manage_options capability)?"
+#~ msgstr ""
+#~ "Afficher Tous les paramètres (requiert la capacité manage_options) ?"
+
+#~ msgid "Remove Menu Toggle (hamburger icon in responsive mode)?"
+#~ msgstr "Supprimer Masquer Menu (icône hamburger en mode responsive) ?"
+
+#~ msgid "Enable full TinyMCE by default?"
+#~ msgstr "Activer l'éditeur TinyMCE complet par défaut ?"
+
+#~ msgid "Add Custom Fonts select?"
+#~ msgstr "Ajouter la liste déroulante Polices personnalisées ?"
+
+#~ msgid "Remove Get shortlink button?"
+#~ msgstr "Supprimer le bouton Obtenir le lien court ?"
+
+#~ msgid " Add New Document button?"
+#~ msgstr "Ajouter bouton Nouveau document ?"
+
+#~ msgid " Add Cut button?"
+#~ msgstr "Ajouter bouton Couper ?"
+
+#~ msgid " Add Copy button?"
+#~ msgstr "Ajouter bouton Couper ?"
+
+#~ msgid " Add Paste button?"
+#~ msgstr "Ajouter bouton Coller ?"
+
+#~ msgid " Add Backcolor button?"
+#~ msgstr "Ajouter le bouton Surlignage ?"
+
+#~ msgid "Add Paragraph tag in text editor?"
+#~ msgstr "Ajouter la balise Paragraphe dans la vue Texte de l'éditeur ?"
+
+#~ msgid "Add HR tag in text editor?"
+#~ msgstr "Ajouter la balise HR dans la vue Texte de l'éditeur ?"
+
+#~ msgid "Add PRE tag in text editor?"
+#~ msgstr "Ajouter la balise PRE dans la vue Texte de l'éditeur ?"
+
+#~ msgid "Add PDF filter?"
+#~ msgstr "Ajouter le filtre PDF ?"
+
+#~ msgid "Add ZIP filter?"
+#~ msgstr "Ajouter le filtre ZIP ?"
+
+#~ msgid "Add RAR filter?"
+#~ msgstr "Ajouter le filtre RAR ?"
+
+#~ msgid "Add 7Z filter?"
+#~ msgstr "Ajouter le filtre 7Z ?"
+
+#~ msgid "Add TAR filter?"
+#~ msgstr "Ajouter le filtre TAR ?"
+
+#~ msgid "Add SWF filter?"
+#~ msgstr "Ajouter le filtre SWF ?"
+
+#~ msgid "Add DOC filter?"
+#~ msgstr "Ajouter le filtre DOC ?"
+
+#~ msgid "Add DOCX filter?"
+#~ msgstr "Ajouter le filtre DOCX ?"
+
+#~ msgid "Add PPT filter?"
+#~ msgstr "Ajouter le filtre PPT ?"
+
+#~ msgid "Add PPTX filter?"
+#~ msgstr "Ajouter le filtre PPTX ?"
+
+#~ msgid "Add XLS filter?"
+#~ msgstr "Ajouter le filtre XLS ?"
+
+#~ msgid "Add XLSX filter?"
+#~ msgstr "Ajouter le filtre XLSX ?"
+
+#~ msgid "Remove WP SEO columns in list view?"
+#~ msgstr "Supprimer les colonnes WP SEO dans la vue liste ?"
+
+#~ msgid "Move WP SEO Metabox to low position?"
+#~ msgstr "Déplacer la metaboxe WP SEO vers le bas ?"
+
+#~ msgid "Remove WPML advert in publish metabox?"
+#~ msgstr "Supprimer la publicité WPML dans la metaboxe Publier ?"
+
+#~ msgid "Remove WPML in admin bar?"
+#~ msgstr "Supprimer WPML dans la barre d'admin ?"
+
+#~ msgid "Remove WPML in dashboard widget?"
+#~ msgstr "Supprimer le widget WPML du Tableau de bord ?"
+
+#~ msgid "Remove Install the WooThemes Updater plugin?"
+#~ msgstr "Supprimer la notification Installer le plugin WooThemes Updater ?"
+
+#~ msgid "Get it!"
+#~ msgstr "Acheter!"
+
+#~ msgid "Empty trash automatically after x days? (0 to disable trash feature)"
+#~ msgstr ""
+#~ "Vider la corbeille automatiquement après x jours? (0 pour désactiver la "
+#~ "corbeille)"
+
+#~ msgid "Change default autosave interval? (in seconds, 0 to disable)"
+#~ msgstr ""
+#~ "Modifier l'intervalle par défaut de la sauvegarde automatique ? (en "
+#~ "secondes, 0 pour désactiver)"
+
+#~ msgid "Limit posts revisions? (0 to disable)"
+#~ msgstr "Limiter les révisions d'articles ? (0 pour désactiver)"
+
+#~ msgid "Users who have defined their own settings will not be overwritten"
+#~ msgstr ""
+#~ "Les utilisateurs qui ont défini leurs propres paramètres ne seront pas "
+#~ "supprimés."
+
+#~ msgid "Empty trash automatically after x days?"
+#~ msgstr "Vider la corbeille automatiquement après x jours ?"
+
+#~ msgid "Remove trash in posts, pages, custom post type...?"
+#~ msgstr ""
+#~ "Supprimer la corbeille pour les articles, pages, types d'articles "
+#~ "personnalisés... ?"
+
+#~ msgid "Disable trash feature?"
+#~ msgstr "Désactiver la corbeille ?"
+
+#~ msgid ""
+#~ "<strong>Before starting:</strong> define which roles to apply settings "
+#~ "using Role Manager page."
+#~ msgstr ""
+#~ "<strong>Avant de commencer:</strong> définissez à quels rôles doivent "
+#~ "s'appliquer les paramètres depuis la page Rôle."
