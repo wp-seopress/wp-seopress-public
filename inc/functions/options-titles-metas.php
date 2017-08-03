@@ -920,7 +920,11 @@ if (seopress_titles_canonical_post_option()) {
 } else {
 	function seopress_titles_canonical_hook() {
 		global $wp;
-		$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
+		if (seopress_advanced_advanced_trailingslash_option()) {
+			$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
+		} else {
+			$current_url = home_url(add_query_arg(array(), $wp->request));
+		}
 		if (is_search()) {
 			$seopress_titles_canonical = '<link rel="canonical" href="'.get_home_url().'/search/'.get_search_query().'" />';
 		} else {

@@ -1330,7 +1330,7 @@ class seopress_options
                             <span class="inner">
                                 <h3><?php _e('SEOPress BOT - Broken links','wp-seopress'); ?></h3>
                                 <p><?php _e('Scan your site to find SEO problems.','wp-seopress'); ?></p>
-                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-bot-page' ); ?>"><?php _e('Scan','wp-seopress'); ?></a>
+                                <a class="button-secondary" href="<?php echo admin_url( 'edit.php?post_type=seopress_bot' ); ?>"><?php _e('Scan','wp-seopress'); ?></a>
                             </span>
                         </div>
                         <div class="seopress-feature">
@@ -2115,6 +2115,14 @@ class seopress_options
             'seopress_advanced_advanced_category_url', // ID
            __("Remove /category/ in URL","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_category_url_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_trailingslash', // ID
+           __("Add trailing slash for metas","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_trailingslash_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
             'seopress_setting_section_advanced_advanced' // Section                  
         );
@@ -4123,6 +4131,23 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_advanced_category_url'])) {
             esc_attr( $this->options['seopress_advanced_advanced_category_url']);
+        }
+    }
+
+    public function seopress_advanced_advanced_trailingslash_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_trailingslash']);      
+        
+        echo '<input id="seopress_advanced_advanced_trailingslash" name="seopress_advanced_option_name[seopress_advanced_advanced_trailingslash]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_trailingslash">'. __( 'Add a trailing slash for metas', 'wp-seopress' ) .'</label><span class="dashicons dashicons-info" title="'.__('You must check this box if the structure of your permalinks contains a slash at the end (eg: /%postname%/)','wp-seopress').'"></span>';
+
+        if (isset($this->options['seopress_advanced_advanced_trailingslash'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_trailingslash']);
         }
     }
 

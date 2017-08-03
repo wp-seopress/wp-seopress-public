@@ -2,6 +2,21 @@
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+//Permalink structure for TrailingSlash
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+function seopress_advanced_advanced_trailingslash_option() {
+    $seopress_advanced_advanced_trailingslash_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_advanced_trailingslash_option ) ) {
+        foreach ($seopress_advanced_advanced_trailingslash_option as $key => $seopress_advanced_advanced_trailingslash_value)
+            $options[$key] = $seopress_advanced_advanced_trailingslash_value;
+         if (isset($seopress_advanced_advanced_trailingslash_option['seopress_advanced_advanced_trailingslash'])) { 
+            return $seopress_advanced_advanced_trailingslash_option['seopress_advanced_advanced_trailingslash'];
+         }
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 //SEOPRESS Core
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -116,7 +131,12 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		add_action('template_redirect', 'seopress_category_redirect', 1);
 		function seopress_category_redirect(){
 			global $wp;
-			$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
+
+			if (seopress_advanced_advanced_trailingslash_option()) {
+				$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
+			} else {
+				$current_url = home_url(add_query_arg(array(), $wp->request));
+			}
 
 			$category_base = get_option( 'category_base' );
 
