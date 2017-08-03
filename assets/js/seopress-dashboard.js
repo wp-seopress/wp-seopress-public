@@ -19,6 +19,26 @@ jQuery(document).ready(function(){
 				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
 			},
 		});
+	});	
+	//**Posts per page
+	jQuery('#notice-posts-number').on('click', function() {
+		jQuery('#notice-posts-number').attr('data-notice', jQuery('#notice-posts-number').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-posts-number',
+				notice_value: jQuery('#notice-posts-number').attr('data-notice'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-posts-number-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
 	});
 	//**RSS full text
 	jQuery('#notice-rss-use-excerpt').on('click', function() {
@@ -201,6 +221,27 @@ jQuery(document).ready(function(){
 				jQuery( '#seopress-notice-save .html' ).html('Advanced features has been successfully updated!');
 				jQuery( '#advanced-state' ).toggleClass('feature-state-on');
 				jQuery( '#advanced-state-default' ).toggleClass('feature-state-off');
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
+	//Local Business
+	jQuery('#toggle-local-business').on('click', function() {
+		jQuery('#toggle-local-business').attr('data-toggle', jQuery('#toggle-local-business').attr('data-toggle') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxToggleFeatures.seopress_toggle_features,
+			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
+			data : {
+				action: 'seopress_toggle_features',
+				feature: 'toggle-local-business',
+				feature_value: jQuery('#toggle-local-business').attr('data-toggle'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Local Business has been successfully updated!');
+				jQuery( '#local-business-state' ).toggleClass('feature-state-on');
+				jQuery( '#local-business-state-default' ).toggleClass('feature-state-off');
 				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
 			},
 		});

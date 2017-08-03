@@ -40,6 +40,7 @@ class seopress_options
             $seopress_toggle_options['toggle-woocommerce'] = '1';
         }
         $seopress_toggle_options['toggle-dublin-core'] = '1';
+        $seopress_toggle_options['toggle-local-business'] = '1';
         $seopress_toggle_options['toggle-rich-snippets'] = '1';
         $seopress_toggle_options['toggle-breadcrumbs'] = '1';
         $seopress_toggle_options['toggle-robots'] = '1';
@@ -602,6 +603,30 @@ class seopress_options
                     </div><!-- .inside -->
                 </div><!-- .postbox -->
 
+                <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                    <div class="postbox">
+                        <h3><span><?php _e( 'Import Redirections', 'wp-seopress' ); ?></span></h3>
+                        <div class="inside">
+                            <p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 3 columns in this order: url to match (without your domain name), url to redirect in absolute and type of redirection (301, 302 or 307).', 'wp-seopress' ); ?></p>
+                            <p>
+                                <a href="https://www.seopress.org/wp-content/uploads/csv/seopress-redirections-example.csv" target="_blank">
+                                    <?php _e('Download an example CSV','novaldi'); ?>
+                                </a>
+                            </p>
+                            <form method="post" enctype="multipart/form-data">
+                                <p>
+                                    <input type="file" name="import_file"/>
+                                </p>
+                                <p>
+                                    <input type="hidden" name="seopress_action" value="import_redirections_settings" />
+                                    <?php wp_nonce_field( 'seopress_import_redirections_nonce', 'seopress_import_redirections_nonce' ); ?>
+                                    <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                </p>
+                            </form>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->
+                <?php } ?>
+
                 <div id="yoast-migration-tool" class="postbox">
                     <h3><span><?php _e( 'Import posts metadata from Yoast', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
@@ -798,6 +823,33 @@ class seopress_options
                                         </p>
                                         <a class="button-primary" href="<?php echo admin_url( 'options-discussion.php' ); ?>"><?php _e('Disable this!','wp-seopress'); ?></a>
                                         <span name="notice-divide-comments" id="notice-divide-comments" class="dashicons dashicons-trash remove-notice" data-notice="notice-divide-comments"></span>
+                                    </div>
+                                <?php }
+                            }
+                        ?>
+                        <?php 
+                            if(get_option('posts_per_page') < '16') {
+                                function seopress_get_hidden_notices_posts_number_option() {
+                                    $seopress_get_hidden_notices_posts_number_option = get_option("seopress_notices");
+                                    if ( ! empty ( $seopress_get_hidden_notices_posts_number_option ) ) {
+                                        foreach ($seopress_get_hidden_notices_posts_number_option as $key => $seopress_get_hidden_notices_posts_number_value)
+                                            $options[$key] = $seopress_get_hidden_notices_posts_number_value;
+                                            if (isset($seopress_get_hidden_notices_posts_number_option['notice-posts-number'])) {
+                                                return $seopress_get_hidden_notices_posts_number_option['notice-posts-number'];
+                                            }
+                                    }
+                                }
+                                if(seopress_get_hidden_notices_posts_number_option() =='1') {
+                                    //do nothing
+                                } else { ?>
+                                    <div id="notice-posts-number-alert" class="seopress-alert deleteable">
+                                        <p>
+                                            <span class="dashicons dashicons-warning"></span>
+                                            <?php _e('Display more posts per page on homepage and archives','wp-seopress'); ?>
+                                            <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
+                                        </p>
+                                        <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                                        <span name="notice-posts-number" id="notice-posts-number" class="dashicons dashicons-trash remove-notice" data-notice="notice-posts-number"></span>
                                     </div>
                                 <?php }
                             }
@@ -1057,6 +1109,34 @@ class seopress_options
                                     } else { 
                                         echo '<span id="woocommerce-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
                                         echo '<span id="woocommerce-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                    }
+                                ?>
+                            </span>
+                        </div>
+                        <div class="seopress-feature">
+                            <div class="img-tool">
+                                <span class="dashicons dashicons-store"></span>
+                            </div>
+                            <span class="inner">
+                                <h3><?php _e('Local Business','wp-seopress'); ?></h3>
+                                <p><?php _e('Add Google Local Business data type','wp-seopress'); ?></p>
+                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_local_business$10' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                <?php
+                                    if(seopress_get_toggle_local_business_option()=='1') { 
+                                        $seopress_get_toggle_local_business_option = '"1"';
+                                    } else { 
+                                        $seopress_get_toggle_local_business_option = '"0"';
+                                    }
+                                ?>
+                                <input type="checkbox" name="toggle-local-business" id="toggle-local-business" class="toggle" data-toggle=<?php echo $seopress_get_toggle_local_business_option; ?>>
+                                <label for="toggle-local-business"></label>
+                                <?php
+                                    if(seopress_get_toggle_local_business_option()=='1') { 
+                                        echo '<span id="local-business-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                        echo '<span id="local-business-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                    } else { 
+                                        echo '<span id="local-business-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                        echo '<span id="local-business-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                     }
                                 ?>
                             </span>
@@ -2129,6 +2209,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_appearance_words_col', // ID
+           __("Show total number of words column in post types","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_words_col_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
             'seopress_advanced_appearance_genesis_seo_metaboxe', // ID
            __("Hide Genesis SEO Metaboxe","wp-seopress"), // Title
             array( $this, 'seopress_advanced_appearance_genesis_seo_metaboxe_callback' ), // Callback
@@ -2276,7 +2364,7 @@ class seopress_options
 
     public function print_section_info_google_analytics_custom_dimensions()
     {
-        print __('<p>Configure your Google Analytics custom dimensions', 'wp-seopress');
+        print __('<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom metrics are like default dimensions and metrics in your Analytics account,<br> except you create them yourself. You can use them to collect and analyze data that Analytics doesn\'t automatically track.<br> Notice that you have to setup your custom dimensions in your Google Analytics account too. More info by clicking on help icon.', 'wp-seopress');
         echo '<a class="seopress-doc" href="https://www.seopress.org/support/guides/create-custom-dimension-google-analytics/" target="_blank"><span class="dashicons dashicons-editor-help"></span></a></p>';
     }
 
@@ -3477,8 +3565,9 @@ class seopress_options
         printf(
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ua]" placeholder="'.__('Enter your Tracking ID (UA-XXXX-XX)','wp-seopress').'" value="%s"/>',
         esc_html( $this->options['seopress_google_analytics_ua'])
-        
         );
+
+        echo '<p class="description"><a href="https://support.google.com/analytics/answer/1032385?hl=en" target="_blank">'.__('Find your tracking ID','wp-seopress').'</a></p>';
         
     }
 
@@ -3519,6 +3608,10 @@ class seopress_options
         
         echo '<label for="seopress_google_analytics_remarketing">'. __( 'Enable remarketing, demographics and interest reporting', 'wp-seopress' ) .'</label>';
 
+        echo '<p class="description">'. __('A remarketing audience is a list of cookies or mobile-advertising IDs that represents a group of users you want to re-engage because of their likelihood to convert.','wp-seopress').'
+            <a href="https://support.google.com/analytics/answer/2611268?hl=en" target="_blank">'.__('Learn more','wp-seopress').'</a>
+            </p>';
+
         if (isset($this->options['seopress_google_analytics_remarketing'])) {
             esc_attr( $this->options['seopress_google_analytics_remarketing']);
         }
@@ -3535,6 +3628,10 @@ class seopress_options
         echo ' value="1"/>';
         
         echo '<label for="seopress_google_analytics_ip_anonymization">'. __( 'Enable IP Anonymization', 'wp-seopress' ) .'</label>';
+
+        echo '<p class="description">'. __('When a customer of Analytics requests IP address anonymization, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network.','wp-seopress').'
+            <a href="https://support.google.com/analytics/answer/2763052?hl=en" target="_blank">'.__('Learn more','wp-seopress').'</a>
+            </p>';
 
         if (isset($this->options['seopress_google_analytics_ip_anonymization'])) {
             esc_attr( $this->options['seopress_google_analytics_ip_anonymization']);
@@ -3553,6 +3650,10 @@ class seopress_options
         
         echo '<label for="seopress_google_analytics_link_attribution">'. __( 'Enhanced Link Attribution', 'wp-seopress' ) .'</label>';
 
+        echo '<p class="description">'. __('Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs.','wp-seopress').'
+            <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-link-attribution" target="_blank">'.__('Learn more','wp-seopress').'</a>
+            </p>';
+
         if (isset($this->options['seopress_google_analytics_link_attribution'])) {
             esc_attr( $this->options['seopress_google_analytics_link_attribution']);
         }
@@ -3569,6 +3670,10 @@ class seopress_options
         echo ' value="1"/>';
         
         echo '<label for="seopress_google_analytics_cross_enable">'. __( 'Enable cross-domain tracking', 'wp-seopress' ) .'</label>';
+
+        echo '<p class="description">'. __('Cross domain tracking makes it possible for Analytics to see sessions on two related sites (such as an ecommerce site and a separate shopping cart site) as a single session. This is sometimes called site linking.','wp-seopress').'
+            <a href="https://support.google.com/analytics/answer/1034342?hl=en" target="_blank">'.__('Learn more','wp-seopress').'</a>
+            </p>';
 
         if (isset($this->options['seopress_google_analytics_cross_enable'])) {
             esc_attr( $this->options['seopress_google_analytics_cross_enable']);
@@ -4169,7 +4274,24 @@ class seopress_options
         if (isset($this->options['seopress_advanced_appearance_nofollow_col'])) {
             esc_attr( $this->options['seopress_advanced_appearance_nofollow_col']);
         }
-    }    
+    } 
+
+    public function seopress_advanced_appearance_words_col_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_words_col']);      
+        
+        echo '<input id="seopress_advanced_appearance_words_col" name="seopress_advanced_option_name[seopress_advanced_appearance_words_col]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_words_col">'. __( 'Display total number of words in content', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_words_col'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_words_col']);
+        }
+    }
 
     public function seopress_advanced_appearance_genesis_seo_metaboxe_callback()
     {

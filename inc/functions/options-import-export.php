@@ -71,6 +71,45 @@ function seopress_import_settings() {
 }
 add_action( 'admin_init', 'seopress_import_settings' );
 
+//Import Redirections from CSV
+function seopress_import_redirections_settings() {
+    if( empty( $_POST['seopress_action'] ) || 'import_redirections_settings' != $_POST['seopress_action'] )
+        return;
+    if( ! wp_verify_nonce( $_POST['seopress_import_redirections_nonce'], 'seopress_import_redirections_nonce' ) )
+        return;
+    if( ! current_user_can( 'manage_options' ) )
+        return;
+    $extension = end( explode( '.', $_FILES['import_file']['name'] ) );
+    if( $extension != 'csv' ) {
+        wp_die( __( 'Please upload a valid .csv file' ) );
+    }
+    $import_file = $_FILES['import_file']['tmp_name'];
+    if( empty( $import_file ) ) {
+        wp_die( __( 'Please upload a file to import' ) );
+    }
+
+    $csv = array_map('str_getcsv', file($import_file));
+
+    foreach ($csv as $key => $value) {
+        foreach ($value as $_key => $_value) {
+            $csv_line = explode ( ';', $_value );
+
+            if ($csv_line[2] =='301' || $csv_line[2] =='302' || $csv_line[2]=='307') {
+                $csv_type_redirects[2] = $csv_line[2];
+            }
+
+            if (!empty($csv_line[0])) {
+                $id = wp_insert_post(array('post_title' => $csv_line[0], 'post_type' => 'seopress_404', 'post_status' => 'publish', 'meta_input' => array( '_seopress_redirections_value' => $csv_line[1], '_seopress_redirections_type' => $csv_type_redirects[2])));
+                    update_post_meta( $id, '_seopress_redirections_enabled', 'yes' );
+
+            }
+        }
+    }
+
+    wp_safe_redirect( admin_url( 'edit.php?post_type=seopress_404' ) ); exit;
+}
+add_action( 'admin_init', 'seopress_import_redirections_settings' );
+
 //Reset SEOPress Notices Settings
 function seopress_reset_notices_settings() {
     if( empty( $_POST['seopress_action'] ) || 'reset_notices_settings' != $_POST['seopress_action'] )

@@ -272,7 +272,7 @@ if (seopress_google_analytics_enable_option() =='1' && seopress_google_analytics
 		if(isset(wp_get_current_user()->roles[0])) {
 			$seopress_user_role = wp_get_current_user()->roles[0];
 			//If current user role matchs values from SEOPress GA settings then apply
-			if (function_exists('seopress_google_analytics_roles_option')) {
+			if (function_exists('seopress_google_analytics_roles_option') && seopress_google_analytics_roles_option() !='') {
 				if( array_key_exists( $seopress_user_role, seopress_google_analytics_roles_option())) {
 					//do nothing
 				} else {

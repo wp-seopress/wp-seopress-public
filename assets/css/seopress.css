@@ -581,6 +581,7 @@
     font-style: italic;
     font-size: 12px;
     font-weight: normal;
+    display: inline-block;
 }
 #seopress-content .feature-state.feature-state-on,
 .seopress-option .feature-state.feature-state-on {
@@ -661,14 +662,18 @@ input.toggle {
     max-width: 0;
     opacity: 0;
 }
-input.toggle + label {
+input.toggle+label {
     display: inline-block;
     position: relative;
-    box-shadow: inset 0 0 0px 1px #d5d5d5;
+    box-shadow: inset 0 0 0 1px #d5d5d5;
     text-indent: -5000px;
     height: 30px;
     width: 50px;
     border-radius: 15px;
+}
+.wrap-toggle-checkboxes input.toggle + label {
+    float: left;
+    margin-right: 10px;
 }
 input.toggle + label:before {
     content: "";
@@ -734,7 +739,7 @@ input.toggle[data-toggle="1"] + label:after {
 }
 .seopress-option .nav-tab {
     border: 0px solid #ccc;
-    border-bottom: none;
+    border-bottom: 5px solid #fff;
     background: none;
     opacity: 0.5;
     padding: 5px 8px;

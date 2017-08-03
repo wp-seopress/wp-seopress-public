@@ -2,11 +2,11 @@
 
 /*
 Plugin Name: SEOPress, WordPress SEO Plugin
-Plugin URI: http://www.seopress.org/
+Plugin URI: https://www.seopress.org/
 Description: The best SEO plugin.
-Version: 1.7.6
+Version: 1.8
 Author: Benjamin DENIS
-Author URI: http://www.seopress.org/
+Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
 Domain Path: /languages
@@ -56,7 +56,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '1.7.6' ); 
+define( 'SEOPRESS_VERSION', '1.8' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,7 +177,7 @@ function seopress_add_admin_options_scripts($hook) {
             }
         }
     }
-        
+
     if (is_user_logged_in()) {
         global $wp_roles;
     
