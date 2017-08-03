@@ -4,11 +4,11 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 0.2
+Version: 0.3
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
-Text Domain: seopress
+Text Domain: wp-seopress
 Domain Path: /languages
 */
 
@@ -52,14 +52,14 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '0.2' ); 
+define( 'SEOPRESS_VERSION', '0.3' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //SEOPRESS INIT = Admin + Core + Translation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_init() {
-    load_plugin_textdomain( 'seopress', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+    load_plugin_textdomain( 'wp-seopress', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
     global $pagenow;
     
@@ -103,6 +103,7 @@ function seopress_add_admin_options_scripts($hook) {
     if ( $hook == 'post-new.php' || $hook == 'post.php') {
         if ( 'attachment' !== $post->post_type) { 
             wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', __FILE__ ), array( 'jquery' ) );
             wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
             wp_enqueue_media();
 
@@ -126,7 +127,7 @@ function seopress_plugin_action_links($links, $file) {
     }
 
     if ($file == $this_plugin) {
-        $settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=seopress-option">'.__("Settings","wpui").'</a>';
+        $settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=seopress-option">'.__("Settings","wp-seopress").'</a>';
         array_unshift($links, $settings_link);
     }
 

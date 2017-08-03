@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 
 add_action('add_meta_boxes','seopress_init_metabox');
 function seopress_init_metabox(){
-    add_meta_box('seopress_cpt', __('SEOPress','seopress'), 'seopress_cpt', seopress_get_post_types(), 'advanced');
+    add_meta_box('seopress_cpt', __('SEOPress','wp-seopress'), 'seopress_cpt', seopress_get_post_types(), 'advanced');
 }
 
 function seopress_cpt($post){
@@ -41,35 +41,39 @@ function seopress_cpt($post){
             return $seopress_titles_desc;
         } else {
             global $post;
-            return $post->post_content;
+            return substr(wp_strip_all_tags($post->post_content, true), 0, 160);
         }
     }
 
     echo '<div id="seopress-tabs">
             <ul>
-                <li><a href="#tabs-1"><span class="dashicons dashicons-editor-table"></span>'. __( 'Titles settings', 'seopress' ) .'</a></li>
-                <li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'seopress' ) .'</a></li>
-                <li><a href="#tabs-3"><span class="dashicons dashicons-share"></span>'. __( 'Social', 'seopress' ) .'</a></li>
+                <li><a href="#tabs-1"><span class="dashicons dashicons-editor-table"></span>'. __( 'Titles settings', 'wp-seopress' ) .'</a></li>
+                <li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'wp-seopress' ) .'</a></li>
+                <li><a href="#tabs-3"><span class="dashicons dashicons-share"></span>'. __( 'Social', 'wp-seopress' ) .'</a></li>
             </ul>
             
             <div id="tabs-1">
                 <div class="box-left">
                     <p>
-                        <label for="seopress_titles_title_meta">'. __( 'Title', 'seopress' ) .'</label>
-                        <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.__('Enter your title','seopress').'" value="'.$seopress_titles_title.'" />
+                        <label for="seopress_titles_title_meta">'. __( 'Title', 'wp-seopress' ) .'</label>
+                        <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.__('Enter your title','wp-seopress').'" value="'.$seopress_titles_title.'" />
                     </p> 
                     <p>
-                        <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'seopress' ) .'</label>
-                        <textarea id="seopress_titles_desc_meta" style="width:100%" name="seopress_titles_desc" placeholder="'.__('Enter your meta description','seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
-                    </p>      
+                        <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
+                        <textarea id="seopress_titles_desc_meta" style="width:100%" name="seopress_titles_desc" placeholder="'.__('Enter your meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
+                    </p>
+                    <div class="wrap-seopress-counters">
+                        <div id="seopress_titles_desc_counters"></div>
+                        '.__('(maximum recommended limit)','wp-seopress').'
+                    </div>
                 </div>
                 <div class="box-right">
                     <div class="google-snippet-preview">
-                        <h3>'.__('Google Snippet Preview','seopress').'</h3>
-                        <p>'. __('This is what your page will look like in Google search results','seopress').'</p>
+                        <h3>'.__('Google Snippet Preview','wp-seopress').'</h3>
+                        <p>'. __('This is what your page will look like in Google search results','wp-seopress').'</p>
                         <div class="snippet-title">'.seopress_titles_title($seopress_titles_title).'</div>
                         <div class="snippet-permalink">'.get_permalink().'</div>
-                        <div class="snippet-desc">'.seopress_titles_desc($seopress_titles_desc).'</div>
+                        <div class="snippet-desc">'.seopress_titles_desc($seopress_titles_desc).'...</div>
                     </div>
                 </div>
             </div>
@@ -77,73 +81,73 @@ function seopress_cpt($post){
                 <p>
                     <label for="seopress_robots_index_meta">
                         <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' />
-                            '. __( 'noindex', 'seopress' ) .'
+                            '. __( 'noindex', 'wp-seopress' ) .'
                     </label>
                 </p>
                 <p>
                     <label for="seopress_robots_follow_meta">
                         <input type="checkbox" name="seopress_robots_follow" id="seopress_robots_follow_meta" value="yes" '. checked( $seopress_robots_follow, 'yes', false ) .' />
-                            '. __( 'nofollow', 'seopress' ) .'
+                            '. __( 'nofollow', 'wp-seopress' ) .'
                     </label>
                 </p>
                 <p>
                     <label for="seopress_robots_odp_meta">
                         <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta" value="yes" '. checked( $seopress_robots_odp, 'yes', false ) .' />
-                            '. __( 'noodp', 'seopress' ) .'
+                            '. __( 'noodp', 'wp-seopress' ) .'
                     </label>
                 </p>
                 <p>
                     <label for="seopress_robots_imageindex_meta">
                         <input type="checkbox" name="seopress_robots_imageindex" id="seopress_robots_imageindex_meta" value="yes" '. checked( $seopress_robots_imageindex, 'yes', false ) .' />
-                            '. __( 'noimageindex', 'seopress' ) .'
+                            '. __( 'noimageindex', 'wp-seopress' ) .'
                     </label>
                 </p>
                 <p>
                     <label for="seopress_robots_archive_meta">
                         <input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta" value="yes" '. checked( $seopress_robots_archive, 'yes', false ) .' />
-                            '. __( 'noarchive', 'seopress' ) .'
+                            '. __( 'noarchive', 'wp-seopress' ) .'
                     </label>
                 </p>
                 <p>
                     <label for="seopress_robots_snippet_meta">
                         <input type="checkbox" name="seopress_robots_snippet" id="seopress_robots_snippet_meta" value="yes" '. checked( $seopress_robots_snippet, 'yes', false ) .' />
-                            '. __( 'nosnippet', 'seopress' ) .'
+                            '. __( 'nosnippet', 'wp-seopress' ) .'
                     </label>
                 </p>
                 <p>
-                    <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'seopress' ) .'</label>
-                    <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.__('Enter your Canonical URL','seopress').'" value="'.$seopress_robots_canonical.'" />
+                    <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
+                    <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.__('Enter your Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
                 </p>
             </div>
             <div id="tabs-3">
                 <span class="dashicons dashicons-facebook-alt"></span>
                 <p>
-                    <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'seopress' ) .'</label>
-                    <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.__('Enter your Facebook title','seopress').'" value="'.$seopress_social_fb_title.'" />
+                    <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'wp-seopress' ) .'</label>
+                    <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.__('Enter your Facebook title','wp-seopress').'" value="'.$seopress_social_fb_title.'" />
                 </p>
                 <p>
-                    <label for="seopress_social_fb_desc_meta">'. __( 'Facebook description', 'seopress' ) .'</label>
-                    <textarea id="seopress_social_fb_desc_meta" name="seopress_social_fb_desc" placeholder="'.__('Enter your Facebook description','seopress').'" value="'.$seopress_social_fb_desc.'">'.$seopress_social_fb_desc.'</textarea>
+                    <label for="seopress_social_fb_desc_meta">'. __( 'Facebook description', 'wp-seopress' ) .'</label>
+                    <textarea id="seopress_social_fb_desc_meta" name="seopress_social_fb_desc" placeholder="'.__('Enter your Facebook description','wp-seopress').'" value="'.$seopress_social_fb_desc.'">'.$seopress_social_fb_desc.'</textarea>
                 </p> 
                 <p>
-                    <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'seopress' ) .'</label>
-                    <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.__('Select your default thumbnail','seopress').'" value="'.$seopress_social_fb_img.'" />
-                    <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','seopress').'" />
+                    <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'wp-seopress' ) .'</label>
+                    <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
+                    <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
                 </p>
                 <br/>
                 <span class="dashicons dashicons-twitter"></span>
                 <p>
-                    <label for="seopress_social_twitter_title_meta">'. __( 'Twitter Title', 'seopress' ) .'</label>
-                    <input id="seopress_social_twitter_title_meta" type="text" name="seopress_social_twitter_title" placeholder="'.__('Enter your Twitter title','seopress').'" value="'.$seopress_social_twitter_title.'" />
+                    <label for="seopress_social_twitter_title_meta">'. __( 'Twitter Title', 'wp-seopress' ) .'</label>
+                    <input id="seopress_social_twitter_title_meta" type="text" name="seopress_social_twitter_title" placeholder="'.__('Enter your Twitter title','wp-seopress').'" value="'.$seopress_social_twitter_title.'" />
                 </p>
                 <p>
-                    <label for="seopress_social_twitter_desc_meta">'. __( 'Twitter description', 'seopress' ) .'</label>
-                    <textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc" placeholder="'.__('Enter your Twitter description','seopress').'" value="'.$seopress_social_twitter_desc.'">'.$seopress_social_twitter_desc.'</textarea>
+                    <label for="seopress_social_twitter_desc_meta">'. __( 'Twitter description', 'wp-seopress' ) .'</label>
+                    <textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc" placeholder="'.__('Enter your Twitter description','wp-seopress').'" value="'.$seopress_social_twitter_desc.'">'.$seopress_social_twitter_desc.'</textarea>
                 </p> 
                 <p>
-                    <label for="seopress_social_twitter_img_meta">'. __( 'Twitter Thumbnail', 'seopress' ) .'</label>
-                    <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.__('Select your default thumbnail','seopress').'" value="'.$seopress_social_twitter_img.'" />
-                    <input id="seopress_social_twitter_img_upload" class="button" type="button" value="'.__('Upload an Image','seopress').'" />
+                    <label for="seopress_social_twitter_img_meta">'. __( 'Twitter Thumbnail', 'wp-seopress' ) .'</label>
+                    <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_twitter_img.'" />
+                    <input id="seopress_social_twitter_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
                 </p>
             </div>
         </div>

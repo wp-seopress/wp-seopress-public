@@ -1,7 +1,11 @@
 <?php
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
+//XML
 Header('Content-type: text/xml');
+
+//Robots
+Header("X-Robots-Tag: noindex", true);
 
 function seopress_xml_sitemap_single_term() {
 	$path = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
