@@ -1,0 +1,540 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SEOPress\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
+"POT-Creation-Date: 2016-08-23 15:23+0200\n"
+"PO-Revision-Date: 2016-08-23 15:23+0200\n"
+"Last-Translator: \n"
+"Language-Team: Benjamin DENIS <contact@seopress.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-KeywordsList: __;_e;_x\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/admin/admin-metaboxes.php:11 inc/admin/admin.php:233
+msgid "SEOPress"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:50
+msgid "Titles settings"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:51 inc/admin/admin.php:66
+msgid "Advanced"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:52 inc/admin/admin.php:36
+#: inc/admin/admin.php:314
+msgid "Social"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:58
+msgid "Title"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:59
+msgid "Enter your title"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:62 inc/admin/admin.php:391
+msgid "Meta description"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:63
+msgid "Enter your meta description"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:68
+msgid "Google Snippet Preview"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:69
+msgid "This is what your page will look like in Google search results"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:80 inc/admin/admin.php:541
+#: inc/admin/admin.php:1058 inc/admin/admin.php:1131 inc/admin/admin.php:1312
+msgid "noindex"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:86 inc/admin/admin.php:549
+#: inc/admin/admin.php:1077 inc/admin/admin.php:1150 inc/admin/admin.php:1329
+msgid "nofollow"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:92 inc/admin/admin.php:557
+#: inc/admin/admin.php:1346
+msgid "noodp"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:98 inc/admin/admin.php:565
+#: inc/admin/admin.php:1363
+msgid "noimageindex"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:104 inc/admin/admin.php:573
+#: inc/admin/admin.php:1380
+msgid "noarchive"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:110 inc/admin/admin.php:581
+#: inc/admin/admin.php:1397
+msgid "nosnippet"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:114
+msgid "Canonical URL"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:115
+msgid "Enter your Canonical URL"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:121
+msgid "Facebook Title"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:122
+msgid "Enter your Facebook title"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:125
+msgid "Facebook description"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:126
+msgid "Enter your Facebook description"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:129
+msgid "Facebook Thumbnail"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:130 inc/admin/admin-metaboxes.php:145
+#: inc/admin/admin.php:1669 inc/admin/admin.php:1721
+msgid "Select your default thumbnail"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:131 inc/admin/admin-metaboxes.php:146
+#: inc/admin/admin.php:1539 inc/admin/admin.php:1671 inc/admin/admin.php:1723
+msgid "Upload an Image"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:136
+msgid "Twitter Title"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:137
+msgid "Enter your Twitter title"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:140
+msgid "Twitter description"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:141
+msgid "Enter your Twitter description"
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:144
+msgid "Twitter Thumbnail"
+msgstr ""
+
+#: inc/admin/admin.php:34
+msgid "Titles & Metas"
+msgstr ""
+
+#: inc/admin/admin.php:35 inc/admin/admin.php:304
+msgid "XML Sitemap"
+msgstr ""
+
+#: inc/admin/admin.php:37
+msgid "Import / Export / Reset settings"
+msgstr ""
+
+#: inc/admin/admin.php:37 inc/admin/admin.php:324
+msgid "Import / Export / Reset"
+msgstr ""
+
+#: inc/admin/admin.php:47
+msgid ""
+"Discourage search engines from indexing this site is <strong>ON!</strong> "
+"None of the following settings will be applied."
+msgstr ""
+
+#: inc/admin/admin.php:48
+msgid "Change this settings"
+msgstr ""
+
+#: inc/admin/admin.php:62
+msgid "Home"
+msgstr ""
+
+#: inc/admin/admin.php:63
+msgid "Single Post Types"
+msgstr ""
+
+#: inc/admin/admin.php:64 inc/admin/admin.php:105
+msgid "Taxonomies"
+msgstr ""
+
+#: inc/admin/admin.php:65
+msgid "Archives"
+msgstr ""
+
+#: inc/admin/admin.php:103
+msgid "General"
+msgstr ""
+
+#: inc/admin/admin.php:104
+msgid "Post Types"
+msgstr ""
+
+#: inc/admin/admin.php:140
+msgid "Knowledge Graph"
+msgstr ""
+
+#: inc/admin/admin.php:141
+msgid "Your social accounts"
+msgstr ""
+
+#: inc/admin/admin.php:142
+msgid "Facebook"
+msgstr ""
+
+#: inc/admin/admin.php:143
+msgid "Twitter"
+msgstr ""
+
+#: inc/admin/admin.php:170
+msgid "Import / Export Settings"
+msgstr ""
+
+#: inc/admin/admin.php:171
+msgid "Import / Export SEOPress settings from site to site"
+msgstr ""
+
+#: inc/admin/admin.php:174
+msgid "Export Settings"
+msgstr ""
+
+#: inc/admin/admin.php:176
+msgid ""
+"Export the plugin settings for this site as a .json file. This allows you to "
+"easily import the configuration into another site."
+msgstr ""
+
+#: inc/admin/admin.php:181
+msgid "Export"
+msgstr ""
+
+#: inc/admin/admin.php:188
+msgid "Import Settings"
+msgstr ""
+
+#: inc/admin/admin.php:190
+msgid ""
+"Import the plugin settings from a .json file. This file can be obtained by "
+"exporting the settings on another site using the form above."
+msgstr ""
+
+#: inc/admin/admin.php:198
+msgid "Import"
+msgstr ""
+
+#: inc/admin/admin.php:205
+msgid "Reset All Settings"
+msgstr ""
+
+#: inc/admin/admin.php:207
+msgid ""
+"<strong>WARNING:</strong> Delete all options related to SEOPress in your "
+"database."
+msgstr ""
+
+#: inc/admin/admin.php:212
+msgid "Reset settings"
+msgstr ""
+
+#: inc/admin/admin.php:237
+msgid "PRO"
+msgstr ""
+
+#: inc/admin/admin.php:247
+msgid "The ultimate plugin to optimize your SEO!"
+msgstr ""
+
+#: inc/admin/admin.php:250
+msgid "You like SEOPress? Don't forget to rate it 5 stars!"
+msgstr ""
+
+#: inc/admin/admin.php:279
+msgid "Follow us on Twitter!"
+msgstr ""
+
+#: inc/admin/admin.php:281
+msgid "Our website"
+msgstr ""
+
+#: inc/admin/admin.php:283
+msgid "Knowledge base"
+msgstr ""
+
+#: inc/admin/admin.php:294
+msgid "Titles & metas"
+msgstr ""
+
+#: inc/admin/admin.php:295
+msgid "Manage all your titles & metas"
+msgstr ""
+
+#: inc/admin/admin.php:296 inc/admin/admin.php:306 inc/admin/admin.php:316
+#: inc/admin/admin.php:326
+msgid "Manage"
+msgstr ""
+
+#: inc/admin/admin.php:305
+msgid "Manage your XML Sitemap"
+msgstr ""
+
+#: inc/admin/admin.php:315
+msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
+msgstr ""
+
+#: inc/admin/admin.php:325
+msgid "Import / export SEOPress settings from site to site."
+msgstr ""
+
+#: inc/admin/admin.php:383
+msgid "Site title"
+msgstr ""
+
+#: inc/admin/admin.php:598 inc/admin/admin.php:1414
+msgid "Enable XML Sitemap"
+msgstr ""
+
+#: inc/admin/admin.php:614
+msgid "Check to INCLUDE Post Types"
+msgstr ""
+
+#: inc/admin/admin.php:630
+msgid "Check to INCLUDE Taxonomies"
+msgstr ""
+
+#: inc/admin/admin.php:647
+msgid "Person or organization"
+msgstr ""
+
+#: inc/admin/admin.php:655
+msgid "Your name/organization"
+msgstr ""
+
+#: inc/admin/admin.php:663
+msgid "Your photo / organization logo"
+msgstr ""
+
+#: inc/admin/admin.php:680
+msgid "Facebook Page URL"
+msgstr ""
+
+#: inc/admin/admin.php:688
+msgid "Twitter Username"
+msgstr ""
+
+#: inc/admin/admin.php:696
+msgid "Google + URL"
+msgstr ""
+
+#: inc/admin/admin.php:704
+msgid "Pinterest URL"
+msgstr ""
+
+#: inc/admin/admin.php:712
+msgid "Instagram URL"
+msgstr ""
+
+#: inc/admin/admin.php:720
+msgid "YouTube URL"
+msgstr ""
+
+#: inc/admin/admin.php:728
+msgid "LinkedIn URL"
+msgstr ""
+
+#: inc/admin/admin.php:736
+msgid "MySpace URL"
+msgstr ""
+
+#: inc/admin/admin.php:744
+msgid "Soundcloud URL"
+msgstr ""
+
+#: inc/admin/admin.php:752
+msgid "Tumblr URL"
+msgstr ""
+
+#: inc/admin/admin.php:769
+msgid "Enable Open Graph Data"
+msgstr ""
+
+#: inc/admin/admin.php:777
+msgid "Select a default image"
+msgstr ""
+
+#: inc/admin/admin.php:785
+msgid "Facebook Admin ID"
+msgstr ""
+
+#: inc/admin/admin.php:793
+msgid "Facebook App ID"
+msgstr ""
+
+#: inc/admin/admin.php:810
+msgid "Enable Twitter Card"
+msgstr ""
+
+#: inc/admin/admin.php:818
+msgid "Default Twitter Image"
+msgstr ""
+
+#: inc/admin/admin.php:826
+msgid "Image size for Twitter Summary card"
+msgstr ""
+
+#: inc/admin/admin.php:927
+msgid "<p>Customize your titles & metas for homepage</p>"
+msgstr ""
+
+#: inc/admin/admin.php:932
+msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
+msgstr ""
+
+#: inc/admin/admin.php:937
+msgid "<p>Customize your metas for all pages</p>"
+msgstr ""
+
+#: inc/admin/admin.php:942
+msgid "<p>Customize your metas for all taxonomies archives</p>"
+msgstr ""
+
+#: inc/admin/admin.php:947
+msgid "<p>Customize your metas for all archives</p>"
+msgstr ""
+
+#: inc/admin/admin.php:952
+msgid "<p>Enable your Sitemap</p>"
+msgstr ""
+
+#: inc/admin/admin.php:953
+msgid ""
+"To view your sitemap, enable permalinks (not default one), and save settings "
+"to flush them."
+msgstr ""
+
+#: inc/admin/admin.php:956
+msgid "View your sitemap"
+msgstr ""
+
+#: inc/admin/admin.php:961
+msgid "<p>Include / Exclude Post Types</p>"
+msgstr ""
+
+#: inc/admin/admin.php:966
+msgid "<p>Include / Exclude Taxonomies</p>"
+msgstr ""
+
+#: inc/admin/admin.php:971
+msgid "<p>Configure Google Knowledge Graph</p>"
+msgstr ""
+
+#: inc/admin/admin.php:976
+msgid "<p>Link your site with your social accounts</p>"
+msgstr ""
+
+#: inc/admin/admin.php:981
+msgid "<p>Manage Open Graph datas</p>"
+msgstr ""
+
+#: inc/admin/admin.php:986
+msgid "<p>Manage your Twitter card</p>"
+msgstr ""
+
+#: inc/admin/admin.php:1024 inc/admin/admin.php:1097 inc/admin/admin.php:1165
+#: inc/admin/admin.php:1193 inc/admin/admin.php:1221 inc/admin/admin.php:1249
+#: inc/admin/admin.php:1277
+msgid "Title template"
+msgstr ""
+
+#: inc/admin/admin.php:1037 inc/admin/admin.php:1110 inc/admin/admin.php:1178
+#: inc/admin/admin.php:1206 inc/admin/admin.php:1234 inc/admin/admin.php:1262
+#: inc/admin/admin.php:1290
+msgid "Meta description template"
+msgstr ""
+
+#: inc/admin/admin.php:1163
+msgid "Author archives"
+msgstr ""
+
+#: inc/admin/admin.php:1191
+msgid "Date archives"
+msgstr ""
+
+#: inc/admin/admin.php:1219
+msgid "Search archives"
+msgstr ""
+
+#: inc/admin/admin.php:1247
+msgid "404 archives"
+msgstr ""
+
+#: inc/admin/admin.php:1275
+msgid "Paged archives"
+msgstr ""
+
+#: inc/admin/admin.php:1453 inc/admin/admin.php:1493
+msgid "Include"
+msgstr ""
+
+#: inc/admin/admin.php:1512
+msgid "Person"
+msgstr ""
+
+#: inc/admin/admin.php:1515
+msgid "Organization"
+msgstr ""
+
+#: inc/admin/admin.php:1537
+msgid "Select your logo"
+msgstr ""
+
+#: inc/admin/admin.php:1656
+msgid "Enable OG data"
+msgstr ""
+
+#: inc/admin/admin.php:1708
+msgid "Enable Twitter card"
+msgstr ""
+
+#: inc/admin/admin.php:1739
+msgid "Default"
+msgstr ""
+
+#: inc/admin/admin.php:1742
+msgid "Large"
+msgstr ""
+
+#: inc/functions/options-import-export.php:42
+msgid "Please upload a valid .json file"
+msgstr ""
+
+#: inc/functions/options-import-export.php:46
+msgid "Please upload a file to import"
+msgstr ""
+
+#: seopress.php:129
+msgid "Settings"
+msgstr ""
