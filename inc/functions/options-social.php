@@ -389,7 +389,7 @@ function seopress_social_facebook_og_type_hook() {
 		elseif (is_search() || is_archive() || is_404()) {
 			$seopress_social_og_type = '<meta property="og:type" content="object" />';
 		}
-		if ($seopress_social_og_type !='') {
+		if (isset($seopress_social_og_type)) {
 			echo $seopress_social_og_type."\n";
 		}
 	}
