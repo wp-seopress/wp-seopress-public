@@ -25,7 +25,7 @@ function seopress_admin_bar_links() {
 	$wp_admin_bar->add_menu( array(
 		'parent'	=> 'seopress_custom_top_level',
 		'id'		=> 'seopress_custom_sub_menu_xml_sitemap',
-		'title'		=> __( 'XML Sitemap', 'wp-seopress' ),
+		'title'		=> __( 'XML / HTML Sitemap', 'wp-seopress' ),
 		'href'		=> admin_url( 'admin.php?page=seopress-xml-sitemap' ),
 	));
 	$wp_admin_bar->add_menu( array(

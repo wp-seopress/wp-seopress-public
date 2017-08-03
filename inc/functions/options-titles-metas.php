@@ -266,11 +266,11 @@ if (get_option('blog_public') =='1') {
 			get_the_date(),
 			$the_author_meta,
 			single_cat_title('', false),
-			category_description(),
+			esc_html(category_description()),
 			single_tag_title('', false),
-			tag_description(),
+			esc_html(tag_description()),
 			single_term_title('', false),
-			term_description(),
+			esc_html(term_description()),
 			get_search_query(),
 			$seopress_paged,
 			post_type_archive_title('', false),
@@ -382,11 +382,11 @@ if (get_option('blog_public') =='1') {
 			get_the_date(),
 			$seopress_get_author,
 			single_cat_title('', false),
-			category_description(),
+			esc_html(category_description()),
 			single_tag_title('', false),
-			tag_description(),
+			esc_html(tag_description()),
 			single_term_title('', false),
-			term_description(),
+			esc_html(term_description()),
 			get_search_query(),
 			$seopress_paged,
 			post_type_archive_title('', false),
@@ -920,7 +920,7 @@ if (seopress_titles_canonical_post_option()) {
 } else {
 	function seopress_titles_canonical_hook() {
 		global $wp;
-		$current_url = home_url(add_query_arg(array(), $wp->request));
+		$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
 		if (is_search()) {
 			$seopress_titles_canonical = '<link rel="canonical" href="'.get_home_url().'/search/'.get_search_query().'" />';
 		} else {

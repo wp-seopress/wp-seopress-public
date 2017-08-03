@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 1.2.1
+Version: 1.3
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
@@ -79,7 +79,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '1.2.1' ); 
+define( 'SEOPRESS_VERSION', '1.3' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,15 +114,23 @@ function seopress_add_admin_options_scripts($hook) {
     wp_register_style( 'seopress-admin', plugins_url('assets/css/seopress.css', __FILE__));
     wp_enqueue_style( 'seopress-admin' );
     
-    //Toggle JS
+    //Toggle / Notices JS
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-option') ) {
         wp_enqueue_script( 'seopress-toggle-ajax', plugins_url( 'assets/js/seopress-dashboard.js', __FILE__ ), array( 'jquery' ), '', true );
 
+        //Features
         $seopress_toggle_features = array(
             'seopress_nonce' => wp_create_nonce('seopress_toggle_features_nonce'),
             'seopress_toggle_features' => admin_url( 'admin-ajax.php'),
         );
         wp_localize_script( 'seopress-toggle-ajax', 'seopressAjaxToggleFeatures', $seopress_toggle_features ); 
+
+        //Notices
+        $seopress_hide_notices = array(
+            'seopress_nonce' => wp_create_nonce('seopress_hide_notices_nonce'),
+            'seopress_hide_notices' => admin_url( 'admin-ajax.php'),
+        );
+        wp_localize_script( 'seopress-toggle-ajax', 'seopressAjaxHideNotices', $seopress_hide_notices ); 
     }
 
     //Migration

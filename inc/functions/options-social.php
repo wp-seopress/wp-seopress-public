@@ -335,7 +335,7 @@ function seopress_social_facebook_og_url_hook() {
 	if (seopress_social_facebook_og_option() =='1') {
 
 		global $wp;
-		$current_url = home_url(add_query_arg(array(), $wp->request));
+		$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
 
 		if (is_search()) {
 			$seopress_social_og_url = '<meta property="og:url" content="'.get_home_url().'/search/'.get_search_query().'" />';

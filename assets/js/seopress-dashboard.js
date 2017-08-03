@@ -1,4 +1,65 @@
-jQuery(document).ready(function(){  
+jQuery(document).ready(function(){
+	//Hide notices
+	//**Search Console
+	jQuery('#notice-search-console').on('click', function() {
+		jQuery('#notice-search-console').attr('data-notice', jQuery('#notice-search-console').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-search-console',
+				notice_value: jQuery('#notice-search-console').attr('data-notice'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-search-console-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
+	//**Google Business
+	jQuery('#notice-google-business').on('click', function() {
+		jQuery('#notice-google-business').attr('data-notice', jQuery('#notice-google-business').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-google-business',
+				notice_value: jQuery('#notice-google-business').attr('data-notice'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-google-business-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
+	//**SSL
+	jQuery('#notice-ssl').on('click', function() {
+		jQuery('#notice-ssl').attr('data-notice', jQuery('#notice-ssl').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-ssl',
+				notice_value: jQuery('#notice-ssl').attr('data-notice'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-ssl-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
 	//Titles
 	jQuery('#toggle-titles').on('click', function() {
 		jQuery('#toggle-titles').attr('data-toggle', jQuery('#toggle-titles').attr('data-toggle') == '1' ? '0' : '1');

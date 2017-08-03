@@ -1,10 +1,10 @@
 === SEOPress ===
 Contributors: rainbowgeek
 Donate link: https://seopress.org/
-Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce
+Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.2.1
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 	<li>Canonical URL</li> 
 	<li>Meta robots (noindex, nofollow, noodp, noimageindex, noarchive, nosnippet)</li>
 	<li>Build your custom XML Sitemap to improve search indexing.</li>
+	<li>Build your custom HTML Sitemap to enhanced navigation for visitors and improve search indexing.</li>
 	<li>Link your social media accounts to your site.</li>
 	<li>Redirections in post, pages, custom post types</li>
 	<li>Remove stop words (english, french, spanish, german, italian, portuguese)</li>
@@ -46,9 +47,13 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 	<li>Robots</li>
 	<li>Google News Sitemap</li>
 	<li>404 Monitoring</li>
+	<li>Redirect 404 to homepage/custom url automatically with custom status code (301, 302 or 307)</li>
+	<li>Email notifications on 404</li>
 	<li>301 Redirections</li>
 	<li>htaccess</li>
 </ul>
+
+<a href="https://www.seopress.org/downloads/seopress-pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / unlimited sites</strong></a>
 
 [youtube https://www.youtube.com/watch?v=9XMXBHBdva0]
 
@@ -102,6 +107,17 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 30. Structured Data Types metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.3 =
+* NEW Redirect 404 to homepage/custom url automatically with custom status code (301, 302 or 307) - (SEOPress PRO only)
+* NEW Receive email notifications each time a 404 is detected (SEOPress PRO only)
+* NEW Create an HTML sitemap to boost your SEO
+* INFO Add save remove notices
+* FIX Esc_html on category, tag and term description
+* FIX Structured Data Types metaboxe if disabled
+* FIX Some french translations
+* FIX Canonical URL
+* FIX Dublin Core Relation
+* FIX OG:URL
 = 1.2.1 =
 * FIX Fatal error for WooCommerce cart, checkout, my account pages
 = 1.2 =

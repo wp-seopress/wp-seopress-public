@@ -24,6 +24,19 @@ function seopress_toggle_features() {
 add_action('wp_ajax_seopress_toggle_features', 'seopress_toggle_features');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+//Dashboard hide notices
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_hide_notices() {
+    if ( isset( $_POST['notice']) && isset( $_POST['notice_value'] )) {
+        $seopress_notices_options = get_option('seopress_notices');
+        $seopress_notices_options[$_POST['notice']] = $_POST['notice_value'];
+        update_option('seopress_notices', $seopress_notices_options, yes);
+    }
+    die();
+}
+add_action('wp_ajax_seopress_hide_notices', 'seopress_hide_notices');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 //Yoast migration
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_yoast_migration() {

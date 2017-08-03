@@ -403,6 +403,7 @@
 .seopress-notice #message {
     margin: 5px 10px 2px 0;
 }
+
 .seopress-page-list {
     margin: 0px;
 }
@@ -423,7 +424,7 @@
     width: 80px;
     background: #747474;
     float: left;
-    margin: 0 30px 0 0;
+    margin: 0 30px 40px 0;
     border-radius: 80px;
 }
 .seopress-page-list .seopress-feature .img-tool .dashicons {
@@ -489,6 +490,7 @@
     margin: 0px 10px 10px 5px;
     border-bottom: 1px solid rgba(224, 224, 224, 1);
     width: calc(100% - 30px);
+    position: relative;
 }
 #seopress-notifications-center .seopress-alert p {
     display: inline-block;
@@ -512,6 +514,22 @@
 }
 #seopress-notifications-center .seopress-alert .dashicons {
     color: #FFC82C;
+}
+#seopress-notifications-center .dashicons.remove-notice {
+    position: absolute;
+    right: -55px;
+    color: rgb(35, 40, 45);
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    top: 2px;
+    padding: 5px;
+    transition: all 300ms linear;
+}
+#seopress-notifications-center .dashicons.remove-notice:hover {
+    background: #FF4949;
+    color: #fff;
+    cursor: pointer;
 }
 #seopress-content .seopress-page-list .seopress-feature .seopress-doc,
 .seopress-option #seopress-tabs .seopress-doc {

@@ -47,7 +47,9 @@ function seopress_load_redirections_options() {
 if (seopress_get_toggle_xml_sitemap_option() =='1') {
 	add_action('init', 'seopress_load_sitemap', 999);
 	function seopress_load_sitemap() {
-		require_once ( dirname( __FILE__ ) . '/options-sitemap.php'); //XML Sitemap
+		if (!is_admin()) {
+			require_once ( dirname( __FILE__ ) . '/options-sitemap.php'); //XML / HTML Sitemap
+		}
 	}	
 }
 if (seopress_get_toggle_advanced_option() =='1') {
