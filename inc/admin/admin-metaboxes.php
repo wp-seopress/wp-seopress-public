@@ -135,7 +135,7 @@ if (is_user_logged_in()) {
                                 <li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'wp-seopress' ) .'</a></li>
                                 <li><a href="#tabs-3"><span class="dashicons dashicons-share"></span>'. __( 'Social', 'wp-seopress' ) .'</a></li>';
                             }
-                            echo '<li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirections', 'wp-seopress' ) .'</a></li>';
+                            echo '<li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirection', 'wp-seopress' ) .'</a></li>';
                             if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
                                 if ("seopress_404" != $typenow) {
                                     echo '<li><a href="#tabs-5"><span class="dashicons dashicons-admin-post"></span>'. __( 'Google News', 'wp-seopress-pro' ) .'</a></li>';
@@ -265,11 +265,11 @@ if (is_user_logged_in()) {
                             <p>
                                 <label for="seopress_redirections_value_meta">'. __( 'URL redirection', 'wp-seopress' ) .'</label>
                                 <select name="seopress_redirections_type">
-                                    <option ' . selected( '301', $seopress_redirections_type, false ) . ' value="301">'. __( '301', 'wp-seopress' ) .'</option>
-                                    <option ' . selected( '302', $seopress_redirections_type, false ) . ' value="302">'. __( '302', 'wp-seopress' ) .'</option>
-                                    <option ' . selected( '307', $seopress_redirections_type, false ) . ' value="307">'. __( '307', 'wp-seopress' ) .'</option>
+                                    <option ' . selected( '301', $seopress_redirections_type, false ) . ' value="301">'. __( '301 Moved Permanently', 'wp-seopress' ) .'</option>
+                                    <option ' . selected( '302', $seopress_redirections_type, false ) . ' value="302">'. __( '302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)', 'wp-seopress' ) .'</option>
+                                    <option ' . selected( '307', $seopress_redirections_type, false ) . ' value="307">'. __( '307 Moved Temporarily (HTTP 1.1 Only)', 'wp-seopress' ) .'</option>
                                 </select>
-                                <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.__('Enter your URL','wp-seopress').'" value="'.$seopress_redirections_value.'" />
+                                <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.__('Enter your new URL','wp-seopress').'" value="'.$seopress_redirections_value.'" />
                                 <br><br>';
                                 if ($seopress_redirections_value !='') {     
                 echo                '<a href="'.seopress_redirections_value($seopress_redirections_value).'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';

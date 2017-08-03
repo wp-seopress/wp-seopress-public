@@ -105,7 +105,7 @@ function seopress_reset_settings() {
 }
 add_action( 'admin_init', 'seopress_reset_settings' );
 
-//Export SEOPress Bot Links in CSV
+//Export SEOPress BOT Links in CSV
 function seopress_bot_links_export_settings() {
     if( empty( $_POST['seopress_action'] ) || 'export_csv_links_settings' != $_POST['seopress_action'] )
         return;

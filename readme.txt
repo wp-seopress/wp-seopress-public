@@ -3,8 +3,8 @@ Contributors: rainbowgeek
 Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap, bot, broken link checker
 Requires at least: 4.4+
-Tested up to: 4.7
-Stable tag: 1.7.3
+Tested up to: 4.8
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,7 +41,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 <h3>SEOPress PRO</h3>
 
 <ul>
-	<li>SEOPress Bot: scan all your links in content to find errors (eg: 404...)</li>
+	<li>SEOPress BOT: scan all your links in content to find errors (eg: 404...)</li>
 	<li>WooCommerce</li>
 	<li>Dublin Core</li>
 	<li>Structured Data types</li>
@@ -113,6 +113,15 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 31. SEOPress BOT
 
 == Changelog ==
+= 1.7.4 =
+* NEW Add Redirection Enable column in Redirections / 404 monitoring
+* NEW Add Redirection status column in Redirections / 404 monitoring
+* NEW Add Redirection URL column in Redirections / 404 monitoring
+* INFO Updating updater licence manager
+* INFO Improve translations
+* INFO Improve UX
+* INFO Improve UI
+* FIX Text domain in some translations
 = 1.7.3 =
 * NEW Add spanish language (thanks to http://www.rslprogramacion.es/)
 * FIX Remove non public custom post types in XML Sitemaps options

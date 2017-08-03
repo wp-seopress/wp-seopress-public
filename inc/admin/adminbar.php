@@ -31,7 +31,7 @@ function seopress_admin_bar_links() {
 	$wp_admin_bar->add_menu( array(
 		'parent'	=> 'seopress_custom_top_level',
 		'id'		=> 'seopress_custom_sub_menu_social',
-		'title'		=> __( 'Social', 'wp-seopress' ),
+		'title'		=> __( 'Social Networks', 'wp-seopress' ),
 		'href'		=> admin_url( 'admin.php?page=seopress-social' ),
 	));	
 	$wp_admin_bar->add_menu( array(
@@ -49,16 +49,40 @@ function seopress_admin_bar_links() {
 	$wp_admin_bar->add_menu( array(
 		'parent'	=> 'seopress_custom_top_level',
 		'id'		=> 'seopress_custom_sub_menu_import_export',
-		'title'		=> __( 'Import / Export / Reset', 'wp-seopress' ),
+		'title'		=> __( 'Tools', 'wp-seopress' ),
 		'href'		=> admin_url( 'admin.php?page=seopress-import-export' ),
 	));
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 		$wp_admin_bar->add_menu( array(
 			'parent'	=> 'seopress_custom_top_level',
+			'id'		=> 'seopress_custom_sub_menu_bot',
+			'title'		=> __( 'BOT', 'wp-seopress' ),
+			'href'		=> admin_url( 'admin.php?page=seopress-bot-batch' ),
+		));
+		$wp_admin_bar->add_menu( array(
+			'parent'	=> 'seopress_custom_top_level',
+			'id'		=> 'seopress_custom_sub_menu_license',
+			'title'		=> __( 'License', 'wp-seopress' ),
+			'href'		=> admin_url( 'admin.php?page=seopress-license' ),
+		));
+		$wp_admin_bar->add_menu( array(
+			'parent'	=> 'seopress_custom_top_level',
 			'id'		=> 'seopress_custom_sub_menu_pro',
 			'title'		=> __( 'PRO', 'wp-seopress' ),
 			'href'		=> admin_url( 'admin.php?page=seopress-pro-page' ),
+		));
+		$wp_admin_bar->add_menu( array(
+			'parent'	=> 'seopress_custom_top_level',
+			'id'		=> 'seopress_custom_sub_menu_404',
+			'title'		=> __( 'Redirections', 'wp-seopress' ),
+			'href'		=> admin_url( 'edit.php?post_type=seopress_404' ),
+		));
+		$wp_admin_bar->add_menu( array(
+			'parent'	=> 'seopress_custom_top_level',
+			'id'		=> 'seopress_custom_sub_menu_broken_links',
+			'title'		=> __( 'Broken Links', 'wp-seopress' ),
+			'href'		=> admin_url( 'edit.php?post_type=seopress_bot' ),
 		));
 	}
 }

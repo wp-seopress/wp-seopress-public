@@ -170,13 +170,14 @@ class seopress_options
      */
     public function add_plugin_page()
     {
-        add_menu_page('SEOPress Option Page', 'SEOPress', 'manage_options', 'seopress-option', array( $this, 'create_admin_page' ), 'dashicons-admin-seopress', 90);
+        add_menu_page('SEOPress Option Page', 'SEO', 'manage_options', 'seopress-option', array( $this, 'create_admin_page' ), 'dashicons-admin-seopress', 90);
+        add_submenu_page('seopress-option', __('Dashboard','wp-seopress'), __('Dashboard','wp-seopress'), 'manage_options', 'seopress-option', array( $this, 'create_admin_page' ));
         $seopress_titles_help_tab = add_submenu_page('seopress-option', __('Titles & Metas','wp-seopress'), __('Titles & Metas','wp-seopress'), 'manage_options', 'seopress-titles', array( $this, 'seopress_titles_page' ));
         add_submenu_page('seopress-option', __('XML / Image / HTML Sitemap','wp-seopress'), __('XML / HTML Sitemap','wp-seopress'), 'manage_options', 'seopress-xml-sitemap', array( $this, 'seopress_xml_sitemap_page' ));
-        add_submenu_page('seopress-option', __('Social','wp-seopress'), __('Social','wp-seopress'), 'manage_options', 'seopress-social', array( $this, 'seopress_social_page' ));
+        add_submenu_page('seopress-option', __('Social Networks','wp-seopress'), __('Social Networks','wp-seopress'), 'manage_options', 'seopress-social', array( $this, 'seopress_social_page' ));
         add_submenu_page('seopress-option', __('Google Analytics','wp-seopress'), __('Google Analytics','wp-seopress'), 'manage_options', 'seopress-google-analytics', array( $this, 'seopress_google_analytics_page' ));
         add_submenu_page('seopress-option', __('Advanced','wp-seopress'), __('Advanced','wp-seopress'), 'manage_options', 'seopress-advanced', array( $this, 'seopress_advanced_page' ));
-        add_submenu_page('seopress-option', __('Import / Export / Reset settings','wp-seopress'), __('Import / Export / Reset','wp-seopress'), 'manage_options', 'seopress-import-export', array( $this,'seopress_import_export_page'));
+        add_submenu_page('seopress-option', __('Tools','wp-seopress'), __('Tools','wp-seopress'), 'manage_options', 'seopress-import-export', array( $this,'seopress_import_export_page'));
 
         function seopress_titles_help_tab() {
             $screen = get_current_screen();
@@ -3395,6 +3396,8 @@ class seopress_options
         esc_html( $check )
         
         );
+
+        echo '<br><br><span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/docs/apps/register" target="_blank">'.__('How-to create a Facebook App ID','wp-seopress').'</a>';
         
     }
 
