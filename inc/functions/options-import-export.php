@@ -69,6 +69,23 @@ function seopress_import_settings() {
 }
 add_action( 'admin_init', 'seopress_import_settings' );
 
+//Reset SEOPress Notices Settings
+function seopress_reset_notices_settings() {
+    if( empty( $_POST['seopress_action'] ) || 'reset_notices_settings' != $_POST['seopress_action'] )
+        return;
+    if( ! wp_verify_nonce( $_POST['seopress_reset_notices_nonce'], 'seopress_reset_notices_nonce' ) )
+        return;
+    if( ! current_user_can( 'manage_options' ) )
+        return;
+
+    global $wpdb;
+    
+    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE 'seopress_notices' ");
+     
+    wp_safe_redirect( admin_url( 'admin.php?page=seopress-import-export' ) ); exit;
+}
+add_action( 'admin_init', 'seopress_reset_notices_settings' );
+
 //Reset SEOPress Settings
 function seopress_reset_settings() {
     if( empty( $_POST['seopress_action'] ) || 'reset_settings' != $_POST['seopress_action'] )

@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.4
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 	<li>Structured Data types</li>
 	<li>Breadcrumbs</li>
 	<li>Google Page Speed</li>
+	<li>Google Analytics Stats in Dashboard</li>
 	<li>Robots</li>
 	<li>Google News Sitemap</li>
 	<li>404 Monitoring</li>
@@ -108,6 +109,16 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 30. Structured Data Types metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.5 =
+* NEW Google Analytics Stats in Dashboard with interactive charts (SEOPress PRO only)
+* NEW Add new advices in Notifications center
+* NEW Add bulk actions to enable/disable noindex/nofollow/index/follow
+* NEW Hide Genesis SEO Metaboxe (in Advanced page, appearance tab)
+* INFO You can now reset notifications display settings in Import/Export/Reset page
+* INFO Enhanced Google Snippet Preview
+* FIX Conflict with AIT Themes
+* FIX some undefined notices
+* FIX Notice admin_header
 = 1.4 =
 * NEW Remove /category/ in permalinks (works with Polylang and WPML)
 * NEW Show/Hide Notifications Center

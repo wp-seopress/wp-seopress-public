@@ -44,13 +44,35 @@ function seopress_cpt($post){
             return get_the_title().' - '.get_bloginfo('name');
         }
     }
-
+    
+    function seopress_titles_single_desc_option() {
+        global $post;
+        $seopress_get_current_cpt = get_post_type($post);
+    
+        $seopress_titles_single_desc_option = get_option("seopress_titles_option_name");
+        if ( ! empty ( $seopress_titles_single_desc_option ) ) {
+            foreach ($seopress_titles_single_desc_option as $key => $seopress_titles_single_desc_value)
+                $options[$key] = $seopress_titles_single_desc_value;
+                if (isset($seopress_titles_single_desc_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['description'])) {
+                    return $seopress_titles_single_desc_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['description'];
+                }
+        }
+    }
+    
     function seopress_titles_desc($seopress_titles_desc) {
         if ($seopress_titles_desc !='') {
             return $seopress_titles_desc;
         } else {
             global $post;
-            return substr(wp_strip_all_tags($post->post_content, true), 0, 160);
+            if (seopress_titles_single_desc_option() !='') {
+                return seopress_titles_single_desc_option();
+            } elseif ( has_excerpt( $post->ID ) ) {
+                // This post has excerpt
+                return substr(wp_strip_all_tags($post->post_excerpt, true), 0, 160);
+            } else {
+                // This post has no excerpt
+                return substr(wp_strip_all_tags($post->post_content, true), 0, 160);
+            }          
         }
     }
 
@@ -126,8 +148,8 @@ function seopress_cpt($post){
     echo                seopress_display_date_snippet();
     echo                '<div class="snippet-description">'.seopress_titles_desc($seopress_titles_desc).'...</div>
                         <div class="snippet-description-custom" style="display:none"></div>
-                        <div class="snippet-description-default" style="display:none">'.substr(wp_strip_all_tags($post->post_content, true), 0, 160).'</div>
-                    </div>
+                        <div class="snippet-description-default" style="display:none">'.seopress_titles_desc($seopress_titles_desc).'</div>';
+                echo '</div>
                 </div>
             </div>
             <div id="tabs-2">

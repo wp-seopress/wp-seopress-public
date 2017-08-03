@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 1.4
+Version: 1.5
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
@@ -35,29 +35,6 @@ if ( !function_exists( 'add_action' ) ) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//Tracking
-///////////////////////////////////////////////////////////////////////////////////////////////////
-require_once __DIR__ . '/wpgod/vendor/autoload.php';
-
-use WPGodWpseopress\WPGod;
-
-$wpgod3545d44c7f14185 = new WPGod(
-    array(
-        "type_development" => "plugin",
-        "plugin_file"      => plugin_basename(__FILE__),
-        "basename"         => dirname(plugin_basename(__FILE__)),
-        "token"            => "3545d44c7f14185a1bd17412521e5356b60065c0",
-        "prevent_user"     => true,
-        "name_transient"   => "wpgod_3545d44c7f14185a1bd17412",
-        "rules_ignore"     => array(
-
-        ),
-        "environment"      => 60
-    ) 
-);
-$wpgod3545d44c7f14185->execute(); 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 //Hooks activation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -79,7 +56,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '1.4' ); 
+define( 'SEOPRESS_VERSION', '1.5' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -197,6 +174,11 @@ function seopress_add_admin_options_scripts($hook) {
 
         }
     }
+
+    //Quick Edit
+    if ( 'edit.php' === $hook && isset( $_GET['post_type'] )) {
+        wp_enqueue_script( 'seopress-quick-edit', plugins_url('assets/js/seopress-quick-edit.js', __FILE__), array('jquery'), '', true );
+    }
 }
 
 add_action('admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1);
@@ -205,7 +187,7 @@ add_action('admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1)
 //Admin Body Class
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-add_filter( 'admin_body_class', 'seopress_admin_body_class' );
+add_filter( 'admin_body_class', 'seopress_admin_body_class', 9 );
 function seopress_admin_body_class( $classes ) {
     if ((isset($_GET['page']) && ($_GET['page'] == 'seopress-option')) 
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-titles'))

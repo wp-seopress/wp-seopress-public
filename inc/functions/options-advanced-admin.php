@@ -108,6 +108,48 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
         }
     }
     add_action('admin_menu', 'seopress_add_columns', 999);
+    
+    //Sortable columns
+    foreach (seopress_get_post_types() as $key => $value) {
+    	add_filter( 'manage_edit-'.$key.'_sortable_columns' , 'wnetpp_admin_sortable_columns' );
+    }
+    
+    function wnetpp_admin_sortable_columns($columns) {
+    	$columns['seopress_noindex'] = 'seopress_noindex';
+    	return $columns;
+    }
+    
+    add_filter( 'pre_get_posts', 'wnetpp_admin_sort_columns_by');
+    function wnetpp_admin_sort_columns_by( $query ) {
+    	if( ! is_admin() ) {
+    		return;
+    	} else {
+	    	$orderby = $query->get('orderby');
+	    	if( 'seopress_noindex' == $orderby ) {
+	    		$query->set('meta_key', '_seopress_robots_index');
+	    		$query->set('orderby','meta_value');
+	    	}
+    	}
+    }
+}
+
+//Remove Genesis SEO Metaboxe
+function seopress_advanced_appearance_genesis_seo_metaboxe_hook_option() {
+	$seopress_advanced_appearance_genesis_seo_metaboxe_hook_option = get_option("seopress_advanced_option_name");
+	if ( ! empty ( $seopress_advanced_appearance_genesis_seo_metaboxe_hook_option ) ) {
+		foreach ($seopress_advanced_appearance_genesis_seo_metaboxe_hook_option as $key => $seopress_advanced_appearance_genesis_seo_metaboxe_hook_value)
+			$options[$key] = $seopress_advanced_appearance_genesis_seo_metaboxe_hook_value;
+		 if (isset($seopress_advanced_appearance_genesis_seo_metaboxe_hook_option['seopress_advanced_appearance_genesis_seo_metaboxe'])) { 
+		 	return $seopress_advanced_appearance_genesis_seo_metaboxe_hook_option['seopress_advanced_appearance_genesis_seo_metaboxe'];
+		 }
+	}
+}
+
+if (seopress_advanced_appearance_genesis_seo_metaboxe_hook_option() !='') {
+	function seopress_advanced_appearance_genesis_seo_metaboxe_hook() {
+		remove_action( 'admin_menu', 'genesis_add_inpost_seo_box' );
+	}
+	add_action('init', 'seopress_advanced_appearance_genesis_seo_metaboxe_hook', 999);
 }
 
 //Stop words
@@ -125,7 +167,7 @@ function seopress_advanced_advanced_stop_words_option() {
 if (seopress_advanced_advanced_stop_words_option() !='') {
 	global $pagenow;
     if ( $pagenow == 'post-new.php' || $pagenow == 'post.php') {
-	
+		
 		function seopress_advanced_advanced_stop_words_hook($slug) {
 
 			$stop_words_list_en = 'a,about,above,after,again,against,all,am,an,and,any,are,aren\'t,as,at,be,because,been,before,being,below,between,both,but,by,can\'t,cannot,could,couldn\'t,did,didn\'t,do,does,doesn\'t,doing,don\'t,down,during,each,few,for,from,further,had,hadn\'t,has,hasn\'t,have,haven\'t,having,he,he\'d,he\'ll,he\'s,her,here,here\'s,hers,herself,him,himself,his,how,how\'s,i,i\'d,,i\'ll,i\'m,i\'ve,if,in,into,is,isn\'t,it,it\'s,its,itself,let\'s,me,more,most,mustn\'t,my,myself,no,nor,not,of,off,on,once,only,or,other,ought,our,ours,ourselves,out,over,own,same,shan\'t,she,she\'d,she\'ll,she\'s,should,shouldn\'t,so,some,such,than,that,that\'s,the,their,theirs,them,themselves,then,there,there\'s,these,they,they\'d,they\'ll,they\'re,they\'ve,this,those,through,to,too,under,until,up,very,was,wasn\'t,we,we\'d,we\'ll,we\'re,we\'ve,were,weren\'t,what,what\'s,when,when\'s,where,where\'s,which,while,who,who\'s,whom,why,why\'s,with,won\'t,would,wouldn\'t,you,you\'d,you\'ll,you\'re,you\'ve,your,yours,yourself,yourselves';
@@ -236,4 +278,222 @@ if (seopress_advanced_advanced_stop_words_option() !='') {
 		}
 		add_filter('sanitize_title', 'seopress_advanced_advanced_stop_words_hook');
 	}
+}
+
+//Bulk actions
+//noindex
+foreach (seopress_get_post_types() as $key => $value) {
+	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_noindex' );
+}
+
+function seopress_bulk_actions_noindex($bulk_actions) {
+	$bulk_actions['seopress_noindex'] = __( 'Enable noindex', 'wp-seopress');
+	return $bulk_actions;
+}
+foreach (seopress_get_post_types() as $key => $value) {
+	add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_noindex_handler', 10, 3 );
+}
+
+function seopress_bulk_action_noindex_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( $doaction !== 'seopress_noindex' ) {
+		return $redirect_to;
+	}
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post.
+		update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
+	}
+	$redirect_to = add_query_arg( 'bulk_noindex_posts', count( $post_ids ), $redirect_to );
+	return $redirect_to;
+}
+
+add_action( 'admin_notices', 'seopress_bulk_action_noindex_admin_notice' );
+
+function seopress_bulk_action_noindex_admin_notice() {
+	if ( ! empty( $_REQUEST['bulk_noindex_posts'] ) ) {
+		$noindex_count = intval( $_REQUEST['bulk_noindex_posts'] );
+		printf( '<div id="message" class="updated fade"><p>' .
+				_n( '%s post to noindex.',
+						'%s posts to noindex.',
+						$noindex_count,
+						'wp-seopress'
+						) . '</p></div>', $noindex_count );
+	}
+}
+
+//index
+foreach (seopress_get_post_types() as $key => $value) {
+	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_index' );
+}
+
+function seopress_bulk_actions_index($bulk_actions) {
+	$bulk_actions['seopress_index'] = __( 'Enable index', 'wp-seopress');
+	return $bulk_actions;
+}
+
+foreach (seopress_get_post_types() as $key => $value) {
+	add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_index_handler', 10, 3 );
+}
+
+function seopress_bulk_action_index_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( $doaction !== 'seopress_index' ) {
+		return $redirect_to;
+	}
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post.
+		delete_post_meta( $post_id, '_seopress_robots_index', '' );
+	}
+	$redirect_to = add_query_arg( 'bulk_index_posts', count( $post_ids ), $redirect_to );
+	return $redirect_to;
+}
+
+add_action( 'admin_notices', 'seopress_bulk_action_index_admin_notice' );
+
+function seopress_bulk_action_index_admin_notice() {
+	if ( ! empty( $_REQUEST['bulk_index_posts'] ) ) {
+		$index_count = intval( $_REQUEST['bulk_index_posts'] );
+		printf( '<div id="message" class="updated fade"><p>' .
+				_n( '%s post to index.',
+						'%s posts to index.',
+						$index_count,
+						'wp-seopress'
+						) . '</p></div>', $index_count );
+	}
+}
+
+//nofollow
+foreach (seopress_get_post_types() as $key => $value) {
+	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_nofollow' );
+}
+
+function seopress_bulk_actions_nofollow($bulk_actions) {
+	$bulk_actions['seopress_nofollow'] = __( 'Enable nofollow', 'wp-seopress');
+	return $bulk_actions;
+}
+foreach (seopress_get_post_types() as $key => $value) {
+	add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_nofollow_handler', 10, 3 );
+}
+
+function seopress_bulk_action_nofollow_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( $doaction !== 'seopress_nofollow' ) {
+		return $redirect_to;
+	}
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post.
+		update_post_meta( $post_id, '_seopress_robots_nofollow', 'yes' );
+	}
+	$redirect_to = add_query_arg( 'bulk_nofollow_posts', count( $post_ids ), $redirect_to );
+	return $redirect_to;
+}
+
+add_action( 'admin_notices', 'seopress_bulk_action_nofollow_admin_notice' );
+
+function seopress_bulk_action_nofollow_admin_notice() {
+	if ( ! empty( $_REQUEST['bulk_nofollow_posts'] ) ) {
+		$nofollow_count = intval( $_REQUEST['bulk_nofollow_posts'] );
+		printf( '<div id="message" class="updated fade"><p>' .
+				_n( '%s post to nofollow.',
+						'%s posts to nofollow.',
+						$nofollow_count,
+						'wp-seopress'
+						) . '</p></div>', $nofollow_count );
+	}
+}
+
+//follow
+foreach (seopress_get_post_types() as $key => $value) {
+	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_follow' );
+}
+
+function seopress_bulk_actions_follow($bulk_actions) {
+	$bulk_actions['seopress_follow'] = __( 'Enable follow', 'wp-seopress');
+	return $bulk_actions;
+}
+
+foreach (seopress_get_post_types() as $key => $value) {
+	add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_follow_handler', 10, 3 );
+}
+
+function seopress_bulk_action_follow_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( $doaction !== 'seopress_follow' ) {
+		return $redirect_to;
+	}
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post.
+		delete_post_meta( $post_id, '_seopress_robots_follow', '' );
+	}
+	$redirect_to = add_query_arg( 'bulk_follow_posts', count( $post_ids ), $redirect_to );
+	return $redirect_to;
+}
+
+add_action( 'admin_notices', 'seopress_bulk_action_follow_admin_notice' );
+
+function seopress_bulk_action_follow_admin_notice() {
+	if ( ! empty( $_REQUEST['bulk_follow_posts'] ) ) {
+		$follow_count = intval( $_REQUEST['bulk_follow_posts'] );
+		printf( '<div id="message" class="updated fade"><p>' .
+				_n( '%s post to follow.',
+						'%s posts to follow.',
+						$follow_count,
+						'wp-seopress'
+						) . '</p></div>', $follow_count );
+	}
+}
+
+//Quick Edit
+add_action( 'quick_edit_custom_box', 'seopress_bulk_quick_edit_custom_box', 10, 2 );
+
+function seopress_bulk_quick_edit_custom_box($column_name) {
+ 	static $printNonce = TRUE;
+    if ( $printNonce ) {
+    	$printNonce = FALSE;
+        wp_nonce_field( plugin_basename( __FILE__ ), 'seopress_title_edit_nonce' );
+    }
+
+    ?>
+    <div class="wp-clearfix"></div>
+    <fieldset class="inline-edit-col-left inline-edit-book">
+    	<div class="inline-edit-col column-<?php echo $column_name; ?>">
+	        
+	        <?php 
+	        	switch ( $column_name ) {
+	         	case 'seopress_title':
+	            ?>	
+	            	<h4><?php _e('SEO','wp-seopress'); ?></h4>
+	            	<label class="inline-edit-group">
+		            	<span class="title"><?php _e('Title tag','wp-seopress'); ?></span>
+		        		<span class="input-text-wrap"><input type="text" name="seopress_title" /></span>
+	        		</label>
+	        		<?php
+	            break;
+	            case 'seopress_desc':
+	            ?>	
+	            	<label class="inline-edit-tags">
+		            	<span class="title"><?php _e('Meta description','wp-seopress'); ?></span>
+		        		<textarea cols="22" rows="1" name="seopress_desc" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"></textarea>
+		        	</label>
+		        	<?php
+	            break;
+	        	}
+	        ?>
+	        </label>
+      	</div>
+    </fieldset>
+    <?php
+}
+
+add_action('save_post','seopress_bulk_quick_edit_save_post', 10, 2);
+function seopress_bulk_quick_edit_save_post($post_id) {
+	if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+    $_POST += array("seopress_title_edit_nonce" => '');
+    if (!wp_verify_nonce($_POST["seopress_title_edit_nonce"], plugin_basename( __FILE__ ))) {
+        return;
+    }
+    if (isset($_REQUEST['seopress_title'])) {
+        update_post_meta($post_id, '_seopress_titles_title', esc_html($_REQUEST['seopress_title']));
+    }
+    if (isset($_REQUEST['seopress_desc'])) {
+        update_post_meta($post_id, '_seopress_titles_desc', esc_html($_REQUEST['seopress_desc']));
+    }
 }

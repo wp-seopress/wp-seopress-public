@@ -157,7 +157,6 @@ class seopress_options
         $seopress_advanced_option_name = get_option('seopress_advanced_option_name');
 
         $seopress_advanced_option_name['seopress_advanced_advanced_attachments'] = '1';
-        $seopress_advanced_option_name['seopress_advanced_advanced_stop_words'] = '1';
         $seopress_advanced_option_name['seopress_advanced_appearance_title_col'] = '1';
         $seopress_advanced_option_name['seopress_advanced_appearance_meta_desc_col'] = '1';
 
@@ -213,7 +212,7 @@ class seopress_options
 
     function seopress_titles_page(){
         $this->options = get_option( 'seopress_titles_option_name' );
-        if (function_exists(seopress_admin_header)) {
+        if (function_exists('seopress_admin_header')) {
             echo seopress_admin_header();
         }
         ?>
@@ -263,7 +262,7 @@ class seopress_options
 
     function seopress_xml_sitemap_page(){
         $this->options = get_option( 'seopress_xml_sitemap_option_name' );
-        if (function_exists(seopress_admin_header)) {
+        if (function_exists('seopress_admin_header')) {
             echo seopress_admin_header();
         }
         ?>
@@ -304,7 +303,7 @@ class seopress_options
 
     function seopress_social_page(){
         $this->options = get_option( 'seopress_social_option_name' );
-        if (function_exists(seopress_admin_header)) {
+        if (function_exists('seopress_admin_header')) {
             echo seopress_admin_header();
         }
         ?>
@@ -346,7 +345,7 @@ class seopress_options
 
     function seopress_google_analytics_page(){
         $this->options = get_option( 'seopress_google_analytics_option_name' );
-        if (function_exists(seopress_admin_header)) {
+        if (function_exists('seopress_admin_header')) {
             echo seopress_admin_header();
         }
         ?>
@@ -360,13 +359,22 @@ class seopress_options
         ?>
     
          <div id="seopress-tabs" class="wrap">
-         <?php 
-            
-            $plugin_settings_tabs = array(
-                'tab_seopress_google_analytics_enable' => __( "General", "wp-seopress" ), 
-                'tab_seopress_google_analytics_features' => __( "Tracking", "wp-seopress" ),
-                'tab_seopress_google_analytics_custom_dimensions' => __( "Custom Dimensions", "wp-seopress" ),
-            );
+         <?php
+
+            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                $plugin_settings_tabs = array(
+                    'tab_seopress_google_analytics_enable' => __( "General", "wp-seopress" ), 
+                    'tab_seopress_google_analytics_features' => __( "Tracking", "wp-seopress" ),
+                    'tab_seopress_google_analytics_custom_dimensions' => __( "Custom Dimensions", "wp-seopress" ),
+                    'tab_seopress_google_analytics_dashboard' => __( "Stats in Dashboard", "wp-seopress" ),
+                );
+            } else {
+                $plugin_settings_tabs = array(
+                    'tab_seopress_google_analytics_enable' => __( "General", "wp-seopress" ), 
+                    'tab_seopress_google_analytics_features' => __( "Tracking", "wp-seopress" ),
+                    'tab_seopress_google_analytics_custom_dimensions' => __( "Custom Dimensions", "wp-seopress" ),
+                );
+            }
 
             echo '<h2 class="nav-tab-wrapper">';
             foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
@@ -377,6 +385,9 @@ class seopress_options
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_enable') { echo 'active'; } ?>" id="tab_seopress_google_analytics_enable"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-enable' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_features') { echo 'active'; } ?>" id="tab_seopress_google_analytics_features"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-features' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_custom_dimensions') { echo 'active'; } ?>" id="tab_seopress_google_analytics_custom_dimensions"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-custom-dimensions' ); ?></div>
+            <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_dashboard') { echo 'active'; } ?>" id="tab_seopress_google_analytics_dashboard"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-dashboard' ); ?></div>
+            <?php } ?>
         </div>
 
         <?php submit_button(); ?>
@@ -386,7 +397,7 @@ class seopress_options
 
     function seopress_advanced_page(){
         $this->options = get_option( 'seopress_advanced_option_name' );
-        if (function_exists(seopress_admin_header)) {
+        if (function_exists('seopress_admin_header')) {
             echo seopress_admin_header();
         }
         ?>
@@ -425,7 +436,7 @@ class seopress_options
 
     function seopress_import_export_page(){
         $this->options = get_option( 'seopress_import_export_option_name' );
-        if (function_exists(seopress_admin_header)) {
+        if (function_exists('seopress_admin_header')) {
             echo seopress_admin_header();
         }
         ?>
@@ -482,6 +493,20 @@ class seopress_options
                         <div id="seopress-yoast-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></div>
                         <span class="spinner"></span>
                         <div class="log"></div>
+                    </div><!-- .inside -->
+                </div><!-- .postbox -->
+
+                <div class="postbox">
+                    <h3><span><?php _e( 'Reset All Notices From Notifications Center', 'wp-seopress' ); ?></span></h3>
+                    <div class="inside">
+                        <p><?php _e( 'By clicking Reset Notices, you\'ll see all notices again in notifications center.', 'wp-seopress' ); ?></p>
+                         <form method="post" enctype="multipart/form-data">
+                            <p>
+                                <input type="hidden" name="seopress_action" value="reset_notices_settings" />
+                                <?php wp_nonce_field( 'seopress_reset_notices_nonce', 'seopress_reset_notices_nonce' ); ?>
+                                <?php submit_button( __( 'Reset notices', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                            </p>
+                        </form>
                     </div><!-- .inside -->
                 </div><!-- .postbox -->
 
@@ -598,6 +623,60 @@ class seopress_options
                                 <a class="button-primary" href="<?php echo admin_url( 'options-permalink.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
                             </div>
                         <?php } ?>
+                        <?php 
+                            if(get_option('rss_use_excerpt') =='0') {
+                                function seopress_get_hidden_notices_rss_use_excerpt_option() {
+                                    $seopress_get_hidden_notices_rss_use_excerpt_option = get_option("seopress_notices");
+                                    if ( ! empty ( $seopress_get_hidden_notices_rss_use_excerpt_option ) ) {
+                                        foreach ($seopress_get_hidden_notices_rss_use_excerpt_option as $key => $seopress_get_hidden_notices_rss_use_excerpt_value)
+                                            $options[$key] = $seopress_get_hidden_notices_rss_use_excerpt_value;
+                                            if (isset($seopress_get_hidden_notices_rss_use_excerpt_option['notice-rss-use-excerpt'])) {
+                                                return $seopress_get_hidden_notices_rss_use_excerpt_option['notice-rss-use-excerpt'];
+                                            }
+                                    }
+                                }
+                                if(seopress_get_hidden_notices_rss_use_excerpt_option() =='1') {
+                                    //do nothing
+                                } else { ?>
+                                    <div id="notice-rss-use-excerpt-alert" class="seopress-alert deleteable">
+                                        <p>
+                                            <span class="dashicons dashicons-warning"></span>
+                                            <?php _e('You RSS feed show full text!','wp-seopress'); ?>
+                                            <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
+                                        </p>
+                                        <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                                        <span name="notice-rss-use-excerpt" id="notice-rss-use-excerpt" class="dashicons dashicons-trash remove-notice" data-notice="notice-rss-use-excerpt"></span>
+                                    </div>
+                                <?php }
+                            }
+                        ?>
+                        <?php 
+                            if(get_option('page_comments') =='1') {
+                                function seopress_get_hidden_notices_divide_comments_option() {
+                                    $seopress_get_hidden_notices_divide_comments_option = get_option("seopress_notices");
+                                    if ( ! empty ( $seopress_get_hidden_notices_divide_comments_option ) ) {
+                                        foreach ($seopress_get_hidden_notices_divide_comments_option as $key => $seopress_get_hidden_notices_divide_comments_value)
+                                            $options[$key] = $seopress_get_hidden_notices_divide_comments_value;
+                                            if (isset($seopress_get_hidden_notices_divide_comments_option['notice-divide-comments'])) {
+                                                return $seopress_get_hidden_notices_divide_comments_option['notice-divide-comments'];
+                                            }
+                                    }
+                                }
+                                if(seopress_get_hidden_notices_divide_comments_option() =='1') {
+                                    //do nothing
+                                } else { ?>
+                                    <div id="notice-divide-comments-alert" class="seopress-alert deleteable">
+                                        <p>
+                                            <span class="dashicons dashicons-warning"></span>
+                                            <?php _e('Break comments into pages is ON!','wp-seopress'); ?>
+                                            <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
+                                        </p>
+                                        <a class="button-primary" href="<?php echo admin_url( 'options-discussion.php' ); ?>"><?php _e('Disable this!','wp-seopress'); ?></a>
+                                        <span name="notice-divide-comments" id="notice-divide-comments" class="dashicons dashicons-trash remove-notice" data-notice="notice-divide-comments"></span>
+                                    </div>
+                                <?php }
+                            }
+                        ?>
                         <?php if (seopress_xml_sitemap_general_enable_option() !='1') { ?>
                             <div class="seopress-alert">
                                 <p>
@@ -1902,6 +1981,14 @@ class seopress_options
             'seopress_advanced_appearance_nofollow_col', // ID
            __("Show nofollow column in post types","wp-seopress"), // Title
             array( $this, 'seopress_advanced_appearance_nofollow_col_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_appearance_genesis_seo_metaboxe', // ID
+           __("Hide Genesis SEO Metaboxe","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_genesis_seo_metaboxe_callback' ), // Callback
             'seopress-settings-admin-advanced-appearance', // Page
             'seopress_setting_section_advanced_appearance' // Section                  
         );
@@ -3833,6 +3920,23 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_appearance_nofollow_col'])) {
             esc_attr( $this->options['seopress_advanced_appearance_nofollow_col']);
+        }
+    }    
+
+    public function seopress_advanced_appearance_genesis_seo_metaboxe_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_genesis_seo_metaboxe']);      
+        
+        echo '<input id="seopress_advanced_appearance_genesis_seo_metaboxe" name="seopress_advanced_option_name[seopress_advanced_appearance_genesis_seo_metaboxe]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_genesis_seo_metaboxe">'. __( 'Remove Genesis SEO Metaboxe', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_genesis_seo_metaboxe'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_genesis_seo_metaboxe']);
         }
     }
 }

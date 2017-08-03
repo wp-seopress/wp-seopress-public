@@ -1,5 +1,45 @@
 jQuery(document).ready(function(){
 	//Hide notices
+	//**Divide comments
+	jQuery('#notice-divide-comments').on('click', function() {
+		jQuery('#notice-divide-comments').attr('data-notice', jQuery('#notice-divide-comments').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-divide-comments',
+				notice_value: jQuery('#notice-divide-comments').attr('data-notice'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-divide-comments-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
+	//**RSS full text
+	jQuery('#notice-rss-use-excerpt').on('click', function() {
+		jQuery('#notice-rss-use-excerpt').attr('data-notice', jQuery('#notice-rss-use-excerpt').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-rss-use-excerpt',
+				notice_value: jQuery('#notice-rss-use-excerpt').attr('data-notice'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-rss-use-excerpt-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
 	//**Search Console
 	jQuery('#notice-search-console').on('click', function() {
 		jQuery('#notice-search-console').attr('data-notice', jQuery('#notice-search-console').attr('data-notice') == '1' ? '0' : '1');
