@@ -22,10 +22,15 @@ function seopress_advanced_security_metaboxe_role_hook_option() {
 function seopress_display_seo_metaboxe() {
     add_action('add_meta_boxes','seopress_init_metabox');
     function seopress_init_metabox(){
-        foreach (seopress_get_post_types() as $key => $value) {
-            add_meta_box('seopress_cpt', __('SEO','wp-seopress'), 'seopress_cpt', $key, 'normal', seopress_advanced_appearance_metaboxe_position_option());
+        if (function_exists('seopress_advanced_appearance_metaboxe_position_option')) {
+            $seopress_advanced_appearance_metaboxe_position_option = seopress_advanced_appearance_metaboxe_position_option();
+        } else {
+            $seopress_advanced_appearance_metaboxe_position_option = 'default';
         }
-        add_meta_box('seopress_cpt', __('SEO','wp-seopress'), 'seopress_cpt', 'seopress_404', 'normal', seopress_advanced_appearance_metaboxe_position_option());
+        foreach (seopress_get_post_types() as $key => $value) {
+            add_meta_box('seopress_cpt', __('SEO','wp-seopress'), 'seopress_cpt', $key, 'normal', $seopress_advanced_appearance_metaboxe_position_option);
+        }
+        add_meta_box('seopress_cpt', __('SEO','wp-seopress'), 'seopress_cpt', 'seopress_404', 'normal', $seopress_advanced_appearance_metaboxe_position_option);
     }
 
     function seopress_cpt($post){

@@ -25,9 +25,7 @@ function seopress_display_seo_term_metaboxe() {
 
     function seopress_init_term_metabox() {
         foreach (seopress_get_taxonomies() as $key => $value) {
-            //add_action( $key.'_add_form_fields','seopress_tax', 10, 2); //Listing terms page
             add_action( $key.'_edit_form_fields', 'seopress_tax', 10, 2 ); //Edit term page
-            //add_action( 'create_'.$key, 'seopress_tax_save_term', 10, 2 ); //Listing save terms
             add_action( 'edit_'.$key,   'seopress_tax_save_term', 10, 2 ); //Edit save term
         }
     }

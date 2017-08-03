@@ -1265,6 +1265,7 @@ input.toggle[data-toggle="1"] + label:after {
     background: rgba(74, 184, 102, 0.75);
     top: 50px;
     right: 20px;
+    z-index: 100;
 }
 .seopress_page_seopress-pro-page #wpcontent {
     background: #F4F7FA;

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2017-05-31 20:40+0200\n"
-"PO-Revision-Date: 2017-05-31 20:43+0200\n"
+"POT-Creation-Date: 2017-06-06 22:58+0200\n"
+"PO-Revision-Date: 2017-06-06 22:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: fr_FR\n"
@@ -146,8 +146,8 @@ msgstr "Support (nouvelle fenêtre)"
 msgid "Support"
 msgstr "Support"
 
-#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:26
-#: inc/admin/admin-metaboxes.php:28 inc/admin/adminbar.php:16
+#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:31
+#: inc/admin/admin-metaboxes.php:33 inc/admin/adminbar.php:16
 #: inc/functions/options-advanced-admin.php:523
 msgid "SEO"
 msgstr "SEO"
@@ -985,7 +985,7 @@ msgstr "Votre rang Alexa"
 msgid "Country Rank: "
 msgstr "Rang Pays : "
 
-#: inc/admin/admin.php:1110
+#: inc/admin/admin.php:1108
 msgid "The lower, the best"
 msgstr "Le plus faible, le mieux"
 
