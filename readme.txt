@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap, bot, broken link checker
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.7
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,8 +109,17 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 28. htaccess (PRO)
 29. SEOPress metaboxe in post, page, custom post type
 30. Structured Data Types metaboxe in post, page, custom post type
+31. SEOPress BOT
 
 == Changelog ==
+= 1.7.1 =
+* FIX XML Index sitemaps count column
+* FIX XML Sitemaps replace Published date by Modified date (last update)
+* FIX XML Sitemaps Notice: Undefined variable: product_img
+* FIX XML Sitemaps Warning:  DOMDocument::loadHTML(): Empty string supplied as input
+* FIX XML Sitemaps Notice: Undefined variable: images
+* FIX Undefined index: logout wp-seopress-pro/inc/admin/admin.php (Google Analytics)
+* FIX Google Analytics Dashboard widget if no token
 = 1.7 =
 * NEW SEOPress BOT : scan all your links in content and detect 404 errors, 301/302/307 redirects, links down... (SEOPress PRO only)
 * NEW SEOPress BOT : export links scan in CSV (SEOPress PRO only)

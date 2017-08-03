@@ -26,7 +26,7 @@ function seopress_xml_sitemap_single() {
 	$seopress_sitemaps .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 	$seopress_sitemaps .= "\n";
 	
-				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'date', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '' );
+				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '' );
 				$postslist = get_posts( $args );
 				foreach ( $postslist as $post ) {
 				  	setup_postdata( $post );
@@ -38,7 +38,7 @@ function seopress_xml_sitemap_single() {
 					$seopress_sitemaps .= '</loc>';
 					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<lastmod>';
-					$seopress_sitemaps .= get_the_date('c', $post);
+					$seopress_sitemaps .= get_the_modified_date('c', $post);
 					$seopress_sitemaps .= '';
 					$seopress_sitemaps .= '</lastmod>';
 					$seopress_sitemaps .= "\n";
@@ -47,10 +47,14 @@ function seopress_xml_sitemap_single() {
 					if (seopress_xml_sitemap_img_enable_option() =='1') {
 						
 						//Standard images
-						$dom = new domDocument;
-						$dom->loadHTML(get_the_content($post));
-						$dom->preserveWhiteSpace = false;
-						$images = $dom->getElementsByTagName('img');
+						if (!empty (get_the_content($post))) {
+							$dom = new domDocument;
+							$dom->loadHTML(get_the_content($post));
+							$dom->preserveWhiteSpace = false;
+							if ($dom->getElementsByTagName('img') !='') {
+								$images = $dom->getElementsByTagName('img');
+							}
+						}
 
 						//WooCommerce
 						global $product;
@@ -59,22 +63,29 @@ function seopress_xml_sitemap_single() {
 						}
 
 						//Galleries
-						$galleries = get_post_galleries_images($post);
+						if (get_post_galleries_images($post) !='') {
+							$galleries = get_post_galleries_images($post);
+						}
 
 						//Post Thumbnail
 						$post_thumbnail = get_the_post_thumbnail_url($post);
 
-						if ($images->length>=1 || !empty($galleries) || !empty($product_img) || $post_thumbnail !='') { 
+						if ((isset($images) && !empty ($images) && $images->length>=1) || (isset($galleries) && !empty($galleries)) || (isset($product) && !empty($product_img)) || $post_thumbnail !='') { 
+							
 							$seopress_sitemaps .= '<image:image>';
-							if ($images->length>=1) {
-								foreach($images as $img) {
-							        $url = $img->getAttribute('src');
-							        $seopress_sitemaps .= "\n";
-							       	$seopress_sitemaps .= '<image:loc>';
-							        $seopress_sitemaps .= $url;
-							        $seopress_sitemaps .= '</image:loc>';
-							    }
+							//Standard img
+							if (isset($images) && !empty ($images)) {
+								if ($images->length>=1) {
+									foreach($images as $img) {
+								        $url = $img->getAttribute('src');
+								        $seopress_sitemaps .= "\n";
+								       	$seopress_sitemaps .= '<image:loc>';
+								        $seopress_sitemaps .= $url;
+								        $seopress_sitemaps .= '</image:loc>';
+								    }
+								}
 							}
+							//Galleries
 							if ($galleries !='') {
 								foreach( $galleries as $gallery ) {
 									foreach( $gallery as $url ) {
@@ -85,7 +96,8 @@ function seopress_xml_sitemap_single() {
 									}
 								}
 							}
-							if ($product_img !='') {
+							//WooCommerce img
+							if ($product !='' && $product_img !='') {
 								foreach( $product_img as $product_attachment_id ) {
 									$seopress_sitemaps .= "\n";
 							       	$seopress_sitemaps .= '<image:loc>';
@@ -93,6 +105,7 @@ function seopress_xml_sitemap_single() {
 							        $seopress_sitemaps .= '</image:loc>';
 								}
 							}
+							//Post thumbnail
 							if ($post_thumbnail !='') {
 								$seopress_sitemaps .= "\n";
 						       	$seopress_sitemaps .= '<image:loc>';
