@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap, bot, broken link checker
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 <ul>
 	<li>English</li>
 	<li>French</li>
+	<li>Spanish</li>
 	<li><a href="https://www.seopress.org/contact-us/">Add yours and get SEOPress PRO for free!</a></li>
 </ul>
 
@@ -112,6 +113,54 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 31. SEOPress BOT
 
 == Changelog ==
+= 1.7.3 =
+* NEW Add spanish language (thanks to http://www.rslprogramacion.es/)
+* FIX Remove non public custom post types in XML Sitemaps options
+* FIX Undefined index: seopress_social_knowledge_type
+* FIX Undefined index: seopress_social_knowledge_contact_type
+* FIX Undefined index: seopress_social_knowledge_contact_option
+* FIX Undefined index: seopress_social_twitter_card_img_size
+* FIX Undefined index: seopress_social_accounts_facebook
+* FIX Undefined index: seopress_social_accounts_twitter
+* FIX Undefined index: seopress_social_accounts_google
+* FIX Undefined index: seopress_social_accounts_pinterest
+* FIX Undefined index: seopress_social_accounts_instagram
+* FIX Undefined index: seopress_social_accounts_youtube
+* FIX Undefined index: seopress_social_accounts_linkedin
+* FIX Undefined index: seopress_social_accounts_myspace
+* FIX Undefined index: seopress_social_accounts_soundcloud
+* FIX Undefined index: seopress_social_accounts_tumblr
+* FIX Undefined index: seopress_social_knowledge_name
+* FIX Undefined index: seopress_social_knowledge_phone
+* FIX Undefined index: seopress_social_facebook_admin_id
+* FIX Undefined index: seopress_social_facebook_app_id
+* FIX Undefined index: seopress_social_knowledge_img
+* FIX Undefined index: seopress_social_facebook_img
+* FIX Undefined index: seopress_social_twitter_card_img
+* FIX Undefined index: description
+* FIX Undefined index: description (2)
+* FIX Undefined index: seopress_titles_archives_author_desc
+* FIX Undefined index: seopress_titles_archives_date_desc
+* FIX Undefined index: seopress_titles_archives_404_desc
+* FIX Undefined index: seopress_xml_sitemap_html_mapping
+* FIX Undefined index: seopress_xml_sitemap_html_exclude
+* FIX Undefined index: seopress_advanced_advanced_google
+* FIX Undefined index: seopress_advanced_advanced_bing
+* FIX Undefined index: seopress_advanced_advanced_pinterest
+* FIX Undefined index: seopress_advanced_advanced_yandex
+* FIX Use of undefined constant seopress_admin_header - assumed 'seopress_admin_header'
+* FIX Undefined index: seopress_rich_snippets_publisher_logo
+* FIX Undefined index: seopress_rich_snippets_publisher_logo_width
+* FIX Undefined index: seopress_rich_snippets_publisher_logo_height
+* FIX Undefined index: seopress_breadcrumbs_separator
+* FIX Undefined index: seopress_robots_file
+* FIX Undefined index: seopress_news_name
+* FIX Undefined index: seopress_news_genres
+* FIX Undefined index: seopress_news_keywords
+* FIX Undefined index: seopress_404_redirect_home
+* FIX Undefined index: seopress_404_redirect_custom_url
+* FIX Undefined index: seopress_404_redirect_status_code
+* FIX Undefined index: seopress_404_enable_mails_from
 = 1.7.2 =
 * INFO Breadcrumbs now support Events Calendar / Events Calendar Pro
 * FIX Edit robots.txt
