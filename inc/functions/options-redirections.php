@@ -14,6 +14,13 @@ function seopress_redirections_enabled() {
 	}
 }
 
+function seopress_redirections_term_enabled() {
+	$_seopress_redirections_enabled = get_term_meta(get_queried_object()->{'term_id'},'_seopress_redirections_enabled',true);
+	if ($_seopress_redirections_enabled != '') {
+		return $_seopress_redirections_enabled;
+	}
+}
+
 //Type
 function seopress_redirections_type() {
 	global $post;
@@ -23,11 +30,21 @@ function seopress_redirections_type() {
 	}
 }
 
+function seopress_redirections_term_type() {
+	$_seopress_redirections_type = get_term_meta(get_queried_object()->{'term_id'},'_seopress_redirections_type',true);
+	if ($_seopress_redirections_type != '') {
+		return $_seopress_redirections_type;
+	}
+}
+
 //URL to redirect
 function seopress_redirections_value() {
 	global $post;
-	if (get_post_meta($post->ID,'_seopress_redirections_value',true)) {
+	if (is_singular() && get_post_meta($post->ID,'_seopress_redirections_value',true)) {
 		$seopress_redirections_value = get_post_meta($post->ID,'_seopress_redirections_value',true);
+		return $seopress_redirections_value;
+ 	} elseif ((is_tax() || is_category() || is_tag()) && get_term_meta(get_queried_object()->{'term_id'},'_seopress_redirections_value',true) !='') {
+		$seopress_redirections_value = get_term_meta(get_queried_object()->{'term_id'},'_seopress_redirections_value',true);
 		return $seopress_redirections_value;
 	} else {
 		$seopress_redirections_value = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
@@ -35,7 +52,7 @@ function seopress_redirections_value() {
 				'post_type' => 'seopress_404', 
 				'posts_per_page' => '-1',           
 				'update_post_term_cache' => false, // don't retrieve post terms
-				'update_post_meta_cache' => false, // don't retrieve post meta, 
+				'update_post_meta_cache' => false, // don't retrieve post meta 
 			) 
 		);
 		$all_titles = array();
@@ -54,7 +71,12 @@ function seopress_redirections_value() {
 }
 
 function seopress_redirections_hook() {
-	if (seopress_redirections_enabled() =='yes') {
+ 	if ((is_tax() || is_category() || is_tag()) && seopress_redirections_term_enabled() =='yes') {
+		if (seopress_redirections_term_type() && seopress_redirections_value() !='') {
+			wp_redirect(seopress_redirections_value(), seopress_redirections_term_type());
+			exit();
+		}
+	} elseif (seopress_redirections_enabled() =='yes') {
 		if (seopress_redirections_type() && seopress_redirections_value() !='') {
 			wp_redirect(seopress_redirections_value(), seopress_redirections_type());
 			exit();

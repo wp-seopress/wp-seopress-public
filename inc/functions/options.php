@@ -30,6 +30,45 @@ function seopress_enable() {
 
 //Front END
 if (seopress_get_toggle_titles_option() =='1') {
+	//Author archive Disabled
+	function seopress_titles_archives_author_disable_option() {
+		$seopress_titles_archives_author_disable_option = get_option("seopress_titles_option_name");
+		if ( ! empty ( $seopress_titles_archives_author_disable_option ) ) {
+			foreach ($seopress_titles_archives_author_disable_option as $key => $seopress_titles_archives_author_disable_value)
+				$options[$key] = $seopress_titles_archives_author_disable_value;
+			 if (isset($seopress_titles_archives_author_disable_option['seopress_titles_archives_author_disable'])) { 
+			 	return $seopress_titles_archives_author_disable_option['seopress_titles_archives_author_disable'];
+			 }
+		}
+	};
+
+	//Date archive Disabled
+	function seopress_titles_archives_date_disable_option() {
+		$seopress_titles_archives_date_disable_option = get_option("seopress_titles_option_name");
+		if ( ! empty ( $seopress_titles_archives_date_disable_option ) ) {
+			foreach ($seopress_titles_archives_date_disable_option as $key => $seopress_titles_archives_date_disable_value)
+				$options[$key] = $seopress_titles_archives_date_disable_value;
+			 if (isset($seopress_titles_archives_date_disable_option['seopress_titles_archives_date_disable'])) { 
+			 	return $seopress_titles_archives_date_disable_option['seopress_titles_archives_date_disable'];
+			 }
+		}
+	};
+
+	function seopress_titles_disable_archives() {
+		global $wp_query;
+
+		if (seopress_titles_archives_author_disable_option() =='1' && $wp_query->is_author) {
+			wp_redirect(get_home_url(), '301');
+	        exit;
+		}
+		if (seopress_titles_archives_author_disable_option() =='1' && $wp_query->is_date) {
+			wp_redirect(get_home_url(), '301');
+	        exit;
+		}
+		return false;
+	}
+
+	add_action('template_redirect', 'seopress_titles_disable_archives', 0);
 	add_action('wp_head', 'seopress_load_titles_options', 0);
 	function seopress_load_titles_options() {
 		if (!is_admin()){	
@@ -48,12 +87,10 @@ if (seopress_get_toggle_social_option() =='1') {
 if (seopress_get_toggle_google_analytics_option() =='1') {
 	add_action('wp_head', 'seopress_load_google_analytics_options', 0);
 	function seopress_load_google_analytics_options() {
-		if (!is_admin()){	
-		    require_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
-		}
+	    require_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
 	}
 }
-add_action('init', 'seopress_load_redirections_options', 0);
+add_action('wp', 'seopress_load_redirections_options', 0);
 function seopress_load_redirections_options() {
 	if (!is_admin()){
 	    require_once ( dirname( __FILE__ ) . '/options-redirections.php'); //Redirections

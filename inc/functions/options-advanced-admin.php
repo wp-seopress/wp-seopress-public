@@ -23,6 +23,18 @@ if (seopress_advanced_appearance_adminbar_option() !='') {
 	}
 }
 
+//Metaboxe position
+function seopress_advanced_appearance_metaboxe_position_option() {
+    $seopress_advanced_appearance_metaboxe_position_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_metaboxe_position_option ) ) {
+        foreach ($seopress_advanced_appearance_metaboxe_position_option as $key => $seopress_advanced_appearance_metaboxe_position_value)
+            $options[$key] = $seopress_advanced_appearance_metaboxe_position_value;
+         if (isset($seopress_advanced_appearance_metaboxe_position_option['seopress_advanced_appearance_metaboxe_position'])) { 
+            return $seopress_advanced_appearance_metaboxe_position_option['seopress_advanced_appearance_metaboxe_position'];
+         }
+    }
+}
+
 //Columns in post types
 function seopress_advanced_appearance_title_col_option() {
     $seopress_advanced_appearance_title_col_option = get_option("seopress_advanced_option_name");
@@ -129,10 +141,10 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
 
         function seopress_title_display_column($column, $post_id) {
             if ($column == 'seopress_title') {
-                echo get_post_meta($post_id, "_seopress_titles_title", true);
+                echo '<div id="seopress_title-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_title", true).'</div>';
             }
             if ($column == 'seopress_desc') {
-                echo get_post_meta($post_id, "_seopress_titles_desc", true);
+                echo '<div id="seopress_desc-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_desc", true).'</div>';
             }
             if ($column == 'seopress_noindex') {
                 if (get_post_meta($post_id, "_seopress_robots_index", true) =='yes') {
@@ -157,7 +169,7 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
             }
         }
     }
-    add_action('admin_menu', 'seopress_add_columns', 999);
+    add_action('init', 'seopress_add_columns', 999);
     
     //Sortable columns
     foreach (seopress_get_post_types() as $key => $value) {
@@ -429,7 +441,7 @@ function seopress_bulk_action_nofollow_handler( $redirect_to, $doaction, $post_i
 	}
 	foreach ( $post_ids as $post_id ) {
 		// Perform action for each post.
-		update_post_meta( $post_id, '_seopress_robots_nofollow', 'yes' );
+		update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
 	}
 	$redirect_to = add_query_arg( 'bulk_nofollow_posts', count( $post_ids ), $redirect_to );
 	return $redirect_to;
@@ -517,9 +529,9 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
 	            break;
 	            case 'seopress_desc':
 	            ?>	
-	            	<label class="inline-edit-tags">
+	            	<label class="inline-edit-group">
 		            	<span class="title"><?php _e('Meta description','wp-seopress'); ?></span>
-		        		<textarea cols="22" rows="1" name="seopress_desc" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"></textarea>
+		        		<textarea cols="18" rows="1" name="seopress_desc" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"></textarea>
 		        	</label>
 		        	<?php
 	            break;
@@ -533,6 +545,14 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
 
 add_action('save_post','seopress_bulk_quick_edit_save_post', 10, 2);
 function seopress_bulk_quick_edit_save_post($post_id) {
+    // don't save for autosave
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+      return $post_id;
+
+    // dont save for revisions
+    if ( isset( $post->post_type ) && $post->post_type == 'revision' )
+      return $post_id;
+
 	if (!current_user_can('edit_post', $post_id)) {
         return;
     }

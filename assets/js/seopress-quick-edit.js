@@ -24,12 +24,12 @@
          var $post_row = $( '#post-' + $post_id );
 
          // get the data
-         var $seopress_title = $( '.column-seopress_title', $post_row ).text();
-         var $seopress_desc = $( '.column-seopress_desc', $post_row ).text();
+         var $seopress_title = $( '#seopress_title-' + $post_id ).text();
+         var $seopress_desc = $( '#seopress_desc-' + $post_id ).text();
 
          // populate the data
-         $( ':input[name="seopress_title"]', $edit_row ).val( $seopress_title );
-         $( ':input[name="seopress_desc"]', $edit_row ).val( $seopress_desc );
+         $edit_row.find( 'input[name="seopress_title"]' ).val( $seopress_title );
+         $edit_row.find( 'textarea[name="seopress_desc"]' ).val( $seopress_desc );
       }
    };
 

@@ -8,3 +8,11 @@ Beta testers / feedbacks:
 - Aurélien Denis: contact@wp-alacarte.com / @wpchannel
 - Sébastien Serre: @sebastienserre
 - Ludovic Riaudel: @lriaudel
+
+Translators:
+- French: Didier Wolforg, @rainbowgeek, and Clément Polito
+- English: @rainbowgeek
+- Italian: Déborah Donnier
+- Spanish: Rafael Salguero
+- German: @likemike2425
+- Japan: @s_tayama and @miccweb

@@ -1,4 +1,26 @@
 /*************************************************************************************************/
+/* SEOPress Font Family                                                                          */
+/*************************************************************************************************/
+@font-face {
+    font-family: 'seopress';
+    src:  url('../fonts/seopress.eot?8v0bs0');
+    src:  url('../fonts/seopress.eot?8v0bs0#iefix') format('embedded-opentype'),
+    url('../fonts/seopress.ttf?8v0bs0') format('truetype'),
+    url('../fonts/seopress.woff?8v0bs0') format('woff'),
+    url('../fonts/seopress.svg?8v0bs0#seopress') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-seopress-"], [class*=" icon-seopress"] {
+    font-family: 'seopress' !important;
+}
+
+.icon-seopress-seopress:before {
+  content: "\e042";
+}
+
+/*************************************************************************************************/
 /* Metaboxe in CPT                                                                               */
 /*************************************************************************************************/
 #seopress_cpt .ui-tabs .ui-tabs-nav {
@@ -149,7 +171,9 @@
     display: inline;
     font-weight: bold;
 }
-
+#term-seopress #seopress_cpt {
+    width: 95%;
+}
 /*************************************************************************************************/
 /* Admin - Tabs                                                                                  */
 /*************************************************************************************************/
@@ -206,12 +230,81 @@
 /*************************************************************************************************/
 /* Admin - Options panel                                                                         */
 /*************************************************************************************************/
+#seopress-content a {
+    color: #3297d3;
+}
+#seopress-content a:hover {
+    color: #106598;
+}
+#seopress-admin-tabs.ui-tabs {
+    position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+    padding: .2em;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+#seopress-admin-tabs.ui-tabs .ui-tabs-nav li {
+    list-style: none;
+    float: left;
+    position: relative;
+    top: 0;
+    margin: -1px .2em 0 0;
+    border-bottom-width: 0;
+    padding: 0;
+    white-space: nowrap;
+    border: none;
+    background: none;
+}
+#seopress-admin-tabs.ui-tabs .ui-tabs-nav li a {
+    float: left;
+    padding: 0.38em 1em 0.75rem;
+    text-decoration: none;
+    outline: none;
+    border-bottom: 2px solid #fff;
+}
+#seopress-admin-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+    margin-bottom: -1px;
+}
+#seopress-admin-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active a,
+#seopress-admin-tabs.ui-tabs .ui-tabs-nav li.ui-state-disabled a,
+#seopress-admin-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+    cursor: text;
+    border-bottom: 2px solid #23282D;
+    color: #23282D;
+}
+#seopress-admin-tabs.ui-tabs .ui-tabs-nav li a, /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+#seopress-admin-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+    cursor: pointer;
+    color: #0073aa;
+    text-decoration: none;
+}
+#seopress-admin-tabs.ui-tabs-vertical { width: 55em; }
+#seopress-admin-tabs.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+#seopress-admin-tabs.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+#seopress-admin-tabs.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+#seopress-admin-tabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
+#seopress-admin-tabs.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+
 .seopress-styles .seopress-option {
-    margin: 20px auto 0;
+    margin: 10px auto 0;
     max-width: 90%;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
     padding: 1.0rem;
     background: #fff;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1),0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+.seopress-styles .seopress-option h1 {
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(50, 151, 211);
+    text-transform: uppercase;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    position: sticky;
+    top: 32px;
+    background: #fff;
+    z-index: 100;
+    padding: 10px 0;
 }
 .seopress-styles .seopress-option h1 .dashicons,
 .seopress-styles .seopress-option h2 .dashicons {
@@ -221,6 +314,16 @@
     height: 40px;
     vertical-align: middle;
 }
+.seopress-styles .seopress-option h1 > .dashicons {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    background: rgb(196, 240, 255);
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.1),0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+}
 .seopress-styles .seopress-option .metabox-holder h2 .dashicons {
     font-size: 16px;
 }
@@ -229,9 +332,11 @@
     width: 16px;
     height: 16px;
     vertical-align: middle;
+    margin: 0 10px 0 0;
 }
 .seopress-styles .wrap {
     margin: 0;
+    position: relative;
 }
 .seopress-styles .seopress-option .submit {
     background: #fff;
@@ -243,19 +348,22 @@
 }
 .seopress-styles .seopress-option #submit,
 .seopress-styles .seopress-option #seopress-yoast-migrate {
-    color: #232323;
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    background: #F1F1F1;
     border: none;
-    border-radius: 30px;
+    border-radius: 4px;
     padding-right: 20px;
     padding-left: 20px;
     line-height: 34px;
     text-transform: uppercase;
-    height: 34px;
+    min-height: 34px;
     transition: all 300ms linear;
-    box-shadow: none;
     text-shadow: none;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),0 3px 6px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+    background: RGB(106, 124, 148);
+    position: relative;
+    height: auto;
 }
 .seopress-styles .seopress-option #submit:hover,
 .seopress-styles .seopress-option #seopress-yoast-migrate:hover {
@@ -265,41 +373,124 @@
 }
 .seopress-styles #wpcontent {
     padding-left: 0;
-    background: #F7F7F7;
+    background: #F8FAFD;
 }
 .seopress-styles #seopress-admin {
-    background: #FFF;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
 }
-#adminmenu div.wp-menu-image.dashicons-admin-seopress {
-    background-image: url('data:image/png;base64,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');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 22px;
+#adminmenu div.wp-menu-image.dashicons-admin-seopress::before {
+    content:"\e042";
+    font-family: 'seopress';
 }
 .seopress-styles #seopress-navbar {
-    padding: 10px 25px;
-    height: 40px;
+    padding: 10px 1.5rem;
+    height: 56px;
     margin: 0 auto;
-    width: 55rem;
+    width: 53rem;
+    box-sizing: border-box;
+    position: relative;
 }
 #seopress-header {
-    margin: 0;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
 }
 #seopress-header #seopress-admin h1 {
-    background: url("../img/logo-seopress.png") no-repeat scroll 0 0 / contain rgba(0, 0, 0, 0);
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 80px;
-    height: 35px;
+    line-height: 50px;
     margin: 0;
     display: inline-block;
-    width: 200px;
+    height: 50px;
+    width: 36px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#seopress-header #seopress-admin h1::before {
+    content: "\e042";
+    font-family: 'seopress';
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 40px;
+    line-height: 45px;
+    position: absolute;
+    font-weight: normal;
+}
+#seopress-header #seopress-admin h1:hover {
+    cursor: pointer;
+}
+#seopress-header #seopress-admin h1 > a {
+    text-decoration: none;
+    color: inherit;
+}
+#seopress-header #seopress-admin .seopress-quick-access {
+    background: #fff;
+    box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1), 0 15px 35px rgba(50, 50, 93, 0.2), 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    font-size: 17px;
+    line-height: 40px;
+    white-space: nowrap;
+    transform: rotate3d(1,1,0,-15deg);
+    transform-origin: 100% 0;
+    opacity: 0;
+    will-change: transform,opacity;
+    transition-property: transform,opacity;
+    transition-duration: .25s;
+    z-index: 300;
+    padding: 0;
+    display: block;
+    width: 53rem;
+    top: 0px;
+    visibility: hidden;
+    cursor: auto;
+}
+#seopress-header #seopress-admin h1:hover .seopress-quick-access {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+}
+#seopress-header #seopress-admin .seopress-quick-access > ul {
+    padding: 20px;
+    margin: 0;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+#seopress-header #seopress-admin h1 .seopress-quick-access li {
+    text-decoration: none;
+    display: inline-block;
+    width: 50%;
+    margin: 0;
+    float: left;
+    padding: 10px 0;
+}
+#seopress-header #seopress-admin h1 .seopress-quick-access li .dashicons {
+    vertical-align: middle;
+    background: #B7E1F3;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 15px;
+}
+#seopress-header #seopress-admin h1 .seopress-quick-access li a {
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 30px;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    transition: all 300ms linear;
+    color: #3297d3;
+}
+#seopress-header #seopress-admin h1 .seopress-quick-access li a:hover {
+    color: #647a88;
 }
 #seopress-header #seopress-admin h1 .seopress-info-version {
     position: relative;
-    left: 190px;
-    top: -17px;
+    left: 50px;
+    top: 0px;
+    font-size: 14px;
+    width: 80px;
+    display: block;
 }
 #seopress-header #seopress-admin .wpc-info-version {
     font-size: 14px;
@@ -324,8 +515,14 @@
     font-size: 13px;
     display: inline;
 }
-#seopress-header #seopress-notice .wporg-ratings {
+#seopress-footer-credits {
+    font-style: italic;
+}
+#seopress-footer-credits .wporg-ratings {
     display: inline;
+}
+#seopress-footer-credits .wporg-ratings a {
+    text-decoration: none;
 }
 .seopress-option .seopress-settings {
     float: left;
@@ -345,19 +542,43 @@
 .seopress-option .seopress-settings label {
     margin: 0 0 0 10px;
 }
-.seopress-tab {
-    display: none;
-    background: #fff;
+.wrap-seopress-tab-content {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 53rem;
+    margin: 20px auto 0;
+}
+#seopress-admin-tabs .seopress-tab {
     padding: 1.5rem;
+    visibility: hidden;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 200ms ease;
+    transform: translateX(-15px);
+    position: absolute;
+    top: 0;
+}
+#seopress-admin-tabs .seopress-tab.active {
+    visibility: visible;
+    overflow: inherit;
+    opacity: 1;
+    transform: translateX(0px);
+    display: inherit;
     position: relative;
 }
-.seopress-tab.active {
+#seopress-tabs .seopress-tab {
+    padding: 1.5rem;
+    display: none;
+}
+#seopress-tabs .seopress-tab.active {
     display: block;
 }
 .seopress-option input[type="text"],
 .seopress-option input[type="password"],
 .seopress-option textarea {
-    min-width: 500px;
+    min-width: 485px;
 }
 .seopress-option textarea {
     min-height: 100px;
@@ -410,7 +631,33 @@
 .seopress-notice #message {
     margin: 5px 10px 2px 0;
 }
-
+#seopress-notice a {
+    position: relative;
+    text-decoration: none;
+}
+#seopress-notice a .tooltip {
+    white-space: pre;
+    z-index: 200;
+    padding: 2px 5px;
+    font-weight: 500;
+    font-size: 12px;
+    color: #aab7c4;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(49, 49, 93, 0.1),0 0 1px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    position: absolute;
+    opacity: 0;
+    top: 30px;
+    transition: opacity 200ms ease;
+    visibility: hidden;
+    line-height: 20px;
+    left: -100%;
+    overflow: hidden;
+}
+#seopress-notice a:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
 .seopress-page-list {
     margin: 0px;
 }
@@ -419,65 +666,151 @@
     vertical-align: middle;
     margin-right: 5px;
 }
-.seopress-page-list .seopress-feature, #seopress-notifications-center {
-    background: #fff;
-    margin: 20px auto;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
-    max-width: 45rem;
+.seopress-page-list .seopress-feature, #seopress-notifications-center, #seopress-admin-tabs .ui-tabs-nav, .seopress-useful-tools {
+    background: linear-gradient(172deg,#f5f7fa,#f5f7fa 200px,#fff 0,#fff);
+    margin: 0 auto 20px;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 50rem;
     padding: 1.5rem;
     width: 100%;
+    border-radius: 4px;
+}
+#seopress-notifications-center,
+.seopress-useful-tools {
+    background: linear-gradient(172deg,#f5f7fa,#f5f7fa 400px,#fff 0,#fff);
+}
+.seopress-page-list .seopress-feature {
+    padding: 0 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .15s;
+}
+.seopress-page-list .seopress-feature p {
+    color: #6b7c93;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+#seopress-notifications-center {
+    margin-top: 0;
+}
+#seopress-admin-tabs .ui-tabs-nav {
+    display: flex;
+    padding-top: 1rem;
+    padding-bottom: 0;
 }
 .seopress-page-list .seopress-feature .img-tool {
-    height: 80px;
-    width: 80px;
-    background: #747474;
-    float: left;
-    margin: 0 30px 40px 0;
-    border-radius: 80px;
+    height: 100px;
+    width: 100px;
+    background: rgb(196, 240, 255);
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.1),0 1px 3px rgba(0, 0, 0, 0.1);
+    top: calc(50% - 50px);
+    left: 20px;
 }
 .seopress-page-list .seopress-feature .img-tool .dashicons {
-    color: #FFF;
+    color: #217AB7;
     font-size: 60px;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     width: 100%;
-    height: 80px;
-    line-height: 80px;
+    height: 100%;
+    position: absolute;
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+    margin: 0;
 }
 .seopress-page-list .seopress-feature .inner {
     margin: 0px;
     display: block;
+    padding: 2rem 0 2rem 140px;
 }
 .seopress-page-list .seopress-feature h3 {
     margin: 0;
     font-size: 16px;
     font-weight: bold;
+    color: #3297d3;
+    text-transform: uppercase;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
 .seopress-page-list .seopress-feature h3 .dashicons {
     font-size: 16px;
     margin-left: 5px;
     vertical-align: middle;
 }
-#seopress-content .seopress-page-list .seopress-feature a,
-.seopress-option .seopress-feature a,
-#seopress-notifications-center .seopress-alert .button-primary {
-    color: #232323;
+#seopress-content .seopress-page-list .seopress-feature a, 
+.seopress-option .seopress-feature a, 
+#seopress-notifications-center .seopress-alert .button-primary,
+.seopress-useful-tools .widget .button-primary {
+    color: #fff;
     text-decoration: none;
-    background: #F1F1F1;
     border: none;
-    border-radius: 30px;
+    border-radius: 4px;
     padding-right: 20px;
     padding-left: 20px;
     line-height: 34px;
     text-transform: uppercase;
-    height: 34px;
+    min-height: 34px;
     transition: all 300ms linear;
-    box-shadow: none;
     text-shadow: none;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),0 3px 6px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+    background: #6A7C94;
+    position: relative;
+    height: auto;
+}
+#seopress-content .seopress-page-list .seopress-feature a.button-secondary {
+    padding-left: 30px;
+}
+#seopress-notifications-center .seopress-alert .button-primary::after,
+#seopress-content .seopress-page-list .seopress-feature a.button-secondary::before {
+    content: "\f111";
+    font-family: Dashicons;
+    position: absolute;
+    left: 10px;
+    top: 1px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+}
+#seopress-notifications-center .seopress-alert .button-primary,
+.seopress-option .button,
+#seopress-content .seopress-page-list .seopress-feature a.view-redirects {
+    background: #fff;
+    border: none;
+    color: rgb(107, 124, 147);
+    font-weight: 500;
+    transition: all 300ms linear;
+    text-shadow: none;
+    text-transform: uppercase;
+    padding-right: 20px;
+    padding-left: 20px;
+    line-height: 34px;
+    min-height: 34px;
+    border-radius: 4px;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),0 3px 6px rgba(0, 0, 0, 0.1);
+    vertical-align: baseline;
+}
+.seopress-option .button .dashicons {
+    font-size: 16px;
+}
+#seopress-content .seopress-page-list .seopress-feature a.view-redirects {
+    padding-left: 35px;
+}
+#seopress-notifications-center .seopress-alert .button-primary::after {
+    content: "\f344";
+    left: inherit;
+    right: 10px;
+}
+#seopress-content .seopress-page-list .seopress-feature a.view-redirects::before {
+    content: "\f177";
 }
 #seopress-content .seopress-page-list .seopress-feature a:hover,
 .seopress-option .seopress-feature a:hover,
-#seopress-notifications-center .seopress-alert .button-primary:hover {
+.seopress-option .button:hover,
+#seopress-notifications-center .seopress-alert .button-primary:hover,
+.seopress-useful-tools .widget .button-primary:hover {
     text-decoration: none;
     color: #FFF;
     background: #232323;
@@ -485,22 +818,28 @@
 #seopress-notifications-center .seopress-alert .button-primary {
     float: right;
     margin: 5px 0;
+    padding-right: 30px;
 }
-#seopress-notifications-center h2 {
+#seopress-notifications-center h2, .seopress-useful-tools h2 {
     margin: 5px 0px 15px 5px;
     display: inline-block;
     width: 100%;
 }
-#seopress-notifications-center .dashicons {
+#seopress-notifications-center .dashicons, .seopress-useful-tools .dashicons {
     margin-right: 10px;
 }
 #seopress-notifications-center .seopress-alert {
     padding: 0;
     display: inline-block;
     margin: 0px 10px 10px 5px;
-    border-bottom: 1px solid rgba(224, 224, 224, 1);
+    border-bottom: 1px solid #e6ebf1;
     width: calc(100% - 30px);
     position: relative;
+    transition: all 150ms ease;
+}
+#seopress-notifications-center .seopress-alert:hover {
+    font-weight: bold;
+    cursor: default;
 }
 #seopress-notifications-center .seopress-alert p {
     display: inline-block;
@@ -511,16 +850,17 @@
     text-transform: uppercase;
     font-weight: bold;
     font-size: 10px;
+    border-radius: 4px;
 }
 #seopress-notifications-center .seopress-alert .impact.low {
-    background: #F89406;
+    background: #FFDE24;
+    color: #6b6543;
 }
 #seopress-notifications-center .seopress-alert .impact.medium {
-    background: #F9F04C;
-    color: #515151;
+    background: #e39f48;
 }
 #seopress-notifications-center .seopress-alert .impact.high {
-    background: #ff4949;
+    background: #e25950;
 }
 #seopress-notifications-center .seopress-alert .dashicons {
     color: #FFC82C;
@@ -528,7 +868,7 @@
 #seopress-notifications-center .dashicons.remove-notice {
     position: absolute;
     right: -55px;
-    color: rgb(35, 40, 45);
+    color: #6b7c93;
     font-size: 30px;
     height: 30px;
     width: 30px;
@@ -537,20 +877,22 @@
     transition: all 300ms linear;
 }
 #seopress-notifications-center .dashicons.remove-notice:hover {
-    background: #FF4949;
+    background: #e25950;
     color: #fff;
     cursor: pointer;
+    border-radius: 4px;
 }
-#seopress-content .seopress-page-list .seopress-feature .seopress-doc,
-.seopress-option #seopress-tabs .seopress-doc {
+#seopress-content .seopress-page-list .seopress-feature .seopress-doc, .seopress-option #seopress-tabs .seopress-doc {
     background: none;
-    float: right;
     padding: 0;
     width: inherit;
     height: inherit;
-    text-align: right;
     text-decoration: none;
     color: inherit;
+    box-shadow: none;
+    position: absolute;
+    right: 0;
+    top: 15px;
 }
 #seopress-content .seopress-page-list .seopress-feature .seopress-doc:hover,
 .seopress-option #seopress-tabs .seopress-doc:hover {
@@ -580,8 +922,15 @@
 .seopress-option .feature-state {
     font-style: italic;
     font-size: 12px;
-    font-weight: normal;
     display: inline-block;
+    background: rgba(0, 140, 135, 0.1);
+    padding: 5px 12px;
+    border-radius: 25px;
+    color: #444;
+    font-weight: 400;
+    text-transform: none;
+    -moz-osx-font-smoothing: initial;
+    -webkit-font-smoothing: initial;
 }
 #seopress-content .feature-state.feature-state-on,
 .seopress-option .feature-state.feature-state-on {
@@ -626,9 +975,7 @@
     margin-bottom: 10px;
 }
 .seopress-option .tag-title {
-    padding: 3px 5px;
-    background: #F1F1F1;
-    font-weight: bold;
+    padding: 4px 8px;
     position: relative;
     top: 5px;
     left: 0;
@@ -639,6 +986,11 @@
     margin-right: 5px;
     user-select: none;
     margin-bottom: 5px;
+    background: rgb(255, 255, 255);
+    color: rgb(107, 124, 147);
+    font-weight: 500;
+    box-shadow: 0 0 0 .5px rgba(50,50,93,.17),0 2px 5px 0 rgba(50,50,93,.12),0 3px 9px 0 rgba(50,50,93,.08),0 1px 1.5px 0 rgba(0,0,0,.08),0 1px 2px 0 rgba(0,0,0,.08);
+    border-radius: 4px;
 }
 .seopress-option .tag-title:hover, .seopress-option .tag-title:focus, .seopress-option .tag-title:active {
     background: #232323;
@@ -693,9 +1045,158 @@
 .seopress-button .dashicons {
     vertical-align: middle;
 }
+#seopress-content #tab_seopress_seo_tools.seopress-useful-tools .widget {
+    border-right: 1px solid #e6ebf1;
+    margin: 0;
+    padding: 0 20px 0;
+    width: calc(50% - 2px);
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+}
+#seopress-content #tab_seopress_seo_tools.seopress-useful-tools .widget:first-child {
+    width: 100%;
+    display: block;
+    clear: both;
+    border-right: none;
+    border-bottom: 1px solid #e6ebf1;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+#seopress-content #tab_seopress_seo_tools.seopress-useful-tools .widget:last-child {
+    border-right: none;
+}
+#seopress-content .seopress-useful-tools .widget-reverse ul {
+    background: #fff;
+}
+#seopress-content .seopress-useful-tools .widget-reverse li {
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid #e6ebf1;
+}
+#seopress-content .seopress-useful-tools .widget-reverse li:hover {
+    background: #F5F7FA;
+}
+#seopress-content .seopress-useful-tools .widget-title {
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    padding: 10px 0;
+    color: #24b47e;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank {
+    margin: 0 0 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_reach {
+    font-size: 30px;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    padding: 0 0 20px 0;
+    text-align: right;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_reach .highlight {
+    display: inline-block;
+    font-size: 16px;
+    background: inherit;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_delta, 
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country, 
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country_rank {
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    margin: 0 20px 0 0;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_delta {
+    width: 100%;
+    text-align: right;
+    font-size: 18px;
+    font-style: italic;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country,
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country_rank {
+    text-align: left;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country .highlight, 
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country_rank .highlight {
+    background: none;
+    font-weight: bold;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country {
+    margin-right: 0;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country_rank {
+    margin-left: 5px;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .plus .dashicons,
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .minus .dashicons {
+    font-style: italic;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .plus {
+    color: green;
+}
+#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .minus {
+    color: red;
+}
+#seopress-content .seopress-useful-tools .widget-whois ul li span {
+    font-weight: bold;
+}
+#seopress-content .seopress-reverse label {
+    font-weight: bold;
+}
+#seopress-content #seopress-reverse-url {
+    width: 100%;
+    margin: 10px 0;
+}
+#seopress-content .widget-reverse p {
+    margin: 0;
+}
+
 /*************************************************************************************************/
 /* Admin - Dashboard                                                                             */
 /*************************************************************************************************/
+#screen-meta {
+    margin: 0 0 0px 0;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 0px solid rgb(242, 242, 242);
+    border-top: none;
+    -webkit-box-shadow: 0 0 0 1px rgba(136,152,170,.1),0 15px 35px 0 rgba(49,49,93,.1),0 5px 15px 0 rgba(0,0,0,.08);
+    box-shadow: 0 0 0 1px rgba(136,152,170,.1),0 15px 35px 0 rgba(49,49,93,.1),0 5px 15px 0 rgba(0,0,0,.08);
+    top: 0;
+}
+#contextual-help-link-wrap, #screen-options-link-wrap {
+    float: right;
+    height: 28px;
+    margin: 0 0 0 6px;
+    border: 1px solid rgb(242, 242, 242);
+    border-top: none;
+    background: rgb(255, 255, 255);
+    -webkit-box-shadow: 0 0 0 1px rgba(136,152,170,.1),0 15px 35px 0 rgba(49,49,93,.1),0 5px 15px 0 rgba(0,0,0,.08);
+    box-shadow: 0 0 0 1px rgba(136,152,170,.1),0 15px 35px 0 rgba(49,49,93,.1),0 5px 15px 0 rgba(0,0,0,.08);
+}
+#screen-meta-links .show-settings {
+    box-shadow: none;
+}
+#screen-meta-links .screen-meta-toggle {
+    position: relative;
+    top: 0;
+    z-index: 2000;
+}
+#contextual-help-back {
+    background: rgb(248, 250, 253);
+}
+.contextual-help-tabs .active {
+    border-left: 2px solid rgb(50, 151, 211);
+    background: rgb(248, 250, 253);
+}
 input.toggle {
     max-height: 0;
     max-width: 0;
@@ -761,7 +1262,7 @@ input.toggle[data-toggle="1"] + label:after {
     font-size: 14px;
     text-align: center;
     border-radius: 50px;
-    background: #4AB866;
+    background: rgba(74, 184, 102, 0.75);
     top: 50px;
     right: 20px;
 }
@@ -769,36 +1270,57 @@ input.toggle[data-toggle="1"] + label:after {
     background: #F4F7FA;
 }
 .seopress-option .wrap h2.nav-tab-wrapper, .seopress-option h1.nav-tab-wrapper, .seopress-option h3.nav-tab-wrapper {
-    border-bottom: 1px solid #EEE;
+    border-bottom: 1px solid RGB(238, 238, 238);
     margin: 0;
-    padding-top: 9px;
-    padding-bottom: 0;
+    padding: 10px 10px;
     line-height: inherit;
-    background: none;
+    position: sticky;
+    top: 100px;
+    background: rgb(255, 255, 255);
+    z-index: 95;
 }
-.seopress-option .nav-tab {
+#seopress-admin-tabs.wrap h2.nav-tab-wrapper {
+    margin: 20px auto 0;
+    max-width: 53rem;
+    width: 100%;
+    border-bottom: 0;
+    padding: 0;
+    line-height: inherit;
+    position: sticky;
+    background: rgb(248, 250, 253);
+    z-index: 100;
+    top: 31px;
+}
+#seopress-admin-tabs #tab_seopress_notifications.seopress-tab {
+    background: none;
+    padding: 0;
+}
+.seopress-option .nav-tab, #seopress-admin-tabs .nav-tab {
     border: 0px solid #ccc;
-    border-bottom: 5px solid #fff;
     background: none;
     opacity: 0.5;
     padding: 5px 8px;
     transition: opacity 300ms linear;
+    color: #647a88;
+    font-weight: 300;
+    float: none;
+    display: inline-block;
 }
-.seopress-option .about-wrap h2 .nav-tab-active, .seopress-option .nav-tab-active, .seopress-option .nav-tab-active:hover {
+.seopress-option .about-wrap h2 .nav-tab-active, .seopress-option .nav-tab-active, .seopress-option .nav-tab-active:hover,
+#seopress-admin-tabs .nav-tab-active, #seopress-admin-tabs .nav-tab-active:hover {
     background-color: #fff;
-    border-bottom-color: rgb(35, 40, 45);
 }
-.seopress-option .nav-tab-active, .nav-tab-active:focus, .seopress-option .nav-tab-active:focus:active, .seopress-option .nav-tab-active:hover {
-    border-bottom: 2px solid rgb(35, 40, 45);
+.seopress-option .nav-tab-active, .nav-tab-active:focus, .seopress-option .nav-tab-active:focus:active, .seopress-option .nav-tab-active:hover,
+#seopress-admin-tabs .nav-tab-active, #seopress-admin-tabs .nav-tab-active:focus, #seopress-admin-tabs .nav-tab-active:focus:active, #seopress-admin-tabs .nav-tab-active:hover {
     background: none;
-    color: rgb(35, 40, 45);
     opacity: 1;
     outline: none;
+    font-weight: 600;
 }
-.seopress-option .nav-tab:hover {
+.seopress-option .nav-tab:hover, #seopress-admin-tabs .nav-tab:hover {
     opacity:1;
 }
-.seopress-option .nav-tab:focus {
+.seopress-option .nav-tab:focus, #seopress-admin-tabs .nav-tab:focus {
     outline: none; 
     box-shadow: none;  
 }
