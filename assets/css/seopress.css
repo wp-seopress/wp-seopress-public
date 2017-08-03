@@ -27,7 +27,8 @@
     width: 100%;
     box-sizing: border-box;
 }
-#seopress_cpt .ui-tabs .ui-tabs-panel .dashicons-info {
+#seopress_cpt .ui-tabs .ui-tabs-panel .dashicons-info,
+#seopress_pro_cpt .dashicons-info {
     font-size: 16px;
     vertical-align: middle;
     height: 16px;
@@ -52,7 +53,8 @@
 #seopress_cpt #tabs-3 label, 
 #seopress_cpt #tabs-4 label, 
 #seopress_cpt #tabs-5 label, 
-#seopress_cpt .subsection-title {
+#seopress_cpt .subsection-title,
+#seopress_pro_cpt label {
     border-bottom: 1px solid #DDDDDD;
     display: block;
     margin: 20px 0 5px;
@@ -85,7 +87,8 @@
     border-bottom: none;
     font-weight: normal;
 }
-#seopress_cpt .advise {
+#seopress_cpt .advise,
+#seopress_pro_cpt .advise {
     margin: 5px;
     display: block;
     color: red;
@@ -131,17 +134,18 @@
     color: #808080;
     display: inline;
 }
-#seopress_cpt .wrap-seopress-counters {
+#seopress_cpt .wrap-seopress-counters,
+#seopress_pro_cpt .wrap-seopress-counters {
     text-align: right;
     background: rgb(238, 238, 238) none repeat scroll 0% 0%;
     padding: 5px;
     box-shadow: 0 1px 1px rgba(0,0,0,.2);
 }
-#seopress_cpt #seopress_titles_title_counters, #seopress_cpt #seopress_titles_desc_counters {
+#seopress_cpt #seopress_titles_title_counters, #seopress_cpt #seopress_titles_desc_counters, #seopress_pro_cpt #seopress_rich_snippets_articles_counters, #seopress_pro_cpt #seopress_rich_snippets_courses_counters {
     display: inline;
     margin-right: 5px;
 }
-#seopress_cpt #seopress_titles_title_counters_val, #seopress_cpt #seopress_titles_desc_counters_val {
+#seopress_cpt #seopress_titles_title_counters_val, #seopress_cpt #seopress_titles_desc_counters_val, #seopress_pro_cpt #seopress_rich_snippets_articles_counters_val, #seopress_pro_cpt #seopress_rich_snippets_courses_counters_val {
     display: inline;
     font-weight: bold;
 }

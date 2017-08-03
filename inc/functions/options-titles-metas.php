@@ -425,13 +425,15 @@ if (get_option('blog_public') =='1') {
 				
 				$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
 				echo $seopress_titles_description_template;
-			} else { //DEFAULT EXCERPT OR THE CONTENT
+			} else {
 				setup_postdata( $post );
-				$seopress_titles_the_description = '<meta name="description" content="'.wp_trim_words(esc_html(get_the_excerpt()), 30).'" />';
-				$seopress_titles_the_description .= "\n";
-				
-				$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
-				echo $seopress_titles_description_template;
+				if (get_the_excerpt() !='' || get_the_content() !='') { //DEFAULT EXCERPT OR THE CONTENT
+					$seopress_titles_the_description = '<meta name="description" content="'.wp_trim_words(esc_html(get_the_excerpt()), 30).'" />';
+					$seopress_titles_the_description .= "\n";
+					
+					$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
+					echo $seopress_titles_description_template;
+				}
 			}
 		} elseif (is_post_type_archive() && seopress_titles_archive_desc_option()) { //IS POST TYPE ARCHIVE
 			$seopress_titles_the_description = '<meta name="description" content="'.seopress_titles_archive_desc_option().'" />';

@@ -124,6 +124,48 @@ jQuery(document).ready(function(){
 				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
 			},
 		});
+	});	
+	//Dublin Core
+	jQuery('#toggle-dublin-core').on('click', function() {
+		jQuery('#toggle-dublin-core').attr('data-toggle', jQuery('#toggle-dublin-core').attr('data-toggle') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxToggleFeatures.seopress_toggle_features,
+			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
+			data : {
+				action: 'seopress_toggle_features',
+				feature: 'toggle-dublin-core',
+				feature_value: jQuery('#toggle-dublin-core').attr('data-toggle'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Dublin Core has been successfully updated!');
+				jQuery( '#dublin-core-state' ).toggleClass('feature-state-on');
+				jQuery( '#dublin-core-state-default' ).toggleClass('feature-state-off');
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
+	//Rich Snippets
+	jQuery('#toggle-rich-snippets').on('click', function() {
+		jQuery('#toggle-rich-snippets').attr('data-toggle', jQuery('#toggle-rich-snippets').attr('data-toggle') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxToggleFeatures.seopress_toggle_features,
+			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
+			data : {
+				action: 'seopress_toggle_features',
+				feature: 'toggle-rich-snippets',
+				feature_value: jQuery('#toggle-rich-snippets').attr('data-toggle'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Structure Data Types has been successfully updated!');
+				jQuery( '#rich-snippets-state' ).toggleClass('feature-state-on');
+				jQuery( '#rich-snippets-state-default' ).toggleClass('feature-state-off');
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
 	});
     //Breadcrumbs
 	jQuery('#toggle-breadcrumbs').on('click', function() {

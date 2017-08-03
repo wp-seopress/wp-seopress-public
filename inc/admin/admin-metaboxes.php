@@ -135,37 +135,37 @@ function seopress_cpt($post){
                     <label for="seopress_robots_index_meta">
                         <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' />
                             '. __( 'noindex', 'wp-seopress' ) .'
-                    </label><span class="dashicons dashicons-info" title="'.__('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.','wp-seopress').'"></span>
+                    </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.','wp-seopress')).'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_follow_meta">
                         <input type="checkbox" name="seopress_robots_follow" id="seopress_robots_follow_meta" value="yes" '. checked( $seopress_robots_follow, 'yes', false ) .' />
                             '. __( 'nofollow', 'wp-seopress' ) .'
-                    </label><span class="dashicons dashicons-info" title="'.__('Do not follow links for all pages.','wp-seopress').'"></span>
+                    </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not follow links for all pages.','wp-seopress')).'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_odp_meta">
                         <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta" value="yes" '. checked( $seopress_robots_odp, 'yes', false ) .' />
                             '. __( 'noodp', 'wp-seopress' ) .'
-                    </label><span class="dashicons dashicons-info" title="'.__('Do not use Open Directory project metadata for titles or excerpts for all pages.','wp-seopress').'"></span>
+                    </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not use Open Directory project metadata for titles or excerpts for all pages.','wp-seopress')).'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_imageindex_meta">
                         <input type="checkbox" name="seopress_robots_imageindex" id="seopress_robots_imageindex_meta" value="yes" '. checked( $seopress_robots_imageindex, 'yes', false ) .' />
                             '. __( 'noimageindex', 'wp-seopress' ) .'
-                    </label><span class="dashicons dashicons-info" title="'.__('Do not index images from the entire site.','wp-seopress').'"></span>
+                    </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not index images from the entire site.','wp-seopress')).'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_archive_meta">
                         <input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta" value="yes" '. checked( $seopress_robots_archive, 'yes', false ) .' />
                             '. __( 'noarchive', 'wp-seopress' ) .'
-                    </label><span class="dashicons dashicons-info" title="'.__('Do not display a "Cached" link in the Google search results.','wp-seopress').'"></span>
+                    </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display a "Cached" link in the Google search results.','wp-seopress')).'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_snippet_meta">
                         <input type="checkbox" name="seopress_robots_snippet" id="seopress_robots_snippet_meta" value="yes" '. checked( $seopress_robots_snippet, 'yes', false ) .' />
                             '. __( 'nosnippet', 'wp-seopress' ) .'
-                    </label><span class="dashicons dashicons-info" title="'.__('Do not display a description in the Google search results for all pages.','wp-seopress').'"></span>
+                    </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display a description in the Google search results for all pages.','wp-seopress')).'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>

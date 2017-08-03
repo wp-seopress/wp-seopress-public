@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 
 <ul>
 	<li>WooCommerce</li>
+	<li>Dublin Core</li>
+	<li>Structured Data types</li>
 	<li>Breadcrumbs</li>
 	<li>Google Page Speed</li>
 	<li>Robots</li>
@@ -47,6 +49,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 	<li>301 Redirections</li>
 	<li>htaccess</li>
 </ul>
+
+[youtube https://www.youtube.com/watch?v=9XMXBHBdva0]
 
 <h3>Translation</h3>
 
@@ -86,15 +90,29 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 18. Advanced settings
 19. Import / Export / Reset settings
 20. WooCommerce (PRO)
-21. Breadcrumbs (PRO)
-22. Google Page Speed (PRO)
-23. Robots.txt (PRO)
-24. Google News Sitemap (PRO)
-24. Monitoring 404 (PRO)
-25. htaccess (PRO)
-26. SEOPress metaboxe in post, page, custom post type
+21. Dublin Core (PRO)
+22. Structured Data Types (PRO)
+23. Breadcrumbs (PRO)
+24. Google Page Speed (PRO)
+25. Robots.txt (PRO)
+26. Google News Sitemap (PRO)
+27. Monitoring 404 (PRO)
+28. htaccess (PRO)
+29. SEOPress metaboxe in post, page, custom post type
+30. Structured Data Types metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.2 =
+* NEW Add Dublin Core meta tags (SEOPress PRO only)
+* NEW Add Structured Data Types for Articles, Courses, Videos, Recipes, Events and Products (SEOPress PRO only)
+* NEW Add Organization phone number for Google Knowledge Graph
+* NEW Add Contact type for Google Knowledge Graph
+* NEW Add Contact option for Google Knowledge Graph
+* FIX Remove Meta description if empty
+* FIX Esc_html in tooltips
+* FIX Logo Google Knowledge Graph
+* FIX Social Accounts in Google Knowledge Graph
+* FIX Duplicate URL (trailing slash bug)
 = 1.1 =
 * NEW Add new advices in notifications center
 * NEW Link your robots.txt to your sitemap in one click

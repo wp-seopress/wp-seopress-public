@@ -39,6 +39,8 @@ class seopress_options
         if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
             $seopress_toggle_options['toggle-woocommerce'] = '1';
         }
+        $seopress_toggle_options['toggle-dublin-core'] = '1';
+        $seopress_toggle_options['toggle-rich-snippets'] = '1';
         $seopress_toggle_options['toggle-breadcrumbs'] = '1';
         $seopress_toggle_options['toggle-robots'] = '1';
         $seopress_toggle_options['toggle-404'] = '1';
@@ -780,6 +782,62 @@ class seopress_options
                         </div>
                         <div class="seopress-feature">
                             <div class="img-tool">
+                                <span class="dashicons dashicons-welcome-learn-more"></span>
+                            </div>
+                            <span class="inner">
+                                <h3><?php _e('Dublin Core','wp-seopress'); ?></h3>
+                                <p><?php _e('Add Dublin Core meta tags','wp-seopress'); ?></p>
+                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_dublin_core$8' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                <?php
+                                    if(seopress_get_toggle_dublin_core_option()=='1') { 
+                                        $seopress_get_toggle_dublin_core_option = '"1"';
+                                    } else { 
+                                        $seopress_get_toggle_dublin_core_option = '"0"';
+                                    }
+                                ?>
+                                <input type="checkbox" name="toggle-dublin-core" id="toggle-dublin-core" class="toggle" data-toggle=<?php echo $seopress_get_toggle_dublin_core_option; ?>>
+                                <label for="toggle-dublin-core"></label>
+                                <?php
+                                    if(seopress_get_toggle_dublin_core_option()=='1') { 
+                                        echo '<span id="dublin-core-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                        echo '<span id="dublin-core-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                    } else { 
+                                        echo '<span id="dublin-core-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                        echo '<span id="dublin-core-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                    }
+                                ?>
+                            </span>
+                        </div>
+                        <div class="seopress-feature">
+                            <div class="img-tool">
+                                <span class="dashicons dashicons-media-spreadsheet"></span>
+                            </div>
+                            <span class="inner">
+                                <h3><?php _e('Structured Data Types','wp-seopress'); ?></h3>
+                                <p><?php _e('Add data types to your content: articles, courses, recipes, videos, events and products','wp-seopress'); ?></p>
+                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets$9' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                <?php
+                                    if(seopress_get_toggle_rich_snippets_option()=='1') { 
+                                        $seopress_get_toggle_rich_snippets_option = '"1"';
+                                    } else { 
+                                        $seopress_get_toggle_rich_snippets_option = '"0"';
+                                    }
+                                ?>
+                                <input type="checkbox" name="toggle-rich-snippets" id="toggle-rich-snippets" class="toggle" data-toggle=<?php echo $seopress_get_toggle_rich_snippets_option; ?>>
+                                <label for="toggle-rich-snippets"></label>
+                                <?php
+                                    if(seopress_get_toggle_rich_snippets_option()=='1') { 
+                                        echo '<span id="rich-snippets-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                        echo '<span id="rich-snippets-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                    } else { 
+                                        echo '<span id="rich-snippets-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                        echo '<span id="rich-snippets-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                    }
+                                ?>
+                            </span>
+                        </div>
+                        <div class="seopress-feature">
+                            <div class="img-tool">
                                 <span class="dashicons dashicons-feedback"></span>                              
                             </div>
                             <span class="inner">
@@ -1297,6 +1355,30 @@ class seopress_options
             'seopress_setting_section_social_knowledge' // Section                  
         );
 
+        add_settings_field(
+            'seopress_social_knowledge_phone', // ID
+           __("Organization Phone number (only for Organization)","wp-seopress"), // Title
+            array( $this, 'seopress_social_knowledge_phone_callback' ), // Callback
+            'seopress-settings-admin-social-knowledge', // Page
+            'seopress_setting_section_social_knowledge' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_social_knowledge_contact_type', // ID
+           __("Contact type (only for Organization)","wp-seopress"), // Title
+            array( $this, 'seopress_social_knowledge_contact_type_callback' ), // Callback
+            'seopress-settings-admin-social-knowledge', // Page
+            'seopress_setting_section_social_knowledge' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_social_knowledge_contact_option', // ID
+           __("Contact option (only for Organization)","wp-seopress"), // Title
+            array( $this, 'seopress_social_knowledge_contact_option_callback' ), // Callback
+            'seopress-settings-admin-social-knowledge', // Page
+            'seopress_setting_section_social_knowledge' // Section                  
+        );
+
         //Social SECTION=====================================================================================
         add_settings_section( 
             'seopress_setting_section_social_accounts', // ID
@@ -1708,7 +1790,7 @@ class seopress_options
     public function sanitize( $input )
     {	
 
-        $seopress_sanitize_fields = array('seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua' );
+        $seopress_sanitize_fields = array('seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua' );
 
         $seopress_sanitize_site_verification = array('seopress_advanced_advanced_google', 'seopress_advanced_advanced_bing', 'seopress_advanced_advanced_pinterest', 'seopress_advanced_advanced_yandex' );
         
@@ -2572,11 +2654,11 @@ class seopress_options
         '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_name]" placeholder="'.__('eg: Apple','wp-seopress').'" value="%s"/>',
         esc_html( $this->options['seopress_social_knowledge_name'])
         );
-        
-    }    
+    }
 
-    public function seopress_social_knowledge_img_callback() {
-        $options = get_option( 'seopress_social_option_name' );  
+    public function seopress_social_knowledge_img_callback() 
+    {
+        $options = get_option( 'seopress_social_option_name' );
         
         $check = isset($options['seopress_social_knowledge_img']);      
 
@@ -2601,6 +2683,79 @@ class seopress_options
         echo '<br>';
         echo '<br>';
         echo '<img style="width:200px;max-height:300px;" src="'.seopress_social_knowledge_img_option().'"/>';
+    }
+
+    public function seopress_social_knowledge_phone_callback()
+    {
+        printf(
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_phone]" placeholder="'.__('eg: +33123456789 (internationalized version required)','wp-seopress').'" value="%s"/>',
+        esc_html( $this->options['seopress_social_knowledge_phone'])
+        );
+        
+    }
+
+    public function seopress_social_knowledge_contact_type_callback()
+    {
+        $options = get_option( 'seopress_social_option_name' );    
+        
+        $selected = $options['seopress_social_knowledge_contact_type'];
+        
+        echo '<select id="seopress_social_knowledge_contact_type" name="seopress_social_option_name[seopress_social_knowledge_contact_type]">';
+            echo ' <option '; 
+                if ('customer support' == $selected) echo 'selected="selected"'; 
+                echo ' value="customer support">'. __("Customer support","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('technical support' == $selected) echo 'selected="selected"'; 
+                echo ' value="technical support">'. __("Technical support","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('billing support' == $selected) echo 'selected="selected"'; 
+                echo ' value="billing support">'. __("Billing support","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('bill payment' == $selected) echo 'selected="selected"'; 
+                echo ' value="bill payment">'. __("Bill payment","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('sales' == $selected) echo 'selected="selected"'; 
+                echo ' value="sales">'. __("Sales","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('credit card support' == $selected) echo 'selected="selected"'; 
+                echo ' value="credit card support">'. __("Credit card support","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('emergency' == $selected) echo 'selected="selected"'; 
+                echo ' value="emergency">'. __("Emergency","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('baggage tracking' == $selected) echo 'selected="selected"'; 
+                echo ' value="baggage tracking">'. __("Baggage tracking","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('roadside assistance' == $selected) echo 'selected="selected"'; 
+                echo ' value="roadside assistance">'. __("Roadside assistance","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('package tracking' == $selected) echo 'selected="selected"'; 
+                echo ' value="package tracking">'. __("Package tracking","wp-seopress") .'</option>';
+        echo '</select>';
+
+        if (isset($this->options['seopress_social_knowledge_contact_type'])) {
+            esc_attr( $this->options['seopress_social_knowledge_contact_type']);
+        }
+    }
+
+    public function seopress_social_knowledge_contact_option_callback()
+    {
+        $options = get_option( 'seopress_social_option_name' );    
+        
+        $selected = $options['seopress_social_knowledge_contact_option'];
+        
+        echo '<select id="seopress_social_knowledge_contact_option" name="seopress_social_option_name[seopress_social_knowledge_contact_option]">';
+            echo ' <option '; 
+                if ('TollFree' == $selected) echo 'selected="selected"'; 
+                echo ' value="TollFree">'. __("Toll Free","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('HearingImpairedSupported' == $selected) echo 'selected="selected"'; 
+                echo ' value="HearingImpairedSupported">'. __("Hearing impaired supported","wp-seopress") .'</option>';
+        echo '</select>';
+
+        if (isset($this->options['seopress_social_knowledge_contact_option'])) {
+            esc_attr( $this->options['seopress_social_knowledge_contact_option']);
+        }
     }
 
     public function seopress_social_accounts_facebook_callback()
