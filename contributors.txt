@@ -3,6 +3,7 @@ Great people who contributed to this plugin :
 Developers:
 - Benjamin Denis: contact@seopress.org / @wpcloudy
 
-Beta testers:
+Beta testers / feedbacks:
 - Mickael Gris: mickael.gris@gmail.com / @mickaelgris
 - Aurélien Denis: contact@wp-alacarte.com / @wpchannel
+- Sébastien Serre: @sebastienserre

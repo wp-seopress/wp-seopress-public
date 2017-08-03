@@ -515,148 +515,173 @@ class seopress_options
         echo seopress_admin_header();
         ?>
             <div id="seopress-content">
-                <div id="seopress-notifications-center">
-                    <h2><span class="dashicons dashicons-flag"></span><?php _e('Notifications Center','wp-seopress'); ?></h2>
-                    <?php if (is_plugin_active('wordpress-seo/wp-seo.php')) { ?>
-                        <div class="seopress-alert">
-                            <p>
-                                <span class="dashicons dashicons-warning"></span>
-                                <?php _e('We notice that you use Yoast SEO plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
-                            </p>
-                            <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export#yoast-migration-tool' ); ?>"><?php _e('Migrate!','wp-seopress'); ?></a>
-                        </div>
-                    <?php } ?>
-                    <?php if (!is_ssl()) { ?>
+                <?php 
+                    //Notifications Center
+                    function seopress_advanced_appearance_notifications_option() {
+                        $seopress_advanced_appearance_notifications_option = get_option("seopress_advanced_option_name");
+                        if ( ! empty ( $seopress_advanced_appearance_notifications_option ) ) {
+                            foreach ($seopress_advanced_appearance_notifications_option as $key => $seopress_advanced_appearance_notifications_value)
+                                $options[$key] = $seopress_advanced_appearance_notifications_value;
+                             if (isset($seopress_advanced_appearance_notifications_option['seopress_advanced_appearance_notifications'])) { 
+                                return $seopress_advanced_appearance_notifications_option['seopress_advanced_appearance_notifications'];
+                             }
+                        }
+                    }
+                ?>
+                <?php if(seopress_advanced_appearance_notifications_option() !='1') { ?>
+                    <div id="seopress-notifications-center">
+                        <h2><span class="dashicons dashicons-flag"></span><?php _e('Notifications Center','wp-seopress'); ?></h2>
+                        <?php if (is_plugin_active('wordpress-seo/wp-seo.php')) { ?>
+                            <div class="seopress-alert">
+                                <p>
+                                    <span class="dashicons dashicons-warning"></span>
+                                    <?php _e('We notice that you use Yoast SEO plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
+                                </p>
+                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export#yoast-migration-tool' ); ?>"><?php _e('Migrate!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
+                        <?php if (!is_ssl()) { ?>
+                            <?php
+                            function seopress_get_hidden_notices_ssl_option() {
+                                $seopress_get_hidden_notices_ssl_option = get_option("seopress_notices");
+                                if ( ! empty ( $seopress_get_hidden_notices_ssl_option ) ) {
+                                    foreach ($seopress_get_hidden_notices_ssl_option as $key => $seopress_get_hidden_notices_ssl_value)
+                                        $options[$key] = $seopress_get_hidden_notices_ssl_value;
+                                     if (isset($seopress_get_hidden_notices_ssl_option['notice-ssl'])) { 
+                                        return $seopress_get_hidden_notices_ssl_option['notice-ssl'];
+                                     }
+                                }
+                            }
+                            if(seopress_get_hidden_notices_ssl_option() =='1') { 
+                                //do nothing
+                            } else { ?>
+                                <div id="notice-ssl-alert" class="seopress-alert deleteable">
+                                    <p>
+                                        <span class="dashicons dashicons-warning"></span>
+                                        <?php _e('Your site doesn\'t use an SSL certificate!','wp-seopress'); ?> 
+                                        <a href="https://webmasters.googleblog.com/2014/08/https-as-ranking-signal.html" target="_blank"><?php _e('Learn more','wp-seopress'); ?></a>
+                                        <span class="impact low"><?php _e('Low impact','wp-seopress'); ?></span>
+                                    </p>
+                                    <a class="button-primary" href="https://www.namecheap.com/?aff=105841" target="_blank"><?php _e('Buy an SSL!','wp-seopress'); ?></a>
+                                    <span name="notice-ssl" id="notice-ssl" class="dashicons dashicons-trash remove-notice" data-notice="notice-ssl"></span>
+                                </div>
+                            <?php }
+                        ?>
+                        <?php } ?>
+                        <?php if (get_option('blog_public') !='1') { ?>
+                            <div class="seopress-alert">
+                                <p>
+                                    <span class="dashicons dashicons-warning"></span>
+                                    <?php _e('Your site is not visible to Search Engines!','wp-seopress'); ?>
+                                    <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
+                                </p>
+                                <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
+                        <?php if (get_option('blogname') =='') { ?>
+                            <div class="seopress-alert">
+                                <p>
+                                    <span class="dashicons dashicons-warning"></span>
+                                    <?php _e('Your site title is empty!','wp-seopress'); ?>
+                                    <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
+                                </p>
+                                <a class="button-primary" href="<?php echo admin_url( 'options-general.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
+                        <?php if (get_option('permalink_structure') =='') { ?>
+                            <div class="seopress-alert">
+                                <p>
+                                    <span class="dashicons dashicons-warning"></span>
+                                    <?php _e('Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this.','wp-seopress'); ?>
+                                    <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
+                                </p>
+                                <a class="button-primary" href="<?php echo admin_url( 'options-permalink.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
+                        <?php if (seopress_xml_sitemap_general_enable_option() !='1') { ?>
+                            <div class="seopress-alert">
+                                <p>
+                                    <span class="dashicons dashicons-warning"></span>
+                                    <?php _e('You don\'t have an XML Sitemap!','wp-seopress'); ?>
+                                    <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
+                                </p>
+                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
+
                         <?php
-                        function seopress_get_hidden_notices_ssl_option() {
-                            $seopress_get_hidden_notices_ssl_option = get_option("seopress_notices");
-                            if ( ! empty ( $seopress_get_hidden_notices_ssl_option ) ) {
-                                foreach ($seopress_get_hidden_notices_ssl_option as $key => $seopress_get_hidden_notices_ssl_value)
-                                    $options[$key] = $seopress_get_hidden_notices_ssl_value;
-                                 if (isset($seopress_get_hidden_notices_ssl_option['notice-ssl'])) { 
-                                    return $seopress_get_hidden_notices_ssl_option['notice-ssl'];
-                                 }
+                            function seopress_get_hidden_notices_google_business_option() {
+                                $seopress_get_hidden_notices_google_business_option = get_option("seopress_notices");
+                                if ( ! empty ( $seopress_get_hidden_notices_google_business_option ) ) {
+                                    foreach ($seopress_get_hidden_notices_google_business_option as $key => $seopress_get_hidden_notices_google_business_value)
+                                        $options[$key] = $seopress_get_hidden_notices_google_business_value;
+                                     if (isset($seopress_get_hidden_notices_google_business_option['notice-google-business'])) { 
+                                        return $seopress_get_hidden_notices_google_business_option['notice-google-business'];
+                                     }
+                                }
                             }
-                        }
-                        if(seopress_get_hidden_notices_ssl_option() =='1') { 
-                            //do nothing
-                        } else { ?>
-                            <div id="notice-ssl-alert" class="seopress-alert deleteable">
+                            if(seopress_get_hidden_notices_google_business_option() =='1') { 
+                                //do nothing
+                            } else { ?>
+                                <div id="notice-google-business-alert" class="seopress-alert deleteable">
+                                    <p>
+                                        <span class="dashicons dashicons-warning"></span>
+                                        <?php _e('Do you have a Google Business page? It\'s free!','wp-seopress'); ?>
+                                        <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
+                                    </p>
+                                    <a class="button-primary" href="https://www.google.com/business/go/" target="_blank"><?php _e('Create your page now!','wp-seopress'); ?></a>
+                                    <span name="notice-google-business" id="notice-google-business" class="dashicons dashicons-trash remove-notice" data-notice="notice-google-business"></span>
+                                </div>
+                            <?php }
+                        ?>
+
+                        <?php
+                            function seopress_get_hidden_notices_search_console_option() {
+                                $seopress_get_hidden_notices_search_console_option = get_option("seopress_notices");
+                                if ( ! empty ( $seopress_get_hidden_notices_search_console_option ) ) {
+                                    foreach ($seopress_get_hidden_notices_search_console_option as $key => $seopress_get_hidden_notices_search_console_value)
+                                        $options[$key] = $seopress_get_hidden_notices_search_console_value;
+                                     if (isset($seopress_get_hidden_notices_search_console_option['notice-search-console'])) { 
+                                        return $seopress_get_hidden_notices_search_console_option['notice-search-console'];
+                                     }
+                                }
+                            }
+                            function seopress_get_google_site_verification_option() {
+                                $seopress_get_google_site_verification_option = get_option("seopress_advanced_option_name");
+                                if ( ! empty ( $seopress_get_google_site_verification_option ) ) {
+                                    foreach ($seopress_get_google_site_verification_option as $key => $seopress_get_google_site_verification_value)
+                                        $options[$key] = $seopress_get_google_site_verification_value;
+                                     if (isset($seopress_get_google_site_verification_option['seopress_advanced_advanced_google'])) { 
+                                        return $seopress_get_google_site_verification_option['seopress_advanced_advanced_google'];
+                                     }
+                                }
+                            }
+                            if(seopress_get_hidden_notices_search_console_option() =='1') { 
+                                //do nothing
+                            } elseif(seopress_get_google_site_verification_option() =='') { ?>
+                                <div id="notice-search-console-alert" class="seopress-alert deleteable">
+                                    <p>
+                                        <span class="dashicons dashicons-warning"></span>
+                                        <?php _e('Add your site to Google. It\'s free!','wp-seopress'); ?>
+                                        <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
+                                    </p>
+                                    <a class="button-primary" href="https://www.google.com/webmasters/tools/home" target="_blank"><?php _e('Add your site to Search Console!','wp-seopress'); ?></a>
+                                    <span name="notice-search-console" id="notice-search-console" class="dashicons dashicons-trash remove-notice" data-notice="notice-search-console"></span>
+                                </div>
+                            <?php }
+                        ?>
+
+                        <?php if (get_option("seopress_pro_license_key") =='' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                            <div class="seopress-alert">
                                 <p>
                                     <span class="dashicons dashicons-warning"></span>
-                                    <?php _e('Your site doesn\'t use an SSL certificate!','wp-seopress'); ?> 
-                                    <a href="https://webmasters.googleblog.com/2014/08/https-as-ranking-signal.html" target="_blank"><?php _e('Learn more','wp-seopress'); ?></a>
-                                    <span class="impact low"><?php _e('Low impact','wp-seopress'); ?></span>
+                                    <?php _e('You have to enter your licence key to get updates and support','wp-seopress'); ?>
                                 </p>
-                                <a class="button-primary" href="https://www.namecheap.com/?aff=105841" target="_blank"><?php _e('Buy an SSL!','wp-seopress'); ?></a>
-                                <span name="notice-ssl" id="notice-ssl" class="dashicons dashicons-trash remove-notice" data-notice="notice-ssl"></span>
+                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-license' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
                             </div>
-                        <?php }
-                    ?>
-                    <?php } ?>
-                    <?php if (get_option('blog_public') !='1') { ?>
-                        <div class="seopress-alert">
-                            <p>
-                                <span class="dashicons dashicons-warning"></span>
-                                <?php _e('Your site is not visible to Search Engines!','wp-seopress'); ?>
-                                <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
-                            </p>
-                            <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                        </div>
-                    <?php } ?>
-                    <?php if (get_option('blogname') =='') { ?>
-                        <div class="seopress-alert">
-                            <p>
-                                <span class="dashicons dashicons-warning"></span>
-                                <?php _e('Your site title is empty!','wp-seopress'); ?>
-                                <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
-                            </p>
-                            <a class="button-primary" href="<?php echo admin_url( 'options-general.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                        </div>
-                    <?php } ?>
-                    <?php if (get_option('permalink_structure') =='') { ?>
-                        <div class="seopress-alert">
-                            <p>
-                                <span class="dashicons dashicons-warning"></span>
-                                <?php _e('Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this.','wp-seopress'); ?>
-                                <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
-                            </p>
-                            <a class="button-primary" href="<?php echo admin_url( 'options-permalink.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                        </div>
-                    <?php } ?>
-                    <?php if (seopress_xml_sitemap_general_enable_option() !='1') { ?>
-                        <div class="seopress-alert">
-                            <p>
-                                <span class="dashicons dashicons-warning"></span>
-                                <?php _e('You don\'t have an XML Sitemap!','wp-seopress'); ?>
-                                <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
-                            </p>
-                            <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                        </div>
-                    <?php } ?>
-
-                    <?php
-                        function seopress_get_hidden_notices_google_business_option() {
-                            $seopress_get_hidden_notices_google_business_option = get_option("seopress_notices");
-                            if ( ! empty ( $seopress_get_hidden_notices_google_business_option ) ) {
-                                foreach ($seopress_get_hidden_notices_google_business_option as $key => $seopress_get_hidden_notices_google_business_value)
-                                    $options[$key] = $seopress_get_hidden_notices_google_business_value;
-                                 if (isset($seopress_get_hidden_notices_google_business_option['notice-google-business'])) { 
-                                    return $seopress_get_hidden_notices_google_business_option['notice-google-business'];
-                                 }
-                            }
-                        }
-                        if(seopress_get_hidden_notices_google_business_option() =='1') { 
-                            //do nothing
-                        } else { ?>
-                            <div id="notice-google-business-alert" class="seopress-alert deleteable">
-                                <p>
-                                    <span class="dashicons dashicons-warning"></span>
-                                    <?php _e('Do you have a Google Business page? It\'s free!','wp-seopress'); ?>
-                                    <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
-                                </p>
-                                <a class="button-primary" href="https://www.google.com/business/go/" target="_blank"><?php _e('Create your page now!','wp-seopress'); ?></a>
-                                <span name="notice-google-business" id="notice-google-business" class="dashicons dashicons-trash remove-notice" data-notice="notice-google-business"></span>
-                            </div>
-                        <?php }
-                    ?>
-
-                    <?php
-                        function seopress_get_hidden_notices_search_console_option() {
-                            $seopress_get_hidden_notices_search_console_option = get_option("seopress_notices");
-                            if ( ! empty ( $seopress_get_hidden_notices_search_console_option ) ) {
-                                foreach ($seopress_get_hidden_notices_search_console_option as $key => $seopress_get_hidden_notices_search_console_value)
-                                    $options[$key] = $seopress_get_hidden_notices_search_console_value;
-                                 if (isset($seopress_get_hidden_notices_search_console_option['notice-search-console'])) { 
-                                    return $seopress_get_hidden_notices_search_console_option['notice-search-console'];
-                                 }
-                            }
-                        }
-                        if(seopress_get_hidden_notices_search_console_option() =='1') { 
-                            //do nothing
-                        } else { ?>
-                            <div id="notice-search-console-alert" class="seopress-alert deleteable">
-                                <p>
-                                    <span class="dashicons dashicons-warning"></span>
-                                    <?php _e('Add your site to Google. It\'s free!','wp-seopress'); ?>
-                                    <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
-                                </p>
-                                <a class="button-primary" href="https://www.google.com/webmasters/tools/home" target="_blank"><?php _e('Add your site to Search Console!','wp-seopress'); ?></a>
-                                <span name="notice-search-console" id="notice-search-console" class="dashicons dashicons-trash remove-notice" data-notice="notice-search-console"></span>
-                            </div>
-                        <?php }
-                    ?>
-
-                    <?php if (get_option("seopress_pro_license_key") =='' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-                        <div class="seopress-alert">
-                            <p>
-                                <span class="dashicons dashicons-warning"></span>
-                                <?php _e('You have to enter your licence key to get updates and support','wp-seopress'); ?>
-                            </p>
-                            <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-license' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                        </div>
-                    <?php } ?>
-                </div>
+                        <?php } ?>
+                    </div><!--#seopress-notifications-center-->
+                <?php } ?>
                 <div class="seopress-page-list">
                     <div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>
                     <div class="seopress-feature">
@@ -1782,6 +1807,14 @@ class seopress_options
             array( $this, 'seopress_advanced_advanced_stop_words_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
             'seopress_setting_section_advanced_advanced' // Section                  
+        );        
+
+        add_settings_field(
+            'seopress_advanced_advanced_category_url', // ID
+           __("Remove /category/ in URL","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_category_url_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
         );
 
         add_settings_field(
@@ -1829,6 +1862,14 @@ class seopress_options
             'seopress_advanced_appearance_adminbar', // ID
            __("SEOPress in admin bar","wp-seopress"), // Title
             array( $this, 'seopress_advanced_appearance_adminbar_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_appearance_notifications', // ID
+           __("Hide SEOPress Notifications Center","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_notifications_callback' ), // Callback
             'seopress-settings-admin-advanced-appearance', // Page
             'seopress_setting_section_advanced_appearance' // Section                  
         );
@@ -1928,7 +1969,6 @@ class seopress_options
 
     public function print_section_info_xml_sitemap_general()
     {
-        echo '<p><a href="https://www.seopress.org/support/guides/enable-xml-sitemaps/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a></p>';
         echo '<p>'.__('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress').'</p>';
         echo '<p>'.__('Only the last 1000 items are listed in Sitemaps for performances issues.', 'wp-seopress').'</p>';
 
@@ -2630,6 +2670,8 @@ class seopress_options
         
         echo '<label for="seopress_xml_sitemap_general_enable">'. __( 'Enable XML Sitemap', 'wp-seopress' ) .'</label>';
         
+        echo '<a href="https://www.seopress.org/support/guides/enable-xml-sitemaps/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
+
         if (isset($this->options['seopress_xml_sitemap_general_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_general_enable']);
         }
@@ -2646,6 +2688,8 @@ class seopress_options
         echo ' value="1"/>';
         
         echo '<label for="seopress_xml_sitemap_html_enable">'. __( 'Enable HTML Sitemap', 'wp-seopress' ) .'</label>';
+
+        echo '<a href="https://www.seopress.org/support/guides/enable-html-sitemap/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
         
         if (isset($this->options['seopress_xml_sitemap_html_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_html_enable']);
@@ -3633,6 +3677,23 @@ class seopress_options
         }
     }
 
+    public function seopress_advanced_advanced_category_url_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_category_url']);      
+        
+        echo '<input id="seopress_advanced_advanced_category_url" name="seopress_advanced_option_name[seopress_advanced_advanced_category_url]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_category_url">'. __( 'Remove /category/ in your permalinks', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_advanced_category_url'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_category_url']);
+        }
+    }
+
     public function seopress_advanced_advanced_google_callback()
     {
         printf(
@@ -3687,6 +3748,23 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_appearance_adminbar'])) {
             esc_attr( $this->options['seopress_advanced_appearance_adminbar']);
+        }
+    }    
+
+    public function seopress_advanced_appearance_notifications_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_notifications']);      
+        
+        echo '<input id="seopress_advanced_appearance_notifications" name="seopress_advanced_option_name[seopress_advanced_appearance_notifications]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_notifications">'. __( 'Hide Notifications Center in SEOPress Dashboard page', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_notifications'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_notifications']);
         }
     }
 

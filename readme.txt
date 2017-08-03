@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 	<li>Link your social media accounts to your site.</li>
 	<li>Redirections in post, pages, custom post types</li>
 	<li>Remove stop words (english, french, spanish, german, italian, portuguese)</li>
+	<li>Remove /category/ in URLs</li>
 	<li>Redirect attachment pages to post parent</li>
 	<li>Import / Export settings from site to site.</li>
 	<li>Import posts metadata from Yoast SEO</li>
@@ -107,6 +108,17 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 30. Structured Data Types metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.4 =
+* NEW Remove /category/ in permalinks (works with Polylang and WPML)
+* NEW Show/Hide Notifications Center
+* NEW Allow Google AdSense bot, Allow Google Image Bot, Add Default WP rules in on click in robots.txt
+* INFO Hide Search Console notice if Google site verification field isn't empty
+* INFO Minifying CSS
+* FIX Canonical tag
+* FIX Facebook Admin ID
+* FIX Facebook App ID
+* FIX Remove stop words conflict with WooCommerce Orders report
+* FIX Fatal error: Uncaught Error: Call to undefined function seopress_titles_single_desc_option()
 = 1.3 =
 * NEW Redirect 404 to homepage/custom url automatically with custom status code (301, 302 or 307) - (SEOPress PRO only)
 * NEW Receive email notifications each time a 404 is detected (SEOPress PRO only)

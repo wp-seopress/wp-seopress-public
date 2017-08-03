@@ -461,6 +461,48 @@ function seopress_social_fb_img_hook() {
 }
 add_action( 'wp_head', 'seopress_social_fb_img_hook', 1 );
 
+//OG Facebook Admin ID
+function seopress_social_facebook_admin_id_option() {
+	$seopress_social_facebook_admin_id_option = get_option("seopress_social_option_name");
+	if ( ! empty ( $seopress_social_facebook_admin_id_option ) ) {
+		foreach ($seopress_social_facebook_admin_id_option as $key => $seopress_social_facebook_admin_id_value)
+			$options[$key] = $seopress_social_facebook_admin_id_value;
+		 if (isset($seopress_social_facebook_admin_id_option['seopress_social_facebook_admin_id'])) { 
+		 	return $seopress_social_facebook_admin_id_option['seopress_social_facebook_admin_id'];
+		 }
+	}
+}
+function seopress_social_facebook_admin_id_hook() {
+	if (seopress_social_facebook_og_option() =='1' && seopress_social_facebook_admin_id_option() !='') {
+
+		$seopress_social_admin_id = '<meta property="fb:admins" content="'.seopress_social_facebook_admin_id_option().'" />';
+		
+		echo $seopress_social_admin_id."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_facebook_admin_id_hook', 1 );
+
+//OG Facebook App ID
+function seopress_social_facebook_app_id_option() {
+	$seopress_social_facebook_app_id_option = get_option("seopress_social_option_name");
+	if ( ! empty ( $seopress_social_facebook_app_id_option ) ) {
+		foreach ($seopress_social_facebook_app_id_option as $key => $seopress_social_facebook_app_id_value)
+			$options[$key] = $seopress_social_facebook_app_id_value;
+		 if (isset($seopress_social_facebook_app_id_option['seopress_social_facebook_app_id'])) { 
+		 	return $seopress_social_facebook_app_id_option['seopress_social_facebook_app_id'];
+		 }
+	}
+}
+function seopress_social_facebook_app_id_hook() {
+	if (seopress_social_facebook_og_option() =='1' && seopress_social_facebook_app_id_option() !="") {
+
+		$seopress_social_app_id = '<meta property="fb:app_id" content="'.seopress_social_facebook_app_id_option().'" />';
+		
+		echo $seopress_social_app_id."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_facebook_app_id_hook', 1 );
+
 //Twitter
 //Twitter Card Enabled
 function seopress_social_twitter_card_option() {

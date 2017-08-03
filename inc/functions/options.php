@@ -65,4 +65,75 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
 		}
 	}
+	//No /category/ in URL
+	function seopress_advanced_advanced_category_url_option() {
+		$seopress_advanced_advanced_category_url_option = get_option("seopress_advanced_option_name");
+		if ( ! empty ( $seopress_advanced_advanced_category_url_option ) ) {
+			foreach ($seopress_advanced_advanced_category_url_option as $key => $seopress_advanced_advanced_category_url_value)
+				$options[$key] = $seopress_advanced_advanced_category_url_value;
+			 if (isset($seopress_advanced_advanced_category_url_option['seopress_advanced_advanced_category_url'])) { 
+			 	return $seopress_advanced_advanced_category_url_option['seopress_advanced_advanced_category_url'];
+			 }
+		}
+	};
+
+	if (seopress_advanced_advanced_category_url_option() !='') {
+		//@credits : WordPress VIP
+		add_filter( 'category_rewrite_rules', 'seopress_filter_category_rewrite_rules' );
+		function seopress_filter_category_rewrite_rules( $rules ) {
+			 if ( class_exists( 'Sitepress' ) ) {
+				global $sitepress;
+				remove_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ) );
+				$categories = get_categories( array( 'hide_empty' => false ) );
+				add_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ), 10, 4 );
+			} else {
+		    	$categories = get_categories( array( 'hide_empty' => false ) );
+		 	}
+		    if ( is_array( $categories ) && ! empty( $categories ) ) {
+		        $slugs = array();
+		 
+		        foreach ( $categories as $category ) {
+		            if ( is_object( $category ) && ! is_wp_error( $category ) ) {
+		                if ( 0 == $category->category_parent )
+		                    $slugs[] = $category->slug;
+		                else
+		                    $slugs[] = trim( get_category_parents( $category->term_id, false, '/', true ), '/' );
+		            }
+		        }
+		 
+		        if ( ! empty( $slugs ) ) {
+		            $rules = array();
+		 
+		            foreach ( $slugs as $slug ) {
+		                $rules[ '(' . $slug . ')/feed/(feed|rdf|rss|rss2|atom)?/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
+		                $rules[ '(' . $slug . ')/(feed|rdf|rss|rss2|atom)/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
+		                $rules[ '(' . $slug . ')(/page/(\d+))?/?$' ] = 'index.php?category_name=$matches[1]&paged=$matches[3]';
+		            }
+		        }
+		    }
+		    return $rules;
+		}
+		add_action('template_redirect', 'seopress_category_redirect', 1);
+		function seopress_category_redirect(){
+			global $wp;
+			$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
+
+			$category_base = get_option( 'category_base' );
+
+			if ($category_base !='') {
+				if (preg_match('/'.$category_base.'/', $current_url)) {
+					$new_url = str_replace('/'.$category_base, '', $current_url);
+					wp_redirect($new_url, 301 );
+					exit();
+				}
+			} else {
+				$category_base = 'category';
+				if (preg_match('/'.$category_base.'/', $current_url)) {
+					$new_url = str_replace('/'.$category_base, '', $current_url);
+					wp_redirect($new_url, 301 );
+		    		exit();
+	    		}
+			}
+		}
+	}
 }

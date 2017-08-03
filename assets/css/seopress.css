@@ -622,6 +622,7 @@
     float: left;
     margin-right: 5px;
     user-select: none;
+    margin-bottom: 5px;
 }
 .seopress-option .tag-title:hover, .seopress-option .tag-title:focus, .seopress-option .tag-title:active {
     background: #232323;
@@ -721,6 +722,7 @@ input.toggle[data-toggle="1"] + label:after {
     border-bottom: none;
     background: none;
     opacity: 0.5;
+    padding: 5px 8px;
     transition: opacity 300ms linear;
 }
 .seopress-option .about-wrap h2 .nav-tab-active, .seopress-option .nav-tab-active, .seopress-option .nav-tab-active:hover {
