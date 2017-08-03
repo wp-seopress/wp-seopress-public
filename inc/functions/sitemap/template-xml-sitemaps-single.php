@@ -72,16 +72,18 @@ function seopress_xml_sitemap_single() {
 
 						if ((isset($images) && !empty ($images) && $images->length>=1) || (isset($galleries) && !empty($galleries)) || (isset($product) && !empty($product_img)) || $post_thumbnail !='') { 
 							
-							$seopress_sitemaps .= '<image:image>';
 							//Standard img
 							if (isset($images) && !empty ($images)) {
 								if ($images->length>=1) {
 									foreach($images as $img) {
 								        $url = $img->getAttribute('src');
+								        $seopress_sitemaps .= '<image:image>';
 								        $seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
 								        $seopress_sitemaps .= $url;
 								        $seopress_sitemaps .= '</image:loc>';
+								        $seopress_sitemaps .= "\n";
+								        $seopress_sitemaps .= '</image:image>';
 								    }
 								}
 							}
@@ -89,32 +91,39 @@ function seopress_xml_sitemap_single() {
 							if ($galleries !='') {
 								foreach( $galleries as $gallery ) {
 									foreach( $gallery as $url ) {
+										$seopress_sitemaps .= '<image:image>';
 										$seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
 								        $seopress_sitemaps .= $url;
 								        $seopress_sitemaps .= '</image:loc>';
+								        $seopress_sitemaps .= "\n";
+								        $seopress_sitemaps .= '</image:image>';
 									}
 								}
 							}
 							//WooCommerce img
 							if ($product !='' && $product_img !='') {
 								foreach( $product_img as $product_attachment_id ) {
+									$seopress_sitemaps .= '<image:image>';
 									$seopress_sitemaps .= "\n";
 							       	$seopress_sitemaps .= '<image:loc>';
 							        $seopress_sitemaps .= wp_get_attachment_url( $product_attachment_id );
 							        $seopress_sitemaps .= '</image:loc>';
+							        $seopress_sitemaps .= "\n";
+							        $seopress_sitemaps .= '</image:image>';
 								}
 							}
 							//Post thumbnail
 							if ($post_thumbnail !='') {
+								$seopress_sitemaps .= '<image:image>';
 								$seopress_sitemaps .= "\n";
 						       	$seopress_sitemaps .= '<image:loc>';
 						        $seopress_sitemaps .= $post_thumbnail;
 						        $seopress_sitemaps .= '</image:loc>';
+						        $seopress_sitemaps .= "\n";
+						        $seopress_sitemaps .= '</image:image>';
 							}
 
-						    $seopress_sitemaps .= "\n";
-						    $seopress_sitemaps .= '</image:image>';
 						    $seopress_sitemaps .= "\n";
 						}
 					}

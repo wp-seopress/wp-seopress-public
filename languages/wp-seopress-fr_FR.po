@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2017-03-29 21:41+0200\n"
-"PO-Revision-Date: 2017-03-29 21:41+0200\n"
+"POT-Creation-Date: 2017-04-08 11:37+0200\n"
+"PO-Revision-Date: 2017-04-08 11:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: fr_FR\n"
@@ -33,70 +33,70 @@ msgstr "Vous aimez SEOPress ? N'oubliez pas de nous noter 5 étoiles !"
 msgid "Support"
 msgstr "Support"
 
-#: inc/admin/admin-metaboxes.php:37 inc/admin/admin-metaboxes.php:39
+#: inc/admin/admin-metaboxes.php:26 inc/admin/admin-metaboxes.php:28
 #: inc/admin/adminbar.php:16 inc/functions/options-advanced-admin.php:461
 msgid "SEO"
 msgstr "SEO"
 
-#: inc/admin/admin-metaboxes.php:134
+#: inc/admin/admin-metaboxes.php:123
 msgid "Titles settings"
 msgstr "Paramètres de titres"
 
-#: inc/admin/admin-metaboxes.php:135 inc/admin/admin.php:179
+#: inc/admin/admin-metaboxes.php:124 inc/admin/admin.php:179
 #: inc/admin/admin.php:269 inc/admin/admin.php:541 inc/admin/admin.php:1012
 #: inc/admin/adminbar.php:46
 msgid "Advanced"
 msgstr "Avancé"
 
-#: inc/admin/admin-metaboxes.php:136
+#: inc/admin/admin-metaboxes.php:125
 msgid "Social"
 msgstr "Social"
 
-#: inc/admin/admin-metaboxes.php:138
+#: inc/admin/admin-metaboxes.php:127
 msgid "Redirection"
 msgstr "Redirection"
 
-#: inc/admin/admin-metaboxes.php:141
+#: inc/admin/admin-metaboxes.php:130
 msgid "Google News"
 msgstr "Google News"
 
-#: inc/admin/admin-metaboxes.php:150
+#: inc/admin/admin-metaboxes.php:139
 msgid "Title"
 msgstr "Titre"
 
-#: inc/admin/admin-metaboxes.php:151
+#: inc/admin/admin-metaboxes.php:140
 msgid "Enter your title"
 msgstr "Entrez votre titre"
 
-#: inc/admin/admin-metaboxes.php:155 inc/admin/admin-metaboxes.php:163
+#: inc/admin/admin-metaboxes.php:144 inc/admin/admin-metaboxes.php:152
 msgid "(maximum recommended limit)"
 msgstr "(limite maximale recommandée)"
 
-#: inc/admin/admin-metaboxes.php:158 inc/admin/admin.php:611
+#: inc/admin/admin-metaboxes.php:147 inc/admin/admin.php:611
 #: inc/admin/admin.php:1363 inc/functions/options-advanced-admin.php:471
 msgid "Meta description"
 msgstr "Meta description"
 
-#: inc/admin/admin-metaboxes.php:159
+#: inc/admin/admin-metaboxes.php:148
 msgid "Enter your meta description"
 msgstr "Entrez votre méta description"
 
-#: inc/admin/admin-metaboxes.php:168
+#: inc/admin/admin-metaboxes.php:157
 msgid "Google Snippet Preview"
 msgstr "Aperçu Google Snippet"
 
-#: inc/admin/admin-metaboxes.php:169
+#: inc/admin/admin-metaboxes.php:158
 msgid "This is what your page will look like in Google search results"
 msgstr ""
 "Voilà à quoi ressemblera votre page dans les résultats de recherche Google"
 
-#: inc/admin/admin-metaboxes.php:185 inc/admin/admin.php:1521
+#: inc/admin/admin-metaboxes.php:174 inc/admin/admin.php:1521
 #: inc/admin/admin.php:2388 inc/admin/admin.php:2521 inc/admin/admin.php:2613
 #: inc/admin/admin.php:2688 inc/admin/admin.php:2739 inc/admin/admin.php:2823
 msgid "noindex"
 msgstr "noindex"
 
-#: inc/admin/admin-metaboxes.php:186 inc/admin/admin.php:2825
+#: inc/admin/admin-metaboxes.php:175 inc/admin/admin.php:2825
 msgid ""
 "Do not display all pages of the site in Google search results and do not "
 "display \"Cached\" links in search results."
@@ -104,22 +104,22 @@ msgstr ""
 "Ne pas afficher toutes les pages du site dans les résultats de recherche "
 "<br>et ne pas afficher de lien \"En cache\" dans les résultats de recherche."
 
-#: inc/admin/admin-metaboxes.php:191 inc/admin/admin.php:1529
+#: inc/admin/admin-metaboxes.php:180 inc/admin/admin.php:1529
 #: inc/admin/admin.php:2407 inc/admin/admin.php:2540 inc/admin/admin.php:2632
 #: inc/admin/admin.php:2842
 msgid "nofollow"
 msgstr "nofollow"
 
-#: inc/admin/admin-metaboxes.php:192 inc/admin/admin.php:2844
+#: inc/admin/admin-metaboxes.php:181 inc/admin/admin.php:2844
 msgid "Do not follow links for all pages."
 msgstr "Ne pas suivre les liens de tout le site."
 
-#: inc/admin/admin-metaboxes.php:197 inc/admin/admin.php:1537
+#: inc/admin/admin-metaboxes.php:186 inc/admin/admin.php:1537
 #: inc/admin/admin.php:2861
 msgid "noodp"
 msgstr "noodp"
 
-#: inc/admin/admin-metaboxes.php:198 inc/admin/admin.php:2863
+#: inc/admin/admin-metaboxes.php:187 inc/admin/admin.php:2863
 msgid ""
 "Do not use Open Directory project metadata for titles or excerpts for all "
 "pages."
@@ -127,173 +127,173 @@ msgstr ""
 "Ne pas utiliser les métadonnées de l'Open Directory project pour les titres "
 "ou les extraits de tout le site."
 
-#: inc/admin/admin-metaboxes.php:203 inc/admin/admin.php:1545
+#: inc/admin/admin-metaboxes.php:192 inc/admin/admin.php:1545
 #: inc/admin/admin.php:2880
 msgid "noimageindex"
 msgstr "noimageindex"
 
-#: inc/admin/admin-metaboxes.php:204 inc/admin/admin.php:2882
+#: inc/admin/admin-metaboxes.php:193 inc/admin/admin.php:2882
 msgid "Do not index images from the entire site."
 msgstr "Ne pas indexer les images de tout le site."
 
-#: inc/admin/admin-metaboxes.php:209 inc/admin/admin.php:1553
+#: inc/admin/admin-metaboxes.php:198 inc/admin/admin.php:1553
 #: inc/admin/admin.php:2899
 msgid "noarchive"
 msgstr "noarchive"
 
-#: inc/admin/admin-metaboxes.php:210 inc/admin/admin.php:2901
+#: inc/admin/admin-metaboxes.php:199 inc/admin/admin.php:2901
 msgid "Do not display a \"Cached\" link in the Google search results."
 msgstr "Ne pas afficher de lien \"En cache\" dans les résultats de recherche."
 
-#: inc/admin/admin-metaboxes.php:215 inc/admin/admin.php:1561
+#: inc/admin/admin-metaboxes.php:204 inc/admin/admin.php:1561
 #: inc/admin/admin.php:2918
 msgid "nosnippet"
 msgstr "nosnippet"
 
-#: inc/admin/admin-metaboxes.php:216 inc/admin/admin.php:2920
+#: inc/admin/admin-metaboxes.php:205 inc/admin/admin.php:2920
 msgid ""
 "Do not display a description in the Google search results for all pages."
 msgstr ""
 "Ne pas afficher de description dans les résultats de recherche pour toutes "
 "les pages du site."
 
-#: inc/admin/admin-metaboxes.php:219 inc/admin/admin.php:615
+#: inc/admin/admin-metaboxes.php:208 inc/admin/admin.php:615
 msgid "Canonical URL"
 msgstr "URL Canonique"
 
-#: inc/admin/admin-metaboxes.php:220
+#: inc/admin/admin-metaboxes.php:209
 msgid "Default value: "
 msgstr "Valeur par défaut: "
 
-#: inc/admin/admin-metaboxes.php:226
+#: inc/admin/admin-metaboxes.php:215
 msgid "Facebook Title"
 msgstr "Titre Facebook"
 
-#: inc/admin/admin-metaboxes.php:227
+#: inc/admin/admin-metaboxes.php:216
 msgid "Enter your Facebook title"
 msgstr "Entrez votre titre Facebook"
 
-#: inc/admin/admin-metaboxes.php:230
+#: inc/admin/admin-metaboxes.php:219
 msgid "Facebook description"
 msgstr "Description Facebook"
 
-#: inc/admin/admin-metaboxes.php:231
+#: inc/admin/admin-metaboxes.php:220
 msgid "Enter your Facebook description"
 msgstr "Entrez votre description Facebook"
 
-#: inc/admin/admin-metaboxes.php:234
+#: inc/admin/admin-metaboxes.php:223
 msgid "Facebook Thumbnail"
 msgstr "Miniature Facebook"
 
-#: inc/admin/admin-metaboxes.php:235
+#: inc/admin/admin-metaboxes.php:224
 msgid "Minimum size: 200x200px"
 msgstr "Taille minimum : 200x200px"
 
-#: inc/admin/admin-metaboxes.php:236 inc/admin/admin-metaboxes.php:252
+#: inc/admin/admin-metaboxes.php:225 inc/admin/admin-metaboxes.php:241
 #: inc/admin/admin.php:3369 inc/admin/admin.php:3429
 msgid "Select your default thumbnail"
 msgstr "Sélectionnez votre miniature par défaut"
 
-#: inc/admin/admin-metaboxes.php:237 inc/admin/admin-metaboxes.php:253
+#: inc/admin/admin-metaboxes.php:226 inc/admin/admin-metaboxes.php:242
 #: inc/admin/admin.php:3127 inc/admin/admin.php:3371 inc/admin/admin.php:3431
 msgid "Upload an Image"
 msgstr "Envoyer une image"
 
-#: inc/admin/admin-metaboxes.php:242
+#: inc/admin/admin-metaboxes.php:231
 msgid "Twitter Title"
 msgstr "Titre Twitter"
 
-#: inc/admin/admin-metaboxes.php:243
+#: inc/admin/admin-metaboxes.php:232
 msgid "Enter your Twitter title"
 msgstr "Entrez votre titre Twitter"
 
-#: inc/admin/admin-metaboxes.php:246
+#: inc/admin/admin-metaboxes.php:235
 msgid "Twitter description"
 msgstr "Description Twitter"
 
-#: inc/admin/admin-metaboxes.php:247
+#: inc/admin/admin-metaboxes.php:236
 msgid "Enter your Twitter description"
 msgstr "Entrez votre description Twitter"
 
-#: inc/admin/admin-metaboxes.php:250
+#: inc/admin/admin-metaboxes.php:239
 msgid "Twitter Thumbnail"
 msgstr "Miniature Twitter"
 
-#: inc/admin/admin-metaboxes.php:251
+#: inc/admin/admin-metaboxes.php:240
 msgid "Minimum size: 160x160px"
 msgstr "Taille minimum : 160x160px"
 
-#: inc/admin/admin-metaboxes.php:262
+#: inc/admin/admin-metaboxes.php:251
 msgid "Enable redirection?"
 msgstr "Activer la redirection ?"
 
-#: inc/admin/admin-metaboxes.php:266
+#: inc/admin/admin-metaboxes.php:255
 msgid "URL redirection"
 msgstr "URL de redirection"
 
-#: inc/admin/admin-metaboxes.php:268
+#: inc/admin/admin-metaboxes.php:257
 msgid "301 Moved Permanently"
 msgstr "301 Redirection permanente"
 
-#: inc/admin/admin-metaboxes.php:269
+#: inc/admin/admin-metaboxes.php:258
 msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
 msgstr "302 Trouvée (HTTP 1.1) / Redirection temporaire (HTTP 1.0)"
 
-#: inc/admin/admin-metaboxes.php:270
+#: inc/admin/admin-metaboxes.php:259
 msgid "307 Moved Temporarily (HTTP 1.1 Only)"
 msgstr "307 Redirection temporaire (HTTP 1.1 seulement)"
 
-#: inc/admin/admin-metaboxes.php:272
+#: inc/admin/admin-metaboxes.php:261
 msgid "Enter your new URL"
 msgstr "Saisissez votre nouvelle URL"
 
-#: inc/admin/admin-metaboxes.php:275 inc/admin/admin-metaboxes.php:277
+#: inc/admin/admin-metaboxes.php:264 inc/admin/admin-metaboxes.php:266
 msgid "Test your URL"
 msgstr "Tester votre URL"
 
-#: inc/admin/admin-metaboxes.php:286
+#: inc/admin/admin-metaboxes.php:275
 msgid "Exclude this post from Google News Sitemap?"
 msgstr "Exclure cet article du sitemap Google News ?"
 
-#: inc/admin/admin-metaboxes.php:290
+#: inc/admin/admin-metaboxes.php:279
 msgid "Google News Genres"
 msgstr "Genres Google News"
 
-#: inc/admin/admin-metaboxes.php:292 inc/admin/admin.php:3597
+#: inc/admin/admin-metaboxes.php:281 inc/admin/admin.php:3597
 #: inc/admin/admin.php:3674 inc/admin/admin.php:3751 inc/admin/admin.php:3828
 #: inc/admin/admin.php:3905
 msgid "None"
 msgstr "Aucun"
 
-#: inc/admin/admin-metaboxes.php:293
+#: inc/admin/admin-metaboxes.php:282
 msgid "Press Release"
 msgstr "Press Release"
 
-#: inc/admin/admin-metaboxes.php:294
+#: inc/admin/admin-metaboxes.php:283
 msgid "Satire"
 msgstr "Satire"
 
-#: inc/admin/admin-metaboxes.php:295
+#: inc/admin/admin-metaboxes.php:284
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/admin/admin-metaboxes.php:296
+#: inc/admin/admin-metaboxes.php:285
 msgid "OpEd"
 msgstr "OpEd"
 
-#: inc/admin/admin-metaboxes.php:297
+#: inc/admin/admin-metaboxes.php:286
 msgid "Opinion"
 msgstr "Opinion"
 
-#: inc/admin/admin-metaboxes.php:298
+#: inc/admin/admin-metaboxes.php:287
 msgid "UserGenerated"
 msgstr "UserGenerated"
 
-#: inc/admin/admin-metaboxes.php:303
+#: inc/admin/admin-metaboxes.php:292
 msgid "Google News Keywords <em>(max recommended limit: 12)</em>"
 msgstr "Mots clés Google News <em>(limite max recommandée: 12)</em>"
 
-#: inc/admin/admin-metaboxes.php:304
+#: inc/admin/admin-metaboxes.php:293
 msgid "Enter your Google News Keywords"
 msgstr "Entrez vos mots clés Google News"
 
@@ -1727,15 +1727,15 @@ msgstr "Veuillez uploader un fichier JSON valide"
 msgid "Please upload a file to import"
 msgstr "Uploader un fichier à importer SVP"
 
-#: seopress.php:237
+#: seopress.php:242
 msgid "Settings"
 msgstr "Paramètres"
 
-#: seopress.php:238
+#: seopress.php:243
 msgid "SEOPress.org"
 msgstr "SEOPress.org"
 
-#: seopress.php:240
+#: seopress.php:245
 msgid "GO PRO!"
 msgstr "PASSEZ PRO !"
 
