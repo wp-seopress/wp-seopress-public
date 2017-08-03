@@ -360,6 +360,18 @@ class seopress_options
                                 <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
                             </div>
                         <?php } ?>
+                        <?php if (get_option('blogname') =='') { ?>
+                            <div class="seopress-alert">
+                                <p><span class="dashicons dashicons-warning"></span><?php _e('Your site title is empty!','wp-seopress'); ?></p>
+                                <a class="button-primary" href="<?php echo admin_url( 'options-general.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
+                        <?php if (get_option('permalink_structure') =='') { ?>
+                            <div class="seopress-alert">
+                                <p><span class="dashicons dashicons-warning"></span><?php _e('Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this.','wp-seopress'); ?></p>
+                                <a class="button-primary" href="<?php echo admin_url( 'options-permalink.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
                         <?php if (seopress_xml_sitemap_general_enable_option() !='1') { ?>
                             <div class="seopress-alert">
                                 <p><span class="dashicons dashicons-warning"></span><?php _e('You don\'t have an XML Sitemap!','wp-seopress'); ?></p>
@@ -552,6 +564,15 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_titles_archives_author_noindex', // ID
+            '',
+            //__("noindex","wp-seopress"), // Title
+            array( $this, 'seopress_titles_archives_author_noindex_callback' ), // Callback
+            'seopress-settings-admin-titles-archives', // Page
+            'seopress_setting_section_titles_archives' // Section                 
+        );
+
+        add_settings_field(
             'seopress_titles_archives_date_title', // ID
             '',
             //__('Title template','wp-seopress'),
@@ -567,6 +588,15 @@ class seopress_options
             array( $this, 'seopress_titles_archives_date_desc_callback' ), // Callback
             'seopress-settings-admin-titles-archives', // Page
             'seopress_setting_section_titles_archives' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_titles_archives_date_noindex', // ID
+            '',
+            //__("noindex","wp-seopress"), // Title
+            array( $this, 'seopress_titles_archives_date_noindex_callback' ), // Callback
+            'seopress-settings-admin-titles-archives', // Page
+            'seopress_setting_section_titles_archives' // Section                 
         );
 
         add_settings_field(
@@ -1051,6 +1081,11 @@ class seopress_options
         echo '<br>';
         echo '<br>';
         echo '<a href="'.home_url().'/sitemaps/" target="_blank" class="button">'.__('View your sitemap','wp-seopress').'</a>';
+        echo '&nbsp;';
+        echo '<a href="http://www.google.com/ping?sitemap='.home_url().'/sitemaps/" target="_blank" class="button">'.__('Ping Google manually','wp-seopress').'</a>';        
+        echo '&nbsp;';
+        echo '<div id="seopress-flush-permalinks" class="button">'.__('Flush permalinks','wp-seopress').'</div>';
+        echo '<span class="spinner"></span>';
     } 
 
     public function print_section_info_xml_sitemap_post_types()
@@ -1307,6 +1342,24 @@ class seopress_options
         
     }
 
+    public function seopress_titles_archives_author_noindex_callback()
+    {
+
+        $options = get_option( 'seopress_titles_option_name' );  
+        
+        $check = isset($options['seopress_titles_archives_author_noindex']);      
+        
+        echo '<input id="seopress_titles_archives_author_noindex" name="seopress_titles_option_name[seopress_titles_archives_author_noindex]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_titles_archives_author_noindex">'. __( 'noindex', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_titles_archives_author_noindex'])) {
+            esc_attr( $this->options['seopress_titles_archives_author_noindex']);
+        }  
+    }
+
     public function seopress_titles_archives_date_title_callback()
     {
         echo '<h2>'.__('Date archives','wp-seopress').'</h2>';
@@ -1332,7 +1385,24 @@ class seopress_options
         esc_html( $this->options['seopress_titles_archives_date_desc'])
         
         );
+    }
+
+    public function seopress_titles_archives_date_noindex_callback()
+    {
+
+        $options = get_option( 'seopress_titles_option_name' );  
         
+        $check = isset($options['seopress_titles_archives_date_noindex']);      
+        
+        echo '<input id="seopress_titles_archives_date_noindex" name="seopress_titles_option_name[seopress_titles_archives_date_noindex]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_titles_archives_date_noindex">'. __( 'noindex', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_titles_archives_date_noindex'])) {
+            esc_attr( $this->options['seopress_titles_archives_date_noindex']);
+        }  
     }
 
     public function seopress_titles_archives_search_title_callback()

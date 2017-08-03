@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
 Tested up to: 4.6
-Stable tag: 0.8
+Stable tag: 0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,10 +13,25 @@ SEOPress is a simple, fast and powerful SEO plugin for WordPress
 == Description ==
 
 SEOPress is a powerful plugin to optimize your SEO, boost your traffic and improve social sharing.<br>
-Manage titles, meta descriptions, Open Graph Data, Google Knowledge Graph, Twitter Card, Canonical URL, meta robots...<br>
-Build your custom XML Sitemap to improve search indexing.<br>
-Link your social media accounts to your site.<br>
-Import / Export settings from site to site.
+
+<h3>Features</h3>
+
+<ul>
+	<li>Titles</li>
+	<li>Meta descriptions</li>
+	<li>Open Graph Data</li>
+	<li>Google Knowledge Graph</li>
+	<li>Twitter Card</li>
+	<li>Canonical URL</li> 
+	<li>Meta robots (noindex, nofollow, noodp, noimageindex, noarchive, nosnippet)</li>
+	<li>Build your custom XML Sitemap to improve search indexing.</li>
+	<li>Link your social media accounts to your site.</li>
+	<li>Redirections</li>
+	<li>Remove stop words (english, french, spanish, german, italian, portuguese)</li>
+	<li>Redirect attachment pages to post parent</li>
+	<li>Import / Export settings from site to site.</li>
+	<li>...</li>
+</ul>
 
 <h3>Translation</h3>
 
@@ -35,7 +50,7 @@ And get early access to our pro release!
 3. Click on SEOPress and apply settings.
 
 == Frequently Asked Questions ==
-Soon :)
+<a href="http://www.seopress.org/support/faq/" target="_blank">Read our FAQ</a>
 
 == Screenshots ==
 1. SEOPress Dashboard
@@ -49,6 +64,31 @@ Soon :)
 9. SEOPress Metaboxe: Redirection settings
 
 == Changelog ==
+= 0.9 =
+* NEW Add OG:URL if Open Graph is enabled
+* NEW Add OG:SITE_NAME if Open Graph is enabled
+* NEW Add OG:TYPE if Open Graph is enabled
+* NEW Add OG:LOCALE if Open Graph is enabled
+* NEW Add TWITTER:SITE if Twitter Card is enabled
+* NEW Add TWITTER:CREATOR if Twitter Card is enabled
+* NEW Add Flush permalinks button in XML Sitemaps settings page
+* NEW Add Ping Google manually button for XML Sitemaps
+* NEW Add noindex meta robots tag for Author and Date archives
+* FIX Display Site Verification meta only on homepage
+* FIX Set Search and 404 pages to noindex by default
+* FIX Notice Undefined variable: seopress_social_knowledge_img_option
+* FIX Notice Undefined variable: seopress_social_accounts_facebook_option
+* FIX Notice Undefined variable: seopress_social_accounts_twitter_option
+* FIX Notice Undefined variable: seopress_social_accounts_google_option
+* FIX Undefined variable: seopress_social_accounts_pinterest_option
+* FIX Notice Undefined variable: seopress_social_accounts_instagram_option
+* FIX Notice Undefined variable: seopress_social_accounts_youtube_option
+* FIX Notice Undefined variable: seopress_social_accounts_linkedin_option 
+* FIX Notice Undefined variable: seopress_social_accounts_myspace_option
+* FIX Notice Undefined variable: seopress_social_accounts_soundcloud_option
+* FIX Notice Undefined variable: seopress_social_accounts_tumblr_option
+* FIX Notice: Trying to get property of non-object in inc/functions/options-titles-metas.php on line 253
+* FIX Notice: Trying to get property of non-object in inc/functions/options-titles-metas.php on line 355
 = 0.8 = 
 * NEW Remove stop words in URL (supported languages: EN, FR, ES, DE, IT, PT)
 * INFO List last modified posts first in XML sitemaps

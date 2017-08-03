@@ -219,13 +219,27 @@ function seopress_social_accounts_jsonld_hook() {
 		$seopress_social_knowledge_img_option = json_encode(seopress_social_knowledge_img_option());
 	}
 
+	$seopress_social_knowledge_img_option ='';
+
 	echo '<script type="application/ld+json">';
 	echo '{"@context" : "http://schema.org","@type" : '.$seopress_social_knowledge_type_option.',';
 	if ($seopress_social_knowledge_img_option) {
 		echo '"image": '.$seopress_social_knowledge_img_option.',';
 	}
 	echo '"name" : '.$seopress_social_knowledge_name_option.',"url" : '.json_encode(get_site_url()).'';
-	if ($seopress_social_accounts_facebook_option || $seopress_social_accounts_twitter_option || $seopress_social_accounts_google_option || $seopress_social_accounts_pinterest_option || $seopress_social_accounts_instagram_option || seopress_social_accounts_youtube_option || seopress_social_accounts_linkedin_option || seopress_social_accounts_myspace_option || seopress_social_accounts_soundcloud_option || seopress_social_accounts_tumblr_option ) {
+
+	$seopress_social_accounts_facebook_option ='';
+	$seopress_social_accounts_twitter_option ='';
+	$seopress_social_accounts_google_option ='';
+	$seopress_social_accounts_pinterest_option ='';
+	$seopress_social_accounts_instagram_option ='';
+	$seopress_social_accounts_youtube_option ='';
+	$seopress_social_accounts_linkedin_option ='';
+	$seopress_social_accounts_myspace_option =''; 
+	$seopress_social_accounts_soundcloud_option ='';
+	$seopress_social_accounts_tumblr_option ='';
+
+	if ($seopress_social_accounts_facebook_option || $seopress_social_accounts_twitter_option || $seopress_social_accounts_google_option || $seopress_social_accounts_pinterest_option || $seopress_social_accounts_instagram_option || $seopress_social_accounts_youtube_option || $seopress_social_accounts_linkedin_option || $seopress_social_accounts_myspace_option || $seopress_social_accounts_soundcloud_option || $seopress_social_accounts_tumblr_option ) {
 		echo ',"sameAs" : [';
 		$seopress_comma_count = count($seopress_comma_array);
 		for ($i = 0; $i < $seopress_comma_count; $i++) {
@@ -275,6 +289,64 @@ function seopress_social_facebook_og_option() {
 		 }
 	}
 };
+
+//OG URL
+function seopress_social_facebook_og_url_hook() {
+	if (seopress_social_facebook_og_option() =='1') {
+
+		global $wp;
+		$current_url = home_url(add_query_arg(array(), $wp->request));
+
+		if (is_search()) {
+			$seopress_social_og_url = '<meta property="og:url" content="'.get_site_url().'/search/'.get_search_query().'" />';
+		} else {
+			$seopress_social_og_url = '<meta property="og:url" content="'.$current_url.'" />';
+		}
+		
+		echo $seopress_social_og_url."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_facebook_og_url_hook', 1 );
+
+//OG Site Name
+function seopress_social_facebook_og_site_name_hook() {
+	if (seopress_social_facebook_og_option() =='1' && get_bloginfo('name') !='') {
+
+		$seopress_social_og_site_name = '<meta property="og:site_name" content="'.get_bloginfo('name').'" />';
+		
+		echo $seopress_social_og_site_name."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_facebook_og_site_name_hook', 1 );
+
+//OG Locale
+function seopress_social_facebook_og_locale_hook() {
+	if (seopress_social_facebook_og_option() =='1') {
+
+		$seopress_social_og_locale = '<meta property="og:locale" content="'.get_locale().'" />';
+		
+		echo $seopress_social_og_locale."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_facebook_og_locale_hook', 1 );
+
+//OG Type
+function seopress_social_facebook_og_type_hook() {
+	if (seopress_social_facebook_og_option() =='1') {
+		if (is_home() || is_front_page()) {
+			$seopress_social_og_type = '<meta property="og:type" content="website" />';
+		} elseif (is_singular()) {
+			$seopress_social_og_type = '<meta property="og:type" content="article" />';
+		} 
+		elseif (is_search() || is_archive() || is_404()) {
+			$seopress_social_og_type = '<meta property="og:type" content="object" />';
+		}
+		if ($seopress_social_og_type !='') {
+			echo $seopress_social_og_type."\n";
+		}
+	}
+}
+add_action( 'wp_head', 'seopress_social_facebook_og_type_hook', 1 );
 
 //Facebook Title
 function seopress_social_fb_title_post_option() {
@@ -361,6 +433,32 @@ function seopress_social_twitter_card_option() {
 		 }
 	}
 };
+
+//Twitter Site
+function seopress_social_twitter_card_site_hook() {
+	if (seopress_social_twitter_card_option() =='1' && seopress_social_accounts_twitter_option() !='' ) {
+
+		$seopress_social_twitter_card_site = '<meta name="twitter:site" content="'.seopress_social_accounts_twitter_option().'" />';
+		
+		echo $seopress_social_twitter_card_site."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_twitter_card_site_hook', 1 );
+
+//Twitter Creator
+function seopress_social_twitter_card_creator_hook() {
+	if (seopress_social_twitter_card_option() =='1' && get_the_author_meta('twitter') ) {
+
+		$seopress_social_twitter_card_creator = '<meta name="twitter:creator" content="@'.get_the_author_meta('twitter').'" />';
+		echo $seopress_social_twitter_card_creator."\n";
+
+	} elseif (seopress_social_twitter_card_option() =='1' && seopress_social_accounts_twitter_option() !='' ) {
+
+		$seopress_social_twitter_card_creator = '<meta name="twitter:creator" content="'.seopress_social_accounts_twitter_option().'" />';
+		echo $seopress_social_twitter_card_creator."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_twitter_card_creator_hook', 1 );
 
 //Twitter Title
 function seopress_social_twitter_title_post_option() {

@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 0.8
+Version: 0.9
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
@@ -52,7 +52,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '0.8' ); 
+define( 'SEOPRESS_VERSION', '0.9' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +66,7 @@ function seopress_init() {
     if ( is_admin() ) {
         require_once dirname( __FILE__ ) . '/inc/admin/admin.php';
         require_once dirname( __FILE__ ) . '/inc/admin/admin-metaboxes.php';
+        require_once dirname( __FILE__ ) . '/inc/admin/ajax.php';
     }   
 
     require_once dirname( __FILE__ ) . '/inc/functions/options.php';
@@ -88,6 +89,15 @@ function seopress_add_admin_options_scripts($hook) {
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-xml-sitemap') ) {
         wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs4.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+
+        wp_enqueue_script( 'seopress-xml-ajax', plugins_url( 'assets/js/seopress-sitemap-ajax.js', __FILE__ ), array( 'jquery' ), '', true );
+
+        $seopress_ajax_permalinks = array(
+            'seopress_nonce' => wp_create_nonce('seopress_flush_permalinks_nonce'),
+            'seopress_flush_permalinks' => admin_url('options-permalink.php'),
+        );
+        wp_localize_script( 'seopress-xml-ajax', 'seopressAjaxResetPermalinks', $seopress_ajax_permalinks ); 
+    
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-advanced') ) {
@@ -143,7 +153,8 @@ function seopress_plugin_action_links($links, $file) {
     if ($file == $this_plugin) {
         $settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=seopress-option">'.__("Settings","wp-seopress").'</a>';
         $website_link = '<a href="http://seopress.org/" target="_blank">'.__("SEOPress.org","wp-seopress").'</a>';
-        array_unshift($links, $settings_link, $website_link);
+        $pro_link = '<a href="http://seopress.org/pro" style="color:#a00;font-weight:bold" target="_blank">'.__("GO PRO!","wp-seopress").'</a>';
+        array_unshift($links, $settings_link, $website_link, $pro_link);
     }
 
     return $links;

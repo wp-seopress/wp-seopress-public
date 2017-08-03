@@ -228,6 +228,12 @@ if (get_option('blog_public') =='1') {
 		if (get_query_var('paged') >='1') {
 			$seopress_paged = get_query_var('paged');
 		}
+
+		$the_author_meta ='';
+		if(is_single() || is_author()){
+			$the_author_meta = get_the_author_meta('display_name', $post->post_author);
+		}
+
 		$seopress_titles_template_variables_array = array(
 			'%%sitetitle%%', 
 			'%%tagline%%',
@@ -250,7 +256,7 @@ if (get_option('blog_public') =='1') {
 			get_the_title(),
 			get_the_excerpt(),
 			get_the_date(),
-			get_the_author_meta( 'display_name', $post->post_author ),
+			$the_author_meta,
 			single_cat_title('', false),
 			category_description(),
 			single_tag_title('', false),
@@ -321,9 +327,16 @@ if (get_option('blog_public') =='1') {
 
 		//Template variables
 		$seopress_paged ='';
+		$seopress_get_author ='';
+
 		if (get_query_var('paged') >='1') {
 			$seopress_paged = get_query_var('paged');
 		}
+
+		if (get_the_author_meta() !='') {
+			$seopress_get_author = get_the_author_meta( 'display_name', $post->post_author );
+		}
+
 		$seopress_titles_template_variables_array = array(
 			'%%sitetitle%%', 
 			'%%tagline%%',
@@ -346,7 +359,7 @@ if (get_option('blog_public') =='1') {
 			get_the_title(),
 			get_the_excerpt(),
 			get_the_date(),
-			get_the_author_meta( 'display_name', $post->post_author ),
+			$seopress_get_author,
 			single_cat_title('', false),
 			category_description(),
 			single_tag_title('', false),
@@ -459,6 +472,30 @@ if (get_option('blog_public') =='1') {
 		}
 	};
 
+	//noindex Author archives
+	function seopress_titles_archives_author_noindex_option() {
+		$seopress_titles_archives_author_noindex_option = get_option("seopress_titles_option_name");
+		if ( ! empty ( $seopress_titles_archives_author_noindex_option ) ) {
+			foreach ($seopress_titles_archives_author_noindex_option as $key => $seopress_titles_archives_author_noindex_value)
+				$options[$key] = $seopress_titles_archives_author_noindex_value;
+			 if (isset($seopress_titles_archives_author_noindex_option['seopress_titles_archives_author_noindex'])) { 
+			 	return $seopress_titles_archives_author_noindex_option['seopress_titles_archives_author_noindex'];
+			 }
+		}
+	};
+
+	//noindex Date archives
+	function seopress_titles_archives_date_noindex_option() {
+		$seopress_titles_archives_date_noindex_option = get_option("seopress_titles_option_name");
+		if ( ! empty ( $seopress_titles_archives_date_noindex_option ) ) {
+			foreach ($seopress_titles_archives_date_noindex_option as $key => $seopress_titles_archives_date_noindex_value)
+				$options[$key] = $seopress_titles_archives_date_noindex_value;
+			 if (isset($seopress_titles_archives_date_noindex_option['seopress_titles_archives_date_noindex'])) { 
+			 	return $seopress_titles_archives_date_noindex_option['seopress_titles_archives_date_noindex'];
+			 }
+		}
+	};	
+
 	//noindex Global Advanced tab
 	function seopress_titles_noindex_option() {
 		$seopress_titles_noindex_option = get_option("seopress_titles_option_name");
@@ -488,6 +525,12 @@ if (get_option('blog_public') =='1') {
 			return seopress_titles_noindex_post_option();
 		} elseif ((is_tax() || is_category() || is_tag()) && seopress_titles_tax_noindex_option()) { //IS TAX
 			return seopress_titles_tax_noindex_option();
+		} elseif (is_author() && seopress_titles_archives_author_noindex_option()) { //IS Author archive
+			return seopress_titles_archives_author_noindex_option();
+		} elseif (is_date() && seopress_titles_archives_date_noindex_option()) { //IS Date archive
+			return seopress_titles_archives_date_noindex_option();
+		} elseif (is_search() || is_404()) {
+			return "noindex";
 		}
 	};
 
@@ -522,6 +565,7 @@ if (get_option('blog_public') =='1') {
 		}
 	};
 
+	//nofollow Global Avanced tab
 	function seopress_titles_nofollow_option() {
 		$seopress_titles_nofollow_option = get_option("seopress_titles_option_name");
 		if ( ! empty ( $seopress_titles_nofollow_option ) ) {
