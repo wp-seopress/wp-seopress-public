@@ -110,6 +110,7 @@ class seopress_options
         $seopress_xml_sitemap_options = get_option('seopress_xml_sitemap_option_name');
 
         $seopress_xml_sitemap_options['seopress_xml_sitemap_general_enable'] = '1';
+        $seopress_xml_sitemap_options['seopress_xml_sitemap_img_enable'] = '1';
  
         global $wp_post_types;
 
@@ -170,7 +171,7 @@ class seopress_options
     {
         add_menu_page('SEOPress Option Page', 'SEOPress', 'manage_options', 'seopress-option', array( $this, 'create_admin_page' ), 'dashicons-admin-seopress', 90);
         $seopress_titles_help_tab = add_submenu_page('seopress-option', __('Titles & Metas','wp-seopress'), __('Titles & Metas','wp-seopress'), 'manage_options', 'seopress-titles', array( $this, 'seopress_titles_page' ));
-        add_submenu_page('seopress-option', __('XML / HTML Sitemap','wp-seopress'), __('XML / HTML Sitemap','wp-seopress'), 'manage_options', 'seopress-xml-sitemap', array( $this, 'seopress_xml_sitemap_page' ));
+        add_submenu_page('seopress-option', __('XML / Image / HTML Sitemap','wp-seopress'), __('XML / HTML Sitemap','wp-seopress'), 'manage_options', 'seopress-xml-sitemap', array( $this, 'seopress_xml_sitemap_page' ));
         add_submenu_page('seopress-option', __('Social','wp-seopress'), __('Social','wp-seopress'), 'manage_options', 'seopress-social', array( $this, 'seopress_social_page' ));
         add_submenu_page('seopress-option', __('Google Analytics','wp-seopress'), __('Google Analytics','wp-seopress'), 'manage_options', 'seopress-google-analytics', array( $this, 'seopress_google_analytics_page' ));
         add_submenu_page('seopress-option', __('Advanced','wp-seopress'), __('Advanced','wp-seopress'), 'manage_options', 'seopress-advanced', array( $this, 'seopress_advanced_page' ));
@@ -417,6 +418,7 @@ class seopress_options
             $plugin_settings_tabs = array(
                 'tab_seopress_advanced_advanced' => __( "Advanced", "wp-seopress" ), 
                 'tab_seopress_advanced_appearance' => __( "Appearance", "wp-seopress" ), 
+                'tab_seopress_advanced_security' => __( "Security", "wp-seopress" ), 
             );
 
             echo '<h2 class="nav-tab-wrapper">';
@@ -427,6 +429,7 @@ class seopress_options
         ?>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_advanced_advanced') { echo 'active'; } ?>" id="tab_seopress_advanced_advanced"><?php do_settings_sections( 'seopress-settings-admin-advanced-advanced' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_advanced_appearance') { echo 'active'; } ?>" id="tab_seopress_advanced_appearance"><?php do_settings_sections( 'seopress-settings-admin-advanced-appearance' ); ?></div>
+            <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_advanced_security') { echo 'active'; } ?>" id="tab_seopress_advanced_security"><?php do_settings_sections( 'seopress-settings-admin-advanced-security' ); ?></div>
         </div>
 
         <?php submit_button(); ?>
@@ -797,8 +800,8 @@ class seopress_options
                             <span class="dashicons dashicons-media-spreadsheet"></span>
                         </div>
                         <span class="inner">
-                            <h3><?php _e('XML / HTML Sitemap','wp-seopress'); ?></h3>
-                            <p><?php _e('Manage your XML / HTML Sitemap','wp-seopress'); ?></p>
+                            <h3><?php _e('XML / Image / HTML Sitemap','wp-seopress'); ?></h3>
+                            <p><?php _e('Manage your XML / Image / HTML Sitemap','wp-seopress'); ?></p>
                             <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                             <?php
                                 if(seopress_get_toggle_xml_sitemap_option()=='1') { 
@@ -1445,6 +1448,14 @@ class seopress_options
             'seopress-settings-admin-xml-sitemap-general', // Page
             'seopress_setting_section_xml_sitemap_general' // Section                  
         );
+
+        add_settings_field(
+            'seopress_xml_sitemap_img_enable', // ID
+           __("Enable XML Image Sitemaps","wp-seopress"), // Title
+            array( $this, 'seopress_xml_sitemap_img_enable_callback' ), // Callback
+            'seopress-settings-admin-xml-sitemap-general', // Page
+            'seopress_setting_section_xml_sitemap_general' // Section                  
+        );
         
         add_settings_field(
             'seopress_xml_sitemap_html_enable', // ID
@@ -1992,6 +2003,23 @@ class seopress_options
             'seopress-settings-admin-advanced-appearance', // Page
             'seopress_setting_section_advanced_appearance' // Section                  
         );
+
+        //Security SECTION=======================================================================
+        add_settings_section( 
+            'seopress_setting_section_advanced_security', // ID
+            '',
+            //__("Security","wp-seopress"), // Title
+            array( $this, 'print_section_info_advanced_security' ), // Callback
+            'seopress-settings-admin-advanced-security' // Page
+        ); 
+
+        add_settings_field(
+            'seopress_advanced_security_metaboxe_role', // ID
+           __("Block SEO metaboxe to user roles","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_security_metaboxe_role_callback' ), // Callback
+            'seopress-settings-admin-advanced-security', // Page
+            'seopress_setting_section_advanced_security' // Section                  
+        );
     }
 
     /**
@@ -2058,6 +2086,8 @@ class seopress_options
     {
         echo '<p>'.__('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress').'</p>';
         echo '<p>'.__('Only the last 1000 items are listed in Sitemaps for performances issues.', 'wp-seopress').'</p>';
+        
+        echo '<p>'.__('Noindex content will not be displayed in Sitemaps.', 'wp-seopress').'</p>';
 
         echo '<a href="'.home_url().'/sitemaps.xml" target="_blank" class="button">'.__('View your sitemap','wp-seopress').'</a>';
         echo '&nbsp;';
@@ -2126,6 +2156,11 @@ class seopress_options
     public function print_section_info_advanced_appearance()
     {
         print __('<p>Customize SEOPress to fit your needs</p>', 'wp-seopress');
+    } 
+
+    public function print_section_info_advanced_security()
+    {
+        print __('<p>Manage security</p>', 'wp-seopress');
     }    
 
     /** 
@@ -2761,6 +2796,23 @@ class seopress_options
 
         if (isset($this->options['seopress_xml_sitemap_general_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_general_enable']);
+        }
+    }
+
+    public function seopress_xml_sitemap_img_enable_callback()
+    {
+        $options = get_option( 'seopress_xml_sitemap_option_name' );  
+        
+        $check = isset($options['seopress_xml_sitemap_img_enable']);      
+        
+        echo '<input id="seopress_xml_sitemap_img_enable" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_img_enable]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_xml_sitemap_img_enable">'. __( 'Enable Image Sitemaps', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_xml_sitemap_img_enable'])) {
+            esc_attr( $this->options['seopress_xml_sitemap_img_enable']);
         }
     }
 
@@ -3937,6 +3989,31 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_appearance_genesis_seo_metaboxe'])) {
             esc_attr( $this->options['seopress_advanced_appearance_genesis_seo_metaboxe']);
+        }
+    }    
+
+    public function seopress_advanced_security_metaboxe_role_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        global $wp_roles;
+
+        if ( ! isset( $wp_roles ) )
+            $wp_roles = new WP_Roles();
+    
+        foreach ($wp_roles->get_names() as $key => $value) {
+
+            $check = isset($options['seopress_advanced_security_metaboxe_role'][$key]);  
+
+            echo '<input id="seopress_advanced_security_metaboxe_role_'.$key.'" name="seopress_advanced_option_name[seopress_advanced_security_metaboxe_role]['.$key.']" type="checkbox"';
+            if ('1' == $check) echo 'checked="yes"'; 
+            echo ' value="1"/>';
+            
+            echo '<label for="seopress_advanced_security_metaboxe_role_'.$key.'">'. $value .'</label><br/>';
+
+            if (isset($this->options['seopress_advanced_security_metaboxe_role'][$key])) {
+                esc_attr( $this->options['seopress_advanced_security_metaboxe_role'][$key]);
+            }
         }
     }
 }

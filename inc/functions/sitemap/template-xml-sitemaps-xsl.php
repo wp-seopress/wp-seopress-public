@@ -57,7 +57,7 @@ function seopress_xml_sitemap_index_xsl() {
 	}
 	#main {
 		margin: 0 auto;
-		max-width: 45rem;
+		max-width: 55rem;
 		padding: 1.5rem;
 		width: 100%;
 	}
@@ -68,17 +68,21 @@ function seopress_xml_sitemap_index_xsl() {
 		margin-top: 20px;
 		display: inline-block;
 	}
-	#sitemaps .loc, #sitemaps .lastmod {
+	#sitemaps .loc, #sitemaps .lastmod, #sitemaps .count {
 	    font-weight: bold;
 	    display: inline-block;
 	    border-bottom: 1px solid rgba(224, 224, 224, 1);
 	    padding: 15px;
 	}
 	#sitemaps .loc {
-		width: 70%;
+		width: 60%;
 	}
 	#sitemaps .lastmod {
 		width: 30%;
+		padding-left: 0;
+	}
+	#sitemaps .count {
+		width: 10%;
 		padding-left: 0;
 	}
 	#sitemaps ul {
@@ -97,7 +101,7 @@ function seopress_xml_sitemap_index_xsl() {
 		background:#F3F6F8;
 	}
 	#sitemaps .item-loc {
-	    width: 70%;
+	    width: 60%;
 	    display: inline-block;
 	}
 	#sitemaps .item-lastmod {
@@ -105,7 +109,13 @@ function seopress_xml_sitemap_index_xsl() {
 	    display: inline-block;
 		padding: 0 10px;
 	}
+	#sitemaps .item-count {
+		width: 10%;
+	    display: inline-block;
+		padding: 0 10px;
+	}
 	</style>';
+	
 	$seopress_sitemaps_xsl .='</head>';
 	$seopress_sitemaps_xsl .='<body>';
 	$seopress_sitemaps_xsl .='<div id="main">';
@@ -118,12 +128,16 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='<div class="lastmod">';
 	$seopress_sitemaps_xsl .='Last update';
 	$seopress_sitemaps_xsl .='</div>';
+	$seopress_sitemaps_xsl .='<div class="count">';
+	$seopress_sitemaps_xsl .='Items count';
+	$seopress_sitemaps_xsl .='</div>';
 	$seopress_sitemaps_xsl .='<ul>';
 	$seopress_sitemaps_xsl .='<xsl:for-each select="sitemap:sitemapindex/sitemap:sitemap">';
     $seopress_sitemaps_xsl .='<li>';
     $seopress_sitemaps_xsl .='<xsl:variable name="sitemap_loc"><xsl:value-of select="sitemap:loc"/></xsl:variable>';
     $seopress_sitemaps_xsl .='<span class="item-loc"><a href="{$sitemap_loc}"><xsl:value-of select="sitemap:loc" /></a></span>';
     $seopress_sitemaps_xsl .='<span class="item-lastmod"><xsl:value-of select="sitemap:lastmod" /></span>';
+    $seopress_sitemaps_xsl .='<span class="item-count"><xsl:value-of select="sitemap:count" /></span>';
     $seopress_sitemaps_xsl .='</li>';
     $seopress_sitemaps_xsl .='</xsl:for-each>';
     $seopress_sitemaps_xsl .='</ul>';

@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 1.5.1
+Version: 1.6
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
@@ -56,7 +56,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '1.5.1' ); 
+define( 'SEOPRESS_VERSION', '1.6' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,20 +157,36 @@ function seopress_add_admin_options_scripts($hook) {
         wp_enqueue_media();
     }
 
-    global $post;
+    if (is_user_logged_in()) {
+        global $wp_roles;
+            
+        //Get current user role
+        if(isset(wp_get_current_user()->roles[0])) {
+            $seopress_user_role = wp_get_current_user()->roles[0];
+            //If current user role matchs values from Security settings then apply
+            if (function_exists('seopress_advanced_security_metaboxe_role_hook_option') && seopress_advanced_security_metaboxe_role_hook_option() !='') {
+                if( array_key_exists( $seopress_user_role, seopress_advanced_security_metaboxe_role_hook_option())) {
+                    //do nothing
+                }
+            } else {
 
-    if ( $hook == 'post-new.php' || $hook == 'post.php') {
-        $cpt_public_check = get_post_type_object( $post->post_type );
-        if ( 'attachment' !== $post->post_type ) { 
-            wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
-            if ( 'seopress_404' !== $post->post_type ) { 
-                if ($cpt_public_check->public =='1') {
-                    wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', __FILE__ ), array( 'jquery' ) );
+                global $post;
+
+                if ( $hook == 'post-new.php' || $hook == 'post.php') {
+                    $cpt_public_check = get_post_type_object( $post->post_type );
+                    if ( 'attachment' !== $post->post_type ) { 
+                        wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+                        if ( 'seopress_404' !== $post->post_type ) { 
+                            if ($cpt_public_check->public =='1') {
+                                wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', __FILE__ ), array( 'jquery' ) );
+                            }
+                        }
+                        wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
+                        wp_enqueue_media();
+
+                    }
                 }
             }
-            wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
-            wp_enqueue_media();
-
         }
     }
 

@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.5.1
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 	<li>Canonical URL</li> 
 	<li>Meta robots (noindex, nofollow, noodp, noimageindex, noarchive, nosnippet)</li>
 	<li>Build your custom XML Sitemap to improve search indexing.</li>
+	<li>Image XML Sitemaps to improve search indexing for Google Images.</li>
 	<li>Build your custom HTML Sitemap to enhanced navigation for visitors and improve search indexing.</li>
 	<li>Link your social media accounts to your site.</li>
 	<li>Redirections in post, pages, custom post types</li>
@@ -109,6 +110,17 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 30. Structured Data Types metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.6 =
+* NEW XML Image Sitemap to improve ranking in Google Images (supports standard images, WP Image Galleries and WooCommerce image products)
+* NEW Block SEO metaboxe to specific user roles
+* NEW Block Structured Data Types metaboxe to specific user roles
+* INFO Move SEO metaboxe just under the editor
+* INFO Add Items count column in index XML Sitemaps
+* INFO Move Structured Data Types metaboxe just under SEO metaboxe
+* FIX Undefined notice phone number
+* FIX Change Price input number to input text to allow decimals (Structured Data Types)
+* FIX incorrect last update date in index XML Sitemaps
+* FIX Admin bar is_plugin_active error
 = 1.5.1 =
 * INFO Improve Breadcrumbs SEO
 * FIX Google Analytics Fatal Error
@@ -122,6 +134,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 = 1.5 =
 * NEW Google Analytics Stats in Dashboard with interactive charts (SEOPress PRO only)
 * NEW Add new advices in Notifications center
+* NEW Quick Edit your titles and meta descriptions from listing pages in backend
 * NEW Add bulk actions to enable/disable noindex/nofollow/index/follow
 * NEW Hide Genesis SEO Metaboxe (in Advanced page, appearance tab)
 * INFO You can now reset notifications display settings in Import/Export/Reset page

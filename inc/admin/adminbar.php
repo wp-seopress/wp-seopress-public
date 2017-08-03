@@ -52,6 +52,7 @@ function seopress_admin_bar_links() {
 		'title'		=> __( 'Import / Export / Reset', 'wp-seopress' ),
 		'href'		=> admin_url( 'admin.php?page=seopress-import-export' ),
 	));
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 		$wp_admin_bar->add_menu( array(
 			'parent'	=> 'seopress_custom_top_level',
