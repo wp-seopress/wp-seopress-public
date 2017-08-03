@@ -17,7 +17,7 @@ function seopress_toggle_features() {
 	if ( isset( $_POST['feature']) && isset( $_POST['feature_value'] )) {
 		$seopress_toggle_options = get_option('seopress_toggle');
 		$seopress_toggle_options[$_POST['feature']] = $_POST['feature_value'];
-		update_option('seopress_toggle', $seopress_toggle_options, yes);
+		update_option('seopress_toggle', $seopress_toggle_options, 'yes');
 	}
 	die();
 }
@@ -30,7 +30,7 @@ function seopress_hide_notices() {
     if ( isset( $_POST['notice']) && isset( $_POST['notice_value'] )) {
         $seopress_notices_options = get_option('seopress_notices');
         $seopress_notices_options[$_POST['notice']] = $_POST['notice_value'];
-        update_option('seopress_notices', $seopress_notices_options, yes);
+        update_option('seopress_notices', $seopress_notices_options, 'yes');
     }
     die();
 }

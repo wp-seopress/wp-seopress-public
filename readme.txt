@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.5
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,16 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 30. Structured Data Types metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.5.1 =
+* INFO Improve Breadcrumbs SEO
+* FIX Google Analytics Fatal Error
+* FIX Dublin Core notices
+* FIX Adminbar now visible in front-end too when user is logged
+* FIX Use of undefined constant yes - assumed 'yes'
+* FIX WooCommerce compatibility with Breadcrumbs
+* FIX Dublin Core Subject
+* FIX Dublin Core Description
+* FIX 10 Undefined variable seopress_social_knowledge_img_option
 = 1.5 =
 * NEW Google Analytics Stats in Dashboard with interactive charts (SEOPress PRO only)
 * NEW Add new advices in Notifications center
