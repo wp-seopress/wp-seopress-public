@@ -91,6 +91,19 @@
     font-weight: 400;
     line-height: 18.2px;
 }
+#seopress_cpt .wrap-seopress-counters {
+    text-align: right;
+    background: rgb(238, 238, 238) none repeat scroll 0% 0%;
+    padding: 5px;
+}
+#seopress_cpt #seopress_titles_desc_counters {
+    display: inline;
+    margin-right: 5px;
+}
+#seopress_cpt #seopress_titles_desc_counters_val {
+    display: inline;
+    font-weight: bold;
+}
 
 /*************************************************************************************************/
 /* Admin - Tabs                                                                                  */
@@ -204,7 +217,7 @@
 .seopress-option input[type="text"],
 .seopress-option input[type="password"],
 .seopress-option textarea {
-    min-width: 400px;
+    min-width: 500px;
 }
 .seopress-option textarea {
     min-height: 100px;
@@ -337,4 +350,7 @@
 .seopress-option input[type="text"].seopress-admin-menu-input {
     min-width: inherit;
     width: 100%;
+}
+.seopress_page_seopress-import-export .postbox {
+    width: calc(100% - 20px);
 }

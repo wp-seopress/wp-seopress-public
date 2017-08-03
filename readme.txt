@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
 Tested up to: 4.6
-Stable tag: 0.2
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,10 +12,10 @@ SEOPress is a simple, fast and powerful SEO plugin for WordPress
 
 == Description ==
 
-SEOPress is a powerful plugin to optimize your SEO, boost your traffic and improve social sharing.
-Manage titles, meta descriptions, Open Graph Data, Google Knowledge Graph, Twitter Card, Canonical URL, meta robots...
-Build your custom XML Sitemap to improve search indexing.
-Link your social media accounts to your site.
+SEOPress is a powerful plugin to optimize your SEO, boost your traffic and improve social sharing.<br>
+Manage titles, meta descriptions, Open Graph Data, Google Knowledge Graph, Twitter Card, Canonical URL, meta robots...<br>
+Build your custom XML Sitemap to improve search indexing.<br>
+Link your social media accounts to your site.<br>
 Import / Export settings from site to site.
 
 <h3>Translation</h3>
@@ -25,6 +25,9 @@ Import / Export settings from site to site.
 	<li>French</li>
 </ul>
 
+<h3>Subscribe to our newsletter</h3>
+And get early access to our pro release!
+<a href="http://seopress.org/" target="_blank">Subscribe now</a>
 == Installation ==
 
 1. Upload 'seopress' to the '/wp-content/plugins/' directory
@@ -44,6 +47,12 @@ Soon :)
 7. SEOPRESS Metaboxe: Social settings
 
 == Changelog ==
+= 0.3 =
+* INFO Add placeholders
+* INFO Improve sanitization
+* INFO Set noindex on xml sitemaps
+* FIX Text domain for localization
+* FIX CSS in Import / Export page
 = 0.2 =
 * INFO Improve SEOPress Metaboxe UI/UX
 * INFO CSS Cleaning
