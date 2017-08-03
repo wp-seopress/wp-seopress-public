@@ -1,10 +1,10 @@
 === SEOPress ===
 Contributors: rainbowgeek
 Donate link: https://seopress.org/
-Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap
+Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap, bot, broken link checker
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.6
+Stable tag: 1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 <h3>SEOPress PRO</h3>
 
 <ul>
+	<li>SEOPress Bot: scan all your links in content to find errors (eg: 404...)</li>
 	<li>WooCommerce</li>
 	<li>Dublin Core</li>
 	<li>Structured Data types</li>
@@ -56,7 +57,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 	<li>htaccess</li>
 </ul>
 
-<a href="https://www.seopress.org/downloads/seopress-pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / unlimited sites</strong></a>
+<h4><a href="https://www.seopress.org/downloads/seopress-pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / unlimited sites</strong></a></h4>
 
 [youtube https://www.youtube.com/watch?v=9XMXBHBdva0]
 
@@ -110,6 +111,16 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 30. Structured Data Types metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.7 =
+* NEW SEOPress BOT : scan all your links in content and detect 404 errors, 301/302/307 redirects, links down... (SEOPress PRO only)
+* NEW SEOPress BOT : export links scan in CSV (SEOPress PRO only)
+* NEW XML Image Sitemap now with Post Thumbnail support
+* INFO Improve UI
+* INFO Improve Licence page
+* FIX Twitter Card
+* FIX Google News Sitemap
+* FIX Sanitize fields (PRO only)
+* FIX Translations
 = 1.6 =
 * NEW XML Image Sitemap to improve ranking in Google Images (supports standard images, WP Image Galleries and WooCommerce image products)
 * NEW Block SEO metaboxe to specific user roles

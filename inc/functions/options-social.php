@@ -520,11 +520,37 @@ function seopress_social_twitter_card_option() {
 	}
 }
 
+//Twitter Card Summary / large
+function seopress_social_twitter_card_img_size_option() {
+	$seopress_social_twitter_card_img_size_option = get_option("seopress_social_option_name");
+	if ( ! empty ( $seopress_social_twitter_card_img_size_option ) ) {
+		foreach ($seopress_social_twitter_card_img_size_option as $key => $seopress_social_twitter_card_value)
+			$options[$key] = $seopress_social_twitter_card_value;
+		 if (isset($seopress_social_twitter_card_img_size_option['seopress_social_twitter_card_img_size'])) { 
+		 	return $seopress_social_twitter_card_img_size_option['seopress_social_twitter_card_img_size'];
+		 }
+	}
+}
+
+//Twitter Summary Card
+function seopress_social_twitter_card_summary_hook() {
+	if (seopress_social_twitter_card_option() =='1') {
+		if (seopress_social_twitter_card_img_size_option() =='large') {
+			$seopress_social_twitter_card_summary = '<meta name="twitter:card" content="summary_large_image">';
+		} else {
+			$seopress_social_twitter_card_summary = '<meta name="twitter:card" content="summary" />';
+		}
+
+		echo $seopress_social_twitter_card_summary."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_twitter_card_summary_hook', 1 );
+
 //Twitter Site
 function seopress_social_twitter_card_site_hook() {
 	if (seopress_social_twitter_card_option() =='1' && seopress_social_accounts_twitter_option() !='' ) {
 
-		$seopress_social_twitter_card_site = '<meta name="twitter:site" content="'.seopress_social_accounts_twitter_option().'" />';
+		$seopress_social_twitter_card_site .= '<meta name="twitter:site" content="'.seopress_social_accounts_twitter_option().'" />';
 		
 		echo $seopress_social_twitter_card_site."\n";
 	}

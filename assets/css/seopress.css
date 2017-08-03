@@ -213,16 +213,22 @@
     padding: 1.0rem;
     background: #fff;
 }
-.seopress-styles .seopress-option h1 span,
-.seopress-styles .seopress-option h2 span {
+.seopress-styles .seopress-option h1 .dashicons,
+.seopress-styles .seopress-option h2 .dashicons {
     margin: 0 10px;
     font-size: 40px;
     width: 40px;
     height: 40px;
     vertical-align: middle;
 }
-.seopress-styles .seopress-option .metabox-holder h2 span {
+.seopress-styles .seopress-option .metabox-holder h2 .dashicons {
     font-size: 16px;
+}
+.seopress-option h1 .feature-state .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
 }
 .seopress-styles .wrap {
     margin: 0;
@@ -343,6 +349,7 @@
     display: none;
     background: #fff;
     padding: 1.5rem;
+    position: relative;
 }
 .seopress-tab.active {
     display: block;
@@ -407,7 +414,8 @@
 .seopress-page-list {
     margin: 0px;
 }
-.seopress-page-list .dashicons {
+.seopress-page-list .dashicons,
+.seopress-option .dashicons {
     vertical-align: middle;
     margin-right: 5px;
 }
@@ -451,6 +459,7 @@
     vertical-align: middle;
 }
 #seopress-content .seopress-page-list .seopress-feature a,
+.seopress-option .seopress-feature a,
 #seopress-notifications-center .seopress-alert .button-primary {
     color: #232323;
     text-decoration: none;
@@ -467,6 +476,7 @@
     text-shadow: none;
 }
 #seopress-content .seopress-page-list .seopress-feature a:hover,
+.seopress-option .seopress-feature a:hover,
 #seopress-notifications-center .seopress-alert .button-primary:hover {
     text-decoration: none;
     color: #FFF;
@@ -566,17 +576,22 @@
     font-weight: bold;
     background: #f1f1f1;
 }
-#seopress-content .feature-state {
+#seopress-content .feature-state, 
+.seopress-option .feature-state {
     font-style: italic;
     font-size: 12px;
+    font-weight: normal;
 }
-#seopress-content .feature-state.feature-state-on {
+#seopress-content .feature-state.feature-state-on,
+.seopress-option .feature-state.feature-state-on {
     display: inline;
 }
-#seopress-content .feature-state-on {
+#seopress-content .feature-state-on,
+.seopress-option .feature-state-on {
     display: inline;
 }
-#seopress-content .feature-state-off {
+#seopress-content .feature-state-off,
+.seopress-option .feature-state-off {
     display: none;
 }
 .seopress-option .postbox .inside li {

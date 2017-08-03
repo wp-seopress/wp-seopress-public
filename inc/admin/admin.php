@@ -44,6 +44,7 @@ class seopress_options
         $seopress_toggle_options['toggle-breadcrumbs'] = '1';
         $seopress_toggle_options['toggle-robots'] = '1';
         $seopress_toggle_options['toggle-404'] = '1';
+        $seopress_toggle_options['toggle-bot'] = '1';
 
         add_option('seopress_toggle', $seopress_toggle_options);
 
@@ -228,7 +229,31 @@ class seopress_options
         global $wp_version, $title;
         $current_tab = '';
         $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
-        echo '<'.$tag.'><span class="dashicons dashicons-editor-table"></span>'.$title.'</'.$tag.'>';
+        echo '<'.$tag.'><span class="dashicons dashicons-editor-table"></span>'.$title;
+
+        if(seopress_get_toggle_titles_option()=='1') { 
+            $seopress_get_toggle_titles_option = '"1"';
+        } else { 
+            $seopress_get_toggle_titles_option = '"0"';
+        }
+        ?>
+        
+        <input type="checkbox" name="toggle-titles" id="toggle-titles" class="toggle" data-toggle=<?php echo $seopress_get_toggle_titles_option; ?>>
+        <label for="toggle-titles"></label>
+        
+        <?php
+        if(seopress_get_toggle_titles_option()=='1') { 
+            echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+            echo '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+        } else { 
+            echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+            echo '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+        }
+        
+        echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
+
+        echo '</'.$tag.'>';
+
         settings_fields( 'seopress_titles_option_group' );
         ?>
         
@@ -272,7 +297,30 @@ class seopress_options
         global $wp_version, $title;
         $current_tab = '';
         $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
-        echo '<'.$tag.'><span class="dashicons dashicons-media-spreadsheet"></span>'.$title.'</'.$tag.'>';
+        echo '<'.$tag.'><span class="dashicons dashicons-media-spreadsheet"></span>'.$title;
+
+        if(seopress_get_toggle_xml_sitemap_option()=='1') { 
+            $seopress_get_toggle_xml_sitemap_option = '"1"';
+        } else { 
+            $seopress_get_toggle_xml_sitemap_option = '"0"';
+        } ?>
+
+        <input type="checkbox" name="toggle-xml-sitemap" id="toggle-xml-sitemap" class="toggle" data-toggle=<?php echo $seopress_get_toggle_xml_sitemap_option; ?>>
+        
+        <label for="toggle-xml-sitemap"></label>
+    
+        <?php if(seopress_get_toggle_xml_sitemap_option()=='1') { 
+            echo '<span id="sitemap-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+            echo '<span id="sitemap-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+        } else { 
+            echo '<span id="sitemap-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+            echo '<span id="sitemap-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+        }
+
+        echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
+
+        echo '</'.$tag.'>';
+
         settings_fields( 'seopress_xml_sitemap_option_group' );
         ?>
         
@@ -313,7 +361,31 @@ class seopress_options
         global $wp_version, $title;
         $current_tab = '';
         $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
-        echo '<'.$tag.'><span class="dashicons dashicons-share"></span>'.$title.'</'.$tag.'>';
+        echo '<'.$tag.'><span class="dashicons dashicons-share"></span>'.$title;
+        
+        if(seopress_get_toggle_social_option()=='1') { 
+            $seopress_get_toggle_social_option = '"1"';
+        } else { 
+            $seopress_get_toggle_social_option = '"0"';
+        }
+        ?>
+        
+        <input type="checkbox" name="toggle-social" id="toggle-social" class="toggle" data-toggle=<?php echo $seopress_get_toggle_social_option; ?>>
+        <label for="toggle-social"></label>
+        
+        <?php
+        if(seopress_get_toggle_social_option()=='1') { 
+            echo '<span id="social-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+            echo '<span id="social-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+        } else { 
+            echo '<span id="social-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+            echo '<span id="social-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+        }
+
+        echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
+
+        echo '</'.$tag.'>';                            
+
         settings_fields( 'seopress_social_option_group' );
         ?>
     
@@ -355,7 +427,32 @@ class seopress_options
         global $wp_version, $title;
         $current_tab = '';
         $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
-        echo '<'.$tag.'><span class="dashicons dashicons-chart-area"></span>'.$title.'</'.$tag.'>';
+        echo '<'.$tag.'><span class="dashicons dashicons-chart-area"></span>'.$title;
+
+        if(seopress_get_toggle_google_analytics_option()=='1') { 
+            $seopress_get_toggle_google_analytics_option = '"1"';
+        } else { 
+            $seopress_get_toggle_google_analytics_option = '"0"';
+        }
+        ?>
+        
+        <input type="checkbox" name="toggle-google-analytics" id="toggle-google-analytics" class="toggle" data-toggle=<?php echo $seopress_get_toggle_google_analytics_option; ?>>
+        
+        <label for="toggle-google-analytics"></label>
+        
+        <?php
+        if(seopress_get_toggle_google_analytics_option()=='1') { 
+            echo '<span id="analytics-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+            echo '<span id="analytics-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+        } else { 
+            echo '<span id="analytics-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+            echo '<span id="analytics-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+        }
+        
+        echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
+
+        echo '</'.$tag.'>';              
+
         settings_fields( 'seopress_google_analytics_option_group' );
         ?>
     
@@ -408,7 +505,31 @@ class seopress_options
         global $wp_version, $title;
         $current_tab = '';
         $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
-        echo '<'.$tag.'><span class="dashicons dashicons-admin-tools"></span>'.$title.'</'.$tag.'>';
+        echo '<'.$tag.'><span class="dashicons dashicons-admin-tools"></span>'.$title;
+
+        if(seopress_get_toggle_advanced_option()=='1') { 
+            $seopress_get_toggle_advanced_option = '"1"';
+        } else { 
+            $seopress_get_toggle_advanced_option = '"0"';
+        }
+        ?>
+        
+        <input type="checkbox" name="toggle-advanced" id="toggle-advanced" class="toggle" data-toggle=<?php echo $seopress_get_toggle_advanced_option; ?>>
+        <label for="toggle-advanced"></label>
+        
+        <?php
+        if(seopress_get_toggle_advanced_option()=='1') { 
+            echo '<span id="advanced-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+            echo '<span id="advanced-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+        } else { 
+            echo '<span id="advanced-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+            echo '<span id="advanced-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+        }
+
+        echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
+
+        echo '</'.$tag.'>';
+
         settings_fields( 'seopress_advanced_option_group' );
         ?>
     
@@ -1119,6 +1240,16 @@ class seopress_options
                                     }
                                 ?>
                                 <a href="http://www.seopress.org/support/guides/redirections/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                            </span>
+                        </div>
+                        <div class="seopress-feature">
+                            <div class="img-tool">
+                                <span class="dashicons dashicons-admin-generic"></span>                              
+                            </div>
+                            <span class="inner">
+                                <h3><?php _e('SEOPress BOT','wp-seopress'); ?></h3>
+                                <p><?php _e('Scan your site to find SEO problems.','wp-seopress'); ?></p>
+                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-bot-page' ); ?>"><?php _e('Scan','wp-seopress'); ?></a>
                             </span>
                         </div>
                         <div class="seopress-feature">
@@ -2810,6 +2941,8 @@ class seopress_options
         echo ' value="1"/>';
         
         echo '<label for="seopress_xml_sitemap_img_enable">'. __( 'Enable Image Sitemaps', 'wp-seopress' ) .'</label>';
+
+        echo '<a href="https://www.seopress.org/support/guides/enable-xml-image-sitemaps/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
         
         if (isset($this->options['seopress_xml_sitemap_img_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_img_enable']);
@@ -3076,7 +3209,7 @@ class seopress_options
     public function seopress_social_accounts_twitter_callback()
     {
         printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="'.__('eg: @wpcloudy','wp-seopress').'" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="'.__('eg: @wp_seopress','wp-seopress').'" value="%s"/>',
         esc_html( $this->options['seopress_social_accounts_twitter'])
         
         );

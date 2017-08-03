@@ -111,16 +111,16 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
     
     //Sortable columns
     foreach (seopress_get_post_types() as $key => $value) {
-    	add_filter( 'manage_edit-'.$key.'_sortable_columns' , 'wnetpp_admin_sortable_columns' );
+    	add_filter( 'manage_edit-'.$key.'_sortable_columns' , 'seopress_admin_sortable_columns' );
     }
     
-    function wnetpp_admin_sortable_columns($columns) {
+    function seopress_admin_sortable_columns($columns) {
     	$columns['seopress_noindex'] = 'seopress_noindex';
     	return $columns;
     }
     
-    add_filter( 'pre_get_posts', 'wnetpp_admin_sort_columns_by');
-    function wnetpp_admin_sort_columns_by( $query ) {
+    add_filter( 'pre_get_posts', 'seopress_admin_sort_columns_by');
+    function seopress_admin_sort_columns_by( $query ) {
     	if( ! is_admin() ) {
     		return;
     	} else {

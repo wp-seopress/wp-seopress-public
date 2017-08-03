@@ -56,13 +56,15 @@ function seopress_xml_sitemap_single() {
 						global $product;
 						if ($product !='') {
 							$product_img = $product->get_gallery_attachment_ids();
-							//print_r($product->get_gallery_attachment_ids());
 						}
 
 						//Galleries
 						$galleries = get_post_galleries_images($post);
 
-						if ($images->length>=1 || !empty($galleries) || !empty($product_img)) { 
+						//Post Thumbnail
+						$post_thumbnail = get_the_post_thumbnail_url($post);
+
+						if ($images->length>=1 || !empty($galleries) || !empty($product_img) || $post_thumbnail !='') { 
 							$seopress_sitemaps .= '<image:image>';
 							if ($images->length>=1) {
 								foreach($images as $img) {
@@ -90,6 +92,12 @@ function seopress_xml_sitemap_single() {
 							        $seopress_sitemaps .= wp_get_attachment_url( $product_attachment_id );
 							        $seopress_sitemaps .= '</image:loc>';
 								}
+							}
+							if ($post_thumbnail !='') {
+								$seopress_sitemaps .= "\n";
+						       	$seopress_sitemaps .= '<image:loc>';
+						        $seopress_sitemaps .= $post_thumbnail;
+						        $seopress_sitemaps .= '</image:loc>';
 							}
 
 						    $seopress_sitemaps .= "\n";
