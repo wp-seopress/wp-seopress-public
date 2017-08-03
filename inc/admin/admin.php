@@ -197,6 +197,7 @@ class seopress_options
         ?>
         <form method="post" action="options.php" class="seopress-option">
         <?php 
+        
         global $wp_version, $title;
         $current_tab = '';
         $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
@@ -941,6 +942,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_advanced_stop_words', // ID
+           __("Remove stop words from URL","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_stop_words_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
             'seopress_advanced_advanced_google', // ID
            __("Google site verification","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_google_callback' ), // Callback
@@ -970,7 +979,7 @@ class seopress_options
             array( $this, 'seopress_advanced_advanced_yandex_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
             'seopress_setting_section_advanced_advanced' // Section                  
-        );        
+        );         
     }
 
     /**
@@ -1528,7 +1537,7 @@ class seopress_options
         if (isset($this->options['seopress_xml_sitemap_general_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_general_enable']);
         }
-    }    
+    }
 
     public function seopress_xml_sitemap_post_types_list_callback()
     {
@@ -1555,7 +1564,7 @@ class seopress_options
             echo '<div class="seopress_wrap_single_cpt">';
 
                 $options = get_option( 'seopress_xml_sitemap_option_name' );  
-            
+                
                 $check = isset($options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include']);      
                 
                 echo '<input id="seopress_xml_sitemap_post_types_list_include['.$seopress_cpt_key.']" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_post_types_list]['.$seopress_cpt_key.'][include]" type="checkbox"';
@@ -1873,6 +1882,23 @@ class seopress_options
         
         if (isset($this->options['seopress_advanced_advanced_attachments'])) {
             esc_attr( $this->options['seopress_advanced_advanced_attachments']);
+        }
+    }
+
+    public function seopress_advanced_advanced_stop_words_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_stop_words']);      
+        
+        echo '<input id="seopress_advanced_advanced_stop_words" name="seopress_advanced_option_name[seopress_advanced_advanced_stop_words]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_stop_words">'. __( 'Remove stop words in permalinks', 'wp-seopress' ) .'</label><span class="dashicons dashicons-info" title="'.__('Setting based on site language. Supported language EN, FR, ES, DE, IT, PT.','wp-seopress').'"></span>';
+
+        if (isset($this->options['seopress_advanced_advanced_stop_words'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_stop_words']);
         }
     }
 

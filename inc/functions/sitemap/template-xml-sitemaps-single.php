@@ -14,10 +14,8 @@ function seopress_xml_sitemap_single() {
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= '<urlset xmlns:xsi="http://www.sitemaps.org/schemas/sitemap/0.9">';
 	$seopress_sitemaps .= "\n";
-	//foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
-	//	foreach ($cpt_value as $_cpt_key => $_cpt_value) {
-	//		if($_cpt_value =='1') {
-				$args = array( 'posts_per_page' => 1000, 'order'=> 'ASC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish' );
+	
+				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS' );
 				$postslist = get_posts( $args );
 				foreach ( $postslist as $post ) {
 				  	setup_postdata( $post );
@@ -36,9 +34,7 @@ function seopress_xml_sitemap_single() {
 					$seopress_sitemaps .= "\n";
 				}
 				wp_reset_postdata();
-	//		}
-	//	}
-	//}
+
 	$seopress_sitemaps .= '</urlset>';
 	return $seopress_sitemaps;
 } 

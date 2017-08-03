@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 0.7
+Version: 0.8
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
@@ -52,11 +52,11 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '0.7' ); 
+define( 'SEOPRESS_VERSION', '0.8' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//SEOPRESS INIT = Admin + Core + Translation
+//SEOPRESS INIT = Admin + Core + API + Translation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_init() {
     load_plugin_textdomain( 'wp-seopress', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -66,12 +66,11 @@ function seopress_init() {
     if ( is_admin() ) {
         require_once dirname( __FILE__ ) . '/inc/admin/admin.php';
         require_once dirname( __FILE__ ) . '/inc/admin/admin-metaboxes.php';
-    }
+    }   
 
     require_once dirname( __FILE__ ) . '/inc/functions/options.php';
 }
 add_action('plugins_loaded', 'seopress_init', 999);
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Loads the JS/CSS in admin

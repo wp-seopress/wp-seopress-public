@@ -38,5 +38,8 @@ add_action('init', 'seopress_load_advanced_options', 0);
 function seopress_load_advanced_options() {
 	if (!is_admin()){	
 	    require_once ( dirname( __FILE__ ) . '/options-advanced.php'); //Advanced
+	}	
+	if (is_admin()){	
+	    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
 	}
 }

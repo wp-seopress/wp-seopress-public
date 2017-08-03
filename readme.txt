@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
 Tested up to: 4.6
-Stable tag: 0.7
+Stable tag: 0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,7 +25,7 @@ Import / Export settings from site to site.
 	<li>French</li>
 </ul>
 
-<h3>Subscribe to our newsletter</h3>
+<h3>Subscribe to our newsletter and get a huge discount!</h3>
 And get early access to our pro release!
 <a href="http://seopress.org/" target="_blank">Subscribe now</a>
 == Installation ==
@@ -49,6 +49,10 @@ Soon :)
 9. SEOPress Metaboxe: Redirection settings
 
 == Changelog ==
+= 0.8 = 
+* NEW Remove stop words in URL (supported languages: EN, FR, ES, DE, IT, PT)
+* INFO List last modified posts first in XML sitemaps
+* FIX Remove posts marked as noindex in edit post page in XML sitemaps
 = 0.7 =
 * NEW Redesign SEOPress main page
 * NEW Notifications center

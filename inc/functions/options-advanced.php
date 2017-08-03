@@ -86,3 +86,6 @@ function seopress_advanced_advanced_yandex_hook() {
 	}
 }
 add_action( 'wp_head', 'seopress_advanced_advanced_yandex_hook', 2 );
+
+
+
