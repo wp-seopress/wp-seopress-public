@@ -259,7 +259,9 @@ function seopress_social_website_option() {
 	echo '</script>';
 	echo "\n";
 }
-add_action( 'wp_head', 'seopress_social_website_option', 1 );
+if (is_home() || is_front_page()) {
+	add_action( 'wp_head', 'seopress_social_website_option', 1 );
+}
 
 //Facebook
 //OG Enabled

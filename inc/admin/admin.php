@@ -24,7 +24,7 @@ class seopress_options
     public function deactivate() {
         delete_option($this->seopress_options);
     }
-	
+
     /**
      * Add options page
      */
@@ -294,119 +294,131 @@ class seopress_options
         ?>
             <div id="seopress-header">
 				<div id="seopress-admin">
-					<h1>
-						<span class="screen-reader-text"><?php _e( 'SEOPress', 'wp-seopress' ); ?></span>
-                        <?php if ( is_plugin_active( 'seopress-pro/seopress-pro.php' ) ) { ?>
-                            <span class="seopress-info-version">
-                                <strong>
-                                    <?php _e('PRO', 'wp-seopress'); ?>
-                                    <?php echo SEOPRESSPRO_VERSION; ?>
-                                </strong>
-                            </span>
-                        <?php } else { ?>
-                            <span class="seopress-info-version"><?php echo SEOPRESS_VERSION; ?></span>
-                        <?php } ?>
-					</h1>
-					<div id="seopress-notice">
-                        <a href="http://wp-alacarte.com/" target="_blank"><img class="wpalacarte-banner" width="300" height="250" src="<?php echo plugins_url('assets/img/wpalacarte-300x250-EN@2x.png', dirname(dirname(__FILE__))); ?>" /></a>
-						<h2><?php _e( 'The ultimate plugin to optimize your SEO!', 'wp-seopress' ); ?></h2>
-                        <p class="small">
-                            <span class="dashicons dashicons-wordpress"></span>
-                            <?php _e( 'You like SEOPress? Don\'t forget to rate it 5 stars!', 'wp-seopress' ); ?>
+                    <div id="seopress-navbar">
+    					<h1>
+    						<span class="screen-reader-text"><?php _e( 'SEOPress', 'wp-seopress' ); ?></span>
+                            <?php if ( is_plugin_active( 'seopress-pro/seopress-pro.php' ) ) { ?>
+                                <span class="seopress-info-version">
+                                    <strong>
+                                        <?php _e('PRO', 'wp-seopress'); ?>
+                                        <?php echo SEOPRESSPRO_VERSION; ?>
+                                    </strong>
+                                </span>
+                            <?php } else { ?>
+                                <span class="seopress-info-version"><?php echo SEOPRESS_VERSION; ?></span>
+                            <?php } ?>
+    					</h1>
+                        <div id="seopress-notice">
+                            <div class="small">
+                                <span class="dashicons dashicons-wordpress"></span>
+                                <?php _e( 'You like SEOPress? Don\'t forget to rate it 5 stars!', 'wp-seopress' ); ?>
 
-                            <div class="wporg-ratings rating-stars">
-                                <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=1#postform" data-rating="1" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
-                                <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=2#postform" data-rating="2" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
-                                <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=3#postform" data-rating="3" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
-                                <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=4#postform" data-rating="4" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
-                                <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=5#postform" data-rating="5" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
-                            </div>
-                            <script>
-                                jQuery(document).ready( function($) {
-                                    $('.rating-stars').find('a').hover(
-                                        function() {
-                                            $(this).nextAll('a').children('span').removeClass('dashicons-star-filled').addClass('dashicons-star-empty');
-                                            $(this).prevAll('a').children('span').removeClass('dashicons-star-empty').addClass('dashicons-star-filled');
-                                            $(this).children('span').removeClass('dashicons-star-empty').addClass('dashicons-star-filled');
-                                        }, function() {
-                                            var rating = $('input#rating').val();
-                                            if (rating) {
-                                                var list = $('.rating-stars a');
-                                                list.children('span').removeClass('dashicons-star-filled').addClass('dashicons-star-empty');
-                                                list.slice(0, rating).children('span').removeClass('dashicons-star-empty').addClass('dashicons-star-filled');
+                                <div class="wporg-ratings rating-stars">
+                                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=1#postform" data-rating="1" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
+                                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=2#postform" data-rating="2" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
+                                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=3#postform" data-rating="3" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
+                                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=4#postform" data-rating="4" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
+                                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=5#postform" data-rating="5" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#e6b800 !important;"></span></a>
+                                </div>
+                                <script>
+                                    jQuery(document).ready( function($) {
+                                        $('.rating-stars').find('a').hover(
+                                            function() {
+                                                $(this).nextAll('a').children('span').removeClass('dashicons-star-filled').addClass('dashicons-star-empty');
+                                                $(this).prevAll('a').children('span').removeClass('dashicons-star-empty').addClass('dashicons-star-filled');
+                                                $(this).children('span').removeClass('dashicons-star-empty').addClass('dashicons-star-filled');
+                                            }, function() {
+                                                var rating = $('input#rating').val();
+                                                if (rating) {
+                                                    var list = $('.rating-stars a');
+                                                    list.children('span').removeClass('dashicons-star-filled').addClass('dashicons-star-empty');
+                                                    list.slice(0, rating).children('span').removeClass('dashicons-star-empty').addClass('dashicons-star-filled');
+                                                }
                                             }
-                                        }
-                                    );
-                                });
-                            </script>
-                        </p>
-						<p class="small">
-							<a href="http://twitter.com/wpcloudy" target="_blank"><div class="dashicons dashicons-twitter"></div><?php _e( 'Follow us on Twitter!', 'wp-seopress' ); ?></a>
-                            &nbsp;
-                            <a href="http://www.seopress.org/" target="_blank"><div class="dashicons dashicons-info"></div><?php _e( 'Our website', 'wp-seopress' ); ?></a>
-                            &nbsp;
-                            <a href="http://www.seopress.org/support" target="_blank"><div class="dashicons dashicons-sos"></div><?php _e( 'Knowledge base', 'wp-seopress' ); ?></a>
-						</p>
-					</div>
-                    <table class="seopress-page-list" cellspacing="16">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="img-tool">
-                                        <span class="dashicons dashicons-editor-table"></span>
-                                    </div>
-                                    <span class="inner">
-                                        <h4><?php _e('Titles & metas','wp-seopress'); ?></h4>
-                                        <p><?php _e('Manage all your titles & metas','wp-seopress'); ?></p>
-                                        <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-titles' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="img-tool">
-                                        <span class="dashicons dashicons-media-spreadsheet"></span>
-                                    </div>
-                                    <span class="inner">
-                                        <h4><?php _e('XML Sitemap','wp-seopress'); ?></h4>
-                                        <p><?php _e('Manage your XML Sitemap','wp-seopress'); ?></p>
-                                        <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="img-tool">
-                                        <span class="dashicons dashicons-share"></span>
-                                    </div>
-                                    <span class="inner">
-                                        <h4><?php _e('Social','wp-seopress'); ?></h4>
-                                        <p><?php _e('Open Graph, Twitter Card, Google Knowledge Graph and more...','wp-seopress'); ?></p>
-                                        <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-social' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="img-tool">
-                                        <span class="dashicons dashicons-admin-tools"></span>                                  
-                                    </div>
-                                    <span class="inner">
-                                        <h4><?php _e('Advanced','wp-seopress'); ?></h4>
-                                        <p><?php _e('Advanced SEO options for advanced users!','wp-seopress'); ?></p>
-                                        <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-advanced' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="img-tool">
-                                        <span class="dashicons dashicons-admin-settings"></span>                                   
-                                    </div>
-                                    <span class="inner">
-                                        <h4><?php _e('Import / Export / Reset','wp-seopress'); ?></h4>
-                                        <p><?php _e('Import / export SEOPress settings from site to site.','wp-seopress'); ?></p>
-                                        <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-				</div>
+                                        );
+                                    });
+                                </script>
+                            </div>
+                            <div class="small">
+                                <a href="http://twitter.com/wpcloudy" target="_blank"><div class="dashicons dashicons-twitter"></div></a>
+                                <a href="http://www.seopress.org/" target="_blank"><div class="dashicons dashicons-info"></div></a>
+                                &nbsp;
+                                <a href="http://www.seopress.org/support" target="_blank"><?php _e( 'Support', 'wp-seopress' ); ?></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="seopress-content">
+                <?php if (get_option('blog_public') !='1' || seopress_xml_sitemap_general_enable_option() !='1') { ?>
+                    <div id="seopress-notifications-center">
+                        <h2><span class="dashicons dashicons-flag"></span><?php _e('Notifications center','wp-seopress'); ?></h2>
+                        <?php if (get_option('blog_public') !='1') { ?>
+                            <div class="seopress-alert">
+                                <p><span class="dashicons dashicons-warning"></span><?php _e('Your site is not visible to Search Engines!','wp-seopress'); ?></p>
+                                <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
+                        <?php if (seopress_xml_sitemap_general_enable_option() !='1') { ?>
+                            <div class="seopress-alert">
+                                <p><span class="dashicons dashicons-warning"></span><?php _e('You don\'t have an XML Sitemap!','wp-seopress'); ?></p>
+                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+                <div class="seopress-page-list">
+                    <div class="seopress-feature">
+                        <div class="img-tool">
+                            <span class="dashicons dashicons-editor-table"></span>
+                        </div>
+                        <span class="inner">
+                            <h4><?php _e('Titles & metas','wp-seopress'); ?></h4>
+                            <p><?php _e('Manage all your titles & metas','wp-seopress'); ?></p>
+                            <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-titles' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                        </span>
+                    </div>
+                    <div class="seopress-feature">
+                        <div class="img-tool">
+                            <span class="dashicons dashicons-media-spreadsheet"></span>
+                        </div>
+                        <span class="inner">
+                            <h4><?php _e('XML Sitemap','wp-seopress'); ?></h4>
+                            <p><?php _e('Manage your XML Sitemap','wp-seopress'); ?></p>
+                            <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                        </span>
+                    </div>
+                    <div class="seopress-feature">
+                        <div class="img-tool">
+                            <span class="dashicons dashicons-share"></span>
+                        </div>
+                        <span class="inner">
+                            <h4><?php _e('Social','wp-seopress'); ?></h4>
+                            <p><?php _e('Open Graph, Twitter Card, Google Knowledge Graph and more...','wp-seopress'); ?></p>
+                            <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-social' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                        </span>
+                    </div>
+                    <div class="seopress-feature">
+                        <div class="img-tool">
+                            <span class="dashicons dashicons-admin-tools"></span>                                  
+                        </div>
+                        <span class="inner">
+                            <h4><?php _e('Advanced','wp-seopress'); ?></h4>
+                            <p><?php _e('Advanced SEO options for advanced users!','wp-seopress'); ?></p>
+                            <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-advanced' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                        </span>
+                    </div>
+                    <div class="seopress-feature">
+                        <div class="img-tool">
+                            <span class="dashicons dashicons-admin-settings"></span>                                   
+                        </div>
+                        <span class="inner">
+                            <h4><?php _e('Import / Export / Reset','wp-seopress'); ?></h4>
+                            <p><?php _e('Import / export SEOPress settings from site to site.','wp-seopress'); ?></p>
+                            <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                        </span>
+                    </div>
+                </div>
 			</div>
         <?php
     }
@@ -927,6 +939,38 @@ class seopress_options
             'seopress-settings-admin-advanced-advanced', // Page
             'seopress_setting_section_advanced_advanced' // Section                  
         );
+
+        add_settings_field(
+            'seopress_advanced_advanced_google', // ID
+           __("Google site verification","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_google_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_bing', // ID
+           __("Bing site verification","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_bing_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );        
+
+        add_settings_field(
+            'seopress_advanced_advanced_pinterest', // ID
+           __("Pinterest site verification","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_pinterest_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_yandex', // ID
+           __("Yandex site verification","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_yandex_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );        
     }
 
     /**
@@ -937,13 +981,26 @@ class seopress_options
     public function sanitize( $input )
     {	
 
-        $seopress_sanitize_fields = array('seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_titles_archives_paged_title', 'seopress_titles_archives_paged_desc', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id');
+        $seopress_sanitize_fields = array('seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_titles_archives_paged_title', 'seopress_titles_archives_paged_desc', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id' );
+
+        $seopress_sanitize_site_verification = array('seopress_advanced_advanced_google', 'seopress_advanced_advanced_bing', 'seopress_advanced_advanced_pinterest', 'seopress_advanced_advanced_yandex' );
         
         foreach ($seopress_sanitize_fields as $value) {
             if( !empty( $input[$value] ) )
                 $input[$value] = sanitize_text_field( $input[$value] );
         }
         
+        foreach ($seopress_sanitize_site_verification as $value) {
+            if( !empty( $input[$value] ) ) {
+                if (preg_match('#content=\'([^"]+)\'#', $input[$value], $m)) {
+                    $input[$value] = $m[1];
+                } elseif (preg_match('#content="([^"]+)"#', $input[$value], $m)) {
+                    $input[$value] = $m[1];
+                }
+            }
+                
+        }
+
         return $input;
     }
 
@@ -980,6 +1037,8 @@ class seopress_options
     {
         print __('<p>Enable your Sitemap</p>', 'wp-seopress');
         echo __('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress');
+        echo '<br>';
+        echo __('Only the last 1000 items are listed in Sitemaps for performances issues.', 'wp-seopress');
         echo '<br>';
         echo '<br>';
         echo '<a href="'.home_url().'/sitemaps/" target="_blank" class="button">'.__('View your sitemap','wp-seopress').'</a>';
@@ -1815,6 +1874,46 @@ class seopress_options
         if (isset($this->options['seopress_advanced_advanced_attachments'])) {
             esc_attr( $this->options['seopress_advanced_advanced_attachments']);
         }
+    }
+
+    public function seopress_advanced_advanced_google_callback()
+    {
+        printf(
+        '<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_google]" placeholder="'.__('Enter Google meta value site verification','wp-seopress').'" value="%s"/>',
+        esc_html( $this->options['seopress_advanced_advanced_google'])
+        
+        );
+        
+    }
+
+    public function seopress_advanced_advanced_bing_callback()
+    {
+        printf(
+        '<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_bing]" placeholder="'.__('Enter Bing meta value site verification','wp-seopress').'" value="%s"/>',
+        esc_html( $this->options['seopress_advanced_advanced_bing'])
+        
+        );
+        
+    }
+
+    public function seopress_advanced_advanced_pinterest_callback()
+    {
+        printf(
+        '<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_pinterest]" placeholder="'.__('Enter Pinterest meta value site verification','wp-seopress').'" value="%s"/>',
+        esc_html( $this->options['seopress_advanced_advanced_pinterest'])
+        
+        );
+        
+    }
+
+    public function seopress_advanced_advanced_yandex_callback()
+    {
+        printf(
+        '<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_yandex]" placeholder="'.__('Enter Yandex meta value site verification','wp-seopress').'" value="%s"/>',
+        esc_html( $this->options['seopress_advanced_advanced_yandex'])
+        
+        );
+        
     }
 }
 	

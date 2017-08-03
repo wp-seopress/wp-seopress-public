@@ -34,3 +34,9 @@ function seopress_load_sitemap() {
 	require_once ( dirname( __FILE__ ) . '/options-sitemap.php'); //XML Sitemap
 }	
 
+add_action('init', 'seopress_load_advanced_options', 0);
+function seopress_load_advanced_options() {
+	if (!is_admin()){	
+	    require_once ( dirname( __FILE__ ) . '/options-advanced.php'); //Advanced
+	}
+}

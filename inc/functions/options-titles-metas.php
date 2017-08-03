@@ -224,6 +224,7 @@ if (get_option('blog_public') =='1') {
 		}
 		
 		//Template variables
+		$seopress_paged ='';
 		if (get_query_var('paged') >='1') {
 			$seopress_paged = get_query_var('paged');
 		}
@@ -319,6 +320,7 @@ if (get_option('blog_public') =='1') {
 		global $post;
 
 		//Template variables
+		$seopress_paged ='';
 		if (get_query_var('paged') >='1') {
 			$seopress_paged = get_query_var('paged');
 		}

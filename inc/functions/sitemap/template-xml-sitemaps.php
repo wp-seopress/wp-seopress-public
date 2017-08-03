@@ -9,17 +9,22 @@ Header("X-Robots-Tag: noindex", true);
 
 function seopress_xml_sitemap_index() {
 	$seopress_sitemaps ='<?xml version="1.0" encoding="UTF-8"?>';
-	$seopress_sitemaps .='<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_home_url().'/sitemaps_xsl"?>';
+	$seopress_sitemaps .= "\n";
+	$seopress_sitemaps .='<sitemapindex xmlns:xsi="http://www.sitemaps.org/schemas/sitemap/0.9">';
 	
 	//CPT
 	if (seopress_xml_sitemap_post_types_list_option() !='') {
 		foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
 			foreach ($cpt_value as $_cpt_key => $_cpt_value) {
 				if($_cpt_value =='1') {
+					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<sitemap>';
+					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<loc>';
 					$seopress_sitemaps .= home_url().'/sitemaps/'.$cpt_key;
 					$seopress_sitemaps .= '</loc>';
+					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<lastmod>';
 
 					$get_latest_post = new WP_Query(array('post_type' => $cpt_key, 'post_status' => 'publish', 'posts_per_page' => 1, 'orderby' => 'modified', 'order' => 'ASC'));
@@ -28,6 +33,7 @@ function seopress_xml_sitemap_index() {
 				    }
 					
 					$seopress_sitemaps .= '</lastmod>';
+					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '</sitemap>';
 				}
 			}
@@ -39,15 +45,19 @@ function seopress_xml_sitemap_index() {
 		foreach (seopress_xml_sitemap_taxonomies_list_option() as $tax_key => $tax_value) {
 			foreach ($tax_value as $_tax_key => $_tax_value) {
 				if($_tax_value =='1') {
+					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<sitemap>';
+					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<loc>';
 					$seopress_sitemaps .= home_url().'/sitemaps/'.$tax_key;
 					$seopress_sitemaps .= '</loc>';
+					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '</sitemap>';
 				}
 			}
 		}
 	}
+	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .='</sitemapindex>';
 	return $seopress_sitemaps;
 } 

@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 0.6
+Version: 0.7
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
@@ -52,7 +52,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '0.6' ); 
+define( 'SEOPRESS_VERSION', '0.7' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,6 +116,17 @@ function seopress_add_admin_options_scripts($hook) {
 }
 
 add_action('admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Admin Body Class
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+add_filter( 'admin_body_class', 'seopress_admin_body_class' );
+function seopress_admin_body_class( $classes ) {
+    if (isset($_GET['page']) && ($_GET['page'] == 'seopress-option' )) {
+        return $classes."seopress-styles";
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Shortcut settings page
@@ -223,6 +234,9 @@ if (seopress_xml_sitemap_general_enable_option() =='1') {
         //XML Index
         add_rewrite_rule( '^sitemaps$', 'index.php?seopress_sitemap=1', 'top' );
 
+        //XSL Sitemap
+        add_rewrite_rule( '^sitemaps_xsl$', 'index.php?seopress_sitemap_xsl=1', 'top' );
+
         //CPT
         if (seopress_xml_sitemap_post_types_list_option() !='') {
             foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
@@ -249,6 +263,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1') {
 
     function seopress_xml_sitemap_query_vars($vars) {
         $vars[] = 'seopress_sitemap';
+        $vars[] = 'seopress_sitemap_xsl';
         $vars[] = 'seopress_cpt';
         $vars[] = 'seopress_tax';
         return $vars;
@@ -259,6 +274,12 @@ if (seopress_xml_sitemap_general_enable_option() =='1') {
             $seopress_sitemap = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps.php';
             if( file_exists( $seopress_sitemap ) ) {
                 return $seopress_sitemap;
+            }
+        }        
+        if( get_query_var( 'seopress_sitemap_xsl' ) === '1' ) {
+            $seopress_sitemap_xsl = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps-xsl.php';
+            if( file_exists( $seopress_sitemap_xsl ) ) {
+                return $seopress_sitemap_xsl;
             }
         }
         if( get_query_var( 'seopress_cpt') !== '' ) {

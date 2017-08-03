@@ -172,21 +172,39 @@
 /*************************************************************************************************/
 /* Admin - Options panel                                                                         */
 /*************************************************************************************************/
+.wp-admin.seopress-styles {
+    background: #F7F7F7;
+}
+.seopress-styles #wpcontent {
+    padding-left: 0;
+}
+.seopress-styles #seopress-admin {
+    background: #FFF;
+    box-shadow: 0 0 0 1px rgba(224, 224, 224, 0),0 0px 2px #a8a8a8;
+}
+.seopress-styles #seopress-navbar {
+    padding: 10px 25px;
+    height: 40px;
+    margin: 0 auto;
+    width: 48rem;
+}
 #seopress-header {
-    margin: 0 10px 40px;
+    margin: 0;
 }
 #seopress-header #seopress-admin h1 {
     background: url("../img/logo-seopress.png") no-repeat scroll 0 0 / contain rgba(0, 0, 0, 0);
-    font-size: 20px;
+    font-size: 14px;
     font-weight: bold;
     line-height: 80px;
-    margin: 30px 0;
-    height: 50px;
+    height: 35px;
+    margin: 0;
+    display: inline-block;
+    width: 200px;
 }
 #seopress-header #seopress-admin h1 .seopress-info-version {
     position: relative;
-    left: 270px;
-    top: -10px;
+    left: 170px;
+    top: -17px;
 }
 #seopress-header #seopress-admin .wpc-info-version {
     font-size: 14px;
@@ -195,21 +213,23 @@
     text-indent: 0;
     top: 85px;
 }
-#seopress-header #seopress-admin #seopress-notice {
-    width: 63%;
+#seopress-header #seopress-notice {
+    float: right;
+    line-height: 40px;
 }
-#seopress-header #seopress-admin #seopress-notice p {
+#seopress-header #seopress-notice p {
     font-size: 16px;
 }
-#seopress-header #seopress-admin #seopress-notice .dashicons {
+#seopress-header #seopress-notice .dashicons {
     color: #444;
     text-decoration: none;
+    line-height: 40px;
 }
-#seopress-header #seopress-admin #seopress-notice p.small {
+#seopress-header #seopress-notice div.small {
     font-size: 13px;
     display: inline;
 }
-#seopress-header #seopress-admin #seopress-notice .wporg-ratings {
+#seopress-header #seopress-notice .wporg-ratings {
     display: inline;
 }
 .seopress-option .seopress-settings {
@@ -293,44 +313,47 @@
     margin: 5px 10px 2px 0;
 }
 .seopress-page-list {
-    margin: 0 0 0 -16px;
+    margin: 0px;
 }
 .seopress-page-list .dashicons {
     vertical-align: middle;
     margin-right: 5px;
 }
-.seopress-page-list td {
-    vertical-align: top;
-    border: 1px solid #CCC;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
-    width: 25%;
-    max-width: 250px;
-    min-width: 200px;
-}
-.seopress-page-list td .img-tool {
-    height: 125px;
+.seopress-page-list .seopress-feature, #seopress-notifications-center {
+    background: #fff;
+    margin: 20px auto;
+    box-shadow: 0 0 0 1px rgba(224, 224, 224, 0.5),0 1px 2px #a8a8a8;
+    max-width: 45rem;
+    padding: 1.5rem;
     width: 100%;
-    background: #747474;
 }
-.seopress-page-list td .img-tool .dashicons {
+.seopress-page-list .seopress-feature .img-tool {
+    height: 80px;
+    width: 80px;
+    background: #747474;
+    float: left;
+    margin: 0 30px 0 0;
+    border-radius: 80px;
+}
+.seopress-page-list .seopress-feature .img-tool .dashicons {
     color: #FFF;
-    font-size: 100px;
+    font-size: 60px;
     text-align: center;
     vertical-align: middle;
     width: 100%;
-    height: 130px;
-    line-height: 130px;
+    height: 80px;
+    line-height: 80px;
 }
-.seopress-page-list td .inner {
-    margin: 20px;
+.seopress-page-list .seopress-feature .inner {
+    margin: 0px;
     display: block;
 }
-.seopress-page-list td h4 {
+.seopress-page-list .seopress-feature h4 {
     margin: 0;
     font-size: 16px;
     font-weight: bold;
 }
-.seopress-page-list td h4 .dashicons {
+.seopress-page-list .seopress-feature h4 .dashicons {
     font-size: 16px;
     margin-left: 5px;
     vertical-align: middle;
@@ -342,6 +365,32 @@
 .seopress-page-list a:hover {
     text-decoration: none;
     color: #09C;
+}
+#seopress-notifications-center h2 {
+    margin: 5px 0px 15px 5px;
+    display: inline-block;
+    width: 100%;
+}
+#seopress-notifications-center .dashicons {
+    margin-right: 10px;
+}
+#seopress-notifications-center .seopress-alert {
+    padding: 10px 15px 10px;
+    display: block;
+    margin: 10px 10px 10px 5px;
+    border: 1px solid rgba(224, 224, 224, 1);
+    border-radius: 5px;
+}
+#seopress-notifications-center .seopress-alert p {
+    display: inline-block;
+}
+#seopress-notifications-center .seopress-alert .button-primary {
+    display: inline;
+    float: right;
+    margin: 10px 0px;
+}
+#seopress-notifications-center .seopress-alert .dashicons {
+    color:#09C;
 }
 .seopress-option .seopress-table {
     background: #FFF none repeat scroll 0% 0%;
@@ -357,7 +406,7 @@
 .seopress-option .seopress-table .seopress-settings-section {
     background: #f1f1f1;
 }
-.seopress-option .seopress-table .seopress-table-head td {
+.seopress-option .seopress-table .seopress-table-head .seopress-feature {
     border-bottom: 1px solid #ccc;
     font-weight: bold;
     background: #f1f1f1;

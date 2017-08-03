@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
 Tested up to: 4.6
-Stable tag: 0.6
+Stable tag: 0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,17 @@ Soon :)
 9. SEOPress Metaboxe: Redirection settings
 
 == Changelog ==
+= 0.7 =
+* NEW Redesign SEOPress main page
+* NEW Notifications center
+* NEW Add XSL in sitemaps for readability
+* NEW Add Google site verification option
+* NEW Add Bing site verification option
+* NEW Add Pinterest site verification option
+* NEW Add Yandex site verification option
+* INFO Limit items in sitemaps to 1000 for performances
+* FIX Notice Undefined variable: seopress_paged
+* FIX Website Schema.org in JSON-LD
 = 0.6 =
 * NEW Add template variable for titles tags and meta descriptions
 * INFO Remove screenshots from main directory to assets
