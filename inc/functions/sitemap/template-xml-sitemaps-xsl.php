@@ -8,16 +8,21 @@ Header('Content-type: text/xml');
 Header("X-Robots-Tag: noindex", true);
 
 function seopress_xml_sitemap_index_xsl() {
-	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?>';
-	$seopress_sitemaps_xsl .='
-<xsl:stylesheet version="1.0"
-xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:template match="/">';
-	
-	$seopress_sitemaps_xsl .='<html>';
+	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"
+				xmlns:html="http://www.w3.org/TR/REC-html40"
+				xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+				xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
+				xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+	<xsl:template match="/">
+		<html xmlns="http://www.w3.org/1999/xhtml">';
+	$seopress_sitemaps_xsl .="\n";
 	$seopress_sitemaps_xsl .='<head>';
+	$seopress_sitemaps_xsl .="\n";
 	$seopress_sitemaps_xsl .='<title>XML Sitemaps</title>';
-	$seopress_sitemaps_xsl .='<style>
+	$seopress_sitemaps_xsl .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+	$seopress_sitemaps_xsl .="\n";
+	$seopress_sitemaps_xsl .='<style type="text/css">
 	* {
 		margin: 0;
 		padding: 0;
@@ -105,7 +110,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	$seopress_sitemaps_xsl .='<body>';
 	$seopress_sitemaps_xsl .='<div id="main">';
 	$seopress_sitemaps_xsl .='<h1>SEOPress XML Sitemaps</h1>';
-	$seopress_sitemaps_xsl .='<p><a href="'.get_home_url().'/sitemaps">Index sitemaps</a></p>';
+	$seopress_sitemaps_xsl .='<p><a href="'.get_home_url().'/sitemaps.xml">Index sitemaps</a></p>';
 	$seopress_sitemaps_xsl .='<div id="sitemaps">';
 	$seopress_sitemaps_xsl .='<div class="loc">';
 	$seopress_sitemaps_xsl .='URL';
@@ -114,21 +119,21 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	$seopress_sitemaps_xsl .='Last update';
 	$seopress_sitemaps_xsl .='</div>';
 	$seopress_sitemaps_xsl .='<ul>';
-	$seopress_sitemaps_xsl .='<xsl:for-each select="sitemapindex/sitemap">';
+	$seopress_sitemaps_xsl .='<xsl:for-each select="sitemap:sitemapindex/sitemap:sitemap">';
     $seopress_sitemaps_xsl .='<li>';
-    $seopress_sitemaps_xsl .='<xsl:variable name="sitemap_loc"><xsl:value-of select="loc"/></xsl:variable>';
-    $seopress_sitemaps_xsl .='<span class="item-loc"><a href="{$sitemap_loc}"><xsl:value-of select="loc" /></a></span>';
-    $seopress_sitemaps_xsl .='<span class="item-lastmod"><xsl:value-of select="lastmod" /></span>';
+    $seopress_sitemaps_xsl .='<xsl:variable name="sitemap_loc"><xsl:value-of select="sitemap:loc"/></xsl:variable>';
+    $seopress_sitemaps_xsl .='<span class="item-loc"><a href="{$sitemap_loc}"><xsl:value-of select="sitemap:loc" /></a></span>';
+    $seopress_sitemaps_xsl .='<span class="item-lastmod"><xsl:value-of select="sitemap:lastmod" /></span>';
     $seopress_sitemaps_xsl .='</li>';
     $seopress_sitemaps_xsl .='</xsl:for-each>';
     $seopress_sitemaps_xsl .='</ul>';
 
     $seopress_sitemaps_xsl .='<ul>';
-	$seopress_sitemaps_xsl .='<xsl:for-each select="urlset/url">';
+	$seopress_sitemaps_xsl .='<xsl:for-each select="sitemap:urlset/sitemap:url">';
     $seopress_sitemaps_xsl .='<li>';
-    $seopress_sitemaps_xsl .='<xsl:variable name="url_loc"><xsl:value-of select="loc"/></xsl:variable>';
-    $seopress_sitemaps_xsl .='<span class="item-loc"><a href="{$url_loc}"><xsl:value-of select="loc" /></a></span>';
-    $seopress_sitemaps_xsl .='<span class="item-lastmod"><xsl:value-of select="lastmod" /></span>';
+    $seopress_sitemaps_xsl .='<xsl:variable name="url_loc"><xsl:value-of select="sitemap:loc"/></xsl:variable>';
+    $seopress_sitemaps_xsl .='<span class="item-loc"><a href="{$url_loc}"><xsl:value-of select="sitemap:loc" /></a></span>';
+    $seopress_sitemaps_xsl .='<span class="item-lastmod"><xsl:value-of select="sitemap:lastmod" /></span>';
     $seopress_sitemaps_xsl .='</li>';
     $seopress_sitemaps_xsl .='</xsl:for-each>';
     $seopress_sitemaps_xsl .='</ul>';

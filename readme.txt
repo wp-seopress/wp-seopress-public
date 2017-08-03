@@ -3,8 +3,8 @@ Contributors: rainbowgeek
 Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
-Tested up to: 4.6
-Stable tag: 0.9
+Tested up to: 4.7
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,16 +21,31 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 	<li>Meta descriptions</li>
 	<li>Open Graph Data</li>
 	<li>Google Knowledge Graph</li>
+	<li>Google Analytics</li>
 	<li>Twitter Card</li>
 	<li>Canonical URL</li> 
 	<li>Meta robots (noindex, nofollow, noodp, noimageindex, noarchive, nosnippet)</li>
 	<li>Build your custom XML Sitemap to improve search indexing.</li>
 	<li>Link your social media accounts to your site.</li>
-	<li>Redirections</li>
+	<li>Redirections in post, pages, custom post types</li>
 	<li>Remove stop words (english, french, spanish, german, italian, portuguese)</li>
 	<li>Redirect attachment pages to post parent</li>
 	<li>Import / Export settings from site to site.</li>
+	<li>Import posts metadata from Yoast SEO</li>
 	<li>...</li>
+</ul>
+
+<h3>SEOPress PRO</h3>
+
+<ul>
+	<li>WooCommerce</li>
+	<li>Breadcrumbs</li>
+	<li>Google Page Speed</li>
+	<li>Robots</li>
+	<li>Google News Sitemap</li>
+	<li>404 Monitoring</li>
+	<li>301 Redirections</li>
+	<li>htaccess</li>
 </ul>
 
 <h3>Translation</h3>
@@ -38,19 +53,21 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 <ul>
 	<li>English</li>
 	<li>French</li>
+	<li><a href="https://www.seopress.org/contact/">Add yours!</a></li>
 </ul>
 
 <h3>Subscribe to our newsletter and get a huge discount!</h3>
 And get early access to our pro release!
 <a href="http://seopress.org/" target="_blank">Subscribe now</a>
+
 == Installation ==
 
-1. Upload 'seopress' to the '/wp-content/plugins/' directory
+1. Upload 'wp-seopress' to the '/wp-content/plugins/' directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Click on SEOPress and apply settings.
 
 == Frequently Asked Questions ==
-<a href="http://www.seopress.org/support/faq/" target="_blank">Read our FAQ</a>
+<a href="https://www.seopress.org/support/faq/" target="_blank">Read our FAQ</a>
 
 == Screenshots ==
 1. SEOPress Dashboard
@@ -64,6 +81,42 @@ And get early access to our pro release!
 9. SEOPress Metaboxe: Redirection settings
 
 == Changelog ==
+= 1.0 =
+* NEW Google Analytics
+* NEW Import Yoast Posts metadata in SEOPress (Title tags, Meta description, Facebook Open Graph tags (title, description and image thumbnail), Twitter tags (title, description and image thumbnail), Meta Robots (noindex, nofollow...), Canonical URL)
+* NEW Google News Sitemap (SEOPress PRO only)
+* NEW Breadcrumbs (SEOPress PRO only)
+* NEW Google Page Speed tool (SEOPress PRO only)
+* NEW Robots.txt (SEOPress PRO only)
+* NEW htaccess (SEOPress PRO only)
+* NEW WooCommerce OG:PRICE meta for product (SEOPress PRO only)
+* NEW WooCommerce OG:CURRENCY meta for product (SEOPress PRO only)
+* NEW WooCommerce Noindex cart page (SEOPress PRO only)
+* NEW WooCommerce Noindex checkout page (SEOPress PRO only)
+* NEW WooCommerce Noindex customer account pages (SEOPress PRO only)
+* NEW Add Title tag column in post types
+* NEW Add Meta description column in post types
+* NEW Set default values (settings need to be reset if you already own the plugin)
+* NEW Add SEOPress in Admin Bar for quick access (you can remove it)
+* NEW Manage Titles, Meta Descriptions and Meta Robots for Custom Post Type Archives
+* NEW Add new checks in notifications center
+* NEW Add Logo preview in Knowledge graph
+* INFO If Jetpack enabled, disable Jetpack Open Graph Tags for compatibility
+* INFO Check if SEOPress is installed, if not, display a notice for SEOPress Pro users
+* INFO Improve some labels
+* INFO Add minimum size required for Facebook and Twitter thumbnail
+* INFO Add SEOPress icon in admin menu
+* INFO Add descriptions / tooltips for labels, inputs...
+* FIX Disable article:published_time, article:modified_time and og:updated_time on homepage
+* FIX CSS bugs
+* FIX XML Sitemaps namespaces
+* FIX Escape HTML in OG:Title, Twitter:title
+* FIX Wrong link for rating SEOPress on w.org
+* FIX Replace get_site_url() by get_home_url() (thanks to Ludovic Riaudel)
+* FIX Title tag and meta description for frontpage
+* FIX Notification center checks
+* FIX if function exists errors
+* FIX WooCommerce checks
 = 0.9 =
 * NEW Add OG:URL if Open Graph is enabled
 * NEW Add OG:SITE_NAME if Open Graph is enabled

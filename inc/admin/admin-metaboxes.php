@@ -8,11 +8,13 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 add_action('add_meta_boxes','seopress_init_metabox');
 function seopress_init_metabox(){
     foreach (seopress_get_post_types() as $key => $value) {
-        add_meta_box('seopress_cpt', __('SEOPress','wp-seopress'), 'seopress_cpt', $key, 'advanced');
+        add_meta_box('seopress_cpt', __('SEO','wp-seopress'), 'seopress_cpt', $key, 'advanced');
     }
+    add_meta_box('seopress_cpt', __('SEO','wp-seopress'), 'seopress_cpt', 'seopress_404', 'advanced');
 }
 
 function seopress_cpt($post){
+    global $typenow;
     $seopress_titles_title                  = get_post_meta($post->ID,'_seopress_titles_title',true);
     $seopress_titles_desc                   = get_post_meta($post->ID,'_seopress_titles_desc',true);
     $seopress_robots_index                  = get_post_meta($post->ID,'_seopress_robots_index',true);
@@ -31,7 +33,10 @@ function seopress_cpt($post){
     $seopress_redirections_enabled          = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
     $seopress_redirections_type             = get_post_meta($post->ID,'_seopress_redirections_type',true);
     $seopress_redirections_value            = get_post_meta($post->ID,'_seopress_redirections_value',true);
-    
+    $seopress_news_disabled                 = get_post_meta($post->ID,'_seopress_news_disabled',true);
+    $seopress_news_genres                   = get_post_meta($post->ID,'_seopress_news_genres',true);
+    $seopress_news_keyboard                 = get_post_meta($post->ID,'_seopress_news_keyboard',true);
+
     function seopress_titles_title($seopress_titles_title) {
         if ($seopress_titles_title !='') {
             return $seopress_titles_title;
@@ -75,15 +80,23 @@ function seopress_cpt($post){
         }
     }
 
-    echo '<div id="seopress-tabs">
-            <ul>
-                <li><a href="#tabs-1"><span class="dashicons dashicons-editor-table"></span>'. __( 'Titles settings', 'wp-seopress' ) .'</a></li>
-                <li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'wp-seopress' ) .'</a></li>
-                <li><a href="#tabs-3"><span class="dashicons dashicons-share"></span>'. __( 'Social', 'wp-seopress' ) .'</a></li>
-                <li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirections', 'wp-seopress' ) .'</a></li>
-            </ul>
+    echo '<div id="seopress-tabs">';
+         echo'<ul>';
+                if ("seopress_404" != $typenow) {
+                    echo '<li><a href="#tabs-1"><span class="dashicons dashicons-editor-table"></span>'. __( 'Titles settings', 'wp-seopress' ) .'</a></li>
+                    <li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'wp-seopress' ) .'</a></li>
+                    <li><a href="#tabs-3"><span class="dashicons dashicons-share"></span>'. __( 'Social', 'wp-seopress' ) .'</a></li>';
+                }
+                echo '<li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirections', 'wp-seopress' ) .'</a></li>';
+                if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
+                    if ("seopress_404" != $typenow) {
+                        echo '<li><a href="#tabs-5"><span class="dashicons dashicons-admin-post"></span>'. __( 'Google News', 'wp-seopress-pro' ) .'</a></li>';
+                    }
+                }
+            echo '</ul>';
             
-            <div id="tabs-1">
+            if ("seopress_404" != $typenow) {
+            echo '<div id="tabs-1">
                 <div class="box-left">
                     <p>
                         <label for="seopress_titles_title_meta">'. __( 'Title', 'wp-seopress' ) .'</label>
@@ -122,37 +135,37 @@ function seopress_cpt($post){
                     <label for="seopress_robots_index_meta">
                         <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' />
                             '. __( 'noindex', 'wp-seopress' ) .'
-                    </label>
+                    </label><span class="dashicons dashicons-info" title="'.__('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.','wp-seopress').'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_follow_meta">
                         <input type="checkbox" name="seopress_robots_follow" id="seopress_robots_follow_meta" value="yes" '. checked( $seopress_robots_follow, 'yes', false ) .' />
                             '. __( 'nofollow', 'wp-seopress' ) .'
-                    </label>
+                    </label><span class="dashicons dashicons-info" title="'.__('Do not follow links for all pages.','wp-seopress').'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_odp_meta">
                         <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta" value="yes" '. checked( $seopress_robots_odp, 'yes', false ) .' />
                             '. __( 'noodp', 'wp-seopress' ) .'
-                    </label>
+                    </label><span class="dashicons dashicons-info" title="'.__('Do not use Open Directory project metadata for titles or excerpts for all pages.','wp-seopress').'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_imageindex_meta">
                         <input type="checkbox" name="seopress_robots_imageindex" id="seopress_robots_imageindex_meta" value="yes" '. checked( $seopress_robots_imageindex, 'yes', false ) .' />
                             '. __( 'noimageindex', 'wp-seopress' ) .'
-                    </label>
+                    </label><span class="dashicons dashicons-info" title="'.__('Do not index images from the entire site.','wp-seopress').'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_archive_meta">
                         <input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta" value="yes" '. checked( $seopress_robots_archive, 'yes', false ) .' />
                             '. __( 'noarchive', 'wp-seopress' ) .'
-                    </label>
+                    </label><span class="dashicons dashicons-info" title="'.__('Do not display a "Cached" link in the Google search results.','wp-seopress').'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_snippet_meta">
                         <input type="checkbox" name="seopress_robots_snippet" id="seopress_robots_snippet_meta" value="yes" '. checked( $seopress_robots_snippet, 'yes', false ) .' />
                             '. __( 'nosnippet', 'wp-seopress' ) .'
-                    </label>
+                    </label><span class="dashicons dashicons-info" title="'.__('Do not display a description in the Google search results for all pages.','wp-seopress').'"></span>
                 </p>
                 <p>
                     <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
@@ -171,6 +184,7 @@ function seopress_cpt($post){
                 </p> 
                 <p>
                     <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'wp-seopress' ) .'</label>
+                    <span class="advise">'. __('Minimum size: 200x200px', 'wp-seopress') .'</span>
                     <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
                     <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
                 </p>
@@ -186,11 +200,14 @@ function seopress_cpt($post){
                 </p> 
                 <p>
                     <label for="seopress_social_twitter_img_meta">'. __( 'Twitter Thumbnail', 'wp-seopress' ) .'</label>
+                    <span class="advise">'. __('Minimum size: 160x160px', 'wp-seopress') .'</span>
                     <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_twitter_img.'" />
                     <input id="seopress_social_twitter_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
                 </p>
-            </div>
-            <div id="tabs-4">
+            </div>';
+            }
+
+            echo '<div id="tabs-4">
                 <p>
                     <label for="seopress_redirections_enabled_meta" id="seopress_redirections_enabled">
                         <input type="checkbox" name="seopress_redirections_enabled" id="seopress_redirections_enabled_meta" value="yes" '. checked( $seopress_redirections_enabled, 'yes', false ) .' />
@@ -211,8 +228,37 @@ function seopress_cpt($post){
                     } 
     echo            '<a href="" id="seopress_redirections_value_live" class="button" target="_blank" style="display: none">'.__('Test your URL','wp-seopress').'</a>
                 </p>
-            </div>
-        </div>
+            </div>';
+    if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
+        if ("seopress_404" != $typenow) { 
+            echo '<div id="tabs-5">
+                    <p>
+                        <label for="seopress_news_disabled_meta" id="seopress_news_disabled">
+                            <input type="checkbox" name="seopress_news_disabled" id="seopress_news_disabled_meta" value="yes" '. checked( $seopress_news_disabled, 'yes', false ) .' />
+                                '. __( 'Exclude this post from Google News Sitemap?', 'wp-seopress' ) .'
+                        </label>
+                    </p>
+                    <p>
+                        <label for="seopress_news_genres_meta">'. __( 'Google News Genres', 'wp-seopress' ) .'</label>
+                        <select name="seopress_news_genres">
+                            <option ' . selected( 'none', $seopress_news_genres, false ) . ' value="none">'. __( 'None', 'wp-seopress' ) .'</option>
+                            <option ' . selected( 'pressrelease', $seopress_news_genres, false ) . ' value="pressrelease">'. __( 'Press Release', 'wp-seopress' ) .'</option>
+                            <option ' . selected( 'satire', $seopress_news_genres, false ) . ' value="satire">'. __( 'Satire', 'wp-seopress' ) .'</option>
+                            <option ' . selected( 'blog', $seopress_news_genres, false ) . ' value="blog">'. __( 'Blog', 'wp-seopress' ) .'</option>
+                            <option ' . selected( 'oped', $seopress_news_genres, false ) . ' value="oped">'. __( 'OpEd', 'wp-seopress' ) .'</option>
+                            <option ' . selected( 'opinion', $seopress_news_genres, false ) . ' value="opinion">'. __( 'Opinion', 'wp-seopress' ) .'</option>
+                            <option ' . selected( 'usergenerated', $seopress_news_genres, false ) . ' value="usergenerated">'. __( 'UserGenerated', 'wp-seopress' ) .'</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="seopress_news_keyboard_meta" id="seopress_news_keyboard">
+                            '. __( 'Google News Keywords <em>(max recommended limit: 12)</em>', 'wp-seopress' ) .'</label>
+                            <input id="seopress_news_keyboard_meta" type="text" name="seopress_news_keyboard" placeholder="'.__('Enter your Google News Keywords','wp-seopress').'" value="'.$seopress_news_keyboard.'" />
+                    </p>
+                </div>';
+            }
+        }
+        echo '</div>
     ';  
 }
 
@@ -286,6 +332,17 @@ function seopress_save_metabox($post_id){
             update_post_meta( $post_id, '_seopress_redirections_enabled', 'yes' );
         } else {
             delete_post_meta( $post_id, '_seopress_redirections_enabled', '' );
+        }
+        if( isset( $_POST[ 'seopress_news_disabled' ] ) ) {
+            update_post_meta( $post_id, '_seopress_news_disabled', 'yes' );
+        } else {
+            delete_post_meta( $post_id, '_seopress_news_disabled', '' );
+        }
+        if(isset($_POST['seopress_news_genres'])){
+            update_post_meta($post_id, '_seopress_news_genres', $_POST['seopress_news_genres']);
+        }     
+        if(isset($_POST['seopress_news_keyboard'])){
+            update_post_meta($post_id, '_seopress_news_keyboard', esc_html($_POST['seopress_news_keyboard']));
         }
     }
 }

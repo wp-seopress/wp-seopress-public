@@ -17,8 +17,13 @@ function seopress_export_settings() {
     $settings["seopress_activated"]                     = get_option( 'seopress_activated' );
     $settings["seopress_titles_option_name"]            = get_option( 'seopress_titles_option_name' );
     $settings["seopress_social_option_name"]            = get_option( 'seopress_social_option_name' );
-    $settings["seopress_advanced_option_name"]            = get_option( 'seopress_advanced_option_name' );
+    $settings["seopress_google_analytics_option_name"]  = get_option( 'seopress_google_analytics_option_name' );
+    $settings["seopress_advanced_option_name"]          = get_option( 'seopress_advanced_option_name' );
     $settings["seopress_xml_sitemap_option_name"]       = get_option( 'seopress_xml_sitemap_option_name' );
+    $settings["seopress_pro_option_name"]               = get_option( 'seopress_pro_option_name' );
+    $settings["seopress_pro_license_key"]               = get_option( 'seopress_pro_license_key' );
+    $settings["seopress_pro_license_status"]            = get_option( 'seopress_pro_license_status' );
+    $settings["seopress_toggle"]                        = get_option( 'seopress_toggle' );
 
     ignore_user_abort( true );
     nocache_headers();
@@ -30,7 +35,7 @@ function seopress_export_settings() {
 }
 add_action( 'admin_init', 'seopress_export_settings' );
 
-//Import WP Admin UI Settings from JSON
+//Import SEOPress Settings from JSON
 function seopress_import_settings() {
     if( empty( $_POST['seopress_action'] ) || 'import_settings' != $_POST['seopress_action'] )
         return;
@@ -52,14 +57,19 @@ function seopress_import_settings() {
     update_option( 'seopress_activated', $settings["seopress_activated"] ); 
     update_option( 'seopress_titles_option_name', $settings["seopress_titles_option_name"] ); 
     update_option( 'seopress_social_option_name', $settings["seopress_social_option_name"] ); 
+    update_option( 'seopress_analytics_option_name', $settings["seopress_analytics_option_name"] ); 
     update_option( 'seopress_advanced_option_name', $settings["seopress_advanced_option_name"] ); 
     update_option( 'seopress_xml_sitemap_option_name', $settings["seopress_xml_sitemap_option_name"] ); 
+    update_option( 'seopress_pro_option_name', $settings["seopress_pro_option_name"] );
+    update_option( 'seopress_pro_license_key', $settings["seopress_pro_license_key"] );
+    update_option( 'seopress_pro_license_status', $settings["seopress_pro_license_status"] );
+    update_option( 'seopress_toggle', $settings["seopress_toggle"] );
      
     wp_safe_redirect( admin_url( 'admin.php?page=seopress-import-export' ) ); exit;
 }
 add_action( 'admin_init', 'seopress_import_settings' );
 
-//Reset WP Admin UI Settings
+//Reset SEOPress Settings
 function seopress_reset_settings() {
     if( empty( $_POST['seopress_action'] ) || 'reset_settings' != $_POST['seopress_action'] )
         return;

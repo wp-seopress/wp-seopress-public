@@ -1,0 +1,16 @@
+{
+    "name": "Gmulti/WPGod",
+    "description": "Library Tracker errors WordPress",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Thomas DENEULIN",
+            "email": "contact@wp-god.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WPGodWpseopress\\": "src/WPGod/"
+        }
+    }
+}

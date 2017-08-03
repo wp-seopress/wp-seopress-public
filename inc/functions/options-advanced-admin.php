@@ -3,6 +3,77 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 
 //Advanced
 //=================================================================================================
+//Admin bar
+function seopress_advanced_appearance_adminbar_option() {
+	$seopress_advanced_appearance_adminbar_option = get_option("seopress_advanced_option_name");
+	if ( ! empty ( $seopress_advanced_appearance_adminbar_option ) ) {
+		foreach ($seopress_advanced_appearance_adminbar_option as $key => $seopress_advanced_appearance_adminbar_value)
+			$options[$key] = $seopress_advanced_appearance_adminbar_value;
+		 if (isset($seopress_advanced_appearance_adminbar_option['seopress_advanced_appearance_adminbar'])) { 
+		 	return $seopress_advanced_appearance_adminbar_option['seopress_advanced_appearance_adminbar'];
+		 }
+	}
+}
+
+if (seopress_advanced_appearance_adminbar_option() !='') {
+	add_action( 'admin_bar_menu', 'seopress_advanced_appearance_adminbar_hook', 999 );
+
+	function seopress_advanced_appearance_adminbar_hook( $wp_admin_bar ) {
+		$wp_admin_bar->remove_node( 'seopress_custom_top_level' );
+	}
+}
+
+//Columns in post types
+function seopress_advanced_appearance_title_col_option() {
+    $seopress_advanced_appearance_title_col_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_title_col_option ) ) {
+        foreach ($seopress_advanced_appearance_title_col_option as $key => $seopress_advanced_appearance_title_col_value)
+            $options[$key] = $seopress_advanced_appearance_title_col_value;
+         if (isset($seopress_advanced_appearance_title_col_option['seopress_advanced_appearance_title_col'])) { 
+            return $seopress_advanced_appearance_title_col_option['seopress_advanced_appearance_title_col'];
+         }
+    }
+}
+function seopress_advanced_appearance_meta_desc_col_option() {
+    $seopress_advanced_appearance_meta_desc_col_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_meta_desc_col_option ) ) {
+        foreach ($seopress_advanced_appearance_meta_desc_col_option as $key => $seopress_advanced_appearance_meta_desc_col_value)
+            $options[$key] = $seopress_advanced_appearance_meta_desc_col_value;
+         if (isset($seopress_advanced_appearance_meta_desc_col_option['seopress_advanced_appearance_meta_desc_col'])) { 
+            return $seopress_advanced_appearance_meta_desc_col_option['seopress_advanced_appearance_meta_desc_col'];
+         }
+    }
+}
+
+if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_appearance_meta_desc_col_option() !='') {
+    function seopress_add_columns() {
+        foreach (seopress_get_post_types() as $key => $value) {
+            add_filter('manage_'.$key.'_posts_columns', 'seopress_title_columns');
+            add_action('manage_'.$key.'_posts_custom_column', 'seopress_title_display_column', 10, 2);
+        }
+
+        function seopress_title_columns($columns) {
+            if(seopress_advanced_appearance_title_col_option() !='') {
+                $columns['seopress_title'] = __('Title tag', 'wp-seopress-pro');
+            }
+            if(seopress_advanced_appearance_meta_desc_col_option() !='') {
+                $columns['seopress_desc'] = __('Meta Desc.', 'wp-seopress-pro');
+            }
+            return $columns;
+        }
+
+        function seopress_title_display_column($column, $post_id) {
+            if ($column == 'seopress_title') {
+                echo get_post_meta($post_id, "_seopress_titles_title", true);
+            }
+            if ($column == 'seopress_desc') {
+                echo get_post_meta($post_id, "_seopress_titles_desc", true);
+            }
+        }
+    }
+    add_action('admin_menu', 'seopress_add_columns', 999);
+}
+
 //Stop words
 function seopress_advanced_advanced_stop_words_option() {
 	$seopress_advanced_advanced_stop_words_option = get_option("seopress_advanced_option_name");
@@ -13,7 +84,7 @@ function seopress_advanced_advanced_stop_words_option() {
 		 	return $seopress_advanced_advanced_stop_words_option['seopress_advanced_advanced_stop_words'];
 		 }
 	}
-};
+}
 
 if (seopress_advanced_advanced_stop_words_option() !='') {
 function seopress_advanced_advanced_stop_words_hook($slug) {
