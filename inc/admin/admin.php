@@ -2251,6 +2251,23 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_appearance_w3c_col', // ID
+           __("Show W3C validator column in post types","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_w3c_col_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+            add_settings_field(
+                'seopress_advanced_appearance_ps_col', // ID
+               __("Show Google Page Speed column in post types","wp-seopress"), // Title
+                array( $this, 'seopress_advanced_appearance_ps_col_callback' ), // Callback
+                'seopress-settings-admin-advanced-appearance', // Page
+                'seopress_setting_section_advanced_appearance' // Section                  
+            );
+        }
+
+        add_settings_field(
             'seopress_advanced_appearance_genesis_seo_metaboxe', // ID
            __("Hide Genesis SEO Metaboxe","wp-seopress"), // Title
             array( $this, 'seopress_advanced_appearance_genesis_seo_metaboxe_callback' ), // Callback
@@ -4344,6 +4361,42 @@ class seopress_options
         }
     }
 
+    public function seopress_advanced_appearance_w3c_col_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_w3c_col']);      
+        
+        echo '<input id="seopress_advanced_appearance_w3c_col" name="seopress_advanced_option_name[seopress_advanced_appearance_w3c_col]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_w3c_col">'. __( 'Display W3C column to check code quality', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_w3c_col'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_w3c_col']);
+        }
+    }
+
+    public function seopress_advanced_appearance_ps_col_callback()
+    {
+        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+            $options = get_option( 'seopress_advanced_option_name' );  
+            
+            $check = isset($options['seopress_advanced_appearance_ps_col']);      
+            
+            echo '<input id="seopress_advanced_appearance_ps_col" name="seopress_advanced_option_name[seopress_advanced_appearance_ps_col]" type="checkbox"';
+            if ('1' == $check) echo 'checked="yes"'; 
+            echo ' value="1"/>';
+            
+            echo '<label for="seopress_advanced_appearance_ps_col">'. __( 'Display Page Speed column to check performances', 'wp-seopress' ) .'</label>';
+
+            if (isset($this->options['seopress_advanced_appearance_ps_col'])) {
+                esc_attr( $this->options['seopress_advanced_appearance_ps_col']);
+            }
+        }
+    }
+    
     public function seopress_advanced_appearance_genesis_seo_metaboxe_callback()
     {
         $options = get_option( 'seopress_advanced_option_name' );  

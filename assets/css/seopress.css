@@ -653,7 +653,46 @@
     margin-right: 5px;
     vertical-align: middle;
 }
-
+.seopress-button {
+    vertical-align: middle;
+    padding: 7px;
+    color: #668eaa;
+    font-size: 11px;
+    line-height: 1;
+    text-transform: uppercase;
+    border-radius: 4px;
+    background: #fff;
+    border-color: #c8d7e1;
+    border-style: solid;
+    border-width: 1px 1px 2px;
+    color: #2e4453;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    outline: 0;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    vertical-align: top;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 21px;
+    border-radius: 4px;
+    padding: 7px 14px 9px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: all 300ms linear;
+}
+.seopress-button:hover {
+    border-color: #a8bece;
+    color: #00a0d2;
+}
+.seopress-button .dashicons {
+    vertical-align: middle;
+}
 /*************************************************************************************************/
 /* Admin - Dashboard                                                                             */
 /*************************************************************************************************/

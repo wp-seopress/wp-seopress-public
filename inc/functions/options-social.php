@@ -262,7 +262,7 @@ function seopress_social_accounts_jsonld_hook() {
 	}
 
 	echo '<script type="application/ld+json">';
-	echo '{"@context" : "http://schema.org","@type" : '.$seopress_social_knowledge_type_option.',';
+	echo '{"@context" : "'.seopress_check_ssl().'schema.org","@type" : '.$seopress_social_knowledge_type_option.',';
 	if (seopress_social_knowledge_img_option() !='') {
 		echo '"logo": '.$seopress_social_knowledge_img_option.',';
 	}
@@ -305,7 +305,7 @@ function seopress_social_website_option() {
 	$target = get_home_url().'/?s={search_term_string}';
 	echo '<script type="application/ld+json">';
 	echo '{
-		    "@context": "http://schema.org",
+		    "@context": "'.seopress_check_ssl().'schema.org",
 		    "@type": "WebSite",
 		    "url" : '.json_encode(get_home_url()).',
 		    "potentialAction": {

@@ -74,8 +74,28 @@ function seopress_advanced_appearance_words_col_option() {
          }
     }
 }
+function seopress_advanced_appearance_w3c_col_option() {
+    $seopress_advanced_appearance_w3c_col_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_w3c_col_option ) ) {
+        foreach ($seopress_advanced_appearance_w3c_col_option as $key => $seopress_advanced_appearance_w3c_col_value)
+            $options[$key] = $seopress_advanced_appearance_w3c_col_value;
+         if (isset($seopress_advanced_appearance_w3c_col_option['seopress_advanced_appearance_w3c_col'])) { 
+            return $seopress_advanced_appearance_w3c_col_option['seopress_advanced_appearance_w3c_col'];
+         }
+    }
+}
+function seopress_advanced_appearance_ps_col_option() {
+    $seopress_advanced_appearance_ps_col_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_ps_col_option ) ) {
+        foreach ($seopress_advanced_appearance_ps_col_option as $key => $seopress_advanced_appearance_ps_col_value)
+            $options[$key] = $seopress_advanced_appearance_ps_col_value;
+         if (isset($seopress_advanced_appearance_ps_col_option['seopress_advanced_appearance_ps_col'])) { 
+            return $seopress_advanced_appearance_ps_col_option['seopress_advanced_appearance_ps_col'];
+         }
+    }
+}
 
-if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_appearance_meta_desc_col_option() !='' || seopress_advanced_appearance_noindex_col_option() !='' || seopress_advanced_appearance_nofollow_col_option() !='' || seopress_advanced_appearance_words_col_option() !='') {
+if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_appearance_meta_desc_col_option() !='' || seopress_advanced_appearance_noindex_col_option() !='' || seopress_advanced_appearance_nofollow_col_option() !='' || seopress_advanced_appearance_words_col_option() !='' || seopress_advanced_appearance_w3c_col_option() !='' || seopress_advanced_appearance_ps_col_option() !='') {
     function seopress_add_columns() {
         foreach (seopress_get_post_types() as $key => $value) {
             add_filter('manage_'.$key.'_posts_columns', 'seopress_title_columns');
@@ -97,6 +117,12 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
             }
             if(seopress_advanced_appearance_words_col_option() !='') {
                 $columns['seopress_words'] = __('Count words?', 'wp-seopress');
+            }
+            if(seopress_advanced_appearance_w3c_col_option() !='') {
+                $columns['seopress_w3c'] = __('W3C check', 'wp-seopress');
+            }
+            if(seopress_advanced_appearance_ps_col_option() !='') {
+                $columns['seopress_ps'] = __('Page Speed', 'wp-seopress');
             }
             return $columns;
         }
@@ -120,8 +146,14 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
             }
             if ($column == 'seopress_words') {
                 if (str_word_count(strip_tags(get_the_content())) !='') {
-                	echo str_word_count(strip_tags(get_the_content()));
+                    echo str_word_count(strip_tags(get_the_content()));
                 }
+            }
+            if ($column == 'seopress_w3c') {
+                echo '<a class="seopress-button" href="https://validator.w3.org/nu/?doc='.get_the_permalink().'" title="'.__('Check code quality of this page','wp-seopress').'" target="_blank"><span class="dashicons dashicons-clipboard"></span></a>';
+            }
+            if ($column == 'seopress_ps') {
+                echo '<div class="seopress-request-page-speed seopress-button" data_permalink="'.get_the_permalink().'" title="'.__('Analyse this page with Google Page Speed','wp-seopress').'"><span class="dashicons dashicons-dashboard"></span></div>';
             }
         }
     }

@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best SEO plugin.
-Version: 1.8.2
+Version: 1.9
 Author: Benjamin DENIS
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -56,7 +56,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '1.8.2' ); 
+define( 'SEOPRESS_VERSION', '1.9' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,6 +86,24 @@ add_action('plugins_loaded', 'seopress_init', 999);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Loads the JS/CSS in admin
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_admin_metaboxe_js($hook) {
+    global $post;
+
+    if ( $hook == 'post-new.php' || $hook == 'post.php') {
+        $cpt_public_check = get_post_type_object( $post->post_type );
+        if ( 'attachment' !== $post->post_type ) { 
+            wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+            if ( 'seopress_404' !== $post->post_type ) { 
+                if ($cpt_public_check->public =='1') {
+                    wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', __FILE__ ), array( 'jquery' ) );
+                }
+            }
+            wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
+            wp_enqueue_media();
+
+        }
+    }
+}
 
 //SEOPRESS Options page
 function seopress_add_admin_options_scripts($hook) {
@@ -157,25 +175,6 @@ function seopress_add_admin_options_scripts($hook) {
         wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
         wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
         wp_enqueue_media();
-    }
-
-    function seopress_admin_metaboxe_js($hook) {
-        global $post;
-
-        if ( $hook == 'post-new.php' || $hook == 'post.php') {
-            $cpt_public_check = get_post_type_object( $post->post_type );
-            if ( 'attachment' !== $post->post_type ) { 
-                wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
-                if ( 'seopress_404' !== $post->post_type ) { 
-                    if ($cpt_public_check->public =='1') {
-                        wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', __FILE__ ), array( 'jquery' ) );
-                    }
-                }
-                wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
-                wp_enqueue_media();
-
-            }
-        }
     }
 
     if (is_user_logged_in()) {
@@ -286,6 +285,17 @@ function seopress_get_taxonomies() {
     $taxonomies = get_taxonomies( $args, $output, $operator );  
     
     return $taxonomies;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Check SSL for schema.org
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_check_ssl() {
+    if (is_ssl()) {
+        return 'https://';
+    } else {
+        return 'http://';
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
