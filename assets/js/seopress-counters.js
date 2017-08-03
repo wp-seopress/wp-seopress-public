@@ -49,3 +49,18 @@ jQuery(document).ready(function(){
         };
     });
 });
+
+//Redirections
+jQuery(document).ready(function(){  
+    jQuery("#seopress_redirections_value_meta").bind('change keyup', function(event) {
+        if(jQuery(this).val().length > 0){
+            jQuery("#seopress_redirections_value_live").attr("href", event.target.value);
+            jQuery("#seopress_redirections_value_live").css('display', 'inline-block');
+            jQuery("#seopress_redirections_value_default").css('display', 'none');
+        } else {
+            jQuery("#seopress_redirections_value_default").css('display', 'none');
+            jQuery("#seopress_redirections_value_live").css('display', 'none');
+        };
+    });
+    
+});

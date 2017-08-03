@@ -13,12 +13,19 @@ function seopress_enable() {
 	}	
 }
 
-//Front END - Titles & metas
+//Front END - Titles & metas - Redirections
 add_action('wp_head', 'seopress_load_titles_options', 0);
 function seopress_load_titles_options() {
 	if (!is_admin()){	
 	    require_once ( dirname( __FILE__ ) . '/options-titles-metas.php'); //Titles & metas
 	    require_once ( dirname( __FILE__ ) . '/options-social.php'); //Social
+	}
+}
+
+add_action('init', 'seopress_load_redirections_options', 0);
+function seopress_load_redirections_options() {
+	if (!is_admin()){	
+	    require_once ( dirname( __FILE__ ) . '/options-redirections.php'); //Redirections
 	}
 }
 

@@ -17,6 +17,7 @@ function seopress_export_settings() {
     $settings["seopress_activated"]                     = get_option( 'seopress_activated' );
     $settings["seopress_titles_option_name"]            = get_option( 'seopress_titles_option_name' );
     $settings["seopress_social_option_name"]            = get_option( 'seopress_social_option_name' );
+    $settings["seopress_advanced_option_name"]            = get_option( 'seopress_advanced_option_name' );
     $settings["seopress_xml_sitemap_option_name"]       = get_option( 'seopress_xml_sitemap_option_name' );
 
     ignore_user_abort( true );
@@ -51,6 +52,7 @@ function seopress_import_settings() {
     update_option( 'seopress_activated', $settings["seopress_activated"] ); 
     update_option( 'seopress_titles_option_name', $settings["seopress_titles_option_name"] ); 
     update_option( 'seopress_social_option_name', $settings["seopress_social_option_name"] ); 
+    update_option( 'seopress_advanced_option_name', $settings["seopress_advanced_option_name"] ); 
     update_option( 'seopress_xml_sitemap_option_name', $settings["seopress_xml_sitemap_option_name"] ); 
      
     wp_safe_redirect( admin_url( 'admin.php?page=seopress-import-export' ) ); exit;

@@ -38,6 +38,7 @@
 #seopress_cpt #tabs-1 label, 
 #seopress_cpt #tabs-2 label[for=seopress_robots_canonical_meta], 
 #seopress_cpt #tabs-3 label, 
+#seopress_cpt #tabs-4 label, 
 #seopress_cpt .subsection-title {
     border-bottom: 1px solid #DDDDDD;
     display: block;
@@ -49,11 +50,23 @@
 #seopress_cpt #tabs-1 input, 
 #seopress_cpt #tabs-2 input[type=text], 
 #seopress_cpt #tabs-3 textarea, 
-#seopress_cpt #tabs-3 input[type=text] {
+#seopress_cpt #tabs-3 input[type=text],
+#seopress_cpt #tabs-4 input[type=text] {
     width:100%;
 }
 #seopress_cpt select {
     width:300px;
+}
+#seopress_cpt #tabs-4 select {
+    width:50px;
+    display: inline;
+}
+#seopress_cpt #tabs-4 #seopress_redirections_value_meta {
+    width: calc(100% - 58px);
+    float: right;
+}
+#seopress_cpt #tabs-4 #seopress_redirections_enabled {
+    border-bottom: none;
 }
 #seopress_cpt .mandatory {
     color: #cc0000;

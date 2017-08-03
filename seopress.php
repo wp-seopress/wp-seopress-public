@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 0.4
+Version: 0.5
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
@@ -52,7 +52,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '0.4' ); 
+define( 'SEOPRESS_VERSION', '0.5' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,6 +89,10 @@ function seopress_add_admin_options_scripts($hook) {
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-xml-sitemap') ) {
         wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs4.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+    }
+
+    if (isset($_GET['page']) && ($_GET['page'] == 'seopress-advanced') ) {
+        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs5.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-social') ) {
@@ -146,7 +150,7 @@ function seopress_get_post_types() {
         'show_ui' => true,
     );
 
-    $output = 'names'; // names or objects, note names is the default
+    $output = 'objects'; // names or objects, note names is the default
     $operator = 'and'; // 'and' or 'or'
 
     $post_types = get_post_types( $args, $output, $operator ); 
@@ -155,7 +159,7 @@ function seopress_get_post_types() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//Get all registered post types
+//Get all registered custom taxonomies
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 function seopress_get_taxonomies() {
@@ -164,7 +168,7 @@ function seopress_get_taxonomies() {
         'public' => true,
       
     ); 
-    $output = 'names'; // or objects
+    $output = 'objects'; // or objects
     $operator = 'and'; // 'and' or 'or'
     $taxonomies = get_taxonomies( $args, $output, $operator );  
     

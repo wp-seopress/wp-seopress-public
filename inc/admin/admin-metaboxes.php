@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 
 add_action('add_meta_boxes','seopress_init_metabox');
 function seopress_init_metabox(){
-    add_meta_box('seopress_cpt', __('SEOPress','wp-seopress'), 'seopress_cpt', seopress_get_post_types(), 'advanced');
+    add_meta_box('seopress_cpt', __('SEOPress','wp-seopress'), 'seopress_cpt', seopress_get_post_types()->name, 'advanced');
 }
 
 function seopress_cpt($post){
@@ -27,6 +27,9 @@ function seopress_cpt($post){
     $seopress_social_twitter_title          = get_post_meta($post->ID,'_seopress_social_twitter_title',true);
     $seopress_social_twitter_desc           = get_post_meta($post->ID,'_seopress_social_twitter_desc',true);
     $seopress_social_twitter_img            = get_post_meta($post->ID,'_seopress_social_twitter_img',true);
+    $seopress_redirections_enabled          = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
+    $seopress_redirections_type             = get_post_meta($post->ID,'_seopress_redirections_type',true);
+    $seopress_redirections_value            = get_post_meta($post->ID,'_seopress_redirections_value',true);
     
     function seopress_titles_title($seopress_titles_title) {
         if ($seopress_titles_title !='') {
@@ -65,11 +68,18 @@ function seopress_cpt($post){
         }
     }
 
+    function seopress_redirections_value($seopress_redirections_value) {
+        if ($seopress_redirections_value !='') {
+            return $seopress_redirections_value;
+        }
+    }
+
     echo '<div id="seopress-tabs">
             <ul>
                 <li><a href="#tabs-1"><span class="dashicons dashicons-editor-table"></span>'. __( 'Titles settings', 'wp-seopress' ) .'</a></li>
                 <li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'wp-seopress' ) .'</a></li>
                 <li><a href="#tabs-3"><span class="dashicons dashicons-share"></span>'. __( 'Social', 'wp-seopress' ) .'</a></li>
+                <li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirections', 'wp-seopress' ) .'</a></li>
             </ul>
             
             <div id="tabs-1">
@@ -94,7 +104,7 @@ function seopress_cpt($post){
                 <div class="box-right">
                     <div class="google-snippet-preview">
                         <h3>'.__('Google Snippet Preview','wp-seopress').'</h3>
-                        <p>'. __('This is what your page will look like in Google search results','wp-seopress').'</p>
+                        <p>'.__('This is what your page will look like in Google search results','wp-seopress').'</p>
                         <div class="snippet-title">'.seopress_titles_title($seopress_titles_title).'</div>
                         <div class="snippet-title-custom" style="display:none"></div>
                         <div class="snippet-title-default" style="display:none">'.get_the_title().' - '.get_bloginfo('name').'</div>
@@ -179,6 +189,28 @@ function seopress_cpt($post){
                     <input id="seopress_social_twitter_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
                 </p>
             </div>
+            <div id="tabs-4">
+                <p>
+                    <label for="seopress_redirections_enabled_meta" id="seopress_redirections_enabled">
+                        <input type="checkbox" name="seopress_redirections_enabled" id="seopress_redirections_enabled_meta" value="yes" '. checked( $seopress_redirections_enabled, 'yes', false ) .' />
+                            '. __( 'Enable redirection?', 'wp-seopress' ) .'
+                    </label>
+                </p>
+                <p>
+                    <label for="seopress_redirections_value_meta">'. __( 'URL redirection', 'wp-seopress' ) .'</label>
+                    <select name="seopress_redirections_type">
+                        <option ' . selected( '301', $seopress_redirections_type, false ) . ' value="301">'. __( '301', 'wp-seopress' ) .'</option>
+                        <option ' . selected( '302', $seopress_redirections_type, false ) . ' value="302">'. __( '302', 'wp-seopress' ) .'</option>
+                        <option ' . selected( '307', $seopress_redirections_type, false ) . ' value="307">'. __( '307', 'wp-seopress' ) .'</option>
+                    </select>
+                    <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.__('Enter your URL','wp-seopress').'" value="'.$seopress_redirections_value.'" />
+                    <br><br>';
+                    if ($seopress_redirections_value !='') {     
+    echo                '<a href="'.seopress_redirections_value($seopress_redirections_value).'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                    } 
+    echo            '<a href="" id="seopress_redirections_value_live" class="button" target="_blank" style="display: none">'.__('Test your URL','wp-seopress').'</a>
+                </p>
+            </div>
         </div>
     ';  
 }
@@ -242,6 +274,17 @@ function seopress_save_metabox($post_id){
         }
         if(isset($_POST['seopress_social_twitter_img'])){
             update_post_meta($post_id, '_seopress_social_twitter_img', esc_html($_POST['seopress_social_twitter_img']));
+        }         
+        if(isset($_POST['seopress_redirections_type'])){
+            update_post_meta($post_id, '_seopress_redirections_type', $_POST['seopress_redirections_type']);
+        }     
+        if(isset($_POST['seopress_redirections_value'])){
+            update_post_meta($post_id, '_seopress_redirections_value', esc_html($_POST['seopress_redirections_value']));
+        }
+        if( isset( $_POST[ 'seopress_redirections_enabled' ] ) ) {
+            update_post_meta( $post_id, '_seopress_redirections_enabled', 'yes' );
+        } else {
+            delete_post_meta( $post_id, '_seopress_redirections_enabled', '' );
         }
     }
 }

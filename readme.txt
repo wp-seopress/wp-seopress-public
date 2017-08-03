@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
 Tested up to: 4.6
-Stable tag: 0.4
+Stable tag: 0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,11 +42,17 @@ Soon :)
 2. Titles & Metas
 3. XML Sitemap
 4. Social
-5. SEOPRESS Metaboxe: Titles settings
-6. SEOPRESS Metaboxe: Advanced settings
-7. SEOPRESS Metaboxe: Social settings
+5. Advanced
+6. SEOPress Metaboxe: Titles settings
+7. SEOPress Metaboxe: Advanced settings
+8. SEOPress Metaboxe: Social settings
+9. SEOPress Metaboxe: Redirection settings
 
 == Changelog ==
+= 0.5 =
+* NEW Add 301/302 redirections in SEOPress metaboxe for custom post types
+* NEW Add Redirect attachment pages to post parent or home if none option
+* INFO Use pretty names for Custom Post Types and Custom Taxonomies in all options
 = 0.4 =
 * NEW Add article:published_time, article:modified_time, og:updated_time metadata
 * INFO Add website link

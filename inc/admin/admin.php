@@ -34,6 +34,7 @@ class seopress_options
         add_submenu_page('seopress-option', __('Titles & Metas','wp-seopress'), __('Titles & Metas','wp-seopress'), 'manage_options', 'seopress-titles', array( $this, 'seopress_titles_page' ));
         add_submenu_page('seopress-option', __('XML Sitemap','wp-seopress'), __('XML Sitemap','wp-seopress'), 'manage_options', 'seopress-xml-sitemap', array( $this, 'seopress_xml_sitemap_page' ));
         add_submenu_page('seopress-option', __('Social','wp-seopress'), __('Social','wp-seopress'), 'manage_options', 'seopress-social', array( $this, 'seopress_social_page' ));
+        add_submenu_page('seopress-option', __('Advanced','wp-seopress'), __('Advanced','wp-seopress'), 'manage_options', 'seopress-advanced', array( $this, 'seopress_advanced_page' ));
         add_submenu_page('seopress-option', __('Import / Export / Reset settings','wp-seopress'), __('Import / Export / Reset','wp-seopress'), 'manage_options', 'seopress-import-export', array( $this,'seopress_import_export_page'));
     }
     
@@ -153,6 +154,39 @@ class seopress_options
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_social_accounts') { echo 'active'; } ?>" id="tab_seopress_social_accounts"><?php do_settings_sections( 'seopress-settings-admin-social-accounts' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_social_facebook') { echo 'active'; } ?>" id="tab_seopress_social_facebook"><?php do_settings_sections( 'seopress-settings-admin-social-facebook' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_social_twitter') { echo 'active'; } ?>" id="tab_seopress_social_twitter"><?php do_settings_sections( 'seopress-settings-admin-social-twitter' ); ?></div>
+        </div>
+
+        <?php submit_button(); ?>
+        </form>
+        <?php
+    }
+
+    function seopress_advanced_page(){
+        $this->options = get_option( 'seopress_advanced_option_name' );
+        ?>
+        <form method="post" action="options.php" class="seopress-option">
+        <?php 
+        global $wp_version, $title;
+        $current_tab = '';
+        $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
+        echo '<'.$tag.'>'.$title.'</'.$tag.'>';
+        settings_fields( 'seopress_advanced_option_group' );
+        ?>
+    
+         <div id="seopress-tabs" class="wrap">
+         <?php 
+            
+            $plugin_settings_tabs = array(
+                'tab_seopress_advanced_advanced' => __( "Advanced", "wp-seopress" ), 
+            );
+
+            echo '<h2 class="nav-tab-wrapper">';
+            foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
+                echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-advanced#tab=' . $tab_key . '">' . $tab_caption . '</a>'; 
+            }
+            echo '</h2>';
+        ?>
+            <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_advanced_advanced') { echo 'active'; } ?>" id="tab_seopress_advanced_advanced"><?php do_settings_sections( 'seopress-settings-admin-advanced-advanced' ); ?></div>
         </div>
 
         <?php submit_button(); ?>
@@ -318,6 +352,18 @@ class seopress_options
                                 </td>
                                 <td>
                                     <div class="img-tool">
+                                        <span class="dashicons dashicons-admin-tools"></span>                                  
+                                    </div>
+                                    <span class="inner">
+                                        <h4><?php _e('Advanced','wp-seopress'); ?></h4>
+                                        <p><?php _e('Advanced SEO options for advanced users!','wp-seopress'); ?></p>
+                                        <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-advanced' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="img-tool">
                                         <span class="dashicons dashicons-admin-settings"></span>                                   
                                     </div>
                                     <span class="inner">
@@ -360,6 +406,12 @@ class seopress_options
         register_setting(
             'seopress_social_option_group', // Option group
             'seopress_social_option_name', // Option name
+            array( $this, 'sanitize' ) // Sanitize
+        );
+
+        register_setting(
+            'seopress_advanced_option_group', // Option group
+            'seopress_advanced_option_name', // Option name
             array( $this, 'sanitize' ) // Sanitize
         );
 
@@ -828,6 +880,22 @@ class seopress_options
             'seopress-settings-admin-social-twitter', // Page
             'seopress_setting_section_social_twitter' // Section                  
         );
+        //Advanced SECTION=========================================================================
+        add_settings_section( 
+            'seopress_setting_section_advanced_advanced', // ID
+            '',
+            //__("Advanced","wp-seopress"), // Title
+            array( $this, 'print_section_info_advanced_advanced' ), // Callback
+            'seopress-settings-admin-advanced-advanced' // Page
+        ); 
+
+        add_settings_field(
+            'seopress_advanced_advanced_attachments', // ID
+           __("Redirect attachment pages to post parent (if none, redirect to homepage)","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_attachments_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
     }
 
     /**
@@ -914,6 +982,11 @@ class seopress_options
     public function print_section_info_social_twitter()
     {
         print __('<p>Manage your Twitter card</p>', 'wp-seopress');
+    }
+
+    public function print_section_info_advanced_advanced()
+    {
+        print __('<p>Advanced SEO options</p>', 'wp-seopress');
     }    
 
     /** 
@@ -946,7 +1019,7 @@ class seopress_options
     {
         foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
             
-            echo '<h2>'.$seopress_cpt_value.'</h2>';
+            echo '<h2>'.$seopress_cpt_value->labels->name.'</h2>';
 
             //Single Title CPT
             echo '<div class="seopress_wrap_single_cpt">';
@@ -955,8 +1028,8 @@ class seopress_options
                 echo "<br/>";
 
                 printf(
-                '<input type="text" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_value.'][title]" value="%s"/>',
-                esc_html( $this->options['seopress_titles_single_titles'][$seopress_cpt_value]['title'])   
+                '<input type="text" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][title]" value="%s"/>',
+                esc_html( $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['title'])   
                 );
 
             echo '</div>';
@@ -968,8 +1041,8 @@ class seopress_options
                 echo "<br/>";
 
                 printf(
-                '<textarea name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_value.'][description]">%s</textarea>',
-                esc_html( $this->options['seopress_titles_single_titles'][$seopress_cpt_value]['description'])
+                '<textarea name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][description]">%s</textarea>',
+                esc_html( $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['description'])
                 );
 
             echo '</div>';
@@ -979,16 +1052,16 @@ class seopress_options
 
                 $options = get_option( 'seopress_titles_option_name' );  
             
-                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_value]['noindex']);      
+                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['noindex']);      
                 
-                echo '<input id="seopress_titles_single_cpt_noindex['.$seopress_cpt_value.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_value.'][noindex]" type="checkbox"';
+                echo '<input id="seopress_titles_single_cpt_noindex['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][noindex]" type="checkbox"';
                 if ('1' == $check) echo 'checked="yes"'; 
                 echo ' value="1"/>';
                 
-                echo '<label for="seopress_titles_single_cpt_noindex['.$seopress_cpt_value.']">'. __( 'noindex', 'wp-seopress' ) .'</label>';
+                echo '<label for="seopress_titles_single_cpt_noindex['.$seopress_cpt_key.']">'. __( 'noindex', 'wp-seopress' ) .'</label>';
                 
-                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_value]['noindex'])) {
-                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_value]['noindex']);
+                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_key]['noindex'])) {
+                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['noindex']);
                 }
 
             echo '</div>';
@@ -998,16 +1071,16 @@ class seopress_options
 
                 $options = get_option( 'seopress_titles_option_name' );  
             
-                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_value]['nofollow']);      
+                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['nofollow']);      
                 
-                echo '<input id="seopress_titles_single_cpt_nofollow['.$seopress_cpt_value.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_value.'][nofollow]" type="checkbox"';
+                echo '<input id="seopress_titles_single_cpt_nofollow['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][nofollow]" type="checkbox"';
                 if ('1' == $check) echo 'checked="yes"'; 
                 echo ' value="1"/>';
                 
-                echo '<label for="seopress_titles_single_cpt_nofollow['.$seopress_cpt_value.']">'. __( 'nofollow', 'wp-seopress' ) .'</label>';
+                echo '<label for="seopress_titles_single_cpt_nofollow['.$seopress_cpt_key.']">'. __( 'nofollow', 'wp-seopress' ) .'</label>';
                 
-                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_value]['nofollow'])) {
-                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_value]['nofollow']);
+                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_key]['nofollow'])) {
+                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['nofollow']);
                 }
 
             echo '</div>';
@@ -1017,16 +1090,16 @@ class seopress_options
 
                 $options = get_option( 'seopress_titles_option_name' );  
             
-                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_value]['date']);      
+                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['date']);      
                 
-                echo '<input id="seopress_titles_single_cpt_date['.$seopress_cpt_value.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_value.'][date]" type="checkbox"';
+                echo '<input id="seopress_titles_single_cpt_date['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][date]" type="checkbox"';
                 if ('1' == $check) echo 'checked="yes"'; 
                 echo ' value="1"/>';
                 
-                echo '<label for="seopress_titles_single_cpt_date['.$seopress_cpt_value.']">'. __( 'Display date in Google search results?', 'wp-seopress' ) .'</label>';
+                echo '<label for="seopress_titles_single_cpt_date['.$seopress_cpt_key.']">'. __( 'Display date in Google search results?', 'wp-seopress' ) .'</label>';
                 
-                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_value]['date'])) {
-                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_value]['date']);
+                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_key]['date'])) {
+                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['date']);
                 }
 
             echo '</div>';
@@ -1038,7 +1111,7 @@ class seopress_options
     {
         foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
             
-            echo '<h2>'.$seopress_tax_value.'</h2>';
+            echo '<h2>'.$seopress_tax_value->labels->name.'</h2>';
 
             //Tax Title
             echo '<div class="seopress_wrap_tax">';
@@ -1047,8 +1120,8 @@ class seopress_options
                 echo "<br/>";
 
                 printf(
-                '<input type="text" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_value.'][title]" value="%s"/>',
-                esc_html( $this->options['seopress_titles_tax_titles'][$seopress_tax_value]['title'])   
+                '<input type="text" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][title]" value="%s"/>',
+                esc_html( $this->options['seopress_titles_tax_titles'][$seopress_tax_key]['title'])   
                 );
 
             echo '</div>';
@@ -1060,8 +1133,8 @@ class seopress_options
                 echo "<br/>";
 
                 printf(
-                '<textarea name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_value.'][description]">%s</textarea>',
-                esc_html( $this->options['seopress_titles_tax_titles'][$seopress_tax_value]['description'])
+                '<textarea name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][description]">%s</textarea>',
+                esc_html( $this->options['seopress_titles_tax_titles'][$seopress_tax_key]['description'])
                 );
 
             echo '</div>';
@@ -1071,16 +1144,16 @@ class seopress_options
 
                 $options = get_option( 'seopress_titles_option_name' );  
             
-                $check = isset($options['seopress_titles_tax_titles'][$seopress_tax_value]['noindex']);      
+                $check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['noindex']);      
                 
-                echo '<input id="seopress_titles_tax_noindex['.$seopress_tax_value.']" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_value.'][noindex]" type="checkbox"';
+                echo '<input id="seopress_titles_tax_noindex['.$seopress_tax_key.']" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][noindex]" type="checkbox"';
                 if ('1' == $check) echo 'checked="yes"'; 
                 echo ' value="1"/>';
                 
-                echo '<label for="seopress_titles_tax_noindex['.$seopress_tax_value.']">'. __( 'noindex', 'wp-seopress' ) .'</label>';
+                echo '<label for="seopress_titles_tax_noindex['.$seopress_tax_key.']">'. __( 'noindex', 'wp-seopress' ) .'</label>';
                 
-                if (isset($this->options['seopress_titles_tax_titles'][$seopress_tax_value]['noindex'])) {
-                    esc_attr( $this->options['seopress_titles_tax_titles'][$seopress_tax_value]['noindex']);
+                if (isset($this->options['seopress_titles_tax_titles'][$seopress_tax_key]['noindex'])) {
+                    esc_attr( $this->options['seopress_titles_tax_titles'][$seopress_tax_key]['noindex']);
                 }
 
             echo '</div>';
@@ -1090,16 +1163,16 @@ class seopress_options
 
                 $options = get_option( 'seopress_titles_option_name' );  
             
-                $check = isset($options['seopress_titles_tax_titles'][$seopress_tax_value]['nofollow']);      
+                $check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['nofollow']);      
                 
-                echo '<input id="seopress_titles_tax_nofollow['.$seopress_tax_value.']" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_value.'][nofollow]" type="checkbox"';
+                echo '<input id="seopress_titles_tax_nofollow['.$seopress_tax_key.']" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][nofollow]" type="checkbox"';
                 if ('1' == $check) echo 'checked="yes"'; 
                 echo ' value="1"/>';
                 
-                echo '<label for="seopress_titles_tax_nofollow['.$seopress_tax_value.']">'. __( 'nofollow', 'wp-seopress' ) .'</label>';
+                echo '<label for="seopress_titles_tax_nofollow['.$seopress_tax_key.']">'. __( 'nofollow', 'wp-seopress' ) .'</label>';
                 
-                if (isset($this->options['seopress_titles_tax_titles'][$seopress_tax_value]['nofollow'])) {
-                    esc_attr( $this->options['seopress_titles_tax_titles'][$seopress_tax_value]['nofollow']);
+                if (isset($this->options['seopress_titles_tax_titles'][$seopress_tax_key]['nofollow'])) {
+                    esc_attr( $this->options['seopress_titles_tax_titles'][$seopress_tax_key]['nofollow']);
                 }
 
             echo '</div>';
@@ -1379,30 +1452,30 @@ class seopress_options
             'show_ui' => true,
         );
 
-        $output = 'names'; // names or objects, note names is the default
+        $output = 'objects'; // names or objects, note names is the default
         $operator = 'and'; // 'and' or 'or'
 
         $post_types = get_post_types( $args, $output, $operator ); 
 
         foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) {
             
-            echo '<h2>'.$seopress_cpt_value.'</h2>';
+            echo '<h2>'.$seopress_cpt_value->labels->name.'</h2>';
 
             //List all post types
             echo '<div class="seopress_wrap_single_cpt">';
 
                 $options = get_option( 'seopress_xml_sitemap_option_name' );  
             
-                $check = isset($options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_value]['include']);      
+                $check = isset($options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include']);      
                 
-                echo '<input id="seopress_xml_sitemap_post_types_list_include['.$seopress_cpt_value.']" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_post_types_list]['.$seopress_cpt_value.'][include]" type="checkbox"';
+                echo '<input id="seopress_xml_sitemap_post_types_list_include['.$seopress_cpt_key.']" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_post_types_list]['.$seopress_cpt_key.'][include]" type="checkbox"';
                 if ('1' == $check) echo 'checked="yes"'; 
                 echo ' value="1"/>';
                 
-                echo '<label for="seopress_xml_sitemap_post_types_list_include['.$seopress_cpt_value.']">'. __( 'Include', 'wp-seopress' ) .'</label>';
+                echo '<label for="seopress_xml_sitemap_post_types_list_include['.$seopress_cpt_key.']">'. __( 'Include', 'wp-seopress' ) .'</label>';
                 
-                if (isset($this->options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_value]['include'])) {
-                    esc_attr( $this->options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_value]['include']);
+                if (isset($this->options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include'])) {
+                    esc_attr( $this->options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include']);
                 }
 
             echo '</div>';
@@ -1420,29 +1493,29 @@ class seopress_options
             'public' => true,
           
         ); 
-        $output = 'names'; // or objects
+        $output = 'objects'; // or objects
         $operator = 'and'; // 'and' or 'or'
         $taxonomies = get_taxonomies( $args, $output, $operator );  
 
         foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
             
-            echo '<h2>'.$seopress_tax_value.'</h2>';
+            echo '<h2>'.$seopress_tax_value->labels->name.'</h2>';
 
             //List all taxonomies
             echo '<div class="seopress_wrap_single_tax">';
 
                 $options = get_option( 'seopress_xml_sitemap_option_name' );  
             
-                $check = isset($options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_value]['include']);      
+                $check = isset($options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_key]['include']);      
                 
-                echo '<input id="seopress_xml_sitemap_taxonomies_list_include['.$seopress_tax_value.']" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_taxonomies_list]['.$seopress_tax_value.'][include]" type="checkbox"';
+                echo '<input id="seopress_xml_sitemap_taxonomies_list_include['.$seopress_tax_key.']" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_taxonomies_list]['.$seopress_tax_key.'][include]" type="checkbox"';
                 if ('1' == $check) echo 'checked="yes"'; 
                 echo ' value="1"/>';
                 
-                echo '<label for="seopress_xml_sitemap_taxonomies_list_include['.$seopress_tax_value.']">'. __( 'Include', 'wp-seopress' ) .'</label>';
+                echo '<label for="seopress_xml_sitemap_taxonomies_list_include['.$seopress_tax_key.']">'. __( 'Include', 'wp-seopress' ) .'</label>';
                 
-                if (isset($this->options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_value]['include'])) {
-                    esc_attr( $this->options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_value]['include']);
+                if (isset($this->options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_key]['include'])) {
+                    esc_attr( $this->options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_key]['include']);
                 }
 
             echo '</div>';
@@ -1693,6 +1766,23 @@ class seopress_options
 
         if (isset($this->options['seopress_social_twitter_card_img_size'])) {
             esc_attr( $this->options['seopress_social_twitter_card_img_size']);
+        }
+    }
+
+    public function seopress_advanced_advanced_attachments_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_attachments']);      
+        
+        echo '<input id="seopress_advanced_advanced_attachments" name="seopress_advanced_option_name[seopress_advanced_advanced_attachments]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_attachments">'. __( 'Redirect attachment pages to post parent (or homepage if none)', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_advanced_advanced_attachments'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_attachments']);
         }
     }
 }
