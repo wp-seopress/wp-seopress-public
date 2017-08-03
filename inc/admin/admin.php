@@ -34,6 +34,7 @@ class seopress_options
         $seopress_toggle_options['toggle-titles'] = '1';
         $seopress_toggle_options['toggle-xml-sitemap'] = '1';
         $seopress_toggle_options['toggle-social'] = '1';
+        $seopress_toggle_options['toggle-google-analytics'] = '1';
         $seopress_toggle_options['toggle-advanced'] = '1';
         if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
             $seopress_toggle_options['toggle-woocommerce'] = '1';
@@ -525,7 +526,8 @@ class seopress_options
                         <div class="seopress-alert">
                             <p>
                                 <span class="dashicons dashicons-warning"></span>
-                                <?php _e('Your site doesn\'t use an SSL certificate!','wp-seopress'); ?>
+                                <?php _e('Your site doesn\'t use an SSL certificate!','wp-seopress'); ?> 
+                                <a href="https://webmasters.googleblog.com/2014/08/https-as-ranking-signal.html" target="_blank"><?php _e('Learn more','wp-seopress'); ?></a>
                                 <span class="impact low"><?php _e('Low impact','wp-seopress'); ?></span>
                             </p>
                             <a class="button-primary" href="https://www.namecheap.com/?aff=105841" target="_blank"><?php _e('Buy an SSL!','wp-seopress'); ?></a>
@@ -569,6 +571,35 @@ class seopress_options
                                 <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
                             </p>
                             <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                        </div>
+                    <?php } ?>
+
+                    <div class="seopress-alert">
+                        <p>
+                            <span class="dashicons dashicons-warning"></span>
+                            <?php _e('Do you have a Google Business page? It\'s free!','wp-seopress'); ?>
+                            <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
+                        </p>
+                        <a class="button-primary" href="https://www.google.com/business/go/" target="_blank"><?php _e('Create your page now!','wp-seopress'); ?></a>
+                    </div>
+
+                    <div class="seopress-alert">
+                        <p>
+                            <span class="dashicons dashicons-warning"></span>
+                            <?php _e('Add your site to Google. It\'s free!','wp-seopress'); ?>
+                            <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
+                        </p>
+                        <a class="button-primary" href="https://www.google.com/webmasters/tools/home" target="_blank"><?php _e('Add your site to Search Console!','wp-seopress'); ?></a>
+                    </div>
+
+                    
+                    <?php if (get_option("seopress_pro_license_key") =='' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                        <div class="seopress-alert">
+                            <p>
+                                <span class="dashicons dashicons-warning"></span>
+                                <?php _e('You have to enter your licence key to get updates and support','wp-seopress'); ?>
+                            </p>
+                            <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-license' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
                         </div>
                     <?php } ?>
                 </div>
@@ -1650,7 +1681,23 @@ class seopress_options
             array( $this, 'seopress_advanced_appearance_meta_desc_col_callback' ), // Callback
             'seopress-settings-admin-advanced-appearance', // Page
             'seopress_setting_section_advanced_appearance' // Section                  
-        );       
+        );
+
+        add_settings_field(
+            'seopress_advanced_appearance_noindex_col', // ID
+           __("Show noindex column in post types","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_noindex_col_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_appearance_nofollow_col', // ID
+           __("Show nofollow column in post types","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_nofollow_col_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
     }
 
     /**
@@ -1715,12 +1762,10 @@ class seopress_options
 
     public function print_section_info_xml_sitemap_general()
     {
-        print __('<p>Enable your Sitemap</p>', 'wp-seopress');
-        echo __('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress');
-        echo '<br>';
-        echo __('Only the last 1000 items are listed in Sitemaps for performances issues.', 'wp-seopress');
-        echo '<br>';
-        echo '<br>';
+        echo '<p><a href="https://www.seopress.org/support/guides/enable-xml-sitemaps/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a></p>';
+        echo '<p>'.__('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress').'</p>';
+        echo '<p>'.__('Only the last 1000 items are listed in Sitemaps for performances issues.', 'wp-seopress').'</p>';
+
         echo '<a href="'.home_url().'/sitemaps.xml" target="_blank" class="button">'.__('View your sitemap','wp-seopress').'</a>';
         echo '&nbsp;';
         echo '<a href="http://www.google.com/ping?sitemap='.home_url().'/sitemaps/" target="_blank" class="button">'.__('Ping Google manually','wp-seopress').'</a>';        
@@ -1771,7 +1816,8 @@ class seopress_options
 
     public function print_section_info_google_analytics_custom_dimensions()
     {
-        print __('<p>Configure your Google Analytics custom dimensions</p>', 'wp-seopress');
+        print __('<p>Configure your Google Analytics custom dimensions', 'wp-seopress');
+        echo '<a class="seopress-doc" href="https://www.seopress.org/support/guides/create-custom-dimension-google-analytics/" target="_blank"><span class="dashicons dashicons-editor-help"></span></a></p>';
     }
 
     public function print_section_info_advanced_advanced()
@@ -3398,6 +3444,40 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_appearance_meta_desc_col'])) {
             esc_attr( $this->options['seopress_advanced_appearance_meta_desc_col']);
+        }
+    }
+
+    public function seopress_advanced_appearance_noindex_col_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_noindex_col']);      
+        
+        echo '<input id="seopress_advanced_appearance_noindex_col" name="seopress_advanced_option_name[seopress_advanced_appearance_noindex_col]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_noindex_col">'. __( 'Display noindex status', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_noindex_col'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_noindex_col']);
+        }
+    }
+
+    public function seopress_advanced_appearance_nofollow_col_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_nofollow_col']);      
+        
+        echo '<input id="seopress_advanced_appearance_nofollow_col" name="seopress_advanced_option_name[seopress_advanced_appearance_nofollow_col]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_nofollow_col">'. __( 'Display nofollow status', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_nofollow_col'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_nofollow_col']);
         }
     }
 }

@@ -4,7 +4,7 @@
 Plugin Name: SEOPress
 Plugin URI: http://seopress.org/
 Description: The best SEO plugin.
-Version: 1.0.2
+Version: 1.1
 Author: Benjamin DENIS
 Author URI: http://seopress.org/
 License: GPLv2
@@ -12,7 +12,7 @@ Text Domain: wp-seopress
 Domain Path: /languages
 */
 
-/*  Copyright 2016 - Benjamin DENIS  (email : contact@seopress.org)
+/*  Copyright 2016 - 2017 - Benjamin DENIS  (email : contact@seopress.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -79,7 +79,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '1.0.2' ); 
+define( 'SEOPRESS_VERSION', '1.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,6 +123,12 @@ function seopress_add_admin_options_scripts($hook) {
             'seopress_toggle_features' => admin_url( 'admin-ajax.php'),
         );
         wp_localize_script( 'seopress-toggle-ajax', 'seopressAjaxToggleFeatures', $seopress_toggle_features ); 
+    }
+
+    //Modal effects
+    if (isset($_GET['page']) && ($_GET['page'] == 'seopress-option') ) {
+        wp_enqueue_script( 'seopress-modal-effects', plugins_url( 'assets/js/seopress-modal-effects.js', __FILE__ ), array( 'jquery' ), '', true );
+        wp_enqueue_script( 'seopress-classie', plugins_url( 'assets/js/classie.js', __FILE__ ), array( 'jquery' ), '', true );
     }
 
     //Migration
@@ -173,9 +179,8 @@ function seopress_add_admin_options_scripts($hook) {
 
     global $post;
 
-    $cpt_public_check = get_post_type_object( $post->post_type );
-
     if ( $hook == 'post-new.php' || $hook == 'post.php') {
+        $cpt_public_check = get_post_type_object( $post->post_type );
         if ( 'attachment' !== $post->post_type ) { 
             wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
             if ( 'seopress_404' !== $post->post_type ) { 

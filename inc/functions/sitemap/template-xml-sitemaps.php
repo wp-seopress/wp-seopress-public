@@ -24,7 +24,7 @@ function seopress_xml_sitemap_index() {
 					$seopress_sitemaps .= '<loc>';
 					$seopress_sitemaps .= home_url().'/sitemaps/'.$cpt_key.'.xml';
 					$seopress_sitemaps .= '</loc>';
-					$get_latest_post = new WP_Query(array('post_type' => $cpt_key, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'order' => 'DESC', 'orderby' => 'date',));
+					$get_latest_post = new WP_Query(array('post_type' => $cpt_key, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'order' => 'DESC', 'orderby' => 'date', 'lang' => ''));
 				    if($get_latest_post->have_posts()){
 				    	$seopress_sitemaps .= "\n";
 						$seopress_sitemaps .= '<lastmod>';

@@ -1,10 +1,10 @@
 === SEOPress ===
 Contributors: rainbowgeek
 Donate link: https://seopress.org/
-Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
+Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.0.2
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,12 +53,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 <ul>
 	<li>English</li>
 	<li>French</li>
-	<li><a href="https://www.seopress.org/contact-us/">Add yours!</a></li>
+	<li><a href="https://www.seopress.org/contact-us/">Add yours and get SEOPress PRO for free!</a></li>
 </ul>
-
-<h3>Subscribe to our newsletter and get a huge discount!</h3>
-And get early access to our pro release!
-<a href="http://seopress.org/" target="_blank">Subscribe now</a>
 
 == Installation ==
 
@@ -99,6 +95,19 @@ And get early access to our pro release!
 26. SEOPress metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.1 =
+* NEW Add new advices in notifications center
+* NEW Link your robots.txt to your sitemap in one click
+* NEW Block SEMRush et Majestic SEO Bots in one click
+* NEW Add noindex column in post types
+* NEW Add nofollow column in post types
+* INFO Improve performance in xml sitemap generation
+* INFO Improve translations
+* INFO Set Google Analytics enable by default
+* INFO Add some helps
+* FIX XML Sitemaps compatibility with Polylang
+* FIX Access to PRO options if SEOPress is disabled
+* FIX Notice Trying to get property of non-object seopress.php:182
 = 1.0.2 = 
 * FIX Escape HTML tags in title
 * FIX WooCommerce (PRO) fatal error
