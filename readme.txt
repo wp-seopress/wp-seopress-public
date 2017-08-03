@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap, bot, broken link checker
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,6 +112,11 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 31. SEOPress BOT
 
 == Changelog ==
+= 1.7.2 =
+* INFO Breadcrumbs now support Events Calendar / Events Calendar Pro
+* FIX Edit robots.txt
+* FIX Esc_attr for SEOPress BOT
+* FIX Google Knowledge Graph (thanks to @leflibustier)
 = 1.7.1 =
 * FIX XML Index sitemaps count column
 * FIX XML Sitemaps replace Published date by Modified date (last update)

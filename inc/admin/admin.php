@@ -3074,11 +3074,11 @@ class seopress_options
         
         echo '<select id="seopress_social_knowledge_type" name="seopress_social_option_name[seopress_social_knowledge_type]">';
             echo ' <option '; 
-                if ('person' == $selected) echo 'selected="selected"'; 
-                echo ' value="person">'. __("Person","wp-seopress") .'</option>';
+                if ('Person' == $selected) echo 'selected="selected"'; 
+                echo ' value="Person">'. __("Person","wp-seopress") .'</option>';
             echo '<option '; 
-                if ('organization' == $selected) echo 'selected="selected"'; 
-                echo ' value="organization">'. __("Organization","wp-seopress") .'</option>';
+                if ('Organization' == $selected) echo 'selected="selected"'; 
+                echo ' value="Organization">'. __("Organization","wp-seopress") .'</option>';
         echo '</select>';
 
         if (isset($this->options['seopress_social_knowledge_type'])) {
