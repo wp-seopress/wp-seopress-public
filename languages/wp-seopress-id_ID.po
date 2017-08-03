@@ -1,16 +1,19 @@
+# Copyright (C) 2017 SEOPress
+# This file is distributed under the same license as the SEOPress package.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2017-06-19 20:16+0200\n"
-"PO-Revision-Date: 2017-06-19 20:16+0200\n"
+"Project-Id-Version: SEOPress 2.0.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
+"POT-Creation-Date: 2017-06-19 20:27+0200\n"
+"PO-Revision-Date: 2017-06-19 20:27+0200\n"
 "Last-Translator: \n"
-"Language-Team: Benjamin DENIS <contact@seopress.org>\n"
-"Language: es_ES\n"
+"Language-Team: \n"
+"Language: id_ID\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: __;_e;_x\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -26,17 +29,17 @@ msgstr "PRO"
 #: inc/admin/admin-header.php:27 inc/admin/admin.php:179
 #: inc/admin/adminbar.php:22
 msgid "Titles & Metas"
-msgstr "Títulos y Metas"
+msgstr "Judul & Meta"
 
 #: inc/admin/admin-header.php:33 inc/admin/admin.php:180
 #: inc/admin/adminbar.php:28
 msgid "XML / HTML Sitemap"
-msgstr "XML / Mapa del sitio HTML"
+msgstr "Sitemap XML / HTML. "
 
 #: inc/admin/admin-header.php:39 inc/admin/admin.php:181
 #: inc/admin/admin.php:1202 inc/admin/adminbar.php:34
 msgid "Social Networks"
-msgstr "Redes Sociales"
+msgstr "Jaringan Sosial"
 
 #: inc/admin/admin-header.php:45 inc/admin/admin.php:182
 #: inc/admin/admin.php:1231 inc/admin/adminbar.php:40
@@ -47,7 +50,7 @@ msgstr "Google Analytics"
 #: inc/admin/admin.php:183 inc/admin/admin.php:273 inc/admin/admin.php:547
 #: inc/admin/admin.php:1260 inc/admin/adminbar.php:46
 msgid "Advanced"
-msgstr "Avanzado"
+msgstr "Lanjutan"
 
 #: inc/admin/admin-header.php:59 inc/admin/admin.php:1289
 msgid "WooCommerce"
@@ -55,7 +58,7 @@ msgstr "WooCommerce"
 
 #: inc/admin/admin-header.php:65 inc/admin/admin.php:1317
 msgid "Local Business"
-msgstr "Negocio Local"
+msgstr "Bisnis Lokal"
 
 #: inc/admin/admin-header.php:71 inc/admin/admin.php:1345
 msgid "Dublin Core"
@@ -63,11 +66,11 @@ msgstr "Dublin Core"
 
 #: inc/admin/admin-header.php:77 inc/admin/admin.php:1373
 msgid "Structured Data Types"
-msgstr "Tipos de datos estructurados"
+msgstr "Tipe Data Terstruktur"
 
 #: inc/admin/admin-header.php:83 inc/admin/admin.php:1401
 msgid "Breadcrumbs"
-msgstr "Migas de pan"
+msgstr "Breadcrumbs"
 
 #: inc/admin/admin-header.php:89 inc/admin/admin.php:1430
 msgid "Google Page Speed"
@@ -79,16 +82,16 @@ msgstr "robots.txt"
 
 #: inc/admin/admin-header.php:101 inc/admin/admin.php:1470
 msgid "Google News Sitemap"
-msgstr "Google News Sitemap"
+msgstr "Sitemap Google News"
 
 #: inc/admin/admin-header.php:107 inc/admin/admin.php:1498
 #: inc/admin/adminbar.php:78
 msgid "Redirections"
-msgstr "redirecciones"
+msgstr "Pengalihan"
 
 #: inc/admin/admin-header.php:113 inc/admin/admin.php:1528
 msgid "SEOPress BOT - Broken links"
-msgstr "SEOPress BOT - Enlaces rotos"
+msgstr "SEOPress BOT - Tautan rusak"
 
 #: inc/admin/admin-header.php:119 inc/admin/admin.php:1539
 msgid ".htaccess"
@@ -101,48 +104,48 @@ msgstr "RSS"
 #: inc/admin/admin-header.php:131 inc/admin/admin.php:1574
 #: inc/admin/adminbar.php:66
 msgid "License"
-msgstr "Licencia"
+msgstr "Licensi"
 
 #: inc/admin/admin-header.php:138 inc/admin/admin.php:184
 #: inc/admin/admin.php:1562 inc/admin/adminbar.php:52
 msgid "Tools"
-msgstr "Herramientas"
+msgstr "Alat"
 
 #: inc/admin/admin-header.php:147
 msgid "See the changelog (new window)"
-msgstr "Ver el changelog (nueva ventana)"
+msgstr "Lihat log perubahan (jendela baru)"
 
 #: inc/admin/admin-header.php:149
 msgid "See the changelog"
-msgstr "Ver el changelog"
+msgstr "Lihat log perubahan"
 
 #: inc/admin/admin-header.php:151 inc/admin/admin-header.php:153
 msgid "Send feedback"
-msgstr "Enviar comentarios"
+msgstr "Kirim umpan balik"
 
 #: inc/admin/admin-header.php:155
 msgid "Follow us on Twitter (new window)"
-msgstr "Síguenos en Twitter (nueva ventana)"
+msgstr "Ikuti kami di Twitter (jendela baru)"
 
 #: inc/admin/admin-header.php:157
 msgid "Follow us on Twitter"
-msgstr "Síguenos en Twitter"
+msgstr "Ikuti kami di Twitter"
 
 #: inc/admin/admin-header.php:159
 msgid "Official website (new window)"
-msgstr "Sitio oficial (nueva ventana)"
+msgstr "Situs web resmi (jendela baru)"
 
 #: inc/admin/admin-header.php:161
 msgid "Official website"
-msgstr "Sitio oficial"
+msgstr "Situs web resmi"
 
 #: inc/admin/admin-header.php:163
 msgid "Support (new window)"
-msgstr "Soporte (nueva ventana)"
+msgstr "Dukungan (jendela baru)"
 
 #: inc/admin/admin-header.php:165
 msgid "Support"
-msgstr "Soporte"
+msgstr "Dukungan"
 
 #: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:31
 #: inc/admin/admin-metaboxes.php:33 inc/admin/adminbar.php:16
@@ -152,15 +155,15 @@ msgstr "SEO"
 
 #: inc/admin/admin-metaboxes-form.php:123
 msgid "Titles settings"
-msgstr "Configuración de títulos"
+msgstr "Pengaturan Judul"
 
 #: inc/admin/admin-metaboxes-form.php:125
 msgid "Social"
-msgstr "Social"
+msgstr "Sosial"
 
 #: inc/admin/admin-metaboxes-form.php:127
 msgid "Redirection"
-msgstr "Redirection"
+msgstr "Pengalihan"
 
 #: inc/admin/admin-metaboxes-form.php:131
 msgid "Google News"
@@ -168,33 +171,33 @@ msgstr "Google News"
 
 #: inc/admin/admin-metaboxes-form.php:141
 msgid "Title"
-msgstr "Título"
+msgstr "Judul"
 
 #: inc/admin/admin-metaboxes-form.php:142
 msgid "Enter your title"
-msgstr "Introduce tu título"
+msgstr "Masukkan judul kamu"
 
 #: inc/admin/admin-metaboxes-form.php:146
 #: inc/admin/admin-metaboxes-form.php:154
 msgid "(maximum recommended limit)"
-msgstr "(límite máximo recomendado)"
+msgstr "(batas maksimal rekomendasi)"
 
 #: inc/admin/admin-metaboxes-form.php:149 inc/admin/admin.php:641
 #: inc/admin/admin.php:1652 inc/functions/options-advanced-admin.php:533
 msgid "Meta description"
-msgstr "Meta Descripción"
+msgstr "Deskripsi meta"
 
 #: inc/admin/admin-metaboxes-form.php:150
 msgid "Enter your meta description"
-msgstr "Introduce tu meta descripción"
+msgstr "Masukkan deskripsi meta kamu"
 
 #: inc/admin/admin-metaboxes-form.php:159
 msgid "Google Snippet Preview"
-msgstr "Google Snippet Preview"
+msgstr "Pratinjau Potongan Google"
 
 #: inc/admin/admin-metaboxes-form.php:160
 msgid "This is what your page will look like in Google search results"
-msgstr "Esto es cómo tu página se verá en los resultados de búsqueda de Google"
+msgstr "Seperti ini tampilan laman kamu di hasil pencarian Google"
 
 #: inc/admin/admin-metaboxes-form.php:185 inc/admin/admin.php:1828
 #: inc/admin/admin.php:2787 inc/admin/admin.php:2920 inc/admin/admin.php:3012
@@ -207,8 +210,8 @@ msgid ""
 "Do not display all pages of the site in Google search results and do not "
 "display \"Cached\" links in search results."
 msgstr ""
-"No mostrar todas las páginas del sitio en los resultados de búsqueda de "
-"Google y no mostrar enlaces de \"Caché\" en resultados de la búsqueda."
+"Jangan tampilkan semua laman situs ini di hasil pencarian Google dan jangan "
+"tampilkan tautan  \"Tertembolok\" di hasil pencarian."
 
 #: inc/admin/admin-metaboxes-form.php:191 inc/admin/admin.php:1836
 #: inc/admin/admin.php:2806 inc/admin/admin.php:2939 inc/admin/admin.php:3031
@@ -218,7 +221,7 @@ msgstr "nofollow"
 
 #: inc/admin/admin-metaboxes-form.php:192 inc/admin/admin.php:3279
 msgid "Do not follow links for all pages."
-msgstr "No seguir enlaces para todas las páginas."
+msgstr "Jangan ikuti tautan untuk semua laman"
 
 #: inc/admin/admin-metaboxes-form.php:197 inc/admin/admin.php:1844
 #: inc/admin/admin.php:3296
@@ -230,8 +233,8 @@ msgid ""
 "Do not use Open Directory project metadata for titles or excerpts for all "
 "pages."
 msgstr ""
-"No usar metadatos de proyecto de Open Directory para títulos o fragmentos "
-"para todas las páginas."
+"Jangan gunakan metadata proyek Open Directory untuk judul atau petikan untuk "
+"semua laman."
 
 #: inc/admin/admin-metaboxes-form.php:203 inc/admin/admin.php:1852
 #: inc/admin/admin.php:3315
@@ -240,7 +243,7 @@ msgstr "noimageindex"
 
 #: inc/admin/admin-metaboxes-form.php:204 inc/admin/admin.php:3317
 msgid "Do not index images from the entire site."
-msgstr "No indexar imágenes para todo el sitio."
+msgstr "Jangan mengindeks gambar dari keseluruhan situs."
 
 #: inc/admin/admin-metaboxes-form.php:209 inc/admin/admin.php:1860
 #: inc/admin/admin.php:3334
@@ -249,8 +252,7 @@ msgstr "noarchive"
 
 #: inc/admin/admin-metaboxes-form.php:210 inc/admin/admin.php:3336
 msgid "Do not display a \"Cached\" link in the Google search results."
-msgstr ""
-"No mostrar un enlace de \"Caché\" en resultados de la búsqueda de Google."
+msgstr "Jangan menampilkan tautan \"Tertembolok\" di hasil pencarian Google."
 
 #: inc/admin/admin-metaboxes-form.php:215 inc/admin/admin.php:1868
 #: inc/admin/admin.php:3353
@@ -261,127 +263,126 @@ msgstr "nosnippet"
 msgid ""
 "Do not display a description in the Google search results for all pages."
 msgstr ""
-"No mostrar una descripción en los resultados de búsqueda de Google para "
-"todas las páginas."
+"Jangan menampilkan deskripsi di hasil pencarian Google untuk semua laman."
 
 #: inc/admin/admin-metaboxes-form.php:219 inc/admin/admin.php:645
 msgid "Canonical URL"
-msgstr "URL canónica"
+msgstr "URL Canonical"
 
 #: inc/admin/admin-metaboxes-form.php:220
 msgid "Default value: "
-msgstr "Valor por defecto:"
+msgstr "Nilai default"
 
 #: inc/admin/admin-metaboxes-form.php:226
 msgid "Facebook Title"
-msgstr "Título de Facebook"
+msgstr "Judul Facebook"
 
 #: inc/admin/admin-metaboxes-form.php:227
 msgid "Enter your Facebook title"
-msgstr "Introduce tu título de Facebook"
+msgstr "Masukkan judul Facebook kamu"
 
 #: inc/admin/admin-metaboxes-form.php:230
 msgid "Facebook description"
-msgstr "Descripción de Facebook"
+msgstr "Deskripsi Facebook"
 
 #: inc/admin/admin-metaboxes-form.php:231
 msgid "Enter your Facebook description"
-msgstr "Introduce tu descripción de Facebook"
+msgstr "Masukkan deskripsi Facebook kamu"
 
 #: inc/admin/admin-metaboxes-form.php:234
 msgid "Facebook Thumbnail"
-msgstr "Imagen de Facebook"
+msgstr "Thumbnail Facebook"
 
 #: inc/admin/admin-metaboxes-form.php:235
 msgid "Minimum size: 200x200px"
-msgstr "Tamaño mínimo: 200x200px"
+msgstr "Ukuran minimal: 200x200px"
 
 #: inc/admin/admin-metaboxes-form.php:236
 #: inc/admin/admin-metaboxes-form.php:252 inc/admin/admin.php:3823
 #: inc/admin/admin.php:3883
 msgid "Select your default thumbnail"
-msgstr "Selecciona tu miniatura predeterminada"
+msgstr "Pilih thumbnail default kamu"
 
 #: inc/admin/admin-metaboxes-form.php:237
 #: inc/admin/admin-metaboxes-form.php:253 inc/admin/admin.php:3581
 #: inc/admin/admin.php:3825 inc/admin/admin.php:3885
 msgid "Upload an Image"
-msgstr "Subir una imagen"
+msgstr "Unggah gambar"
 
 #: inc/admin/admin-metaboxes-form.php:242
 msgid "Twitter Title"
-msgstr "Título de Twitter"
+msgstr "Judul Twitter"
 
 #: inc/admin/admin-metaboxes-form.php:243
 msgid "Enter your Twitter title"
-msgstr "Introduce tu título de Twitter"
+msgstr "Masukkan judul Twitter kamu"
 
 #: inc/admin/admin-metaboxes-form.php:246
 msgid "Twitter description"
-msgstr "Descripción de Twitter"
+msgstr "Deskripsi Twitter"
 
 #: inc/admin/admin-metaboxes-form.php:247
 msgid "Enter your Twitter description"
-msgstr "Introduce tu descripción de Twitter"
+msgstr "Masukkan deskripsi Twitter kamu"
 
 #: inc/admin/admin-metaboxes-form.php:250
 msgid "Twitter Thumbnail"
-msgstr "Imagen de Twitter"
+msgstr "Thumbnail Twitter"
 
 #: inc/admin/admin-metaboxes-form.php:251
 msgid "Minimum size: 160x160px"
-msgstr "Tamaño mínimo: 160x160px"
+msgstr "Ukuran minimal: 160x160px"
 
 #: inc/admin/admin-metaboxes-form.php:262
 msgid "Enable redirection?"
-msgstr "¿Habilitar la redirección?"
+msgstr "Aktifkan pengalihan?"
 
 #: inc/admin/admin-metaboxes-form.php:266
 msgid "URL redirection"
-msgstr "Redirección de URL"
+msgstr "Pengalihan URL"
 
 #: inc/admin/admin-metaboxes-form.php:268
 msgid "301 Moved Permanently"
-msgstr "301 Movido Permanentemente"
+msgstr "301 Pindah Tetap"
 
 #: inc/admin/admin-metaboxes-form.php:269
 msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
-msgstr "302 Encontrado (HTTP 1.1) / Movido temporalmente (HTTP 1.0)"
+msgstr "302 Ditemukan (HTTP 1.1) / Pindah Sementara (HTTP 1.0)"
 
 #: inc/admin/admin-metaboxes-form.php:270
 msgid "307 Moved Temporarily (HTTP 1.1 Only)"
-msgstr "307 Movido temporalmente (sólo HTTP 1.1)"
+msgstr "307 Pindah Sementara (hanya HTTP 1.1)"
 
 #: inc/admin/admin-metaboxes-form.php:272
 msgid "Enter your new URL"
-msgstr "Introduzca su nueva URL"
+msgstr "Masukkan URL baru kamu"
 
 #: inc/admin/admin-metaboxes-form.php:275
 #: inc/admin/admin-metaboxes-form.php:277
 msgid "Test your URL"
-msgstr "Prueba tu URL"
+msgstr "Coba URL kamu"
 
 #: inc/admin/admin-metaboxes-form.php:287
 msgid "Exclude this post from Google News Sitemap?"
-msgstr "¿Excluir este post de Google News Sitemap?"
+msgstr "Kecualikan pos ini dari Sitemap Google News?"
 
 #: inc/admin/admin-metaboxes-form.php:291
 msgid "Google News Genres"
-msgstr "Género de Google News"
+msgstr "Genre Google News"
 
 #: inc/admin/admin-metaboxes-form.php:293 inc/admin/admin.php:4097
 #: inc/admin/admin.php:4174 inc/admin/admin.php:4251 inc/admin/admin.php:4328
 #: inc/admin/admin.php:4405
 msgid "None"
-msgstr "Ninguna"
+msgstr "Tidak ada"
 
 #: inc/admin/admin-metaboxes-form.php:294
 msgid "Press Release"
-msgstr "Comunicado de prensa"
+msgstr "Jumpa pers"
 
 #: inc/admin/admin-metaboxes-form.php:295
 msgid "Satire"
-msgstr "Sátira"
+msgstr "Sindiran"
 
 #: inc/admin/admin-metaboxes-form.php:296
 msgid "Blog"
@@ -389,35 +390,35 @@ msgstr "Blog"
 
 #: inc/admin/admin-metaboxes-form.php:297
 msgid "OpEd"
-msgstr "Editorial"
+msgstr "OpEd"
 
 #: inc/admin/admin-metaboxes-form.php:298
 msgid "Opinion"
-msgstr "Opinión"
+msgstr "Opini"
 
 #: inc/admin/admin-metaboxes-form.php:299
 msgid "UserGenerated"
-msgstr "UserGenerated"
+msgstr "Dihasilkan pengguna"
 
 #: inc/admin/admin-metaboxes-form.php:304
 msgid "Google News Keywords <em>(max recommended limit: 12)</em>"
-msgstr "Palabras clave Google News <em>(límite máximo recomendado: 12)</em>"
+msgstr "Google News Keywords <em>(rekomendasi batas maksimal: 12)</em>"
 
 #: inc/admin/admin-metaboxes-form.php:305
 msgid "Enter your Google News Keywords"
-msgstr "Introduce tus palabras clave Google News"
+msgstr "Masukkan keywords Google News kamu"
 
 #: inc/admin/admin.php:107
 msgid "404 - Page not found"
-msgstr "404 - Página no encontrada"
+msgstr "404 - Laman tidak ketemu"
 
 #: inc/admin/admin.php:178
 msgid "Dashboard"
-msgstr "Escritorio"
+msgstr "Dasbor"
 
 #: inc/admin/admin.php:180 inc/admin/admin.php:1173
 msgid "XML / Image / HTML Sitemap"
-msgstr "XML / imagen / Mapa del sitio HTML"
+msgstr "Sitemap XML / Gambar / HTML"
 
 #: inc/admin/admin.php:191
 #, php-format
@@ -428,7 +429,7 @@ msgstr "%%sitetitle%%"
 #: inc/admin/admin.php:2872 inc/admin/admin.php:2980 inc/admin/admin.php:3056
 #: inc/admin/admin.php:3126 inc/admin/admin.php:3195 inc/admin/admin.php:3227
 msgid "Site Title"
-msgstr "Título del sitio"
+msgstr "Judul Situs"
 
 #: inc/admin/admin.php:192
 #, php-format
@@ -437,7 +438,7 @@ msgstr "%%tagline%%"
 
 #: inc/admin/admin.php:192 inc/admin/admin.php:2707 inc/admin/admin.php:2718
 msgid "Tagline"
-msgstr "Lema del sitio"
+msgstr "Tagline"
 
 #: inc/admin/admin.php:193
 #, php-format
@@ -446,7 +447,7 @@ msgstr "%%post_title%%"
 
 #: inc/admin/admin.php:193
 msgid "Post Title (post, page, custom post type)"
-msgstr "Título de Post (post, página, tipo de post personalizado)"
+msgstr "Judul Pos (pos, laman, tipe pos kustom)"
 
 #: inc/admin/admin.php:194
 #, php-format
@@ -455,7 +456,7 @@ msgstr "%%post_excerpt%%"
 
 #: inc/admin/admin.php:194
 msgid "Post excerpt"
-msgstr "Extracto de Post"
+msgstr "Petikan pos"
 
 #: inc/admin/admin.php:195
 #, php-format
@@ -464,7 +465,7 @@ msgstr "%%post_date%%"
 
 #: inc/admin/admin.php:195
 msgid "Post date"
-msgstr "Fecha de Post"
+msgstr "Tanggal pos"
 
 #: inc/admin/admin.php:196
 #, php-format
@@ -473,7 +474,7 @@ msgstr "%%post_author%%"
 
 #: inc/admin/admin.php:196 inc/admin/admin.php:3055
 msgid "Post author"
-msgstr "Autor de Post"
+msgstr "Pemilik pos"
 
 #: inc/admin/admin.php:197
 #, php-format
@@ -482,7 +483,7 @@ msgstr "%%_category_title%%"
 
 #: inc/admin/admin.php:197
 msgid "Category title"
-msgstr "Título de Categoría"
+msgstr "Judul kategori"
 
 #: inc/admin/admin.php:198
 #, php-format
@@ -491,7 +492,7 @@ msgstr "%%_category_description%%"
 
 #: inc/admin/admin.php:198
 msgid "Category description"
-msgstr "Descripción de Categoría"
+msgstr "Deskripsi kategori"
 
 #: inc/admin/admin.php:199
 #, php-format
@@ -500,7 +501,7 @@ msgstr "%%tag_title%%"
 
 #: inc/admin/admin.php:199
 msgid "Tag title"
-msgstr "Título de Etiqueta"
+msgstr "Judul tag"
 
 #: inc/admin/admin.php:200
 #, php-format
@@ -509,7 +510,7 @@ msgstr "%%tag_description%%"
 
 #: inc/admin/admin.php:200
 msgid "Tag description"
-msgstr "Descripción de Etiqueta"
+msgstr "Deskripsi tag"
 
 #: inc/admin/admin.php:201
 #, php-format
@@ -518,7 +519,7 @@ msgstr "%%term_title%%"
 
 #: inc/admin/admin.php:201
 msgid "Term title"
-msgstr "Título de término"
+msgstr "Judul terma"
 
 #: inc/admin/admin.php:202
 #, php-format
@@ -527,7 +528,7 @@ msgstr "%%term_description%%"
 
 #: inc/admin/admin.php:202
 msgid "Term description"
-msgstr "Descripción del término"
+msgstr "Deskripsi terma"
 
 #: inc/admin/admin.php:203
 #, php-format
@@ -536,7 +537,7 @@ msgstr "%%search_keywords%%"
 
 #: inc/admin/admin.php:203
 msgid "Search keywords"
-msgstr "Buscar palabras clave"
+msgstr "Keywords pencarian"
 
 #: inc/admin/admin.php:204
 #, php-format
@@ -545,7 +546,7 @@ msgstr "%%current_pagination%%"
 
 #: inc/admin/admin.php:204
 msgid "Current number page"
-msgstr "Número de página actual"
+msgstr "Nomor laman sekarang"
 
 #: inc/admin/admin.php:205
 #, php-format
@@ -554,7 +555,7 @@ msgstr "%%cpt_plural%%"
 
 #: inc/admin/admin.php:205
 msgid "Plural Post Type Archive name"
-msgstr "Nombre de Tipo de Archivo de Post Plural"
+msgstr "Nama arsip pos jamak"
 
 #: inc/admin/admin.php:206
 #, php-format
@@ -563,23 +564,23 @@ msgstr "%%date_archive%%"
 
 #: inc/admin/admin.php:206
 msgid "Date Archive"
-msgstr "Archivo de Fecha"
+msgstr "Tanggal Arsip"
 
 #: inc/admin/admin.php:212
 msgid "Templates variables"
-msgstr "Variables de plantillas"
+msgstr "Variabel template"
 
 #: inc/admin/admin.php:230
 msgid ""
 "Discourage search engines from indexing this site is <strong>ON!</strong> "
 "None of the following settings will be applied."
 msgstr ""
-"La disuación de los motores de búsqueda de índice de este sitio está "
-"<strong>ACTIVADO</strong> Ninguno de los siguientes ajustes se aplicará."
+"Halangi mesin pencari dari mengindeks situs ini <strong>ON!</strong>. Tidak "
+"ada pengaturan berikut yang akan diaplikasikan."
 
 #: inc/admin/admin.php:231
 msgid "Change this settings"
-msgstr "Cambia esta configuración"
+msgstr "Ubah pengaturan ini"
 
 #: inc/admin/admin.php:251 inc/admin/admin.php:255 inc/admin/admin.php:318
 #: inc/admin/admin.php:322 inc/admin/admin.php:383 inc/admin/admin.php:387
@@ -594,7 +595,7 @@ msgstr "Cambia esta configuración"
 #: inc/admin/admin.php:1455 inc/admin/admin.php:1459 inc/admin/admin.php:1484
 #: inc/admin/admin.php:1488 inc/admin/admin.php:1513 inc/admin/admin.php:1517
 msgid "Click to disable this feature"
-msgstr "Haga clic para desactivar esta función"
+msgstr "Klik untuk menonaktifkan fitur ini"
 
 #: inc/admin/admin.php:252 inc/admin/admin.php:254 inc/admin/admin.php:319
 #: inc/admin/admin.php:321 inc/admin/admin.php:384 inc/admin/admin.php:386
@@ -609,43 +610,43 @@ msgstr "Haga clic para desactivar esta función"
 #: inc/admin/admin.php:1456 inc/admin/admin.php:1458 inc/admin/admin.php:1485
 #: inc/admin/admin.php:1487 inc/admin/admin.php:1514 inc/admin/admin.php:1516
 msgid "Click to enable this feature"
-msgstr "Haga clic para activar esta función"
+msgstr "Klik untuk mengaktifkan fitur ini"
 
 #: inc/admin/admin.php:269
 msgid "Home"
-msgstr "Inicio"
+msgstr "Beranda"
 
 #: inc/admin/admin.php:270
 msgid "Single Post Types"
-msgstr "Tipos de Post Individuales"
+msgstr "Tipe Pos Single"
 
 #: inc/admin/admin.php:271
 msgid "Archives"
-msgstr "Archivos"
+msgstr "Arsip"
 
 #: inc/admin/admin.php:272 inc/admin/admin.php:338
 msgid "Taxonomies"
-msgstr "Taxonomías"
+msgstr "Taksonomi"
 
 #: inc/admin/admin.php:336 inc/admin/admin.php:469 inc/admin/admin.php:477
 msgid "General"
-msgstr "General"
+msgstr "Umum"
 
 #: inc/admin/admin.php:337
 msgid "Post Types"
-msgstr "Tipos de Post"
+msgstr "Tipe Pos"
 
 #: inc/admin/admin.php:339
 msgid "HTML Sitemap"
-msgstr "Mapa del sitio HTML"
+msgstr "Sitemap HTML"
 
 #: inc/admin/admin.php:401
 msgid "Knowledge Graph"
-msgstr "Gráfico de conocimiento"
+msgstr "Knowledge Graph"
 
 #: inc/admin/admin.php:402
 msgid "Your social accounts"
-msgstr "Tus cuentas sociales"
+msgstr "Akun sosial kamu"
 
 #: inc/admin/admin.php:403
 msgid "Facebook"
@@ -657,64 +658,63 @@ msgstr "Twitter"
 
 #: inc/admin/admin.php:470 inc/admin/admin.php:478
 msgid "Tracking"
-msgstr "Seguimiento"
+msgstr "Pelacakan"
 
 #: inc/admin/admin.php:471 inc/admin/admin.php:479
 msgid "Events"
-msgstr "Eventos"
+msgstr "Even"
 
 #: inc/admin/admin.php:472 inc/admin/admin.php:480
 msgid "Custom Dimensions"
-msgstr "Dimensiones personalizadas"
+msgstr "Dimensi Kustom"
 
 #: inc/admin/admin.php:473
 msgid "Stats in Dashboard"
-msgstr "Estadísticas en el Escritorio"
+msgstr "Status di dasbor"
 
 #: inc/admin/admin.php:548
 msgid "Appearance"
-msgstr "Apariencia"
+msgstr "Penampilan"
 
 #: inc/admin/admin.php:549
 msgid "Security"
-msgstr "Seguridad"
+msgstr "Keamanan"
 
 #: inc/admin/admin.php:581
 msgid "Export Settings"
-msgstr "Exportar configuración"
+msgstr "Ekspor Pengaturan"
 
 #: inc/admin/admin.php:583
 msgid ""
 "Export the plugin settings for this site as a .json file. This allows you to "
 "easily import the configuration into another site."
 msgstr ""
-"Exportar la configuración del plugin de este sitio como un archivo .json. "
-"Esto le permite importar fácilmente la configuración en otro sitio."
+"Ekspor pengaturan plugin untuk situs ini sebagai berkas .json. Ini "
+"memungkinkan kamu untuk mengimpor konfigurasi ke situs  lain dengan mudah."
 
 #: inc/admin/admin.php:588
 msgid "Export"
-msgstr "Exportar"
+msgstr "Ekspor"
 
 #: inc/admin/admin.php:595
 msgid "Import Settings"
-msgstr "Importar configuración"
+msgstr "Impor Pengaturan"
 
 #: inc/admin/admin.php:597
 msgid ""
 "Import the plugin settings from a .json file. This file can be obtained by "
 "exporting the settings on another site using the form above."
 msgstr ""
-"Importar la configuración del plugin desde un archivo .json. Este archivo se "
-"puede obtener mediante la exportación de los ajustes en otro sitio usando el "
-"formulario de arriba."
+"Impor pengaturan plugin dari berkas .json. Berkas ini bisa didapatkan dengan "
+"mengekspor pengaturan pada situs lain menggunakan form diatas."
 
 #: inc/admin/admin.php:605 inc/admin/admin.php:628
 msgid "Import"
-msgstr "Importar"
+msgstr "Impor"
 
 #: inc/admin/admin.php:613
 msgid "Import Redirections"
-msgstr "Redirecciones de importación"
+msgstr "Pengalihan Impor"
 
 #: inc/admin/admin.php:615
 msgid ""
@@ -722,281 +722,276 @@ msgid ""
 "have 3 columns in this order: url to match (without your domain name), url "
 "to redirect in absolute and type of redirection (301, 302 or 307)."
 msgstr ""
-"Importe sus propias redirecciones desde un archivo .csv (separador \";\"). "
-"Debe tener 3 columnas en este orden: url para emparejar (sin su nombre de "
-"dominio), url para redireccionar en dirección absoluta y tipo de redirección "
-"(301, 302 o 307)."
+"Impor pengalihan kamu sendiri dari berkas .csv (pemisah \";\"). Kamu harus "
+"memiliki 3 kolom dengan urutan berikut: URL untuk pencocokan (tanpa nama "
+"domain kamu), URL untuk pengalih yang absolut dan tipe pengalihan (301, 302 "
+"atau 307)."
 
 #: inc/admin/admin.php:618
 msgid "Download a CSV example"
-msgstr "Descargar un ejemplo de CSV"
+msgstr "Unduh contoh CSV"
 
 #: inc/admin/admin.php:636
 msgid "Import posts and terms metadata from Yoast"
-msgstr "Importar entradas y términos metadatos de Yoast"
+msgstr "Impor pos dan terma metadata dari Yoast"
 
 #: inc/admin/admin.php:638
 msgid "By clicking Migrate, we'll import:"
-msgstr "Clicando sobre Migrar, importaremos:"
+msgstr "Dengan mengklik Migrasi, kami akan impor:"
 
 #: inc/admin/admin.php:640
 msgid "Title tags"
-msgstr "Etiquetas de título"
+msgstr "Tag judul"
 
 #: inc/admin/admin.php:642
 msgid "Facebook Open Graph tags (title, description and image thumbnail)"
-msgstr ""
-"Etiquetas de Facebook Open Graph (título, Descripción e imagen miniatura)"
+msgstr "Tag Facebook Open Graph (judul, deskripsi dan thumbnail gambar)"
 
 #: inc/admin/admin.php:643
 msgid "Twitter tags (title, description and image thumbnail)"
-msgstr "Etiquetas de Twitter (título, Descripción e imagen miniatura)"
+msgstr "Tag Twitter (judul, deskripsi dan thumbnail gambar)"
 
 #: inc/admin/admin.php:644
 msgid "Meta Robots (noindex, nofollow...)"
-msgstr "Meta Robots (noindex, nofollow...)"
+msgstr "Meta Robots (noindex, nogollow..)"
 
 #: inc/admin/admin.php:647
 msgid ""
 "<strong>WARNING:</strong> Migration will delete all SEOPress posts metadata"
 msgstr ""
-"<strong>ADVERTENCIA:</strong> Migración eliminará todos los mensajes de "
-"metadatos de SEOPress"
+"<strong>PERINGATAN</strong> Migrasi akan menghapus semua metadata pos SEOPres"
 
 #: inc/admin/admin.php:648
 msgid "Migrate now"
-msgstr "Migrar ahora"
+msgstr "Migrasi sekarang"
 
 #: inc/admin/admin.php:655
 msgid "Reset All Notices From Notifications Center"
-msgstr "Restablecer todos los avisos del Centro de Notificaciones"
+msgstr "Reset semua pemberitahuan dari Pusat Pemberitahuan"
 
 #: inc/admin/admin.php:657
 msgid ""
 "By clicking Reset Notices, you'll see all notices again in notifications "
 "center."
 msgstr ""
-"Clicando en Restablecer Avisos, verás todos los avisos otra vez en el centro "
-"de notificaciones."
+"Dengan mengklik Reset Pemberitahuan, kamu akan melihat semua pemberitahuan "
+"lagi di pusat pemberitahuan."
 
 #: inc/admin/admin.php:662
 msgid "Reset notices"
-msgstr "Restablecer avisos"
+msgstr "Reset pemberitahuan"
 
 #: inc/admin/admin.php:669
 msgid "Reset All Settings"
-msgstr "Restablecer todas las configuraciónes"
+msgstr "Reset Semua Pengaturan"
 
 #: inc/admin/admin.php:671
 msgid ""
 "<strong>WARNING:</strong> Delete all options related to SEOPress in your "
 "database AND set settings to their default values."
 msgstr ""
-"<strong>ADVERTENCIA:</strong> Borrar todas las opciones relacionadas con "
-"SEOPress en su base de datos Y la configuración a sus valores "
-"predeterminados."
+"<strong>PERINGATAN</strong> Hapus semua opsi terhubung ke SEOPress di "
+"database kamu DAN atur pengaturan ke nilai default mereka."
 
 #: inc/admin/admin.php:676
 msgid "Reset settings"
-msgstr "Reiniciar Ajustes"
+msgstr "Reset pengaturan"
 
 #: inc/admin/admin.php:717 inc/admin/admin.php:723
 msgid "SEO Tools"
-msgstr "Herramientas SEO"
+msgstr "Alat SEO"
 
 #: inc/admin/admin.php:718 inc/admin/admin.php:724 inc/admin/admin.php:730
 #: inc/admin/admin.php:735
 msgid "Useful links"
-msgstr "Enlaces útiles"
+msgstr "Tautan berguna"
 
 #: inc/admin/admin.php:722 inc/admin/admin.php:734
 msgid "Notifications Center"
-msgstr "Centro de Notificaciones"
+msgstr "Pusat Pemberitahuan"
 
 #: inc/admin/admin.php:755
 msgid ""
 "We notice that you use Yoast SEO plugin. <br>Do you want to migrate all your "
 "posts metadata to SEOPress?"
 msgstr ""
-"Hemos observado que utilizas Yoast SEO. <br> ¿Migrar los metadatos de sus "
-"artículos, páginas y tipos de elementos personalizados a SEOPress?"
+"Kami tahu  kamu memakai plugin Yoast SEO. <br>Apa kamu ingin migrasi semua "
+"metadata pos kamu ke SEOPress?"
 
 #: inc/admin/admin.php:757
 msgid "Migrate!"
-msgstr "Migrar"
+msgstr "Migrasi!"
 
 #: inc/admin/admin.php:778
 msgid "Your site doesn't use an SSL certificate!"
-msgstr "¡Tu sitio no utiliza un certificado SSL!"
+msgstr "Situs kamu tidak menggunakan sertifikat SSL!"
 
 #: inc/admin/admin.php:779 inc/admin/admin.php:3978 inc/admin/admin.php:3999
 #: inc/admin/admin.php:4020 inc/admin/admin.php:4041
 msgid "Learn more"
-msgstr "Saber más"
+msgstr "Pelajari lebih"
 
 #: inc/admin/admin.php:780
 msgid "Low impact"
-msgstr "Bajo impacto"
+msgstr "Dampak rendah"
 
 #: inc/admin/admin.php:782
 msgid "Buy an SSL!"
-msgstr "¡Comprar un SSL!"
+msgstr "Beli SSL!"
 
 #: inc/admin/admin.php:792
 msgid "Your site is not visible to Search Engines!"
-msgstr "¡Tu sitio no es visible para los motores de búsqueda!"
+msgstr "Situs kamu tidak terlihat ke Mesin Pencari!"
 
 #: inc/admin/admin.php:793 inc/admin/admin.php:803 inc/admin/admin.php:813
 msgid "High impact"
-msgstr "Alto impacto"
+msgstr "Dampak tinggi"
 
 #: inc/admin/admin.php:795 inc/admin/admin.php:805 inc/admin/admin.php:815
 #: inc/admin/admin.php:839 inc/admin/admin.php:893 inc/admin/admin.php:906
 #: inc/admin/admin.php:978
 msgid "Fix this!"
-msgstr "¡Solucionarlo!"
+msgstr "Perbaiki ini!"
 
 #: inc/admin/admin.php:802
 msgid "Your site title is empty!"
-msgstr "¡El título de tu sitio está vacío!"
+msgstr "Judul situs kamu kosong!"
 
 #: inc/admin/admin.php:812
 msgid ""
 "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
 msgstr ""
-"¡Tus permalinks no son SEO amigables! Activa permalinks buenos para "
-"solucionar este problema."
+"Permalink kamu tidak SEO Friendly! Aktifkan permalink cantik untuk "
+"memperbaikinya."
 
 #: inc/admin/admin.php:836
 msgid "You RSS feed show full text!"
-msgstr "¡Tu fuente RSS muestra el texto completo!"
+msgstr "Feed RSS kamu menampilkan teks penuh!"
 
 #: inc/admin/admin.php:837 inc/admin/admin.php:891 inc/admin/admin.php:904
 msgid "Medium impact"
-msgstr "Impacto medio"
+msgstr "Dampak sedang"
 
 #: inc/admin/admin.php:863
 msgid "Break comments into pages is ON!"
-msgstr "¡Los comentarios divididos en las páginas está activo!"
+msgstr "Bagi komentar ke beberapa laman ON!"
 
 #: inc/admin/admin.php:864 inc/admin/admin.php:928 inc/admin/admin.php:964
 msgid "Huge impact"
-msgstr "Gran impacto"
+msgstr "Dampak besar"
 
 #: inc/admin/admin.php:866
 msgid "Disable this!"
-msgstr "¡Desactivar esto!"
+msgstr "Nonaktifkan ini!"
 
 #: inc/admin/admin.php:890
 msgid "Display more posts per page on homepage and archives"
-msgstr ""
-"Mostrar más publicaciones por página en la página principal y los archivos"
+msgstr "Tampilkan lebih banyak pos per laman pada beranda dan arsip"
 
 #: inc/admin/admin.php:903
 msgid "You don't have an XML Sitemap!"
-msgstr "¡No tienes un Sitemap XML!"
+msgstr "Kamu tidak punya Sitemap XML!"
 
 #: inc/admin/admin.php:927
 msgid "Do you have a Google Business page? It's free!"
-msgstr "¿Tienes una página de Google Business? ¡Es gratis!"
+msgstr "Apa kamu punya laman Google Business? Ini gratis!"
 
 #: inc/admin/admin.php:930
 msgid "Create your page now!"
-msgstr "¡Crea tu página ahora!"
+msgstr "Buat laman kamu sekarang!"
 
 #: inc/admin/admin.php:963
 msgid "Add your site to Google. It's free!"
-msgstr "Agrega tu sitio a Google. ¡Es gratis!"
+msgstr "Tambahkan situs kamu ke Google. Ini gratis!"
 
 #: inc/admin/admin.php:966
 msgid "Add your site to Search Console!"
-msgstr "¡Agrega tu sitio a Search Console!"
+msgstr "Tambahkan situs kamu ke Search Console!"
 
 #: inc/admin/admin.php:976
 msgid "You have to enter your licence key to get updates and support"
 msgstr ""
-"Tienes que introducir tu clave de licencia para obtener actualizaciones y "
-"soporte"
+"Kamu harus memasukkan llicence key untuk mendapatkan pembaruhan dan dukungan"
 
 #: inc/admin/admin.php:991
 msgid "Check websites setup on your server"
-msgstr "Comprobar la configuración de sitios web en su servidor"
+msgstr "Periksa pengaturan situs web pada server kamu"
 
 #: inc/admin/admin.php:993
 msgid "Host IP: "
-msgstr "Host IP: "
+msgstr "Host IP"
 
 #: inc/admin/admin.php:999
 msgid "Server IP Address: "
-msgstr "Dirección IP del servidor: "
+msgstr "Alamat IP Server"
 
 #: inc/admin/admin.php:1001
 msgid "Last scrape: "
-msgstr "Última raspadura: "
+msgstr "Goresan terakhir"
 
 #: inc/admin/admin.php:1002
 msgid "Number of websites on your server: "
-msgstr "Número de sitios web en su servidor: "
+msgstr "Jumlah situs web pada server kamu"
 
 #: inc/admin/admin.php:1014
 msgid "Get list"
-msgstr "Obtener Lista"
+msgstr "Dapatkan daftar"
 
 #: inc/admin/admin.php:1022
 msgid "Check your domain expiration date"
-msgstr "Compruebe la fecha de vencimiento de su dominio"
+msgstr "Periksa tanggal kedaluwarsa domain kamu"
 
 #: inc/admin/admin.php:1043
 msgid "Your domain name: "
-msgstr "Su nombre de dominio: "
+msgstr "Nama domain kamu"
 
 #: inc/admin/admin.php:1046
 msgid "Your registrar: "
-msgstr "Su registrador: "
+msgstr "Pendaftar kamu"
 
 #: inc/admin/admin.php:1049
 msgid "Last updated date: "
-msgstr "Última actualización: "
+msgstr "Tanggal pembaruan terakhir"
 
 #: inc/admin/admin.php:1052
 msgid "Domain creation date: "
-msgstr "Fecha de creación del dominio: "
+msgstr "Tanggal pembuatan domain"
 
 #: inc/admin/admin.php:1055
 msgid "Your domain expires: "
-msgstr "Su dominio caduca: "
+msgstr "Kedaluwarsa domain kamu"
 
 #: inc/admin/admin.php:1060
 msgid "Sorry, you domain name can't be verified :("
-msgstr "Lo sentimos, nombre de dominio no puede ser verificado :("
+msgstr "Maaf, nama domain kamu tidak bisa diverifikasi"
 
 #: inc/admin/admin.php:1063
 msgid "Email me before expiration"
-msgstr "Envíeme un correo electrónico antes de la expiración"
+msgstr "Email aku sebelum kedaluwarsa"
 
 #: inc/admin/admin.php:1072
 msgid "Check your Alexa Rank (Amazon index)"
-msgstr "Compruebe su Alexa Rank (índice de Amazon)"
+msgstr "Periksa Alexa Rank kamu (indeks Amazon)"
 
 #: inc/admin/admin.php:1087
 msgid "Your Alexa Rank"
-msgstr "Su Alexa Rank"
+msgstr "Alexa Rank kamu"
 
 #: inc/admin/admin.php:1109
 msgid "Country Rank: "
-msgstr "Clasificación de País: "
+msgstr "Rank negara"
 
 #: inc/admin/admin.php:1118
 msgid "The lower, the best"
-msgstr "El más bajo, el mejor"
+msgstr "Lebih rendah, terbaik"
 
 #: inc/admin/admin.php:1122
 msgid "Get Alexa Rank"
-msgstr "Obtener Alexa Rank"
+msgstr "Dapatkan Alexa Rank"
 
 #: inc/admin/admin.php:1130
 msgid "Upload a list of links to disavow to Google"
-msgstr "Sube una lista de enlaces para rechazar a Google"
+msgstr "Unggah daftar tautan untuk mengingkari ke Google"
 
 #: inc/admin/admin.php:1131
 msgid "Google Trends"
@@ -1004,11 +999,11 @@ msgstr "Google Trends"
 
 #: inc/admin/admin.php:1144
 msgid "Titles & metas"
-msgstr "Títulos y Metas"
+msgstr "Judul dan meta"
 
 #: inc/admin/admin.php:1145
 msgid "Manage all your titles & metas"
-msgstr "Administrar todos tus títulos y metas"
+msgstr "Kelola semua judul & meta kamu"
 
 #: inc/admin/admin.php:1146 inc/admin/admin.php:1175 inc/admin/admin.php:1204
 #: inc/admin/admin.php:1233 inc/admin/admin.php:1262 inc/admin/admin.php:1291
@@ -1017,470 +1012,465 @@ msgstr "Administrar todos tus títulos y metas"
 #: inc/admin/admin.php:1472 inc/admin/admin.php:1501 inc/admin/admin.php:1541
 #: inc/admin/admin.php:1552 inc/admin/admin.php:1564 inc/admin/admin.php:1576
 msgid "Manage"
-msgstr "Gestionar"
+msgstr "Kelola"
 
 #: inc/admin/admin.php:1174
 msgid "Manage your XML / Image / HTML Sitemap"
-msgstr "Gestionar tu XML / imagen / mapa del sitio HTML"
+msgstr "Kelola Sitemap XML / Gambar / HTML  kamu"
 
 #: inc/admin/admin.php:1203
 msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
-msgstr "Open Graph, Twitter Card, Google Knowledge Graph y más..."
+msgstr "Open Graph, Twitter Card, Google Knowledge Graph dan lebih..."
 
 #: inc/admin/admin.php:1232
 msgid "Track everything about your visitors with Google Analytics"
-msgstr "Siga todo acerca de sus visitantes con Google Analytics"
+msgstr "Lacak segalanya tentang pengunjung kamu dengan Google Analytics"
 
 #: inc/admin/admin.php:1261
 msgid "Advanced SEO options for advanced users!"
-msgstr "¡Opciones avanzadas de SEO para usuarios avanzados!"
+msgstr "Opsi lanjutan SEO untuk pengguna lanjutan!"
 
 #: inc/admin/admin.php:1290
 msgid "Improve WooCommerce SEO"
-msgstr "Mejorar SEO WooCommerce"
+msgstr "Improvisasi SEO WooCommerce"
 
 #: inc/admin/admin.php:1318
 msgid "Add Google Local Business data type"
-msgstr "Añadir tipo de datos de Google Local Business"
+msgstr "Tambah tipe data Google Local Business"
 
 #: inc/admin/admin.php:1346
 msgid "Add Dublin Core meta tags"
-msgstr "Agregar metaetiquetas Dublin Core"
+msgstr "Tambah metatag Dublin Core"
 
 #: inc/admin/admin.php:1374
 msgid ""
 "Add data types to your content: articles, courses, recipes, videos, events "
 "and products"
 msgstr ""
-"Añadir tipos de datos a tu contenido: artículos, cursos, recetas, videos, "
-"eventos y productos"
+"Tambahkan tipe data ke konten kamu: artikel, kursus, resep, video, even dan "
+"produk"
 
 #: inc/admin/admin.php:1402
 msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
-msgstr "Habilitar migas de pan para tu tema y mejorar tu SEO en SERPs"
+msgstr ""
+"Aktifkan Breadcrumbs untuk tema kamu dan improvisasi SEO kamu pada SERP"
 
 #: inc/admin/admin.php:1431
 msgid "Track your website performance to improve SEO with Google Page Speed"
 msgstr ""
-"Seguir el rendimiento de su sitio web para mejorar el SEO con Google Page "
-"Speed"
+"Lacak kemampuan situs web kamu untuk improvisasi SEO dengan Google Page Speed"
 
 #: inc/admin/admin.php:1442
 msgid "Edit your robots.txt file"
-msgstr "Edita tu archivo robots.txt"
+msgstr "Sunting berkas robots.txt kamu"
 
 #: inc/admin/admin.php:1471
 msgid "Optimize your site for Google News"
-msgstr "Optimizar tu sitio para Google News"
+msgstr "Optimalkan situs kamu untuk Google News"
 
 #: inc/admin/admin.php:1499
 msgid "Monitor 404, create 301, 302 and 307 redirections"
-msgstr "Monitorear 404, crear redirecciones 301, 302 y 307"
+msgstr "Pantau 404, buat pengalihan 301, 302 dan 307"
 
 #: inc/admin/admin.php:1500
 msgid "See redirects"
-msgstr "Ver redirecciones"
+msgstr "Lihat pengalihan"
 
 #: inc/admin/admin.php:1529
 msgid "Scan your site to find SEO problems."
-msgstr "Analiza tu sitio para encontrar problemas SEO."
+msgstr "Pindai situs kamu untuk menemukan masalah SEO."
 
 #: inc/admin/admin.php:1530
 msgid "See broken links"
-msgstr "Ver enlaces rotos"
+msgstr "Lihat tautan rusak"
 
 #: inc/admin/admin.php:1531
 msgid "Scan"
-msgstr "Analizar"
+msgstr "Pindai"
 
 #: inc/admin/admin.php:1540
 msgid "Edit your htaccess file."
-msgstr "Editar tu archivo htaccess."
+msgstr "Sunting berkas htaccess kamu."
 
 #: inc/admin/admin.php:1551
 msgid "Configure default WordPress RSS."
-msgstr "Configurar el RSS predeterminado de WordPress."
+msgstr "Konfigurasi RSS default WordPress."
 
 #: inc/admin/admin.php:1563
 msgid "Import / export SEOPress settings from site to site."
-msgstr "Importar / exportar configuración de SEOPress de sitio a sitio."
+msgstr ""
+"Impor / ekspor pengaturan SEOPress dari situs satu ke situs yang lainnya."
 
 #: inc/admin/admin.php:1575
 msgid "Edit your SEOPress license key."
-msgstr "Editar tu clave de licencia de SEOPress."
+msgstr "Sunting  kunci lisensi SEOPress kamu."
 
 #: inc/admin/admin.php:1644
 msgid "Site title"
-msgstr "Título del Sitio"
+msgstr "Judul situs"
 
 #: inc/admin/admin.php:1876
 msgid "Indicate paginated content to Google"
-msgstr "Indique contenido paginado a Google"
+msgstr "Indikasi konten perhalaman ke Google"
 
 #: inc/admin/admin.php:1893 inc/admin/admin.php:3391
 msgid "Enable XML Sitemap"
-msgstr "Activar Mapa del Sitio XML"
+msgstr "Aktifkan Sitemap XML"
 
 #: inc/admin/admin.php:1901
 msgid "Enable XML Image Sitemaps"
-msgstr "Activar imagen de Mapas del Sitio XML"
+msgstr "Aktifkan Sitemap XML Gambar"
 
 #: inc/admin/admin.php:1909 inc/admin/admin.php:3429
 msgid "Enable HTML Sitemap"
-msgstr "Activar Mapa del Sitio HTML"
+msgstr "Aktifkan Sitemap HTML"
 
 #: inc/admin/admin.php:1925
 msgid "Check to INCLUDE Post Types"
-msgstr "Marcar para INCLUIR Tipos de Post"
+msgstr "Cek untuk MENGIKUTKAN tipe pos"
 
 #: inc/admin/admin.php:1941
 msgid "Check to INCLUDE Taxonomies"
-msgstr "Marcar para INCLUIR Taxonomías"
+msgstr "Cek untuk MENGIKUTKAN taksonomi"
 
 #: inc/admin/admin.php:1957
 msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
-msgstr ""
-"Introducir un ID de elemento, página o tipo de contenido que muestra el mapa "
-"del sitio."
+msgstr "Masukkan pos, laman atau ID tipe pos kustom untuk menampilkan sitemap"
 
 #: inc/admin/admin.php:1965
 msgid "Exclude some Posts, Pages or Custom Post Types"
-msgstr "Excluir algunos artículos, páginas o tipos de contenido."
+msgstr "Kecualikan beberapa Pos, Laman atau Tipe Pos Kustom"
 
 #: inc/admin/admin.php:1982
 msgid "Person or organization"
-msgstr "Persona u organización"
+msgstr "Perorangan atau Organisasi"
 
 #: inc/admin/admin.php:1990
 msgid "Your name / organization"
-msgstr "Tu nombre / organización"
+msgstr "Nama / organisasi kamu"
 
 #: inc/admin/admin.php:1998
 msgid "Your photo / organization logo"
-msgstr "Tu foto / logo de la organización"
+msgstr "Foto / logo organisasi kamu"
 
 #: inc/admin/admin.php:2006
 msgid "Organization Phone number (only for Organization)"
-msgstr "Número de teléfono de la organización (sólo para la organización)"
+msgstr "Nomor Telpon Organisasi (hanya untuk organisasi)"
 
 #: inc/admin/admin.php:2014
 msgid "Contact type (only for Organization)"
-msgstr "Tipo de contacto (sólo para la organización)"
+msgstr "Tipe Kontak  (hanya untuk organisasi)"
 
 #: inc/admin/admin.php:2022
 msgid "Contact option (only for Organization)"
-msgstr "Opción de contacto (sólo para la organización)"
+msgstr "Opsi Kontak  (hanya untuk organisasi)"
 
 #: inc/admin/admin.php:2039
 msgid "Facebook Page URL"
-msgstr "URL de la página de Facebook"
+msgstr "URL Facebook Page"
 
 #: inc/admin/admin.php:2047
 msgid "Twitter Username"
-msgstr "Nombre de usuario de Twitter"
+msgstr "Nama pengguna Twitter"
 
 #: inc/admin/admin.php:2055
 msgid "Google + URL"
-msgstr "URL de Google+"
+msgstr "URL Google+"
 
 #: inc/admin/admin.php:2063
 msgid "Pinterest URL"
-msgstr "URL de Pinterest"
+msgstr "URL Pinterest"
 
 #: inc/admin/admin.php:2071
 msgid "Instagram URL"
-msgstr "URL de Instagram"
+msgstr "URL Instagram"
 
 #: inc/admin/admin.php:2079
 msgid "YouTube URL"
-msgstr "URL de YouTube"
+msgstr "URL YouTube"
 
 #: inc/admin/admin.php:2087
 msgid "LinkedIn URL"
-msgstr "URL de Linkedln"
+msgstr "URL LinkedIn"
 
 #: inc/admin/admin.php:2095
 msgid "MySpace URL"
-msgstr "URL de MySpace"
+msgstr "URL MySpace"
 
 #: inc/admin/admin.php:2103
 msgid "Soundcloud URL"
-msgstr "URL de Soundcloud"
+msgstr "URL Soundcloud"
 
 #: inc/admin/admin.php:2111
 msgid "Tumblr URL"
-msgstr "URL de Tumblr"
+msgstr "URL Tumblr"
 
 #: inc/admin/admin.php:2128
 msgid "Enable Open Graph Data"
-msgstr "Habilitar datos de Open Graph"
+msgstr "Aktifkan Open Graph Data"
 
 #: inc/admin/admin.php:2136
 msgid "Select a default image"
-msgstr "Seleccionar una imagen predeterminada"
+msgstr "Pilih gambar default"
 
 #: inc/admin/admin.php:2144
 msgid "Facebook Admin ID"
-msgstr "Facebook admin ID"
+msgstr "ID Facebook Admin"
 
 #: inc/admin/admin.php:2152
 msgid "Facebook App ID"
-msgstr "Facebook App ID"
+msgstr "ID Facebook App"
 
 #: inc/admin/admin.php:2169
 msgid "Enable Twitter Card"
-msgstr "Habilitar Twitter Card"
+msgstr "Aktifkan Twitter Card"
 
 #: inc/admin/admin.php:2177
 msgid "Default Twitter Image"
-msgstr "Imagen de Twitter por defecto"
+msgstr "Gambar Twitter default"
 
 #: inc/admin/admin.php:2185
 msgid "Image size for Twitter Summary card"
-msgstr "Tamaño de imagen para Twitter Summary Card"
+msgstr "Ukuran gambar untuk Twitter Summary card"
 
 #: inc/admin/admin.php:2202 inc/admin/admin.php:3922
 msgid "Enable Google Analytics tracking"
-msgstr "Habilitar el seguimiento de Google Analytics"
+msgstr "Aktifkan pelacakan  Google Analytics"
 
 #: inc/admin/admin.php:2210
 msgid "Enter your tracking ID"
-msgstr "Introduzca su ID de seguimiento"
+msgstr "Masukkan ID pelacakan kamu"
 
 #: inc/admin/admin.php:2218
 msgid "Exclude user roles from tracking"
-msgstr "Excluir roles de usuario para seguimiento"
+msgstr "Kecualikan peran pengguna dari pelacakan.  "
 
 #: inc/admin/admin.php:2236 inc/admin/admin.php:3975
 msgid "Enable remarketing, demographics and interest reporting"
-msgstr "Habilitar remarketing, datos demográficos e informes de interés"
+msgstr "Aktifkan pemasaran ulang, demografi dan pelaporan minat"
 
 #: inc/admin/admin.php:2244 inc/admin/admin.php:3996
 msgid "Enable IP Anonymization"
-msgstr "Habilitar la anonimización de IP"
+msgstr "Aktifkan Anomisasi IP"
 
 #: inc/admin/admin.php:2252 inc/admin/admin.php:4017
 msgid "Enhanced Link Attribution"
-msgstr "Atribución de Enlace Mejorado"
+msgstr "Atribusi Link Lanjutan"
 
 #: inc/admin/admin.php:2260 inc/admin/admin.php:4038
 msgid "Enable cross-domain tracking"
-msgstr "Habilitar el seguimiento de dominios cruzados"
+msgstr "Aktifkan pelacakan lintas domain"
 
 #: inc/admin/admin.php:2268
 msgid "Cross domains"
-msgstr "Dominios cruzados"
+msgstr "Lintas domain"
 
 #: inc/admin/admin.php:2286
 msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
-msgstr ""
-"Habilitar el seguimiento de descargas (por ejemplo: PDF, XLSX, DOCX ...)"
+msgstr "Aktifkan pelacakan unduh (mis: PDF, XLSX, DOCX...)"
 
 #: inc/admin/admin.php:2294
 msgid "Track click downloads"
-msgstr "Seguimiento de descargas de clics"
+msgstr "Lacak klik unduk"
 
 #: inc/admin/admin.php:2312
 msgid "Track Authors"
-msgstr "Seguir Autores"
+msgstr "Lacak Pemilik"
 
 #: inc/admin/admin.php:2320
 msgid "Track Categories"
-msgstr "Seguir Categorías"
+msgstr "Lacak Kategori"
 
 #: inc/admin/admin.php:2328
 msgid "Track Tags"
-msgstr "Seguir Etiquetas"
+msgstr "Lacak Tag"
 
 #: inc/admin/admin.php:2336
 msgid "Track Post Types"
-msgstr "Seguir Tipos de Publicaciones"
+msgstr "Lacak Tipe Pos"
 
 #: inc/admin/admin.php:2344
 msgid "Track Logged In Users"
-msgstr "seguir Usuarios Conectados"
+msgstr "Lacak pengguna masuk"
 
 #: inc/admin/admin.php:2361
 msgid "Redirect attachment pages to post parent"
-msgstr "Redirigir las páginas de adjuntos al post principal"
+msgstr "Pengalihan laman lampiran ke induk pos"
 
 #: inc/admin/admin.php:2369
 msgid "Remove stop words from URL"
-msgstr "Quitar stop words (palabras vacías) de la URL"
+msgstr "Hilangkan kata berhenti dari URL"
 
 #: inc/admin/admin.php:2377
 msgid "Remove /category/ in URL"
-msgstr "Quitar /category/ en URL"
+msgstr "Hilangkan /kategori/ pada URL"
 
 #: inc/admin/admin.php:2385 inc/admin/admin.php:4534
 msgid "Disable trailing slash for metas"
-msgstr "Deshabilitar barra diagonal final para metas"
+msgstr "Menonaktifkan garis miring untuk meta"
 
 #: inc/admin/admin.php:2393
 msgid "Google site verification"
-msgstr "Verificación del sitio de Google"
+msgstr "Verifikasi situs Google"
 
 #: inc/admin/admin.php:2401
 msgid "Bing site verification"
-msgstr "Verificación del sitio de Bing"
+msgstr "Verifikasi situs Bing"
 
 #: inc/admin/admin.php:2409
 msgid "Pinterest site verification"
-msgstr "Verificación del sitio en Pinterest"
+msgstr "Verifikasi situs Pinterest"
 
 #: inc/admin/admin.php:2417
 msgid "Yandex site verification"
-msgstr "Verificación del sitio de Yandex"
+msgstr "Verifikasi situs Yandex"
 
 #: inc/admin/admin.php:2434
 msgid "SEOPress in admin bar"
-msgstr "SEOPress en la barra de admin"
+msgstr "SEOPress di admin bar"
 
 #: inc/admin/admin.php:2442
 msgid "Move SEOPress metaboxe position"
-msgstr "Mover la posición metaboxe de SEOPress"
+msgstr "Pindah posisi metaboks SEOPress"
 
 #: inc/admin/admin.php:2450
 msgid "Hide SEOPress Notifications Center"
-msgstr "Ocultar Centro de notificaciones de SEOPress"
+msgstr "Sembunyikan Pusat Pemberitahuan SEOPress"
 
 #: inc/admin/admin.php:2458
 msgid "Show Title tag column in post types"
-msgstr "Mostrar columna de etiqueta Title en tipos de post"
+msgstr "Tampilkan kolom tag Judul di tipe pos"
 
 #: inc/admin/admin.php:2466
 msgid "Show Meta description column in post types"
-msgstr "Mostrar columna de descripción Meta en tipos de post"
+msgstr "Tampilkan kolom deskripsi Meta di tipe pos"
 
 #: inc/admin/admin.php:2474
 msgid "Show noindex column in post types"
-msgstr "Mostrar columna noindex en tipos de post"
+msgstr "Tampilkan kolom noindex di tipe pos"
 
 #: inc/admin/admin.php:2482
 msgid "Show nofollow column in post types"
-msgstr "Mostrar columna de nofollow en tipos de post"
+msgstr "Tampilkan kolom nofollow di tipe pos"
 
 #: inc/admin/admin.php:2490
 msgid "Show total number of words column in post types"
-msgstr ""
-"Mostrar el número total de columnas de palabras en los tipos de publicación"
+msgstr "Tampilkan jumlah total kolom kata di tipe pos"
 
 #: inc/admin/admin.php:2498
 msgid "Show W3C validator column in post types"
-msgstr "Mostrar columna de validador de W3C en los tipos de publicación"
+msgstr "Tampilkan kolom validator W3 di tipe pos"
 
 #: inc/admin/admin.php:2506
 msgid "Show Google Page Speed column in post types"
-msgstr "Mostrar columna Google Page Speed en los tipos de publicación"
+msgstr "Tampilkan kolom Google Page Speed di tipe pos"
 
 #: inc/admin/admin.php:2515
 msgid "Hide Genesis SEO Metaboxe"
-msgstr "Ocultar Génesis SEO Metaboxe"
+msgstr "Sembunyikan Genesis SEO Metaboxe"
 
 #: inc/admin/admin.php:2532
 msgid "Block SEO metaboxe to user roles"
-msgstr "Bloquear la SEO Metaboxe a roles de usuario"
+msgstr "Blok SEO metaboxe kepada peran pengguna"
 
 #: inc/admin/admin.php:2576
 msgid "<p>Customize your titles & metas for homepage</p>"
-msgstr "<p>Personalizar sus títulos y metas para página de inicio</p>"
+msgstr "<p>Kustomisasi judul & meta kamu untuk beranda</p>"
 
 #: inc/admin/admin.php:2581
 msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
-msgstr ""
-"<p>Personalizar sus títulos y metas para los tipos individuales del "
-"artículo</p>"
+msgstr "<p>Kustomisasi judul & meta kamu untuk Tipe Pos Kustom Single</p>"
 
 #: inc/admin/admin.php:2586
 msgid "<p>Customize your metas for all pages</p>"
-msgstr "<p>Personaliza tus metas para todas las páginas</p>"
+msgstr "<p>Kustomisasi meta kamu untuk semua laman</p>"
 
 #: inc/admin/admin.php:2591
 msgid "<p>Customize your metas for all taxonomies archives</p>"
-msgstr "<p>Personaliza tus metas para todos los archivos de las taxonomías</p>"
+msgstr "<p>Kustomisasi meta kamu untuk semua arsip taksonomi</p>"
 
 #: inc/admin/admin.php:2596
 msgid "<p>Customize your metas for all archives</p>"
-msgstr "<p>Personaliza tus metas para todos los archivos</p>"
+msgstr "<p>Kustomisasi meta kamu untuk semua arsip</p>"
 
 #: inc/admin/admin.php:2601
 msgid ""
 "To view your sitemap, enable permalinks (not default one), and save settings "
 "to flush them."
 msgstr ""
-"Para ver el mapa del sitio, activar los permalinks (no por defecto) y "
-"guardar los ajustes para actualizarlos."
+"Untuk meninjau sitemap kamu, aktifkan permalink (bukan default), dan simpan "
+"pengaturan untuk menyiramnya."
 
 #: inc/admin/admin.php:2602
 msgid ""
 "Only the last 1000 items are listed in Sitemaps for performances issues."
 msgstr ""
-"Sólo los 1000 últimos artículos aparecen en Sitemaps para evitar problemas "
-"de rendimiento."
+"Hanya 100 item terakhir yang terdaftar didalam Sitemaps untuk masalah "
+"kemampuan."
 
 #: inc/admin/admin.php:2604
 msgid ""
 "Your server use NGINX. If XML Sitemaps doesn't work, you have to add this "
 "rules to your configuration:"
 msgstr ""
-"El servidor utiliza NGINX. Si XML Sitemaps no funciona, debe agregar estas "
-"reglas a su configuración:"
+"Server kamu menggunakan NGINX. Jika Sitemap XML tidak bekerja, kamu harus "
+"menambahkan aturan berikut ini ke konfigurasi kamu"
 
 #: inc/admin/admin.php:2614
 msgid "Noindex content will not be displayed in Sitemaps."
-msgstr "Contenido noindex no se mostrará en Sitemaps."
+msgstr "Konten noindex tidak akan ditampilkan di Sitemaps."
 
 #: inc/admin/admin.php:2616
 msgid "View your sitemap"
-msgstr "Ver el mapa del sitio"
+msgstr "Tinjau sitemap kamu"
 
 #: inc/admin/admin.php:2618
 msgid "Ping Google manually"
-msgstr "Ping a Google manualmente"
+msgstr "Ping Google secara manual"
 
 #: inc/admin/admin.php:2620
 msgid "Flush permalinks"
-msgstr "Permalinks a nivel"
+msgstr "Siram permalink"
 
 #: inc/admin/admin.php:2626
 msgid "<p>Create an HTML for your visitors and boost your SEO</p>"
-msgstr "<p>Crear un HTML para tus visitantes y mejorar tu SEO</p>"
+msgstr "<p>Buat HTML untuk pengunjung kamu dan tingkatkan SEO kamu</p>"
 
 #: inc/admin/admin.php:2631
 msgid "<p>Include / Exclude Post Types</p>"
-msgstr "<p>Incluir / Excluir Tipos de Post</p>"
+msgstr "<p>Sertakan / Kecualikan Tipe Pos</p>"
 
 #: inc/admin/admin.php:2636
 msgid "<p>Include / Exclude Taxonomies</p>"
-msgstr "<p>Incluir / Excluir Taxonomías</p>"
+msgstr "<p>Sertakan / Kecualikan Taksonomi</p>"
 
 #: inc/admin/admin.php:2641
 msgid "<p>Configure Google Knowledge Graph</p>"
-msgstr "<p>Configurar el Google Knowledge Graph</p>"
+msgstr "<p>Konfigurasikan Google Knowlede Graph</p>"
 
 #: inc/admin/admin.php:2646
 msgid "<p>Link your site with your social accounts</p>"
-msgstr "<p>Enlazar tu sitio con tus cuentas sociales</p>"
+msgstr "<p>Tautkan situs kamu dengan akun sosial kamu</p>"
 
 #: inc/admin/admin.php:2651
 msgid "<p>Manage Open Graph datas</p>"
-msgstr "<p>Gestionar datos de Open Graph</p>"
+msgstr "<p>Kelola data Open Graph</p>"
 
 #: inc/admin/admin.php:2656
 msgid "<p>Manage your Twitter card</p>"
-msgstr "<p>Gestionar tu Twitter Card</p>"
+msgstr "<p>Kelola Twitter card kamu</p>"
 
 #: inc/admin/admin.php:2661
 msgid "<p>Link your Google Analytics to your website</p>"
-msgstr "<p>Vincular tu Google Analytics a tu sitio web</p>"
+msgstr "<p>Tautkan Google Analytics kamu ke situs web kamu</p>"
 
 #: inc/admin/admin.php:2666
 msgid "<p>Configure your Google Analytics tracking code</p>"
-msgstr "<p>Configurar su código de seguimiento de Google Analytics</p>"
+msgstr "<p>Konfigurasikan kode pelacakan Google Analytics kamu</p>"
 
 #: inc/admin/admin.php:2671
 msgid "<p>Track events in Google Analytics</p>"
-msgstr "<p>Seguimiento de eventos en Google Analytics</p>"
+msgstr "<p>Lacak even di Google Analytics</p>"
 
 #: inc/admin/admin.php:2676
 msgid ""
@@ -1491,41 +1481,39 @@ msgid ""
 "you have to setup your custom dimensions in your Google Analytics account "
 "too. More info by clicking on help icon."
 msgstr ""
-"<p>Configure sus dimensiones personalizadas de Google Analytics.<br>Las "
-"dimensiones personalizadas y las métricas personalizadas son como las "
-"dimensiones y las métricas predeterminadas en su cuenta de Analytics,"
-"<br>excepto que las crea usted mismo. Puede utilizarlas para recopilar y "
-"analizar datos que el seguimiento de Analytics no realiza automáticamente."
-"<br>Tenga en cuenta que también debe configurar sus dimensiones "
-"personalizadas en su cuenta de Google Analytics. Más información haciendo "
-"clic en el icono de ayuda."
+"<p>Konfigurasikan dimensi kustom Google Analytics kamu. <br>Dimensi kustom "
+"dan metrik kustom seperti dimensi default dan metrik di akun Analytics kamu,"
+"<br>kecuali kamu membuatnya sendiri. Kamu bisa menggunakan mereka untuk "
+"mengoleksi dan menganalisa data yang tidak secara otomatis dilacak oleh "
+"Analytics.<br>Perhatikan bahwa kamu harus mengatur dimensi kustom kamu di "
+"akun Google Analytics kamu juga. Info lebih dengan mengklik ikon bantuan."
 
 #: inc/admin/admin.php:2682
 msgid "<p>Advanced SEO options</p>"
-msgstr "<p>Opciones avanzadas de SEO</p>"
+msgstr "<p>Opsi SEO Lanjutan</p>"
 
 #: inc/admin/admin.php:2687
 msgid "<p>Customize SEOPress to fit your needs</p>"
-msgstr "<p>Personalizar SEOPress para adaptarse a tus necesidades</p>"
+msgstr "<p>Kustomisasi SEOPress agar sesuai dengan kebutuhan kamu</p>"
 
 #: inc/admin/admin.php:2692
 msgid "<p>Manage security</p>"
-msgstr "<p>Gestión de seguridad</p>"
+msgstr "<p>Kelola keamanan</p>"
 
 #: inc/admin/admin.php:2703
 msgid "My awesome website"
-msgstr "Mi impresionante sitio web"
+msgstr "Situs webku yang mengagumkan"
 
 #: inc/admin/admin.php:2708 inc/admin/admin.php:2719 inc/admin/admin.php:2757
 #: inc/admin/admin.php:2874 inc/admin/admin.php:2905 inc/admin/admin.php:2982
 #: inc/admin/admin.php:3057 inc/admin/admin.php:3127 inc/admin/admin.php:3196
 #: inc/admin/admin.php:3228
 msgid "More tags"
-msgstr "Más Etiquetas"
+msgstr "Lebih banyak tag"
 
 #: inc/admin/admin.php:2714
 msgid "This is a cool website about Wookiees"
-msgstr "Esta es una web interesante sobre Wookiees"
+msgstr "Ini adalah situs web keren tentang Wookiees"
 
 #: inc/admin/admin.php:2721
 msgid "Looking for editing your blog page?"
@@ -1535,243 +1523,242 @@ msgstr ""
 #: inc/admin/admin.php:3046 inc/admin/admin.php:3116 inc/admin/admin.php:3185
 #: inc/admin/admin.php:3219
 msgid "Title template"
-msgstr "Plantilla de título"
+msgstr "Template judul"
 
 #: inc/admin/admin.php:2753
 msgid "Post Title"
-msgstr "Título de publicación"
+msgstr "Judul pos"
 
 #: inc/admin/admin.php:2764 inc/admin/admin.php:2881 inc/admin/admin.php:2989
 #: inc/admin/admin.php:3063 inc/admin/admin.php:3133 inc/admin/admin.php:3202
 #: inc/admin/admin.php:3234
 msgid "Meta description template"
-msgstr "Plantilla de Descripción meta"
+msgstr "Template deskripsi meta"
 
 #: inc/admin/admin.php:2825
 msgid "Display date in Google search results?"
-msgstr "¿Mostrar la fecha en los resultados de búsqueda de Google?"
+msgstr "Tampilkan tanggal di hasil pencarian Google?"
 
 #: inc/admin/admin.php:2865
 msgid "Category Title"
-msgstr "Título de la Categoría"
+msgstr "Judul kategori"
 
 #: inc/admin/admin.php:2867
 msgid "Tag Title"
-msgstr "Título de la Etiqueta"
+msgstr "Judul tag"
 
 #: inc/admin/admin.php:2869
 msgid "Term Title"
-msgstr "Título de término"
+msgstr "Judul terma"
 
 #: inc/admin/admin.php:2898
 msgid "Category Description"
-msgstr "Descripción de la categoría"
+msgstr "Deskripsi Kategori"
 
 #: inc/admin/admin.php:2900
 msgid "Tag Description"
-msgstr "Descripción de la Etiqueta"
+msgstr "Deskripsi Tag"
 
 #: inc/admin/admin.php:2902
 msgid "Term Description"
-msgstr "Descripción del término"
+msgstr "Deskripsi Terma"
 
 #: inc/admin/admin.php:2978
 msgid "Post Type Archive Name"
-msgstr "Nombre de archivo del tipo de publicación"
+msgstr "Nama Arsip Tipe Post"
 
 #: inc/admin/admin.php:3044
 msgid "Author archives"
-msgstr "Archivos del autor"
+msgstr "Arsip pemilik"
 
 #: inc/admin/admin.php:3105
 msgid "Disable author archives"
-msgstr "Deshabilitar archivos de autor"
+msgstr "Nonaktifkan arsip pemilik"
 
 #: inc/admin/admin.php:3114
 msgid "Date archives"
-msgstr "Archivos por fecha"
+msgstr "Arsip tanggal"
 
 #: inc/admin/admin.php:3125
 msgid "Archive date"
-msgstr "Fecha de archivo"
+msgstr "Arsip tanggal"
 
 #: inc/admin/admin.php:3174
 msgid "Disable date archives"
-msgstr "Deshabilitar archivos de fecha"
+msgstr "Nonaktifkan arsip tanggal"
 
 #: inc/admin/admin.php:3183
 msgid "Search archives"
-msgstr "Buscar archivos"
+msgstr "Arsip pencarian"
 
 #: inc/admin/admin.php:3194
 msgid "Search Keywords"
-msgstr "Buscar Palabras Clave"
+msgstr "Keywords pencarian"
 
 #: inc/admin/admin.php:3217
 msgid "404 archives"
-msgstr "Archivos 404"
+msgstr "Arsip 404"
 
 #: inc/admin/admin.php:3372
 msgid "Add rel next/prev link in head of paginated archive pages"
 msgstr ""
-"Agregue el enlace rel next/prev en la cabecera de las páginas de archivo "
-"paginadas"
+"Tambahkan rel tautan selanjutnya/sebelumnya di head laman arsip perhalaman"
 
 #: inc/admin/admin.php:3374
 msgid "Learn more on Google website"
-msgstr "Más información en el sitio web de Google"
+msgstr "Belajar lebih pada situs web Google"
 
 #: inc/admin/admin.php:3410
 msgid "Enable Image Sitemaps"
-msgstr "Activar el Mapa de sitios de Imágenes"
+msgstr "Aktifkan Sitemap Gambar"
 
 #: inc/admin/admin.php:3471 inc/admin/admin.php:3511
 msgid "Include"
-msgstr "Incluir"
+msgstr "Sertakan"
 
 #: inc/admin/admin.php:3526
 msgid "eg: 2, 28, 68"
-msgstr "eg: 2, 28, 68"
+msgstr "mis: 2, 28, 68"
 
 #: inc/admin/admin.php:3536
 msgid "eg: 13, 8, 38"
-msgstr "eg: 13, 8, 38"
+msgstr "mis: 13, 8, 38"
 
 #: inc/admin/admin.php:3550
 msgid "Person"
-msgstr "Persona"
+msgstr "Perorangan"
 
 #: inc/admin/admin.php:3553
 msgid "Organization"
-msgstr "Organización"
+msgstr "Organisasi"
 
 #: inc/admin/admin.php:3566
 msgid "eg: Apple"
-msgstr "eg: Apple"
+msgstr "mis: Apple"
 
 #: inc/admin/admin.php:3579
 msgid "Select your logo"
-msgstr "Selecciona tu logotipo"
+msgstr "Pilih logo kamu"
 
 #: inc/admin/admin.php:3607
 msgid "eg: +33123456789 (internationalized version required)"
-msgstr "eg: +33123456789 (versión internacionalizada necesaria)"
+msgstr "mis: +33123456789 (diharuskan versi internasional)"
 
 #: inc/admin/admin.php:3622
 msgid "Customer support"
-msgstr "Atención al cliente"
+msgstr "Dukungan pelanggan"
 
 #: inc/admin/admin.php:3625
 msgid "Technical support"
-msgstr "Asistencia técnica"
+msgstr "Dukungan tehnik"
 
 #: inc/admin/admin.php:3628
 msgid "Billing support"
-msgstr "Soporte de facturación"
+msgstr "Dukungan tagihan"
 
 #: inc/admin/admin.php:3631
 msgid "Bill payment"
-msgstr "Pago de factura"
+msgstr "Pembayaran tagihan"
 
 #: inc/admin/admin.php:3634
 msgid "Sales"
-msgstr "Promociones"
+msgstr "Penjualan"
 
 #: inc/admin/admin.php:3637
 msgid "Credit card support"
-msgstr "Soporte de tarjeta de crédito"
+msgstr "Dukungan kartu kredit"
 
 #: inc/admin/admin.php:3640
 msgid "Emergency"
-msgstr "Emergencias"
+msgstr "Darurat"
 
 #: inc/admin/admin.php:3643
 msgid "Baggage tracking"
-msgstr "Seguimiento de equipajes"
+msgstr "Pelacakan bagasi"
 
 #: inc/admin/admin.php:3646
 msgid "Roadside assistance"
-msgstr "Asistencia en carretera"
+msgstr "Asisten sisi jalan"
 
 #: inc/admin/admin.php:3649
 msgid "Package tracking"
-msgstr "Seguimiento de paquetes"
+msgstr "Pelacakan paket"
 
 #: inc/admin/admin.php:3666
 msgid "Toll Free"
-msgstr "Sin Cargo"
+msgstr "Bebas biaya"
 
 #: inc/admin/admin.php:3669
 msgid "Hearing impaired supported"
-msgstr "Discapacidad auditiva soportada"
+msgstr "Gangguan pendengaran didukung"
 
 #: inc/admin/admin.php:3682
 msgid "eg: https://www.facebook.com/your-page"
-msgstr "eg: https://www.facebook.com/tu-pagina"
+msgstr "mis: https://www.facebook.com/your-page"
 
 #: inc/admin/admin.php:3695
 msgid "eg: @wp_seopress"
-msgstr "eg: @wp_seopress"
+msgstr "mis: @wp_seopress"
 
 #: inc/admin/admin.php:3707
 msgid "eg: https://plus.google.com/+BenjaminDenis"
-msgstr "eg: https://plus.google.com/+BenjaminDenis"
+msgstr "mis: https://plus.google.com/+BenjaminDenis"
 
 #: inc/admin/admin.php:3719
 msgid "eg: https://pinterest.com/wpbuy/"
-msgstr "eg: https://pinterest.com/wpbuy/"
+msgstr "mis: https://pinterest.com/wpbuy/"
 
 #: inc/admin/admin.php:3731
 msgid "eg: https://www.instagram.com/rainbowgeek64/"
-msgstr "por ejemplo: https://www.instagram.com/rainbowgeek64/"
+msgstr "mis: https://www.instagram.com/rainbowgeek64/"
 
 #: inc/admin/admin.php:3743
 msgid "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
-msgstr "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+msgstr "mis: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
 
 #: inc/admin/admin.php:3755
 msgid "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
-msgstr "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
+msgstr "mis: https://www.linkedin.com/in/benjamin-denis-70672b3b"
 
 #: inc/admin/admin.php:3767
 msgid "eg: https://myspace.com/your-page"
-msgstr "eg: https://myspace.com/tu-pagina"
+msgstr "mis: https://myspace.com/your-page"
 
 #: inc/admin/admin.php:3779
 msgid "eg: https://soundcloud.com/michaelmccannmusic"
-msgstr "eg: https://soundcloud.com/michaelmccannmusic"
+msgstr "mis: https://soundcloud.com/michaelmccannmusic"
 
 #: inc/admin/admin.php:3791
 msgid "eg: https://your-site.tumblr.com"
-msgstr "eg: https://tu-sitio.tumblr.com"
+msgstr "mis: https://your-site.tumblr.com"
 
 #: inc/admin/admin.php:3808
 msgid "Enable OG data"
-msgstr "Habilitar datos de OG"
+msgstr "Aktifkan OG data"
 
 #: inc/admin/admin.php:3854
 msgid "How-to create a Facebook App ID"
-msgstr "Cómo crear un ID de aplicación de Facebook"
+msgstr "Cara membuat ID Facebook App"
 
 #: inc/admin/admin.php:3868
 msgid "Enable Twitter card"
-msgstr "Habilitar tarjeta de Twitter"
+msgstr "Aktifkan Twitter card"
 
 #: inc/admin/admin.php:3901
 msgid "Default"
-msgstr "Predeterminado"
+msgstr "Default"
 
 #: inc/admin/admin.php:3904
 msgid "Large"
-msgstr "Grande"
+msgstr "Lebar"
 
 #: inc/admin/admin.php:3932
 msgid "Enter your Tracking ID (UA-XXXX-XX)"
-msgstr "Introduce tu Identificador de Seguimiento (UA-XXXX-XX)"
+msgstr "Masukkan ID Pelacakan kamu (UA-XXXX-XX)"
 
 #: inc/admin/admin.php:3936
 msgid "Find your tracking ID"
-msgstr "Encuentra tu ID de seguimiento"
+msgstr "Temukan ID pelacakan kamu"
 
 #: inc/admin/admin.php:3977
 msgid ""
@@ -1779,9 +1766,9 @@ msgid ""
 "represents a group of users you want to re-engage because of their "
 "likelihood to convert."
 msgstr ""
-"Un audiencia de remarketing es una lista de cookies o identificadores de "
-"publicidad para móviles que representa un grupo de usuarios que desea volver "
-"a participar debido a su probabilidad de conversión."
+"Audien pemasaran ulang adalah daftar kukis atau ID periklanan mobile yang "
+"merepresentasikan grup pengguna kamu inginkan untuk dipikat ulang karena "
+"sepertinya mereka menghasilkan."
 
 #: inc/admin/admin.php:3998
 msgid ""
@@ -1789,9 +1776,9 @@ msgid ""
 "anonymizes the address as soon as technically feasible at the earliest "
 "possible stage of the collection network."
 msgstr ""
-"Cuando un cliente de Analytics solicita la anonimización de direcciones IP, "
-"Analytics anonimiza la dirección tan pronto como sea técnicamente posible en "
-"la etapa más temprana posible de la red de recopilación."
+"Ketika pelanggan Analytic meminta anonimasi alamat IP, Analytics "
+"menganonimasikan alamatnya secara tekhnik seawal mungkin dari pengumpulan "
+"jaringan."
 
 #: inc/admin/admin.php:4019
 msgid ""
@@ -1799,9 +1786,9 @@ msgid ""
 "report by automatically differentiating between multiple links to the same "
 "URL on a single page by using link element IDs."
 msgstr ""
-"La Atribución mejorada de vínculos mejora la precisión de su informe de "
-"Análisis en la página al diferenciar automáticamente entre varios vínculos a "
-"la misma URL en una sola página mediante el uso de ID de elemento de enlace."
+"Atribusi Tautan Lanjutan mengimprovisasi akurasi dari laporan In-Page "
+"Analytic kamu dengan pembedaan otomatis antara banyak tautan ke URL yang "
+"sama pada laman single dengan menggunakan ID  elemen tautan."
 
 #: inc/admin/admin.php:4040
 msgid ""
@@ -1809,18 +1796,17 @@ msgid ""
 "related sites (such as an ecommerce site and a separate shopping cart site) "
 "as a single session. This is sometimes called site linking."
 msgstr ""
-"El seguimiento de varios dominios permite que Analytics vea sesiones en dos "
-"sitios relacionados (como un sitio de comercio electrónico y un sitio de "
-"carrito de compras independiente) como una única sesión. Esto a veces se "
-"llama vinculación de sitios."
+"Pelacakan lintas domain membuat Analytics mungkin melihat sesi pada dua "
+"situs berhubungan (seperti pada situs komersial dan situs keranjang belanja "
+"terpisah) sebagai sesi single. Ini kadang-kadang dipanggil penautan situs."
 
 #: inc/admin/admin.php:4052
 msgid "Enter yours domains"
-msgstr "Introduce tus dominios"
+msgstr "Masukkan domain kamu"
 
 #: inc/admin/admin.php:4069
 msgid "Enable download tracking"
-msgstr "Habilitar seguimiento de descargas"
+msgstr "Aktifkan pelacakan unduh"
 
 #: inc/admin/admin.php:4079
 msgid "pdf|docx|pptx|zip"
@@ -1828,204 +1814,202 @@ msgstr "pdf|docx|pptx|zip"
 
 #: inc/admin/admin.php:4083
 msgid "Separate each file type extensions with a pipe \"|\""
-msgstr "Separe cada extensión de tipo de archivo con un pipe \"|\""
+msgstr "Pisahkan setiap tipe ekstensi berkas dengan pipa \"|'"
 
 #: inc/admin/admin.php:4100 inc/admin/admin.php:4177 inc/admin/admin.php:4254
 #: inc/admin/admin.php:4331 inc/admin/admin.php:4408
 msgid "Custom Dimension #1"
-msgstr "Dimensión personalizada #1"
+msgstr "Dimensi Kustom #1"
 
 #: inc/admin/admin.php:4103 inc/admin/admin.php:4180 inc/admin/admin.php:4257
 #: inc/admin/admin.php:4334 inc/admin/admin.php:4411
 msgid "Custom Dimension #2"
-msgstr "Dimensión personalizada #2"
+msgstr "Dimensi Kustom #2"
 
 #: inc/admin/admin.php:4106 inc/admin/admin.php:4183 inc/admin/admin.php:4260
 #: inc/admin/admin.php:4337 inc/admin/admin.php:4414
 msgid "Custom Dimension #3"
-msgstr "Dimensión personalizada #3"
+msgstr "Dimensi Kustom #3"
 
 #: inc/admin/admin.php:4109 inc/admin/admin.php:4186 inc/admin/admin.php:4263
 #: inc/admin/admin.php:4340 inc/admin/admin.php:4417
 msgid "Custom Dimension #4"
-msgstr "Dimensión personalizada #4"
+msgstr "Dimensi Kustom #4"
 
 #: inc/admin/admin.php:4112 inc/admin/admin.php:4189 inc/admin/admin.php:4266
 #: inc/admin/admin.php:4343 inc/admin/admin.php:4420
 msgid "Custom Dimension #5"
-msgstr "Dimensión personalizada #5"
+msgstr "Dimensi Kustom #5"
 
 #: inc/admin/admin.php:4115 inc/admin/admin.php:4192 inc/admin/admin.php:4269
 #: inc/admin/admin.php:4346 inc/admin/admin.php:4423
 msgid "Custom Dimension #6"
-msgstr "Dimensión personalizada #6"
+msgstr "Dimensi Kustom #6"
 
 #: inc/admin/admin.php:4118 inc/admin/admin.php:4195 inc/admin/admin.php:4272
 #: inc/admin/admin.php:4349 inc/admin/admin.php:4426
 msgid "Custom Dimension #7"
-msgstr "Dimensión personalizada #7"
+msgstr "Dimensi Kustom #7"
 
 #: inc/admin/admin.php:4121 inc/admin/admin.php:4198 inc/admin/admin.php:4275
 #: inc/admin/admin.php:4352 inc/admin/admin.php:4429
 msgid "Custom Dimension #8"
-msgstr "Dimensión personalizada #8"
+msgstr "Dimensi Kustom #8"
 
 #: inc/admin/admin.php:4124 inc/admin/admin.php:4201 inc/admin/admin.php:4278
 #: inc/admin/admin.php:4355 inc/admin/admin.php:4432
 msgid "Custom Dimension #9"
-msgstr "Dimensión personalizada #9"
+msgstr "Dimensi Kustom #9"
 
 #: inc/admin/admin.php:4127 inc/admin/admin.php:4204 inc/admin/admin.php:4281
 #: inc/admin/admin.php:4358 inc/admin/admin.php:4435
 msgid "Custom Dimension #10"
-msgstr "Dimensión personalizada #10"
+msgstr "Dimensi Kustom #10"
 
 #: inc/admin/admin.php:4130 inc/admin/admin.php:4207 inc/admin/admin.php:4284
 #: inc/admin/admin.php:4361 inc/admin/admin.php:4438
 msgid "Custom Dimension #11"
-msgstr "Dimensión personalizada #11"
+msgstr "Dimensi Kustom #11"
 
 #: inc/admin/admin.php:4133 inc/admin/admin.php:4210 inc/admin/admin.php:4287
 #: inc/admin/admin.php:4364 inc/admin/admin.php:4441
 msgid "Custom Dimension #12"
-msgstr "Dimensión personalizada #12"
+msgstr "Dimensi Kustom #12"
 
 #: inc/admin/admin.php:4136 inc/admin/admin.php:4213 inc/admin/admin.php:4290
 #: inc/admin/admin.php:4367 inc/admin/admin.php:4444
 msgid "Custom Dimension #13"
-msgstr "Dimensión personalizada #13"
+msgstr "Dimensi Kustom #13"
 
 #: inc/admin/admin.php:4139 inc/admin/admin.php:4216 inc/admin/admin.php:4293
 #: inc/admin/admin.php:4370 inc/admin/admin.php:4447
 msgid "Custom Dimension #14"
-msgstr "Dimensión personalizada #14"
+msgstr "Dimensi Kustom #14"
 
 #: inc/admin/admin.php:4142 inc/admin/admin.php:4219 inc/admin/admin.php:4296
 #: inc/admin/admin.php:4373 inc/admin/admin.php:4450
 msgid "Custom Dimension #15"
-msgstr "Dimensión personalizada #15"
+msgstr "Dimensi Kustom #15"
 
 #: inc/admin/admin.php:4145 inc/admin/admin.php:4222 inc/admin/admin.php:4299
 #: inc/admin/admin.php:4376 inc/admin/admin.php:4453
 msgid "Custom Dimension #16"
-msgstr "Dimensión personalizada #16"
+msgstr "Dimensi Kustom #16"
 
 #: inc/admin/admin.php:4148 inc/admin/admin.php:4225 inc/admin/admin.php:4302
 #: inc/admin/admin.php:4379 inc/admin/admin.php:4456
 msgid "Custom Dimension #17"
-msgstr "Dimensión personalizada #17"
+msgstr "Dimensi Kustom #17"
 
 #: inc/admin/admin.php:4151 inc/admin/admin.php:4228 inc/admin/admin.php:4305
 #: inc/admin/admin.php:4382 inc/admin/admin.php:4459
 msgid "Custom Dimension #18"
-msgstr "Dimensión personalizada #18"
+msgstr "Dimensi Kustom #18"
 
 #: inc/admin/admin.php:4154 inc/admin/admin.php:4231 inc/admin/admin.php:4308
 #: inc/admin/admin.php:4385 inc/admin/admin.php:4462
 msgid "Custom Dimension #19"
-msgstr "Dimensión personalizada #19"
+msgstr "Dimensi Kustom #19"
 
 #: inc/admin/admin.php:4157 inc/admin/admin.php:4234 inc/admin/admin.php:4311
 #: inc/admin/admin.php:4388 inc/admin/admin.php:4465
 msgid "Custom Dimension #20"
-msgstr "Dimensión personalizada #20"
+msgstr "Dimensi Kustom #20"
 
 #: inc/admin/admin.php:4483
 msgid "Redirect attachment pages to post parent (or homepage if none)"
-msgstr ""
-"Redirigir las páginas de adjuntos al post principal (o a la página principal "
-"si no lo hay)"
+msgstr "Pengalihan laman lampiran ke induk pos (atau beranda jika tidak ada)"
 
 #: inc/admin/admin.php:4500
 msgid "Remove stop words in permalinks"
-msgstr "Quitar stop words (palabras vacías) en los permalinks"
+msgstr "Hilangkan kata berhenti di permalink"
 
 #: inc/admin/admin.php:4500
 msgid ""
 "Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
 msgstr ""
-"Ajuste basado en el idioma del sitio. Lenguajes soportados: EN, FR, ES, DE, "
+"Pengaturan berdasarkan pada bahasa situs. Bahasa didukung EN, FR, ES, DE, "
 "IT, PT."
 
 #: inc/admin/admin.php:4517
 msgid "Remove /category/ in your permalinks"
-msgstr "Quitar /categoría/ en tus permalinks"
+msgstr "Hilangkan /kategori/ di permalink kamu"
 
 #: inc/admin/admin.php:4534
 msgid ""
 "You must check this box if the structure of your permalinks DOES NOT contain "
 "a slash at the end (eg: /%postname%)"
 msgstr ""
-"Debe marcar esta casilla si la estructura de sus permalinks NO contiene una "
-"barra al final (por ejemplo: /%postname%)"
+"Kamu harus cek boks ini jika struktur permalink kamu tidak mengandung garis "
+"miring di akhir (mis:  /%postname%)"
 
 #: inc/admin/admin.php:4546
 msgid "Enter Google meta value site verification"
-msgstr "Introducir la verificación meta del sitio de Google"
+msgstr "Masukkan nilai meta verifikasi situs Google. "
 
 #: inc/admin/admin.php:4558
 msgid "Enter Bing meta value site verification"
-msgstr "Introducir la verificación meta del sitio de Bing"
+msgstr "Masukkan nilai meta verifikasi situs Bing"
 
 #: inc/admin/admin.php:4570
 msgid "Enter Pinterest meta value site verification"
-msgstr "Introducir la verificación meta del sitio de Pinterest"
+msgstr "Masukkan nilai meta verifikasi situs Pinterest"
 
 #: inc/admin/admin.php:4582
 msgid "Enter Yandex meta value site verification"
-msgstr "Introducir la verificación meta del sitio de Yandex"
+msgstr "Masukkan nilai meta verifikasi situs Yandex"
 
 #: inc/admin/admin.php:4599
 msgid "Remove SEOPress from Admin Bar in backend"
-msgstr "Quitar SEOPress de la barra de Admin en backend"
+msgstr "Hilangkan SEOPress dari Admin Bar di backend"
 
 #: inc/admin/admin.php:4615
 msgid "High priority (top)"
-msgstr "Alta prioridad (arriba)"
+msgstr "Prioritas tinggi (atas)"
 
 #: inc/admin/admin.php:4618
 msgid "Normal priority (default)"
-msgstr "Prioridad normal (predeterminado)"
+msgstr "Prioritas normal (default)"
 
 #: inc/admin/admin.php:4621
 msgid "Low priority"
-msgstr "Baja prioridad"
+msgstr "Prioritas rendah"
 
 #: inc/admin/admin.php:4639
 msgid "Hide Notifications Center in SEOPress Dashboard page"
-msgstr "Ocultar Centro de Notificaciones en el Escritorio de SEOPress"
+msgstr "Sembunyikan Pusat Pemberitahuan di laman SEOPress Dasbor"
 
 #: inc/admin/admin.php:4656
 msgid "Add title column"
-msgstr "Añadir columna de título"
+msgstr "Kolom tambah judul"
 
 #: inc/admin/admin.php:4673
 msgid "Add meta description column"
-msgstr "Añadir columna de metadescripción"
+msgstr "Kolom tambah deskripsi meta"
 
 #: inc/admin/admin.php:4690
 msgid "Display noindex status"
-msgstr "Muestra estado noindex"
+msgstr "Tampilkan status noindex"
 
 #: inc/admin/admin.php:4707
 msgid "Display nofollow status"
-msgstr "Muestra estado nofollow"
+msgstr "Tampilkan status nofollow"
 
 #: inc/admin/admin.php:4724
 msgid "Display total number of words in content"
-msgstr "Mostrar el número total de palabras en el contenido"
+msgstr "Tampilkan jumlah total kata di konten"
 
 #: inc/admin/admin.php:4741
 msgid "Display W3C column to check code quality"
-msgstr "Mostrar columna W3C para comprobar la calidad del código"
+msgstr "Tampilkan kolom W3C untuk memeriksa kualitas kode"
 
 #: inc/admin/admin.php:4759
 msgid "Display Page Speed column to check performances"
-msgstr "Mostrar la columna Page Speed para comprobar las actuaciones"
+msgstr "Tampilkan kolom Page Speed untuk memeriksa kemampuan"
 
 #: inc/admin/admin.php:4777
 msgid "Remove Genesis SEO Metaboxe"
-msgstr "Quitar Metaboxe SEO de Génesis"
+msgstr "Hilangkan Genesis SEO Metaboxe"
 
 #: inc/admin/adminbar.php:60
 msgid "BOT"
@@ -2033,32 +2017,32 @@ msgstr "BOT"
 
 #: inc/admin/adminbar.php:84
 msgid "Broken Links"
-msgstr "Enlaces Rotos"
+msgstr "Tautan Rusak"
 
 #: inc/functions/options-advanced-admin.php:119
 #: inc/functions/options-advanced-admin.php:525
 msgid "Title tag"
-msgstr "Etiqueta título"
+msgstr "Tag judul"
 
 #: inc/functions/options-advanced-admin.php:122
 msgid "Meta Desc."
-msgstr "Meta Descripción"
+msgstr "Desk. meta."
 
 #: inc/functions/options-advanced-admin.php:125
 msgid "Noindex?"
-msgstr "¿Noindex?"
+msgstr "Noindex?"
 
 #: inc/functions/options-advanced-admin.php:128
 msgid "Nofollow?"
-msgstr "¿Nofollow?"
+msgstr "Nofollow?"
 
 #: inc/functions/options-advanced-admin.php:131
 msgid "Count words?"
-msgstr "¿Contar palabras?"
+msgstr "Hitung kata?"
 
 #: inc/functions/options-advanced-admin.php:134
 msgid "W3C check"
-msgstr "Comprobación W3C"
+msgstr "Periksa W3C"
 
 #: inc/functions/options-advanced-admin.php:137
 msgid "Page Speed"
@@ -2066,48 +2050,48 @@ msgstr "Page Speed"
 
 #: inc/functions/options-advanced-admin.php:165
 msgid "Check code quality of this page"
-msgstr "Compruebe la calidad del código de esta página"
+msgstr "Perika kualitas kode laman ini"
 
 #: inc/functions/options-advanced-admin.php:168
 msgid "Analyse this page with Google Page Speed"
-msgstr "Analice esta página con Google Page Speed"
+msgstr "Analisa laman ini dengan Google Page Speed"
 
 #: inc/functions/options-advanced-admin.php:352
 msgid "Enable noindex"
-msgstr "Habilitar noindex"
+msgstr "Aktifkan noindex"
 
 #: inc/functions/options-advanced-admin.php:391
 msgid "Enable index"
-msgstr "Habilitar index"
+msgstr "Aktifkan indeks"
 
 #: inc/functions/options-advanced-admin.php:431
 msgid "Enable nofollow"
-msgstr "Habilitar nofollow"
+msgstr "Aktifkan nofollow"
 
 #: inc/functions/options-advanced-admin.php:470
 msgid "Enable follow"
-msgstr "Habilitar follow"
+msgstr "Aktifkan follow"
 
 #: inc/functions/options-import-export.php:49
 msgid "Please upload a valid .json file"
-msgstr "Por favor, sube un archivo .json válido"
+msgstr "Tolong unggah berkas valid .json"
 
 #: inc/functions/options-import-export.php:53
 #: inc/functions/options-import-export.php:88
 msgid "Please upload a file to import"
-msgstr "Por favor, sube un archivo para importar"
+msgstr "Tolong unggah berkas ke impor"
 
 #: inc/functions/options-import-export.php:84
 msgid "Please upload a valid .csv file"
-msgstr "Cargue un archivo .csv válido."
+msgstr "Tolong unggah berkas valid .csv"
 
 #: seopress.php:296
 msgid "You like SEOPress? Don't forget to rate it 5 stars!"
-msgstr "¿Te gusta SEOPress? ¡No olvides valorarlo con 5 estrellas!"
+msgstr "Kamu suka SEOPress? Jangan lupa untuk menilainya bintang 5!"
 
 #: seopress.php:343
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "Pengaturan"
 
 #: seopress.php:344
 msgid "SEOPress.org"
@@ -2115,25 +2099,7 @@ msgstr "SEOPress.org"
 
 #: seopress.php:346
 msgid "GO PRO!"
-msgstr "¡Hazte Pro!"
-
-#~ msgid "Import posts metadata from Yoast"
-#~ msgstr "Importar los mensajes de metadatos de Yoast"
-
-#~ msgid "<p>Configure your Google Analytics custom dimensions"
-#~ msgstr "<p>Configurar sus dimensiones personalizadas de Google Analytics"
-
-#~ msgid "Robots"
-#~ msgstr "Robots"
-
-#~ msgid "SEOPress BOT"
-#~ msgstr "SEOPress BOT"
-
-#~ msgid "htaccess"
-#~ msgstr "htaccess"
-
-#~ msgid "Import / Export / Reset"
-#~ msgstr "Importar / Exportar / Restaurar"
+msgstr "AYO PRO!"
 
 #~ msgid "301"
 #~ msgstr "301"
@@ -2145,10 +2111,53 @@ msgstr "¡Hazte Pro!"
 #~ msgstr "307"
 
 #~ msgid "Enter your URL"
-#~ msgstr "Introduce tu URL"
+#~ msgstr "Masukkan URL kamu"
 
 #~ msgid "Import / Export / Reset settings"
-#~ msgstr "Importar / Exportar / Restaurar ajustes"
+#~ msgstr "Pengaturan Impor / Ekspor / Reset"
+
+#~ msgid "Import / Export / Reset"
+#~ msgstr "Import / Export / Reset"
+
+#~ msgid "Import posts metadata from Yoast"
+#~ msgstr "Impor metadata pos dari Yoast"
+
+#~ msgid "Robots"
+#~ msgstr "Robots"
+
+#~ msgid "SEOPress BOT"
+#~ msgstr "SEOPress BOT"
+
+#~ msgid "htaccess"
+#~ msgstr "htaccess"
+
+#~ msgid "<p>Configure your Google Analytics custom dimensions"
+#~ msgstr "<p>Konfigurasi kustom dimensi Google Analytics kamu"
 
 #~ msgid "eg: https://www.instagram.com/your-name/"
-#~ msgstr "eg: https://www.instagram.com/tu-nombre/"
+#~ msgstr "mis: https://www.instagram.com/your-name/"
+
+#~ msgid "%s post to noindex."
+#~ msgid_plural "%s posts to noindex."
+#~ msgstr[0] "%s pos ke noindex"
+
+#~ msgid "%s post to index."
+#~ msgid_plural "%s posts to index."
+#~ msgstr[0] "%s pos ke indeks."
+
+#~ msgid "%s post to nofollow."
+#~ msgid_plural "%s posts to nofollow."
+#~ msgstr[0] "%s post ke nofollow"
+
+#~ msgid "%s post to follow."
+#~ msgid_plural "%s posts to follow."
+#~ msgstr[0] "%s pos ke follow"
+
+#~ msgid "http://seopress.org/"
+#~ msgstr "http://seopress.org/"
+
+#~ msgid "The best SEO plugin."
+#~ msgstr "Plugin SEO terbaik."
+
+#~ msgid "Benjamin DENIS"
+#~ msgstr "Benjamin DENIS"

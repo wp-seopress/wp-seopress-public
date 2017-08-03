@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
-"POT-Creation-Date: 2017-06-08 20:18+0200\n"
-"PO-Revision-Date: 2017-06-08 20:18+0200\n"
+"POT-Creation-Date: 2017-06-19 20:16+0200\n"
+"PO-Revision-Date: 2017-06-19 20:16+0200\n"
 "Last-Translator: Stefan Ilivanov (CMS Bulgaria) <info@cmsbg.info>\n"
 "Language-Team: \n"
 "Language: bg_BG\n"
@@ -200,12 +200,12 @@ msgid "This is what your page will look like in Google search results"
 msgstr "Така ще изглежда Вашата страница в резултатите от търсене в Google"
 
 #: inc/admin/admin-metaboxes-form.php:185 inc/admin/admin.php:1828
-#: inc/admin/admin.php:2785 inc/admin/admin.php:2918 inc/admin/admin.php:3010
-#: inc/admin/admin.php:3085 inc/admin/admin.php:3154 inc/admin/admin.php:3256
+#: inc/admin/admin.php:2787 inc/admin/admin.php:2920 inc/admin/admin.php:3012
+#: inc/admin/admin.php:3087 inc/admin/admin.php:3156 inc/admin/admin.php:3258
 msgid "noindex"
 msgstr "noindex"
 
-#: inc/admin/admin-metaboxes-form.php:186 inc/admin/admin.php:3258
+#: inc/admin/admin-metaboxes-form.php:186 inc/admin/admin.php:3260
 msgid ""
 "Do not display all pages of the site in Google search results and do not "
 "display \"Cached\" links in search results."
@@ -214,21 +214,21 @@ msgstr ""
 "не показва връзки към \"Кеширано\"."
 
 #: inc/admin/admin-metaboxes-form.php:191 inc/admin/admin.php:1836
-#: inc/admin/admin.php:2804 inc/admin/admin.php:2937 inc/admin/admin.php:3029
-#: inc/admin/admin.php:3275
+#: inc/admin/admin.php:2806 inc/admin/admin.php:2939 inc/admin/admin.php:3031
+#: inc/admin/admin.php:3277
 msgid "nofollow"
 msgstr "nofollow"
 
-#: inc/admin/admin-metaboxes-form.php:192 inc/admin/admin.php:3277
+#: inc/admin/admin-metaboxes-form.php:192 inc/admin/admin.php:3279
 msgid "Do not follow links for all pages."
 msgstr "Да не следва връзките за всички страници."
 
 #: inc/admin/admin-metaboxes-form.php:197 inc/admin/admin.php:1844
-#: inc/admin/admin.php:3294
+#: inc/admin/admin.php:3296
 msgid "noodp"
 msgstr "noodp"
 
-#: inc/admin/admin-metaboxes-form.php:198 inc/admin/admin.php:3296
+#: inc/admin/admin-metaboxes-form.php:198 inc/admin/admin.php:3298
 msgid ""
 "Do not use Open Directory project metadata for titles or excerpts for all "
 "pages."
@@ -237,30 +237,30 @@ msgstr ""
 "всички страници."
 
 #: inc/admin/admin-metaboxes-form.php:203 inc/admin/admin.php:1852
-#: inc/admin/admin.php:3313
+#: inc/admin/admin.php:3315
 msgid "noimageindex"
 msgstr "noimageindex"
 
-#: inc/admin/admin-metaboxes-form.php:204 inc/admin/admin.php:3315
+#: inc/admin/admin-metaboxes-form.php:204 inc/admin/admin.php:3317
 msgid "Do not index images from the entire site."
 msgstr "Да не индексира снимките за целия сайт."
 
 #: inc/admin/admin-metaboxes-form.php:209 inc/admin/admin.php:1860
-#: inc/admin/admin.php:3332
+#: inc/admin/admin.php:3334
 msgid "noarchive"
 msgstr "noarchive"
 
-#: inc/admin/admin-metaboxes-form.php:210 inc/admin/admin.php:3334
+#: inc/admin/admin-metaboxes-form.php:210 inc/admin/admin.php:3336
 msgid "Do not display a \"Cached\" link in the Google search results."
 msgstr ""
 "Да не показва връзката \"Кеширано\" в резултатите от търсене на Google."
 
 #: inc/admin/admin-metaboxes-form.php:215 inc/admin/admin.php:1868
-#: inc/admin/admin.php:3351
+#: inc/admin/admin.php:3353
 msgid "nosnippet"
 msgstr "nosnippet"
 
-#: inc/admin/admin-metaboxes-form.php:216 inc/admin/admin.php:3353
+#: inc/admin/admin-metaboxes-form.php:216 inc/admin/admin.php:3355
 msgid ""
 "Do not display a description in the Google search results for all pages."
 msgstr "Да не показва описание в резултатите от търсене на Google."
@@ -298,14 +298,14 @@ msgid "Minimum size: 200x200px"
 msgstr "Минимален размер: 200x200px"
 
 #: inc/admin/admin-metaboxes-form.php:236
-#: inc/admin/admin-metaboxes-form.php:252 inc/admin/admin.php:3821
-#: inc/admin/admin.php:3881
+#: inc/admin/admin-metaboxes-form.php:252 inc/admin/admin.php:3823
+#: inc/admin/admin.php:3883
 msgid "Select your default thumbnail"
 msgstr "Изберете миниатюра по подразбиране"
 
 #: inc/admin/admin-metaboxes-form.php:237
-#: inc/admin/admin-metaboxes-form.php:253 inc/admin/admin.php:3579
-#: inc/admin/admin.php:3823 inc/admin/admin.php:3883
+#: inc/admin/admin-metaboxes-form.php:253 inc/admin/admin.php:3581
+#: inc/admin/admin.php:3825 inc/admin/admin.php:3885
 msgid "Upload an Image"
 msgstr "Качване на снимка"
 
@@ -370,9 +370,9 @@ msgstr "Изключване на публикацията от картата �
 msgid "Google News Genres"
 msgstr "Категории за Google новини"
 
-#: inc/admin/admin-metaboxes-form.php:293 inc/admin/admin.php:4095
-#: inc/admin/admin.php:4172 inc/admin/admin.php:4249 inc/admin/admin.php:4326
-#: inc/admin/admin.php:4403
+#: inc/admin/admin-metaboxes-form.php:293 inc/admin/admin.php:4097
+#: inc/admin/admin.php:4174 inc/admin/admin.php:4251 inc/admin/admin.php:4328
+#: inc/admin/admin.php:4405
 msgid "None"
 msgstr "Няма"
 
@@ -425,9 +425,9 @@ msgstr "XML / Снимка / HTML карта на сайта"
 msgid "%%sitetitle%%"
 msgstr "%%sitetitle%%"
 
-#: inc/admin/admin.php:191 inc/admin/admin.php:2706 inc/admin/admin.php:2753
-#: inc/admin/admin.php:2870 inc/admin/admin.php:2978 inc/admin/admin.php:3054
-#: inc/admin/admin.php:3124 inc/admin/admin.php:3193 inc/admin/admin.php:3225
+#: inc/admin/admin.php:191 inc/admin/admin.php:2706 inc/admin/admin.php:2755
+#: inc/admin/admin.php:2872 inc/admin/admin.php:2980 inc/admin/admin.php:3056
+#: inc/admin/admin.php:3126 inc/admin/admin.php:3195 inc/admin/admin.php:3227
 msgid "Site Title"
 msgstr "Заглавие на сайта"
 
@@ -473,7 +473,7 @@ msgstr "Дата на публикуване"
 msgid "%%post_author%%"
 msgstr "%%post_author%%"
 
-#: inc/admin/admin.php:196 inc/admin/admin.php:3053
+#: inc/admin/admin.php:196 inc/admin/admin.php:3055
 msgid "Post author"
 msgstr "Автор"
 
@@ -824,8 +824,8 @@ msgstr "Мигрирай!"
 msgid "Your site doesn't use an SSL certificate!"
 msgstr "Вашият сайт няма SSL сертификат!"
 
-#: inc/admin/admin.php:779 inc/admin/admin.php:3976 inc/admin/admin.php:3997
-#: inc/admin/admin.php:4018 inc/admin/admin.php:4039
+#: inc/admin/admin.php:779 inc/admin/admin.php:3978 inc/admin/admin.php:3999
+#: inc/admin/admin.php:4020 inc/admin/admin.php:4041
 msgid "Learn more"
 msgstr "Научете повече"
 
@@ -1108,7 +1108,7 @@ msgstr "Заглавие на сайта"
 msgid "Indicate paginated content to Google"
 msgstr ""
 
-#: inc/admin/admin.php:1893 inc/admin/admin.php:3389
+#: inc/admin/admin.php:1893 inc/admin/admin.php:3391
 msgid "Enable XML Sitemap"
 msgstr "Включване на XML карта на сайта"
 
@@ -1116,7 +1116,7 @@ msgstr "Включване на XML карта на сайта"
 msgid "Enable XML Image Sitemaps"
 msgstr "Включване на XML карта на сайта за снимки"
 
-#: inc/admin/admin.php:1909 inc/admin/admin.php:3427
+#: inc/admin/admin.php:1909 inc/admin/admin.php:3429
 msgid "Enable HTML Sitemap"
 msgstr "Включване на HTML карта на сайта"
 
@@ -1231,7 +1231,7 @@ msgstr "Снимка по подразбиране за Twitter"
 msgid "Image size for Twitter Summary card"
 msgstr "Размер на снимка за Twitter картичка"
 
-#: inc/admin/admin.php:2202 inc/admin/admin.php:3920
+#: inc/admin/admin.php:2202 inc/admin/admin.php:3922
 msgid "Enable Google Analytics tracking"
 msgstr "Включване на Google Analytics следене"
 
@@ -1243,19 +1243,19 @@ msgstr "Въведете Вашето ID за следене"
 msgid "Exclude user roles from tracking"
 msgstr "Изключване на потребителски роли от следене"
 
-#: inc/admin/admin.php:2236 inc/admin/admin.php:3973
+#: inc/admin/admin.php:2236 inc/admin/admin.php:3975
 msgid "Enable remarketing, demographics and interest reporting"
 msgstr "Включване демографска информация и интереси."
 
-#: inc/admin/admin.php:2244 inc/admin/admin.php:3994
+#: inc/admin/admin.php:2244 inc/admin/admin.php:3996
 msgid "Enable IP Anonymization"
 msgstr "Включване на следене на анонимни IP"
 
-#: inc/admin/admin.php:2252 inc/admin/admin.php:4015
+#: inc/admin/admin.php:2252 inc/admin/admin.php:4017
 msgid "Enhanced Link Attribution"
 msgstr "Разширени атрибути за връзка"
 
-#: inc/admin/admin.php:2260 inc/admin/admin.php:4036
+#: inc/admin/admin.php:2260 inc/admin/admin.php:4038
 msgid "Enable cross-domain tracking"
 msgstr "Включване на следене за кръстосани домейни"
 
@@ -1303,7 +1303,7 @@ msgstr "Премахване на спиращи думи от URL"
 msgid "Remove /category/ in URL"
 msgstr "Премахване на /category/ в URL"
 
-#: inc/admin/admin.php:2385 inc/admin/admin.php:4532
+#: inc/admin/admin.php:2385 inc/admin/admin.php:4534
 msgid "Disable trailing slash for metas"
 msgstr ""
 
@@ -1496,10 +1496,10 @@ msgstr "<p>Управление на сигурността</p>"
 msgid "My awesome website"
 msgstr "Моят прекрасен сайт"
 
-#: inc/admin/admin.php:2708 inc/admin/admin.php:2719 inc/admin/admin.php:2755
-#: inc/admin/admin.php:2872 inc/admin/admin.php:2903 inc/admin/admin.php:2980
-#: inc/admin/admin.php:3055 inc/admin/admin.php:3125 inc/admin/admin.php:3194
-#: inc/admin/admin.php:3226
+#: inc/admin/admin.php:2708 inc/admin/admin.php:2719 inc/admin/admin.php:2757
+#: inc/admin/admin.php:2874 inc/admin/admin.php:2905 inc/admin/admin.php:2982
+#: inc/admin/admin.php:3057 inc/admin/admin.php:3127 inc/admin/admin.php:3196
+#: inc/admin/admin.php:3228
 msgid "More tags"
 msgstr "Още етикети"
 
@@ -1507,482 +1507,486 @@ msgstr "Още етикети"
 msgid "This is a cool website about Wookiees"
 msgstr "Този сайт е за Укита"
 
-#: inc/admin/admin.php:2732 inc/admin/admin.php:2843 inc/admin/admin.php:2957
-#: inc/admin/admin.php:3044 inc/admin/admin.php:3114 inc/admin/admin.php:3183
-#: inc/admin/admin.php:3217
+#: inc/admin/admin.php:2721
+msgid "Looking for editing your blog page?"
+msgstr ""
+
+#: inc/admin/admin.php:2734 inc/admin/admin.php:2845 inc/admin/admin.php:2959
+#: inc/admin/admin.php:3046 inc/admin/admin.php:3116 inc/admin/admin.php:3185
+#: inc/admin/admin.php:3219
 msgid "Title template"
 msgstr "Заглавие на шаблон"
 
-#: inc/admin/admin.php:2751
+#: inc/admin/admin.php:2753
 msgid "Post Title"
 msgstr "Заглавие на публикация"
 
-#: inc/admin/admin.php:2762 inc/admin/admin.php:2879 inc/admin/admin.php:2987
-#: inc/admin/admin.php:3061 inc/admin/admin.php:3131 inc/admin/admin.php:3200
-#: inc/admin/admin.php:3232
+#: inc/admin/admin.php:2764 inc/admin/admin.php:2881 inc/admin/admin.php:2989
+#: inc/admin/admin.php:3063 inc/admin/admin.php:3133 inc/admin/admin.php:3202
+#: inc/admin/admin.php:3234
 msgid "Meta description template"
 msgstr "Мета описание на шаблон"
 
-#: inc/admin/admin.php:2823
+#: inc/admin/admin.php:2825
 msgid "Display date in Google search results?"
 msgstr "Да показва ли дата в резултатите от търсенето ?"
 
-#: inc/admin/admin.php:2863
+#: inc/admin/admin.php:2865
 msgid "Category Title"
 msgstr "Заглавие на категория"
 
-#: inc/admin/admin.php:2865
+#: inc/admin/admin.php:2867
 msgid "Tag Title"
 msgstr "Заглавие на етикет"
 
-#: inc/admin/admin.php:2867
+#: inc/admin/admin.php:2869
 msgid "Term Title"
 msgstr "Заглавие на термин"
 
-#: inc/admin/admin.php:2896
+#: inc/admin/admin.php:2898
 msgid "Category Description"
 msgstr "Описание на категория"
 
-#: inc/admin/admin.php:2898
+#: inc/admin/admin.php:2900
 msgid "Tag Description"
 msgstr "Описание на етикет"
 
-#: inc/admin/admin.php:2900
+#: inc/admin/admin.php:2902
 msgid "Term Description"
 msgstr "Описание на термин"
 
-#: inc/admin/admin.php:2976
+#: inc/admin/admin.php:2978
 msgid "Post Type Archive Name"
 msgstr "Име на архивен тип публикация"
 
-#: inc/admin/admin.php:3042
+#: inc/admin/admin.php:3044
 msgid "Author archives"
 msgstr "Автор на архиви"
 
-#: inc/admin/admin.php:3103
+#: inc/admin/admin.php:3105
 msgid "Disable author archives"
 msgstr ""
 
-#: inc/admin/admin.php:3112
+#: inc/admin/admin.php:3114
 msgid "Date archives"
 msgstr "Дата на архиви"
 
-#: inc/admin/admin.php:3123
+#: inc/admin/admin.php:3125
 msgid "Archive date"
 msgstr "Дата на архива"
 
-#: inc/admin/admin.php:3172
+#: inc/admin/admin.php:3174
 msgid "Disable date archives"
 msgstr ""
 
-#: inc/admin/admin.php:3181
+#: inc/admin/admin.php:3183
 msgid "Search archives"
 msgstr "Търсене в архиви"
 
-#: inc/admin/admin.php:3192
+#: inc/admin/admin.php:3194
 msgid "Search Keywords"
 msgstr "Търсене по кл. дума"
 
-#: inc/admin/admin.php:3215
+#: inc/admin/admin.php:3217
 msgid "404 archives"
 msgstr "архивни 404"
 
-#: inc/admin/admin.php:3370
+#: inc/admin/admin.php:3372
 msgid "Add rel next/prev link in head of paginated archive pages"
 msgstr ""
 
-#: inc/admin/admin.php:3372
+#: inc/admin/admin.php:3374
 msgid "Learn more on Google website"
 msgstr ""
 
-#: inc/admin/admin.php:3408
+#: inc/admin/admin.php:3410
 msgid "Enable Image Sitemaps"
 msgstr "Включване на карта на сайта за снимки"
 
-#: inc/admin/admin.php:3469 inc/admin/admin.php:3509
+#: inc/admin/admin.php:3471 inc/admin/admin.php:3511
 msgid "Include"
 msgstr "Включва"
 
-#: inc/admin/admin.php:3524
+#: inc/admin/admin.php:3526
 msgid "eg: 2, 28, 68"
 msgstr "пример: 2, 28, 68"
 
-#: inc/admin/admin.php:3534
+#: inc/admin/admin.php:3536
 msgid "eg: 13, 8, 38"
 msgstr "пример: 13, 8, 38"
 
-#: inc/admin/admin.php:3548
+#: inc/admin/admin.php:3550
 msgid "Person"
 msgstr "Частно лице"
 
-#: inc/admin/admin.php:3551
+#: inc/admin/admin.php:3553
 msgid "Organization"
 msgstr "Организация"
 
-#: inc/admin/admin.php:3564
+#: inc/admin/admin.php:3566
 msgid "eg: Apple"
 msgstr "Пример: Епъл"
 
-#: inc/admin/admin.php:3577
+#: inc/admin/admin.php:3579
 msgid "Select your logo"
 msgstr "Изберете Вашето лого"
 
-#: inc/admin/admin.php:3605
+#: inc/admin/admin.php:3607
 msgid "eg: +33123456789 (internationalized version required)"
 msgstr "пример: +123456789 (изисква се интернационална версия)"
 
-#: inc/admin/admin.php:3620
+#: inc/admin/admin.php:3622
 msgid "Customer support"
 msgstr "Поддръжка за клиенти"
 
-#: inc/admin/admin.php:3623
+#: inc/admin/admin.php:3625
 msgid "Technical support"
 msgstr "Техническа поддръжка"
 
-#: inc/admin/admin.php:3626
+#: inc/admin/admin.php:3628
 msgid "Billing support"
 msgstr "Поддръжка за плащания"
 
-#: inc/admin/admin.php:3629
+#: inc/admin/admin.php:3631
 msgid "Bill payment"
 msgstr "Плащане"
 
-#: inc/admin/admin.php:3632
+#: inc/admin/admin.php:3634
 msgid "Sales"
 msgstr "Продажби"
 
-#: inc/admin/admin.php:3635
+#: inc/admin/admin.php:3637
 msgid "Credit card support"
 msgstr "Поддръжка за кредитна карта"
 
-#: inc/admin/admin.php:3638
+#: inc/admin/admin.php:3640
 msgid "Emergency"
 msgstr "Спешно"
 
-#: inc/admin/admin.php:3641
+#: inc/admin/admin.php:3643
 msgid "Baggage tracking"
 msgstr "Следене на багаж"
 
-#: inc/admin/admin.php:3644
+#: inc/admin/admin.php:3646
 msgid "Roadside assistance"
 msgstr "Асистиране на път"
 
-#: inc/admin/admin.php:3647
+#: inc/admin/admin.php:3649
 msgid "Package tracking"
 msgstr "Следене на пакет"
 
-#: inc/admin/admin.php:3664
+#: inc/admin/admin.php:3666
 msgid "Toll Free"
 msgstr "Безплатно"
 
-#: inc/admin/admin.php:3667
+#: inc/admin/admin.php:3669
 msgid "Hearing impaired supported"
 msgstr "Поддръжка за глухи"
 
-#: inc/admin/admin.php:3680
+#: inc/admin/admin.php:3682
 msgid "eg: https://www.facebook.com/your-page"
 msgstr "пример: https://www.facebook.com/your-page"
 
-#: inc/admin/admin.php:3693
+#: inc/admin/admin.php:3695
 msgid "eg: @wp_seopress"
 msgstr "пример: @wp_seopress"
 
-#: inc/admin/admin.php:3705
+#: inc/admin/admin.php:3707
 msgid "eg: https://plus.google.com/+BenjaminDenis"
 msgstr "пример: https://plus.google.com/+BenjaminDenis"
 
-#: inc/admin/admin.php:3717
+#: inc/admin/admin.php:3719
 msgid "eg: https://pinterest.com/wpbuy/"
 msgstr "пример: https://pinterest.com/wpbuy/"
 
-#: inc/admin/admin.php:3729
+#: inc/admin/admin.php:3731
 msgid "eg: https://www.instagram.com/rainbowgeek64/"
 msgstr ""
 
-#: inc/admin/admin.php:3741
+#: inc/admin/admin.php:3743
 msgid "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
 msgstr "пример: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
 
-#: inc/admin/admin.php:3753
+#: inc/admin/admin.php:3755
 msgid "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
 msgstr "пример: https://www.linkedin.com/in/benjamin-denis-70672b3b"
 
-#: inc/admin/admin.php:3765
+#: inc/admin/admin.php:3767
 msgid "eg: https://myspace.com/your-page"
 msgstr "пример: https://myspace.com/your-page"
 
-#: inc/admin/admin.php:3777
+#: inc/admin/admin.php:3779
 msgid "eg: https://soundcloud.com/michaelmccannmusic"
 msgstr "пример: https://soundcloud.com/michaelmccannmusic"
 
-#: inc/admin/admin.php:3789
+#: inc/admin/admin.php:3791
 msgid "eg: https://your-site.tumblr.com"
 msgstr "пример: https://your-site.tumblr.com"
 
-#: inc/admin/admin.php:3806
+#: inc/admin/admin.php:3808
 msgid "Enable OG data"
 msgstr "Включване на OG данни"
 
-#: inc/admin/admin.php:3852
+#: inc/admin/admin.php:3854
 msgid "How-to create a Facebook App ID"
 msgstr ""
 
-#: inc/admin/admin.php:3866
+#: inc/admin/admin.php:3868
 msgid "Enable Twitter card"
 msgstr "Включване на Twitter картички"
 
-#: inc/admin/admin.php:3899
+#: inc/admin/admin.php:3901
 msgid "Default"
 msgstr "По подразбиране"
 
-#: inc/admin/admin.php:3902
+#: inc/admin/admin.php:3904
 msgid "Large"
 msgstr "Голямо"
 
-#: inc/admin/admin.php:3930
+#: inc/admin/admin.php:3932
 msgid "Enter your Tracking ID (UA-XXXX-XX)"
 msgstr "Въведете Вашият код от Analytics (UA-XXXX-XX)"
 
-#: inc/admin/admin.php:3934
+#: inc/admin/admin.php:3936
 msgid "Find your tracking ID"
 msgstr ""
 
-#: inc/admin/admin.php:3975
+#: inc/admin/admin.php:3977
 msgid ""
 "A remarketing audience is a list of cookies or mobile-advertising IDs that "
 "represents a group of users you want to re-engage because of their "
 "likelihood to convert."
 msgstr ""
 
-#: inc/admin/admin.php:3996
+#: inc/admin/admin.php:3998
 msgid ""
 "When a customer of Analytics requests IP address anonymization, Analytics "
 "anonymizes the address as soon as technically feasible at the earliest "
 "possible stage of the collection network."
 msgstr ""
 
-#: inc/admin/admin.php:4017
+#: inc/admin/admin.php:4019
 msgid ""
 "Enhanced Link Attribution improves the accuracy of your In-Page Analytics "
 "report by automatically differentiating between multiple links to the same "
 "URL on a single page by using link element IDs."
 msgstr ""
 
-#: inc/admin/admin.php:4038
+#: inc/admin/admin.php:4040
 msgid ""
 "Cross domain tracking makes it possible for Analytics to see sessions on two "
 "related sites (such as an ecommerce site and a separate shopping cart site) "
 "as a single session. This is sometimes called site linking."
 msgstr ""
 
-#: inc/admin/admin.php:4050
+#: inc/admin/admin.php:4052
 msgid "Enter yours domains"
 msgstr "Въведете Вашите домейни"
 
-#: inc/admin/admin.php:4067
+#: inc/admin/admin.php:4069
 msgid "Enable download tracking"
 msgstr ""
 
-#: inc/admin/admin.php:4077
+#: inc/admin/admin.php:4079
 msgid "pdf|docx|pptx|zip"
 msgstr ""
 
-#: inc/admin/admin.php:4081
+#: inc/admin/admin.php:4083
 msgid "Separate each file type extensions with a pipe \"|\""
 msgstr ""
 
-#: inc/admin/admin.php:4098 inc/admin/admin.php:4175 inc/admin/admin.php:4252
-#: inc/admin/admin.php:4329 inc/admin/admin.php:4406
+#: inc/admin/admin.php:4100 inc/admin/admin.php:4177 inc/admin/admin.php:4254
+#: inc/admin/admin.php:4331 inc/admin/admin.php:4408
 msgid "Custom Dimension #1"
 msgstr "Допълнителен размер #1"
 
-#: inc/admin/admin.php:4101 inc/admin/admin.php:4178 inc/admin/admin.php:4255
-#: inc/admin/admin.php:4332 inc/admin/admin.php:4409
+#: inc/admin/admin.php:4103 inc/admin/admin.php:4180 inc/admin/admin.php:4257
+#: inc/admin/admin.php:4334 inc/admin/admin.php:4411
 msgid "Custom Dimension #2"
 msgstr "Допълнителен размер #2"
 
-#: inc/admin/admin.php:4104 inc/admin/admin.php:4181 inc/admin/admin.php:4258
-#: inc/admin/admin.php:4335 inc/admin/admin.php:4412
+#: inc/admin/admin.php:4106 inc/admin/admin.php:4183 inc/admin/admin.php:4260
+#: inc/admin/admin.php:4337 inc/admin/admin.php:4414
 msgid "Custom Dimension #3"
 msgstr "Допълнителен размер #3"
 
-#: inc/admin/admin.php:4107 inc/admin/admin.php:4184 inc/admin/admin.php:4261
-#: inc/admin/admin.php:4338 inc/admin/admin.php:4415
+#: inc/admin/admin.php:4109 inc/admin/admin.php:4186 inc/admin/admin.php:4263
+#: inc/admin/admin.php:4340 inc/admin/admin.php:4417
 msgid "Custom Dimension #4"
 msgstr "Допълнителен размер #4"
 
-#: inc/admin/admin.php:4110 inc/admin/admin.php:4187 inc/admin/admin.php:4264
-#: inc/admin/admin.php:4341 inc/admin/admin.php:4418
+#: inc/admin/admin.php:4112 inc/admin/admin.php:4189 inc/admin/admin.php:4266
+#: inc/admin/admin.php:4343 inc/admin/admin.php:4420
 msgid "Custom Dimension #5"
 msgstr "Допълнителен размер #5"
 
-#: inc/admin/admin.php:4113 inc/admin/admin.php:4190 inc/admin/admin.php:4267
-#: inc/admin/admin.php:4344 inc/admin/admin.php:4421
+#: inc/admin/admin.php:4115 inc/admin/admin.php:4192 inc/admin/admin.php:4269
+#: inc/admin/admin.php:4346 inc/admin/admin.php:4423
 msgid "Custom Dimension #6"
 msgstr "Допълнителен размер #6"
 
-#: inc/admin/admin.php:4116 inc/admin/admin.php:4193 inc/admin/admin.php:4270
-#: inc/admin/admin.php:4347 inc/admin/admin.php:4424
+#: inc/admin/admin.php:4118 inc/admin/admin.php:4195 inc/admin/admin.php:4272
+#: inc/admin/admin.php:4349 inc/admin/admin.php:4426
 msgid "Custom Dimension #7"
 msgstr "Допълнителен размер #7"
 
-#: inc/admin/admin.php:4119 inc/admin/admin.php:4196 inc/admin/admin.php:4273
-#: inc/admin/admin.php:4350 inc/admin/admin.php:4427
+#: inc/admin/admin.php:4121 inc/admin/admin.php:4198 inc/admin/admin.php:4275
+#: inc/admin/admin.php:4352 inc/admin/admin.php:4429
 msgid "Custom Dimension #8"
 msgstr "Допълнителен размер #8"
 
-#: inc/admin/admin.php:4122 inc/admin/admin.php:4199 inc/admin/admin.php:4276
-#: inc/admin/admin.php:4353 inc/admin/admin.php:4430
+#: inc/admin/admin.php:4124 inc/admin/admin.php:4201 inc/admin/admin.php:4278
+#: inc/admin/admin.php:4355 inc/admin/admin.php:4432
 msgid "Custom Dimension #9"
 msgstr "Допълнителен размер #9"
 
-#: inc/admin/admin.php:4125 inc/admin/admin.php:4202 inc/admin/admin.php:4279
-#: inc/admin/admin.php:4356 inc/admin/admin.php:4433
+#: inc/admin/admin.php:4127 inc/admin/admin.php:4204 inc/admin/admin.php:4281
+#: inc/admin/admin.php:4358 inc/admin/admin.php:4435
 msgid "Custom Dimension #10"
 msgstr "Допълнителен размер #10"
 
-#: inc/admin/admin.php:4128 inc/admin/admin.php:4205 inc/admin/admin.php:4282
-#: inc/admin/admin.php:4359 inc/admin/admin.php:4436
+#: inc/admin/admin.php:4130 inc/admin/admin.php:4207 inc/admin/admin.php:4284
+#: inc/admin/admin.php:4361 inc/admin/admin.php:4438
 msgid "Custom Dimension #11"
 msgstr "Допълнителен размер #11"
 
-#: inc/admin/admin.php:4131 inc/admin/admin.php:4208 inc/admin/admin.php:4285
-#: inc/admin/admin.php:4362 inc/admin/admin.php:4439
+#: inc/admin/admin.php:4133 inc/admin/admin.php:4210 inc/admin/admin.php:4287
+#: inc/admin/admin.php:4364 inc/admin/admin.php:4441
 msgid "Custom Dimension #12"
 msgstr "Допълнителен размер #12"
 
-#: inc/admin/admin.php:4134 inc/admin/admin.php:4211 inc/admin/admin.php:4288
-#: inc/admin/admin.php:4365 inc/admin/admin.php:4442
+#: inc/admin/admin.php:4136 inc/admin/admin.php:4213 inc/admin/admin.php:4290
+#: inc/admin/admin.php:4367 inc/admin/admin.php:4444
 msgid "Custom Dimension #13"
 msgstr "Допълнителен размер #13"
 
-#: inc/admin/admin.php:4137 inc/admin/admin.php:4214 inc/admin/admin.php:4291
-#: inc/admin/admin.php:4368 inc/admin/admin.php:4445
+#: inc/admin/admin.php:4139 inc/admin/admin.php:4216 inc/admin/admin.php:4293
+#: inc/admin/admin.php:4370 inc/admin/admin.php:4447
 msgid "Custom Dimension #14"
 msgstr "Допълнителен размер #14"
 
-#: inc/admin/admin.php:4140 inc/admin/admin.php:4217 inc/admin/admin.php:4294
-#: inc/admin/admin.php:4371 inc/admin/admin.php:4448
+#: inc/admin/admin.php:4142 inc/admin/admin.php:4219 inc/admin/admin.php:4296
+#: inc/admin/admin.php:4373 inc/admin/admin.php:4450
 msgid "Custom Dimension #15"
 msgstr "Допълнителен размер #15"
 
-#: inc/admin/admin.php:4143 inc/admin/admin.php:4220 inc/admin/admin.php:4297
-#: inc/admin/admin.php:4374 inc/admin/admin.php:4451
+#: inc/admin/admin.php:4145 inc/admin/admin.php:4222 inc/admin/admin.php:4299
+#: inc/admin/admin.php:4376 inc/admin/admin.php:4453
 msgid "Custom Dimension #16"
 msgstr "Допълнителен размер #16"
 
-#: inc/admin/admin.php:4146 inc/admin/admin.php:4223 inc/admin/admin.php:4300
-#: inc/admin/admin.php:4377 inc/admin/admin.php:4454
+#: inc/admin/admin.php:4148 inc/admin/admin.php:4225 inc/admin/admin.php:4302
+#: inc/admin/admin.php:4379 inc/admin/admin.php:4456
 msgid "Custom Dimension #17"
 msgstr "Допълнителен размер #17"
 
-#: inc/admin/admin.php:4149 inc/admin/admin.php:4226 inc/admin/admin.php:4303
-#: inc/admin/admin.php:4380 inc/admin/admin.php:4457
+#: inc/admin/admin.php:4151 inc/admin/admin.php:4228 inc/admin/admin.php:4305
+#: inc/admin/admin.php:4382 inc/admin/admin.php:4459
 msgid "Custom Dimension #18"
 msgstr "Допълнителен размер #18"
 
-#: inc/admin/admin.php:4152 inc/admin/admin.php:4229 inc/admin/admin.php:4306
-#: inc/admin/admin.php:4383 inc/admin/admin.php:4460
+#: inc/admin/admin.php:4154 inc/admin/admin.php:4231 inc/admin/admin.php:4308
+#: inc/admin/admin.php:4385 inc/admin/admin.php:4462
 msgid "Custom Dimension #19"
 msgstr "Допълнителен размер #19"
 
-#: inc/admin/admin.php:4155 inc/admin/admin.php:4232 inc/admin/admin.php:4309
-#: inc/admin/admin.php:4386 inc/admin/admin.php:4463
+#: inc/admin/admin.php:4157 inc/admin/admin.php:4234 inc/admin/admin.php:4311
+#: inc/admin/admin.php:4388 inc/admin/admin.php:4465
 msgid "Custom Dimension #20"
 msgstr "Допълнителен размер #20"
 
-#: inc/admin/admin.php:4481
+#: inc/admin/admin.php:4483
 msgid "Redirect attachment pages to post parent (or homepage if none)"
 msgstr ""
 "Пренасочване на прикачени страници към основната (или начална страница ако "
 "няма)"
 
-#: inc/admin/admin.php:4498
+#: inc/admin/admin.php:4500
 msgid "Remove stop words in permalinks"
 msgstr "Премахване на спиращи думи от статичните връзки"
 
-#: inc/admin/admin.php:4498
+#: inc/admin/admin.php:4500
 msgid ""
 "Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
 msgstr ""
 "Настройки базирани на езика на сайта Ви. Поддържани езици EN, FR, ES, DE, "
 "IT, PT."
 
-#: inc/admin/admin.php:4515
+#: inc/admin/admin.php:4517
 msgid "Remove /category/ in your permalinks"
 msgstr "Премахване на /category/ от вашите статични връзки"
 
-#: inc/admin/admin.php:4532
+#: inc/admin/admin.php:4534
 msgid ""
 "You must check this box if the structure of your permalinks DOES NOT contain "
 "a slash at the end (eg: /%postname%)"
 msgstr ""
 
-#: inc/admin/admin.php:4544
+#: inc/admin/admin.php:4546
 msgid "Enter Google meta value site verification"
 msgstr "Въведете стойността за проверка в Google"
 
-#: inc/admin/admin.php:4556
+#: inc/admin/admin.php:4558
 msgid "Enter Bing meta value site verification"
 msgstr "Въведете стойността за проверка чрез Bing"
 
-#: inc/admin/admin.php:4568
+#: inc/admin/admin.php:4570
 msgid "Enter Pinterest meta value site verification"
 msgstr "Въведете стойността за проверка чрез Pinterest"
 
-#: inc/admin/admin.php:4580
+#: inc/admin/admin.php:4582
 msgid "Enter Yandex meta value site verification"
 msgstr "Въведете стойността за проверка чрез Yandex"
 
-#: inc/admin/admin.php:4597
+#: inc/admin/admin.php:4599
 msgid "Remove SEOPress from Admin Bar in backend"
 msgstr "Премахване на SEOPress от административната лента"
 
-#: inc/admin/admin.php:4613
+#: inc/admin/admin.php:4615
 msgid "High priority (top)"
 msgstr ""
 
-#: inc/admin/admin.php:4616
+#: inc/admin/admin.php:4618
 msgid "Normal priority (default)"
 msgstr ""
 
-#: inc/admin/admin.php:4619
+#: inc/admin/admin.php:4621
 msgid "Low priority"
 msgstr ""
 
-#: inc/admin/admin.php:4637
+#: inc/admin/admin.php:4639
 msgid "Hide Notifications Center in SEOPress Dashboard page"
 msgstr "Скриване на известията от таблото в SEOPress"
 
-#: inc/admin/admin.php:4654
+#: inc/admin/admin.php:4656
 msgid "Add title column"
 msgstr "Добавяне на колона Заглавие"
 
-#: inc/admin/admin.php:4671
+#: inc/admin/admin.php:4673
 msgid "Add meta description column"
 msgstr "Добавяне на колона Мета описание"
 
-#: inc/admin/admin.php:4688
+#: inc/admin/admin.php:4690
 msgid "Display noindex status"
 msgstr "Показва статус noindex"
 
-#: inc/admin/admin.php:4705
+#: inc/admin/admin.php:4707
 msgid "Display nofollow status"
 msgstr "Показва статус nofollow"
 
-#: inc/admin/admin.php:4722
+#: inc/admin/admin.php:4724
 msgid "Display total number of words in content"
 msgstr ""
 
-#: inc/admin/admin.php:4739
+#: inc/admin/admin.php:4741
 msgid "Display W3C column to check code quality"
 msgstr ""
 
-#: inc/admin/admin.php:4757
+#: inc/admin/admin.php:4759
 msgid "Display Page Speed column to check performances"
 msgstr ""
 
-#: inc/admin/admin.php:4775
+#: inc/admin/admin.php:4777
 msgid "Remove Genesis SEO Metaboxe"
 msgstr "Премахва Genesis SEO мета"
 

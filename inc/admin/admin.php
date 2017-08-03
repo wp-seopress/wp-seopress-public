@@ -2717,7 +2717,11 @@ class seopress_options
         );
         echo '<div class="wrap-tags"><span id="seopress-tag-meta-desc" data-tag="%%tagline%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Tagline','wp-seopress').'</span>';
         echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
-    } 
+
+        if (get_option( 'page_for_posts' )) {
+            echo '<p><a href="'.admin_url('post.php?post='.get_option( 'page_for_posts' ).'&action=edit').'">'.__('Looking for editing your blog page?','wp-seopress').'</a></p>';
+        }
+    }
 
     //Single CPT
     public function seopress_titles_single_titles_callback()
