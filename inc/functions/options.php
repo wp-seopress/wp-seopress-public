@@ -133,9 +133,9 @@ if (seopress_get_toggle_advanced_option() =='1') {
 			global $wp;
 
 			if (seopress_advanced_advanced_trailingslash_option()) {
-				$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
-			} else {
 				$current_url = home_url(add_query_arg(array(), $wp->request));
+			} else {
+				$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
 			}
 
 			$category_base = get_option( 'category_base' );

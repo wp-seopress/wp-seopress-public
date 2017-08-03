@@ -854,6 +854,32 @@ class seopress_options
                                 <?php }
                             }
                         ?>
+                        <?php
+                            function seopress_get_hidden_notices_trailingslash_option() {
+                                $seopress_get_hidden_notices_trailingslash_option = get_option("seopress_notices");
+                                if ( ! empty ( $seopress_get_hidden_notices_trailingslash_option ) ) {
+                                    foreach ($seopress_get_hidden_notices_trailingslash_option as $key => $seopress_get_hidden_notices_trailingslash_value)
+                                        $options[$key] = $seopress_get_hidden_notices_trailingslash_value;
+                                        if (isset($seopress_get_hidden_notices_trailingslash_option['notice-trailingslash'])) {
+                                            return $seopress_get_hidden_notices_trailingslash_option['notice-trailingslash'];
+                                        }
+                                }
+                            }
+                            
+                            if(seopress_get_hidden_notices_trailingslash_option() =='1') {
+                                //do nothing
+                            } else { ?>
+                                <div id="notice-trailingslash-alert" class="seopress-alert deleteable">
+                                    <p>
+                                        <span class="dashicons dashicons-warning"></span>
+                                        <?php _e('Disable trailing slash for metas <br>if your pemarlink structure doesn\'t have a trailing slash','wp-seopress'); ?>
+                                        <span class="impact medium"><?php _e('Huge impact','wp-seopress'); ?></span>
+                                    </p>
+                                    <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-advanced' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                    <span name="notice-trailingslash" id="notice-trailingslash" class="dashicons dashicons-trash remove-notice" data-notice="notice-trailingslash"></span>
+                                </div>
+                            <?php }
+                        ?>
                         <?php if (seopress_xml_sitemap_general_enable_option() !='1') { ?>
                             <div class="seopress-alert">
                                 <p>
@@ -2121,7 +2147,7 @@ class seopress_options
 
         add_settings_field(
             'seopress_advanced_advanced_trailingslash', // ID
-           __("Add trailing slash for metas","wp-seopress"), // Title
+           __("Disable trailing slash for metas","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_trailingslash_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
             'seopress_setting_section_advanced_advanced' // Section                  
@@ -4144,7 +4170,7 @@ class seopress_options
         if ('1' == $check) echo 'checked="yes"'; 
         echo ' value="1"/>';
         
-        echo '<label for="seopress_advanced_advanced_trailingslash">'. __( 'Add a trailing slash for metas', 'wp-seopress' ) .'</label><span class="dashicons dashicons-info" title="'.__('You must check this box if the structure of your permalinks contains a slash at the end (eg: /%postname%/)','wp-seopress').'"></span>';
+        echo '<label for="seopress_advanced_advanced_trailingslash">'. __( 'Disable trailing slash for metas', 'wp-seopress' ) .'</label><span class="dashicons dashicons-info" title="'.__('You must check this box if the structure of your permalinks contains a slash at the end (eg: /%postname%/)','wp-seopress').'"></span>';
 
         if (isset($this->options['seopress_advanced_advanced_trailingslash'])) {
             esc_attr( $this->options['seopress_advanced_advanced_trailingslash']);

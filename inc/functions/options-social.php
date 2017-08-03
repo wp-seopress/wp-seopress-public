@@ -340,9 +340,9 @@ function seopress_social_facebook_og_url_hook() {
 
 		global $wp;
 		if (seopress_advanced_advanced_trailingslash_option()) {
-			$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
-		} else {
 			$current_url = home_url(add_query_arg(array(), $wp->request));
+		} else {
+			$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
 		}
 
 		if (is_search()) {

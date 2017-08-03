@@ -19,6 +19,26 @@ jQuery(document).ready(function(){
 				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
 			},
 		});
+	});
+	//**Trailingslash
+	jQuery('#notice-trailingslash').on('click', function() {
+		jQuery('#notice-trailingslash').attr('data-notice', jQuery('#notice-trailingslash').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-trailingslash',
+				notice_value: jQuery('#notice-trailingslash').attr('data-notice'),
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-trailingslash-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
 	});	
 	//**Posts per page
 	jQuery('#notice-posts-number').on('click', function() {
