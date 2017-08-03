@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
 Tested up to: 4.6
-Stable tag: 0.3
+Stable tag: 0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,13 @@ Soon :)
 7. SEOPRESS Metaboxe: Social settings
 
 == Changelog ==
+= 0.4 =
+* NEW Add article:published_time, article:modified_time, og:updated_time metadata
+* INFO Add website link
+* INFO Improve UI in Google Snippet Preview with live preview
+* INFO Improve Canonical URL field
+* FIX CSS Google Snippet preview
+* FIX Title tag in Google Snipet Preview
 = 0.3 =
 * INFO Add placeholders
 * INFO Improve sanitization

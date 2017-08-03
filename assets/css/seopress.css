@@ -68,39 +68,44 @@
     width: 49%;
     margin-left: 1%;
 }
-#seopress_cpt .google-snippet-preview .snippet-title {
-    color: rgb(26, 13, 171);
+#seopress_cpt .google-snippet-preview {
     font-family: arial,sans-serif;
+}
+#seopress_cpt .google-snippet-preview .snippet-title, #seopress_cpt .google-snippet-preview .snippet-title-custom, #seopress_cpt .google-snippet-preview .snippet-title-default {
+    color: rgb(26, 13, 171);
     font-size: 18px;
     font-weight: 400;
     line-height: 21.6px;
-    text-decoration: underline;
 }
 #seopress_cpt .google-snippet-preview .snippet-permalink {
     color: rgb(0, 102, 33);
-    font-family: arial,sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
 }
-#seopress_cpt .google-snippet-preview .snippet-description {
-    color: rgb(84, 84, 84);
-    font-family: arial,sans-serif;
+#seopress_cpt .google-snippet-preview .snippet-description, #seopress_cpt .google-snippet-preview .snippet-description-custom, #seopress_cpt .google-snippet-preview .snippet-description-default {
+    color: #545454;
     font-size: 13px;
     font-weight: 400;
     line-height: 18.2px;
+    display: inline;
+}
+#seopress_cpt .google-snippet-preview .snippet-date {
+    color: #808080;
+    display: inline;
 }
 #seopress_cpt .wrap-seopress-counters {
     text-align: right;
     background: rgb(238, 238, 238) none repeat scroll 0% 0%;
     padding: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
 }
-#seopress_cpt #seopress_titles_desc_counters {
+#seopress_cpt #seopress_titles_title_counters, #seopress_cpt #seopress_titles_desc_counters {
     display: inline;
     margin-right: 5px;
 }
-#seopress_cpt #seopress_titles_desc_counters_val {
+#seopress_cpt #seopress_titles_title_counters_val, #seopress_cpt #seopress_titles_desc_counters_val {
     display: inline;
     font-weight: bold;
 }

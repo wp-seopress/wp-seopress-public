@@ -341,6 +341,7 @@ if (get_option('blog_public') =='1') {
 		}
 	};
 
+	//noindex single CPT
 	function seopress_titles_noindex_post_option() {
 		$_seopress_robots_index = get_post_meta(get_the_ID(),'_seopress_robots_index',true);
 		if ($_seopress_robots_index == 'yes') {
@@ -420,6 +421,35 @@ if (get_option('blog_public') =='1') {
 			return seopress_titles_tax_nofollow_option();
 		}
 	};
+
+	//date in SERPs
+	function seopress_titles_single_cpt_date_option() {
+		global $post;
+		$seopress_get_current_cpt = get_post_type($post);
+
+		$seopress_titles_single_cpt_date_option = get_option("seopress_titles_option_name");
+		if ( ! empty ( $seopress_titles_single_cpt_date_option ) ) {
+			foreach ($seopress_titles_single_cpt_date_option as $key => $seopress_titles_single_cpt_date_value)
+				$options[$key] = $seopress_titles_single_cpt_date_value;
+			 if (isset($seopress_titles_single_cpt_date_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['date'])) { 
+			 	return $seopress_titles_single_cpt_date_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['date'];
+			 }
+		}
+	};
+
+	function seopress_titles_single_cpt_date_hook() {
+		if (is_singular() && seopress_titles_single_cpt_date_option() =='1') {
+			$seopress_get_current_pub_post_date = get_the_date('c');
+			$seopress_get_current_up_post_date = get_the_modified_date('c');
+			echo '<meta property="article:published_time" content="'.$seopress_get_current_pub_post_date.'" />';
+			echo "\n";
+			echo '<meta property="article:modified_time" content="'.$seopress_get_current_up_post_date.'" />';
+			echo "\n";
+			echo '<meta property="og:updated_time" content="'.$seopress_get_current_up_post_date.'" />';
+			echo "\n";
+		}
+	}
+	add_action( 'wp_head', 'seopress_titles_single_cpt_date_hook', 1 );
 
 	//noodp
 	function seopress_titles_noodp_option() {

@@ -32,7 +32,7 @@ function seopress_cpt($post){
         if ($seopress_titles_title !='') {
             return $seopress_titles_title;
         } else {
-            return get_the_title();
+            return get_the_title().' - '.get_bloginfo('name');
         }
     }
 
@@ -42,6 +42,26 @@ function seopress_cpt($post){
         } else {
             global $post;
             return substr(wp_strip_all_tags($post->post_content, true), 0, 160);
+        }
+    }
+
+    function seopress_titles_single_cpt_date_option() {
+        global $post;
+        $seopress_get_current_cpt = get_post_type($post);
+
+        $seopress_titles_single_cpt_date_option = get_option("seopress_titles_option_name");
+        if ( ! empty ( $seopress_titles_single_cpt_date_option ) ) {
+            foreach ($seopress_titles_single_cpt_date_option as $key => $seopress_titles_single_cpt_date_value)
+                $options[$key] = $seopress_titles_single_cpt_date_value;
+             if (isset($seopress_titles_single_cpt_date_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['date'])) { 
+                return $seopress_titles_single_cpt_date_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['date'];
+             }
+        }
+    };
+
+    function seopress_display_date_snippet() {
+        if (seopress_titles_single_cpt_date_option()) {
+            return '<div class="snippet-date">'.get_the_date('M j, Y').' - </div>';
         }
     }
 
@@ -58,6 +78,10 @@ function seopress_cpt($post){
                         <label for="seopress_titles_title_meta">'. __( 'Title', 'wp-seopress' ) .'</label>
                         <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.__('Enter your title','wp-seopress').'" value="'.$seopress_titles_title.'" />
                     </p> 
+                    <div class="wrap-seopress-counters">
+                        <div id="seopress_titles_title_counters"></div>
+                        '.__('(maximum recommended limit)','wp-seopress').'
+                    </div>
                     <p>
                         <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
                         <textarea id="seopress_titles_desc_meta" style="width:100%" name="seopress_titles_desc" placeholder="'.__('Enter your meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
@@ -72,8 +96,13 @@ function seopress_cpt($post){
                         <h3>'.__('Google Snippet Preview','wp-seopress').'</h3>
                         <p>'. __('This is what your page will look like in Google search results','wp-seopress').'</p>
                         <div class="snippet-title">'.seopress_titles_title($seopress_titles_title).'</div>
-                        <div class="snippet-permalink">'.get_permalink().'</div>
-                        <div class="snippet-desc">'.seopress_titles_desc($seopress_titles_desc).'...</div>
+                        <div class="snippet-title-custom" style="display:none"></div>
+                        <div class="snippet-title-default" style="display:none">'.get_the_title().' - '.get_bloginfo('name').'</div>
+                        <div class="snippet-permalink">'.get_permalink().'</div>';
+    echo                seopress_display_date_snippet();
+    echo                '<div class="snippet-description">'.seopress_titles_desc($seopress_titles_desc).'...</div>
+                        <div class="snippet-description-custom" style="display:none"></div>
+                        <div class="snippet-description-default" style="display:none">'.substr(wp_strip_all_tags($post->post_content, true), 0, 160).'</div>
                     </div>
                 </div>
             </div>
@@ -116,7 +145,7 @@ function seopress_cpt($post){
                 </p>
                 <p>
                     <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
-                    <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.__('Enter your Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
+                    <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.__('Default value: ','wp-seopress').get_permalink().'" value="'.$seopress_robots_canonical.'" />
                 </p>
             </div>
             <div id="tabs-3">

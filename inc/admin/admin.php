@@ -1011,6 +1011,25 @@ class seopress_options
                 }
 
             echo '</div>';
+
+            //Single Published / modified date CPT
+            echo '<div class="seopress_wrap_single_cpt">';
+
+                $options = get_option( 'seopress_titles_option_name' );  
+            
+                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_value]['date']);      
+                
+                echo '<input id="seopress_titles_single_cpt_date['.$seopress_cpt_value.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_value.'][date]" type="checkbox"';
+                if ('1' == $check) echo 'checked="yes"'; 
+                echo ' value="1"/>';
+                
+                echo '<label for="seopress_titles_single_cpt_date['.$seopress_cpt_value.']">'. __( 'Display date in Google search results?', 'wp-seopress' ) .'</label>';
+                
+                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_value]['date'])) {
+                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_value]['date']);
+                }
+
+            echo '</div>';
         }
     }
 
