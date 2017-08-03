@@ -6,9 +6,11 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //Enabled
 function seopress_redirections_enabled() {
 	global $post;
-	if (get_post_meta($post->ID,'_seopress_redirections_enabled',true)) { 
-		$seopress_redirections_enabled = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
-		return $seopress_redirections_enabled;
+	if ($post) {
+		if (get_post_meta($post->ID,'_seopress_redirections_enabled',true)) { 
+			$seopress_redirections_enabled = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
+			return $seopress_redirections_enabled;
+		}
 	}
 }
 

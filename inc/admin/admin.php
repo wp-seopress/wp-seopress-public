@@ -31,13 +31,44 @@ class seopress_options
     public function add_plugin_page()
     {
         add_menu_page('SEOPress Option Page', 'SEOPress', 'manage_options', 'seopress-option', array( $this, 'create_admin_page' ), 'dashicons-admin-generic', 90);
-        add_submenu_page('seopress-option', __('Titles & Metas','wp-seopress'), __('Titles & Metas','wp-seopress'), 'manage_options', 'seopress-titles', array( $this, 'seopress_titles_page' ));
+        $seopress_titles_help_tab = add_submenu_page('seopress-option', __('Titles & Metas','wp-seopress'), __('Titles & Metas','wp-seopress'), 'manage_options', 'seopress-titles', array( $this, 'seopress_titles_page' ));
         add_submenu_page('seopress-option', __('XML Sitemap','wp-seopress'), __('XML Sitemap','wp-seopress'), 'manage_options', 'seopress-xml-sitemap', array( $this, 'seopress_xml_sitemap_page' ));
         add_submenu_page('seopress-option', __('Social','wp-seopress'), __('Social','wp-seopress'), 'manage_options', 'seopress-social', array( $this, 'seopress_social_page' ));
         add_submenu_page('seopress-option', __('Advanced','wp-seopress'), __('Advanced','wp-seopress'), 'manage_options', 'seopress-advanced', array( $this, 'seopress_advanced_page' ));
         add_submenu_page('seopress-option', __('Import / Export / Reset settings','wp-seopress'), __('Import / Export / Reset','wp-seopress'), 'manage_options', 'seopress-import-export', array( $this,'seopress_import_export_page'));
+
+        function seopress_titles_help_tab() {
+            $screen = get_current_screen();
+
+            $seopress_titles_help_tab_content = '
+                <ul>
+                    <li><span>'.__('%%sitetitle%%','wp-seopress').'</span>'.__('Site Title','wp-seopress').'</li>
+                    <li><span>'.__('%%tagline%%','wp-seopress').'</span>'.__('Tagline','wp-seopress').'</li>
+                    <li><span>'.__('%%post_title%%','wp-seopress').'</span>'.__('Post Title (post, page, custom post type)','wp-seopress').'</li>
+                    <li><span>'.__('%%post_excerpt%%','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
+                    <li><span>'.__('%%post_date%%','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
+                    <li><span>'.__('%%post_author%%','wp-seopress').'</span>'.__('Post author','wp-seopress').'</li>
+                    <li><span>'.__('%%_category_title%%','wp-seopress').'</span>'.__('Category title','wp-seopress').'</li>
+                    <li><span>'.__('%%_category_description%%','wp-seopress').'</span>'.__('Category description','wp-seopress').'</li>
+                    <li><span>'.__('%%tag_title%%','wp-seopress').'</span>'.__('Tag title','wp-seopress').'</li>
+                    <li><span>'.__('%%tag_description%%','wp-seopress').'</span>'.__('Tag description','wp-seopress').'</li>
+                    <li><span>'.__('%%term_title%%','wp-seopress').'</span>'.__('Term title','wp-seopress').'</li>
+                    <li><span>'.__('%%term_description%%','wp-seopress').'</span>'.__('Term description','wp-seopress').'</li>
+                    <li><span>'.__('%%search_keywords%%','wp-seopress').'</span>'.__('Search keywords','wp-seopress').'</li>
+                    <li><span>'.__('%%current_pagination%%','wp-seopress').'</span>'.__('Current number page','wp-seopress').'</li>
+                </ul>
+            ';
+
+            $screen->add_help_tab( array(
+                'id'    => 'seopress_titles_help_tab',
+                'title' => __('Templates variables'),
+                'content'   => $seopress_titles_help_tab_content,
+            ));
+        }
+        add_action('load-'.$seopress_titles_help_tab, 'seopress_titles_help_tab');
     }
     
+
     function seopress_titles_page(){
         $this->options = get_option( 'seopress_titles_option_name' );
         ?>

@@ -302,6 +302,7 @@ function seopress_social_fb_desc_post_option() {
 };
 
 function seopress_social_fb_desc_hook() {
+	global $post;
 	setup_postdata( $post );
 	if (seopress_social_facebook_og_option() =='1' && seopress_social_fb_desc_post_option() !='') { 
  		echo '<meta property="og:description" content="'.seopress_social_fb_desc_post_option().'" />'; 
@@ -387,6 +388,8 @@ function seopress_social_twitter_desc_post_option() {
 };
 
 function seopress_social_twitter_desc_hook() {
+	global $post;
+	setup_postdata( $post );
 	if (seopress_social_twitter_card_option() =='1' && seopress_social_twitter_desc_post_option() !='') { 
  		echo '<meta name="twitter:description" content="'.seopress_social_twitter_desc_post_option().'" />';
  		echo "\n";

@@ -5,10 +5,11 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Display metabox in Custom Post Type
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 add_action('add_meta_boxes','seopress_init_metabox');
 function seopress_init_metabox(){
-    add_meta_box('seopress_cpt', __('SEOPress','wp-seopress'), 'seopress_cpt', seopress_get_post_types()->name, 'advanced');
+    foreach (seopress_get_post_types() as $key => $value) {
+        add_meta_box('seopress_cpt', __('SEOPress','wp-seopress'), 'seopress_cpt', $key, 'advanced');
+    }
 }
 
 function seopress_cpt($post){

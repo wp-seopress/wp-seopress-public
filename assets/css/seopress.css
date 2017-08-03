@@ -165,6 +165,10 @@
 #seopress_cpt .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
 #seopress_cpt .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
 
+#tab-panel-seopress_titles_help_tab li span {
+    font-weight: bold;
+    margin-right: 10px;
+}
 /*************************************************************************************************/
 /* Admin - Options panel                                                                         */
 /*************************************************************************************************/
