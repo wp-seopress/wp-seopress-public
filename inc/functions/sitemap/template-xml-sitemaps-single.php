@@ -80,7 +80,7 @@ function seopress_xml_sitemap_single() {
 								        $seopress_sitemaps .= '<image:image>';
 								        $seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
-								        $seopress_sitemaps .= $url;
+										$seopress_sitemaps .= '<![CDATA['.$url.']]>';
 								        $seopress_sitemaps .= '</image:loc>';
 								        $seopress_sitemaps .= "\n";
 								        $seopress_sitemaps .= '</image:image>';
@@ -94,7 +94,7 @@ function seopress_xml_sitemap_single() {
 										$seopress_sitemaps .= '<image:image>';
 										$seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
-								        $seopress_sitemaps .= $url;
+										$seopress_sitemaps .= '<![CDATA['.$url.']]>';
 								        $seopress_sitemaps .= '</image:loc>';
 								        $seopress_sitemaps .= "\n";
 								        $seopress_sitemaps .= '</image:image>';
@@ -107,7 +107,7 @@ function seopress_xml_sitemap_single() {
 									$seopress_sitemaps .= '<image:image>';
 									$seopress_sitemaps .= "\n";
 							       	$seopress_sitemaps .= '<image:loc>';
-							        $seopress_sitemaps .= wp_get_attachment_url( $product_attachment_id );
+									$seopress_sitemaps .= '<![CDATA['.wp_get_attachment_url( $product_attachment_id ).']]>';
 							        $seopress_sitemaps .= '</image:loc>';
 							        $seopress_sitemaps .= "\n";
 							        $seopress_sitemaps .= '</image:image>';
@@ -118,7 +118,7 @@ function seopress_xml_sitemap_single() {
 								$seopress_sitemaps .= '<image:image>';
 								$seopress_sitemaps .= "\n";
 						       	$seopress_sitemaps .= '<image:loc>';
-						        $seopress_sitemaps .= $post_thumbnail;
+								$seopress_sitemaps .= '<![CDATA['.$post_thumbnail.']]>';
 						        $seopress_sitemaps .= '</image:loc>';
 						        $seopress_sitemaps .= "\n";
 						        $seopress_sitemaps .= '</image:image>';

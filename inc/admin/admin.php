@@ -8,7 +8,7 @@ class seopress_options
      * Holds the values to be used in the fields callbacks
      */
     private $options;
-	
+    
     /**
      * Start up
      */
@@ -17,8 +17,8 @@ class seopress_options
         add_action( 'admin_init', array( $this, 'set_default_values' ), 10 );
         add_action( 'admin_init', array( $this, 'page_init' ) );
     }
-	
-	public function activate() {
+    
+    public function activate() {
         update_option($this->seopress_options, $this->data);
     }
 
@@ -615,7 +615,7 @@ class seopress_options
                             <p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 3 columns in this order: url to match (without your domain name), url to redirect in absolute and type of redirection (301, 302 or 307).', 'wp-seopress' ); ?></p>
                             <p>
                                 <a href="https://www.seopress.org/wp-content/uploads/csv/seopress-redirections-example.csv" target="_blank">
-                                    <?php _e('Download a CSV example','novaldi'); ?>
+                                    <?php _e('Download a CSV example','wp-seopress'); ?>
                                 </a>
                             </p>
                             <form method="post" enctype="multipart/form-data">
@@ -688,7 +688,7 @@ class seopress_options
      */
     public function create_admin_page()
     {
-	
+    
         // Set class property
         $this->options = get_option( 'seopress_option_name' );
         $current_tab ='';
@@ -1021,8 +1021,18 @@ class seopress_options
                                 <div class="widget widget-whois">
                                     <h3 class="widget-title"><span class="dashicons dashicons-clock"></span><?php _e('Check your domain expiration date','wp-seopress'); ?></h3>
                                     <?php
-                                        $clean_url = str_replace( array('http://', 'https://'), "", ''.get_home_url() ); 
-                                        $whois = shell_exec('whois '.$clean_url);
+                                        $url = get_home_url();
+
+                                        function get_domain($url) {
+                                            $urlobj = parse_url($url);
+                                            $domain = $urlobj['host'];
+                                            if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
+                                                return $regs['domain'];
+                                            }
+                                            return false;
+                                        }
+                                        
+                                        $whois = shell_exec('whois '.get_domain($url));
 
                                         if ($whois) {
                                             $whois_result = explode("\n",$whois);
@@ -1035,7 +1045,7 @@ class seopress_options
                                                 }
 
                                                 $ps = explode(':',$line);
-                                                $out[trim($ps[0])] = trim($ps[1]);
+                                                $out[trim($ps[0])] = isset($ps[1]) ? trim($ps[1]) : null;
                                             }
                                             if ($out) {
                                                 echo '<ul>';
@@ -1579,7 +1589,7 @@ class seopress_options
                         </div>
                     <?php } ?>
                 </div>
-			</div>
+            </div>
         <?php
     }
 
@@ -1630,7 +1640,7 @@ class seopress_options
             array( $this, 'sanitize' ) // Sanitize
         );
 
-		//Titles & metas SECTION===================================================================
+        //Titles & metas SECTION===================================================================
         add_settings_section( 
             'seopress_setting_section_titles_home', // ID
             '',
@@ -2542,7 +2552,7 @@ class seopress_options
      * @param array $input Contains all settings fields as array keys
      */
     public function sanitize( $input )
-    {	
+    {   
 
         $seopress_sanitize_fields = array('seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking' );
 
@@ -2570,11 +2580,11 @@ class seopress_options
     /** 
      * Print the Section text
      */
-	 
+     
     public function print_section_info_titles()
     {
         print __('<p>Customize your titles & metas for homepage</p>', 'wp-seopress');
-    }	
+    }   
 
     public function print_section_info_single()
     {
@@ -2598,6 +2608,12 @@ class seopress_options
 
     public function print_section_info_xml_sitemap_general()
     {
+        if (get_option('permalink_structure') =='') {
+            echo '<div class="error notice is-dismissable">';
+            echo '<p>'. __('Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this.','wp-seopress');
+            echo ' <a href="'.admin_url("options-permalink.php").'">'.__('Change this settings','wp-seopress').'</a></p>';
+            echo '</div>';
+        }
         echo '<p>'.__('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress').'</p>';
         echo '<p>'.__('Only the last 1000 items are listed in Sitemaps for performances issues.', 'wp-seopress').'</p>';
         if ( ( isset( $_SERVER['SERVER_SOFTWARE'] ) && stristr( $_SERVER['SERVER_SOFTWARE'], 'nginx' ) === true ) ) { //IF NGINX
@@ -2695,7 +2711,7 @@ class seopress_options
     /** 
      * Get the settings option array and print one of its values
      */
-	
+    
     //Titles & metas
     public function seopress_titles_home_site_title_callback()
     {
@@ -2766,7 +2782,7 @@ class seopress_options
                 _e('Meta description template','wp-seopress');
                 echo "<br/>";
                 
-           	    $check = isset($this->options['seopress_titles_single_titles'][$seopress_cpt_key]['description']) ? $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['description'] : NULL;
+                $check = isset($this->options['seopress_titles_single_titles'][$seopress_cpt_key]['description']) ? $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['description'] : NULL;
 
                 printf(
                 '<textarea name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][description]">%s</textarea>',
@@ -2991,7 +3007,7 @@ class seopress_options
                 _e('Meta description template','wp-seopress');
                 echo "<br/>";
 
-           	    $check = isset($this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['description']) ? $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['description'] : NULL;
+                $check = isset($this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['description']) ? $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['description'] : NULL;
 
                 printf(
                 '<textarea name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][description]">%s</textarea>',
@@ -3064,8 +3080,8 @@ class seopress_options
     {
         _e('Meta description template','wp-seopress');
         echo "<br/>";
-		
-   	    $check = isset($this->options['seopress_titles_archives_author_desc']) ? $this->options['seopress_titles_archives_author_desc'] : NULL;
+        
+        $check = isset($this->options['seopress_titles_archives_author_desc']) ? $this->options['seopress_titles_archives_author_desc'] : NULL;
 
         printf(
         '<textarea name="seopress_titles_option_name[seopress_titles_archives_author_desc]">%s</textarea>',
@@ -3204,8 +3220,8 @@ class seopress_options
         _e('Meta description template','wp-seopress');
         echo "<br/>";
 
-		$check = isset($this->options['seopress_titles_archives_search_desc']) ? $this->options['seopress_titles_archives_search_desc'] : NULL;
-		
+        $check = isset($this->options['seopress_titles_archives_search_desc']) ? $this->options['seopress_titles_archives_search_desc'] : NULL;
+        
         printf(
         '<textarea name="seopress_titles_option_name[seopress_titles_archives_search_desc]">%s</textarea>',
         esc_html( $check )
@@ -3236,7 +3252,7 @@ class seopress_options
         _e('Meta description template','wp-seopress');
         echo "<br/>";
         
-    	$check = isset($this->options['seopress_titles_archives_404_desc']) ? $this->options['seopress_titles_archives_404_desc'] : NULL;
+        $check = isset($this->options['seopress_titles_archives_404_desc']) ? $this->options['seopress_titles_archives_404_desc'] : NULL;
 
         printf(
         '<textarea name="seopress_titles_option_name[seopress_titles_archives_404_desc]">%s</textarea>',
@@ -3522,7 +3538,7 @@ class seopress_options
 
     public function seopress_xml_sitemap_html_mapping_callback()
     {
-      	$check = isset($this->options['seopress_xml_sitemap_html_mapping']) ? $this->options['seopress_xml_sitemap_html_mapping'] : NULL;
+        $check = isset($this->options['seopress_xml_sitemap_html_mapping']) ? $this->options['seopress_xml_sitemap_html_mapping'] : NULL;
 
         printf(
         '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_mapping]" placeholder="'.__('eg: 2, 28, 68','wp-seopress').'" value="%s"/>',
@@ -3532,7 +3548,7 @@ class seopress_options
 
     public function seopress_xml_sitemap_html_exclude_callback()
     {
-       	$check = isset($this->options['seopress_xml_sitemap_html_exclude']) ? $this->options['seopress_xml_sitemap_html_exclude'] : NULL;
+        $check = isset($this->options['seopress_xml_sitemap_html_exclude']) ? $this->options['seopress_xml_sitemap_html_exclude'] : NULL;
 
         printf(
         '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_exclude]" placeholder="'.__('eg: 13, 8, 38','wp-seopress').'" value="%s"/>',
@@ -3562,7 +3578,7 @@ class seopress_options
 
     public function seopress_social_knowledge_name_callback()
     {
-   	    $check = isset($this->options['seopress_social_knowledge_name']) ? $this->options['seopress_social_knowledge_name'] : NULL;
+        $check = isset($this->options['seopress_social_knowledge_name']) ? $this->options['seopress_social_knowledge_name'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_name]" placeholder="'.__('eg: Apple','wp-seopress').'" value="%s"/>',
@@ -3574,8 +3590,8 @@ class seopress_options
     {
         $options = get_option( 'seopress_social_option_name' );
         
-   	    $options_set = isset($options['seopress_social_knowledge_img']) ? $options['seopress_social_knowledge_img'] : NULL;
-   	    
+        $options_set = isset($options['seopress_social_knowledge_img']) ? $options['seopress_social_knowledge_img'] : NULL;
+        
         $check = isset($options['seopress_social_knowledge_img']);      
 
         echo '<input id="seopress_social_knowledge_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_knowledge_img]" placeholder="'.__('Select your logo','wp-seopress').'"  />
@@ -3603,7 +3619,7 @@ class seopress_options
 
     public function seopress_social_knowledge_phone_callback()
     {
-   	    $check = isset($this->options['seopress_social_knowledge_phone']) ? $this->options['seopress_social_knowledge_phone'] : NULL;
+        $check = isset($this->options['seopress_social_knowledge_phone']) ? $this->options['seopress_social_knowledge_phone'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_phone]" placeholder="'.__('eg: +33123456789 (internationalized version required)','wp-seopress').'" value="%s"/>',
@@ -3678,7 +3694,7 @@ class seopress_options
 
     public function seopress_social_accounts_facebook_callback()
     {
-   	    $check = isset($this->options['seopress_social_accounts_facebook']) ? $this->options['seopress_social_accounts_facebook'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_facebook']) ? $this->options['seopress_social_accounts_facebook'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_facebook]" placeholder="'.__('eg: https://www.facebook.com/your-page','wp-seopress').'" value="%s"/>',
@@ -3690,9 +3706,9 @@ class seopress_options
 
     public function seopress_social_accounts_twitter_callback()
     {
-	    
-	    $check = isset($this->options['seopress_social_accounts_twitter']) ? $this->options['seopress_social_accounts_twitter'] : NULL;
-	    
+        
+        $check = isset($this->options['seopress_social_accounts_twitter']) ? $this->options['seopress_social_accounts_twitter'] : NULL;
+        
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="'.__('eg: @wp_seopress','wp-seopress').'" value="%s"/>',
         esc_html( $check )
@@ -3703,7 +3719,7 @@ class seopress_options
 
     public function seopress_social_accounts_google_callback()
     {
-  	    $check = isset($this->options['seopress_social_accounts_google']) ? $this->options['seopress_social_accounts_google'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_google']) ? $this->options['seopress_social_accounts_google'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_google]" placeholder="'.__('eg: https://plus.google.com/+BenjaminDenis','wp-seopress').'" value="%s"/>',
@@ -3715,7 +3731,7 @@ class seopress_options
 
     public function seopress_social_accounts_pinterest_callback()
     {
-   	    $check = isset($this->options['seopress_social_accounts_pinterest']) ? $this->options['seopress_social_accounts_pinterest'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_pinterest']) ? $this->options['seopress_social_accounts_pinterest'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_pinterest]" placeholder="'.__('eg: https://pinterest.com/wpbuy/','wp-seopress').'" value="%s"/>',
@@ -3727,7 +3743,7 @@ class seopress_options
 
     public function seopress_social_accounts_instagram_callback()
     {
-   	    $check = isset($this->options['seopress_social_accounts_instagram']) ? $this->options['seopress_social_accounts_instagram'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_instagram']) ? $this->options['seopress_social_accounts_instagram'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_instagram]" placeholder="'.__('eg: https://www.instagram.com/rainbowgeek64/','wp-seopress').'" value="%s"/>',
@@ -3739,7 +3755,7 @@ class seopress_options
 
     public function seopress_social_accounts_youtube_callback()
     {
-   	    $check = isset($this->options['seopress_social_accounts_youtube']) ? $this->options['seopress_social_accounts_youtube'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_youtube']) ? $this->options['seopress_social_accounts_youtube'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_youtube]" placeholder="'.__('eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA','wp-seopress').'" value="%s"/>',
@@ -3751,7 +3767,7 @@ class seopress_options
 
     public function seopress_social_accounts_linkedin_callback()
     {
-   	    $check = isset($this->options['seopress_social_accounts_linkedin']) ? $this->options['seopress_social_accounts_linkedin'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_linkedin']) ? $this->options['seopress_social_accounts_linkedin'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_linkedin]" placeholder="'.__('eg: https://www.linkedin.com/in/benjamin-denis-70672b3b','wp-seopress').'" value="%s"/>',
@@ -3763,7 +3779,7 @@ class seopress_options
 
     public function seopress_social_accounts_myspace_callback()
     {
-   	    $check = isset($this->options['seopress_social_accounts_myspace']) ? $this->options['seopress_social_accounts_myspace'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_myspace']) ? $this->options['seopress_social_accounts_myspace'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_myspace]" placeholder="'.__('eg: https://myspace.com/your-page','wp-seopress').'" value="%s"/>',
@@ -3775,7 +3791,7 @@ class seopress_options
 
     public function seopress_social_accounts_soundcloud_callback()
     {
-   	    $check = isset($this->options['seopress_social_accounts_soundcloud']) ? $this->options['seopress_social_accounts_soundcloud'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_soundcloud']) ? $this->options['seopress_social_accounts_soundcloud'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_soundcloud]" placeholder="'.__('eg: https://soundcloud.com/michaelmccannmusic','wp-seopress').'" value="%s"/>',
@@ -3787,7 +3803,7 @@ class seopress_options
 
     public function seopress_social_accounts_tumblr_callback()
     {
-   	    $check = isset($this->options['seopress_social_accounts_tumblr']) ? $this->options['seopress_social_accounts_tumblr'] : NULL;
+        $check = isset($this->options['seopress_social_accounts_tumblr']) ? $this->options['seopress_social_accounts_tumblr'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_tumblr]" placeholder="'.__('eg: https://your-site.tumblr.com','wp-seopress').'" value="%s"/>',
@@ -3818,7 +3834,7 @@ class seopress_options
     {
         $options = get_option( 'seopress_social_option_name' );  
         
-   	    $options_set = isset($options['seopress_social_facebook_img']) ? $options['seopress_social_facebook_img'] : NULL;
+        $options_set = isset($options['seopress_social_facebook_img']) ? $options['seopress_social_facebook_img'] : NULL;
         
         $check = isset($options['seopress_social_facebook_img']);      
 
@@ -3833,7 +3849,7 @@ class seopress_options
 
     public function seopress_social_facebook_admin_id_callback()
     {
-   	    $check = isset($this->options['seopress_social_facebook_admin_id']) ? $this->options['seopress_social_facebook_admin_id'] : NULL;
+        $check = isset($this->options['seopress_social_facebook_admin_id']) ? $this->options['seopress_social_facebook_admin_id'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_facebook_admin_id]" value="%s"/>',
@@ -3845,7 +3861,7 @@ class seopress_options
 
     public function seopress_social_facebook_app_id_callback()
     {
-   	    $check = isset($this->options['seopress_social_facebook_app_id']) ? $this->options['seopress_social_facebook_app_id'] : NULL;
+        $check = isset($this->options['seopress_social_facebook_app_id']) ? $this->options['seopress_social_facebook_app_id'] : NULL;
 
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_facebook_app_id]" value="%s"/>',
@@ -3878,7 +3894,7 @@ class seopress_options
     {      
         $options = get_option( 'seopress_social_option_name' );
         
-   	    $options_set = isset($options['seopress_social_twitter_card_img']) ? $options['seopress_social_twitter_card_img'] : NULL;
+        $options_set = isset($options['seopress_social_twitter_card_img']) ? $options['seopress_social_twitter_card_img'] : NULL;
         
         $check = isset($options['seopress_social_twitter_card_img']);      
 
@@ -4542,7 +4558,7 @@ class seopress_options
 
     public function seopress_advanced_advanced_google_callback()
     {
-       	$check = isset($this->options['seopress_advanced_advanced_google']) ? $this->options['seopress_advanced_advanced_google'] : NULL;
+        $check = isset($this->options['seopress_advanced_advanced_google']) ? $this->options['seopress_advanced_advanced_google'] : NULL;
 
         printf(
         '<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_google]" placeholder="'.__('Enter Google meta value site verification','wp-seopress').'" value="%s"/>',
@@ -4566,8 +4582,8 @@ class seopress_options
 
     public function seopress_advanced_advanced_pinterest_callback()
     {
-	    $check = isset($this->options['seopress_advanced_advanced_pinterest']) ? $this->options['seopress_advanced_advanced_pinterest'] : NULL;
-	           
+        $check = isset($this->options['seopress_advanced_advanced_pinterest']) ? $this->options['seopress_advanced_advanced_pinterest'] : NULL;
+               
         printf(
         '<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_pinterest]" placeholder="'.__('Enter Pinterest meta value site verification','wp-seopress').'" value="%s"/>',
         esc_html( $check )
@@ -4578,7 +4594,7 @@ class seopress_options
 
     public function seopress_advanced_advanced_yandex_callback()
     {
-  	    $check = isset($this->options['seopress_advanced_advanced_yandex']) ? $this->options['seopress_advanced_advanced_yandex'] : NULL;
+        $check = isset($this->options['seopress_advanced_advanced_yandex']) ? $this->options['seopress_advanced_advanced_yandex'] : NULL;
 
         printf(
         '<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_yandex]" placeholder="'.__('Enter Yandex meta value site verification','wp-seopress').'" value="%s"/>',
@@ -4808,8 +4824,8 @@ class seopress_options
         }
     }
 }
-	
+    
 if( is_admin() )
     $my_settings_page = new seopress_options();
-	
+    
 ?>
