@@ -261,7 +261,7 @@ if (get_option('blog_public') =='1') {
 		$seopress_titles_template_replace_array = array(
 			get_bloginfo('name'), 
 			get_bloginfo('description'),
-			get_the_title(),
+			the_title_attribute('echo=0'),
 			get_the_excerpt(),
 			get_the_date(),
 			$the_author_meta,
@@ -377,7 +377,7 @@ if (get_option('blog_public') =='1') {
 		$seopress_titles_template_replace_array = array(
 			get_bloginfo('name'), 
 			get_bloginfo('description'),
-			get_the_title(),
+			the_title_attribute('echo=0'),
 			get_the_excerpt(),
 			get_the_date(),
 			$seopress_get_author,

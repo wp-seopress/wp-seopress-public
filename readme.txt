@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,7 +53,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 <ul>
 	<li>English</li>
 	<li>French</li>
-	<li><a href="https://www.seopress.org/contact/">Add yours!</a></li>
+	<li><a href="https://www.seopress.org/contact-us/">Add yours!</a></li>
 </ul>
 
 <h3>Subscribe to our newsletter and get a huge discount!</h3>
@@ -72,15 +72,36 @@ And get early access to our pro release!
 == Screenshots ==
 1. SEOPress Dashboard
 2. Titles & Metas
-3. XML Sitemap
-4. Social
-5. Advanced
-6. SEOPress Metaboxe: Titles settings
-7. SEOPress Metaboxe: Advanced settings
-8. SEOPress Metaboxe: Social settings
-9. SEOPress Metaboxe: Redirection settings
+3. Titles & Metas
+4. Titles & Metas
+5. Titles & Metas
+6. Titles & Metas
+7. XML Sitemap
+8. XML Sitemap
+9. XML Sitemap
+10. Social
+11. Social
+12. Social
+13. Social
+14. Google Analytics
+15. Google Analytics
+16. Google Analytics
+17. Advanced settings
+18. Advanced settings
+19. Import / Export / Reset settings
+20. WooCommerce (PRO)
+21. Breadcrumbs (PRO)
+22. Google Page Speed (PRO)
+23. Robots.txt (PRO)
+24. Google News Sitemap (PRO)
+24. Monitoring 404 (PRO)
+25. htaccess (PRO)
+26. SEOPress metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.0.2 = 
+* FIX Escape HTML tags in title
+* FIX WooCommerce (PRO) fatal error
 = 1.0.1 =
 * FIX XML sitemaps fatal error
 = 1.0 =

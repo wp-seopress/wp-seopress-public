@@ -161,7 +161,8 @@ function seopress_google_analytics_cd_logged_in_user_option() {
 
 //Build Custom GA
 function seopress_google_analytics_js() {
-	$seopress_google_analytics_html =
+	$seopress_google_analytics_html = "\n";
+	$seopress_google_analytics_html .=
 "<!-- Google Analytics -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
