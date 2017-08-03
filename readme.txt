@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap, bot, broken link checker
 Requires at least: 4.4+
 Tested up to: 4.8
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,12 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 31. SEOPress BOT
 
 == Changelog ==
+= 1.7.5 =
+* FIX Redirections (PRO Only)
+* FIX UI issues
+* FIX Capability for SEOPress BOT (PRO only)
+* FIX Default tab JS (PRO only)
+* FIX Notice Undefined variable: seopress_social_twitter_card_site in options-social.php on line 553
 = 1.7.4 =
 * NEW Add Redirection Enable column in Redirections / 404 monitoring
 * NEW Add Redirection status column in Redirections / 404 monitoring

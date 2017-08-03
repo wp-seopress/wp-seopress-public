@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2017-03-27 21:55+0200\n"
-"PO-Revision-Date: 2017-03-27 21:55+0200\n"
+"POT-Creation-Date: 2017-03-29 21:41+0200\n"
+"PO-Revision-Date: 2017-03-29 21:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: en\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: inc/admin/admin-metaboxes.php:136 inc/admin/admin.php:954
+#: inc/admin/admin-metaboxes.php:136
 msgid "Social"
 msgstr ""
 
@@ -308,7 +308,7 @@ msgstr ""
 msgid "XML / HTML Sitemap"
 msgstr ""
 
-#: inc/admin/admin.php:177 inc/admin/adminbar.php:34
+#: inc/admin/admin.php:177 inc/admin/admin.php:954 inc/admin/adminbar.php:34
 msgid "Social Networks"
 msgstr ""
 
@@ -316,7 +316,7 @@ msgstr ""
 msgid "Google Analytics"
 msgstr ""
 
-#: inc/admin/admin.php:180 inc/admin/adminbar.php:52
+#: inc/admin/admin.php:180 inc/admin/admin.php:1273 inc/admin/adminbar.php:52
 msgid "Tools"
 msgstr ""
 
@@ -835,7 +835,7 @@ msgid "Track your website performance to improve SEO with Google Page Speed"
 msgstr ""
 
 #: inc/admin/admin.php:1165
-msgid "Robots"
+msgid "robots.txt"
 msgstr ""
 
 #: inc/admin/admin.php:1166
@@ -859,7 +859,7 @@ msgid "Monitor 404, create 301, 302 and 307 redirections"
 msgstr ""
 
 #: inc/admin/admin.php:1251
-msgid "SEOPress BOT"
+msgid "SEOPress BOT - Broken links"
 msgstr ""
 
 #: inc/admin/admin.php:1252
@@ -871,15 +871,11 @@ msgid "Scan"
 msgstr ""
 
 #: inc/admin/admin.php:1261
-msgid "htaccess"
+msgid ".htaccess"
 msgstr ""
 
 #: inc/admin/admin.php:1262
 msgid "Edit your htaccess file."
-msgstr ""
-
-#: inc/admin/admin.php:1273
-msgid "Import / Export / Reset"
 msgstr ""
 
 #: inc/admin/admin.php:1274

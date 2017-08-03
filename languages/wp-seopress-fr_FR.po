@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2017-03-27 21:55+0200\n"
-"PO-Revision-Date: 2017-03-27 21:55+0200\n"
+"POT-Creation-Date: 2017-03-29 21:41+0200\n"
+"PO-Revision-Date: 2017-03-29 21:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: fr_FR\n"
@@ -48,7 +48,7 @@ msgstr "Paramètres de titres"
 msgid "Advanced"
 msgstr "Avancé"
 
-#: inc/admin/admin-metaboxes.php:136 inc/admin/admin.php:954
+#: inc/admin/admin-metaboxes.php:136
 msgid "Social"
 msgstr "Social"
 
@@ -317,7 +317,7 @@ msgstr "Plan de site XML / Image / HTML"
 msgid "XML / HTML Sitemap"
 msgstr "Sitemap XML / HTML"
 
-#: inc/admin/admin.php:177 inc/admin/adminbar.php:34
+#: inc/admin/admin.php:177 inc/admin/admin.php:954 inc/admin/adminbar.php:34
 msgid "Social Networks"
 msgstr "Réseaux Sociaux"
 
@@ -325,7 +325,7 @@ msgstr "Réseaux Sociaux"
 msgid "Google Analytics"
 msgstr "Google Analytics"
 
-#: inc/admin/admin.php:180 inc/admin/adminbar.php:52
+#: inc/admin/admin.php:180 inc/admin/admin.php:1273 inc/admin/adminbar.php:52
 msgid "Tools"
 msgstr "Outils"
 
@@ -872,8 +872,8 @@ msgstr ""
 "Google Page Speed"
 
 #: inc/admin/admin.php:1165
-msgid "Robots"
-msgstr "Robots"
+msgid "robots.txt"
+msgstr "robots.txt"
 
 #: inc/admin/admin.php:1166
 msgid "Edit your robots.txt file"
@@ -896,8 +896,8 @@ msgid "Monitor 404, create 301, 302 and 307 redirections"
 msgstr "Surveiller les 404, créer des redirections 301, 302 et 307"
 
 #: inc/admin/admin.php:1251
-msgid "SEOPress BOT"
-msgstr "SEOPress BOT"
+msgid "SEOPress BOT - Broken links"
+msgstr "SEOPress BOT - Liens cassés"
 
 #: inc/admin/admin.php:1252
 msgid "Scan your site to find SEO problems."
@@ -908,16 +908,12 @@ msgid "Scan"
 msgstr "Scan"
 
 #: inc/admin/admin.php:1261
-msgid "htaccess"
-msgstr "htaccess"
+msgid ".htaccess"
+msgstr ".htaccess"
 
 #: inc/admin/admin.php:1262
 msgid "Edit your htaccess file."
 msgstr "Modifier votre fichier htaccess."
-
-#: inc/admin/admin.php:1273
-msgid "Import / Export / Reset"
-msgstr "Importer / Exporter / Réinitialiser"
 
 #: inc/admin/admin.php:1274
 msgid "Import / export SEOPress settings from site to site."
@@ -1742,6 +1738,18 @@ msgstr "SEOPress.org"
 #: seopress.php:240
 msgid "GO PRO!"
 msgstr "PASSEZ PRO !"
+
+#~ msgid "Robots"
+#~ msgstr "Robots"
+
+#~ msgid "SEOPress BOT"
+#~ msgstr "SEOPress BOT"
+
+#~ msgid "htaccess"
+#~ msgstr "htaccess"
+
+#~ msgid "Import / Export / Reset"
+#~ msgstr "Importer / Exporter / Réinitialiser"
 
 #~ msgid "301"
 #~ msgstr "301"

@@ -29,6 +29,27 @@ function seopress_redirections_value() {
 	if (get_post_meta($post->ID,'_seopress_redirections_value',true)) {
 		$seopress_redirections_value = get_post_meta($post->ID,'_seopress_redirections_value',true);
 		return $seopress_redirections_value;
+	} else {
+		$seopress_redirections_value = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+		$seopress_redirections_query = new WP_Query( array( 
+				'post_type' => 'seopress_404', 
+				'posts_per_page' => '-1',           
+				'update_post_term_cache' => false, // don't retrieve post terms
+				'update_post_meta_cache' => false, // don't retrieve post meta, 
+			) 
+		);
+		$all_titles = array();
+		if ( $seopress_redirections_query->have_posts() ) {
+			while ( $seopress_redirections_query->have_posts() ) {
+				$seopress_redirections_query->the_post();
+				array_push($all_titles, get_the_title());
+			}
+			if (in_array($seopress_redirections_value, $all_titles)) {
+				//do_redirect
+				return $seopress_redirections_value;
+			}
+			wp_reset_postdata();
+		}
 	}
 }
 
@@ -36,7 +57,7 @@ function seopress_redirections_hook() {
 	if (seopress_redirections_enabled() =='yes') {
 		if (seopress_redirections_type() && seopress_redirections_value() !='') {
 			wp_redirect(seopress_redirections_value(), seopress_redirections_type());
-			exit();	
+			exit();
 		}
 	}
 }

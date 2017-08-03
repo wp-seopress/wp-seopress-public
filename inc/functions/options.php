@@ -40,7 +40,7 @@ if (seopress_get_toggle_google_analytics_option() =='1') {
 }
 add_action('init', 'seopress_load_redirections_options', 0);
 function seopress_load_redirections_options() {
-	if (!is_admin()){	
+	if (!is_admin()){
 	    require_once ( dirname( __FILE__ ) . '/options-redirections.php'); //Redirections
 	}
 }

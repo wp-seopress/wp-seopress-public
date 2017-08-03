@@ -550,7 +550,7 @@ add_action( 'wp_head', 'seopress_social_twitter_card_summary_hook', 1 );
 function seopress_social_twitter_card_site_hook() {
 	if (seopress_social_twitter_card_option() =='1' && seopress_social_accounts_twitter_option() !='' ) {
 
-		$seopress_social_twitter_card_site .= '<meta name="twitter:site" content="'.seopress_social_accounts_twitter_option().'" />';
+		$seopress_social_twitter_card_site = '<meta name="twitter:site" content="'.seopress_social_accounts_twitter_option().'" />';
 		
 		echo $seopress_social_twitter_card_site."\n";
 	}

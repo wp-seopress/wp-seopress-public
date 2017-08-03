@@ -951,7 +951,7 @@ class seopress_options
                             <span class="dashicons dashicons-share"></span>
                         </div>
                         <span class="inner">
-                            <h3><?php _e('Social','wp-seopress'); ?></h3>
+                            <h3><?php _e('Social Networks','wp-seopress'); ?></h3>
                             <p><?php _e('Open Graph, Twitter Card, Google Knowledge Graph and more...','wp-seopress'); ?></p>
                             <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-social' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                             <?php
@@ -1162,7 +1162,7 @@ class seopress_options
                                 <span class="dashicons dashicons-media-text"></span>                              
                             </div>
                             <span class="inner">
-                                <h3><?php _e('Robots','wp-seopress'); ?></h3>
+                                <h3><?php _e('robots.txt','wp-seopress'); ?></h3>
                                 <p><?php _e('Edit your robots.txt file','wp-seopress'); ?></p>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots$4' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                                 <?php
@@ -1248,7 +1248,7 @@ class seopress_options
                                 <span class="dashicons dashicons-admin-generic"></span>                              
                             </div>
                             <span class="inner">
-                                <h3><?php _e('SEOPress BOT','wp-seopress'); ?></h3>
+                                <h3><?php _e('SEOPress BOT - Broken links','wp-seopress'); ?></h3>
                                 <p><?php _e('Scan your site to find SEO problems.','wp-seopress'); ?></p>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-bot-page' ); ?>"><?php _e('Scan','wp-seopress'); ?></a>
                             </span>
@@ -1258,7 +1258,7 @@ class seopress_options
                                 <span class="dashicons dashicons-media-text"></span>                             
                             </div>
                             <span class="inner">
-                                <h3><?php _e('htaccess','wp-seopress'); ?></h3>
+                                <h3><?php _e('.htaccess','wp-seopress'); ?></h3>
                                 <p><?php _e('Edit your htaccess file.','wp-seopress'); ?></p>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess$7' ); ?>"><?php _e('Manage','wp-seopress'); ?>
                                 </a>
@@ -1270,7 +1270,7 @@ class seopress_options
                             <span class="dashicons dashicons-admin-settings"></span>                                   
                         </div>
                         <span class="inner">
-                            <h3><?php _e('Import / Export / Reset','wp-seopress'); ?></h3>
+                            <h3><?php _e('Tools','wp-seopress'); ?></h3>
                             <p><?php _e('Import / export SEOPress settings from site to site.','wp-seopress'); ?></p>
                             <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                             <a href="https://www.seopress.org/support/guides/export-import-reset-settings/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
