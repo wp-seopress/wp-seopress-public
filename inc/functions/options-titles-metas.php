@@ -378,9 +378,11 @@ if (get_option('blog_public') =='1') {
 		} elseif ($post !='') {
 			if (get_post_field('post_content', $post->ID) !='') {
 				$seopress_get_the_excerpt = wp_trim_words(esc_html(get_post_field('post_content', $post->ID)), 30);
+			} else {
+				$seopress_get_the_excerpt = null;
 			}
 		} else {
-			$seopress_get_the_excerpt = false;
+			$seopress_get_the_excerpt = null;
 		}
 
 		$seopress_titles_template_variables_array = array(

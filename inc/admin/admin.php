@@ -1022,32 +1022,42 @@ class seopress_options
                                     <h3 class="widget-title"><span class="dashicons dashicons-clock"></span><?php _e('Check your domain expiration date','wp-seopress'); ?></h3>
                                     <?php
                                         $clean_url = str_replace( array('http://', 'https://'), "", ''.get_home_url() ); 
-                                        $whois = shell_exec("whois $clean_url");
+                                        $whois = shell_exec('whois '.$clean_url);
 
-                                        $whois_result = explode("\n",$whois);
+                                        if ($whois) {
+                                            $whois_result = explode("\n",$whois);
 
-                                        $out = array();
-                                        foreach ($whois_result as $line) {
-                                            //remove comments
-                                            if (substr($line,0,1) == '%' || substr($line,0,1) == '#') {
-                                                continue; 
+                                            $out = array();
+                                            foreach ($whois_result as $line) {
+                                                //remove comments
+                                                if (substr($line,0,1) == '%' || substr($line,0,1) == '#') {
+                                                    continue; 
+                                                }
+
+                                                $ps = explode(':',$line);
+                                                $out[trim($ps[0])] = trim($ps[1]);
                                             }
-
-                                            $ps = explode(':',$line);
-                                            $out[trim($ps[0])] = trim($ps[1]);
-                                        }
-                                        if ($out) {
-                                            echo '<ul>';
-                                                echo '<li><span>'.__('Your domain name: ','wp-seopress').'</span>'.$out['Domain Name'].'</li>';
-
-                                                echo '<li><span>'.__('Your registrar: ','wp-seopress').'</span>'.$out['Registrar'].'</li>';
-                                                
-                                                echo '<li><span>'.__('Last updated date: ','wp-seopress').'</span>'.date_i18n( get_option( 'date_format' ), strtotime( $out['Updated Date'].':00:00' ) ).'</li>';
-                                                
-                                                echo '<li><span>'.__('Domain creation date: ','wp-seopress').'</span>'.date_i18n( get_option( 'date_format' ), strtotime( $out['Creation Date'].':00:00' ) ).'</li>';
-
-                                                echo '<li><span>'.__('Your domain expires: ','wp-seopress').'</span>'.date_i18n( get_option( 'date_format' ), strtotime( $out['Registry Expiry Date'].':00:00' ) ).'</li>';
-                                            echo '</ul>';
+                                            if ($out) {
+                                                echo '<ul>';
+                                                    if (isset($out['Domain Name'])) {
+                                                        echo '<li><span>'.__('Your domain name: ','wp-seopress').'</span> '.$out['Domain Name'].'</li>';
+                                                    }
+                                                    if (isset($out['Registrar'])) {
+                                                        echo '<li><span>'.__('Your registrar: ','wp-seopress').'</span> '.$out['Registrar'].'</li>';
+                                                    }
+                                                    if (isset($out['Updated Date'])) {
+                                                        echo '<li><span>'.__('Last updated date: ','wp-seopress').'</span> '.date_i18n( get_option( 'date_format' ), strtotime( $out['Updated Date'].':00:00' ) ).'</li>';
+                                                    }
+                                                    if (isset($out['Creation Date'])) {
+                                                        echo '<li><span>'.__('Domain creation date: ','wp-seopress').'</span> '.date_i18n( get_option( 'date_format' ), strtotime( $out['Creation Date'].':00:00' ) ).'</li>';
+                                                    }
+                                                    if (isset($out['Registry Expiry Date'])) {
+                                                        echo '<li><span>'.__('Your domain expires: ','wp-seopress').'</span> '.date_i18n( get_option( 'date_format' ), strtotime( $out['Registry Expiry Date'].':00:00' ) ).'</li>';
+                                                    }
+                                                echo '</ul>';
+                                            }
+                                        } else {
+                                            echo '<p>'.__('Sorry, you domain name can\'t be verified :(','wp-seopress').'</p>';
                                         }
                                     ?>
                                     <button id="seopress-whois-alert" class="button-primary button" name="clear"><?php _e('Email me before expiration','wp-seopress'); ?></button>
