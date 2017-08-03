@@ -57,7 +57,7 @@ function seopress_xml_sitemap_index() {
 	}
 
 	//Google News
-	if (seopress_xml_sitemap_news_enable_option() !='') {
+	if (function_exists("seopress_xml_sitemap_news_enable_option") && seopress_xml_sitemap_news_enable_option() !='') {
 		$seopress_sitemaps .= "\n";
 		$seopress_sitemaps .= '<sitemap>';
 		$seopress_sitemaps .= "\n";

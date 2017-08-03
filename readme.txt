@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,8 @@ And get early access to our pro release!
 9. SEOPress Metaboxe: Redirection settings
 
 == Changelog ==
+= 1.0.1 =
+* FIX XML sitemaps fatal error
 = 1.0 =
 * NEW Google Analytics
 * NEW Import Yoast Posts metadata in SEOPress (Title tags, Meta description, Facebook Open Graph tags (title, description and image thumbnail), Twitter tags (title, description and image thumbnail), Meta Robots (noindex, nofollow...), Canonical URL)
