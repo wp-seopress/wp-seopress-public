@@ -617,13 +617,13 @@ if (get_option('blog_public') =='1') {
 			return seopress_titles_archives_author_noindex_option();
 		} elseif (is_date() && seopress_titles_archives_date_noindex_option()) { //IS Date archive
 			return seopress_titles_archives_date_noindex_option();
-		} elseif (function_exists('is_cart') && (is_cart() && seopress_woocommerce_cart_page_no_index_option())) { //IS WooCommerce Cart page
+		} elseif (function_exists('is_cart') && function_exists('seopress_woocommerce_cart_page_no_index_option') && (is_cart() && seopress_woocommerce_cart_page_no_index_option())) { //IS WooCommerce Cart page
 			return seopress_woocommerce_cart_page_no_index_option();
-		} elseif (function_exists('is_checkout') && (is_checkout() && seopress_woocommerce_checkout_page_no_index_option())) { //IS WooCommerce Checkout page
+		} elseif (function_exists('is_checkout') && function_exists('seopress_woocommerce_checkout_page_no_index_option') && (is_checkout() && seopress_woocommerce_checkout_page_no_index_option())) { //IS WooCommerce Checkout page
 			return seopress_woocommerce_checkout_page_no_index_option();
-		} elseif (function_exists('is_account_page') && (is_account_page() && seopress_woocommerce_customer_account_page_no_index_option())) { //IS WooCommerce Customer account pages
+		} elseif (function_exists('is_account_page') && function_exists('seopress_woocommerce_customer_account_page_no_index_option') && (is_account_page() && seopress_woocommerce_customer_account_page_no_index_option())) { //IS WooCommerce Customer account pages
 			return seopress_woocommerce_customer_account_page_no_index_option();
-		} elseif (function_exists('is_wc_endpoint_url') && (is_wc_endpoint_url() && seopress_woocommerce_customer_account_page_no_index_option())) { //IS WooCommerce Customer account pages
+		} elseif (function_exists('is_wc_endpoint_url') && function_exists('seopress_woocommerce_customer_account_page_no_index_option') && (is_wc_endpoint_url() && seopress_woocommerce_customer_account_page_no_index_option())) { //IS WooCommerce Customer account pages
 			return seopress_woocommerce_customer_account_page_no_index_option();
 		} elseif(is_404()) { //Is 404 page
 			return "noindex";

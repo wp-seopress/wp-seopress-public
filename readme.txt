@@ -4,7 +4,7 @@ Donate link: https://seopress.org/
 Tags: seo, search engine optimization, meta, title, description, keywords, serp, knowledge grah, schema.org, url, redirection, 301, xml sitemap, breadcrumbs, ranking, google analytics, woocommerce
 Requires at least: 4.4+
 Tested up to: 4.7
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic and impro
 30. Structured Data Types metaboxe in post, page, custom post type
 
 == Changelog ==
+= 1.2.1 =
+* FIX Fatal error for WooCommerce cart, checkout, my account pages
 = 1.2 =
 * NEW Add Dublin Core meta tags (SEOPress PRO only)
 * NEW Add Structured Data Types for Articles, Courses, Videos, Recipes, Events and Products (SEOPress PRO only)
