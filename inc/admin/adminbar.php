@@ -84,6 +84,12 @@ function seopress_admin_bar_links() {
 			'title'		=> __( 'Broken Links', 'wp-seopress' ),
 			'href'		=> admin_url( 'edit.php?post_type=seopress_bot' ),
 		));
+		$wp_admin_bar->add_menu( array(
+			'parent'	=> 'seopress_custom_top_level',
+			'id'		=> 'seopress_custom_sub_menu_backlinks',
+			'title'		=> __( 'Backlinks', 'wp-seopress' ),
+			'href'		=> admin_url( 'edit.php?post_type=seopress_backlinks' ),
+		));
 	}
 }
 add_action( 'admin_bar_menu', 'seopress_admin_bar_links', 99 );

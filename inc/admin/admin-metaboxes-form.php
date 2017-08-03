@@ -147,7 +147,7 @@ echo '<div id="seopress-tabs">';
                 </div>
                 <p>
                     <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
-                    <textarea id="seopress_titles_desc_meta" style="width:100%" name="seopress_titles_desc" placeholder="'.__('Enter your meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
+                    <textarea id="seopress_titles_desc_meta" style="width:100%" rows="4" name="seopress_titles_desc" placeholder="'.__('Enter your meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
                 </p>
                 <div class="wrap-seopress-counters">
                     <div id="seopress_titles_desc_counters"></div>
@@ -222,6 +222,8 @@ echo                '<div class="snippet-description">'.seopress_titles_desc($se
         </div>
         <div id="tabs-3">
             <span class="dashicons dashicons-facebook-alt"></span>
+            <br><br>
+            <span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">'.__('Ask Facebook to update his cache','wp-seopress').'</a>
             <p>
                 <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'wp-seopress' ) .'</label>
                 <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.__('Enter your Facebook title','wp-seopress').'" value="'.$seopress_social_fb_title.'" />

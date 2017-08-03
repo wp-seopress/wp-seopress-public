@@ -110,7 +110,7 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='</head>';
 	$seopress_sitemaps_xsl .='<body>';
 	$seopress_sitemaps_xsl .='<div id="main">';
-	$seopress_sitemaps_xsl .='<h1>SEOPress XML Sitemaps</h1>';
+	$seopress_sitemaps_xsl .='<h1>'.__('XML Sitemaps','wp-seopress').'</h1>';
 	$seopress_sitemaps_xsl .='<p><a href="'.get_home_url().'/sitemaps.xml">Index sitemaps</a></p>';
 	$seopress_sitemaps_xsl .='<div id="sitemaps">';
 	$seopress_sitemaps_xsl .='<div class="loc">';

@@ -89,12 +89,14 @@ function seopress_admin_header() { ?>
                                             <?php _e( 'Google Page Speed', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots$4' ); ?>">
-                                            <span class="dashicons dashicons-media-text"></span>
-                                            <?php _e( 'robots.txt', 'wp-seopress' ); ?>
-                                        </a>
-                                    </li>
+                                    <?php if (!is_multisite()) { ?>
+                                        <li>
+                                            <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots$4' ); ?>">
+                                                <span class="dashicons dashicons-media-text"></span>
+                                                <?php _e( 'robots.txt', 'wp-seopress' ); ?>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
                                     <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_news$5' ); ?>">
                                             <span class="dashicons dashicons-admin-post"></span>
@@ -114,11 +116,19 @@ function seopress_admin_header() { ?>
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="<?php echo admin_url( 'edit.php?post_type=seopress_backlinks' ); ?>">
+                                            <span class="dashicons dashicons-admin-links"></span>
+                                            <?php _e( 'Backlinks', 'wp-seopress' ); ?>
+                                        </a>
+                                    </li>
+                                    <?php if (!is_multisite()) { ?>
+                                    <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess$7' ); ?>">
                                             <span class="dashicons dashicons-media-text"></span>
                                             <?php _e( '.htaccess', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
+                                    <?php } ?>
                                     <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rss$11' ); ?>">
                                             <span class="dashicons dashicons-rss"></span>
@@ -142,9 +152,22 @@ function seopress_admin_header() { ?>
                         </div>
                     </a>
                 </h1>
+                <?php
+                    if (function_exists('seopress_get_locale')) {
+                        if (seopress_get_locale() =='fr') {
+                            $seopress_docs_link['changelog'] = 'https://www.seopress.org/fr/journal-modifications/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                            $seopress_docs_link['website'] = 'https://www.seopress.org/fr/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                            $seopress_docs_link['support'] = 'https://www.seopress.org/fr/support/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                        } else {
+                            $seopress_docs_link['changelog'] = 'https://www.seopress.org/changelog/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                            $seopress_docs_link['website'] = 'https://www.seopress.org/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                            $seopress_docs_link['support'] = 'https://www.seopress.org/support/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                        }
+                    }
+                ?>
                 <div id="seopress-notice">
                     <div class="small">
-                        <a href="https://www.seopress.org/changelog/" alt="<?php _e('See the changelog (new window)','wp-seopress'); ?>" target="_blank">
+                        <a href="<?php echo $seopress_docs_link['changelog']; ?>" alt="<?php _e('See the changelog (new window)','wp-seopress'); ?>" target="_blank">
                             <div class="dashicons dashicons-media-text"></div>
                             <div class="tooltip"><?php _e('See the changelog','wp-seopress'); ?></div>
                         </a>
@@ -156,11 +179,11 @@ function seopress_admin_header() { ?>
                             <div class="dashicons dashicons-twitter"></div>
                             <div class="tooltip"><?php _e('Follow us on Twitter','wp-seopress'); ?></div>
                         </a>
-                        <a href="https://www.seopress.org/" alt="<?php _e('Official website (new window)','wp-seopress'); ?>" target="_blank">
+                        <a href="<?php echo $seopress_docs_link['website']; ?>" alt="<?php _e('Official website (new window)','wp-seopress'); ?>" target="_blank">
                             <div class="dashicons dashicons-info"></div>
                             <div class="tooltip"><?php _e('Official website','wp-seopress'); ?></div>
                         </a>
-                        <a href="https://www.seopress.org/support" alt="<?php _e('Support (new window)','wp-seopress'); ?>" target="_blank">
+                        <a href="<?php echo $seopress_docs_link['support']; ?>" alt="<?php _e('Support (new window)','wp-seopress'); ?>" target="_blank">
                             <div class="dashicons dashicons-editor-help"></div>
                             <div class="tooltip"><?php _e('Support','wp-seopress'); ?></div>
                         </a>

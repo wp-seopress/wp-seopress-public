@@ -723,7 +723,7 @@
 .seopress-page-list .seopress-feature .inner {
     margin: 0px;
     display: block;
-    padding: 2rem 0 2rem 140px;
+    padding: 2rem 0 2rem 120px;
 }
 .seopress-page-list .seopress-feature h3 {
     margin: 0;
@@ -892,7 +892,6 @@
     box-shadow: none;
     position: absolute;
     right: 0;
-    top: 15px;
 }
 #seopress-content .seopress-page-list .seopress-feature .seopress-doc:hover,
 .seopress-option #seopress-tabs .seopress-doc:hover {
@@ -1158,6 +1157,15 @@
 #seopress-content .widget-reverse p {
     margin: 0;
 }
+/*************************************************************************************************/
+/* Admin - Backlinks                                                                             */
+/*************************************************************************************************/
+.post-type-seopress_backlinks .wp-list-table .column-seopress_backlinks_url {
+    width: 35%;
+}
+.post-type-seopress_backlinks .wp-list-table .column-seopress_backlinks_anchor_text {
+    width: 20%;
+}
 
 /*************************************************************************************************/
 /* Admin - Dashboard                                                                             */
@@ -1276,7 +1284,7 @@
 .seopress_page_seopress-pro-page #wpcontent {
     background: #F4F7FA;
 }
-.seopress-option .wrap h2.nav-tab-wrapper, .seopress-option h1.nav-tab-wrapper, .seopress-option h3.nav-tab-wrapper {
+.seopress-option .wrap div.nav-tab-wrapper {
     border-bottom: 1px solid RGB(238, 238, 238);
     margin: 0;
     padding: 10px 10px;
@@ -1285,8 +1293,10 @@
     top: 100px;
     background: rgb(255, 255, 255);
     z-index: 95;
+    font-style: 23px;
+    font-weight: 400;
 }
-#seopress-admin-tabs.wrap h2.nav-tab-wrapper {
+#seopress-admin-tabs.wrap div.nav-tab-wrapper {
     margin: 20px auto 0;
     max-width: 53rem;
     width: 100%;
@@ -1297,6 +1307,8 @@
     background: rgb(248, 250, 253);
     z-index: 100;
     top: 31px;
+    font-style: 23px;
+    font-weight: 400;
 }
 #seopress-admin-tabs #tab_seopress_notifications.seopress-tab {
     background: none;

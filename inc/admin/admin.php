@@ -14,6 +14,7 @@ class seopress_options
      */
     public function __construct() {
         add_action( 'admin_menu', array( $this, 'add_plugin_page' ), 10 );
+        add_action( 'network_admin_menu', array( $this, 'add_network_plugin_page'), 10 );
         add_action( 'admin_init', array( $this, 'set_default_values' ), 10 );
         add_action( 'admin_init', array( $this, 'page_init' ) );
     }
@@ -172,6 +173,11 @@ class seopress_options
     /**
      * Add options page
      */
+    public function add_network_plugin_page() {
+        add_menu_page(__('SEOPress Network settings'), 'SEO', 'manage_options', 'seopress-network-option', array( $this, 'create_network_admin_page' ), 'dashicons-admin-seopress', 90);
+ 
+    }
+
     public function add_plugin_page()
     {
         add_menu_page('SEOPress Option Page', 'SEO', 'manage_options', 'seopress-option', array( $this, 'create_admin_page' ), 'dashicons-admin-seopress', 90);
@@ -223,7 +229,7 @@ class seopress_options
             echo seopress_admin_header();
         }
         ?>
-        <form method="post" action="options.php" class="seopress-option">
+        <form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
         <?php 
         if (get_option('blog_public') =='0') {
             echo '<div class="error notice is-dismissable">';
@@ -273,11 +279,11 @@ class seopress_options
                 'tab_seopress_titles_advanced' => __( "Advanced", "wp-seopress" ),
             );
 
-            echo '<h2 class="nav-tab-wrapper">';
+            echo '<div class="nav-tab-wrapper">';
             foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
                 echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-titles#tab=' . $tab_key . '">' . $tab_caption . '</a>'; 
             }
-            echo '</h2>';
+            echo '</div>';
         ?>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_titles_home') { echo 'active'; } ?>" id="tab_seopress_titles_home"><?php do_settings_sections( 'seopress-settings-admin-titles-home' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_titles_single') { echo 'active'; } ?>" id="tab_seopress_titles_single"><?php do_settings_sections( 'seopress-settings-admin-titles-single' ); ?></div>
@@ -297,7 +303,7 @@ class seopress_options
             echo seopress_admin_header();
         }
         ?>
-        <form method="post" action="options.php" class="seopress-option" name="seopress-flush">
+        <form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option" name="seopress-flush">
         <?php 
         global $wp_version, $title;
         $current_tab = '';
@@ -339,11 +345,11 @@ class seopress_options
                 'tab_seopress_html_sitemap' => __( "HTML Sitemap", "wp-seopress" ),
             );
 
-            echo '<h2 class="nav-tab-wrapper">';
+            echo '<div class="nav-tab-wrapper">';
             foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
                 echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-xml-sitemap#tab=' . $tab_key . '">' . $tab_caption . '</a>'; 
             }
-            echo '</h2>';
+            echo '</div>';
         ?>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_xml_sitemap_general') { echo 'active'; } ?>" id="tab_seopress_xml_sitemap_general"><?php do_settings_sections( 'seopress-settings-admin-xml-sitemap-general' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_xml_sitemap_post_types') { echo 'active'; } ?>" id="tab_seopress_xml_sitemap_post_types"><?php do_settings_sections( 'seopress-settings-admin-xml-sitemap-post-types' ); ?></div>
@@ -361,7 +367,7 @@ class seopress_options
             echo seopress_admin_header();
         }
         ?>
-        <form method="post" action="options.php" class="seopress-option">
+        <form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
         <?php 
         global $wp_version, $title;
         $current_tab = '';
@@ -404,11 +410,11 @@ class seopress_options
                 'tab_seopress_social_twitter' => __( "Twitter", "wp-seopress" ), 
             );
 
-            echo '<h2 class="nav-tab-wrapper">';
+            echo '<div class="nav-tab-wrapper">';
             foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
                 echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-social#tab=' . $tab_key . '">' . $tab_caption . '</a>'; 
             }
-            echo '</h2>';
+            echo '</div>';
         ?>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_social_knowledge') { echo 'active'; } ?>" id="tab_seopress_social_knowledge"><?php do_settings_sections( 'seopress-settings-admin-social-knowledge' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_social_accounts') { echo 'active'; } ?>" id="tab_seopress_social_accounts"><?php do_settings_sections( 'seopress-settings-admin-social-accounts' ); ?></div>
@@ -427,7 +433,7 @@ class seopress_options
             echo seopress_admin_header();
         }
         ?>
-        <form method="post" action="options.php" class="seopress-option">
+        <form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
         <?php 
         global $wp_version, $title;
         $current_tab = '';
@@ -481,11 +487,11 @@ class seopress_options
                 );
             }
 
-            echo '<h2 class="nav-tab-wrapper">';
+            echo '<div class="nav-tab-wrapper">';
             foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
                 echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-google-analytics#tab=' . $tab_key . '">' . $tab_caption . '</a>'; 
             }
-            echo '</h2>';
+            echo '</div>';
         ?>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_enable') { echo 'active'; } ?>" id="tab_seopress_google_analytics_enable"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-enable' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_features') { echo 'active'; } ?>" id="tab_seopress_google_analytics_features"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-features' ); ?></div><div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_events') { echo 'active'; } ?>" id="tab_seopress_google_analytics_events"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-events' ); ?></div>
@@ -506,7 +512,7 @@ class seopress_options
             echo seopress_admin_header();
         }
         ?>
-        <form method="post" action="options.php" class="seopress-option">
+        <form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
         <?php 
         
         global $wp_version, $title;
@@ -549,11 +555,11 @@ class seopress_options
                 'tab_seopress_advanced_security' => __( "Security", "wp-seopress" ), 
             );
 
-            echo '<h2 class="nav-tab-wrapper">';
+            echo '<div class="nav-tab-wrapper">';
             foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
                 echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-advanced#tab=' . $tab_key . '">' . $tab_caption . '</a>'; 
             }
-            echo '</h2>';
+            echo '</div>';
         ?>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_advanced_advanced') { echo 'active'; } ?>" id="tab_seopress_advanced_advanced"><?php do_settings_sections( 'seopress-settings-admin-advanced-advanced' ); ?></div>
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_advanced_appearance') { echo 'active'; } ?>" id="tab_seopress_advanced_appearance"><?php do_settings_sections( 'seopress-settings-admin-advanced-appearance' ); ?></div>
@@ -686,6 +692,57 @@ class seopress_options
     /**
      * Options page callback
      */
+    public function create_network_admin_page() {
+        if (is_plugin_active('wp-seopress/seopress.php')) {
+            if (function_exists('seopress_admin_header')) {
+                echo seopress_admin_header();
+            } ?>
+
+            <form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
+
+                <?php if (get_option('blog_public') =='0') {
+                    echo '<div class="error notice is-dismissable">';
+                    echo '<p>'. __('Discourage search engines from indexing this site is <strong>ON!</strong> None of the following settings will be applied.','wp-seopress-pro');
+                    echo ' <a href="'.admin_url("options-reading.php").'">'.__('Change this settings','wp-seopress-pro').'</a></p>';
+                    echo '</div>';
+                }
+
+                echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
+
+                global $wp_version, $title;
+                $current_tab = '';
+                $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
+                echo '<'.$tag.'><span class="dashicons dashicons-editor-table"></span>'.$title.'</'.$tag.'>';
+                settings_fields( 'seopress_pro_option_group' );
+                ?>
+
+                <div id="seopress-tabs" class="wrap">
+                    <?php 
+                        $plugin_settings_tabs = array(
+                            'tab_seopress_robots' => __( "robots.txt", "wp-seopress-pro" ),
+                            'tab_seopress_htaccess' => __( ".htaccess", "wp-seopress-pro" ),
+                        );
+
+                        echo '<div class="nav-tab-wrapper">';
+                        foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
+                            echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-network-option#tab=' . $tab_key . '">' . $tab_caption . '</a>';
+                        }
+                        echo '</div>';
+                    ?>
+                    
+                    <!-- Robots -->
+                    <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_robots') { echo 'active'; } ?>" id="tab_seopress_robots"><?php do_settings_sections( 'seopress-settings-admin-robots' ); ?></div>
+
+                    <!-- htaccess -->
+                    <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_htaccess') { echo 'active'; } ?>" id="tab_seopress_htaccess"><?php do_settings_sections( 'seopress-settings-admin-htaccess' ); ?></div>
+
+                </div><!--seopress-tabs-->
+
+                <?php submit_button(); ?>
+            </form>
+        <?php }
+    }
+
     public function create_admin_page()
     {
     
@@ -737,11 +794,11 @@ class seopress_options
                             }
                         }
                         
-                        echo '<h2 class="nav-tab-wrapper">';
+                        echo '<div class="nav-tab-wrapper">';
                         foreach ( $dashboard_settings_tabs as $tab_key => $tab_caption ) {
                             echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-option#tab=' . $tab_key . '">' . $tab_caption . '</a>';
                         }
-                        echo '</h2>';
+                        echo '</div>';
                     ?>
 
                     <div class="wrap-seopress-tab-content">
@@ -1139,6 +1196,7 @@ class seopress_options
                             <ul>
                                 <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.google.com/webmasters/tools/disavow-links-main" target="_blank"><?php _e('Upload a list of links to disavow to Google','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
                                 <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://trends.google.com/trends/" target="_blank"><?php _e('Google Trends','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
+                                <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://ga-dev-tools.appspot.com/campaign-url-builder/" target="_blank"><?php _e('Google Campaign URL Builder tool','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
                             </ul>
                         </div>
                     </div>
@@ -1172,7 +1230,16 @@ class seopress_options
                                     echo '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                 }
                             ?>
-                            <a href="https://www.seopress.org/support/guides/manage-titles-meta-descriptions/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                            <?php
+                                if (function_exists('seopress_get_locale')) {
+                                    if (seopress_get_locale() =='fr') {
+                                        $seopress_docs_link['support']['titles'] = 'https://www.seopress.org/fr/support/guides/gerez-vos-balises-titres-metas/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    } else {
+                                        $seopress_docs_link['support']['titles'] = 'https://www.seopress.org/support/guides/manage-titles-meta-descriptions/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    }
+                                }
+                            ?>
+                            <a href="<?php echo $seopress_docs_link['support']['titles']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                         </span>
                     </div>
                     <div class="seopress-feature">
@@ -1201,7 +1268,16 @@ class seopress_options
                                     echo '<span id="sitemap-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                 }
                             ?>
-                            <a href="https://www.seopress.org/support/guides/enable-xml-sitemaps/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                            <?php
+                                if (function_exists('seopress_get_locale')) {
+                                    if (seopress_get_locale() =='fr') {
+                                        $seopress_docs_link['support']['sitemaps'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    } else {
+                                        $seopress_docs_link['support']['sitemaps'] = 'https://www.seopress.org/support/guides/enable-xml-sitemaps/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    }
+                                }
+                            ?>
+                            <a href="<?php echo $seopress_docs_link['support']['sitemaps']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                         </span>
                     </div>
                     <div class="seopress-feature">
@@ -1230,7 +1306,16 @@ class seopress_options
                                     echo '<span id="social-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                 }
                             ?>
-                            <a href="https://www.seopress.org/support/guides/enable-google-knowledge-graph/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                            <?php
+                                if (function_exists('seopress_get_locale')) {
+                                    if (seopress_get_locale() =='fr') {
+                                        $seopress_docs_link['support']['knowledge'] = 'https://www.seopress.org/fr/support/guides/activer-google-knowledge-graph/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    } else {
+                                        $seopress_docs_link['support']['knowledge'] = 'https://www.seopress.org/support/guides/enable-google-knowledge-graph/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    }
+                                }
+                            ?>
+                            <a href="<?php echo $seopress_docs_link['support']['knowledge']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                         </span>
                     </div>
                     <div class="seopress-feature">
@@ -1259,7 +1344,16 @@ class seopress_options
                                     echo '<span id="analytics-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                 }
                             ?>
-                            <a href="https://www.seopress.org/support/guides/google-analytics/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                            <?php
+                                if (function_exists('seopress_get_locale')) {
+                                    if (seopress_get_locale() =='fr') {
+                                        $seopress_docs_link['support']['analytics'] = 'https://www.seopress.org/fr/support/guides/debutez-google-analytics/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    } else {
+                                        $seopress_docs_link['support']['analytics'] = 'https://www.seopress.org/support/guides/google-analytics/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    }
+                                }
+                            ?>
+                            <a href="<?php echo $seopress_docs_link['support']['analytics']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                         </span>
                     </div>
                     <div class="seopress-feature">
@@ -1429,7 +1523,16 @@ class seopress_options
                                         echo '<span id="breadcrumbs-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                     }
                                 ?>
-                                <a href="https://www.seopress.org/support/guides/enable-breadcrumbs/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                                <?php
+                                if (function_exists('seopress_get_locale')) {
+                                        if (seopress_get_locale() =='fr') {
+                                            $seopress_docs_link['support']['breadcrumbs'] = 'https://www.seopress.org/fr/support/guides/activer-fil-dariane/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        } else {
+                                            $seopress_docs_link['support']['breadcrumbs'] = 'https://www.seopress.org/support/guides/enable-breadcrumbs/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        }
+                                    }
+                                ?>
+                                <a href="<?php echo $seopress_docs_link['support']['breadcrumbs']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                             </span>
                         </div>
                         <div class="seopress-feature">
@@ -1440,38 +1543,58 @@ class seopress_options
                                 <h3><?php _e('Google Page Speed','wp-seopress'); ?></h3>
                                 <p><?php _e('Track your website performance to improve SEO with Google Page Speed','wp-seopress'); ?></p>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed$3' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                                <a href="http://www.seopress.org/support/guides/analyse-site-google-page-speed/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                                <?php
+                                if (function_exists('seopress_get_locale')) {
+                                        if (seopress_get_locale() =='fr') {
+                                            $seopress_docs_link['support']['page_speed'] = 'https://www.seopress.org/fr/support/guides/analyser-site-google-page-speed/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        } else {
+                                            $seopress_docs_link['support']['page_speed'] = 'http://www.seopress.org/support/guides/analyse-site-google-page-speed/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        }
+                                    }
+                                ?>
+                                <a href="<?php echo $seopress_docs_link['support']['page_speed']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                             </span>
                         </div>
-                        <div class="seopress-feature">
-                            <div class="img-tool">
-                                <span class="dashicons dashicons-media-text"></span>                              
+                        <?php if (!is_multisite()) { ?>
+                            <div class="seopress-feature">
+                                <div class="img-tool">
+                                    <span class="dashicons dashicons-media-text"></span>                              
+                                </div>
+                                <span class="inner">
+                                    <h3><?php _e('robots.txt','wp-seopress'); ?></h3>
+                                    <p><?php _e('Edit your robots.txt file','wp-seopress'); ?></p>
+                                    <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots$4' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                    <?php
+                                        if(seopress_get_toggle_robots_option()=='1') { 
+                                            $seopress_get_toggle_robots_option = '"1"';
+                                        } else {
+                                            $seopress_get_toggle_robots_option = '"0"';
+                                        }
+                                    ?>
+                                    <input type="checkbox" name="toggle-robots" id="toggle-robots" class="toggle" data-toggle=<?php echo $seopress_get_toggle_robots_option; ?>>
+                                    <label for="toggle-robots"></label>
+                                    <?php
+                                        if(seopress_get_toggle_robots_option()=='1') { 
+                                            echo '<span id="robots-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                            echo '<span id="robots-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                        } else { 
+                                            echo '<span id="robots-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                            echo '<span id="robots-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                        }
+                                    ?>
+                                    <?php
+                                    if (function_exists('seopress_get_locale')) {
+                                            if (seopress_get_locale() =='fr') {
+                                                $seopress_docs_link['support']['robots'] = 'https://www.seopress.org/fr/support/guides/editer-fichier-robots-txt/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                            } else {
+                                                $seopress_docs_link['support']['robots'] = 'https://www.seopress.org/support/guides/edit-robots-txt-file/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                            }
+                                        }
+                                    ?>
+                                    <a href="<?php echo $seopress_docs_link['support']['robots']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                                </span>
                             </div>
-                            <span class="inner">
-                                <h3><?php _e('robots.txt','wp-seopress'); ?></h3>
-                                <p><?php _e('Edit your robots.txt file','wp-seopress'); ?></p>
-                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots$4' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                                <?php
-                                    if(seopress_get_toggle_robots_option()=='1') { 
-                                        $seopress_get_toggle_robots_option = '"1"';
-                                    } else { 
-                                        $seopress_get_toggle_robots_option = '"0"';
-                                    }
-                                ?>
-                                <input type="checkbox" name="toggle-robots" id="toggle-robots" class="toggle" data-toggle=<?php echo $seopress_get_toggle_robots_option; ?>>
-                                <label for="toggle-robots"></label>
-                                <?php
-                                    if(seopress_get_toggle_robots_option()=='1') { 
-                                        echo '<span id="robots-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
-                                        echo '<span id="robots-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
-                                    } else { 
-                                        echo '<span id="robots-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
-                                        echo '<span id="robots-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
-                                    }
-                                ?>
-                                <a href="https://www.seopress.org/support/guides/edit-robots-txt-file/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
-                            </span>
-                        </div>
+                        <?php } ?>
                         <div class="seopress-feature">
                             <div class="img-tool">
                                 <span class="dashicons dashicons-admin-post"></span>                              
@@ -1508,7 +1631,7 @@ class seopress_options
                                 <h3><?php _e('Redirections','wp-seopress'); ?></h3>
                                 <p><?php _e('Monitor 404, create 301, 302 and 307 redirections','wp-seopress'); ?></p>
                                 <a class="button-secondary view-redirects" href="<?php echo admin_url( 'edit.php?post_type=seopress_404' ); ?>"><?php _e('See redirects','wp-seopress'); ?></a>
-                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404$6' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404$6' ); ?>"><?php _e('Manage','wp-seopress'); ?></a><br><br>
                                 <?php
                                     if(seopress_get_toggle_404_option()=='1') { 
                                         $seopress_get_toggle_404_option = '"1"';
@@ -1527,7 +1650,16 @@ class seopress_options
                                         echo '<span id="redirections-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                     }
                                 ?>
-                                <a href="http://www.seopress.org/support/guides/redirections/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                                <?php
+                                if (function_exists('seopress_get_locale')) {
+                                        if (seopress_get_locale() =='fr') {
+                                            $seopress_docs_link['support']['redirections'] = 'https://www.seopress.org/fr/support/guides/activer-redirections-301-surveillance-404/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        } else {
+                                            $seopress_docs_link['support']['redirections'] = 'http://www.seopress.org/support/guides/redirections/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        }
+                                    }
+                                ?>
+                                <a href="<?php echo $seopress_docs_link['support']['redirections']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                             </span>
                         </div>
                         <div class="seopress-feature">
@@ -1543,15 +1675,28 @@ class seopress_options
                         </div>
                         <div class="seopress-feature">
                             <div class="img-tool">
-                                <span class="dashicons dashicons-media-text"></span>                             
+                                <span class="dashicons dashicons-admin-links"></span>
                             </div>
                             <span class="inner">
-                                <h3><?php _e('.htaccess','wp-seopress'); ?></h3>
-                                <p><?php _e('Edit your htaccess file.','wp-seopress'); ?></p>
-                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess$7' ); ?>"><?php _e('Manage','wp-seopress'); ?>
-                                </a>
+                                <h3><?php _e('Backlinks','wp-seopress'); ?></h3>
+                                <p><?php _e('Check your backlinks with Majestic API.','wp-seopress'); ?></p>
+                                <a class="button-secondary view-redirects" href="<?php echo admin_url( 'edit.php?post_type=seopress_backlinks' ); ?>"><?php _e('See backlinks','wp-seopress'); ?></a>
+                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_backlinks$12' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                             </span>
                         </div>
+                        <?php if (!is_multisite()) { ?>
+                            <div class="seopress-feature">
+                                <div class="img-tool">
+                                    <span class="dashicons dashicons-media-text"></span>                             
+                                </div>
+                                <span class="inner">
+                                    <h3><?php _e('.htaccess','wp-seopress'); ?></h3>
+                                    <p><?php _e('Edit your htaccess file.','wp-seopress'); ?></p>
+                                    <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess$7' ); ?>"><?php _e('Manage','wp-seopress'); ?>
+                                    </a>
+                                </span>
+                            </div>
+                        <?php } ?>
                         <div class="seopress-feature">
                             <div class="img-tool">
                                 <span class="dashicons dashicons-rss"></span>                             
@@ -1572,7 +1717,16 @@ class seopress_options
                             <h3><?php _e('Tools','wp-seopress'); ?></h3>
                             <p><?php _e('Import / export SEOPress settings from site to site.','wp-seopress'); ?></p>
                             <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                            <a href="https://www.seopress.org/support/guides/export-import-reset-settings/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                            <?php
+                                if (function_exists('seopress_get_locale')) {
+                                    if (seopress_get_locale() =='fr') {
+                                        $seopress_docs_link['support']['export'] = 'https://www.seopress.org/fr/support/guides/exporter-importer-remise-a-niveau-parametres/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    } else {
+                                        $seopress_docs_link['support']['export'] = 'https://www.seopress.org/support/guides/export-import-reset-settings/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                    }
+                                }
+                            ?>
+                            <a href="<?php echo $seopress_docs_link['support']['export']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                         </span>
                     </div>
                     <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
@@ -1584,7 +1738,16 @@ class seopress_options
                                 <h3><?php _e('License','wp-seopress'); ?></h3>
                                 <p><?php _e('Edit your SEOPress license key.','wp-seopress'); ?></p>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-license' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
-                                <a href="https://www.seopress.org/support/guides/activate-seopress-pro-license/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
+                                <?php
+                                    if (function_exists('seopress_get_locale')) {
+                                        if (seopress_get_locale() =='fr') {
+                                            $seopress_docs_link['support']['license'] = 'https://www.seopress.org/fr/support/guides/activer-licence-seopress-pro/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        } else {
+                                            $seopress_docs_link['support']['license'] = 'https://www.seopress.org/support/guides/activate-seopress-pro-license/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        }
+                                    }
+                                ?>
+                                <a href="<?php echo $seopress_docs_link['support']['license']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>
                             </span>
                         </div>
                     <?php } ?>
@@ -2292,6 +2455,14 @@ class seopress_options
         );  
 
         add_settings_field(
+            'seopress_google_analytics_link_tracking_enable', // ID
+           __("Enable external links tracking (all links with target _blank attribute)","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_link_tracking_enable_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-events', // Page
+            'seopress_setting_section_google_analytics_events' // Section                  
+        );
+
+        add_settings_field(
             'seopress_google_analytics_download_tracking_enable', // ID
            __("Enable downloads tracking (eg: PDF, XLSX, DOCX...)","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_download_tracking_enable_callback' ), // Callback
@@ -2303,6 +2474,22 @@ class seopress_options
             'seopress_google_analytics_download_tracking', // ID
            __("Track click downloads","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_download_tracking_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-events', // Page
+            'seopress_setting_section_google_analytics_events' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_affiliate_tracking_enable', // ID
+           __("Enable affiliate / outbound links tracking (eg: aff, go, out, recommends","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_affiliate_tracking_enable_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-events', // Page
+            'seopress_setting_section_google_analytics_events' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_affiliate_tracking', // ID
+           __("Track affiliate / outbound links","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_affiliate_tracking_callback' ), // Callback
             'seopress-settings-admin-google-analytics-events', // Page
             'seopress_setting_section_google_analytics_events' // Section                  
         );
@@ -2690,7 +2877,16 @@ class seopress_options
     public function print_section_info_google_analytics_custom_dimensions()
     {
         print __('<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom metrics are like default dimensions and metrics in your Analytics account,<br> except you create them yourself. You can use them to collect and analyze data that Analytics doesn\'t automatically track.<br> Notice that you have to setup your custom dimensions in your Google Analytics account too. More info by clicking on help icon.', 'wp-seopress');
-        echo '<a class="seopress-doc" href="https://www.seopress.org/support/guides/create-custom-dimension-google-analytics/" target="_blank"><span class="dashicons dashicons-editor-help"></span></a></p>';
+        
+        if (function_exists('seopress_get_locale')) {
+            if (seopress_get_locale() =='fr') {
+                $seopress_docs_link['support']['analytics']['custom_dimensions'] = 'https://www.seopress.org/fr/support/guides/creer-dimensions-personnalisees-google-analytics/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            } else {
+                $seopress_docs_link['support']['analytics']['custom_dimensions'] = 'https://www.seopress.org/support/guides/create-custom-dimension-google-analytics/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            }
+        }
+                        
+        echo '<a class="seopress-doc" href="'.$seopress_docs_link['support']['analytics']['custom_dimensions'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span></a></p>';
     }
 
     public function print_section_info_advanced_advanced()
@@ -3408,7 +3604,15 @@ class seopress_options
         
         echo '<label for="seopress_xml_sitemap_general_enable">'. __( 'Enable XML Sitemap', 'wp-seopress' ) .'</label>';
         
-        echo '<a href="https://www.seopress.org/support/guides/enable-xml-sitemaps/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
+        if (function_exists('seopress_get_locale')) {
+            if (seopress_get_locale() =='fr') {
+                $seopress_docs_link['support']['sitemaps'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            } else {
+                $seopress_docs_link['support']['sitemaps'] = 'https://www.seopress.org/support/guides/enable-xml-sitemaps/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            }
+        }
+
+        echo '<a href="'.$seopress_docs_link['support']['sitemaps'].'" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
 
         if (isset($this->options['seopress_xml_sitemap_general_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_general_enable']);
@@ -3427,7 +3631,15 @@ class seopress_options
         
         echo '<label for="seopress_xml_sitemap_img_enable">'. __( 'Enable Image Sitemaps', 'wp-seopress' ) .'</label>';
 
-        echo '<a href="https://www.seopress.org/support/guides/enable-xml-image-sitemaps/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
+        if (function_exists('seopress_get_locale')) {
+            if (seopress_get_locale() =='fr') {
+                $seopress_docs_link['support']['sitemaps']['image'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml-images/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            } else {
+                $seopress_docs_link['support']['sitemaps']['image'] = 'https://www.seopress.org/support/guides/enable-xml-image-sitemaps/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            }
+        }
+
+        echo '<a href="'.$seopress_docs_link['support']['sitemaps']['image'].'" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
         
         if (isset($this->options['seopress_xml_sitemap_img_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_img_enable']);
@@ -3446,7 +3658,15 @@ class seopress_options
         
         echo '<label for="seopress_xml_sitemap_html_enable">'. __( 'Enable HTML Sitemap', 'wp-seopress' ) .'</label>';
 
-        echo '<a href="https://www.seopress.org/support/guides/enable-html-sitemap/" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
+        if (function_exists('seopress_get_locale')) {
+            if (seopress_get_locale() =='fr') {
+                $seopress_docs_link['support']['sitemaps']['html'] = 'https://www.seopress.org/fr/support/guides/activer-plan-de-site-html/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            } else {
+                $seopress_docs_link['support']['sitemaps']['html'] = 'https://www.seopress.org/support/guides/enable-html-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            }
+        }
+
+        echo '<a href="'.$seopress_docs_link['support']['sitemaps']['html'].'" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span></a>';
         
         if (isset($this->options['seopress_xml_sitemap_html_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_html_enable']);
@@ -4074,6 +4294,23 @@ class seopress_options
         
     }
 
+    public function seopress_google_analytics_link_tracking_enable_callback()
+    {
+        $options = get_option( 'seopress_google_analytics_option_name' );  
+        
+        $check = isset($options['seopress_google_analytics_link_tracking_enable']);      
+        
+        echo '<input id="seopress_google_analytics_link_tracking_enable" name="seopress_google_analytics_option_name[seopress_google_analytics_link_tracking_enable]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_google_analytics_link_tracking_enable">'. __( 'Enable external links tracking', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_google_analytics_link_tracking_enable'])) {
+            esc_attr( $this->options['seopress_google_analytics_link_tracking_enable']);
+        }
+    }
+
     public function seopress_google_analytics_download_tracking_enable_callback()
     {
         $options = get_option( 'seopress_google_analytics_option_name' );  
@@ -4093,12 +4330,45 @@ class seopress_options
 
     public function seopress_google_analytics_download_tracking_callback()
     {
+        $check = isset($this->options['seopress_google_analytics_download_tracking']) ? $this->options['seopress_google_analytics_download_tracking'] : NULL;
+
         printf(
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_download_tracking]" placeholder="'.__('pdf|docx|pptx|zip','wp-seopress').'" value="%s"/>',
-        esc_html( $this->options['seopress_google_analytics_download_tracking'])
+        esc_html( $check)
         );
 
         echo '<p class="description">'. __('Separate each file type extensions with a pipe "|"','wp-seopress').'</a>
+            </p>';
+        
+    }
+
+    public function seopress_google_analytics_affiliate_tracking_enable_callback()
+    {
+        $options = get_option( 'seopress_google_analytics_option_name' );  
+        
+        $check = isset($options['seopress_google_analytics_affiliate_tracking_enable']);      
+        
+        echo '<input id="seopress_google_analytics_affiliate_tracking_enable" name="seopress_google_analytics_option_name[seopress_google_analytics_affiliate_tracking_enable]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_google_analytics_affiliate_tracking_enable">'. __( 'Enable affiliate / outbound tracking', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_google_analytics_affiliate_tracking_enable'])) {
+            esc_attr( $this->options['seopress_google_analytics_affiliate_tracking_enable']);
+        }
+    }
+
+    public function seopress_google_analytics_affiliate_tracking_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_affiliate_tracking']) ? $this->options['seopress_google_analytics_affiliate_tracking'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_affiliate_tracking]" placeholder="'.__('aff|go|out','wp-seopress').'" value="%s"/>',
+        esc_html( $check)
+        );
+
+        echo '<p class="description">'. __('Separate each keyword with a pipe "|"','wp-seopress').'</a>
             </p>';
         
     }

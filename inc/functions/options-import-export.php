@@ -232,3 +232,123 @@ function seopress_bot_links_export_settings() {
     exit;
 }
 add_action( 'admin_init', 'seopress_bot_links_export_settings' );
+
+//Export SEOPress Backlinks in CSV
+function seopress_backlinks_export_settings() {
+    if( empty( $_POST['seopress_action'] ) || 'export_backlinks_settings' != $_POST['seopress_action'] )
+        return;
+        
+    if( ! wp_verify_nonce( $_POST['seopress_export_backlinks_nonce'], 'seopress_export_backlinks_nonce' ) )
+        return;
+    
+    if( ! current_user_can( 'manage_options' ) )
+        return;
+
+    $args = array(
+        'post_type' => 'seopress_backlinks',
+        'posts_per_page' => 1000,
+        'post_status' => 'publish',
+        'order' => 'DESC',
+        'orderby' => 'date',
+    );
+    $the_query = new WP_Query( $args );
+    
+    $settings["URL"] = array();
+    $settings["Anchor_text"] = array();
+    $settings["Source_citation_flow"] = array();
+    $settings["Source_trust_flow"] = array();     
+    $settings["Target_citation_flow"] = array();
+    $settings["Target_trust_flow"] = array(); 
+    $settings["Found_date"] = array(); 
+    $settings["Last_update"] = array(); 
+    
+    $csv_fields = array();
+    $csv_fields[] = 'URL';
+    $csv_fields[] = 'Anchor Text';
+    $csv_fields[] = 'Source Citation Flow';
+    $csv_fields[] = 'Source Trust Flow';    
+    $csv_fields[] = 'Target Citation Flow';
+    $csv_fields[] = 'Target Trust Flow';
+    $csv_fields[] = 'First indexed';
+    $csv_fields[] = 'Last Update';
+    
+    $output_handle = @fopen( 'php://output', 'w' );
+    
+    //Insert header row
+    fputcsv( $output_handle, $csv_fields );
+    
+    //Header
+    ignore_user_abort( true );
+    nocache_headers();
+    header( 'Content-Type: text/csv; charset=utf-8' );
+    header( 'Content-Disposition: attachment; filename=seopress-backlinks-export-' . date( 'm-d-Y' ) . '.csv' );
+    header( 'Expires: 0' );
+    header( 'Pragma: public' );
+    
+    // The Loop
+    if ( $the_query->have_posts() ) {
+        while ( $the_query->have_posts() ) {
+            $the_query->the_post();
+            
+            array_push($settings["URL"], get_the_title());
+            
+            if (get_post_meta( get_the_ID(), 'seopress_backlinks_anchor_text', true ) !='') {
+                array_push($settings["Anchor_text"], get_post_meta( get_the_ID(), 'seopress_backlinks_anchor_text', true ));    
+            }
+
+            if (get_post_meta( get_the_ID(), 'seopress_backlinks_source_citation_flow', true ) !='') {
+                array_push($settings["Source_citation_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_source_citation_flow', true ));    
+            }
+
+            if (get_post_meta( get_the_ID(), 'seopress_backlinks_source_trust_flow', true ) !='') {
+                array_push($settings["Source_trust_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_source_trust_flow', true ));    
+            }
+
+            if (get_post_meta( get_the_ID(), 'seopress_backlinks_target_citation_flow', true ) !='') {
+                array_push($settings["Target_citation_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_target_citation_flow', true ));    
+            }
+
+            if (get_post_meta( get_the_ID(), 'seopress_backlinks_target_trust_flow', true ) !='') {
+                array_push($settings["Target_trust_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_target_trust_flow', true ));    
+            }
+
+            if (get_post_meta( get_the_ID(), 'seopress_backlinks_found_date', true ) !='') {
+                array_push($settings["Found_date"], get_post_meta( get_the_ID(), 'seopress_backlinks_found_date', true ));    
+            }
+
+            if (get_post_meta( get_the_ID(), 'seopress_backlinks_last_update', true ) !='') {
+                array_push($settings["Last_update"], get_post_meta( get_the_ID(), 'seopress_backlinks_last_update', true ));    
+            }
+
+            fputcsv( $output_handle, array_merge(
+                        $settings["URL"], 
+                        $settings["Anchor_text"], 
+                        $settings["Source_citation_flow"], 
+                        $settings["Source_trust_flow"], 
+                        $settings["Target_citation_flow"], 
+                        $settings["Target_trust_flow"],
+                        $settings["Found_date"], 
+                        $settings["Last_update"]
+                    )
+            );
+            
+            //Clean arrays
+            $settings["URL"] = array();
+            $settings["Anchor_text"] = array();
+            $settings["Source_citation_flow"] = array();
+            $settings["Source_trust_flow"] = array();
+            $settings["Target_citation_flow"] = array();
+            $settings["Target_trust_flow"] = array();
+            $settings["Found_date"] = array();
+            $settings["Last_update"] = array();
+
+        }
+        wp_reset_postdata();
+    }    
+    
+    // Close output file stream
+    fclose( $output_handle );
+    
+    exit;
+}
+add_action( 'admin_init', 'seopress_backlinks_export_settings' );
