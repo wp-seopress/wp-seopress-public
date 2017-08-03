@@ -126,9 +126,11 @@ echo '<div id="seopress-tabs">';
             }
             echo '<li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirection', 'wp-seopress' ) .'</a></li>';
             if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
-                if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
-                    if ("seopress_404" != $typenow) {
-                        echo '<li><a href="#tabs-5"><span class="dashicons dashicons-admin-post"></span>'. __( 'Google News', 'wp-seopress-pro' ) .'</a></li>';
+                if (seopress_get_toggle_news_option() =='1') {
+                    if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                        if ("seopress_404" != $typenow) {
+                            echo '<li><a href="#tabs-5"><span class="dashicons dashicons-admin-post"></span>'. __( 'Google News', 'wp-seopress-pro' ) .'</a></li>';
+                        }
                     }
                 }
             }
@@ -280,33 +282,35 @@ echo            '<a href="" id="seopress_redirections_value_live" class="button"
             </p>
         </div>';
     if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
-        if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
-            if ("seopress_404" != $typenow) { 
-                echo '<div id="tabs-5">
-                    <p>
-                        <label for="seopress_news_disabled_meta" id="seopress_news_disabled">
-                            <input type="checkbox" name="seopress_news_disabled" id="seopress_news_disabled_meta" value="yes" '. checked( $seopress_news_disabled, 'yes', false ) .' />
-                                '. __( 'Exclude this post from Google News Sitemap?', 'wp-seopress' ) .'
-                        </label>
-                    </p>
-                    <p>
-                        <label for="seopress_news_genres_meta">'. __( 'Google News Genres', 'wp-seopress' ) .'</label>
-                        <select name="seopress_news_genres">
-                            <option ' . selected( 'none', $seopress_news_genres, false ) . ' value="none">'. __( 'None', 'wp-seopress' ) .'</option>
-                            <option ' . selected( 'pressrelease', $seopress_news_genres, false ) . ' value="pressrelease">'. __( 'Press Release', 'wp-seopress' ) .'</option>
-                            <option ' . selected( 'satire', $seopress_news_genres, false ) . ' value="satire">'. __( 'Satire', 'wp-seopress' ) .'</option>
-                            <option ' . selected( 'blog', $seopress_news_genres, false ) . ' value="blog">'. __( 'Blog', 'wp-seopress' ) .'</option>
-                            <option ' . selected( 'oped', $seopress_news_genres, false ) . ' value="oped">'. __( 'OpEd', 'wp-seopress' ) .'</option>
-                            <option ' . selected( 'opinion', $seopress_news_genres, false ) . ' value="opinion">'. __( 'Opinion', 'wp-seopress' ) .'</option>
-                            <option ' . selected( 'usergenerated', $seopress_news_genres, false ) . ' value="usergenerated">'. __( 'UserGenerated', 'wp-seopress' ) .'</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label for="seopress_news_keyboard_meta" id="seopress_news_keyboard">
-                            '. __( 'Google News Keywords <em>(max recommended limit: 12)</em>', 'wp-seopress' ) .'</label>
-                            <input id="seopress_news_keyboard_meta" type="text" name="seopress_news_keyboard" placeholder="'.__('Enter your Google News Keywords','wp-seopress').'" value="'.$seopress_news_keyboard.'" />
-                    </p>
-                </div>';
+        if (seopress_get_toggle_news_option() =='1') {
+            if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                if ("seopress_404" != $typenow) { 
+                    echo '<div id="tabs-5">
+                        <p>
+                            <label for="seopress_news_disabled_meta" id="seopress_news_disabled">
+                                <input type="checkbox" name="seopress_news_disabled" id="seopress_news_disabled_meta" value="yes" '. checked( $seopress_news_disabled, 'yes', false ) .' />
+                                    '. __( 'Exclude this post from Google News Sitemap?', 'wp-seopress' ) .'
+                            </label>
+                        </p>
+                        <p>
+                            <label for="seopress_news_genres_meta">'. __( 'Google News Genres', 'wp-seopress' ) .'</label>
+                            <select name="seopress_news_genres">
+                                <option ' . selected( 'none', $seopress_news_genres, false ) . ' value="none">'. __( 'None', 'wp-seopress' ) .'</option>
+                                <option ' . selected( 'pressrelease', $seopress_news_genres, false ) . ' value="pressrelease">'. __( 'Press Release', 'wp-seopress' ) .'</option>
+                                <option ' . selected( 'satire', $seopress_news_genres, false ) . ' value="satire">'. __( 'Satire', 'wp-seopress' ) .'</option>
+                                <option ' . selected( 'blog', $seopress_news_genres, false ) . ' value="blog">'. __( 'Blog', 'wp-seopress' ) .'</option>
+                                <option ' . selected( 'oped', $seopress_news_genres, false ) . ' value="oped">'. __( 'OpEd', 'wp-seopress' ) .'</option>
+                                <option ' . selected( 'opinion', $seopress_news_genres, false ) . ' value="opinion">'. __( 'Opinion', 'wp-seopress' ) .'</option>
+                                <option ' . selected( 'usergenerated', $seopress_news_genres, false ) . ' value="usergenerated">'. __( 'UserGenerated', 'wp-seopress' ) .'</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="seopress_news_keyboard_meta" id="seopress_news_keyboard">
+                                '. __( 'Google News Keywords <em>(max recommended limit: 12)</em>', 'wp-seopress' ) .'</label>
+                                <input id="seopress_news_keyboard_meta" type="text" name="seopress_news_keyboard" placeholder="'.__('Enter your Google News Keywords','wp-seopress').'" value="'.$seopress_news_keyboard.'" />
+                        </p>
+                    </div>';
+                }
             }
         }
     }

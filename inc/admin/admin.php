@@ -805,6 +805,24 @@ class seopress_options
                         <?php if(seopress_advanced_appearance_notifications_option() !='1') { ?>
                             <div id="tab_seopress_notifications" class="seopress-tab <?php if ($current_tab == 'tab_seopress_notifications') { echo 'active'; } ?>">
                                 <div id="seopress-notifications-center">
+                                    <?php if (get_theme_support('title-tag') !='1') { ?>
+                                        <div class="seopress-alert">
+                                            <p>
+                                                <span class="dashicons dashicons-warning"></span>
+                                                <?php _e('Your theme doesn\'t use <strong>add_theme_support(\'title-tag\');</strong>','wp-seopress'); ?>
+                                                <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
+                                            </p>
+                                            <?php
+                                            if (function_exists('seopress_get_locale')) {
+                                                if (seopress_get_locale() =='fr') {
+                                                    $seopress_docs_link['support']['title-tag'] = 'https://www.seopress.org/fr/support/guides/resoudre-add_theme_support-manquant-dans-votre-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                                } else {
+                                                    $seopress_docs_link['support']['title-tag'] = 'https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                                }
+                                            } ?>
+                                            <?php echo '<a class="button-primary" href="'.$seopress_docs_link['support']['title-tag'].'" target="_blank">'.__('Learn more','wp-seopress').'</a>'; ?>
+                                        </div>
+                                    <?php } ?>
                                     <?php if (is_plugin_active('wordpress-seo/wp-seo.php')) { ?>
                                         <div class="seopress-alert">
                                             <p>
@@ -2141,6 +2159,14 @@ class seopress_options
             'seopress_setting_section_html_sitemap' // Section                  
         );
 
+        add_settings_field(
+            'seopress_xml_sitemap_html_date', // ID
+           __("Disable the display of the publication date","wp-seopress"), // Title
+            array( $this, 'seopress_xml_sitemap_html_date_callback' ), // Callback
+            'seopress-settings-admin-html-sitemap', // Page
+            'seopress_setting_section_html_sitemap' // Section                  
+        );
+
         //Knowledge graph SECTION======================================================================
         add_settings_section( 
             'seopress_setting_section_social_knowledge', // ID
@@ -2826,7 +2852,17 @@ class seopress_options
 
     public function print_section_info_html_sitemap()
     {
-        print __('<p>Create an HTML for your visitors and boost your SEO</p>', 'wp-seopress');
+        print __('<p>Create an HTML for your visitors and boost your SEO.</p>', 'wp-seopress');
+
+        if (function_exists('seopress_get_locale')) {
+            if (seopress_get_locale() =='fr') {
+                $seopress_docs_link['sitemaps']['html'] = 'https://www.seopress.org/fr/support/guides/activer-plan-de-site-html/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            } else {
+                $seopress_docs_link['sitemaps']['html'] = 'https://www.seopress.org/support/guides/enable-html-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+            }
+        }
+
+        echo '<a class="seopress-doc" href="'.$seopress_docs_link['sitemaps']['html'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span></a></p>';
     }
 
     public function print_section_info_xml_sitemap_post_types()
@@ -3764,6 +3800,10 @@ class seopress_options
         '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_mapping]" placeholder="'.__('eg: 2, 28, 68','wp-seopress').'" value="%s"/>',
         esc_html( $check )
         );
+
+        echo '<br><br><p>'.__('You can also use this shorcode:','wp-seopress').'</p>';
+
+        echo '<pre>[seopress_html_sitemap]</pre>';
     }
 
     public function seopress_xml_sitemap_html_exclude_callback()
@@ -3775,7 +3815,24 @@ class seopress_options
         esc_html( $check )
         );
     }
-    
+
+    public function seopress_xml_sitemap_html_date_callback()
+    {
+        $options = get_option( 'seopress_xml_sitemap_option_name' );  
+        
+        $check = isset($options['seopress_xml_sitemap_html_date']);      
+        
+        echo '<input id="seopress_xml_sitemap_html_date" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_date]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_xml_sitemap_html_date">'. __( 'Disable date after each post, page, post type?', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_xml_sitemap_html_date'])) {
+            esc_attr( $this->options['seopress_xml_sitemap_html_date']);
+        }
+    }
+
     public function seopress_social_knowledge_type_callback()
     {
         $options = get_option( 'seopress_social_option_name' );    

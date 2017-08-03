@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-	jQuery('#seopress-flush-permalinks').on('click', function() {
+	jQuery('#seopress-flush-permalinks,#seopress-flush-permalinks2').on('click', function() {
 		jQuery.ajax({
 			method : 'GET',
 			url : seopressAjaxResetPermalinks.seopress_flush_permalinks,
@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 	});
 });
 jQuery(document).ready(function(){
-	jQuery('#seopress-flush-permalinks').on('click', function() {
+	jQuery('#seopress-flush-permalinks,#seopress-flush-permalinks2').on('click', function() {
 		jQuery(this).attr("disabled", "disabled");
 		jQuery( '.spinner' ).css( "visibility", "visible" );
 		jQuery( '.spinner' ).css( "float", "none" );

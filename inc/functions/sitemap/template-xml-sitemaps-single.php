@@ -59,7 +59,7 @@ function seopress_xml_sitemap_single() {
 						//WooCommerce
 						global $product;
 						if ($product !='') {
-							$product_img = $product->get_gallery_attachment_ids();
+							$product_img = $product->get_gallery_image_ids();
 						}
 
 						//Galleries
@@ -80,7 +80,7 @@ function seopress_xml_sitemap_single() {
 								        $seopress_sitemaps .= '<image:image>';
 								        $seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
-										$seopress_sitemaps .= '<![CDATA['.$url.']]>';
+										$seopress_sitemaps .= '<![CDATA['.utf8_decode(urldecode($url)).']]>';
 								        $seopress_sitemaps .= '</image:loc>';
 								        $seopress_sitemaps .= "\n";
 								        $seopress_sitemaps .= '</image:image>';
@@ -94,7 +94,7 @@ function seopress_xml_sitemap_single() {
 										$seopress_sitemaps .= '<image:image>';
 										$seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
-										$seopress_sitemaps .= '<![CDATA['.$url.']]>';
+										$seopress_sitemaps .= '<![CDATA['.utf8_decode(urldecode($url)).']]>';
 								        $seopress_sitemaps .= '</image:loc>';
 								        $seopress_sitemaps .= "\n";
 								        $seopress_sitemaps .= '</image:image>';

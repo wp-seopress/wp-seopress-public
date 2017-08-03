@@ -39,10 +39,26 @@ function seopress_xml_sitemap_html_exclude_option() {
 	}
 }
 
-if (seopress_xml_sitemap_html_enable_option() =='1' && seopress_xml_sitemap_html_mapping_option() !='') {
+//HTML Sitemap Date
+function seopress_xml_sitemap_html_date_option() {
+	$seopress_xml_sitemap_html_date_option = get_option("seopress_xml_sitemap_option_name");
+	if ( ! empty ( $seopress_xml_sitemap_html_date_option ) ) {
+		foreach ($seopress_xml_sitemap_html_date_option as $key => $seopress_xml_sitemap_html_date_value)
+			$options[$key] = $seopress_xml_sitemap_html_date_value;
+		 if (isset($seopress_xml_sitemap_html_date_option['seopress_xml_sitemap_html_date'])) { 
+		 	return $seopress_xml_sitemap_html_date_option['seopress_xml_sitemap_html_date'];
+		 }
+	}
+}
+
+if (seopress_xml_sitemap_html_enable_option() =='1') {
 	function seopress_xml_sitemap_html_display() {
-		if(is_page(explode(',', seopress_xml_sitemap_html_mapping_option()))) {	
-			function seopress_xml_sitemap_html_hook($content) {
+		if (seopress_xml_sitemap_html_mapping_option() !='') {
+			if(is_page(explode(',', seopress_xml_sitemap_html_mapping_option()))) {	
+				add_filter('the_content', 'seopress_xml_sitemap_html_hook');
+			}
+		}
+		function seopress_xml_sitemap_html_hook($content) {
 				if (seopress_xml_sitemap_html_exclude_option() !='') {
 					$seopress_xml_sitemap_html_exclude_option = seopress_xml_sitemap_html_exclude_option();
 				} else {
@@ -63,7 +79,9 @@ if (seopress_xml_sitemap_html_enable_option() =='1' && seopress_xml_sitemap_html
 								  	setup_postdata( $post );
 								  	$content .= '<li>';
 									$content .= '<a href="'.get_permalink($post).'">'.get_the_title($post).'</a>';
-									$content .= ' - '.get_the_date('j F Y', $post);
+									if (seopress_xml_sitemap_html_date_option() !='1') {
+										$content .= ' - '.get_the_date('j F Y', $post);
+									}
 									$content .= '</li>';
 								}
 								wp_reset_postdata();
@@ -76,8 +94,8 @@ if (seopress_xml_sitemap_html_enable_option() =='1' && seopress_xml_sitemap_html
 			    
 			    return $content;
 			}
-			add_filter('the_content', 'seopress_xml_sitemap_html_hook');
-		}
 	}
 	add_action('wp_head', 'seopress_xml_sitemap_html_display');
+
+	add_shortcode( 'seopress_html_sitemap', 'seopress_xml_sitemap_html_hook' );
 }
