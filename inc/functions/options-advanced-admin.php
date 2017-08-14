@@ -3,25 +3,6 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 
 //Advanced
 //=================================================================================================
-//Admin bar
-function seopress_advanced_appearance_adminbar_option() {
-	$seopress_advanced_appearance_adminbar_option = get_option("seopress_advanced_option_name");
-	if ( ! empty ( $seopress_advanced_appearance_adminbar_option ) ) {
-		foreach ($seopress_advanced_appearance_adminbar_option as $key => $seopress_advanced_appearance_adminbar_value)
-			$options[$key] = $seopress_advanced_appearance_adminbar_value;
-		 if (isset($seopress_advanced_appearance_adminbar_option['seopress_advanced_appearance_adminbar'])) { 
-		 	return $seopress_advanced_appearance_adminbar_option['seopress_advanced_appearance_adminbar'];
-		 }
-	}
-}
-
-if (seopress_advanced_appearance_adminbar_option() !='') {
-	add_action( 'admin_bar_menu', 'seopress_advanced_appearance_adminbar_hook', 999 );
-
-	function seopress_advanced_appearance_adminbar_hook( $wp_admin_bar ) {
-		$wp_admin_bar->remove_node( 'seopress_custom_top_level' );
-	}
-}
 
 //Metaboxe position
 function seopress_advanced_appearance_metaboxe_position_option() {

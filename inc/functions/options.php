@@ -116,6 +116,25 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		if (is_admin()){	
 		    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
 		}
+		//Admin bar
+		function seopress_advanced_appearance_adminbar_option() {
+			$seopress_advanced_appearance_adminbar_option = get_option("seopress_advanced_option_name");
+			if ( ! empty ( $seopress_advanced_appearance_adminbar_option ) ) {
+				foreach ($seopress_advanced_appearance_adminbar_option as $key => $seopress_advanced_appearance_adminbar_value)
+					$options[$key] = $seopress_advanced_appearance_adminbar_value;
+				if (isset($seopress_advanced_appearance_adminbar_option['seopress_advanced_appearance_adminbar'])) { 
+					return $seopress_advanced_appearance_adminbar_option['seopress_advanced_appearance_adminbar'];
+				}
+			}
+		}
+
+		if (seopress_advanced_appearance_adminbar_option() !='') {
+			add_action( 'admin_bar_menu', 'seopress_advanced_appearance_adminbar_hook', 999 );
+
+			function seopress_advanced_appearance_adminbar_hook( $wp_admin_bar ) {
+				$wp_admin_bar->remove_node( 'seopress_custom_top_level' );
+			}
+		}
 	}
 	//No /category/ in URL
 	function seopress_advanced_advanced_category_url_option() {

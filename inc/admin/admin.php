@@ -218,6 +218,26 @@ class seopress_options
                 'title' => __('Templates variables'),
                 'content'   => $seopress_titles_help_tab_content,
             ));
+
+            if (function_exists('seopress_get_locale')) {
+                if (seopress_get_locale() =='fr') {
+                    $screen->set_help_sidebar(
+                        '<ul>
+                            <li><a href="https://www.seopress.org/fr/support/guides/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Browse our guides","wp-seopress").'</a></li>
+                            <li><a href="https://www.seopress.org/fr/support/faq/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our FAQ","wp-seopress").'</a></li>
+                            <li><a href="https://www.seopress.org/fr/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Check our website","wp-seopress").'</a></li>
+                        </ul>'
+                    );
+                } else {
+                    $screen->set_help_sidebar(
+                        '<ul>
+                            <li><a href="https://www.seopress.org/support/guides/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Browse our guides","wp-seopress").'</a></li>
+                            <li><a href="https://www.seopress.org/support/faq/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our FAQ","wp-seopress").'</a></li>
+                            <li><a href="https://www.seopress.org/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Check our website","wp-seopress").'</a></li>
+                        </ul>'
+                    );
+                }
+            }
         }
         add_action('load-'.$seopress_titles_help_tab, 'seopress_titles_help_tab');
     }
@@ -4941,7 +4961,7 @@ class seopress_options
         if ('1' == $check) echo 'checked="yes"'; 
         echo ' value="1"/>';
         
-        echo '<label for="seopress_advanced_appearance_adminbar">'. __( 'Remove SEOPress from Admin Bar in backend', 'wp-seopress' ) .'</label>';
+        echo '<label for="seopress_advanced_appearance_adminbar">'. __( 'Remove SEOPress from Admin Bar in backend and frontend', 'wp-seopress' ) .'</label>';
 
         if (isset($this->options['seopress_advanced_appearance_adminbar'])) {
             esc_attr( $this->options['seopress_advanced_appearance_adminbar']);

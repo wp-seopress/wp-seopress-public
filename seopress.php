@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best SEO plugin.
-Version: 2.1.3
+Version: 2.1.4
 Author: Benjamin DENIS
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '2.1.3' ); 
+define( 'SEOPRESS_VERSION', '2.1.4' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,11 +77,12 @@ function seopress_init($hook) {
         require_once dirname( __FILE__ ) . '/inc/admin/ajax.php';
         require_once dirname( __FILE__ ) . '/inc/admin/admin-header.php';
     }
+
+    require_once dirname( __FILE__ ) . '/inc/functions/options.php';
+
     if(current_user_can('edit_posts')) {
         require_once dirname( __FILE__ ) . '/inc/admin/adminbar.php';
     }
-
-    require_once dirname( __FILE__ ) . '/inc/functions/options.php';
     
     remove_action( 'wp_head', 'rel_canonical' ); //remove default WordPress Canonical
 }
@@ -243,8 +244,10 @@ add_action('admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1)
 
 //SEOPRESS Admin bar
 function seopress_admin_bar_css() {
-    wp_register_style( 'seopress-admin-bar', plugins_url('assets/css/seopress-admin-bar.min.css', __FILE__));
-    wp_enqueue_style( 'seopress-admin-bar' );
+    if (is_user_logged_in() && function_exists('seopress_advanced_appearance_adminbar_option') && seopress_advanced_appearance_adminbar_option() !='1') {
+        wp_register_style( 'seopress-admin-bar', plugins_url('assets/css/seopress-admin-bar.min.css', __FILE__));
+        wp_enqueue_style( 'seopress-admin-bar' );
+    }
 }
 
 add_action('init', 'seopress_admin_bar_css', 10, 1);

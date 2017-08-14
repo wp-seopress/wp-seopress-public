@@ -230,6 +230,9 @@
 /*************************************************************************************************/
 /* Admin - Options panel                                                                         */
 /*************************************************************************************************/
+body.seopress-styles {
+    background: rgb(248, 250, 253);
+}
 #seopress-content a {
     color: #3297d3;
 }
@@ -1170,7 +1173,7 @@
 /*************************************************************************************************/
 /* Admin - Dashboard                                                                             */
 /*************************************************************************************************/
-#screen-meta {
+.seopress-styles #screen-meta {
     margin: 0 0 0px 0;
     position: relative;
     background-color: rgb(255, 255, 255);
@@ -1180,7 +1183,7 @@
     box-shadow: 0 0 0 1px rgba(136,152,170,.1),0 15px 35px 0 rgba(49,49,93,.1),0 5px 15px 0 rgba(0,0,0,.08);
     top: 0;
 }
-#contextual-help-link-wrap, #screen-options-link-wrap {
+.seopress-styles #contextual-help-link-wrap, .seopress-styles #screen-options-link-wrap {
     float: right;
     height: 28px;
     margin: 0 0 0 6px;
@@ -1190,18 +1193,18 @@
     -webkit-box-shadow: 0 0 0 1px rgba(136,152,170,.1),0 15px 35px 0 rgba(49,49,93,.1),0 5px 15px 0 rgba(0,0,0,.08);
     box-shadow: 0 0 0 1px rgba(136,152,170,.1),0 15px 35px 0 rgba(49,49,93,.1),0 5px 15px 0 rgba(0,0,0,.08);
 }
-#screen-meta-links .show-settings {
+.seopress-styles #screen-meta-links .show-settings {
     box-shadow: none;
 }
-#screen-meta-links .screen-meta-toggle {
+.seopress-styles #screen-meta-links .screen-meta-toggle {
     position: relative;
     top: 0;
     z-index: 2000;
 }
-#contextual-help-back {
+.seopress-styles #contextual-help-back {
     background: rgb(248, 250, 253);
 }
-.contextual-help-tabs .active {
+.seopress-styles .contextual-help-tabs .active {
     border-left: 2px solid rgb(50, 151, 211);
     background: rgb(248, 250, 253);
 }
