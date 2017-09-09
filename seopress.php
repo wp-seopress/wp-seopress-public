@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best SEO plugin.
-Version: 2.1.4
+Version: 2.1.5
 Author: Benjamin DENIS
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '2.1.4' ); 
+define( 'SEOPRESS_VERSION', '2.1.5' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ function seopress_init($hook) {
 
     global $pagenow;
     
-    if ( is_admin() ) {
+    if ( is_admin() || is_network_admin() ) {
         require_once dirname( __FILE__ ) . '/inc/admin/admin.php';
         if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
             require_once dirname( __FILE__ ) . '/inc/admin/admin-metaboxes.php';
@@ -194,14 +194,14 @@ function seopress_add_admin_options_scripts($hook) {
         wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs4.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
     }
 
-    if (isset($_GET['page']) && ($_GET['page'] == 'seopress-xml-sitemap' || $_GET['page'] == 'seopress-pro-page') ) {
+    if (isset($_GET['page']) && ($_GET['page'] == 'seopress-xml-sitemap' || $_GET['page'] == 'seopress-pro-page' || $_GET['page'] == 'seopress-network-option' )) {
         wp_enqueue_script( 'seopress-xml-ajax', plugins_url( 'assets/js/seopress-sitemap-ajax.js', __FILE__ ), array( 'jquery' ), '', true );
 
         $seopress_ajax_permalinks = array(
             'seopress_nonce' => wp_create_nonce('seopress_flush_permalinks_nonce'),
             'seopress_flush_permalinks' => admin_url('options-permalink.php'),
         );
-        wp_localize_script( 'seopress-xml-ajax', 'seopressAjaxResetPermalinks', $seopress_ajax_permalinks ); 
+            wp_localize_script( 'seopress-xml-ajax', 'seopressAjaxResetPermalinks', $seopress_ajax_permalinks ); 
     
     }
 

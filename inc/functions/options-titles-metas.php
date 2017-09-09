@@ -386,10 +386,10 @@ if (get_option('blog_public') =='1') {
 		}
 
 		if (get_the_excerpt() !='') {
-			$seopress_get_the_excerpt = wp_trim_words(wp_filter_nohtml_kses(get_the_excerpt()), 30);
+			$seopress_get_the_excerpt = wp_trim_words(esc_attr(wp_filter_nohtml_kses(get_the_excerpt()), 30));
 		} elseif ($post !='') {
 			if (get_post_field('post_content', $post->ID) !='') {
-				$seopress_get_the_excerpt = wp_trim_words(wp_filter_nohtml_kses(get_post_field('post_content', $post->ID)), 30);
+				$seopress_get_the_excerpt = wp_trim_words(esc_attr(wp_filter_nohtml_kses(get_post_field('post_content', $post->ID)), 30));
 			} else {
 				$seopress_get_the_excerpt = null;
 			}

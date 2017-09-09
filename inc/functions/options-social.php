@@ -492,7 +492,7 @@ function seopress_social_fb_desc_hook() {
 	 		echo "\n";
 	 	}
 	} elseif (seopress_social_facebook_og_option() && get_the_excerpt() !='') {
-		echo '<meta property="og:description" content="'.wp_trim_words(wp_filter_nohtml_kses(get_the_excerpt()), 30).'" />'; 
+		echo '<meta property="og:description" content="'.wp_trim_words(esc_attr(wp_filter_nohtml_kses(get_the_excerpt()), 30)).'" />'; 
  		echo "\n";
 	} 
 }
@@ -757,7 +757,7 @@ function seopress_social_twitter_desc_hook() {
 	 	}
 	} elseif (seopress_social_twitter_card_option() =='1' && get_the_excerpt() !='') { 
 		setup_postdata( $post );
-		echo '<meta name="twitter:description" content="'.wp_trim_words(wp_filter_nohtml_kses(get_the_excerpt()), 30).'" />';
+		echo '<meta name="twitter:description" content="'.wp_trim_words(esc_attr(wp_filter_nohtml_kses(get_the_excerpt()), 30)).'" />';
  		echo "\n";
 	}
 }

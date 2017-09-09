@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2017-08-11 20:48+0200\n"
-"PO-Revision-Date: 2017-08-11 20:48+0200\n"
+"POT-Creation-Date: 2017-08-22 17:01+0200\n"
+"PO-Revision-Date: 2017-08-22 17:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: fr_FR\n"
@@ -588,17 +588,15 @@ msgstr "Modèles de variables"
 
 #: inc/admin/admin.php:226 inc/admin/admin.php:234
 msgid "Browse our guides"
-msgstr ""
+msgstr "Consultez nos guides"
 
 #: inc/admin/admin.php:227 inc/admin/admin.php:235
 msgid "Read our FAQ"
-msgstr ""
+msgstr "Consultez notre FAQ"
 
 #: inc/admin/admin.php:228 inc/admin/admin.php:236
-#, fuzzy
-#| msgid "Our website"
 msgid "Check our website"
-msgstr "Notre site web"
+msgstr "Visitez notre site web"
 
 #: inc/admin/admin.php:256 inc/admin/admin.php:725
 msgid ""
@@ -2074,10 +2072,8 @@ msgid "Enter Yandex meta value site verification"
 msgstr "Entrer la meta de vérification de site Yandex"
 
 #: inc/admin/admin.php:4964
-#, fuzzy
-#| msgid "Remove SEOPress from Admin Bar in backend"
 msgid "Remove SEOPress from Admin Bar in backend and frontend"
-msgstr "Supprimer SEOPress de la barre d'outils dans l'administration"
+msgstr "Supprimer SEOPress de la barre d'outils"
 
 #: inc/admin/admin.php:4980
 msgid "High priority (top)"

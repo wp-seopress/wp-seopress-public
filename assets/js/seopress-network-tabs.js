@@ -61,4 +61,20 @@ jQuery(document).ready(function($) {
     jQuery('#seopress-tag-robots-6').click(function() {
         jQuery("#seopress_robots_file").val(jQuery("#seopress_robots_file").val() +'\n'+ jQuery('#seopress-tag-robots-6').attr('data-tag'));
     });
+    //Flush permalinks
+    jQuery('#seopress-flush-permalinks2').on('click', function() {
+        jQuery.ajax({
+            method : 'GET',
+            url : seopressAjaxResetPermalinks.seopress_flush_permalinks,
+            _ajax_nonce: seopressAjaxResetPermalinks.seopress_nonce,
+            success : function( data ) {
+                window.location.reload(true);
+            },
+        });
+    });
+    jQuery('#seopress-flush-permalinks2').on('click', function() {
+        jQuery(this).attr("disabled", "disabled");
+        jQuery( '.spinner' ).css( "visibility", "visible" );
+        jQuery( '.spinner' ).css( "float", "none" );
+    });
 });
