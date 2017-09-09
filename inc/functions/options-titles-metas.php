@@ -253,6 +253,44 @@ if (get_option('blog_public') =='1') {
 			$the_author_meta = get_the_author_meta('display_name', $post->post_author);
 		}
 
+		$woo_single_cat_html ='';
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+			if (is_product()) {
+				$woo_single_cats = get_the_terms( $post->ID, 'product_cat' );
+		                         
+				if ( $woo_single_cats && ! is_wp_error( $woo_single_cats ) ) {
+				 
+				    $woo_single_cat = array();
+				 
+				    foreach ( $woo_single_cats as $term ) {
+				        $woo_single_cat[] = $term->name;
+				    }
+		                         
+				    $woo_single_cat_html = wp_filter_nohtml_kses(join( ", ", $woo_single_cat ));
+				}
+			}
+		}
+
+		$woo_single_tag_html ='';
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+			if (is_product()) {
+				$woo_single_tags = get_the_terms( $post->ID, 'product_tag' );
+		                         
+				if ( $woo_single_tags && ! is_wp_error( $woo_single_tags ) ) {
+				 
+				    $woo_single_tag = array();
+				 
+				    foreach ( $woo_single_tags as $term ) {
+				        $woo_single_tag[] = $term->name;
+				    }
+
+				    $woo_single_tag_html = wp_filter_nohtml_kses(join( ", ", $woo_single_tag ));
+				}
+			}
+		}
+
 		$seopress_titles_template_variables_array = array(
 			'%%sitetitle%%', 
 			'%%tagline%%',
@@ -270,6 +308,9 @@ if (get_option('blog_public') =='1') {
 			'%%current_pagination%%',
 			'%%cpt_plural%%',
 			'%%archive_date%%',
+			'%%wc_single_cat%%',
+			'%%wc_single_tag%%',
+			'%%wc_single_short_desc%%',
 		);
 		$seopress_titles_template_replace_array = array(
 			get_bloginfo('name'), 
@@ -288,6 +329,9 @@ if (get_option('blog_public') =='1') {
 			$seopress_paged,
 			post_type_archive_title('', false),
 			get_the_archive_title(),
+			$woo_single_cat_html,
+			$woo_single_tag_html,
+			get_the_excerpt(),
 		);
 
 		if ( is_front_page() && is_home() && get_post_meta($post->ID,'_seopress_titles_title',true) =='') { //HOMEPAGE
@@ -397,6 +441,44 @@ if (get_option('blog_public') =='1') {
 			$seopress_get_the_excerpt = null;
 		}
 
+		$woo_single_cat_html ='';
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+			if (is_product()) {
+				$woo_single_cats = get_the_terms( $post->ID, 'product_cat' );
+		                         
+				if ( $woo_single_cats && ! is_wp_error( $woo_single_cats ) ) {
+				 
+				    $woo_single_cat = array();
+				 
+				    foreach ( $woo_single_cats as $term ) {
+				        $woo_single_cat[] = $term->name;
+				    }
+		                         
+				    $woo_single_cat_html = wp_filter_nohtml_kses(join( ", ", $woo_single_cat ));
+				}
+			}
+		}
+
+		$woo_single_tag_html ='';
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+			if (is_product()) {
+				$woo_single_tags = get_the_terms( $post->ID, 'product_tag' );
+		                         
+				if ( $woo_single_tags && ! is_wp_error( $woo_single_tags ) ) {
+				 
+				    $woo_single_tag = array();
+				 
+				    foreach ( $woo_single_tags as $term ) {
+				        $woo_single_tag[] = $term->name;
+				    }
+
+				    $woo_single_tag_html = wp_filter_nohtml_kses(join( ", ", $woo_single_tag ));
+				}
+			}
+		}
+
 		$seopress_titles_template_variables_array = array(
 			'%%sitetitle%%', 
 			'%%tagline%%',
@@ -414,6 +496,9 @@ if (get_option('blog_public') =='1') {
 			'%%current_pagination%%',
 			'%%cpt_plural%%',
 			'%%archive_date%%',
+			'%%wc_single_cat%%',
+			'%%wc_single_tag%%',
+			'%%wc_single_short_desc%%',
 		);
 		$seopress_titles_template_replace_array = array(
 			get_bloginfo('name'), 
@@ -432,6 +517,9 @@ if (get_option('blog_public') =='1') {
 			$seopress_paged,
 			post_type_archive_title('', false),
 			get_the_archive_title(),
+			$woo_single_cat_html,
+			$woo_single_tag_html,
+			get_the_excerpt(),
 		);
 
 		if ( is_front_page() && is_home() && get_post_meta($post->ID,'_seopress_titles_desc',true) =='' ) { //HOMEPAGE

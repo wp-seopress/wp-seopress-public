@@ -49,11 +49,13 @@ function seopress_xml_sitemap_single() {
 						//Standard images
 						if (!empty (get_the_content($post))) {
 							$dom = new domDocument;
-							$dom->loadHTML(get_the_content($post));
+							$internalErrors = libxml_use_internal_errors(true);
+							$dom->loadHTML(esc_attr(wp_filter_nohtml_kses(htmlentities(get_the_content($post)))));
 							$dom->preserveWhiteSpace = false;
 							if ($dom->getElementsByTagName('img') !='') {
 								$images = $dom->getElementsByTagName('img');
 							}
+							libxml_use_internal_errors($internalErrors);
 						}
 
 						//WooCommerce
@@ -68,7 +70,7 @@ function seopress_xml_sitemap_single() {
 						}
 
 						//Post Thumbnail
-						$post_thumbnail = get_the_post_thumbnail_url($post);
+						$post_thumbnail = esc_attr(wp_filter_nohtml_kses(htmlentities(get_the_post_thumbnail_url($post))));
 
 						if ((isset($images) && !empty ($images) && $images->length>=1) || (isset($galleries) && !empty($galleries)) || (isset($product) && !empty($product_img)) || $post_thumbnail !='') { 
 							
@@ -94,7 +96,7 @@ function seopress_xml_sitemap_single() {
 										$seopress_sitemaps .= '<image:image>';
 										$seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
-										$seopress_sitemaps .= '<![CDATA['.utf8_decode(urldecode($url)).']]>';
+										$seopress_sitemaps .= '<![CDATA['.utf8_decode(urldecode(esc_attr(wp_filter_nohtml_kses(htmlentities($url))))).']]>';
 								        $seopress_sitemaps .= '</image:loc>';
 								        $seopress_sitemaps .= "\n";
 								        $seopress_sitemaps .= '</image:image>';
@@ -107,7 +109,7 @@ function seopress_xml_sitemap_single() {
 									$seopress_sitemaps .= '<image:image>';
 									$seopress_sitemaps .= "\n";
 							       	$seopress_sitemaps .= '<image:loc>';
-									$seopress_sitemaps .= '<![CDATA['.wp_get_attachment_url( $product_attachment_id ).']]>';
+									$seopress_sitemaps .= '<![CDATA['.esc_attr(wp_filter_nohtml_kses(htmlentities(wp_get_attachment_url( $product_attachment_id )))).']]>';
 							        $seopress_sitemaps .= '</image:loc>';
 							        $seopress_sitemaps .= "\n";
 							        $seopress_sitemaps .= '</image:image>';

@@ -307,8 +307,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 	if (seopress_google_analytics_cd_logged_in_user_option() !='') {
 		if (seopress_google_analytics_cd_logged_in_user_option() !='none') {
-			if (wp_get_current_user()->user_login) {
-				$seopress_google_analytics_html .= "ga('set', '".seopress_google_analytics_cd_logged_in_user_option()."', '".wp_get_current_user()->user_login."');";
+			if (wp_get_current_user()->ID) {
+				$seopress_google_analytics_html .= "ga('set', '".seopress_google_analytics_cd_logged_in_user_option()."', '".wp_get_current_user()->ID."');";
 				$seopress_google_analytics_html .= "\n";
 			}
 		}
