@@ -175,9 +175,13 @@ function seopress_admin_header() { ?>
                             <div class="dashicons dashicons-megaphone"></div>
                             <div class="tooltip"><?php _e('Send feedback','wp-seopress'); ?></div>
                         </a>
-                        <a href="http://twitter.com/wpcloudy" alt="<?php _e('Follow us on Twitter (new window)','wp-seopress'); ?>" target="_blank">
+                        <a href="https://twitter.com/wp_seopress" alt="<?php _e('Follow us on Twitter (new window)','wp-seopress'); ?>" target="_blank">
                             <div class="dashicons dashicons-twitter"></div>
                             <div class="tooltip"><?php _e('Follow us on Twitter','wp-seopress'); ?></div>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCH5sQx3T2QZFhFEamT51hsw" alt="<?php _e('Follow us on YouTube (new window)','wp-seopress'); ?>" target="_blank">
+                            <div class="dashicons dashicons-video-alt3"></div>
+                            <div class="tooltip"><?php _e('Follow us on YouTube','wp-seopress'); ?></div>
                         </a>
                         <a href="<?php echo $seopress_docs_link['website']; ?>" alt="<?php _e('Official website (new window)','wp-seopress'); ?>" target="_blank">
                             <div class="dashicons dashicons-info"></div>

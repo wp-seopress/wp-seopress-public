@@ -214,7 +214,7 @@ class seopress_options
                     <li><span>'.__('%%wc_single_tag%%','wp-seopress').'</span>'.__('Single product tag','wp-seopress').'</li>
                     <li><span>'.__('%%wc_single_short_desc%%','wp-seopress').'</span>'.__('Single product short description','wp-seopress').'</li>
                 </ul>
-            ';
+            '.wp_oembed_get('https://www.youtube.com/watch?v=HEa8m9u4mOk', array('width'=>530));
 
             $screen->add_help_tab( array(
                 'id'    => 'seopress_titles_help_tab',
@@ -2392,6 +2392,14 @@ class seopress_options
             array( $this, 'seopress_social_twitter_card_callback' ), // Callback
             'seopress-settings-admin-social-twitter', // Page
             'seopress_setting_section_social_twitter' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_social_twitter_card_og', // ID
+           __("Use Open Graph if no Twitter Cards filled","wp-seopress"), // Title
+            array( $this, 'seopress_social_twitter_card_og_callback' ), // Callback
+            'seopress-settings-admin-social-twitter', // Page
+            'seopress_setting_section_social_twitter' // Section                  
         );     
 
         add_settings_field(
@@ -4187,6 +4195,23 @@ class seopress_options
         
         if (isset($this->options['seopress_social_twitter_card'])) {
             esc_attr( $this->options['seopress_social_twitter_card']);
+        }
+    }
+
+    public function seopress_social_twitter_card_og_callback()
+    {
+        $options = get_option( 'seopress_social_option_name' );  
+        
+        $check = isset($options['seopress_social_twitter_card_og']);      
+        
+        echo '<input id="seopress_social_twitter_card_og" name="seopress_social_option_name[seopress_social_twitter_card_og]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_social_twitter_card_og">'. __( 'Use OG if no Twitter Cards', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_social_twitter_card_og'])) {
+            esc_attr( $this->options['seopress_social_twitter_card_og']);
         }
     }
 
