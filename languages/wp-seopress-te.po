@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress 2.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
-"POT-Creation-Date: 2017-09-16 11:26+0200\n"
-"PO-Revision-Date: 2017-09-16 11:26+0200\n"
+"POT-Creation-Date: 2017-09-18 19:10+0200\n"
+"PO-Revision-Date: 2017-09-18 19:10+0200\n"
 "Last-Translator: Manojkumar(INDIA) <Manojkumar09051993@gmail.com>\n"
 "Language-Team: \n"
 "Language: te_IN\n"
@@ -1980,6 +1980,10 @@ msgstr "సైట్ భాష ఆధారంగా సెట్ చేస్�
 #: inc/admin/admin.php:4910
 msgid "Remove /category/ in your permalinks"
 msgstr "మీ permalinks లో / వర్గం / తొలగించు"
+
+#: inc/admin/admin.php:4910
+msgid "You have to flush your permalinks each time you change this settings"
+msgstr ""
 
 #: inc/admin/admin.php:4927
 msgid ""

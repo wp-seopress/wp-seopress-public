@@ -930,12 +930,12 @@ function seopress_social_twitter_img_hook() {
 		 			echo '<meta name="twitter:image" content="'.seopress_social_fb_img_term_option().'" />'; 
 		 			echo "\n";
 		 		}
-			} elseif (seopress_social_fb_img_option() !='') { 
+			} elseif (seopress_social_facebook_img_option() !='') { 
 				if (seopress_social_twitter_img_size_option() =='large') {
-			 		echo '<meta name="twitter:image:src" content="'.seopress_social_fb_img_option().'" />'; 
+			 		echo '<meta name="twitter:image:src" content="'.seopress_social_facebook_img_option().'" />'; 
 			 		echo "\n";
 			 	} else {
-			 		echo '<meta name="twitter:image" content="'.seopress_social_fb_img_option().'" />'; 
+			 		echo '<meta name="twitter:image" content="'.seopress_social_facebook_img_option().'" />'; 
 			 		echo "\n";
 			 	}
 		 	}

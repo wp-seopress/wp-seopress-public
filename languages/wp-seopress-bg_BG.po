@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
-"POT-Creation-Date: 2017-09-16 11:28+0200\n"
-"PO-Revision-Date: 2017-09-16 11:28+0200\n"
+"POT-Creation-Date: 2017-09-18 19:11+0200\n"
+"PO-Revision-Date: 2017-09-18 19:11+0200\n"
 "Last-Translator: Stefan Ilivanov (CMS Bulgaria) <info@cmsbg.info>\n"
 "Language-Team: \n"
 "Language: bg_BG\n"
@@ -2053,6 +2053,10 @@ msgstr ""
 #: inc/admin/admin.php:4910
 msgid "Remove /category/ in your permalinks"
 msgstr "Премахване на /category/ от вашите статични връзки"
+
+#: inc/admin/admin.php:4910
+msgid "You have to flush your permalinks each time you change this settings"
+msgstr ""
 
 #: inc/admin/admin.php:4927
 msgid ""

@@ -4907,7 +4907,7 @@ class seopress_options
         if ('1' == $check) echo 'checked="yes"'; 
         echo ' value="1"/>';
         
-        echo '<label for="seopress_advanced_advanced_category_url">'. __( 'Remove /category/ in your permalinks', 'wp-seopress' ) .'</label>';
+        echo '<label for="seopress_advanced_advanced_category_url">'. __( 'Remove /category/ in your permalinks', 'wp-seopress' ) .'</label><span class="dashicons dashicons-info" title="'.__('You have to flush your permalinks each time you change this settings','wp-seopress').'"></span>';
 
         if (isset($this->options['seopress_advanced_advanced_category_url'])) {
             esc_attr( $this->options['seopress_advanced_advanced_category_url']);

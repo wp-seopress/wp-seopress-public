@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2017-09-16 11:27+0200\n"
-"PO-Revision-Date: 2017-09-16 11:27+0200\n"
+"POT-Creation-Date: 2017-09-18 19:10+0200\n"
+"PO-Revision-Date: 2017-09-18 19:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: fr_FR\n"
@@ -2089,6 +2089,10 @@ msgstr ""
 #: inc/admin/admin.php:4910
 msgid "Remove /category/ in your permalinks"
 msgstr "Supprimer /category/ dans vos permaliens"
+
+#: inc/admin/admin.php:4910
+msgid "You have to flush your permalinks each time you change this settings"
+msgstr "Vous devez mettre à jour vos "
 
 #: inc/admin/admin.php:4927
 msgid ""
