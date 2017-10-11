@@ -200,6 +200,8 @@ class seopress_options
                     <li><span>'.__('%%post_excerpt%%','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
                     <li><span>'.__('%%post_date%%','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
                     <li><span>'.__('%%post_author%%','wp-seopress').'</span>'.__('Post author','wp-seopress').'</li>
+                    <li><span>'.__('%%post_category%%','wp-seopress').'</span>'.__('Post category','wp-seopress').'</li>
+                    <li><span>'.__('%%post_tag%%','wp-seopress').'</span>'.__('Post tag','wp-seopress').'</li>
                     <li><span>'.__('%%_category_title%%','wp-seopress').'</span>'.__('Category title','wp-seopress').'</li>
                     <li><span>'.__('%%_category_description%%','wp-seopress').'</span>'.__('Category description','wp-seopress').'</li>
                     <li><span>'.__('%%tag_title%%','wp-seopress').'</span>'.__('Tag title','wp-seopress').'</li>
@@ -500,6 +502,7 @@ class seopress_options
                     'tab_seopress_google_analytics_events' => __( "Events", "wp-seopress" ),
                     'tab_seopress_google_analytics_custom_dimensions' => __( "Custom Dimensions", "wp-seopress" ),
                     'tab_seopress_google_analytics_dashboard' => __( "Stats in Dashboard", "wp-seopress" ),
+                    //'tab_seopress_google_analytics_e_commerce' => __( "E-commerce", "wp-seopress" ),
                 );
             } else {
                 $plugin_settings_tabs = array(
@@ -521,7 +524,8 @@ class seopress_options
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_custom_dimensions') { echo 'active'; } ?>" id="tab_seopress_google_analytics_custom_dimensions"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-custom-dimensions' ); ?></div>
             <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
                 <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_dashboard') { echo 'active'; } ?>" id="tab_seopress_google_analytics_dashboard"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-dashboard' ); ?></div>
-            <?php } ?>
+                <!-- <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_e_commerce') { echo 'active'; } ?>" id="tab_seopress_google_analytics_e_commerce"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-e-commerce' ); ?></div>
+ -->            <?php } ?>
         </div>
 
         <?php submit_button(); ?>
@@ -3832,7 +3836,7 @@ class seopress_options
         esc_html( $check )
         );
 
-        echo '<br><br><p>'.__('You can also use this shorcode:','wp-seopress').'</p>';
+        echo '<br><br><p>'.__('You can also use this shortcode:','wp-seopress').'</p>';
 
         echo '<pre>[seopress_html_sitemap]</pre>';
     }

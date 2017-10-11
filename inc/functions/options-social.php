@@ -241,14 +241,14 @@ function seopress_social_accounts_jsonld_hook() {
 	if (seopress_social_knowledge_type_option() !='') {
 		$seopress_social_knowledge_type_option = json_encode(seopress_social_knowledge_type_option());
 	} else {
-		$seopress_social_knowledge_type_option = 'Organization';
+		$seopress_social_knowledge_type_option = json_encode('Organization');
 	}
 	if (seopress_social_knowledge_name_option() !='') {
 		$seopress_social_knowledge_name_option = json_encode(seopress_social_knowledge_name_option());
 	} else {
 		$seopress_social_knowledge_name_option = json_encode(get_bloginfo('name'));
 	}
-	if (seopress_social_knowledge_img_option() !='') {
+	if (seopress_social_knowledge_img_option() !='' && seopress_social_knowledge_type_option() =='Organization') {
 		$seopress_social_knowledge_img_option = json_encode(seopress_social_knowledge_img_option());
 	}
 	if (seopress_social_knowledge_phone_number_option() !='') {
@@ -263,7 +263,7 @@ function seopress_social_accounts_jsonld_hook() {
 
 	echo '<script type="application/ld+json">';
 	echo '{"@context" : "'.seopress_check_ssl().'schema.org","@type" : '.$seopress_social_knowledge_type_option.',';
-	if (seopress_social_knowledge_img_option() !='') {
+	if (seopress_social_knowledge_img_option() !='' && seopress_social_knowledge_type_option() =='Organization') {
 		echo '"logo": '.$seopress_social_knowledge_img_option.',';
 	}
 	echo '"name" : '.$seopress_social_knowledge_name_option.',"url" : '.json_encode(get_home_url());

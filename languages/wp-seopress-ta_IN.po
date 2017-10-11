@@ -1,0 +1,2243 @@
+# Copyright (C) 2017 SEOPress
+# This file is distributed under the same license as the SEOPress package.
+msgid ""
+msgstr ""
+"Project-Id-Version: SEOPress 2.1.7.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
+"POT-Creation-Date: 2017-10-11 18:45+0200\n"
+"PO-Revision-Date: 2017-10-11 18:45+0200\n"
+"Last-Translator: \n"
+"Language-Team: Benjamin DENIS <contact@seopress.org>\n"
+"Language: ta_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_attr_e;esc_attr__\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/admin/admin-header.php:11
+msgid "SEOPress"
+msgstr "SEO ப்ரஸ்"
+
+#: inc/admin/admin-header.php:15 inc/admin/adminbar.php:72
+msgid "PRO"
+msgstr "ப்ரோ"
+
+#: inc/admin/admin-header.php:27 inc/admin/admin.php:185 inc/admin/adminbar.php:22
+msgid "Titles & Metas"
+msgstr "தலைப்பு & மெட்டா"
+
+#: inc/admin/admin-header.php:33 inc/admin/admin.php:186 inc/admin/adminbar.php:28
+msgid "XML / HTML Sitemap"
+msgstr "XML / HTML தள வரைபடம்"
+
+#: inc/admin/admin-header.php:39 inc/admin/admin.php:187 inc/admin/admin.php:1333
+#: inc/admin/adminbar.php:34
+msgid "Social Networks"
+msgstr "சமூக வலைதளங்கள்"
+
+#: inc/admin/admin-header.php:45 inc/admin/admin.php:188 inc/admin/admin.php:1371
+#: inc/admin/adminbar.php:40
+msgid "Google Analytics"
+msgstr "கூகுள் பகுப்பாய்வு"
+
+#: inc/admin/admin-header.php:51 inc/admin/admin-metaboxes-form.php:124
+#: inc/admin/admin.php:189 inc/admin/admin.php:304 inc/admin/admin.php:580
+#: inc/admin/admin.php:1409 inc/admin/adminbar.php:46
+msgid "Advanced"
+msgstr "மேம்பட்டது"
+
+#: inc/admin/admin-header.php:59 inc/admin/admin.php:1438
+msgid "WooCommerce"
+msgstr "ஊகாமர்ஸ்"
+
+#: inc/admin/admin-header.php:65 inc/admin/admin.php:1466
+msgid "Local Business"
+msgstr "உள்ளூர் வணிகம்"
+
+#: inc/admin/admin-header.php:71 inc/admin/admin.php:1494
+msgid "Dublin Core"
+msgstr "டப்ளின் மையம்"
+
+#: inc/admin/admin-header.php:77 inc/admin/admin.php:1522
+msgid "Structured Data Types"
+msgstr "கட்டமைக்கப்பட்ட தரவு வகைகள்"
+
+#: inc/admin/admin-header.php:83 inc/admin/admin.php:1550
+msgid "Breadcrumbs"
+msgstr "Breadcrumbs"
+
+#: inc/admin/admin-header.php:89 inc/admin/admin.php:1588
+msgid "Google Page Speed"
+msgstr "கூகுள் பக்க வேகம்"
+
+#: inc/admin/admin-header.php:96 inc/admin/admin.php:749 inc/admin/admin.php:1609
+msgid "robots.txt"
+msgstr "robots.txt"
+
+#: inc/admin/admin-header.php:103 inc/admin/admin.php:1648
+msgid "Google News Sitemap"
+msgstr "Google செய்திகள் தள வரைபடம்"
+
+#: inc/admin/admin-header.php:109 inc/admin/admin.php:1676 inc/admin/adminbar.php:78
+msgid "Redirections"
+msgstr "திசை திருப்புதல்"
+
+#: inc/admin/admin-header.php:115 inc/admin/admin.php:1715
+msgid "SEOPress BOT - Broken links"
+msgstr "SEO Press BOT - உடைந்த இணைப்புகள்"
+
+#: inc/admin/admin-header.php:121 inc/admin/admin.php:1726 inc/admin/adminbar.php:90
+msgid "Backlinks"
+msgstr "பின்னிணைப்புகள்"
+
+#: inc/admin/admin-header.php:128 inc/admin/admin.php:750 inc/admin/admin.php:1738
+msgid ".htaccess"
+msgstr ".htaccess"
+
+#: inc/admin/admin-header.php:135 inc/admin/admin.php:1750
+msgid "RSS"
+msgstr "வலைதளச் சுருக்கம் RSS"
+
+#: inc/admin/admin-header.php:141 inc/admin/admin.php:1783 inc/admin/adminbar.php:66
+msgid "License"
+msgstr "உரிமம்"
+
+#: inc/admin/admin-header.php:148 inc/admin/admin.php:190 inc/admin/admin.php:1762
+#: inc/admin/adminbar.php:52
+msgid "Tools"
+msgstr "கருவிகள்"
+
+#: inc/admin/admin-header.php:170
+msgid "See the changelog (new window)"
+msgstr "மாற்றங்களைக் காண்க (புதிய திரையில்)"
+
+#: inc/admin/admin-header.php:172
+msgid "See the changelog"
+msgstr "மாற்றங்களைக் காண்க"
+
+#: inc/admin/admin-header.php:174 inc/admin/admin-header.php:176
+msgid "Send feedback"
+msgstr "உங்கள் கருத்துக்களை அனுப்புங்கள்"
+
+#: inc/admin/admin-header.php:178
+msgid "Follow us on Twitter (new window)"
+msgstr "ட்விட்டரில் பின்தொடருங்கள் (புதிய திரையில்)"
+
+#: inc/admin/admin-header.php:180
+msgid "Follow us on Twitter"
+msgstr "ட்விட்டரில் பின்தொடருங்கள்"
+
+#: inc/admin/admin-header.php:182
+#, fuzzy
+#| msgid "Follow us on Twitter (new window)"
+msgid "Follow us on YouTube (new window)"
+msgstr "ட்விட்டரில் பின்தொடருங்கள் (புதிய திரையில்)"
+
+#: inc/admin/admin-header.php:184
+#, fuzzy
+#| msgid "Follow us on Twitter"
+msgid "Follow us on YouTube"
+msgstr "ட்விட்டரில் பின்தொடருங்கள்"
+
+#: inc/admin/admin-header.php:186
+msgid "Official website (new window)"
+msgstr "அதிகாரபூர்வ இணையதளம் (புதிய திரையில்)"
+
+#: inc/admin/admin-header.php:188
+msgid "Official website"
+msgstr "அதிகாரபூர்வ இணையதளம்"
+
+#: inc/admin/admin-header.php:190
+msgid "Support (new window)"
+msgstr "வழிகாட்டுதல் (புதிய திரையில்)"
+
+#: inc/admin/admin-header.php:192
+msgid "Support"
+msgstr "வழிகாட்டுதல்"
+
+#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:31
+#: inc/admin/admin-metaboxes.php:33 inc/admin/adminbar.php:16
+#: inc/functions/options-advanced-admin.php:581
+msgid "SEO"
+msgstr "தேடுபொறி மேம்படுத்தல் SEO"
+
+#: inc/admin/admin-metaboxes-form.php:123
+msgid "Titles settings"
+msgstr "தலைப்பு அமைப்புகள்"
+
+#: inc/admin/admin-metaboxes-form.php:125
+msgid "Social"
+msgstr "சமூக வலைதளங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:127
+msgid "Redirection"
+msgstr "திசை திருப்புதல்"
+
+#: inc/admin/admin-metaboxes-form.php:132
+msgid "Google News"
+msgstr "கூகுள் செய்திகள்"
+
+#: inc/admin/admin-metaboxes-form.php:143
+msgid "Title"
+msgstr "தலைப்பு"
+
+#: inc/admin/admin-metaboxes-form.php:144
+msgid "Enter your title"
+msgstr "உங்கள் தலைப்பைப் பதிவு செய்யுங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:148 inc/admin/admin-metaboxes-form.php:156
+msgid "(maximum recommended limit)"
+msgstr "(அதிகபட்ச பரிந்துரைக்கப்பட்ட வரம்பு)"
+
+#: inc/admin/admin-metaboxes-form.php:151 inc/admin/admin.php:674 inc/admin/admin.php:1870
+#: inc/functions/options-advanced-admin.php:591
+msgid "Meta description"
+msgstr "மெட்டா விளக்கம்"
+
+#: inc/admin/admin-metaboxes-form.php:152
+msgid "Enter your meta description"
+msgstr "மெட்டா விளக்கம் பதிவு செய்யுங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:161
+msgid "Google Snippet Preview"
+msgstr "கூகுள் துணுக்கு(Snippet) முன்பார்வை"
+
+#: inc/admin/admin-metaboxes-form.php:162
+msgid "This is what your page will look like in Google search results"
+msgstr "கூகுள் தேடலில் உங்கள் பக்கம் இப்படிக் காட்சியளிக்கலாம்"
+
+#: inc/admin/admin-metaboxes-form.php:187 inc/admin/admin.php:2046 inc/admin/admin.php:3072
+#: inc/admin/admin.php:3205 inc/admin/admin.php:3297 inc/admin/admin.php:3372
+#: inc/admin/admin.php:3441 inc/admin/admin.php:3543
+msgid "noindex"
+msgstr "noindex"
+
+#: inc/admin/admin-metaboxes-form.php:188 inc/admin/admin.php:3545
+msgid ""
+"Do not display all pages of the site in Google search results and do not display \"Cached\" "
+"links in search results."
+msgstr ""
+"கூகுள் தேடல் முடிவுகளில் தளத்தின் அனைத்து பக்கங்களையும்,  மற்றும் \"Cached\" இணைப்புகளையும் காட்ட வேண்டாம்."
+
+#: inc/admin/admin-metaboxes-form.php:193 inc/admin/admin.php:2054 inc/admin/admin.php:3091
+#: inc/admin/admin.php:3224 inc/admin/admin.php:3316 inc/admin/admin.php:3562
+msgid "nofollow"
+msgstr "nofollow"
+
+#: inc/admin/admin-metaboxes-form.php:194 inc/admin/admin.php:3564
+msgid "Do not follow links for all pages."
+msgstr "அனைத்து பக்கங்களுக்கும் இணைப்புகள் பின்பற்ற வேண்டாம்."
+
+#: inc/admin/admin-metaboxes-form.php:199 inc/admin/admin.php:2062 inc/admin/admin.php:3581
+msgid "noodp"
+msgstr "noodp"
+
+#: inc/admin/admin-metaboxes-form.php:200 inc/admin/admin.php:3583
+msgid "Do not use Open Directory project metadata for titles or excerpts for all pages."
+msgstr ""
+"பொது டைரக்டரி திட்ட மெட்டாடேட்டாவை, அனைத்து பக்கங்களிலும் தலைப்புகளில் மற்றும் மேற்கோள்களில் பயன்படுத்த "
+"வேண்டாம்."
+
+#: inc/admin/admin-metaboxes-form.php:205 inc/admin/admin.php:2070 inc/admin/admin.php:3600
+msgid "noimageindex"
+msgstr "noimageindex"
+
+#: inc/admin/admin-metaboxes-form.php:206 inc/admin/admin.php:3602
+msgid "Do not index images from the entire site."
+msgstr "முழு தளத்தில் இருந்தும் படங்களை index செய்ய வேண்டாம்."
+
+#: inc/admin/admin-metaboxes-form.php:211 inc/admin/admin.php:2078 inc/admin/admin.php:3619
+msgid "noarchive"
+msgstr "noarchive"
+
+#: inc/admin/admin-metaboxes-form.php:212 inc/admin/admin.php:3621
+msgid "Do not display a \"Cached\" link in the Google search results."
+msgstr "கூகுள் தேடல் முடிவுகளில் \"Cached\" இணைப்புகளை காட்ட வேண்டாம்."
+
+#: inc/admin/admin-metaboxes-form.php:217 inc/admin/admin.php:2086 inc/admin/admin.php:3638
+msgid "nosnippet"
+msgstr "nosnippet"
+
+#: inc/admin/admin-metaboxes-form.php:218 inc/admin/admin.php:3640
+msgid "Do not display a description in the Google search results for all pages."
+msgstr "எல்லா பக்கங்களிலும் கூகுள் தேடல் முடிவு விளக்கம் காட்டவேண்டாம்."
+
+#: inc/admin/admin-metaboxes-form.php:221 inc/admin/admin.php:678
+msgid "Canonical URL"
+msgstr "நியமன (Canonical) URL"
+
+#: inc/admin/admin-metaboxes-form.php:222
+msgid "Default value: "
+msgstr "இயல்பு மதிப்பு: "
+
+#: inc/admin/admin-metaboxes-form.php:228
+msgid "Ask Facebook to update his cache"
+msgstr "முகநூலின் cacheஐ மேம்படுத்தச் சொல்லவும்"
+
+#: inc/admin/admin-metaboxes-form.php:230
+msgid "Facebook Title"
+msgstr "முகநூல் தலைப்பு"
+
+#: inc/admin/admin-metaboxes-form.php:231
+msgid "Enter your Facebook title"
+msgstr "உங்கள் முகநூல் தலைப்பை பதிவு செய்யுங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:234
+msgid "Facebook description"
+msgstr "முகநூல் விளக்கம்"
+
+#: inc/admin/admin-metaboxes-form.php:235
+msgid "Enter your Facebook description"
+msgstr "உங்கள் முகநூல் விளக்கத்தை பதிவு செய்யவும்"
+
+#: inc/admin/admin-metaboxes-form.php:238
+msgid "Facebook Thumbnail"
+msgstr "முகநூல் சிறுபடம்"
+
+#: inc/admin/admin-metaboxes-form.php:239
+msgid "Minimum size: 200x200px"
+msgstr "குறைந்தபட்ச அளவு: 200x200px"
+
+#: inc/admin/admin-metaboxes-form.php:240 inc/admin/admin-metaboxes-form.php:256
+#: inc/admin/admin.php:4153 inc/admin/admin.php:4230
+msgid "Select your default thumbnail"
+msgstr "உங்கள் இயல்பான சிறுபடத்தை தேர்வு செய்யவும்"
+
+#: inc/admin/admin-metaboxes-form.php:241 inc/admin/admin-metaboxes-form.php:257
+#: inc/admin/admin.php:3911 inc/admin/admin.php:4155 inc/admin/admin.php:4232
+msgid "Upload an Image"
+msgstr "படம் பதிவேற்ற"
+
+#: inc/admin/admin-metaboxes-form.php:246
+msgid "Twitter Title"
+msgstr "ட்விட்டர் தலைப்பு"
+
+#: inc/admin/admin-metaboxes-form.php:247
+msgid "Enter your Twitter title"
+msgstr "ட்விட்டர் தலைப்பைப் பதிவு செய்யுங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:250
+msgid "Twitter description"
+msgstr "ட்விட்டர் விபரங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:251
+msgid "Enter your Twitter description"
+msgstr "ட்விட்டர் விபரங்களை பதிவு செய்யுங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:254
+msgid "Twitter Thumbnail"
+msgstr "ட்விட்டர் சிறுபடம்"
+
+#: inc/admin/admin-metaboxes-form.php:255
+msgid "Minimum size: 160x160px"
+msgstr "குறைந்தபட்ச அளவு: 160x160px"
+
+#: inc/admin/admin-metaboxes-form.php:266
+msgid "Enable redirection?"
+msgstr "திசைதிருப்பல் செயல்படுத்தவா?"
+
+#: inc/admin/admin-metaboxes-form.php:270
+msgid "URL redirection"
+msgstr "URL திசை திருப்புதல்"
+
+#: inc/admin/admin-metaboxes-form.php:272
+msgid "301 Moved Permanently"
+msgstr "301 முழுவதுமாக நகர்த்தப்பட்டது"
+
+#: inc/admin/admin-metaboxes-form.php:273
+msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
+msgstr "302 கண்டறியப்பட்டது (HTTP 1.1) / தற்காலிகமாக நகர்த்தப்பட்டது (HTTP 1.0)"
+
+#: inc/admin/admin-metaboxes-form.php:274
+msgid "307 Moved Temporarily (HTTP 1.1 Only)"
+msgstr "307 தற்காலிகமாக நகர்த்தப்பட்டது (HTTP 1.1 மட்டும்)"
+
+#: inc/admin/admin-metaboxes-form.php:276
+msgid "Enter your new URL"
+msgstr "உங்கள் URL பதிவு செய்யுங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:279 inc/admin/admin-metaboxes-form.php:281
+msgid "Test your URL"
+msgstr "உங்கள் URL சோதித்திடுங்கள்"
+
+#: inc/admin/admin-metaboxes-form.php:292
+msgid "Exclude this post from Google News Sitemap?"
+msgstr "இந்தப்பதிவை கூகுள் செய்திகள் தள வரைபடத்திலிருந்து தவிர்க்கவா?"
+
+#: inc/admin/admin-metaboxes-form.php:296
+msgid "Google News Genres"
+msgstr "கூகுள் செய்திகள் வகையினம்"
+
+#: inc/admin/admin-metaboxes-form.php:298 inc/admin/admin.php:4494 inc/admin/admin.php:4571
+#: inc/admin/admin.php:4648 inc/admin/admin.php:4725 inc/admin/admin.php:4802
+msgid "None"
+msgstr "எதுவுமில்லை"
+
+#: inc/admin/admin-metaboxes-form.php:299
+msgid "Press Release"
+msgstr "பத்திரிகை வெளியீடு"
+
+#: inc/admin/admin-metaboxes-form.php:300
+msgid "Satire"
+msgstr "நையாண்டி"
+
+#: inc/admin/admin-metaboxes-form.php:301
+msgid "Blog"
+msgstr "வலைப்பதிவு"
+
+#: inc/admin/admin-metaboxes-form.php:302
+msgid "OpEd"
+msgstr "OpEd"
+
+#: inc/admin/admin-metaboxes-form.php:303
+msgid "Opinion"
+msgstr "கருத்து"
+
+#: inc/admin/admin-metaboxes-form.php:304
+msgid "UserGenerated"
+msgstr "பயனர்உருவாக்கியது"
+
+#: inc/admin/admin-metaboxes-form.php:309
+msgid "Google News Keywords <em>(max recommended limit: 12)</em>"
+msgstr "கூகுள் செய்திகள் சிறப்புச் சொற்கள் <em>(அதிகபட்ச பரிந்துரைக்கப்பட்ட வரம்பு: 12)</em>"
+
+#: inc/admin/admin-metaboxes-form.php:310
+msgid "Enter your Google News Keywords"
+msgstr "கூகுள் செய்திகள் சிறப்புச் சொற்கள் பதிவு செய்யுங்கள்"
+
+#: inc/admin/admin.php:108
+msgid "404 - Page not found"
+msgstr "404 - பக்கத்தைக் காணவில்லை"
+
+#: inc/admin/admin.php:177
+msgid "SEOPress Network settings"
+msgstr "SEOPress வலைப்பின்னல் அமைப்புகள்"
+
+#: inc/admin/admin.php:184
+msgid "Dashboard"
+msgstr "டாஷ்போர்டு"
+
+#: inc/admin/admin.php:186 inc/admin/admin.php:1295
+msgid "XML / Image / HTML Sitemap"
+msgstr "XML / படம் / HTML தள வரைபடம்"
+
+#: inc/admin/admin.php:197
+#, php-format
+msgid "%%sitetitle%%"
+msgstr "%%sitetitle%%"
+
+#: inc/admin/admin.php:197 inc/admin/admin.php:2989 inc/admin/admin.php:3040
+#: inc/admin/admin.php:3157 inc/admin/admin.php:3265 inc/admin/admin.php:3341
+#: inc/admin/admin.php:3411 inc/admin/admin.php:3480 inc/admin/admin.php:3512
+msgid "Site Title"
+msgstr "தலைப்பு"
+
+#: inc/admin/admin.php:198
+#, php-format
+msgid "%%tagline%%"
+msgstr "%%tagline%%"
+
+#: inc/admin/admin.php:198 inc/admin/admin.php:2990 inc/admin/admin.php:3001
+msgid "Tagline"
+msgstr "டேக் லைன்"
+
+#: inc/admin/admin.php:199
+#, php-format
+msgid "%%post_title%%"
+msgstr "%%post_title%%"
+
+#: inc/admin/admin.php:199
+msgid "Post Title (post, page, custom post type)"
+msgstr "பதிவின் தலைப்பு (பதிவு, பக்கம், விருப்பப் பதிவு மாதிரி)"
+
+#: inc/admin/admin.php:200
+#, php-format
+msgid "%%post_excerpt%%"
+msgstr "%%post_excerpt%%"
+
+#: inc/admin/admin.php:200
+msgid "Post excerpt"
+msgstr "பதிவு சுருக்கம்"
+
+#: inc/admin/admin.php:201
+#, php-format
+msgid "%%post_date%%"
+msgstr "%%post_date%%"
+
+#: inc/admin/admin.php:201
+msgid "Post date"
+msgstr "பதிவு தேதி"
+
+#: inc/admin/admin.php:202
+#, php-format
+msgid "%%post_author%%"
+msgstr "%%post_author%%"
+
+#: inc/admin/admin.php:202 inc/admin/admin.php:3340
+msgid "Post author"
+msgstr "பதிவை எழுதியவர்"
+
+#: inc/admin/admin.php:203
+#, fuzzy, php-format
+#| msgid "%%post_author%%"
+msgid "%%post_category%%"
+msgstr "%%post_author%%"
+
+#: inc/admin/admin.php:203
+#, fuzzy
+#| msgid "Post author"
+msgid "Post category"
+msgstr "பதிவை எழுதியவர்"
+
+#: inc/admin/admin.php:204
+#, fuzzy, php-format
+#| msgid "%%post_date%%"
+msgid "%%post_tag%%"
+msgstr "%%post_date%%"
+
+#: inc/admin/admin.php:204
+#, fuzzy
+#| msgid "Post date"
+msgid "Post tag"
+msgstr "பதிவு தேதி"
+
+#: inc/admin/admin.php:205
+#, php-format
+msgid "%%_category_title%%"
+msgstr "%%_category_title%%"
+
+#: inc/admin/admin.php:205
+msgid "Category title"
+msgstr "வகையினத் தலைப்பு"
+
+#: inc/admin/admin.php:206
+#, php-format
+msgid "%%_category_description%%"
+msgstr "%%_category_description%%"
+
+#: inc/admin/admin.php:206
+msgid "Category description"
+msgstr "வகையின விளக்கம்"
+
+#: inc/admin/admin.php:207
+#, php-format
+msgid "%%tag_title%%"
+msgstr "%%tag_title%%"
+
+#: inc/admin/admin.php:207
+msgid "Tag title"
+msgstr "டேக் தலைப்பு"
+
+#: inc/admin/admin.php:208
+#, php-format
+msgid "%%tag_description%%"
+msgstr "%%tag_description%%"
+
+#: inc/admin/admin.php:208
+msgid "Tag description"
+msgstr "டேக் விளக்கம்"
+
+#: inc/admin/admin.php:209
+#, php-format
+msgid "%%term_title%%"
+msgstr "%%term_title%%"
+
+#: inc/admin/admin.php:209
+msgid "Term title"
+msgstr "டெர்ம் தலைப்பு"
+
+#: inc/admin/admin.php:210
+#, php-format
+msgid "%%term_description%%"
+msgstr "%%term_description%%"
+
+#: inc/admin/admin.php:210
+msgid "Term description"
+msgstr "டெர்ம் விளக்கம்"
+
+#: inc/admin/admin.php:211
+#, php-format
+msgid "%%search_keywords%%"
+msgstr "%%search_keywords%%"
+
+#: inc/admin/admin.php:211
+msgid "Search keywords"
+msgstr "தேடுதல் வார்த்தைகள்"
+
+#: inc/admin/admin.php:212
+#, php-format
+msgid "%%current_pagination%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/admin.php:212
+msgid "Current number page"
+msgstr "தற்போதைய பக்க எண்"
+
+#: inc/admin/admin.php:213
+#, php-format
+msgid "%%cpt_plural%%"
+msgstr "%%cpt_plural%%"
+
+#: inc/admin/admin.php:213
+msgid "Plural Post Type Archive name"
+msgstr "பன்மைப்பதிவு காப்பகப் பெயர்"
+
+#: inc/admin/admin.php:214
+#, php-format
+msgid "%%date_archive%%"
+msgstr "%%date_archive%%"
+
+#: inc/admin/admin.php:214
+msgid "Date Archive"
+msgstr "தினக் காப்பகம்"
+
+#: inc/admin/admin.php:215
+#, php-format
+msgid "%%wc_single_cat%%"
+msgstr "%%wc_single_cat%%"
+
+#: inc/admin/admin.php:215
+msgid "Single product category"
+msgstr ""
+
+#: inc/admin/admin.php:216
+#, php-format
+msgid "%%wc_single_tag%%"
+msgstr "%%wc_single_tag%%"
+
+#: inc/admin/admin.php:216
+msgid "Single product tag"
+msgstr ""
+
+#: inc/admin/admin.php:217
+#, php-format
+msgid "%%wc_single_short_desc%%"
+msgstr "%%wc_single_short_desc%%"
+
+#: inc/admin/admin.php:217
+#, fuzzy
+#| msgid "Enter your meta description"
+msgid "Single product short description"
+msgstr "மெட்டா விளக்கம் பதிவு செய்யுங்கள்"
+
+#: inc/admin/admin.php:223
+msgid "Templates variables"
+msgstr "டெம்ப்ளேட் மாறிகள்"
+
+#: inc/admin/admin.php:231 inc/admin/admin.php:239
+msgid "Browse our guides"
+msgstr "எங்கள் வழிகாட்டி ஏடுகளைப் பார்க்கவும்"
+
+#: inc/admin/admin.php:232 inc/admin/admin.php:240
+msgid "Read our FAQ"
+msgstr "படியுங்கள்... சந்தேகமும் தீர்வும்"
+
+#: inc/admin/admin.php:233 inc/admin/admin.php:241
+msgid "Check our website"
+msgstr "எங்கள் இணையதளத்தைப் பார்க்கவும்"
+
+#: inc/admin/admin.php:261 inc/admin/admin.php:732
+msgid ""
+"Discourage search engines from indexing this site is <strong>ON!</strong> None of the "
+"following settings will be applied."
+msgstr ""
+"தேடுதளம் Index செய்வதிலிருந்து இந்தத்தளம் தடுக்கப்படுவது <strong>ON!</strong> செய்யப்பட்டுள்ளது. "
+"பின்வரும் அமைப்புகள் எதுவும் செயல்படாது."
+
+#: inc/admin/admin.php:262 inc/admin/admin.php:733 inc/admin/admin.php:2862
+msgid "Change this settings"
+msgstr "இந்த அமைப்புகளை மாற்றுங்கள்"
+
+#: inc/admin/admin.php:282 inc/admin/admin.php:286 inc/admin/admin.php:349
+#: inc/admin/admin.php:353 inc/admin/admin.php:414 inc/admin/admin.php:418
+#: inc/admin/admin.php:481 inc/admin/admin.php:485 inc/admin/admin.php:562
+#: inc/admin/admin.php:566 inc/admin/admin.php:1271 inc/admin/admin.php:1275
+#: inc/admin/admin.php:1309 inc/admin/admin.php:1313 inc/admin/admin.php:1347
+#: inc/admin/admin.php:1351 inc/admin/admin.php:1385 inc/admin/admin.php:1389
+#: inc/admin/admin.php:1423 inc/admin/admin.php:1427 inc/admin/admin.php:1452
+#: inc/admin/admin.php:1456 inc/admin/admin.php:1480 inc/admin/admin.php:1484
+#: inc/admin/admin.php:1508 inc/admin/admin.php:1512 inc/admin/admin.php:1536
+#: inc/admin/admin.php:1540 inc/admin/admin.php:1564 inc/admin/admin.php:1568
+#: inc/admin/admin.php:1623 inc/admin/admin.php:1627 inc/admin/admin.php:1662
+#: inc/admin/admin.php:1666 inc/admin/admin.php:1691 inc/admin/admin.php:1695
+msgid "Click to disable this feature"
+msgstr "இந்த வசதியை நீக்க கிளிக் செய்யுங்கள்"
+
+#: inc/admin/admin.php:283 inc/admin/admin.php:285 inc/admin/admin.php:350
+#: inc/admin/admin.php:352 inc/admin/admin.php:415 inc/admin/admin.php:417
+#: inc/admin/admin.php:482 inc/admin/admin.php:484 inc/admin/admin.php:563
+#: inc/admin/admin.php:565 inc/admin/admin.php:1272 inc/admin/admin.php:1274
+#: inc/admin/admin.php:1310 inc/admin/admin.php:1312 inc/admin/admin.php:1348
+#: inc/admin/admin.php:1350 inc/admin/admin.php:1386 inc/admin/admin.php:1388
+#: inc/admin/admin.php:1424 inc/admin/admin.php:1426 inc/admin/admin.php:1453
+#: inc/admin/admin.php:1455 inc/admin/admin.php:1481 inc/admin/admin.php:1483
+#: inc/admin/admin.php:1509 inc/admin/admin.php:1511 inc/admin/admin.php:1537
+#: inc/admin/admin.php:1539 inc/admin/admin.php:1565 inc/admin/admin.php:1567
+#: inc/admin/admin.php:1624 inc/admin/admin.php:1626 inc/admin/admin.php:1663
+#: inc/admin/admin.php:1665 inc/admin/admin.php:1692 inc/admin/admin.php:1694
+msgid "Click to enable this feature"
+msgstr "இந்த வசதியைப் பெற கிளிக் செய்யுங்கள்"
+
+#: inc/admin/admin.php:300
+msgid "Home"
+msgstr "முகப்பு"
+
+#: inc/admin/admin.php:301
+msgid "Single Post Types"
+msgstr "ஒற்றைப்பதிவு வகைகள்"
+
+#: inc/admin/admin.php:302
+msgid "Archives"
+msgstr "காப்பகம்"
+
+#: inc/admin/admin.php:303 inc/admin/admin.php:369
+msgid "Taxonomies"
+msgstr "வகைப்பாடுகள்"
+
+#: inc/admin/admin.php:367 inc/admin/admin.php:500 inc/admin/admin.php:509
+msgid "General"
+msgstr "பொது"
+
+#: inc/admin/admin.php:368
+msgid "Post Types"
+msgstr "பதிவு வகைகள்"
+
+#: inc/admin/admin.php:370
+msgid "HTML Sitemap"
+msgstr "HTML தள வரைபடம்"
+
+#: inc/admin/admin.php:432
+msgid "Knowledge Graph"
+msgstr "அறிவு வரைபடம்"
+
+#: inc/admin/admin.php:433
+msgid "Your social accounts"
+msgstr "உங்கள் சமூக வலைத்தளங்கள்"
+
+#: inc/admin/admin.php:434
+msgid "Facebook"
+msgstr "முகநூல்"
+
+#: inc/admin/admin.php:435
+msgid "Twitter"
+msgstr "ட்விட்டர்"
+
+#: inc/admin/admin.php:501 inc/admin/admin.php:510
+msgid "Tracking"
+msgstr "பின்தொடர்"
+
+#: inc/admin/admin.php:502 inc/admin/admin.php:511
+msgid "Events"
+msgstr "நிகழ்வுகள்"
+
+#: inc/admin/admin.php:503 inc/admin/admin.php:512
+msgid "Custom Dimensions"
+msgstr "தனிபயன் பரிமாணங்கள்"
+
+#: inc/admin/admin.php:504
+msgid "Stats in Dashboard"
+msgstr "விபரங்கள் டாஷ்போர்டில்"
+
+#: inc/admin/admin.php:581
+msgid "Appearance"
+msgstr "தோற்றம்"
+
+#: inc/admin/admin.php:582
+msgid "Security"
+msgstr "பாதுகாப்பு"
+
+#: inc/admin/admin.php:614
+msgid "Export Settings"
+msgstr "பதிவேற்று அமைப்புகள்"
+
+#: inc/admin/admin.php:616
+msgid ""
+"Export the plugin settings for this site as a .json file. This allows you to easily import "
+"the configuration into another site."
+msgstr ""
+"இந்த தளத்திற்கான பிளக்இன் அமைப்புகளை ஒரு .json கோப்பாக ஏற்றுமதி செய்க. இது அமைப்பை மற்றொரு தளத்திற்கு "
+"எளிதாக இறக்குமதி செய்ய அனுமதிக்கிறது."
+
+#: inc/admin/admin.php:621
+msgid "Export"
+msgstr "பதிவேற்று"
+
+#: inc/admin/admin.php:628
+msgid "Import Settings"
+msgstr "பதிவிறக்கி அமைப்புகள்"
+
+#: inc/admin/admin.php:630
+msgid ""
+"Import the plugin settings from a .json file. This file can be obtained by exporting the "
+"settings on another site using the form above."
+msgstr ""
+"ஒரு .json கோப்பிலிருந்து பிளக்இன் அமைப்புகளை இறக்குமதி செய்க. மேலே உள்ள படிவத்தைப் பயன்படுத்தி மற்றொரு "
+"தளத்தில் அமைப்புகளை ஏற்றுமதி செய்வதன் மூலம் இந்த கோப்பை பதிவிறக்கலாம்."
+
+#: inc/admin/admin.php:638 inc/admin/admin.php:661
+msgid "Import"
+msgstr "பதிவிறக்க"
+
+#: inc/admin/admin.php:646
+msgid "Import Redirections"
+msgstr "பதிவிறக்க திசை திருப்புதல்"
+
+#: inc/admin/admin.php:648
+msgid ""
+"Import your own redirections from a .csv file (separator \";\"). You must have 3 columns in "
+"this order: url to match (without your domain name), url to redirect in absolute and type "
+"of redirection (301, 302 or 307)."
+msgstr ""
+"ஒரு .csv கோப்பில் (\";\" மூலம் பிரித்து) உங்கள் சொந்த திசைதிருப்பங்களை இறக்குமதி செய்யவும். இதில் 3 "
+"பத்திகள் இருக்கலாம்:  URL (உங்கள் டொமைன் இல்லாமல்) பொருத்தமாக, திசைமாற்ற மற்றும் திசைமாறும் வகை (301, 302 "
+"அல்லது 307) இருக்கவேண்டும்."
+
+#: inc/admin/admin.php:651
+msgid "Download a CSV example"
+msgstr "CSV மாதிரியை பதிவிறக்க"
+
+#: inc/admin/admin.php:669
+msgid "Import posts and terms metadata from Yoast"
+msgstr "Yoast லிருந்து பதிவுகள் மற்றும் மெட்டாடேட்டா பதிவிறக்கலாம்"
+
+#: inc/admin/admin.php:671
+msgid "By clicking Migrate, we'll import:"
+msgstr "Migrate கிளிக் செய்தால், நாங்கள் பதிவிறக்குகிறோம்:"
+
+#: inc/admin/admin.php:673
+msgid "Title tags"
+msgstr "டேக் தலைப்பு"
+
+#: inc/admin/admin.php:675
+msgid "Facebook Open Graph tags (title, description and image thumbnail)"
+msgstr "முகநூல் Open Graph டேக் (தலைப்பு, விவரம் மற்றும் சிறுபடம்)"
+
+#: inc/admin/admin.php:676
+msgid "Twitter tags (title, description and image thumbnail)"
+msgstr "டிவிட்டர் டேக் (தலைப்பு, விவரம் மற்றும் சிறுபடம்)"
+
+#: inc/admin/admin.php:677
+msgid "Meta Robots (noindex, nofollow...)"
+msgstr "மெட்டா எந்திரன் (noindex, nofollow...)"
+
+#: inc/admin/admin.php:680
+msgid "<strong>WARNING:</strong> Migration will delete all SEOPress posts metadata"
+msgstr "<strong>எச்சரிக்கை:</strong> Migration பதிவு மெட்டாடேட்டாவை அழித்துவிடும் ஜாக்கிரதை"
+
+#: inc/admin/admin.php:681
+msgid "Migrate now"
+msgstr "இப்போது இடம்பெயரலாம்"
+
+#: inc/admin/admin.php:688
+msgid "Reset All Notices From Notifications Center"
+msgstr "அனைத்து அறிவிப்புகளையும் அறிவிப்பு மையத்திலிருந்து மீட்டமை"
+
+#: inc/admin/admin.php:690
+msgid "By clicking Reset Notices, you'll see all notices again in notifications center."
+msgstr ""
+"அறிவிப்புகளை மீட்டமைக்க கிளிக் செய்வதன் மூலம், அறிவிப்பு மையத்தில் எல்லா அறிவிப்புகளையும் மீண்டும் காண்பீர்கள்."
+
+#: inc/admin/admin.php:695
+msgid "Reset notices"
+msgstr "அறிவிப்புகளை மீட்டமைக்கவும்"
+
+#: inc/admin/admin.php:702
+msgid "Reset All Settings"
+msgstr "அனைத்து அமைப்புகளையும் மீட்டமைக்கவும்"
+
+#: inc/admin/admin.php:704
+msgid ""
+"<strong>WARNING:</strong> Delete all options related to SEOPress in your database AND set "
+"settings to their default values."
+msgstr ""
+"<strong>எச்சரிக்கை:</strong> SEOPress தொடர்பான இயல்புநிலை மதிப்புகள், உங்கள் Database மற்றும் "
+"அமைப்புகளில் அனைத்து விருப்பங்களையும் நீக்க."
+
+#: inc/admin/admin.php:709
+msgid "Reset settings"
+msgstr "அமைப்புகளை மீட்டமைக்கவும்"
+
+#: inc/admin/admin.php:801 inc/admin/admin.php:807
+msgid "SEO Tools"
+msgstr "SEO கருவிகள்"
+
+#: inc/admin/admin.php:802 inc/admin/admin.php:808 inc/admin/admin.php:814
+#: inc/admin/admin.php:819
+msgid "Useful links"
+msgstr "பயனுள்ள இணைப்புகள்"
+
+#: inc/admin/admin.php:806 inc/admin/admin.php:818
+msgid "Notifications Center"
+msgstr "அறிவிப்பு மையம்"
+
+#: inc/admin/admin.php:839
+msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
+msgstr "<Strong>add_theme_support ('title-tag')</strong> ஐ உங்கள் தீம் பயன்படுத்தாது"
+
+#: inc/admin/admin.php:840 inc/admin/admin.php:895 inc/admin/admin.php:905
+#: inc/admin/admin.php:915
+msgid "High impact"
+msgstr "உயர் தாக்கம்"
+
+#: inc/admin/admin.php:850 inc/admin/admin.php:881 inc/admin/admin.php:4325
+#: inc/admin/admin.php:4346 inc/admin/admin.php:4367 inc/admin/admin.php:4388
+msgid "Learn more"
+msgstr "மேலும் அறிய"
+
+#: inc/admin/admin.php:857
+msgid ""
+"We notice that you use Yoast SEO plugin. <br>Do you want to migrate all your posts metadata "
+"to SEOPress?"
+msgstr ""
+"நீங்கள் Yoast SEO Plugin பயன்படுத்துகிறீர்கள். <br>உங்கள் அனைத்து இடுகைகள் மெட்டாடேட்டாவை SEOPressக்கு "
+"நகர்த்த வேண்டுமா?"
+
+#: inc/admin/admin.php:859
+msgid "Migrate!"
+msgstr "இடம்பெயர!"
+
+#: inc/admin/admin.php:880
+msgid "Your site doesn't use an SSL certificate!"
+msgstr "உங்கள் தளம் SSL சான்றிதழைப் பயன்படுத்தவில்லை!"
+
+#: inc/admin/admin.php:882
+msgid "Low impact"
+msgstr "குறைந்த தாக்கம்"
+
+#: inc/admin/admin.php:884
+msgid "Buy an SSL!"
+msgstr "வாங்குங்கள் SSL!"
+
+#: inc/admin/admin.php:894
+msgid "Your site is not visible to Search Engines!"
+msgstr "தேடுபொறிகளுக்கு உங்கள் தளம் தெரியாது!"
+
+#: inc/admin/admin.php:897 inc/admin/admin.php:907 inc/admin/admin.php:917
+#: inc/admin/admin.php:941 inc/admin/admin.php:995 inc/admin/admin.php:1008
+#: inc/admin/admin.php:1080
+msgid "Fix this!"
+msgstr "இதை சரிசெய்க!"
+
+#: inc/admin/admin.php:904
+msgid "Your site title is empty!"
+msgstr "உங்கள் தள தலைப்பு காலியாக உள்ளது!"
+
+#: inc/admin/admin.php:914 inc/admin/admin.php:2861
+msgid "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
+msgstr "உங்கள் permalinks SEOக்கு ஏற்றதாக இல்லை! இதை சரிசெய்ய, pretty permalinksஐ இயக்கவும்."
+
+#: inc/admin/admin.php:938
+msgid "You RSS feed show full text!"
+msgstr "RSS Feed முழுவதையும் காண்பிக்க!"
+
+#: inc/admin/admin.php:939 inc/admin/admin.php:993 inc/admin/admin.php:1006
+msgid "Medium impact"
+msgstr "நடுத்தர தாக்கம்"
+
+#: inc/admin/admin.php:965
+msgid "Break comments into pages is ON!"
+msgstr "Comments பிரித்துப் பதிவேற்றும் வசதி ஆன் செய்யப்பட்டுள்ளது!"
+
+#: inc/admin/admin.php:966 inc/admin/admin.php:1030 inc/admin/admin.php:1066
+msgid "Huge impact"
+msgstr "பெரிய தாக்கம்"
+
+#: inc/admin/admin.php:968
+msgid "Disable this!"
+msgstr "இந்த வசதியை நீக்க!"
+
+#: inc/admin/admin.php:992
+msgid "Display more posts per page on homepage and archives"
+msgstr "முகப்பு மற்றும் காப்பகங்களில் ஒன்றுக்கு மேற்பட்ட பதிவுகள் காட்ட"
+
+#: inc/admin/admin.php:1005
+msgid "You don't have an XML Sitemap!"
+msgstr "XML தள வரைபடம் உங்களிடம் இல்லை!"
+
+#: inc/admin/admin.php:1029
+msgid "Do you have a Google Business page? It's free!"
+msgstr "உங்களிடம் Google Business பக்கம் இருக்கிறதா? இது இலவசம்!"
+
+#: inc/admin/admin.php:1032
+msgid "Create your page now!"
+msgstr "உங்கள் பக்கத்தை உருவாக்கவும்!"
+
+#: inc/admin/admin.php:1065
+msgid "Add your site to Google. It's free!"
+msgstr "உங்கள் தளத்தை கூகுளில் சேர்க்கவும். இது இலவசம்!"
+
+#: inc/admin/admin.php:1068
+msgid "Add your site to Search Console!"
+msgstr "உங்கள் தளத்தை தேடல் மையத்தில் சேர்க்கவும்!"
+
+#: inc/admin/admin.php:1078
+msgid "You have to enter your licence key to get updates and support"
+msgstr "புதுப்பிப்புகளையும் உதவியையும் பெற License Key பதிவேற்றுங்கள்"
+
+#: inc/admin/admin.php:1093
+msgid "Check websites setup on your server"
+msgstr "உங்கள் சர்வரில் வலைத்தள அமைப்புகளை சரிபார்க்கவும்"
+
+#: inc/admin/admin.php:1095
+msgid "Host IP: "
+msgstr "Host IP: "
+
+#: inc/admin/admin.php:1101
+msgid "Server IP Address: "
+msgstr "செர்வர் IP முகவரி "
+
+#: inc/admin/admin.php:1103
+msgid "Last scrape: "
+msgstr "கடைசி சுரங்கம்: "
+
+#: inc/admin/admin.php:1104
+msgid "Number of websites on your server: "
+msgstr "உங்கள் சர்வரில் வலைதளங்களின் எண்ணிக்கை: "
+
+#: inc/admin/admin.php:1116
+msgid "Get list"
+msgstr "பட்டியல் எடுக்க"
+
+#: inc/admin/admin.php:1124
+msgid "Check your domain expiration date"
+msgstr "உங்கள் டொமைன் காலாவதி தேதியை சரிபார்க்கவும்"
+
+#: inc/admin/admin.php:1155
+msgid "Your domain name: "
+msgstr "உங்கள் டொமைன் பெயர்: "
+
+#: inc/admin/admin.php:1158
+msgid "Your registrar: "
+msgstr "உங்கள் டொமைன் பதிவாளர்: "
+
+#: inc/admin/admin.php:1161
+msgid "Last updated date: "
+msgstr "கடைசியாக புதுப்பிக்கப்பட்ட தேதி: "
+
+#: inc/admin/admin.php:1164
+msgid "Domain creation date: "
+msgstr "டொமைன் உருவாக்கம் தேதி: "
+
+#: inc/admin/admin.php:1167
+msgid "Your domain expires: "
+msgstr "உங்கள் டொமைன் காலாவதியாகிறது: "
+
+#: inc/admin/admin.php:1172
+msgid "Sorry, you domain name can't be verified :("
+msgstr "மன்னிக்கவும், உங்கள் டொமைன் பெயரை சரிபார்க்க முடியாது :("
+
+#: inc/admin/admin.php:1175
+msgid "Email me before expiration"
+msgstr "காலாவதியாகும் முன் எனக்கு மின்னஞ்சல் அனுப்புக"
+
+#: inc/admin/admin.php:1184
+msgid "Check your Alexa Rank (Amazon index)"
+msgstr "Alexa ரேங்க் சரிபாருங்கள் (Amazon Index)"
+
+#: inc/admin/admin.php:1199
+msgid "Your Alexa Rank"
+msgstr "உங்கள் Alexa ரேங்க்"
+
+#: inc/admin/admin.php:1221
+msgid "Country Rank: "
+msgstr "நாட்டின் குறியீடு: "
+
+#: inc/admin/admin.php:1230
+msgid "The lower, the best"
+msgstr "குறைவே நல்லது"
+
+#: inc/admin/admin.php:1234
+msgid "Get Alexa Rank"
+msgstr "Alexa ரேங்க் பெறுங்கள்"
+
+#: inc/admin/admin.php:1242
+msgid "Upload a list of links to disavow to Google"
+msgstr "Google க்கு முரணான இணைப்பு பட்டியலைப் பதிவேற்றவும்"
+
+#: inc/admin/admin.php:1243
+msgid "Google Trends"
+msgstr "கூகுள் ட்ரென்ட்ஸ்"
+
+#: inc/admin/admin.php:1244
+msgid "Google Campaign URL Builder tool"
+msgstr "கூகுள் Campaign URL பில்டர்"
+
+#: inc/admin/admin.php:1257
+msgid "Titles & metas"
+msgstr "தலைப்பு & மெட்டா"
+
+#: inc/admin/admin.php:1258
+msgid "Manage all your titles & metas"
+msgstr "உங்கள் மெட்டா & தலைப்பை"
+
+#: inc/admin/admin.php:1259 inc/admin/admin.php:1297 inc/admin/admin.php:1335
+#: inc/admin/admin.php:1373 inc/admin/admin.php:1411 inc/admin/admin.php:1440
+#: inc/admin/admin.php:1468 inc/admin/admin.php:1496 inc/admin/admin.php:1524
+#: inc/admin/admin.php:1552 inc/admin/admin.php:1590 inc/admin/admin.php:1611
+#: inc/admin/admin.php:1650 inc/admin/admin.php:1679 inc/admin/admin.php:1729
+#: inc/admin/admin.php:1740 inc/admin/admin.php:1752 inc/admin/admin.php:1764
+#: inc/admin/admin.php:1785
+msgid "Manage"
+msgstr "மேலாண்மை"
+
+#: inc/admin/admin.php:1296
+msgid "Manage your XML / Image / HTML Sitemap"
+msgstr "XML / படம் / HTML தள வரைபட மேலாண்மை"
+
+#: inc/admin/admin.php:1334
+msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
+msgstr "திறந்த வரைபடம், ட்விட்டர் அட்டை, Google Knowledge Graph மேலும் ..."
+
+#: inc/admin/admin.php:1372
+msgid "Track everything about your visitors with Google Analytics"
+msgstr "Google Analytics மூலம் உங்கள் பார்வையாளர்களைப் பற்றிய அனைத்தையும் கண்காணிக்கலாம்"
+
+#: inc/admin/admin.php:1410
+msgid "Advanced SEO options for advanced users!"
+msgstr "மேம்பட்ட பயனர்களுக்காக மேம்பட்ட SEO விருப்பங்கள்!"
+
+#: inc/admin/admin.php:1439
+msgid "Improve WooCommerce SEO"
+msgstr "WooCommerce SEO மேம்படுத்த"
+
+#: inc/admin/admin.php:1467
+msgid "Add Google Local Business data type"
+msgstr "Google உள்ளூர் வணிக தரவு வகையைச் சேர்க்கவும்"
+
+#: inc/admin/admin.php:1495
+msgid "Add Dublin Core meta tags"
+msgstr "டப்ளின் கோர் மெட்டா குறிச்சொற்களை சேர்க்கவும்"
+
+#: inc/admin/admin.php:1523
+msgid ""
+"Add data types to your content: articles, courses, recipes, videos, events and products"
+msgstr ""
+"உங்கள் உள்ளடக்கத்திற்கு தரவு வகைகள் சேர்க்க: கட்டுரைகள், படிப்புகள், சமையல், வீடியோக்கள், நிகழ்வுகள் மற்றும் "
+"தயாரிப்புகள்"
+
+#: inc/admin/admin.php:1551
+msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
+msgstr "உங்கள் தீமின் Breadcrumbsஐ ஆக்டிவேட் செய்து தேடுதல் பக்கங்களில் SEOவை மேம்படுத்துங்கள்"
+
+#: inc/admin/admin.php:1589
+msgid "Track your website performance to improve SEO with Google Page Speed"
+msgstr "SEO மற்றும் கூகுள் பக்க வேகத்தை மேம்படுத்த, உங்கள் இணைய செயல்திறனை கண்காணித்திடுங்கள்"
+
+#: inc/admin/admin.php:1610
+msgid "Edit your robots.txt file"
+msgstr "உங்கள் robots.txt கோப்பை எடிட் செய்யுங்கள்"
+
+#: inc/admin/admin.php:1649
+msgid "Optimize your site for Google News"
+msgstr "கூகுள் செய்திகளுக்காக  உங்கள் தளத்தை மேம்படுத்தவும்"
+
+#: inc/admin/admin.php:1677
+msgid "Monitor 404, create 301, 302 and 307 redirections"
+msgstr "404 கவனிக்க, 301,302,307 திசைதிருப்பல் உருவாக்க"
+
+#: inc/admin/admin.php:1678
+msgid "See redirects"
+msgstr "திசைதிருப்பல்களை காண்க"
+
+#: inc/admin/admin.php:1716
+msgid "Scan your site to find SEO problems."
+msgstr "SEO பிரச்சினைகளைக் கண்டுபிடிக்க உங்கள் தளத்தை ஸ்கேன் செய்திடுங்கள்."
+
+#: inc/admin/admin.php:1717
+msgid "See broken links"
+msgstr "உடைந்த இணைப்புகளைக் காண்க"
+
+#: inc/admin/admin.php:1718
+msgid "Scan"
+msgstr "ஸ்கேன்"
+
+#: inc/admin/admin.php:1727
+msgid "Check your backlinks with Majestic API."
+msgstr "மெஜஸ்டிக் API உடன் உங்கள் பின்னிணைப்புகள் சரிபார்க்கவும்."
+
+#: inc/admin/admin.php:1728
+msgid "See backlinks"
+msgstr "பின்னிணைப்புகள்"
+
+#: inc/admin/admin.php:1739
+msgid "Edit your htaccess file."
+msgstr "உங்கள் htaccess கோப்பை எடிட் செய்யுங்கள்."
+
+#: inc/admin/admin.php:1751
+msgid "Configure default WordPress RSS."
+msgstr "இயல்புநிலை வேர்ட்பிரஸ் RSS ஐ கட்டமைக்கவும்."
+
+#: inc/admin/admin.php:1763
+msgid "Import / export SEOPress settings from site to site."
+msgstr "SEOPress செட்டிங்க்ஸை ஒரு தளத்திலிருந்து மறு தளத்திற்கு ஏற்ற/இறக்க."
+
+#: inc/admin/admin.php:1784
+msgid "Edit your SEOPress license key."
+msgstr "உங்கள் SEOPress உரிமத்தின் எண்ணைத் திருத்த."
+
+#: inc/admin/admin.php:1862
+msgid "Site title"
+msgstr "தள தலைப்பு"
+
+#: inc/admin/admin.php:2094
+msgid "Indicate paginated content to Google"
+msgstr "கூகுள்க்கு பக்க உள்ளடக்கத்தைக் சுட்டிக்காட்டவும்"
+
+#: inc/admin/admin.php:2111 inc/admin/admin.php:3676
+msgid "Enable XML Sitemap"
+msgstr "XML தளவரைபடத்தை இயக்குக"
+
+#: inc/admin/admin.php:2119
+msgid "Enable XML Image Sitemaps"
+msgstr "XML பட தளவரைபடங்களை இயக்குக"
+
+#: inc/admin/admin.php:2127 inc/admin/admin.php:3730
+msgid "Enable HTML Sitemap"
+msgstr "HTML தளவரைபடத்தை இயக்குக"
+
+#: inc/admin/admin.php:2143
+msgid "Check to INCLUDE Post Types"
+msgstr "போஸ்ட் வகைகள் சேர்க்கலாமா சோதிக்கவும்"
+
+#: inc/admin/admin.php:2159
+msgid "Check to INCLUDE Taxonomies"
+msgstr "வகைப்பாடுகள் உள்ளிட்டவற்றை சரிபார்க்கவும்"
+
+#: inc/admin/admin.php:2175
+msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
+msgstr "தள வரைபடம் காட்ட ஒரு பதிவு அல்லது பக்கத்தை உள்ளிடவும்"
+
+#: inc/admin/admin.php:2183
+msgid "Exclude some Posts, Pages or Custom Post Types"
+msgstr "சில பதிவுகள், பக்கங்கள் அல்லது தனிபயன் போஸ்ட் வகைகளை நீக்கவும்"
+
+#: inc/admin/admin.php:2191
+msgid "Disable the display of the publication date"
+msgstr "பதிவின் தேதியை முடக்கவும்"
+
+#: inc/admin/admin.php:2208
+msgid "Person or organization"
+msgstr "நபர் அல்லது நிறுவனம்"
+
+#: inc/admin/admin.php:2216
+msgid "Your name / organization"
+msgstr "உங்கள் பெயர் / நிறுவனம்"
+
+#: inc/admin/admin.php:2224
+msgid "Your photo / organization logo"
+msgstr "உங்கள் புகைப்படம் / நிறுவனத்தின் இலச்சினை"
+
+#: inc/admin/admin.php:2232
+msgid "Organization Phone number (only for Organization)"
+msgstr "நிறுவன தொலைபேசி எண் (நிறுவனங்களுக்கு மட்டும்)"
+
+#: inc/admin/admin.php:2240
+msgid "Contact type (only for Organization)"
+msgstr "தொடர்பு முறை (நிறுவனங்களுக்கு மட்டும்)"
+
+#: inc/admin/admin.php:2248
+msgid "Contact option (only for Organization)"
+msgstr "தொடர்பு விருப்பம் (நிறுவனங்களுக்கு மட்டும்)"
+
+#: inc/admin/admin.php:2265
+msgid "Facebook Page URL"
+msgstr "முகநூல் பக்க URL"
+
+#: inc/admin/admin.php:2273
+msgid "Twitter Username"
+msgstr "டிவிட்டர் பயனர்பெயர்"
+
+#: inc/admin/admin.php:2281
+msgid "Google + URL"
+msgstr "கூகுள்+ URL"
+
+#: inc/admin/admin.php:2289
+msgid "Pinterest URL"
+msgstr "பிண்ட்ரெஸ்ட் URL"
+
+#: inc/admin/admin.php:2297
+msgid "Instagram URL"
+msgstr "இன்ஸ்டாகிராம் URL"
+
+#: inc/admin/admin.php:2305
+msgid "YouTube URL"
+msgstr "யூடியுப் URL"
+
+#: inc/admin/admin.php:2313
+msgid "LinkedIn URL"
+msgstr "லிங்க்ட்இன் URL"
+
+#: inc/admin/admin.php:2321
+msgid "MySpace URL"
+msgstr "மைஸ்பேஸ் URL"
+
+#: inc/admin/admin.php:2329
+msgid "Soundcloud URL"
+msgstr "சவுண்ட்க்ளவுட் URL"
+
+#: inc/admin/admin.php:2337
+msgid "Tumblr URL"
+msgstr "டம்ப்ளர் URL"
+
+#: inc/admin/admin.php:2354
+msgid "Enable Open Graph Data"
+msgstr "திறந்தநிலை வரைபடத் தரவை இயக்குக"
+
+#: inc/admin/admin.php:2362
+msgid "Select a default image"
+msgstr "எப்போதைக்குமான படத்தைத் தெரிவு செய்க"
+
+#: inc/admin/admin.php:2370
+msgid "Facebook Admin ID"
+msgstr "முகநூல் நிர்வாக ஐடி"
+
+#: inc/admin/admin.php:2378
+msgid "Facebook App ID"
+msgstr "முகநூல் செயலி ஐடி"
+
+#: inc/admin/admin.php:2395
+msgid "Enable Twitter Card"
+msgstr "ட்விட்டர் கார்டை இயக்குக"
+
+#: inc/admin/admin.php:2403
+msgid "Use Open Graph if no Twitter Cards filled"
+msgstr ""
+
+#: inc/admin/admin.php:2411
+msgid "Default Twitter Image"
+msgstr "எப்போதைக்குமான ட்விட்டர் படம்"
+
+#: inc/admin/admin.php:2419
+msgid "Image size for Twitter Summary card"
+msgstr "ட்விட்டர் சம்மரி கார்டின் பட அளவு"
+
+#: inc/admin/admin.php:2436 inc/admin/admin.php:4269
+msgid "Enable Google Analytics tracking"
+msgstr "கூகுள் பகுப்பாய்வு கண்காணிப்பை இயக்குக"
+
+#: inc/admin/admin.php:2444
+msgid "Enter your tracking ID"
+msgstr "கண்காணித்தல் IDயை உள்ளிடுக"
+
+#: inc/admin/admin.php:2452
+msgid "Exclude user roles from tracking"
+msgstr "கண்காணிப்பிலிருந்து பயனர்களை நீக்க"
+
+#: inc/admin/admin.php:2470 inc/admin/admin.php:4322
+msgid "Enable remarketing, demographics and interest reporting"
+msgstr "மதிப்பாய்வு, புள்ளிவிவரங்கள் மற்றும் விருப்பங்கள் ஆகியவற்றை இயக்க"
+
+#: inc/admin/admin.php:2478 inc/admin/admin.php:4343
+msgid "Enable IP Anonymization"
+msgstr "IP அநாமதேயமாக்குதலை இயக்க"
+
+#: inc/admin/admin.php:2486 inc/admin/admin.php:4364
+msgid "Enhanced Link Attribution"
+msgstr "மேம்படுத்தப்பட்ட இணைப்புகள்"
+
+#: inc/admin/admin.php:2494 inc/admin/admin.php:4385
+msgid "Enable cross-domain tracking"
+msgstr "டொமைன் மாறுதல் கண்காணிப்பை இயக்க"
+
+#: inc/admin/admin.php:2502
+msgid "Cross domains"
+msgstr "டொமைன் மாறுதல்"
+
+#: inc/admin/admin.php:2520
+msgid "Enable external links tracking (all links with target _blank attribute)"
+msgstr "புற இணைப்புகள் கண்காணித்தல் (target_blank பண்புள்ள அனைத்து இணைப்புகள்)"
+
+#: inc/admin/admin.php:2528
+msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
+msgstr "தரவிறக்க கண்காணிப்பை இயக்க (உ-ம்: PDF, XLSX, DOCX...)"
+
+#: inc/admin/admin.php:2536
+msgid "Track click downloads"
+msgstr "கிளிக் தரவிறக்கம் கண்காணிக்க"
+
+#: inc/admin/admin.php:2544
+msgid "Enable affiliate / outbound links tracking (eg: aff, go, out, recommends"
+msgstr "Affiliate இணைப்பு / வெளிச்செல்லும் இணைப்புகள் கண்காணிப்பை இயக்க (உ-ம்: aff, go, out, recommends"
+
+#: inc/admin/admin.php:2552
+msgid "Track affiliate / outbound links"
+msgstr "Affiliate / வெளிச்செல்லும் இணைப்புகள் கண்காணிப்பு"
+
+#: inc/admin/admin.php:2570
+msgid "Track Authors"
+msgstr "பயனர்கள் கண்காணிப்பு"
+
+#: inc/admin/admin.php:2578
+msgid "Track Categories"
+msgstr "வகைகள் கண்காணிப்பு"
+
+#: inc/admin/admin.php:2586
+msgid "Track Tags"
+msgstr "டேக் கண்காணிப்பு"
+
+#: inc/admin/admin.php:2594
+msgid "Track Post Types"
+msgstr "பதிவு வகைகள் கண்காணிப்பு"
+
+#: inc/admin/admin.php:2602
+msgid "Track Logged In Users"
+msgstr "உள்ளிட்டு வந்த பயனர் கண்காணிப்பு"
+
+#: inc/admin/admin.php:2619
+msgid "Redirect attachment pages to post parent"
+msgstr "இணைப்பு பக்கங்களை மேல் திருப்பி விடுங்கள்"
+
+#: inc/admin/admin.php:2627
+msgid "Remove stop words from URL"
+msgstr "URLலிலிருந்து வார்த்தைகளை நீக்குக"
+
+#: inc/admin/admin.php:2635
+msgid "Remove /category/ in URL"
+msgstr "நீக்குக / வகை / URLஇல்"
+
+#: inc/admin/admin.php:2643 inc/admin/admin.php:4931
+msgid "Disable trailing slash for metas"
+msgstr "ஸ்லாஷ் குறியீட்டை மெட்டாவிலிருந்து நிறுத்த"
+
+#: inc/admin/admin.php:2651
+msgid "Google site verification"
+msgstr "கூகுள் தளம் சரிபார்த்தல்"
+
+#: inc/admin/admin.php:2659
+msgid "Bing site verification"
+msgstr "Bing தளம் சரிபார்த்தல்"
+
+#: inc/admin/admin.php:2667
+msgid "Pinterest site verification"
+msgstr "Pinterest தளம் சரிபார்த்தல்"
+
+#: inc/admin/admin.php:2675
+msgid "Yandex site verification"
+msgstr "Yandex தளம் சரிபார்த்தல்"
+
+#: inc/admin/admin.php:2692
+msgid "SEOPress in admin bar"
+msgstr "SEOPress நிர்வாக தளம்"
+
+#: inc/admin/admin.php:2700
+msgid "Move SEOPress metaboxe position"
+msgstr "SEOPress மெட்டாபாக்ஸ் இடத்தை நகர்த்த"
+
+#: inc/admin/admin.php:2708
+msgid "Hide SEOPress Notifications Center"
+msgstr "SEOPress அறிவிப்பு மையத்தை மறைக்க"
+
+#: inc/admin/admin.php:2716
+msgid "Show Title tag column in post types"
+msgstr "பதிவு வகைகளில் தலைப்பு டேக் காண்பிக்க"
+
+#: inc/admin/admin.php:2724
+msgid "Show Meta description column in post types"
+msgstr "பதிவு வகைகளில் மெட்டா விளக்கம் காண்பிக்க"
+
+#: inc/admin/admin.php:2732
+msgid "Show noindex column in post types"
+msgstr "பதிவு வகைகளில் noindex காண்பிக்க"
+
+#: inc/admin/admin.php:2740
+msgid "Show nofollow column in post types"
+msgstr "பதிவு வகைகளில் nofollow காண்பிக்க"
+
+#: inc/admin/admin.php:2748
+msgid "Show total number of words column in post types"
+msgstr "பதிவு வகைகளில் மொத்த வார்த்தைகள் காண்பிக்க"
+
+#: inc/admin/admin.php:2756
+msgid "Show W3C validator column in post types"
+msgstr "பதிவு வகைகளில் W3C validator காண்பிக்க"
+
+#: inc/admin/admin.php:2764
+msgid "Show Google Page Speed column in post types"
+msgstr "பதிவு வகைகளில் கூகுள் பக்க வேகம் காண்பிக்க"
+
+#: inc/admin/admin.php:2773
+msgid "Hide Genesis SEO Metaboxe"
+msgstr "Genesis SEO மெட்டபாக்ஸ் மறைக்க"
+
+#: inc/admin/admin.php:2790
+msgid "Block SEO metaboxe to user roles"
+msgstr "பயனருக்கு SEO மெட்டபாக்ஸ் தடைசெய்ய"
+
+#: inc/admin/admin.php:2834
+msgid "<p>Customize your titles & metas for homepage</p>"
+msgstr "<p>உங்கள் முகப்புப் பக்க மெட்டா & தலைப்பை மாற்றிக்கொள்ள</p>"
+
+#: inc/admin/admin.php:2839
+msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
+msgstr "<p>தனிப்பயன் பதிவு வகைகளில் தலைப்பு & மெட்டா மாற்றிக்கொள்ள</p>"
+
+#: inc/admin/admin.php:2844
+msgid "<p>Customize your metas for all pages</p>"
+msgstr "<p>அனைத்துப் பக்கங்களுக்குமான மெட்டா மாற்றிக்கொள்ள</p>"
+
+#: inc/admin/admin.php:2849
+msgid "<p>Customize your metas for all taxonomies archives</p>"
+msgstr "<p>அனைத்து taxonomyக்குமான மெட்டா மாற்றிக்கொள்ள</p>"
+
+#: inc/admin/admin.php:2854
+msgid "<p>Customize your metas for all archives</p>"
+msgstr "<p>அனைத்து archiveக்குமான மெட்டா மாற்றிக்கொள்ள</p>"
+
+#: inc/admin/admin.php:2865
+msgid ""
+"To view your sitemap, enable permalinks (not default one), and save settings to flush them."
+msgstr "உங்கள் தளவரைபடத்தைப் பார்வையிட, permalinks இயக்கி, அமைப்புகளை சேமித்து வைக்கவும்."
+
+#: inc/admin/admin.php:2866
+msgid "Only the last 1000 items are listed in Sitemaps for performances issues."
+msgstr "சிறந்த செயல்திறனுக்காக 1000 தரவுகள் மட்டுமே தளவரைபடத்தில் பட்டியலிடப்பட்டுள்ளது."
+
+#: inc/admin/admin.php:2868
+msgid ""
+"Your server use NGINX. If XML Sitemaps doesn't work, you have to add this rules to your "
+"configuration:"
+msgstr ""
+"உங்கள் NGINX செர்வர் உபயோகிக்கிறது. XML தளவரைபடம் செயலிழந்தால், இந்த விதிகளை Configuration இல் "
+"சேர்த்திடுங்கள்:"
+
+#: inc/admin/admin.php:2878
+msgid "Noindex content will not be displayed in Sitemaps."
+msgstr "noindex உள்ளடக்கங்கள் தளவரைபடத்தில் இடம்பெறாது."
+
+#: inc/admin/admin.php:2880
+msgid "View your sitemap"
+msgstr "உங்கள் தலவரைபடத்தைப் பார்வையிட"
+
+#: inc/admin/admin.php:2882
+msgid "Ping Google manually"
+msgstr "நீங்களே கூகுளை பிங் செய்ய"
+
+#: inc/admin/admin.php:2884
+msgid "Flush permalinks"
+msgstr "Flush permalinks"
+
+#: inc/admin/admin.php:2890
+msgid "<p>Create an HTML for your visitors and boost your SEO.</p>"
+msgstr "<p>உங்கள் பயனர்களுக்காகவும், SEO மேம்படுத்தவும் HTML உருவாக்குங்கள்</p>"
+
+#: inc/admin/admin.php:2905
+msgid "<p>Include / Exclude Post Types</p>"
+msgstr "<p>பதிவு வகைகள் சேர்க்க / நீக்க</p>"
+
+#: inc/admin/admin.php:2910
+msgid "<p>Include / Exclude Taxonomies</p>"
+msgstr "<p>Taxonomies சேர்க்க / நீக்க</p>"
+
+#: inc/admin/admin.php:2915
+msgid "<p>Configure Google Knowledge Graph</p>"
+msgstr "<p>கூகுள் Knowledge Graph கட்டமைத்திட</p>"
+
+#: inc/admin/admin.php:2920
+msgid "<p>Link your site with your social accounts</p>"
+msgstr "<p>உங்கள் தளத்தை, உங்கள் சமூக வலைதளங்களோடு இணைத்திடுங்கள்</p>"
+
+#: inc/admin/admin.php:2925
+msgid "<p>Manage Open Graph datas</p>"
+msgstr "<p>Open Graph தரவுகள் மேலாண்மை</p>"
+
+#: inc/admin/admin.php:2930
+msgid "<p>Manage your Twitter card</p>"
+msgstr "<p>உங்கள் ட்விட்டர் கார்ட் மேலாண்மை</p>"
+
+#: inc/admin/admin.php:2935
+msgid "<p>Link your Google Analytics to your website</p>"
+msgstr "<p>கூகுள் அனலைடிக்சை உங்கள் தளத்தோடு இணைத்திடுங்கள்</p>"
+
+#: inc/admin/admin.php:2940
+msgid "<p>Configure your Google Analytics tracking code</p>"
+msgstr "<p>உங்கள் கூகுள் அனலைடிக்ஸ் குறியீட்டை கட்டமைத்திடுங்கள்</p>"
+
+#: inc/admin/admin.php:2945
+msgid "<p>Track events in Google Analytics</p>"
+msgstr "<p>கூகுள் அனலிடிக்ஸில் நிகழ்வுகளைக் கண்காணித்திடுங்கள்</p>"
+
+#: inc/admin/admin.php:2950
+msgid ""
+"<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom "
+"metrics are like default dimensions and metrics in your Analytics account,<br> except you "
+"create them yourself. You can use them to collect and analyze data that Analytics doesn't "
+"automatically track.<br> Notice that you have to setup your custom dimensions in your "
+"Google Analytics account too. More info by clicking on help icon."
+msgstr ""
+"<p> உங்கள் கூகுள் அனலைடிக்ஸ் தனிபயன் பரிமாணங்களை உள்ளமைக்கவும். <br> தனிபயன் பரிமாணங்கள் மற்றும் தனிபயன் "
+"அளவீடுகள் ஆகியவை உங்கள் அனலைடிக்ஸ் கணக்கில் இயல்புநிலை பரிமாணங்கள் மற்றும் அளவுருக்களைப் போன்றவை. அனலைடிக்ஸ் "
+"தானாகவே கண்காணிக்காத தரவைச் சேகரிக்கவும், அவற்றைப் பகுப்பாய்வு செய்யவும் பயன்படுத்தலாம். <br> உங்கள் கூகுள் "
+"அனலைடிக்ஸ் கணக்கில் உங்கள் தனிபயன் பரிமாணங்களை அமைக்க வேண்டும் என்பதை கவனிக்கவும். உதவி ஐகானில் கிளிக் "
+"செய்வதன் மூலம் மேலும் தகவல் பெறலாம்."
+
+#: inc/admin/admin.php:2965
+msgid "<p>Advanced SEO options</p>"
+msgstr "<p>மேம்பட்ட SEO விருப்பங்கள்!</p>"
+
+#: inc/admin/admin.php:2970
+msgid "<p>Customize SEOPress to fit your needs</p>"
+msgstr "<p>SEOPressஐ உங்கள் தேவைக்கேற்ப வடிவமையுங்கள்</p>"
+
+#: inc/admin/admin.php:2975
+msgid "<p>Manage security</p>"
+msgstr "<p>பாதுகாப்பு மேலாண்மை</p>"
+
+#: inc/admin/admin.php:2986
+msgid "My awesome website"
+msgstr "எனது அற்புதமான இணையதளம்"
+
+#: inc/admin/admin.php:2991 inc/admin/admin.php:3002 inc/admin/admin.php:3042
+#: inc/admin/admin.php:3159 inc/admin/admin.php:3190 inc/admin/admin.php:3267
+#: inc/admin/admin.php:3342 inc/admin/admin.php:3412 inc/admin/admin.php:3481
+#: inc/admin/admin.php:3513
+msgid "More tags"
+msgstr "மேலதிக டேக்குகள்"
+
+#: inc/admin/admin.php:2997
+msgid "This is a cool website about Wookiees"
+msgstr "இது Wookiees குறித்த இணையதளம்"
+
+#: inc/admin/admin.php:3005
+msgid "Looking for editing your blog page?"
+msgstr "உங்கள் பதிவுகள் பக்கத்தை எடிட் செய்ய விரும்புகிறீர்களா?"
+
+#: inc/admin/admin.php:3019 inc/admin/admin.php:3130 inc/admin/admin.php:3244
+#: inc/admin/admin.php:3331 inc/admin/admin.php:3401 inc/admin/admin.php:3470
+#: inc/admin/admin.php:3504
+msgid "Title template"
+msgstr "தலைப்பு template"
+
+#: inc/admin/admin.php:3038
+msgid "Post Title"
+msgstr "பதிவின் தலைப்பு"
+
+#: inc/admin/admin.php:3049 inc/admin/admin.php:3166 inc/admin/admin.php:3274
+#: inc/admin/admin.php:3348 inc/admin/admin.php:3418 inc/admin/admin.php:3487
+#: inc/admin/admin.php:3519
+msgid "Meta description template"
+msgstr "மெட்டா விளக்கம் template"
+
+#: inc/admin/admin.php:3110
+msgid "Display date in Google search results?"
+msgstr "கூகுள் தேடல் முடிவுகளில் தேதி காட்ட வேண்டுமா?"
+
+#: inc/admin/admin.php:3150
+msgid "Category Title"
+msgstr "வகையினத் தலைப்பு"
+
+#: inc/admin/admin.php:3152
+msgid "Tag Title"
+msgstr "டேக் தலைப்பு"
+
+#: inc/admin/admin.php:3154
+msgid "Term Title"
+msgstr "டெர்ம் தலைப்பு"
+
+#: inc/admin/admin.php:3183
+msgid "Category Description"
+msgstr "வகையின விளக்கம்"
+
+#: inc/admin/admin.php:3185
+msgid "Tag Description"
+msgstr "டேக் விளக்கம்"
+
+#: inc/admin/admin.php:3187
+msgid "Term Description"
+msgstr "டெர்ம் விளக்கம்"
+
+#: inc/admin/admin.php:3263
+msgid "Post Type Archive Name"
+msgstr "பதிவுவகை காப்பகப் பெயர்"
+
+#: inc/admin/admin.php:3329
+msgid "Author archives"
+msgstr "பதிவர் எழுதியவை"
+
+#: inc/admin/admin.php:3390
+msgid "Disable author archives"
+msgstr "பதிவர் எழுதியவைகளை காண்பிக்காமல் இருக்க"
+
+#: inc/admin/admin.php:3399
+msgid "Date archives"
+msgstr "தினக் காப்பகம்"
+
+#: inc/admin/admin.php:3410
+msgid "Archive date"
+msgstr "தினக் காப்பகம்"
+
+#: inc/admin/admin.php:3459
+msgid "Disable date archives"
+msgstr "பதிவின் தேதியை முடக்கவும்"
+
+#: inc/admin/admin.php:3468
+msgid "Search archives"
+msgstr "காப்பகத்தில் தேடுங்கள்"
+
+#: inc/admin/admin.php:3479
+msgid "Search Keywords"
+msgstr "தேடுதல் வார்த்தைகள்"
+
+#: inc/admin/admin.php:3502
+msgid "404 archives"
+msgstr "404 காப்பகம்"
+
+#: inc/admin/admin.php:3657
+msgid "Add rel next/prev link in head of paginated archive pages"
+msgstr "Add rel next/prev link in head of paginated archive pages"
+
+#: inc/admin/admin.php:3659
+msgid "Learn more on Google website"
+msgstr "கூகுள் தளத்தில் மேலும் அறிந்திடுங்கள்"
+
+#: inc/admin/admin.php:3703
+msgid "Enable Image Sitemaps"
+msgstr "படங்களின் தலவரைபடத்தை இயக்குக"
+
+#: inc/admin/admin.php:3780 inc/admin/admin.php:3820
+msgid "Include"
+msgstr "சேர்த்திடு"
+
+#: inc/admin/admin.php:3835
+msgid "eg: 2, 28, 68"
+msgstr "உ-ம்: 2, 28, 68"
+
+#: inc/admin/admin.php:3839
+#, fuzzy
+#| msgid "You can also use this shorcode:"
+msgid "You can also use this shortcode:"
+msgstr "இந்தக் குருங்குறியீட்டையும் நீங்கள் உபயோகிக்கலாம்:"
+
+#: inc/admin/admin.php:3849
+msgid "eg: 13, 8, 38"
+msgstr "உ-ம்: 13, 8, 38"
+
+#: inc/admin/admin.php:3864
+msgid "Disable date after each post, page, post type?"
+msgstr "பதிவு, பக்கம் மற்றும் பதிவு வகைகளில் தேதியை நிறுத்தவா?"
+
+#: inc/admin/admin.php:3880
+msgid "Person"
+msgstr "நபர்"
+
+#: inc/admin/admin.php:3883
+msgid "Organization"
+msgstr "நிறுவனம்"
+
+#: inc/admin/admin.php:3896
+msgid "eg: Apple"
+msgstr "உ-ம்: ஆப்பிள்"
+
+#: inc/admin/admin.php:3909
+msgid "Select your logo"
+msgstr "இலச்சினையைத் தெரிவு செய்யுங்கள்"
+
+#: inc/admin/admin.php:3937
+msgid "eg: +33123456789 (internationalized version required)"
+msgstr "உ-ம்: +33123456789 (சர்வதேச குறியீட்டில்)"
+
+#: inc/admin/admin.php:3952
+msgid "Customer support"
+msgstr "வாடிக்கையாளர் சேவை"
+
+#: inc/admin/admin.php:3955
+msgid "Technical support"
+msgstr "தொழில்நுட்ப சேவை"
+
+#: inc/admin/admin.php:3958
+msgid "Billing support"
+msgstr "கட்டணம் செலுத்துவதற்கான சேவை"
+
+#: inc/admin/admin.php:3961
+msgid "Bill payment"
+msgstr "கட்டணம் செலுத்துதல்"
+
+#: inc/admin/admin.php:3964
+msgid "Sales"
+msgstr "விற்பனை"
+
+#: inc/admin/admin.php:3967
+msgid "Credit card support"
+msgstr "கடன் அட்டை சேவை"
+
+#: inc/admin/admin.php:3970
+msgid "Emergency"
+msgstr "அவசரம்"
+
+#: inc/admin/admin.php:3973
+msgid "Baggage tracking"
+msgstr "பயணப்பையை பின்தொடர"
+
+#: inc/admin/admin.php:3976
+msgid "Roadside assistance"
+msgstr "தெருவோர உதவி"
+
+#: inc/admin/admin.php:3979
+msgid "Package tracking"
+msgstr "பாக்கெஜ் பின்தொடர"
+
+#: inc/admin/admin.php:3996
+msgid "Toll Free"
+msgstr "கட்டணம் இல்லாதது"
+
+#: inc/admin/admin.php:3999
+msgid "Hearing impaired supported"
+msgstr "காது கேளாதோருக்கான உதவி"
+
+#: inc/admin/admin.php:4012
+msgid "eg: https://www.facebook.com/your-page"
+msgstr "eg: https://www.facebook.com/your-page"
+
+#: inc/admin/admin.php:4025
+msgid "eg: @wp_seopress"
+msgstr "eg: @wp_seopress"
+
+#: inc/admin/admin.php:4037
+msgid "eg: https://plus.google.com/+BenjaminDenis"
+msgstr "eg: https://plus.google.com/+BenjaminDenis"
+
+#: inc/admin/admin.php:4049
+msgid "eg: https://pinterest.com/wpbuy/"
+msgstr "eg: https://pinterest.com/wpbuy/"
+
+#: inc/admin/admin.php:4061
+msgid "eg: https://www.instagram.com/rainbowgeek64/"
+msgstr "eg: https://www.instagram.com/rainbowgeek64/"
+
+#: inc/admin/admin.php:4073
+msgid "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+msgstr "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+
+#: inc/admin/admin.php:4085
+msgid "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
+msgstr "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
+
+#: inc/admin/admin.php:4097
+msgid "eg: https://myspace.com/your-page"
+msgstr "eg: https://myspace.com/your-page"
+
+#: inc/admin/admin.php:4109
+msgid "eg: https://soundcloud.com/michaelmccannmusic"
+msgstr "eg: https://soundcloud.com/michaelmccannmusic"
+
+#: inc/admin/admin.php:4121
+msgid "eg: https://your-site.tumblr.com"
+msgstr "eg: https://your-site.tumblr.com"
+
+#: inc/admin/admin.php:4138
+msgid "Enable OG data"
+msgstr "OG தரவை இயக்குக"
+
+#: inc/admin/admin.php:4184
+msgid "How-to create a Facebook App ID"
+msgstr "முகநூல் App IDயை எப்படி உருவாக்கலாம்"
+
+#: inc/admin/admin.php:4198
+msgid "Enable Twitter card"
+msgstr "ட்விட்டர் கார்டை இயக்குக"
+
+#: inc/admin/admin.php:4215
+#, fuzzy
+#| msgid "Enable Twitter Card"
+msgid "Use OG if no Twitter Cards"
+msgstr "ட்விட்டர் கார்டை இயக்குக"
+
+#: inc/admin/admin.php:4248
+msgid "Default"
+msgstr "இயல்புநிலை"
+
+#: inc/admin/admin.php:4251
+msgid "Large"
+msgstr "பெரியது"
+
+#: inc/admin/admin.php:4279
+msgid "Enter your Tracking ID (UA-XXXX-XX)"
+msgstr "கண்காணிப்பு ID உள்ளீடுக (UA-XXXX-XX)"
+
+#: inc/admin/admin.php:4283
+msgid "Find your tracking ID"
+msgstr "உங்கள் கண்காணிப்பு ID அறிந்திடுங்கள்"
+
+#: inc/admin/admin.php:4324
+msgid ""
+"A remarketing audience is a list of cookies or mobile-advertising IDs that represents a "
+"group of users you want to re-engage because of their likelihood to convert."
+msgstr ""
+"மறுசந்தை பார்வையாளர், மாற்று பயனர்களின் குழுவை பிரதிநிதித்துவப்படுத்தும் குக்கி மற்றும் மொபைல் விளம்பர "
+"IDகளின் பட்டியலாகும்."
+
+#: inc/admin/admin.php:4345
+msgid ""
+"When a customer of Analytics requests IP address anonymization, Analytics anonymizes the "
+"address as soon as technically feasible at the earliest possible stage of the collection "
+"network."
+msgstr ""
+"Analytics இன் வாடிக்கையாளர் ஐபி முகவரியை அநாமதேயமாக்குகிறது போது, ​​அனலிட்டிக்ஸ் சாத்தியமான நிலையில் "
+"அநாமதேயப்படுத்தி வருகிறது."
+
+#: inc/admin/admin.php:4366
+msgid ""
+"Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by "
+"automatically differentiating between multiple links to the same URL on a single page by "
+"using link element IDs."
+msgstr ""
+"ஒரே URLன் வேறுபட்ட இணைப்புகளை தானே பிரித்துக் காட்டுவதன் மூலம், மேம்படுத்தப்பட்ட இணைப்பு பண்புக்கூறு "
+"(Enhanced Link Attribution) உங்கள் In-Page அனலிட்டிக்ஸ் அறிக்கையின் துல்லியத்தன்மையை மேம்படுத்தும்."
+
+#: inc/admin/admin.php:4387
+msgid ""
+"Cross domain tracking makes it possible for Analytics to see sessions on two related sites "
+"(such as an ecommerce site and a separate shopping cart site) as a single session. This is "
+"sometimes called site linking."
+msgstr ""
+"கிராஸ் டொமைன் டிராக்கிங், இரு தளங்களுக்கிடையிலான அனலிட்டிக்ஸை  ஒற்றை அமர்வில் பார்க்கத் துணை செய்கிறது. "
+"இது site linking என்று அழைக்கப்படுகிறது."
+
+#: inc/admin/admin.php:4399
+msgid "Enter yours domains"
+msgstr "உங்கள் டொமைன்களை உள்ளிடுங்கள்"
+
+#: inc/admin/admin.php:4416
+msgid "Enable external links tracking"
+msgstr "புற இணைப்புகள் கண்காணித்தலை உயிர்ப்பிக்கவும்"
+
+#: inc/admin/admin.php:4433
+msgid "Enable download tracking"
+msgstr "பதிவிறக்கம் கண்காணித்தலை உயிர்ப்பிக்கவும்"
+
+#: inc/admin/admin.php:4445
+msgid "pdf|docx|pptx|zip"
+msgstr "pdf|docx|pptx|zip"
+
+#: inc/admin/admin.php:4449
+msgid "Separate each file type extensions with a pipe \"|\""
+msgstr "\"|\" உள்ளிட்டு கோப்பு வகை நீட்டலாய் வகை பிரிக்கவும்\""
+
+#: inc/admin/admin.php:4464
+msgid "Enable affiliate / outbound tracking"
+msgstr "Affiliate / வெளிச்செல்லும் இணைப்புகள் கண்காணிப்பை இயக்க"
+
+#: inc/admin/admin.php:4476
+msgid "aff|go|out"
+msgstr "aff|go|out"
+
+#: inc/admin/admin.php:4480
+msgid "Separate each keyword with a pipe \"|\""
+msgstr "\"|\" பயன்படுத்தி தேடுதல் வார்த்தைகளைப் பிரித்திடுங்கள்\""
+
+#: inc/admin/admin.php:4497 inc/admin/admin.php:4574 inc/admin/admin.php:4651
+#: inc/admin/admin.php:4728 inc/admin/admin.php:4805
+msgid "Custom Dimension #1"
+msgstr "விருப்பப் பரிமாணம் #1"
+
+#: inc/admin/admin.php:4500 inc/admin/admin.php:4577 inc/admin/admin.php:4654
+#: inc/admin/admin.php:4731 inc/admin/admin.php:4808
+msgid "Custom Dimension #2"
+msgstr "விருப்பப் பரிமாணம் #2"
+
+#: inc/admin/admin.php:4503 inc/admin/admin.php:4580 inc/admin/admin.php:4657
+#: inc/admin/admin.php:4734 inc/admin/admin.php:4811
+msgid "Custom Dimension #3"
+msgstr "விருப்பப் பரிமாணம் #3"
+
+#: inc/admin/admin.php:4506 inc/admin/admin.php:4583 inc/admin/admin.php:4660
+#: inc/admin/admin.php:4737 inc/admin/admin.php:4814
+msgid "Custom Dimension #4"
+msgstr "விருப்பப் பரிமாணம் #4"
+
+#: inc/admin/admin.php:4509 inc/admin/admin.php:4586 inc/admin/admin.php:4663
+#: inc/admin/admin.php:4740 inc/admin/admin.php:4817
+msgid "Custom Dimension #5"
+msgstr "விருப்பப் பரிமாணம் #5"
+
+#: inc/admin/admin.php:4512 inc/admin/admin.php:4589 inc/admin/admin.php:4666
+#: inc/admin/admin.php:4743 inc/admin/admin.php:4820
+msgid "Custom Dimension #6"
+msgstr "விருப்பப் பரிமாணம் #6"
+
+#: inc/admin/admin.php:4515 inc/admin/admin.php:4592 inc/admin/admin.php:4669
+#: inc/admin/admin.php:4746 inc/admin/admin.php:4823
+msgid "Custom Dimension #7"
+msgstr "விருப்பப் பரிமாணம் #7"
+
+#: inc/admin/admin.php:4518 inc/admin/admin.php:4595 inc/admin/admin.php:4672
+#: inc/admin/admin.php:4749 inc/admin/admin.php:4826
+msgid "Custom Dimension #8"
+msgstr "விருப்பப் பரிமாணம் #8"
+
+#: inc/admin/admin.php:4521 inc/admin/admin.php:4598 inc/admin/admin.php:4675
+#: inc/admin/admin.php:4752 inc/admin/admin.php:4829
+msgid "Custom Dimension #9"
+msgstr "விருப்பப் பரிமாணம் #9"
+
+#: inc/admin/admin.php:4524 inc/admin/admin.php:4601 inc/admin/admin.php:4678
+#: inc/admin/admin.php:4755 inc/admin/admin.php:4832
+msgid "Custom Dimension #10"
+msgstr "விருப்பப் பரிமாணம் #10"
+
+#: inc/admin/admin.php:4527 inc/admin/admin.php:4604 inc/admin/admin.php:4681
+#: inc/admin/admin.php:4758 inc/admin/admin.php:4835
+msgid "Custom Dimension #11"
+msgstr "விருப்பப் பரிமாணம் #11"
+
+#: inc/admin/admin.php:4530 inc/admin/admin.php:4607 inc/admin/admin.php:4684
+#: inc/admin/admin.php:4761 inc/admin/admin.php:4838
+msgid "Custom Dimension #12"
+msgstr "விருப்பப் பரிமாணம் #12"
+
+#: inc/admin/admin.php:4533 inc/admin/admin.php:4610 inc/admin/admin.php:4687
+#: inc/admin/admin.php:4764 inc/admin/admin.php:4841
+msgid "Custom Dimension #13"
+msgstr "விருப்பப் பரிமாணம் #13"
+
+#: inc/admin/admin.php:4536 inc/admin/admin.php:4613 inc/admin/admin.php:4690
+#: inc/admin/admin.php:4767 inc/admin/admin.php:4844
+msgid "Custom Dimension #14"
+msgstr "விருப்பப் பரிமாணம் #14"
+
+#: inc/admin/admin.php:4539 inc/admin/admin.php:4616 inc/admin/admin.php:4693
+#: inc/admin/admin.php:4770 inc/admin/admin.php:4847
+msgid "Custom Dimension #15"
+msgstr "விருப்பப் பரிமாணம் #15"
+
+#: inc/admin/admin.php:4542 inc/admin/admin.php:4619 inc/admin/admin.php:4696
+#: inc/admin/admin.php:4773 inc/admin/admin.php:4850
+msgid "Custom Dimension #16"
+msgstr "விருப்பப் பரிமாணம் #16"
+
+#: inc/admin/admin.php:4545 inc/admin/admin.php:4622 inc/admin/admin.php:4699
+#: inc/admin/admin.php:4776 inc/admin/admin.php:4853
+msgid "Custom Dimension #17"
+msgstr "விருப்பப் பரிமாணம் #17"
+
+#: inc/admin/admin.php:4548 inc/admin/admin.php:4625 inc/admin/admin.php:4702
+#: inc/admin/admin.php:4779 inc/admin/admin.php:4856
+msgid "Custom Dimension #18"
+msgstr "விருப்பப் பரிமாணம் #18"
+
+#: inc/admin/admin.php:4551 inc/admin/admin.php:4628 inc/admin/admin.php:4705
+#: inc/admin/admin.php:4782 inc/admin/admin.php:4859
+msgid "Custom Dimension #19"
+msgstr "விருப்பப் பரிமாணம் #19"
+
+#: inc/admin/admin.php:4554 inc/admin/admin.php:4631 inc/admin/admin.php:4708
+#: inc/admin/admin.php:4785 inc/admin/admin.php:4862
+msgid "Custom Dimension #20"
+msgstr "விருப்பப் பரிமாணம் #20"
+
+#: inc/admin/admin.php:4880
+msgid "Redirect attachment pages to post parent (or homepage if none)"
+msgstr "இணைப்பு பக்கங்களைத் திசைதிருப்பி முதன்மைப் பக்கத்தில் இடுகையிட (அல்லது முகப்புப்பக்கத்தி)"
+
+#: inc/admin/admin.php:4897
+msgid "Remove stop words in permalinks"
+msgstr "நிறுத்தல் வார்த்தைகளை permalinksல் நீக்குக"
+
+#: inc/admin/admin.php:4897
+msgid "Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
+msgstr "தளத்தின் மொழியொற்றிய அமைப்புகள். துணை செய்யும் மொழிகள் EN, FR, ES, DE, IT, PT."
+
+#: inc/admin/admin.php:4914
+msgid "Remove /category/ in your permalinks"
+msgstr "உங்கள் permalinksல் / வகைகள் / நீக்குக"
+
+#: inc/admin/admin.php:4914
+msgid "You have to flush your permalinks each time you change this settings"
+msgstr ""
+
+#: inc/admin/admin.php:4931
+msgid ""
+"You must check this box if the structure of your permalinks DOES NOT contain a slash at the "
+"end (eg: /%postname%)"
+msgstr "உங்கள் permalinks அமைப்பில் \"/\" இருக்கிறதா என்று சோதிக்கவும் (/%postname%)"
+
+#: inc/admin/admin.php:4943
+msgid "Enter Google meta value site verification"
+msgstr "கூகுள் மெட்டா மதிப்பு சரிபார்த்தலுக்கு உள்ளிடவும்"
+
+#: inc/admin/admin.php:4955
+msgid "Enter Bing meta value site verification"
+msgstr "Bing மெட்டா மதிப்பு சரிபார்த்தலுக்கு உள்ளிடவும்"
+
+#: inc/admin/admin.php:4967
+msgid "Enter Pinterest meta value site verification"
+msgstr "Pinterest மெட்டா மதிப்பு சரிபார்த்தலுக்கு உள்ளிடவும்"
+
+#: inc/admin/admin.php:4979
+msgid "Enter Yandex meta value site verification"
+msgstr "Yandex மெட்டா மதிப்பு சரிபார்த்தலுக்கு உள்ளிடவும்"
+
+#: inc/admin/admin.php:4996
+msgid "Remove SEOPress from Admin Bar in backend and frontend"
+msgstr "பின்தளத்திலும், முன்தளத்திலும் SEOPressஐ Admin Barலிருந்து நீக்கவும்"
+
+#: inc/admin/admin.php:5012
+msgid "High priority (top)"
+msgstr "உயர் தாக்கம் (top)"
+
+#: inc/admin/admin.php:5015
+msgid "Normal priority (default)"
+msgstr "சாதாரண தாக்கம் (default)"
+
+#: inc/admin/admin.php:5018
+msgid "Low priority"
+msgstr "குறைந்த தாக்கம்"
+
+#: inc/admin/admin.php:5036
+msgid "Hide Notifications Center in SEOPress Dashboard page"
+msgstr "SEOPress அறிவிப்பு மையத்தை மறைக்க"
+
+#: inc/admin/admin.php:5053
+msgid "Add title column"
+msgstr "தலைப்பை சேர்க்கவும்"
+
+#: inc/admin/admin.php:5070
+msgid "Add meta description column"
+msgstr "மெட்டா விளக்கத்தை சேர்க்கவும்"
+
+#: inc/admin/admin.php:5087
+msgid "Display noindex status"
+msgstr "நோ இண்டெக்ஸ் noindex நிலையை காண்பிக்கவும்"
+
+#: inc/admin/admin.php:5104
+msgid "Display nofollow status"
+msgstr "நோபாலோ nofollow நிலையை காண்பிக்கவும்"
+
+#: inc/admin/admin.php:5121
+msgid "Display total number of words in content"
+msgstr "மொத்த வார்த்தைகளின் எண்ணிக்கையை காண்பிக்கவும்"
+
+#: inc/admin/admin.php:5138
+msgid "Display W3C column to check code quality"
+msgstr "கட்டளைகளின் தரத்தை சோதித்திட W3C காண்பிக்கவும்"
+
+#: inc/admin/admin.php:5156
+msgid "Display Page Speed column to check performances"
+msgstr "செயல்திறனை சோதித்திட பக்க வேகத்தை காண்பிக்கவும்"
+
+#: inc/admin/admin.php:5174
+msgid "Remove Genesis SEO Metaboxe"
+msgstr "Genesis SEO Metaboxe நீக்கிடுங்கள்"
+
+#: inc/admin/adminbar.php:60
+msgid "BOT"
+msgstr "எந்திரன்"
+
+#: inc/admin/adminbar.php:84
+msgid "Broken Links"
+msgstr "உடைந்த இணைப்புகள்"
+
+#: inc/functions/options-advanced-admin.php:100 inc/functions/options-advanced-admin.php:583
+msgid "Title tag"
+msgstr "தலைப்பு டேக்"
+
+#: inc/functions/options-advanced-admin.php:103
+msgid "Meta Desc."
+msgstr "மெட்டா விளக்கம்."
+
+#: inc/functions/options-advanced-admin.php:106
+msgid "Noindex?"
+msgstr "Noindex?"
+
+#: inc/functions/options-advanced-admin.php:109
+msgid "Nofollow?"
+msgstr "Nofollow?"
+
+#: inc/functions/options-advanced-admin.php:112
+msgid "Count words?"
+msgstr "வார்த்தைகளை எண்ணவா?"
+
+#: inc/functions/options-advanced-admin.php:115
+msgid "W3C check"
+msgstr "W3C சோதித்தறிதல்"
+
+#: inc/functions/options-advanced-admin.php:118
+msgid "Page Speed"
+msgstr "பக்க வேகம்"
+
+#: inc/functions/options-advanced-admin.php:146
+msgid "Check code quality of this page"
+msgstr "இந்த பக்கத்தின் குறியீடு தரத்தை சரிபார்க்கவும்"
+
+#: inc/functions/options-advanced-admin.php:149
+msgid "Analyse this page with Google Page Speed"
+msgstr "இந்த பக்கத்தை கூகுள் பக்க வேகத்துடன் ஆராய்க"
+
+#: inc/functions/options-advanced-admin.php:363
+msgid "Enable noindex"
+msgstr "நோஇன்டெக்ஸ் noindex இயக்குக"
+
+#: inc/functions/options-advanced-admin.php:416
+msgid "Enable index"
+msgstr "இன்டெக்ஸ் index இயக்குக"
+
+#: inc/functions/options-advanced-admin.php:469
+msgid "Enable nofollow"
+msgstr "நோ பாலோ nofollow இயக்குக"
+
+#: inc/functions/options-advanced-admin.php:521
+msgid "Enable follow"
+msgstr "பாலோ follow இயக்குக"
+
+#: inc/functions/options-import-export.php:49
+msgid "Please upload a valid .json file"
+msgstr "சரியான .json கோப்பைப் பதிவேற்றவும்"
+
+#: inc/functions/options-import-export.php:53 inc/functions/options-import-export.php:88
+msgid "Please upload a file to import"
+msgstr "இறக்குமதி செய்ய ஒரு கோப்பை பதிவேற்றவும்"
+
+#: inc/functions/options-import-export.php:84
+msgid "Please upload a valid .csv file"
+msgstr "சரியான .csv கோப்பைப் பதிவேற்றவும்"
+
+#: inc/functions/options-redirections.php:120
+msgid "Once per day"
+msgstr "நாளுக்கொரு முறை"
+
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:113
+msgid "XML Sitemaps"
+msgstr "XML தள வரைபடங்கள்"
+
+#: seopress.php:304
+msgid "You like SEOPress? Don't forget to rate it 5 stars!"
+msgstr "நீங்கள் SEOPressயை விரும்புகிறீர்களா? 5* மதிப்பிட மறக்க வேண்டாம்!"
+
+#: seopress.php:351
+msgid "Settings"
+msgstr "அமைப்புகள்"
+
+#: seopress.php:352
+msgid "SEOPress.org"
+msgstr "SEOPress.org"
+
+#: seopress.php:354
+msgid "GO PRO!"
+msgstr "PRO பதிப்பை முயற்சியுங்கள்!"
+
+#: seopress.php:613
+msgid ""
+"The PRO release of SEOPress with Google Local Business, Dublin Core, WooCommerce, Google "
+"Structured Data Types, Breadcrumbs, Google Page Speed, robots.txt, Google News, 404 "
+"monitoring, .htaccess, RSS, Broken links, Redirections and more..."
+msgstr ""
+"SEOPressன் PRO பதிப்புடன் Google Local Business, Dublin Core, WooCommerce, Google Structured "
+"Data Types, Breadcrumbs, Google Page Speed, robots.txt, Google News, 404 monitoring, ."
+"htaccess, RSS, Broken links, Redirections மற்றும் நிறைய..."
+
+#: seopress.php:632
+msgid "Buy now"
+msgstr "இப்போது வாங்குங்கள்"
+
+#: seopress.php:633
+msgid "More details"
+msgstr "மேலதிக விபரங்கள்"
+
+#, fuzzy
+#~| msgid "WooCommerce"
+#~ msgid "E-commerce"
+#~ msgstr "ஊகாமர்ஸ்"

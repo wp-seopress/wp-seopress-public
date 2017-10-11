@@ -253,6 +253,16 @@ if (get_option('blog_public') =='1') {
 			$the_author_meta = get_the_author_meta('display_name', $post->post_author);
 		}
 
+		$post_category ='';
+		if (is_single() && has_category()) {
+			$post_category = get_the_terms(get_the_id(), 'category')[0]->name;
+		}
+
+		$post_tag ='';
+		if (is_single() && has_tag()) {
+			$post_tag = get_the_terms(get_the_id(), 'post_tag')[0]->name;
+		}
+
 		$woo_single_cat_html ='';
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
@@ -298,6 +308,8 @@ if (get_option('blog_public') =='1') {
 			'%%post_excerpt%%',
 			'%%post_date%%',
 			'%%post_author%%',
+			'%%post_category%%',
+			'%%post_tag%%',
 			'%%_category_title%%',
 			'%%_category_description%%',
 			'%%tag_title%%',
@@ -319,6 +331,8 @@ if (get_option('blog_public') =='1') {
 			get_the_excerpt(),
 			get_the_date(),
 			$the_author_meta,
+			$post_category,
+			$post_tag,
 			single_cat_title('', false),
 			wp_filter_nohtml_kses(category_description()),
 			single_tag_title('', false),
@@ -429,6 +443,16 @@ if (get_option('blog_public') =='1') {
 			$seopress_get_author = get_the_author_meta( 'display_name', $post->post_author );
 		}
 
+		$post_category ='';
+		if (is_single() && has_category()) {
+			$post_category = get_the_terms(get_the_id(), 'category')[0]->name;
+		}
+
+		$post_tag ='';
+		if (is_single() && has_tag()) {
+			$post_tag = get_the_terms(get_the_id(), 'post_tag')[0]->name;
+		}
+
 		if (get_the_excerpt() !='') {
 			$seopress_get_the_excerpt = wp_trim_words(esc_attr(wp_filter_nohtml_kses(get_the_excerpt()), 30));
 		} elseif ($post !='') {
@@ -486,6 +510,8 @@ if (get_option('blog_public') =='1') {
 			'%%post_excerpt%%',
 			'%%post_date%%',
 			'%%post_author%%',
+			'%%post_category%%',
+			'%%post_tag%%',
 			'%%_category_title%%',
 			'%%_category_description%%',
 			'%%tag_title%%',
@@ -507,6 +533,8 @@ if (get_option('blog_public') =='1') {
 			$seopress_get_the_excerpt,
 			get_the_date(),
 			$seopress_get_author,
+			$post_category,
+			$post_tag,
 			single_cat_title('', false),
 			wp_filter_nohtml_kses(category_description()),
 			single_tag_title('', false),

@@ -350,15 +350,28 @@ if (seopress_advanced_advanced_stop_words_option() !='') {
 //Bulk actions
 //noindex
 foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_noindex' );
+}
+foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_noindex' );
+}
+if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    add_filter( 'bulk_actions-edit-product', 'seopress_bulk_actions_noindex' );
 }
 
 function seopress_bulk_actions_noindex($bulk_actions) {
 	$bulk_actions['seopress_noindex'] = __( 'Enable noindex', 'wp-seopress');
 	return $bulk_actions;
 }
+
 foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_noindex_handler', 10, 3 );
+}
+foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_noindex_handler', 10, 3 );
+}
+if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    add_filter( 'handle_bulk_actions-edit-product', 'seopress_bulk_action_noindex_handler', 10, 3 );
 }
 
 function seopress_bulk_action_noindex_handler( $redirect_to, $doaction, $post_ids ) {
@@ -366,8 +379,9 @@ function seopress_bulk_action_noindex_handler( $redirect_to, $doaction, $post_id
 		return $redirect_to;
 	}
 	foreach ( $post_ids as $post_id ) {
-		// Perform action for each post.
-		update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
+		// Perform action for each post/term
+        update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
+		update_term_meta( $post_id, '_seopress_robots_index', 'yes' );
 	}
 	$redirect_to = add_query_arg( 'bulk_noindex_posts', count( $post_ids ), $redirect_to );
 	return $redirect_to;
@@ -389,7 +403,13 @@ function seopress_bulk_action_noindex_admin_notice() {
 
 //index
 foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_index' );
+}
+foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_index' );
+}
+if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    add_filter( 'bulk_actions-edit-product', 'seopress_bulk_actions_index' );
 }
 
 function seopress_bulk_actions_index($bulk_actions) {
@@ -398,7 +418,13 @@ function seopress_bulk_actions_index($bulk_actions) {
 }
 
 foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_index_handler', 10, 3 );
+}
+foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_index_handler', 10, 3 );
+}
+if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    add_filter( 'handle_bulk_actions-edit-product', 'seopress_bulk_action_index_handler', 10, 3 );
 }
 
 function seopress_bulk_action_index_handler( $redirect_to, $doaction, $post_ids ) {
@@ -407,7 +433,8 @@ function seopress_bulk_action_index_handler( $redirect_to, $doaction, $post_ids 
 	}
 	foreach ( $post_ids as $post_id ) {
 		// Perform action for each post.
-		delete_post_meta( $post_id, '_seopress_robots_index', '' );
+        delete_post_meta( $post_id, '_seopress_robots_index', '' );
+		delete_term_meta( $post_id, '_seopress_robots_index', '' );
 	}
 	$redirect_to = add_query_arg( 'bulk_index_posts', count( $post_ids ), $redirect_to );
 	return $redirect_to;
@@ -429,7 +456,13 @@ function seopress_bulk_action_index_admin_notice() {
 
 //nofollow
 foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_nofollow' );
+}
+foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_nofollow' );
+}
+if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    add_filter( 'bulk_actions-edit-product', 'seopress_bulk_actions_nofollow' );
 }
 
 function seopress_bulk_actions_nofollow($bulk_actions) {
@@ -437,7 +470,13 @@ function seopress_bulk_actions_nofollow($bulk_actions) {
 	return $bulk_actions;
 }
 foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_nofollow_handler', 10, 3 );
+}
+foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_nofollow_handler', 10, 3 );
+}
+if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    add_filter( 'handle_bulk_actions-edit-product', 'seopress_bulk_action_nofollow_handler', 10, 3 );
 }
 
 function seopress_bulk_action_nofollow_handler( $redirect_to, $doaction, $post_ids ) {
@@ -446,7 +485,8 @@ function seopress_bulk_action_nofollow_handler( $redirect_to, $doaction, $post_i
 	}
 	foreach ( $post_ids as $post_id ) {
 		// Perform action for each post.
-		update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
+        update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
+		update_term_meta( $post_id, '_seopress_robots_follow', 'yes' );
 	}
 	$redirect_to = add_query_arg( 'bulk_nofollow_posts', count( $post_ids ), $redirect_to );
 	return $redirect_to;
@@ -468,7 +508,13 @@ function seopress_bulk_action_nofollow_admin_notice() {
 
 //follow
 foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_follow' );
+}
+foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_follow' );
+}
+if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    add_filter( 'bulk_actions-edit-product', 'seopress_bulk_actions_follow' );
 }
 
 function seopress_bulk_actions_follow($bulk_actions) {
@@ -477,7 +523,13 @@ function seopress_bulk_actions_follow($bulk_actions) {
 }
 
 foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_follow_handler', 10, 3 );
+}
+foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_follow_handler', 10, 3 );
+}
+if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    add_filter( 'handle_bulk_actions-edit-product', 'seopress_bulk_action_follow_handler', 10, 3 );
 }
 
 function seopress_bulk_action_follow_handler( $redirect_to, $doaction, $post_ids ) {
@@ -486,7 +538,8 @@ function seopress_bulk_action_follow_handler( $redirect_to, $doaction, $post_ids
 	}
 	foreach ( $post_ids as $post_id ) {
 		// Perform action for each post.
-		delete_post_meta( $post_id, '_seopress_robots_follow', '' );
+        delete_post_meta( $post_id, '_seopress_robots_follow', '' );
+		delete_term_meta( $post_id, '_seopress_robots_follow', '' );
 	}
 	$redirect_to = add_query_arg( 'bulk_follow_posts', count( $post_ids ), $redirect_to );
 	return $redirect_to;

@@ -3,42 +3,6 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 
 //Google Analytics
 //=================================================================================================
-//Enabled
-function seopress_google_analytics_enable_option() {
-	$seopress_google_analytics_enable_option = get_option("seopress_google_analytics_option_name");
-	if ( ! empty ( $seopress_google_analytics_enable_option ) ) {
-		foreach ($seopress_google_analytics_enable_option as $key => $seopress_google_analytics_enable_value)
-			$options[$key] = $seopress_google_analytics_enable_value;
-		 if (isset($seopress_google_analytics_enable_option['seopress_google_analytics_enable'])) { 
-		 	return $seopress_google_analytics_enable_option['seopress_google_analytics_enable'];
-		 }
-	}
-}
-
-//UA
-function seopress_google_analytics_ua_option() {
-	$seopress_google_analytics_ua_option = get_option("seopress_google_analytics_option_name");
-	if ( ! empty ( $seopress_google_analytics_ua_option ) ) {
-		foreach ($seopress_google_analytics_ua_option as $key => $seopress_google_analytics_ua_value)
-			$options[$key] = $seopress_google_analytics_ua_value;
-		 if (isset($seopress_google_analytics_ua_option['seopress_google_analytics_ua'])) { 
-		 	return $seopress_google_analytics_ua_option['seopress_google_analytics_ua'];
-		 }
-	}
-}
-
-//User roles
-function seopress_google_analytics_roles_option() {
-	$seopress_google_analytics_roles_option = get_option("seopress_google_analytics_option_name");
-	if ( ! empty ( $seopress_google_analytics_roles_option ) ) {
-		foreach ($seopress_google_analytics_roles_option as $key => $seopress_google_analytics_roles_value)
-			$options[$key] = $seopress_google_analytics_roles_value;
-		 if (isset($seopress_google_analytics_roles_option['seopress_google_analytics_roles'])) { 
-		 	return $seopress_google_analytics_roles_option['seopress_google_analytics_roles'];
-		 }
-	}
-}
-
 //Remarketing
 function seopress_google_analytics_remarketing_option() {
 	$seopress_google_analytics_remarketing_option = get_option("seopress_google_analytics_option_name");
@@ -229,6 +193,7 @@ function seopress_google_analytics_js() {
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 ";
+
 	if (seopress_google_analytics_ua_option() && seopress_google_analytics_ip_anonymization_option() =='1') {
 		$seopress_google_analytics_html .= "ga('create', '".seopress_google_analytics_ua_option()."', 'auto', {anonymizeIp: true});";
 		$seopress_google_analytics_html .= "\n";
@@ -236,7 +201,88 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		$seopress_google_analytics_html .= "ga('create', '".seopress_google_analytics_ua_option()."', 'auto');";
 		$seopress_google_analytics_html .= "\n";
 	}
+
+	if (seopress_google_analytics_ecommerce_enable_option() =='1') {
+		$seopress_google_analytics_html .= "ga('require', 'ec');";
+		$seopress_google_analytics_html .= "\n";
 	
+		//If WC enabled
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
+			
+			//Measuring a Product Details View
+			if (is_product()) {
+				global $product;
+
+				$product_cat = get_the_terms($product->get_id(), 'product_cat');
+				
+				$seopress_google_analytics_html .= "
+					ga('ec:addProduct', {
+						'id': '".$product->get_id()."',
+						'name': '".$product->get_title()."',";
+					if ($product_cat !='') {
+						$seopress_google_analytics_html .= "
+						'category': '".$product_cat[0]->name."',";
+					}
+				$seopress_google_analytics_html .= "
+					});
+
+					ga('ec:setAction', 'detail');
+				";
+				$seopress_google_analytics_html .= "\n";
+			}
+
+			//GA E-Commerce - User begins checkout process
+			function seopress_google_analytics_checkout() {
+			    if (is_checkout() == true) {
+			        $seopress_google_analytics_html ='';
+			        foreach( WC()->cart->get_cart() as $cart_item ){
+			            
+			            $product = wc_get_product($cart_item['product_id']);
+			            $product_cat = get_the_terms($cart_item['product_id'], 'product_cat');
+
+			            $seopress_google_analytics_html .= "
+			                ga('ec:addProduct', {
+			                    'id': '".$cart_item['product_id']."',
+			                    'name': '".$product->get_name()."',";
+
+			                if ($product_cat !='') {
+			                    $seopress_google_analytics_html .= "
+			                    'category': '".$product_cat[0]->name."',";
+			                }
+
+			                if ($product->get_price() !='') {
+			                    $seopress_google_analytics_html .= "
+			                    'price': '".$product->get_price()."',";
+			                }
+
+			                if ($cart_item['quantity'] !='') {
+			                    $seopress_google_analytics_html .= "
+			                    'quantity': ".$cart_item['quantity'];
+			                }
+			                $seopress_google_analytics_html .= "
+			                });
+			            ";
+			        }
+
+			        $seopress_google_analytics_html .= "\n";
+			        
+			        $seopress_google_analytics_html .= "
+			        ga('ec:setAction','checkout', {
+			            'step': 1
+			        });
+			        ";
+
+			        $seopress_google_analytics_html .= "\n";
+
+			        if (function_exists('wc_enqueue_js')) {
+			        	wc_enqueue_js($seopress_google_analytics_html);
+			    	}
+			    }
+			}
+			add_action('woocommerce_after_checkout_form', 'seopress_google_analytics_checkout', 10);
+		}
+	}
 	if (seopress_google_analytics_cross_enable_option() =='1' && seopress_google_analytics_cross_domain_option()) {
 		$seopress_google_analytics_html .= "ga('require', 'linker');";
 		$seopress_google_analytics_html .= "\n";

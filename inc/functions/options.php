@@ -85,17 +85,77 @@ if (seopress_get_toggle_social_option() =='1') {
 	}
 }
 if (seopress_get_toggle_google_analytics_option() =='1') {
+	//Enabled
+	function seopress_google_analytics_enable_option() {
+		$seopress_google_analytics_enable_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_enable_option ) ) {
+			foreach ($seopress_google_analytics_enable_option as $key => $seopress_google_analytics_enable_value)
+				$options[$key] = $seopress_google_analytics_enable_value;
+			 if (isset($seopress_google_analytics_enable_option['seopress_google_analytics_enable'])) { 
+			 	return $seopress_google_analytics_enable_option['seopress_google_analytics_enable'];
+			 }
+		}
+	}
+
+	//UA
+	function seopress_google_analytics_ua_option() {
+		$seopress_google_analytics_ua_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_ua_option ) ) {
+			foreach ($seopress_google_analytics_ua_option as $key => $seopress_google_analytics_ua_value)
+				$options[$key] = $seopress_google_analytics_ua_value;
+			 if (isset($seopress_google_analytics_ua_option['seopress_google_analytics_ua'])) { 
+			 	return $seopress_google_analytics_ua_option['seopress_google_analytics_ua'];
+			 }
+		}
+	}
+
+	//User roles
+	function seopress_google_analytics_roles_option() {
+		$seopress_google_analytics_roles_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_roles_option ) ) {
+			foreach ($seopress_google_analytics_roles_option as $key => $seopress_google_analytics_roles_value)
+				$options[$key] = $seopress_google_analytics_roles_value;
+			 if (isset($seopress_google_analytics_roles_option['seopress_google_analytics_roles'])) { 
+			 	return $seopress_google_analytics_roles_option['seopress_google_analytics_roles'];
+			 }
+		}
+	}
+
+	//Ecommerce enabled
+	function seopress_google_analytics_ecommerce_enable_option() {
+		$seopress_google_analytics_ecommerce_enable_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_ecommerce_enable_option ) ) {
+			foreach ($seopress_google_analytics_ecommerce_enable_option as $key => $seopress_google_analytics_ecommerce_enable_value)
+				$options[$key] = $seopress_google_analytics_ecommerce_enable_value;
+			 if (isset($seopress_google_analytics_ecommerce_enable_option['seopress_google_analytics_e_commerce_enable'])) { 
+			 	return $seopress_google_analytics_ecommerce_enable_option['seopress_google_analytics_e_commerce_enable'];
+			 }
+		}
+	}
+
 	add_action('wp_head', 'seopress_load_google_analytics_options', 0);
 	function seopress_load_google_analytics_options() {
 	    require_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
 	}
+	
+	// add_action('woocommerce_add_to_cart', 'seopress_load_google_analytics_checkout_options', 0);
+	// function seopress_load_google_analytics_checkout_options() {
+	//     require_once ( dirname( __FILE__ ) . '/options-google-analytics-checkout.php'); //Google Analytics E-commerce
+	// }
+
+	// add_action('woocommerce_checkout_order_processed', 'seopress_load_google_analytics_order_options', 0);
+	// function seopress_load_google_analytics_order_options() {
+	//     require_once ( dirname( __FILE__ ) . '/options-google-analytics-order.php'); //Google Analytics E-commerce
+	// }
 }
+
 add_action('wp', 'seopress_load_redirections_options', 0);
 function seopress_load_redirections_options() {
 	if (!is_admin()){
 	    require_once ( dirname( __FILE__ ) . '/options-redirections.php'); //Redirections
 	}
 }
+
 if (seopress_get_toggle_xml_sitemap_option() =='1') {
 	add_action('init', 'seopress_load_sitemap', 999);
 	function seopress_load_sitemap() {
