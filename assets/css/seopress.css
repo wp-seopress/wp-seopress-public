@@ -71,7 +71,8 @@
     border-radius: 0;
 }
 #seopress_cpt #tabs-1 label, 
-#seopress_cpt #tabs-2 label[for=seopress_robots_canonical_meta], 
+#seopress_cpt #tabs-2 label[for=seopress_robots_canonical_meta],
+#seopress_cpt #tabs-2 label[for=seopress_robots_breadcrumbs_meta],
 #seopress_cpt #tabs-3 label, 
 #seopress_cpt #tabs-4 label, 
 #seopress_cpt #tabs-5 label, 

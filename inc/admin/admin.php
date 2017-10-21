@@ -1026,7 +1026,7 @@ class seopress_options
                                             <div id="notice-google-business-alert" class="seopress-alert deleteable">
                                                 <p>
                                                     <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('Do you have a Google Business page? It\'s free!','wp-seopress'); ?>
+                                                    <?php _e('Do you have a Google My Business page? It\'s free!','wp-seopress'); ?>
                                                     <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
                                                 </p>
                                                 <a class="button-primary" href="https://www.google.com/business/go/" target="_blank"><?php _e('Create your page now!','wp-seopress'); ?></a>

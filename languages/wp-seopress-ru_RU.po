@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress 2.1.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
-"POT-Creation-Date: 2017-10-11 18:45+0200\n"
-"PO-Revision-Date: 2017-10-11 18:45+0200\n"
+"POT-Creation-Date: 2017-10-21 15:01+0200\n"
+"PO-Revision-Date: 2017-10-21 15:01+0200\n"
 "Last-Translator: admin <admin@easy-as-abc.ru>\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -165,9 +165,8 @@ msgstr "Поддержка (в новом окне)"
 msgid "Support"
 msgstr "Поддержка"
 
-#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:31
-#: inc/admin/admin-metaboxes.php:33 inc/admin/adminbar.php:16
-#: inc/functions/options-advanced-admin.php:581
+#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:34
+#: inc/admin/adminbar.php:16 inc/functions/options-advanced-admin.php:581
 msgid "SEO"
 msgstr "SEO"
 
@@ -293,144 +292,156 @@ msgstr "Канонический URL"
 msgid "Default value: "
 msgstr "По умолчанию:"
 
-#: inc/admin/admin-metaboxes-form.php:228
+#: inc/admin/admin-metaboxes-form.php:226
+#, fuzzy
+#| msgid "Breadcrumbs"
+msgid "Custom breadcrumbs"
+msgstr "Хлебные крошки"
+
+#: inc/admin/admin-metaboxes-form.php:227
+msgid "Enter a custom value, useful if your title is too long"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:234
 msgid "Ask Facebook to update his cache"
 msgstr "Отправить запрос в Facebook на изменение этого кеша"
 
-#: inc/admin/admin-metaboxes-form.php:230
+#: inc/admin/admin-metaboxes-form.php:236
 msgid "Facebook Title"
 msgstr "Заголовок для Facebook"
 
-#: inc/admin/admin-metaboxes-form.php:231
+#: inc/admin/admin-metaboxes-form.php:237
 msgid "Enter your Facebook title"
 msgstr "Введите ваш заголовок для Facebook"
 
-#: inc/admin/admin-metaboxes-form.php:234
+#: inc/admin/admin-metaboxes-form.php:240
 msgid "Facebook description"
 msgstr "Описание для Facebook"
 
-#: inc/admin/admin-metaboxes-form.php:235
+#: inc/admin/admin-metaboxes-form.php:241
 msgid "Enter your Facebook description"
 msgstr "Введите ваше описание для Facebook"
 
-#: inc/admin/admin-metaboxes-form.php:238
+#: inc/admin/admin-metaboxes-form.php:244
 msgid "Facebook Thumbnail"
 msgstr "Миниатюра изображения для Facebook"
 
-#: inc/admin/admin-metaboxes-form.php:239
+#: inc/admin/admin-metaboxes-form.php:245
 msgid "Minimum size: 200x200px"
 msgstr "Минимальный размер: 200px ✕ 200px"
 
-#: inc/admin/admin-metaboxes-form.php:240
-#: inc/admin/admin-metaboxes-form.php:256 inc/admin/admin.php:4153
+#: inc/admin/admin-metaboxes-form.php:246
+#: inc/admin/admin-metaboxes-form.php:262 inc/admin/admin.php:4153
 #: inc/admin/admin.php:4230
 msgid "Select your default thumbnail"
 msgstr "Выберите вашу миниатюру по умолчанию"
 
-#: inc/admin/admin-metaboxes-form.php:241
-#: inc/admin/admin-metaboxes-form.php:257 inc/admin/admin.php:3911
+#: inc/admin/admin-metaboxes-form.php:247
+#: inc/admin/admin-metaboxes-form.php:263 inc/admin/admin.php:3911
 #: inc/admin/admin.php:4155 inc/admin/admin.php:4232
 msgid "Upload an Image"
 msgstr "Загрузить изображение"
 
-#: inc/admin/admin-metaboxes-form.php:246
+#: inc/admin/admin-metaboxes-form.php:252
 msgid "Twitter Title"
 msgstr "Заголовок для Twitter"
 
-#: inc/admin/admin-metaboxes-form.php:247
+#: inc/admin/admin-metaboxes-form.php:253
 msgid "Enter your Twitter title"
 msgstr "Введите ваш заголовок для Twitter"
 
-#: inc/admin/admin-metaboxes-form.php:250
+#: inc/admin/admin-metaboxes-form.php:256
 msgid "Twitter description"
 msgstr "Описание для Twitter"
 
-#: inc/admin/admin-metaboxes-form.php:251
+#: inc/admin/admin-metaboxes-form.php:257
 msgid "Enter your Twitter description"
 msgstr "Введите ваше описание для Twitter"
 
-#: inc/admin/admin-metaboxes-form.php:254
+#: inc/admin/admin-metaboxes-form.php:260
 msgid "Twitter Thumbnail"
 msgstr "Миниатюра изображения для Twitter"
 
-#: inc/admin/admin-metaboxes-form.php:255
+#: inc/admin/admin-metaboxes-form.php:261
 msgid "Minimum size: 160x160px"
 msgstr "Минимальный размер: 160px ✕ 160px"
 
-#: inc/admin/admin-metaboxes-form.php:266
+#: inc/admin/admin-metaboxes-form.php:272
 msgid "Enable redirection?"
 msgstr "Включить перенаправление?"
 
-#: inc/admin/admin-metaboxes-form.php:270
+#: inc/admin/admin-metaboxes-form.php:276
 msgid "URL redirection"
 msgstr "URL-перенаправление"
 
-#: inc/admin/admin-metaboxes-form.php:272
+#: inc/admin/admin-metaboxes-form.php:278
 msgid "301 Moved Permanently"
 msgstr "301 Постоянно перенесен"
 
-#: inc/admin/admin-metaboxes-form.php:273
+#: inc/admin/admin-metaboxes-form.php:279
 msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
 msgstr "302 Найден (HTTP 1.1) / Временно перемещен (HTTP 1.0)"
 
-#: inc/admin/admin-metaboxes-form.php:274
+#: inc/admin/admin-metaboxes-form.php:280
 msgid "307 Moved Temporarily (HTTP 1.1 Only)"
 msgstr "307 Временно перемещен (HTTP 1.1 Only)"
 
-#: inc/admin/admin-metaboxes-form.php:276
+#: inc/admin/admin-metaboxes-form.php:282
 msgid "Enter your new URL"
 msgstr "Введите новый URL"
 
-#: inc/admin/admin-metaboxes-form.php:279
-#: inc/admin/admin-metaboxes-form.php:281
+#: inc/admin/admin-metaboxes-form.php:287
+#: inc/admin/admin-metaboxes-form.php:289
+#: inc/admin/admin-metaboxes-form.php:292
+#: inc/admin/admin-metaboxes-form.php:294
 msgid "Test your URL"
 msgstr "Проверка URL"
 
-#: inc/admin/admin-metaboxes-form.php:292
+#: inc/admin/admin-metaboxes-form.php:307
 msgid "Exclude this post from Google News Sitemap?"
 msgstr "Исключить эту запись из карты сайта для Новостей Google?"
 
-#: inc/admin/admin-metaboxes-form.php:296
+#: inc/admin/admin-metaboxes-form.php:311
 msgid "Google News Genres"
 msgstr "Темы разделов Новостей Google"
 
-#: inc/admin/admin-metaboxes-form.php:298 inc/admin/admin.php:4494
+#: inc/admin/admin-metaboxes-form.php:313 inc/admin/admin.php:4494
 #: inc/admin/admin.php:4571 inc/admin/admin.php:4648 inc/admin/admin.php:4725
 #: inc/admin/admin.php:4802
 msgid "None"
 msgstr "Нет"
 
-#: inc/admin/admin-metaboxes-form.php:299
+#: inc/admin/admin-metaboxes-form.php:314
 msgid "Press Release"
 msgstr "Пресс-релиз"
 
-#: inc/admin/admin-metaboxes-form.php:300
+#: inc/admin/admin-metaboxes-form.php:315
 msgid "Satire"
 msgstr "Юмор"
 
-#: inc/admin/admin-metaboxes-form.php:301
+#: inc/admin/admin-metaboxes-form.php:316
 msgid "Blog"
 msgstr "Блог"
 
-#: inc/admin/admin-metaboxes-form.php:302
+#: inc/admin/admin-metaboxes-form.php:317
 msgid "OpEd"
 msgstr "Авторское мнение"
 
-#: inc/admin/admin-metaboxes-form.php:303
+#: inc/admin/admin-metaboxes-form.php:318
 msgid "Opinion"
 msgstr "Мнение"
 
-#: inc/admin/admin-metaboxes-form.php:304
+#: inc/admin/admin-metaboxes-form.php:319
 msgid "UserGenerated"
 msgstr "Контент пользователей"
 
-#: inc/admin/admin-metaboxes-form.php:309
+#: inc/admin/admin-metaboxes-form.php:324
 msgid "Google News Keywords <em>(max recommended limit: 12)</em>"
 msgstr ""
 "Ключевые слова для Новостей Google <em>(максимальное рекомендуемое значение: "
 "12)</em>"
 
-#: inc/admin/admin-metaboxes-form.php:310
+#: inc/admin/admin-metaboxes-form.php:325
 msgid "Enter your Google News Keywords"
 msgstr "Введите ваши ключевые слова для Новостей Google"
 
@@ -994,7 +1005,9 @@ msgid "You don't have an XML Sitemap!"
 msgstr "У вас нет XML-карты сайта!"
 
 #: inc/admin/admin.php:1029
-msgid "Do you have a Google Business page? It's free!"
+#, fuzzy
+#| msgid "Do you have a Google Business page? It's free!"
+msgid "Do you have a Google My Business page? It's free!"
 msgstr "У вас есть бизнес-страница Google? Это бесплатно!"
 
 #: inc/admin/admin.php:1032
@@ -2269,16 +2282,16 @@ msgstr "Включить отписку"
 msgid "Enable follow"
 msgstr "Включить подписку"
 
-#: inc/functions/options-import-export.php:49
+#: inc/functions/options-import-export.php:50
 msgid "Please upload a valid .json file"
 msgstr "Пожайлуста, загрузите валидный .json файл"
 
-#: inc/functions/options-import-export.php:53
-#: inc/functions/options-import-export.php:88
+#: inc/functions/options-import-export.php:54
+#: inc/functions/options-import-export.php:90
 msgid "Please upload a file to import"
 msgstr "Пожалуйста, загрузите файл импорта"
 
-#: inc/functions/options-import-export.php:84
+#: inc/functions/options-import-export.php:86
 msgid "Please upload a valid .csv file"
 msgstr "Пожалуйста, загрузите валидный .csv файл"
 

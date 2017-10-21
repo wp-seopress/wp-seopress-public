@@ -220,8 +220,14 @@ echo                '<div class="snippet-description">'.seopress_titles_desc($se
             <p>
                 <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
                 <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.__('Default value: ','wp-seopress').get_permalink().'" value="'.$seopress_robots_canonical.'" />
-            </p>
-        </div>
+            </p>';
+            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                echo '<p>
+                    <label for="seopress_robots_breadcrumbs_meta">'. __( 'Custom breadcrumbs', 'wp-seopress' ) .'</label>
+                    <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.__('Enter a custom value, useful if your title is too long','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
+                </p>';
+            }
+        echo '</div>
         <div id="tabs-3">
             <span class="dashicons dashicons-facebook-alt"></span>
             <br><br>
@@ -275,11 +281,20 @@ echo                '<div class="snippet-description">'.seopress_titles_desc($se
                 </select>
                 <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.__('Enter your new URL','wp-seopress').'" value="'.$seopress_redirections_value.'" />
                 <br><br>';
-                if ($seopress_redirections_value !='') {     
-echo                '<a href="'.seopress_redirections_value($seopress_redirections_value).'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
-                } 
-echo            '<a href="" id="seopress_redirections_value_live" class="button" target="_blank" style="display: none">'.__('Test your URL','wp-seopress').'</a>
-            </p>
+                if ($seopress_redirections_value !='' && $seopress_redirections_enabled =='yes') {
+                    if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                        if ( 'seopress_404' == $typenow ) {                      
+                            echo '<a href="'.get_home_url().'/'.get_the_title().'/" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                        } else {
+                            echo '<a href="'.get_permalink().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                        }
+                    } elseif ( $pagenow == 'term.php' ) {
+                        echo '<a href="'.get_term_link($term).'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                    } else {
+                        echo '<a href="'.get_permalink().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                    }
+                }
+echo            '</p>
         </div>';
     if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
         if (seopress_get_toggle_news_option() =='1') {

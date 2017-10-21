@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress 2.1.7.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
-"POT-Creation-Date: 2017-10-11 18:45+0200\n"
-"PO-Revision-Date: 2017-10-11 18:45+0200\n"
+"POT-Creation-Date: 2017-10-21 15:01+0200\n"
+"PO-Revision-Date: 2017-10-21 15:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: ta_IN\n"
@@ -160,9 +160,8 @@ msgstr "வழிகாட்டுதல் (புதிய திரையி
 msgid "Support"
 msgstr "வழிகாட்டுதல்"
 
-#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:31
-#: inc/admin/admin-metaboxes.php:33 inc/admin/adminbar.php:16
-#: inc/functions/options-advanced-admin.php:581
+#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:34
+#: inc/admin/adminbar.php:16 inc/functions/options-advanced-admin.php:581
 msgid "SEO"
 msgstr "தேடுபொறி மேம்படுத்தல் SEO"
 
@@ -275,138 +274,149 @@ msgstr "நியமன (Canonical) URL"
 msgid "Default value: "
 msgstr "இயல்பு மதிப்பு: "
 
-#: inc/admin/admin-metaboxes-form.php:228
+#: inc/admin/admin-metaboxes-form.php:226
+#, fuzzy
+#| msgid "Breadcrumbs"
+msgid "Custom breadcrumbs"
+msgstr "Breadcrumbs"
+
+#: inc/admin/admin-metaboxes-form.php:227
+msgid "Enter a custom value, useful if your title is too long"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:234
 msgid "Ask Facebook to update his cache"
 msgstr "முகநூலின் cacheஐ மேம்படுத்தச் சொல்லவும்"
 
-#: inc/admin/admin-metaboxes-form.php:230
+#: inc/admin/admin-metaboxes-form.php:236
 msgid "Facebook Title"
 msgstr "முகநூல் தலைப்பு"
 
-#: inc/admin/admin-metaboxes-form.php:231
+#: inc/admin/admin-metaboxes-form.php:237
 msgid "Enter your Facebook title"
 msgstr "உங்கள் முகநூல் தலைப்பை பதிவு செய்யுங்கள்"
 
-#: inc/admin/admin-metaboxes-form.php:234
+#: inc/admin/admin-metaboxes-form.php:240
 msgid "Facebook description"
 msgstr "முகநூல் விளக்கம்"
 
-#: inc/admin/admin-metaboxes-form.php:235
+#: inc/admin/admin-metaboxes-form.php:241
 msgid "Enter your Facebook description"
 msgstr "உங்கள் முகநூல் விளக்கத்தை பதிவு செய்யவும்"
 
-#: inc/admin/admin-metaboxes-form.php:238
+#: inc/admin/admin-metaboxes-form.php:244
 msgid "Facebook Thumbnail"
 msgstr "முகநூல் சிறுபடம்"
 
-#: inc/admin/admin-metaboxes-form.php:239
+#: inc/admin/admin-metaboxes-form.php:245
 msgid "Minimum size: 200x200px"
 msgstr "குறைந்தபட்ச அளவு: 200x200px"
 
-#: inc/admin/admin-metaboxes-form.php:240 inc/admin/admin-metaboxes-form.php:256
+#: inc/admin/admin-metaboxes-form.php:246 inc/admin/admin-metaboxes-form.php:262
 #: inc/admin/admin.php:4153 inc/admin/admin.php:4230
 msgid "Select your default thumbnail"
 msgstr "உங்கள் இயல்பான சிறுபடத்தை தேர்வு செய்யவும்"
 
-#: inc/admin/admin-metaboxes-form.php:241 inc/admin/admin-metaboxes-form.php:257
+#: inc/admin/admin-metaboxes-form.php:247 inc/admin/admin-metaboxes-form.php:263
 #: inc/admin/admin.php:3911 inc/admin/admin.php:4155 inc/admin/admin.php:4232
 msgid "Upload an Image"
 msgstr "படம் பதிவேற்ற"
 
-#: inc/admin/admin-metaboxes-form.php:246
+#: inc/admin/admin-metaboxes-form.php:252
 msgid "Twitter Title"
 msgstr "ட்விட்டர் தலைப்பு"
 
-#: inc/admin/admin-metaboxes-form.php:247
+#: inc/admin/admin-metaboxes-form.php:253
 msgid "Enter your Twitter title"
 msgstr "ட்விட்டர் தலைப்பைப் பதிவு செய்யுங்கள்"
 
-#: inc/admin/admin-metaboxes-form.php:250
+#: inc/admin/admin-metaboxes-form.php:256
 msgid "Twitter description"
 msgstr "ட்விட்டர் விபரங்கள்"
 
-#: inc/admin/admin-metaboxes-form.php:251
+#: inc/admin/admin-metaboxes-form.php:257
 msgid "Enter your Twitter description"
 msgstr "ட்விட்டர் விபரங்களை பதிவு செய்யுங்கள்"
 
-#: inc/admin/admin-metaboxes-form.php:254
+#: inc/admin/admin-metaboxes-form.php:260
 msgid "Twitter Thumbnail"
 msgstr "ட்விட்டர் சிறுபடம்"
 
-#: inc/admin/admin-metaboxes-form.php:255
+#: inc/admin/admin-metaboxes-form.php:261
 msgid "Minimum size: 160x160px"
 msgstr "குறைந்தபட்ச அளவு: 160x160px"
 
-#: inc/admin/admin-metaboxes-form.php:266
+#: inc/admin/admin-metaboxes-form.php:272
 msgid "Enable redirection?"
 msgstr "திசைதிருப்பல் செயல்படுத்தவா?"
 
-#: inc/admin/admin-metaboxes-form.php:270
+#: inc/admin/admin-metaboxes-form.php:276
 msgid "URL redirection"
 msgstr "URL திசை திருப்புதல்"
 
-#: inc/admin/admin-metaboxes-form.php:272
+#: inc/admin/admin-metaboxes-form.php:278
 msgid "301 Moved Permanently"
 msgstr "301 முழுவதுமாக நகர்த்தப்பட்டது"
 
-#: inc/admin/admin-metaboxes-form.php:273
+#: inc/admin/admin-metaboxes-form.php:279
 msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
 msgstr "302 கண்டறியப்பட்டது (HTTP 1.1) / தற்காலிகமாக நகர்த்தப்பட்டது (HTTP 1.0)"
 
-#: inc/admin/admin-metaboxes-form.php:274
+#: inc/admin/admin-metaboxes-form.php:280
 msgid "307 Moved Temporarily (HTTP 1.1 Only)"
 msgstr "307 தற்காலிகமாக நகர்த்தப்பட்டது (HTTP 1.1 மட்டும்)"
 
-#: inc/admin/admin-metaboxes-form.php:276
+#: inc/admin/admin-metaboxes-form.php:282
 msgid "Enter your new URL"
 msgstr "உங்கள் URL பதிவு செய்யுங்கள்"
 
-#: inc/admin/admin-metaboxes-form.php:279 inc/admin/admin-metaboxes-form.php:281
+#: inc/admin/admin-metaboxes-form.php:287 inc/admin/admin-metaboxes-form.php:289
+#: inc/admin/admin-metaboxes-form.php:292 inc/admin/admin-metaboxes-form.php:294
 msgid "Test your URL"
 msgstr "உங்கள் URL சோதித்திடுங்கள்"
 
-#: inc/admin/admin-metaboxes-form.php:292
+#: inc/admin/admin-metaboxes-form.php:307
 msgid "Exclude this post from Google News Sitemap?"
 msgstr "இந்தப்பதிவை கூகுள் செய்திகள் தள வரைபடத்திலிருந்து தவிர்க்கவா?"
 
-#: inc/admin/admin-metaboxes-form.php:296
+#: inc/admin/admin-metaboxes-form.php:311
 msgid "Google News Genres"
 msgstr "கூகுள் செய்திகள் வகையினம்"
 
-#: inc/admin/admin-metaboxes-form.php:298 inc/admin/admin.php:4494 inc/admin/admin.php:4571
+#: inc/admin/admin-metaboxes-form.php:313 inc/admin/admin.php:4494 inc/admin/admin.php:4571
 #: inc/admin/admin.php:4648 inc/admin/admin.php:4725 inc/admin/admin.php:4802
 msgid "None"
 msgstr "எதுவுமில்லை"
 
-#: inc/admin/admin-metaboxes-form.php:299
+#: inc/admin/admin-metaboxes-form.php:314
 msgid "Press Release"
 msgstr "பத்திரிகை வெளியீடு"
 
-#: inc/admin/admin-metaboxes-form.php:300
+#: inc/admin/admin-metaboxes-form.php:315
 msgid "Satire"
 msgstr "நையாண்டி"
 
-#: inc/admin/admin-metaboxes-form.php:301
+#: inc/admin/admin-metaboxes-form.php:316
 msgid "Blog"
 msgstr "வலைப்பதிவு"
 
-#: inc/admin/admin-metaboxes-form.php:302
+#: inc/admin/admin-metaboxes-form.php:317
 msgid "OpEd"
 msgstr "OpEd"
 
-#: inc/admin/admin-metaboxes-form.php:303
+#: inc/admin/admin-metaboxes-form.php:318
 msgid "Opinion"
 msgstr "கருத்து"
 
-#: inc/admin/admin-metaboxes-form.php:304
+#: inc/admin/admin-metaboxes-form.php:319
 msgid "UserGenerated"
 msgstr "பயனர்உருவாக்கியது"
 
-#: inc/admin/admin-metaboxes-form.php:309
+#: inc/admin/admin-metaboxes-form.php:324
 msgid "Google News Keywords <em>(max recommended limit: 12)</em>"
 msgstr "கூகுள் செய்திகள் சிறப்புச் சொற்கள் <em>(அதிகபட்ச பரிந்துரைக்கப்பட்ட வரம்பு: 12)</em>"
 
-#: inc/admin/admin-metaboxes-form.php:310
+#: inc/admin/admin-metaboxes-form.php:325
 msgid "Enter your Google News Keywords"
 msgstr "கூகுள் செய்திகள் சிறப்புச் சொற்கள் பதிவு செய்யுங்கள்"
 
@@ -960,7 +970,9 @@ msgid "You don't have an XML Sitemap!"
 msgstr "XML தள வரைபடம் உங்களிடம் இல்லை!"
 
 #: inc/admin/admin.php:1029
-msgid "Do you have a Google Business page? It's free!"
+#, fuzzy
+#| msgid "Do you have a Google Business page? It's free!"
+msgid "Do you have a Google My Business page? It's free!"
 msgstr "உங்களிடம் Google Business பக்கம் இருக்கிறதா? இது இலவசம்!"
 
 #: inc/admin/admin.php:1032
@@ -2183,15 +2195,15 @@ msgstr "நோ பாலோ nofollow இயக்குக"
 msgid "Enable follow"
 msgstr "பாலோ follow இயக்குக"
 
-#: inc/functions/options-import-export.php:49
+#: inc/functions/options-import-export.php:50
 msgid "Please upload a valid .json file"
 msgstr "சரியான .json கோப்பைப் பதிவேற்றவும்"
 
-#: inc/functions/options-import-export.php:53 inc/functions/options-import-export.php:88
+#: inc/functions/options-import-export.php:54 inc/functions/options-import-export.php:90
 msgid "Please upload a file to import"
 msgstr "இறக்குமதி செய்ய ஒரு கோப்பை பதிவேற்றவும்"
 
-#: inc/functions/options-import-export.php:84
+#: inc/functions/options-import-export.php:86
 msgid "Please upload a valid .csv file"
 msgstr "சரியான .csv கோப்பைப் பதிவேற்றவும்"
 
