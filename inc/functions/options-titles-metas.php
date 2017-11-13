@@ -255,12 +255,14 @@ if (get_option('blog_public') =='1') {
 
 		$post_category ='';
 		if (is_single() && has_category()) {
-			$post_category = get_the_terms(get_the_id(), 'category')[0]->name;
+			$post_category_array = get_the_terms(get_the_id(), 'category');
+			$post_category = $post_category_array[0]->name;
 		}
 
 		$post_tag ='';
 		if (is_single() && has_tag()) {
-			$post_tag = get_the_terms(get_the_id(), 'post_tag')[0]->name;
+			$post_tag_array = get_the_terms(get_the_id(), 'post_tag');
+			$post_tag = $post_tag_array[0]->name;
 		}
 
 		$woo_single_cat_html ='';
@@ -445,12 +447,14 @@ if (get_option('blog_public') =='1') {
 
 		$post_category ='';
 		if (is_single() && has_category()) {
-			$post_category = get_the_terms(get_the_id(), 'category')[0]->name;
+			$post_category_array = get_the_terms(get_the_id(), 'category');
+			$post_category = $post_category_array[0]->name;
 		}
 
 		$post_tag ='';
 		if (is_single() && has_tag()) {
-			$post_tag = get_the_terms(get_the_id(), 'post_tag')[0]->name;
+			$post_tag_array = get_the_terms(get_the_id(), 'post_tag');
+			$post_tag = $post_tag_array[0]->name;
 		}
 
 		if (get_the_excerpt() !='') {

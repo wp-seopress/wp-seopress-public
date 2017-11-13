@@ -221,11 +221,13 @@ echo                '<div class="snippet-description">'.seopress_titles_desc($se
                 <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
                 <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.__('Default value: ','wp-seopress').get_permalink().'" value="'.$seopress_robots_canonical.'" />
             </p>';
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                echo '<p>
-                    <label for="seopress_robots_breadcrumbs_meta">'. __( 'Custom breadcrumbs', 'wp-seopress' ) .'</label>
-                    <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.__('Enter a custom value, useful if your title is too long','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
-                </p>';
+            if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                    echo '<p>
+                        <label for="seopress_robots_breadcrumbs_meta">'. __( 'Custom breadcrumbs', 'wp-seopress' ) .'</label>
+                        <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.__('Enter a custom value, useful if your title is too long','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
+                    </p>';
+                }
             }
         echo '</div>
         <div id="tabs-3">

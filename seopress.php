@@ -105,12 +105,27 @@ function seopress_admin_metaboxe_js($hook) {
             }
             wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
             wp_enqueue_media();
+
+            //Content Analysis
+            wp_enqueue_script( 'seopress-content-analysis-ajax', plugins_url( 'assets/js/seopress-content-analysis.js', __FILE__ ), array( 'jquery', 'jquery-ui-tabs' ), '', true );
+
+            $seopress_content_analysis = array(
+                'seopress_nonce' => wp_create_nonce('seopress_content_analysis_nonce'),
+                'seopress_content_analysis' => admin_url( 'admin-ajax.php'),
+            );
+            wp_localize_script( 'seopress-content-analysis-ajax', 'seopressContentAnalysis', $seopress_content_analysis );
         }
     } elseif ( $hook =='term.php' ) {
-        wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
-        wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', __FILE__ ), array( 'jquery' ) );
-        wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
-        wp_enqueue_media();
+        global $my_admin_page;
+        $screen = get_current_screen();
+
+        $tax_public_check = get_taxonomy($screen->taxonomy);
+        if ($tax_public_check->public =='1') {
+            wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', __FILE__ ), array( 'jquery' ) );
+            wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
+            wp_enqueue_media();
+        }
     }
 }
 

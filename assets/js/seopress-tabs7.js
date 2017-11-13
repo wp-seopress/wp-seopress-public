@@ -54,9 +54,9 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'GET',
 			url : seopressAjaxWhois.seopress_whois_alert,
-			_ajax_nonce: seopressAjaxWhois.seopress_nonce,
 			data : {
 				action: 'seopress_whois_alert',
+				_ajax_nonce: seopressAjaxWhois.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery('#seopress-whois-alert').removeAttr("disabled");
@@ -80,9 +80,9 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'GET',
 			url : seopressAjaxAlexa.seopress_request_alexa_rank,
-			_ajax_nonce: seopressAjaxAlexa.seopress_nonce,
 			data : {
 				action: 'seopress_request_alexa_rank',
+				_ajax_nonce: seopressAjaxAlexa.seopress_nonce,
 			},
 			success : function( data ) {
 				window.location.reload(true);
@@ -104,9 +104,9 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'GET',
 			url : seopressAjaxReverse.seopress_request_reverse,
-			_ajax_nonce: seopressAjaxReverse.seopress_nonce,
 			data : {
 				action: 'seopress_request_reverse',
+				_ajax_nonce: seopressAjaxReverse.seopress_nonce,
 			},
 			success : function( data ) {
 				window.location.reload(true);

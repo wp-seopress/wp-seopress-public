@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
 "POT-Creation-Date: 2017-10-11 18:49+0200\n"
-"PO-Revision-Date: 2017-10-11 18:49+0200\n"
+"PO-Revision-Date: 2017-10-26 18:43+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 1.8.2\n"
 "X-Poedit-KeywordsList: __;_e;_x;esc_attr_e;esc_attr__\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -136,16 +136,12 @@ msgid "Follow us on Twitter"
 msgstr "Síguenos en Twitter"
 
 #: inc/admin/admin-header.php:182
-#, fuzzy
-#| msgid "Follow us on Twitter (new window)"
 msgid "Follow us on YouTube (new window)"
-msgstr "Síguenos en Twitter (nueva ventana)"
+msgstr "Síguenos en YouTube (nueva ventana)"
 
 #: inc/admin/admin-header.php:184
-#, fuzzy
-#| msgid "Follow us on Twitter"
 msgid "Follow us on YouTube"
-msgstr "Síguenos en Twitter"
+msgstr "Síguenos en YouTube"
 
 #: inc/admin/admin-header.php:186
 msgid "Official website (new window)"
@@ -503,28 +499,22 @@ msgid "Post author"
 msgstr "Autor de Post"
 
 #: inc/admin/admin.php:203
-#, fuzzy, php-format
-#| msgid "%%post_author%%"
+#, php-format
 msgid "%%post_category%%"
-msgstr "%%post_author%%"
+msgstr "%%post_category%%"
 
 #: inc/admin/admin.php:203
-#, fuzzy
-#| msgid "Post author"
 msgid "Post category"
-msgstr "Autor de Post"
+msgstr "Categoría de Post"
 
 #: inc/admin/admin.php:204
-#, fuzzy, php-format
-#| msgid "%%post_date%%"
+#, php-format
 msgid "%%post_tag%%"
-msgstr "%%post_date%%"
+msgstr "%%post_tag%%"
 
 #: inc/admin/admin.php:204
-#, fuzzy
-#| msgid "Post date"
 msgid "Post tag"
-msgstr "Fecha de Post"
+msgstr "Etiqueta de Post"
 
 #: inc/admin/admin.php:205
 #, php-format
@@ -619,31 +609,29 @@ msgstr "Archivo de Fecha"
 #: inc/admin/admin.php:215
 #, php-format
 msgid "%%wc_single_cat%%"
-msgstr ""
+msgstr "%%wc_single_cat%%"
 
 #: inc/admin/admin.php:215
 msgid "Single product category"
-msgstr ""
+msgstr "Categoría de producto simple"
 
 #: inc/admin/admin.php:216
 #, php-format
 msgid "%%wc_single_tag%%"
-msgstr ""
+msgstr "%%wc_single_tag%%"
 
 #: inc/admin/admin.php:216
 msgid "Single product tag"
-msgstr ""
+msgstr "Etiqueta de producto simple"
 
 #: inc/admin/admin.php:217
 #, php-format
 msgid "%%wc_single_short_desc%%"
-msgstr ""
+msgstr "%%wc_single_short_desc%%"
 
 #: inc/admin/admin.php:217
-#, fuzzy
-#| msgid "Enter your meta description"
 msgid "Single product short description"
-msgstr "Introduce tu meta descripción"
+msgstr "Descripción corta de producto simple"
 
 #: inc/admin/admin.php:223
 msgid "Templates variables"
@@ -651,15 +639,15 @@ msgstr "Variables de plantillas"
 
 #: inc/admin/admin.php:231 inc/admin/admin.php:239
 msgid "Browse our guides"
-msgstr ""
+msgstr "Visita nuestras guías"
 
 #: inc/admin/admin.php:232 inc/admin/admin.php:240
 msgid "Read our FAQ"
-msgstr ""
+msgstr "Lee nuestro FAQ"
 
 #: inc/admin/admin.php:233 inc/admin/admin.php:241
 msgid "Check our website"
-msgstr ""
+msgstr "Comprueba nuestro sito web"
 
 #: inc/admin/admin.php:261 inc/admin/admin.php:732
 msgid ""
@@ -907,7 +895,7 @@ msgstr "Centro de Notificaciones"
 
 #: inc/admin/admin.php:839
 msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
-msgstr ""
+msgstr "Tu tema no usa <strong>add_theme_support('title-tag');</strong>"
 
 #: inc/admin/admin.php:840 inc/admin/admin.php:895 inc/admin/admin.php:905
 #: inc/admin/admin.php:915
@@ -1259,7 +1247,7 @@ msgstr "Excluir algunos artículos, páginas o tipos de contenido personalizados
 
 #: inc/admin/admin.php:2191
 msgid "Disable the display of the publication date"
-msgstr ""
+msgstr "Desactivar la visualización de la fecha de publicación"
 
 #: inc/admin/admin.php:2208
 msgid "Person or organization"
@@ -1347,7 +1335,7 @@ msgstr "Habilitar Twitter Card"
 
 #: inc/admin/admin.php:2403
 msgid "Use Open Graph if no Twitter Cards filled"
-msgstr ""
+msgstr "Use Open Graph si no se rellenaron las tarjetas de Twitter"
 
 #: inc/admin/admin.php:2411
 msgid "Default Twitter Image"
@@ -1578,10 +1566,8 @@ msgid "Flush permalinks"
 msgstr "Permalinks a nivel"
 
 #: inc/admin/admin.php:2890
-#, fuzzy
-#| msgid "<p>Create an HTML for your visitors and boost your SEO</p>"
 msgid "<p>Create an HTML for your visitors and boost your SEO.</p>"
-msgstr "<p>Crear un HTML para tus visitantes y mejorar tu SEO</p>"
+msgstr "<p>Cree un HTML para sus visitantes y aumente su SEO.</p>"
 
 #: inc/admin/admin.php:2905
 msgid "<p>Include / Exclude Post Types</p>"
@@ -1772,17 +1758,15 @@ msgstr "eg: 2, 28, 68"
 
 #: inc/admin/admin.php:3839
 msgid "You can also use this shortcode:"
-msgstr ""
+msgstr "También puedes usar este shortcode:"
 
 #: inc/admin/admin.php:3849
 msgid "eg: 13, 8, 38"
 msgstr "eg: 13, 8, 38"
 
 #: inc/admin/admin.php:3864
-#, fuzzy
-#| msgid "Post Title (post, page, custom post type)"
 msgid "Disable date after each post, page, post type?"
-msgstr "Título de Post (post, página, tipo de post personalizado)"
+msgstr "¿Deshabilitar la fecha después de cada post, página, tipo de post?"
 
 #: inc/admin/admin.php:3880
 msgid "Person"
@@ -1905,10 +1889,8 @@ msgid "Enable Twitter card"
 msgstr "Habilitar tarjeta de Twitter"
 
 #: inc/admin/admin.php:4215
-#, fuzzy
-#| msgid "Enable Twitter Card"
 msgid "Use OG if no Twitter Cards"
-msgstr "Habilitar Twitter Card"
+msgstr "Usar OG si no hay tarjetas de Twitter"
 
 #: inc/admin/admin.php:4248
 msgid "Default"
@@ -2122,7 +2104,7 @@ msgstr "Quitar /categoría/ en tus permalinks"
 
 #: inc/admin/admin.php:4914
 msgid "You have to flush your permalinks each time you change this settings"
-msgstr ""
+msgstr "Debes purgar tus permalinks cada vez que cambies esta configuración"
 
 #: inc/admin/admin.php:4931
 msgid ""
@@ -2149,10 +2131,9 @@ msgid "Enter Yandex meta value site verification"
 msgstr "Introducir la verificación meta del sitio de Yandex"
 
 #: inc/admin/admin.php:4996
-#, fuzzy
-#| msgid "Remove SEOPress from Admin Bar in backend"
 msgid "Remove SEOPress from Admin Bar in backend and frontend"
-msgstr "Quitar SEOPress de la barra de Admin en backend"
+msgstr ""
+"Quitar SEOPress de la barra de administración en el back-end y frontend"
 
 #: inc/admin/admin.php:5012
 msgid "High priority (top)"

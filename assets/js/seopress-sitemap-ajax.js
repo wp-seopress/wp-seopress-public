@@ -3,7 +3,9 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'GET',
 			url : seopressAjaxResetPermalinks.seopress_flush_permalinks,
-			_ajax_nonce: seopressAjaxResetPermalinks.seopress_nonce,
+			data: {
+				_ajax_nonce: seopressAjaxResetPermalinks.seopress_nonce,
+			},
 			success : function( data ) {
 				window.location.reload(true);
 			},

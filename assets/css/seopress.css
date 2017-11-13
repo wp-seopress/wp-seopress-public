@@ -23,7 +23,44 @@
 /*************************************************************************************************/
 /* Metaboxe in CPT                                                                               */
 /*************************************************************************************************/
-#seopress_cpt .ui-tabs .ui-tabs-nav {
+#seopress_launch_analysis {
+    float: left;
+}
+#seopress_analysis_results_state {
+    background: rgba(74,184,102,.75);
+    color: #fff;
+    padding: 5px 25px 5px 20px;
+    border-radius: 100px;
+    font-style: italic;
+    position: relative;
+    width: auto;
+    display: inline-block;
+    margin: 0 0 0 20px;
+}
+#seopress_content_analysis h3 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+#seopress_content_analysis .wrap-analysis-img ul {
+    display: flex;
+}
+#seopress_content_analysis .wrap-analysis-img ul li {
+    padding: 0;
+    text-align: left;
+    cursor: default;
+}
+#seopress_content_analysis .wrap-analysis-img h4 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+#seopress_content_analysis .wrap-analysis-img ul li img {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    cursor: default;
+}
+#seopress_cpt .ui-tabs .ui-tabs-nav,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav {
     display: inline-block;
     height: 26px;
     position: relative;
@@ -34,13 +71,19 @@
     background: none;
     border: none;
 }
-#seopress_cpt .ui-helper-clearfix:after {
+#seopress_content_analysis .ui-tabs .ui-tabs-nav {
+    margin-top: 15px;
+}
+#seopress_cpt .ui-helper-clearfix:after,
+#seopress_content_analysis .ui-helper-clearfix:after {
     content:none;
 }
-.seopress_page_seopress-titles #seopress-tabs .form-table td {
+.seopress_page_seopress-titles #seopress-tabs .form-table td,
+.seopress_page_seopress-titles #seopress_content_analysis .form-table td {
     padding: 0;
 }
-#seopress_cpt .ui-tabs .ui-tabs-panel {
+#seopress_cpt .ui-tabs .ui-tabs-panel,
+#seopress_content_analysis .ui-tabs .ui-tabs-panel {
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #DDDDDD;
     border-radius: 0;
@@ -50,16 +93,19 @@
     box-sizing: border-box;
 }
 #seopress_cpt .ui-tabs .ui-tabs-panel .dashicons-info,
+#seopress_content_analysis .ui-tabs .ui-tabs-panel .dashicons-info,
 #seopress_pro_cpt .dashicons-info {
     font-size: 16px;
     vertical-align: middle;
     height: 16px;
     width: 16px;
 }
-#seopress_cpt .ui-tabs .ui-tabs-nav li, #seopress_cpt .ui-tabs-anchor {
+#seopress_cpt .ui-tabs .ui-tabs-nav li, #seopress_cpt .ui-tabs-anchor,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li, #seopress_content_analysis .ui-tabs-anchor, {
     cursor:pointer !important;
 }
-#seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+#seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     background: none repeat scroll 0 0 #FFFFFF;
     border-color: #DDDDDD #DDDDDD #FFFFFF;
     border-image: none;
@@ -70,14 +116,15 @@
     cursor:pointer;
     border-radius: 0;
 }
-#seopress_cpt #tabs-1 label, 
+#seopress_cpt #tabs-1 label,
 #seopress_cpt #tabs-2 label[for=seopress_robots_canonical_meta],
 #seopress_cpt #tabs-2 label[for=seopress_robots_breadcrumbs_meta],
 #seopress_cpt #tabs-3 label, 
 #seopress_cpt #tabs-4 label, 
 #seopress_cpt #tabs-5 label, 
 #seopress_cpt .subsection-title,
-#seopress_pro_cpt label {
+#seopress_pro_cpt label,
+#seopress_content_analysis label {
     border-bottom: 1px solid #DDDDDD;
     display: block;
     margin: 20px 0 5px;
@@ -91,7 +138,8 @@
 #seopress_cpt #tabs-3 textarea, 
 #seopress_cpt #tabs-3 input[type=text],
 #seopress_cpt #tabs-4 input[type=text],
-#seopress_cpt #tabs-5 input[type=text] {
+#seopress_cpt #tabs-5 input[type=text],
+#seopress_content_analysis input[type=text] {
     width:100%;
 }
 #seopress_cpt select {
@@ -111,13 +159,15 @@
     font-weight: normal;
 }
 #seopress_cpt .advise,
-#seopress_pro_cpt .advise {
+#seopress_pro_cpt .advise,
+#seopress_content_analysis .advise {
     margin: 5px;
     display: block;
     color: red;
     font-style: italic;
 }
-#seopress_cpt .mandatory {
+#seopress_cpt .mandatory,
+#seopress_content_analysis .mandatory {
     color: #cc0000;
 }
 #seopress_cpt .box-left {
@@ -186,14 +236,16 @@
 /*************************************************************************************************/
 /* Admin - Tabs                                                                                  */
 /*************************************************************************************************/
-#seopress_cpt .ui-tabs {
+#seopress_cpt .ui-tabs,
+#seopress_content_analysis .ui-tabs {
     position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
     padding: .2em;
     border: none;
     font-family: inherit;
     font-size: inherit;
 }
-#seopress_cpt .ui-tabs .ui-tabs-nav li {
+#seopress_cpt .ui-tabs .ui-tabs-nav li,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li {
     list-style: none;
     float: left;
     position: relative;
@@ -205,22 +257,29 @@
     border: none;
     background: none;
 }
-#seopress_cpt .ui-tabs .ui-tabs-nav li a {
+#seopress_cpt .ui-tabs .ui-tabs-nav li a,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li a {
     float: left;
     padding: 0.38em 1em;
     text-decoration: none;
 }
-#seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+#seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     margin-bottom: -1px;
     padding-bottom: 1px;
 }
 #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active a,
 #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-state-disabled a,
-#seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+#seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-loading a,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li.ui-tabs-active a,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li.ui-state-disabled a,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
     cursor: text;
 }
 #seopress_cpt .ui-tabs .ui-tabs-nav li a, /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
-#seopress_cpt .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+#seopress_cpt .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li a,
+#seopress_content_analysis .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
     cursor: pointer;
     color: #0073aa;
     text-decoration: none;
@@ -236,6 +295,25 @@
     font-weight: bold;
     margin-right: 10px;
 }
+#seopress_content_analysis .ui-tabs .dashicons-yes {
+    color: #fff;
+    background: #12BD10;
+    border-radius: 50px;
+    margin-right: 10px;
+    padding: 1px;
+}
+#seopress_content_analysis .ui-tabs .dashicons-yes,
+#seopress_content_analysis .ui-tabs .dashicons-no-alt {
+    color: #fff;
+    background: #12BD10;
+    border-radius: 50px;
+    margin-right: 10px;
+    padding: 1px;
+}
+#seopress_content_analysis .ui-tabs .dashicons-no-alt {
+    background: #e25950;
+}
+
 /*************************************************************************************************/
 /* Admin - Options panel                                                                         */
 /*************************************************************************************************/

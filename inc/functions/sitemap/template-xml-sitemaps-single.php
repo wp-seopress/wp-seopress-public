@@ -47,7 +47,7 @@ function seopress_xml_sitemap_single() {
 					if (seopress_xml_sitemap_img_enable_option() =='1') {
 						
 						//Standard images
-						if (!empty (get_the_content($post))) {
+						if (get_the_content($post) !='') {
 							$dom = new domDocument;
 							$internalErrors = libxml_use_internal_errors(true);
 							$dom->loadHTML(esc_attr(wp_filter_nohtml_kses(htmlentities(get_the_content($post)))));

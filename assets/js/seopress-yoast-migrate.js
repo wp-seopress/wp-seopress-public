@@ -3,9 +3,9 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxYoastMigrate.seopress_yoast_migration,
-			_ajax_nonce: seopressAjaxYoastMigrate.seopress_nonce,
 			data : {
 				action: 'seopress_yoast_migration',
+				_ajax_nonce: seopressAjaxYoastMigrate.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery('#seopress-yoast-migrate').removeAttr("disabled");

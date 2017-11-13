@@ -676,8 +676,9 @@ class seopress_options
                             <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
                             <li><?php _e('Meta Robots (noindex, nofollow...)','wp-seopress'); ?></li>
                             <li><?php _e('Canonical URL','wp-seopress'); ?></li>
+                            <li><?php _e('Focus keywords','wp-seopress'); ?></li>
                         </ul>
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete all SEOPress posts metadata', 'wp-seopress' ); ?></p>
+                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms metadata', 'wp-seopress' ); ?></p>
                         <div id="seopress-yoast-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></div>
                         <span class="spinner"></span>
                         <div class="log"></div>
@@ -2728,6 +2729,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_appearance_target_kw_col', // ID
+           __("Show Target Keyword column in post types","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_target_kw_col_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
             'seopress_advanced_appearance_noindex_col', // ID
            __("Show noindex column in post types","wp-seopress"), // Title
             array( $this, 'seopress_advanced_appearance_noindex_col_callback' ), // Callback
@@ -2789,6 +2798,14 @@ class seopress_options
             'seopress_advanced_security_metaboxe_role', // ID
            __("Block SEO metaboxe to user roles","wp-seopress"), // Title
             array( $this, 'seopress_advanced_security_metaboxe_role_callback' ), // Callback
+            'seopress-settings-admin-advanced-security', // Page
+            'seopress_setting_section_advanced_security' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_security_metaboxe_ca_role', // ID
+           __("Block Content analysis metaboxe to user roles","wp-seopress-pro"), // Title
+            array( $this, 'seopress_advanced_security_metaboxe_ca_role_callback' ), // Callback
             'seopress-settings-admin-advanced-security', // Page
             'seopress_setting_section_advanced_security' // Section                  
         );
@@ -5074,6 +5091,23 @@ class seopress_options
         }
     }
 
+    public function seopress_advanced_appearance_target_kw_col_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_target_kw_col']);      
+        
+        echo '<input id="seopress_advanced_appearance_target_kw_col" name="seopress_advanced_option_name[seopress_advanced_appearance_target_kw_col]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_target_kw_col">'. __( 'Add target keyword column', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_target_kw_col'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_target_kw_col']);
+        }
+    }
+
     public function seopress_advanced_appearance_noindex_col_callback()
     {
         $options = get_option( 'seopress_advanced_option_name' );  
@@ -5199,6 +5233,31 @@ class seopress_options
 
             if (isset($this->options['seopress_advanced_security_metaboxe_role'][$key])) {
                 esc_attr( $this->options['seopress_advanced_security_metaboxe_role'][$key]);
+            }
+        }
+    }
+
+    public function seopress_advanced_security_metaboxe_ca_role_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        global $wp_roles;
+
+        if ( ! isset( $wp_roles ) )
+            $wp_roles = new WP_Roles();
+    
+        foreach ($wp_roles->get_names() as $key => $value) {
+
+            $check = isset($options['seopress_advanced_security_metaboxe_ca_role'][$key]);  
+
+            echo '<input id="seopress_advanced_security_metaboxe_ca_role_'.$key.'" name="seopress_advanced_option_name[seopress_advanced_security_metaboxe_ca_role]['.$key.']" type="checkbox"';
+            if ('1' == $check) echo 'checked="yes"'; 
+            echo ' value="1"/>';
+            
+            echo '<label for="seopress_advanced_security_metaboxe_ca_role_'.$key.'">'. $value .'</label><br/>';
+
+            if (isset($this->options['seopress_advanced_security_metaboxe_ca_role'][$key])) {
+                esc_attr( $this->options['seopress_advanced_security_metaboxe_ca_role'][$key]);
             }
         }
     }

@@ -6,11 +6,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxHideNotices.seopress_hide_notices,
-			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			data : {
 				action: 'seopress_hide_notices',
 				notice: 'notice-divide-comments',
 				notice_value: jQuery('#notice-divide-comments').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -26,11 +26,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxHideNotices.seopress_hide_notices,
-			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			data : {
 				action: 'seopress_hide_notices',
 				notice: 'notice-trailingslash',
 				notice_value: jQuery('#notice-trailingslash').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -46,11 +46,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxHideNotices.seopress_hide_notices,
-			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			data : {
 				action: 'seopress_hide_notices',
 				notice: 'notice-posts-number',
 				notice_value: jQuery('#notice-posts-number').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -66,11 +66,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxHideNotices.seopress_hide_notices,
-			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			data : {
 				action: 'seopress_hide_notices',
 				notice: 'notice-rss-use-excerpt',
 				notice_value: jQuery('#notice-rss-use-excerpt').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -86,11 +86,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxHideNotices.seopress_hide_notices,
-			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			data : {
 				action: 'seopress_hide_notices',
 				notice: 'notice-search-console',
 				notice_value: jQuery('#notice-search-console').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -106,11 +106,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxHideNotices.seopress_hide_notices,
-			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			data : {
 				action: 'seopress_hide_notices',
 				notice: 'notice-google-business',
 				notice_value: jQuery('#notice-google-business').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -126,11 +126,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxHideNotices.seopress_hide_notices,
-			_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			data : {
 				action: 'seopress_hide_notices',
 				notice: 'notice-ssl',
 				notice_value: jQuery('#notice-ssl').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -146,11 +146,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-titles',
 				feature_value: jQuery('#toggle-titles').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
