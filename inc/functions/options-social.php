@@ -383,7 +383,7 @@ function seopress_social_facebook_og_type_hook() {
 	if (seopress_social_facebook_og_option() =='1') {
 		if (is_home() || is_front_page()) {
 			$seopress_social_og_type = '<meta property="og:type" content="website" />';
-		} elseif (is_singular('product')) {
+		} elseif (is_singular('product') || is_singular('download')) {
 			$seopress_social_og_type = '<meta property="og:type" content="product" />';
 		} elseif (is_singular()) {
 			$seopress_social_og_type = '<meta property="og:type" content="article" />';

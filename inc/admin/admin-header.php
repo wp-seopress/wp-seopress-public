@@ -60,6 +60,12 @@ function seopress_admin_header() { ?>
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_edd$13' ); ?>">
+                                            <span class="dashicons dashicons-cart"></span>
+                                            <?php _e( 'Easy Digital Downloads', 'wp-seopress' ); ?>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_local_business$10' ); ?>">
                                             <span class="dashicons dashicons-store"></span>
                                             <?php _e( 'Local Business', 'wp-seopress' ); ?>

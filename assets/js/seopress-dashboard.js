@@ -287,6 +287,27 @@ jQuery(document).ready(function(){
 			},
 		});
 	});	
+	//EDD
+	jQuery('#toggle-edd').on('click', function() {
+		jQuery('#toggle-edd').attr('data-toggle', jQuery('#toggle-edd').attr('data-toggle') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxToggleFeatures.seopress_toggle_features,
+			data : {
+				action: 'seopress_toggle_features',
+				feature: 'toggle-edd',
+				feature_value: jQuery('#toggle-edd').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Easy Digital Downloads has been successfully updated!');
+				jQuery( '#edd-state' ).toggleClass('feature-state-on');
+				jQuery( '#edd-state-default' ).toggleClass('feature-state-off');
+				jQuery( '#edd-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});	
 	//Dublin Core
 	jQuery('#toggle-dublin-core').on('click', function() {
 		jQuery('#toggle-dublin-core').attr('data-toggle', jQuery('#toggle-dublin-core').attr('data-toggle') == '1' ? '0' : '1');

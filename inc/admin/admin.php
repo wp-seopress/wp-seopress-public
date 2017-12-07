@@ -209,6 +209,7 @@ class seopress_options
                     <li><span>'.__('%%current_pagination%%','wp-seopress').'</span>'.__('Current number page','wp-seopress').'</li>
                     <li><span>'.__('%%cpt_plural%%','wp-seopress').'</span>'.__('Plural Post Type Archive name','wp-seopress').'</li>
                     <li><span>'.__('%%date_archive%%','wp-seopress').'</span>'.__('Date Archive','wp-seopress').'</li>
+                    <li><span>'.__('%%_cf_your_custom_field_name%%','wp-seopress').'</span>'.__('Custom fields from post, page or post type','wp-seopress').'</li>
                     <li><span>'.__('%%wc_single_cat%%','wp-seopress').'</span>'.__('Single product category','wp-seopress').'</li>
                     <li><span>'.__('%%wc_single_tag%%','wp-seopress').'</span>'.__('Single product tag','wp-seopress').'</li>
                     <li><span>'.__('%%wc_single_short_desc%%','wp-seopress').'</span>'.__('Single product short description','wp-seopress').'</li>
@@ -1452,6 +1453,34 @@ class seopress_options
                                     } else { 
                                         echo '<span id="woocommerce-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
                                         echo '<span id="woocommerce-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                    }
+                                ?>
+                            </span>
+                        </div>
+                        <div class="seopress-feature">
+                            <div class="img-tool">
+                                <span class="dashicons dashicons-cart"></span>                                  
+                            </div>
+                            <span class="inner">
+                                <h3><?php _e('Easy Digital Downloads','wp-seopress'); ?></h3>
+                                <p><?php _e('Improve Easy Digital Downloads SEO','wp-seopress'); ?></p>
+                                <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_edd$13' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                <?php
+                                    if(seopress_get_toggle_edd_option()=='1') { 
+                                        $seopress_get_toggle_edd_option = '"1"';
+                                    } else { 
+                                        $seopress_get_toggle_edd_option = '"0"';
+                                    }
+                                ?>
+                                <input type="checkbox" name="toggle-edd" id="toggle-edd" class="toggle" data-toggle=<?php echo $seopress_get_toggle_edd_option; ?>>
+                                <label for="toggle-edd"></label>
+                                <?php
+                                    if(seopress_get_toggle_edd_option()=='1') { 
+                                        echo '<span id="edd-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                        echo '<span id="edd-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                    } else { 
+                                        echo '<span id="edd-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                        echo '<span id="edd-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                     }
                                 ?>
                             </span>

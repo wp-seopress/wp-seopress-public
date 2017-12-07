@@ -382,13 +382,54 @@ if (get_option('blog_public') =='1') {
 			if (get_post_meta($post->ID,'_seopress_titles_title',true)) { //IS METABOXE
 				$seopress_titles_the_title = esc_attr(get_post_meta($post->ID,'_seopress_titles_title',true));
 
+				preg_match_all('/%%_cf_(.*?)%%/', $seopress_titles_the_title, $matches);
+
+				if (!empty($matches)) {
+					$seopress_titles_cf_template_variables_array = array();
+					$seopress_titles_cf_template_replace_array = array();
+
+					foreach ($matches['0'] as $key => $value) {
+						$seopress_titles_cf_template_variables_array[] = $value;
+					}
+
+					foreach ($matches['1'] as $key => $value) {
+						$seopress_titles_cf_template_replace_array[] = get_post_meta($post->ID,$value,true);
+					}
+				}
+
 				$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title);
+
+				if (!empty($matches) && !empty($seopress_titles_cf_template_variables_array) && !empty($seopress_titles_cf_template_replace_array)) {
+					$seopress_titles_title_template = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_titles_title_template);
+				}
+
 				return $seopress_titles_title_template;
 			}
 			else { //DEFAULT GLOBAL
+
 				$seopress_titles_single_titles_option = esc_attr(seopress_titles_single_titles_option());
 
+				preg_match_all('/%%_cf_(.*?)%%/', $seopress_titles_single_titles_option, $matches);
+
+				if (!empty($matches)) {
+					$seopress_titles_cf_template_variables_array = array();
+					$seopress_titles_cf_template_replace_array = array();
+
+					foreach ($matches['0'] as $key => $value) {
+						$seopress_titles_cf_template_variables_array[] = $value;
+					}
+
+					foreach ($matches['1'] as $key => $value) {
+						$seopress_titles_cf_template_replace_array[] = get_post_meta($post->ID,$value,true);
+					}
+				}
+
 				$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_single_titles_option);
+				
+				if (!empty($matches) && !empty($seopress_titles_cf_template_variables_array) && !empty($seopress_titles_cf_template_replace_array)) {
+					$seopress_titles_title_template = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_titles_title_template);
+				}
+
 				return $seopress_titles_title_template;
 			}
 		} elseif (is_post_type_archive() && seopress_titles_archive_titles_option()) { //IS POST TYPE ARCHIVE
@@ -585,15 +626,54 @@ if (get_option('blog_public') =='1') {
 			}
 		} elseif (is_singular()) { //IS SINGLE
 			if (get_post_meta($post->ID,'_seopress_titles_desc',true)) { //IS METABOXE
-				$seopress_titles_the_description_meta = get_post_meta($post->ID,'_seopress_titles_desc',true);
-				$seopress_titles_the_description = esc_attr($seopress_titles_the_description_meta);
-				
+				$seopress_titles_the_description = esc_attr(get_post_meta($post->ID,'_seopress_titles_desc',true));
+
+				preg_match_all('/%%_cf_(.*?)%%/', $seopress_titles_the_description, $matches);
+
+				if (!empty($matches)) {
+					$seopress_titles_cf_template_variables_array = array();
+					$seopress_titles_cf_template_replace_array = array();
+
+					foreach ($matches['0'] as $key => $value) {
+						$seopress_titles_cf_template_variables_array[] = $value;
+					}
+
+					foreach ($matches['1'] as $key => $value) {
+						$seopress_titles_cf_template_replace_array[] = get_post_meta($post->ID,$value,true);
+					}
+				}
+
 				$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
+
+				if (!empty($matches) && !empty($seopress_titles_cf_template_variables_array) && !empty($seopress_titles_cf_template_replace_array)) {
+					$seopress_titles_description_template = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_titles_description_template);
+				}
+
 				return $seopress_titles_description_template;
 			} elseif (seopress_titles_single_desc_option() !='') { //IS GLOBAL
 				$seopress_titles_the_description = esc_attr(seopress_titles_single_desc_option());
 				
+				preg_match_all('/%%_cf_(.*?)%%/', $seopress_titles_the_description, $matches);
+
+				if (!empty($matches)) {
+					$seopress_titles_cf_template_variables_array = array();
+					$seopress_titles_cf_template_replace_array = array();
+
+					foreach ($matches['0'] as $key => $value) {
+						$seopress_titles_cf_template_variables_array[] = $value;
+					}
+
+					foreach ($matches['1'] as $key => $value) {
+						$seopress_titles_cf_template_replace_array[] = get_post_meta($post->ID,$value,true);
+					}
+				}
+
 				$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
+
+				if (!empty($matches) && !empty($seopress_titles_cf_template_variables_array) && !empty($seopress_titles_cf_template_replace_array)) {
+					$seopress_titles_description_template = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_titles_description_template);
+				}
+				
 				return $seopress_titles_description_template;
 			} else {
 				setup_postdata( $post );
@@ -758,6 +838,7 @@ if (get_option('blog_public') =='1') {
 				 }
 			}
 		}
+		//Checkout page
 		function seopress_woocommerce_checkout_page_no_index_option() {
 			$seopress_woocommerce_checkout_page_no_index_option = get_option("seopress_pro_option_name");
 			if ( ! empty ( $seopress_woocommerce_checkout_page_no_index_option ) ) {
@@ -768,6 +849,7 @@ if (get_option('blog_public') =='1') {
 				 }
 			}
 		}
+		//Customer Account
 		function seopress_woocommerce_customer_account_page_no_index_option() {
 			$seopress_woocommerce_customer_account_page_no_index_option = get_option("seopress_pro_option_name");
 			if ( ! empty ( $seopress_woocommerce_customer_account_page_no_index_option ) ) {
