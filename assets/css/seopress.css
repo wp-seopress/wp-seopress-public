@@ -59,6 +59,9 @@
     object-fit: cover;
     cursor: default;
 }
+#seopress_cpt .notice {
+    padding: 10px 14px;
+}
 #seopress_cpt .ui-tabs .ui-tabs-nav,
 #seopress_content_analysis .ui-tabs .ui-tabs-nav {
     display: inline-block;

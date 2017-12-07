@@ -137,8 +137,15 @@ echo '<div id="seopress-tabs">';
         echo '</ul>';
         
         if ("seopress_404" != $typenow) {
-        echo '<div id="tabs-1">
-            <div class="box-left">
+        echo '<div id="tabs-1">';
+            if (is_plugin_active( 'woocommerce/woocommerce.php' )) {
+                $shop_page_id = wc_get_page_id( 'shop' );
+
+                if ( $post && absint( $shop_page_id ) === absint( $post->ID ) ) {
+                    echo '<p class="notice notice-info">'.__('This is your <strong>Shop page</strong>. Go to <strong>SEO > Titles & Metas > Archives > Products</strong> ','wp-seopress').' <a href="'.admin_url( 'admin.php?page=seopress-titles' ).'">'.__('to edit your title and meta description','wp-seopress').'</a></p>';
+                }
+            }
+        echo '<div class="box-left">
                 <p>
                     <label for="seopress_titles_title_meta">'. __( 'Title', 'wp-seopress' ) .'</label>
                     <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.__('Enter your title','wp-seopress').'" value="'.$seopress_titles_title.'" />

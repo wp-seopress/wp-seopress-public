@@ -83,9 +83,6 @@ class seopress_options
             } else {
                 $seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%term_description%%';
             }
-
-            //noindex
-            $seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['noindex'] ='1';
         }
 
         //Archives
@@ -2648,6 +2645,38 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_advanced_wp_generator', // ID
+           __("Remove WordPress generator meta tag","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_wp_generator_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_wp_shortlink', // ID
+           __("Remove WordPress shortlink meta tag","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_wp_shortlink_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_wp_wlw', // ID
+           __("Remove Windows Live Writer meta tag","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_wp_wlw_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_wp_rsd', // ID
+           __("Remove RSD meta tag","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_wp_rsd_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
             'seopress_advanced_advanced_google', // ID
            __("Google site verification","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_google_callback' ), // Callback
@@ -4949,6 +4978,74 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_advanced_trailingslash'])) {
             esc_attr( $this->options['seopress_advanced_advanced_trailingslash']);
+        }
+    }
+
+    public function seopress_advanced_advanced_wp_generator_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_wp_generator']);      
+        
+        echo '<input id="seopress_advanced_advanced_wp_generator" name="seopress_advanced_option_name[seopress_advanced_advanced_wp_generator]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_wp_generator">'. __( 'Remove WordPress meta generator in source code', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_advanced_wp_generator'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_wp_generator']);
+        }
+    }
+
+    public function seopress_advanced_advanced_wp_shortlink_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_wp_shortlink']);      
+        
+        echo '<input id="seopress_advanced_advanced_wp_shortlink" name="seopress_advanced_option_name[seopress_advanced_advanced_wp_shortlink]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_wp_shortlink">'. __( 'Remove WordPress shortlink meta tag in source code (eg:', 'wp-seopress' ) .'<em>'.esc_attr('<link rel="shortlink" href="https://www.seopress.org/"/>').'</em>)</label>';
+
+        if (isset($this->options['seopress_advanced_advanced_wp_shortlink'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_wp_shortlink']);
+        }
+    }
+
+    public function seopress_advanced_advanced_wp_wlw_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_wp_wlw']);      
+        
+        echo '<input id="seopress_advanced_advanced_wp_wlw" name="seopress_advanced_option_name[seopress_advanced_advanced_wp_wlw]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_wp_wlw">'. __( 'Remove Windows Live Writer meta tag in source code (eg:', 'wp-seopress' ) .'<em>'.esc_attr('<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.seopress.org/wp-includes/wlwmanifest.xml" />').'</em>)</label>';
+
+        if (isset($this->options['seopress_advanced_advanced_wp_wlw'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_wp_wlw']);
+        }
+    }
+
+    public function seopress_advanced_advanced_wp_rsd_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_wp_rsd']);      
+        
+        echo '<input id="seopress_advanced_advanced_wp_rsd" name="seopress_advanced_option_name[seopress_advanced_advanced_wp_rsd]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_wp_rsd">'. __( 'Remove Really Simple Discovery meta tag in source code (eg:', 'wp-seopress' ) .'<em>'.esc_attr('<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.seopress.dev/xmlrpc.php?rsd" />').'</em>)</label>';
+
+        if (isset($this->options['seopress_advanced_advanced_wp_rsd'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_wp_rsd']);
         }
     }
 

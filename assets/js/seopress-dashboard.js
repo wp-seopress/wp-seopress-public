@@ -167,11 +167,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-xml-sitemap',
 				feature_value: jQuery('#toggle-xml-sitemap').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -188,11 +188,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-social',
 				feature_value: jQuery('#toggle-social').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -209,11 +209,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-google-analytics',
 				feature_value: jQuery('#toggle-google-analytics').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -230,11 +230,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-advanced',
 				feature_value: jQuery('#toggle-advanced').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -251,11 +251,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-local-business',
 				feature_value: jQuery('#toggle-local-business').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -272,11 +272,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-woocommerce',
 				feature_value: jQuery('#toggle-woocommerce').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -293,11 +293,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-dublin-core',
 				feature_value: jQuery('#toggle-dublin-core').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -314,11 +314,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-rich-snippets',
 				feature_value: jQuery('#toggle-rich-snippets').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -335,11 +335,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-breadcrumbs',
 				feature_value: jQuery('#toggle-breadcrumbs').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -356,11 +356,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-robots',
 				feature_value: jQuery('#toggle-robots').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -377,11 +377,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-news',
 				feature_value: jQuery('#toggle-news').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
@@ -398,11 +398,11 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			method : 'POST',
 			url : seopressAjaxToggleFeatures.seopress_toggle_features,
-			_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			data : {
 				action: 'seopress_toggle_features',
 				feature: 'toggle-404',
 				feature_value: jQuery('#toggle-404').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
 			},
 			success : function( data ) {
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
