@@ -103,6 +103,9 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
         foreach (seopress_get_post_types() as $key => $value) {
             add_filter('manage_'.$key.'_posts_columns', 'seopress_title_columns');
             add_action('manage_'.$key.'_posts_custom_column', 'seopress_title_display_column', 10, 2);
+            if ( is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' )) {
+                add_filter('manage_edit-'.$key.'_columns', 'seopress_title_columns');
+            }
         }
 
         function seopress_title_columns($columns) {
@@ -134,35 +137,43 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
         }
 
         function seopress_title_display_column($column, $post_id) {
-            if ($column == 'seopress_title') {
-                echo '<div id="seopress_title-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_title", true).'</div>';
-            }
-            if ($column == 'seopress_desc') {
-                echo '<div id="seopress_desc-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_desc", true).'</div>';
-            }
-            if ($column == 'seopress_tkw') {
-                echo '<div id="seopress_tkw-' . $post_id . '">'.get_post_meta($post_id, "_seopress_analysis_target_kw", true).'</div>';
-            }
-            if ($column == 'seopress_noindex') {
-                if (get_post_meta($post_id, "_seopress_robots_index", true) =='yes') {
-                	echo '<span class="dashicons dashicons-yes"></span>';
-                }
-            }
-            if ($column == 'seopress_nofollow') {
-                if (get_post_meta($post_id, "_seopress_robots_follow", true) =='yes') {
-                	echo '<span class="dashicons dashicons-yes"></span>';
-                }
-            }
-            if ($column == 'seopress_words') {
-                if (get_the_content() !='') {
-                    echo str_word_count(strip_tags(get_the_content()));
-                }
-            }
-            if ($column == 'seopress_w3c') {
-                echo '<a class="seopress-button" href="https://validator.w3.org/nu/?doc='.get_the_permalink().'" title="'.__('Check code quality of this page','wp-seopress').'" target="_blank"><span class="dashicons dashicons-clipboard"></span></a>';
-            }
-            if ($column == 'seopress_ps') {
-                echo '<div class="seopress-request-page-speed seopress-button" data_permalink="'.get_the_permalink().'" title="'.__('Analyse this page with Google Page Speed','wp-seopress').'"><span class="dashicons dashicons-dashboard"></span></div>';
+            switch ( $column ) {
+                case 'seopress_title' :
+                    echo '<div id="seopress_title-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_title", true).'</div>';
+                    break;
+                case 'seopress_desc';
+                    echo '<div id="seopress_desc-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_desc", true).'</div>';
+                    break;
+
+                case 'seopress_tkw' :
+                    echo '<div id="seopress_tkw-' . $post_id . '">'.get_post_meta($post_id, "_seopress_analysis_target_kw", true).'</div>';
+                    break;
+
+                case 'seopress_noindex' :
+                    if (get_post_meta($post_id, "_seopress_robots_index", true) =='yes') {
+                    	echo '<span class="dashicons dashicons-yes"></span>';
+                    }
+                    break;
+                
+                case 'seopress_nofollow' :
+                    if (get_post_meta($post_id, "_seopress_robots_follow", true) =='yes') {
+                    	echo '<span class="dashicons dashicons-yes"></span>';
+                    }
+                    break;
+
+                case 'seopress_words' :
+                    if (get_the_content() !='') {
+                        echo str_word_count(strip_tags(get_the_content()));
+                    }
+                    break;
+
+                case 'seopress_w3c' :
+                    echo '<a class="seopress-button" href="https://validator.w3.org/nu/?doc='.get_the_permalink().'" title="'.__('Check code quality of this page','wp-seopress').'" target="_blank"><span class="dashicons dashicons-clipboard"></span></a>';
+                    break;
+
+                case 'seopress_ps' :
+                    echo '<div class="seopress-request-page-speed seopress-button" data_permalink="'.get_the_permalink().'" title="'.__('Analyse this page with Google Page Speed','wp-seopress').'"><span class="dashicons dashicons-dashboard"></span></div>';
+                    break;
             }
         }
     }

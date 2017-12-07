@@ -3310,91 +3310,92 @@ class seopress_options
     public function seopress_titles_archives_titles_callback()
     {
         foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
-            
-            echo '<h2>'.$seopress_cpt_value->labels->name.'</h2>';
+            if (!in_array($seopress_cpt_key, array('post','page'))) {
+                echo '<h2>'.$seopress_cpt_value->labels->name.'</h2>';
 
-            //Archive Title CPT
-            echo '<div class="seopress_wrap_archive_cpt">';
+                //Archive Title CPT
+                echo '<div class="seopress_wrap_archive_cpt">';
 
-                _e('Title template','wp-seopress');
-                echo "<br/>";
+                    _e('Title template','wp-seopress');
+                    echo "<br/>";
 
-                echo "<script>
-                    jQuery(document).ready(function($) {
-                        jQuery('#seopress-tag-archive-title-".$seopress_cpt_key."').click(function() {
-                            jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + jQuery('#seopress-tag-archive-title-".$seopress_cpt_key."').attr('data-tag'));
+                    echo "<script>
+                        jQuery(document).ready(function($) {
+                            jQuery('#seopress-tag-archive-title-".$seopress_cpt_key."').click(function() {
+                                jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + jQuery('#seopress-tag-archive-title-".$seopress_cpt_key."').attr('data-tag'));
+                            });
+                            jQuery('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').click(function() {
+                                jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + jQuery('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
+                            });
                         });
-                        jQuery('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').click(function() {
-                            jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + jQuery('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
-                        });
-                    });
-                </script>";
+                    </script>";
 
-                printf(
-                '<input type="text" id="seopress_titles_archive_titles_'.$seopress_cpt_key.'" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][title]" value="%s"/>',
-                esc_html( $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['title'])   
-                );
+                    printf(
+                    '<input type="text" id="seopress_titles_archive_titles_'.$seopress_cpt_key.'" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][title]" value="%s"/>',
+                    esc_html( $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['title'])   
+                    );
 
-                echo '<div class="wrap-tags"><span id="seopress-tag-archive-title-'.$seopress_cpt_key.'" data-tag="%%cpt_plural%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Type Archive Name','wp-seopress').'</span>';
+                    echo '<div class="wrap-tags"><span id="seopress-tag-archive-title-'.$seopress_cpt_key.'" data-tag="%%cpt_plural%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Type Archive Name','wp-seopress').'</span>';
 
-                echo '<span id="seopress-tag-archive-sitetitle-'.$seopress_cpt_key.'" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
+                    echo '<span id="seopress-tag-archive-sitetitle-'.$seopress_cpt_key.'" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
 
-                echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
+                    echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
 
-            echo '</div>';
+                echo '</div>';
 
-            //Archive Meta Description CPT
-            echo '<div class="seopress_wrap_archive_cpt">';
+                //Archive Meta Description CPT
+                echo '<div class="seopress_wrap_archive_cpt">';
+                    
+                    _e('Meta description template','wp-seopress');
+                    echo "<br/>";
+
+                    $check = isset($this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['description']) ? $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['description'] : NULL;
+
+                    printf(
+                    '<textarea name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][description]">%s</textarea>',
+                    esc_html( $check )
+                    );
+
+                echo '</div>';
+
+                //Archive No-Index CPT
+                echo '<div class="seopress_wrap_archive_cpt">';
+
+                    $options = get_option( 'seopress_titles_option_name' );  
                 
-                _e('Meta description template','wp-seopress');
-                echo "<br/>";
+                    $check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']);      
+                    
+                    echo '<input id="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][noindex]" type="checkbox"';
+                    if ('1' == $check) echo 'checked="yes"'; 
+                    echo ' value="1"/>';
+                    
+                    echo '<label for="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']">'. __( 'noindex', 'wp-seopress' ) .'</label>';
+                    
+                    if (isset($this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex'])) {
+                        esc_attr( $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']);
+                    }
 
-                $check = isset($this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['description']) ? $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['description'] : NULL;
+                echo '</div>';
 
-                printf(
-                '<textarea name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][description]">%s</textarea>',
-                esc_html( $check )
-                );
+                //Archive No-Follow CPT
+                echo '<div class="seopress_wrap_archive_cpt">';
 
-            echo '</div>';
-
-            //Archive No-Index CPT
-            echo '<div class="seopress_wrap_archive_cpt">';
-
-                $options = get_option( 'seopress_titles_option_name' );  
-            
-                $check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']);      
+                    $options = get_option( 'seopress_titles_option_name' );  
                 
-                echo '<input id="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][noindex]" type="checkbox"';
-                if ('1' == $check) echo 'checked="yes"'; 
-                echo ' value="1"/>';
-                
-                echo '<label for="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']">'. __( 'noindex', 'wp-seopress' ) .'</label>';
-                
-                if (isset($this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex'])) {
-                    esc_attr( $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']);
-                }
+                    $check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow']);      
+                    
+                    echo '<input id="seopress_titles_archive_cpt_nofollow['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][nofollow]" type="checkbox"';
+                    if ('1' == $check) echo 'checked="yes"'; 
+                    echo ' value="1"/>';
+                    
+                    echo '<label for="seopress_titles_archive_cpt_nofollow['.$seopress_cpt_key.']">'. __( 'nofollow', 'wp-seopress' ) .'</label>';
+                    
+                    if (isset($this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow'])) {
+                        esc_attr( $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow']);
+                    }
 
-            echo '</div>';
-
-            //Archive No-Follow CPT
-            echo '<div class="seopress_wrap_archive_cpt">';
-
-                $options = get_option( 'seopress_titles_option_name' );  
-            
-                $check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow']);      
-                
-                echo '<input id="seopress_titles_archive_cpt_nofollow['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][nofollow]" type="checkbox"';
-                if ('1' == $check) echo 'checked="yes"'; 
-                echo ' value="1"/>';
-                
-                echo '<label for="seopress_titles_archive_cpt_nofollow['.$seopress_cpt_key.']">'. __( 'nofollow', 'wp-seopress' ) .'</label>';
-                
-                if (isset($this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow'])) {
-                    esc_attr( $this->options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow']);
-                }
-
-            echo '</div>';
+                echo '</div>';
+            }
         }
     }
 
@@ -4133,7 +4134,7 @@ class seopress_options
         $check = isset($this->options['seopress_social_accounts_instagram']) ? $this->options['seopress_social_accounts_instagram'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_instagram]" placeholder="'.__('eg: https://www.instagram.com/rainbowgeek64/','wp-seopress').'" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_instagram]" placeholder="'.__('eg: https://www.instagram.com/wp_seopress/','wp-seopress').'" value="%s"/>',
         esc_html( $check )
         
         );
