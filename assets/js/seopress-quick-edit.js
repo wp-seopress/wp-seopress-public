@@ -26,10 +26,12 @@
          // get the data
          var $seopress_title = $( '#seopress_title-' + $post_id ).text();
          var $seopress_desc = $( '#seopress_desc-' + $post_id ).text();
+         var $seopress_canonical = $( '#seopress_canonical-' + $post_id ).text();
 
          // populate the data
          $edit_row.find( 'input[name="seopress_title"]' ).val( $seopress_title );
          $edit_row.find( 'textarea[name="seopress_desc"]' ).val( $seopress_desc );
+         $edit_row.find( 'input[name="seopress_canonical"]' ).val( $seopress_canonical );
       }
    };
 

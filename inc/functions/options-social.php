@@ -561,6 +561,27 @@ function seopress_social_fb_img_hook() {
 }
 add_action( 'wp_head', 'seopress_social_fb_img_hook', 1 );
 
+//OG Facebook Link Ownership ID
+function seopress_social_facebook_link_ownership_id_option() {
+	$seopress_social_facebook_link_ownership_id_option = get_option("seopress_social_option_name");
+	if ( ! empty ( $seopress_social_facebook_link_ownership_id_option ) ) {
+		foreach ($seopress_social_facebook_link_ownership_id_option as $key => $seopress_social_facebook_link_ownership_id_value)
+			$options[$key] = $seopress_social_facebook_link_ownership_id_value;
+		 if (isset($seopress_social_facebook_link_ownership_id_option['seopress_social_facebook_link_ownership_id'])) { 
+		 	return $seopress_social_facebook_link_ownership_id_option['seopress_social_facebook_link_ownership_id'];
+		 }
+	}
+}
+function seopress_social_facebook_link_ownership_id_hook() {
+	if (seopress_social_facebook_og_option() =='1' && seopress_social_facebook_link_ownership_id_option() !='') {
+
+		$seopress_social_link_ownership_id = '<meta property="fb:pages" content="'.seopress_social_facebook_link_ownership_id_option().'" />';
+		
+		echo $seopress_social_link_ownership_id."\n";
+	}
+}
+add_action( 'wp_head', 'seopress_social_facebook_link_ownership_id_hook', 1 );
+
 //OG Facebook Admin ID
 function seopress_social_facebook_admin_id_option() {
 	$seopress_social_facebook_admin_id_option = get_option("seopress_social_option_name");

@@ -37,6 +37,16 @@ function seopress_advanced_appearance_meta_desc_col_option() {
          }
     }
 }
+function seopress_advanced_appearance_canonical_option() {
+    $seopress_advanced_appearance_canonical_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_canonical_option ) ) {
+        foreach ($seopress_advanced_appearance_canonical_option as $key => $seopress_advanced_appearance_canonical_value)
+            $options[$key] = $seopress_advanced_appearance_canonical_value;
+         if (isset($seopress_advanced_appearance_canonical_option['seopress_advanced_appearance_canonical'])) { 
+            return $seopress_advanced_appearance_canonical_option['seopress_advanced_appearance_canonical'];
+         }
+    }
+}
 function seopress_advanced_appearance_target_kw_col_option() {
     $seopress_advanced_appearance_target_kw_col_option = get_option("seopress_advanced_option_name");
     if ( ! empty ( $seopress_advanced_appearance_target_kw_col_option ) ) {
@@ -98,7 +108,7 @@ function seopress_advanced_appearance_ps_col_option() {
     }
 }
 
-if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_appearance_meta_desc_col_option() !='' || seopress_advanced_appearance_target_kw_col_option() !='' || seopress_advanced_appearance_noindex_col_option() !='' || seopress_advanced_appearance_nofollow_col_option() !='' || seopress_advanced_appearance_words_col_option() !='' || seopress_advanced_appearance_w3c_col_option() !='' || seopress_advanced_appearance_ps_col_option() !='') {
+if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_appearance_meta_desc_col_option() !='' || seopress_advanced_appearance_canonical_option() !='' || seopress_advanced_appearance_target_kw_col_option() !='' || seopress_advanced_appearance_noindex_col_option() !='' || seopress_advanced_appearance_nofollow_col_option() !='' || seopress_advanced_appearance_words_col_option() !='' || seopress_advanced_appearance_w3c_col_option() !='' || seopress_advanced_appearance_ps_col_option() !='') {
     function seopress_add_columns() {
         foreach (seopress_get_post_types() as $key => $value) {
             add_filter('manage_'.$key.'_posts_columns', 'seopress_title_columns');
@@ -114,6 +124,9 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
             }
             if(seopress_advanced_appearance_meta_desc_col_option() !='') {
                 $columns['seopress_desc'] = __('Meta Desc.', 'wp-seopress');
+            }
+            if(seopress_advanced_appearance_canonical_option() !='') {
+                $columns['seopress_canonical'] = __('Canonical', 'wp-seopress');
             }
             if(seopress_advanced_appearance_target_kw_col_option() !='') {
                 $columns['seopress_tkw'] = __('Target Kw', 'wp-seopress');
@@ -143,6 +156,10 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
                     break;
                 case 'seopress_desc';
                     echo '<div id="seopress_desc-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_desc", true).'</div>';
+                    break;
+
+                case 'seopress_canonical';
+                    echo '<div id="seopress_canonical-' . $post_id . '">'.get_post_meta($post_id, "_seopress_robots_canonical", true).'</div>';
                     break;
 
                 case 'seopress_tkw' :
@@ -613,16 +630,23 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
 	        		<?php
 	            break;
 	            case 'seopress_desc':
+                ?>  
+                    <label class="inline-edit-group">
+                        <span class="title"><?php _e('Meta description','wp-seopress'); ?></span>
+                        <span class="input-text-wrap"><textarea cols="18" rows="1" name="seopress_desc" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"></textarea></span>
+                    </label>
+                    <?php
+                break;
+                case 'seopress_canonical':
 	            ?>	
 	            	<label class="inline-edit-group">
-		            	<span class="title"><?php _e('Meta description','wp-seopress'); ?></span>
-		        		<textarea cols="18" rows="1" name="seopress_desc" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"></textarea>
+		            	<span class="title"><?php _e('Canonical','wp-seopress'); ?></span>
+		        		<span class="input-text-wrap"><input type="text" name="seopress_canonical" /></span>
 		        	</label>
 		        	<?php
 	            break;
 	        	}
 	        ?>
-	        </label>
       	</div>
     </fieldset>
     <?php
@@ -650,5 +674,8 @@ function seopress_bulk_quick_edit_save_post($post_id) {
     }
     if (isset($_REQUEST['seopress_desc'])) {
         update_post_meta($post_id, '_seopress_titles_desc', esc_html($_REQUEST['seopress_desc']));
+    }
+    if (isset($_REQUEST['seopress_canonical'])) {
+        update_post_meta($post_id, '_seopress_robots_canonical', esc_html($_REQUEST['seopress_canonical']));
     }
 }

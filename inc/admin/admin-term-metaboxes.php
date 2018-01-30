@@ -24,13 +24,24 @@ function seopress_display_seo_term_metaboxe() {
     add_action('init','seopress_init_term_metabox');
 
     function seopress_init_term_metabox() {
-        foreach (seopress_get_taxonomies() as $key => $value) {
-            add_action( $key.'_edit_form_fields', 'seopress_tax', 10, 2 ); //Edit term page
-            add_action( 'edit_'.$key,   'seopress_tax_save_term', 10, 2 ); //Edit save term
+        if (function_exists('seopress_get_taxonomies')) {
+            
+            $seopress_get_taxonomies = seopress_get_taxonomies();
+            $seopress_get_taxonomies = apply_filters('seopress_metaboxe_term_seo', $seopress_get_taxonomies);
+            
+            foreach ($seopress_get_taxonomies as $key => $value) {
+                add_action( $key.'_edit_form_fields', 'seopress_tax', 10, 2 ); //Edit term page
+                add_action( 'edit_'.$key,   'seopress_tax_save_term', 10, 2 ); //Edit save term
+            }
         }
     }
 
     function seopress_tax($term) {
+        wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', dirname(dirname( __FILE__ ))), array( 'jquery-ui-tabs' ) );
+        wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery' ), '1.1' );
+        wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', dirname(dirname( __FILE__ ))), array('jquery'), '', false );
+        wp_enqueue_media();
+
         $seopress_titles_title             = get_term_meta($term->term_id,'_seopress_titles_title', true);
         $seopress_titles_desc              = get_term_meta($term->term_id,'_seopress_titles_desc', true);
         $seopress_robots_index             = get_term_meta($term->term_id,'_seopress_robots_index',true);

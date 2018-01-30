@@ -30,4 +30,3 @@ function seopress_xml_sitemap_single_term() {
 	return $seopress_sitemaps;
 } 
 echo seopress_xml_sitemap_single_term();
-?>

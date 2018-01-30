@@ -2393,6 +2393,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_social_facebook_link_ownership_id', // ID
+           __("Facebook Link Ownership ID","wp-seopress"), // Title
+            array( $this, 'seopress_social_facebook_link_ownership_id_callback' ), // Callback
+            'seopress-settings-admin-social-facebook', // Page
+            'seopress_setting_section_social_facebook' // Section                  
+        );
+
+        add_settings_field(
             'seopress_social_facebook_admin_id', // ID
            __("Facebook Admin ID","wp-seopress"), // Title
             array( $this, 'seopress_social_facebook_admin_id_callback' ), // Callback
@@ -2787,6 +2795,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_appearance_canonical', // ID
+           __("Show canonical URL column in post types","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_canonical_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
             'seopress_advanced_appearance_target_kw_col', // ID
            __("Show Target Keyword column in post types","wp-seopress"), // Title
             array( $this, 'seopress_advanced_appearance_target_kw_col_callback' ), // Callback
@@ -2877,7 +2893,7 @@ class seopress_options
     public function sanitize( $input )
     {   
 
-        $seopress_sanitize_fields = array('seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking' );
+        $seopress_sanitize_fields = array('seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking' );
 
         $seopress_sanitize_site_verification = array('seopress_advanced_advanced_google', 'seopress_advanced_advanced_bing', 'seopress_advanced_advanced_pinterest', 'seopress_advanced_advanced_yandex' );
         
@@ -3092,6 +3108,9 @@ class seopress_options
             echo '<div class="seopress_wrap_single_cpt">';
 
                 _e('Title template','wp-seopress');
+
+                $check = isset($this->options['seopress_titles_single_titles'][$seopress_cpt_key]['title']) ? $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['title'] : NULL;
+
                 echo "<br/>";
 
                 echo "<script>
@@ -3107,7 +3126,7 @@ class seopress_options
 
                 printf(
                 '<input type="text" id="seopress_titles_single_titles_'.$seopress_cpt_key.'" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][title]" value="%s"/>',
-                esc_html( $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['title'])   
+                esc_html( $check )   
                 );
 
                 echo '<div class="wrap-tags"><span id="seopress-tag-single-title-'.$seopress_cpt_key.'" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>';
@@ -4235,6 +4254,18 @@ class seopress_options
         }
     }
 
+    public function seopress_social_facebook_link_ownership_id_callback()
+    {
+        $check = isset($this->options['seopress_social_facebook_link_ownership_id']) ? $this->options['seopress_social_facebook_link_ownership_id'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_social_option_name[seopress_social_facebook_link_ownership_id]" value="%s"/>',
+        esc_html( $check )
+        
+        );
+        
+    }
+
     public function seopress_social_facebook_admin_id_callback()
     {
         $check = isset($this->options['seopress_social_facebook_admin_id']) ? $this->options['seopress_social_facebook_admin_id'] : NULL;
@@ -5215,6 +5246,23 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_appearance_meta_desc_col'])) {
             esc_attr( $this->options['seopress_advanced_appearance_meta_desc_col']);
+        }
+    }
+
+    public function seopress_advanced_appearance_canonical_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_canonical']);      
+        
+        echo '<input id="seopress_advanced_appearance_canonical" name="seopress_advanced_option_name[seopress_advanced_appearance_canonical]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_canonical">'. __( 'Add canonical URL column', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_canonical'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_canonical']);
         }
     }
 

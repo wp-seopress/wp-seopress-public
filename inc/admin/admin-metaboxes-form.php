@@ -38,10 +38,10 @@ if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                 return seopress_titles_single_desc_option();
             } elseif ( has_excerpt( $post->ID ) ) {
                 // This post has excerpt
-                return substr(wp_strip_all_tags($post->post_excerpt, true), 0, 160);
+                return substr(wp_strip_all_tags($post->post_excerpt, true), 0, 320);
             } else {
                 // This post has no excerpt
-                return substr(wp_strip_all_tags($post->post_content, true), 0, 160);
+                return substr(wp_strip_all_tags($post->post_content, true), 0, 320);
             }          
         }
     }
@@ -140,9 +140,10 @@ echo '<div id="seopress-tabs">';
         echo '<div id="tabs-1">';
             if (is_plugin_active( 'woocommerce/woocommerce.php' )) {
                 $shop_page_id = wc_get_page_id( 'shop' );
-
-                if ( $post && absint( $shop_page_id ) === absint( $post->ID ) ) {
-                    echo '<p class="notice notice-info">'.__('This is your <strong>Shop page</strong>. Go to <strong>SEO > Titles & Metas > Archives > Products</strong> ','wp-seopress').' <a href="'.admin_url( 'admin.php?page=seopress-titles' ).'">'.__('to edit your title and meta description','wp-seopress').'</a></p>';
+                if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                    if ( $post && absint( $shop_page_id ) === absint( $post->ID ) ) {
+                        echo '<p class="notice notice-info">'.__('This is your <strong>Shop page</strong>. Go to <strong>SEO > Titles & Metas > Archives > Products</strong> ','wp-seopress').' <a href="'.admin_url( 'admin.php?page=seopress-titles' ).'">'.__('to edit your title and meta description','wp-seopress').'</a></p>';
+                    }
                 }
             }
         echo '<div class="box-left">
@@ -156,7 +157,7 @@ echo '<div id="seopress-tabs">';
                 </div>
                 <p>
                     <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
-                    <textarea id="seopress_titles_desc_meta" style="width:100%" rows="4" name="seopress_titles_desc" placeholder="'.__('Enter your meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
+                    <textarea id="seopress_titles_desc_meta" style="width:100%" rows="8" name="seopress_titles_desc" placeholder="'.__('Enter your meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
                 </p>
                 <div class="wrap-seopress-counters">
                     <div id="seopress_titles_desc_counters"></div>
@@ -181,7 +182,7 @@ echo '<div id="seopress-tabs">';
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
 echo                seopress_display_date_snippet();
                 }
-echo                '<div class="snippet-description">'.seopress_titles_desc($seopress_titles_desc).'...</div>
+echo               '<div class="snippet-description">'.seopress_titles_desc($seopress_titles_desc).'...</div>
                     <div class="snippet-description-custom" style="display:none"></div>
                     <div class="snippet-description-default" style="display:none">'.seopress_titles_desc($seopress_titles_desc).'</div>';
             echo '</div>
@@ -315,6 +316,26 @@ echo            '</p>
                                 <input type="checkbox" name="seopress_news_disabled" id="seopress_news_disabled_meta" value="yes" '. checked( $seopress_news_disabled, 'yes', false ) .' />
                                     '. __( 'Exclude this post from Google News Sitemap?', 'wp-seopress' ) .'
                             </label>
+                        </p>
+                        <p>
+                            <label for="seopress_news_standout_meta" id="seopress_news_standout">
+                                <input type="checkbox" name="seopress_news_standout" id="seopress_news_standout_meta" value="yes" '. checked( $seopress_news_standout, 'yes', false ) .' />
+                                    '. __( 'Use the standout tag for this post?', 'wp-seopress' ) .'
+                            <span class="dashicons dashicons-info" title="'.esc_html(__('Your article is an original source for the story.
+Your organization invested significant resources in reporting or producing the article.
+The article deserves special recognition.
+You haven\'t used standout on your own articles more than seven times in the past calendar week.','wp-seopress')).'"></span>
+                            </label>';
+                            
+                            if (function_exists('seopress_get_locale')) {
+                                if (seopress_get_locale() =='fr') {
+                                    $seopress_docs_link = 'https://support.google.com/news/publisher/answer/191283?hl=fr';
+                                } else {
+                                    $seopress_docs_link = 'https://support.google.com/news/publisher/answer/191283';
+                                }
+                            }
+                            
+                            echo '<span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link.'" target="_blank" class="seopress-doc">'.__('Learn how to use correctly the standout tag','wp-seopress').'</a>
                         </p>
                         <p>
                             <label for="seopress_news_genres_meta">'. __( 'Google News Genres', 'wp-seopress' ) .'</label>

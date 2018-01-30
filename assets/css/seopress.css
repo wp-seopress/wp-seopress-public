@@ -157,7 +157,8 @@
     float: right;
 }
 #seopress_cpt #tabs-4 #seopress_redirections_enabled,
-#seopress_cpt #tabs-5 #seopress_news_disabled {
+#seopress_cpt #tabs-5 #seopress_news_disabled,
+#seopress_cpt #tabs-5 #seopress_news_standout {
     border-bottom: none;
     font-weight: normal;
 }
@@ -306,14 +307,17 @@
     padding: 1px;
 }
 #seopress_content_analysis .ui-tabs .dashicons-yes,
-#seopress_content_analysis .ui-tabs .dashicons-no-alt {
+#seopress_content_analysis .ui-tabs .dashicons-no-alt,
+#seopress_pro_cpt .dashicons-yes,
+#seopress_pro_cpt .dashicons-no-alt {
     color: #fff;
     background: #12BD10;
     border-radius: 50px;
     margin-right: 10px;
     padding: 1px;
 }
-#seopress_content_analysis .ui-tabs .dashicons-no-alt {
+#seopress_content_analysis .ui-tabs .dashicons-no-alt,
+#seopress_pro_cpt .dashicons-no-alt {
     background: #e25950;
 }
 

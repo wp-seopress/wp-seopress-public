@@ -26,14 +26,14 @@ jQuery(document).ready(function(){
 
 //Meta description counters / live preview
 jQuery(document).ready(function(){
-    jQuery("#seopress_titles_desc_counters").after("<div id=\"seopress_titles_desc_counters_val\">/ 160</div>");
+    jQuery("#seopress_titles_desc_counters").after("<div id=\"seopress_titles_desc_counters_val\">/ 320</div>");
     jQuery("#seopress_titles_desc_counters").text(jQuery("#seopress_titles_desc_meta").val().length);
-    if(jQuery('#seopress_titles_desc_meta').val().length > 160){   
+    if(jQuery('#seopress_titles_desc_meta').val().length > 320){   
         jQuery('#seopress_titles_desc_counters').css('color', 'red');
     }
     jQuery("#seopress_titles_desc_meta").keyup(function(event) {
         jQuery('#seopress_titles_desc_counters').css('color', 'inherit');
-        if(jQuery(this).val().length > 160){
+        if(jQuery(this).val().length > 320){
             jQuery('#seopress_titles_desc_counters').css('color', 'red');
         }
         jQuery("#seopress_titles_desc_counters").text(jQuery("#seopress_titles_desc_meta").val().length);

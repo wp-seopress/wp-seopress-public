@@ -142,7 +142,7 @@ echo '<div id="seopress-analysis-tabs">
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('None of your target keywords were found in Meta description.','wp-seopress').'</p>';
                     }
 
-                    if (strlen($seopress_titles_desc) > 160 ) {
+                    if (strlen($seopress_titles_desc) > 320 ) {
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('You custom meta description is too long.','wp-seopress').'</p>'; 
                     } else {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('The length of your meta description is correct','wp-seopress').'</p>';

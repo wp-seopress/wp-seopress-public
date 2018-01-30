@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress 2.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
-"POT-Creation-Date: 2017-11-12 18:01+0100\n"
-"PO-Revision-Date: 2017-11-12 18:01+0100\n"
+"POT-Creation-Date: 2017-12-30 16:01+0100\n"
+"PO-Revision-Date: 2017-12-30 16:01+0100\n"
 "Last-Translator: Manojkumar(INDIA) <Manojkumar09051993@gmail.com>\n"
 "Language-Team: \n"
 "Language: te_IN\n"
@@ -26,132 +26,136 @@ msgstr "SEOPress"
 msgid "PRO"
 msgstr "PRO"
 
-#: inc/admin/admin-header.php:27 inc/admin/admin.php:185 inc/admin/adminbar.php:22
+#: inc/admin/admin-header.php:27 inc/admin/admin.php:182 inc/admin/adminbar.php:22
 msgid "Titles & Metas"
 msgstr "శీర్షిక & మెటా (ఉన్నత స్థాయి వివరణ)"
 
-#: inc/admin/admin-header.php:33 inc/admin/admin.php:186 inc/admin/adminbar.php:28
+#: inc/admin/admin-header.php:33 inc/admin/admin.php:183 inc/admin/adminbar.php:28
 msgid "XML / HTML Sitemap"
 msgstr "XML / HTML సైట్ మ్యాప్"
 
-#: inc/admin/admin-header.php:39 inc/admin/admin.php:187 inc/admin/admin.php:1334 inc/admin/adminbar.php:34
+#: inc/admin/admin-header.php:39 inc/admin/admin.php:184 inc/admin/admin.php:1332 inc/admin/adminbar.php:34
 msgid "Social Networks"
 msgstr "సామాజిక నెట్వర్క్స్"
 
-#: inc/admin/admin-header.php:45 inc/admin/admin.php:188 inc/admin/admin.php:1372 inc/admin/adminbar.php:40
+#: inc/admin/admin-header.php:45 inc/admin/admin.php:185 inc/admin/admin.php:1370 inc/admin/adminbar.php:40
 msgid "Google Analytics"
 msgstr "గూగుల్ విశ్లేషణలు"
 
-#: inc/admin/admin-header.php:51 inc/admin/admin-metaboxes-form.php:124 inc/admin/admin.php:189
-#: inc/admin/admin.php:304 inc/admin/admin.php:580 inc/admin/admin.php:1410 inc/admin/adminbar.php:46
+#: inc/admin/admin-header.php:51 inc/admin/admin-metaboxes-form.php:124 inc/admin/admin.php:186
+#: inc/admin/admin.php:302 inc/admin/admin.php:578 inc/admin/admin.php:1408 inc/admin/adminbar.php:46
 msgid "Advanced"
 msgstr "ఉన్నతస్థాయి"
 
-#: inc/admin/admin-header.php:59 inc/admin/admin.php:1439
+#: inc/admin/admin-header.php:59 inc/admin/admin.php:1437
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: inc/admin/admin-header.php:65 inc/admin/admin.php:1467
+#: inc/admin/admin-header.php:65 inc/admin/admin.php:1465
+msgid "Easy Digital Downloads"
+msgstr ""
+
+#: inc/admin/admin-header.php:71 inc/admin/admin.php:1493
 msgid "Local Business"
 msgstr "స్థానిక వ్యాపారం"
 
-#: inc/admin/admin-header.php:71 inc/admin/admin.php:1495
+#: inc/admin/admin-header.php:77 inc/admin/admin.php:1521
 msgid "Dublin Core"
 msgstr "Dublin Core (డబ్లిన్ కోర్)"
 
-#: inc/admin/admin-header.php:77 inc/admin/admin.php:1523
+#: inc/admin/admin-header.php:83 inc/admin/admin.php:1549
 msgid "Structured Data Types"
 msgstr "నిర్మాణాత్మక డేటా రకాలు"
 
-#: inc/admin/admin-header.php:83 inc/admin/admin.php:1551
+#: inc/admin/admin-header.php:89 inc/admin/admin.php:1577
 msgid "Breadcrumbs"
 msgstr "Breadcrumbs"
 
-#: inc/admin/admin-header.php:89 inc/admin/admin.php:1589
+#: inc/admin/admin-header.php:95 inc/admin/admin.php:1615
 msgid "Google Page Speed"
 msgstr "గూగుల్ పేజ్ స్పీడ్"
 
-#: inc/admin/admin-header.php:96 inc/admin/admin.php:750 inc/admin/admin.php:1610
+#: inc/admin/admin-header.php:102 inc/admin/admin.php:748 inc/admin/admin.php:1636
 msgid "robots.txt"
 msgstr "robots.txt  (రోబోట్స్.txt)"
 
-#: inc/admin/admin-header.php:103 inc/admin/admin.php:1649
+#: inc/admin/admin-header.php:109 inc/admin/admin.php:1675
 msgid "Google News Sitemap"
 msgstr "Google వార్తలు సైట్ మ్యాప్"
 
-#: inc/admin/admin-header.php:109 inc/admin/admin.php:1677 inc/admin/adminbar.php:78
+#: inc/admin/admin-header.php:115 inc/admin/admin.php:1703 inc/admin/adminbar.php:78
 msgid "Redirections"
 msgstr "Redirections (మళ్లింపులు)"
 
-#: inc/admin/admin-header.php:115 inc/admin/admin.php:1716
+#: inc/admin/admin-header.php:121 inc/admin/admin.php:1742
 msgid "SEOPress BOT - Broken links"
 msgstr "SEOPress BOT - (బోట్ SEO - బ్రోకెన్ లింకులు)"
 
-#: inc/admin/admin-header.php:121 inc/admin/admin.php:1727 inc/admin/adminbar.php:90
+#: inc/admin/admin-header.php:127 inc/admin/admin.php:1753 inc/admin/adminbar.php:90
 msgid "Backlinks"
 msgstr "బ్యాక్ లింక్"
 
-#: inc/admin/admin-header.php:128 inc/admin/admin.php:751 inc/admin/admin.php:1739
+#: inc/admin/admin-header.php:134 inc/admin/admin.php:749 inc/admin/admin.php:1765
 msgid ".htaccess"
 msgstr ".htaccess"
 
-#: inc/admin/admin-header.php:135 inc/admin/admin.php:1751
+#: inc/admin/admin-header.php:141 inc/admin/admin.php:1777
 msgid "RSS"
 msgstr "RSS (రియల్లీ సింపుల్ సిండికేషన్)"
 
-#: inc/admin/admin-header.php:141 inc/admin/admin.php:1784 inc/admin/adminbar.php:66
+#: inc/admin/admin-header.php:147 inc/admin/admin.php:1810 inc/admin/adminbar.php:66
 msgid "License"
 msgstr "అధికారపూరిత అనుమతి"
 
-#: inc/admin/admin-header.php:148 inc/admin/admin.php:190 inc/admin/admin.php:1763 inc/admin/adminbar.php:52
+#: inc/admin/admin-header.php:154 inc/admin/admin.php:187 inc/admin/admin.php:1789 inc/admin/adminbar.php:52
 msgid "Tools"
 msgstr "Tools - (టూల్స్)"
 
-#: inc/admin/admin-header.php:170
+#: inc/admin/admin-header.php:176
 msgid "See the changelog (new window)"
 msgstr "మార్పులు చూడండి (కొత్త విండో)"
 
-#: inc/admin/admin-header.php:172
+#: inc/admin/admin-header.php:178
 msgid "See the changelog"
 msgstr "మార్పులు చూడండి"
 
-#: inc/admin/admin-header.php:174 inc/admin/admin-header.php:176
+#: inc/admin/admin-header.php:180 inc/admin/admin-header.php:182
 msgid "Send feedback"
 msgstr "అభిప్రాయాన్ని పంపండి"
 
-#: inc/admin/admin-header.php:178
+#: inc/admin/admin-header.php:184
 msgid "Follow us on Twitter (new window)"
 msgstr "ట్విట్టర్ లో మమల్ని అనుసరించండి (కొత్త విండో)"
 
-#: inc/admin/admin-header.php:180
+#: inc/admin/admin-header.php:186
 msgid "Follow us on Twitter"
 msgstr "ట్విట్టర్ లో మమల్ని అనుసరించండి"
 
-#: inc/admin/admin-header.php:182
+#: inc/admin/admin-header.php:188
 #, fuzzy
 #| msgid "Follow us on Twitter (new window)"
 msgid "Follow us on YouTube (new window)"
 msgstr "ట్విట్టర్ లో మమల్ని అనుసరించండి (కొత్త విండో)"
 
-#: inc/admin/admin-header.php:184
+#: inc/admin/admin-header.php:190
 #, fuzzy
 #| msgid "Follow us on Twitter"
 msgid "Follow us on YouTube"
 msgstr "ట్విట్టర్ లో మమల్ని అనుసరించండి"
 
-#: inc/admin/admin-header.php:186
+#: inc/admin/admin-header.php:192
 msgid "Official website (new window)"
 msgstr "అధికారిక వెబ్సైట్ (కొత్త విండో)"
 
-#: inc/admin/admin-header.php:188
+#: inc/admin/admin-header.php:194
 msgid "Official website"
 msgstr "అధికారిక వెబ్సైట్"
 
-#: inc/admin/admin-header.php:190
+#: inc/admin/admin-header.php:196
 msgid "Support (new window)"
 msgstr "సహాయము (కొత్త విండో)"
 
-#: inc/admin/admin-header.php:192
+#: inc/admin/admin-header.php:198
 msgid "Support"
 msgstr "సహాయము"
 
@@ -309,8 +313,8 @@ msgstr ""
 msgid "No custom title set for this post."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:128 inc/admin/admin-metaboxes-form.php:151
-#: inc/admin/admin.php:674 inc/admin/admin.php:1871 inc/functions/options-advanced-admin.php:607
+#: inc/admin/admin-metaboxes-content-analysis-form.php:128 inc/admin/admin-metaboxes-form.php:159
+#: inc/admin/admin.php:672 inc/admin/admin.php:1897 inc/functions/options-advanced-admin.php:635
 msgid "Meta description"
 msgstr "ఉన్నత స్థాయి వివరణ"
 
@@ -424,8 +428,8 @@ msgstr "Nofollow?"
 msgid "This page doesn't have any nofollow links."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:42 inc/admin/admin-metaboxes.php:44
-#: inc/admin/adminbar.php:16 inc/functions/options-advanced-admin.php:597
+#: inc/admin/admin-metaboxes-form.php:114 inc/admin/admin-metaboxes.php:49 inc/admin/admin-metaboxes.php:51
+#: inc/admin/adminbar.php:16 inc/functions/options-advanced-admin.php:625
 msgid "SEO"
 msgstr "SEO"
 
@@ -445,579 +449,619 @@ msgstr "Redirection (మళ్లింపు)"
 msgid "Google News"
 msgstr "Google వార్తలు"
 
-#: inc/admin/admin-metaboxes-form.php:143
+#: inc/admin/admin-metaboxes-form.php:145
+msgid ""
+"This is your <strong>Shop page</strong>. Go to <strong>SEO > Titles & Metas > Archives > Products</strong> "
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:145
+#, fuzzy
+#| msgid "Enter your meta description"
+msgid "to edit your title and meta description"
+msgstr "మీ ఉన్నత స్థాయి వివరణను నమోదు చేయండి"
+
+#: inc/admin/admin-metaboxes-form.php:151
 msgid "Title"
 msgstr "శీర్షిక"
 
-#: inc/admin/admin-metaboxes-form.php:144
+#: inc/admin/admin-metaboxes-form.php:152
 msgid "Enter your title"
 msgstr "మీ శీర్షికను నమోదు చేయండి"
 
-#: inc/admin/admin-metaboxes-form.php:148 inc/admin/admin-metaboxes-form.php:156
+#: inc/admin/admin-metaboxes-form.php:156 inc/admin/admin-metaboxes-form.php:164
 msgid "(maximum recommended limit)"
 msgstr "(గరిష్ట సిఫార్సు పరిమితి)"
 
-#: inc/admin/admin-metaboxes-form.php:152
+#: inc/admin/admin-metaboxes-form.php:160
 msgid "Enter your meta description"
 msgstr "మీ ఉన్నత స్థాయి వివరణను నమోదు చేయండి"
 
-#: inc/admin/admin-metaboxes-form.php:161
+#: inc/admin/admin-metaboxes-form.php:169
 msgid "Google Snippet Preview"
 msgstr "Google స్నిప్పెట్ పరిదృశ్యం"
 
-#: inc/admin/admin-metaboxes-form.php:162
+#: inc/admin/admin-metaboxes-form.php:170
 msgid "This is what your page will look like in Google search results"
 msgstr "Google శోధన ఫలితాల్లో మీ పేజీ ఇలా కనిపిస్తుంది"
 
-#: inc/admin/admin-metaboxes-form.php:187 inc/admin/admin.php:2047 inc/admin/admin.php:3089
-#: inc/admin/admin.php:3222 inc/admin/admin.php:3314 inc/admin/admin.php:3389 inc/admin/admin.php:3458
-#: inc/admin/admin.php:3560
+#: inc/admin/admin-metaboxes-form.php:195 inc/admin/admin.php:2073 inc/admin/admin.php:3166
+#: inc/admin/admin.php:3299 inc/admin/admin.php:3391 inc/admin/admin.php:3467 inc/admin/admin.php:3536
+#: inc/admin/admin.php:3638
 msgid "noindex"
 msgstr "noindex"
 
-#: inc/admin/admin-metaboxes-form.php:188 inc/admin/admin.php:3562
+#: inc/admin/admin-metaboxes-form.php:196 inc/admin/admin.php:3640
 msgid ""
 "Do not display all pages of the site in Google search results and do not display \"Cached\" links in search "
 "results."
 msgstr "Google శోధన ఫలితాల్లో సైట్ యొక్క అన్ని పేజీలను ప్రదర్శించవద్దు మరియు శోధన ఫలితాల్లో \"Cached\" లింక్లను ప్రదర్శించవద్దు."
 
-#: inc/admin/admin-metaboxes-form.php:193 inc/admin/admin.php:2055 inc/admin/admin.php:3108
-#: inc/admin/admin.php:3241 inc/admin/admin.php:3333 inc/admin/admin.php:3579
+#: inc/admin/admin-metaboxes-form.php:201 inc/admin/admin.php:2081 inc/admin/admin.php:3185
+#: inc/admin/admin.php:3318 inc/admin/admin.php:3410 inc/admin/admin.php:3657
 msgid "nofollow"
 msgstr "అనుకరించటానికి లేదు"
 
-#: inc/admin/admin-metaboxes-form.php:194 inc/admin/admin.php:3581
+#: inc/admin/admin-metaboxes-form.php:202 inc/admin/admin.php:3659
 msgid "Do not follow links for all pages."
 msgstr "అన్ని పేజీల కోసం లింక్లను అనుసరించవద్దు."
 
-#: inc/admin/admin-metaboxes-form.php:199 inc/admin/admin.php:2063 inc/admin/admin.php:3598
+#: inc/admin/admin-metaboxes-form.php:207 inc/admin/admin.php:2089 inc/admin/admin.php:3676
 msgid "noodp"
 msgstr "noodp"
 
-#: inc/admin/admin-metaboxes-form.php:200 inc/admin/admin.php:3600
+#: inc/admin/admin-metaboxes-form.php:208 inc/admin/admin.php:3678
 msgid "Do not use Open Directory project metadata for titles or excerpts for all pages."
 msgstr "అన్ని పేజీలకు శీర్షికలు లేదా సారాంశాలు కోసం ఓపెన్ డైరెక్టరీ ప్రాజెక్ట్ meta సమాచారం ఉపయోగించవద్దు."
 
-#: inc/admin/admin-metaboxes-form.php:205 inc/admin/admin.php:2071 inc/admin/admin.php:3617
+#: inc/admin/admin-metaboxes-form.php:213 inc/admin/admin.php:2097 inc/admin/admin.php:3695
 msgid "noimageindex"
 msgstr "noimageindex"
 
-#: inc/admin/admin-metaboxes-form.php:206 inc/admin/admin.php:3619
+#: inc/admin/admin-metaboxes-form.php:214 inc/admin/admin.php:3697
 msgid "Do not index images from the entire site."
 msgstr "మొత్తం సైట్ నుండి చిత్రాలను ఇండెక్స్ చేయవద్దు."
 
-#: inc/admin/admin-metaboxes-form.php:211 inc/admin/admin.php:2079 inc/admin/admin.php:3636
+#: inc/admin/admin-metaboxes-form.php:219 inc/admin/admin.php:2105 inc/admin/admin.php:3714
 msgid "noarchive"
 msgstr "noarchive"
 
-#: inc/admin/admin-metaboxes-form.php:212 inc/admin/admin.php:3638
+#: inc/admin/admin-metaboxes-form.php:220 inc/admin/admin.php:3716
 msgid "Do not display a \"Cached\" link in the Google search results."
 msgstr "Google శోధన ఫలితాల్లో \"Cached\" లింక్ను ప్రదర్శించవద్దు."
 
-#: inc/admin/admin-metaboxes-form.php:217 inc/admin/admin.php:2087 inc/admin/admin.php:3655
+#: inc/admin/admin-metaboxes-form.php:225 inc/admin/admin.php:2113 inc/admin/admin.php:3733
 msgid "nosnippet"
 msgstr "nosnippet"
 
-#: inc/admin/admin-metaboxes-form.php:218 inc/admin/admin.php:3657
+#: inc/admin/admin-metaboxes-form.php:226 inc/admin/admin.php:3735
 msgid "Do not display a description in the Google search results for all pages."
 msgstr "Google శోధన ఫలితాల్లో అన్ని పేజీల యొక్క వివరణని ప్రదర్శించవద్దు."
 
-#: inc/admin/admin-metaboxes-form.php:221 inc/admin/admin.php:678
+#: inc/admin/admin-metaboxes-form.php:229 inc/admin/admin.php:676
 msgid "Canonical URL"
 msgstr "Canonical URL"
 
-#: inc/admin/admin-metaboxes-form.php:222
+#: inc/admin/admin-metaboxes-form.php:230
 msgid "Default value: "
 msgstr "డిఫాల్ట్ విలువ :"
 
-#: inc/admin/admin-metaboxes-form.php:227
+#: inc/admin/admin-metaboxes-form.php:235
 #, fuzzy
 #| msgid "Breadcrumbs"
 msgid "Custom breadcrumbs"
 msgstr "Breadcrumbs"
 
-#: inc/admin/admin-metaboxes-form.php:228
+#: inc/admin/admin-metaboxes-form.php:236
 msgid "Enter a custom value, useful if your title is too long"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:236
+#: inc/admin/admin-metaboxes-form.php:244
 msgid "Ask Facebook to update his cache"
 msgstr "తన  cache  నవీకరించడానికి  Facebook  ni అడగండి"
 
-#: inc/admin/admin-metaboxes-form.php:238
+#: inc/admin/admin-metaboxes-form.php:246
 msgid "Facebook Title"
 msgstr "Facebook టైటిల్"
 
-#: inc/admin/admin-metaboxes-form.php:239
+#: inc/admin/admin-metaboxes-form.php:247
 msgid "Enter your Facebook title"
 msgstr "మీ Facebook శీర్షికను నమోదు చేయండి"
 
-#: inc/admin/admin-metaboxes-form.php:242
+#: inc/admin/admin-metaboxes-form.php:250
 msgid "Facebook description"
 msgstr "Facebook వివరణ"
 
-#: inc/admin/admin-metaboxes-form.php:243
+#: inc/admin/admin-metaboxes-form.php:251
 msgid "Enter your Facebook description"
 msgstr "మీ Facebook వివరణను నమోదు చేయండి"
 
-#: inc/admin/admin-metaboxes-form.php:246
+#: inc/admin/admin-metaboxes-form.php:254
 msgid "Facebook Thumbnail"
 msgstr "Facebook Thumbnail"
 
-#: inc/admin/admin-metaboxes-form.php:247
+#: inc/admin/admin-metaboxes-form.php:255
 msgid "Minimum size: 200x200px"
 msgstr "కనీస పరిమాణం: 200x200px"
 
-#: inc/admin/admin-metaboxes-form.php:248 inc/admin/admin-metaboxes-form.php:264 inc/admin/admin.php:4170
-#: inc/admin/admin.php:4247
+#: inc/admin/admin-metaboxes-form.php:256 inc/admin/admin-metaboxes-form.php:272 inc/admin/admin.php:4248
+#: inc/admin/admin.php:4337
 msgid "Select your default thumbnail"
 msgstr "మీ డిఫాల్ట్ సూక్ష్మచిత్రం ఎంచుకోండి"
 
-#: inc/admin/admin-metaboxes-form.php:249 inc/admin/admin-metaboxes-form.php:265 inc/admin/admin.php:3928
-#: inc/admin/admin.php:4172 inc/admin/admin.php:4249
+#: inc/admin/admin-metaboxes-form.php:257 inc/admin/admin-metaboxes-form.php:273 inc/admin/admin.php:4006
+#: inc/admin/admin.php:4250 inc/admin/admin.php:4339
 msgid "Upload an Image"
 msgstr "ఒక చిత్రాన్ని అప్లోడ్ చేయండి"
 
-#: inc/admin/admin-metaboxes-form.php:254
+#: inc/admin/admin-metaboxes-form.php:262
 msgid "Twitter Title"
 msgstr "ట్విట్టర్ శీర్షిక"
 
-#: inc/admin/admin-metaboxes-form.php:255
+#: inc/admin/admin-metaboxes-form.php:263
 msgid "Enter your Twitter title"
 msgstr "మీ ట్విట్టర్ శీర్షికను నమోదు చేయండి"
 
-#: inc/admin/admin-metaboxes-form.php:258
+#: inc/admin/admin-metaboxes-form.php:266
 msgid "Twitter description"
 msgstr "Twitter వివరణ"
 
-#: inc/admin/admin-metaboxes-form.php:259
+#: inc/admin/admin-metaboxes-form.php:267
 msgid "Enter your Twitter description"
 msgstr "మీ Twitter వివరణను నమోదు చేయండి"
 
-#: inc/admin/admin-metaboxes-form.php:262
+#: inc/admin/admin-metaboxes-form.php:270
 msgid "Twitter Thumbnail"
 msgstr "ట్విట్టర్ సూక్ష్మచిత్రం"
 
-#: inc/admin/admin-metaboxes-form.php:263
+#: inc/admin/admin-metaboxes-form.php:271
 msgid "Minimum size: 160x160px"
 msgstr "కనీస పరిమాణం: 160x160px"
 
-#: inc/admin/admin-metaboxes-form.php:274
+#: inc/admin/admin-metaboxes-form.php:282
 msgid "Enable redirection?"
 msgstr "Enable redirection? (మళ్లింపును ప్రారంభించాలా?)"
 
-#: inc/admin/admin-metaboxes-form.php:278
+#: inc/admin/admin-metaboxes-form.php:286
 msgid "URL redirection"
 msgstr "URL redirection (URL దారి మళ్లింపు)"
 
-#: inc/admin/admin-metaboxes-form.php:280
+#: inc/admin/admin-metaboxes-form.php:288
 msgid "301 Moved Permanently"
 msgstr "301 శాశ్వతంగా తరలించబడింది"
 
-#: inc/admin/admin-metaboxes-form.php:281
+#: inc/admin/admin-metaboxes-form.php:289
 msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
 msgstr "302 కనుగొనబడింది (HTTP 1.1) / తాత్కాలికంగా తరలించబడింది (HTTP 1.0)"
 
-#: inc/admin/admin-metaboxes-form.php:282
+#: inc/admin/admin-metaboxes-form.php:290
 msgid "307 Moved Temporarily (HTTP 1.1 Only)"
 msgstr "307 తాత్కాలికంగా తరలించబడింది (HTTP 1.1 మాత్రమే)"
 
-#: inc/admin/admin-metaboxes-form.php:284
+#: inc/admin/admin-metaboxes-form.php:292
 msgid "Enter your new URL"
 msgstr "మీ క్రొత్త URL ను ఎంటర్ చెయ్యండి"
 
-#: inc/admin/admin-metaboxes-form.php:289 inc/admin/admin-metaboxes-form.php:291
-#: inc/admin/admin-metaboxes-form.php:294 inc/admin/admin-metaboxes-form.php:296
+#: inc/admin/admin-metaboxes-form.php:297 inc/admin/admin-metaboxes-form.php:299
+#: inc/admin/admin-metaboxes-form.php:302 inc/admin/admin-metaboxes-form.php:304
 msgid "Test your URL"
 msgstr "మీ URL ని పరీక్షించండి"
 
-#: inc/admin/admin-metaboxes-form.php:309
+#: inc/admin/admin-metaboxes-form.php:317
 msgid "Exclude this post from Google News Sitemap?"
 msgstr "Google వార్తల సైట్మాప్ నుండి ఈ పోస్ట్ను మినహాయించాలా?"
 
-#: inc/admin/admin-metaboxes-form.php:313
+#: inc/admin/admin-metaboxes-form.php:323
+msgid "Use the standout tag for this post?"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:324
+msgid ""
+"Your article is an original source for the story.\n"
+"Your organization invested significant resources in reporting or producing the article.\n"
+"The article deserves special recognition.\n"
+"You haven't used standout on your own articles more than seven times in the past calendar week."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:338
+msgid "Learn how to use correctly the standout tag"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:341
 msgid "Google News Genres"
 msgstr "Google వార్తలు వర్గాలు"
 
-#: inc/admin/admin-metaboxes-form.php:315 inc/admin/admin.php:4511 inc/admin/admin.php:4588
-#: inc/admin/admin.php:4665 inc/admin/admin.php:4742 inc/admin/admin.php:4819
+#: inc/admin/admin-metaboxes-form.php:343 inc/admin/admin.php:4601 inc/admin/admin.php:4678
+#: inc/admin/admin.php:4755 inc/admin/admin.php:4832 inc/admin/admin.php:4909
 msgid "None"
 msgstr "ఏమీ కాదు"
 
-#: inc/admin/admin-metaboxes-form.php:316
+#: inc/admin/admin-metaboxes-form.php:344
 msgid "Press Release"
 msgstr "పత్రికా ప్రకటన"
 
-#: inc/admin/admin-metaboxes-form.php:317
+#: inc/admin/admin-metaboxes-form.php:345
 msgid "Satire"
 msgstr "వ్యంగ్యమైన"
 
-#: inc/admin/admin-metaboxes-form.php:318
+#: inc/admin/admin-metaboxes-form.php:346
 msgid "Blog"
 msgstr "బ్లాగ్"
 
-#: inc/admin/admin-metaboxes-form.php:319
+#: inc/admin/admin-metaboxes-form.php:347
 msgid "OpEd"
 msgstr "OpEd"
 
-#: inc/admin/admin-metaboxes-form.php:320
+#: inc/admin/admin-metaboxes-form.php:348
 msgid "Opinion"
 msgstr "అభిప్రాయం"
 
-#: inc/admin/admin-metaboxes-form.php:321
+#: inc/admin/admin-metaboxes-form.php:349
 msgid "UserGenerated"
 msgstr "User-generated (వాడుకరి ఉత్పత్తి)"
 
-#: inc/admin/admin-metaboxes-form.php:326
+#: inc/admin/admin-metaboxes-form.php:354
 msgid "Google News Keywords <em>(max recommended limit: 12)</em>"
 msgstr "Google వార్తలు కీవర్డ్లు <em>(గరిష్ట సిఫార్సు పరిమితి: 12)</ em>"
 
-#: inc/admin/admin-metaboxes-form.php:327
+#: inc/admin/admin-metaboxes-form.php:355
 msgid "Enter your Google News Keywords"
 msgstr "మీ Google వార్తల కీలక పదాలను నమోదు చేయండి"
 
-#: inc/admin/admin-metaboxes.php:177
+#: inc/admin/admin-metaboxes.php:203
 msgid "Content analysis"
 msgstr ""
 
-#: inc/admin/admin.php:108
+#: inc/admin/admin.php:105
 msgid "404 - Page not found"
 msgstr "404 - పేజీ దొరకలేదు"
 
-#: inc/admin/admin.php:177
+#: inc/admin/admin.php:174
 msgid "SEOPress Network settings"
 msgstr "SEO నెట్వర్క్ నెట్వర్క్ సెట్టింగ్లు"
 
-#: inc/admin/admin.php:184
+#: inc/admin/admin.php:181
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: inc/admin/admin.php:186 inc/admin/admin.php:1296
+#: inc/admin/admin.php:183 inc/admin/admin.php:1294
 msgid "XML / Image / HTML Sitemap"
 msgstr "XML / ఇమేజ్ / HTML సైట్మాప్"
 
-#: inc/admin/admin.php:197
+#: inc/admin/admin.php:194
 #, php-format
 msgid "%%sitetitle%%"
 msgstr "%%sitetitle%%"
 
-#: inc/admin/admin.php:197 inc/admin/admin.php:3006 inc/admin/admin.php:3057 inc/admin/admin.php:3174
-#: inc/admin/admin.php:3282 inc/admin/admin.php:3358 inc/admin/admin.php:3428 inc/admin/admin.php:3497
-#: inc/admin/admin.php:3529
+#: inc/admin/admin.php:194 inc/admin/admin.php:3080 inc/admin/admin.php:3134 inc/admin/admin.php:3251
+#: inc/admin/admin.php:3359 inc/admin/admin.php:3436 inc/admin/admin.php:3506 inc/admin/admin.php:3575
+#: inc/admin/admin.php:3607
 msgid "Site Title"
 msgstr "సైట్ శీర్షిక"
 
-#: inc/admin/admin.php:198
+#: inc/admin/admin.php:195
 #, php-format
 msgid "%%tagline%%"
 msgstr "%%tagline%%"
 
-#: inc/admin/admin.php:198 inc/admin/admin.php:3007 inc/admin/admin.php:3018
+#: inc/admin/admin.php:195 inc/admin/admin.php:3081 inc/admin/admin.php:3092
 msgid "Tagline"
 msgstr "ట్యాగ్లైన్"
 
-#: inc/admin/admin.php:199
+#: inc/admin/admin.php:196
 #, php-format
 msgid "%%post_title%%"
 msgstr "%%post_title%%"
 
-#: inc/admin/admin.php:199
+#: inc/admin/admin.php:196
 msgid "Post Title (post, page, custom post type)"
 msgstr "పోస్ట్ శీర్షిక (పోస్ట్, పేజీ, కస్టమ్ పోస్ట్ రకం)"
 
-#: inc/admin/admin.php:200
+#: inc/admin/admin.php:197
 #, php-format
 msgid "%%post_excerpt%%"
 msgstr "%%post_excerpt%%"
 
-#: inc/admin/admin.php:200
+#: inc/admin/admin.php:197
 msgid "Post excerpt"
 msgstr "Post excerpt"
 
-#: inc/admin/admin.php:201
+#: inc/admin/admin.php:198
 #, php-format
 msgid "%%post_date%%"
 msgstr "%%post_date%%"
 
-#: inc/admin/admin.php:201
+#: inc/admin/admin.php:198
 msgid "Post date"
 msgstr "పోస్ట్ తేదీ"
 
-#: inc/admin/admin.php:202
+#: inc/admin/admin.php:199
 #, php-format
 msgid "%%post_author%%"
 msgstr "%%post_author%%"
 
-#: inc/admin/admin.php:202 inc/admin/admin.php:3357
+#: inc/admin/admin.php:199 inc/admin/admin.php:3435
 msgid "Post author"
 msgstr "పోస్ట్ రచయిత"
 
-#: inc/admin/admin.php:203
+#: inc/admin/admin.php:200
 #, fuzzy, php-format
 #| msgid "%%post_author%%"
 msgid "%%post_category%%"
 msgstr "%%post_author%%"
 
-#: inc/admin/admin.php:203
+#: inc/admin/admin.php:200
 #, fuzzy
 #| msgid "Post author"
 msgid "Post category"
 msgstr "పోస్ట్ రచయిత"
 
-#: inc/admin/admin.php:204
+#: inc/admin/admin.php:201
 #, fuzzy, php-format
 #| msgid "%%post_date%%"
 msgid "%%post_tag%%"
 msgstr "%%post_date%%"
 
-#: inc/admin/admin.php:204
+#: inc/admin/admin.php:201
 #, fuzzy
 #| msgid "Post date"
 msgid "Post tag"
 msgstr "పోస్ట్ తేదీ"
 
-#: inc/admin/admin.php:205
+#: inc/admin/admin.php:202
 #, php-format
 msgid "%%_category_title%%"
 msgstr "%%_category_title%%"
 
-#: inc/admin/admin.php:205
+#: inc/admin/admin.php:202
 msgid "Category title"
 msgstr "వర్గం శీర్షిక"
 
-#: inc/admin/admin.php:206
+#: inc/admin/admin.php:203
 #, php-format
 msgid "%%_category_description%%"
 msgstr "%%_category_description%%"
 
-#: inc/admin/admin.php:206
+#: inc/admin/admin.php:203
 msgid "Category description"
 msgstr "వర్గం వివరణ"
 
-#: inc/admin/admin.php:207
+#: inc/admin/admin.php:204
 #, php-format
 msgid "%%tag_title%%"
 msgstr "%%tag_title%%"
 
-#: inc/admin/admin.php:207
+#: inc/admin/admin.php:204
 msgid "Tag title"
 msgstr "ట్యాగ్ శీర్షిక"
 
-#: inc/admin/admin.php:208
+#: inc/admin/admin.php:205
 #, php-format
 msgid "%%tag_description%%"
 msgstr "%%tag_description%%"
 
-#: inc/admin/admin.php:208
+#: inc/admin/admin.php:205
 msgid "Tag description"
 msgstr "ట్యాగ్ వివరణ"
 
-#: inc/admin/admin.php:209
+#: inc/admin/admin.php:206
 #, php-format
 msgid "%%term_title%%"
 msgstr "%%term_title%%"
 
-#: inc/admin/admin.php:209
+#: inc/admin/admin.php:206
 msgid "Term title"
 msgstr "టర్మ్ టైటిల్"
 
-#: inc/admin/admin.php:210
+#: inc/admin/admin.php:207
 #, php-format
 msgid "%%term_description%%"
 msgstr "%%term_description%%"
 
-#: inc/admin/admin.php:210
+#: inc/admin/admin.php:207
 msgid "Term description"
 msgstr "టర్మ్ వివరణ"
 
-#: inc/admin/admin.php:211
+#: inc/admin/admin.php:208
 #, php-format
 msgid "%%search_keywords%%"
 msgstr "%%search_keywords%%"
 
-#: inc/admin/admin.php:211
+#: inc/admin/admin.php:208
 msgid "Search keywords"
 msgstr "కీలక పదాలను శోధించండి"
 
-#: inc/admin/admin.php:212
+#: inc/admin/admin.php:209
 #, php-format
 msgid "%%current_pagination%%"
 msgstr "%%current_pagination%%"
 
-#: inc/admin/admin.php:212
+#: inc/admin/admin.php:209
 msgid "Current number page"
 msgstr "ప్రస్తుత సంఖ్య పేజీ"
 
-#: inc/admin/admin.php:213
+#: inc/admin/admin.php:210
 #, php-format
 msgid "%%cpt_plural%%"
 msgstr "%%cpt_plural%%"
 
-#: inc/admin/admin.php:213
+#: inc/admin/admin.php:210
 msgid "Plural Post Type Archive name"
 msgstr "Plural Post Type Archive name (బహుళ పోస్ట్ రకం ఆర్కైవ్ పేరు)"
 
-#: inc/admin/admin.php:214
+#: inc/admin/admin.php:211
 #, php-format
 msgid "%%date_archive%%"
 msgstr "%%date_archive%%"
 
-#: inc/admin/admin.php:214
+#: inc/admin/admin.php:211
 msgid "Date Archive"
 msgstr "తేదీ ఆర్కైవ్"
 
-#: inc/admin/admin.php:215
+#: inc/admin/admin.php:212
+#, php-format
+msgid "%%_cf_your_custom_field_name%%"
+msgstr ""
+
+#: inc/admin/admin.php:212
+#, fuzzy
+#| msgid "Post Title (post, page, custom post type)"
+msgid "Custom fields from post, page or post type"
+msgstr "పోస్ట్ శీర్షిక (పోస్ట్, పేజీ, కస్టమ్ పోస్ట్ రకం)"
+
+#: inc/admin/admin.php:213
 #, php-format
 msgid "%%wc_single_cat%%"
 msgstr ""
 
-#: inc/admin/admin.php:215
+#: inc/admin/admin.php:213
 msgid "Single product category"
 msgstr ""
 
-#: inc/admin/admin.php:216
+#: inc/admin/admin.php:214
 #, php-format
 msgid "%%wc_single_tag%%"
 msgstr ""
 
-#: inc/admin/admin.php:216
+#: inc/admin/admin.php:214
 msgid "Single product tag"
 msgstr ""
 
-#: inc/admin/admin.php:217
+#: inc/admin/admin.php:215
 #, php-format
 msgid "%%wc_single_short_desc%%"
 msgstr ""
 
-#: inc/admin/admin.php:217
+#: inc/admin/admin.php:215
 #, fuzzy
 #| msgid "Enter your meta description"
 msgid "Single product short description"
 msgstr "మీ ఉన్నత స్థాయి వివరణను నమోదు చేయండి"
 
-#: inc/admin/admin.php:223
+#: inc/admin/admin.php:221
 msgid "Templates variables"
 msgstr "టెంప్లేట్లు భావితము"
 
-#: inc/admin/admin.php:231 inc/admin/admin.php:239
+#: inc/admin/admin.php:229 inc/admin/admin.php:237
 msgid "Browse our guides"
 msgstr ""
 
-#: inc/admin/admin.php:232 inc/admin/admin.php:240
+#: inc/admin/admin.php:230 inc/admin/admin.php:238
 msgid "Read our FAQ"
 msgstr ""
 
-#: inc/admin/admin.php:233 inc/admin/admin.php:241
+#: inc/admin/admin.php:231 inc/admin/admin.php:239
 msgid "Check our website"
 msgstr ""
 
-#: inc/admin/admin.php:261 inc/admin/admin.php:733
+#: inc/admin/admin.php:259 inc/admin/admin.php:731
 msgid ""
 "Discourage search engines from indexing this site is <strong>ON!</strong> None of the following settings "
 "will be applied."
 msgstr "ఈ సైట్  శోధన ఇంజిన్లను ఇండెక్సింగ్ నుండి  నిరుత్సాహపరుస్తుంది <strong>పై!</strong> క్రింది సెట్టింగ్లు ఏవీ వర్తించవు."
 
-#: inc/admin/admin.php:262 inc/admin/admin.php:734 inc/admin/admin.php:2879
+#: inc/admin/admin.php:260 inc/admin/admin.php:732 inc/admin/admin.php:2953
 msgid "Change this settings"
 msgstr "ఈ సెట్టింగ్లను మార్చండి"
 
-#: inc/admin/admin.php:282 inc/admin/admin.php:286 inc/admin/admin.php:349 inc/admin/admin.php:353
-#: inc/admin/admin.php:414 inc/admin/admin.php:418 inc/admin/admin.php:481 inc/admin/admin.php:485
-#: inc/admin/admin.php:562 inc/admin/admin.php:566 inc/admin/admin.php:1272 inc/admin/admin.php:1276
-#: inc/admin/admin.php:1310 inc/admin/admin.php:1314 inc/admin/admin.php:1348 inc/admin/admin.php:1352
-#: inc/admin/admin.php:1386 inc/admin/admin.php:1390 inc/admin/admin.php:1424 inc/admin/admin.php:1428
-#: inc/admin/admin.php:1453 inc/admin/admin.php:1457 inc/admin/admin.php:1481 inc/admin/admin.php:1485
-#: inc/admin/admin.php:1509 inc/admin/admin.php:1513 inc/admin/admin.php:1537 inc/admin/admin.php:1541
-#: inc/admin/admin.php:1565 inc/admin/admin.php:1569 inc/admin/admin.php:1624 inc/admin/admin.php:1628
-#: inc/admin/admin.php:1663 inc/admin/admin.php:1667 inc/admin/admin.php:1692 inc/admin/admin.php:1696
+#: inc/admin/admin.php:280 inc/admin/admin.php:284 inc/admin/admin.php:347 inc/admin/admin.php:351
+#: inc/admin/admin.php:412 inc/admin/admin.php:416 inc/admin/admin.php:479 inc/admin/admin.php:483
+#: inc/admin/admin.php:560 inc/admin/admin.php:564 inc/admin/admin.php:1270 inc/admin/admin.php:1274
+#: inc/admin/admin.php:1308 inc/admin/admin.php:1312 inc/admin/admin.php:1346 inc/admin/admin.php:1350
+#: inc/admin/admin.php:1384 inc/admin/admin.php:1388 inc/admin/admin.php:1422 inc/admin/admin.php:1426
+#: inc/admin/admin.php:1451 inc/admin/admin.php:1455 inc/admin/admin.php:1479 inc/admin/admin.php:1483
+#: inc/admin/admin.php:1507 inc/admin/admin.php:1511 inc/admin/admin.php:1535 inc/admin/admin.php:1539
+#: inc/admin/admin.php:1563 inc/admin/admin.php:1567 inc/admin/admin.php:1591 inc/admin/admin.php:1595
+#: inc/admin/admin.php:1650 inc/admin/admin.php:1654 inc/admin/admin.php:1689 inc/admin/admin.php:1693
+#: inc/admin/admin.php:1718 inc/admin/admin.php:1722
 msgid "Click to disable this feature"
 msgstr "ఈ లక్షణాన్ని నిలిపివేయడానికి క్లిక్ చేయండి"
 
-#: inc/admin/admin.php:283 inc/admin/admin.php:285 inc/admin/admin.php:350 inc/admin/admin.php:352
-#: inc/admin/admin.php:415 inc/admin/admin.php:417 inc/admin/admin.php:482 inc/admin/admin.php:484
-#: inc/admin/admin.php:563 inc/admin/admin.php:565 inc/admin/admin.php:1273 inc/admin/admin.php:1275
-#: inc/admin/admin.php:1311 inc/admin/admin.php:1313 inc/admin/admin.php:1349 inc/admin/admin.php:1351
-#: inc/admin/admin.php:1387 inc/admin/admin.php:1389 inc/admin/admin.php:1425 inc/admin/admin.php:1427
-#: inc/admin/admin.php:1454 inc/admin/admin.php:1456 inc/admin/admin.php:1482 inc/admin/admin.php:1484
-#: inc/admin/admin.php:1510 inc/admin/admin.php:1512 inc/admin/admin.php:1538 inc/admin/admin.php:1540
-#: inc/admin/admin.php:1566 inc/admin/admin.php:1568 inc/admin/admin.php:1625 inc/admin/admin.php:1627
-#: inc/admin/admin.php:1664 inc/admin/admin.php:1666 inc/admin/admin.php:1693 inc/admin/admin.php:1695
+#: inc/admin/admin.php:281 inc/admin/admin.php:283 inc/admin/admin.php:348 inc/admin/admin.php:350
+#: inc/admin/admin.php:413 inc/admin/admin.php:415 inc/admin/admin.php:480 inc/admin/admin.php:482
+#: inc/admin/admin.php:561 inc/admin/admin.php:563 inc/admin/admin.php:1271 inc/admin/admin.php:1273
+#: inc/admin/admin.php:1309 inc/admin/admin.php:1311 inc/admin/admin.php:1347 inc/admin/admin.php:1349
+#: inc/admin/admin.php:1385 inc/admin/admin.php:1387 inc/admin/admin.php:1423 inc/admin/admin.php:1425
+#: inc/admin/admin.php:1452 inc/admin/admin.php:1454 inc/admin/admin.php:1480 inc/admin/admin.php:1482
+#: inc/admin/admin.php:1508 inc/admin/admin.php:1510 inc/admin/admin.php:1536 inc/admin/admin.php:1538
+#: inc/admin/admin.php:1564 inc/admin/admin.php:1566 inc/admin/admin.php:1592 inc/admin/admin.php:1594
+#: inc/admin/admin.php:1651 inc/admin/admin.php:1653 inc/admin/admin.php:1690 inc/admin/admin.php:1692
+#: inc/admin/admin.php:1719 inc/admin/admin.php:1721
 msgid "Click to enable this feature"
 msgstr "ఈ లక్షణాన్ని ప్రారంభించడానికి క్లిక్ చేయండి"
 
-#: inc/admin/admin.php:300
+#: inc/admin/admin.php:298
 msgid "Home"
 msgstr "Home (హోమ్)"
 
-#: inc/admin/admin.php:301
+#: inc/admin/admin.php:299
 msgid "Single Post Types"
 msgstr "ఒకే పోస్ట్ రకాలు"
 
-#: inc/admin/admin.php:302
+#: inc/admin/admin.php:300
 msgid "Archives"
 msgstr "Archives  (ప్రాచీనపత్ర సంచయము)"
 
-#: inc/admin/admin.php:303 inc/admin/admin.php:369
+#: inc/admin/admin.php:301 inc/admin/admin.php:367
 msgid "Taxonomies"
 msgstr "Taxonomies - (వర్గీకరణాలు)"
 
-#: inc/admin/admin.php:367 inc/admin/admin.php:500 inc/admin/admin.php:509
+#: inc/admin/admin.php:365 inc/admin/admin.php:498 inc/admin/admin.php:507
 msgid "General"
 msgstr "జనరల్"
 
-#: inc/admin/admin.php:368
+#: inc/admin/admin.php:366
 msgid "Post Types"
 msgstr "పోస్ట్ రకాలు"
 
-#: inc/admin/admin.php:370
+#: inc/admin/admin.php:368
 msgid "HTML Sitemap"
 msgstr "HTML సైట్ మ్యాప్"
 
-#: inc/admin/admin.php:432
+#: inc/admin/admin.php:430
 msgid "Knowledge Graph"
 msgstr "నాలెడ్జ్ గ్రాఫ్"
 
-#: inc/admin/admin.php:433
+#: inc/admin/admin.php:431
 msgid "Your social accounts"
 msgstr "మీ సామాజిక ఖాతాలు"
 
-#: inc/admin/admin.php:434
+#: inc/admin/admin.php:432
 msgid "Facebook"
 msgstr "Facebook"
 
-#: inc/admin/admin.php:435
+#: inc/admin/admin.php:433
 msgid "Twitter"
 msgstr "Twitter"
 
-#: inc/admin/admin.php:501 inc/admin/admin.php:510
+#: inc/admin/admin.php:499 inc/admin/admin.php:508
 msgid "Tracking"
 msgstr "Tracking"
 
-#: inc/admin/admin.php:502 inc/admin/admin.php:511
+#: inc/admin/admin.php:500 inc/admin/admin.php:509
 msgid "Events"
 msgstr "Events - (సంఘటనక్రమం)"
 
-#: inc/admin/admin.php:503 inc/admin/admin.php:512
+#: inc/admin/admin.php:501 inc/admin/admin.php:510
 msgid "Custom Dimensions"
 msgstr "వాడుక కొలతలు"
 
-#: inc/admin/admin.php:504
+#: inc/admin/admin.php:502
 msgid "Stats in Dashboard"
 msgstr "డాష్బోర్డ్లో గణాంకాలు"
 
-#: inc/admin/admin.php:581
+#: inc/admin/admin.php:579
 msgid "Appearance"
 msgstr "స్వరూపం"
 
-#: inc/admin/admin.php:582
+#: inc/admin/admin.php:580
 msgid "Security"
 msgstr "సెక్యూరిటీ"
 
-#: inc/admin/admin.php:614
+#: inc/admin/admin.php:612
 msgid "Export Settings"
 msgstr "ఎగుమతి సెట్టింగులు"
 
-#: inc/admin/admin.php:616
+#: inc/admin/admin.php:614
 msgid ""
 "Export the plugin settings for this site as a .json file. This allows you to easily import the "
 "configuration into another site."
@@ -1025,15 +1069,15 @@ msgstr ""
 "ఒక .json ఫైల్ వలె ఈ సైట్ కోసం ప్లగిన్ సెట్టింగులను ఎగుమతి చేయండి. ఆకృతీకరణను మరొక సైట్లోకి సులభంగా దిగుమతి చేసుకోవడానికి ఇది మిమ్మల్ని "
 "అనుమతిస్తుంది."
 
-#: inc/admin/admin.php:621
+#: inc/admin/admin.php:619
 msgid "Export"
 msgstr "ఎగుమతి"
 
-#: inc/admin/admin.php:628
+#: inc/admin/admin.php:626
 msgid "Import Settings"
 msgstr "దిగుమతి సెట్టింగ్లు"
 
-#: inc/admin/admin.php:630
+#: inc/admin/admin.php:628
 msgid ""
 "Import the plugin settings from a .json file. This file can be obtained by exporting the settings on "
 "another site using the form above."
@@ -1041,15 +1085,15 @@ msgstr ""
 "ఒక .json ఫైల్ నుండి ప్లగ్ఇన్ అమర్పులను దిగుమతి చేయండి. పైన ఉన్న ఫారమ్ను (Form) ఉపయోగించి మరొక సైట్లో సెట్టింగులను ఎగుమతి చేయడం ద్వారా ఈ "
 "ఫైల్ పొందవచ్చు."
 
-#: inc/admin/admin.php:638 inc/admin/admin.php:661
+#: inc/admin/admin.php:636 inc/admin/admin.php:659
 msgid "Import"
 msgstr "దిగుమతి"
 
-#: inc/admin/admin.php:646
+#: inc/admin/admin.php:644
 msgid "Import Redirections"
 msgstr "దిగుమతి దారి మళ్లింపులు (Import Redirections)"
 
-#: inc/admin/admin.php:648
+#: inc/admin/admin.php:646
 msgid ""
 "Import your own redirections from a .csv file (separator \";\"). You must have 3 columns in this order: url "
 "to match (without your domain name), url to redirect in absolute and type of redirection (301, 302 or 307)."
@@ -1057,777 +1101,809 @@ msgstr ""
 "CSV ఫైల్ (విభజన \";\") నుండి మీ స్వంత మళ్లింపులను దిగుమతి చేయండి. ఈ క్రమంలో మీరు 3 నిలువు వరుసలను కలిగి ఉండాలి: మ్యాచ్ కు url (మీ "
 "డొమైన్ పేరు లేకుండా), url సంపూర్ణంగా మరియు రీడైరెక్ట్ రకం (301, 302 లేదా 307) లో మళ్ళించబడుతుంది."
 
-#: inc/admin/admin.php:651
+#: inc/admin/admin.php:649
 msgid "Download a CSV example"
 msgstr "CSV ఉదాహరణను డౌన్లోడ్ చేయండి"
 
-#: inc/admin/admin.php:669
+#: inc/admin/admin.php:667
 msgid "Import posts and terms metadata from Yoast"
 msgstr "Yoast నుండి పోస్ట్లు మరియు నిబంధనల మెటాడేటాని దిగుమతి చేయండి"
 
-#: inc/admin/admin.php:671
+#: inc/admin/admin.php:669
 msgid "By clicking Migrate, we'll import:"
 msgstr "మైగ్రేట్ను క్లిక్ చేయడం ద్వారా, మేము దిగుమతి చేస్తాము:"
 
-#: inc/admin/admin.php:673
+#: inc/admin/admin.php:671
 msgid "Title tags"
 msgstr "శీర్షిక ట్యాగ్లు"
 
-#: inc/admin/admin.php:675
+#: inc/admin/admin.php:673
 msgid "Facebook Open Graph tags (title, description and image thumbnail)"
 msgstr "Facebook  ఓపెన్ గ్రాఫ్ టాగ్లు (శీర్షిక, వివరణ మరియు చిత్రం సూక్ష్మచిత్రం) (title, description and image thumbnail)"
 
-#: inc/admin/admin.php:676
+#: inc/admin/admin.php:674
 msgid "Twitter tags (title, description and image thumbnail)"
 msgstr "Twitter ట్యాగ్లు (శీర్షిక, వివరణ మరియు చిత్రం సూక్ష్మచిత్రం) (title, description and image thumbnail)"
 
-#: inc/admin/admin.php:677
+#: inc/admin/admin.php:675
 msgid "Meta Robots (noindex, nofollow...)"
 msgstr "మెటా రోబోట్స్ (నోఇండిక్స్, నోఫాల్లో .)"
 
-#: inc/admin/admin.php:679
+#: inc/admin/admin.php:677
 #, fuzzy
 #| msgid "Search keywords"
 msgid "Focus keywords"
 msgstr "కీలక పదాలను శోధించండి"
 
-#: inc/admin/admin.php:681
+#: inc/admin/admin.php:679
 #, fuzzy
 #| msgid "<strong>WARNING:</strong> Migration will delete all SEOPress posts metadata"
 msgid "<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms metadata"
 msgstr "<strong>హెచ్చరిక:</strong> మైగ్రేషన్ అన్ని SEO పోస్ట్స్ మెటాడేటాను తొలగిస్తుంది"
 
-#: inc/admin/admin.php:682
+#: inc/admin/admin.php:680
 msgid "Migrate now"
 msgstr "ఇప్పుడే మైగ్రేట్ చేయండి"
 
-#: inc/admin/admin.php:689
+#: inc/admin/admin.php:687
 msgid "Reset All Notices From Notifications Center"
 msgstr "నోటిఫికేషన్ల కేంద్రం నుండి అన్ని నోటీసులను పునరావాసం (RESET) చేయండి"
 
-#: inc/admin/admin.php:691
+#: inc/admin/admin.php:689
 msgid "By clicking Reset Notices, you'll see all notices again in notifications center."
 msgstr "నోటిఫికేషన్లను పునరావాసం(RESET) క్లిక్ చేయడం ద్వారా, నోటిఫికేషన్ సెంటర్లో మీరు అన్ని నోటీసులను మళ్లీ చూస్తారు."
 
-#: inc/admin/admin.php:696
+#: inc/admin/admin.php:694
 msgid "Reset notices"
 msgstr "నోటీసులను పునరావాసం (RESET) చేయండి"
 
-#: inc/admin/admin.php:703
+#: inc/admin/admin.php:701
 msgid "Reset All Settings"
 msgstr "అన్ని సెట్టింగ్లను పునరావాసం (RESET) చేయండి"
 
-#: inc/admin/admin.php:705
+#: inc/admin/admin.php:703
 msgid ""
 "<strong>WARNING:</strong> Delete all options related to SEOPress in your database AND set settings to their "
 "default values."
 msgstr ""
 "<strong>హెచ్చరిక:</strong> మీ డిఫాల్ట్ విలువలను మీ డేటాబేస్ మరియు సెట్టింగులు సెట్టింగులు లో SEOPress సంబంధించిన అన్ని ఎంపికలు తొలగించు."
 
-#: inc/admin/admin.php:710
+#: inc/admin/admin.php:708
 msgid "Reset settings"
 msgstr "సెట్టింగ్లను పునఃపరిష్కారం (RESET) చేయండి"
 
-#: inc/admin/admin.php:802 inc/admin/admin.php:808
+#: inc/admin/admin.php:800 inc/admin/admin.php:806
 msgid "SEO Tools"
 msgstr "SEO ఉపకరణాలు"
 
-#: inc/admin/admin.php:803 inc/admin/admin.php:809 inc/admin/admin.php:815 inc/admin/admin.php:820
+#: inc/admin/admin.php:801 inc/admin/admin.php:807 inc/admin/admin.php:813 inc/admin/admin.php:818
 msgid "Useful links"
 msgstr "ఉపయోగకరమైన లింకులు"
 
-#: inc/admin/admin.php:807 inc/admin/admin.php:819
+#: inc/admin/admin.php:805 inc/admin/admin.php:817
 msgid "Notifications Center"
 msgstr "నోటిఫికేషన్ సెంటర్"
 
-#: inc/admin/admin.php:840
+#: inc/admin/admin.php:838
 msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
 msgstr ""
 
-#: inc/admin/admin.php:841 inc/admin/admin.php:896 inc/admin/admin.php:906 inc/admin/admin.php:916
+#: inc/admin/admin.php:839 inc/admin/admin.php:894 inc/admin/admin.php:904 inc/admin/admin.php:914
 msgid "High impact"
 msgstr "అధిక ప్రభావం"
 
-#: inc/admin/admin.php:851 inc/admin/admin.php:882 inc/admin/admin.php:4342 inc/admin/admin.php:4363
-#: inc/admin/admin.php:4384 inc/admin/admin.php:4405
+#: inc/admin/admin.php:849 inc/admin/admin.php:880 inc/admin/admin.php:4432 inc/admin/admin.php:4453
+#: inc/admin/admin.php:4474 inc/admin/admin.php:4495
 msgid "Learn more"
 msgstr "ఇంకా నేర్చుకోండి"
 
-#: inc/admin/admin.php:858
+#: inc/admin/admin.php:856
 msgid ""
 "We notice that you use Yoast SEO plugin. <br>Do you want to migrate all your posts metadata to SEOPress?"
 msgstr "మీరు Yoast SEO ప్లగ్ఇన్ ఉపయోగించే గమనించండి. <br>మీరు మీ అన్ని పోస్ట్స్ మెటాడేటాను SEOPress మైగ్రేట్ చేయాలనుకుంటున్నారా?"
 
-#: inc/admin/admin.php:860
+#: inc/admin/admin.php:858
 msgid "Migrate!"
 msgstr "ప్రవాసానికి పోవు - (Migrate!)"
 
-#: inc/admin/admin.php:881
+#: inc/admin/admin.php:879
 msgid "Your site doesn't use an SSL certificate!"
 msgstr "మీ సైట్ SSL ప్రమాణపత్రాన్ని ఉపయోగించుటలేదు!"
 
-#: inc/admin/admin.php:883
+#: inc/admin/admin.php:881
 msgid "Low impact"
 msgstr "తక్కువ ప్రభావం"
 
-#: inc/admin/admin.php:885
+#: inc/admin/admin.php:883
 msgid "Buy an SSL!"
 msgstr "ఒక SSL కొనండి!"
 
-#: inc/admin/admin.php:895
+#: inc/admin/admin.php:893
 msgid "Your site is not visible to Search Engines!"
 msgstr "శోధన ఇంజిన్లకు మీ సైట్ కనిపించదు!"
 
-#: inc/admin/admin.php:898 inc/admin/admin.php:908 inc/admin/admin.php:918 inc/admin/admin.php:942
-#: inc/admin/admin.php:996 inc/admin/admin.php:1009 inc/admin/admin.php:1081
+#: inc/admin/admin.php:896 inc/admin/admin.php:906 inc/admin/admin.php:916 inc/admin/admin.php:940
+#: inc/admin/admin.php:994 inc/admin/admin.php:1007 inc/admin/admin.php:1079
 msgid "Fix this!"
 msgstr "దీన్ని పరిష్కరించండి!"
 
-#: inc/admin/admin.php:905
+#: inc/admin/admin.php:903
 msgid "Your site title is empty!"
 msgstr "మీ సైట్ శీర్షిక ఖాళీగా ఉంది!"
 
-#: inc/admin/admin.php:915 inc/admin/admin.php:2878
+#: inc/admin/admin.php:913 inc/admin/admin.php:2952
 msgid "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
 msgstr "మీ permalinks SEO ఫ్రెండ్లీ కాదు! దీనిని పరిష్కరించడానికి అందంగా permalinks ను ప్రారంభించండి."
 
-#: inc/admin/admin.php:939
+#: inc/admin/admin.php:937
 msgid "You RSS feed show full text!"
 msgstr "మీరు RSS ఫీడ్ పూర్తి టెక్స్ట్ చూపించు!"
 
-#: inc/admin/admin.php:940 inc/admin/admin.php:994 inc/admin/admin.php:1007
+#: inc/admin/admin.php:938 inc/admin/admin.php:992 inc/admin/admin.php:1005
 msgid "Medium impact"
 msgstr "మధ్యస్థ ప్రభావం"
 
-#: inc/admin/admin.php:966
+#: inc/admin/admin.php:964
 msgid "Break comments into pages is ON!"
 msgstr "వ్యాఖ్యలు  పేజీలలో  బ్రేక్,  ఆన్లో ఉంది!"
 
-#: inc/admin/admin.php:967 inc/admin/admin.php:1031 inc/admin/admin.php:1067
+#: inc/admin/admin.php:965 inc/admin/admin.php:1029 inc/admin/admin.php:1065
 msgid "Huge impact"
 msgstr "భారీ ప్రభావం"
 
-#: inc/admin/admin.php:969
+#: inc/admin/admin.php:967
 msgid "Disable this!"
 msgstr "దీన్ని ఆపివేయి!"
 
-#: inc/admin/admin.php:993
+#: inc/admin/admin.php:991
 msgid "Display more posts per page on homepage and archives"
 msgstr "(Homepage) హోమ్పేజీ మరియు ఆర్కైవ్ లలో పేజీకి ఎక్కువ పోస్ట్లు ప్రదర్శించు"
 
-#: inc/admin/admin.php:1006
+#: inc/admin/admin.php:1004
 msgid "You don't have an XML Sitemap!"
 msgstr "మీకు XML సైట్ మ్యాప్ లేదు!"
 
-#: inc/admin/admin.php:1030
+#: inc/admin/admin.php:1028
 #, fuzzy
 #| msgid "Do you have a Google Business page? It's free!"
 msgid "Do you have a Google My Business page? It's free!"
 msgstr "మీకు Google వ్యాపారం పేజీ ఉందా? ఇది ఉచితం!"
 
-#: inc/admin/admin.php:1033
+#: inc/admin/admin.php:1031
 msgid "Create your page now!"
 msgstr "ఇప్పుడు మీ పేజీని సృష్టించండి!"
 
-#: inc/admin/admin.php:1066
+#: inc/admin/admin.php:1064
 msgid "Add your site to Google. It's free!"
 msgstr "మీ సైట్ను Google కి జోడించండి. ఇది ఉచితం!"
 
-#: inc/admin/admin.php:1069
+#: inc/admin/admin.php:1067
 msgid "Add your site to Search Console!"
 msgstr "మీ సైట్ ను సెర్చ్ కన్సోల్కు జోడించండి! (Search Console!)"
 
-#: inc/admin/admin.php:1079
+#: inc/admin/admin.php:1077
 msgid "You have to enter your licence key to get updates and support"
 msgstr "నవీకరణలు మరియు మద్దతు పొందడానికి మీరు మీ లైసెన్స్ కీని నమోదు చేయాలి"
 
-#: inc/admin/admin.php:1094
+#: inc/admin/admin.php:1092
 msgid "Check websites setup on your server"
 msgstr "మీ సర్వర్లో వెబ్సైటు సెటప్ తనిఖీ చేయండి"
 
-#: inc/admin/admin.php:1096
+#: inc/admin/admin.php:1094
 msgid "Host IP: "
 msgstr "హోస్ట్ IP :"
 
-#: inc/admin/admin.php:1102
+#: inc/admin/admin.php:1100
 msgid "Server IP Address: "
 msgstr "సర్వర్ IP చిరునామా :"
 
-#: inc/admin/admin.php:1104
+#: inc/admin/admin.php:1102
 msgid "Last scrape: "
 msgstr "Last scrape: చివరి గీరి :"
 
-#: inc/admin/admin.php:1105
+#: inc/admin/admin.php:1103
 msgid "Number of websites on your server: "
 msgstr "మీ సర్వర్లోని వెబ్సైట్ల సంఖ్య :"
 
-#: inc/admin/admin.php:1117
+#: inc/admin/admin.php:1115
 msgid "Get list"
 msgstr "జాబితా పొందండి"
 
-#: inc/admin/admin.php:1125
+#: inc/admin/admin.php:1123
 msgid "Check your domain expiration date"
 msgstr "మీ డొమైన్ గడువు తేదీని తనిఖీ చేయండి"
 
-#: inc/admin/admin.php:1156
+#: inc/admin/admin.php:1154
 msgid "Your domain name: "
 msgstr "మీ డొమైన్ పేరు :"
 
-#: inc/admin/admin.php:1159
+#: inc/admin/admin.php:1157
 msgid "Your registrar: "
 msgstr "మీ రిజిస్ట్రార్ :"
 
-#: inc/admin/admin.php:1162
+#: inc/admin/admin.php:1160
 msgid "Last updated date: "
 msgstr "చివరిగా నవీకరించబడిన తేదీ :"
 
-#: inc/admin/admin.php:1165
+#: inc/admin/admin.php:1163
 msgid "Domain creation date: "
 msgstr "డొమైన్ సృష్టించిన తేదీ :"
 
-#: inc/admin/admin.php:1168
+#: inc/admin/admin.php:1166
 msgid "Your domain expires: "
 msgstr "మీ డొమైన్ గడువు ముగిసింది :"
 
-#: inc/admin/admin.php:1173
+#: inc/admin/admin.php:1171
 msgid "Sorry, you domain name can't be verified :("
 msgstr "క్షమించండి, మీ డొమైన్ పేరు ధృవీకరించబడo లేదు :("
 
-#: inc/admin/admin.php:1176
+#: inc/admin/admin.php:1174
 msgid "Email me before expiration"
 msgstr "గడువు ముందే నాకు ఇమెయిల్ చేయండి"
 
-#: inc/admin/admin.php:1185
+#: inc/admin/admin.php:1183
 msgid "Check your Alexa Rank (Amazon index)"
 msgstr "మీ అలెక్సా ర్యాంక్ (అమెజాన్ ఇండెక్స్)"
 
-#: inc/admin/admin.php:1200
+#: inc/admin/admin.php:1198
 msgid "Your Alexa Rank"
 msgstr "Your Alexa Rank మీ అలెక్సా ర్యాంక్"
 
-#: inc/admin/admin.php:1222
+#: inc/admin/admin.php:1220
 msgid "Country Rank: "
 msgstr "దేశం లో ర్యాంక్ :"
 
-#: inc/admin/admin.php:1231
+#: inc/admin/admin.php:1229
 msgid "The lower, the best"
 msgstr "తక్కువ వుంటే, ఉత్తమo"
 
-#: inc/admin/admin.php:1235
+#: inc/admin/admin.php:1233
 msgid "Get Alexa Rank"
 msgstr "అలెక్సా ర్యాంక్ పొందండి"
 
-#: inc/admin/admin.php:1243
+#: inc/admin/admin.php:1241
 msgid "Upload a list of links to disavow to Google"
 msgstr "Google కు ఇష్టపడని లింక్ల జాబితాను అప్లోడ్ చేయండి"
 
-#: inc/admin/admin.php:1244
+#: inc/admin/admin.php:1242
 msgid "Google Trends"
 msgstr "Google ట్రెండ్లు"
 
-#: inc/admin/admin.php:1245
+#: inc/admin/admin.php:1243
 msgid "Google Campaign URL Builder tool"
 msgstr "Google ప్రచారం URL బిల్డర్ సాధనం"
 
-#: inc/admin/admin.php:1258
+#: inc/admin/admin.php:1256
 msgid "Titles & metas"
 msgstr "శీర్షికలు & Meta"
 
-#: inc/admin/admin.php:1259
+#: inc/admin/admin.php:1257
 msgid "Manage all your titles & metas"
 msgstr "మీ శీర్షికలు & meta నిర్వహించండి"
 
-#: inc/admin/admin.php:1260 inc/admin/admin.php:1298 inc/admin/admin.php:1336 inc/admin/admin.php:1374
-#: inc/admin/admin.php:1412 inc/admin/admin.php:1441 inc/admin/admin.php:1469 inc/admin/admin.php:1497
-#: inc/admin/admin.php:1525 inc/admin/admin.php:1553 inc/admin/admin.php:1591 inc/admin/admin.php:1612
-#: inc/admin/admin.php:1651 inc/admin/admin.php:1680 inc/admin/admin.php:1730 inc/admin/admin.php:1741
-#: inc/admin/admin.php:1753 inc/admin/admin.php:1765 inc/admin/admin.php:1786
+#: inc/admin/admin.php:1258 inc/admin/admin.php:1296 inc/admin/admin.php:1334 inc/admin/admin.php:1372
+#: inc/admin/admin.php:1410 inc/admin/admin.php:1439 inc/admin/admin.php:1467 inc/admin/admin.php:1495
+#: inc/admin/admin.php:1523 inc/admin/admin.php:1551 inc/admin/admin.php:1579 inc/admin/admin.php:1617
+#: inc/admin/admin.php:1638 inc/admin/admin.php:1677 inc/admin/admin.php:1706 inc/admin/admin.php:1756
+#: inc/admin/admin.php:1767 inc/admin/admin.php:1779 inc/admin/admin.php:1791 inc/admin/admin.php:1812
 msgid "Manage"
 msgstr "నిర్వహింౘు"
 
-#: inc/admin/admin.php:1297
+#: inc/admin/admin.php:1295
 msgid "Manage your XML / Image / HTML Sitemap"
 msgstr "మీ XML / ఇమేజ్ / HTML సైట్ మాప్ ను నిర్వహించండి"
 
-#: inc/admin/admin.php:1335
+#: inc/admin/admin.php:1333
 msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
 msgstr "ఓపెన్ గ్రాఫ్, ట్విట్టర్ కార్డ్, Google నాలెడ్జ్ గ్రాఫ్ మరియు మరింత.."
 
-#: inc/admin/admin.php:1373
+#: inc/admin/admin.php:1371
 msgid "Track everything about your visitors with Google Analytics"
 msgstr "Google Analytics తో మీ సందర్శకుల గురించి ప్రతిదీ ట్రాక్ చేయండి"
 
-#: inc/admin/admin.php:1411
+#: inc/admin/admin.php:1409
 msgid "Advanced SEO options for advanced users!"
 msgstr "ఆధునిక వినియోగదారులకు ఆధునిక SEO ఎంపికలు!"
 
-#: inc/admin/admin.php:1440
+#: inc/admin/admin.php:1438
 msgid "Improve WooCommerce SEO"
 msgstr "WooCommerce SEO మెరుగుపరచండి"
 
-#: inc/admin/admin.php:1468
+#: inc/admin/admin.php:1466
+msgid "Improve Easy Digital Downloads SEO"
+msgstr ""
+
+#: inc/admin/admin.php:1494
 msgid "Add Google Local Business data type"
 msgstr "Google స్థానిక వ్యాపార డేటా రకాన్ని జోడించండి"
 
-#: inc/admin/admin.php:1496
+#: inc/admin/admin.php:1522
 msgid "Add Dublin Core meta tags"
 msgstr "డబ్లిన్ కోర్ మెటా ట్యాగ్లను జోడించండి"
 
-#: inc/admin/admin.php:1524
+#: inc/admin/admin.php:1550
 msgid "Add data types to your content: articles, courses, recipes, videos, events and products"
 msgstr "మీ కంటెంట్ డేటా రకాలను జోడించండి: కథనాలు, కోర్సులు, వంటకాలు, వీడియోలు, ఈవెంట్లు మరియు ఉత్పత్తులు"
 
-#: inc/admin/admin.php:1552
+#: inc/admin/admin.php:1578
 msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
 msgstr "మీ థీమ్ కోసం Breadcrumbs ప్రారంభించు మరియు SERP లలో మీ SEO ను మెరుగుపరచండి"
 
-#: inc/admin/admin.php:1590
+#: inc/admin/admin.php:1616
 msgid "Track your website performance to improve SEO with Google Page Speed"
 msgstr "గూగుల్ పేజీ వేగంతో SEO మెరుగుపరచడానికి మీ వెబ్సైట్ పనితీరుని ట్రాక్ చేయండి"
 
-#: inc/admin/admin.php:1611
+#: inc/admin/admin.php:1637
 msgid "Edit your robots.txt file"
 msgstr "మీ robots.txt ఫైల్ను సవరించండి"
 
-#: inc/admin/admin.php:1650
+#: inc/admin/admin.php:1676
 msgid "Optimize your site for Google News"
 msgstr "Google వార్తల కోసం మీ సైట్ను ఆప్టిమైజ్ చేయండి"
 
-#: inc/admin/admin.php:1678
+#: inc/admin/admin.php:1704
 msgid "Monitor 404, create 301, 302 and 307 redirections"
 msgstr "మానిటర్ 404, 301, 302 మరియు 307 మళ్లింపులను సృష్టించండి"
 
-#: inc/admin/admin.php:1679
+#: inc/admin/admin.php:1705
 msgid "See redirects"
 msgstr "దారిమార్పులను(redirects) చూడండి"
 
-#: inc/admin/admin.php:1717
+#: inc/admin/admin.php:1743
 msgid "Scan your site to find SEO problems."
 msgstr "SEO సమస్యలను కనుగొనడానికి మీ సైట్ను స్కాన్ చేయండి."
 
-#: inc/admin/admin.php:1718
+#: inc/admin/admin.php:1744
 msgid "See broken links"
 msgstr "విరిగిన లింక్లను చూడండి ( broken links)"
 
-#: inc/admin/admin.php:1719
+#: inc/admin/admin.php:1745
 msgid "Scan"
 msgstr "స్కాన్"
 
-#: inc/admin/admin.php:1728
+#: inc/admin/admin.php:1754
 msgid "Check your backlinks with Majestic API."
 msgstr "మెజెస్టిక్ API తో మీ బ్యాక్లింక్లను తనిఖీ చేయండి."
 
-#: inc/admin/admin.php:1729
+#: inc/admin/admin.php:1755
 msgid "See backlinks"
 msgstr "బ్యాక్ లింక్లను చూడండి"
 
-#: inc/admin/admin.php:1740
+#: inc/admin/admin.php:1766
 msgid "Edit your htaccess file."
 msgstr "మీ htaccess ఫైల్ను సవరించండి."
 
-#: inc/admin/admin.php:1752
+#: inc/admin/admin.php:1778
 msgid "Configure default WordPress RSS."
 msgstr "డిఫాల్ట్ WordPress RSS ఆకృతీకరించుము."
 
-#: inc/admin/admin.php:1764
+#: inc/admin/admin.php:1790
 msgid "Import / export SEOPress settings from site to site."
 msgstr "సైట్ నుండి సైట్ దిగుమతి / ఎగుమతి SEOPress సెట్టింగులు."
 
-#: inc/admin/admin.php:1785
+#: inc/admin/admin.php:1811
 msgid "Edit your SEOPress license key."
 msgstr "మీ SEO ప్రెస్ లైసెన్స్ కీని సవరించండి."
 
-#: inc/admin/admin.php:1863
+#: inc/admin/admin.php:1889
 msgid "Site title"
 msgstr "సైట్ శీర్షిక"
 
-#: inc/admin/admin.php:2095
+#: inc/admin/admin.php:2121
 msgid "Indicate paginated content to Google"
 msgstr "Google కు పేజీ విన్యాసం కంటెంట్ను సూచించండి"
 
-#: inc/admin/admin.php:2112 inc/admin/admin.php:3693
+#: inc/admin/admin.php:2138 inc/admin/admin.php:3771
 msgid "Enable XML Sitemap"
 msgstr "XML సైట్మాప్ను ప్రారంభించండి"
 
-#: inc/admin/admin.php:2120
+#: inc/admin/admin.php:2146
 msgid "Enable XML Image Sitemaps"
 msgstr "XML చిత్రం సైట్మాప్లను ప్రారంభించండి"
 
-#: inc/admin/admin.php:2128 inc/admin/admin.php:3747
+#: inc/admin/admin.php:2154 inc/admin/admin.php:3825
 msgid "Enable HTML Sitemap"
 msgstr "HTML సైట్మాప్ను ప్రారంభించండి"
 
-#: inc/admin/admin.php:2144
+#: inc/admin/admin.php:2170
 msgid "Check to INCLUDE Post Types"
 msgstr "పోస్ట్ రకాలను చేర్చడానికి తనిఖీ చేయండి"
 
-#: inc/admin/admin.php:2160
+#: inc/admin/admin.php:2186
 msgid "Check to INCLUDE Taxonomies"
 msgstr "వర్గీకరణాలు చేర్చడానికి తనిఖీ చేయండి"
 
-#: inc/admin/admin.php:2176
+#: inc/admin/admin.php:2202
 msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
 msgstr "సైట్ మ్యాప్ ప్రదర్శించడానికి పోస్ట్, పేజీ లేదా కస్టమ్ పోస్ట్ రకం ID (లు) ను నమోదు చేయండి"
 
-#: inc/admin/admin.php:2184
+#: inc/admin/admin.php:2210
 msgid "Exclude some Posts, Pages or Custom Post Types"
 msgstr "కొన్ని పోస్ట్లు, పేజీలు లేదా కస్టమ్ పోస్ట్ రకాలు మినహాయించాలని"
 
-#: inc/admin/admin.php:2192
+#: inc/admin/admin.php:2218
 msgid "Disable the display of the publication date"
 msgstr ""
 
-#: inc/admin/admin.php:2209
+#: inc/admin/admin.php:2235
 msgid "Person or organization"
 msgstr "వ్యక్తి లేదా సంస్థ"
 
-#: inc/admin/admin.php:2217
+#: inc/admin/admin.php:2243
 msgid "Your name / organization"
 msgstr "మీ పేరు / సంస్థ"
 
-#: inc/admin/admin.php:2225
+#: inc/admin/admin.php:2251
 msgid "Your photo / organization logo"
 msgstr "మీ ఫోటో / సంస్థ లోగో"
 
-#: inc/admin/admin.php:2233
+#: inc/admin/admin.php:2259
 msgid "Organization Phone number (only for Organization)"
 msgstr "సంస్థ ఫోన్ నంబర్ (సంస్థ కోసం మాత్రమే)"
 
-#: inc/admin/admin.php:2241
+#: inc/admin/admin.php:2267
 msgid "Contact type (only for Organization)"
 msgstr "సంప్రదింపు రకం (సంస్థ కోసం మాత్రమే)"
 
-#: inc/admin/admin.php:2249
+#: inc/admin/admin.php:2275
 msgid "Contact option (only for Organization)"
 msgstr "సంప్రదింపు ఎంపిక (మాత్రమే సంస్థ కోసం)"
 
-#: inc/admin/admin.php:2266
+#: inc/admin/admin.php:2292
 msgid "Facebook Page URL"
 msgstr "Facebook పేజ్ URL"
 
-#: inc/admin/admin.php:2274
+#: inc/admin/admin.php:2300
 msgid "Twitter Username"
 msgstr "Twitter Username"
 
-#: inc/admin/admin.php:2282
+#: inc/admin/admin.php:2308
 msgid "Google + URL"
 msgstr "Google + URL"
 
-#: inc/admin/admin.php:2290
+#: inc/admin/admin.php:2316
 msgid "Pinterest URL"
 msgstr "Pinterest URL"
 
-#: inc/admin/admin.php:2298
+#: inc/admin/admin.php:2324
 msgid "Instagram URL"
 msgstr "Instagram URL"
 
-#: inc/admin/admin.php:2306
+#: inc/admin/admin.php:2332
 msgid "YouTube URL"
 msgstr "YouTube URL"
 
-#: inc/admin/admin.php:2314
+#: inc/admin/admin.php:2340
 msgid "LinkedIn URL"
 msgstr "LinkedIn URL"
 
-#: inc/admin/admin.php:2322
+#: inc/admin/admin.php:2348
 msgid "MySpace URL"
 msgstr "MySpace URL"
 
-#: inc/admin/admin.php:2330
+#: inc/admin/admin.php:2356
 msgid "Soundcloud URL"
 msgstr "Soundcloud URL"
 
-#: inc/admin/admin.php:2338
+#: inc/admin/admin.php:2364
 msgid "Tumblr URL"
 msgstr "Tumblr URL"
 
-#: inc/admin/admin.php:2355
+#: inc/admin/admin.php:2381
 msgid "Enable Open Graph Data"
 msgstr "ఓపెన్ గ్రాఫ్ డేటాను ప్రారంభించండి"
 
-#: inc/admin/admin.php:2363
+#: inc/admin/admin.php:2389
 msgid "Select a default image"
 msgstr "డిఫాల్ట్ చిత్రాన్ని ఎంచుకోండి"
 
-#: inc/admin/admin.php:2371
+#: inc/admin/admin.php:2397
+#, fuzzy
+#| msgid "Facebook Admin ID"
+msgid "Facebook Link Ownership ID"
+msgstr "Facebook అడ్మిన్ ID"
+
+#: inc/admin/admin.php:2405
 msgid "Facebook Admin ID"
 msgstr "Facebook అడ్మిన్ ID"
 
-#: inc/admin/admin.php:2379
+#: inc/admin/admin.php:2413
 msgid "Facebook App ID"
 msgstr "Facebook App ID"
 
-#: inc/admin/admin.php:2396
+#: inc/admin/admin.php:2430
 msgid "Enable Twitter Card"
 msgstr "ట్విట్టర్ కార్డ్ని ప్రారంభించండి"
 
-#: inc/admin/admin.php:2404
+#: inc/admin/admin.php:2438
 msgid "Use Open Graph if no Twitter Cards filled"
 msgstr ""
 
-#: inc/admin/admin.php:2412
+#: inc/admin/admin.php:2446
 msgid "Default Twitter Image"
 msgstr "డిఫాల్ట్ ట్విట్టర్ చిత్రం"
 
-#: inc/admin/admin.php:2420
+#: inc/admin/admin.php:2454
 msgid "Image size for Twitter Summary card"
 msgstr "ట్విట్టర్ సారాంశం కార్డు కోసం చిత్రం పరిమాణం"
 
-#: inc/admin/admin.php:2437 inc/admin/admin.php:4286
+#: inc/admin/admin.php:2471 inc/admin/admin.php:4376
 msgid "Enable Google Analytics tracking"
 msgstr "Google Analytics ట్రాకింగ్ను ప్రారంభించండి"
 
-#: inc/admin/admin.php:2445
+#: inc/admin/admin.php:2479
 msgid "Enter your tracking ID"
 msgstr "మీ ట్రాకింగ్ ID ని నమోదు చేయండి"
 
-#: inc/admin/admin.php:2453
+#: inc/admin/admin.php:2487
 msgid "Exclude user roles from tracking"
 msgstr "ట్రాకింగ్ నుండి వినియోగదారు పాత్రలను మినహాయించండి"
 
-#: inc/admin/admin.php:2471 inc/admin/admin.php:4339
+#: inc/admin/admin.php:2505 inc/admin/admin.php:4429
 msgid "Enable remarketing, demographics and interest reporting"
 msgstr "రీమార్కెటింగ్, డిపోగ్రాఫిక్స్ మరియు ఇతర రిపోర్టింగ్లను ప్రారంభించండి"
 
-#: inc/admin/admin.php:2479 inc/admin/admin.php:4360
+#: inc/admin/admin.php:2513 inc/admin/admin.php:4450
 msgid "Enable IP Anonymization"
 msgstr "IP అనామలైజేషన్ను ప్రారంభించండి"
 
-#: inc/admin/admin.php:2487 inc/admin/admin.php:4381
+#: inc/admin/admin.php:2521 inc/admin/admin.php:4471
 msgid "Enhanced Link Attribution"
 msgstr "మెరుగుపరచబడిన లింక్ అట్రిబ్యూషన్"
 
-#: inc/admin/admin.php:2495 inc/admin/admin.php:4402
+#: inc/admin/admin.php:2529 inc/admin/admin.php:4492
 msgid "Enable cross-domain tracking"
 msgstr "క్రాస్ డొమైన్ ట్రాకింగ్ను ప్రారంభించండి - (cross-domain tracking)"
 
-#: inc/admin/admin.php:2503
+#: inc/admin/admin.php:2537
 msgid "Cross domains"
 msgstr "Cross domains"
 
-#: inc/admin/admin.php:2521
+#: inc/admin/admin.php:2555
 msgid "Enable external links tracking (all links with target _blank attribute)"
 msgstr "ట్రాకింగ్ బాహ్య లింక్లను ప్రారంభించండి (target_blank లక్షణంతో అన్ని లింక్లు)"
 
-#: inc/admin/admin.php:2529
+#: inc/admin/admin.php:2563
 msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
 msgstr "డౌన్ ట్రాకింగ్ను ప్రారంభించండి (ఉదా: PDF, XLSX, DOCX ...)"
 
-#: inc/admin/admin.php:2537
+#: inc/admin/admin.php:2571
 msgid "Track click downloads"
 msgstr "Track click downloads"
 
-#: inc/admin/admin.php:2545
+#: inc/admin/admin.php:2579
 msgid "Enable affiliate / outbound links tracking (eg: aff, go, out, recommends"
 msgstr "అనుబంధ / అవుట్బౌండ్ లింకులు ట్రాకింగ్ను ప్రారంభించండి (ఉదా: eg: aff, go, out, recommends)"
 
-#: inc/admin/admin.php:2553
+#: inc/admin/admin.php:2587
 msgid "Track affiliate / outbound links"
 msgstr "అనుబంధ / అవుట్బౌండ్ లింక్లను ట్రాక్ చేయండి"
 
-#: inc/admin/admin.php:2571
+#: inc/admin/admin.php:2605
 msgid "Track Authors"
 msgstr "Track Authors"
 
-#: inc/admin/admin.php:2579
+#: inc/admin/admin.php:2613
 msgid "Track Categories"
 msgstr "Track Categories"
 
-#: inc/admin/admin.php:2587
+#: inc/admin/admin.php:2621
 msgid "Track Tags"
 msgstr "Track Tags"
 
-#: inc/admin/admin.php:2595
+#: inc/admin/admin.php:2629
 msgid "Track Post Types"
 msgstr "ట్రాక్ పోస్ట్ రకాలు"
 
-#: inc/admin/admin.php:2603
+#: inc/admin/admin.php:2637
 msgid "Track Logged In Users"
 msgstr "Track లాగిన్ వినియోగదారులు"
 
-#: inc/admin/admin.php:2620
+#: inc/admin/admin.php:2654
 msgid "Redirect attachment pages to post parent"
 msgstr "Redirect attachment pages to post parent"
 
-#: inc/admin/admin.php:2628
+#: inc/admin/admin.php:2662
 msgid "Remove stop words from URL"
 msgstr "URL నుండి పదాలను నిలిపివేయి ( ఉదా: all, am, an, and, any, are)"
 
-#: inc/admin/admin.php:2636
+#: inc/admin/admin.php:2670
 msgid "Remove /category/ in URL"
 msgstr "URL లో / వర్గం / తొలగించు - (Remove /category/ in URL)"
 
-#: inc/admin/admin.php:2644 inc/admin/admin.php:4948
+#: inc/admin/admin.php:2678 inc/admin/admin.php:5038
 msgid "Disable trailing slash for metas"
 msgstr "మెటాస్ కోసం వెనుకంజలో స్లాష్ను నిలిపివేయి"
 
-#: inc/admin/admin.php:2652
+#: inc/admin/admin.php:2686
+msgid "Remove WordPress generator meta tag"
+msgstr ""
+
+#: inc/admin/admin.php:2694
+msgid "Remove WordPress shortlink meta tag"
+msgstr ""
+
+#: inc/admin/admin.php:2702
+msgid "Remove Windows Live Writer meta tag"
+msgstr ""
+
+#: inc/admin/admin.php:2710
+msgid "Remove RSD meta tag"
+msgstr ""
+
+#: inc/admin/admin.php:2718
 msgid "Google site verification"
 msgstr "Google సైట్ ధృవీకరణ"
 
-#: inc/admin/admin.php:2660
+#: inc/admin/admin.php:2726
 msgid "Bing site verification"
 msgstr "Bing సైట్ ధృవీకరణ"
 
-#: inc/admin/admin.php:2668
+#: inc/admin/admin.php:2734
 msgid "Pinterest site verification"
 msgstr "Pinterest సైట్ ధృవీకరణ"
 
-#: inc/admin/admin.php:2676
+#: inc/admin/admin.php:2742
 msgid "Yandex site verification"
 msgstr "Yandex సైట్ ధృవీకరణ"
 
-#: inc/admin/admin.php:2693
+#: inc/admin/admin.php:2759
 msgid "SEOPress in admin bar"
 msgstr "అడ్మిన్ బార్ లో SEOPress"
 
-#: inc/admin/admin.php:2701
+#: inc/admin/admin.php:2767
 msgid "Move SEOPress metaboxe position"
 msgstr "SEOPress metabox స్థానం తరలించు"
 
-#: inc/admin/admin.php:2709
+#: inc/admin/admin.php:2775
 msgid "Hide SEOPress Notifications Center"
 msgstr "దాచండి SEOPress ప్రకటనలు సెంటర్"
 
-#: inc/admin/admin.php:2717
+#: inc/admin/admin.php:2783
 msgid "Show Title tag column in post types"
 msgstr "పోస్ట్ రకాల టైటిల్ ట్యాగ్ కాలమ్ చూపించు"
 
-#: inc/admin/admin.php:2725
+#: inc/admin/admin.php:2791
 msgid "Show Meta description column in post types"
 msgstr "పోస్ట్ రకాల మెటా వివరణ కాలమ్ చూపించు"
 
-#: inc/admin/admin.php:2733
+#: inc/admin/admin.php:2799
+#, fuzzy
+#| msgid "Show noindex column in post types"
+msgid "Show canonical URL column in post types"
+msgstr "పోస్ట్ రకాలలో noindex కాలమ్ చూపించు"
+
+#: inc/admin/admin.php:2807
 #, fuzzy
 #| msgid "Show Title tag column in post types"
 msgid "Show Target Keyword column in post types"
 msgstr "పోస్ట్ రకాల టైటిల్ ట్యాగ్ కాలమ్ చూపించు"
 
-#: inc/admin/admin.php:2741
+#: inc/admin/admin.php:2815
 msgid "Show noindex column in post types"
 msgstr "పోస్ట్ రకాలలో noindex కాలమ్ చూపించు"
 
-#: inc/admin/admin.php:2749
+#: inc/admin/admin.php:2823
 msgid "Show nofollow column in post types"
 msgstr "పోస్ట్ రకాల్లో నోఫాల్లో నిలువు వరుసను చూపించు"
 
-#: inc/admin/admin.php:2757
+#: inc/admin/admin.php:2831
 msgid "Show total number of words column in post types"
 msgstr "పోస్ట్ రకాల పదాల పదాల మొత్తం సంఖ్యను చూపించు"
 
-#: inc/admin/admin.php:2765
+#: inc/admin/admin.php:2839
 msgid "Show W3C validator column in post types"
 msgstr "పోస్ట్ రకాల W3C వ్యాలిడేటర్కు కాలమ్ చూపించు"
 
-#: inc/admin/admin.php:2773
+#: inc/admin/admin.php:2847
 msgid "Show Google Page Speed column in post types"
 msgstr "పోస్ట్ రకాల Google పేజీ స్పీడ్ కాలమ్ చూపించు"
 
-#: inc/admin/admin.php:2782
+#: inc/admin/admin.php:2856
 msgid "Hide Genesis SEO Metaboxe"
 msgstr "Genesis SEO Metabox దాచు"
 
-#: inc/admin/admin.php:2799
+#: inc/admin/admin.php:2873
 msgid "Block SEO metaboxe to user roles"
 msgstr "యూజర్ పాత్రలు కు SEO metabox బ్లాక్  అయివుంటుంది"
 
-#: inc/admin/admin.php:2807
+#: inc/admin/admin.php:2881
 #, fuzzy
 #| msgid "Block SEO metaboxe to user roles"
 msgid "Block Content analysis metaboxe to user roles"
 msgstr "యూజర్ పాత్రలు కు SEO metabox బ్లాక్  అయివుంటుంది"
 
-#: inc/admin/admin.php:2851
+#: inc/admin/admin.php:2925
 msgid "<p>Customize your titles & metas for homepage</p>"
 msgstr "<p>homepage కోసం మీ శీర్షికలు & మెటాలను అనుకూలపరచండి</p>"
 
-#: inc/admin/admin.php:2856
+#: inc/admin/admin.php:2930
 msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
 msgstr "<p>సింగిల్ కస్టమ్ పోస్ట్ రకాలు కోసం మీ శీర్షికలు & metas అనుకూలపరచండి</p>"
 
-#: inc/admin/admin.php:2861
+#: inc/admin/admin.php:2935
 msgid "<p>Customize your metas for all pages</p>"
 msgstr "<p>అన్ని పేజీల కోసం మీ మెటాలను అనుకూలపరచండి</p>"
 
-#: inc/admin/admin.php:2866
+#: inc/admin/admin.php:2940
 msgid "<p>Customize your metas for all taxonomies archives</p>"
 msgstr "<p>అన్ని వర్గీకరణాలు ఆర్కైవ్ల కోసం మీ మెటాలను అనుకూలీకరించండి</p>"
 
-#: inc/admin/admin.php:2871
+#: inc/admin/admin.php:2945
 msgid "<p>Customize your metas for all archives</p>"
 msgstr "<p>అన్ని ఆర్కైవ్లకు(Archives) మీ మెటాలను అనుకూలీకరించండి</p>"
 
-#: inc/admin/admin.php:2882
+#: inc/admin/admin.php:2956
 msgid "To view your sitemap, enable permalinks (not default one), and save settings to flush them."
 msgstr "మీ సైట్ మ్యాప్ను వీక్షించడానికి, permalinks (డిఫాల్ట్ కాదు) ను ఎనేబుల్ చేసి, వాటిని ఫ్లష్ చేయడానికి సెట్టింగులను సేవ్ చేయండి."
 
-#: inc/admin/admin.php:2883
+#: inc/admin/admin.php:2957
 msgid "Only the last 1000 items are listed in Sitemaps for performances issues."
 msgstr "ప్రదర్శనలు సమస్యల కోసం రాకుండా, సైట్ మాప్ల్లో చివరి 1000 అంశాలు మాత్రమే ఇవ్వబడ్డాయి."
 
-#: inc/admin/admin.php:2885
+#: inc/admin/admin.php:2959
 msgid "Your server use NGINX. If XML Sitemaps doesn't work, you have to add this rules to your configuration:"
 msgstr "మీ సర్వర్ NGINX ను ఉపయోగిస్తుంది. XML సైట్ మ్యాప్లు పని చేయకపోతే, మీరు ఈ నియమాన్ని మీ కాన్ఫిగరేషన్కు జోడించాలి:"
 
-#: inc/admin/admin.php:2895
+#: inc/admin/admin.php:2969
 msgid "Noindex content will not be displayed in Sitemaps."
 msgstr "సైట్ మాప్లలో Noindex కంటెంట్ ప్రదర్శించబడదు."
 
-#: inc/admin/admin.php:2897
+#: inc/admin/admin.php:2971
 msgid "View your sitemap"
 msgstr "మీ సైట్మాప్ని వీక్షించండి"
 
-#: inc/admin/admin.php:2899
+#: inc/admin/admin.php:2973
 msgid "Ping Google manually"
 msgstr "Google ను మానవీయంగా పింగ్ చేయండి"
 
-#: inc/admin/admin.php:2901
+#: inc/admin/admin.php:2975
 msgid "Flush permalinks"
 msgstr "ఫ్లష్ permalinks"
 
-#: inc/admin/admin.php:2907
+#: inc/admin/admin.php:2981
 #, fuzzy
 #| msgid "<p>Create an HTML for your visitors and boost your SEO</p>"
 msgid "<p>Create an HTML for your visitors and boost your SEO.</p>"
 msgstr "<p>మీ సందర్శకులకు HTML ను సృష్టించండి మరియు మీ SEO ను పెంచండి</p>"
 
-#: inc/admin/admin.php:2922
+#: inc/admin/admin.php:2996
 msgid "<p>Include / Exclude Post Types</p>"
 msgstr "<p>పోస్ట్ రకాలు చేర్చండి / మినహాయించండి</p>"
 
-#: inc/admin/admin.php:2927
+#: inc/admin/admin.php:3001
 msgid "<p>Include / Exclude Taxonomies</p>"
 msgstr "<p>చేర్చండి / వర్గీకరణాలు మినహాయించండి</p>"
 
-#: inc/admin/admin.php:2932
+#: inc/admin/admin.php:3006
 msgid "<p>Configure Google Knowledge Graph</p>"
 msgstr "<p>Google Knowledge Graph ను కన్ఫిగర్ చేయండి</p>"
 
-#: inc/admin/admin.php:2937
+#: inc/admin/admin.php:3011
 msgid "<p>Link your site with your social accounts</p>"
 msgstr "<p>మీ సామాజిక ఖాతాలతో మీ సైట్ను లింక్ చేయండి</p>"
 
-#: inc/admin/admin.php:2942
+#: inc/admin/admin.php:3016
 msgid "<p>Manage Open Graph datas</p>"
 msgstr "<p>ఓపెన్ గ్రాఫ్ డేటాలను నిర్వహించండి</p>"
 
-#: inc/admin/admin.php:2947
+#: inc/admin/admin.php:3021
 msgid "<p>Manage your Twitter card</p>"
 msgstr "<p>మీ ట్విట్టర్ కార్డ్ని నిర్వహించండి</p>"
 
-#: inc/admin/admin.php:2952
+#: inc/admin/admin.php:3026
 msgid "<p>Link your Google Analytics to your website</p>"
 msgstr "<p>మీ వెబ్సైట్కు మీ Google Analytics లింక్ చేయండి</p>"
 
-#: inc/admin/admin.php:2957
+#: inc/admin/admin.php:3031
 msgid "<p>Configure your Google Analytics tracking code</p>"
 msgstr "<p>మీ Google Analytics ట్రాకింగ్ కోడ్ను కాన్ఫిగర్ చేయండి</p>"
 
-#: inc/admin/admin.php:2962
+#: inc/admin/admin.php:3036
 msgid "<p>Track events in Google Analytics</p>"
 msgstr "<p>Google Analytics లో ఈవెంట్లను ట్రాక్ చేయండి</p>"
 
-#: inc/admin/admin.php:2967
+#: inc/admin/admin.php:3041
 msgid ""
 "<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom metrics are like "
 "default dimensions and metrics in your Analytics account,<br> except you create them yourself. You can use "
@@ -1839,291 +1915,293 @@ msgstr ""
 "ఉపయోగించవచ్చు.<br>మీరు మీ Google Analytics ఖాతాలో మీ అనుకూల కొలతలు సెటప్ చేయాలని గమనించండి. సహాయ చిహ్నాన్ని క్లిక్ చేయడం ద్వారా మరింత "
 "సమాచారం."
 
-#: inc/admin/admin.php:2982
+#: inc/admin/admin.php:3056
 msgid "<p>Advanced SEO options</p>"
 msgstr "<p>ఆధునిక SEO ఎంపికలు</p>"
 
-#: inc/admin/admin.php:2987
+#: inc/admin/admin.php:3061
 msgid "<p>Customize SEOPress to fit your needs</p>"
 msgstr "<p>మీ అవసరాలకు సరిపోయేలా SEO ను అనుకూలీకరించండి</p>"
 
-#: inc/admin/admin.php:2992
+#: inc/admin/admin.php:3066
 msgid "<p>Manage security</p>"
 msgstr "<p>భద్రతను నిర్వహించండి</p>"
 
-#: inc/admin/admin.php:3003
+#: inc/admin/admin.php:3077
 msgid "My awesome website"
 msgstr "నా అద్భుతమైన వెబ్ సైట్"
 
-#: inc/admin/admin.php:3008 inc/admin/admin.php:3019 inc/admin/admin.php:3059 inc/admin/admin.php:3176
-#: inc/admin/admin.php:3207 inc/admin/admin.php:3284 inc/admin/admin.php:3359 inc/admin/admin.php:3429
-#: inc/admin/admin.php:3498 inc/admin/admin.php:3530
+#: inc/admin/admin.php:3082 inc/admin/admin.php:3093 inc/admin/admin.php:3136 inc/admin/admin.php:3253
+#: inc/admin/admin.php:3284 inc/admin/admin.php:3361 inc/admin/admin.php:3437 inc/admin/admin.php:3507
+#: inc/admin/admin.php:3576 inc/admin/admin.php:3608
 msgid "More tags"
 msgstr "మరిన్ని ట్యాగ్లు"
 
-#: inc/admin/admin.php:3014
+#: inc/admin/admin.php:3088
 msgid "This is a cool website about Wookiees"
 msgstr "This is a cool website about Wookiees"
 
-#: inc/admin/admin.php:3022
+#: inc/admin/admin.php:3096
 msgid "Looking for editing your blog page?"
 msgstr "మీ బ్లాగ్ పేజీని సవరించడం కోసం వెతుకుతున్నారా?"
 
-#: inc/admin/admin.php:3036 inc/admin/admin.php:3147 inc/admin/admin.php:3261 inc/admin/admin.php:3348
-#: inc/admin/admin.php:3418 inc/admin/admin.php:3487 inc/admin/admin.php:3521
+#: inc/admin/admin.php:3110 inc/admin/admin.php:3224 inc/admin/admin.php:3338 inc/admin/admin.php:3426
+#: inc/admin/admin.php:3496 inc/admin/admin.php:3565 inc/admin/admin.php:3599
 msgid "Title template"
 msgstr "శీర్షిక టెంప్లేట్ (Title template)"
 
-#: inc/admin/admin.php:3055
+#: inc/admin/admin.php:3132
 msgid "Post Title"
 msgstr "పోస్ట్ శీర్షిక - Post Title"
 
-#: inc/admin/admin.php:3066 inc/admin/admin.php:3183 inc/admin/admin.php:3291 inc/admin/admin.php:3365
-#: inc/admin/admin.php:3435 inc/admin/admin.php:3504 inc/admin/admin.php:3536
+#: inc/admin/admin.php:3143 inc/admin/admin.php:3260 inc/admin/admin.php:3368 inc/admin/admin.php:3443
+#: inc/admin/admin.php:3513 inc/admin/admin.php:3582 inc/admin/admin.php:3614
 msgid "Meta description template"
 msgstr "మెటా వివరణ టెంప్లేట్ - Meta description template"
 
-#: inc/admin/admin.php:3127
+#: inc/admin/admin.php:3204
 msgid "Display date in Google search results?"
 msgstr "Google శోధన ఫలితాల్లో తేదీని ప్రదర్శించాలా?"
 
-#: inc/admin/admin.php:3167
+#: inc/admin/admin.php:3244
 msgid "Category Title"
 msgstr "వర్గం శీర్షిక - Category Title"
 
-#: inc/admin/admin.php:3169
+#: inc/admin/admin.php:3246
 msgid "Tag Title"
 msgstr "ట్యాగ్ శీర్షిక"
 
-#: inc/admin/admin.php:3171
+#: inc/admin/admin.php:3248
 msgid "Term Title"
 msgstr "పదం శీర్షిక - Term Title"
 
-#: inc/admin/admin.php:3200
+#: inc/admin/admin.php:3277
 msgid "Category Description"
 msgstr "వర్గం వివరణ - Category Description"
 
-#: inc/admin/admin.php:3202
+#: inc/admin/admin.php:3279
 msgid "Tag Description"
 msgstr "ట్యాగ్ వివరణ"
 
-#: inc/admin/admin.php:3204
+#: inc/admin/admin.php:3281
 msgid "Term Description"
 msgstr "పదం వివరణ - Term Description"
 
-#: inc/admin/admin.php:3280
+#: inc/admin/admin.php:3357
 msgid "Post Type Archive Name"
 msgstr "పోస్ట్ రకం ఆర్కైవ్(Archive) పేరు"
 
-#: inc/admin/admin.php:3346
+#: inc/admin/admin.php:3424
 msgid "Author archives"
 msgstr "రచయిత ఆర్కైవ్స్ (ప్రాచీనపత్ర సంచయము)"
 
-#: inc/admin/admin.php:3407
+#: inc/admin/admin.php:3485
 msgid "Disable author archives"
 msgstr "Disable author archives"
 
-#: inc/admin/admin.php:3416
+#: inc/admin/admin.php:3494
 msgid "Date archives"
 msgstr "తేదీ ఆర్కైవ్లు (Date Archives)"
 
-#: inc/admin/admin.php:3427
+#: inc/admin/admin.php:3505
 msgid "Archive date"
 msgstr "ఆర్కైవ్ తేదీ"
 
-#: inc/admin/admin.php:3476
+#: inc/admin/admin.php:3554
 msgid "Disable date archives"
 msgstr "తేదీ ఆర్కైవ్ని నిలిపివేయండి"
 
-#: inc/admin/admin.php:3485
+#: inc/admin/admin.php:3563
 msgid "Search archives"
 msgstr "ఆర్కైవ్లను శోధించండి (ప్రాచీనపత్ర సంచయము)"
 
-#: inc/admin/admin.php:3496
+#: inc/admin/admin.php:3574
 msgid "Search Keywords"
 msgstr "Keywords శోధన"
 
-#: inc/admin/admin.php:3519
+#: inc/admin/admin.php:3597
 msgid "404 archives"
 msgstr "404 ఆర్కైవ్లు"
 
-#: inc/admin/admin.php:3674
+#: inc/admin/admin.php:3752
 msgid "Add rel next/prev link in head of paginated archive pages"
 msgstr "ఆర్కైవ్ పేజీల తలలో తదుపరి / గత లింక్ని జోడించండి"
 
-#: inc/admin/admin.php:3676
+#: inc/admin/admin.php:3754
 msgid "Learn more on Google website"
 msgstr "Google వెబ్సైట్లో మరింత తెలుసుకోండి"
 
-#: inc/admin/admin.php:3720
+#: inc/admin/admin.php:3798
 msgid "Enable Image Sitemaps"
 msgstr "చిత్రం సైట్మాప్లను ప్రారంభించండి"
 
-#: inc/admin/admin.php:3797 inc/admin/admin.php:3837
+#: inc/admin/admin.php:3875 inc/admin/admin.php:3915
 msgid "Include"
 msgstr "చేర్చండి"
 
-#: inc/admin/admin.php:3852
+#: inc/admin/admin.php:3930
 msgid "eg: 2, 28, 68"
 msgstr "ఉదా: 2, 28, 68"
 
-#: inc/admin/admin.php:3856
+#: inc/admin/admin.php:3934
 msgid "You can also use this shortcode:"
 msgstr ""
 
-#: inc/admin/admin.php:3866
+#: inc/admin/admin.php:3944
 msgid "eg: 13, 8, 38"
 msgstr "ఉదా: 13, 8, 38"
 
-#: inc/admin/admin.php:3881
+#: inc/admin/admin.php:3959
 #, fuzzy
 #| msgid "Post Title (post, page, custom post type)"
 msgid "Disable date after each post, page, post type?"
 msgstr "పోస్ట్ శీర్షిక (పోస్ట్, పేజీ, కస్టమ్ పోస్ట్ రకం)"
 
-#: inc/admin/admin.php:3897
+#: inc/admin/admin.php:3975
 msgid "Person"
 msgstr "వ్యక్తి"
 
-#: inc/admin/admin.php:3900
+#: inc/admin/admin.php:3978
 msgid "Organization"
 msgstr "సంస్థ"
 
-#: inc/admin/admin.php:3913
+#: inc/admin/admin.php:3991
 msgid "eg: Apple"
 msgstr "ఉదా: ఆపిల్"
 
-#: inc/admin/admin.php:3926
+#: inc/admin/admin.php:4004
 msgid "Select your logo"
 msgstr "మీ లోగో ఎంచుకోండి"
 
-#: inc/admin/admin.php:3954
+#: inc/admin/admin.php:4032
 msgid "eg: +33123456789 (internationalized version required)"
 msgstr "ఉదా: +33123456789 (అంతర్జాతీయీకరించిన సంస్కరణ అవసరం)"
 
-#: inc/admin/admin.php:3969
+#: inc/admin/admin.php:4047
 msgid "Customer support"
 msgstr "వినియోగదారుని కి సహాయము"
 
-#: inc/admin/admin.php:3972
+#: inc/admin/admin.php:4050
 msgid "Technical support"
 msgstr "సాంకేతిక సహాయము"
 
-#: inc/admin/admin.php:3975
+#: inc/admin/admin.php:4053
 msgid "Billing support"
 msgstr "బిల్లింగ్ సహాయము"
 
-#: inc/admin/admin.php:3978
+#: inc/admin/admin.php:4056
 msgid "Bill payment"
 msgstr "బిల్ చెల్లింపు"
 
-#: inc/admin/admin.php:3981
+#: inc/admin/admin.php:4059
 msgid "Sales"
 msgstr "అమ్మకాలు"
 
-#: inc/admin/admin.php:3984
+#: inc/admin/admin.php:4062
 msgid "Credit card support"
 msgstr "క్రెడిట్ కార్డ్ సహాయము"
 
-#: inc/admin/admin.php:3987
+#: inc/admin/admin.php:4065
 msgid "Emergency"
 msgstr "అత్యవసరo"
 
-#: inc/admin/admin.php:3990
+#: inc/admin/admin.php:4068
 msgid "Baggage tracking"
 msgstr "బ్యాగేజ్ ట్రాకింగ్"
 
-#: inc/admin/admin.php:3993
+#: inc/admin/admin.php:4071
 msgid "Roadside assistance"
 msgstr "రోడ్సైడ్ సహాయం"
 
-#: inc/admin/admin.php:3996
+#: inc/admin/admin.php:4074
 msgid "Package tracking"
 msgstr "ప్యాకేజీ ట్రాకింగ్"
 
-#: inc/admin/admin.php:4013
+#: inc/admin/admin.php:4091
 msgid "Toll Free"
 msgstr "టోల్ ఫ్రీ"
 
-#: inc/admin/admin.php:4016
+#: inc/admin/admin.php:4094
 msgid "Hearing impaired supported"
 msgstr "వినికిడి బలహీనమైన మద్దతు"
 
-#: inc/admin/admin.php:4029
+#: inc/admin/admin.php:4107
 msgid "eg: https://www.facebook.com/your-page"
 msgstr "ఉదా: https://www.facebook.com/your-page"
 
-#: inc/admin/admin.php:4042
+#: inc/admin/admin.php:4120
 msgid "eg: @wp_seopress"
 msgstr "ఉదా: @ wp_seopress"
 
-#: inc/admin/admin.php:4054
+#: inc/admin/admin.php:4132
 msgid "eg: https://plus.google.com/+BenjaminDenis"
 msgstr "ఉదా: https://plus.google.com/+BenjaminDenis"
 
-#: inc/admin/admin.php:4066
+#: inc/admin/admin.php:4144
 msgid "eg: https://pinterest.com/wpbuy/"
 msgstr "ఉదా: https://pinterest.com/wpbuy/"
 
-#: inc/admin/admin.php:4078
-msgid "eg: https://www.instagram.com/rainbowgeek64/"
+#: inc/admin/admin.php:4156
+#, fuzzy
+#| msgid "eg: https://www.instagram.com/rainbowgeek64/"
+msgid "eg: https://www.instagram.com/wp_seopress/"
 msgstr "ఉదా: https://www.instagram.com/rainbowgeek64/"
 
-#: inc/admin/admin.php:4090
+#: inc/admin/admin.php:4168
 msgid "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
 msgstr "ఉదా: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
 
-#: inc/admin/admin.php:4102
+#: inc/admin/admin.php:4180
 msgid "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
 msgstr "ఉదా: https://www.linkedin.com/in/benjamin-denis-70672b3b"
 
-#: inc/admin/admin.php:4114
+#: inc/admin/admin.php:4192
 msgid "eg: https://myspace.com/your-page"
 msgstr "ఉదా: https://myspace.com/your-page"
 
-#: inc/admin/admin.php:4126
+#: inc/admin/admin.php:4204
 msgid "eg: https://soundcloud.com/michaelmccannmusic"
 msgstr "ఉదా: https://soundcloud.com/michaelmccannmusic"
 
-#: inc/admin/admin.php:4138
+#: inc/admin/admin.php:4216
 msgid "eg: https://your-site.tumblr.com"
 msgstr "ఉదా: https://your-site.tumblr.com"
 
-#: inc/admin/admin.php:4155
+#: inc/admin/admin.php:4233
 msgid "Enable OG data"
 msgstr "OG డేటాను ప్రారంభించండి"
 
-#: inc/admin/admin.php:4201
+#: inc/admin/admin.php:4291
 msgid "How-to create a Facebook App ID"
 msgstr "ఎలా Facebook App ID ని సృష్టించాలి"
 
-#: inc/admin/admin.php:4215
+#: inc/admin/admin.php:4305
 msgid "Enable Twitter card"
 msgstr "ట్విట్టర్ కార్డ్ని ప్రారంభించండి"
 
-#: inc/admin/admin.php:4232
+#: inc/admin/admin.php:4322
 #, fuzzy
 #| msgid "Enable Twitter Card"
 msgid "Use OG if no Twitter Cards"
 msgstr "ట్విట్టర్ కార్డ్ని ప్రారంభించండి"
 
-#: inc/admin/admin.php:4265
+#: inc/admin/admin.php:4355
 msgid "Default"
 msgstr "డిఫాల్ట్"
 
-#: inc/admin/admin.php:4268
+#: inc/admin/admin.php:4358
 msgid "Large"
 msgstr "పెద్ద"
 
-#: inc/admin/admin.php:4296
+#: inc/admin/admin.php:4386
 msgid "Enter your Tracking ID (UA-XXXX-XX)"
 msgstr "మీ ట్రాకింగ్ ID (UA-XXXX-XX) ను నమోదు చేయండి"
 
-#: inc/admin/admin.php:4300
+#: inc/admin/admin.php:4390
 msgid "Find your tracking ID"
 msgstr "మీ ట్రాకింగ్ ID ని కనుగొనండి"
 
-#: inc/admin/admin.php:4341
+#: inc/admin/admin.php:4431
 msgid ""
 "A remarketing audience is a list of cookies or mobile-advertising IDs that represents a group of users you "
 "want to re-engage because of their likelihood to convert."
@@ -2131,7 +2209,7 @@ msgstr ""
 "రీమార్కెటింగ్ ప్రేక్షకులు cookies లేదా మొబైల్ ప్రకటన ID ల జాబితాగా చెప్పవచ్చు, ఇది వినియోగదారుల సమూహాన్ని ప్రతిబింబించేలా చేయడానికి మీరు కోరుకున్న "
 "వినియోగదారుల సమూహాన్ని ప్రతిబింబిస్తుంది."
 
-#: inc/admin/admin.php:4362
+#: inc/admin/admin.php:4452
 msgid ""
 "When a customer of Analytics requests IP address anonymization, Analytics anonymizes the address as soon as "
 "technically feasible at the earliest possible stage of the collection network."
@@ -2139,7 +2217,7 @@ msgstr ""
 "Analytics యొక్క కస్టమర్ ఐపి అడ్రస్ అనామలైజేషన్ అభ్యర్థి అయినప్పుడు, అనలిటిక్స్ వెంటనే ఈ నెట్వర్క్ను సేకరణ నెట్వర్క్ యొక్క సాధ్యమైన దశలో సాంకేతికంగా "
 "సాధ్యమవుతుంది."
 
-#: inc/admin/admin.php:4383
+#: inc/admin/admin.php:4473
 msgid ""
 "Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically "
 "differentiating between multiple links to the same URL on a single page by using link element IDs."
@@ -2149,7 +2227,7 @@ msgstr ""
 "Analytics report by automatically differentiating between multiple links to the same URL on a single page "
 "by using link element IDs.)"
 
-#: inc/admin/admin.php:4404
+#: inc/admin/admin.php:4494
 msgid ""
 "Cross domain tracking makes it possible for Analytics to see sessions on two related sites (such as an "
 "ecommerce site and a separate shopping cart site) as a single session. This is sometimes called site "
@@ -2158,237 +2236,259 @@ msgstr ""
 "క్రాస్ డొమైన్ ట్రాకింగ్ అనేది ఒకే session రెండు సంబంధిత సైట్లలో session (ఇకామర్స్ సైట్ మరియు ఒక ప్రత్యేక షాపింగ్ కార్ట్ సైట్ వంటివి) session "
 "చూడడానికి సాధ్యమవుతుంది. దీనిని కొన్నిసార్లు సైట్ లింకింగ్ అని పిలుస్తారు."
 
-#: inc/admin/admin.php:4416
+#: inc/admin/admin.php:4506
 msgid "Enter yours domains"
 msgstr "మీ డొమైన్లను నమోదు చేయండి"
 
-#: inc/admin/admin.php:4433
+#: inc/admin/admin.php:4523
 msgid "Enable external links tracking"
 msgstr "బాహ్య లింకులు ట్రాకింగ్ను ప్రారంభించండి (Enable external links tracking)"
 
-#: inc/admin/admin.php:4450
+#: inc/admin/admin.php:4540
 msgid "Enable download tracking"
 msgstr "డౌన్లోడ్ ట్రాకింగ్ను ప్రారంభించండి"
 
-#: inc/admin/admin.php:4462
+#: inc/admin/admin.php:4552
 msgid "pdf|docx|pptx|zip"
 msgstr "pdf|docx|pptx|zip"
 
-#: inc/admin/admin.php:4466
+#: inc/admin/admin.php:4556
 msgid "Separate each file type extensions with a pipe \"|\""
 msgstr "ప్రతి ఫైల్ రకం ఎక్స్టెన్షన్లను విభజించండి పైప్తో \"|\""
 
-#: inc/admin/admin.php:4481
+#: inc/admin/admin.php:4571
 msgid "Enable affiliate / outbound tracking"
 msgstr "అనుబంధ / అవుట్బౌండ్ ట్రాకింగ్ను ప్రారంభించండి"
 
-#: inc/admin/admin.php:4493
+#: inc/admin/admin.php:4583
 msgid "aff|go|out"
 msgstr "aff|go|out"
 
-#: inc/admin/admin.php:4497
+#: inc/admin/admin.php:4587
 msgid "Separate each keyword with a pipe \"|\""
 msgstr "Separate each keyword with a pipe \"|\""
 
-#: inc/admin/admin.php:4514 inc/admin/admin.php:4591 inc/admin/admin.php:4668 inc/admin/admin.php:4745
-#: inc/admin/admin.php:4822
+#: inc/admin/admin.php:4604 inc/admin/admin.php:4681 inc/admin/admin.php:4758 inc/admin/admin.php:4835
+#: inc/admin/admin.php:4912
 msgid "Custom Dimension #1"
 msgstr "కస్టమ్ డైమెన్షన్ # 1"
 
-#: inc/admin/admin.php:4517 inc/admin/admin.php:4594 inc/admin/admin.php:4671 inc/admin/admin.php:4748
-#: inc/admin/admin.php:4825
+#: inc/admin/admin.php:4607 inc/admin/admin.php:4684 inc/admin/admin.php:4761 inc/admin/admin.php:4838
+#: inc/admin/admin.php:4915
 msgid "Custom Dimension #2"
 msgstr "కస్టమ్ డైమెన్షన్ #2"
 
-#: inc/admin/admin.php:4520 inc/admin/admin.php:4597 inc/admin/admin.php:4674 inc/admin/admin.php:4751
-#: inc/admin/admin.php:4828
+#: inc/admin/admin.php:4610 inc/admin/admin.php:4687 inc/admin/admin.php:4764 inc/admin/admin.php:4841
+#: inc/admin/admin.php:4918
 msgid "Custom Dimension #3"
 msgstr "కస్టమ్ డైమెన్షన్ #3"
 
-#: inc/admin/admin.php:4523 inc/admin/admin.php:4600 inc/admin/admin.php:4677 inc/admin/admin.php:4754
-#: inc/admin/admin.php:4831
+#: inc/admin/admin.php:4613 inc/admin/admin.php:4690 inc/admin/admin.php:4767 inc/admin/admin.php:4844
+#: inc/admin/admin.php:4921
 msgid "Custom Dimension #4"
 msgstr "కస్టమ్ డైమెన్షన్ #4"
 
-#: inc/admin/admin.php:4526 inc/admin/admin.php:4603 inc/admin/admin.php:4680 inc/admin/admin.php:4757
-#: inc/admin/admin.php:4834
+#: inc/admin/admin.php:4616 inc/admin/admin.php:4693 inc/admin/admin.php:4770 inc/admin/admin.php:4847
+#: inc/admin/admin.php:4924
 msgid "Custom Dimension #5"
 msgstr "కస్టమ్ డైమెన్షన్ #5"
 
-#: inc/admin/admin.php:4529 inc/admin/admin.php:4606 inc/admin/admin.php:4683 inc/admin/admin.php:4760
-#: inc/admin/admin.php:4837
+#: inc/admin/admin.php:4619 inc/admin/admin.php:4696 inc/admin/admin.php:4773 inc/admin/admin.php:4850
+#: inc/admin/admin.php:4927
 msgid "Custom Dimension #6"
 msgstr "కస్టమ్ డైమెన్షన్ #6"
 
-#: inc/admin/admin.php:4532 inc/admin/admin.php:4609 inc/admin/admin.php:4686 inc/admin/admin.php:4763
-#: inc/admin/admin.php:4840
+#: inc/admin/admin.php:4622 inc/admin/admin.php:4699 inc/admin/admin.php:4776 inc/admin/admin.php:4853
+#: inc/admin/admin.php:4930
 msgid "Custom Dimension #7"
 msgstr "కస్టమ్ డైమెన్షన్ #7"
 
-#: inc/admin/admin.php:4535 inc/admin/admin.php:4612 inc/admin/admin.php:4689 inc/admin/admin.php:4766
-#: inc/admin/admin.php:4843
+#: inc/admin/admin.php:4625 inc/admin/admin.php:4702 inc/admin/admin.php:4779 inc/admin/admin.php:4856
+#: inc/admin/admin.php:4933
 msgid "Custom Dimension #8"
 msgstr "కస్టమ్ డైమెన్షన్ #8"
 
-#: inc/admin/admin.php:4538 inc/admin/admin.php:4615 inc/admin/admin.php:4692 inc/admin/admin.php:4769
-#: inc/admin/admin.php:4846
+#: inc/admin/admin.php:4628 inc/admin/admin.php:4705 inc/admin/admin.php:4782 inc/admin/admin.php:4859
+#: inc/admin/admin.php:4936
 msgid "Custom Dimension #9"
 msgstr "కస్టమ్ డైమెన్షన్ #9"
 
-#: inc/admin/admin.php:4541 inc/admin/admin.php:4618 inc/admin/admin.php:4695 inc/admin/admin.php:4772
-#: inc/admin/admin.php:4849
+#: inc/admin/admin.php:4631 inc/admin/admin.php:4708 inc/admin/admin.php:4785 inc/admin/admin.php:4862
+#: inc/admin/admin.php:4939
 msgid "Custom Dimension #10"
 msgstr "కస్టమ్ డైమెన్షన్ #10"
 
-#: inc/admin/admin.php:4544 inc/admin/admin.php:4621 inc/admin/admin.php:4698 inc/admin/admin.php:4775
-#: inc/admin/admin.php:4852
+#: inc/admin/admin.php:4634 inc/admin/admin.php:4711 inc/admin/admin.php:4788 inc/admin/admin.php:4865
+#: inc/admin/admin.php:4942
 msgid "Custom Dimension #11"
 msgstr "కస్టమ్ డైమెన్షన్ #11"
 
-#: inc/admin/admin.php:4547 inc/admin/admin.php:4624 inc/admin/admin.php:4701 inc/admin/admin.php:4778
-#: inc/admin/admin.php:4855
+#: inc/admin/admin.php:4637 inc/admin/admin.php:4714 inc/admin/admin.php:4791 inc/admin/admin.php:4868
+#: inc/admin/admin.php:4945
 msgid "Custom Dimension #12"
 msgstr "కస్టమ్ డైమెన్షన్ #12"
 
-#: inc/admin/admin.php:4550 inc/admin/admin.php:4627 inc/admin/admin.php:4704 inc/admin/admin.php:4781
-#: inc/admin/admin.php:4858
+#: inc/admin/admin.php:4640 inc/admin/admin.php:4717 inc/admin/admin.php:4794 inc/admin/admin.php:4871
+#: inc/admin/admin.php:4948
 msgid "Custom Dimension #13"
 msgstr "కస్టమ్ డైమెన్షన్ #13"
 
-#: inc/admin/admin.php:4553 inc/admin/admin.php:4630 inc/admin/admin.php:4707 inc/admin/admin.php:4784
-#: inc/admin/admin.php:4861
+#: inc/admin/admin.php:4643 inc/admin/admin.php:4720 inc/admin/admin.php:4797 inc/admin/admin.php:4874
+#: inc/admin/admin.php:4951
 msgid "Custom Dimension #14"
 msgstr "కస్టమ్ డైమెన్షన్ #14"
 
-#: inc/admin/admin.php:4556 inc/admin/admin.php:4633 inc/admin/admin.php:4710 inc/admin/admin.php:4787
-#: inc/admin/admin.php:4864
+#: inc/admin/admin.php:4646 inc/admin/admin.php:4723 inc/admin/admin.php:4800 inc/admin/admin.php:4877
+#: inc/admin/admin.php:4954
 msgid "Custom Dimension #15"
 msgstr "కస్టమ్ డైమెన్షన్ #15"
 
-#: inc/admin/admin.php:4559 inc/admin/admin.php:4636 inc/admin/admin.php:4713 inc/admin/admin.php:4790
-#: inc/admin/admin.php:4867
+#: inc/admin/admin.php:4649 inc/admin/admin.php:4726 inc/admin/admin.php:4803 inc/admin/admin.php:4880
+#: inc/admin/admin.php:4957
 msgid "Custom Dimension #16"
 msgstr "కస్టమ్ డైమెన్షన్ #16"
 
-#: inc/admin/admin.php:4562 inc/admin/admin.php:4639 inc/admin/admin.php:4716 inc/admin/admin.php:4793
-#: inc/admin/admin.php:4870
+#: inc/admin/admin.php:4652 inc/admin/admin.php:4729 inc/admin/admin.php:4806 inc/admin/admin.php:4883
+#: inc/admin/admin.php:4960
 msgid "Custom Dimension #17"
 msgstr "కస్టమ్ డైమెన్షన్ #17"
 
-#: inc/admin/admin.php:4565 inc/admin/admin.php:4642 inc/admin/admin.php:4719 inc/admin/admin.php:4796
-#: inc/admin/admin.php:4873
+#: inc/admin/admin.php:4655 inc/admin/admin.php:4732 inc/admin/admin.php:4809 inc/admin/admin.php:4886
+#: inc/admin/admin.php:4963
 msgid "Custom Dimension #18"
 msgstr "కస్టమ్ డైమెన్షన్ #18"
 
-#: inc/admin/admin.php:4568 inc/admin/admin.php:4645 inc/admin/admin.php:4722 inc/admin/admin.php:4799
-#: inc/admin/admin.php:4876
+#: inc/admin/admin.php:4658 inc/admin/admin.php:4735 inc/admin/admin.php:4812 inc/admin/admin.php:4889
+#: inc/admin/admin.php:4966
 msgid "Custom Dimension #19"
 msgstr "కస్టమ్ డైమెన్షన్ #19"
 
-#: inc/admin/admin.php:4571 inc/admin/admin.php:4648 inc/admin/admin.php:4725 inc/admin/admin.php:4802
-#: inc/admin/admin.php:4879
+#: inc/admin/admin.php:4661 inc/admin/admin.php:4738 inc/admin/admin.php:4815 inc/admin/admin.php:4892
+#: inc/admin/admin.php:4969
 msgid "Custom Dimension #20"
 msgstr "కస్టమ్ డైమెన్షన్ #20"
 
-#: inc/admin/admin.php:4897
+#: inc/admin/admin.php:4987
 msgid "Redirect attachment pages to post parent (or homepage if none)"
 msgstr "Redirect attachment pages to post parent (or homepage if none)"
 
-#: inc/admin/admin.php:4914
+#: inc/admin/admin.php:5004
 msgid "Remove stop words in permalinks"
 msgstr "Permalinks లో stop words ని ఆపివేయి"
 
-#: inc/admin/admin.php:4914
+#: inc/admin/admin.php:5004
 msgid "Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
 msgstr "సైట్ భాష ఆధారంగా సెట్ చేస్తోంది. మద్దతు ఉన్న భాష EN, FR, ES, DE, IT, PT,TE."
 
-#: inc/admin/admin.php:4931
+#: inc/admin/admin.php:5021
 msgid "Remove /category/ in your permalinks"
 msgstr "మీ permalinks లో / వర్గం / తొలగించు"
 
-#: inc/admin/admin.php:4931
+#: inc/admin/admin.php:5021
 msgid "You have to flush your permalinks each time you change this settings"
 msgstr ""
 
-#: inc/admin/admin.php:4948
+#: inc/admin/admin.php:5038
 msgid ""
 "You must check this box if the structure of your permalinks DOES NOT contain a slash at the end (eg: /"
 "%postname%)"
 msgstr "మీ permalinks  నిర్మాణం చివరిలో స్లాష్ను కలిగి ఉండకపోతే మీరు దీని ఎంచుకోవాలి (ఉదా: /% postname%)"
 
-#: inc/admin/admin.php:4960
+#: inc/admin/admin.php:5055
+msgid "Remove WordPress meta generator in source code"
+msgstr ""
+
+#: inc/admin/admin.php:5072
+msgid "Remove WordPress shortlink meta tag in source code (eg:"
+msgstr ""
+
+#: inc/admin/admin.php:5089
+msgid "Remove Windows Live Writer meta tag in source code (eg:"
+msgstr ""
+
+#: inc/admin/admin.php:5106
+msgid "Remove Really Simple Discovery meta tag in source code (eg:"
+msgstr ""
+
+#: inc/admin/admin.php:5118
 msgid "Enter Google meta value site verification"
 msgstr "Google మెటా విలువ సైట్ ధృవీకరణను నమోదు చేయండి"
 
-#: inc/admin/admin.php:4972
+#: inc/admin/admin.php:5130
 msgid "Enter Bing meta value site verification"
 msgstr "Bing మెటా విలువ సైట్ ధృవీకరణను నమోదు చేయండి"
 
-#: inc/admin/admin.php:4984
+#: inc/admin/admin.php:5142
 msgid "Enter Pinterest meta value site verification"
 msgstr "Pinterest మెటా విలువ సైట్ ధృవీకరణను నమోదు చేయండి"
 
-#: inc/admin/admin.php:4996
+#: inc/admin/admin.php:5154
 msgid "Enter Yandex meta value site verification"
 msgstr "Yandex మెటా విలువ సైట్ ధృవీకరణను నమోదు చేయండి"
 
-#: inc/admin/admin.php:5013
+#: inc/admin/admin.php:5171
 #, fuzzy
 #| msgid "Remove SEOPress from Admin Bar in backend"
 msgid "Remove SEOPress from Admin Bar in backend and frontend"
 msgstr "బ్యాకెండ్ లో అడ్మిన్ బార్ నుండి SEOPress తొలగించు"
 
-#: inc/admin/admin.php:5029
+#: inc/admin/admin.php:5187
 msgid "High priority (top)"
 msgstr "అధిక ప్రాధాన్యత (పైన)"
 
-#: inc/admin/admin.php:5032
+#: inc/admin/admin.php:5190
 msgid "Normal priority (default)"
 msgstr "సాధారణ ప్రాధాన్యత (డిఫాల్ట్)"
 
-#: inc/admin/admin.php:5035
+#: inc/admin/admin.php:5193
 msgid "Low priority"
 msgstr "తక్కువ ప్రాధాన్యత"
 
-#: inc/admin/admin.php:5053
+#: inc/admin/admin.php:5211
 msgid "Hide Notifications Center in SEOPress Dashboard page"
 msgstr "SEOPress డాష్బోర్డ్ పేజీ లో ప్రకటనలు సెంటర్ ని దాచు, ఈ బటన్ నొక్కండి"
 
-#: inc/admin/admin.php:5070
+#: inc/admin/admin.php:5228
 msgid "Add title column"
 msgstr "టైటిల్ కాలమ్ని జోడించండి"
 
-#: inc/admin/admin.php:5087
+#: inc/admin/admin.php:5245
 msgid "Add meta description column"
 msgstr "మెటా వివరణ నిలువు వరుసను జోడించండి"
 
-#: inc/admin/admin.php:5104
+#: inc/admin/admin.php:5262
+#, fuzzy
+#| msgid "Add title column"
+msgid "Add canonical URL column"
+msgstr "టైటిల్ కాలమ్ని జోడించండి"
+
+#: inc/admin/admin.php:5279
 #, fuzzy
 #| msgid "Add title column"
 msgid "Add target keyword column"
 msgstr "టైటిల్ కాలమ్ని జోడించండి"
 
-#: inc/admin/admin.php:5121
+#: inc/admin/admin.php:5296
 msgid "Display noindex status"
 msgstr "Noindex స్థితి ప్రదర్శించు"
 
-#: inc/admin/admin.php:5138
+#: inc/admin/admin.php:5313
 msgid "Display nofollow status"
 msgstr "నోఫాల్లో స్థితి ప్రదర్శించు"
 
-#: inc/admin/admin.php:5155
+#: inc/admin/admin.php:5330
 msgid "Display total number of words in content"
 msgstr "కంటెంట్లోని మొత్తం పదాల సంఖ్యను ప్రదర్శించండి"
 
-#: inc/admin/admin.php:5172
+#: inc/admin/admin.php:5347
 msgid "Display W3C column to check code quality"
 msgstr "కోడ్ నాణ్యత తనిఖీ W3C కాలమ్ ప్రదర్శించు"
 
-#: inc/admin/admin.php:5190
+#: inc/admin/admin.php:5365
 msgid "Display Page Speed column to check performances"
 msgstr "ప్రదర్శనలు తనిఖీ పేజీ స్పీడ్ కాలమ్ ప్రదర్శించు"
 
-#: inc/admin/admin.php:5208
+#: inc/admin/admin.php:5383
 msgid "Remove Genesis SEO Metaboxe"
 msgstr "Genesis SEO Metabox తొలగించు"
 
@@ -2400,59 +2500,65 @@ msgstr "BOT"
 msgid "Broken Links"
 msgstr "బ్రోకెన్ లింక్స్"
 
-#: inc/functions/options-advanced-admin.php:110 inc/functions/options-advanced-admin.php:599
+#: inc/functions/options-advanced-admin.php:123 inc/functions/options-advanced-admin.php:627
 msgid "Title tag"
 msgstr "శీర్షిక ట్యాగ్"
 
-#: inc/functions/options-advanced-admin.php:113
+#: inc/functions/options-advanced-admin.php:126
 msgid "Meta Desc."
 msgstr "మెటా DESC."
 
-#: inc/functions/options-advanced-admin.php:116
+#: inc/functions/options-advanced-admin.php:129 inc/functions/options-advanced-admin.php:643
+#, fuzzy
+#| msgid "Canonical URL"
+msgid "Canonical"
+msgstr "Canonical URL"
+
+#: inc/functions/options-advanced-admin.php:132
 msgid "Target Kw"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:119
+#: inc/functions/options-advanced-admin.php:135
 msgid "Noindex?"
 msgstr "Noindex?"
 
-#: inc/functions/options-advanced-admin.php:122
+#: inc/functions/options-advanced-admin.php:138
 msgid "Nofollow?"
 msgstr "Nofollow?"
 
-#: inc/functions/options-advanced-admin.php:125
+#: inc/functions/options-advanced-admin.php:141
 msgid "Count words?"
 msgstr "పదాలను కౌంట్ చేయాలా?"
 
-#: inc/functions/options-advanced-admin.php:128
+#: inc/functions/options-advanced-admin.php:144
 msgid "W3C check"
 msgstr "W3C చెక్"
 
-#: inc/functions/options-advanced-admin.php:131
+#: inc/functions/options-advanced-admin.php:147
 msgid "Page Speed"
 msgstr "పేజీ వేగం"
 
-#: inc/functions/options-advanced-admin.php:162
+#: inc/functions/options-advanced-admin.php:188
 msgid "Check code quality of this page"
 msgstr "ఈ పేజీ యొక్క కోడ్ నాణ్యత తనిఖీ చేయండి"
 
-#: inc/functions/options-advanced-admin.php:165
+#: inc/functions/options-advanced-admin.php:192
 msgid "Analyse this page with Google Page Speed"
 msgstr "ఈ పేజీని Google Page Speed ​​తో విశ్లేషించండి"
 
-#: inc/functions/options-advanced-admin.php:379
+#: inc/functions/options-advanced-admin.php:407
 msgid "Enable noindex"
 msgstr "Noindex ని ప్రారంభించండి"
 
-#: inc/functions/options-advanced-admin.php:432
+#: inc/functions/options-advanced-admin.php:460
 msgid "Enable index"
 msgstr "సూచికను ప్రారంభించు"
 
-#: inc/functions/options-advanced-admin.php:485
+#: inc/functions/options-advanced-admin.php:513
 msgid "Enable nofollow"
 msgstr "నోఫాల్లోని ప్రారంభించండి"
 
-#: inc/functions/options-advanced-admin.php:537
+#: inc/functions/options-advanced-admin.php:565
 msgid "Enable follow"
 msgstr "అనుసరించు ప్రారంభించు"
 
@@ -2476,23 +2582,23 @@ msgstr "రోజుకు ఒకసారి"
 msgid "XML Sitemaps"
 msgstr "XML సైట్ మ్యాప్లు"
 
-#: seopress.php:319
+#: seopress.php:262
 msgid "You like SEOPress? Don't forget to rate it 5 stars!"
 msgstr "మీరు SEOPress నచ్చిందా? 5 నక్షత్రాలు తో రేటింగ్ ఇవ్వండి!"
 
-#: seopress.php:366
+#: seopress.php:309
 msgid "Settings"
 msgstr "సెట్టింగులు"
 
-#: seopress.php:367
+#: seopress.php:310
 msgid "SEOPress.org"
 msgstr "SEOPress.org"
 
-#: seopress.php:369
+#: seopress.php:312
 msgid "GO PRO!"
 msgstr "GO PRO!"
 
-#: seopress.php:628
+#: seopress.php:571
 msgid ""
 "The PRO release of SEOPress with Google Local Business, Dublin Core, WooCommerce, Google Structured Data "
 "Types, Breadcrumbs, Google Page Speed, robots.txt, Google News, 404 monitoring, .htaccess, RSS, Broken "
@@ -2501,10 +2607,10 @@ msgstr ""
 "గూగుల్ స్థానిక వ్యాపారం, డబ్లిన్ కోర్, WooCommerce, గూగుల్ స్ట్రక్చర్డ్ డేటా రకాలు, బ్రెడ్క్రంబ్లు, గూగుల్ పేజి స్పీడ్, robots.txt, గూగుల్ "
 "న్యూస్, 404 పర్యవేక్షణ, .htaccess, RSS, బ్రోకెన్ లింక్లు, దారి మళ్లింపులు మరియు మరింత తో SEOPress యొక్క PRO లో వుంటుంది."
 
-#: seopress.php:647
+#: seopress.php:590
 msgid "Buy now"
 msgstr "ఇప్పుడే కొనండి"
 
-#: seopress.php:648
+#: seopress.php:591
 msgid "More details"
 msgstr "మరిన్ని వివరాలు"
