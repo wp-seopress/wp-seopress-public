@@ -429,9 +429,6 @@ function seopress_social_fb_title_hook() {
 			echo '<meta property="og:title" content="'.esc_attr(seopress_titles_the_title()).'" />'; 
 	 		echo "\n";
 	 	}
-	} elseif (seopress_social_facebook_og_option() =='1' && seopress_social_fb_title_post_option() !='') { 
- 		echo '<meta property="og:title" content="'.seopress_social_fb_title_post_option().'" />'; 
- 		echo "\n";
 	} elseif (is_tax() || is_category() || is_tag()) {
 		if (seopress_social_fb_title_term_option() !='') {
 			echo '<meta property="og:title" content="'.seopress_social_fb_title_term_option().'" />'; 
@@ -440,7 +437,10 @@ function seopress_social_fb_title_hook() {
  			echo '<meta property="og:title" content="'.single_term_title('', false).' - '.get_bloginfo('name').'" />'; 
  			echo "\n";
  		}
- 	} elseif (seopress_social_facebook_og_option() =='1' && function_exists('seopress_titles_the_title') && seopress_titles_the_title() !='') {
+ 	} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && seopress_social_fb_title_post_option() !='') { 
+ 		echo '<meta property="og:title" content="'.seopress_social_fb_title_post_option().'" />'; 
+ 		echo "\n";
+	} elseif (seopress_social_facebook_og_option() =='1' && function_exists('seopress_titles_the_title') && seopress_titles_the_title() !='') {
  		echo '<meta property="og:title" content="'.esc_attr(seopress_titles_the_title()).'" />'; 
 	 	echo "\n";
 	} elseif (seopress_social_facebook_og_option() =='1' && get_the_title() !='') { 
@@ -483,9 +483,6 @@ function seopress_social_fb_desc_hook() {
 	 		echo '<meta property="og:description" content="'.seopress_titles_the_description_content().'" />'; 
 	 		echo "\n";
 	 	}
-	} elseif (seopress_social_facebook_og_option() =='1' && seopress_social_fb_desc_post_option() !='') { 
- 		echo '<meta property="og:description" content="'.seopress_social_fb_desc_post_option().'" />'; 
- 		echo "\n";
 	} elseif (is_tax() || is_category() || is_tag()) {
 		if (seopress_social_fb_desc_term_option() !='') {
 			echo '<meta property="og:description" content="'.seopress_social_fb_desc_term_option().'" />'; 
@@ -494,6 +491,9 @@ function seopress_social_fb_desc_hook() {
 	 		echo '<meta property="og:description" content="'.wp_filter_nohtml_kses(term_description()).' - '.get_bloginfo('name').'" />'; 
 	 		echo "\n";
 	 	}
+	} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && seopress_social_fb_desc_post_option() !='') { 
+ 		echo '<meta property="og:description" content="'.seopress_social_fb_desc_post_option().'" />'; 
+ 		echo "\n";
 	} elseif (seopress_social_facebook_og_option() =='1' && function_exists('seopress_titles_the_description_content') && seopress_titles_the_description_content() !='') {
  		echo '<meta property="og:description" content="'.seopress_titles_the_description_content().'" />'; 
  		echo "\n";
@@ -733,9 +733,6 @@ function seopress_social_twitter_title_hook() {
 				echo '<meta name="twitter:title" content="'.esc_attr(seopress_titles_the_title()).'" />'; 
 		 		echo "\n";
 		 	}
-		} elseif (seopress_social_facebook_og_option() =='1' && seopress_social_fb_title_post_option() !='') { 
-	 		echo '<meta name="twitter:title" content="'.seopress_social_fb_title_post_option().'" />';
-	 		echo "\n";
 		} elseif (is_tax() || is_category() || is_tag()) {
 			if (seopress_social_fb_title_term_option() !='') {
 				echo '<meta name="twitter:title" content="'.seopress_social_fb_title_term_option().'" />'; 
@@ -744,6 +741,9 @@ function seopress_social_twitter_title_hook() {
 	 			echo '<meta name="twitter:title" content="'.single_term_title('', false).' - '.get_bloginfo('name').'" />'; 
 	 			echo "\n";
 	 		}
+		} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && seopress_social_fb_title_post_option() !='') { 
+	 		echo '<meta name="twitter:title" content="'.seopress_social_fb_title_post_option().'" />';
+	 		echo "\n";
 		} elseif (seopress_social_facebook_og_option() =='1' && function_exists('seopress_titles_the_title') && seopress_titles_the_title() !='') {
 	 		echo '<meta name="twitter:title" content="'.esc_attr(seopress_titles_the_title()).'" />'; 
 		 	echo "\n";
@@ -760,9 +760,6 @@ function seopress_social_twitter_title_hook() {
 				echo '<meta name="twitter:title" content="'.esc_attr(seopress_titles_the_title()).'" />'; 
 		 		echo "\n";
 		 	}
-		} elseif (seopress_social_twitter_card_option() =='1' && seopress_social_twitter_title_post_option() !='') { 
-	 		echo '<meta name="twitter:title" content="'.seopress_social_twitter_title_post_option().'" />';
-	 		echo "\n";
 		} elseif (is_tax() || is_category() || is_tag()) {
 			if (seopress_social_twitter_title_term_option() !='') {
 				echo '<meta name="twitter:title" content="'.seopress_social_twitter_title_term_option().'" />'; 
@@ -771,6 +768,9 @@ function seopress_social_twitter_title_hook() {
 	 			echo '<meta name="twitter:title" content="'.single_term_title('', false).' - '.get_bloginfo('name').'" />'; 
 	 			echo "\n";
 	 		}
+		} elseif (is_singular() && seopress_social_twitter_card_option() =='1' && seopress_social_twitter_title_post_option() !='') { 
+	 		echo '<meta name="twitter:title" content="'.seopress_social_twitter_title_post_option().'" />';
+	 		echo "\n";
 		} elseif (seopress_social_twitter_card_option() =='1' && function_exists('seopress_titles_the_title') && seopress_titles_the_title() !='') {
 	 		echo '<meta name="twitter:title" content="'.esc_attr(seopress_titles_the_title()).'" />'; 
 		 	echo "\n";
@@ -817,9 +817,6 @@ function seopress_social_twitter_desc_hook() {
 		 		echo '<meta name="twitter:description" content="'.seopress_titles_the_description_content().'" />'; 
 		 		echo "\n";
 		 	}
-		} elseif (seopress_social_facebook_og_option() =='1' && seopress_social_fb_desc_post_option() !='') { 
-	 		echo '<meta name="twitter:description" content="'.seopress_social_fb_desc_post_option().'" />';
-	 		echo "\n";
 		} elseif (is_tax() || is_category() || is_tag()) {
 	 		if (seopress_social_fb_desc_term_option() !='') {
 		 		echo '<meta name="twitter:description" content="'.seopress_social_fb_desc_term_option().'" />';
@@ -828,6 +825,9 @@ function seopress_social_twitter_desc_hook() {
 		 		echo '<meta name="twitter:description" content="'.wp_filter_nohtml_kses(term_description()).' - '.get_bloginfo('name').'" />'; 
 		 		echo "\n";
 		 	}
+		} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && seopress_social_fb_desc_post_option() !='') { 
+	 		echo '<meta name="twitter:description" content="'.seopress_social_fb_desc_post_option().'" />';
+	 		echo "\n";
 		} elseif (seopress_social_facebook_og_option() =='1' && function_exists('seopress_titles_the_description_content') && seopress_titles_the_description_content() !='') {
 	 		echo '<meta name="twitter:description" content="'.seopress_titles_the_description_content().'" />'; 
 	 		echo "\n";
@@ -845,9 +845,6 @@ function seopress_social_twitter_desc_hook() {
 		 		echo '<meta name="twitter:description" content="'.seopress_titles_the_description_content().'" />'; 
 		 		echo "\n";
 		 	}
-		} elseif (seopress_social_twitter_card_option() =='1' && seopress_social_twitter_desc_post_option() !='') { 
-	 		echo '<meta name="twitter:description" content="'.seopress_social_twitter_desc_post_option().'" />';
-	 		echo "\n";
 		} elseif (is_tax() || is_category() || is_tag()) {
 	 		if (seopress_social_twitter_desc_term_option() !='') {
 		 		echo '<meta name="twitter:description" content="'.seopress_social_twitter_desc_term_option().'" />';
@@ -856,6 +853,9 @@ function seopress_social_twitter_desc_hook() {
 		 		echo '<meta name="twitter:description" content="'.wp_filter_nohtml_kses(term_description()).' - '.get_bloginfo('name').'" />'; 
 		 		echo "\n";
 		 	}
+		} elseif (is_singular() && seopress_social_twitter_card_option() =='1' && seopress_social_twitter_desc_post_option() !='') { 
+	 		echo '<meta name="twitter:description" content="'.seopress_social_twitter_desc_post_option().'" />';
+	 		echo "\n";
 		} elseif (seopress_social_twitter_card_option() =='1' && function_exists('seopress_titles_the_description_content') && seopress_titles_the_description_content() !='') {
 	 		echo '<meta name="twitter:description" content="'.seopress_titles_the_description_content().'" />'; 
 	 		echo "\n";

@@ -149,7 +149,7 @@ echo '<div id="seopress-tabs">';
         echo '<div class="box-left">
                 <p>
                     <label for="seopress_titles_title_meta">'. __( 'Title', 'wp-seopress' ) .'</label>
-                    <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.__('Enter your title','wp-seopress').'" value="'.$seopress_titles_title.'" />
+                    <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.esc_html__('Enter your title','wp-seopress').'" value="'.$seopress_titles_title.'" />
                 </p> 
                 <div class="wrap-seopress-counters">
                     <div id="seopress_titles_title_counters"></div>
@@ -157,7 +157,7 @@ echo '<div id="seopress-tabs">';
                 </div>
                 <p>
                     <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
-                    <textarea id="seopress_titles_desc_meta" style="width:100%" rows="8" name="seopress_titles_desc" placeholder="'.__('Enter your meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
+                    <textarea id="seopress_titles_desc_meta" style="width:100%" rows="8" name="seopress_titles_desc" placeholder="'.esc_html__('Enter your meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
                 </p>
                 <div class="wrap-seopress-counters">
                     <div id="seopress_titles_desc_counters"></div>
@@ -227,13 +227,13 @@ echo               '<div class="snippet-description">'.seopress_titles_desc($seo
             </p>
             <p>
                 <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
-                <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.__('Default value: ','wp-seopress').get_permalink().'" value="'.$seopress_robots_canonical.'" />
+                <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').get_permalink().'" value="'.$seopress_robots_canonical.'" />
             </p>';
             if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                 if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                     echo '<p>
                         <label for="seopress_robots_breadcrumbs_meta">'. __( 'Custom breadcrumbs', 'wp-seopress' ) .'</label>
-                        <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.__('Enter a custom value, useful if your title is too long','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
+                        <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.esc_html__('Enter a custom value, useful if your title is too long','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
                     </p>';
                 }
             }
@@ -244,32 +244,32 @@ echo               '<div class="snippet-description">'.seopress_titles_desc($seo
             <span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">'.__('Ask Facebook to update his cache','wp-seopress').'</a>
             <p>
                 <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'wp-seopress' ) .'</label>
-                <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.__('Enter your Facebook title','wp-seopress').'" value="'.$seopress_social_fb_title.'" />
+                <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.esc_html__('Enter your Facebook title','wp-seopress').'" value="'.$seopress_social_fb_title.'" />
             </p>
             <p>
                 <label for="seopress_social_fb_desc_meta">'. __( 'Facebook description', 'wp-seopress' ) .'</label>
-                <textarea id="seopress_social_fb_desc_meta" name="seopress_social_fb_desc" placeholder="'.__('Enter your Facebook description','wp-seopress').'" value="'.$seopress_social_fb_desc.'">'.$seopress_social_fb_desc.'</textarea>
+                <textarea id="seopress_social_fb_desc_meta" name="seopress_social_fb_desc" placeholder="'.esc_html__('Enter your Facebook description','wp-seopress').'" value="'.$seopress_social_fb_desc.'">'.$seopress_social_fb_desc.'</textarea>
             </p> 
             <p>
                 <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'wp-seopress' ) .'</label>
                 <span class="advise">'. __('Minimum size: 200x200px', 'wp-seopress') .'</span>
-                <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
+                <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
                 <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
             </p>
             <br/>
             <span class="dashicons dashicons-twitter"></span>
             <p>
                 <label for="seopress_social_twitter_title_meta">'. __( 'Twitter Title', 'wp-seopress' ) .'</label>
-                <input id="seopress_social_twitter_title_meta" type="text" name="seopress_social_twitter_title" placeholder="'.__('Enter your Twitter title','wp-seopress').'" value="'.$seopress_social_twitter_title.'" />
+                <input id="seopress_social_twitter_title_meta" type="text" name="seopress_social_twitter_title" placeholder="'.esc_html__('Enter your Twitter title','wp-seopress').'" value="'.$seopress_social_twitter_title.'" />
             </p>
             <p>
                 <label for="seopress_social_twitter_desc_meta">'. __( 'Twitter description', 'wp-seopress' ) .'</label>
-                <textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc" placeholder="'.__('Enter your Twitter description','wp-seopress').'" value="'.$seopress_social_twitter_desc.'">'.$seopress_social_twitter_desc.'</textarea>
+                <textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc" placeholder="'.esc_html__('Enter your Twitter description','wp-seopress').'" value="'.$seopress_social_twitter_desc.'">'.$seopress_social_twitter_desc.'</textarea>
             </p> 
             <p>
                 <label for="seopress_social_twitter_img_meta">'. __( 'Twitter Thumbnail', 'wp-seopress' ) .'</label>
                 <span class="advise">'. __('Minimum size: 160x160px', 'wp-seopress') .'</span>
-                <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_twitter_img.'" />
+                <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_twitter_img.'" />
                 <input id="seopress_social_twitter_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
             </p>
         </div>';
@@ -289,7 +289,7 @@ echo               '<div class="snippet-description">'.seopress_titles_desc($seo
                     <option ' . selected( '302', $seopress_redirections_type, false ) . ' value="302">'. __( '302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)', 'wp-seopress' ) .'</option>
                     <option ' . selected( '307', $seopress_redirections_type, false ) . ' value="307">'. __( '307 Moved Temporarily (HTTP 1.1 Only)', 'wp-seopress' ) .'</option>
                 </select>
-                <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.__('Enter your new URL','wp-seopress').'" value="'.$seopress_redirections_value.'" />
+                <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.esc_html__('Enter your new URL','wp-seopress').'" value="'.$seopress_redirections_value.'" />
                 <br><br>';
                 if ($seopress_redirections_value !='' && $seopress_redirections_enabled =='yes') {
                     if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
@@ -352,7 +352,7 @@ You haven\'t used standout on your own articles more than seven times in the pas
                         <p>
                             <label for="seopress_news_keyboard_meta" id="seopress_news_keyboard">
                                 '. __( 'Google News Keywords <em>(max recommended limit: 12)</em>', 'wp-seopress' ) .'</label>
-                                <input id="seopress_news_keyboard_meta" type="text" name="seopress_news_keyboard" placeholder="'.__('Enter your Google News Keywords','wp-seopress').'" value="'.$seopress_news_keyboard.'" />
+                                <input id="seopress_news_keyboard_meta" type="text" name="seopress_news_keyboard" placeholder="'.esc_html__('Enter your Google News Keywords','wp-seopress').'" value="'.$seopress_news_keyboard.'" />
                         </p>
                     </div>';
                 }

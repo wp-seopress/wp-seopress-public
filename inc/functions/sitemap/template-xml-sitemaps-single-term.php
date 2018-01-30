@@ -14,6 +14,7 @@ function seopress_xml_sitemap_single_term() {
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 	$args = array('taxonomy' => $path,'hide_empty' => false, 'number' => 1000, 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '');
+	$args = apply_filters('seopress_sitemaps_single_term_query', $args, $path);
 	$termslist = get_terms( $args );
 	foreach ( $termslist as $term ) {
 		$seopress_sitemaps .= "\n";

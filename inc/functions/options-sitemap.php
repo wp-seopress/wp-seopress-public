@@ -71,22 +71,23 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
 						$obj = get_post_type_object( $cpt_key );
 						$content .= '<h2>'.$obj->labels->singular_name.'</h2>';
 						foreach ($cpt_value as $_cpt_key => $_cpt_value) {
-							$content .= '<ul>';
 							if($_cpt_value =='1') {
-						    	$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'date', 'post_type' => $cpt_key, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'exclude' => $seopress_xml_sitemap_html_exclude_option );
-								$postslist = get_posts( $args );
-								foreach ( $postslist as $post ) {
-								  	setup_postdata( $post );
-								  	$content .= '<li>';
-									$content .= '<a href="'.get_permalink($post).'">'.get_the_title($post).'</a>';
-									if (seopress_xml_sitemap_html_date_option() !='1') {
-										$content .= ' - '.get_the_date('j F Y', $post);
+								$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'date', 'post_type' => $cpt_key, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'exclude' => $seopress_xml_sitemap_html_exclude_option );
+								if ($cpt_key =='post') {
+									$cats = get_categories('orderby=name&order=ASC');
+									if (!empty($cats)) {
+										foreach($cats as $cat) {
+											$content .= '<h3>'.$cat->name.'</h3>';
+											unset($args['cat']);
+											$args['cat'][] = $cat->term_id;
+											require(dirname( __FILE__ ) . '/sitemap/template-html-sitemap.php');
+										}
 									}
-									$content .= '</li>';
+								} else {
+									require(dirname( __FILE__ ) . '/sitemap/template-html-sitemap.php');
 								}
-								wp_reset_postdata();
 							}
-							$content .= '</ul>';
+							
 						}
 					}
 					$content .= '</div>';

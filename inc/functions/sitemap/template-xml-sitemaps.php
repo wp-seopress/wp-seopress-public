@@ -18,7 +18,12 @@ function seopress_xml_sitemap_index() {
 		foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
 			foreach ($cpt_value as $_cpt_key => $_cpt_value) {
 				if($_cpt_value =='1') {
-					$get_latest_post = new WP_Query(array('post_type' => $cpt_key, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'orderby' => 'modified', 'lang' => ''));
+					$args = array('post_type' => $cpt_key, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'orderby' => 'modified', 'lang' => '');
+					
+					$args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
+
+					$get_latest_post = new WP_Query($args);
+
 				    if($get_latest_post->have_posts()){
 						$seopress_sitemaps .= "\n";
 						$seopress_sitemaps .= '<sitemap>';
@@ -48,11 +53,14 @@ function seopress_xml_sitemap_index() {
 			}
 		}
 		foreach ($seopress_xml_terms_list as $term_value) {
-			$terms = get_terms( array(
+			$args = array(
 			    'taxonomy' => $term_value,
 			    'hide_empty' => false,
 			    'lang' => ''
-			));
+			);
+			$args = apply_filters('seopress_sitemaps_index_tax_query', $args, $term_value);
+			
+			$terms = get_terms($args);
 			
 			if (!empty($terms)) {
 				$seopress_sitemaps .= "\n";
@@ -69,7 +77,33 @@ function seopress_xml_sitemap_index() {
 
 	//Google News
 	if (function_exists("seopress_xml_sitemap_news_enable_option") && seopress_xml_sitemap_news_enable_option() !='') {
-		$get_latest_post = new WP_Query(array('post_type' => 'post', 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'orderby' => 'modified', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC'));
+		//Include Custom Post Types
+		function seopress_xml_sitemap_news_cpt_option() {
+	    	$seopress_xml_sitemap_news_cpt_option = get_option("seopress_pro_option_name");
+		    if ( ! empty ( $seopress_xml_sitemap_news_cpt_option ) ) {
+		        foreach ($seopress_xml_sitemap_news_cpt_option as $key => $seopress_xml_sitemap_news_cpt_value)
+		            $options[$key] = $seopress_xml_sitemap_news_cpt_value;
+		         if (isset($seopress_xml_sitemap_news_cpt_option['seopress_news_name_post_types_list'])) { 
+		            return $seopress_xml_sitemap_news_cpt_option['seopress_news_name_post_types_list'];
+		         }
+		    }
+		}
+		if (seopress_xml_sitemap_news_cpt_option() !='') {
+			$seopress_xml_sitemap_news_cpt_array = array();
+		    foreach (seopress_xml_sitemap_news_cpt_option() as $cpt_key => $cpt_value) {
+		        foreach ($cpt_value as $_cpt_key => $_cpt_value) {
+		            if($_cpt_value =='1') {
+		                array_push($seopress_xml_sitemap_news_cpt_array, $cpt_key);
+		            }
+		        }
+		    }
+		}
+		
+		$args = array('post_type' => $seopress_xml_sitemap_news_cpt_array, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'orderby' => 'modified', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'lang' => '');
+
+		$args = apply_filters('seopress_sitemaps_index_gnews_query', $args);
+
+		$get_latest_post = new WP_Query($args);
 	    if($get_latest_post->have_posts()){
 	    	$seopress_sitemaps .= "\n";
 			$seopress_sitemaps .= '<sitemap>';

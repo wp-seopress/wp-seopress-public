@@ -27,6 +27,9 @@ function seopress_xml_sitemap_single() {
 	$seopress_sitemaps .= "\n";
 	
 				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '' );
+
+				$args = apply_filters('seopress_sitemaps_single_query', $args, $path);
+
 				$postslist = get_posts( $args );
 				foreach ( $postslist as $post ) {
 				  	setup_postdata( $post );
