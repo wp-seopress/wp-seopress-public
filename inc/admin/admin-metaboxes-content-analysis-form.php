@@ -4,7 +4,7 @@ echo '<div id="seopress-analysis-tabs">
         <p>
             '.__('Enter a few keywords for analysis and help you write optimized content.','wp-seopress').'
             <label for="seopress_analysis_target_kw_meta">'. __( 'Target keywords', 'wp-seopress' ) .'</label>
-            <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" value="'.$seopress_analysis_target_kw.'" />
+            <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" aria-label="'.__('Target keywords','wp-seopress').'" value="'.$seopress_analysis_target_kw.'" />
             <span class="howto">'.__('Separate target keywords with commas','wp-seopress').'</span>
         </p>';
 

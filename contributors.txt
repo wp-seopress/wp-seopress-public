@@ -6,6 +6,10 @@ Developers:
 SEO consultant:
 - Alan Cladx: @cladxxx
 
+A11Y:
+- Thierry Pigot: @thierrypigot
+- Claire Bizingre: @accesbilis
+
 Beta testers / feedbacks:
 - Mickael Gris: mickael.gris@gmail.com / @mickaelgris
 - Aurélien Denis: contact@wp-alacarte.com / @wpchannel

@@ -1,3 +1,24 @@
+//Retreive title / meta-desc from source code
+jQuery(document).ready(function(){
+    jQuery.ajax({
+        method : 'GET',
+        url : seopressAjaxRealPreview.seopress_real_preview,
+        data: {
+            action: 'seopress_do_real_preview',
+            post_id: jQuery('#seopress-tabs').attr('data_id'),
+            tax_name: jQuery('#seopress-tabs').attr('data_tax'),
+            origin: jQuery('#seopress-tabs').attr('data_origin'),
+            _ajax_nonce: seopressAjaxRealPreview.seopress_nonce,
+        },
+        success : function( data ) {
+            jQuery( '#seopress_cpt .google-snippet-preview .snippet-title' ).html(data.data.title);
+            jQuery( '#seopress_cpt .google-snippet-preview .snippet-title-default' ).html(data.data.title);
+            jQuery( '#seopress_cpt .google-snippet-preview .snippet-description' ).html(data.data.meta_desc);
+            jQuery( '#seopress_cpt .google-snippet-preview .snippet-description-default' ).html(data.data.meta_desc);
+        },
+    });
+});
+
 //Title tag counters / live preview
 jQuery(document).ready(function(){
     jQuery("#seopress_titles_title_counters").after("<div id=\"seopress_titles_title_counters_val\">/ 60</div>");

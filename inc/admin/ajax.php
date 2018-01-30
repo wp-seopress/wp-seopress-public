@@ -2,6 +2,78 @@
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+//Get real preview
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_do_real_preview() {
+    check_ajax_referer( 'seopress_real_preview_nonce', $_POST['_ajax_nonce'], true );
+    
+    //Get post id
+    if ( isset( $_GET['post_id'] ) ) {
+        $seopress_get_the_id = $_GET['post_id'];
+    }
+
+    //Origin
+    if ( isset( $_GET['origin'] ) ) {
+        $seopress_origin = $_GET['origin'];
+    }
+
+    //Tax name
+    if ( isset( $_GET['tax_name'] ) ) {
+        $seopress_tax_name = $_GET['tax_name'];
+    }
+
+    //Init
+    $title = '';
+    $meta_desc = '';
+    $data = array();
+
+    //DOM
+    $dom = new DOMDocument();
+    $internalErrors = libxml_use_internal_errors(true);
+    $dom->preserveWhiteSpace = false;
+    
+    //Get source code
+    $args = array(
+        'blocking' => true,
+        'timeout'  => 5,
+    );
+
+    if ($seopress_origin =='post') { //Default: post type
+        $response = wp_remote_retrieve_body(wp_remote_get(get_permalink($seopress_get_the_id), $args));
+    } else { //Term taxonomy
+        $response = wp_remote_retrieve_body(wp_remote_get(get_term_link((int)$seopress_get_the_id, $seopress_tax_name), $args));
+    }
+
+    //Check for error
+    if ( is_wp_error( $response ) ) {
+        return;
+    } else {
+        if($dom->loadHTML($response)) {
+            //Title
+            $list = $dom->getElementsByTagName("title");
+            if ($list->length > 0) {
+                $title = $list->item(0)->textContent;
+                $data['title'] = $title;
+            }
+
+            //Meta desc
+            $xpath = new DOMXPath($dom);
+            $meta_description = $xpath->query('//meta[@name="description"]/@content');
+
+            foreach ($meta_description as $key=>$mdesc) {
+                $data['meta_desc'] = $mdesc->nodeValue;
+            }
+        }
+    }
+    
+    libxml_use_internal_errors($internalErrors);
+
+    //Return
+    wp_send_json_success($data);
+}
+add_action('wp_ajax_seopress_do_real_preview', 'seopress_do_real_preview');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 //Content analysis
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_do_content_analysis() {

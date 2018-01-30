@@ -677,6 +677,9 @@ body.seopress-styles {
 .seopress-option textarea {
     min-width: 485px;
 }
+#seopress_htaccess_file {
+    width: 100%;
+}
 .seopress-option textarea {
     min-height: 100px;
 }
@@ -885,6 +888,7 @@ body.seopress-styles {
     padding-left: 20px;
     line-height: 34px;
     min-height: 34px;
+    margin-bottom: 10px;
     border-radius: 4px;
     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),0 3px 6px rgba(0, 0, 0, 0.1);
     vertical-align: baseline;
@@ -912,6 +916,24 @@ body.seopress-styles {
     color: #FFF;
     background: #232323;
 }
+#seopress-content a:focus,
+#seopress-content .seopress-page-list .seopress-feature a:focus, 
+.seopress-option .seopress-feature a:focus, 
+#seopress-notifications-center .seopress-alert .button-primary:focus, 
+.seopress-useful-tools .widget .button-primary:focus,
+#seopress-content .seopress-page-list .seopress-feature a:focus.button-secondary,
+.seopress-styles .seopress-option #submit:focus, 
+.seopress-styles .seopress-option #seopress-yoast-migrate:focus,
+#seopress-content .seopress-page-list .seopress-feature .seopress-doc:focus, 
+.seopress-option #seopress-tabs .seopress-doc:focus {
+    box-shadow: 0 1px 0 #0073aa, 0 0 2px 1px #33b3db;
+    background: #008ec2;
+    border-color: #006799;
+    color: #fff;
+}
+#seopress-admin-tabs .nav-tab-wrapper a.nav-tab-active:focus {
+    color:inherit;
+}
 #seopress-notifications-center .seopress-alert .button-primary {
     float: right;
     margin: 5px 0;
@@ -935,7 +957,6 @@ body.seopress-styles {
     transition: all 150ms ease;
 }
 #seopress-notifications-center .seopress-alert:hover {
-    font-weight: bold;
     cursor: default;
 }
 #seopress-notifications-center .seopress-alert p {
@@ -1047,6 +1068,7 @@ body.seopress-styles {
 #tab_seopress_page_speed .inside li {
     list-style: none;
     padding-left: 0;
+    word-break: break-word;
 }
 .seopress-option .log {
     margin: 0;
@@ -1427,7 +1449,9 @@ body.seopress-styles {
     background-color: #fff;
 }
 .seopress-option .nav-tab-active, .nav-tab-active:focus, .seopress-option .nav-tab-active:focus:active, .seopress-option .nav-tab-active:hover,
-#seopress-admin-tabs .nav-tab-active, #seopress-admin-tabs .nav-tab-active:focus, #seopress-admin-tabs .nav-tab-active:focus:active, #seopress-admin-tabs .nav-tab-active:hover {
+#seopress-admin-tabs .nav-tab-active, #seopress-admin-tabs .nav-tab-active:focus, #seopress-admin-tabs .nav-tab-active:focus:active, #seopress-admin-tabs .nav-tab-active:hover,
+#seopress-admin-tabs .nav-tab:focus, 
+.seopress-option .nav-tab:focus {
     background: none;
     opacity: 1;
     outline: none;
@@ -1439,142 +1463,4 @@ body.seopress-styles {
 .seopress-option .nav-tab:focus, #seopress-admin-tabs .nav-tab:focus {
     outline: none; 
     box-shadow: none;  
-}
-
-/* Modal */
-.md-perspective,
-.md-perspective body {
-    height: 100%;
-    overflow: hidden;
-}
-
-.md-perspective body  {
-    background: #222;
-    -webkit-perspective: 600px;
-    -moz-perspective: 600px;
-    perspective: 600px;
-}
-
-.container {
-    background: #e74c3c;
-    min-height: 100%;
-}
-
-.md-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    max-width: 990px;
-    min-width: 320px;
-    height: auto;
-    z-index: 2000000;
-    visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -ms-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-}
-
-.md-show {
-    visibility: visible;
-}
-
-.md-overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    visibility: hidden;
-    top: 0;
-    left: 0;
-    z-index: 1000000;
-    opacity: 0;
-    background: rgba(143,27,15,0.8);
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-}
-
-.md-show ~ .md-overlay {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Content styles */
-.md-content {
-    color: #fff;
-    background: #e74c3c;
-    position: relative;
-    border-radius: 3px;
-    margin: 0 auto;
-}
-
-.md-content h3 {
-    margin: 0;
-    padding: 0.4em;
-    text-align: center;
-    font-size: 2.4em;
-    font-weight: 300;
-    opacity: 0.8;
-    background: rgba(0,0,0,0.1);
-    border-radius: 3px 3px 0 0;
-}
-
-.md-content > div {
-    padding: 15px 40px 30px;
-    margin: 0;
-    font-weight: 300;
-    font-size: 1.15em;
-}
-
-.md-content > div p {
-    margin: 0;
-    padding: 10px 0;
-}
-
-.md-content > div ul {
-    margin: 0;
-    padding: 0 0 30px 20px;
-}
-
-.md-content > div ul li {
-    padding: 5px 0;
-}
-
-.md-content button {
-    display: block;
-    margin: 0 auto;
-    font-size: 0.8em;
-}
-
-.md-effect-12 .md-content {
-    -webkit-transform: scale(0.8);
-    -moz-transform: scale(0.8);
-    -ms-transform: scale(0.8);
-    transform: scale(0.8);
-    opacity: 0;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-}
-
-.md-show.md-effect-12 ~ .md-overlay {
-    background: #fafafa;
-    overflow: hidden;
-} 
-
-.md-effect-12 .md-content h3,
-.md-effect-12 .md-content {
-    background: transparent;
-}
-
-.md-show.md-effect-12 .md-content {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-    opacity: 1;
 }

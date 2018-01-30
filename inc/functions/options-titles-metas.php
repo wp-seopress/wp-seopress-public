@@ -250,8 +250,10 @@ if (get_option('blog_public') =='1') {
 		}
 
 		$seopress_excerpt ='';
-		if (has_excerpt($post->ID)) {
-			$seopress_excerpt = get_the_excerpt();
+		if (!is_404()) {
+			if (has_excerpt($post->ID)) {
+				$seopress_excerpt = get_the_excerpt();
+			}
 		}
 
 		$the_author_meta ='';
@@ -497,8 +499,10 @@ if (get_option('blog_public') =='1') {
 		}
 
 		$seopress_excerpt ='';
-		if (has_excerpt($post->ID)) {
-			$seopress_excerpt = get_the_excerpt();
+		if (!is_404()) {
+			if (has_excerpt($post->ID)) {
+				$seopress_excerpt = get_the_excerpt();
+			}
 		}
 
 		if (get_query_var('paged') >='1') {

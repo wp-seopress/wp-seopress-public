@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
 "POT-Creation-Date: 2018-01-13 16:13+0100\n"
-"PO-Revision-Date: 2018-01-13 16:13+0100\n"
+"PO-Revision-Date: 2018-01-20 14:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-KeywordsList: __;_e;_x;esc_attr_e;esc_attr__;esc_html__;esc_html_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -253,7 +253,7 @@ msgstr "Se encontraron keywords de destino en Título de Publicación."
 #: inc/admin/admin-metaboxes-content-analysis-form.php:138
 #, php-format
 msgid "%s was found %d times."
-msgstr ""
+msgstr "%s se encontró %d veces."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:59
 msgid "None of your target keywords were found in the Post Title."
@@ -273,7 +273,7 @@ msgstr "H1 (Título 1)"
 #: inc/admin/admin-metaboxes-content-analysis-form.php:69
 #, php-format
 msgid "We found %d Heading 1 (H1) in your content."
-msgstr ""
+msgstr "Encontramos %d Título 1 (H1) en tu contenido."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:70
 msgid ""
@@ -471,6 +471,8 @@ msgid ""
 "We found %d links with nofollow attribute in your page. Do not overuse "
 "nofollow attribute in links. Below, the list:"
 msgstr ""
+"Encontramos %d enlaces con el atributo nofollow en tu página. No uses en "
+"exceso el atributo nofollow en los enlaces. A continuación, la lista:"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:251
 msgid "This page doesn't have any nofollow links."
@@ -720,11 +722,8 @@ msgid "Exclude this post from Google News Sitemap?"
 msgstr "¿Excluir este post de Google News Sitemap?"
 
 #: inc/admin/admin-metaboxes-form.php:323
-#, fuzzy
-#| msgid "No post title set for this post!"
 msgid "Use the standout tag for this post?"
-msgstr ""
-"¡No hay ningún título de publicación establecido para esta publicación!"
+msgstr "¿Usar la etiqueta destacada para esta publicación?"
 
 #: inc/admin/admin-metaboxes-form.php:324
 msgid ""
@@ -735,10 +734,16 @@ msgid ""
 "You haven't used standout on your own articles more than seven times in the "
 "past calendar week."
 msgstr ""
+"Tu artículo es una fuente original para la historia.\n"
+"Tu organización invirtió recursos significativos en informar o producir el "
+"artículo.\n"
+"El artículo merece un reconocimiento especial.\n"
+"No has utilizado etiquetas destacadas en tus propios artículos más de siete "
+"veces en la última semana."
 
 #: inc/admin/admin-metaboxes-form.php:338
 msgid "Learn how to use correctly the standout tag"
-msgstr ""
+msgstr "Aprende a usar correctamente la etiqueta destacada"
 
 #: inc/admin/admin-metaboxes-form.php:341
 msgid "Google News Genres"
@@ -1466,7 +1471,7 @@ msgstr "Google Trends"
 
 #: inc/admin/admin.php:1243
 msgid "Dareboost: Test, analyze and optimize your website"
-msgstr ""
+msgstr "Dareboost: prueba, analiza y optimiza tu sitio web"
 
 #: inc/admin/admin.php:1244
 msgid "Google Campaign URL Builder tool"
@@ -1707,10 +1712,8 @@ msgid "Select a default image"
 msgstr "Seleccionar una imagen predeterminada"
 
 #: inc/admin/admin.php:2407
-#, fuzzy
-#| msgid "Facebook Admin ID"
 msgid "Facebook Link Ownership ID"
-msgstr "Facebook admin ID"
+msgstr "ID de propiedad del enlace de Facebook"
 
 #: inc/admin/admin.php:2415
 msgid "Facebook Admin ID"
@@ -1883,10 +1886,8 @@ msgid "Show Meta description column in post types"
 msgstr "Mostrar columna de descripción Meta en tipos de post"
 
 #: inc/admin/admin.php:2809
-#, fuzzy
-#| msgid "Show noindex column in post types"
 msgid "Show canonical URL column in post types"
-msgstr "Mostrar columna noindex en tipos de post"
+msgstr "Mostrar la columna de URL canónica en los tipos de publicaciones"
 
 #: inc/admin/admin.php:2817
 msgid "Show Target Keyword column in post types"
@@ -2602,10 +2603,8 @@ msgid "Add meta description column"
 msgstr "Añadir columna de metadescripción"
 
 #: inc/admin/admin.php:5297
-#, fuzzy
-#| msgid "Add title column"
 msgid "Add canonical URL column"
-msgstr "Añadir columna de título"
+msgstr "Añadir columna de URL canónica"
 
 #: inc/admin/admin.php:5314
 msgid "Add target keyword column"
@@ -2654,10 +2653,8 @@ msgstr "Meta Descripción."
 
 #: inc/functions/options-advanced-admin.php:129
 #: inc/functions/options-advanced-admin.php:643
-#, fuzzy
-#| msgid "Canonical URL"
 msgid "Canonical"
-msgstr "URL canónica"
+msgstr "Canónica"
 
 #: inc/functions/options-advanced-admin.php:132
 msgid "Target Kw"

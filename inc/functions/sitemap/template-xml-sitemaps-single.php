@@ -25,6 +25,21 @@ function seopress_xml_sitemap_single() {
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 	$seopress_sitemaps .= "\n";
+
+			if (get_post_type_archive_link($path) ==true) {
+				$seopress_sitemaps .= '<url>';
+			  	$seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= '<loc>';
+				$seopress_sitemaps .= get_post_type_archive_link($path);
+				$seopress_sitemaps .= '</loc>';
+				$seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= '<lastmod>';
+				$seopress_sitemaps .= '';
+				$seopress_sitemaps .= '</lastmod>';
+				$seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= '</url>';
+				$seopress_sitemaps .= "\n";
+			}
 	
 				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '' );
 

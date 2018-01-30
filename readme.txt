@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta, title, meta description, open graph
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.4
+Stable tag: 2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,6 +153,20 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.5 =
+* NEW Google Analytics: Moving from analytics.js to gtag.js
+* NEW Huge improvement for accessibility (thanks to @thierrypigot for his feedbacks)
+* NEW Real Google Snippet Preview: meta title and description are now read from your source code
+* NEW 404 email alert redesign (PRO Only)
+* NEW Page Speed email alert redesign (PRO Only)
+* INFO Improve Page Speed design page (PRO Only)
+* INFO Add post type archive link in XML sitemaps
+* INFO Increase htaccess textarea width
+* INFO Add a default value for meta description at plugin activation
+* INFO Redirections now support Query String
+* FIX 4 Notices
+* FIX CSS conflicts
+* FIX Notice seopress_xml_terms_list in XML sitemaps (thanks to @lriaudel)
 = 2.4 =
 * NEW Add priceRange field for Local Business (PRO Only)
 * NEW Add 'seopress_sitemaps_single_query' hook to filter XML Sitemap query for single post type

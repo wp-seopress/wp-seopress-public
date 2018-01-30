@@ -54,7 +54,14 @@ function seopress_display_seo_metaboxe() {
 
     function seopress_cpt($post){
         wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', dirname(dirname(__FILE__ ))), array( 'jquery-ui-tabs' ));
+
         wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery' ), '1.1' );
+
+        $seopress_real_preview = array(
+            'seopress_nonce' => wp_create_nonce('seopress_real_preview_nonce'),
+            'seopress_real_preview' => admin_url('admin-ajax.php'),
+        );
+        wp_localize_script( 'seopress-cpt-counters-js', 'seopressAjaxRealPreview', $seopress_real_preview );
     
         wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', dirname(dirname( __FILE__ ))), array('jquery'), '', false );
         wp_enqueue_media();
