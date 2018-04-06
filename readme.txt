@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,7 +153,9 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
-* 2.6.2 =
+= 2.6.3 =
+* FIX Regression on canonical
+= 2.6.2 =
 * FIX Regression Google Analytics introduced in 2.6.1
 = 2.6.1 =
 * NEW Russian language for SEOPress PRO (thanks to @Dmitriy)
