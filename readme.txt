@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta, title, meta description, open graph
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,6 +153,8 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.5.2 =
+* FIX Google Analytics
 = 2.5.1 =
 * FIX Fatal error in XML Sitemaps
 = 2.5 =

@@ -289,6 +289,8 @@ gtag('js', new Date());\n";
 				!empty($seopress_google_analytics_config['cd_categories']) ||
 				!empty($seopress_google_analytics_config['cd_author'])) {
 				$seopress_google_analytics_config['cd_end'] = "}, ";
+			} else {
+				$seopress_google_analytics_config['cd'] = '';
 			}
 		
 		//External links
