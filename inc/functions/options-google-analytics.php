@@ -334,9 +334,9 @@ gtag('js', new Date());\n";
 				(!empty($seopress_google_analytics_config['cd']['cd_hook']) && !empty($seopress_google_analytics_event['cd_hook']))) {
 			$seopress_google_analytics_config['cd']['cd_end'] = "}, ";
 		} 
-		// else {
-		// 	$seopress_google_analytics_config['cd']['cd_start'] = '';
-		// }
+		else {
+			$seopress_google_analytics_config['cd']['cd_start'] = '';
+		}
 
 		//External links
 		if (seopress_google_analytics_link_tracking_enable_option() !='') {
