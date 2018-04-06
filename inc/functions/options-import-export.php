@@ -21,7 +21,7 @@ function seopress_export_settings() {
     $settings["seopress_advanced_option_name"]                  = get_option( 'seopress_advanced_option_name' );
     $settings["seopress_xml_sitemap_option_name"]               = get_option( 'seopress_xml_sitemap_option_name' );
     $settings["seopress_pro_option_name"]                       = get_option( 'seopress_pro_option_name' );
-    $settings["seopress_pro_mu_option_name"]                       = get_option( 'seopress_pro_mu_option_name' );
+    $settings["seopress_pro_mu_option_name"]                    = get_option( 'seopress_pro_mu_option_name' );
     $settings["seopress_pro_license_key"]                       = get_option( 'seopress_pro_license_key' );
     $settings["seopress_pro_license_status"]                    = get_option( 'seopress_pro_license_status' );
     $settings["seopress_bot_option_name"]                       = get_option( 'seopress_bot_option_name' );
@@ -113,6 +113,51 @@ function seopress_import_redirections_settings() {
     wp_safe_redirect( admin_url( 'edit.php?post_type=seopress_404' ) ); exit;
 }
 add_action( 'admin_init', 'seopress_import_redirections_settings' );
+
+//Export Redirections to CSV file
+function seopress_export_redirections_settings() {
+    if( empty( $_POST['seopress_action'] ) || 'export_redirections' != $_POST['seopress_action'] )
+        return;
+    if( ! wp_verify_nonce( $_POST['seopress_export_redirections_nonce'], 'seopress_export_redirections_nonce' ) )
+        return;
+    if( ! current_user_can( 'manage_options' ) )
+        return;
+    
+     //Init
+    $redirects_html = '';
+
+    $args = array(
+        'post_type' => 'seopress_404',
+        'posts_per_page' => '-1',
+    );
+    $seopress_redirects_query = new WP_Query( $args );
+
+    if ( $seopress_redirects_query->have_posts() ) {
+        while ( $seopress_redirects_query->have_posts() ) {
+            $seopress_redirects_query->the_post();
+            $redirects_html .= get_the_title();
+            $redirects_html .= ';';
+            $redirects_html .= get_post_meta($post->ID,'_seopress_redirections_enabled',true);
+            $redirects_html .= ';';
+            $redirects_html .= get_post_meta($post->ID,'_seopress_redirections_type',true);
+            $redirects_html .= ';';
+            $redirects_html .= get_post_meta($post->ID,'_seopress_redirections_value',true);
+            $redirects_html .= ';';
+            $redirects_html .= "\n";
+        }
+        wp_reset_postdata();
+    }    
+
+    ignore_user_abort( true );
+    nocache_headers();
+    header( 'Content-Type: application/csv; charset=utf-8' );
+    header( 'Content-Disposition: attachment; filename=seopress-redirections-export-' . date( 'm-d-Y' ) . '.csv' );
+    header( "Expires: 0" );
+    echo $redirects_html;
+
+    exit;
+}
+add_action( 'admin_init', 'seopress_export_redirections_settings' );
 
 //Reset SEOPress Notices Settings
 function seopress_reset_notices_settings() {

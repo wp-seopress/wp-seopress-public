@@ -694,6 +694,19 @@ class seopress_options
                             </form>
                         </div><!-- .inside -->
                     </div><!-- .postbox -->
+                    <div class="postbox">
+                        <h3><span><?php _e( 'Export Redirections', 'wp-seopress' ); ?></span></h3>
+                        <div class="inside">
+                            <p><?php _e( 'Export all redirections for this site as a .csv file. This allows you to easily import the redirections into another site, to Excel / Google Sheets...', 'wp-seopress' ); ?></p>
+                            <form method="post">
+                                <p><input type="hidden" name="seopress_action" value="export_redirections" /></p>
+                                <p>
+                                    <?php wp_nonce_field( 'seopress_export_redirections_nonce', 'seopress_export_redirections_nonce' ); ?>
+                                    <?php submit_button( __( 'Export', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                </p>
+                            </form>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->
                 <?php } ?>
 
                 <div id="yoast-migration-tool" class="postbox">
@@ -2796,6 +2809,22 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_appearance_redirect_enable_col', // ID
+           __("Show Redirection Enable column in post types","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_redirect_enable_col_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_appearance_redirect_url_col', // ID
+           __("Show Redirect URL column in post types","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_redirect_url_col_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
             'seopress_advanced_appearance_canonical', // ID
            __("Show canonical URL column in post types","wp-seopress"), // Title
             array( $this, 'seopress_advanced_appearance_canonical_callback' ), // Callback
@@ -2956,16 +2985,21 @@ class seopress_options
         }
         echo '<p>'.__('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress').'</p>';
         echo '<p>'.__('Only the last 1000 items are listed in Sitemaps for performances issues.', 'wp-seopress').'</p>';
-        if ( ( isset( $_SERVER['SERVER_SOFTWARE'] ) && stristr( $_SERVER['SERVER_SOFTWARE'], 'nginx' ) === true ) ) { //IF NGINX
-            echo '<p>'.__('Your server use NGINX. If XML Sitemaps doesn\'t work, you have to add this rules to your configuration:', 'wp-seopress').'</p><br>';
-            echo '<pre style="margin:0;padding:10px;font-weight: bold;background:#F3F3F3;display:inline-block;width: 100%">
-                location ~ ([^/]*)sitemap(.*)\.x(m|s)l$ {              
-                    ## SEOPress
-                    rewrite ^/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
-                    rewrite ^/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;  
-                    rewrite ^/sitemaps/([_0-9a-zA-Z-]+)?\.xml$ /index.php?seopress_cpt=$1 last;
-                }
-            </pre>';
+        
+        if ( isset( $_SERVER['SERVER_SOFTWARE'] )) {
+            $server_software = explode('/', $_SERVER['SERVER_SOFTWARE']);
+            reset($server_software);
+            if (current($server_software) =='nginx' ) { //IF NGINX
+                echo '<p>'.__('Your server use NGINX. If XML Sitemaps doesn\'t work, you have to add this rules to your configuration:', 'wp-seopress').'</p><br>';
+                echo '<pre style="margin:0;padding:10px;font-weight: bold;background:#F3F3F3;display:inline-block;width: 100%">
+                    location ~ ([^/]*)sitemap(.*)\.x(m|s)l$ {              
+                        ## SEOPress
+                        rewrite ^/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
+                        rewrite ^/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;  
+                        rewrite ^/sitemaps/([_0-9a-zA-Z-]+)?\.xml$ /index.php?seopress_cpt=$1 last;
+                    }
+                </pre>';
+            }
         }
         echo '<p>'.__('Noindex content will not be displayed in Sitemaps.', 'wp-seopress').'</p><br>';
 
@@ -5289,6 +5323,40 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_appearance_meta_desc_col'])) {
             esc_attr( $this->options['seopress_advanced_appearance_meta_desc_col']);
+        }
+    }
+
+    public function seopress_advanced_appearance_redirect_enable_col_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_redirect_enable_col']);      
+        
+        echo '<input id="seopress_advanced_appearance_redirect_enable_col" name="seopress_advanced_option_name[seopress_advanced_appearance_redirect_enable_col]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_redirect_enable_col">'. __( 'Add redirection enable column', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_redirect_enable_col'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_redirect_enable_col']);
+        }
+    }    
+
+    public function seopress_advanced_appearance_redirect_url_col_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_redirect_url_col']);      
+        
+        echo '<input id="seopress_advanced_appearance_redirect_url_col" name="seopress_advanced_option_name[seopress_advanced_appearance_redirect_url_col]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_redirect_url_col">'. __( 'Add redirection URL column', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_redirect_url_col'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_redirect_url_col']);
         }
     }
 

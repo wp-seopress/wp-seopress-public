@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.6.3
+Stable tag: 2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Telugu</li>
 	<li>Tamil</li>
 	<li>Brazilian Portguese</li>
+	<li>Dutch</li>
 	<li>German (in progress)</li>
 	<li>Japanese (in progress)</li>
 	<li><a href="https://www.seopress.org/contact-us/">Add yours and get SEOPress PRO for free!</a></li>
@@ -153,6 +154,16 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.7 =
+* NEW Export redirections to CSV file (PRO only)
+* NEW Add Redirection URL and Redirection Enable columns in post types (Go to SEO > Advanced > Appearance to enable them)
+* NEW Swedish stop words
+* NEW Add Dutch language (thanks to Sebastiaan Hendriks)
+* INFO Import tool from Yoast now supports large amount of posts (tested with 10 000 posts)
+* INFO Improve server software detection (thanks to @KulkaNicolas)
+* INFO Improve design to separate 301/302/307 redirections compare to 404 errors (PRO Only)
+* FIX Double echo in Breadcrumbs
+* FIX Encoding in Google Snippet Preview
 = 2.6.3 =
 * FIX Regression on canonical
 = 2.6.2 =

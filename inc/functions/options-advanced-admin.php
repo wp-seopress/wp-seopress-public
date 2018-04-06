@@ -37,6 +37,26 @@ function seopress_advanced_appearance_meta_desc_col_option() {
          }
     }
 }
+function seopress_advanced_appearance_redirect_url_col_option() {
+    $seopress_advanced_appearance_redirect_url_col_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_redirect_url_col_option ) ) {
+        foreach ($seopress_advanced_appearance_redirect_url_col_option as $key => $seopress_advanced_appearance_redirect_url_col_value)
+            $options[$key] = $seopress_advanced_appearance_redirect_url_col_value;
+         if (isset($seopress_advanced_appearance_redirect_url_col_option['seopress_advanced_appearance_redirect_url_col'])) { 
+            return $seopress_advanced_appearance_redirect_url_col_option['seopress_advanced_appearance_redirect_url_col'];
+         }
+    }
+}
+function seopress_advanced_appearance_redirect_enable_col_option() {
+    $seopress_advanced_appearance_redirect_enable_col_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_redirect_enable_col_option ) ) {
+        foreach ($seopress_advanced_appearance_redirect_enable_col_option as $key => $seopress_advanced_appearance_redirect_enable_col_value)
+            $options[$key] = $seopress_advanced_appearance_redirect_enable_col_value;
+         if (isset($seopress_advanced_appearance_redirect_enable_col_option['seopress_advanced_appearance_redirect_enable_col'])) { 
+            return $seopress_advanced_appearance_redirect_enable_col_option['seopress_advanced_appearance_redirect_enable_col'];
+         }
+    }
+}
 function seopress_advanced_appearance_canonical_option() {
     $seopress_advanced_appearance_canonical_option = get_option("seopress_advanced_option_name");
     if ( ! empty ( $seopress_advanced_appearance_canonical_option ) ) {
@@ -108,7 +128,8 @@ function seopress_advanced_appearance_ps_col_option() {
     }
 }
 
-if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_appearance_meta_desc_col_option() !='' || seopress_advanced_appearance_canonical_option() !='' || seopress_advanced_appearance_target_kw_col_option() !='' || seopress_advanced_appearance_noindex_col_option() !='' || seopress_advanced_appearance_nofollow_col_option() !='' || seopress_advanced_appearance_words_col_option() !='' || seopress_advanced_appearance_w3c_col_option() !='' || seopress_advanced_appearance_ps_col_option() !='') {
+if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_appearance_meta_desc_col_option() !='' || seopress_advanced_appearance_redirect_enable_col_option() !='' || seopress_advanced_appearance_redirect_url_col_option() !='' ||
+    seopress_advanced_appearance_canonical_option() !='' || seopress_advanced_appearance_target_kw_col_option() !='' || seopress_advanced_appearance_noindex_col_option() !='' || seopress_advanced_appearance_nofollow_col_option() !='' || seopress_advanced_appearance_words_col_option() !='' || seopress_advanced_appearance_w3c_col_option() !='' || seopress_advanced_appearance_ps_col_option() !='') {
     function seopress_add_columns() {
         foreach (seopress_get_post_types() as $key => $value) {
             add_filter('manage_'.$key.'_posts_columns', 'seopress_title_columns');
@@ -124,6 +145,12 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
             }
             if(seopress_advanced_appearance_meta_desc_col_option() !='') {
                 $columns['seopress_desc'] = __('Meta Desc.', 'wp-seopress');
+            }
+            if(seopress_advanced_appearance_redirect_enable_col_option() !='') {
+                $columns['seopress_redirect_enable'] = __('Redirect?', 'wp-seopress');
+            }
+            if(seopress_advanced_appearance_redirect_url_col_option() !='') {
+                $columns['seopress_redirect_url'] = __('Redirect URL', 'wp-seopress');
             }
             if(seopress_advanced_appearance_canonical_option() !='') {
                 $columns['seopress_canonical'] = __('Canonical', 'wp-seopress');
@@ -154,8 +181,18 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
                 case 'seopress_title' :
                     echo '<div id="seopress_title-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_title", true).'</div>';
                     break;
+                
                 case 'seopress_desc';
                     echo '<div id="seopress_desc-' . $post_id . '">'.get_post_meta($post_id, "_seopress_titles_desc", true).'</div>';
+                    break;
+
+                case 'seopress_redirect_enable';
+                    if (get_post_meta($post_id, "_seopress_redirections_enabled", true) =='yes') {
+                        echo '<div id="seopress_redirect_enable-' . $post_id . '"><span class="dashicons dashicons-yes"></span></div>';
+                    }
+                    break;
+                case 'seopress_redirect_url';
+                    echo '<div id="seopress_redirect_url-' . $post_id . '">'.get_post_meta($post_id, "_seopress_redirections_value", true).'</div>';
                     break;
 
                 case 'seopress_canonical';
@@ -293,6 +330,12 @@ if (seopress_advanced_advanced_stop_words_option() !='') {
                 $stop_words_list_pt = apply_filters('seopress_add_stop_words_list_pt', $stop_words_list_pt);
             }
 
+            $stop_words_list_sv = 'aderton,adertonde,adjö,aldrig,alla,allas,allt,alltid,alltså,än,andra,andras,annan,annat,ännu,artonde,artonn,åtminstone,att,åtta,åttio,åttionde,åttonde,av,även,båda,bådas,bakom,bara,bäst,bättre,behöva,behövas,behövde,behövt,beslut,beslutat,beslutit,bland,blev,bli,blir,blivit,bort,borta,bra,då,dag,dagar,dagarna,dagen,där,därför,de,del,delen,dem,den,deras,dess,det,detta,dig,din,dina,dit,ditt,dock,du,efter,eftersom,elfte,eller,elva,en,enkel,enkelt,enkla,enligt,er,era,ert,ett,ettusen,få,fanns,får,fått,fem,femte,femtio,femtionde,femton,femtonde,fick,fin,finnas,finns,fjärde,fjorton,fjortonde,fler,flera,flesta,följande,för,före,förlåt,förra,första,fram,framför,från,fyra,fyrtio,fyrtionde,gå,gälla,gäller,gällt,går,gärna,gått,genast,genom,gick,gjorde,gjort,god,goda,godare,godast,gör,göra,gott,ha,hade,haft,han,hans,har,här,heller,hellre,helst,helt,henne,hennes,hit,hög,höger,högre,högst,hon,honom,hundra,hundraen,hundraett,hur,i,ibland,idag,igår,igen,imorgon,in,inför,inga,ingen,ingenting,inget,innan,inne,inom,inte,inut,i,ja,jag,jämfört,kan,kanske,knappast,kom,komma,kommer,kommit,kr,kunde,kunna,kunnat,kvar,länge,längre,långsam,långsammare,långsammast,långsamt,längst,långt,lätt,lättare,lättast,legat,ligga,ligger,lika,likställd,likställda,lilla,lite,liten,litet,man,många,måste,med,mellan,men,mer,mera,mest,mig,min,mina,mindre,minst,mitt,mittemot,möjlig,möjligen,möjligt,möjligtvis,mot,mycket,någon,någonting,något,några,när,nästa,ned,nederst,nedersta,nedre,nej,ner,ni,nio,nionde,nittio,nittionde,nitton,nittonde,nödvändig,nödvändiga,nödvändigt,nödvändigtvis,nog,noll,nr,nu,nummer,och,också,ofta,oftast,olika,olikt,om,oss,över,övermorgon,överst,övre,på,rakt,rätt,redan,så,sade,säga,säger,sagt,samma,sämre,sämst,sedan,senare,senast,sent,sex,sextio,sextionde,sexton,sextonde,sig,sin,sina,sist,sista,siste,sitt,sjätte,sju,sjunde,sjuttio,sjuttionde,sjutton,sjuttonde,ska,skall,skulle,slutligen,små,smått,snart,som,stor,stora,större,störst,stort,tack,tidig,tidigare,tidigast,tidigt,till,tills,tillsammans,tio,tionde,tjugo,tjugoen,tjugoett,tjugonde,tjugotre,tjugotvå,tjungo,tolfte,tolv,tre,tredje,trettio,trettionde,tretton,trettonde,två,tvåhundra,under,upp,ur,ursäkt,ut,utan,utanför,ute,vad,vänster,vänstra,var,vår,vara,våra,varför,varifrån,varit,varken,värre,varsågod,vart,vårt,vem,vems,verkligen,vi,vid,vidare,viktig,viktigare,viktigast,viktigt,vilka,vilken,vilket,vill';
+
+            if(has_filter('seopress_add_stop_words_list_sv')) {
+                $stop_words_list_sv = apply_filters('seopress_add_stop_words_list_sv', $stop_words_list_sv);
+            }
+
 			switch (get_locale()) {
 			    case "fr_FR":
 			    	$stop_words_list = $stop_words_list_fr;
@@ -372,6 +415,9 @@ if (seopress_advanced_advanced_stop_words_option() !='') {
 			    case "en_ZW":
 			        $stop_words_list = $stop_words_list_en;
 			        break;
+                case "sv_SE":
+                    $stop_words_list = $stop_words_list_sv;
+                    break;
 			    default:
 			    	$stop_words_list = $stop_words_list_en;
 			}		
@@ -601,6 +647,83 @@ function seopress_bulk_action_follow_admin_notice() {
 						'wp-seopress'
 						) . '</p></div>', $follow_count );
 	}
+}
+
+//enable 301
+foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_redirect_enable' );
+}
+
+function seopress_bulk_actions_redirect_enable($bulk_actions) {
+    $bulk_actions['seopress_enable'] = __( 'Enable redirection', 'wp-seopress');
+    return $bulk_actions;
+}
+foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_redirect_enable_handler', 10, 3 );
+}
+
+function seopress_bulk_action_redirect_enable_handler( $redirect_to, $doaction, $post_ids ) {
+    if ( $doaction !== 'seopress_enable' ) {
+        return $redirect_to;
+    }
+    foreach ( $post_ids as $post_id ) {
+        // Perform action for each post.
+        update_post_meta( $post_id, '_seopress_redirections_enabled', 'yes' );
+    }
+    $redirect_to = add_query_arg( 'bulk_enable_redirects_posts', count( $post_ids ), $redirect_to );
+    return $redirect_to;
+}
+
+add_action( 'admin_notices', 'seopress_bulk_action_redirect_enable_admin_notice' );
+
+function seopress_bulk_action_redirect_enable_admin_notice() {
+    if ( ! empty( $_REQUEST['bulk_enable_redirects_posts'] ) ) {
+        $enable_count = intval( $_REQUEST['bulk_enable_redirects_posts'] );
+        printf( '<div id="message" class="updated fade"><p>' .
+                _n( '%s redirections enabled.',
+                        '%s redirections enabled.',
+                        $enable_count,
+                        'wp-seopress'
+                        ) . '</p></div>', $enable_count );
+    }
+}
+
+//disable 301
+foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_redirect_disable' );
+}
+
+function seopress_bulk_actions_redirect_disable($bulk_actions) {
+    $bulk_actions['seopress_disable'] = __( 'Disable redirection', 'wp-seopress');
+    return $bulk_actions;
+}
+foreach (seopress_get_post_types() as $key => $value) {
+    add_filter( 'handle_bulk_actions-edit-'.$key, 'seopress_bulk_action_redirect_disable_handler', 10, 3 );
+}
+
+function seopress_bulk_action_redirect_disable_handler( $redirect_to, $doaction, $post_ids ) {
+    if ( $doaction !== 'seopress_disable' ) {
+        return $redirect_to;
+    }
+    foreach ( $post_ids as $post_id ) {
+        // Perform action for each post.
+        update_post_meta( $post_id, '_seopress_redirections_enabled', '' );
+    }
+    $redirect_to = add_query_arg( 'bulk_disable_redirects_posts', count( $post_ids ), $redirect_to );
+    return $redirect_to;
+}
+
+add_action( 'admin_notices', 'seopress_bulk_action_redirect_disable_admin_notice' );
+function seopress_bulk_action_redirect_disable_admin_notice() {
+    if ( ! empty( $_REQUEST['bulk_disable_redirects_posts'] ) ) {
+        $enable_count = intval( $_REQUEST['bulk_disable_redirects_posts'] );
+        printf( '<div id="message" class="updated fade"><p>' .
+                _n( '%s redirections disabled.',
+                        '%s redirections disabled.',
+                        $enable_count,
+                        'wp-seopress'
+                        ) . '</p></div>', $enable_count );
+    }
 }
 
 //Quick Edit

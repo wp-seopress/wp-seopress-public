@@ -134,7 +134,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
             <div class="box-right">
                 <div class="google-snippet-preview">
                     <h3>'.__('Google Snippet Preview','wp-seopress').'</h3>
-                    <p>'.__('This is what your page will look like in Google search results','wp-seopress').'</p>
+                    <p>'.__('This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview.','wp-seopress').'</p>
                     <div class="snippet-title"></div>
                     <div class="snippet-title-custom" style="display:none"></div>';
                 global $tag;

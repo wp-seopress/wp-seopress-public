@@ -48,7 +48,7 @@ function seopress_do_real_preview() {
     if ( is_wp_error( $response ) ) {
         return;
     } else {
-        if($dom->loadHTML($response)) {
+        if($dom->loadHTML('<?xml encoding="utf-8" ?>' .$response)) {
             //Title
             $list = $dom->getElementsByTagName("title");
             if ($list->length > 0) {
@@ -281,128 +281,142 @@ add_action('wp_ajax_seopress_hide_notices', 'seopress_hide_notices');
 function seopress_yoast_migration() {
     check_ajax_referer( 'seopress_yoast_migrate_nonce', $_POST['_ajax_nonce'], true );
 
+    if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+        $offset = absint($_POST['offset']);
+    }
+    
+    $count_posts = wp_count_posts();
+    $total_count_posts = $count_posts->publish + $count_posts->future + $count_posts->draft + $count_posts->pending + $count_posts->private + $count_posts->trash + $count_posts->{'auto-draft'};
+    
+    $increment = 200;
     global $post;
 	
-    $args = array(  
-        'posts_per_page' => '-1',  
-        'post_type' => 'any',  
-    );
-    
-    $yoast_query = get_posts( $args );
-    
-    if ($yoast_query) {  
-        foreach ($yoast_query as $post) {
-            if (get_post_meta($post->ID, '_yoast_wpseo_title', true) !='') { //Import title tag
-                update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_yoast_wpseo_title', true));
-            }
-            if (get_post_meta($post->ID, '_yoast_wpseo_metadesc', true) !='') { //Import meta desc
-                update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_yoast_wpseo_metadesc', true));
-            }
-            if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-title', true) !='') { //Import Facebook Title
-                update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_yoast_wpseo_opengraph-title', true));
-            }            
-            if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-description', true) !='') { //Import Facebook Desc
-                update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_yoast_wpseo_opengraph-description', true));
-            }            
-            if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true) !='') { //Import Facebook Image
-                update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true));
-            }            
-            if (get_post_meta($post->ID, '_yoast_wpseo_twitter-title', true) !='') { //Import Twitter Title
-                update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_yoast_wpseo_twitter-title', true));
-            }            
-            if (get_post_meta($post->ID, '_yoast_wpseo_twitter-description', true) !='') { //Import Twitter Desc
-                update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_yoast_wpseo_twitter-description', true));
-            }            
-            if (get_post_meta($post->ID, '_yoast_wpseo_twitter-image', true) !='') { //Import Twitter Image
-                update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_yoast_wpseo_twitter-image', true));
-            }            
-            if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-noindex', true) =='1') { //Import Robots NoIndex
-                update_post_meta($post->ID, '_seopress_robots_index', "yes");
-            }             
-            if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-nofollow', true) =='1') { //Import Robots NoFollow
-                update_post_meta($post->ID, '_seopress_robots_follow', "yes");
-            }             
-            if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true) !='') { //Import Robots NoOdp, NoImageIndex, NoArchive, NoSnippet
-                $yoast_wpseo_meta_robots_adv = get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true);
-                
-                if (strpos($yoast_wpseo_meta_robots_adv, 'noodp') !== false) {
-                	update_post_meta($post->ID, '_seopress_robots_odp', "yes");
-            	}
-            	if (strpos($yoast_wpseo_meta_robots_adv, 'noimageindex') !== false) {
-                	update_post_meta($post->ID, '_seopress_robots_imageindex', "yes");
-                }
-                if (strpos($yoast_wpseo_meta_robots_adv, 'noarchive') !== false) {
-                	update_post_meta($post->ID, '_seopress_robots_archive', "yes");
-                }
-                if (strpos($yoast_wpseo_meta_robots_adv, 'nosnippet') !== false) {
-                	update_post_meta($post->ID, '_seopress_robots_snippet', "yes");
-                }
-            }            
-            if (get_post_meta($post->ID, '_yoast_wpseo_canonical', true) !='') { //Import Canonical URL
-                update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_yoast_wpseo_canonical', true));
-            }
-            if (get_post_meta($post->ID, '_yoast_wpseo_focuskw', true) !='' || get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', true) !='') { //Import Focus Keywords
-                $y_fkws_clean = array(); //reset array
+    if ($offset > $total_count_posts) {
+        wp_reset_query();
 
-                $y_fkws = get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', false);
-                
-                foreach ($y_fkws as $value) {
-                    foreach (json_decode($value) as $key => $value) {
-                        $y_fkws_clean[] .= $value->keyword;
+        $yoast_query_terms = get_option('wpseo_taxonomy_meta');
+
+        if ($yoast_query_terms) { 
+        
+            foreach ($yoast_query_terms as $taxonomies => $taxonomie) {
+                foreach ($taxonomie as $term_id => $term_value) {
+                    if ($term_value['wpseo_title'] !='') { //Import title tag
+                        update_term_meta($term_id, '_seopress_titles_title', $term_value['wpseo_title']);
+                    }
+                    if ($term_value['wpseo_desc'] !='') { //Import meta desc
+                        update_term_meta($term_id, '_seopress_titles_desc', $term_value['wpseo_desc']);
+                    }
+                    if ($term_value['wpseo_opengraph-title'] !='') { //Import Facebook Title
+                        update_term_meta($term_id, '_seopress_social_fb_title', $term_value['wpseo_opengraph-title']);
+                    }            
+                    if ($term_value['wpseo_opengraph-description'] !='') { //Import Facebook Desc
+                        update_term_meta($term_id, '_seopress_social_fb_desc', $term_value['wpseo_opengraph-description']);
+                    }            
+                    if ($term_value['wpseo_opengraph-image'] !='') { //Import Facebook Image
+                        update_term_meta($term_id, '_seopress_social_fb_img', $term_value['wpseo_opengraph-image']);
+                    }            
+                    if ($term_value['wpseo_twitter-title'] !='') { //Import Twitter Title
+                        update_term_meta($term_id, '_seopress_social_twitter_title', $term_value['wpseo_twitter-title']);
+                    }            
+                    if ($term_value['wpseo_twitter-description'] !='') { //Import Twitter Desc
+                        update_term_meta($term_id, '_seopress_social_twitter_desc', $term_value['wpseo_twitter-description']);
+                    }            
+                    if ($term_value['wpseo_twitter-image'] !='') { //Import Twitter Image
+                        update_term_meta($term_id, '_seopress_social_twitter_img', $term_value['wpseo_twitter-image']);
+                    }            
+                    if ($term_value['wpseo_noindex'] =='noindex') { //Import Robots NoIndex
+                        update_term_meta($term_id, '_seopress_robots_index', "yes");
+                    }           
+                    if ($term_value['wpseo_canonical'] !='') { //Import Canonical URL
+                        update_term_meta($term_id, '_seopress_robots_canonical', $term_value['wpseo_canonical']);
                     }
                 }
-
-                $y_fkws_clean[] .= get_post_meta($post->ID, '_yoast_wpseo_focuskw', true);
-
-                update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',',$y_fkws_clean));
             }
         }
-    }
-
-    wp_reset_query();
-
-    $yoast_query_terms = get_option('wpseo_taxonomy_meta');
-
-    if ($yoast_query_terms) { 
-    
-        foreach ($yoast_query_terms as $taxonomies => $taxonomie) {
-            foreach ($taxonomie as $term_id => $term_value) {
-                if ($term_value['wpseo_title'] !='') { //Import title tag
-                    update_term_meta($term_id, '_seopress_titles_title', $term_value['wpseo_title']);
+        $offset = 'done';
+        wp_reset_query();
+    } else {
+        $args = array(  
+            'posts_per_page' => $increment,  
+            'post_type' => 'any',
+            'offset' => $offset, 
+        );
+        
+        $yoast_query = get_posts( $args );
+        
+        if ($yoast_query) {  
+            foreach ($yoast_query as $post) {
+                if (get_post_meta($post->ID, '_yoast_wpseo_title', true) !='') { //Import title tag
+                    update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_yoast_wpseo_title', true));
                 }
-                if ($term_value['wpseo_desc'] !='') { //Import meta desc
-                    update_term_meta($term_id, '_seopress_titles_desc', $term_value['wpseo_desc']);
+                if (get_post_meta($post->ID, '_yoast_wpseo_metadesc', true) !='') { //Import meta desc
+                    update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_yoast_wpseo_metadesc', true));
                 }
-                if ($term_value['wpseo_opengraph-title'] !='') { //Import Facebook Title
-                    update_term_meta($term_id, '_seopress_social_fb_title', $term_value['wpseo_opengraph-title']);
+                if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-title', true) !='') { //Import Facebook Title
+                    update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_yoast_wpseo_opengraph-title', true));
                 }            
-                if ($term_value['wpseo_opengraph-description'] !='') { //Import Facebook Desc
-                    update_term_meta($term_id, '_seopress_social_fb_desc', $term_value['wpseo_opengraph-description']);
+                if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-description', true) !='') { //Import Facebook Desc
+                    update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_yoast_wpseo_opengraph-description', true));
                 }            
-                if ($term_value['wpseo_opengraph-image'] !='') { //Import Facebook Image
-                    update_term_meta($term_id, '_seopress_social_fb_img', $term_value['wpseo_opengraph-image']);
+                if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true) !='') { //Import Facebook Image
+                    update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true));
                 }            
-                if ($term_value['wpseo_twitter-title'] !='') { //Import Twitter Title
-                    update_term_meta($term_id, '_seopress_social_twitter_title', $term_value['wpseo_twitter-title']);
+                if (get_post_meta($post->ID, '_yoast_wpseo_twitter-title', true) !='') { //Import Twitter Title
+                    update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_yoast_wpseo_twitter-title', true));
                 }            
-                if ($term_value['wpseo_twitter-description'] !='') { //Import Twitter Desc
-                    update_term_meta($term_id, '_seopress_social_twitter_desc', $term_value['wpseo_twitter-description']);
+                if (get_post_meta($post->ID, '_yoast_wpseo_twitter-description', true) !='') { //Import Twitter Desc
+                    update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_yoast_wpseo_twitter-description', true));
                 }            
-                if ($term_value['wpseo_twitter-image'] !='') { //Import Twitter Image
-                    update_term_meta($term_id, '_seopress_social_twitter_img', $term_value['wpseo_twitter-image']);
+                if (get_post_meta($post->ID, '_yoast_wpseo_twitter-image', true) !='') { //Import Twitter Image
+                    update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_yoast_wpseo_twitter-image', true));
                 }            
-                if ($term_value['wpseo_noindex'] =='noindex') { //Import Robots NoIndex
-                    update_term_meta($term_id, '_seopress_robots_index', "yes");
-                }           
-                if ($term_value['wpseo_canonical'] !='') { //Import Canonical URL
-                    update_term_meta($term_id, '_seopress_robots_canonical', $term_value['wpseo_canonical']);
+                if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-noindex', true) =='1') { //Import Robots NoIndex
+                    update_post_meta($post->ID, '_seopress_robots_index', "yes");
+                }             
+                if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-nofollow', true) =='1') { //Import Robots NoFollow
+                    update_post_meta($post->ID, '_seopress_robots_follow', "yes");
+                }             
+                if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true) !='') { //Import Robots NoOdp, NoImageIndex, NoArchive, NoSnippet
+                    $yoast_wpseo_meta_robots_adv = get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true);
+                    
+                    if (strpos($yoast_wpseo_meta_robots_adv, 'noodp') !== false) {
+                    	update_post_meta($post->ID, '_seopress_robots_odp', "yes");
+                	}
+                	if (strpos($yoast_wpseo_meta_robots_adv, 'noimageindex') !== false) {
+                    	update_post_meta($post->ID, '_seopress_robots_imageindex', "yes");
+                    }
+                    if (strpos($yoast_wpseo_meta_robots_adv, 'noarchive') !== false) {
+                    	update_post_meta($post->ID, '_seopress_robots_archive', "yes");
+                    }
+                    if (strpos($yoast_wpseo_meta_robots_adv, 'nosnippet') !== false) {
+                    	update_post_meta($post->ID, '_seopress_robots_snippet', "yes");
+                    }
+                }            
+                if (get_post_meta($post->ID, '_yoast_wpseo_canonical', true) !='') { //Import Canonical URL
+                    update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_yoast_wpseo_canonical', true));
+                }
+                if (get_post_meta($post->ID, '_yoast_wpseo_focuskw', true) !='' || get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', true) !='') { //Import Focus Keywords
+                    $y_fkws_clean = array(); //reset array
+
+                    $y_fkws = get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', false);
+                    
+                    foreach ($y_fkws as $value) {
+                        foreach (json_decode($value) as $key => $value) {
+                            $y_fkws_clean[] .= $value->keyword;
+                        }
+                    }
+
+                    $y_fkws_clean[] .= get_post_meta($post->ID, '_yoast_wpseo_focuskw', true);
+
+                    update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',',$y_fkws_clean));
                 }
             }
         }
+        $offset += $increment;
     }
-
-    wp_reset_query();
-
+    $data = array();
+    $data['offset'] = $offset;
+    wp_send_json_success($data);
 	die();
 }
 add_action('wp_ajax_seopress_yoast_migration', 'seopress_yoast_migration');
