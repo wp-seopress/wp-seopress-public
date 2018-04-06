@@ -69,7 +69,7 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
 					$content .= '<div class="wrap-html-sitemap">';
 					foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
 						$obj = get_post_type_object( $cpt_key );
-						$content .= '<h2>'.$obj->labels->singular_name.'</h2>';
+						$content .= '<h2>'.$obj->labels->name.'</h2>';
 						foreach ($cpt_value as $_cpt_key => $_cpt_value) {
 							if($_cpt_value =='1') {
 								$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'date', 'post_type' => $cpt_key, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'exclude' => $seopress_xml_sitemap_html_exclude_option );

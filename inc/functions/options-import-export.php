@@ -137,11 +137,11 @@ function seopress_export_redirections_settings() {
             $seopress_redirects_query->the_post();
             $redirects_html .= get_the_title();
             $redirects_html .= ';';
-            $redirects_html .= get_post_meta($post->ID,'_seopress_redirections_enabled',true);
+            $redirects_html .= get_post_meta(get_the_ID(),'_seopress_redirections_enabled',true);
             $redirects_html .= ';';
-            $redirects_html .= get_post_meta($post->ID,'_seopress_redirections_type',true);
+            $redirects_html .= get_post_meta(get_the_ID(),'_seopress_redirections_type',true);
             $redirects_html .= ';';
-            $redirects_html .= get_post_meta($post->ID,'_seopress_redirections_value',true);
+            $redirects_html .= get_post_meta(get_the_ID(),'_seopress_redirections_value',true);
             $redirects_html .= ';';
             $redirects_html .= "\n";
         }

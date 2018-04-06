@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best SEO plugin.
-Version: 2.7
+Version: 2.7.1
 Author: Benjamin DENIS
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '2.7' ); 
+define( 'SEOPRESS_VERSION', '2.7.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,9 +413,18 @@ if (seopress_xml_sitemap_general_enable_option() =='1') {
     add_action( 'init', 'seopress_xml_sitemap_rewrite' );
     add_action( 'query_vars', 'seopress_xml_sitemap_query_vars' );
     add_action( 'template_include', 'seopress_xml_sitemap_change_template', 9999 );
+    add_action( 'template_redirect', 'seopress_xml_sitemap_shortcut', 1);
+
+    function seopress_xml_sitemap_shortcut() {
+        //Redirect sitemap.xml to sitemaps.xml
+        $get_current_url = get_home_url().$_SERVER['REQUEST_URI'];
+        if (in_array($get_current_url,array(get_home_url().'/sitemap.xml/',get_home_url().'/sitemap.xml'))) {
+            wp_safe_redirect(get_home_url().'/sitemaps.xml', 301);
+            exit();
+        }
+    }
 
     function seopress_xml_sitemap_rewrite() {
-
         //XML Index
         add_rewrite_rule( '^sitemaps.xml$', 'index.php?seopress_sitemap=1', 'top' );
 

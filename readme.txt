@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.7
+Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,7 +38,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Build your custom HTML Sitemap to enhanced navigation for visitors and improve search indexing.</li>
 	<li>Link your social media accounts to your site.</li>
 	<li>Redirections in post, pages, custom post types</li>
-	<li>Remove stop words (english, french, spanish, german, italian, portuguese)</li>
+	<li>Remove stop words (english, french, spanish, german, italian, portuguese, swedish)</li>
 	<li>Remove /category/ in URLs</li>
 	<li>Redirect attachment pages to post parent</li>
 	<li>Import / Export settings from site to site.</li>
@@ -154,11 +154,29 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.7.1 =
+* NEW Add seopress_titles_title hook to filter title tag
+* NEW Add seopress_titles_desc hook to filter meta description
+* NEW Add seopress_titles_robots hook to filter meta robots (complete tag)
+* NEW Add seopress_titles_noindex hook to filter meta robots noindex value
+* NEW Add seopress_titles_nofollow hook to filter meta robots nofollow value
+* NEW Add seopress_titles_nosnippet hook to filter meta robots nosnippet value
+* NEW Add seopress_titles_noarchive hook to filter meta robots noarchive value
+* NEW Add seopress_titles_noodp hook to filter meta robots noodp value
+* NEW Add seopress_titles_noimageindex hook to filter meta google noimageindex
+* NEW Add seopress_ga_dashboard_widget filter to remove Google Analytics Widget in Dashboard (PRO Only, feature requested by @wpchannel)
+* INFO "Discourage search engines from indexing this site" option (Settings > Reading), is not impacting anymore Titles & metas in frontend
+* INFO Improve Post type title in HTML Sitemap (suggested by @mickaelgris)
+* INFO Autoredirect sitemap.xml to sitemaps.xml
+* FIX Export redirections CSV file
+* FIX backslashes in metas
+* FIX Google Snippet Preview
 = 2.7 =
 * NEW Export redirections to CSV file (PRO only)
 * NEW Add Redirection URL and Redirection Enable columns in post types (Go to SEO > Advanced > Appearance to enable them)
 * NEW Swedish stop words
 * NEW Add Dutch language (thanks to Sebastiaan Hendriks)
+* NEW Add bulk edit for Enable / Disable redirections in post / page / post type lists
 * INFO Import tool from Yoast now supports large amount of posts (tested with 10 000 posts)
 * INFO Improve server software detection (thanks to @KulkaNicolas)
 * INFO Improve design to separate 301/302/307 redirections compare to 404 errors (PRO Only)

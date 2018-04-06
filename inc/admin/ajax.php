@@ -53,7 +53,7 @@ function seopress_do_real_preview() {
             $list = $dom->getElementsByTagName("title");
             if ($list->length > 0) {
                 $title = $list->item(0)->textContent;
-                $data['title'] = $title;
+                $data['title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($title)));
             }
 
             //Meta desc
@@ -61,7 +61,7 @@ function seopress_do_real_preview() {
             $meta_description = $xpath->query('//meta[@name="description"]/@content');
 
             foreach ($meta_description as $key=>$mdesc) {
-                $data['meta_desc'] = $mdesc->nodeValue;
+                $data['meta_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mdesc->nodeValue)));
             }
         }
     }

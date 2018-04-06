@@ -488,7 +488,7 @@ function seopress_social_fb_desc_hook() {
 			echo '<meta property="og:description" content="'.seopress_social_fb_desc_term_option().'" />'; 
 	 		echo "\n";
 	 	} elseif (term_description() !='') {
-	 		echo '<meta property="og:description" content="'.wp_filter_nohtml_kses(term_description()).' - '.get_bloginfo('name').'" />'; 
+	 		echo '<meta property="og:description" content="'.stripslashes_deep(wp_filter_nohtml_kses(term_description())).' - '.get_bloginfo('name').'" />'; 
 	 		echo "\n";
 	 	}
 	} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && seopress_social_fb_desc_post_option() !='') { 
@@ -498,7 +498,7 @@ function seopress_social_fb_desc_hook() {
  		echo '<meta property="og:description" content="'.seopress_titles_the_description_content().'" />'; 
  		echo "\n";
  	} elseif (seopress_social_facebook_og_option() =='1' && get_the_excerpt() !='') {
-		echo '<meta property="og:description" content="'.wp_trim_words(esc_attr(wp_filter_nohtml_kses(get_the_excerpt()), 30)).'" />'; 
+		echo '<meta property="og:description" content="'.wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(get_the_excerpt()))), 30).'" />'; 
  		echo "\n";
 	} 
 }
@@ -822,7 +822,7 @@ function seopress_social_twitter_desc_hook() {
 		 		echo '<meta name="twitter:description" content="'.seopress_social_fb_desc_term_option().'" />';
 		 		echo "\n";
 		 	} elseif (term_description() !='') {
-		 		echo '<meta name="twitter:description" content="'.wp_filter_nohtml_kses(term_description()).' - '.get_bloginfo('name').'" />'; 
+		 		echo '<meta name="twitter:description" content="'.stripslashes_deep(wp_filter_nohtml_kses(term_description())).' - '.get_bloginfo('name').'" />'; 
 		 		echo "\n";
 		 	}
 		} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && seopress_social_fb_desc_post_option() !='') { 
@@ -833,7 +833,7 @@ function seopress_social_twitter_desc_hook() {
 	 		echo "\n";
 	 	} elseif (seopress_social_facebook_og_option() =='1' && get_the_excerpt() !='') { 
 			setup_postdata( $post );
-			echo '<meta name="twitter:description" content="'.wp_trim_words(esc_attr(wp_filter_nohtml_kses(get_the_excerpt()), 30)).'" />';
+			echo '<meta name="twitter:description" content="'.wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(get_the_excerpt()))), 30).'" />';
 	 		echo "\n";
 		}
 	} else {
@@ -850,7 +850,7 @@ function seopress_social_twitter_desc_hook() {
 		 		echo '<meta name="twitter:description" content="'.seopress_social_twitter_desc_term_option().'" />';
 		 		echo "\n";
 		 	} elseif (term_description() !='') {
-		 		echo '<meta name="twitter:description" content="'.wp_filter_nohtml_kses(term_description()).' - '.get_bloginfo('name').'" />'; 
+		 		echo '<meta name="twitter:description" content="'.stripslashes_deep(wp_filter_nohtml_kses(term_description())).' - '.get_bloginfo('name').'" />'; 
 		 		echo "\n";
 		 	}
 		} elseif (is_singular() && seopress_social_twitter_card_option() =='1' && seopress_social_twitter_desc_post_option() !='') { 
@@ -861,7 +861,7 @@ function seopress_social_twitter_desc_hook() {
 	 		echo "\n";
 	 	} elseif (seopress_social_twitter_card_option() =='1' && get_the_excerpt() !='') { 
 			setup_postdata( $post );
-			echo '<meta name="twitter:description" content="'.wp_trim_words(esc_attr(wp_filter_nohtml_kses(get_the_excerpt()), 30)).'" />';
+			echo '<meta name="twitter:description" content="'.wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(get_the_excerpt()))), 30).'" />';
 	 		echo "\n";
 		}
 	}

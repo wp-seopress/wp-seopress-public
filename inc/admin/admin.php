@@ -286,13 +286,7 @@ class seopress_options
         }
         ?>
         <form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
-        <?php 
-        if (get_option('blog_public') =='0') {
-            echo '<div class="error notice is-dismissable">';
-            echo '<p>'. __('Discourage search engines from indexing this site is <strong>ON!</strong> None of the following settings will be applied.','wp-seopress');
-            echo ' <a href="'.admin_url("options-reading.php").'">'.__('Change this settings','wp-seopress').'</a></p>';
-            echo '</div>';
-        }
+        <?php
         global $wp_version, $title;
         $current_tab = '';
         $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
