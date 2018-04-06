@@ -46,7 +46,7 @@ function seopress_xml_sitemap_index() {
 	//Taxonomies
 	if (seopress_xml_sitemap_taxonomies_list_option() !='') {
 		//Init
-		$seopress_xml_terms_list = '';
+		$seopress_xml_terms_list = array();
 		foreach (seopress_xml_sitemap_taxonomies_list_option() as $tax_key => $tax_value) {
 			foreach ($tax_value as $_tax_key => $_tax_value) {
 				if($_tax_value =='1') {
