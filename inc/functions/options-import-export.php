@@ -21,6 +21,7 @@ function seopress_export_settings() {
     $settings["seopress_advanced_option_name"]                  = get_option( 'seopress_advanced_option_name' );
     $settings["seopress_xml_sitemap_option_name"]               = get_option( 'seopress_xml_sitemap_option_name' );
     $settings["seopress_pro_option_name"]                       = get_option( 'seopress_pro_option_name' );
+    $settings["seopress_pro_mu_option_name"]                       = get_option( 'seopress_pro_mu_option_name' );
     $settings["seopress_pro_license_key"]                       = get_option( 'seopress_pro_license_key' );
     $settings["seopress_pro_license_status"]                    = get_option( 'seopress_pro_license_status' );
     $settings["seopress_bot_option_name"]                       = get_option( 'seopress_bot_option_name' );
@@ -63,6 +64,7 @@ function seopress_import_settings() {
     update_option( 'seopress_advanced_option_name', $settings["seopress_advanced_option_name"] ); 
     update_option( 'seopress_xml_sitemap_option_name', $settings["seopress_xml_sitemap_option_name"] ); 
     update_option( 'seopress_pro_option_name', $settings["seopress_pro_option_name"] );
+    update_option( 'seopress_pro_mu_option_name', $settings["seopress_pro_mu_option_name"] );
     update_option( 'seopress_pro_license_key', $settings["seopress_pro_license_key"] );
     update_option( 'seopress_pro_license_status', $settings["seopress_pro_license_status"] );
     update_option( 'seopress_bot_option_name', $settings["seopress_bot_option_name"] );

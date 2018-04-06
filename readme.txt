@@ -1,12 +1,12 @@
-=== WordPress SEO Plugin, SEOPress ===
+=== SEOPress ===
 Authors: rainbowgeek
 Contributors: rainbowgeek
 Donate link: https://www.seopress.org/
-Tags: seo, search engine optimization, meta, title, meta description, open graph, twitter cards, content analysis, serp, knowledge graph, schema.org, redirection, 301, xml sitemap, breadcrumbs, google analytics, woocommerce, dublin core, rich snippets, 404, html sitemap, bot, broken link checker
+Tags: seo, search engine optimization, meta title, open graph, content analysis, knowledge graph, redirection, xml sitemap, breadcrumbs, google analytics, rich snippets, broken link checker
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.6
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,6 +153,11 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.6.1 =
+* NEW Russian language for SEOPress PRO (thanks to @Dmitriy)
+* FIX Themosis Framework (thanks to @romainhe)
+* FIX XML Sitemap last mod error
+* FIX Multisite save settings
 = 2.6 =
 * NEW Add WP Editor to taxonomy description textarea
 * NEW 15 new Google Analytics hooks (custom dimensions, link attribution etc...)

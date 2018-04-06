@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best SEO plugin.
-Version: 2.6
+Version: 2.6.1
 Author: Benjamin DENIS
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '2.6' ); 
+define( 'SEOPRESS_VERSION', '2.6.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -458,25 +458,29 @@ if (seopress_xml_sitemap_general_enable_option() =='1') {
         if( get_query_var( 'seopress_sitemap' ) === '1' ) {
             $seopress_sitemap = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps.php';
             if( file_exists( $seopress_sitemap ) ) {
-                return $seopress_sitemap;
+                include $seopress_sitemap;
+                exit;
             }
         }        
         if( get_query_var( 'seopress_sitemap_xsl' ) === '1' ) {
             $seopress_sitemap_xsl = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps-xsl.php';
             if( file_exists( $seopress_sitemap_xsl ) ) {
-                return $seopress_sitemap_xsl;
+                include $seopress_sitemap_xsl;
+                exit;
             }
         }
         if( get_query_var( 'seopress_cpt') !== '' ) {
             $seopress_cpt = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps-single.php';
             if( file_exists( $seopress_cpt ) ) {
-                return $seopress_cpt;
+                include $seopress_cpt;
+                exit;
             }
         }
         if( get_query_var( 'seopress_tax') !== '' ) {
             $seopress_tax = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps-single-term.php';
             if( file_exists( $seopress_tax ) ) {
-                return $seopress_tax;
+                include $seopress_tax;
+                exit;
             }
         }
         return $template;

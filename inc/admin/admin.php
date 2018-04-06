@@ -14,7 +14,6 @@ class seopress_options
      */
     public function __construct() {
         add_action( 'admin_menu', array( $this, 'add_plugin_page' ), 10 );
-        add_action( 'network_admin_menu', array( $this, 'add_network_plugin_page'), 10 );
         add_action( 'admin_init', array( $this, 'set_default_values' ), 10 );
         add_action( 'admin_init', array( $this, 'page_init' ) );
     }
@@ -172,17 +171,6 @@ class seopress_options
     /**
      * Add options page
      */
-    public function add_network_plugin_page() {
-        if (has_filter('seopress_seo_admin_menu')) {
-            $sp_seo_admin_menu['icon'] = apply_filters('seopress_seo_admin_menu', $sp_seo_admin_menu['icon']);
-        } else {
-            $sp_seo_admin_menu['icon'] = 'dashicons-admin-seopress';
-        }
-        
-        add_menu_page(__('SEOPress Network settings'), 'SEO', 'manage_options', 'seopress-network-option', array( $this, 'create_network_admin_page' ), $sp_seo_admin_menu['icon'], 90);
- 
-    }
-
     public function add_plugin_page()
     {
         if (has_filter('seopress_seo_admin_menu')) {
@@ -763,60 +751,8 @@ class seopress_options
     /**
      * Options page callback
      */
-    public function create_network_admin_page() {
-        if (is_plugin_active('wp-seopress/seopress.php')) {
-            if (function_exists('seopress_admin_header')) {
-                echo seopress_admin_header();
-            } ?>
-
-            <form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
-
-                <?php if (get_option('blog_public') =='0') {
-                    echo '<div class="error notice is-dismissable">';
-                    echo '<p>'. __('Discourage search engines from indexing this site is <strong>ON!</strong> None of the following settings will be applied.','wp-seopress-pro');
-                    echo ' <a href="'.admin_url("options-reading.php").'">'.__('Change this settings','wp-seopress-pro').'</a></p>';
-                    echo '</div>';
-                }
-
-                echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
-
-                global $wp_version, $title;
-                $current_tab = '';
-                $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
-                echo '<'.$tag.'><span class="dashicons dashicons-editor-table"></span>'.$title.'</'.$tag.'>';
-                settings_fields( 'seopress_pro_option_group' );
-                ?>
-
-                <div id="seopress-tabs" class="wrap">
-                    <?php 
-                        $plugin_settings_tabs = array(
-                            'tab_seopress_robots' => __( "robots.txt", "wp-seopress-pro" ),
-                            'tab_seopress_htaccess' => __( ".htaccess", "wp-seopress-pro" ),
-                        );
-
-                        echo '<div class="nav-tab-wrapper">';
-                        foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
-                            echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-network-option#tab=' . $tab_key . '">' . $tab_caption . '</a>';
-                        }
-                        echo '</div>';
-                    ?>
-                    
-                    <!-- Robots -->
-                    <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_robots') { echo 'active'; } ?>" id="tab_seopress_robots"><?php do_settings_sections( 'seopress-settings-admin-robots' ); ?></div>
-
-                    <!-- htaccess -->
-                    <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_htaccess') { echo 'active'; } ?>" id="tab_seopress_htaccess"><?php do_settings_sections( 'seopress-settings-admin-htaccess' ); ?></div>
-
-                </div><!--seopress-tabs-->
-
-                <?php submit_button(); ?>
-            </form>
-        <?php }
-    }
-
     public function create_admin_page()
     {
-    
         // Set class property
         $this->options = get_option( 'seopress_option_name' );
         $current_tab ='';
@@ -1681,6 +1617,7 @@ class seopress_options
                                 <span class="inner">
                                     <h3><?php _e('robots.txt','wp-seopress'); ?></h3>
                                     <p><?php _e('Edit your robots.txt file','wp-seopress'); ?></p>
+                                    <a href="<?php get_home_url(); ?>/robots.txt" class="button-secondary view-redirects" target="_blank"><?php _e('View your robots.txt','wp-seopress-pro'); ?></a>
                                     <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots$4' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                                     <?php
                                         if(seopress_get_toggle_robots_option()=='1') { 
@@ -1689,6 +1626,7 @@ class seopress_options
                                             $seopress_get_toggle_robots_option = '"0"';
                                         }
                                     ?>
+                                    
                                     <input type="checkbox" name="toggle-robots" id="toggle-robots" class="toggle" data-toggle=<?php echo $seopress_get_toggle_robots_option; ?>>
                                     <label for="toggle-robots"></label>
                                     <?php
