@@ -250,7 +250,7 @@ if (get_option('blog_public') =='1') {
 		}
 
 		$seopress_excerpt ='';
-		if (!is_404()) {
+		if (!is_404() && $post !='') {
 			if (has_excerpt($post->ID)) {
 				$seopress_excerpt = get_the_excerpt();
 			}
@@ -499,7 +499,7 @@ if (get_option('blog_public') =='1') {
 		}
 
 		$seopress_excerpt ='';
-		if (!is_404()) {
+		if (!is_404() && $post !='') {
 			if (has_excerpt($post->ID)) {
 				$seopress_excerpt = get_the_excerpt();
 			}

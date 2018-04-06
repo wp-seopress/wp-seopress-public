@@ -102,27 +102,36 @@ function seopress_do_content_analysis() {
     $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
 
     //Get Target Keywords
-    $seopress_analysis_target_kw = array_filter(array_map('trim', explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true))));
+    $seopress_analysis_target_kw = explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true));
 
     //Get Post Title
     $seopress_get_the_title = get_post_field('post_title', $seopress_get_the_id);
     if ($seopress_get_the_title !='') {
-        $data_post_title_clean = explode(' ',implode(' ', (array)$seopress_get_the_title));
-        $seopress_analysis_data['post_title'][] = array_intersect($data_post_title_clean, $seopress_analysis_target_kw);
+        foreach ($seopress_analysis_target_kw as $kw) {
+            if (preg_match_all('#\b('.$kw.')\b#iu', $seopress_get_the_title, $m)) {
+                $seopress_analysis_data['post_title']['matches'][$kw][] = $m[0];
+            }
+        }
     }
 
     //Get Meta Title
     $seopress_titles_title = get_post_meta($seopress_get_the_id, '_seopress_titles_title', true);
     if ($seopress_titles_title !='') {
-        $data_title_clean = explode(' ',implode(' ', (array)$seopress_titles_title));
-        $seopress_analysis_data['title'][] = array_intersect($data_title_clean, $seopress_analysis_target_kw);
+        foreach ($seopress_analysis_target_kw as $kw) {
+            if (preg_match_all('#\b('.$kw.')\b#iu', $seopress_titles_title, $m)) {
+                $seopress_analysis_data['title']['matches'][$kw][] = $m[0];
+            }
+        }
     }
 
     //Get Meta Description
     $seopress_titles_desc = get_post_meta($seopress_get_the_id, '_seopress_titles_desc', true);
     if ($seopress_titles_desc !='') {
-        $data_desc_clean = explode(' ',implode(' ', (array)$seopress_titles_desc));
-        $seopress_analysis_data['desc'][] = array_intersect($data_desc_clean, $seopress_analysis_target_kw);
+        foreach ($seopress_analysis_target_kw as $kw) {
+            if (preg_match_all('#\b('.$kw.')\b#iu', $seopress_titles_desc, $m)) {
+                $seopress_analysis_data['desc']['matches'][$kw][] = $m[0];
+            }
+        }
     }
 
     //DomDocument
@@ -139,39 +148,38 @@ function seopress_do_content_analysis() {
     
     //h1
     $h1 = $domxpath->query("//h1");
-
     if (!empty($h1)) {
-        
         foreach ($h1 as $heading1) {
-            $data_h1[] .= $heading1->nodeValue;
+            foreach ($seopress_analysis_target_kw as $kw) {
+                if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading1->nodeValue), $m)) {
+                    $seopress_analysis_data['h1']['matches'][$kw][] = $m[0];
+                }
+            }
         }
-        $seopress_analysis_data['h1'] = $data_h1;
-    }  
+    } 
 
     //h2
     $h2 = $domxpath->query("//h2");
-
     if (!empty($h2)) {
-        
         foreach ($h2 as $heading2) {
-            $data_h2[] .= $heading2->nodeValue;
+            foreach ($seopress_analysis_target_kw as $kw) {
+                if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading2->nodeValue), $m)) {
+                    $seopress_analysis_data['h2']['matches'][$kw][] = $m[0];
+                }
+            }
         }
-        $data_h2_clean = explode(' ',implode(' ', $data_h2));
-
-        $seopress_analysis_data['h2'][] = array_intersect($data_h2_clean, $seopress_analysis_target_kw);
     }
 
     //h3
     $h3 = $domxpath->query("//h3");
-
     if (!empty($h3)) {
-        
         foreach ($h3 as $heading3) {
-            $data_h3[] .= $heading3->nodeValue;
+            foreach ($seopress_analysis_target_kw as $kw) {
+                if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading3->nodeValue), $m)) {
+                    $seopress_analysis_data['h3']['matches'][$kw][] = $m[0];
+                }
+            }
         }
-        $data_h3_clean = explode(' ',implode(' ', $data_h3));
-
-        $seopress_analysis_data['h3'][] = array_intersect($data_h3_clean, $seopress_analysis_target_kw);
     }
 
     //Images

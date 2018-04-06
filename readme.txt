@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta, title, meta description, open graph
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.5.2
+Stable tag: 2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,6 +153,13 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.6 =
+* NEW Add WP Editor to taxonomy description textarea
+* NEW 15 new Google Analytics hooks (custom dimensions, link attribution etc...)
+* NEW Admin menu hook to filter SEOPress icon
+* INFO Content Analysis improvement: now with support for expressions, accented words, case insensitive etc...
+* INFO Improve A11Y
+* FIX Trying to get property 'ID' of non-object (inc/functions/options-titles-metas.php:503 & inc/functions/options-titles-metas.php:253)
 = 2.5.2 =
 * FIX Google Analytics
 = 2.5.1 =

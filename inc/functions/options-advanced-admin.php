@@ -679,3 +679,78 @@ function seopress_bulk_quick_edit_save_post($post_id) {
         update_post_meta($post_id, '_seopress_robots_canonical', esc_html($_REQUEST['seopress_canonical']));
     }
 }
+
+//WP Editor on taxonomy description field
+function seopress_advanced_advanced_tax_desc_editor_option() {
+    $seopress_advanced_advanced_tax_desc_editor_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_advanced_tax_desc_editor_option ) ) {
+        foreach ($seopress_advanced_advanced_tax_desc_editor_option as $key => $seopress_advanced_advanced_tax_desc_editor_value)
+            $options[$key] = $seopress_advanced_advanced_tax_desc_editor_value;
+         if (isset($seopress_advanced_advanced_tax_desc_editor_option['seopress_advanced_advanced_tax_desc_editor'])) { 
+            return $seopress_advanced_advanced_tax_desc_editor_option['seopress_advanced_advanced_tax_desc_editor'];
+         }
+    }
+}
+if (seopress_advanced_advanced_tax_desc_editor_option() !='' && current_user_can( 'publish_posts' )) {
+    
+    function seopress_tax_desc_wp_editor_init() {
+        global $pagenow;
+        if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
+            remove_filter( 'pre_term_description', 'wp_filter_kses' );
+            remove_filter( 'term_description', 'wp_kses_data' );
+
+            //Disallow HTML Tags
+            if ( ! current_user_can( 'unfiltered_html' ) ) {
+                add_filter( 'pre_term_description', 'wp_kses_post' );
+                add_filter( 'term_description', 'wp_kses_post' );
+            }
+
+            //Allow HTML Tags
+            add_filter( 'term_description', 'wptexturize' );
+            add_filter( 'term_description', 'convert_smilies' );
+            add_filter( 'term_description', 'convert_chars' );
+            add_filter( 'term_description', 'wpautop' );
+
+        }
+        function seopress_tax_desc_wp_editor($tag) {
+            global $pagenow;
+            if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
+
+                $content = '';
+
+                if ($pagenow == 'term.php') {
+                    $editor_id = 'description';
+                } elseif($pagenow == 'edit-tags.php') {
+                    $editor_id = 'tag-description';
+                }
+
+                ?>
+
+                <tr class="form-field term-description-wrap">
+                    <th scope="row"><label for="description"><?php _e( 'Description' ); ?></label></th>
+                    <td>
+                        <?php
+                        $settings = array(
+                            'textarea_name' => 'description',
+                            'textarea_rows' => 10,
+                        );
+                        wp_editor( htmlspecialchars_decode( $tag->description ), 'html-tag-description', $settings );
+                        ?>
+                        <p class="description"><?php _e( 'The description is not prominent by default; however, some themes may show it.' ); ?></p>
+                    </td>
+                    <script type="text/javascript">
+                        // Remove default description field
+                        jQuery('textarea#description').closest('.form-field').remove();
+                    </script>
+                </tr>
+
+                <?php
+            }
+        }
+        $seopress_get_taxonomies = seopress_get_taxonomies();
+        foreach ($seopress_get_taxonomies as $key => $value) {
+            add_action($key.'_edit_form_fields', 'seopress_tax_desc_wp_editor', 9, 1);
+        }
+    }
+    add_action('init', 'seopress_tax_desc_wp_editor_init');
+}

@@ -5,7 +5,7 @@ echo '<div id="seopress-analysis-tabs">
             '.__('Enter a few keywords for analysis and help you write optimized content.','wp-seopress').'
             <label for="seopress_analysis_target_kw_meta">'. __( 'Target keywords', 'wp-seopress' ) .'</label>
             <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" aria-label="'.__('Target keywords','wp-seopress').'" value="'.$seopress_analysis_target_kw.'" />
-            <span class="howto">'.__('Separate target keywords with commas','wp-seopress').'</span>
+            <span class="howto">'.__('Separate target keywords with commas, do not use space after comma unless it\'s wanted.','wp-seopress').'</span>
         </p>';
 
         if (empty($seopress_analysis_data)) {
@@ -45,14 +45,16 @@ echo '<div id="seopress-analysis-tabs">
                 //Post Title
                 echo '<h3>'.__('Post title','wp-seopress').'</h3>';
                 if (get_post_field('post_title', $post->ID) !='') {
-                    if (!empty($seopress_analysis_data['0']['post_title']['0'])) {
+                    if (!empty($seopress_analysis_data['0']['post_title']['matches'])) {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Post Title.','wp-seopress').'</p>';
-
-                        $target_kws_post_title = array_count_values($seopress_analysis_data['0']['post_title']['0']);
-                        
                         echo '<ul>';
+                            $target_kws_post_title = $seopress_analysis_data['0']['post_title']['matches'];
                             foreach ($target_kws_post_title as $key => $value) {
-                                echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $key, $value).'</li>';
+                                foreach ($value as $_key => $_value) {
+                                    $kw_count = count($_value);
+                                }
+                                $kw_name = $key;
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
                             }
                         echo '</ul>';
                     } else {
@@ -63,21 +65,25 @@ echo '<div id="seopress-analysis-tabs">
                 }
 
                 //H1
-                if (!empty($seopress_analysis_data['0']['h1'])) {
+                if (!empty($seopress_analysis_data['0']['h1']['matches'])) {
                     echo '<h3>'.__('H1 (Heading 1)','wp-seopress').'</h3>';
-                    $count = count($seopress_analysis_data['0']['h1']);
+                    $count = count($seopress_analysis_data['0']['h1']['matches']);
                     echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d Heading 1 (H1) in your content.','wp-seopress'), $count).'</p>';
                     echo '<p>'.__('You should not use Heading 1 in your post content because your post title is already an H1. The rule is simple: 1 H1 for 1 web page.','wp-seopress').'</p>';
                 }
 
                 //H2
                 echo '<h3>'.__('H2 (Heading 2)','wp-seopress').'</h3>';
-                if (!empty($seopress_analysis_data['0']['h2']['0'])) {
+                if (!empty($seopress_analysis_data['0']['h2']['matches'])) {
                     echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Heading 2 (H2).','wp-seopress').'</p>';
-                    $target_kws_h2 = array_count_values($seopress_analysis_data['0']['h2']['0']);
                     echo '<ul>';
+                        $target_kws_h2 = $seopress_analysis_data['0']['h2']['matches'];
                         foreach ($target_kws_h2 as $key => $value) {
-                            echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $key, $value).'</li>';
+                            foreach ($value as $_key => $_value) {
+                                $kw_count = count($_value);
+                            }
+                            $kw_name = $key;
+                            echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
                         }
                     echo '</ul>';
                 } else {
@@ -86,12 +92,16 @@ echo '<div id="seopress-analysis-tabs">
 
                 //H3
                 echo '<h3>'.__('H3 (Heading 3)','wp-seopress').'</h3>';
-                if (!empty($seopress_analysis_data['0']['h3']['0'])) {
+                if (!empty($seopress_analysis_data['0']['h3']['matches'])) {
                     echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Heading 3 (H3).','wp-seopress').'</p>';
-                    $target_kws_h3 = array_count_values($seopress_analysis_data['0']['h3']['0']);
                     echo '<ul>';
+                        $target_kws_h3 = $seopress_analysis_data['0']['h3']['matches'];
                         foreach ($target_kws_h3 as $key => $value) {
-                            echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $key, $value).'</li>';
+                            foreach ($value as $_key => $_value) {
+                                $kw_count = count($_value);
+                            }
+                            $kw_name = $key;
+                            echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
                         }
                     echo '</ul>';
                 } else {
@@ -101,14 +111,16 @@ echo '<div id="seopress-analysis-tabs">
                 //Meta Title
                 echo '<h3>'.__('Meta title','wp-seopress').'</h3>';
                 if ($seopress_titles_title !='') {
-                    if (!empty($seopress_analysis_data['0']['title']['0'])) {
+                    if (!empty($seopress_analysis_data['0']['title']['matches'])) {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Meta Title.','wp-seopress').'</p>';
-
-                        $target_kws_title = array_count_values($seopress_analysis_data['0']['title']['0']);
-                        
                         echo '<ul>';
+                            $target_kws_title = $seopress_analysis_data['0']['title']['matches'];
                             foreach ($target_kws_title as $key => $value) {
-                                echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $key, $value).'</li>';
+                                foreach ($value as $_key => $_value) {
+                                    $kw_count = count($_value);
+                                }
+                                $kw_name = $key;
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
                             }
                         echo '</ul>';
                     } else {
@@ -128,14 +140,16 @@ echo '<div id="seopress-analysis-tabs">
                 echo '<h3>'.__('Meta description','wp-seopress').'</h3>';
 
                 if ($seopress_titles_desc !='') {
-                    if (!empty($seopress_analysis_data['0']['desc']['0'])) {
-                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Meta description.','wp-seopress').'</p>';
-
-                        $target_kws_desc = array_count_values($seopress_analysis_data['0']['desc']['0']);
-                        
+                    if (!empty($seopress_analysis_data['0']['desc']['matches'])) {
+                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Meta description.','wp-seopress').'</p>';                        
                         echo '<ul>';
+                            $target_kws_desc = $seopress_analysis_data['0']['desc']['matches'];
                             foreach ($target_kws_desc as $key => $value) {
-                                echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $key, $value).'</li>';
+                                foreach ($value as $_key => $_value) {
+                                    $kw_count = count($_value);
+                                }
+                                $kw_name = $key;
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
                             }
                         echo '</ul>';
                     } else {
