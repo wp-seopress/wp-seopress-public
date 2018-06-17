@@ -61,10 +61,10 @@ function seopress_xml_sitemap_single() {
 					if (seopress_xml_sitemap_img_enable_option() =='1') {
 						
 						//Standard images
-						if (get_the_content($post) !='') {
+						if (get_post_field('post_content', $post) !='') {
 							$dom = new domDocument;
 							$internalErrors = libxml_use_internal_errors(true);
-							$dom->loadHTML(esc_attr(wp_filter_nohtml_kses(htmlentities(get_the_content($post)))));
+							$dom->loadHTML(get_post_field('post_content', $post));
 							$dom->preserveWhiteSpace = false;
 							if ($dom->getElementsByTagName('img') !='') {
 								$images = $dom->getElementsByTagName('img');
@@ -96,7 +96,7 @@ function seopress_xml_sitemap_single() {
 								        $seopress_sitemaps .= '<image:image>';
 								        $seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
-										$seopress_sitemaps .= '<![CDATA['.utf8_decode(urldecode($url)).']]>';
+										$seopress_sitemaps .= '<![CDATA['.utf8_decode(urldecode(esc_attr(wp_filter_nohtml_kses(htmlentities($url))))).']]>';
 								        $seopress_sitemaps .= '</image:loc>';
 								        $seopress_sitemaps .= "\n";
 								        $seopress_sitemaps .= '</image:image>';

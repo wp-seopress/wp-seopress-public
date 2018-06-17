@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //Get real preview
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_do_real_preview() {
-    check_ajax_referer( 'seopress_real_preview_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer( 'seopress_real_preview_nonce', $_GET['_ajax_nonce'], true );
     
     //Get post id
     if ( isset( $_GET['post_id'] ) ) {
@@ -142,8 +142,8 @@ function seopress_do_content_analysis() {
     $domxpath = new DOMXPath($dom);
 
     //Words counter
-    $seopress_analysis_data['words_counter'] = str_word_count(strip_tags($seopress_get_the_content));
-    $words_counter_unique = count(array_unique(str_word_count($seopress_get_the_content, 1)));
+    $seopress_analysis_data['words_counter'] = str_word_count(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)));
+    $words_counter_unique = count(array_unique(str_word_count(wp_filter_nohtml_kses($seopress_get_the_content), 1)));
     $seopress_analysis_data['words_counter_unique'] = $words_counter_unique - 1;
     
     //h1

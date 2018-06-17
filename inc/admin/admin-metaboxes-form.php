@@ -225,6 +225,8 @@ echo               '<div class="snippet-description">...</div>
             </p>
             <br/>
             <span class="dashicons dashicons-twitter"></span>
+            <br><br>
+            <span class="dashicons dashicons-external"></span><a href="https://cards-dev.twitter.com/validator" target="_blank">'.__('Preview your Twitter card using the official validator','wp-seopress').'</a>
             <p>
                 <label for="seopress_social_twitter_title_meta">'. __( 'Twitter Title', 'wp-seopress' ) .'</label>
                 <input id="seopress_social_twitter_title_meta" type="text" name="seopress_social_twitter_title" placeholder="'.esc_html__('Enter your Twitter title','wp-seopress').'" aria-label="'.__('Twitter Title','wp-seopress').'" value="'.$seopress_social_twitter_title.'" />

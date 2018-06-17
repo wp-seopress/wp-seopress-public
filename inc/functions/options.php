@@ -133,11 +133,106 @@ if (seopress_get_toggle_google_analytics_option() =='1') {
 		}
 	}
 
+	//Disable Tracking
+	function seopress_google_analytics_disable_option() {
+		$seopress_google_analytics_disable_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_disable_option ) ) {
+			foreach ($seopress_google_analytics_disable_option as $key => $seopress_google_analytics_disable_value)
+				$options[$key] = $seopress_google_analytics_disable_value;
+				if (isset($seopress_google_analytics_disable_option['seopress_google_analytics_disable'])) {
+					return $seopress_google_analytics_disable_option['seopress_google_analytics_disable'];
+				}
+		}
+	}
+
+	//Disable Tracking - Message
+	function seopress_google_analytics_opt_out_msg_option() {
+		$seopress_google_analytics_opt_out_msg_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_opt_out_msg_option ) ) {
+			foreach ($seopress_google_analytics_opt_out_msg_option as $key => $seopress_google_analytics_opt_out_msg_value)
+				$options[$key] = $seopress_google_analytics_opt_out_msg_value;
+				if (isset($seopress_google_analytics_opt_out_msg_option['seopress_google_analytics_opt_out_msg'])) {
+					return $seopress_google_analytics_opt_out_msg_option['seopress_google_analytics_opt_out_msg'];
+				}
+		}
+	}
+
+	//User Consent JS
+	function seopress_google_analytics_cookies_js() {
+		wp_register_script('seopress-cookies', plugins_url( 'assets/js/seopress-cookies.min.js', dirname(dirname(__FILE__))), array(), '2.2.0', true);
+		wp_enqueue_script('seopress-cookies');
+
+		wp_enqueue_script( 'seopress-cookies-ajax', plugins_url( 'assets/js/seopress-cookies-ajax.js', dirname(dirname(__FILE__))), array( 'jquery','seopress-cookies' ), '', true );
+
+        $seopress_cookies_user_consent = array(
+	        'seopress_nonce' => wp_create_nonce('seopress_cookies_user_consent_nonce'),
+	        'seopress_cookies_user_consent' => admin_url('admin-ajax.php'),
+	    );
+	    wp_localize_script( 'seopress-cookies-ajax', 'seopressAjaxGAUserConsent', $seopress_cookies_user_consent );
+	}
+	if (seopress_google_analytics_disable_option() =='1') {
+		if (is_user_logged_in()) {
+			global $wp_roles;
+			
+			//Get current user role
+			if(isset(wp_get_current_user()->roles[0])) {
+				$seopress_user_role = wp_get_current_user()->roles[0];
+				//If current user role matchs values from SEOPress GA settings then apply
+				if (function_exists('seopress_google_analytics_roles_option') && seopress_google_analytics_roles_option() !='') {
+					if( array_key_exists( $seopress_user_role, seopress_google_analytics_roles_option())) {
+						//do nothing
+					} else {
+						add_action('wp_enqueue_scripts','seopress_google_analytics_cookies_js', 20, 1);
+					}
+				} else {
+					add_action('wp_enqueue_scripts','seopress_google_analytics_cookies_js', 20, 1);	
+				}
+			} else {
+				add_action('wp_enqueue_scripts','seopress_google_analytics_cookies_js', 20, 1);
+			}
+		}
+	}
+
 	add_action('wp_head', 'seopress_load_google_analytics_options', 0);
 	function seopress_load_google_analytics_options() {
 	    require_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
 	}
-	
+
+	function seopress_cookies_user_consent() {
+	    check_ajax_referer( 'seopress_cookies_user_consent_nonce', $_GET['_ajax_nonce'], true );
+	    if (is_user_logged_in()) {
+			global $wp_roles;
+			
+			//Get current user role
+			if(isset(wp_get_current_user()->roles[0])) {
+				$seopress_user_role = wp_get_current_user()->roles[0];
+				//If current user role matchs values from SEOPress GA settings then apply
+				if (function_exists('seopress_google_analytics_roles_option') && seopress_google_analytics_roles_option() !='') {
+					if( array_key_exists( $seopress_user_role, seopress_google_analytics_roles_option())) {
+						//do nothing
+					} else {
+					 	include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
+					 	$data = array();
+					 	$data['gtag_js'] = seopress_google_analytics_js(false);
+						wp_send_json_success($data);
+					}
+				} else {
+					include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
+				 	$data = array();
+				 	$data['gtag_js'] = seopress_google_analytics_js(false);
+					wp_send_json_success($data);
+				}
+			}
+		} else {
+			include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
+		 	$data = array();
+		 	$data['gtag_js'] = seopress_google_analytics_js(false);
+			wp_send_json_success($data);
+		}
+	}
+	add_action('wp_ajax_seopress_cookies_user_consent', 'seopress_cookies_user_consent');
+	add_action('wp_ajax_nopriv_seopress_cookies_user_consent', 'seopress_cookies_user_consent');
+
 	// add_action('woocommerce_add_to_cart', 'seopress_load_google_analytics_checkout_options', 0);
 	// function seopress_load_google_analytics_checkout_options() {
 	//     require_once ( dirname( __FILE__ ) . '/options-google-analytics-checkout.php'); //Google Analytics E-commerce

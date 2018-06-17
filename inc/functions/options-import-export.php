@@ -71,7 +71,7 @@ function seopress_import_settings() {
     update_option( 'seopress_toggle', $settings["seopress_toggle"] );
     update_option( 'seopress_google_analytics_lock_option_name', $settings["seopress_google_analytics_lock_option_name"] );
      
-    wp_safe_redirect( admin_url( 'admin.php?page=seopress-import-export' ) ); exit;
+    wp_safe_redirect( admin_url( 'admin.php?page=seopress-import-export&success=true' ) ); exit;
 }
 add_action( 'admin_init', 'seopress_import_settings' );
 

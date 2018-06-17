@@ -2,11 +2,11 @@
 Authors: rainbowgeek
 Contributors: rainbowgeek
 Donate link: https://www.seopress.org/
-Tags: seo, search engine optimization, meta title, open graph, content analysis, knowledge graph, redirection, xml sitemap, breadcrumbs, google analytics, rich snippets, broken link checker
+Tags: seo, search engine optimization, meta title, open graph, content analysis, knowledge graph, redirection, xml sitemap, breadcrumbs, google analytics, rich snippets, broken link checker, GDPR
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.7.3
+Stable tag: 2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Meta descriptions</li>
 	<li>Open Graph Data</li>
 	<li>Google Knowledge Graph</li>
-	<li>Google Analytics with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...</li>
+	<li>Google Analytics with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(GDPR compatibility)</li>
 	<li>Twitter Card</li>
 	<li>Canonical URL</li> 
 	<li>Meta robots (noindex, nofollow, noodp, noimageindex, noarchive, nosnippet)</li>
@@ -155,6 +155,29 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.8 =
+* NEW GDPR for Google Analytics: request user's consent for analytics tracking
+* NEW Search results URL rewriting, eg: https://example.com/search/my-keyword (PRO only)
+* NEW Add ARIA label to breadcrumbs
+* NEW %%_ct_your_custom_taxonomy_slug%% dynamic variable for title / meta description
+* NEW %%currentday%% dynamic variables for title / meta description
+* NEW %%currentmonth%% dynamic variables for title / meta description
+* NEW %%currentyear%% dynamic variables for title / meta description
+* NEW %%currentdate%% dynamic variables for title / meta description
+* NEW %%currenttime%% dynamic variables for title / meta description
+* NEW %%archive_title%% dynamic variable for title / meta description
+* NEW %%archive_date_day%% dynamic variable for title / meta description
+* NEW %%archive_date_month%% dynamic variable for title / meta description
+* NEW %%archive_date_year%% dynamic variable for title / meta description
+* NEW Add 'seopress_pro_breadcrumbs_css' hook to filter breadcrumbs inline CSS
+* NEW Add 'seopress_pro_breadcrumbs_sep' hook to filter breadcrumbs separator
+* INFO Remove "seopress-breadcrumb" class
+* INFO Add echo parameter to 'seopress_display_breadcrumbs' function, default true, set to false to return the breadcrumbs
+* INFO Remove SEOPress PRO ad in Add plugin section
+* INFO Add a message when import settings is done
+* FIX Word count in Content Analysis metaboxe
+* FIX XML Sitemaps standard images
+* FIX PHP Notice: Undefined index: _ajax_nonce
 = 2.7.3 =
 * FIX Meta title / description
 = 2.7.2 =
@@ -172,10 +195,10 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 * NEW Add seopress_social_twitter_card_summary hook to filter Twitter card summary tag
 * NEW Add seopress_social_twitter_card_site hook to filter Twitter card site tag
 * NEW Add seopress_social_twitter_card_creator hook to filter Twitter card creator tag
-* NEW Add seopress_dublin_core_title hook to filter Dublic Core title tag
-* NEW Add seopress_dublin_core_desc hook to filter Dublic Core description tag
-* NEW Add seopress_dublin_core_relation hook to filter Dublic Core relation tag
-* NEW Add seopress_dublin_core_source hook to filter Dublic Core source tag
+* NEW Add seopress_dublin_core_title hook to filter Dublin Core title tag
+* NEW Add seopress_dublin_core_desc hook to filter Dublin Core description tag
+* NEW Add seopress_dublin_core_relation hook to filter Dublin Core relation tag
+* NEW Add seopress_dublin_core_source hook to filter Dublin Core source tag
 * INFO Remove canonical URL if noindex set
 * FIX Notice: Undefined variable: seopress_titles_title_template 
 * FIX Notice: Undefined variable: seopress_titles_description_template

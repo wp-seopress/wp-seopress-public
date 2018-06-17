@@ -434,4 +434,25 @@ jQuery(document).ready(function(){
 			},
 		});
 	});
+	//Rewrite
+	jQuery('#toggle-rewrite').on('click', function() {
+		jQuery('#toggle-rewrite').attr('data-toggle', jQuery('#toggle-rewrite').attr('data-toggle') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxToggleFeatures.seopress_toggle_features,
+			data : {
+				action: 'seopress_toggle_features',
+				feature: 'toggle-rewrite',
+				feature_value: jQuery('#toggle-rewrite').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('URL Rewriting has been successfully updated!');
+				jQuery( '#rewrite-state' ).toggleClass('feature-state-on');
+				jQuery( '#rewrite-state-default' ).toggleClass('feature-state-off');
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
 });

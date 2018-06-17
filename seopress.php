@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best SEO plugin.
-Version: 2.7.3
+Version: 2.8
 Author: Benjamin DENIS
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '2.7.3' ); 
+define( 'SEOPRESS_VERSION', '2.8' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -262,11 +262,11 @@ function seopress_custom_credits_footer() {
                 '.__( "You like SEOPress? Don't forget to rate it 5 stars!", "wp-seopress" ).'
 
                 <span class="wporg-ratings rating-stars">
-                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=1#postform" data-rating="1" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=2#postform" data-rating="2" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=3#postform" data-rating="3" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=4#postform" data-rating="4" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-                    <a href="//wordpress.org/support/view/plugin-reviews/seopress?rate=5#postform" data-rating="5" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
+                    <a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=1#postform" data-rating="1" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
+                    <a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=2#postform" data-rating="2" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
+                    <a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=3#postform" data-rating="3" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
+                    <a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=4#postform" data-rating="4" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
+                    <a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=5#postform" data-rating="5" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
                 </span>
                 <script>
                     jQuery(document).ready( function($) {
@@ -554,58 +554,6 @@ function seopress_get_toggle_advanced_option() {
             return $seopress_get_toggle_advanced_option['toggle-advanced'];
          }
     }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// SEOPress PRO link in plugin featured tab
-///////////////////////////////////////////////////////////////////////////////////////////////////
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-if (!is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-    function seopress_filter_api_result( $result, $action, $args ) {
-        remove_filter( 'plugins_api_result', 'seopress_filter_api_result', 10, 3 );
-        
-        if ( false === ( $defaults = get_transient( 'seopress_plugins_api' ) ) ) {
-            $defaults = plugins_api( 'plugin_information', array( 'slug' => 'wp-seopress', 'fields' => array( 'active_installs' => true ) ) );
-
-            set_transient( 'seopress_plugins_api', $defaults, 1 * DAY_IN_SECONDS );
-        }
-
-        if ( empty( $args->browse ) || ( 'featured' !== $args->browse && 'recommended' !== $args->browse ) ) {
-            return $result;
-        }
-
-        if ( ! isset( $result->info['page'] ) || 1 < $result->info['page'] ) {
-            return $result;
-        }
-
-        $seopress_infos = array_merge( (array) $defaults, 
-            array(
-                'name'                     => 'SEOPress PRO',
-                'short_description'        => __('The PRO release of SEOPress with Google Local Business, Dublin Core, WooCommerce, Google Structured Data Types, Breadcrumbs, Google Page Speed, robots.txt, Google News, 404 monitoring, .htaccess, RSS, Broken links, Redirections and more...','wp-seopress'),
-                'icons' => array( 'default' => 'https://ps.w.org/wp-seopress/assets/icon-256x256.png' ),
-
-        ));
-        array_unshift( $result->plugins, $seopress_infos );
-
-        return $result;
-    }
-    add_filter( 'plugins_api_result', 'seopress_filter_api_result', 10, 3 );
-
-    function seopress_filter_action_links( $links, $plugin ) {
-        if ( 'wp-seopress' == $plugin['slug'] ) {
-            if (function_exists('seopress_get_locale')) {
-                if (seopress_get_locale() =='fr') {
-                    $seopress_docs_link['pro'] = 'https://www.seopress.org/fr/seopress-pro/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                } else {
-                    $seopress_docs_link['pro'] = 'https://www.seopress.org/seopress-pro/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                }
-            }   
-            $links[0] = '<a href="'.$seopress_docs_link['pro'].'" class="button button-primary">'.__('Buy now','wp-seopress').'</a>'; 
-            $links[1] = '<a href="'.$seopress_docs_link['pro'].'" target="_blank">'.__('More details','wp-seopress').'</a>'; 
-        }
-        return $links;
-    }
-    add_filter( 'plugin_install_action_links', 'seopress_filter_action_links', 11, 2 );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
