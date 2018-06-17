@@ -96,7 +96,7 @@ function seopress_xml_sitemap_single() {
 						}
 
 						//Post Thumbnail
-						$post_thumbnail = esc_attr(wp_filter_nohtml_kses(htmlentities(get_the_post_thumbnail_url($post))));
+						$post_thumbnail = get_the_post_thumbnail_url($post);
 
 						if ((isset($images) && !empty ($images) && $images->length>=1) || (isset($galleries) && !empty($galleries)) || (isset($product) && !empty($product_img)) || $post_thumbnail !='') { 
 							
@@ -132,7 +132,7 @@ function seopress_xml_sitemap_single() {
 										$seopress_sitemaps .= '<image:image>';
 										$seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
-										$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses(htmlentities($url)))).']]>';
+										$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses($url))).']]>';
 								        $seopress_sitemaps .= '</image:loc>';
 								        $seopress_sitemaps .= "\n";
 								        $seopress_sitemaps .= '</image:image>';
@@ -145,7 +145,7 @@ function seopress_xml_sitemap_single() {
 									$seopress_sitemaps .= '<image:image>';
 									$seopress_sitemaps .= "\n";
 							       	$seopress_sitemaps .= '<image:loc>';
-									$seopress_sitemaps .= '<![CDATA['.esc_attr(wp_filter_nohtml_kses(htmlentities(wp_get_attachment_url( $product_attachment_id )))).']]>';
+									$seopress_sitemaps .= '<![CDATA['.esc_attr(wp_filter_nohtml_kses(wp_get_attachment_url( $product_attachment_id ))).']]>';
 							        $seopress_sitemaps .= '</image:loc>';
 							        $seopress_sitemaps .= "\n";
 							        $seopress_sitemaps .= '</image:image>';
