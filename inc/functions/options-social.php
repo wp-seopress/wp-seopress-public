@@ -602,7 +602,7 @@ function seopress_thumbnail_in_content() {
 		//DomDocument
 	    $dom = new domDocument;
 	    $internalErrors = libxml_use_internal_errors(true);
-	    $dom->loadHTML($seopress_get_the_content);
+	    $dom->loadHTML(mb_convert_encoding($seopress_get_the_content, 'HTML-ENTITIES', 'UTF-8'));
 	    $dom->preserveWhiteSpace = false;
 	    $domxpath = new DOMXPath($dom);
 
@@ -611,7 +611,7 @@ function seopress_thumbnail_in_content() {
 	    
 	    if (!empty($imgs) && $imgs[0] !=NULL) {
 	        $url = $imgs[0]->getAttribute('src');
-	        $url = esc_attr(wp_filter_nohtml_kses(htmlentities($url)));
+	        $url = esc_attr(wp_filter_nohtml_kses($url));
 	        return $url;
 	    }
 		libxml_use_internal_errors($internalErrors);
