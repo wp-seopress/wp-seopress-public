@@ -14,7 +14,7 @@ class seopress_options
      */
     public function __construct() {
         add_action( 'admin_menu', array( $this, 'add_plugin_page' ), 10 );
-        //add_action( 'admin_init', array( $this, 'set_default_values' ), 10 );
+        add_action( 'admin_init', array( $this, 'set_default_values' ), 10 );
         add_action( 'admin_init', array( $this, 'page_init' ) );
     }
     

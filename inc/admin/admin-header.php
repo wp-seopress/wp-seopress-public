@@ -127,6 +127,12 @@ function seopress_admin_header() { ?>
                                             <?php _e( 'Backlinks', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rewrite$14' ); ?>">
+                                            <span class="dashicons dashicons-admin-links"></span>
+                                            <?php _e( 'URL Rewriting', 'wp-seopress' ); ?>
+                                        </a>
+                                    </li>
                                     <?php if (!is_multisite()) { ?>
                                     <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess$7' ); ?>">
