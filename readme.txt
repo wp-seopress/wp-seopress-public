@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Tamil</li>
 	<li>Brazilian Portguese</li>
 	<li>Dutch</li>
+	<li>Vietnamese</li>
 	<li>German (in progress)</li>
 	<li>Japanese (in progress)</li>
 	<li><a href="https://www.seopress.org/contact-us/">Add yours and get SEOPress PRO for free!</a></li>
@@ -154,6 +155,30 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.7.2 =
+* NEW Add Vietnamese language (thanks to Anh)
+* NEW Add seopress_titles_canonical hook to filter canonical URL tag
+* NEW Add seopress_social_og_title hook to filter OG title tag
+* NEW Add seopress_social_og_desc hook to filter OG description tag
+* NEW Add seopress_social_og_thumb hook to filter OG thumbnail tag
+* NEW Add seopress_social_og_url hook to filter OG URL tag
+* NEW Add seopress_social_og_site_name hook to filter OG site name tag
+* NEW Add seopress_social_og_locale hook to filter OG locale tag
+* NEW Add seopress_social_twitter_card_title hook to filter Twitter card title tag
+* NEW Add seopress_social_twitter_card_desc hook to filter Twitter card description tag
+* NEW Add seopress_social_twitter_card_thumb hook to filter Twitter card thumbnail tag
+* NEW Add seopress_social_twitter_card_summary hook to filter Twitter card summary tag
+* NEW Add seopress_social_twitter_card_site hook to filter Twitter card site tag
+* NEW Add seopress_social_twitter_card_creator hook to filter Twitter card creator tag
+* NEW Add seopress_dublin_core_title hook to filter Dublic Core title tag
+* NEW Add seopress_dublin_core_desc hook to filter Dublic Core description tag
+* NEW Add seopress_dublin_core_relation hook to filter Dublic Core relation tag
+* NEW Add seopress_dublin_core_source hook to filter Dublic Core source tag
+* INFO Remove canonical URL if noindex set
+* FIX Notice: Undefined variable: seopress_titles_title_template 
+* FIX Notice: Undefined variable: seopress_titles_description_template
+* FIX Improve breadcrumbs compatibility with WooCommerce
+* FIX Dutch translation
 = 2.7.1 =
 * NEW Add seopress_titles_title hook to filter title tag
 * NEW Add seopress_titles_desc hook to filter meta description
@@ -393,7 +418,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 * FIX Undefined offset in admin.php
 * FIX Whois if subdomain
 = 2.0.3 =
-* NEW Add indonesian language (thanks to Tomtom)
+* NEW Add Indonesian language (thanks to Tomtom)
 * FIX Title/meta desc/OG, DC and Twitter metas for blog page
 * FIX OG/Twitter metas for term archive
 * FIX Esc quotes

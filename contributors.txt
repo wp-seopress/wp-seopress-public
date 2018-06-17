@@ -23,3 +23,11 @@ Translators:
 - Spanish: Rafael Salguero
 - German: @likemike2425
 - Japan: @s_tayama and @miccweb
+- Dutch: Sebastiaan Hendriks
+- Vietnamese: Anh
+- Russian: @Dmitriy
+- Tamil: Sankar Srinivasan
+- Brazilian Portuguese: Daniel Pechmann
+- Telugu: Manoj Kumar
+- Indonesian: Tomtom
+- Bulgarian: @ilivanov
