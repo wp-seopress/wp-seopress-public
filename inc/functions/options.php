@@ -354,14 +354,14 @@ if (seopress_get_toggle_advanced_option() =='1') {
 			$category_base = get_option( 'category_base' );
 
 			if ($category_base !='') {
-				if (preg_match('/'.$category_base.'/', $current_url)) {
+				if (preg_match('/\/'.$category_base.'\//', $current_url)) {
 					$new_url = str_replace('/'.$category_base, '', $current_url);
 					wp_redirect($new_url, 301 );
 					exit();
 				}
 			} else {
 				$category_base = 'category';
-				if (preg_match('/'.$category_base.'/', $current_url)) {
+				if (preg_match('/\/'.$category_base.'\//', $current_url)) {
 					$new_url = str_replace('/'.$category_base, '', $current_url);
 					wp_redirect($new_url, 301 );
 		    		exit();

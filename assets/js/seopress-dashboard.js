@@ -1,4 +1,9 @@
 jQuery(document).ready(function(){
+	//If no notices
+	if (!jQuery.trim( jQuery("#seopress-notifications-center").html() )) {
+		jQuery('#seopress-notifications-center').remove();
+	}
+
 	//Hide notices
 	//**Divide comments
 	jQuery('#notice-divide-comments').on('click', function() {
@@ -16,6 +21,26 @@ jQuery(document).ready(function(){
 				jQuery( '#seopress-notice-save' ).css('display', 'block');
 				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
 				jQuery( '#notice-divide-comments-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
+	//**Review SEOPress
+	jQuery('#notice-review').on('click', function() {
+		jQuery('#notice-review').attr('data-notice', jQuery('#notice-review').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-review',
+				notice_value: jQuery('#notice-review').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-review-alert' ).fadeOut();
 				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
 			},
 		});

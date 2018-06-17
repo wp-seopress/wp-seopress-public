@@ -122,6 +122,18 @@ function seopress_xml_sitemap_index() {
 		}
 	}
 
+	//Video sitemap
+	if (function_exists("seopress_xml_sitemap_video_enable_option") && seopress_xml_sitemap_video_enable_option() !='') {
+		$seopress_sitemaps .= "\n";
+		$seopress_sitemaps .= '<sitemap>';
+		$seopress_sitemaps .= "\n";
+		$seopress_sitemaps .= '<loc>';
+		$seopress_sitemaps .= home_url().'/sitemaps/video.xml';
+		$seopress_sitemaps .= '</loc>';
+		$seopress_sitemaps .= "\n";
+		$seopress_sitemaps .= '</sitemap>';
+	}
+
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .='</sitemapindex>';
 	

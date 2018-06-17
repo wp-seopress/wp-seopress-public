@@ -61,7 +61,49 @@ function seopress_do_real_preview() {
             $meta_description = $xpath->query('//meta[@name="description"]/@content');
 
             foreach ($meta_description as $key=>$mdesc) {
-                $data['meta_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mdesc->nodeValue)));
+                $data['meta_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags($mdesc->nodeValue))));
+            }
+
+            //OG:title
+            $og_title = $xpath->query('//meta[@property="og:title"]/@content');
+
+            foreach ($og_title as $key=>$mogtitle) {
+                $data['og_title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogtitle->nodeValue)));
+            }
+
+            //OG:description
+            $og_desc = $xpath->query('//meta[@property="og:description"]/@content');
+
+            foreach ($og_desc as $key=>$mogdesc) {
+                $data['og_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogdesc->nodeValue)));
+            }
+
+            //OG:image
+            $og_img = $xpath->query('//meta[@property="og:image"]/@content');
+
+            foreach ($og_img as $key=>$mogimg) {
+                $data['og_img'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogimg->nodeValue)));
+            }
+
+            //Twitter:title
+            $tw_title = $xpath->query('//meta[@name="twitter:title"]/@content');
+
+            foreach ($tw_title as $key=>$mtwtitle) {
+                $data['tw_title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtwtitle->nodeValue)));
+            }
+
+            //Twitter:description
+            $tw_desc = $xpath->query('//meta[@name="twitter:description"]/@content');
+
+            foreach ($tw_desc as $key=>$mtwdesc) {
+                $data['tw_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtwdesc->nodeValue)));
+            }
+
+            //Twitter:image
+            $tw_img = $xpath->query('//meta[@name="twitter:image"]/@content');
+
+            foreach ($tw_img as $key=>$mtwimg) {
+                $data['tw_img'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtwimg->nodeValue)));
             }
         }
     }

@@ -944,6 +944,31 @@ class seopress_options
                                         }
                                     ?>
                                     <?php 
+                                        function seopress_get_hidden_notices_review_option() {
+                                            $seopress_get_hidden_notices_review_option = get_option("seopress_notices");
+                                            if ( ! empty ( $seopress_get_hidden_notices_review_option ) ) {
+                                                foreach ($seopress_get_hidden_notices_review_option as $key => $seopress_get_hidden_notices_review_value)
+                                                    $options[$key] = $seopress_get_hidden_notices_review_value;
+                                                    if (isset($seopress_get_hidden_notices_review_option['notice-review'])) {
+                                                        return $seopress_get_hidden_notices_review_option['notice-review'];
+                                                    }
+                                            }
+                                        }
+                                        if(seopress_get_hidden_notices_review_option() =='1') {
+                                            //do nothing
+                                        } else { ?>
+                                            <div id="notice-review-alert" class="seopress-alert deleteable">
+                                                <p>
+                                                    <span class="dashicons dashicons-warning"></span>
+                                                    <?php _e('You like SEOPress? Please help us by rating us 5 stars!','wp-seopress'); ?>
+                                                </p>
+                                                <a class="button-primary" href="http://wordpress.org/support/view/plugin-reviews/wp-seopress?rate=5#postform" target="_blank"><?php _e('Rate us!','wp-seopress'); ?></a>
+                                                <span name="notice-review" id="notice-review" class="dashicons dashicons-trash remove-notice" data-notice="notice-review"></span>
+                                            </div>
+                                        <?php }
+                                        
+                                    ?>
+                                    <?php 
                                         if(get_option('page_comments') =='1') {
                                             function seopress_get_hidden_notices_divide_comments_option() {
                                                 $seopress_get_hidden_notices_divide_comments_option = get_option("seopress_notices");
@@ -2213,6 +2238,16 @@ class seopress_options
             'seopress-settings-admin-xml-sitemap-general', // Page
             'seopress_setting_section_xml_sitemap_general' // Section                  
         );
+
+        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+            add_settings_field(
+                'seopress_xml_sitemap_video_enable_callback', // ID
+               __("Enable XML Video Sitemaps","wp-seopress"), // Title
+                array( $this, 'seopress_xml_sitemap_video_enable_callback' ), // Callback
+                'seopress-settings-admin-xml-sitemap-general', // Page
+                'seopress_setting_section_xml_sitemap_general' // Section                  
+            );
+        }
         
         add_settings_field(
             'seopress_xml_sitemap_html_enable', // ID
@@ -3939,7 +3974,7 @@ class seopress_options
         if ('1' == $check) echo 'checked="yes"'; 
         echo ' value="1"/>';
         
-        echo '<label for="seopress_xml_sitemap_img_enable">'. __( 'Enable Image Sitemaps', 'wp-seopress' ) .'</label>';
+        echo '<label for="seopress_xml_sitemap_img_enable">'. __( 'Enable Image Sitemaps (standard images, image galleries, featured image, WooCommerce product images)', 'wp-seopress' ) .'</label>';
 
         if (function_exists('seopress_get_locale')) {
             if (seopress_get_locale() =='fr') {
@@ -3953,6 +3988,33 @@ class seopress_options
         
         if (isset($this->options['seopress_xml_sitemap_img_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_img_enable']);
+        }
+    }
+    
+    public function seopress_xml_sitemap_video_enable_callback()
+    {
+        $options = get_option( 'seopress_xml_sitemap_option_name' );  
+        
+        $check = isset($options['seopress_xml_sitemap_video_enable']);      
+        
+        echo '<input id="seopress_xml_sitemap_video_enable" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_video_enable]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_xml_sitemap_video_enable">'. __( 'Enable Video Sitemaps', 'wp-seopress' ) .'</label>';
+
+        // if (function_exists('seopress_get_locale')) {
+        //     if (seopress_get_locale() =='fr') {
+        //         $seopress_docs_link['support']['sitemaps']['video'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml-images/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+        //     } else {
+        //         $seopress_docs_link['support']['sitemaps']['video'] = 'https://www.seopress.org/support/guides/enable-xml-image-sitemaps/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+        //     }
+        // }
+
+        // echo '<a href="'.$seopress_docs_link['support']['sitemaps']['video'].'" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to enable XML video sitemaps - new window','wp-seopress').'</span></a>';
+        
+        if (isset($this->options['seopress_xml_sitemap_video_enable'])) {
+            esc_attr( $this->options['seopress_xml_sitemap_video_enable']);
         }
     }
 
@@ -4392,6 +4454,8 @@ class seopress_options
         echo '<input id="seopress_social_fb_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_facebook_img]" aria-label="'.__('Select a default image','wp-seopress').'" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'"  />
         
         <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />';
+
+        echo '<p class="description">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8mb max.', 'wp-seopress').'</p>';
         
         if (isset($this->options['seopress_social_facebook_img'])) {
             esc_attr( $this->options['seopress_social_facebook_img']);
@@ -4481,6 +4545,8 @@ class seopress_options
         echo '<input id="seopress_social_twitter_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_twitter_card_img]" aria-label="'.__('Default Twitter Image','wp-seopress').'" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'"  />
         
         <input id="seopress_social_twitter_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />';
+
+        echo '<p class="description">'.__('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5mb max.', 'wp-seopress').'</p>';
         
         if (isset($this->options['seopress_social_twitter_card_img'])) {
             esc_attr( $this->options['seopress_social_twitter_card_img']);

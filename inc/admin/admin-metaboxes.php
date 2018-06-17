@@ -53,9 +53,10 @@ function seopress_display_seo_metaboxe() {
     }
 
     function seopress_cpt($post){
+        wp_enqueue_script('jquery-ui-accordion');
         wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', dirname(dirname(__FILE__ ))), array( 'jquery-ui-tabs' ));
 
-        wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery' ), '1.1' );
+        wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-accordion' ), '1.1' );
 
         $seopress_real_preview = array(
             'seopress_nonce' => wp_create_nonce('seopress_real_preview_nonce'),
@@ -88,10 +89,14 @@ function seopress_display_seo_metaboxe() {
         $seopress_redirections_enabled          = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
         $seopress_redirections_type             = get_post_meta($post->ID,'_seopress_redirections_type',true);
         $seopress_redirections_value            = get_post_meta($post->ID,'_seopress_redirections_value',true);
-        $seopress_news_disabled                 = get_post_meta($post->ID,'_seopress_news_disabled',true);
-        $seopress_news_standout                 = get_post_meta($post->ID,'_seopress_news_standout',true);
-        $seopress_news_genres                   = get_post_meta($post->ID,'_seopress_news_genres',true);
-        $seopress_news_keyboard                 = get_post_meta($post->ID,'_seopress_news_keyboard',true);
+        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+            $seopress_news_disabled                 = get_post_meta($post->ID,'_seopress_news_disabled',true);
+            $seopress_news_standout                 = get_post_meta($post->ID,'_seopress_news_standout',true);
+            $seopress_news_genres                   = get_post_meta($post->ID,'_seopress_news_genres',true);
+            $seopress_news_keyboard                 = get_post_meta($post->ID,'_seopress_news_keyboard',true);
+            $seopress_video_disabled                = get_post_meta($post->ID,'_seopress_video_disabled',true);
+            $seopress_video                         = get_post_meta($post->ID,'_seopress_video');
+        }
 
         require_once ( dirname( __FILE__ ) . '/admin-metaboxes-form.php'); //Metaboxe HTML  
     }
@@ -172,21 +177,31 @@ function seopress_display_seo_metaboxe() {
             } else {
                 delete_post_meta( $post_id, '_seopress_redirections_enabled', '' );
             }
-            if( isset( $_POST[ 'seopress_news_disabled' ] ) ) {
-                update_post_meta( $post_id, '_seopress_news_disabled', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_news_disabled', '' );
-            }
-            if( isset( $_POST[ 'seopress_news_standout' ] ) ) {
-                update_post_meta( $post_id, '_seopress_news_standout', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_news_standout', '' );
-            }
-            if(isset($_POST['seopress_news_genres'])){
-                update_post_meta($post_id, '_seopress_news_genres', $_POST['seopress_news_genres']);
-            }     
-            if(isset($_POST['seopress_news_keyboard'])){
-                update_post_meta($post_id, '_seopress_news_keyboard', esc_html($_POST['seopress_news_keyboard']));
+            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                if( isset( $_POST[ 'seopress_news_disabled' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_news_disabled', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_news_disabled', '' );
+                }
+                if( isset( $_POST[ 'seopress_news_standout' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_news_standout', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_news_standout', '' );
+                }
+                if(isset($_POST['seopress_news_genres'])){
+                    update_post_meta($post_id, '_seopress_news_genres', $_POST['seopress_news_genres']);
+                }     
+                if(isset($_POST['seopress_news_keyboard'])){
+                    update_post_meta($post_id, '_seopress_news_keyboard', esc_html($_POST['seopress_news_keyboard']));
+                }
+                if( isset( $_POST[ 'seopress_video_disabled' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_video_disabled', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_video_disabled', '' );
+                }
+                if(isset($_POST['seopress_video'])){
+                    update_post_meta($post_id, '_seopress_video', $_POST['seopress_video']);
+                }
             }
         }
     }

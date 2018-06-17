@@ -23,13 +23,27 @@
 /*************************************************************************************************/
 /* Metaboxe in CPT                                                                               */
 /*************************************************************************************************/
-#seopress_content_analysis .ui-tabs #seopress_suggestions.ui-tabs-nav {
+#seopress_content_analysis .wrap-seopress-analysis {
     display: inline-block;
     width: 100%;
-    height: auto;
-    margin: 20px 0;
 }
-#seopress_content_analysis .ui-tabs #seopress_suggestions.ui-tabs-nav li {
+#seopress_content_analysis .col-left {
+    width: calc(50% - 30px);
+    float: left;
+    margin-right: 30px;
+}
+#seopress_content_analysis .col-right {
+    float: right;
+    width: 50%;
+}
+#seopress_content_analysis #seopress_suggestions {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    height: auto;
+    padding: 20px 0;
+}
+#seopress_content_analysis #seopress_suggestions li {
     list-style: square;
     margin: 5px;
     display: inline-block;
@@ -49,6 +63,7 @@
     width: auto;
     display: inline-block;
     margin: 0 0 0 20px;
+    clear: both;
 }
 #seopress_content_analysis h3 {
     border-bottom: 1px solid #ddd;
@@ -78,7 +93,7 @@
 #seopress_cpt .ui-tabs .ui-tabs-nav,
 #seopress_content_analysis .ui-tabs .ui-tabs-nav {
     display: inline-block;
-    height: 26px;
+    min-height: 26px;
     position: relative;
     width: 100%;
     z-index: 50;
@@ -138,10 +153,10 @@
 #seopress_cpt #tabs-3 label, 
 #seopress_cpt #tabs-4 label, 
 #seopress_cpt #tabs-5 label, 
+#seopress_cpt #tabs-6 label, 
 #seopress_cpt .subsection-title,
 #seopress_pro_cpt label,
 #seopress_content_analysis label {
-    border-bottom: 1px solid #DDDDDD;
     display: block;
     margin: 20px 0 5px;
     font-weight: bold;
@@ -155,8 +170,17 @@
 #seopress_cpt #tabs-3 input[type=text],
 #seopress_cpt #tabs-4 input[type=text],
 #seopress_cpt #tabs-5 input[type=text],
+#seopress_cpt #tabs-6 input[type=text],
+#seopress_cpt #tabs-6 textarea,
 #seopress_content_analysis input[type=text] {
     width:100%;
+}
+#seopress_cpt #tabs-6 input[type=number] {
+    width: 30%;
+    min-width: 200px;
+}
+#seopress_cpt #tabs-6 #wrap-videos .video:first-child .remove-video {
+    display: none;
 }
 #seopress_cpt select {
     width:300px;
@@ -169,11 +193,42 @@
     width: calc(100% - 68px);
     float: right;
 }
+#seopress_cpt #tabs-6 {
+    padding: 0;
+}
+#seopress_cpt #tabs-6 > p,
+#seopress_cpt #tabs-6 #wrap-videos .video .accordion-section-content {
+    padding: 0em 1.4em;
+}
+#seopress_cpt #tabs-6 #wrap-videos .video .accordion-section-content {
+    padding: 0em 1.4em 1em;
+}
+#seopress_cpt #tabs-6 #wrap-videos .video {
+    border-top: 1px solid #eee;
+}
+#seopress_cpt #tabs-6 #wrap-videos .video .accordion-section-title {
+    border-left:none;
+    border-right:none;
+    font-size:1em;
+    padding: 1em 1.4em;
+}
+#seopress_cpt #tabs-6 #wrap-videos .video:last-child .accordion-section-title,
+#seopress_cpt #tabs-6 #wrap-videos .video:last-child .accordion-section-content {
+    border-bottom: 1px solid #eee;
+}
+#seopress_cpt #tabs-6 #wrap-videos .video .inside {
+    padding: 0;
+}
 #seopress_cpt #tabs-4 #seopress_redirections_enabled,
 #seopress_cpt #tabs-5 #seopress_news_disabled,
-#seopress_cpt #tabs-5 #seopress_news_standout {
-    border-bottom: none;
+#seopress_cpt #tabs-5 #seopress_news_standout,
+#seopress_cpt #tabs-6 #seopress_video_disabled,
+#seopress_cpt #tabs-6 .internal_video label,
+#seopress_cpt #tabs-6 .family-friendly label {
     font-weight: normal;
+}
+#seopress_cpt #tabs-6 #wrap-videos .video:nth-child(odd) {
+    background: #fdfdfd;
 }
 #seopress_cpt .advise,
 #seopress_pro_cpt .advise,
@@ -182,6 +237,9 @@
     display: block;
     color: red;
     font-style: italic;
+}
+#seopress_cpt #tabs-6 #wrap-videos .video .advise {
+    color:#555;
 }
 #seopress_cpt .mandatory,
 #seopress_content_analysis .mandatory {
@@ -228,8 +286,9 @@
 #seopress_pro_cpt .wrap-seopress-counters {
     text-align: right;
     background: rgb(238, 238, 238) none repeat scroll 0% 0%;
-    padding: 5px;
+    padding: 2px 5px;
     box-shadow: 0 1px 1px rgba(0,0,0,.2);
+    font-size: 12px;
 }
 #seopress_cpt #seopress_titles_title_counters, #seopress_cpt #seopress_titles_desc_counters, #seopress_pro_cpt #seopress_rich_snippets_articles_counters, #seopress_pro_cpt #seopress_rich_snippets_courses_counters {
     display: inline;
@@ -260,11 +319,13 @@
     border: none;
     font-family: inherit;
     font-size: inherit;
+    display: inline-block;
+    width: 100%;
 }
 #seopress_cpt .ui-tabs .ui-tabs-nav li,
 #seopress_content_analysis .ui-tabs .ui-tabs-nav li {
     list-style: none;
-    float: left;
+    display: inline-block;
     position: relative;
     top: 0;
     margin: -1px .2em 0 0;
@@ -276,13 +337,13 @@
 }
 #seopress_cpt .ui-tabs .ui-tabs-nav li a,
 #seopress_content_analysis .ui-tabs .ui-tabs-nav li a {
-    float: left;
+    display: inline-block;
     padding: 0.38em 1em;
     text-decoration: none;
 }
 #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active,
 #seopress_content_analysis .ui-tabs .ui-tabs-nav li.ui-tabs-active {
-    margin-bottom: -1px;
+    margin-bottom: -2px;
     padding-bottom: 1px;
 }
 #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active a,
@@ -307,7 +368,10 @@
 #seopress_cpt .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
 #seopress_cpt .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
 #seopress_cpt .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
-
+#seopress_cpt .ui-tabs .ui-tabs-nav li a .dashicons,
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li a .dashicons {
+    margin-right: 2px;
+}
 #tab-panel-seopress_titles_help_tab li span {
     font-weight: bold;
     margin-right: 10px;

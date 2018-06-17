@@ -4,6 +4,7 @@ jQuery(document).ready(function(){
 			method : 'GET',
 			url : seopressAjaxResetPermalinks.seopress_flush_permalinks,
 			data: {
+				action: 'seopress_flush_permalinks',
 				_ajax_nonce: seopressAjaxResetPermalinks.seopress_nonce,
 			},
 			success : function( data ) {

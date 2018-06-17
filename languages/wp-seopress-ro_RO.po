@@ -1,0 +1,3127 @@
+# Copyright (C) 2017 SEOPress
+# This file is distributed under the same license as the SEOPress package.
+msgid ""
+msgstr ""
+"Project-Id-Version: SEOPress 2.1.7\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
+"POT-Creation-Date: 2018-05-18 18:34+0200\n"
+"PO-Revision-Date: 2018-05-18 18:35+0200\n"
+"Last-Translator: \n"
+"Language-Team: Benjamin DENIS <contact@seopress.org>\n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_attr_e;esc_attr__;esc_html_e;esc_html__\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/admin/admin-header.php:11
+msgid "SEOPress"
+msgstr "SEOPress"
+
+#: inc/admin/admin-header.php:15 inc/admin/adminbar.php:72
+msgid "PRO"
+msgstr "PRO"
+
+#: inc/admin/admin-header.php:27 inc/admin/admin.php:184
+#: inc/admin/adminbar.php:22
+msgid "Titles & Metas"
+msgstr "Titles & Metas"
+
+#: inc/admin/admin-header.php:33 inc/admin/admin.php:185
+#: inc/admin/adminbar.php:28
+msgid "XML / HTML Sitemap"
+msgstr "XML / HTML Sitemap"
+
+#: inc/admin/admin-header.php:39 inc/admin/admin.php:186
+#: inc/admin/admin.php:1356 inc/admin/adminbar.php:34
+msgid "Social Networks"
+msgstr "Rețele sociale"
+
+#: inc/admin/admin-header.php:45 inc/admin/admin.php:187
+#: inc/admin/admin.php:1394 inc/admin/adminbar.php:40
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: inc/admin/admin-header.php:51 inc/admin/admin-metaboxes-form.php:91
+#: inc/admin/admin.php:188 inc/admin/admin.php:338 inc/admin/admin.php:614
+#: inc/admin/admin.php:1432 inc/admin/adminbar.php:46
+msgid "Advanced"
+msgstr "Avansat"
+
+#: inc/admin/admin-header.php:59 inc/admin/admin.php:1461
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: inc/admin/admin-header.php:65 inc/admin/admin.php:1489
+msgid "Easy Digital Downloads"
+msgstr "Easy Digital Downloads"
+
+#: inc/admin/admin-header.php:71 inc/admin/admin.php:1517
+msgid "Local Business"
+msgstr "Afaceri locale"
+
+#: inc/admin/admin-header.php:77 inc/admin/admin.php:1545
+msgid "Dublin Core"
+msgstr "Dublin Core"
+
+#: inc/admin/admin-header.php:83 inc/admin/admin.php:1573
+msgid "Structured Data Types"
+msgstr "Tipuri de date structurate"
+
+#: inc/admin/admin-header.php:89 inc/admin/admin.php:1601
+msgid "Breadcrumbs"
+msgstr "Breadcrumbs"
+
+#: inc/admin/admin-header.php:95 inc/admin/admin.php:1639
+msgid "Google Page Speed"
+msgstr "Google Page Speed"
+
+#: inc/admin/admin-header.php:102 inc/admin/admin.php:1660
+msgid "robots.txt"
+msgstr "robots.txt"
+
+#: inc/admin/admin-header.php:109 inc/admin/admin.php:1701
+msgid "Google News Sitemap"
+msgstr "Google News Sitemap"
+
+#: inc/admin/admin-header.php:115 inc/admin/admin.php:1729
+#: inc/admin/adminbar.php:78
+msgid "Redirections"
+msgstr "Redirectari"
+
+#: inc/admin/admin-header.php:121 inc/admin/admin.php:1768
+msgid "SEOPress BOT - Broken links"
+msgstr "SEOPress bot-link-uri rupte"
+
+#: inc/admin/admin-header.php:127 inc/admin/admin.php:1779
+#: inc/admin/adminbar.php:90
+msgid "Backlinks"
+msgstr "Legături inverse"
+
+#: inc/admin/admin-header.php:133 inc/admin/admin.php:1790
+msgid "URL Rewriting"
+msgstr "Rescrierea URL-ului"
+
+#: inc/admin/admin-header.php:140 inc/admin/admin.php:1821
+msgid ".htaccess"
+msgstr ".htaccess"
+
+#: inc/admin/admin-header.php:147 inc/admin/admin.php:1833
+msgid "RSS"
+msgstr "RSS"
+
+#: inc/admin/admin-header.php:153 inc/admin/admin.php:1866
+#: inc/admin/adminbar.php:66
+msgid "License"
+msgstr "Licenta"
+
+#: inc/admin/admin-header.php:160 inc/admin/admin.php:189
+#: inc/admin/admin.php:1845 inc/admin/adminbar.php:52
+msgid "Tools"
+msgstr "Unelte"
+
+#: inc/admin/admin-header.php:182
+msgid "See the changelog (new window)"
+msgstr "Vedeti lista de modificari (fereastra noua)"
+
+#: inc/admin/admin-header.php:184
+msgid "See the changelog"
+msgstr "Vedeti lista de modificari"
+
+#: inc/admin/admin-header.php:186 inc/admin/admin-header.php:188
+msgid "Send feedback"
+msgstr "Trimite feedback"
+
+#: inc/admin/admin-header.php:190
+msgid "Follow us on Twitter (new window)"
+msgstr "Urmareste-ne pe Twitter (fereastra noua)"
+
+#: inc/admin/admin-header.php:192
+msgid "Follow us on Twitter"
+msgstr "Urmareste-ne pe Twitter"
+
+#: inc/admin/admin-header.php:194
+msgid "Follow us on YouTube (new window)"
+msgstr "Urmareste-ne pe Youtube (fereastra noua)"
+
+#: inc/admin/admin-header.php:196
+msgid "Follow us on YouTube"
+msgstr "Urmareste-ne pe Youtube"
+
+#: inc/admin/admin-header.php:198
+msgid "Official website (new window)"
+msgstr "Sit oficial ( fereastra noua)"
+
+#: inc/admin/admin-header.php:200
+msgid "Official website"
+msgstr "Sit oficial"
+
+#: inc/admin/admin-header.php:202
+msgid "Support (new window)"
+msgstr "Suport (fereastra noua)"
+
+#: inc/admin/admin-header.php:204
+msgid "Support"
+msgstr "Suport"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:5
+msgid "Enter a few keywords for analysis and help you write optimized content."
+msgstr ""
+"Introduceți câteva cuvinte cheie pentru analiză care vă ajuta să scrieți "
+"conținut optimizat."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:9
+#: inc/admin/admin-metaboxes-content-analysis-form.php:10
+msgid "Target keywords"
+msgstr "Cuvinte targhetate"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:10
+msgid "Enter your target keywords"
+msgstr "Introduceti cuvintele targhetate"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:11
+msgid ""
+"Separate target keywords with commas, do not use space after comma unless "
+"it's wanted."
+msgstr ""
+"Separați cuvintele-cheie targhetate cu virgule, nu utilizați spațiu după "
+"virgulă decât dacă doriți."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:14
+msgid "Analyse my content"
+msgstr "Analizeaza conținutul meu"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:16
+msgid "Refresh analysis"
+msgstr "Actualizați analiza"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:18
+msgid "Analysis completed"
+msgstr "Analiza completa"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:20
+msgid "Save your post first, to get the most accurate analysis."
+msgstr "Salveaza articloul prim dat, pentru a obține cea mai precisă analiză."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:24
+msgid "Google Suggest"
+msgstr "Sugestii Google"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:26
+msgid ""
+"Enter a keyword or phrase to find the top 10 Google suggestions instantly. "
+"Useful for working the long tail technique."
+msgstr ""
+"Introduceți un cuvânt cheie sau o expresie pentru a găsi instantaneu primele "
+"10 sugestii Google. Utile pentru lucrul cu tehnica long tail."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:28
+msgid "Get suggestions!"
+msgstr "Obtine sugestii!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:68
+msgid "Optimisations"
+msgstr "Optimizări"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:69
+msgid "Configuration"
+msgstr "Configurare"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:70
+msgid "Images"
+msgstr "Imagini"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:71
+msgid "Links"
+msgstr "Link-uri"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:77
+msgid "Words counter"
+msgstr "Contor cuvinte"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:79
+msgid "words found."
+msgstr "cuvinte gasite."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:80
+msgid "unique words found."
+msgstr "cuvinte unice gasite."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:83
+msgid ""
+"Your content is composed of more than 300 words, which is the minimum for a "
+"post."
+msgstr ""
+"Conținutul dvs. este compus din mai mult de 300 de cuvinte, ceea ce "
+"reprezintă minimul pentru un articol."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:85
+msgid "Your content lacks words. Add a few more paragraphs!"
+msgstr ""
+"Conținutul dvs. are cuvinte putine sau deloc. Adăugați încă câteva paragrafe!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:91
+msgid "Post title"
+msgstr "Titlul articolului"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:94
+msgid "Target keywords were found in Post Title."
+msgstr "Cuvintele cheie găsite în Titlul articolului."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:102
+#: inc/admin/admin-metaboxes-content-analysis-form.php:131
+#: inc/admin/admin-metaboxes-content-analysis-form.php:149
+#: inc/admin/admin-metaboxes-content-analysis-form.php:168
+#: inc/admin/admin-metaboxes-content-analysis-form.php:197
+#, php-format
+msgid "%s was found %d times."
+msgstr "%s am gasit %d ori."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:106
+msgid "None of your target keywords were found in the Post Title."
+msgstr "Nici un cuvant cheie targhetat gasit in Titlul Articolului."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:109
+msgid "No post title set for this post!"
+msgstr "Nu a fost setat niciun titlu post pentru acest articol!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:114
+msgid "H1 (Heading 1)"
+msgstr "H1 (Heading 1)"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:116
+#, php-format
+msgid "We found %d Heading 1 (H1) in your content."
+msgstr "Am gasit %d Heading 1 (H1) in continutul tau."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:117
+msgid ""
+"You should not use Heading 1 in your post content because your post title is "
+"already an H1. The rule is simple: 1 H1 for 1 web page."
+msgstr ""
+"Nu trebuie să utilizați H 1 în conținutul articolului, deoarece titlul "
+"articolului dvs. este deja H1. Regula este simplă: un H1 pentru o pagină web."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:121
+msgid "H2 (Heading 2)"
+msgstr "H2 (Heading 2)"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:123
+msgid "Target keywords were found in Heading 2 (H2)."
+msgstr "Cuvinte cheie gasite in Heading 2 (H2)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:135
+msgid "None of your target keywords were found in Heading 2 (H2)."
+msgstr "Nici un cuvant cheie gasit in Heading 2 (H2)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:139
+msgid "H3 (Heading 3)"
+msgstr "H3 (Heading 3)"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:141
+msgid "Target keywords were found in Heading 3 (H3)."
+msgstr "Cuvinte cheie gasite in Heading 3 (H3)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:153
+msgid "None of your target keywords were found in Heading 3 (H3)."
+msgstr "Nici un cuvant cheie gasit in Heading 3 (H3)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:157
+msgid "Meta title"
+msgstr "Titlul Meta"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:160
+msgid "Target keywords were found in Meta Title."
+msgstr "Cuvinte cheie gasite in Titlu Meta."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:172
+msgid "None of your target keywords were found in Meta Title."
+msgstr "Nici un cuvant cheie gasit in Titlu Meta."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:176
+msgid "You custom title is too long."
+msgstr "Titlul particularizat este prea lung."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:178
+msgid "The length of your title is correct"
+msgstr "Lungimea titlului dvs. este corectă"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:181
+msgid "No custom title set for this post."
+msgstr "Nu este setat titlul personalizat pentru acest articol."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:185
+#: inc/admin/admin-metaboxes-form.php:126
+#: inc/admin/admin-metaboxes-form.php:127 inc/admin/admin.php:724
+#: inc/admin/admin.php:1953 inc/admin/admin.php:3207
+#: inc/functions/options-advanced-admin.php:762
+msgid "Meta description"
+msgstr "Descriere Meta"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:189
+msgid "Target keywords were found in Meta description."
+msgstr "Cuvinte cheie gasite in Descrierea Meta."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:201
+msgid "None of your target keywords were found in Meta description."
+msgstr "Nici un cuvant cheie gasit in Descriere Meta."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:205
+msgid "You custom meta description is too long."
+msgstr "Valoarea este prea lungă."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:207
+msgid "The length of your meta description is correct"
+msgstr "Lungimea descrierii meta este corecta"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:210
+msgid "No custom meta description set for this post."
+msgstr "Nu ai setat descriere meta personalizata pentru articol."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:216
+msgid "Robots"
+msgstr "Roboţi"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:220
+msgid "noindex is on! Search engines can't index this page."
+msgstr "noindex este on! Motoarele de căutare nu pot indexa această pagină."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:222
+msgid "noindex is off. Search engines will index this page."
+msgstr "noindex este oprit.Motoarele de cautare indexeaza pagina."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:226
+msgid "nofollow is on! Search engines can't follow your links on this page."
+msgstr ""
+"nofollow este on! Motoarele de căutare nu pot urma link-urile de pe această "
+"pagină."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:228
+msgid "nofollow is off. Search engines will follow links on this page."
+msgstr ""
+"nofollow este orpit. Motoarele de căutare vor urma linkurile de pe această "
+"pagină."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:232
+msgid ""
+"noimageindex is on! Google will not index your images on this page (but if "
+"someone makes a direct link to one of your image in this page, it will be "
+"indexed)."
+msgstr ""
+"noimageindex este on! Google nu va indexa imaginile pe această pagină (dar "
+"dacă cineva face o legătură directă cu una dintre imaginile dvs. din această "
+"pagină, aceasta va fi indexată)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:234
+msgid "noimageindex is off. Google will index your images on this page."
+msgstr ""
+"noimageindex este opri. Google vă va indexa imaginile pe această pagină."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:238
+msgid "noarchive is on! Search engines will not cache your page."
+msgstr ""
+"noarchive este on! Motoarele de căutare nu vor memora în cache pagina dvs."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:240
+msgid "noarchive is off. Search engines will probably cache your page."
+msgstr ""
+"noarchive este oprit. Motoarele de căutare vor memora in cache, probabil, "
+"pagina."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:244
+msgid ""
+"nosnippet is on! Search engines will not display a snippet of this page in "
+"search results."
+msgstr ""
+"nosnippet este on! Motoarele de căutare nu vor afișa un fragment al acestei "
+"pagini în rezultatele căutării."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:246
+msgid ""
+"nosnippet is off. Search engines will display a snippet of this page in "
+"search results."
+msgstr ""
+"nosnippet este off. Motoarele de căutare vor afișa un fragment al acestei "
+"pagini în rezultatele căutării."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:258
+msgid ""
+"No alternative text found for these images. Alt tag are important for both "
+"SEO and accessibility."
+msgstr ""
+"Nu a fost găsit niciun text alternativ pentru aceste imagini. Alt tag-urile "
+"sunt importante atât pentru SEO, cât și pentru accesibilitate."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:262
+msgid "Post Content"
+msgstr "Continut articol"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:272
+msgid "Post Thumbnail"
+msgstr "Miniatura articol"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:280
+msgid "Product gallery"
+msgstr "Galerie produs"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:288
+msgid "All alternative tags are filled in. Good work!"
+msgstr "Toate etichetele alternative sunt completate. Bună treabă!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:291
+msgid ""
+"We could not find any image in your content. Content with media is a plus "
+"for your SEO."
+msgstr ""
+"Nu am găsit nicio imagine în conținutul dvs. Conținutul cu media este un "
+"plus pentru SEO."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:297
+msgid "NoFollow Links"
+msgstr "Link-uri NoFollow"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:303
+#, php-format
+msgid ""
+"We found %d links with nofollow attribute in your page. Do not overuse "
+"nofollow attribute in links. Below, the list:"
+msgstr ""
+"Am gasit %d link-uri cu atributul nofollow în pagina dvs. Nu exagerați "
+"atributul nofollow în legături. Mai jos, lista:"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:310
+msgid "This page doesn't have any nofollow links."
+msgstr "Această pagină nu are link-uri nofollow."
+
+#: inc/admin/admin-metaboxes-form.php:81 inc/admin/admin-metaboxes.php:49
+#: inc/admin/admin-metaboxes.php:51 inc/admin/admin.php:182
+#: inc/admin/adminbar.php:16 inc/functions/options-advanced-admin.php:752
+msgid "SEO"
+msgstr "SEO"
+
+#: inc/admin/admin-metaboxes-form.php:90
+msgid "Titles settings"
+msgstr "Setari Titluri"
+
+#: inc/admin/admin-metaboxes-form.php:92
+msgid "Social"
+msgstr "Social"
+
+#: inc/admin/admin-metaboxes-form.php:94
+msgid "Redirection"
+msgstr "Redirectari"
+
+#: inc/admin/admin-metaboxes-form.php:99
+msgid "Google News"
+msgstr "Google News"
+
+#: inc/admin/admin-metaboxes-form.php:112
+msgid ""
+"This is your <strong>Shop page</strong>. Go to <strong>SEO > Titles & Metas "
+"> Archives > Products</strong> "
+msgstr ""
+"Aceasta este  <strong>Pagina magazinului</strong>. Mergi la <strong>SEO > "
+"Titluri si meta > Arhive> Produse</strong> "
+
+#: inc/admin/admin-metaboxes-form.php:112
+msgid "to edit your title and meta description"
+msgstr "pentru a edita titluri si descriere meta"
+
+#: inc/admin/admin-metaboxes-form.php:118
+#: inc/admin/admin-metaboxes-form.php:119
+msgid "Title"
+msgstr "Titlu"
+
+#: inc/admin/admin-metaboxes-form.php:119
+msgid "Enter your title"
+msgstr "Scrieti titlul"
+
+#: inc/admin/admin-metaboxes-form.php:123
+#: inc/admin/admin-metaboxes-form.php:131
+msgid "(maximum recommended limit)"
+msgstr "(limita maxima reocmandata)"
+
+#: inc/admin/admin-metaboxes-form.php:127
+msgid "Enter your meta description"
+msgstr "Scrieti descrierea meta"
+
+#: inc/admin/admin-metaboxes-form.php:136
+msgid "Google Snippet Preview"
+msgstr "Previzualizare Google Snippet"
+
+#: inc/admin/admin-metaboxes-form.php:137
+msgid ""
+"This is what your page will look like in Google search results. You have to "
+"publish your post to get the Google Snippet Preview."
+msgstr ""
+"Așa va arăta pagina dvs. în rezultatele căutării Google. Trebuie să "
+"publicați postarea pentru a obține Previzualizarea Google Snippet."
+
+#: inc/admin/admin-metaboxes-form.php:162 inc/admin/admin.php:2138
+#: inc/admin/admin.php:3285 inc/admin/admin.php:3422 inc/admin/admin.php:3517
+#: inc/admin/admin.php:3593 inc/admin/admin.php:3662 inc/admin/admin.php:3732
+#: inc/admin/admin.php:3782
+msgid "noindex"
+msgstr "noindex"
+
+#: inc/admin/admin-metaboxes-form.php:163 inc/admin/admin.php:3784
+msgid ""
+"Do not display all pages of the site in Google search results and do not "
+"display \"Cached\" links in search results."
+msgstr ""
+"Nu afisati toate paginile sit-ului în rezultatele cautarii Google si nu "
+"afisati linkurile \"Cache\" în rezultatele cautarii."
+
+#: inc/admin/admin-metaboxes-form.php:168 inc/admin/admin.php:2146
+#: inc/admin/admin.php:3304 inc/admin/admin.php:3441 inc/admin/admin.php:3536
+#: inc/admin/admin.php:3801
+msgid "nofollow"
+msgstr "nofollow"
+
+#: inc/admin/admin-metaboxes-form.php:169 inc/admin/admin.php:3803
+msgid "Do not follow links for all pages."
+msgstr "Nu urmareste link-urile pentru toate paginile."
+
+#: inc/admin/admin-metaboxes-form.php:174 inc/admin/admin.php:2154
+#: inc/admin/admin.php:3820
+msgid "noodp"
+msgstr "noodp"
+
+#: inc/admin/admin-metaboxes-form.php:175 inc/admin/admin.php:3822
+msgid ""
+"Do not use Open Directory project metadata for titles or excerpts for all "
+"pages."
+msgstr ""
+"Nu folosi metadatele proiectului Open Directory pentru titluri sau fragmente "
+"pentru toate paginile."
+
+#: inc/admin/admin-metaboxes-form.php:180 inc/admin/admin.php:2162
+#: inc/admin/admin.php:3839
+msgid "noimageindex"
+msgstr "noimageindex"
+
+#: inc/admin/admin-metaboxes-form.php:181 inc/admin/admin.php:3841
+msgid "Do not index images from the entire site."
+msgstr "Nu indexati imaginile de pe întreg site."
+
+#: inc/admin/admin-metaboxes-form.php:186 inc/admin/admin.php:2170
+#: inc/admin/admin.php:3858
+msgid "noarchive"
+msgstr "noarchive"
+
+#: inc/admin/admin-metaboxes-form.php:187 inc/admin/admin.php:3860
+msgid "Do not display a \"Cached\" link in the Google search results."
+msgstr "Nu afisati un link \"Cached\" în rezultatele cautarii Google."
+
+#: inc/admin/admin-metaboxes-form.php:192 inc/admin/admin.php:2178
+#: inc/admin/admin.php:3877
+msgid "nosnippet"
+msgstr "nosnippet"
+
+#: inc/admin/admin-metaboxes-form.php:193 inc/admin/admin.php:3879
+msgid ""
+"Do not display a description in the Google search results for all pages."
+msgstr ""
+"Nu afisati o descriere în rezultatele căutării Google pentru toate paginile."
+
+#: inc/admin/admin-metaboxes-form.php:196
+#: inc/admin/admin-metaboxes-form.php:197 inc/admin/admin.php:728
+msgid "Canonical URL"
+msgstr "Adresa URL canonic"
+
+#: inc/admin/admin-metaboxes-form.php:197
+msgid "Default value: "
+msgstr "Valoare implicita "
+
+#: inc/admin/admin-metaboxes-form.php:202
+#: inc/admin/admin-metaboxes-form.php:203
+msgid "Custom breadcrumbs"
+msgstr "Breadcrumbs personalizat"
+
+#: inc/admin/admin-metaboxes-form.php:203
+msgid "Enter a custom value, useful if your title is too long"
+msgstr ""
+"Introduceți o valoare personalizată, utilă dacă titlul dvs. este prea lung"
+
+#: inc/admin/admin-metaboxes-form.php:211
+msgid "Ask Facebook to update his cache"
+msgstr "Cere Facebook sa îsi actualizeze cache-ul"
+
+#: inc/admin/admin-metaboxes-form.php:213
+#: inc/admin/admin-metaboxes-form.php:214
+msgid "Facebook Title"
+msgstr "Titlul Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:214
+msgid "Enter your Facebook title"
+msgstr "Introduceti titlul pentru Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:217
+#: inc/admin/admin-metaboxes-form.php:218
+msgid "Facebook description"
+msgstr "Descrie Fecabook"
+
+#: inc/admin/admin-metaboxes-form.php:218
+msgid "Enter your Facebook description"
+msgstr "Introduceti descrierea pentru Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:221
+#: inc/admin/admin-metaboxes-form.php:223
+msgid "Facebook Thumbnail"
+msgstr "Facebook Thumbnail"
+
+#: inc/admin/admin-metaboxes-form.php:222
+msgid "Minimum size: 200x200px"
+msgstr "Dimensiunea minima: 200x200px"
+
+#: inc/admin/admin-metaboxes-form.php:223
+#: inc/admin/admin-metaboxes-form.php:241 inc/admin/admin.php:4392
+#: inc/admin/admin.php:4481
+msgid "Select your default thumbnail"
+msgstr "Selectati miniatura implicita"
+
+#: inc/admin/admin-metaboxes-form.php:224
+#: inc/admin/admin-metaboxes-form.php:242 inc/admin/admin.php:4150
+#: inc/admin/admin.php:4394 inc/admin/admin.php:4483
+msgid "Upload an Image"
+msgstr "Încarcati o Imagine"
+
+#: inc/admin/admin-metaboxes-form.php:229
+msgid "Preview your Twitter card using the official validator"
+msgstr "Previzualizați-vă cardul Twitter folosind validatorul oficial"
+
+#: inc/admin/admin-metaboxes-form.php:231
+#: inc/admin/admin-metaboxes-form.php:232
+msgid "Twitter Title"
+msgstr "Titlu Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:232
+msgid "Enter your Twitter title"
+msgstr "Introduceti titlu pentru Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:235
+#: inc/admin/admin-metaboxes-form.php:236
+msgid "Twitter description"
+msgstr "Descriere Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:236
+msgid "Enter your Twitter description"
+msgstr "Introduceti descrierea pentru Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:239
+#: inc/admin/admin-metaboxes-form.php:242
+msgid "Twitter Thumbnail"
+msgstr "Twitter Thumbnail"
+
+#: inc/admin/admin-metaboxes-form.php:240
+msgid "Minimum size: 160x160px"
+msgstr "Dimensiune minima: 160x160px"
+
+#: inc/admin/admin-metaboxes-form.php:251
+msgid "Enable redirection?"
+msgstr "Activati redirectionarea?"
+
+#: inc/admin/admin-metaboxes-form.php:255
+#: inc/admin/admin-metaboxes-form.php:261
+msgid "URL redirection"
+msgstr "Redirectionarea adresei URL"
+
+#: inc/admin/admin-metaboxes-form.php:257
+msgid "301 Moved Permanently"
+msgstr "301 Mutat permanent"
+
+#: inc/admin/admin-metaboxes-form.php:258
+msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
+msgstr "302 Gasit (HTTP 1.1) / Mutat temporar (HTTP 1.0)"
+
+#: inc/admin/admin-metaboxes-form.php:259
+msgid "307 Moved Temporarily (HTTP 1.1 Only)"
+msgstr "307 Mutat temporar (HTTP 1.1 Doar)"
+
+#: inc/admin/admin-metaboxes-form.php:261
+msgid "Enter your new URL"
+msgstr "Introduceți noua adresa URL"
+
+#: inc/admin/admin-metaboxes-form.php:266
+#: inc/admin/admin-metaboxes-form.php:268
+#: inc/admin/admin-metaboxes-form.php:271
+#: inc/admin/admin-metaboxes-form.php:273
+msgid "Test your URL"
+msgstr "Testeaza adresa URL"
+
+#: inc/admin/admin-metaboxes-form.php:286
+msgid "Exclude this post from Google News Sitemap?"
+msgstr "Excludeti aceasta postare din Sitemap-ul Stirilor Google?"
+
+#: inc/admin/admin-metaboxes-form.php:292
+msgid "Use the standout tag for this post?"
+msgstr "Utilizați eticheta standout pentru aceast articol?"
+
+#: inc/admin/admin-metaboxes-form.php:293
+msgid ""
+"Your article is an original source for the story.\n"
+"Your organization invested significant resources in reporting or producing "
+"the article.\n"
+"The article deserves special recognition.\n"
+"You haven't used standout on your own articles more than seven times in the "
+"past calendar week."
+msgstr ""
+"Articolul dvs. este o sursă originală pentru poveste.\n"
+"Organizația dvs. a investit resurse semnificative în raportarea sau "
+"producerea articolului.\n"
+"Articolul merită o recunoaștere specială.\n"
+"Nu ați folosit standout pentru articolele dvs. mai mult de șapte ori în "
+"săptămâna calendaristică trecută."
+
+#: inc/admin/admin-metaboxes-form.php:307
+msgid "Learn how to use correctly the standout tag"
+msgstr "Aflați cum să utilizați corect eticheta standout"
+
+#: inc/admin/admin-metaboxes-form.php:310
+msgid "Google News Genres"
+msgstr "Genuri de stiri Google"
+
+#: inc/admin/admin-metaboxes-form.php:312 inc/admin/admin.php:4776
+#: inc/admin/admin.php:4853 inc/admin/admin.php:4930 inc/admin/admin.php:5007
+#: inc/admin/admin.php:5084
+msgid "None"
+msgstr "Nimic"
+
+#: inc/admin/admin-metaboxes-form.php:313
+msgid "Press Release"
+msgstr "Comunicat de presa"
+
+#: inc/admin/admin-metaboxes-form.php:314
+msgid "Satire"
+msgstr "Satira"
+
+#: inc/admin/admin-metaboxes-form.php:315
+msgid "Blog"
+msgstr "Blog"
+
+#: inc/admin/admin-metaboxes-form.php:316
+msgid "OpEd"
+msgstr "OpEd"
+
+#: inc/admin/admin-metaboxes-form.php:317
+msgid "Opinion"
+msgstr "Opinie"
+
+#: inc/admin/admin-metaboxes-form.php:318
+msgid "UserGenerated"
+msgstr "Utilizatorul generat"
+
+#: inc/admin/admin-metaboxes-form.php:323
+#: inc/admin/admin-metaboxes-form.php:324
+msgid "Google News Keywords <em>(max recommended limit: 12)</em>"
+msgstr "Cuvinte cheie Google Stiri <em>(limita maxima: 12)</em>"
+
+#: inc/admin/admin-metaboxes-form.php:324
+msgid "Enter your Google News Keywords"
+msgstr "Introduceti cuvintele cheie Google Stiri"
+
+#: inc/admin/admin-metaboxes.php:210
+msgid "Content analysis"
+msgstr "Analiza continut"
+
+#: inc/admin/admin.php:105
+msgid "404 - Page not found"
+msgstr "404 - Pagina nu a fost gasita"
+
+#: inc/admin/admin.php:183
+msgid "Dashboard"
+msgstr "Tablou de bord"
+
+#: inc/admin/admin.php:185 inc/admin/admin.php:1318
+msgid "XML / Image / HTML Sitemap"
+msgstr "XML / Image / HTML Sitemap"
+
+#: inc/admin/admin.php:196
+#, php-format
+msgid "%%sitetitle%%"
+msgstr "%%sitetitle%%"
+
+#: inc/admin/admin.php:196 inc/admin/admin.php:3199 inc/admin/admin.php:3253
+#: inc/admin/admin.php:3372 inc/admin/admin.php:3485 inc/admin/admin.php:3562
+#: inc/admin/admin.php:3632 inc/admin/admin.php:3701 inc/admin/admin.php:3751
+msgid "Site Title"
+msgstr "Titlu Site"
+
+#: inc/admin/admin.php:197
+#, php-format
+msgid "%%tagline%%"
+msgstr "%%tagline%%"
+
+#: inc/admin/admin.php:197 inc/admin/admin.php:3200 inc/admin/admin.php:3211
+msgid "Tagline"
+msgstr "Slogan"
+
+#: inc/admin/admin.php:198
+#, php-format
+msgid "%%post_title%%"
+msgstr "%%post_title%%"
+
+#: inc/admin/admin.php:198
+msgid "Post Title (post, page, custom post type)"
+msgstr "Titlul postarii (postare, pagina, tip post particular)"
+
+#: inc/admin/admin.php:199
+#, php-format
+msgid "%%post_excerpt%%"
+msgstr "%%post_excerpt%%"
+
+#: inc/admin/admin.php:199
+msgid "Post excerpt"
+msgstr "Post extras"
+
+#: inc/admin/admin.php:200
+#, php-format
+msgid "%%post_date%%"
+msgstr "%%post_date%%"
+
+#: inc/admin/admin.php:200
+msgid "Post date"
+msgstr "Data postarii"
+
+#: inc/admin/admin.php:201
+#, php-format
+msgid "%%post_author%%"
+msgstr "%%post_author%%"
+
+#: inc/admin/admin.php:201 inc/admin/admin.php:3561
+msgid "Post author"
+msgstr "Autor postare"
+
+#: inc/admin/admin.php:202
+#, php-format
+msgid "%%post_category%%"
+msgstr "%%post_category%%"
+
+#: inc/admin/admin.php:202
+msgid "Post category"
+msgstr "Categorie articol"
+
+#: inc/admin/admin.php:203
+#, php-format
+msgid "%%post_tag%%"
+msgstr "%%post_tag%%"
+
+#: inc/admin/admin.php:203
+msgid "Post tag"
+msgstr "Eticheta articol"
+
+#: inc/admin/admin.php:204
+#, php-format
+msgid "%%_category_title%%"
+msgstr "%%_category_title%%"
+
+#: inc/admin/admin.php:204
+msgid "Category title"
+msgstr "Titlu categorilor"
+
+#: inc/admin/admin.php:205
+#, php-format
+msgid "%%_category_description%%"
+msgstr "%%_category_description%%"
+
+#: inc/admin/admin.php:205
+msgid "Category description"
+msgstr "Descriere categorii"
+
+#: inc/admin/admin.php:206
+#, php-format
+msgid "%%tag_title%%"
+msgstr "%%tag_title%%"
+
+#: inc/admin/admin.php:206
+msgid "Tag title"
+msgstr "Titlul etichetei"
+
+#: inc/admin/admin.php:207
+#, php-format
+msgid "%%tag_description%%"
+msgstr "%%tag_description%%"
+
+#: inc/admin/admin.php:207
+msgid "Tag description"
+msgstr "Descriere eticheta"
+
+#: inc/admin/admin.php:208
+#, php-format
+msgid "%%term_title%%"
+msgstr "%%term_title%%"
+
+#: inc/admin/admin.php:208
+msgid "Term title"
+msgstr "Titlu termen"
+
+#: inc/admin/admin.php:209
+#, php-format
+msgid "%%term_description%%"
+msgstr "%%term_description%%"
+
+#: inc/admin/admin.php:209
+msgid "Term description"
+msgstr "Descriere termen"
+
+#: inc/admin/admin.php:210
+#, php-format
+msgid "%%search_keywords%%"
+msgstr "%%search_keywords%%"
+
+#: inc/admin/admin.php:210
+msgid "Search keywords"
+msgstr "Cuvinte cheie"
+
+#: inc/admin/admin.php:211
+#, php-format
+msgid "%%current_pagination%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/admin.php:211
+msgid "Current number page"
+msgstr "Numarul curent al paginii"
+
+#: inc/admin/admin.php:212
+#, php-format
+msgid "%%cpt_plural%%"
+msgstr "%%cpt_plural%%"
+
+#: inc/admin/admin.php:212
+msgid "Plural Post Type Archive name"
+msgstr "Denumire plurala arhive postari"
+
+#: inc/admin/admin.php:213
+#, php-format
+msgid "%%archive_title%%"
+msgstr "%%archive_title%%"
+
+#: inc/admin/admin.php:213
+msgid "Archive title"
+msgstr "Titlu arhiva"
+
+#: inc/admin/admin.php:214
+#, php-format
+msgid "%%archive_date_day%%"
+msgstr "%%archive_date_day%%"
+
+#: inc/admin/admin.php:214
+msgid "Day Archive date"
+msgstr "Data ziua arhivei"
+
+#: inc/admin/admin.php:215
+#, php-format
+msgid "%%archive_date_month%%"
+msgstr "%%archive_date_month%%"
+
+#: inc/admin/admin.php:215
+msgid "Month Archive title"
+msgstr "Titlu arhiva lunara"
+
+#: inc/admin/admin.php:216
+#, php-format
+msgid "%%archive_date_year%%"
+msgstr "%%archive_date_year%%"
+
+#: inc/admin/admin.php:216
+msgid "Year Archive title"
+msgstr "Tiltu arhiva anuala"
+
+#: inc/admin/admin.php:217
+#, php-format
+msgid "%%_cf_your_custom_field_name%%"
+msgstr "%%_cf_your_custom_field_name%%"
+
+#: inc/admin/admin.php:217
+msgid "Custom fields from post, page or post type"
+msgstr "Câmpuri personalizate din postare, pagină sau tip postare"
+
+#: inc/admin/admin.php:218
+#, php-format
+msgid "%%_ct_your_custom_taxonomy_slug%%"
+msgstr "%%_ct_your_custom_taxonomy_slug%%"
+
+#: inc/admin/admin.php:218
+msgid "Custom term taxonomy from post, page or post type"
+msgstr ""
+"Termeni personalizați pentru taxonomia din tipul postării, paginii sau "
+"postului"
+
+#: inc/admin/admin.php:219
+#, php-format
+msgid "%%wc_single_cat%%"
+msgstr "%%wc_single_cat%%"
+
+#: inc/admin/admin.php:219
+msgid "Single product category"
+msgstr "Categorie singulara produs"
+
+#: inc/admin/admin.php:220
+#, php-format
+msgid "%%wc_single_tag%%"
+msgstr "%%wc_single_tag%%"
+
+#: inc/admin/admin.php:220
+msgid "Single product tag"
+msgstr "Etichete produs singular"
+
+#: inc/admin/admin.php:221
+#, php-format
+msgid "%%wc_single_short_desc%%"
+msgstr "%%wc_single_short_desc%%"
+
+#: inc/admin/admin.php:221
+msgid "Single product short description"
+msgstr "Descriere produs singular"
+
+#: inc/admin/admin.php:222
+#, php-format
+msgid "%%currentday%%"
+msgstr "%%currentday%%"
+
+#: inc/admin/admin.php:222
+msgid "Current day"
+msgstr "Ziua curenta"
+
+#: inc/admin/admin.php:223
+#, php-format
+msgid "%%currentmonth%%"
+msgstr "%%currentmonth%%"
+
+#: inc/admin/admin.php:223
+msgid "Current month"
+msgstr "Luna curenta"
+
+#: inc/admin/admin.php:224
+#, php-format
+msgid "%%currentyear%%"
+msgstr "%%currentyear%%"
+
+#: inc/admin/admin.php:224
+msgid "Current year"
+msgstr "Anul curent"
+
+#: inc/admin/admin.php:225
+#, php-format
+msgid "%%currentdate%%"
+msgstr "%%currentdate%%"
+
+#: inc/admin/admin.php:225
+msgid "Current date"
+msgstr "Data curenta"
+
+#: inc/admin/admin.php:226
+#, php-format
+msgid "%%currenttime%%"
+msgstr "%%currenttime%%"
+
+#: inc/admin/admin.php:226
+msgid "Current time"
+msgstr "Timp curent"
+
+#: inc/admin/admin.php:232
+msgid "Templates variables"
+msgstr "Sabloane variabile"
+
+#: inc/admin/admin.php:240 inc/admin/admin.php:248
+msgid "Browse our guides"
+msgstr "Rasfoieste ghidurile noastre"
+
+#: inc/admin/admin.php:241 inc/admin/admin.php:249
+msgid "Read our FAQ"
+msgstr "Citeste FAQ"
+
+#: inc/admin/admin.php:242 inc/admin/admin.php:250
+msgid "Check our website"
+msgstr "Verificati site-ul nostru"
+
+#: inc/admin/admin.php:262
+msgid ""
+"Watch our video to learn how to connect your WordPress site with Google "
+"Analytics and get statistics right in your dashboard (PRO only)."
+msgstr ""
+"Vizionați videoclipul nostru pentru a afla cum să vă conectați site-ul "
+"WordPress cu Google Analytics și să obțineți statistici în tabloul de bord "
+"(numai PRO)."
+
+#: inc/admin/admin.php:267
+msgid "How-to"
+msgstr "Cum sa"
+
+#: inc/admin/admin.php:275 inc/admin/admin.php:281
+msgid "Read our guide"
+msgstr "Citeste ghidul nostru"
+
+#: inc/admin/admin.php:316 inc/admin/admin.php:320 inc/admin/admin.php:383
+#: inc/admin/admin.php:387 inc/admin/admin.php:448 inc/admin/admin.php:452
+#: inc/admin/admin.php:515 inc/admin/admin.php:519 inc/admin/admin.php:596
+#: inc/admin/admin.php:600 inc/admin/admin.php:1294 inc/admin/admin.php:1298
+#: inc/admin/admin.php:1332 inc/admin/admin.php:1336 inc/admin/admin.php:1370
+#: inc/admin/admin.php:1374 inc/admin/admin.php:1408 inc/admin/admin.php:1412
+#: inc/admin/admin.php:1446 inc/admin/admin.php:1450 inc/admin/admin.php:1475
+#: inc/admin/admin.php:1479 inc/admin/admin.php:1503 inc/admin/admin.php:1507
+#: inc/admin/admin.php:1531 inc/admin/admin.php:1535 inc/admin/admin.php:1559
+#: inc/admin/admin.php:1563 inc/admin/admin.php:1587 inc/admin/admin.php:1591
+#: inc/admin/admin.php:1615 inc/admin/admin.php:1619 inc/admin/admin.php:1676
+#: inc/admin/admin.php:1680 inc/admin/admin.php:1715 inc/admin/admin.php:1719
+#: inc/admin/admin.php:1744 inc/admin/admin.php:1748 inc/admin/admin.php:1806
+#: inc/admin/admin.php:1810
+msgid "Click to disable this feature"
+msgstr "Clic pentru a dezactiva această functie"
+
+#: inc/admin/admin.php:317 inc/admin/admin.php:319 inc/admin/admin.php:384
+#: inc/admin/admin.php:386 inc/admin/admin.php:449 inc/admin/admin.php:451
+#: inc/admin/admin.php:516 inc/admin/admin.php:518 inc/admin/admin.php:597
+#: inc/admin/admin.php:599 inc/admin/admin.php:1295 inc/admin/admin.php:1297
+#: inc/admin/admin.php:1333 inc/admin/admin.php:1335 inc/admin/admin.php:1371
+#: inc/admin/admin.php:1373 inc/admin/admin.php:1409 inc/admin/admin.php:1411
+#: inc/admin/admin.php:1447 inc/admin/admin.php:1449 inc/admin/admin.php:1476
+#: inc/admin/admin.php:1478 inc/admin/admin.php:1504 inc/admin/admin.php:1506
+#: inc/admin/admin.php:1532 inc/admin/admin.php:1534 inc/admin/admin.php:1560
+#: inc/admin/admin.php:1562 inc/admin/admin.php:1588 inc/admin/admin.php:1590
+#: inc/admin/admin.php:1616 inc/admin/admin.php:1618 inc/admin/admin.php:1677
+#: inc/admin/admin.php:1679 inc/admin/admin.php:1716 inc/admin/admin.php:1718
+#: inc/admin/admin.php:1745 inc/admin/admin.php:1747 inc/admin/admin.php:1807
+#: inc/admin/admin.php:1809
+msgid "Click to enable this feature"
+msgstr "Clic pentru a activa aceasta functie"
+
+#: inc/admin/admin.php:334
+msgid "Home"
+msgstr "Acasa"
+
+#: inc/admin/admin.php:335
+msgid "Single Post Types"
+msgstr "Potare tip singulara"
+
+#: inc/admin/admin.php:336
+msgid "Archives"
+msgstr "Arhive"
+
+#: inc/admin/admin.php:337 inc/admin/admin.php:403
+msgid "Taxonomies"
+msgstr "Taxonometrii"
+
+#: inc/admin/admin.php:401 inc/admin/admin.php:534 inc/admin/admin.php:543
+msgid "General"
+msgstr "General"
+
+#: inc/admin/admin.php:402
+msgid "Post Types"
+msgstr "Tip postari"
+
+#: inc/admin/admin.php:404
+msgid "HTML Sitemap"
+msgstr "HTML Sitemap"
+
+#: inc/admin/admin.php:466
+msgid "Knowledge Graph"
+msgstr "Graficul de cunostinte"
+
+#: inc/admin/admin.php:467
+msgid "Your social accounts"
+msgstr "Conturile dvs. sociale"
+
+#: inc/admin/admin.php:468
+msgid "Facebook"
+msgstr "Facebook"
+
+#: inc/admin/admin.php:469
+msgid "Twitter"
+msgstr "Twitter"
+
+#: inc/admin/admin.php:535 inc/admin/admin.php:544
+msgid "Tracking"
+msgstr "Urmarire"
+
+#: inc/admin/admin.php:536 inc/admin/admin.php:545
+msgid "Events"
+msgstr "Evenimente"
+
+#: inc/admin/admin.php:537 inc/admin/admin.php:546
+msgid "Custom Dimensions"
+msgstr "Dimensiuni personalizate"
+
+#: inc/admin/admin.php:538
+msgid "Stats in Dashboard"
+msgstr "Statistici din tabloul de bord"
+
+#: inc/admin/admin.php:615
+msgid "Appearance"
+msgstr "Aspect"
+
+#: inc/admin/admin.php:616
+msgid "Security"
+msgstr "Securitate"
+
+#: inc/admin/admin.php:648
+msgid "Export Settings"
+msgstr "Setari Export"
+
+#: inc/admin/admin.php:650
+msgid ""
+"Export the plugin settings for this site as a .json file. This allows you to "
+"easily import the configuration into another site."
+msgstr ""
+"Exportați setările pluginului pentru acest site ca fișier .json. Aceasta vă "
+"permite să importați cu ușurință configurația într-un alt site."
+
+#: inc/admin/admin.php:655 inc/admin/admin.php:711
+msgid "Export"
+msgstr "Exporta"
+
+#: inc/admin/admin.php:662
+msgid "Import Settings"
+msgstr "Setari Import"
+
+#: inc/admin/admin.php:664
+msgid ""
+"Import the plugin settings from a .json file. This file can be obtained by "
+"exporting the settings on another site using the form above."
+msgstr ""
+"Importați setările pluginului dintr-un fișier .json. Acest fișier poate fi "
+"obținut exportând setările de pe alt site folosind formularul de mai sus."
+
+#: inc/admin/admin.php:672 inc/admin/admin.php:698
+msgid "Import"
+msgstr "Importa"
+
+#: inc/admin/admin.php:674
+msgid "Import completed!"
+msgstr "Importul a fost finalizat!"
+
+#: inc/admin/admin.php:683
+msgid "Import Redirections"
+msgstr "Importa Redirectari"
+
+#: inc/admin/admin.php:685
+msgid ""
+"Import your own redirections from a .csv file (separator \";\"). You must "
+"have 3 columns in this order: url to match (without your domain name), url "
+"to redirect in absolute and type of redirection (301, 302 or 307)."
+msgstr ""
+"Importați propriile redirecționări dintr-un fișier .csv (separator \";\"). "
+"Trebuie să aveți 3 coloane în această ordine: url pentru potrivire (fără "
+"numele domeniului dvs.), url pentru a redirecționare în modul absolut și "
+"tipul de redirecționare (301, 302 sau 307)."
+
+#: inc/admin/admin.php:688
+msgid "Download a CSV example"
+msgstr "Descărcați un exemplu CSV"
+
+#: inc/admin/admin.php:704
+msgid "Export Redirections"
+msgstr "Exporta Redirectari"
+
+#: inc/admin/admin.php:706
+msgid ""
+"Export all redirections for this site as a .csv file. This allows you to "
+"easily import the redirections into another site, to Excel / Google Sheets..."
+msgstr ""
+"Exportați setările pluginului pentru acest site ca fișier .csv. Aceasta vă "
+"permite să importați cu ușurință configurația într-un alt site,la Excel/"
+"Google Sheets..."
+
+#: inc/admin/admin.php:719
+msgid "Import posts and terms metadata from Yoast"
+msgstr "Importati metadate postari si termene din Yoast"
+
+#: inc/admin/admin.php:721
+msgid "By clicking Migrate, we'll import:"
+msgstr "Dacă faceți clic pe Migrație, vom importa:"
+
+#: inc/admin/admin.php:723
+msgid "Title tags"
+msgstr "Titlu etichete"
+
+#: inc/admin/admin.php:725
+msgid "Facebook Open Graph tags (title, description and image thumbnail)"
+msgstr ""
+"Etichete Facebook Open Graph (titlul, descrierea și miniatura imaginii)"
+
+#: inc/admin/admin.php:726
+msgid "Twitter tags (title, description and image thumbnail)"
+msgstr "Etichete Twitter (titlu, descriere și miniatură imagine)"
+
+#: inc/admin/admin.php:727
+msgid "Meta Robots (noindex, nofollow...)"
+msgstr "Meta Roboți (noindex, nofollow ...)"
+
+#: inc/admin/admin.php:729
+msgid "Focus keywords"
+msgstr "Cavant cheie focalizat"
+
+#: inc/admin/admin.php:731
+msgid ""
+"<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms "
+"metadata. Some dynamic variables will not be interpreted."
+msgstr ""
+"<strong>AVERTIZARE:</strong> Migrarea va șterge toate metadatele articolelor "
+"create de SEOPress. Unele variabile dinamice nu vor fi interpretate."
+
+#: inc/admin/admin.php:732
+msgid "Migrate now"
+msgstr "Migreaza acum"
+
+#: inc/admin/admin.php:739
+msgid "Reset All Notices From Notifications Center"
+msgstr "Resetați toate notificările de la Centrul de notificări"
+
+#: inc/admin/admin.php:741
+msgid ""
+"By clicking Reset Notices, you'll see all notices again in notifications "
+"center."
+msgstr ""
+"Dacă faceți clic pe Resetați notificările, veți vedea din nou toate "
+"notificările în centrul de notificări."
+
+#: inc/admin/admin.php:746
+msgid "Reset notices"
+msgstr "Resetati notificarile"
+
+#: inc/admin/admin.php:753
+msgid "Reset All Settings"
+msgstr "Resteaza toate setarile"
+
+#: inc/admin/admin.php:755
+msgid ""
+"<strong>WARNING:</strong> Delete all options related to SEOPress in your "
+"database AND set settings to their default values."
+msgstr ""
+"<strong>WARNING:</strong> Ștergeți toate opțiunile legate de SEOPress din "
+"baza de date și setați setările la valorile lor implicite."
+
+#: inc/admin/admin.php:760
+msgid "Reset settings"
+msgstr "Resteaza setari"
+
+#: inc/admin/admin.php:800 inc/admin/admin.php:806
+msgid "SEO Tools"
+msgstr "Unelte SEO"
+
+#: inc/admin/admin.php:801 inc/admin/admin.php:807 inc/admin/admin.php:813
+#: inc/admin/admin.php:818
+msgid "Useful links"
+msgstr "Link-uri utile"
+
+#: inc/admin/admin.php:805 inc/admin/admin.php:817
+msgid "Notifications Center"
+msgstr "Centru Notificari"
+
+#: inc/admin/admin.php:838
+msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
+msgstr ""
+"Tema dvs. nu foloseste <strong>add_theme_support('title-tag');</strong>"
+
+#: inc/admin/admin.php:839 inc/admin/admin.php:894 inc/admin/admin.php:904
+#: inc/admin/admin.php:914
+msgid "High impact"
+msgstr "Impact major"
+
+#: inc/admin/admin.php:849 inc/admin/admin.php:880 inc/admin/admin.php:4607
+#: inc/admin/admin.php:4628 inc/admin/admin.php:4649 inc/admin/admin.php:4670
+msgid "Learn more"
+msgstr "Mai mult"
+
+#: inc/admin/admin.php:856
+msgid ""
+"We notice that you use Yoast SEO plugin. <br>Do you want to migrate all your "
+"posts metadata to SEOPress?"
+msgstr ""
+"Observăm că utilizați pluginul Yoast SEO. <br>Doriți să migrați toate "
+"metadatele postărilor dvs. în SEOPress?"
+
+#: inc/admin/admin.php:858
+msgid "Migrate!"
+msgstr "Migreaza!"
+
+#: inc/admin/admin.php:879
+msgid "Your site doesn't use an SSL certificate!"
+msgstr "Site-ul dvs. nu utilizează un certificat SSL!"
+
+#: inc/admin/admin.php:881
+msgid "Low impact"
+msgstr "Impact minor"
+
+#: inc/admin/admin.php:883
+msgid "Buy an SSL!"
+msgstr "Cumpara SSL!"
+
+#: inc/admin/admin.php:893
+msgid "Your site is not visible to Search Engines!"
+msgstr "Site-ul dvs. nu este vizibil pentru motoarele de căutare!"
+
+#: inc/admin/admin.php:896 inc/admin/admin.php:906 inc/admin/admin.php:916
+#: inc/admin/admin.php:940 inc/admin/admin.php:994 inc/admin/admin.php:1007
+#: inc/admin/admin.php:1079
+msgid "Fix this!"
+msgstr "Rezolva asta!"
+
+#: inc/admin/admin.php:903
+msgid "Your site title is empty!"
+msgstr "Titlu site-ului este gol!"
+
+#: inc/admin/admin.php:913 inc/admin/admin.php:3066
+msgid ""
+"Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
+msgstr ""
+"Link-urile permanente nu sunt SEO Friendly! Activați pretty permalinks "
+"pentru a rezolva acest lucru."
+
+#: inc/admin/admin.php:937
+msgid "You RSS feed show full text!"
+msgstr "Feed-ul RSS vă arată textul integral!"
+
+#: inc/admin/admin.php:938 inc/admin/admin.php:992 inc/admin/admin.php:1005
+msgid "Medium impact"
+msgstr "Impact mediu"
+
+#: inc/admin/admin.php:964
+msgid "Break comments into pages is ON!"
+msgstr "Imparte comentariile în pagini este ON!"
+
+#: inc/admin/admin.php:965 inc/admin/admin.php:1029 inc/admin/admin.php:1065
+msgid "Huge impact"
+msgstr "Impact imens"
+
+#: inc/admin/admin.php:967
+msgid "Disable this!"
+msgstr "Dezactiveaza asta!"
+
+#: inc/admin/admin.php:991
+msgid "Display more posts per page on homepage and archives"
+msgstr "Afișați mai multe postări pe pagină pe pagina de pornire și arhive"
+
+#: inc/admin/admin.php:1004
+msgid "You don't have an XML Sitemap!"
+msgstr "Nu aveți un Sitemap XML!"
+
+#: inc/admin/admin.php:1028
+msgid "Do you have a Google My Business page? It's free!"
+msgstr "Aveți o pagină Google My Business? Este gratis!"
+
+#: inc/admin/admin.php:1031
+msgid "Create your page now!"
+msgstr "Creați-vă pagina acum!"
+
+#: inc/admin/admin.php:1064
+msgid "Add your site to Google. It's free!"
+msgstr "Adăugați site-ul la Google. Este gratis!"
+
+#: inc/admin/admin.php:1067
+msgid "Add your site to Search Console!"
+msgstr "Adăugați site-ul dvs. în Search Console!"
+
+#: inc/admin/admin.php:1077
+msgid "You have to enter your licence key to get updates and support"
+msgstr ""
+"Trebuie să introduceți cheia de licență pentru a obține actualizări și "
+"asistență"
+
+#: inc/admin/admin.php:1092
+msgid "Check websites setup on your server"
+msgstr "Verificați configurarea site-urilor de pe serverul dvs"
+
+#: inc/admin/admin.php:1094
+msgid "Host IP: "
+msgstr "IP Gazda "
+
+#: inc/admin/admin.php:1101
+msgid "Not found"
+msgstr "Negasit"
+
+#: inc/admin/admin.php:1106
+msgid "No scrape."
+msgstr "Nici un scrape."
+
+#: inc/admin/admin.php:1111
+msgid "No domain found."
+msgstr "Nu am gasit domeniu."
+
+#: inc/admin/admin.php:1121
+msgid "Server IP Address: "
+msgstr "Adresa IP Server "
+
+#: inc/admin/admin.php:1124
+msgid "Last scrape: "
+msgstr "Ultima verificare "
+
+#: inc/admin/admin.php:1125
+msgid "Number of websites on your server: "
+msgstr "Numărul de site-uri web de pe serverul dvs "
+
+#: inc/admin/admin.php:1138
+msgid "Get list"
+msgstr "Obțineți lista"
+
+#: inc/admin/admin.php:1146
+msgid "Check your domain expiration date"
+msgstr "Verificați data de expirare a domeniului"
+
+#: inc/admin/admin.php:1177
+msgid "Your domain name: "
+msgstr "Numele dvs. de domeniu "
+
+#: inc/admin/admin.php:1180
+msgid "Your registrar: "
+msgstr "Registratorul dvs "
+
+#: inc/admin/admin.php:1183
+msgid "Last updated date: "
+msgstr "Ultima updatare "
+
+#: inc/admin/admin.php:1186
+msgid "Domain creation date: "
+msgstr "Data creării domeniului "
+
+#: inc/admin/admin.php:1189
+msgid "Your domain expires: "
+msgstr "Domeniul dvs. expiră "
+
+#: inc/admin/admin.php:1194
+msgid "Sorry, you domain name can't be verified :("
+msgstr "Ne pare rău, numele domeniului nu poate fi verificat :("
+
+#: inc/admin/admin.php:1197
+msgid "Email me before expiration"
+msgstr "Trimiteți-mi un e-mail înainte de expirare"
+
+#: inc/admin/admin.php:1206
+msgid "Check your Alexa Rank (Amazon index)"
+msgstr "Verificați poziția dvs. Alexa (indice Amazon)"
+
+#: inc/admin/admin.php:1221
+msgid "Your Alexa Rank"
+msgstr "Clasamentul tău in Alexa"
+
+#: inc/admin/admin.php:1243
+msgid "Country Rank: "
+msgstr "Clasament tara "
+
+#: inc/admin/admin.php:1252
+msgid "The lower, the best"
+msgstr "Cel mai mic, cel mai bun"
+
+#: inc/admin/admin.php:1256
+msgid "Get Alexa Rank"
+msgstr "Obțineți Alexa Rank"
+
+#: inc/admin/admin.php:1264
+msgid "Upload a list of links to disavow to Google"
+msgstr "Încărcați o listă cu link-uri pentru a dezactiva in Google"
+
+#: inc/admin/admin.php:1265
+msgid "Google Trends"
+msgstr "Trenduri Google"
+
+#: inc/admin/admin.php:1266
+msgid "Dareboost: Test, analyze and optimize your website"
+msgstr "Dareboost: testați, analizați și optimizați site-ul dvs"
+
+#: inc/admin/admin.php:1267
+msgid "Google Campaign URL Builder tool"
+msgstr "Instrumentul Google Builder pentru campanii Google"
+
+#: inc/admin/admin.php:1280
+msgid "Titles & metas"
+msgstr "Titluri & meta"
+
+#: inc/admin/admin.php:1281
+msgid "Manage all your titles & metas"
+msgstr "Gestionați toate titlurile și meta-urile"
+
+#: inc/admin/admin.php:1282 inc/admin/admin.php:1320 inc/admin/admin.php:1358
+#: inc/admin/admin.php:1396 inc/admin/admin.php:1434 inc/admin/admin.php:1463
+#: inc/admin/admin.php:1491 inc/admin/admin.php:1519 inc/admin/admin.php:1547
+#: inc/admin/admin.php:1575 inc/admin/admin.php:1603 inc/admin/admin.php:1641
+#: inc/admin/admin.php:1663 inc/admin/admin.php:1703 inc/admin/admin.php:1732
+#: inc/admin/admin.php:1782 inc/admin/admin.php:1792 inc/admin/admin.php:1823
+#: inc/admin/admin.php:1835 inc/admin/admin.php:1847 inc/admin/admin.php:1868
+msgid "Manage"
+msgstr "Gestioneaza"
+
+#: inc/admin/admin.php:1310
+msgid "Guide to manage your titles and meta descriptions - new window"
+msgstr ""
+"Ghid pentru gestionarea titlurilor și meta-descrierilor - fereastră nouă"
+
+#: inc/admin/admin.php:1319
+msgid "Manage your XML / Image / HTML Sitemap"
+msgstr "Gestionați sitemap-ul XML / Image / HTML"
+
+#: inc/admin/admin.php:1348
+msgid "Guide to enable your XML Sitemaps - new window"
+msgstr "Ghid pentru activarea sitemap-urilor XML - fereastră nouă"
+
+#: inc/admin/admin.php:1357
+msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
+msgstr "Open Graph, Twitter Card, Google Knowledge Graph si mai mult..."
+
+#: inc/admin/admin.php:1386
+msgid "Guide to enable Google Knowledge Graph - new window"
+msgstr "Ghid pentru a permite Google Knowledge Graph - fereastră nouă"
+
+#: inc/admin/admin.php:1395
+msgid "Track everything about your visitors with Google Analytics"
+msgstr "Urmăriți totul despre vizitatorii dvs. cu Google Analytics"
+
+#: inc/admin/admin.php:1424
+msgid "Guide to getting started with Google Analytics - new window"
+msgstr "Ghid pentru a începe cu Google Analytics - fereastră nouă"
+
+#: inc/admin/admin.php:1433
+msgid "Advanced SEO options for advanced users!"
+msgstr "Opțiuni avansate de SEO pentru utilizatorii avansați!"
+
+#: inc/admin/admin.php:1462
+msgid "Improve WooCommerce SEO"
+msgstr "Îmbunătățire WooCommerce SEO"
+
+#: inc/admin/admin.php:1490
+msgid "Improve Easy Digital Downloads SEO"
+msgstr "Îmbunătățire Easy Digital Downloads SEO"
+
+#: inc/admin/admin.php:1518
+msgid "Add Google Local Business data type"
+msgstr "Adăugați tipul de date Google Business"
+
+#: inc/admin/admin.php:1546
+msgid "Add Dublin Core meta tags"
+msgstr "Adăugați meta etichetele Dublin Core"
+
+#: inc/admin/admin.php:1574
+msgid ""
+"Add data types to your content: articles, courses, recipes, videos, events "
+"and products"
+msgstr ""
+"Adăugați tipuri de date în conținutul dvs.: articole, cursuri, rețete, "
+"videoclipuri, evenimente și produse"
+
+#: inc/admin/admin.php:1602
+msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
+msgstr "Activați Breadcrumbs pentru tema dvs. și îmbunătățiți SEO în SERP"
+
+#: inc/admin/admin.php:1631
+msgid "Guide to enable Breadcrumbs - new window"
+msgstr "Ghid pentru a permite Breadcrumbs - fereastră nouă"
+
+#: inc/admin/admin.php:1640
+msgid "Track your website performance to improve SEO with Google Page Speed"
+msgstr ""
+"Urmăriți performanța site-ului dvs. pentru a îmbunătăți SEO cu Google Page "
+"Speed"
+
+#: inc/admin/admin.php:1651
+msgid "Guide to analyse your site with Google Page Speed - new window"
+msgstr ""
+"Ghid pentru analiza site-ului dvs. cu Google Page Speed ​​- fereastră nouă"
+
+#: inc/admin/admin.php:1661
+msgid "Edit your robots.txt file"
+msgstr "Editați fișierul dvs. robots.txt"
+
+#: inc/admin/admin.php:1662
+msgid "View your robots.txt"
+msgstr "Vezi fișierul dvs. robots.txt"
+
+#: inc/admin/admin.php:1692
+msgid "Guide to edit your robots.txt file - new window"
+msgstr "Ghid pentru editare fișierul dvs. robots.txt"
+
+#: inc/admin/admin.php:1702
+msgid "Optimize your site for Google News"
+msgstr "Optimizați-vă site-ul pentru Știri Google"
+
+#: inc/admin/admin.php:1730
+msgid "Monitor 404, create 301, 302 and 307 redirections"
+msgstr "Monitorizeaza 404, creaza redirecționări 301, 302 și 307"
+
+#: inc/admin/admin.php:1731
+msgid "See redirects"
+msgstr "Vedeți redirecționările"
+
+#: inc/admin/admin.php:1760
+msgid "Guide to enable 301 redirections and 404 monitoring - new window"
+msgstr ""
+"Ghid pentru activarea redirecționărilor 301 și monitorizarea 404 - fereastră "
+"nouă"
+
+#: inc/admin/admin.php:1769
+msgid "Scan your site to find SEO problems."
+msgstr "Scanați site-ul pentru a găsi probleme SEO."
+
+#: inc/admin/admin.php:1770
+msgid "See broken links"
+msgstr "Vedeți legături întrerupte"
+
+#: inc/admin/admin.php:1771
+msgid "Scan"
+msgstr "Scaneaza"
+
+#: inc/admin/admin.php:1780
+msgid "Check your backlinks with Majestic API."
+msgstr "Verificați-vă backlink-urile cu API-ul Majestic."
+
+#: inc/admin/admin.php:1781
+msgid "See backlinks"
+msgstr "Consultați backlink-urile"
+
+#: inc/admin/admin.php:1791
+msgid "Customize your permalinks."
+msgstr "Customizeaza permalinks."
+
+#: inc/admin/admin.php:1822
+msgid "Edit your htaccess file."
+msgstr "Editați fișierul htaccess."
+
+#: inc/admin/admin.php:1834
+msgid "Configure default WordPress RSS."
+msgstr "Configurați RSS WordPress implicit."
+
+#: inc/admin/admin.php:1846
+msgid "Import / export SEOPress settings from site to site."
+msgstr "Import / export setările SEOPress de la site la site."
+
+#: inc/admin/admin.php:1857
+msgid "Guide to export / import / reset settings - new window"
+msgstr "Ghid pentru export / import / resetare setări - fereastră nouă"
+
+#: inc/admin/admin.php:1867
+msgid "Edit your SEOPress license key."
+msgstr "Editați cheia de licență SEOPress."
+
+#: inc/admin/admin.php:1878
+msgid "Guide to activate SEOPress PRO - new window"
+msgstr "Ghid pentru activarea SEOPress PRO - fereastră nouă"
+
+#: inc/admin/admin.php:1945 inc/admin/admin.php:3196
+msgid "Site title"
+msgstr "Titlu site"
+
+#: inc/admin/admin.php:2186
+msgid "Indicate paginated content to Google"
+msgstr "Indicați conținutul paginat in Google"
+
+#: inc/admin/admin.php:2203 inc/admin/admin.php:3915
+msgid "Enable XML Sitemap"
+msgstr "Activați Sitemap XML"
+
+#: inc/admin/admin.php:2211
+msgid "Enable XML Image Sitemaps"
+msgstr "Activați Sitemap-urile de imagine XML"
+
+#: inc/admin/admin.php:2219 inc/admin/admin.php:3969
+msgid "Enable HTML Sitemap"
+msgstr "Activați Sitemap HTML"
+
+#: inc/admin/admin.php:2235
+msgid "Check to INCLUDE Post Types"
+msgstr "Bifeaza pentru a INCLUDE Tipuri de postări"
+
+#: inc/admin/admin.php:2251
+msgid "Check to INCLUDE Taxonomies"
+msgstr "Bifeaza pentru a INCLUDE Taxonometrii"
+
+#: inc/admin/admin.php:2267 inc/admin/admin.php:4074
+msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
+msgstr ""
+"Introduceți un ID postare personalizată, pagină sau postare pentru a afișa "
+"in harta site-ului"
+
+#: inc/admin/admin.php:2275 inc/admin/admin.php:4088
+msgid "Exclude some Posts, Pages or Custom Post Types"
+msgstr "Excludeți unele postări, pagini sau tipuri de postări personalizate"
+
+#: inc/admin/admin.php:2283
+msgid "Disable the display of the publication date"
+msgstr "Dezactivați afișarea datei publicării"
+
+#: inc/admin/admin.php:2300
+msgid "Person or organization"
+msgstr "Persoană sau organizație"
+
+#: inc/admin/admin.php:2308 inc/admin/admin.php:4135
+msgid "Your name / organization"
+msgstr "Numele dvs./ organizația"
+
+#: inc/admin/admin.php:2316 inc/admin/admin.php:4148
+msgid "Your photo / organization logo"
+msgstr "Fotografia dvs. / logo organizatie"
+
+#: inc/admin/admin.php:2324 inc/admin/admin.php:4176
+msgid "Organization Phone number (only for Organization)"
+msgstr "Numar telefon organizatie (numai pentru Organizație)"
+
+#: inc/admin/admin.php:2332
+msgid "Contact type (only for Organization)"
+msgstr "Tip contact (numai pentru organizație)"
+
+#: inc/admin/admin.php:2340
+msgid "Contact option (only for Organization)"
+msgstr "Optiuni contact (numai pentru organizație)"
+
+#: inc/admin/admin.php:2357 inc/admin/admin.php:4251
+msgid "Facebook Page URL"
+msgstr "Adresa URL a paginii Facebook"
+
+#: inc/admin/admin.php:2365
+msgid "Twitter Username"
+msgstr "Utilizator Twitter"
+
+#: inc/admin/admin.php:2373 inc/admin/admin.php:4276
+msgid "Google + URL"
+msgstr "Link Google +"
+
+#: inc/admin/admin.php:2381 inc/admin/admin.php:4288
+msgid "Pinterest URL"
+msgstr "Lnk Pinterest"
+
+#: inc/admin/admin.php:2389 inc/admin/admin.php:4300
+msgid "Instagram URL"
+msgstr "Link Instagram"
+
+#: inc/admin/admin.php:2397 inc/admin/admin.php:4312
+msgid "YouTube URL"
+msgstr "Link YouTube"
+
+#: inc/admin/admin.php:2405 inc/admin/admin.php:4324
+msgid "LinkedIn URL"
+msgstr "Link LinkedIn"
+
+#: inc/admin/admin.php:2413 inc/admin/admin.php:4336
+msgid "MySpace URL"
+msgstr "Link MySpace"
+
+#: inc/admin/admin.php:2421 inc/admin/admin.php:4348
+msgid "Soundcloud URL"
+msgstr "Link Soundcloud"
+
+#: inc/admin/admin.php:2429 inc/admin/admin.php:4360
+msgid "Tumblr URL"
+msgstr "Link Tumblr"
+
+#: inc/admin/admin.php:2446
+msgid "Enable Open Graph Data"
+msgstr "Activați Date Open Graph"
+
+#: inc/admin/admin.php:2454 inc/admin/admin.php:4392
+msgid "Select a default image"
+msgstr "Selectați o imagine implicită"
+
+#: inc/admin/admin.php:2462
+msgid "Facebook Link Ownership ID"
+msgstr "ID-ul de proprietate a legăturii Facebook"
+
+#: inc/admin/admin.php:2470
+msgid "Facebook Admin ID"
+msgstr "Facebook Admin ID"
+
+#: inc/admin/admin.php:2478
+msgid "Facebook App ID"
+msgstr "Facebook App ID"
+
+#: inc/admin/admin.php:2495
+msgid "Enable Twitter Card"
+msgstr "Activeaza Twitter Card"
+
+#: inc/admin/admin.php:2503
+msgid "Use Open Graph if no Twitter Cards filled"
+msgstr "Utilizați Open Graph dacă nu sunt completate carduri Twitter"
+
+#: inc/admin/admin.php:2511 inc/admin/admin.php:4481
+msgid "Default Twitter Image"
+msgstr "Imagine prestabilită Twitter"
+
+#: inc/admin/admin.php:2519
+msgid "Image size for Twitter Summary card"
+msgstr "Dimensiunea imaginii pentru cardul Sumar Twitter"
+
+#: inc/admin/admin.php:2536
+msgid "Enable Google Analytics tracking"
+msgstr "Activați urmărirea Google Analytics"
+
+#: inc/admin/admin.php:2544 inc/admin/admin.php:4530
+msgid "Enter your tracking ID"
+msgstr "Introduceți codul de urmărire"
+
+#: inc/admin/admin.php:2552
+msgid "Google Analytics tracking opt-out"
+msgstr "Urmărirea abolirii de urmărire Google Analytics"
+
+#: inc/admin/admin.php:2560
+msgid "Consent message for user tracking"
+msgstr "Mesaj de consimțământ pentru urmărirea utilizatorilor"
+
+#: inc/admin/admin.php:2568
+msgid "Exclude user roles from tracking"
+msgstr "Excludeți rolurile utilizatorilor de la urmărire"
+
+#: inc/admin/admin.php:2586 inc/admin/admin.php:4604
+msgid "Enable remarketing, demographics and interest reporting"
+msgstr "Activați remarketingul, demografia și raportarea de interese"
+
+#: inc/admin/admin.php:2594 inc/admin/admin.php:4625
+msgid "Enable IP Anonymization"
+msgstr "Activați anonimizarea IP"
+
+#: inc/admin/admin.php:2602 inc/admin/admin.php:4646
+msgid "Enhanced Link Attribution"
+msgstr "Îmbunătățirea atribuire a legăturii"
+
+#: inc/admin/admin.php:2610 inc/admin/admin.php:4667
+msgid "Enable cross-domain tracking"
+msgstr "Activați urmărirea în domenii încrucișate"
+
+#: inc/admin/admin.php:2618 inc/admin/admin.php:4681
+msgid "Cross domains"
+msgstr "Domenii încrucișate"
+
+#: inc/admin/admin.php:2636
+msgid "Enable external links tracking (all links with target _blank attribute)"
+msgstr ""
+"Activați urmărirea legăturilor externe (toate legăturile cu atributul target "
+"_blank)"
+
+#: inc/admin/admin.php:2644
+msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
+msgstr "Activați urmărirea descărcărilor (de ex.: PDF, XLSX, DOCX ...)"
+
+#: inc/admin/admin.php:2652 inc/admin/admin.php:4727
+msgid "Track click downloads"
+msgstr "Urmăriți click-urile pe descărcări"
+
+#: inc/admin/admin.php:2660
+msgid ""
+"Enable affiliate / outbound links tracking (eg: aff, go, out, recommends"
+msgstr ""
+"Activați urmărirea legăturilor de afiliere / ieșire (de exemplu: aff, go, "
+"out, recomandari"
+
+#: inc/admin/admin.php:2668 inc/admin/admin.php:4758
+msgid "Track affiliate / outbound links"
+msgstr "Urmăriți legăturile afiliate / de ieșire"
+
+#: inc/admin/admin.php:2686
+msgid "Track Authors"
+msgstr "Urmăriți autori"
+
+#: inc/admin/admin.php:2694
+msgid "Track Categories"
+msgstr "Urmăriți categoriile"
+
+#: inc/admin/admin.php:2702
+msgid "Track Tags"
+msgstr "Urmareste Etichete"
+
+#: inc/admin/admin.php:2710
+msgid "Track Post Types"
+msgstr "Urmăriți tipurile de postări"
+
+#: inc/admin/admin.php:2718
+msgid "Track Logged In Users"
+msgstr "Urmăriți utilizatorii conectați"
+
+#: inc/admin/admin.php:2735
+msgid "Redirect attachment pages to post parent"
+msgstr "Redirecționați fisiere atașate la postarea de baza"
+
+#: inc/admin/admin.php:2743
+msgid "Add WP Editor to taxonomy description textarea"
+msgstr "Adăugați editorul WP la descrierea taxonomiei textarea"
+
+#: inc/admin/admin.php:2751
+msgid "Remove stop words from URL"
+msgstr "Eliminați cuvintele stop de la adresa URL"
+
+#: inc/admin/admin.php:2759
+msgid "Remove /category/ in URL"
+msgstr "Eliminați / categoria / în URL"
+
+#: inc/admin/admin.php:2767 inc/admin/admin.php:5230
+msgid "Disable trailing slash for metas"
+msgstr "Dezactivați slash-ul pentru metas"
+
+#: inc/admin/admin.php:2775
+msgid "Remove WordPress generator meta tag"
+msgstr "Eliminați meta tag-ul generatorului WordPress"
+
+#: inc/admin/admin.php:2783
+msgid "Remove WordPress shortlink meta tag"
+msgstr "Eliminați meta tag-ul WordPress shortlink"
+
+#: inc/admin/admin.php:2791
+msgid "Remove Windows Live Writer meta tag"
+msgstr "Eliminați meta eticheta Windows Live Writer"
+
+#: inc/admin/admin.php:2799
+msgid "Remove RSD meta tag"
+msgstr "Eliminați meta-tag-ul RSD"
+
+#: inc/admin/admin.php:2807 inc/admin/admin.php:5310
+msgid "Google site verification"
+msgstr "Verificarea site-ului in Google"
+
+#: inc/admin/admin.php:2815 inc/admin/admin.php:5322
+msgid "Bing site verification"
+msgstr "Verificarea site-ului in Bing"
+
+#: inc/admin/admin.php:2823 inc/admin/admin.php:5334
+msgid "Pinterest site verification"
+msgstr "Verificarea site-ului in Pinterest"
+
+#: inc/admin/admin.php:2831 inc/admin/admin.php:5346
+msgid "Yandex site verification"
+msgstr "Verificarea site-ului in Yandex"
+
+#: inc/admin/admin.php:2848
+msgid "SEOPress in admin bar"
+msgstr "SEOPress in bara de admin"
+
+#: inc/admin/admin.php:2856
+msgid "Move SEOPress metaboxe position"
+msgstr "Deplasați poziția metabox SEOPress"
+
+#: inc/admin/admin.php:2864
+msgid "Hide SEOPress Notifications Center"
+msgstr "Ascundeți Centrul de notificări SEOPress"
+
+#: inc/admin/admin.php:2872
+msgid "Show Title tag column in post types"
+msgstr "Afișați Titlu eticheta în coloana tipuri de postări"
+
+#: inc/admin/admin.php:2880
+msgid "Show Meta description column in post types"
+msgstr "Afișați descriere meta în coloana tipuri de postări"
+
+#: inc/admin/admin.php:2888
+msgid "Show Redirection Enable column in post types"
+msgstr "Afișați coloana Redirecționare Enable în tipurile de postări"
+
+#: inc/admin/admin.php:2896
+msgid "Show Redirect URL column in post types"
+msgstr "Afișați coloana URL de redirecționare în tipurile de postări"
+
+#: inc/admin/admin.php:2904
+msgid "Show canonical URL column in post types"
+msgstr "Afișați coloana URL canonică în tipurile de postări"
+
+#: inc/admin/admin.php:2912
+msgid "Show Target Keyword column in post types"
+msgstr "Afișați coloana Cuvânt cheie targhetat în tipuri de postări"
+
+#: inc/admin/admin.php:2920
+msgid "Show noindex column in post types"
+msgstr "Afișați coloana noindex în tipuri de postări"
+
+#: inc/admin/admin.php:2928
+msgid "Show nofollow column in post types"
+msgstr "Afișați coloana nofollow în tipurile de postări"
+
+#: inc/admin/admin.php:2936
+msgid "Show total number of words column in post types"
+msgstr "Afișați coloana cu numărul total de cuvinte din tipurile de postări"
+
+#: inc/admin/admin.php:2944
+msgid "Show W3C validator column in post types"
+msgstr "Afișați coloana validator W3C în tipurile de postări"
+
+#: inc/admin/admin.php:2952
+msgid "Show Google Page Speed column in post types"
+msgstr "Afișați coloana Google Speed ​​Speed ​​în tipuri de postări"
+
+#: inc/admin/admin.php:2961
+msgid "Hide Genesis SEO Metaboxe"
+msgstr "Ascunde SEO Metabox Genesis"
+
+#: inc/admin/admin.php:2978
+msgid "Block SEO metaboxe to user roles"
+msgstr "Blochează metaboxul SEO în rolurile utilizatorilor"
+
+#: inc/admin/admin.php:2986
+msgid "Block Content analysis metaboxe to user roles"
+msgstr ""
+"Blochează metaboxul de analiză a conținutului în rolurile utilizatorilor"
+
+#: inc/admin/admin.php:3039
+msgid "<p>Customize your titles & metas for homepage</p>"
+msgstr ""
+"<p>Personalizați-vă titlurile și meta-urile pentru pagina de pornire</p>"
+
+#: inc/admin/admin.php:3044
+msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
+msgstr ""
+"<p>Personalizați-vă titlurile și meta-urile pentru tipurile personalizate de "
+"postări personalizate</p>"
+
+#: inc/admin/admin.php:3049
+msgid "<p>Customize your metas for all pages</p>"
+msgstr "<p>Personalizați meta-urile pentru toate paginile</p>"
+
+#: inc/admin/admin.php:3054
+msgid "<p>Customize your metas for all taxonomies archives</p>"
+msgstr "<p>Personalizați meta-urile pentru toate arhivele de taxonomii</p>"
+
+#: inc/admin/admin.php:3059
+msgid "<p>Customize your metas for all archives</p>"
+msgstr "<p>Personalizați-vă meta-urile pentru toate arhivele</p>"
+
+#: inc/admin/admin.php:3067
+msgid "Change this settings"
+msgstr "Schimbati aceste setari"
+
+#: inc/admin/admin.php:3070
+msgid ""
+"To view your sitemap, enable permalinks (not default one), and save settings "
+"to flush them."
+msgstr ""
+"Pentru a vizualiza sitemap-ul dvs., activați permalinks (nu unul implicit) "
+"și salvați setările pentru a le elimina."
+
+#: inc/admin/admin.php:3071
+msgid ""
+"Only the last 1000 items are listed in Sitemaps for performances issues."
+msgstr ""
+"Numai ultimele 1000 de elemente sunt listate în Sitemap-uri pentru probleme "
+"legate de performanțe."
+
+#: inc/admin/admin.php:3077
+msgid ""
+"Your server use NGINX. If XML Sitemaps doesn't work, you have to add this "
+"rules to your configuration:"
+msgstr ""
+"Serverul dvs. utilizează NGINX. Dacă XML Sitemaps nu funcționează, trebuie "
+"să adăugați aceste reguli la configurația dvs:"
+
+#: inc/admin/admin.php:3088
+msgid "Noindex content will not be displayed in Sitemaps."
+msgstr "Conținutul noindex nu va fi afișat în Sitemaps."
+
+#: inc/admin/admin.php:3090
+msgid "View your sitemap"
+msgstr "Vizualizați sitemap-ul dvs"
+
+#: inc/admin/admin.php:3092
+msgid "Ping Google manually"
+msgstr "Ping Google manual"
+
+#: inc/admin/admin.php:3094
+msgid "Flush permalinks"
+msgstr "Curata permalinks"
+
+#: inc/admin/admin.php:3100
+msgid "<p>Create an HTML for your visitors and boost your SEO.</p>"
+msgstr ""
+"<p>Creați un cod HTML pentru vizitatorii dvs. și stimulați-vă SEO-ul.</p>"
+
+#: inc/admin/admin.php:3110 inc/admin/admin.php:3979
+msgid "Guide to enable HTML Sitemap - new window"
+msgstr "Ghid pentru activarea Sitemap-ului HTML - fereastră nouă"
+
+#: inc/admin/admin.php:3115
+msgid "<p>Include / Exclude Post Types.</p>"
+msgstr "<p>Include / Excludeți tipurile de postări.</p>"
+
+#: inc/admin/admin.php:3120
+msgid "<p>Include / Exclude Taxonomies.</p>"
+msgstr "<p>Include /Excludeți taxonomiile.</p>"
+
+#: inc/admin/admin.php:3125
+msgid "<p>Configure Google Knowledge Graph.</p>"
+msgstr "<p>Configurați Google Knowledge Graph.</p>"
+
+#: inc/admin/admin.php:3130
+msgid "<p>Link your site with your social accounts.</p>"
+msgstr "<p>Conectați site-ul dvs. la conturile din retele sociale</p>"
+
+#: inc/admin/admin.php:3135
+msgid "<p>Manage Open Graph datas.</p>"
+msgstr "<p>Gestioneaza datele Open Graph</p>"
+
+#: inc/admin/admin.php:3140
+msgid "<p>Manage your Twitter card.</p>"
+msgstr "<p>Gestioneaza cardul Twitter</p>"
+
+#: inc/admin/admin.php:3145
+msgid "<p>Link your Google Analytics to your website.</p>"
+msgstr "<p>Conectati site-ul la Google Analytics.</p>"
+
+#: inc/admin/admin.php:3150
+msgid "<p>Configure your Google Analytics tracking code.</p>"
+msgstr "<p>Configureaza codul de urmărire Google Analytics</p>"
+
+#: inc/admin/admin.php:3155
+msgid "<p>Track events in Google Analytics.</p>"
+msgstr "<p>Urmareste  evenimentele din Google Analytics</p>"
+
+#: inc/admin/admin.php:3160
+msgid ""
+"<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions "
+"and custom metrics are like default dimensions and metrics in your Analytics "
+"account,<br> except you create them yourself. You can use them to collect "
+"and analyze data that Analytics doesn't automatically track.<br> Notice that "
+"you have to setup your custom dimensions in your Google Analytics account "
+"too. More info by clicking on help icon."
+msgstr ""
+"<p>Configurați dimensiunile personalizate Google Analytics. <br>Dimensiunile "
+"personalizate și valorile personalizate sunt ca dimensiuni și valori "
+"implicite în contul Google Analytics,<br> cu excepția faptului că le creați "
+"singur. Puteți să le utilizați pentru a colecta și analiza date pe care "
+"Google Analytics nu le monitorizează automat.<br> Rețineți că trebuie să "
+"configurați și dimensiunile personalizate în contul dvs. Google Analytics. "
+"Mai multe informații făcând clic pe pictograma de ajutor."
+
+#: inc/admin/admin.php:3170
+msgid "Guide to create custom dimensions in Google Analytics - new window"
+msgstr ""
+"Ghid pentru crearea de dimensiuni personalizate în Google Analytics - "
+"fereastră nouă"
+
+#: inc/admin/admin.php:3175
+msgid "<p>Advanced SEO options.</p>"
+msgstr "<p>Setari avansate de SEO</p>"
+
+#: inc/admin/admin.php:3180
+msgid "<p>Customize SEOPress to fit your needs.</p>"
+msgstr "<p>Personalizeaza SEOPress exact cum iti doresti.</p>"
+
+#: inc/admin/admin.php:3185
+msgid "<p>Manage security.</p>"
+msgstr "<p>Administrare securitate</p>"
+
+#: inc/admin/admin.php:3196
+msgid "My awesome website"
+msgstr "Site-ul meu minunat"
+
+#: inc/admin/admin.php:3201 inc/admin/admin.php:3212 inc/admin/admin.php:3255
+#: inc/admin/admin.php:3374 inc/admin/admin.php:3407 inc/admin/admin.php:3487
+#: inc/admin/admin.php:3563 inc/admin/admin.php:3633 inc/admin/admin.php:3702
+#: inc/admin/admin.php:3752
+msgid "More tags"
+msgstr "Mai multe etichete"
+
+#: inc/admin/admin.php:3207
+msgid "This is a cool website about Wookiees"
+msgstr "Acesta este un site interesant despre Wookiees"
+
+#: inc/admin/admin.php:3215
+msgid "Looking for editing your blog page?"
+msgstr "În căutarea pentru editarea paginii de blog?"
+
+#: inc/admin/admin.php:3229 inc/admin/admin.php:3345 inc/admin/admin.php:3464
+#: inc/admin/admin.php:3552 inc/admin/admin.php:3622 inc/admin/admin.php:3691
+#: inc/admin/admin.php:3743
+msgid "Title template"
+msgstr "Șablon de titlu"
+
+#: inc/admin/admin.php:3251
+msgid "Post Title"
+msgstr "Titlul postului"
+
+#: inc/admin/admin.php:3262 inc/admin/admin.php:3383 inc/admin/admin.php:3494
+#: inc/admin/admin.php:3569 inc/admin/admin.php:3639 inc/admin/admin.php:3708
+#: inc/admin/admin.php:3758
+msgid "Meta description template"
+msgstr "Sablon Meta descriere"
+
+#: inc/admin/admin.php:3323
+msgid "Display date in Google search results?"
+msgstr "Afișați data în rezultatele căutării Google?"
+
+#: inc/admin/admin.php:3365
+msgid "Category Title"
+msgstr "Titlu Categorie"
+
+#: inc/admin/admin.php:3367
+msgid "Tag Title"
+msgstr "Titlu Eticheta"
+
+#: inc/admin/admin.php:3369
+msgid "Term Title"
+msgstr "Titlu term"
+
+#: inc/admin/admin.php:3400
+msgid "Category Description"
+msgstr "Descriere Categorie"
+
+#: inc/admin/admin.php:3402
+msgid "Tag Description"
+msgstr "Descriere Eticheta"
+
+#: inc/admin/admin.php:3404
+msgid "Term Description"
+msgstr "Descriere term"
+
+#: inc/admin/admin.php:3483
+msgid "Post Type Archive Name"
+msgstr "Nume arhiva tip postare"
+
+#: inc/admin/admin.php:3550
+msgid "Author archives"
+msgstr "Arhiva autor"
+
+#: inc/admin/admin.php:3611
+msgid "Disable author archives"
+msgstr "Dezactiveaza arhive autori"
+
+#: inc/admin/admin.php:3620
+msgid "Date archives"
+msgstr "Data arhive"
+
+#: inc/admin/admin.php:3631
+msgid "Archive date"
+msgstr "Data Arhiva"
+
+#: inc/admin/admin.php:3680
+msgid "Disable date archives"
+msgstr "Dezactveaza data arhive"
+
+#: inc/admin/admin.php:3689
+msgid "Search archives"
+msgstr "Cauta arhive"
+
+#: inc/admin/admin.php:3700
+msgid "Search Keywords"
+msgstr "Cuvinte cheie"
+
+#: inc/admin/admin.php:3741
+msgid "404 archives"
+msgstr "Arhive 404"
+
+#: inc/admin/admin.php:3896
+msgid "Add rel next/prev link in head of paginated archive pages"
+msgstr "Adăugați linkul rel next / prev în capul paginilor arhivate paginate"
+
+#: inc/admin/admin.php:3898
+msgid "Learn more on Google website"
+msgstr "Aflați mai multe pe site-ul web Google"
+
+#: inc/admin/admin.php:3925
+msgid "Guide to enable XML Sitemaps - new window"
+msgstr "Ghid pentru activarea XML Sitemaps - fereastră nouă"
+
+#: inc/admin/admin.php:3942
+msgid "Enable Image Sitemaps"
+msgstr "Activați Sitemap-urile imaginii"
+
+#: inc/admin/admin.php:3952
+msgid "Guide to enable XML image sitemaps - new window"
+msgstr "Ghid pentru activarea sitemapurilor de imagini XML - fereastră nouă"
+
+#: inc/admin/admin.php:4019 inc/admin/admin.php:4059
+msgid "Include"
+msgstr "Include"
+
+#: inc/admin/admin.php:4074
+msgid "eg: 2, 28, 68"
+msgstr "ex: 2, 28, 68"
+
+#: inc/admin/admin.php:4078
+msgid "You can also use this shortcode:"
+msgstr "Poti utiliza si acest shortcode:"
+
+#: inc/admin/admin.php:4088
+msgid "eg: 13, 8, 38"
+msgstr "ex: 13, 8, 38"
+
+#: inc/admin/admin.php:4103
+msgid "Disable date after each post, page, post type?"
+msgstr "Dezactivați data după fiecare postare, pagină, tip post?"
+
+#: inc/admin/admin.php:4119
+msgid "Person"
+msgstr "Persoana"
+
+#: inc/admin/admin.php:4122
+msgid "Organization"
+msgstr "Organizatie"
+
+#: inc/admin/admin.php:4135
+msgid "eg: Apple"
+msgstr "ex: Apple"
+
+#: inc/admin/admin.php:4148
+msgid "Select your logo"
+msgstr "Selectați sigla"
+
+#: inc/admin/admin.php:4176
+msgid "eg: +33123456789 (internationalized version required)"
+msgstr "ex: +33123456789 (versiune internationala)"
+
+#: inc/admin/admin.php:4191
+msgid "Customer support"
+msgstr "Relații Clienți"
+
+#: inc/admin/admin.php:4194
+msgid "Technical support"
+msgstr "Suport tehnic"
+
+#: inc/admin/admin.php:4197
+msgid "Billing support"
+msgstr "Suport de facturare"
+
+#: inc/admin/admin.php:4200
+msgid "Bill payment"
+msgstr "Plati facturi"
+
+#: inc/admin/admin.php:4203
+msgid "Sales"
+msgstr "Vanzari"
+
+#: inc/admin/admin.php:4206
+msgid "Credit card support"
+msgstr "Suport Card credit"
+
+#: inc/admin/admin.php:4209
+msgid "Emergency"
+msgstr "Urgente"
+
+#: inc/admin/admin.php:4212
+msgid "Baggage tracking"
+msgstr "Urmărirea bagajelor"
+
+#: inc/admin/admin.php:4215
+msgid "Roadside assistance"
+msgstr "Asistenta rutiera"
+
+#: inc/admin/admin.php:4218
+msgid "Package tracking"
+msgstr "Urmărirea pachetelor"
+
+#: inc/admin/admin.php:4235
+msgid "Toll Free"
+msgstr "Fără taxă"
+
+#: inc/admin/admin.php:4238
+msgid "Hearing impaired supported"
+msgstr "Problemele cu auzul sunt acceptate"
+
+#: inc/admin/admin.php:4251
+msgid "eg: https://www.facebook.com/your-page"
+msgstr "ex: https://www.facebook.com/your-page"
+
+#: inc/admin/admin.php:4264
+msgid "eg: @wp_seopress"
+msgstr "ex: @wp_seopress"
+
+#: inc/admin/admin.php:4264
+msgid "Twitter Page URL"
+msgstr "Link pagina Twitter"
+
+#: inc/admin/admin.php:4276
+msgid "eg: https://plus.google.com/+BenjaminDenis"
+msgstr "ex: https://plus.google.com/+BenjaminDenis"
+
+#: inc/admin/admin.php:4288
+msgid "eg: https://pinterest.com/wpbuy/"
+msgstr "ex: https://pinterest.com/wpbuy/"
+
+#: inc/admin/admin.php:4300
+msgid "eg: https://www.instagram.com/wp_seopress/"
+msgstr "ex: https://www.instagram.com/wp_seopress/"
+
+#: inc/admin/admin.php:4312
+msgid "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+msgstr "ex: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+
+#: inc/admin/admin.php:4324
+msgid "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
+msgstr "ex: https://www.linkedin.com/in/benjamin-denis-70672b3b"
+
+#: inc/admin/admin.php:4336
+msgid "eg: https://myspace.com/your-page"
+msgstr "ex: https://myspace.com/your-page"
+
+#: inc/admin/admin.php:4348
+msgid "eg: https://soundcloud.com/michaelmccannmusic"
+msgstr "ex: https://soundcloud.com/michaelmccannmusic"
+
+#: inc/admin/admin.php:4360
+msgid "eg: https://your-site.tumblr.com"
+msgstr "ex: https://your-site.tumblr.com"
+
+#: inc/admin/admin.php:4377
+msgid "Enable OG data"
+msgstr "Activați datele OG"
+
+#: inc/admin/admin.php:4435
+msgid "How-to create a Facebook App ID"
+msgstr "Cum se creează un ID de aplicație Facebook"
+
+#: inc/admin/admin.php:4449
+msgid "Enable Twitter card"
+msgstr "Activați card Twitter"
+
+#: inc/admin/admin.php:4466
+msgid "Use OG if no Twitter Cards"
+msgstr "Utilizați OG dacă nu există carduri Twitter"
+
+#: inc/admin/admin.php:4499
+msgid "Default"
+msgstr "Mod implicit"
+
+#: inc/admin/admin.php:4502
+msgid "Large"
+msgstr "Mare"
+
+#: inc/admin/admin.php:4520
+msgid "Enable Google Analytics tracking (Global Site Tag: gtag.js)"
+msgstr "Activați urmărirea Google Analytics (Global Site Tag: gtag.js)"
+
+#: inc/admin/admin.php:4530
+msgid "Enter your Tracking ID (UA-XXXX-XX)"
+msgstr "Introduceți ID-ul de urmărire (UA-XXXX-XX)"
+
+#: inc/admin/admin.php:4534
+msgid "Find your tracking ID"
+msgstr "Găsiți ID-ul de urmărire"
+
+#: inc/admin/admin.php:4548
+msgid "Request user's consent for analytics tracking (required by GDPR)"
+msgstr ""
+"Solicitați consimțământul utilizatorului pentru urmărirea analizelor "
+"(solicitate de GDPR)"
+
+#: inc/admin/admin.php:4550
+msgid "User roles excluded from tracking will not see the consent message."
+msgstr ""
+"Rolurile utilizatorilor excluse din urmărire nu vor vedea mesajul de "
+"aprobare."
+
+#: inc/admin/admin.php:4563
+msgid "Enter your message (HTML allowed)"
+msgstr "Introduceți mesajul dvs. (doar HTML permis )"
+
+#: inc/admin/admin.php:4563
+msgid "This message will only appear if request user's consent is enabled."
+msgstr ""
+"Acest mesaj va apărea numai dacă consimțământul utilizatorului cererii este "
+"activat."
+
+#: inc/admin/admin.php:4566
+msgid "HTML tags allowed: strong, em, br, a href"
+msgstr "Etichete HTML permise: strong, em, br, a href"
+
+#: inc/admin/admin.php:4606
+msgid ""
+"A remarketing audience is a list of cookies or mobile-advertising IDs that "
+"represents a group of users you want to re-engage because of their "
+"likelihood to convert."
+msgstr ""
+"Un public de remarketing este o listă de cookie-uri sau de ID-uri de "
+"publicitate mobilă care reprezintă un grup de utilizatori pe care doriți să "
+"vă reangajați din cauza probabilității de a le converti."
+
+#: inc/admin/admin.php:4627
+msgid ""
+"When a customer of Analytics requests IP address anonymization, Analytics "
+"anonymizes the address as soon as technically feasible at the earliest "
+"possible stage of the collection network."
+msgstr ""
+"Atunci când un client din Analytics solicită anonimizarea adresei IP, Google "
+"Analytics anonimă adresa cât mai curând posibil din punct de vedere tehnic, "
+"în cel mai scurt timp posibil al rețelei de colectare."
+
+#: inc/admin/admin.php:4648
+msgid ""
+"Enhanced Link Attribution improves the accuracy of your In-Page Analytics "
+"report by automatically differentiating between multiple links to the same "
+"URL on a single page by using link element IDs."
+msgstr ""
+"Îmbunătățirea atribuire a legăturii îmbunătățește acuratețea raportului "
+"Google Analytics în pagină prin diferențierea automată a mai multor linkuri "
+"către aceeași adresă URL dintr-o singură pagină, utilizând ID-urile "
+"elementului de legătură."
+
+#: inc/admin/admin.php:4669
+msgid ""
+"Cross domain tracking makes it possible for Analytics to see sessions on two "
+"related sites (such as an ecommerce site and a separate shopping cart site) "
+"as a single session. This is sometimes called site linking."
+msgstr ""
+"Urmărirea pe mai multe domenii face ca Google Analytics să poată vedea "
+"sesiuni pe două site-uri conexe (cum ar fi un site de comerț electronic și "
+"un site separat de coș de cumpărături) ca o singură sesiune. Aceasta este "
+"uneori numită legare la locație."
+
+#: inc/admin/admin.php:4681
+msgid "Enter yours domains (eg: https://www.seopress.org/)"
+msgstr "Introduceți domeniile dvs. (de exemplu: https://www.seopress.org/)"
+
+#: inc/admin/admin.php:4698
+msgid "Enable external links tracking"
+msgstr "Activați urmărirea legăturilor externe"
+
+#: inc/admin/admin.php:4715
+msgid "Enable download tracking"
+msgstr "Activați urmărirea descărcării"
+
+#: inc/admin/admin.php:4727
+msgid "pdf|docx|pptx|zip"
+msgstr "pdf|docx|pptx|zip"
+
+#: inc/admin/admin.php:4731
+msgid "Separate each file type extensions with a pipe \"|\""
+msgstr "Separați fiecare extensie de tip fișier cu o conductă \"|\""
+
+#: inc/admin/admin.php:4746
+msgid "Enable affiliate / outbound tracking"
+msgstr "Activați urmărirea afiliată / de ieșire"
+
+#: inc/admin/admin.php:4758
+msgid "aff|go|out"
+msgstr "aff|go|out"
+
+#: inc/admin/admin.php:4762
+msgid "Separate each keyword with a pipe \"|\""
+msgstr "Separați fiecare cuvânt cheie cu o conductă \"|\""
+
+#: inc/admin/admin.php:4779 inc/admin/admin.php:4856 inc/admin/admin.php:4933
+#: inc/admin/admin.php:5010 inc/admin/admin.php:5087
+msgid "Custom Dimension #1"
+msgstr "Parametru personalizat # 1"
+
+#: inc/admin/admin.php:4782 inc/admin/admin.php:4859 inc/admin/admin.php:4936
+#: inc/admin/admin.php:5013 inc/admin/admin.php:5090
+msgid "Custom Dimension #2"
+msgstr "Parametru personalizat # 2"
+
+#: inc/admin/admin.php:4785 inc/admin/admin.php:4862 inc/admin/admin.php:4939
+#: inc/admin/admin.php:5016 inc/admin/admin.php:5093
+msgid "Custom Dimension #3"
+msgstr "Parametru personalizat # 3"
+
+#: inc/admin/admin.php:4788 inc/admin/admin.php:4865 inc/admin/admin.php:4942
+#: inc/admin/admin.php:5019 inc/admin/admin.php:5096
+msgid "Custom Dimension #4"
+msgstr "Parametru personalizat # 4"
+
+#: inc/admin/admin.php:4791 inc/admin/admin.php:4868 inc/admin/admin.php:4945
+#: inc/admin/admin.php:5022 inc/admin/admin.php:5099
+msgid "Custom Dimension #5"
+msgstr "Parametru personalizat # 5"
+
+#: inc/admin/admin.php:4794 inc/admin/admin.php:4871 inc/admin/admin.php:4948
+#: inc/admin/admin.php:5025 inc/admin/admin.php:5102
+msgid "Custom Dimension #6"
+msgstr "Parametru personalizat # 6"
+
+#: inc/admin/admin.php:4797 inc/admin/admin.php:4874 inc/admin/admin.php:4951
+#: inc/admin/admin.php:5028 inc/admin/admin.php:5105
+msgid "Custom Dimension #7"
+msgstr "Parametru personalizat # 7"
+
+#: inc/admin/admin.php:4800 inc/admin/admin.php:4877 inc/admin/admin.php:4954
+#: inc/admin/admin.php:5031 inc/admin/admin.php:5108
+msgid "Custom Dimension #8"
+msgstr "Parametru personalizat # 8"
+
+#: inc/admin/admin.php:4803 inc/admin/admin.php:4880 inc/admin/admin.php:4957
+#: inc/admin/admin.php:5034 inc/admin/admin.php:5111
+msgid "Custom Dimension #9"
+msgstr "Parametru personalizat # 9"
+
+#: inc/admin/admin.php:4806 inc/admin/admin.php:4883 inc/admin/admin.php:4960
+#: inc/admin/admin.php:5037 inc/admin/admin.php:5114
+msgid "Custom Dimension #10"
+msgstr "Parametru personalizat # 10"
+
+#: inc/admin/admin.php:4809 inc/admin/admin.php:4886 inc/admin/admin.php:4963
+#: inc/admin/admin.php:5040 inc/admin/admin.php:5117
+msgid "Custom Dimension #11"
+msgstr "Parametru personalizat # 11"
+
+#: inc/admin/admin.php:4812 inc/admin/admin.php:4889 inc/admin/admin.php:4966
+#: inc/admin/admin.php:5043 inc/admin/admin.php:5120
+msgid "Custom Dimension #12"
+msgstr "Parametru personalizat # 12"
+
+#: inc/admin/admin.php:4815 inc/admin/admin.php:4892 inc/admin/admin.php:4969
+#: inc/admin/admin.php:5046 inc/admin/admin.php:5123
+msgid "Custom Dimension #13"
+msgstr "Parametru personalizat # 13"
+
+#: inc/admin/admin.php:4818 inc/admin/admin.php:4895 inc/admin/admin.php:4972
+#: inc/admin/admin.php:5049 inc/admin/admin.php:5126
+msgid "Custom Dimension #14"
+msgstr "Parametru personalizat # 14"
+
+#: inc/admin/admin.php:4821 inc/admin/admin.php:4898 inc/admin/admin.php:4975
+#: inc/admin/admin.php:5052 inc/admin/admin.php:5129
+msgid "Custom Dimension #15"
+msgstr "Parametru personalizat # 15"
+
+#: inc/admin/admin.php:4824 inc/admin/admin.php:4901 inc/admin/admin.php:4978
+#: inc/admin/admin.php:5055 inc/admin/admin.php:5132
+msgid "Custom Dimension #16"
+msgstr "Parametru personalizat # 16"
+
+#: inc/admin/admin.php:4827 inc/admin/admin.php:4904 inc/admin/admin.php:4981
+#: inc/admin/admin.php:5058 inc/admin/admin.php:5135
+msgid "Custom Dimension #17"
+msgstr "Parametru personalizat # 17"
+
+#: inc/admin/admin.php:4830 inc/admin/admin.php:4907 inc/admin/admin.php:4984
+#: inc/admin/admin.php:5061 inc/admin/admin.php:5138
+msgid "Custom Dimension #18"
+msgstr "Parametru personalizat # 18"
+
+#: inc/admin/admin.php:4833 inc/admin/admin.php:4910 inc/admin/admin.php:4987
+#: inc/admin/admin.php:5064 inc/admin/admin.php:5141
+msgid "Custom Dimension #19"
+msgstr "Parametru personalizat # 19"
+
+#: inc/admin/admin.php:4836 inc/admin/admin.php:4913 inc/admin/admin.php:4990
+#: inc/admin/admin.php:5067 inc/admin/admin.php:5144
+msgid "Custom Dimension #20"
+msgstr "Parametru personalizat # 20"
+
+#: inc/admin/admin.php:5162
+msgid "Redirect attachment pages to post parent (or homepage if none)"
+msgstr ""
+"Redirecționarea paginilor de atașament la postarea părintelui (sau la pagina "
+"principală dacă nu există)"
+
+#: inc/admin/admin.php:5179
+msgid "Add TINYMCE editor to term description"
+msgstr "Adăugați editorul TINYMCE la descrierea meta articol"
+
+#: inc/admin/admin.php:5196
+msgid "Remove stop words in permalinks"
+msgstr "Eliminați cuvintele stop în permalinks"
+
+#: inc/admin/admin.php:5196
+msgid ""
+"Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
+msgstr ""
+"Setare bazată pe limba site-ului. Limba acceptată EN, FR, ES, DE, IT, PT."
+
+#: inc/admin/admin.php:5213
+msgid "Remove /category/ in your permalinks"
+msgstr "Eliminați / categoria / în permalinks"
+
+#: inc/admin/admin.php:5213
+msgid "You have to flush your permalinks each time you change this settings"
+msgstr ""
+"Trebuie să vă spălați permalinks de fiecare dată când schimbați aceste setări"
+
+#: inc/admin/admin.php:5230
+msgid ""
+"You must check this box if the structure of your permalinks DOES NOT contain "
+"a slash at the end (eg: /%postname%)"
+msgstr ""
+"Trebuie să bifați această casetă dacă structura permalinks-ului NU conține o "
+"slash la sfârșit (de exemplu: /% postname%)"
+
+#: inc/admin/admin.php:5247
+msgid "Remove WordPress meta generator in source code"
+msgstr "Eliminați meta-generatorul WordPress în codul sursă"
+
+#: inc/admin/admin.php:5264
+msgid "Remove WordPress shortlink meta tag in source code (eg:"
+msgstr "Eliminați meta-tag-ul Shortlink WordPress în codul sursă (de exemplu:"
+
+#: inc/admin/admin.php:5281
+msgid "Remove Windows Live Writer meta tag in source code (eg:"
+msgstr "Eliminați metaticheta Windows Live Writer în codul sursă (ex:"
+
+#: inc/admin/admin.php:5298
+msgid "Remove Really Simple Discovery meta tag in source code (eg:"
+msgstr ""
+"Eliminați meta-tag-ul Really Simple Discovery în codul sursă (de exemplu:"
+
+#: inc/admin/admin.php:5310
+msgid "Enter Google meta value site verification"
+msgstr "Introduceți verificarea meta site-ului Google"
+
+#: inc/admin/admin.php:5322
+msgid "Enter Bing meta value site verification"
+msgstr "Introduceți verificarea meta valoare site-ului Bing"
+
+#: inc/admin/admin.php:5334
+msgid "Enter Pinterest meta value site verification"
+msgstr "Introduceți verificarea meta site-ului in Pinterest"
+
+#: inc/admin/admin.php:5346
+msgid "Enter Yandex meta value site verification"
+msgstr "Introduceți verificarea site-ului valoare meta Yandex"
+
+#: inc/admin/admin.php:5363
+msgid "Remove SEOPress from Admin Bar in backend and frontend"
+msgstr "Eliminați SEOPress din bara de administrare în backend și frontend"
+
+#: inc/admin/admin.php:5379
+msgid "High priority (top)"
+msgstr "Prioritate înaltă (de sus)"
+
+#: inc/admin/admin.php:5382
+msgid "Normal priority (default)"
+msgstr "Prioritate normală (implicită)"
+
+#: inc/admin/admin.php:5385
+msgid "Low priority"
+msgstr "Prioritate redusa"
+
+#: inc/admin/admin.php:5403
+msgid "Hide Notifications Center in SEOPress Dashboard page"
+msgstr "Ascundeți Centrul de notificări pe pagina de bord SEOPress"
+
+#: inc/admin/admin.php:5420
+msgid "Add title column"
+msgstr "Adăugați coloana titlului"
+
+#: inc/admin/admin.php:5437
+msgid "Add meta description column"
+msgstr "Adăugați coloana descrierii meta"
+
+#: inc/admin/admin.php:5454
+msgid "Add redirection enable column"
+msgstr "Adăugați coloana de activare a redirecționării"
+
+#: inc/admin/admin.php:5471
+msgid "Add redirection URL column"
+msgstr "Adăugați coloana URL de redirecționare"
+
+#: inc/admin/admin.php:5488
+msgid "Add canonical URL column"
+msgstr "Adăugați coloana URL canonică"
+
+#: inc/admin/admin.php:5505
+msgid "Add target keyword column"
+msgstr "Adăugați o coloană de cuvinte cheie targhetate"
+
+#: inc/admin/admin.php:5522
+msgid "Display noindex status"
+msgstr "Afișează statusul noindex"
+
+#: inc/admin/admin.php:5539
+msgid "Display nofollow status"
+msgstr "Afișați starea nofollow"
+
+#: inc/admin/admin.php:5556
+msgid "Display total number of words in content"
+msgstr "Afișați numărul total de cuvinte din conținut"
+
+#: inc/admin/admin.php:5573
+msgid "Display W3C column to check code quality"
+msgstr "Afișați coloana W3C pentru a verifica calitatea codului"
+
+#: inc/admin/admin.php:5591
+msgid "Display Page Speed column to check performances"
+msgstr "Afișați coloana Page Speed pentru a verifica performanțele"
+
+#: inc/admin/admin.php:5609
+msgid "Remove Genesis SEO Metaboxe"
+msgstr "Eliminați Metaboxul SEO Genesis"
+
+#: inc/admin/adminbar.php:60
+msgid "BOT"
+msgstr "BOT"
+
+#: inc/admin/adminbar.php:84
+msgid "Broken Links"
+msgstr "Link-uri sparte"
+
+#: inc/functions/options-advanced-admin.php:147
+#: inc/functions/options-advanced-admin.php:754
+msgid "Title tag"
+msgstr "Titlu eticheta"
+
+#: inc/functions/options-advanced-admin.php:150
+msgid "Meta Desc."
+msgstr "Descriere meta."
+
+#: inc/functions/options-advanced-admin.php:153
+msgid "Redirect?"
+msgstr "Redirectari?"
+
+#: inc/functions/options-advanced-admin.php:156
+msgid "Redirect URL"
+msgstr "URL redirectat"
+
+#: inc/functions/options-advanced-admin.php:159
+#: inc/functions/options-advanced-admin.php:770
+msgid "Canonical"
+msgstr "Canonical"
+
+#: inc/functions/options-advanced-admin.php:162
+msgid "Target Kw"
+msgstr "Kw targhetat"
+
+#: inc/functions/options-advanced-admin.php:165
+msgid "Noindex?"
+msgstr "Noindex?"
+
+#: inc/functions/options-advanced-admin.php:168
+msgid "Nofollow?"
+msgstr "Nofollow?"
+
+#: inc/functions/options-advanced-admin.php:171
+msgid "Count words?"
+msgstr "Count words?"
+
+#: inc/functions/options-advanced-admin.php:174
+msgid "W3C check"
+msgstr "Validare W3C"
+
+#: inc/functions/options-advanced-admin.php:177
+msgid "Page Speed"
+msgstr "Page Speed"
+
+#: inc/functions/options-advanced-admin.php:228
+msgid "Check code quality of this page"
+msgstr "Verificați calitatea codului din această pagină"
+
+#: inc/functions/options-advanced-admin.php:232
+msgid "Analyse this page with Google Page Speed"
+msgstr "Analizați această pagină cu Google Page Speed"
+
+#: inc/functions/options-advanced-admin.php:457
+msgid "Enable noindex"
+msgstr "Activați noindex"
+
+#: inc/functions/options-advanced-admin.php:510
+msgid "Enable index"
+msgstr "Activați indexul"
+
+#: inc/functions/options-advanced-admin.php:563
+msgid "Enable nofollow"
+msgstr "Activați nofollow"
+
+#: inc/functions/options-advanced-admin.php:615
+msgid "Enable follow"
+msgstr "Activați follow"
+
+#: inc/functions/options-advanced-admin.php:662
+msgid "Enable redirection"
+msgstr "Activati redirectionarea"
+
+#: inc/functions/options-advanced-admin.php:701
+msgid "Disable redirection"
+msgstr "Dezactivati redirectionarea"
+
+#: inc/functions/options-advanced-admin.php:857
+msgid "Description"
+msgstr "Descriere"
+
+#: inc/functions/options-advanced-admin.php:866
+msgid ""
+"The description is not prominent by default; however, some themes may show "
+"it."
+msgstr ""
+"Descrierea nu este proeminentă în mod prestabilit; totuși, unele teme le pot "
+"arăta."
+
+#: inc/functions/options-google-analytics.php:12
+msgid ""
+"By visiting our site, you agree to our privacy policy regarding cookies, "
+"tracking statistics etc ..."
+msgstr ""
+"Vizitând site-ul nostru, sunteți de acord cu politica de confidențialitate "
+"privind cookie-urile, statisticile de urmărire etc..."
+
+#: inc/functions/options-google-analytics.php:15
+msgid "Accept"
+msgstr "Accepta"
+
+#: inc/functions/options-google-analytics.php:15
+msgid "X"
+msgstr "X"
+
+#: inc/functions/options-google-analytics.php:285
+msgid "Authors"
+msgstr "Autori"
+
+#: inc/functions/options-google-analytics.php:304
+msgid "Categories"
+msgstr "Categorii"
+
+#: inc/functions/options-google-analytics.php:330
+msgid "Tags"
+msgstr "Etichete"
+
+#: inc/functions/options-google-analytics.php:344
+msgid "Post types"
+msgstr "Tip articole"
+
+#: inc/functions/options-google-analytics.php:358
+msgid "Connected users"
+msgstr "Utilizatori conectati"
+
+#: inc/functions/options-import-export.php:51
+msgid "Please upload a valid .json file"
+msgstr "Încărcați un fișier .json valabil"
+
+#: inc/functions/options-import-export.php:55
+#: inc/functions/options-import-export.php:92
+msgid "Please upload a file to import"
+msgstr "Încărcați un fișier pentru import"
+
+#: inc/functions/options-import-export.php:88
+msgid "Please upload a valid .csv file"
+msgstr "Încărcați un fișier validat .csv"
+
+#: inc/functions/options-redirections.php:120
+msgid "Once per day"
+msgstr "Odata pe zi"
+
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:113
+msgid "XML Sitemaps"
+msgstr "Sitemap-uri XML"
+
+#: seopress.php:262
+msgid "You like SEOPress? Don't forget to rate it 5 stars!"
+msgstr "Îți place SEOPress? Nu uitați să evaluați 5 stele!"
+
+#: seopress.php:309
+msgid "Settings"
+msgstr "Setări"
+
+#: seopress.php:310
+msgid "SEOPress.org"
+msgstr "SEOPress.org"
+
+#: seopress.php:312
+msgid "GO PRO!"
+msgstr "Activeaza  PRO!"
+
+#~ msgid "SEOPress Network settings"
+#~ msgstr "SEOPress Setari Retea"
+
+#~ msgid "%%date_archive%%"
+#~ msgstr "%%date_archive%%"
+
+#~ msgid "Date Archive"
+#~ msgstr "Data Arhive"
+
+#~ msgid ""
+#~ "Discourage search engines from indexing this site is <strong>ON!</strong> "
+#~ "None of the following settings will be applied."
+#~ msgstr ""
+#~ "Descurajarea motoarele de căutare de la indexarea acestui site este "
+#~ "<strong>ON!</strong> Nu se va aplica nici una dintre urmatoarele setari."
+
+#~ msgid "Enter yours domains"
+#~ msgstr "Introduceți domeniile dvs."
+
+#~ msgid ""
+#~ "The PRO release of SEOPress with Google Local Business, Dublin Core, "
+#~ "WooCommerce, Google Structured Data Types, Breadcrumbs, Google Page "
+#~ "Speed, robots.txt, Google News, 404 monitoring, .htaccess, RSS, Broken "
+#~ "links, Redirections and more..."
+#~ msgstr ""
+#~ "Versiunea PRO a SEOPress cu Google Local Business, Dublin Core, "
+#~ "WooCommerce, Google Structured Data Types, Breadcrumbs, Google Speed, "
+#~ "robots.txt, Știri Google, 404 de monitorizare, .htaccess, RSS, Link-uri "
+#~ "întrerupte, Redirecționări și multe altele ..."
+
+#~ msgid "Buy now"
+#~ msgstr "Cumpara acum"
+
+#~ msgid "More details"
+#~ msgstr "Mai multe detalii"

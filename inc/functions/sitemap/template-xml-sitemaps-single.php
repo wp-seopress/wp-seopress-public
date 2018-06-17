@@ -27,14 +27,26 @@ function seopress_xml_sitemap_single() {
 	$seopress_sitemaps .= "\n";
 
 			if (get_post_type_archive_link($path) ==true) {
-				$seopress_sitemaps .= '<url>';
-			  	$seopress_sitemaps .= "\n";
-				$seopress_sitemaps .= '<loc>';
-				$seopress_sitemaps .= get_post_type_archive_link($path);
-				$seopress_sitemaps .= '</loc>';
-				$seopress_sitemaps .= "\n";
-				$seopress_sitemaps .= '</url>';
-				$seopress_sitemaps .= "\n";
+				function seopress_titles_cpt_noindex_option($path) {
+					$seopress_titles_cpt_noindex_option = get_option("seopress_titles_option_name");
+					if ( ! empty ( $seopress_titles_cpt_noindex_option ) ) {
+						foreach ($seopress_titles_cpt_noindex_option as $key => $seopress_titles_cpt_noindex_value)
+							$options[$key] = $seopress_titles_cpt_noindex_value;
+						 if (isset($seopress_titles_cpt_noindex_option['seopress_titles_archive_titles'][$path]['noindex'])) { 
+						 	return $seopress_titles_cpt_noindex_option['seopress_titles_archive_titles'][$path]['noindex'];
+						 }
+					}
+				}
+				if (seopress_titles_cpt_noindex_option($path) !='1') {
+					$seopress_sitemaps .= '<url>';
+				  	$seopress_sitemaps .= "\n";
+					$seopress_sitemaps .= '<loc>';
+					$seopress_sitemaps .= get_post_type_archive_link($path);
+					$seopress_sitemaps .= '</loc>';
+					$seopress_sitemaps .= "\n";
+					$seopress_sitemaps .= '</url>';
+					$seopress_sitemaps .= "\n";
+				}
 			}
 	
 				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '' );
@@ -93,6 +105,11 @@ function seopress_xml_sitemap_single() {
 								if ($images->length>=1) {
 									foreach($images as $img) {
 								        $url = $img->getAttribute('src');
+								        if (seopress_is_absolute($url) ===true) {
+								        	//do nothing
+								        } else {
+								        	$url = get_home_url().$url;
+								        }
 								        $seopress_sitemaps .= '<image:image>';
 								        $seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
@@ -107,6 +124,11 @@ function seopress_xml_sitemap_single() {
 							if ($galleries !='') {
 								foreach( $galleries as $gallery ) {
 									foreach( $gallery as $url ) {
+										if (seopress_is_absolute($url) ===true) {
+								        	//do nothing
+								        } else {
+								        	$url = get_home_url().$url;
+								        }
 										$seopress_sitemaps .= '<image:image>';
 										$seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';

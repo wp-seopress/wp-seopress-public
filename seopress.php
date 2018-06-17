@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best SEO plugin.
-Version: 2.8.3
+Version: 2.9
 Author: Benjamin DENIS
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-define( 'SEOPRESS_VERSION', '2.8.3' ); 
+define( 'SEOPRESS_VERSION', '2.9' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +93,7 @@ add_action('plugins_loaded', 'seopress_init', 999);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //SEOPRESS Options page
 function seopress_add_admin_options_scripts($hook) {
-    wp_register_style( 'seopress-admin', plugins_url('assets/css/seopress.min.css', __FILE__));
+    wp_register_style( 'seopress-admin', plugins_url('assets/css/seopress.min.css', __FILE__), array(), SEOPRESS_VERSION);
     wp_enqueue_style( 'seopress-admin' );
     
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-network-option')) {
@@ -554,6 +554,18 @@ function seopress_get_toggle_advanced_option() {
             return $seopress_get_toggle_advanced_option['toggle-advanced'];
          }
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Test abolute URLs (return true if absolute)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_is_absolute($url) {
+    $pattern = "/^(?:ftp|https?|feed)?:?\/\/(?:(?:(?:[\w\.\-\+!$&'\(\)*\+,;=]|%[0-9a-f]{2})+:)*
+    (?:[\w\.\-\+%!$&'\(\)*\+,;=]|%[0-9a-f]{2})+@)?(?:
+    (?:[a-z0-9\-\.]|%[0-9a-f]{2})+|(?:\[(?:[0-9a-f]{0,4}:)*(?:[0-9a-f]{0,4})\]))(?::[0-9]+)?(?:[\/|\?]
+    (?:[\w#!:\.\?\+\|=&@$'~*,;\/\(\)\[\]\-]|%[0-9a-f]{2})*)?$/xi";
+
+    return (bool) preg_match($pattern, $url);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

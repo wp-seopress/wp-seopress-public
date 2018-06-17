@@ -34,39 +34,6 @@ if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
     $current_id = $tag->term_id;
     $origin = 'term';
     $data_tax = $tag->taxonomy;
-    // function seopress_titles_title($seopress_titles_title) {
-    //     global $tag;
-    //     if ($seopress_titles_title !='') {
-    //         return $seopress_titles_title;
-    //     } elseif ($tag) {
-    //         return $tag->name.' - '.get_bloginfo('name');
-    //     } else {
-    //         return get_the_title().' - '.get_bloginfo('name');
-    //     }
-    // }
-
-    // function seopress_titles_single_desc_option() {
-    //     global $post;
-    //     $seopress_get_current_cpt = get_post_type($post);
-
-    //     $seopress_titles_single_desc_option = get_option("seopress_titles_option_name");
-    //     if ( ! empty ( $seopress_titles_single_desc_option ) ) {
-    //         foreach ($seopress_titles_single_desc_option as $key => $seopress_titles_single_desc_value)
-    //             $options[$key] = $seopress_titles_single_desc_value;
-    //             if (isset($seopress_titles_single_desc_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['description'])) {
-    //                 return $seopress_titles_single_desc_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['description'];
-    //             }
-    //     }
-    // }
-
-    // function seopress_titles_desc($seopress_titles_desc) {
-    //     global $tag;
-    //     if ($seopress_titles_desc !='') {
-    //         return $seopress_titles_desc;
-    //     } elseif ($tag) {
-    //         return $tag->description;
-    //     }
-    // }
 }
 
 function seopress_redirections_value($seopress_redirections_value) {
@@ -96,7 +63,8 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                 if (seopress_get_toggle_news_option() =='1') {
                     if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                         if ("seopress_404" != $typenow) {
-                            echo '<li><a href="#tabs-5"><span class="dashicons dashicons-admin-post"></span>'. __( 'Google News', 'wp-seopress-pro' ) .'</a></li>';
+                            echo '<li><a href="#tabs-5"><span class="dashicons dashicons-admin-post"></span>'. __( 'Google News', 'wp-seopress' ) .'</a></li>';
+                            echo '<li><a href="#tabs-6"><span class="dashicons dashicons-format-video"></span>'. __( 'Video Sitemap', 'wp-seopress' ) .'</a></li>';
                         }
                     }
                 }
@@ -114,7 +82,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                 }
             }
         echo '<div class="box-left">
-                <p>
+                <p style="margin-bottom:0">
                     <label for="seopress_titles_title_meta">'. __( 'Title', 'wp-seopress' ) .'</label>
                     <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.esc_html__('Enter your title','wp-seopress').'" aria-label="'.__('Title','wp-seopress').'" value="'.$seopress_titles_title.'" />
                 </p> 
@@ -122,7 +90,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     <div id="seopress_titles_title_counters"></div>
                     '.__('(maximum recommended limit)','wp-seopress').'
                 </div>
-                <p>
+                <p style="margin-bottom:0">
                     <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
                     <textarea id="seopress_titles_desc_meta" style="width:100%" rows="8" name="seopress_titles_desc" placeholder="'.esc_html__('Enter your meta description','wp-seopress').'" aria-label="'.__('Meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
                 </p>
@@ -219,8 +187,8 @@ echo               '<div class="snippet-description">...</div>
             </p> 
             <p>
                 <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'wp-seopress' ) .'</label>
-                <span class="advise">'. __('Minimum size: 200x200px', 'wp-seopress') .'</span>
                 <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" aria-label="'.__('Facebook Thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
+                <span class="advise">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8mb max.', 'wp-seopress').'</span>
                 <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
             </p>
             <br/>
@@ -237,8 +205,8 @@ echo               '<div class="snippet-description">...</div>
             </p> 
             <p>
                 <label for="seopress_social_twitter_img_meta">'. __( 'Twitter Thumbnail', 'wp-seopress' ) .'</label>
-                <span class="advise">'. __('Minimum size: 160x160px', 'wp-seopress') .'</span>
                 <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_twitter_img.'" />
+                <span class="advise">'. __('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5mb max.', 'wp-seopress') .'</span>
                 <input id="seopress_social_twitter_img_upload" class="button" type="button" aria-label="'.__('Twitter Thumbnail','wp-seopress').'" value="'.__('Upload an Image','wp-seopress').'" />
             </p>
         </div>';
@@ -324,6 +292,110 @@ You haven\'t used standout on your own articles more than seven times in the pas
                                 <input id="seopress_news_keyboard_meta" type="text" name="seopress_news_keyboard" placeholder="'.esc_html__('Enter your Google News Keywords','wp-seopress').'" aria-label="'.__('Google News Keywords <em>(max recommended limit: 12)</em>','wp-seopress').'" value="'.$seopress_news_keyboard.'" />
                         </p>
                     </div>';
+
+                    //Init $seopress_video array if empty
+                    if (empty($seopress_video)) {
+                        $seopress_video = array('0' => array(''));
+                    }
+
+                    $count = $seopress_video[0];
+                    end($count);
+                    $total = key($count);
+
+                    echo '<div id="tabs-6">
+                        <p>
+                            <label for="seopress_video_disabled_meta" id="seopress_video_disabled">
+                                <input type="checkbox" name="seopress_video_disabled" id="seopress_video_disabled_meta" value="yes" '. checked( $seopress_video_disabled, 'yes', false ) .' />
+                                    '. __( 'Exclude this post from Video Sitemap?', 'wp-seopress' ) .'
+                            </label>
+                            <span class="advise">'. __('If your post is set to noindex, it will be automatically excluded from the sitemap.', 'wp-seopress') .'</span>
+                        </p>
+                        <div id="wrap-videos" data-count="'.$total.'">';
+                            foreach ($seopress_video[0] as $key => $value) {
+
+                                $check_url = isset($seopress_video[0][$key]["url"]) ? $seopress_video[0][$key]["url"] : NULL;
+                                $check_internal_video = isset($seopress_video[0][$key]["internal_video"]) ? $seopress_video[0][$key]["internal_video"] : NULL;
+                                $check_title = isset($seopress_video[0][$key]["title"]) ? $seopress_video[0][$key]["title"] : NULL;
+                                $check_desc = isset($seopress_video[0][$key]["desc"]) ? $seopress_video[0][$key]["desc"] : NULL;
+                                $check_thumbnail = isset($seopress_video[0][$key]["thumbnail"]) ? $seopress_video[0][$key]["thumbnail"] : NULL;
+                                $check_duration = isset($seopress_video[0][$key]["duration"]) ? $seopress_video[0][$key]["duration"] : NULL;
+                                $check_rating = isset($seopress_video[0][$key]["rating"]) ? $seopress_video[0][$key]["rating"] : NULL;
+                                $check_view_count = isset($seopress_video[0][$key]["view_count"]) ? $seopress_video[0][$key]["view_count"] : NULL;
+                                $check_view_count = isset($seopress_video[0][$key]["view_count"]) ? $seopress_video[0][$key]["view_count"] : NULL;
+                                $check_tag = isset($seopress_video[0][$key]["tag"]) ? $seopress_video[0][$key]["tag"] : NULL;
+                                $check_cat = isset($seopress_video[0][$key]["cat"]) ? $seopress_video[0][$key]["cat"] : NULL;
+                                $check_family_friendly = isset($seopress_video[0][$key]["family_friendly"]) ? $seopress_video[0][$key]["family_friendly"] : NULL;
+
+                            echo '<div class="video">
+                                    <h3 class="accordion-section-title" tabindex="0">'.__('Video ','wp-seopress').$check_title.'</h3>
+                                    <div class="accordion-section-content">
+                                        <div class="inside">
+                                            <p>
+                                                <label for="seopress_video['.$key.'][url_meta]">'. __( 'Video URL (required)', 'wp-seopress' ) .'</label>
+                                                <input id="seopress_video['.$key.'][url_meta]" type="text" name="seopress_video['.$key.'][url]" placeholder="'.esc_html__('Enter your video URL','wp-seopress').'" aria-label="'.__('Video URL','wp-seopress').'" value="'.$check_url.'" />
+                                            </p>
+                                            <p class="internal_video">
+                                                <label for="seopress_video['.$key.'][internal_video_meta]" id="seopress_video['.$key.'][internal_video]">
+                                                    <input type="checkbox" name="seopress_video['.$key.'][internal_video]" id="seopress_video['.$key.'][internal_video_meta]" value="yes" '. checked( $check_internal_video, 'yes', false ) .' />
+                                                        '. __( 'NOT an external video (eg: video hosting on YouTube, Vimeo, Wistia...)? Check this if your video is hosting on this server.', 'wp-seopress' ) .'
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label for="seopress_video['.$key.'][title_meta]">'. __( 'Video Title (required)', 'wp-seopress' ) .'</label>
+                                                <input id="seopress_video['.$key.'][title_meta]" type="text" name="seopress_video['.$key.'][title]" placeholder="'.esc_html__('Enter your video title','wp-seopress').'" aria-label="'.__('Video title','wp-seopress').'" value="'.$check_title.'" />
+                                                <span class="advise">'. __('Default: title tag, if not available, post title.', 'wp-seopress') .'</span>
+                                            </p>
+                                            <p>
+                                                <label for="seopress_video['.$key.'][desc_meta]">'. __( 'Video Description (required)', 'wp-seopress' ) .'</label>
+                                                <textarea id="seopress_video['.$key.'][desc_meta]" name="seopress_video['.$key.'][desc]" placeholder="'.esc_html__('Enter your video description','wp-seopress').'" aria-label="'.__('Video description','wp-seopress').'" value="'.$check_desc.'">'.$check_desc.'</textarea>
+                                                <span class="advise">'. __('2048 characters max., default: meta description, if not available, beginning of the post content.', 'wp-seopress') .'</span>
+                                            </p> 
+                                            <p>
+                                                <label for="seopress_video['.$key.'][thumbnail_meta]">'. __( 'Video Thumbnail (required)', 'wp-seopress' ) .'</label>
+                                                <input id="seopress_video['.$key.'][thumbnail_meta]" class="seopress_video_thumbnail_meta" type="text" name="seopress_video['.$key.'][thumbnail]" placeholder="'.esc_html__('Select your video thumbnail','wp-seopress').'" value="'.$check_thumbnail.'" />
+                                                <input class="button seopress_video_thumbnail_upload" type="button" aria-label="'.__('Video Thumbnail','wp-seopress').'" value="'.__('Upload an Image','wp-seopress').'" />
+                                                <span class="advise">'. __('Minimum size: 160x90px (1920x1080 max), JPG, PNG or GIF formats. Default: your post featured image.', 'wp-seopress') .'</span>
+                                            </p>
+                                            <p>
+                                                <label for="seopress_video['.$key.'][duration_meta]">'. __( 'Video Duration (recommended)', 'wp-seopress' ) .'</label>
+                                                <input id="seopress_video['.$key.'][duration_meta]" type="number" step="1" min="0" max="28800" name="seopress_video['.$key.'][duration]" placeholder="'.esc_html__('Duration in seconds','wp-seopress').'" aria-label="'.__('Video duration','wp-seopress').'" value="'.$check_duration.'" />
+                                                <span class="advise">'. __('The duration of the video in seconds. Value must be between 0 and 28800 (8 hours).', 'wp-seopress') .'</span>
+                                            </p>
+                                            <p>
+                                                <label for="seopress_video['.$key.'][rating_meta]">'. __( 'Video Rating', 'wp-seopress' ) .'</label>
+                                                <input id="seopress_video['.$key.'][rating_meta]" type="number" step="0.1" min="0" max="5" name="seopress_video['.$key.'][rating]" placeholder="'.esc_html__('Video rating','wp-seopress').'" aria-label="'.__('Video rating','wp-seopress').'" value="'.$check_rating.'" />
+                                                <span class="advise">'. __('Allowed values are float numbers in the range 0.0 to 5.0.', 'wp-seopress') .'</span>
+                                            </p>
+                                            <p>
+                                                <label for="seopress_video['.$key.'][view_count_meta]">'. __( 'View count', 'wp-seopress' ) .'</label>
+                                                <input id="seopress_video['.$key.'][view_count_meta]" type="number" name="seopress_video['.$key.'][view_count]" placeholder="'.esc_html__('Number of views','wp-seopress').'" aria-label="'.__('View count','wp-seopress').'" value="'.$check_view_count.'" />
+                                            </p>
+                                            <p>
+                                                <label for="seopress_video['.$key.'][tag_meta]">'. __( 'Video tags', 'wp-seopress' ) .'</label>
+                                                <input id="seopress_video['.$key.'][tag_meta]" type="text" name="seopress_video['.$key.'][tag]" placeholder="'.esc_html__('Enter your video tags','wp-seopress').'" aria-label="'.__('Video tags','wp-seopress').'" value="'.$check_tag.'" />
+                                                <span class="advise">'. __('32 tags max., separate tags with commas. Default: target keywords + post tags if available.', 'wp-seopress') .'</span>
+                                            </p>
+                                            <p>
+                                                <label for="seopress_video['.$key.'][cat_meta]">'. __( 'Video categories', 'wp-seopress' ) .'</label>
+                                                <input id="seopress_video['.$key.'][cat_meta]" type="text" name="seopress_video['.$key.'][cat]" placeholder="'.esc_html__('Enter your video categories','wp-seopress').'" aria-label="'.__('Video categories','wp-seopress').'" value="'.$check_cat.'" />
+                                                <span class="advise">'. __('256 characters max., usually a video will belong to a single category, separate categories with commas. Default: first post category if available.', 'wp-seopress') .'</span>
+                                            </p>
+                                            <p class="family-friendly">
+                                                <label for="seopress_video['.$key.'][family_friendly_meta]" id="seopress_video['.$key.'][family_friendly]">
+                                                    <input type="checkbox" name="seopress_video['.$key.'][family_friendly]" id="seopress_video['.$key.'][family_friendly_meta]" value="yes" '. checked( $check_family_friendly, 'yes', false ) .' />
+                                                        '. __( 'NOT family friendly?', 'wp-seopress' ) .'
+                                                </label>
+                                                <span class="advise">'. __('The video will be available only to users with SafeSearch turned off.', 'wp-seopress') .'</span>
+                                            </p>
+                                            <p><a href="#" class="remove-video button">'.__('Remove video','wp-seopress').'</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ';
+                        }
+                   echo '</div>
+                   <p><a href="#" id="add-video" class="add-video button button-primary">'.__('Add video','wp-seopress').'</a></p>
+                   </div>';
                 }
             }
         }

@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.8.3
+Stable tag: 2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,8 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 <h3>SEOPress PRO</h3>
 
 <ul>
+	<li>Video XML Sitemap</li>
+	<li>Google Suggestions in Content Analysis</li>
 	<li>Backlinks (required a Majestic paid account)</li>
 	<li>SEOPress BOT: scan all your links in content to find errors (eg: 404...)</li>
 	<li>WooCommerce: disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
@@ -94,6 +96,8 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Brazilian Portguese</li>
 	<li>Dutch</li>
 	<li>Vietnamese</li>
+	<li>Romanian</li>
+	<li>Chinese</li>
 	<li>German (in progress)</li>
 	<li>Japanese (in progress)</li>
 	<li><a href="https://www.seopress.org/contact-us/">Add yours and get SEOPress PRO for free!</a></li>
@@ -155,6 +159,27 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.9 =
+* NEW Video XML Sitemap (PRO Only)
+* NEW Add Google Suggest to find top 10 suggestions / keywords for your post (PRO Only)
+* NEW Add Romanian language (thanks to @antonio)
+* NEW Add Chinese language (thanks to @stanma)
+* NEW Add seopress_excerpt_length hook to filter excerpt length
+* NEW Add 'seopress_sitemaps_video_query' hook to filter video xml sitemap query
+* NEW og:image and twitter:image tags now automatically take the first image of the post if no post thumbnail
+* INFO Add og:title, og:description, og:image, twitter:title, twitter:description and twitter:image values from source code to placeholders
+* INFO Trim words for category, tag and term description on og:description and twitter:description meta (default: 50 words, use 'seopress_excerpt_length' hook to filter)
+* INFO add a check on "Discourage search engines from indexing this site" option before rendering meta robots
+* INFO Improve UI in notifications center
+* INFO Add useful information about og:image and twitter:image as image ratio, size etc when uploading
+* INFO Set meta robots to noindex if is a password protected page
+* INFO Detect relative urls in XML Image sitemap and fix them
+* FIX Export redirections file (thanks to Rémy Rouqual)
+* FIX Remove post type archive link in single XML sitemap if noindex set (thanks to Momo Zaza)
+* FIX Flush permalinks ajax
+* FIX XML Category sitemap if remove /category/ enabled
+* FIX Strip html comments in meta description / og:description / twitter:description / dc.description for excerpt/post content
+* FIX Fix translation in Local business
 = 2.8.3 =
 * INFO Add shop base to breadcrumbs if WooCommerce is enabled for single product and archive page (product cat and product tag)
 * FIX Columns in post types
