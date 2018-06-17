@@ -607,7 +607,7 @@ function seopress_thumbnail_in_content() {
 	    $domxpath = new DOMXPath($dom);
 
 		/*Standard images*/
-	    $imgs = $domxpath->query("//img");
+	    $imgs = (array)$domxpath->query("//img");
 	    
 	    if (!empty($imgs) && $imgs[0] !=NULL) {
 	        $url = $imgs[0]->getAttribute('src');
