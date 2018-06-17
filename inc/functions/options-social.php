@@ -596,7 +596,7 @@ function seopress_social_fb_img_home_option() {
 
 function seopress_thumbnail_in_content() {
 	//Get post content
-    $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', get_the_ID()));
+    $seopress_get_the_content = get_post_field('post_content', get_the_ID());
 
     if ($seopress_get_the_content !='') {
 		//DomDocument
@@ -614,6 +614,7 @@ function seopress_thumbnail_in_content() {
 	        $url = esc_attr(wp_filter_nohtml_kses(htmlentities($url)));
 	        return $url;
 	    }
+		libxml_use_internal_errors($internalErrors);
 	}
 }
 
