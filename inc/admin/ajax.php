@@ -240,7 +240,7 @@ add_action('wp_ajax_seopress_do_content_analysis', 'seopress_do_content_analysis
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_flush_permalinks() {
     check_ajax_referer( 'seopress_flush_permalinks_nonce', $_GET['_ajax_nonce'], true );
-	flush_rewrite_rules();
+	wp_remote_get(admin_url( 'options-permalink.php' ), array(blocking => true));
 	die();
 }
 add_action('wp_ajax_seopress_flush_permalinks', 'seopress_flush_permalinks');

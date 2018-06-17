@@ -23,6 +23,19 @@
 /*************************************************************************************************/
 /* Metaboxe in CPT                                                                               */
 /*************************************************************************************************/
+#seopress_content_analysis .ui-tabs #seopress_suggestions.ui-tabs-nav {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+#seopress_content_analysis .ui-tabs #seopress_suggestions.ui-tabs-nav li {
+    list-style: square;
+    margin: 5px;
+    display: inline-block;
+    background: #F1F1F1;
+    padding: 5px;
+}
 #seopress_launch_analysis {
     float: left;
 }

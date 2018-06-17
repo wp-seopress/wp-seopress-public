@@ -268,9 +268,9 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		    require_once ( dirname( __FILE__ ) . '/options-advanced.php'); //Advanced
 		}
 	}
-	add_action('admin_init', 'seopress_load_advanced_admin_options', 0);
+	add_action('init', 'seopress_load_advanced_admin_options', 0);
 	function seopress_load_advanced_admin_options() {
-		if (is_admin()){	
+		if (is_admin()){
 		    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
 		}
 		//Admin bar

@@ -1,6 +1,9 @@
 <?php
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
+//MANDATORY for using is_plugin_active
+include_once(ABSPATH.'wp-admin/includes/plugin.php');
+
 //Advanced
 //=================================================================================================
 
@@ -445,6 +448,7 @@ foreach (seopress_get_post_types() as $key => $value) {
 foreach (seopress_get_taxonomies() as $key => $value) {
 	add_filter( 'bulk_actions-edit-'.$key, 'seopress_bulk_actions_noindex' );
 }
+
 if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
     add_filter( 'bulk_actions-edit-product', 'seopress_bulk_actions_noindex' );
 }

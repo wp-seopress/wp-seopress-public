@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.8.2
+Stable tag: 2.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,7 +57,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Easy Digital Downloads: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li>Dublin Core</li>
 	<li>Google Structured Data types: article, course, recipe, video, event, product</li>
-	<li>Breadcrumbs optimized with Schema.org</li>
+	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Custom Breadcrumbs for single post types</li>
 	<li>Google Page Speed</li>
 	<li>Google Analytics Stats in Dashboard</li>
@@ -155,6 +155,11 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 2.8.3 =
+* INFO Add shop base to breadcrumbs if WooCommerce is enabled for single product and archive page (product cat and product tag)
+* FIX Columns in post types
+* FIX some text-domain
+* FIX Flush permalinks ajax
 = 2.8.2 =
 * FIX Google Analytics GDPR compatibility
 * FIX Search URL rewrite
