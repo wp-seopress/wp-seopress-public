@@ -1094,23 +1094,46 @@ class seopress_options
                                     <p><?php echo '<strong>'.__('Host IP: ','wp-seopress-pro').'</strong>'.gethostbyname(get_home_url()); ?></p>
                                     <?php
                                         if ( get_transient( 'seopress_results_reverse' ) !='' ) { 
-                                            
+
                                             $seopress_results_reverse = (array)json_decode(get_transient( 'seopress_results_reverse' ));
 
-                                            echo '<p class="remote-ip"><strong>'.__('Server IP Address: ','wp-seopress').'</strong>'.$seopress_results_reverse['remoteIpAddress'].'</p>';
+                                            //Init
+                                            $seopress_results_reverse_remote_ip_address = __('Not found','wp-seopress');
+                                            if(isset($seopress_results_reverse['remoteIpAddress'])) { 
+                                                $seopress_results_reverse_remote_ip_address = $seopress_results_reverse['remoteIpAddress'];
+                                            }
 
-                                            echo '<p class="last-scrape"><strong>'.__('Last scrape: ','wp-seopress').'</strong>'.$seopress_results_reverse['lastScrape'].'</p>';
-                                            echo '<p class="domain-count"><strong>'.__('Number of websites on your server: ','wp-seopress').'</strong>'.$seopress_results_reverse['domainCount'].'</p>';
+                                            $seopress_results_reverse_last_scrape = __('No scrape.','wp-seopress');
+                                            if(isset($seopress_results_reverse['lastScrape'])) { 
+                                                $seopress_results_reverse_last_scrape = $seopress_results_reverse['lastScrape'];
+                                            }
+
+                                            $seopress_results_reverse_domain_count = __('No domain found.','wp-seopress');
+                                            if(isset($seopress_results_reverse['domainCount'])) { 
+                                                $seopress_results_reverse_domain_count = $seopress_results_reverse['domainCount'];
+                                            }
+
+                                            $seopress_results_reverse_domain_array = '';
+                                            if(isset($seopress_results_reverse['domainArray'])) { 
+                                                $seopress_results_reverse_domain_array = $seopress_results_reverse['domainArray'];
+                                            }
+                                             
+                                            echo '<p class="remote-ip"><strong>'.__('Server IP Address: ','wp-seopress').'</strong>'.$seopress_results_reverse_remote_ip_address.'</p>';
                                             
-                                            if ($seopress_results_reverse['domainArray'] !='') {
+
+                                            echo '<p class="last-scrape"><strong>'.__('Last scrape: ','wp-seopress').'</strong>'.$seopress_results_reverse_last_scrape.'</p>';
+                                            echo '<p class="domain-count"><strong>'.__('Number of websites on your server: ','wp-seopress').'</strong>'.$seopress_results_reverse_domain_count.'</p>';
+                                            
+                                            if ($seopress_results_reverse_domain_array !='') {
                                                 echo '<ul>';
-                                                    foreach ($seopress_results_reverse['domainArray'] as $key => $value) {
+                                                    foreach ($seopress_results_reverse_domain_array as $key => $value) {
                                                         echo '<li><span class="dashicons dashicons-minus"></span><a href="'.$value[0].'" target="_blank">'.$value[0].'</a><span class="dashicons dashicons-external"></span></li>';
                                                     }
                                                 echo '</ul>';
                                             }
                                         }
                                     ?>
+                                    <br>
                                     <button id="seopress-reverse-submit" class="button button-primary" name="submit">
                                         <?php _e('Get list','wp-seopress'); ?>
                                     </button>
@@ -1768,7 +1791,7 @@ class seopress_options
                                 <p><?php _e('Customize your permalinks.','wp-seopress'); ?></p>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rewrite$14' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                                 <?php         
-                                if(seopress_get_toggle_rewrite_option()=='1') { 
+                                if(function_exists('seopress_get_toggle_rewrite_option') && seopress_get_toggle_rewrite_option()=='1') { 
                                     $seopress_get_toggle_rewrite_option = '"1"';
                                 } else { 
                                     $seopress_get_toggle_rewrite_option = '"0"';
@@ -1779,7 +1802,7 @@ class seopress_options
                                     <label for="toggle-rewrite"></label>
                                     
                                     <?php
-                                    if(seopress_get_toggle_rewrite_option()=='1') { 
+                                    if(function_exists('seopress_get_toggle_rewrite_option') && seopress_get_toggle_rewrite_option()=='1') { 
                                         echo '<span id="rewrite-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
                                         echo '<span id="rewrite-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
                                     } else { 

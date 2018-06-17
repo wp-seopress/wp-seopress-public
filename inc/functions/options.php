@@ -190,6 +190,8 @@ if (seopress_get_toggle_google_analytics_option() =='1') {
 			} else {
 				add_action('wp_enqueue_scripts','seopress_google_analytics_cookies_js', 20, 1);
 			}
+		} else {
+			add_action('wp_enqueue_scripts','seopress_google_analytics_cookies_js', 20, 1);
 		}
 	}
 

@@ -34,6 +34,8 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				} else {
 					add_action('wp_footer', 'seopress_cookies_user_consent_html');
 				}
+			} else {
+				add_action('wp_footer', 'seopress_cookies_user_consent_html');
 			}
 		}
 	}
