@@ -800,29 +800,35 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
 
 add_action('save_post','seopress_bulk_quick_edit_save_post', 10, 2);
 function seopress_bulk_quick_edit_save_post($post_id) {
-    // don't save for autosave
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-      return $post_id;
+    
+    $current_screen = get_current_screen();
 
-    // dont save for revisions
-    if ( isset( $post->post_type ) && $post->post_type == 'revision' )
-      return $post_id;
+    if ($current_screen->post_type !='elementor_library') {
+        
+        // don't save for autosave
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+          return $post_id;
 
-	if (!current_user_can('edit_post', $post_id)) {
-        return;
-    }
-    $_POST += array("seopress_title_edit_nonce" => '');
-    if (!wp_verify_nonce($_POST["seopress_title_edit_nonce"], plugin_basename( __FILE__ ))) {
-        return;
-    }
-    if (isset($_REQUEST['seopress_title'])) {
-        update_post_meta($post_id, '_seopress_titles_title', esc_html($_REQUEST['seopress_title']));
-    }
-    if (isset($_REQUEST['seopress_desc'])) {
-        update_post_meta($post_id, '_seopress_titles_desc', esc_html($_REQUEST['seopress_desc']));
-    }
-    if (isset($_REQUEST['seopress_canonical'])) {
-        update_post_meta($post_id, '_seopress_robots_canonical', esc_html($_REQUEST['seopress_canonical']));
+        // dont save for revisions
+        if ( isset( $post->post_type ) && $post->post_type == 'revision' )
+          return $post_id;
+
+    	if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+        $_POST += array("seopress_title_edit_nonce" => '');
+        if (!wp_verify_nonce($_POST["seopress_title_edit_nonce"], plugin_basename( __FILE__ ))) {
+            return;
+        }
+        if (isset($_REQUEST['seopress_title'])) {
+            update_post_meta($post_id, '_seopress_titles_title', esc_html($_REQUEST['seopress_title']));
+        }
+        if (isset($_REQUEST['seopress_desc'])) {
+            update_post_meta($post_id, '_seopress_titles_desc', esc_html($_REQUEST['seopress_desc']));
+        }
+        if (isset($_REQUEST['seopress_canonical'])) {
+            update_post_meta($post_id, '_seopress_robots_canonical', esc_html($_REQUEST['seopress_canonical']));
+        }
     }
 }
 

@@ -355,7 +355,8 @@ function seopress_titles_the_title() {
 
 	$seopress_titles_template_variables_array = array(
 		'%%sep%%',
-		'%%sitetitle%%', 
+		'%%sitetitle%%',
+		'%%sitename%%',
 		'%%tagline%%',
 		'%%post_title%%',
 		'%%post_excerpt%%',
@@ -390,7 +391,8 @@ function seopress_titles_the_title() {
 	global $wp_locale;
 	$seopress_titles_template_replace_array = array(
 		$sep,
-		get_bloginfo('name'), 
+		get_bloginfo('name'),
+		get_bloginfo('name'),
 		get_bloginfo('description'),
 		the_title_attribute('echo=0'),
 		$seopress_get_the_excerpt,
@@ -594,7 +596,7 @@ function seopress_titles_the_description_content() {
 	//Init
 	$seopress_titles_description_template ='';
 	$seopress_paged ='';
-	$seopress_get_author ='';
+	$the_author_meta ='';
 
 	//Excerpt length
 	$seopress_excerpt_length = 50;
@@ -624,8 +626,8 @@ function seopress_titles_the_description_content() {
 		$seopress_paged = apply_filters('seopress_paged', $seopress_paged);
 	}
 
-	if (get_the_author_meta() !='') {
-		$seopress_get_author = get_the_author_meta( 'display_name', $post->post_author );
+	if(is_single() || is_author()){
+		$the_author_meta = get_the_author_meta('display_name', $post->post_author);
 	}
 
 	$post_category ='';
@@ -705,7 +707,8 @@ function seopress_titles_the_description_content() {
 
 	$seopress_titles_template_variables_array = array(
 		'%%sep%%',
-		'%%sitetitle%%', 
+		'%%sitetitle%%',
+		'%%sitename%%',
 		'%%tagline%%',
 		'%%post_title%%',
 		'%%post_excerpt%%',
@@ -741,12 +744,13 @@ function seopress_titles_the_description_content() {
 	$seopress_titles_template_replace_array = array(
 		$sep,
 		get_bloginfo('name'), 
+		get_bloginfo('name'), 
 		get_bloginfo('description'),
 		the_title_attribute('echo=0'),
 		$seopress_get_the_excerpt,
 		get_the_date(),
 		get_the_modified_date(),
-		$seopress_get_author,
+		$the_author_meta,
 		$post_category,
 		$post_tag,
 		single_cat_title('', false),

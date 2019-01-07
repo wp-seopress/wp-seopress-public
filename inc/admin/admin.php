@@ -2659,7 +2659,7 @@ class seopress_options
 
         add_settings_field(
             'seopress_google_analytics_disable', // ID
-           __("Google Analytics tracking opt-out","wp-seopress"), // Title
+           __("Google Analytics tracking opt-in","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_disable_callback' ), // Callback
             'seopress-settings-admin-google-analytics-enable', // Page
             'seopress_setting_section_google_analytics_enable' // Section                  

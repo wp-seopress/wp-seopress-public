@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //Get real preview
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_do_real_preview() {
+            
     check_ajax_referer( 'seopress_real_preview_nonce', $_GET['_ajax_nonce'], true );
     
     //Get post id

@@ -176,7 +176,13 @@ function seopress_display_seo_metaboxe() {
         if ("seopress_404" != $typenow) {
             wp_enqueue_script('jquery-ui-accordion');
 
-            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery' ), SEOPRESS_VERSION );
+             wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery' ), SEOPRESS_VERSION );
+
+            //If WordPress 5.0+
+            global $wp_version;
+            if ( version_compare( $wp_version, '5.0', '>=' ) ) {
+                wp_enqueue_script( 'seopress-block-editor-js', plugins_url( 'assets/js/seopress-block-editor.js', dirname(dirname( __FILE__ ))), array( 'jquery' ), SEOPRESS_VERSION );
+            }
             
             wp_enqueue_script( 'seopress-cpt-video-sitemap-js', plugins_url( 'assets/js/seopress-sitemap-video.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
 

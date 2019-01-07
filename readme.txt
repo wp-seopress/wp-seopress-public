@@ -4,9 +4,9 @@ Contributors: rainbowgeek
 Donate link: https://www.seopress.org/
 Tags: seo, search engine optimization, meta title, open graph, content analysis, knowledge graph, redirection, xml sitemap, breadcrumbs, google analytics, rich snippets, broken link checker, GDPR
 Requires at least: 4.4+
-Tested up to: 4.9
+Tested up to: 5.0
 Requires PHP: 5.4
-Stable tag: 3.2.3
+Stable tag: 3.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,6 +161,13 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.2.4 =
+* NEW Add Guternberg / WP 5.0 compatibility
+* INFO German translation updated (thanks to Nicola Stobbe)
+* INFO Support %%sitename%% (alias of %%sitetitle%%) in titles and description
+* FIX %%post_author%% dynamic variable in meta description
+* FIX CSS on Breadcrumbs
+* FIX Elementor compatibility when creating new single template
 = 3.2.3 =
 * NEW Add ?replytocom option (SEO > Advanced settings)
 * NEW Add Business type option to Local Business Schema (PRO)
