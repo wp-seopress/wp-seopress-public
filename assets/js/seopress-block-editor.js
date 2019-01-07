@@ -1,6 +1,5 @@
 //Retrieve title / meta-desc from source code
 jQuery(document).ready(function(){
-
 const { subscribe, select } = wp.data;
 let hasSaved = false;
 
@@ -10,6 +9,7 @@ let hasSaved = false;
         const isSaved = editor && editor.didPostSaveRequestSucceed();
 
         if ( ! hasSaved && isSaved ) {
+            
             jQuery.ajax({
                 method : 'GET',
                 url : seopressAjaxRealPreview.seopress_real_preview,
@@ -38,8 +38,6 @@ let hasSaved = false;
                 },
             });
         }
-
         hasSaved = !! isSaved;
-
     });
 });
