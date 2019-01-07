@@ -127,7 +127,7 @@ function seopress_xml_sitemap_single() {
 									        }
 									        $seopress_sitemaps .= '<image:image>';
 									        $seopress_sitemaps .= "\n";
-									       	$seopress_sitemaps .= '<image:loc>'.$post;
+									       	$seopress_sitemaps .= '<image:loc>';
 											$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses($url))).']]>';
 									        $seopress_sitemaps .= '</image:loc>';
 									        $seopress_sitemaps .= "\n";

@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 3.2
+Stable tag: 3.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -160,12 +160,14 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.2.1 =
+* FIX Image sitemaps
 = 3.2 =
 * NEW WPML officially supported (still one issue with duplicate sitemap)
 * NEW Polylang compatibility for translating options (site title, global titles / meta desc, google analytics user consent message...)
 * NEW The SEO Framework import tool
-* NEW Add Local Business schema on a per post basis
-* NEW Add FAQ schema on a per post basis
+* NEW Add Local Business schema on a per post basis (PRO)
+* NEW Add FAQ schema on a per post basis (PRO)
 * NEW Add orber/order by option for HTML Sitemap (SEO > XML / HTML Sitemap > HTML Sitemap)
 * NEW 'seopress_404_exclude' to filter 404 error creation
 * NEW Add 410 (gone) and 451 (Unavailable For Legal Reasons) redirections type
