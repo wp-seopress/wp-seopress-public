@@ -682,29 +682,70 @@ function seopress_thumbnail_in_content() {
 	}
 }
 
+function seopress_social_fb_img_size_from_url($url) {
+	if (function_exists('attachment_url_to_postid')) {
+		$post_id 			= attachment_url_to_postid( $url );
+		//If cropped image
+		if ( !$post_id ){
+			$dir = wp_upload_dir();
+			$path = $url;
+			if ( 0 === strpos( $path, $dir['baseurl'] . '/' ) ) {
+				$path = substr( $path, strlen( $dir['baseurl'] . '/' ) );
+			}
+
+			if ( preg_match( '/^(.*)(\-\d*x\d*)(\.\w{1,})/i', $path, $matches ) ){
+				$url = $dir['baseurl'] . '/' . $matches[1] . $matches[3];
+				$post_id = attachment_url_to_postid( $url );
+			}
+		}
+
+		$image_src = wp_get_attachment_image_src( $post_id, 'full' );
+
+		//OG:IMAGE
+		$seopress_social_og_thumb .= '<meta property="og:image" content="'.$url.'" />';
+		$seopress_social_og_thumb .= "\n";
+
+		//OG:IMAGE:SECURE_URL IF SSL
+		if (is_ssl()) {
+			$seopress_social_og_thumb .= '<meta property="og:image:secure_url" content="'.$url.'" />';
+			$seopress_social_og_thumb .= "\n";
+		}
+
+		//OG:IMAGE:WIDTH + OG:IMAGE:HEIGHT
+		if (!empty($image_src)) {
+			$seopress_social_og_thumb .= '<meta property="og:image:width" content="'.$image_src[1].'" />';
+			$seopress_social_og_thumb .= "\n";
+			$seopress_social_og_thumb .= '<meta property="og:image:height" content="'.$image_src[2].'" />';
+			$seopress_social_og_thumb .= "\n";
+		}
+
+		//OG:IMAGE:ALT
+		if (get_post_meta($post_id, '_wp_attachment_image_alt', true) !='') {
+			$seopress_social_og_thumb .= '<meta property="og:image:alt" content="'.get_post_meta($post_id, '_wp_attachment_image_alt', true).'" />';
+			$seopress_social_og_thumb .= "\n";
+		}
+
+		return $seopress_social_og_thumb;
+	}
+}
+
 function seopress_social_fb_img_hook() {
 	if (seopress_social_facebook_og_option() =='1') {
 		//Init
 		$seopress_social_og_thumb ='';
 
 		if (is_home() && seopress_social_fb_img_home_option() !='' && 'page' == get_option( 'show_on_front' )) {
-			$seopress_social_og_thumb .= '<meta property="og:image" content="'.seopress_social_fb_img_home_option().'" />'; 
- 			$seopress_social_og_thumb .= "\n";
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_fb_img_home_option());
 		} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && seopress_social_fb_img_post_option() !='') { 
-	 		$seopress_social_og_thumb .= '<meta property="og:image" content="'.seopress_social_fb_img_post_option().'" />'; 
-	 		$seopress_social_og_thumb .= "\n";
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_fb_img_post_option());
 		} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && has_post_thumbnail() ) {
-			$seopress_social_og_thumb .= '<meta property="og:image" content="'.get_the_post_thumbnail_url().'" />'; 
-	 		$seopress_social_og_thumb .= "\n";
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(get_the_post_thumbnail_url());
 		} elseif (is_singular() && seopress_social_facebook_og_option() =='1' && seopress_thumbnail_in_content() !='' ) {
-			$seopress_social_og_thumb .= '<meta property="og:image" content="'.seopress_thumbnail_in_content().'" />'; 
-	 		$seopress_social_og_thumb .= "\n";
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_thumbnail_in_content());
 		} elseif ((is_tax() || is_category() || is_tag()) && seopress_social_fb_img_term_option() !='') {
-			$seopress_social_og_thumb .= '<meta property="og:image" content="'.seopress_social_fb_img_term_option().'" />';
-	 		$seopress_social_og_thumb .= "\n";
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_fb_img_term_option());
 		} elseif (seopress_social_facebook_og_option() =='1' && seopress_social_facebook_img_option() !='') { 
-	 		$seopress_social_og_thumb .= '<meta property="og:image" content="'.seopress_social_facebook_img_option().'" />'; 
-	 		$seopress_social_og_thumb .= "\n";
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_facebook_img_option());
 	 	}
 
 	 	//Hook on post OG thumbnail - 'seopress_social_og_thumb'
