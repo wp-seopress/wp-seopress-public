@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 3.1.1
+Stable tag: 3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,7 +58,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>WooCommerce: disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li>Easy Digital Downloads: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li>Dublin Core</li>
-	<li>Google Structured Data types: article, course, recipe, video, event, product</li>
+	<li>Google Structured Data types: article, local business, FAQ, course, recipe, video, event, product</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Custom Breadcrumbs for single post types</li>
 	<li>Google Page Speed</li>
@@ -74,7 +74,6 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Google Local Business</li>
 	<li>htaccess</li>
 	<li>RSS</li>
-	<li>SEO tools: check websites on same server, get notified before domain expiration date, check your Alexa Rank...</li>
 </ul>
 
 <h4><a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / unlimited sites / year</strong></a></h4>
@@ -99,6 +98,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Dutch</li>
 	<li>Vietnamese</li>
 	<li>Romanian</li>
+	<li>Arabic</li>
 	<li>Chinese</li>
 	<li>Japanese (in progress)</li>
 	<li><a href="https://www.seopress.org/contact-us/">Add yours and get SEOPress PRO for free!</a></li>
@@ -160,6 +160,34 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.2 =
+* NEW WPML officially supported (still one issue with duplicate sitemap)
+* NEW Polylang compatibility for translating options (site title, global titles / meta desc, google analytics user consent message...)
+* NEW The SEO Framework import tool
+* NEW Add Local Business schema on a per post basis
+* NEW Add FAQ schema on a per post basis
+* NEW Add orber/order by option for HTML Sitemap (SEO > XML / HTML Sitemap > HTML Sitemap)
+* NEW 'seopress_404_exclude' to filter 404 error creation
+* NEW Add 410 (gone) and 451 (Unavailable For Legal Reasons) redirections type
+* NEW Add Arabic language (thanks to Moqbel Bajri)
+* NEW Prevent Google to display a sitelinks searchbox in search results (nositelinkssearchbox)
+* NEW Remove Genesis SEO link in WP Admin Menu (SEO > Advanced > Appearance)
+* NEW Add Indonesian rupiah currency to Product data type (PRO)
+* INFO Updating Google Analytics API source
+* INFO Better UI for meta robots
+* INFO Automatically exclude URLs starting with "wp-content/cache" from 404 monitoring
+* INFO Exclude base64 img from XML Sitemaps
+* INFO New notifications to detect already active SEO plugins to avoid conflicts
+* FIX Import tool (AIO, Yoast, The SEO Framework)
+* FIX XML Video sitemap
+* FIX dynamic variables in term titles / term description
+* FIX 'seopress_breadcrumbs_after_html' hook
+* FIX redirects
+* FIX Video and News sitemaps template_include
+* FIX First thumbnail from the_content for OG/Twitter img
+* FIX Couldn't fetch XML sitemaps with the new Google Search Console
+* FIX  Warning: Cannot modify header information - headers already sent by (output started at /****/wp-content/plugins/wp-seopress/inc/admin/admin.php:3074)
+* FIX Avoid error 500 if mbstring PHP module is not installed, add fallback if not available
 = 3.1.1 =
 * FIX Yoast/AIO import tool
 * FIX Updater! (PRO)

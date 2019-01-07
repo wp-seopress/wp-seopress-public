@@ -62,5 +62,38 @@ jQuery(document).ready(function(){
 		jQuery( '#aio-migration-tool .spinner' ).css( "visibility", "visible" );
 		jQuery( '#aio-migration-tool .spinner' ).css( "float", "none" );
 		jQuery( '#aio-migration-tool .log' ).html('');
+	});	
+
+	//SEO Framework
+	jQuery('#seopress-seo-framework-migrate').on('click', function(e3) {
+		e3.preventDefault();
+		self.process_offset3( 0, self );
+	});
+	process_offset3 = function( offset3, self ) {
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxMigrate.seopress_seo_framework_migrate.seopress_seo_framework_migration,
+			data : {
+				action: 'seopress_seo_framework_migration',
+				offset3: offset3,
+				_ajax_nonce: seopressAjaxMigrate.seopress_seo_framework_migrate.seopress_nonce,
+			},
+			success : function( data ) {
+				if( 'done' == data.data.offset3 ) {
+		        	jQuery('#seopress-seo-framework-migrate').removeAttr("disabled");
+					jQuery( '.spinner' ).css( "visibility", "hidden" );
+					jQuery( '#seo-framework-migration-tool .log' ).html('Migration completed!');
+		        } else {
+		        	self.process_offset3( parseInt( data.data.offset3 ), self );
+		        }					
+			},
+		});
+	};
+
+	jQuery('#seopress-seo-framework-migrate').on('click', function() {
+		jQuery(this).attr("disabled", "disabled");
+		jQuery( '#seo-framework-migration-tool .spinner' ).css( "visibility", "visible" );
+		jQuery( '#seo-framework-migration-tool .spinner' ).css( "float", "none" );
+		jQuery( '#seo-framework-migration-tool .log' ).html('');
 	});
 });

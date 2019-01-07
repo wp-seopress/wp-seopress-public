@@ -1,6 +1,6 @@
 #adminmenu div.wp-menu-image.dashicons-admin-seopress::before,#seopress-header #seopress-admin h1::before {
     content: "\e042";
-    font-family: seopress;
+    font-family: seopress !important;
 }
 
 #seopress-header #seopress-admin h1::before,.seopress-page-list .seopress-feature h3,.seopress-styles .seopress-option h1 {
@@ -157,7 +157,7 @@
     width: 16px;
 }
 
-,#seopress_content_analysis .ui-tabs .ui-tabs-nav li,#seopress_content_analysis .ui-tabs-anchor,#seopress_cpt .ui-tabs .ui-tabs-nav li,#seopress_cpt .ui-tabs-anchor {
+#seopress_content_analysis .ui-tabs .ui-tabs-nav li,#seopress_content_analysis .ui-tabs-anchor,#seopress_cpt .ui-tabs .ui-tabs-nav li,#seopress_cpt .ui-tabs-anchor {
     cursor: pointer!important;
 }
 
@@ -596,7 +596,7 @@ body.seopress-styles {
     margin: 0;
 }
 
-.seopress-styles .seopress-option #seopress-yoast-migrate, .seopress-styles .seopress-option #seopress-aio-migrate, .seopress-styles .seopress-option #submit {
+.seopress-styles .seopress-option #seopress-yoast-migrate, .seopress-styles .seopress-option #seopress-aio-migrate, .seopress-styles .seopress-option #seopress-seo-framework-migrate, .seopress-styles .seopress-option #submit {
     color: #fff;
     text-decoration: none;
     border: none;
@@ -615,7 +615,7 @@ body.seopress-styles {
     height: auto;
 }
 
-.seopress-styles .seopress-option #seopress-yoast-migrate:hover, .seopress-styles .seopress-option #seopress-aio-migrate:hover, .seopress-styles .seopress-option #submit:hover {
+.seopress-styles .seopress-option #seopress-yoast-migrate:hover, .seopress-styles .seopress-option #seopress-aio-migrate:hover, .seopress-styles .seopress-option #seopress-seo-framework-migrate:hover, .seopress-styles .seopress-option #submit:hover {
     text-decoration: none;
     color: #FFF;
     background: #232323;
@@ -624,6 +624,14 @@ body.seopress-styles {
 .seopress-styles #wpcontent {
     padding-left: 0;
     background: #F8FAFD;
+}
+
+.seopress-styles pre {
+    color: #42b72a;
+    background: #f5f6f7;
+    font-family: Menlo, Monaco, Andale Mono, Courier New, monospace;
+    padding: 7px;
+    display: inline-block;
 }
 
 .seopress-styles #seopress-navbar {

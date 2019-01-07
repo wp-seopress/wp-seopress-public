@@ -144,38 +144,38 @@ echo               '<div class="snippet-description">...</div>
             <p>
                 <label for="seopress_robots_index_meta">
                     <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' '.$disabled['robots_index'].'/>
-                        '. __( 'noindex', 'wp-seopress' ) .'
-                </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.','wp-seopress')).'"></span>
+                        '. __( 'Do not display this page in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'
+                </label>
             </p>
             <p>
                 <label for="seopress_robots_follow_meta">
                     <input type="checkbox" name="seopress_robots_follow" id="seopress_robots_follow_meta" value="yes" '. checked( $seopress_robots_follow, 'yes', false ) .' '.$disabled['robots_follow'].'/>
-                        '. __( 'nofollow', 'wp-seopress' ) .'
-                </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not follow links for all pages.','wp-seopress')).'"></span>
+                        '. __( 'Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress' ) .'
+                </label>
             </p>
             <p>
                 <label for="seopress_robots_odp_meta">
                     <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta" value="yes" '. checked( $seopress_robots_odp, 'yes', false ) .' '.$disabled['robots_odp'].'/>
-                        '. __( 'noodp', 'wp-seopress' ) .'
-                </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not use Open Directory project metadata for titles or excerpts for all pages.','wp-seopress')).'"></span>
+                        '. __( 'Do not use Open Directory project metadata for titles or excerpts for this page <strong>(noodp)</strong>', 'wp-seopress' ) .'
+                </label>
             </p>
             <p>
                 <label for="seopress_robots_imageindex_meta">
                     <input type="checkbox" name="seopress_robots_imageindex" id="seopress_robots_imageindex_meta" value="yes" '. checked( $seopress_robots_imageindex, 'yes', false ) .' '.$disabled['imageindex'].'/>
-                        '. __( 'noimageindex', 'wp-seopress' ) .'
-                </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not index images from the entire site.','wp-seopress')).'"></span>
+                        '. __( 'Do not index images for this page <strong>(noimageindex)</strong>', 'wp-seopress' ) .'
+                </label>
             </p>
             <p>
                 <label for="seopress_robots_archive_meta">
                     <input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta" value="yes" '. checked( $seopress_robots_archive, 'yes', false ) .' '.$disabled['archive'].'/>
-                        '. __( 'noarchive', 'wp-seopress' ) .'
-                </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display a "Cached" link in the Google search results.','wp-seopress')).'"></span>
+                        '. __( 'Do not display a "Cached" link in the Google search results <strong>(noarchive)</strong>', 'wp-seopress' ) .'
+                </label>
             </p>
             <p>
                 <label for="seopress_robots_snippet_meta">
                     <input type="checkbox" name="seopress_robots_snippet" id="seopress_robots_snippet_meta" value="yes" '. checked( $seopress_robots_snippet, 'yes', false ) .' '.$disabled['snippet'].'/>
-                        '. __( 'nosnippet', 'wp-seopress' ) .'
-                </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display a description in the Google search results for all pages.','wp-seopress')).'"></span>
+                        '. __( 'Do not display a description in search results for this page <strong>(nosnippet)</strong>', 'wp-seopress' ) .'
+                </label>
             </p>
             <p class="description">
                 '.__('You can not uncheck a parameter? This is normal, it is most likely defined in the global settings of the extension.','wp-seopress').'
@@ -243,8 +243,10 @@ echo               '<div class="snippet-description">...</div>
                 <label for="seopress_redirections_value_meta">'. __( 'URL redirection', 'wp-seopress' ) .'</label>
                 <select name="seopress_redirections_type">
                     <option ' . selected( '301', $seopress_redirections_type, false ) . ' value="301">'. __( '301 Moved Permanently', 'wp-seopress' ) .'</option>
-                    <option ' . selected( '302', $seopress_redirections_type, false ) . ' value="302">'. __( '302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)', 'wp-seopress' ) .'</option>
-                    <option ' . selected( '307', $seopress_redirections_type, false ) . ' value="307">'. __( '307 Moved Temporarily (HTTP 1.1 Only)', 'wp-seopress' ) .'</option>
+                    <option ' . selected( '302', $seopress_redirections_type, false ) . ' value="302">'. __( '302 Found / Moved Temporarily', 'wp-seopress' ) .'</option>
+                    <option ' . selected( '307', $seopress_redirections_type, false ) . ' value="307">'. __( '307 Moved Temporarily', 'wp-seopress' ) .'</option>
+                    <option ' . selected( '410', $seopress_redirections_type, false ) . ' value="410">'. __( '410 Gone', 'wp-seopress' ) .'</option>
+                    <option ' . selected( '451', $seopress_redirections_type, false ) . ' value="451">'. __( '451 Unavailable For Legal Reasons', 'wp-seopress' ) .'</option>
                 </select>
                 <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.esc_html__('Enter your new URL','wp-seopress').'" aria-label="'.__('URL redirection','wp-seopress').'" value="'.$seopress_redirections_value.'" />
                 <br><br>';

@@ -606,18 +606,33 @@ function seopress_thumbnail_in_content() {
 		//DomDocument
 	    $dom = new domDocument;
 	    $internalErrors = libxml_use_internal_errors(true);
-	    $dom->loadHTML(mb_convert_encoding($seopress_get_the_content, 'HTML-ENTITIES', 'UTF-8'));
-	    $dom->preserveWhiteSpace = false;
-	    $domxpath = new DOMXPath($dom);
 
-		/*Standard images*/
-	    $imgs = (array)$domxpath->query("//img");
-	    
-	    if (!empty($imgs) && $imgs[0] !=NULL) {
-	        $url = $imgs[0]->getAttribute('src');
-	        $url = esc_attr(wp_filter_nohtml_kses($url));
-	        return $url;
-	    }
+	    if (function_exists('mb_convert_encoding')) {
+	    	$dom->loadHTML(mb_convert_encoding($seopress_get_the_content, 'HTML-ENTITIES', 'UTF-8'));
+	    } else {
+	    	$dom->loadHTML('<?xml encoding="utf-8" ?>'.$seopress_get_the_content);
+		}
+
+	    $dom->preserveWhiteSpace = false;
+	    if ($dom->getElementsByTagName('img') !='') {
+			$images = $dom->getElementsByTagName('img');
+		}
+		if (isset($images) && !empty ($images)) {
+			if ($images->length>=1) {
+				foreach($images as $img) {
+			        $url = $img->getAttribute('src');
+			        //Exclude Base64 img
+					if (strpos($url, 'data:image/') === false) {
+				        if (seopress_is_absolute($url) ===true) {
+				        	//do nothing
+				        } else {
+				        	$url = get_home_url().$url;
+				        }
+				        return urldecode(esc_attr(wp_filter_nohtml_kses($url)));
+				    }
+				}
+			}
+		}
 		libxml_use_internal_errors($internalErrors);
 	}
 }

@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.1.1
+Version: 3.2
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.1.1' ); 
+define( 'SEOPRESS_VERSION', '3.2' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,6 +158,10 @@ function seopress_add_admin_options_scripts($hook) {
             'seopress_yoast_migrate' => array(
                 'seopress_nonce' => wp_create_nonce('seopress_yoast_migrate_nonce'),
                 'seopress_yoast_migration' => admin_url( 'admin-ajax.php'),
+            ),
+            'seopress_seo_framework_migrate' => array(
+                'seopress_nonce' => wp_create_nonce('seopress_seo_framework_migrate_nonce'),
+                'seopress_seo_framework_migration' => admin_url( 'admin-ajax.php'),
             ),
         );
         wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate );

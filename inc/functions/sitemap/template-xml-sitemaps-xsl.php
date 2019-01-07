@@ -4,9 +4,6 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //XML
 Header('Content-type: text/xml');
 
-//Robots
-Header("X-Robots-Tag: noindex", true);
-
 function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"
 				xmlns:html="http://www.w3.org/TR/REC-html40"

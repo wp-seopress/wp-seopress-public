@@ -1,0 +1,32 @@
+<wpml-config>
+  <admin-texts>
+    <key name="seopress_titles_option_name">
+      <key name="seopress_titles_home_site_title"/>
+      <key name="seopress_titles_home_site_desc"/>
+      <key name="seopress_titles_single_titles">
+        <key name="*">
+          <key name="title"/>
+          <key name="description"/>
+        </key>
+      </key>
+      <key name="seopress_titles_archives_author_title"/>
+      <key name="seopress_titles_archives_author_desc"/>
+      <key name="seopress_titles_archives_date_title"/>
+      <key name="seopress_titles_archives_date_desc"/>
+      <key name="seopress_titles_archives_search_title"/>
+      <key name="seopress_titles_archives_search_desc"/>
+      <key name="seopress_titles_archives_404_title"/>
+      <key name="seopress_titles_archives_404_desc"/>
+      <key name="seopress_titles_tax_titles">
+        <key name="*">
+          <key name="title"/>
+          <key name="description"/>
+        </key>
+      </key>
+    </key>
+    <key name="seopress_google_analytics_option_name">
+      <key name="seopress_google_analytics_opt_out_msg"/>
+      <key name="seopress_google_analytics_opt_out_msg_ok"/>
+    </key>
+  </admin-texts>
+</wpml-config>

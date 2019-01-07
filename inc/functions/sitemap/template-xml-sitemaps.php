@@ -4,8 +4,15 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //XML
 Header('Content-type: text/xml');
 
-//Robots
-Header("X-Robots-Tag: noindex", true);
+add_filter( 'seopress_sitemaps_index_cpt_query', function( $args ) {
+    global $sitepress, $sitepress_settings;
+
+    $sitepress_settings['auto_adjust_ids'] = 0;
+    remove_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ) );
+    remove_filter( 'category_link', array( $sitepress, 'category_link_adjust_id' ), 1 );
+
+    return $args;
+});
 
 function seopress_xml_sitemap_index() {
 	$seopress_sitemaps ='<?xml version="1.0" encoding="UTF-8"?>';

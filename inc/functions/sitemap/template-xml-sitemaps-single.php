@@ -4,8 +4,15 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //XML
 Header('Content-type: text/xml');
 
-//Robots
-Header("X-Robots-Tag: noindex", true);
+add_filter( 'seopress_sitemaps_single_query', function( $args ) {
+    global $sitepress, $sitepress_settings;
+
+    $sitepress_settings['auto_adjust_ids'] = 0;
+    remove_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ) );
+    remove_filter( 'category_link', array( $sitepress, 'category_link_adjust_id' ), 1 );
+
+    return $args;
+});
 
 function seopress_xml_sitemap_img_enable_option() {
 	$seopress_xml_sitemap_img_enable_option = get_option("seopress_xml_sitemap_option_name");
@@ -76,7 +83,13 @@ function seopress_xml_sitemap_single() {
 						if (get_post_field('post_content', $post) !='') {
 							$dom = new domDocument;
 							$internalErrors = libxml_use_internal_errors(true);
-							$dom->loadHTML(mb_convert_encoding(get_post_field('post_content', $post), 'HTML-ENTITIES', 'UTF-8'));
+
+						    if (function_exists('mb_convert_encoding')) {
+						    	$dom->loadHTML(mb_convert_encoding(get_post_field('post_content', $post), 'HTML-ENTITIES', 'UTF-8'));
+						    } else {
+						    	$dom->loadHTML('<?xml encoding="utf-8" ?>'.get_post_field('post_content', $post));
+							}
+
 							$dom->preserveWhiteSpace = false;
 							if ($dom->getElementsByTagName('img') !='') {
 								$images = $dom->getElementsByTagName('img');
@@ -105,18 +118,21 @@ function seopress_xml_sitemap_single() {
 								if ($images->length>=1) {
 									foreach($images as $img) {
 								        $url = $img->getAttribute('src');
-								        if (seopress_is_absolute($url) ===true) {
-								        	//do nothing
-								        } else {
-								        	$url = get_home_url().$url;
-								        }
-								        $seopress_sitemaps .= '<image:image>';
-								        $seopress_sitemaps .= "\n";
-								       	$seopress_sitemaps .= '<image:loc>';
-										$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses($url))).']]>';
-								        $seopress_sitemaps .= '</image:loc>';
-								        $seopress_sitemaps .= "\n";
-								        $seopress_sitemaps .= '</image:image>';
+								        //Exclude Base64 img
+										if (strpos($url, 'data:image/') === false) {
+									        if (seopress_is_absolute($url) ===true) {
+									        	//do nothing
+									        } else {
+									        	$url = get_home_url().$url;
+									        }
+									        $seopress_sitemaps .= '<image:image>';
+									        $seopress_sitemaps .= "\n";
+									       	$seopress_sitemaps .= '<image:loc>'.$post;
+											$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses($url))).']]>';
+									        $seopress_sitemaps .= '</image:loc>';
+									        $seopress_sitemaps .= "\n";
+									        $seopress_sitemaps .= '</image:image>';
+									    }
 								    }
 								}
 							}

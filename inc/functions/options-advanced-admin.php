@@ -279,6 +279,25 @@ if (seopress_advanced_appearance_genesis_seo_metaboxe_hook_option() !='') {
 	add_action('init', 'seopress_advanced_appearance_genesis_seo_metaboxe_hook', 999);
 }
 
+//Remove Genesis SEO Menu Link
+function seopress_advanced_appearance_genesis_seo_menu_option() {
+    $seopress_advanced_appearance_genesis_seo_menu_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_genesis_seo_menu_option ) ) {
+        foreach ($seopress_advanced_appearance_genesis_seo_menu_option as $key => $seopress_advanced_appearance_genesis_seo_menu_value)
+            $options[$key] = $seopress_advanced_appearance_genesis_seo_menu_value;
+         if (isset($seopress_advanced_appearance_genesis_seo_menu_option['seopress_advanced_appearance_genesis_seo_menu'])) { 
+            return $seopress_advanced_appearance_genesis_seo_menu_option['seopress_advanced_appearance_genesis_seo_menu'];
+         }
+    }
+}
+
+if (seopress_advanced_appearance_genesis_seo_menu_option() !='') {
+    function seopress_advanced_appearance_genesis_seo_menu_hook() {
+        remove_theme_support( 'genesis-seo-settings-menu' );
+    }
+    add_action('init', 'seopress_advanced_appearance_genesis_seo_menu_hook', 999);
+}
+
 //Stop words
 function seopress_advanced_advanced_stop_words_option() {
 	$seopress_advanced_advanced_stop_words_option = get_option("seopress_advanced_option_name");

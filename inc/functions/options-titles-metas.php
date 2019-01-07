@@ -61,7 +61,7 @@ function seopress_titles_tax_titles_option() {
 		 	return $seopress_titles_tax_titles_option['seopress_titles_tax_titles'][$seopress_get_current_tax]['title'];
 		 }
 	}
-};
+}
 
 //Author archive Titles
 function seopress_titles_archives_author_title_option() {
@@ -530,11 +530,12 @@ function seopress_titles_the_title() {
 
 		$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archive_titles_option);
 	} elseif ((is_tax() || is_category() || is_tag()) && seopress_titles_tax_titles_option()) { //IS TAX
+		$seopress_titles_tax_titles_option = esc_attr(seopress_titles_tax_titles_option());
+		
 		if (get_term_meta(get_queried_object()->{'term_id'},'_seopress_titles_title',true)) {
 			$seopress_titles_title_template = esc_attr(get_term_meta(get_queried_object()->{'term_id'},'_seopress_titles_title',true));
+			$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_title_template);
 		} else {
-			$seopress_titles_tax_titles_option = esc_attr(seopress_titles_tax_titles_option());
-
 			$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_tax_titles_option);
 		}		
 	} elseif (is_author() && seopress_titles_archives_author_title_option()) { //IS AUTHOR
@@ -871,11 +872,12 @@ function seopress_titles_the_description_content() {
 		
 		$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
 	} elseif ((is_tax() || is_category() || is_tag()) && seopress_titles_tax_desc_option()) { //IS TAX
+		$seopress_titles_the_description = esc_attr(seopress_titles_tax_desc_option());
+
 		if (get_term_meta(get_queried_object()->{'term_id'},'_seopress_titles_desc',true)) {
 			$seopress_titles_description_template = esc_attr(get_term_meta(get_queried_object()->{'term_id'},'_seopress_titles_desc',true));
-		} else {
-			$seopress_titles_the_description = esc_attr(seopress_titles_tax_desc_option());
-			
+			$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_description_template);
+		} else {	
 			$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
 		}
 	} elseif (is_author() && seopress_titles_archives_author_desc_option()) { //IS AUTHOR
@@ -1385,14 +1387,14 @@ function seopress_titles_noimageindex_option() {
 		 	return $seopress_titles_noimageindex_option['seopress_titles_noimageindex'];
 		 }
 	}
-};
+}
 
 function seopress_titles_noimageindex_post_option() {
 	$_seopress_robots_imageindex = get_post_meta(get_the_ID(),'_seopress_robots_imageindex',true);
 	if ($_seopress_robots_imageindex == 'yes') {
 		return $_seopress_robots_imageindex;
 	}
-};
+}
 
 function seopress_titles_noimageindex_bypass() {
 	if (seopress_titles_noimageindex_option()) {
@@ -1405,7 +1407,7 @@ function seopress_titles_noimageindex_bypass() {
 			return get_term_meta(get_queried_object()->{'term_id'},'_seopress_robots_imageindex',true);
 		}
 	}
-};
+}
 
 if (seopress_titles_noimageindex_bypass() || has_filter('seopress_titles_noimageindex')) {
 	function seopress_titles_advanced_google_hook() {
@@ -1418,7 +1420,27 @@ if (seopress_titles_noimageindex_bypass() || has_filter('seopress_titles_noimage
 		echo $seopress_titles_noimageindex."\n";
 	}	
 	add_action( 'wp_head', 'seopress_titles_advanced_google_hook', 1 );
-};
+}
+
+//nositelinkssearchbox
+function seopress_titles_nositelinkssearchbox_option() {
+	$seopress_titles_nositelinkssearchbox_option = get_option("seopress_titles_option_name");
+	if ( ! empty ( $seopress_titles_nositelinkssearchbox_option ) ) {
+		foreach ($seopress_titles_nositelinkssearchbox_option as $key => $seopress_titles_nositelinkssearchbox_value)
+			$options[$key] = $seopress_titles_nositelinkssearchbox_value;
+		 if (isset($seopress_titles_nositelinkssearchbox_option['seopress_titles_nositelinkssearchbox'])) { 
+		 	return $seopress_titles_nositelinkssearchbox_option['seopress_titles_nositelinkssearchbox'];
+		 }
+	}
+}
+
+if (seopress_titles_nositelinkssearchbox_option()) {
+	function seopress_titles_nositelinkssearchbox_hook() {
+		echo '<meta name="google" content="nositelinkssearchbox" />';
+		echo "\n";
+	}
+	add_action( 'wp_head', 'seopress_titles_nositelinkssearchbox_hook', 2 );
+}
 
 //link rel prev/next
 if (seopress_titles_paged_rel_option()) {
