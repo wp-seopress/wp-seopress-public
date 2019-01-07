@@ -352,7 +352,7 @@ function seopress_social_facebook_og_url_hook() {
 		if (is_search()) {
 			$seopress_social_og_url = '<meta property="og:url" content="'.get_home_url().'/search/'.get_search_query().'" />';
 		} else {
-			$seopress_social_og_url = '<meta property="og:url" content="'.$current_url.'" />';
+			$seopress_social_og_url = '<meta property="og:url" content="'.htmlspecialchars($current_url).'" />';
 		}
 
 		//Hook on post OG URL - 'seopress_social_og_url'
@@ -384,8 +384,30 @@ add_action( 'wp_head', 'seopress_social_facebook_og_site_name_hook', 1 );
 //OG Locale
 function seopress_social_facebook_og_locale_hook() {
 	if (seopress_social_facebook_og_option() =='1') {
-
 		$seopress_social_og_locale = '<meta property="og:locale" content="'.get_locale().'" />';
+
+		//Polylang
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active( 'polylang/polylang.php' ) || is_plugin_active( 'polylang-pro/polylang.php' )) {
+			//@credits Polylang
+			if (did_action('pll_init') && function_exists('PLL')) {
+				$alternates = array();
+
+				foreach ( PLL()->model->get_languages_list() as $language ) {
+					if ( PLL()->curlang->slug !== $language->slug && PLL()->links->get_translation_url( $language ) && isset( $language->facebook ) ) {
+						$alternates[] = $language->facebook;
+					}
+				}
+
+				// There is a risk that 2 languages have the same Facebook locale. So let's make sure to output each locale only once.
+				$alternates = array_unique( $alternates );
+
+				foreach ( $alternates as $lang ) {
+					$seopress_social_og_locale .= "\n";
+					$seopress_social_og_locale .= '<meta property="og:locale:alternate" content="'.$lang.'" />';
+				}
+			}
+		}
 
 		//Hook on post OG locale - 'seopress_social_og_locale'
 		if (has_filter('seopress_social_og_locale')) {

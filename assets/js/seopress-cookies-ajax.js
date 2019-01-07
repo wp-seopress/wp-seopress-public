@@ -1,5 +1,8 @@
 //GA user consent
 jQuery(document).ready(function(){
+	if(Cookies.get('seopress-user-consent-close') ==undefined && Cookies.get('seopress-user-consent-accept') ==undefined) {
+		jQuery('.seopress-user-consent').removeClass('seopress-user-consent-hide');
+	}
 	jQuery('#seopress-user-consent-accept').on('click', function() {
 		jQuery.ajax({
 			method : 'GET',

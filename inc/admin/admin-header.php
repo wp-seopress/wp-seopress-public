@@ -200,7 +200,7 @@ function seopress_admin_header() { ?>
                             <div class="dashicons dashicons-twitter"></div>
                             <div class="tooltip"><?php _e('Follow us on Twitter','wp-seopress'); ?></div>
                         </a>
-                        <a href="https://www.youtube.com/c/SEOPress" alt="<?php _e('Follow us on YouTube (new window)','wp-seopress'); ?>" target="_blank">
+                        <a href="https://www.youtube.com/SEOPress" alt="<?php _e('Follow us on YouTube (new window)','wp-seopress'); ?>" target="_blank">
                             <div class="dashicons dashicons-video-alt3"></div>
                             <div class="tooltip"><?php _e('Follow us on YouTube','wp-seopress'); ?></div>
                         </a>

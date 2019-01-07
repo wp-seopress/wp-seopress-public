@@ -21,7 +21,12 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			if (seopress_google_analytics_opt_out_msg_option() !='') {
 				$msg = seopress_google_analytics_opt_out_msg_option();
 			} else {
-				$msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics etc ...','wp-seopress');
+				$msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics etc.&nbsp;<a href="[seopress_privacy_page]">Read more</a>','wp-seopress');
+			}
+
+			if (get_option('wp_page_for_privacy_policy') && $msg !='') {
+				$seopress_privacy_page = esc_url(get_permalink(get_option('wp_page_for_privacy_policy')));
+				$msg = str_replace('[seopress_privacy_page]', $seopress_privacy_page, $msg);
 			}
 			
 			$msg = apply_filters('seopress_rgpd_message', $msg);
@@ -31,8 +36,8 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			} else {
 				$consent_btn = __('Accept','wp-seopress');
 			} 
-		    echo '<style>.seopress-user-consent {position: fixed;z-index: 8000;width: 100%;bottom: 0;background: #F1F1F1;padding: 10px;left: 0;text-align: center;}.seopress-user-consent p {margin:0;font-size:14px;}.seopress-user-consent button {margin: 0 10px;padding: 5px 20px;font-size: 14px;}#seopress-user-consent-close{margin: 0 10px;position: absolute;right: 15px;line-height: 29px;font-weight: bold;border: 1px solid #ccc;padding: 0 10px;}#seopress-user-consent-close:hover{background:#222;cursor:pointer;color:#fff}</style>
-		    <div class="seopress-user-consent"><p>'.$msg.'<button id="seopress-user-consent-accept">'.$consent_btn.'</button><span id="seopress-user-consent-close">'.__('X','wp-seopress').'</span></p></div>';
+		    echo '<style>.seopress-user-consent {position: fixed;z-index: 8000;width: 100%;bottom: 0;background: #F1F1F1;padding: 10px;left: 0;text-align: center;}.seopress-user-consent p {margin: 0;font-size: 0.8em;justify-content: center;}.seopress-user-consent button {vertical-align: middle;margin: 0 10px;padding: 5px 20px;font-size: 14px;}#seopress-user-consent-close{margin: 0 0 0 20px;position: relative;line-height: 26px;background: none;font-weight: bold;border: 1px solid #ccc;padding: 0 10px;color:inherit;}#seopress-user-consent-close:hover{background:#222;cursor:pointer;color:#fff}.seopress-user-consent-hide{display:none;}</style>
+		    <div class="seopress-user-consent seopress-user-consent-hide" tabindex="5000"><p>'.$msg.'<button id="seopress-user-consent-accept">'.$consent_btn.'</button><button id="seopress-user-consent-close">'.__('X','wp-seopress').'</button></p></div>';
 		}
 		if (seopress_google_analytics_disable_option() =='1') {
 			if (is_user_logged_in()) {
@@ -400,10 +405,13 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 		if (seopress_google_analytics_link_tracking_enable_option() !='') {
 			if (seopress_google_analytics_link_tracking_enable_option() !='') {
 				$seopress_google_analytics_click_event['link_tracking'] =
-"jQuery(document).ready(function() {
-	jQuery('a[target=\"_blank\"]').click(function(e) {
-		gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
-	});
+"window.addEventListener('load', function () {
+    var links = document.querySelectorAll('a[target=\"_blank\"]');
+    for (let i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e) {
+            gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
+        });
+    }
 });
 ";
 				$seopress_google_analytics_click_event['link_tracking'] = apply_filters('seopress_gtag_link_tracking_ev', $seopress_google_analytics_click_event['link_tracking']);

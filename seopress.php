@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.2.6
+Version: 3.3
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.2.6' ); 
+define( 'SEOPRESS_VERSION', '3.3' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -310,7 +310,7 @@ function seopress_plugin_action_links($links, $file) {
 
     if ($file == $this_plugin) {
         $settings_link = '<a href="' . admin_url( 'admin.php?page=seopress-option') . '">'.__("Settings","wp-seopress").'</a>';
-        $website_link = '<a href="https://seopress.org/" target="_blank">'.__("SEOPress.org","wp-seopress").'</a>';
+        $website_link = '<a href="https://www.seopress.org/" target="_blank">'.__("SEOPress.org","wp-seopress").'</a>';
         if ( !is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
             $pro_link = '<a href="https://www.seopress.org/seopress-pro/" style="color:#a00;font-weight:bold" target="_blank">'.__("GO PRO!","wp-seopress").'</a>';
             array_unshift($links, $pro_link);
@@ -330,7 +330,6 @@ function seopress_plugin_action_links($links, $file) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Get all registered post types
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 function seopress_get_post_types() {
     global $wp_post_types;
 

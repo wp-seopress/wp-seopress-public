@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 5.0
 Requires PHP: 5.4
-Stable tag: 3.2.6
+Stable tag: 3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,7 +59,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>WooCommerce: disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li>Easy Digital Downloads: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li>Dublin Core</li>
-	<li>Google Structured Data types (schema.org): article, local business, FAQ, course, recipe, video, event, product</li>
+	<li>Google Structured Data types (schema.org): article, local business, FAQ, course, recipe, video, event, product, simple review</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Custom Breadcrumbs for single post types</li>
 	<li>Google Page Speed</li>
@@ -161,6 +161,41 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3 =
+* NEW Add Simple Review schema (PRO)
+* NEW Update Google Page Speed to API Version 5 (PRO)
+* NEW Add Persan language (thanks to Dariush Ojabonian)
+* NEW Add separator button in SEO metabox
+* NEW Use [seopress_privacy_page] in Consent message for user tracking field to get Privacy Page URL dynamically
+* NEW Add og:locale:alternate with Polylang
+* NEW Add Target keywords quick edit from post type list
+* INFO Support DIVI / Elegant Theme Builder / Visual Composer / page builders using shortcodes for meta description / social / Image XML sitemaps... (🍾)
+* INFO User cookie bar A11Y / CSS / HTML improvements
+* INFO Improvement of notification for license activation 
+* INFO Improvement of XML Image sitemap
+* INFO Improvement of import/export tool
+* INFO Update seopress-cookies.min.js
+* INFO Allow target (eg: _blank) attribute in consent message for user tracking textarea
+* INFO Phasing out jQuery dependency
+* INFO Update SEOPress webfont
+* INFO Add Validate my schema button for Structured Data Types metabox (PRO)
+* FIX PHP Fatal error: Uncaught ArgumentCountError: Too few arguments to function get_category_link(), 0 passed in /wp-content/plugins/wp-seopress-pro/inc/functions/options-breadcrumbs.php on line 488
+* FIX Increase timeout to generate Google Snippet Preview (5 to 15 seconds), useful on slow server
+* FIX Stop words now only applied when post is published, not updated
+* FIX Stop words and Polylang conflict
+* FIX User consent message bar with caching plugins
+* FIX Quick edit in post types
+* FIX Bulk edit for custom post types
+* FIX Logo preview in Structured Data Types
+* FIX Words counter column in post type list
+* FIX Breadcrumbs with custom search URL (PRO)
+* FIX Breadcrumbs with default search URL
+* FIX Notice Trying to get property 'labels' of non-object
+* FIX Notice Trying to get property 'name' of non-object
+* FIX Notice undefined index 'seopress_google_analytics_ua'
+* FIX Notice undefined index 'seopress_google_analytics_opt_out_msg_ok'
+* FIX Notice undefined index 'seopress_google_analytics_cross_domain'
+* FIX Notice undefined variable 'seopress_local_business_type_option'
 = 3.2.6 =
 * FIX Fatal error: Uncaught Error: Call to undefined function get_current_screen()
 = 3.2.5 = 

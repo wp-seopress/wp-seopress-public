@@ -274,7 +274,7 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		    require_once ( dirname( __FILE__ ) . '/options-advanced.php'); //Advanced
 		}
 	}
-	add_action('init', 'seopress_load_advanced_admin_options', 0);
+	add_action('init', 'seopress_load_advanced_admin_options', 10);
 	function seopress_load_advanced_admin_options() {
 		if (is_admin()){
 		    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
@@ -299,6 +299,12 @@ if (seopress_get_toggle_advanced_option() =='1') {
 			}
 		}
 	}
+	add_action('init', 'seopress_load_advanced_admin_sw_options', 0); 
+	function seopress_load_advanced_admin_sw_options() {
+		if (is_admin()){
+		    require_once ( dirname( __FILE__ ) . '/options-advanced-admin-sw.php'); //Advanced (stop words)
+		}
+	}
 	//No /category/ in URL
 	function seopress_advanced_advanced_category_url_option() {
 		$seopress_advanced_advanced_category_url_option = get_option("seopress_advanced_option_name");
@@ -309,7 +315,7 @@ if (seopress_get_toggle_advanced_option() =='1') {
 			 	return $seopress_advanced_advanced_category_url_option['seopress_advanced_advanced_category_url'];
 			 }
 		}
-	};
+	}
 
 	if (seopress_advanced_advanced_category_url_option() !='') {
 		//@credits : WordPress VIP

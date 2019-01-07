@@ -86,9 +86,9 @@ function seopress_xml_sitemap_single() {
 							$internalErrors = libxml_use_internal_errors(true);
 
 						    if (function_exists('mb_convert_encoding')) {
-						    	$dom->loadHTML(mb_convert_encoding(get_post_field('post_content', $post), 'HTML-ENTITIES', 'UTF-8'));
+						    	$dom->loadHTML(mb_convert_encoding(do_shortcode(get_post_field('post_content', $post)), 'HTML-ENTITIES', 'UTF-8'));
 						    } else {
-						    	$dom->loadHTML('<?xml encoding="utf-8" ?>'.get_post_field('post_content', $post));
+						    	$dom->loadHTML('<?xml encoding="utf-8" ?>'.do_shortcode(get_post_field('post_content', $post)));
 							}
 
 							$dom->preserveWhiteSpace = false;
@@ -119,21 +119,23 @@ function seopress_xml_sitemap_single() {
 								if ($images->length>=1) {
 									foreach($images as $img) {
 								        $url = $img->getAttribute('src');
-								        //Exclude Base64 img
-										if (strpos($url, 'data:image/') === false) {
-									        if (seopress_is_absolute($url) ===true) {
-									        	//do nothing
-									        } else {
-									        	$url = get_home_url().$url;
-									        }
-									        $seopress_sitemaps .= '<image:image>';
-									        $seopress_sitemaps .= "\n";
-									       	$seopress_sitemaps .= '<image:loc>';
-											$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses($url))).']]>';
-									        $seopress_sitemaps .= '</image:loc>';
-									        $seopress_sitemaps .= "\n";
-									        $seopress_sitemaps .= '</image:image>';
-									    }
+								        if ($url !='') {
+									        //Exclude Base64 img
+											if (strpos($url, 'data:image/') === false) {
+										        if (seopress_is_absolute($url) ===true) {
+										        	//do nothing
+										        } else {
+										        	$url = get_home_url().$url;
+										        }
+										        $seopress_sitemaps .= '<image:image>';
+										        $seopress_sitemaps .= "\n";
+										       	$seopress_sitemaps .= '<image:loc>';
+												$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses($url))).']]>';
+										        $seopress_sitemaps .= '</image:loc>';
+										        $seopress_sitemaps .= "\n";
+										        $seopress_sitemaps .= '</image:image>';
+										    }
+										}
 								    }
 								}
 							}

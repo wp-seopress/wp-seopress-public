@@ -1,5 +1,5 @@
 #adminmenu div.wp-menu-image.dashicons-admin-seopress::before,#seopress-header #seopress-admin h1::before {
-    content: "\e042";
+    content: "\e800";
     font-family: seopress !important;
 }
 
@@ -10,8 +10,12 @@
 
 @font-face {
     font-family: seopress;
-    src: url(../fonts/seopress.eot?8v0bs0);
-    src: url(../fonts/seopress.eot?8v0bs0#iefix) format('embedded-opentype'),url(../fonts/seopress.ttf?8v0bs0) format('truetype'),url(../fonts/seopress.woff?8v0bs0) format('woff'),url(../fonts/seopress.svg?8v0bs0#seopress) format('svg');
+    src: url(../fonts/seopress.eot?81521271);
+    src: url(../fonts/seopress.eot?81521271#iefix) format('embedded-opentype'),
+    url(../fonts/seopress.woff?81521271) format('woff2'),
+    url(../fonts/seopress.woff?81521271) format('woff'),
+    url(../fonts/seopress.ttf?81521271) format('truetype'),
+    url(../fonts/seopress.svg?81521271#seopress) format('svg');
     font-weight: 400;
     font-style: normal;
 }
@@ -21,7 +25,7 @@
 }
 
 .icon-seopress-seopress:before {
-    content: "\e042";
+    content: "\e800";
 }
 
 #seopress_content_analysis .wrap-seopress-analysis {
@@ -427,7 +431,6 @@
     background: #12BD10;
     border-radius: 50px;
     margin-right: 10px;
-    padding: 1px;
 }
 
 #seopress_content_analysis .ui-tabs .dashicons-no-alt,#seopress_pro_cpt .dashicons-no-alt {
@@ -1184,6 +1187,10 @@ body.seopress-styles {
 
 #seopress-notifications-center .seopress-alert .impact.high {
     background: #e25950;
+}
+
+#seopress-notifications-center .seopress-alert .impact.high.info{
+    background:#0085ba;
 }
 
 #seopress-notifications-center .seopress-alert .dashicons {

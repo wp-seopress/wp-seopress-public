@@ -43,7 +43,7 @@ function seopress_do_real_preview() {
         //Get source code
         $args = array(
             'blocking' => true,
-            'timeout'  => 5,
+            'timeout'  => 15,
             'cookies'  => $cookies,
         );
 
@@ -54,7 +54,6 @@ function seopress_do_real_preview() {
         } else { //Term taxonomy
             $response = wp_remote_get(get_term_link((int)$seopress_get_the_id, $seopress_tax_name), $args);
         }
-
         //Check for error
         if ( is_wp_error( $response ) || wp_remote_retrieve_response_code($response) =='404' ) {
             $data['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');

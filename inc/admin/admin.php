@@ -650,7 +650,7 @@ class seopress_options
             ?>
             <div class="metabox-holder">
                 <div class="postbox">
-                    <h3><span><?php _e( 'Export Settings', 'wp-seopress' ); ?></span></h3>
+                    <h3><span><?php _e( 'Export SEOPress Settings', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p><?php _e( 'Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'wp-seopress' ); ?></p>
                         <form method="post">
@@ -664,7 +664,7 @@ class seopress_options
                 </div><!-- .postbox -->
 
                 <div class="postbox">
-                    <h3><span><?php _e( 'Import Settings', 'wp-seopress' ); ?></span></h3>
+                    <h3><span><?php _e( 'Import SEOPress Settings', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p><?php _e( 'Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'wp-seopress' ); ?></p>
                         <form method="post" enctype="multipart/form-data">
@@ -1198,11 +1198,12 @@ class seopress_options
                                         <?php }
                                     ?>
 
-                                    <?php if (get_option("seopress_pro_license_key") =='' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                                    <?php if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
                                         <div class="seopress-alert">
                                             <p>
                                                 <span class="dashicons dashicons-warning"></span>
                                                 <?php _e('You have to enter your licence key to get updates and support','wp-seopress'); ?>
+                                                <span class="impact high info"><?php _e('License','wp-seopress'); ?></span>
                                             </p>
                                             <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-license' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
                                         </div>
@@ -3158,7 +3159,7 @@ class seopress_options
                         'strong' => array(),
                         'em'     => array(),
                         'br'     => array(),
-                        'a'      => array('href'   => array())
+                        'a'      => array('href' => array(), 'target' => array())
                 );
                 $input[$value] = wp_kses($input[$value], $args);
             } elseif( !empty( $input[$value] ) ) {
@@ -4597,7 +4598,7 @@ class seopress_options
         $check = isset($this->options['seopress_social_accounts_youtube']) ? $this->options['seopress_social_accounts_youtube'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_youtube]" placeholder="'.esc_html__('eg: https://www.youtube.com/c/SEOPress','wp-seopress').'" aria-label="'.__('YouTube URL','wp-seopress').'" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_youtube]" placeholder="'.esc_html__('eg: https://www.youtube.com/SEOPress','wp-seopress').'" aria-label="'.__('YouTube URL','wp-seopress').'" value="%s"/>',
         esc_html( $check )
         
         );
@@ -4819,9 +4820,11 @@ class seopress_options
 
     public function seopress_google_analytics_ua_callback()
     {
+        $check = isset($this->options['seopress_google_analytics_ua']) ? $this->options['seopress_google_analytics_ua'] : NULL;
+
         printf(
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ua]" placeholder="'.esc_html__('Enter your Tracking ID (UA-XXXX-XX)','wp-seopress').'" aria-label="'.__('Enter your tracking ID','wp-seopress').'" value="%s"/>',
-        esc_html( $this->options['seopress_google_analytics_ua'])
+        esc_html( $check )
         );
 
         echo '<p class="description"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/analytics/answer/1032385?hl=en" target="_blank">'.__('Find your tracking ID','wp-seopress').'</a></p>';
@@ -4876,14 +4879,17 @@ class seopress_options
 
         echo '<a class="seopress-doc" href="'.$seopress_docs_link['support']['analytics']['consent_msg'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Hook to filter user consent message - new window','wp-seopress').'</span></a></p>';
 
-        echo '<p class="description">'.__('HTML tags allowed: strong, em, br, a href','wp-seopress').'</p>';
+        echo '<p class="description">'.__('HTML tags allowed: strong, em, br, a href / target','wp-seopress').'</p>';
+        echo '<p class="description">'.__('Shortcode allowed to get the privacy page set in WordPress settings: [seopress_privacy_page]','wp-seopress').'</p>';
     }
 
     public function seopress_google_analytics_opt_out_msg_ok_callback()
     {
+        $check = isset($this->options['seopress_google_analytics_opt_out_msg_ok']) ? $this->options['seopress_google_analytics_opt_out_msg_ok'] : NULL;
+
         printf(
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_opt_out_msg_ok]" placeholder="'.esc_html__('Accept','wp-seopress').'" aria-label="'.__('Change the button value','wp-seopress').'" value="%s"/>',
-        esc_html( $this->options['seopress_google_analytics_opt_out_msg_ok'])
+        esc_html( $check )
         );        
     }
 
@@ -4998,9 +5004,11 @@ class seopress_options
 
     public function seopress_google_analytics_cross_domain_callback()
     {
+        $check = isset($this->options['seopress_google_analytics_cross_domain']) ? $this->options['seopress_google_analytics_cross_domain'] : NULL;
+
         printf(
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cross_domain]" placeholder="'.esc_html__('Enter yours domains (eg: https://www.seopress.org/)','wp-seopress').'" value="%s" aria-label="'.__('Cross domains','wp-seopress').'"/>',
-        esc_html($this->options['seopress_google_analytics_cross_domain'])
+        esc_html($check)
         
         );
         
@@ -5046,7 +5054,7 @@ class seopress_options
 
         printf(
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_download_tracking]" placeholder="'.esc_html__('pdf|docx|pptx|zip','wp-seopress').'" aria-label="'.__('Track downloads\' clicks','wp-seopress').'" value="%s"/>',
-        esc_html( $check)
+        esc_html( $check )
         );
 
         echo '<p class="description">'. __('Separate each file type extensions with a pipe "|"','wp-seopress').'</a>
@@ -5077,7 +5085,7 @@ class seopress_options
 
         printf(
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_affiliate_tracking]" placeholder="'.esc_html__('aff|go|out','wp-seopress').'" aria-label="'.__('Track affiliate/outbound links','wp-seopress').'" value="%s"/>',
-        esc_html( $check)
+        esc_html( $check )
         );
 
         echo '<p class="description">'. __('Separate each keyword with a pipe "|"','wp-seopress').'</a>
