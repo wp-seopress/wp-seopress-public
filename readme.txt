@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 5.0
 Requires PHP: 5.4
-Stable tag: 3.3
+Stable tag: 3.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,6 +161,11 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.1 =
+* NEW Add Ukrainian hryvnia currency (PRO)
+* INFO Improvement of UI
+* FIX Rollback for executing shortcode in meta description: replace do_shortcode by strip_shortcodes
+* FIX Display meta description only if not empty
 = 3.3 =
 * NEW Add Simple Review schema (PRO)
 * NEW Update Google Page Speed to API Version 5 (PRO)
