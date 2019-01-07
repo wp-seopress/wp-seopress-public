@@ -23,6 +23,9 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			} else {
 				$msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics etc ...','wp-seopress');
 			}
+			
+			$msg = apply_filters('seopress_rgpd_message', $msg);
+
 			if (seopress_google_analytics_opt_out_msg_ok_option() !='') {
 				$consent_btn = seopress_google_analytics_opt_out_msg_ok_option();
 			} else {

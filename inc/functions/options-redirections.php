@@ -112,34 +112,3 @@ function seopress_redirections_attachments(){
 	}
 }
 add_action( 'template_redirect', 'seopress_redirections_attachments', 1 );
-
-//404 Cleaning
-function seopress_404_cron_daily($schedules) {
-	$schedules['daily'] = array(
-	  'interval' => 86400,
-	  'display' => __( 'Once per day' )
-	);
-	return $schedules;
-}
-add_filter('cron_schedules','seopress_404_cron_daily');
-
-function seopress_404_cron_schedule() {
-  if (!wp_next_scheduled('seopress_404_cron_cleaning') ) {
-    wp_schedule_event( time(), 'daily', 'seopress_404_cron_cleaning');
-  }
-}
-add_action('wp','seopress_404_cron_schedule');
-
-function seopress_404_cron_cleaning_action() {
-  global $wpdb;
-  $wpdb->query($wpdb->prepare("DELETE * FROM wp_posts as posts
-            WHERE   posts.post_type     = 'seopress_404'
-            AND posts.post_date < DATE_SUB(NOW(), INTERVAL 30 DAY)
-            AND NOT EXISTS (
-              SELECT * FROM `wp_postmeta`
-               WHERE `wp_postmeta`.`meta_key` = '_seopress_redirections_type'
-                AND `wp_postmeta`.`post_id`=posts.ID
-            );"));
-}
-add_action( 'seopress_404_cron_cleaning', 'seopress_404_cron_cleaning_action' );
-

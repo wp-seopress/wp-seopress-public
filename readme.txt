@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 3.0
+Stable tag: 3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,8 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>English</li>
 	<li>French</li>
 	<li>Spanish</li>
+	<li>German</li>
+	<li>Greek</li>
 	<li>Bulgarian</li>
 	<li>Indonesian</li>
 	<li>Italian</li>
@@ -98,7 +100,6 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Vietnamese</li>
 	<li>Romanian</li>
 	<li>Chinese</li>
-	<li>German (in progress)</li>
 	<li>Japanese (in progress)</li>
 	<li><a href="https://www.seopress.org/contact-us/">Add yours and get SEOPress PRO for free!</a></li>
 </ul>
@@ -159,6 +160,40 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.1 =
+* NEW All In One SEO importer
+* NEW JSON/LD for Breadcrumbs (PRO)
+* NEW Add German language (thanks to Nicola Stobbe)
+* NEW Add Greek language (thanks to Stratos Karavarakis)
+* NEW Add author biography tag for meta description
+* NEW Add seopress_404_cleaning_query hook to filter 404 cleaning query (PRO)
+* NEW Add 'seopress_rgpd_message' hook to filter user consent message (RGPD)
+* NEW Add Valid from / Image / Description in Event data type (PRO)
+* NEW Add new types of Events for Structured Data types (PRO)
+* NEW Add Indian Rupee / Chilean Pesos / Vietnamese đồng currency to Product data type (PRO)
+* INFO Complete refactoring of the breadcrumb trail: more flexible, more efficient
+* INFO Add link to post type archive in SEO > Titles & metas > Archives (if has_archive is true)
+* INFO Remove Whois tool
+* INFO Change default ItemCondition from UsedCondition to NewCondition for Product schema (PRO)
+* INFO Improve Yoast importer tool
+* INFO Improve Google Snippet Preview UI
+* INFO Add date picker in Event data type to improve UX/UI (PRO)
+* INFO Improve Reset License action
+* INFO Improve UI
+* INFO Improve performance
+* FIX Undefined index: responseCode
+* FIX Post update messages if 404 monitoring is on
+* FIX Undefined variable: seopress_404_test
+* FIX 404 cleaning after 30 days (PRO)
+* FIX Ping Google manually link
+* FIX Disable News Sitemap if green toggle off
+* FIX Some strings translation / wrong text domain
+* FIX TechArticle selected value in admin
+* FIX Fixing updater / license "the link has expired"
+* FIX If default search parameter is empty, do not display quotes in breadcrumbs / meta title
+* FIX Calculation of title length / meta description for content analysis
+* FIX Use OG if no Twitter Cards
+* FIX OG/Twitter cards thumbnail if Your latest posts is set for homepage
 = 3.0 =
 * NEW 404 monitoring will now automatically exclude crawlers (robots/spiders)
 * NEW Hide SEO tools option in SEOPress dashboard page

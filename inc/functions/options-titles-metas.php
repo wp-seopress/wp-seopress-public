@@ -281,9 +281,8 @@ function seopress_titles_the_title() {
 	$get_search_query ='';
 	if (get_search_query() !='') {
 		$get_search_query = '"'.get_search_query().'"';
-	} else {
-		$get_search_query = esc_attr('" "');
 	}
+	
 	$get_search_query = apply_filters('seopress_get_search_query', $get_search_query);
 
 	if ($seopress_excerpt !='') {
@@ -395,7 +394,6 @@ function seopress_titles_the_title() {
 		$woo_single_cat_html,
 		$woo_single_tag_html,
 		$seopress_get_the_excerpt,
-		date_i18n('F Y'),
 		date_i18n('j'),
 		date_i18n('F'),
 		date('Y'),
@@ -422,6 +420,10 @@ function seopress_titles_the_title() {
 			$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title);
 		}
 	} elseif ( is_home() && (get_option( 'show_on_front' ) =='posts')) { //YOUR LATEST POSTS
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active( 'polylang/polylang.php' ) || is_plugin_active( 'polylang-pro/polylang.php' )) {
+
+		}
 		if (seopress_titles_home_site_title_option() !='') {
 			$seopress_titles_the_title = esc_attr(seopress_titles_home_site_title_option());
 
@@ -666,6 +668,11 @@ function seopress_titles_the_description_content() {
 		}
 	}
 
+	$author_bio ='';
+	if (get_the_author_meta('description') !='') {
+		$author_bio = esc_html(get_the_author_meta('description'));
+	}
+
 	$seopress_titles_template_variables_array = array(
 		'%%sitetitle%%', 
 		'%%tagline%%',
@@ -697,6 +704,7 @@ function seopress_titles_the_description_content() {
 		'%%currentyear%%',
 		'%%currentdate%%',
 		'%%currenttime%%',
+		'%%author_bio%%',
 	);
 	$seopress_titles_template_replace_array = array(
 		get_bloginfo('name'), 
@@ -724,12 +732,12 @@ function seopress_titles_the_description_content() {
 		$woo_single_cat_html,
 		$woo_single_tag_html,
 		$seopress_get_the_excerpt,
-		date_i18n('F Y'),
 		date_i18n('j'),
 		date_i18n('F'),
 		date('Y'),
 		date_i18n( get_option( 'date_format' )),
 		current_time(get_option( 'time_format' )),
+		$author_bio,
 	);
 
 	if ( is_front_page() && is_home() && get_post_meta($post->ID,'_seopress_titles_desc',true) =='' ) { //HOMEPAGE

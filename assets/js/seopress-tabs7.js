@@ -48,32 +48,6 @@ jQuery(document).ready(function(){
     });
 });
 
-//Whois email alert
-jQuery(document).ready(function(){
-	jQuery('#seopress-whois-alert').on('click', function() {
-		jQuery.ajax({
-			method : 'GET',
-			url : seopressAjaxWhois.seopress_whois_alert,
-			data : {
-				action: 'seopress_whois_alert',
-				_ajax_nonce: seopressAjaxWhois.seopress_nonce,
-			},
-			success : function( data ) {
-				jQuery('#seopress-whois-alert').removeAttr("disabled");
-				jQuery( '#spinner-whois.spinner' ).css( "visibility", "hidden" );
-				jQuery( '.seopress-whois-alert.log' ).html('Alert successfully scheduled!');
-			},
-		});
-	});
-});
-jQuery(document).ready(function(){
-	jQuery('#seopress-whois-alert').on('click', function() {
-		jQuery(this).attr("disabled", "disabled");
-		jQuery( '#spinner-whois.spinner' ).css( "visibility", "visible" );
-		jQuery( '#spinner-whois.spinner' ).css( "float", "none" );
-	});
-});
-
 //Request Alexa Rank
 jQuery(document).ready(function(){
 	jQuery('#seopress-request-alexa-rank').on('click', function() {

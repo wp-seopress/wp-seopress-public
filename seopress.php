@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.0
+Version: 3.1
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -36,7 +36,6 @@ if ( !function_exists( 'add_action' ) ) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Hooks activation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 function seopress_activation() {
 	add_option( 'seopress_activated', 'yes' );
     flush_rewrite_rules();
@@ -54,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.0' ); 
+define( 'SEOPRESS_VERSION', '3.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,13 +144,6 @@ function seopress_add_admin_options_scripts($hook) {
             'seopress_request_alexa_rank' => admin_url( 'admin-ajax.php'),
         );
         wp_localize_script( 'seopress-reverse-ajax', 'seopressAjaxAlexa', $seopress_request_alexa_rank );
-
-        //Whois
-        $seopress_whois_alert = array(
-            'seopress_nonce' => wp_create_nonce('seopress_whois_alert_nonce'),
-            'seopress_whois_alert' => admin_url( 'admin-ajax.php'),
-        );
-        wp_localize_script( 'seopress-reverse-ajax', 'seopressAjaxWhois', $seopress_whois_alert );
     }
 
     //Migration
@@ -162,7 +154,13 @@ function seopress_add_admin_options_scripts($hook) {
             'seopress_nonce' => wp_create_nonce('seopress_yoast_migrate_nonce'),
             'seopress_yoast_migration' => admin_url( 'admin-ajax.php'),
         );
-        wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxYoastMigrate', $seopress_yoast_migrate ); 
+        wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxYoastMigrate', $seopress_yoast_migrate );
+
+        $seopress_aio_migrate = array(
+            'seopress_nonce' => wp_create_nonce('seopress_aio_migrate_nonce'),
+            'seopress_aio_migration' => admin_url( 'admin-ajax.php'),
+        );
+        wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxAIOMigrate', $seopress_aio_migrate ); 
     }
 
     //Tabs
@@ -348,7 +346,6 @@ function seopress_get_post_types() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Get all registered custom taxonomies
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 function seopress_get_taxonomies() {
     $args = array(
         'show_ui' => true,

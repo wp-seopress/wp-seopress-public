@@ -1,0 +1,3061 @@
+# Translation of Plugins - SEOPress - Stable (latest release) in Greek
+# This file is distributed under the same license as the Plugins - SEOPress - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-07-26 18:54+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.0.6\n"
+"Language: el_GR\n"
+"Project-Id-Version: Plugins - SEOPress - Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+
+#. Author of the plugin/theme
+msgid "Benjamin Denis"
+msgstr "Benjamin Denis"
+
+#. Description of the plugin/theme
+msgid "The best plugin for SEO."
+msgstr "Το καλύτερο πρόσθετο για SEO."
+
+#: inc/admin/admin.php:5835 inc/admin/admin.php:5870
+msgid "Hook to filter Structured data types metaboxe call by post type - new window"
+msgstr "Αγκιστρώστε για φιλτράρισμα δομημένα πεδία δεδομένων ανά τύπο αλληλογραφίας - νέο παράθυρο"
+
+#: inc/admin/admin.php:5591
+msgid "Hide Useful Links in SEOPress dashboard page"
+msgstr "Απόκρυψη χρήσιμων συνδέσεων στη σελίδα του πίνακα ελέγχου SEOPress"
+
+#: inc/admin/admin.php:5574
+msgid "Hide SEO tools in SEOPress Dashboard page"
+msgstr "Απόκρυψη εργαλείων SEO στη σελίδα του πίνακα ελέγχου SEOPress"
+
+#: inc/admin/admin.php:5479
+msgid "If your site is already verified in <strong>Bing Webmaster tools</strong>, you can leave this field empty."
+msgstr "Εάν ο ιστότοπός σας έχει ήδη επαληθευτεί στα <strong> εργαλεία για τα Bing Webmaster</strong>, μπορείτε να αφήσετε αυτό το πεδίο κενό."
+
+#: inc/admin/admin.php:5466
+msgid "If your site is already verified in <strong>Google Search Console</strong>, you can leave this field empty."
+msgstr "Εάν ο ιστότοπός σας έχει ήδη επαληθευτεί στην <strong>Google Search Console</strong>, μπορείτε να αφήσετε αυτό το πεδίο κενό."
+
+#: inc/admin/admin.php:4715
+msgid "Change the button value"
+msgstr "Αλλάξτε την τιμή του κουμπιού"
+
+#: inc/admin/admin.php:4693
+msgid "Hook to add custom tracking code with user consent - new window"
+msgstr "Αγκιστρώστε για προσθήκη προσαρμοσμένου κώδικα παρακολούθησης με τη συγκατάθεση χρηστών - νέο παράθυρο"
+
+#: inc/admin/admin.php:4683
+msgid "User roles excluded from tracking will not see the consent message.<br> If you use a caching plugin, you have to exclude this JS file in your settings: <br><strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</strong>"
+msgstr "Οι ρόλοι χρηστών που εξαιρούνται από την παρακολούθηση δεν θα βλέπουν το μήνυμα συγκατάθεσης. <br> Εάν χρησιμοποιείτε ένα πρόσθετο cache, πρέπει να αποκλείσετε αυτό το JS αρχείο στις ρυθμίσεις σας: <br> <strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</strong>"
+
+#: inc/admin/admin.php:4080
+msgid "Guide to enable XML video sitemaps - new window"
+msgstr "Οδηγός για να ενεργοποιήσετε τους χάρτες ιστοτόπου XML - νέο παράθυρο"
+
+#: inc/admin/admin.php:3226
+msgid "Learn more on Google official website."
+msgstr "Μάθετε περισσότερα στην επίσημη ιστοσελίδα της Google"
+
+#: inc/admin/admin.php:2964
+msgid "Hide Useful Links"
+msgstr "Απόκρυψη χρήσιμων συνδέσμων"
+
+#: inc/admin/admin.php:2956
+msgid "Hide SEO tools"
+msgstr "Απόκρυψη εργαλείων SEO"
+
+#: inc/admin/admin.php:2948
+msgid "Hide Notifications Center"
+msgstr "Απόκρυψη του κέντρου ειδοποιήσεων"
+
+#: inc/admin/admin.php:2736 inc/admin/admin.php:4878
+msgid "Track downloads' clicks"
+msgstr "Παρακολουθήστε τα κλικ λήψεων"
+
+#: inc/admin/admin.php:2644
+msgid "Accept button for user tracking"
+msgstr "Πλήκτρο αποδοχής για την παρακολούθηση χρηστών"
+
+#: inc/admin/admin.php:1384
+msgid "XML / Image / Video / HTML Sitemap"
+msgstr "XML / Image / Video / HTML χάρτης ιστοτόπου"
+
+#: inc/admin/admin.php:742
+msgid "By clicking Reset Notices, all notices in the notifications center will be set to their initial status."
+msgstr "Κάνοντας κλικ στην επιλογή Επαναφορά ειδοποιήσεων, όλες οι ειδοποιήσεις στο κέντρο ειδοποιήσεων θα ρυθμιστούν στην αρχική τους κατάσταση."
+
+#: inc/admin/admin.php:470
+msgid "Twitter (Twitter card)"
+msgstr "Twitter (κάρτα Twitter)"
+
+#: inc/admin/admin.php:469
+msgid "Facebook (Open Graph)"
+msgstr "Facebook (ανοικτό γράφημα)"
+
+#: inc/admin/admin.php:214
+msgid "%%archive_date%%"
+msgstr "%%archive_date%%"
+
+#: inc/admin/admin-metaboxes-form.php:274
+msgid "Need help with your redirections? Read our guide."
+msgstr "Χρειάζεστε βοήθεια με τις ανακατευθύνσεις σας; Διαβάστε τον οδηγό μας."
+
+#: inc/admin/admin-metaboxes-form.php:181
+msgid "You can not uncheck a parameter? This is normal, it is most likely defined in the global settings of the extension."
+msgstr "Δεν μπορείτε να καταργήσετε την επιλογή μιας παραμέτρου; Αυτό είναι φυσιολογικό, πιθανότατα ορίζεται από γενικές ρυθμίσεις της επέκτασης."
+
+#: inc/admin/admin-metaboxes-form.php:116
+msgid "Post Excerpt"
+msgstr "Απόσπασμα άρθρου"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:26
+msgid "Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique."
+msgstr "Καταχωρίστε μια λέξη-κλειδί ή μια φράση για να βρείτε τις 10 κορυφαίες προτάσεις Google αμέσως. Αυτό είναι χρήσιμο εάν θέλετε να εργαστείτε με την τεχνική της μακράς ουράς."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:24
+msgid "Google suggestions"
+msgstr "Προτάσεις Google"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:20
+msgid "To get the most accurate analysis, save your post first."
+msgstr "Για να έχετε πιο ακριβή ανάλυση, αποθηκεύστε πρώτα την ανάρτησή σας."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:11
+msgid "Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them."
+msgstr "Ξεχωρίστε τις  λέξεις-κλειδιά προορισμού με κόμματα. Μην χρησιμοποιείτε κενά μετά τα κόμματα, εκτός αν θέλετε να τα συμπεριλάβετε."
+
+#: inc/admin/admin.php:4070
+msgid "Enable Video Sitemaps"
+msgstr "Ενεργοποίηση των χάρτων ιστοτόπου (sitemaps) βίντεο"
+
+#: inc/admin/admin.php:4042
+msgid "Enable Image Sitemaps (standard images, image galleries, featured image, WooCommerce product images)"
+msgstr "Ενεργοποίηση χαρτών ιστοτόπων (sitemaps) εικόνας (τυπικές εικόνες, γκαλερί εικόνων, χαρακτηρισμένη εικόνα, εικόνες προϊόντων WooCommerce)"
+
+#: inc/admin/admin.php:2286
+msgid "Enable XML Video Sitemaps"
+msgstr "Ενεργοποίηση των χάρτων ιστοτόπου XML βίντεο"
+
+#: inc/admin/admin.php:1006
+msgid "Rate us!"
+msgstr "Βαθμολογήστε μας!"
+
+#: inc/admin/admin.php:1004
+msgid "You like SEOPress? Please help us by rating us 5 stars!"
+msgstr "Σας αρέσει το SEOPress; Παρακαλώ βοηθήστε μας βαθμολογώντας μας με 5 αστέρια!"
+
+#: inc/admin/admin-metaboxes-form.php:398
+msgid "Add video"
+msgstr "Προσθήκη βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:391
+msgid "Remove video"
+msgstr "Κατάργηση βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:389
+msgid "The video will be available only to users with SafeSearch turned off."
+msgstr "Το βίντεο θα είναι διαθέσιμο μόνο σε χρήστες που έχουν απενεργοποιήσει την Ασφαλής Αναζήτηση."
+
+#: inc/admin/admin-metaboxes-form.php:387
+msgid "NOT family friendly?"
+msgstr "ΔΕΝ είναι φιλικό προς την οικογένεια;"
+
+#: inc/admin/admin-metaboxes-form.php:382
+msgid "256 characters max., usually a video will belong to a single category, separate categories with commas. Default: first post category if available."
+msgstr "256 χαρακτήρες μέγιστο, συνήθως ένα βίντεο θα ανήκει σε μια μόνο κατηγορία, ξεχωρίστε τις κατηγορίες με κόμματα. Προεπιλογή: η πρώτη κατηγορία άρθρου αν είναι διαθέσιμη."
+
+#: inc/admin/admin-metaboxes-form.php:381
+msgid "Enter your video categories"
+msgstr "Εισαγάγετε τις κατηγορίες βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:380
+#: inc/admin/admin-metaboxes-form.php:381
+msgid "Video categories"
+msgstr "Κατηγορίες βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:377
+msgid "32 tags max., separate tags with commas. Default: target keywords + post tags if available."
+msgstr "32 ετικέτες μέγιστο, χωρισμένες με κόμματα.Προεπιλογή: λέξεις-κλειδιά + ετικέτες άρθρων, αν υπάρχουν."
+
+#: inc/admin/admin-metaboxes-form.php:376
+msgid "Enter your video tags"
+msgstr "Καταχωρίστε τις ετικέτες βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:375
+#: inc/admin/admin-metaboxes-form.php:376
+msgid "Video tags"
+msgstr "Ετικέτες βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:372
+msgid "Number of views"
+msgstr "Αριθμός προβολών"
+
+#: inc/admin/admin-metaboxes-form.php:371
+#: inc/admin/admin-metaboxes-form.php:372
+msgid "View count"
+msgstr "Εμφάνιση μέτρησης"
+
+#: inc/admin/admin-metaboxes-form.php:368
+msgid "Allowed values are float numbers in the range 0.0 to 5.0."
+msgstr "Οι επιτρεπόμενες τιμές είναι αριθμοί μεταξύ τιμών από 0,0 έως 5,0."
+
+#: inc/admin/admin-metaboxes-form.php:367
+msgid "Video rating"
+msgstr "Βαθμολογία βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:366
+msgid "Video Rating"
+msgstr "Βαθμολογία βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:363
+msgid "The duration of the video in seconds. Value must be between 0 and 28800 (8 hours)."
+msgstr "Η διάρκεια του βίντεο σε δευτερόλεπτα. Η τιμή πρέπει να είναι μεταξύ 0 και 28800 (8 ώρες)."
+
+#: inc/admin/admin-metaboxes-form.php:362
+msgid "Video duration"
+msgstr "Διάρκεια βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:362
+msgid "Duration in seconds"
+msgstr "Διάρκεια σε δευτερόλεπτα"
+
+#: inc/admin/admin-metaboxes-form.php:361
+msgid "Video Duration (recommended)"
+msgstr "Διάρκεια βίντεο (συνιστάται)"
+
+#: inc/admin/admin-metaboxes-form.php:358
+msgid "Minimum size: 160x90px (1920x1080 max), JPG, PNG or GIF formats. Default: your post featured image."
+msgstr "Ελάχιστο μέγεθος: 160x90px (1920x1080 max), JPG, PNG ή GIF. Προεπιλογή: η προεπιλεγμένη εικόνα του άρθρου σας."
+
+#: inc/admin/admin-metaboxes-form.php:357
+msgid "Video Thumbnail"
+msgstr " Μικρογραφία βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:356
+msgid "Select your video thumbnail"
+msgstr "Επιλογή μικρογραφίας βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:355
+msgid "Video Thumbnail (required)"
+msgstr "Μικρογραφία βίντεο (απαιτείται)"
+
+#: inc/admin/admin-metaboxes-form.php:352
+msgid "2048 characters max.; default: meta description. If not available, use the beginning of the post content."
+msgstr "2048 χαρακτήρες μέγιστο, προεπιλογή: περιγραφή meta,και αν δεν είναι διαθέσιμη η αρχή του περιεχομένου του άρθρου."
+
+#: inc/admin/admin-metaboxes-form.php:351
+msgid "Video description"
+msgstr "Περιγραφή του βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:351
+msgid "Enter your video description"
+msgstr "Εισαγάγετε την περιγραφή του βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:350
+msgid "Video Description (required)"
+msgstr "Περιγραφή βίντεο (απαιτείται)"
+
+#: inc/admin/admin-metaboxes-form.php:347
+msgid "Default: title tag, if not available, post title."
+msgstr "Προεπιλογή: ετικέτα τίτλου, και αν δεν είναι διαθέσιμη, τίτλος άρθρου."
+
+#: inc/admin/admin-metaboxes-form.php:346
+msgid "Video title"
+msgstr "Τίτλος βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:346
+msgid "Enter your video title"
+msgstr "Εισαγάγετε τον τίτλο βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:345
+msgid "Video Title (required)"
+msgstr "Τίτλος βίντεο (απαιτείται)"
+
+#: inc/admin/admin-metaboxes-form.php:341
+msgid "NOT an external video (eg: video hosting on YouTube, Vimeo, Wistia...)? Check this if your video is hosting on this server."
+msgstr "ΟΧΙ ένα εξωτερικό βίντεο (π.χ.: φιλοξενία βίντεο στο YouTube, Vimeo, Wistia ...); Ελέγξτε αν το βίντεο σας φιλοξενείται σε αυτόν τον διακομιστή."
+
+#: inc/admin/admin-metaboxes-form.php:336
+msgid "Video URL"
+msgstr "Διεύθυνση URL βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:336
+msgid "Enter your video URL"
+msgstr "Εισαγάγετε τη διεύθυνση URL του βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:335
+msgid "Video URL (required)"
+msgstr "Διεύθυνση URL βίντεο (απαιτείται)"
+
+#: inc/admin/admin-metaboxes-form.php:331
+msgid "Video "
+msgstr "Βίντεο"
+
+#: inc/admin/admin-metaboxes-form.php:312
+msgid "If your post is set to noindex, it will be automatically excluded from the sitemap."
+msgstr "Εάν το άρθρο σας οριστεί σε noindex, θα αποκλειστεί αυτόματα από τον χάρτη ιστότοπου."
+
+#: inc/admin/admin-metaboxes-form.php:310
+msgid "Exclude this post from Video Sitemap?"
+msgstr "Εξαίρεση αυτού του άρθρου από τον Χάρτη ιστοτόπου βίντεο;"
+
+#: inc/admin/admin-metaboxes-form.php:229 inc/admin/admin.php:4616
+msgid "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max."
+msgstr "Ελάχιστο μέγεθος: 144x144px (300x157px με δυνατότητα μεγάλης κάρτας), ιδανική αναλογία 1: 1 (2: 1 με μεγάλη κάρτα), μέγιστη τιμή 5mb."
+
+#: inc/admin/admin-metaboxes-form.php:211 inc/admin/admin.php:4525
+msgid "Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max."
+msgstr "Ελάχιστο μέγεθος: 200x200px, ιδανικός λόγος 1,91: 1, 8mb μέγιστο."
+
+#: inc/admin/admin-metaboxes-form.php:73
+msgid "Video Sitemap"
+msgstr "Χάρτης ιστοτόπου βίντεο"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:28
+msgid "Get suggestions!"
+msgstr "Λάβετε προτάσεις!"
+
+#: inc/admin/admin.php:1177
+msgid "No domain found."
+msgstr "Δεν βρέθηκε o τομέας."
+
+#: inc/admin/admin.php:1172
+msgid "No scrape."
+msgstr "Απενεργοποίηση λειτουργίας scrape."
+
+#: inc/admin/admin.php:1167
+msgid "Not found"
+msgstr "Δεν βρέθηκε"
+
+#: inc/functions/options-google-analytics.php:32
+msgid "X"
+msgstr "Χ"
+
+#: inc/admin/admin.php:4715 inc/functions/options-google-analytics.php:29
+msgid "Accept"
+msgstr "Αποδοχή"
+
+#: inc/functions/options-google-analytics.php:24
+msgid "By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics etc ..."
+msgstr "Επισκεπτόμενοι τον ιστότοπό μας, αποδέχεστε την πολιτική απορρήτου σχετικά με τα cookies, τα στατιστικά στοιχεία παρακολούθησης κ.λπ."
+
+#: inc/admin/admin.php:4709
+msgid "HTML tags allowed: strong, em, br, a href"
+msgstr "Επιτρεπόμενες ετικέτες HTML: strong, em, br, a href"
+
+#: inc/admin/admin.php:4706
+msgid "This message will only appear if request user's consent is enabled."
+msgstr "Αυτό το μήνυμα θα εμφανιστεί μόνο αν είναι ενεργοποιημένη η συγκατάθεση του χρήστη."
+
+#: inc/admin/admin.php:4706
+msgid "Enter your message (HTML allowed)"
+msgstr "Εισαγάγετε το μήνυμά σας (επιτρέπεται HTML)"
+
+#: inc/admin/admin.php:4681
+msgid "Request user's consent for analytics tracking (required by GDPR)"
+msgstr "Ζητήστε τη συγκατάθεση του χρήστη για την παρακολούθηση των αναλυτικών στοιχείων (απαιτείται από το GDPR)"
+
+#: inc/admin/admin.php:2636
+msgid "Consent message for user tracking"
+msgstr "Συμφωνητικό μήνυμα για την παρακολούθηση χρηστών"
+
+#: inc/admin/admin.php:2628
+msgid "Google Analytics tracking opt-out"
+msgstr "Απόρριψη παρακολούθησης του Google Analytics"
+
+#: inc/admin/admin.php:1857
+msgid "Customize your permalinks."
+msgstr "Προσαρμόστε τους μόνιμους συνδέσμους σας."
+
+#: inc/admin/admin-header.php:142 inc/admin/admin.php:1856
+msgid "URL Rewriting"
+msgstr "Επανεγγραφή διεύθυνσης URL"
+
+#: inc/admin/admin.php:732
+msgid "<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted."
+msgstr "<strong> ΠΡΟΕΙΔΟΠΟΙΗΣΗ: </strong> Η μετεγκατάσταση θα διαγράψει όλα τα δεδομένα SEOPress και τα μεταδεδομένα. Ορισμένες δυναμικές μεταβλητές δεν θα ερμηνευθούν."
+
+#: inc/admin/admin.php:675
+msgid "Import completed!"
+msgstr "Η εισαγωγή ολοκληρώθηκε!"
+
+#: inc/admin/admin.php:227
+msgid "Current time"
+msgstr "Τρέχουσα ώρα"
+
+#: inc/admin/admin.php:227
+msgid "%%currenttime%%"
+msgstr "%%currenttime%%"
+
+#: inc/admin/admin.php:226
+msgid "Current date"
+msgstr "Τρέχουσα ημερομηνία"
+
+#: inc/admin/admin.php:226
+msgid "%%currentdate%%"
+msgstr "%%currentdate%%"
+
+#: inc/admin/admin.php:225
+msgid "Current year"
+msgstr "Τρέχων έτος"
+
+#: inc/admin/admin.php:225
+msgid "%%currentyear%%"
+msgstr "%%currentyear%%"
+
+#: inc/admin/admin.php:224
+msgid "Current month"
+msgstr "Τρέχων μήνας"
+
+#: inc/admin/admin.php:224
+msgid "%%currentmonth%%"
+msgstr "%%currentmonth%%"
+
+#: inc/admin/admin.php:223
+msgid "Current day"
+msgstr "Τρέχων ημέρα"
+
+#: inc/admin/admin.php:223
+msgid "%%currentday%%"
+msgstr "%%currentday%%"
+
+#: inc/admin/admin.php:219
+msgid "Custom term taxonomy from post, page or post type"
+msgstr "Προσαρμοσμένος όρος κατηγορίας από άρθρο, σελίδα ή τύπο άρθρου"
+
+#: inc/admin/admin.php:219
+msgid "%%_ct_your_custom_taxonomy_slug%%"
+msgstr "%%_ct_your_custom_taxonomy_slug%%"
+
+#: inc/admin/admin.php:217
+msgid "Year Archive title"
+msgstr "Τίτλος έτους αρχείου"
+
+#: inc/admin/admin.php:217
+msgid "%%archive_date_year%%"
+msgstr "%%archive_date_year%%"
+
+#: inc/admin/admin.php:216
+msgid "Month Archive title"
+msgstr "Τίτλος μήνα αρχείου"
+
+#: inc/admin/admin.php:216
+msgid "%%archive_date_month%%"
+msgstr "%%archive_date_month%%"
+
+#: inc/admin/admin.php:215
+msgid "Day Archive date"
+msgstr "Ημέρα αρχείου"
+
+#: inc/admin/admin.php:215
+msgid "%%archive_date_day%%"
+msgstr "%%archive_date_day%%"
+
+#: inc/admin/admin.php:213
+msgid "Archive title"
+msgstr "Τίτλος αρχείου"
+
+#: inc/admin/admin.php:213
+msgid "%%archive_title%%"
+msgstr "%%archive_title%%"
+
+#: inc/admin/admin-metaboxes-form.php:217
+msgid "Preview your Twitter card using the official validator"
+msgstr "Προβάλετε την κάρτα Twitter χρησιμοποιώντας τον επίσημο επικυρωτή"
+
+#: inc/functions/options-advanced-admin.php:725
+msgid "%s redirections disabled."
+msgid_plural "%s redirections disabled."
+msgstr[0] "%s redirections disabled."
+msgstr[1] "%s redirections disabled."
+
+#: inc/functions/options-advanced-admin.php:701
+msgid "Disable redirection"
+msgstr "Απενεργοποίηση ανακατεύθυνσης"
+
+#: inc/functions/options-advanced-admin.php:687
+msgid "%s redirections enabled."
+msgid_plural "%s redirections enabled."
+msgstr[0] "%s redirections enabled."
+msgstr[1] "%s redirections enabled."
+
+#: inc/functions/options-advanced-admin.php:662
+msgid "Enable redirection"
+msgstr "Ενεργοποίηση ανακατεύθυνσης"
+
+#: inc/functions/options-advanced-admin.php:156
+msgid "Redirect URL"
+msgstr "Διεύθυνση URL ανακατεύθυνσης"
+
+#: inc/functions/options-advanced-admin.php:153
+msgid "Redirect?"
+msgstr "Ανακατεύθυνση"
+
+#: inc/admin/admin.php:5659
+msgid "Add redirection URL column"
+msgstr "Προσθήκη στήλης διεύθυνσης URL ανακατεύθυνσης"
+
+#: inc/admin/admin.php:5642
+msgid "Add redirection enable column"
+msgstr "Προσθήκη στήλης ενεργοποίησης ανακατεύθυνσης"
+
+#: inc/admin/admin.php:2996
+msgid "Show Redirect URL column in post types"
+msgstr "Εμφάνιση στήλης διεύθυνσης URL ανακατεύθυνσης σε άρθρα"
+
+#: inc/admin/admin.php:2988
+msgid "Show Redirection Enable column in post types"
+msgstr "Εμφάνιση στήλης ενεργοποιμένης ανακατεύθυνσης σε άρθρα"
+
+#: inc/admin/admin.php:707
+msgid "Export all redirections for this site as a .csv file. This allows you to easily import the redirections into another site, to Excel / Google Sheets..."
+msgstr "Εξαγωγή όλων των ανακατευθύνσεων για αυτόν τον ιστότοπο ως αρχείο .csv. Αυτό σας επιτρέπει να εισάγετε εύκολα τις ανακατευθύνσεις σε έναν άλλο ιστότοπο, στο Excel / Google Sheets"
+
+#: inc/admin/admin.php:705
+msgid "Export Redirections"
+msgstr "Εξαγωγή ανακατευθύνσεων"
+
+#: inc/admin/admin-metaboxes-form.php:122
+msgid "This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview."
+msgstr "Αυτή είναι η εμφάνιση της σελίδας σας στα αποτελέσματα αναζήτησης Google. Πρέπει να δημοσιεύσετε το άρθρο σας για να λάβετε την προεπισκόπηση Snippet Google."
+
+#: inc/admin/admin.php:1728
+msgid "View your robots.txt"
+msgstr "Προβολή του αρχείου σας robots.txt"
+
+#: inc/functions/options-advanced-admin.php:866
+msgid "The description is not prominent by default; however, some themes may show it."
+msgstr "Η περιγραφή δεν εμφανίζεται από προεπιλογή. Ωστόσο, μερικά θέματα μπορεί να τη δείξουν."
+
+#: inc/functions/options-advanced-admin.php:857
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: inc/admin/admin.php:5330
+msgid "Add TINYMCE editor to term description"
+msgstr "Προσθήκη του επεξεργαστή κειμένου στη περιγραφή όρων"
+
+#: inc/admin/admin.php:4052
+msgid "Guide to enable XML image sitemaps - new window"
+msgstr "Οδηγός για την ενεργοποίηση των χάρτων ιστοτόπου εικόνας XML - νέο παράθυρο"
+
+#: inc/admin/admin.php:4025
+msgid "Guide to enable XML Sitemaps - new window"
+msgstr "Οδηγός για την ενεργοποίηση των χάρτων ιστοτόπου XML - νέο παράθυρο"
+
+#: inc/admin/admin.php:3271
+msgid "Guide to create custom dimensions in Google Analytics - new window"
+msgstr "Guide to create custom dimensions in Google Analytics - new window"
+
+#: inc/admin/admin.php:3210 inc/admin/admin.php:4108
+msgid "Guide to enable a HTML Sitemap - new window"
+msgstr "Οδηγός για την ενεργοποίηση των χαρτών ιστοτόπου HTML - νέο παράθυρο"
+
+#: inc/admin/admin.php:2827
+msgid "Add WP Editor to taxonomy description textarea"
+msgstr "Προσθέστε τον επεξεργαστή WP στην περιγραφή ταξινόμησης πεδίο κειμένου"
+
+#: inc/admin/admin.php:1944
+msgid "Guide to activate SEOPress PRO - new window"
+msgstr "Οδηγός για την ενεργοποίηση του SEOPress PRO - νέο παράθυρο"
+
+#: inc/admin/admin.php:1923
+msgid "Guide to Export/Import/Reset settings - new window"
+msgstr "Οδηγός για την εξαγωγή / εισαγωγή / επαναφορά ρυθμίσεων - νέο παράθυρο"
+
+#: inc/admin/admin.php:1826
+msgid "Guide to enable 301 redirections and 404 monitoring - new window"
+msgstr "Οδηγός για να ενεργοποιήσετε 301 ανακατευθύνσεις και 404 παρακολούθηση - νέο παράθυρο"
+
+#: inc/admin/admin.php:1758
+msgid "Guide to edit your robots.txt file - new window"
+msgstr "Οδηγός για την επεξεργασία του αρχείου robots.txt - νέο παράθυρο"
+
+#: inc/admin/admin.php:1717
+msgid "Guide to analyze your site with Google Page Speed - new window"
+msgstr "Οδηγός για την ανάλυση του ιστότοπού σας με το Google Page Speed ​​- νέο παράθυρο"
+
+#: inc/admin/admin.php:1697
+msgid "Guide to enable Breadcrumbs - new window"
+msgstr "Οδηγός για να ενεργοποιήσετε τα Breadcrumbs - νέο παράθυρο"
+
+#: inc/admin/admin.php:1490
+msgid "Guide to getting started with Google Analytics - new window"
+msgstr "Οδηγός για να ξεκινήσετε με το Google Analytics - νέο παράθυρο"
+
+#: inc/admin/admin.php:1452
+msgid "Guide to enable Google Knowledge Graph - new window"
+msgstr "Οδηγός για την ενεργοποίηση του Google Knowledge Graph - νέο παράθυρο"
+
+#: inc/admin/admin.php:1414
+msgid "Guide to enable your XML Sitemaps - new window"
+msgstr "Οδηγός για την ενεργοποίηση των XML χαρτών ιστοτόπου - νέο παράθυρο"
+
+#: inc/admin/admin.php:1376
+msgid "Guide to manage your titles and meta descriptions - new window"
+msgstr "Οδηγός για τη διαχείριση των τίτλων και των μετα-περιγραφών σας - νέο παράθυρο"
+
+#: inc/admin/admin.php:276 inc/admin/admin.php:282
+msgid "Read our guide"
+msgstr "Διαβάστε τον οδηγό μας"
+
+#: inc/admin/admin.php:268
+msgid "How-to"
+msgstr "Οδηγίες"
+
+#: inc/admin/admin.php:263
+msgid "Watch our video to learn how to connect your WordPress site with Google Analytics and get statistics right in your dashboard (PRO only)."
+msgstr "Παρακολουθήστε το βίντεό μας για να μάθετε πώς να συνδέετε τον ιστότοπό σας WordPress με το Google Analytics και να λαμβάνετε στατιστικά στοιχεία στον πίνακα ελέγχου σας (μόνο PRO)."
+
+#: inc/functions/options-google-analytics.php:375
+msgid "Connected users"
+msgstr "Συνδεδεμένοι χρήστες"
+
+#: inc/functions/options-google-analytics.php:361
+msgid "Post types"
+msgstr "Τύποι άρθρων"
+
+#: inc/functions/options-google-analytics.php:347
+msgid "Tags"
+msgstr "Ετικέτες"
+
+#: inc/functions/options-google-analytics.php:321
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+#: inc/functions/options-google-analytics.php:302
+msgid "Authors"
+msgstr "Συγγραφείς"
+
+#: inc/admin/admin.php:4832
+msgid "Enter yours domains (eg: https://www.seopress.org/)"
+msgstr "Εισαγάγετε τους τομείς σας (π.χ.: https://www.seopress.org/)"
+
+#: inc/admin/admin.php:4653
+msgid "Enable Google Analytics tracking (Global Site Tag: gtag.js)"
+msgstr "Ενεργοποίηση παρακολούθησης του Google Analytics (Global Tag Site: gtag.js)"
+
+#: inc/admin/admin.php:4393
+msgid "Twitter Page URL"
+msgstr "Διεύθυνση URL σελίδας Twitter"
+
+#: inc/admin/admin.php:1332
+msgid "Dareboost: Test, analyze and optimize your website"
+msgstr "Dareboost: Δοκιμάστε, αναλύστε και βελτιστοποιήστε τον ιστότοπό σας"
+
+#: inc/functions/options-advanced-admin.php:159
+#: inc/functions/options-advanced-admin.php:770
+msgid "Canonical"
+msgstr "Κανονικός"
+
+#: inc/admin/admin.php:5676
+msgid "Add canonical URL column"
+msgstr "Προσθήκη  στήλης κανονικής διεύθυνσης URL"
+
+#: inc/admin/admin.php:3004
+msgid "Show canonical URL column in post types"
+msgstr "Προβολη της στήλης κανονικής διεύθυνσης URL στα άρθρα"
+
+#: inc/admin/admin.php:2538
+msgid "Facebook Link Ownership ID"
+msgstr "ID αναγνωριστικό σύνδεσης στο Facebook"
+
+#: inc/admin/admin.php:4429
+msgid "eg: https://www.instagram.com/wp_seopress/"
+msgstr "π.χ.: https://www.instagram.com/wp_seopress/"
+
+#: inc/admin/admin.php:1556
+msgid "Improve Easy Digital Downloads SEO"
+msgstr "Βελτιώστε τις εύκολες ψηφιακές λήψεις SEO"
+
+#: inc/admin/admin.php:218
+msgid "Custom fields from post, page or post type"
+msgstr "Προσαρμοσμένα πεδία από άρθρα, σελίδας ή τύπους άρθρων"
+
+#: inc/admin/admin.php:218
+msgid "%%_cf_your_custom_field_name%%"
+msgstr "%%_cf_your_custom_field_name%%"
+
+#: inc/admin/admin-header.php:74 inc/admin/admin.php:1555
+msgid "Easy Digital Downloads"
+msgstr "Εύκολες ψηφιακές λήψεις"
+
+#: inc/admin/admin.php:5449
+msgid "Remove Really Simple Discovery meta tag in source code (eg:"
+msgstr "Καταργήστε τη μετα-ετικέτα Really Simple Discovery στον πηγαίο κώδικα (π.χ.:"
+
+#: inc/admin/admin.php:5432
+msgid "Remove Windows Live Writer meta tag in source code (eg:"
+msgstr "Κατάργηση της μετα-ετικέτας του Windows Live Writer στον πηγαίο κώδικα (π.χ.:"
+
+#: inc/admin/admin.php:5415
+msgid "Remove WordPress shortlink meta tag in source code (eg:"
+msgstr "Καταργήστε την μετα-ετικέτα shortlink WordPress στον πηγαίο κώδικα (π.χ.:"
+
+#: inc/admin/admin.php:5398
+msgid "Remove WordPress meta generator in source code"
+msgstr "Καταργήστε τη μετα-γεννήτρια WordPress στον πηγαίο κώδικα"
+
+#: inc/admin/admin.php:2883
+msgid "Remove RSD meta tag"
+msgstr "Καταργήστε τη μετα-ετικέτα RSD"
+
+#: inc/admin/admin.php:2875
+msgid "Remove Windows Live Writer meta tag"
+msgstr "Καταργήστε τη μετα-ετικέτα του Windows Live Writer"
+
+#: inc/admin/admin.php:2867
+msgid "Remove WordPress shortlink meta tag"
+msgstr "Καταργήστε τη μετα-ετικέτα shortlink του WordPress"
+
+#: inc/admin/admin.php:2859
+msgid "Remove WordPress generator meta tag"
+msgstr "Καταργήστε τη μετα-ετικέτα γεννήτριας WordPress"
+
+#: inc/admin/admin-metaboxes-form.php:86
+msgid "to edit your title and meta description"
+msgstr "για να επεξεργαστείτε τον τίτλο και τη μετα-περιγραφή σας"
+
+#: inc/admin/admin-metaboxes-form.php:86
+msgid "This is your <strong>Shop page</strong>. Go to <strong>SEO > Titles & Metas > Archives > Products</strong> "
+msgstr "Αυτή είναι η <strong> σελίδα Καταστήματος </strong>. Μεταβείτε στην ενότητα <strong> SEO> Τίτλοι & Metas> Αρχεία> Προϊόντα </strong>"
+
+#: inc/functions/options-advanced-admin.php:162
+msgid "Target Kw"
+msgstr "Στόχος Kw"
+
+#: inc/admin/admin.php:5693
+msgid "Add target keyword column"
+msgstr "Προσθήκη στήλης λέξεων-κλειδιών προορισμού"
+
+#: inc/admin/admin.php:3086
+msgid "Block Content analysis metaboxe to user roles"
+msgstr "Αποκλεισμός πεδίου ανάλυσης περιεχομένου στους ρόλους των χρηστών"
+
+#: inc/admin/admin.php:3012
+msgid "Show Target Keyword column in post types"
+msgstr "Εμφάνιση στήλης \"Στόχος λέξης-κλειδιού\" σε τύπους άρθρων"
+
+#: inc/admin/admin.php:730
+msgid "Focus keywords"
+msgstr "Λέξεις κλειδιά που θα εστιάσουμε"
+
+#: inc/admin/admin-metaboxes.php:378
+msgid "Content analysis"
+msgstr "Ανάλυση περιεχομένου"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:310
+msgid "This page doesn't have any nofollow links."
+msgstr "Αυτή η σελίδα δεν περιέχει συνδέσμους nofollow."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:303
+msgid "We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:"
+msgstr "Βρήκαμε %d σύνδεσμους με το χαρακτηριστικό nofollow στη σελίδα σας. Μην υπερβείτε το χαρακτηριστικό nofollow σε συνδέσμους. Παρακάτω, η λίστα:"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:297
+msgid "NoFollow Links"
+msgstr "NoFollow σύνδεσμοι"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:291
+msgid "We could not find any image in your content. Content with media is a plus for your SEO."
+msgstr "Δεν μπορέσαμε να βρούμε καμία εικόνα στο περιεχόμενό σας. Περιεχόμενο με πολυμέσα έχει πλεονέκτημα για το SEO σας."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:288
+msgid "All alternative tags are filled in. Good work!"
+msgstr "Όλες οι εναλλακτικές ετικέτες συμπληρώθηκαν. Καλή δουλειά!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:280
+msgid "Product gallery"
+msgstr "Συλλογή προϊόντων"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:272
+msgid "Post Thumbnail"
+msgstr "Μικρογραφία άρθρου"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:262
+msgid "Post Content"
+msgstr "Περιεχόμενο άρθρου"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:258
+msgid "No alternative text found for these images. Alt tags are important for both SEO and accessibility."
+msgstr "Δεν βρέθηκε εναλλακτικό κείμενο για αυτές τις εικόνες. Η ετικέτα εναλλακτικού κειμένου είναι σημαντική τόσο για SEO όσο και για την προσβασιμότητα."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:246
+msgid "nosnippet is off. Search engines will display a snippet of this page in search results."
+msgstr "Το nosnippet είναι απενεργοποιημένο. Οι μηχανές αναζήτησης θα εμφανίσουν ένα απόσπασμα αυτής της σελίδας στα αποτελέσματα αναζήτησης."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:244
+msgid "nosnippet is on! Search engines will not display a snippet of this page in search results."
+msgstr "Το nosnippet είναι ενεργοποιημένο. Οι μηχανές αναζήτησης δεν θα εμφανίσουν απόσπασμα αυτής της σελίδας στα αποτελέσματα αναζήτησης."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:240
+msgid "noarchive is off. Search engines will probably cache your page."
+msgstr "το noarchive είναι εκτός λειτουργίας. Οι μηχανές αναζήτησης πιθανώς θα αποθηκεύουν προσωρινά τη σελίδα σας."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:238
+msgid "noarchive is on! Search engines will not cache your page."
+msgstr "Το noarchive είναι ενεργό! Οι μηχανές αναζήτησης δεν θα αποθηκεύουν προσωρινά τη σελίδα σας."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:234
+msgid "noimageindex is off. Google will index the images on this page."
+msgstr "noimageindex είναι εκτός λειτουργίας. Η Google θα ευρετηριάσει τις εικόνες σας σε αυτή τη σελίδα."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:232
+msgid "noimageindex is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed)."
+msgstr "noimageindex είναι ενεργοποιημένο! Η Google δεν θα κάνει ευρετηρίαση των εικόνων σας σε αυτήν τη σελίδα (αλλά αν κάποιος κάνει απευθείας σύνδεσμο σε μία από τις εικόνες σας σε αυτήν τη σελίδα, θα γίνει ευρετηρίαση)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:228
+msgid "nofollow is off. Search engines will follow links on this page."
+msgstr "Το nofollow είναι εκτός λειτουργίας. Οι μηχανές αναζήτησης θα ακολουθήσουν τους συνδέσμους σε αυτή τη σελίδα."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:226
+msgid "nofollow is on! Search engines can't follow your links on this page."
+msgstr "Το nofollow είναι ενεργό! Οι μηχανές αναζήτησης δεν μπορούν να ακολουθήσουν τους συνδέσμους σας σε αυτή τη σελίδα."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:222
+msgid "noindex is off. Search engines will index this page."
+msgstr "noindex είναι εκτός λειτουργίας. Οι μηχανές αναζήτησης θα δείξουν αυτή τη σελίδα."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:220
+msgid "noindex is on! Search engines can't index this page."
+msgstr "noindex είναι ενεργοποιημένο! Οι μηχανές αναζήτησης δεν μπορούν να ευρετηριάσουν αυτή τη σελίδα."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:210
+msgid "No custom meta description is set for this post."
+msgstr "Δεν έχει οριστεί προσαρμοσμένη περιγραφή meta για αυτό τo άρθρο."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:207
+msgid "The length of your meta description is correct"
+msgstr "Το μήκος της μετα-περιγραφής σας είναι σωστό"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:205
+msgid "You custom meta description is too long."
+msgstr "Η προσαρμοσμένη περιγραφή meta είναι πολύ μεγάλη."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:201
+msgid "None of your target keywords were found in the Meta description."
+msgstr "Καμία από τις λέξεις-κλειδιά στόχων σας δεν βρέθηκε στην περιγραφή Meta."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:189
+msgid "Target keywords were found in the Meta description."
+msgstr "Οι λέξεις-κλειδιά προορισμού βρέθηκαν στην περιγραφή Meta."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:181
+msgid "No custom title is set for this post."
+msgstr "Δεν έχει οριστεί προσαρμοσμένος τίτλος για αυυτό το άρθρο"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:178
+msgid "The length of your title is correct"
+msgstr "Το μήκος του τίτλου σας είναι σωστό"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:176
+msgid "You custom title is too long."
+msgstr "Ο προσαρμοσμένος τίτλος είναι πολύ μεγάλος."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:172
+msgid "None of your target keywords were found in the Meta Title."
+msgstr "Καμία από τις λέξεις κλειδιά προορισμού δεν βρέθηκαν στον μέτα τίτλο."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:160
+msgid "Target keywords were found in the Meta Title."
+msgstr "Οι λέξεις-κλειδιά-στόχοι βρέθηκαν στον μέτα-Τίτλο."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:157
+msgid "Meta title"
+msgstr "Μέτα-τίτλος"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:153
+msgid "None of your target keywords were found in Heading 3 (H3)."
+msgstr "Κανένας από τις λέξεις-κλειδιά στόχων σας δεν βρέθηκε στην επικεφαλίδα 3 (H3)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:141
+msgid "Target keywords were found in Heading 3 (H3)."
+msgstr "Λέξεις-κλειδιά στόχων σας βρέθηκαν στην επικεφαλίδα 3 (H3)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:139
+msgid "H3 (Heading 3)"
+msgstr "Η3 (Επικεφαλίδα 3)"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:135
+msgid "None of your target keywords were found in Heading 2 (H2)."
+msgstr "Καμία από τις λέξεις-κλειδιά στόχων σας δεν βρέθηκε στην Επικεφαλίδα 2 (H2)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:123
+msgid "Target keywords were found in Heading 2 (H2)."
+msgstr "Λέξεις-κλειδιά στόχων σας βρέθηκαν στην Επικεφαλίδα 2 (H2)."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:121
+msgid "H2 (Heading 2)"
+msgstr "Η2 (Επικεφαλίδα 2)"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:117
+msgid "You should not use a H1 heading in your post content because your post title is already an H1. The rule is simple: only one H1 for each web page."
+msgstr "Δεν θα πρέπει να χρησιμοποιήσετε την Επικαφαλίδα 1 στο περιεχόμενο του άρθρου, επειδή ο τίτλος της ανάρτησής σας είναι ήδη H1. Ο κανόνας είναι απλός: 1 H1 για κάθε 1 σελίδα."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:116
+msgid "We found %d Heading 1 (H1) in your content."
+msgstr "Βρήκαμε %d Επικεφαλίδα 1 (H1) στο περιεχόμενό σας."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:114
+msgid "H1 (Heading 1)"
+msgstr "Η1 (Επικεφαλίδα 1)"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:109
+msgid "No post title set for this post!"
+msgstr "Δεν έχει οριστεί τίτλος για αυτό το άρθρο!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:106
+msgid "None of your target keywords were found in the Post Title."
+msgstr "Καμία από τις λέξεις-κλειδιά στόχων σας δεν βρέθηκε στον τίτλο του άρθρου."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:102
+#: inc/admin/admin-metaboxes-content-analysis-form.php:131
+#: inc/admin/admin-metaboxes-content-analysis-form.php:149
+#: inc/admin/admin-metaboxes-content-analysis-form.php:168
+#: inc/admin/admin-metaboxes-content-analysis-form.php:197
+msgid "%s was found %d times."
+msgstr "%s βρέθηκε %d φορές."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:94
+msgid "Target keywords were found in the Post Title."
+msgstr "Οι λέξεις-κλειδιά-στόχοι βρέθηκαν στον τίτλο του άρθρου. "
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:91
+msgid "Post title"
+msgstr "Τίτλος άρθρου"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:85
+msgid "Your content is too short. Add a few more paragraphs!"
+msgstr "Το περιεχόμενό σας στερείται λέξεων. Προσθέστε μερικές ακόμη παραγράφους!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:83
+msgid "Your content is composed of more than 300 words, which is the minimum for a post."
+msgstr "Το περιεχόμενό σας αποτελείται από περισσότερες από 300 λέξεις, το οποίο είναι το ελάχιστο για ένα άρθρο."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:80
+msgid "unique words found."
+msgstr "Βρέθηκαν μοναδικές λέξεις."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:79
+msgid "words found."
+msgstr "Βρέθηκαν λέξεις."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:77
+msgid "Words counter"
+msgstr "Μετρητής λέξεων"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:71
+msgid "Links"
+msgstr "Σύνδεσμοι"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:70
+msgid "Images"
+msgstr "Εικόνες"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:69
+msgid "Configuration"
+msgstr "Ρυθμίσεις"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:68
+msgid "Optimizations"
+msgstr "Βελτιστοποιήσεις"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:18
+msgid "Analysis completed"
+msgstr "Η ανάλυση ολοκληρώθηκε"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:16
+msgid "Refresh analysis"
+msgstr "Ανανέωση της ανάλυσης"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:14
+msgid "Analyze my content"
+msgstr "Ανάλυσε το περιεχόμενο μου"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:10
+msgid "Enter your target keywords"
+msgstr "Εισάγετε τις λέξεις κλειδιά προορισμού"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:9
+#: inc/admin/admin-metaboxes-content-analysis-form.php:10
+msgid "Target keywords"
+msgstr "Λέξεις κλειδιά προορισμού"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:5
+msgid "Enter a few keywords for analysis to help you write optimized content."
+msgstr "Εισαγάγετε μερικές λέξεις-κλειδιά για ανάλυση και βοηθεια για να γράψετε βελτιστοποιημένο περιεχόμενο."
+
+#: inc/admin/admin-metaboxes-form.php:191
+msgid "Enter a custom value, useful if your title is too long"
+msgstr "Εισαγάγετε μια προσαρμοσμένη τιμή, χρήσιμη εάν ο τίτλος σας είναι πολύ μεγάλος"
+
+#: inc/admin/admin-metaboxes-form.php:190
+#: inc/admin/admin-metaboxes-form.php:191
+msgid "Custom breadcrumbs"
+msgstr "Προσαρμοσμένα breadcrumbs"
+
+#: inc/admin/admin.php:203
+msgid "Post tag"
+msgstr "Ετικέτα άρθρου"
+
+#: inc/admin/admin.php:203
+msgid "%%post_tag%%"
+msgstr "%%post_tag%%"
+
+#: inc/admin/admin.php:202
+msgid "Post category"
+msgstr "Κατηγορία άρθρου"
+
+#: inc/admin/admin.php:202
+msgid "%%post_category%%"
+msgstr "%%post_category%%"
+
+#: inc/admin/admin.php:5364
+msgid "You have to flush your permalinks each time you change this settings"
+msgstr "Πρέπει να καθαρίσετε τους μόνιμους συνδέσμου κάθε φορά που αλλάζετε αυτές τις ρυθμίσεις"
+
+#: inc/admin/admin-header.php:203
+msgid "Follow us on YouTube (new window)"
+msgstr "Ακολουθήστε μας στο YouTube (νέο παράθυρο)"
+
+#: inc/admin/admin-header.php:205
+msgid "Follow us on YouTube"
+msgstr "Ακολουθήστε μας στο YouTube "
+
+#: inc/admin/admin.php:2579
+msgid "Use Open Graph if no Twitter Card is filled"
+msgstr "Χρησιμοποιήστε το Open Graph εάν δεν έχουν συμπληρωθεί οι κάρτες Twitter"
+
+#: inc/admin/admin.php:4597
+msgid "Use OG if no Twitter Cards"
+msgstr "Χρησιμοποιήστε το OG εάν δεν έυπάρχουν κάρτες Twitter"
+
+#: inc/admin/admin.php:222
+msgid "Single product short description"
+msgstr "Σύντομη περιγραφή προϊόντος"
+
+#: inc/admin/admin.php:222
+msgid "%%wc_single_short_desc%%"
+msgstr "%%wc_single_short_desc%%"
+
+#: inc/admin/admin.php:221
+msgid "Single product tag"
+msgstr "Ετικέτα προϊόντος"
+
+#: inc/admin/admin.php:221
+msgid "%%wc_single_tag%%"
+msgstr "%%wc_single_tag%%"
+
+#: inc/admin/admin.php:220
+msgid "Single product category"
+msgstr "Κατηγορία προϊόντος"
+
+#: inc/admin/admin.php:220
+msgid "%%wc_single_cat%%"
+msgstr "%%wc_single_cat%%"
+
+#: inc/admin/admin.php:5517
+msgid "Remove SEOPress from Admin Bar in backend and frontend"
+msgstr "Αφαίρεση του SEOPress από την μπάρα διαχειριστή στο πίνακα ελέγχου"
+
+#: inc/admin/admin.php:243 inc/admin/admin.php:251
+msgid "Check our website"
+msgstr "Ελέγξτε την ιστοσελίδα μας"
+
+#: inc/admin/admin.php:242 inc/admin/admin.php:250
+msgid "Read our FAQ"
+msgstr "Διαβάστε το τμήμα συχνών ερωτήσεων - απαντήσεων"
+
+#: inc/admin/admin.php:241 inc/admin/admin.php:249
+msgid "Browse our guides"
+msgstr "Περιηγηθείτε στους οδηγούς μας"
+
+#: inc/admin/admin.php:4232
+msgid "Disable date after each post, page, post type?"
+msgstr "Απανεργοποίηση ημερομηνίας μέτά από κάθε άρθρο, σελίδα, τύπο άρθρου?"
+
+#: inc/admin/admin.php:4207
+msgid "You can also use this shortcode:"
+msgstr "Μπορείτε επίσης να χρησιμοποιήσετε αυτό το σύντομο κωδικό:"
+
+#: inc/admin/admin.php:2359
+msgid "Disable the display of the publication date"
+msgstr "Απενεργοποιήστε την εμφάνιση της ημερομηνίας δημοσίευσης"
+
+#: inc/admin/admin.php:875
+msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
+msgstr "Το θέμα σας δεν χρησιμοποιεί το <strong>add_theme_support('title-tag'); </strong>"
+
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:113
+msgid "XML Sitemaps"
+msgstr "Χάρτης ιστοτόπου XML"
+
+#: inc/admin/admin.php:4913
+msgid "Separate each keyword with a pipe \"|\""
+msgstr "Διαχωρήστε κάθε λέξη κλειδί με το \"|\""
+
+#: inc/admin/admin.php:4909
+msgid "aff|go|out"
+msgstr "aff|go|out"
+
+#: inc/admin/admin.php:4897
+msgid "Enable affiliate/outbound tracking"
+msgstr "Ενεργοποίηση συνδέσμου διαφήμισης / παρακολούθηση εξερχόμενων "
+
+#: inc/admin/admin.php:4849
+msgid "Enable external links tracking"
+msgstr "Ενεργοποίηση παρακολούθησης εξωτερικόν συνδέσμων"
+
+#: inc/admin/admin.php:2752 inc/admin/admin.php:4909
+msgid "Track affiliate/outbound links"
+msgstr "Παρακολούθηση συνδέσμου διαφήμησης / εξερχομένων συνδέσμων"
+
+#: inc/admin/admin.php:2744
+msgid "Enable affiliate/outbound links tracking (eg: aff, go, out, recommends)"
+msgstr "Παρακολούθηση συνδέσμου διαφήμησης / καταγραφή εξερχομένων συνδέσμων (π.χ.: aff, go, out, συνιστόμενα"
+
+#: inc/admin/admin.php:2720
+msgid "Enable external links tracking (all links with target _blank attribute)"
+msgstr "Ενεργοποίηση παρακολούθησης εξωτερικών συνδέσμων (όλοι οι σύνδεσμοι με το χαρακτηριστικό στόχου _blank)"
+
+#: inc/admin/admin.php:1847
+msgid "See backlinks"
+msgstr "Προβολή των συνδέσμων επιστροφής (backlinks)"
+
+#: inc/admin/admin.php:1846
+msgid "Check your backlinks with Majestic API."
+msgstr "Ελέγξτε τους συνδέσμους επιστροφής με το Majestic API"
+
+#: inc/admin/admin.php:1333
+msgid "Google Campaign URL Builder tool"
+msgstr "Εργαλείο δημιουργίας διεύθυνσης URL καμπάνιας Google"
+
+#: inc/admin/admin-metaboxes-form.php:199
+msgid "Ask Facebook to update his cache"
+msgstr "Ζητήστε από το Facebook να ενημερώσει την κρυφή μνήμη του"
+
+#: inc/admin/admin-header.php:136 inc/admin/admin.php:1845
+#: inc/admin/adminbar.php:93
+msgid "Backlinks"
+msgstr "Συνδέσμοι επιστροφής"
+
+#: inc/functions/options-redirections.php:120
+msgid "Once per day"
+msgstr "Μία φορά τη μέρα"
+
+#: inc/admin/admin.php:3316
+msgid "Looking to edit your blog page?"
+msgstr "Ψάχνετε για την επεξεργασία της σελίδας του ιστολογίου σας;"
+
+#: inc/admin/admin.php:1260
+msgid "Sorry, you domain name can't be verified :("
+msgstr "Λυπούμαστε, το όνομα τομέα δεν μπορεί να επαληθευτεί :("
+
+#: inc/admin/admin.php:5539
+msgid "Low priority"
+msgstr "Χαμηλή προτεραιότητα"
+
+#: inc/admin/admin.php:5536
+msgid "Normal priority (default)"
+msgstr "Κανονική προτεραιότητα (προεπιλογή)"
+
+#: inc/admin/admin.php:5533
+msgid "High priority (top)"
+msgstr "Υψηλή προτεραιότητα (κορυφή)"
+
+#: inc/admin/admin.php:4882
+msgid "Separate each file type extensions with a pipe \"|\""
+msgstr "Διαχωρίστε κάθε επεκτάσεις τύπου αρχείου με \"|\""
+
+#: inc/admin/admin.php:4878
+msgid "pdf|docx|pptx|zip"
+msgstr "pdf|docx|pptx|zip"
+
+#: inc/admin/admin.php:4866
+msgid "Enable download tracking"
+msgstr "Ενεργοποιήστε την παρακολούθηση λήψης"
+
+#: inc/admin/admin.php:3998
+msgid "Learn more on Google website"
+msgstr "Μάθετε περισσότερα στον ιστότοπο της Google"
+
+#: inc/admin/admin.php:3996
+msgid "Add rel next/prev link in head of paginated archive pages"
+msgstr "Προσθέστε το σύνδεσμο επόμενο / προηγούμενο στην επικεφαλίδα σελίδων σελίδας αρχειοθέτησης"
+
+#: inc/admin/admin.php:3780
+msgid "Disable date archives"
+msgstr "Απενεργοποιήστε τα αρχεία ημερομηνίας"
+
+#: inc/admin/admin.php:3711
+msgid "Disable author archives"
+msgstr "Απενεργοποιήστε τα αρχεία δημιουργών"
+
+#: inc/admin/admin.php:3256
+msgid "<p>Track events in Google Analytics.</p>"
+msgstr "<p>Παρακολουθήστε συμβάντα στο Google Analytics.</p>"
+
+#: inc/admin/admin.php:3177
+msgid "Your server uses NGINX. If XML Sitemaps doesn't work properly, you need to add this rule to your configuration:"
+msgstr "Ο διακομιστής σας χρησιμοποιεί το NGINX. Εάν η χαρτογράφηση ιστοτόπου XML δεν λειτουργεί, πρέπει να προσθέσετε αυτούς τους κανόνες στη διαμόρφωσή σας:"
+
+#: inc/admin/admin.php:2940
+msgid "Move SEOPress metabox's position"
+msgstr "Μετακίνηση της θέσης μετατόπισης SEOPress"
+
+#: inc/admin/admin.php:2728
+msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
+msgstr "Ενεργοποίηση παρακολούθησης λήψεων (π.χ. PDF, XLSX, DOCX ...)"
+
+#: inc/admin/admin.php:2252
+msgid "Indicate paginated content to Google"
+msgstr "Υποδείξτε το περιεχομένο σελίδας στο Google"
+
+#: inc/admin/admin.php:1900
+msgid "Configure default WordPress RSS."
+msgstr "Ρυθμίστε την προεπιλογή του WordPress RSS."
+
+#: inc/admin/admin.php:1836
+msgid "See broken links"
+msgstr "Δείτε τους σπασμένους συνδέσμους"
+
+#: inc/admin/admin.php:1797
+msgid "See redirects"
+msgstr "Δείτε τις ανακατευθύνσεις"
+
+#: inc/admin/admin.php:1331
+msgid "Google Trends"
+msgstr "Google Trends"
+
+#: inc/admin/admin.php:1330
+msgid "Upload a list of links to disavow to Google"
+msgstr "Μεταφορτώστε μια λίστα με συνδέσμους για να αποκρύψετε την Google"
+
+#: inc/admin/admin.php:1322
+msgid "Get Alexa Rank"
+msgstr "Λάβετε την κατάταξη Alexa"
+
+#: inc/admin/admin.php:1318
+msgid "The lower, the best"
+msgstr "Όσο χαμηλότερο, τόσο καλύτερο"
+
+#: inc/admin/admin.php:1309
+msgid "Country Rank: "
+msgstr "Κατάταξη χώρας:"
+
+#: inc/admin/admin.php:1287
+msgid "Your Alexa Rank"
+msgstr "Η κατάταξη σας Alexa"
+
+#: inc/admin/admin.php:1272
+msgid "Check your Alexa Rank (Amazon index)"
+msgstr "Ελέγξτε την κατάταξη σας Alexa (δείκτης Amazon)"
+
+#: inc/admin/admin.php:1263
+msgid "Email me before expiration"
+msgstr "Στείλτε μου email πριν από τη λήξη"
+
+#: inc/admin/admin.php:1255
+msgid "Your domain expires: "
+msgstr "Ο τομέας σας λήγει:"
+
+#: inc/admin/admin.php:1252
+msgid "Domain creation date: "
+msgstr "Ημερομηνία δημιουργίας τομέα:"
+
+#: inc/admin/admin.php:1249
+msgid "Last updated date: "
+msgstr "Τελευταία ημερομηνία ενημέρωσης:"
+
+#: inc/admin/admin.php:1246
+msgid "Your registrar: "
+msgstr "Ο κατωχυρωτής σας:"
+
+#: inc/admin/admin.php:1243
+msgid "Your domain name: "
+msgstr "Το όνομα τομέα σας:"
+
+#: inc/admin/admin.php:1212
+msgid "Check your domain expiration date"
+msgstr "Ελέγξτε την ημερομηνία λήξης του τομέα σας"
+
+#: inc/admin/admin.php:1204
+msgid "Get list"
+msgstr "Λάβετε τη λιστα"
+
+#: inc/admin/admin.php:1191
+msgid "Number of websites on your server: "
+msgstr "Αριθμός ιστότοπων στον διακομιστή σας:"
+
+#: inc/admin/admin.php:1190
+msgid "Last scrape: "
+msgstr "Τελευταία επεξεργασία: "
+
+#: inc/admin/admin.php:1187
+msgid "Server IP Address: "
+msgstr "Διεύθυνση IP διακομιστή:"
+
+#: inc/admin/admin.php:1160
+msgid "Host IP: "
+msgstr "IP φυλοξενητή"
+
+#: inc/admin/admin.php:1158
+msgid "Check websites setup on your server"
+msgstr "Ελέγξτε τη ρύθμιση ιστοσελίδων στο διακομιστή σας"
+
+#: inc/admin/admin.php:826 inc/admin/admin.php:831
+msgid "Useful links"
+msgstr "Χρήσιμοι σύνδεσμοι"
+
+#: inc/admin/admin.php:825
+msgid "SEO Tools"
+msgstr "Εργαλεία SEO"
+
+#: inc/admin/admin.php:720
+msgid "Import posts and terms metadata from Yoast"
+msgstr "Εισαγωγή άρθρων και μεταδεδομένων όρων από το Yoast"
+
+#: inc/admin/admin.php:689
+msgid "Download a CSV example"
+msgstr "Κάντε λήψη ενός παραδείγματος CSV"
+
+#: inc/admin/admin.php:537 inc/admin/admin.php:546
+msgid "Events"
+msgstr "Εκδηλώσεις"
+
+#: inc/admin/admin-header.php:211
+msgid "Support (new window)"
+msgstr "Υποστήριξη (νέο παράθυρο)"
+
+#: inc/admin/admin-header.php:209
+msgid "Official website"
+msgstr "Επίσημη ιστοσελίδα"
+
+#: inc/admin/admin-header.php:207
+msgid "Official website (new window)"
+msgstr "Επίσημη Ιστοσελίδα (νέο παράθυρο)"
+
+#: inc/admin/admin-header.php:199
+msgid "Follow us on Twitter (new window)"
+msgstr "Ακολουθήστε μας στο Twitter (νέο παράθυρο)"
+
+#: inc/admin/admin-header.php:195 inc/admin/admin-header.php:197
+msgid "Send feedback"
+msgstr "Στείλετε τα σχόλιά σας"
+
+#: inc/admin/admin-header.php:193
+msgid "See the changelog"
+msgstr "Δείτε το αρχειο αλλαγών"
+
+#: inc/admin/admin-header.php:191
+msgid "See the changelog (new window)"
+msgstr "Δείτε το αρχειο αλλαγών (νέο παράθυρο)"
+
+#: inc/admin/admin-header.php:156 inc/admin/admin.php:1899
+msgid "RSS"
+msgstr "RSS"
+
+#: inc/functions/options-advanced-admin.php:232
+msgid "Analyze this page with Google Page Speed"
+msgstr "Αναλύστε αυτήν τη σελίδα με το μετρητή ταχύτητας σελίδας Google"
+
+#: inc/functions/options-advanced-admin.php:228
+msgid "Check code quality of this page"
+msgstr "Ελέγξτε την ποιότητα του κώδικα αυτής της σελίδας"
+
+#: inc/functions/options-advanced-admin.php:177
+msgid "Page Speed"
+msgstr "Ταχύτητα σελίδας"
+
+#: inc/functions/options-advanced-admin.php:174
+msgid "W3C check"
+msgstr "Έλεγχος W3C"
+
+#: inc/admin/admin.php:5779
+msgid "Display Page Speed column to check performances"
+msgstr "Εμφάνιση στήλης ταχύτητα σελίδας για να ελέγξετε τις επιδόσεις"
+
+#: inc/admin/admin.php:5761
+msgid "Display W3C column to check code quality"
+msgstr "Προβάλετε τη στήλη W3C για να ελέγξετε την ποιότητα του κώδικα"
+
+#: inc/admin/admin.php:3052
+msgid "Show Google Page Speed column in post types"
+msgstr "Εμφάνιση στήλης ταχύτητα σελίδας Google σε τύπους άρθρων"
+
+#: inc/admin/admin.php:3044
+msgid "Show W3C validator column in post types"
+msgstr "Εμφάνιση στήλης επικύρωσης W3C σε τύπους άρθρων"
+
+#: inc/admin/admin.php:2851 inc/admin/admin.php:5381
+msgid "Disable trailing slash for metas"
+msgstr "Απενεργοποιήστε την πλάγια κάθετο"
+
+#: inc/admin/admin.php:5381
+msgid "You must check this box if the structure of your permalinks DOES NOT contain a slash at the end (eg: /%postname%)"
+msgstr "Πρέπει να επιλέξετε αυτό το πλαίσιο εάν η δομή των μόνιμων συνδέσμων σας ΔΕΝ περιέχει κάθετο στο τέλος (π.χ.:%postname%)"
+
+#: inc/functions/options-import-export.php:88
+msgid "Please upload a valid .csv file"
+msgstr "Ανεβάστε ένα έγκυρο αρχείο .csv"
+
+#: inc/functions/options-advanced-admin.php:171
+msgid "Count words?"
+msgstr "Καταμέτρηση λέξεων;"
+
+#: inc/admin/admin.php:5744
+msgid "Display total number of words in content"
+msgstr "Εμφάνιση συνολικού αριθμού λέξεων στο περιεχόμενο"
+
+#: inc/admin/admin.php:4820
+msgid "Cross domain tracking makes it possible for Analytics to see sessions on two related sites (such as an ecommerce site and a separate shopping cart site) as a single session. This is sometimes called site linking."
+msgstr "Η παρακολούθηση μεταξύ τομέων επιτρέπει στο Analytics να βλέπει περιόδους σύνδεσης σε δύο σχετικούς ιστότοπους (όπως ένας ιστότοπος ηλεκτρονικού εμπορίου και ένας ξεχωριστός ιστότοπος καλαθιού αγορών) ως μία μόνο συνεδρία. Αυτό μερικές φορές ονομάζεται σύνδεση ιστότοπου."
+
+#: inc/admin/admin.php:4799
+msgid "Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs."
+msgstr "Η βελτιωμένη απόδοση σύνδεσης βελτιώνει την ακρίβεια της αναφοράς σας στην σελίδα Analytics, διαφοροποιώντας αυτόματα μεταξύ πολλών συνδέσμων με την ίδια διεύθυνση URL σε μια μόνο σελίδα, χρησιμοποιώντας αναγνωριστικά στοιχείου συνδέσμου."
+
+#: inc/admin/admin.php:4778
+msgid "When a customer of Analytics requests IP address anonymization, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network."
+msgstr "Όταν ένας πελάτης του Analytics ζητά ανώνυμο διεύθυνσης IP, το Analytics ανώνυμα τη διεύθυνση το συντομότερο τεχνικά εφικτό στο συντομότερο δυνατό στάδιο του δικτύου συλλογής."
+
+#: inc/admin/admin.php:4757
+msgid "A remarketing audience is a list of cookies or mobile-advertising IDs that represents a group of users you want to re-engage because of their likelihood to convert."
+msgstr "Το κοινό κοινού επαναληπτικού μάρκετινγκ είναι μια λίστα με cookies ή αναγνωριστικά διαφημίσεων για κινητά που αντιπροσωπεύουν μια ομάδα χρηστών που θέλετε να επανενεργοποιήσετε λόγω της πιθανότητας μετατροπής τους."
+
+#: inc/admin/admin.php:4667
+msgid "Find your tracking ID"
+msgstr "Βρείτε το αναγνωριστικό παρακολούθησης"
+
+#: inc/admin/admin.php:3261
+msgid "<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom metrics in SEOPress are like the default dimensions and metrics in your Analytics account, except you create them yourself.<br> Use them to collect and analyze data that Analytics doesn't automatically track.<br> Please note that you also have to setup your custom dimensions in your Google Analytics account. More info by clicking on the help icon."
+msgstr "<p>Διαμορφώστε τις προσαρμοσμένες ιδιότητες του Google Analytics.<br> Οι προσαρμοσμένες ιδιότητες και οι προσαρμοσμένες μετρήσεις είναι σαν προεπιλεγμένες ιδιότητες και μετρήσεις στο λογαριασμό σας στο Analytics<br>, εκτός από τη δημιουργία τους μόνοι σας. Μπορείτε να τα χρησιμοποιήσετε για να συλλέξετε και να αναλύσετε δεδομένα που το Analytics δεν παρακολουθεί αυτόματα.<br>Σημειώστε ότι πρέπει επίσης να ρυθμίσετε τις προσαρμοσμένες ιδιότητες στο λογαριασμό σας στο Google Analytics. Περισσότερες πληροφορίες κάνοντας κλικ στο εικονίδιο βοήθειας."
+
+#: inc/admin/admin.php:3036
+msgid "Show total number of words column in post types"
+msgstr "Εμφάνιση συνολικού αριθμού στήλης λέξεων σε τύπους άρθρων"
+
+#: inc/admin/admin.php:1584
+msgid "Add Google Local Business data type"
+msgstr "Προσθέστε τον τύπο δεδομένων Google Local Business"
+
+#: inc/admin/admin-header.php:80 inc/admin/admin.php:1583
+msgid "Local Business"
+msgstr "Local Business"
+
+#: inc/admin/admin.php:1057
+msgid "Display more posts per page on homepage and archives"
+msgstr "Εμφάνιση περισσότερων άρθρων ανά σελίδα στην αρχική σελίδα και τα αρχεία"
+
+#: inc/admin/admin.php:686
+msgid "Import your own redirections from a .csv file (separator \";\"). You must have 3 columns in this order: url to match (without your domain name), url to redirect in absolute and type of redirection (301, 302 or 307)."
+msgstr "Εισαγάγετε τις δικές σας ανακατευθύνσεις από ένα αρχείο .csv (διαχωριστικό \";\"). Πρέπει να έχετε 3 στήλες σε αυτή τη σειρά: url για αντιστοίχιση (χωρίς το όνομα τομέα), url για ανακατεύθυνση σε απόλυτο και τύπο ανακατεύθυνσης (301, 302 ή 307)."
+
+#: inc/admin/admin.php:684
+msgid "Import Redirections"
+msgstr "Εισαγωγή ανακατευθύνσεων"
+
+#: inc/admin/admin-header.php:130 inc/admin/admin.php:1834
+msgid "SEOPress BOT - Broken links"
+msgstr "SEOPress BOT - Σπασμένοι σύνδεσμοι"
+
+#: inc/admin/admin-header.php:111 inc/admin/admin.php:1726
+msgid "robots.txt"
+msgstr "robots.txt"
+
+#: inc/admin/adminbar.php:87
+msgid "Broken Links"
+msgstr "Σπασμένοι σύνδεσμοι"
+
+#: inc/admin/adminbar.php:63
+msgid "BOT"
+msgstr "BOT"
+
+#: inc/admin/admin.php:4566
+msgid "How to create a Facebook App ID"
+msgstr "Πώς να δημιουργήσετε ένα αναγνωριστικό εφαρμογής στο Facebook"
+
+#: inc/admin/admin-header.php:169 inc/admin/admin.php:189
+#: inc/admin/admin.php:1911 inc/admin/adminbar.php:55
+msgid "Tools"
+msgstr "Εργαλεία"
+
+#: inc/admin/admin-header.php:48 inc/admin/admin.php:186
+#: inc/admin/admin.php:1422 inc/admin/adminbar.php:37
+msgid "Social Networks"
+msgstr "Μέσα κοινωνικής δικτύωσης"
+
+#: inc/admin/admin.php:183
+msgid "Dashboard"
+msgstr "Πίνακας ελέγχου"
+
+#: inc/admin/admin-metaboxes-form.php:249
+msgid "Enter your new URL"
+msgstr "Εισαγάγετε τη νέα σας διεύθυνση URL"
+
+#: inc/admin/admin-metaboxes-form.php:247
+msgid "307 Moved Temporarily (HTTP 1.1 Only)"
+msgstr "307 Μετακινήθηκε προσωρινά (μόνο HTTP 1.1)"
+
+#: inc/admin/admin-metaboxes-form.php:246
+msgid "302 Found (HTTP 1.1) / Moved Temporarily (HTTP 1.0)"
+msgstr "302 Βρέθηκε (HTTP 1.1) / Μετακινήθηκε προσωρινά (HTTP 1.0)"
+
+#: inc/admin/admin-metaboxes-form.php:245
+msgid "301 Moved Permanently"
+msgstr "301 Μετακινήθηκε μόνιμα"
+
+#: inc/admin/admin-metaboxes-form.php:61
+msgid "Redirection"
+msgstr "Ανακατεύθυνση"
+
+#: inc/admin/admin.php:4393
+msgid "eg: @wp_seopress"
+msgstr "π.χ.: @wp_seopress"
+
+#: inc/admin/admin.php:1837
+msgid "Scan"
+msgstr "Έλεγχος"
+
+#: inc/admin/admin.php:1835
+msgid "Scan your site to find SEO problems."
+msgstr "Σαρώστε τον ιστότοπό σας για να βρείτε προβλήματα SEO."
+
+#: inc/admin/admin.php:3286
+msgid "<p>Manage security.</p>"
+msgstr "<p>Διαχειριστείτε την ασφάλεια.</p>"
+
+#: inc/admin/admin.php:3188
+msgid "Noindex content will not be displayed in Sitemaps."
+msgstr "Το περιεχόμενο Noindex δεν θα εμφανίζεται στους χάρτες ιστοτόπου."
+
+#: inc/admin/admin.php:3078
+msgid "Block SEO metaboxes to user roles"
+msgstr "Αποκλείστε το μέτα-πεδίο SEO στους ρόλους των χρηστών"
+
+#: inc/admin/admin.php:2277
+msgid "Enable XML Image Sitemaps"
+msgstr "Ενεργοποιήστε τους Χάρτες ιστοτόπου XML"
+
+#: inc/admin/admin.php:1385
+msgid "Manage your XML / Image / Video / HTML Sitemap"
+msgstr "Διαχειριστείτε τον χάρτη ιστοτόπου XML / Εικόνας / HTML"
+
+#: inc/admin/admin.php:617
+msgid "Security"
+msgstr "Ασφάλεια"
+
+#: inc/admin/admin.php:185
+msgid "XML / Image / HTML Sitemap"
+msgstr "XML / Εικόνα / HTML χάρτης ιστοτόπου"
+
+#: inc/functions/options-advanced-admin.php:648
+msgid "%s post to follow."
+msgid_plural "%s posts to follow."
+msgstr[0] "%s άρθρο για να ακολουθήσετε"
+msgstr[1] "%s άρθρα για να ακολουθήσετε"
+
+#: inc/functions/options-advanced-admin.php:615
+msgid "Enable follow"
+msgstr "Ενεργοποίηση follow"
+
+#: inc/functions/options-advanced-admin.php:595
+msgid "%s post to nofollow."
+msgid_plural "%s posts to nofollow."
+msgstr[0] "%s άρθρο nofollow."
+msgstr[1] "%s άρθρα nofollow."
+
+#: inc/functions/options-advanced-admin.php:563
+msgid "Enable nofollow"
+msgstr "Ενεργοποίηση nofollow"
+
+#: inc/functions/options-advanced-admin.php:543
+msgid "%s post to index."
+msgid_plural "%s posts to index."
+msgstr[0] "%s άρθρο για ευρετηρίαση"
+msgstr[1] "%s άρθρα για ευρετηρίαση"
+
+#: inc/functions/options-advanced-admin.php:510
+msgid "Enable index"
+msgstr "Ενεργοποίηση ευρετηρίασης"
+
+#: inc/functions/options-advanced-admin.php:490
+msgid "%s post to noindex."
+msgid_plural "%s posts to noindex."
+msgstr[0] "%s άρθρο noindex."
+msgstr[1] "%s άρθρα noindex."
+
+#: inc/functions/options-advanced-admin.php:457
+msgid "Enable noindex"
+msgstr "Ενεργοποίηση noindex"
+
+#: inc/admin/admin.php:5797
+msgid "Remove Genesis SEO Metaboxes"
+msgstr "Αφαιρέστε το μέτα-πεδίο SEO της Genesis"
+
+#: inc/admin/admin.php:3061
+msgid "Hide Genesis SEO Metaboxes"
+msgstr "Αποκρύψτε το μέτα-πεδίο SEO της Genesis"
+
+#: inc/admin/admin.php:1033
+msgid "Disable this!"
+msgstr "Απενεργοποίηση!"
+
+#: inc/admin/admin.php:1030
+msgid "Break comments into pages is ON!"
+msgstr "Η διακοπή σχολίων στις σελίδες είναι ενεργοποιημένη!"
+
+#: inc/admin/admin.php:978
+msgid "You RSS feed show full text!"
+msgstr "Το RSS feed δείχνει πλήρες κείμενο!"
+
+#: inc/admin/admin.php:747
+msgid "Reset notices"
+msgstr "Επαναφορά ειδοποιήσεων"
+
+#: inc/admin/admin.php:740
+msgid "Reset All Notices From Notifications Center"
+msgstr "Επαναφορά όλων των ειδοποιήσεων από το κέντρο ειδοποιήσεων"
+
+#: inc/admin/admin.php:539
+msgid "Stats in Dashboard"
+msgstr "Στατιστικά στον Πίνακα ελέγχου"
+
+#: inc/admin/admin.php:5557
+msgid "Hide Notifications Center in SEOPress Dashboard page"
+msgstr "Απόκρυψη του κέντρου ειδοποιήσεων στη σελίδα του πίνακα ελέγχου SEOPress"
+
+#: inc/admin/admin.php:5364
+msgid "Remove /category/ in your permalinks"
+msgstr "Κατάργηση /κατηγορία/ από τους μόνιμους συνδέσμους σας"
+
+#: inc/admin/admin.php:2843
+msgid "Remove /category/ in URL"
+msgstr "Κατάργηση /κατηγορία/ από τη διεύθυνση URL"
+
+#: inc/admin/admin.php:4217
+msgid "eg: 13, 8, 38"
+msgstr "π.χ.: 13, 8, 38"
+
+#: inc/admin/admin.php:4203
+msgid "eg: 2, 28, 68"
+msgstr "π.χ.: 2, 28, 68"
+
+#: inc/admin/admin.php:3200
+msgid "<p>Create an HTML Sitemap for your visitors and boost your SEO.</p>"
+msgstr "<p>Δημιουργήστε ένα HTML για τους επισκέπτες σας και ενισχύστε το SEO σας. </p>"
+
+#: inc/admin/admin.php:2351 inc/admin/admin.php:4217
+msgid "Exclude some Posts, Pages or Custom Post Types"
+msgstr "Εξαιρέστε μερικά άρθρα, σελίδες ή προσαρμοσμένους τύπους άρθρων"
+
+#: inc/admin/admin.php:2343 inc/admin/admin.php:4203
+msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
+msgstr "Καταχωρίστε ένα αναγνωριστικό τύπου άρθρου, σελίδας ή προσαρμοσμένου τύπου άρθρων για την εμφάνιση του στο χάρτη ιστότοπου"
+
+#: inc/admin/admin.php:2295 inc/admin/admin.php:4098
+msgid "Enable HTML Sitemap"
+msgstr "Ενεργοποιήστε το χάρτη ιστοτόπου HTML"
+
+#: inc/admin/admin-header.php:42 inc/admin/admin.php:185
+#: inc/admin/adminbar.php:31
+msgid "XML / HTML Sitemap"
+msgstr "XML / HTML χάρτης ιστοτόπου"
+
+#: inc/admin/admin.php:4367
+msgid "Hearing impaired supported"
+msgstr "Υποστηρίξη ατόμων με προβλήματα ακοής "
+
+#: inc/admin/admin.php:4364
+msgid "Toll Free"
+msgstr "Χωρίς δασμούς"
+
+#: inc/admin/admin.php:4347
+msgid "Package tracking"
+msgstr "Παρακολούθηση πακέτων"
+
+#: inc/admin/admin.php:4344
+msgid "Roadside assistance"
+msgstr "Οδική βοήθεια"
+
+#: inc/admin/admin.php:4341
+msgid "Baggage tracking"
+msgstr "Παρακολούθηση αποσκευών"
+
+#: inc/admin/admin.php:4338
+msgid "Emergency"
+msgstr "Επείγον"
+
+#: inc/admin/admin.php:4335
+msgid "Credit card support"
+msgstr "Υποστήριξη πιστωτικών καρτών"
+
+#: inc/admin/admin.php:4332
+msgid "Sales"
+msgstr "Πωλήσεις"
+
+#: inc/admin/admin.php:4329
+msgid "Bill payment"
+msgstr "Πληρωμή λογαριασμού"
+
+#: inc/admin/admin.php:4326
+msgid "Billing support"
+msgstr "Υποστήριξη πληρωμών"
+
+#: inc/admin/admin.php:4323
+msgid "Technical support"
+msgstr "Τεχνική υποστήριξη"
+
+#: inc/admin/admin.php:4320
+msgid "Customer support"
+msgstr "Υποστήριξη πελατών"
+
+#: inc/admin/admin.php:4305
+msgid "eg: +33123456789 (internationalized version required)"
+msgstr "π.χ.: +33123456789 (απαιτείται διεθνής έκδοση)"
+
+#: inc/admin/admin.php:2416
+msgid "Contact option (only for Organizations)"
+msgstr "Επιλογή επαφής (μόνο για Οργανισμό)"
+
+#: inc/admin/admin.php:2408
+msgid "Contact type (only for Organizations)"
+msgstr "Τύπος επαφής (μόνο για Οργανισμό)"
+
+#: inc/admin/admin.php:2400 inc/admin/admin.php:4305
+msgid "Organization's phone number (only for Organizations)"
+msgstr "Αριθμός τηλεφώνου Οργανισμού (μόνο για Οργανισμό)"
+
+#: inc/admin/admin.php:1640
+msgid "Add data types to your content: articles, courses, recipes, videos, events and products"
+msgstr "Προσθέστε τους τύπους δεδομένων στο περιεχόμενό σας: άρθρα, μαθήματα, συνταγές, βίντεο, εκδηλώσεις και προϊόντα"
+
+#: inc/admin/admin-header.php:92 inc/admin/admin.php:1639
+msgid "Structured Data Types"
+msgstr "Δομημένοι τύποι δεδομένων"
+
+#: inc/admin/admin.php:1612
+msgid "Add Dublin Core meta tags"
+msgstr "Προσθέστε μετα-ετικέτες Dublin Core"
+
+#: inc/admin/admin-header.php:86 inc/admin/admin.php:1611
+msgid "Dublin Core"
+msgstr "Dublin Core"
+
+#: inc/functions/options-advanced-admin.php:168
+msgid "Nofollow?"
+msgstr "Nofollow?"
+
+#: inc/functions/options-advanced-admin.php:165
+msgid "Noindex?"
+msgstr "Noindex?"
+
+#: inc/admin/admin.php:5727
+msgid "Display nofollow status"
+msgstr "Προβολή κατάστασης nofollow"
+
+#: inc/admin/admin.php:5710
+msgid "Display noindex status"
+msgstr "Προβολή κατάστασης noindex"
+
+#: inc/admin/admin.php:3028
+msgid "Show nofollow column in post types"
+msgstr "Εμφάνιση στήλης nofollow σε τύπους άρθρων"
+
+#: inc/admin/admin.php:3020
+msgid "Show noindex column in post types"
+msgstr "Εμφάνιση στήλης noindex σε τύπους άρθρων"
+
+#: inc/admin/admin.php:1143
+msgid "You have to enter your licence key to get updates and support"
+msgstr "Πρέπει να εισαγάγετε το κλειδί άδειας χρήσης για να λαμβάνετε ενημερώσεις και υποστήριξη"
+
+#: inc/admin/admin.php:1133
+msgid "Add your site to Search Console!"
+msgstr "Προσθέστε τον ιστότοπό σας στο Search Console!"
+
+#: inc/admin/admin.php:1130
+msgid "Add your site to Google. It's free!"
+msgstr "Προσθέστε τον ιστότοπό σας στο Google. Είναι δωρεάν!"
+
+#: inc/admin/admin.php:1097
+msgid "Create your page now!"
+msgstr "Δημιουργήστε τη σελίδα σας τώρα!"
+
+#: inc/admin/admin.php:1031 inc/admin/admin.php:1095 inc/admin/admin.php:1131
+msgid "Huge impact"
+msgstr "Μεγάλη επιρροή"
+
+#: inc/admin/admin.php:1094
+msgid "Do you have a Google My Business page? It's free!"
+msgstr "Έχετε μια σελίδα στο Google My Business; Είναι δωρεάν!"
+
+#: inc/admin/admin.php:888 inc/admin/admin.php:921 inc/admin/admin.php:4758
+#: inc/admin/admin.php:4779 inc/admin/admin.php:4800 inc/admin/admin.php:4821
+msgid "Learn more"
+msgstr "Μάθετε περισσότερα"
+
+#: inc/functions/options-advanced-admin.php:150
+msgid "Meta Desc."
+msgstr "Meta Desc."
+
+#: inc/functions/options-advanced-admin.php:147
+#: inc/functions/options-advanced-admin.php:754
+msgid "Title tag"
+msgstr "Ετικέτα τίτλου"
+
+#: inc/admin/admin.php:5625
+msgid "Add meta description column"
+msgstr "Προσθήκη στήλης μέτα-περιγραφής "
+
+#: inc/admin/admin.php:5608
+msgid "Add title column"
+msgstr "Προσθήκη αυτής της στήλης"
+
+#: inc/admin/admin.php:4987 inc/admin/admin.php:5064 inc/admin/admin.php:5141
+#: inc/admin/admin.php:5218 inc/admin/admin.php:5295
+msgid "Custom Dimension #20"
+msgstr "Προσαρμοσμένη διάσταση #20"
+
+#: inc/admin/admin.php:4984 inc/admin/admin.php:5061 inc/admin/admin.php:5138
+#: inc/admin/admin.php:5215 inc/admin/admin.php:5292
+msgid "Custom Dimension #19"
+msgstr "Προσαρμοσμένη διάσταση #19"
+
+#: inc/admin/admin.php:4981 inc/admin/admin.php:5058 inc/admin/admin.php:5135
+#: inc/admin/admin.php:5212 inc/admin/admin.php:5289
+msgid "Custom Dimension #18"
+msgstr "Προσαρμοσμένη διάσταση #18"
+
+#: inc/admin/admin.php:4978 inc/admin/admin.php:5055 inc/admin/admin.php:5132
+#: inc/admin/admin.php:5209 inc/admin/admin.php:5286
+msgid "Custom Dimension #17"
+msgstr "Προσαρμοσμένη διάσταση #17"
+
+#: inc/admin/admin.php:4975 inc/admin/admin.php:5052 inc/admin/admin.php:5129
+#: inc/admin/admin.php:5206 inc/admin/admin.php:5283
+msgid "Custom Dimension #16"
+msgstr "Προσαρμοσμένη διάσταση #16"
+
+#: inc/admin/admin.php:4972 inc/admin/admin.php:5049 inc/admin/admin.php:5126
+#: inc/admin/admin.php:5203 inc/admin/admin.php:5280
+msgid "Custom Dimension #15"
+msgstr "Προσαρμοσμένη διάσταση #15"
+
+#: inc/admin/admin.php:4969 inc/admin/admin.php:5046 inc/admin/admin.php:5123
+#: inc/admin/admin.php:5200 inc/admin/admin.php:5277
+msgid "Custom Dimension #14"
+msgstr "Προσαρμοσμένη διάσταση #14"
+
+#: inc/admin/admin.php:4966 inc/admin/admin.php:5043 inc/admin/admin.php:5120
+#: inc/admin/admin.php:5197 inc/admin/admin.php:5274
+msgid "Custom Dimension #13"
+msgstr "Προσαρμοσμένη διάσταση #13"
+
+#: inc/admin/admin.php:4963 inc/admin/admin.php:5040 inc/admin/admin.php:5117
+#: inc/admin/admin.php:5194 inc/admin/admin.php:5271
+msgid "Custom Dimension #12"
+msgstr "Προσαρμοσμένη διάσταση #12"
+
+#: inc/admin/admin.php:4960 inc/admin/admin.php:5037 inc/admin/admin.php:5114
+#: inc/admin/admin.php:5191 inc/admin/admin.php:5268
+msgid "Custom Dimension #11"
+msgstr "Προσαρμοσμένη διάσταση #11"
+
+#: inc/admin/admin.php:4957 inc/admin/admin.php:5034 inc/admin/admin.php:5111
+#: inc/admin/admin.php:5188 inc/admin/admin.php:5265
+msgid "Custom Dimension #10"
+msgstr "Προσαρμοσμένη διάσταση #10"
+
+#: inc/admin/admin.php:4954 inc/admin/admin.php:5031 inc/admin/admin.php:5108
+#: inc/admin/admin.php:5185 inc/admin/admin.php:5262
+msgid "Custom Dimension #9"
+msgstr "Προσαρμοσμένη διάσταση #9"
+
+#: inc/admin/admin.php:4951 inc/admin/admin.php:5028 inc/admin/admin.php:5105
+#: inc/admin/admin.php:5182 inc/admin/admin.php:5259
+msgid "Custom Dimension #8"
+msgstr "Προσαρμοσμένη διάσταση #8"
+
+#: inc/admin/admin.php:4948 inc/admin/admin.php:5025 inc/admin/admin.php:5102
+#: inc/admin/admin.php:5179 inc/admin/admin.php:5256
+msgid "Custom Dimension #7"
+msgstr "Προσαρμοσμένη διάσταση #7"
+
+#: inc/admin/admin.php:4945 inc/admin/admin.php:5022 inc/admin/admin.php:5099
+#: inc/admin/admin.php:5176 inc/admin/admin.php:5253
+msgid "Custom Dimension #6"
+msgstr "Προσαρμοσμένη διάσταση #6"
+
+#: inc/admin/admin.php:4942 inc/admin/admin.php:5019 inc/admin/admin.php:5096
+#: inc/admin/admin.php:5173 inc/admin/admin.php:5250
+msgid "Custom Dimension #5"
+msgstr "Προσαρμοσμένη διάσταση #5"
+
+#: inc/admin/admin.php:4939 inc/admin/admin.php:5016 inc/admin/admin.php:5093
+#: inc/admin/admin.php:5170 inc/admin/admin.php:5247
+msgid "Custom Dimension #4"
+msgstr "Προσαρμοσμένη διάσταση #4"
+
+#: inc/admin/admin.php:4936 inc/admin/admin.php:5013 inc/admin/admin.php:5090
+#: inc/admin/admin.php:5167 inc/admin/admin.php:5244
+msgid "Custom Dimension #3"
+msgstr "Προσαρμοσμένη διάσταση #3"
+
+#: inc/admin/admin.php:4933 inc/admin/admin.php:5010 inc/admin/admin.php:5087
+#: inc/admin/admin.php:5164 inc/admin/admin.php:5241
+msgid "Custom Dimension #2"
+msgstr "Προσαρμοσμένη διάσταση #2"
+
+#: inc/admin/admin.php:4930 inc/admin/admin.php:5007 inc/admin/admin.php:5084
+#: inc/admin/admin.php:5161 inc/admin/admin.php:5238
+msgid "Custom Dimension #1"
+msgstr "Προσαρμοσμένη διάσταση #1"
+
+#: inc/admin/admin.php:4663
+msgid "Enter your Tracking ID (UA-XXXX-XX)"
+msgstr "Εισάγετε το αναγνωριστικό καταγραφής (UA-XXXX-XX)"
+
+#: inc/admin/admin.php:3800
+msgid "Search Keywords"
+msgstr "Λέξεις-κλειδιά αναζήτησης"
+
+#: inc/admin/admin.php:3583
+msgid "Post Type Archive Name"
+msgstr "Όνομα αρχείου τύπων άρθρων"
+
+#: inc/admin/admin.php:3504
+msgid "Term Description"
+msgstr "Περιγραφή όρων"
+
+#: inc/admin/admin.php:3502
+msgid "Tag Description"
+msgstr "Ετικέτα περιγραφής"
+
+#: inc/admin/admin.php:3500
+msgid "Category Description"
+msgstr "Περιγραφή κατηγορίας"
+
+#: inc/admin/admin.php:3469
+msgid "Term Title"
+msgstr "Τίτλος όρων"
+
+#: inc/admin/admin.php:3467
+msgid "Tag Title"
+msgstr "Τίτλος ετικέτας"
+
+#: inc/admin/admin.php:3465
+msgid "Category Title"
+msgstr "Τίτλος κατηγορίας"
+
+#: inc/admin/admin-metaboxes-form.php:101 inc/admin/admin.php:3351
+msgid "Post Title"
+msgstr "Τίτλος άρθρου"
+
+#: inc/admin/admin.php:3302 inc/admin/admin.php:3313 inc/admin/admin.php:3355
+#: inc/admin/admin.php:3474 inc/admin/admin.php:3507 inc/admin/admin.php:3587
+#: inc/admin/admin.php:3663 inc/admin/admin.php:3733 inc/admin/admin.php:3802
+#: inc/admin/admin.php:3852
+msgid "More tags"
+msgstr "Περισσότερες ετικέτες"
+
+#: inc/admin/admin.php:3281
+msgid "<p>Customize SEOPress to fit your needs.</p>"
+msgstr "<p>Προσαρμόστε το SEOPress για να ταιριάξει στις ανάγκες σας.</p>"
+
+#: inc/admin/admin.php:3251
+msgid "<p>Configure your Google Analytics tracking code.</p>"
+msgstr "<p>Διαμορφώστε τον κώδικα παρακολούθησης του Google Analytics. </p>"
+
+#: inc/admin/admin.php:3246
+msgid "<p>Link your Google Analytics to your website.</p>"
+msgstr "<p> Συνδέστε το Google Analytics στον ιστότοπό σας. </p>"
+
+#: inc/admin/admin.php:2980
+msgid "Show Meta description column in post types"
+msgstr "Εμφάνιση της στήλης μέτα-περιγραφή σε τύπους άρθρων"
+
+#: inc/admin/admin.php:2972
+msgid "Show Title tag column in post types"
+msgstr "Εμφάνιση στήλης ετικέτας τίτλου σε τύπους άρθρων"
+
+#: inc/admin/admin.php:2932
+msgid "SEOPress in admin bar"
+msgstr "SEOPress στην γραμμή διαχειριστή"
+
+#: inc/admin/admin.php:2819
+msgid "Redirect attachment pages to post parent"
+msgstr "Ανακατεύθυνση σελίδων συνημμένων σε γονικά άρθρα"
+
+#: inc/admin/admin.php:2802
+msgid "Track Logged In Users"
+msgstr "Παρακολούθηση συνδεδεμένων χρηστών"
+
+#: inc/admin/admin.php:2794
+msgid "Track Post Types"
+msgstr "Παρακολουθήστε τους τύπους άρθρων"
+
+#: inc/admin/admin.php:2786
+msgid "Track Tags"
+msgstr "Καταγραφή ετικετών"
+
+#: inc/admin/admin.php:2778
+msgid "Track Categories"
+msgstr "Καταγραφή κατηγοριών"
+
+#: inc/admin/admin.php:2770
+msgid "Track Authors"
+msgstr "Καταγραφή συγγραφέων"
+
+#: inc/admin/admin.php:2702 inc/admin/admin.php:4832
+msgid "Cross domains"
+msgstr "Εναλλαγή τομέων"
+
+#: inc/admin/admin.php:2694 inc/admin/admin.php:4818
+msgid "Enable cross-domain tracking"
+msgstr "Ενεργοποίηση καταγραφής εναλλαγής τομέων"
+
+#: inc/admin/admin.php:2686 inc/admin/admin.php:4797
+msgid "Enhanced Link Attribution"
+msgstr "Ενισχυμένη απόδοση σύνδεσης"
+
+#: inc/admin/admin.php:2678 inc/admin/admin.php:4776
+msgid "Enable IP Anonymization"
+msgstr "Ενεργοποίηση ανωνυμοποίησης IP"
+
+#: inc/admin/admin.php:2670 inc/admin/admin.php:4755
+msgid "Enable remarketing, demographics, and interests reporting"
+msgstr "Ενεργοποιήστε την αλλαγή μάρκετινγκ, τη δημογραφία και την αναφορά ενδιαφέροντος"
+
+#: inc/admin/admin.php:2652
+msgid "Exclude user roles from tracking"
+msgstr "Εξαίρεση των ρόλων χρηστών από την καταγραφή"
+
+#: inc/admin/admin.php:2620 inc/admin/admin.php:4663
+msgid "Enter your tracking ID"
+msgstr "Εισάγετε το αναγνωριστικό καταγραφής"
+
+#: inc/admin/admin.php:2612
+msgid "Enable Google Analytics tracking"
+msgstr "Ενεργοποιήστε την παρακολούθηση του Google Analytics"
+
+#: inc/admin/admin.php:1933
+msgid "Edit your SEOPress license key."
+msgstr "Επεξεργαστείτε το κλειδί άδειας SEOPress."
+
+#: inc/admin/admin-header.php:162 inc/admin/admin.php:1932
+#: inc/admin/adminbar.php:69
+msgid "License"
+msgstr "Άδεια χρήσης"
+
+#: inc/admin/admin.php:1888
+msgid "Edit your htaccess file."
+msgstr "Επεξεργαστείτε το αρχείο htaccess."
+
+#: inc/admin/admin-header.php:149 inc/admin/admin.php:1887
+msgid ".htaccess"
+msgstr ".htaccess"
+
+#: inc/admin/admin.php:1796
+msgid "Monitor 404, create 301, 302 and 307 redirections"
+msgstr "Παρακολουθήστε 404, δημιουργήστε ανακατευθύνσεις 301, 302 και 307"
+
+#: inc/admin/admin.php:1768
+msgid "Optimize your site for Google News"
+msgstr "Βελτιστοποιήστε τον ιστότοπό σας για τις Ειδήσεις Google"
+
+#: inc/admin/admin-header.php:118 inc/admin/admin.php:1767
+msgid "Google News Sitemap"
+msgstr "Χάρτης ιστοτόπου ειδήσεων Google"
+
+#: inc/admin/admin.php:1727
+msgid "Edit your robots.txt file"
+msgstr "Επεξεργαστείτε το αρχείο robots.txt"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:216
+msgid "Robots"
+msgstr "Robots"
+
+#: inc/admin/admin.php:1706
+msgid "Track your website performance to improve SEO with Google Page Speed"
+msgstr "Παρακολουθήστε την απόδοση του ιστότοπού σας για τη βελτίωση του SEO με τον μετρητή ταχύτητας σελίδας Google"
+
+#: inc/admin/admin-header.php:104 inc/admin/admin.php:1705
+msgid "Google Page Speed"
+msgstr "Μετρητής ταχύτητας σελίδας Google"
+
+#: inc/admin/admin.php:1668
+msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
+msgstr "Ενεργοποιήστε τα Breadcrumbs για το θέμα σας και βελτιώστε το SEO σας σε SERPs"
+
+#: inc/admin/admin-header.php:98 inc/admin/admin.php:1667
+msgid "Breadcrumbs"
+msgstr "Breadcrumbs"
+
+#: inc/admin/admin.php:1528
+msgid "Improve WooCommerce SEO"
+msgstr "Βελτιώστε το WooCommerce SEO"
+
+#: inc/admin/admin-header.php:68 inc/admin/admin.php:1527
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: inc/admin/admin.php:1461
+msgid "Track everything about your visitors with Google Analytics"
+msgstr "Παρακολουθήστε τα πάντα για τους επισκέπτες σας με το Google Analytics"
+
+#: inc/admin/admin.php:318 inc/admin/admin.php:320 inc/admin/admin.php:385
+#: inc/admin/admin.php:387 inc/admin/admin.php:450 inc/admin/admin.php:452
+#: inc/admin/admin.php:517 inc/admin/admin.php:519 inc/admin/admin.php:598
+#: inc/admin/admin.php:600 inc/admin/admin.php:1361 inc/admin/admin.php:1363
+#: inc/admin/admin.php:1399 inc/admin/admin.php:1401 inc/admin/admin.php:1437
+#: inc/admin/admin.php:1439 inc/admin/admin.php:1475 inc/admin/admin.php:1477
+#: inc/admin/admin.php:1513 inc/admin/admin.php:1515 inc/admin/admin.php:1542
+#: inc/admin/admin.php:1544 inc/admin/admin.php:1570 inc/admin/admin.php:1572
+#: inc/admin/admin.php:1598 inc/admin/admin.php:1600 inc/admin/admin.php:1626
+#: inc/admin/admin.php:1628 inc/admin/admin.php:1654 inc/admin/admin.php:1656
+#: inc/admin/admin.php:1682 inc/admin/admin.php:1684 inc/admin/admin.php:1743
+#: inc/admin/admin.php:1745 inc/admin/admin.php:1782 inc/admin/admin.php:1784
+#: inc/admin/admin.php:1811 inc/admin/admin.php:1813 inc/admin/admin.php:1873
+#: inc/admin/admin.php:1875
+msgid "Click to enable this feature"
+msgstr "Κάντε κλικ για να ενεργοποιήσετε αυτήν τη δυνατότητα"
+
+#: inc/admin/admin.php:317 inc/admin/admin.php:321 inc/admin/admin.php:384
+#: inc/admin/admin.php:388 inc/admin/admin.php:449 inc/admin/admin.php:453
+#: inc/admin/admin.php:516 inc/admin/admin.php:520 inc/admin/admin.php:597
+#: inc/admin/admin.php:601 inc/admin/admin.php:1360 inc/admin/admin.php:1364
+#: inc/admin/admin.php:1398 inc/admin/admin.php:1402 inc/admin/admin.php:1436
+#: inc/admin/admin.php:1440 inc/admin/admin.php:1474 inc/admin/admin.php:1478
+#: inc/admin/admin.php:1512 inc/admin/admin.php:1516 inc/admin/admin.php:1541
+#: inc/admin/admin.php:1545 inc/admin/admin.php:1569 inc/admin/admin.php:1573
+#: inc/admin/admin.php:1597 inc/admin/admin.php:1601 inc/admin/admin.php:1625
+#: inc/admin/admin.php:1629 inc/admin/admin.php:1653 inc/admin/admin.php:1657
+#: inc/admin/admin.php:1681 inc/admin/admin.php:1685 inc/admin/admin.php:1742
+#: inc/admin/admin.php:1746 inc/admin/admin.php:1781 inc/admin/admin.php:1785
+#: inc/admin/admin.php:1810 inc/admin/admin.php:1814 inc/admin/admin.php:1872
+#: inc/admin/admin.php:1876
+msgid "Click to disable this feature"
+msgstr "Κάντε κλικ για να απενεργοποιήσετε αυτήν τη δυνατότητα"
+
+#: inc/admin/admin.php:979 inc/admin/admin.php:1058 inc/admin/admin.php:1071
+msgid "Medium impact"
+msgstr "Μεσαία επιρροή"
+
+#: inc/admin/admin.php:876 inc/admin/admin.php:935 inc/admin/admin.php:945
+#: inc/admin/admin.php:955
+msgid "High impact"
+msgstr "Υψηλή επιρροή"
+
+#: inc/admin/admin.php:924
+msgid "Buy an SSL!"
+msgstr "Αγοράστε SSL!"
+
+#: inc/admin/admin.php:922
+msgid "Low impact"
+msgstr "Χαμηλή επιρροή"
+
+#: inc/admin/admin.php:920
+msgid "Your site doesn't use an SSL certificate!"
+msgstr "Ο ιστότοπός σας δεν χρησιμοποιεί πιστοποιητικό SSL!"
+
+#: inc/admin/admin.php:899
+msgid "Migrate!"
+msgstr "Μετακίνηση"
+
+#: inc/admin/admin.php:897
+msgid "We notice that you use Yoast SEO plugin. <br>Do you want to migrate all your posts metadata to SEOPress?"
+msgstr "Παρατηρούμε ότι χρησιμοποιείτε το plugin Yoast SEO. <br> Θέλετε να μεταφέρετε όλα τα μεταδεδομένα των άρθρων σας στο SEOPress;"
+
+#: inc/admin/admin.php:756
+msgid "<strong>WARNING:</strong> Delete all options related to SEOPress in your database AND set settings to their default values."
+msgstr "<strong> ΠΡΟΕΙΔΟΠΟΙΗΣΗ: </strong> Διαγράψτε όλες τις επιλογές που σχετίζονται με το SEOPress στη βάση δεδομένων σας και ρυθμίστε τις ρυθμίσεις στις προεπιλεγμένες τιμές τους."
+
+#: inc/admin/admin.php:733
+msgid "Migrate now"
+msgstr "Μετακίνηση τώρα"
+
+#: inc/admin/admin.php:728
+msgid "Meta Robots (noindex, nofollow...)"
+msgstr "Meta Robots (noindex, nofollow...)"
+
+#: inc/admin/admin.php:727
+msgid "Twitter tags (title, description and image thumbnail)"
+msgstr "Ετικέτες Twitter (τίτλος, περιγραφή και μικρογραφία εικόνας)"
+
+#: inc/admin/admin.php:726
+msgid "Facebook Open Graph tags (title, description and image thumbnail)"
+msgstr "Ετικέτες του Open Graph για το Facebook (τίτλος, περιγραφή και μικρογραφία εικόνας)"
+
+#: inc/admin/admin.php:724
+msgid "Title tags"
+msgstr "Ετικέτα τίτλου"
+
+#: inc/admin/admin.php:722
+msgid "By clicking Migrate, we'll import:"
+msgstr "Κάνοντας κλικ στη μετακίνηση θα εισάγουμε :"
+
+#: inc/admin/admin.php:616
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: inc/admin/admin.php:538 inc/admin/admin.php:547
+msgid "Custom Dimensions"
+msgstr "Προσαρμοσμένες διαστάσεις"
+
+#: inc/admin/admin.php:536 inc/admin/admin.php:545
+msgid "Tracking"
+msgstr "Καταγραφή"
+
+#: inc/admin/admin.php:214
+msgid "Date Archive"
+msgstr "Ημερομηνία αρχείου"
+
+#: inc/admin/admin.php:212
+msgid "Plural Post Type Archive name"
+msgstr "Πληθυντικός ονόματος αρχείου τύπων άρθρου"
+
+#: inc/admin/admin.php:212
+msgid "%%cpt_plural%%"
+msgstr "%%cpt_plural%%"
+
+#: inc/admin/admin-header.php:54 inc/admin/admin.php:187
+#: inc/admin/admin.php:1460 inc/admin/adminbar.php:43
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: inc/admin/admin.php:105
+msgid "404 - Page not found"
+msgstr "404 - Η δελίδα δεν βρέθηκε"
+
+#: inc/admin/admin.php:4927 inc/admin/admin.php:5004 inc/admin/admin.php:5081
+#: inc/admin/admin.php:5158 inc/admin/admin.php:5235
+msgid "None"
+msgstr "Τίποτα"
+
+#: inc/admin/admin-metaboxes-form.php:286
+msgid "Exclude this post from Google News Sitemap?"
+msgstr "Εξαίρεση αυτού του άρθρου από τον Χάρτη ιστοτόπων ειδήσεων Google;"
+
+#: inc/admin/admin-metaboxes-form.php:178 inc/admin/admin.php:3979
+msgid "Do not display a description in the Google search results for all pages."
+msgstr "Να μην εμφανίζεται περιγραφή στα αποτελέσματα αναζήτησης Google για όλες τις σελίδες."
+
+#: inc/admin/admin-metaboxes-form.php:172 inc/admin/admin.php:3960
+msgid "Do not display a \"Cached\" link in the Google search results."
+msgstr "Να μην εμφανίζεται σύνδεσμος \"Αποθηκευμένη\" στα αποτελέσματα αναζήτησης Google."
+
+#: inc/admin/admin-metaboxes-form.php:166 inc/admin/admin.php:3941
+msgid "Do not index images from the entire site."
+msgstr "Μην κάνετε ευρετήριο εικόνων σε ολόκληρο τον ιστότοπο."
+
+#: inc/admin/admin-metaboxes-form.php:160 inc/admin/admin.php:3922
+msgid "Do not use Open Directory project metadata for titles or excerpts for all pages."
+msgstr "Μη χρησιμοποιείτε μεταδεδομένα του έργου Open Directory για τίτλους ή αποσπάσματα για όλες τις σελίδες."
+
+#: inc/admin/admin-metaboxes-form.php:154 inc/admin/admin.php:3903
+msgid "Do not follow links for all pages."
+msgstr "Μην ακολουθήσετε συνδέσμους για όλες τις σελίδες."
+
+#: inc/admin/admin-metaboxes-form.php:148 inc/admin/admin.php:3884
+msgid "Do not display all pages of the site in Google search results and do not display \"Cached\" links in search results."
+msgstr "Να μην εμφανίζονται όλες οι σελίδες του ιστότοπου στα αποτελέσματα αναζήτησης Google και να μην εμφανίζονται σύνδεσμοι \"προσωρινής αποθήκευσης\" στα αποτελέσματα αναζήτησης."
+
+#: inc/admin/admin-metaboxes-form.php:66
+msgid "Google News"
+msgstr "Ειδήσεις Google"
+
+#: inc/admin/admin-metaboxes-form.php:48 inc/admin/admin-metaboxes.php:162
+#: inc/admin/admin-metaboxes.php:164 inc/admin/admin.php:182
+#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:752
+msgid "SEO"
+msgstr "SEO"
+
+#: seopress.php:313
+msgid "GO PRO!"
+msgstr "Αναβαθμήστε σε PRO!"
+
+#: inc/admin/admin.php:3194
+msgid "Flush permalinks"
+msgstr "Καθαρισμός μόνιμων συνδέσμων"
+
+#: inc/admin/admin.php:3192
+msgid "Ping Google manually"
+msgstr "Ping Google χειροκίνητα"
+
+#: inc/admin/admin.php:954 inc/admin/admin.php:3166
+msgid "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
+msgstr "Οι μόνιμοι σύνδεσμοί σας δεν είναι φιλικοί για SEO! Ενεργοποιήστε αρκετούς μόνιμους συνδέσμους για να το διορθώσετε."
+
+#: inc/admin/admin.php:944
+msgid "Your site title is empty!"
+msgstr "Ο τίτλος του ιστότοπού σας είναι κενός!"
+
+#: inc/admin/admin.php:5347
+msgid "Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
+msgstr "Ρύθμιση βασισμένη στη γλώσσα του ιστότοπου. Υποστηριζόμενες γλώσσες EN, FR, ES, DE, IT, PT."
+
+#: inc/admin/admin.php:5347
+msgid "Remove stop words in permalinks"
+msgstr "Καταργήστε τις μικρές λέξεις στους μόνιμους συνδέσμους"
+
+#: inc/admin/admin.php:2835
+msgid "Remove stop words from URL"
+msgstr "Αφαιρέστε τις μικρές λέξεις από τις διευθύνσνεις URL"
+
+#: inc/admin/admin.php:5500
+msgid "Enter Yandex meta value site verification"
+msgstr "Εισαγάγετε την τιμή επαλήθευσης ιστότοπου Yandex"
+
+#: inc/admin/admin.php:5488
+msgid "Enter Pinterest meta value site verification"
+msgstr "Εισαγάγετε την τιμή επαλήθευσης ιστότοπου Pinterest "
+
+#: inc/admin/admin.php:5475
+msgid "Enter Bing meta value site verification"
+msgstr "Εισαγάγετε την τιμή επαλήθευσης ιστότοπου Bing "
+
+#: inc/admin/admin.php:5461
+msgid "Enter Google meta value site verification"
+msgstr "Εισαγάγετε την τιμή επαλήθευσης ιστότοπου Google"
+
+#: inc/admin/admin.php:3171
+msgid "Only the last 1000 items are listed in Sitemaps for performances issues."
+msgstr "Μόνο τα τελευταία 1000 στοιχεία εμφανίζονται στους Χάρτες ιστοτόπου για θέματα επιδόσεων."
+
+#: inc/admin/admin.php:2915 inc/admin/admin.php:5500
+msgid "Yandex site verification"
+msgstr "Ιστότοπος επαλήθευσης Yandex"
+
+#: inc/admin/admin.php:2907 inc/admin/admin.php:5488
+msgid "Pinterest site verification"
+msgstr "Ιστότοπος επαλήθευσης Pinterest "
+
+#: inc/admin/admin.php:2899 inc/admin/admin.php:5475
+msgid "Bing site verification"
+msgstr "Ιστότοπος επαλήθευσης Bing "
+
+#: inc/admin/admin.php:2891 inc/admin/admin.php:5461
+msgid "Google site verification"
+msgstr "Επαλήθευση ιστότοπου Google"
+
+#: inc/admin/admin.php:1070
+msgid "You don't have an XML Sitemap!"
+msgstr "Δεν διαθέτετε Χάρτη ιστοτόπου XML!"
+
+#: inc/admin/admin.php:937 inc/admin/admin.php:947 inc/admin/admin.php:957
+#: inc/admin/admin.php:981 inc/admin/admin.php:1060 inc/admin/admin.php:1073
+#: inc/admin/admin.php:1145
+msgid "Fix this!"
+msgstr "Διορθώστε το!"
+
+#: inc/admin/admin.php:934
+msgid "Your site is not visible to Search Engines!"
+msgstr "Ο ιστότοπός σας δεν είναι ορατός σε μηχανές αναζήτησης!"
+
+#: inc/admin/admin.php:824 inc/admin/admin.php:830
+msgid "Notifications Center"
+msgstr "Κέντρο ειδοποιήσεων"
+
+#: inc/admin/admin-header.php:213
+msgid "Support"
+msgstr "Υποστήριξη"
+
+#: inc/admin/admin.php:233
+msgid "Templates variables"
+msgstr "Πρότυπα μεταβλητών "
+
+#: inc/admin/admin.php:211
+msgid "Current number page"
+msgstr "Αριθμός τρέχουσας σελίδας "
+
+#: inc/admin/admin.php:211
+msgid "%%current_pagination%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/admin.php:210
+msgid "Search keywords"
+msgstr "Αναζήτηση λέξεων κλειδιά"
+
+#: inc/admin/admin.php:210
+msgid "%%search_keywords%%"
+msgstr "%%search_keywords%%"
+
+#: inc/admin/admin.php:209
+msgid "Term description"
+msgstr "Περιγραφή όρου"
+
+#: inc/admin/admin.php:209
+msgid "%%term_description%%"
+msgstr "%%term_description%%"
+
+#: inc/admin/admin.php:208
+msgid "Term title"
+msgstr "Τίτλος όρου"
+
+#: inc/admin/admin.php:208
+msgid "%%term_title%%"
+msgstr "%%term_title%%"
+
+#: inc/admin/admin.php:207
+msgid "Tag description"
+msgstr "Ετικέτα περιγραφής"
+
+#: inc/admin/admin.php:207
+msgid "%%tag_description%%"
+msgstr "%%tag_description%%"
+
+#: inc/admin/admin.php:206
+msgid "Tag title"
+msgstr "Ετικέτα τίτλου"
+
+#: inc/admin/admin.php:206
+msgid "%%tag_title%%"
+msgstr "%%tag_title%%"
+
+#: inc/admin/admin.php:205
+msgid "Category description"
+msgstr "Περιγραφή κατηγορίας"
+
+#: inc/admin/admin.php:205
+msgid "%%_category_description%%"
+msgstr "%%_category_description%%"
+
+#: inc/admin/admin.php:204
+msgid "Category title"
+msgstr "Τίτλος κατηγορίας"
+
+#: inc/admin/admin.php:204
+msgid "%%_category_title%%"
+msgstr "%%_category_title%%"
+
+#: inc/admin/admin.php:201 inc/admin/admin.php:3661
+msgid "Post author"
+msgstr "Συγγραφές άρθρου"
+
+#: inc/admin/admin.php:201
+msgid "%%post_author%%"
+msgstr "%%post_author%%"
+
+#: inc/admin/admin.php:200
+msgid "Post date"
+msgstr "Ημερομηνία άρθρου"
+
+#: inc/admin/admin.php:200
+msgid "%%post_date%%"
+msgstr "%%post_date%%"
+
+#: inc/admin/admin.php:199
+msgid "Post excerpt"
+msgstr "Απόσπασμα άρθρου"
+
+#: inc/admin/admin.php:199
+msgid "%%post_excerpt%%"
+msgstr "%%post_excerpt%%"
+
+#: inc/admin/admin.php:198
+msgid "Post Title (post, page, custom post type)"
+msgstr "Τίτλος άρθρου (άρθρο, προσαρμοσμένος τύπος άρθρου)"
+
+#: inc/admin/admin.php:198
+msgid "%%post_title%%"
+msgstr "%%post_title%%"
+
+#: inc/admin/admin.php:197 inc/admin/admin.php:3301 inc/admin/admin.php:3312
+msgid "Tagline"
+msgstr "Ετικέτα"
+
+#: inc/admin/admin.php:197
+msgid "%%tagline%%"
+msgstr "%%tagline%%"
+
+#: inc/admin/admin-metaboxes-form.php:103 inc/admin/admin.php:196
+#: inc/admin/admin.php:3300 inc/admin/admin.php:3353 inc/admin/admin.php:3472
+#: inc/admin/admin.php:3585 inc/admin/admin.php:3662 inc/admin/admin.php:3732
+#: inc/admin/admin.php:3801 inc/admin/admin.php:3851
+msgid "Site Title"
+msgstr "Τίτλος ιστοτόπου"
+
+#: inc/admin/admin.php:196
+msgid "%%sitetitle%%"
+msgstr "%%sitetitle%%"
+
+#: inc/admin/admin.php:5313
+msgid "Redirect attachment pages to post parent (or homepage if none)"
+msgstr "Ανακατεύθυνση  συνημμένων σελίδων για γονικά άρθρα (ή αρχική σελίδα αν δεν υπάρχει)"
+
+#: inc/admin/admin.php:3276
+msgid "<p>Advanced SEO options.</p>"
+msgstr "<p> Προχωρημένες επιλογές SEO. </p>"
+
+#: inc/admin/admin.php:1499
+msgid "Advanced SEO options for advanced users!"
+msgstr "Προηγμένες επιλογές SEO για προχωρημένους χρήστες!"
+
+#: inc/admin/admin-metaboxes-form.php:254
+#: inc/admin/admin-metaboxes-form.php:256
+#: inc/admin/admin-metaboxes-form.php:259
+#: inc/admin/admin-metaboxes-form.php:261
+msgid "Test your URL"
+msgstr "Δοκιμάστε τη διεύθυνση URL σας"
+
+#: inc/admin/admin-metaboxes-form.php:243
+#: inc/admin/admin-metaboxes-form.php:249
+msgid "URL redirection"
+msgstr "Ανακατεύθυνση διεύθυνσης URL"
+
+#: inc/admin/admin-metaboxes-form.php:239
+msgid "Enable redirection?"
+msgstr "Ενεργοποίηση της ανακατεύθυνσης;"
+
+#: inc/admin/admin-header.php:124 inc/admin/admin.php:1795
+#: inc/admin/adminbar.php:81
+msgid "Redirections"
+msgstr "Ανακατευθύνσεις"
+
+#: seopress.php:311
+msgid "SEOPress.org"
+msgstr "SEOPress.org"
+
+#: inc/admin/admin.php:3423
+msgid "Display date in Google search results?"
+msgstr "Εμφάνιση ημερομηνίας στα αποτελέσματα αναζήτησης Google;"
+
+#: inc/admin/admin-metaboxes-form.php:185
+msgid "Default value: "
+msgstr "Προεπιλεγμένη τιμή:"
+
+#. Plugin Name of the plugin/theme
+#: inc/admin/admin-header.php:16
+msgid "SEOPress"
+msgstr "SEOPress"
+
+#: inc/admin/admin-metaboxes-form.php:57
+msgid "Titles settings"
+msgstr "Ρυθμίσεις τίτλου"
+
+#: inc/admin/admin-header.php:60 inc/admin/admin-metaboxes-form.php:58
+#: inc/admin/admin.php:188 inc/admin/admin.php:339 inc/admin/admin.php:615
+#: inc/admin/admin.php:1498 inc/admin/adminbar.php:49
+msgid "Advanced"
+msgstr "Προηγμένες"
+
+#: inc/admin/admin-metaboxes-form.php:59
+msgid "Social"
+msgstr "Μέσα κοινωνικής δικτύωσης"
+
+#: inc/admin/admin-metaboxes-form.php:92 inc/admin/admin-metaboxes-form.php:93
+msgid "Title"
+msgstr "Τίτλος"
+
+#: inc/admin/admin-metaboxes-form.php:93
+msgid "Enter your title"
+msgstr "Εισάγετε τον τίτλος σας"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:185
+#: inc/admin/admin-metaboxes-form.php:107
+#: inc/admin/admin-metaboxes-form.php:108 inc/admin/admin.php:725
+#: inc/admin/admin.php:2019 inc/admin/admin.php:3308
+#: inc/functions/options-advanced-admin.php:762
+msgid "Meta description"
+msgstr "Μέτα-περιγραφή"
+
+#: inc/admin/admin-metaboxes-form.php:108
+msgid "Enter your meta description"
+msgstr "Εισάγετε την μέτα-περιγραφή"
+
+#: inc/admin/admin-metaboxes-form.php:97 inc/admin/admin-metaboxes-form.php:112
+msgid "(maximum recommended limit)"
+msgstr "(μέγιστο επιτρεπόμενο όριο)"
+
+#: inc/admin/admin-metaboxes-form.php:121
+msgid "Google Snippet Preview"
+msgstr "Προεπισκόπηση Google Snippet"
+
+#: inc/admin/admin-metaboxes-form.php:147 inc/admin/admin.php:2204
+#: inc/admin/admin.php:3385 inc/admin/admin.php:3522 inc/admin/admin.php:3617
+#: inc/admin/admin.php:3693 inc/admin/admin.php:3762 inc/admin/admin.php:3832
+#: inc/admin/admin.php:3882
+msgid "noindex"
+msgstr "noindex"
+
+#: inc/admin/admin-metaboxes-form.php:153 inc/admin/admin.php:2212
+#: inc/admin/admin.php:3404 inc/admin/admin.php:3541 inc/admin/admin.php:3636
+#: inc/admin/admin.php:3901
+msgid "nofollow"
+msgstr "nofollow"
+
+#: inc/admin/admin-metaboxes-form.php:159 inc/admin/admin.php:2220
+#: inc/admin/admin.php:3920
+msgid "noodp"
+msgstr "noodp"
+
+#: inc/admin/admin-metaboxes-form.php:165 inc/admin/admin.php:2228
+#: inc/admin/admin.php:3939
+msgid "noimageindex"
+msgstr "noimageindex"
+
+#: inc/admin/admin-metaboxes-form.php:177 inc/admin/admin.php:2244
+#: inc/admin/admin.php:3977
+msgid "nosnippet"
+msgstr "nosnippet"
+
+#: inc/admin/admin-metaboxes-form.php:171 inc/admin/admin.php:2236
+#: inc/admin/admin.php:3958
+msgid "noarchive"
+msgstr "noarchive"
+
+#: inc/admin/admin-metaboxes-form.php:184
+#: inc/admin/admin-metaboxes-form.php:185 inc/admin/admin.php:729
+msgid "Canonical URL"
+msgstr "Κανονική διεύθυνση URL"
+
+#: inc/admin/admin-metaboxes-form.php:201
+#: inc/admin/admin-metaboxes-form.php:202
+msgid "Facebook Title"
+msgstr "Τίτλος Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:205
+#: inc/admin/admin-metaboxes-form.php:206
+msgid "Facebook description"
+msgstr "Περιγραφή Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:202
+msgid "Enter your Facebook title"
+msgstr "Εισάγετε τον τίτλο Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:206
+msgid "Enter your Facebook description"
+msgstr "Εισαγάγετε την περιγραφή του Facebook σας"
+
+#: inc/admin/admin-metaboxes-form.php:209
+#: inc/admin/admin-metaboxes-form.php:210
+msgid "Facebook Thumbnail"
+msgstr "Μικρογραφία Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:210
+#: inc/admin/admin-metaboxes-form.php:228 inc/admin/admin.php:4521
+#: inc/admin/admin.php:4612
+msgid "Select your default thumbnail"
+msgstr "Επιλέξτε την προεπιλεγμένη μικρογραφία"
+
+#: inc/admin/admin-metaboxes-form.php:212
+#: inc/admin/admin-metaboxes-form.php:230
+#: inc/admin/admin-metaboxes-form.php:357 inc/admin/admin.php:4279
+#: inc/admin/admin.php:4523 inc/admin/admin.php:4614
+msgid "Upload an Image"
+msgstr "Μεταφορτώστε μια εικόνα"
+
+#: inc/admin/admin-metaboxes-form.php:219
+#: inc/admin/admin-metaboxes-form.php:220
+msgid "Twitter Title"
+msgstr "Τίτλος Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:220
+msgid "Enter your Twitter title"
+msgstr "Εισάγετε το τίτλος σας Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:223
+#: inc/admin/admin-metaboxes-form.php:224
+msgid "Twitter description"
+msgstr "Περιγραφή Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:227
+#: inc/admin/admin-metaboxes-form.php:230
+msgid "Twitter Thumbnail"
+msgstr "Μικρογραφία Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:224
+msgid "Enter your Twitter description"
+msgstr "Εισάγετε την περιγραφή Τwitter"
+
+#: inc/admin/admin-header.php:36 inc/admin/admin.php:184
+#: inc/admin/adminbar.php:25
+msgid "Titles & Metas"
+msgstr "Τίτλος και μέτα"
+
+#: inc/admin/admin.php:405
+msgid "HTML Sitemap"
+msgstr "Χάρτης ιστοτόπου HTML"
+
+#: inc/admin/admin.php:3167
+msgid "Change this settings"
+msgstr "Αλλάξτε αυτές τις ρυθμίσεις"
+
+#: inc/admin/admin.php:338 inc/admin/admin.php:404
+msgid "Taxonomies"
+msgstr "Ταξινόμηση"
+
+#: inc/admin/admin.php:336
+msgid "Single Post Types"
+msgstr "Μοναδικό τύπο άρθρου"
+
+#: inc/admin/admin.php:335
+msgid "Home"
+msgstr "Αρχική"
+
+#: inc/admin/admin.php:337
+msgid "Archives"
+msgstr "Αρχεία"
+
+#: inc/admin/admin.php:402 inc/admin/admin.php:535 inc/admin/admin.php:544
+msgid "General"
+msgstr "Γενικά"
+
+#: inc/admin/admin.php:403
+msgid "Post Types"
+msgstr "Τύπος άρθρων"
+
+#: inc/admin/admin.php:467
+msgid "Knowledge Graph"
+msgstr "Γράφημα Γνώσης"
+
+#: inc/admin/admin.php:468
+msgid "Your social accounts"
+msgstr "Οι  λογαριασμοί σας στα μέσα κοινωνικής δικτύωσης"
+
+#: inc/admin/admin.php:649
+msgid "Export Settings"
+msgstr "Εξαγωγή ρυθμίσεων"
+
+#: inc/admin/admin.php:651
+msgid "Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site."
+msgstr "Εξαγωγή των ρυθμίσεων του πρόσθετου για αυτόν τον ιστότοπο ως αρχείο .json. Αυτό σας επιτρέπει να εισαγάγετε εύκολα τη διαμόρφωση σε έναν άλλο ιστότοπο."
+
+#: inc/admin/admin.php:656 inc/admin/admin.php:712
+msgid "Export"
+msgstr "Εξαγωγή"
+
+#: inc/admin/admin.php:663
+msgid "Import Settings"
+msgstr "Εισάγετε τις ρυθμίσεις"
+
+#: inc/admin/admin.php:665
+msgid "Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above."
+msgstr "Εισαγάγετε τις ρυθμίσεις του πρόσθετου από αρχείο .json. Αυτό το αρχείο μπορεί να ληφθεί εξάγοντας τις ρυθμίσεις σε έναν άλλο ιστότοπο χρησιμοποιώντας την παραπάνω φόρμα."
+
+#: inc/admin/admin.php:673 inc/admin/admin.php:699
+msgid "Import"
+msgstr "Εισαγωγή"
+
+#: inc/admin/admin.php:754
+msgid "Reset All Settings"
+msgstr "Επαναφορά όλων των ρυθμίσεων"
+
+#: inc/admin/admin-header.php:23 inc/admin/adminbar.php:75
+msgid "PRO"
+msgstr "PRO"
+
+#: inc/admin/admin.php:761
+msgid "Reset settings"
+msgstr "Επαναφορά ρυθμίσεων"
+
+#: seopress.php:263
+msgid "You like SEOPress? Don't forget to rate it 5 stars!"
+msgstr "Σας αρέσει το SEOPress? Μη ξεχάσετε να το βαθμολογίσετε με 5 αστέρια!"
+
+#: inc/admin/admin-header.php:201
+msgid "Follow us on Twitter"
+msgstr "Ακολουθήστε μας στο Twitter"
+
+#: inc/admin/admin.php:1346
+msgid "Titles & metas"
+msgstr "Τίτλοι και μέτα"
+
+#: inc/admin/admin.php:1347
+msgid "Manage all your titles & metas"
+msgstr "Διαχειριστείτε όλους τους τίτλους και τα μέτα σας"
+
+#: inc/admin/admin.php:1348 inc/admin/admin.php:1386 inc/admin/admin.php:1424
+#: inc/admin/admin.php:1462 inc/admin/admin.php:1500 inc/admin/admin.php:1529
+#: inc/admin/admin.php:1557 inc/admin/admin.php:1585 inc/admin/admin.php:1613
+#: inc/admin/admin.php:1641 inc/admin/admin.php:1669 inc/admin/admin.php:1707
+#: inc/admin/admin.php:1729 inc/admin/admin.php:1769 inc/admin/admin.php:1798
+#: inc/admin/admin.php:1848 inc/admin/admin.php:1858 inc/admin/admin.php:1889
+#: inc/admin/admin.php:1901 inc/admin/admin.php:1913 inc/admin/admin.php:1934
+msgid "Manage"
+msgstr "Διαχείριση"
+
+#: inc/admin/admin.php:2433 inc/admin/admin.php:4380
+msgid "Facebook Page URL"
+msgstr "Διεύθυνση σελίδας URL Facebook"
+
+#: inc/admin/admin.php:2392 inc/admin/admin.php:4277
+msgid "Your photo/organization logo"
+msgstr "Η φωτογραφία σας / Το λογότυπο της εταιρείας σας"
+
+#: inc/admin/admin.php:2384 inc/admin/admin.php:4264
+msgid "Your name/organization"
+msgstr "Το όνομα σας / όνομα εταιρείας"
+
+#: inc/admin/admin.php:2376
+msgid "Person or organization"
+msgstr "Άτομο ή εταιρεία"
+
+#: inc/admin/admin.php:2327
+msgid "Check to INCLUDE Taxonomies"
+msgstr "Επιλέξτε για να συμπεριλάβετε τις ταξονομήσεις"
+
+#: inc/admin/admin.php:2311
+msgid "Check to INCLUDE Post Types"
+msgstr "Επιλέξτε για να συμπεριλάβετε τους τύπους άρθρων"
+
+#: inc/admin/admin.php:2269 inc/admin/admin.php:4015
+msgid "Enable XML Sitemap"
+msgstr "Ενεργοποιήστε τον Χάρτη ιστοτόπου XML"
+
+#: inc/admin/admin.php:2011 inc/admin/admin.php:3297
+msgid "Site title"
+msgstr "Τίτλος ιστοσελίδας"
+
+#: inc/admin/admin.php:1912
+msgid "Import/Export SEOPress settings from site to site."
+msgstr "Εισαγωγή / εξαγωγή ρυθμίσεων SEOPress από ιστοσελίδα σε ιστοσελίδα."
+
+#: inc/admin/admin.php:1423
+msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
+msgstr "Open Graph, Twitter Card, Γνωσιακό Γράφημα Google και πολλά άλλα ..."
+
+#: inc/admin/admin.php:2441
+msgid "Twitter Username"
+msgstr "Όνομα χρήστη Twitter"
+
+#: inc/admin/admin.php:2449 inc/admin/admin.php:4405
+msgid "Google + URL"
+msgstr "Διεύθυνση URL Goole +"
+
+#: inc/admin/admin.php:2457 inc/admin/admin.php:4417
+msgid "Pinterest URL"
+msgstr "Διεύθυνση URL Pinterest "
+
+#: inc/admin/admin.php:2497 inc/admin/admin.php:4477
+msgid "Soundcloud URL"
+msgstr "Διεύθυνση URL Soundcloud"
+
+#: inc/admin/admin.php:2489 inc/admin/admin.php:4465
+msgid "MySpace URL"
+msgstr "Διεύθυνση URL MySpace "
+
+#: inc/admin/admin.php:2481 inc/admin/admin.php:4453
+msgid "LinkedIn URL"
+msgstr "Διεύθυνση URL LinkedIn"
+
+#: inc/admin/admin.php:2473 inc/admin/admin.php:4441
+msgid "YouTube URL"
+msgstr "Διεύθυνση URL YouTube "
+
+#: inc/admin/admin.php:2465 inc/admin/admin.php:4429
+msgid "Instagram URL"
+msgstr "Διεύθυνση URL Instagram"
+
+#: inc/admin/admin.php:2522
+msgid "Enable Open Graph Data"
+msgstr "Ενεργοποιήση δεδομένων Open Graph"
+
+#: inc/admin/admin.php:2505 inc/admin/admin.php:4489
+msgid "Tumblr URL"
+msgstr "Διεύθυνση URLTumblr"
+
+#: inc/admin/admin.php:2554
+msgid "Facebook App ID"
+msgstr "Αναγνωριστικό εφαρμογής Facebook "
+
+#: inc/admin/admin.php:2546
+msgid "Facebook Admin ID"
+msgstr "Αναγνωριστικό διαχειριστή Facebook"
+
+#: inc/admin/admin.php:2530 inc/admin/admin.php:4521
+msgid "Select a default image"
+msgstr "Επιλέξτε μια προεπιλεγμένη εικόνα"
+
+#: inc/admin/admin.php:2571
+msgid "Enable Twitter Card"
+msgstr "Ενεργοποίηση της κάρτας Twitter"
+
+#: inc/admin/admin.php:2587 inc/admin/admin.php:4612
+msgid "Default Twitter Image"
+msgstr "Προεπιλεγμένη εικόνα Twitter"
+
+#: inc/admin/admin.php:2595
+msgid "Image size for Twitter Summary card"
+msgstr "Μέγεθος εικόνας για την καρτέλα σύνοψης Twitter"
+
+#: inc/admin/admin.php:3139
+msgid "<p>Customize your titles & metas for homepage</p>"
+msgstr "<p> Προσαρμόστε τους τίτλους και τα μέτα σας για την αρχική σελίδα </p>"
+
+#: inc/admin/admin.php:3144
+msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
+msgstr "<p>Προσαρμόστε τους τίτλους και τα μέτα σας για τους ενιαίους προσαρμοσμένους τύπους άρθρων </p>"
+
+#: inc/admin/admin.php:3149
+msgid "<p>Customize your metas for all pages</p>"
+msgstr "<p> Προσαρμόστε τα μέτα σας για όλες τις σελίδες </p>"
+
+#: inc/admin/admin.php:3159
+msgid "<p>Customize your metas for all archives</p>"
+msgstr "<p> Προσαρμόστε τα μέτα σας για όλα τα αρχεία </p>"
+
+#: inc/admin/admin.php:3154
+msgid "<p>Customize your metas for all taxonomies archives</p>"
+msgstr "<p> Προσαρμόστε τα μέτα σας για όλα τα αρχεία ταξινόμησης </p>"
+
+#: inc/admin/admin.php:3170
+msgid "To view your sitemap, enable permalinks (not default one), and save settings to flush them."
+msgstr "Για να προβάλετε τον χάρτη ιστότοπού σας, ενεργοποιήστε τους μόνιμους συνδέσμους (όχι το προεπιλεγμένο) και αποθηκεύστε τις ρυθμίσεις για να τις καθαρίσετε."
+
+#: inc/admin/admin.php:3190
+msgid "View your sitemap"
+msgstr "Δείτε το χάρτη ιστότοπού σας"
+
+#: inc/admin/admin.php:3215
+msgid "<p>Include/Exclude Post Types.</p>"
+msgstr "<p> Συμπερίληψη / Εξαίρεση τύπων άρθρου. </p>"
+
+#: inc/admin/admin.php:3220
+msgid "<p>Include/Exclude Taxonomies.</p>"
+msgstr "<p> Συμπεριλάβετε / Εξαιρέστε τις ταξινομίσεις. </p>"
+
+#: inc/admin/admin.php:3225
+msgid "<p>Configure Google Knowledge Graph.</p>"
+msgstr "<p> Διαμορφώστε το Γράφημα Γνώσης της Google. </p>"
+
+#: inc/admin/admin.php:3720 inc/admin/admin.php:3731
+msgid "Date archives"
+msgstr "Αρχείο ημερομηνιών"
+
+#: inc/admin/admin.php:3650
+msgid "Author archives"
+msgstr "Αρχείο συγγραφέων"
+
+#: inc/admin/admin.php:3362 inc/admin/admin.php:3483 inc/admin/admin.php:3594
+#: inc/admin/admin.php:3669 inc/admin/admin.php:3739 inc/admin/admin.php:3808
+#: inc/admin/admin.php:3858
+msgid "Meta description template"
+msgstr "Πρότυπο μέτα-περιγραφών"
+
+#: inc/admin/admin.php:3329 inc/admin/admin.php:3445 inc/admin/admin.php:3564
+#: inc/admin/admin.php:3652 inc/admin/admin.php:3722 inc/admin/admin.php:3791
+#: inc/admin/admin.php:3843
+msgid "Title template"
+msgstr "Τίτλος πρότυπου"
+
+#: inc/admin/admin.php:3308
+msgid "This is a cool website about Wookiees"
+msgstr "Αυτός είναι ένας ωραίος ιστότοπος για το Wookiees"
+
+#: inc/admin/admin.php:3297
+msgid "My awesome website"
+msgstr "Ο υπέροχος ιστότοπός μου"
+
+#: inc/admin/admin.php:3241
+msgid "<p>Manage your Twitter card.</p>"
+msgstr "<p> Διαχειριστείτε την κάρτα Twitter. </p>"
+
+#: inc/admin/admin.php:3236
+msgid "<p>Manage Open Graph datas.</p>"
+msgstr "<p> Διαχειριστείτε τα δεδομένα Open Graph. </p>"
+
+#: inc/admin/admin.php:3231
+msgid "<p>Link your site with your social accounts.</p>"
+msgstr "<p> Συνδέστε τον ιστότοπό σας με τους λογαριασμούς σας στα μέσα κοινωνικής δικτύωσης. </p>"
+
+#: inc/admin/admin.php:4441
+msgid "eg: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+msgstr "π.χ.: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+
+#: inc/admin/admin.php:4417
+msgid "eg: https://pinterest.com/wpbuy/"
+msgstr "π.χ.: https://pinterest.com/wpbuy/"
+
+#: inc/admin/admin.php:4405
+msgid "eg: https://plus.google.com/+BenjaminDenis"
+msgstr "π.χ.: https://plus.google.com/+BenjaminDenis"
+
+#: inc/admin/admin.php:4380
+msgid "eg: https://www.facebook.com/your-page"
+msgstr "π.χ.: https://www.facebook.com/your-page"
+
+#: inc/admin/admin.php:4277
+msgid "Select your logo"
+msgstr "Επιλέξτε το λογότυπό σας"
+
+#: inc/admin/admin.php:4264
+msgid "eg: Apple"
+msgstr "π.χ.: Apple"
+
+#: inc/admin/admin.php:4251
+msgid "Organization"
+msgstr "Εταιρεία"
+
+#: inc/admin/admin.php:4248
+msgid "Person"
+msgstr "Άτομο"
+
+#: inc/admin/admin.php:4148 inc/admin/admin.php:4188
+msgid "Include"
+msgstr "Συμπεριλαμβάνει"
+
+#: inc/admin/admin.php:3841
+msgid "404 archives"
+msgstr "Αρχεία 404"
+
+#: inc/admin/admin.php:3789
+msgid "Search archives"
+msgstr "Αρχεία αναζητήσεων"
+
+#: inc/admin/admin.php:4477
+msgid "eg: https://soundcloud.com/michaelmccannmusic"
+msgstr "π.χ.: https://soundcloud.com/michaelmccannmusic"
+
+#: inc/admin/admin.php:4465
+msgid "eg: https://myspace.com/your-page"
+msgstr "π.χ.: https://myspace.com/your-page"
+
+#: inc/admin/admin.php:4453
+msgid "eg: https://www.linkedin.com/in/benjamin-denis-70672b3b"
+msgstr "π.χ.: https://www.linkedin.com/in/benjamin-denis-70672b3b"
+
+#: inc/admin/admin.php:4489
+msgid "eg: https://your-site.tumblr.com"
+msgstr "π.χ.: https://your-site.tumblr.com"
+
+#: inc/functions/options-import-export.php:51
+msgid "Please upload a valid .json file"
+msgstr "Ανεβάστε ένα έγκυρο αρχείο .json"
+
+#: inc/admin/admin.php:4635
+msgid "Large"
+msgstr "Μεγάλο"
+
+#: inc/admin/admin.php:4632
+msgid "Default"
+msgstr "Προεπιλογή"
+
+#: inc/admin/admin.php:4580
+msgid "Enable Twitter card"
+msgstr "Ενεργοποίηση κάρτας Twitter"
+
+#: inc/admin/admin.php:4506
+msgid "Enable OG data"
+msgstr "Ενεργοποίηση δεδομένων OG"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://www.seopress.org/"
+msgstr "https://www.seopress.org/"
+
+#: seopress.php:310
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: inc/functions/options-import-export.php:55
+#: inc/functions/options-import-export.php:92
+msgid "Please upload a file to import"
+msgstr "Μεταφορτώστε ένα αρχείο για εισαγωγή"

@@ -118,9 +118,15 @@
     width: 100%;
     z-index: 10;
     margin: 0;
+    border-radius: 0;
     padding: 0;
     background: #edeff0;
     border: none;
+}
+
+#seopress_content_analysis .ui-tabs .ui-tabs-nav {
+    width: calc(100% + 24px);
+    margin: 0 0 0 -12px;
 }
 
 #seopress_content_analysis .ui-tabs .ui-tabs-nav {
@@ -542,6 +548,17 @@ body.seopress-styles {
     vertical-align: middle;
 }
 
+.seopress-styles .seopress-option .link-archive {
+    font-size: 14px;
+}
+
+.seopress-styles .seopress-option .link-archive .dashicons {
+    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    margin: inherit;
+}
+
 .seopress-styles .seopress-option h1>.dashicons {
     font-size: 30px;
     width: 30px;
@@ -579,7 +596,7 @@ body.seopress-styles {
     margin: 0;
 }
 
-.seopress-styles .seopress-option #seopress-yoast-migrate,.seopress-styles .seopress-option #submit {
+.seopress-styles .seopress-option #seopress-yoast-migrate, .seopress-styles .seopress-option #seopress-aio-migrate, .seopress-styles .seopress-option #submit {
     color: #fff;
     text-decoration: none;
     border: none;
@@ -598,7 +615,7 @@ body.seopress-styles {
     height: auto;
 }
 
-.seopress-styles .seopress-option #seopress-yoast-migrate:hover,.seopress-styles .seopress-option #submit:hover {
+.seopress-styles .seopress-option #seopress-yoast-migrate:hover, .seopress-styles .seopress-option #seopress-aio-migrate:hover, .seopress-styles .seopress-option #submit:hover {
     text-decoration: none;
     color: #FFF;
     background: #232323;
@@ -1094,7 +1111,7 @@ body.seopress-styles {
     background: #232323;
 }
 
-#seopress-content .seopress-page-list .seopress-feature .seopress-doc:focus,#seopress-content .seopress-page-list .seopress-feature a:focus,#seopress-content .seopress-page-list .seopress-feature a:focus.button-secondary,#seopress-content a:focus,#seopress-notifications-center .seopress-alert .button-primary:focus,.seopress-option #seopress-tabs .seopress-doc:focus,.seopress-option .seopress-feature a:focus,.seopress-styles .seopress-option #seopress-yoast-migrate:focus,.seopress-styles .seopress-option #submit:focus,.seopress-useful-tools .widget .button-primary:focus {
+#seopress-content .seopress-page-list .seopress-feature .seopress-doc:focus,#seopress-content .seopress-page-list .seopress-feature a:focus,#seopress-content .seopress-page-list .seopress-feature a:focus.button-secondary,#seopress-content a:focus,#seopress-notifications-center .seopress-alert .button-primary:focus,.seopress-option #seopress-tabs .seopress-doc:focus,.seopress-option .seopress-feature a:focus,.seopress-styles .seopress-option #seopress-yoast-migrate:focus, .seopress-styles .seopress-option #seopress-aio-migrate:focus,.seopress-styles .seopress-option #submit:focus,.seopress-useful-tools .widget .button-primary:focus {
     box-shadow: 0 1px 0 #0073aa,0 0 2px 1px #33b3db;
     background: #008ec2;
     border-color: #006799;

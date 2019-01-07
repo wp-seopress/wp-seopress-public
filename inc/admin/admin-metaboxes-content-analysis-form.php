@@ -172,8 +172,8 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                             echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('None of your target keywords were found in the Meta Title.','wp-seopress').'</p>';
                         }
 
-                        if (strlen($seopress_titles_title) > 65 ) {
-                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('You custom title is too long.','wp-seopress').'</p>'; 
+                        if (mb_strlen($seopress_titles_title) > 65 ) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your custom title is too long.','wp-seopress').'</p>'; 
                         } else {
                             echo '<p><span class="dashicons dashicons-yes"></span>'.__('The length of your title is correct','wp-seopress').'</p>';
                         }
@@ -201,7 +201,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                             echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('None of your target keywords were found in the Meta description.','wp-seopress').'</p>';
                         }
 
-                        if (strlen($seopress_titles_desc) > 160 ) {
+                        if (mb_strlen($seopress_titles_desc) > 160 ) {
                             echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('You custom meta description is too long.','wp-seopress').'</p>'; 
                         } else {
                             echo '<p><span class="dashicons dashicons-yes"></span>'.__('The length of your meta description is correct','wp-seopress').'</p>';
