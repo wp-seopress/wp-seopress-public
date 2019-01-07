@@ -5,6 +5,17 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //=================================================================================================
 //Titles
 //Titles & Metas
+//Separator
+function seopress_titles_sep_option() {
+	$seopress_titles_sep_option = get_option("seopress_titles_option_name");
+	if ( ! empty ( $seopress_titles_sep_option ) ) {
+		foreach ($seopress_titles_sep_option as $key => $seopress_titles_sep_value)
+			$options[$key] = $seopress_titles_sep_value;
+		 if (isset($seopress_titles_sep_option['seopress_titles_sep'])) { 
+		 	return $seopress_titles_sep_option['seopress_titles_sep'];
+		 }
+	}
+};
 
 //Homepage Title
 function seopress_titles_home_site_title_option() {
@@ -248,6 +259,13 @@ function seopress_titles_the_title() {
 	}
 	
 	//Template variables
+	$sep = '';
+	if (seopress_titles_sep_option()) {
+		$sep = seopress_titles_sep_option();
+	} else {
+		$sep = '-';
+	} 
+
 	$seopress_paged ='';
 	if (get_query_var('paged') >='1') {
 		$seopress_paged = get_query_var('paged');
@@ -336,11 +354,13 @@ function seopress_titles_the_title() {
 	}
 
 	$seopress_titles_template_variables_array = array(
+		'%%sep%%',
 		'%%sitetitle%%', 
 		'%%tagline%%',
 		'%%post_title%%',
 		'%%post_excerpt%%',
 		'%%post_date%%',
+		'%%post_modified_date%%',
 		'%%post_author%%',
 		'%%post_category%%',
 		'%%post_tag%%',
@@ -369,11 +389,13 @@ function seopress_titles_the_title() {
 	);
 	global $wp_locale;
 	$seopress_titles_template_replace_array = array(
+		$sep,
 		get_bloginfo('name'), 
 		get_bloginfo('description'),
 		the_title_attribute('echo=0'),
 		$seopress_get_the_excerpt,
 		get_the_date(),
+		get_the_modified_date(),
 		$the_author_meta,
 		$post_category,
 		$post_tag,
@@ -579,6 +601,13 @@ function seopress_titles_the_description_content() {
 	$seopress_excerpt_length = apply_filters('seopress_excerpt_length',$seopress_excerpt_length);
 	
 	//Template variables
+	$sep = '';
+	if (seopress_titles_sep_option()) {
+		$sep = seopress_titles_sep_option();
+	} else {
+		$sep = '-';
+	}
+	
 	if (get_query_var('paged') >='1') {
 		$seopress_paged = get_query_var('paged');
 	}
@@ -675,11 +704,13 @@ function seopress_titles_the_description_content() {
 	}
 
 	$seopress_titles_template_variables_array = array(
+		'%%sep%%',
 		'%%sitetitle%%', 
 		'%%tagline%%',
 		'%%post_title%%',
 		'%%post_excerpt%%',
 		'%%post_date%%',
+		'%%post_modified_date%%',
 		'%%post_author%%',
 		'%%post_category%%',
 		'%%post_tag%%',
@@ -708,11 +739,13 @@ function seopress_titles_the_description_content() {
 		'%%author_bio%%',
 	);
 	$seopress_titles_template_replace_array = array(
+		$sep,
 		get_bloginfo('name'), 
 		get_bloginfo('description'),
 		the_title_attribute('echo=0'),
 		$seopress_get_the_excerpt,
 		get_the_date(),
+		get_the_modified_date(),
 		$seopress_get_author,
 		$post_category,
 		$post_tag,

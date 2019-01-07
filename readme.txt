@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 3.2.1
+Stable tag: 3.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -160,6 +160,18 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.2.2 =
+* NEW Add %%sep%% dynamic variable (custom separator)
+* NEW Add %%post_modified_date%% dynamic variable for meta title / desc
+* NEW Add meta property article:author and article:publisher for Open Graph
+* NEW Capture the user agent for 404 monitoring (PRO)
+* NEW Add itemCondition for Product schema (PRO)
+* INFO Improve UI
+* INFO Add option to disable Knowledge graph (select None in Person or organization field, in SEO > Social Networks)
+* FIX Snippet preview counters if no custom title / meta desc set
+* FIX WPML XML sitemap issue
+* FIX Breadcrumbs with WooCommerce
+* FIX Disable date archives
 = 3.2.1 =
 * FIX Image sitemaps
 = 3.2 =

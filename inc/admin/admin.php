@@ -60,7 +60,7 @@ class seopress_options
         
         //Post Types
         foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
-            $seopress_titles_options['seopress_titles_single_titles'][$seopress_cpt_key]['title'] = '%%post_title%% - %%sitetitle%%';
+            $seopress_titles_options['seopress_titles_single_titles'][$seopress_cpt_key]['title'] = '%%post_title%% %%sep%% %%sitetitle%%';
             $seopress_titles_options['seopress_titles_single_titles'][$seopress_cpt_key]['description'] = '%%post_excerpt%%';
         }
         
@@ -68,11 +68,11 @@ class seopress_options
         foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
             //Title
             if ($seopress_tax_key =='category') {
-                $seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%_category_title%% %%current_pagination%% - %%sitetitle%%';  
+                $seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%_category_title%% %%current_pagination%% %%sep%% %%sitetitle%%';  
             } elseif ($seopress_tax_key =='post_tag') {
-                $seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%tag_title%% %%current_pagination%% - %%sitetitle%%';  
+                $seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%tag_title%% %%current_pagination%% %%sep%% %%sitetitle%%';  
             } else {
-                $seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%term_title%% %%current_pagination%% - %%sitetitle%%';
+                $seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%term_title%% %%current_pagination%% %%sep%% %%sitetitle%%';
             }
 
             //Desc
@@ -87,22 +87,22 @@ class seopress_options
 
         //Archives
         foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
-            $seopress_titles_options['seopress_titles_archive_titles'][$seopress_cpt_key]['title'] = '%%cpt_plural%% %%current_pagination%% - %%sitetitle%%';
+            $seopress_titles_options['seopress_titles_archive_titles'][$seopress_cpt_key]['title'] = '%%cpt_plural%% %%current_pagination%% %%sep%% %%sitetitle%%';
         }
 
         //Author
-        $seopress_titles_options['seopress_titles_archives_author_title'] = '%%post_author%% - %%sitetitle%%';
+        $seopress_titles_options['seopress_titles_archives_author_title'] = '%%post_author%% %%sep%% %%sitetitle%%';
         $seopress_titles_options['seopress_titles_archives_author_noindex'] = '1';
 
         //Date
-        $seopress_titles_options['seopress_titles_archives_date_title'] = '%%archive_date%% - %%sitetitle%%';
+        $seopress_titles_options['seopress_titles_archives_date_title'] = '%%archive_date%% %%sep%% %%sitetitle%%';
         $seopress_titles_options['seopress_titles_archives_date_noindex'] = '1';
 
         //Search
-        $seopress_titles_options['seopress_titles_archives_search_title'] = '%%search_keywords%% - %%sitetitle%%';
+        $seopress_titles_options['seopress_titles_archives_search_title'] = '%%search_keywords%% %%sep%% %%sitetitle%%';
 
         //404
-        $seopress_titles_options['seopress_titles_archives_404_title'] = __('404 - Page not found','wp-seopress').' - %%sitetitle%%';
+        $seopress_titles_options['seopress_titles_archives_404_title'] = __('404 - Page not found','wp-seopress').' %%sep%% %%sitetitle%%';
 
         //Link rel prev/next
         $seopress_titles_options['seopress_titles_paged_rel'] = '1';
@@ -193,11 +193,13 @@ class seopress_options
 
             $seopress_titles_help_tab_content = '
                 <ul>
+                    <li><span>'.__('%%sep%%','wp-seopress').'</span>'.__('Separator (eg: - )','wp-seopress').'</li>
                     <li><span>'.__('%%sitetitle%%','wp-seopress').'</span>'.__('Site Title','wp-seopress').'</li>
                     <li><span>'.__('%%tagline%%','wp-seopress').'</span>'.__('Tagline','wp-seopress').'</li>
                     <li><span>'.__('%%post_title%%','wp-seopress').'</span>'.__('Post Title (post, page, custom post type)','wp-seopress').'</li>
                     <li><span>'.__('%%post_excerpt%%','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
                     <li><span>'.__('%%post_date%%','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
+                    <li><span>'.__('%%post_modified_date%%','wp-seopress').'</span>'.__('Last modified post date','wp-seopress').'</li>
                     <li><span>'.__('%%post_author%%','wp-seopress').'</span>'.__('Post author','wp-seopress').'</li>
                     <li><span>'.__('%%post_category%%','wp-seopress').'</span>'.__('Post category','wp-seopress').'</li>
                     <li><span>'.__('%%post_tag%%','wp-seopress').'</span>'.__('Post tag','wp-seopress').'</li>
@@ -2006,6 +2008,14 @@ class seopress_options
         );  
 
         add_settings_field(
+            'seopress_titles_sep', // ID
+           __("Separator","wp-seopress"), // Title
+            array( $this, 'seopress_titles_sep_callback' ), // Callback
+            'seopress-settings-admin-titles-home', // Page
+            'seopress_setting_section_titles_home' // Section                  
+        );
+
+        add_settings_field(
             'seopress_titles_home_site_title', // ID
            __("Site title","wp-seopress"), // Title
             array( $this, 'seopress_titles_home_site_title_callback' ), // Callback
@@ -3129,7 +3139,7 @@ class seopress_options
     public function sanitize( $input )
     {   
 
-        $seopress_sanitize_fields = array('seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking','seopress_google_analytics_opt_out_msg', 'seopress_google_analytics_opt_out_msg_ok' );
+        $seopress_sanitize_fields = array('seopress_titles_sep','seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_google', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking','seopress_google_analytics_opt_out_msg', 'seopress_google_analytics_opt_out_msg_ok' );
 
         $seopress_sanitize_site_verification = array('seopress_advanced_advanced_google', 'seopress_advanced_advanced_bing', 'seopress_advanced_advanced_pinterest', 'seopress_advanced_advanced_yandex' );
         
@@ -3212,6 +3222,8 @@ class seopress_options
                         rewrite ^/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
                         rewrite ^/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;  
                         rewrite ^/sitemaps/([_0-9a-zA-Z-]+)?\.xml$ /index.php?seopress_cpt=$1 last;
+                        rewrite ^/sitemaps/([_0-9a-zA-Z-]+)?\.xml$ /index.php?seopress_news=$1 last;
+                        rewrite ^/sitemaps/([_0-9a-zA-Z-]+)?\.xml$ /index.php?seopress_video=$1 last;
                     }
                 </pre>';
             }
@@ -3335,6 +3347,18 @@ class seopress_options
      */
     
     //Titles & metas
+    public function seopress_titles_sep_callback()
+    {
+        $check = isset($this->options['seopress_titles_sep']) ? $this->options['seopress_titles_sep'] : NULL;
+        
+        printf(
+            '<input type="text" id="seopress_titles_sep" name="seopress_titles_option_name[seopress_titles_sep]" placeholder="'.esc_html__('Enter your separator, eg: "-"','wp-seopress').'" aria-label="'.__('Separator','wp-seopress').'" value="%s"/>',
+            esc_html( $check )
+        );
+
+        echo '<p class="description">'.__('Use this separator with %%sep%% in your title and meta description.','wp-seopress').'</p>';
+    }
+
     public function seopress_titles_home_site_title_callback()
     {
         printf(
@@ -4109,6 +4133,8 @@ class seopress_options
         
         echo '<label for="seopress_xml_sitemap_img_enable">'. __( 'Enable Image Sitemaps (standard images, image galleries, featured image, WooCommerce product images)', 'wp-seopress' ) .'</label>';
 
+        echo '<p class="description">'.__('Images in XML sitemaps are visible only from the source code.','wp-seopress').'</p>';
+
         if (function_exists('seopress_get_locale')) {
             if (seopress_get_locale() =='fr') {
                 $seopress_docs_link['support']['sitemaps']['image'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml-images/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
@@ -4144,6 +4170,8 @@ class seopress_options
                     $seopress_docs_link['support']['sitemaps']['video'] = 'https://www.seopress.org/support/guides/enable-video-xml-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
                 }
             }
+
+            printf('<p class="description">'.__('Your video sitemap is empty? Read our guide to learn more about <a href="%s" target="_blank">adding videos to your sitemap.</a>','wp-seopress').'</p>', $seopress_docs_link['support']['sitemaps']['video']);
 
             echo '<a href="'.$seopress_docs_link['support']['sitemaps']['video'].'" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to enable XML video sitemaps - new window','wp-seopress').'</span></a>';
             
@@ -4357,6 +4385,9 @@ class seopress_options
         $selected = isset($options['seopress_social_knowledge_type']) ? $options['seopress_social_knowledge_type'] : NULL;
                 
         echo '<select id="seopress_social_knowledge_type" name="seopress_social_option_name[seopress_social_knowledge_type]">';
+            echo ' <option '; 
+                if ('None' == $selected) echo 'selected="selected"'; 
+                echo ' value="none">'. __("None (will disable this feature)","wp-seopress") .'</option>';
             echo ' <option '; 
                 if ('Person' == $selected) echo 'selected="selected"'; 
                 echo ' value="Person">'. __("Person","wp-seopress") .'</option>';

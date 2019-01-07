@@ -89,7 +89,7 @@ function seopress_admin_header() { ?>
                                     <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets$9' ); ?>">
                                             <span class="dashicons dashicons-media-spreadsheet"></span>
-                                            <?php _e( 'Structured Data Types', 'wp-seopress' ); ?>
+                                            <?php _e( 'Structured Data Types (schema.org)', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>

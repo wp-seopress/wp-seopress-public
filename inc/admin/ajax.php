@@ -46,7 +46,7 @@ function seopress_do_real_preview() {
 
     //Check for error
     if ( is_wp_error( $response ) || wp_remote_retrieve_response_code($response) =='404' ) {
-        $data['title'] = __('To get your Google snippet preview, publish your post!');
+        $data['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
     } else {
         $response = wp_remote_retrieve_body($response);
         if($dom->loadHTML('<?xml encoding="utf-8" ?>' .$response)) {
@@ -201,7 +201,7 @@ function seopress_do_content_analysis() {
                     }
                 }
             }
-        } 
+        }
 
         //h2
         $h2 = $domxpath->query("//h2");

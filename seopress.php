@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.2.1
+Version: 3.2.2
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.2.1' ); 
+define( 'SEOPRESS_VERSION', '3.2.2' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -416,6 +416,22 @@ if (seopress_xml_sitemap_general_enable_option() =='1') {
     add_action( 'query_vars', 'seopress_xml_sitemap_query_vars' );
     add_action( 'template_include', 'seopress_xml_sitemap_change_template', 9999 );
     add_action( 'template_redirect', 'seopress_xml_sitemap_shortcut', 1);
+
+    //WPML compatibility
+    if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+        add_filter( 'request', 'seopress_wpml_block_secondary_languages' );
+    }
+    function seopress_wpml_block_secondary_languages( $q ) {
+        $current_language = apply_filters( 'wpml_current_language', false );
+        $default_language = apply_filters( 'wpml_default_language', false );
+        if ( $current_language !== $default_language ) {
+            unset( $q['seopress_sitemap'] );
+            unset( $q['seopress_cpt'] );
+            unset( $q['seopress_tax'] );
+            unset( $q['seopress_sitemap_xsl'] );
+        }
+        return $q;
+    }
 
     function seopress_xml_sitemap_shortcut() {
         //Redirect sitemap.xml to sitemaps.xml

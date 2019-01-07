@@ -64,6 +64,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 }
         echo '<div id="seopress-analysis-tabs">';
             if (!empty($seopress_analysis_data)) {
+                
                 echo '<ul class="wrap-analysis-results">
                     <li><a href="#seopress-analysis-tabs-1"><span class="dashicons dashicons-admin-settings"></span>'. __( 'Optimizations', 'wp-seopress' ) .'</a></li>
                     <li><a href="#seopress-analysis-tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Configuration', 'wp-seopress' ) .'</a></li>
