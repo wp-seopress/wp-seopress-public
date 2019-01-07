@@ -9,10 +9,13 @@ function seopress_do_real_preview() {
 
     if (current_user_can('edit_posts') && is_admin()) { 
 
-        $cookies = array();
-
-        foreach ( $_COOKIE as $name => $value ) {
-            $cookies[] = new WP_Http_Cookie( array( 'name' => $name, 'value' => $value ) );
+        //Get cookies
+        if (isset($_COOKIE)) { 
+            $cookies = array();
+    
+            foreach ( $_COOKIE as $name => $value ) {
+                $cookies[] = new WP_Http_Cookie( array( 'name' => $name, 'value' => $value ) );
+            }
         }
            
         //Get post id
@@ -44,8 +47,11 @@ function seopress_do_real_preview() {
         $args = array(
             'blocking' => true,
             'timeout'  => 15,
-            'cookies'  => $cookies,
         );
+
+        if (!empty($cookies)) {
+            $args['cookies']  = $cookies;
+        }
 
         $args = apply_filters('seopress_real_preview_remote', $args);
 
