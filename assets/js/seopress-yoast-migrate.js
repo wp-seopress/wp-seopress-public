@@ -1,4 +1,5 @@
 jQuery(document).ready(function(){
+	//Yoast SEO
 	jQuery('#seopress-yoast-migrate').on('click', function(e) {
 		e.preventDefault();
 		self.process_offset( 0, self );
@@ -6,11 +7,11 @@ jQuery(document).ready(function(){
 	process_offset = function( offset, self ) {
 		jQuery.ajax({
 			method : 'POST',
-			url : seopressAjaxYoastMigrate.seopress_yoast_migration,
+			url : seopressAjaxMigrate.seopress_yoast_migrate.seopress_yoast_migration,
 			data : {
 				action: 'seopress_yoast_migration',
 				offset: offset,
-				_ajax_nonce: seopressAjaxYoastMigrate.seopress_nonce,
+				_ajax_nonce: seopressAjaxMigrate.seopress_yoast_migrate.seopress_nonce,
 			},
 			success : function( data ) {
 				if( 'done' == data.data.offset ) {
@@ -23,43 +24,39 @@ jQuery(document).ready(function(){
 			},
 		});
 	};
-});
-jQuery(document).ready(function(){
 	jQuery('#seopress-yoast-migrate').on('click', function() {
 		jQuery(this).attr("disabled", "disabled");
 		jQuery( '#yoast-migration-tool .spinner' ).css( "visibility", "visible" );
 		jQuery( '#yoast-migration-tool .spinner' ).css( "float", "none" );
 		jQuery( '#yoast-migration-tool .log' ).html('');
 	});
-});
 
-jQuery(document).ready(function(){
-	jQuery('#seopress-aio-migrate').on('click', function(e) {
-		e.preventDefault();
-		self.process_offset( 0, self );
+	//All In One
+	jQuery('#seopress-aio-migrate').on('click', function(e2) {
+		e2.preventDefault();
+		self.process_offset2( 0, self );
 	});
-	process_offset = function( offset, self ) {
+	process_offset2 = function( offset2, self ) {
 		jQuery.ajax({
 			method : 'POST',
-			url : seopressAjaxAIOMigrate.seopress_aio_migration,
+			url : seopressAjaxMigrate.seopress_aio_migrate.seopress_aio_migration,
 			data : {
 				action: 'seopress_aio_migration',
-				offset: offset,
-				_ajax_nonce: seopressAjaxAIOMigrate.seopress_nonce,
+				offset2: offset2,
+				_ajax_nonce: seopressAjaxMigrate.seopress_aio_migrate.seopress_nonce,
 			},
 			success : function( data ) {
-				if( 'done' == data.data.offset ) {
+				if( 'done' == data.data.offset2 ) {
 		        	jQuery('#seopress-aio-migrate').removeAttr("disabled");
 					jQuery( '.spinner' ).css( "visibility", "hidden" );
 					jQuery( '#aio-migration-tool .log' ).html('Migration completed!');
 		        } else {
-		        	self.process_offset( parseInt( data.data.offset ), self );
+		        	self.process_offset2( parseInt( data.data.offset2 ), self );
 		        }					
 			},
 		});
 	};
-});
-jQuery(document).ready(function(){
+
 	jQuery('#seopress-aio-migrate').on('click', function() {
 		jQuery(this).attr("disabled", "disabled");
 		jQuery( '#aio-migration-tool .spinner' ).css( "visibility", "visible" );

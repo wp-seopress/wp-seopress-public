@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.1
+Version: 3.1.1
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.1' ); 
+define( 'SEOPRESS_VERSION', '3.1.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,17 +150,17 @@ function seopress_add_admin_options_scripts($hook) {
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-option' || $_GET['page'] == 'seopress-import-export') ) {
         wp_enqueue_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-yoast-migrate.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
 
-        $seopress_yoast_migrate = array(
-            'seopress_nonce' => wp_create_nonce('seopress_yoast_migrate_nonce'),
-            'seopress_yoast_migration' => admin_url( 'admin-ajax.php'),
+        $seopress_migrate = array( 
+            'seopress_aio_migrate' => array(
+                'seopress_nonce' => wp_create_nonce('seopress_aio_migrate_nonce'),
+                'seopress_aio_migration' => admin_url( 'admin-ajax.php'),
+            ),
+            'seopress_yoast_migrate' => array(
+                'seopress_nonce' => wp_create_nonce('seopress_yoast_migrate_nonce'),
+                'seopress_yoast_migration' => admin_url( 'admin-ajax.php'),
+            ),
         );
-        wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxYoastMigrate', $seopress_yoast_migrate );
-
-        $seopress_aio_migrate = array(
-            'seopress_nonce' => wp_create_nonce('seopress_aio_migrate_nonce'),
-            'seopress_aio_migration' => admin_url( 'admin-ajax.php'),
-        );
-        wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxAIOMigrate', $seopress_aio_migrate ); 
+        wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate );
     }
 
     //Tabs
