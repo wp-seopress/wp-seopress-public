@@ -112,7 +112,7 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
 						$content .= '<h2>'.$obj->labels->name.'</h2>';
 						foreach ($cpt_value as $_cpt_key => $_cpt_value) {
 							if($_cpt_value =='1') {
-								$args = array( 'posts_per_page' => 1000, 'order'=> $seopress_xml_sitemap_html_order_option, 'orderby' => $seopress_xml_sitemap_html_orderby_option, 'post_type' => $cpt_key, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'exclude' => $seopress_xml_sitemap_html_exclude_option );
+								$args = array( 'posts_per_page' => 1000, 'order'=> $seopress_xml_sitemap_html_order_option, 'orderby' => $seopress_xml_sitemap_html_orderby_option, 'post_type' => $cpt_key, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'exclude' => $seopress_xml_sitemap_html_exclude_option, 'suppress_filters' => false );
 								if ($cpt_key =='post') {
 									$cats = get_categories('orderby=name&order=ASC');
 									if (!empty($cats)) {

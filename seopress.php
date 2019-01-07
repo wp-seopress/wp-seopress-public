@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.2.2
+Version: 3.2.3
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -11,7 +11,7 @@ Text Domain: wp-seopress
 Domain Path: /languages
 */
 
-/*  Copyright 2016 - 2018 - Benjamin Denis  (email : contact@seopress.org)
+/*  Copyright 2016 - 2019 - Benjamin Denis  (email : contact@seopress.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.2.2' ); 
+define( 'SEOPRESS_VERSION', '3.2.3' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -374,6 +374,66 @@ function seopress_check_ssl() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// Check if a feature is ON
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Is Titles enable?
+function seopress_get_toggle_titles_option() {
+    $seopress_get_toggle_titles_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_titles_option ) ) {
+        foreach ($seopress_get_toggle_titles_option as $key => $seopress_get_toggle_titles_value)
+            $options[$key] = $seopress_get_toggle_titles_value;
+         if (isset($seopress_get_toggle_titles_option['toggle-titles'])) { 
+            return $seopress_get_toggle_titles_option['toggle-titles'];
+         }
+    }
+}
+// Is Social enable?
+function seopress_get_toggle_social_option() {
+    $seopress_get_toggle_social_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_social_option ) ) {
+        foreach ($seopress_get_toggle_social_option as $key => $seopress_get_toggle_social_value)
+            $options[$key] = $seopress_get_toggle_social_value;
+         if (isset($seopress_get_toggle_social_option['toggle-social'])) { 
+            return $seopress_get_toggle_social_option['toggle-social'];
+         }
+    }
+}
+// Is XML Sitemap enable?
+function seopress_get_toggle_xml_sitemap_option() {
+    $seopress_get_toggle_xml_sitemap_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_xml_sitemap_option ) ) {
+        foreach ($seopress_get_toggle_xml_sitemap_option as $key => $seopress_get_toggle_xml_sitemap_value)
+            $options[$key] = $seopress_get_toggle_xml_sitemap_value;
+         if (isset($seopress_get_toggle_xml_sitemap_option['toggle-xml-sitemap'])) { 
+            return $seopress_get_toggle_xml_sitemap_option['toggle-xml-sitemap'];
+         }
+    }
+}
+// Is Google Analytics enable?
+function seopress_get_toggle_google_analytics_option() {
+    $seopress_get_toggle_google_analytics_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_google_analytics_option ) ) {
+        foreach ($seopress_get_toggle_google_analytics_option as $key => $seopress_get_toggle_google_analytics_value)
+            $options[$key] = $seopress_get_toggle_google_analytics_value;
+         if (isset($seopress_get_toggle_google_analytics_option['toggle-google-analytics'])) { 
+            return $seopress_get_toggle_google_analytics_option['toggle-google-analytics'];
+         }
+    }
+}
+// Is Advanced enable?
+function seopress_get_toggle_advanced_option() {
+    $seopress_get_toggle_advanced_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_advanced_option ) ) {
+        foreach ($seopress_get_toggle_advanced_option as $key => $seopress_get_toggle_advanced_value)
+            $options[$key] = $seopress_get_toggle_advanced_value;
+         if (isset($seopress_get_toggle_advanced_option['toggle-advanced'])) { 
+            return $seopress_get_toggle_advanced_option['toggle-advanced'];
+         }
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 //Enable XML Sitemap
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_xml_sitemap_general_enable_option() {
@@ -410,8 +470,7 @@ function seopress_xml_sitemap_taxonomies_list_option() {
 }
 
 //Rewrite Rules for XML Sitemap
-if (seopress_xml_sitemap_general_enable_option() =='1') {
-
+if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xml_sitemap_option() =='1') {
     add_action( 'init', 'seopress_xml_sitemap_rewrite' );
     add_action( 'query_vars', 'seopress_xml_sitemap_query_vars' );
     add_action( 'template_include', 'seopress_xml_sitemap_change_template', 9999 );
@@ -511,66 +570,6 @@ if (seopress_xml_sitemap_general_enable_option() =='1') {
             }
         }
         return $template;
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// Check if a feature is ON
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Is Titles enable?
-function seopress_get_toggle_titles_option() {
-    $seopress_get_toggle_titles_option = get_option("seopress_toggle");
-    if ( ! empty ( $seopress_get_toggle_titles_option ) ) {
-        foreach ($seopress_get_toggle_titles_option as $key => $seopress_get_toggle_titles_value)
-            $options[$key] = $seopress_get_toggle_titles_value;
-         if (isset($seopress_get_toggle_titles_option['toggle-titles'])) { 
-            return $seopress_get_toggle_titles_option['toggle-titles'];
-         }
-    }
-}
-// Is Social enable?
-function seopress_get_toggle_social_option() {
-    $seopress_get_toggle_social_option = get_option("seopress_toggle");
-    if ( ! empty ( $seopress_get_toggle_social_option ) ) {
-        foreach ($seopress_get_toggle_social_option as $key => $seopress_get_toggle_social_value)
-            $options[$key] = $seopress_get_toggle_social_value;
-         if (isset($seopress_get_toggle_social_option['toggle-social'])) { 
-            return $seopress_get_toggle_social_option['toggle-social'];
-         }
-    }
-}
-// Is XML Sitemap enable?
-function seopress_get_toggle_xml_sitemap_option() {
-    $seopress_get_toggle_xml_sitemap_option = get_option("seopress_toggle");
-    if ( ! empty ( $seopress_get_toggle_xml_sitemap_option ) ) {
-        foreach ($seopress_get_toggle_xml_sitemap_option as $key => $seopress_get_toggle_xml_sitemap_value)
-            $options[$key] = $seopress_get_toggle_xml_sitemap_value;
-         if (isset($seopress_get_toggle_xml_sitemap_option['toggle-xml-sitemap'])) { 
-            return $seopress_get_toggle_xml_sitemap_option['toggle-xml-sitemap'];
-         }
-    }
-}
-// Is Google Analytics enable?
-function seopress_get_toggle_google_analytics_option() {
-    $seopress_get_toggle_google_analytics_option = get_option("seopress_toggle");
-    if ( ! empty ( $seopress_get_toggle_google_analytics_option ) ) {
-        foreach ($seopress_get_toggle_google_analytics_option as $key => $seopress_get_toggle_google_analytics_value)
-            $options[$key] = $seopress_get_toggle_google_analytics_value;
-         if (isset($seopress_get_toggle_google_analytics_option['toggle-google-analytics'])) { 
-            return $seopress_get_toggle_google_analytics_option['toggle-google-analytics'];
-         }
-    }
-}
-// Is Advanced enable?
-function seopress_get_toggle_advanced_option() {
-    $seopress_get_toggle_advanced_option = get_option("seopress_toggle");
-    if ( ! empty ( $seopress_get_toggle_advanced_option ) ) {
-        foreach ($seopress_get_toggle_advanced_option as $key => $seopress_get_toggle_advanced_value)
-            $options[$key] = $seopress_get_toggle_advanced_value;
-         if (isset($seopress_get_toggle_advanced_option['toggle-advanced'])) { 
-            return $seopress_get_toggle_advanced_option['toggle-advanced'];
-         }
     }
 }
 

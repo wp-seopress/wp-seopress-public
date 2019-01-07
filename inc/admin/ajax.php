@@ -187,9 +187,11 @@ function seopress_do_content_analysis() {
         $domxpath = new DOMXPath($dom);
 
         //Words counter
-        $seopress_analysis_data['words_counter'] = str_word_count(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)));
-        $words_counter_unique = count(array_unique(str_word_count(wp_filter_nohtml_kses($seopress_get_the_content), 1)));
-        $seopress_analysis_data['words_counter_unique'] = $words_counter_unique - 1;
+        //$seopress_analysis_data['words_counter'] = str_word_count(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)));
+        $seopress_analysis_data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
+
+        $words_counter_unique = count(array_unique($matches[0]));
+        $seopress_analysis_data['words_counter_unique'] = $words_counter_unique;
         
         //h1
         $h1 = $domxpath->query("//h1");

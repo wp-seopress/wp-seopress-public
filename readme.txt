@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 3.2.2
+Stable tag: 3.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ SEOPress is a simple, fast and powerful SEO plugin for WordPress
 
 == Description ==
 
-SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create breadcrumbs, manage redirections 301 and so much more.<br>
+SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage redirections 301 and so much more.<br>
 
 <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 <strong>Content analysis to help you write search-engine optimized content</strong>
@@ -25,8 +25,8 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 <h3>Features</h3>
 
 <ul>
-	<li>Titles</li>
-	<li>Meta descriptions</li>
+	<li>Titles (with dyanmic variables: custom fields, terms taxonomie...)</li>
+	<li>Meta descriptions (with dynamic variables too)</li>
 	<li>Open Graph Data</li>
 	<li>Google Knowledge Graph</li>
 	<li>Google Analytics with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(GDPR compatibility)</li>
@@ -40,6 +40,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Redirections in post, pages, custom post types</li>
 	<li>Remove stop words (english, french, spanish, german, italian, portuguese, swedish)</li>
 	<li>Remove /category/ in URLs</li>
+	<li>Remove ?replytocom to avoid duplicate content</li>
 	<li>Redirect attachment pages to post parent</li>
 	<li>Import / Export settings from site to site.</li>
 	<li>Import posts and terms metadata from Yoast SEO</li>
@@ -58,7 +59,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>WooCommerce: disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li>Easy Digital Downloads: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li>Dublin Core</li>
-	<li>Google Structured Data types: article, local business, FAQ, course, recipe, video, event, product</li>
+	<li>Google Structured Data types (schema.org): article, local business, FAQ, course, recipe, video, event, product</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Custom Breadcrumbs for single post types</li>
 	<li>Google Page Speed</li>
@@ -67,7 +68,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Robots.txt</li>
 	<li>Google News Sitemap</li>
 	<li>404 Monitoring</li>
-	<li>Redirect 404 to homepage/custom url automatically with custom status code (301, 302 or 307)</li>
+	<li>Redirect 404 to homepage/custom url automatically with custom status code (301, 302, 307, 410 or 451)</li>
 	<li>Email notifications on 404</li>
 	<li>301, 302 and 307 Redirections</li>
 	<li>Import redirections using CSV</li>
@@ -160,6 +161,27 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.2.3 =
+* NEW Add ?replytocom option (SEO > Advanced settings)
+* NEW Add Business type option to Local Business Schema (PRO)
+* NEW Add "None" choice for Contact option (Knowledge Graph)
+* NEW Add Bulgarian lev currency to Product / Event data type (PRO)
+* INFO Add Help tab in Licence page
+* INFO Redirect URL is no longer needed if status code is set to 410 / 451
+* INFO Add 404, 410 and 451 redirects to filters in Redirections list
+* INFO Improve UI/UX
+* INFO Remove max limit to "Number of posts / pages / post types to scan"
+* FIX Remove WooCommerce pages from sitemap if noindex set in SEO > PRO > WooCommerce
+* FIX Video schema publisher logo
+* FIX Dutch translation string (thanks to Dirk)
+* FIX check if XML sitemaps feature on/off
+* FIX Add checks to Structured Data Types fields
+* FIX Words counter
+* FIX conflict with Google XML Sitemaps
+* FIX Undefined notice in admin.php line 177
+* FIX HTML sitemap with WPML
+* FIX article:author / article:publisher
+* FIX JSON/LD Breadcrumbs can now be used without HTML Breadcrumbs
 = 3.2.2 =
 * NEW Add %%sep%% dynamic variable (custom separator)
 * NEW Add %%post_modified_date%% dynamic variable for meta title / desc
@@ -186,7 +208,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 * NEW Add Arabic language (thanks to Moqbel Bajri)
 * NEW Prevent Google to display a sitelinks searchbox in search results (nositelinkssearchbox)
 * NEW Remove Genesis SEO link in WP Admin Menu (SEO > Advanced > Appearance)
-* NEW Add Indonesian rupiah currency to Product data type (PRO)
+* NEW Add Indonesian rupiah currency to Product / Event data type (PRO)
 * INFO Updating Google Analytics API source
 * INFO Better UI for meta robots
 * INFO Automatically exclude URLs starting with "wp-content/cache" from 404 monitoring

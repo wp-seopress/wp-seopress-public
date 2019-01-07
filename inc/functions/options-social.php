@@ -273,14 +273,15 @@ function seopress_social_accounts_jsonld_hook() {
 		if (seopress_social_knowledge_type_option() =='Organization' 
 			&& seopress_social_knowledge_phone_number_option() !=''
 			&& seopress_social_knowledge_contact_type_option() !=''
-			&& seopress_social_knowledge_contact_option_option() !=''
 			) {
-			if ($seopress_social_knowledge_phone_number_option && $seopress_social_knowledge_contact_type_option && $seopress_social_knowledge_contact_option_option ) {
+			if ($seopress_social_knowledge_phone_number_option && $seopress_social_knowledge_contact_type_option ) {
 				echo ',"contactPoint": [{
 					"@type": "ContactPoint",
-					"telephone": '.$seopress_social_knowledge_phone_number_option.',
-					"contactType": '.$seopress_social_knowledge_contact_type_option.',
-					"contactOption": '.$seopress_social_knowledge_contact_option_option.'
+					"telephone": '.$seopress_social_knowledge_phone_number_option.',';
+					if ($seopress_social_knowledge_contact_option_option !='' && $seopress_social_knowledge_contact_option_option !='None') {
+						echo '"contactOption": '.$seopress_social_knowledge_contact_option_option.',';
+					}
+					echo '"contactType": '.$seopress_social_knowledge_contact_type_option.'
 				}]';
 			}
 		}
@@ -433,7 +434,7 @@ add_action( 'wp_head', 'seopress_social_facebook_og_type_hook', 1 );
 //Article Author / Article Publisher
 function seopress_social_facebook_og_author_hook() {
 	if (seopress_social_facebook_og_option() =='1' && seopress_social_accounts_facebook_option() !='') {
-		if (is_singular()) {			
+		if (is_singular() && !is_home() && !is_front_page()) {			
 			$seopress_social_og_author = '<meta property="article:author" content="'.seopress_social_accounts_facebook_option().'" />';
 			$seopress_social_og_author .= "\n";
 			$seopress_social_og_author .= '<meta property="article:publisher" content="'.seopress_social_accounts_facebook_option().'" />';

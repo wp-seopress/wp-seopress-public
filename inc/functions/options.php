@@ -57,11 +57,11 @@ if (seopress_get_toggle_titles_option() =='1') {
 	function seopress_titles_disable_archives() {
 		global $wp_query;
 
-		if (seopress_titles_archives_author_disable_option() =='1' && $wp_query->is_author) {
+		if (seopress_titles_archives_author_disable_option() =='1' && $wp_query->is_author && !is_feed()) {
 			wp_redirect(get_home_url(), '301');
 	        exit;
 		}
-		if (seopress_titles_archives_date_disable_option() =='1' && $wp_query->is_date) {
+		if (seopress_titles_archives_date_disable_option() =='1' && $wp_query->is_date && !is_feed()) {
 			wp_redirect(get_home_url(), '301');
 	        exit;
 		}

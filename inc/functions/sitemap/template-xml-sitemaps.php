@@ -4,6 +4,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //XML
 Header('Content-type: text/xml');
 
+//WPML
 add_filter( 'seopress_sitemaps_index_cpt_query', function( $args ) {
     global $sitepress, $sitepress_settings;
 

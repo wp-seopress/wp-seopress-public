@@ -3,6 +3,25 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 
 //Advanced
 //=================================================================================================
+//?replytocom
+function seopress_advanced_advanced_replytocom_option() {
+	$seopress_advanced_advanced_replytocom_option = get_option("seopress_advanced_option_name");
+	if ( ! empty ( $seopress_advanced_advanced_replytocom_option ) ) {
+		foreach ($seopress_advanced_advanced_replytocom_option as $key => $seopress_advanced_advanced_replytocom_value)
+			$options[$key] = $seopress_advanced_advanced_replytocom_value;
+		 if (isset($seopress_advanced_advanced_replytocom_option['seopress_advanced_advanced_replytocom'])) { 
+		 	return $seopress_advanced_advanced_replytocom_option['seopress_advanced_advanced_replytocom'];
+		 }
+	}
+}
+
+if (seopress_advanced_advanced_replytocom_option() =='1') {
+	add_filter( 'comment_reply_link', 'seopress_remove_reply_to_com');
+}
+function seopress_remove_reply_to_com( $link ) {
+	return preg_replace( '/href=\'(.*(\?|&)replytocom=(\d+)#respond)/', 'href=\'#comment-$3', $link );
+}
+
 //WordPress Meta generator
 function seopress_advanced_advanced_wp_generator_option() {
 	$seopress_advanced_advanced_wp_generator_option = get_option("seopress_advanced_option_name");

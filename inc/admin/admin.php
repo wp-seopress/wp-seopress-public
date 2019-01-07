@@ -174,6 +174,7 @@ class seopress_options
     public function add_plugin_page()
     {
         if (has_filter('seopress_seo_admin_menu')) {
+            $sp_seo_admin_menu['icon'] = '';
             $sp_seo_admin_menu['icon'] = apply_filters('seopress_seo_admin_menu', $sp_seo_admin_menu['icon']);
         } else {
             $sp_seo_admin_menu['icon'] = 'dashicons-admin-seopress';
@@ -2856,6 +2857,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_advanced_replytocom', // ID
+           __("Remove ?replytocom link to avoid duplicate content","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_replytocom_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
             'seopress_advanced_advanced_tax_desc_editor', // ID
            __("Add WP Editor to taxonomy description textarea","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_tax_desc_editor_callback' ), // Callback
@@ -3763,7 +3772,7 @@ class seopress_options
         if ('1' == $check) echo 'checked="yes"'; 
         echo ' value="1"/>';
         
-        echo '<label for="seopress_titles_archives_author_noindex">'. __( 'noindex', 'wp-seopress' ) .'</label>';
+        echo '<label for="seopress_titles_archives_author_noindex">'. __( 'Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
         
         if (isset($this->options['seopress_titles_archives_author_noindex'])) {
             esc_attr( $this->options['seopress_titles_archives_author_noindex']);
@@ -3832,7 +3841,7 @@ class seopress_options
         if ('1' == $check) echo 'checked="yes"'; 
         echo ' value="1"/>';
         
-        echo '<label for="seopress_titles_archives_date_noindex">'. __( 'noindex', 'wp-seopress' ) .'</label>';
+        echo '<label for="seopress_titles_archives_date_noindex">'. __( 'Do not display date archives in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
         
         if (isset($this->options['seopress_titles_archives_date_noindex'])) {
             esc_attr( $this->options['seopress_titles_archives_date_noindex']);
@@ -3902,7 +3911,7 @@ class seopress_options
         if ('1' == $check) echo 'checked="yes"'; 
         echo ' value="1"/>';
         
-        echo '<label for="seopress_titles_archives_search_title_noindex">'. __( 'noindex', 'wp-seopress' ) .'</label>';
+        echo '<label for="seopress_titles_archives_search_title_noindex">'. __( 'Do not display search archives in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
         
         if (isset($this->options['seopress_titles_archives_search_title_noindex'])) {
             esc_attr( $this->options['seopress_titles_archives_search_title_noindex']);
@@ -4422,6 +4431,8 @@ class seopress_options
         echo '<input id="seopress_social_knowledge_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_knowledge_img]" aria-label="'.__('Your photo/organization logo','wp-seopress').'" placeholder="'.esc_html__('Select your logo','wp-seopress').'"  />
         
         <input id="seopress_social_knowledge_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />';
+
+        echo '<p class="description">'.__('JPG, PNG or GIF allowed.', 'wp-seopress').'</p>';
         
         if (isset($this->options['seopress_social_knowledge_img'])) {
             esc_attr( $this->options['seopress_social_knowledge_img']);
@@ -4504,6 +4515,9 @@ class seopress_options
         $selected = isset($options['seopress_social_knowledge_contact_option']) ? $options['seopress_social_knowledge_contact_option'] : NULL;
         
         echo '<select id="seopress_social_knowledge_contact_option" name="seopress_social_option_name[seopress_social_knowledge_contact_option]">';
+            echo ' <option '; 
+                if ('None' == $selected) echo 'selected="selected"'; 
+                echo ' value="None">'. __("None","wp-seopress") .'</option>';
             echo ' <option '; 
                 if ('TollFree' == $selected) echo 'selected="selected"'; 
                 echo ' value="TollFree">'. __("Toll Free","wp-seopress") .'</option>';
@@ -4826,7 +4840,7 @@ class seopress_options
         
         echo '<label for="seopress_google_analytics_disable">'. __( 'Request user\'s consent for analytics tracking (required by GDPR)', 'wp-seopress' ) .'</label>';
 
-        echo '<p class="description">'.__('User roles excluded from tracking will not see the consent message.<br> If you use a caching plugin, you have to exclude this JS file in your settings: <br><strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</strong>','wp-seopress').'</p>';
+        echo '<p class="description">'.__('User roles excluded from tracking will not see the consent message.<br> If you use a caching plugin, you have to exclude this JS file in your settings: <br><strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</strong> <br>and this cookie <strong>seopress-user-consent-accept</strong>','wp-seopress').'</p>';
 
         if (function_exists('seopress_get_locale')) {
             if (seopress_get_locale() =='fr') {
@@ -5470,6 +5484,23 @@ class seopress_options
         
         if (isset($this->options['seopress_advanced_advanced_attachments'])) {
             esc_attr( $this->options['seopress_advanced_advanced_attachments']);
+        }
+    }    
+
+    public function seopress_advanced_advanced_replytocom_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_replytocom']);      
+        
+        echo '<input id="seopress_advanced_advanced_replytocom" name="seopress_advanced_option_name[seopress_advanced_advanced_replytocom]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_replytocom">'. __( 'Remove ?replytocom link in source code', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_advanced_advanced_replytocom'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_replytocom']);
         }
     }
 

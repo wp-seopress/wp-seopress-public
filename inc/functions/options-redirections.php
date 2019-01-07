@@ -96,7 +96,7 @@ function seopress_advanced_advanced_attachments_option() {
 		 	return $seopress_advanced_advanced_attachments_option['seopress_advanced_advanced_attachments'];
 		 }
 	}
-};
+}
 
 function seopress_redirections_attachments(){
 	if (seopress_advanced_advanced_attachments_option() =='1') {

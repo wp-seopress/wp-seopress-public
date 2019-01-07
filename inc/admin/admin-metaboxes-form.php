@@ -250,17 +250,21 @@ echo               '<div class="snippet-description">...</div>
                 </select>
                 <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.esc_html__('Enter your new URL','wp-seopress').'" aria-label="'.__('URL redirection','wp-seopress').'" value="'.$seopress_redirections_value.'" />
                 <br><br>';
-                if ($seopress_redirections_value !='' && $seopress_redirections_enabled =='yes') {
-                    if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
-                        if ( 'seopress_404' == $typenow ) {                      
-                            echo '<a href="'.get_home_url().'/'.get_the_title().'/" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                                
+                if ($seopress_redirections_enabled =='yes') {
+                    $status_code = array('410','451');
+                    if ($seopress_redirections_value !='' || in_array($seopress_redirections_type, $status_code)) {
+                        if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                            if ( 'seopress_404' == $typenow ) {                      
+                                echo '<a href="'.get_home_url().'/'.get_the_title().'/" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                            } else {
+                                echo '<a href="'.get_permalink().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                            }
+                        } elseif ( $pagenow == 'term.php' ) {
+                            echo '<a href="'.get_term_link($term).'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
                         } else {
                             echo '<a href="'.get_permalink().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
                         }
-                    } elseif ( $pagenow == 'term.php' ) {
-                        echo '<a href="'.get_term_link($term).'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
-                    } else {
-                        echo '<a href="'.get_permalink().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
                     }
                 }
 
