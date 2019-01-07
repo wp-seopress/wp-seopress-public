@@ -159,10 +159,10 @@ if (seopress_get_toggle_google_analytics_option() =='1') {
 
 	//User Consent JS
 	function seopress_google_analytics_cookies_js() {
-		wp_register_script('seopress-cookies', plugins_url( 'assets/js/seopress-cookies.min.js', dirname(dirname(__FILE__))), array(), '2.2.0', true);
+		wp_register_script('seopress-cookies', plugins_url( 'assets/js/seopress-cookies.min.js', dirname(dirname(__FILE__))), array(), SEOPRESS_VERSION, true);
 		wp_enqueue_script('seopress-cookies');
 
-		wp_enqueue_script( 'seopress-cookies-ajax', plugins_url( 'assets/js/seopress-cookies-ajax.js', dirname(dirname(__FILE__))), array( 'jquery','seopress-cookies' ), '', true );
+		wp_enqueue_script( 'seopress-cookies-ajax', plugins_url( 'assets/js/seopress-cookies-ajax.js', dirname(dirname(__FILE__))), array( 'jquery','seopress-cookies' ), SEOPRESS_VERSION, true );
 
         $seopress_cookies_user_consent = array(
 	        'seopress_nonce' => wp_create_nonce('seopress_cookies_user_consent_nonce'),
@@ -216,12 +216,16 @@ if (seopress_get_toggle_google_analytics_option() =='1') {
 					 	include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
 					 	$data = array();
 					 	$data['gtag_js'] = seopress_google_analytics_js(false);
+					 	$data['custom'] = '';
+					 	$data['custom'] = apply_filters( 'seopress_custom_tracking', $data['custom'] );
 						wp_send_json_success($data);
 					}
 				} else {
 					include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
 				 	$data = array();
 				 	$data['gtag_js'] = seopress_google_analytics_js(false);
+				 	$data['custom'] = '';
+				 	$data['custom'] = apply_filters( 'seopress_custom_tracking', $data['custom'] );
 					wp_send_json_success($data);
 				}
 			}
@@ -229,6 +233,8 @@ if (seopress_get_toggle_google_analytics_option() =='1') {
 			include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
 		 	$data = array();
 		 	$data['gtag_js'] = seopress_google_analytics_js(false);
+		 	$data['custom'] = '';
+		 	$data['custom'] = apply_filters( 'seopress_custom_tracking', $data['custom'] );
 			wp_send_json_success($data);
 		}
 	}

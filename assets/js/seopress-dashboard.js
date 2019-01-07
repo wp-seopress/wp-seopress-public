@@ -165,6 +165,26 @@ jQuery(document).ready(function(){
 			},
 		});
 	});
+	//**Title tag add_theme_support
+	jQuery('#notice-title-tag').on('click', function() {
+		jQuery('#notice-title-tag').attr('data-notice', jQuery('#notice-title-tag').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-title-tag',
+				notice_value: jQuery('#notice-title-tag').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-title-tag-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
 	//Titles
 	jQuery('#toggle-titles').on('click', function() {
 		jQuery('#toggle-titles').attr('data-toggle', jQuery('#toggle-titles').attr('data-toggle') == '1' ? '0' : '1');

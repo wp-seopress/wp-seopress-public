@@ -60,10 +60,16 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
             }
             echo '<li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirection', 'wp-seopress' ) .'</a></li>';
             if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
-                if (seopress_get_toggle_news_option() =='1') {
+                if (function_exists('seopress_get_toggle_news_option') && seopress_get_toggle_news_option() =='1') {
                     if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                         if ("seopress_404" != $typenow) {
                             echo '<li><a href="#tabs-5"><span class="dashicons dashicons-admin-post"></span>'. __( 'Google News', 'wp-seopress' ) .'</a></li>';
+                        }
+                    }
+                }
+                if (function_exists('seopress_get_toggle_xml_sitemap_option') && seopress_get_toggle_xml_sitemap_option() =='1') {
+                    if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                        if ("seopress_404" != $typenow) {
                             echo '<li><a href="#tabs-6"><span class="dashicons dashicons-format-video"></span>'. __( 'Video Sitemap', 'wp-seopress' ) .'</a></li>';
                         }
                     }
@@ -90,6 +96,13 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     <div id="seopress_titles_title_counters"></div>
                     '.__('(maximum recommended limit)','wp-seopress').'
                 </div>
+                
+                <div class="wrap-tags">
+                    <span id="seopress-tag-single-title" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>
+
+                    <span id="seopress-tag-single-site-title" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>
+                </div>
+
                 <p style="margin-bottom:0">
                     <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
                     <textarea id="seopress_titles_desc_meta" style="width:100%" rows="8" name="seopress_titles_desc" placeholder="'.esc_html__('Enter your meta description','wp-seopress').'" aria-label="'.__('Meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
@@ -97,6 +110,10 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                 <div class="wrap-seopress-counters">
                     <div id="seopress_titles_desc_counters"></div>
                     '.__('(maximum recommended limit)','wp-seopress').'
+                </div>
+
+                <div class="wrap-tags">
+                    <span id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Excerpt','wp-seopress').'</span>
                 </div>
             </div>
             <div class="box-right">
@@ -126,39 +143,42 @@ echo               '<div class="snippet-description">...</div>
         <div id="tabs-2">
             <p>
                 <label for="seopress_robots_index_meta">
-                    <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' />
+                    <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' '.$disabled['robots_index'].'/>
                         '. __( 'noindex', 'wp-seopress' ) .'
                 </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.','wp-seopress')).'"></span>
             </p>
             <p>
                 <label for="seopress_robots_follow_meta">
-                    <input type="checkbox" name="seopress_robots_follow" id="seopress_robots_follow_meta" value="yes" '. checked( $seopress_robots_follow, 'yes', false ) .' />
+                    <input type="checkbox" name="seopress_robots_follow" id="seopress_robots_follow_meta" value="yes" '. checked( $seopress_robots_follow, 'yes', false ) .' '.$disabled['robots_follow'].'/>
                         '. __( 'nofollow', 'wp-seopress' ) .'
                 </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not follow links for all pages.','wp-seopress')).'"></span>
             </p>
             <p>
                 <label for="seopress_robots_odp_meta">
-                    <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta" value="yes" '. checked( $seopress_robots_odp, 'yes', false ) .' />
+                    <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta" value="yes" '. checked( $seopress_robots_odp, 'yes', false ) .' '.$disabled['robots_odp'].'/>
                         '. __( 'noodp', 'wp-seopress' ) .'
                 </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not use Open Directory project metadata for titles or excerpts for all pages.','wp-seopress')).'"></span>
             </p>
             <p>
                 <label for="seopress_robots_imageindex_meta">
-                    <input type="checkbox" name="seopress_robots_imageindex" id="seopress_robots_imageindex_meta" value="yes" '. checked( $seopress_robots_imageindex, 'yes', false ) .' />
+                    <input type="checkbox" name="seopress_robots_imageindex" id="seopress_robots_imageindex_meta" value="yes" '. checked( $seopress_robots_imageindex, 'yes', false ) .' '.$disabled['imageindex'].'/>
                         '. __( 'noimageindex', 'wp-seopress' ) .'
                 </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not index images from the entire site.','wp-seopress')).'"></span>
             </p>
             <p>
                 <label for="seopress_robots_archive_meta">
-                    <input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta" value="yes" '. checked( $seopress_robots_archive, 'yes', false ) .' />
+                    <input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta" value="yes" '. checked( $seopress_robots_archive, 'yes', false ) .' '.$disabled['archive'].'/>
                         '. __( 'noarchive', 'wp-seopress' ) .'
                 </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display a "Cached" link in the Google search results.','wp-seopress')).'"></span>
             </p>
             <p>
                 <label for="seopress_robots_snippet_meta">
-                    <input type="checkbox" name="seopress_robots_snippet" id="seopress_robots_snippet_meta" value="yes" '. checked( $seopress_robots_snippet, 'yes', false ) .' />
+                    <input type="checkbox" name="seopress_robots_snippet" id="seopress_robots_snippet_meta" value="yes" '. checked( $seopress_robots_snippet, 'yes', false ) .' '.$disabled['snippet'].'/>
                         '. __( 'nosnippet', 'wp-seopress' ) .'
                 </label><span class="dashicons dashicons-info" title="'.esc_html(__('Do not display a description in the Google search results for all pages.','wp-seopress')).'"></span>
+            </p>
+            <p class="description">
+                '.__('You can not uncheck a parameter? This is normal, it is most likely defined in the global settings of the extension.','wp-seopress').'
             </p>
             <p>
                 <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
@@ -188,7 +208,7 @@ echo               '<div class="snippet-description">...</div>
             <p>
                 <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'wp-seopress' ) .'</label>
                 <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" aria-label="'.__('Facebook Thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
-                <span class="advise">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8mb max.', 'wp-seopress').'</span>
+                <span class="advise">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max.', 'wp-seopress').'</span>
                 <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
             </p>
             <br/>
@@ -206,7 +226,7 @@ echo               '<div class="snippet-description">...</div>
             <p>
                 <label for="seopress_social_twitter_img_meta">'. __( 'Twitter Thumbnail', 'wp-seopress' ) .'</label>
                 <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_twitter_img.'" />
-                <span class="advise">'. __('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5mb max.', 'wp-seopress') .'</span>
+                <span class="advise">'. __('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress') .'</span>
                 <input id="seopress_social_twitter_img_upload" class="button" type="button" aria-label="'.__('Twitter Thumbnail','wp-seopress').'" value="'.__('Upload an Image','wp-seopress').'" />
             </p>
         </div>';
@@ -241,10 +261,22 @@ echo               '<div class="snippet-description">...</div>
                         echo '<a href="'.get_permalink().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
                     }
                 }
-echo            '</p>
+
+                if (function_exists('seopress_get_locale')) {
+                    if (seopress_get_locale() =='fr') {
+                        $seopress_docs_link['support']['redirection'] = 'https://www.seopress.org/fr/support/guides/activer-redirections-301-surveillance-404/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                    } else {
+                        $seopress_docs_link['support']['redirection'] = 'https://www.seopress.org/support/guides/redirections/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                    }
+                }
+                ?>
+                <span class="dashicons dashicons-external"></span>
+                <a href="<?php echo $seopress_docs_link['support']['redirection']; ?>" target="_blank" class="seopress-doc"><?php _e('Need help with your redirections? Read our guide.','wp-seopress'); ?></a>
+                <?php echo 
+            '</p>
         </div>';
     if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
-        if (seopress_get_toggle_news_option() =='1') {
+        if (function_exists('seopress_get_toggle_news_option') && seopress_get_toggle_news_option() =='1') {
             if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                 if ("seopress_404" != $typenow) { 
                     echo '<div id="tabs-5">
@@ -254,44 +286,13 @@ echo            '</p>
                                     '. __( 'Exclude this post from Google News Sitemap?', 'wp-seopress' ) .'
                             </label>
                         </p>
-                        <p>
-                            <label for="seopress_news_standout_meta" id="seopress_news_standout">
-                                <input type="checkbox" name="seopress_news_standout" id="seopress_news_standout_meta" value="yes" '. checked( $seopress_news_standout, 'yes', false ) .' />
-                                    '. __( 'Use the standout tag for this post?', 'wp-seopress' ) .'
-                            <span class="dashicons dashicons-info" title="'.esc_html(__('Your article is an original source for the story.
-Your organization invested significant resources in reporting or producing the article.
-The article deserves special recognition.
-You haven\'t used standout on your own articles more than seven times in the past calendar week.','wp-seopress')).'"></span>
-                            </label>';
-                            
-                            if (function_exists('seopress_get_locale')) {
-                                if (seopress_get_locale() =='fr') {
-                                    $seopress_docs_link = 'https://support.google.com/news/publisher/answer/191283?hl=fr';
-                                } else {
-                                    $seopress_docs_link = 'https://support.google.com/news/publisher/answer/191283';
-                                }
-                            }
-                            
-                            echo '<span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link.'" target="_blank" class="seopress-doc">'.__('Learn how to use correctly the standout tag','wp-seopress').'</a>
-                        </p>
-                        <p>
-                            <label for="seopress_news_genres_meta">'. __( 'Google News Genres', 'wp-seopress' ) .'</label>
-                            <select name="seopress_news_genres">
-                                <option ' . selected( 'none', $seopress_news_genres, false ) . ' value="none">'. __( 'None', 'wp-seopress' ) .'</option>
-                                <option ' . selected( 'pressrelease', $seopress_news_genres, false ) . ' value="pressrelease">'. __( 'Press Release', 'wp-seopress' ) .'</option>
-                                <option ' . selected( 'satire', $seopress_news_genres, false ) . ' value="satire">'. __( 'Satire', 'wp-seopress' ) .'</option>
-                                <option ' . selected( 'blog', $seopress_news_genres, false ) . ' value="blog">'. __( 'Blog', 'wp-seopress' ) .'</option>
-                                <option ' . selected( 'oped', $seopress_news_genres, false ) . ' value="oped">'. __( 'OpEd', 'wp-seopress' ) .'</option>
-                                <option ' . selected( 'opinion', $seopress_news_genres, false ) . ' value="opinion">'. __( 'Opinion', 'wp-seopress' ) .'</option>
-                                <option ' . selected( 'usergenerated', $seopress_news_genres, false ) . ' value="usergenerated">'. __( 'UserGenerated', 'wp-seopress' ) .'</option>
-                            </select>
-                        </p>
-                        <p>
-                            <label for="seopress_news_keyboard_meta" id="seopress_news_keyboard">
-                                '. __( 'Google News Keywords <em>(max recommended limit: 12)</em>', 'wp-seopress' ) .'</label>
-                                <input id="seopress_news_keyboard_meta" type="text" name="seopress_news_keyboard" placeholder="'.esc_html__('Enter your Google News Keywords','wp-seopress').'" aria-label="'.__('Google News Keywords <em>(max recommended limit: 12)</em>','wp-seopress').'" value="'.$seopress_news_keyboard.'" />
-                        </p>
                     </div>';
+                }
+            }
+        }
+        if (function_exists('seopress_get_toggle_xml_sitemap_option') && seopress_get_toggle_xml_sitemap_option() =='1') {
+            if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                if ("seopress_404" != $typenow) {
 
                     //Init $seopress_video array if empty
                     if (empty($seopress_video)) {
@@ -348,7 +349,7 @@ You haven\'t used standout on your own articles more than seven times in the pas
                                             <p>
                                                 <label for="seopress_video['.$key.'][desc_meta]">'. __( 'Video Description (required)', 'wp-seopress' ) .'</label>
                                                 <textarea id="seopress_video['.$key.'][desc_meta]" name="seopress_video['.$key.'][desc]" placeholder="'.esc_html__('Enter your video description','wp-seopress').'" aria-label="'.__('Video description','wp-seopress').'" value="'.$check_desc.'">'.$check_desc.'</textarea>
-                                                <span class="advise">'. __('2048 characters max., default: meta description, if not available, beginning of the post content.', 'wp-seopress') .'</span>
+                                                <span class="advise">'. __('2048 characters max.; default: meta description. If not available, use the beginning of the post content.', 'wp-seopress') .'</span>
                                             </p> 
                                             <p>
                                                 <label for="seopress_video['.$key.'][thumbnail_meta]">'. __( 'Video Thumbnail (required)', 'wp-seopress' ) .'</label>

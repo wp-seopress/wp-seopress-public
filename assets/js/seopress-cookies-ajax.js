@@ -11,6 +11,7 @@ jQuery(document).ready(function(){
 			success : function( data ) {
 				jQuery('.seopress-user-consent').remove();
 				jQuery('head').append(data.data.gtag_js);
+				jQuery('head').append(data.data.custom);
 				Cookies.set('seopress-user-consent-accept', '1', { expires: 30 });
 			},
 		});

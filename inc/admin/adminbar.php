@@ -9,11 +9,14 @@ function seopress_admin_bar_links() {
 	if (function_exists('seopress_advanced_appearance_adminbar_option') && seopress_advanced_appearance_adminbar_option() !='1') {
 		global $wp_admin_bar;
 
+		$title = '<span class="ab-icon icon-seopress-seopress"></span> '.__( 'SEO', 'wp-seopress' );
+		$title = apply_filters('seopress_adminbar_icon',$title);
+
 		// Adds a new top level admin bar link and a submenu to it
 		$wp_admin_bar->add_menu( array(
 			'parent'	=> false,
 			'id'		=> 'seopress_custom_top_level',
-			'title'		=> '<span class="ab-icon icon-seopress-seopress"></span> '.__( 'SEO', 'wp-seopress' ),
+			'title'		=> $title,
 			'href'		=> admin_url( 'admin.php?page=seopress-option' ),
 		));
 		$wp_admin_bar->add_menu( array(

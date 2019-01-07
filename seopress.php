@@ -2,16 +2,16 @@
 /*
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
-Description: The best SEO plugin.
-Version: 2.9.3
-Author: Benjamin DENIS
+Description: The best plugin for SEO.
+Version: 3.0
+Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
 Domain Path: /languages
 */
 
-/*  Copyright 2016 - 2018 - Benjamin DENIS  (email : contact@seopress.org)
+/*  Copyright 2016 - 2018 - Benjamin Denis  (email : contact@seopress.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -54,9 +54,8 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-define( 'SEOPRESS_VERSION', '2.9.3' ); 
-define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' ); 
+define( 'SEOPRESS_VERSION', '3.0' ); 
+define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //SEOPRESS INIT = Admin + Core + API + Translation
@@ -75,7 +74,11 @@ function seopress_init($hook) {
             require_once dirname( __FILE__ ) . '/inc/admin/admin-term-metaboxes.php';
         }
         require_once dirname( __FILE__ ) . '/inc/admin/ajax.php';
-        require_once dirname( __FILE__ ) . '/inc/admin/admin-header.php';
+        if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+            //do not load the SEOPress admin header
+        } else {
+            require_once dirname( __FILE__ ) . '/inc/admin/admin-header.php';
+        }
     }
 
     require_once dirname( __FILE__ ) . '/inc/functions/options.php';
@@ -97,12 +100,12 @@ function seopress_add_admin_options_scripts($hook) {
     wp_enqueue_style( 'seopress-admin' );
     
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-network-option')) {
-        wp_enqueue_script( 'seopress-network-tabs', plugins_url( 'assets/js/seopress-network-tabs.js', __FILE__ ), array( 'jquery' ), '', true );
+        wp_enqueue_script( 'seopress-network-tabs', plugins_url( 'assets/js/seopress-network-tabs.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
     }
 
     //Toggle / Notices JS
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-option' || $_GET['page'] == 'seopress-network-option' || $_GET['page'] == 'seopress-titles' || $_GET['page'] == 'seopress-xml-sitemap' || $_GET['page'] == 'seopress-social' || $_GET['page'] == 'seopress-google-analytics' || $_GET['page'] == 'seopress-advanced' || $_GET['page'] == 'seopress-pro-page') ) {
-        wp_enqueue_script( 'seopress-toggle-ajax', plugins_url( 'assets/js/seopress-dashboard.js', __FILE__ ), array( 'jquery' ), '', true );
+        wp_enqueue_script( 'seopress-toggle-ajax', plugins_url( 'assets/js/seopress-dashboard.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
 
         //Features
         $seopress_toggle_features = array(
@@ -121,7 +124,7 @@ function seopress_add_admin_options_scripts($hook) {
         wp_localize_script( 'seopress-toggle-ajax', 'seopressAjaxHideNotices', $seopress_hide_notices );
 
         //Admin Tabs
-        wp_enqueue_script( 'seopress-reverse-ajax', plugins_url( 'assets/js/seopress-tabs7.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+        wp_enqueue_script( 'seopress-reverse-ajax', plugins_url( 'assets/js/seopress-tabs7.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
 
         //Reverse domains
         $seopress_request_reverse = array(
@@ -153,7 +156,7 @@ function seopress_add_admin_options_scripts($hook) {
 
     //Migration
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-option' || $_GET['page'] == 'seopress-import-export') ) {
-        wp_enqueue_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-yoast-migrate.js', __FILE__ ), array( 'jquery' ), '', true );
+        wp_enqueue_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-yoast-migrate.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
 
         $seopress_yoast_migrate = array(
             'seopress_nonce' => wp_create_nonce('seopress_yoast_migrate_nonce'),
@@ -164,15 +167,15 @@ function seopress_add_admin_options_scripts($hook) {
 
     //Tabs
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-titles') ) {
-        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-xml-sitemap') ) {
-        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs4.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs4.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-xml-sitemap' || $_GET['page'] == 'seopress-pro-page' || $_GET['page'] == 'seopress-network-option' )) {
-        wp_enqueue_script( 'seopress-xml-ajax', plugins_url( 'assets/js/seopress-sitemap-ajax.js', __FILE__ ), array( 'jquery' ), '', true );
+        wp_enqueue_script( 'seopress-xml-ajax', plugins_url( 'assets/js/seopress-sitemap-ajax.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
 
         $seopress_ajax_permalinks = array(
             'seopress_nonce' => wp_create_nonce('seopress_flush_permalinks_nonce'),
@@ -183,17 +186,17 @@ function seopress_add_admin_options_scripts($hook) {
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-google-analytics') ) {
-        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs6.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs6.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-advanced') ) {
-        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs5.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
+        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs5.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-social') ) {
-        wp_enqueue_script( 'seopress-social-tabs-js', plugins_url( 'assets/js/seopress-tabs3.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
-        wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ) );
-        wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), '', false );
+        wp_enqueue_script( 'seopress-social-tabs-js', plugins_url( 'assets/js/seopress-tabs3.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
+        wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
+        wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), SEOPRESS_VERSION, false );
         wp_enqueue_media();
     }
 }
@@ -203,7 +206,7 @@ add_action('admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1)
 //SEOPRESS Admin bar
 function seopress_admin_bar_css() {
     if (is_user_logged_in() && function_exists('seopress_advanced_appearance_adminbar_option') && seopress_advanced_appearance_adminbar_option() !='1') {
-        wp_register_style( 'seopress-admin-bar', plugins_url('assets/css/seopress-admin-bar.min.css', __FILE__));
+        wp_register_style( 'seopress-admin-bar', plugins_url('assets/css/seopress-admin-bar.min.css', __FILE__), array(), SEOPRESS_VERSION);
         wp_enqueue_style( 'seopress-admin-bar' );
     }
 }
@@ -212,14 +215,13 @@ add_action('init', 'seopress_admin_bar_css', 10, 1);
 
 //Quick Edit
 function seopress_add_admin_options_scripts_quick_edit() {
-    wp_enqueue_script( 'seopress-quick-edit', plugins_url('assets/js/seopress-quick-edit.js', __FILE__), array('jquery', 'inline-edit-post'), '', true );
+    wp_enqueue_script( 'seopress-quick-edit', plugins_url('assets/js/seopress-quick-edit.js', __FILE__), array('jquery', 'inline-edit-post'), SEOPRESS_VERSION, true );
 }
 add_action( 'admin_print_scripts-edit.php', 'seopress_add_admin_options_scripts_quick_edit' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Admin Body Class
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 add_filter( 'admin_body_class', 'seopress_admin_body_class', 9 );
 function seopress_admin_body_class( $classes ) {
     if ((isset($_GET['page']) && ($_GET['page'] == 'seopress-option'))
@@ -250,7 +252,6 @@ function seopress_compatibility_jetpack() {
     }
 }
 add_action( 'wp_head', 'seopress_compatibility_jetpack', 0 );
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Credits footer
@@ -307,7 +308,7 @@ function seopress_plugin_action_links($links, $file) {
 
     if ($file == $this_plugin) {
         $settings_link = '<a href="' . admin_url( 'admin.php?page=seopress-option') . '">'.__("Settings","wp-seopress").'</a>';
-        $website_link = '<a href="http://seopress.org/" target="_blank">'.__("SEOPress.org","wp-seopress").'</a>';
+        $website_link = '<a href="https://seopress.org/" target="_blank">'.__("SEOPress.org","wp-seopress").'</a>';
         if ( !is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
             $pro_link = '<a href="https://www.seopress.org/seopress-pro/" style="color:#a00;font-weight:bold" target="_blank">'.__("GO PRO!","wp-seopress").'</a>';
             array_unshift($links, $pro_link);

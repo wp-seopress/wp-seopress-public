@@ -6,9 +6,9 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.9.3
+Stable tag: 3.0
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 SEOPress is a simple, fast and powerful SEO plugin for WordPress
 
@@ -159,6 +159,39 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.0 =
+* NEW 404 monitoring will now automatically exclude crawlers (robots/spiders)
+* NEW Hide SEO tools option in SEOPress dashboard page
+* NEW Hide Useful links option in SEOPress dashboard page
+* NEW Add 'seopress_404_bots' hook to filter bots list
+* NEW Add 'seopress_adminbar_icon' hook to filter SEOPress icon in adminbar (White labeling)
+* NEW Add SEOPRESS_WL_ADMIN_HEADER define to remove SEOPress admin header (White labeling)
+* NEW Add SEOPRESS_WL_ADMIN_HEADER_LOGO define to change SEOPress logo in admin header (White labeling)
+* NEW Add 'seopress_content_analysis_content' hook to filter the analyzed content (eg: adding custom fields, ACF fields...)
+* NEW Add 'seopress_custom_tracking' hook to add your custom tracking code (Facebook Pixel, Hotjar...) with user consent
+* NEW Breadcrumbs: add translation for homepage	option
+* NEW Breadcrumbs: add translation for 404 error option
+* NEW Breadcrumbs: add translation for Search results option
+* NEW Breadcrumbs: add translation for No results option
+* INFO Improve UI / UX
+* INFO Improve CSS / JS registering
+* INFO Performances improvement
+* INFO A11Y for Breadcrumbs (remove title attr)
+* INFO Better microdata markup for Breadcrumbs
+* INFO Remove News keywords / genres / standout tag for News XML Sitemap to match new guidelines
+* INFO You can now delete "Your theme doesn't use add_theme_support('title-tag');" notice
+* INFO Add compatibility for Admin Columns > 4.3 (older versions of AC will stop working with SEOPress, please update)
+* INFO Improve content analysis
+* INFO Decrease meta description length to 160 characters
+* INFO Meta robots for articles and terms (noindex, nofollow, nosnippet, noodp, noarchive, noimageindex) are now precoched according to the global parameters. 
+* FIX Change og:price:amount prefix to product
+* FIX Change og:price:currency prefix to product
+* FIX Event calendar compatibility with Breadcrumbs
+* FIX If Google News sitemap is off, Video tab doesn't display in SEO metaboxe
+* FIX [seopress_breadcrumbs] shortcode to return instead of echo
+* FIX jQuery accordion error
+* FIX %%archive_date%% in title/meta desc
+* FIX Udpater
 = 2.9.3 =
 * FIX PHP 5.4 compatibility (we strongly recommend users to upgrade to PHP 7.2)
 = 2.9.2.1 =

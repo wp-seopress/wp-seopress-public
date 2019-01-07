@@ -37,9 +37,9 @@ function seopress_do_real_preview() {
         'blocking' => true,
         'timeout'  => 5,
     );
-
+    
     if ($seopress_origin =='post') { //Default: post type
-        $response = wp_remote_retrieve_body(wp_remote_get(get_permalink($seopress_get_the_id), $args));
+        $response = wp_remote_retrieve_body(wp_remote_get(get_permalink((int)$seopress_get_the_id), $args));
     } else { //Term taxonomy
         $response = wp_remote_retrieve_body(wp_remote_get(get_term_link((int)$seopress_get_the_id, $seopress_tax_name), $args));
     }
@@ -142,6 +142,7 @@ function seopress_do_content_analysis() {
 
     //Get post content
     $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
+    $seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
 
     //Get Target Keywords
     $seopress_analysis_target_kw = explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true));
@@ -179,92 +180,96 @@ function seopress_do_content_analysis() {
     //DomDocument
     $dom = new domDocument;
     $internalErrors = libxml_use_internal_errors(true);
-    $dom->loadHTML($seopress_get_the_content);
-    $dom->preserveWhiteSpace = false;
-    $domxpath = new DOMXPath($dom);
+    if ($seopress_get_the_content !='') {
+        $dom->loadHTML($seopress_get_the_content);
+        $dom->preserveWhiteSpace = false;
+        $domxpath = new DOMXPath($dom);
 
-    //Words counter
-    $seopress_analysis_data['words_counter'] = str_word_count(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)));
-    $words_counter_unique = count(array_unique(str_word_count(wp_filter_nohtml_kses($seopress_get_the_content), 1)));
-    $seopress_analysis_data['words_counter_unique'] = $words_counter_unique - 1;
-    
-    //h1
-    $h1 = $domxpath->query("//h1");
-    if (!empty($h1)) {
-        foreach ($h1 as $heading1) {
-            foreach ($seopress_analysis_target_kw as $kw) {
-                if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading1->nodeValue), $m)) {
-                    $seopress_analysis_data['h1']['matches'][$kw][] = $m[0];
+        //Words counter
+        $seopress_analysis_data['words_counter'] = str_word_count(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)));
+        $words_counter_unique = count(array_unique(str_word_count(wp_filter_nohtml_kses($seopress_get_the_content), 1)));
+        $seopress_analysis_data['words_counter_unique'] = $words_counter_unique - 1;
+        
+        //h1
+        $h1 = $domxpath->query("//h1");
+        if (!empty($h1)) {
+            foreach ($h1 as $heading1) {
+                foreach ($seopress_analysis_target_kw as $kw) {
+                    if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading1->nodeValue), $m)) {
+                        $seopress_analysis_data['h1']['matches'][$kw][] = $m[0];
+                    }
+                }
+            }
+        } 
+
+        //h2
+        $h2 = $domxpath->query("//h2");
+        if (!empty($h2)) {
+            foreach ($h2 as $heading2) {
+                foreach ($seopress_analysis_target_kw as $kw) {
+                    if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading2->nodeValue), $m)) {
+                        $seopress_analysis_data['h2']['matches'][$kw][] = $m[0];
+                    }
                 }
             }
         }
-    } 
 
-    //h2
-    $h2 = $domxpath->query("//h2");
-    if (!empty($h2)) {
-        foreach ($h2 as $heading2) {
-            foreach ($seopress_analysis_target_kw as $kw) {
-                if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading2->nodeValue), $m)) {
-                    $seopress_analysis_data['h2']['matches'][$kw][] = $m[0];
+        //h3
+        $h3 = $domxpath->query("//h3");
+        if (!empty($h3)) {
+            foreach ($h3 as $heading3) {
+                foreach ($seopress_analysis_target_kw as $kw) {
+                    if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading3->nodeValue), $m)) {
+                        $seopress_analysis_data['h3']['matches'][$kw][] = $m[0];
+                    }
                 }
             }
         }
-    }
 
-    //h3
-    $h3 = $domxpath->query("//h3");
-    if (!empty($h3)) {
-        foreach ($h3 as $heading3) {
-            foreach ($seopress_analysis_target_kw as $kw) {
-                if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading3->nodeValue), $m)) {
-                    $seopress_analysis_data['h3']['matches'][$kw][] = $m[0];
+        //Images
+        /*Standard images*/
+        $imgs = $domxpath->query("//img");
+        
+        if (!empty($imgs) && $imgs !=NULL) {
+            //init
+            $data_img = array();
+            foreach ($imgs as $img) {
+                if ($img->getAttribute('alt') =='') {
+                    $data_img[] .= $img->getAttribute('src');
+                }
+            }
+            $seopress_analysis_data['img']['images'] = $data_img;
+        }
+
+        /*WooCommerce*/
+        if  ( 'product' == $seopress_get_post_type ) {
+            $product_id = $seopress_get_the_id;
+            $product = new WC_product($product_id);
+            $product_img_ids = $product->get_gallery_image_ids();
+            if (!empty($product_img_ids)) {
+                foreach ($product_img_ids as $product_img_id) {
+                    $alt = get_post_meta($product_img_id, '_wp_attachment_image_alt', true);
+                    if ($alt =='') {
+                        $seopress_analysis_data['img']['product_img'][] .= wp_get_attachment_thumb_url($product_img_id);
+                    }
                 }
             }
         }
-    }
 
-    //Images
-    /*Standard images*/
-    $imgs = $domxpath->query("//img");
-    
-    if (!empty($imgs) && $imgs !=NULL) {
-        foreach ($imgs as $img) {
-            if ($img->getAttribute('alt') =='') {
-                $data_img[] .= $img->getAttribute('src');
+        /*Post Thumbnail*/
+        if (has_post_thumbnail($seopress_get_the_id)) {
+            $thumbnail_id = get_post_thumbnail_id($seopress_get_the_id);
+            $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+            if ($alt =='') {
+                $seopress_analysis_data['img']['post_thumbnail'] = get_the_post_thumbnail($seopress_get_the_id);
             }
         }
-        $seopress_analysis_data['img']['images'] = $data_img;
-    }
 
-    /*WooCommerce*/
-    if  ( 'product' == $seopress_get_post_type ) {
-        $product_id = $seopress_get_the_id;
-        $product = new WC_product($product_id);
-        $product_img_ids = $product->get_gallery_image_ids();
-        if (!empty($product_img_ids)) {
-            foreach ($product_img_ids as $product_img_id) {
-                $alt = get_post_meta($product_img_id, '_wp_attachment_image_alt', true);
-                if ($alt =='') {
-                    $seopress_analysis_data['img']['product_img'][] .= wp_get_attachment_thumb_url($product_img_id);
-                }
-            }
+        //nofollow links
+        $nofollow_links = $domxpath->query("//a[@rel='nofollow']"); //AMELIORER CHECK SI PLUSIEURS ATTR
+        foreach ($nofollow_links as $key=>$link) {
+            $seopress_analysis_data['nofollow_links'][$key] .= $link->nodeValue;
         }
-    }
-
-    /*Post Thumbnail*/
-    if (has_post_thumbnail($seopress_get_the_id)) {
-        $thumbnail_id = get_post_thumbnail_id($seopress_get_the_id);
-        $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
-        if ($alt =='') {
-            $seopress_analysis_data['img']['post_thumbnail'] = get_the_post_thumbnail($seopress_get_the_id);
-        }
-    }
-
-    //nofollow links
-    $nofollow_links = $domxpath->query("//a[@rel='nofollow']"); //AMELIORER CHECK SI PLUSIEURS ATTR
-    foreach ($nofollow_links as $key=>$link) {
-        $seopress_analysis_data['nofollow_links'][$key] .= $link->nodeValue;
     }
 
     libxml_use_internal_errors($internalErrors);

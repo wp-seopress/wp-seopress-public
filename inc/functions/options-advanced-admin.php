@@ -229,7 +229,7 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
                     break;
 
                 case 'seopress_ps' :
-                    echo '<div class="seopress-request-page-speed seopress-button" data_permalink="'.get_the_permalink().'" title="'.__('Analyse this page with Google Page Speed','wp-seopress').'"><span class="dashicons dashicons-dashboard"></span></div>';
+                    echo '<div class="seopress-request-page-speed seopress-button" data_permalink="'.get_the_permalink().'" title="'.__('Analyze this page with Google Page Speed','wp-seopress').'"><span class="dashicons dashicons-dashboard"></span></div>';
                     break;
             }
         }

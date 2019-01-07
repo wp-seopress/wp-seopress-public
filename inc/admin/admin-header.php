@@ -6,15 +6,24 @@ function seopress_admin_header() { ?>
     <div id="seopress-header">
     	<div id="seopress-admin">
             <div id="seopress-navbar">
+                <?php if (defined('SEOPRESS_WL_ADMIN_HEADER_LOGO') && SEOPRESS_WL_ADMIN_HEADER_LOGO !== '') { ?>
+                    <style>
+                        #seopress-navbar h1::before{content:"" !important;background:url(<?php echo SEOPRESS_WL_ADMIN_HEADER_LOGO; ?>) no-repeat center center !important;width:40px !important;height:45px !important};
+                    </style>
+                <?php } ?>
                 <h1>
                     <a href="<?php echo admin_url( 'admin.php?page=seopress-option' ); ?>">
                         <span class="screen-reader-text"><?php _e( 'SEOPress', 'wp-seopress' ); ?></span>
                         <?php if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) { ?>
                             <span class="seopress-info-version">
-                                <strong>
-                                    <?php _e('PRO', 'wp-seopress'); ?>
-                                    <?php echo SEOPRESS_VERSION; ?>
-                                </strong>
+                                <?php if (defined('SEOPRESS_WL_ADMIN_HEADER_INFO') && SEOPRESS_WL_ADMIN_HEADER_INFO !== '') { ?>
+                                    <?php echo SEOPRESS_WL_ADMIN_HEADER_INFO; ?>
+                                <?php } else { ?>
+                                    <strong>
+                                        <?php _e('PRO', 'wp-seopress'); ?>
+                                        <?php echo SEOPRESS_VERSION; ?>
+                                    </strong>
+                                <?php } ?>
                             </span>
                         <?php } else { ?>
                             <span class="seopress-info-version"><?php echo SEOPRESS_VERSION; ?></span>

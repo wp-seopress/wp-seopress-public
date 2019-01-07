@@ -2,28 +2,28 @@
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 echo '<div class="wrap-seopress-analysis">
         <p>
-            '.__('Enter a few keywords for analysis and help you write optimized content.','wp-seopress').'
+            '.__('Enter a few keywords for analysis to help you write optimized content.','wp-seopress').'
         </p>
         <div class="col-left">
             <p>
                 <label for="seopress_analysis_target_kw_meta">'. __( 'Target keywords', 'wp-seopress' ) .'</label>
                 <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" aria-label="'.__('Target keywords','wp-seopress').'" value="'.$seopress_analysis_target_kw.'" />
-                <span class="howto">'.__('Separate target keywords with commas, do not use space after comma unless it\'s wanted.','wp-seopress').'</span>
+                <span class="howto">'.__('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them.','wp-seopress').'</span>
             </p>';
             if (empty($seopress_analysis_data)) {
-                echo '<div id="seopress_launch_analysis" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Analyse my content','wp-seopress').'</div>';
+                echo '<div id="seopress_launch_analysis" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Analyze my content','wp-seopress').'</div>';
             } else {
                 echo '<div id="seopress_launch_analysis" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Refresh analysis','wp-seopress').'</div>';
             }
             echo '<div id="seopress_analysis_results_state" style="display:none"><span class="dashicons dashicons-yes"></span>'.__('Analysis completed','wp-seopress').'</div>';
 
-            echo '<br><p><span class="howto">'.__('Save your post first, to get the most accurate analysis.','wp-seopress').'</span></p>';
+            echo '<br><p><span class="howto">'.__('To get the most accurate analysis, save your post first.','wp-seopress').'</span></p>';
 echo    '</div>';
 if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
     echo '<div class="col-right">
-            <label for="seopress_google_suggest_kw_meta">'. __( 'Google Suggest', 'wp-seopress' ) .'</label>
+            <label for="seopress_google_suggest_kw_meta">'. __( 'Google suggestions', 'wp-seopress' ) .'</label>
             <input id="seopress_google_suggest_kw_meta" type="text" name="seopress_google_suggest_kw" placeholder="Get suggestions from Google" aria-label="Google suggestions" value="">
-            <span class="howto">'.__('Enter a keyword or phrase to find the top 10 Google suggestions instantly. Useful for working the long tail technique.','wp-seopress').'</span>
+            <span class="howto">'.__('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.','wp-seopress').'</span>
             <br>
             <button id="seopress_get_suggestions" class="button">'.__('Get suggestions!','wp-seopress').'</button>
             ';
@@ -65,7 +65,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
         echo '<div id="seopress-analysis-tabs">';
             if (!empty($seopress_analysis_data)) {
                 echo '<ul class="wrap-analysis-results">
-                    <li><a href="#seopress-analysis-tabs-1"><span class="dashicons dashicons-admin-settings"></span>'. __( 'Optimisations', 'wp-seopress' ) .'</a></li>
+                    <li><a href="#seopress-analysis-tabs-1"><span class="dashicons dashicons-admin-settings"></span>'. __( 'Optimizations', 'wp-seopress' ) .'</a></li>
                     <li><a href="#seopress-analysis-tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Configuration', 'wp-seopress' ) .'</a></li>
                     <li><a href="#seopress-analysis-tabs-3"><span class="dashicons dashicons-format-image"></span>'. __( 'Images', 'wp-seopress' ) .'</a></li>
                     <li><a href="#seopress-analysis-tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Links', 'wp-seopress' ) .'</a></li>
@@ -82,7 +82,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                             if ($seopress_analysis_data['0']['words_counter'] >= 299) {
                                 echo '<li><span class="dashicons dashicons-yes"></span>'.__('Your content is composed of more than 300 words, which is the minimum for a post.','wp-seopress').'</li>';
                             } else {
-                                echo '<li><span class="dashicons dashicons-no-alt"></span>'.__('Your content lacks words. Add a few more paragraphs!','wp-seopress').'</li>';
+                                echo '<li><span class="dashicons dashicons-no-alt"></span>'.__('Your content is too short. Add a few more paragraphs!','wp-seopress').'</li>';
                             }
                     echo '</ul>';
                     }
@@ -91,7 +91,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     echo '<h3>'.__('Post title','wp-seopress').'</h3>';
                     if (get_post_field('post_title', $post->ID) !='') {
                         if (!empty($seopress_analysis_data['0']['post_title']['matches'])) {
-                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Post Title.','wp-seopress').'</p>';
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in the Post Title.','wp-seopress').'</p>';
                             echo '<ul>';
                                 $target_kws_post_title = $seopress_analysis_data['0']['post_title']['matches'];
                                 foreach ($target_kws_post_title as $key => $value) {
@@ -114,7 +114,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                         echo '<h3>'.__('H1 (Heading 1)','wp-seopress').'</h3>';
                         $count = count($seopress_analysis_data['0']['h1']['matches']);
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d Heading 1 (H1) in your content.','wp-seopress'), $count).'</p>';
-                        echo '<p>'.__('You should not use Heading 1 in your post content because your post title is already an H1. The rule is simple: 1 H1 for 1 web page.','wp-seopress').'</p>';
+                        echo '<p>'.__('You should not use a H1 heading in your post content because your post title is already an H1. The rule is simple: only one H1 for each web page.','wp-seopress').'</p>';
                     }
 
                     //H2
@@ -125,7 +125,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                             $target_kws_h2 = $seopress_analysis_data['0']['h2']['matches'];
                             foreach ($target_kws_h2 as $key => $value) {
                                 foreach ($value as $_key => $_value) {
-                                    $kw_count = count($_value);
+                                    $kw_count = count($value);
                                 }
                                 $kw_name = $key;
                                 echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
@@ -143,7 +143,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                             $target_kws_h3 = $seopress_analysis_data['0']['h3']['matches'];
                             foreach ($target_kws_h3 as $key => $value) {
                                 foreach ($value as $_key => $_value) {
-                                    $kw_count = count($_value);
+                                    $kw_count = count($value);
                                 }
                                 $kw_name = $key;
                                 echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
@@ -157,7 +157,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     echo '<h3>'.__('Meta title','wp-seopress').'</h3>';
                     if ($seopress_titles_title !='') {
                         if (!empty($seopress_analysis_data['0']['title']['matches'])) {
-                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Meta Title.','wp-seopress').'</p>';
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in the Meta Title.','wp-seopress').'</p>';
                             echo '<ul>';
                                 $target_kws_title = $seopress_analysis_data['0']['title']['matches'];
                                 foreach ($target_kws_title as $key => $value) {
@@ -169,7 +169,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                                 }
                             echo '</ul>';
                         } else {
-                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('None of your target keywords were found in Meta Title.','wp-seopress').'</p>';
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('None of your target keywords were found in the Meta Title.','wp-seopress').'</p>';
                         }
 
                         if (strlen($seopress_titles_title) > 65 ) {
@@ -178,7 +178,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                             echo '<p><span class="dashicons dashicons-yes"></span>'.__('The length of your title is correct','wp-seopress').'</p>';
                         }
                     } else {
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom title set for this post.','wp-seopress').'</p>';
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom title is set for this post.','wp-seopress').'</p>';
                     }
 
                     //Meta description
@@ -186,7 +186,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 
                     if ($seopress_titles_desc !='') {
                         if (!empty($seopress_analysis_data['0']['desc']['matches'])) {
-                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Meta description.','wp-seopress').'</p>';                        
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in the Meta description.','wp-seopress').'</p>';                        
                             echo '<ul>';
                                 $target_kws_desc = $seopress_analysis_data['0']['desc']['matches'];
                                 foreach ($target_kws_desc as $key => $value) {
@@ -198,16 +198,16 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                                 }
                             echo '</ul>';
                         } else {
-                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('None of your target keywords were found in Meta description.','wp-seopress').'</p>';
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('None of your target keywords were found in the Meta description.','wp-seopress').'</p>';
                         }
 
-                        if (strlen($seopress_titles_desc) > 320 ) {
+                        if (strlen($seopress_titles_desc) > 160 ) {
                             echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('You custom meta description is too long.','wp-seopress').'</p>'; 
                         } else {
                             echo '<p><span class="dashicons dashicons-yes"></span>'.__('The length of your meta description is correct','wp-seopress').'</p>';
                         }
                     } else {
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom meta description set for this post.','wp-seopress').'</p>';
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom meta description is set for this post.','wp-seopress').'</p>';
                     }
 
                 echo '</div>
@@ -215,32 +215,32 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                 <div id="seopress-analysis-tabs-2">
                     <h3>'.__('Robots','wp-seopress').'</h3>';
 
-                    //Robots
-                    if ($seopress_robots_index =='yes') {
+                    //Robots                    
+                    if ($seopress_robots_index =='yes' || $seopress_robots_index =='1') {
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noindex is on! Search engines can\'t index this page.','wp-seopress').'</p>';
                     } else {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('noindex is off. Search engines will index this page.','wp-seopress').'</p>';
                     }
 
-                    if ($seopress_robots_follow =='yes') {
+                    if ($seopress_robots_follow =='yes' || $seopress_robots_follow =='1') {
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('nofollow is on! Search engines can\'t follow your links on this page.','wp-seopress').'</p>';
                     } else {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('nofollow is off. Search engines will follow links on this page.','wp-seopress').'</p>';
                     }
 
-                    if ($seopress_robots_imageindex =='yes') {
+                    if ($seopress_robots_imageindex =='yes' || $seopress_robots_imageindex =='1') {
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noimageindex is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed).','wp-seopress').'</p>';
                     } else {
-                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('noimageindex is off. Google will index your images on this page.','wp-seopress').'</p>';
+                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('noimageindex is off. Google will index the images on this page.','wp-seopress').'</p>';
                     }
 
-                    if ($seopress_robots_archive =='yes') {
+                    if ($seopress_robots_archive =='yes' || $seopress_robots_archive =='1') {
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noarchive is on! Search engines will not cache your page.','wp-seopress').'</p>';
                     } else {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('noarchive is off. Search engines will probably cache your page.','wp-seopress').'</p>';
                     }
 
-                    if ($seopress_robots_snippet =='yes') {
+                    if ($seopress_robots_snippet =='yes' || $seopress_robots_snippet =='1') {
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('nosnippet is on! Search engines will not display a snippet of this page in search results.','wp-seopress').'</p>';
                     } else {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('nosnippet is off. Search engines will display a snippet of this page in search results.','wp-seopress').'</p>';
@@ -255,7 +255,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                             $product_imgs = isset($seopress_analysis_data['0']['img']['product_img']) ? $seopress_analysis_data['0']['img']['product_img'] : NULL;
 
                             if ((isset($images) && !empty($images)) || (isset($post_thumbnail) && !empty($post_thumbnail))) {
-                                echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No alternative text found for these images. Alt tag are important for both SEO and accessibility.','wp-seopress').'</p>';
+                                echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No alternative text found for these images. Alt tags are important for both SEO and accessibility.','wp-seopress').'</p>';
                             
                                 //Standard images & galleries
                                 if (isset($images) && !empty($images)) {

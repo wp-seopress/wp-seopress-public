@@ -20,7 +20,7 @@ Translators:
 - French: Didier Wolforg, @rainbowgeek, and Clément Polito
 - English: @rainbowgeek
 - Italian: Déborah Donnier @deborahdonnier
-- Spanish: Rafael Salguero
+- Spanish: Rafael Salguero + WP-Translations
 - German: @likemike2425
 - Japan: @s_tayama and @miccweb
 - Dutch: Sebastiaan Hendriks

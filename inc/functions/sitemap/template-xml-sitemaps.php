@@ -140,4 +140,3 @@ function seopress_xml_sitemap_index() {
 	return $seopress_sitemaps;
 } 
 echo seopress_xml_sitemap_index();
-
