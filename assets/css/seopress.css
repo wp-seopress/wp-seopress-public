@@ -1,7 +1,9 @@
-#adminmenu div.wp-menu-image.dashicons-admin-seopress::before,#seopress-header #seopress-admin h1::before {
+#adminmenu div.wp-menu-image.dashicons-admin-seopress::before, #seopress-header #seopress-admin h1::before {
     content: "\e800";
     font-family: seopress !important;
     font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
 }
 
 #seopress-header #seopress-admin h1::before,.seopress-page-list .seopress-feature h3,.seopress-styles .seopress-option h1 {
@@ -23,6 +25,8 @@
 
 [class*=" icon-seopress"],[class^=icon-seopress-] {
     font-family: seopress!important;
+    font-size: 14px !important;
+    line-height: 24px !important;
 }
 
 .icon-seopress-seopress:before {
@@ -664,16 +668,20 @@ body.seopress-styles {
 }
 
 #seopress-header #seopress-admin h1::before {
-    font-size: 28px;
+    font-size: 14px;
     line-height: 40px;
     position: absolute;
-    background: #23282d;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: 400;
     color: #fff;
     width: 40px;
     height: 40px;
     text-align: center;
+    background: rgb(58,74,251);
+    background: -moz-linear-gradient(45deg, rgba(58,74,251,1) 0%, rgba(71,190,165,1) 100%);
+    background: -webkit-linear-gradient(45deg, rgba(58,74,251,1) 0%,rgba(71,190,165,1) 100%);
+    background: linear-gradient(45deg, rgba(58,74,251,1) 0%,rgba(71,190,165,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a4afb', endColorstr='#47bea5',GradientType=1 );
 }
 
 #seopress-header #seopress-admin h1:hover {

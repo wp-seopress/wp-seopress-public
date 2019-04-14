@@ -6,7 +6,7 @@
 <font id="fontello" horiz-adv-x="1000" >
 <font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
-<glyph glyph-name="seopress" unicode="&#xe800;" d="M361 143l-319 0a35 35 0 0 1 0-69l319 0a35 35 0 0 1 0 69z m-319 440l319 0a35 35 0 0 1 0 69l-319 0a35 35 0 0 1 0-69z m669 43a289 289 0 0 1-286-254l-393 0a35 35 0 0 1 0-69l393 0a289 289 0 1 1 286 323z m0-507a218 218 0 1 0 218 218 218 218 0 0 0-218-218z" horiz-adv-x="1000" />
+<glyph glyph-name="seopress-seopress" unicode="&#xe800;" d="M612-30h-552a60 60 0 0 1 0-119h552a60 60 0 0 1 0 119m-552 761h552a60 60 0 0 1 0 119h-552a60 60 0 0 1 0-119m1176 119a499 499 0 0 1-496-441h-680a60 60 0 0 1 0-119h680a499 499 0 1 1 496 560m0-877a377 377 0 1 0 377 377 378 378 0 0 0-377-378" horiz-adv-x="1735" />
 </font>
 </defs>
 </svg>

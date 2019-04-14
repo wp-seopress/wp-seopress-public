@@ -2367,7 +2367,7 @@ class seopress_options
 
         add_settings_field(
             'seopress_xml_sitemap_html_exclude', // ID
-           __("Exclude some Posts, Pages or Custom Post Types","wp-seopress"), // Title
+           __("Exclude some Posts, Pages, Custom Post Types or Terms IDs","wp-seopress"), // Title
             array( $this, 'seopress_xml_sitemap_html_exclude_callback' ), // Callback
             'seopress-settings-admin-html-sitemap', // Page
             'seopress_setting_section_html_sitemap' // Section                  
@@ -4320,7 +4320,7 @@ class seopress_options
         $check = isset($this->options['seopress_xml_sitemap_html_exclude']) ? $this->options['seopress_xml_sitemap_html_exclude'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_exclude]" placeholder="'.esc_html__('eg: 13, 8, 38','wp-seopress').'" aria-label="'.__('Exclude some Posts, Pages or Custom Post Types','wp-seopress').'" value="%s"/>',
+        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_exclude]" placeholder="'.esc_html__('eg: 13, 8, 38','wp-seopress').'" aria-label="'.__('Exclude some Posts, Pages, Custom Post Types or Terms IDs','wp-seopress').'" value="%s"/>',
         esc_html( $check )
         );
     }
@@ -4364,6 +4364,9 @@ class seopress_options
             echo '<option '; 
                 if ('ID' == $selected) echo 'selected="selected"'; 
                 echo ' value="ID">'. __("Post ID","wp-seopress") .'</option>';
+            echo '<option '; 
+                if ('menu_order' == $selected) echo 'selected="selected"'; 
+                echo ' value="menu_order">'. __("Menu order","wp-seopress") .'</option>';
         echo '</select>';
 
         if (isset($this->options['seopress_xml_sitemap_html_orderby'])) {

@@ -116,7 +116,18 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
 						if($_cpt_value =='1') {
 							$args = array( 'posts_per_page' => 1000, 'order'=> $seopress_xml_sitemap_html_order_option, 'orderby' => $seopress_xml_sitemap_html_orderby_option, 'post_type' => $cpt_key, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'exclude' => $seopress_xml_sitemap_html_exclude_option, 'suppress_filters' => false );
 							if ($cpt_key =='post') {
-								$cats = get_categories('orderby=name&order=ASC');
+								$args_cat_query = array(
+									'orderby'	=>	'name',
+									'order'		=>	'ASC',
+									'meta_key' 	=> '_seopress_robots_index',
+									'meta_value' => 'yes',
+									'meta_compare' => 'NOT EXISTS',
+									'exclude' => $seopress_xml_sitemap_html_exclude_option,
+									'suppress_filters' => false,
+								);
+								$args_cat_query = apply_filters('seopress_sitemaps_html_cat_query', $args_cat_query);
+
+								$cats = get_categories($args_cat_query);
 								if (!empty($cats)) {
 									foreach($cats as $cat) {
 										$content .= '<h3>'.$cat->name.'</h3>';

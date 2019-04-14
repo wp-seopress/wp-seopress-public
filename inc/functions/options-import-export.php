@@ -98,14 +98,20 @@ function seopress_import_redirections_settings() {
         foreach ($value as $_key => $_value) {
             $csv_line = explode ( ';', $_value );
 
-            if ($csv_line[2] =='301' || $csv_line[2] =='302' || $csv_line[2]=='307') {
+            //Third column: redirections type
+            if ($csv_line[2] =='301' || $csv_line[2] =='302' || $csv_line[2]=='307' || $csv_line[2]=='410' || $csv_line[2]=='451') {
                 $csv_type_redirects[2] = $csv_line[2];
             }
 
-            if (!empty($csv_line[0])) {
-                $id = wp_insert_post(array('post_title' => $csv_line[0], 'post_type' => 'seopress_404', 'post_status' => 'publish', 'meta_input' => array( '_seopress_redirections_value' => $csv_line[1], '_seopress_redirections_type' => $csv_type_redirects[2])));
-                    update_post_meta( $id, '_seopress_redirections_enabled', 'yes' );
+            //Fourth column: redirections enabled
+            if ($csv_line[3] =='yes') {
+                $csv_type_redirects[3] = $csv_line[3];
+            } else {
+                $csv_type_redirects[3] = '';
+            }
 
+            if (!empty($csv_line[0])) {
+                $id = wp_insert_post(array('post_title' => urldecode($csv_line[0]), 'post_type' => 'seopress_404', 'post_status' => 'publish', 'meta_input' => array( '_seopress_redirections_value' => urldecode($csv_line[1]), '_seopress_redirections_type' => $csv_type_redirects[2], '_seopress_redirections_enabled' =>  $csv_line[3])));
             }
         }
     }
@@ -129,15 +135,22 @@ function seopress_export_redirections_settings() {
     $args = array(
         'post_type' => 'seopress_404',
         'posts_per_page' => '-1',
+        'meta_query' => array(
+            array(
+                'key'     => '_seopress_redirections_type',
+                'value'   => array('301','302','307','410','451'),
+                'compare' => 'IN',
+            ),
+        ),
     );
     $seopress_redirects_query = new WP_Query( $args );
 
     if ( $seopress_redirects_query->have_posts() ) {
         while ( $seopress_redirects_query->have_posts() ) {
             $seopress_redirects_query->the_post();
-            $redirects_html .= get_the_title();
+            $redirects_html .= urlencode(esc_attr(wp_filter_nohtml_kses(get_the_title())));
             $redirects_html .= ';';
-            $redirects_html .= get_post_meta(get_the_ID(),'_seopress_redirections_value',true);
+            $redirects_html .= urlencode(esc_attr(wp_filter_nohtml_kses(get_post_meta(get_the_ID(),'_seopress_redirections_value',true))));
             $redirects_html .= ';';
             $redirects_html .= get_post_meta(get_the_ID(),'_seopress_redirections_type',true);
             $redirects_html .= ';';
