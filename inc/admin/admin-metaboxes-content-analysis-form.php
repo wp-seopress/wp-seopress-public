@@ -91,34 +91,38 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     echo '</ul>';
                     }
 
-                    //Post Title
-                    echo '<h3>'.__('Post title','wp-seopress').'</h3>';
-                    if (get_post_field('post_title', $post->ID) !='') {
-                        if (!empty($seopress_analysis_data['0']['post_title']['matches'])) {
-                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in the Post Title.','wp-seopress').'</p>';
-                            echo '<ul>';
-                                $target_kws_post_title = $seopress_analysis_data['0']['post_title']['matches'];
-                                foreach ($target_kws_post_title as $key => $value) {
-                                    foreach ($value as $_key => $_value) {
-                                        $kw_count = count($_value);
-                                    }
-                                    $kw_name = $key;
-                                    echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
-                                }
-                            echo '</ul>';
-                        } else {
-                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('None of your target keywords were found in the Post Title.','wp-seopress').'</p>';
-                        }
-                    } else {
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No post title set for this post!','wp-seopress').'</p>';
-                    }
-
                     //H1
                     if (!empty($seopress_analysis_data['0']['h1']['matches'])) {
                         echo '<h3>'.__('H1 (Heading 1)','wp-seopress').'</h3>';
+
+                        if (!empty($seopress_analysis_data['0']['h1']['nomatches'])) {
+                            $h1nomatches = count($seopress_analysis_data['0']['h1']['nomatches']);
+                        } else {
+                            $h1nomatches = 0;
+                        }
+
                         $count = count($seopress_analysis_data['0']['h1']['matches']);
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d Heading 1 (H1) in your content.','wp-seopress'), $count).'</p>';
-                        echo '<p>'.__('You should not use a H1 heading in your post content because your post title is already an H1. The rule is simple: only one H1 for each web page.','wp-seopress').'</p>';
+                        $count = $count + $h1nomatches;
+
+                        $target_kws_h1 = $seopress_analysis_data['0']['h1']['matches'];
+
+                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Heading 1 (H1).','wp-seopress').'</p>';
+                        
+                        echo '<ul>';
+
+                        foreach ($target_kws_h1 as $key => $value) {
+                            foreach ($value as $_key => $_value) {
+                                $kw_count = count($value);
+                            }
+                            $kw_name = $key;
+                            echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
+                        }
+
+                        echo '</ul>';
+                        if ($count > 1) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d Heading 1 (H1) in your content.','wp-seopress'), $count).'</p>';
+                            echo '<p>'.__('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. Better for SEO and accessibility.','wp-seopress').'</p>';
+                        }
                     }
 
                     //H2
@@ -160,10 +164,10 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     //Meta Title
                     echo '<h3>'.__('Meta title','wp-seopress').'</h3>';
                     if ($seopress_titles_title !='') {
-                        if (!empty($seopress_analysis_data['0']['title']['matches'])) {
+                        if (!empty($seopress_analysis_data['0']['meta_title']['matches'])) {
                             echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in the Meta Title.','wp-seopress').'</p>';
                             echo '<ul>';
-                                $target_kws_title = $seopress_analysis_data['0']['title']['matches'];
+                                $target_kws_title = $seopress_analysis_data['0']['meta_title']['matches'];
                                 foreach ($target_kws_title as $key => $value) {
                                     foreach ($value as $_key => $_value) {
                                         $kw_count = count($_value);
@@ -189,10 +193,10 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     echo '<h3>'.__('Meta description','wp-seopress').'</h3>';
 
                     if ($seopress_titles_desc !='') {
-                        if (!empty($seopress_analysis_data['0']['desc']['matches'])) {
+                        if (!empty($seopress_analysis_data['0']['meta_description']['matches'])) {
                             echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in the Meta description.','wp-seopress').'</p>';                        
                             echo '<ul>';
-                                $target_kws_desc = $seopress_analysis_data['0']['desc']['matches'];
+                                $target_kws_desc = $seopress_analysis_data['0']['meta_description']['matches'];
                                 foreach ($target_kws_desc as $key => $value) {
                                     foreach ($value as $_key => $_value) {
                                         $kw_count = count($_value);
@@ -219,72 +223,63 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                 <div id="seopress-analysis-tabs-2">
                     <h3>'.__('Robots','wp-seopress').'</h3>';
 
-                    //Robots                    
-                    if ($seopress_robots_index =='yes' || $seopress_robots_index =='1') {
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noindex is on! Search engines can\'t index this page.','wp-seopress').'</p>';
-                    } else {
-                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('noindex is off. Search engines will index this page.','wp-seopress').'</p>';
-                    }
+                    //Robots              
+                    if (!empty($seopress_analysis_data['0']['meta_robots'])) {
 
-                    if ($seopress_robots_follow =='yes' || $seopress_robots_follow =='1') {
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('nofollow is on! Search engines can\'t follow your links on this page.','wp-seopress').'</p>';
-                    } else {
-                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('nofollow is off. Search engines will follow links on this page.','wp-seopress').'</p>';
-                    }
+                        $meta_robots = $seopress_analysis_data['0']['meta_robots']['0'];
+                        
+                        if (count($seopress_analysis_data['0']['meta_robots']) > 1) {
+                            $count_meta_robots = count($seopress_analysis_data['0']['meta_robots']);
 
-                    if ($seopress_robots_imageindex =='yes' || $seopress_robots_imageindex =='1') {
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noimageindex is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed).','wp-seopress').'</p>';
-                    } else {
-                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('noimageindex is off. Google will index the images on this page.','wp-seopress').'</p>';
-                    }
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %s meta robots in your page. There is probably something wrong with your theme!','wp-seopress'), $count_meta_robots).'</p>';
+                        }
 
-                    if ($seopress_robots_archive =='yes' || $seopress_robots_archive =='1') {
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noarchive is on! Search engines will not cache your page.','wp-seopress').'</p>';
-                    } else {
-                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('noarchive is off. Search engines will probably cache your page.','wp-seopress').'</p>';
-                    }
+                        if (preg_match('/noindex/', json_encode($meta_robots))) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noindex is on! Search engines can\'t index this page.','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('noindex is off. Search engines will index this page.','wp-seopress').'</p>';
+                        }
 
-                    if ($seopress_robots_snippet =='yes' || $seopress_robots_snippet =='1') {
-                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('nosnippet is on! Search engines will not display a snippet of this page in search results.','wp-seopress').'</p>';
+                        if (preg_match('/nofollow/', json_encode($meta_robots))) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('nofollow is on! Search engines can\'t follow your links on this page.','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('nofollow is off. Search engines will follow links on this page.','wp-seopress').'</p>';
+                        }
+
+                        if (preg_match('/noimageindex/', json_encode($meta_robots))) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noimageindex is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed).','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('noimageindex is off. Google will index the images on this page.','wp-seopress').'</p>';
+                        }
+
+                        if (preg_match('/noarchive/', json_encode($meta_robots))) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noarchive is on! Search engines will not cache your page.','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('noarchive is off. Search engines will probably cache your page.','wp-seopress').'</p>';
+                        }
+
+                        if (preg_match('/nosnippet/', json_encode($meta_robots))) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('nosnippet is on! Search engines will not display a snippet of this page in search results.','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('nosnippet is off. Search engines will display a snippet of this page in search results.','wp-seopress').'</p>';
+                        }
                     } else {
-                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('nosnippet is off. Search engines will display a snippet of this page in search results.','wp-seopress').'</p>';
+                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('We found no meta robots on this page. It means, your page is index,follow. Search engines will index it, and follow links. ','wp-seopress').'</p>';
                     }
             echo '</div>
                 <div id="seopress-analysis-tabs-3">
                     <div class="wrap-analysis-img">';
                         if (!empty($seopress_analysis_data['0']['img'])) {
                             $images = isset($seopress_analysis_data['0']['img']['images']) ? $seopress_analysis_data['0']['img']['images'] : NULL;
-                            $post_thumbnail = isset($seopress_analysis_data['0']['img']['post_thumbnail']) ? $seopress_analysis_data['0']['img']['post_thumbnail'] : NULL;
 
-                            $product_imgs = isset($seopress_analysis_data['0']['img']['product_img']) ? $seopress_analysis_data['0']['img']['product_img'] : NULL;
-
-                            if ((isset($images) && !empty($images)) || (isset($post_thumbnail) && !empty($post_thumbnail))) {
+                            if (isset($images) && !empty($images)) {
                                 echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No alternative text found for these images. Alt tags are important for both SEO and accessibility.','wp-seopress').'</p>';
                             
                                 //Standard images & galleries
                                 if (isset($images) && !empty($images)) {
-                                    echo '<h4>'.__('Post Content','wp-seopress').'</h4>';
                                     echo '<ul class="attachments">';
                                         foreach($images as $img) {
                                             echo '<li class="attachment"><img src="'.$img.'"/></li>';
-                                        }
-                                    echo '</ul>';
-                                }
-
-                                //Post Thumbnail
-                                if (isset($post_thumbnail) && !empty($post_thumbnail)) {
-                                    echo '<h4>'.__('Post Thumbnail','wp-seopress').'</h4>';
-                                    echo '<ul class="attachments">';
-                                        echo '<li class="attachment">'.$post_thumbnail.'</li>';
-                                    echo '</ul>';
-                                }
-
-                                //WooCommerce galleries
-                                if (isset($product_imgs) && !empty($product_imgs)) {
-                                    echo '<h4>'.__('Product gallery','wp-seopress').'</h4>';
-                                    echo '<ul class="attachments">';
-                                        foreach ($product_imgs as $product_img) {
-                                            echo '<li class="attachment"><img src="'.$product_img.'"/></li>';
                                         }
                                     echo '</ul>';
                                 }
@@ -301,15 +296,17 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     echo '<h3>'.__('NoFollow Links','wp-seopress').'</h3>';
                     
                     if (!empty($seopress_analysis_data['0']['nofollow_links'])) {
-                        
                         $count = count($seopress_analysis_data['0']['nofollow_links']);
                         
                         echo '<p>'.sprintf( esc_html__( 'We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:', 'wp-seopress' ), $count ).'</p>';
                         echo '<ul>';
-                            foreach ($seopress_analysis_data['0']['nofollow_links'] as $link) {
-                                echo '<li><span class="dashicons dashicons-minus"></span>'.$link.'</li>';
+                            foreach ($seopress_analysis_data['0']['nofollow_links'] as $links) {
+                                foreach ($links as $link) {
+                                    echo '<li><span class="dashicons dashicons-minus"></span>'.$link.'</li>';
+                                }
                             }
                         echo '</ul>';
+                        
                     } else {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('This page doesn\'t have any nofollow links.','wp-seopress').'</p>';
                     }

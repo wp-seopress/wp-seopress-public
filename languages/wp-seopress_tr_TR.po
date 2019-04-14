@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2019-02-24 11:58+0100\n"
-"PO-Revision-Date: 2019-02-24 11:58+0100\n"
+"POT-Creation-Date: 2019-02-23 15:33+0100\n"
+"PO-Revision-Date: 2019-02-23 15:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
-"Language: en\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,579 +14,635 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_x;esc_attr_e;esc_attr__;esc_html__;esc_html_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: inc/admin/admin-header.php:16
 msgid "SEOPress"
-msgstr ""
+msgstr "SEOPress"
 
 #: inc/admin/admin-header.php:23 inc/admin/adminbar.php:75
 msgid "PRO"
-msgstr ""
+msgstr "PRO"
 
 #: inc/admin/admin-header.php:36 inc/admin/admin.php:185
 #: inc/admin/adminbar.php:25
 msgid "Titles & Metas"
-msgstr ""
+msgstr "Başlıklar & Metalar"
 
 #: inc/admin/admin-header.php:42 inc/admin/admin.php:186
 #: inc/admin/adminbar.php:31
 msgid "XML / HTML Sitemap"
-msgstr ""
+msgstr "XML / HTML Site haritası"
 
 #: inc/admin/admin-header.php:48 inc/admin/admin.php:187
 #: inc/admin/admin.php:1438 inc/admin/adminbar.php:37
 msgid "Social Networks"
-msgstr ""
+msgstr "Sosyal Ağlar"
 
 #: inc/admin/admin-header.php:54 inc/admin/admin.php:188
 #: inc/admin/admin.php:1476 inc/admin/adminbar.php:43
 msgid "Google Analytics"
-msgstr ""
+msgstr "Google Analytics"
 
 #: inc/admin/admin-header.php:60 inc/admin/admin-metaboxes-form.php:58
 #: inc/admin/admin.php:189 inc/admin/admin.php:345 inc/admin/admin.php:621
 #: inc/admin/admin.php:1514 inc/admin/adminbar.php:49
 msgid "Advanced"
-msgstr ""
+msgstr "Gelişmiş"
 
 #: inc/admin/admin-header.php:68 inc/admin/admin.php:1543
 msgid "WooCommerce"
-msgstr ""
+msgstr "WooCommerce"
 
 #: inc/admin/admin-header.php:74 inc/admin/admin.php:1571
 msgid "Easy Digital Downloads"
-msgstr ""
+msgstr "Kolay Dijital İndirme"
 
 #: inc/admin/admin-header.php:80 inc/admin/admin.php:1599
 msgid "Local Business"
-msgstr ""
+msgstr "Yerel İşletme"
 
 #: inc/admin/admin-header.php:86 inc/admin/admin.php:1627
 msgid "Dublin Core"
-msgstr ""
+msgstr "Dublin Çekirdek"
 
 #: inc/admin/admin-header.php:92
 msgid "Structured Data Types (schema.org)"
-msgstr ""
+msgstr "Yapısal Veri Türleri (schema.org)"
 
 #: inc/admin/admin-header.php:98 inc/admin/admin.php:1683
 msgid "Breadcrumbs"
-msgstr ""
+msgstr "Kırıntılar"
 
 #: inc/admin/admin-header.php:104 inc/admin/admin.php:1721
 msgid "Google Page Speed"
-msgstr ""
+msgstr "Google Sayfa Hızı"
 
 #: inc/admin/admin-header.php:111 inc/admin/admin.php:1742
 msgid "robots.txt"
-msgstr ""
+msgstr "robots.txt"
 
 #: inc/admin/admin-header.php:118 inc/admin/admin.php:1783
 msgid "Google News Sitemap"
-msgstr ""
+msgstr "Google Haberler Site Haritası"
 
 #: inc/admin/admin-header.php:124 inc/admin/admin.php:1811
 #: inc/admin/adminbar.php:81
 msgid "Redirections"
-msgstr ""
+msgstr "Yeniden yönlendirme"
 
 #: inc/admin/admin-header.php:130 inc/admin/admin.php:1850
 msgid "SEOPress BOT - Broken links"
-msgstr ""
+msgstr "SEOPress BOT - Kırık bağlantılar"
 
 #: inc/admin/admin-header.php:136 inc/admin/admin.php:1861
 #: inc/admin/adminbar.php:93
 msgid "Backlinks"
-msgstr ""
+msgstr "Geri bağlantılar"
 
 #: inc/admin/admin-header.php:142 inc/admin/admin.php:1872
 msgid "URL Rewriting"
-msgstr ""
+msgstr "URL yeniden yazma"
 
 #: inc/admin/admin-header.php:149 inc/admin/admin.php:1903
 msgid ".htaccess"
-msgstr ""
+msgstr ".htaccess"
 
 #: inc/admin/admin-header.php:156 inc/admin/admin.php:1915
 msgid "RSS"
-msgstr ""
+msgstr "RSS"
 
 #: inc/admin/admin-header.php:162 inc/admin/admin.php:1219
 #: inc/admin/admin.php:1948 inc/admin/adminbar.php:69
 msgid "License"
-msgstr ""
+msgstr "Lisans"
 
 #: inc/admin/admin-header.php:169 inc/admin/admin.php:190
 #: inc/admin/admin.php:1927 inc/admin/adminbar.php:55
 msgid "Tools"
-msgstr ""
+msgstr "Araçlar"
 
 #: inc/admin/admin-header.php:191
 msgid "See the changelog (new window)"
-msgstr ""
+msgstr "Değişikliklere bak (yeni pencere)"
 
 #: inc/admin/admin-header.php:193
 msgid "See the changelog"
-msgstr ""
+msgstr "Değişikliklere bak"
 
 #: inc/admin/admin-header.php:195 inc/admin/admin-header.php:197
 msgid "Send feedback"
-msgstr ""
+msgstr "Yorum gönder"
 
 #: inc/admin/admin-header.php:199
 msgid "Follow us on Twitter (new window)"
-msgstr ""
+msgstr "Twitter'da bizi takip edin (yeni pencere)"
 
 #: inc/admin/admin-header.php:201
 msgid "Follow us on Twitter"
-msgstr ""
+msgstr "Twitter'da bizi takip edin"
 
 #: inc/admin/admin-header.php:203
 msgid "Follow us on YouTube (new window)"
-msgstr ""
+msgstr "Youtube'da bizi takip edin (yeni pencere)"
 
 #: inc/admin/admin-header.php:205
 msgid "Follow us on YouTube"
-msgstr ""
+msgstr "Youtube'da bizi takip edin"
 
 #: inc/admin/admin-header.php:207
 msgid "Official website (new window)"
-msgstr ""
+msgstr "Resmi Web sitesi (yeni pencere)"
 
 #: inc/admin/admin-header.php:209
 msgid "Official website"
-msgstr ""
+msgstr "Resmi Web sitesi"
 
 #: inc/admin/admin-header.php:211
 msgid "Support (new window)"
-msgstr ""
+msgstr "Destek (yeni pencere)"
 
 #: inc/admin/admin-header.php:213
 msgid "Support"
-msgstr ""
+msgstr "Destek"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:5
 msgid "Enter a few keywords for analysis to help you write optimized content."
 msgstr ""
+"Optimize edilmiş içeriğe yardım ve analiz için birkaç anahtar kelime girin."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:9
 #: inc/admin/admin-metaboxes-content-analysis-form.php:10
 #: inc/functions/options-advanced-admin.php:651
 msgid "Target keywords"
-msgstr ""
+msgstr "Hedef anahtar sözcükler"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:10
 msgid "Enter your target keywords"
-msgstr ""
+msgstr "Hedef anahtar kelimeleri girin"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:11
 msgid ""
 "Separate target keywords with commas. Do not use spaces after the commas, "
 "unless you want to include them."
 msgstr ""
+"Hedef anahtar sözcükleri virgüllerle ayırın. Eğer bunları dahil etmek "
+"istemiyorsanız virgülden sonra boşluk kullanmayın."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:14
 msgid "Analyze my content"
-msgstr ""
+msgstr "İçeriğimi analiz et"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:16
 msgid "Refresh analysis"
-msgstr ""
+msgstr "Analizi yenile"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:18
 msgid "Analysis completed"
-msgstr ""
+msgstr "Analizler tamamlandı"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:20
 msgid "To get the most accurate analysis, save your post first."
-msgstr ""
+msgstr "En doğru analizi almak için önce yazınızı kaydedin."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:24
 msgid "Google suggestions"
-msgstr ""
+msgstr "Google önerileri"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:26
 msgid ""
 "Enter a keyword, or a phrase, to find the top 10 Google suggestions "
 "instantly. This is useful if you want to work with the long tail technique."
 msgstr ""
+"En iyi 10 Google önerilerini anında bulmak için bir anahtar kelime veya "
+"ifade girin. Uzun kuyruk tekniğiyle çalışmak istiyorsanız bu yararlıdır."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:28
 msgid "Get suggestions!"
-msgstr ""
+msgstr "Öneriler alın!"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:72
 msgid "Optimizations"
-msgstr ""
+msgstr "İyileştirme"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:73
 msgid "Configuration"
-msgstr ""
+msgstr "Yapılandırma"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:74
 msgid "Images"
-msgstr ""
+msgstr "Görüntüler"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:75
 msgid "Links"
-msgstr ""
+msgstr "Bağlantılar"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:81
 msgid "Words counter"
-msgstr ""
+msgstr "Kelime sayacı"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:83
 msgid "words found."
-msgstr ""
+msgstr "kelimeler bulundu."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:84
 msgid "unique words found."
-msgstr ""
+msgstr "benzersiz kelimeler bulundu."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:87
 msgid ""
 "Your content is composed of more than 300 words, which is the minimum for a "
 "post."
 msgstr ""
+"İçeriğiniz 300 kelimeden fazla oluştu, zaten bir yazı için minumum kelime "
+"300 ."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:89
 msgid "Your content is too short. Add a few more paragraphs!"
-msgstr ""
+msgstr "İçeriğiniz çok kısa. Birkaç paragraf daha ekleyin!"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:96
-msgid "H1 (Heading 1)"
-msgstr ""
+#: inc/admin/admin-metaboxes-content-analysis-form.php:95
+msgid "Post title"
+msgstr "Yazı başlığı"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:109
-msgid "Target keywords were found in Heading 1 (H1)."
-msgstr ""
+#: inc/admin/admin-metaboxes-content-analysis-form.php:98
+msgid "Target keywords were found in the Post Title."
+msgstr "Hedef anahtar kelimeler yazı başlığında bulundu."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:118
-#: inc/admin/admin-metaboxes-content-analysis-form.php:139
-#: inc/admin/admin-metaboxes-content-analysis-form.php:157
-#: inc/admin/admin-metaboxes-content-analysis-form.php:176
-#: inc/admin/admin-metaboxes-content-analysis-form.php:205
+#: inc/admin/admin-metaboxes-content-analysis-form.php:106
+#: inc/admin/admin-metaboxes-content-analysis-form.php:135
+#: inc/admin/admin-metaboxes-content-analysis-form.php:153
+#: inc/admin/admin-metaboxes-content-analysis-form.php:172
+#: inc/admin/admin-metaboxes-content-analysis-form.php:201
 #, php-format
 msgid "%s was found %d times."
-msgstr ""
+msgstr "%s %d kez bulundu."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:123
+#: inc/admin/admin-metaboxes-content-analysis-form.php:110
+msgid "None of your target keywords were found in the Post Title."
+msgstr "Hedef anahtar kelimelerinizin hiçbiri Yazı başlığında bulunamadı."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:113
+msgid "No post title set for this post!"
+msgstr "Yazı başlığı bu yazıda yok!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:118
+msgid "H1 (Heading 1)"
+msgstr "H1 (Başlık 1)"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:120
 #, php-format
 msgid "We found %d Heading 1 (H1) in your content."
-msgstr ""
+msgstr "İçeriğinize %d Başlık 1 (H1) bulduk."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:124
+#: inc/admin/admin-metaboxes-content-analysis-form.php:121
 msgid ""
-"You should not use more than one H1 heading in your post content. The rule "
-"is simple: only one H1 for each web page. Better for SEO and accessibility."
+"You should not use a H1 heading in your post content because your post title "
+"is already an H1. The rule is simple: only one H1 for each web page."
 msgstr ""
+"Yazı içeriğinizde H1 başlık kullanılmamalıdır. Yazı başlık zaten H1'dir. "
+"Kural basittir: Her Web sayfası için yalnızca bir H1."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:129
+#: inc/admin/admin-metaboxes-content-analysis-form.php:125
 msgid "H2 (Heading 2)"
-msgstr ""
+msgstr "H2 (Başlık 2)"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:131
+#: inc/admin/admin-metaboxes-content-analysis-form.php:127
 msgid "Target keywords were found in Heading 2 (H2)."
-msgstr ""
+msgstr "Hedef anahtar kelimeler Başlık 2 de (H2) bulundu."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:139
+msgid "None of your target keywords were found in Heading 2 (H2)."
+msgstr "Hedef anahtar kelimelerinizin hiçbiri başlık 2 de (H2) bulunamadı."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:143
-msgid "None of your target keywords were found in Heading 2 (H2)."
-msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:147
 msgid "H3 (Heading 3)"
-msgstr ""
+msgstr "H3 (Başlık 3)"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:149
+#: inc/admin/admin-metaboxes-content-analysis-form.php:145
 msgid "Target keywords were found in Heading 3 (H3)."
-msgstr ""
+msgstr "Hedef anahtar sözcükler başlık 3 te (H3) bulundu."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:157
+msgid "None of your target keywords were found in Heading 3 (H3)."
+msgstr "Hedef anahtar kelimelerinizin hiçbiri başlık 3 ' te (H3) bulunamadı."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:161
-msgid "None of your target keywords were found in Heading 3 (H3)."
-msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:165
 msgid "Meta title"
-msgstr ""
+msgstr "Meta başlık"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:168
+#: inc/admin/admin-metaboxes-content-analysis-form.php:164
 msgid "Target keywords were found in the Meta Title."
-msgstr ""
+msgstr "Hedef anahtar sözcükler meta başlığında bulundu."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:176
+msgid "None of your target keywords were found in the Meta Title."
+msgstr "Hedef anahtar kelimelerinizin hiçbiri meta başlığında bulunamadı."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:180
-msgid "None of your target keywords were found in the Meta Title."
-msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:184
 msgid "Your custom title is too long."
-msgstr ""
+msgstr "Özel başlığınız çok uzun."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:186
+#: inc/admin/admin-metaboxes-content-analysis-form.php:182
 msgid "The length of your title is correct"
-msgstr ""
+msgstr "Başlığınızın uzunluğu doğru"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:185
+msgid "No custom title is set for this post."
+msgstr "Bu yazı için özel başlık ayarlanamaz."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:189
-msgid "No custom title is set for this post."
-msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:193
 #: inc/admin/admin-metaboxes-form.php:109
 #: inc/admin/admin-metaboxes-form.php:110 inc/admin/admin.php:732
 #: inc/admin/admin.php:753 inc/admin/admin.php:772 inc/admin/admin.php:2043
 #: inc/admin/admin.php:3399 inc/functions/options-advanced-admin.php:643
 msgid "Meta description"
-msgstr ""
+msgstr "Meta açıklama"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:197
+#: inc/admin/admin-metaboxes-content-analysis-form.php:193
 msgid "Target keywords were found in the Meta description."
-msgstr ""
+msgstr "Hedef anahtar sözcükler Meta açıklamasında bulundu."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:205
+msgid "None of your target keywords were found in the Meta description."
+msgstr "Hedef anahtar kelimelerinizin hiçbiri Meta açıklamasında bulunamadı."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:209
-msgid "None of your target keywords were found in the Meta description."
-msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:213
 msgid "You custom meta description is too long."
-msgstr ""
+msgstr "Özel meta açıklama çok uzun."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:215
+#: inc/admin/admin-metaboxes-content-analysis-form.php:211
 msgid "The length of your meta description is correct"
-msgstr ""
+msgstr "Meta açıklamanın uzunluğu doğru"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:218
+#: inc/admin/admin-metaboxes-content-analysis-form.php:214
 msgid "No custom meta description is set for this post."
-msgstr ""
+msgstr "Bu yazı için hiçbir özel meta açıklama ayar yoktur."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:220
+msgid "Robots"
+msgstr "Robots"
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:224
-msgid "Robots"
-msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:234
-#, php-format
-msgid ""
-"We found %s meta robots in your page. There is probably something wrong with "
-"your theme!"
-msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:238
 msgid "noindex is on! Search engines can't index this page."
-msgstr ""
+msgstr "noindex açık! Arama motorları bu sayfayı dizine alamaz."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:240
+#: inc/admin/admin-metaboxes-content-analysis-form.php:226
 msgid "noindex is off. Search engines will index this page."
-msgstr ""
+msgstr "noindex kapalı. Arama motorları bu sayfayı dizine alır."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:244
+#: inc/admin/admin-metaboxes-content-analysis-form.php:230
 msgid "nofollow is on! Search engines can't follow your links on this page."
 msgstr ""
+"nofollow açık! Arama motorları bu sayfadaki bağlantılarınızı takip edemez."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:246
+#: inc/admin/admin-metaboxes-content-analysis-form.php:232
 msgid "nofollow is off. Search engines will follow links on this page."
 msgstr ""
+"nofollow kapalı. Arama motorları bu sayfadaki bağlantıları takip edecektir."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:250
+#: inc/admin/admin-metaboxes-content-analysis-form.php:236
 msgid ""
 "noimageindex is on! Google will not index your images on this page (but if "
 "someone makes a direct link to one of your image in this page, it will be "
 "indexed)."
 msgstr ""
+"noimageindex açık! Google bu sayfadaki görüntüleri dizine almaz (ama eğer "
+"birisi bu sayfadaki görüntüden birine doğrudan bir bağlantı yaparsa, dizine "
+"alacaktır)."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:252
+#: inc/admin/admin-metaboxes-content-analysis-form.php:238
 msgid "noimageindex is off. Google will index the images on this page."
-msgstr ""
+msgstr "noimageindex kapalı. Google bu sayfadaki görüntüleri dizine alacak."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:256
+#: inc/admin/admin-metaboxes-content-analysis-form.php:242
 msgid "noarchive is on! Search engines will not cache your page."
-msgstr ""
+msgstr "noarchive açık! Arama motorları sayfanızı önbelleğe almayacak."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:258
+#: inc/admin/admin-metaboxes-content-analysis-form.php:244
 msgid "noarchive is off. Search engines will probably cache your page."
 msgstr ""
+"noarşiv kapalıdır. Arama motorları muhtemelen sayfanızı önbelleğe alacak."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:262
+#: inc/admin/admin-metaboxes-content-analysis-form.php:248
 msgid ""
 "nosnippet is on! Search engines will not display a snippet of this page in "
 "search results."
 msgstr ""
+"nosnippet açık! Arama motorları bu sayfanın bir pasajını(parçacığını) arama "
+"sonuçlarında görüntülemeyecek."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:264
+#: inc/admin/admin-metaboxes-content-analysis-form.php:250
 msgid ""
 "nosnippet is off. Search engines will display a snippet of this page in "
 "search results."
 msgstr ""
+"nosnippet kapalı. Arama motorları bu sayfanın bir pasajını(parçacığını) "
+"arama sonuçlarında görüntüleyecek."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:267
-msgid ""
-"We found no meta robots on this page. It means, your page is index,follow. "
-"Search engines will index it, and follow links. "
-msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:276
+#: inc/admin/admin-metaboxes-content-analysis-form.php:262
 msgid ""
 "No alternative text found for these images. Alt tags are important for both "
 "SEO and accessibility."
 msgstr ""
+"Bu görüntüler için alternatif metin bulunamadı. Alt etiketler SEO ve "
+"erişilebilirlik için de önemlidir."
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:287
+#: inc/admin/admin-metaboxes-content-analysis-form.php:266
+msgid "Post Content"
+msgstr "Yazı İçerik"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:276
+msgid "Post Thumbnail"
+msgstr "Yazı küçük resim"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:284
+msgid "Product gallery"
+msgstr "Ürün galerisi"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:292
 msgid "All alternative tags are filled in. Good work!"
-msgstr ""
+msgstr "Tüm alternatif etiketler dolduruldu. İyi iş!"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:290
+#: inc/admin/admin-metaboxes-content-analysis-form.php:295
 msgid ""
 "We could not find any image in your content. Content with media is a plus "
 "for your SEO."
 msgstr ""
-
-#: inc/admin/admin-metaboxes-content-analysis-form.php:296
-msgid "NoFollow Links"
-msgstr ""
+"İçeriğinizde herhangi bir görüntü bulamadık. Medya ile içerik SEO için bir "
+"artıdır."
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:301
+msgid "NoFollow Links"
+msgstr "NoFollow Bağlantılar"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:307
 #, php-format
 msgid ""
 "We found %d links with nofollow attribute in your page. Do not overuse "
 "nofollow attribute in links. Below, the list:"
 msgstr ""
+"Sayfanızda nofollow özniteliğiyle %d bağlantı bulundu. Bağlantılara nofollow "
+"özniteliğini aşırı kullanmayın. Aşağıda, liste:"
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:311
+#: inc/admin/admin-metaboxes-content-analysis-form.php:314
 msgid "This page doesn't have any nofollow links."
-msgstr ""
+msgstr "Bu sayfada herhangi bir nofollow bağlantılar yoktur."
 
 #: inc/admin/admin-metaboxes-form.php:48 inc/admin/admin-metaboxes.php:163
 #: inc/admin/admin-metaboxes.php:166 inc/admin/admin.php:183
 #: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:633
 msgid "SEO"
-msgstr ""
+msgstr "SEO"
 
 #: inc/admin/admin-metaboxes-form.php:57
 msgid "Titles settings"
-msgstr ""
+msgstr "Başlıklar ayarları"
 
 #: inc/admin/admin-metaboxes-form.php:59
 msgid "Social"
-msgstr ""
+msgstr "Sosyal"
 
 #: inc/admin/admin-metaboxes-form.php:61
 msgid "Redirection"
-msgstr ""
+msgstr "Yeniden yönlendirme"
 
 #: inc/admin/admin-metaboxes-form.php:66
 msgid "Google News"
-msgstr ""
+msgstr "Google Haberler"
 
 #: inc/admin/admin-metaboxes-form.php:73
 msgid "Video Sitemap"
-msgstr ""
+msgstr "Video Site Haritası"
 
 #: inc/admin/admin-metaboxes-form.php:86
 msgid ""
 "This is your <strong>Shop page</strong>. Go to <strong>SEO > Titles & Metas "
 "> Archives > Products</strong> "
 msgstr ""
+"Bu sizin <strong>dükkan sayfanız</strong>. <strong>SEO > Başlıklar & Metalar "
+"> Arşivler > Ürünler</strong></strong>'e git "
 
 #: inc/admin/admin-metaboxes-form.php:86
 msgid "to edit your title and meta description"
-msgstr ""
+msgstr "başlık ve meta açıklamasını düzenlemek için"
 
 #: inc/admin/admin-metaboxes-form.php:92 inc/admin/admin-metaboxes-form.php:93
 msgid "Title"
-msgstr ""
+msgstr "Başlık"
 
 #: inc/admin/admin-metaboxes-form.php:93
 msgid "Enter your title"
-msgstr ""
+msgstr "Başlığınızı girin"
 
 #: inc/admin/admin-metaboxes-form.php:97 inc/admin/admin-metaboxes-form.php:114
 msgid "(maximum recommended limit)"
-msgstr ""
+msgstr "(maksimum önerilen limit)"
 
 #: inc/admin/admin-metaboxes-form.php:101 inc/admin/admin.php:3442
 #: inc/admin/admin.php:4377
 msgid "Post Title"
-msgstr ""
+msgstr "Yazı Başlığı"
 
 #: inc/admin/admin-metaboxes-form.php:103 inc/admin/admin.php:198
 #: inc/admin/admin.php:3391 inc/admin/admin.php:3444 inc/admin/admin.php:3563
 #: inc/admin/admin.php:3681 inc/admin/admin.php:3758 inc/admin/admin.php:3828
 #: inc/admin/admin.php:3897 inc/admin/admin.php:3947
 msgid "Site Title"
-msgstr ""
+msgstr "Site Başlığı"
 
 #: inc/admin/admin-metaboxes-form.php:105 inc/admin/admin.php:2027
 #: inc/admin/admin.php:3378
 msgid "Separator"
-msgstr ""
+msgstr "Ayırıcı"
 
 #: inc/admin/admin-metaboxes-form.php:110
 msgid "Enter your meta description"
-msgstr ""
+msgstr "Meta açıklamasını girin"
 
 #: inc/admin/admin-metaboxes-form.php:118
 msgid "Post Excerpt"
-msgstr ""
+msgstr "Yazı Alıntısı"
 
 #: inc/admin/admin-metaboxes-form.php:123
 msgid "Google Snippet Preview"
-msgstr ""
+msgstr "Google Pasaj(parçacık) Önizleme"
 
 #: inc/admin/admin-metaboxes-form.php:124
 msgid ""
 "This is what your page will look like in Google search results. You have to "
 "publish your post to get the Google Snippet Preview."
 msgstr ""
+"Bu sayfanızın Google arama sonuçlarında nasıl görüneceğidir. Google "
+"Pasaj(parçacık) Önizleme'sini almak için yazınızı yayımlamak zorundasın."
 
 #: inc/admin/admin-metaboxes-form.php:149
+#, fuzzy
+#| msgid ""
+#| "Do not display this page in search engine results <strong>(noindex)</"
+#| "strong>"
 msgid ""
 "Do not display this page in search engine results / XML - HTML sitemaps "
 "<strong>(noindex)</strong>"
 msgstr ""
+"Bu sayfayı arama motoru sonuçlarında <strong>(noindex)</strong> görüntüleme"
 
 #: inc/admin/admin-metaboxes-form.php:155
 msgid "Do not follow links for this page <strong>(nofollow)</strong>"
-msgstr ""
+msgstr "Bu sayfa  için bağlantıları takip etme <strong>(nofollow)</strong>"
 
 #: inc/admin/admin-metaboxes-form.php:161
 msgid ""
 "Do not use Open Directory project metadata for titles or excerpts for this "
 "page <strong>(noodp)</strong>"
 msgstr ""
+"Bu sayfa için başlıklar veya alıntılar meta verilerini Açık Dizin projesinde "
+"kullanmayın"
 
 #: inc/admin/admin-metaboxes-form.php:167
 msgid "Do not index images for this page <strong>(noimageindex)</strong>"
-msgstr ""
+msgstr "Bu sayfa için görüntüleri dizine alma <strong>(noimageindex)</strong>"
 
 #: inc/admin/admin-metaboxes-form.php:173
 msgid ""
 "Do not display a \"Cached\" link in the Google search results "
 "<strong>(noarchive)</strong>"
 msgstr ""
+"Google arama sonuçlarında bir \\\"Önbelleğe alınmış\\\" bağlantı görüntüleme "
+"<strong>(noarchive)</strong>"
 
 #: inc/admin/admin-metaboxes-form.php:179
 msgid ""
 "Do not display a description in search results for this page "
 "<strong>(nosnippet)</strong>"
 msgstr ""
+"Bu sayfanın arama sonuçlarında açıklama görüntüleme <strong>(nosnippet)</"
+"strong>"
 
 #: inc/admin/admin-metaboxes-form.php:183
 msgid ""
 "You can not uncheck a parameter? This is normal, it is most likely defined "
 "in the global settings of the extension."
 msgstr ""
+"Bir parametreyi kaldıramazsın? Bu normal, büyük olasılıkla tanımlı uzantının "
+"genel ayarlarında."
 
 #: inc/admin/admin-metaboxes-form.php:186
 #: inc/admin/admin-metaboxes-form.php:187 inc/admin/admin.php:736
 #: inc/admin/admin.php:776
 msgid "Canonical URL"
-msgstr ""
+msgstr "Kurallı URL"
 
 #: inc/admin/admin-metaboxes-form.php:187
 msgid "Default value: "
-msgstr ""
+msgstr "Varsayılan değer:"
 
 #: inc/admin/admin-metaboxes-form.php:191
+#, fuzzy
+#| msgid "Single product category"
 msgid "Select a primary category"
-msgstr ""
+msgstr "Tek ürün kategorisi"
 
 #: inc/admin/admin-metaboxes-form.php:192
 msgid ""
@@ -596,685 +652,711 @@ msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:197 inc/admin/admin.php:4420
 msgid "None (will disable this feature)"
-msgstr ""
+msgstr "Hiçbiri (Bu özelliği devre dışı bırakır)"
 
 #: inc/admin/admin-metaboxes-form.php:208
 #: inc/admin/admin-metaboxes-form.php:209
 msgid "Custom breadcrumbs"
-msgstr ""
+msgstr "Özel kırıntılar"
 
 #: inc/admin/admin-metaboxes-form.php:209
 msgid "Enter a custom value, useful if your title is too long"
-msgstr ""
+msgstr "Başlığınızın çok uzun olması durumunda, yararlı bir özel değer girin"
 
 #: inc/admin/admin-metaboxes-form.php:217
 msgid "Ask Facebook to update his cache"
-msgstr ""
+msgstr "Facebook'un önbelleğini güncellemeyi isteyin"
 
 #: inc/admin/admin-metaboxes-form.php:219
 #: inc/admin/admin-metaboxes-form.php:220
 msgid "Facebook Title"
-msgstr ""
+msgstr "Facebook Başlık"
 
 #: inc/admin/admin-metaboxes-form.php:220
 msgid "Enter your Facebook title"
-msgstr ""
+msgstr "Facebook başlığını girin"
 
 #: inc/admin/admin-metaboxes-form.php:223
 #: inc/admin/admin-metaboxes-form.php:224
 msgid "Facebook description"
-msgstr ""
+msgstr "Facebook açıklama"
 
 #: inc/admin/admin-metaboxes-form.php:224
 msgid "Enter your Facebook description"
-msgstr ""
+msgstr "Facebook açıklamasını girin"
 
 #: inc/admin/admin-metaboxes-form.php:227
 #: inc/admin/admin-metaboxes-form.php:228
 msgid "Facebook Thumbnail"
-msgstr ""
+msgstr "Facebook küçük resim"
 
 #: inc/admin/admin-metaboxes-form.php:228
 #: inc/admin/admin-metaboxes-form.php:246 inc/admin/admin.php:4689
 #: inc/admin/admin.php:4781
 msgid "Select your default thumbnail"
-msgstr ""
+msgstr "Varsayılan minik görüntüyü seçin"
 
 #: inc/admin/admin-metaboxes-form.php:229 inc/admin/admin.php:4693
 msgid "Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max."
-msgstr ""
+msgstr "Minimum boyut: 200x200px, ideal oranı 1.91:1, 8Mb Max."
 
 #: inc/admin/admin-metaboxes-form.php:230
 #: inc/admin/admin-metaboxes-form.php:248
 #: inc/admin/admin-metaboxes-form.php:381 inc/admin/admin.php:4454
 #: inc/admin/admin.php:4691 inc/admin/admin.php:4783
 msgid "Upload an Image"
-msgstr ""
+msgstr "Görüntü yükle"
 
 #: inc/admin/admin-metaboxes-form.php:235
 msgid "Preview your Twitter card using the official validator"
-msgstr ""
+msgstr "Twitter kartınızın önizlemesinde resmi doğrulayıcıyı kullanın"
 
 #: inc/admin/admin-metaboxes-form.php:237
 #: inc/admin/admin-metaboxes-form.php:238
 msgid "Twitter Title"
-msgstr ""
+msgstr "Twitter Başlık"
 
 #: inc/admin/admin-metaboxes-form.php:238
 msgid "Enter your Twitter title"
-msgstr ""
+msgstr "Twitter başlığını girin"
 
 #: inc/admin/admin-metaboxes-form.php:241
 #: inc/admin/admin-metaboxes-form.php:242
 msgid "Twitter description"
-msgstr ""
+msgstr "Twitter açıklaması"
 
 #: inc/admin/admin-metaboxes-form.php:242
 msgid "Enter your Twitter description"
-msgstr ""
+msgstr "Twitter açıklamasını girin"
 
 #: inc/admin/admin-metaboxes-form.php:245
 #: inc/admin/admin-metaboxes-form.php:248
 msgid "Twitter Thumbnail"
-msgstr ""
+msgstr "Twitter küçük görüntü"
 
 #: inc/admin/admin-metaboxes-form.php:247 inc/admin/admin.php:4785
 msgid ""
 "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 "
 "(2:1 with large card), 5Mb max."
 msgstr ""
+"Minimum boyut: 144x144px (300x157px büyük kart ile etkin), ideal oranı 1:1 "
+"(2:1 büyük kart ile), 5Mb Max."
 
 #: inc/admin/admin-metaboxes-form.php:257
 msgid "Enable redirection?"
-msgstr ""
+msgstr "Yeniden yönlendirme etkinleştirilsin mi?"
 
 #: inc/admin/admin-metaboxes-form.php:261
 #: inc/admin/admin-metaboxes-form.php:269
 msgid "URL redirection"
-msgstr ""
+msgstr "URL yeniden yönlendirme"
 
 #: inc/admin/admin-metaboxes-form.php:263
 msgid "301 Moved Permanently"
-msgstr ""
+msgstr "301 kalıcı olarak taşındı"
 
 #: inc/admin/admin-metaboxes-form.php:264
 msgid "302 Found / Moved Temporarily"
-msgstr ""
+msgstr "302 bulundu / geçici olarak taşındı"
 
 #: inc/admin/admin-metaboxes-form.php:265
 msgid "307 Moved Temporarily"
-msgstr ""
+msgstr "307 geçici olarak taşındı"
 
 #: inc/admin/admin-metaboxes-form.php:266
 msgid "410 Gone"
-msgstr ""
+msgstr "410 Gitti"
 
 #: inc/admin/admin-metaboxes-form.php:267
 msgid "451 Unavailable For Legal Reasons"
-msgstr ""
+msgstr "451 yasal nedenlerle kullanılamaz"
 
 #: inc/admin/admin-metaboxes-form.php:269
 msgid "Enter your new URL"
-msgstr ""
+msgstr "Yeni URL'i girin"
 
 #: inc/admin/admin-metaboxes-form.php:277
 #: inc/admin/admin-metaboxes-form.php:279
 #: inc/admin/admin-metaboxes-form.php:282
 #: inc/admin/admin-metaboxes-form.php:284
 msgid "Test your URL"
-msgstr ""
+msgstr "URL'i test edin"
 
 #: inc/admin/admin-metaboxes-form.php:298
 msgid "Need help with your redirections? Read our guide."
 msgstr ""
+"Yeniden yönlendirmeler için yardıma ihtiyacınız var mı? Rehberimizi okuyun."
 
 #: inc/admin/admin-metaboxes-form.php:310
 msgid "Exclude this post from Google News Sitemap?"
-msgstr ""
+msgstr "Bu yazıyı Google News Site haritasına dahil etme?"
 
 #: inc/admin/admin-metaboxes-form.php:334
 msgid "Exclude this post from Video Sitemap?"
-msgstr ""
+msgstr "Bu yazıyı Video Site haritasına dahil etme?"
 
 #: inc/admin/admin-metaboxes-form.php:336
 msgid ""
 "If your post is set to noindex, it will be automatically excluded from the "
 "sitemap."
 msgstr ""
+"Gönderiniz noindex olarak ayarlanmışsa, site haritasına otomatik olarak "
+"dahil edilmeyecektir."
 
 #: inc/admin/admin-metaboxes-form.php:355
 msgid "Video "
-msgstr ""
+msgstr "Video "
 
 #: inc/admin/admin-metaboxes-form.php:359
 msgid "Video URL (required)"
-msgstr ""
+msgstr "Video URL (gerekli)"
 
 #: inc/admin/admin-metaboxes-form.php:360
 msgid "Enter your video URL"
-msgstr ""
+msgstr "Video URL girin"
 
 #: inc/admin/admin-metaboxes-form.php:360
 msgid "Video URL"
-msgstr ""
+msgstr "Video URL"
 
 #: inc/admin/admin-metaboxes-form.php:365
 msgid ""
 "NOT an external video (eg: video hosting on YouTube, Vimeo, Wistia...)? "
 "Check this if your video is hosting on this server."
 msgstr ""
+"Harici bir video değil (örneğin: YouTube, Vimeo, Wistia sunucu üzerinde...)? "
+"Videonuz bu sunucuda bulunuyorsa bunu kontrol edin."
 
 #: inc/admin/admin-metaboxes-form.php:369
 msgid "Video Title (required)"
-msgstr ""
+msgstr "Video Başlık (gerekli)"
 
 #: inc/admin/admin-metaboxes-form.php:370
 msgid "Enter your video title"
-msgstr ""
+msgstr "Video Başlık girin"
 
 #: inc/admin/admin-metaboxes-form.php:370
 msgid "Video title"
-msgstr ""
+msgstr "Video başlık"
 
 #: inc/admin/admin-metaboxes-form.php:371
 msgid "Default: title tag, if not available, post title."
-msgstr ""
+msgstr "Varsayılan: başlık etiketi, mevcut değilse, Yazı başlığı."
 
 #: inc/admin/admin-metaboxes-form.php:374
 msgid "Video Description (required)"
-msgstr ""
+msgstr "Video Açıklaması (gerekli)"
 
 #: inc/admin/admin-metaboxes-form.php:375
 msgid "Enter your video description"
-msgstr ""
+msgstr "Video Açıklaması girin"
 
 #: inc/admin/admin-metaboxes-form.php:375
 msgid "Video description"
-msgstr ""
+msgstr "Video açıklama"
 
 #: inc/admin/admin-metaboxes-form.php:376
 msgid ""
 "2048 characters max.; default: meta description. If not available, use the "
 "beginning of the post content."
 msgstr ""
+"2048 karakter maks.; Varsayılan: meta açıklama. Kullanılamıyorsa, yazı "
+"içeriğinin başlangıcını kullan."
 
 #: inc/admin/admin-metaboxes-form.php:379
 msgid "Video Thumbnail (required)"
-msgstr ""
+msgstr "Video küçük görüntü (gerekli)"
 
 #: inc/admin/admin-metaboxes-form.php:380
 msgid "Select your video thumbnail"
-msgstr ""
+msgstr "Video küçük görüntüyü seçin"
 
 #: inc/admin/admin-metaboxes-form.php:381
 msgid "Video Thumbnail"
-msgstr ""
+msgstr "Video küçük görüntü"
 
 #: inc/admin/admin-metaboxes-form.php:382
 msgid ""
 "Minimum size: 160x90px (1920x1080 max), JPG, PNG or GIF formats. Default: "
 "your post featured image."
 msgstr ""
+"Minimum boyut: 160x90px (1920x1080 max), JPG, PNG veya GIF formatları. "
+"Varsayılan: Yazıda öne çıkan görüntü."
 
 #: inc/admin/admin-metaboxes-form.php:385
 msgid "Video Duration (recommended)"
-msgstr ""
+msgstr "Video Süresi (önerilen)"
 
 #: inc/admin/admin-metaboxes-form.php:386
 msgid "Duration in seconds"
-msgstr ""
+msgstr "Saniye olarak süre"
 
 #: inc/admin/admin-metaboxes-form.php:386
 msgid "Video duration"
-msgstr ""
+msgstr "Video süresi"
 
 #: inc/admin/admin-metaboxes-form.php:387
 msgid ""
 "The duration of the video in seconds. Value must be between 0 and 28800 (8 "
 "hours)."
 msgstr ""
+"Saniye olarak video süresi. Değer 0 ile 28800 arasında olmalıdır (8 saat)."
 
 #: inc/admin/admin-metaboxes-form.php:390
 msgid "Video Rating"
-msgstr ""
+msgstr "Video Değerlendirmesi"
 
 #: inc/admin/admin-metaboxes-form.php:391
 msgid "Video rating"
-msgstr ""
+msgstr "Video değerlendirmesi"
 
 #: inc/admin/admin-metaboxes-form.php:392
 msgid "Allowed values are float numbers in the range 0.0 to 5.0."
-msgstr ""
+msgstr "İzin verilen değerler 0,0 aralığı 5,0 için float sayıları vardır."
 
 #: inc/admin/admin-metaboxes-form.php:395
 #: inc/admin/admin-metaboxes-form.php:396
 msgid "View count"
-msgstr ""
+msgstr "Görünüm sayısı"
 
 #: inc/admin/admin-metaboxes-form.php:396
 msgid "Number of views"
-msgstr ""
+msgstr "Görünümler sayısı"
 
 #: inc/admin/admin-metaboxes-form.php:399
 #: inc/admin/admin-metaboxes-form.php:400
 msgid "Video tags"
-msgstr ""
+msgstr "Video etiketler"
 
 #: inc/admin/admin-metaboxes-form.php:400
 msgid "Enter your video tags"
-msgstr ""
+msgstr "Video etiketleri girin"
 
 #: inc/admin/admin-metaboxes-form.php:401
 msgid ""
 "32 tags max., separate tags with commas. Default: target keywords + post "
 "tags if available."
 msgstr ""
+"32 etiketler Maks., virgülle etiketleri ayır. Varsayılan: hedef anahtar "
+"sözcükler + varsa yazı etiketler."
 
 #: inc/admin/admin-metaboxes-form.php:404
 #: inc/admin/admin-metaboxes-form.php:405
 msgid "Video categories"
-msgstr ""
+msgstr "Video kategoriler"
 
 #: inc/admin/admin-metaboxes-form.php:405
 msgid "Enter your video categories"
-msgstr ""
+msgstr "Video kategorileri gir"
 
 #: inc/admin/admin-metaboxes-form.php:406
 msgid ""
 "256 characters max., usually a video will belong to a single category, "
 "separate categories with commas. Default: first post category if available."
 msgstr ""
+"256 karakter maks., genellikle bir video tek bir kategoriye ait olacak, "
+"virgülle kategorileri ayır. Varsayılan: Eğer varsa ilk yazı kategorisi."
 
 #: inc/admin/admin-metaboxes-form.php:411
 msgid "NOT family friendly?"
-msgstr ""
+msgstr "Aile dostu değil mi?"
 
 #: inc/admin/admin-metaboxes-form.php:413
 msgid "The video will be available only to users with SafeSearch turned off."
 msgstr ""
+"Video yalnızca güvenli arama devre dışı olan kullanıcılar tarafından "
+"kullanılabilir."
 
 #: inc/admin/admin-metaboxes-form.php:415
 msgid "Remove video"
-msgstr ""
+msgstr "Videoyu kaldır"
 
 #: inc/admin/admin-metaboxes-form.php:422
 msgid "Add video"
-msgstr ""
+msgstr "Video ekle"
 
-#: inc/admin/admin-metaboxes.php:396
+#: inc/admin/admin-metaboxes.php:394
 msgid "Content analysis"
-msgstr ""
+msgstr "İçerik analizi"
 
 #: inc/admin/admin.php:105
 msgid "404 - Page not found"
-msgstr ""
+msgstr "404 - Sayfa bulunamadı"
 
 #: inc/admin/admin.php:184
 msgid "Dashboard"
-msgstr ""
+msgstr "Pano"
 
 #: inc/admin/admin.php:186 inc/admin/admin.php:1400
 msgid "XML / Image / Video / HTML Sitemap"
-msgstr ""
+msgstr "XML / Görüntü / Video / HTML site haritası"
 
 #: inc/admin/admin.php:197
 #, php-format
 msgid "%%sep%%"
-msgstr ""
+msgstr "%%sep%%"
 
 #: inc/admin/admin.php:197
 msgid "Separator (eg: - )"
-msgstr ""
+msgstr "Ayırıcı (örn: - )"
 
 #: inc/admin/admin.php:198
 #, php-format
 msgid "%%sitetitle%%"
-msgstr ""
+msgstr "%%sitetitle%%"
 
 #: inc/admin/admin.php:199
 #, php-format
 msgid "%%tagline%%"
-msgstr ""
+msgstr "%%tagline%%"
 
 #: inc/admin/admin.php:199 inc/admin/admin.php:3392 inc/admin/admin.php:3403
 msgid "Tagline"
-msgstr ""
+msgstr "Slogan"
 
 #: inc/admin/admin.php:200
 #, php-format
 msgid "%%post_title%%"
-msgstr ""
+msgstr "%%post_title%%"
 
 #: inc/admin/admin.php:200
 msgid "Post Title (post, page, custom post type)"
-msgstr ""
+msgstr "Yazı başlığı (yazı, sayfa, özel yazı türü)"
 
 #: inc/admin/admin.php:201
 #, php-format
 msgid "%%post_excerpt%%"
-msgstr ""
+msgstr "%%post_excerpt%%"
 
 #: inc/admin/admin.php:201
 msgid "Post excerpt"
-msgstr ""
+msgstr "Yazı alıntısı"
 
 #: inc/admin/admin.php:202
 #, php-format
 msgid "%%post_date%%"
-msgstr ""
+msgstr "%%post_date%%"
 
 #: inc/admin/admin.php:202
 msgid "Post date"
-msgstr ""
+msgstr "Yazı tarihi"
 
 #: inc/admin/admin.php:203
 #, php-format
 msgid "%%post_modified_date%%"
-msgstr ""
+msgstr "%%post_modified_date%%"
 
 #: inc/admin/admin.php:203
 msgid "Last modified post date"
-msgstr ""
+msgstr "Son değiştirilen yazı tarihi"
 
 #: inc/admin/admin.php:204
 #, php-format
 msgid "%%post_author%%"
-msgstr ""
+msgstr "%%post_author%%"
 
 #: inc/admin/admin.php:204 inc/admin/admin.php:3757
 msgid "Post author"
-msgstr ""
+msgstr "Yazar"
 
 #: inc/admin/admin.php:205
 #, php-format
 msgid "%%post_category%%"
-msgstr ""
+msgstr "%%post_category%%"
 
 #: inc/admin/admin.php:205
 msgid "Post category"
-msgstr ""
+msgstr "Yazı kategorisi"
 
 #: inc/admin/admin.php:206
 #, php-format
 msgid "%%post_tag%%"
-msgstr ""
+msgstr "%%post_tag%%"
 
 #: inc/admin/admin.php:206
 msgid "Post tag"
-msgstr ""
+msgstr "Yazı etiketi"
 
 #: inc/admin/admin.php:207
 #, php-format
 msgid "%%_category_title%%"
-msgstr ""
+msgstr "%%_category_title%%"
 
 #: inc/admin/admin.php:207
 msgid "Category title"
-msgstr ""
+msgstr "Kategori başlığı"
 
 #: inc/admin/admin.php:208
 #, php-format
 msgid "%%_category_description%%"
-msgstr ""
+msgstr "%%_category_description%%"
 
 #: inc/admin/admin.php:208
 msgid "Category description"
-msgstr ""
+msgstr "Kategori açıklama"
 
 #: inc/admin/admin.php:209
 #, php-format
 msgid "%%tag_title%%"
-msgstr ""
+msgstr "%%tag_title%%"
 
 #: inc/admin/admin.php:209
 msgid "Tag title"
-msgstr ""
+msgstr "Etiket başlığı"
 
 #: inc/admin/admin.php:210
 #, php-format
 msgid "%%tag_description%%"
-msgstr ""
+msgstr "%%tag_description%%"
 
 #: inc/admin/admin.php:210
 msgid "Tag description"
-msgstr ""
+msgstr "Etiket açıklama"
 
 #: inc/admin/admin.php:211
 #, php-format
 msgid "%%term_title%%"
-msgstr ""
+msgstr "%%term_title%%"
 
 #: inc/admin/admin.php:211
 msgid "Term title"
-msgstr ""
+msgstr "Terim başlığı"
 
 #: inc/admin/admin.php:212
 #, php-format
 msgid "%%term_description%%"
-msgstr ""
+msgstr "%%term_description%%"
 
 #: inc/admin/admin.php:212
 msgid "Term description"
-msgstr ""
+msgstr "Terim açıklama"
 
 #: inc/admin/admin.php:213
 #, php-format
 msgid "%%search_keywords%%"
-msgstr ""
+msgstr "%%search_keywords%%"
 
 #: inc/admin/admin.php:213
 msgid "Search keywords"
-msgstr ""
+msgstr "Anahtar kelimeleri arama"
 
 #: inc/admin/admin.php:214
 #, php-format
 msgid "%%current_pagination%%"
-msgstr ""
+msgstr "%%current_pagination%%"
 
 #: inc/admin/admin.php:214
 msgid "Current number page"
-msgstr ""
+msgstr "Şu anki sayfa sayısı"
 
 #: inc/admin/admin.php:215
 #, php-format
 msgid "%%cpt_plural%%"
-msgstr ""
+msgstr "%%cpt_plural%%"
 
 #: inc/admin/admin.php:215
 msgid "Plural Post Type Archive name"
-msgstr ""
+msgstr "Çoğul yazı türü arşiv adı"
 
 #: inc/admin/admin.php:216
 #, php-format
 msgid "%%archive_title%%"
-msgstr ""
+msgstr "%%archive_title%%"
 
 #: inc/admin/admin.php:216
 msgid "Archive title"
-msgstr ""
+msgstr "Arşiv başlığı"
 
 #: inc/admin/admin.php:217
 #, php-format
 msgid "%%archive_date%%"
-msgstr ""
+msgstr "%%archive_date%%"
 
 #: inc/admin/admin.php:217
 msgid "Date Archive"
-msgstr ""
+msgstr "Arşiv Tarihi"
 
 #: inc/admin/admin.php:218
 #, php-format
 msgid "%%archive_date_day%%"
-msgstr ""
+msgstr "%%archive_date_day%%"
 
 #: inc/admin/admin.php:218
 msgid "Day Archive date"
-msgstr ""
+msgstr "Arşiv gün tarihi"
 
 #: inc/admin/admin.php:219
 #, php-format
 msgid "%%archive_date_month%%"
-msgstr ""
+msgstr "%%archive_date_month%%"
 
 #: inc/admin/admin.php:219
 msgid "Month Archive title"
-msgstr ""
+msgstr "Ay Arşivi başlığı"
 
 #: inc/admin/admin.php:220
 #, php-format
 msgid "%%archive_date_year%%"
-msgstr ""
+msgstr "%%archive_date_year%%"
 
 #: inc/admin/admin.php:220
 msgid "Year Archive title"
-msgstr ""
+msgstr "Yıl Arşivi başlığı"
 
 #: inc/admin/admin.php:221
 #, php-format
 msgid "%%_cf_your_custom_field_name%%"
-msgstr ""
+msgstr "%%_cf_your_custom_field_name%%"
 
 #: inc/admin/admin.php:221
 msgid "Custom fields from post, page or post type"
-msgstr ""
+msgstr "Yazı, sayfa veya yazı türünden özel alanlar"
 
 #: inc/admin/admin.php:222
 #, php-format
 msgid "%%_ct_your_custom_taxonomy_slug%%"
-msgstr ""
+msgstr "%%_ct_your_custom_taxonomy_slug%%"
 
 #: inc/admin/admin.php:222
 msgid "Custom term taxonomy from post, page or post type"
-msgstr ""
+msgstr "Yazı, sayfa veya yazı türünden özel terim taksonomisi"
 
 #: inc/admin/admin.php:223
 #, php-format
 msgid "%%wc_single_cat%%"
-msgstr ""
+msgstr "%%wc_single_cat%%"
 
 #: inc/admin/admin.php:223
 msgid "Single product category"
-msgstr ""
+msgstr "Tek ürün kategorisi"
 
 #: inc/admin/admin.php:224
 #, php-format
 msgid "%%wc_single_tag%%"
-msgstr ""
+msgstr "%%wc_single_tag%%"
 
 #: inc/admin/admin.php:224
 msgid "Single product tag"
-msgstr ""
+msgstr "Tek ürün etiketi"
 
 #: inc/admin/admin.php:225
 #, php-format
 msgid "%%wc_single_short_desc%%"
-msgstr ""
+msgstr "%%wc_single_short_desc%%"
 
 #: inc/admin/admin.php:225
 msgid "Single product short description"
-msgstr ""
+msgstr "Tek ürün kısa açıklama"
 
 #: inc/admin/admin.php:226
-#, php-format
+#, fuzzy, php-format
+#| msgid "%%wc_single_cat%%"
 msgid "%%wc_single_price%%"
-msgstr ""
+msgstr "%%wc_single_cat%%"
 
 #: inc/admin/admin.php:226
+#, fuzzy
+#| msgid "Single product category"
 msgid "Single product price"
-msgstr ""
+msgstr "Tek ürün kategorisi"
 
 #: inc/admin/admin.php:227
-#, php-format
+#, fuzzy, php-format
+#| msgid "%%wc_single_cat%%"
 msgid "%%wc_single_price_exc_tax%%"
-msgstr ""
+msgstr "%%wc_single_cat%%"
 
 #: inc/admin/admin.php:227
+#, fuzzy
+#| msgid "Single product tag"
 msgid "Single product price taxes excluded"
-msgstr ""
+msgstr "Tek ürün etiketi"
 
 #: inc/admin/admin.php:228
 #, php-format
 msgid "%%currentday%%"
-msgstr ""
+msgstr "%%currentday%%"
 
 #: inc/admin/admin.php:228
 msgid "Current day"
-msgstr ""
+msgstr "Şu anki gün"
 
 #: inc/admin/admin.php:229
 #, php-format
 msgid "%%currentmonth%%"
-msgstr ""
+msgstr "%%currentmonth%%"
 
 #: inc/admin/admin.php:229
 msgid "Current month"
-msgstr ""
+msgstr "Şu anki Ay"
 
 #: inc/admin/admin.php:230
 #, php-format
 msgid "%%currentyear%%"
-msgstr ""
+msgstr "%%currentyear%%"
 
 #: inc/admin/admin.php:230
 msgid "Current year"
-msgstr ""
+msgstr "Şu anki Yıl"
 
 #: inc/admin/admin.php:231
 #, php-format
 msgid "%%currentdate%%"
-msgstr ""
+msgstr "%%currentdate%%"
 
 #: inc/admin/admin.php:231
 msgid "Current date"
-msgstr ""
+msgstr "Şu anki gün"
 
 #: inc/admin/admin.php:232
 #, php-format
 msgid "%%currenttime%%"
-msgstr ""
+msgstr "%%currenttime%%"
 
 #: inc/admin/admin.php:232
 msgid "Current time"
-msgstr ""
+msgstr "Şu anki zaman"
 
 #: inc/admin/admin.php:233
 #, php-format
 msgid "%%author_bio%%"
-msgstr ""
+msgstr "%%author_bio%%"
 
 #: inc/admin/admin.php:233
 msgid "Author bio, meta desc only"
-msgstr ""
+msgstr "Yazar byio, azalan meta sadece"
 
 #: inc/admin/admin.php:239
 msgid "Templates variables"
-msgstr ""
+msgstr "Şablonlar değişkenleri"
 
 #: inc/admin/admin.php:247 inc/admin/admin.php:255
 msgid "Browse our guides"
-msgstr ""
+msgstr "Kılavuzlarımıza göz atın"
 
 #: inc/admin/admin.php:248 inc/admin/admin.php:256
 msgid "Read our FAQ"
-msgstr ""
+msgstr "SSS sayfamızı okuyun"
 
 #: inc/admin/admin.php:249 inc/admin/admin.php:257
 msgid "Check our website"
-msgstr ""
+msgstr "Web sitemizi kontrol edin"
 
 #: inc/admin/admin.php:269
 msgid ""
 "Watch our video to learn how to connect your WordPress site with Google "
 "Analytics and get statistics right in your dashboard (PRO only)."
 msgstr ""
+"Google Analytics ile WordPress sitenizi nasıl bağlayacağınızı öğrenmek için "
+"videolarımızı izleyin ve istatistikleri sağ panonuzdan alın (yalnızca PRO)"
 
 #: inc/admin/admin.php:274
 msgid "How-to"
-msgstr ""
+msgstr "Nasıl yapılır"
 
 #: inc/admin/admin.php:282 inc/admin/admin.php:288
 msgid "Read our guide"
-msgstr ""
+msgstr "Kılavuzumuzu okuyun"
 
 #: inc/admin/admin.php:323 inc/admin/admin.php:327 inc/admin/admin.php:390
 #: inc/admin/admin.php:394 inc/admin/admin.php:455 inc/admin/admin.php:459
@@ -1291,7 +1373,7 @@ msgstr ""
 #: inc/admin/admin.php:1826 inc/admin/admin.php:1830 inc/admin/admin.php:1888
 #: inc/admin/admin.php:1892
 msgid "Click to disable this feature"
-msgstr ""
+msgstr "Bu özelliği devre dışı bırakmak için tıklayın"
 
 #: inc/admin/admin.php:324 inc/admin/admin.php:326 inc/admin/admin.php:391
 #: inc/admin/admin.php:393 inc/admin/admin.php:456 inc/admin/admin.php:458
@@ -1308,113 +1390,127 @@ msgstr ""
 #: inc/admin/admin.php:1827 inc/admin/admin.php:1829 inc/admin/admin.php:1889
 #: inc/admin/admin.php:1891
 msgid "Click to enable this feature"
-msgstr ""
+msgstr "Bu özelliği etkinleştirmek için tıklayın"
 
 #: inc/admin/admin.php:341
 msgid "Home"
-msgstr ""
+msgstr "Ana menü"
 
 #: inc/admin/admin.php:342
 msgid "Single Post Types"
-msgstr ""
+msgstr "Tek yazı tipleri"
 
 #: inc/admin/admin.php:343
 msgid "Archives"
-msgstr ""
+msgstr "Arşivler"
 
 #: inc/admin/admin.php:344 inc/admin/admin.php:410
 msgid "Taxonomies"
-msgstr ""
+msgstr "Taksonomiler"
 
 #: inc/admin/admin.php:408 inc/admin/admin.php:541 inc/admin/admin.php:550
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: inc/admin/admin.php:409
 msgid "Post Types"
-msgstr ""
+msgstr "Yazı tipleri"
 
 #: inc/admin/admin.php:411
 msgid "HTML Sitemap"
-msgstr ""
+msgstr "HTML site haritası"
 
 #: inc/admin/admin.php:473
 msgid "Knowledge Graph"
-msgstr ""
+msgstr "Knowledge Graph"
 
 #: inc/admin/admin.php:474
 msgid "Your social accounts"
-msgstr ""
+msgstr "Sosyal hesaplarınız"
 
 #: inc/admin/admin.php:475
 msgid "Facebook (Open Graph)"
-msgstr ""
+msgstr "Facebook (Open Graph)"
 
 #: inc/admin/admin.php:476
 msgid "Twitter (Twitter card)"
-msgstr ""
+msgstr "Twitter (Twitter kartı)"
 
 #: inc/admin/admin.php:542 inc/admin/admin.php:551
 msgid "Tracking"
-msgstr ""
+msgstr "İzleme"
 
 #: inc/admin/admin.php:543 inc/admin/admin.php:552
 msgid "Events"
-msgstr ""
+msgstr "Etkinlikler"
 
 #: inc/admin/admin.php:544 inc/admin/admin.php:553
 msgid "Custom Dimensions"
-msgstr ""
+msgstr "Özel boyutlar"
 
 #: inc/admin/admin.php:545
 msgid "Stats in Dashboard"
-msgstr ""
+msgstr "Pano İstatistikleri"
 
 #: inc/admin/admin.php:622
 msgid "Appearance"
-msgstr ""
+msgstr "Görünüm"
 
 #: inc/admin/admin.php:623
 msgid "Security"
-msgstr ""
+msgstr "Güvenlik"
 
 #: inc/admin/admin.php:655
+#, fuzzy
+#| msgid "Export Settings"
 msgid "Export SEOPress Settings"
-msgstr ""
+msgstr "Dışa aktarma ayarları"
 
 #: inc/admin/admin.php:657
 msgid ""
 "Export the plugin settings for this site as a .json file. This allows you to "
 "easily import the configuration into another site."
 msgstr ""
+"Bu sitenin eklenti ayarlarını .json dosyası olarak dışa aktarın. Bu sayede "
+"yapılandırmayı başka bir siteye kolayca aktarın."
 
 #: inc/admin/admin.php:662 inc/admin/admin.php:718
 msgid "Export"
-msgstr ""
+msgstr "Dışa aktar"
 
 #: inc/admin/admin.php:669
+#, fuzzy
+#| msgid "Import Settings"
 msgid "Import SEOPress Settings"
-msgstr ""
+msgstr "İçe aktarma ayarları"
 
 #: inc/admin/admin.php:671
 msgid ""
 "Import the plugin settings from a .json file. This file can be obtained by "
 "exporting the settings on another site using the form above."
 msgstr ""
+"Eklenti ayarlarını bir .json dosyasından içeri aktar. Yukarıdaki formu "
+"kullanarak başka bir sitedeki ayarları dışa aktarma bu dosya tarafından elde "
+"edilebilir."
 
 #: inc/admin/admin.php:679 inc/admin/admin.php:705
 msgid "Import"
-msgstr ""
+msgstr "İçe aktarma"
 
 #: inc/admin/admin.php:681
 msgid "Import completed!"
-msgstr ""
+msgstr "İçe aktarma tamamlandı!"
 
 #: inc/admin/admin.php:690
 msgid "Import Redirections"
-msgstr ""
+msgstr "Yeniden yönlendirmeleri içe aktar"
 
 #: inc/admin/admin.php:692
+#, fuzzy
+#| msgid ""
+#| "Import your own redirections from a .csv file (separator \";\"). You must "
+#| "have 3 columns in this order: url to match (without your domain name), "
+#| "url to redirect in absolute and type of redirection (301, 302 or 307)."
 msgid ""
 "Import your own redirections from a .csv file (separator \";\"). You must "
 "have 4 columns in this order: url to match (without your domain name), url "
@@ -1422,158 +1518,178 @@ msgid ""
 "one with the value yes to enable the redirect. Leave it empty to disable the "
 "redirect."
 msgstr ""
+"Yeniden yönlendirmelerini bir .csv dosyasından içe aktar (ayırıcı \\\";\\"
+"\"). Bu sırada 3 sütun olmalı: URL eşleştirmek için (alan adınız olmadan), "
+"url yönlendirmek için mutlaka ve yeniden yönlendirme türünü (301, 302 veya "
+"307) yapmalısınız."
 
 #: inc/admin/admin.php:695
 msgid "Download a CSV example"
-msgstr ""
+msgstr "Bir CSV örneği indir"
 
 #: inc/admin/admin.php:711
 msgid "Export Redirections"
-msgstr ""
+msgstr "Yeniden yönlendirmeleri dışa aktar"
 
 #: inc/admin/admin.php:713
 msgid ""
 "Export all redirections for this site as a .csv file. This allows you to "
 "easily import the redirections into another site, to Excel / Google Sheets..."
 msgstr ""
+"Bu sitenin tüm yeniden yönlendirmelerini .csv dosyası olarak dışa aktar. Bu "
+"sayede kolayca başka bir siteye yeniden yönlendirmeleri içe aktarır, Excel / "
+"Google sayfaları için..."
 
 #: inc/admin/admin.php:727
 msgid "Import posts and terms metadata from Yoast"
-msgstr ""
+msgstr "Yoast'tan yazılar ve terimler meta verilerini içe aktar"
 
 #: inc/admin/admin.php:729 inc/admin/admin.php:750 inc/admin/admin.php:769
 msgid "By clicking Migrate, we'll import:"
-msgstr ""
+msgstr "Taşıma seçeneğini tıklayarak bunları içe aktaracağız:"
 
 #: inc/admin/admin.php:731 inc/admin/admin.php:752 inc/admin/admin.php:771
 msgid "Title tags"
-msgstr ""
+msgstr "Başlık etiketleri"
 
 #: inc/admin/admin.php:733 inc/admin/admin.php:754 inc/admin/admin.php:773
 msgid "Facebook Open Graph tags (title, description and image thumbnail)"
-msgstr ""
+msgstr "Facebook Open Graph etiketler (başlık, açıklama ve küçük görüntü)"
 
 #: inc/admin/admin.php:734 inc/admin/admin.php:774
 msgid "Twitter tags (title, description and image thumbnail)"
-msgstr ""
+msgstr "Twitter etiketler (başlık, açıklama ve küçük görüntü)"
 
 #: inc/admin/admin.php:735
 msgid "Meta Robots (noindex, nofollow...)"
-msgstr ""
+msgstr "Meta Robotlar (noindex, nofollow...)"
 
 #: inc/admin/admin.php:737
 msgid "Focus keywords"
-msgstr ""
+msgstr "Fokus anahtar sözcükler"
 
 #: inc/admin/admin.php:739 inc/admin/admin.php:758 inc/admin/admin.php:779
 msgid ""
 "<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms "
 "metadata. Some dynamic variables will not be interpreted."
 msgstr ""
+"<strong>UYARI:</strong> Taşıma tüm SEOPress yazılar ve terimler meta "
+"verilerini silecektir. Bazı dinamik değişkenler değerlendirilmeyecektir."
 
 #: inc/admin/admin.php:740 inc/admin/admin.php:759 inc/admin/admin.php:780
 msgid "Migrate now"
-msgstr ""
+msgstr "Şimdi taşı"
 
 #: inc/admin/admin.php:748
 msgid "Import posts and terms metadata from All In One SEO"
-msgstr ""
+msgstr "All In One SEO'dan tüm yazılar ve terimler meta verilerini içe aktar"
 
 #: inc/admin/admin.php:755
 msgid "Twitter image thumbnail"
-msgstr ""
+msgstr "Twitter küçük görüntü"
 
 #: inc/admin/admin.php:756
 msgid "Meta Robots (noindex, nofollow)"
-msgstr ""
+msgstr "Meta Robotlar (noindex, nofollow)"
 
 #: inc/admin/admin.php:767
 msgid "Import posts and terms metadata from The SEO Framework"
 msgstr ""
+"The SEO Framework'dan tüm yazılar ve terimler meta verilerini içe aktar"
 
 #: inc/admin/admin.php:775
 msgid "Meta Robots (noindex, nofollow, noarchive)"
-msgstr ""
+msgstr "Meta Robotlar (noindex, nofollow, noarchive)"
 
 #: inc/admin/admin.php:777 inc/functions/options-advanced-admin.php:178
 msgid "Redirect URL"
-msgstr ""
+msgstr "URL yeniden yönlendir"
 
 #: inc/admin/admin.php:787
 msgid "Reset All Notices From Notifications Center"
-msgstr ""
+msgstr "Bildirimler merkezinden tüm bildirimleri sıfırla"
 
 #: inc/admin/admin.php:789
 msgid ""
 "By clicking Reset Notices, all notices in the notifications center will be "
 "set to their initial status."
 msgstr ""
+"Bildirimleri sıfırlaya tıklayarak, bildirimler merkezindeki tüm bildirimleri "
+"ilk durumuna ayarlayın."
 
 #: inc/admin/admin.php:794
 msgid "Reset notices"
-msgstr ""
+msgstr "Bildirimleri sıfırla"
 
 #: inc/admin/admin.php:801
 msgid "Reset All Settings"
-msgstr ""
+msgstr "Tüm ayarları sıfırla"
 
 #: inc/admin/admin.php:803
 msgid ""
 "<strong>WARNING:</strong> Delete all options related to SEOPress in your "
 "database AND set settings to their default values."
 msgstr ""
+"<strong>UYARI:</strong>SEOPress ile ilgili tüm seçenekleri silin veritabanı "
+"ve ayarları varsayılan değerlere ayarlayın."
 
 #: inc/admin/admin.php:808
 msgid "Reset settings"
-msgstr ""
+msgstr "Ayarları sıfırla"
 
 #: inc/admin/admin.php:871 inc/admin/admin.php:877
 msgid "Notifications Center"
-msgstr ""
+msgstr "Bildirimler Merkezi"
 
 #: inc/admin/admin.php:872
 msgid "SEO Tools"
-msgstr ""
+msgstr "SEO Araçları"
 
 #: inc/admin/admin.php:873 inc/admin/admin.php:878
 msgid "Useful links"
-msgstr ""
+msgstr "Faydalı bağlantılar"
 
 #: inc/admin/admin.php:922
 msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
-msgstr ""
+msgstr "Temanız <strong>add_theme_support('title-tag');</strong> kullanmıyor"
 
 #: inc/admin/admin.php:923 inc/admin/admin.php:1010 inc/admin/admin.php:1020
 #: inc/admin/admin.php:1030
 msgid "High impact"
-msgstr ""
+msgstr "Yüksek etki"
 
 #: inc/admin/admin.php:935 inc/admin/admin.php:996 inc/admin/admin.php:4944
 #: inc/admin/admin.php:4965 inc/admin/admin.php:4986 inc/admin/admin.php:5007
 msgid "Learn more"
-msgstr ""
+msgstr "Daha fazla bilgi edinin"
 
 #: inc/admin/admin.php:944
 msgid ""
 "We notice that you use <strong>Yoast SEO</strong> plugin. <br>Do you want to "
 "migrate all your posts metadata to SEOPress?"
 msgstr ""
+"<strong>Yoast SEO</strong> eklentisini kullandığınızı fark ettik. <br>Tüm "
+"yazılarınızın meta verilerini SEOPress'e aktarmak ister misiniz?"
 
 #: inc/admin/admin.php:946 inc/admin/admin.php:955
 msgid "Migrate!"
-msgstr ""
+msgstr "Taşıma!"
 
 #: inc/admin/admin.php:953
 msgid ""
 "We notice that you use <strong>All In One SEO Pack</strong> plugin. <br>Do "
 "you want to migrate all your posts metadata to SEOPress?"
 msgstr ""
+"<strong>All In One SEO Pack</strong> eklentisini kullandığınızı fark ettik. "
+"<br>Tüm yazılarınızın meta verilerini SEOPress'e aktarmak ister misiniz?"
 
 #: inc/admin/admin.php:962
 msgid ""
 "We notice that you use another SEO plugin. <br>Do not use multiple SEO "
 "plugins at once to avoid conflicts!"
 msgstr ""
+"Başka bir SEO eklentisi kullandığınızı fark ettik. <br>Çakışmaları önlemek "
+"için birden fazla SEO eklentisi kullanmayın!"
 
 #: inc/admin/admin.php:972
 msgid ""
@@ -1583,166 +1699,171 @@ msgstr ""
 
 #: inc/admin/admin.php:995
 msgid "Your site doesn't use an SSL certificate!"
-msgstr ""
+msgstr "Siteniz bir SSL sertifikası kullanmıyor!"
 
 #: inc/admin/admin.php:997
 msgid "Low impact"
-msgstr ""
+msgstr "Düşük etki"
 
 #: inc/admin/admin.php:999
 msgid "Buy an SSL!"
-msgstr ""
+msgstr "Bir SSL satın alın!"
 
 #: inc/admin/admin.php:1009
 msgid "Your site is not visible to Search Engines!"
-msgstr ""
+msgstr "Siteniz arama motorları için görünür değil!"
 
 #: inc/admin/admin.php:1012 inc/admin/admin.php:1022 inc/admin/admin.php:1032
 #: inc/admin/admin.php:1056 inc/admin/admin.php:1135 inc/admin/admin.php:1148
 #: inc/admin/admin.php:1221
 msgid "Fix this!"
-msgstr ""
+msgstr "Bunu düzelt!"
 
 #: inc/admin/admin.php:1019
 msgid "Your site title is empty!"
-msgstr ""
+msgstr "Sitenizin başlığı boş!"
 
 #: inc/admin/admin.php:1029 inc/admin/admin.php:3230
 msgid ""
 "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
 msgstr ""
+"Kalıcı bağlantılar SEO dostu değil! Bunu düzeltmek için güzel kalıcı "
+"bağlantıları etkinleştirin."
 
 #: inc/admin/admin.php:1053
 msgid "You RSS feed show full text!"
-msgstr ""
+msgstr "RSS beslemeyi tam metin göster!"
 
 #: inc/admin/admin.php:1054 inc/admin/admin.php:1133 inc/admin/admin.php:1146
 msgid "Medium impact"
-msgstr ""
+msgstr "Orta etki"
 
 #: inc/admin/admin.php:1079
 msgid "You like SEOPress? Please help us by rating us 5 stars!"
 msgstr ""
+"SEOPress'i seviyor musun? Lütfen bizi 5 yıldızla derecelendirip yardımcı "
+"olur musun!"
 
 #: inc/admin/admin.php:1081
 msgid "Rate us!"
-msgstr ""
+msgstr "Bizi derecelendir!"
 
 #: inc/admin/admin.php:1105
 msgid "Break comments into pages is ON!"
-msgstr ""
+msgstr "Yorumları sayfalara böl AÇIK!"
 
 #: inc/admin/admin.php:1106 inc/admin/admin.php:1170 inc/admin/admin.php:1206
 msgid "Huge impact"
-msgstr ""
+msgstr "Büyük etki"
 
 #: inc/admin/admin.php:1108
 msgid "Disable this!"
-msgstr ""
+msgstr "Bunu devre dışı bırak!"
 
 #: inc/admin/admin.php:1132
 msgid "Display more posts per page on homepage and archives"
-msgstr ""
+msgstr "Anasayfada ve arşivlerde sayfa başına daha fazla mesaj göster"
 
 #: inc/admin/admin.php:1145
 msgid "You don't have an XML Sitemap!"
-msgstr ""
+msgstr "XML site haritanız yok!"
 
 #: inc/admin/admin.php:1169
 msgid "Do you have a Google My Business page? It's free!"
-msgstr ""
+msgstr "Google My Business sayfanız var mı? Bedava!"
 
 #: inc/admin/admin.php:1172
 msgid "Create your page now!"
-msgstr ""
+msgstr "Sayfanızı şimdi oluşturun!"
 
 #: inc/admin/admin.php:1205
 msgid "Add your site to Google. It's free!"
-msgstr ""
+msgstr "Sitenizi Google'a ekleyin. Bedava!"
 
 #: inc/admin/admin.php:1208
 msgid "Add your site to Search Console!"
-msgstr ""
+msgstr "Sitenizi Search Console'a ekleyin!"
 
 #: inc/admin/admin.php:1218
 msgid "You have to enter your licence key to get updates and support"
 msgstr ""
+"Güncellemeler ve destek almak için lisans anahtarınızı girmeniz gerekir"
 
 #: inc/admin/admin.php:1234
 msgid "Check websites setup on your server"
-msgstr ""
+msgstr "Sunucunuzda Web sitelerinin kurulumunu denetle"
 
 #: inc/admin/admin.php:1243
 msgid "Not found"
-msgstr ""
+msgstr "Bulunamadı"
 
 #: inc/admin/admin.php:1248
 msgid "No scrape."
-msgstr ""
+msgstr "Kazıma yok."
 
 #: inc/admin/admin.php:1253
 msgid "No domain found."
-msgstr ""
+msgstr "Alan adı bulunamadı."
 
 #: inc/admin/admin.php:1263
 msgid "Server IP Address: "
-msgstr ""
+msgstr "Sunucu IP adresi:"
 
 #: inc/admin/admin.php:1266
 msgid "Last scrape: "
-msgstr ""
+msgstr "Son kazıma:"
 
 #: inc/admin/admin.php:1267
 msgid "Number of websites on your server: "
-msgstr ""
+msgstr "Sunucunuzdaki Web sitesi sayısı:"
 
 #: inc/admin/admin.php:1280
 msgid "Get list"
-msgstr ""
+msgstr "Listeyi al"
 
 #: inc/admin/admin.php:1288
 msgid "Check your Alexa Rank (Amazon index)"
-msgstr ""
+msgstr "Alexa sıralamasını (Amazon endeksi) kontrol edin"
 
 #: inc/admin/admin.php:1303
 msgid "Your Alexa Rank"
-msgstr ""
+msgstr "Alexa sıralamanız"
 
 #: inc/admin/admin.php:1325
 msgid "Country Rank: "
-msgstr ""
+msgstr "Ülke sıralaması :"
 
 #: inc/admin/admin.php:1334
 msgid "The lower, the best"
-msgstr ""
+msgstr "En düşük, en iyi"
 
 #: inc/admin/admin.php:1338
 msgid "Get Alexa Rank"
-msgstr ""
+msgstr "Alexa sıralaması alın"
 
 #: inc/admin/admin.php:1346
 msgid "Upload a list of links to disavow to Google"
-msgstr ""
+msgstr "Google'a onaylanmayan bağlantıların listesini yükleyin"
 
 #: inc/admin/admin.php:1347
 msgid "Google Trends"
-msgstr ""
+msgstr "Google Trends"
 
 #: inc/admin/admin.php:1348
 msgid "Dareboost: Test, analyze and optimize your website"
-msgstr ""
+msgstr "Dareboost: Test, analiz ve Web sitenizi en uygun hale getirin"
 
 #: inc/admin/admin.php:1349
 msgid "Google Campaign URL Builder tool"
-msgstr ""
+msgstr "Google kampanya URL oluşturucu aracı"
 
 #: inc/admin/admin.php:1362
 msgid "Titles & metas"
-msgstr ""
+msgstr "Başlıklar & metalar"
 
 #: inc/admin/admin.php:1363
 msgid "Manage all your titles & metas"
-msgstr ""
+msgstr "Tüm başlıkları & metaları yönet"
 
 #: inc/admin/admin.php:1364 inc/admin/admin.php:1402 inc/admin/admin.php:1440
 #: inc/admin/admin.php:1478 inc/admin/admin.php:1516 inc/admin/admin.php:1545
@@ -1752,421 +1873,438 @@ msgstr ""
 #: inc/admin/admin.php:1864 inc/admin/admin.php:1874 inc/admin/admin.php:1905
 #: inc/admin/admin.php:1917 inc/admin/admin.php:1929 inc/admin/admin.php:1950
 msgid "Manage"
-msgstr ""
+msgstr "Yönet"
 
 #: inc/admin/admin.php:1392
 msgid "Guide to manage your titles and meta descriptions - new window"
-msgstr ""
+msgstr "Başlık ve meta açıklamaları yönetmek için kılavuz - yeni pencere"
 
 #: inc/admin/admin.php:1401
 msgid "Manage your XML / Image / Video / HTML Sitemap"
-msgstr ""
+msgstr "XML / Görüntü / Video / HTML site haritanızı yönetin"
 
 #: inc/admin/admin.php:1430
 msgid "Guide to enable your XML Sitemaps - new window"
-msgstr ""
+msgstr "XML site haritaları etkinleştirmek için kılavuz - yeni pencere"
 
 #: inc/admin/admin.php:1439
 msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
-msgstr ""
+msgstr "XML site haritaları etkinleştirmek için kılavuz - yeni pencere."
 
 #: inc/admin/admin.php:1468
 msgid "Guide to enable Google Knowledge Graph - new window"
-msgstr ""
+msgstr "Google bilgi grafiği kılavuzu etkinleştirmek için - yeni pencere"
 
 #: inc/admin/admin.php:1477
 msgid "Track everything about your visitors with Google Analytics"
-msgstr ""
+msgstr "Google Analytics ile ziyaretçileriniz hakkında her şeyi izleyin"
 
 #: inc/admin/admin.php:1506
 msgid "Guide to getting started with Google Analytics - new window"
-msgstr ""
+msgstr "Google Analytics'e başlarken kılavuzu - yeni pencere"
 
 #: inc/admin/admin.php:1515
 msgid "Advanced SEO options for advanced users!"
-msgstr ""
+msgstr "Gelişmiş kullanıcılar için gelişmiş SEO seçenekleri!"
 
 #: inc/admin/admin.php:1544
 msgid "Improve WooCommerce SEO"
-msgstr ""
+msgstr "WooCommerce SEO'yu geliştirin"
 
 #: inc/admin/admin.php:1572
 msgid "Improve Easy Digital Downloads SEO"
-msgstr ""
+msgstr "Kolay dijital indirme SEO'yu geliştirin"
 
 #: inc/admin/admin.php:1600
 msgid "Add Google Local Business data type"
-msgstr ""
+msgstr "Google Yerel İşletme veri türünü ekle"
 
 #: inc/admin/admin.php:1628
 msgid "Add Dublin Core meta tags"
-msgstr ""
+msgstr "Dublin çekirdek meta etiketleri ekle"
 
 #: inc/admin/admin.php:1655
 msgid "Structured Data Types"
-msgstr ""
+msgstr "Yapısal veri türleri"
 
 #: inc/admin/admin.php:1656
 msgid ""
 "Add data types to your content: articles, courses, recipes, videos, events "
 "and products"
 msgstr ""
+"İçeriğinize veri türleri ekleyin: makaleler, kurslar, yemek tarifleri, "
+"videolar, etkinlikler ve ürünler"
 
 #: inc/admin/admin.php:1684
 msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
 msgstr ""
+"Tema için kırıntıları etkinleştirin ve SERPs içinde SEO'nuzu geliştirin"
 
 #: inc/admin/admin.php:1713
 msgid "Guide to enable Breadcrumbs - new window"
-msgstr ""
+msgstr "Kırıntıları etkinleştirmek için kılavuzu - yeni pencere"
 
 #: inc/admin/admin.php:1722
 msgid "Track your website performance to improve SEO with Google Page Speed"
 msgstr ""
+"Google sayfa hızı ile SEO geliştirmek için Web sitesi performansını takip "
+"edin"
 
 #: inc/admin/admin.php:1733
 msgid "Guide to analyze your site with Google Page Speed - new window"
-msgstr ""
+msgstr "Google sayfa hızı ile sitenizi analiz kılavuzu - yeni pencere"
 
 #: inc/admin/admin.php:1743
 msgid "Edit your robots.txt file"
-msgstr ""
+msgstr "Robots.txt dosyanızı düzenleme"
 
 #: inc/admin/admin.php:1744
 msgid "View your robots.txt"
-msgstr ""
+msgstr "Robots.txt dosyanızı görüntüleme"
 
 #: inc/admin/admin.php:1774
 msgid "Guide to edit your robots.txt file - new window"
-msgstr ""
+msgstr "Robots.txt dosyanızı düzenlemek için kılavuz - yeni pencere"
 
 #: inc/admin/admin.php:1784
 msgid "Optimize your site for Google News"
-msgstr ""
+msgstr "Google Haberler için sitenizi optimize edin"
 
 #: inc/admin/admin.php:1812
 msgid "Monitor 404, create 301, 302 and 307 redirections"
-msgstr ""
+msgstr "Monitör 404, 301, 302 ve 307 yeniden yönlendirme oluştur"
 
 #: inc/admin/admin.php:1813
 msgid "See redirects"
-msgstr ""
+msgstr "Yeniden yönlendirmelere bakın"
 
 #: inc/admin/admin.php:1842
 msgid "Guide to enable 301 redirections and 404 monitoring - new window"
 msgstr ""
+"301 yönlendirmeler ve 404 kontrol etkinleştirmek için kılavuz - yeni pencere"
 
 #: inc/admin/admin.php:1851
 msgid "Scan your site to find SEO problems."
-msgstr ""
+msgstr "SEO sorunlarını bulmak için sitenizi tarayın."
 
 #: inc/admin/admin.php:1852
 msgid "See broken links"
-msgstr ""
+msgstr "Kırık bağlantılara bakın"
 
 #: inc/admin/admin.php:1853
 msgid "Scan"
-msgstr ""
+msgstr "Tarama"
 
 #: inc/admin/admin.php:1862
 msgid "Check your backlinks with Majestic API."
-msgstr ""
+msgstr "Majestic API ile geri bağlantıları kontrol edin."
 
 #: inc/admin/admin.php:1863
 msgid "See backlinks"
-msgstr ""
+msgstr "Geri bağlantılara bakın"
 
 #: inc/admin/admin.php:1873
 msgid "Customize your permalinks."
-msgstr ""
+msgstr "Kalıcı bağlantıları özelleştirin."
 
 #: inc/admin/admin.php:1904
 msgid "Edit your htaccess file."
-msgstr ""
+msgstr "Htaccess dosyanızı düzenleyin."
 
 #: inc/admin/admin.php:1916
 msgid "Configure default WordPress RSS."
-msgstr ""
+msgstr "Varsayılan WordPress RSS'i yapılandır."
 
 #: inc/admin/admin.php:1928
 msgid "Import/Export SEOPress settings from site to site."
-msgstr ""
+msgstr "Dışa aktarma/İçe aktarma siteden siteye SEOPress ayarları."
 
 #: inc/admin/admin.php:1939
 msgid "Guide to Export/Import/Reset settings - new window"
-msgstr ""
+msgstr "Dışa aktarma/İçe aktarma/sıfırlama ayarları kılavuzu - yeni pencere"
 
 #: inc/admin/admin.php:1949
 msgid "Edit your SEOPress license key."
-msgstr ""
+msgstr "SEOPress lisans anahtarını düzenleyin."
 
 #: inc/admin/admin.php:1960
 msgid "Guide to activate SEOPress PRO - new window"
-msgstr ""
+msgstr "SEOPress PRO etkinleştirmek için kılavuz - yeni pencere"
 
 #: inc/admin/admin.php:2035 inc/admin/admin.php:3388
 msgid "Site title"
-msgstr ""
+msgstr "Site başlık"
 
 #: inc/admin/admin.php:2228 inc/admin/admin.php:3978
 msgid "noindex"
-msgstr ""
+msgstr "noindex"
 
 #: inc/admin/admin.php:2236 inc/admin/admin.php:3997
 msgid "nofollow"
-msgstr ""
+msgstr "nofollow"
 
 #: inc/admin/admin.php:2244 inc/admin/admin.php:4016
 msgid "noodp"
-msgstr ""
+msgstr "noodp"
 
 #: inc/admin/admin.php:2252 inc/admin/admin.php:4035
 msgid "noimageindex"
-msgstr ""
+msgstr "noimageindex"
 
 #: inc/admin/admin.php:2260 inc/admin/admin.php:4054
 msgid "noarchive"
-msgstr ""
+msgstr "noarchive"
 
 #: inc/admin/admin.php:2268 inc/admin/admin.php:4073
 msgid "nosnippet"
-msgstr ""
+msgstr "nosnippet"
 
 #: inc/admin/admin.php:2276 inc/admin/admin.php:4092
 msgid "nositelinkssearchbox"
-msgstr ""
+msgstr "nositelinkssearchbox"
 
 #: inc/admin/admin.php:2284
 msgid "Indicate paginated content to Google"
-msgstr ""
+msgstr "Sayfalandırılmış içeriği Google'a belirtin"
 
 #: inc/admin/admin.php:2301 inc/admin/admin.php:4130
 msgid "Enable XML Sitemap"
-msgstr ""
+msgstr "XML site haritasını etkinleştir"
 
 #: inc/admin/admin.php:2309
 msgid "Enable XML Image Sitemaps"
-msgstr ""
+msgstr "XML görüntü site haritalarını etkinleştir"
 
 #: inc/admin/admin.php:2318
 msgid "Enable XML Video Sitemaps"
-msgstr ""
+msgstr "XML Video site haritalarını etkinleştir"
 
 #: inc/admin/admin.php:2327 inc/admin/admin.php:4217
 msgid "Enable HTML Sitemap"
-msgstr ""
+msgstr "HTML site haritasını etkinleştir"
 
 #: inc/admin/admin.php:2343
 msgid "Check to INCLUDE Post Types"
-msgstr ""
+msgstr "Yazı türlerini dahil etmek için kontrol edin"
 
 #: inc/admin/admin.php:2359
 msgid "Check to INCLUDE Taxonomies"
-msgstr ""
+msgstr "Taksonomileri dahil etmek için kontrol edin"
 
 #: inc/admin/admin.php:2375 inc/admin/admin.php:4326
 msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
 msgstr ""
+"Site haritasını görüntülemek için bir yazı, sayfa veya özel yazı türü "
+"kimlik(ler) girin"
 
 #: inc/admin/admin.php:2383 inc/admin/admin.php:4340
+#, fuzzy
+#| msgid "Exclude some Posts, Pages or Custom Post Types"
 msgid "Exclude some Posts, Pages, Custom Post Types or Terms IDs"
-msgstr ""
+msgstr "Bazı yazıları, sayfaları veya özel yazı tiplerini dışla"
 
 #: inc/admin/admin.php:2391
 msgid "Sort order"
-msgstr ""
+msgstr "Sıralama düzeni"
 
 #: inc/admin/admin.php:2399
 msgid "Order posts by"
-msgstr ""
+msgstr "Yazılara göre sıralama düzeni"
 
 #: inc/admin/admin.php:2407
 msgid "Disable the display of the publication date"
-msgstr ""
+msgstr "Yayın tarihinin görüntülenmesini devre dışı bırak"
 
 #: inc/admin/admin.php:2424
 msgid "Person or organization"
-msgstr ""
+msgstr "Kişi veya organizasyon"
 
 #: inc/admin/admin.php:2432 inc/admin/admin.php:4439
 msgid "Your name/organization"
-msgstr ""
+msgstr "Adınız/kuruluşunuz"
 
 #: inc/admin/admin.php:2440 inc/admin/admin.php:4452
 msgid "Your photo/organization logo"
-msgstr ""
+msgstr "Fotoğraf/organizasyon logonuz"
 
 #: inc/admin/admin.php:2448 inc/admin/admin.php:4482
 msgid "Organization's phone number (only for Organizations)"
-msgstr ""
+msgstr "Kuruluşun telefon numarası (yalnızca kuruluşlar için)"
 
 #: inc/admin/admin.php:2456
 msgid "Contact type (only for Organizations)"
-msgstr ""
+msgstr "İletişim türü (yalnızca kuruluşlar için)"
 
 #: inc/admin/admin.php:2464
 msgid "Contact option (only for Organizations)"
-msgstr ""
+msgstr "İletişim seçeneği (yalnızca kuruluşlar için)"
 
 #: inc/admin/admin.php:2481 inc/admin/admin.php:4560
 msgid "Facebook Page URL"
-msgstr ""
+msgstr "Facebook Sayfa URL"
 
 #: inc/admin/admin.php:2489
 msgid "Twitter Username"
-msgstr ""
+msgstr "Twitter kullanıcı adı"
 
 #: inc/admin/admin.php:2497 inc/admin/admin.php:4585
 msgid "Pinterest URL"
-msgstr ""
+msgstr "Pinterest URL"
 
 #: inc/admin/admin.php:2505 inc/admin/admin.php:4597
 msgid "Instagram URL"
-msgstr ""
+msgstr "Instagram URL"
 
 #: inc/admin/admin.php:2513 inc/admin/admin.php:4609
 msgid "YouTube URL"
-msgstr ""
+msgstr "YouTube URL"
 
 #: inc/admin/admin.php:2521 inc/admin/admin.php:4621
 msgid "LinkedIn URL"
-msgstr ""
+msgstr "LinkedIn URL"
 
 #: inc/admin/admin.php:2529 inc/admin/admin.php:4633
 msgid "MySpace URL"
-msgstr ""
+msgstr "MySpace URL"
 
 #: inc/admin/admin.php:2537 inc/admin/admin.php:4645
 msgid "Soundcloud URL"
-msgstr ""
+msgstr "Soundcloud URL"
 
 #: inc/admin/admin.php:2545 inc/admin/admin.php:4657
 msgid "Tumblr URL"
-msgstr ""
+msgstr "Tumblr URL"
 
 #: inc/admin/admin.php:2562
 msgid "Enable Open Graph Data"
-msgstr ""
+msgstr "Open Graph verilerini etkinleştir"
 
 #: inc/admin/admin.php:2570 inc/admin/admin.php:4689
 msgid "Select a default image"
-msgstr ""
+msgstr "Varsayılan bir görüntü seçin"
 
 #: inc/admin/admin.php:2578
 msgid "Facebook Link Ownership ID"
-msgstr ""
+msgstr "Facebook bağlantı sahiplik kimliği"
 
 #: inc/admin/admin.php:2586
 msgid "Facebook Admin ID"
-msgstr ""
+msgstr "Facebook yönetici kimliği"
 
 #: inc/admin/admin.php:2594
 msgid "Facebook App ID"
-msgstr ""
+msgstr "Facebook uygulama kimliği"
 
 #: inc/admin/admin.php:2611
 msgid "Enable Twitter Card"
-msgstr ""
+msgstr "Twitter Kartını etkinleştir"
 
 #: inc/admin/admin.php:2619
 msgid "Use Open Graph if no Twitter Card is filled"
-msgstr ""
+msgstr "Twitter kartı doldurulmamışsa Open Graph kullanın"
 
 #: inc/admin/admin.php:2627 inc/admin/admin.php:4781
 msgid "Default Twitter Image"
-msgstr ""
+msgstr "Varsayılan Twitter görüntüsü"
 
 #: inc/admin/admin.php:2635
 msgid "Image size for Twitter Summary card"
-msgstr ""
+msgstr "Twitter Özet kartı için görüntü boyutu"
 
 #: inc/admin/admin.php:2652
 msgid "Enable Google Analytics tracking"
-msgstr ""
+msgstr "Google Analytics izlemeyi etkinleştir"
 
 #: inc/admin/admin.php:2660 inc/admin/admin.php:4834
 msgid "Enter your tracking ID"
-msgstr ""
+msgstr "İzleme kimliğinizi girin"
 
 #: inc/admin/admin.php:2668
+#, fuzzy
+#| msgid "Google Analytics tracking opt-out"
 msgid "Google Analytics tracking opt-in"
-msgstr ""
+msgstr "Google Analytics izleme iptal etme"
 
 #: inc/admin/admin.php:2676
 msgid "Consent message for user tracking"
-msgstr ""
+msgstr "Kullanıcı izleme için onay iletisi"
 
 #: inc/admin/admin.php:2684
 msgid "Accept button for user tracking"
-msgstr ""
+msgstr "Kullanıcı izleme için onay düğmesi"
 
 #: inc/admin/admin.php:2692
 msgid "Exclude user roles from tracking"
-msgstr ""
+msgstr "Kullanıcı rollerini izlemeyi dışla"
 
 #: inc/admin/admin.php:2710 inc/admin/admin.php:4941
 msgid "Enable remarketing, demographics, and interests reporting"
 msgstr ""
+"Yeniden pazarlama, demografi ve ilgili alanların bildirimini etkinleştir"
 
 #: inc/admin/admin.php:2718 inc/admin/admin.php:4962
 msgid "Enable IP Anonymization"
-msgstr ""
+msgstr "IP anonimleştirme özelliğini etkinleştir"
 
 #: inc/admin/admin.php:2726 inc/admin/admin.php:4983
 msgid "Enhanced Link Attribution"
-msgstr ""
+msgstr "Gelişmiş bağlantıyı ilişkilendir"
 
 #: inc/admin/admin.php:2734 inc/admin/admin.php:5004
 msgid "Enable cross-domain tracking"
-msgstr ""
+msgstr "Alan adları arası izlemeyi etkinleştir"
 
 #: inc/admin/admin.php:2742 inc/admin/admin.php:5020
 msgid "Cross domains"
-msgstr ""
+msgstr "Çapraz alan adları"
 
 #: inc/admin/admin.php:2760
 msgid "Enable external links tracking (all links with target _blank attribute)"
 msgstr ""
+"Dış bağlantıları izlemeyi etkinleştir (hedef _blank özniteliğiyle tüm "
+"bağlantılar)"
 
 #: inc/admin/admin.php:2768
 msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
-msgstr ""
+msgstr "İndirmelerin takibini etkinleştir (örn: PDF, XLSX, DOCX...)"
 
 #: inc/admin/admin.php:2776 inc/admin/admin.php:5066
 msgid "Track downloads' clicks"
-msgstr ""
+msgstr "İndirmelerin tıklamalarını izle"
 
 #: inc/admin/admin.php:2784
 msgid "Enable affiliate/outbound links tracking (eg: aff, go, out, recommends)"
 msgstr ""
+"Ortaklık/giden bağlantılar izlemeyi etkinleştir (örneğin: aff, go, out, "
+"recommends)"
 
 #: inc/admin/admin.php:2792 inc/admin/admin.php:5097
 msgid "Track affiliate/outbound links"
-msgstr ""
+msgstr "Ortaklık/giden bağlantıları izle"
 
 #: inc/admin/admin.php:2810
 msgid "Track Authors"
-msgstr ""
+msgstr "Yazarları izle"
 
 #: inc/admin/admin.php:2818
 msgid "Track Categories"
-msgstr ""
+msgstr "Kategorileri izle"
 
 #: inc/admin/admin.php:2826
 msgid "Track Tags"
-msgstr ""
+msgstr "Etkinlikleri izle"
 
 #: inc/admin/admin.php:2834
 msgid "Track Post Types"
-msgstr ""
+msgstr "Yazı Tiplerini izle"
 
 #: inc/admin/admin.php:2842
 msgid "Track Logged In Users"
-msgstr ""
+msgstr "Oturum açan kullanıcıları izle"
 
 #: inc/admin/admin.php:2859
 msgid "Redirect attachment pages to post parent"
-msgstr ""
+msgstr "Ek sayfaları yazı anasayfasına yeniden yönlendirme"
 
 #: inc/admin/admin.php:2867
 msgid "Remove ?replytocom link to avoid duplicate content"
@@ -2174,248 +2312,258 @@ msgstr ""
 
 #: inc/admin/admin.php:2875
 msgid "Add WP Editor to taxonomy description textarea"
-msgstr ""
+msgstr "WP Editörü taksonomi açıklama metin alanına ekle"
 
 #: inc/admin/admin.php:2883
 msgid "Remove stop words from URL"
-msgstr ""
+msgstr "Durdurma sözcükleri bağlantıdan kaldır"
 
 #: inc/admin/admin.php:2891
 msgid "Remove /category/ in URL"
-msgstr ""
+msgstr "/Kategori/ bağlantısından kaldır"
 
 #: inc/admin/admin.php:2899 inc/admin/admin.php:5586
 msgid "Disable trailing slash for metas"
-msgstr ""
+msgstr "Metalar için sondaki eğik çizgiyi devre dışı bırak"
 
 #: inc/admin/admin.php:2907
 msgid "Remove WordPress generator meta tag"
-msgstr ""
+msgstr "WordPress Generator meta etiketini kaldır"
 
 #: inc/admin/admin.php:2915
 msgid "Remove WordPress shortlink meta tag"
-msgstr ""
+msgstr "WordPress kısa bağlantılar meta etiketini kaldır"
 
 #: inc/admin/admin.php:2923
 msgid "Remove Windows Live Writer meta tag"
-msgstr ""
+msgstr "Windows Live Writer meta etiketini kaldır"
 
 #: inc/admin/admin.php:2931
 msgid "Remove RSD meta tag"
-msgstr ""
+msgstr "RSD meta etiketini kaldır"
 
 #: inc/admin/admin.php:2939 inc/admin/admin.php:5666
 msgid "Google site verification"
-msgstr ""
+msgstr "Google site doğrulaması"
 
 #: inc/admin/admin.php:2947 inc/admin/admin.php:5680
 msgid "Bing site verification"
-msgstr ""
+msgstr "Bing site doğrulaması"
 
 #: inc/admin/admin.php:2955 inc/admin/admin.php:5693
 msgid "Pinterest site verification"
-msgstr ""
+msgstr "Pinterest site doğrulaması"
 
 #: inc/admin/admin.php:2963 inc/admin/admin.php:5705
 msgid "Yandex site verification"
-msgstr ""
+msgstr "Yandex site doğrulaması"
 
 #: inc/admin/admin.php:2980
 msgid "SEOPress in admin bar"
-msgstr ""
+msgstr "Yönetici Bar SEOPress"
 
 #: inc/admin/admin.php:2988
 msgid "Move SEOPress metabox's position"
-msgstr ""
+msgstr "SEOPress metabox pozisyonunu taşı"
 
 #: inc/admin/admin.php:2996
 msgid "Hide Notifications Center"
-msgstr ""
+msgstr "Bildirimler merkezini gizle"
 
 #: inc/admin/admin.php:3004
 msgid "Hide SEO tools"
-msgstr ""
+msgstr "SEO araçları gizle"
 
 #: inc/admin/admin.php:3012
 msgid "Hide Useful Links"
-msgstr ""
+msgstr "Yararlı bağlantıları gizle"
 
 #: inc/admin/admin.php:3020
 msgid "Show Title tag column in post types"
-msgstr ""
+msgstr "Yazı türlerinde başlık etiketi sütununu göster"
 
 #: inc/admin/admin.php:3028
 msgid "Show Meta description column in post types"
-msgstr ""
+msgstr "Yazı türlerinde meta açıklama sütununu göster"
 
 #: inc/admin/admin.php:3036
 msgid "Show Redirection Enable column in post types"
-msgstr ""
+msgstr "Yazı türlerinde yeniden yönlendirme etkinleştir sütununu göster"
 
 #: inc/admin/admin.php:3044
 msgid "Show Redirect URL column in post types"
-msgstr ""
+msgstr "Yazı türlerinde yeniden yönlendirme URL sütununu göster"
 
 #: inc/admin/admin.php:3052
 msgid "Show canonical URL column in post types"
-msgstr ""
+msgstr "Yazı türlerinde kurallı URL sütununu göster"
 
 #: inc/admin/admin.php:3060
 msgid "Show Target Keyword column in post types"
-msgstr ""
+msgstr "Yazı türlerinden hedef anahtar sözcük sütununu göster"
 
 #: inc/admin/admin.php:3068
 msgid "Show noindex column in post types"
-msgstr ""
+msgstr "Yazı türlerinde noindex sütununu göster"
 
 #: inc/admin/admin.php:3076
 msgid "Show nofollow column in post types"
-msgstr ""
+msgstr "Yazı türlerinde nofollow sütununu göster"
 
 #: inc/admin/admin.php:3084
 msgid "Show total number of words column in post types"
-msgstr ""
+msgstr "Yazı türlerinden toplam sözcük sütun sayısını göster"
 
 #: inc/admin/admin.php:3092
 msgid "Show W3C validator column in post types"
-msgstr ""
+msgstr "Yazı türlerinde W3C doğrulayıcısı sütununu göster"
 
 #: inc/admin/admin.php:3100
 msgid "Show Google Page Speed column in post types"
-msgstr ""
+msgstr "Yazı türlerinde Google sayfa hızı sütununu göster"
 
 #: inc/admin/admin.php:3109
 msgid "Hide Genesis SEO Metabox"
-msgstr ""
+msgstr "Genesis SEO Metabox gizle"
 
 #: inc/admin/admin.php:3117
 msgid "Hide Genesis SEO Settings link"
-msgstr ""
+msgstr "Genesis SEO Ayarlar bağlantısını gizle"
 
 #: inc/admin/admin.php:3125
+#, fuzzy
+#| msgid "Structured Data Types"
 msgid "Hide advice in Structured Data Types metabox"
-msgstr ""
+msgstr "Yapısal veri türleri"
 
 #: inc/admin/admin.php:3142
 msgid "Block SEO metabox to user roles"
-msgstr ""
+msgstr "Blok SEO metabox kullanıcı rolleri için"
 
 #: inc/admin/admin.php:3150
 msgid "Block Content analysis metabox to user roles"
-msgstr ""
+msgstr "İçerik çözümlemesi metabox kullanıcı rollerini engelle"
 
 #: inc/admin/admin.php:3203
 msgid "<p>Customize your titles & metas for homepage</p>"
-msgstr ""
+msgstr "<p>Ana sayfanız için başlıklar ve metaları özelleştirin</p>"
 
 #: inc/admin/admin.php:3208
 msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
-msgstr ""
+msgstr "<p>Tek özel yazı türleri için başlıklar ve metaları özelleştirin</p>"
 
 #: inc/admin/admin.php:3213
 msgid "<p>Customize your metas for all pages</p>"
-msgstr ""
+msgstr "<p>Metalarınızı tüm sayfalar için özelleştirin</p>"
 
 #: inc/admin/admin.php:3218
 msgid "<p>Customize your metas for all taxonomies archives</p>"
-msgstr ""
+msgstr "<p>Tüm taksonomi arşivler için metaları özelleştirin</p>"
 
 #: inc/admin/admin.php:3223
 msgid "<p>Customize your metas for all archives</p>"
-msgstr ""
+msgstr "<p>Tüm arşivler için metaları özelleştirin</p>"
 
 #: inc/admin/admin.php:3231
 msgid "Change this settings"
-msgstr ""
+msgstr "Bu ayarları değiştir"
 
 #: inc/admin/admin.php:3234
 msgid ""
 "To view your sitemap, enable permalinks (not default one), and save settings "
 "to flush them."
 msgstr ""
+"Site haritanızı görüntülemek için kalıcı (varsayılan değil) özelliğini "
+"etkinleştirin ve onları güncellemek için ayarları kaydedin ."
 
 #: inc/admin/admin.php:3235
 msgid ""
 "Only the last 1000 items are listed in Sitemaps for performances issues."
 msgstr ""
+"Performans sorunları için yalnızca son 1000 öğeler site haritalarında "
+"listelenir."
 
 #: inc/admin/admin.php:3241
 msgid ""
 "Your server uses NGINX. If XML Sitemaps doesn't work properly, you need to "
 "add this rule to your configuration:"
 msgstr ""
+"Sunucunuz NGINX kullanıyor. XML site haritaları düzgün çalışmıyorsa, bu "
+"kuralı yapılandırmanıza eklemeniz gerekir :"
 
 #: inc/admin/admin.php:3254
 msgid "Noindex content will not be displayed in Sitemaps."
-msgstr ""
+msgstr "Noindex içeriği site haritalarında görüntülenmez."
 
 #: inc/admin/admin.php:3266
 msgid "Blank sitemap?"
-msgstr ""
+msgstr "Site haritası boş mu?"
 
 #: inc/admin/admin.php:3267
 msgid "404 error?"
-msgstr ""
+msgstr "404 hatası?"
 
 #: inc/admin/admin.php:3269
 msgid "View your sitemap"
-msgstr ""
+msgstr "Site haritanızı Görüntüleme"
 
 #: inc/admin/admin.php:3271
 msgid "Ping Google manually"
-msgstr ""
+msgstr "Elden ping Google"
 
 #: inc/admin/admin.php:3273
 msgid "Flush permalinks"
-msgstr ""
+msgstr "Kalıcılar güncellendi"
 
 #: inc/admin/admin.php:3279
 msgid "<p>Create an HTML Sitemap for your visitors and boost your SEO.</p>"
 msgstr ""
+"<p>Ziyaretçileriniz için bir HTML site haritası oluşturun ve SEO'nunuzu "
+"arttırın.</p>"
 
 #: inc/admin/admin.php:3289 inc/admin/admin.php:4227
 msgid "Guide to enable a HTML Sitemap - new window"
-msgstr ""
+msgstr "HTML site haritasını etkinleştirme kılavuzu - yeni pencere"
 
 #: inc/admin/admin.php:3294
 msgid "<p>Include/Exclude Post Types.</p>"
-msgstr ""
+msgstr "<p>Posta türlerini dahil et/dışlama.</p>"
 
 #: inc/admin/admin.php:3299
 msgid "<p>Include/Exclude Taxonomies.</p>"
-msgstr ""
+msgstr "<p>Taksononomiler dahil/hariç.</p>"
 
 #: inc/admin/admin.php:3304
 msgid "<p>Configure Google Knowledge Graph.</p>"
-msgstr ""
+msgstr "<p>Google Knowledge Graph yapılandırın.</p>"
 
 #: inc/admin/admin.php:3305
 msgid "Learn more on Google official website."
-msgstr ""
+msgstr "Google resmi web sitesinden daha fazla bilgi edinin."
 
 #: inc/admin/admin.php:3310
 msgid "<p>Link your site with your social accounts.</p>"
-msgstr ""
+msgstr "<p>Sitenizi sosyal hesaplarınızla ilişkilendirin.</p>"
 
 #: inc/admin/admin.php:3315
 msgid "<p>Manage Open Graph datas.</p>"
-msgstr ""
+msgstr "<p>Open Graph verilerini yönetin.</p>"
 
 #: inc/admin/admin.php:3320
 msgid "<p>Manage your Twitter card.</p>"
-msgstr ""
+msgstr "<p>Twitter kartınızı yönetin.</p>"
 
 #: inc/admin/admin.php:3325
 msgid "<p>Link your Google Analytics to your website.</p>"
-msgstr ""
+msgstr "<p>Google Analytics'i Web sitenize bağlayın.</p>"
 
 #: inc/admin/admin.php:3330
 msgid "<p>Configure your Google Analytics tracking code.</p>"
-msgstr ""
+msgstr "<p>Google Analytics izleme kodunuzu yapılandırın.</p>"
 
 #: inc/admin/admin.php:3335
 msgid "<p>Track events in Google Analytics.</p>"
-msgstr ""
+msgstr "<p>Google Analytics'teki etkinlikleri izleyin.</p>"
 
 #: inc/admin/admin.php:3340
 msgid ""
@@ -2426,240 +2574,284 @@ msgid ""
 "Please note that you also have to setup your custom dimensions in your "
 "Google Analytics account. More info by clicking on the help icon."
 msgstr ""
+"<p>Google Analytics özel boyutlarınızı yapılandırın. <br>Özel boyutlar ve "
+"SEOPress özel ölçümlerde varsayılan boyutlar ve metrikler gibidir. "
+"Analytics'in otomatik olarak takip etmediği verileri toplayın ve analiz "
+"edin. <br>Lütfen unutmayın sizinde özel boyutlarınıza Google Analytics "
+"hesabı kurulum gerekir. Yardım simgesine tıklayarak daha fazla bilgi."
 
 #: inc/admin/admin.php:3350
 msgid "Guide to create custom dimensions in Google Analytics - new window"
-msgstr ""
+msgstr "Google Analytics özel boyutlar oluşturma için kılavuz - yeni pencere"
 
 #: inc/admin/admin.php:3355
 msgid "<p>Advanced SEO options.</p>"
-msgstr ""
+msgstr "<p>Gelişmiş SEO seçenekleri.</p>"
 
 #: inc/admin/admin.php:3360
 msgid "<p>Customize SEOPress to fit your needs.</p>"
-msgstr ""
+msgstr "<p>İhtiyaçlarınızı karşılamak için SEOPress'i özelleştirin.</p>"
 
 #: inc/admin/admin.php:3365
 msgid "<p>Manage security.</p>"
-msgstr ""
+msgstr "<p>Güvenliği yönetin.</p>"
 
 #: inc/admin/admin.php:3378
 msgid "Enter your separator, eg: \"-\""
-msgstr ""
+msgstr "Ayırıcı girin, örneğin: \"-\""
 
 #: inc/admin/admin.php:3382
 #, php-format
 msgid "Use this separator with %%sep%% in your title and meta description."
-msgstr ""
+msgstr "Bu ayırıcı %%sep%% ile başlık ve meta açıklamasında kullanın."
 
 #: inc/admin/admin.php:3388
 msgid "My awesome website"
-msgstr ""
+msgstr "Benim muhteşem web sitem"
 
 #: inc/admin/admin.php:3393 inc/admin/admin.php:3404 inc/admin/admin.php:3446
 #: inc/admin/admin.php:3565 inc/admin/admin.php:3598 inc/admin/admin.php:3683
 #: inc/admin/admin.php:3759 inc/admin/admin.php:3829 inc/admin/admin.php:3898
 #: inc/admin/admin.php:3948
 msgid "More tags"
-msgstr ""
+msgstr "Daha fazla etiket"
 
 #: inc/admin/admin.php:3399
 msgid "This is a cool website about Wookiees"
-msgstr ""
+msgstr "Bu Wookiees hakkında harika bir Web sitesi"
 
 #: inc/admin/admin.php:3407
 msgid "Looking to edit your blog page?"
-msgstr ""
+msgstr "Blog sayfanızı düzenlemek için mi arıyorsunuz?"
 
 #: inc/admin/admin.php:3420 inc/admin/admin.php:3536 inc/admin/admin.php:3660
 #: inc/admin/admin.php:3748 inc/admin/admin.php:3818 inc/admin/admin.php:3887
 #: inc/admin/admin.php:3939
 msgid "Title template"
-msgstr ""
+msgstr "Başlık şablonu"
 
 #: inc/admin/admin.php:3453 inc/admin/admin.php:3574 inc/admin/admin.php:3690
 #: inc/admin/admin.php:3765 inc/admin/admin.php:3835 inc/admin/admin.php:3904
 #: inc/admin/admin.php:3954
 msgid "Meta description template"
-msgstr ""
+msgstr "Meta açıklama şablonu"
 
 #: inc/admin/admin.php:3476
 msgid ""
 "Do not display this single post type in search engine results "
 "<strong>(noindex)</strong>"
 msgstr ""
+"Bu tek yazı türünü arama motoru sonuçlarında görüntüleme <strong>(noindex)</"
+"strong>"
 
 #: inc/admin/admin.php:3495
 msgid ""
 "Do not follow links for this single post type <strong>(nofollow)</strong>"
 msgstr ""
+"Bu tek yazı türü <strong>(nofollow)</strong> için bağlantıları takip etme"
 
 #: inc/admin/admin.php:3514
 msgid "Display date in Google search results?"
-msgstr ""
+msgstr "Google arama sonuçlarında görüntüleme tarihi?"
 
 #: inc/admin/admin.php:3556
 msgid "Category Title"
-msgstr ""
+msgstr "Kategori başlığı"
 
 #: inc/admin/admin.php:3558
 msgid "Tag Title"
-msgstr ""
+msgstr "Etiket başlığı"
 
 #: inc/admin/admin.php:3560
 msgid "Term Title"
-msgstr ""
+msgstr "Terim başlığı"
 
 #: inc/admin/admin.php:3591
 msgid "Category Description"
-msgstr ""
+msgstr "Kategori açıklaması"
 
 #: inc/admin/admin.php:3593
 msgid "Tag Description"
-msgstr ""
+msgstr "Etiket açıklaması"
 
 #: inc/admin/admin.php:3595
 msgid "Term Description"
-msgstr ""
+msgstr "Terim açıklaması"
 
 #: inc/admin/admin.php:3613
 msgid ""
 "Do not display this taxonomy archive in search engine results "
 "<strong>(noindex)</strong>"
 msgstr ""
+"Bu taksonomi arşivini arama motoru sonuçlarında görüntüleme "
+"<strong>(noindex)</strong>"
 
 #: inc/admin/admin.php:3632
 msgid ""
 "Do not follow links for this taxonomy archive <strong>(nofollow)</strong>"
 msgstr ""
+"Bu taksonomi arşivi <strong>(nofollow)</strong> için bağlantıları takip etme"
 
 #: inc/admin/admin.php:3652
 msgid "See archive"
-msgstr ""
+msgstr "Bkz. Arşiv"
 
 #: inc/admin/admin.php:3679
 msgid "Post Type Archive Name"
-msgstr ""
+msgstr "Yazı türü arşiv adı"
 
 #: inc/admin/admin.php:3713
 msgid ""
 "Do not display this post type archive in search engine results "
 "<strong>(noindex)</strong>"
 msgstr ""
+"Arama motoru sonuçlarında bu yazı türü arşivi görüntülemeyin "
+"<strong>(noindex)</strong>"
 
 #: inc/admin/admin.php:3732
 msgid ""
 "Do not follow links for this post type archive <strong>(nofollow)</strong>"
 msgstr ""
+"Bu yazı türü arşiv için bağlantıları takip etme <strong>(nofollow)</strong>"
 
 #: inc/admin/admin.php:3746
 msgid "Author archives"
-msgstr ""
+msgstr "Yazar arşivler"
 
 #: inc/admin/admin.php:3789
+#, fuzzy
+#| msgid ""
+#| "Do not display this taxonomy archive in search engine results "
+#| "<strong>(noindex)</strong>"
 msgid ""
 "Do not display author archives in search engine results <strong>(noindex)</"
 "strong>"
 msgstr ""
+"Bu taksonomi arşivini arama motoru sonuçlarında görüntüleme "
+"<strong>(noindex)</strong>"
 
 #: inc/admin/admin.php:3807
 msgid "Disable author archives"
-msgstr ""
+msgstr "Yazar arşivleri devre dışı bırak"
 
 #: inc/admin/admin.php:3816 inc/admin/admin.php:3827
 msgid "Date archives"
-msgstr ""
+msgstr "Tarih arşivleri"
 
 #: inc/admin/admin.php:3858
+#, fuzzy
+#| msgid ""
+#| "Do not display this post type archive in search engine results "
+#| "<strong>(noindex)</strong>"
 msgid ""
 "Do not display date archives in search engine results <strong>(noindex)</"
 "strong>"
 msgstr ""
+"Arama motoru sonuçlarında bu yazı türü arşivi görüntülemeyin "
+"<strong>(noindex)</strong>"
 
 #: inc/admin/admin.php:3876
 msgid "Disable date archives"
-msgstr ""
+msgstr "Tarih arşivlerini devre dışı bırak"
 
 #: inc/admin/admin.php:3885
 msgid "Search archives"
-msgstr ""
+msgstr "Arama arşivleri"
 
 #: inc/admin/admin.php:3896
 msgid "Search Keywords"
-msgstr ""
+msgstr "Arama anahtar kelimeler"
 
 #: inc/admin/admin.php:3928
+#, fuzzy
+#| msgid ""
+#| "Do not display this taxonomy archive in search engine results "
+#| "<strong>(noindex)</strong>"
 msgid ""
 "Do not display search archives in search engine results <strong>(noindex)</"
 "strong>"
 msgstr ""
+"Bu taksonomi arşivini arama motoru sonuçlarında görüntüleme "
+"<strong>(noindex)</strong>"
 
 #: inc/admin/admin.php:3937
 msgid "404 archives"
-msgstr ""
+msgstr "404 Arşivler"
 
 #: inc/admin/admin.php:3980
 msgid ""
 "Do not display all pages of the site in Google search results and do not "
 "display \"Cached\" links in search results."
 msgstr ""
+"Sitenin tüm sayfalarını Google arama sonuçlarında görüntülemeyin ve arama "
+"sonuçlarında \"Önbelleğe alınmış\" bağlantıları görüntüler."
 
 #: inc/admin/admin.php:3999
 msgid "Do not follow links for all pages."
-msgstr ""
+msgstr "Tüm sayfaların bağlantılarını takip etme."
 
 #: inc/admin/admin.php:4018
 msgid ""
 "Do not use Open Directory project metadata for titles or excerpts for all "
 "pages."
 msgstr ""
+"Tüm başlıklar veya sayfalardan alıntılar için açık dizin projesi meta "
+"verilerini kullanma."
 
 #: inc/admin/admin.php:4037
 msgid "Do not index images from the entire site."
-msgstr ""
+msgstr "Tüm siteden görüntü dizinini kullanma."
 
 #: inc/admin/admin.php:4056
 msgid "Do not display a \"Cached\" link in the Google search results."
 msgstr ""
+"Google arama sonuçlarında \"Önbelleğe alınmış\" bağlantısını görüntüleme."
 
 #: inc/admin/admin.php:4075
 msgid ""
 "Do not display a description in the Google search results for all pages."
 msgstr ""
+"Google arama sonuçlarında tüm sayfalar için bir açıklama görüntülemeyin."
 
 #: inc/admin/admin.php:4094
 msgid "Prevent Google to display a sitelinks searchbox in search results."
 msgstr ""
+"Google'ın arama sonuçlarında site bağlantılarını arama kutusunda "
+"görüntülemesini engelle."
 
 #: inc/admin/admin.php:4111
 msgid "Add rel next/prev link in head of paginated archive pages"
 msgstr ""
+"Sayfalandırılmış arşiv sayfalarının başına rel sonraki/önceki bağlantı ekle"
 
 #: inc/admin/admin.php:4113
 msgid "Learn more on Google website"
-msgstr ""
+msgstr "Google Web sitesinden daha fazla bilgi edinin"
 
 #: inc/admin/admin.php:4140
 msgid "Guide to enable XML Sitemaps - new window"
-msgstr ""
+msgstr "XML site haritaları etkinleştirme kılavuzu - yeni pencere"
 
 #: inc/admin/admin.php:4157
 msgid ""
 "Enable Image Sitemaps (standard images, image galleries, featured image, "
 "WooCommerce product images)"
 msgstr ""
+"Görüntü site haritaları (Standart görüntüler, görüntü galerileri, öne çıkan "
+"görüntü, WooCommerce ürün görüntüleri)"
 
 #: inc/admin/admin.php:4159
 msgid "Images in XML sitemaps are visible only from the source code."
 msgstr ""
+"XML site haritalarındaki görüntüler yalnızca kaynak kodundan görülebilir."
 
 #: inc/admin/admin.php:4169
 msgid "Guide to enable XML image sitemaps - new window"
-msgstr ""
+msgstr "XML görüntü site haritaları etkinleştirmek için kılavuz - yeni pencere"
 
 #: inc/admin/admin.php:4187
 msgid "Enable Video Sitemaps"
-msgstr ""
+msgstr "Video site haritalarını etkinleştir"
 
 #: inc/admin/admin.php:4197
 #, php-format
@@ -2667,14 +2859,17 @@ msgid ""
 "Your video sitemap is empty? Read our guide to learn more about <a href=\"%s"
 "\" target=\"_blank\">adding videos to your sitemap.</a>"
 msgstr ""
+"Video site haritanız boş mu? Haritanıza video ekleme hakkında daha fazla "
+"bilgi edinmek için <a href=\"%s\" target=\" _blank\"> kılavuzumuzu okuyun.</"
+"a>"
 
 #: inc/admin/admin.php:4199
 msgid "Guide to enable XML video sitemaps - new window"
-msgstr ""
+msgstr "XML video site haritaları etkinleştirme kılavuzu - yeni pencere"
 
 #: inc/admin/admin.php:4267 inc/admin/admin.php:4311
 msgid "Include"
-msgstr ""
+msgstr "İçerir"
 
 #: inc/admin/admin.php:4270
 msgid ""
@@ -2684,60 +2879,62 @@ msgstr ""
 
 #: inc/admin/admin.php:4326
 msgid "eg: 2, 28, 68"
-msgstr ""
+msgstr "örneğin: 2, 28, 68"
 
 #: inc/admin/admin.php:4330
 msgid "You can also use this shortcode:"
-msgstr ""
+msgstr "Bu kısa kodu da kullanabilirsiniz:"
 
 #: inc/admin/admin.php:4340
 msgid "eg: 13, 8, 38"
-msgstr ""
+msgstr "örneğin: 13, 8, 38"
 
 #: inc/admin/admin.php:4354
 msgid ""
 "DESC (descending order from highest to lowest values (3, 2, 1; c, b, a))"
-msgstr ""
+msgstr "DESC (en yüksekten en düşük değerlere azalan (3, 2, 1; c, b, a))"
 
 #: inc/admin/admin.php:4357
 msgid "ASC (ascending order from lowest to highest values (1, 2, 3; a, b, c))"
-msgstr ""
+msgstr "ASC (en düşük değerden en yüksek değerlere artan (1, 2, 3; a, b, c))"
 
 #: inc/admin/admin.php:4374
 msgid "Default (date)"
-msgstr ""
+msgstr "Varsayılan (Tarih)"
 
 #: inc/admin/admin.php:4380
 msgid "Modified date"
-msgstr ""
+msgstr "Değiştirilme tarihi"
 
 #: inc/admin/admin.php:4383
 msgid "Post ID"
-msgstr ""
+msgstr "Yazı kimliği"
 
 #: inc/admin/admin.php:4386
+#, fuzzy
+#| msgid "Sort order"
 msgid "Menu order"
-msgstr ""
+msgstr "Sıralama düzeni"
 
 #: inc/admin/admin.php:4404
 msgid "Disable date after each post, page, post type?"
-msgstr ""
+msgstr "Tarihi her yazı, sayfa, yazı türü sonrasında devre dışı bırak?"
 
 #: inc/admin/admin.php:4423
 msgid "Person"
-msgstr ""
+msgstr "Kişi"
 
 #: inc/admin/admin.php:4426
 msgid "Organization"
-msgstr ""
+msgstr "Organizasyon"
 
 #: inc/admin/admin.php:4439
 msgid "eg: Apple"
-msgstr ""
+msgstr "örneğin: Apple"
 
 #: inc/admin/admin.php:4452
 msgid "Select your logo"
-msgstr ""
+msgstr "Logonuzu seçin"
 
 #: inc/admin/admin.php:4456
 msgid "JPG, PNG or GIF allowed."
@@ -2745,116 +2942,122 @@ msgstr ""
 
 #: inc/admin/admin.php:4482
 msgid "eg: +33123456789 (internationalized version required)"
-msgstr ""
+msgstr "örneğin: +33123456789 (Uluslararası sürüm gerekli)"
 
 #: inc/admin/admin.php:4497
 msgid "Customer support"
-msgstr ""
+msgstr "Müşteri desteği"
 
 #: inc/admin/admin.php:4500
 msgid "Technical support"
-msgstr ""
+msgstr "Teknik destek"
 
 #: inc/admin/admin.php:4503
 msgid "Billing support"
-msgstr ""
+msgstr "Faturalandırma desteği"
 
 #: inc/admin/admin.php:4506
 msgid "Bill payment"
-msgstr ""
+msgstr "Fatura ödeme"
 
 #: inc/admin/admin.php:4509
 msgid "Sales"
-msgstr ""
+msgstr "Satış"
 
 #: inc/admin/admin.php:4512
 msgid "Credit card support"
-msgstr ""
+msgstr "Kredi kartı desteği"
 
 #: inc/admin/admin.php:4515
 msgid "Emergency"
-msgstr ""
+msgstr "Acil"
 
 #: inc/admin/admin.php:4518
 msgid "Baggage tracking"
-msgstr ""
+msgstr "Bagaj izleme"
 
 #: inc/admin/admin.php:4521
 msgid "Roadside assistance"
-msgstr ""
+msgstr "Yol yardımı"
 
 #: inc/admin/admin.php:4524
 msgid "Package tracking"
-msgstr ""
+msgstr "Paket izleme"
 
 #: inc/admin/admin.php:4541 inc/admin/admin.php:5115 inc/admin/admin.php:5192
 #: inc/admin/admin.php:5269 inc/admin/admin.php:5346 inc/admin/admin.php:5423
 msgid "None"
-msgstr ""
+msgstr "Hiçbiri"
 
 #: inc/admin/admin.php:4544
 msgid "Toll Free"
-msgstr ""
+msgstr "Ücretsiz"
 
 #: inc/admin/admin.php:4547
 msgid "Hearing impaired supported"
-msgstr ""
+msgstr "İşitme engelli destekli"
 
 #: inc/admin/admin.php:4560
 msgid "eg: https://www.facebook.com/your-page"
-msgstr ""
+msgstr "örneğin: https://www.facebook.com/your-page"
 
 #: inc/admin/admin.php:4573
 msgid "eg: @wp_seopress"
-msgstr ""
+msgstr "örneğin: @wp_seopress"
 
 #: inc/admin/admin.php:4573
 msgid "Twitter Page URL"
-msgstr ""
+msgstr "Twitter URL sayfası"
 
 #: inc/admin/admin.php:4585
 msgid "eg: https://pinterest.com/wpbuy/"
-msgstr ""
+msgstr "örneğin: https://pinterest.com/wpbuy/"
 
 #: inc/admin/admin.php:4597
 msgid "eg: https://www.instagram.com/wp_seopress/"
-msgstr ""
+msgstr "örneğin: https://www.instagram.com/wp_seopress/"
 
 #: inc/admin/admin.php:4609
+#, fuzzy
+#| msgid "eg: https://www.youtube.com/c/SEOPress"
 msgid "eg: https://www.youtube.com/SEOPress"
-msgstr ""
+msgstr "örneğin: https://www.youtube.com/c/SEOPress"
 
 #: inc/admin/admin.php:4621
 msgid "eg: http://linkedin.com/company/seopress/"
-msgstr ""
+msgstr "örneğin: http://linkedin.com/company/seopress/"
 
 #: inc/admin/admin.php:4633
 msgid "eg: https://myspace.com/your-page"
-msgstr ""
+msgstr "örneğin: https://myspace.com/your-page"
 
 #: inc/admin/admin.php:4645
 msgid "eg: https://soundcloud.com/michaelmccannmusic"
-msgstr ""
+msgstr "örneğin: https://soundcloud.com/michaelmccannmusic"
 
 #: inc/admin/admin.php:4657
 msgid "eg: https://your-site.tumblr.com"
-msgstr ""
+msgstr "örneğin: https://your-site.tumblr.com"
 
 #: inc/admin/admin.php:4674
 msgid "Enable OG data"
-msgstr ""
+msgstr "OG verilerini etkinleştir"
 
 #: inc/admin/admin.php:4707
 msgid ""
 "One or more Facebook Page IDs that are associated with a URL in order to "
 "enable link editing and instant article publishing."
 msgstr ""
+"Bir URL ile ilişkili olan bir veya daha fazla Facebook sayfası kimliği "
+"bağlantısı düzenleme ve anlık yazı yayımlama özelliğini etkinleştir."
 
 #: inc/admin/admin.php:4720
 msgid ""
 "The ID (or comma-separated list for properties that can accept multiple IDs) "
 "of an app, person using the app, or Page Graph API object."
 msgstr ""
+"Kimlik (veya birden çok kimlik kabul edebilir özellikleri için virgülle "
+"ayrılmış liste) uygulama veya Page Graph API nesnesi kullanan kişi."
 
 #: inc/admin/admin.php:4732
 msgid ""
@@ -2865,42 +3068,50 @@ msgid ""
 "\"_blank\">More info here</a> <span class=\"dashicons dashicons-external\"></"
 "span>"
 msgstr ""
+"Sitenin uygulamasının Facebook uygulama kimliği. Facebook'un görüşlerini "
+"kullanmak için uygulama kimliğini sayfanıza eklemeniz gerekir. Öngörüler, "
+"Facebook dan sitenize trafik analizini görüntülemenizi sağlar. Uygulama "
+"panonuzda uygulama kimliğini bulun. <a href=\"https://developers.facebook."
+"com/apps/redirect/dashboard\" target=\"_blank\">More info here</a> <span "
+"class=\"dashicons dashicons-external\"></span>"
 
 #: inc/admin/admin.php:4736
 msgid "How to create a Facebook App ID"
-msgstr ""
+msgstr "Bir Facebook uygulaması kimliği nasıl oluşturulur"
 
 #: inc/admin/admin.php:4749
 msgid "Enable Twitter card"
-msgstr ""
+msgstr "Twitter kartları etkinleştir"
 
 #: inc/admin/admin.php:4766
 msgid "Use OG if no Twitter Cards"
-msgstr ""
+msgstr "Eğer Twitter kartları yoksa OG kullan"
 
 #: inc/admin/admin.php:4801
 msgid "Default"
-msgstr ""
+msgstr "Varsayılan"
 
 #: inc/admin/admin.php:4804
 msgid "Large"
-msgstr ""
+msgstr "Büyük"
 
 #: inc/admin/admin.php:4822
 msgid "Enable Google Analytics tracking (Global Site Tag: gtag.js)"
-msgstr ""
+msgstr "Google Analytics izlemeyi etkinleştir (genel site etiketi: gtag.js)"
 
 #: inc/admin/admin.php:4834
 msgid "Enter your Tracking ID (UA-XXXX-XX)"
-msgstr ""
+msgstr "İzleme kimliğinizi girin (UA-XXXX-XX)"
 
 #: inc/admin/admin.php:4838
 msgid "Find your tracking ID"
-msgstr ""
+msgstr "İzleme kimliğinizi bulun"
 
 #: inc/admin/admin.php:4852
 msgid "Request user's consent for analytics tracking (required by GDPR)"
 msgstr ""
+"Analytics izleme için kullanıcının onayını isteyin (GDPR tarafından "
+"gereklidir)"
 
 #: inc/admin/admin.php:4854
 msgid ""
@@ -2908,32 +3119,44 @@ msgid ""
 msgstr ""
 
 #: inc/admin/admin.php:4856
+#, fuzzy
+#| msgid ""
+#| "User roles excluded from tracking will not see the consent message.<br> "
+#| "If you use a caching plugin, you have to exclude this JS file in your "
+#| "settings: <br><strong>/wp-content/plugins/wp-seopress/assets/js/seopress-"
+#| "cookies-ajax.js</strong>"
 msgid ""
 "User roles excluded from tracking will not see the consent message.<br> If "
 "you use a caching plugin, you have to exclude this JS file in your settings: "
 "<br><strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax."
 "js</strong> <br>and this cookie <strong>seopress-user-consent-accept</strong>"
 msgstr ""
+"İzleme dışında bırakılan kullanıcı rolleri onay iletisini göremez.<br> Eğer "
+"bir önbelleğe alma eklentisi kullanıyorsan, bu JS dosyasını ayarlarınızda "
+"dışlamak zorundasın: <br><strong>/wp-content/plugins/wp-seopress/assets/js/"
+"seopress-cookies-ajax.js</strong>"
 
 #: inc/admin/admin.php:4866
 msgid "Hook to add custom tracking code with user consent - new window"
-msgstr ""
+msgstr "Kullanıcı onayı ile özel izleme kodu eklemek için - yeni pencere"
 
 #: inc/admin/admin.php:4879
 msgid "Enter your message (HTML allowed)"
-msgstr ""
+msgstr "Mesajınızı girin (HTML izin verilir)"
 
 #: inc/admin/admin.php:4879
 msgid "This message will only appear if request user's consent is enabled."
-msgstr ""
+msgstr "Bu ileti yalnızca istenilen kullanıcının onayı etkinse görünür."
 
 #: inc/admin/admin.php:4890
 msgid "Hook to filter user consent message - new window"
-msgstr ""
+msgstr "Kullanıcı onay mesajını süzmek için - yeni pencere"
 
 #: inc/admin/admin.php:4892
+#, fuzzy
+#| msgid "HTML tags allowed: strong, em, br, a href"
 msgid "HTML tags allowed: strong, em, br, a href / target"
-msgstr ""
+msgstr "HTML etiketleri izinli: strong, em, br, a href"
 
 #: inc/admin/admin.php:4893
 msgid ""
@@ -2943,11 +3166,11 @@ msgstr ""
 
 #: inc/admin/admin.php:4901 inc/functions/options-google-analytics.php:39
 msgid "Accept"
-msgstr ""
+msgstr "Kabul"
 
 #: inc/admin/admin.php:4901
 msgid "Change the button value"
-msgstr ""
+msgstr "Düğme değerini değiştirme"
 
 #: inc/admin/admin.php:4943
 msgid ""
@@ -2955,6 +3178,9 @@ msgid ""
 "represents a group of users you want to re-engage because of their "
 "likelihood to convert."
 msgstr ""
+"Yeniden pazarlama izleyici tanımlama bilgileri veya mobil reklam kimlikleri "
+"listesi, yeniden meşgul olmak istediğiniz kullanıcıların temsil ettikleri "
+"bir grubu dönüştürme olasılığı."
 
 #: inc/admin/admin.php:4964
 msgid ""
@@ -2962,6 +3188,9 @@ msgid ""
 "anonymizes the address as soon as technically feasible at the earliest "
 "possible stage of the collection network."
 msgstr ""
+"Analytics'in bir müşterisi IP adresi anonimleştirme istediğinde, Analytics "
+"koleksiyon ağının olası aşamasında en kısa sürede teknik olarak mümkün "
+"olduğu gibi adresi anonimleştirir."
 
 #: inc/admin/admin.php:4985
 msgid ""
@@ -2969,6 +3198,9 @@ msgid ""
 "report by automatically differentiating between multiple links to the same "
 "URL on a single page by using link element IDs."
 msgstr ""
+"Gelişmiş bağlantı ilişkilendirme sayfa içi analizinizin doğruluğunu "
+"geliştirir, otomatik olarak birden fazla bağlantılar arasında aynı rapor "
+"bağlantı öğesi kimliklerini URL tek bir sayfada kullanır."
 
 #: inc/admin/admin.php:5006
 msgid ""
@@ -2976,297 +3208,313 @@ msgid ""
 "related sites (such as an ecommerce site and a separate shopping cart site) "
 "as a single session. This is sometimes called site linking."
 msgstr ""
+"Analytics için alan adları arası izleme iki oturumda görmeyi mümkün kılar, "
+"ilgili siteler (örneğin, bir e-ticaret sitesi ve ayrı bir alışveriş sepeti "
+"sitesi) tek bir oturum olarak. Buna bazen site bağlama denir."
 
 #: inc/admin/admin.php:5020
+#, fuzzy
+#| msgid "Enter yours domains (eg: https://www.seopress.org/)"
 msgid "Enter yours domains: seopress.org,sub.seopress.org,sub2.seopress.org"
-msgstr ""
+msgstr "Alan adlarınızı girin (örneğin: https://www.seopress.org/)"
 
 #: inc/admin/admin.php:5037
 msgid "Enable external links tracking"
-msgstr ""
+msgstr "Dış bağlantıları izlemeyi etkinleştir"
 
 #: inc/admin/admin.php:5054
 msgid "Enable download tracking"
-msgstr ""
+msgstr "İndirme izlemeyi etkinleştir"
 
 #: inc/admin/admin.php:5066
 msgid "pdf|docx|pptx|zip"
-msgstr ""
+msgstr "pdf|docx|pptx|zip"
 
 #: inc/admin/admin.php:5070
 msgid "Separate each file type extensions with a pipe \"|\""
-msgstr ""
+msgstr "Her dosya türü uzantılarını bir boru \"|\" ile ayırın"
 
 #: inc/admin/admin.php:5085
 msgid "Enable affiliate/outbound tracking"
-msgstr ""
+msgstr "Ortaklık/giden izlemeyi etkinleştir"
 
 #: inc/admin/admin.php:5097
 msgid "aff|go|out"
-msgstr ""
+msgstr "aff|git|çıkış"
 
 #: inc/admin/admin.php:5101
 msgid "Separate each keyword with a pipe \"|\""
-msgstr ""
+msgstr "Her anahtar kelimeyi bir boru \"|\" ile ayırın"
 
 #: inc/admin/admin.php:5118 inc/admin/admin.php:5195 inc/admin/admin.php:5272
 #: inc/admin/admin.php:5349 inc/admin/admin.php:5426
 msgid "Custom Dimension #1"
-msgstr ""
+msgstr "Özel Boyut #1"
 
 #: inc/admin/admin.php:5121 inc/admin/admin.php:5198 inc/admin/admin.php:5275
 #: inc/admin/admin.php:5352 inc/admin/admin.php:5429
 msgid "Custom Dimension #2"
-msgstr ""
+msgstr "Özel Boyut #2"
 
 #: inc/admin/admin.php:5124 inc/admin/admin.php:5201 inc/admin/admin.php:5278
 #: inc/admin/admin.php:5355 inc/admin/admin.php:5432
 msgid "Custom Dimension #3"
-msgstr ""
+msgstr "Özel Boyut #3"
 
 #: inc/admin/admin.php:5127 inc/admin/admin.php:5204 inc/admin/admin.php:5281
 #: inc/admin/admin.php:5358 inc/admin/admin.php:5435
 msgid "Custom Dimension #4"
-msgstr ""
+msgstr "Özel Boyut #4"
 
 #: inc/admin/admin.php:5130 inc/admin/admin.php:5207 inc/admin/admin.php:5284
 #: inc/admin/admin.php:5361 inc/admin/admin.php:5438
 msgid "Custom Dimension #5"
-msgstr ""
+msgstr "Özel Boyut #5"
 
 #: inc/admin/admin.php:5133 inc/admin/admin.php:5210 inc/admin/admin.php:5287
 #: inc/admin/admin.php:5364 inc/admin/admin.php:5441
 msgid "Custom Dimension #6"
-msgstr ""
+msgstr "Özel Boyut #6"
 
 #: inc/admin/admin.php:5136 inc/admin/admin.php:5213 inc/admin/admin.php:5290
 #: inc/admin/admin.php:5367 inc/admin/admin.php:5444
 msgid "Custom Dimension #7"
-msgstr ""
+msgstr "Özel Boyut #7"
 
 #: inc/admin/admin.php:5139 inc/admin/admin.php:5216 inc/admin/admin.php:5293
 #: inc/admin/admin.php:5370 inc/admin/admin.php:5447
 msgid "Custom Dimension #8"
-msgstr ""
+msgstr "Özel Boyut #8"
 
 #: inc/admin/admin.php:5142 inc/admin/admin.php:5219 inc/admin/admin.php:5296
 #: inc/admin/admin.php:5373 inc/admin/admin.php:5450
 msgid "Custom Dimension #9"
-msgstr ""
+msgstr "Özel Boyut #9"
 
 #: inc/admin/admin.php:5145 inc/admin/admin.php:5222 inc/admin/admin.php:5299
 #: inc/admin/admin.php:5376 inc/admin/admin.php:5453
 msgid "Custom Dimension #10"
-msgstr ""
+msgstr "Özel Boyut #10"
 
 #: inc/admin/admin.php:5148 inc/admin/admin.php:5225 inc/admin/admin.php:5302
 #: inc/admin/admin.php:5379 inc/admin/admin.php:5456
 msgid "Custom Dimension #11"
-msgstr ""
+msgstr "Özel Boyut #11"
 
 #: inc/admin/admin.php:5151 inc/admin/admin.php:5228 inc/admin/admin.php:5305
 #: inc/admin/admin.php:5382 inc/admin/admin.php:5459
 msgid "Custom Dimension #12"
-msgstr ""
+msgstr "Özel Boyut #12"
 
 #: inc/admin/admin.php:5154 inc/admin/admin.php:5231 inc/admin/admin.php:5308
 #: inc/admin/admin.php:5385 inc/admin/admin.php:5462
 msgid "Custom Dimension #13"
-msgstr ""
+msgstr "Özel Boyut #13"
 
 #: inc/admin/admin.php:5157 inc/admin/admin.php:5234 inc/admin/admin.php:5311
 #: inc/admin/admin.php:5388 inc/admin/admin.php:5465
 msgid "Custom Dimension #14"
-msgstr ""
+msgstr "Özel Boyut #14"
 
 #: inc/admin/admin.php:5160 inc/admin/admin.php:5237 inc/admin/admin.php:5314
 #: inc/admin/admin.php:5391 inc/admin/admin.php:5468
 msgid "Custom Dimension #15"
-msgstr ""
+msgstr "Özel Boyut #15"
 
 #: inc/admin/admin.php:5163 inc/admin/admin.php:5240 inc/admin/admin.php:5317
 #: inc/admin/admin.php:5394 inc/admin/admin.php:5471
 msgid "Custom Dimension #16"
-msgstr ""
+msgstr "Özel Boyut #16"
 
 #: inc/admin/admin.php:5166 inc/admin/admin.php:5243 inc/admin/admin.php:5320
 #: inc/admin/admin.php:5397 inc/admin/admin.php:5474
 msgid "Custom Dimension #17"
-msgstr ""
+msgstr "Özel Boyut #17"
 
 #: inc/admin/admin.php:5169 inc/admin/admin.php:5246 inc/admin/admin.php:5323
 #: inc/admin/admin.php:5400 inc/admin/admin.php:5477
 msgid "Custom Dimension #18"
-msgstr ""
+msgstr "Özel Boyut #18"
 
 #: inc/admin/admin.php:5172 inc/admin/admin.php:5249 inc/admin/admin.php:5326
 #: inc/admin/admin.php:5403 inc/admin/admin.php:5480
 msgid "Custom Dimension #19"
-msgstr ""
+msgstr "Özel Boyut #19"
 
 #: inc/admin/admin.php:5175 inc/admin/admin.php:5252 inc/admin/admin.php:5329
 #: inc/admin/admin.php:5406 inc/admin/admin.php:5483
 msgid "Custom Dimension #20"
-msgstr ""
+msgstr "Özel Boyut #20"
 
 #: inc/admin/admin.php:5501
 msgid "Redirect attachment pages to post parent (or homepage if none)"
-msgstr ""
+msgstr "Ek sayfaları üst posta (yoksa anasayfaya) yeniden yönlendirin"
 
 #: inc/admin/admin.php:5518
+#, fuzzy
+#| msgid "Remove WordPress meta generator in source code"
 msgid "Remove ?replytocom link in source code"
-msgstr ""
+msgstr "WordPress meta jeneratör kaynak kodunu çıkar"
 
 #: inc/admin/admin.php:5535
 msgid "Add TINYMCE editor to term description"
-msgstr ""
+msgstr "TINYMCE editörü terim açıklamaya ekle"
 
 #: inc/admin/admin.php:5552
 msgid "Remove stop words in permalinks"
-msgstr ""
+msgstr "Kalıcı bağlantılardan durdurma kelimelerini kaldır"
 
 #: inc/admin/admin.php:5552
 msgid ""
 "Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
-msgstr ""
+msgstr "Site diline göre ayar. Desteklenen dil EN, FR, ES, DE, IT, PT."
 
 #: inc/admin/admin.php:5569
 msgid "Remove /category/ in your permalinks"
-msgstr ""
+msgstr "Kalıcı bağlantılardan /kategori/ kaldır"
 
 #: inc/admin/admin.php:5569
 msgid "You have to flush your permalinks each time you change this settings"
 msgstr ""
+"Bu ayarları ne zaman değiştirirsen, sizin kalıcı bağlantıları "
+"güncellemelisiniz"
 
 #: inc/admin/admin.php:5586
 msgid ""
 "You must check this box if the structure of your permalinks DOES NOT contain "
 "a slash at the end (eg: /%postname%)"
 msgstr ""
+"Sizin kalıcı bağlantıları içermiyorsa, bu kutuyu kontrol etmelisiniz sonunda "
+"bir eğik çizgi (örneğin: /%postname%)"
 
 #: inc/admin/admin.php:5603
 msgid "Remove WordPress meta generator in source code"
-msgstr ""
+msgstr "WordPress meta jeneratör kaynak kodunu çıkar"
 
 #: inc/admin/admin.php:5620
 msgid "Remove WordPress shortlink meta tag in source code (eg:"
 msgstr ""
+"WordPress kısa bağlantı meta etiket içinden kaynak kodunu çıkar (örneğin:"
 
 #: inc/admin/admin.php:5637
 msgid "Remove Windows Live Writer meta tag in source code (eg:"
-msgstr ""
+msgstr "Windows Live Writer meta etiketini kaynak kodundan kaldır (örneğin:"
 
 #: inc/admin/admin.php:5654
 msgid "Remove Really Simple Discovery meta tag in source code (eg:"
-msgstr ""
+msgstr "Kaynak kodundaki gerçekten basit keşif meta etiketini kaldır (örneğin:"
 
 #: inc/admin/admin.php:5666
 msgid "Enter Google meta value site verification"
-msgstr ""
+msgstr "Google meta değeri site doğrulamasını girin"
 
 #: inc/admin/admin.php:5671
 msgid ""
 "If your site is already verified in <strong>Google Search Console</strong>, "
 "you can leave this field empty."
 msgstr ""
+"Siteniz <strong>Google Search Console</strong>'da zaten doğrulanmışsa, bu "
+"alanı boş bırakabilirsiniz."
 
 #: inc/admin/admin.php:5680
 msgid "Enter Bing meta value site verification"
-msgstr ""
+msgstr "Bing meta değer site doğrulamasını girin"
 
 #: inc/admin/admin.php:5684
 msgid ""
 "If your site is already verified in <strong>Bing Webmaster tools</strong>, "
 "you can leave this field empty."
 msgstr ""
+"Siteniz <strong>Bing Web Yöneticisi Araçları</strong>'nda zaten "
+"doğrulanmışsa, bu alanı boş bırakabilirsiniz."
 
 #: inc/admin/admin.php:5693
 msgid "Enter Pinterest meta value site verification"
-msgstr ""
+msgstr "Pinterest meta değeri site doğrulamasını girin"
 
 #: inc/admin/admin.php:5705
 msgid "Enter Yandex meta value site verification"
-msgstr ""
+msgstr "Yandex meta değer site doğrulamasını girin"
 
 #: inc/admin/admin.php:5722
 msgid "Remove SEOPress from Admin Bar in backend and frontend"
-msgstr ""
+msgstr "Arka ve önyüz yönetici çubuğundan SEOPress'i kaldır"
 
 #: inc/admin/admin.php:5738
 msgid "High priority (top)"
-msgstr ""
+msgstr "Yüksek öncelik (üst)"
 
 #: inc/admin/admin.php:5741
 msgid "Normal priority (default)"
-msgstr ""
+msgstr "Normal öncelik (varsayılan)"
 
 #: inc/admin/admin.php:5744
 msgid "Low priority"
-msgstr ""
+msgstr "Düşük öncelik"
 
 #: inc/admin/admin.php:5762
 msgid "Hide Notifications Center in SEOPress Dashboard page"
-msgstr ""
+msgstr "SEOPress pano sayfasında bildirimler merkezini gizle"
 
 #: inc/admin/admin.php:5779
 msgid "Hide SEO tools in SEOPress Dashboard page"
-msgstr ""
+msgstr "SEOPress pano sayfasında SEO araçlarını gizle"
 
 #: inc/admin/admin.php:5796
 msgid "Hide Useful Links in SEOPress dashboard page"
-msgstr ""
+msgstr "SEOPress pano sayfasında yararlı bağlantıları gizle"
 
 #: inc/admin/admin.php:5813
 msgid "Add title column"
-msgstr ""
+msgstr "Başlık sütunu ekle"
 
 #: inc/admin/admin.php:5830
 msgid "Add meta description column"
-msgstr ""
+msgstr "Meta açıklama sütunu ekle"
 
 #: inc/admin/admin.php:5847
 msgid "Add redirection enable column"
-msgstr ""
+msgstr "Yeniden yönlendirme sütunu etkinleştiri ekle"
 
 #: inc/admin/admin.php:5864
 msgid "Add redirection URL column"
-msgstr ""
+msgstr "Yeniden yönlendirme URL sütunu ekle"
 
 #: inc/admin/admin.php:5881
 msgid "Add canonical URL column"
-msgstr ""
+msgstr "Kurallı URL sütun ekle"
 
 #: inc/admin/admin.php:5898
 msgid "Add target keyword column"
-msgstr ""
+msgstr "Hedef anahtar sözcük sütunu ekle"
 
 #: inc/admin/admin.php:5915
 msgid "Display noindex status"
-msgstr ""
+msgstr "Noindex durumunu göster"
 
 #: inc/admin/admin.php:5932
 msgid "Display nofollow status"
-msgstr ""
+msgstr "Nofollow durumunu göster"
 
 #: inc/admin/admin.php:5949
 msgid "Display total number of words in content"
-msgstr ""
+msgstr "İçerikte toplam sözcük sayısını göster"
 
 #: inc/admin/admin.php:5966
 msgid "Display W3C column to check code quality"
-msgstr ""
+msgstr "Kod kalitesini kontrol etmek için W3C sütununu göster"
 
 #: inc/admin/admin.php:5984
 msgid "Display Page Speed column to check performances"
-msgstr ""
+msgstr "Performansları kontrol etmek için sayfa hızı sütununu göster"
 
 #: inc/admin/admin.php:6002
 msgid "Remove Genesis SEO Metabox"
-msgstr ""
+msgstr "Genesis SEO Metabox'u kaldır"
 
 #: inc/admin/admin.php:6019
 msgid "Remove Genesis SEO link in WP Admin Menu"
-msgstr ""
+msgstr "WP Admin menü içinde Genesis SEO bağlantıyı kaldır"
 
 #: inc/admin/admin.php:6036
 msgid "Remove the advice if None schema selected"
@@ -3276,32 +3524,38 @@ msgstr ""
 msgid ""
 "Hook to filter Structured data types metabox call by post type - new window"
 msgstr ""
+"Yapısal veri türleri filtreleme için metabox çağrı yazı türü - yeni pencere"
 
 #: inc/admin/adminbar.php:63
 msgid "BOT"
-msgstr ""
+msgstr "BOT"
 
 #: inc/admin/adminbar.php:87
 msgid "Broken Links"
-msgstr ""
+msgstr "Kırık linkler"
 
-#: inc/admin/ajax.php:76
+#: inc/admin/ajax.php:80
 msgid "To get your Google snippet preview, publish your post!"
-msgstr ""
+msgstr "Google snippet önizlemesini almak için yazınızı yayınlayın!"
 
 #: inc/functions/options-advanced-admin.php:13
 msgid "Welcome to SEOPress PRO!"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:14
+#, fuzzy
+#| msgid "You have to enter your licence key to get updates and support"
 msgid ""
 "Please activate your license to receive automatic updates and get premium "
 "support."
 msgstr ""
+"Güncellemeler ve destek almak için lisans anahtarınızı girmeniz gerekir"
 
 #: inc/functions/options-advanced-admin.php:15
+#, fuzzy
+#| msgid "License"
 msgid "Activate License"
-msgstr ""
+msgstr "Lisans"
 
 #: inc/functions/options-advanced-admin.php:21
 msgid "Need help?"
@@ -3310,153 +3564,173 @@ msgstr ""
 #: inc/functions/options-advanced-admin.php:169
 #: inc/functions/options-advanced-admin.php:635
 msgid "Title tag"
-msgstr ""
+msgstr "Başlık etiketi"
 
 #: inc/functions/options-advanced-admin.php:172
 msgid "Meta Desc."
-msgstr ""
+msgstr "Meta açıklama."
 
 #: inc/functions/options-advanced-admin.php:175
 msgid "Redirect?"
-msgstr ""
+msgstr "Yeniden yönlendirme?"
 
 #: inc/functions/options-advanced-admin.php:181
 #: inc/functions/options-advanced-admin.php:659
 msgid "Canonical"
-msgstr ""
+msgstr "Kurallı"
 
 #: inc/functions/options-advanced-admin.php:184
 msgid "Target Kw"
-msgstr ""
+msgstr "Hedef Kw"
 
 #: inc/functions/options-advanced-admin.php:187
 msgid "Noindex?"
-msgstr ""
+msgstr "Noindex?"
 
 #: inc/functions/options-advanced-admin.php:190
 msgid "Nofollow?"
-msgstr ""
+msgstr "Nofollow?"
 
 #: inc/functions/options-advanced-admin.php:193
 msgid "Count words?"
-msgstr ""
+msgstr "Kelime sayım?"
 
 #: inc/functions/options-advanced-admin.php:196
 msgid "W3C check"
-msgstr ""
+msgstr "W3C denetimi"
 
 #: inc/functions/options-advanced-admin.php:199
 msgid "Page Speed"
-msgstr ""
+msgstr "Sayfa hızı"
 
 #: inc/functions/options-advanced-admin.php:252
 msgid "Check code quality of this page"
-msgstr ""
+msgstr "Bu sayfanın kod kalitesini kontrol et"
 
 #: inc/functions/options-advanced-admin.php:256
 msgid "Analyze this page with Google Page Speed"
-msgstr ""
+msgstr "Bu sayfayı Google sayfa hızıyla analiz edin"
 
 #: inc/functions/options-advanced-admin.php:339
 msgid "Enable noindex"
-msgstr ""
+msgstr "Noindex'i etkinleştir"
 
 #: inc/functions/options-advanced-admin.php:392
 msgid "Enable index"
-msgstr ""
+msgstr "Dizini etkinleştir"
 
 #: inc/functions/options-advanced-admin.php:445
 msgid "Enable nofollow"
-msgstr ""
+msgstr "Nofollow'u etkinleştir"
 
 #: inc/functions/options-advanced-admin.php:497
 msgid "Enable follow"
-msgstr ""
+msgstr "Follow'u etkinleştir"
 
 #: inc/functions/options-advanced-admin.php:544
 msgid "Enable redirection"
-msgstr ""
+msgstr "Yeniden yönlendirme etkinleştir"
 
 #: inc/functions/options-advanced-admin.php:583
 msgid "Disable redirection"
-msgstr ""
+msgstr "Yeniden yönlendirmeyi devre dışı bırak"
 
 #: inc/functions/options-advanced-admin.php:757
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
 #: inc/functions/options-advanced-admin.php:766
 msgid ""
 "The description is not prominent by default; however, some themes may show "
 "it."
 msgstr ""
+"Açıklama varsayılan olarak belirgin değildir; Ancak, bazı temalar "
+"gösterebilir."
 
 #: inc/functions/options-google-analytics.php:24
+#, fuzzy
+#| msgid ""
+#| "By visiting our site, you agree to our privacy policy regarding cookies, "
+#| "tracking statistics etc ..."
 msgid ""
 "By visiting our site, you agree to our privacy policy regarding cookies, "
 "tracking statistics etc.&nbsp;<a href=\"[seopress_privacy_page]\" tabindex="
 "\"10\">Read more</a>"
 msgstr ""
+"Sitemizi ziyaret ederek, çerezler ile ilgili gizlilik politikasını kabul "
+"etmiş olursunuz, istatistik vb izleme..."
 
 #: inc/functions/options-google-analytics.php:26
+#, fuzzy
+#| msgid ""
+#| "By visiting our site, you agree to our privacy policy regarding cookies, "
+#| "tracking statistics etc ..."
 msgid ""
 "By visiting our site, you agree to our privacy policy regarding cookies, "
 "tracking statistics etc."
 msgstr ""
+"Sitemizi ziyaret ederek, çerezler ile ilgili gizlilik politikasını kabul "
+"etmiş olursunuz, istatistik vb izleme..."
 
 #: inc/functions/options-google-analytics.php:42
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #: inc/functions/options-google-analytics.php:332
 msgid "Authors"
-msgstr ""
+msgstr "Yazarlar"
 
 #: inc/functions/options-google-analytics.php:351
 msgid "Categories"
-msgstr ""
+msgstr "Kategoriler"
 
 #: inc/functions/options-google-analytics.php:377
 msgid "Tags"
-msgstr ""
+msgstr "Etiketler"
 
 #: inc/functions/options-google-analytics.php:391
 msgid "Post types"
-msgstr ""
+msgstr "Yazı türleri"
 
 #: inc/functions/options-google-analytics.php:405
 msgid "Connected users"
-msgstr ""
+msgstr "Bağlı kullanıcılar"
 
 #: inc/functions/options-import-export.php:51
 msgid "Please upload a valid .json file"
-msgstr ""
+msgstr "Lütfen geçerli bir .json dosyası yükleyin"
 
 #: inc/functions/options-import-export.php:55
 #: inc/functions/options-import-export.php:92
 msgid "Please upload a file to import"
-msgstr ""
+msgstr "Lütfen içe aktarmak için bir dosya yükleyin"
 
 #: inc/functions/options-import-export.php:88
 msgid "Please upload a valid .csv file"
-msgstr ""
+msgstr "Lütfen geçerli bir .csv dosyası yükleyin"
 
 #: inc/functions/sitemap/template-xml-sitemaps-xsl.php:110
 msgid "XML Sitemaps"
-msgstr ""
+msgstr "XML Site Haritası"
 
 #: seopress.php:265
 msgid "You like SEOPress? Don't forget to rate it 5 stars!"
-msgstr ""
+msgstr "SEOPress den memnun musun? 5 yıldız vermeyi unutmayın!"
 
 #: seopress.php:311
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
 #: seopress.php:312
 msgid "SEOPress.org"
-msgstr ""
+msgstr "SEOPress.org"
 
 #: seopress.php:314
 msgid "GO PRO!"
-msgstr ""
+msgstr "Pro versiyona git!"
+
+#~ msgid "Google + URL"
+#~ msgstr "Google + URL"
+
+#~ msgid "eg: https://plus.google.com/+BenjaminDenis"
+#~ msgstr "örneğin: https://plus.google.com/+BenjaminDenis"

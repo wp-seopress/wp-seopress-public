@@ -127,10 +127,10 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                 global $tag;
                 if (get_the_title()) {
                     echo '<div class="snippet-title-default" style="display:none">'.get_the_title().' - '.get_bloginfo('name').'</div>
-                    <div class="snippet-permalink">'.urldecode(get_permalink()).'</div>';
+                    <div class="snippet-permalink">'.htmlspecialchars(urldecode(get_permalink())).'</div>';
                 } elseif ($tag) {
                     echo '<div class="snippet-title-default" style="display:none">'.$tag->name.' - '.get_bloginfo('name').'</div>';
-                    echo '<div class="snippet-permalink">'.urldecode(get_term_link($tag)).'</div>';
+                    echo '<div class="snippet-permalink">'.htmlspecialchars(urldecode(get_term_link($tag))).'</div>';
                 }
 
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
@@ -184,7 +184,7 @@ echo               '<div class="snippet-description">...</div>
             </p>
             <p>
                 <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
-                <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').urldecode(get_permalink()).'" aria-label="'.__('Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
+                <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').htmlspecialchars(urldecode(get_permalink())).'" aria-label="'.__('Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
             </p>';
             if ($typenow =='post' && ($pagenow == 'post.php' || $pagenow == 'post-new.php')) {
                 echo '<p>

@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.4+
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.3.9
+Stable tag: 3.3.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Arabic</li>
 	<li>Chinese</li>
 	<li>Persian</li>
+	<li>Turkish</li>
 	<li>Japanese (in progress)</li>
 </ul>
 
@@ -161,6 +162,11 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.10 =
+* NEW Content analysis for all page builders / themes
+* NEW Add Turkish language
+* INFO Improve CSS
+* FIX Security
 = 3.3.9 =
 * NEW WP 5.1 compatibility
 * NEW German language updated by WP Translations

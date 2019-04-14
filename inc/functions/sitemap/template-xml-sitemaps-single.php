@@ -49,7 +49,7 @@ function seopress_xml_sitemap_single() {
 					$seopress_sitemaps .= '<url>';
 				  	$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<loc>';
-					$seopress_sitemaps .= urldecode(get_post_type_archive_link($path));
+					$seopress_sitemaps .= htmlspecialchars(urldecode(get_post_type_archive_link($path)));
 					$seopress_sitemaps .= '</loc>';
 					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '</url>';
@@ -68,7 +68,7 @@ function seopress_xml_sitemap_single() {
 				  	$seopress_sitemaps .= '<url>';
 				  	$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<loc>';
-					$seopress_sitemaps .= urldecode(get_permalink($post));
+					$seopress_sitemaps .= htmlspecialchars(urldecode(get_permalink($post)));
 					$seopress_sitemaps .= '</loc>';
 					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<lastmod>';
@@ -131,7 +131,7 @@ function seopress_xml_sitemap_single() {
 										        $seopress_sitemaps .= '<image:image>';
 										        $seopress_sitemaps .= "\n";
 										       	$seopress_sitemaps .= '<image:loc>';
-												$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses($url))).']]>';
+												$seopress_sitemaps .= '<![CDATA['.htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url)))).']]>';
 										        $seopress_sitemaps .= '</image:loc>';
 										        $seopress_sitemaps .= "\n";
 										        $seopress_sitemaps .= '</image:image>';
@@ -152,7 +152,7 @@ function seopress_xml_sitemap_single() {
 										$seopress_sitemaps .= '<image:image>';
 										$seopress_sitemaps .= "\n";
 								       	$seopress_sitemaps .= '<image:loc>';
-										$seopress_sitemaps .= '<![CDATA['.urldecode(esc_attr(wp_filter_nohtml_kses($url))).']]>';
+										$seopress_sitemaps .= '<![CDATA['.htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url)))).']]>';
 								        $seopress_sitemaps .= '</image:loc>';
 								        $seopress_sitemaps .= "\n";
 								        $seopress_sitemaps .= '</image:image>';

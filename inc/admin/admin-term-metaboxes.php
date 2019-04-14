@@ -160,7 +160,8 @@ function seopress_display_seo_term_metaboxe() {
         wp_enqueue_script( 'seopress-cpt-tabs-js', plugins_url( 'assets/js/seopress-tabs2.js', dirname(dirname(__FILE__ ))), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION);
 
         if ("seopress_404" != $typenow) {
-            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery' ), SEOPRESS_VERSION );
+            //Register Google Snippet Preview / Content Analysis JS
+            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
 
             $seopress_real_preview = array(
                 'seopress_nonce' => wp_create_nonce('seopress_real_preview_nonce'),

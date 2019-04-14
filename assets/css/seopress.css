@@ -89,6 +89,7 @@
 
 #seopress_content_analysis .wrap-analysis-img ul {
     display: flex;
+    flex-wrap: wrap;
 }
 
 #seopress_content_analysis .wrap-analysis-img ul li {
@@ -129,13 +130,15 @@
     margin: 0;
     border-radius: 0;
     padding: 0;
-    background: #edeff0;
+    background: #f3f4f5;
     border: none;
 }
 
 #seopress_content_analysis .ui-tabs .ui-tabs-nav {
     width: calc(100% + 24px);
     margin: 0 0 0 -12px;
+    position: sticky;
+    top: 0;
 }
 
 #seopress_content_analysis .ui-tabs .ui-tabs-nav {
@@ -284,6 +287,10 @@
 #seopress_cpt .google-snippet-preview {
     font-family: arial,sans-serif;
     word-break: break-all;
+}
+
+#seopress_cpt .google-snippet-preview > p {
+    word-break: normal;
 }
 
 #seopress_cpt .google-snippet-preview .snippet-title,#seopress_cpt .google-snippet-preview .snippet-title-custom,#seopress_cpt .google-snippet-preview .snippet-title-default {

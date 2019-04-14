@@ -28,7 +28,7 @@ function seopress_xml_sitemap_single_term() {
 	  	$seopress_sitemaps .= '<url>';
 	  	$seopress_sitemaps .= "\n";
 		$seopress_sitemaps .= '<loc>';
-		$seopress_sitemaps .= urldecode(esc_url(get_term_link($term)));
+		$seopress_sitemaps .= htmlspecialchars(urldecode(esc_url(get_term_link($term))));
 		$seopress_sitemaps .= '</loc>';
 		$seopress_sitemaps .= "\n";
 		$seopress_sitemaps .= '</url>';
