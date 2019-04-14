@@ -1256,7 +1256,7 @@ class seopress_options
                                             if ($seopress_results_reverse_domain_array !='') {
                                                 echo '<ul>';
                                                     foreach ($seopress_results_reverse_domain_array as $key => $value) {
-                                                        echo '<li><span class="dashicons dashicons-minus"></span><a href="'.$value[0].'" target="_blank">'.$value[0].'</a><span class="dashicons dashicons-external"></span></li>';
+                                                        echo '<li><span class="dashicons dashicons-minus"></span><a href="'.$value[0].'" target="_blank">//'.$value[0].'</a><span class="dashicons dashicons-external"></span></li>';
                                                     }
                                                 echo '</ul>';
                                             }
@@ -4842,6 +4842,8 @@ class seopress_options
         echo ' value="1"/>';
         
         echo '<label for="seopress_google_analytics_disable">'. __( 'Request user\'s consent for analytics tracking (required by GDPR)', 'wp-seopress' ) .'</label>';
+
+        echo '<p class="advise" style="margin:10px 0 0 0">'.__('<strong>The user must click the Accept button to allow tracking.</strong>','wp-seopress').'</p>';
 
         echo '<p class="description">'.__('User roles excluded from tracking will not see the consent message.<br> If you use a caching plugin, you have to exclude this JS file in your settings: <br><strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</strong> <br>and this cookie <strong>seopress-user-consent-accept</strong>','wp-seopress').'</p>';
 

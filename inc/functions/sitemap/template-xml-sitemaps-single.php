@@ -57,7 +57,7 @@ function seopress_xml_sitemap_single() {
 				}
 			}
 	
-				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '' );
+				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '', 'has_password' => false );
 
 				$args = apply_filters('seopress_sitemaps_single_query', $args, $path);
 
@@ -84,11 +84,12 @@ function seopress_xml_sitemap_single() {
 						if (get_post_field('post_content', $post) !='') {
 							$dom = new domDocument;
 							$internalErrors = libxml_use_internal_errors(true);
+							$post_content = get_post_field('post_content', $post);
 
 						    if (function_exists('mb_convert_encoding')) {
-						    	$dom->loadHTML(mb_convert_encoding(do_shortcode(get_post_field('post_content', $post)), 'HTML-ENTITIES', 'UTF-8'));
+						    	$dom->loadHTML(mb_convert_encoding($post_content, 'HTML-ENTITIES', 'UTF-8'));
 						    } else {
-						    	$dom->loadHTML('<?xml encoding="utf-8" ?>'.do_shortcode(get_post_field('post_content', $post)));
+						    	$dom->loadHTML('<?xml encoding="utf-8" ?>'.$post_content);
 							}
 
 							$dom->preserveWhiteSpace = false;

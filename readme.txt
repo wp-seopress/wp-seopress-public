@@ -6,7 +6,7 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 5.0
 Requires PHP: 5.4
-Stable tag: 3.3.4
+Stable tag: 3.3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,6 +161,14 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.5 =
+* INFO Add admin notice for License / automatic update (PRO)
+* INFO Password posts are now excluded by default from XML Sitemaps
+* FIX Video / Image sitemaps
+* FIX SEO tools URLs
+* FIX Notice: do_shortcode_tag was called incorrectly in XML Sitemaps
+* FIX Progress-bar CSS conflict with WPML
+* FIX PHP Warning: htmlspecialchars(): charset 'UTF-8;' not supported, assuming utf-8 (to fix bad server PHP configuration)
 = 3.3.4 =
 * FIX Notice: Undefined variable: seopress_social_og_thumb
 = 3.3.3 =

@@ -249,7 +249,7 @@
     background: #fdfdfd;
 }
 
-#seopress_content_analysis .advise,#seopress_cpt .advise,#seopress_pro_cpt .advise {
+#seopress_content_analysis .advise,#seopress_cpt .advise,#seopress_pro_cpt .advise, .seopress-option .advise {
     margin: 5px;
     display: block;
     color: red;

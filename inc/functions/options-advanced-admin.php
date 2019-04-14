@@ -4,6 +4,21 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //MANDATORY for using is_plugin_active
 include_once(ABSPATH.'wp-admin/includes/plugin.php');
 
+//Admin notices
+//=================================================================================================
+//License notice
+if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+    function seopress_notice_license() {
+        $class = 'notice notice-error';
+        $message = '<strong>'.__( 'Welcome to SEOPress PRO!', 'wp-seopress' ).'</strong>';
+        $message .= '<p>'.__( 'Please activate your license to receive automatic updates and get premium support.', 'wp-seopress' ).'</p>';
+        $message .= '<a class="button button-primary" href="'.admin_url( 'admin.php?page=seopress-license' ).'">'.__('Activate License', 'wp-seopress').'</a>';
+
+        printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); 
+    }
+    add_action( 'admin_notices', 'seopress_notice_license' );
+}
+
 //Advanced
 //=================================================================================================
 
