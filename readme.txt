@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.4+
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.3.12
+Stable tag: 3.3.13
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,12 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.13 =
+* INFO Update updater
+* FIX The link has expired with very specific configurations
+* FIX Can't save PRO options with some configurations
+* FIX PHP Notice: Trying to get property of non-object in options-redirections.php on line 18
+* FIX CSS admin body class hook
 = 3.3.12 =
 * NEW Support Redirects with parameters (PRO)
 * NEW Add Argentina Peso currency (PRO)

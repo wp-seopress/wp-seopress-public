@@ -15,9 +15,11 @@ function seopress_redirections_enabled() {
 }
 
 function seopress_redirections_term_enabled() {
-	$_seopress_redirections_enabled = get_term_meta(get_queried_object()->{'term_id'},'_seopress_redirections_enabled',true);
-	if ($_seopress_redirections_enabled != '') {
-		return $_seopress_redirections_enabled;
+	if (get_queried_object_id()) {
+		$_seopress_redirections_enabled = get_term_meta(get_queried_object_id(),'_seopress_redirections_enabled',true);
+		if ($_seopress_redirections_enabled != '') {
+			return $_seopress_redirections_enabled;
+		}
 	}
 }
 
@@ -31,9 +33,11 @@ function seopress_redirections_type() {
 }
 
 function seopress_redirections_term_type() {
-	$_seopress_redirections_type = get_term_meta(get_queried_object()->{'term_id'},'_seopress_redirections_type',true);
-	if ($_seopress_redirections_type != '') {
-		return $_seopress_redirections_type;
+	if (get_queried_object_id()) {
+		$_seopress_redirections_type = get_term_meta(get_queried_object_id(),'_seopress_redirections_type',true);
+		if ($_seopress_redirections_type != '') {
+			return $_seopress_redirections_type;
+		}
 	}
 }
 
@@ -43,8 +47,8 @@ function seopress_redirections_value() {
 	if (is_singular() && get_post_meta($post->ID,'_seopress_redirections_value',true)) {
 		$seopress_redirections_value = get_post_meta($post->ID,'_seopress_redirections_value',true);
 		return $seopress_redirections_value;
- 	} elseif ((is_tax() || is_category() || is_tag()) && get_term_meta(get_queried_object()->{'term_id'},'_seopress_redirections_value',true) !='') {
-		$seopress_redirections_value = get_term_meta(get_queried_object()->{'term_id'},'_seopress_redirections_value',true);
+ 	} elseif ((is_tax() || is_category() || is_tag()) && get_term_meta(get_queried_object_id(),'_seopress_redirections_value',true) !='') {
+		$seopress_redirections_value = get_term_meta(get_queried_object_id(),'_seopress_redirections_value',true);
 		return $seopress_redirections_value;
 	} else {
 		$seopress_redirections_value = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));

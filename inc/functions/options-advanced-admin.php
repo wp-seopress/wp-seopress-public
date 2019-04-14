@@ -712,8 +712,9 @@ function seopress_bulk_quick_edit_save_post($post_id) {
         return;
     }
 
-    $_POST += array("seopress_title_edit_nonce" => '');
-    if (!wp_verify_nonce($_POST["seopress_title_edit_nonce"], plugin_basename( __FILE__ ))) {
+    $_REQUEST += array("seopress_title_edit_nonce" => '');
+
+    if (!wp_verify_nonce($_REQUEST["seopress_title_edit_nonce"], plugin_basename( __FILE__ ))) {
         return;
     }
     if (isset($_REQUEST['seopress_title'])) {

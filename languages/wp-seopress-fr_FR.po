@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2019-03-10 14:37+0100\n"
-"PO-Revision-Date: 2019-03-10 14:39+0100\n"
+"POT-Creation-Date: 2019-03-20 18:56+0100\n"
+"PO-Revision-Date: 2019-03-20 18:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: fr_FR\n"
@@ -1760,7 +1760,9 @@ msgstr ""
 "d'URL pour résoudre cela."
 
 #: inc/admin/admin.php:1053
-msgid "You RSS feed show full text!"
+#, fuzzy
+#| msgid "You RSS feed show full text!"
+msgid "Your RSS feed show full text!"
 msgstr "Votre flux RSS affiche le texte complet !"
 
 #: inc/admin/admin.php:1054 inc/admin/admin.php:1133 inc/admin/admin.php:1146
@@ -3682,11 +3684,11 @@ msgstr "Activer redirection"
 msgid "Disable redirection"
 msgstr "Désactiver redirection"
 
-#: inc/functions/options-advanced-admin.php:783
+#: inc/functions/options-advanced-admin.php:784
 msgid "Description"
 msgstr "Description"
 
-#: inc/functions/options-advanced-admin.php:792
+#: inc/functions/options-advanced-admin.php:793
 msgid ""
 "The description is not prominent by default; however, some themes may show "
 "it."

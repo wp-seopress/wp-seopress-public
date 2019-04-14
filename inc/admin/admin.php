@@ -1050,7 +1050,7 @@ class seopress_options
                                                 <div id="notice-rss-use-excerpt-alert" class="seopress-alert deleteable">
                                                     <p>
                                                         <span class="dashicons dashicons-warning"></span>
-                                                        <?php _e('You RSS feed show full text!','wp-seopress'); ?>
+                                                        <?php _e('Your RSS feed show full text!','wp-seopress'); ?>
                                                         <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
                                                     </p>
                                                     <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>

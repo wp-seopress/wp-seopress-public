@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.3.12
+Version: 3.3.13
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.3.12' ); 
+define( 'SEOPRESS_VERSION', '3.3.13' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -224,7 +224,7 @@ add_action( 'admin_print_scripts-edit.php', 'seopress_add_admin_options_scripts_
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Admin Body Class
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-add_filter( 'admin_body_class', 'seopress_admin_body_class', 9 );
+add_filter( 'admin_body_class', 'seopress_admin_body_class', 100 );
 function seopress_admin_body_class( $classes ) {
     if ((isset($_GET['page']) && ($_GET['page'] == 'seopress-option'))
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-network-option'))
@@ -237,7 +237,7 @@ function seopress_admin_body_class( $classes ) {
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-pro-page'))
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-bot-batch'))
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-license'))) {
-        return $classes."seopress-styles";
+        return $classes." seopress-styles";
     }
 }
 
