@@ -14,7 +14,9 @@ function seopress_do_real_preview() {
             $cookies = array();
     
             foreach ( $_COOKIE as $name => $value ) {
-                $cookies[] = new WP_Http_Cookie( array( 'name' => $name, 'value' => $value ) );
+                if ( 'PHPSESSID' !== $name ) {
+                    $cookies[] = new WP_Http_Cookie( array( 'name' => $name, 'value' => $value ) );
+                }
             }
         }
            
@@ -61,7 +63,8 @@ function seopress_do_real_preview() {
         //Get source code
         $args = array(
             'blocking' => true,
-            'timeout'  => 30
+            'timeout'  => 30,
+            'sslverify'   => false,
         );
 
         if (isset($cookies) && !empty($cookies)) {
@@ -69,6 +72,8 @@ function seopress_do_real_preview() {
         }
 
         $args = apply_filters('seopress_real_preview_remote', $args);
+
+        $data['title'] = $cookies;
 
         if ($seopress_origin =='post') { //Default: post type
             $response = wp_remote_get(get_preview_post_link((int)$seopress_get_the_id), $args);
