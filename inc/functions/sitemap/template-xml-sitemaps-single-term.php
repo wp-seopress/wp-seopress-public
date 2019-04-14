@@ -15,7 +15,10 @@ add_filter( 'seopress_sitemaps_single_term_query', function( $args ) {
 });
 
 function seopress_xml_sitemap_single_term() {
-	$path = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), ".xml");
+	if( get_query_var( 'seopress_cpt') !== '' ) {
+		$path = get_query_var( 'seopress_cpt');
+	}
+
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_home_url().'/sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";

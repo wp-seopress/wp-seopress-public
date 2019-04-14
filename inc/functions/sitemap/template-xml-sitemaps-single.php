@@ -27,14 +27,29 @@ function seopress_xml_sitemap_img_enable_option() {
 }
 
 function seopress_xml_sitemap_single() {
-	$path = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), ".xml");
+	if( get_query_var( 'seopress_cpt') !== '' ) {
+		$path = get_query_var( 'seopress_cpt');
+	}
+
+	$offset = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), ".xml");
+	$offset = preg_match_all('/\d+/', $offset, $matches);
+	$offset = end($matches[0]);
+
+
+	if (isset($offset) && absint($offset) && $offset !='' && $offset !=0) {
+		$offset = (($offset-1)*1000);
+	} else {
+		$offset = 0;
+	}
+
+
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_home_url().'/sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 	$seopress_sitemaps .= "\n";
 
-			if (get_post_type_archive_link($path) ==true) {
+			if (get_post_type_archive_link($path) ==true && $offset ==0) {
 				function seopress_titles_cpt_noindex_option($path) {
 					$seopress_titles_cpt_noindex_option = get_option("seopress_titles_option_name");
 					if ( ! empty ( $seopress_titles_cpt_noindex_option ) ) {
@@ -57,11 +72,12 @@ function seopress_xml_sitemap_single() {
 				}
 			}
 	
-				$args = array( 'posts_per_page' => 1000, 'order'=> 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '', 'has_password' => false );
+				$args = array( 'posts_per_page' => 1000, 'offset' => $offset, 'order' => 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '', 'has_password' => false );
 
 				$args = apply_filters('seopress_sitemaps_single_query', $args, $path);
 
 				$postslist = get_posts( $args );
+
 				foreach ( $postslist as $post ) {
 				  	setup_postdata( $post );
 

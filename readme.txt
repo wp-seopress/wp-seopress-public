@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.4+
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.3.13.1
+Stable tag: 3.3.14
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,11 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.14 =
+* NEW Paginated XML Sitemaps (NGINX USERS READ THIS PLEASE: you must update your nginx configuration file. More info here: https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/)
+* NEW Add categories for redirects (PRO)
+* FIX Redirects with parameters in specific cases
+* FIX CSS admin body class
 = 3.3.13.1 =
 * FIX CSS admin body class
 = 3.3.13 =

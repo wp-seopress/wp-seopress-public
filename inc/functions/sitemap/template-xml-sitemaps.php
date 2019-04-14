@@ -26,25 +26,55 @@ function seopress_xml_sitemap_index() {
 		foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
 			foreach ($cpt_value as $_cpt_key => $_cpt_value) {
 				if($_cpt_value =='1') {
-					$args = array('post_type' => $cpt_key, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'orderby' => 'modified', 'lang' => '', 'has_password' => false, 'suppress_filters' => true);
-					
-					$args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
 
-					$get_latest_post = new WP_Query($args);
+					$count_posts = wp_count_posts($cpt_key);
 
-				    if($get_latest_post->have_posts()){
-						$seopress_sitemaps .= "\n";
-						$seopress_sitemaps .= '<sitemap>';
-						$seopress_sitemaps .= "\n";
-						$seopress_sitemaps .= '<loc>';
-						$seopress_sitemaps .= home_url().'/sitemaps/'.$cpt_key.'.xml';
-						$seopress_sitemaps .= '</loc>';
-				    	$seopress_sitemaps .= "\n";
-						$seopress_sitemaps .= '<lastmod>';
-				        $seopress_sitemaps .= date("c", strtotime($get_latest_post->posts[0]->post_modified));
-				        $seopress_sitemaps .= '</lastmod>';
-						$seopress_sitemaps .= "\n";
-						$seopress_sitemaps .= '</sitemap>';
+					if (isset($count_posts->publish)) {
+						$published_posts = $count_posts->publish;
+					}
+
+					if ($published_posts >= 1000) {
+						$max_loop = $published_posts / 1000;
+					} else {
+						$max_loop = 1;
+					}
+
+					$paged ='';
+					$i = '';
+					for ($i=0; $i < $max_loop ; $i++) {
+
+						if (isset($offset) && absint($offset) && $offset !='' && $offset !=0) {
+							$offset = ((($i)*1000));
+						} else {
+							$offset = 0;
+						}
+
+						if ($i >= 1 && $i <= $max_loop) {
+							$paged = $i+1;
+						} else {
+							$paged = 1;
+						}
+
+						$args = array('post_type' => $cpt_key, 'offset' => $offset, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'orderby' => 'modified', 'lang' => '', 'has_password' => false, 'suppress_filters' => true);
+						
+						$args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
+
+						$get_latest_post = new WP_Query($args);
+
+					    if($get_latest_post->have_posts()){
+							$seopress_sitemaps .= "\n";
+							$seopress_sitemaps .= '<sitemap>';
+							$seopress_sitemaps .= "\n";
+							$seopress_sitemaps .= '<loc>';
+							$seopress_sitemaps .= home_url().'/sitemaps/'.$cpt_key.'-sitemap'.$paged.'.xml';
+							$seopress_sitemaps .= '</loc>';
+					    	$seopress_sitemaps .= "\n";
+							$seopress_sitemaps .= '<lastmod>';
+					        $seopress_sitemaps .= date("c", strtotime($get_latest_post->posts[0]->post_modified));
+					        $seopress_sitemaps .= '</lastmod>';
+							$seopress_sitemaps .= "\n";
+							$seopress_sitemaps .= '</sitemap>';
+						}
 					}
 				}
 			}
@@ -77,7 +107,7 @@ function seopress_xml_sitemap_index() {
 				$seopress_sitemaps .= '<sitemap>';
 				$seopress_sitemaps .= "\n";
 				$seopress_sitemaps .= '<loc>';
-				$seopress_sitemaps .= home_url().'/sitemaps/'.$term_value.'.xml';
+				$seopress_sitemaps .= home_url().'/sitemaps/'.$term_value.'-sitemap.xml';
 				$seopress_sitemaps .= '</loc>';
 				$seopress_sitemaps .= "\n";
 				$seopress_sitemaps .= '</sitemap>';

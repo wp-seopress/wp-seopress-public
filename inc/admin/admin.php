@@ -3232,7 +3232,6 @@ class seopress_options
             echo '</div>';
         }
         echo '<p>'.__('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress').'</p>';
-        echo '<p>'.__('Only the last 1000 items are listed in Sitemaps for performances issues.', 'wp-seopress').'</p>';
         
         if ( isset( $_SERVER['SERVER_SOFTWARE'] )) {
             $server_software = explode('/', $_SERVER['SERVER_SOFTWARE']);
@@ -3243,10 +3242,10 @@ class seopress_options
                     location ~ ([^/]*)sitemap(.*)\.x(m|s)l$ {              
                         ## SEOPress
                         rewrite ^/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
-                        rewrite ^/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;  
-                        rewrite ^/sitemaps/([_0-9a-zA-Z-]+)?\.xml$ /index.php?seopress_cpt=$1 last;
-                        rewrite ^/sitemaps/([_0-9a-zA-Z-]+)?\.xml$ /index.php?seopress_news=$1 last;
-                        rewrite ^/sitemaps/([_0-9a-zA-Z-]+)?\.xml$ /index.php?seopress_video=$1 last;
+                        rewrite ^/sitemaps/news.xml$ /index.php?seopress_news=$1 last;
+                        rewrite ^/sitemaps/video.xml$ /index.php?seopress_video=$1 last;
+                        rewrite ^/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;
+                        rewrite ^/sitemaps/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?seopress_cpt=$1&seopress_paged=$2 last;
                     }
                 </pre>';
             }
