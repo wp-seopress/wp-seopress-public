@@ -223,6 +223,8 @@ class seopress_options
                     <li><span>'.__('%%wc_single_cat%%','wp-seopress').'</span>'.__('Single product category','wp-seopress').'</li>
                     <li><span>'.__('%%wc_single_tag%%','wp-seopress').'</span>'.__('Single product tag','wp-seopress').'</li>
                     <li><span>'.__('%%wc_single_short_desc%%','wp-seopress').'</span>'.__('Single product short description','wp-seopress').'</li>
+                    <li><span>'.__('%%wc_single_price%%','wp-seopress').'</span>'.__('Single product price','wp-seopress').'</li>
+                    <li><span>'.__('%%wc_single_price_exc_tax%%','wp-seopress').'</span>'.__('Single product price taxes excluded','wp-seopress').'</li>
                     <li><span>'.__('%%currentday%%','wp-seopress').'</span>'.__('Current day','wp-seopress').'</li>
                     <li><span>'.__('%%currentmonth%%','wp-seopress').'</span>'.__('Current month','wp-seopress').'</li>
                     <li><span>'.__('%%currentyear%%','wp-seopress').'</span>'.__('Current year','wp-seopress').'</li>

@@ -184,8 +184,24 @@ echo               '<div class="snippet-description">...</div>
             </p>
             <p>
                 <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
-                <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').get_permalink().'" aria-label="'.__('Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
+                <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').urldecode(get_permalink()).'" aria-label="'.__('Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
             </p>';
+            if ($typenow =='post' && ($pagenow == 'post.php' || $pagenow == 'post-new.php')) {
+                echo '<p>
+                    <label for="seopress_robots_primary_cat_meta">'. __( 'Select a primary category', 'wp-seopress' ) .'</label>
+                    <span class="description">'.__('Set the category that gets used in the %category% permalink if you have multiple categories.','wp-seopress').'</p>
+                    <select name="seopress_robots_primary_cat">';
+
+                    $cats = get_categories();
+                    if (!empty($cats)) {
+                        echo '<option '. selected( 'none', $seopress_robots_primary_cat, false ).' value="none">'.__('None (will disable this feature)','wp-seopress').'</option>';
+                        foreach ($cats as $category) {
+                            echo '<option '.selected( $category->term_id, $seopress_robots_primary_cat, false ).' value="'.$category->term_id.'">'. $category->name .'</option>';
+                        }
+                    }
+                    echo '</select>
+                </p>';
+            }
             if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                 if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                     echo '<p>

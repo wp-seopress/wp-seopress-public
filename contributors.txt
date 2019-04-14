@@ -17,11 +17,11 @@ Beta testers / feedbacks:
 - Ludovic Riaudel: @lriaudel
 
 Translators:
-- French: Didier Wolforg, @rainbowgeek, and Clément Polito
+- French: Didier Wolforg, @rainbowgeek, and Clément Polito + WP-Translations
 - English: @rainbowgeek + WP-Translations
 - Italian: Déborah Donnier @deborahdonnier
 - Spanish: Rafael Salguero + WP-Translations
-- German: @likemike2425
+- German: @likemike2425 + WP-Translations
 - Japan: @s_tayama and @miccweb
 - Dutch: Sebastiaan Hendriks
 - Vietnamese: Anh

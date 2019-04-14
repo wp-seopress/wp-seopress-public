@@ -178,7 +178,7 @@
     border-bottom: 3px solid #0085ba;
 }
 
-#seopress_content_analysis label,#seopress_cpt #tabs-1 label,#seopress_cpt #tabs-2 label[for=seopress_robots_breadcrumbs_meta],#seopress_cpt #tabs-2 label[for=seopress_robots_canonical_meta],#seopress_cpt #tabs-3 label,#seopress_cpt #tabs-4 label,#seopress_cpt #tabs-5 label,#seopress_cpt #tabs-6 label,#seopress_cpt .subsection-title,#seopress_pro_cpt label {
+#seopress_content_analysis label,#seopress_cpt #tabs-1 label,#seopress_cpt #tabs-2 label[for=seopress_robots_breadcrumbs_meta],#seopress_cpt #tabs-2 label[for=seopress_robots_canonical_meta],#seopress_cpt #tabs-2 label[for=seopress_robots_primary_cat_meta],#seopress_cpt #tabs-3 label,#seopress_cpt #tabs-4 label,#seopress_cpt #tabs-5 label,#seopress_cpt #tabs-6 label,#seopress_cpt .subsection-title,#seopress_pro_cpt label {
     display: block;
     margin: 20px 0 5px;
     font-weight: 700;
@@ -621,6 +621,7 @@ body.seopress-styles {
     background: RGB(106,124,148);
     position: relative;
     height: auto;
+    z-index: 10;
 }
 
 .seopress-styles .seopress-option #seopress-yoast-migrate:hover, .seopress-styles .seopress-option #seopress-aio-migrate:hover, .seopress-styles .seopress-option #seopress-seo-framework-migrate:hover, .seopress-styles .seopress-option #submit:hover {

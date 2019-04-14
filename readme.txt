@@ -4,9 +4,9 @@ Contributors: rainbowgeek
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.4+
-Tested up to: 5.0
+Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.3.8.1
+Stable tag: 3.3.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,6 +161,17 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.9 =
+* NEW WP 5.1 compatibility
+* NEW German language updated by WP Translations
+* NEW Select a primary category for post permalink
+* NEW WooCommerce dynamic variables for title / meta desc: price with taxes (%%wc_single_price%%), price without taxes (%%wc_single_price_exc_tax%%)
+* INFO Better URL encoding for canonical / dc.relation / dc.source / og.url
+* INFO Add is_wp_error checks for custom taxonomy in title tag
+* FIX Canonical URL for old permalink
+* FIX redirects with + sign
+* FIX CSS in Tools blocking buttons
+* FIX og:image:alt esc_attr
 = 3.3.8.1 =
 * FIX Remove Google +
 = 3.3.8 =

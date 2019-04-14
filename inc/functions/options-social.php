@@ -334,9 +334,9 @@ function seopress_social_facebook_og_url_hook() {
 		}
 
 		if (is_search()) {
-			$seopress_social_og_url = '<meta property="og:url" content="'.get_home_url().'/search/'.get_search_query().'" />';
+			$seopress_social_og_url = '<meta property="og:url" content="'.urldecode(get_home_url().'/search/'.get_search_query()).'" />';
 		} else {
-			$seopress_social_og_url = '<meta property="og:url" content="'.htmlspecialchars($current_url,ENT_COMPAT, 'UTF-8').'" />';
+			$seopress_social_og_url = '<meta property="og:url" content="'.urldecode(htmlspecialchars($current_url,ENT_COMPAT, 'UTF-8')).'" />';
 		}
 
 		//Hook on post OG URL - 'seopress_social_og_url'
@@ -714,7 +714,7 @@ function seopress_social_fb_img_size_from_url($url) {
 
 		//OG:IMAGE:ALT
 		if (get_post_meta($post_id, '_wp_attachment_image_alt', true) !='') {
-			$seopress_social_og_img .= '<meta property="og:image:alt" content="'.get_post_meta($post_id, '_wp_attachment_image_alt', true).'" />';
+			$seopress_social_og_img .= '<meta property="og:image:alt" content="'.esc_attr(get_post_meta($post_id, '_wp_attachment_image_alt', true)).'" />';
 			$seopress_social_og_img .= "\n";
 		}
 

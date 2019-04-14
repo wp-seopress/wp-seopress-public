@@ -303,6 +303,21 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		    require_once ( dirname( __FILE__ ) . '/options-advanced-admin-sw.php'); //Advanced (stop words)
 		}
 	}
+	//primary category
+    if (!is_admin()){
+	    function seopress_titles_primary_cat_hook($cats_0,  $cats,  $post) {
+	        $_seopress_robots_primary_cat = get_post_meta(get_the_ID(),'_seopress_robots_primary_cat',true);
+	        if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {
+	            $cats_0 = $_seopress_robots_primary_cat;
+	            return $cats_0;
+	        } else {
+	        	//no primary cat
+	        	return $cats_0;
+	        }
+		    
+	    }
+	    add_filter( 'post_link_category', 'seopress_titles_primary_cat_hook', 10, 3 ); 
+    }
 	//No /category/ in URL
 	function seopress_advanced_advanced_category_url_option() {
 		$seopress_advanced_advanced_category_url_option = get_option("seopress_advanced_option_name");

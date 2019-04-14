@@ -316,9 +316,13 @@ function seopress_titles_the_title() {
 	}
 	
 	$woo_single_cat_html ='';
+	$woo_single_tag_html ='';
+	$woo_single_price ='';
+	$woo_single_price_exc_tax ='';
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
 		if (is_product()) {
+			//Woo Cat product
 			$woo_single_cats = get_the_terms( $post->ID, 'product_cat' );
 	                         
 			if ( $woo_single_cats && ! is_wp_error( $woo_single_cats ) ) {
@@ -331,13 +335,8 @@ function seopress_titles_the_title() {
 	                         
 			    $woo_single_cat_html = stripslashes_deep(wp_filter_nohtml_kses(join( ", ", $woo_single_cat )));
 			}
-		}
-	}
 
-	$woo_single_tag_html ='';
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-	if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
-		if (is_product()) {
+			//Woo Tag product
 			$woo_single_tags = get_the_terms( $post->ID, 'product_tag' );
 	                         
 			if ( $woo_single_tags && ! is_wp_error( $woo_single_tags ) ) {
@@ -350,6 +349,14 @@ function seopress_titles_the_title() {
 
 			    $woo_single_tag_html = stripslashes_deep(wp_filter_nohtml_kses(join( ", ", $woo_single_tag )));
 			}
+
+			//Woo Price
+			$product = wc_get_product($post->ID);
+			$woo_single_price = wc_get_price_including_tax( $product );
+
+			//Woo Price tax excluded
+			$product = wc_get_product($post->ID);
+			$woo_single_price_exc_tax = wc_get_price_excluding_tax( $product );
 		}
 	}
 
@@ -382,6 +389,8 @@ function seopress_titles_the_title() {
 		'%%wc_single_cat%%',
 		'%%wc_single_tag%%',
 		'%%wc_single_short_desc%%',
+		'%%wc_single_price%%',
+		'%%wc_single_price_exc_tax%%',
 		'%%currentday%%',
 		'%%currentmonth%%',
 		'%%currentyear%%',
@@ -418,6 +427,8 @@ function seopress_titles_the_title() {
 		$woo_single_cat_html,
 		$woo_single_tag_html,
 		$seopress_get_the_excerpt,
+		$woo_single_price,
+		$woo_single_price_exc_tax,
 		date_i18n('j'),
 		date_i18n('F'),
 		date('Y'),
@@ -484,7 +495,9 @@ function seopress_titles_the_title() {
 
 				foreach ($matches2['1'] as $key => $value) {
 					$term = wp_get_post_terms( $post->ID, $value );
-					$seopress_titles_ct_template_replace_array[] = $term[0]->name;
+					if (!is_wp_error($term)) {
+						$seopress_titles_ct_template_replace_array[] = $term[0]->name;
+					}
 				}
 			}
 
@@ -532,7 +545,9 @@ function seopress_titles_the_title() {
 
 				foreach ($matches2['1'] as $key => $value) {
 					$term = wp_get_post_terms( $post->ID, $value );
-					$seopress_titles_ct_template_replace_array[] = $term[0]->name;
+					if (!is_wp_error($term)) {
+						$seopress_titles_ct_template_replace_array[] = $term[0]->name;
+					}
 				}
 			}
 
@@ -663,9 +678,13 @@ function seopress_titles_the_description_content() {
 	}
 
 	$woo_single_cat_html ='';
+	$woo_single_tag_html ='';
+	$woo_single_price ='';
+	$woo_single_price_exc_tax ='';
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
 		if (is_product()) {
+			//Woo Cat product
 			$woo_single_cats = get_the_terms( $post->ID, 'product_cat' );
 	                         
 			if ( $woo_single_cats && ! is_wp_error( $woo_single_cats ) ) {
@@ -678,13 +697,8 @@ function seopress_titles_the_description_content() {
 	                         
 			    $woo_single_cat_html = stripslashes_deep(wp_filter_nohtml_kses(join( ", ", $woo_single_cat )));
 			}
-		}
-	}
 
-	$woo_single_tag_html ='';
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-	if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
-		if (is_product()) {
+			//Woo Tag product
 			$woo_single_tags = get_the_terms( $post->ID, 'product_tag' );
 	                         
 			if ( $woo_single_tags && ! is_wp_error( $woo_single_tags ) ) {
@@ -697,6 +711,14 @@ function seopress_titles_the_description_content() {
 
 			    $woo_single_tag_html = stripslashes_deep(wp_filter_nohtml_kses(join( ", ", $woo_single_tag )));
 			}
+
+			//Woo Price
+			$product = wc_get_product($post->ID);
+			$woo_single_price = wc_get_price_including_tax( $product );
+
+			//Woo Price tax excluded
+			$product = wc_get_product($post->ID);
+			$woo_single_price_exc_tax = wc_get_price_excluding_tax( $product );
 		}
 	}
 
@@ -734,6 +756,8 @@ function seopress_titles_the_description_content() {
 		'%%wc_single_cat%%',
 		'%%wc_single_tag%%',
 		'%%wc_single_short_desc%%',
+		'%%wc_single_price%%',
+		'%%wc_single_price_exc_tax%%',
 		'%%currentday%%',
 		'%%currentmonth%%',
 		'%%currentyear%%',
@@ -770,6 +794,8 @@ function seopress_titles_the_description_content() {
 		$woo_single_cat_html,
 		$woo_single_tag_html,
 		$seopress_get_the_excerpt,
+		$woo_single_price,
+		$woo_single_price_exc_tax,
 		date_i18n('j'),
 		date_i18n('F'),
 		date('Y'),
@@ -834,7 +860,9 @@ function seopress_titles_the_description_content() {
 
 				foreach ($matches2['1'] as $key => $value) {
 					$term = wp_get_post_terms( $post->ID, $value );
-					$seopress_titles_ct_template_replace_array[] = $term[0]->name;
+					if (!is_wp_error($term)) {
+						$seopress_titles_ct_template_replace_array[] = $term[0]->name;
+					}
 				}
 			}
 
@@ -880,7 +908,9 @@ function seopress_titles_the_description_content() {
 
 				foreach ($matches2['1'] as $key => $value) {
 					$term = wp_get_post_terms( $post->ID, $value );
-					$seopress_titles_ct_template_replace_array[] = $term[0]->name;
+					if (!is_wp_error($term)) {
+						$seopress_titles_ct_template_replace_array[] = $term[0]->name;
+					}
 				}
 			}
 
@@ -1512,7 +1542,7 @@ function seopress_titles_canonical_term_option() {
 if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex_bypass() !='1' && seopress_titles_noindex_bypass() !='yes') {//Remove Canonical if noindex
 	if ( is_singular() && seopress_titles_canonical_post_option()) { //CUSTOM SINGLE CANONICAL
 		function seopress_titles_canonical_post_hook() {
-			$seopress_titles_canonical = '<link rel="canonical" href="'.seopress_titles_canonical_post_option().'" />';
+			$seopress_titles_canonical = '<link rel="canonical" href="'.urldecode(seopress_titles_canonical_post_option()).'" />';
 			//Hook on post canonical URL - 'seopress_titles_canonical'
 			if (has_filter('seopress_titles_canonical')) {
 				$seopress_titles_canonical = apply_filters('seopress_titles_canonical', $seopress_titles_canonical);
@@ -1522,7 +1552,7 @@ if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex
 		add_action( 'wp_head', 'seopress_titles_canonical_post_hook', 1 );
 	} elseif ((is_tax() || is_category() || is_tag()) && seopress_titles_canonical_term_option()) { //CUSTOM TERM CANONICAL
 		function seopress_titles_canonical_term_hook() {
-			$seopress_titles_canonical = '<link rel="canonical" href="'.seopress_titles_canonical_term_option().'" />';
+			$seopress_titles_canonical = '<link rel="canonical" href="'.urldecode(seopress_titles_canonical_term_option()).'" />';
 			//Hook on post canonical URL - 'seopress_titles_canonical'
 			if (has_filter('seopress_titles_canonical')) {
 				$seopress_titles_canonical = apply_filters('seopress_titles_canonical', $seopress_titles_canonical);
@@ -1539,11 +1569,13 @@ if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex
 				$current_url = trailingslashit(home_url(add_query_arg(array(), $wp->request)));
 			}
 			if (is_search()) {
-				$seopress_titles_canonical = '<link rel="canonical" href="'.get_home_url().'/search/'.get_search_query().'" />';
+				$seopress_titles_canonical = '<link rel="canonical" href="'.urldecode(get_home_url().'/search/'.get_search_query()).'" />';
 			} elseif (is_paged()){
-				$seopress_titles_canonical = '<link rel="canonical" href="'.get_pagenum_link('1').'" />';
+				$seopress_titles_canonical = '<link rel="canonical" href="'.urldecode(get_pagenum_link('1')).'" />';
+			} elseif (is_singular()) {
+				$seopress_titles_canonical = '<link rel="canonical" href="'.urldecode(get_permalink()).'" />';
 			} else {
-				$seopress_titles_canonical = '<link rel="canonical" href="'.$current_url.'" />';
+				$seopress_titles_canonical = '<link rel="canonical" href="'.urldecode($current_url).'" />';
 			}
 			//Hook on post canonical URL - 'seopress_titles_canonical'
 			if (has_filter('seopress_titles_canonical')) {
