@@ -727,7 +727,7 @@ if (seopress_advanced_advanced_tax_desc_editor_option() !='' && current_user_can
             remove_filter( 'term_description', 'wp_kses_data' );
 
             //Disallow HTML Tags
-            if ( ! current_user_can( 'unfiltered_html' ) ) {
+            if ( !current_user_can( 'unfiltered_html' ) ) {
                 add_filter( 'pre_term_description', 'wp_kses_post' );
                 add_filter( 'term_description', 'wp_kses_post' );
             }
@@ -739,45 +739,46 @@ if (seopress_advanced_advanced_tax_desc_editor_option() !='' && current_user_can
             add_filter( 'term_description', 'wpautop' );
 
         }
-        function seopress_tax_desc_wp_editor($tag) {
-            global $pagenow;
-            if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
+    }
+    add_action('init', 'seopress_tax_desc_wp_editor_init', 100);
+    
+    function seopress_tax_desc_wp_editor($tag) {
+        global $pagenow;
+        if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
 
-                $content = '';
+            $content = '';
 
-                if ($pagenow == 'term.php') {
-                    $editor_id = 'description';
-                } elseif($pagenow == 'edit-tags.php') {
-                    $editor_id = 'tag-description';
-                }
-
-                ?>
-
-                <tr class="form-field term-description-wrap">
-                    <th scope="row"><label for="description"><?php _e( 'Description' ); ?></label></th>
-                    <td>
-                        <?php
-                        $settings = array(
-                            'textarea_name' => 'description',
-                            'textarea_rows' => 10,
-                        );
-                        wp_editor( htmlspecialchars_decode( $tag->description ), 'html-tag-description', $settings );
-                        ?>
-                        <p class="description"><?php _e( 'The description is not prominent by default; however, some themes may show it.' ); ?></p>
-                    </td>
-                    <script type="text/javascript">
-                        // Remove default description field
-                        jQuery('textarea#description').closest('.form-field').remove();
-                    </script>
-                </tr>
-
-                <?php
+            if ($pagenow == 'term.php') {
+                $editor_id = 'description';
+            } elseif($pagenow == 'edit-tags.php') {
+                $editor_id = 'tag-description';
             }
-        }
-        $seopress_get_taxonomies = seopress_get_taxonomies();
-        foreach ($seopress_get_taxonomies as $key => $value) {
-            add_action($key.'_edit_form_fields', 'seopress_tax_desc_wp_editor', 9, 1);
+
+            ?>
+
+            <tr class="form-field term-description-wrap">
+                <th scope="row"><label for="description"><?php _e( 'Description' ); ?></label></th>
+                <td>
+                    <?php
+                    $settings = array(
+                        'textarea_name' => 'description',
+                        'textarea_rows' => 10,
+                    );
+                    wp_editor( htmlspecialchars_decode( $tag->description ), 'html-tag-description', $settings );
+                    ?>
+                    <p class="description"><?php _e( 'The description is not prominent by default; however, some themes may show it.' ); ?></p>
+                </td>
+                <script type="text/javascript">
+                    // Remove default description field
+                    jQuery('textarea#description').closest('.form-field').remove();
+                </script>
+            </tr>
+
+            <?php
         }
     }
-    add_action('init', 'seopress_tax_desc_wp_editor_init');
+    $seopress_get_taxonomies = seopress_get_taxonomies();
+    foreach ($seopress_get_taxonomies as $key => $value) {
+        add_action($key.'_edit_form_fields', 'seopress_tax_desc_wp_editor', 9, 1);
+    }
 }

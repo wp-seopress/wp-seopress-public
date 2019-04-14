@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.3.10
+Version: 3.3.11
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.3.10' ); 
+define( 'SEOPRESS_VERSION', '3.3.11' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -471,7 +471,7 @@ function seopress_xml_sitemap_taxonomies_list_option() {
 if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xml_sitemap_option() =='1') {
     add_action( 'init', 'seopress_xml_sitemap_rewrite' );
     add_action( 'query_vars', 'seopress_xml_sitemap_query_vars' );
-    add_action( 'template_include', 'seopress_xml_sitemap_change_template', 9999 );
+    add_action( 'template_redirect', 'seopress_xml_sitemap_change_template', 1 );
     add_action( 'template_redirect', 'seopress_xml_sitemap_shortcut', 1);
 
     //WPML compatibility

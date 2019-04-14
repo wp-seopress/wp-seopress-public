@@ -364,6 +364,7 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		            }
 		        }
 		    }
+		    $rules = apply_filters('seopress_category_rewrite_rules', $rules);
 		    return $rules;
 		}
 		add_action('template_redirect', 'seopress_category_redirect', 1);

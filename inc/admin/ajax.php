@@ -64,10 +64,14 @@ function seopress_do_real_preview() {
             'timeout'  => 30
         );
 
+        if (isset($cookies) && !empty($cookies)) {
+            $args['cookies'] = $cookies;
+        }
+
         $args = apply_filters('seopress_real_preview_remote', $args);
 
         if ($seopress_origin =='post') { //Default: post type
-            $response = wp_remote_get(get_permalink((int)$seopress_get_the_id), $args);
+            $response = wp_remote_get(get_preview_post_link((int)$seopress_get_the_id), $args);
         } else { //Term taxonomy
             $response = wp_remote_get(get_term_link((int)$seopress_get_the_id, $seopress_tax_name), $args);
         }

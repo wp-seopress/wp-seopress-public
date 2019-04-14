@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.4+
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.3.10
+Stable tag: 3.3.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,11 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.11 =
+* NEW Add seopress_category_rewrite_rules hook to filter rewrite rules for category taxonomy
+* INFO Content analysis is now working with draft / pending review / published posts
+* FIX Date Picker CSS conflict
+* FIX WP Editor in term description
 = 3.3.10 =
 * NEW Content analysis for all page builders / themes
 * NEW Add Turkish language

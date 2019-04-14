@@ -146,5 +146,5 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='</xsl:stylesheet>';
 
 	return $seopress_sitemaps_xsl;
-} 
+}
 echo seopress_xml_sitemap_index_xsl();
