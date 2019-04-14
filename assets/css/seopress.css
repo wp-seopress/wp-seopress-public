@@ -1,6 +1,7 @@
 #adminmenu div.wp-menu-image.dashicons-admin-seopress::before,#seopress-header #seopress-admin h1::before {
     content: "\e800";
     font-family: seopress !important;
+    font-weight: bold;
 }
 
 #seopress-header #seopress-admin h1::before,.seopress-page-list .seopress-feature h3,.seopress-styles .seopress-option h1 {
@@ -638,7 +639,7 @@ body.seopress-styles {
 }
 
 .seopress-styles #seopress-navbar {
-    padding: 10px 1.5rem;
+    padding: 10px 0.5rem;
     height: 56px;
     margin: 0 auto;
     width: 53rem;
@@ -653,20 +654,26 @@ body.seopress-styles {
 }
 
 #seopress-header #seopress-admin h1 {
-    line-height: 50px;
+    line-height: 40px;
     margin: 0;
     display: inline-block;
-    height: 50px;
-    width: 36px;
+    height: 40px;
+    width: 40px;
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 #seopress-header #seopress-admin h1::before {
-    font-size: 40px;
-    line-height: 45px;
+    font-size: 28px;
+    line-height: 40px;
     position: absolute;
+    background: #23282d;
+    border-radius: 8px;
     font-weight: 400;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    text-align: center;
 }
 
 #seopress-header #seopress-admin h1:hover {

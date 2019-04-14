@@ -461,32 +461,37 @@ function seopress_display_ca_metaboxe() {
 }
 
 if (is_user_logged_in()) {
-    global $wp_roles;
-        
-    //Get current user role
-    if(isset(wp_get_current_user()->roles[0])) {
-        $seopress_user_role = wp_get_current_user()->roles[0];
+    if(is_super_admin()) {
+        echo seopress_display_seo_metaboxe();
+        echo seopress_display_ca_metaboxe();
+    } else {
+        global $wp_roles;
+            
+        //Get current user role
+        if(isset(wp_get_current_user()->roles[0])) {
+            $seopress_user_role = wp_get_current_user()->roles[0];
 
-        //If current user role matchs values from Security settings then apply -- SEO Metaboxe
-        if (function_exists('seopress_advanced_security_metaboxe_role_hook_option') && seopress_advanced_security_metaboxe_role_hook_option() !='') {
-            if( array_key_exists( $seopress_user_role, seopress_advanced_security_metaboxe_role_hook_option())) {
-                //do nothing
+            //If current user role matchs values from Security settings then apply -- SEO Metaboxe
+            if (function_exists('seopress_advanced_security_metaboxe_role_hook_option') && seopress_advanced_security_metaboxe_role_hook_option() !='') {
+                if( array_key_exists( $seopress_user_role, seopress_advanced_security_metaboxe_role_hook_option())) {
+                    //do nothing
+                } else {
+                    echo seopress_display_seo_metaboxe();
+                }
             } else {
                 echo seopress_display_seo_metaboxe();
             }
-        } else {
-            echo seopress_display_seo_metaboxe();
-        }
 
-        //If current user role matchs values from Security settings then apply -- SEO Content Analysis
-        if (function_exists('seopress_advanced_security_metaboxe_ca_role_hook_option') && seopress_advanced_security_metaboxe_ca_role_hook_option() !='') {
-            if( array_key_exists( $seopress_user_role, seopress_advanced_security_metaboxe_ca_role_hook_option())) {
-                //do nothing
+            //If current user role matchs values from Security settings then apply -- SEO Content Analysis
+            if (function_exists('seopress_advanced_security_metaboxe_ca_role_hook_option') && seopress_advanced_security_metaboxe_ca_role_hook_option() !='') {
+                if( array_key_exists( $seopress_user_role, seopress_advanced_security_metaboxe_ca_role_hook_option())) {
+                    //do nothing
+                } else {
+                    echo seopress_display_ca_metaboxe();
+                }
             } else {
                 echo seopress_display_ca_metaboxe();
             }
-        } else {
-            echo seopress_display_ca_metaboxe();
         }
-    }   
+    } 
 }

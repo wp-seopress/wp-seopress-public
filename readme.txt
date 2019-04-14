@@ -6,11 +6,11 @@ Tags: seo, search engine optimization, meta title, open graph, content analysis,
 Requires at least: 4.4+
 Tested up to: 5.0
 Requires PHP: 5.4
-Stable tag: 3.3.5
+Stable tag: 3.3.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-SEOPress is a simple, fast and powerful SEO plugin for WordPress
+SEOPress is a simple, fast and powerful SEO plugin for WordPress.
 
 == Description ==
 
@@ -161,6 +161,13 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.6 =
+* INFO Allow rel attribute in RSS feeds
+* INFO Improve license notification
+* FIX Multisite: metaboxes did not show up if super_admin user role
+* FIX Google News Sitemap (news:title encoding)
+* FIX Count words column (was displaying unique words instead of words)
+* FIX Warning invalid argument for Page Speed
 = 3.3.5 =
 * INFO Add admin notice for License / automatic update (PRO)
 * INFO Password posts are now excluded by default from XML Sitemaps

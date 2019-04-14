@@ -7,12 +7,18 @@ include_once(ABSPATH.'wp-admin/includes/plugin.php');
 //Admin notices
 //=================================================================================================
 //License notice
-if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('wp-seopress-pro/seopress-pro.php') && !is_multisite()) {
     function seopress_notice_license() {
         $class = 'notice notice-error';
         $message = '<strong>'.__( 'Welcome to SEOPress PRO!', 'wp-seopress' ).'</strong>';
         $message .= '<p>'.__( 'Please activate your license to receive automatic updates and get premium support.', 'wp-seopress' ).'</p>';
         $message .= '<a class="button button-primary" href="'.admin_url( 'admin.php?page=seopress-license' ).'">'.__('Activate License', 'wp-seopress').'</a>';
+        if (seopress_get_locale() =='fr') {
+            $sp_license_guide = 'https://www.seopress.org/fr/support/guides/activer-licence-seopress-pro/';
+        } else {
+            $sp_license_guide = 'https://www.seopress.org/support/guides/activate-seopress-pro-license/';
+        }
+        $message .= '<a href="'.$sp_license_guide.'" target="_blank" style="vertical-align: middle;line-height: 28px;margin: 0 0 0 5px;">'.__('Need help?', 'wp-seopress').'</a>';
 
         printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); 
     }
@@ -237,10 +243,7 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
                     if (get_the_content() !='') {
                         $seopress_analysis_data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses(get_the_content())), $matches);
 
-                        $words_counter_unique = count(array_unique($matches[0]));
-                        $seopress_analysis_data['words_counter_unique'] = $words_counter_unique;
-
-                        echo $seopress_analysis_data['words_counter_unique'];
+                        echo $seopress_analysis_data['words_counter'];
                     }
                     break;
 

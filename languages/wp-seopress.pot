@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2019-01-10 20:17+0100\n"
-"PO-Revision-Date: 2019-01-10 20:17+0100\n"
+"POT-Creation-Date: 2019-01-14 20:12+0100\n"
+"PO-Revision-Date: 2019-01-14 20:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: en\n"
@@ -172,7 +172,7 @@ msgstr ""
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:9
 #: inc/admin/admin-metaboxes-content-analysis-form.php:10
-#: inc/functions/options-advanced-admin.php:647
+#: inc/functions/options-advanced-admin.php:650
 msgid "Target keywords"
 msgstr ""
 
@@ -346,7 +346,7 @@ msgstr ""
 #: inc/admin/admin-metaboxes-form.php:109
 #: inc/admin/admin-metaboxes-form.php:110 inc/admin/admin.php:730
 #: inc/admin/admin.php:751 inc/admin/admin.php:770 inc/admin/admin.php:2030
-#: inc/admin/admin.php:3386 inc/functions/options-advanced-admin.php:639
+#: inc/admin/admin.php:3386 inc/functions/options-advanced-admin.php:642
 msgid "Meta description"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:48 inc/admin/admin-metaboxes.php:162
 #: inc/admin/admin-metaboxes.php:164 inc/admin/admin.php:183
-#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:629
+#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:632
 msgid "SEO"
 msgstr ""
 
@@ -1471,7 +1471,7 @@ msgstr ""
 msgid "Meta Robots (noindex, nofollow, noarchive)"
 msgstr ""
 
-#: inc/admin/admin.php:775 inc/functions/options-advanced-admin.php:171
+#: inc/admin/admin.php:775 inc/functions/options-advanced-admin.php:177
 msgid "Redirect URL"
 msgstr ""
 
@@ -3267,85 +3267,89 @@ msgstr ""
 msgid "Activate License"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:162
-#: inc/functions/options-advanced-admin.php:631
-msgid "Title tag"
-msgstr ""
-
-#: inc/functions/options-advanced-admin.php:165
-msgid "Meta Desc."
+#: inc/functions/options-advanced-admin.php:21
+msgid "Need help?"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:168
-msgid "Redirect?"
+#: inc/functions/options-advanced-admin.php:634
+msgid "Title tag"
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:171
+msgid "Meta Desc."
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:174
-#: inc/functions/options-advanced-admin.php:655
-msgid "Canonical"
-msgstr ""
-
-#: inc/functions/options-advanced-admin.php:177
-msgid "Target Kw"
+msgid "Redirect?"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:180
-msgid "Noindex?"
+#: inc/functions/options-advanced-admin.php:658
+msgid "Canonical"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:183
-msgid "Nofollow?"
+msgid "Target Kw"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:186
-msgid "Count words?"
+msgid "Noindex?"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:189
-msgid "W3C check"
+msgid "Nofollow?"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:192
+msgid "Count words?"
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:195
+msgid "W3C check"
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:198
 msgid "Page Speed"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:248
+#: inc/functions/options-advanced-admin.php:251
 msgid "Check code quality of this page"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:252
+#: inc/functions/options-advanced-admin.php:255
 msgid "Analyze this page with Google Page Speed"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:335
+#: inc/functions/options-advanced-admin.php:338
 msgid "Enable noindex"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:388
+#: inc/functions/options-advanced-admin.php:391
 msgid "Enable index"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:441
+#: inc/functions/options-advanced-admin.php:444
 msgid "Enable nofollow"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:493
+#: inc/functions/options-advanced-admin.php:496
 msgid "Enable follow"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:540
+#: inc/functions/options-advanced-admin.php:543
 msgid "Enable redirection"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:579
+#: inc/functions/options-advanced-admin.php:582
 msgid "Disable redirection"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:753
+#: inc/functions/options-advanced-admin.php:756
 msgid "Description"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:762
+#: inc/functions/options-advanced-admin.php:765
 msgid ""
 "The description is not prominent by default; however, some themes may show "
 "it."

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2019-01-10 20:18+0100\n"
-"PO-Revision-Date: 2019-01-10 20:19+0100\n"
+"POT-Creation-Date: 2019-01-14 20:13+0100\n"
+"PO-Revision-Date: 2019-01-14 20:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: fr_FR\n"
@@ -175,7 +175,7 @@ msgstr ""
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:9
 #: inc/admin/admin-metaboxes-content-analysis-form.php:10
-#: inc/functions/options-advanced-admin.php:647
+#: inc/functions/options-advanced-admin.php:650
 msgid "Target keywords"
 msgstr "Mots clés cibles"
 
@@ -359,7 +359,7 @@ msgstr "Aucune balise titre personnalisée définie pour cet article."
 #: inc/admin/admin-metaboxes-form.php:109
 #: inc/admin/admin-metaboxes-form.php:110 inc/admin/admin.php:730
 #: inc/admin/admin.php:751 inc/admin/admin.php:770 inc/admin/admin.php:2030
-#: inc/admin/admin.php:3386 inc/functions/options-advanced-admin.php:639
+#: inc/admin/admin.php:3386 inc/functions/options-advanced-admin.php:642
 msgid "Meta description"
 msgstr "Meta description"
 
@@ -502,7 +502,7 @@ msgstr "Cette page n'a aucun lien avec l'attribut nofollow."
 
 #: inc/admin/admin-metaboxes-form.php:48 inc/admin/admin-metaboxes.php:162
 #: inc/admin/admin-metaboxes.php:164 inc/admin/admin.php:183
-#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:629
+#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:632
 msgid "SEO"
 msgstr "SEO"
 
@@ -1564,7 +1564,7 @@ msgstr "Importer les méta données des posts et termes depuis The SEO Framework
 msgid "Meta Robots (noindex, nofollow, noarchive)"
 msgstr "Meta Robots (noindex, nofollow, noarchive)"
 
-#: inc/admin/admin.php:775 inc/functions/options-advanced-admin.php:171
+#: inc/admin/admin.php:775 inc/functions/options-advanced-admin.php:177
 msgid "Redirect URL"
 msgstr "URL de redirection"
 
@@ -3505,85 +3505,89 @@ msgstr ""
 msgid "Activate License"
 msgstr "Activer Licence"
 
-#: inc/functions/options-advanced-admin.php:162
-#: inc/functions/options-advanced-admin.php:631
+#: inc/functions/options-advanced-admin.php:21
+msgid "Need help?"
+msgstr "Besoin d'aide ?"
+
+#: inc/functions/options-advanced-admin.php:168
+#: inc/functions/options-advanced-admin.php:634
 msgid "Title tag"
 msgstr "Balise Titre"
 
-#: inc/functions/options-advanced-admin.php:165
+#: inc/functions/options-advanced-admin.php:171
 msgid "Meta Desc."
 msgstr "Meta Desc."
 
-#: inc/functions/options-advanced-admin.php:168
+#: inc/functions/options-advanced-admin.php:174
 msgid "Redirect?"
 msgstr "Redirection?"
 
-#: inc/functions/options-advanced-admin.php:174
-#: inc/functions/options-advanced-admin.php:655
+#: inc/functions/options-advanced-admin.php:180
+#: inc/functions/options-advanced-admin.php:658
 msgid "Canonical"
 msgstr "Canonique"
 
-#: inc/functions/options-advanced-admin.php:177
+#: inc/functions/options-advanced-admin.php:183
 msgid "Target Kw"
 msgstr "Mot clé cible"
 
-#: inc/functions/options-advanced-admin.php:180
+#: inc/functions/options-advanced-admin.php:186
 msgid "Noindex?"
 msgstr "Noindex ?"
 
-#: inc/functions/options-advanced-admin.php:183
+#: inc/functions/options-advanced-admin.php:189
 msgid "Nofollow?"
 msgstr "Nofollow ?"
 
-#: inc/functions/options-advanced-admin.php:186
+#: inc/functions/options-advanced-admin.php:192
 msgid "Count words?"
 msgstr "Compteur de mots?"
 
-#: inc/functions/options-advanced-admin.php:189
+#: inc/functions/options-advanced-admin.php:195
 msgid "W3C check"
 msgstr "W3C check"
 
-#: inc/functions/options-advanced-admin.php:192
+#: inc/functions/options-advanced-admin.php:198
 msgid "Page Speed"
 msgstr "Page Speed"
 
-#: inc/functions/options-advanced-admin.php:248
+#: inc/functions/options-advanced-admin.php:251
 msgid "Check code quality of this page"
 msgstr "Analyser la qualité du code de cette page"
 
-#: inc/functions/options-advanced-admin.php:252
+#: inc/functions/options-advanced-admin.php:255
 msgid "Analyze this page with Google Page Speed"
 msgstr "Analyser cette page avec Google Page Speed"
 
-#: inc/functions/options-advanced-admin.php:335
+#: inc/functions/options-advanced-admin.php:338
 msgid "Enable noindex"
 msgstr "Définir sur noindex"
 
-#: inc/functions/options-advanced-admin.php:388
+#: inc/functions/options-advanced-admin.php:391
 msgid "Enable index"
 msgstr "Définir sur index"
 
-#: inc/functions/options-advanced-admin.php:441
+#: inc/functions/options-advanced-admin.php:444
 msgid "Enable nofollow"
 msgstr "Définir sur nofollow"
 
-#: inc/functions/options-advanced-admin.php:493
+#: inc/functions/options-advanced-admin.php:496
 msgid "Enable follow"
 msgstr "Définir sur follow"
 
-#: inc/functions/options-advanced-admin.php:540
+#: inc/functions/options-advanced-admin.php:543
 msgid "Enable redirection"
 msgstr "Activer redirection"
 
-#: inc/functions/options-advanced-admin.php:579
+#: inc/functions/options-advanced-admin.php:582
 msgid "Disable redirection"
 msgstr "Désactiver redirection"
 
-#: inc/functions/options-advanced-admin.php:753
+#: inc/functions/options-advanced-admin.php:756
 msgid "Description"
 msgstr "Description"
 
-#: inc/functions/options-advanced-admin.php:762
+#: inc/functions/options-advanced-admin.php:765
 msgid ""
 "The description is not prominent by default; however, some themes may show "
 "it."
@@ -5109,9 +5113,6 @@ msgstr "PASSEZ PRO !"
 
 #~ msgid "Custom favicon in admin?"
 #~ msgstr "Favicon personnalisé dans l'admin ?"
-
-#~ msgid "Remove help tab?"
-#~ msgstr "Supprimer l'onglet Aide ?"
 
 #~ msgid "Remove screen options tab?"
 #~ msgstr "Supprimer l'onglet Options de l'écran ?"
