@@ -127,10 +127,10 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                 global $tag;
                 if (get_the_title()) {
                     echo '<div class="snippet-title-default" style="display:none">'.get_the_title().' - '.get_bloginfo('name').'</div>
-                    <div class="snippet-permalink">'.get_permalink().'</div>';
+                    <div class="snippet-permalink">'.urldecode(get_permalink()).'</div>';
                 } elseif ($tag) {
                     echo '<div class="snippet-title-default" style="display:none">'.$tag->name.' - '.get_bloginfo('name').'</div>';
-                    echo '<div class="snippet-permalink">'.get_term_link($tag).'</div>';
+                    echo '<div class="snippet-permalink">'.urldecode(get_term_link($tag)).'</div>';
                 }
 
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
@@ -146,7 +146,7 @@ echo               '<div class="snippet-description">...</div>
             <p>
                 <label for="seopress_robots_index_meta">
                     <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' '.$disabled['robots_index'].'/>
-                        '. __( 'Do not display this page in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'
+                        '. __( 'Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>', 'wp-seopress' ) .'
                 </label>
             </p>
             <p>

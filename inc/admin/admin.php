@@ -649,7 +649,7 @@ class seopress_options
             echo '<'.$tag.'><span class="dashicons dashicons-admin-settings"></span>'.$title.'</'.$tag.'>';
             ?>
             <div class="metabox-holder">
-                <div class="postbox">
+                <div class="postbox section-tool">
                     <h3><span><?php _e( 'Export SEOPress Settings', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p><?php _e( 'Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'wp-seopress' ); ?></p>
@@ -663,7 +663,7 @@ class seopress_options
                     </div><!-- .inside -->
                 </div><!-- .postbox -->
 
-                <div class="postbox">
+                <div class="postbox section-tool">
                     <h3><span><?php _e( 'Import SEOPress Settings', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p><?php _e( 'Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'wp-seopress' ); ?></p>
@@ -684,10 +684,10 @@ class seopress_options
                 </div><!-- .postbox -->
 
                 <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-                    <div class="postbox">
+                    <div id="section-import-redirects" class="postbox section-tool">
                         <h3><span><?php _e( 'Import Redirections', 'wp-seopress' ); ?></span></h3>
                         <div class="inside">
-                            <p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 3 columns in this order: url to match (without your domain name), url to redirect in absolute and type of redirection (301, 302 or 307).', 'wp-seopress' ); ?></p>
+                            <p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 4 columns in this order: url to match (without your domain name), url to redirect in absolute, type of redirection (301, 302 or 307) and the last one with the value yes to enable the redirect. Leave it empty to disable the redirect.', 'wp-seopress' ); ?></p>
                             <p>
                                 <a href="https://www.seopress.org/wp-content/uploads/csv/seopress-redirections-example.csv" target="_blank">
                                     <?php _e('Download a CSV example','wp-seopress'); ?>
@@ -705,7 +705,7 @@ class seopress_options
                             </form>
                         </div><!-- .inside -->
                     </div><!-- .postbox -->
-                    <div class="postbox">
+                    <div id="section-export-redirects" class="postbox section-tool">
                         <h3><span><?php _e( 'Export Redirections', 'wp-seopress' ); ?></span></h3>
                         <div class="inside">
                             <p><?php _e( 'Export all redirections for this site as a .csv file. This allows you to easily import the redirections into another site, to Excel / Google Sheets...', 'wp-seopress' ); ?></p>
@@ -721,7 +721,7 @@ class seopress_options
                 <?php } ?>
 
                 <!-- Yoast import tool --> 
-                <div id="yoast-migration-tool" class="postbox">
+                <div id="yoast-migration-tool" class="postbox section-tool">
                     <h3><span><?php _e( 'Import posts and terms metadata from Yoast', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
@@ -742,7 +742,7 @@ class seopress_options
                 </div><!-- .postbox -->                
 
                 <!-- All In One import tool --> 
-                <div id="aio-migration-tool" class="postbox">
+                <div id="aio-migration-tool" class="postbox section-tool">
                     <h3><span><?php _e( 'Import posts and terms metadata from All In One SEO', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
@@ -761,7 +761,7 @@ class seopress_options
                 </div><!-- .postbox -->
 
                 <!-- SEO Framework import tool --> 
-                <div id="seo-framework-migration-tool" class="postbox">
+                <div id="seo-framework-migration-tool" class="postbox section-tool">
                     <h3><span><?php _e( 'Import posts and terms metadata from The SEO Framework', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
@@ -781,7 +781,7 @@ class seopress_options
                     </div><!-- .inside -->
                 </div><!-- .postbox -->
 
-                <div class="postbox">
+                <div class="postbox section-tool">
                     <h3><span><?php _e( 'Reset All Notices From Notifications Center', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p><?php _e( 'By clicking Reset Notices, all notices in the notifications center will be set to their initial status.', 'wp-seopress' ); ?></p>
@@ -795,7 +795,7 @@ class seopress_options
                     </div><!-- .inside -->
                 </div><!-- .postbox -->
 
-                <div class="postbox">
+                <div class="postbox section-tool">
                     <h3><span><?php _e( 'Reset All Settings', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">
                         <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Delete all options related to SEOPress in your database AND set settings to their default values.', 'wp-seopress' ); ?></p>
@@ -903,7 +903,7 @@ class seopress_options
                                     <?php if (get_theme_support('title-tag') !='1') {
                                         function seopress_get_hidden_notices_title_tag_option() {
                                             $seopress_get_hidden_notices_title_tag_option = get_option("seopress_notices");
-                                            if ( ! empty ( $seopress_get_hidden_notices_title_tag_option ) ) {
+                                            if ( !empty ( $seopress_get_hidden_notices_title_tag_option ) ) {
                                                 foreach ($seopress_get_hidden_notices_title_tag_option as $key => $seopress_get_hidden_notices_title_tag_value)
                                                     $options[$key] = $seopress_get_hidden_notices_title_tag_value;
                                                  if (isset($seopress_get_hidden_notices_title_tag_option['notice-title-tag'])) { 
@@ -961,6 +961,17 @@ class seopress_options
                                             </p>
                                         </div>
                                     <?php } ?>
+                                    <?php
+                                    if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                                        if (seopress_404_cleaning_option() == 1 && !wp_next_scheduled('seopress_404_cron_cleaning')) { ?>
+                                            <div class="seopress-alert">
+                                                <p>
+                                                    <span class="dashicons dashicons-warning"></span>
+                                                    <?php _e('You have enabled 404 cleaning BUT the scheduled task is not running. <br>To solve this, please disable and enable SEOPress PRO.','wp-seopress'); ?>
+                                                </p>
+                                            </div>
+                                        <?php } 
+                                    } ?>
                                     <?php if (!is_ssl()) { ?>
                                         <?php
                                         function seopress_get_hidden_notices_ssl_option() {
@@ -2480,14 +2491,6 @@ class seopress_options
         );
 
         add_settings_field(
-            'seopress_social_accounts_google', // ID
-           __("Google + URL","wp-seopress"), // Title
-            array( $this, 'seopress_social_accounts_google_callback' ), // Callback
-            'seopress-settings-admin-social-accounts', // Page
-            'seopress_setting_section_social_accounts' // Section                  
-        );
-
-        add_settings_field(
             'seopress_social_accounts_pinterest', // ID
            __("Pinterest URL","wp-seopress"), // Title
             array( $this, 'seopress_social_accounts_pinterest_callback' ), // Callback
@@ -3111,6 +3114,14 @@ class seopress_options
             'seopress_advanced_appearance_genesis_seo_menu', // ID
            __("Hide Genesis SEO Settings link","wp-seopress"), // Title
             array( $this, 'seopress_advanced_appearance_genesis_seo_menu_callback' ), // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_appearance_advice_schema', // ID
+           __("Hide advice in Structured Data Types metabox","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_appearance_advice_schema_callback' ), // Callback
             'seopress-settings-admin-advanced-appearance', // Page
             'seopress_setting_section_advanced_appearance' // Section                  
         );
@@ -4238,7 +4249,7 @@ class seopress_options
 
         foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) {
             
-            echo '<h2>'.$seopress_cpt_value->labels->name.'</h2>';
+            echo '<h2>'.$seopress_cpt_value->labels->name.' <em><small>['.$seopress_cpt_value->name.']</small></em></h2>';
 
             //List all post types
             echo '<div class="seopress_wrap_single_cpt">';
@@ -4253,6 +4264,10 @@ class seopress_options
                 
                 echo '<label for="seopress_xml_sitemap_post_types_list_include['.$seopress_cpt_key.']">'. __( 'Include', 'wp-seopress' ) .'</label>';
                 
+                if ($seopress_cpt_value->name == 'attachment') {
+                    echo '<p class="description">'.__('You should never include attachment post type in your sitemap. Be careful if you checked this.','wp-seopress').'</p>';
+                }
+
                 if (isset($this->options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include'])) {
                     esc_attr( $this->options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include']);
                 }
@@ -4278,7 +4293,7 @@ class seopress_options
 
         foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
             
-            echo '<h2>'.$seopress_tax_value->labels->name.'</h2>';
+            echo '<h2>'.$seopress_tax_value->labels->name.' <em><small>['.$seopress_tax_value->name.']</small></em></h2>';
 
             //List all taxonomies
             echo '<div class="seopress_wrap_single_tax">';
@@ -4554,18 +4569,6 @@ class seopress_options
         
         printf(
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="'.esc_html__('eg: @wp_seopress','wp-seopress').'" aria-label="'.__('Twitter Page URL','wp-seopress').'" value="%s"/>',
-        esc_html( $check )
-        
-        );
-        
-    }
-
-    public function seopress_social_accounts_google_callback()
-    {
-        $check = isset($this->options['seopress_social_accounts_google']) ? $this->options['seopress_social_accounts_google'] : NULL;
-
-        printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_google]" placeholder="'.esc_html__('eg: https://plus.google.com/+BenjaminDenis','wp-seopress').'" aria-label="'.__('Google + URL','wp-seopress').'" value="%s"/>',
         esc_html( $check )
         
         );
@@ -4957,7 +4960,7 @@ class seopress_options
         echo '<label for="seopress_google_analytics_ip_anonymization">'. __( 'Enable IP Anonymization', 'wp-seopress' ) .'</label>';
 
         echo '<p class="description">'. __('When a customer of Analytics requests IP address anonymization, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network.','wp-seopress').'
-            <a href="https://support.google.com/analytics/answer/2763052?hl=en" target="_blank">'.__('Learn more','wp-seopress').'</a>
+            <a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization" target="_blank">'.__('Learn more','wp-seopress').'</a>
             </p>';
 
         if (isset($this->options['seopress_google_analytics_ip_anonymization'])) {
@@ -4978,7 +4981,7 @@ class seopress_options
         echo '<label for="seopress_google_analytics_link_attribution">'. __( 'Enhanced Link Attribution', 'wp-seopress' ) .'</label>';
 
         echo '<p class="description">'. __('Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs.','wp-seopress').'
-            <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-link-attribution" target="_blank">'.__('Learn more','wp-seopress').'</a>
+            <a href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-link-attribution" target="_blank">'.__('Learn more','wp-seopress').'</a>
             </p>';
 
         if (isset($this->options['seopress_google_analytics_link_attribution'])) {
@@ -4999,7 +5002,7 @@ class seopress_options
         echo '<label for="seopress_google_analytics_cross_enable">'. __( 'Enable cross-domain tracking', 'wp-seopress' ) .'</label>';
 
         echo '<p class="description">'. __('Cross domain tracking makes it possible for Analytics to see sessions on two related sites (such as an ecommerce site and a separate shopping cart site) as a single session. This is sometimes called site linking.','wp-seopress').'
-            <a href="https://support.google.com/analytics/answer/1034342?hl=en" target="_blank">'.__('Learn more','wp-seopress').'</a>
+            <a href="https://developers.google.com/analytics/devguides/collection/gtagjs/cross-domain" target="_blank">'.__('Learn more','wp-seopress').'</a>
             </p>';
 
         if (isset($this->options['seopress_google_analytics_cross_enable'])) {
@@ -5012,7 +5015,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cross_domain']) ? $this->options['seopress_google_analytics_cross_domain'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cross_domain]" placeholder="'.esc_html__('Enter yours domains (eg: https://www.seopress.org/)','wp-seopress').'" value="%s" aria-label="'.__('Cross domains','wp-seopress').'"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cross_domain]" placeholder="'.esc_html__('Enter yours domains: seopress.org,sub.seopress.org,sub2.seopress.org','wp-seopress').'" value="%s" aria-label="'.__('Cross domains','wp-seopress').'"/>',
         esc_html($check)
         
         );
@@ -6015,6 +6018,23 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_appearance_genesis_seo_menu'])) {
             esc_attr( $this->options['seopress_advanced_appearance_genesis_seo_menu']);
+        }
+    }    
+
+    public function seopress_advanced_appearance_advice_schema_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_appearance_advice_schema']);      
+        
+        echo '<input id="seopress_advanced_appearance_advice_schema" name="seopress_advanced_option_name[seopress_advanced_appearance_advice_schema]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_appearance_advice_schema">'. __( 'Remove the advice if None schema selected', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_advice_schema'])) {
+            esc_attr( $this->options['seopress_advanced_appearance_advice_schema']);
         }
     }
 

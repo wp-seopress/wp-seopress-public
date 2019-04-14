@@ -60,7 +60,7 @@ function seopress_import_settings() {
     update_option( 'seopress_activated', $settings["seopress_activated"] ); 
     update_option( 'seopress_titles_option_name', $settings["seopress_titles_option_name"] ); 
     update_option( 'seopress_social_option_name', $settings["seopress_social_option_name"] ); 
-    update_option( 'seopress_analytics_option_name', $settings["seopress_analytics_option_name"] ); 
+    update_option( 'seopress_google_analytics_option_name', $settings["seopress_google_analytics_option_name"] ); 
     update_option( 'seopress_advanced_option_name', $settings["seopress_advanced_option_name"] ); 
     update_option( 'seopress_xml_sitemap_option_name', $settings["seopress_xml_sitemap_option_name"] ); 
     update_option( 'seopress_pro_option_name', $settings["seopress_pro_option_name"] );

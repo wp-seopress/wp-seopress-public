@@ -29,10 +29,13 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
             ';
             echo "<ul id='seopress_suggestions'></ul>";
 
+
             if (get_locale() !='') {
                 $locale = substr(get_locale(), 0, 2);
+                $country_code = substr(get_locale(), -2);
             } else {
                 $locale = 'en';
+                $country_code = 'US';
             }
 
             echo "<script>
@@ -42,7 +45,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     var suggestions_array = raw_suggestions.split(',');
                     
                     var i;
-                    for (i = 0; i < suggestions_array.length; i++) { 
+                    for (i = 0; i < 10; i++) { 
                         document.getElementById('seopress_suggestions').innerHTML += '<li>'+suggestions_array[i]+'</li>';
                     }
                 }
@@ -55,7 +58,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 
                     if (kws) {
                         var script = document.createElement('script');
-                        script.src = 'https://www.google.com/complete/search?client=firefox&hl=".$locale."&q='+kws+'&callback=seopress_google_suggest';
+                        script.src = 'https://www.google.com/complete/search?client=chrome&hl=".$locale."&q='+kws+'&gl=".$country_code."&callback=seopress_google_suggest';
                         document.body.appendChild(script);
                     }
                 });

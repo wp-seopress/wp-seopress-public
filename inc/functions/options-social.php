@@ -98,18 +98,6 @@ function seopress_social_accounts_twitter_option() {
 	}
 }
 
-//Google +
-function seopress_social_accounts_google_option() {
-	$seopress_social_accounts_google_option = get_option("seopress_social_option_name");
-	if ( ! empty ( $seopress_social_accounts_google_option ) ) {
-		foreach ($seopress_social_accounts_google_option as $key => $seopress_social_accounts_google_value)
-			$options[$key] = $seopress_social_accounts_google_value;
-		 if (isset($seopress_social_accounts_google_option['seopress_social_accounts_google'])) { 
-		 	return $seopress_social_accounts_google_option['seopress_social_accounts_google'];
-		 }
-	}
-}
-
 //Pinterest
 function seopress_social_accounts_pinterest_option() {
 	$seopress_social_accounts_pinterest_option = get_option("seopress_social_option_name");
@@ -207,10 +195,6 @@ function seopress_social_accounts_jsonld_hook() {
 		if (seopress_social_accounts_twitter_option() !='') { 
 	 		$seopress_social_accounts_twitter_option = json_encode('https://twitter.com/'.seopress_social_accounts_twitter_option());	
 	 	 	array_push($seopress_comma_array, $seopress_social_accounts_twitter_option);	
-		}	
-		if (seopress_social_accounts_google_option() !='') { 
-	 		$seopress_social_accounts_google_option = json_encode(seopress_social_accounts_google_option());
-	 		array_push($seopress_comma_array, $seopress_social_accounts_google_option);
 		}	
 		if (seopress_social_accounts_pinterest_option() !='') { 
 	 		$seopress_social_accounts_pinterest_option = json_encode(seopress_social_accounts_pinterest_option());
@@ -456,10 +440,18 @@ add_action( 'wp_head', 'seopress_social_facebook_og_type_hook', 1 );
 //Article Author / Article Publisher
 function seopress_social_facebook_og_author_hook() {
 	if (seopress_social_facebook_og_option() =='1' && seopress_social_accounts_facebook_option() !='') {
-		if (is_singular() && !is_home() && !is_front_page()) {			
-			$seopress_social_og_author = '<meta property="article:author" content="'.seopress_social_accounts_facebook_option().'" />';
-			$seopress_social_og_author .= "\n";
-			$seopress_social_og_author .= '<meta property="article:publisher" content="'.seopress_social_accounts_facebook_option().'" />';
+		if (is_singular() && !is_home() && !is_front_page()) {
+			global $post;
+			$seopress_video_disabled     	= get_post_meta($post->ID,'_seopress_video_disabled', true);
+		  	$seopress_video     			= get_post_meta($post->ID,'_seopress_video');
+
+		  	if (!empty($seopress_video[0][0]['url']) && $seopress_video_disabled =='') {		
+				//do nothing
+			} else {
+				$seopress_social_og_author = '<meta property="article:author" content="'.seopress_social_accounts_facebook_option().'" />';
+				$seopress_social_og_author .= "\n";
+				$seopress_social_og_author .= '<meta property="article:publisher" content="'.seopress_social_accounts_facebook_option().'" />';
+			}
 		}
 		if (isset($seopress_social_og_author)) {
 			//Hook on post OG author - 'seopress_social_og_author'

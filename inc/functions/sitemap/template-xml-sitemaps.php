@@ -26,7 +26,7 @@ function seopress_xml_sitemap_index() {
 		foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
 			foreach ($cpt_value as $_cpt_key => $_cpt_value) {
 				if($_cpt_value =='1') {
-					$args = array('post_type' => $cpt_key, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'orderby' => 'modified', 'lang' => '', 'has_password' => false);
+					$args = array('post_type' => $cpt_key, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'orderby' => 'modified', 'lang' => '', 'has_password' => false, 'suppress_filters' => true);
 					
 					$args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
 

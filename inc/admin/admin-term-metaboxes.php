@@ -142,9 +142,11 @@ function seopress_display_seo_term_metaboxe() {
             $seopress_get_taxonomies = seopress_get_taxonomies();
             $seopress_get_taxonomies = apply_filters('seopress_metaboxe_term_seo', $seopress_get_taxonomies);
             
-            foreach ($seopress_get_taxonomies as $key => $value) {
-                add_action( $key.'_edit_form_fields', 'seopress_tax', 10, 2 ); //Edit term page
-                add_action( 'edit_'.$key,   'seopress_tax_save_term', 10, 2 ); //Edit save term
+            if (!empty($seopress_get_taxonomies)) {
+                foreach ($seopress_get_taxonomies as $key => $value) {
+                    add_action( $key.'_edit_form_fields', 'seopress_tax', 10, 2 ); //Edit term page
+                    add_action( 'edit_'.$key,   'seopress_tax_save_term', 10, 2 ); //Edit save term
+                }
             }
         }
     }

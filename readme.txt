@@ -2,11 +2,11 @@
 Authors: rainbowgeek
 Contributors: rainbowgeek
 Donate link: https://www.seopress.org/
-Tags: seo, search engine optimization, meta title, open graph, content analysis, knowledge graph, redirection, xml sitemap, breadcrumbs, google analytics, rich snippets, broken link checker, GDPR
+Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.4+
 Tested up to: 5.0
 Requires PHP: 5.4
-Stable tag: 3.3.7
+Stable tag: 3.3.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,16 +54,17 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 <ul>
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
+	<li>Google Structured Data types (schema.org): article, local business, FAQ, course, recipe, video, event, product, simple review</li>
+	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
+	<li>Google Analytics Stats in Dashboard</li>
+	<li>Google Local Business</li>
 	<li>Backlinks (required a Majestic paid account)</li>
 	<li>SEOPress BOT: scan all your links in content to find errors (eg: 404...)</li>
 	<li>WooCommerce: disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li>Easy Digital Downloads: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li>Dublin Core</li>
-	<li>Google Structured Data types (schema.org): article, local business, FAQ, course, recipe, video, event, product, simple review</li>
-	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Custom Breadcrumbs for single post types</li>
 	<li>Google Page Speed</li>
-	<li>Google Analytics Stats in Dashboard</li>
 	<li>Google Analytics Events: track external links, downloads (PDF, DOCX...), affiliate links...</li>
 	<li>Robots.txt</li>
 	<li>Google News Sitemap</li>
@@ -72,7 +73,6 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Email notifications on 404</li>
 	<li>301, 302 and 307 Redirections</li>
 	<li>Import redirections using CSV</li>
-	<li>Google Local Business</li>
 	<li>htaccess</li>
 	<li>RSS</li>
 </ul>
@@ -87,7 +87,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>English (professional translation)</li>
 	<li>French (professional translation)</li>
 	<li>Spanish (professional translation)</li>
-	<li>German</li>
+	<li>German (professional translation)</li>
 	<li>Greek</li>
 	<li>Bulgarian</li>
 	<li>Indonesian</li>
@@ -161,6 +161,23 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.8 =
+* NEW Remove the advice if None schema selected option in SEO > Advanced > Appearance (PRO)
+* INFO Add new notification in SEO > Dashboard about 404 cleaning
+* INFO Improve UI/UX for License page / XML Sitemaps
+* INFO Improve UI when clicking Import / Export redirects buttons
+* INFO Google Analytics links to documentation updated
+* INFO Google Suggestions is now localized to your country (PRO)
+* FIX Warning Invalid argument supplied for foreach() when using filters to remove metaboxes (thanks to John Buchanan)
+* FIX Remove Blog page for Tags / Categories option
+* FIX Cross domains tracking if multiple domains
+* FIX OG:type video.other
+* FIX Import SEOPress Google Analytics settings (thanks to @wpchannel)
+* FIX Permalink encoding in Google Snippet Preview / XML Sitemaps (thanks to Tsika Boom)
+* FIX Compatibility with WPML and e-commerce features for XML sitemaps
+* FIX Tribe events for XML Sitemaps
+* FIX Reset License button
+* FIX Compatibility with WPML/Events Calendar/HTML sitemap
 = 3.3.7 =
 * NEW Add 'seopress_sitemaps_html_cat_query' filter to HTML sitemap
 * NEW Add 'seopress_sitemaps_html_pages_query' filter to HTML sitemap

@@ -49,7 +49,7 @@ function seopress_xml_sitemap_single() {
 					$seopress_sitemaps .= '<url>';
 				  	$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<loc>';
-					$seopress_sitemaps .= get_post_type_archive_link($path);
+					$seopress_sitemaps .= urldecode(get_post_type_archive_link($path));
 					$seopress_sitemaps .= '</loc>';
 					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '</url>';
@@ -68,7 +68,7 @@ function seopress_xml_sitemap_single() {
 				  	$seopress_sitemaps .= '<url>';
 				  	$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<loc>';
-					$seopress_sitemaps .= get_permalink($post);
+					$seopress_sitemaps .= urldecode(get_permalink($post));
 					$seopress_sitemaps .= '</loc>';
 					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<lastmod>';

@@ -25,6 +25,7 @@ if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('w
     add_action( 'admin_notices', 'seopress_notice_license' );
 }
 
+
 //Advanced
 //=================================================================================================
 

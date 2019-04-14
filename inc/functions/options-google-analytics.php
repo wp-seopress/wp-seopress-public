@@ -269,8 +269,24 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 		
 		//Cross domains
 		if (seopress_google_analytics_cross_enable_option() =='1' && seopress_google_analytics_cross_domain_option()) {
-			$seopress_google_analytics_config['linker'] = "'linker': {'domains': ['".seopress_google_analytics_cross_domain_option()."']},";
-			$seopress_google_analytics_config['linker'] = apply_filters('seopress_gtag_linker', $seopress_google_analytics_config['linker']);
+
+			$domains = array_map('trim',array_filter(explode(',',seopress_google_analytics_cross_domain_option())));
+
+			
+			if (!empty($domains)) { 
+				$domains_count = count($domains);
+
+				$link_domains = '';
+
+				foreach ($domains as $key => $domain) {
+					$link_domains .= "'".$domain."'";
+					if ( $key < $domains_count -1){
+						$link_domains .= ',';
+					}
+				}
+				$seopress_google_analytics_config['linker'] = "'linker': {'domains': [".$link_domains."]},";
+				$seopress_google_analytics_config['linker'] = apply_filters('seopress_gtag_linker', $seopress_google_analytics_config['linker']);
+			}
 		}
 		
 		//Remarketing
