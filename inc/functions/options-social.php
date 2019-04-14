@@ -270,7 +270,7 @@ function seopress_social_accounts_jsonld_hook() {
 			}
 		}
 
-		if (seopress_social_accounts_facebook_option() !='' || seopress_social_accounts_twitter_option() !='' || seopress_social_accounts_google_option() !='' || seopress_social_accounts_pinterest_option() !='' || seopress_social_accounts_instagram_option() !='' || seopress_social_accounts_youtube_option() !='' || seopress_social_accounts_linkedin_option() !='' || seopress_social_accounts_myspace_option() !='' || seopress_social_accounts_soundcloud_option() !='' || seopress_social_accounts_tumblr_option() !='' ) {
+		if (seopress_social_accounts_facebook_option() !='' || seopress_social_accounts_twitter_option() !='' ||  seopress_social_accounts_pinterest_option() !='' || seopress_social_accounts_instagram_option() !='' || seopress_social_accounts_youtube_option() !='' || seopress_social_accounts_linkedin_option() !='' || seopress_social_accounts_myspace_option() !='' || seopress_social_accounts_soundcloud_option() !='' || seopress_social_accounts_tumblr_option() !='' ) {
 			echo ',"sameAs" : [';
 			$seopress_comma_count = count($seopress_comma_array);
 			for ($i = 0; $i < $seopress_comma_count; $i++) {

@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.4+
 Tested up to: 5.0
 Requires PHP: 5.4
-Stable tag: 3.3.8
+Stable tag: 3.3.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,6 +161,8 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.8.1 =
+* FIX Remove Google +
 = 3.3.8 =
 * NEW Remove the advice if None schema selected option in SEO > Advanced > Appearance (PRO)
 * INFO Add new notification in SEO > Dashboard about 404 cleaning
