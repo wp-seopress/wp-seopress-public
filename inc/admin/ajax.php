@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 function seopress_do_real_preview() {            
     check_ajax_referer( 'seopress_real_preview_nonce', $_GET['_ajax_nonce'], true );
 
-    if (current_user_can('edit_posts') && is_admin()) { 
+    if (current_user_can('edit_posts') && is_admin()) {
 
         //Get cookies
         if (isset($_COOKIE)) { 
@@ -76,7 +76,7 @@ function seopress_do_real_preview() {
         $data['title'] = $cookies;
 
         if ($seopress_origin =='post') { //Default: post type
-            $response = wp_remote_get(get_preview_post_link((int)$seopress_get_the_id), $args);
+            $response = wp_remote_get(get_preview_post_link((int)$seopress_get_the_id,array('no_admin_bar' => 1)), $args);
         } else { //Term taxonomy
             $response = wp_remote_get(get_term_link((int)$seopress_get_the_id, $seopress_tax_name), $args);
         }
@@ -114,7 +114,7 @@ function seopress_do_real_preview() {
                 if (!empty($meta_description)) {
                     foreach ($meta_description as $meta_desc) {
                         foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($meta_desc->nodeValue), $m)) {
+                            if (preg_match_all('#\b('.$kw.')\b#iu', $meta_desc->nodeValue, $m)) {
                                 $data['meta_description']['matches'][$kw][] = $m[0];
                             }
                         }
@@ -166,12 +166,11 @@ function seopress_do_real_preview() {
                 //h1
                 $h1 = $xpath->query("//h1");
                 if (!empty($h1)) {
+                    $data['h1']['nomatches']['count'] = count($h1);
                     foreach ($h1 as $heading1) {
                         foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading1->nodeValue), $m)) {
+                            if (preg_match_all('#\b('.$kw.')\b#iu', $heading1->nodeValue, $m)) {
                                 $data['h1']['matches'][$kw][] = $m[0];
-                            } else {
-                                $data['h1']['nomatches'][$kw][] = $m[0];
                             }
                         }
                     }
@@ -182,7 +181,7 @@ function seopress_do_real_preview() {
                 if (!empty($h2)) {
                     foreach ($h2 as $heading2) {
                         foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading2->nodeValue), $m)) {
+                            if (preg_match_all('#\b('.$kw.')\b#iu', $heading2->nodeValue, $m)) {
                                 $data['h2']['matches'][$kw][] = $m[0];
                             }
                         }
@@ -194,7 +193,7 @@ function seopress_do_real_preview() {
                 if (!empty($h3)) {
                     foreach ($h3 as $heading3) {
                         foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', utf8_decode($heading3->nodeValue), $m)) {
+                            if (preg_match_all('#\b('.$kw.')\b#iu', $heading3->nodeValue, $m)) {
                                 $data['h3']['matches'][$kw][] = $m[0];
                             }
                         }

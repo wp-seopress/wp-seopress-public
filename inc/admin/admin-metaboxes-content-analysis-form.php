@@ -95,14 +95,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     if (!empty($seopress_analysis_data['0']['h1']['matches'])) {
                         echo '<h3>'.__('H1 (Heading 1)','wp-seopress').'</h3>';
 
-                        if (!empty($seopress_analysis_data['0']['h1']['nomatches'])) {
-                            $h1nomatches = count($seopress_analysis_data['0']['h1']['nomatches']);
-                        } else {
-                            $h1nomatches = 0;
-                        }
-
-                        $count = count($seopress_analysis_data['0']['h1']['matches']);
-                        $count = $count + $h1nomatches;
+                        $count = $seopress_analysis_data['0']['h1']['nomatches']['count'];
 
                         $target_kws_h1 = $seopress_analysis_data['0']['h1']['matches'];
 

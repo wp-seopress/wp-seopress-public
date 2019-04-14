@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: The best plugin for SEO.
-Version: 3.3.11.1
+Version: 3.3.11.2
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.3.11.1' ); 
+define( 'SEOPRESS_VERSION', '3.3.11.2' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -570,6 +570,16 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
         return $template;
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Remove Admin Bar with Content Analysis
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_remove_admin_bar() {
+    if (isset($_GET['no_admin_bar']) && $_GET['no_admin_bar'] == 1) {
+        add_filter('show_admin_bar', '__return_false');
+    }
+}
+add_action('plugins_loaded', 'seopress_remove_admin_bar');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Test abolute URLs (return true if absolute)

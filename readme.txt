@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.4+
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.3.11.1
+Stable tag: 3.3.11.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,8 +162,13 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.11.2 =
+* FIX Content Analysis for non UTF-8 characters
+* FIX H1 count for Content Analysis
+* FIX Content Analysis for Images and links detection
 = 3.3.11.1 =
 * FIX SSL verification for Content Analysis / Snippet Preview!
+* FIX a problem with cookies that prevented the generation of Snippet Preview / Content Analysis 
 = 3.3.11 =
 * NEW Add seopress_category_rewrite_rules hook to filter rewrite rules for category taxonomy
 * INFO Content analysis is now working with draft / pending review / published posts
