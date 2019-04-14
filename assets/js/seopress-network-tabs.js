@@ -12,6 +12,9 @@ jQuery(document).ready(function($) {
 	    } else if (clean_hash[1] =='2') { //htaccess Tab
             jQuery('#tab_seopress_htaccess-tab').addClass("nav-tab-active");
             jQuery('#tab_seopress_htaccess').addClass("active");
+        } else if (clean_hash[1] =='3') { //White Label Tab
+            jQuery('#tab_seopress_white_label-tab').addClass("nav-tab-active");
+            jQuery('#tab_seopress_white_label').addClass("active");
         } else if (seopress_tab_session_storage) {
 			jQuery('#seopress-tabs').find('.nav-tab.nav-tab-active').removeClass("nav-tab-active");
 			jQuery('#seopress-tabs').find('.seopress-tab.active').removeClass("active");
@@ -34,7 +37,9 @@ jQuery(document).ready(function($) {
     	if (clean_hash[1]==1) {
     		sessionStorage.setItem("seopress_robots_tab", 'tab_seopress_robots');
     	} else if (clean_hash[1]==2) {
-    		sessionStorage.setItem("seopress_robots_tab", 'tab_seopress_htaccess');
+            sessionStorage.setItem("seopress_robots_tab", 'tab_seopress_htaccess');
+        } else if (clean_hash[1]==3) {
+    		sessionStorage.setItem("seopress_white_label", 'tab_seopress_white_label');
     	} else {
     		sessionStorage.setItem("seopress_robots_tab", hash);
     	}    	 

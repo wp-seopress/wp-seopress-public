@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2019-02-24 11:58+0100\n"
-"PO-Revision-Date: 2019-02-24 11:58+0100\n"
+"POT-Creation-Date: 2019-03-10 14:36+0100\n"
+"PO-Revision-Date: 2019-03-10 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: en\n"
@@ -104,65 +104,69 @@ msgstr ""
 msgid "URL Rewriting"
 msgstr ""
 
-#: inc/admin/admin-header.php:149 inc/admin/admin.php:1903
+#: inc/admin/admin-header.php:149
+msgid "White Label"
+msgstr ""
+
+#: inc/admin/admin-header.php:155 inc/admin/admin.php:1903
 msgid ".htaccess"
 msgstr ""
 
-#: inc/admin/admin-header.php:156 inc/admin/admin.php:1915
+#: inc/admin/admin-header.php:162 inc/admin/admin.php:1915
 msgid "RSS"
 msgstr ""
 
-#: inc/admin/admin-header.php:162 inc/admin/admin.php:1219
+#: inc/admin/admin-header.php:168 inc/admin/admin.php:1219
 #: inc/admin/admin.php:1948 inc/admin/adminbar.php:69
 msgid "License"
 msgstr ""
 
-#: inc/admin/admin-header.php:169 inc/admin/admin.php:190
+#: inc/admin/admin-header.php:175 inc/admin/admin.php:190
 #: inc/admin/admin.php:1927 inc/admin/adminbar.php:55
 msgid "Tools"
 msgstr ""
 
-#: inc/admin/admin-header.php:191
+#: inc/admin/admin-header.php:197
 msgid "See the changelog (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:193
+#: inc/admin/admin-header.php:199
 msgid "See the changelog"
 msgstr ""
 
-#: inc/admin/admin-header.php:195 inc/admin/admin-header.php:197
+#: inc/admin/admin-header.php:201 inc/admin/admin-header.php:203
 msgid "Send feedback"
 msgstr ""
 
-#: inc/admin/admin-header.php:199
+#: inc/admin/admin-header.php:205
 msgid "Follow us on Twitter (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:201
+#: inc/admin/admin-header.php:207
 msgid "Follow us on Twitter"
 msgstr ""
 
-#: inc/admin/admin-header.php:203
+#: inc/admin/admin-header.php:209
 msgid "Follow us on YouTube (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:205
+#: inc/admin/admin-header.php:211
 msgid "Follow us on YouTube"
 msgstr ""
 
-#: inc/admin/admin-header.php:207
+#: inc/admin/admin-header.php:213
 msgid "Official website (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:209
+#: inc/admin/admin-header.php:215
 msgid "Official website"
 msgstr ""
 
-#: inc/admin/admin-header.php:211
+#: inc/admin/admin-header.php:217
 msgid "Support (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:213
+#: inc/admin/admin-header.php:219
 msgid "Support"
 msgstr ""
 
@@ -172,7 +176,7 @@ msgstr ""
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:9
 #: inc/admin/admin-metaboxes-content-analysis-form.php:10
-#: inc/functions/options-advanced-admin.php:651
+#: inc/functions/options-advanced-admin.php:674
 msgid "Target keywords"
 msgstr ""
 
@@ -216,246 +220,246 @@ msgstr ""
 msgid "Get suggestions!"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:72
+#: inc/admin/admin-metaboxes-content-analysis-form.php:71
 msgid "Optimizations"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:73
+#: inc/admin/admin-metaboxes-content-analysis-form.php:72
 msgid "Configuration"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:74
+#: inc/admin/admin-metaboxes-content-analysis-form.php:73
 msgid "Images"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:75
+#: inc/admin/admin-metaboxes-content-analysis-form.php:74
 msgid "Links"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:81
+#: inc/admin/admin-metaboxes-content-analysis-form.php:80
 msgid "Words counter"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:83
+#: inc/admin/admin-metaboxes-content-analysis-form.php:82
 msgid "words found."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:84
+#: inc/admin/admin-metaboxes-content-analysis-form.php:83
 msgid "unique words found."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:87
+#: inc/admin/admin-metaboxes-content-analysis-form.php:86
 msgid ""
 "Your content is composed of more than 300 words, which is the minimum for a "
 "post."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:89
+#: inc/admin/admin-metaboxes-content-analysis-form.php:88
 msgid "Your content is too short. Add a few more paragraphs!"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:96
+#: inc/admin/admin-metaboxes-content-analysis-form.php:95
 msgid "H1 (Heading 1)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:109
+#: inc/admin/admin-metaboxes-content-analysis-form.php:101
 msgid "Target keywords were found in Heading 1 (H1)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:118
-#: inc/admin/admin-metaboxes-content-analysis-form.php:139
-#: inc/admin/admin-metaboxes-content-analysis-form.php:157
-#: inc/admin/admin-metaboxes-content-analysis-form.php:176
-#: inc/admin/admin-metaboxes-content-analysis-form.php:205
+#: inc/admin/admin-metaboxes-content-analysis-form.php:110
+#: inc/admin/admin-metaboxes-content-analysis-form.php:131
+#: inc/admin/admin-metaboxes-content-analysis-form.php:149
+#: inc/admin/admin-metaboxes-content-analysis-form.php:168
+#: inc/admin/admin-metaboxes-content-analysis-form.php:197
 #, php-format
 msgid "%s was found %d times."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:123
+#: inc/admin/admin-metaboxes-content-analysis-form.php:115
 #, php-format
 msgid "We found %d Heading 1 (H1) in your content."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:124
+#: inc/admin/admin-metaboxes-content-analysis-form.php:116
 msgid ""
 "You should not use more than one H1 heading in your post content. The rule "
 "is simple: only one H1 for each web page. Better for SEO and accessibility."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:129
+#: inc/admin/admin-metaboxes-content-analysis-form.php:121
 msgid "H2 (Heading 2)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:131
+#: inc/admin/admin-metaboxes-content-analysis-form.php:123
 msgid "Target keywords were found in Heading 2 (H2)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:143
+#: inc/admin/admin-metaboxes-content-analysis-form.php:135
 msgid "None of your target keywords were found in Heading 2 (H2)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:147
+#: inc/admin/admin-metaboxes-content-analysis-form.php:139
 msgid "H3 (Heading 3)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:149
+#: inc/admin/admin-metaboxes-content-analysis-form.php:141
 msgid "Target keywords were found in Heading 3 (H3)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:161
+#: inc/admin/admin-metaboxes-content-analysis-form.php:153
 msgid "None of your target keywords were found in Heading 3 (H3)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:165
+#: inc/admin/admin-metaboxes-content-analysis-form.php:157
 msgid "Meta title"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:168
+#: inc/admin/admin-metaboxes-content-analysis-form.php:160
 msgid "Target keywords were found in the Meta Title."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:180
+#: inc/admin/admin-metaboxes-content-analysis-form.php:172
 msgid "None of your target keywords were found in the Meta Title."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:184
+#: inc/admin/admin-metaboxes-content-analysis-form.php:176
 msgid "Your custom title is too long."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:186
+#: inc/admin/admin-metaboxes-content-analysis-form.php:178
 msgid "The length of your title is correct"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:189
+#: inc/admin/admin-metaboxes-content-analysis-form.php:181
 msgid "No custom title is set for this post."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:193
+#: inc/admin/admin-metaboxes-content-analysis-form.php:185
 #: inc/admin/admin-metaboxes-form.php:109
 #: inc/admin/admin-metaboxes-form.php:110 inc/admin/admin.php:732
 #: inc/admin/admin.php:753 inc/admin/admin.php:772 inc/admin/admin.php:2043
-#: inc/admin/admin.php:3399 inc/functions/options-advanced-admin.php:643
+#: inc/admin/admin.php:3399 inc/functions/options-advanced-admin.php:666
 msgid "Meta description"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:197
+#: inc/admin/admin-metaboxes-content-analysis-form.php:189
 msgid "Target keywords were found in the Meta description."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:209
+#: inc/admin/admin-metaboxes-content-analysis-form.php:201
 msgid "None of your target keywords were found in the Meta description."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:213
+#: inc/admin/admin-metaboxes-content-analysis-form.php:205
 msgid "You custom meta description is too long."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:215
+#: inc/admin/admin-metaboxes-content-analysis-form.php:207
 msgid "The length of your meta description is correct"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:218
+#: inc/admin/admin-metaboxes-content-analysis-form.php:210
 msgid "No custom meta description is set for this post."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:224
+#: inc/admin/admin-metaboxes-content-analysis-form.php:216
 msgid "Robots"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:234
+#: inc/admin/admin-metaboxes-content-analysis-form.php:226
 #, php-format
 msgid ""
 "We found %s meta robots in your page. There is probably something wrong with "
 "your theme!"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:238
+#: inc/admin/admin-metaboxes-content-analysis-form.php:230
 msgid "noindex is on! Search engines can't index this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:240
+#: inc/admin/admin-metaboxes-content-analysis-form.php:232
 msgid "noindex is off. Search engines will index this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:244
+#: inc/admin/admin-metaboxes-content-analysis-form.php:236
 msgid "nofollow is on! Search engines can't follow your links on this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:246
+#: inc/admin/admin-metaboxes-content-analysis-form.php:238
 msgid "nofollow is off. Search engines will follow links on this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:250
+#: inc/admin/admin-metaboxes-content-analysis-form.php:242
 msgid ""
 "noimageindex is on! Google will not index your images on this page (but if "
 "someone makes a direct link to one of your image in this page, it will be "
 "indexed)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:252
+#: inc/admin/admin-metaboxes-content-analysis-form.php:244
 msgid "noimageindex is off. Google will index the images on this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:256
+#: inc/admin/admin-metaboxes-content-analysis-form.php:248
 msgid "noarchive is on! Search engines will not cache your page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:258
+#: inc/admin/admin-metaboxes-content-analysis-form.php:250
 msgid "noarchive is off. Search engines will probably cache your page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:262
+#: inc/admin/admin-metaboxes-content-analysis-form.php:254
 msgid ""
 "nosnippet is on! Search engines will not display a snippet of this page in "
 "search results."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:264
+#: inc/admin/admin-metaboxes-content-analysis-form.php:256
 msgid ""
 "nosnippet is off. Search engines will display a snippet of this page in "
 "search results."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:267
+#: inc/admin/admin-metaboxes-content-analysis-form.php:259
 msgid ""
 "We found no meta robots on this page. It means, your page is index,follow. "
 "Search engines will index it, and follow links. "
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:276
+#: inc/admin/admin-metaboxes-content-analysis-form.php:268
 msgid ""
 "No alternative text found for these images. Alt tags are important for both "
 "SEO and accessibility."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:287
+#: inc/admin/admin-metaboxes-content-analysis-form.php:279
 msgid "All alternative tags are filled in. Good work!"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:290
+#: inc/admin/admin-metaboxes-content-analysis-form.php:282
 msgid ""
 "We could not find any image in your content. Content with media is a plus "
 "for your SEO."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:296
+#: inc/admin/admin-metaboxes-content-analysis-form.php:288
 msgid "NoFollow Links"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:301
+#: inc/admin/admin-metaboxes-content-analysis-form.php:293
 #, php-format
 msgid ""
 "We found %d links with nofollow attribute in your page. Do not overuse "
 "nofollow attribute in links. Below, the list:"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:311
+#: inc/admin/admin-metaboxes-content-analysis-form.php:303
 msgid "This page doesn't have any nofollow links."
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:48 inc/admin/admin-metaboxes.php:163
 #: inc/admin/admin-metaboxes.php:166 inc/admin/admin.php:183
-#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:633
+#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:656
 msgid "SEO"
 msgstr ""
 
@@ -1465,10 +1469,11 @@ msgstr ""
 msgid "Focus keywords"
 msgstr ""
 
-#: inc/admin/admin.php:739 inc/admin/admin.php:758 inc/admin/admin.php:779
+#: inc/admin/admin.php:739
 msgid ""
-"<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms "
-"metadata. Some dynamic variables will not be interpreted."
+"<strong>WARNING:</strong> Migration will delete / update all SEOPress posts "
+"and terms metadata. Some dynamic variables will not be interpreted. We do "
+"NOT delete any Yoast datas."
 msgstr ""
 
 #: inc/admin/admin.php:740 inc/admin/admin.php:759 inc/admin/admin.php:780
@@ -1487,6 +1492,13 @@ msgstr ""
 msgid "Meta Robots (noindex, nofollow)"
 msgstr ""
 
+#: inc/admin/admin.php:758
+msgid ""
+"<strong>WARNING:</strong> Migration will update / delete all SEOPress posts "
+"and terms metadata. Some dynamic variables will not be interpreted. We do "
+"NOT delete any AIO datas."
+msgstr ""
+
 #: inc/admin/admin.php:767
 msgid "Import posts and terms metadata from The SEO Framework"
 msgstr ""
@@ -1495,8 +1507,15 @@ msgstr ""
 msgid "Meta Robots (noindex, nofollow, noarchive)"
 msgstr ""
 
-#: inc/admin/admin.php:777 inc/functions/options-advanced-admin.php:178
+#: inc/admin/admin.php:777 inc/functions/options-advanced-admin.php:201
 msgid "Redirect URL"
+msgstr ""
+
+#: inc/admin/admin.php:779
+msgid ""
+"<strong>WARNING:</strong> Migration will update / delete all SEOPress posts "
+"and terms metadata. Some dynamic variables will not be interpreted. We do "
+"NOT delete any SEO Framework datas."
 msgstr ""
 
 #: inc/admin/admin.php:787
@@ -3285,7 +3304,7 @@ msgstr ""
 msgid "Broken Links"
 msgstr ""
 
-#: inc/admin/ajax.php:76
+#: inc/admin/ajax.php:85
 msgid "To get your Google snippet preview, publish your post!"
 msgstr ""
 
@@ -3307,85 +3326,102 @@ msgstr ""
 msgid "Need help?"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:169
-#: inc/functions/options-advanced-admin.php:635
+#: inc/functions/options-advanced-admin.php:33
+#: inc/functions/options-advanced-admin.php:43
+msgid "WARNING"
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:34
+msgid ""
+"Do NOT change your permalink structure on a production site. Changing URLs "
+"can severely damage your SEO."
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:44
+msgid ""
+"URL rewriting is NOT enabled on your site. Select a permalink structure "
+"optimized for SEO (NOT Plain)."
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:192
+#: inc/functions/options-advanced-admin.php:658
 msgid "Title tag"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:172
+#: inc/functions/options-advanced-admin.php:195
 msgid "Meta Desc."
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:175
+#: inc/functions/options-advanced-admin.php:198
 msgid "Redirect?"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:181
-#: inc/functions/options-advanced-admin.php:659
+#: inc/functions/options-advanced-admin.php:204
+#: inc/functions/options-advanced-admin.php:682
 msgid "Canonical"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:184
+#: inc/functions/options-advanced-admin.php:207
 msgid "Target Kw"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:187
+#: inc/functions/options-advanced-admin.php:210
 msgid "Noindex?"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:190
+#: inc/functions/options-advanced-admin.php:213
 msgid "Nofollow?"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:193
+#: inc/functions/options-advanced-admin.php:216
 msgid "Count words?"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:196
+#: inc/functions/options-advanced-admin.php:219
 msgid "W3C check"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:199
+#: inc/functions/options-advanced-admin.php:222
 msgid "Page Speed"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:252
+#: inc/functions/options-advanced-admin.php:275
 msgid "Check code quality of this page"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:256
+#: inc/functions/options-advanced-admin.php:279
 msgid "Analyze this page with Google Page Speed"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:339
+#: inc/functions/options-advanced-admin.php:362
 msgid "Enable noindex"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:392
+#: inc/functions/options-advanced-admin.php:415
 msgid "Enable index"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:445
+#: inc/functions/options-advanced-admin.php:468
 msgid "Enable nofollow"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:497
+#: inc/functions/options-advanced-admin.php:520
 msgid "Enable follow"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:544
+#: inc/functions/options-advanced-admin.php:567
 msgid "Enable redirection"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:583
+#: inc/functions/options-advanced-admin.php:606
 msgid "Disable redirection"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:757
+#: inc/functions/options-advanced-admin.php:783
 msgid "Description"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:766
+#: inc/functions/options-advanced-admin.php:792
 msgid ""
 "The description is not prominent by default; however, some themes may show "
 "it."

@@ -436,13 +436,13 @@ function seopress_titles_the_title() {
 		current_time(get_option( 'time_format' )),
 	);
 
-	if ( is_front_page() && is_home() && get_post_meta($post->ID,'_seopress_titles_title',true) =='') { //HOMEPAGE
+	if ( is_front_page() && is_home() && isset($post) && get_post_meta($post->ID,'_seopress_titles_title',true) =='') { //HOMEPAGE
 		if (seopress_titles_home_site_title_option() !='') {
 			$seopress_titles_the_title = esc_attr(seopress_titles_home_site_title_option());
 
 			$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title);
 		}
-	} elseif ( is_front_page() && get_post_meta($post->ID,'_seopress_titles_title',true) ==''){ //STATIC HOMEPAGE
+	} elseif ( is_front_page() && isset($post) && get_post_meta($post->ID,'_seopress_titles_title',true) ==''){ //STATIC HOMEPAGE
 		if (seopress_titles_home_site_title_option() !='') {
 			$seopress_titles_the_title = esc_attr(seopress_titles_home_site_title_option());
 
@@ -804,13 +804,13 @@ function seopress_titles_the_description_content() {
 		$author_bio,
 	);
 
-	if ( is_front_page() && is_home() && get_post_meta($post->ID,'_seopress_titles_desc',true) =='' ) { //HOMEPAGE
+	if ( is_front_page() && is_home() && isset($post) && get_post_meta($post->ID,'_seopress_titles_desc',true) =='' ) { //HOMEPAGE
 		if (seopress_titles_home_site_desc_option() !='') { //IS GLOBAL
 			$seopress_titles_the_description = esc_attr(seopress_titles_home_site_desc_option());
 
 			$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
 		}
-	} elseif ( is_front_page() && get_post_meta($post->ID,'_seopress_titles_desc',true) ==''){ //STATIC HOMEPAGE
+	} elseif ( is_front_page() && isset($post) && get_post_meta($post->ID,'_seopress_titles_desc',true) ==''){ //STATIC HOMEPAGE
 		if (seopress_titles_home_site_desc_option() !='' && get_post_meta($post->ID,'_seopress_titles_desc',true) =='') { //IS GLOBAL
 			$seopress_titles_the_description = esc_attr(seopress_titles_home_site_desc_option());
 

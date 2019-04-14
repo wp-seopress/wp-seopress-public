@@ -500,4 +500,25 @@ jQuery(document).ready(function(){
 			},
 		});
 	});
+	//White Label
+	jQuery('#toggle-white-label').on('click', function() {
+		jQuery('#toggle-white-label').attr('data-toggle', jQuery('#toggle-white-label').attr('data-toggle') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxToggleFeatures.seopress_toggle_features,
+			data : {
+				action: 'seopress_toggle_features',
+				feature: 'toggle-white-label',
+				feature_value: jQuery('#toggle-white-label').attr('data-toggle'),
+				_ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('White Label has been successfully updated!');
+				jQuery( '#white-label-state' ).toggleClass('feature-state-on');
+				jQuery( '#white-label-state-default' ).toggleClass('feature-state-off');
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
 });

@@ -25,6 +25,29 @@ if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('w
     add_action( 'admin_notices', 'seopress_notice_license' );
 }
 
+//Permalinks notice
+global $pagenow;
+if (isset($pagenow) && $pagenow == 'options-permalink.php') {
+    function seopress_notice_permalinks() {
+        $class = 'notice notice-warning';
+        $message = '<strong>'.__( 'WARNING', 'wp-seopress' ).'</strong>';
+        $message .= '<p>'.__( 'Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO.', 'wp-seopress' ).'</p>';
+
+        printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); 
+    }
+    add_action( 'admin_notices', 'seopress_notice_permalinks' );
+
+    if (get_option('permalink_structure') =='') { //If default permalink
+        function seopress_notice_no_rewrite_url() {
+            $class = 'notice notice-warning';
+            $message = '<strong>'.__( 'WARNING', 'wp-seopress' ).'</strong>';
+            $message .= '<p>'.__( 'URL rewriting is NOT enabled on your site. Select a permalink structure optimized for SEO (NOT Plain).', 'wp-seopress' ).'</p>';
+
+            printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); 
+        }
+        add_action( 'admin_notices', 'seopress_notice_no_rewrite_url' );
+    }
+}
 
 //Advanced
 //=================================================================================================

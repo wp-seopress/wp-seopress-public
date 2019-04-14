@@ -41,6 +41,11 @@ let hasSaved = false;
                     jQuery( '#seopress-analysis-tabs-2' ).load(' #seopress-analysis-tabs-2');
                     jQuery( '#seopress-analysis-tabs-3' ).load(' #seopress-analysis-tabs-3');
                     jQuery( '#seopress-analysis-tabs-4' ).load(' #seopress-analysis-tabs-4');
+                    if (data.data.target_kws) {
+                        jQuery('#seopress-analysis-tabs').show();
+                    } else {
+                        jQuery('#seopress-analysis-tabs').hide();
+                    }
                 },
             });
         }

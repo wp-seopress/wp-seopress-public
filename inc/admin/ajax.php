@@ -50,7 +50,7 @@ function seopress_do_real_preview() {
         $data = array();
 
         //Save Target KWs
-        if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
+        if(isset($_GET['seopress_analysis_target_kw'])) {
             delete_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw');
             update_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', esc_html($_GET['seopress_analysis_target_kw']));
         }
@@ -88,6 +88,7 @@ function seopress_do_real_preview() {
 
             if($dom->loadHTML('<?xml encoding="utf-8" ?>' .$response)) {
                 //Get Target Keywords
+                $data['target_kws'] = $_GET['seopress_analysis_target_kw'];
                 $seopress_analysis_target_kw = explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true));
 
                 $xpath = new DOMXPath($dom);

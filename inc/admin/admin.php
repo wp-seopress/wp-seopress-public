@@ -736,7 +736,7 @@ class seopress_options
                             <li><?php _e('Canonical URL','wp-seopress'); ?></li>
                             <li><?php _e('Focus keywords','wp-seopress'); ?></li>
                         </ul>
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted.', 'wp-seopress' ); ?></p>
+                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast datas.', 'wp-seopress' ); ?></p>
                         <button id="seopress-yoast-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                         <span class="spinner"></span>
                         <div class="log"></div>
@@ -755,7 +755,7 @@ class seopress_options
                             <li><?php _e('Twitter image thumbnail','wp-seopress'); ?></li>
                             <li><?php _e('Meta Robots (noindex, nofollow)','wp-seopress'); ?></li>
                         </ul>
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted.', 'wp-seopress' ); ?></p>
+                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO datas.', 'wp-seopress' ); ?></p>
                         <button id="seopress-aio-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                         <span class="spinner"></span>
                         <div class="log"></div>
@@ -776,7 +776,7 @@ class seopress_options
                             <li><?php _e('Canonical URL','wp-seopress'); ?></li>
                             <li><?php _e('Redirect URL','wp-seopress'); ?></li>
                         </ul>
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted.', 'wp-seopress' ); ?></p>
+                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Framework datas.', 'wp-seopress' ); ?></p>
                         <button id="seopress-seo-framework-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                         <span class="spinner"></span>
                         <div class="log"></div>

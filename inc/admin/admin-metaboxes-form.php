@@ -274,7 +274,7 @@ echo               '<div class="snippet-description">...</div>
                     if ($seopress_redirections_value !='' || in_array($seopress_redirections_type, $status_code)) {
                         if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                             if ( 'seopress_404' == $typenow ) {                      
-                                echo '<a href="'.get_home_url().'/'.get_the_title().'/" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
+                                echo '<a href="'.get_home_url().'/'.get_the_title().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
                             } else {
                                 echo '<a href="'.get_permalink().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
                             }

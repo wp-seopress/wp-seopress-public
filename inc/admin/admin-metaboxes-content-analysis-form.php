@@ -65,9 +65,8 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
             </script>
         </div>";
 }
-        echo '<div id="seopress-analysis-tabs">';
-            //if (!empty($seopress_analysis_data)) {
-                
+        
+        echo '<div id="seopress-analysis-tabs" style="display:none;">';
                 echo '<ul class="wrap-analysis-results">
                     <li><a href="#seopress-analysis-tabs-1"><span class="dashicons dashicons-admin-settings"></span>'. __( 'Optimizations', 'wp-seopress' ) .'</a></li>
                     <li><a href="#seopress-analysis-tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Configuration', 'wp-seopress' ) .'</a></li>
@@ -303,7 +302,6 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     } else {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('This page doesn\'t have any nofollow links.','wp-seopress').'</p>';
                     }
-                echo '</div>';
-            //}
+            echo '</div>';
     echo '</div>
     </div>';

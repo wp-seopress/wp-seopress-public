@@ -144,6 +144,12 @@ function seopress_admin_header() { ?>
                                     </li>
                                     <?php if (!is_multisite()) { ?>
                                     <li>
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_white_label$15' ); ?>">
+                                            <span class="dashicons dashicons-tag"></span>
+                                            <?php _e( 'White Label', 'wp-seopress' ); ?>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess$7' ); ?>">
                                             <span class="dashicons dashicons-media-text"></span>
                                             <?php _e( '.htaccess', 'wp-seopress' ); ?>

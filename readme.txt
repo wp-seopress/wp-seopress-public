@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.4+
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.3.11.2
+Stable tag: 3.3.12
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,15 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.3.12 =
+* NEW Support Redirects with parameters (PRO)
+* NEW Add Argentina Peso currency (PRO)
+* NEW White label settings + Multisite (PRO)
+* INFO Improve Content Analysis UX/UI if no target keywords
+* INFO Improve UI in Permalink settings page
+* FIX Test redirection link and Test your URL button (PRO)
+* FIX Notice Trying to get property 'ID' of non-object in wp-content/plugins/wp-seopress/inc/functions/options-titles-metas.php:439
+* FIX Notice Trying to get property 'ID' of non-object in wp-content/plugins/wp-seopress/inc/functions/options-titles-metas.php:807
 = 3.3.11.2 =
 * FIX Content Analysis for non UTF-8 characters
 * FIX H1 count for Content Analysis
