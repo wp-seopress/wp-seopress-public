@@ -77,6 +77,12 @@ function seopress_admin_bar_links() {
 			));
 			$wp_admin_bar->add_menu( array(
 				'parent'	=> 'seopress_custom_top_level',
+				'id'		=> 'seopress_custom_sub_menu_schemas',
+				'title'		=> __( 'Schemas', 'wp-seopress' ),
+				'href'		=> admin_url( 'edit.php?post_type=seopress_schemas' ),
+			));
+			$wp_admin_bar->add_menu( array(
+				'parent'	=> 'seopress_custom_top_level',
 				'id'		=> 'seopress_custom_sub_menu_404',
 				'title'		=> __( 'Redirections', 'wp-seopress' ),
 				'href'		=> admin_url( 'edit.php?post_type=seopress_404' ),

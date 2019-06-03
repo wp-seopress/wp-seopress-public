@@ -365,6 +365,22 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		    $rules = apply_filters('seopress_category_rewrite_rules', $rules);
 		    return $rules;
 		}
+
+		function seopress_remove_category_base( $link ) {
+			$category_base = get_option( 'category_base' );
+			if ( '' == $category_base ) {
+				$category_base = 'category';
+			}
+
+			if ( '/' == substr( $category_base, 0, 1 ) ) {
+				$category_base = substr( $category_base, 1 );
+			}
+			$category_base .= '/';
+
+			return preg_replace( '`' . preg_quote( $category_base, '`' ) . '`u', '', $link, 1 );
+		}
+		add_filter( 'category_link', 'seopress_remove_category_base' );
+
 		add_action('template_redirect', 'seopress_category_redirect', 1);
 		function seopress_category_redirect(){
 			global $wp;

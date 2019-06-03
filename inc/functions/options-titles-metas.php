@@ -1270,12 +1270,26 @@ function seopress_titles_single_cpt_date_hook() {
 		if (is_singular() && seopress_titles_single_cpt_date_option() =='1') {
 			$seopress_get_current_pub_post_date = get_the_date('c');
 			$seopress_get_current_up_post_date = get_the_modified_date('c');
-			echo '<meta property="article:published_time" content="'.$seopress_get_current_pub_post_date.'" />';
-			echo "\n";
-			echo '<meta property="article:modified_time" content="'.$seopress_get_current_up_post_date.'" />';
-			echo "\n";
-			echo '<meta property="og:updated_time" content="'.$seopress_get_current_up_post_date.'" />';
-			echo "\n";
+			$html = '<meta property="article:published_time" content="'.$seopress_get_current_pub_post_date.'" />';
+			$html .= "\n";
+
+			$html = apply_filters('seopress_titles_article_published_time', $html);
+
+			echo $html;
+
+			$html = '<meta property="article:modified_time" content="'.$seopress_get_current_up_post_date.'" />';
+			$html .= "\n";
+
+			$html = apply_filters('seopress_titles_article_modified_time', $html);
+
+			echo $html;
+
+			$html = '<meta property="og:updated_time" content="'.$seopress_get_current_up_post_date.'" />';
+			$html .= "\n";
+			
+			$html = apply_filters('seopress_titles_og_updated_time', $html);
+
+			echo $html;
 		}
 	}
 }

@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO Plugin for WordPress.
-Version: 3.4
+Version: 3.5
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.4' ); 
+define( 'SEOPRESS_VERSION', '3.5' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -360,6 +360,33 @@ function seopress_get_taxonomies() {
     $taxonomies = get_taxonomies( $args, $output, $operator );  
     
     return $taxonomies;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Get all custom fields (limit: 200)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_get_custom_fields() {
+    $cf_keys = wp_cache_get( 'seopress_get_custom_fields' );
+    
+    if ( false === $cf_keys ) {
+        global $wpdb;
+        global $post;
+        $post = get_post( $post );
+        $limit = (int) apply_filters( 'postmeta_form_limit', 200 );
+        $cf_keys = $wpdb->get_col( "
+            SELECT meta_key
+            FROM $wpdb->postmeta
+            GROUP BY meta_key
+            HAVING meta_key NOT LIKE '\_%'
+            ORDER BY meta_key
+            LIMIT $limit" );
+
+        if ( $cf_keys ) {
+            natcasesort( $cf_keys );
+        };
+        wp_cache_set( 'seopress_get_custom_fields', $cf_keys );
+    }
+    return $cf_keys;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

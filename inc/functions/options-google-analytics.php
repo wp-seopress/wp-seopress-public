@@ -84,6 +84,18 @@ function seopress_google_analytics_optimize_option() {
 	}
 }
 
+//Additional tracking code
+function seopress_google_analytics_other_tracking_option() {
+	$seopress_google_analytics_other_tracking_option = get_option("seopress_google_analytics_option_name");
+	if ( ! empty ( $seopress_google_analytics_other_tracking_option ) ) {
+		foreach ($seopress_google_analytics_other_tracking_option as $key => $seopress_google_analytics_other_tracking_value)
+			$options[$key] = $seopress_google_analytics_other_tracking_value;
+			if (isset($seopress_google_analytics_other_tracking_option['seopress_google_analytics_other_tracking'])) {
+				return $seopress_google_analytics_other_tracking_option['seopress_google_analytics_other_tracking'];
+			}
+	}
+}
+
 //Remarketing
 function seopress_google_analytics_remarketing_option() {
 	$seopress_google_analytics_remarketing_option = get_option("seopress_google_analytics_option_name");
@@ -542,6 +554,11 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 		$seopress_google_analytics_html .= "\n";
 		
 		$seopress_google_analytics_html = apply_filters('seopress_gtag_html', $seopress_google_analytics_html);
+
+		if (seopress_google_analytics_other_tracking_option() !='') {
+			$seopress_google_analytics_html .= seopress_google_analytics_other_tracking_option();
+			$seopress_google_analytics_html = apply_filters('seopress_gtag_after_additional_tracking_html', $seopress_google_analytics_html);
+		}
 
 		if ($echo == true) {
 			echo $seopress_google_analytics_html;

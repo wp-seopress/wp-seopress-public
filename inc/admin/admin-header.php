@@ -127,7 +127,7 @@ function seopress_admin_header() { ?>
                                     <li>
                                         <a href="<?php echo admin_url( 'edit.php?post_type=seopress_bot' ); ?>">
                                             <span class="dashicons dashicons-admin-generic"></span>
-                                            <?php _e( 'SEOPress BOT - Broken links', 'wp-seopress' ); ?>
+                                            <?php _e( 'Broken links', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
@@ -180,46 +180,50 @@ function seopress_admin_header() { ?>
                     </a>
                 </h1>
                 <?php
-                    if (function_exists('seopress_get_locale')) {
-                        if (seopress_get_locale() =='fr') {
-                            $seopress_docs_link['changelog'] = 'https://www.seopress.org/fr/journal-modifications/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                            $seopress_docs_link['website'] = 'https://www.seopress.org/fr/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                            $seopress_docs_link['support'] = 'https://www.seopress.org/fr/support/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                        } else {
-                            $seopress_docs_link['changelog'] = 'https://www.seopress.org/changelog/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                            $seopress_docs_link['website'] = 'https://www.seopress.org/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                            $seopress_docs_link['support'] = 'https://www.seopress.org/support/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                    if (defined('SEOPRESS_WL_ICONS_HEADER') && SEOPRESS_WL_ICONS_HEADER === false) {
+                        //do nothing
+                    } else {
+                        if (function_exists('seopress_get_locale')) {
+                            if (seopress_get_locale() =='fr') {
+                                $seopress_docs_link['changelog'] = 'https://www.seopress.org/fr/journal-modifications/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                $seopress_docs_link['website'] = 'https://www.seopress.org/fr/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                $seopress_docs_link['support'] = 'https://www.seopress.org/fr/support/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                            } else {
+                                $seopress_docs_link['changelog'] = 'https://www.seopress.org/changelog/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                $seopress_docs_link['website'] = 'https://www.seopress.org/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                $seopress_docs_link['support'] = 'https://www.seopress.org/support/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                            }
                         }
-                    }
-                ?>
-                <div id="seopress-notice">
-                    <div class="small">
-                        <a href="<?php echo $seopress_docs_link['changelog']; ?>" alt="<?php _e('See the changelog (new window)','wp-seopress'); ?>" target="_blank">
-                            <div class="dashicons dashicons-media-text"></div>
-                            <div class="tooltip"><?php _e('See the changelog','wp-seopress'); ?></div>
-                        </a>
-                        <a href="mailto:contact@seopress.org" alt="<?php _e('Send feedback','wp-seopress'); ?>" target="_blank">
-                            <div class="dashicons dashicons-megaphone"></div>
-                            <div class="tooltip"><?php _e('Send feedback','wp-seopress'); ?></div>
-                        </a>
-                        <a href="https://twitter.com/wp_seopress" alt="<?php _e('Follow us on Twitter (new window)','wp-seopress'); ?>" target="_blank">
-                            <div class="dashicons dashicons-twitter"></div>
-                            <div class="tooltip"><?php _e('Follow us on Twitter','wp-seopress'); ?></div>
-                        </a>
-                        <a href="https://www.youtube.com/SEOPress" alt="<?php _e('Follow us on YouTube (new window)','wp-seopress'); ?>" target="_blank">
-                            <div class="dashicons dashicons-video-alt3"></div>
-                            <div class="tooltip"><?php _e('Follow us on YouTube','wp-seopress'); ?></div>
-                        </a>
-                        <a href="<?php echo $seopress_docs_link['website']; ?>" alt="<?php _e('Official website (new window)','wp-seopress'); ?>" target="_blank">
-                            <div class="dashicons dashicons-info"></div>
-                            <div class="tooltip"><?php _e('Official website','wp-seopress'); ?></div>
-                        </a>
-                        <a href="<?php echo $seopress_docs_link['support']; ?>" alt="<?php _e('Support (new window)','wp-seopress'); ?>" target="_blank">
-                            <div class="dashicons dashicons-editor-help"></div>
-                            <div class="tooltip"><?php _e('Support','wp-seopress'); ?></div>
-                        </a>
+                    ?>
+                    <div id="seopress-notice">
+                        <div class="small">
+                            <a href="<?php echo $seopress_docs_link['changelog']; ?>" alt="<?php _e('See the changelog (new window)','wp-seopress'); ?>" target="_blank">
+                                <div class="dashicons dashicons-media-text"></div>
+                                <div class="tooltip"><?php _e('See the changelog','wp-seopress'); ?></div>
+                            </a>
+                            <a href="mailto:contact@seopress.org" alt="<?php _e('Send feedback','wp-seopress'); ?>" target="_blank">
+                                <div class="dashicons dashicons-megaphone"></div>
+                                <div class="tooltip"><?php _e('Send feedback','wp-seopress'); ?></div>
+                            </a>
+                            <a href="https://twitter.com/wp_seopress" alt="<?php _e('Follow us on Twitter (new window)','wp-seopress'); ?>" target="_blank">
+                                <div class="dashicons dashicons-twitter"></div>
+                                <div class="tooltip"><?php _e('Follow us on Twitter','wp-seopress'); ?></div>
+                            </a>
+                            <a href="https://www.youtube.com/SEOPress" alt="<?php _e('Follow us on YouTube (new window)','wp-seopress'); ?>" target="_blank">
+                                <div class="dashicons dashicons-video-alt3"></div>
+                                <div class="tooltip"><?php _e('Follow us on YouTube','wp-seopress'); ?></div>
+                            </a>
+                            <a href="<?php echo $seopress_docs_link['website']; ?>" alt="<?php _e('Official website (new window)','wp-seopress'); ?>" target="_blank">
+                                <div class="dashicons dashicons-info"></div>
+                                <div class="tooltip"><?php _e('Official website','wp-seopress'); ?></div>
+                            </a>
+                            <a href="<?php echo $seopress_docs_link['support']; ?>" alt="<?php _e('Support (new window)','wp-seopress'); ?>" target="_blank">
+                                <div class="dashicons dashicons-editor-help"></div>
+                                <div class="tooltip"><?php _e('Support','wp-seopress'); ?></div>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>

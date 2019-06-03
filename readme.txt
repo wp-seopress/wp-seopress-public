@@ -3,10 +3,10 @@ Authors: rainbowgeek
 Contributors: rainbowgeek
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
-Requires at least: 4.4+
-Tested up to: 5.1
+Requires at least: 4.6+
+Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.4
+Stable tag: 3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
 	<li>Google Structured Data types (schema.org): article, local business, FAQ, course, recipe, video, event, product, simple review</li>
+	<li>Automatic Schemas</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Google Analytics Stats in Dashboard</li>
 	<li>Google Local Business</li>
@@ -162,6 +163,38 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.5 =
+* NEW WP 5.2 compatibility
+* NEW Automatic schemas for your posts, pages, post types: article, local business, course, recipe, video, event, product, review (SEO > PRO > Structured Data Types)! (PRO)
+* NEW Add 'seopress_schemas_auto_article_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_auto_lb_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_auto_course_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_auto_recipe_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_auto_video_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_auto_event_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_auto_product_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_auto_review_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_article_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_schemas_lb_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_schemas_faq_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_schemas_course_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_schemas_recipe_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_schemas_video_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_schemas_event_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_schemas_product_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_schemas_review_html' hook to filter manual review schema (PRO)
+* NEW Add 'seopress_titles_article_published_time' hook to filter article published time meta
+* NEW Add 'seopress_titles_article_modified_time' hook to filter article published time meta
+* NEW Add 'seopress_titles_og_updated_time' hook to filter article published time meta
+* NEW Add additional tracking code like Facebook Pixel, Hotjar... from SEO > Analytics > Tracking (PRO)
+* NEW Add seopress_gtag_after_additional_tracking_html hook to filter custom tracking
+* NEW White label: remove SEOPress icons on the right in header (changelog, YouTube, Twitter...) - (PRO)
+* NEW Add SEOPRESS_WL_ICONS_HEADER define to remove SEOPress icons
+* INFO WordPress 4.6 is now the minimum recommended version
+* INFO Removing multiple references to SEOPress to improve the white label
+* FIX White label for subsites in a multisite setup
+* FIX TotalTime for recipe schema
+* FIX Remove /category/ in content (thanks to Udo Telaar)! Flush your permalinks!
 = 3.4 =
 * NEW Automatically set the image Title based on filename
 * NEW Automatically set the image Alt text based on filename
