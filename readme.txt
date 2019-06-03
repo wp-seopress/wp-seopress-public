@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.5.3
+Stable tag: 3.5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,23 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.5.4 =
+* NEW brand field for Product Schema (PRO)
+* NEW aggregateRating for Product Schema (PRO)
+* NEW review for Product Schema (PRO)
+* NEW global identifiers field for Product Schema (PRO)
+* NEW SKU field for Product Schema (PRO)
+* NEW priceValidUntil field for Product Schema (PRO)
+* NEW URL for Product Schema (PRO)
+* NEW Remove default JSON-LD structured data (WooCommerce 3+, PRO)
+* NEW 'seopress_ga_dashboard_widget_cap' hook to filter Google Analytics dashboard widget capability (PRO)
+* INFO Small performance improvements
+* INFO Add default values for Product schema if empty fields (for manual and automatic)
+* INFO Google Analytics dashboard widget is now only visible for users with "edit_dashboard" capability (PRO)
+* FIX Page Speed screenshots (PRO)
+* FIX Notices in Page Speed analysis (PRO)
+* FIX Esc_attr for term taxonomies
+* FIX Revert itemscope attribute in Breadcrumbs (it's not possible to be valid both in W3C and in Google Structured Data test tool, PRO)
 = 3.5.3 =
 * NEW Add 'seopress_dublin_core_language' hook to filter Dublin Core language
 * FIX itemscope attribute in Breadcrumbs
