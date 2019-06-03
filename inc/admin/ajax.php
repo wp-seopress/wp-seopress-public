@@ -102,11 +102,11 @@ function seopress_do_real_preview() {
                 $xpath = new DOMXPath($dom);
 
                 //Title
-                if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
-                    $list = $dom->getElementsByTagName("title");
-                    if ($list->length > 0) {
-                        $title = $list->item(0)->textContent;
-                        $data['title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($title)));
+                $list = $dom->getElementsByTagName("title");
+                if ($list->length > 0) {
+                    $title = $list->item(0)->textContent;
+                    $data['title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($title)));
+                    if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
                         foreach ($seopress_analysis_target_kw as $kw) {
                             if (preg_match_all('#\b('.$kw.')\b#iu', $data['title'], $m)) {
                                 $data['meta_title']['matches'][$kw][] = $m[0];
@@ -114,6 +114,7 @@ function seopress_do_real_preview() {
                         }
                     }
                 }
+                
 
                 //Meta desc
                 $meta_description = $xpath->query('//meta[@name="description"]/@content');
