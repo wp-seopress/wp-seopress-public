@@ -2,8 +2,8 @@
 /*
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
-Description: The Best SEO Plugin for WordPress.
-Version: 3.3.14
+Description: One of the best SEO Plugin for WordPress.
+Version: 3.3.15
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.3.14' ); 
+define( 'SEOPRESS_VERSION', '3.3.15' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -512,7 +512,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
         $urls = array();
 
         /*CPT*/
-        if (!empty(seopress_xml_sitemap_post_types_list_option())) {
+        if (seopress_xml_sitemap_post_types_list_option() !='') {
             foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
                 foreach ($cpt_value as $_cpt_key => $_cpt_value) {
                     if($_cpt_value =='1') {
@@ -523,7 +523,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
         }
 
         /*Taxonomies*/
-        if (!empty(seopress_xml_sitemap_taxonomies_list_option())) {
+        if (seopress_xml_sitemap_taxonomies_list_option() !='') {
             foreach (seopress_xml_sitemap_taxonomies_list_option() as $tax_key => $tax_value) {
                 foreach ($tax_value as $_tax_key => $_tax_value) {
                     if($_tax_value =='1') {
@@ -569,7 +569,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
 
         if (get_query_var( 'seopress_cpt') !== '' ) {
             if (function_exists('seopress_xml_sitemap_post_types_list_option') 
-                && !empty(seopress_xml_sitemap_post_types_list_option()) 
+                && seopress_xml_sitemap_post_types_list_option() !='' 
                 && array_key_exists(get_query_var('seopress_cpt'),seopress_xml_sitemap_post_types_list_option())) {
                 $seopress_cpt = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps-single.php';
                 if( file_exists( $seopress_cpt ) ) {
@@ -577,7 +577,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
                     exit;
                 }
             } elseif (function_exists('seopress_xml_sitemap_taxonomies_list_option') 
-                && !empty(seopress_xml_sitemap_taxonomies_list_option()) 
+                && seopress_xml_sitemap_taxonomies_list_option() !='' 
                 && array_key_exists(get_query_var('seopress_cpt'),seopress_xml_sitemap_taxonomies_list_option())) {
                 $seopress_tax = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps-single-term.php';
                 if( file_exists( $seopress_tax ) ) {
