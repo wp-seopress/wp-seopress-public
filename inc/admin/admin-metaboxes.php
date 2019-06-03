@@ -270,6 +270,7 @@ function seopress_display_seo_metaboxe() {
         $seopress_redirections_enabled          = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
         $seopress_redirections_type             = get_post_meta($post->ID,'_seopress_redirections_type',true);
         $seopress_redirections_value            = get_post_meta($post->ID,'_seopress_redirections_value',true);
+        $seopress_redirections_param            = get_post_meta($post->ID,'_seopress_redirections_param',true);
         if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
             $seopress_news_disabled                 = get_post_meta($post->ID,'_seopress_news_disabled',true);
             $seopress_video_disabled                = get_post_meta($post->ID,'_seopress_video_disabled',true);
@@ -352,6 +353,9 @@ function seopress_display_seo_metaboxe() {
             }     
             if(isset($_POST['seopress_redirections_value'])){
                 update_post_meta($post_id, '_seopress_redirections_value', esc_html($_POST['seopress_redirections_value']));
+            }
+            if(isset($_POST['seopress_redirections_param'])){
+                update_post_meta($post_id, '_seopress_redirections_param', esc_html($_POST['seopress_redirections_param']));
             }
             if( isset( $_POST[ 'seopress_redirections_enabled' ] ) ) {
                 update_post_meta( $post_id, '_seopress_redirections_enabled', 'yes' );

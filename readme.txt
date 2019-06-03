@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.4+
 Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.3.15
+Stable tag: 3.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,17 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.4 =
+* NEW Automatically set the image Title based on filename
+* NEW Automatically set the image Alt text based on filename
+* NEW Automatically set the image Caption based on filename
+* NEW Automatically set the image Description based on filename
+* NEW Redirect attachment pages to the file URL
+* NEW Query parameters of redirections (exact match, exclude all parameters, exclude all parameters and passed them to the redirection)
+* NEW Google Optimize
+* INFO Show content analysis tab even if there is no target keyword entered
+* FIX Escape attribute on custom field dynamic variable (thanks @wpchannel)
+* FIX Word count for Themify builder plugin
 = 3.3.15 =
 * FIX Fatal error: Can't use function return value in write context
 = 3.3.14 =

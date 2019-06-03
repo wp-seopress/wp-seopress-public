@@ -479,7 +479,7 @@ function seopress_titles_the_title() {
 				}
 
 				foreach ($matches['1'] as $key => $value) {
-					$seopress_titles_cf_template_replace_array[] = get_post_meta($post->ID,$value,true);
+					$seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID,$value,true));
 				}
 			}
 
@@ -529,7 +529,7 @@ function seopress_titles_the_title() {
 				}
 
 				foreach ($matches['1'] as $key => $value) {
-					$seopress_titles_cf_template_replace_array[] = get_post_meta($post->ID,$value,true);
+					$seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID,$value,true));
 				}
 			}
 
@@ -844,7 +844,7 @@ function seopress_titles_the_description_content() {
 				}
 
 				foreach ($matches['1'] as $key => $value) {
-					$seopress_titles_cf_template_replace_array[] = get_post_meta($post->ID,$value,true);
+					$seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID,$value,true));
 				}
 			}
 
@@ -892,7 +892,7 @@ function seopress_titles_the_description_content() {
 				}
 
 				foreach ($matches['1'] as $key => $value) {
-					$seopress_titles_cf_template_replace_array[] = get_post_meta($post->ID,$value,true);
+					$seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID,$value,true));
 				}
 			}
 

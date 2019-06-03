@@ -274,9 +274,7 @@ if (seopress_get_toggle_advanced_option() =='1') {
 	}
 	add_action('init', 'seopress_load_advanced_admin_options', 10);
 	function seopress_load_advanced_admin_options() {
-		if (is_admin()){
-		    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
-		}
+	    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
 		//Admin bar
 		function seopress_advanced_appearance_adminbar_option() {
 			$seopress_advanced_appearance_adminbar_option = get_option("seopress_advanced_option_name");

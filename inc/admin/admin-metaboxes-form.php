@@ -267,8 +267,18 @@ echo               '<div class="snippet-description">...</div>
                     <option ' . selected( '451', $seopress_redirections_type, false ) . ' value="451">'. __( '451 Unavailable For Legal Reasons', 'wp-seopress' ) .'</option>
                 </select>
                 <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.esc_html__('Enter your new URL','wp-seopress').'" aria-label="'.__('URL redirection','wp-seopress').'" value="'.$seopress_redirections_value.'" />
-                <br><br>';
-                                
+                <br><br>
+            </p>';
+            if ("seopress_404" == $typenow) {
+            echo '<p>
+                <label for="seopress_redirections_param_meta">'. __( 'Query parameters', 'wp-seopress' ) .'</label>
+                <select name="seopress_redirections_param">
+                    <option ' . selected( 'exact_match', $seopress_redirections_param, false ) . ' value="exact_match">'. __( 'Exact match with all parameters', 'wp-seopress' ) .'</option>
+                    <option ' . selected( 'without_param', $seopress_redirections_param, false ) . ' value="without_param">'. __( 'Exclude all parameters', 'wp-seopress' ) .'</option>
+                    <option ' . selected( 'with_ignored_param', $seopress_redirections_param, false ) . ' value="with_ignored_param">'. __( 'Exclude all parameters and passed them to the redirection', 'wp-seopress' ) .'</option>
+                </select></p>';
+            }
+            echo '<p>';                
                 if ($seopress_redirections_enabled =='yes') {
                     $status_code = array('410','451');
                     if ($seopress_redirections_value !='' || in_array($seopress_redirections_type, $status_code)) {

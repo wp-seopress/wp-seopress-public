@@ -42,6 +42,12 @@ function seopress_do_real_preview() {
 
         //Get post content (used for Words counter)
         $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
+        
+            //Themify compatibility
+            if ( defined( 'THEMIFY_DIR' ) ) {
+                $seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
+            }
+
         $seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
 
         //Init

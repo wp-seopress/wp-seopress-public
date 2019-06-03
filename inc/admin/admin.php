@@ -2706,6 +2706,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_google_analytics_optimize', // ID
+           __("Enable Google Optimize","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_optimize_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-features', // Page
+            'seopress_setting_section_google_analytics_features' // Section                  
+        );
+
+        add_settings_field(
             'seopress_google_analytics_remarketing', // ID
            __("Enable remarketing, demographics, and interests reporting","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_remarketing_callback' ), // Callback
@@ -2863,9 +2871,49 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_advanced_attachments_file', // ID
+           __("Redirect attachment pages to the file URL","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_attachments_file_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
             'seopress_advanced_advanced_replytocom', // ID
            __("Remove ?replytocom link to avoid duplicate content","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_replytocom_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_title_editor', // ID
+           __("Automatically set the image Title","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_image_auto_title_editor_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_alt_editor', // ID
+           __("Automatically set the image Alt text","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_image_auto_alt_editor_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_caption_editor', // ID
+           __("Automatically set the image Caption","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_image_auto_caption_editor_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_desc_editor', // ID
+           __("Automatically set the image Description","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_image_auto_desc_editor_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
             'seopress_setting_section_advanced_advanced' // Section                  
         );
@@ -3162,7 +3210,7 @@ class seopress_options
     public function sanitize( $input )
     {   
 
-        $seopress_sanitize_fields = array('seopress_titles_sep','seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking','seopress_google_analytics_opt_out_msg', 'seopress_google_analytics_opt_out_msg_ok' );
+        $seopress_sanitize_fields = array('seopress_titles_sep','seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking','seopress_google_analytics_opt_out_msg', 'seopress_google_analytics_opt_out_msg_ok', 'seopress_google_analytics_optimize', 'seopress_google_analytics_cross_domain' );
 
         $seopress_sanitize_site_verification = array('seopress_advanced_advanced_google', 'seopress_advanced_advanced_bing', 'seopress_advanced_advanced_pinterest', 'seopress_advanced_advanced_yandex' );
         
@@ -4927,6 +4975,17 @@ class seopress_options
         }
     }
 
+    public function seopress_google_analytics_optimize_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_optimize']) ? $this->options['seopress_google_analytics_optimize'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_optimize]" placeholder="'.esc_html__('Enter your Google Optimize container ID','wp-seopress').'" value="%s" aria-label="'.__('GTM-XXXXXXX','wp-seopress').'"/>',
+        esc_html($check));
+
+        echo '<p class="description">'.__('Google Optimize offers A/B testing, website testing & personalization tools.','wp-seopress').'<a href="https://marketingplatform.google.com/about/optimize/" target="_blank">'.__('Learn more','wp-seopress').'</a></p>';
+    }
+
     public function seopress_google_analytics_remarketing_callback()
     {
         $options = get_option( 'seopress_google_analytics_option_name' );  
@@ -5502,6 +5561,25 @@ class seopress_options
         if (isset($this->options['seopress_advanced_advanced_attachments'])) {
             esc_attr( $this->options['seopress_advanced_advanced_attachments']);
         }
+    }
+
+    public function seopress_advanced_advanced_attachments_file_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_attachments_file']);      
+        
+        echo '<input id="seopress_advanced_advanced_attachments_file" name="seopress_advanced_option_name[seopress_advanced_advanced_attachments_file]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_attachments_file">'. __( 'Redirect attachment pages to the file URL (https://www.example.com/my-image-file.jpg)', 'wp-seopress' ) .'</label>';
+
+        echo '<p class="description">'.__('If this option is checked, it will take precedence over the redirection of attachments to the post parent.','wp-seopress').'</p>';
+        
+        if (isset($this->options['seopress_advanced_advanced_attachments_file'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_attachments_file']);
+        }
     }    
 
     public function seopress_advanced_advanced_replytocom_callback()
@@ -5518,6 +5596,74 @@ class seopress_options
         
         if (isset($this->options['seopress_advanced_advanced_replytocom'])) {
             esc_attr( $this->options['seopress_advanced_advanced_replytocom']);
+        }
+    }
+
+    public function seopress_advanced_advanced_image_auto_title_editor_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_image_auto_title_editor']);      
+        
+        echo '<input id="seopress_advanced_advanced_image_auto_title_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_title_editor]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_image_auto_title_editor">'. __( 'When sending an image file, automatically set the title based on the filename', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_advanced_advanced_image_auto_title_editor'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_image_auto_title_editor']);
+        }
+    }
+
+    public function seopress_advanced_advanced_image_auto_alt_editor_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_image_auto_alt_editor']);      
+        
+        echo '<input id="seopress_advanced_advanced_image_auto_alt_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_alt_editor]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_image_auto_alt_editor">'. __( 'When sending an image file, automatically set the alternative text based on the filename', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_advanced_advanced_image_auto_alt_editor'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_image_auto_alt_editor']);
+        }
+    } 
+
+    public function seopress_advanced_advanced_image_auto_caption_editor_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_image_auto_caption_editor']);      
+        
+        echo '<input id="seopress_advanced_advanced_image_auto_caption_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_caption_editor]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_image_auto_caption_editor">'. __( 'When sending an image file, automatically set the caption based on the filename', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_advanced_advanced_image_auto_caption_editor'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_image_auto_caption_editor']);
+        }
+    } 
+
+    public function seopress_advanced_advanced_image_auto_desc_editor_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_image_auto_desc_editor']);      
+        
+        echo '<input id="seopress_advanced_advanced_image_auto_desc_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_desc_editor]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_image_auto_desc_editor">'. __( 'When sending an image file, automatically set the description based on the filename', 'wp-seopress' ) .'</label>';
+        
+        if (isset($this->options['seopress_advanced_advanced_image_auto_desc_editor'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_image_auto_desc_editor']);
         }
     }
 

@@ -115,4 +115,26 @@ function seopress_redirections_attachments(){
 		}
 	}
 }
-add_action( 'template_redirect', 'seopress_redirections_attachments', 1 );
+add_action( 'template_redirect', 'seopress_redirections_attachments', 2 );
+
+//Attachments redirects to file URL
+function seopress_advanced_advanced_attachments_file_option() {
+	$seopress_advanced_advanced_attachments_file_option = get_option("seopress_advanced_option_name");
+	if ( ! empty ( $seopress_advanced_advanced_attachments_file_option ) ) {
+		foreach ($seopress_advanced_advanced_attachments_file_option as $key => $seopress_advanced_advanced_attachments_file_value)
+			$options[$key] = $seopress_advanced_advanced_attachments_file_value;
+		 if (isset($seopress_advanced_advanced_attachments_file_option['seopress_advanced_advanced_attachments_file'])) { 
+		 	return $seopress_advanced_advanced_attachments_file_option['seopress_advanced_advanced_attachments_file'];
+		 }
+	}
+}
+
+function seopress_redirections_attachments_file(){
+	if (seopress_advanced_advanced_attachments_file_option() =='1') {
+		if ( is_attachment() ) {
+			wp_redirect( wp_get_attachment_url(), 301 );
+			exit();
+		}
+	}
+}
+add_action( 'template_redirect', 'seopress_redirections_attachments_file', 1 );

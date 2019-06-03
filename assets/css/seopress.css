@@ -209,12 +209,12 @@
 }
 
 #seopress_cpt #tabs-4 select {
-    width: 60px;
+    width: 250px;
     display: inline;
 }
 
 #seopress_cpt #tabs-4 #seopress_redirections_value_meta {
-    width: calc(100% - 68px);
+    width: calc(100% - 258px);
     float: right;
 }
 

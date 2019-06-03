@@ -72,6 +72,18 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 	}
 }
 
+//Optimize
+function seopress_google_analytics_optimize_option() {
+	$seopress_google_analytics_optimize_option = get_option("seopress_google_analytics_option_name");
+	if ( ! empty ( $seopress_google_analytics_optimize_option ) ) {
+		foreach ($seopress_google_analytics_optimize_option as $key => $seopress_google_analytics_optimize_value)
+			$options[$key] = $seopress_google_analytics_optimize_value;
+			if (isset($seopress_google_analytics_optimize_option['seopress_google_analytics_optimize'])) {
+				return $seopress_google_analytics_optimize_option['seopress_google_analytics_optimize'];
+			}
+	}
+}
+
 //Remarketing
 function seopress_google_analytics_remarketing_option() {
 	$seopress_google_analytics_remarketing_option = get_option("seopress_google_analytics_option_name");
@@ -289,6 +301,12 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 			}
 		}
 		
+		//Optimize
+		if (seopress_google_analytics_optimize_option() !='1') {
+			$seopress_google_analytics_config['optimize'] = "'optimize_id': '".seopress_google_analytics_optimize_option()."',";
+			$seopress_google_analytics_config['optimize'] = apply_filters('seopress_gtag_optimize_id', $seopress_google_analytics_config['optimize']);
+		}
+
 		//Remarketing
 		if (seopress_google_analytics_remarketing_option() !='1') {
 			$seopress_google_analytics_config['allow_display_features'] = "'allow_display_features': false,";
