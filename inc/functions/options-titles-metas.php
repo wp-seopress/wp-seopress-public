@@ -319,6 +319,8 @@ function seopress_titles_the_title() {
 	$woo_single_tag_html ='';
 	$woo_single_price ='';
 	$woo_single_price_exc_tax ='';
+	$woo_single_sku ='';
+
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
 		if (is_product()) {
@@ -357,6 +359,10 @@ function seopress_titles_the_title() {
 			//Woo Price tax excluded
 			$product = wc_get_product($post->ID);
 			$woo_single_price_exc_tax = wc_get_price_excluding_tax( $product );
+
+			//Woo SKU Number
+			$product = wc_get_product($post->ID);
+			$woo_single_sku = $product->get_sku();
 		}
 	}
 
@@ -391,6 +397,7 @@ function seopress_titles_the_title() {
 		'%%wc_single_short_desc%%',
 		'%%wc_single_price%%',
 		'%%wc_single_price_exc_tax%%',
+		'%%wc_sku%%',
 		'%%currentday%%',
 		'%%currentmonth%%',
 		'%%currentyear%%',
@@ -429,6 +436,7 @@ function seopress_titles_the_title() {
 		$seopress_get_the_excerpt,
 		$woo_single_price,
 		$woo_single_price_exc_tax,
+		$woo_single_sku,
 		date_i18n('j'),
 		date_i18n('F'),
 		date('Y'),
@@ -681,6 +689,7 @@ function seopress_titles_the_description_content() {
 	$woo_single_tag_html ='';
 	$woo_single_price ='';
 	$woo_single_price_exc_tax ='';
+	$woo_single_sku = '';
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
 		if (is_product()) {
@@ -719,6 +728,10 @@ function seopress_titles_the_description_content() {
 			//Woo Price tax excluded
 			$product = wc_get_product($post->ID);
 			$woo_single_price_exc_tax = wc_get_price_excluding_tax( $product );
+
+			//Woo SKU Number
+			$product = wc_get_product($post->ID);
+			$woo_single_sku = $product->get_sku();
 		}
 	}
 
@@ -758,6 +771,7 @@ function seopress_titles_the_description_content() {
 		'%%wc_single_short_desc%%',
 		'%%wc_single_price%%',
 		'%%wc_single_price_exc_tax%%',
+		'%%wc_sku%%',
 		'%%currentday%%',
 		'%%currentmonth%%',
 		'%%currentyear%%',
@@ -796,6 +810,7 @@ function seopress_titles_the_description_content() {
 		$seopress_get_the_excerpt,
 		$woo_single_price,
 		$woo_single_price_exc_tax,
+		$woo_single_sku,
 		date_i18n('j'),
 		date_i18n('F'),
 		date('Y'),

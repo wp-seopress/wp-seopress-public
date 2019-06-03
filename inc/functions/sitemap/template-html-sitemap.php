@@ -16,9 +16,17 @@ if (is_post_type_hierarchical($cpt_key)) {
 if (!empty($postslist)) {
     if (is_post_type_hierarchical($cpt_key)) {
         $walker_page = new Walker_Page();
-        $content .= '<ul>'.$walker_page->walk($postslist, 0).'</ul>'; // 0 means display all levels.
+        $content .= '<ul>';
+        if (get_post_type_archive_link($cpt_key)) {
+            $content .= '<li><a href="'.get_post_type_archive_link($cpt_key).'">'.$obj->labels->name.'</a></li>';
+        }
+        $content .= $walker_page->walk($postslist, 0);
+        $content .= '</ul>'; // 0 means display all levels.
     } else {
         $content .= '<ul>';
+            if ($cpt_key !='post') {//check if not Post cpt
+                $content .= '<li><a href="'.get_post_type_archive_link($cpt_key).'">'.$obj->labels->name.'</a></li>';
+            }
             foreach ( $postslist as $post ) {
                 setup_postdata( $post );
                 $content .= '<li>';

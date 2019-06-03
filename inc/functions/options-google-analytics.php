@@ -314,7 +314,7 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 		}
 		
 		//Optimize
-		if (seopress_google_analytics_optimize_option() !='1') {
+		if (seopress_google_analytics_optimize_option() !='') {
 			$seopress_google_analytics_config['optimize'] = "'optimize_id': '".seopress_google_analytics_optimize_option()."',";
 			$seopress_google_analytics_config['optimize'] = apply_filters('seopress_gtag_optimize_id', $seopress_google_analytics_config['optimize']);
 		}

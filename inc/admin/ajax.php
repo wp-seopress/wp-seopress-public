@@ -94,19 +94,23 @@ function seopress_do_real_preview() {
 
             if($dom->loadHTML('<?xml encoding="utf-8" ?>' .$response)) {
                 //Get Target Keywords
-                $data['target_kws'] = $_GET['seopress_analysis_target_kw'];
-                $seopress_analysis_target_kw = explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true));
+                if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
+                    $data['target_kws'] = $_GET['seopress_analysis_target_kw'];
+                    $seopress_analysis_target_kw = explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true));
+                }
 
                 $xpath = new DOMXPath($dom);
 
                 //Title
-                $list = $dom->getElementsByTagName("title");
-                if ($list->length > 0) {
-                    $title = $list->item(0)->textContent;
-                    $data['title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($title)));
-                    foreach ($seopress_analysis_target_kw as $kw) {
-                        if (preg_match_all('#\b('.$kw.')\b#iu', $data['title'], $m)) {
-                            $data['meta_title']['matches'][$kw][] = $m[0];
+                if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
+                    $list = $dom->getElementsByTagName("title");
+                    if ($list->length > 0) {
+                        $title = $list->item(0)->textContent;
+                        $data['title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($title)));
+                        foreach ($seopress_analysis_target_kw as $kw) {
+                            if (preg_match_all('#\b('.$kw.')\b#iu', $data['title'], $m)) {
+                                $data['meta_title']['matches'][$kw][] = $m[0];
+                            }
                         }
                     }
                 }
@@ -118,11 +122,13 @@ function seopress_do_real_preview() {
                     $data['meta_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags($mdesc->nodeValue))));
                 }
 
-                if (!empty($meta_description)) {
-                    foreach ($meta_description as $meta_desc) {
-                        foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', $meta_desc->nodeValue, $m)) {
-                                $data['meta_description']['matches'][$kw][] = $m[0];
+                if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
+                    if (!empty($meta_description)) {
+                        foreach ($meta_description as $meta_desc) {
+                            foreach ($seopress_analysis_target_kw as $kw) {
+                                if (preg_match_all('#\b('.$kw.')\b#iu', $meta_desc->nodeValue, $m)) {
+                                    $data['meta_description']['matches'][$kw][] = $m[0];
+                                }
                             }
                         }
                     }
@@ -171,37 +177,39 @@ function seopress_do_real_preview() {
                 }
 
                 //h1
-                $h1 = $xpath->query("//h1");
-                if (!empty($h1)) {
-                    $data['h1']['nomatches']['count'] = count($h1);
-                    foreach ($h1 as $heading1) {
-                        foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', $heading1->nodeValue, $m)) {
-                                $data['h1']['matches'][$kw][] = $m[0];
+                if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
+                    $h1 = $xpath->query("//h1");
+                    if (!empty($h1)) {
+                        $data['h1']['nomatches']['count'] = count($h1);
+                        foreach ($h1 as $heading1) {
+                            foreach ($seopress_analysis_target_kw as $kw) {
+                                if (preg_match_all('#\b('.$kw.')\b#iu', $heading1->nodeValue, $m)) {
+                                    $data['h1']['matches'][$kw][] = $m[0];
+                                }
                             }
                         }
                     }
-                }
 
-                //h2
-                $h2 = $xpath->query("//h2");
-                if (!empty($h2)) {
-                    foreach ($h2 as $heading2) {
-                        foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', $heading2->nodeValue, $m)) {
-                                $data['h2']['matches'][$kw][] = $m[0];
+                    //h2
+                    $h2 = $xpath->query("//h2");
+                    if (!empty($h2)) {
+                        foreach ($h2 as $heading2) {
+                            foreach ($seopress_analysis_target_kw as $kw) {
+                                if (preg_match_all('#\b('.$kw.')\b#iu', $heading2->nodeValue, $m)) {
+                                    $data['h2']['matches'][$kw][] = $m[0];
+                                }
                             }
                         }
                     }
-                }
 
-                //h3
-                $h3 = $xpath->query("//h3");
-                if (!empty($h3)) {
-                    foreach ($h3 as $heading3) {
-                        foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', $heading3->nodeValue, $m)) {
-                                $data['h3']['matches'][$kw][] = $m[0];
+                    //h3
+                    $h3 = $xpath->query("//h3");
+                    if (!empty($h3)) {
+                        foreach ($h3 as $heading3) {
+                            foreach ($seopress_analysis_target_kw as $kw) {
+                                if (preg_match_all('#\b('.$kw.')\b#iu', $heading3->nodeValue, $m)) {
+                                    $data['h3']['matches'][$kw][] = $m[0];
+                                }
                             }
                         }
                     }
@@ -226,7 +234,15 @@ function seopress_do_real_preview() {
                 $meta_robots = $xpath->query('//meta[@name="robots"]/@content');
                 if (!empty($meta_robots)) {
                     foreach ($meta_robots as $key=>$value) {
-                        $data['meta_robots'][$key][] = $value->nodeValue;
+                        $data['meta_robots'][$key][] = esc_attr($value->nodeValue);
+                    }
+                }
+
+                //Meta google noimageindex / nositelinkssearchbox
+                $meta_google = $xpath->query('//meta[@name="google"]/@content');
+                if (!empty($meta_google)) {
+                    foreach ($meta_google as $key=>$mgnoimg) {
+                        $data['meta_google'][$key][] = esc_attr($mgnoimg->nodeValue);
                     }
                 }
 

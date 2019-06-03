@@ -878,7 +878,7 @@ body.seopress-styles {
 }
 
 #seopress-tabs .seopress-tab.active {
-    display: block;
+    display: inline-block;
 }
 
 .seopress-option input[type=text],.seopress-option input[type=password],.seopress-option textarea {
@@ -1756,4 +1756,13 @@ body.seopress-styles {
     height: 1px;
     width: 100%;
     display: block;
+}
+#tab_seopress_social_accounts .help-social {
+    position: relative;
+    right: 0;
+    width: 30%;
+}
+#tab_seopress_social_accounts .form-table {
+    float: left;
+    width: 70%;
 }

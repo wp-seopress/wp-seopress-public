@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.5
+Stable tag: 3.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,20 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.5.1 =
+* NEW Add %%sku%% dynamic variable (thanks to Necdet Emre Ozpalamutcu)
+* INFO Improve content analysis by adding nositelinkssearchbox detection
+* INFO Refactoring some JS files
+* INFO Improve UI in redirections edit screen
+* INFO Improve UI in Social pages
+* INFO Display page post type first in HTML sitemap page
+* INFO Display post type archive link in HTML sitemap if available
+* FIX XML Product category sitemaps with latest version of WooCommerce
+* FIX Content analysis if target keywords field empty
+* FIX Undefined index: seopress_analysis_target_kw
+* FIX noimageindex meta tags detection in content analysis
+* FIX Google Optimize if empty
+* FIX CSS conflicts with WooCommerce / Easy Digital Downloads
 = 3.5 =
 * NEW WP 5.2 compatibility
 * NEW Automatic schemas for your posts, pages, post types: article, local business, course, recipe, video, event, product, review (SEO > PRO > Structured Data Types)! (PRO)
@@ -389,7 +403,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 * FIX Undefined notice in admin.php line 177
 * FIX HTML sitemap with WPML
 * FIX article:author / article:publisher
-* FIX JSON/LD Breadcrumbs can now be used without HTML Breadcrumbs
+* FIX JSON-LD Breadcrumbs can now be used without HTML Breadcrumbs
 = 3.2.2 =
 * NEW Add %%sep%% dynamic variable (custom separator)
 * NEW Add %%post_modified_date%% dynamic variable for meta title / desc
@@ -437,7 +451,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 * FIX Updater! (PRO)
 = 3.1 =
 * NEW All In One SEO importer
-* NEW JSON/LD for Breadcrumbs (PRO)
+* NEW JSON-LD for Breadcrumbs (PRO)
 * NEW Add German language (thanks to Nicola Stobbe)
 * NEW Add Greek language (thanks to Stratos Karavarakis)
 * NEW Add author biography tag for meta description

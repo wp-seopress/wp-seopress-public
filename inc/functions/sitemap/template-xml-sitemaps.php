@@ -55,7 +55,7 @@ function seopress_xml_sitemap_index() {
 							$paged = 1;
 						}
 
-						$args = array('post_type' => $cpt_key, 'offset' => $offset, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'orderby' => 'modified', 'lang' => '', 'has_password' => false, 'suppress_filters' => true);
+						$args = array('post_type' => $cpt_key, 'offset' => $offset, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ), 'order' => 'DESC', 'orderby' => 'modified', 'lang' => '', 'has_password' => false, 'suppress_filters' => true);
 						
 						$args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
 
@@ -140,7 +140,7 @@ function seopress_xml_sitemap_index() {
 		    }
 		}
 		
-		$args = array('post_type' => $seopress_xml_sitemap_news_cpt_array, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'orderby' => 'modified', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'order' => 'DESC', 'lang' => '', 'has_password' => false);
+		$args = array('post_type' => $seopress_xml_sitemap_news_cpt_array, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'orderby' => 'modified', 'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ), 'order' => 'DESC', 'lang' => '', 'has_password' => false);
 
 		$args = apply_filters('seopress_sitemaps_index_gnews_query', $args);
 

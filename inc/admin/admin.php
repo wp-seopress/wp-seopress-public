@@ -225,6 +225,7 @@ class seopress_options
                     <li><span>'.__('%%wc_single_short_desc%%','wp-seopress').'</span>'.__('Single product short description','wp-seopress').'</li>
                     <li><span>'.__('%%wc_single_price%%','wp-seopress').'</span>'.__('Single product price','wp-seopress').'</li>
                     <li><span>'.__('%%wc_single_price_exc_tax%%','wp-seopress').'</span>'.__('Single product price taxes excluded','wp-seopress').'</li>
+                    <li><span>'.__('%%wc_sku%%','wp-seopress').'</span>'.__('Single SKU product','wp-seopress').'</li>
                     <li><span>'.__('%%currentday%%','wp-seopress').'</span>'.__('Current day','wp-seopress').'</li>
                     <li><span>'.__('%%currentmonth%%','wp-seopress').'</span>'.__('Current month','wp-seopress').'</li>
                     <li><span>'.__('%%currentyear%%','wp-seopress').'</span>'.__('Current year','wp-seopress').'</li>
@@ -3375,17 +3376,38 @@ class seopress_options
 
     public function print_section_info_social_accounts()
     {
-        print __('<p>Link your site with your social accounts.</p>', 'wp-seopress');
+        print __('<p>Link your site with your social accounts. Use markup on your website to add your social profile information to a Google Knowledge panel. Knowledge panels prominently display your social profile information in some Google Search results. Filling in these fields does not guarantee the display of this data in search results. It may take a long time to see these social networking links.</p>', 'wp-seopress');
+        echo '<img src="'.plugins_url('assets/img/help/google-knowledge-graph-social.png', dirname(dirname(__FILE__))).'" class="help-social">';
     }    
 
     public function print_section_info_social_facebook()
     {
         print __('<p>Manage Open Graph datas.</p>', 'wp-seopress');
+
+        echo __('<p>We generate the <strong>og:image</strong> meta following this order:</p>','wp-seopress');
+
+        echo '
+        <ol>
+            <li>'.__('Custom OG Image from SEO metabox','wp-seopress').'</li>
+            <li>'.__('Post thumbnail','wp-seopress').'</li>
+            <li>'.__('First image of your post content','wp-seopress').'</li>
+            <li>'.__('Global OG Image set in SEO > Social > Open Graph','wp-seopress').'</li>
+        </ol>';
     }    
 
     public function print_section_info_social_twitter()
     {
         print __('<p>Manage your Twitter card.</p>', 'wp-seopress');
+
+        echo __('<p>We generate the <strong>twitter:image</strong> meta following this order:</p>','wp-seopress');
+
+        echo '
+        <ol>
+            <li>'.__('Custom Twitter image from SEO metabox','wp-seopress').'</li>
+            <li>'.__('Post thumbnail','wp-seopress').'</li>
+            <li>'.__('First image of your post content','wp-seopress').'</li>
+            <li>'.__('Global Twitter:image set in SEO > Social > Twitter Card','wp-seopress').'</li>
+        </ol>';
     }    
 
     public function print_section_info_google_analytics_enable()

@@ -72,7 +72,7 @@ function seopress_xml_sitemap_single() {
 				}
 			}
 	
-				$args = array( 'posts_per_page' => 1000, 'offset' => $offset, 'order' => 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_key' => '_seopress_robots_index', 'meta_value' => 'yes', 'meta_compare' => 'NOT EXISTS', 'fields' => 'ids', 'lang' => '', 'has_password' => false );
+				$args = array( 'posts_per_page' => 1000, 'offset' => $offset, 'order' => 'DESC', 'orderby' => 'modified', 'post_type' => $path, 'post_status' => 'publish', 'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ), 'fields' => 'ids', 'lang' => '', 'has_password' => false );
 
 				$args = apply_filters('seopress_sitemaps_single_query', $args, $path);
 

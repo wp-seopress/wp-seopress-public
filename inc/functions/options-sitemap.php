@@ -107,7 +107,12 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
 			//CPT
 			if (seopress_xml_sitemap_post_types_list_option() !='') {
 				$content .= '<div class="wrap-html-sitemap">';
-				foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
+				
+				$seopress_xml_sitemap_post_types_list_option = seopress_xml_sitemap_post_types_list_option();
+
+				$seopress_xml_sitemap_post_types_list_option = array('page' => $seopress_xml_sitemap_post_types_list_option['page']) + $seopress_xml_sitemap_post_types_list_option; //Display page first
+
+				foreach ($seopress_xml_sitemap_post_types_list_option as $cpt_key => $cpt_value) {
 					$obj = get_post_type_object( $cpt_key );
 					if ($obj) {
 						$content .= '<h2>'.$obj->labels->name.'</h2>';
@@ -126,6 +131,13 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
                                 'suppress_filters' => false
                             );
 							if ($cpt_key =='post') {
+								
+								if (get_post_type_archive_link($cpt_key)) {
+									$content .= '<ul>';
+									$content .= '<li><a href="'.get_post_type_archive_link($cpt_key).'">'.$obj->labels->name.'</a></li>';
+									$content .= '</ul>';
+								}
+
 								$args_cat_query = array(
 									'orderby'	=>	'name',
 									'order'		=>	'ASC',

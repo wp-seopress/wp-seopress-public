@@ -48,23 +48,8 @@ jQuery(document).ready(function($) {
     	jQuery('#'+hash).addClass("active");
     });
     //Robots
-    jQuery('#seopress-tag-robots-1').click(function() {
-        jQuery(".seopress_robots_file").val(jQuery(".seopress_robots_file").val() +'\n'+ jQuery('#seopress-tag-robots-1').attr('data-tag'));
-    });
-    jQuery('#seopress-tag-robots-2').click(function() {
-        jQuery(".seopress_robots_file").val(jQuery(".seopress_robots_file").val() +'\n'+ jQuery('#seopress-tag-robots-2').attr('data-tag'));
-    });
-    jQuery('#seopress-tag-robots-3').click(function() {
-        jQuery(".seopress_robots_file").val(jQuery(".seopress_robots_file").val() +'\n'+ jQuery('#seopress-tag-robots-3').attr('data-tag'));
-    });
-    jQuery('#seopress-tag-robots-4').click(function() {
-        jQuery(".seopress_robots_file").val(jQuery(".seopress_robots_file").val() +'\n'+ jQuery('#seopress-tag-robots-4').attr('data-tag'));
-    });
-    jQuery('#seopress-tag-robots-5').click(function() {
-        jQuery(".seopress_robots_file").val(jQuery(".seopress_robots_file").val() +'\n'+ jQuery('#seopress-tag-robots-5').attr('data-tag'));
-    });
-    jQuery('#seopress-tag-robots-6').click(function() {
-        jQuery(".seopress_robots_file").val(jQuery(".seopress_robots_file").val() +'\n'+ jQuery('#seopress-tag-robots-6').attr('data-tag'));
+    jQuery('#seopress-tag-robots-1, #seopress-tag-robots-2, #seopress-tag-robots-3, #seopress-tag-robots-4, #seopress-tag-robots-5, #seopress-tag-robots-6, #seopress-tag-robots-7').click(function() {
+        jQuery(".seopress_robots_file").val(jQuery(".seopress_robots_file").val() +'\n'+ jQuery(this).attr('data-tag'));
     });
     //Flush permalinks
     jQuery('#seopress-flush-permalinks2').on('click', function() {

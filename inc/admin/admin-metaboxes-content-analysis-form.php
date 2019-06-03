@@ -238,12 +238,6 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                             echo '<p><span class="dashicons dashicons-yes"></span>'.__('nofollow is off. Search engines will follow links on this page.','wp-seopress').'</p>';
                         }
 
-                        if (preg_match('/noimageindex/', json_encode($meta_robots))) {
-                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noimageindex is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed).','wp-seopress').'</p>';
-                        } else {
-                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('noimageindex is off. Google will index the images on this page.','wp-seopress').'</p>';
-                        }
-
                         if (preg_match('/noarchive/', json_encode($meta_robots))) {
                             echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noarchive is on! Search engines will not cache your page.','wp-seopress').'</p>';
                         } else {
@@ -258,6 +252,28 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     } else {
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('We found no meta robots on this page. It means, your page is index,follow. Search engines will index it, and follow links. ','wp-seopress').'</p>';
                     }
+
+                    //Meta Google              
+                    if (!empty($seopress_analysis_data['0']['meta_google'])) {
+                        $meta_google = $seopress_analysis_data['0']['meta_google'];
+
+                        if (preg_match('/noimageindex/', json_encode($meta_google))) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('noimageindex is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed).','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('noimageindex is off. Google will index the images on this page.','wp-seopress').'</p>';
+                        }
+
+                        if (preg_match('/nositelinkssearchbox/', json_encode($meta_google))) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('nositelinkssearchbox is on! Google will not display a sitelinks searchbox in search results.','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('nositelinkssearchbox is off. Google will probably display a sitelinks searchbox in search results.','wp-seopress').'</p>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('noimageindex is off. Google will index the images on this page.','wp-seopress').'</p>';
+                        
+                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('nositelinkssearchbox is off. Google will probably display a sitelinks searchbox in search results.','wp-seopress').'</p>';
+                    }
+
             echo '</div>
                 <div id="seopress-analysis-tabs-3">
                     <div class="wrap-analysis-img">';
