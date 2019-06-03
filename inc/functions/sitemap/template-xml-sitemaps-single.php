@@ -15,6 +15,15 @@ add_filter( 'seopress_sitemaps_single_query', function( $args ) {
     return $args;
 });
 
+add_action( 'the_post', function( $post ) {
+	$language = apply_filters(
+		'wpml_element_language_code',
+		null,
+		array( 'element_id' => $post->ID, 'element_type' => 'page' )
+	);
+	do_action( 'wpml_switch_language', $language );
+});
+
 function seopress_xml_sitemap_img_enable_option() {
 	$seopress_xml_sitemap_img_enable_option = get_option("seopress_xml_sitemap_option_name");
 	if ( ! empty ( $seopress_xml_sitemap_img_enable_option ) ) {
@@ -44,7 +53,7 @@ function seopress_xml_sitemap_single() {
 
 
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
-	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_home_url().'/sitemaps_xsl.xsl"?>';
+	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_site_url().'/sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 	$seopress_sitemaps .= "\n";
@@ -142,7 +151,7 @@ function seopress_xml_sitemap_single() {
 										        if (seopress_is_absolute($url) ===true) {
 										        	//do nothing
 										        } else {
-										        	$url = get_home_url().$url;
+										        	$url = get_site_url().$url;
 										        }
 										        $seopress_sitemaps .= '<image:image>';
 										        $seopress_sitemaps .= "\n";
@@ -163,7 +172,7 @@ function seopress_xml_sitemap_single() {
 										if (seopress_is_absolute($url) ===true) {
 								        	//do nothing
 								        } else {
-								        	$url = get_home_url().$url;
+								        	$url = get_site_url().$url;
 								        }
 										$seopress_sitemaps .= '<image:image>';
 										$seopress_sitemaps .= "\n";

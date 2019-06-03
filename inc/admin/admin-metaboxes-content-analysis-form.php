@@ -8,7 +8,7 @@ echo '<div class="wrap-seopress-analysis">
             <p>
                 <label for="seopress_analysis_target_kw_meta">'. __( 'Target keywords', 'wp-seopress' ) .'</label>
                 <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" aria-label="'.__('Target keywords','wp-seopress').'" value="'.$seopress_analysis_target_kw.'" />
-                <span class="howto">'.__('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them.','wp-seopress').'</span>
+                <span class="howto">'.__('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them (eg: "my super keyword,another keyword,keyword")','wp-seopress').'</span>
             </p>';
             if (empty($seopress_analysis_data)) {
                 echo '<div id="seopress_launch_analysis" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Analyze my content','wp-seopress').'</div>';

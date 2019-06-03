@@ -20,7 +20,7 @@ function seopress_xml_sitemap_single_term() {
 	}
 
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
-	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_home_url().'/sitemaps_xsl.xsl"?>';
+	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_site_url().'/sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 	$args = array('taxonomy' => $path,'hide_empty' => false, 'number' => 1000, 'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ), 'fields' => 'ids', 'lang' => '');

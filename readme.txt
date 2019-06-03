@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.5.2
+Stable tag: 3.5.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,11 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.5.3 =
+* NEW Add 'seopress_dublin_core_language' hook to filter Dublin Core language
+* FIX itemscope attribute in Breadcrumbs
+* FIX Conflict between SEO and Schemas metboxes
+* FIX XML sitemaps compatibility with WPML (double slash, prefix in URLs...)
 = 3.5.2 =
 * INFO Block Ahrefs bot in 1 click (SEO > PRO > robots.txt)
 * FIX robots.txt save in multisite setup
