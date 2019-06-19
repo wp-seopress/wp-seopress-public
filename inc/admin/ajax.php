@@ -727,3 +727,170 @@ function seopress_seo_framework_migration() {
     }
 }
 add_action('wp_ajax_seopress_seo_framework_migration', 'seopress_seo_framework_migration');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//RK migration
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_rk_migration() {
+    check_ajax_referer( 'seopress_rk_migrate_nonce', $_POST['_ajax_nonce'], true );
+
+    if (current_user_can('manage_options') && is_admin()) { 
+
+        if ( isset( $_POST['offset4']) && isset( $_POST['offset4'] )) {
+            $offset4 = absint($_POST['offset4']);
+        }
+        
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'posts';
+        $count_query = $wpdb->get_results( "SELECT * FROM $table_name" );
+        $total_count_posts = $wpdb->num_rows;
+        
+        $increment = 200;
+        global $post;
+        
+        if ($offset4 > $total_count_posts) {
+            wp_reset_query();
+
+            $args = array(
+                //'number' => $increment,  
+                'hide_empty' => false,
+                //'offset' => $offset4,
+                'fields' => 'ids',
+            );
+            $rk_query_terms = get_terms($args);
+
+            if ($rk_query_terms) { 
+                foreach ($rk_query_terms as $term_id) {
+                    if (get_term_meta($term_id, 'rank_math_title', true) !='') { //Import title tag
+                        update_term_meta($term_id, '_seopress_titles_title', get_term_meta($term_id, 'rank_math_title', true));
+                    }
+                    if (get_term_meta($term_id, 'rank_math_description', true) !='') { //Import title desc
+                        update_term_meta($term_id, '_seopress_titles_desc', get_term_meta($term_id, 'rank_math_description', true));
+                    }
+                    if (get_term_meta($term_id, 'rank_math_facebook_title', true) !='') { //Import Facebook Title
+                        update_term_meta($term_id, '_seopress_social_fb_title', get_term_meta($term_id, 'rank_math_facebook_title', true));
+                    }            
+                    if (get_term_meta($term_id, 'rank_math_facebook_description', true) !='') { //Import Facebook Desc
+                        update_term_meta($term_id, '_seopress_social_fb_desc', get_term_meta($term_id, 'rank_math_facebook_description', true));
+                    }            
+                    if (get_term_meta($term_id, 'rank_math_facebook_image', true) !='') { //Import Facebook Image
+                        update_term_meta($term_id, '_seopress_social_fb_img', get_term_meta($term_id, 'rank_math_facebook_image', true));
+                    }            
+                    if (get_term_meta($term_id, 'rank_math_twitter_title', true) !='') { //Import Twitter Title
+                        update_term_meta($term_id, '_seopress_social_twitter_title', get_term_meta($term_id, 'rank_math_twitter_title', true));
+                    }            
+                    if (get_term_meta($term_id, 'rank_math_twitter_description', true) !='') { //Import Twitter Desc
+                        update_term_meta($term_id, '_seopress_social_twitter_desc', get_term_meta($term_id, 'rank_math_twitter_description', true));
+                    }            
+                    if (get_term_meta($term_id, 'rank_math_twitter_image', true) !='') { //Import Twitter Image
+                        update_term_meta($term_id, '_seopress_social_twitter_img', get_term_meta($term_id, 'rank_math_twitter_image', true));
+                    }                      
+                    if (get_term_meta($term_id, 'rank_math_robots', true) !='') { //Import Robots NoIndex, NoFollow, NoOdp, NoImageIndex, NoArchive, NoSnippet
+                        $rank_math_robots = get_term_meta($term_id, 'rank_math_robots', true);
+                        
+                        if (in_array('noindex', $rank_math_robots)) {
+                            update_term_meta($term_id, '_seopress_robots_index', "yes");
+                        }
+                        if (in_array('nofollow', $rank_math_robots)) {
+                            update_term_meta($term_id, '_seopress_robots_follow', "yes");
+                        }
+                        if (in_array('noodp', $rank_math_robots)) {
+                            update_term_meta($term_id, '_seopress_robots_odp', "yes");
+                        }
+                        if (in_array('noimageindex', $rank_math_robots)) {
+                            update_term_meta($term_id, '_seopress_robots_imageindex', "yes");
+                        }
+                        if (in_array('noarchive', $rank_math_robots)) {
+                            update_term_meta($term_id, '_seopress_robots_archive', "yes");
+                        }
+                        if (in_array('nosnippet', $rank_math_robots)) {
+                            update_term_meta($term_id, '_seopress_robots_snippet', "yes");
+                        }
+                    }            
+                    if (get_term_meta($term_id, 'rank_math_canonical_url', true) !='') { //Import Canonical URL
+                        update_term_meta($term_id, '_seopress_robots_canonical', get_term_meta($term_id, 'rank_math_canonical_url', true));
+                    }
+                    if (get_term_meta($term_id, 'rank_math_focus_keyword', true) !='') { //Import Focus Keywords
+                        update_term_meta($term_id, '_seopress_analysis_target_kw', get_term_meta($term_id, 'rank_math_focus_keyword', true));
+                    }
+                   
+                    
+                }
+            }
+            $offset4 = 'done';
+            wp_reset_query();
+        } else {
+            $args = array(  
+                'posts_per_page' => $increment,  
+                'post_type' => 'any',
+                'post_status' => 'any',
+                'offset' => $offset4, 
+            );
+            
+            $rk_query = get_posts( $args );
+            
+            if ($rk_query) {  
+                foreach ($rk_query as $post) {
+                    if (get_post_meta($post->ID, 'rank_math_title', true) !='') { //Import title tag
+                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, 'rank_math_title', true));
+                    }
+                    if (get_post_meta($post->ID, 'rank_math_description', true) !='') { //Import meta desc
+                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, 'rank_math_description', true));
+                    }
+                    if (get_post_meta($post->ID, 'rank_math_facebook_title', true) !='') { //Import Facebook Title
+                        update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, 'rank_math_facebook_title', true));
+                    }            
+                    if (get_post_meta($post->ID, 'rank_math_facebook_description', true) !='') { //Import Facebook Desc
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, 'rank_math_facebook_description', true));
+                    }            
+                    if (get_post_meta($post->ID, 'rank_math_facebook_image', true) !='') { //Import Facebook Image
+                        update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, 'rank_math_facebook_image', true));
+                    }            
+                    if (get_post_meta($post->ID, 'rank_math_twitter_title', true) !='') { //Import Twitter Title
+                        update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, 'rank_math_twitter_title', true));
+                    }            
+                    if (get_post_meta($post->ID, 'rank_math_twitter_description', true) !='') { //Import Twitter Desc
+                        update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, 'rank_math_twitter_description', true));
+                    }            
+                    if (get_post_meta($post->ID, 'rank_math_twitter_image', true) !='') { //Import Twitter Image
+                        update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, 'rank_math_twitter_image', true));
+                    }                      
+                    if (get_post_meta($post->ID, 'rank_math_robots', true) !='') { //Import Robots NoIndex, NoFollow, NoOdp, NoImageIndex, NoArchive, NoSnippet
+                        $rank_math_robots = get_post_meta($post->ID, 'rank_math_robots', true);
+                        
+                        if (in_array('noindex', $rank_math_robots)) {
+                            update_post_meta($post->ID, '_seopress_robots_index', "yes");
+                        }
+                        if (in_array('nofollow', $rank_math_robots)) {
+                            update_post_meta($post->ID, '_seopress_robots_follow', "yes");
+                        }
+                        if (in_array('noodp', $rank_math_robots)) {
+                            update_post_meta($post->ID, '_seopress_robots_odp', "yes");
+                        }
+                        if (in_array('noimageindex', $rank_math_robots)) {
+                            update_post_meta($post->ID, '_seopress_robots_imageindex', "yes");
+                        }
+                        if (in_array('noarchive', $rank_math_robots)) {
+                            update_post_meta($post->ID, '_seopress_robots_archive', "yes");
+                        }
+                        if (in_array('nosnippet', $rank_math_robots)) {
+                            update_post_meta($post->ID, '_seopress_robots_snippet', "yes");
+                        }
+                    }            
+                    if (get_post_meta($post->ID, 'rank_math_canonical_url', true) !='') { //Import Canonical URL
+                        update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, 'rank_math_canonical_url', true));
+                    }
+                    if (get_post_meta($post->ID, 'rank_math_focus_keyword', true) !='') { //Import Focus Keywords
+                        update_post_meta($post->ID, '_seopress_analysis_target_kw', get_post_meta($post->ID, 'rank_math_focus_keyword', true));
+                    }
+                }
+            }
+            $offset4 += $increment;
+        }
+        $data = array();
+        $data['offset4'] = $offset4;
+        wp_send_json_success($data);
+        die();
+    }
+}
+add_action('wp_ajax_seopress_rk_migration', 'seopress_rk_migration');

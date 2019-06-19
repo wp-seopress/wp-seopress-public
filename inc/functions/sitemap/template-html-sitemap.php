@@ -24,7 +24,7 @@ if (!empty($postslist)) {
         $content .= '</ul>'; // 0 means display all levels.
     } else {
         $content .= '<ul>';
-            if ($cpt_key !='post') {//check if not Post cpt
+            if ($cpt_key !='post' && isset($obj->labels->name)) {//check if not Post cpt
                 $content .= '<li><a href="'.get_post_type_archive_link($cpt_key).'">'.$obj->labels->name.'</a></li>';
             }
             foreach ( $postslist as $post ) {

@@ -784,6 +784,27 @@ class seopress_options
                     </div><!-- .inside -->
                 </div><!-- .postbox -->
 
+                <!-- RK import tool --> 
+                <div id="rk-migration-tool" class="postbox section-tool">
+                    <h3><span><?php _e( 'Import posts and terms metadata from Rank Math', 'wp-seopress' ); ?></span></h3>
+                    <div class="inside">
+                        <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+                        <ul>
+                            <li><?php _e('Title tags','wp-seopress'); ?></li>
+                            <li><?php _e('Meta description','wp-seopress'); ?></li>
+                            <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                            <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                            <li><?php _e('Meta Robots (noindex, nofollow, noarchive, noimageindex)','wp-seopress'); ?></li>
+                            <li><?php _e('Canonical URL','wp-seopress'); ?></li>
+                            <li><?php _e('Focus keywords','wp-seopress'); ?></li>
+                        </ul>
+                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Rank Math datas.', 'wp-seopress' ); ?></p>
+                        <button id="seopress-rk-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                        <span class="spinner"></span>
+                        <div class="log"></div>
+                    </div><!-- .inside -->
+                </div><!-- .postbox -->
+
                 <div class="postbox section-tool">
                     <h3><span><?php _e( 'Reset All Notices From Notifications Center', 'wp-seopress' ); ?></span></h3>
                     <div class="inside">

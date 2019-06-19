@@ -96,4 +96,37 @@ jQuery(document).ready(function(){
 		jQuery( '#seo-framework-migration-tool .spinner' ).css( "float", "none" );
 		jQuery( '#seo-framework-migration-tool .log' ).html('');
 	});
+
+	//RK
+	jQuery('#seopress-rk-migrate').on('click', function(e4) {
+		e4.preventDefault();
+		self.process_offset4( 0, self );
+	});
+	process_offset4 = function( offset4, self ) {
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxMigrate.seopress_rk_migrate.seopress_rk_migration,
+			data : {
+				action: 'seopress_rk_migration',
+				offset4: offset4,
+				_ajax_nonce: seopressAjaxMigrate.seopress_rk_migrate.seopress_nonce,
+			},
+			success : function( data ) {
+				if( 'done' == data.data.offset4 ) {
+		        	jQuery('#seopress-rk-migrate').removeAttr("disabled");
+					jQuery( '.spinner' ).css( "visibility", "hidden" );
+					jQuery( '#rk-migration-tool .log' ).html('Migration completed!');
+		        } else {
+		        	self.process_offset4( parseInt( data.data.offset4 ), self );
+		        }					
+			},
+		});
+	};
+
+	jQuery('#seopress-rk-migrate').on('click', function() {
+		jQuery(this).attr("disabled", "disabled");
+		jQuery( '#rk-migration-tool .spinner' ).css( "visibility", "visible" );
+		jQuery( '#rk-migration-tool .spinner' ).css( "float", "none" );
+		jQuery( '#rk-migration-tool .log' ).html('');
+	});
 });
