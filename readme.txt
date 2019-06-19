@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.5.7
+Stable tag: 3.5.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 <h3>Features</h3>
 
 <ul>
+	<li>Installation wizard to quickly setup your site</li>
 	<li>Titles (with dyanmic variables: custom fields, terms taxonomie...)</li>
 	<li>Meta descriptions (with dynamic variables too)</li>
 	<li>Open Graph Data</li>
@@ -74,6 +75,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Email notifications on 404</li>
 	<li>301, 302 and 307 Redirections</li>
 	<li>Import redirections using CSV</li>
+	<li>Import redirections from Redirections plugin (via a JSON file)</li>
 	<li>htaccess</li>
 	<li>RSS</li>
 </ul>
@@ -163,6 +165,15 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.5.8 =
+* NEW Installation wizard!
+* NEW Import redirects from Redirections plugin
+* NEW Display and automatically accept the user‘s consent on page load (not fully GDPR) for Google Analytics
+* INFO Compatibility with LifterLMS plugin
+* INFO Improve redirections export to CSV
+* FIX Import/export redirects tool for query param
+* FIX Links in SEO Tools
+* FIX Post type archive link if no posts page set in Settings > Reading for HTML sitemap
 = 3.5.7 =
 * NEW Add 23 LocalBusiness types
 * FIX Sitemap for subdirectory installs

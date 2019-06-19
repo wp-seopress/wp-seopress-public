@@ -132,7 +132,7 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
                             );
 							if ($cpt_key =='post') {
 								
-								if (get_post_type_archive_link($cpt_key)) {
+								if (get_post_type_archive_link($cpt_key) && get_option( 'page_for_posts' ) !=0) { 
 									$content .= '<ul>';
 									$content .= '<li><a href="'.get_post_type_archive_link($cpt_key).'">'.$obj->labels->name.'</a></li>';
 									$content .= '</ul>';

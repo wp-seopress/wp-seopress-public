@@ -581,7 +581,7 @@ function seopress_custom_tracking_hook() {
 }
 
 if (seopress_google_analytics_enable_option() =='1' && seopress_google_analytics_ua_option() !='') {
-	if (((isset($_COOKIE["seopress-user-consent-accept"]) && $_COOKIE["seopress-user-consent-accept"] =='1') && seopress_google_analytics_disable_option() =='1') || (seopress_google_analytics_disable_option() !='1')) { //User consent cookie OK
+	if (seopress_google_analytics_half_disable_option() =='1' || (((isset($_COOKIE["seopress-user-consent-accept"]) && $_COOKIE["seopress-user-consent-accept"] =='1') && seopress_google_analytics_disable_option() =='1') || (seopress_google_analytics_disable_option() !='1'))) { //User consent cookie OK
 		if (is_user_logged_in()) {
 			global $wp_roles;
 			

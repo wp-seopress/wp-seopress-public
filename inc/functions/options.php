@@ -143,6 +143,18 @@ if (seopress_get_toggle_google_analytics_option() =='1') {
 		}
 	}
 
+	//Auto accept user consent
+	function seopress_google_analytics_half_disable_option() {
+		$seopress_google_analytics_half_disable_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_half_disable_option ) ) {
+			foreach ($seopress_google_analytics_half_disable_option as $key => $seopress_google_analytics_half_disable_value)
+				$options[$key] = $seopress_google_analytics_half_disable_value;
+				if (isset($seopress_google_analytics_half_disable_option['seopress_google_analytics_half_disable'])) {
+					return $seopress_google_analytics_half_disable_option['seopress_google_analytics_half_disable'];
+				}
+		}
+	}
+
 	//Disable Tracking - Message
 	function seopress_google_analytics_opt_out_msg_option() {
 		$seopress_google_analytics_opt_out_msg_option = get_option("seopress_google_analytics_option_name");

@@ -100,6 +100,12 @@ function seopress_admin_bar_links() {
 				'href'		=> admin_url( 'edit.php?post_type=seopress_backlinks' ),
 			));
 		}
+		$wp_admin_bar->add_menu( array(
+			'parent'	=> 'seopress_custom_top_level',
+			'id'		=> 'seopress_custom_sub_menu_wizard',
+			'title'		=> __( 'Configuration wizard', 'wp-seopress' ),
+			'href'		=> admin_url( 'admin.php?page=seopress-setup' ),
+		));
 	}
 }
 add_action( 'admin_bar_menu', 'seopress_admin_bar_links', 99 );

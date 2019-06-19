@@ -5,6 +5,26 @@ jQuery(document).ready(function(){
 	}
 
 	//Hide notices
+	//**Wizard
+	jQuery('#notice-wizard').on('click', function() {
+		jQuery('#notice-wizard').attr('data-notice', jQuery('#notice-wizard').attr('data-notice') == '1' ? '0' : '1');
+		jQuery.ajax({
+			method : 'POST',
+			url : seopressAjaxHideNotices.seopress_hide_notices,
+			data : {
+				action: 'seopress_hide_notices',
+				notice: 'notice-wizard',
+				notice_value: jQuery('#notice-wizard').attr('data-notice'),
+				_ajax_nonce: seopressAjaxHideNotices.seopress_nonce,
+			},
+			success : function( data ) {
+				jQuery( '#seopress-notice-save' ).css('display', 'block');
+				jQuery( '#seopress-notice-save .html' ).html('Notice successfully removed');
+				jQuery( '#notice-wizard-alert' ).fadeOut();
+				jQuery( '#seopress-notice-save' ).delay(3500).fadeOut();
+			},
+		});
+	});
 	//**Divide comments
 	jQuery('#notice-divide-comments').on('click', function() {
 		jQuery('#notice-divide-comments').attr('data-notice', jQuery('#notice-divide-comments').attr('data-notice') == '1' ? '0' : '1');

@@ -131,7 +131,7 @@ function seopress_xml_sitemap_single() {
 
 						//WooCommerce
 						global $product;
-						if ($product !='') {
+						if ($product !='' && method_exists($product, 'get_gallery_image_ids')) {
 							$product_img = $product->get_gallery_image_ids();
 						}
 
