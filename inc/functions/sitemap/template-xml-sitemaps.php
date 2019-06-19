@@ -5,6 +5,11 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 Header('Content-type: text/xml');
 
 //WPML
+function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
+    return $url;
+}
+add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
+
 add_filter( 'seopress_sitemaps_index_cpt_query', function( $args ) {
     global $sitepress, $sitepress_settings;
 
@@ -26,7 +31,7 @@ add_action( 'the_post', function( $post ) {
 
 function seopress_xml_sitemap_index() {
 	$seopress_sitemaps ='<?xml version="1.0" encoding="UTF-8"?>';
-	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_site_url().'/sitemaps_xsl.xsl"?>';
+	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.get_home_url().'/sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .='<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
@@ -75,7 +80,7 @@ function seopress_xml_sitemap_index() {
 							$seopress_sitemaps .= '<sitemap>';
 							$seopress_sitemaps .= "\n";
 							$seopress_sitemaps .= '<loc>';
-							$seopress_sitemaps .= get_site_url().'/sitemaps/'.$cpt_key.'-sitemap'.$paged.'.xml';
+							$seopress_sitemaps .= get_home_url().'/sitemaps/'.$cpt_key.'-sitemap'.$paged.'.xml';
 							$seopress_sitemaps .= '</loc>';
 					    	$seopress_sitemaps .= "\n";
 							$seopress_sitemaps .= '<lastmod>';
@@ -116,7 +121,7 @@ function seopress_xml_sitemap_index() {
 				$seopress_sitemaps .= '<sitemap>';
 				$seopress_sitemaps .= "\n";
 				$seopress_sitemaps .= '<loc>';
-				$seopress_sitemaps .= get_site_url().'/sitemaps/'.$term_value.'-sitemap.xml';
+				$seopress_sitemaps .= get_home_url().'/sitemaps/'.$term_value.'-sitemap.xml';
 				$seopress_sitemaps .= '</loc>';
 				$seopress_sitemaps .= "\n";
 				$seopress_sitemaps .= '</sitemap>';
@@ -159,7 +164,7 @@ function seopress_xml_sitemap_index() {
 			$seopress_sitemaps .= '<sitemap>';
 			$seopress_sitemaps .= "\n";
 			$seopress_sitemaps .= '<loc>';
-			$seopress_sitemaps .= get_site_url().'/sitemaps/news.xml';
+			$seopress_sitemaps .= get_home_url().'/sitemaps/news.xml';
 			$seopress_sitemaps .= '</loc>';
 			$seopress_sitemaps .= "\n";
 			$seopress_sitemaps .= '<lastmod>';
@@ -176,7 +181,7 @@ function seopress_xml_sitemap_index() {
 		$seopress_sitemaps .= '<sitemap>';
 		$seopress_sitemaps .= "\n";
 		$seopress_sitemaps .= '<loc>';
-		$seopress_sitemaps .= get_site_url().'/sitemaps/video.xml';
+		$seopress_sitemaps .= get_home_url().'/sitemaps/video.xml';
 		$seopress_sitemaps .= '</loc>';
 		$seopress_sitemaps .= "\n";
 		$seopress_sitemaps .= '</sitemap>';

@@ -4,6 +4,12 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //XML
 Header('Content-type: text/xml');
 
+//WPML
+function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
+    return $url;
+}
+add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
+
 function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"
 				xmlns:html="http://www.w3.org/TR/REC-html40"
@@ -108,7 +114,7 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='<body>';
 	$seopress_sitemaps_xsl .='<div id="main">';
 	$seopress_sitemaps_xsl .='<h1>'.__('XML Sitemaps','wp-seopress').'</h1>';
-	$seopress_sitemaps_xsl .='<p><a href="'.get_site_url().'/sitemaps.xml">Index sitemaps</a></p>';
+	$seopress_sitemaps_xsl .='<p><a href="'.get_home_url().'/sitemaps.xml">Index sitemaps</a></p>';
 	$seopress_sitemaps_xsl .='<div id="sitemaps">';
 	$seopress_sitemaps_xsl .='<div class="loc">';
 	$seopress_sitemaps_xsl .='URL';

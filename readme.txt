@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.5.6
+Stable tag: 3.5.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>French (professional translation)</li>
 	<li>Spanish (professional translation)</li>
 	<li>German (professional translation)</li>
+	<li>Dutch (professional translation)</li>
 	<li>Greek</li>
 	<li>Bulgarian</li>
 	<li>Indonesian</li>
@@ -97,7 +98,6 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Telugu</li>
 	<li>Tamil</li>
 	<li>Brazilian Portguese</li>
-	<li>Dutch</li>
 	<li>Vietnamese</li>
 	<li>Romanian</li>
 	<li>Arabic</li>
@@ -163,6 +163,10 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 44. Structured Data Types metaboxe in post, page, custom post type (PRO)
 
 == Changelog ==
+= 3.5.7 =
+* NEW Add 23 LocalBusiness types
+* FIX Sitemap for subdirectory installs
+* FIX get_home_url() with WPML
 = 3.5.6 =
 * NEW Rank Math importer
 * FIX Notice in HTML sitemap
