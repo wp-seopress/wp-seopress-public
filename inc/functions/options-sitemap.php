@@ -112,6 +112,8 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
 
 				$seopress_xml_sitemap_post_types_list_option = array('page' => $seopress_xml_sitemap_post_types_list_option['page']) + $seopress_xml_sitemap_post_types_list_option; //Display page first
 
+				$seopress_xml_sitemap_post_types_list_option = apply_filters('seopress_sitemaps_html_cpt', $seopress_xml_sitemap_post_types_list_option);
+
 				foreach ($seopress_xml_sitemap_post_types_list_option as $cpt_key => $cpt_value) {
 					$obj = get_post_type_object( $cpt_key );
 					if ($obj) {

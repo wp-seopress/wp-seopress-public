@@ -33,6 +33,37 @@
     content: "\e800";
 }
 
+.sp-tooltip {
+    position: relative;
+    margin-left: 5px;
+    display: inline-block;
+    cursor: help;
+}
+
+.sp-tooltip .dashicons {
+    color: #666;
+}
+
+.sp-tooltip .sp-tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    z-index: 999999999;
+    color: #fff;
+    font-size: .8em;
+    background: #333;
+    text-align: center;
+    width: 240px;
+    right: 0px;
+    border-radius: 3px;
+    padding: .618em 1em;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    top: 25px;
+}
+
+.sp-tooltip:hover .sp-tooltiptext {
+    visibility: visible;
+}
+
 #seopress_content_analysis .wrap-seopress-analysis {
     display: inline-block;
     width: 100%;
@@ -137,6 +168,7 @@
 #seopress_content_analysis .ui-tabs .ui-tabs-nav {
     width: calc(100% + 24px);
     margin: 0 0 0 -12px;
+    position: -webkit-sticky; /* Required for Safari */
     position: sticky;
     top: 0;
 }
@@ -192,6 +224,11 @@
 }
 
 #seopress_content_analysis input[type=text],#seopress_cpt #tabs-1 input,#seopress_cpt #tabs-2 input[type=text],#seopress_cpt #tabs-3 input[type=text],#seopress_cpt #tabs-3 textarea,#seopress_cpt #tabs-4 input[type=text],#seopress_cpt #tabs-5 input[type=text],#seopress_cpt #tabs-6 input[type=text],#seopress_cpt #tabs-6 textarea {
+    width: 90%;
+    display: inline-block;
+}
+
+#seopress_cpt #tabs-1 input {
     width: 100%;
 }
 
@@ -325,8 +362,10 @@
     text-align: right;
     background: #eee;
     padding: 2px 5px;
+    display: flex;
     box-shadow: 0 1px 1px rgba(0,0,0,.2);
     font-size: 12px;
+    justify-content: flex-end;
 }
 
 #seopress_cpt #seopress_titles_desc_counters,#seopress_cpt #seopress_titles_title_counters,#seopress_pro_cpt #seopress_rich_snippets_articles_counters,#seopress_pro_cpt #seopress_rich_snippets_courses_counters {
@@ -368,6 +407,7 @@
     top: 2px;
     padding: 0px 5px;
     white-space: nowrap;
+    margin: 0;
     border: none;
     background: 0 0;
 }
@@ -382,7 +422,7 @@
 }
 
 #seopress_content_analysis .ui-tabs .ui-tabs-nav li.ui-tabs-active,#seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
-    margin-bottom: -2px;
+    margin-bottom: 2px;
     padding-bottom: 1px;
 }
 
@@ -548,6 +588,7 @@ body.seopress-styles {
     font-weight: 700;
     color: #3297d3;
     text-transform: uppercase;
+    position: -webkit-sticky; /* Required for Safari */
     position: sticky;
     top: 32px;
     background: #fff;
@@ -1673,6 +1714,7 @@ body.seopress-styles {
     padding: 0 10px;
     line-height: inherit;
     background: #fff;
+    position: -webkit-sticky; /* Required for Safari */
     position: sticky;
     top: 102px;
     width: calc(100% + 12px);
@@ -1687,6 +1729,7 @@ body.seopress-styles {
     border-bottom: 0;
     padding: 0;
     line-height: inherit;
+    position: -webkit-sticky; /* Required for Safari */
     position: sticky;
     background: #f8fafd;
     z-index: 100;

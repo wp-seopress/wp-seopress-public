@@ -46,7 +46,8 @@ function seopress_import_settings() {
         return;
     if( ! current_user_can( 'manage_options' ) )
         return;
-    $extension = end( explode( '.', $_FILES['import_file']['name'] ) );
+    $extension = explode( '.', $_FILES['import_file']['name'] );
+    $extension = end($extension);
     if( $extension != 'json' ) {
         wp_die( __( 'Please upload a valid .json file' ) );
     }
@@ -83,7 +84,8 @@ function seopress_import_redirections_settings() {
         return;
     if( ! current_user_can( 'manage_options' ) )
         return;
-    $extension = end( explode( '.', $_FILES['import_file']['name'] ) );
+    $extension = explode( '.', $_FILES['import_file']['name'] );
+    $extension = end($extension);
     if( $extension != 'csv' ) {
         wp_die( __( 'Please upload a valid .csv file' ) );
     }
@@ -126,6 +128,52 @@ function seopress_import_redirections_settings() {
     wp_safe_redirect( admin_url( 'edit.php?post_type=seopress_404' ) ); exit;
 }
 add_action( 'admin_init', 'seopress_import_redirections_settings' );
+
+//Import Redirections from Yoast Premium (CSV)
+function seopress_import_yoast_redirections() {
+    if( empty( $_POST['seopress_action'] ) || 'import_yoast_redirections' != $_POST['seopress_action'] )
+        return;
+    if( ! wp_verify_nonce( $_POST['seopress_import_yoast_redirections_nonce'], 'seopress_import_yoast_redirections_nonce' ) )
+        return;
+    if( ! current_user_can( 'manage_options' ) )
+        return;
+    $extension = explode( '.', $_FILES['import_file']['name'] );
+    $extension = end($extension);
+    if( $extension != 'csv' ) {
+        wp_die( __( 'Please upload a valid .csv file' ) );
+    }
+    $import_file = $_FILES['import_file']['tmp_name'];
+    if( empty( $import_file ) ) {
+        wp_die( __( 'Please upload a file to import' ) );
+    }
+
+    $csv = array_map('str_getcsv', file($import_file));
+
+    foreach (array_slice($csv,1) as $_key => $_value) {
+        $csv_line = $_value;
+
+        //Third column: redirections type
+        if ($csv_line[2] =='301' || $csv_line[2] =='302' || $csv_line[2]=='307' || $csv_line[2]=='410' || $csv_line[2]=='451') {
+            $csv_type_redirects[2] = $csv_line[2];
+        }
+
+        //Fourth column: redirections enabled
+        $csv_type_redirects[3] = 'yes';
+
+        //Fifth column: redirections query param
+        $csv_type_redirects[4] = 'exact_match';
+
+        if (!empty($csv_line[0])) {
+            $csv_line[0] = substr($csv_line[0], 1);
+            if (!empty($csv_line[1]) && $csv_line[1] ==='//') {
+                $csv_line[1] = '/';
+            }
+            $id = wp_insert_post(array('post_title' => urldecode($csv_line[0]), 'post_type' => 'seopress_404', 'post_status' => 'publish', 'meta_input' => array( '_seopress_redirections_value' => urldecode($csv_line[1]), '_seopress_redirections_type' => $csv_type_redirects[2], '_seopress_redirections_enabled' =>  $csv_type_redirects[3], '_seopress_redirections_param' => $csv_type_redirects[4])));
+        }
+    }
+    wp_safe_redirect( admin_url( 'edit.php?post_type=seopress_404' ) ); exit;
+}
+add_action( 'admin_init', 'seopress_import_yoast_redirections' );
 
 //Export Redirections to CSV file
 function seopress_export_redirections_settings() {
@@ -189,7 +237,8 @@ function seopress_import_redirections_plugin_settings() {
         return;
     if( ! current_user_can( 'manage_options' ) )
         return;
-    $extension = end( explode( '.', $_FILES['import_file']['name'] ) );
+    $extension = explode( '.', $_FILES['import_file']['name'] );
+    $extension = end($extension);
     if( $extension != 'json' ) {
         wp_die( __( 'Please upload a valid .json file' ) );
     }

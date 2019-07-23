@@ -129,6 +129,20 @@ if (!function_exists('seopress_titles_noimageindex_option')) {
     }
 }
 
+//Metaboxe position
+if (!function_exists('seopress_advanced_appearance_term_metaboxe_position_option')) {
+    function seopress_advanced_appearance_term_metaboxe_position_option() {
+        $seopress_advanced_appearance_term_metaboxe_position_option = get_option("seopress_advanced_option_name");
+        if ( ! empty ( $seopress_advanced_appearance_term_metaboxe_position_option ) ) {
+            foreach ($seopress_advanced_appearance_term_metaboxe_position_option as $key => $seopress_advanced_appearance_term_metaboxe_position_value)
+                $options[$key] = $seopress_advanced_appearance_term_metaboxe_position_value;
+             if (isset($seopress_advanced_appearance_term_metaboxe_position_option['seopress_advanced_appearance_metaboxe_position'])) { 
+                return $seopress_advanced_appearance_term_metaboxe_position_option['seopress_advanced_appearance_metaboxe_position'];
+             }
+        }
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Display metabox in Custom Taxonomy
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,14 +152,32 @@ function seopress_display_seo_term_metaboxe() {
 
     function seopress_init_term_metabox() {
         if (function_exists('seopress_get_taxonomies')) {
-            
             $seopress_get_taxonomies = seopress_get_taxonomies();
             $seopress_get_taxonomies = apply_filters('seopress_metaboxe_term_seo', $seopress_get_taxonomies);
             
             if (!empty($seopress_get_taxonomies)) {
+                if (function_exists('seopress_advanced_appearance_term_metaboxe_position_option')) {
+                    switch (seopress_advanced_appearance_term_metaboxe_position_option()) {
+                        case 'high':
+                            $priority = 1;
+                            break;
+                        case 'default':
+                            $priority = 10;
+                            break;
+                        case 'low':
+                            $priority = 100;
+                            break;
+                        default:
+                            $priority = 10;
+                            break;
+                    }
+                } else {
+                    $priority = 10;
+                }
+                $priority = apply_filters('seopress_metaboxe_term_seo_priority', $priority);
                 foreach ($seopress_get_taxonomies as $key => $value) {
-                    add_action( $key.'_edit_form_fields', 'seopress_tax', 10, 2 ); //Edit term page
-                    add_action( 'edit_'.$key,   'seopress_tax_save_term', 10, 2 ); //Edit save term
+                    add_action( $key.'_edit_form', 'seopress_tax', $priority, 2 ); //Edit term page
+                    add_action( 'edit_'.$key,   'seopress_tax_save_term', $priority, 2 ); //Edit save term
                 }
             }
         }
@@ -161,7 +193,7 @@ function seopress_display_seo_term_metaboxe() {
 
         if ("seopress_404" != $typenow) {
             //Register Google Snippet Preview / Content Analysis JS
-            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
+            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.min.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
 
             $seopress_real_preview = array(
                 'seopress_nonce' => wp_create_nonce('seopress_real_preview_nonce'),

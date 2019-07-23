@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO Plugin for WordPress.
-Version: 3.5.8
+Version: 3.6
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.5.8' ); 
+define( 'SEOPRESS_VERSION', '3.6' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,11 +63,13 @@ function seopress_init($hook) {
     load_plugin_textdomain( 'wp-seopress', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
     global $pagenow;
-    
+    global $typenow;
     if ( is_admin() || is_network_admin() ) {
         require_once dirname( __FILE__ ) . '/inc/admin/admin.php';
         if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
-            require_once dirname( __FILE__ ) . '/inc/admin/admin-metaboxes.php';
+            if ( 'seopress_schemas' != $typenow ) { 
+                require_once dirname( __FILE__ ) . '/inc/admin/admin-metaboxes.php';
+            } 
         }
         if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
             require_once dirname( __FILE__ ) . '/inc/admin/admin-term-metaboxes.php';
@@ -206,6 +208,10 @@ function seopress_add_admin_options_scripts($hook) {
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-advanced') ) {
         wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs5.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
+    }
+
+    if (isset($_GET['page']) && ($_GET['page'] == 'seopress-import-export') ) {
+        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs8.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-social') ) {

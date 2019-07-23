@@ -1,8 +1,9 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2019-06-19 15:31+0200\n"
+"POT-Creation-Date: 2019-07-17 15:34+0200\n"
 "PO-Revision-Date: 2019-06-19 15:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
@@ -25,149 +26,153 @@ msgstr ""
 msgid "PRO"
 msgstr ""
 
-#: inc/admin/admin-header.php:36 inc/admin/admin.php:185
+#: inc/admin/admin-header.php:28
+msgid "FREE"
+msgstr ""
+
+#: inc/admin/admin-header.php:35 inc/admin/admin.php:185
 #: inc/admin/adminbar.php:25
 msgid "Titles & Metas"
 msgstr ""
 
-#: inc/admin/admin-header.php:42 inc/admin/admin.php:186
+#: inc/admin/admin-header.php:41 inc/admin/admin.php:186
 #: inc/admin/adminbar.php:31
 msgid "XML / HTML Sitemap"
 msgstr ""
 
-#: inc/admin/admin-header.php:48 inc/admin/admin.php:187
-#: inc/admin/admin.php:1500 inc/admin/adminbar.php:37
+#: inc/admin/admin-header.php:47 inc/admin/admin.php:187
+#: inc/admin/admin.php:1540 inc/admin/adminbar.php:37
 msgid "Social Networks"
 msgstr ""
 
-#: inc/admin/admin-header.php:54 inc/admin/admin.php:188
-#: inc/admin/admin.php:1538 inc/admin/adminbar.php:43
+#: inc/admin/admin-header.php:53 inc/admin/admin.php:188
+#: inc/admin/admin.php:1578 inc/admin/adminbar.php:43
 msgid "Google Analytics"
 msgstr ""
 
-#: inc/admin/admin-header.php:60 inc/admin/admin-metaboxes-form.php:58
+#: inc/admin/admin-header.php:59 inc/admin/admin-metaboxes-form.php:58
 #: inc/admin/admin.php:189 inc/admin/admin.php:346 inc/admin/admin.php:622
-#: inc/admin/admin.php:1576 inc/admin/adminbar.php:49
+#: inc/admin/admin.php:1616 inc/admin/adminbar.php:49
 msgid "Advanced"
 msgstr ""
 
-#: inc/admin/admin-header.php:68 inc/admin/admin.php:1605
+#: inc/admin/admin-header.php:67 inc/admin/admin.php:1645
 msgid "WooCommerce"
 msgstr ""
 
-#: inc/admin/admin-header.php:74 inc/admin/admin.php:1633
+#: inc/admin/admin-header.php:73 inc/admin/admin.php:1673
 msgid "Easy Digital Downloads"
 msgstr ""
 
-#: inc/admin/admin-header.php:80 inc/admin/admin.php:1661
+#: inc/admin/admin-header.php:79 inc/admin/admin.php:1701
 msgid "Local Business"
 msgstr ""
 
-#: inc/admin/admin-header.php:86 inc/admin/admin.php:1689
+#: inc/admin/admin-header.php:85 inc/admin/admin.php:1729
 msgid "Dublin Core"
 msgstr ""
 
-#: inc/admin/admin-header.php:92
+#: inc/admin/admin-header.php:91
 msgid "Structured Data Types (schema.org)"
 msgstr ""
 
-#: inc/admin/admin-header.php:98 inc/admin/admin.php:1745
+#: inc/admin/admin-header.php:97 inc/admin/admin.php:1785
 msgid "Breadcrumbs"
 msgstr ""
 
-#: inc/admin/admin-header.php:104 inc/admin/admin.php:1783
+#: inc/admin/admin-header.php:103 inc/admin/admin.php:1823
 msgid "Google Page Speed"
 msgstr ""
 
-#: inc/admin/admin-header.php:111 inc/admin/admin.php:1804
+#: inc/admin/admin-header.php:110 inc/admin/admin.php:1844
 msgid "robots.txt"
 msgstr ""
 
-#: inc/admin/admin-header.php:118 inc/admin/admin.php:1845
+#: inc/admin/admin-header.php:117 inc/admin/admin.php:1885
 msgid "Google News Sitemap"
 msgstr ""
 
-#: inc/admin/admin-header.php:124 inc/admin/admin.php:1884
-#: inc/admin/adminbar.php:87
+#: inc/admin/admin-header.php:123 inc/admin/admin.php:660
+#: inc/admin/admin.php:1924 inc/admin/adminbar.php:87
 msgid "Redirections"
 msgstr ""
 
-#: inc/admin/admin-header.php:130 inc/admin/admin.php:1923
+#: inc/admin/admin-header.php:129 inc/admin/admin.php:1963
 msgid "Broken links"
 msgstr ""
 
-#: inc/admin/admin-header.php:136 inc/admin/admin.php:1934
+#: inc/admin/admin-header.php:135 inc/admin/admin.php:1974
 #: inc/admin/adminbar.php:99
 msgid "Backlinks"
 msgstr ""
 
-#: inc/admin/admin-header.php:142 inc/admin/admin.php:1945
+#: inc/admin/admin-header.php:141 inc/admin/admin.php:1985
 msgid "URL Rewriting"
 msgstr ""
 
-#: inc/admin/admin-header.php:149
+#: inc/admin/admin-header.php:148
 msgid "White Label"
 msgstr ""
 
-#: inc/admin/admin-header.php:155 inc/admin/admin.php:1976
+#: inc/admin/admin-header.php:154 inc/admin/admin.php:2016
 msgid ".htaccess"
 msgstr ""
 
-#: inc/admin/admin-header.php:162 inc/admin/admin.php:1988
+#: inc/admin/admin-header.php:161 inc/admin/admin.php:2028
 msgid "RSS"
 msgstr ""
 
-#: inc/admin/admin-header.php:168 inc/admin/admin.php:1281
-#: inc/admin/admin.php:2021 inc/admin/adminbar.php:69
+#: inc/admin/admin-header.php:167 inc/admin/admin.php:1320
+#: inc/admin/admin.php:2061 inc/admin/adminbar.php:69
 msgid "License"
 msgstr ""
 
-#: inc/admin/admin-header.php:175 inc/admin/admin.php:190
-#: inc/admin/admin.php:2000 inc/admin/adminbar.php:55
+#: inc/admin/admin-header.php:174 inc/admin/admin.php:190
+#: inc/admin/admin.php:2040 inc/admin/adminbar.php:55
 msgid "Tools"
 msgstr ""
 
-#: inc/admin/admin-header.php:200
+#: inc/admin/admin-header.php:199
 msgid "See the changelog (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:202
+#: inc/admin/admin-header.php:201
 msgid "See the changelog"
 msgstr ""
 
-#: inc/admin/admin-header.php:204 inc/admin/admin-header.php:206
+#: inc/admin/admin-header.php:203 inc/admin/admin-header.php:205
 msgid "Send feedback"
 msgstr ""
 
-#: inc/admin/admin-header.php:208
+#: inc/admin/admin-header.php:207
 msgid "Follow us on Twitter (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:210 inc/admin/admin-wizard.php:780
+#: inc/admin/admin-header.php:209 inc/admin/admin-wizard.php:780
 msgid "Follow us on Twitter"
 msgstr ""
 
-#: inc/admin/admin-header.php:212
+#: inc/admin/admin-header.php:211
 msgid "Follow us on YouTube (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:214
+#: inc/admin/admin-header.php:213
 msgid "Follow us on YouTube"
 msgstr ""
 
-#: inc/admin/admin-header.php:216
+#: inc/admin/admin-header.php:215
 msgid "Official website (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:218
+#: inc/admin/admin-header.php:217
 msgid "Official website"
 msgstr ""
 
-#: inc/admin/admin-header.php:220
+#: inc/admin/admin-header.php:219
 msgid "Support (new window)"
 msgstr ""
 
-#: inc/admin/admin-header.php:222
+#: inc/admin/admin-header.php:221
 msgid "Support"
 msgstr ""
 
@@ -185,294 +190,294 @@ msgstr ""
 msgid "Enter your target keywords"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:11
+#: inc/admin/admin-metaboxes-content-analysis-form.php:13
 msgid ""
 "Separate target keywords with commas. Do not use spaces after the commas, "
 "unless you want to include them (eg: \"my super keyword,another keyword,"
 "keyword\")"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:14
+#: inc/admin/admin-metaboxes-content-analysis-form.php:17
 msgid "Analyze my content"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:16
+#: inc/admin/admin-metaboxes-content-analysis-form.php:19
 msgid "Refresh analysis"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:18
+#: inc/admin/admin-metaboxes-content-analysis-form.php:21
 msgid "Analysis completed"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:20
+#: inc/admin/admin-metaboxes-content-analysis-form.php:23
 msgid "To get the most accurate analysis, save your post first."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:24
+#: inc/admin/admin-metaboxes-content-analysis-form.php:28
 msgid "Google suggestions"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:26
+#: inc/admin/admin-metaboxes-content-analysis-form.php:32
 msgid ""
 "Enter a keyword, or a phrase, to find the top 10 Google suggestions "
 "instantly. This is useful if you want to work with the long tail technique."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:28
+#: inc/admin/admin-metaboxes-content-analysis-form.php:35
 msgid "Get suggestions!"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:71
+#: inc/admin/admin-metaboxes-content-analysis-form.php:78
 msgid "Optimizations"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:72
+#: inc/admin/admin-metaboxes-content-analysis-form.php:79
 msgid "Configuration"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:73
+#: inc/admin/admin-metaboxes-content-analysis-form.php:80
 msgid "Images"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:74
+#: inc/admin/admin-metaboxes-content-analysis-form.php:81
 msgid "Links"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:80
+#: inc/admin/admin-metaboxes-content-analysis-form.php:87
 msgid "Words counter"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:82
+#: inc/admin/admin-metaboxes-content-analysis-form.php:89
 msgid "words found."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:83
+#: inc/admin/admin-metaboxes-content-analysis-form.php:90
 msgid "unique words found."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:86
+#: inc/admin/admin-metaboxes-content-analysis-form.php:93
 msgid ""
 "Your content is composed of more than 300 words, which is the minimum for a "
 "post."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:88
+#: inc/admin/admin-metaboxes-content-analysis-form.php:95
 msgid "Your content is too short. Add a few more paragraphs!"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:95
+#: inc/admin/admin-metaboxes-content-analysis-form.php:102
 msgid "H1 (Heading 1)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:101
+#: inc/admin/admin-metaboxes-content-analysis-form.php:108
 msgid "Target keywords were found in Heading 1 (H1)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:110
-#: inc/admin/admin-metaboxes-content-analysis-form.php:131
-#: inc/admin/admin-metaboxes-content-analysis-form.php:149
-#: inc/admin/admin-metaboxes-content-analysis-form.php:168
-#: inc/admin/admin-metaboxes-content-analysis-form.php:197
+#: inc/admin/admin-metaboxes-content-analysis-form.php:117
+#: inc/admin/admin-metaboxes-content-analysis-form.php:138
+#: inc/admin/admin-metaboxes-content-analysis-form.php:156
+#: inc/admin/admin-metaboxes-content-analysis-form.php:175
+#: inc/admin/admin-metaboxes-content-analysis-form.php:204
 #, php-format
 msgid "%s was found %d times."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:115
+#: inc/admin/admin-metaboxes-content-analysis-form.php:122
 #, php-format
 msgid "We found %d Heading 1 (H1) in your content."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:116
+#: inc/admin/admin-metaboxes-content-analysis-form.php:123
 msgid ""
 "You should not use more than one H1 heading in your post content. The rule "
 "is simple: only one H1 for each web page. Better for SEO and accessibility."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:121
+#: inc/admin/admin-metaboxes-content-analysis-form.php:128
 msgid "H2 (Heading 2)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:123
+#: inc/admin/admin-metaboxes-content-analysis-form.php:130
 msgid "Target keywords were found in Heading 2 (H2)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:135
+#: inc/admin/admin-metaboxes-content-analysis-form.php:142
 msgid "None of your target keywords were found in Heading 2 (H2)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:139
+#: inc/admin/admin-metaboxes-content-analysis-form.php:146
 msgid "H3 (Heading 3)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:141
+#: inc/admin/admin-metaboxes-content-analysis-form.php:148
 msgid "Target keywords were found in Heading 3 (H3)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:153
+#: inc/admin/admin-metaboxes-content-analysis-form.php:160
 msgid "None of your target keywords were found in Heading 3 (H3)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:157
+#: inc/admin/admin-metaboxes-content-analysis-form.php:164
 msgid "Meta title"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:160
+#: inc/admin/admin-metaboxes-content-analysis-form.php:167
 msgid "Target keywords were found in the Meta Title."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:172
+#: inc/admin/admin-metaboxes-content-analysis-form.php:179
 msgid "None of your target keywords were found in the Meta Title."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:176
+#: inc/admin/admin-metaboxes-content-analysis-form.php:183
 msgid "Your custom title is too long."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:178
+#: inc/admin/admin-metaboxes-content-analysis-form.php:185
 msgid "The length of your title is correct"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:181
+#: inc/admin/admin-metaboxes-content-analysis-form.php:188
 msgid "No custom title is set for this post."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:185
-#: inc/admin/admin-metaboxes-form.php:109
-#: inc/admin/admin-metaboxes-form.php:110 inc/admin/admin-wizard.php:256
+#: inc/admin/admin-metaboxes-content-analysis-form.php:192
+#: inc/admin/admin-metaboxes-form.php:111
+#: inc/admin/admin-metaboxes-form.php:112 inc/admin/admin-wizard.php:256
 #: inc/admin/admin-wizard.php:275 inc/admin/admin-wizard.php:292
-#: inc/admin/admin-wizard.php:311 inc/admin/admin.php:749
-#: inc/admin/admin.php:770 inc/admin/admin.php:789 inc/admin/admin.php:810
-#: inc/admin/admin.php:2116 inc/admin/admin.php:3558
+#: inc/admin/admin-wizard.php:311 inc/admin/admin.php:713
+#: inc/admin/admin.php:734 inc/admin/admin.php:753 inc/admin/admin.php:774
+#: inc/admin/admin.php:2156 inc/admin/admin.php:3598
 #: inc/functions/options-advanced-admin.php:761
 msgid "Meta description"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:189
+#: inc/admin/admin-metaboxes-content-analysis-form.php:196
 msgid "Target keywords were found in the Meta description."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:201
+#: inc/admin/admin-metaboxes-content-analysis-form.php:208
 msgid "None of your target keywords were found in the Meta description."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:205
+#: inc/admin/admin-metaboxes-content-analysis-form.php:212
 msgid "You custom meta description is too long."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:207
+#: inc/admin/admin-metaboxes-content-analysis-form.php:214
 msgid "The length of your meta description is correct"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:210
+#: inc/admin/admin-metaboxes-content-analysis-form.php:217
 msgid "No custom meta description is set for this post."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:216
+#: inc/admin/admin-metaboxes-content-analysis-form.php:223
 msgid "Robots"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:226
+#: inc/admin/admin-metaboxes-content-analysis-form.php:233
 #, php-format
 msgid ""
 "We found %s meta robots in your page. There is probably something wrong with "
 "your theme!"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:230
+#: inc/admin/admin-metaboxes-content-analysis-form.php:237
 msgid "noindex is on! Search engines can't index this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:232
+#: inc/admin/admin-metaboxes-content-analysis-form.php:239
 msgid "noindex is off. Search engines will index this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:236
+#: inc/admin/admin-metaboxes-content-analysis-form.php:243
 msgid "nofollow is on! Search engines can't follow your links on this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:238
+#: inc/admin/admin-metaboxes-content-analysis-form.php:245
 msgid "nofollow is off. Search engines will follow links on this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:242
+#: inc/admin/admin-metaboxes-content-analysis-form.php:249
 msgid "noarchive is on! Search engines will not cache your page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:244
+#: inc/admin/admin-metaboxes-content-analysis-form.php:251
 msgid "noarchive is off. Search engines will probably cache your page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:248
+#: inc/admin/admin-metaboxes-content-analysis-form.php:255
 msgid ""
 "nosnippet is on! Search engines will not display a snippet of this page in "
 "search results."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:250
+#: inc/admin/admin-metaboxes-content-analysis-form.php:257
 msgid ""
 "nosnippet is off. Search engines will display a snippet of this page in "
 "search results."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:253
+#: inc/admin/admin-metaboxes-content-analysis-form.php:260
 msgid ""
 "We found no meta robots on this page. It means, your page is index,follow. "
 "Search engines will index it, and follow links. "
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:261
+#: inc/admin/admin-metaboxes-content-analysis-form.php:268
 msgid ""
 "noimageindex is on! Google will not index your images on this page (but if "
 "someone makes a direct link to one of your image in this page, it will be "
 "indexed)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:263
-#: inc/admin/admin-metaboxes-content-analysis-form.php:272
+#: inc/admin/admin-metaboxes-content-analysis-form.php:270
+#: inc/admin/admin-metaboxes-content-analysis-form.php:279
 msgid "noimageindex is off. Google will index the images on this page."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:267
+#: inc/admin/admin-metaboxes-content-analysis-form.php:274
 msgid ""
 "nositelinkssearchbox is on! Google will not display a sitelinks searchbox in "
 "search results."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:269
-#: inc/admin/admin-metaboxes-content-analysis-form.php:274
+#: inc/admin/admin-metaboxes-content-analysis-form.php:276
+#: inc/admin/admin-metaboxes-content-analysis-form.php:281
 msgid ""
 "nositelinkssearchbox is off. Google will probably display a sitelinks "
 "searchbox in search results."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:284
+#: inc/admin/admin-metaboxes-content-analysis-form.php:291
 msgid ""
 "No alternative text found for these images. Alt tags are important for both "
 "SEO and accessibility."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:295
+#: inc/admin/admin-metaboxes-content-analysis-form.php:302
 msgid "All alternative tags are filled in. Good work!"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:298
+#: inc/admin/admin-metaboxes-content-analysis-form.php:305
 msgid ""
 "We could not find any image in your content. Content with media is a plus "
 "for your SEO."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:304
+#: inc/admin/admin-metaboxes-content-analysis-form.php:311
 msgid "NoFollow Links"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:309
+#: inc/admin/admin-metaboxes-content-analysis-form.php:316
 #, php-format
 msgid ""
 "We found %d links with nofollow attribute in your page. Do not overuse "
 "nofollow attribute in links. Below, the list:"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-content-analysis-form.php:319
+#: inc/admin/admin-metaboxes-content-analysis-form.php:326
 msgid "This page doesn't have any nofollow links."
 msgstr ""
 
@@ -520,425 +525,451 @@ msgstr ""
 msgid "Enter your title"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:97 inc/admin/admin-metaboxes-form.php:114
-msgid "(maximum recommended limit)"
+#: inc/admin/admin-metaboxes-form.php:97
+msgid " / 568 pixels - "
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:101 inc/admin/admin.php:3601
-#: inc/admin/admin.php:4536
+#: inc/admin/admin-metaboxes-form.php:99 inc/admin/admin-metaboxes-form.php:118
+msgid " (maximum recommended limit)"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:103 inc/admin/admin.php:3641
+#: inc/admin/admin.php:4576
 msgid "Post Title"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:103 inc/admin/admin.php:198
-#: inc/admin/admin.php:3550 inc/admin/admin.php:3603 inc/admin/admin.php:3722
-#: inc/admin/admin.php:3840 inc/admin/admin.php:3917 inc/admin/admin.php:3987
-#: inc/admin/admin.php:4056 inc/admin/admin.php:4106
+#: inc/admin/admin-metaboxes-form.php:105 inc/admin/admin.php:198
+#: inc/admin/admin.php:3590 inc/admin/admin.php:3643 inc/admin/admin.php:3762
+#: inc/admin/admin.php:3880 inc/admin/admin.php:3957 inc/admin/admin.php:4027
+#: inc/admin/admin.php:4096 inc/admin/admin.php:4146
 msgid "Site Title"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:105 inc/admin/admin-wizard.php:369
-#: inc/admin/admin.php:2100 inc/admin/admin.php:3537
+#: inc/admin/admin-metaboxes-form.php:107 inc/admin/admin-wizard.php:369
+#: inc/admin/admin.php:2140 inc/admin/admin.php:3577
 msgid "Separator"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:110
+#: inc/admin/admin-metaboxes-form.php:112
 msgid "Enter your meta description"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:118
+#: inc/admin/admin-metaboxes-form.php:116
+msgid " / 940 pixels - "
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:122
+msgid "Category / term description"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:126
 msgid "Post Excerpt"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:123
+#: inc/admin/admin-metaboxes-form.php:132
 msgid "Google Snippet Preview"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:124
+#: inc/admin/admin-metaboxes-form.php:133
 msgid ""
 "This is what your page will look like in Google search results. You have to "
 "publish your post to get the Google Snippet Preview."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:149
+#: inc/admin/admin-metaboxes-form.php:158
 msgid ""
 "Do not display this page in search engine results / XML - HTML sitemaps "
 "<strong>(noindex)</strong>"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:155
+#: inc/admin/admin-metaboxes-form.php:164
 msgid "Do not follow links for this page <strong>(nofollow)</strong>"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:161
+#: inc/admin/admin-metaboxes-form.php:170
 msgid ""
 "Do not use Open Directory project metadata for titles or excerpts for this "
 "page <strong>(noodp)</strong>"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:167
+#: inc/admin/admin-metaboxes-form.php:176
 msgid "Do not index images for this page <strong>(noimageindex)</strong>"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:173
+#: inc/admin/admin-metaboxes-form.php:182
 msgid ""
 "Do not display a \"Cached\" link in the Google search results "
 "<strong>(noarchive)</strong>"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:179
+#: inc/admin/admin-metaboxes-form.php:188
 msgid ""
 "Do not display a description in search results for this page "
 "<strong>(nosnippet)</strong>"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:183
+#: inc/admin/admin-metaboxes-form.php:192
 msgid ""
 "You can not uncheck a parameter? This is normal, it is most likely defined "
 "in the global settings of the extension."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:186
-#: inc/admin/admin-metaboxes-form.php:187 inc/admin/admin-wizard.php:260
+#: inc/admin/admin-metaboxes-form.php:195
+#: inc/admin/admin-metaboxes-form.php:196 inc/admin/admin-wizard.php:260
 #: inc/admin/admin-wizard.php:296 inc/admin/admin-wizard.php:315
-#: inc/admin/admin.php:753 inc/admin/admin.php:793 inc/admin/admin.php:814
+#: inc/admin/admin.php:717 inc/admin/admin.php:757 inc/admin/admin.php:778
 msgid "Canonical URL"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:187
+#: inc/admin/admin-metaboxes-form.php:196
 msgid "Default value: "
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:191
+#: inc/admin/admin-metaboxes-form.php:198
+msgid ""
+"A canonical URL is the URL of the page that Google thinks is most "
+"representative from a set of duplicate pages on your site. For example, if "
+"you have URLs for the same page (for example: example.com?dress=1234 and "
+"example.com/dresses/1234), Google chooses one as canonical. Note that the "
+"pages do not need to be absolutely identical; minor changes in sorting or "
+"filtering of list pages do not make the page unique (for example, sorting by "
+"price or filtering by item color).\n"
+"                The canonical can be in a different domain than a duplicate."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:205
 msgid "Select a primary category"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:192
+#: inc/admin/admin-metaboxes-form.php:206
 msgid ""
 "Set the category that gets used in the %category% permalink if you have "
 "multiple categories."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:197 inc/admin/admin-wizard.php:380
-#: inc/admin/admin.php:4579
+#: inc/admin/admin-metaboxes-form.php:211 inc/admin/admin-wizard.php:380
+#: inc/admin/admin.php:4619
 msgid "None (will disable this feature)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:208
-#: inc/admin/admin-metaboxes-form.php:209
+#: inc/admin/admin-metaboxes-form.php:222
+#: inc/admin/admin-metaboxes-form.php:223
 msgid "Custom breadcrumbs"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:209
+#: inc/admin/admin-metaboxes-form.php:223
 msgid "Enter a custom value, useful if your title is too long"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:217
+#: inc/admin/admin-metaboxes-form.php:231
 msgid "Ask Facebook to update his cache"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:219
-#: inc/admin/admin-metaboxes-form.php:220
+#: inc/admin/admin-metaboxes-form.php:233
+#: inc/admin/admin-metaboxes-form.php:234
 msgid "Facebook Title"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:220
+#: inc/admin/admin-metaboxes-form.php:234
 msgid "Enter your Facebook title"
-msgstr ""
-
-#: inc/admin/admin-metaboxes-form.php:223
-#: inc/admin/admin-metaboxes-form.php:224
-msgid "Facebook description"
-msgstr ""
-
-#: inc/admin/admin-metaboxes-form.php:224
-msgid "Enter your Facebook description"
-msgstr ""
-
-#: inc/admin/admin-metaboxes-form.php:227
-#: inc/admin/admin-metaboxes-form.php:228
-msgid "Facebook Thumbnail"
-msgstr ""
-
-#: inc/admin/admin-metaboxes-form.php:228
-#: inc/admin/admin-metaboxes-form.php:246 inc/admin/admin.php:4848
-#: inc/admin/admin.php:4940
-msgid "Select your default thumbnail"
-msgstr ""
-
-#: inc/admin/admin-metaboxes-form.php:229 inc/admin/admin.php:4852
-msgid "Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max."
-msgstr ""
-
-#: inc/admin/admin-metaboxes-form.php:230
-#: inc/admin/admin-metaboxes-form.php:248
-#: inc/admin/admin-metaboxes-form.php:391 inc/admin/admin.php:4613
-#: inc/admin/admin.php:4850 inc/admin/admin.php:4942
-msgid "Upload an Image"
-msgstr ""
-
-#: inc/admin/admin-metaboxes-form.php:235
-msgid "Preview your Twitter card using the official validator"
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:237
 #: inc/admin/admin-metaboxes-form.php:238
-msgid "Twitter Title"
+msgid "Facebook description"
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:238
-msgid "Enter your Twitter title"
+msgid "Enter your Facebook description"
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:241
 #: inc/admin/admin-metaboxes-form.php:242
-msgid "Twitter description"
+msgid "Facebook Thumbnail"
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:242
+#: inc/admin/admin-metaboxes-form.php:260 inc/admin/admin.php:4888
+#: inc/admin/admin.php:4980
+msgid "Select your default thumbnail"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:243 inc/admin/admin.php:4892
+msgid ""
+"Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or "
+"3280x1712px for retina screens)"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:244
+#: inc/admin/admin-metaboxes-form.php:262
+#: inc/admin/admin-metaboxes-form.php:405 inc/admin/admin.php:4653
+#: inc/admin/admin.php:4890 inc/admin/admin.php:4982
+msgid "Upload an Image"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:249
+msgid "Preview your Twitter card using the official validator"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:251
+#: inc/admin/admin-metaboxes-form.php:252
+msgid "Twitter Title"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:252
+msgid "Enter your Twitter title"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:255
+#: inc/admin/admin-metaboxes-form.php:256
+msgid "Twitter description"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:256
 msgid "Enter your Twitter description"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:245
-#: inc/admin/admin-metaboxes-form.php:248
+#: inc/admin/admin-metaboxes-form.php:259
+#: inc/admin/admin-metaboxes-form.php:262
 msgid "Twitter Thumbnail"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:247 inc/admin/admin.php:4944
+#: inc/admin/admin-metaboxes-form.php:261 inc/admin/admin.php:4984
 msgid ""
 "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 "
 "(2:1 with large card), 5Mb max."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:257
+#: inc/admin/admin-metaboxes-form.php:271
 msgid "Enable redirection?"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:261
-#: inc/admin/admin-metaboxes-form.php:269
+#: inc/admin/admin-metaboxes-form.php:275
+#: inc/admin/admin-metaboxes-form.php:283
 msgid "URL redirection"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:263
+#: inc/admin/admin-metaboxes-form.php:277
 msgid "301 Moved Permanently"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:264
+#: inc/admin/admin-metaboxes-form.php:278
 msgid "302 Found / Moved Temporarily"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:265
+#: inc/admin/admin-metaboxes-form.php:279
 msgid "307 Moved Temporarily"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:266
+#: inc/admin/admin-metaboxes-form.php:280
 msgid "410 Gone"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:267
+#: inc/admin/admin-metaboxes-form.php:281
 msgid "451 Unavailable For Legal Reasons"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:269
-msgid "Enter your new URL"
+#: inc/admin/admin-metaboxes-form.php:283
+msgid "Enter your new URL in absolute (eg: https://www.example.com/)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:274
+#: inc/admin/admin-metaboxes-form.php:288
 msgid "Query parameters"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:276
+#: inc/admin/admin-metaboxes-form.php:290
 msgid "Exact match with all parameters"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:277
+#: inc/admin/admin-metaboxes-form.php:291
 msgid "Exclude all parameters"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:278
-msgid "Exclude all parameters and passed them to the redirection"
+#: inc/admin/admin-metaboxes-form.php:292
+msgid "Exclude all parameters and pass them to the redirection"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:287
-#: inc/admin/admin-metaboxes-form.php:289
-#: inc/admin/admin-metaboxes-form.php:292
-#: inc/admin/admin-metaboxes-form.php:294
+#: inc/admin/admin-metaboxes-form.php:301
+#: inc/admin/admin-metaboxes-form.php:303
+#: inc/admin/admin-metaboxes-form.php:306
+#: inc/admin/admin-metaboxes-form.php:308
 msgid "Test your URL"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:308
+#: inc/admin/admin-metaboxes-form.php:322
 msgid "Need help with your redirections? Read our guide."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:320
+#: inc/admin/admin-metaboxes-form.php:334
 msgid "Exclude this post from Google News Sitemap?"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:344
+#: inc/admin/admin-metaboxes-form.php:358
 msgid "Exclude this post from Video Sitemap?"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:346
+#: inc/admin/admin-metaboxes-form.php:360
 msgid ""
 "If your post is set to noindex, it will be automatically excluded from the "
 "sitemap."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:365
+#: inc/admin/admin-metaboxes-form.php:379
 msgid "Video "
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:369
+#: inc/admin/admin-metaboxes-form.php:383
 msgid "Video URL (required)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:370
+#: inc/admin/admin-metaboxes-form.php:384
 msgid "Enter your video URL"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:370
+#: inc/admin/admin-metaboxes-form.php:384
 msgid "Video URL"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:375
+#: inc/admin/admin-metaboxes-form.php:389
 msgid ""
 "NOT an external video (eg: video hosting on YouTube, Vimeo, Wistia...)? "
 "Check this if your video is hosting on this server."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:379
+#: inc/admin/admin-metaboxes-form.php:393
 msgid "Video Title (required)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:380
+#: inc/admin/admin-metaboxes-form.php:394
 msgid "Enter your video title"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:380
+#: inc/admin/admin-metaboxes-form.php:394
 msgid "Video title"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:381
+#: inc/admin/admin-metaboxes-form.php:395
 msgid "Default: title tag, if not available, post title."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:384
+#: inc/admin/admin-metaboxes-form.php:398
 msgid "Video Description (required)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:385
+#: inc/admin/admin-metaboxes-form.php:399
 msgid "Enter your video description"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:385
+#: inc/admin/admin-metaboxes-form.php:399
 msgid "Video description"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:386
+#: inc/admin/admin-metaboxes-form.php:400
 msgid ""
 "2048 characters max.; default: meta description. If not available, use the "
 "beginning of the post content."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:389
+#: inc/admin/admin-metaboxes-form.php:403
 msgid "Video Thumbnail (required)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:390
+#: inc/admin/admin-metaboxes-form.php:404
 msgid "Select your video thumbnail"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:391
+#: inc/admin/admin-metaboxes-form.php:405
 msgid "Video Thumbnail"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:392
+#: inc/admin/admin-metaboxes-form.php:406
 msgid ""
 "Minimum size: 160x90px (1920x1080 max), JPG, PNG or GIF formats. Default: "
 "your post featured image."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:395
+#: inc/admin/admin-metaboxes-form.php:409
 msgid "Video Duration (recommended)"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:396
+#: inc/admin/admin-metaboxes-form.php:410
 msgid "Duration in seconds"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:396
+#: inc/admin/admin-metaboxes-form.php:410
 msgid "Video duration"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:397
+#: inc/admin/admin-metaboxes-form.php:411
 msgid ""
 "The duration of the video in seconds. Value must be between 0 and 28800 (8 "
 "hours)."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:400
+#: inc/admin/admin-metaboxes-form.php:414
 msgid "Video Rating"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:401
+#: inc/admin/admin-metaboxes-form.php:415
 msgid "Video rating"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:402
+#: inc/admin/admin-metaboxes-form.php:416
 msgid "Allowed values are float numbers in the range 0.0 to 5.0."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:405
-#: inc/admin/admin-metaboxes-form.php:406
+#: inc/admin/admin-metaboxes-form.php:419
+#: inc/admin/admin-metaboxes-form.php:420
 msgid "View count"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:406
+#: inc/admin/admin-metaboxes-form.php:420
 msgid "Number of views"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:409
-#: inc/admin/admin-metaboxes-form.php:410
+#: inc/admin/admin-metaboxes-form.php:423
+#: inc/admin/admin-metaboxes-form.php:424
 msgid "Video tags"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:410
+#: inc/admin/admin-metaboxes-form.php:424
 msgid "Enter your video tags"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:411
+#: inc/admin/admin-metaboxes-form.php:425
 msgid ""
 "32 tags max., separate tags with commas. Default: target keywords + post "
 "tags if available."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:414
-#: inc/admin/admin-metaboxes-form.php:415
+#: inc/admin/admin-metaboxes-form.php:428
+#: inc/admin/admin-metaboxes-form.php:429
 msgid "Video categories"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:415
+#: inc/admin/admin-metaboxes-form.php:429
 msgid "Enter your video categories"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:416
+#: inc/admin/admin-metaboxes-form.php:430
 msgid ""
 "256 characters max., usually a video will belong to a single category, "
 "separate categories with commas. Default: first post category if available."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:421
+#: inc/admin/admin-metaboxes-form.php:435
 msgid "NOT family friendly?"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:423
+#: inc/admin/admin-metaboxes-form.php:437
 msgid "The video will be available only to users with SafeSearch turned off."
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:425
+#: inc/admin/admin-metaboxes-form.php:439
 msgid "Remove video"
 msgstr ""
 
-#: inc/admin/admin-metaboxes-form.php:432
+#: inc/admin/admin-metaboxes-form.php:446
 msgid "Add video"
 msgstr ""
 
@@ -984,112 +1015,112 @@ msgid ""
 "quickly."
 msgstr ""
 
-#: inc/admin/admin-wizard.php:252 inc/admin/admin.php:744
+#: inc/admin/admin-wizard.php:252 inc/admin/admin.php:709
 msgid "Import posts and terms metadata from Yoast"
 msgstr ""
 
 #: inc/admin/admin-wizard.php:253 inc/admin/admin-wizard.php:272
 #: inc/admin/admin-wizard.php:289 inc/admin/admin-wizard.php:308
-#: inc/admin/admin.php:746 inc/admin/admin.php:767 inc/admin/admin.php:786
-#: inc/admin/admin.php:807
+#: inc/admin/admin.php:710 inc/admin/admin.php:731 inc/admin/admin.php:750
+#: inc/admin/admin.php:771
 msgid "By clicking Migrate, we'll import:"
 msgstr ""
 
 #: inc/admin/admin-wizard.php:255 inc/admin/admin-wizard.php:274
 #: inc/admin/admin-wizard.php:291 inc/admin/admin-wizard.php:310
-#: inc/admin/admin.php:748 inc/admin/admin.php:769 inc/admin/admin.php:788
-#: inc/admin/admin.php:809
+#: inc/admin/admin.php:712 inc/admin/admin.php:733 inc/admin/admin.php:752
+#: inc/admin/admin.php:773
 msgid "Title tags"
 msgstr ""
 
 #: inc/admin/admin-wizard.php:257 inc/admin/admin-wizard.php:276
 #: inc/admin/admin-wizard.php:293 inc/admin/admin-wizard.php:312
-#: inc/admin/admin.php:750 inc/admin/admin.php:771 inc/admin/admin.php:790
-#: inc/admin/admin.php:811
+#: inc/admin/admin.php:714 inc/admin/admin.php:735 inc/admin/admin.php:754
+#: inc/admin/admin.php:775
 msgid "Facebook Open Graph tags (title, description and image thumbnail)"
 msgstr ""
 
 #: inc/admin/admin-wizard.php:258 inc/admin/admin-wizard.php:294
-#: inc/admin/admin-wizard.php:313 inc/admin/admin.php:751
-#: inc/admin/admin.php:791 inc/admin/admin.php:812
+#: inc/admin/admin-wizard.php:313 inc/admin/admin.php:715
+#: inc/admin/admin.php:755 inc/admin/admin.php:776
 msgid "Twitter tags (title, description and image thumbnail)"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:259 inc/admin/admin.php:752
+#: inc/admin/admin-wizard.php:259 inc/admin/admin.php:716
 msgid "Meta Robots (noindex, nofollow...)"
 msgstr ""
 
 #: inc/admin/admin-wizard.php:261 inc/admin/admin-wizard.php:316
-#: inc/admin/admin.php:754 inc/admin/admin.php:815
+#: inc/admin/admin.php:718 inc/admin/admin.php:779
 msgid "Focus keywords"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:263 inc/admin/admin.php:756
+#: inc/admin/admin-wizard.php:263 inc/admin/admin.php:720
 msgid ""
 "<strong>WARNING:</strong> Migration will delete / update all SEOPress posts "
 "and terms metadata. Some dynamic variables will not be interpreted. We do "
-"NOT delete any Yoast datas."
+"NOT delete any Yoast data."
 msgstr ""
 
 #: inc/admin/admin-wizard.php:264 inc/admin/admin-wizard.php:281
 #: inc/admin/admin-wizard.php:300 inc/admin/admin-wizard.php:319
-#: inc/admin/admin.php:757 inc/admin/admin.php:776 inc/admin/admin.php:797
-#: inc/admin/admin.php:818
+#: inc/admin/admin.php:721 inc/admin/admin.php:740 inc/admin/admin.php:761
+#: inc/admin/admin.php:782
 msgid "Migrate now"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:271 inc/admin/admin.php:765
+#: inc/admin/admin-wizard.php:271 inc/admin/admin.php:730
 msgid "Import posts and terms metadata from All In One SEO"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:277 inc/admin/admin.php:772
+#: inc/admin/admin-wizard.php:277 inc/admin/admin.php:736
 msgid "Twitter image thumbnail"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:278 inc/admin/admin.php:773
+#: inc/admin/admin-wizard.php:278 inc/admin/admin.php:737
 msgid "Meta Robots (noindex, nofollow)"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:280 inc/admin/admin.php:775
+#: inc/admin/admin-wizard.php:280 inc/admin/admin.php:739
 msgid ""
 "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts "
 "and terms metadata. Some dynamic variables will not be interpreted. We do "
-"NOT delete any AIO datas."
+"NOT delete any AIO data."
 msgstr ""
 
-#: inc/admin/admin-wizard.php:288 inc/admin/admin.php:784
+#: inc/admin/admin-wizard.php:288 inc/admin/admin.php:749
 msgid "Import posts and terms metadata from The SEO Framework"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:295 inc/admin/admin.php:792
+#: inc/admin/admin-wizard.php:295 inc/admin/admin.php:756
 msgid "Meta Robots (noindex, nofollow, noarchive)"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:297 inc/admin/admin.php:794
+#: inc/admin/admin-wizard.php:297 inc/admin/admin.php:758
 #: inc/functions/options-advanced-admin.php:296
 msgid "Redirect URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:299 inc/admin/admin.php:796
+#: inc/admin/admin-wizard.php:299 inc/admin/admin.php:760
 msgid ""
 "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts "
 "and terms metadata. Some dynamic variables will not be interpreted. We do "
-"NOT delete any SEO Framework datas."
+"NOT delete any SEO Framework data."
 msgstr ""
 
-#: inc/admin/admin-wizard.php:307 inc/admin/admin.php:805
+#: inc/admin/admin-wizard.php:307 inc/admin/admin.php:770
 msgid "Import posts and terms metadata from Rank Math"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:314 inc/admin/admin.php:813
+#: inc/admin/admin-wizard.php:314 inc/admin/admin.php:777
 msgid "Meta Robots (noindex, nofollow, noarchive, noimageindex)"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:318 inc/admin/admin.php:817
+#: inc/admin/admin-wizard.php:318 inc/admin/admin.php:781
 msgid ""
 "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts "
 "and terms metadata. Some dynamic variables will not be interpreted. We do "
-"NOT delete any Rank Math datas."
+"NOT delete any Rank Math data."
 msgstr ""
 
 #: inc/admin/admin-wizard.php:326 inc/admin/admin-wizard.php:753
@@ -1106,8 +1137,8 @@ msgstr ""
 msgid "eg: |"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:372 inc/admin/admin.php:2108
-#: inc/admin/admin.php:3547
+#: inc/admin/admin-wizard.php:372 inc/admin/admin.php:2148
+#: inc/admin/admin.php:3587
 msgid "Site title"
 msgstr ""
 
@@ -1115,7 +1146,7 @@ msgstr ""
 msgid "eg: My super website"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:375 inc/admin/admin.php:2497
+#: inc/admin/admin-wizard.php:375 inc/admin/admin.php:2537
 msgid "Person or organization"
 msgstr ""
 
@@ -1123,16 +1154,16 @@ msgstr ""
 msgid "Choose a knowledge type"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:383 inc/admin/admin.php:4582
+#: inc/admin/admin-wizard.php:383 inc/admin/admin.php:4622
 msgid "Person"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:386 inc/admin/admin.php:4585
+#: inc/admin/admin-wizard.php:386 inc/admin/admin.php:4625
 msgid "Organization"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:390 inc/admin/admin.php:2505
-#: inc/admin/admin.php:4598
+#: inc/admin/admin-wizard.php:390 inc/admin/admin.php:2545
+#: inc/admin/admin.php:4638
 msgid "Your name/organization"
 msgstr ""
 
@@ -1140,8 +1171,8 @@ msgstr ""
 msgid "eg: SEOPress"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:393 inc/admin/admin.php:2513
-#: inc/admin/admin.php:4611
+#: inc/admin/admin-wizard.php:393 inc/admin/admin.php:2553
+#: inc/admin/admin.php:4651
 msgid "Your photo/organization logo"
 msgstr ""
 
@@ -1153,78 +1184,78 @@ msgstr ""
 msgid "Facebook page URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:397 inc/admin/admin.php:4719
+#: inc/admin/admin-wizard.php:397 inc/admin/admin.php:4759
 msgid "eg: https://www.facebook.com/your-page"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:399 inc/admin/admin.php:2562
+#: inc/admin/admin-wizard.php:399 inc/admin/admin.php:2602
 msgid "Twitter Username"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:400 inc/admin/admin.php:4732
+#: inc/admin/admin-wizard.php:400 inc/admin/admin.php:4772
 msgid "eg: @wp_seopress"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:402 inc/admin/admin.php:2570
-#: inc/admin/admin.php:4744
+#: inc/admin/admin-wizard.php:402 inc/admin/admin.php:2610
+#: inc/admin/admin.php:4784
 msgid "Pinterest URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:403 inc/admin/admin.php:4744
+#: inc/admin/admin-wizard.php:403 inc/admin/admin.php:4784
 msgid "eg: https://pinterest.com/wpbuy/"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:405 inc/admin/admin.php:2578
-#: inc/admin/admin.php:4756
+#: inc/admin/admin-wizard.php:405 inc/admin/admin.php:2618
+#: inc/admin/admin.php:4796
 msgid "Instagram URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:406 inc/admin/admin.php:4756
+#: inc/admin/admin-wizard.php:406 inc/admin/admin.php:4796
 msgid "eg: https://www.instagram.com/wp_seopress/"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:408 inc/admin/admin.php:2586
-#: inc/admin/admin.php:4768
+#: inc/admin/admin-wizard.php:408 inc/admin/admin.php:2626
+#: inc/admin/admin.php:4808
 msgid "YouTube URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:409 inc/admin/admin.php:4768
+#: inc/admin/admin-wizard.php:409 inc/admin/admin.php:4808
 msgid "eg: https://www.youtube.com/SEOPress"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:411 inc/admin/admin.php:2594
-#: inc/admin/admin.php:4780
+#: inc/admin/admin-wizard.php:411 inc/admin/admin.php:2634
+#: inc/admin/admin.php:4820
 msgid "LinkedIn URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:412 inc/admin/admin.php:4780
+#: inc/admin/admin-wizard.php:412 inc/admin/admin.php:4820
 msgid "eg: http://linkedin.com/company/seopress/"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:414 inc/admin/admin.php:2602
-#: inc/admin/admin.php:4792
+#: inc/admin/admin-wizard.php:414 inc/admin/admin.php:2642
+#: inc/admin/admin.php:4832
 msgid "MySpace URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:415 inc/admin/admin.php:4792
+#: inc/admin/admin-wizard.php:415 inc/admin/admin.php:4832
 msgid "eg: https://myspace.com/your-page"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:417 inc/admin/admin.php:2610
-#: inc/admin/admin.php:4804
+#: inc/admin/admin-wizard.php:417 inc/admin/admin.php:2650
+#: inc/admin/admin.php:4844
 msgid "Soundcloud URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:418 inc/admin/admin.php:4804
+#: inc/admin/admin-wizard.php:418 inc/admin/admin.php:4844
 msgid "eg: https://soundcloud.com/michaelmccannmusic"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:420 inc/admin/admin.php:2618
-#: inc/admin/admin.php:4816
+#: inc/admin/admin-wizard.php:420 inc/admin/admin.php:2658
+#: inc/admin/admin.php:4856
 msgid "Tumblr URL"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:421 inc/admin/admin.php:4816
+#: inc/admin/admin-wizard.php:421 inc/admin/admin.php:4856
 msgid "eg: https://your-site.tumblr.com"
 msgstr ""
 
@@ -1242,7 +1273,7 @@ msgstr ""
 msgid "For which single post types, indexing should be disabled?"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:498 inc/admin/admin.php:3635
+#: inc/admin/admin-wizard.php:498 inc/admin/admin.php:3675
 msgid ""
 "Do not display this single post type in search engine results "
 "<strong>(noindex)</strong>"
@@ -1252,7 +1283,7 @@ msgstr ""
 msgid "For which post type archives, indexing should be disabled?"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:527 inc/admin/admin.php:3872
+#: inc/admin/admin-wizard.php:527 inc/admin/admin.php:3912
 msgid ""
 "Do not display this post type archive in search engine results "
 "<strong>(noindex)</strong>"
@@ -1262,13 +1293,13 @@ msgstr ""
 msgid "For which taxonomy archives, indexing should be disabled?"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:556 inc/admin/admin.php:3772
+#: inc/admin/admin-wizard.php:556 inc/admin/admin.php:3812
 msgid ""
 "Do not display this taxonomy archive in search engine results "
 "<strong>(noindex)</strong>"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:639 inc/admin/admin.php:3948
+#: inc/admin/admin-wizard.php:639 inc/admin/admin.php:3988
 msgid ""
 "Do not display author archives in search engine results <strong>(noindex)</"
 "strong>"
@@ -1280,7 +1311,7 @@ msgid ""
 "content."
 msgstr ""
 
-#: inc/admin/admin-wizard.php:651 inc/admin/admin.php:5718
+#: inc/admin/admin-wizard.php:651 inc/admin/admin.php:5767
 msgid ""
 "Redirect attachment pages to the file URL (https://www.example.com/my-image-"
 "file.jpg)"
@@ -1292,7 +1323,7 @@ msgid ""
 "Optimize this by redirecting the user directly to the URL of the media file."
 msgstr ""
 
-#: inc/admin/admin-wizard.php:663 inc/admin/admin.php:5856
+#: inc/admin/admin-wizard.php:663 inc/admin/admin.php:5888
 msgid "Remove /category/ in your permalinks"
 msgstr ""
 
@@ -1338,7 +1369,7 @@ msgid "Create your XML sitemaps"
 msgstr ""
 
 #: inc/admin/admin-wizard.php:755
-msgid "Build a custom XML sitemaps to improve Google crawling of your site."
+msgid "Build custom XML sitemaps to improve Google crawling of your site."
 msgstr ""
 
 #: inc/admin/admin-wizard.php:760
@@ -1385,7 +1416,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: inc/admin/admin.php:186 inc/admin/admin.php:1462
+#: inc/admin/admin.php:186 inc/admin/admin.php:1502
 msgid "XML / Image / Video / HTML Sitemap"
 msgstr ""
 
@@ -1408,7 +1439,7 @@ msgstr ""
 msgid "%%tagline%%"
 msgstr ""
 
-#: inc/admin/admin.php:199 inc/admin/admin.php:3551 inc/admin/admin.php:3562
+#: inc/admin/admin.php:199 inc/admin/admin.php:3591 inc/admin/admin.php:3602
 msgid "Tagline"
 msgstr ""
 
@@ -1453,7 +1484,7 @@ msgstr ""
 msgid "%%post_author%%"
 msgstr ""
 
-#: inc/admin/admin.php:204 inc/admin/admin.php:3916
+#: inc/admin/admin.php:204 inc/admin/admin.php:3956
 msgid "Post author"
 msgstr ""
 
@@ -1760,34 +1791,34 @@ msgstr ""
 #: inc/admin/admin.php:324 inc/admin/admin.php:328 inc/admin/admin.php:391
 #: inc/admin/admin.php:395 inc/admin/admin.php:456 inc/admin/admin.php:460
 #: inc/admin/admin.php:523 inc/admin/admin.php:527 inc/admin/admin.php:604
-#: inc/admin/admin.php:608 inc/admin/admin.php:1438 inc/admin/admin.php:1442
-#: inc/admin/admin.php:1476 inc/admin/admin.php:1480 inc/admin/admin.php:1514
-#: inc/admin/admin.php:1518 inc/admin/admin.php:1552 inc/admin/admin.php:1556
-#: inc/admin/admin.php:1590 inc/admin/admin.php:1594 inc/admin/admin.php:1619
-#: inc/admin/admin.php:1623 inc/admin/admin.php:1647 inc/admin/admin.php:1651
-#: inc/admin/admin.php:1675 inc/admin/admin.php:1679 inc/admin/admin.php:1703
-#: inc/admin/admin.php:1707 inc/admin/admin.php:1731 inc/admin/admin.php:1735
-#: inc/admin/admin.php:1759 inc/admin/admin.php:1763 inc/admin/admin.php:1820
-#: inc/admin/admin.php:1824 inc/admin/admin.php:1859 inc/admin/admin.php:1863
-#: inc/admin/admin.php:1899 inc/admin/admin.php:1903 inc/admin/admin.php:1961
-#: inc/admin/admin.php:1965
+#: inc/admin/admin.php:608 inc/admin/admin.php:1478 inc/admin/admin.php:1482
+#: inc/admin/admin.php:1516 inc/admin/admin.php:1520 inc/admin/admin.php:1554
+#: inc/admin/admin.php:1558 inc/admin/admin.php:1592 inc/admin/admin.php:1596
+#: inc/admin/admin.php:1630 inc/admin/admin.php:1634 inc/admin/admin.php:1659
+#: inc/admin/admin.php:1663 inc/admin/admin.php:1687 inc/admin/admin.php:1691
+#: inc/admin/admin.php:1715 inc/admin/admin.php:1719 inc/admin/admin.php:1743
+#: inc/admin/admin.php:1747 inc/admin/admin.php:1771 inc/admin/admin.php:1775
+#: inc/admin/admin.php:1799 inc/admin/admin.php:1803 inc/admin/admin.php:1860
+#: inc/admin/admin.php:1864 inc/admin/admin.php:1899 inc/admin/admin.php:1903
+#: inc/admin/admin.php:1939 inc/admin/admin.php:1943 inc/admin/admin.php:2001
+#: inc/admin/admin.php:2005
 msgid "Click to disable this feature"
 msgstr ""
 
 #: inc/admin/admin.php:325 inc/admin/admin.php:327 inc/admin/admin.php:392
 #: inc/admin/admin.php:394 inc/admin/admin.php:457 inc/admin/admin.php:459
 #: inc/admin/admin.php:524 inc/admin/admin.php:526 inc/admin/admin.php:605
-#: inc/admin/admin.php:607 inc/admin/admin.php:1439 inc/admin/admin.php:1441
-#: inc/admin/admin.php:1477 inc/admin/admin.php:1479 inc/admin/admin.php:1515
-#: inc/admin/admin.php:1517 inc/admin/admin.php:1553 inc/admin/admin.php:1555
-#: inc/admin/admin.php:1591 inc/admin/admin.php:1593 inc/admin/admin.php:1620
-#: inc/admin/admin.php:1622 inc/admin/admin.php:1648 inc/admin/admin.php:1650
-#: inc/admin/admin.php:1676 inc/admin/admin.php:1678 inc/admin/admin.php:1704
-#: inc/admin/admin.php:1706 inc/admin/admin.php:1732 inc/admin/admin.php:1734
-#: inc/admin/admin.php:1760 inc/admin/admin.php:1762 inc/admin/admin.php:1821
-#: inc/admin/admin.php:1823 inc/admin/admin.php:1860 inc/admin/admin.php:1862
-#: inc/admin/admin.php:1900 inc/admin/admin.php:1902 inc/admin/admin.php:1962
-#: inc/admin/admin.php:1964
+#: inc/admin/admin.php:607 inc/admin/admin.php:1479 inc/admin/admin.php:1481
+#: inc/admin/admin.php:1517 inc/admin/admin.php:1519 inc/admin/admin.php:1555
+#: inc/admin/admin.php:1557 inc/admin/admin.php:1593 inc/admin/admin.php:1595
+#: inc/admin/admin.php:1631 inc/admin/admin.php:1633 inc/admin/admin.php:1660
+#: inc/admin/admin.php:1662 inc/admin/admin.php:1688 inc/admin/admin.php:1690
+#: inc/admin/admin.php:1716 inc/admin/admin.php:1718 inc/admin/admin.php:1744
+#: inc/admin/admin.php:1746 inc/admin/admin.php:1772 inc/admin/admin.php:1774
+#: inc/admin/admin.php:1800 inc/admin/admin.php:1802 inc/admin/admin.php:1861
+#: inc/admin/admin.php:1863 inc/admin/admin.php:1900 inc/admin/admin.php:1902
+#: inc/admin/admin.php:1940 inc/admin/admin.php:1942 inc/admin/admin.php:2002
+#: inc/admin/admin.php:2004
 msgid "Click to enable this feature"
 msgstr ""
 
@@ -1859,62 +1890,76 @@ msgstr ""
 msgid "Security"
 msgstr ""
 
-#: inc/admin/admin.php:656
+#: inc/admin/admin.php:658 seopress.php:332
+msgid "Settings"
+msgstr ""
+
+#: inc/admin/admin.php:659
+msgid "Plugins"
+msgstr ""
+
+#: inc/admin/admin.php:661
+msgid "Reset"
+msgstr ""
+
+#: inc/admin/admin.php:673
 msgid "Export plugin settings"
 msgstr ""
 
-#: inc/admin/admin.php:658
+#: inc/admin/admin.php:674
 msgid ""
 "Export the plugin settings for this site as a .json file. This allows you to "
 "easily import the configuration into another site."
 msgstr ""
 
-#: inc/admin/admin.php:663 inc/admin/admin.php:735
+#: inc/admin/admin.php:679 inc/admin/admin.php:851
 msgid "Export"
 msgstr ""
 
-#: inc/admin/admin.php:670
+#: inc/admin/admin.php:687
 msgid "Import plugin settings"
 msgstr ""
 
-#: inc/admin/admin.php:672
+#: inc/admin/admin.php:688
 msgid ""
 "Import the plugin settings from a .json file. This file can be obtained by "
 "exporting the settings on another site using the form above."
 msgstr ""
 
-#: inc/admin/admin.php:680 inc/admin/admin.php:706 inc/admin/admin.php:722
+#: inc/admin/admin.php:696 inc/admin/admin.php:806 inc/admin/admin.php:822
+#: inc/admin/admin.php:838
 msgid "Import"
 msgstr ""
 
-#: inc/admin/admin.php:682
+#: inc/admin/admin.php:698
 msgid "Import completed!"
 msgstr ""
 
-#: inc/admin/admin.php:691
+#: inc/admin/admin.php:792
 msgid "Import Redirections"
 msgstr ""
 
-#: inc/admin/admin.php:693
+#: inc/admin/admin.php:793
 msgid ""
 "Import your own redirections from a .csv file (separator \";\"). You must "
-"have 5 columns in this order: url to match (without your domain name), url "
-"to redirect in absolute, type of redirection (301, 302 or 307), yes to "
-"enable the redirect and the last one the query parameter (\"exact_match\" = "
-"Exact match with all parameters, \"without_param\" = Exclude all parameters "
-"or \"with_ignored_param\" = Exclude all parameters and passed them to the "
-"redirection). Leave it empty to disable the redirect."
+"have 5 columns in this order: <ul><li>url to match (without your domain "
+"name), </li><li>url to redirect in absolute, </li><li>type of redirection "
+"(301, 302 or 307), </li><li>yes to enable the redirect (leave it empty to "
+"disable the redirect) </li><li>and the last one the query parameter "
+"(\"exact_match\" = Exact match with all parameters, \"without_param\" = "
+"Exclude all parameters or \"with_ignored_param\" = Exclude all parameters "
+"and pass them to the redirection).</li></ul>"
 msgstr ""
 
-#: inc/admin/admin.php:696
+#: inc/admin/admin.php:796
 msgid "Download a CSV example"
 msgstr ""
 
-#: inc/admin/admin.php:712
+#: inc/admin/admin.php:813
 msgid "Import Redirections from Redirections plugin"
 msgstr ""
 
-#: inc/admin/admin.php:714
+#: inc/admin/admin.php:814
 msgid ""
 "Import your own redirections from a .json file generated by the Redirections "
 "plugin. Note that we do not support certain options like regex. Make sure "
@@ -1922,908 +1967,919 @@ msgid ""
 "conflicts."
 msgstr ""
 
-#: inc/admin/admin.php:728
+#: inc/admin/admin.php:829
+msgid "Import Redirections from Yoast Premium"
+msgstr ""
+
+#: inc/admin/admin.php:830
+msgid ""
+"Import your own redirections from a .csv file generated by Yoast Premium. "
+"Note that we do not support certain options like regex. Make sure you don't "
+"have duplicates between your file and existing redirects to avoid conflicts."
+msgstr ""
+
+#: inc/admin/admin.php:845
 msgid "Export Redirections"
 msgstr ""
 
-#: inc/admin/admin.php:730
+#: inc/admin/admin.php:846
 msgid ""
 "Export all redirections for this site as a .csv file. This allows you to "
 "easily import the redirections into another site, to Excel / Google Sheets..."
 msgstr ""
 
-#: inc/admin/admin.php:825
+#: inc/admin/admin.php:861
 msgid "Reset All Notices From Notifications Center"
 msgstr ""
 
-#: inc/admin/admin.php:827
+#: inc/admin/admin.php:862
 msgid ""
 "By clicking Reset Notices, all notices in the notifications center will be "
 "set to their initial status."
 msgstr ""
 
-#: inc/admin/admin.php:832
+#: inc/admin/admin.php:867
 msgid "Reset notices"
 msgstr ""
 
-#: inc/admin/admin.php:839
+#: inc/admin/admin.php:875
 msgid "Reset All Settings"
 msgstr ""
 
-#: inc/admin/admin.php:841
+#: inc/admin/admin.php:876
 msgid ""
 "<strong>WARNING:</strong> Delete all options related to SEOPress in your "
 "database AND set settings to their default values."
 msgstr ""
 
-#: inc/admin/admin.php:846
+#: inc/admin/admin.php:881
 msgid "Reset settings"
 msgstr ""
 
-#: inc/admin/admin.php:909 inc/admin/admin.php:915
+#: inc/admin/admin.php:948 inc/admin/admin.php:954
 msgid "Notifications Center"
 msgstr ""
 
-#: inc/admin/admin.php:910
+#: inc/admin/admin.php:949
 msgid "SEO Tools"
 msgstr ""
 
-#: inc/admin/admin.php:911 inc/admin/admin.php:916
+#: inc/admin/admin.php:950 inc/admin/admin.php:955
 msgid "Useful links"
 msgstr ""
 
-#: inc/admin/admin.php:960
+#: inc/admin/admin.php:999
 msgid "Configure SEOPress in a few minutes thanks to our installation wizard"
 msgstr ""
 
-#: inc/admin/admin.php:962
+#: inc/admin/admin.php:1001
 msgid "Start the wizard"
 msgstr ""
 
-#: inc/admin/admin.php:984
+#: inc/admin/admin.php:1023
 msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
 msgstr ""
 
-#: inc/admin/admin.php:985 inc/admin/admin.php:1072 inc/admin/admin.php:1082
-#: inc/admin/admin.php:1092
+#: inc/admin/admin.php:1024 inc/admin/admin.php:1111 inc/admin/admin.php:1121
+#: inc/admin/admin.php:1131
 msgid "High impact"
 msgstr ""
 
-#: inc/admin/admin.php:997 inc/admin/admin.php:1058 inc/admin/admin.php:5117
-#: inc/admin/admin.php:5144 inc/admin/admin.php:5165 inc/admin/admin.php:5186
-#: inc/admin/admin.php:5207
+#: inc/admin/admin.php:1036 inc/admin/admin.php:1097 inc/admin/admin.php:5157
+#: inc/admin/admin.php:5193 inc/admin/admin.php:5214 inc/admin/admin.php:5235
+#: inc/admin/admin.php:5256
 msgid "Learn more"
 msgstr ""
 
-#: inc/admin/admin.php:1006
+#: inc/admin/admin.php:1045
 msgid ""
 "We notice that you use <strong>Yoast SEO</strong> plugin. <br>Do you want to "
 "migrate all your posts metadata to SEOPress?"
 msgstr ""
 
-#: inc/admin/admin.php:1008 inc/admin/admin.php:1017
+#: inc/admin/admin.php:1047 inc/admin/admin.php:1056
 msgid "Migrate!"
 msgstr ""
 
-#: inc/admin/admin.php:1015
+#: inc/admin/admin.php:1054
 msgid ""
 "We notice that you use <strong>All In One SEO Pack</strong> plugin. <br>Do "
 "you want to migrate all your posts metadata to SEOPress?"
 msgstr ""
 
-#: inc/admin/admin.php:1024
+#: inc/admin/admin.php:1063
 msgid ""
 "We notice that you use another SEO plugin. <br>Do not use multiple SEO "
 "plugins at once to avoid conflicts!"
 msgstr ""
 
-#: inc/admin/admin.php:1034
+#: inc/admin/admin.php:1073
 msgid ""
 "You have enabled 404 cleaning BUT the scheduled task is not running. <br>To "
 "solve this, please disable and enable SEOPress PRO."
 msgstr ""
 
-#: inc/admin/admin.php:1057
+#: inc/admin/admin.php:1096
 msgid "Your site doesn't use an SSL certificate!"
 msgstr ""
 
-#: inc/admin/admin.php:1059
+#: inc/admin/admin.php:1098
 msgid "Low impact"
 msgstr ""
 
-#: inc/admin/admin.php:1061
+#: inc/admin/admin.php:1100
 msgid "Buy an SSL!"
 msgstr ""
 
-#: inc/admin/admin.php:1071
+#: inc/admin/admin.php:1110
 msgid "Your site is not visible to Search Engines!"
 msgstr ""
 
-#: inc/admin/admin.php:1074 inc/admin/admin.php:1084 inc/admin/admin.php:1094
-#: inc/admin/admin.php:1118 inc/admin/admin.php:1197 inc/admin/admin.php:1210
-#: inc/admin/admin.php:1283
+#: inc/admin/admin.php:1113 inc/admin/admin.php:1123 inc/admin/admin.php:1133
+#: inc/admin/admin.php:1157 inc/admin/admin.php:1236 inc/admin/admin.php:1249
+#: inc/admin/admin.php:1322
 msgid "Fix this!"
 msgstr ""
 
-#: inc/admin/admin.php:1081
+#: inc/admin/admin.php:1120
 msgid "Your site title is empty!"
 msgstr ""
 
-#: inc/admin/admin.php:1091 inc/admin/admin.php:3369
+#: inc/admin/admin.php:1130 inc/admin/admin.php:3409
 msgid ""
 "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
 msgstr ""
 
-#: inc/admin/admin.php:1115
-msgid "Your RSS feed show full text!"
+#: inc/admin/admin.php:1154
+msgid "Your RSS feed shows full text!"
 msgstr ""
 
-#: inc/admin/admin.php:1116 inc/admin/admin.php:1195 inc/admin/admin.php:1208
+#: inc/admin/admin.php:1155 inc/admin/admin.php:1234 inc/admin/admin.php:1247
 msgid "Medium impact"
 msgstr ""
 
-#: inc/admin/admin.php:1141
+#: inc/admin/admin.php:1180
 msgid "You like SEOPress? Please help us by rating us 5 stars!"
 msgstr ""
 
-#: inc/admin/admin.php:1143
+#: inc/admin/admin.php:1182
 msgid "Rate us!"
 msgstr ""
 
-#: inc/admin/admin.php:1167
+#: inc/admin/admin.php:1206
 msgid "Break comments into pages is ON!"
 msgstr ""
 
-#: inc/admin/admin.php:1168 inc/admin/admin.php:1232 inc/admin/admin.php:1268
+#: inc/admin/admin.php:1207 inc/admin/admin.php:1271 inc/admin/admin.php:1307
 msgid "Huge impact"
 msgstr ""
 
-#: inc/admin/admin.php:1170
+#: inc/admin/admin.php:1209
 msgid "Disable this!"
 msgstr ""
 
-#: inc/admin/admin.php:1194
+#: inc/admin/admin.php:1233
 msgid "Display more posts per page on homepage and archives"
 msgstr ""
 
-#: inc/admin/admin.php:1207
+#: inc/admin/admin.php:1246
 msgid "You don't have an XML Sitemap!"
 msgstr ""
 
-#: inc/admin/admin.php:1231
+#: inc/admin/admin.php:1270
 msgid "Do you have a Google My Business page? It's free!"
 msgstr ""
 
-#: inc/admin/admin.php:1234
+#: inc/admin/admin.php:1273
 msgid "Create your page now!"
 msgstr ""
 
-#: inc/admin/admin.php:1267
+#: inc/admin/admin.php:1306
 msgid "Add your site to Google. It's free!"
 msgstr ""
 
-#: inc/admin/admin.php:1270
+#: inc/admin/admin.php:1309
 msgid "Add your site to Search Console!"
 msgstr ""
 
-#: inc/admin/admin.php:1280
+#: inc/admin/admin.php:1319
 msgid "You have to enter your licence key to get updates and support"
 msgstr ""
 
-#: inc/admin/admin.php:1296
+#: inc/admin/admin.php:1335
 msgid "Check websites setup on your server"
 msgstr ""
 
-#: inc/admin/admin.php:1305
+#: inc/admin/admin.php:1344
 msgid "Not found"
 msgstr ""
 
-#: inc/admin/admin.php:1310
+#: inc/admin/admin.php:1349
 msgid "No scrape."
 msgstr ""
 
-#: inc/admin/admin.php:1315
+#: inc/admin/admin.php:1354
 msgid "No domain found."
 msgstr ""
 
-#: inc/admin/admin.php:1325
+#: inc/admin/admin.php:1364
 msgid "Server IP Address: "
 msgstr ""
 
-#: inc/admin/admin.php:1328
+#: inc/admin/admin.php:1367
 msgid "Last scrape: "
 msgstr ""
 
-#: inc/admin/admin.php:1329
+#: inc/admin/admin.php:1368
 msgid "Number of websites on your server: "
 msgstr ""
 
-#: inc/admin/admin.php:1342
+#: inc/admin/admin.php:1381
 msgid "Get list"
 msgstr ""
 
-#: inc/admin/admin.php:1350
+#: inc/admin/admin.php:1389
 msgid "Check your Alexa Rank (Amazon index)"
 msgstr ""
 
-#: inc/admin/admin.php:1365
+#: inc/admin/admin.php:1404
 msgid "Your Alexa Rank"
 msgstr ""
 
-#: inc/admin/admin.php:1387
+#: inc/admin/admin.php:1426
 msgid "Country Rank: "
 msgstr ""
 
-#: inc/admin/admin.php:1396
+#: inc/admin/admin.php:1435
 msgid "The lower, the best"
 msgstr ""
 
-#: inc/admin/admin.php:1400
+#: inc/admin/admin.php:1439
 msgid "Get Alexa Rank"
 msgstr ""
 
-#: inc/admin/admin.php:1408
+#: inc/admin/admin.php:1447
 msgid "Upload a list of links to disavow to Google"
 msgstr ""
 
-#: inc/admin/admin.php:1409
+#: inc/admin/admin.php:1448
 msgid "Google Trends"
 msgstr ""
 
-#: inc/admin/admin.php:1410
+#: inc/admin/admin.php:1449
 msgid "Dareboost: Test, analyze and optimize your website"
 msgstr ""
 
-#: inc/admin/admin.php:1411
+#: inc/admin/admin.php:1450
 msgid "Google Campaign URL Builder tool"
 msgstr ""
 
-#: inc/admin/admin.php:1424
+#: inc/admin/admin.php:1464
 msgid "Titles & metas"
 msgstr ""
 
-#: inc/admin/admin.php:1425
+#: inc/admin/admin.php:1465
 msgid "Manage all your titles & metas"
 msgstr ""
 
-#: inc/admin/admin.php:1426 inc/admin/admin.php:1464 inc/admin/admin.php:1502
-#: inc/admin/admin.php:1540 inc/admin/admin.php:1578 inc/admin/admin.php:1607
-#: inc/admin/admin.php:1635 inc/admin/admin.php:1663 inc/admin/admin.php:1691
-#: inc/admin/admin.php:1719 inc/admin/admin.php:1747 inc/admin/admin.php:1785
-#: inc/admin/admin.php:1807 inc/admin/admin.php:1847 inc/admin/admin.php:1876
-#: inc/admin/admin.php:1887 inc/admin/admin.php:1937 inc/admin/admin.php:1947
-#: inc/admin/admin.php:1978 inc/admin/admin.php:1990 inc/admin/admin.php:2002
-#: inc/admin/admin.php:2023
+#: inc/admin/admin.php:1466 inc/admin/admin.php:1504 inc/admin/admin.php:1542
+#: inc/admin/admin.php:1580 inc/admin/admin.php:1618 inc/admin/admin.php:1647
+#: inc/admin/admin.php:1675 inc/admin/admin.php:1703 inc/admin/admin.php:1731
+#: inc/admin/admin.php:1759 inc/admin/admin.php:1787 inc/admin/admin.php:1825
+#: inc/admin/admin.php:1847 inc/admin/admin.php:1887 inc/admin/admin.php:1916
+#: inc/admin/admin.php:1927 inc/admin/admin.php:1977 inc/admin/admin.php:1987
+#: inc/admin/admin.php:2018 inc/admin/admin.php:2030 inc/admin/admin.php:2042
+#: inc/admin/admin.php:2063
 msgid "Manage"
 msgstr ""
 
-#: inc/admin/admin.php:1454
+#: inc/admin/admin.php:1494
 msgid "Guide to manage your titles and meta descriptions - new window"
 msgstr ""
 
-#: inc/admin/admin.php:1463
+#: inc/admin/admin.php:1503
 msgid "Manage your XML / Image / Video / HTML Sitemap"
 msgstr ""
 
-#: inc/admin/admin.php:1492
+#: inc/admin/admin.php:1532
 msgid "Guide to enable your XML Sitemaps - new window"
 msgstr ""
 
-#: inc/admin/admin.php:1501
+#: inc/admin/admin.php:1541
 msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
 msgstr ""
 
-#: inc/admin/admin.php:1530
+#: inc/admin/admin.php:1570
 msgid "Guide to enable Google Knowledge Graph - new window"
 msgstr ""
 
-#: inc/admin/admin.php:1539
+#: inc/admin/admin.php:1579
 msgid "Track everything about your visitors with Google Analytics"
 msgstr ""
 
-#: inc/admin/admin.php:1568
+#: inc/admin/admin.php:1608
 msgid "Guide to getting started with Google Analytics - new window"
 msgstr ""
 
-#: inc/admin/admin.php:1577
+#: inc/admin/admin.php:1617
 msgid "Advanced SEO options for advanced users!"
 msgstr ""
 
-#: inc/admin/admin.php:1606
+#: inc/admin/admin.php:1646
 msgid "Improve WooCommerce SEO"
 msgstr ""
 
-#: inc/admin/admin.php:1634
+#: inc/admin/admin.php:1674
 msgid "Improve Easy Digital Downloads SEO"
 msgstr ""
 
-#: inc/admin/admin.php:1662
+#: inc/admin/admin.php:1702
 msgid "Add Google Local Business data type"
 msgstr ""
 
-#: inc/admin/admin.php:1690
+#: inc/admin/admin.php:1730
 msgid "Add Dublin Core meta tags"
 msgstr ""
 
-#: inc/admin/admin.php:1717
+#: inc/admin/admin.php:1757
 msgid "Structured Data Types"
 msgstr ""
 
-#: inc/admin/admin.php:1718
+#: inc/admin/admin.php:1758
 msgid ""
 "Add data types to your content: articles, courses, recipes, videos, events "
 "and products"
 msgstr ""
 
-#: inc/admin/admin.php:1746
+#: inc/admin/admin.php:1786
 msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
 msgstr ""
 
-#: inc/admin/admin.php:1775
+#: inc/admin/admin.php:1815
 msgid "Guide to enable Breadcrumbs - new window"
 msgstr ""
 
-#: inc/admin/admin.php:1784
+#: inc/admin/admin.php:1824
 msgid "Track your website performance to improve SEO with Google Page Speed"
 msgstr ""
 
-#: inc/admin/admin.php:1795
+#: inc/admin/admin.php:1835
 msgid "Guide to analyze your site with Google Page Speed - new window"
 msgstr ""
 
-#: inc/admin/admin.php:1805
+#: inc/admin/admin.php:1845
 msgid "Edit your robots.txt file"
 msgstr ""
 
-#: inc/admin/admin.php:1806
+#: inc/admin/admin.php:1846
 msgid "View your robots.txt"
 msgstr ""
 
-#: inc/admin/admin.php:1836
+#: inc/admin/admin.php:1876
 msgid "Guide to edit your robots.txt file - new window"
 msgstr ""
 
-#: inc/admin/admin.php:1846
+#: inc/admin/admin.php:1886
 msgid "Optimize your site for Google News"
 msgstr ""
 
-#: inc/admin/admin.php:1873 inc/admin/adminbar.php:81
+#: inc/admin/admin.php:1913 inc/admin/adminbar.php:81
 msgid "Schemas"
 msgstr ""
 
-#: inc/admin/admin.php:1874
+#: inc/admin/admin.php:1914
 msgid "Create / manage your schemas"
 msgstr ""
 
-#: inc/admin/admin.php:1875
+#: inc/admin/admin.php:1915
 msgid "See schemas"
 msgstr ""
 
-#: inc/admin/admin.php:1885
+#: inc/admin/admin.php:1925
 msgid "Monitor 404, create 301, 302 and 307 redirections"
 msgstr ""
 
-#: inc/admin/admin.php:1886
+#: inc/admin/admin.php:1926
 msgid "See redirects"
 msgstr ""
 
-#: inc/admin/admin.php:1915
+#: inc/admin/admin.php:1955
 msgid "Guide to enable 301 redirections and 404 monitoring - new window"
 msgstr ""
 
-#: inc/admin/admin.php:1924
+#: inc/admin/admin.php:1964
 msgid "Scan your site to find SEO problems."
 msgstr ""
 
-#: inc/admin/admin.php:1925
+#: inc/admin/admin.php:1965
 msgid "See broken links"
 msgstr ""
 
-#: inc/admin/admin.php:1926
+#: inc/admin/admin.php:1966
 msgid "Scan"
 msgstr ""
 
-#: inc/admin/admin.php:1935
+#: inc/admin/admin.php:1975
 msgid "Check your backlinks with Majestic API."
 msgstr ""
 
-#: inc/admin/admin.php:1936
+#: inc/admin/admin.php:1976
 msgid "See backlinks"
 msgstr ""
 
-#: inc/admin/admin.php:1946
+#: inc/admin/admin.php:1986
 msgid "Customize your permalinks."
 msgstr ""
 
-#: inc/admin/admin.php:1977
+#: inc/admin/admin.php:2017
 msgid "Edit your htaccess file."
 msgstr ""
 
-#: inc/admin/admin.php:1989
+#: inc/admin/admin.php:2029
 msgid "Configure default WordPress RSS."
 msgstr ""
 
-#: inc/admin/admin.php:2001
+#: inc/admin/admin.php:2041
 msgid "Import/Export SEOPress settings from site to site."
 msgstr ""
 
-#: inc/admin/admin.php:2012
+#: inc/admin/admin.php:2052
 msgid "Guide to Export/Import/Reset settings - new window"
 msgstr ""
 
-#: inc/admin/admin.php:2022
+#: inc/admin/admin.php:2062
 msgid "Edit your SEOPress license key."
 msgstr ""
 
-#: inc/admin/admin.php:2033
+#: inc/admin/admin.php:2073
 msgid "Guide to activate SEOPress PRO - new window"
 msgstr ""
 
-#: inc/admin/admin.php:2301 inc/admin/admin.php:4137
+#: inc/admin/admin.php:2341 inc/admin/admin.php:4177
 msgid "noindex"
 msgstr ""
 
-#: inc/admin/admin.php:2309 inc/admin/admin.php:4156
+#: inc/admin/admin.php:2349 inc/admin/admin.php:4196
 msgid "nofollow"
 msgstr ""
 
-#: inc/admin/admin.php:2317 inc/admin/admin.php:4175
+#: inc/admin/admin.php:2357 inc/admin/admin.php:4215
 msgid "noodp"
 msgstr ""
 
-#: inc/admin/admin.php:2325 inc/admin/admin.php:4194
+#: inc/admin/admin.php:2365 inc/admin/admin.php:4234
 msgid "noimageindex"
 msgstr ""
 
-#: inc/admin/admin.php:2333 inc/admin/admin.php:4213
+#: inc/admin/admin.php:2373 inc/admin/admin.php:4253
 msgid "noarchive"
 msgstr ""
 
-#: inc/admin/admin.php:2341 inc/admin/admin.php:4232
+#: inc/admin/admin.php:2381 inc/admin/admin.php:4272
 msgid "nosnippet"
 msgstr ""
 
-#: inc/admin/admin.php:2349 inc/admin/admin.php:4251
+#: inc/admin/admin.php:2389 inc/admin/admin.php:4291
 msgid "nositelinkssearchbox"
 msgstr ""
 
-#: inc/admin/admin.php:2357
+#: inc/admin/admin.php:2397
 msgid "Indicate paginated content to Google"
 msgstr ""
 
-#: inc/admin/admin.php:2374 inc/admin/admin.php:4289
+#: inc/admin/admin.php:2414 inc/admin/admin.php:4329
 msgid "Enable XML Sitemap"
 msgstr ""
 
-#: inc/admin/admin.php:2382
+#: inc/admin/admin.php:2422
 msgid "Enable XML Image Sitemaps"
 msgstr ""
 
-#: inc/admin/admin.php:2391
+#: inc/admin/admin.php:2431
 msgid "Enable XML Video Sitemaps"
 msgstr ""
 
-#: inc/admin/admin.php:2400 inc/admin/admin.php:4376
+#: inc/admin/admin.php:2440 inc/admin/admin.php:4416
 msgid "Enable HTML Sitemap"
 msgstr ""
 
-#: inc/admin/admin.php:2416
+#: inc/admin/admin.php:2456
 msgid "Check to INCLUDE Post Types"
 msgstr ""
 
-#: inc/admin/admin.php:2432
+#: inc/admin/admin.php:2472
 msgid "Check to INCLUDE Taxonomies"
 msgstr ""
 
-#: inc/admin/admin.php:2448 inc/admin/admin.php:4485
+#: inc/admin/admin.php:2488 inc/admin/admin.php:4525
 msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
 msgstr ""
 
-#: inc/admin/admin.php:2456 inc/admin/admin.php:4499
+#: inc/admin/admin.php:2496 inc/admin/admin.php:4539
 msgid "Exclude some Posts, Pages, Custom Post Types or Terms IDs"
 msgstr ""
 
-#: inc/admin/admin.php:2464
+#: inc/admin/admin.php:2504
 msgid "Sort order"
 msgstr ""
 
-#: inc/admin/admin.php:2472
+#: inc/admin/admin.php:2512
 msgid "Order posts by"
 msgstr ""
 
-#: inc/admin/admin.php:2480
+#: inc/admin/admin.php:2520
 msgid "Disable the display of the publication date"
 msgstr ""
 
-#: inc/admin/admin.php:2521 inc/admin/admin.php:4641
+#: inc/admin/admin.php:2561 inc/admin/admin.php:4681
 msgid "Organization's phone number (only for Organizations)"
 msgstr ""
 
-#: inc/admin/admin.php:2529
+#: inc/admin/admin.php:2569
 msgid "Contact type (only for Organizations)"
 msgstr ""
 
-#: inc/admin/admin.php:2537
+#: inc/admin/admin.php:2577
 msgid "Contact option (only for Organizations)"
 msgstr ""
 
-#: inc/admin/admin.php:2554 inc/admin/admin.php:4719
+#: inc/admin/admin.php:2594 inc/admin/admin.php:4759
 msgid "Facebook Page URL"
 msgstr ""
 
-#: inc/admin/admin.php:2635
+#: inc/admin/admin.php:2675
 msgid "Enable Open Graph Data"
 msgstr ""
 
-#: inc/admin/admin.php:2643 inc/admin/admin.php:4848
+#: inc/admin/admin.php:2683 inc/admin/admin.php:4888
 msgid "Select a default image"
 msgstr ""
 
-#: inc/admin/admin.php:2651
+#: inc/admin/admin.php:2691
 msgid "Facebook Link Ownership ID"
 msgstr ""
 
-#: inc/admin/admin.php:2659
+#: inc/admin/admin.php:2699
 msgid "Facebook Admin ID"
 msgstr ""
 
-#: inc/admin/admin.php:2667
+#: inc/admin/admin.php:2707
 msgid "Facebook App ID"
 msgstr ""
 
-#: inc/admin/admin.php:2684
+#: inc/admin/admin.php:2724
 msgid "Enable Twitter Card"
 msgstr ""
 
-#: inc/admin/admin.php:2692
+#: inc/admin/admin.php:2732
 msgid "Use Open Graph if no Twitter Card is filled"
 msgstr ""
 
-#: inc/admin/admin.php:2700 inc/admin/admin.php:4940
+#: inc/admin/admin.php:2740 inc/admin/admin.php:4980
 msgid "Default Twitter Image"
 msgstr ""
 
-#: inc/admin/admin.php:2708
+#: inc/admin/admin.php:2748
 msgid "Image size for Twitter Summary card"
 msgstr ""
 
-#: inc/admin/admin.php:2725
+#: inc/admin/admin.php:2765
 msgid "Enable Google Analytics tracking"
 msgstr ""
 
-#: inc/admin/admin.php:2733 inc/admin/admin.php:4993
+#: inc/admin/admin.php:2773 inc/admin/admin.php:5033
 msgid "Enter your tracking ID"
 msgstr ""
 
-#: inc/admin/admin.php:2741
+#: inc/admin/admin.php:2781
 msgid "Google Analytics tracking opt-in"
 msgstr ""
 
-#: inc/admin/admin.php:2757
+#: inc/admin/admin.php:2797
 msgid "Consent message for user tracking"
 msgstr ""
 
-#: inc/admin/admin.php:2765
+#: inc/admin/admin.php:2805
 msgid "Accept button for user tracking"
 msgstr ""
 
-#: inc/admin/admin.php:2773
+#: inc/admin/admin.php:2813
 msgid "Exclude user roles from tracking"
 msgstr ""
 
-#: inc/admin/admin.php:2791
+#: inc/admin/admin.php:2831
 msgid "Enable Google Optimize"
 msgstr ""
 
-#: inc/admin/admin.php:2799
+#: inc/admin/admin.php:2839
+msgid "Enable Google Ads"
+msgstr ""
+
+#: inc/admin/admin.php:2847
 msgid "Add an additional tracking code (like Facebook Pixel, Hotjar...)"
 msgstr ""
 
-#: inc/admin/admin.php:2807 inc/admin/admin.php:5141
+#: inc/admin/admin.php:2855 inc/admin/admin.php:5190
 msgid "Enable remarketing, demographics, and interests reporting"
 msgstr ""
 
-#: inc/admin/admin.php:2815 inc/admin/admin.php:5162
+#: inc/admin/admin.php:2863 inc/admin/admin.php:5211
 msgid "Enable IP Anonymization"
 msgstr ""
 
-#: inc/admin/admin.php:2823 inc/admin/admin.php:5183
+#: inc/admin/admin.php:2871 inc/admin/admin.php:5232
 msgid "Enhanced Link Attribution"
 msgstr ""
 
-#: inc/admin/admin.php:2831 inc/admin/admin.php:5204
+#: inc/admin/admin.php:2879 inc/admin/admin.php:5253
 msgid "Enable cross-domain tracking"
 msgstr ""
 
-#: inc/admin/admin.php:2839 inc/admin/admin.php:5220
+#: inc/admin/admin.php:2887 inc/admin/admin.php:5269
 msgid "Cross domains"
 msgstr ""
 
-#: inc/admin/admin.php:2857
+#: inc/admin/admin.php:2905
 msgid "Enable external links tracking (all links with target _blank attribute)"
 msgstr ""
 
-#: inc/admin/admin.php:2865
+#: inc/admin/admin.php:2913
 msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
 msgstr ""
 
-#: inc/admin/admin.php:2873 inc/admin/admin.php:5266
+#: inc/admin/admin.php:2921 inc/admin/admin.php:5315
 msgid "Track downloads' clicks"
 msgstr ""
 
-#: inc/admin/admin.php:2881
+#: inc/admin/admin.php:2929
 msgid "Enable affiliate/outbound links tracking (eg: aff, go, out, recommends)"
 msgstr ""
 
-#: inc/admin/admin.php:2889 inc/admin/admin.php:5297
+#: inc/admin/admin.php:2937 inc/admin/admin.php:5346
 msgid "Track affiliate/outbound links"
 msgstr ""
 
-#: inc/admin/admin.php:2907
+#: inc/admin/admin.php:2955
 msgid "Track Authors"
 msgstr ""
 
-#: inc/admin/admin.php:2915
+#: inc/admin/admin.php:2963
 msgid "Track Categories"
 msgstr ""
 
-#: inc/admin/admin.php:2923
+#: inc/admin/admin.php:2971
 msgid "Track Tags"
 msgstr ""
 
-#: inc/admin/admin.php:2931
+#: inc/admin/admin.php:2979
 msgid "Track Post Types"
 msgstr ""
 
-#: inc/admin/admin.php:2939
+#: inc/admin/admin.php:2987
 msgid "Track Logged In Users"
 msgstr ""
 
-#: inc/admin/admin.php:2956
+#: inc/admin/admin.php:3004
 msgid "Redirect attachment pages to post parent"
 msgstr ""
 
-#: inc/admin/admin.php:2964
+#: inc/admin/admin.php:3012
 msgid "Redirect attachment pages to the file URL"
 msgstr ""
 
-#: inc/admin/admin.php:2972
+#: inc/admin/admin.php:3020
 msgid "Remove ?replytocom link to avoid duplicate content"
 msgstr ""
 
-#: inc/admin/admin.php:2980
+#: inc/admin/admin.php:3028
 msgid "Automatically set the image Title"
 msgstr ""
 
-#: inc/admin/admin.php:2988
+#: inc/admin/admin.php:3036
 msgid "Automatically set the image Alt text"
 msgstr ""
 
-#: inc/admin/admin.php:2996
+#: inc/admin/admin.php:3044
 msgid "Automatically set the image Caption"
 msgstr ""
 
-#: inc/admin/admin.php:3004
+#: inc/admin/admin.php:3052
 msgid "Automatically set the image Description"
 msgstr ""
 
-#: inc/admin/admin.php:3012
+#: inc/admin/admin.php:3060
 msgid "Add WP Editor to taxonomy description textarea"
 msgstr ""
 
-#: inc/admin/admin.php:3020
-msgid "Remove stop words from URL"
-msgstr ""
-
-#: inc/admin/admin.php:3028
+#: inc/admin/admin.php:3068
 msgid "Remove /category/ in URL"
 msgstr ""
 
-#: inc/admin/admin.php:3036 inc/admin/admin.php:5873
+#: inc/admin/admin.php:3076 inc/admin/admin.php:5905
 msgid "Disable trailing slash for metas"
 msgstr ""
 
-#: inc/admin/admin.php:3044
+#: inc/admin/admin.php:3084
 msgid "Remove WordPress generator meta tag"
 msgstr ""
 
-#: inc/admin/admin.php:3052
+#: inc/admin/admin.php:3092
 msgid "Remove WordPress shortlink meta tag"
 msgstr ""
 
-#: inc/admin/admin.php:3060
+#: inc/admin/admin.php:3100
 msgid "Remove Windows Live Writer meta tag"
 msgstr ""
 
-#: inc/admin/admin.php:3068
+#: inc/admin/admin.php:3108
 msgid "Remove RSD meta tag"
 msgstr ""
 
-#: inc/admin/admin.php:3076 inc/admin/admin.php:5953
+#: inc/admin/admin.php:3116 inc/admin/admin.php:5985
 msgid "Google site verification"
 msgstr ""
 
-#: inc/admin/admin.php:3084 inc/admin/admin.php:5967
+#: inc/admin/admin.php:3124 inc/admin/admin.php:5999
 msgid "Bing site verification"
 msgstr ""
 
-#: inc/admin/admin.php:3092 inc/admin/admin.php:5980
+#: inc/admin/admin.php:3132 inc/admin/admin.php:6012
 msgid "Pinterest site verification"
 msgstr ""
 
-#: inc/admin/admin.php:3100 inc/admin/admin.php:5992
+#: inc/admin/admin.php:3140 inc/admin/admin.php:6024
 msgid "Yandex site verification"
 msgstr ""
 
-#: inc/admin/admin.php:3117
+#: inc/admin/admin.php:3157
 msgid "SEOPress in admin bar"
 msgstr ""
 
-#: inc/admin/admin.php:3125
+#: inc/admin/admin.php:3165
 msgid "Move SEOPress metabox's position"
 msgstr ""
 
-#: inc/admin/admin.php:3133
+#: inc/admin/admin.php:3173
 msgid "Hide Notifications Center"
 msgstr ""
 
-#: inc/admin/admin.php:3141
+#: inc/admin/admin.php:3181
 msgid "Hide SEO tools"
 msgstr ""
 
-#: inc/admin/admin.php:3149
+#: inc/admin/admin.php:3189
 msgid "Hide Useful Links"
 msgstr ""
 
-#: inc/admin/admin.php:3157
+#: inc/admin/admin.php:3197
 msgid "Show Title tag column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3165
+#: inc/admin/admin.php:3205
 msgid "Show Meta description column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3173
+#: inc/admin/admin.php:3213
 msgid "Show Redirection Enable column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3181
+#: inc/admin/admin.php:3221
 msgid "Show Redirect URL column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3189
+#: inc/admin/admin.php:3229
 msgid "Show canonical URL column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3197
+#: inc/admin/admin.php:3237
 msgid "Show Target Keyword column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3205
+#: inc/admin/admin.php:3245
 msgid "Show noindex column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3213
+#: inc/admin/admin.php:3253
 msgid "Show nofollow column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3221
+#: inc/admin/admin.php:3261
 msgid "Show total number of words column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3229
+#: inc/admin/admin.php:3269
 msgid "Show W3C validator column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3237
+#: inc/admin/admin.php:3277
 msgid "Show Google Page Speed column in post types"
 msgstr ""
 
-#: inc/admin/admin.php:3246
+#: inc/admin/admin.php:3286
 msgid "Hide Genesis SEO Metabox"
 msgstr ""
 
-#: inc/admin/admin.php:3254
+#: inc/admin/admin.php:3294
 msgid "Hide Genesis SEO Settings link"
 msgstr ""
 
-#: inc/admin/admin.php:3262
+#: inc/admin/admin.php:3302
 msgid "Hide advice in Structured Data Types metabox"
 msgstr ""
 
-#: inc/admin/admin.php:3279
+#: inc/admin/admin.php:3319
 msgid "Block SEO metabox to user roles"
 msgstr ""
 
-#: inc/admin/admin.php:3287
+#: inc/admin/admin.php:3327
 msgid "Block Content analysis metabox to user roles"
 msgstr ""
 
-#: inc/admin/admin.php:3342
+#: inc/admin/admin.php:3382
 msgid "<p>Customize your titles & metas for homepage</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3347
+#: inc/admin/admin.php:3387
 msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3352
+#: inc/admin/admin.php:3392
 msgid "<p>Customize your metas for all pages</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3357
+#: inc/admin/admin.php:3397
 msgid "<p>Customize your metas for all taxonomies archives</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3362
+#: inc/admin/admin.php:3402
 msgid "<p>Customize your metas for all archives</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3370
+#: inc/admin/admin.php:3410
 msgid "Change this settings"
 msgstr ""
 
-#: inc/admin/admin.php:3373
+#: inc/admin/admin.php:3413
 msgid ""
 "To view your sitemap, enable permalinks (not default one), and save settings "
 "to flush them."
 msgstr ""
 
-#: inc/admin/admin.php:3379
+#: inc/admin/admin.php:3419
 msgid ""
 "Your server uses NGINX. If XML Sitemaps doesn't work properly, you need to "
 "add this rule to your configuration:"
 msgstr ""
 
-#: inc/admin/admin.php:3392
+#: inc/admin/admin.php:3432
 msgid "Noindex content will not be displayed in Sitemaps."
 msgstr ""
 
-#: inc/admin/admin.php:3404
+#: inc/admin/admin.php:3444
 msgid "Blank sitemap?"
 msgstr ""
 
-#: inc/admin/admin.php:3405
+#: inc/admin/admin.php:3445
 msgid "404 error?"
 msgstr ""
 
-#: inc/admin/admin.php:3407
+#: inc/admin/admin.php:3447
 msgid "View your sitemap"
 msgstr ""
 
-#: inc/admin/admin.php:3409
+#: inc/admin/admin.php:3449
 msgid "Ping Google manually"
 msgstr ""
 
-#: inc/admin/admin.php:3411
+#: inc/admin/admin.php:3451
 msgid "Flush permalinks"
 msgstr ""
 
-#: inc/admin/admin.php:3417
+#: inc/admin/admin.php:3457
 msgid "<p>Create an HTML Sitemap for your visitors and boost your SEO.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3427 inc/admin/admin.php:4386
+#: inc/admin/admin.php:3467 inc/admin/admin.php:4426
 msgid "Guide to enable a HTML Sitemap - new window"
 msgstr ""
 
-#: inc/admin/admin.php:3432
+#: inc/admin/admin.php:3472
 msgid "<p>Include/Exclude Post Types.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3437
+#: inc/admin/admin.php:3477
 msgid "<p>Include/Exclude Taxonomies.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3442
+#: inc/admin/admin.php:3482
 msgid "<p>Configure Google Knowledge Graph.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3443
+#: inc/admin/admin.php:3483
 msgid "Learn more on Google official website."
 msgstr ""
 
-#: inc/admin/admin.php:3448
+#: inc/admin/admin.php:3488
 msgid ""
 "<p>Link your site with your social accounts. Use markup on your website to "
 "add your social profile information to a Google Knowledge panel. Knowledge "
@@ -2833,62 +2889,62 @@ msgid ""
 "networking links.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3454
-msgid "<p>Manage Open Graph datas.</p>"
+#: inc/admin/admin.php:3494
+msgid "<p>Manage Open Graph data.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3456
+#: inc/admin/admin.php:3496
 msgid ""
 "<p>We generate the <strong>og:image</strong> meta following this order:</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3460
+#: inc/admin/admin.php:3500
 msgid "Custom OG Image from SEO metabox"
 msgstr ""
 
-#: inc/admin/admin.php:3461 inc/admin/admin.php:3476
+#: inc/admin/admin.php:3501 inc/admin/admin.php:3516
 msgid "Post thumbnail"
 msgstr ""
 
-#: inc/admin/admin.php:3462 inc/admin/admin.php:3477
+#: inc/admin/admin.php:3502 inc/admin/admin.php:3517
 msgid "First image of your post content"
 msgstr ""
 
-#: inc/admin/admin.php:3463
+#: inc/admin/admin.php:3503
 msgid "Global OG Image set in SEO > Social > Open Graph"
 msgstr ""
 
-#: inc/admin/admin.php:3469
+#: inc/admin/admin.php:3509
 msgid "<p>Manage your Twitter card.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3471
+#: inc/admin/admin.php:3511
 msgid ""
 "<p>We generate the <strong>twitter:image</strong> meta following this order:"
 "</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3475
+#: inc/admin/admin.php:3515
 msgid "Custom Twitter image from SEO metabox"
 msgstr ""
 
-#: inc/admin/admin.php:3478
+#: inc/admin/admin.php:3518
 msgid "Global Twitter:image set in SEO > Social > Twitter Card"
 msgstr ""
 
-#: inc/admin/admin.php:3484
+#: inc/admin/admin.php:3524
 msgid "<p>Link your Google Analytics to your website.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3489
+#: inc/admin/admin.php:3529
 msgid "<p>Configure your Google Analytics tracking code.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3494
+#: inc/admin/admin.php:3534
 msgid "<p>Track events in Google Analytics.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3499
+#: inc/admin/admin.php:3539
 msgid ""
 "<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions "
 "and custom metrics in SEOPress are like the default dimensions and metrics "
@@ -2898,368 +2954,368 @@ msgid ""
 "Google Analytics account. More info by clicking on the help icon."
 msgstr ""
 
-#: inc/admin/admin.php:3509
+#: inc/admin/admin.php:3549
 msgid "Guide to create custom dimensions in Google Analytics - new window"
 msgstr ""
 
-#: inc/admin/admin.php:3514
+#: inc/admin/admin.php:3554
 msgid "<p>Advanced SEO options.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3519
+#: inc/admin/admin.php:3559
 msgid "<p>Customize SEOPress to fit your needs.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3524
+#: inc/admin/admin.php:3564
 msgid "<p>Manage security.</p>"
 msgstr ""
 
-#: inc/admin/admin.php:3537
+#: inc/admin/admin.php:3577
 msgid "Enter your separator, eg: \"-\""
 msgstr ""
 
-#: inc/admin/admin.php:3541
+#: inc/admin/admin.php:3581
 #, php-format
 msgid "Use this separator with %%sep%% in your title and meta description."
 msgstr ""
 
-#: inc/admin/admin.php:3547
+#: inc/admin/admin.php:3587
 msgid "My awesome website"
 msgstr ""
 
-#: inc/admin/admin.php:3552 inc/admin/admin.php:3563 inc/admin/admin.php:3605
-#: inc/admin/admin.php:3724 inc/admin/admin.php:3757 inc/admin/admin.php:3842
-#: inc/admin/admin.php:3918 inc/admin/admin.php:3988 inc/admin/admin.php:4057
-#: inc/admin/admin.php:4107
+#: inc/admin/admin.php:3592 inc/admin/admin.php:3603 inc/admin/admin.php:3645
+#: inc/admin/admin.php:3764 inc/admin/admin.php:3797 inc/admin/admin.php:3882
+#: inc/admin/admin.php:3958 inc/admin/admin.php:4028 inc/admin/admin.php:4097
+#: inc/admin/admin.php:4147
 msgid "More tags"
 msgstr ""
 
-#: inc/admin/admin.php:3558
+#: inc/admin/admin.php:3598
 msgid "This is a cool website about Wookiees"
 msgstr ""
 
-#: inc/admin/admin.php:3566
+#: inc/admin/admin.php:3606
 msgid "Looking to edit your blog page?"
 msgstr ""
 
-#: inc/admin/admin.php:3579 inc/admin/admin.php:3695 inc/admin/admin.php:3819
-#: inc/admin/admin.php:3907 inc/admin/admin.php:3977 inc/admin/admin.php:4046
-#: inc/admin/admin.php:4098
+#: inc/admin/admin.php:3619 inc/admin/admin.php:3735 inc/admin/admin.php:3859
+#: inc/admin/admin.php:3947 inc/admin/admin.php:4017 inc/admin/admin.php:4086
+#: inc/admin/admin.php:4138
 msgid "Title template"
 msgstr ""
 
-#: inc/admin/admin.php:3612 inc/admin/admin.php:3733 inc/admin/admin.php:3849
-#: inc/admin/admin.php:3924 inc/admin/admin.php:3994 inc/admin/admin.php:4063
-#: inc/admin/admin.php:4113
+#: inc/admin/admin.php:3652 inc/admin/admin.php:3773 inc/admin/admin.php:3889
+#: inc/admin/admin.php:3964 inc/admin/admin.php:4034 inc/admin/admin.php:4103
+#: inc/admin/admin.php:4153
 msgid "Meta description template"
 msgstr ""
 
-#: inc/admin/admin.php:3654
+#: inc/admin/admin.php:3694
 msgid ""
 "Do not follow links for this single post type <strong>(nofollow)</strong>"
 msgstr ""
 
-#: inc/admin/admin.php:3673
+#: inc/admin/admin.php:3713
 msgid "Display date in Google search results?"
 msgstr ""
 
-#: inc/admin/admin.php:3715
+#: inc/admin/admin.php:3755
 msgid "Category Title"
 msgstr ""
 
-#: inc/admin/admin.php:3717
+#: inc/admin/admin.php:3757
 msgid "Tag Title"
 msgstr ""
 
-#: inc/admin/admin.php:3719
+#: inc/admin/admin.php:3759
 msgid "Term Title"
 msgstr ""
 
-#: inc/admin/admin.php:3750
+#: inc/admin/admin.php:3790
 msgid "Category Description"
 msgstr ""
 
-#: inc/admin/admin.php:3752
+#: inc/admin/admin.php:3792
 msgid "Tag Description"
 msgstr ""
 
-#: inc/admin/admin.php:3754
+#: inc/admin/admin.php:3794
 msgid "Term Description"
 msgstr ""
 
-#: inc/admin/admin.php:3791
+#: inc/admin/admin.php:3831
 msgid ""
 "Do not follow links for this taxonomy archive <strong>(nofollow)</strong>"
 msgstr ""
 
-#: inc/admin/admin.php:3811
+#: inc/admin/admin.php:3851
 msgid "See archive"
 msgstr ""
 
-#: inc/admin/admin.php:3838
+#: inc/admin/admin.php:3878
 msgid "Post Type Archive Name"
 msgstr ""
 
-#: inc/admin/admin.php:3891
+#: inc/admin/admin.php:3931
 msgid ""
 "Do not follow links for this post type archive <strong>(nofollow)</strong>"
 msgstr ""
 
-#: inc/admin/admin.php:3905
+#: inc/admin/admin.php:3945
 msgid "Author archives"
 msgstr ""
 
-#: inc/admin/admin.php:3966
+#: inc/admin/admin.php:4006
 msgid "Disable author archives"
 msgstr ""
 
-#: inc/admin/admin.php:3975 inc/admin/admin.php:3986
+#: inc/admin/admin.php:4015 inc/admin/admin.php:4026
 msgid "Date archives"
 msgstr ""
 
-#: inc/admin/admin.php:4017
+#: inc/admin/admin.php:4057
 msgid ""
 "Do not display date archives in search engine results <strong>(noindex)</"
 "strong>"
 msgstr ""
 
-#: inc/admin/admin.php:4035
+#: inc/admin/admin.php:4075
 msgid "Disable date archives"
 msgstr ""
 
-#: inc/admin/admin.php:4044
+#: inc/admin/admin.php:4084
 msgid "Search archives"
 msgstr ""
 
-#: inc/admin/admin.php:4055
+#: inc/admin/admin.php:4095
 msgid "Search Keywords"
 msgstr ""
 
-#: inc/admin/admin.php:4087
+#: inc/admin/admin.php:4127
 msgid ""
 "Do not display search archives in search engine results <strong>(noindex)</"
 "strong>"
 msgstr ""
 
-#: inc/admin/admin.php:4096
+#: inc/admin/admin.php:4136
 msgid "404 archives"
 msgstr ""
 
-#: inc/admin/admin.php:4139
+#: inc/admin/admin.php:4179
 msgid ""
 "Do not display all pages of the site in Google search results and do not "
 "display \"Cached\" links in search results."
 msgstr ""
 
-#: inc/admin/admin.php:4158
+#: inc/admin/admin.php:4198
 msgid "Do not follow links for all pages."
 msgstr ""
 
-#: inc/admin/admin.php:4177
+#: inc/admin/admin.php:4217
 msgid ""
 "Do not use Open Directory project metadata for titles or excerpts for all "
 "pages."
 msgstr ""
 
-#: inc/admin/admin.php:4196
+#: inc/admin/admin.php:4236
 msgid "Do not index images from the entire site."
 msgstr ""
 
-#: inc/admin/admin.php:4215
+#: inc/admin/admin.php:4255
 msgid "Do not display a \"Cached\" link in the Google search results."
 msgstr ""
 
-#: inc/admin/admin.php:4234
+#: inc/admin/admin.php:4274
 msgid ""
 "Do not display a description in the Google search results for all pages."
 msgstr ""
 
-#: inc/admin/admin.php:4253
+#: inc/admin/admin.php:4293
 msgid "Prevent Google to display a sitelinks searchbox in search results."
 msgstr ""
 
-#: inc/admin/admin.php:4270
+#: inc/admin/admin.php:4310
 msgid "Add rel next/prev link in head of paginated archive pages"
 msgstr ""
 
-#: inc/admin/admin.php:4272
+#: inc/admin/admin.php:4312
 msgid "Learn more on Google website"
 msgstr ""
 
-#: inc/admin/admin.php:4299
+#: inc/admin/admin.php:4339
 msgid "Guide to enable XML Sitemaps - new window"
 msgstr ""
 
-#: inc/admin/admin.php:4316
+#: inc/admin/admin.php:4356
 msgid ""
 "Enable Image Sitemaps (standard images, image galleries, featured image, "
 "WooCommerce product images)"
 msgstr ""
 
-#: inc/admin/admin.php:4318
+#: inc/admin/admin.php:4358
 msgid "Images in XML sitemaps are visible only from the source code."
 msgstr ""
 
-#: inc/admin/admin.php:4328
+#: inc/admin/admin.php:4368
 msgid "Guide to enable XML image sitemaps - new window"
 msgstr ""
 
-#: inc/admin/admin.php:4346
+#: inc/admin/admin.php:4386
 msgid "Enable Video Sitemaps"
 msgstr ""
 
-#: inc/admin/admin.php:4356
+#: inc/admin/admin.php:4396
 #, php-format
 msgid ""
 "Your video sitemap is empty? Read our guide to learn more about <a href=\"%s"
 "\" target=\"_blank\">adding videos to your sitemap.</a>"
 msgstr ""
 
-#: inc/admin/admin.php:4358
+#: inc/admin/admin.php:4398
 msgid "Guide to enable XML video sitemaps - new window"
 msgstr ""
 
-#: inc/admin/admin.php:4426 inc/admin/admin.php:4470
+#: inc/admin/admin.php:4466 inc/admin/admin.php:4510
 msgid "Include"
 msgstr ""
 
-#: inc/admin/admin.php:4429
+#: inc/admin/admin.php:4469
 msgid ""
 "You should never include attachment post type in your sitemap. Be careful if "
 "you checked this."
 msgstr ""
 
-#: inc/admin/admin.php:4485
+#: inc/admin/admin.php:4525
 msgid "eg: 2, 28, 68"
 msgstr ""
 
-#: inc/admin/admin.php:4489
+#: inc/admin/admin.php:4529
 msgid "You can also use this shortcode:"
 msgstr ""
 
-#: inc/admin/admin.php:4499
+#: inc/admin/admin.php:4539
 msgid "eg: 13, 8, 38"
 msgstr ""
 
-#: inc/admin/admin.php:4513
+#: inc/admin/admin.php:4553
 msgid ""
 "DESC (descending order from highest to lowest values (3, 2, 1; c, b, a))"
 msgstr ""
 
-#: inc/admin/admin.php:4516
+#: inc/admin/admin.php:4556
 msgid "ASC (ascending order from lowest to highest values (1, 2, 3; a, b, c))"
 msgstr ""
 
-#: inc/admin/admin.php:4533
+#: inc/admin/admin.php:4573
 msgid "Default (date)"
 msgstr ""
 
-#: inc/admin/admin.php:4539
+#: inc/admin/admin.php:4579
 msgid "Modified date"
 msgstr ""
 
-#: inc/admin/admin.php:4542
+#: inc/admin/admin.php:4582
 msgid "Post ID"
 msgstr ""
 
-#: inc/admin/admin.php:4545
+#: inc/admin/admin.php:4585
 msgid "Menu order"
 msgstr ""
 
-#: inc/admin/admin.php:4563
+#: inc/admin/admin.php:4603
 msgid "Disable date after each post, page, post type?"
 msgstr ""
 
-#: inc/admin/admin.php:4598
+#: inc/admin/admin.php:4638
 msgid "eg: Apple"
 msgstr ""
 
-#: inc/admin/admin.php:4611
+#: inc/admin/admin.php:4651
 msgid "Select your logo"
 msgstr ""
 
-#: inc/admin/admin.php:4615
+#: inc/admin/admin.php:4655
 msgid "JPG, PNG or GIF allowed."
 msgstr ""
 
-#: inc/admin/admin.php:4641
+#: inc/admin/admin.php:4681
 msgid "eg: +33123456789 (internationalized version required)"
 msgstr ""
 
-#: inc/admin/admin.php:4656
+#: inc/admin/admin.php:4696
 msgid "Customer support"
 msgstr ""
 
-#: inc/admin/admin.php:4659
+#: inc/admin/admin.php:4699
 msgid "Technical support"
 msgstr ""
 
-#: inc/admin/admin.php:4662
+#: inc/admin/admin.php:4702
 msgid "Billing support"
 msgstr ""
 
-#: inc/admin/admin.php:4665
+#: inc/admin/admin.php:4705
 msgid "Bill payment"
 msgstr ""
 
-#: inc/admin/admin.php:4668
+#: inc/admin/admin.php:4708
 msgid "Sales"
 msgstr ""
 
-#: inc/admin/admin.php:4671
+#: inc/admin/admin.php:4711
 msgid "Credit card support"
 msgstr ""
 
-#: inc/admin/admin.php:4674
+#: inc/admin/admin.php:4714
 msgid "Emergency"
 msgstr ""
 
-#: inc/admin/admin.php:4677
+#: inc/admin/admin.php:4717
 msgid "Baggage tracking"
 msgstr ""
 
-#: inc/admin/admin.php:4680
+#: inc/admin/admin.php:4720
 msgid "Roadside assistance"
 msgstr ""
 
-#: inc/admin/admin.php:4683
+#: inc/admin/admin.php:4723
 msgid "Package tracking"
 msgstr ""
 
-#: inc/admin/admin.php:4700 inc/admin/admin.php:5315 inc/admin/admin.php:5392
-#: inc/admin/admin.php:5469 inc/admin/admin.php:5546 inc/admin/admin.php:5623
+#: inc/admin/admin.php:4740 inc/admin/admin.php:5364 inc/admin/admin.php:5441
+#: inc/admin/admin.php:5518 inc/admin/admin.php:5595 inc/admin/admin.php:5672
 msgid "None"
 msgstr ""
 
-#: inc/admin/admin.php:4703
+#: inc/admin/admin.php:4743
 msgid "Toll Free"
 msgstr ""
 
-#: inc/admin/admin.php:4706
+#: inc/admin/admin.php:4746
 msgid "Hearing impaired supported"
 msgstr ""
 
-#: inc/admin/admin.php:4732
+#: inc/admin/admin.php:4772
 msgid "Twitter Page URL"
 msgstr ""
 
-#: inc/admin/admin.php:4833
+#: inc/admin/admin.php:4873
 msgid "Enable OG data"
 msgstr ""
 
-#: inc/admin/admin.php:4866
+#: inc/admin/admin.php:4906
 msgid ""
 "One or more Facebook Page IDs that are associated with a URL in order to "
 "enable link editing and instant article publishing."
 msgstr ""
 
-#: inc/admin/admin.php:4879
+#: inc/admin/admin.php:4919
 msgid ""
 "The ID (or comma-separated list for properties that can accept multiple IDs) "
 "of an app, person using the app, or Page Graph API object."
 msgstr ""
 
-#: inc/admin/admin.php:4891
+#: inc/admin/admin.php:4931
 msgid ""
 "The Facebook app ID of the site's app. In order to use Facebook Insights you "
 "must add the app ID to your page. Insights lets you view analytics for "
@@ -3269,48 +3325,48 @@ msgid ""
 "span>"
 msgstr ""
 
-#: inc/admin/admin.php:4895
+#: inc/admin/admin.php:4935
 msgid "How to create a Facebook App ID"
 msgstr ""
 
-#: inc/admin/admin.php:4908
+#: inc/admin/admin.php:4948
 msgid "Enable Twitter card"
 msgstr ""
 
-#: inc/admin/admin.php:4925
+#: inc/admin/admin.php:4965
 msgid "Use OG if no Twitter Cards"
 msgstr ""
 
-#: inc/admin/admin.php:4960
+#: inc/admin/admin.php:5000
 msgid "Default"
 msgstr ""
 
-#: inc/admin/admin.php:4963
+#: inc/admin/admin.php:5003
 msgid "Large"
 msgstr ""
 
-#: inc/admin/admin.php:4981
+#: inc/admin/admin.php:5021
 msgid "Enable Google Analytics tracking (Global Site Tag: gtag.js)"
 msgstr ""
 
-#: inc/admin/admin.php:4993
+#: inc/admin/admin.php:5033
 msgid "Enter your Tracking ID (UA-XXXX-XX)"
 msgstr ""
 
-#: inc/admin/admin.php:4997
+#: inc/admin/admin.php:5037
 msgid "Find your tracking ID"
 msgstr ""
 
-#: inc/admin/admin.php:5011
+#: inc/admin/admin.php:5051
 msgid "Request user's consent for analytics tracking (required by GDPR)"
 msgstr ""
 
-#: inc/admin/admin.php:5013
+#: inc/admin/admin.php:5053
 msgid ""
 "<strong>The user must click the Accept button to allow tracking.</strong>"
 msgstr ""
 
-#: inc/admin/admin.php:5015
+#: inc/admin/admin.php:5055
 msgid ""
 "User roles excluded from tracking will not see the consent message.<br> If "
 "you use a caching plugin, you have to exclude this JS file in your settings: "
@@ -3318,424 +3374,423 @@ msgid ""
 "js</strong> <br>and this cookie <strong>seopress-user-consent-accept</strong>"
 msgstr ""
 
-#: inc/admin/admin.php:5025
+#: inc/admin/admin.php:5065
 msgid "Hook to add custom tracking code with user consent - new window"
 msgstr ""
 
-#: inc/admin/admin.php:5042
+#: inc/admin/admin.php:5082
 msgid ""
 "Display and automatically accept the user‘s consent on page load (not fully "
 "GDPR)"
 msgstr ""
 
-#: inc/admin/admin.php:5044
+#: inc/admin/admin.php:5084
 msgid "The previous option must be checked to use this."
 msgstr ""
 
-#: inc/admin/admin.php:5057
+#: inc/admin/admin.php:5097
 msgid "Enter your message (HTML allowed)"
 msgstr ""
 
-#: inc/admin/admin.php:5057
+#: inc/admin/admin.php:5097
 msgid "This message will only appear if request user's consent is enabled."
 msgstr ""
 
-#: inc/admin/admin.php:5068
+#: inc/admin/admin.php:5108
 msgid "Hook to filter user consent message - new window"
 msgstr ""
 
-#: inc/admin/admin.php:5070
+#: inc/admin/admin.php:5110
 msgid "HTML tags allowed: strong, em, br, a href / target"
 msgstr ""
 
-#: inc/admin/admin.php:5071
+#: inc/admin/admin.php:5111
 msgid ""
 "Shortcode allowed to get the privacy page set in WordPress settings: "
 "[seopress_privacy_page]"
 msgstr ""
 
-#: inc/admin/admin.php:5079 inc/functions/options-google-analytics.php:39
+#: inc/admin/admin.php:5119 inc/functions/options-google-analytics.php:39
 msgid "Accept"
 msgstr ""
 
-#: inc/admin/admin.php:5079
+#: inc/admin/admin.php:5119
 msgid "Change the button value"
 msgstr ""
 
-#: inc/admin/admin.php:5114
+#: inc/admin/admin.php:5154
 msgid "Enter your Google Optimize container ID"
 msgstr ""
 
-#: inc/admin/admin.php:5114
+#: inc/admin/admin.php:5154
 msgid "GTM-XXXXXXX"
 msgstr ""
 
-#: inc/admin/admin.php:5117
+#: inc/admin/admin.php:5157
 msgid ""
 "Google Optimize offers A/B testing, website testing & personalization tools."
 msgstr ""
 
-#: inc/admin/admin.php:5125
+#: inc/admin/admin.php:5165
+msgid "Enter your Google Ads conversion ID (eg: AW-123456789"
+msgstr ""
+
+#: inc/admin/admin.php:5165
+msgid "AW-XXXXXXXXX"
+msgstr ""
+
+#: inc/admin/admin.php:5174
 msgid "Paste your tracking code here"
 msgstr ""
 
-#: inc/admin/admin.php:5125
+#: inc/admin/admin.php:5174
 msgid "Additional tracking code field"
 msgstr ""
 
-#: inc/admin/admin.php:5128
+#: inc/admin/admin.php:5177
 msgid "This code will be added in the head section of your page."
 msgstr ""
 
-#: inc/admin/admin.php:5143
+#: inc/admin/admin.php:5192
 msgid ""
 "A remarketing audience is a list of cookies or mobile-advertising IDs that "
 "represents a group of users you want to re-engage because of their "
 "likelihood to convert."
 msgstr ""
 
-#: inc/admin/admin.php:5164
+#: inc/admin/admin.php:5213
 msgid ""
 "When a customer of Analytics requests IP address anonymization, Analytics "
 "anonymizes the address as soon as technically feasible at the earliest "
 "possible stage of the collection network."
 msgstr ""
 
-#: inc/admin/admin.php:5185
+#: inc/admin/admin.php:5234
 msgid ""
 "Enhanced Link Attribution improves the accuracy of your In-Page Analytics "
 "report by automatically differentiating between multiple links to the same "
 "URL on a single page by using link element IDs."
 msgstr ""
 
-#: inc/admin/admin.php:5206
+#: inc/admin/admin.php:5255
 msgid ""
 "Cross domain tracking makes it possible for Analytics to see sessions on two "
 "related sites (such as an ecommerce site and a separate shopping cart site) "
 "as a single session. This is sometimes called site linking."
 msgstr ""
 
-#: inc/admin/admin.php:5220
+#: inc/admin/admin.php:5269
 msgid "Enter yours domains: seopress.org,sub.seopress.org,sub2.seopress.org"
 msgstr ""
 
-#: inc/admin/admin.php:5237
+#: inc/admin/admin.php:5286
 msgid "Enable external links tracking"
 msgstr ""
 
-#: inc/admin/admin.php:5254
+#: inc/admin/admin.php:5303
 msgid "Enable download tracking"
 msgstr ""
 
-#: inc/admin/admin.php:5266
+#: inc/admin/admin.php:5315
 msgid "pdf|docx|pptx|zip"
 msgstr ""
 
-#: inc/admin/admin.php:5270
+#: inc/admin/admin.php:5319
 msgid "Separate each file type extensions with a pipe \"|\""
 msgstr ""
 
-#: inc/admin/admin.php:5285
+#: inc/admin/admin.php:5334
 msgid "Enable affiliate/outbound tracking"
 msgstr ""
 
-#: inc/admin/admin.php:5297
+#: inc/admin/admin.php:5346
 msgid "aff|go|out"
 msgstr ""
 
-#: inc/admin/admin.php:5301
+#: inc/admin/admin.php:5350
 msgid "Separate each keyword with a pipe \"|\""
 msgstr ""
 
-#: inc/admin/admin.php:5318 inc/admin/admin.php:5395 inc/admin/admin.php:5472
-#: inc/admin/admin.php:5549 inc/admin/admin.php:5626
+#: inc/admin/admin.php:5367 inc/admin/admin.php:5444 inc/admin/admin.php:5521
+#: inc/admin/admin.php:5598 inc/admin/admin.php:5675
 msgid "Custom Dimension #1"
 msgstr ""
 
-#: inc/admin/admin.php:5321 inc/admin/admin.php:5398 inc/admin/admin.php:5475
-#: inc/admin/admin.php:5552 inc/admin/admin.php:5629
+#: inc/admin/admin.php:5370 inc/admin/admin.php:5447 inc/admin/admin.php:5524
+#: inc/admin/admin.php:5601 inc/admin/admin.php:5678
 msgid "Custom Dimension #2"
 msgstr ""
 
-#: inc/admin/admin.php:5324 inc/admin/admin.php:5401 inc/admin/admin.php:5478
-#: inc/admin/admin.php:5555 inc/admin/admin.php:5632
+#: inc/admin/admin.php:5373 inc/admin/admin.php:5450 inc/admin/admin.php:5527
+#: inc/admin/admin.php:5604 inc/admin/admin.php:5681
 msgid "Custom Dimension #3"
 msgstr ""
 
-#: inc/admin/admin.php:5327 inc/admin/admin.php:5404 inc/admin/admin.php:5481
-#: inc/admin/admin.php:5558 inc/admin/admin.php:5635
+#: inc/admin/admin.php:5376 inc/admin/admin.php:5453 inc/admin/admin.php:5530
+#: inc/admin/admin.php:5607 inc/admin/admin.php:5684
 msgid "Custom Dimension #4"
 msgstr ""
 
-#: inc/admin/admin.php:5330 inc/admin/admin.php:5407 inc/admin/admin.php:5484
-#: inc/admin/admin.php:5561 inc/admin/admin.php:5638
+#: inc/admin/admin.php:5379 inc/admin/admin.php:5456 inc/admin/admin.php:5533
+#: inc/admin/admin.php:5610 inc/admin/admin.php:5687
 msgid "Custom Dimension #5"
 msgstr ""
 
-#: inc/admin/admin.php:5333 inc/admin/admin.php:5410 inc/admin/admin.php:5487
-#: inc/admin/admin.php:5564 inc/admin/admin.php:5641
+#: inc/admin/admin.php:5382 inc/admin/admin.php:5459 inc/admin/admin.php:5536
+#: inc/admin/admin.php:5613 inc/admin/admin.php:5690
 msgid "Custom Dimension #6"
 msgstr ""
 
-#: inc/admin/admin.php:5336 inc/admin/admin.php:5413 inc/admin/admin.php:5490
-#: inc/admin/admin.php:5567 inc/admin/admin.php:5644
+#: inc/admin/admin.php:5385 inc/admin/admin.php:5462 inc/admin/admin.php:5539
+#: inc/admin/admin.php:5616 inc/admin/admin.php:5693
 msgid "Custom Dimension #7"
 msgstr ""
 
-#: inc/admin/admin.php:5339 inc/admin/admin.php:5416 inc/admin/admin.php:5493
-#: inc/admin/admin.php:5570 inc/admin/admin.php:5647
+#: inc/admin/admin.php:5388 inc/admin/admin.php:5465 inc/admin/admin.php:5542
+#: inc/admin/admin.php:5619 inc/admin/admin.php:5696
 msgid "Custom Dimension #8"
 msgstr ""
 
-#: inc/admin/admin.php:5342 inc/admin/admin.php:5419 inc/admin/admin.php:5496
-#: inc/admin/admin.php:5573 inc/admin/admin.php:5650
+#: inc/admin/admin.php:5391 inc/admin/admin.php:5468 inc/admin/admin.php:5545
+#: inc/admin/admin.php:5622 inc/admin/admin.php:5699
 msgid "Custom Dimension #9"
 msgstr ""
 
-#: inc/admin/admin.php:5345 inc/admin/admin.php:5422 inc/admin/admin.php:5499
-#: inc/admin/admin.php:5576 inc/admin/admin.php:5653
+#: inc/admin/admin.php:5394 inc/admin/admin.php:5471 inc/admin/admin.php:5548
+#: inc/admin/admin.php:5625 inc/admin/admin.php:5702
 msgid "Custom Dimension #10"
 msgstr ""
 
-#: inc/admin/admin.php:5348 inc/admin/admin.php:5425 inc/admin/admin.php:5502
-#: inc/admin/admin.php:5579 inc/admin/admin.php:5656
+#: inc/admin/admin.php:5397 inc/admin/admin.php:5474 inc/admin/admin.php:5551
+#: inc/admin/admin.php:5628 inc/admin/admin.php:5705
 msgid "Custom Dimension #11"
 msgstr ""
 
-#: inc/admin/admin.php:5351 inc/admin/admin.php:5428 inc/admin/admin.php:5505
-#: inc/admin/admin.php:5582 inc/admin/admin.php:5659
+#: inc/admin/admin.php:5400 inc/admin/admin.php:5477 inc/admin/admin.php:5554
+#: inc/admin/admin.php:5631 inc/admin/admin.php:5708
 msgid "Custom Dimension #12"
 msgstr ""
 
-#: inc/admin/admin.php:5354 inc/admin/admin.php:5431 inc/admin/admin.php:5508
-#: inc/admin/admin.php:5585 inc/admin/admin.php:5662
+#: inc/admin/admin.php:5403 inc/admin/admin.php:5480 inc/admin/admin.php:5557
+#: inc/admin/admin.php:5634 inc/admin/admin.php:5711
 msgid "Custom Dimension #13"
 msgstr ""
 
-#: inc/admin/admin.php:5357 inc/admin/admin.php:5434 inc/admin/admin.php:5511
-#: inc/admin/admin.php:5588 inc/admin/admin.php:5665
+#: inc/admin/admin.php:5406 inc/admin/admin.php:5483 inc/admin/admin.php:5560
+#: inc/admin/admin.php:5637 inc/admin/admin.php:5714
 msgid "Custom Dimension #14"
 msgstr ""
 
-#: inc/admin/admin.php:5360 inc/admin/admin.php:5437 inc/admin/admin.php:5514
-#: inc/admin/admin.php:5591 inc/admin/admin.php:5668
+#: inc/admin/admin.php:5409 inc/admin/admin.php:5486 inc/admin/admin.php:5563
+#: inc/admin/admin.php:5640 inc/admin/admin.php:5717
 msgid "Custom Dimension #15"
 msgstr ""
 
-#: inc/admin/admin.php:5363 inc/admin/admin.php:5440 inc/admin/admin.php:5517
-#: inc/admin/admin.php:5594 inc/admin/admin.php:5671
+#: inc/admin/admin.php:5412 inc/admin/admin.php:5489 inc/admin/admin.php:5566
+#: inc/admin/admin.php:5643 inc/admin/admin.php:5720
 msgid "Custom Dimension #16"
 msgstr ""
 
-#: inc/admin/admin.php:5366 inc/admin/admin.php:5443 inc/admin/admin.php:5520
-#: inc/admin/admin.php:5597 inc/admin/admin.php:5674
+#: inc/admin/admin.php:5415 inc/admin/admin.php:5492 inc/admin/admin.php:5569
+#: inc/admin/admin.php:5646 inc/admin/admin.php:5723
 msgid "Custom Dimension #17"
 msgstr ""
 
-#: inc/admin/admin.php:5369 inc/admin/admin.php:5446 inc/admin/admin.php:5523
-#: inc/admin/admin.php:5600 inc/admin/admin.php:5677
+#: inc/admin/admin.php:5418 inc/admin/admin.php:5495 inc/admin/admin.php:5572
+#: inc/admin/admin.php:5649 inc/admin/admin.php:5726
 msgid "Custom Dimension #18"
 msgstr ""
 
-#: inc/admin/admin.php:5372 inc/admin/admin.php:5449 inc/admin/admin.php:5526
-#: inc/admin/admin.php:5603 inc/admin/admin.php:5680
+#: inc/admin/admin.php:5421 inc/admin/admin.php:5498 inc/admin/admin.php:5575
+#: inc/admin/admin.php:5652 inc/admin/admin.php:5729
 msgid "Custom Dimension #19"
 msgstr ""
 
-#: inc/admin/admin.php:5375 inc/admin/admin.php:5452 inc/admin/admin.php:5529
-#: inc/admin/admin.php:5606 inc/admin/admin.php:5683
+#: inc/admin/admin.php:5424 inc/admin/admin.php:5501 inc/admin/admin.php:5578
+#: inc/admin/admin.php:5655 inc/admin/admin.php:5732
 msgid "Custom Dimension #20"
 msgstr ""
 
-#: inc/admin/admin.php:5701
+#: inc/admin/admin.php:5750
 msgid "Redirect attachment pages to post parent (or homepage if none)"
 msgstr ""
 
-#: inc/admin/admin.php:5720
+#: inc/admin/admin.php:5769
 msgid ""
 "If this option is checked, it will take precedence over the redirection of "
 "attachments to the post parent."
 msgstr ""
 
-#: inc/admin/admin.php:5737
+#: inc/admin/admin.php:5786
 msgid "Remove ?replytocom link in source code"
 msgstr ""
 
-#: inc/admin/admin.php:5754
+#: inc/admin/admin.php:5803
 msgid ""
 "When sending an image file, automatically set the title based on the filename"
 msgstr ""
 
-#: inc/admin/admin.php:5771
+#: inc/admin/admin.php:5820
 msgid ""
 "When sending an image file, automatically set the alternative text based on "
 "the filename"
 msgstr ""
 
-#: inc/admin/admin.php:5788
+#: inc/admin/admin.php:5837
 msgid ""
 "When sending an image file, automatically set the caption based on the "
 "filename"
 msgstr ""
 
-#: inc/admin/admin.php:5805
+#: inc/admin/admin.php:5854
 msgid ""
 "When sending an image file, automatically set the description based on the "
 "filename"
 msgstr ""
 
-#: inc/admin/admin.php:5822
+#: inc/admin/admin.php:5871
 msgid "Add TINYMCE editor to term description"
 msgstr ""
 
-#: inc/admin/admin.php:5839
-msgid "Remove stop words in permalinks"
-msgstr ""
-
-#: inc/admin/admin.php:5839
-msgid ""
-"Setting based on site language. Supported language EN, FR, ES, DE, IT, PT."
-msgstr ""
-
-#: inc/admin/admin.php:5856
+#: inc/admin/admin.php:5888
 msgid "You have to flush your permalinks each time you change this settings"
 msgstr ""
 
-#: inc/admin/admin.php:5873
+#: inc/admin/admin.php:5905
 msgid ""
 "You must check this box if the structure of your permalinks DOES NOT contain "
 "a slash at the end (eg: /%postname%)"
 msgstr ""
 
-#: inc/admin/admin.php:5890
+#: inc/admin/admin.php:5922
 msgid "Remove WordPress meta generator in source code"
 msgstr ""
 
-#: inc/admin/admin.php:5907
+#: inc/admin/admin.php:5939
 msgid "Remove WordPress shortlink meta tag in source code (eg:"
 msgstr ""
 
-#: inc/admin/admin.php:5924
+#: inc/admin/admin.php:5956
 msgid "Remove Windows Live Writer meta tag in source code (eg:"
 msgstr ""
 
-#: inc/admin/admin.php:5941
+#: inc/admin/admin.php:5973
 msgid "Remove Really Simple Discovery meta tag in source code (eg:"
 msgstr ""
 
-#: inc/admin/admin.php:5953
+#: inc/admin/admin.php:5985
 msgid "Enter Google meta value site verification"
 msgstr ""
 
-#: inc/admin/admin.php:5958
+#: inc/admin/admin.php:5990
 msgid ""
 "If your site is already verified in <strong>Google Search Console</strong>, "
 "you can leave this field empty."
 msgstr ""
 
-#: inc/admin/admin.php:5967
+#: inc/admin/admin.php:5999
 msgid "Enter Bing meta value site verification"
 msgstr ""
 
-#: inc/admin/admin.php:5971
+#: inc/admin/admin.php:6003
 msgid ""
 "If your site is already verified in <strong>Bing Webmaster tools</strong>, "
 "you can leave this field empty."
 msgstr ""
 
-#: inc/admin/admin.php:5980
+#: inc/admin/admin.php:6012
 msgid "Enter Pinterest meta value site verification"
 msgstr ""
 
-#: inc/admin/admin.php:5992
+#: inc/admin/admin.php:6024
 msgid "Enter Yandex meta value site verification"
 msgstr ""
 
-#: inc/admin/admin.php:6009
+#: inc/admin/admin.php:6041
 msgid "Remove SEOPress from Admin Bar in backend and frontend"
 msgstr ""
 
-#: inc/admin/admin.php:6025
+#: inc/admin/admin.php:6057
 msgid "High priority (top)"
 msgstr ""
 
-#: inc/admin/admin.php:6028
+#: inc/admin/admin.php:6060
 msgid "Normal priority (default)"
 msgstr ""
 
-#: inc/admin/admin.php:6031
+#: inc/admin/admin.php:6063
 msgid "Low priority"
 msgstr ""
 
-#: inc/admin/admin.php:6049
+#: inc/admin/admin.php:6081
 msgid "Hide Notifications Center in SEOPress Dashboard page"
 msgstr ""
 
-#: inc/admin/admin.php:6066
+#: inc/admin/admin.php:6098
 msgid "Hide SEO tools in SEOPress Dashboard page"
 msgstr ""
 
-#: inc/admin/admin.php:6083
+#: inc/admin/admin.php:6115
 msgid "Hide Useful Links in SEOPress dashboard page"
 msgstr ""
 
-#: inc/admin/admin.php:6100
+#: inc/admin/admin.php:6132
 msgid "Add title column"
 msgstr ""
 
-#: inc/admin/admin.php:6117
+#: inc/admin/admin.php:6149
 msgid "Add meta description column"
 msgstr ""
 
-#: inc/admin/admin.php:6134
+#: inc/admin/admin.php:6166
 msgid "Add redirection enable column"
 msgstr ""
 
-#: inc/admin/admin.php:6151
+#: inc/admin/admin.php:6183
 msgid "Add redirection URL column"
 msgstr ""
 
-#: inc/admin/admin.php:6168
+#: inc/admin/admin.php:6200
 msgid "Add canonical URL column"
 msgstr ""
 
-#: inc/admin/admin.php:6185
+#: inc/admin/admin.php:6217
 msgid "Add target keyword column"
 msgstr ""
 
-#: inc/admin/admin.php:6202
+#: inc/admin/admin.php:6234
 msgid "Display noindex status"
 msgstr ""
 
-#: inc/admin/admin.php:6219
+#: inc/admin/admin.php:6251
 msgid "Display nofollow status"
 msgstr ""
 
-#: inc/admin/admin.php:6236
+#: inc/admin/admin.php:6268
 msgid "Display total number of words in content"
 msgstr ""
 
-#: inc/admin/admin.php:6253
+#: inc/admin/admin.php:6285
 msgid "Display W3C column to check code quality"
 msgstr ""
 
-#: inc/admin/admin.php:6271
+#: inc/admin/admin.php:6303
 msgid "Display Page Speed column to check performances"
 msgstr ""
 
-#: inc/admin/admin.php:6289
+#: inc/admin/admin.php:6321
 msgid "Remove Genesis SEO Metabox"
 msgstr ""
 
-#: inc/admin/admin.php:6306
+#: inc/admin/admin.php:6338
 msgid "Remove Genesis SEO link in WP Admin Menu"
 msgstr ""
 
-#: inc/admin/admin.php:6323
+#: inc/admin/admin.php:6355
 msgid "Remove the advice if None schema selected"
 msgstr ""
 
-#: inc/admin/admin.php:6361 inc/admin/admin.php:6396
+#: inc/admin/admin.php:6393 inc/admin/admin.php:6428
 msgid ""
 "Hook to filter Structured data types metabox call by post type - new window"
 msgstr ""
@@ -3878,38 +3933,40 @@ msgstr ""
 msgid "X"
 msgstr ""
 
-#: inc/functions/options-google-analytics.php:362
+#: inc/functions/options-google-analytics.php:374
 msgid "Authors"
 msgstr ""
 
-#: inc/functions/options-google-analytics.php:381
+#: inc/functions/options-google-analytics.php:393
 msgid "Categories"
 msgstr ""
 
-#: inc/functions/options-google-analytics.php:407
+#: inc/functions/options-google-analytics.php:419
 msgid "Tags"
 msgstr ""
 
-#: inc/functions/options-google-analytics.php:421
+#: inc/functions/options-google-analytics.php:433
 msgid "Post types"
 msgstr ""
 
-#: inc/functions/options-google-analytics.php:435
+#: inc/functions/options-google-analytics.php:447
 msgid "Connected users"
 msgstr ""
 
-#: inc/functions/options-import-export.php:51
-#: inc/functions/options-import-export.php:194
+#: inc/functions/options-import-export.php:52
+#: inc/functions/options-import-export.php:243
 msgid "Please upload a valid .json file"
 msgstr ""
 
-#: inc/functions/options-import-export.php:55
-#: inc/functions/options-import-export.php:92
-#: inc/functions/options-import-export.php:198
+#: inc/functions/options-import-export.php:56
+#: inc/functions/options-import-export.php:94
+#: inc/functions/options-import-export.php:147
+#: inc/functions/options-import-export.php:247
 msgid "Please upload a file to import"
 msgstr ""
 
-#: inc/functions/options-import-export.php:88
+#: inc/functions/options-import-export.php:90
+#: inc/functions/options-import-export.php:143
 msgid "Please upload a valid .csv file"
 msgstr ""
 
@@ -3917,18 +3974,14 @@ msgstr ""
 msgid "XML Sitemaps"
 msgstr ""
 
-#: seopress.php:280
+#: seopress.php:286
 msgid "You like SEOPress? Don't forget to rate it 5 stars!"
 msgstr ""
 
-#: seopress.php:326
-msgid "Settings"
-msgstr ""
-
-#: seopress.php:327
+#: seopress.php:333
 msgid "SEOPress.org"
 msgstr ""
 
-#: seopress.php:329
+#: seopress.php:335
 msgid "GO PRO!"
 msgstr ""

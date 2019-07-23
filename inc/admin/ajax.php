@@ -114,7 +114,6 @@ function seopress_do_real_preview() {
                         }
                     }
                 }
-                
 
                 //Meta desc
                 $meta_description = $xpath->query('//meta[@name="description"]/@content');

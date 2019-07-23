@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.5.8
+Stable tag: 3.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,11 +18,11 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 
 <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 <strong>Content analysis to help you write search-engine optimized content</strong>
+<strong>Import your post and term metadatas from other plugins in 1 click</strong>
 
-<h3>Subscribe to our newsletter to get exclusive deals</h3>
-Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a>
+<a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / year / unlimited sites</strong></a>
 
-<h3>Features</h3>
+<h3>SEOPress Free Features</h3>
 
 <ul>
 	<li>Installation wizard to quickly setup your site</li>
@@ -30,7 +30,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Meta descriptions (with dynamic variables too)</li>
 	<li>Open Graph Data</li>
 	<li>Google Knowledge Graph</li>
-	<li>Google Analytics with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(GDPR compatibility)</li>
+	<li>Google Analytics with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">GDPR compatibility</a>)</li>
 	<li>Twitter Card</li>
 	<li>Canonical URL</li> 
 	<li>Meta robots (noindex, nofollow, noodp, noimageindex, noarchive, nosnippet)</li>
@@ -50,12 +50,12 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>...</li>
 </ul>
 
-<h3>SEOPress PRO</h3>
+<h3>SEOPress PRO: to go further with your SEO</h3>
 
 <ul>
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
-	<li>Google Structured Data types (schema.org): article, local business, FAQ, course, recipe, video, event, product, simple review</li>
+	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, FAQ, course, recipe, video, event, product, simple review</li>
 	<li>Automatic Schemas</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Google Analytics Stats in Dashboard</li>
@@ -80,7 +80,7 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>RSS</li>
 </ul>
 
-<h4><a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / unlimited sites / year</strong></a></h4>
+<h4><a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO now!</strong></a></h4>
 
 [youtube https://www.youtube.com/watch?v=9XMXBHBdva0]
 
@@ -92,11 +92,12 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Spanish (professional translation)</li>
 	<li>German (professional translation)</li>
 	<li>Dutch (professional translation)</li>
+	<li>Russian (professional translation)</li>
+	<li>Japanese (professional translation)</li>
 	<li>Greek</li>
 	<li>Bulgarian</li>
 	<li>Indonesian</li>
 	<li>Italian</li>
-	<li>Russian</li>
 	<li>Telugu</li>
 	<li>Tamil</li>
 	<li>Brazilian Portguese</li>
@@ -106,8 +107,45 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 	<li>Chinese</li>
 	<li>Persian</li>
 	<li>Turkish</li>
-	<li>Japanese (in progress)</li>
 </ul>
+
+<h3>SEOPress integrates seamlessly with popular e-commerce, translation, performance and analytics tools.</h3>
+<ul>
+	<li>WPML</li>
+	<li>Polylang</li>
+	<li>MultilingualPress</li>
+	<li>Weglot</li>
+	<li>Elementor</li>
+	<li>Divi</li>
+	<li>WP-Rocket</li>
+	<li>WooCommerce</li>
+	<li>Easy Digital Downloads</li>
+	<li>Admin Columns PRO</li>
+	<li>...</li>
+</ul>
+
+<h3>Help and support</h3>
+<ul>
+	<li><a href="https://www.seopress.org/support/" target="_blank">Documentation center</a></li>
+	<li><a href="https://www.facebook.com/groups/seopress/" target="_blank">Join our SEOPress official community group</a></li>
+	<li><a href="https://www.youtube.com/seopress" target="_blank">Our SEOPress YouTube Channel</a></li>
+	<li><a href="https://www.seopress.org/account/your-tickets/" target="_blank">Email (PRO only)</a></li>
+</ul>
+
+<h3>Featured on</h3>
+<ul>
+	<li>WP Crafter</li>
+	<li>Kinsta</li>
+	<li>Pagely</li>
+	<li>Freemius</li>
+	<li>Majestic</li>
+	<li>WP Explorer</li>
+	<li>MasterWP</li>
+	<li>...</li>
+</ul>
+
+<h3>Our website:</h3>
+Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">seopress.org</a>
 
 == Installation ==
 
@@ -128,43 +166,104 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 7. XML Sitemap
 8. XML Sitemap
 9. XML Sitemap
-10. XML Sitemap
-11. XML Sitemap
-12. Social
-13. Social
-14. Social
-15. Social
+10. HTML Sitemap
+11. Social Networks
+12. Social Networks
+13. Social Networks
+14. Social Networks
+15. Google Analytics
 16. Google Analytics
 17. Google Analytics
 18. Google Analytics
 19. Google Analytics
-20. Google Analytics
+20. Advanced settings
 21. Advanced settings
 22. Advanced settings
-23. Advanced settings
-24. Import / Export / Reset settings
-25. SEOPress Bot : scan (PRO)
-26. SEOPress Bot : settings (PRO)
-27. License settings (PRO)
-28. Google Local Business (PRO)
-29. Dublin Core (PRO)
-30. Structured Data Types (PRO)
-31. Breadcrumbs (PRO)
-32. Robots.txt (PRO)
-33. Google News Sitemap (PRO)
-34. Monitoring 404 (PRO)
-35. htaccess (PRO)
-36. RSS (PRO)
-37. Backlinks (PRO)
-38. Google Page Speed (PRO)
-39. WooCommerce (PRO)
-40. Redirections (PRO)
-41. Broken links (PRO)
-42. Backlinks (PRO)
-43. SEOPress metaboxe in post, page, custom post type
-44. Structured Data Types metaboxe in post, page, custom post type (PRO)
+23. Tools: Import / Export / Reset settings
+24. SEOPress Bot : scan (PRO)
+25. SEOPress Bot : settings (PRO)
+26. License settings (PRO)
+27. Google Local Business (PRO)
+28. Dublin Core (PRO)
+29. Structured Data Types (PRO)
+30. Breadcrumbs (PRO)
+31. WooCommerce (PRO)
+32. Easy Digital Downloads (PRO)
+33. Google Page Speed (PRO)
+34. Robots.txt (PRO)
+35. Google News Sitemap (PRO)
+36. Monitoring 404 (PRO)
+37. htaccess (PRO)
+38. RSS (PRO)
+39. Backlinks (PRO)
+40. URL Rewriting (PRO)
+41. White Label (PRO)
+42. Schemas (PRO)
+43. Schemas (PRO)
+44. Redirections (PRO)
+45. Redirections (PRO)
+46. Broken links (PRO)
+47. SEO metabox
+48. SEO metabox
+49. SEO metabox
+50. SEO metabox
+51. SEO metabox
+52. SEO metabox
+53. Content analysis metabox
+54. Content analysis metabox
+55. Content analysis metabox
+56. Content analysis metabox
+57. Google Structured data types (PRO)
+58. Google Structured data types (PRO)
+59. Installation Wizard
+60. Installation Wizard
 
 == Changelog ==
+= 3.6 =
+* NEW Using the pixel to calculate the length of title / meta description (beta)
+* NEW All translations are now maintained on TranslationsPress
+* NEW Remove static Shop page defined in WooCommerce settings from Breadcrumbs (PRO)
+* NEW Google Ads (SEO > Google Analytics > Tracking tab)
+* NEW Import redirects from Yoast Premium (PRO)
+* NEW Service schema (automatic and manual - PRO)
+* NEW "seopress_metaboxe_term_seo_priority" hook to filter SEO metabox priority in terms taxonomy
+* NEW "seopress_gtag_ua" hook to filter Google UA tag + features
+* NEW "seopress_gtag_ads" hook to filter Google Ads tag
+* NEW "seopress_pro_breadcrumbs_crumbs" hook to filter crumbs for breadcrumbs
+* NEW "seopress_sitemaps_html_cpt" hook to filter post types for HTML sitemap
+* NEW Add 'seopress_schemas_auto_service_html' hook to filter automatic service schema (PRO)
+* INFO Refactoring broken links checker feature (PRO)
+* INFO Remove stop words feature
+* INFO JSON-LD breadcrumbs is now automatically called in the head of your document (if enabled). No longer need to manually add the function in your theme.
+* INFO Improve UI for License page / displaying license error
+* INFO Improve UI for Tools page
+* INFO Improve CSS for Schemas
+* INFO Improve SEO metabox UI for term taxonomy
+* INFO Improve Content Analysis metabox UI
+* INFO Removal of the version number in the header of the SEO dashboard (too confusing)
+* INFO Significant performance improvement for Google Analytics widget in Dashboard
+* INFO Improve select values for automatic schemas
+* INFO Better Admin Columns PRO integration (thanks Stefan from ACPRO team @admincolumns)
+* INFO Minify some JS files to slightly improve performance
+* INFO Remove 100 CSS lines in seopress-pro.css
+* FIX Social meta tags for Shop Page (WooCommerce)
+* FIX Some translation strings
+* FIX Add a check to avoid displaying empty automatic schemas
+* FIX White Label: Remove SEOPress admin header
+* FIX SEO metabox position for term taxonomy is now using the setting defined in SEO > Advanced
+* FIX Undefined variable: article_img_height for article schema
+* FIX Undefined variable: article_img_width for article schema
+* FIX Redirections category filtering in backend
+* FIX JS error ctx is not defined when configuring Google Analytics widget in Dashboard
+* FIX Notice Only variables should be passed by reference in Import tool page
+* FIX CSS position sticky with Safari
+* FIX CSS for FAQ schema (Structured data types metabox)
+* FIX Display the searched keyword in the breadcrumb
+* FIX HTML Entities decode in placeholders for SEO metabox
+* FIX Product Global Identifiers type and value for manual Product schema
+* FIX Using WooCommerce product metas with automatic schemas
+* FIX Broken link checker percentage of completion
+* FIX Strip HTML comments in title / schemas (especially those of Gutenberg)
 = 3.5.8 =
 * NEW Installation wizard!
 * NEW Import redirects from Redirections plugin
@@ -229,13 +328,13 @@ Subscribe on <a href="https://www.seopress.org/" target="_blank">seopress.org</a
 = 3.5 =
 * NEW WP 5.2 compatibility
 * NEW Automatic schemas for your posts, pages, post types: article, local business, course, recipe, video, event, product, review (SEO > PRO > Structured Data Types)! (PRO)
-* NEW Add 'seopress_schemas_auto_article_html' hook to filter automatic review schema (PRO)
-* NEW Add 'seopress_schemas_auto_lb_html' hook to filter automatic review schema (PRO)
-* NEW Add 'seopress_schemas_auto_course_html' hook to filter automatic review schema (PRO)
-* NEW Add 'seopress_schemas_auto_recipe_html' hook to filter automatic review schema (PRO)
-* NEW Add 'seopress_schemas_auto_video_html' hook to filter automatic review schema (PRO)
-* NEW Add 'seopress_schemas_auto_event_html' hook to filter automatic review schema (PRO)
-* NEW Add 'seopress_schemas_auto_product_html' hook to filter automatic review schema (PRO)
+* NEW Add 'seopress_schemas_auto_article_html' hook to filter automatic article schema (PRO)
+* NEW Add 'seopress_schemas_auto_lb_html' hook to filter automatic local business schema (PRO)
+* NEW Add 'seopress_schemas_auto_course_html' hook to filter automatic course schema (PRO)
+* NEW Add 'seopress_schemas_auto_recipe_html' hook to filter automatic recipe schema (PRO)
+* NEW Add 'seopress_schemas_auto_video_html' hook to filter automatic video schema (PRO)
+* NEW Add 'seopress_schemas_auto_event_html' hook to filter automatic event schema (PRO)
+* NEW Add 'seopress_schemas_auto_product_html' hook to filter automatic product schema (PRO)
 * NEW Add 'seopress_schemas_auto_review_html' hook to filter automatic review schema (PRO)
 * NEW Add 'seopress_schemas_article_html' hook to filter manual review schema (PRO)
 * NEW Add 'seopress_schemas_lb_html' hook to filter manual review schema (PRO)

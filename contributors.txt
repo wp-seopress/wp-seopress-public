@@ -12,20 +12,26 @@ A11Y:
 
 Beta testers / feedbacks:
 - Mickael Gris: mickael.gris@gmail.com / @mickaelgris
-- Aurélien Denis: contact@wp-alacarte.com / @wpchannel
+- Aurélien Denis: aurelien.denis@neticpro.fr / @wpchannel
 - Sébastien Serre: @sebastienserre
 - Ludovic Riaudel: @lriaudel
+
+Integrations:
+- The Admin Columns PRO team
+- The Polylang team
+- The WPML team
+- The Weglot team
 
 Translators:
 - French: Didier Wolforg, @rainbowgeek, and Clément Polito + WP-Translations
 - English: @rainbowgeek + WP-Translations
+- Spanish: WP-Translations
+- German: WP-Translations
+- Japan: WP-Translations
+- Dutch: WP-Translations
 - Italian: Déborah Donnier @deborahdonnier
-- Spanish: Rafael Salguero + WP-Translations
-- German: @likemike2425 + WP-Translations
-- Japan: @s_tayama and @miccweb
-- Dutch: Sebastiaan Hendriks
 - Vietnamese: Anh
-- Russian: @Dmitriy
+- Russian: WP-Translations
 - Tamil: Sankar Srinivasan
 - Brazilian Portuguese: Daniel Pechmann
 - Telugu: Manoj Kumar

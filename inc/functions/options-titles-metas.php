@@ -304,10 +304,10 @@ function seopress_titles_the_title() {
 	$get_search_query = apply_filters('seopress_get_search_query', $get_search_query);
 
 	if ($seopress_excerpt !='') {
-		$seopress_get_the_excerpt = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(strip_shortcodes($seopress_excerpt)))), $seopress_excerpt_length);
+		$seopress_get_the_excerpt = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes($seopress_excerpt), true)))), $seopress_excerpt_length);
 	} elseif ($post !='') {
 		if (get_post_field('post_content', $post->ID) !='') {
-			$seopress_get_the_excerpt = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(strip_shortcodes(get_post_field('post_content', $post->ID))))), $seopress_excerpt_length);
+			$seopress_get_the_excerpt = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_post_field('post_content', $post->ID), true))))), $seopress_excerpt_length);
 		} else {
 			$seopress_get_the_excerpt = null;
 		}

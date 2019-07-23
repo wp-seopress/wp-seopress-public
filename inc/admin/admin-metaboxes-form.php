@@ -45,7 +45,7 @@ function seopress_redirections_value($seopress_redirections_value) {
 if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
     echo '
         <tr id="term-seopress" class="form-field">
-            <th scope="row">'.__('SEO','wp-seopress').'</th>
+            <th scope="row"><h2>'.__('SEO','wp-seopress').'</h2></th>
             <td>
                 <div id="seopress_cpt">
                     <div class="inside">';
@@ -93,8 +93,10 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.esc_html__('Enter your title','wp-seopress').'" aria-label="'.__('Title','wp-seopress').'" value="'.$seopress_titles_title.'" />
                 </p> 
                 <div class="wrap-seopress-counters">
+                    <div id="seopress_titles_title_pixel"></div>
+                    <strong>'.__(' / 568 pixels - ','wp-seopress').'</strong>
                     <div id="seopress_titles_title_counters"></div>
-                    '.__('(maximum recommended limit)','wp-seopress').'
+                    '.__(' (maximum recommended limit)','wp-seopress').'
                 </div>
                 
                 <div class="wrap-tags">
@@ -110,14 +112,21 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     <textarea id="seopress_titles_desc_meta" style="width:100%" rows="8" name="seopress_titles_desc" placeholder="'.esc_html__('Enter your meta description','wp-seopress').'" aria-label="'.__('Meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
                 </p>
                 <div class="wrap-seopress-counters">
+                    <div id="seopress_titles_desc_pixel"></div>
+                    <strong>'.__(' / 940 pixels - ','wp-seopress').'</strong>
                     <div id="seopress_titles_desc_counters"></div>
-                    '.__('(maximum recommended limit)','wp-seopress').'
-                </div>
-
-                <div class="wrap-tags">
-                    <span id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Excerpt','wp-seopress').'</span>
-                </div>
-            </div>
+                    '.__(' (maximum recommended limit)','wp-seopress').'
+                </div>';
+                if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
+                    echo '<div class="wrap-tags">
+                        <span id="seopress-tag-single-excerpt" data-tag="%%_category_description%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Category / term description','wp-seopress').'</span>
+                    </div>';
+                } else {
+                    echo '<div class="wrap-tags">
+                        <span id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Excerpt','wp-seopress').'</span>
+                    </div>';
+                }
+            echo '</div>
             <div class="box-right">
                 <div class="google-snippet-preview">
                     <h3>'.__('Google Snippet Preview','wp-seopress').'</h3>
@@ -185,7 +194,12 @@ echo               '<div class="snippet-description">...</div>
             <p>
                 <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
                 <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').htmlspecialchars(urldecode(get_permalink())).'" aria-label="'.__('Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
+                <span class="sp-tooltip"><span class="dashicons dashicons-editor-help"></span>
+                  <span class="sp-tooltiptext">'.__('A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color).
+                The canonical can be in a different domain than a duplicate.','wp-seopress').'</span>
+                </span>
             </p>';
+
             if ($typenow =='post' && ($pagenow == 'post.php' || $pagenow == 'post-new.php')) {
                 echo '<p>
                     <label for="seopress_robots_primary_cat_meta">'. __( 'Select a primary category', 'wp-seopress' ) .'</label>
@@ -226,7 +240,7 @@ echo               '<div class="snippet-description">...</div>
             <p>
                 <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'wp-seopress' ) .'</label>
                 <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" aria-label="'.__('Facebook Thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
-                <span class="advise">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max.', 'wp-seopress').'</span>
+                <span class="advise">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress').'</span>
                 <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
             </p>
             <br/>
@@ -266,7 +280,7 @@ echo               '<div class="snippet-description">...</div>
                     <option ' . selected( '410', $seopress_redirections_type, false ) . ' value="410">'. __( '410 Gone', 'wp-seopress' ) .'</option>
                     <option ' . selected( '451', $seopress_redirections_type, false ) . ' value="451">'. __( '451 Unavailable For Legal Reasons', 'wp-seopress' ) .'</option>
                 </select>
-                <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.esc_html__('Enter your new URL','wp-seopress').'" aria-label="'.__('URL redirection','wp-seopress').'" value="'.$seopress_redirections_value.'" />
+                <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value" placeholder="'.esc_html__('Enter your new URL in absolute (eg: https://www.example.com/)','wp-seopress').'" aria-label="'.__('URL redirection','wp-seopress').'" value="'.$seopress_redirections_value.'" />
                 <br><br>
             </p>';
             if ("seopress_404" == $typenow) {
@@ -275,7 +289,7 @@ echo               '<div class="snippet-description">...</div>
                 <select name="seopress_redirections_param">
                     <option ' . selected( 'exact_match', $seopress_redirections_param, false ) . ' value="exact_match">'. __( 'Exact match with all parameters', 'wp-seopress' ) .'</option>
                     <option ' . selected( 'without_param', $seopress_redirections_param, false ) . ' value="without_param">'. __( 'Exclude all parameters', 'wp-seopress' ) .'</option>
-                    <option ' . selected( 'with_ignored_param', $seopress_redirections_param, false ) . ' value="with_ignored_param">'. __( 'Exclude all parameters and passed them to the redirection', 'wp-seopress' ) .'</option>
+                    <option ' . selected( 'with_ignored_param', $seopress_redirections_param, false ) . ' value="with_ignored_param">'. __( 'Exclude all parameters and pass them to the redirection', 'wp-seopress' ) .'</option>
                 </select></p>';
             }
             echo '<p>';                

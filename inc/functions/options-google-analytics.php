@@ -84,6 +84,18 @@ function seopress_google_analytics_optimize_option() {
 	}
 }
 
+//Ads
+function seopress_google_analytics_ads_option() {
+	$seopress_google_analytics_ads_option = get_option("seopress_google_analytics_option_name");
+	if ( ! empty ( $seopress_google_analytics_ads_option ) ) {
+		foreach ($seopress_google_analytics_ads_option as $key => $seopress_google_analytics_ads_value)
+			$options[$key] = $seopress_google_analytics_ads_value;
+			if (isset($seopress_google_analytics_ads_option['seopress_google_analytics_ads'])) {
+				return $seopress_google_analytics_ads_option['seopress_google_analytics_ads'];
+			}
+	}
+}
+
 //Additional tracking code
 function seopress_google_analytics_other_tracking_option() {
 	$seopress_google_analytics_other_tracking_option = get_option("seopress_google_analytics_option_name");
@@ -539,8 +551,19 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 			$features .= '}';
 		}
 
-		$seopress_google_analytics_html .= "gtag('config', '".seopress_google_analytics_ua_option()."' ".$features.");";
+		//UA
+		$seopress_gtag_ua = "gtag('config', '".seopress_google_analytics_ua_option()."' ".$features.");";
+		$seopress_gtag_ua = apply_filters('seopress_gtag_ua', $seopress_gtag_ua);
+		$seopress_google_analytics_html .= $seopress_gtag_ua;
 		$seopress_google_analytics_html .= "\n";
+
+		//Ads
+		if (seopress_google_analytics_ads_option() !='') {
+			$seopress_gtag_ads = "gtag('config', '".seopress_google_analytics_ads_option()."');";
+			$seopress_gtag_ads = apply_filters('seopress_gtag_ads', $seopress_gtag_ads);
+			$seopress_google_analytics_html .= $seopress_gtag_ads;
+			$seopress_google_analytics_html .= "\n";
+		}
 
 		$events = '';
 		if (!empty($seopress_google_analytics_event)) {

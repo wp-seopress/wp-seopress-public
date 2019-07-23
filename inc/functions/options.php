@@ -307,12 +307,6 @@ if (seopress_get_toggle_advanced_option() =='1') {
 			}
 		}
 	}
-	add_action('init', 'seopress_load_advanced_admin_sw_options', 0); 
-	function seopress_load_advanced_admin_sw_options() {
-		if (is_admin()){
-		    require_once ( dirname( __FILE__ ) . '/options-advanced-admin-sw.php'); //Advanced (stop words)
-		}
-	}
 	//primary category
     if (!is_admin()){
 	    function seopress_titles_primary_cat_hook($cats_0,  $cats,  $post) {

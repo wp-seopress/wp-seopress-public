@@ -260,7 +260,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <li><?php _e('Canonical URL','wp-seopress'); ?></li>
                         <li><?php _e('Focus keywords','wp-seopress'); ?></li>
                     </ul>
-                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast datas.', 'wp-seopress' ); ?></p>
+                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast data.', 'wp-seopress' ); ?></p>
                     <button id="seopress-yoast-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                     <span class="spinner"></span>
                     <div class="log"></div>
@@ -277,7 +277,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <li><?php _e('Twitter image thumbnail','wp-seopress'); ?></li>
                         <li><?php _e('Meta Robots (noindex, nofollow)','wp-seopress'); ?></li>
                     </ul>
-                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO datas.', 'wp-seopress' ); ?></p>
+                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data.', 'wp-seopress' ); ?></p>
                     <button id="seopress-aio-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                     <span class="spinner"></span>
                     <div class="log"></div>
@@ -296,7 +296,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <li><?php _e('Canonical URL','wp-seopress'); ?></li>
                         <li><?php _e('Redirect URL','wp-seopress'); ?></li>
                     </ul>
-                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Framework datas.', 'wp-seopress' ); ?></p>
+                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Framework data.', 'wp-seopress' ); ?></p>
                     <button id="seopress-seo-framework-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                     <span class="spinner"></span>
                     <div class="log"></div>
@@ -315,7 +315,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <li><?php _e('Canonical URL','wp-seopress'); ?></li>
                         <li><?php _e('Focus keywords','wp-seopress'); ?></li>
                     </ul>
-                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Rank Math datas.', 'wp-seopress' ); ?></p>
+                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Rank Math data.', 'wp-seopress' ); ?></p>
                     <button id="seopress-rk-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                     <span class="spinner"></span>
                     <div class="log"></div>
@@ -752,7 +752,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 				<div class="seopress-wizard-next-step-description">
 					<p class="next-step-heading"><?php esc_html_e("Next step","wp-seopress"); ?></p>
 					<h3 class="next-step-description"><?php esc_html_e("Create your XML sitemaps","wp-seopress"); ?></h3>
-					<p class="next-step-extra-info"><?php esc_html_e("Build a custom XML sitemaps to improve Google crawling of your site.","wp-seopress"); ?></p>
+					<p class="next-step-extra-info"><?php esc_html_e("Build custom XML sitemaps to improve Google crawling of your site.","wp-seopress"); ?></p>
 				</div>
 				<div class="seopress-wizard-next-step-action">
 					<p class="seopress-setup-actions step">

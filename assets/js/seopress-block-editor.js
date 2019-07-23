@@ -9,7 +9,6 @@ let hasSaved = false;
         const isSaved = editor && editor.didPostSaveRequestSucceed();
 
         if ( ! hasSaved && isSaved ) {
-            
             jQuery.ajax({
                 method : 'GET',
                 url : seopressAjaxRealPreview.seopress_real_preview,

@@ -21,12 +21,11 @@ function seopress_admin_header() { ?>
                                 <?php } else { ?>
                                     <strong>
                                         <?php _e('PRO', 'wp-seopress'); ?>
-                                        <?php echo SEOPRESS_VERSION; ?>
                                     </strong>
                                 <?php } ?>
                             </span>
                         <?php } else { ?>
-                            <span class="seopress-info-version"><?php echo SEOPRESS_VERSION; ?></span>
+                            <span class="seopress-info-version"><?php _e('FREE', 'wp-seopress'); ?></span>
                         <?php } ?>
                         <div class="seopress-quick-access">
                             <ul>

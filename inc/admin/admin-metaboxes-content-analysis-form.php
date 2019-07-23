@@ -8,7 +8,10 @@ echo '<div class="wrap-seopress-analysis">
             <p>
                 <label for="seopress_analysis_target_kw_meta">'. __( 'Target keywords', 'wp-seopress' ) .'</label>
                 <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" aria-label="'.__('Target keywords','wp-seopress').'" value="'.$seopress_analysis_target_kw.'" />
-                <span class="howto">'.__('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them (eg: "my super keyword,another keyword,keyword")','wp-seopress').'</span>
+                <span class="sp-tooltip">
+                    <span class="dashicons dashicons-editor-help"></span>
+                    <span class="sp-tooltiptext">'.__('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them (eg: "my super keyword,another keyword,keyword")','wp-seopress').'</span>
+                </span>
             </p>';
             if (empty($seopress_analysis_data)) {
                 echo '<div id="seopress_launch_analysis" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Analyze my content','wp-seopress').'</div>';
@@ -21,10 +24,14 @@ echo '<div class="wrap-seopress-analysis">
 echo    '</div>';
 if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
     echo '<div class="col-right">
-            <label for="seopress_google_suggest_kw_meta">'. __( 'Google suggestions', 'wp-seopress' ) .'</label>
-            <input id="seopress_google_suggest_kw_meta" type="text" name="seopress_google_suggest_kw" placeholder="Get suggestions from Google" aria-label="Google suggestions" value="">
-            <span class="howto">'.__('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.','wp-seopress').'</span>
-            <br>
+            <p>
+                <label for="seopress_google_suggest_kw_meta">'. __( 'Google suggestions', 'wp-seopress' ) .'</label>
+                <input id="seopress_google_suggest_kw_meta" type="text" name="seopress_google_suggest_kw" placeholder="Get suggestions from Google" aria-label="Google suggestions" value="">
+                <span class="sp-tooltip">
+                    <span class="dashicons dashicons-editor-help"></span>
+                    <span class="sp-tooltiptext">'.__('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.','wp-seopress').'</span>
+                </span>
+            </p>
             <button id="seopress_get_suggestions" class="button">'.__('Get suggestions!','wp-seopress').'</button>
             ';
             echo "<ul id='seopress_suggestions'></ul>";

@@ -179,7 +179,7 @@ function seopress_display_seo_metaboxe() {
             wp_enqueue_script('jquery-ui-accordion');
 
             //Register Google Snippet Preview / Content Analysis JS
-            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
+            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.min.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
 
              //If Gutenberg ON
              if (function_exists('get_current_screen')) {
@@ -404,7 +404,7 @@ function seopress_display_ca_metaboxe() {
     }
 
     function seopress_content_analysis($post) {
-        wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
+        wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.min.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
         $seopress_real_preview = array(
             'seopress_nonce' => wp_create_nonce('seopress_real_preview_nonce'),
             'seopress_real_preview' => admin_url('admin-ajax.php'),

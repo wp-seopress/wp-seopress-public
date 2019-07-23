@@ -648,207 +648,243 @@ class seopress_options
         ?>
         <div class="seopress-option">
             <?php global $wp_version, $title;
+            $current_tab = '';
             $tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
             echo '<'.$tag.'><span class="dashicons dashicons-admin-settings"></span>'.$title.'</'.$tag.'>';
             ?>
-            <div class="metabox-holder">
-                <div class="postbox section-tool">
-                    <h3><span><?php _e( 'Export plugin settings', 'wp-seopress' ); ?></span></h3>
-                    <div class="inside">
-                        <p><?php _e( 'Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'wp-seopress' ); ?></p>
-                        <form method="post">
-                            <p><input type="hidden" name="seopress_action" value="export_settings" /></p>
-                            <p>
-                                <?php wp_nonce_field( 'seopress_export_nonce', 'seopress_export_nonce' ); ?>
-                                <?php submit_button( __( 'Export', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                            </p>
-                        </form>
-                    </div><!-- .inside -->
-                </div><!-- .postbox -->
+            <div id="seopress-tabs" class="wrap">
+                <?php 
+                    $plugin_settings_tabs = array(
+                        'tab_seopress_tool_settings' => __( "Settings", "wp-seopress" ), 
+                        'tab_seopress_tool_plugins' => __( "Plugins", "wp-seopress" ), 
+                        'tab_seopress_tool_redirects' => __( "Redirections", "wp-seopress" ),
+                        'tab_seopress_tool_reset' => __( "Reset", "wp-seopress" ),
+                    );
 
-                <div class="postbox section-tool">
-                    <h3><span><?php _e( 'Import plugin settings', 'wp-seopress' ); ?></span></h3>
-                    <div class="inside">
-                        <p><?php _e( 'Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'wp-seopress' ); ?></p>
-                        <form method="post" enctype="multipart/form-data">
-                            <p>
-                                <input type="file" name="import_file"/>
-                            </p>
-                            <p>
-                                <input type="hidden" name="seopress_action" value="import_settings" />
-                                <?php wp_nonce_field( 'seopress_import_nonce', 'seopress_import_nonce' ); ?>
-                                <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                                <?php if(!empty($_GET["success"]) && htmlspecialchars($_GET["success"]) =='true') {
-                                    echo '<div class="log">'.__('Import completed!','wp-seopress').'</div>';
-                                }; ?>
-                            </p>
-                        </form>
-                    </div><!-- .inside -->
-                </div><!-- .postbox -->
-
-                <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-                    <div id="section-import-redirects" class="postbox section-tool">
-                        <h3><span><?php _e( 'Import Redirections', 'wp-seopress' ); ?></span></h3>
+                    echo '<div class="nav-tab-wrapper">';
+                    foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
+                        echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-import-export#tab=' . $tab_key . '">' . $tab_caption . '</a>'; 
+                    }
+                    echo '</div>';
+                ?>
+                <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_settings') { echo 'active'; } ?>" id="tab_seopress_tool_settings">
+                    <div class="postbox section-tool">
                         <div class="inside">
-                            <p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 5 columns in this order: url to match (without your domain name), url to redirect in absolute, type of redirection (301, 302 or 307), yes to enable the redirect and the last one the query parameter ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and passed them to the redirection). Leave it empty to disable the redirect.', 'wp-seopress' ); ?></p>
-                            <p>
-                                <a href="https://www.seopress.org/wp-content/uploads/csv/seopress-redirections-example.csv" target="_blank">
-                                    <?php _e('Download a CSV example','wp-seopress'); ?>
-                                </a>
-                            </p>
-                            <form method="post" enctype="multipart/form-data">
-                                <p>
-                                    <input type="file" name="import_file"/>
-                                </p>
-                                <p>
-                                    <input type="hidden" name="seopress_action" value="import_redirections_settings" />
-                                    <?php wp_nonce_field( 'seopress_import_redirections_nonce', 'seopress_import_redirections_nonce' ); ?>
-                                    <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                                </p>
-                            </form>
-                        </div><!-- .inside -->
-                    </div><!-- .postbox -->
-                    <div id="section-import-redirects-plugin" class="postbox section-tool">
-                        <h3><span><?php _e( 'Import Redirections from Redirections plugin', 'wp-seopress' ); ?></span></h3>
-                        <div class="inside">
-                            <p><?php _e( 'Import your own redirections from a .json file generated by the Redirections plugin. Note that we do not support certain options like regex. Make sure you don\'t have duplicates between your file and existing redirects to avoid conflicts.', 'wp-seopress' ); ?></p>
-                            <form method="post" enctype="multipart/form-data">
-                                <p>
-                                    <input type="file" name="import_file"/>
-                                </p>
-                                <p>
-                                    <input type="hidden" name="seopress_action" value="import_redirections_plugin_settings" />
-                                    <?php wp_nonce_field( 'seopress_import_redirections_plugin_nonce', 'seopress_import_redirections_plugin_nonce' ); ?>
-                                    <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                                </p>
-                            </form>
-                        </div><!-- .inside -->
-                    </div><!-- .postbox -->
-                    <div id="section-export-redirects" class="postbox section-tool">
-                        <h3><span><?php _e( 'Export Redirections', 'wp-seopress' ); ?></span></h3>
-                        <div class="inside">
-                            <p><?php _e( 'Export all redirections for this site as a .csv file. This allows you to easily import the redirections into another site, to Excel / Google Sheets...', 'wp-seopress' ); ?></p>
+                            <h3><span><?php _e( 'Export plugin settings', 'wp-seopress' ); ?></span></h3>
+                            <p><?php _e( 'Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'wp-seopress' ); ?></p>
                             <form method="post">
-                                <p><input type="hidden" name="seopress_action" value="export_redirections" /></p>
+                                <p><input type="hidden" name="seopress_action" value="export_settings" /></p>
                                 <p>
-                                    <?php wp_nonce_field( 'seopress_export_redirections_nonce', 'seopress_export_redirections_nonce' ); ?>
+                                    <?php wp_nonce_field( 'seopress_export_nonce', 'seopress_export_nonce' ); ?>
                                     <?php submit_button( __( 'Export', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
                                 </p>
                             </form>
                         </div><!-- .inside -->
                     </div><!-- .postbox -->
-                <?php } ?>
 
-                <!-- Yoast import tool --> 
-                <div id="yoast-migration-tool" class="postbox section-tool">
-                    <h3><span><?php _e( 'Import posts and terms metadata from Yoast', 'wp-seopress' ); ?></span></h3>
-                    <div class="inside">
-                        <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
-                        <ul>
-                            <li><?php _e('Title tags','wp-seopress'); ?></li>
-                            <li><?php _e('Meta description','wp-seopress'); ?></li>
-                            <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
-                            <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
-                            <li><?php _e('Meta Robots (noindex, nofollow...)','wp-seopress'); ?></li>
-                            <li><?php _e('Canonical URL','wp-seopress'); ?></li>
-                            <li><?php _e('Focus keywords','wp-seopress'); ?></li>
-                        </ul>
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast datas.', 'wp-seopress' ); ?></p>
-                        <button id="seopress-yoast-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
-                        <span class="spinner"></span>
-                        <div class="log"></div>
-                    </div><!-- .inside -->
-                </div><!-- .postbox -->                
+                    <div class="postbox section-tool">
+                        <div class="inside">
+                            <h3><span><?php _e( 'Import plugin settings', 'wp-seopress' ); ?></span></h3>
+                            <p><?php _e( 'Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'wp-seopress' ); ?></p>
+                            <form method="post" enctype="multipart/form-data">
+                                <p>
+                                    <input type="file" name="import_file"/>
+                                </p>
+                                <p>
+                                    <input type="hidden" name="seopress_action" value="import_settings" />
+                                    <?php wp_nonce_field( 'seopress_import_nonce', 'seopress_import_nonce' ); ?>
+                                    <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                    <?php if(!empty($_GET["success"]) && htmlspecialchars($_GET["success"]) =='true') {
+                                        echo '<div class="log">'.__('Import completed!','wp-seopress').'</div>';
+                                    }; ?>
+                                </p>
+                            </form>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->
+                </div>
+                <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_plugins') { echo 'active'; } ?>" id="tab_seopress_tool_plugins">
+                    <!-- Yoast import tool --> 
+                    <div id="yoast-migration-tool" class="postbox section-tool">
+                        <div class="inside">
+                            <h3><span><?php _e( 'Import posts and terms metadata from Yoast', 'wp-seopress' ); ?></span></h3>
+                            <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+                            <ul>
+                                <li><?php _e('Title tags','wp-seopress'); ?></li>
+                                <li><?php _e('Meta description','wp-seopress'); ?></li>
+                                <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                                <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                                <li><?php _e('Meta Robots (noindex, nofollow...)','wp-seopress'); ?></li>
+                                <li><?php _e('Canonical URL','wp-seopress'); ?></li>
+                                <li><?php _e('Focus keywords','wp-seopress'); ?></li>
+                            </ul>
+                            <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast data.', 'wp-seopress' ); ?></p>
+                            <button id="seopress-yoast-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <span class="spinner"></span>
+                            <div class="log"></div>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->                
 
-                <!-- All In One import tool --> 
-                <div id="aio-migration-tool" class="postbox section-tool">
-                    <h3><span><?php _e( 'Import posts and terms metadata from All In One SEO', 'wp-seopress' ); ?></span></h3>
-                    <div class="inside">
-                        <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
-                        <ul>
-                            <li><?php _e('Title tags','wp-seopress'); ?></li>
-                            <li><?php _e('Meta description','wp-seopress'); ?></li>
-                            <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
-                            <li><?php _e('Twitter image thumbnail','wp-seopress'); ?></li>
-                            <li><?php _e('Meta Robots (noindex, nofollow)','wp-seopress'); ?></li>
-                        </ul>
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO datas.', 'wp-seopress' ); ?></p>
-                        <button id="seopress-aio-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
-                        <span class="spinner"></span>
-                        <div class="log"></div>
-                    </div><!-- .inside -->
-                </div><!-- .postbox -->
+                    <!-- All In One import tool --> 
+                    <div id="aio-migration-tool" class="postbox section-tool">
+                        <div class="inside">
+                            <h3><span><?php _e( 'Import posts and terms metadata from All In One SEO', 'wp-seopress' ); ?></span></h3>
+                            <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+                            <ul>
+                                <li><?php _e('Title tags','wp-seopress'); ?></li>
+                                <li><?php _e('Meta description','wp-seopress'); ?></li>
+                                <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                                <li><?php _e('Twitter image thumbnail','wp-seopress'); ?></li>
+                                <li><?php _e('Meta Robots (noindex, nofollow)','wp-seopress'); ?></li>
+                            </ul>
+                            <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data.', 'wp-seopress' ); ?></p>
+                            <button id="seopress-aio-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <span class="spinner"></span>
+                            <div class="log"></div>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->
 
-                <!-- SEO Framework import tool --> 
-                <div id="seo-framework-migration-tool" class="postbox section-tool">
-                    <h3><span><?php _e( 'Import posts and terms metadata from The SEO Framework', 'wp-seopress' ); ?></span></h3>
-                    <div class="inside">
-                        <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
-                        <ul>
-                            <li><?php _e('Title tags','wp-seopress'); ?></li>
-                            <li><?php _e('Meta description','wp-seopress'); ?></li>
-                            <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
-                            <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
-                            <li><?php _e('Meta Robots (noindex, nofollow, noarchive)','wp-seopress'); ?></li>
-                            <li><?php _e('Canonical URL','wp-seopress'); ?></li>
-                            <li><?php _e('Redirect URL','wp-seopress'); ?></li>
-                        </ul>
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Framework datas.', 'wp-seopress' ); ?></p>
-                        <button id="seopress-seo-framework-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
-                        <span class="spinner"></span>
-                        <div class="log"></div>
-                    </div><!-- .inside -->
-                </div><!-- .postbox -->
+                    <!-- SEO Framework import tool --> 
+                    <div id="seo-framework-migration-tool" class="postbox section-tool">
+                        <div class="inside">
+                            <h3><span><?php _e( 'Import posts and terms metadata from The SEO Framework', 'wp-seopress' ); ?></span></h3>
+                            <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+                            <ul>
+                                <li><?php _e('Title tags','wp-seopress'); ?></li>
+                                <li><?php _e('Meta description','wp-seopress'); ?></li>
+                                <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                                <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                                <li><?php _e('Meta Robots (noindex, nofollow, noarchive)','wp-seopress'); ?></li>
+                                <li><?php _e('Canonical URL','wp-seopress'); ?></li>
+                                <li><?php _e('Redirect URL','wp-seopress'); ?></li>
+                            </ul>
+                            <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Framework data.', 'wp-seopress' ); ?></p>
+                            <button id="seopress-seo-framework-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <span class="spinner"></span>
+                            <div class="log"></div>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->
 
-                <!-- RK import tool --> 
-                <div id="rk-migration-tool" class="postbox section-tool">
-                    <h3><span><?php _e( 'Import posts and terms metadata from Rank Math', 'wp-seopress' ); ?></span></h3>
-                    <div class="inside">
-                        <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
-                        <ul>
-                            <li><?php _e('Title tags','wp-seopress'); ?></li>
-                            <li><?php _e('Meta description','wp-seopress'); ?></li>
-                            <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
-                            <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
-                            <li><?php _e('Meta Robots (noindex, nofollow, noarchive, noimageindex)','wp-seopress'); ?></li>
-                            <li><?php _e('Canonical URL','wp-seopress'); ?></li>
-                            <li><?php _e('Focus keywords','wp-seopress'); ?></li>
-                        </ul>
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Rank Math datas.', 'wp-seopress' ); ?></p>
-                        <button id="seopress-rk-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
-                        <span class="spinner"></span>
-                        <div class="log"></div>
-                    </div><!-- .inside -->
-                </div><!-- .postbox -->
+                    <!-- RK import tool --> 
+                    <div id="rk-migration-tool" class="postbox section-tool">
+                        <div class="inside">
+                            <h3><span><?php _e( 'Import posts and terms metadata from Rank Math', 'wp-seopress' ); ?></span></h3>
+                            <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+                            <ul>
+                                <li><?php _e('Title tags','wp-seopress'); ?></li>
+                                <li><?php _e('Meta description','wp-seopress'); ?></li>
+                                <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                                <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+                                <li><?php _e('Meta Robots (noindex, nofollow, noarchive, noimageindex)','wp-seopress'); ?></li>
+                                <li><?php _e('Canonical URL','wp-seopress'); ?></li>
+                                <li><?php _e('Focus keywords','wp-seopress'); ?></li>
+                            </ul>
+                            <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Rank Math data.', 'wp-seopress' ); ?></p>
+                            <button id="seopress-rk-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <span class="spinner"></span>
+                            <div class="log"></div>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->
+                </div>
+                <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_redirects') { echo 'active'; } ?>" id="tab_seopress_tool_redirects">
+                    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                        <div id="section-import-redirects" class="postbox section-tool">
+                            <div class="inside">
+                                <h3><span><?php _e( 'Import Redirections', 'wp-seopress' ); ?></span></h3>
+                                <p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 5 columns in this order: <ul><li>url to match (without your domain name), </li><li>url to redirect in absolute, </li><li>type of redirection (301, 302 or 307), </li><li>yes to enable the redirect (leave it empty to disable the redirect) </li><li>and the last one the query parameter ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection).</li></ul>', 'wp-seopress' ); ?></p>
+                                <p>
+                                    <a href="https://www.seopress.org/wp-content/uploads/csv/seopress-redirections-example.csv" target="_blank">
+                                        <?php _e('Download a CSV example','wp-seopress'); ?>
+                                    </a>
+                                </p>
+                                <form method="post" enctype="multipart/form-data">
+                                    <p>
+                                        <input type="file" name="import_file"/>
+                                    </p>
+                                    <p>
+                                        <input type="hidden" name="seopress_action" value="import_redirections_settings" />
+                                        <?php wp_nonce_field( 'seopress_import_redirections_nonce', 'seopress_import_redirections_nonce' ); ?>
+                                        <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                    </p>
+                                </form>
+                            </div><!-- .inside -->
+                        </div><!-- .postbox -->
+                        <div id="section-import-redirects-plugin" class="postbox section-tool">
+                            <div class="inside">
+                                <h3><span><?php _e( 'Import Redirections from Redirections plugin', 'wp-seopress' ); ?></span></h3>
+                                <p><?php _e( 'Import your own redirections from a .json file generated by the Redirections plugin. Note that we do not support certain options like regex. Make sure you don\'t have duplicates between your file and existing redirects to avoid conflicts.', 'wp-seopress' ); ?></p>
+                                <form method="post" enctype="multipart/form-data">
+                                    <p>
+                                        <input type="file" name="import_file"/>
+                                    </p>
+                                    <p>
+                                        <input type="hidden" name="seopress_action" value="import_redirections_plugin_settings" />
+                                        <?php wp_nonce_field( 'seopress_import_redirections_plugin_nonce', 'seopress_import_redirections_plugin_nonce' ); ?>
+                                        <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                    </p>
+                                </form>
+                            </div><!-- .inside -->
+                        </div><!-- .postbox -->
+                        <div id="section-import-yoast-redirects" class="postbox section-tool">
+                            <div class="inside">
+                                <h3><span><?php _e( 'Import Redirections from Yoast Premium', 'wp-seopress' ); ?></span></h3>
+                                <p><?php _e( 'Import your own redirections from a .csv file generated by Yoast Premium. Note that we do not support certain options like regex. Make sure you don\'t have duplicates between your file and existing redirects to avoid conflicts.', 'wp-seopress' ); ?></p>
+                                <form method="post" enctype="multipart/form-data">
+                                    <p>
+                                        <input type="file" name="import_file"/>
+                                    </p>
+                                    <p>
+                                        <input type="hidden" name="seopress_action" value="import_yoast_redirections" />
+                                        <?php wp_nonce_field( 'seopress_import_yoast_redirections_nonce', 'seopress_import_yoast_redirections_nonce' ); ?>
+                                        <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                    </p>
+                                </form>
+                            </div><!-- .inside -->
+                        </div><!-- .postbox -->
+                        <div id="section-export-redirects" class="postbox section-tool">
+                            <div class="inside">
+                                <h3><span><?php _e( 'Export Redirections', 'wp-seopress' ); ?></span></h3>
+                                <p><?php _e( 'Export all redirections for this site as a .csv file. This allows you to easily import the redirections into another site, to Excel / Google Sheets...', 'wp-seopress' ); ?></p>
+                                <form method="post">
+                                    <p><input type="hidden" name="seopress_action" value="export_redirections" /></p>
+                                    <p>
+                                        <?php wp_nonce_field( 'seopress_export_redirections_nonce', 'seopress_export_redirections_nonce' ); ?>
+                                        <?php submit_button( __( 'Export', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                    </p>
+                                </form>
+                            </div><!-- .inside -->
+                        </div><!-- .postbox -->
+                    <?php } ?>
+                </div>
+                <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_reset') { echo 'active'; } ?>" id="tab_seopress_tool_reset">
+                    <div class="postbox section-tool">
+                        <div class="inside">
+                            <h3><span><?php _e( 'Reset All Notices From Notifications Center', 'wp-seopress' ); ?></span></h3>
+                            <p><?php _e( 'By clicking Reset Notices, all notices in the notifications center will be set to their initial status.', 'wp-seopress' ); ?></p>
+                             <form method="post" enctype="multipart/form-data">
+                                <p>
+                                    <input type="hidden" name="seopress_action" value="reset_notices_settings" />
+                                    <?php wp_nonce_field( 'seopress_reset_notices_nonce', 'seopress_reset_notices_nonce' ); ?>
+                                    <?php submit_button( __( 'Reset notices', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                </p>
+                            </form>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->
 
-                <div class="postbox section-tool">
-                    <h3><span><?php _e( 'Reset All Notices From Notifications Center', 'wp-seopress' ); ?></span></h3>
-                    <div class="inside">
-                        <p><?php _e( 'By clicking Reset Notices, all notices in the notifications center will be set to their initial status.', 'wp-seopress' ); ?></p>
-                         <form method="post" enctype="multipart/form-data">
-                            <p>
-                                <input type="hidden" name="seopress_action" value="reset_notices_settings" />
-                                <?php wp_nonce_field( 'seopress_reset_notices_nonce', 'seopress_reset_notices_nonce' ); ?>
-                                <?php submit_button( __( 'Reset notices', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                            </p>
-                        </form>
-                    </div><!-- .inside -->
-                </div><!-- .postbox -->
-
-                <div class="postbox section-tool">
-                    <h3><span><?php _e( 'Reset All Settings', 'wp-seopress' ); ?></span></h3>
-                    <div class="inside">
-                        <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Delete all options related to SEOPress in your database AND set settings to their default values.', 'wp-seopress' ); ?></p>
-                         <form method="post" enctype="multipart/form-data">
-                            <p>
-                                <input type="hidden" name="seopress_action" value="reset_settings" />
-                                <?php wp_nonce_field( 'seopress_reset_nonce', 'seopress_reset_nonce' ); ?>
-                                <?php submit_button( __( 'Reset settings', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                            </p>
-                        </form>
-                    </div><!-- .inside -->
-                </div><!-- .postbox -->
-            </div><!-- .metabox-holder -->
+                    <div class="postbox section-tool">
+                        <div class="inside">
+                            <h3><span><?php _e( 'Reset All Settings', 'wp-seopress' ); ?></span></h3>
+                            <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Delete all options related to SEOPress in your database AND set settings to their default values.', 'wp-seopress' ); ?></p>
+                             <form method="post" enctype="multipart/form-data">
+                                <p>
+                                    <input type="hidden" name="seopress_action" value="reset_settings" />
+                                    <?php wp_nonce_field( 'seopress_reset_nonce', 'seopress_reset_nonce' ); ?>
+                                    <?php submit_button( __( 'Reset settings', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                </p>
+                            </form>
+                        </div><!-- .inside -->
+                    </div><!-- .postbox -->
+                </div>
+            </div>
         </div>
     <?php
     }
@@ -901,518 +937,522 @@ class seopress_options
                         }
                     }
                 ?>     
-        
-                <div id="seopress-admin-tabs" class="wrap">
-                    <?php 
-                        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                            $dashboard_settings_tabs = array(
-                                'tab_seopress_notifications' => __( "Notifications Center", "wp-seopress" ),
-                                'tab_seopress_seo_tools' => __( "SEO Tools", "wp-seopress" ),
-                                'tab_seopress_links' => __( "Useful links", "wp-seopress" )
-                            );
-                        } else {
-                            $dashboard_settings_tabs = array(
-                                'tab_seopress_notifications' => __( "Notifications Center", "wp-seopress" ),
-                                'tab_seopress_links' => __( "Useful links", "wp-seopress" )
-                            );
-                        }
-
-                        if (seopress_advanced_appearance_notifications_option() !='') {
-                            unset($dashboard_settings_tabs['tab_seopress_notifications']);
-                        }
-                        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                            if (seopress_advanced_appearance_seo_tools_option() !='') {
-                                unset($dashboard_settings_tabs['tab_seopress_seo_tools']);
+                
+                <?php if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+                    //do nothing
+                } else { ?>
+                    <div id="seopress-admin-tabs" class="wrap">
+                        <?php 
+                            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                                $dashboard_settings_tabs = array(
+                                    'tab_seopress_notifications' => __( "Notifications Center", "wp-seopress" ),
+                                    'tab_seopress_seo_tools' => __( "SEO Tools", "wp-seopress" ),
+                                    'tab_seopress_links' => __( "Useful links", "wp-seopress" )
+                                );
+                            } else {
+                                $dashboard_settings_tabs = array(
+                                    'tab_seopress_notifications' => __( "Notifications Center", "wp-seopress" ),
+                                    'tab_seopress_links' => __( "Useful links", "wp-seopress" )
+                                );
                             }
-                        }
-                        if (seopress_advanced_appearance_useful_links_option() !='') {
-                            unset($dashboard_settings_tabs['tab_seopress_links']);
-                        }
-                        
-                        echo '<div class="nav-tab-wrapper">';
-                        foreach ( $dashboard_settings_tabs as $tab_key => $tab_caption ) {
-                            echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-option#tab=' . $tab_key . '">' . $tab_caption . '</a>';
-                        }
-                        echo '</div>';
-                    ?>
 
-                    <div class="wrap-seopress-tab-content">
-                        <?php if(seopress_advanced_appearance_notifications_option() !='1') { ?>
-                            <div id="tab_seopress_notifications" class="seopress-tab <?php if ($current_tab == 'tab_seopress_notifications') { echo 'active'; } ?>">
-                                <div id="seopress-notifications-center">
-                                    <?php 
-                                        function seopress_get_hidden_notices_wizard_option() {
-                                            $seopress_get_hidden_notices_wizard_option = get_option("seopress_notices");
-                                            if ( ! empty ( $seopress_get_hidden_notices_wizard_option ) ) {
-                                                foreach ($seopress_get_hidden_notices_wizard_option as $key => $seopress_get_hidden_notices_wizard_value)
-                                                    $options[$key] = $seopress_get_hidden_notices_wizard_value;
-                                                    if (isset($seopress_get_hidden_notices_wizard_option['notice-wizard'])) {
-                                                        return $seopress_get_hidden_notices_wizard_option['notice-wizard'];
-                                                    }
-                                            }
-                                        }
-                                        if(seopress_get_hidden_notices_wizard_option() =='1') {
-                                            //do nothing
-                                        } else { ?>
-                                            <div id="notice-wizard-alert" class="seopress-alert deleteable">
-                                                <p>
-                                                    <span class="dashicons dashicons-warning"></span>
-                                                    <strong><?php _e('Configure SEOPress in a few minutes thanks to our installation wizard','wp-seopress'); ?></strong>
-                                                </p>
-                                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-setup' ); ?>"><?php _e('Start the wizard','wp-seopress'); ?></a>
-                                                <span name="notice-wizard" id="notice-wizard" class="dashicons dashicons-trash remove-notice" data-notice="notice-wizard"></span>
-                                            </div>
-                                        <?php }
-                                    ?>
-                                    <?php if (get_theme_support('title-tag') !='1') {
-                                        function seopress_get_hidden_notices_title_tag_option() {
-                                            $seopress_get_hidden_notices_title_tag_option = get_option("seopress_notices");
-                                            if ( !empty ( $seopress_get_hidden_notices_title_tag_option ) ) {
-                                                foreach ($seopress_get_hidden_notices_title_tag_option as $key => $seopress_get_hidden_notices_title_tag_value)
-                                                    $options[$key] = $seopress_get_hidden_notices_title_tag_value;
-                                                 if (isset($seopress_get_hidden_notices_title_tag_option['notice-title-tag'])) { 
-                                                    return $seopress_get_hidden_notices_title_tag_option['notice-title-tag'];
-                                                 }
-                                            }
-                                        }
-                                        if(seopress_get_hidden_notices_title_tag_option() =='1') { 
-                                            //do nothing
-                                        } else { ?>
-                                            <div id="notice-title-tag-alert" class="seopress-alert deleteable">
-                                                <p>
-                                                    <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('Your theme doesn\'t use <strong>add_theme_support(\'title-tag\');</strong>','wp-seopress'); ?>
-                                                    <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
-                                                    
-                                                </p>
+                            if (seopress_advanced_appearance_notifications_option() !='') {
+                                unset($dashboard_settings_tabs['tab_seopress_notifications']);
+                            }
+                            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                                if (seopress_advanced_appearance_seo_tools_option() !='') {
+                                    unset($dashboard_settings_tabs['tab_seopress_seo_tools']);
+                                }
+                            }
+                            if (seopress_advanced_appearance_useful_links_option() !='') {
+                                unset($dashboard_settings_tabs['tab_seopress_links']);
+                            }
+                            
+                            echo '<div class="nav-tab-wrapper">';
+                            foreach ( $dashboard_settings_tabs as $tab_key => $tab_caption ) {
+                                echo '<a id="'. $tab_key .'-tab" class="nav-tab" href="?page=seopress-option#tab=' . $tab_key . '">' . $tab_caption . '</a>';
+                            }
+                            echo '</div>';
+                        ?>
 
-                                                <?php
-                                                if (function_exists('seopress_get_locale')) {
-                                                    if (seopress_get_locale() =='fr') {
-                                                        $seopress_docs_link['support']['title-tag'] = 'https://www.seopress.org/fr/support/guides/resoudre-add_theme_support-manquant-dans-votre-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                                                    } else {
-                                                        $seopress_docs_link['support']['title-tag'] = 'https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-                                                    }
-                                                } ?>
-                                                <?php echo '<a class="button-primary" href="'.$seopress_docs_link['support']['title-tag'].'" target="_blank">'.__('Learn more','wp-seopress').'</a>'; ?>
-                                                <span name="notice-title-tag" id="notice-title-tag" class="dashicons dashicons-trash remove-notice" data-notice="notice-title-tag"></span>
-                                            </div>
-                                        <?php }
-                                    } ?>
-                                    <?php if (is_plugin_active('wordpress-seo/wp-seo.php') || is_plugin_active('wordpress-seo-premium/wp-seo-premium.php')) { ?>
-                                        <div class="seopress-alert">
-                                            <p>
-                                                <span class="dashicons dashicons-warning"></span>
-                                                <?php _e('We notice that you use <strong>Yoast SEO</strong> plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
-                                            </p>
-                                            <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export#yoast-migration-tool' ); ?>"><?php _e('Migrate!','wp-seopress'); ?></a>
-                                        </div>
-                                    <?php } ?>
-                                    <?php if (is_plugin_active('all-in-one-seo-pack/all_in_one_seo_pack.php')) { ?>
-                                        <div class="seopress-alert">
-                                            <p>
-                                                <span class="dashicons dashicons-warning"></span>
-                                                <?php _e('We notice that you use <strong>All In One SEO Pack</strong> plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
-                                            </p>
-                                            <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export#aio-migration-tool' ); ?>"><?php _e('Migrate!','wp-seopress'); ?></a>
-                                        </div>
-                                    <?php } ?>
-                                    <?php if (is_plugin_active('seo-ultimate/seo-ultimate.php') || is_plugin_active('autodescription/autodescription.php') || is_plugin_active('squirrly-seo/squirrly.php') || is_plugin_active('premium-seo-pack/index.php') || is_plugin_active('wp-meta-seo/wp-meta-seo.php')) { ?>
-                                        <div class="seopress-alert">
-                                            <p>
-                                                <span class="dashicons dashicons-warning"></span>
-                                                <?php _e('We notice that you use another SEO plugin. <br>Do not use multiple SEO plugins at once to avoid conflicts!','wp-seopress'); ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
-                                    <?php
-                                    if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                                        if (seopress_404_cleaning_option() == 1 && !wp_next_scheduled('seopress_404_cron_cleaning')) { ?>
+                        <div class="wrap-seopress-tab-content">
+                            <?php if(seopress_advanced_appearance_notifications_option() !='1') { ?>
+                                <div id="tab_seopress_notifications" class="seopress-tab <?php if ($current_tab == 'tab_seopress_notifications') { echo 'active'; } ?>">
+                                    <div id="seopress-notifications-center">
+                                        <?php 
+                                            function seopress_get_hidden_notices_wizard_option() {
+                                                $seopress_get_hidden_notices_wizard_option = get_option("seopress_notices");
+                                                if ( ! empty ( $seopress_get_hidden_notices_wizard_option ) ) {
+                                                    foreach ($seopress_get_hidden_notices_wizard_option as $key => $seopress_get_hidden_notices_wizard_value)
+                                                        $options[$key] = $seopress_get_hidden_notices_wizard_value;
+                                                        if (isset($seopress_get_hidden_notices_wizard_option['notice-wizard'])) {
+                                                            return $seopress_get_hidden_notices_wizard_option['notice-wizard'];
+                                                        }
+                                                }
+                                            }
+                                            if(seopress_get_hidden_notices_wizard_option() =='1') {
+                                                //do nothing
+                                            } else { ?>
+                                                <div id="notice-wizard-alert" class="seopress-alert deleteable">
+                                                    <p>
+                                                        <span class="dashicons dashicons-warning"></span>
+                                                        <strong><?php _e('Configure SEOPress in a few minutes thanks to our installation wizard','wp-seopress'); ?></strong>
+                                                    </p>
+                                                    <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-setup' ); ?>"><?php _e('Start the wizard','wp-seopress'); ?></a>
+                                                    <span name="notice-wizard" id="notice-wizard" class="dashicons dashicons-trash remove-notice" data-notice="notice-wizard"></span>
+                                                </div>
+                                            <?php }
+                                        ?>
+                                        <?php if (get_theme_support('title-tag') !='1') {
+                                            function seopress_get_hidden_notices_title_tag_option() {
+                                                $seopress_get_hidden_notices_title_tag_option = get_option("seopress_notices");
+                                                if ( !empty ( $seopress_get_hidden_notices_title_tag_option ) ) {
+                                                    foreach ($seopress_get_hidden_notices_title_tag_option as $key => $seopress_get_hidden_notices_title_tag_value)
+                                                        $options[$key] = $seopress_get_hidden_notices_title_tag_value;
+                                                     if (isset($seopress_get_hidden_notices_title_tag_option['notice-title-tag'])) { 
+                                                        return $seopress_get_hidden_notices_title_tag_option['notice-title-tag'];
+                                                     }
+                                                }
+                                            }
+                                            if(seopress_get_hidden_notices_title_tag_option() =='1') { 
+                                                //do nothing
+                                            } else { ?>
+                                                <div id="notice-title-tag-alert" class="seopress-alert deleteable">
+                                                    <p>
+                                                        <span class="dashicons dashicons-warning"></span>
+                                                        <?php _e('Your theme doesn\'t use <strong>add_theme_support(\'title-tag\');</strong>','wp-seopress'); ?>
+                                                        <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
+                                                        
+                                                    </p>
+
+                                                    <?php
+                                                    if (function_exists('seopress_get_locale')) {
+                                                        if (seopress_get_locale() =='fr') {
+                                                            $seopress_docs_link['support']['title-tag'] = 'https://www.seopress.org/fr/support/guides/resoudre-add_theme_support-manquant-dans-votre-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                                        } else {
+                                                            $seopress_docs_link['support']['title-tag'] = 'https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                                        }
+                                                    } ?>
+                                                    <?php echo '<a class="button-primary" href="'.$seopress_docs_link['support']['title-tag'].'" target="_blank">'.__('Learn more','wp-seopress').'</a>'; ?>
+                                                    <span name="notice-title-tag" id="notice-title-tag" class="dashicons dashicons-trash remove-notice" data-notice="notice-title-tag"></span>
+                                                </div>
+                                            <?php }
+                                        } ?>
+                                        <?php if (is_plugin_active('wordpress-seo/wp-seo.php') || is_plugin_active('wordpress-seo-premium/wp-seo-premium.php')) { ?>
                                             <div class="seopress-alert">
                                                 <p>
                                                     <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('You have enabled 404 cleaning BUT the scheduled task is not running. <br>To solve this, please disable and enable SEOPress PRO.','wp-seopress'); ?>
+                                                    <?php _e('We notice that you use <strong>Yoast SEO</strong> plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
                                                 </p>
+                                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export#yoast-migration-tool' ); ?>"><?php _e('Migrate!','wp-seopress'); ?></a>
                                             </div>
-                                        <?php } 
-                                    } ?>
-                                    <?php if (!is_ssl()) { ?>
-                                        <?php
-                                        function seopress_get_hidden_notices_ssl_option() {
-                                            $seopress_get_hidden_notices_ssl_option = get_option("seopress_notices");
-                                            if ( ! empty ( $seopress_get_hidden_notices_ssl_option ) ) {
-                                                foreach ($seopress_get_hidden_notices_ssl_option as $key => $seopress_get_hidden_notices_ssl_value)
-                                                    $options[$key] = $seopress_get_hidden_notices_ssl_value;
-                                                 if (isset($seopress_get_hidden_notices_ssl_option['notice-ssl'])) { 
-                                                    return $seopress_get_hidden_notices_ssl_option['notice-ssl'];
-                                                 }
-                                            }
-                                        }
-                                        if(seopress_get_hidden_notices_ssl_option() =='1') { 
-                                            //do nothing
-                                        } else { ?>
-                                            <div id="notice-ssl-alert" class="seopress-alert deleteable">
+                                        <?php } ?>
+                                        <?php if (is_plugin_active('all-in-one-seo-pack/all_in_one_seo_pack.php')) { ?>
+                                            <div class="seopress-alert">
                                                 <p>
                                                     <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('Your site doesn\'t use an SSL certificate!','wp-seopress'); ?> 
-                                                    <a href="https://webmasters.googleblog.com/2014/08/https-as-ranking-signal.html" target="_blank"><?php _e('Learn more','wp-seopress'); ?></a>
-                                                    <span class="impact low"><?php _e('Low impact','wp-seopress'); ?></span>
+                                                    <?php _e('We notice that you use <strong>All In One SEO Pack</strong> plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
                                                 </p>
-                                                <a class="button-primary" href="https://www.namecheap.com/?aff=105841" target="_blank"><?php _e('Buy an SSL!','wp-seopress'); ?></a>
-                                                <span name="notice-ssl" id="notice-ssl" class="dashicons dashicons-trash remove-notice" data-notice="notice-ssl"></span>
+                                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export#aio-migration-tool' ); ?>"><?php _e('Migrate!','wp-seopress'); ?></a>
                                             </div>
-                                        <?php }
-                                    ?>
-                                    <?php } ?>
-                                    <?php if (get_option('blog_public') !='1') { ?>
-                                        <div class="seopress-alert">
-                                            <p>
-                                                <span class="dashicons dashicons-warning"></span>
-                                                <?php _e('Your site is not visible to Search Engines!','wp-seopress'); ?>
-                                                <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
-                                            </p>
-                                            <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                                        </div>
-                                    <?php } ?>
-                                    <?php if (get_option('blogname') =='') { ?>
-                                        <div class="seopress-alert">
-                                            <p>
-                                                <span class="dashicons dashicons-warning"></span>
-                                                <?php _e('Your site title is empty!','wp-seopress'); ?>
-                                                <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
-                                            </p>
-                                            <a class="button-primary" href="<?php echo admin_url( 'options-general.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                                        </div>
-                                    <?php } ?>
-                                    <?php if (get_option('permalink_structure') =='') { ?>
-                                        <div class="seopress-alert">
-                                            <p>
-                                                <span class="dashicons dashicons-warning"></span>
-                                                <?php _e('Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this.','wp-seopress'); ?>
-                                                <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
-                                            </p>
-                                            <a class="button-primary" href="<?php echo admin_url( 'options-permalink.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                                        </div>
-                                    <?php } ?>
-                                    <?php 
-                                        if(get_option('rss_use_excerpt') =='0') {
-                                            function seopress_get_hidden_notices_rss_use_excerpt_option() {
-                                                $seopress_get_hidden_notices_rss_use_excerpt_option = get_option("seopress_notices");
-                                                if ( ! empty ( $seopress_get_hidden_notices_rss_use_excerpt_option ) ) {
-                                                    foreach ($seopress_get_hidden_notices_rss_use_excerpt_option as $key => $seopress_get_hidden_notices_rss_use_excerpt_value)
-                                                        $options[$key] = $seopress_get_hidden_notices_rss_use_excerpt_value;
-                                                        if (isset($seopress_get_hidden_notices_rss_use_excerpt_option['notice-rss-use-excerpt'])) {
-                                                            return $seopress_get_hidden_notices_rss_use_excerpt_option['notice-rss-use-excerpt'];
-                                                        }
-                                                }
-                                            }
-                                            if(seopress_get_hidden_notices_rss_use_excerpt_option() =='1') {
-                                                //do nothing
-                                            } else { ?>
-                                                <div id="notice-rss-use-excerpt-alert" class="seopress-alert deleteable">
+                                        <?php } ?>
+                                        <?php if (is_plugin_active('seo-ultimate/seo-ultimate.php') || is_plugin_active('autodescription/autodescription.php') || is_plugin_active('squirrly-seo/squirrly.php') || is_plugin_active('premium-seo-pack/index.php') || is_plugin_active('wp-meta-seo/wp-meta-seo.php')) { ?>
+                                            <div class="seopress-alert">
+                                                <p>
+                                                    <span class="dashicons dashicons-warning"></span>
+                                                    <?php _e('We notice that you use another SEO plugin. <br>Do not use multiple SEO plugins at once to avoid conflicts!','wp-seopress'); ?>
+                                                </p>
+                                            </div>
+                                        <?php } ?>
+                                        <?php
+                                        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                                            if (seopress_404_cleaning_option() == 1 && !wp_next_scheduled('seopress_404_cron_cleaning')) { ?>
+                                                <div class="seopress-alert">
                                                     <p>
                                                         <span class="dashicons dashicons-warning"></span>
-                                                        <?php _e('Your RSS feed show full text!','wp-seopress'); ?>
-                                                        <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
+                                                        <?php _e('You have enabled 404 cleaning BUT the scheduled task is not running. <br>To solve this, please disable and enable SEOPress PRO.','wp-seopress'); ?>
                                                     </p>
-                                                    <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                                                    <span name="notice-rss-use-excerpt" id="notice-rss-use-excerpt" class="dashicons dashicons-trash remove-notice" data-notice="notice-rss-use-excerpt"></span>
+                                                </div>
+                                            <?php } 
+                                        } ?>
+                                        <?php if (!is_ssl()) { ?>
+                                            <?php
+                                            function seopress_get_hidden_notices_ssl_option() {
+                                                $seopress_get_hidden_notices_ssl_option = get_option("seopress_notices");
+                                                if ( ! empty ( $seopress_get_hidden_notices_ssl_option ) ) {
+                                                    foreach ($seopress_get_hidden_notices_ssl_option as $key => $seopress_get_hidden_notices_ssl_value)
+                                                        $options[$key] = $seopress_get_hidden_notices_ssl_value;
+                                                     if (isset($seopress_get_hidden_notices_ssl_option['notice-ssl'])) { 
+                                                        return $seopress_get_hidden_notices_ssl_option['notice-ssl'];
+                                                     }
+                                                }
+                                            }
+                                            if(seopress_get_hidden_notices_ssl_option() =='1') { 
+                                                //do nothing
+                                            } else { ?>
+                                                <div id="notice-ssl-alert" class="seopress-alert deleteable">
+                                                    <p>
+                                                        <span class="dashicons dashicons-warning"></span>
+                                                        <?php _e('Your site doesn\'t use an SSL certificate!','wp-seopress'); ?> 
+                                                        <a href="https://webmasters.googleblog.com/2014/08/https-as-ranking-signal.html" target="_blank"><?php _e('Learn more','wp-seopress'); ?></a>
+                                                        <span class="impact low"><?php _e('Low impact','wp-seopress'); ?></span>
+                                                    </p>
+                                                    <a class="button-primary" href="https://www.namecheap.com/?aff=105841" target="_blank"><?php _e('Buy an SSL!','wp-seopress'); ?></a>
+                                                    <span name="notice-ssl" id="notice-ssl" class="dashicons dashicons-trash remove-notice" data-notice="notice-ssl"></span>
                                                 </div>
                                             <?php }
-                                        }
-                                    ?>
-                                    <?php 
-                                        function seopress_get_hidden_notices_review_option() {
-                                            $seopress_get_hidden_notices_review_option = get_option("seopress_notices");
-                                            if ( ! empty ( $seopress_get_hidden_notices_review_option ) ) {
-                                                foreach ($seopress_get_hidden_notices_review_option as $key => $seopress_get_hidden_notices_review_value)
-                                                    $options[$key] = $seopress_get_hidden_notices_review_value;
-                                                    if (isset($seopress_get_hidden_notices_review_option['notice-review'])) {
-                                                        return $seopress_get_hidden_notices_review_option['notice-review'];
-                                                    }
-                                            }
-                                        }
-                                        if(seopress_get_hidden_notices_review_option() =='1') {
-                                            //do nothing
-                                        } else { ?>
-                                            <div id="notice-review-alert" class="seopress-alert deleteable">
+                                        ?>
+                                        <?php } ?>
+                                        <?php if (get_option('blog_public') !='1') { ?>
+                                            <div class="seopress-alert">
                                                 <p>
                                                     <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('You like SEOPress? Please help us by rating us 5 stars!','wp-seopress'); ?>
+                                                    <?php _e('Your site is not visible to Search Engines!','wp-seopress'); ?>
+                                                    <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
                                                 </p>
-                                                <a class="button-primary" href="https://wordpress.org/support/view/plugin-reviews/wp-seopress?rate=5#postform" target="_blank"><?php _e('Rate us!','wp-seopress'); ?></a>
-                                                <span name="notice-review" id="notice-review" class="dashicons dashicons-trash remove-notice" data-notice="notice-review"></span>
+                                                <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
                                             </div>
-                                        <?php }
-                                        
-                                    ?>
-                                    <?php 
-                                        if(get_option('page_comments') =='1') {
-                                            function seopress_get_hidden_notices_divide_comments_option() {
-                                                $seopress_get_hidden_notices_divide_comments_option = get_option("seopress_notices");
-                                                if ( ! empty ( $seopress_get_hidden_notices_divide_comments_option ) ) {
-                                                    foreach ($seopress_get_hidden_notices_divide_comments_option as $key => $seopress_get_hidden_notices_divide_comments_value)
-                                                        $options[$key] = $seopress_get_hidden_notices_divide_comments_value;
-                                                        if (isset($seopress_get_hidden_notices_divide_comments_option['notice-divide-comments'])) {
-                                                            return $seopress_get_hidden_notices_divide_comments_option['notice-divide-comments'];
+                                        <?php } ?>
+                                        <?php if (get_option('blogname') =='') { ?>
+                                            <div class="seopress-alert">
+                                                <p>
+                                                    <span class="dashicons dashicons-warning"></span>
+                                                    <?php _e('Your site title is empty!','wp-seopress'); ?>
+                                                    <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
+                                                </p>
+                                                <a class="button-primary" href="<?php echo admin_url( 'options-general.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                                            </div>
+                                        <?php } ?>
+                                        <?php if (get_option('permalink_structure') =='') { ?>
+                                            <div class="seopress-alert">
+                                                <p>
+                                                    <span class="dashicons dashicons-warning"></span>
+                                                    <?php _e('Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this.','wp-seopress'); ?>
+                                                    <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
+                                                </p>
+                                                <a class="button-primary" href="<?php echo admin_url( 'options-permalink.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                                            </div>
+                                        <?php } ?>
+                                        <?php 
+                                            if(get_option('rss_use_excerpt') =='0') {
+                                                function seopress_get_hidden_notices_rss_use_excerpt_option() {
+                                                    $seopress_get_hidden_notices_rss_use_excerpt_option = get_option("seopress_notices");
+                                                    if ( ! empty ( $seopress_get_hidden_notices_rss_use_excerpt_option ) ) {
+                                                        foreach ($seopress_get_hidden_notices_rss_use_excerpt_option as $key => $seopress_get_hidden_notices_rss_use_excerpt_value)
+                                                            $options[$key] = $seopress_get_hidden_notices_rss_use_excerpt_value;
+                                                            if (isset($seopress_get_hidden_notices_rss_use_excerpt_option['notice-rss-use-excerpt'])) {
+                                                                return $seopress_get_hidden_notices_rss_use_excerpt_option['notice-rss-use-excerpt'];
+                                                            }
+                                                    }
+                                                }
+                                                if(seopress_get_hidden_notices_rss_use_excerpt_option() =='1') {
+                                                    //do nothing
+                                                } else { ?>
+                                                    <div id="notice-rss-use-excerpt-alert" class="seopress-alert deleteable">
+                                                        <p>
+                                                            <span class="dashicons dashicons-warning"></span>
+                                                            <?php _e('Your RSS feed shows full text!','wp-seopress'); ?>
+                                                            <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
+                                                        </p>
+                                                        <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                                                        <span name="notice-rss-use-excerpt" id="notice-rss-use-excerpt" class="dashicons dashicons-trash remove-notice" data-notice="notice-rss-use-excerpt"></span>
+                                                    </div>
+                                                <?php }
+                                            }
+                                        ?>
+                                        <?php 
+                                            function seopress_get_hidden_notices_review_option() {
+                                                $seopress_get_hidden_notices_review_option = get_option("seopress_notices");
+                                                if ( ! empty ( $seopress_get_hidden_notices_review_option ) ) {
+                                                    foreach ($seopress_get_hidden_notices_review_option as $key => $seopress_get_hidden_notices_review_value)
+                                                        $options[$key] = $seopress_get_hidden_notices_review_value;
+                                                        if (isset($seopress_get_hidden_notices_review_option['notice-review'])) {
+                                                            return $seopress_get_hidden_notices_review_option['notice-review'];
                                                         }
                                                 }
                                             }
-                                            if(seopress_get_hidden_notices_divide_comments_option() =='1') {
+                                            if(seopress_get_hidden_notices_review_option() =='1') {
                                                 //do nothing
                                             } else { ?>
-                                                <div id="notice-divide-comments-alert" class="seopress-alert deleteable">
+                                                <div id="notice-review-alert" class="seopress-alert deleteable">
                                                     <p>
                                                         <span class="dashicons dashicons-warning"></span>
-                                                        <?php _e('Break comments into pages is ON!','wp-seopress'); ?>
+                                                        <?php _e('You like SEOPress? Please help us by rating us 5 stars!','wp-seopress'); ?>
+                                                    </p>
+                                                    <a class="button-primary" href="https://wordpress.org/support/view/plugin-reviews/wp-seopress?rate=5#postform" target="_blank"><?php _e('Rate us!','wp-seopress'); ?></a>
+                                                    <span name="notice-review" id="notice-review" class="dashicons dashicons-trash remove-notice" data-notice="notice-review"></span>
+                                                </div>
+                                            <?php }
+                                            
+                                        ?>
+                                        <?php 
+                                            if(get_option('page_comments') =='1') {
+                                                function seopress_get_hidden_notices_divide_comments_option() {
+                                                    $seopress_get_hidden_notices_divide_comments_option = get_option("seopress_notices");
+                                                    if ( ! empty ( $seopress_get_hidden_notices_divide_comments_option ) ) {
+                                                        foreach ($seopress_get_hidden_notices_divide_comments_option as $key => $seopress_get_hidden_notices_divide_comments_value)
+                                                            $options[$key] = $seopress_get_hidden_notices_divide_comments_value;
+                                                            if (isset($seopress_get_hidden_notices_divide_comments_option['notice-divide-comments'])) {
+                                                                return $seopress_get_hidden_notices_divide_comments_option['notice-divide-comments'];
+                                                            }
+                                                    }
+                                                }
+                                                if(seopress_get_hidden_notices_divide_comments_option() =='1') {
+                                                    //do nothing
+                                                } else { ?>
+                                                    <div id="notice-divide-comments-alert" class="seopress-alert deleteable">
+                                                        <p>
+                                                            <span class="dashicons dashicons-warning"></span>
+                                                            <?php _e('Break comments into pages is ON!','wp-seopress'); ?>
+                                                            <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
+                                                        </p>
+                                                        <a class="button-primary" href="<?php echo admin_url( 'options-discussion.php' ); ?>"><?php _e('Disable this!','wp-seopress'); ?></a>
+                                                        <span name="notice-divide-comments" id="notice-divide-comments" class="dashicons dashicons-trash remove-notice" data-notice="notice-divide-comments"></span>
+                                                    </div>
+                                                <?php }
+                                            }
+                                        ?>
+                                        <?php 
+                                            if(get_option('posts_per_page') < '16') {
+                                                function seopress_get_hidden_notices_posts_number_option() {
+                                                    $seopress_get_hidden_notices_posts_number_option = get_option("seopress_notices");
+                                                    if ( ! empty ( $seopress_get_hidden_notices_posts_number_option ) ) {
+                                                        foreach ($seopress_get_hidden_notices_posts_number_option as $key => $seopress_get_hidden_notices_posts_number_value)
+                                                            $options[$key] = $seopress_get_hidden_notices_posts_number_value;
+                                                            if (isset($seopress_get_hidden_notices_posts_number_option['notice-posts-number'])) {
+                                                                return $seopress_get_hidden_notices_posts_number_option['notice-posts-number'];
+                                                            }
+                                                    }
+                                                }
+                                                if(seopress_get_hidden_notices_posts_number_option() =='1') {
+                                                    //do nothing
+                                                } else { ?>
+                                                    <div id="notice-posts-number-alert" class="seopress-alert deleteable">
+                                                        <p>
+                                                            <span class="dashicons dashicons-warning"></span>
+                                                            <?php _e('Display more posts per page on homepage and archives','wp-seopress'); ?>
+                                                            <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
+                                                        </p>
+                                                        <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                                                        <span name="notice-posts-number" id="notice-posts-number" class="dashicons dashicons-trash remove-notice" data-notice="notice-posts-number"></span>
+                                                    </div>
+                                                <?php }
+                                            }
+                                        ?>
+                                        <?php if (seopress_xml_sitemap_general_enable_option() !='1') { ?>
+                                            <div class="seopress-alert">
+                                                <p>
+                                                    <span class="dashicons dashicons-warning"></span>
+                                                    <?php _e('You don\'t have an XML Sitemap!','wp-seopress'); ?>
+                                                    <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
+                                                </p>
+                                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
+                                            </div>
+                                        <?php } ?>
+
+                                        <?php
+                                            function seopress_get_hidden_notices_google_business_option() {
+                                                $seopress_get_hidden_notices_google_business_option = get_option("seopress_notices");
+                                                if ( ! empty ( $seopress_get_hidden_notices_google_business_option ) ) {
+                                                    foreach ($seopress_get_hidden_notices_google_business_option as $key => $seopress_get_hidden_notices_google_business_value)
+                                                        $options[$key] = $seopress_get_hidden_notices_google_business_value;
+                                                     if (isset($seopress_get_hidden_notices_google_business_option['notice-google-business'])) { 
+                                                        return $seopress_get_hidden_notices_google_business_option['notice-google-business'];
+                                                     }
+                                                }
+                                            }
+                                            if(seopress_get_hidden_notices_google_business_option() =='1') { 
+                                                //do nothing
+                                            } else { ?>
+                                                <div id="notice-google-business-alert" class="seopress-alert deleteable">
+                                                    <p>
+                                                        <span class="dashicons dashicons-warning"></span>
+                                                        <?php _e('Do you have a Google My Business page? It\'s free!','wp-seopress'); ?>
                                                         <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
                                                     </p>
-                                                    <a class="button-primary" href="<?php echo admin_url( 'options-discussion.php' ); ?>"><?php _e('Disable this!','wp-seopress'); ?></a>
-                                                    <span name="notice-divide-comments" id="notice-divide-comments" class="dashicons dashicons-trash remove-notice" data-notice="notice-divide-comments"></span>
+                                                    <a class="button-primary" href="https://www.google.com/business/go/" target="_blank"><?php _e('Create your page now!','wp-seopress'); ?></a>
+                                                    <span name="notice-google-business" id="notice-google-business" class="dashicons dashicons-trash remove-notice" data-notice="notice-google-business"></span>
                                                 </div>
                                             <?php }
-                                        }
-                                    ?>
-                                    <?php 
-                                        if(get_option('posts_per_page') < '16') {
-                                            function seopress_get_hidden_notices_posts_number_option() {
-                                                $seopress_get_hidden_notices_posts_number_option = get_option("seopress_notices");
-                                                if ( ! empty ( $seopress_get_hidden_notices_posts_number_option ) ) {
-                                                    foreach ($seopress_get_hidden_notices_posts_number_option as $key => $seopress_get_hidden_notices_posts_number_value)
-                                                        $options[$key] = $seopress_get_hidden_notices_posts_number_value;
-                                                        if (isset($seopress_get_hidden_notices_posts_number_option['notice-posts-number'])) {
-                                                            return $seopress_get_hidden_notices_posts_number_option['notice-posts-number'];
-                                                        }
+                                        ?>
+
+                                        <?php
+                                            function seopress_get_hidden_notices_search_console_option() {
+                                                $seopress_get_hidden_notices_search_console_option = get_option("seopress_notices");
+                                                if ( ! empty ( $seopress_get_hidden_notices_search_console_option ) ) {
+                                                    foreach ($seopress_get_hidden_notices_search_console_option as $key => $seopress_get_hidden_notices_search_console_value)
+                                                        $options[$key] = $seopress_get_hidden_notices_search_console_value;
+                                                     if (isset($seopress_get_hidden_notices_search_console_option['notice-search-console'])) { 
+                                                        return $seopress_get_hidden_notices_search_console_option['notice-search-console'];
+                                                     }
                                                 }
                                             }
-                                            if(seopress_get_hidden_notices_posts_number_option() =='1') {
+                                            function seopress_get_google_site_verification_option() {
+                                                $seopress_get_google_site_verification_option = get_option("seopress_advanced_option_name");
+                                                if ( ! empty ( $seopress_get_google_site_verification_option ) ) {
+                                                    foreach ($seopress_get_google_site_verification_option as $key => $seopress_get_google_site_verification_value)
+                                                        $options[$key] = $seopress_get_google_site_verification_value;
+                                                     if (isset($seopress_get_google_site_verification_option['seopress_advanced_advanced_google'])) { 
+                                                        return $seopress_get_google_site_verification_option['seopress_advanced_advanced_google'];
+                                                     }
+                                                }
+                                            }
+                                            if(seopress_get_hidden_notices_search_console_option() =='1') { 
                                                 //do nothing
-                                            } else { ?>
-                                                <div id="notice-posts-number-alert" class="seopress-alert deleteable">
+                                            } elseif(seopress_get_google_site_verification_option() =='') { ?>
+                                                <div id="notice-search-console-alert" class="seopress-alert deleteable">
                                                     <p>
                                                         <span class="dashicons dashicons-warning"></span>
-                                                        <?php _e('Display more posts per page on homepage and archives','wp-seopress'); ?>
-                                                        <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
+                                                        <?php _e('Add your site to Google. It\'s free!','wp-seopress'); ?>
+                                                        <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
                                                     </p>
-                                                    <a class="button-primary" href="<?php echo admin_url( 'options-reading.php' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                                                    <span name="notice-posts-number" id="notice-posts-number" class="dashicons dashicons-trash remove-notice" data-notice="notice-posts-number"></span>
+                                                    <a class="button-primary" href="https://www.google.com/webmasters/tools/home" target="_blank"><?php _e('Add your site to Search Console!','wp-seopress'); ?></a>
+                                                    <span name="notice-search-console" id="notice-search-console" class="dashicons dashicons-trash remove-notice" data-notice="notice-search-console"></span>
                                                 </div>
                                             <?php }
-                                        }
-                                    ?>
-                                    <?php if (seopress_xml_sitemap_general_enable_option() !='1') { ?>
-                                        <div class="seopress-alert">
-                                            <p>
-                                                <span class="dashicons dashicons-warning"></span>
-                                                <?php _e('You don\'t have an XML Sitemap!','wp-seopress'); ?>
-                                                <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
-                                            </p>
-                                            <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-xml-sitemap' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                                        </div>
-                                    <?php } ?>
+                                        ?>
 
-                                    <?php
-                                        function seopress_get_hidden_notices_google_business_option() {
-                                            $seopress_get_hidden_notices_google_business_option = get_option("seopress_notices");
-                                            if ( ! empty ( $seopress_get_hidden_notices_google_business_option ) ) {
-                                                foreach ($seopress_get_hidden_notices_google_business_option as $key => $seopress_get_hidden_notices_google_business_value)
-                                                    $options[$key] = $seopress_get_hidden_notices_google_business_value;
-                                                 if (isset($seopress_get_hidden_notices_google_business_option['notice-google-business'])) { 
-                                                    return $seopress_get_hidden_notices_google_business_option['notice-google-business'];
-                                                 }
-                                            }
-                                        }
-                                        if(seopress_get_hidden_notices_google_business_option() =='1') { 
-                                            //do nothing
-                                        } else { ?>
-                                            <div id="notice-google-business-alert" class="seopress-alert deleteable">
+                                        <?php if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                                            <div class="seopress-alert">
                                                 <p>
                                                     <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('Do you have a Google My Business page? It\'s free!','wp-seopress'); ?>
-                                                    <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
+                                                    <?php _e('You have to enter your licence key to get updates and support','wp-seopress'); ?>
+                                                    <span class="impact high info"><?php _e('License','wp-seopress'); ?></span>
                                                 </p>
-                                                <a class="button-primary" href="https://www.google.com/business/go/" target="_blank"><?php _e('Create your page now!','wp-seopress'); ?></a>
-                                                <span name="notice-google-business" id="notice-google-business" class="dashicons dashicons-trash remove-notice" data-notice="notice-google-business"></span>
+                                                <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-license' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
                                             </div>
-                                        <?php }
-                                    ?>
+                                        <?php } ?>
+                                    </div><!--#seopress-notifications-center-->
+                                        
+                                </div>
+                            <?php } ?>
 
-                                    <?php
-                                        function seopress_get_hidden_notices_search_console_option() {
-                                            $seopress_get_hidden_notices_search_console_option = get_option("seopress_notices");
-                                            if ( ! empty ( $seopress_get_hidden_notices_search_console_option ) ) {
-                                                foreach ($seopress_get_hidden_notices_search_console_option as $key => $seopress_get_hidden_notices_search_console_value)
-                                                    $options[$key] = $seopress_get_hidden_notices_search_console_value;
-                                                 if (isset($seopress_get_hidden_notices_search_console_option['notice-search-console'])) { 
-                                                    return $seopress_get_hidden_notices_search_console_option['notice-search-console'];
-                                                 }
-                                            }
-                                        }
-                                        function seopress_get_google_site_verification_option() {
-                                            $seopress_get_google_site_verification_option = get_option("seopress_advanced_option_name");
-                                            if ( ! empty ( $seopress_get_google_site_verification_option ) ) {
-                                                foreach ($seopress_get_google_site_verification_option as $key => $seopress_get_google_site_verification_value)
-                                                    $options[$key] = $seopress_get_google_site_verification_value;
-                                                 if (isset($seopress_get_google_site_verification_option['seopress_advanced_advanced_google'])) { 
-                                                    return $seopress_get_google_site_verification_option['seopress_advanced_advanced_google'];
-                                                 }
-                                            }
-                                        }
-                                        if(seopress_get_hidden_notices_search_console_option() =='1') { 
-                                            //do nothing
-                                        } elseif(seopress_get_google_site_verification_option() =='') { ?>
-                                            <div id="notice-search-console-alert" class="seopress-alert deleteable">
-                                                <p>
-                                                    <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('Add your site to Google. It\'s free!','wp-seopress'); ?>
-                                                    <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
-                                                </p>
-                                                <a class="button-primary" href="https://www.google.com/webmasters/tools/home" target="_blank"><?php _e('Add your site to Search Console!','wp-seopress'); ?></a>
-                                                <span name="notice-search-console" id="notice-search-console" class="dashicons dashicons-trash remove-notice" data-notice="notice-search-console"></span>
-                                            </div>
-                                        <?php }
-                                    ?>
-
-                                    <?php if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-                                        <div class="seopress-alert">
-                                            <p>
-                                                <span class="dashicons dashicons-warning"></span>
-                                                <?php _e('You have to enter your licence key to get updates and support','wp-seopress'); ?>
-                                                <span class="impact high info"><?php _e('License','wp-seopress'); ?></span>
-                                            </p>
-                                            <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-license' ); ?>"><?php _e('Fix this!','wp-seopress'); ?></a>
-                                        </div>
-                                    <?php } ?>
-                                </div><!--#seopress-notifications-center-->
+                            <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                                <div id="tab_seopress_seo_tools" class="seopress-tab seopress-useful-tools <?php if ($current_tab == 'tab_seopress_seo_tools') { echo 'active'; } ?>">
                                     
-                            </div>
-                        <?php } ?>
+                                    <!-- Reverse -->
+                                    <div class="widget widget-reverse">
+                                        <h3 class="widget-title"><span class="dashicons dashicons-welcome-view-site"></span><?php _e('Check websites setup on your server','wp-seopress'); ?></h3>
 
-                        <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-                            <div id="tab_seopress_seo_tools" class="seopress-tab seopress-useful-tools <?php if ($current_tab == 'tab_seopress_seo_tools') { echo 'active'; } ?>">
-                                
-                                <!-- Reverse -->
-                                <div class="widget widget-reverse">
-                                    <h3 class="widget-title"><span class="dashicons dashicons-welcome-view-site"></span><?php _e('Check websites setup on your server','wp-seopress'); ?></h3>
+                                        <p>
+                                        <?php
+                                            if ( get_transient( 'seopress_results_reverse' ) !='' ) { 
 
-                                    <p>
-                                    <?php
-                                        if ( get_transient( 'seopress_results_reverse' ) !='' ) { 
+                                                $seopress_results_reverse = (array)json_decode(get_transient( 'seopress_results_reverse' ));
 
-                                            $seopress_results_reverse = (array)json_decode(get_transient( 'seopress_results_reverse' ));
+                                                //Init
+                                                $seopress_results_reverse_remote_ip_address = __('Not found','wp-seopress');
+                                                if(isset($seopress_results_reverse['remoteIpAddress'])) { 
+                                                    $seopress_results_reverse_remote_ip_address = $seopress_results_reverse['remoteIpAddress'];
+                                                }
 
-                                            //Init
-                                            $seopress_results_reverse_remote_ip_address = __('Not found','wp-seopress');
-                                            if(isset($seopress_results_reverse['remoteIpAddress'])) { 
-                                                $seopress_results_reverse_remote_ip_address = $seopress_results_reverse['remoteIpAddress'];
+                                                $seopress_results_reverse_last_scrape = __('No scrape.','wp-seopress');
+                                                if(isset($seopress_results_reverse['lastScrape'])) { 
+                                                    $seopress_results_reverse_last_scrape = $seopress_results_reverse['lastScrape'];
+                                                }
+
+                                                $seopress_results_reverse_domain_count = __('No domain found.','wp-seopress');
+                                                if(isset($seopress_results_reverse['domainCount'])) { 
+                                                    $seopress_results_reverse_domain_count = $seopress_results_reverse['domainCount'];
+                                                }
+
+                                                $seopress_results_reverse_domain_array = '';
+                                                if(isset($seopress_results_reverse['domainArray'])) { 
+                                                    $seopress_results_reverse_domain_array = $seopress_results_reverse['domainArray'];
+                                                }
+                                                 
+                                                echo '<p class="remote-ip"><strong>'.__('Server IP Address: ','wp-seopress').'</strong>'.$seopress_results_reverse_remote_ip_address.'</p>';
+                                                
+
+                                                echo '<p class="last-scrape"><strong>'.__('Last scrape: ','wp-seopress').'</strong>'.$seopress_results_reverse_last_scrape.'</p>';
+                                                echo '<p class="domain-count"><strong>'.__('Number of websites on your server: ','wp-seopress').'</strong>'.$seopress_results_reverse_domain_count.'</p>';
+                                                
+                                                if ($seopress_results_reverse_domain_array !='') {
+                                                    echo '<ul>';
+                                                        foreach ($seopress_results_reverse_domain_array as $key => $value) {
+                                                            echo '<li><span class="dashicons dashicons-minus"></span><a href="//'.preg_replace('#^https?://#', '', $value[0]).'" target="_blank">'.$value[0].'</a><span class="dashicons dashicons-external"></span></li>';
+                                                        }
+                                                    echo '</ul>';
+                                                }
                                             }
+                                        ?>
+                                        <br>
+                                        <button id="seopress-reverse-submit" class="button button-primary" name="submit">
+                                            <?php _e('Get list','wp-seopress'); ?>
+                                        </button>
 
-                                            $seopress_results_reverse_last_scrape = __('No scrape.','wp-seopress');
-                                            if(isset($seopress_results_reverse['lastScrape'])) { 
-                                                $seopress_results_reverse_last_scrape = $seopress_results_reverse['lastScrape'];
-                                            }
+                                        <span id="spinner-reverse" class="spinner"></span>
+                                    </div>
 
-                                            $seopress_results_reverse_domain_count = __('No domain found.','wp-seopress');
-                                            if(isset($seopress_results_reverse['domainCount'])) { 
-                                                $seopress_results_reverse_domain_count = $seopress_results_reverse['domainCount'];
-                                            }
+                                    <!-- Alexa -->
+                                    <div class="widget widget-alexa">
+                                        <h3 class="widget-title"><span class="dashicons dashicons-chart-area"></span><?php _e('Check your Alexa Rank (Amazon index)','wp-seopress'); ?></h3>
 
-                                            $seopress_results_reverse_domain_array = '';
-                                            if(isset($seopress_results_reverse['domainArray'])) { 
-                                                $seopress_results_reverse_domain_array = $seopress_results_reverse['domainArray'];
-                                            }
-                                             
-                                            echo '<p class="remote-ip"><strong>'.__('Server IP Address: ','wp-seopress').'</strong>'.$seopress_results_reverse_remote_ip_address.'</p>';
-                                            
+                                        <?php
+                                            if ( get_transient( 'seopress_results_alexa_rank' ) !='' ) {
+                                                echo '<div class="wrap-alexa-rank">';
+                                                    $seopress_results_alexa_rank = get_transient( 'seopress_results_alexa_rank' );
 
-                                            echo '<p class="last-scrape"><strong>'.__('Last scrape: ','wp-seopress').'</strong>'.$seopress_results_reverse_last_scrape.'</p>';
-                                            echo '<p class="domain-count"><strong>'.__('Number of websites on your server: ','wp-seopress').'</strong>'.$seopress_results_reverse_domain_count.'</p>';
-                                            
-                                            if ($seopress_results_reverse_domain_array !='') {
-                                                echo '<ul>';
-                                                    foreach ($seopress_results_reverse_domain_array as $key => $value) {
-                                                        echo '<li><span class="dashicons dashicons-minus"></span><a href="//'.preg_replace('#^https?://#', '', $value[0]).'" target="_blank">'.$value[0].'</a><span class="dashicons dashicons-external"></span></li>';
+                                                    $seopress_alexa_rank_xml            = simplexml_load_string($seopress_results_alexa_rank);
+                                                    $seopress_alexa_rank_reach          = $seopress_alexa_rank_xml->SD->REACH['RANK'];
+                                                    $seopress_alexa_rank_delta          = $seopress_alexa_rank_xml->SD->RANK['DELTA'];
+                                                    $seopress_alexa_rank_country        = $seopress_alexa_rank_xml->SD->COUNTRY['NAME'];
+                                                    $seopress_alexa_rank_country_rank   = $seopress_alexa_rank_xml->SD->COUNTRY['RANK'];
+
+                                                    if ($seopress_alexa_rank_reach !='') {
+                                                        echo '<span class="seopress_alexa_rank_reach">
+                                                                <span class="highlight">'.__('Your Alexa Rank','wp-seopress').'</span>'
+                                                                .$seopress_alexa_rank_reach.'
+                                                            </span>';
                                                     }
-                                                echo '</ul>';
-                                            }
-                                        }
-                                    ?>
-                                    <br>
-                                    <button id="seopress-reverse-submit" class="button button-primary" name="submit">
-                                        <?php _e('Get list','wp-seopress'); ?>
-                                    </button>
+                                                    if ($seopress_alexa_rank_delta !='') {
+                                                        
+                                                        $seopress_alexa_rank_delta_sign = substr($seopress_alexa_rank_delta, 0, 1);
+                                                        $seopress_alexa_rank_delta_num = substr($seopress_alexa_rank_delta, 1, 9999);
+                                                        
+                                                        if ($seopress_alexa_rank_delta_sign =='+') {
+                                                            $seopress_alexa_rank_delta_css = '<span class="plus"><span class="dashicons dashicons-plus"></span></span>';
+                                                        } elseif ($seopress_alexa_rank_delta_sign =='-') {
+                                                            $seopress_alexa_rank_delta_css = '<span class="minus"><span class="dashicons dashicons-minus"></span></span>';
+                                                        }
 
-                                    <span id="spinner-reverse" class="spinner"></span>
-                                </div>
-
-                                <!-- Alexa -->
-                                <div class="widget widget-alexa">
-                                    <h3 class="widget-title"><span class="dashicons dashicons-chart-area"></span><?php _e('Check your Alexa Rank (Amazon index)','wp-seopress'); ?></h3>
-
-                                    <?php
-                                        if ( get_transient( 'seopress_results_alexa_rank' ) !='' ) {
-                                            echo '<div class="wrap-alexa-rank">';
-                                                $seopress_results_alexa_rank = get_transient( 'seopress_results_alexa_rank' );
-
-                                                $seopress_alexa_rank_xml            = simplexml_load_string($seopress_results_alexa_rank);
-                                                $seopress_alexa_rank_reach          = $seopress_alexa_rank_xml->SD->REACH['RANK'];
-                                                $seopress_alexa_rank_delta          = $seopress_alexa_rank_xml->SD->RANK['DELTA'];
-                                                $seopress_alexa_rank_country        = $seopress_alexa_rank_xml->SD->COUNTRY['NAME'];
-                                                $seopress_alexa_rank_country_rank   = $seopress_alexa_rank_xml->SD->COUNTRY['RANK'];
-
-                                                if ($seopress_alexa_rank_reach !='') {
-                                                    echo '<span class="seopress_alexa_rank_reach">
-                                                            <span class="highlight">'.__('Your Alexa Rank','wp-seopress').'</span>'
-                                                            .$seopress_alexa_rank_reach.'
-                                                        </span>';
-                                                }
-                                                if ($seopress_alexa_rank_delta !='') {
-                                                    
-                                                    $seopress_alexa_rank_delta_sign = substr($seopress_alexa_rank_delta, 0, 1);
-                                                    $seopress_alexa_rank_delta_num = substr($seopress_alexa_rank_delta, 1, 9999);
-                                                    
-                                                    if ($seopress_alexa_rank_delta_sign =='+') {
-                                                        $seopress_alexa_rank_delta_css = '<span class="plus"><span class="dashicons dashicons-plus"></span></span>';
-                                                    } elseif ($seopress_alexa_rank_delta_sign =='-') {
-                                                        $seopress_alexa_rank_delta_css = '<span class="minus"><span class="dashicons dashicons-minus"></span></span>';
+                                                        echo '<span class="seopress_alexa_rank_delta">
+                                                                '.$seopress_alexa_rank_delta_css.$seopress_alexa_rank_delta_num.'
+                                                            </span>';
                                                     }
 
-                                                    echo '<span class="seopress_alexa_rank_delta">
-                                                            '.$seopress_alexa_rank_delta_css.$seopress_alexa_rank_delta_num.'
-                                                        </span>';
-                                                }
+                                                    if ($seopress_alexa_rank_country !='') {
+                                                        echo '<span class="seopress_alexa_rank_country">
+                                                                <span class="highlight">'.__('Country Rank: ','wp-seopress').'</span>
+                                                                '.$seopress_alexa_rank_country.'
+                                                            </span>';
+                                                    }
+                                                    if ($seopress_alexa_rank_country_rank !='') {
+                                                        echo '<span class="seopress_alexa_rank_country_rank"> - '.$seopress_alexa_rank_country_rank.'</span>';
+                                                    }
+                                                echo '</div>';
 
-                                                if ($seopress_alexa_rank_country !='') {
-                                                    echo '<span class="seopress_alexa_rank_country">
-                                                            <span class="highlight">'.__('Country Rank: ','wp-seopress').'</span>
-                                                            '.$seopress_alexa_rank_country.'
-                                                        </span>';
-                                                }
-                                                if ($seopress_alexa_rank_country_rank !='') {
-                                                    echo '<span class="seopress_alexa_rank_country_rank"> - '.$seopress_alexa_rank_country_rank.'</span>';
-                                                }
-                                            echo '</div>';
+                                                echo '<p><em>'._e('The lower, the best','wp-seopress').'</em></p>';
+                                            }
+                                        ?>
 
-                                            echo '<p><em>'._e('The lower, the best','wp-seopress').'</em></p>';
-                                        }
-                                    ?>
+                                        <button id="seopress-request-alexa-rank" class="button-primary button" name="clear"><?php _e('Get Alexa Rank','wp-seopress'); ?></button>
 
-                                    <button id="seopress-request-alexa-rank" class="button-primary button" name="clear"><?php _e('Get Alexa Rank','wp-seopress'); ?></button>
-
-                                    <span id="spinner-alexa" class="spinner"></span>
+                                        <span id="spinner-alexa" class="spinner"></span>
+                                    </div>
                                 </div>
+                            <?php } ?>
+                            <div id="tab_seopress_links" class="seopress-tab seopress-useful-tools <?php if ($current_tab == 'tab_seopress_links') { echo 'active'; } ?>">
+                                <ul>
+                                    <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.google.com/webmasters/tools/disavow-links-main" target="_blank"><?php _e('Upload a list of links to disavow to Google','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
+                                    <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://trends.google.com/trends/" target="_blank"><?php _e('Google Trends','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
+                                    <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.dareboost.com/en/home" target="_blank"><?php _e('Dareboost: Test, analyze and optimize your website','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
+                                    <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://ga-dev-tools.appspot.com/campaign-url-builder/" target="_blank"><?php _e('Google Campaign URL Builder tool','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
+                                </ul>
                             </div>
-                        <?php } ?>
-                        <div id="tab_seopress_links" class="seopress-tab seopress-useful-tools <?php if ($current_tab == 'tab_seopress_links') { echo 'active'; } ?>">
-                            <ul>
-                                <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.google.com/webmasters/tools/disavow-links-main" target="_blank"><?php _e('Upload a list of links to disavow to Google','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
-                                <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://trends.google.com/trends/" target="_blank"><?php _e('Google Trends','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
-                                <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.dareboost.com/en/home" target="_blank"><?php _e('Dareboost: Test, analyze and optimize your website','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
-                                <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://ga-dev-tools.appspot.com/campaign-url-builder/" target="_blank"><?php _e('Google Campaign URL Builder tool','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
-                            </ul>
                         </div>
                     </div>
-                </div>
+                <?php } ?>
                     
                 <div class="seopress-page-list">
                     <div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>
@@ -2795,6 +2835,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_google_analytics_ads', // ID
+           __("Enable Google Ads","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_ads_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-features', // Page
+            'seopress_setting_section_google_analytics_features' // Section                  
+        );
+
+        add_settings_field(
             'seopress_google_analytics_other_tracking', // ID
            __("Add an additional tracking code (like Facebook Pixel, Hotjar...)","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_other_tracking_callback' ), // Callback
@@ -3013,15 +3061,7 @@ class seopress_options
             array( $this, 'seopress_advanced_advanced_tax_desc_editor_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
             'seopress_setting_section_advanced_advanced' // Section                  
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_stop_words', // ID
-           __("Remove stop words from URL","wp-seopress"), // Title
-            array( $this, 'seopress_advanced_advanced_stop_words_callback' ), // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section                  
-        );        
+        );    
 
         add_settings_field(
             'seopress_advanced_advanced_category_url', // ID
@@ -3299,7 +3339,7 @@ class seopress_options
     public function sanitize( $input )
     {   
 
-        $seopress_sanitize_fields = array('seopress_titles_sep','seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking','seopress_google_analytics_opt_out_msg', 'seopress_google_analytics_opt_out_msg_ok', 'seopress_google_analytics_other_tracking', 'seopress_google_analytics_optimize', 'seopress_google_analytics_cross_domain' );
+        $seopress_sanitize_fields = array('seopress_titles_sep','seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking','seopress_google_analytics_opt_out_msg', 'seopress_google_analytics_opt_out_msg_ok', 'seopress_google_analytics_other_tracking', 'seopress_google_analytics_optimize', 'seopress_google_analytics_ads','seopress_google_analytics_cross_domain' );
 
         $seopress_sanitize_site_verification = array('seopress_advanced_advanced_google', 'seopress_advanced_advanced_bing', 'seopress_advanced_advanced_pinterest', 'seopress_advanced_advanced_yandex' );
         
@@ -3451,7 +3491,7 @@ class seopress_options
 
     public function print_section_info_social_facebook()
     {
-        print __('<p>Manage Open Graph datas.</p>', 'wp-seopress');
+        print __('<p>Manage Open Graph data.</p>', 'wp-seopress');
 
         echo __('<p>We generate the <strong>og:image</strong> meta following this order:</p>','wp-seopress');
 
@@ -4849,7 +4889,7 @@ class seopress_options
         
         <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />';
 
-        echo '<p class="description">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max.', 'wp-seopress').'</p>';
+        echo '<p class="description">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress').'</p>';
         
         if (isset($this->options['seopress_social_facebook_img'])) {
             esc_attr( $this->options['seopress_social_facebook_img']);
@@ -5115,6 +5155,15 @@ class seopress_options
         esc_html($check));
 
         echo '<p class="description">'.__('Google Optimize offers A/B testing, website testing & personalization tools.','wp-seopress').'<a href="https://marketingplatform.google.com/about/optimize/" target="_blank">'.__('Learn more','wp-seopress').'</a></p>';
+    }
+
+    public function seopress_google_analytics_ads_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_ads']) ? $this->options['seopress_google_analytics_ads'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ads]" placeholder="'.esc_html__('Enter your Google Ads conversion ID (eg: AW-123456789','wp-seopress').'" value="%s" aria-label="'.__('AW-XXXXXXXXX','wp-seopress').'"/>',
+        esc_html($check));
     }
 
     public function seopress_google_analytics_other_tracking_callback()
@@ -5823,23 +5872,6 @@ class seopress_options
         
         if (isset($this->options['seopress_advanced_advanced_tax_desc_editor'])) {
             esc_attr( $this->options['seopress_advanced_advanced_tax_desc_editor']);
-        }
-    }
-
-    public function seopress_advanced_advanced_stop_words_callback()
-    {
-        $options = get_option( 'seopress_advanced_option_name' );  
-        
-        $check = isset($options['seopress_advanced_advanced_stop_words']);      
-        
-        echo '<input id="seopress_advanced_advanced_stop_words" name="seopress_advanced_option_name[seopress_advanced_advanced_stop_words]" type="checkbox"';
-        if ('1' == $check) echo 'checked="yes"'; 
-        echo ' value="1"/>';
-        
-        echo '<label for="seopress_advanced_advanced_stop_words">'. __( 'Remove stop words in permalinks', 'wp-seopress' ) .'</label><span class="dashicons dashicons-info" title="'.__('Setting based on site language. Supported language EN, FR, ES, DE, IT, PT.','wp-seopress').'"></span>';
-
-        if (isset($this->options['seopress_advanced_advanced_stop_words'])) {
-            esc_attr( $this->options['seopress_advanced_advanced_stop_words']);
         }
     }
 
