@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 3.7
+Stable tag: 3.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,9 +53,10 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 <h3>SEOPress PRO: to go further with your SEO</h3>
 
 <ul>
+	<li>Import metadatas (titles, open graph, robots...) from CSV file</li>
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
-	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, FAQ, course, recipe, video, event, product, simple review</li>
+	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, FAQ, course, recipe, video, event, product, job, simple review</li>
 	<li>Automatic Schemas</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Google Analytics Stats in Dashboard</li>
@@ -94,6 +95,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Dutch (professional translation)</li>
 	<li>Russian (professional translation)</li>
 	<li>Japanese (professional translation)</li>
+	<li>Hindi (professional translation)</li>
 	<li>Greek</li>
 	<li>Bulgarian</li>
 	<li>Indonesian</li>
@@ -219,6 +221,16 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.7.1 =
+* NEW JobPosting schema (PRO)
+* NEW 'seopress_metabox_seo_tabs' hook to filter tabs in SEO metabox
+* NEW 'seopress_schemas_auto_job_html' hook to filter JobPosting global schema
+* NEW 'seopress_schemas_job_html' hook to filter JobPosting manual schema
+* NEW 'seopress_sitemaps_max_posts_per_sitemap' hook to filter max posts per paginated sitemap
+* INFO GA: we now follow all external links, even if you have not defined an empty target attribute
+* INFO Performance optimization
+* INFO Improving security
+* INFO Improving the user experience
 = 3.7 =
 * NEW Import metadata from CSV file: title, meta description, meta robots and more... (SEO > Tools > Data) - PRO
 * NEW Support the new Google meta robots (max-snippet:-1, max-image-preview:large, max-video-preview:-1), ON by default

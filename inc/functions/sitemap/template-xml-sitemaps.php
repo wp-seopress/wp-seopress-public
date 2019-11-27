@@ -43,12 +43,16 @@ function seopress_xml_sitemap_index() {
 
 					$count_posts = wp_count_posts($cpt_key);
 
+					//Max posts per paginated sitemap
+					$max = 1000;
+					$max = apply_filters('seopress_sitemaps_max_posts_per_sitemap', $max);
+
 					if (isset($count_posts->publish)) {
 						$published_posts = $count_posts->publish;
 					}
 
-					if ($published_posts >= 1000) {
-						$max_loop = $published_posts / 1000;
+					if ($published_posts >= $max) {
+						$max_loop = $published_posts / $max;
 					} else {
 						$max_loop = 1;
 					}
@@ -58,7 +62,7 @@ function seopress_xml_sitemap_index() {
 					for ($i=0; $i < $max_loop ; $i++) {
 
 						if (isset($offset) && absint($offset) && $offset !='' && $offset !=0) {
-							$offset = ((($i)*1000));
+							$offset = ((($i)*$max));
 						} else {
 							$offset = 0;
 						}

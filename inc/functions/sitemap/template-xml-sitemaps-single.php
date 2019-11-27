@@ -52,9 +52,12 @@ function seopress_xml_sitemap_single() {
 	$offset = preg_match_all('/\d+/', $offset, $matches);
 	$offset = end($matches[0]);
 
+	//Max posts per paginated sitemap
+	$max = 1000;
+	$max = apply_filters('seopress_sitemaps_max_posts_per_sitemap', $max);
 
 	if (isset($offset) && absint($offset) && $offset !='' && $offset !=0) {
-		$offset = (($offset-1)*1000);
+		$offset = (($offset-1)*$max);
 	} else {
 		$offset = 0;
 	}

@@ -56,7 +56,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_style( 'seopress-setup', plugins_url( 'assets/css/seopress-setup.min.css', dirname(dirname(__FILE__))), array( 'dashicons', 'install' ), SEOPRESS_VERSION );
-		wp_register_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-migrate.js', dirname(dirname(__FILE__))), array( 'jquery' ), SEOPRESS_VERSION, true );
+		wp_register_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-migrate.min.js', dirname(dirname(__FILE__))), array( 'jquery' ), SEOPRESS_VERSION, true );
 
         $seopress_migrate = array( 
             'seopress_aio_migrate' => array(

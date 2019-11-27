@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.7
+Version: 3.7.1
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.7' ); 
+define( 'SEOPRESS_VERSION', '3.7.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +165,7 @@ function seopress_add_admin_options_scripts($hook) {
 
     //Migration
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-option' || $_GET['page'] == 'seopress-import-export') ) {
-        wp_enqueue_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-migrate.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
+        wp_enqueue_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-migrate.min.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
 
         $seopress_migrate = array( 
             'seopress_aio_migrate' => array(

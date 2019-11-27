@@ -1333,7 +1333,7 @@ body.seopress-styles {
     -webkit-font-smoothing: initial;
 }
 
-#seopress_cpt .tag-title,.seopress-button,.seopress-option .tag-title {
+#seopress_cpt .tag-title,.seopress-button,.seopress-option .tag-title,#seopress_pro_cpt .tag-title {
     cursor: pointer;
     font-weight: 500;
     border-radius: 4px;
@@ -1378,14 +1378,14 @@ body.seopress-styles {
     width: calc(100% - 20px);
 }
 
-#seopress_cpt .wrap-tags,.seopress-option .wrap-tags {
+#seopress_cpt .wrap-tags,.seopress-option .wrap-tags,#seopress_pro_cpt .wrap-tags {
     position: relative;
     display: inline-block;
     width: 100%;
     margin-bottom: 10px;
 }
 
-#seopress_cpt .tag-title,.seopress-option .tag-title {
+#seopress_cpt .tag-title,.seopress-option .tag-title,#seopress_pro_cpt .tag-title {
     padding: 4px 8px;
     position: relative;
     top: 5px;
@@ -1400,13 +1400,15 @@ body.seopress-styles {
     box-shadow: 0 0 0 .5px rgba(50,50,93,.17),0 2px 5px 0 rgba(50,50,93,.12),0 3px 9px 0 rgba(50,50,93,.08),0 1px 1.5px 0 rgba(0,0,0,.08),0 1px 2px 0 rgba(0,0,0,.08);
 }
 
-#seopress_cpt .tag-title:active,#seopress_cpt .tag-title:focus,#seopress_cpt .tag-title:hover,.seopress-option .tag-title:active,.seopress-option .tag-title:focus,.seopress-option .tag-title:hover {
+#seopress_pro_cpt .tag-title:active,#seopress_pro_cpt .tag-title:focus,#seopress_pro_cpt .tag-title:hover,
+#seopress_cpt .tag-title:active,#seopress_cpt .tag-title:focus,#seopress_cpt .tag-title:hover,
+.seopress-option .tag-title:active,.seopress-option .tag-title:focus,.seopress-option .tag-title:hover {
     background: #232323;
     color: #fff;
     user-select: none;
 }
 
-#seopress_cpt .tag-title .dashicons,.seopress-option .tag-title .dashicons {
+#seopress_cpt .tag-title .dashicons,.seopress-option .tag-title .dashicons, #seopress_pro_cpt .tag-title .dashicons {
     padding: 0;
     height: 16px;
     width: 16px;

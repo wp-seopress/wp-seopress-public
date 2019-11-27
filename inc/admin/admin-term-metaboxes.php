@@ -184,6 +184,8 @@ function seopress_display_seo_term_metaboxe() {
     }
 
     function seopress_tax($term) {
+        wp_nonce_field( plugin_basename( __FILE__ ), 'seopress_cpt_nonce' );
+
         global $typenow;
         
         //init 
@@ -273,73 +275,95 @@ function seopress_display_seo_term_metaboxe() {
     }
 
     function seopress_tax_save_term( $term_id ) {
-        if(isset($_POST['seopress_titles_title'])){
-            update_term_meta($term_id, '_seopress_titles_title', esc_html($_POST['seopress_titles_title']));
+        //Nonce
+        if ( !isset( $_POST['seopress_cpt_nonce'] ) || !wp_verify_nonce( $_POST['seopress_cpt_nonce'], plugin_basename( __FILE__ ) ) )
+            return $term_id;
+
+        //Taxonomy object
+        $taxonomy = get_taxonomy(get_current_screen()->taxonomy);
+
+        //Check permission
+        if ( !current_user_can( $taxonomy->cap->edit_terms, $term_id ) )
+            return $term_id;
+
+        $seo_tabs = array();
+        $seo_tabs = json_decode(stripslashes(htmlspecialchars_decode($_POST['seo_tabs'])));
+        
+        if (in_array('title-tab', $seo_tabs)) {
+            if(isset($_POST['seopress_titles_title'])){
+                update_term_meta($term_id, '_seopress_titles_title', esc_html($_POST['seopress_titles_title']));
+            }
+            if(isset($_POST['seopress_titles_desc'])){
+                update_term_meta($term_id, '_seopress_titles_desc', esc_html($_POST['seopress_titles_desc']));
+            }
         }
-        if(isset($_POST['seopress_titles_desc'])){
-            update_term_meta($term_id, '_seopress_titles_desc', esc_html($_POST['seopress_titles_desc']));
+        if (in_array('advanced-tab', $seo_tabs)) {
+            if( isset( $_POST[ 'seopress_robots_index' ] ) ) {
+                update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
+            } else {
+                delete_term_meta( $term_id, '_seopress_robots_index', '' );
+            }
+            if( isset( $_POST[ 'seopress_robots_follow' ] ) ) {
+                update_term_meta( $term_id, '_seopress_robots_follow', 'yes' );
+            } else {
+                delete_term_meta( $term_id, '_seopress_robots_follow', '' );
+            }
+            if( isset( $_POST[ 'seopress_robots_odp' ] ) ) {
+                update_term_meta( $term_id, '_seopress_robots_odp', 'yes' );
+            } else {
+                delete_term_meta( $term_id, '_seopress_robots_odp', '' );
+            }
+            if( isset( $_POST[ 'seopress_robots_imageindex' ] ) ) {
+                update_term_meta( $term_id, '_seopress_robots_imageindex', 'yes' );
+            } else {
+                delete_term_meta( $term_id, '_seopress_robots_imageindex', '' );
+            }
+            if( isset( $_POST[ 'seopress_robots_archive' ] ) ) {
+                update_term_meta( $term_id, '_seopress_robots_archive', 'yes' );
+            } else {
+                delete_term_meta( $term_id, '_seopress_robots_archive', '' );
+            }
+            if( isset( $_POST[ 'seopress_robots_snippet' ] ) ) {
+                update_term_meta( $term_id, '_seopress_robots_snippet', 'yes' );
+            } else {
+                delete_term_meta( $term_id, '_seopress_robots_snippet', '' );
+            }
+            if(isset($_POST['seopress_robots_canonical'])){
+                update_term_meta($term_id, '_seopress_robots_canonical', esc_html($_POST['seopress_robots_canonical']));
+            }
         }
-        if( isset( $_POST[ 'seopress_robots_index' ] ) ) {
-            update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
-        } else {
-            delete_term_meta( $term_id, '_seopress_robots_index', '' );
+        if (in_array('social-tab', $seo_tabs)) {
+            if(isset($_POST['seopress_social_fb_title'])){
+                update_term_meta($term_id, '_seopress_social_fb_title', esc_html($_POST['seopress_social_fb_title']));
+            }
+            if(isset($_POST['seopress_social_fb_desc'])){
+                update_term_meta($term_id, '_seopress_social_fb_desc', esc_html($_POST['seopress_social_fb_desc']));
+            }
+            if(isset($_POST['seopress_social_fb_img'])){
+                update_term_meta($term_id, '_seopress_social_fb_img', esc_html($_POST['seopress_social_fb_img']));
+            }
+            if(isset($_POST['seopress_social_twitter_title'])){
+                update_term_meta($term_id, '_seopress_social_twitter_title', esc_html($_POST['seopress_social_twitter_title']));
+            }
+            if(isset($_POST['seopress_social_twitter_desc'])){
+                update_term_meta($term_id, '_seopress_social_twitter_desc', esc_html($_POST['seopress_social_twitter_desc']));
+            }
+            if(isset($_POST['seopress_social_twitter_img'])){
+                update_term_meta($term_id, '_seopress_social_twitter_img', esc_html($_POST['seopress_social_twitter_img']));
+            }
         }
-        if( isset( $_POST[ 'seopress_robots_follow' ] ) ) {
-            update_term_meta( $term_id, '_seopress_robots_follow', 'yes' );
-        } else {
-            delete_term_meta( $term_id, '_seopress_robots_follow', '' );
-        }
-        if( isset( $_POST[ 'seopress_robots_odp' ] ) ) {
-            update_term_meta( $term_id, '_seopress_robots_odp', 'yes' );
-        } else {
-            delete_term_meta( $term_id, '_seopress_robots_odp', '' );
-        }
-        if( isset( $_POST[ 'seopress_robots_imageindex' ] ) ) {
-            update_term_meta( $term_id, '_seopress_robots_imageindex', 'yes' );
-        } else {
-            delete_term_meta( $term_id, '_seopress_robots_imageindex', '' );
-        }
-        if( isset( $_POST[ 'seopress_robots_archive' ] ) ) {
-            update_term_meta( $term_id, '_seopress_robots_archive', 'yes' );
-        } else {
-            delete_term_meta( $term_id, '_seopress_robots_archive', '' );
-        }
-        if( isset( $_POST[ 'seopress_robots_snippet' ] ) ) {
-            update_term_meta( $term_id, '_seopress_robots_snippet', 'yes' );
-        } else {
-            delete_term_meta( $term_id, '_seopress_robots_snippet', '' );
-        }
-        if(isset($_POST['seopress_robots_canonical'])){
-            update_term_meta($term_id, '_seopress_robots_canonical', esc_html($_POST['seopress_robots_canonical']));
-        }
-        if(isset($_POST['seopress_social_fb_title'])){
-            update_term_meta($term_id, '_seopress_social_fb_title', esc_html($_POST['seopress_social_fb_title']));
-        }
-        if(isset($_POST['seopress_social_fb_desc'])){
-            update_term_meta($term_id, '_seopress_social_fb_desc', esc_html($_POST['seopress_social_fb_desc']));
-        }
-        if(isset($_POST['seopress_social_fb_img'])){
-            update_term_meta($term_id, '_seopress_social_fb_img', esc_html($_POST['seopress_social_fb_img']));
-        }
-        if(isset($_POST['seopress_social_twitter_title'])){
-            update_term_meta($term_id, '_seopress_social_twitter_title', esc_html($_POST['seopress_social_twitter_title']));
-        }
-        if(isset($_POST['seopress_social_twitter_desc'])){
-            update_term_meta($term_id, '_seopress_social_twitter_desc', esc_html($_POST['seopress_social_twitter_desc']));
-        }
-        if(isset($_POST['seopress_social_twitter_img'])){
-            update_term_meta($term_id, '_seopress_social_twitter_img', esc_html($_POST['seopress_social_twitter_img']));
-        }         
-        if(isset($_POST['seopress_redirections_type'])){
-            update_term_meta($term_id, '_seopress_redirections_type', $_POST['seopress_redirections_type']);
-        }     
-        if(isset($_POST['seopress_redirections_value'])){
-            update_term_meta($term_id, '_seopress_redirections_value', esc_html($_POST['seopress_redirections_value']));
-        }
-        if( isset( $_POST[ 'seopress_redirections_enabled' ] ) ) {
-            update_term_meta( $term_id, '_seopress_redirections_enabled', 'yes' );
-        } else {
-            delete_term_meta( $term_id, '_seopress_redirections_enabled', '' );
+        if (in_array('redirect-tab', $seo_tabs)) {
+            if(isset($_POST['seopress_redirections_type'])){
+                update_term_meta($term_id, '_seopress_redirections_type', $_POST['seopress_redirections_type']);
+            }
+            if(isset($_POST['seopress_redirections_value'])){
+                update_term_meta($term_id, '_seopress_redirections_value', esc_html($_POST['seopress_redirections_value']));
+            }
+            if( isset( $_POST[ 'seopress_redirections_enabled' ] ) ) {
+                update_term_meta( $term_id, '_seopress_redirections_enabled', 'yes' );
+            } else {
+                delete_term_meta( $term_id, '_seopress_redirections_enabled', '' );
+            }
         }
     }
 }

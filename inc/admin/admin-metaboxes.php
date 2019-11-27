@@ -279,7 +279,7 @@ function seopress_display_seo_metaboxe() {
             $seopress_video                         = get_post_meta($post->ID,'_seopress_video');
         }
 
-        require_once ( dirname( __FILE__ ) . '/admin-metaboxes-form.php'); //Metaboxe HTML  
+        require_once ( dirname( __FILE__ ) . '/admin-metaboxes-form.php'); //Metaboxe HTML
     }
 
     add_action('save_post','seopress_save_metabox', 10, 2);
@@ -296,98 +296,113 @@ function seopress_display_seo_metaboxe() {
             return $post_id;
 
         if ( 'attachment' !== get_post_type($post_id)) {
-            if(isset($_POST['seopress_titles_title'])){
-              update_post_meta($post_id, '_seopress_titles_title', esc_html($_POST['seopress_titles_title']));
+            $seo_tabs = array();
+            $seo_tabs = json_decode(stripslashes(htmlspecialchars_decode($_POST['seo_tabs'])));
+            
+            if (in_array('title-tab', $seo_tabs)) {
+                if(isset($_POST['seopress_titles_title'])){
+                update_post_meta($post_id, '_seopress_titles_title', esc_html($_POST['seopress_titles_title']));
+                }
+                if(isset($_POST['seopress_titles_desc'])){
+                update_post_meta($post_id, '_seopress_titles_desc', esc_html($_POST['seopress_titles_desc']));
+                }
             }
-            if(isset($_POST['seopress_titles_desc'])){
-              update_post_meta($post_id, '_seopress_titles_desc', esc_html($_POST['seopress_titles_desc']));
+            if (in_array('advanced-tab', $seo_tabs)) {
+                if( isset( $_POST[ 'seopress_robots_index' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_robots_index', '' );
+                }
+                if( isset( $_POST[ 'seopress_robots_follow' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_robots_follow', '' );
+                }
+                if( isset( $_POST[ 'seopress_robots_odp' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_robots_odp', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_robots_odp', '' );
+                }
+                if( isset( $_POST[ 'seopress_robots_imageindex' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_robots_imageindex', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_robots_imageindex', '' );
+                }
+                if( isset( $_POST[ 'seopress_robots_archive' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_robots_archive', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_robots_archive', '' );
+                }
+                if( isset( $_POST[ 'seopress_robots_snippet' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_robots_snippet', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_robots_snippet', '' );
+                }
+                if(isset($_POST['seopress_robots_canonical'])){
+                    update_post_meta($post_id, '_seopress_robots_canonical', esc_html($_POST['seopress_robots_canonical']));
+                }            
+                if(isset($_POST['seopress_robots_primary_cat'])){
+                    update_post_meta($post_id, '_seopress_robots_primary_cat', esc_html($_POST['seopress_robots_primary_cat']));
+                }
+                if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                    if(isset($_POST['seopress_robots_breadcrumbs'])){
+                        update_post_meta($post_id, '_seopress_robots_breadcrumbs', esc_html($_POST['seopress_robots_breadcrumbs']));
+                    }
+                }
             }
-            if( isset( $_POST[ 'seopress_robots_index' ] ) ) {
-                update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_robots_index', '' );
+            if (in_array('social-tab', $seo_tabs)) {
+                if(isset($_POST['seopress_social_fb_title'])){
+                    update_post_meta($post_id, '_seopress_social_fb_title', esc_html($_POST['seopress_social_fb_title']));
+                }
+                if(isset($_POST['seopress_social_fb_desc'])){
+                    update_post_meta($post_id, '_seopress_social_fb_desc', esc_html($_POST['seopress_social_fb_desc']));
+                }
+                if(isset($_POST['seopress_social_fb_img'])){
+                    update_post_meta($post_id, '_seopress_social_fb_img', esc_html($_POST['seopress_social_fb_img']));
+                }
+                if(isset($_POST['seopress_social_twitter_title'])){
+                    update_post_meta($post_id, '_seopress_social_twitter_title', esc_html($_POST['seopress_social_twitter_title']));
+                }
+                if(isset($_POST['seopress_social_twitter_desc'])){
+                    update_post_meta($post_id, '_seopress_social_twitter_desc', esc_html($_POST['seopress_social_twitter_desc']));
+                }
+                if(isset($_POST['seopress_social_twitter_img'])){
+                    update_post_meta($post_id, '_seopress_social_twitter_img', esc_html($_POST['seopress_social_twitter_img']));
+                }
             }
-            if( isset( $_POST[ 'seopress_robots_follow' ] ) ) {
-                update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_robots_follow', '' );
-            }
-            if( isset( $_POST[ 'seopress_robots_odp' ] ) ) {
-                update_post_meta( $post_id, '_seopress_robots_odp', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_robots_odp', '' );
-            }
-            if( isset( $_POST[ 'seopress_robots_imageindex' ] ) ) {
-                update_post_meta( $post_id, '_seopress_robots_imageindex', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_robots_imageindex', '' );
-            }
-            if( isset( $_POST[ 'seopress_robots_archive' ] ) ) {
-                update_post_meta( $post_id, '_seopress_robots_archive', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_robots_archive', '' );
-            }
-            if( isset( $_POST[ 'seopress_robots_snippet' ] ) ) {
-                update_post_meta( $post_id, '_seopress_robots_snippet', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_robots_snippet', '' );
-            }
-            if(isset($_POST['seopress_robots_canonical'])){
-                update_post_meta($post_id, '_seopress_robots_canonical', esc_html($_POST['seopress_robots_canonical']));
-            }            
-            if(isset($_POST['seopress_robots_primary_cat'])){
-                update_post_meta($post_id, '_seopress_robots_primary_cat', esc_html($_POST['seopress_robots_primary_cat']));
+            if (in_array('redirect-tab', $seo_tabs)) {
+                if(isset($_POST['seopress_redirections_type'])){
+                    update_post_meta($post_id, '_seopress_redirections_type', $_POST['seopress_redirections_type']);
+                }     
+                if(isset($_POST['seopress_redirections_value'])){
+                    update_post_meta($post_id, '_seopress_redirections_value', esc_html($_POST['seopress_redirections_value']));
+                }
+                if(isset($_POST['seopress_redirections_param'])){
+                    update_post_meta($post_id, '_seopress_redirections_param', esc_html($_POST['seopress_redirections_param']));
+                }
+                if( isset( $_POST[ 'seopress_redirections_enabled' ] ) ) {
+                    update_post_meta( $post_id, '_seopress_redirections_enabled', 'yes' );
+                } else {
+                    delete_post_meta( $post_id, '_seopress_redirections_enabled', '' );
+                }
             }
             if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                if(isset($_POST['seopress_robots_breadcrumbs'])){
-                    update_post_meta($post_id, '_seopress_robots_breadcrumbs', esc_html($_POST['seopress_robots_breadcrumbs']));
+                if (in_array('news-tab', $seo_tabs)) {
+                    if( isset( $_POST[ 'seopress_news_disabled' ] ) ) {
+                        update_post_meta( $post_id, '_seopress_news_disabled', 'yes' );
+                    } else {
+                        delete_post_meta( $post_id, '_seopress_news_disabled', '' );
+                    }
                 }
-            }
-            if(isset($_POST['seopress_social_fb_title'])){
-                update_post_meta($post_id, '_seopress_social_fb_title', esc_html($_POST['seopress_social_fb_title']));
-            }
-            if(isset($_POST['seopress_social_fb_desc'])){
-                update_post_meta($post_id, '_seopress_social_fb_desc', esc_html($_POST['seopress_social_fb_desc']));
-            }
-            if(isset($_POST['seopress_social_fb_img'])){
-                update_post_meta($post_id, '_seopress_social_fb_img', esc_html($_POST['seopress_social_fb_img']));
-            }
-            if(isset($_POST['seopress_social_twitter_title'])){
-                update_post_meta($post_id, '_seopress_social_twitter_title', esc_html($_POST['seopress_social_twitter_title']));
-            }
-            if(isset($_POST['seopress_social_twitter_desc'])){
-                update_post_meta($post_id, '_seopress_social_twitter_desc', esc_html($_POST['seopress_social_twitter_desc']));
-            }
-            if(isset($_POST['seopress_social_twitter_img'])){
-                update_post_meta($post_id, '_seopress_social_twitter_img', esc_html($_POST['seopress_social_twitter_img']));
-            }         
-            if(isset($_POST['seopress_redirections_type'])){
-                update_post_meta($post_id, '_seopress_redirections_type', $_POST['seopress_redirections_type']);
-            }     
-            if(isset($_POST['seopress_redirections_value'])){
-                update_post_meta($post_id, '_seopress_redirections_value', esc_html($_POST['seopress_redirections_value']));
-            }
-            if(isset($_POST['seopress_redirections_param'])){
-                update_post_meta($post_id, '_seopress_redirections_param', esc_html($_POST['seopress_redirections_param']));
-            }
-            if( isset( $_POST[ 'seopress_redirections_enabled' ] ) ) {
-                update_post_meta( $post_id, '_seopress_redirections_enabled', 'yes' );
-            } else {
-                delete_post_meta( $post_id, '_seopress_redirections_enabled', '' );
-            }
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                if( isset( $_POST[ 'seopress_news_disabled' ] ) ) {
-                    update_post_meta( $post_id, '_seopress_news_disabled', 'yes' );
-                } else {
-                    delete_post_meta( $post_id, '_seopress_news_disabled', '' );
-                }
-                if( isset( $_POST[ 'seopress_video_disabled' ] ) ) {
-                    update_post_meta( $post_id, '_seopress_video_disabled', 'yes' );
-                } else {
-                    delete_post_meta( $post_id, '_seopress_video_disabled', '' );
-                }
-                if(isset($_POST['seopress_video'])){
-                    update_post_meta($post_id, '_seopress_video', $_POST['seopress_video']);
+                if (in_array('video-tab', $seo_tabs)) {
+                    if( isset( $_POST[ 'seopress_video_disabled' ] ) ) {
+                        update_post_meta( $post_id, '_seopress_video_disabled', 'yes' );
+                    } else {
+                        delete_post_meta( $post_id, '_seopress_video_disabled', '' );
+                    }
+                    if(isset($_POST['seopress_video'])){
+                        update_post_meta($post_id, '_seopress_video', $_POST['seopress_video']);
+                    }
                 }
             }
         }

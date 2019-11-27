@@ -482,14 +482,16 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 			if (seopress_google_analytics_link_tracking_enable_option() !='') {
 				$seopress_google_analytics_click_event['link_tracking'] =
 "window.addEventListener('load', function () {
-    var links = document.querySelectorAll('a[target=\"_blank\"]');
-    for (let i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', function(e) {
-            gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
-        });
-    }
-});
-";
+	var links = document.querySelectorAll('a');
+	for (let i = 0; i < links.length; i++) {
+		links[i].addEventListener('click', function(e) {
+			var n = this.href.includes('".get_home_url()."');
+			if (n == false) {
+				gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
+			}
+		});
+		}
+	});";
 				$seopress_google_analytics_click_event['link_tracking'] = apply_filters('seopress_gtag_link_tracking_ev', $seopress_google_analytics_click_event['link_tracking']);
 				$seopress_google_analytics_html .= $seopress_google_analytics_click_event['link_tracking'];
 			}

@@ -1785,7 +1785,7 @@ class seopress_options
                                 </div>
                                 <span class="inner">
                                     <h3><?php _e('Structured Data Types','wp-seopress'); ?></h3>
-                                    <p><?php _e('Add data types to your content: articles, courses, recipes, videos, events and products','wp-seopress'); ?></p>
+                                    <p><?php _e('Add data types to your content: articles, courses, recipes, videos, events, products and more.','wp-seopress'); ?></p>
                                     <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets$9' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                                     <a class="button-secondary view-redirects" href="<?php echo admin_url( 'edit.php?post_type=seopress_schemas' ); ?>"><?php _e('See schemas','wp-seopress'); ?></a>
                                     <?php
@@ -3023,7 +3023,7 @@ class seopress_options
 
         add_settings_field(
             'seopress_google_analytics_link_tracking_enable', // ID
-           __("Enable external links tracking (all links with target _blank attribute)","wp-seopress"), // Title
+           __("Enable external links tracking","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_link_tracking_enable_callback' ), // Callback
             'seopress-settings-admin-google-analytics-events', // Page
             'seopress_setting_section_google_analytics_events' // Section                  
