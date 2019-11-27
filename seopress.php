@@ -3,8 +3,8 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.7.2
-Author: Benjamin Denis
+Version: 3.7.3
+Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.7.2' ); 
+define( 'SEOPRESS_VERSION', '3.7.3' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -184,7 +184,18 @@ function seopress_add_admin_options_scripts($hook) {
                 'seopress_nonce' => wp_create_nonce('seopress_rk_migrate_nonce'),
                 'seopress_rk_migration' => admin_url( 'admin-ajax.php'),
             ),
-            'i18n' => __('Migration completed!','wp-seopress')
+            'seopress_squirrly_migrate' => array(
+                'seopress_nonce' => wp_create_nonce('seopress_squirrly_migrate_nonce'),
+                'seopress_squirrly_migration' => admin_url( 'admin-ajax.php'),
+            ),
+            'seopress_metadata_csv' => array(
+                'seopress_nonce' => wp_create_nonce('seopress_export_csv_metadata_nonce'),
+                'seopress_metadata_export' => admin_url( 'admin-ajax.php'),
+            ),
+            'i18n' => array(
+                'migration'=>__('Migration completed!','wp-seopress'),
+                'export'=>__('Export completed!','wp-seopress'),
+            )
         );
         wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate );
     }
@@ -340,7 +351,8 @@ function seopress_plugin_action_links($links, $file) {
 
     if ($file == $this_plugin) {
         $settings_link = '<a href="' . admin_url( 'admin.php?page=seopress-option') . '">'.__("Settings","wp-seopress").'</a>';
-        $website_link = '<a href="https://www.seopress.org/" target="_blank">'.__("SEOPress.org","wp-seopress").'</a>';
+        $website_link = '<a href="https://www.seopress.org/support/" target="_blank">'.__("Docs","wp-seopress").'</a>';
+        $wizard_link = '<a href="'.admin_url('admin.php?page=seopress-setup').'">'.__("Configuration Wizard","wp-seopress").'</a>';
         if ( !is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
             $pro_link = '<a href="https://www.seopress.org/seopress-pro/" style="color:#a00;font-weight:bold" target="_blank">'.__("GO PRO!","wp-seopress").'</a>';
             array_unshift($links, $pro_link);
@@ -351,7 +363,7 @@ function seopress_plugin_action_links($links, $file) {
             )));
             unset( $links['deactivate'] );
         }
-        array_unshift($links, $settings_link, $website_link);
+        array_unshift($links, $settings_link, $wizard_link, $website_link);
     }
 
     return $links;
@@ -372,7 +384,8 @@ function seopress_get_post_types() {
     $operator = 'and'; // 'and' or 'or'
 
     $post_types = get_post_types( $args, $output, $operator ); 
-    unset($post_types['attachment'], $post_types['seopress_404'], $post_types['elementor_library']);    
+    unset($post_types['attachment'], $post_types['seopress_404'], $post_types['elementor_library']);
+    $post_types = apply_filters('seopress_post_types', $post_types);
     return $post_types;
 }
 

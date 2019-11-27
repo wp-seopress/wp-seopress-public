@@ -4,9 +4,9 @@ Contributors: rainbowgeek
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.6+
-Tested up to: 5.2
+Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.7.2
+Stable tag: 3.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,12 +41,13 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Build your custom HTML Sitemap to enhanced navigation for visitors and improve search indexing.</li>
 	<li>Link your social media accounts to your site.</li>
 	<li>Redirections in post, pages, custom post types</li>
-	<li>Remove stop words (english, french, spanish, german, italian, portuguese, swedish)</li>
 	<li>Remove /category/ in URLs</li>
 	<li>Remove ?replytocom to avoid duplicate content</li>
 	<li>Redirect attachment pages to post parent</li>
+	<li>Redirect attachment pages to their file URL</li>
+	<li>Automatically set the image title / alt / caption / description</li>
 	<li>Import / Export settings from site to site.</li>
-	<li>Import posts and terms metadata from Yoast SEO</li>
+	<li>Import posts and terms metadata from Yoast SEO, All In One SEO, SEO Framework, Rank Math and Squirrly</li>
 	<li>W3C check</li>
 	<li>Content analysis</li>
 	<li>...</li>
@@ -56,6 +57,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 
 <ul>
 	<li>Import metadatas (titles, open graph, robots...) from CSV file</li>
+	<li>Export metadatas (titles, open graph, robots...) to a CSV file</li>
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
 	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, FAQ, course, recipe, video, event, product, job, simple review</li>
@@ -88,27 +90,26 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 <h3>Translations</h3>
 
 <ul>
-	<li>English (professional translation)</li>
-	<li>French (professional translation)</li>
-	<li>Spanish (professional translation)</li>
-	<li>German (professional translation)</li>
-	<li>Dutch (professional translation)</li>
-	<li>Russian (professional translation)</li>
-	<li>Japanese (professional translation)</li>
-	<li>Hindi (professional translation)</li>
-	<li>Greek</li>
-	<li>Bulgarian</li>
-	<li>Indonesian</li>
-	<li>Italian</li>
-	<li>Telugu</li>
-	<li>Tamil</li>
-	<li>Brazilian Portguese</li>
-	<li>Vietnamese</li>
-	<li>Romanian</li>
-	<li>Arabic</li>
-	<li>Chinese</li>
-	<li>Persian</li>
-	<li>Turkish</li>
+	<li>🇺🇸 English (UK) (English (UK)) - professional translation</li>
+	<li>🇫🇷 Français (French (France)) - professional translation</li>
+	<li>🇪🇸 Español (Spanish (Spain)) - professional translation</li>
+	<li>🇩🇪 Deutsch (German) - professional translation</li>
+	<li>🇳🇱 Nederlands (Dutch) - professional translation</li>
+	<li>🇷🇺 Русский (Russian) - professional translation</li>
+	<li>🇯🇵 日本語 (Japanese) - professional translation</li>
+	<li>🇮🇳 हिन्दी (Hindi) - professional translation</li>
+	<li>🇬🇷 Ελληνικά (Greek)</li>
+	<li>🇧🇬 Български (Bulgarian)</li>
+	<li>🇮🇩 Bahasa Indonesia (Indonesian)</li>
+	<li>🇮🇹 Italiano (Italian)</li>
+	<li>🇧🇷 Português do Brasil (Portuguese (Brazil))</li>
+	<li>🇻🇳 Tiếng Việt (Vietnamese)</li>
+	<li>🇷🇴 Română (Romanian)</li>
+	<li>🇸🇦 العربية (Arabic)</li>
+	<li>🇨🇳 中文 (Chinese (China))</li>
+	<li>🇮🇷 فارسی (Persian)</li>
+	<li>🇹🇷 Türkçe (Turkish)</li>
+	<li>...</li>
 </ul>
 
 <h3>SEOPress integrates seamlessly with popular e-commerce, translation, performance and analytics tools.</h3>
@@ -136,6 +137,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 
 <h3>Featured on</h3>
 <ul>
+	<li>WP Beginner</li>
+	<li>Elementor</li>
 	<li>WP Crafter</li>
 	<li>Kinsta</li>
 	<li>Pagely</li>
@@ -145,6 +148,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>MasterWP</li>
 	<li>...</li>
 </ul>
+
+<a href="https://www.seopress.org/press/" target="_blank">Complete list on our Press page</a>
 
 <h3>Our website:</h3>
 Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">seopress.org</a>
@@ -159,7 +164,7 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 
 = Can I import my post and term metadatas from other plugins? =
 
-You can import your metadatas from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a> and <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a> in one click to SEOPress without losing traffic.
+You can import your metadatas from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/">Squirrly</a> (post metas only, not terms), and <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a> in one click to SEOPress without losing traffic.
 
 = How to use Google Tag Manager / Facebook Pixel with SEOPress? =
 
@@ -265,6 +270,19 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 60. Installation Wizard
 
 == Changelog ==
+= 3.7.3 =
+* NEW WordPress 5.3 compatibility
+* NEW Export metadata to a CSV file! (PRO)
+* NEW Added multi-domain support for XML sitemaps with Polylang (https://www.seopress.org/support/guides/multidomain-xml-sitemap-with-polylang-and-seopress/)
+* NEW Import post metadata from Squirrly (https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/)
+* NEW 'seopress_metadata_query_args' hook to filter CSV metadata export query (https://www.seopress.org/support/hooks/filter-the-arguments-of-the-metadata-export-query/)
+* NEW 'seopress_post_types' hook to filter custom post type used by SEOPress
+* NEW 'seopress_sitemaps_single_img_url' hook to filter standard image URLs in XML image sitemaps (use it inside a mu-plugin)
+* NEW 'seopress_sitemaps_single_shortcodes' hook to filter execution of shortcodes in XML image sitemaps (use it inside a mu-plugin)
+* INFO Improve XML image sitemaps for featured images, product galleries...
+* INFO Breadcrumbs options can now be translated from WPML / Polylang (wpml-config.xml)
+* FIX Call to undefined function is_product() in /wp-seopress/inc/functions/variables/dynamic-variables.php:97
+* FIX JS error in content analysis metabox on Google Suggestions
 = 3.7.2 =
 * NEW Custom taxonomy for automatic schemas (eg: Brand for product schema) - PRO
 * NEW Add image caption and title to XML Image Sitemaps

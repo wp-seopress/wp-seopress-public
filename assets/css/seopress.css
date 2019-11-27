@@ -650,7 +650,7 @@ body.seopress-styles {
     margin: 0;
 }
 
-.seopress-styles .seopress-option #seopress-yoast-migrate, .seopress-styles .seopress-option #seopress-aio-migrate, .seopress-styles .seopress-option #seopress-seo-framework-migrate, .seopress-styles .seopress-option #submit {
+.seopress-styles .seopress-option #seopress-yoast-migrate, .seopress-styles .seopress-option #seopress-aio-migrate, .seopress-styles .seopress-option #seopress-seo-framework-migrate, .seopress-styles .seopress-option #seopress-rk-migrate, .seopress-styles .seopress-option #seopress-squirrly-migrate, .seopress-styles .seopress-option #submit {
     color: #fff;
     text-decoration: none;
     border: none;
@@ -670,7 +670,7 @@ body.seopress-styles {
     z-index: 10;
 }
 
-.seopress-styles .seopress-option #seopress-yoast-migrate:hover, .seopress-styles .seopress-option #seopress-aio-migrate:hover, .seopress-styles .seopress-option #seopress-seo-framework-migrate:hover, .seopress-styles .seopress-option #submit:hover {
+.seopress-styles .seopress-option #seopress-yoast-migrate:hover, .seopress-styles .seopress-option #seopress-aio-migrate:hover, .seopress-styles .seopress-option #seopress-seo-framework-migrate:hover, .seopress-styles .seopress-option #seopress-rk-migrate:hover, .seopress-styles .seopress-option #seopress-squirrly-migrate:hover, .seopress-styles .seopress-option #submit:hover {
     text-decoration: none;
     color: #FFF;
     background: #232323;

@@ -108,7 +108,7 @@ if ($post !='') {
 
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
-    if (is_product()) {
+    if (is_singular(array('product'))) {
         //Woo Cat product
         $woo_single_cats = get_the_terms( $post->ID, 'product_cat' );
                             

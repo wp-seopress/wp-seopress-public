@@ -231,8 +231,7 @@ function seopress_display_seo_metaboxe() {
             $disabled['robots_odp']             = 'disabled';
         } else {
             $seopress_robots_odp                = get_post_meta($post->ID,'_seopress_robots_odp',true);
-
-        }        
+        }
 
         $disabled['archive'] ='';
         if (seopress_titles_noarchive_option()) {
@@ -240,7 +239,7 @@ function seopress_display_seo_metaboxe() {
             $disabled['archive']                = 'disabled';
         } else {
             $seopress_robots_archive            = get_post_meta($post->ID,'_seopress_robots_archive',true);
-        }        
+        }
 
         $disabled['snippet'] ='';
         if (seopress_titles_nosnippet_option()) {

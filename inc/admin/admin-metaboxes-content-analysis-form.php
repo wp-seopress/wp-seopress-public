@@ -58,7 +58,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 
                     jQuery('.sp-suggest-btn').click(function(e) {
                         e.preventDefault();
-                        if($('#seopress_analysis_target_kw_meta').val().length == 0){
+                        if(jQuery('#seopress_analysis_target_kw_meta').val().length == 0){
                             jQuery('#seopress_analysis_target_kw_meta').val(jQuery(this).text() + ',');
                         } else {
                             str = jQuery('#seopress_analysis_target_kw_meta').val();

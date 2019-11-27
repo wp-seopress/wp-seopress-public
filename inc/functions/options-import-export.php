@@ -4,8 +4,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Import / Exports settings page
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-//Export SEOPress Settings in JSON
+//Export SEOPress Settings to JSON
 function seopress_export_settings() {
     if( empty( $_POST['seopress_action'] ) || 'export_settings' != $_POST['seopress_action'] )
         return;
@@ -315,7 +314,7 @@ function seopress_reset_settings() {
 }
 add_action( 'admin_init', 'seopress_reset_settings' );
 
-//Export SEOPress BOT Links in CSV
+//Export SEOPress BOT Links to CSV
 function seopress_bot_links_export_settings() {
     if( empty( $_POST['seopress_action'] ) || 'export_csv_links_settings' != $_POST['seopress_action'] )
         return;
@@ -368,21 +367,13 @@ function seopress_bot_links_export_settings() {
             
             array_push($settings["URL"], get_the_title());
             
-            if (get_post_meta( get_the_ID(), 'seopress_bot_source_title', true ) !='') {
-                array_push($settings["Source"], get_post_meta( get_the_ID(), 'seopress_bot_source_title', true ));    
-            }
+            array_push($settings["Source"], get_post_meta( get_the_ID(), 'seopress_bot_source_title', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_bot_source_url', true ) !='') {
-                array_push($settings["Source_Url"], get_post_meta( get_the_ID(), 'seopress_bot_source_url', true ));    
-            }
+            array_push($settings["Source_Url"], get_post_meta( get_the_ID(), 'seopress_bot_source_url', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_bot_status', true ) !='') {
-                array_push($settings["Status"], get_post_meta( get_the_ID(), 'seopress_bot_status', true ));    
-            }
+            array_push($settings["Status"], get_post_meta( get_the_ID(), 'seopress_bot_status', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_bot_type', true ) !='') {
-                array_push($settings["Type"], get_post_meta( get_the_ID(), 'seopress_bot_type', true ));    
-            }
+            array_push($settings["Type"], get_post_meta( get_the_ID(), 'seopress_bot_type', true ));
 
             fputcsv( $output_handle, array_merge($settings["URL"], $settings["Source"], $settings["Source_Url"], $settings["Status"], $settings["Type"]));
             
@@ -404,7 +395,7 @@ function seopress_bot_links_export_settings() {
 }
 add_action( 'admin_init', 'seopress_bot_links_export_settings' );
 
-//Export SEOPress Backlinks in CSV
+//Export SEOPress Backlinks to CSV
 function seopress_backlinks_export_settings() {
     if( empty( $_POST['seopress_action'] ) || 'export_backlinks_settings' != $_POST['seopress_action'] )
         return;
@@ -437,7 +428,7 @@ function seopress_backlinks_export_settings() {
     $csv_fields[] = 'URL';
     $csv_fields[] = 'Anchor Text';
     $csv_fields[] = 'Source Citation Flow';
-    $csv_fields[] = 'Source Trust Flow';    
+    $csv_fields[] = 'Source Trust Flow';
     $csv_fields[] = 'Target Citation Flow';
     $csv_fields[] = 'Target Trust Flow';
     $csv_fields[] = 'First indexed';
@@ -463,33 +454,19 @@ function seopress_backlinks_export_settings() {
             
             array_push($settings["URL"], get_the_title());
             
-            if (get_post_meta( get_the_ID(), 'seopress_backlinks_anchor_text', true ) !='') {
-                array_push($settings["Anchor_text"], get_post_meta( get_the_ID(), 'seopress_backlinks_anchor_text', true ));    
-            }
+            array_push($settings["Anchor_text"], get_post_meta( get_the_ID(), 'seopress_backlinks_anchor_text', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_backlinks_source_citation_flow', true ) !='') {
-                array_push($settings["Source_citation_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_source_citation_flow', true ));    
-            }
+            array_push($settings["Source_citation_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_source_citation_flow', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_backlinks_source_trust_flow', true ) !='') {
-                array_push($settings["Source_trust_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_source_trust_flow', true ));    
-            }
+            array_push($settings["Source_trust_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_source_trust_flow', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_backlinks_target_citation_flow', true ) !='') {
-                array_push($settings["Target_citation_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_target_citation_flow', true ));    
-            }
+            array_push($settings["Target_citation_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_target_citation_flow', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_backlinks_target_trust_flow', true ) !='') {
-                array_push($settings["Target_trust_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_target_trust_flow', true ));    
-            }
+            array_push($settings["Target_trust_flow"], get_post_meta( get_the_ID(), 'seopress_backlinks_target_trust_flow', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_backlinks_found_date', true ) !='') {
-                array_push($settings["Found_date"], get_post_meta( get_the_ID(), 'seopress_backlinks_found_date', true ));    
-            }
+            array_push($settings["Found_date"], get_post_meta( get_the_ID(), 'seopress_backlinks_found_date', true ));
 
-            if (get_post_meta( get_the_ID(), 'seopress_backlinks_last_update', true ) !='') {
-                array_push($settings["Last_update"], get_post_meta( get_the_ID(), 'seopress_backlinks_last_update', true ));    
-            }
+            array_push($settings["Last_update"], get_post_meta( get_the_ID(), 'seopress_backlinks_last_update', true ));
 
             fputcsv( $output_handle, array_merge(
                         $settings["URL"], 
@@ -523,3 +500,64 @@ function seopress_backlinks_export_settings() {
     exit;
 }
 add_action( 'admin_init', 'seopress_backlinks_export_settings' );
+
+function seopress_download_batch_export() {
+    if( empty( $_GET['seopress_action'] ) || 'seopress_download_batch_export' != $_GET['seopress_action'] )
+        return;
+
+    if( ! wp_verify_nonce( $_GET['nonce'], 'seopress_csv_batch_export_nonce' ) )
+         return;
+
+    if (current_user_can('manage_options') && is_admin()) {
+
+        if (get_option('seopress_metadata_csv') !='') {
+            $csv = get_option('seopress_metadata_csv');
+
+            $csv_fields = array();
+            $csv_fields[] = 'id';
+            $csv_fields[] = 'meta_title';
+            $csv_fields[] = 'meta_desc';
+            $csv_fields[] = 'fb_title';
+            $csv_fields[] = 'fb_desc';
+            $csv_fields[] = 'fb_img';
+            $csv_fields[] = 'tw_title';
+            $csv_fields[] = 'tw_desc';
+            $csv_fields[] = 'tw_img';
+            $csv_fields[] = 'noindex';
+            $csv_fields[] = 'nofollow';
+            $csv_fields[] = 'noodp';
+            $csv_fields[] = 'noimageindex';
+            $csv_fields[] = 'noarchive';
+            $csv_fields[] = 'nosnippet';
+            $csv_fields[] = 'canonical_url';
+            $csv_fields[] = 'target_kw';
+            
+            $output_handle = @fopen( 'php://output', 'w' );
+                
+            //Insert header row
+            fputcsv( $output_handle, $csv_fields );
+            
+            //Header
+            ignore_user_abort( true );
+            nocache_headers();
+            header( 'Content-Type: text/csv; charset=utf-8' );
+            header( 'Content-Disposition: attachment; filename=seopress-metadata-export-' . date( 'm-d-Y' ) . '.csv' );
+            header( 'Expires: 0' );
+            header( 'Pragma: public' );
+            
+            if (!empty($csv)) {
+                foreach($csv as $value) {
+                    fputcsv( $output_handle, $value);
+                }
+            }
+
+            // Close output file stream
+            fclose( $output_handle );
+
+            //Clean database
+            delete_option('seopress_metadata_csv');
+            exit;
+        }
+    }
+}
+add_action( 'admin_init', 'seopress_download_batch_export' );
