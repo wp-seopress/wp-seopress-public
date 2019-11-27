@@ -1312,3 +1312,20 @@ if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex
 		add_action( 'wp_head', 'seopress_titles_canonical_hook', 1 );
 	}
 }
+
+//Author meta
+function seopress_titles_author() {
+	global $post;
+	if (is_singular() && isset($post->post_author)){
+		$the_author_meta = get_the_author_meta('display_name', $post->post_author);
+		if ($the_author_meta) {
+			$html = '<meta name="author" content="'.$the_author_meta.'">';
+			$html .= "\n";
+
+			$html = apply_filters( 'seopress_titles_author', $html );
+
+			echo $html;
+		}
+	}
+}
+add_action('wp_head', 'seopress_titles_author', 1);

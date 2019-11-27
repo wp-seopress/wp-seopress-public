@@ -30,6 +30,7 @@ add_action( 'the_post', function( $post ) {
 });
 
 function seopress_xml_sitemap_index() {
+	//Polylang
 	$home_url = get_home_url().'/';
 	if (function_exists('pll_home_url')) {
 		$home_url = pll_home_url();
@@ -46,7 +47,12 @@ function seopress_xml_sitemap_index() {
 			foreach ($cpt_value as $_cpt_key => $_cpt_value) {
 				if($_cpt_value =='1') {
 
-					$count_posts = wp_count_posts($cpt_key);
+					//Polylang
+					if (function_exists('pll_home_url')) {
+						$count_posts = pll_count_posts(pll_current_language());
+					} else {
+						$count_posts = wp_count_posts($cpt_key);
+					}
 
 					//Max posts per paginated sitemap
 					$max = 1000;

@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.7.3
+Version: 3.7.4
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.7.3' ); 
+define( 'SEOPRESS_VERSION', '3.7.4' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -412,8 +412,7 @@ function seopress_get_custom_fields() {
     
     if ( false === $cf_keys ) {
         global $wpdb;
-        global $post;
-        $post = get_post( $post );
+        
         $limit = (int) apply_filters( 'postmeta_form_limit', 250 );
         $cf_keys = $wpdb->get_col( "
             SELECT meta_key
@@ -422,6 +421,8 @@ function seopress_get_custom_fields() {
             HAVING meta_key NOT LIKE '\_%'
             ORDER BY meta_key
             LIMIT $limit" );
+
+        $cf_keys = apply_filters( 'seopress_get_custom_fields', $cf_keys );
 
         if ( $cf_keys ) {
             natcasesort( $cf_keys );

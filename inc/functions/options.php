@@ -304,20 +304,30 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		}
 	}
 	//primary category
-    if (!is_admin()){
-	    function seopress_titles_primary_cat_hook($cats_0,  $cats,  $post) {
-	        $_seopress_robots_primary_cat = get_post_meta(get_the_ID(),'_seopress_robots_primary_cat',true);
-	        if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {
-	            $cats_0 = $_seopress_robots_primary_cat;
-	            return $cats_0;
-	        } else {
-	        	//no primary cat
-	        	return $cats_0;
-	        }
-		    
-	    }
-	    add_filter( 'post_link_category', 'seopress_titles_primary_cat_hook', 10, 3 ); 
-    }
+	function seopress_titles_primary_cat_hook($cats_0,  $cats,  $post) {
+		$primary_cat	= NULL;
+		if (!is_admin()) {
+			global $post;
+		}
+		$post			= get_post( $post );
+		
+		$_seopress_robots_primary_cat = get_post_meta($post->ID,'_seopress_robots_primary_cat',true);
+		
+		if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {
+			if ($post->post_type !=NULL && $post->post_type =='post') {
+				$primary_cat = get_category($_seopress_robots_primary_cat);
+			} elseif ($post->post_type !=NULL && $post->post_type =='product') {
+				$primary_cat = get_term($_seopress_robots_primary_cat, 'product_cat');
+			}
+			if (!is_wp_error($primary_cat) && $primary_cat !=NULL) {
+				return $primary_cat;
+			}
+		} else {
+			//no primary cat
+			return $cats_0;
+		}
+	}
+	add_filter( 'post_link_category', 'seopress_titles_primary_cat_hook', 10, 3 );
 	//No /category/ in URL
 	function seopress_advanced_advanced_category_url_option() {
 		$seopress_advanced_advanced_category_url_option = get_option("seopress_advanced_option_name");

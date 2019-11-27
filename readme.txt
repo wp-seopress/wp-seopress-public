@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.7.3
+Stable tag: 3.7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -270,6 +270,18 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 60. Installation Wizard
 
 == Changelog ==
+= 3.7.4 =
+* NEW Author meta name for singular page (enabled by default)
+* NEW 'seopress_robots_txt_file' hook to filter robots.txt file (useful with Polylang and multidomain option https://www.seopress.org/support/hooks/filter-robots-txt-file-seopress-pro/)
+* NEW 'seopress_get_custom_fields' hook to filter custom fields list in Schemas (https://www.seopress.org/support/hooks/filter-custom-fields-list-in-schemas/)
+* INFO Support hierarchical custom post type for breadcrumbs (PRO)
+* INFO Improve documentation for robots.txt page
+* INFO Improve primary category feature for post
+* INFO Breadcrumbs is now matching primary category (if set)
+* FIX get_home_url() for XSL sitemap with Polylang
+* FIX replace wp_count_posts by pll_count_posts if Polylang activated for XML Sitemap index
+* FIX check when applying "rsd_link" option (thanks to @bomalo)
+* FIX Site is experience difficulties error after requesting the bot in specific cases
 = 3.7.3 =
 * NEW WordPress 5.3 compatibility
 * NEW Export metadata to a CSV file! (PRO)

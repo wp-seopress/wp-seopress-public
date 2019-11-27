@@ -214,13 +214,18 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         </span>
                     </p>';
 
-                    if ($typenow =='post' && ($pagenow == 'post.php' || $pagenow == 'post-new.php')) {
+                    if (($typenow =='post' || $typenow =='product') && ($pagenow == 'post.php' || $pagenow == 'post-new.php')) {
                         echo '<p>
                             <label for="seopress_robots_primary_cat_meta">'. __( 'Select a primary category', 'wp-seopress' ) .'</label>
                             <span class="description">'.__('Set the category that gets used in the %category% permalink if you have multiple categories.','wp-seopress').'</p>
                             <select name="seopress_robots_primary_cat">';
 
                             $cats = get_categories();
+
+                            if ($typenow =='product') {
+                                $cats = get_the_terms( $post, 'product_cat' );
+                            }
+
                             if (!empty($cats)) {
                                 echo '<option '. selected( 'none', $seopress_robots_primary_cat, false ).' value="none">'.__('None (will disable this feature)','wp-seopress').'</option>';
                                 foreach ($cats as $category) {
@@ -230,6 +235,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                             echo '</select>
                         </p>';
                     }
+                    
                     if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                         if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                             echo '<p>

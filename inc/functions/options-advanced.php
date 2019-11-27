@@ -82,7 +82,7 @@ function seopress_advanced_advanced_wp_rsd_option() {
 	}
 }
 
-if (seopress_advanced_advanced_wp_wlw_option() =='1') {
+if (seopress_advanced_advanced_wp_rsd_option() =='1') {
 	remove_action('wp_head', 'rsd_link');
 }
 

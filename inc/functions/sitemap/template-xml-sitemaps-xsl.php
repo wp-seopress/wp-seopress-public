@@ -11,6 +11,11 @@ function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_sch
 add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
 
 function seopress_xml_sitemap_index_xsl() {
+	$home_url = get_home_url().'/';
+	if (function_exists('pll_home_url')) {
+		$home_url = pll_home_url();
+	}
+
 	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"
 				xmlns:html="http://www.w3.org/TR/REC-html40"
 				xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
@@ -114,7 +119,7 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='<body>';
 	$seopress_sitemaps_xsl .='<div id="main">';
 	$seopress_sitemaps_xsl .='<h1>'.__('XML Sitemaps','wp-seopress').'</h1>';
-	$seopress_sitemaps_xsl .='<p><a href="'.get_home_url().'/sitemaps.xml">Index sitemaps</a></p>';
+	$seopress_sitemaps_xsl .='<p><a href="'.$home_url.'sitemaps.xml">Index sitemaps</a></p>';
 	$seopress_sitemaps_xsl .='<div id="sitemaps">';
 	$seopress_sitemaps_xsl .='<div class="loc">';
 	$seopress_sitemaps_xsl .='URL';
