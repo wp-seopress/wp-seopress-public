@@ -531,11 +531,11 @@ function seopress_download_batch_export() {
             $csv_fields[] = 'nosnippet';
             $csv_fields[] = 'canonical_url';
             $csv_fields[] = 'target_kw';
-            
+            ob_start();
             $output_handle = @fopen( 'php://output', 'w' );
                 
             //Insert header row
-            fputcsv( $output_handle, $csv_fields );
+            fputcsv( $output_handle, $csv_fields, ';' );
             
             //Header
             ignore_user_abort( true );

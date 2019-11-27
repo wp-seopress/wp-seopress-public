@@ -62,7 +62,11 @@ function seopress_xml_sitemap_single() {
 		$offset = 0;
 	}
 
-	$home_url = site_url().'/';
+	$home_url = home_url().'/';
+	
+	if (function_exists('pll_home_url')) {
+        $home_url = site_url().'/';
+    }
 
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
@@ -133,16 +137,18 @@ function seopress_xml_sitemap_single() {
 								$post_content = get_post_field('post_content', $post);
 							}
 
-						    if (function_exists('mb_convert_encoding')) {
-						    	$dom->loadHTML(mb_convert_encoding($post_content, 'HTML-ENTITIES', 'UTF-8'));
-						    } else {
-						    	$dom->loadHTML('<?xml encoding="utf-8" ?>'.$post_content);
-							}
+							if ($post_content !="") {
+								if (function_exists('mb_convert_encoding')) {
+									$dom->loadHTML(mb_convert_encoding($post_content, 'HTML-ENTITIES', 'UTF-8'));
+								} else {
+									$dom->loadHTML('<?xml encoding="utf-8" ?>'.$post_content);
+								}
 
-							$dom->preserveWhiteSpace = false;
+								$dom->preserveWhiteSpace = false;
 
-							if ($dom->getElementsByTagName('img') !='') {
-								$images = $dom->getElementsByTagName('img');
+								if ($dom->getElementsByTagName('img') !='') {
+									$images = $dom->getElementsByTagName('img');
+								}
 							}
 							libxml_use_internal_errors($internalErrors);
 						}

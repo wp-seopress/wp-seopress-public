@@ -15,7 +15,11 @@ function seopress_xml_sitemap_author() {
 		$path = get_query_var( 'seopress_cpt');
 	}
 
-	$home_url = site_url().'/';
+	$home_url = home_url().'/';
+	
+	if (function_exists('pll_home_url')) {
+        $home_url = site_url().'/';
+    }
 
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
