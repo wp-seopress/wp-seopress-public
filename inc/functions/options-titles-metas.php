@@ -474,9 +474,9 @@ function seopress_titles_the_description_content() {
 			$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
 		}
 	} elseif ( is_home() && get_post_meta(get_option( 'page_for_posts' ),'_seopress_titles_desc',true) !=''){ //BLOG PAGE
-		if (get_post_meta(get_option( 'page_for_posts' ),'_seopress_titles_desc',true)) { //IS METABOXE
-			$seopress_titles_the_description_meta = get_post_meta(get_option( 'page_for_posts' ),'_seopress_titles_desc',true);
-			$seopress_titles_the_description = esc_attr($seopress_titles_the_description_meta);
+		if (get_post_meta(get_option( 'page_for_posts' ),'_seopress_titles_desc',true)) {
+			$seopress_titles_the_description_meta = esc_html(get_post_meta(get_option( 'page_for_posts' ),'_seopress_titles_desc',true));
+			$seopress_titles_the_description = $seopress_titles_the_description_meta;
 			
 			$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
 		}

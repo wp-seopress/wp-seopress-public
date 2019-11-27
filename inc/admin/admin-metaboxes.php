@@ -168,6 +168,8 @@ function seopress_display_seo_metaboxe() {
     }
 
     function seopress_cpt($post){
+        wp_nonce_field( plugin_basename( __FILE__ ), 'seopress_cpt_nonce' );
+
         global $typenow;
 
         //init 
@@ -280,8 +282,19 @@ function seopress_display_seo_metaboxe() {
         require_once ( dirname( __FILE__ ) . '/admin-metaboxes-form.php'); //Metaboxe HTML  
     }
 
-    add_action('save_post','seopress_save_metabox');
-    function seopress_save_metabox($post_id){
+    add_action('save_post','seopress_save_metabox', 10, 2);
+    function seopress_save_metabox($post_id, $post){
+        //Nonce
+        if ( !isset( $_POST['seopress_cpt_nonce'] ) || !wp_verify_nonce( $_POST['seopress_cpt_nonce'], plugin_basename( __FILE__ ) ) )
+            return $post_id;
+
+        //Post type object
+        $post_type = get_post_type_object( $post->post_type );
+
+        //Check permission
+        if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
+            return $post_id;
+
         if ( 'attachment' !== get_post_type($post_id)) {
             if(isset($_POST['seopress_titles_title'])){
               update_post_meta($post_id, '_seopress_titles_title', esc_html($_POST['seopress_titles_title']));
@@ -404,6 +417,8 @@ function seopress_display_ca_metaboxe() {
     }
 
     function seopress_content_analysis($post) {
+        wp_nonce_field( plugin_basename( __FILE__ ), 'seopress_content_analysis_nonce' );
+
         wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters.min.js', dirname(dirname( __FILE__ ))), array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ), SEOPRESS_VERSION );
         $seopress_real_preview = array(
             'seopress_nonce' => wp_create_nonce('seopress_real_preview_nonce'),
@@ -455,8 +470,19 @@ function seopress_display_ca_metaboxe() {
         require_once ( dirname( __FILE__ ) . '/admin-metaboxes-content-analysis-form.php'); //Metaboxe HTML
     }
 
-    add_action('save_post','seopress_save_ca_metabox');
-    function seopress_save_ca_metabox($post_id){
+    add_action('save_post','seopress_save_ca_metabox', 10, 2);
+    function seopress_save_ca_metabox($post_id, $post){
+        //Nonce
+        if ( !isset( $_POST['seopress_content_analysis_nonce'] ) || !wp_verify_nonce( $_POST['seopress_content_analysis_nonce'], plugin_basename( __FILE__ ) ) )
+            return $post_id;
+
+        //Post type object
+        $post_type = get_post_type_object( $post->post_type );
+
+        //Check permission
+        if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
+            return $post_id;
+
         if ( 'attachment' !== get_post_type($post_id)) {
             if(isset($_POST['seopress_analysis_target_kw'])){
                 update_post_meta($post_id, '_seopress_analysis_target_kw', esc_html($_POST['seopress_analysis_target_kw']));

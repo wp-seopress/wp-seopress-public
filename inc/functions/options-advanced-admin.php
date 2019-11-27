@@ -373,6 +373,9 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
                 case 'seopress_ps' :
                     echo '<div class="seopress-request-page-speed seopress-button" data_permalink="'.get_the_permalink().'" title="'.__('Analyze this page with Google Page Speed','wp-seopress').'"><span class="dashicons dashicons-dashboard"></span></div>';
                     break;
+                
+                default :
+                    break;
             }
         }
     }
@@ -778,7 +781,9 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
 		        		<span class="input-text-wrap"><input type="text" name="seopress_canonical" /></span>
 		        	</label>
 		        	<?php
-	            break;
+                break;
+                default :
+                break;
 	        	}
 	        ?>
       	</div>
@@ -803,7 +808,7 @@ function seopress_bulk_quick_edit_save_post($post_id) {
         return $post_id;
     }
 
-	if (!current_user_can('edit_post', $post_id)) {
+	if (!current_user_can('edit_posts', $post_id)) {
         return;
     }
 

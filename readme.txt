@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 3.6.2.1
+Stable tag: 3.6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -219,6 +219,21 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.6.3 =
+* INFO Improve code quality
+* INFO Improve security
+* FIX Notice: Undefined index: seopress_backlinks_majestic_key
+* FIX Notice: Undefined index: seopress_robots_file
+* FIX Notice: Undefined index: seopress_rss_before_html
+* FIX Notice: Undefined index: seopress_rss_after_html
+* FIX Saving FAQ manual schema
+* FIX Saving Service description manual schema
+* FIX Saving Recipe ingredients manual schema
+* FIX Saving Recipe instructions manual schema
+* FIX Pixels counter color
+* FIX Some CSS
+* FIX map_meta_cap was called incorrectly. The post type seopress_404 is not registered, so it may not be reliable to check the capability "edit_post" against a post of that type.
+* FIX Undefined variable in installation wizard
 = 3.6.2.1 =
 * FIX Video duration for manual edit (automatic schema)
 * FIX Notice: Undefined variable: seopress_excerpt_length

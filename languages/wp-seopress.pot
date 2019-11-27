@@ -1,10 +1,9 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2019-08-08 11:56+0200\n"
-"PO-Revision-Date: 2019-06-19 15:31+0200\n"
+"POT-Creation-Date: 2019-08-22 12:52+0200\n"
+"PO-Revision-Date: 2019-08-22 12:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
 "Language: en_US\n"
@@ -182,7 +181,7 @@ msgstr ""
 
 #: inc/admin/admin-metaboxes-content-analysis-form.php:9
 #: inc/admin/admin-metaboxes-content-analysis-form.php:10
-#: inc/functions/options-advanced-admin.php:769
+#: inc/functions/options-advanced-admin.php:772
 msgid "Target keywords"
 msgstr ""
 
@@ -371,7 +370,7 @@ msgstr ""
 #: inc/admin/admin-wizard.php:311 inc/admin/admin.php:711
 #: inc/admin/admin.php:732 inc/admin/admin.php:751 inc/admin/admin.php:772
 #: inc/admin/admin.php:2121 inc/admin/admin.php:3572
-#: inc/functions/options-advanced-admin.php:761
+#: inc/functions/options-advanced-admin.php:764
 msgid "Meta description"
 msgstr ""
 
@@ -511,7 +510,7 @@ msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:48 inc/admin/admin-metaboxes.php:163
 #: inc/admin/admin-metaboxes.php:166 inc/admin/admin.php:183
-#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:751
+#: inc/admin/adminbar.php:12 inc/functions/options-advanced-admin.php:754
 msgid "SEO"
 msgstr ""
 
@@ -1004,7 +1003,7 @@ msgstr ""
 msgid "Add video"
 msgstr ""
 
-#: inc/admin/admin-metaboxes.php:400
+#: inc/admin/admin-metaboxes.php:413
 msgid "Content analysis"
 msgstr ""
 
@@ -1922,7 +1921,7 @@ msgstr ""
 msgid "Security"
 msgstr ""
 
-#: inc/admin/admin.php:656 seopress.php:335
+#: inc/admin/admin.php:656 seopress.php:337
 msgid "Settings"
 msgstr ""
 
@@ -3874,7 +3873,7 @@ msgid ""
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:287
-#: inc/functions/options-advanced-admin.php:753
+#: inc/functions/options-advanced-admin.php:756
 msgid "Title tag"
 msgstr ""
 
@@ -3887,7 +3886,7 @@ msgid "Redirect?"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:299
-#: inc/functions/options-advanced-admin.php:777
+#: inc/functions/options-advanced-admin.php:780
 msgid "Canonical"
 msgstr ""
 
@@ -3923,35 +3922,35 @@ msgstr ""
 msgid "Analyze this page with Google Page Speed"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:457
+#: inc/functions/options-advanced-admin.php:460
 msgid "Enable noindex"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:510
+#: inc/functions/options-advanced-admin.php:513
 msgid "Enable index"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:563
+#: inc/functions/options-advanced-admin.php:566
 msgid "Enable nofollow"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:615
+#: inc/functions/options-advanced-admin.php:618
 msgid "Enable follow"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:662
+#: inc/functions/options-advanced-admin.php:665
 msgid "Enable redirection"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:701
+#: inc/functions/options-advanced-admin.php:704
 msgid "Disable redirection"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:879
+#: inc/functions/options-advanced-admin.php:884
 msgid "Description"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:888
+#: inc/functions/options-advanced-admin.php:893
 msgid ""
 "The description is not prominent by default; however, some themes may show "
 "it."
@@ -4015,22 +4014,22 @@ msgstr ""
 msgid "XML Sitemaps"
 msgstr ""
 
-#: seopress.php:133
+#: seopress.php:135
 msgid "has been successfully updated!"
 msgstr ""
 
-#: seopress.php:184
+#: seopress.php:186
 msgid "Migration completed!"
 msgstr ""
 
-#: seopress.php:289
+#: seopress.php:291
 msgid "You like SEOPress? Don't forget to rate it 5 stars!"
 msgstr ""
 
-#: seopress.php:336
+#: seopress.php:338
 msgid "SEOPress.org"
 msgstr ""
 
-#: seopress.php:338
+#: seopress.php:340
 msgid "GO PRO!"
 msgstr ""

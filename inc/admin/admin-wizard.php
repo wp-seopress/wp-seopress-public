@@ -814,7 +814,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 				</div>
 			</li>
 		</ul>
-		<p class="next-steps-help-text"><?php echo wp_kses_post( $help_text ); ?></p>
 		<?php
 	}
 }
