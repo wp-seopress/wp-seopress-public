@@ -120,7 +120,7 @@ function seopress_xml_sitemap_single() {
 						if (get_post_field('post_content', $post) !='') {
 							$dom = new domDocument;
 							$internalErrors = libxml_use_internal_errors(true);
-							$post_content = get_post_field('post_content', $post);
+							$post_content = do_shortcode(get_post_field('post_content', $post));
 
 						    if (function_exists('mb_convert_encoding')) {
 						    	$dom->loadHTML(mb_convert_encoding($post_content, 'HTML-ENTITIES', 'UTF-8'));
@@ -129,6 +129,7 @@ function seopress_xml_sitemap_single() {
 							}
 
 							$dom->preserveWhiteSpace = false;
+
 							if ($dom->getElementsByTagName('img') !='') {
 								$images = $dom->getElementsByTagName('img');
 							}
@@ -182,11 +183,30 @@ function seopress_xml_sitemap_single() {
 												}
 												
 										        $seopress_sitemaps .= '</image:loc>';
-										        $seopress_sitemaps .= "\n";
-										        $seopress_sitemaps .= '</image:image>';
-										    }
+												$seopress_sitemaps .= "\n";
+
+												if ($img->getAttribute('title') !='') {
+													$title = $img->getAttribute('title');
+
+													$seopress_sitemaps .= '<image:title>';
+													$seopress_sitemaps .= '<![CDATA['.$title.']]>';
+													$seopress_sitemaps .= '</image:title>';
+													$seopress_sitemaps .= "\n";
+												}
+												
+												if ($img->getAttribute('alt') !='') {
+													$caption = $img->getAttribute('alt');
+
+													$seopress_sitemaps .= '<image:caption>';
+													$seopress_sitemaps .= '<![CDATA['.$caption.']]>';
+													$seopress_sitemaps .= '</image:caption>';
+													$seopress_sitemaps .= "\n";
+												}
+
+												$seopress_sitemaps .= '</image:image>';
+											}
 										}
-								    }
+									}
 								}
 							}
 							//Galleries

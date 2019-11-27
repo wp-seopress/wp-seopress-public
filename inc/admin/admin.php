@@ -199,6 +199,7 @@ class seopress_options
                     <li><span>'.__('%%tagline%%','wp-seopress').'</span>'.__('Tagline','wp-seopress').'</li>
                     <li><span>'.__('%%post_title%% (alias %%title%%)','wp-seopress').'</span>'.__('Post Title (post, page, custom post type)','wp-seopress').'</li>
                     <li><span>'.__('%%post_excerpt%%','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
+                    <li><span>'.__('%%post_content%%','wp-seopress').'</span>'.__('Post content / product long description','wp-seopress').'</li>
                     <li><span>'.__('%%post_date%%','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
                     <li><span>'.__('%%post_modified_date%%','wp-seopress').'</span>'.__('Last modified post date','wp-seopress').'</li>
                     <li><span>'.__('%%post_author%%','wp-seopress').'</span>'.__('Post author','wp-seopress').'</li>
@@ -662,6 +663,7 @@ class seopress_options
 
                     if (!is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                         unset($plugin_settings_tabs['tab_seopress_tool_data']);
+                        unset($plugin_settings_tabs['tab_seopress_tool_redirects']);
                     }
 
                     echo '<div class="nav-tab-wrapper">';

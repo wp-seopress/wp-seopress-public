@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 3.7.1
+Stable tag: 3.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 <strong>Import your post and term metadatas from other plugins in 1 click</strong>
 
 <a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / year / unlimited sites</strong></a>
+
+[youtube https://www.youtube.com/watch?v=FwaJA5MY6sc]
 
 <h3>SEOPress Free Features</h3>
 
@@ -82,8 +84,6 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 </ul>
 
 <h4><a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO now!</strong></a></h4>
-
-[youtube https://www.youtube.com/watch?v=9XMXBHBdva0]
 
 <h3>Translations</h3>
 
@@ -156,7 +156,51 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 3. Click on SEOPress and apply settings.
 
 == Frequently Asked Questions ==
-<a href="https://www.seopress.org/support/faq/" target="_blank">Read our FAQ</a>
+
+= Can I import my post and term metadatas from other plugins? =
+
+You can import your metadatas from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a> and <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a> in one click to SEOPress without losing traffic.
+
+= How to use Google Tag Manager / Facebook Pixel with SEOPress? =
+
+Go to SEO > Google Analytics > Tracking tab. Paste GTM / Facebook Pixel tracking code to [HEAD] Add an additional tracking code / [BODY] Add an additional tracking code textarea fields. Save changes and clear your cache.
+
+= Which types of sitemaps support SEOPress? =
+
+XML sitemaps for search engines: post, page, post type, taxonomies, images and author.
+
+HTML sitemap for accessibility and SEO.
+
+SEOPress PRO supports Google News XML and Video sitemaps.
+
+= How do I get support? =
+
+For FREE users: <a href="https://www.seopress.org/support/guides/">guides</a>, forum on <a href="https://wordpress.org/plugins/wp-seopress/">w.org</a>, <a href="https://www.seopress.org/support/faq/">FAQ</a>, <a href="https://www.seopress.org/support/hooks/">hooks for developers</a>, and <a href="https://www.youtube.com/channel/UCH5sQx3T2QZFhFEamT51hsw" target="_blank">videos on our YouTube channel</a>.
+For PRO users: support by mail from their customer account.
+
+= Is SEOPress GDPR compliant? =
+
+Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-label/">about SEOPress and GDPR</a>
+
+= Is white label a free feature? =
+
+Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-label/">about SEOPress and the White Label feature</a>
+
+= My XML sitemap returns a 404 error =
+
+Read this <a href="https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/">post to solve this issue</a>
+
+= My XML sitemap returns a blank page =
+
+Read this <a href="https://www.seopress.org/support/guides/xml-sitemap-blank-page/">post to solve this issue</a>
+
+= I don't see the correct title! =
+
+You're theme is probably using a deprecated function to handle the title. <a href="https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/">Learn more here</a>
+
+= My question is not listed here! =
+
+<a href="https://www.seopress.org/support/faq/" target="_blank">Read our complete FAQ on our site</a>
 
 == Screenshots ==
 1. SEOPress Dashboard
@@ -221,6 +265,19 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.7.2 =
+* NEW Custom taxonomy for automatic schemas (eg: Brand for product schema) - PRO
+* NEW Add image caption and title to XML Image Sitemaps
+* NEW Image sitemaps now support shortcodes (useful with DIVI page builder)
+* NEW Add %%post_content%% dynamic variable to get the post content / product description
+* NEW 'seopress_titles_product_cat' hook to filter product categories using %%wc_single_cat%%
+* NEW 'seopress_titles_product_tag' hook to filter product categories using %%wc_single_tag%%
+* NEW 'seopress_titles_cat' hook to filter product categories using %%post_category%%
+* NEW 'seopress_titles_tag' hook to filter product tags using %%post_tag%%
+* INFO Improve schemas rendering to avoid "}" missing error in Google Search Console
+* FIX UI - Hide Redirections tab in SEO > Tools if SEOPress PRO is not enabled
+* FIX new meta robots
+* FIX Call to undefined function is_product() in /wp-seopress-pro/inc/functions/options-woocommerce.php:8
 = 3.7.1 =
 * NEW JobPosting schema (PRO)
 * NEW 'seopress_metabox_seo_tabs' hook to filter tabs in SEO metabox
