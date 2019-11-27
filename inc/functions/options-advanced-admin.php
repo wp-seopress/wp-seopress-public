@@ -41,7 +41,7 @@ if (isset($pagenow) && $pagenow == 'options-permalink.php') {
         function seopress_notice_no_rewrite_url() {
             $class = 'notice notice-warning';
             $message = '<strong>'.__( 'WARNING', 'wp-seopress' ).'</strong>';
-            $message .= '<p>'.__( 'URL rewriting is NOT enabled on your site. Select a permalink structure optimized for SEO (NOT Plain).', 'wp-seopress' ).'</p>';
+            $message .= '<p>'.__( 'URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain).', 'wp-seopress' ).'</p>';
 
             printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ); 
         }

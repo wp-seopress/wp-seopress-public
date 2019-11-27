@@ -96,9 +96,8 @@ function seopress_do_real_preview() {
                 //Get Target Keywords
                 if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
                     $data['target_kws'] = $_GET['seopress_analysis_target_kw'];
-                    $seopress_analysis_target_kw = explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true));
+                    $seopress_analysis_target_kw = array_filter(explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true)));
                 }
-
                 $xpath = new DOMXPath($dom);
 
                 //Title
@@ -220,6 +219,13 @@ function seopress_do_real_preview() {
                             }
                         }
                     }
+
+                    //Keywords density
+                    foreach ($seopress_analysis_target_kw as $kw) {
+                        if (preg_match_all('#\b('.$kw.')\b#iu', strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $m)) {
+                            $data['kws_density']['matches'][$kw][] = $m[0];
+                        }
+                    }
                 }
 
                 //Images
@@ -257,7 +263,15 @@ function seopress_do_real_preview() {
                 $nofollow_links = $xpath->query("//a[contains(@rel, 'nofollow')]");
                 if (!empty($nofollow_links)) {
                     foreach ($nofollow_links as $key=>$link) {
-                        $data['nofollow_links'][$key][] = $link->nodeValue;
+                        $data['nofollow_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
+                    }
+                }
+                
+                //outbound links
+                $outbound_links = $xpath->query("//a[contains(@target, '_blank')]");
+                if (!empty($outbound_links)) {
+                    foreach ($outbound_links as $key=>$link) {
+                        $data['outbound_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
                     }
                 }
 

@@ -56,6 +56,21 @@ jQuery(document).ready(function($) {
     $('#seopress-tag-search-keywords').click(function() {
         $("#seopress_titles_archives_search_title").val($("#seopress_titles_archives_search_title").val() + ' ' + $('#seopress-tag-search-keywords').attr('data-tag'));
     });
+    $('#seopress-tag-site-sep').click(function() {
+        $("#seopress_titles_home_site_title").val($("#seopress_titles_home_site_title").val() + ' ' + $('#seopress-tag-site-sep').attr('data-tag'));
+    });
+    $('#seopress-tag-sep-author').click(function() {
+        $("#seopress_titles_archive_post_author").val($("#seopress_titles_archive_post_author").val() + ' ' + $('#seopress-tag-sep-author').attr('data-tag'));
+    });
+    $('#seopress-tag-sep-date').click(function() {
+        $("#seopress_titles_archives_date_title").val($("#seopress_titles_archives_date_title").val() + ' ' + $('#seopress-tag-sep-date').attr('data-tag'));
+    });
+    $('#seopress-tag-sep-search').click(function() {
+        $("#seopress_titles_archives_search_title").val($("#seopress_titles_archives_search_title").val() + ' ' + $('#seopress-tag-sep-search').attr('data-tag'));
+    });
+    $('#seopress-tag-sep-404').click(function() {
+        $("#seopress_titles_archives_404_title").val($("#seopress_titles_archives_404_title").val() + ' ' + $('#seopress-tag-sep-404').attr('data-tag'));
+    });
     $('.more-tags').click(function() {
         $('#contextual-help-link').click();
     });

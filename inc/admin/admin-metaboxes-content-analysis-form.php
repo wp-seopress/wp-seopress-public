@@ -53,8 +53,19 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     
                     var i;
                     for (i = 0; i < 10; i++) { 
-                        document.getElementById('seopress_suggestions').innerHTML += '<li>'+suggestions_array[i]+'</li>';
+                        document.getElementById('seopress_suggestions').innerHTML += '<li><a href=\"#\" class=\"sp-suggest-btn button button-small\">'+suggestions_array[i]+'</a></li>';
                     }
+
+                    jQuery('.sp-suggest-btn').click(function(e) {
+                        e.preventDefault();
+                        if($('#seopress_analysis_target_kw_meta').val().length == 0){
+                            jQuery('#seopress_analysis_target_kw_meta').val(jQuery(this).text() + ',');
+                        } else {
+                            str = jQuery('#seopress_analysis_target_kw_meta').val();
+                            str = str.replace(/,\s*$/, '');
+                            jQuery('#seopress_analysis_target_kw_meta').val(str+','+jQuery(this).text());
+                        }
+                    });
                 }
                 jQuery('#seopress_get_suggestions').on('click', function(data) {
                     data.preventDefault();
@@ -85,6 +96,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     //Word counters
                     if (isset($seopress_analysis_data['0']['words_counter']) || isset($seopress_analysis_data['0']['words_counter_unique'])) {
                         echo '<h3>'.__('Words counter','wp-seopress').'</h3>
+                        <p>'.__('Words counter is not a direct ranking factor. But, your content must be as qualitative as possible, with relevant and unique information. To fulfill these conditions, your article requires a minimum of paragraphs, so words.','wp-seopress').'</p>
                         <ul>
                             <li>'.$seopress_analysis_data['0']['words_counter'].' '.__('words found.','wp-seopress').'</li>
                             <li>'.$seopress_analysis_data['0']['words_counter_unique'].' '.__('unique words found.','wp-seopress').'</li>';
@@ -95,6 +107,28 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                                 echo '<li><span class="dashicons dashicons-no-alt"></span>'.__('Your content is too short. Add a few more paragraphs!','wp-seopress').'</li>';
                             }
                     echo '</ul>';
+                    }
+
+                    //Keywords density
+                    if (!empty($seopress_analysis_data['0']['kws_density']['matches']) && isset($seopress_analysis_data['0']['words_counter'])) {
+                        echo '<h3>'.__('Keywords density','wp-seopress').'</h3>';
+                       
+                        $target_kws_density = $seopress_analysis_data['0']['kws_density']['matches'];
+                        
+                        echo '<ul>';
+
+                        foreach ($target_kws_density as $key => $value) {
+                            foreach ($value as $_key => $_value) {
+                                $kw_count = count($_value);
+                            }
+                            $kw_name = $key;
+                            $kw_density = round($kw_count/$seopress_analysis_data['0']['words_counter']*100, 2);
+                            echo '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times in your content, a keyword density of %s%%','wp-seopress'), $kw_name, $kw_count, $kw_density).'</li>';
+                        }
+
+                        echo '</ul>';
+
+                        echo '<p class="description">'.__('Learn more about <a href="https://www.youtube.com/watch?v=Rk4qgQdp2UA" target="_blank">keywords stuffing</a>.','wp-seopress').'</p>';
                     }
 
                     //H1
@@ -120,7 +154,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                         echo '</ul>';
                         if ($count > 1) {
                             echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d Heading 1 (H1) in your content.','wp-seopress'), $count).'</p>';
-                            echo '<p>'.__('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. Better for SEO and accessibility.','wp-seopress').'</p>';
+                            echo '<p>'.__('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility.','wp-seopress').'</p>';
                         }
                     }
 
@@ -316,8 +350,27 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                         echo '<p>'.sprintf( esc_html__( 'We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:', 'wp-seopress' ), $count ).'</p>';
                         echo '<ul>';
                             foreach ($seopress_analysis_data['0']['nofollow_links'] as $links) {
-                                foreach ($links as $link) {
-                                    echo '<li><span class="dashicons dashicons-minus"></span>'.$link.'</li>';
+                                foreach ($links as $href => $link) {
+                                    echo '<li><span class="dashicons dashicons-minus"></span><a href="'.$href.'" target="_blank">'.$link.'</a><span class="dashicons dashicons-external"></span></li>';
+                                }
+                            }
+                        echo '</ul>';
+                        
+                    } else {
+                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('This page doesn\'t have any nofollow links.','wp-seopress').'</p>';
+                    }
+
+                    //Outbound links
+                    echo '<h3>'.__('Outbound Links','wp-seopress').'</h3>';
+                    
+                    if (!empty($seopress_analysis_data['0']['outbound_links'])) {
+                        $count = count($seopress_analysis_data['0']['outbound_links']);
+                        
+                        echo '<p>'.sprintf( 'We found %d outbound links in your page. Internet is built on the principle of hyperlink. It is therefore perfectly normal to make links between different websites. However, avoid making links to low quality sites, SPAM... If you are not sure about the quality of a site, add the attribute "nofollow" to your link. <br>Below, the list:', 'wp-seopress', $count ).'</p>';
+                        echo '<ul>';
+                            foreach ($seopress_analysis_data['0']['outbound_links'] as $links) {
+                                foreach ($links as $href => $link) {
+                                    echo '<li><span class="dashicons dashicons-minus"></span><a href="'.$href.'" target="_blank">'.$link.'</a><span class="dashicons dashicons-external"></span></li>';
                                 }
                             }
                         echo '</ul>';

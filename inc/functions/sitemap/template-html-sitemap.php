@@ -20,7 +20,10 @@ if (!empty($postslist)) {
         if (get_post_type_archive_link($cpt_key)) {
             $content .= '<li><a href="'.get_post_type_archive_link($cpt_key).'">'.$obj->labels->name.'</a></li>';
         }
-        $content .= $walker_page->walk($postslist, 0);
+        $depth = 0;
+        $depth = apply_filters('seopress_sitemaps_html_pages_depth_query', $depth);
+
+        $content .= $walker_page->walk($postslist, $depth);
         $content .= '</ul>'; // 0 means display all levels.
     } else {
         $content .= '<ul>';

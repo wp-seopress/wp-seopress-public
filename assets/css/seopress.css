@@ -89,11 +89,9 @@
 }
 
 #seopress_content_analysis #seopress_suggestions li {
-    list-style: square;
+    list-style: none;
     margin: 5px;
     display: inline-block;
-    background: #F1F1F1;
-    padding: 5px;
 }
 
 #seopress_launch_analysis {
@@ -1493,74 +1491,6 @@ body.seopress-styles {
     font-size: 13px;
     padding: 10px 0;
     color: #24b47e;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank {
-    margin: 0 0 10px;
-    width: 100%;
-    box-sizing: border-box;
-    display: block;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_reach {
-    font-size: 30px;
-    font-weight: 700;
-    display: inline-block;
-    width: 100%;
-    padding: 0 0 20px;
-    text-align: right;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_reach .highlight {
-    display: inline-block;
-    font-size: 16px;
-    background: inherit;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country,#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country_rank,#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_delta {
-    font-size: 14px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: left;
-    margin: 0 20px 0 0;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_delta {
-    width: 100%;
-    text-align: right;
-    font-size: 18px;
-    font-style: italic;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country,#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country_rank {
-    text-align: left;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country .highlight,#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country_rank .highlight {
-    background: 0 0;
-    font-weight: 700;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country {
-    margin-right: 0;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .seopress_alexa_rank_country_rank {
-    margin-left: 5px;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .minus .dashicons,#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .plus .dashicons {
-    font-style: italic;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .plus {
-    color: green;
-}
-
-#seopress-content .seopress-useful-tools .widget-alexa .wrap-alexa-rank .minus {
-    color: red;
 }
 
 #seopress-content .seopress-reverse label,#seopress-content .seopress-useful-tools .widget-whois ul li span {

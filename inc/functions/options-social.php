@@ -289,24 +289,28 @@ function seopress_social_accounts_jsonld_hook() {
 add_action( 'wp_head', 'seopress_social_accounts_jsonld_hook', 1 );
 
 //Website Schema.org in JSON-LD - Sitelinks
-function seopress_social_website_option() {
-	$target = get_home_url().'/?s={search_term_string}';
-	echo '<script type="application/ld+json">';
-	echo '{
-		    "@context": "'.seopress_check_ssl().'schema.org",
-		    "@type": "WebSite",
-		    "url" : '.json_encode(get_home_url()).',
-		    "potentialAction": {
-		      	"@type": "SearchAction",
-		      	"target": '.json_encode($target).',
-				"query-input": "required name=search_term_string"
-		    }
-		}';
-	echo '</script>';
-	echo "\n";
-}
-if (is_home() || is_front_page()) {
-	add_action( 'wp_head', 'seopress_social_website_option', 1 );
+if (function_exists('seopress_titles_nositelinkssearchbox_option') && seopress_titles_nositelinkssearchbox_option() =='1') {
+	//do not display searchbox schema	
+} else {
+	function seopress_social_website_option() {
+		$target = get_home_url().'/?s={search_term_string}';
+		echo '<script type="application/ld+json">';
+		echo '{
+				"@context": "'.seopress_check_ssl().'schema.org",
+				"@type": "WebSite",
+				"url" : '.json_encode(get_home_url()).',
+				"potentialAction": {
+					"@type": "SearchAction",
+					"target": '.json_encode($target).',
+					"query-input": "required name=search_term_string"
+				}
+			}';
+		echo '</script>';
+		echo "\n";
+	}
+	if (is_home() || is_front_page()) {
+		add_action( 'wp_head', 'seopress_social_website_option', 1 );
+	}
 }
 
 //Facebook

@@ -544,7 +544,6 @@ class seopress_options
                     'tab_seopress_google_analytics_events' => __( "Events", "wp-seopress" ),
                     'tab_seopress_google_analytics_custom_dimensions' => __( "Custom Dimensions", "wp-seopress" ),
                     'tab_seopress_google_analytics_dashboard' => __( "Stats in Dashboard", "wp-seopress" ),
-                    //'tab_seopress_google_analytics_e_commerce' => __( "E-commerce", "wp-seopress" ),
                 );
             } else {
                 $plugin_settings_tabs = array(
@@ -566,8 +565,7 @@ class seopress_options
             <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_custom_dimensions') { echo 'active'; } ?>" id="tab_seopress_google_analytics_custom_dimensions"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-custom-dimensions' ); ?></div>
             <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
                 <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_dashboard') { echo 'active'; } ?>" id="tab_seopress_google_analytics_dashboard"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-dashboard' ); ?></div>
-                <!-- <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_e_commerce') { echo 'active'; } ?>" id="tab_seopress_google_analytics_e_commerce"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-e-commerce' ); ?></div>
- -->            <?php } ?>
+            <?php } ?>
         </div>
 
         <?php submit_button(); ?>
@@ -787,72 +785,77 @@ class seopress_options
                 </div>
                 <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_redirects') { echo 'active'; } ?>" id="tab_seopress_tool_redirects">
                     <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-                        <div id="section-import-redirects" class="postbox section-tool">
-                            <div class="inside">
-                                <h3><span><?php _e( 'Import Redirections', 'wp-seopress' ); ?></span></h3>
-                                <p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 5 columns in this order: <ul><li>url to match (without your domain name), </li><li>url to redirect in absolute, </li><li>type of redirection (301, 302 or 307), </li><li>yes to enable the redirect (leave it empty to disable the redirect) </li><li>and the last one the query parameter ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection).</li></ul>', 'wp-seopress' ); ?></p>
-                                <p>
-                                    <a href="https://www.seopress.org/wp-content/uploads/csv/seopress-redirections-example.csv" target="_blank">
-                                        <?php _e('Download a CSV example','wp-seopress'); ?>
-                                    </a>
-                                </p>
-                                <form method="post" enctype="multipart/form-data">
+                        <?php if(seopress_get_toggle_404_option()=='1') { ?>
+                            <div id="section-import-redirects" class="postbox section-tool">
+                                <div class="inside">
+                                    <h3><span><?php _e( 'Import Redirections', 'wp-seopress' ); ?></span></h3>
+                                    <p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 5 columns in this order: <ul><li>URL to match (without your domain name), </li><li>URL to redirect in absolute, </li><li>type of redirection (301, 302 or 307), </li><li>Yes to enable the redirect (leave it empty to disable the redirect) </li><li>and, last, the query parameter ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection).</li></ul>', 'wp-seopress' ); ?></p>
                                     <p>
-                                        <input type="file" name="import_file"/>
+                                        <a href="https://www.seopress.org/wp-content/uploads/csv/seopress-redirections-example.csv" target="_blank">
+                                            <?php _e('Download a CSV example','wp-seopress'); ?>
+                                        </a>
                                     </p>
-                                    <p>
-                                        <input type="hidden" name="seopress_action" value="import_redirections_settings" />
-                                        <?php wp_nonce_field( 'seopress_import_redirections_nonce', 'seopress_import_redirections_nonce' ); ?>
-                                        <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                                    </p>
-                                </form>
-                            </div><!-- .inside -->
-                        </div><!-- .postbox -->
-                        <div id="section-import-redirects-plugin" class="postbox section-tool">
-                            <div class="inside">
-                                <h3><span><?php _e( 'Import Redirections from Redirections plugin', 'wp-seopress' ); ?></span></h3>
-                                <p><?php _e( 'Import your own redirections from a .json file generated by the Redirections plugin. Note that we do not support certain options like regex. Make sure you don\'t have duplicates between your file and existing redirects to avoid conflicts.', 'wp-seopress' ); ?></p>
-                                <form method="post" enctype="multipart/form-data">
-                                    <p>
-                                        <input type="file" name="import_file"/>
-                                    </p>
-                                    <p>
-                                        <input type="hidden" name="seopress_action" value="import_redirections_plugin_settings" />
-                                        <?php wp_nonce_field( 'seopress_import_redirections_plugin_nonce', 'seopress_import_redirections_plugin_nonce' ); ?>
-                                        <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                                    </p>
-                                </form>
-                            </div><!-- .inside -->
-                        </div><!-- .postbox -->
-                        <div id="section-import-yoast-redirects" class="postbox section-tool">
-                            <div class="inside">
-                                <h3><span><?php _e( 'Import Redirections from Yoast Premium', 'wp-seopress' ); ?></span></h3>
-                                <p><?php _e( 'Import your own redirections from a .csv file generated by Yoast Premium. Note that we do not support certain options like regex. Make sure you don\'t have duplicates between your file and existing redirects to avoid conflicts.', 'wp-seopress' ); ?></p>
-                                <form method="post" enctype="multipart/form-data">
-                                    <p>
-                                        <input type="file" name="import_file"/>
-                                    </p>
-                                    <p>
-                                        <input type="hidden" name="seopress_action" value="import_yoast_redirections" />
-                                        <?php wp_nonce_field( 'seopress_import_yoast_redirections_nonce', 'seopress_import_yoast_redirections_nonce' ); ?>
-                                        <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                                    </p>
-                                </form>
-                            </div><!-- .inside -->
-                        </div><!-- .postbox -->
-                        <div id="section-export-redirects" class="postbox section-tool">
-                            <div class="inside">
-                                <h3><span><?php _e( 'Export Redirections', 'wp-seopress' ); ?></span></h3>
-                                <p><?php _e( 'Export all redirections for this site as a .csv file. This allows you to easily import the redirections into another site, to Excel / Google Sheets...', 'wp-seopress' ); ?></p>
-                                <form method="post">
-                                    <p><input type="hidden" name="seopress_action" value="export_redirections" /></p>
-                                    <p>
-                                        <?php wp_nonce_field( 'seopress_export_redirections_nonce', 'seopress_export_redirections_nonce' ); ?>
-                                        <?php submit_button( __( 'Export', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
-                                    </p>
-                                </form>
-                            </div><!-- .inside -->
-                        </div><!-- .postbox -->
+                                    <form method="post" enctype="multipart/form-data">
+                                        <p>
+                                            <input type="file" name="import_file"/>
+                                        </p>
+                                        <p>
+                                            <input type="hidden" name="seopress_action" value="import_redirections_settings" />
+                                            <?php wp_nonce_field( 'seopress_import_redirections_nonce', 'seopress_import_redirections_nonce' ); ?>
+                                            <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                        </p>
+                                    </form>
+                                </div><!-- .inside -->
+                            </div><!-- .postbox -->
+                            <div id="section-import-redirects-plugin" class="postbox section-tool">
+                                <div class="inside">
+                                    <h3><span><?php _e( 'Import Redirections from the Redirections plugin', 'wp-seopress' ); ?></span></h3>
+                                    <p><?php _e( 'Import your own redirections from a .json file generated by the Redirections plugin. Note that we do not support certain options, like regex. To avoid conflicts, make sure there are no duplicates between your file and existing redirects.', 'wp-seopress' ); ?></p>
+                                    <form method="post" enctype="multipart/form-data">
+                                        <p>
+                                            <input type="file" name="import_file"/>
+                                        </p>
+                                        <p>
+                                            <input type="hidden" name="seopress_action" value="import_redirections_plugin_settings" />
+                                            <?php wp_nonce_field( 'seopress_import_redirections_plugin_nonce', 'seopress_import_redirections_plugin_nonce' ); ?>
+                                            <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                        </p>
+                                    </form>
+                                </div><!-- .inside -->
+                            </div><!-- .postbox -->
+                            <div id="section-import-yoast-redirects" class="postbox section-tool">
+                                <div class="inside">
+                                    <h3><span><?php _e( 'Import Redirections from Yoast Premium', 'wp-seopress' ); ?></span></h3>
+                                    <p><?php _e( 'Import your own redirections from a .csv file generated by Yoast Premium. Note that we don\'t support certain options, like regex. To avoid conflicts, make sure there are no duplicates between your file and existing redirects.', 'wp-seopress' ); ?></p>
+                                    <form method="post" enctype="multipart/form-data">
+                                        <p>
+                                            <input type="file" name="import_file"/>
+                                        </p>
+                                        <p>
+                                            <input type="hidden" name="seopress_action" value="import_yoast_redirections" />
+                                            <?php wp_nonce_field( 'seopress_import_yoast_redirections_nonce', 'seopress_import_yoast_redirections_nonce' ); ?>
+                                            <?php submit_button( __( 'Import', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                        </p>
+                                    </form>
+                                </div><!-- .inside -->
+                            </div><!-- .postbox -->
+                            <div id="section-export-redirects" class="postbox section-tool">
+                                <div class="inside">
+                                    <h3><span><?php _e( 'Export Redirections', 'wp-seopress' ); ?></span></h3>
+                                    <p><?php _e( 'Export all redirections for this site as a .csv file. This allows you to easily import the redirections into another site, to Excel / Google Sheets...', 'wp-seopress' ); ?></p>
+                                    <form method="post">
+                                        <p><input type="hidden" name="seopress_action" value="export_redirections" /></p>
+                                        <p>
+                                            <?php wp_nonce_field( 'seopress_export_redirections_nonce', 'seopress_export_redirections_nonce' ); ?>
+                                            <?php submit_button( __( 'Export', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                        </p>
+                                    </form>
+                                </div><!-- .inside -->
+                            </div><!-- .postbox -->
+                        <?php } else { ?>
+                            <p><?php _e('Redirections feature is disabled. Please activate it from the PRO page.','wp-seopress'); ?></p>
+                            <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page' ); ?>"><?php _e('Activate Redirections','wp-seopress'); ?></a>
+                        <?php } ?>
                     <?php } ?>
                 </div>
                 <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_reset') { echo 'active'; } ?>" id="tab_seopress_tool_reset">
@@ -996,7 +999,7 @@ class seopress_options
                                                 <div id="notice-wizard-alert" class="seopress-alert deleteable">
                                                     <p>
                                                         <span class="dashicons dashicons-warning"></span>
-                                                        <strong><?php _e('Configure SEOPress in a few minutes thanks to our installation wizard','wp-seopress'); ?></strong>
+                                                        <strong><?php _e('Configure SEOPress in a few minutes with our installation wizard','wp-seopress'); ?></strong>
                                                     </p>
                                                     <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-setup' ); ?>"><?php _e('Start the wizard','wp-seopress'); ?></a>
                                                     <span name="notice-wizard" id="notice-wizard" class="dashicons dashicons-trash remove-notice" data-notice="notice-wizard"></span>
@@ -1042,7 +1045,7 @@ class seopress_options
                                             <div class="seopress-alert">
                                                 <p>
                                                     <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('We notice that you use <strong>Yoast SEO</strong> plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
+                                                    <?php _e('We noticed that you use <strong>Yoast SEO</strong> plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
                                                 </p>
                                                 <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export#yoast-migration-tool' ); ?>"><?php _e('Migrate!','wp-seopress'); ?></a>
                                             </div>
@@ -1051,7 +1054,7 @@ class seopress_options
                                             <div class="seopress-alert">
                                                 <p>
                                                     <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('We notice that you use <strong>All In One SEO Pack</strong> plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
+                                                    <?php _e('We noticed that you use <strong>All In One SEO Pack</strong> plugin. <br>Do you want to migrate all your posts metadata to SEOPress?','wp-seopress'); ?>
                                                 </p>
                                                 <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export#aio-migration-tool' ); ?>"><?php _e('Migrate!','wp-seopress'); ?></a>
                                             </div>
@@ -1060,7 +1063,7 @@ class seopress_options
                                             <div class="seopress-alert">
                                                 <p>
                                                     <span class="dashicons dashicons-warning"></span>
-                                                    <?php _e('We notice that you use another SEO plugin. <br>Do not use multiple SEO plugins at once to avoid conflicts!','wp-seopress'); ?>
+                                                    <?php _e('We noticed that you use another SEO plugin. <br>Do not use multiple SEO plugins at once to avoid conflicts!','wp-seopress'); ?>
                                                 </p>
                                             </div>
                                         <?php } ?>
@@ -1070,7 +1073,7 @@ class seopress_options
                                                 <div class="seopress-alert">
                                                     <p>
                                                         <span class="dashicons dashicons-warning"></span>
-                                                        <?php _e('You have enabled 404 cleaning BUT the scheduled task is not running. <br>To solve this, please disable and enable SEOPress PRO.','wp-seopress'); ?>
+                                                        <?php _e('You have enabled 404 cleaning BUT the scheduled task is not running. <br>To solve this, please disable and re-enable SEOPress PRO.','wp-seopress'); ?>
                                                     </p>
                                                 </div>
                                             <?php } 
@@ -1382,63 +1385,6 @@ class seopress_options
                                         </button>
 
                                         <span id="spinner-reverse" class="spinner"></span>
-                                    </div>
-
-                                    <!-- Alexa -->
-                                    <div class="widget widget-alexa">
-                                        <h3 class="widget-title"><span class="dashicons dashicons-chart-area"></span><?php _e('Check your Alexa Rank (Amazon index)','wp-seopress'); ?></h3>
-
-                                        <?php
-                                            if ( get_transient( 'seopress_results_alexa_rank' ) !='' ) {
-                                                echo '<div class="wrap-alexa-rank">';
-                                                    $seopress_results_alexa_rank = get_transient( 'seopress_results_alexa_rank' );
-
-                                                    $seopress_alexa_rank_xml            = simplexml_load_string($seopress_results_alexa_rank);
-                                                    $seopress_alexa_rank_reach          = $seopress_alexa_rank_xml->SD->REACH['RANK'];
-                                                    $seopress_alexa_rank_delta          = $seopress_alexa_rank_xml->SD->RANK['DELTA'];
-                                                    $seopress_alexa_rank_country        = $seopress_alexa_rank_xml->SD->COUNTRY['NAME'];
-                                                    $seopress_alexa_rank_country_rank   = $seopress_alexa_rank_xml->SD->COUNTRY['RANK'];
-
-                                                    if ($seopress_alexa_rank_reach !='') {
-                                                        echo '<span class="seopress_alexa_rank_reach">
-                                                                <span class="highlight">'.__('Your Alexa Rank','wp-seopress').'</span>'
-                                                                .$seopress_alexa_rank_reach.'
-                                                            </span>';
-                                                    }
-                                                    if ($seopress_alexa_rank_delta !='') {
-                                                        
-                                                        $seopress_alexa_rank_delta_sign = substr($seopress_alexa_rank_delta, 0, 1);
-                                                        $seopress_alexa_rank_delta_num = substr($seopress_alexa_rank_delta, 1, 9999);
-                                                        
-                                                        if ($seopress_alexa_rank_delta_sign =='+') {
-                                                            $seopress_alexa_rank_delta_css = '<span class="plus"><span class="dashicons dashicons-plus"></span></span>';
-                                                        } elseif ($seopress_alexa_rank_delta_sign =='-') {
-                                                            $seopress_alexa_rank_delta_css = '<span class="minus"><span class="dashicons dashicons-minus"></span></span>';
-                                                        }
-
-                                                        echo '<span class="seopress_alexa_rank_delta">
-                                                                '.$seopress_alexa_rank_delta_css.$seopress_alexa_rank_delta_num.'
-                                                            </span>';
-                                                    }
-
-                                                    if ($seopress_alexa_rank_country !='') {
-                                                        echo '<span class="seopress_alexa_rank_country">
-                                                                <span class="highlight">'.__('Country Rank: ','wp-seopress').'</span>
-                                                                '.$seopress_alexa_rank_country.'
-                                                            </span>';
-                                                    }
-                                                    if ($seopress_alexa_rank_country_rank !='') {
-                                                        echo '<span class="seopress_alexa_rank_country_rank"> - '.$seopress_alexa_rank_country_rank.'</span>';
-                                                    }
-                                                echo '</div>';
-
-                                                echo '<p><em>'._e('The lower, the best','wp-seopress').'</em></p>';
-                                            }
-                                        ?>
-
-                                        <button id="seopress-request-alexa-rank" class="button-primary button" name="clear"><?php _e('Get Alexa Rank','wp-seopress'); ?></button>
-
-                                        <span id="spinner-alexa" class="spinner"></span>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -1757,6 +1703,7 @@ class seopress_options
                                 <h3><?php _e('Structured Data Types','wp-seopress'); ?></h3>
                                 <p><?php _e('Add data types to your content: articles, courses, recipes, videos, events and products','wp-seopress'); ?></p>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets$9' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
+                                <a class="button-secondary view-redirects" href="<?php echo admin_url( 'edit.php?post_type=seopress_schemas' ); ?>"><?php _e('See schemas','wp-seopress'); ?></a>
                                 <?php
                                     if(seopress_get_toggle_rich_snippets_option()=='1') { 
                                         $seopress_get_toggle_rich_snippets_option = '"1"';
@@ -1964,6 +1911,24 @@ class seopress_options
                                 <p><?php _e('Scan your site to find SEO problems.','wp-seopress'); ?></p>
                                 <a class="button-secondary view-redirects" href="<?php echo admin_url( 'edit.php?post_type=seopress_bot' ); ?>"><?php _e('See broken links','wp-seopress'); ?></a>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-bot-batch' ); ?>"><?php _e('Scan','wp-seopress'); ?></a>
+                                <?php
+                                    if(seopress_get_toggle_bot_option()=='1') { 
+                                        $seopress_get_toggle_bot_option = '"1"';
+                                    } else { 
+                                        $seopress_get_toggle_bot_option = '"0"';
+                                    }
+                                ?>
+                                <input type="checkbox" name="toggle-bot" id="toggle-bot" class="toggle" data-toggle=<?php echo $seopress_get_toggle_bot_option; ?>>
+                                <label for="toggle-bot"></label>
+                                <?php
+                                    if(seopress_get_toggle_bot_option()=='1') { 
+                                        echo '<span id="bot-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                        echo '<span id="bot-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                    } else { 
+                                        echo '<span id="bot-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
+                                        echo '<span id="bot-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
+                                    }
+                                ?>
                             </span>
                         </div>
                         <div class="seopress-feature">
@@ -2844,8 +2809,16 @@ class seopress_options
 
         add_settings_field(
             'seopress_google_analytics_other_tracking', // ID
-           __("Add an additional tracking code (like Facebook Pixel, Hotjar...)","wp-seopress"), // Title
+           __("[HEAD] Add an additional tracking code (like GTM, Facebook Pixel, Hotjar...)","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_other_tracking_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-features', // Page
+            'seopress_setting_section_google_analytics_features' // Section                  
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_other_tracking_body', // ID
+           __("[BODY] Add an additional tracking code (like Google Tag Manager...)","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_other_tracking_body_callback' ), // Callback
             'seopress-settings-admin-google-analytics-features', // Page
             'seopress_setting_section_google_analytics_features' // Section                  
         );
@@ -3009,7 +2982,7 @@ class seopress_options
 
         add_settings_field(
             'seopress_advanced_advanced_attachments_file', // ID
-           __("Redirect attachment pages to the file URL","wp-seopress"), // Title
+           __("Redirect attachment pages to their file URL","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_attachments_file_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
             'seopress_setting_section_advanced_advanced' // Section                  
@@ -3339,7 +3312,7 @@ class seopress_options
     public function sanitize( $input )
     {   
 
-        $seopress_sanitize_fields = array('seopress_titles_sep','seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking','seopress_google_analytics_opt_out_msg', 'seopress_google_analytics_opt_out_msg_ok', 'seopress_google_analytics_other_tracking', 'seopress_google_analytics_optimize', 'seopress_google_analytics_ads','seopress_google_analytics_cross_domain' );
+        $seopress_sanitize_fields = array('seopress_titles_sep','seopress_titles_home_site_title', 'seopress_titles_home_site_desc', 'seopress_titles_archives_author_title', 'seopress_titles_archives_author_desc', 'seopress_titles_archives_date_title', 'seopress_titles_archives_date_desc', 'seopress_titles_archives_search_title', 'seopress_titles_archives_search_desc', 'seopress_titles_archives_404_title', 'seopress_titles_archives_404_desc', 'seopress_xml_sitemap_html_exclude', 'seopress_social_knowledge_name', 'seopress_social_knowledge_img', 'seopress_social_knowledge_phone', 'seopress_social_accounts_facebook', 'seopress_social_accounts_twitter', 'seopress_social_accounts_pinterest', 'seopress_social_accounts_instagram', 'seopress_social_accounts_youtube', 'seopress_social_accounts_linkedin', 'seopress_social_accounts_myspace', 'seopress_social_accounts_soundcloud', 'seopress_social_accounts_tumblr', 'seopress_social_facebook_link_ownership_id', 'seopress_social_facebook_admin_id', 'seopress_social_facebook_app_id', 'seopress_google_analytics_ua', 'seopress_google_analytics_download_tracking','seopress_google_analytics_opt_out_msg', 'seopress_google_analytics_opt_out_msg_ok', 'seopress_google_analytics_other_tracking', 'seopress_google_analytics_other_tracking_body', 'seopress_google_analytics_optimize', 'seopress_google_analytics_ads','seopress_google_analytics_cross_domain' );
 
         $seopress_sanitize_site_verification = array('seopress_advanced_advanced_google', 'seopress_advanced_advanced_bing', 'seopress_advanced_advanced_pinterest', 'seopress_advanced_advanced_yandex' );
         
@@ -3352,7 +3325,7 @@ class seopress_options
                         'a'      => array('href' => array(), 'target' => array())
                 );
                 $input[$value] = wp_kses($input[$value], $args);
-            } elseif (!empty( $input['seopress_google_analytics_other_tracking'] ) && $value =='seopress_google_analytics_other_tracking') {
+            } elseif ((!empty( $input['seopress_google_analytics_other_tracking'] ) && $value =='seopress_google_analytics_other_tracking') || (!empty( $input['seopress_google_analytics_other_tracking_body'] ) && $value =='seopress_google_analytics_other_tracking_body')) {
                 $input[$value] = $input[$value]; //No sanitization for this field
             } elseif( !empty( $input[$value] ) ) {
                 $input[$value] = sanitize_text_field( $input[$value] );
@@ -3379,7 +3352,7 @@ class seopress_options
      
     public function print_section_info_titles()
     {
-        print __('<p>Customize your titles & metas for homepage</p>', 'wp-seopress');
+        print __('<p>Customize your title & meta description for homepage</p>', 'wp-seopress');
     }   
 
     public function print_section_info_single()
@@ -3485,7 +3458,7 @@ class seopress_options
 
     public function print_section_info_social_accounts()
     {
-        print __('<p>Link your site with your social accounts. Use markup on your website to add your social profile information to a Google Knowledge panel. Knowledge panels prominently display your social profile information in some Google Search results. Filling in these fields does not guarantee the display of this data in search results. It may take a long time to see these social networking links.</p>', 'wp-seopress');
+        print __('<p>Link your site with your social accounts. Use markup on your website to add your social profile information to a Google Knowledge panel. Knowledge panels prominently display your social profile information in some Google Search results. Filling in these fields does not guarantee the display of this data in search results. It may take a long time to see these social-network links.</p>', 'wp-seopress');
         echo '<img src="'.plugins_url('assets/img/help/google-knowledge-graph-social.png', dirname(dirname(__FILE__))).'" class="help-social">';
     }    
 
@@ -3493,7 +3466,7 @@ class seopress_options
     {
         print __('<p>Manage Open Graph data.</p>', 'wp-seopress');
 
-        echo __('<p>We generate the <strong>og:image</strong> meta following this order:</p>','wp-seopress');
+        echo __('<p>We generate the <strong>og:image</strong> meta in this order:</p>','wp-seopress');
 
         echo '
         <ol>
@@ -3508,7 +3481,7 @@ class seopress_options
     {
         print __('<p>Manage your Twitter card.</p>', 'wp-seopress');
 
-        echo __('<p>We generate the <strong>twitter:image</strong> meta following this order:</p>','wp-seopress');
+        echo __('<p>We generate the <strong>twitter:image</strong> meta in this order:</p>','wp-seopress');
 
         echo '
         <ol>
@@ -3588,6 +3561,7 @@ class seopress_options
             esc_html( $this->options['seopress_titles_home_site_title'])
         );        
         echo '<div class="wrap-tags"><span id="seopress-tag-site-title" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
+        echo '<span id="seopress-tag-site-sep" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
         echo '<span id="seopress-tag-site-desc" data-tag="%%tagline%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Tagline','wp-seopress').'</span>';
         echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
     }
@@ -3624,11 +3598,14 @@ class seopress_options
 
                 echo "<script>
                     jQuery(document).ready(function($) {
-                        jQuery('#seopress-tag-single-title-".$seopress_cpt_key."').click(function() {
-                            jQuery('#seopress_titles_single_titles_".$seopress_cpt_key."').val(jQuery('#seopress_titles_single_titles_".$seopress_cpt_key."').val() + ' ' + jQuery('#seopress-tag-single-title-".$seopress_cpt_key."').attr('data-tag'));
+                        $('#seopress-tag-single-title-".$seopress_cpt_key."').click(function() {
+                            $('#seopress_titles_single_titles_".$seopress_cpt_key."').val($('#seopress_titles_single_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-single-title-".$seopress_cpt_key."').attr('data-tag'));
                         });
-                        jQuery('#seopress-tag-single-sitetitle-".$seopress_cpt_key."').click(function() {
-                            jQuery('#seopress_titles_single_titles_".$seopress_cpt_key."').val(jQuery('#seopress_titles_single_titles_".$seopress_cpt_key."').val() + ' ' + jQuery('#seopress-tag-single-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
+                        $('#seopress-tag-sep-".$seopress_cpt_key."').click(function() {
+                            $('#seopress_titles_single_titles_".$seopress_cpt_key."').val($('#seopress_titles_single_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-sep-".$seopress_cpt_key."').attr('data-tag'));
+                        });
+                        $('#seopress-tag-single-sitetitle-".$seopress_cpt_key."').click(function() {
+                            $('#seopress_titles_single_titles_".$seopress_cpt_key."').val($('#seopress_titles_single_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-single-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
                         });
                     });
                 </script>";
@@ -3639,6 +3616,8 @@ class seopress_options
                 );
 
                 echo '<div class="wrap-tags"><span id="seopress-tag-single-title-'.$seopress_cpt_key.'" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>';
+
+                echo '<span id="seopress-tag-sep-'.$seopress_cpt_key.'" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
 
                 echo '<span id="seopress-tag-single-sitetitle-'.$seopress_cpt_key.'" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
 
@@ -3717,6 +3696,25 @@ class seopress_options
                 }
 
             echo '</div>';
+
+            //Single meta thumbnail CPT
+            echo '<div class="seopress_wrap_single_cpt">';
+
+                $options = get_option( 'seopress_titles_option_name' );  
+            
+                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs']);      
+                
+                echo '<input id="seopress_titles_single_cpt_thumb_gcs['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][thumb_gcs]" type="checkbox"';
+                if ('1' == $check) echo 'checked="yes"'; 
+                echo ' value="1"/>';
+                
+                echo '<label for="seopress_titles_single_cpt_thumb_gcs['.$seopress_cpt_key.']">'. __( 'Display post thumbnail in Google Custom Search results?', 'wp-seopress' ) .'</label>';
+                
+                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs'])) {
+                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs']);
+                }
+
+            echo '</div>';
         }
     }
 
@@ -3737,11 +3735,14 @@ class seopress_options
 
                 echo "<script>
                     jQuery(document).ready(function($) {
-                        jQuery('#seopress-tag-tax-title-".$seopress_tax_key."').click(function() {
-                            jQuery('#seopress_titles_tax_titles_".$seopress_tax_key."').val(jQuery('#seopress_titles_tax_titles_".$seopress_tax_key."').val() + ' ' + jQuery('#seopress-tag-tax-title-".$seopress_tax_key."').attr('data-tag'));
+                        $('#seopress-tag-tax-title-".$seopress_tax_key."').click(function() {
+                            $('#seopress_titles_tax_titles_".$seopress_tax_key."').val($('#seopress_titles_tax_titles_".$seopress_tax_key."').val() + ' ' + $('#seopress-tag-tax-title-".$seopress_tax_key."').attr('data-tag'));
                         });
-                        jQuery('#seopress-tag-tax-sitetitle-".$seopress_tax_key."').click(function() {
-                            jQuery('#seopress_titles_tax_titles_".$seopress_tax_key."').val(jQuery('#seopress_titles_tax_titles_".$seopress_tax_key."').val() + ' ' + jQuery('#seopress-tag-tax-sitetitle-".$seopress_tax_key."').attr('data-tag'));
+                        $('#seopress-tag-sep-".$seopress_tax_key."').click(function() {
+                            $('#seopress_titles_tax_titles_".$seopress_tax_key."').val($('#seopress_titles_tax_titles_".$seopress_tax_key."').val() + ' ' + $('#seopress-tag-sep-".$seopress_tax_key."').attr('data-tag'));
+                        });
+                        $('#seopress-tag-tax-sitetitle-".$seopress_tax_key."').click(function() {
+                            $('#seopress_titles_tax_titles_".$seopress_tax_key."').val($('#seopress_titles_tax_titles_".$seopress_tax_key."').val() + ' ' + $('#seopress-tag-tax-sitetitle-".$seopress_tax_key."').attr('data-tag'));
                         });
                     });
                 </script>";
@@ -3758,6 +3759,8 @@ class seopress_options
                 } else {
                     echo '<div class="wrap-tags"><span id="seopress-tag-tax-title-'.$seopress_tax_key.'" data-tag="%%term_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Term Title','wp-seopress').'</span>';
                 }
+
+                echo '<span id="seopress-tag-sep-'.$seopress_tax_key.'" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
 
                 echo '<span id="seopress-tag-tax-sitetitle-'.$seopress_tax_key.'" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
 
@@ -3861,11 +3864,14 @@ class seopress_options
 
                     echo "<script>
                         jQuery(document).ready(function($) {
-                            jQuery('#seopress-tag-archive-title-".$seopress_cpt_key."').click(function() {
-                                jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + jQuery('#seopress-tag-archive-title-".$seopress_cpt_key."').attr('data-tag'));
+                            $('#seopress-tag-archive-title-".$seopress_cpt_key."').click(function() {
+                                $('#seopress_titles_archive_titles_".$seopress_cpt_key."').val($('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-archive-title-".$seopress_cpt_key."').attr('data-tag'));
                             });
-                            jQuery('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').click(function() {
-                                jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(jQuery('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + jQuery('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
+                            $('#seopress-tag-archive-sep-".$seopress_cpt_key."').click(function() {
+                                $('#seopress_titles_archive_titles_".$seopress_cpt_key."').val($('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-archive-sep-".$seopress_cpt_key."').attr('data-tag'));
+                            });
+                            $('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').click(function() {
+                                $('#seopress_titles_archive_titles_".$seopress_cpt_key."').val($('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
                             });
                         });
                     </script>";
@@ -3876,6 +3882,8 @@ class seopress_options
                     );
 
                     echo '<div class="wrap-tags"><span id="seopress-tag-archive-title-'.$seopress_cpt_key.'" data-tag="%%cpt_plural%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Type Archive Name','wp-seopress').'</span>';
+
+                    echo '<span id="seopress-tag-archive-sep-'.$seopress_cpt_key.'" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
 
                     echo '<span id="seopress-tag-archive-sitetitle-'.$seopress_cpt_key.'" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
 
@@ -3954,6 +3962,7 @@ class seopress_options
         );
 
         echo '<div class="wrap-tags"><span id="seopress-tag-post-author" data-tag="%%post_author%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post author','wp-seopress').'</span>';
+        echo '<span id="seopress-tag-sep-author" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
         echo '<span id="seopress-tag-site-title-author" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
         echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
         
@@ -4024,6 +4033,7 @@ class seopress_options
         );
 
         echo '<div class="wrap-tags"><span id="seopress-tag-archive-date" data-tag="%%archive_date%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Date archives','wp-seopress').'</span>';
+        echo '<span id="seopress-tag-sep-date" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
         echo '<span id="seopress-tag-site-title-date" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
         echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
         
@@ -4093,6 +4103,7 @@ class seopress_options
         );
 
         echo '<div class="wrap-tags"><span id="seopress-tag-search-keywords" data-tag="%%search_keywords%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Search Keywords','wp-seopress').'</span>';
+        echo '<span id="seopress-tag-sep-search" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
         echo '<span id="seopress-tag-site-title-search" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
         echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
         
@@ -4144,8 +4155,8 @@ class seopress_options
         
         );
         echo '<div class="wrap-tags"><span id="seopress-tag-site-title-404" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
+        echo '<span id="seopress-tag-sep-404" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
         echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
-        
     }
 
     public function seopress_titles_archives_404_desc_callback()
@@ -4290,7 +4301,7 @@ class seopress_options
         
         echo '<label for="seopress_titles_nositelinkssearchbox">'. __( 'nositelinkssearchbox', 'wp-seopress' ) .'</label>';
         
-        echo '<p class="description">'.__('Prevent Google to display a sitelinks searchbox in search results.','wp-seopress').'</p>';
+        echo '<p class="description">'.__('Prevent Google to display a sitelinks searchbox in search results. Enable this option will remove the "Website" schema from your source code.','wp-seopress').'</p>';
         
         if (isset($this->options['seopress_titles_nositelinkssearchbox'])) {
             esc_attr( $this->options['seopress_titles_nositelinkssearchbox']);
@@ -4652,7 +4663,7 @@ class seopress_options
         
         <input id="seopress_social_knowledge_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />';
 
-        echo '<p class="description">'.__('JPG, PNG or GIF allowed.', 'wp-seopress').'</p>';
+        echo '<p class="description">'.__('JPG, PNG, and GIF allowed.', 'wp-seopress').'</p>';
         
         if (isset($this->options['seopress_social_knowledge_img'])) {
             esc_attr( $this->options['seopress_social_knowledge_img']);
@@ -5154,7 +5165,7 @@ class seopress_options
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_optimize]" placeholder="'.esc_html__('Enter your Google Optimize container ID','wp-seopress').'" value="%s" aria-label="'.__('GTM-XXXXXXX','wp-seopress').'"/>',
         esc_html($check));
 
-        echo '<p class="description">'.__('Google Optimize offers A/B testing, website testing & personalization tools.','wp-seopress').'<a href="https://marketingplatform.google.com/about/optimize/" target="_blank">'.__('Learn more','wp-seopress').'</a></p>';
+        echo '<p class="description">'.__('Google Optimize offers A/B testing, website testing & personalization tools.','wp-seopress').' <a href="https://marketingplatform.google.com/about/optimize/" target="_blank">'.__('Learn more','wp-seopress').'</a></p>';
     }
 
     public function seopress_google_analytics_ads_callback()
@@ -5162,7 +5173,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_ads']) ? $this->options['seopress_google_analytics_ads'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ads]" placeholder="'.esc_html__('Enter your Google Ads conversion ID (eg: AW-123456789','wp-seopress').'" value="%s" aria-label="'.__('AW-XXXXXXXXX','wp-seopress').'"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ads]" placeholder="'.esc_html__('Enter your Google Ads conversion ID (eg: AW-123456789)','wp-seopress').'" value="%s" aria-label="'.__('AW-XXXXXXXXX','wp-seopress').'"/>',
         esc_html($check));
     }
 
@@ -5171,10 +5182,21 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_other_tracking']) ? $this->options['seopress_google_analytics_other_tracking'] : NULL;
 
         printf(
-        '<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="'.esc_html__('Paste your tracking code here','wp-seopress').'" aria-label="'.__('Additional tracking code field','wp-seopress').'">%s</textarea>',
+        '<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="'.esc_html__('Paste your tracking code here like Google Tag Manager (head)','wp-seopress').'" aria-label="'.__('Additional tracking code field','wp-seopress').'">%s</textarea>',
         esc_textarea($check));
 
         echo '<p class="description">'.__('This code will be added in the head section of your page.','wp-seopress').'</a></p>';
+    }
+
+    public function seopress_google_analytics_other_tracking_body_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_other_tracking_body']) ? $this->options['seopress_google_analytics_other_tracking_body'] : NULL;
+
+        printf(
+        '<textarea id="seopress_google_analytics_other_tracking_body" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_body]" rows="16" placeholder="'.esc_html__('Paste your tracking code here like Google Tag Manager (body)','wp-seopress').'" aria-label="'.__('Additional tracking code field added to body','wp-seopress').'">%s</textarea>',
+        esc_textarea($check));
+
+        echo '<p class="description">'.__('This code will be added just after the opening body tag of your page.','wp-seopress').'</a></p>';
     }
 
     public function seopress_google_analytics_remarketing_callback()
@@ -5266,7 +5288,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cross_domain']) ? $this->options['seopress_google_analytics_cross_domain'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cross_domain]" placeholder="'.esc_html__('Enter yours domains: seopress.org,sub.seopress.org,sub2.seopress.org','wp-seopress').'" value="%s" aria-label="'.__('Cross domains','wp-seopress').'"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cross_domain]" placeholder="'.esc_html__('Enter your domains: seopress.org,sub.seopress.org,sub2.seopress.org','wp-seopress').'" value="%s" aria-label="'.__('Cross domains','wp-seopress').'"/>',
         esc_html($check)
         
         );
@@ -5764,9 +5786,9 @@ class seopress_options
         if ('1' == $check) echo 'checked="yes"'; 
         echo ' value="1"/>';
         
-        echo '<label for="seopress_advanced_advanced_attachments_file">'. __( 'Redirect attachment pages to the file URL (https://www.example.com/my-image-file.jpg)', 'wp-seopress' ) .'</label>';
+        echo '<label for="seopress_advanced_advanced_attachments_file">'. __( 'Redirect attachment pages to their file URL (https://www.example.com/my-image-file.jpg)', 'wp-seopress' ) .'</label>';
 
-        echo '<p class="description">'.__('If this option is checked, it will take precedence over the redirection of attachments to the post parent.','wp-seopress').'</p>';
+        echo '<p class="description">'.__('If this option is checked, it will take precedence over the redirection of attachments to the post\'s parent.','wp-seopress').'</p>';
         
         if (isset($this->options['seopress_advanced_advanced_attachments_file'])) {
             esc_attr( $this->options['seopress_advanced_advanced_attachments_file']);
@@ -6390,7 +6412,7 @@ class seopress_options
             }
         }
         ?>
-        <a href="<?php echo $seopress_docs_link['support']['security']['metaboxe_seo']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Hook to filter Structured data types metabox call by post type - new window','wp-seopress'); ?></span></a>
+        <a href="<?php echo $seopress_docs_link['support']['security']['metaboxe_seo']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Hook to filter structured data types metabox call by post type - new window','wp-seopress'); ?></span></a>
         <?php
     }
 
@@ -6425,7 +6447,7 @@ class seopress_options
             }
         }
         ?>
-        <a href="<?php echo $seopress_docs_link['support']['security']['metaboxe_ca']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Hook to filter Structured data types metabox call by post type - new window','wp-seopress'); ?></span></a>
+        <a href="<?php echo $seopress_docs_link['support']['security']['metaboxe_ca']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Hook to filter structured data types metabox call by post type - new window','wp-seopress'); ?></span></a>
         <?php
     }
 }

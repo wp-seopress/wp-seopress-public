@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 3.6.1.1
+Stable tag: 3.6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -219,6 +219,36 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.6.2 =
+* NEW Add custom manual / automatic schema with dynamic variables (PRO)
+* NEW Add custom tracking code after opening body tag like Google Tag Manager 🍾
+* NEW Add meta name "thumbnail" option in SEO > Titles and metas > Single post types to display post thumbnail in Google Custom Search (eg: https://wordpress.org/search/seopress)
+* NEW Add FAQ global schema (PRO)
+* NEW Add 'keywords' for Recipe schema (PRO)
+* NEW Add 'recipeCuisine' for Recipe schema (PRO)
+* NEW Add 'recipeIngredient' for Recipe schema (PRO)
+* NEW Add 'recipeInstructions' for Recipe schema (PRO)
+* NEW Add 'BlogPosting' for Article schema (PRO)
+* NEW 'seopress_schemas_auto_faq_html' hook to filter FAQ global schema
+* NEW 'seopress_sitemaps_single_img' hook to add custom fields to XML image sitemaps
+* NEW 'seopress_sitemaps_html_pages_depth_query' hook to filter depth for hierarchical contents in HTML sitemap
+* NEW 'seopress_custom_body_tracking' hook to filter custom body tracking
+* NEW 'seopress_titles_template_variables_array' && 'seopress_titles_template_replace_array' hook to filter dynamic variables for title tag / meta description
+* NEW Add keywords density to content analysis to help you avoid keyword stuffing
+* NEW Add outbound links to content analysis (in links tab)
+* INFO WP-Rocket now automatically detect our XML sitemaps (WP-Rocket 3.3.7 required)
+* INFO Add quick button separator for title fields
+* INFO You can now disable BOT / Broken links checker from the SEO dashboard (admin bar, menu page and post type)
+* INFO Improve content analysis by removing empty target keywords
+* INFO Remove Alexa Rank feature (the API is no longer provided for free by Amazon)
+* INFO Translate Google Analytics UA option field with WPML / Polylang
+* INFO Automatic schemas tab is now the default one in Structured Data Types metabox
+* INFO Checks if the redirects feature is active before importing redirects 
+* FIX Some translation strings / localize strings
+* FIX wpml-config.xml file, WPML / Polylang users can now translate Archives title and meta description (eg: shop page)
+* FIX Recipe schema: cooking time / calories / yield / total time
+* FIX Custom tracking code in head
+* FIX Remove Website schema if nositelinkssearchbox option is ON
 = 3.6.1.1 =
 * FIX s(...).tabs is not a function in seopress-cookies.min.js
 = 3.6.1 =

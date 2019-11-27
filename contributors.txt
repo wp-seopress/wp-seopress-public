@@ -15,6 +15,7 @@ Beta testers / feedbacks:
 - Aurélien Denis: aurelien.denis@neticpro.fr / @wpchannel
 - Sébastien Serre: @sebastienserre
 - Ludovic Riaudel: @lriaudel
+- Philippe Fronzes: @novaldi64
 
 Integrations:
 - The Admin Columns PRO team

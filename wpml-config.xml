@@ -9,6 +9,12 @@
           <key name="description"/>
         </key>
       </key>
+      <key name="seopress_titles_archive_titles">
+        <key name="*">
+          <key name="title"/>
+          <key name="description"/>
+        </key>
+      </key>
       <key name="seopress_titles_archives_author_title"/>
       <key name="seopress_titles_archives_author_desc"/>
       <key name="seopress_titles_archives_date_title"/>
@@ -25,6 +31,7 @@
       </key>
     </key>
     <key name="seopress_google_analytics_option_name">
+      <key name="seopress_google_analytics_ua"/>
       <key name="seopress_google_analytics_opt_out_msg"/>
       <key name="seopress_google_analytics_opt_out_msg_ok"/>
     </key>

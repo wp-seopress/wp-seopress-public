@@ -12,9 +12,12 @@ jQuery(document).ready(function($) {
 				_ajax_nonce: seopressAjaxGAUserConsent.seopress_nonce,
 			},
 			success : function( data ) {
+				console.log(data.data);
 				$('.seopress-user-consent').remove();
 				$('head').append(data.data.gtag_js);
 				$('head').append(data.data.custom);
+				$('head').append(data.data.head_js);
+				$('body').prepend(data.data.body_js);
 				Cookies.set('seopress-user-consent-accept', '1', { expires: 30 });
 			},
 		});

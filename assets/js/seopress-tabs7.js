@@ -46,25 +46,6 @@ jQuery(document).ready(function($) {
     	$('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");
     	$('#'+hash).addClass("active");
     });
-	//Request Alexa Rank
-	$('#seopress-request-alexa-rank').on('click', function() {
-		$.ajax({
-			method : 'GET',
-			url : seopressAjaxAlexa.seopress_request_alexa_rank,
-			data : {
-				action: 'seopress_request_alexa_rank',
-				_ajax_nonce: seopressAjaxAlexa.seopress_nonce,
-			},
-			success : function( data ) {
-				window.location.reload(true);
-			},
-		});
-	});
-	$('#seopress-request-alexa-rank').on('click', function() {
-		$(this).attr("disabled", "disabled");
-		$( '#spinner-alexa.spinner' ).css( "visibility", "visible" );
-		$( '#spinner-alexa.spinner' ).css( "float", "none" );
-	});
 	//Request Reverse Domains
 	$('#seopress-reverse-submit').on('click', function() {
 		$.ajax({

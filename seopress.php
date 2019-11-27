@@ -2,8 +2,8 @@
 /*
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
-Description: One of the best SEO Plugin for WordPress.
-Version: 3.6.1.1
+Description: One of the best SEO plugins for WordPress.
+Version: 3.6.2
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.6.1.1' ); 
+define( 'SEOPRESS_VERSION', '3.6.2' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,6 +100,15 @@ function seopress_init($hook) {
     }
 }
 add_action('plugins_loaded', 'seopress_init', 999);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Loads dynamic variables for titles, metas, schemas...
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_dyn_variables_init($variables){
+    $variables = include dirname( __FILE__ ) . '/inc/functions/variables/dynamic-variables.php';
+    return $variables;
+}
+add_filter('seopress_dyn_variables_fn','seopress_dyn_variables_init');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Loads the JS/CSS in admin
@@ -149,13 +158,6 @@ function seopress_add_admin_options_scripts($hook) {
             'seopress_clear_reverse_cache' => admin_url( 'admin-ajax.php'),
         );
         wp_localize_script( 'seopress-reverse-ajax', 'seopressAjaxClearReverseCache', $seopress_clear_reverse_cache );
-
-        //Alexa Rank
-        $seopress_request_alexa_rank = array(
-            'seopress_nonce' => wp_create_nonce('seopress_request_alexa_rank_nonce'),
-            'seopress_request_alexa_rank' => admin_url( 'admin-ajax.php'),
-        );
-        wp_localize_script( 'seopress-reverse-ajax', 'seopressAjaxAlexa', $seopress_request_alexa_rank );
     }
 
     //Migration
@@ -179,6 +181,7 @@ function seopress_add_admin_options_scripts($hook) {
                 'seopress_nonce' => wp_create_nonce('seopress_rk_migrate_nonce'),
                 'seopress_rk_migration' => admin_url( 'admin-ajax.php'),
             ),
+            'i18n' => __('Migration completed!','wp-seopress')
         );
         wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate );
     }
@@ -266,7 +269,6 @@ function seopress_admin_body_class( $classes ) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //3rd plugins compatibility
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 //Jetpack
 function seopress_compatibility_jetpack() {
     if ( function_exists('is_plugin_active')) {
@@ -423,7 +425,6 @@ function seopress_check_ssl() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Check if a feature is ON
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Is Titles enable?
 function seopress_get_toggle_titles_option() {
     $seopress_get_toggle_titles_option = get_option("seopress_toggle");

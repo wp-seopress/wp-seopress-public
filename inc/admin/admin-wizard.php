@@ -364,7 +364,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 		<h1><?php esc_html_e( 'Your site', 'wp-seopress' ); ?></h1>
 		<form method="post">
-			<p><?php esc_html_e( 'Fill out the fields below to configure general settings needed to build title tags and knowledge graph for Google.', 'wp-seopress' ); ?></p>
+			<p><?php esc_html_e( 'To build title tags and knowledge graph for Google, you need to fill out the fields below to configure the general settings. ', 'wp-seopress' ); ?></p>
 
 			<label class="location-prompt" for="site_sep"><?php esc_html_e( 'Separator', 'wp-seopress' ); ?></label>
 			<input type="text" id="site_sep" class="location-input" name="site_sep" placeholder="<?php esc_html_e('eg: |', 'wp-seopress'); ?>" required value="<?php echo $site_sep; ?>" />
@@ -473,12 +473,12 @@ class SEOPRESS_Admin_Setup_Wizard {
 			$seopress_titles_option = get_option( 'seopress_titles_option_name' );
 		?>
 		<h1><?php esc_html_e( 'Indexing', 'wp-seopress' ); ?></h1>
-		<p><?php esc_html_e( 'Specify to the search engines what you want to index or not. Defaut: index', 'wp-seopress' ); ?></p>
+		<p><?php esc_html_e( 'Specify to the search engines what you want to be indexed or not. Default: index', 'wp-seopress' ); ?></p>
 		<form method="post" class="seopress-wizard-indexing-form">
 			<?php if(!empty(seopress_get_post_types())) { ?>
 				<div class="seopress-wizard-services">
 					<p>
-						<?php _e('For which single post types, indexing should be disabled?','wp-seopress'); ?>
+						<?php _e('For which single post types, should indexing be disabled?','wp-seopress'); ?>
 					</p>
 					
 					<ul>
@@ -506,7 +506,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 			<?php if(!empty(seopress_get_post_types())) { ?>
 				<div class="seopress-wizard-services">
 				    <p>
-						<?php _e('For which post type archives, indexing should be disabled?','wp-seopress'); ?>
+						<?php _e('For which post type archives, should indexing be disabled?','wp-seopress'); ?>
 					</p>
 
 					<ul>
@@ -536,7 +536,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 			<?php if(!empty(seopress_get_taxonomies())) { ?>
 			    <div class="seopress-wizard-services">
 				    <p>
-						<?php _e('For which taxonomy archives, indexing should be disabled?','wp-seopress'); ?>
+						<?php _e('For which taxonomy archives, should indexing be disabled?','wp-seopress'); ?>
 					</p>
 
 					<ul>
@@ -648,7 +648,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 				        if ('1' == $attachments_file) echo 'checked="yes"'; 
 				        echo ' value="1"/>';
 				        
-				        echo '<label for="attachments_file" class="location-prompt">'. __( 'Redirect attachment pages to the file URL (https://www.example.com/my-image-file.jpg)', 'wp-seopress' ) .'</label>';
+				        echo '<label for="attachments_file" class="location-prompt">'. __( 'Redirect attachment pages to their file URL (https://www.example.com/my-image-file.jpg)', 'wp-seopress' ) .'</label>';
 				    echo '</li>';
 				    echo '<li class="seopress-wizard-service-info">';
 				    	_e('By default, SEOPress redirects your Attachment pages to the parent post. Optimize this by redirecting the user directly to the URL of the media file.','wp-seopress');
@@ -736,7 +736,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 					<?php esc_html_e( "Go PRO with SEOPress PRO!","wp-seopress"); ?>
 				</h3>
 				<p class="seopress-setup-actions step">
-					<?php esc_html_e( "Get a lot of additional features by upgrading PRO like automatic and manual schemas, Video Sitemap, WooCommerce enhancements, Analytics statistics in your Dashboard, breadcrumbs, redirections and more.", 'wp-seopress' ); ?>
+					<?php esc_html_e( "When you upgrade to the PRO version, you get a lot of additional features, like automatic and manual schemas, Video Sitemap, WooCommerce enhancements, Analytics statistics in your Dashboard, breadcrumbs, redirections, and more.", 'wp-seopress' ); ?>
 				</p>
 				<p class="seopress-setup-actions step">
 					<a class="button button-primary button-large" href="https://www.seopress.org/" target="_blank">
@@ -752,7 +752,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 				<div class="seopress-wizard-next-step-description">
 					<p class="next-step-heading"><?php esc_html_e("Next step","wp-seopress"); ?></p>
 					<h3 class="next-step-description"><?php esc_html_e("Create your XML sitemaps","wp-seopress"); ?></h3>
-					<p class="next-step-extra-info"><?php esc_html_e("Build custom XML sitemaps to improve Google crawling of your site.","wp-seopress"); ?></p>
+					<p class="next-step-extra-info"><?php esc_html_e("Build custom XML sitemaps to improve Google's crawling of your site.","wp-seopress"); ?></p>
 				</div>
 				<div class="seopress-wizard-next-step-action">
 					<p class="seopress-setup-actions step">

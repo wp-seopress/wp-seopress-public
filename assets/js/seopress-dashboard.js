@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
 		});
 	});
 
-	const features = ["titles","xml-sitemap","social","google-analytics","advanced","local-business","woocommerce","edd","dublin-core","rich-snippets","breadcrumbs","robots","news","404","rewrite","white-label"]
+	const features = ["titles","xml-sitemap","social","google-analytics","advanced","local-business","woocommerce","edd","dublin-core","rich-snippets","breadcrumbs","robots","news","404","bot","rewrite","white-label"]
 	features.forEach(function (item) {
 		$('#toggle-'+item).on('click', function() {
 			$('#toggle-'+item).attr('data-toggle', $('#toggle-'+item).attr('data-toggle') == '1' ? '0' : '1');

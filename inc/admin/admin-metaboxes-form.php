@@ -189,7 +189,7 @@ echo               '<div class="snippet-description">...</div>
                 </label>
             </p>
             <p class="description">
-                '.__('You can not uncheck a parameter? This is normal, it is most likely defined in the global settings of the extension.','wp-seopress').'
+                '.__('You cannot uncheck a parameter? This is normal, and it\'s most likely defined in the global settings of the extension.','wp-seopress').'
             </p>
             <p>
                 <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
@@ -287,7 +287,7 @@ echo               '<div class="snippet-description">...</div>
             echo '<p>
                 <label for="seopress_redirections_param_meta">'. __( 'Query parameters', 'wp-seopress' ) .'</label>
                 <select name="seopress_redirections_param">
-                    <option ' . selected( 'exact_match', $seopress_redirections_param, false ) . ' value="exact_match">'. __( 'Exact match with all parameters', 'wp-seopress' ) .'</option>
+                    <option ' . selected( 'exact_match', $seopress_redirections_param, false ) . ' value="exact_match">'. __( 'Exactly match all parameters', 'wp-seopress' ) .'</option>
                     <option ' . selected( 'without_param', $seopress_redirections_param, false ) . ' value="without_param">'. __( 'Exclude all parameters', 'wp-seopress' ) .'</option>
                     <option ' . selected( 'with_ignored_param', $seopress_redirections_param, false ) . ' value="with_ignored_param">'. __( 'Exclude all parameters and pass them to the redirection', 'wp-seopress' ) .'</option>
                 </select></p>';

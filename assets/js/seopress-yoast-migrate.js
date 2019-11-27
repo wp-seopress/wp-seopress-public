@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
 				if( 'done' == data.data.offset ) {
 		        	$('#seopress-yoast-migrate').removeAttr("disabled");
 					$( '.spinner' ).css( "visibility", "hidden" );
-					$( '#yoast-migration-tool .log' ).html('Migration completed!');
+					$( '#yoast-migration-tool .log' ).html(seopressAjaxMigrate.i18n);
 		        } else {
 		        	self.process_offset( parseInt( data.data.offset ), self );
 		        }					
@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
 				if( 'done' == data.data.offset2 ) {
 		        	$('#seopress-aio-migrate').removeAttr("disabled");
 					$( '.spinner' ).css( "visibility", "hidden" );
-					$( '#aio-migration-tool .log' ).html('Migration completed!');
+					$( '#aio-migration-tool .log' ).html(seopressAjaxMigrate.i18n);
 		        } else {
 		        	self.process_offset2( parseInt( data.data.offset2 ), self );
 		        }					
@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
 				if( 'done' == data.data.offset3 ) {
 		        	$('#seopress-seo-framework-migrate').removeAttr("disabled");
 					$( '.spinner' ).css( "visibility", "hidden" );
-					$( '#seo-framework-migration-tool .log' ).html('Migration completed!');
+					$( '#seo-framework-migration-tool .log' ).html(seopressAjaxMigrate.i18n);
 		        } else {
 		        	self.process_offset3( parseInt( data.data.offset3 ), self );
 		        }					
@@ -115,7 +115,7 @@ jQuery(document).ready(function($) {
 				if( 'done' == data.data.offset4 ) {
 		        	$('#seopress-rk-migrate').removeAttr("disabled");
 					$( '.spinner' ).css( "visibility", "hidden" );
-					$( '#rk-migration-tool .log' ).html('Migration completed!');
+					$( '#rk-migration-tool .log' ).html(seopressAjaxMigrate.i18n);
 		        } else {
 		        	self.process_offset4( parseInt( data.data.offset4 ), self );
 		        }					
