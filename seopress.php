@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.6.4
+Version: 3.6.5
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.6.4' ); 
+define( 'SEOPRESS_VERSION', '3.6.5' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,7 +284,6 @@ add_action( 'wp_head', 'seopress_compatibility_jetpack', 0 );
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Credits footer
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 function seopress_custom_credits_footer() {
     return '<span id="seopress-footer-credits">
                 <span class="dashicons dashicons-wordpress"></span>
@@ -519,6 +518,17 @@ function seopress_xml_sitemap_taxonomies_list_option() {
     }
 }
 
+function seopress_xml_sitemap_author_enable_option() {
+    $seopress_xml_sitemap_author_enable_option = get_option("seopress_xml_sitemap_option_name");
+    if ( ! empty ( $seopress_xml_sitemap_author_enable_option ) ) {
+        foreach ($seopress_xml_sitemap_author_enable_option as $key => $seopress_xml_sitemap_author_enable_value)
+            $options[$key] = $seopress_xml_sitemap_author_enable_value;
+         if (isset($seopress_xml_sitemap_author_enable_option['seopress_xml_sitemap_author_enable'])) { 
+            return $seopress_xml_sitemap_author_enable_option['seopress_xml_sitemap_author_enable'];
+         }
+    }
+}
+
 //Rewrite Rules for XML Sitemap
 if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xml_sitemap_option() =='1') {
     add_action( 'init', 'seopress_xml_sitemap_rewrite' );
@@ -537,6 +547,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
             unset( $q['seopress_sitemap'] );
             unset( $q['seopress_cpt'] );
             unset( $q['seopress_paged'] );
+            unset( $q['seopress_author'] );
             unset( $q['seopress_sitemap_xsl'] );
         }
         return $q;
@@ -590,6 +601,11 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
                 add_rewrite_rule( 'sitemaps/'.$value.'-sitemap([0-9]+)?.xml$', 'index.php?seopress_cpt='.$value.'&seopress_paged='.$matches[2], 'top' );
             }
         }
+
+        //XML Author
+        if (seopress_xml_sitemap_author_enable_option() == 1) {
+            add_rewrite_rule( 'sitemaps/author.xml?$', 'index.php?seopress_author=1', 'top' );
+        }
     }
 
 
@@ -598,6 +614,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
         $vars[] = 'seopress_sitemap_xsl';
         $vars[] = 'seopress_cpt';
         $vars[] = 'seopress_paged';
+        $vars[] = 'seopress_author';
         return $vars;
     }
     
@@ -616,7 +633,6 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
                 exit;
             }
         }
-
         if (get_query_var( 'seopress_cpt') !== '' ) {
             if (function_exists('seopress_xml_sitemap_post_types_list_option') 
                 && seopress_xml_sitemap_post_types_list_option() !='' 
@@ -634,6 +650,13 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_xm
                     include $seopress_tax;
                     exit;
                 }
+            }
+        }
+        if( get_query_var( 'seopress_author' ) === '1' ) {
+            $seopress_author = plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/template-xml-sitemaps-author.php';
+            if( file_exists( $seopress_author ) ) {
+                include $seopress_author;
+                exit;
             }
         }
 

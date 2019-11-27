@@ -247,43 +247,46 @@ function seopress_social_accounts_jsonld_hook() {
 			$seopress_social_knowledge_contact_option_option = json_encode(seopress_social_knowledge_contact_option_option());
 		}
 
-		echo '<script type="application/ld+json">';
-		echo '{"@context" : "'.seopress_check_ssl().'schema.org","@type" : '.$seopress_social_knowledge_type_option.',';
+		$html = '<script type="application/ld+json">';
+		$html .= '{"@context" : "'.seopress_check_ssl().'schema.org","@type" : '.$seopress_social_knowledge_type_option.',';
 		if (seopress_social_knowledge_img_option() !='' && seopress_social_knowledge_type_option() =='Organization') {
-			echo '"logo": '.$seopress_social_knowledge_img_option.',';
+			$html .= '"logo": '.$seopress_social_knowledge_img_option.',';
 		}
-		echo '"name" : '.$seopress_social_knowledge_name_option.',"url" : '.json_encode(get_home_url());
+		$html .= '"name" : '.$seopress_social_knowledge_name_option.',"url" : '.json_encode(get_home_url());
 		
 		if (seopress_social_knowledge_type_option() =='Organization' 
 			&& seopress_social_knowledge_phone_number_option() !=''
 			&& seopress_social_knowledge_contact_type_option() !=''
 			) {
 			if ($seopress_social_knowledge_phone_number_option && $seopress_social_knowledge_contact_type_option ) {
-				echo ',"contactPoint": [{
+				$html .= ',"contactPoint": [{
 					"@type": "ContactPoint",
 					"telephone": '.$seopress_social_knowledge_phone_number_option.',';
 					if ($seopress_social_knowledge_contact_option_option !='' && $seopress_social_knowledge_contact_option_option !='None') {
-						echo '"contactOption": '.$seopress_social_knowledge_contact_option_option.',';
+						$html .= '"contactOption": '.$seopress_social_knowledge_contact_option_option.',';
 					}
-					echo '"contactType": '.$seopress_social_knowledge_contact_type_option.'
+					$html .= '"contactType": '.$seopress_social_knowledge_contact_type_option.'
 				}]';
 			}
 		}
 
 		if (seopress_social_accounts_facebook_option() !='' || seopress_social_accounts_twitter_option() !='' ||  seopress_social_accounts_pinterest_option() !='' || seopress_social_accounts_instagram_option() !='' || seopress_social_accounts_youtube_option() !='' || seopress_social_accounts_linkedin_option() !='' || seopress_social_accounts_myspace_option() !='' || seopress_social_accounts_soundcloud_option() !='' || seopress_social_accounts_tumblr_option() !='' ) {
-			echo ',"sameAs" : [';
+			$html .= ',"sameAs" : [';
 			$seopress_comma_count = count($seopress_comma_array);
 			for ($i = 0; $i < $seopress_comma_count; $i++) {
-				echo $seopress_comma_array[$i];
+				$html .= $seopress_comma_array[$i];
 			   	if ($i < ($seopress_comma_count - 1)) {
-			    	echo ', ';
+			    	$html .= ', ';
 			   	}
 			}
-			echo ']';
+			$html .= ']';
 		}
-		echo '}';
-		echo '</script>';
-		echo "\n";
+		$html .= '}';
+		$html .= '</script>';
+		$html .= "\n";
+
+		$html = apply_filters('seopress_schemas_organization_html', $html);
+		echo $html;
 	}
 }
 add_action( 'wp_head', 'seopress_social_accounts_jsonld_hook', 1 );

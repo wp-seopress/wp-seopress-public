@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 3.6.4
+Stable tag: 3.6.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -219,6 +219,37 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.6.5 =
+* NEW XML Author sitemap
+* NEW 'seopress_schemas_organization_html' hook to filter Organization schema
+* NEW 'seopress_remove_feature_titles' hook to remove Titles and metas block in SEO > Dashboard
+* NEW 'seopress_remove_feature_xml_sitemap' hook to remove Titles and metas block in SEO > Dashboard
+* NEW 'seopress_remove_feature_social' hook to remove Social block in SEO > Dashboard
+* NEW 'seopress_remove_feature_google_analytics' hook to remove Google Analytics block in SEO > Dashboard
+* NEW 'seopress_remove_feature_advanced' hook to remove Advanced block in SEO > Dashboard
+* NEW 'seopress_remove_feature_woocommerce' hook to remove WooCommerce block in SEO > Dashboard
+* NEW 'seopress_remove_feature_edd' hook to remove Easy Digital Downloads block in SEO > Dashboard
+* NEW 'seopress_remove_feature_local_business' hook to remove Local Business block in SEO > Dashboard
+* NEW 'seopress_remove_feature_dublin_core' hook to remove Dublin Core block in SEO > Dashboard
+* NEW 'seopress_remove_feature_breadcrumbs' hook to remove Breadcrumbs block in SEO > Dashboard
+* NEW 'seopress_remove_feature_schemas' hook to remove Schemas block in SEO > Dashboard
+* NEW 'seopress_remove_feature_page_speed' hook to remove Page Speed block in SEO > Dashboard
+* NEW 'seopress_remove_feature_robots' hook to remove Robots block in SEO > Dashboard
+* NEW 'seopress_remove_feature_news' hook to remove News block in SEO > Dashboard
+* NEW 'seopress_remove_feature_redirects' hook to remove Redirects block in SEO > Dashboard
+* NEW 'seopress_remove_feature_bot' hook to remove Bot (broken links) block in SEO > Dashboard
+* NEW 'seopress_remove_feature_backlinks' hook to remove Backlinks block in SEO > Dashboard
+* NEW 'seopress_remove_feature_rewrite' hook to remove Rewrite block in SEO > Dashboard
+* NEW 'seopress_remove_feature_htaccess' hook to remove htaccess block in SEO > Dashboard
+* NEW 'seopress_remove_feature_rss' hook to remove RSS block in SEO > Dashboard
+* NEW 'seopress_remove_feature_tools' hook to remove Tools (Import / Export) block in SEO > Dashboard
+* NEW 'seopress_remove_feature_license' hook to remove License block in SEO > Dashboard
+* INFO Aria-label attribute in breadcrumbs is now translatable
+* INFO %%current_pagination%% is now set to 1 by default
+* FIX 'seopress_sitemaps_html_pages_query' hook to include $cpt_key parameter
+* FIX bounce rate with custom dimensions
+* FIX Hierarchical post types in HTML sitemap
+* FIX CSS bug in SEO dashboard with WordPress 5.2.3
 = 3.6.4 =
 * NEW Add 'seopress_bot_query' hook to filter the broken links checker query
 * INFO Relevanssi users: posts marked as noindex are no longer indexed by default (Relevanssi 4.3.2 required)

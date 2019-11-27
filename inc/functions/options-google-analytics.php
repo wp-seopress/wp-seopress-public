@@ -383,7 +383,7 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 				if (is_singular()) {
 					$seopress_google_analytics_config['cd']['cd_author'] = "'".seopress_google_analytics_cd_author_option()."': 'cd_author',";
 
-					$seopress_google_analytics_event['cd_author'] = "gtag('event', '".__('Authors','wp-seopress')."', {'cd_author': '".get_the_author()."'});";
+					$seopress_google_analytics_event['cd_author'] = "gtag('event', '".__('Authors','wp-seopress')."', {'cd_author': '".get_the_author()."', 'non_interaction': true});";
 					
 					$seopress_google_analytics_config['cd']['cd_author'] = apply_filters('seopress_gtag_cd_author_cf', $seopress_google_analytics_config['cd']['cd_author']);
 					
@@ -402,7 +402,7 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 
 					$seopress_google_analytics_config['cd']['cd_categories'] = "'".seopress_google_analytics_cd_category_option()."': 'cd_categories',";
 
-					$seopress_google_analytics_event['cd_categories'] = "gtag('event', '".__('Categories','wp-seopress')."', {'cd_categories': '".$get_first_category."'});";
+					$seopress_google_analytics_event['cd_categories'] = "gtag('event', '".__('Categories','wp-seopress')."', {'cd_categories': '".$get_first_category."', 'non_interaction': true});";
 					
 					$seopress_google_analytics_config['cd']['cd_categories'] = apply_filters('seopress_gtag_cd_categories_cf', $seopress_google_analytics_config['cd']['cd_categories']);
 					
@@ -428,7 +428,7 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 
 					$seopress_google_analytics_config['cd']['cd_tags'] = "'".seopress_google_analytics_cd_tag_option()."': 'cd_tags',";
 
-					$seopress_google_analytics_event['cd_tags'] = "gtag('event', '".__('Tags','wp-seopress')."', {'cd_tags': '".$get_tags."'});";
+					$seopress_google_analytics_event['cd_tags'] = "gtag('event', '".__('Tags','wp-seopress')."', {'cd_tags': '".$get_tags."', 'non_interaction': true});";
 					
 					$seopress_google_analytics_config['cd']['cd_tags'] = apply_filters('seopress_gtag_cd_tags_cf', $seopress_google_analytics_config['cd']['cd_tags']);
 					
@@ -442,7 +442,7 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 				if (is_single()) {
 					$seopress_google_analytics_config['cd']['cd_cpt'] = "'".seopress_google_analytics_cd_post_type_option()."': 'cd_cpt',";
 
-					$seopress_google_analytics_event['cd_cpt'] = "gtag('event', '".__('Post types','wp-seopress')."', {'cd_cpt': '".get_post_type()."'});";
+					$seopress_google_analytics_event['cd_cpt'] = "gtag('event', '".__('Post types','wp-seopress')."', {'cd_cpt': '".get_post_type()."', 'non_interaction': true});";
 					
 					$seopress_google_analytics_config['cd']['cd_cpt'] = apply_filters('seopress_gtag_cd_cpt_cf', $seopress_google_analytics_config['cd']['cd_cpt']);
 					
@@ -456,7 +456,7 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 				if (wp_get_current_user()->ID) {
 					$seopress_google_analytics_config['cd']['cd_logged_in'] = "'".seopress_google_analytics_cd_logged_in_user_option()."': 'cd_logged_in',";
 
-					$seopress_google_analytics_event['cd_logged_in'] = "gtag('event', '".__('Connected users','wp-seopress')."', {'cd_logged_in': '".wp_get_current_user()->ID."'});";
+					$seopress_google_analytics_event['cd_logged_in'] = "gtag('event', '".__('Connected users','wp-seopress')."', {'cd_logged_in': '".wp_get_current_user()->ID."', 'non_interaction': true});";
 					
 					$seopress_google_analytics_config['cd']['cd_logged_in'] = apply_filters('seopress_gtag_cd_logged_in_cf', $seopress_google_analytics_config['cd']['cd_logged_in']);
 					

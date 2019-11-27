@@ -187,6 +187,18 @@ function seopress_xml_sitemap_index() {
 		$seopress_sitemaps .= '</sitemap>';
 	}
 
+	//Author sitemap
+	if (function_exists("seopress_xml_sitemap_author_enable_option") && seopress_xml_sitemap_author_enable_option() !='') {
+		$seopress_sitemaps .= "\n";
+		$seopress_sitemaps .= '<sitemap>';
+		$seopress_sitemaps .= "\n";
+		$seopress_sitemaps .= '<loc>';
+		$seopress_sitemaps .= get_home_url().'/sitemaps/author.xml';
+		$seopress_sitemaps .= '</loc>';
+		$seopress_sitemaps .= "\n";
+		$seopress_sitemaps .= '</sitemap>';
+	}
+
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .='</sitemapindex>';
 	

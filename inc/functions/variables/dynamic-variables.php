@@ -7,7 +7,7 @@ global $term;
 
 $seopress_titles_title_template ='';
 $seopress_titles_description_template ='';
-$seopress_paged ='';
+$seopress_paged ='1';
 $the_author_meta ='';
 $sep = '';
 $seopress_excerpt ='';
@@ -36,10 +36,6 @@ if (seopress_titles_sep_option()) {
     $sep = seopress_titles_sep_option();
 } else {
     $sep = '-';
-}
-
-if (get_query_var('paged') >='1') {
-    $seopress_paged = get_query_var('paged');
 }
 
 if (!is_404() && $post !='') {

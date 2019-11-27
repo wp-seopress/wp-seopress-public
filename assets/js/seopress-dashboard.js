@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 	if (!$.trim( $("#seopress-notifications-center").html() )) {
 		$('#seopress-notifications-center').remove();
 	}
-	const notices = ["notice-wizard","notice-divide-comments","notice-review","notice-trailingslash","notice-posts-number","notice-rss-use-excerpt","notice-search-console","notice-google-business","notice-ssl","notice-title-tag"]
+	const notices = ["notice-wizard","notice-divide-comments","notice-review","notice-trailingslash","notice-posts-number","notice-rss-use-excerpt","notice-search-console","notice-google-business","notice-ssl","notice-title-tag", "notice-go-pro"]
 	notices.forEach(function (item) {
 		$('#'+item).on('click', function() {
 			$('#'+item).attr('data-notice', $('#'+item).attr('data-notice') == '1' ? '0' : '1');
