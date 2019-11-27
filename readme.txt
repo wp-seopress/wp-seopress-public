@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.7.4
+Stable tag: 3.7.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -270,6 +270,27 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 60. Installation Wizard
 
 == Changelog ==
+= 3.7.5 =
+* NEW Review schema: Add item type CreativeWorkSeason, CreativeWorkSeries, Episode, Game, MediaObject, MusicPlaylist, MusicRecording, Organization to solve "Thing is not a known valid target type for the itemReviewed property."
+* NEW Add custom tracking code just before the body closing tag
+* NEW Add an option to display/hide any SEO metaboxes for each custom post type
+* NEW 'seopress_custom_footer_tracking' hook to filter additional tracking code in body footer (https://www.seopress.org/support/hooks/filter-html-additional-tracking-code-in-footer-body/)
+* NEW 'seopress_sitemaps_xml_index' hook to filter XML index sitemap (https://www.seopress.org/support/hooks/filter-xml-index-sitemap/)
+* NEW 'seopress_sitemaps_xml_single' hook to filter XML single post type sitemap (https://www.seopress.org/support/hooks/filter-xml-single-post-type-sitemap/)
+* NEW 'seopress_sitemaps_xml_single_term' hook to filter XML single taxonomy sitemap (https://www.seopress.org/support/hooks/filter-xml-sitemap-single-taxonomy/)
+* NEW 'seopress_sitemaps_xml_author' hook to filter XML author sitemap (https://www.seopress.org/support/hooks/filter-xml-author-sitemap/)
+* NEW 'seopress_sitemaps_xml_video' hook to filter XML video sitemap (https://www.seopress.org/support/hooks/filter-xml-video-sitemap/)
+* NEW 'seopress_sitemaps_xml_news' hook to filter XML news sitemap (https://www.seopress.org/support/hooks/filter-xml-news-sitemap/)
+* INFO Support %%sitedesc%% dynamic variable (alias of %%tagline%%') in title / meta description
+* INFO Support %%excerpt%% dynamic variable (alias of %%post_excerpt%%') in title / meta description
+* INFO Support %%date%% dynamic variable (alias of %%post_date%%') in title / meta description
+* INFO Display author meta only if username is not equal to display name
+* INFO Improve UI
+* INFO Improve content analysis (UX/UI)
+* INFO Improve block editor (Gutenberg) compatibility
+* FIX XML sitemaps with Polylang
+* FIX Add '59' value for minutes in LocalBusiness schema to manage stores open 24 hours a day
+* FIX Solved undefined in broken link checker bot (log textarea)
 = 3.7.4 =
 * NEW Author meta name for singular page (enabled by default)
 * NEW 'seopress_robots_txt_file' hook to filter robots.txt file (useful with Polylang and multidomain option https://www.seopress.org/support/hooks/filter-robots-txt-file-seopress-pro/)

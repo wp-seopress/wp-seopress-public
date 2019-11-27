@@ -25,10 +25,7 @@ function seopress_xml_sitemap_single_term() {
 		$path = get_query_var( 'seopress_cpt');
 	}
 
-	$home_url = get_home_url().'/';
-	if (function_exists('pll_home_url')) {
-		$home_url = pll_home_url();
-	}
+	$home_url = site_url().'/';
 
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
@@ -50,6 +47,9 @@ function seopress_xml_sitemap_single_term() {
 	}
 	$seopress_sitemaps .= '</urlset>';
 	$seopress_sitemaps .= "\n";
+
+	$seopress_sitemaps = apply_filters( 'seopress_sitemaps_xml_single_term', $seopress_sitemaps );
+
 	return $seopress_sitemaps;
 } 
 echo seopress_xml_sitemap_single_term();

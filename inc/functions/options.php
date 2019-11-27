@@ -66,6 +66,70 @@ if (seopress_get_toggle_titles_option() =='1') {
 		return false;
 	}
 
+	//SEO metaboxes
+	function seopress_hide_metaboxes() {
+		if (is_admin()) {
+			global $typenow;
+			global $pagenow;
+
+			//Post type?
+			if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+				function seopress_titles_single_enable_option() {
+					global $post;
+					$seopress_get_current_cpt = get_post_type($post);
+				
+					$seopress_titles_single_enable_option = get_option("seopress_titles_option_name");
+					if ( ! empty ( $seopress_titles_single_enable_option ) ) {
+						foreach ($seopress_titles_single_enable_option as $key => $seopress_titles_single_enable_value)
+							$options[$key] = $seopress_titles_single_enable_value;
+						if (isset($seopress_titles_single_enable_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['enable'])) { 
+							return $seopress_titles_single_enable_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['enable'];
+						}
+					}
+				}
+				function seopress_titles_single_enable_metabox($seopress_get_post_types) { 
+					global $post;
+					if (seopress_titles_single_enable_option() == 1 && get_post_type($post) !='') {
+						unset($seopress_get_post_types[get_post_type($post)]);
+					}
+					return $seopress_get_post_types;
+				}
+				add_filter('seopress_metaboxe_seo', 'seopress_titles_single_enable_metabox');
+				add_filter('seopress_metaboxe_content_analysis', 'seopress_titles_single_enable_metabox');
+				add_filter('seopress_pro_metaboxe_sdt', 'seopress_titles_single_enable_metabox');
+			}
+			
+			//Taxonomy?
+			if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
+				if (!empty($_GET['taxonomy'])) {
+					$seopress_get_current_tax = sanitize_title(esc_attr($_GET['taxonomy']));
+					
+					function seopress_tax_single_enable_option($seopress_get_current_tax) {
+						$seopress_tax_single_enable_option = get_option("seopress_titles_option_name");
+						if ( ! empty ( $seopress_tax_single_enable_option ) ) {
+							foreach ($seopress_tax_single_enable_option as $key => $seopress_tax_single_enable_value)
+								$options[$key] = $seopress_tax_single_enable_value;
+							if (isset($seopress_tax_single_enable_option['seopress_titles_tax_titles'][$seopress_get_current_tax]['enable'])) { 
+								return $seopress_tax_single_enable_option['seopress_titles_tax_titles'][$seopress_get_current_tax]['enable'];
+							}
+						}
+					}
+					
+					function seopress_tax_single_enable_metabox($seopress_get_taxonomies) {
+						$seopress_get_current_tax = sanitize_title(esc_attr($_GET['taxonomy']));
+						if (seopress_tax_single_enable_option($seopress_get_current_tax) == 1 && $seopress_get_current_tax !='') {
+							unset($seopress_get_taxonomies[$seopress_get_current_tax]);
+						}
+						return $seopress_get_taxonomies;
+					}
+					add_filter('seopress_metaboxe_term_seo', 'seopress_tax_single_enable_metabox');
+				}
+			}
+		}
+	}
+	add_action('after_setup_theme', 'seopress_hide_metaboxes');
+
+	//Titles and metas
 	add_action('template_redirect', 'seopress_titles_disable_archives', 0);
 	add_action('wp_head', 'seopress_load_titles_options', 0);
 	function seopress_load_titles_options() {

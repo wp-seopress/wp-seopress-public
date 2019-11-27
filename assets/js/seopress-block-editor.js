@@ -4,11 +4,11 @@ const { subscribe, select } = wp.data;
 let hasSaved = false;
 
     subscribe( () => {
-
-        const editor  = select( 'core/editor' );
-        const isSaved = editor && editor.didPostSaveRequestSucceed();
-
-        if ( ! hasSaved && isSaved ) {
+        var isSavingPost = wp.data.select('core/editor').isSavingPost();
+        var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+      
+        if (isSavingPost && !isAutosavingPost && !hasSaved) {
+        
             $.ajax({
                 method : 'GET',
                 url : seopressAjaxRealPreview.seopress_real_preview,
@@ -34,6 +34,7 @@ let hasSaved = false;
                     $( '#seopress_cpt #seopress_social_twitter_title_meta' ).attr("placeholder", data.data.tw_title);
                     $( '#seopress_cpt #seopress_social_twitter_desc_meta' ).attr("placeholder", data.data.tw_desc);
                     $( '#seopress_cpt #seopress_social_twitter_img_meta' ).attr("placeholder", data.data.tw_img);
+                    $( '#seopress_cpt #seopress_robots_canonical_meta').attr('placeholder', data.data.canonical),
                     $( '#seopress_analysis_results_state' ).fadeIn().css('display', 'inline-block');
                     $( '#seopress_analysis_results_state' ).delay(3500).fadeOut();
                     $( '#seopress-analysis-tabs-1' ).load(' #seopress-analysis-tabs-1');
@@ -43,6 +44,6 @@ let hasSaved = false;
                 },
             });
         }
-        hasSaved = !! isSaved;
+        hasSaved = !! isSavingPost;
     });
 });

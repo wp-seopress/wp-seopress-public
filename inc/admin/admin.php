@@ -196,11 +196,11 @@ class seopress_options
                 <ul>
                     <li><span>'.__('%%sep%%','wp-seopress').'</span>'.__('Separator (eg: - )','wp-seopress').'</li>
                     <li><span>'.__('%%sitetitle%%','wp-seopress').'</span>'.__('Site Title','wp-seopress').'</li>
-                    <li><span>'.__('%%tagline%%','wp-seopress').'</span>'.__('Tagline','wp-seopress').'</li>
+                    <li><span>'.__('%%tagline%% (alias %%sitedesc%%)','wp-seopress').'</span>'.__('Tagline','wp-seopress').'</li>
                     <li><span>'.__('%%post_title%% (alias %%title%%)','wp-seopress').'</span>'.__('Post Title (post, page, custom post type)','wp-seopress').'</li>
-                    <li><span>'.__('%%post_excerpt%%','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
+                    <li><span>'.__('%%post_excerpt%% (alias %%excerpt%%)','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
                     <li><span>'.__('%%post_content%%','wp-seopress').'</span>'.__('Post content / product long description','wp-seopress').'</li>
-                    <li><span>'.__('%%post_date%%','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
+                    <li><span>'.__('%%post_date%% (alias %%date%%)','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
                     <li><span>'.__('%%post_modified_date%%','wp-seopress').'</span>'.__('Last modified post date','wp-seopress').'</li>
                     <li><span>'.__('%%post_author%%','wp-seopress').'</span>'.__('Post author','wp-seopress').'</li>
                     <li><span>'.__('%%post_category%%','wp-seopress').'</span>'.__('Post category','wp-seopress').'</li>
@@ -3009,6 +3009,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_google_analytics_other_tracking_footer', // ID
+           __("[BODY (FOOTER)] Add an additional tracking code (like Google Tag Manager...)","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_other_tracking_footer_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-features', // Page
+            'seopress_setting_section_google_analytics_features' // Section                  
+        );
+
+        add_settings_field(
             'seopress_google_analytics_remarketing', // ID
            __("Enable remarketing, demographics, and interests reporting","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_remarketing_callback' ), // Callback
@@ -3510,7 +3518,7 @@ class seopress_options
                         'a'      => array('href' => array(), 'target' => array())
                 );
                 $input[$value] = wp_kses($input[$value], $args);
-            } elseif ((!empty( $input['seopress_google_analytics_other_tracking'] ) && $value =='seopress_google_analytics_other_tracking') || (!empty( $input['seopress_google_analytics_other_tracking_body'] ) && $value =='seopress_google_analytics_other_tracking_body')) {
+            } elseif ((!empty( $input['seopress_google_analytics_other_tracking'] ) && $value =='seopress_google_analytics_other_tracking') || (!empty( $input['seopress_google_analytics_other_tracking_body'] ) && $value =='seopress_google_analytics_other_tracking_body') || (!empty( $input['seopress_google_analytics_other_tracking_footer'] ) && $value =='seopress_google_analytics_other_tracking_footer')) {
                 $input[$value] = $input[$value]; //No sanitization for this field
             } elseif( !empty( $input[$value] ) ) {
                 $input[$value] = sanitize_text_field( $input[$value] );
@@ -3772,6 +3780,47 @@ class seopress_options
         foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
             echo '<h2>'.$seopress_cpt_value->labels->name.' <em><small>['.$seopress_cpt_value->name.']</small></em></h2>';
 
+            //Single on/off CPT
+            echo '<div class="seopress_wrap_single_cpt">';
+
+                $options = get_option( 'seopress_titles_option_name' );  
+            
+                $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['enable']) ? $options['seopress_titles_single_titles'][$seopress_cpt_key]['enable'] : NULL;
+
+                echo '<input id="seopress_titles_single_cpt_enable['.$seopress_cpt_key.']" data-id='.$seopress_cpt_key.' name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][enable]" class="toggle" type="checkbox"';
+                if ('1' == $check) { 
+                    echo 'checked="yes" data-toggle="0"';
+                } else {
+                    echo 'data-toggle="1"';
+                };
+                echo ' value="1"/>';
+
+                echo '<label for="seopress_titles_single_cpt_enable['.$seopress_cpt_key.']">'. __( 'Click to hide any SEO metaboxes for this post type', 'wp-seopress' ) .'</label>';
+
+                echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to hide any SEO metaboxes for this post type', 'wp-seopress') .'</span>';
+
+                $toggle_txt_on = '<span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to display any SEO metaboxes for this post type','wp-seopress');
+                $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to hide any SEO metaboxes for this post type','wp-seopress');
+                
+                echo "<script>
+                jQuery(document).ready(function($) {
+                    $('input[data-id=".$seopress_cpt_key."]').on('click', function() {
+                        $(this).attr('data-toggle', $(this).attr('data-toggle') == '1' ? '0' : '1');
+                        if ($(this).attr('data-toggle') == '1') {
+                            $(this).next().next('.feature-state').html('".$toggle_txt_off."');
+                        } else {
+                            $(this).next().next('.feature-state').html('".$toggle_txt_on."');
+                        }
+                    });
+                });
+                </script>";
+                
+                if (isset($this->options['seopress_titles_single_titles'][$seopress_cpt_key]['enable'])) {
+                    esc_attr( $this->options['seopress_titles_single_titles'][$seopress_cpt_key]['enable']);
+                }
+
+            echo '</div>';
+
             //Single Title CPT
             echo '<div class="seopress_wrap_single_cpt">';
 
@@ -3907,12 +3956,53 @@ class seopress_options
     public function seopress_titles_tax_titles_callback()
     {
         foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
-            
-            $check = isset($this->options['seopress_titles_tax_titles'][$seopress_tax_key]['title']) ? $this->options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] : NULL;
 
             echo '<h2>'.$seopress_tax_value->labels->name.' <em><small>['.$seopress_tax_value->name.']</small></em></h2>';
 
+            //Single on/off Tax
+            echo '<div class="seopress_wrap_tax">';
+
+                $options = get_option( 'seopress_titles_option_name' );  
+            
+                $check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['enable']) ? $options['seopress_titles_tax_titles'][$seopress_tax_key]['enable'] : NULL;
+
+                echo '<input id="seopress_titles_tax_titles_enable['.$seopress_tax_key.']" data-id='.$seopress_tax_key.' name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][enable]" class="toggle" type="checkbox"';
+                if ('1' == $check) { 
+                    echo 'checked="yes" data-toggle="0"';
+                } else {
+                    echo 'data-toggle="1"';
+                };
+                echo ' value="1"/>';
+
+                echo '<label for="seopress_titles_tax_titles_enable['.$seopress_tax_key.']">'. __( 'Click to hide any SEO metaboxes for this taxonomy', 'wp-seopress' ) .'</label>';
+
+                echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to hide any SEO metaboxes for this taxonomy', 'wp-seopress') .'</span>';
+
+                $toggle_txt_on = '<span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to display any SEO metaboxes for this taxonomy','wp-seopress');
+                $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to hide any SEO metaboxes for this taxonomy','wp-seopress');
+                
+                echo "<script>
+                jQuery(document).ready(function($) {
+                    $('input[data-id=".$seopress_tax_key."]').on('click', function() {
+                        $(this).attr('data-toggle', $(this).attr('data-toggle') == '1' ? '0' : '1');
+                        if ($(this).attr('data-toggle') == '1') {
+                            $(this).next().next('.feature-state').html('".$toggle_txt_off."');
+                        } else {
+                            $(this).next().next('.feature-state').html('".$toggle_txt_on."');
+                        }
+                    });
+                });
+                </script>";
+
+                if (isset($this->options['seopress_titles_tax_titles'][$seopress_tax_key]['enable'])) {
+                    esc_attr( $this->options['seopress_titles_tax_titles'][$seopress_tax_key]['enable']);
+                }
+
+            echo '</div>';
+
             //Tax Title
+            $check = isset($this->options['seopress_titles_tax_titles'][$seopress_tax_key]['title']) ? $this->options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] : NULL;
+
             echo '<div class="seopress_wrap_tax">';
 
                 _e('Title template','wp-seopress');
@@ -5401,6 +5491,17 @@ class seopress_options
         esc_textarea($check));
 
         echo '<p class="description">'.__('This code will be added just after the opening body tag of your page.','wp-seopress').'</a></p>';
+    }
+    
+    public function seopress_google_analytics_other_tracking_footer_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_other_tracking_footer']) ? $this->options['seopress_google_analytics_other_tracking_footer'] : NULL;
+
+        printf(
+        '<textarea id="seopress_google_analytics_other_tracking_footer" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_footer]" rows="16" placeholder="'.esc_html__('Paste your tracking code here (body footer)','wp-seopress').'" aria-label="'.__('Additional tracking code field added to body footer','wp-seopress').'">%s</textarea>',
+        esc_textarea($check));
+
+        echo '<p class="description">'.__('This code will be added just after the closing body tag of your page.','wp-seopress').'</a></p>';
     }
 
     public function seopress_google_analytics_remarketing_callback()

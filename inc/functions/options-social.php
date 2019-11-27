@@ -691,7 +691,7 @@ function seopress_thumbnail_in_content() {
 				        	$url = get_home_url().$url;
 						}
 						//cleaning url
-						$url = htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url))));
+						$url = htmlspecialchars(urlencode(esc_attr(wp_filter_nohtml_kses($url))));	
 						
 						//remove query strings
 						$parse_url = wp_parse_url($url);
@@ -713,7 +713,7 @@ function seopress_social_fb_img_size_from_url($url) {
 	if (function_exists('attachment_url_to_postid')) {
 		$post_id 			= attachment_url_to_postid( $url );
 		//If cropped image
-		if ( !$post_id ){
+		if ( $post_id !=0 ){
 			$dir = wp_upload_dir();
 			$path = $url;
 			if ( 0 === strpos( $path, $dir['baseurl'] . '/' ) ) {

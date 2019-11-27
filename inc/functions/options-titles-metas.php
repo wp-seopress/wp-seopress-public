@@ -1317,8 +1317,9 @@ if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex
 function seopress_titles_author() {
 	global $post;
 	if (is_singular() && isset($post->post_author)){
+		$user_login = get_the_author_meta('user_login', $post->post_author);
 		$the_author_meta = get_the_author_meta('display_name', $post->post_author);
-		if ($the_author_meta) {
+		if ($the_author_meta !=$user_login && $the_author_meta !='' && $user_login !='') {
 			$html = '<meta name="author" content="'.$the_author_meta.'">';
 			$html .= "\n";
 

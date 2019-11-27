@@ -30,11 +30,7 @@ add_action( 'the_post', function( $post ) {
 });
 
 function seopress_xml_sitemap_index() {
-	//Polylang
-	$home_url = get_home_url().'/';
-	if (function_exists('pll_home_url')) {
-		$home_url = pll_home_url();
-	}
+	$home_url = site_url().'/';
 
 	$seopress_sitemaps ='<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
@@ -216,6 +212,8 @@ function seopress_xml_sitemap_index() {
 
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .='</sitemapindex>';
+
+	$seopress_sitemaps = apply_filters( 'seopress_sitemaps_xml_index', $seopress_sitemaps );
 	
 	return $seopress_sitemaps;
 } 
