@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 3.6.5
+Stable tag: 3.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -219,6 +219,14 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.7 =
+* NEW Import metadata from CSV file: title, meta description, meta robots and more... (SEO > Tools > Data) - PRO
+* NEW Support the new Google meta robots (max-snippet:-1, max-image-preview:large, max-video-preview:-1), ON by default
+* INFO Improve translations
+* FIX %%current_pagination%% for first page
+* FIX robots.txt with Elementor didn't load in specific configurations
+* FIX Outbound links count in content analysis
+* FIX Last separator for breadcrumbs with "seopress_pro_breadcrumbs_crumbs" hook
 = 3.6.5 =
 * NEW XML Author sitemap
 * NEW 'seopress_schemas_organization_html' hook to filter Organization schema

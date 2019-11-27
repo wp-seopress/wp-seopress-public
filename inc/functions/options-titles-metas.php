@@ -1133,6 +1133,11 @@ if (get_option('blog_public') !='0') {// Discourage search engines from indexing
 				array_push($seopress_comma_array, $seopress_titles_nosnippet);
 			}
 
+			//new meta robots
+			if (!in_array('noindex', $seopress_comma_array) && !in_array('nosnippet', $seopress_comma_array)) {
+				$seopress_titles_max_snippet = 'max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+				array_push($seopress_comma_array, $seopress_titles_max_snippet);
+			}
 			$seopress_titles_robots = '<meta name="robots" content="';
 
 			$seopress_comma_count = count($seopress_comma_array);

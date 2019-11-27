@@ -651,13 +651,18 @@ class seopress_options
             echo '<'.$tag.'><span class="dashicons dashicons-admin-settings"></span>'.$title.'</'.$tag.'>';
             ?>
             <div id="seopress-tabs" class="wrap">
-                <?php 
+                <?php
                     $plugin_settings_tabs = array(
-                        'tab_seopress_tool_settings' => __( "Settings", "wp-seopress" ), 
+                        'tab_seopress_tool_data' => __( "Data", "wp-seopress" ),
+                        'tab_seopress_tool_settings' => __( "Settings", "wp-seopress" ),
                         'tab_seopress_tool_plugins' => __( "Plugins", "wp-seopress" ), 
                         'tab_seopress_tool_redirects' => __( "Redirections", "wp-seopress" ),
                         'tab_seopress_tool_reset' => __( "Reset", "wp-seopress" ),
                     );
+
+                    if (!is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                        unset($plugin_settings_tabs['tab_seopress_tool_data']);
+                    }
 
                     echo '<div class="nav-tab-wrapper">';
                     foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) {
@@ -665,6 +670,17 @@ class seopress_options
                     }
                     echo '</div>';
                 ?>
+                <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                    <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_data') { echo 'active'; } ?>" id="tab_seopress_tool_data">
+                        <div class="postbox section-tool">
+                            <div class="inside">
+                                <h3><span><?php _e( 'Import data from a CSV', 'wp-seopress' ); ?></span></h3>
+                                <p><?php _e( 'Import your title, meta description, meta robots, social metas from a CSV file with our import tool.', 'wp-seopress' ); ?></p>
+                                <a class="button" href="<?php echo admin_url( 'admin.php?page=seopress_csv_importer' ); ?>"><?php _e('Run the importer','wp-seopress'); ?></a>
+                            </div><!-- .inside -->
+                        </div><!-- .postbox -->
+                    </div>
+                <?php } ?>
                 <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_settings') { echo 'active'; } ?>" id="tab_seopress_tool_settings">
                     <div class="postbox section-tool">
                         <div class="inside">
@@ -6581,7 +6597,7 @@ class seopress_options
             $check = isset($options['seopress_advanced_security_metaboxe_ca_role'][$key]);  
 
             echo '<input id="seopress_advanced_security_metaboxe_ca_role_'.$key.'" name="seopress_advanced_option_name[seopress_advanced_security_metaboxe_ca_role]['.$key.']" type="checkbox"';
-            if ('1' == $check) echo 'checked="yes"'; 
+            if ('1' == $check) echo 'checked="yes"';
             echo ' value="1"/>';
             
             echo '<label for="seopress_advanced_security_metaboxe_ca_role_'.$key.'">'. $value .'</label><br/>';
@@ -6605,5 +6621,3 @@ class seopress_options
     
 if( is_admin() )
     $my_settings_page = new seopress_options();
-    
-?>

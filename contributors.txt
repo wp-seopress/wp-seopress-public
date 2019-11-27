@@ -29,6 +29,7 @@ Translators:
 - Spanish: WP-Translations
 - German: WP-Translations
 - Japan: WP-Translations
+- Hindi: WP-Translations
 - Dutch: WP-Translations
 - Italian: Déborah Donnier @deborahdonnier
 - Vietnamese: Anh

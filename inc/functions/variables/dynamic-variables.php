@@ -44,9 +44,11 @@ if (!is_404() && $post !='') {
     }
 }
 
-if (get_query_var('paged') >='1') {
+if (get_query_var('paged') >'1') {
     $seopress_paged = get_query_var('paged');
     $seopress_paged = apply_filters('seopress_paged', $seopress_paged);
+} else {
+    $seopress_paged = '';
 }
 
 if (is_singular() && isset($post->post_author)){

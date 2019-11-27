@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.6.5
+Version: 3.7
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.6.5' ); 
+define( 'SEOPRESS_VERSION', '3.7' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +66,7 @@ function seopress_init($hook) {
     global $typenow;
     if ( is_admin() || is_network_admin() ) {
         require_once dirname( __FILE__ ) . '/inc/admin/admin.php';
+        
         if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
             if ( 'seopress_schemas' != $typenow ) { 
                 require_once dirname( __FILE__ ) . '/inc/admin/admin-metaboxes.php';
@@ -89,8 +90,8 @@ function seopress_init($hook) {
     }
     
     remove_action( 'wp_head', 'rel_canonical' ); //remove default WordPress Canonical
-
-    //Setup/welcome.
+    
+    //Setup/welcome
     if (!empty($_GET['page'])){
         switch ($_GET['page']){
             case 'seopress-setup':
@@ -164,7 +165,7 @@ function seopress_add_admin_options_scripts($hook) {
 
     //Migration
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-option' || $_GET['page'] == 'seopress-import-export') ) {
-        wp_enqueue_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-yoast-migrate.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
+        wp_enqueue_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-migrate.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
 
         $seopress_migrate = array( 
             'seopress_aio_migrate' => array(
@@ -226,6 +227,11 @@ function seopress_add_admin_options_scripts($hook) {
         wp_enqueue_script( 'seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader.js', __FILE__), array('jquery'), SEOPRESS_VERSION, false );
         wp_enqueue_media();
     }
+
+    //CSV Importer
+    if (isset($_GET['page']) && ($_GET['page'] == 'seopress_csv_importer') ) {
+        wp_enqueue_style( 'seopress-setup', plugins_url( 'assets/css/seopress-setup.css', __FILE__), array( 'dashicons' ), SEOPRESS_VERSION );
+    }
 }
 
 add_action('admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1);
@@ -251,7 +257,8 @@ add_action( 'admin_print_scripts-edit.php', 'seopress_add_admin_options_scripts_
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 add_filter( 'admin_body_class', 'seopress_admin_body_class' );
 function seopress_admin_body_class( $classes ) {
-    if ((isset($_GET['page']) && ($_GET['page'] == 'seopress-option'))
+    if ((isset($_GET['page']) && ($_GET['page'] == 'seopress_csv_importer'))
+    || (isset($_GET['page']) && ($_GET['page'] == 'seopress-option'))
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-network-option'))
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-titles'))
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-xml-sitemap'))
@@ -263,7 +270,6 @@ function seopress_admin_body_class( $classes ) {
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-bot-batch'))
     || (isset($_GET['page']) && ($_GET['page'] == 'seopress-license'))) {
         $classes .= " seopress-styles ";
-        
     }
     return $classes;
 }
