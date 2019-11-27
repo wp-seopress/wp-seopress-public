@@ -4,6 +4,9 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //XML
 Header('Content-type: text/xml');
 
+//Remove primary category
+remove_filter( 'post_link_category', 'seopress_titles_primary_cat_hook', 10, 3 ); 
+
 //WPML
 function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
     return $url;

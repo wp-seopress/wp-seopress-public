@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 3.6.3
+Stable tag: 3.6.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -219,6 +219,13 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.6.4 =
+* NEW Add 'seopress_bot_query' hook to filter the broken links checker query
+* INFO Relevanssi users: posts marked as noindex are no longer indexed by default (Relevanssi 4.3.2 required)
+* INFO Updated Chart JS library
+* FIX primary category in XML sitemaps
+* FIX meta robots / canonical tags for static blog page
+* FIX Breadcrumbs with before / after HTML hooks (thanks to @wpchannel)
 = 3.6.3 =
 * INFO Improve code quality
 * INFO Improve security
