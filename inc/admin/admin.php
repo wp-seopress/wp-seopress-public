@@ -197,7 +197,7 @@ class seopress_options
                     <li><span>'.__('%%sep%%','wp-seopress').'</span>'.__('Separator (eg: - )','wp-seopress').'</li>
                     <li><span>'.__('%%sitetitle%%','wp-seopress').'</span>'.__('Site Title','wp-seopress').'</li>
                     <li><span>'.__('%%tagline%%','wp-seopress').'</span>'.__('Tagline','wp-seopress').'</li>
-                    <li><span>'.__('%%post_title%%','wp-seopress').'</span>'.__('Post Title (post, page, custom post type)','wp-seopress').'</li>
+                    <li><span>'.__('%%post_title%% (alias %%title%%)','wp-seopress').'</span>'.__('Post Title (post, page, custom post type)','wp-seopress').'</li>
                     <li><span>'.__('%%post_excerpt%%','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
                     <li><span>'.__('%%post_date%%','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
                     <li><span>'.__('%%post_modified_date%%','wp-seopress').'</span>'.__('Last modified post date','wp-seopress').'</li>
@@ -2038,7 +2038,7 @@ class seopress_options
                         </div>
                         <span class="inner">
                             <h3><?php _e('Tools','wp-seopress'); ?></h3>
-                            <p><?php _e('Import/Export SEOPress settings from site to site.','wp-seopress'); ?></p>
+                            <p><?php _e('Import/Export plugin settings from site to site.','wp-seopress'); ?></p>
                             <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-import-export' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                             <?php
                                 if (function_exists('seopress_get_locale')) {
@@ -2059,7 +2059,7 @@ class seopress_options
                             </div>
                             <span class="inner">
                                 <h3><?php _e('License','wp-seopress'); ?></h3>
-                                <p><?php _e('Edit your SEOPress license key.','wp-seopress'); ?></p>
+                                <p><?php _e('Edit your license key.','wp-seopress'); ?></p>
                                 <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-license' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                                 <?php
                                     if (function_exists('seopress_get_locale')) {

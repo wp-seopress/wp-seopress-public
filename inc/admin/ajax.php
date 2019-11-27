@@ -176,6 +176,13 @@ function seopress_do_real_preview() {
                     $data['tw_img'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtwimg->nodeValue)));
                 }
 
+                //Canonical
+                $canonical = $xpath->query('//link[@rel="canonical"]/@href');
+
+                foreach ($canonical as $key=>$mcanonical) {
+                    $data['canonical'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mcanonical->nodeValue)));
+                }
+
                 //h1
                 if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
                     $h1 = $xpath->query("//h1");

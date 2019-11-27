@@ -1695,13 +1695,16 @@ body.seopress-styles {
     position: fixed;
     color: #fff;
     padding: 15px 40px;
-    font-size: 14px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
     text-align: center;
-    border-radius: 50px;
-    background: rgba(74,184,102,.75);
-    top: 50px;
-    right: 20px;
+    border-radius: 0;
+    background: rgba(74,184,102,.9);
+    bottom: 0;
+    right: 0;
     z-index: 500;
+    width: 100%;
+    font-weight: bold;
 }
 
 .seopress_page_seopress-pro-page #wpcontent {

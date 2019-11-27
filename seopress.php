@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO Plugin for WordPress.
-Version: 3.6
+Version: 3.6.1
 Author: Benjamin Denis
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.6' ); 
+define( 'SEOPRESS_VERSION', '3.6.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -121,6 +121,7 @@ function seopress_add_admin_options_scripts($hook) {
         $seopress_toggle_features = array(
             'seopress_nonce' => wp_create_nonce('seopress_toggle_features_nonce'),
             'seopress_toggle_features' => admin_url( 'admin-ajax.php'),
+            'i18n' => __('has been successfully updated!','wp-seopress')
         );
         wp_localize_script( 'seopress-toggle-ajax', 'seopressAjaxToggleFeatures', $seopress_toggle_features );
     }
@@ -382,7 +383,7 @@ function seopress_get_taxonomies() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//Get all custom fields (limit: 200)
+//Get all custom fields (limit: 250)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_get_custom_fields() {
     $cf_keys = wp_cache_get( 'seopress_get_custom_fields' );
@@ -391,7 +392,7 @@ function seopress_get_custom_fields() {
         global $wpdb;
         global $post;
         $post = get_post( $post );
-        $limit = (int) apply_filters( 'postmeta_form_limit', 200 );
+        $limit = (int) apply_filters( 'postmeta_form_limit', 250 );
         $cf_keys = $wpdb->get_col( "
             SELECT meta_key
             FROM $wpdb->postmeta

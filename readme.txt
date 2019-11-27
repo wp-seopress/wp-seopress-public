@@ -5,8 +5,8 @@ Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.6+
 Tested up to: 5.2
-Requires PHP: 5.4
-Stable tag: 3.6
+Requires PHP: 5.6
+Stable tag: 3.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -219,6 +219,18 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.6.1 =
+* INFO PHP 5.6 is now the minimum requirement
+* INFO Small performance improvements
+* INFO Refactoring some JS files (drastic weight reduction)
+* INFO Support %%title%% dynamic variable (alias of %%post_title%%') in title / meta description
+* INFO Remove query strings for social sharing and image XML sitemaps
+* FIX Canonical placeholder value in SEO metabox for terms taxonomy
+* FIX Undefined variable: html
+* FIX Breadcrumbs shortcode
+* FIX Fatal error SEOPRESS_Language_Packs
+* FIX Notice array to string conversion
+* FIX Saving image fields for automatic schemas
 = 3.6 =
 * NEW Using the pixel to calculate the length of title / meta description (beta)
 * NEW All translations are now maintained on TranslationsPress

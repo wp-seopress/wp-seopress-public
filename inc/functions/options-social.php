@@ -682,8 +682,18 @@ function seopress_thumbnail_in_content() {
 				        	//do nothing
 				        } else {
 				        	$url = get_home_url().$url;
-				        }
-				        return htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url))));
+						}
+						//cleaning url
+						$url = htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url))));
+						
+						//remove query strings
+						$parse_url = wp_parse_url($url);
+
+						if (!empty($parse_url['scheme']) && !empty($parse_url['host'])	&& !empty($parse_url['path'])) {
+							return $parse_url['scheme'].'://'.$parse_url['host'].$parse_url['path'];
+						} else {
+							return $url;
+						}
 				    }
 				}
 			}

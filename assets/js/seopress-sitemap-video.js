@@ -1,17 +1,17 @@
 //Video Sitemap
-jQuery(document).ready(function(){
+jQuery(document).ready(function($) {
     function seopress_call_media_uploader() {
         var mediaUploader;
         var thumb;
-        jQuery('.seopress_video_thumbnail_upload').click(function(e) {
+        $('.seopress_video_thumbnail_upload').click(function(e) {
             e.preventDefault();
-            $btn = jQuery(this);
+            $btn = $(this);
             // If the uploader object has already been created, reopen the dialog
             if (mediaUploader) {
               mediaUploader.open();
               return;
             }
-            thumb = jQuery(this).prev();
+            thumb = $(this).prev();
             // Extend the wp.media object
             mediaUploader = wp.media.frames.file_frame = wp.media({
               title: 'Choose Image',
@@ -30,11 +30,11 @@ jQuery(document).ready(function(){
     }
     seopress_call_media_uploader();
 
-    var template = jQuery('#wrap-videos .video:last').clone();
+    var template = $('#wrap-videos .video:last').clone();
 
     //accordion
     var stop = false;
-    jQuery("#wrap-videos .video h3").click(function(event) {
+    $("#wrap-videos .video h3").click(function(event) {
         if (stop) {
             event.stopImmediatePropagation();
             event.preventDefault();
@@ -42,7 +42,7 @@ jQuery(document).ready(function(){
         }
     });
     function seopress_call_video_accordion() {
-        jQuery( "#wrap-videos .video" ).accordion({
+        $( "#wrap-videos .video" ).accordion({
             collapsible: true,
             active: false,
             heightStyle:"panel",
@@ -51,10 +51,10 @@ jQuery(document).ready(function(){
     seopress_call_video_accordion();
 
     //define counter
-    var sectionsCount = jQuery('#wrap-videos').attr('data-count');
+    var sectionsCount = $('#wrap-videos').attr('data-count');
 
     //add new section
-    jQuery('#add-video').click(function() {
+    $('#add-video').click(function() {
 
         //increment
         sectionsCount++;
@@ -71,22 +71,22 @@ jQuery(document).ready(function(){
             var newId = this.id.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']');
 
             //Update input name
-            jQuery(this).attr('name', input_name.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
+            $(this).attr('name', input_name.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
             
             //Clear input value
-            if (! jQuery(this).hasClass('seopress_video_thumbnail_upload')) {
-                jQuery(this).attr('value','');
+            if (! $(this).hasClass('seopress_video_thumbnail_upload')) {
+                $(this).attr('value','');
             }
 
             //update for label
-            if (jQuery(this).is(':checkbox')) {
-                jQuery(this).parent().attr('for', input_id.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
-                jQuery(this).parent().attr('id', input_name.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
-            } else if(jQuery(this).hasClass('seopress_video_thumbnail_upload')) {
+            if ($(this).is(':checkbox')) {
+                $(this).parent().attr('for', input_id.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
+                $(this).parent().attr('id', input_name.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
+            } else if($(this).hasClass('seopress_video_thumbnail_upload')) {
                 //do nothing
             } else {
-                jQuery(this).prev().attr('for', input_id.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
-                jQuery(this).prev().attr('id', input_name.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
+                $(this).prev().attr('for', input_id.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
+                $(this).prev().attr('id', input_name.replace(/^(\w+)\[.*?\]/, '$1['+sectionsCount+']'));
             }
 
             //update id
@@ -97,20 +97,20 @@ jQuery(document).ready(function(){
         //inject new section
         .appendTo('#wrap-videos');
         seopress_call_video_accordion();
-        jQuery( "#wrap-videos .video" ).accordion('destroy');
+        $( "#wrap-videos .video" ).accordion('destroy');
         seopress_call_video_accordion();
-        jQuery("[id^=__wp-uploader-id-]").each(function() {
-            jQuery(this).remove();
+        $("[id^=__wp-uploader-id-]").each(function() {
+            $(this).remove();
         });
         seopress_call_media_uploader();
         return false;
     });
 
     //remove section
-    jQuery('#wrap-videos').on('click', '.remove-video', function() {
+    $('#wrap-videos').on('click', '.remove-video', function() {
         //fade out section
-        jQuery(this).fadeOut(300, function(){
-            jQuery(this).parent().parent().parent().parent().remove();
+        $(this).fadeOut(300, function(){
+            $(this).parent().parent().parent().parent().remove();
             return false;
         });
         return false;

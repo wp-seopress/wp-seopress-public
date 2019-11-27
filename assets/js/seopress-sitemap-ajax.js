@@ -1,6 +1,6 @@
-jQuery(document).ready(function(){
-	jQuery('#seopress-flush-permalinks,#seopress-flush-permalinks2').on('click', function() {
-		jQuery.ajax({
+jQuery(document).ready(function($) {
+	$('#seopress-flush-permalinks,#seopress-flush-permalinks2').on('click', function() {
+		$.ajax({
 			method : 'GET',
 			url : seopressAjaxResetPermalinks.seopress_flush_permalinks,
 			data: {
@@ -12,11 +12,9 @@ jQuery(document).ready(function(){
 			},
 		});
 	});
-});
-jQuery(document).ready(function(){
-	jQuery('#seopress-flush-permalinks,#seopress-flush-permalinks2').on('click', function() {
-		jQuery(this).attr("disabled", "disabled");
-		jQuery( '.spinner' ).css( "visibility", "visible" );
-		jQuery( '.spinner' ).css( "float", "none" );
+	$('#seopress-flush-permalinks,#seopress-flush-permalinks2').on('click', function() {
+		$(this).attr("disabled", "disabled");
+		$( '.spinner' ).css( "visibility", "visible" );
+		$( '.spinner' ).css( "float", "none" );
 	});
 });

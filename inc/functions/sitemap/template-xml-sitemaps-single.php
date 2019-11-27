@@ -157,11 +157,24 @@ function seopress_xml_sitemap_single() {
 										        	//do nothing
 										        } else {
 										        	$url = get_home_url().$url;
-										        }
-										        $seopress_sitemaps .= '<image:image>';
+												}
+												
+												//cleaning url
+												$url = htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url))));
+																		
+												//remove query strings
+												$parse_url = wp_parse_url($url);
+
+												$seopress_sitemaps .= '<image:image>';
 										        $seopress_sitemaps .= "\n";
 										       	$seopress_sitemaps .= '<image:loc>';
-												$seopress_sitemaps .= '<![CDATA['.htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url)))).']]>';
+												
+												if (!empty($parse_url['scheme']) && !empty($parse_url['host'])	&& !empty($parse_url['path'])) {
+													$seopress_sitemaps .= '<![CDATA['.$parse_url['scheme'].'://'.$parse_url['host'].$parse_url['path'].']]>';
+												} else {
+													$seopress_sitemaps .= '<![CDATA['.$url.']]>';
+												}
+												
 										        $seopress_sitemaps .= '</image:loc>';
 										        $seopress_sitemaps .= "\n";
 										        $seopress_sitemaps .= '</image:image>';
