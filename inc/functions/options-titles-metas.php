@@ -264,6 +264,7 @@ function seopress_titles_the_title() {
 	$seopress_get_the_excerpt = $variables['seopress_get_the_excerpt'];
 	$seopress_titles_template_variables_array = $variables['seopress_titles_template_variables_array'];
 	$seopress_titles_template_replace_array = $variables['seopress_titles_template_replace_array'];
+	$seopress_excerpt_length = $variables['seopress_excerpt_length'];
 
 	if ( is_front_page() && is_home() && isset($post) && get_post_meta($post->ID,'_seopress_titles_title',true) =='') { //HOMEPAGE
 		if (seopress_titles_home_site_title_option() !='') {
@@ -458,6 +459,7 @@ function seopress_titles_the_description_content() {
 	$seopress_get_the_excerpt = $variables['seopress_get_the_excerpt'];
 	$seopress_titles_template_variables_array = $variables['seopress_titles_template_variables_array'];
 	$seopress_titles_template_replace_array = $variables['seopress_titles_template_replace_array'];
+	$seopress_excerpt_length = $variables['seopress_excerpt_length'];
 
 	if ( is_front_page() && is_home() && isset($post) && get_post_meta($post->ID,'_seopress_titles_desc',true) =='' ) { //HOMEPAGE
 		if (seopress_titles_home_site_desc_option() !='') { //IS GLOBAL

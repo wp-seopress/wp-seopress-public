@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.6+
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 3.6.2
+Stable tag: 3.6.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -219,6 +219,12 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 60. Installation Wizard
 
 == Changelog ==
+= 3.6.2.1 =
+* FIX Video duration for manual edit (automatic schema)
+* FIX Notice: Undefined variable: seopress_excerpt_length
+* FIX undefined 'post_author' variable if no posts in author archive
+* FIX %%post_author%% and %%author_bio%% variables
+* FIX Redirections with HTML entities
 = 3.6.2 =
 * NEW Add custom manual / automatic schema with dynamic variables (PRO)
 * NEW Add custom tracking code after opening body tag like Google Tag Manager 🍾

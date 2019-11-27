@@ -53,8 +53,16 @@ if (get_query_var('paged') >='1') {
     $seopress_paged = apply_filters('seopress_paged', $seopress_paged);
 }
 
-if(is_single() || is_author()){
+if (is_singular() && isset($post->post_author)){
     $the_author_meta = get_the_author_meta('display_name', $post->post_author);
+    $author_bio = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description', $post->post_author))))));
+}
+
+if (is_author() && NULL !== get_queried_object()) {
+    $author = get_queried_object();
+    $the_author_meta = $author->display_name;
+    $author_bio = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description', $author->ID))))));
+
 }
 
 if (is_single() && has_category()) {
@@ -129,10 +137,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
         $product = wc_get_product($post->ID);
         $woo_single_sku = $product->get_sku();
     }
-}
-
-if (get_the_author_meta('description') !='') {
-    $author_bio = esc_html(get_the_author_meta('description'));
 }
 
 $seopress_titles_template_variables_array = array(
@@ -241,7 +245,8 @@ $variables = array(
 	'author_bio' => $author_bio,
 	'seopress_get_the_excerpt' => $seopress_get_the_excerpt,
 	'seopress_titles_template_variables_array' => $seopress_titles_template_variables_array,
-	'seopress_titles_template_replace_array' => $seopress_titles_template_replace_array
+    'seopress_titles_template_replace_array' => $seopress_titles_template_replace_array,
+    'seopress_excerpt_length' => $seopress_excerpt_length,
 );
 
 return $variables;
