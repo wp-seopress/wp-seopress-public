@@ -478,20 +478,24 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		    return $rules;
 		}
 
-		function seopress_remove_category_base( $link ) {
-			$category_base = get_option( 'category_base' );
-			if ( '' == $category_base ) {
-				$category_base = 'category';
-			}
+		function seopress_remove_category_base( $termlink, $term, $taxonomy ) {
+			if ($taxonomy =='category') {
+				$category_base = get_option( 'category_base' );
+				if ( '' == $category_base ) {
+					$category_base = 'category';
+				}
 
-			if ( '/' == substr( $category_base, 0, 1 ) ) {
-				$category_base = substr( $category_base, 1 );
-			}
-			$category_base .= '/';
+				if ( '/' == substr( $category_base, 0, 1 ) ) {
+					$category_base = substr( $category_base, 1 );
+				}
+				$category_base .= '/';
 
-			return preg_replace( '`' . preg_quote( $category_base, '`' ) . '`u', '', $link, 1 );
+				return preg_replace( '`' . preg_quote( $category_base, '`' ) . '`u', '', $termlink, 1 );
+			} else {
+				return $termlink;
+			}
 		}
-		add_filter( 'term_link', 'seopress_remove_category_base' );
+		add_filter( 'term_link', 'seopress_remove_category_base', 10, 3 );
 
 		add_action('template_redirect', 'seopress_category_redirect', 1);
 		function seopress_category_redirect(){

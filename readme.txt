@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.7.7
+Stable tag: 3.7.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -270,6 +270,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 60. Installation Wizard
 
 == Changelog ==
+= 3.7.7.1 =
+* FIX Remove /category/ in permalinks to target "category" taxonomy only by default
 = 3.7.7 =
 * NEW WordPress 4.7 is now the minimum required to use SEOPress (WP 5.3 is recommended)
 * NEW Add %%page%% dynamic variable, current page number with context (eg: "Page 1 of 4")
