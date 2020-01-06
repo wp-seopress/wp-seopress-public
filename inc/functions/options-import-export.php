@@ -522,6 +522,7 @@ function seopress_backlinks_export_settings() {
 }
 add_action( 'admin_init', 'seopress_backlinks_export_settings' );
 
+//Export metadata
 function seopress_download_batch_export() {
     if( empty( $_GET['seopress_action'] ) || 'seopress_download_batch_export' != $_GET['seopress_action'] )
         return;
@@ -536,6 +537,8 @@ function seopress_download_batch_export() {
 
             $csv_fields = array();
             $csv_fields[] = 'id';
+            $csv_fields[] = 'post_title';
+            $csv_fields[] = 'url';
             $csv_fields[] = 'meta_title';
             $csv_fields[] = 'meta_desc';
             $csv_fields[] = 'fb_title';

@@ -254,41 +254,83 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
             }
             if (array_key_exists('social-tab', $seo_tabs)) {
                 echo '<div id="tabs-3">
-                    <span class="dashicons dashicons-facebook-alt"></span>
-                    <br><br>
-                    <span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">'.__('Ask Facebook to update his cache','wp-seopress').'</a>
-                    <p>
-                        <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'wp-seopress' ) .'</label>
-                        <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.esc_html__('Enter your Facebook title','wp-seopress').'" aria-label="'.__('Facebook Title','wp-seopress').'" value="'.$seopress_social_fb_title.'" />
-                    </p>
-                    <p>
-                        <label for="seopress_social_fb_desc_meta">'. __( 'Facebook description', 'wp-seopress' ) .'</label>
-                        <textarea id="seopress_social_fb_desc_meta" name="seopress_social_fb_desc" placeholder="'.esc_html__('Enter your Facebook description','wp-seopress').'" aria-label="'.__('Facebook description','wp-seopress').'" value="'.$seopress_social_fb_desc.'">'.$seopress_social_fb_desc.'</textarea>
-                    </p> 
-                    <p>
-                        <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'wp-seopress' ) .'</label>
-                        <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" aria-label="'.__('Facebook Thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
-                        <span class="advise">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress').'</span>
-                        <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
-                    </p>
-                    <br/>
-                    <span class="dashicons dashicons-twitter"></span>
-                    <br><br>
-                    <span class="dashicons dashicons-external"></span><a href="https://cards-dev.twitter.com/validator" target="_blank">'.__('Preview your Twitter card using the official validator','wp-seopress').'</a>
-                    <p>
-                        <label for="seopress_social_twitter_title_meta">'. __( 'Twitter Title', 'wp-seopress' ) .'</label>
-                        <input id="seopress_social_twitter_title_meta" type="text" name="seopress_social_twitter_title" placeholder="'.esc_html__('Enter your Twitter title','wp-seopress').'" aria-label="'.__('Twitter Title','wp-seopress').'" value="'.$seopress_social_twitter_title.'" />
-                    </p>
-                    <p>
-                        <label for="seopress_social_twitter_desc_meta">'. __( 'Twitter description', 'wp-seopress' ) .'</label>
-                        <textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc" placeholder="'.esc_html__('Enter your Twitter description','wp-seopress').'" aria-label="'.__('Twitter description','wp-seopress').'" value="'.$seopress_social_twitter_desc.'">'.$seopress_social_twitter_desc.'</textarea>
-                    </p> 
-                    <p>
-                        <label for="seopress_social_twitter_img_meta">'. __( 'Twitter Thumbnail', 'wp-seopress' ) .'</label>
-                        <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_twitter_img.'" />
-                        <span class="advise">'. __('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress') .'</span>
-                        <input id="seopress_social_twitter_img_upload" class="button" type="button" aria-label="'.__('Twitter Thumbnail','wp-seopress').'" value="'.__('Upload an Image','wp-seopress').'" />
-                    </p>
+                    <div class="box-left">
+                        <span class="dashicons dashicons-facebook-alt"></span>
+                        <br><br>
+                        <span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">'.__('Ask Facebook to update his cache','wp-seopress').'</a>
+                        <p>
+                            <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'wp-seopress' ) .'</label>
+                            <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.esc_html__('Enter your Facebook title','wp-seopress').'" aria-label="'.__('Facebook Title','wp-seopress').'" value="'.$seopress_social_fb_title.'" />
+                        </p>
+                        <p>
+                            <label for="seopress_social_fb_desc_meta">'. __( 'Facebook description', 'wp-seopress' ) .'</label>
+                            <textarea id="seopress_social_fb_desc_meta" name="seopress_social_fb_desc" placeholder="'.esc_html__('Enter your Facebook description','wp-seopress').'" aria-label="'.__('Facebook description','wp-seopress').'" value="'.$seopress_social_fb_desc.'">'.$seopress_social_fb_desc.'</textarea>
+                        </p> 
+                        <p>
+                            <label for="seopress_social_fb_img_meta">'. __( 'Facebook Thumbnail', 'wp-seopress' ) .'</label>
+                            <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" aria-label="'.__('Facebook Thumbnail','wp-seopress').'" value="'.$seopress_social_fb_img.'" />
+                            <span class="advise">'.__('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress').'</span>
+                            <input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
+                        </p>
+                    </div>
+                    <div class="box-right">
+                        <div class="facebook-snippet-preview">
+                            <h3>'.__('Facebook Preview','wp-seopress').'</h3>';
+                            if(seopress_get_toggle_social_option()=='1') {
+                                echo '<p>'.__('This is what your post will look like in Facebook. You have to publish your post to get the Facebook Preview.','wp-seopress').'</p>';
+                            } else {
+                                echo '<p><span class="dashicons dashicons-warning"></span>'.__('The Social Networks feature is disabled. Still seing informations from the FB Preview? You probably have social tags added by your theme or a plugin.','wp-seopress').'</p>';
+                            }
+                            echo '<div class="facebook-snippet-box">
+                                <div class="snippet-fb-img"><img src="" width="524" height="274" alt="" aria-label=""/></div>
+                                <div class="snippet-fb-img-custom" style="display:none"><img src="" width="524" height="274" alt="" aria-label=""/></div>
+                                <div class="snippet-fb-img-default" style="display:none"><img src="" width="524" height="274" alt="" aria-label=""/></div>
+
+                                <div class="facebook-snippet-text">
+                                    <div class="snippet-meta">
+                                        <div class="snippet-fb-url"></div>
+                                        <div class="fb-sep">|</div>
+                                        <div class="fb-by">'.__('By ','wp-seopress').'</div>
+                                        <div class="snippet-fb-site-name"></div>
+                                    </div>
+                                    <div class="title-desc">
+                                        <div class="snippet-fb-title"></div>
+                                        <div class="snippet-fb-title-custom" style="display:none"></div>';
+                                        global $tag;
+                                        if (get_the_title()) {
+                                            echo '<div class="snippet-fb-title-default" style="display:none">'.get_the_title().' - '.get_bloginfo('name').'</div>';
+                                        } elseif ($tag) {
+                                            echo '<div class="snippet-fb-title-default" style="display:none">'.$tag->name.' - '.get_bloginfo('name').'</div>';
+                                        }
+                                echo   '<div class="snippet-fb-description">...</div>
+                                        <div class="snippet-fb-description-custom" style="display:none"></div>
+                                        <div class="snippet-fb-description-default" style="display:none"></div>';
+                            echo    '</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="box-left">
+                        <br/>
+                        <span class="dashicons dashicons-twitter"></span>
+                        <br><br>
+                        <span class="dashicons dashicons-external"></span><a href="https://cards-dev.twitter.com/validator" target="_blank">'.__('Preview your Twitter card using the official validator','wp-seopress').'</a>
+                        <p>
+                            <label for="seopress_social_twitter_title_meta">'. __( 'Twitter Title', 'wp-seopress' ) .'</label>
+                            <input id="seopress_social_twitter_title_meta" type="text" name="seopress_social_twitter_title" placeholder="'.esc_html__('Enter your Twitter title','wp-seopress').'" aria-label="'.__('Twitter Title','wp-seopress').'" value="'.$seopress_social_twitter_title.'" />
+                        </p>
+                        <p>
+                            <label for="seopress_social_twitter_desc_meta">'. __( 'Twitter description', 'wp-seopress' ) .'</label>
+                            <textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc" placeholder="'.esc_html__('Enter your Twitter description','wp-seopress').'" aria-label="'.__('Twitter description','wp-seopress').'" value="'.$seopress_social_twitter_desc.'">'.$seopress_social_twitter_desc.'</textarea>
+                        </p> 
+                        <p>
+                            <label for="seopress_social_twitter_img_meta">'. __( 'Twitter Thumbnail', 'wp-seopress' ) .'</label>
+                            <input id="seopress_social_twitter_img_meta" type="text" name="seopress_social_twitter_img" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'" value="'.$seopress_social_twitter_img.'" />
+                            <span class="advise">'. __('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress') .'</span>
+                            <input id="seopress_social_twitter_img_upload" class="button" type="button" aria-label="'.__('Twitter Thumbnail','wp-seopress').'" value="'.__('Upload an Image','wp-seopress').'" />
+                        </p>
+                    </div>
                 </div>';
             }
         }

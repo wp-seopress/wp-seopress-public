@@ -156,6 +156,8 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 
                         $target_kws_h1 = $seopress_analysis_data['0']['h1']['matches'];
 
+                        $all_h1 = $seopress_analysis_data['0']['h1']['values'];
+
                         echo '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Heading 1 (H1).','wp-seopress').'</p>';
                         
                         echo '<ul>';
@@ -171,7 +173,15 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                         echo '</ul>';
                         if ($count > 1) {
                             echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d Heading 1 (H1) in your content.','wp-seopress'), $count).'</p>';
-                            echo '<p>'.__('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility.','wp-seopress').'</p>';
+                            echo '<p>'.__('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility. Below, the list:','wp-seopress').'</p>';
+                        }
+
+                        if (!empty($all_h1)) {
+                            echo '<ul>';
+                            foreach($all_h1 as $h1) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$h1.'</li>';
+                            }
+                            echo '</ul>';
                         }
                     }
 
@@ -267,7 +277,215 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                     } else {
                         echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom meta description is set for this post.','wp-seopress').'</p>';
                     }
+                    
+                    //og:title
+                    echo '<h3>'.__('Open Graph Title','wp-seopress').'</h3>';
 
+                    if (!empty($seopress_analysis_data['0']['og_title']['count'])) {
+                        $count = $seopress_analysis_data['0']['og_title']['count'];
+
+                        $all_og_title = $seopress_analysis_data['0']['og_title']['values'];
+
+                        if ($count > 1) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:title in your content.','wp-seopress'), $count).'</p>';
+                            echo '<p>'.__('You should not use more than one og:title in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:title tag from your source code. Below, the list:','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('We found an Open Graph Title tag in your source code.','wp-seopress').'</p>';
+                        }
+
+                        if (!empty($all_og_title)) {
+                            echo '<ul>';
+                            foreach($all_og_title as $og_title) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$og_title.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph Title is missing!','wp-seopress').'</p>';
+                    }
+
+                    //og:description
+                    echo '<h3>'.__('Open Graph Description','wp-seopress').'</h3>';
+
+                    if (!empty($seopress_analysis_data['0']['og_desc']['count'])) {
+
+                        $count = $seopress_analysis_data['0']['og_desc']['count'];
+
+                        $all_og_desc = $seopress_analysis_data['0']['og_desc']['values'];
+
+                        if ($count > 1) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:description in your content.','wp-seopress'), $count).'</p>';
+                            echo '<p>'.__('You should not use more than one og:description in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:description tag from your source code. Below, the list:','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('We found an Open Graph Description tag in your source code.','wp-seopress').'</p>';
+                        }
+
+                        if (!empty($all_og_desc)) {
+                            echo '<ul>';
+                            foreach($all_og_desc as $og_desc) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$og_desc.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph Description is missing!','wp-seopress').'</p>';
+                    }
+
+                    //og:image
+                    echo '<h3>'.__('Open Graph Image','wp-seopress').'</h3>';
+
+                    if (!empty($seopress_analysis_data['0']['og_img']['count'])) {
+
+                        $count = $seopress_analysis_data['0']['og_img']['count'];
+
+                        $all_og_img = $seopress_analysis_data['0']['og_img']['values'];
+
+                        if ($count > 0) {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.sprintf(esc_html__('We found %d og:image in your content.','wp-seopress'), $count).'</p>';
+                        }
+
+                        if (!empty($all_og_img)) {
+                            echo '<ul>';
+                            foreach($all_og_img as $og_img) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$og_img.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph Image is missing!','wp-seopress').'</p>';
+                    }
+
+                    //og:url
+                    echo '<h3>'.__('Open Graph URL','wp-seopress').'</h3>';
+
+                    if (!empty($seopress_analysis_data['0']['og_url']['count'])) {
+
+                        $count = $seopress_analysis_data['0']['og_url']['count'];
+
+                        $all_og_url = $seopress_analysis_data['0']['og_url']['values'];
+
+                        if ($count > 1) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:url in your content.','wp-seopress'), $count).'</p>';
+                            echo '<p>'.__('You should not use more than one og:url in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:url tag from your source code. Below, the list:','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('We found an Open Graph URL tag in your source code.','wp-seopress').'</p>';
+                        }
+
+                        if (!empty($all_og_url)) {
+                            echo '<ul>';
+                            foreach($all_og_url as $og_url) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$og_url.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph URL is missing!','wp-seopress').'</p>';
+                    }
+
+                    //og:site_name
+                    echo '<h3>'.__('Open Graph Site Name','wp-seopress').'</h3>';
+
+                    if (!empty($seopress_analysis_data['0']['og_site_name']['count'])) {
+
+                        $count = $seopress_analysis_data['0']['og_site_name']['count'];
+
+                        $all_og_site_name = $seopress_analysis_data['0']['og_site_name']['values'];
+
+                        if ($count > 1) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:site_name in your content.','wp-seopress'), $count).'</p>';
+                            echo '<p>'.__('You should not use more than one og:site_name in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:site_name tag from your source code. Below, the list:','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('We found an Open Graph Site Name tag in your source code.','wp-seopress').'</p>';
+                        }
+
+                        if (!empty($all_og_site_name)) {
+                            echo '<ul>';
+                            foreach($all_og_site_name as $og_site_name) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$og_site_name.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph Site Name is missing!','wp-seopress').'</p>';
+                    }
+
+                    //twitter:title
+                    echo '<h3>'.__('Twitter Title','wp-seopress').'</h3>';
+
+                    if (!empty($seopress_analysis_data['0']['tw_title']['count'])) {
+
+                        $count = $seopress_analysis_data['0']['tw_title']['count'];
+
+                        $all_tw_title = $seopress_analysis_data['0']['tw_title']['values'];
+
+                        if ($count > 1) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d twitter:title in your content.','wp-seopress'), $count).'</p>';
+                            echo '<p>'.__('You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:title tag from your source code. Below, the list:','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('We found a Twitter Title Tag in your source code.','wp-seopress').'</p>';
+                        }
+
+                        if (!empty($all_tw_title)) {
+                            echo '<ul>';
+                            foreach($all_tw_title as $tw_title) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$tw_title.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Twitter Title is missing!','wp-seopress').'</p>';
+                    }
+
+                    //twitter:description
+                    echo '<h3>'.__('Twitter Description','wp-seopress').'</h3>';
+
+                    if (!empty($seopress_analysis_data['0']['tw_desc']['count'])) {
+
+                        $count = $seopress_analysis_data['0']['tw_desc']['count'];
+
+                        $all_tw_desc = $seopress_analysis_data['0']['tw_desc']['values'];
+
+                        if ($count > 1) {
+                            echo '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d twitter:description in your content.','wp-seopress'), $count).'</p>';
+                            echo '<p>'.__('You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:description tag from your source code. Below, the list:','wp-seopress').'</p>';
+                        } else {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.__('We found a Twitter Description tag in your source code.','wp-seopress').'</p>';
+                        }
+
+                        if (!empty($all_tw_desc)) {
+                            echo '<ul>';
+                            foreach($all_tw_desc as $tw_desc) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$tw_desc.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Twitter Description is missing!','wp-seopress').'</p>';
+                    }
+
+                    //twitter:image
+                    echo '<h3>'.__('Twitter Image','wp-seopress').'</h3>';
+
+                    if (!empty($seopress_analysis_data['0']['tw_img']['count'])) {
+
+                        $count = $seopress_analysis_data['0']['tw_img']['count'];
+
+                        $all_tw_img = $seopress_analysis_data['0']['tw_img']['values'];
+
+                        if ($count > 0) {
+                            echo '<p><span class="dashicons dashicons-yes"></span>'.sprintf(esc_html__('We found %d twitter:image in your content.','wp-seopress'), $count).'</p>';
+                        }
+
+                        if (!empty($all_tw_img)) {
+                            echo '<ul>';
+                            foreach($all_tw_img as $tw_img) {
+                                echo '<li><span class="dashicons dashicons-minus"></span>'.$tw_img.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Twitter Image is missing!','wp-seopress').'</p>';
+                    }
                 echo '</div>
 
                 <div id="seopress-analysis-tabs-2">

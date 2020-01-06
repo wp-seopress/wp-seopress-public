@@ -20,7 +20,9 @@ jQuery(document).ready(function($){
         mediaUploader.on('select', function() {
           attachment = mediaUploader.state().get('selection').first().toJSON();
           $(item + '_meta').val(attachment.url);
+          $( "#seopress_social_fb_img_meta" ).trigger( "keyup" );
         });
+        
         // Open the uploader dialog
         mediaUploader.open();
     });

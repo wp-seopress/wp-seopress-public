@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.7.7.1
+Version: 3.7.8
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.7.7.1' ); 
+define( 'SEOPRESS_VERSION', '3.7.8' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@ function seopress_init($hook) {
 
     require_once dirname( __FILE__ ) . '/inc/functions/options.php';
 
-    if(current_user_can('edit_posts')) {
+    if(current_user_can('manage_options')) {
         require_once dirname( __FILE__ ) . '/inc/admin/adminbar.php';
     }
     
@@ -221,7 +221,8 @@ function seopress_add_admin_options_scripts($hook) {
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-google-analytics') ) {
-        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs6.js', __FILE__ ), array( 'jquery-ui-tabs' ), SEOPRESS_VERSION );
+        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs6.js', __FILE__ ), array( 'jquery-ui-tabs', 'wp-color-picker' ), SEOPRESS_VERSION );
     }
 
     if (isset($_GET['page']) && ($_GET['page'] == 'seopress-advanced') ) {

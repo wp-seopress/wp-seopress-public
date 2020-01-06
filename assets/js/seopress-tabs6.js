@@ -24,5 +24,6 @@ jQuery(document).ready(function($) {
     	
     	$('#seopress-tabs').find('.seopress-tab.active').removeClass("active");
     	$('#'+hash).addClass("active");
-    });
+	});	
+	$('.seopress_admin_color_picker').wpColorPicker();
 });

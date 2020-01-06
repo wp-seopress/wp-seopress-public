@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.7.7.1
+Stable tag: 3.7.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,8 +56,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 <h3>SEOPress PRO: to go further with your SEO</h3>
 
 <ul>
-	<li>Import metadatas (titles, open graph, robots...) from CSV file</li>
-	<li>Export metadatas (titles, open graph, robots...) to a CSV file</li>
+	<li>Import metadata (titles, open graph, robots...) from CSV file</li>
+	<li>Export metadata (titles, open graph, robots...) to a CSV file</li>
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
 	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, FAQ, course, recipe, video, event, product, job, simple review, site navigation element</li>
@@ -162,9 +162,9 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 
 == Frequently Asked Questions ==
 
-= Can I import my post and term metadatas from other plugins? =
+= Can I import my post and term metadata from other plugins? =
 
-You can import your metadatas from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/">Squirrly</a> (post metas only, not terms), and <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a> in one click to SEOPress without losing traffic.
+You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/">Squirrly</a> (post metas only, not terms), and <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a> in one click to SEOPress without losing traffic.
 
 = How to use Google Tag Manager / Facebook Pixel with SEOPress? =
 
@@ -270,6 +270,22 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 60. Installation Wizard
 
 == Changelog ==
+= 3.7.8 =
+* NEW Pixel counter for title and meta description now works with each language / alphabet! Faster, more reliable and universal!
+* NEW Facebook Preview!
+* NEW Cookie bar customization: change background, color, buttons... from SEO, Google Analytics, Cookie bar / GDPR tab
+* NEW Add new checks to content analysis for social networks (Open Graph / Twitter cards) to detect duplicated tags/conflicts
+* NEW %%post_thumbnail_url%% global dynamic variable to display post thumbnail URL (https://www.seopress.org/support/guides/manage-titles-meta-descriptions/)
+* NEW %%currentmonth_short%% global dynamic variable to display current month in 3 letters (https://www.seopress.org/support/guides/manage-titles-meta-descriptions/)
+* NEW 'seopress_titles_post_thumbnail_url' hook to filter post thumbnail URL (https://www.seopress.org/support/hooks/filter-seopress_titles_post_thumbnail_url-dynamic-variable/)
+* INFO Content analysis now displays duplicate H1 title values for faster identification
+* INFO Add Post title and Permalink to the metadata export file (PRO)
+* INFO wpForo compatibility with SEOPress
+* INFO Improve compatibility with Jetpack CDN (thanks to @jeherve)
+* INFO Improve UI in content analysis if transparent / white images
+* INFO Remove SEO admin bar for user roles without "manage_options" capability to improve UX
+* FIX Facebook OG:Image URL encoding if no featured thumbnail or custom og:image set (thanks to @bitofseo)
+* FIX Keywords in permalink was case sensitive
 = 3.7.7.1 =
 * FIX Remove /category/ in permalinks to target "category" taxonomy only by default
 = 3.7.7 =

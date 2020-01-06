@@ -449,6 +449,7 @@ function seopress_titles_the_description_content() {
 	$seopress_excerpt = $variables['seopress_excerpt'];
 	$post_category = $variables['post_category'];
 	$post_tag = $variables['post_tag'];
+	$post_thumbnail_url = $variables['post_thumbnail_url'];
 	$get_search_query = $variables['get_search_query'];
 	$woo_single_cat_html = $variables['woo_single_cat_html'];
 	$woo_single_tag_html = $variables['woo_single_tag_html'];

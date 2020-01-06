@@ -133,16 +133,31 @@ if (seopress_get_toggle_titles_option() =='1') {
 	add_action('template_redirect', 'seopress_titles_disable_archives', 0);
 	add_action('wp_head', 'seopress_load_titles_options', 0);
 	function seopress_load_titles_options() {
-		if (!is_admin()){	
-		    require_once ( dirname( __FILE__ ) . '/options-titles-metas.php'); //Titles & metas
+		if (!is_admin()){
+			if( function_exists('is_wpforo_page') && is_wpforo_page() ){//disable on wpForo pages to avoid conflicts
+				//do nothing
+			} else {
+				require_once ( dirname( __FILE__ ) . '/options-titles-metas.php'); //Titles & metas
+			}
 		}
 	}
 }
 if (seopress_get_toggle_social_option() =='1') {
+	// add_action('wp_loaded', 'seopress_load_oembed_options');
+	// function seopress_load_oembed_options() {
+	// 	if (!is_admin()){
+	// 		require_once ( dirname( __FILE__ ) . '/options-oembed.php'); //Oembed
+	// 	}
+	// }
+	
 	add_action('wp_head', 'seopress_load_social_options', 0);
 	function seopress_load_social_options() {
-		if (!is_admin()){	
-		    require_once ( dirname( __FILE__ ) . '/options-social.php'); //Social
+		if (!is_admin()){
+			if( function_exists('is_wpforo_page') && is_wpforo_page() ){//disable on wpForo pages to avoid conflicts
+				//do nothing
+			} else {
+				require_once ( dirname( __FILE__ ) . '/options-social.php'); //Social
+			}
 		}
 	}
 }

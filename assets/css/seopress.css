@@ -136,7 +136,9 @@
     max-width: 150px;
     max-height: 150px;
     object-fit: cover;
+    border: 1px solid #f3f4f5;
     cursor: default;
+    padding: 1px;
 }
 
 #seopress_cpt .notice {
@@ -318,6 +320,35 @@
     width: 49%;
     margin-left: 1%;
 }
+#seopress_cpt #tabs-3 .box-left {
+    width: 44%;
+}
+#seopress_cpt #tabs-3 .box-right {
+    width: 54%;
+}
+@media only screen and (max-width: 1200px) {
+    #seopress_cpt .box-left,
+    #seopress_cpt .box-right {
+        float: none;
+        width: 100%;
+        margin: 0;
+    }
+}
+@media only screen and (max-width: 1500px) {
+    #seopress_cpt #tabs-3 .box-left,
+    #seopress_cpt #tabs-3 .box-right {
+        float: none;
+        width: 100%;
+        margin: 0;
+    }
+}
+
+#edittag #seopress_cpt #tabs-3 .box-left,
+#edittag #seopress_cpt #tabs-3 .box-right {
+    float: none;
+    width: 100%;
+    margin: 0;
+}
 
 #seopress_cpt .google-snippet-preview {
     font-family: arial,sans-serif;
@@ -342,20 +373,89 @@
     font-weight: 400;
     line-height: 16px;
 }
-
 #seopress_cpt .google-snippet-preview .snippet-description,#seopress_cpt .google-snippet-preview .snippet-description-custom,#seopress_cpt .google-snippet-preview .snippet-description-default {
     color: #545454;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 18.2px;
     display: inline;
 }
-
 #seopress_cpt .google-snippet-preview .snippet-date {
     color: grey;
     display: inline;
 }
-
+#seopress_cpt .facebook-snippet-box {
+    color: #4b4f56;
+    font-size: 14px;
+    width: 524px;
+}
+#seopress_cpt .snippet-meta {
+    display:flex;
+} 
+#seopress_cpt .snippet-fb-site-name,
+#seopress_cpt .snippet-fb-url,
+#seopress_cpt .fb-by {
+    color: #606770;
+    font-size: 12px;
+    white-space: nowrap;
+    line-height: 11px;
+    text-transform: uppercase;
+}
+#seopress_cpt .fb-sep {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #606770;
+    line-height: 11px;
+    font-size: 12px;
+}
+#seopress_cpt .facebook-snippet-box .facebook-snippet-text {
+    border: 1px solid #dadde1;
+    background-color: #f2f3f5;
+    padding: 10px 12px;
+}
+#seopress_cpt .facebook-snippet-box .title-desc {
+    max-height: 46px;
+    overflow: hidden;
+}
+#seopress_cpt .facebook-snippet-box .snippet-fb-title,
+#seopress_cpt .facebook-snippet-box .snippet-fb-title-custom,
+#seopress_cpt .facebook-snippet-box .snippet-fb-title-default {
+    font-size: 16px;
+    line-height: 20px;
+    margin: 3px 0 0;
+    padding-top: 2px;
+    color: #1d2129;
+    font-weight: 700;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+    max-height: 22px;
+}
+#seopress_cpt .facebook-snippet-box .snippet-fb-description,
+#seopress_cpt .facebook-snippet-box .snippet-fb-description-custom,
+#seopress_cpt .facebook-snippet-box .snippet-fb-description-default {
+    color: #606770;
+    font-size: 14px;
+    line-height: 20px;
+    word-break: break-word;
+    font-family: Helvetica, Arial, sans-serif;
+    max-height: 80px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    width: 100%;
+}
+#seopress_cpt .facebook-snippet-box img {
+    display: block;
+    height: 274px;
+    width: 524px;
+    object-fit: cover;
+}
 #seopress_cpt .wrap-seopress-counters, #seopress_pro_cpt .wrap-seopress-counters {
     text-align: right;
     background: #e9ecef;
@@ -365,7 +465,6 @@
     justify-content: flex-end;
     border-radius: 0 0 .25rem .25rem;
 }
-
 #seopress_cpt .sp-progress, #seopress_pro_cpt .sp-progress {
     display: -ms-flexbox;
     display: flex;
@@ -375,7 +474,6 @@
     background-color: #e9ecef;
     border-radius: .25rem .25rem 0 0;
 }
-
 #seopress_cpt .sp-progress-bar, #seopress_pro_cpt .sp-progress-bar {
     display: -ms-flexbox;
     display: flex;
@@ -389,7 +487,6 @@
     background-color: #0085ba;
     transition: width .6s ease;
 }
-
 #seopress_cpt #seopress_titles_desc_counters,
 #seopress_cpt #seopress_titles_title_counters,
 #seopress_pro_cpt #seopress_rich_snippets_articles_counters,
@@ -1191,6 +1288,31 @@ body.seopress-styles {
     border-radius: 4px;
     box-shadow: 0 7px 14px rgba(50,50,93,.1),0 3px 6px rgba(0,0,0,.1);
     vertical-align: baseline;
+}
+
+.seopress-option .wp-picker-container button {
+    box-shadow: none;
+    border: 1px solid #0071a1;
+    border-radius: 3px;
+    background: rgb(243, 245, 246);
+    text-transform: none;
+}
+
+.seopress-option .wp-picker-container input[type=text].wp-color-picker {
+    min-width: inherit;
+}
+
+.seopress-option .wp-picker-container .wp-picker-clear {
+    box-shadow: none;
+    text-transform: none;
+    border-radius: 0;
+    background: none;
+}
+
+.seopress-option .wp-picker-container .wp-picker-clear:hover {
+    background:none;
+    text-decoration: currentColor;
+    color:inherit;
 }
 
 .seopress-option .button .dashicons {

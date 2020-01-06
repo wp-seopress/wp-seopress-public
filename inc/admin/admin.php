@@ -546,6 +546,7 @@ class seopress_options
                     'tab_seopress_google_analytics_events' => __( "Events", "wp-seopress" ),
                     'tab_seopress_google_analytics_custom_dimensions' => __( "Custom Dimensions", "wp-seopress" ),
                     'tab_seopress_google_analytics_dashboard' => __( "Stats in Dashboard", "wp-seopress" ),
+                    'tab_seopress_google_analytics_gdpr' => __( "Cookie bar / GDPR", "wp-seopress" ),
                 );
             } else {
                 $plugin_settings_tabs = array(
@@ -553,6 +554,7 @@ class seopress_options
                     'tab_seopress_google_analytics_features' => __( "Tracking", "wp-seopress" ),
                     'tab_seopress_google_analytics_events' => __( "Events", "wp-seopress" ),
                     'tab_seopress_google_analytics_custom_dimensions' => __( "Custom Dimensions", "wp-seopress" ),
+                    'tab_seopress_google_analytics_gdpr' => __( "Cookie bar / GDPR", "wp-seopress" ),
                 );
             }
 
@@ -568,6 +570,7 @@ class seopress_options
             <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
                 <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_dashboard') { echo 'active'; } ?>" id="tab_seopress_google_analytics_dashboard"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-dashboard' ); ?></div>
             <?php } ?>
+            <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_gdpr') { echo 'active'; } ?>" id="tab_seopress_google_analytics_gdpr"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-gdpr' ); ?></div>
         </div>
 
         <?php submit_button(); ?>
@@ -2918,7 +2921,7 @@ class seopress_options
             array( $this, 'seopress_social_twitter_card_og_callback' ), // Callback
             'seopress-settings-admin-social-twitter', // Page
             'seopress_setting_section_social_twitter' // Section                  
-        );     
+        );
 
         add_settings_field(
             'seopress_social_twitter_card_img', // ID
@@ -2926,14 +2929,14 @@ class seopress_options
             array( $this, 'seopress_social_twitter_card_img_callback' ), // Callback
             'seopress-settings-admin-social-twitter', // Page
             'seopress_setting_section_social_twitter' // Section                  
-        );   
+        );
 
         add_settings_field(
             'seopress_social_twitter_card_img_size', // ID
            __("Image size for Twitter Summary card","wp-seopress"), // Title
             array( $this, 'seopress_social_twitter_card_img_size_callback' ), // Callback
             'seopress-settings-admin-social-twitter', // Page
-            'seopress_setting_section_social_twitter' // Section                  
+            'seopress_setting_section_social_twitter' // Section
         );
 
         //Google Analytics Enable SECTION==========================================================
@@ -2943,14 +2946,14 @@ class seopress_options
             //__("Google Analytics","wp-seopress"), // Title
             array( $this, 'print_section_info_google_analytics_enable' ), // Callback
             'seopress-settings-admin-google-analytics-enable' // Page
-        );      
+        );
 
         add_settings_field(
             'seopress_google_analytics_enable', // ID
            __("Enable Google Analytics tracking","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_enable_callback' ), // Callback
             'seopress-settings-admin-google-analytics-enable', // Page
-            'seopress_setting_section_google_analytics_enable' // Section                  
+            'seopress_setting_section_google_analytics_enable' // Section
         );
 
         add_settings_field(
@@ -2958,47 +2961,152 @@ class seopress_options
            __("Enter your tracking ID","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_ua_callback' ), // Callback
             'seopress-settings-admin-google-analytics-enable', // Page
-            'seopress_setting_section_google_analytics_enable' // Section                  
+            'seopress_setting_section_google_analytics_enable' // Section
         );
-
-        add_settings_field(
-            'seopress_google_analytics_disable', // ID
-           __("Google Analytics tracking opt-in","wp-seopress"), // Title
-            array( $this, 'seopress_google_analytics_disable_callback' ), // Callback
-            'seopress-settings-admin-google-analytics-enable', // Page
-            'seopress_setting_section_google_analytics_enable' // Section                  
-        );
-
-        add_settings_field(
-            'seopress_google_analytics_half_disable', // ID
-            '', // Title
-            array( $this, 'seopress_google_analytics_half_disable_callback' ), // Callback
-            'seopress-settings-admin-google-analytics-enable', // Page
-            'seopress_setting_section_google_analytics_enable' // Section                  
-        ); 
-
-        add_settings_field(
-            'seopress_google_analytics_opt_out_msg', // ID
-           __("Consent message for user tracking","wp-seopress"), // Title
-            array( $this, 'seopress_google_analytics_opt_out_msg_callback' ), // Callback
-            'seopress-settings-admin-google-analytics-enable', // Page
-            'seopress_setting_section_google_analytics_enable' // Section                  
-        );
-
-        add_settings_field(
-            'seopress_google_analytics_opt_out_msg_ok', // ID
-           __("Accept button for user tracking","wp-seopress"), // Title
-            array( $this, 'seopress_google_analytics_opt_out_msg_ok_callback' ), // Callback
-            'seopress-settings-admin-google-analytics-enable', // Page
-            'seopress_setting_section_google_analytics_enable' // Section                  
-        );        
 
         add_settings_field(
             'seopress_google_analytics_roles', // ID
            __("Exclude user roles from tracking","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_roles_callback' ), // Callback
             'seopress-settings-admin-google-analytics-enable', // Page
-            'seopress_setting_section_google_analytics_enable' // Section                  
+            'seopress_setting_section_google_analytics_enable' // Section
+        );
+
+        //Cookie bar / GDPR SECTION================================================================
+        add_settings_section(
+            'seopress_setting_section_google_analytics_gdpr', // ID
+            '',
+            //__("Google Analytics","wp-seopress"), // Title
+            array( $this, 'print_section_info_google_analytics_gdpr' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr' // Page
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_disable', // ID
+           __("Google Analytics tracking opt-in","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_disable_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_half_disable', // ID
+            '', // Title
+            array( $this, 'seopress_google_analytics_half_disable_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        ); 
+
+        add_settings_field(
+            'seopress_google_analytics_opt_out_msg', // ID
+           __("Consent message for user tracking","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_opt_out_msg_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_opt_out_msg_ok', // ID
+           __("Accept button for user tracking","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_opt_out_msg_ok_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_pos', // ID
+           __("Cookie bar position","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_pos_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+        
+        add_settings_field(
+            'seopress_google_analytics_cb_bg', // ID
+           __("Cookie bar background color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_bg_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_txt_col', // ID
+           __("Cookie bar text color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_txt_col_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_lk_col', // ID
+           __("Cookie bar link color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_lk_col_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_btn_bg', // ID
+           __("Cookie bar button background color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_btn_bg_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_btn_col', // ID
+           __("Cookie bar button color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_btn_col_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_btn_bg_hov', // ID
+           __("Cookie bar button hover background color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_btn_bg_hov_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_btn_col_hov', // ID
+           __("Cookie bar button hover color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_btn_col_hov_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_btn_sec_bg', // ID
+           __("Cookie bar secondary button background color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_btn_sec_bg_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_btn_sec_col', // ID
+           __("Cookie bar secondary button color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_btn_sec_col_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_btn_sec_bg_hov', // ID
+           __("Cookie bar secondary button hover background color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_btn_sec_bg_hov_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
+            'seopress_google_analytics_cb_btn_sec_col_hov', // ID
+           __("Cookie bar secondary button hover color","wp-seopress"), // Title
+            array( $this, 'seopress_google_analytics_cb_btn_sec_col_hov_callback' ), // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
         );
 
         //Google Analytics Tracking SECTION========================================================
@@ -3602,33 +3710,27 @@ class seopress_options
      * Print the Section text
      */
      
-    public function print_section_info_titles()
-    {
+    public function print_section_info_titles() {
         print __('<p>Customize your title & meta description for homepage</p>', 'wp-seopress');
-    }   
+    }
 
-    public function print_section_info_single()
-    {
+    public function print_section_info_single() {
         print __('<p>Customize your titles & metas for Single Custom Post Types</p>', 'wp-seopress');
     }
 
-    public function print_section_info_advanced()
-    {
+    public function print_section_info_advanced() {
         print __('<p>Customize your metas for all pages</p>', 'wp-seopress');
-    }    
+    }
 
-    public function print_section_info_tax()
-    {
+    public function print_section_info_tax() {
         print __('<p>Customize your metas for all taxonomies archives</p>', 'wp-seopress');
-    }    
+    }
 
-    public function print_section_info_archives()
-    {
+    public function print_section_info_archives() {
         print __('<p>Customize your metas for all archives</p>', 'wp-seopress');
-    }     
+    }
 
-    public function print_section_info_xml_sitemap_general()
-    {
+    public function print_section_info_xml_sitemap_general() {
         if (get_option('permalink_structure') =='') {
             echo '<div class="error notice is-dismissable">';
             echo '<p>'. __('Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this.','wp-seopress');
@@ -3677,8 +3779,7 @@ class seopress_options
         echo '<span class="spinner"></span>';
     } 
 
-    public function print_section_info_html_sitemap()
-    {
+    public function print_section_info_html_sitemap() {
         print __('<p>Create an HTML Sitemap for your visitors and boost your SEO.</p>', 'wp-seopress');
 
         if (function_exists('seopress_get_locale')) {
@@ -3692,30 +3793,25 @@ class seopress_options
         echo '<a class="seopress-doc" href="'.$seopress_docs_link['sitemaps']['html'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to enable a HTML Sitemap - new window','wp-seopress').'</span></a></p>';
     }
 
-    public function print_section_info_xml_sitemap_post_types()
-    {
+    public function print_section_info_xml_sitemap_post_types() {
         print __('<p>Include/Exclude Post Types.</p>', 'wp-seopress');
     }
 
-    public function print_section_info_xml_sitemap_taxonomies()
-    {
+    public function print_section_info_xml_sitemap_taxonomies() {
         print __('<p>Include/Exclude Taxonomies.</p>', 'wp-seopress');
-    }    
+    }
 
-    public function print_section_info_social_knowledge()
-    {
+    public function print_section_info_social_knowledge() {
         print __('<p>Configure Google Knowledge Graph.</p>', 'wp-seopress');
         echo '<p><span class="dashicons dashicons-external"></span><a href="https://developers.google.com/search/docs/guides/enhance-site" target="_blank">'.__('Learn more on Google official website.','wp-seopress').'</a></p>';
-    }     
+    }
 
-    public function print_section_info_social_accounts()
-    {
+    public function print_section_info_social_accounts() {
         print __('<p>Link your site with your social accounts. Use markup on your website to add your social profile information to a Google Knowledge panel. Knowledge panels prominently display your social profile information in some Google Search results. Filling in these fields does not guarantee the display of this data in search results. It may take a long time to see these social-network links.</p>', 'wp-seopress');
         echo '<img src="'.plugins_url('assets/img/help/google-knowledge-graph-social.png', dirname(dirname(__FILE__))).'" class="help-social">';
-    }    
+    }
 
-    public function print_section_info_social_facebook()
-    {
+    public function print_section_info_social_facebook() {
         print __('<p>Manage Open Graph data.</p>', 'wp-seopress');
 
         echo __('<p>We generate the <strong>og:image</strong> meta in this order:</p>','wp-seopress');
@@ -3729,8 +3825,7 @@ class seopress_options
         </ol>';
     }    
 
-    public function print_section_info_social_twitter()
-    {
+    public function print_section_info_social_twitter() {
         print __('<p>Manage your Twitter card.</p>', 'wp-seopress');
 
         echo __('<p>We generate the <strong>twitter:image</strong> meta in this order:</p>','wp-seopress');
@@ -3742,25 +3837,25 @@ class seopress_options
             <li>'.__('First image of your post content','wp-seopress').'</li>
             <li>'.__('Global Twitter:image set in SEO > Social > Twitter Card','wp-seopress').'</li>
         </ol>';
-    }    
-
-    public function print_section_info_google_analytics_enable()
-    {
-        print __('<p>Link your Google Analytics to your website.</p>', 'wp-seopress');
     }
 
-    public function print_section_info_google_analytics_features()
-    {
-        print __('<p>Configure your Google Analytics tracking code.</p>', 'wp-seopress');
-    }    
-    
-    public function print_section_info_google_analytics_events()
-    {
-        print __('<p>Track events in Google Analytics.</p>', 'wp-seopress');
-    }    
+    public function print_section_info_google_analytics_enable() {
+        print __('<p>Link your Google Analytics to your website. The tracking code will be automatically added to your site.</p>', 'wp-seopress');
+    }
 
-    public function print_section_info_google_analytics_custom_dimensions()
-    {
+    public function print_section_info_google_analytics_gdpr() {
+        print __('<p>Manage user consent for GDPR and customize your cookie bar easily.</p>', 'wp-seopress');
+    }
+
+    public function print_section_info_google_analytics_features() {
+        print __('<p>Configure your Google Analytics tracking code.</p>', 'wp-seopress');
+    }
+
+    public function print_section_info_google_analytics_events() {
+        print __('<p>Track events in Google Analytics.</p>', 'wp-seopress');
+    }
+
+    public function print_section_info_google_analytics_custom_dimensions() {
         print __('<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom metrics in SEOPress are like the default dimensions and metrics in your Analytics account, except you create them yourself.<br> Use them to collect and analyze data that Analytics doesn\'t automatically track.<br> Please note that you also have to setup your custom dimensions in your Google Analytics account. More info by clicking on the help icon.', 'wp-seopress');
         
         if (function_exists('seopress_get_locale')) {
@@ -3774,20 +3869,17 @@ class seopress_options
         echo '<a class="seopress-doc" href="'.$seopress_docs_link['support']['analytics']['custom_dimensions'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to create custom dimensions in Google Analytics - new window','wp-seopress').'</span></a></p>';
     }
 
-    public function print_section_info_advanced_advanced()
-    {
+    public function print_section_info_advanced_advanced() {
         print __('<p>Advanced SEO options.</p>', 'wp-seopress');
     }
 
-    public function print_section_info_advanced_appearance()
-    {
+    public function print_section_info_advanced_appearance() {
         print __('<p>Customize SEOPress to fit your needs.</p>', 'wp-seopress');
-    } 
+    }
 
-    public function print_section_info_advanced_security()
-    {
+    public function print_section_info_advanced_security() {
         print __('<p>Manage security.</p>', 'wp-seopress');
-    }    
+    }
 
     /** 
      * Get the settings option array and print one of its values
@@ -5435,9 +5527,9 @@ class seopress_options
 
     public function seopress_google_analytics_half_disable_callback()
     {
-        $options = get_option( 'seopress_google_analytics_option_name' );  
+        $options = get_option( 'seopress_google_analytics_option_name' );
         
-        $check = isset($options['seopress_google_analytics_half_disable']);      
+        $check = isset($options['seopress_google_analytics_half_disable']);
         
         echo '<input id="seopress_google_analytics_half_disable" name="seopress_google_analytics_option_name[seopress_google_analytics_half_disable]" type="checkbox"';
         if ('1' == $check) echo 'checked="yes"'; 
@@ -5482,7 +5574,137 @@ class seopress_options
         printf(
         '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_opt_out_msg_ok]" placeholder="'.esc_html__('Accept','wp-seopress').'" aria-label="'.__('Change the button value','wp-seopress').'" value="%s"/>',
         esc_html( $check )
-        );        
+        );
+    }
+
+    public function seopress_google_analytics_cb_pos_callback()
+    {
+        $options = get_option( 'seopress_google_analytics_option_name' );
+
+        $selected = isset($options['seopress_google_analytics_cb_pos']) ? $options['seopress_google_analytics_cb_pos'] : NULL;
+
+        echo '<select id="seopress_google_analytics_cb_pos" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_pos]">';
+            echo ' <option '; 
+                if ('bottom' == $selected) echo 'selected="selected"'; 
+                echo ' value="bottom">'. __("Bottom (default)","wp-seopress") .'</option>';
+            echo ' <option ';
+                if ('top' == $selected) echo 'selected="selected"'; 
+                echo ' value="top">'. __("Top","wp-seopress") .'</option>';
+        echo '</select>';
+
+        if (isset($this->options['seopress_google_analytics_cb_pos'])) {
+            esc_attr( $this->options['seopress_google_analytics_cb_pos']);
+        }
+    }
+
+    public function seopress_google_analytics_cb_bg_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_bg']) ? $this->options['seopress_google_analytics_cb_bg'] : NULL;
+
+        printf(
+        '<input type="text" data-default-color="#F1F1F1" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_bg]" aria-label="'.__('Change the cookie bar background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_txt_col_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_txt_col']) ? $this->options['seopress_google_analytics_cb_txt_col'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_txt_col]" aria-label="'.__('Change the cookie bar text color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_lk_col_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_lk_col']) ? $this->options['seopress_google_analytics_cb_lk_col'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_lk_col]" aria-label="'.__('Change the cookie bar link color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_btn_bg_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_btn_bg']) ? $this->options['seopress_google_analytics_cb_btn_bg'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg]" aria-label="'.__('Change the cookie bar button background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_btn_bg_hov_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_btn_bg_hov']) ? $this->options['seopress_google_analytics_cb_btn_bg_hov'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg_hov]" aria-label="'.__('Change the cookie bar button hover background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_btn_col_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_btn_col']) ? $this->options['seopress_google_analytics_cb_btn_col'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_col]" aria-label="'.__('Change the cookie bar button color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_btn_col_hov_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_btn_col_hov']) ? $this->options['seopress_google_analytics_cb_btn_col_hov'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_col_hov]" aria-label="'.__('Change the cookie bar button hover color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_btn_sec_bg_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_btn_sec_bg']) ? $this->options['seopress_google_analytics_cb_btn_sec_bg'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg]" aria-label="'.__('Change the cookie bar secondary button background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_btn_sec_col_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_btn_sec_col']) ? $this->options['seopress_google_analytics_cb_btn_sec_col'] : NULL;
+
+        printf(
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_col]" aria-label="'.__('Change the cookie bar secondary button hover background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_btn_sec_bg_hov_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_btn_sec_bg_hov']) ? $this->options['seopress_google_analytics_cb_btn_sec_bg_hov'] : NULL;
+
+        printf(
+        '<input type="text" data-default-color="#222222" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg_hov]" aria-label="'.__('Change the cookie bar secondary button color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
+    }
+
+    public function seopress_google_analytics_cb_btn_sec_col_hov_callback()
+    {
+        $check = isset($this->options['seopress_google_analytics_cb_btn_sec_col_hov']) ? $this->options['seopress_google_analytics_cb_btn_sec_col_hov'] : NULL;
+
+        printf(
+        '<input type="text" data-default-color="#FFFFFF" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_col_hov]" aria-label="'.__('Change the cookie bar secondary button hover color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        esc_html( $check )
+        );
     }
 
     public function seopress_google_analytics_roles_callback()

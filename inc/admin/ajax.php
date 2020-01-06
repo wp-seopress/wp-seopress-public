@@ -135,44 +135,85 @@ function seopress_do_real_preview() {
 
                 //OG:title
                 $og_title = $xpath->query('//meta[@property="og:title"]/@content');
-
-                foreach ($og_title as $key=>$mogtitle) {
-                    $data['og_title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogtitle->nodeValue)));
+                
+                if (!empty($og_title)) {
+                    $data['og_title']['count'] = count($og_title);
+                    foreach ($og_title as $key=>$mogtitle) {
+                        $data['og_title']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogtitle->nodeValue)));
+                    }
                 }
 
                 //OG:description
                 $og_desc = $xpath->query('//meta[@property="og:description"]/@content');
 
-                foreach ($og_desc as $key=>$mogdesc) {
-                    $data['og_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogdesc->nodeValue)));
+                if (!empty($og_desc)) {
+                    $data['og_desc']['count'] = count($og_desc);
+                    foreach ($og_desc as $key=>$mog_desc) {
+                        $data['og_desc']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_desc->nodeValue)));
+                    }
                 }
 
                 //OG:image
                 $og_img = $xpath->query('//meta[@property="og:image"]/@content');
 
-                foreach ($og_img as $key=>$mogimg) {
-                    $data['og_img'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogimg->nodeValue)));
+                if (!empty($og_img)) {
+                    $data['og_img']['count'] = count($og_img);
+                    foreach ($og_img as $key=>$mog_img) {
+                        $data['og_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_img->nodeValue)));
+                    }
+                }
+
+                //OG:url
+                $og_url = $xpath->query('//meta[@property="og:url"]/@content');
+
+                if (!empty($og_url)) {
+                    $data['og_url']['count'] = count($og_url);
+                    foreach ($og_url as $key=>$mog_url) {
+                        $url = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_url->nodeValue)));
+                        $data['og_url']['values'][] = $url;
+                        $url = wp_parse_url($url);
+                        $data['og_url']['host'] = $url['host'];
+                    }
+                }
+
+                //OG:site_name
+                $og_site_name = $xpath->query('//meta[@property="og:site_name"]/@content');
+
+                if (!empty($og_site_name)) {
+                    $data['og_site_name']['count'] = count($og_site_name);
+                    foreach ($og_site_name as $key=>$mog_site_name) {
+                        $data['og_site_name']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_site_name->nodeValue)));
+                    }
                 }
 
                 //Twitter:title
                 $tw_title = $xpath->query('//meta[@name="twitter:title"]/@content');
 
-                foreach ($tw_title as $key=>$mtwtitle) {
-                    $data['tw_title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtwtitle->nodeValue)));
+                if (!empty($tw_title)) {
+                    $data['tw_title']['count'] = count($tw_title);
+                    foreach ($tw_title as $key=>$mtw_title) {
+                        $data['tw_title']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_title->nodeValue)));
+                    }
                 }
 
                 //Twitter:description
                 $tw_desc = $xpath->query('//meta[@name="twitter:description"]/@content');
 
-                foreach ($tw_desc as $key=>$mtwdesc) {
-                    $data['tw_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtwdesc->nodeValue)));
+                if (!empty($tw_desc)) {
+                    $data['tw_desc']['count'] = count($tw_desc);
+                    foreach ($tw_desc as $key=>$mtw_desc) {
+                        $data['tw_desc']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_desc->nodeValue)));
+                    }
                 }
 
                 //Twitter:image
                 $tw_img = $xpath->query('//meta[@name="twitter:image"]/@content');
 
-                foreach ($tw_img as $key=>$mtwimg) {
-                    $data['tw_img'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtwimg->nodeValue)));
+                if (!empty($tw_img)) {
+                    $data['tw_img']['count'] = count($tw_img);
+                    foreach ($tw_img as $key=>$mtw_img) {
+                        $data['tw_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_img->nodeValue)));
+                    }
                 }
 
                 //Canonical
@@ -182,8 +223,8 @@ function seopress_do_real_preview() {
                     $data['canonical'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mcanonical->nodeValue)));
                 }
 
-                //h1
                 if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
+                    //h1
                     $h1 = $xpath->query("//h1");
                     if (!empty($h1)) {
                         $data['h1']['nomatches']['count'] = count($h1);
@@ -193,6 +234,7 @@ function seopress_do_real_preview() {
                                     $data['h1']['matches'][$kw][] = $m[0];
                                 }
                             }
+                            $data['h1']['values'][] = esc_attr($heading1->nodeValue);
                         }
                     }
 
@@ -233,7 +275,7 @@ function seopress_do_real_preview() {
 
                     if (!empty($kw_slug)) {
                         foreach ($seopress_analysis_target_kw as $kw) {
-                            if (in_array($kw, $kw_slug)) {
+                            if (in_array(strtolower($kw), $kw_slug)) {
                                 $data['kws_permalink']['matches'][$kw][] = $kw;
                             }
                         }
@@ -1019,6 +1061,8 @@ function seopress_metadata_export() {
         $download_url = '';
 
         $settings["id"] = array();
+        $settings["post_title"] = array();
+        $settings["url"] = array();
         $settings["meta_title"] = array();
         $settings["meta_desc"] = array();
         $settings["fb_title"] = array();
@@ -1066,6 +1110,10 @@ function seopress_metadata_export() {
                 // The Loop
                 foreach ($meta_query as $post) {
                     array_push($settings["id"], $post->ID);
+                    
+                    array_push($settings["post_title"], $post->post_title);
+                    
+                    array_push($settings["url"], get_permalink($post));
 
                     array_push($settings["meta_title"], get_post_meta( $post->ID, '_seopress_titles_title', true ));
                     
@@ -1099,10 +1147,12 @@ function seopress_metadata_export() {
 
                     array_push($settings["target_kw"], get_post_meta( $post->ID, '_seopress_analysis_target_kw', true ));
 
-                    $csv[] = array_merge($settings["id"],$settings["meta_title"],$settings["meta_desc"],$settings["fb_title"],$settings["fb_desc"],$settings["fb_img"],$settings["tw_title"],$settings["tw_desc"],$settings["tw_img"],$settings["noindex"],$settings["nofollow"],$settings["noodp"],$settings["noimageindex"],$settings["noarchive"],$settings["nosnippet"],$settings["canonical_url"],$settings["target_kw"]);
+                    $csv[] = array_merge($settings["id"],$settings["post_title"],$settings["url"],$settings["meta_title"],$settings["meta_desc"],$settings["fb_title"],$settings["fb_desc"],$settings["fb_img"],$settings["tw_title"],$settings["tw_desc"],$settings["tw_img"],$settings["noindex"],$settings["nofollow"],$settings["noodp"],$settings["noimageindex"],$settings["noarchive"],$settings["nosnippet"],$settings["canonical_url"],$settings["target_kw"]);
 
                     //Clean arrays
                     $settings["id"] = array();
+                    $settings["post_title"] = array();
+                    $settings["url"] = array();
                     $settings["meta_title"] = array();
                     $settings["meta_desc"] = array();
                     $settings["fb_title"] = array();

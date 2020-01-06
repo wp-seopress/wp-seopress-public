@@ -14,6 +14,7 @@ $the_author_meta ='';
 $sep = '';
 $seopress_excerpt ='';
 $seopress_content ='';
+$post_thumbnail_url ='';
 $post_category ='';
 $post_tag ='';
 $get_search_query ='';
@@ -74,7 +75,11 @@ if (is_author() && NULL !== get_queried_object()) {
     $author = get_queried_object();
     $the_author_meta = $author->display_name;
     $author_bio = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description', $author->ID))))));
+}
 
+if (is_singular() && isset($post)) {
+    $post_thumbnail_url = get_the_post_thumbnail_url($post, 'full');
+    $post_thumbnail_url = apply_filters('seopress_titles_post_thumbnail_url', $post_thumbnail_url);
 }
 
 if (is_single() && has_category()) {
@@ -178,6 +183,7 @@ $seopress_titles_template_variables_array = array(
     '%%post_excerpt%%',
     '%%excerpt%%',
     '%%post_content%%',
+    '%%post_thumbnail_url%%',
     '%%post_date%%',
     '%%date%%',
     '%%post_modified_date%%',
@@ -207,6 +213,7 @@ $seopress_titles_template_variables_array = array(
     '%%wc_sku%%',
     '%%currentday%%',
     '%%currentmonth%%',
+    '%%currentmonth_short%%',
     '%%currentyear%%',
     '%%currentdate%%',
     '%%currenttime%%',
@@ -226,6 +233,7 @@ $seopress_titles_template_replace_array = array(
     $seopress_get_the_excerpt,
     $seopress_get_the_excerpt,
     $seopress_content,
+    $post_thumbnail_url,
     get_the_date(),
     get_the_date(),
     get_the_modified_date(),
@@ -255,6 +263,7 @@ $seopress_titles_template_replace_array = array(
     $woo_single_sku,
     date_i18n('j'),
     date_i18n('F'),
+    date_i18n('M'),
     date('Y'),
     date_i18n( get_option( 'date_format' )),
     current_time(get_option( 'time_format' )),
@@ -274,7 +283,8 @@ $variables = array(
 	'sep' => $sep,
 	'seopress_excerpt' => $seopress_excerpt,
 	'post_category' => $post_category,
-	'post_tag' => $post_tag,
+    'post_tag' => $post_tag,
+    'post_thumbnail_url' => $post_thumbnail_url,
     'get_search_query' => $get_search_query,
 	'woo_single_cat_html' => $woo_single_cat_html,
 	'woo_single_tag_html' => $woo_single_tag_html,

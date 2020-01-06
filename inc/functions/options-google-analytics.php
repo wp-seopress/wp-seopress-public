@@ -17,6 +17,138 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			}
 		}
 
+		function seopress_google_analytics_cb_bg_option() {
+			$seopress_google_analytics_cb_bg_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_bg_option ) ) {
+				foreach ($seopress_google_analytics_cb_bg_option as $key => $seopress_google_analytics_cb_bg_value)
+					$options[$key] = $seopress_google_analytics_cb_bg_value;
+				 if (isset($seopress_google_analytics_cb_bg_option['seopress_google_analytics_cb_bg'])) {
+				 	return $seopress_google_analytics_cb_bg_option['seopress_google_analytics_cb_bg'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_txt_col_option() {
+			$seopress_google_analytics_cb_txt_col_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_txt_col_option ) ) {
+				foreach ($seopress_google_analytics_cb_txt_col_option as $key => $seopress_google_analytics_cb_txt_col_value)
+					$options[$key] = $seopress_google_analytics_cb_txt_col_value;
+				 if (isset($seopress_google_analytics_cb_txt_col_option['seopress_google_analytics_cb_txt_col'])) {
+				 	return $seopress_google_analytics_cb_txt_col_option['seopress_google_analytics_cb_txt_col'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_lk_col_option() {
+			$seopress_google_analytics_cb_lk_col_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_lk_col_option ) ) {
+				foreach ($seopress_google_analytics_cb_lk_col_option as $key => $seopress_google_analytics_cb_lk_col_value)
+					$options[$key] = $seopress_google_analytics_cb_lk_col_value;
+				 if (isset($seopress_google_analytics_cb_lk_col_option['seopress_google_analytics_cb_lk_col'])) {
+				 	return $seopress_google_analytics_cb_lk_col_option['seopress_google_analytics_cb_lk_col'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_btn_bg_option() {
+			$seopress_google_analytics_cb_btn_bg_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_btn_bg_option ) ) {
+				foreach ($seopress_google_analytics_cb_btn_bg_option as $key => $seopress_google_analytics_cb_btn_bg_value)
+					$options[$key] = $seopress_google_analytics_cb_btn_bg_value;
+				 if (isset($seopress_google_analytics_cb_btn_bg_option['seopress_google_analytics_cb_btn_bg'])) {
+				 	return $seopress_google_analytics_cb_btn_bg_option['seopress_google_analytics_cb_btn_bg'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_btn_bg_hov_option() {
+			$seopress_google_analytics_cb_btn_bg_hov_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_btn_bg_hov_option ) ) {
+				foreach ($seopress_google_analytics_cb_btn_bg_hov_option as $key => $seopress_google_analytics_cb_btn_bg_hov_value)
+					$options[$key] = $seopress_google_analytics_cb_btn_bg_hov_value;
+				 if (isset($seopress_google_analytics_cb_btn_bg_hov_option['seopress_google_analytics_cb_btn_bg_hov'])) {
+				 	return $seopress_google_analytics_cb_btn_bg_hov_option['seopress_google_analytics_cb_btn_bg_hov'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_btn_col_option() {
+			$seopress_google_analytics_cb_btn_col_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_btn_col_option ) ) {
+				foreach ($seopress_google_analytics_cb_btn_col_option as $key => $seopress_google_analytics_cb_btn_col_value)
+					$options[$key] = $seopress_google_analytics_cb_btn_col_value;
+				 if (isset($seopress_google_analytics_cb_btn_col_option['seopress_google_analytics_cb_btn_col'])) {
+				 	return $seopress_google_analytics_cb_btn_col_option['seopress_google_analytics_cb_btn_col'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_btn_col_hov_option() {
+			$seopress_google_analytics_cb_btn_col_hov_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_btn_col_hov_option ) ) {
+				foreach ($seopress_google_analytics_cb_btn_col_hov_option as $key => $seopress_google_analytics_cb_btn_col_hov_value)
+					$options[$key] = $seopress_google_analytics_cb_btn_col_hov_value;
+				 if (isset($seopress_google_analytics_cb_btn_col_hov_option['seopress_google_analytics_cb_btn_col_hov'])) {
+				 	return $seopress_google_analytics_cb_btn_col_hov_option['seopress_google_analytics_cb_btn_col_hov'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_btn_sec_bg_option() {
+			$seopress_google_analytics_cb_btn_sec_bg_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_btn_sec_bg_option ) ) {
+				foreach ($seopress_google_analytics_cb_btn_sec_bg_option as $key => $seopress_google_analytics_cb_btn_sec_bg_value)
+					$options[$key] = $seopress_google_analytics_cb_btn_sec_bg_value;
+				 if (isset($seopress_google_analytics_cb_btn_sec_bg_option['seopress_google_analytics_cb_btn_sec_bg'])) {
+				 	return $seopress_google_analytics_cb_btn_sec_bg_option['seopress_google_analytics_cb_btn_sec_bg'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_btn_sec_col_option() {
+			$seopress_google_analytics_cb_btn_sec_col_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_btn_sec_col_option ) ) {
+				foreach ($seopress_google_analytics_cb_btn_sec_col_option as $key => $seopress_google_analytics_cb_btn_sec_col_value)
+					$options[$key] = $seopress_google_analytics_cb_btn_sec_col_value;
+				 if (isset($seopress_google_analytics_cb_btn_sec_col_option['seopress_google_analytics_cb_btn_sec_col'])) {
+				 	return $seopress_google_analytics_cb_btn_sec_col_option['seopress_google_analytics_cb_btn_sec_col'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_btn_sec_bg_hov_option() {
+			$seopress_google_analytics_cb_btn_sec_bg_hov_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_btn_sec_bg_hov_option ) ) {
+				foreach ($seopress_google_analytics_cb_btn_sec_bg_hov_option as $key => $seopress_google_analytics_cb_btn_sec_bg_hov_value)
+					$options[$key] = $seopress_google_analytics_cb_btn_sec_bg_hov_value;
+				 if (isset($seopress_google_analytics_cb_btn_sec_bg_hov_option['seopress_google_analytics_cb_btn_sec_bg_hov'])) {
+				 	return $seopress_google_analytics_cb_btn_sec_bg_hov_option['seopress_google_analytics_cb_btn_sec_bg_hov'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_btn_sec_col_hov_option() {
+			$seopress_google_analytics_cb_btn_sec_col_hov_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_btn_sec_col_hov_option ) ) {
+				foreach ($seopress_google_analytics_cb_btn_sec_col_hov_option as $key => $seopress_google_analytics_cb_btn_sec_col_hov_value)
+					$options[$key] = $seopress_google_analytics_cb_btn_sec_col_hov_value;
+				 if (isset($seopress_google_analytics_cb_btn_sec_col_hov_option['seopress_google_analytics_cb_btn_sec_col_hov'])) {
+				 	return $seopress_google_analytics_cb_btn_sec_col_hov_option['seopress_google_analytics_cb_btn_sec_col_hov'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_pos_option() {
+			$seopress_google_analytics_cb_pos_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_pos_option ) ) {
+				foreach ($seopress_google_analytics_cb_pos_option as $key => $seopress_google_analytics_cb_pos_value)
+					$options[$key] = $seopress_google_analytics_cb_pos_value;
+				 if (isset($seopress_google_analytics_cb_pos_option['seopress_google_analytics_cb_pos'])) {
+				 	return $seopress_google_analytics_cb_pos_option['seopress_google_analytics_cb_pos'];
+				 }
+			}
+		}
+
 		function seopress_cookies_user_consent_html() {
 			if (seopress_google_analytics_opt_out_msg_option() !='') {
 				$msg = seopress_google_analytics_opt_out_msg_option();
@@ -37,9 +169,99 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$consent_btn = seopress_google_analytics_opt_out_msg_ok_option();
 			} else {
 				$consent_btn = __('Accept','wp-seopress');
-			} 
-		    $user_msg = '<style>.seopress-user-consent {position: fixed;z-index: 8000;width: 100%;bottom: 0;background: #F1F1F1;padding: 10px;left: 0;text-align: center;}.seopress-user-consent p {margin: 0;font-size: 0.8em;justify-content: center;}.seopress-user-consent button {vertical-align: middle;margin: 0 10px;padding: 5px 20px;font-size: 14px;}#seopress-user-consent-close{margin: 0 0 0 20px;position: relative;line-height: 26px;background: none;font-weight: bold;border: 1px solid #ccc;padding: 0 10px;color:inherit;}#seopress-user-consent-close:hover{background:#222;cursor:pointer;color:#fff}.seopress-user-consent-hide{display:none;}</style>
-		    <div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" tabindex="11">'.$consent_btn.'</button><button id="seopress-user-consent-close" tabindex="12">'.__('X','wp-seopress').'</button></p></div>';
+			}
+
+			$styles = '<style>.seopress-user-consent {position: fixed;z-index: 8000;width: 100%;padding: 10px;left: 0;text-align: center;';
+			
+			//Position
+			if (seopress_google_analytics_cb_pos_option() ==='top') {
+				$styles .= 'top:0;';
+			} else {
+				$styles .= 'bottom:0;';
+			}
+
+			//Background color
+			if (seopress_google_analytics_cb_bg_option() !='') {
+				$styles .= 'background:'.seopress_google_analytics_cb_bg_option().';';
+			} else {
+				$styles .= 'background:#F1F1F1;';
+			}
+
+			$styles .='}.seopress-user-consent p {margin: 0;font-size: 0.8em;justify-content: center;';
+
+			//Text color
+			if (seopress_google_analytics_cb_txt_col_option() !='') {
+				$styles .= 'color:'.seopress_google_analytics_cb_txt_col_option().';';
+			}
+
+			$styles .='}.seopress-user-consent button {vertical-align: middle;margin: 0 10px;padding: 5px 20px;font-size: 14px;';
+
+			//Btn background color
+			if (seopress_google_analytics_cb_btn_bg_option() !='') {
+				$styles .= 'background:'.seopress_google_analytics_cb_btn_bg_option().';';
+			}
+			
+			//Btn text color
+			if (seopress_google_analytics_cb_btn_col_option() !='') {
+				$styles .= 'color:'.seopress_google_analytics_cb_btn_col_option().';';
+			}
+			
+			$styles .='}.seopress-user-consent button:hover{';
+			
+			//Background hover color
+			if (seopress_google_analytics_cb_btn_bg_hov_option() !='') {
+				$styles .= 'background:'.seopress_google_analytics_cb_btn_bg_hov_option().';';
+			}
+
+			//Text hover color
+			if (seopress_google_analytics_cb_btn_col_hov_option() !='') {
+				$styles .= 'color:'.seopress_google_analytics_cb_btn_col_hov_option().';';
+			}
+
+			$styles .='}#seopress-user-consent-close{margin: 0 0 0 20px;position: relative;line-height: 26px;font-weight: bold;border: 1px solid #ccc;padding: 0 10px;';
+
+			//Background secondary button
+			if (seopress_google_analytics_cb_btn_sec_bg_option() !='') {
+				$styles .= 'background:'.seopress_google_analytics_cb_btn_sec_bg_option().';';
+			} else {
+				$styles .= 'background:none;';
+			}
+
+			//Color secondary button
+			if (seopress_google_analytics_cb_btn_sec_col_option() !='') {
+				$styles .= 'color:'.seopress_google_analytics_cb_btn_sec_col_option().';';
+			} else {
+				$styles .= 'color:inherit;';
+			}
+
+			$styles .='}#seopress-user-consent-close:hover{cursor:pointer;';
+
+			//Background secondary button hover
+			if (seopress_google_analytics_cb_btn_sec_bg_hov_option() !='') {
+				$styles .= 'background:'.seopress_google_analytics_cb_btn_sec_bg_hov_option().';';
+			} else {
+				$styles .= 'background:#222;';
+			}
+
+			//Color secondary button hover
+			if (seopress_google_analytics_cb_btn_sec_col_hov_option() !='') {
+				$styles .= 'color:'.seopress_google_analytics_cb_btn_sec_col_hov_option().';';
+			} else {
+				$styles .= 'color:#fff;';
+			}
+
+			$styles .='}';
+
+			//Link color
+			if (seopress_google_analytics_cb_lk_col_option() !='') {
+				$styles .= '.seopress-user-consent a{';
+				$styles .= 'color:'.seopress_google_analytics_cb_lk_col_option();
+				$styles .= '}';
+			}
+
+			$styles .='.seopress-user-consent-hide{display:none;}</style>';
+
+			$user_msg = $styles.'<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" tabindex="11">'.$consent_btn.'</button><button id="seopress-user-consent-close" tabindex="12">'.__('X','wp-seopress').'</button></p></div>';
 
 		    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn);
 
