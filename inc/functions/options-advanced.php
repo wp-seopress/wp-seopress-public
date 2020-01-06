@@ -38,6 +38,25 @@ if (seopress_advanced_advanced_wp_generator_option() =='1') {
 	remove_action('wp_head', 'wp_generator');
 }
 
+//Remove hentry post class
+function seopress_advanced_advanced_hentry_option() {
+	$seopress_advanced_advanced_hentry_option = get_option("seopress_advanced_option_name");
+	if ( ! empty ( $seopress_advanced_advanced_hentry_option ) ) {
+		foreach ($seopress_advanced_advanced_hentry_option as $key => $seopress_advanced_advanced_hentry_value)
+			$options[$key] = $seopress_advanced_advanced_hentry_value;
+		 if (isset($seopress_advanced_advanced_hentry_option['seopress_advanced_advanced_hentry'])) {
+		 	return $seopress_advanced_advanced_hentry_option['seopress_advanced_advanced_hentry'];
+		 }
+	}
+}
+if (seopress_advanced_advanced_hentry_option() =='1') {
+	function seopress_advanced_advanced_hentry_hook( $classes ) {
+		$classes = array_diff( $classes, array( 'hentry' ) );
+		return $classes;
+	}
+	add_filter( 'post_class', 'seopress_advanced_advanced_hentry_hook' );
+}
+
 //WordPress Shortlink
 function seopress_advanced_advanced_wp_shortlink_option() {
 	$seopress_advanced_advanced_wp_shortlink_option = get_option("seopress_advanced_option_name");

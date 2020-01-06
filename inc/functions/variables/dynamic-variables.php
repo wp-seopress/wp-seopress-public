@@ -4,10 +4,12 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //Init
 global $post;
 global $term;
+global $wp_query;
 
 $seopress_titles_title_template ='';
 $seopress_titles_description_template ='';
 $seopress_paged ='1';
+$seopress_context_paged = '';
 $the_author_meta ='';
 $sep = '';
 $seopress_excerpt ='';
@@ -51,6 +53,16 @@ if (get_query_var('paged') >'1') {
     $seopress_paged = apply_filters('seopress_paged', $seopress_paged);
 } else {
     $seopress_paged = '';
+}
+
+if (isset($wp_query->max_num_pages)) {
+    if (get_query_var('paged') > 1) {
+        $current_page = get_query_var('paged');
+    } else {
+        $current_page = 1;
+    }
+    $seopress_context_paged = sprintf(__('Page %d of %2$d','wp-seopress'),$current_page, $wp_query->max_num_pages);
+    $seopress_context_paged = apply_filters('seopress_context_paged', $seopress_context_paged);
 }
 
 if (is_singular() && isset($post->post_author)){
@@ -180,6 +192,7 @@ $seopress_titles_template_variables_array = array(
     '%%term_description%%',
     '%%search_keywords%%',
     '%%current_pagination%%',
+    '%%page%%',
     '%%cpt_plural%%',
     '%%archive_title%%',
     '%%archive_date%%',
@@ -227,6 +240,7 @@ $seopress_titles_template_replace_array = array(
     wp_trim_words(stripslashes_deep(wp_filter_nohtml_kses(term_description())),$seopress_excerpt_length),
     $get_search_query,
     $seopress_paged,
+    $seopress_context_paged,
     post_type_archive_title('', false),
     get_the_archive_title(),
     get_query_var('monthnum').' - '.get_query_var('year'),
@@ -255,6 +269,7 @@ $variables = array(
 	'seopress_titles_title_template' => $seopress_titles_title_template,
 	'seopress_titles_description_template' => $seopress_titles_description_template,
 	'seopress_paged' => $seopress_paged,
+	'seopress_context_paged' => $seopress_context_paged,
 	'the_author_meta' => $the_author_meta,
 	'sep' => $sep,
 	'seopress_excerpt' => $seopress_excerpt,
@@ -272,5 +287,7 @@ $variables = array(
     'seopress_titles_template_replace_array' => $seopress_titles_template_replace_array,
     'seopress_excerpt_length' => $seopress_excerpt_length,
 );
+
+$variables = apply_filters('seopress_titles_template_variables',$variables);
 
 return $variables;

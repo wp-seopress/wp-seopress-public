@@ -338,13 +338,47 @@ if (seopress_get_toggle_xml_sitemap_option() =='1') {
 	}	
 }
 if (seopress_get_toggle_advanced_option() =='1') {
+	//Remove comment author url
+	function seopress_advanced_advanced_comments_author_url_option() {
+		$seopress_advanced_advanced_comments_author_url_option = get_option("seopress_advanced_option_name");
+		if ( ! empty ( $seopress_advanced_advanced_comments_author_url_option ) ) {
+			foreach ($seopress_advanced_advanced_comments_author_url_option as $key => $seopress_advanced_advanced_comments_author_url_value)
+				$options[$key] = $seopress_advanced_advanced_comments_author_url_value;
+			if (isset($seopress_advanced_advanced_comments_author_url_option['seopress_advanced_advanced_comments_author_url'])) {
+				return $seopress_advanced_advanced_comments_author_url_option['seopress_advanced_advanced_comments_author_url'];
+			}
+		}
+	}
+	if (seopress_advanced_advanced_comments_author_url_option() =='1') {
+		add_filter( 'get_comment_author_url', '__return_empty_string' );
+	}
+
+	//Remove website field in comments
+	function seopress_advanced_advanced_comments_website_option() {
+		$seopress_advanced_advanced_comments_website_option = get_option("seopress_advanced_option_name");
+		if ( ! empty ( $seopress_advanced_advanced_comments_website_option ) ) {
+			foreach ($seopress_advanced_advanced_comments_website_option as $key => $seopress_advanced_advanced_comments_website_value)
+				$options[$key] = $seopress_advanced_advanced_comments_website_value;
+			if (isset($seopress_advanced_advanced_comments_website_option['seopress_advanced_advanced_comments_website'])) {
+				return $seopress_advanced_advanced_comments_website_option['seopress_advanced_advanced_comments_website'];
+			}
+		}
+	}
+	if (seopress_advanced_advanced_comments_website_option() =='1') {
+		function seopress_advanced_advanced_comments_website_hook($fields) { 
+			unset($fields['url']);
+			return $fields;
+		}
+		add_filter('comment_form_default_fields','seopress_advanced_advanced_comments_website_hook', 40);
+	}
+
 	add_action('wp_head', 'seopress_load_advanced_options', 0);
 	function seopress_load_advanced_options() {
 		if (!is_admin()){	
 		    require_once ( dirname( __FILE__ ) . '/options-advanced.php'); //Advanced
 		}
 	}
-	add_action('init', 'seopress_load_advanced_admin_options', 10);
+	add_action('init', 'seopress_load_advanced_admin_options', 11);
 	function seopress_load_advanced_admin_options() {
 	    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
 		//Admin bar
@@ -375,20 +409,22 @@ if (seopress_get_toggle_advanced_option() =='1') {
 		}
 		$post			= get_post( $post );
 		
-		$_seopress_robots_primary_cat = get_post_meta($post->ID,'_seopress_robots_primary_cat',true);
-		
-		if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {
-			if ($post->post_type !=NULL && $post->post_type =='post') {
-				$primary_cat = get_category($_seopress_robots_primary_cat);
-			} elseif ($post->post_type !=NULL && $post->post_type =='product') {
-				$primary_cat = get_term($_seopress_robots_primary_cat, 'product_cat');
+		if ($post) {
+			$_seopress_robots_primary_cat = get_post_meta($post->ID,'_seopress_robots_primary_cat',true);
+			
+			if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {
+				if ($post->post_type !=NULL && $post->post_type =='post') {
+					$primary_cat = get_category($_seopress_robots_primary_cat);
+				} elseif ($post->post_type !=NULL && $post->post_type =='product') {
+					$primary_cat = get_term($_seopress_robots_primary_cat, 'product_cat');
+				}
+				if (!is_wp_error($primary_cat) && $primary_cat !=NULL) {
+					return $primary_cat;
+				}
+			} else {
+				//no primary cat
+				return $cats_0;
 			}
-			if (!is_wp_error($primary_cat) && $primary_cat !=NULL) {
-				return $primary_cat;
-			}
-		} else {
-			//no primary cat
-			return $cats_0;
 		}
 	}
 	add_filter( 'post_link_category', 'seopress_titles_primary_cat_hook', 10, 3 );
@@ -455,7 +491,7 @@ if (seopress_get_toggle_advanced_option() =='1') {
 
 			return preg_replace( '`' . preg_quote( $category_base, '`' ) . '`u', '', $link, 1 );
 		}
-		add_filter( 'category_link', 'seopress_remove_category_base' );
+		add_filter( 'term_link', 'seopress_remove_category_base' );
 
 		add_action('template_redirect', 'seopress_category_redirect', 1);
 		function seopress_category_redirect(){

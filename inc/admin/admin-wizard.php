@@ -730,7 +730,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 					</a>
 				</p>
 			</div>
-		<?php } else { ?>
+		<?php } elseif (!is_plugin_active('wp-seopress-pro/seopress-pro.php') && !is_multisite()) { ?>
 			<div class="seopress-message seopress-newsletter">
 				<h3 class="seopress-setup-actions step">
 					<?php esc_html_e( "Go PRO with SEOPress PRO!","wp-seopress"); ?>

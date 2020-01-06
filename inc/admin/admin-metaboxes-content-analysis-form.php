@@ -83,7 +83,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
             </script>
         </div>";
 }
-        
+
         echo '<div id="seopress-analysis-tabs">';
                 echo '<ul class="wrap-analysis-results">
                     <li><a href="#seopress-analysis-tabs-1"><span class="dashicons dashicons-admin-settings"></span>'. __( 'Optimizations', 'wp-seopress' ) .'</a></li>
@@ -129,6 +129,23 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                         echo '</ul>';
 
                         echo '<p class="description">'.__('Learn more about <a href="https://www.youtube.com/watch?v=Rk4qgQdp2UA" target="_blank">keywords stuffing</a>.','wp-seopress').'</p>';
+                    }
+
+                    //Keywords in permalink
+                    echo '<h3>'.__('Keywords in permalink','wp-seopress').'</h3>';
+
+                    if (!empty($seopress_analysis_data['0']['kws_permalink']['matches'])) {
+                        echo '<p><span class="dashicons dashicons-yes"></span>'.__('Cool, one of your target keyword is used in your permalink.','wp-seopress').'</p>';
+
+                        $target_kws_permalink = $seopress_analysis_data['0']['kws_permalink']['matches'];
+                        
+                        echo '<ul>';
+                        foreach ($target_kws_permalink as $key => $value) {
+                            echo '<li><span class="dashicons dashicons-minus"></span>'.$key.'</li>';
+                        }
+                        echo '</ul>';
+                    } else {
+                        echo '<p><span class="dashicons dashicons-no-alt"></span>'.__('You should add one of your target keyword in your permalink.','wp-seopress').'</p>';
                     }
 
                     //H1
@@ -256,7 +273,7 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
                 <div id="seopress-analysis-tabs-2">
                     <h3>'.__('Robots','wp-seopress').'</h3>';
 
-                    //Robots              
+                    //Robots
                     if (!empty($seopress_analysis_data['0']['meta_robots'])) {
 
                         $meta_robots = $seopress_analysis_data['0']['meta_robots']['0'];

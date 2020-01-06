@@ -124,7 +124,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
 
                         <p style="margin-bottom:0">
                             <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
-                            <textarea id="seopress_titles_desc_meta" style="width:100%" rows="8" name="seopress_titles_desc" placeholder="'.esc_html__('Enter your meta description','wp-seopress').'" aria-label="'.__('Meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
+                            <textarea id="seopress_titles_desc_meta" style="width:100%" rows="4" name="seopress_titles_desc" placeholder="'.esc_html__('Enter your meta description','wp-seopress').'" aria-label="'.__('Meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
                         </p>
                         <div class="sp-progress">
                             <div id="seopress_titles_desc_counters_progress" class="sp-progress-bar" role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100">1%</div>

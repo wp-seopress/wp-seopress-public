@@ -280,6 +280,27 @@ function seopress_import_redirections_plugin_settings() {
 }
 add_action( 'admin_init', 'seopress_import_redirections_plugin_settings' );
 
+//Clean all 404
+function seopress_clean_404_query_hook($args) {
+    unset($args['date_query']);
+    return $args;
+}
+
+
+function seopress_clean_404() {
+    if( empty( $_POST['seopress_action'] ) || 'clean_404' != $_POST['seopress_action'] )
+        return;
+    if( ! wp_verify_nonce( $_POST['seopress_clean_404_nonce'], 'seopress_clean_404_nonce' ) )
+        return;
+    if( ! current_user_can( 'manage_options' ) )
+        return;
+
+    add_filter('seopress_404_cleaning_query', 'seopress_clean_404_query_hook');
+    do_action('seopress_404_cron_cleaning');
+    wp_safe_redirect( admin_url( 'edit.php?post_type=seopress_404' ) ); exit;
+}
+add_action( 'admin_init', 'seopress_clean_404' );
+
 //Reset SEOPress Notices Settings
 function seopress_reset_notices_settings() {
     if( empty( $_POST['seopress_action'] ) || 'reset_notices_settings' != $_POST['seopress_action'] )
@@ -547,7 +568,7 @@ function seopress_download_batch_export() {
             
             if (!empty($csv)) {
                 foreach($csv as $value) {
-                    fputcsv( $output_handle, $value);
+                    fputcsv( $output_handle, $value, ';');
                 }
             }
 

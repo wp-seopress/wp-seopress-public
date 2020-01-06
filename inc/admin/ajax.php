@@ -226,6 +226,18 @@ function seopress_do_real_preview() {
                             $data['kws_density']['matches'][$kw][] = $m[0];
                         }
                     }
+
+                    //Keywords in permalink
+                    $post = get_post($seopress_get_the_id);
+                    $kw_slug = array_filter(explode('-', $post->post_name));
+
+                    if (!empty($kw_slug)) {
+                        foreach ($seopress_analysis_target_kw as $kw) {
+                            if (in_array($kw, $kw_slug)) {
+                                $data['kws_permalink']['matches'][$kw][] = $kw;
+                            }
+                        }
+                    }
                 }
 
                 //Images
@@ -302,8 +314,8 @@ add_action('wp_ajax_seopress_do_real_preview', 'seopress_do_real_preview');
 //Flush permalinks
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_flush_permalinks() {
-    check_ajax_referer( 'seopress_flush_permalinks_nonce', $_GET['_ajax_nonce'], true );
-	wp_remote_get(admin_url( 'options-permalink.php' ), array(blocking => true));
+    check_ajax_referer( 'seopress_flush_permalinks_nonce', $_GET['_ajax_nonce'], true ); 
+    flush_rewrite_rules();
 	die();
 }
 add_action('wp_ajax_seopress_flush_permalinks', 'seopress_flush_permalinks');
@@ -351,9 +363,8 @@ function seopress_yoast_migration() {
         }
         
         global $wpdb;
-        $table_name = $wpdb->prefix . 'posts';
-        $count_query = $wpdb->get_results( "SELECT * FROM $table_name" );
-        $total_count_posts = $wpdb->num_rows;
+
+        $total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
         
         $increment = 200;
         global $post;
@@ -503,9 +514,7 @@ function seopress_aio_migration() {
         }
         
         global $wpdb;
-        $table_name = $wpdb->prefix . 'posts';
-        $count_query = $wpdb->get_results( "SELECT * FROM $table_name" );
-        $total_count_posts = $wpdb->num_rows;
+        $total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
         
         $increment = 200;
         global $post;
@@ -640,9 +649,7 @@ function seopress_seo_framework_migration() {
         }
         
         global $wpdb;
-        $table_name = $wpdb->prefix . 'posts';
-        $count_query = $wpdb->get_results( "SELECT * FROM $table_name" );
-        $total_count_posts = $wpdb->num_rows;
+        $total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
         
         $increment = 200;
         global $post;
@@ -761,9 +768,7 @@ function seopress_rk_migration() {
         }
         
         global $wpdb;
-        $table_name = $wpdb->prefix . 'posts';
-        $count_query = $wpdb->get_results( "SELECT * FROM $table_name" );
-        $total_count_posts = $wpdb->num_rows;
+        $total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
         
         $increment = 200;
         global $post;
@@ -1005,9 +1010,7 @@ function seopress_metadata_export() {
         global $wpdb;
         global $post;
 
-        $table_name = $wpdb->prefix . 'posts';
-        $count_query = $wpdb->get_results( "SELECT * FROM $table_name" );
-        $total_count_posts = $wpdb->num_rows;
+        $total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
 
         $increment = 200;
 

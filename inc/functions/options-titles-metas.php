@@ -637,6 +637,7 @@ function seopress_titles_the_description() {
 }
 add_action( 'wp_head', 'seopress_titles_the_description', 1 );
 
+
 //Advanced
 //noindex
 //Single CPT noindex

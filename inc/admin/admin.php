@@ -213,6 +213,7 @@ class seopress_options
                     <li><span>'.__('%%term_description%%','wp-seopress').'</span>'.__('Term description','wp-seopress').'</li>
                     <li><span>'.__('%%search_keywords%%','wp-seopress').'</span>'.__('Search keywords','wp-seopress').'</li>
                     <li><span>'.__('%%current_pagination%%','wp-seopress').'</span>'.__('Current number page','wp-seopress').'</li>
+                    <li><span>'.__('%%page%%','wp-seopress').'</span>'.__('Current page number with context (i.e. page 1 of 3)','wp-seopress').'</li>
                     <li><span>'.__('%%cpt_plural%%','wp-seopress').'</span>'.__('Plural Post Type Archive name','wp-seopress').'</li>
                     <li><span>'.__('%%archive_title%%','wp-seopress').'</span>'.__('Archive title','wp-seopress').'</li>
                     <li><span>'.__('%%archive_date%%','wp-seopress').'</span>'.__('Date Archive','wp-seopress').'</li>
@@ -905,6 +906,19 @@ class seopress_options
                                     </form>
                                 </div><!-- .inside -->
                             </div><!-- .postbox -->
+                            <div id="section-clean-404" class="postbox section-tool">
+                                <div class="inside">
+                                    <h3><span><?php _e( 'Clean your 404', 'wp-seopress' ); ?></span></h3>
+                                    <p><?php _e( 'Delete all your 404 errors. We don‘t delete any redirects.', 'wp-seopress' ); ?></p>
+                                    <form method="post">
+                                        <p><input type="hidden" name="seopress_action" value="clean_404" /></p>
+                                        <p>
+                                            <?php wp_nonce_field( 'seopress_clean_404_nonce', 'seopress_clean_404_nonce' ); ?>
+                                            <?php submit_button( __( 'Delete all 404', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+                                        </p>
+                                    </form>
+                                </div><!-- .inside -->
+                            </div><!-- .postbox -->
                         <?php } else { ?>
                             <p><?php _e('Redirections feature is disabled. Please activate it from the PRO page.','wp-seopress'); ?></p>
                             <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page' ); ?>"><?php _e('Activate Redirections','wp-seopress'); ?></a>
@@ -1157,7 +1171,25 @@ class seopress_options
                                                     <span name="notice-ssl" id="notice-ssl" class="dashicons dashicons-trash remove-notice" data-notice="notice-ssl"></span>
                                                 </div>
                                             <?php }
-                                        ?>
+                                            ?>
+                                        <?php } ?>
+                                        <?php if (function_exists('extension_loaded') && !extension_loaded('dom')) { ?>                                            
+                                            <div id="notice-ssl-alert" class="seopress-alert">
+                                                <p>
+                                                    <span class="dashicons dashicons-warning"></span>
+                                                    <?php _e('PHP module "DOM" is missing on your server.','wp-seopress'); ?> 
+                                                    <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
+                                                </p>
+                                                <?php
+                                                if (function_exists('seopress_get_locale')) {
+                                                    if (seopress_get_locale() =='fr') {
+                                                        $seopress_docs_link['support']['dom'] = 'https://www.seopress.org/fr/support/guides/debutez-seopress/';
+                                                    } else {
+                                                        $seopress_docs_link['support']['dom'] = 'https://www.seopress.org/support/guides/get-started-seopress/';
+                                                    }
+                                                } ?>
+                                                <?php echo '<a class="button-primary" href="'.$seopress_docs_link['support']['dom'].'" target="_blank">'.__('Learn more','wp-seopress').'</a>'; ?>
+                                            </div>
                                         <?php } ?>
                                         <?php if (get_option('blog_public') !='1') { ?>
                                             <div class="seopress-alert">
@@ -1473,6 +1505,9 @@ class seopress_options
                                 <ul>
                                     <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.google.com/webmasters/tools/disavow-links-main" target="_blank"><?php _e('Upload a list of links to disavow to Google','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
                                     <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://trends.google.com/trends/" target="_blank"><?php _e('Google Trends','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
+                                    <?php if ( !is_plugin_active( 'imageseo/imageseo.php' )) {
+                                        echo '<li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://imageseo.io?_from=seopress" target="_blank">'.__('Image SEO plugin to optimize your image ALT texts and names for Search Engines.','wp-seopress-pro').'</a><span class="dashicons dashicons-external"></span></li>';
+                                    } ?>
                                     <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.dareboost.com/en/home" target="_blank"><?php _e('Dareboost: Test, analyze and optimize your website','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
                                     <li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://ga-dev-tools.appspot.com/campaign-url-builder/" target="_blank"><?php _e('Google Campaign URL Builder tool','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
                                 </ul>
@@ -3226,7 +3261,7 @@ class seopress_options
            __("Add WP Editor to taxonomy description textarea","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_tax_desc_editor_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section                  
+            'seopress_setting_section_advanced_advanced' // Section
         );    
 
         add_settings_field(
@@ -3234,7 +3269,7 @@ class seopress_options
            __("Remove /category/ in URL","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_category_url_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section                  
+            'seopress_setting_section_advanced_advanced' // Section
         );
 
         add_settings_field(
@@ -3242,7 +3277,7 @@ class seopress_options
            __("Disable trailing slash for metas","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_trailingslash_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section                  
+            'seopress_setting_section_advanced_advanced' // Section
         );
 
         add_settings_field(
@@ -3250,7 +3285,31 @@ class seopress_options
            __("Remove WordPress generator meta tag","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_wp_generator_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section                  
+            'seopress_setting_section_advanced_advanced' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_hentry', // ID
+           __("Remove hentry post class","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_hentry_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_comments_author_url', // ID
+           __("Remove author URL","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_comments_author_url_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_comments_website', // ID
+           __("Remove website field in comment form","wp-seopress"), // Title
+            array( $this, 'seopress_advanced_advanced_comments_website_callback' ), // Callback
+            'seopress-settings-admin-advanced-advanced', // Page
+            'seopress_setting_section_advanced_advanced' // Section
         );
 
         add_settings_field(
@@ -3258,7 +3317,7 @@ class seopress_options
            __("Remove WordPress shortlink meta tag","wp-seopress"), // Title
             array( $this, 'seopress_advanced_advanced_wp_shortlink_callback' ), // Callback
             'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section                  
+            'seopress_setting_section_advanced_advanced' // Section
         );
 
         add_settings_field(
@@ -6145,6 +6204,10 @@ class seopress_options
         echo ' value="1"/>';
         
         echo '<label for="seopress_advanced_advanced_image_auto_alt_editor">'. __( 'When sending an image file, automatically set the alternative text based on the filename', 'wp-seopress' ) .'</label>';
+
+        if ( !is_plugin_active( 'imageseo/imageseo.php' )) {
+            echo '<p class="description"><a href="https://imageseo.io?_from=seopress" target="_blank">'.__('We recommend Image SEO plugin to optimize your image ALT texts and names for Search Engines using AI and Machine Learning. Starting from just €4.99.','wp-seopress-pro').'</a><span class="dashicons dashicons-external"></span></p>';
+        }
         
         if (isset($this->options['seopress_advanced_advanced_image_auto_alt_editor'])) {
             esc_attr( $this->options['seopress_advanced_advanced_image_auto_alt_editor']);
@@ -6250,6 +6313,57 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_advanced_wp_generator'])) {
             esc_attr( $this->options['seopress_advanced_advanced_wp_generator']);
+        }
+    }
+
+    public function seopress_advanced_advanced_hentry_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_hentry']);      
+        
+        echo '<input id="seopress_advanced_advanced_hentry" name="seopress_advanced_option_name[seopress_advanced_advanced_hentry]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_hentry">'. __( 'Remove hentry post class to prevent Google from seeing this as structured data (schema)', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_advanced_hentry'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_hentry']);
+        }
+    }
+
+    public function seopress_advanced_advanced_comments_author_url_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );
+        
+        $check = isset($options['seopress_advanced_advanced_comments_author_url']);
+        
+        echo '<input id="seopress_advanced_advanced_comments_author_url" name="seopress_advanced_option_name[seopress_advanced_advanced_comments_author_url]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_comments_author_url">'. __( 'Remove comment author URL in comments if the website is filled from profile page', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_advanced_comments_author_url'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_comments_author_url']);
+        }
+    }
+
+    public function seopress_advanced_advanced_comments_website_callback()
+    {
+        $options = get_option( 'seopress_advanced_option_name' );  
+        
+        $check = isset($options['seopress_advanced_advanced_comments_website']);
+        
+        echo '<input id="seopress_advanced_advanced_comments_website" name="seopress_advanced_option_name[seopress_advanced_advanced_comments_website]" type="checkbox"';
+        if ('1' == $check) echo 'checked="yes"'; 
+        echo ' value="1"/>';
+        
+        echo '<label for="seopress_advanced_advanced_comments_website">'. __( 'Remove website field from comment form to reduce spam', 'wp-seopress' ) .'</label>';
+
+        if (isset($this->options['seopress_advanced_advanced_comments_website'])) {
+            esc_attr( $this->options['seopress_advanced_advanced_comments_website']);
         }
     }
 

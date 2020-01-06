@@ -467,6 +467,52 @@ function seopress_social_facebook_og_author_hook() {
 		    }
 			echo $seopress_social_og_author."\n";
 		}
+		if (is_singular('post')) {
+			// article:section
+			if (get_post_meta($post->ID,'_seopress_robots_primary_cat',true)) {
+				$_seopress_robots_primary_cat = get_post_meta($post->ID,'_seopress_robots_primary_cat',true);
+				
+				if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {
+					if ($post->post_type !=NULL && $post->post_type =='post') {
+						$current_cat = get_category($_seopress_robots_primary_cat);
+					}
+				} else {
+					$current_cat = current( get_the_category( $post ) );
+				}
+			} else {
+				$current_cat = current( get_the_category( $post ) );
+			}
+			if ($current_cat) {
+				$seopress_social_og_section = '';
+				$seopress_social_og_section .= '<meta property="article:section" content="'.$current_cat->name.'" />';
+				$seopress_social_og_section .= "\n";
+				if (isset($seopress_social_og_section)) {
+					//Hook on post OG article:section - 'seopress_social_og_section'
+					if (has_filter('seopress_social_og_section')) {
+						$seopress_social_og_section = apply_filters('seopress_social_og_section', $seopress_social_og_section);
+					}
+					echo $seopress_social_og_section;
+				}
+			}
+			// article:tag
+			if (function_exists('get_the_tags')) {
+				$tags = get_the_tags();
+				if (!empty($tags)) {
+					$seopress_social_og_tag = '';
+					foreach($tags as $tag) {
+						$seopress_social_og_tag .= '<meta property="article:tag" content="'.$tag->name.'" />';
+						$seopress_social_og_tag .= "\n";
+					}
+					if (isset($seopress_social_og_tag)) {
+						//Hook on post OG article:tag - 'seopress_social_og_tag'
+						if (has_filter('seopress_social_og_tag')) {
+							$seopress_social_og_tag = apply_filters('seopress_social_og_tag', $seopress_social_og_tag);
+						}
+						echo $seopress_social_og_tag;
+					}
+				}
+			}
+		}
 	}
 }
 add_action( 'wp_head', 'seopress_social_facebook_og_author_hook', 1 );
