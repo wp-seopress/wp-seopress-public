@@ -2,7 +2,11 @@
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 //XML
-Header('Content-type: text/xml');
+
+//Headers
+if (function_exists('seopress_sitemaps_headers')) {
+	seopress_sitemaps_headers();
+}
 
 //Remove primary category
 remove_filter( 'post_link_category', 'seopress_titles_primary_cat_hook', 10, 3 ); 
@@ -123,119 +127,152 @@ function seopress_xml_sitemap_single() {
 					
 					//XML Image Sitemaps
 					if (seopress_xml_sitemap_img_enable_option() =='1') {
+
+						//noimageindex?
+						if (get_post_meta($post,'_seopress_robots_imageindex',true) !='yes') {
 						
-						//Standard images
-						if (get_post_field('post_content', $post) !='') {
-							$dom = new domDocument;
-							$internalErrors = libxml_use_internal_errors(true);
-							
-							$run_shortcodes = apply_filters( 'seopress_sitemaps_single_shortcodes', true );
+							//Standard images
+							if (get_post_field('post_content', $post) !='') {
+								$dom = new domDocument;
+								$internalErrors = libxml_use_internal_errors(true);
+								
+								$run_shortcodes = apply_filters( 'seopress_sitemaps_single_shortcodes', true );
 
-							if ($run_shortcodes === true) {
-								$post_content = do_shortcode(get_post_field('post_content', $post));
-							} else {
-								$post_content = get_post_field('post_content', $post);
-							}
-
-							if ($post_content !="") {
-								if (function_exists('mb_convert_encoding')) {
-									$dom->loadHTML(mb_convert_encoding($post_content, 'HTML-ENTITIES', 'UTF-8'));
+								if ($run_shortcodes === true) {
+									$post_content = do_shortcode(get_post_field('post_content', $post));
 								} else {
-									$dom->loadHTML('<?xml encoding="utf-8" ?>'.$post_content);
+									$post_content = get_post_field('post_content', $post);
 								}
 
-								$dom->preserveWhiteSpace = false;
+								if ($post_content !="") {
+									if (function_exists('mb_convert_encoding')) {
+										$dom->loadHTML(mb_convert_encoding($post_content, 'HTML-ENTITIES', 'UTF-8'));
+									} else {
+										$dom->loadHTML('<?xml encoding="utf-8" ?>'.$post_content);
+									}
 
-								if ($dom->getElementsByTagName('img') !='') {
-									$images = $dom->getElementsByTagName('img');
+									$dom->preserveWhiteSpace = false;
+
+									if ($dom->getElementsByTagName('img') !='') {
+										$images = $dom->getElementsByTagName('img');
+									}
 								}
+								libxml_use_internal_errors($internalErrors);
 							}
-							libxml_use_internal_errors($internalErrors);
-						}
 
-						//WooCommerce
-						global $product;
-						if ($product !='' && method_exists($product, 'get_gallery_image_ids')) {
-							$product_img = $product->get_gallery_image_ids();
-						}
+							//WooCommerce
+							global $product;
+							if ($product !='' && method_exists($product, 'get_gallery_image_ids')) {
+								$product_img = $product->get_gallery_image_ids();
+							}
 
-						//Post Thumbnail
-						$post_thumbnail = get_the_post_thumbnail_url($post);
-						$post_thumbnail_id = get_post_thumbnail_id($post);
+							//Post Thumbnail
+							$post_thumbnail = get_the_post_thumbnail_url($post);
+							$post_thumbnail_id = get_post_thumbnail_id($post);
 
-						if ((isset($images) && !empty ($images) && $images->length>=1) || (isset($product) && !empty($product_img)) || $post_thumbnail !='') { 
-							
-							//Standard img
-							if (isset($images) && !empty ($images)) {
-								if ($images->length>=1) {
-									foreach($images as $img) {
-										$url = $img->getAttribute('src');
-										$url = apply_filters( 'seopress_sitemaps_single_img_url', $url );
-								        if ($url !='') {
-									        //Exclude Base64 img
-											if (strpos($url, 'data:image/') === false) {
-										        if (seopress_is_absolute($url) === true) {
-										        	//do nothing
-										        } else {
-										        	$url = $home_url.$url;
-												}
-												
-												//cleaning url
-												$url = htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url))));
-																		
-												//remove query strings
-												$parse_url = wp_parse_url($url);
+							if ((isset($images) && !empty ($images) && $images->length>=1) || (isset($product) && !empty($product_img)) || $post_thumbnail !='') { 
+								
+								//Standard img
+								if (isset($images) && !empty ($images)) {
+									if ($images->length>=1) {
+										foreach($images as $img) {
+											$url = $img->getAttribute('src');
+											$url = apply_filters( 'seopress_sitemaps_single_img_url', $url );
+											if ($url !='') {
+												//Exclude Base64 img
+												if (strpos($url, 'data:image/') === false) {
+													if (seopress_is_absolute($url) === true) {
+														//do nothing
+													} else {
+														$url = $home_url.$url;
+													}
+													
+													//cleaning url
+													$url = htmlspecialchars(urldecode(esc_attr(wp_filter_nohtml_kses($url))));
+																			
+													//remove query strings
+													$parse_url = wp_parse_url($url);
 
-												$seopress_sitemaps .= '<image:image>';
-										        $seopress_sitemaps .= "\n";
-										       	$seopress_sitemaps .= '<image:loc>';
-												
-												if (!empty($parse_url['scheme']) && !empty($parse_url['host'])	&& !empty($parse_url['path'])) {
-													$seopress_sitemaps .= '<![CDATA['.$parse_url['scheme'].'://'.$parse_url['host'].$parse_url['path'].']]>';
-												} else {
-													$seopress_sitemaps .= '<![CDATA['.$url.']]>';
-												}
-												
-										        $seopress_sitemaps .= '</image:loc>';
-												$seopress_sitemaps .= "\n";
-
-												if ($img->getAttribute('title') !='') {
-													$title = htmlspecialchars($img->getAttribute('title'));
-
-													$seopress_sitemaps .= '<image:title>';
-													$seopress_sitemaps .= '<![CDATA['.$title.']]>';
-													$seopress_sitemaps .= '</image:title>';
+													$seopress_sitemaps .= '<image:image>';
 													$seopress_sitemaps .= "\n";
-												}
-												
-												if ($img->getAttribute('alt') !='') {
-													$caption = htmlspecialchars($img->getAttribute('alt'));
-
-													$seopress_sitemaps .= '<image:caption>';
-													$seopress_sitemaps .= '<![CDATA['.$caption.']]>';
-													$seopress_sitemaps .= '</image:caption>';
+													$seopress_sitemaps .= '<image:loc>';
+													
+													if (!empty($parse_url['scheme']) && !empty($parse_url['host'])	&& !empty($parse_url['path'])) {
+														$seopress_sitemaps .= '<![CDATA['.$parse_url['scheme'].'://'.$parse_url['host'].$parse_url['path'].']]>';
+													} else {
+														$seopress_sitemaps .= '<![CDATA['.$url.']]>';
+													}
+													
+													$seopress_sitemaps .= '</image:loc>';
 													$seopress_sitemaps .= "\n";
-												}
 
-												$seopress_sitemaps .= '</image:image>';
+													if ($img->getAttribute('title') !='') {
+														$title = htmlspecialchars($img->getAttribute('title'));
+
+														$seopress_sitemaps .= '<image:title>';
+														$seopress_sitemaps .= '<![CDATA['.$title.']]>';
+														$seopress_sitemaps .= '</image:title>';
+														$seopress_sitemaps .= "\n";
+													}
+													
+													if ($img->getAttribute('alt') !='') {
+														$caption = htmlspecialchars($img->getAttribute('alt'));
+
+														$seopress_sitemaps .= '<image:caption>';
+														$seopress_sitemaps .= '<![CDATA['.$caption.']]>';
+														$seopress_sitemaps .= '</image:caption>';
+														$seopress_sitemaps .= "\n";
+													}
+
+													$seopress_sitemaps .= '</image:image>';
+												}
 											}
 										}
 									}
 								}
-							}
 
-							//WooCommerce img
-							if ($product !='' && $product_img !='') {
-								foreach( $product_img as $product_attachment_id ) {
+								//WooCommerce img
+								if ($product !='' && $product_img !='') {
+									foreach( $product_img as $product_attachment_id ) {
+										$seopress_sitemaps .= '<image:image>';
+										$seopress_sitemaps .= "\n";
+										$seopress_sitemaps .= '<image:loc>';
+										$seopress_sitemaps .= '<![CDATA['.esc_attr(wp_filter_nohtml_kses(wp_get_attachment_url( $product_attachment_id ))).']]>';
+										$seopress_sitemaps .= '</image:loc>';
+										$seopress_sitemaps .= "\n";
+
+										if (get_the_title($product_attachment_id) !='') {
+											$title = htmlspecialchars(get_the_title($product_attachment_id));
+
+											$seopress_sitemaps .= '<image:title>';
+											$seopress_sitemaps .= '<![CDATA['.$title.']]>';
+											$seopress_sitemaps .= '</image:title>';
+											$seopress_sitemaps .= "\n";
+										}
+										
+										if (get_post_meta($product_attachment_id, '_wp_attachment_image_alt', true) !='') {
+											$caption = htmlspecialchars(get_post_meta($product_attachment_id, '_wp_attachment_image_alt', true));
+
+											$seopress_sitemaps .= '<image:caption>';
+											$seopress_sitemaps .= '<![CDATA['.$caption.']]>';
+											$seopress_sitemaps .= '</image:caption>';
+											$seopress_sitemaps .= "\n";
+										}
+
+										$seopress_sitemaps .= '</image:image>';
+									}
+								}
+								//Post thumbnail
+								if ($post_thumbnail !='') {
 									$seopress_sitemaps .= '<image:image>';
 									$seopress_sitemaps .= "\n";
-							       	$seopress_sitemaps .= '<image:loc>';
-									$seopress_sitemaps .= '<![CDATA['.esc_attr(wp_filter_nohtml_kses(wp_get_attachment_url( $product_attachment_id ))).']]>';
-							        $seopress_sitemaps .= '</image:loc>';
+									$seopress_sitemaps .= '<image:loc>';
+									$seopress_sitemaps .= '<![CDATA['.$post_thumbnail.']]>';
+									$seopress_sitemaps .= '</image:loc>';
 									$seopress_sitemaps .= "\n";
-
-									if (get_the_title($product_attachment_id) !='') {
-										$title = htmlspecialchars(get_the_title($product_attachment_id));
+									
+									if (get_the_title($post_thumbnail_id) !='') {
+										$title = htmlspecialchars(get_the_title($post_thumbnail_id));
 
 										$seopress_sitemaps .= '<image:title>';
 										$seopress_sitemaps .= '<![CDATA['.$title.']]>';
@@ -243,8 +280,8 @@ function seopress_xml_sitemap_single() {
 										$seopress_sitemaps .= "\n";
 									}
 									
-									if (get_post_meta($product_attachment_id, '_wp_attachment_image_alt', true) !='') {
-										$caption = htmlspecialchars(get_post_meta($product_attachment_id, '_wp_attachment_image_alt', true));
+									if (get_post_meta($post_thumbnail_id, '_wp_attachment_image_alt', true) !='') {
+										$caption = htmlspecialchars(get_post_meta($post_thumbnail_id, '_wp_attachment_image_alt', true));
 
 										$seopress_sitemaps .= '<image:caption>';
 										$seopress_sitemaps .= '<![CDATA['.$caption.']]>';
@@ -254,44 +291,15 @@ function seopress_xml_sitemap_single() {
 
 									$seopress_sitemaps .= '</image:image>';
 								}
-							}
-							//Post thumbnail
-							if ($post_thumbnail !='') {
-								$seopress_sitemaps .= '<image:image>';
-								$seopress_sitemaps .= "\n";
-						       	$seopress_sitemaps .= '<image:loc>';
-								$seopress_sitemaps .= '<![CDATA['.$post_thumbnail.']]>';
-						        $seopress_sitemaps .= '</image:loc>';
+
 								$seopress_sitemaps .= "\n";
 								
-								if (get_the_title($post_thumbnail_id) !='') {
-									$title = htmlspecialchars(get_the_title($post_thumbnail_id));
-
-									$seopress_sitemaps .= '<image:title>';
-									$seopress_sitemaps .= '<![CDATA['.$title.']]>';
-									$seopress_sitemaps .= '</image:title>';
-									$seopress_sitemaps .= "\n";
-								}
-								
-								if (get_post_meta($post_thumbnail_id, '_wp_attachment_image_alt', true) !='') {
-									$caption = htmlspecialchars(get_post_meta($post_thumbnail_id, '_wp_attachment_image_alt', true));
-
-									$seopress_sitemaps .= '<image:caption>';
-									$seopress_sitemaps .= '<![CDATA['.$caption.']]>';
-									$seopress_sitemaps .= '</image:caption>';
-									$seopress_sitemaps .= "\n";
-								}
-
-								$seopress_sitemaps .= '</image:image>';
+								$seopress_sitemaps = apply_filters('seopress_sitemaps_single_img', $seopress_sitemaps, $post);
 							}
-
-							$seopress_sitemaps .= "\n";
-							
-							$seopress_sitemaps = apply_filters('seopress_sitemaps_single_img', $seopress_sitemaps, $post);
 						}
+						$seopress_sitemaps .= '</url>';
+						$seopress_sitemaps .= "\n";
 					}
-					$seopress_sitemaps .= '</url>';
-					$seopress_sitemaps .= "\n";
 				}
 				wp_reset_postdata();
 

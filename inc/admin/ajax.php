@@ -95,8 +95,8 @@ function seopress_do_real_preview() {
             if($dom->loadHTML('<?xml encoding="utf-8" ?>' .$response)) {
                 //Get Target Keywords
                 if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
-                    $data['target_kws'] = $_GET['seopress_analysis_target_kw'];
-                    $seopress_analysis_target_kw = array_filter(explode(',', get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true)));
+                    $data['target_kws'] = strtolower($_GET['seopress_analysis_target_kw']);
+                    $seopress_analysis_target_kw = array_filter(explode(',', strtolower(get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true))));
                 }
                 $xpath = new DOMXPath($dom);
 
@@ -271,12 +271,13 @@ function seopress_do_real_preview() {
 
                     //Keywords in permalink
                     $post = get_post($seopress_get_the_id);
-                    $kw_slug = array_filter(explode('-', $post->post_name));
+                    $kw_slug = $post->post_name;
+                    $kw_slug = str_replace("-", " ", $kw_slug);
 
-                    if (!empty($kw_slug)) {
+                    if (isset($kw_slug)) {
                         foreach ($seopress_analysis_target_kw as $kw) {
-                            if (in_array(strtolower($kw), $kw_slug)) {
-                                $data['kws_permalink']['matches'][$kw][] = $kw;
+                            if (preg_match_all('#\b('.$kw.')\b#iu', strip_tags(wp_filter_nohtml_kses($kw_slug)), $m)) {
+                                $data['kws_permalink']['matches'][$kw][] = $m[0];
                             }
                         }
                     }
@@ -322,10 +323,13 @@ function seopress_do_real_preview() {
                 }
                 
                 //outbound links
-                $outbound_links = $xpath->query("//a[contains(@target, '_blank')]");
+                $site_url  = wp_parse_url(get_home_url(), PHP_URL_HOST);
+                $outbound_links = $xpath->query("//a[not(contains(@href, '".$site_url."'))]");
                 if (!empty($outbound_links)) {
                     foreach ($outbound_links as $key=>$link) {
-                        $data['outbound_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
+                        if (!empty(wp_parse_url($link->getAttribute('href'), PHP_URL_HOST))) {
+                            $data['outbound_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
+                        }
                     }
                 }
 
@@ -335,6 +339,15 @@ function seopress_do_real_preview() {
 
                     $words_counter_unique = count(array_unique($matches[0]));
                     $data['words_counter_unique'] = $words_counter_unique;
+                }
+
+                //Get schemas
+                $json_ld = $xpath->query( '//script[@type="application/ld+json"]' );
+                if (!empty($json_ld)) {
+                    foreach($json_ld as $node) {
+                        $json = json_decode($node->nodeValue, true);
+                        $data['json'][] = $json['@type'];
+                    }
                 }
             }
         }

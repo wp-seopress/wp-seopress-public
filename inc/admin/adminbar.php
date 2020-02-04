@@ -57,7 +57,7 @@ function seopress_admin_bar_links() {
 		));
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
-			if(seopress_get_toggle_bot_option()=='1') {
+			if(seopress_get_toggle_option('bot')=='1') {
 				$wp_admin_bar->add_menu( array(
 					'parent'	=> 'seopress_custom_top_level',
 					'id'		=> 'seopress_custom_sub_menu_bot',
@@ -77,7 +77,7 @@ function seopress_admin_bar_links() {
 				'title'		=> __( 'PRO', 'wp-seopress' ),
 				'href'		=> admin_url( 'admin.php?page=seopress-pro-page' ),
 			));
-			if(seopress_get_toggle_rich_snippets_option()=='1') { 
+			if(seopress_get_toggle_option('rich-snippets')=='1') { 
 				$wp_admin_bar->add_menu( array(
 					'parent'	=> 'seopress_custom_top_level',
 					'id'		=> 'seopress_custom_sub_menu_schemas',
@@ -85,7 +85,7 @@ function seopress_admin_bar_links() {
 					'href'		=> admin_url( 'edit.php?post_type=seopress_schemas' ),
 				));
 			}
-			if(seopress_get_toggle_404_option()=='1') {
+			if(seopress_get_toggle_option('404')=='1') {
 				$wp_admin_bar->add_menu( array(
 					'parent'	=> 'seopress_custom_top_level',
 					'id'		=> 'seopress_custom_sub_menu_404',
@@ -93,7 +93,7 @@ function seopress_admin_bar_links() {
 					'href'		=> admin_url( 'edit.php?post_type=seopress_404' ),
 				));
 			}
-			if(seopress_get_toggle_bot_option()=='1') {
+			if(seopress_get_toggle_option('bot')=='1') {
 				$wp_admin_bar->add_menu( array(
 					'parent'	=> 'seopress_custom_top_level',
 					'id'		=> 'seopress_custom_sub_menu_broken_links',

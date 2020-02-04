@@ -2,7 +2,11 @@
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 //XML
-Header('Content-type: text/xml');
+
+//Headers
+if (function_exists('seopress_sitemaps_headers')) {
+	seopress_sitemaps_headers();
+}
 
 //WPML
 function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {

@@ -62,14 +62,14 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
         $seo_tabs['redirect-tab'] = '<li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirection', 'wp-seopress' ) .'</a></li>';
         
         if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
-            if (function_exists('seopress_get_toggle_news_option') && seopress_get_toggle_news_option() =='1') {
+            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('news') =='1') {
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                     if ("seopress_404" != $typenow) {
                         $seo_tabs['news-tab'] = '<li><a href="#tabs-5"><span class="dashicons dashicons-admin-post"></span>'. __( 'Google News', 'wp-seopress' ) .'</a></li>';
                     }
                 }
             }
-            if (function_exists('seopress_get_toggle_xml_sitemap_option') && seopress_get_toggle_xml_sitemap_option() =='1') {
+            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('xml-sitemap') =='1') {
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                     if ("seopress_404" != $typenow) {
                         $seo_tabs['video-tab'] = '<li><a href="#tabs-6"><span class="dashicons dashicons-format-video"></span>'. __( 'Video Sitemap', 'wp-seopress' ) .'</a></li>';
@@ -208,15 +208,18 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                                 '. __( 'Do not display a description in search results for this page <strong>(nosnippet)</strong>', 'wp-seopress' ) .'
                         </label>
                     </p>
-                    <p class="description">
-                        '.__('You cannot uncheck a parameter? This is normal, and it\'s most likely defined in the global settings of the extension.','wp-seopress').'
-                    </p>
+                    <p class="description">';
+                        $url = admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_single');
+                        echo sprintf(__('You cannot uncheck a parameter? This is normal, and it\'s most likely defined in the <a href="%s">global settings of the extension</a>.','wp-seopress'), $url);
+                        echo '</p>
                     <p>
-                        <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'</label>
-                        <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').htmlspecialchars(urldecode(get_permalink())).'" aria-label="'.__('Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
-                        <span class="sp-tooltip"><span class="dashicons dashicons-editor-help"></span>
-                        <span class="sp-tooltiptext">'.__('A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color).
+                        <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'
+                            <span class="sp-tooltip"><span class="dashicons dashicons-editor-help"></span>
+                            <span class="sp-tooltiptext">'.__('A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color).
                         The canonical can be in a different domain than a duplicate.','wp-seopress').'</span>
+                        </label>
+                        <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').htmlspecialchars(urldecode(get_permalink())).'" aria-label="'.__('Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
+                        
                         </span>
                     </p>';
 
@@ -246,7 +249,10 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                             echo '<p>
                                 <label for="seopress_robots_breadcrumbs_meta">'. __( 'Custom breadcrumbs', 'wp-seopress' ) .'</label>
-                                <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.esc_html__('Enter a custom value, useful if your title is too long','wp-seopress').'" aria-label="'.__('Custom breadcrumbs','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
+                                <span class="description">'.__('Enter a custom value, useful if your title is too long.','wp-seopress').'</span>
+                            </p>
+                            <p>
+                                <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.esc_html(sprintf(__('Current breadcrumbs: %s','wp-seopress'),get_the_title($post))).'" aria-label="'.__('Custom breadcrumbs','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
                             </p>';
                         }
                     }
@@ -258,6 +264,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         <span class="dashicons dashicons-facebook-alt"></span>
                         <br><br>
                         <span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">'.__('Ask Facebook to update his cache','wp-seopress').'</a>
+                        <p>'.__('<span class="label">Did you know?</span> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tag defined below.','wp-seopress').'</p>
                         <p>
                             <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'wp-seopress' ) .'</label>
                             <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.esc_html__('Enter your Facebook title','wp-seopress').'" aria-label="'.__('Facebook Title','wp-seopress').'" value="'.$seopress_social_fb_title.'" />
@@ -276,7 +283,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     <div class="box-right">
                         <div class="facebook-snippet-preview">
                             <h3>'.__('Facebook Preview','wp-seopress').'</h3>';
-                            if(seopress_get_toggle_social_option()=='1') {
+                            if(seopress_get_toggle_option('social')=='1') {
                                 echo '<p>'.__('This is what your post will look like in Facebook. You have to publish your post to get the Facebook Preview.','wp-seopress').'</p>';
                             } else {
                                 echo '<p><span class="dashicons dashicons-warning"></span>'.__('The Social Networks feature is disabled. Still seing informations from the FB Preview? You probably have social tags added by your theme or a plugin.','wp-seopress').'</p>';
@@ -397,7 +404,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
             </div>';
         }
         if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
-            if (function_exists('seopress_get_toggle_news_option') && seopress_get_toggle_news_option() =='1') {
+            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('news') =='1') {
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                     if ("seopress_404" != $typenow) {
                         if (array_key_exists('news-tab', $seo_tabs)) {
@@ -413,7 +420,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     }
                 }
             }
-            if (function_exists('seopress_get_toggle_xml_sitemap_option') && seopress_get_toggle_xml_sitemap_option() =='1') {
+            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('xml-sitemap') =='1') {
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                     if ("seopress_404" != $typenow) {
 
@@ -478,7 +485,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                                                     <p>
                                                         <label for="seopress_video['.$key.'][thumbnail_meta]">'. __( 'Video Thumbnail (required)', 'wp-seopress' ) .'</label>
                                                         <input id="seopress_video['.$key.'][thumbnail_meta]" class="seopress_video_thumbnail_meta" type="text" name="seopress_video['.$key.'][thumbnail]" placeholder="'.esc_html__('Select your video thumbnail','wp-seopress').'" value="'.$check_thumbnail.'" />
-                                                        <input class="button seopress_video_thumbnail_upload" type="button" aria-label="'.__('Video Thumbnail','wp-seopress').'" value="'.__('Upload an Image','wp-seopress').'" />
+                                                        <input class="button seopress_video_thumbnail_upload seopress_media_upload" type="button" aria-label="'.__('Video Thumbnail','wp-seopress').'" value="'.__('Upload an Image','wp-seopress').'" />
                                                         <span class="advise">'. __('Minimum size: 160x90px (1920x1080 max), JPG, PNG or GIF formats. Default: your post featured image.', 'wp-seopress') .'</span>
                                                     </p>
                                                     <p>

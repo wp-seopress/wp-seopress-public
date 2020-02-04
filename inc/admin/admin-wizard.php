@@ -244,7 +244,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 		?>
 		<form method="post" class="address-step">
 			<?php wp_nonce_field( 'seopress-setup' ); ?>
+			<h2><?php _e('Welcome!','wp-seopress'); ?></h2>
 			<p class="store-setup"><?php esc_html_e( 'The following wizard will help you configure SEOPress and get you started quickly.', 'wp-seopress' ); ?></p>
+			<p class="store-setup"><?php esc_html_e( 'The first step is to import your previous settings from other plugins to keep your SEO.', 'wp-seopress' ); ?></p>
+			<p class="store-setup"><?php esc_html_e( 'Not data to migrate? Click "Next step" button!', 'wp-seopress' ); ?></p>
 
 			<div class="store-address-container">
                 <!-- Yoast import tool --> 
@@ -394,7 +397,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 			<input type="text" id="knowledge_img" class="location-input" name="knowledge_img" placeholder="<?php esc_html_e('eg: https://www.example.com/logo.png', 'wp-seopress'); ?>" value="<?php echo $knowledge_img; ?>" />
 
 			<label class="location-prompt" for="knowledge_fb"><?php esc_html_e( 'Facebook page URL', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_fb" class="location-input" name="knowledge_fb" placeholder="<?php esc_html_e('eg: https://www.facebook.com/your-page','wp-seopress'); ?>" value="<?php echo $knowledge_fb; ?>" />
+			<input type="text" id="knowledge_fb" class="location-input" name="knowledge_fb" placeholder="<?php esc_html_e('eg: https://facebook.com/seopresspro','wp-seopress'); ?>" value="<?php echo $knowledge_fb; ?>" />
 
 			<label class="location-prompt" for="knowledge_tw"><?php esc_html_e( 'Twitter Username', 'wp-seopress' ); ?></label>
 			<input type="text" id="knowledge_tw" class="location-input" name="knowledge_tw" placeholder="<?php esc_html_e('eg: @wp_seopress', 'wp-seopress'); ?>" value="<?php echo $knowledge_tw; ?>" />
@@ -473,7 +476,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 			$seopress_titles_option = get_option( 'seopress_titles_option_name' );
 		?>
 		<h1><?php esc_html_e( 'Indexing', 'wp-seopress' ); ?></h1>
-		<p><?php esc_html_e( 'Specify to the search engines what you want to be indexed or not. Default: index', 'wp-seopress' ); ?></p>
+		<p><?php esc_html_e( 'Specify to the search engines what you want to be indexed or not.', 'wp-seopress' ); ?></p>
+		<p><?php esc_html_e( 'Avoid indexing duplicate or poor quality content.', 'wp-seopress' ); ?></p>
+		<p><?php esc_html_e( 'Default: index', 'wp-seopress' ); ?></p>
 		<form method="post" class="seopress-wizard-indexing-form">
 			<?php if(!empty(seopress_get_post_types())) { ?>
 				<div class="seopress-wizard-services">
@@ -495,7 +500,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 					                if ('1' == $seopress_titles_single_titles) echo 'checked="yes"'; 
 					                echo ' value="1"/>';
 					                
-					                echo '<label for="seopress_titles_single_cpt_noindex['.$seopress_cpt_key.']">'. __( 'Do not display this single post type in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
+					                echo '<label for="seopress_titles_single_cpt_noindex['.$seopress_cpt_key.']">'. __( 'Do not display this single post type in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
 					            echo '</li>';
 					        }
 					    ?>
@@ -524,7 +529,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 					                    if ('1' == $seopress_titles_archive_titles) echo 'checked="yes"'; 
 					                    echo ' value="1"/>';
 					                    
-					                    echo '<label for="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']">'. __( 'Do not display this post type archive in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
+					                    echo '<label for="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']">'. __( 'Do not display this post type archive in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
 					                echo '</li>';
 					            }
 					        }
@@ -553,7 +558,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 					                if ('1' == $seopress_titles_tax_titles) echo 'checked="yes"'; 
 					                echo ' value="1"/>';
 					                
-					                echo '<label for="seopress_titles_tax_noindex['.$seopress_tax_key.']">'. __( 'Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
+					                echo '<label for="seopress_titles_tax_noindex['.$seopress_tax_key.']">'. __( 'Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
 					            echo '</li>';
 					        }
 			        	?>

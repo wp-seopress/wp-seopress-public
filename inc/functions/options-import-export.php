@@ -164,8 +164,12 @@ function seopress_import_yoast_redirections() {
 
         if (!empty($csv_line[0])) {
             $csv_line[0] = substr($csv_line[0], 1);
-            if (!empty($csv_line[1]) && $csv_line[1] ==='//') {
-                $csv_line[1] = '/';
+            if (!empty($csv_line[1])) {
+                if ($csv_line[1] ==='//') {
+                    $csv_line[1] = '/';
+                } else {
+                    $csv_line[1] = home_url().$csv_line[1];
+                }
             }
             $id = wp_insert_post(array('post_title' => urldecode($csv_line[0]), 'post_type' => 'seopress_404', 'post_status' => 'publish', 'meta_input' => array( '_seopress_redirections_value' => urldecode($csv_line[1]), '_seopress_redirections_type' => $csv_type_redirects[2], '_seopress_redirections_enabled' =>  $csv_type_redirects[3], '_seopress_redirections_param' => $csv_type_redirects[4])));
         }

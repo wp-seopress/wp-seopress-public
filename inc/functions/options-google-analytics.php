@@ -17,6 +17,17 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			}
 		}
 
+		function seopress_google_analytics_opt_out_msg_close_option() {
+			$seopress_google_analytics_opt_out_msg_close_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_opt_out_msg_close_option ) ) {
+				foreach ($seopress_google_analytics_opt_out_msg_close_option as $key => $seopress_google_analytics_opt_out_msg_close_value)
+					$options[$key] = $seopress_google_analytics_opt_out_msg_close_value;
+				 if (isset($seopress_google_analytics_opt_out_msg_close_option['seopress_google_analytics_opt_out_msg_close'])) { 
+				 	return $seopress_google_analytics_opt_out_msg_close_option['seopress_google_analytics_opt_out_msg_close'];
+				 }
+			}
+		}
+
 		function seopress_google_analytics_cb_bg_option() {
 			$seopress_google_analytics_cb_bg_option = get_option("seopress_google_analytics_option_name");
 			if ( ! empty ( $seopress_google_analytics_cb_bg_option ) ) {
@@ -171,6 +182,12 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$consent_btn = __('Accept','wp-seopress');
 			}
 
+			if (seopress_google_analytics_opt_out_msg_close_option() !='') {
+				$close_btn = seopress_google_analytics_opt_out_msg_close_option();
+			} else {
+				$close_btn = __('X','wp-seopress');
+			}
+
 			$styles = '<style>.seopress-user-consent {position: fixed;z-index: 8000;width: 100%;padding: 10px;left: 0;text-align: center;';
 			
 			//Position
@@ -194,7 +211,7 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$styles .= 'color:'.seopress_google_analytics_cb_txt_col_option().';';
 			}
 
-			$styles .='}.seopress-user-consent button {vertical-align: middle;margin: 0 10px;padding: 5px 20px;font-size: 14px;';
+			$styles .='}.seopress-user-consent button {vertical-align: middle;margin: 0 10px;font-size: 14px;';
 
 			//Btn background color
 			if (seopress_google_analytics_cb_btn_bg_option() !='') {
@@ -218,7 +235,7 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$styles .= 'color:'.seopress_google_analytics_cb_btn_col_hov_option().';';
 			}
 
-			$styles .='}#seopress-user-consent-close{margin: 0 0 0 20px;position: relative;line-height: 26px;font-weight: bold;border: 1px solid #ccc;padding: 0 10px;';
+			$styles .='}#seopress-user-consent-close{margin: 0 0 0 20px;position: relative;font-weight: bold;border: 1px solid #ccc;';
 
 			//Background secondary button
 			if (seopress_google_analytics_cb_btn_sec_bg_option() !='') {
@@ -261,9 +278,9 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 
 			$styles .='.seopress-user-consent-hide{display:none;}</style>';
 
-			$user_msg = $styles.'<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" tabindex="11">'.$consent_btn.'</button><button id="seopress-user-consent-close" tabindex="12">'.__('X','wp-seopress').'</button></p></div>';
+			$user_msg = $styles.'<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" tabindex="11">'.$consent_btn.'</button><button id="seopress-user-consent-close" tabindex="12">'.$close_btn.'</button></p></div>';
 
-		    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn);
+		    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn);
 
 		    echo $user_msg;
 		}

@@ -2,7 +2,11 @@
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 //XML
-Header('Content-type: text/xml');
+
+//Headers
+if (function_exists('seopress_sitemaps_headers')) {
+	seopress_sitemaps_headers();
+}
 
 //WPML
 function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
@@ -147,7 +151,7 @@ function seopress_xml_sitemap_index() {
 
 	//Google News
 	if (function_exists("seopress_xml_sitemap_news_enable_option") && seopress_xml_sitemap_news_enable_option() !='' 
-		&& function_exists('seopress_get_toggle_news_option') && seopress_get_toggle_news_option() =='1') {
+		&& function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('news') =='1') {
 		//Include Custom Post Types
 		function seopress_xml_sitemap_news_cpt_option() {
 	    	$seopress_xml_sitemap_news_cpt_option = get_option("seopress_pro_option_name");

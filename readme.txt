@@ -1,16 +1,16 @@
 === SEOPress ===
 Authors: rainbowgeek
-Contributors: rainbowgeek
+Contributors: rainbowgeek, juliobox
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.7.8
+Stable tag: 3.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-SEOPress is a simple, fast and powerful SEO plugin for WordPress.
+Boost your SEO with SEOPress, a simple, fast and powerful SEO plugin for WordPress. No ads, no footprints, no anonymous data sent, white label.
 
 == Description ==
 
@@ -60,14 +60,14 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Export metadata (titles, open graph, robots...) to a CSV file</li>
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
-	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, FAQ, course, recipe, video, event, product, job, simple review, site navigation element</li>
+	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, FAQ, course, recipe, software application, video, event, product, job, simple review, site navigation element</li>
 	<li>Automatic Schemas</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Google Analytics Stats in Dashboard</li>
 	<li>Google Local Business</li>
 	<li>Backlinks (required a Majestic paid account)</li>
 	<li>SEOPress BOT: scan all your links in content to find errors (eg: 404...)</li>
-	<li>WooCommerce: disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
+	<li>WooCommerce: Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema, disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li>Easy Digital Downloads: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li>Dublin Core</li>
 	<li>Custom Breadcrumbs for single post types</li>
@@ -138,6 +138,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 <h3>Featured on</h3>
 <ul>
 	<li>WP Beginner</li>
+	<li>Forbes</li>
+	<li>Search Engine Journal</li>
 	<li>Elementor</li>
 	<li>WP Crafter</li>
 	<li>Kinsta</li>
@@ -270,6 +272,39 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 60. Installation Wizard
 
 == Changelog ==
+= 3.8 =
+* NEW Content analysis now detects duplicated schemas from your source code to avoid conflicts
+* NEW Add Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for Product schema - PRO
+* NEW Software Application schema (manual and automatic) - PRO
+* NEW Option to force a default OG:IMAGE tag if no custom OG:IMAGE set from SEO metabox (SEO > Social Networks > Open Graph)
+* NEW "seopress_schemas_softwareapp_html" hook to filter the software app manual schema (https://www.seopress.org/support/hooks/filter-manual-software-application-schema/) - PRO
+* NEW "seopress_schemas_auto_softwareapp_html" hook to filter the software app automatic schema (https://www.seopress.org/support/hooks/filter-automatic-software-application-schema/) - PRO
+* NEW 'seopress_sitemaps_headers' hook to filter sitemaps headers (https://www.seopress.org/support/hooks/filter-xml-sitemaps-headers/)
+* NEW '%%post_title%%' dynamic variable for RSS feeds
+* INFO Improve notifications center
+* INFO Improve UI/UX
+* INFO Improve SEOPress Wizard
+* INFO Improve UI for automatic schemas
+* INFO You can now redirect 404 to homepage/custom URL without enabling 404 
+* INFO Adding a new verification in the content analysis metabox: if the post modification date is more than 1 year, a message will prompt you to update the content of your article.
+* INFO Add x-robots-tag: noindex,follow to sitemaps headers
+* INFO Add a new argument to "seopress_rgpd_full_message" hook to filter the close button (https://www.seopress.org/support/hooks/filter-user-consent-message-html/)
+* INFO Remove some CSS from the cookie bar buttons to better match the design of the themes
+* INFO Add a new notification if automatic schemas used without Structured data types option ON
+* INFO Improve code quality / refactoring
+* INFO If noimageindex checked, remove image links from XML sitemap for consistency
+* FIX Bug with primary category link and Gutenberg
+* FIX Import redirects from Yoast Premium
+* FIX Small UI bug for custom automatic schema
+* FIX Keywords in permalink
+* FIX iOS toggle from Dashboard feature list / Titles and metas page
+* FIX Facebook Preview if site title is too long
+* FIX Outbound links check from Content Analysis
+* FIX Google Suggestions last empty item
+* FIX Improve security
+* FIX Performance issue with PRO
+* FIX Send parameters to redirect URL
+* FIX seopress-block-editor.js?ver=3.7.8:36 Uncaught TypeError: Cannot read property 'length' of undefined
 = 3.7.8 =
 * NEW Pixel counter for title and meta description now works with each language / alphabet! Faster, more reliable and universal!
 * NEW Facebook Preview!

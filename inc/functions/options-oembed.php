@@ -23,8 +23,9 @@ function seopress_oembed_title_term_option() {
 }
 
 function seopress_oembed_title_home_option() {
-	$_seopress_oembed_title = get_post_meta(get_option( 'page_for_posts' ),'_seopress_social_fb_title',true);
-	if ($_seopress_oembed_title != '') {
+    $page_id                = get_option( 'page_for_posts' );
+	$_seopress_oembed_title = get_post_meta( $page_id, '_seopress_social_fb_title', true );
+	if ( ! empty( $_seopress_oembed_title ) ) {
 		return $_seopress_oembed_title;
 	}
 }
@@ -32,21 +33,21 @@ function seopress_oembed_title_home_option() {
 function seopress_oembed_title_hook() {
     //Init
     $seopress_oembed_title ='';
-    
+
     if (is_home()) {
         if (seopress_oembed_title_home_option() !='') {
-            $seopress_oembed_title = seopress_oembed_title_home_option(); 
+            $seopress_oembed_title = seopress_oembed_title_home_option();
         } elseif (function_exists('seopress_titles_the_title') && seopress_titles_the_title() !='') {
-            $seopress_oembed_title = esc_attr(seopress_titles_the_title()); 
+            $seopress_oembed_title = esc_attr(seopress_titles_the_title());
         }
     } elseif (is_tax() || is_category() || is_tag()) {
         if (seopress_oembed_title_term_option() !='') {
-            $seopress_oembed_title = seopress_oembed_title_term_option(); 
+            $seopress_oembed_title = seopress_oembed_title_term_option();
         } else {
-            $seopress_oembed_title = single_term_title('', false).' - '.get_bloginfo('name'); 
+            $seopress_oembed_title = single_term_title('', false).' - '.get_bloginfo('name');
         }
-    } elseif (is_singular() && seopress_oembed_title_post_option() !='') { 
-        $seopress_oembed_title = seopress_oembed_title_post_option(); 
+    } elseif (is_singular() && seopress_oembed_title_post_option() !='') {
+        $seopress_oembed_title = seopress_oembed_title_post_option();
     } elseif(function_exists("is_shop") && is_shop() && seopress_oembed_title_post_option() !='') {
         $seopress_oembed_title = seopress_oembed_title_post_option();
     } elseif (function_exists('seopress_titles_the_title') && seopress_titles_the_title() !='') {

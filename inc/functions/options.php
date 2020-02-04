@@ -27,7 +27,7 @@ function seopress_enable() {
 }
 
 //Front END
-if (seopress_get_toggle_titles_option() =='1') {
+if (seopress_get_toggle_option('titles') =='1') {
 	//Author archive Disabled
 	function seopress_titles_archives_author_disable_option() {
 		$seopress_titles_archives_author_disable_option = get_option("seopress_titles_option_name");
@@ -142,7 +142,7 @@ if (seopress_get_toggle_titles_option() =='1') {
 		}
 	}
 }
-if (seopress_get_toggle_social_option() =='1') {
+if (seopress_get_toggle_option('social') =='1') {
 	// add_action('wp_loaded', 'seopress_load_oembed_options');
 	// function seopress_load_oembed_options() {
 	// 	if (!is_admin()){
@@ -161,7 +161,7 @@ if (seopress_get_toggle_social_option() =='1') {
 		}
 	}
 }
-if (seopress_get_toggle_google_analytics_option() =='1') {
+if (seopress_get_toggle_option('google-analytics') =='1') {
 	//Enabled
 	function seopress_google_analytics_enable_option() {
 		$seopress_google_analytics_enable_option = get_option("seopress_google_analytics_option_name");
@@ -344,7 +344,7 @@ function seopress_load_redirections_options() {
 	}
 }
 
-if (seopress_get_toggle_xml_sitemap_option() =='1') {
+if (seopress_get_toggle_option('xml-sitemap') =='1') {
 	add_action('init', 'seopress_load_sitemap', 999);
 	function seopress_load_sitemap() {
 		if (!is_admin()) {
@@ -352,7 +352,7 @@ if (seopress_get_toggle_xml_sitemap_option() =='1') {
 		}
 	}	
 }
-if (seopress_get_toggle_advanced_option() =='1') {
+if (seopress_get_toggle_option('advanced') =='1') {
 	//Remove comment author url
 	function seopress_advanced_advanced_comments_author_url_option() {
 		$seopress_advanced_advanced_comments_author_url_option = get_option("seopress_advanced_option_name");
@@ -440,6 +440,8 @@ if (seopress_get_toggle_advanced_option() =='1') {
 				//no primary cat
 				return $cats_0;
 			}
+		} else {
+			return $cats_0;
 		}
 	}
 	add_filter( 'post_link_category', 'seopress_titles_primary_cat_hook', 10, 3 );

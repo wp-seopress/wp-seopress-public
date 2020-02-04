@@ -727,11 +727,11 @@ body.seopress-setup {
     -webkit-justify-content: space-between;
     justify-content: space-between;
     padding: 0;
-    border-bottom: 1px solid #eee;
     color: #666;
     -webkit-box-align: center;
     -webkit-align-items: center;
-    align-items: center
+    align-items: center;
+    margin: 1rem 0;
 }
 
 .seopress-wizard-service-item:last-child,
@@ -1202,7 +1202,8 @@ h3.jetpack-reasons {
     font-weight: 500;
     margin-bottom: .5em;
     margin-top: .85em;
-    display: inline-block
+    display: inline-block;
+    width: 100%;
 }
 
 .location-input {
@@ -1216,11 +1217,13 @@ h3.jetpack-reasons {
     font-size: 16px;
     color: #444;
     background-color: #fff;
-    display: inline-block
+    display: inline-block;
+    width: 100%;
 }
 
 .location-input.dropdown {
-    width: 100%
+    width: 100%;
+    max-width: inherit;
 }
 
 .address-step .select2 {
