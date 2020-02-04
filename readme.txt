@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.8
+Stable tag: 3.8.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -272,6 +272,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 60. Installation Wizard
 
 == Changelog ==
+= 3.8.0.1 =
+* FIX Fatal error Google Analytics widget
 = 3.8 =
 * NEW Content analysis now detects duplicated schemas from your source code to avoid conflicts
 * NEW Add Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for Product schema - PRO

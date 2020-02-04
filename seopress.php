@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8
+Version: 3.8.0.1
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -53,7 +53,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8' ); 
+define( 'SEOPRESS_VERSION', '3.8.0.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -462,6 +462,19 @@ function seopress_get_toggle_option($feature) {
             if (isset($seopress_get_toggle_option['toggle-'.$feature])) { 
                 return $seopress_get_toggle_option['toggle-'.$feature];
             }
+        }
+    }
+}
+
+// Is Google Analytics enable?
+//@deprecated since version 3.8
+function seopress_get_toggle_google_analytics_option() {
+    $seopress_get_toggle_google_analytics_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_google_analytics_option ) ) {
+        foreach ($seopress_get_toggle_google_analytics_option as $key => $seopress_get_toggle_google_analytics_value)
+            $options[$key] = $seopress_get_toggle_google_analytics_value;
+        if (isset($seopress_get_toggle_google_analytics_option['toggle-google-analytics'])) { 
+            return $seopress_get_toggle_google_analytics_option['toggle-google-analytics'];
         }
     }
 }
