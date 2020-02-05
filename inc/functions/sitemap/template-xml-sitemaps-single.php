@@ -297,9 +297,9 @@ function seopress_xml_sitemap_single() {
 								$seopress_sitemaps = apply_filters('seopress_sitemaps_single_img', $seopress_sitemaps, $post);
 							}
 						}
-						$seopress_sitemaps .= '</url>';
-						$seopress_sitemaps .= "\n";
 					}
+					$seopress_sitemaps .= '</url>';
+					$seopress_sitemaps .= "\n";
 				}
 				wp_reset_postdata();
 
