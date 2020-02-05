@@ -120,7 +120,11 @@ function seopress_xml_sitemap_single() {
 					$seopress_sitemaps .= '</loc>';
 					$seopress_sitemaps .= "\n";
 					$seopress_sitemaps .= '<lastmod>';
-					$seopress_sitemaps .= get_the_modified_date('c', $post);
+					if (get_the_modified_date('c', $post)) {
+						$seopress_sitemaps .= get_the_modified_date('c', $post);
+					} else {
+						$seopress_sitemaps .= get_post_modified_time('c', false, $post);
+					}
 					$seopress_sitemaps .= '';
 					$seopress_sitemaps .= '</lastmod>';
 					$seopress_sitemaps .= "\n";

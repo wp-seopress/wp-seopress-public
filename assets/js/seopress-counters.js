@@ -1,43 +1,3 @@
-function sp_meta_title_update(e) {
-	var meta_title_val = jQuery("#seopress_titles_title_meta").val();
-	var meta_title_placeholder = jQuery("#seopress_titles_title_meta").attr("placeholder");
-
-	jQuery("#seopress_titles_title_counters").css("color", "inherit"),
-	jQuery("#seopress_titles_title_pixel").css("color", "inherit"),
-	
-	meta_title_val.length > 60 && jQuery("#seopress_titles_title_counters").css("color", "red"),
-	pixelTitle(meta_title_val) > 568 && jQuery("#seopress_titles_title_pixel").css("color", "red");
-
-	if (meta_title_val.length == 0) { 
-		meta_title_placeholder.length > 60 && jQuery("#seopress_titles_title_counters").css("color", "red"),
-		pixelTitle(meta_title_placeholder) > 568 && jQuery("#seopress_titles_title_pixel").css("color", "red")
-	}
-
-	meta_title_val.length > 0 ? (jQuery("#seopress_titles_title_counters").text(meta_title_val.length),
-	jQuery("#seopress_titles_title_pixel").text(pixelTitle(meta_title_val))) : meta_title_placeholder.length && (jQuery("#seopress_titles_title_counters").text(meta_title_placeholder.length),
-	jQuery("#seopress_titles_title_pixel").text(pixelTitle(meta_title_placeholder))),
-	
-	meta_title_val.length > 0 ? (jQuery(".snippet-title-custom").text(e.target.value),
-	jQuery(".snippet-title").css("display", "none"),
-	jQuery(".snippet-title-custom").css("display", "block"),
-	jQuery(".snippet-title-default").css("display", "none")) : 0 == meta_title_val.length && (jQuery(".snippet-title-default").css("display", "block"),
-	jQuery(".snippet-title-custom").css("display", "none"), jQuery(".snippet-title").css("display", "none"));
-
-	if (meta_title_val.length) {
-		var progress = Math.round(pixelTitle(meta_title_val)/568*100);
-	} else {
-		var progress = Math.round(pixelTitle(meta_title_placeholder)/568*100);
-	}
-
-	if (progress >= 100) {
-		progress = 100;
-	}
-
-	jQuery('#seopress_titles_title_counters_progress').attr('aria-valuenow',progress),
-	jQuery('#seopress_titles_title_counters_progress').text(progress +'%'),
-	jQuery('#seopress_titles_title_counters_progress').css('width',progress +'%')
-}
-
 function sp_titles_counters() {
 	var meta_title_val = jQuery("#seopress_titles_title_meta").val();
 	var meta_title_placeholder = jQuery("#seopress_titles_title_meta").attr("placeholder");
@@ -62,7 +22,47 @@ function sp_titles_counters() {
 	
 	jQuery('#seopress_titles_title_counters_progress').attr('aria-valuenow',progress),
 	jQuery('#seopress_titles_title_counters_progress').text(progress +'%'),
-	jQuery('#seopress_titles_title_counters_progress').css('width',progress +'%')
+	jQuery('#seopress_titles_title_counters_progress').css('width',progress +'%'),
+	
+	jQuery("#seopress_titles_title_meta, #seopress-tag-single-title, #seopress-tag-single-site-title, #seopress-tag-single-sep").on('keyup paste change click', function(e) {
+		var meta_title_val = jQuery("#seopress_titles_title_meta").val();
+		var meta_title_placeholder = jQuery("#seopress_titles_title_meta").attr("placeholder");
+
+		jQuery("#seopress_titles_title_counters").css("color", "inherit"),
+		jQuery("#seopress_titles_title_pixel").css("color", "inherit"),
+		
+		meta_title_val.length > 60 && jQuery("#seopress_titles_title_counters").css("color", "red"),
+		pixelTitle(meta_title_val) > 568 && jQuery("#seopress_titles_title_pixel").css("color", "red");
+
+		if (meta_title_val.length == 0) { 
+			meta_title_placeholder.length > 60 && jQuery("#seopress_titles_title_counters").css("color", "red"),
+			pixelTitle(meta_title_placeholder) > 568 && jQuery("#seopress_titles_title_pixel").css("color", "red")
+		}
+
+		meta_title_val.length > 0 ? (jQuery("#seopress_titles_title_counters").text(meta_title_val.length),
+		jQuery("#seopress_titles_title_pixel").text(pixelTitle(meta_title_val))) : meta_title_placeholder.length && (jQuery("#seopress_titles_title_counters").text(meta_title_placeholder.length),
+		jQuery("#seopress_titles_title_pixel").text(pixelTitle(meta_title_placeholder))),
+		
+		meta_title_val.length > 0 ? (jQuery(".snippet-title-custom").text(e.target.value),
+		jQuery(".snippet-title").css("display", "none"),
+		jQuery(".snippet-title-custom").css("display", "block"),
+		jQuery(".snippet-title-default").css("display", "none")) : 0 == meta_title_val.length && (jQuery(".snippet-title-default").css("display", "block"),
+		jQuery(".snippet-title-custom").css("display", "none"), jQuery(".snippet-title").css("display", "none"));
+
+		if (meta_title_val.length) {
+			var progress = Math.round(pixelTitle(meta_title_val)/568*100);
+		} else {
+			var progress = Math.round(pixelTitle(meta_title_placeholder)/568*100);
+		}
+
+		if (progress >= 100) {
+			progress = 100;
+		}
+
+		jQuery('#seopress_titles_title_counters_progress').attr('aria-valuenow',progress),
+		jQuery('#seopress_titles_title_counters_progress').text(progress +'%'),
+		jQuery('#seopress_titles_title_counters_progress').css('width',progress +'%')
+    })
 }
 
 function sp_meta_desc_counters() {
