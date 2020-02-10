@@ -4,6 +4,7 @@ jQuery(document).ready(function($) {
 		$('.seopress-user-consent').removeClass('seopress-user-consent-hide');
 	}
 	$('#seopress-user-consent-accept').on('click', function() {
+		$('.seopress-user-consent').remove();
 		$.ajax({
 			method : 'GET',
 			url : seopressAjaxGAUserConsent.seopress_cookies_user_consent,
@@ -12,7 +13,6 @@ jQuery(document).ready(function($) {
 				_ajax_nonce: seopressAjaxGAUserConsent.seopress_nonce,
 			},
 			success : function( data ) {
-				$('.seopress-user-consent').remove();
 				$('head').append(data.data.gtag_js);
 				$('head').append(data.data.custom);
 				$('head').append(data.data.head_js);

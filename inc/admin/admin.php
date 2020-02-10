@@ -845,6 +845,16 @@ class seopress_options
                 <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_redirects') { echo 'active'; } ?>" id="tab_seopress_tool_redirects">
                     <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
                         <?php if(seopress_get_toggle_option('404')=='1') { ?>
+                            <div class="postbox section-tool">
+                                <h3><span><?php _e('Import your redirections','wp-seopress'); ?></span></h3>
+                                <select id="select-wizard-redirects" name="select-wizard-redirects">
+                                    <option value="none"><?php _e('Select an option','wp-seopress'); ?></option>
+                                    <option value="section-import-redirects"><?php _e('CSV file (must match the template)','wp-seopress'); ?></option>
+                                    <option value="section-import-redirects-plugin"><?php _e('Redirections plugin (JSON - WordPress Redirects)','wp-seopress'); ?></option>
+                                    <option value="section-import-yoast-redirects"><?php _e('Yoast Premium plugin (CSV)','wp-seopress'); ?></option>
+                                </select>
+                                <br><br>
+                            </div>
                             <div id="section-import-redirects" class="postbox section-tool">
                                 <div class="inside">
                                     <h3><span><?php _e( 'Import Redirections', 'wp-seopress' ); ?></span></h3>

@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.0.3
+Version: 3.8.1
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -44,6 +44,7 @@ function seopress_activation() {
 register_activation_hook(__FILE__, 'seopress_activation');
 
 function seopress_deactivation() {
+    deactivate_plugins('wp-seopress-pro/seopress-pro.php');
 	delete_option( 'seopress_activated' );
     flush_rewrite_rules();
     do_action('seopress_deactivation');
@@ -53,7 +54,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.0.3' ); 
+define( 'SEOPRESS_VERSION', '3.8.1' ); 
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,6 +300,20 @@ function seopress_compatibility_jetpack() {
 }
 add_action( 'wp_head', 'seopress_compatibility_jetpack', 0 );
 
+/**
+ * Remove default WC meta robots
+ *
+ * @since 3.8.1
+ */
+function seopress_compatibility_woocommerce() {
+    if ( function_exists('is_plugin_active')) {
+        if (is_plugin_active( 'woocommerce/woocommerce.php' ) && !is_admin()) {
+            remove_action( 'wp_head', 'wc_page_noindex' );
+        }
+    }
+}
+add_action( 'wp_head', 'seopress_compatibility_woocommerce', 0 );
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Credits footer
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -466,6 +481,42 @@ function seopress_get_toggle_option($feature) {
     }
 }
 
+// Is Titles enable?
+//@deprecated since version 3.8
+function seopress_get_toggle_titles_option() {
+    $seopress_get_toggle_titles_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_titles_option ) ) {
+        foreach ($seopress_get_toggle_titles_option as $key => $seopress_get_toggle_titles_value)
+            $options[$key] = $seopress_get_toggle_titles_value;
+         if (isset($seopress_get_toggle_titles_option['toggle-titles'])) { 
+            return $seopress_get_toggle_titles_option['toggle-titles'];
+         }
+    }
+}
+// Is Social enable?
+//@deprecated since version 3.8
+function seopress_get_toggle_social_option() {
+    $seopress_get_toggle_social_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_social_option ) ) {
+        foreach ($seopress_get_toggle_social_option as $key => $seopress_get_toggle_social_value)
+            $options[$key] = $seopress_get_toggle_social_value;
+         if (isset($seopress_get_toggle_social_option['toggle-social'])) { 
+            return $seopress_get_toggle_social_option['toggle-social'];
+         }
+    }
+}
+// Is XML Sitemap enable?
+//@deprecated since version 3.8
+function seopress_get_toggle_xml_sitemap_option() {
+    $seopress_get_toggle_xml_sitemap_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_xml_sitemap_option ) ) {
+        foreach ($seopress_get_toggle_xml_sitemap_option as $key => $seopress_get_toggle_xml_sitemap_value)
+            $options[$key] = $seopress_get_toggle_xml_sitemap_value;
+         if (isset($seopress_get_toggle_xml_sitemap_option['toggle-xml-sitemap'])) { 
+            return $seopress_get_toggle_xml_sitemap_option['toggle-xml-sitemap'];
+         }
+    }
+}
 // Is Google Analytics enable?
 //@deprecated since version 3.8
 function seopress_get_toggle_google_analytics_option() {
@@ -476,6 +527,18 @@ function seopress_get_toggle_google_analytics_option() {
         if (isset($seopress_get_toggle_google_analytics_option['toggle-google-analytics'])) { 
             return $seopress_get_toggle_google_analytics_option['toggle-google-analytics'];
         }
+    }
+}
+// Is Advanced enable?
+//@deprecated since version 3.8
+function seopress_get_toggle_advanced_option() {
+    $seopress_get_toggle_advanced_option = get_option("seopress_toggle");
+    if ( ! empty ( $seopress_get_toggle_advanced_option ) ) {
+        foreach ($seopress_get_toggle_advanced_option as $key => $seopress_get_toggle_advanced_value)
+            $options[$key] = $seopress_get_toggle_advanced_value;
+         if (isset($seopress_get_toggle_advanced_option['toggle-advanced'])) { 
+            return $seopress_get_toggle_advanced_option['toggle-advanced'];
+         }
     }
 }
 
@@ -534,7 +597,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_op
     add_action( 'template_redirect', 'seopress_xml_sitemap_shortcut', 1);
 
     function seopress_sitemaps_headers() {
-        $headers = array('Content-type' => 'text/xml', 'x-robots-tag' => 'noindex,follow');
+        $headers = array('Content-type' => 'text/xml', 'x-robots-tag' => 'noindex, follow');
         $headers = apply_filters( 'seopress_sitemaps_headers', $headers );
         if (!empty($headers)) {
             foreach($headers as $key => $header) {

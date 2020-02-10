@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Get real preview + content analysis
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_do_real_preview() {            
+function seopress_do_real_preview() {
     check_ajax_referer( 'seopress_real_preview_nonce', $_GET['_ajax_nonce'], true );
 
     if (current_user_can('edit_posts') && is_admin()) {
@@ -211,6 +211,22 @@ function seopress_do_real_preview() {
 
                 if (!empty($tw_img)) {
                     $data['tw_img']['count'] = count($tw_img);
+                    foreach ($tw_img as $key=>$mtw_img) {
+                        $data['tw_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_img->nodeValue)));
+                    }
+                }
+
+                //Twitter:image:src
+                $tw_img = $xpath->query('//meta[@name="twitter:image:src"]/@content');
+
+                if (!empty($tw_img)) {
+                    $count = NULL;
+                    if (!empty($data['tw_img']['count'])) {
+                        $count = $data['tw_img']['count'];
+                    }
+                    
+                    $data['tw_img']['count'] = count($tw_img) + $count;
+
                     foreach ($tw_img as $key=>$mtw_img) {
                         $data['tw_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_img->nodeValue)));
                     }

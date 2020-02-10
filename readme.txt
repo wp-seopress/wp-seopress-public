@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.8.0.3
+Stable tag: 3.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,14 +60,14 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Export metadata (titles, open graph, robots...) to a CSV file</li>
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
-	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, FAQ, course, recipe, software application, video, event, product, job, simple review, site navigation element</li>
+	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, service, FAQ, course, recipe, software application, video, event, product, job, simple review, site navigation element and custom</li>
 	<li>Automatic Schemas</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Google Analytics Stats in Dashboard</li>
 	<li>Google Local Business</li>
 	<li>Backlinks (required a Majestic paid account)</li>
 	<li>SEOPress BOT: scan all your links in content to find errors (eg: 404...)</li>
-	<li>WooCommerce: Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema, disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
+	<li>WooCommerce: Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema (barcode), disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li>Easy Digital Downloads: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li>Dublin Core</li>
 	<li>Custom Breadcrumbs for single post types</li>
@@ -210,68 +210,24 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 <a href="https://www.seopress.org/support/faq/" target="_blank">Read our complete FAQ on our site</a>
 
 == Screenshots ==
-1. SEOPress Dashboard
-2. Titles & Metas
-3. Titles & Metas
-4. Titles & Metas
-5. Titles & Metas
-6. Titles & Metas
-7. XML Sitemap
-8. XML Sitemap
-9. XML Sitemap
-10. HTML Sitemap
-11. Social Networks
-12. Social Networks
-13. Social Networks
-14. Social Networks
-15. Google Analytics
-16. Google Analytics
-17. Google Analytics
-18. Google Analytics
-19. Google Analytics
-20. Advanced settings
-21. Advanced settings
-22. Advanced settings
-23. Tools: Import / Export / Reset settings
-24. SEOPress Bot : scan (PRO)
-25. SEOPress Bot : settings (PRO)
-26. License settings (PRO)
-27. Google Local Business (PRO)
-28. Dublin Core (PRO)
-29. Structured Data Types (PRO)
-30. Breadcrumbs (PRO)
-31. WooCommerce (PRO)
-32. Easy Digital Downloads (PRO)
-33. Google Page Speed (PRO)
-34. Robots.txt (PRO)
-35. Google News Sitemap (PRO)
-36. Monitoring 404 (PRO)
-37. htaccess (PRO)
-38. RSS (PRO)
-39. Backlinks (PRO)
-40. URL Rewriting (PRO)
-41. White Label (PRO)
-42. Schemas (PRO)
-43. Schemas (PRO)
-44. Redirections (PRO)
-45. Redirections (PRO)
-46. Broken links (PRO)
-47. SEO metabox
-48. SEO metabox
-49. SEO metabox
-50. SEO metabox
-51. SEO metabox
-52. SEO metabox
-53. Content analysis metabox
-54. Content analysis metabox
-55. Content analysis metabox
-56. Content analysis metabox
-57. Google Structured data types (PRO)
-58. Google Structured data types (PRO)
-59. Installation Wizard
-60. Installation Wizard
+1. SEOPress notifications center
+2. SEOPress dashboard
+3. SEO metabox: Titles settings
+4. SEO metabox: Social tab
+5. Content analysis metabox
+6. SEOPress PRO
+7. Installation Wizard
 
 == Changelog ==
+= 3.8.1 =
+* INFO Improve general user experience
+* INFO Improve UI to import redirections
+* INFO Improve backward compatibility
+* INFO Remove default WooCommerce meta robots to avoid conflicts
+* INFO Improve performance to remove the cookie bar when user clicks the Accept button
+* FIX Fatal error $product->get_id
+* FIX Some CSS
+* FIX Twitter Cards false positive if Tw Image size is set to large
 = 3.8.0.3 =
 * INFO Add a fallback for get modified post date in xml sitemaps
 * FIX JS file for SEO metabox

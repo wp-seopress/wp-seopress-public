@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
 	    	$('#tab_seopress_links_tools').addClass("active");
         } else if (seopress_admin_tab_session_storage) {
             $('#seopress-admin-tabs').find('.nav-tab.nav-tab-active').removeClass("nav-tab-active");
-            $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");    
+            $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");
             $('#'+seopress_admin_tab_session_storage.split('#tab=')+'-tab').addClass("nav-tab-active");
             $('#'+seopress_admin_tab_session_storage.split('#tab=')).addClass("active");
         } else {
