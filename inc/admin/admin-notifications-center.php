@@ -163,11 +163,11 @@
                                         <span class="dashicons dashicons-info"></span>
                                         <div class="notice-left">
                                             <p>
-                                                <?php echo sprintf(__('We noticed that you use <strong>%s</strong> plugin.','wp-seopress'), $value); ?>
+                                                <?php echo sprintf(__('We noticed that you are using <strong>%s</strong> plugin.','wp-seopress'), $value); ?>
                                                 <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
                                             </p>
                                             <p>
-                                                <?php _e('Do you want to migrate all your metadata to SEOPress? Do not use multiple SEO plugins at once to avoid conflicts!','wp-seopress'); ?>
+                                                <?php _e('Do you want to migrate all your metadata to SEOPress? To avoid conflicts don't use multiple SEO plugins at once.','wp-seopress'); ?>
                                             </p>
                                         </div>
                                         <div class="notice-right">
@@ -182,11 +182,11 @@
                                 <span class="dashicons dashicons-info"></span>
                                 <div class="notice-left">
                                     <p>
-                                        <?php _e('We noticed that you use another SEO plugin.','wp-seopress'); ?>
+                                        <?php _e('We noticed that you are using another SEO plugin.','wp-seopress'); ?>
                                         <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
                                     </p>
                                     <p>
-                                        <?php _e('Do not use multiple SEO plugins at once to avoid conflicts!','wp-seopress'); ?>
+                                        <?php _e('To avoid conflicts, do not use multiple SEO plugins at once!','wp-seopress'); ?>
                                     </p>
                                 </div>
                                 <div class="notice-right">
@@ -254,7 +254,7 @@
                                         <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
                                     </p>
                                     <p>
-                                        <?php _e('This PHP module, installed by default with PHP, is required by many plugins including SEOPress. Please contact your host as soon as possible to solve this.','wp-seopress'); ?>
+                                        <?php _e('This PHP module, installed by default with PHP, is required by many plugins, including SEOPress. Please contact your host as soon as possible to solve this.','wp-seopress'); ?>
                                     </p>
                                 </div>
                                 <?php
@@ -308,7 +308,7 @@
                                         <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
                                     </p>
                                     <p>
-                                        <?php _e('Your Site Title is used by WordPress, your theme and your plugins including SEOPress. It is an essential component in the generation of title tags, but not only. Enter one!','wp-seopress'); ?>
+                                        <?php _e('Your Site Title is used by WordPress, your theme, and your plugins, including SEOPress. It is an essential component in the generation of title tags, but not only. Enter one!','wp-seopress'); ?>
                                     </p>
                                 </div>
                                 <div class="notice-right">
@@ -325,7 +325,7 @@
                                         <span class="impact high"><?php _e('High impact','wp-seopress'); ?></span>
                                     </p>
                                     <p>
-                                        <?php _e('Why is this important? Showing only the summary of each article significantly reduces the theft of your content by third party sites. Not to mention, the increase in your traffic, your advertising revenue, conversions...','wp-seopress'); ?>
+                                        <?php _e('Why is this important? Showing the summary of each article significantly reduces the theft of your content by third party sites. Not to mention, the increase in your traffic, your advertising revenue, conversions...','wp-seopress'); ?>
                                     </p>
                                 </div>
                                 <div class="notice-right">
@@ -356,7 +356,7 @@
                                                 <span class="impact medium"><?php _e('Medium impact','wp-seopress'); ?></span>
                                             </p>
                                             <p>
-                                                <?php _e('Why is this important? Showing only the summary of each article significantly reduces the theft of your content by third party sites. Not to mention, the increase in your traffic, your advertising revenue, conversions...','wp-seopress'); ?>
+                                                <?php _e('Why is this important? Showing the summary of each article significantly reduces the theft of your content by third party sites. Not to mention, the increase in your traffic, your advertising revenue, conversions...','wp-seopress'); ?>
                                             </p>
                                         </div>
                                         <div class="notice-right">
@@ -422,7 +422,7 @@
                                                 <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
                                             </p>
                                             <p>
-                                                <?php _e('Enabling this option will create duplicate content for each article beyond x comments. This can have a disastrous effect by creating a large number of poor quality pages, and slowing the Google bot unnecessarily, so your ranking in search results.','wp-seopress'); ?>
+                                                <?php _e('Enabling this option will create duplicate content for each article beyond x comments. This can have a disastrous effect by creating a large number of poor quality pages and slowing the Google bot unnecessarily, so hindering your ranking in search results.','wp-seopress'); ?>
                                             </p>
                                         </div>
                                         <div class="notice-right">
@@ -550,7 +550,7 @@
                                             <span class="impact high"><?php _e('Huge impact','wp-seopress'); ?></span>
                                         </p>
                                         <p>
-                                            <?php _e('Is your brand new site online? So reference it as quickly as possible on Google to get your first visitors via Google Search Console. Already the case? Click on the cross on the right to remove this alert.','wp-seopress'); ?>
+                                            <?php _e('Is your brand new site online? If so, reference it as quickly as possible on Google to get your first visitors via the Google Search Console. Already the case? Click on the cross on the right to remove this alert.','wp-seopress'); ?>
                                         </p>
                                     </div>
                                     <div class="notice-right">
@@ -594,7 +594,7 @@
                                         <span class="impact high info"><?php _e('License','wp-seopress'); ?></span>
                                     </p>
                                     <p>
-                                        <?php _e('Please activate the SEOPress PRO license key to automatically receive updates to guarantee you the best user experience possible.','wp-seopress'); ?>
+                                        <?php _e('Please activate the SEOPress PRO license key to automatically receive updates and to guarantee you the best user experience possible.','wp-seopress'); ?>
                                     </p>
                                 </div>
                                 <div class="notice-right">
@@ -627,7 +627,7 @@
                                             <span class="impact high info"><?php _e('PRO','wp-seopress'); ?></span>
                                         </p>
                                         <p>
-                                            <?php _e('The PRO version of SEOPress allows you to easily manage your structured data (schemas), add a breadcrumb optimized for SEO and accessibility, improve SEO for WooCommerce, gain productivity with our import / export tool from a CSV of your metadata and so much more.','wp-seopress'); ?>
+                                            <?php _e('The PRO version of SEOPress allows you to easily manage your structured data (schemas), add breadcrumbs optimized for SEO and accessibility, improve SEO for WooCommerce, gain productivity with our import/export tool from/to a CSV of your metadata, and so much more.','wp-seopress'); ?>
                                         </p>
                                     </div>
                                     <div class="notice-right">

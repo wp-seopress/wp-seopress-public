@@ -1,5 +1,5 @@
 <div id="notice-get-started-alert" class="seopress-get-started seopress-alert deleteable">
-    <span class="preheader"><?php _e('How-to get started','wp-seopress'); ?></span>
+    <span class="preheader"><?php _e('How to get started','wp-seopress'); ?></span>
     <h2><?php _e('Welcome to SEOPress!','wp-seopress'); ?></h2>
     <p><?php _e('Launch our installation wizard to quickly and easily configure the basic SEO settings for your site. Browse our video guides to go further. Can\'t find the answers to your questions? Open a ticket from your customer area. A happiness engineer will be happy to help you.','wp-seopress'); ?></p>
     <a href="<?php echo admin_url('admin.php?page=seopress-setup'); ?>" class="button button-primary"><?php _e('Get started','wp-seopress'); ?> <span class="dashicons dashicons-arrow-right-alt"></span></a>

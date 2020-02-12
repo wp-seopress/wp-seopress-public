@@ -241,7 +241,7 @@
                             }
                         }
                     ?>
-                    <a href="<?php echo $seopress_docs_link['support']['wc']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Guide to optimize your WooCommerce SEO - new window','wp-seopress'); ?></span></a>
+                    <a href="<?php echo $seopress_docs_link['support']['wc']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('A guide to optimize your WooCommerce SEO - new window','wp-seopress'); ?></span></a>
                 </span>
             </div>
             <?php 
@@ -350,7 +350,7 @@
                         <span class="dashicons dashicons-media-spreadsheet"></span>
                     </div>
                     <h3><?php _e('Structured Data Types','wp-seopress'); ?></h3>
-                    <p><?php _e('Add data types to your content: articles, courses, recipes, videos, events, products and more.','wp-seopress'); ?></p>
+                    <p><?php _e('Add data types to your content: articles, courses, recipes, videos, events and products','wp-seopress'); ?></p>
                     <a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets$9' ); ?>"><?php _e('Manage','wp-seopress'); ?></a>
                     <a class="button-secondary view-redirects" href="<?php echo admin_url( 'edit.php?post_type=seopress_schemas' ); ?>"><?php _e('See schemas','wp-seopress'); ?></a>
                     <?php
@@ -380,7 +380,7 @@
                             }
                         }
                     ?>
-                    <a href="<?php echo $seopress_docs_link['support']['schema']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Guide to add schemas with SEOPress PRO - new window','wp-seopress'); ?></span></a>
+                    <a href="<?php echo $seopress_docs_link['support']['schema']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('A guide to add schemas with SEOPress PRO - new window','wp-seopress'); ?></span></a>
                 </span>
             </div>
         <?php 
@@ -535,7 +535,7 @@
                             }
                         }
                     ?>
-                    <a href="<?php echo $seopress_docs_link['support']['gnews']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Guide to activate Google News XML sitemap with SEOPress PRO - new window','wp-seopress'); ?></span></a>
+                    <a href="<?php echo $seopress_docs_link['support']['gnews']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('A guide to activate Google News XML sitemap with SEOPress PRO - new window','wp-seopress'); ?></span></a>
                 </span>
             </div>
         <?php
@@ -561,7 +561,7 @@
                             }
                         }
                     ?>
-                    <a href="<?php echo $seopress_docs_link['support']['schema']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Guide to add schemas with SEOPress PRO - new window','wp-seopress'); ?></span></a>
+                    <a href="<?php echo $seopress_docs_link['support']['schema']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('A guide to add schemas with SEOPress PRO - new window','wp-seopress'); ?></span></a>
                 </span>
             </div>
         <?php
@@ -647,7 +647,7 @@
                             }
                         }
                     ?>
-                    <a href="<?php echo $seopress_docs_link['support']['broken']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Guide to find broken links with SEOPress PRO - new window','wp-seopress'); ?></span></a>
+                    <a href="<?php echo $seopress_docs_link['support']['broken']; ?>" target="_blank" class="seopress-doc" title="<?php _e('Read our guide','wp-seopress'); ?>"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('A guide to find broken links with SEOPress PRO - new window','wp-seopress'); ?></span></a>
                 </span>
             </div>
         <?php

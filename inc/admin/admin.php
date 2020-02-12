@@ -740,6 +740,18 @@ class seopress_options
                     </div><!-- .postbox -->
                 </div>
                 <div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_plugins') { echo 'active'; } ?>" id="tab_seopress_tool_plugins">
+                    <div class="postbox section-tool">
+                        <h3><span><?php _e('Import posts and terms metadata from','wp-seopress'); ?></span></h3>
+                        <select id="select-wizard-import" name="select-wizard-import">
+                            <option value="none"><?php _e('Select an option','wp-seopress'); ?></option>
+                            <option value="yoast-migration-tool"><?php _e('Yoast SEO','wp-seopress'); ?></option>
+                            <option value="aio-migration-tool"><?php _e('All In One SEO','wp-seopress'); ?></option>
+                            <option value="seo-framework-migration-tool"><?php _e('The SEO Framework','wp-seopress'); ?></option>
+                            <option value="rk-migration-tool"><?php _e('Rank Math','wp-seopress'); ?></option>
+                            <option value="squirrly-migration-tool"><?php _e('Squirrly SEO','wp-seopress'); ?></option>
+                        </select>
+                        <br><br>
+                    </div>
                     <!-- Yoast import tool --> 
                     <div id="yoast-migration-tool" class="postbox section-tool">
                         <div class="inside">
@@ -773,7 +785,7 @@ class seopress_options
                                 <li><?php _e('Twitter image thumbnail','wp-seopress'); ?></li>
                                 <li><?php _e('Meta Robots (noindex, nofollow)','wp-seopress'); ?></li>
                             </ul>
-                            <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data.', 'wp-seopress' ); ?></p>
+                            <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update/delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data.', 'wp-seopress' ); ?></p>
                             <button id="seopress-aio-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
@@ -835,7 +847,7 @@ class seopress_options
                                 <li><?php _e('Meta Robots (noindex or nofollow)','wp-seopress'); ?></li>
                                 <li><?php _e('Canonical URL','wp-seopress'); ?></li>
                             </ul>
-                            <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any Squirrly SEO data.', 'wp-seopress' ); ?></p>
+                            <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update/delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any Squirrly SEO data.', 'wp-seopress' ); ?></p>
                             <button id="seopress-squirrly-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
@@ -1911,7 +1923,7 @@ class seopress_options
 
         add_settings_field(
             'seopress_google_analytics_other_tracking', // ID
-           __("[HEAD] Add an additional tracking code (like GTM, Facebook Pixel, Hotjar...)","wp-seopress"), // Title
+           __("Add an additional tracking code (like Facebook Pixel, Hotjar...)","wp-seopress"), // Title
             array( $this, 'seopress_google_analytics_other_tracking_callback' ), // Callback
             'seopress-settings-admin-google-analytics-features', // Page
             'seopress_setting_section_google_analytics_features' // Section                  
@@ -3520,7 +3532,7 @@ class seopress_options
         
         echo '<label for="seopress_titles_nositelinkssearchbox">'. __( 'nositelinkssearchbox', 'wp-seopress' ) .'</label>';
         
-        echo '<p class="description">'.__('Prevent Google to display a sitelinks searchbox in search results. Enable this option will remove the "Website" schema from your source code.','wp-seopress').'</p>';
+        echo '<p class="description">'.__('Prevents Google to display a sitelinks searchbox in search results. Enable this option will remove the "Website" schema from your source code.','wp-seopress').'</p>';
         
         if (isset($this->options['seopress_titles_nositelinkssearchbox'])) {
             esc_attr( $this->options['seopress_titles_nositelinkssearchbox']);
@@ -3645,7 +3657,7 @@ class seopress_options
         
         echo '<label for="seopress_xml_sitemap_author_enable">'. __( 'Enable Author Sitemap', 'wp-seopress' ) .'</label>';
         
-        echo '<p class="description">'.__('Make sure to enable Author archive from SEO, Titles and metas, Archives tab.</a>','wp-seopress').'</p>';
+        echo '<p class="description">'.__('Make sure to enable author archive from SEO, titles and metas, archives tab.</a>','wp-seopress').'</p>';
 
         if (isset($this->options['seopress_xml_sitemap_author_enable'])) {
             esc_attr( $this->options['seopress_xml_sitemap_author_enable']);
@@ -4157,7 +4169,7 @@ class seopress_options
         
         echo '<label for="seopress_social_facebook_img_default">'. __( 'Override every <strong>og:image</strong> tag with this default image (except if a custom og:image has already been set from the SEO metabox).', 'wp-seopress' ) .'</label>';
 
-        echo '<p class="description">'.__('This setting doesn‘t apply for homepage.','wp-seopress').'</p>';
+        echo '<p class="description">'.__('This setting doesn‘t apply for the homepage.','wp-seopress').'</p>';
         
         if (isset($this->options['seopress_social_facebook_img_default'])) {
             esc_attr( $this->options['seopress_social_facebook_img_default']);
@@ -4175,7 +4187,7 @@ class seopress_options
 
         echo '<pre>&lt;meta property="fb:pages" content="page ID"/&gt;</pre>';
 
-        echo '<br><span class="dashicons dashicons-external"></span><a href="https://www.facebook.com/help/1503421039731588" target="_blank">'.__('How to find my Facebook Page ID?','wp-seopress').'</a>';
+        echo '<br><span class="dashicons dashicons-external"></span><a href="https://www.facebook.com/help/1503421039731588" target="_blank">'.__('How do I find my Facebook Page ID?','wp-seopress').'</a>';
     }
 
     public function seopress_social_facebook_admin_id_callback()
@@ -4425,7 +4437,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_bg']) ? $this->options['seopress_google_analytics_cb_bg'] : NULL;
 
         printf(
-        '<input type="text" data-default-color="#F1F1F1" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_bg]" aria-label="'.__('Change the cookie bar background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" data-default-color="#F1F1F1" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_bg]" aria-label="'.__('Change the color of the cookie bar background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4435,7 +4447,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_txt_col']) ? $this->options['seopress_google_analytics_cb_txt_col'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_txt_col]" aria-label="'.__('Change the cookie bar text color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_txt_col]" aria-label="'.__('Change the color of the cookie bar text','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4445,7 +4457,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_lk_col']) ? $this->options['seopress_google_analytics_cb_lk_col'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_lk_col]" aria-label="'.__('Change the cookie bar link color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_lk_col]" aria-label="'.__('Change the color of the cookie bar link','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4455,7 +4467,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_btn_bg']) ? $this->options['seopress_google_analytics_cb_btn_bg'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg]" aria-label="'.__('Change the cookie bar button background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg]" aria-label="'.__('Change the color of the cookie bar button background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4465,7 +4477,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_btn_bg_hov']) ? $this->options['seopress_google_analytics_cb_btn_bg_hov'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg_hov]" aria-label="'.__('Change the cookie bar button hover background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg_hov]" aria-label="'.__('Change the color of the cookie bar button hover background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4475,7 +4487,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_btn_col']) ? $this->options['seopress_google_analytics_cb_btn_col'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_col]" aria-label="'.__('Change the cookie bar button color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_col]" aria-label="'.__('Change the color of the cookie bar button','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4485,7 +4497,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_btn_col_hov']) ? $this->options['seopress_google_analytics_cb_btn_col_hov'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_col_hov]" aria-label="'.__('Change the cookie bar button hover color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_col_hov]" aria-label="'.__('Change the color of the cookie bar button hover','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4495,7 +4507,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_btn_sec_bg']) ? $this->options['seopress_google_analytics_cb_btn_sec_bg'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg]" aria-label="'.__('Change the cookie bar secondary button background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg]" aria-label="'.__('Change the color of the cookie bar secondary button background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4505,7 +4517,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_btn_sec_col']) ? $this->options['seopress_google_analytics_cb_btn_sec_col'] : NULL;
 
         printf(
-        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_col]" aria-label="'.__('Change the cookie bar secondary button hover background color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_col]" aria-label="'.__('Change the color of the cookie bar secondary button hover background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4515,7 +4527,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_btn_sec_bg_hov']) ? $this->options['seopress_google_analytics_cb_btn_sec_bg_hov'] : NULL;
 
         printf(
-        '<input type="text" data-default-color="#222222" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg_hov]" aria-label="'.__('Change the cookie bar secondary button color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" data-default-color="#222222" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg_hov]" aria-label="'.__('Change the color of the cookie bar secondary button','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
@@ -4525,7 +4537,7 @@ class seopress_options
         $check = isset($this->options['seopress_google_analytics_cb_btn_sec_col_hov']) ? $this->options['seopress_google_analytics_cb_btn_sec_col_hov'] : NULL;
 
         printf(
-        '<input type="text" data-default-color="#FFFFFF" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_col_hov]" aria-label="'.__('Change the cookie bar secondary button hover color','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+        '<input type="text" data-default-color="#FFFFFF" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_col_hov]" aria-label="'.__('Change the color of the cookie bar secondary button hover','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
         esc_html( $check )
         );
     }
