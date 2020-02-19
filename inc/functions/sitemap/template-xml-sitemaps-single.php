@@ -75,7 +75,7 @@ function seopress_xml_sitemap_single() {
     $seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
     $seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
     $seopress_sitemaps .= "\n";
-    $seopress_sitemaps .= apply_filters('seopress_sitemap_urlset', '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' );
+    $seopress_sitemaps .= apply_filters('seopress_sitemaps_urlset', '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' );
     $seopress_sitemaps .= "\n";
 
     if (get_post_type_archive_link($path) ==true && $offset ==0) {
@@ -106,7 +106,7 @@ function seopress_xml_sitemap_single() {
             $seopress_sitemap_url .= '</url>';
             $seopress_sitemap_url .= "\n";
 
-            $seopress_sitemaps .= apply_filters('seopress_sitemap_url', $seopress_sitemap_url, $seopress_url);
+            $seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemap_url, $seopress_url);
         }
     }
 
@@ -385,7 +385,7 @@ function seopress_xml_sitemap_single() {
         }
         $seopress_sitemap_url .= '</url>';
         $seopress_sitemap_url .= "\n";
-        $seopress_sitemaps .= apply_filters('seopress_sitemap_url', $seopress_sitemap_url, $seopress_url);
+        $seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemap_url, $seopress_url);
     }
     wp_reset_postdata();
 
