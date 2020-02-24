@@ -28,23 +28,32 @@ function seopress_xml_sitemap_author() {
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";
-	$seopress_sitemaps .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    
+	$seopress_sitemaps .= apply_filters('seopress_sitemaps_urlset', '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' );
+
     $args = array('fields' => 'ID', 'orderby' => 'nicename', 'order' => 'ASC', 'has_published_posts' => array('post'), 'blog_id' => absint(get_current_blog_id()), 'lang' => '');
     $args = apply_filters('seopress_sitemaps_author_query', $args);
     
     $authorslist = get_users($args);
         
     foreach ( $authorslist as $author ) {
-		$seopress_sitemaps .= "\n";
-	  	$seopress_sitemaps .= '<url>';
-	  	$seopress_sitemaps .= "\n";
-		$seopress_sitemaps .= '<loc>';
-		$seopress_sitemaps .= htmlspecialchars(urldecode(esc_url(get_author_posts_url($author))));
-		$seopress_sitemaps .= '</loc>';
-		$seopress_sitemaps .= "\n";
-		$seopress_sitemaps .= '</url>';
-	}
+        $seopress_sitemaps_url = '';
+        // array with all the information needed for a sitemap url
+        $seopress_url = array(
+            'loc' => htmlspecialchars(urldecode(esc_url(get_author_posts_url($author)))),
+            'mod' => '',
+            'images' => array()
+        );
+        $seopress_sitemaps_url .= "\n";
+        $seopress_sitemaps_url .= '<url>';
+        $seopress_sitemaps_url .= "\n";
+        $seopress_sitemaps_url .= '<loc>';
+        $seopress_sitemaps_url .= $seopress_url['loc'];
+        $seopress_sitemaps_url .= '</loc>';
+        $seopress_sitemaps_url .= "\n";
+        $seopress_sitemaps_url .= '</url>';
+
+        $seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
+    }
 	$seopress_sitemaps .= '</urlset>';
 	$seopress_sitemaps .= "\n";
 
