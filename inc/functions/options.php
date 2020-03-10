@@ -426,11 +426,9 @@ if (seopress_get_toggle_option('advanced') =='1') {
 			global $product;
 		}
 		$post			= get_post( $post );
-		$product		= wc_get_product( $post->ID );
-
-		//if (isset($product) && method_exists($product, 'get_id') && get_post_meta($product->get_id(),'sp_wc_barcode_type_field', true)) {
-
-		
+		if (function_exists('wc_get_product')) {
+			$product		= wc_get_product( $post->ID );
+		}
 		if ($post) {
 			$_seopress_robots_primary_cat = get_post_meta($post->ID,'_seopress_robots_primary_cat',true);
 			if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {

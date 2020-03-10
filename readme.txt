@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.8.2
+Stable tag: 3.8.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -222,6 +222,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.8.2.1 =
+* FIX Fatal error Call to undefined function wc_get_product()
 = 3.8.2 =
 * NEW 🎉 Advanced conditions for schemas! (PRO)
 * NEW Google Mobile Preview!
