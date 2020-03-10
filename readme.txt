@@ -1,12 +1,12 @@
 === SEOPress ===
 Authors: rainbowgeek
-Contributors: rainbowgeek, juliobox, maigret
+Contributors: rainbowgeek, juliobox
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.8.1
+Stable tag: 3.8.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -219,13 +219,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
-
-
-TESTS: inc/functions/options-redirections.php pour redirections ! cas avec is_home/is_blog/is_front_page/multisite...
-
-= 3.8.2 =
-* INFO Improve UI for import tool
-* FIX Redirect from blog page
+= 3.8.1.1 =
+* FIX JS error for SEO metabox of taxonomy terms
 = 3.8.1 =
 * INFO Improve general user experience
 * INFO Improve UI to import redirections

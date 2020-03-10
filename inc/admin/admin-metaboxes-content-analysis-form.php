@@ -186,13 +186,13 @@ if( strtotime( $post->post_modified ) < strtotime('-365 days') ) {
 } else {
     $desc = '<p><span class="dashicons dashicons-yes"></span>'.__('The last modified date of this article is less than 1 year. Cool!','wp-seopress').'</p>';
 }
-$desc .= '<p>'.__('Search engines love fresh content. Update regularly your articles without entirely rewriting your content and give them a boost in search rankings. SEOPress takes care of the technical part.','wp-seopress').'</p>';
+$desc .= '<p>'.__('Search engines love fresh content. Regularly update your articles without having to rewrite your content entirely and give them a boost in search rankings. SEOPress takes care of the technical part.','wp-seopress').'</p>';
 $analyzes['old_post']['desc'] = $desc;
 
 //Word counters
 $desc = NULL;
 if (isset($seopress_analysis_data['0']['words_counter']) || isset($seopress_analysis_data['0']['words_counter_unique'])) {
-    $desc = '<p>'.__('Words count is not a direct ranking factor. But, your content must be as qualitative as possible, with relevant and unique information. To fulfill these conditions, your articles require a minimum of paragraphs, and so, words.','wp-seopress').'</p>
+    $desc = '<p>'.__('Words counter is not a direct ranking factor. But, your content must be as qualitative as possible, with relevant and unique information. To fulfill these conditions, your article requires a minimum of paragraphs, so words.','wp-seopress').'</p>
     <ul>
         <li>'.$seopress_analysis_data['0']['words_counter'].' '.__('words found.','wp-seopress').'</li>
         <li>'.$seopress_analysis_data['0']['words_counter_unique'].' '.__('unique words found.','wp-seopress').'</li>';
@@ -278,7 +278,7 @@ if (!empty($seopress_analysis_data['0']['h1']['matches'])) {
     $desc .= '</ul>';
     if ($count > 1) {
         $desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d Heading 1 (H1) in your content.','wp-seopress'), $count).'</p>';
-        $desc .= '<p>'.__('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility.','wp-seopress').'</p>';
+        $desc .= '<p>'.__('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility. Below, the list:','wp-seopress').'</p>';
         $analyzes['headings']['impact'] = 'high';
     }
 
@@ -711,7 +711,7 @@ if (!empty($seopress_analysis_data['0']['img'])) {
 
     if (isset($images) && !empty($images)) {
         $analyzes['img_alt']['impact'] = 'high';
-        $desc = '<p><span class="dashicons dashicons-no-alt"></span>'.__('No alternative text was found for these images. Alt tags are important for both SEO and accessibility. Edit your images using the media library or your favorite page builder and fill in alternative text fields.','wp-seopress').'</p>';
+        $desc = '<p><span class="dashicons dashicons-no-alt"></span>'.__('No alternative text found for these images. Alt tags are important for both SEO and accessibility. Edit your images using the media library or your favorite page builder and fill in alternative text fields.','wp-seopress').'</p>';
     
         //Standard images & galleries
         if (isset($images) && !empty($images)) {

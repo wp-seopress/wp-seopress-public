@@ -200,6 +200,7 @@ function seopress_display_seo_term_metaboxe() {
             $seopress_real_preview = array(
                 'seopress_nonce' => wp_create_nonce('seopress_real_preview_nonce'),
                 'seopress_real_preview' => admin_url('admin-ajax.php'),
+                'i18n' => array('progress' => __('Analysis in progress...','wp-seopress'))
             );
             wp_localize_script( 'seopress-cpt-counters-js', 'seopressAjaxRealPreview', $seopress_real_preview );
 

@@ -247,7 +247,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 			<h2><?php _e('Welcome!','wp-seopress'); ?></h2>
 			<p class="store-setup"><?php esc_html_e( 'The following wizard will help you configure SEOPress and get you started quickly.', 'wp-seopress' ); ?></p>
 			<p class="store-setup"><?php esc_html_e( 'The first step is to import your previous settings from other plugins to keep your SEO.', 'wp-seopress' ); ?></p>
-			<p class="store-setup"><?php esc_html_e( 'No data to migrate? Click "Next step" button!', 'wp-seopress' ); ?></p>
+			<p class="store-setup"><?php esc_html_e( 'Not data to migrate? Click "Next step" button!', 'wp-seopress' ); ?></p>
 
 			<div class="store-address-container">
                 <!-- Yoast import tool --> 
@@ -280,7 +280,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <li><?php _e('Twitter image thumbnail','wp-seopress'); ?></li>
                         <li><?php _e('Meta Robots (noindex, nofollow)','wp-seopress'); ?></li>
                     </ul>
-                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update/delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data.', 'wp-seopress' ); ?></p>
+                    <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data.', 'wp-seopress' ); ?></p>
                     <button id="seopress-aio-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                     <span class="spinner"></span>
                     <div class="log"></div>
