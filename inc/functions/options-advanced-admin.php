@@ -9,7 +9,7 @@ global $pagenow;
 //Admin notices
 //=================================================================================================
 //License notice
-if (current_user_can('manage_options')) {
+if ( current_user_can( seopress_capability( 'manage_options', 'notice' ) ) && is_seopress_page() ) {
     if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('wp-seopress-pro/seopress-pro.php') && !is_multisite()) {
         function seopress_notice_license() {
             $screen_id = get_current_screen();
@@ -28,7 +28,7 @@ if (current_user_can('manage_options')) {
                 printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
             }
         }
-        add_action( 'admin_notices', 'seopress_notice_license' );
+        add_action( 'seopress_admin_notices', 'seopress_notice_license' );
     }
 }
 
@@ -281,7 +281,7 @@ function seopress_advanced_appearance_score_col_option() {
     if ( ! empty ( $seopress_advanced_appearance_score_col_option ) ) {
         foreach ($seopress_advanced_appearance_score_col_option as $key => $seopress_advanced_appearance_score_col_value)
             $options[$key] = $seopress_advanced_appearance_score_col_value;
-         if (isset($seopress_advanced_appearance_score_col_option['seopress_advanced_appearance_score_col'])) { 
+         if (isset($seopress_advanced_appearance_score_col_option['seopress_advanced_appearance_score_col'])) {
             return $seopress_advanced_appearance_score_col_option['seopress_advanced_appearance_score_col'];
          }
     }
@@ -392,7 +392,7 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
                 case 'seopress_ps' :
                     echo '<div class="seopress-request-page-speed seopress-button" data_permalink="'.esc_url(get_the_permalink()).'" title="'.esc_attr(__('Analyze this page with Google Page Speed','wp-seopress')).'"><span class="dashicons dashicons-dashboard"></span></div>';
                     break;
-                
+
                 case 'seopress_score' :
                     if (get_post_meta($post_id, "_seopress_analysis_data", true)) {
                         $ca = get_post_meta($post_id, "_seopress_analysis_data", true);
@@ -411,7 +411,7 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
                         echo '</div>';
                     }
                     break;
-                
+
                 default :
                     break;
             }

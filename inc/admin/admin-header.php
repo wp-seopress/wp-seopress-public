@@ -3,8 +3,9 @@
 defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 function seopress_admin_header() { ?>
+    <div class="wrap"><h2><!--// hack to get WP notice at the correct place //--></h2></div>
     <div id="seopress-header">
-    	<div id="seopress-admin">
+        <div id="seopress-admin">
             <div id="seopress-navbar">
                 <?php if (defined('SEOPRESS_WL_ADMIN_HEADER_LOGO') && SEOPRESS_WL_ADMIN_HEADER_LOGO !== '') { ?>
                     <style>

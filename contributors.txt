@@ -2,6 +2,7 @@ Great people who contributed to this plugin :
 
 Developers:
 - Benjamin Denis: contact@seopress.org / @wp_seopress
+- Julio Potier: @juliobox
 
 SEO consultant:
 - Alan Cladx: @cladxxx
@@ -22,6 +23,7 @@ Integrations:
 - The Polylang team
 - The WPML team
 - The Weglot team
+- The TranslatePress team
 
 Translators:
 - French: Didier Wolforg, @rainbowgeek, and Clément Polito + WP-Translations

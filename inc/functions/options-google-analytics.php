@@ -188,6 +188,14 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$close_btn = __('X','wp-seopress');
 			}
 
+			$user_msg = '<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" tabindex="11">'.$consent_btn.'</button><button id="seopress-user-consent-close" tabindex="12">'.$close_btn.'</button></p></div>';
+
+		    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn);
+
+		    echo $user_msg;
+		}
+
+		function seopress_cookies_user_consent_styles(){
 			$styles = '<style>.seopress-user-consent {position: fixed;z-index: 8000;width: 100%;padding: 10px;left: 0;text-align: center;';
 			
 			//Position
@@ -277,13 +285,12 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			}
 
 			$styles .='.seopress-user-consent-hide{display:none;}</style>';
-
-			$user_msg = $styles.'<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" tabindex="11">'.$consent_btn.'</button><button id="seopress-user-consent-close" tabindex="12">'.$close_btn.'</button></p></div>';
-
-		    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn);
-
-		    echo $user_msg;
+			
+			$styles = apply_filters('seopress_rgpd_full_message_styles', $styles);
+			
+			echo $styles;
 		}
+
 		if (seopress_google_analytics_disable_option() =='1') {
 			if (is_user_logged_in()) {
 				global $wp_roles;
@@ -297,15 +304,19 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 							//do nothing
 						} else {
 							add_action('wp_footer', 'seopress_cookies_user_consent_html');
+							add_action('wp_head', 'seopress_cookies_user_consent_styles');
 						}
 					} else {
 						add_action('wp_footer', 'seopress_cookies_user_consent_html');
+						add_action('wp_head', 'seopress_cookies_user_consent_styles');
 					}
 				} else {
 					add_action('wp_footer', 'seopress_cookies_user_consent_html');
+					add_action('wp_head', 'seopress_cookies_user_consent_styles');
 				}
 			} else {
 				add_action('wp_footer', 'seopress_cookies_user_consent_html');
+				add_action('wp_head', 'seopress_cookies_user_consent_styles');
 			}
 		}
 	}

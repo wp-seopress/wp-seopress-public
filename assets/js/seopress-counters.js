@@ -238,6 +238,16 @@ function sp_ca_toggle() {
 }
 
 jQuery(document).ready(function(e) {
+	//default state
+	if (jQuery('#toggle-preview').attr('data-toggle') == '1') {
+		jQuery("#seopress_cpt .google-snippet-preview").addClass("mobile-preview");
+	} else {
+		jQuery("#seopress_cpt .google-snippet-preview").removeClass("mobile-preview");
+	}
+    jQuery('#toggle-preview').on('click', function() {
+		jQuery('#toggle-preview').attr('data-toggle', jQuery('#toggle-preview').attr('data-toggle') == '1' ? '0' : '1');
+        jQuery("#seopress_cpt .google-snippet-preview").toggleClass("mobile-preview");
+    });
     function s() {
         e.ajax({
             method: "GET",

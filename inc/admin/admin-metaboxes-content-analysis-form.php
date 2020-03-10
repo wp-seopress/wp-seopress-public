@@ -162,7 +162,7 @@ if (!empty($seopress_analysis_data['0']['json']) && isset($seopress_analysis_dat
     $desc = '<p>'.__('We found these schemas in the source code of this page:','wp-seopress').'</p>';
 
     $desc .= '<ul>';
-        $json_ld = $seopress_analysis_data['0']['json'];
+        $json_ld = array_filter($seopress_analysis_data['0']['json']);
         foreach(array_count_values($json_ld) as $key => $value) {
             $html = NULL;
             if ($value > 1) {
@@ -365,7 +365,7 @@ if ($seopress_titles_title !='') {
     $analyzes['meta_title']['desc'] = $desc;
 } else {
     $analyzes['meta_title']['impact'] = 'medium';
-    $analyzes['meta_title']['desc'] = '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom title is set for this post.','wp-seopress').'</p>';
+    $analyzes['meta_title']['desc'] = '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom title is set for this post. If the global meta title suits you, you can ignore this recommendation.','wp-seopress').'</p>';
 }
 
 //Meta description
@@ -399,7 +399,7 @@ if ($seopress_titles_desc !='') {
     $analyzes['meta_desc']['desc'] = $desc;
 } else {
     $analyzes['meta_desc']['impact'] = 'medium';
-    $analyzes['meta_desc']['desc'] = '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom meta description is set for this post.','wp-seopress').'</p>';
+    $analyzes['meta_desc']['desc'] = '<p><span class="dashicons dashicons-no-alt"></span>'.__('No custom meta description is set for this post. If the global meta description suits you, you can ignore this recommendation.','wp-seopress').'</p>';
 }
 
 //Social tags
@@ -709,9 +709,11 @@ $analyzes['robots']['desc'] = $desc;
 if (!empty($seopress_analysis_data['0']['img'])) {
     $images = isset($seopress_analysis_data['0']['img']['images']) ? $seopress_analysis_data['0']['img']['images'] : NULL;
 
+    $desc = '<div class="wrap-analysis-img">';
+
     if (isset($images) && !empty($images)) {
         $analyzes['img_alt']['impact'] = 'high';
-        $desc = '<p><span class="dashicons dashicons-no-alt"></span>'.__('No alternative text found for these images. Alt tags are important for both SEO and accessibility. Edit your images using the media library or your favorite page builder and fill in alternative text fields.','wp-seopress').'</p>';
+        $desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('No alternative text found for these images. Alt tags are important for both SEO and accessibility. Edit your images using the media library or your favorite page builder and fill in alternative text fields.','wp-seopress').'</p>';
     
         //Standard images & galleries
         if (isset($images) && !empty($images)) {
@@ -722,8 +724,10 @@ if (!empty($seopress_analysis_data['0']['img'])) {
             $desc .= '</ul>';
         }
     } else {
-        $desc = '<p><span class="dashicons dashicons-yes"></span>'.__('All alternative tags are filled in. Good work!','wp-seopress').'</p>';
+        $desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('All alternative tags are filled in. Good work!','wp-seopress').'</p>';
     }
+    $desc .= '</div>';
+
     $analyzes['img_alt']['desc'] = $desc;
 } else {
     $analyzes['img_alt']['impact'] = 'medium';

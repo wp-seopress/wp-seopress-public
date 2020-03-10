@@ -5,11 +5,16 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //=================================================================================================
 //Enabled
 function seopress_redirections_enabled() {
-	global $post;
-	if ($post) {
-		if (get_post_meta($post->ID,'_seopress_redirections_enabled',true)) { 
-			$seopress_redirections_enabled = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
-			return $seopress_redirections_enabled;
+	if (is_home() && get_option( 'page_for_posts' ) !='' && get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_enabled',true)) {
+		$seopress_redirections_enabled = get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_enabled',true);
+		return $seopress_redirections_enabled;
+	} else {
+		global $post;
+		if ($post) {
+			if (get_post_meta($post->ID,'_seopress_redirections_enabled',true)) { 
+				$seopress_redirections_enabled = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
+				return $seopress_redirections_enabled;
+			}
 		}
 	}
 }
@@ -25,10 +30,15 @@ function seopress_redirections_term_enabled() {
 
 //Type
 function seopress_redirections_type() {
-	global $post;
-	if (get_post_meta($post->ID,'_seopress_redirections_type',true)) { 
-		$seopress_redirections_type = get_post_meta($post->ID,'_seopress_redirections_type',true);
+	if (is_home() && get_option( 'page_for_posts' ) !='' && get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_type',true)) { 
+		$seopress_redirections_type = get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_type',true);
 		return $seopress_redirections_type;
+	} else {
+		global $post;
+		if (get_post_meta($post->ID,'_seopress_redirections_type',true)) { 
+			$seopress_redirections_type = get_post_meta($post->ID,'_seopress_redirections_type',true);
+			return $seopress_redirections_type;
+		}
 	}
 }
 
@@ -46,6 +56,9 @@ function seopress_redirections_value() {
 	global $post;
 	if (is_singular() && get_post_meta($post->ID,'_seopress_redirections_value',true)) {
 		$seopress_redirections_value = html_entity_decode(esc_url(get_post_meta($post->ID,'_seopress_redirections_value',true)));
+		return $seopress_redirections_value;
+	} elseif (is_home() && get_option( 'page_for_posts' ) !='' && get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_value',true)) {
+		$seopress_redirections_value = html_entity_decode(esc_url(get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_value',true)));
 		return $seopress_redirections_value;
  	} elseif ((is_tax() || is_category() || is_tag()) && get_term_meta(get_queried_object_id(),'_seopress_redirections_value',true) !='') {
 		$seopress_redirections_value = html_entity_decode(esc_url(get_term_meta(get_queried_object_id(),'_seopress_redirections_value',true)));

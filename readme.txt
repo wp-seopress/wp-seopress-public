@@ -1,12 +1,12 @@
 === SEOPress ===
 Authors: rainbowgeek
-Contributors: rainbowgeek, juliobox
+Contributors: rainbowgeek, juliobox, maigret
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.8.1.1
+Stable tag: 3.8.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,9 +47,11 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Redirect attachment pages to their file URL</li>
 	<li>Automatically set the image title / alt / caption / description</li>
 	<li>Import / Export settings from site to site.</li>
-	<li>Import posts and terms metadata from Yoast SEO, All In One SEO, SEO Framework, Rank Math and Squirrly</li>
+	<li>Import posts and terms metadata from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, and Squirrly</li>
 	<li>W3C check</li>
 	<li>Content analysis</li>
+	<li>Mobile / Desktop Google Preview</li>
+	<li>Facebook Preview</li>
 	<li>...</li>
 </ul>
 
@@ -61,7 +63,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Video XML Sitemap</li>
 	<li>Google Suggestions in Content Analysis</li>
 	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank">Google Structured Data types (schema.org)</a>: article, local business, service, FAQ, course, recipe, software application, video, event, product, job, simple review, site navigation element and custom</li>
-	<li>Automatic Schemas</li>
+	<li>Automatic Schemas with advanced conditions (AND, OR, Post types, taxonomies)</li>
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Google Analytics Stats in Dashboard</li>
 	<li>Google Local Business</li>
@@ -118,6 +120,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Polylang</li>
 	<li>MultilingualPress</li>
 	<li>Weglot</li>
+	<li>TranslatePress</li>
 	<li>Elementor</li>
 	<li>Divi</li>
 	<li>WP-Rocket</li>
@@ -166,7 +169,7 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 
 = Can I import my post and term metadata from other plugins? =
 
-You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/">Squirrly</a> (post metas only, not terms), and <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a> in one click to SEOPress without losing traffic.
+You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/">SEO Ultimate (post metas only, not terms)</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/">WP Meta SEO</a> in one click to SEOPress without losing traffic.
 
 = How to use Google Tag Manager / Facebook Pixel with SEOPress? =
 
@@ -219,6 +222,45 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.8.2 =
+* NEW 🎉 Advanced conditions for schemas! (PRO)
+* NEW Google Mobile Preview!
+* NEW TranslatePress compatibility!
+* NEW "remove post category links from breadcrumbs" option (SEO, PRO, Breadcrumbs)
+* NEW Import redirects from Rank Math
+* NEW SEO Ultimate import tool
+* NEW WP Meta SEO import tool
+* NEW Add servesCuisine property to LocalBusiness schemas related to Food (PRO)
+* NEW "seopress_rgpd_full_message_styles" hook to filter cookie bar inline styles (https://www.seopress.org/support/hooks/filter-user-consent-inline-styles/)
+* NEW "seopress_toggle_mobile_preview" hook to change the default Google Preview (desktop or mobile - https://www.seopress.org/support/hooks/set-google-snippet-preview-to-desktop-by-default/)
+* INFO Improve Oxygen compatibility
+* INFO Improve UI for FAQ schema
+* INFO Improve Wizard Configuration UI
+* INFO Improve UI for import tool
+* INFO Improve UX with tabs/anchor
+* INFO Improve responsive design
+* INFO Improve tooltip
+* INFO Improve alt text detection with tiny images (eg: Facebook Pixel) to avoid false positives
+* INFO Parsing the target keyword in permalinks no longer takes accents into account
+* INFO Improve orderby 404 in SEO, Redirections
+* INFO Automatically remove BOM from plugin export JSON file
+* INFO Add "Last time loaded" column to Redirections
+* INFO If redirect in place from the SEO metabox, then don't generate Google preview or content analysis
+* FIX Support non UTF-8 characters for "keyword in permalink" check
+* FIX Notices
+* FIX Redirect from blog page
+* FIX Warning: array_count_values(): Can only count STRING and INTEGER values
+* FIX Trailing slash in post type archive link for XML sitemaps
+* FIX Provider name for service schema
+* FIX redirects if "&" in query string
+* FIX product primary category for breadcrumbs
+* FIX White label with multisite
+* FIX XML Sitemaps with Polylang
+* FIX undefined index in video XML sitemap
+* FIX %%post_author%% in author archive page for specific cases
+* FIX W3C error for cookie bar, inline styles are now printed in the head of your document
+* FIX Plugin import / export settings tool
+* FIX tabs JS error if SEO metabox is not displayed with Structured data types metabox
 = 3.8.1.1 =
 * FIX JS error for SEO metabox of taxonomy terms
 = 3.8.1 =

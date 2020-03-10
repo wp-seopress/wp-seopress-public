@@ -26,7 +26,7 @@ if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
 
     function seopress_display_date_snippet() {
         if (seopress_titles_single_cpt_date_option()) {
-            return '<div class="snippet-date">'.get_the_date('M j, Y').' - </div>';
+            return '<div class="snippet-date">'.get_the_modified_date('M j, Y').' - </div>';
         }
     }
 } elseif ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
@@ -101,7 +101,10 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     }
                 echo '<div class="box-left">
                         <p style="margin-bottom:0">
-                            <label for="seopress_titles_title_meta">'. __( 'Title', 'wp-seopress' ) .'</label>
+                            <label for="seopress_titles_title_meta">'
+                                . __( 'Title', 'wp-seopress' )
+                                . seopress_tooltip(__('Meta title','wp-seopress'), __('Titles are critical to giving users a quick insight into the content of a result and why it’s relevant to their query. It\'s often the primary piece of information used to decide which result to click on, so it\'s important to use high-quality titles on your web pages.','wp-seopress'), esc_html('<title>My super title</title>')).
+                            '</label>
                             <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.esc_html__('Enter your title','wp-seopress').'" aria-label="'.__('Title','wp-seopress').'" value="'.$seopress_titles_title.'" />
                         </p>
                         <div class="sp-progress">
@@ -123,7 +126,10 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         </div>
 
                         <p style="margin-bottom:0">
-                            <label for="seopress_titles_desc_meta">'. __( 'Meta description', 'wp-seopress' ) .'</label>
+                            <label for="seopress_titles_desc_meta">'
+                            . __( 'Meta description', 'wp-seopress' ) 
+                            . seopress_tooltip(__('Meta description','wp-seopress'), __('A meta description tag should generally inform and interest users with a short, relevant summary of what a particular page is about. <br>They are like a pitch that convince the user that the page is exactly what they\'re looking for. <br>There\'s no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width.','wp-seopress'), esc_html('<meta name="description" content="my super meta description" />')).'
+                            </label>
                             <textarea id="seopress_titles_desc_meta" style="width:100%" rows="4" name="seopress_titles_desc" placeholder="'.esc_html__('Enter your meta description','wp-seopress').'" aria-label="'.__('Meta description','wp-seopress').'" value="'.$seopress_titles_desc.'">'.$seopress_titles_desc.'</textarea>
                         </p>
                         <div class="sp-progress">
@@ -144,29 +150,61 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                                 <span id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Excerpt','wp-seopress').'</span>
                             </div>';
                         }
-                    echo '</div>
-                    <div class="box-right">
-                        <div class="google-snippet-preview">
-                            <h3>'.__('Google Snippet Preview','wp-seopress').'</h3>
-                            <p>'.__('This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview.','wp-seopress').'</p>
-                            <div class="snippet-title"></div>
-                            <div class="snippet-title-custom" style="display:none"></div>';
-                        global $tag;
-                        if (get_the_title()) {
-                            echo '<div class="snippet-title-default" style="display:none">'.get_the_title().' - '.get_bloginfo('name').'</div>
-                            <div class="snippet-permalink">'.htmlspecialchars(urldecode(get_permalink())).'</div>';
-                        } elseif ($tag) {
-                            echo '<div class="snippet-title-default" style="display:none">'.$tag->name.' - '.get_bloginfo('name').'</div>';
-                            echo '<div class="snippet-permalink">'.htmlspecialchars(urldecode(get_term_link($tag))).'</div>';
-                        }
+                    echo '</div>';
+                    
+                    $toggle_preview = 1;
+                    $toggle_preview = apply_filters('seopress_toggle_mobile_preview', $toggle_preview);
 
-                        if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
-        echo                seopress_display_date_snippet();
-                        }
-        echo               '<div class="snippet-description">...</div>
-                            <div class="snippet-description-custom" style="display:none"></div>
-                            <div class="snippet-description-default" style="display:none"></div>';
-                    echo '</div>
+                echo '<div class="box-right">
+                        <div class="google-snippet-preview mobile-preview">
+                            <h3>'
+                                .__('Google Snippet Preview','wp-seopress')
+                                . seopress_tooltip(__('Snippet Preview','wp-seopress'), __('The Google preview is a simulation. <br>There is no reliable preview because it depends on the screen resolution, the device used, the expression sought, and Google. <br>There is not one snippet for one URL but several. <br>All the data in this overview comes directly from your source code. <br>This is what the crawlers will see.','wp-seopress'), NULL).'
+                            </h3>
+                            <p>'.__('This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview.','wp-seopress').'</p>
+                            
+                            <div class="wrap-toggle-preview">
+                                <p>
+                                    <span class="dashicons dashicons-smartphone"></span>
+                                    '.__('Mobile Preview','wp-seopress').'
+                                    <input type="checkbox" name="toggle-preview" id="toggle-preview" class="toggle" data-toggle="'.$toggle_preview.'">
+                                    <label for="toggle-preview"></label>
+                                </p>
+                            </div>';
+                            
+                            global $tag;
+
+                            $gp_title       = '';
+                            $gp_permalink   = '';
+                            if (get_the_title()) {
+                                $gp_title       = '<div class="snippet-title-default" style="display:none">'.get_the_title().' - '.get_bloginfo('name').'</div>';
+                                $gp_permalink   = '<div class="snippet-permalink">'.htmlspecialchars(urldecode(get_permalink())).'</div>';
+                            } elseif ($tag) {
+                                $gp_title       = '<div class="snippet-title-default" style="display:none">'.$tag->name.' - '.get_bloginfo('name').'</div>';
+                                $gp_permalink   = '<div class="snippet-permalink">'.htmlspecialchars(urldecode(get_term_link($tag))).'</div>';
+                            }
+
+                            $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="16" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC" width="16" alt="favicon"></div>';
+                            if (get_site_icon_url( 32 )) {
+                                $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="16" src="'.get_site_icon_url( 32 ).'" width="16" alt="favicon"/></div>';
+                            }
+
+                            echo '<div class="wrap-snippet">
+                                <div class="wrap-m-icon-permalink">'.$siteicon.$gp_permalink.'</div>
+                                <div class="snippet-title"></div>
+                                <div class="snippet-title-custom" style="display:none"></div>';
+                            
+                            echo $gp_title;
+                            echo $gp_permalink;
+
+                                if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
+                                    echo seopress_display_date_snippet();
+                                }
+            echo               '<div class="snippet-description">...</div>
+                                <div class="snippet-description-custom" style="display:none"></div>
+                                <div class="snippet-description-default" style="display:none"></div>';
+                        echo '</div>
+                        </div>
                     </div>
                 </div>';
             }
@@ -176,36 +214,42 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         <label for="seopress_robots_index_meta">
                             <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' '.$disabled['robots_index'].'/>
                                 '. __( 'Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>', 'wp-seopress' ) .'
+                                '.seopress_tooltip(__('"noindex" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "noindex". <br>Search engines will not index this URL in the search results.','wp-seopress'), esc_html('<meta name="robots" content="noindex" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_follow_meta">
                             <input type="checkbox" name="seopress_robots_follow" id="seopress_robots_follow_meta" value="yes" '. checked( $seopress_robots_follow, 'yes', false ) .' '.$disabled['robots_follow'].'/>
                                 '. __( 'Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress' ) .'
+                                '.seopress_tooltip(__('"nofollow" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "nofollow". <br>Search engines will not follow links from this URL.','wp-seopress'), esc_html('<meta name="robots" content="nofollow" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_odp_meta">
                             <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta" value="yes" '. checked( $seopress_robots_odp, 'yes', false ) .' '.$disabled['robots_odp'].'/>
                                 '. __( 'Do not use Open Directory project metadata for titles or excerpts for this page <strong>(noodp)</strong>', 'wp-seopress' ) .'
+                                '.seopress_tooltip(__('"noodp" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "noodp". <br>Note that Google and Yahoo have stopped considering this tag since the closing of DMOZ directory.','wp-seopress'), esc_html('<meta name="robots" content="noodp" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_imageindex_meta">
                             <input type="checkbox" name="seopress_robots_imageindex" id="seopress_robots_imageindex_meta" value="yes" '. checked( $seopress_robots_imageindex, 'yes', false ) .' '.$disabled['imageindex'].'/>
                                 '. __( 'Do not index images for this page <strong>(noimageindex)</strong>', 'wp-seopress' ) .'
+                                '.seopress_tooltip(__('"noimageindex" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "noimageindex". <br> Note that your images can always be indexed if they are linked from other pages.','wp-seopress'), esc_html('<meta name="google" content="noimageindex" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_archive_meta">
                             <input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta" value="yes" '. checked( $seopress_robots_archive, 'yes', false ) .' '.$disabled['archive'].'/>
                                 '. __( 'Do not display a "Cached" link in the Google search results <strong>(noarchive)</strong>', 'wp-seopress' ) .'
+                                '.seopress_tooltip(__('"noarchive" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "noarchive".','wp-seopress'), esc_html('<meta name="robots" content="noarchive" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_snippet_meta">
                             <input type="checkbox" name="seopress_robots_snippet" id="seopress_robots_snippet_meta" value="yes" '. checked( $seopress_robots_snippet, 'yes', false ) .' '.$disabled['snippet'].'/>
                                 '. __( 'Do not display a description in search results for this page <strong>(nosnippet)</strong>', 'wp-seopress' ) .'
+                                '.seopress_tooltip(__('"nosnippet" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "nosnippet".','wp-seopress'), esc_html('<meta name="robots" content="nosnippet" />')).'
                         </label>
                     </p>
                     <p class="description">';
@@ -214,9 +258,8 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         echo '</p>
                     <p>
                         <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'
-                            <span class="sp-tooltip"><span class="dashicons dashicons-editor-help"></span>
-                            <span class="sp-tooltiptext">'.__('A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color).
-                        The canonical can be in a different domain than a duplicate.','wp-seopress').'</span>
+                            '.seopress_tooltip(__('Canonical URL','wp-seopress'), __('A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. <br>For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. <br>Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color).
+                            The canonical can be in a different domain than a duplicate.','wp-seopress'), esc_html('<link rel="canonical" href="https://www.example.com/my-post-url/" />')).'
                         </label>
                         <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical" placeholder="'.esc_html__('Default value: ','wp-seopress').htmlspecialchars(urldecode(get_permalink())).'" aria-label="'.__('Canonical URL','wp-seopress').'" value="'.$seopress_robots_canonical.'" />
                         
@@ -376,7 +419,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         $status_code = array('410','451');
                         if ($seopress_redirections_value !='' || in_array($seopress_redirections_type, $status_code)) {
                             if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
-                                if ( 'seopress_404' == $typenow ) {                      
+                                if ( 'seopress_404' == $typenow ) {
                                     echo '<a href="'.get_home_url().'/'.get_the_title().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';
                                 } else {
                                     echo '<a href="'.get_permalink().'" id="seopress_redirections_value_default" class="button" target="_blank">'.__('Test your URL','wp-seopress').'</a>';

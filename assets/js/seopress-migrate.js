@@ -1,4 +1,27 @@
 jQuery(document).ready(function($) {
+	//Select toggle
+	$('#select-wizard-redirects, #select-wizard-import').change(function(e) {
+		e.preventDefault();
+
+		var select = $(this).val();
+
+		if (select =='none') {
+			$("#select-wizard-redirects option, #select-wizard-import option").each(function() {
+				var ids_to_hide = $(this).val();
+				$('#'+ids_to_hide).hide();
+			});
+		} else {
+			$("#select-wizard-redirects option:selected, #select-wizard-import option:selected").each(function() {
+				var ids_to_show = $(this).val();
+				$('#'+ids_to_show).show();
+			});
+			$("#select-wizard-redirects option:not(:selected), #select-wizard-import option:not(:selected)").each(function() {
+				var ids_to_hide = $(this).val();
+				$('#'+ids_to_hide).hide();
+			});
+		}
+	}).trigger('change');
+	
 	//Yoast SEO
 	$('#seopress-yoast-migrate').on('click', function(e) {
 		e.preventDefault();
@@ -161,6 +184,72 @@ jQuery(document).ready(function($) {
 		$( '#squirrly-migration-tool .spinner' ).css( "visibility", "visible" );
 		$( '#squirrly-migration-tool .spinner' ).css( "float", "none" );
 		$( '#squirrly-migration-tool .log' ).html('');
+	});
+
+	//SEO Ultimate
+	$('#seopress-seo-ultimate-migrate').on('click', function(e7) {
+		e7.preventDefault();
+		self.process_offset7( 0, self );
+	});
+	process_offset7 = function( offset7, self ) {
+		$.ajax({
+			method : 'POST',
+			url : seopressAjaxMigrate.seopress_seo_ultimate_migrate.seopress_seo_ultimate_migration,
+			data : {
+				action: 'seopress_seo_ultimate_migration',
+				offset7: offset7,
+				_ajax_nonce: seopressAjaxMigrate.seopress_seo_ultimate_migrate.seopress_nonce,
+			},
+			success : function( data ) {
+				if( 'done' == data.data.offset7 ) {
+		        	$('#seopress-seo-ultimate-migrate').removeAttr("disabled");
+					$( '.spinner' ).css( "visibility", "hidden" );
+					$( '#seo-ultimate-migration-tool .log' ).html(seopressAjaxMigrate.i18n.migration);
+		        } else {
+		        	self.process_offset7( parseInt( data.data.offset7 ), self );
+		        }
+			},
+		});
+	};
+
+	$('#seopress-seo-ultimate-migrate').on('click', function() {
+		$(this).attr("disabled", "disabled");
+		$( '#seo-ultimate-migration-tool .spinner' ).css( "visibility", "visible" );
+		$( '#seo-ultimate-migration-tool .spinner' ).css( "float", "none" );
+		$( '#seo-ultimate-migration-tool .log' ).html('');
+	});
+
+	//WP Meta SEO
+	$('#seopress-wp-meta-seo-migrate').on('click', function(e8) {
+		e8.preventDefault();
+		self.process_offset8( 0, self );
+	});
+	process_offset8 = function( offset8, self ) {
+		$.ajax({
+			method : 'POST',
+			url : seopressAjaxMigrate.seopress_wp_meta_seo_migrate.seopress_wp_meta_seo_migration,
+			data : {
+				action: 'seopress_wp_meta_seo_migration',
+				offset8: offset8,
+				_ajax_nonce: seopressAjaxMigrate.seopress_wp_meta_seo_migrate.seopress_nonce,
+			},
+			success : function( data ) {
+				if( 'done' == data.data.offset8 ) {
+					$('#seopress-wp-meta-seo-migrate').removeAttr("disabled");
+					$( '.spinner' ).css( "visibility", "hidden" );
+					$( '#wp-meta-seo-migration-tool .log' ).html(seopressAjaxMigrate.i18n.migration);
+				} else {
+					self.process_offset8( parseInt( data.data.offset8 ), self );
+				}
+			},
+		});
+	};
+
+	$('#seopress-wp-meta-seo-migrate').on('click', function() {
+		$(this).attr("disabled", "disabled");
+		$( '#wp-meta-seo-migration-tool .spinner' ).css( "visibility", "visible" );
+		$( '#wp-meta-seo-migration-tool .spinner' ).css( "float", "none" );
+		$( '#wp-meta-seo-migration-tool .log' ).html('');
 	});
 
 	//Export metadata to CSV

@@ -35,7 +35,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 * Hook in tabs.
 	 */
 	public function __construct() {
-		if ( apply_filters( 'seopress_enable_setup_wizard', true ) && current_user_can( 'manage_options' ) ) {
+		if ( apply_filters( 'seopress_enable_setup_wizard', true ) && current_user_can( seopress_capability( 'manage_options', 'Admin_Setup_Wizard' ) ) ) {
 			add_action( 'admin_menu', array( $this, 'admin_menus' ) );
 			add_action( 'admin_init', array( $this, 'setup_wizard' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -46,7 +46,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 * Add admin menus/screens.
 	 */
 	public function admin_menus() {
-		add_dashboard_page( '', '', 'manage_options', 'seopress-setup', '' );
+		add_dashboard_page( '', '', seopress_capability( 'manage_options', 'menu' ), 'seopress-setup', '' );
 	}
 
 	/**
@@ -55,28 +55,49 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 * Hooked onto 'admin_enqueue_scripts'.
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_style( 'seopress-setup', plugins_url( 'assets/css/seopress-setup.min.css', dirname(dirname(__FILE__))), array( 'dashicons', 'install' ), SEOPRESS_VERSION );
-		wp_register_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-migrate.min.js', dirname(dirname(__FILE__))), array( 'jquery' ), SEOPRESS_VERSION, true );
+		$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		wp_enqueue_style( 'seopress-setup', plugins_url( 'assets/css/seopress-setup' . $prefix . '.css', dirname( dirname( __FILE__ ) ) ), [ 'dashicons', 'install' ], SEOPRESS_VERSION );
+		wp_register_script( 'seopress-migrate-ajax', plugins_url( 'assets/js/seopress-migrate' . $prefix . '.js', dirname( dirname( __FILE__ ) ) ), [ 'jquery' ], SEOPRESS_VERSION, true );
 
-        $seopress_migrate = array( 
-            'seopress_aio_migrate' => array(
-                'seopress_nonce' => wp_create_nonce('seopress_aio_migrate_nonce'),
-                'seopress_aio_migration' => admin_url( 'admin-ajax.php'),
-            ),
-            'seopress_yoast_migrate' => array(
-                'seopress_nonce' => wp_create_nonce('seopress_yoast_migrate_nonce'),
-                'seopress_yoast_migration' => admin_url( 'admin-ajax.php'),
-            ),
-            'seopress_seo_framework_migrate' => array(
-                'seopress_nonce' => wp_create_nonce('seopress_seo_framework_migrate_nonce'),
-                'seopress_seo_framework_migration' => admin_url( 'admin-ajax.php'),
-            ),
-            'seopress_rk_migrate' => array(
-                'seopress_nonce' => wp_create_nonce('seopress_rk_migrate_nonce'),
-                'seopress_rk_migration' => admin_url( 'admin-ajax.php'),
-            ),
-        );
-        wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate );
+        $seopress_migrate = [
+            'seopress_aio_migrate'				=> [
+                'seopress_nonce'					=> wp_create_nonce('seopress_aio_migrate_nonce'),
+                'seopress_aio_migration'			=> admin_url( 'admin-ajax.php'),
+            ],
+            'seopress_yoast_migrate'			=> [
+                'seopress_nonce'					=> wp_create_nonce('seopress_yoast_migrate_nonce'),
+                'seopress_yoast_migration'			=> admin_url( 'admin-ajax.php'),
+            ],
+            'seopress_seo_framework_migrate'	=> [
+                'seopress_nonce'					=> wp_create_nonce('seopress_seo_framework_migrate_nonce'),
+                'seopress_seo_framework_migration' 	=> admin_url( 'admin-ajax.php'),
+            ],
+            'seopress_rk_migrate'				=> [
+                'seopress_nonce'					=> wp_create_nonce('seopress_rk_migrate_nonce'),
+                'seopress_rk_migration'				=> admin_url( 'admin-ajax.php'),
+            ],
+            'seopress_squirrly_migrate' 		=> [
+                'seopress_nonce' 					=> wp_create_nonce('seopress_squirrly_migrate_nonce'),
+                'seopress_squirrly_migration'		=> admin_url( 'admin-ajax.php'),
+			],
+            'seopress_seo_ultimate_migrate' 	=> [
+                'seopress_nonce' 					=> wp_create_nonce('seopress_seo_ultimate_migrate_nonce'),
+                'seopress_seo_ultimate_migration'	=> admin_url( 'admin-ajax.php'),
+			],
+			'seopress_wp_meta_seo_migrate'		=> [
+                'seopress_nonce' 					=> wp_create_nonce('seopress_meta_seo_migrate_nonce'),
+                'seopress_wp_meta_seo_migration'	=> admin_url( 'admin-ajax.php'),
+			],
+            'seopress_metadata_csv'				=> [
+                'seopress_nonce'					=> wp_create_nonce('seopress_export_csv_metadata_nonce'),
+                'seopress_metadata_export'			=> admin_url( 'admin-ajax.php'),
+			],
+            'i18n'								=> [
+                'migration'							=>__('Migration completed!','wp-seopress'),
+                'export'							=>__('Export completed!','wp-seopress'),
+			]
+		];
+		wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate );
 	}
 
 	/**
@@ -249,8 +270,22 @@ class SEOPRESS_Admin_Setup_Wizard {
 			<p class="store-setup"><?php esc_html_e( 'The first step is to import your previous settings from other plugins to keep your SEO.', 'wp-seopress' ); ?></p>
 			<p class="store-setup"><?php esc_html_e( 'Not data to migrate? Click "Next step" button!', 'wp-seopress' ); ?></p>
 
+			<h3><span><?php _e('Import posts and terms metadata from','wp-seopress'); ?></span></h3>
+			<select id="select-wizard-import" name="select-wizard-import">
+				<option value="none"><?php _e('Select an option','wp-seopress'); ?></option>
+				<option value="yoast-migration-tool"><?php _e('Yoast SEO','wp-seopress'); ?></option>
+				<option value="aio-migration-tool"><?php _e('All In One SEO','wp-seopress'); ?></option>
+				<option value="seo-framework-migration-tool"><?php _e('The SEO Framework','wp-seopress'); ?></option>
+				<option value="rk-migration-tool"><?php _e('Rank Math','wp-seopress'); ?></option>
+				<option value="squirrly-migration-tool"><?php _e('Squirrly SEO','wp-seopress'); ?></option>
+				<option value="seo-ultimate-migration-tool"><?php _e('SEO Ultimate','wp-seopress'); ?></option>
+				<option value="wp-meta-seo-migration-tool"><?php _e('WP Meta SEO','wp-seopress'); ?></option>
+			</select>
+
+			<br><br>
+
 			<div class="store-address-container">
-                <!-- Yoast import tool --> 
+                <!-- Yoast import tool -->
                 <div id="yoast-migration-tool" class="postbox section-tool seopress-wizard-services">
                     <h3><span><?php _e( 'Import posts and terms metadata from Yoast', 'wp-seopress' ); ?></span></h3>
                     <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
@@ -267,9 +302,9 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <button id="seopress-yoast-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                     <span class="spinner"></span>
                     <div class="log"></div>
-                </div><!-- .postbox -->                
+                </div><!-- .postbox -->
 
-                <!-- All In One import tool --> 
+                <!-- All In One import tool -->
                 <div id="aio-migration-tool" class="postbox section-tool seopress-wizard-services">
                     <h3><span><?php _e( 'Import posts and terms metadata from All In One SEO', 'wp-seopress' ); ?></span></h3>
                     <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
@@ -286,7 +321,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <div class="log"></div>
                 </div><!-- .postbox -->
 
-                <!-- SEO Framework import tool --> 
+                <!-- SEO Framework import tool -->
                 <div id="seo-framework-migration-tool" class="postbox section-tool seopress-wizard-services">
                     <h3><span><?php _e( 'Import posts and terms metadata from The SEO Framework', 'wp-seopress' ); ?></span></h3>
                     <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
@@ -305,7 +340,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <div class="log"></div>
                 </div><!-- .postbox -->
 
-                <!-- RK import tool --> 
+                <!-- RK import tool -->
                 <div id="rk-migration-tool" class="postbox section-tool seopress-wizard-services">
                     <h3><span><?php _e( 'Import posts and terms metadata from Rank Math', 'wp-seopress' ); ?></span></h3>
                     <p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
@@ -323,8 +358,59 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <span class="spinner"></span>
                     <div class="log"></div>
                 </div><!-- .postbox -->
+
+				<!-- Squirrly import tool -->
+				<div id="squirrly-migration-tool" class="postbox section-tool seopress-wizard-services">
+					<h3><span><?php _e( 'Import posts metadata from Squirrly SEO', 'wp-seopress' ); ?></span></h3>
+					<p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+					<ul>
+						<li><?php _e('Title tags','wp-seopress'); ?></li>
+						<li><?php _e('Meta description','wp-seopress'); ?></li>
+						<li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+						<li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+						<li><?php _e('Meta Robots (noindex or nofollow)','wp-seopress'); ?></li>
+						<li><?php _e('Canonical URL','wp-seopress'); ?></li>
+					</ul>
+					<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any Squirrly SEO data.', 'wp-seopress' ); ?></p>
+					<button id="seopress-squirrly-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+					<span class="spinner"></span>
+					<div class="log"></div>
+				</div><!-- .postbox -->
+				
+				<!-- SEO Ultimate import tool -->
+				<div id="seo-ultimate-migration-tool" class="postbox section-tool seopress-wizard-services">
+					<h3><span><?php _e( 'Import posts metadata from SEO Ultimate', 'wp-seopress' ); ?></span></h3>
+					<p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+					<ul>
+						<li><?php _e('Title tags','wp-seopress'); ?></li>
+						<li><?php _e('Meta description','wp-seopress'); ?></li>
+						<li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+						<li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+						<li><?php _e('Meta Robots (noindex or nofollow)','wp-seopress'); ?></li>
+					</ul>
+					<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Ultimate data.', 'wp-seopress' ); ?></p>
+					<button id="seopress-seo-ultimate-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+					<span class="spinner"></span>
+					<div class="log"></div>
+				</div><!-- .postbox -->
+
+				<!-- WP Meta SEO import tool -->
+				<div id="wp-meta-seo-migration-tool" class="postbox section-tool seopress-wizard-services">
+					<h3><span><?php _e( 'Import posts and terms metadata from WP Meta SEO', 'wp-seopress' ); ?></span></h3>
+					<p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+					<ul>
+						<li><?php _e('Title tags','wp-seopress'); ?></li>
+						<li><?php _e('Meta description','wp-seopress'); ?></li>
+						<li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+						<li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+					</ul>
+					<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any WP Meta SEO data.', 'wp-seopress' ); ?></p>
+					<button id="seopress-wp-meta-seo-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+					<span class="spinner"></span>
+					<div class="log"></div>
+				</div><!-- .postbox -->
             </div>
-			
+
 			<p class="seopress-setup-actions step">
 				<button type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e( "Next step", 'wp-seopress' ); ?>" name="save_step"><?php esc_html_e( "Next step", 'wp-seopress' ); ?></button>
 				<?php wp_nonce_field( 'seopress-setup' ); ?>
@@ -348,7 +434,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function seopress_setup_site() {
 			$seopress_titles_option = get_option( 'seopress_titles_option_name' );
 			$seopress_social_option = get_option( 'seopress_social_option_name' );
-			
+
 			$site_sep = isset($seopress_titles_option['seopress_titles_sep']) ? $seopress_titles_option['seopress_titles_sep'] : NULL;
 			$site_title = isset($seopress_titles_option['seopress_titles_home_site_title']) ? $seopress_titles_option['seopress_titles_home_site_title'] : NULL;
 			$knowledge_type = isset($seopress_social_option['seopress_social_knowledge_type']) ? $seopress_social_option['seopress_social_knowledge_type'] : NULL;
@@ -378,14 +464,14 @@ class SEOPRESS_Admin_Setup_Wizard {
 			<label class="location-prompt" for="knowledge_type"><?php esc_html_e('Person or organization','wp-seopress'); ?></label>
 			<?php
 			    echo '<select id="knowledge_type" name="knowledge_type" data-placeholder="'.esc_attr__( 'Choose a knowledge type', 'wp-seopress' ).'"	class="location-input wc-enhanced-select dropdown">';
-			        echo ' <option '; 
-			            if ('None' == $knowledge_type) echo 'selected="selected"'; 
+			        echo ' <option ';
+			            if ('None' == $knowledge_type) echo 'selected="selected"';
 			            echo ' value="none">'. __("None (will disable this feature)","wp-seopress") .'</option>';
-			        echo ' <option '; 
-			            if ('Person' == $knowledge_type) echo 'selected="selected"'; 
+			        echo ' <option ';
+			            if ('Person' == $knowledge_type) echo 'selected="selected"';
 			            echo ' value="Person">'. __("Person","wp-seopress") .'</option>';
-			        echo '<option '; 
-			            if ('Organization' == $knowledge_type) echo 'selected="selected"'; 
+			        echo '<option ';
+			            if ('Organization' == $knowledge_type) echo 'selected="selected"';
 			            echo ' value="Organization">'. __("Organization","wp-seopress") .'</option>';
 			    echo '</select>';
 			?>
@@ -436,7 +522,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 */
 	public function seopress_setup_site_save() {
 		check_admin_referer( 'seopress-setup' );
-		
+
 		//Get options
 		$seopress_titles_option = get_option("seopress_titles_option_name");
 		$seopress_social_option = get_option("seopress_social_option_name");
@@ -485,7 +571,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 					<p>
 						<?php _e('For which single post types, should indexing be disabled?','wp-seopress'); ?>
 					</p>
-					
+
 					<ul>
 						<?php
 							//Post Types
@@ -497,9 +583,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 					            //Single No-Index CPT
 					            echo '<li class="recommended-item checkbox">';
 					                echo '<input id="seopress_titles_single_cpt_noindex['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][noindex]" type="checkbox"';
-					                if ('1' == $seopress_titles_single_titles) echo 'checked="yes"'; 
+					                if ('1' == $seopress_titles_single_titles) echo 'checked="yes"';
 					                echo ' value="1"/>';
-					                
+
 					                echo '<label for="seopress_titles_single_cpt_noindex['.$seopress_cpt_key.']">'. __( 'Do not display this single post type in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
 					            echo '</li>';
 					        }
@@ -522,13 +608,13 @@ class SEOPRESS_Admin_Setup_Wizard {
 					            	echo '<h3>'.$seopress_cpt_value->labels->name.' <em><small>['.$seopress_cpt_value->name.']</small></em></h2>';
 
 					                //Archive No-Index CPT
-				                    $seopress_titles_archive_titles = isset($seopress_titles_option['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']);      
-				                    
+				                    $seopress_titles_archive_titles = isset($seopress_titles_option['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']);
+
 				                    echo '<li class="recommended-item checkbox">';
 					                    echo '<input id="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][noindex]" type="checkbox"';
-					                    if ('1' == $seopress_titles_archive_titles) echo 'checked="yes"'; 
+					                    if ('1' == $seopress_titles_archive_titles) echo 'checked="yes"';
 					                    echo ' value="1"/>';
-					                    
+
 					                    echo '<label for="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']">'. __( 'Do not display this post type archive in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
 					                echo '</li>';
 					            }
@@ -555,16 +641,16 @@ class SEOPRESS_Admin_Setup_Wizard {
 					            //Tax No-Index
 					            echo '<li class="recommended-item checkbox">';
 					                echo '<input id="seopress_titles_tax_noindex['.$seopress_tax_key.']" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][noindex]" type="checkbox"';
-					                if ('1' == $seopress_titles_tax_titles) echo 'checked="yes"'; 
+					                if ('1' == $seopress_titles_tax_titles) echo 'checked="yes"';
 					                echo ' value="1"/>';
-					                
+
 					                echo '<label for="seopress_titles_tax_noindex['.$seopress_tax_key.']">'. __( 'Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
 					            echo '</li>';
 					        }
 			        	?>
 		        	</ul>
 		        </div>
-		    <?php } ?>	
+		    <?php } ?>
 
 			<p class="seopress-setup-actions step">
 				<button type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e( 'Continue', 'wp-seopress' ); ?>" name="save_step"><?php esc_html_e( 'Continue', 'wp-seopress' ); ?></button>
@@ -590,7 +676,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 			} else {
 				$noindex = NULL;
 			}
-			$seopress_titles_option['seopress_titles_single_titles'][$seopress_cpt_key]['noindex'] = $noindex;			
+			$seopress_titles_option['seopress_titles_single_titles'][$seopress_cpt_key]['noindex'] = $noindex;
 		}
 
 		//Post Type archives noindex
@@ -638,9 +724,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 					//Noindex on author archives
 					echo '<li class="seopress-wizard-service-item checkbox">';
 				        echo '<input id="author_noindex" class="location-input" name="author_noindex" type="checkbox"';
-				        if ('1' == $author_noindex) echo 'checked="yes"'; 
+				        if ('1' == $author_noindex) echo 'checked="yes"';
 				        echo ' value="1"/>';
-				        
+
 				        echo '<label for="author_noindex" class="location-prompt">'. __( 'Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
 				    echo '</li>';
 				    echo '<li class="seopress-wizard-service-info">';
@@ -650,9 +736,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 			        //Redirect attachment pages to URL
 					echo '<li class="seopress-wizard-service-item checkbox">';
 				        echo '<input id="attachments_file" class="location-input" name="attachments_file" type="checkbox"';
-				        if ('1' == $attachments_file) echo 'checked="yes"'; 
+				        if ('1' == $attachments_file) echo 'checked="yes"';
 				        echo ' value="1"/>';
-				        
+
 				        echo '<label for="attachments_file" class="location-prompt">'. __( 'Redirect attachment pages to their file URL (https://www.example.com/my-image-file.jpg)', 'wp-seopress' ) .'</label>';
 				    echo '</li>';
 				    echo '<li class="seopress-wizard-service-info">';
@@ -662,9 +748,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 			        //Remove /category/ in URLs
 					echo '<li class="seopress-wizard-service-item checkbox">';
 				        echo '<input id="category_url" name="category_url" type="checkbox" class="location-input"';
-				        if ('1' == $category_url) echo 'checked="yes"'; 
+				        if ('1' == $category_url) echo 'checked="yes"';
 				        echo ' value="1"/>';
-				        
+
 				        echo '<label for="category_url" class="location-prompt">'. __( 'Remove /category/ in your permalinks', 'wp-seopress' ) .'</label>';
 				    echo '</li>';
 				    echo '<li class="seopress-wizard-service-info">';
@@ -704,7 +790,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 		wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
 		exit;
-	}	
+	}
 
 	/**
 	 * Final step.
@@ -714,7 +800,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_notices = get_option('seopress_notices');
 		$seopress_notices['notice-wizard'] = "1";
 		update_option('seopress_notices',$seopress_notices);
-		
+
 		//Flush permalinks
 		flush_rewrite_rules();
 		?>

@@ -71,10 +71,9 @@ if (is_singular() && isset($post->post_author)){
     $author_bio = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description', $post->post_author))))));
 }
 
-if (is_author() && NULL !== get_queried_object()) {
-    $author = get_queried_object();
-    $the_author_meta = $author->display_name;
-    $author_bio = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description', $author->ID))))));
+if (is_author()) {
+    $the_author_meta = get_the_author_meta('display_name');
+    $author_bio = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description'))))));
 }
 
 if (is_singular() && isset($post)) {
