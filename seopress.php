@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.2.2
+Version: 3.8.2.3
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -54,7 +54,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.2.2' );
+define( 'SEOPRESS_VERSION', '3.8.2.3' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,7 +299,8 @@ function seopress_admin_body_class( $classes ) {
 		'seopress-import-export' => true, 
 		'seopress-pro-page' => true, 
 		'seopress-bot-batch' => true, 
-		'seopress-license' => true
+		'seopress-license' => true,
+		'seopress-insights' => true
 	];
 	if ( isset( $_pages[ $_GET['page'] ] ) ) {
 		$classes .= " seopress-styles ";
@@ -380,6 +381,7 @@ if ((isset($_GET['page']) && (
 	|| $_GET['page'] == 'seopress-pro-page' 
 	|| $_GET['page'] == 'seopress-import-export' 
 	|| $_GET['page'] == 'seopress-bot-batch' 
+	|| $_GET['page'] == 'seopress-insights' 
 	|| $_GET['page'] == 'seopress-license'))
 	|| (isset($_GET['post_type']) && (
 	$_GET['post_type'] == 'seopress_404'
@@ -755,7 +757,14 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_op
 			}
 		}
 		if ( isset( $seopress_sitemap_file ) && file_exists( plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/' . $seopress_sitemap_file ) ) {
-			wp_ob_end_flush_all();
+			$return_true ='';
+            $return_true = apply_filters( 'seopress_ob_end_flush_all', $return_true );
+
+            if (has_filter('seopress_ob_end_flush_all') && $return_true == true) {
+				wp_ob_end_flush_all();
+				die();
+			}
+
 			include( plugin_dir_path( __FILE__ ) . 'inc/functions/sitemap/' . $seopress_sitemap_file );
 			exit();
 		}
