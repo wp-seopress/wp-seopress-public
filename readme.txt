@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.8.2.1
+Stable tag: 3.8.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -222,6 +222,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.8.2.2 =
+* FIX Import tool (extension not valid error)
+* FIX Valid From Date / Time for automatic Event schema (PRO)
 = 3.8.2.1 =
 * FIX Fatal error Call to undefined function wc_get_product()
 = 3.8.2 =
@@ -232,6 +235,7 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * NEW Import redirects from Rank Math
 * NEW SEO Ultimate import tool
 * NEW WP Meta SEO import tool
+* NEW Custom capability for SEOPress pages (https://www.seopress.org/support/hooks/filter-user-capacities/)
 * NEW Add servesCuisine property to LocalBusiness schemas related to Food (PRO)
 * NEW "seopress_rgpd_full_message_styles" hook to filter cookie bar inline styles (https://www.seopress.org/support/hooks/filter-user-consent-inline-styles/)
 * NEW "seopress_toggle_mobile_preview" hook to change the default Google Preview (desktop or mobile - https://www.seopress.org/support/hooks/set-google-snippet-preview-to-desktop-by-default/)

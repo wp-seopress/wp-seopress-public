@@ -131,11 +131,6 @@ function seopress_import_redirections_settings() {
     if( empty( $import_file ) ) {
         wp_die( __( 'Please upload a file to import' ) );
     }
-    $extension = explode( '.', $import_file );
-    $extension = end($extension);
-    if( $extension != 'csv' ) {
-        wp_die( __( 'Please upload a valid .csv file' ) );
-    }
 
     $csv = array_map('str_getcsv', file($import_file));
 
@@ -193,11 +188,6 @@ function seopress_import_yoast_redirections() {
     $import_file = $_FILES['import_file']['tmp_name'];
     if( empty( $import_file ) ) {
         wp_die( __( 'Please upload a file to import' ) );
-    }
-    $extension = explode( '.', $import_file );
-    $extension = end($extension);
-    if( $extension != 'csv' ) {
-        wp_die( __( 'Please upload a valid .csv file' ) );
     }
 
     $csv = array_map('str_getcsv', file($import_file));
@@ -311,12 +301,6 @@ function seopress_import_redirections_plugin_settings() {
         wp_die( __( 'Please upload a file to import' ) );
     }
 
-    $extension = explode( '.', $import_file );
-    $extension = end($extension);
-    if( $extension != 'json' ) {
-        wp_die( __( 'Please upload a valid .json file' ) );
-    }
-
     $settings = (array) json_decode( file_get_contents( $import_file ), true );
 
     foreach ($settings['redirects'] as $redirect_key => $redirect_value) {
@@ -362,8 +346,9 @@ function seopress_import_rk_redirections() {
         return;
     if( ! current_user_can( seopress_capability( 'manage_options', 'import_settings' ) ) )
         return;
-    $extension = explode( '.', $_FILES['import_file']['name'] );
-    $extension = end($extension);
+
+    $extension = pathinfo( $_FILES['import_file']['name'], PATHINFO_EXTENSION );
+    
     if( $extension != 'txt' ) {
         wp_die( __( 'Please upload a valid .txt file' ) );
     }
