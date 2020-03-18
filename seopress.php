@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.2.3
+Version: 3.8.3
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -54,7 +54,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.2.3' );
+define( 'SEOPRESS_VERSION', '3.8.3' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -423,9 +423,13 @@ function seopress_plugin_action_links($links, $file) {
 	return $links;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Get all registered post types
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+  * Get all registered post types
+  *
+  * @author Benjamin Denis
+  *
+  * @return (array) $wp_post_types
+  **/
 function seopress_get_post_types() {
 	global $wp_post_types;
 

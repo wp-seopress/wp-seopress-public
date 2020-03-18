@@ -33,7 +33,7 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='<head>';
 	$seopress_sitemaps_xsl .="\n";
 	$seopress_sitemaps_xsl .='<title>XML Sitemaps</title>';
-	$seopress_sitemaps_xsl .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+	$seopress_sitemaps_xsl .='<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
 	$seopress_sitemaps_xsl .="\n";
 	$seopress_sitemaps_xsl .='<style type="text/css">
 	* {
@@ -125,10 +125,16 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='<div id="main">';
 	$seopress_sitemaps_xsl .='<h1>'.__('XML Sitemaps','wp-seopress').'</h1>';
 	$seopress_sitemaps_xsl .='<p><a href="'.$home_url.'sitemaps.xml">Index sitemaps</a></p>';
+	$seopress_sitemaps_xsl .='<xsl:if test="sitemap:sitemapindex/sitemap:sitemap">';
+	$seopress_sitemaps_xsl .='<p>'.sprintf(__('This XML Sitemap Index file contains %s sitemaps.','wp-seopress'),'<xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/>').'</p>';
+	$seopress_sitemaps_xsl .='</xsl:if>';
+	$seopress_sitemaps_xsl .='<xsl:if test="sitemap:urlset/sitemap:url">';
+	$seopress_sitemaps_xsl .='<p>'.sprintf(__('This XML Sitemap contains %s URL(s).','wp-seopress'),'<xsl:value-of select="count(sitemap:urlset/sitemap:url)"/>').'</p>';
+	$seopress_sitemaps_xsl .='</xsl:if>';
 	$seopress_sitemaps_xsl .='<div id="sitemaps">';
 	$seopress_sitemaps_xsl .='<div class="loc">';
 	$seopress_sitemaps_xsl .='URL';
-	$seopress_sitemaps_xsl .='</div>';	
+	$seopress_sitemaps_xsl .='</div>';
 	$seopress_sitemaps_xsl .='<div class="lastmod">';
 	$seopress_sitemaps_xsl .='Last update';
 	$seopress_sitemaps_xsl .='</div>';

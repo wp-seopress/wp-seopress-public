@@ -999,7 +999,16 @@ class seopress_options
                                 <div class="inside">
                                     <h3><span><?php _e( 'Clean your 404', 'wp-seopress' ); ?></span></h3>
                                     <p><?php _e( 'Delete all your 404 errors. We don‘t delete any redirects.', 'wp-seopress' ); ?></p>
-                                    <p><?php echo sprintf(__( 'Make sure you have enable 404 cleaning from SEO, PRO, <a href="%s">404/301</a> tab to be able to delete all your 404 errors.', 'wp-seopress' ), admin_url( 'admin.php?page=seopress-pro-page' )); ?></p>
+                                    <p><?php echo sprintf(__( 'Make sure you have enabled 404 cleaning from SEO, PRO, <a href="%s">404/301</a> tab to be able to delete all your 404 errors.', 'wp-seopress' ), admin_url( 'admin.php?page=seopress-pro-page' )); ?></p>
+                                    <p><?php 
+                                    if (function_exists('seopress_get_locale')) {
+                                        if (seopress_get_locale() =='fr') {
+                                            $seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/fr/support/guides/nettoyez-vos-erreurs-404-a-laide-dune-requete-mysql/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        } else {
+                                            $seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/support/guides/delete-your-404-errors-with-a-mysql-query/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                                        }
+                                    }
+                                    echo sprintf(__('You can also use <span class="dashicons dashicons-external"></span><a href="%s" target="_blank">this MySQL query</a> if necessary.','wp-seopress'),$seopress_docs_link['support']['redirects']['query']); ?></p>
                                     <form method="post">
                                         <p><input type="hidden" name="seopress_action" value="clean_404" /></p>
                                         <p>
@@ -2607,6 +2616,7 @@ class seopress_options
                         rewrite ^/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
                         rewrite ^/sitemaps/news.xml$ /index.php?seopress_news=$1 last;
                         rewrite ^/sitemaps/video.xml$ /index.php?seopress_video=$1 last;
+                        rewrite ^/sitemaps/author.xml$ /index.php?seopress_author=$1 last;
                         rewrite ^/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;
                         rewrite ^/sitemaps/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?seopress_cpt=$1&seopress_paged=$2 last;
                     }
@@ -2625,8 +2635,8 @@ class seopress_options
             }
         }
 
-        echo '<p><a href="'.$seopress_docs_link['sitemaps']['error']['blank'].'" target="_blank">'.__('Blank sitemap?', 'wp-seopress').'</a> - ';
-        echo '<a href="'.$seopress_docs_link['sitemaps']['error']['404'].'" target="_blank">'.__('404 error?', 'wp-seopress').'</a></p><br>';
+        echo '<p><span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['blank'].'" target="_blank">'.__('Blank sitemap?', 'wp-seopress').'</a> - ';
+        echo '<span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['404'].'" target="_blank">'.__('404 error?', 'wp-seopress').'</a></p><br>';
 
         echo '<a href="'.get_option( 'home' ).'/sitemaps.xml" target="_blank" class="button"><span class="dashicons dashicons-visibility"></span>'.__('View your sitemap','wp-seopress').'</a>';
         echo '&nbsp;';
@@ -3614,7 +3624,7 @@ class seopress_options
         
         echo '<label for="seopress_titles_paged_rel">'. __( 'Add rel next/prev link in head of paginated archive pages', 'wp-seopress' ) .'</label>';
         
-        echo '<p class="description"><a href="https://support.google.com/webmasters/answer/1663744?hl=en" target="_blank">'.__('Learn more on Google website','wp-seopress').'</p>';
+        echo '<p class="description"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/webmasters/answer/1663744?hl=en" target="_blank">'.__('Learn more on Google website','wp-seopress').'</p>';
         
         if (isset($this->options['seopress_titles_paged_rel'])) {
             esc_attr( $this->options['seopress_titles_paged_rel']);

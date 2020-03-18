@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 function seopress_do_real_preview() {
     check_ajax_referer( 'seopress_real_preview_nonce', $_GET['_ajax_nonce'], true );
 
-    if ( current_user_can( seopress_capability('edit_posts', 'real_preview' ) && is_admin() ) ) {
+    if ( current_user_can( 'edit_posts' ) && is_admin() ) {
 
         //Get cookies
         if (isset($_COOKIE)) {

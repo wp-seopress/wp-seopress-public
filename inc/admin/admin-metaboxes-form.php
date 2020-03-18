@@ -103,7 +103,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         <p style="margin-bottom:0">
                             <label for="seopress_titles_title_meta">'
                                 . __( 'Title', 'wp-seopress' )
-                                . seopress_tooltip(__('Meta title','wp-seopress'), __('Titles are critical to giving users a quick insight into the content of a result and why it’s relevant to their query. It\'s often the primary piece of information used to decide which result to click on, so it\'s important to use high-quality titles on your web pages.','wp-seopress'), esc_html('<title>My super title</title>')).
+                                . seopress_tooltip(__('Meta title','wp-seopress'), __('Titles are critical to give users a quick insight into the content of a result and why it’s relevant to their query. It\'s often the primary piece of information used to decide which result to click on, so it\'s important to use high-quality titles on your web pages.','wp-seopress'), esc_html('<title>My super title</title>')).
                             '</label>
                             <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title" placeholder="'.esc_html__('Enter your title','wp-seopress').'" aria-label="'.__('Title','wp-seopress').'" value="'.$seopress_titles_title.'" />
                         </p>
@@ -214,42 +214,42 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         <label for="seopress_robots_index_meta">
                             <input type="checkbox" name="seopress_robots_index" id="seopress_robots_index_meta" value="yes" '. checked( $seopress_robots_index, 'yes', false ) .' '.$disabled['robots_index'].'/>
                                 '. __( 'Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>', 'wp-seopress' ) .'
-                                '.seopress_tooltip(__('"noindex" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "noindex". <br>Search engines will not index this URL in the search results.','wp-seopress'), esc_html('<meta name="robots" content="noindex" />')).'
+                                '.seopress_tooltip(__('"noindex" robots meta tag','wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "noindex". <br>Search engines will not index this URL in the search results.','wp-seopress'), esc_html('<meta name="robots" content="noindex" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_follow_meta">
                             <input type="checkbox" name="seopress_robots_follow" id="seopress_robots_follow_meta" value="yes" '. checked( $seopress_robots_follow, 'yes', false ) .' '.$disabled['robots_follow'].'/>
                                 '. __( 'Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress' ) .'
-                                '.seopress_tooltip(__('"nofollow" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "nofollow". <br>Search engines will not follow links from this URL.','wp-seopress'), esc_html('<meta name="robots" content="nofollow" />')).'
+                                '.seopress_tooltip(__('"nofollow" robots meta tag','wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "nofollow". <br>Search engines will not follow links from this URL.','wp-seopress'), esc_html('<meta name="robots" content="nofollow" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_odp_meta">
                             <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta" value="yes" '. checked( $seopress_robots_odp, 'yes', false ) .' '.$disabled['robots_odp'].'/>
                                 '. __( 'Do not use Open Directory project metadata for titles or excerpts for this page <strong>(noodp)</strong>', 'wp-seopress' ) .'
-                                '.seopress_tooltip(__('"noodp" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "noodp". <br>Note that Google and Yahoo have stopped considering this tag since the closing of DMOZ directory.','wp-seopress'), esc_html('<meta name="robots" content="noodp" />')).'
+                                '.seopress_tooltip(__('"noodp" robots meta tag','wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "noodp". <br>Note that Google and Yahoo have stopped considering this tag since the closing of DMOZ directory.','wp-seopress'), esc_html('<meta name="robots" content="noodp" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_imageindex_meta">
                             <input type="checkbox" name="seopress_robots_imageindex" id="seopress_robots_imageindex_meta" value="yes" '. checked( $seopress_robots_imageindex, 'yes', false ) .' '.$disabled['imageindex'].'/>
                                 '. __( 'Do not index images for this page <strong>(noimageindex)</strong>', 'wp-seopress' ) .'
-                                '.seopress_tooltip(__('"noimageindex" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "noimageindex". <br> Note that your images can always be indexed if they are linked from other pages.','wp-seopress'), esc_html('<meta name="google" content="noimageindex" />')).'
+                                '.seopress_tooltip(__('"noimageindex" robots meta tag','wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "noimageindex". <br> Note that your images can always be indexed if they are linked from other pages.','wp-seopress'), esc_html('<meta name="google" content="noimageindex" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_archive_meta">
                             <input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta" value="yes" '. checked( $seopress_robots_archive, 'yes', false ) .' '.$disabled['archive'].'/>
                                 '. __( 'Do not display a "Cached" link in the Google search results <strong>(noarchive)</strong>', 'wp-seopress' ) .'
-                                '.seopress_tooltip(__('"noarchive" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "noarchive".','wp-seopress'), esc_html('<meta name="robots" content="noarchive" />')).'
+                                '.seopress_tooltip(__('"noarchive" robots meta tag','wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "noarchive".','wp-seopress'), esc_html('<meta name="robots" content="noarchive" />')).'
                         </label>
                     </p>
                     <p>
                         <label for="seopress_robots_snippet_meta">
                             <input type="checkbox" name="seopress_robots_snippet" id="seopress_robots_snippet_meta" value="yes" '. checked( $seopress_robots_snippet, 'yes', false ) .' '.$disabled['snippet'].'/>
                                 '. __( 'Do not display a description in search results for this page <strong>(nosnippet)</strong>', 'wp-seopress' ) .'
-                                '.seopress_tooltip(__('"nosnippet" robots meta tag','wp-seopress'), __('By checking this option, this will add a meta robots tag with the value "nosnippet".','wp-seopress'), esc_html('<meta name="robots" content="nosnippet" />')).'
+                                '.seopress_tooltip(__('"nosnippet" robots meta tag','wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "nosnippet".','wp-seopress'), esc_html('<meta name="robots" content="nosnippet" />')).'
                         </label>
                     </p>
                     <p class="description">';
@@ -340,7 +340,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                                     <div class="snippet-meta">
                                         <div class="snippet-fb-url"></div>
                                         <div class="fb-sep">|</div>
-                                        <div class="fb-by">'.__('By ','wp-seopress').'</div>
+                                        <div class="fb-by">'.__('By&nbsp;','wp-seopress').'</div>
                                         <div class="snippet-fb-site-name"></div>
                                     </div>
                                     <div class="title-desc">

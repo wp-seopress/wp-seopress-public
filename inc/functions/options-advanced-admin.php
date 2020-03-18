@@ -763,7 +763,7 @@ function seopress_bulk_action_redirect_disable_admin_notice() {
     if ( ! empty( $_REQUEST['bulk_disable_redirects_posts'] ) ) {
         $enable_count = intval( $_REQUEST['bulk_disable_redirects_posts'] );
         printf( '<div id="message" class="updated fade"><p>' .
-                _n( '%s redirections disabled.',
+                _n( '%s redirection disabled.',
                         '%s redirections disabled.',
                         $enable_count,
                         'wp-seopress'
