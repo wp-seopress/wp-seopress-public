@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SEOPress\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-cloudy\n"
-"POT-Creation-Date: 2020-03-18 11:07+0100\n"
+"POT-Creation-Date: 2020-03-20 15:40+0100\n"
 "PO-Revision-Date: 2019-08-22 12:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: Benjamin DENIS <contact@seopress.org>\n"
@@ -1267,10 +1267,9 @@ msgid ""
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:257
-#, php-format
 msgid ""
-"You cannot uncheck a parameter? This is normal, and it's most likely defined "
-"in the <a href=\"%s\">global settings of the extension</a>."
+"You cannot uncheck a parameter? This is normal, and it‘s most likely defined "
+"in the global settings of the extension."
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:260
@@ -1320,7 +1319,7 @@ msgid "Custom breadcrumbs"
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:295
-msgid "Enter a custom value, useful if your title is too long."
+msgid "Enter a custom value, useful if your title is too long"
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:298
@@ -1336,7 +1335,7 @@ msgstr ""
 msgid ""
 "<span class=\"label\">Did you know?</span> LinkedIn, Instagram and Pinterest "
 "use the same social metadata as Facebook. Twitter does the same if no "
-"Twitter cards tag defined below."
+"Twitter cards tags are defined below."
 msgstr ""
 
 #: inc/admin/admin-metaboxes-form.php:312
@@ -2086,7 +2085,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/admin-wizard.php:271
-msgid "Not data to migrate? Click \"Next step\" button!"
+msgid "No data to migrate? Click \"Next step\" button!"
 msgstr ""
 
 #: inc/admin/admin-wizard.php:273 inc/admin/admin.php:750
@@ -2204,7 +2203,7 @@ msgstr ""
 
 #: inc/admin/admin-wizard.php:318 inc/admin/admin.php:796
 msgid ""
-"<strong>WARNING:</strong> Migration will update / delete all SEOPress posts "
+"<strong>WARNING:</strong> Migration will update/delete all SEOPress posts "
 "and terms metadata. Some dynamic variables will not be interpreted. We do "
 "NOT delete any AIO data."
 msgstr ""
@@ -2253,7 +2252,7 @@ msgstr ""
 msgid "Meta Robots (noindex or nofollow)"
 msgstr ""
 
-#: inc/admin/admin-wizard.php:374 inc/admin/admin.php:858
+#: inc/admin/admin-wizard.php:374
 msgid ""
 "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts "
 "metadata. Some dynamic variables will not be interpreted. We do NOT delete "
@@ -3144,6 +3143,13 @@ msgstr ""
 msgid "Import completed!"
 msgstr ""
 
+#: inc/admin/admin.php:858
+msgid ""
+"<strong>WARNING:</strong> Migration will update/delete all SEOPress posts "
+"metadata. Some dynamic variables will not be interpreted. We do NOT delete "
+"any Squirrly SEO data."
+msgstr ""
+
 #: inc/admin/admin.php:906
 msgid "Import your redirections"
 msgstr ""
@@ -3512,8 +3518,7 @@ msgid "Enable Google Ads"
 msgstr ""
 
 #: inc/admin/admin.php:1998
-msgid ""
-"[HEAD] Add an additional tracking code (like GTM, Facebook Pixel, Hotjar...)"
+msgid "Add an additional tracking code (like Facebook Pixel, Hotjar...)"
 msgstr ""
 
 #: inc/admin/admin.php:2006
@@ -4139,7 +4144,7 @@ msgstr ""
 
 #: inc/admin/admin.php:3608
 msgid ""
-"Prevent Google to display a sitelinks searchbox in search results. Enable "
+"Prevents Google to display a sitelinks searchbox in search results. Enable "
 "this option will remove the \"Website\" schema from your source code."
 msgstr ""
 
@@ -4186,7 +4191,7 @@ msgstr ""
 
 #: inc/admin/admin.php:3733
 msgid ""
-"Make sure to enable Author archive from SEO, Titles and metas, Archives tab."
+"Make sure to enable author archive from SEO, titles and metas, archives tab."
 "</a>"
 msgstr ""
 
@@ -4321,7 +4326,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/admin.php:4245
-msgid "This setting doesn‘t apply for homepage."
+msgid "This setting doesn‘t apply for the homepage."
 msgstr ""
 
 #: inc/admin/admin.php:4259
@@ -4331,7 +4336,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/admin.php:4263
-msgid "How to find my Facebook Page ID?"
+msgid "How do I find my Facebook Page ID?"
 msgstr ""
 
 #: inc/admin/admin.php:4273
@@ -4460,47 +4465,47 @@ msgid "Top"
 msgstr ""
 
 #: inc/admin/admin.php:4513
-msgid "Change the cookie bar background color"
+msgid "Change the color of the cookie bar background"
 msgstr ""
 
 #: inc/admin/admin.php:4523
-msgid "Change the cookie bar text color"
+msgid "Change the color of the cookie bar text"
 msgstr ""
 
 #: inc/admin/admin.php:4533
-msgid "Change the cookie bar link color"
+msgid "Change the color of the cookie bar link"
 msgstr ""
 
 #: inc/admin/admin.php:4543
-msgid "Change the cookie bar button background color"
+msgid "Change the color of the cookie bar button background"
 msgstr ""
 
 #: inc/admin/admin.php:4553
-msgid "Change the cookie bar button hover background color"
+msgid "Change the color of the cookie bar button hover background"
 msgstr ""
 
 #: inc/admin/admin.php:4563
-msgid "Change the cookie bar button color"
+msgid "Change the color of the cookie bar button"
 msgstr ""
 
 #: inc/admin/admin.php:4573
-msgid "Change the cookie bar button hover color"
+msgid "Change the color of the cookie bar button hover"
 msgstr ""
 
 #: inc/admin/admin.php:4583
-msgid "Change the cookie bar secondary button background color"
+msgid "Change the color of the cookie bar secondary button background"
 msgstr ""
 
 #: inc/admin/admin.php:4593
-msgid "Change the cookie bar secondary button hover background color"
+msgid "Change the color of the cookie bar secondary button hover background"
 msgstr ""
 
 #: inc/admin/admin.php:4603
-msgid "Change the cookie bar secondary button color"
+msgid "Change the color of the cookie bar secondary button"
 msgstr ""
 
 #: inc/admin/admin.php:4613
-msgid "Change the cookie bar secondary button hover color"
+msgid "Change the color of the cookie bar secondary button hover"
 msgstr ""
 
 #: inc/admin/admin.php:4648

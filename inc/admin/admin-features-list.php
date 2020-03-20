@@ -90,7 +90,7 @@
                     'title' => __('WooCommerce','wp-seopress'),
                     'desc'  => __('Improve WooCommerce SEO', 'wp-seopress'),
                     'btn_secondary' => [
-                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_woocommerce$1' ) => __('Manage','wp-seopress')
+                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_woocommerce' ) => __('Manage','wp-seopress')
                     ],
                     'help' => [
                         'en'        => 'https://www.seopress.org/blog/woocommerce-seo-seopress/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
@@ -106,7 +106,7 @@
                     'title' => __('Easy Digital Downloads','wp-seopress'),
                     'desc'  => __('Improve Easy Digital Downloads SEO', 'wp-seopress'),
                     'btn_secondary' => [
-                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_edd$13' ) => __('Manage','wp-seopress')
+                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_edd' ) => __('Manage','wp-seopress')
                     ],
                     'filter' => 'seopress_remove_feature_edd'
                 ];
@@ -115,7 +115,7 @@
                     'title' => __('Local Business','wp-seopress'),
                     'desc'  => __('Add Google Local Business data type', 'wp-seopress'),
                     'btn_secondary' => [
-                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_local_business$10' ) => __('Manage','wp-seopress')
+                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_local_business' ) => __('Manage','wp-seopress')
                     ],
                     'filter' => 'seopress_remove_feature_local_business'
                 ];
@@ -124,7 +124,7 @@
                 'title' => __('Dublin Core','wp-seopress'),
                 'desc'  => __('Add Dublin Core meta tags', 'wp-seopress'),
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_dublin_core$8' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_dublin_core' ) => __('Manage','wp-seopress')
                 ],
                 'filter' => 'seopress_remove_feature_dublin_core'
             ];
@@ -133,7 +133,7 @@
                 'title' => __('Structured Data Types','wp-seopress'),
                 'desc'  => __('Add data types to your content: articles, courses, recipes, videos, events, products and more.', 'wp-seopress'),
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets$9' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets' ) => __('Manage','wp-seopress')
                 ],
                 'btn_primary' => [
                     admin_url( 'edit.php?post_type=seopress_schemas' ) => __('See schemas','wp-seopress')
@@ -152,7 +152,7 @@
                 'title' => __('Breadcrumbs','wp-seopress'),
                 'desc'  => __('Enable Breadcrumbs for your theme and improve your SEO in SERPs', 'wp-seopress'),
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_breadcrumbs$2' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_breadcrumbs' ) => __('Manage','wp-seopress')
                 ],
                 'help' => [
                     'en'        => 'https://www.seopress.org/support/guides/enable-breadcrumbs/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
@@ -168,7 +168,7 @@
                 'title' => __('Google Page Speed','wp-seopress'),
                 'desc'  => __('Track your website performance to improve SEO with Google Page Speed', 'wp-seopress'),
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed$3' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed' ) => __('Manage','wp-seopress')
                 ],
                 'help' => [
                     'en'        => 'https://www.seopress.org/support/guides/analyse-site-google-page-speed/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
@@ -189,7 +189,7 @@
                         get_home_url().'/robots.txt' => __('View your robots.txt','wp-seopress')
                     ],
                     'btn_secondary' => [
-                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots$4' ) => __('Manage','wp-seopress')
+                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots' ) => __('Manage','wp-seopress')
                     ],
                     'help' => [
                         'en'        => 'https://www.seopress.org/support/guides/edit-robots-txt-file/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
@@ -206,7 +206,7 @@
                 'title' => __('Google News Sitemap','wp-seopress'),
                 'desc'  => __('Optimize your site for Google News', 'wp-seopress'),
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_news$5' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_news' ) => __('Manage','wp-seopress')
                 ],
                 'help' => [
                     'en'        => 'https://www.seopress.org/support/guides/enable-google-news-xml-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
@@ -225,7 +225,7 @@
                     admin_url( 'edit.php?post_type=seopress_schemas' ) => __('See schemas','wp-seopress')
                 ],
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_schemas$9' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_schemas' ) => __('Manage','wp-seopress')
                 ],
                 'help' => [
                     'en'        => 'https://www.seopress.org/support/guides/#structured-data-types?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
@@ -244,7 +244,7 @@
                     admin_url( 'edit.php?post_type=seopress_404' ) => __('See redirects','wp-seopress')
                 ],
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404$6' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404' ) => __('Manage','wp-seopress')
                 ],
                 'help' => [
                     'en'        => 'https://www.seopress.org/support/guides/redirections/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
@@ -282,7 +282,7 @@
                     admin_url( 'edit.php?post_type=seopress_backlinks' ) => __('See backlinks','wp-seopress')
                 ],
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_backlinks$12' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_backlinks' ) => __('Manage','wp-seopress')
                 ],
                 'filter' => 'seopress_remove_feature_backlinks',
                 'toggle' => false
@@ -292,7 +292,7 @@
                 'title' => __('URL Rewriting','wp-seopress'),
                 'desc'  => __('Customize your permalinks.', 'wp-seopress'),
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rewrite$14' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rewrite' ) => __('Manage','wp-seopress')
                 ],
                 'filter' => 'seopress_remove_feature_rewrite'
             ];
@@ -302,7 +302,7 @@
                     'title' => __('.htaccess','wp-seopress'),
                     'desc'  => __('Edit your htaccess file.', 'wp-seopress'),
                     'btn_secondary' => [
-                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess$7' ) => __('Manage','wp-seopress')
+                        admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess' ) => __('Manage','wp-seopress')
                     ],
                     'filter' => 'seopress_remove_feature_htaccess',
                     'toggle' => false
@@ -313,7 +313,7 @@
                 'title' => __('RSS','wp-seopress'),
                 'desc'  => __('Configure default WordPress RSS.', 'wp-seopress'),
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rss$11' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rss' ) => __('Manage','wp-seopress')
                 ],
                 'filter' => 'seopress_remove_feature_rss',
                 'toggle' => false

@@ -1694,6 +1694,7 @@ body.seopress-styles {
     align-items: center;
     border: none;
     margin-right: 0.5rem;
+    cursor: pointer;
 }
 
 .seopress-get-started .button {

@@ -58,7 +58,7 @@ function seopress_do_real_preview() {
             }
 
             //Oxygen Builder compatibility
-            if (is_plugin_active('oxygen/functions.php')) {
+            if (is_plugin_active('oxygen/functions.php') && !is_plugin_active('oxygen-gutenberg/oxygen-gutenberg.php')) {
                 $seopress_get_the_content = esc_attr(wp_strip_all_tags(do_shortcode(get_post_meta($seopress_get_the_id, 'ct_builder_shortcodes', true), true)));
             }
 
@@ -338,8 +338,8 @@ function seopress_do_real_preview() {
                                         if (filesize($img_src) > 100) {//Ignore files under 100 bytes
                                             $data_img[] .= $img->getAttribute('src');
                                         }
-                                    }
-                                    unlink($img_src);
+                                        @unlink($img_src);
+                                    }  
                                 }
                             }
                             $data['img']['images'] = $data_img;

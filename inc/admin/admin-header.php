@@ -63,63 +63,63 @@ function seopress_admin_header() { ?>
                                 <?php include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
                                 if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) { ?>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_woocommerce$1' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_woocommerce' ); ?>">
                                             <span class="dashicons dashicons-cart"></span>
                                             <?php _e( 'WooCommerce', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_edd$13' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_edd' ); ?>">
                                             <span class="dashicons dashicons-cart"></span>
                                             <?php _e( 'Easy Digital Downloads', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_local_business$10' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_local_business' ); ?>">
                                             <span class="dashicons dashicons-store"></span>
                                             <?php _e( 'Local Business', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_dublin_core$8' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_dublin_core' ); ?>">
                                             <span class="dashicons dashicons-welcome-learn-more"></span>
                                             <?php _e( 'Dublin Core', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets$9' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets' ); ?>">
                                             <span class="dashicons dashicons-media-spreadsheet"></span>
                                             <?php _e( 'Structured Data Types (schema.org)', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_breadcrumbs$2' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_breadcrumbs' ); ?>">
                                             <span class="dashicons dashicons-feedback"></span>
                                             <?php _e( 'Breadcrumbs', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed$3' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed' ); ?>">
                                             <span class="dashicons dashicons-performance"></span>
                                             <?php _e( 'Google Page Speed', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <?php if (!is_multisite()) { ?>
                                         <li>
-                                            <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots$4' ); ?>">
+                                            <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots' ); ?>">
                                                 <span class="dashicons dashicons-media-text"></span>
                                                 <?php _e( 'robots.txt', 'wp-seopress' ); ?>
                                             </a>
                                         </li>
                                     <?php } ?>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_news$5' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_news' ); ?>">
                                             <span class="dashicons dashicons-admin-post"></span>
                                             <?php _e( 'Google News Sitemap', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404$6' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404' ); ?>">
                                             <span class="dashicons dashicons-admin-links"></span>
                                             <?php _e( 'Redirections', 'wp-seopress' ); ?>
                                         </a>
@@ -137,27 +137,27 @@ function seopress_admin_header() { ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rewrite$14' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rewrite' ); ?>">
                                             <span class="dashicons dashicons-admin-links"></span>
                                             <?php _e( 'URL Rewriting', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <?php if (!is_multisite()) { ?>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_white_label$15' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_white_label' ); ?>">
                                             <span class="dashicons dashicons-tag"></span>
                                             <?php _e( 'White Label', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess$7' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_htaccess' ); ?>">
                                             <span class="dashicons dashicons-media-text"></span>
                                             <?php _e( '.htaccess', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <?php } ?>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rss$11' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rss' ); ?>">
                                             <span class="dashicons dashicons-rss"></span>
                                             <?php _e( 'RSS', 'wp-seopress' ); ?>
                                         </a>

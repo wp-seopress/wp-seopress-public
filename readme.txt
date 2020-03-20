@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 3.8.3
+Stable tag: 3.8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -222,6 +222,12 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.8.4 =
+* NEW New properties for virtual, postponed, and canceled events: "eventStatus", "eventAttendanceMode", "previousStartDate" properties due to COVID-19 (PRO)
+* INFO Improve translations
+* INFO Improve Oxygen compatibility with Oxygen Gutenberg add-on (little tricky)
+* FIX unlink error if WP can't download the file for analysis
+* FIX Links in SEOPress dashboard
 = 3.8.3 =
 * NEW Add sitemaps / URLs count
 * INFO Improve translations

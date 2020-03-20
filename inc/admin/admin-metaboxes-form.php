@@ -254,7 +254,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     </p>
                     <p class="description">';
                         $url = admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_single');
-                        echo sprintf(__('You cannot uncheck a parameter? This is normal, and it\'s most likely defined in the <a href="%s">global settings of the extension</a>.','wp-seopress'), $url);
+                        echo sprintf(__('You cannot uncheck a parameter? This is normal, and it‘s most likely defined in the global settings of the extension.','wp-seopress'), $url);
                         echo '</p>
                     <p>
                         <label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'
@@ -292,7 +292,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                             echo '<p>
                                 <label for="seopress_robots_breadcrumbs_meta">'. __( 'Custom breadcrumbs', 'wp-seopress' ) .'</label>
-                                <span class="description">'.__('Enter a custom value, useful if your title is too long.','wp-seopress').'</span>
+                                <span class="description">'.__('Enter a custom value, useful if your title is too long','wp-seopress').'</span>
                             </p>
                             <p>
                                 <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.esc_html(sprintf(__('Current breadcrumbs: %s','wp-seopress'),get_the_title($post))).'" aria-label="'.__('Custom breadcrumbs','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
@@ -307,7 +307,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         <span class="dashicons dashicons-facebook-alt"></span>
                         <br><br>
                         <span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">'.__('Ask Facebook to update his cache','wp-seopress').'</a>
-                        <p>'.__('<span class="label">Did you know?</span> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tag defined below.','wp-seopress').'</p>
+                        <p>'.__('<span class="label">Did you know?</span> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tags are defined below.','wp-seopress').'</p>
                         <p>
                             <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'wp-seopress' ) .'</label>
                             <input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title" placeholder="'.esc_html__('Enter your Facebook title','wp-seopress').'" aria-label="'.__('Facebook Title','wp-seopress').'" value="'.$seopress_social_fb_title.'" />
