@@ -134,7 +134,7 @@ if (seopress_get_toggle_option('titles') =='1') {
 	add_action('wp_head', 'seopress_load_titles_options', 0);
 	function seopress_load_titles_options() {
 		if (!is_admin()){
-			if( function_exists('is_wpforo_page') && is_wpforo_page() ){//disable on wpForo pages to avoid conflicts
+			if( (function_exists('is_wpforo_page') && is_wpforo_page()) || ( class_exists('Ecwid_Store_Page') && Ecwid_Store_Page::is_store_page())) {//disable on wpForo pages to avoid conflicts
 				//do nothing
 			} else {
 				require_once ( dirname( __FILE__ ) . '/options-titles-metas.php'); //Titles & metas
@@ -153,7 +153,7 @@ if (seopress_get_toggle_option('social') =='1') {
 	add_action('wp_head', 'seopress_load_social_options', 0);
 	function seopress_load_social_options() {
 		if (!is_admin()){
-			if( function_exists('is_wpforo_page') && is_wpforo_page() ){//disable on wpForo pages to avoid conflicts
+			if( (function_exists('is_wpforo_page') && is_wpforo_page()) || ( class_exists('Ecwid_Store_Page') && Ecwid_Store_Page::is_store_page())) {//disable on wpForo pages to avoid conflicts
 				//do nothing
 			} else {
 				require_once ( dirname( __FILE__ ) . '/options-social.php'); //Social
@@ -288,7 +288,7 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 
 	add_action('wp_head', 'seopress_load_google_analytics_options', 0);
 	function seopress_load_google_analytics_options() {
-	    require_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
+	    require_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics + Matomo
 	}
 
 	function seopress_cookies_user_consent() {
@@ -305,34 +305,40 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 						//do nothing
 					} else {
 					 	include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
-					 	$data = array();
-					 	$data['gtag_js'] = seopress_google_analytics_js(false);
-					 	$data['body_js'] = seopress_google_analytics_body_code(false);
-					 	$data['head_js'] = seopress_google_analytics_head_code(false);
-					 	$data['custom'] = '';
-					 	$data['custom'] = apply_filters( 'seopress_custom_tracking', $data['custom'] );
+					 	$data 					= [];
+					 	$data['gtag_js'] 		= seopress_google_analytics_js(false);
+					 	$data['matomo_js'] 		= seopress_matomo_js(false);
+					 	$data['body_js'] 		= seopress_google_analytics_body_code(false);
+					 	$data['head_js'] 		= seopress_google_analytics_head_code(false);
+					 	$data['footer_js'] 		= seopress_google_analytics_footer_code(false);
+					 	$data['custom'] 		= '';
+					 	$data['custom'] 		= apply_filters( 'seopress_custom_tracking', $data['custom'] );
 						wp_send_json_success($data);
 					}
 				} else {
 					include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
-				 	$data = array();
-					$data['gtag_js'] = seopress_google_analytics_js(false);
-					$data['body_js'] = seopress_google_analytics_body_code(false);
-					$data['head_js'] = seopress_google_analytics_head_code(false);
-				 	$data['custom'] = '';
-				 	$data['custom'] = apply_filters( 'seopress_custom_tracking', $data['custom'] );
-					wp_send_json_success($data);
+					$data 					= [];
+					$data['gtag_js'] 		= seopress_google_analytics_js(false);
+					$data['matomo_js'] 		= seopress_matomo_js(false);
+					$data['body_js'] 		= seopress_google_analytics_body_code(false);
+					$data['head_js'] 		= seopress_google_analytics_head_code(false);
+					$data['footer_js'] 		= seopress_google_analytics_footer_code(false);
+					$data['custom'] 		= '';
+					$data['custom'] 		= apply_filters( 'seopress_custom_tracking', $data['custom'] );
+				   	wp_send_json_success($data);
 				}
 			}
 		} else {
 			include_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics
-		 	$data = array();
-			$data['gtag_js'] = seopress_google_analytics_js(false);
-			$data['body_js'] = seopress_google_analytics_body_code(false);
-			$data['head_js'] = seopress_google_analytics_head_code(false);
-		 	$data['custom'] = '';
-		 	$data['custom'] = apply_filters( 'seopress_custom_tracking', $data['custom'] );
-			wp_send_json_success($data);
+			$data 					= [];
+			$data['gtag_js'] 		= seopress_google_analytics_js(false);
+			$data['matomo_js'] 		= seopress_matomo_js(false);
+			$data['body_js'] 		= seopress_google_analytics_body_code(false);
+			$data['head_js'] 		= seopress_google_analytics_head_code(false);
+			$data['footer_js'] 		= seopress_google_analytics_footer_code(false);
+			$data['custom'] 		= '';
+			$data['custom'] 		= apply_filters( 'seopress_custom_tracking', $data['custom'] );
+		   	wp_send_json_success($data);
 		}
 	}
 	add_action('wp_ajax_seopress_cookies_user_consent', 'seopress_cookies_user_consent');

@@ -1277,6 +1277,7 @@ if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex
 		add_action( 'wp_head', 'seopress_titles_canonical_post_hook', 1 );
 	} elseif ( is_home() && get_post_meta($page_id,'_seopress_robots_canonical',true) !=''){ //BLOG PAGE
 		function seopress_titles_canonical_post_hook() {
+			$page_id = get_option( 'page_for_posts' );
 			$seopress_titles_canonical = '<link rel="canonical" href="'.htmlspecialchars(urldecode(get_post_meta($page_id,'_seopress_robots_canonical',true))).'" />';
 			//Hook on post canonical URL - 'seopress_titles_canonical'
 			if (has_filter('seopress_titles_canonical')) {
@@ -1284,7 +1285,7 @@ if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex
 		    }
 			echo $seopress_titles_canonical."\n";
 		}
-		add_action( 'wp_head', 'seopress_titles_canonical_post_hook', 1 );
+		add_action( 'wp_head', 'seopress_titles_canonical_post_hook', 1, 1 );
 	} elseif ((is_tax() || is_category() || is_tag()) && seopress_titles_canonical_term_option()) { //CUSTOM TERM CANONICAL
 		function seopress_titles_canonical_term_hook() {
 			$seopress_titles_canonical = '<link rel="canonical" href="'.htmlspecialchars(urldecode(seopress_titles_canonical_term_option())).'" />';

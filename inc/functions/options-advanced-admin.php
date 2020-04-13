@@ -165,6 +165,18 @@ function seopress_advanced_appearance_metaboxe_position_option() {
     }
 }
 
+//Set default tab in schema metabox
+function seopress_advanced_appearance_schema_default_tab_option() {
+    $seopress_advanced_appearance_schema_default_tab_option = get_option("seopress_advanced_option_name");
+    if ( ! empty ( $seopress_advanced_appearance_schema_default_tab_option ) ) {
+        foreach ($seopress_advanced_appearance_schema_default_tab_option as $key => $seopress_advanced_appearance_schema_default_tab_value)
+            $options[$key] = $seopress_advanced_appearance_schema_default_tab_value;
+         if (isset($seopress_advanced_appearance_schema_default_tab_option['seopress_advanced_appearance_schema_default_tab'])) {
+            return $seopress_advanced_appearance_schema_default_tab_option['seopress_advanced_appearance_schema_default_tab'];
+         }
+    }
+}
+
 //Columns in post types
 function seopress_advanced_appearance_title_col_option() {
     $seopress_advanced_appearance_title_col_option = get_option("seopress_advanced_option_name");

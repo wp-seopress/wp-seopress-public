@@ -58,34 +58,59 @@ let hasSaved = false;
                         }
                     }
 
-                    $( '#seopress_cpt .google-snippet-preview .snippet-title' ).html(s.data.title),
-                    $( '#seopress_cpt .google-snippet-preview .snippet-title-default' ).html(s.data.title),
-                    $( '#seopress_titles_title_meta' ).attr("placeholder", s.data.title),
-                    $( '#seopress_cpt .google-snippet-preview .snippet-description' ).html(s.data.meta_desc),
-                    $( '#seopress_cpt .google-snippet-preview .snippet-description-default' ).html(s.data.meta_desc),
-                    $( '#seopress_titles_desc_meta' ).attr("placeholder", s.data.meta_desc),
-                    
-                    $( '#seopress_cpt #seopress_social_fb_title_meta' ).attr("placeholder", data_arr.og_title),
-                    $( '#seopress_cpt .facebook-snippet-preview .snippet-fb-title').html(data_arr.og_title),
-                    $( '#seopress_cpt .facebook-snippet-preview .snippet-fb-title-default').html(data_arr.og_title),
-                    
-                    $( '#seopress_cpt #seopress_social_fb_desc_meta' ).attr("placeholder", data_arr.og_desc),
-                    $( '#seopress_cpt .facebook-snippet-preview .snippet-fb-description').html(data_arr.og_desc),
-                    $( '#seopress_cpt .facebook-snippet-preview .snippet-fb-description-default').html(data_arr.og_desc),
+                    // Google Preview
+                    $("#seopress_cpt .google-snippet-preview .snippet-title").html(s.data.title),
+                    $("#seopress_cpt .google-snippet-preview .snippet-title-default").html(s.data.title),
+                    $("#seopress_titles_title_meta").attr("placeholder", s.data.title),
+                    $("#seopress_cpt .google-snippet-preview .snippet-description").html(s.data.meta_desc),
+                    $("#seopress_cpt .google-snippet-preview .snippet-description-default").html(s.data.meta_desc),
+                    $("#seopress_titles_desc_meta").attr("placeholder", s.data.meta_desc)
 
-                    $( '#seopress_cpt #seopress_social_fb_img_meta' ).attr("placeholder", data_arr.og_img),
-                    $( '#seopress_cpt .snippet-fb-img img' ).attr("src", data_arr.og_img),
-                    $( '#seopress_cpt .snippet-fb-img-default img' ).attr("src", data_arr.og_img),
+                    // Facebook Preview
+                    if (data_arr.og_title) {
+                        $("#seopress_cpt #seopress_social_fb_title_meta").attr("placeholder", data_arr.og_title[0]),
+                        $("#seopress_cpt .facebook-snippet-preview .snippet-fb-title").html(data_arr.og_title[0]),
+                        $("#seopress_cpt .facebook-snippet-preview .snippet-fb-title-default").html(data_arr.og_title[0])
+                    }
 
-                    $( '#seopress_cpt .facebook-snippet-preview .snippet-fb-url').html(data_arr.og_url),
-                    $( '#seopress_cpt .facebook-snippet-preview .snippet-fb-site-name').html(data_arr.og_site_name),
+                    if (data_arr.og_desc) {
+                        $("#seopress_cpt #seopress_social_fb_desc_meta").attr("placeholder", data_arr.og_desc[0]),
+                        $("#seopress_cpt .facebook-snippet-preview .snippet-fb-description").html(data_arr.og_desc[0]),
+                        $("#seopress_cpt .facebook-snippet-preview .snippet-fb-description-default").html(data_arr.og_desc[0])
+                    }
 
-                    $( '#seopress_cpt #seopress_social_twitter_title_meta' ).attr("placeholder", data_arr.tw_title),
-                    $( '#seopress_cpt #seopress_social_twitter_desc_meta' ).attr("placeholder", data_arr.tw_desc),
-                    $( '#seopress_cpt #seopress_social_twitter_img_meta' ).attr("placeholder", data_arr.tw_img),
-                    
+                    if (data_arr.og_img) {
+                        $("#seopress_cpt #seopress_social_fb_img_meta").attr("placeholder", data_arr.og_img[0]),
+                        $("#seopress_cpt .facebook-snippet-preview .snippet-fb-img img").attr("src", data_arr.og_img[0]),
+                        $("#seopress_cpt .facebook-snippet-preview .snippet-fb-img-default img").attr("src", data_arr.og_img[0])
+                    }
+
+                    $("#seopress_cpt .facebook-snippet-preview .snippet-fb-url").html(data_arr.og_url),
+                    $("#seopress_cpt .facebook-snippet-preview .snippet-fb-site-name").html(data_arr.og_site_name)
+
+                    // Twitter Preview
+                    if (data_arr.tw_title) {
+                        $("#seopress_cpt #seopress_social_twitter_title_meta").attr("placeholder", data_arr.tw_title[0]),
+                        $("#seopress_cpt .twitter-snippet-preview .snippet-twitter-title").html(data_arr.tw_title[0]),
+                        $("#seopress_cpt .twitter-snippet-preview .snippet-twitter-title-default").html(data_arr.tw_title[0])
+                    }
+
+                    if (data_arr.tw_desc) {
+                        $("#seopress_cpt #seopress_social_twitter_desc_meta").attr("placeholder", data_arr.tw_desc[0]),
+                        $("#seopress_cpt .twitter-snippet-preview .snippet-twitter-description").html(data_arr.tw_desc[0]),
+                        $("#seopress_cpt .twitter-snippet-preview .snippet-twitter-description-default").html(data_arr.tw_desc[0])
+                    }
+
+                    if (data_arr.tw_img) {
+                        $("#seopress_cpt #seopress_social_twitter_img_meta").attr("placeholder", data_arr.tw_img[0]),
+                        $("#seopress_cpt .twitter-snippet-preview .snippet-twitter-img img").attr("src", data_arr.tw_img[0]),
+                        $("#seopress_cpt .twitter-snippet-preview .snippet-twitter-img-default img").attr("src", data_arr.tw_img[0])
+                    }
+
+                    $("#seopress_cpt .twitter-snippet-preview .snippet-twitter-url").html(data_arr.og_url),
+
                     $( '#seopress_cpt #seopress_robots_canonical_meta').attr('placeholder', s.data.canonical),
-                    
+
                     $( '#seopress-analysis-tabs').load(" #seopress-analysis-tabs-1", '', sp_ca_toggle),
                     $(".analysis-score p").removeClass('loading')
                 },

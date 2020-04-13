@@ -158,7 +158,19 @@ function seopress_import_redirections_settings() {
             }
 
             if (!empty($csv_line[0])) {
-                $id = wp_insert_post(array('post_title' => urldecode($csv_line[0]), 'post_type' => 'seopress_404', 'post_status' => 'publish', 'meta_input' => array( '_seopress_redirections_value' => urldecode($csv_line[1]), '_seopress_redirections_type' => $csv_type_redirects[2], '_seopress_redirections_enabled' =>  $csv_type_redirects[3], '_seopress_redirections_param' => $csv_type_redirects[4])));
+                $id = wp_insert_post([
+                        'post_title' => urldecode($csv_line[0]), 
+                        'post_type' => 'seopress_404', 
+                        'post_status' => 'publish', 
+                        'meta_input' => [
+                            '_seopress_redirections_value'      => urldecode($csv_line[1]),
+                            '_seopress_redirections_type'       => $csv_type_redirects[2], 
+                            '_seopress_redirections_enabled'    => $csv_type_redirects[3], 
+                            '_seopress_redirections_param'      => $csv_type_redirects[4],
+                            'seopress_404_count'                => $csv_line[5]
+                        ]
+                    ]
+                );
             }
         }
     }
@@ -215,7 +227,17 @@ function seopress_import_yoast_redirections() {
                     $csv_line[1] = home_url().$csv_line[1];
                 }
             }
-            $id = wp_insert_post(array('post_title' => urldecode($csv_line[0]), 'post_type' => 'seopress_404', 'post_status' => 'publish', 'meta_input' => array( '_seopress_redirections_value' => urldecode($csv_line[1]), '_seopress_redirections_type' => $csv_type_redirects[2], '_seopress_redirections_enabled' =>  $csv_type_redirects[3], '_seopress_redirections_param' => $csv_type_redirects[4])));
+            $id = wp_insert_post([
+                'post_title'        => urldecode($csv_line[0]), 
+                'post_type'         => 'seopress_404', 
+                'post_status'       => 'publish', 
+                'meta_input'        => [
+                    '_seopress_redirections_value'          => urldecode($csv_line[1]), 
+                    '_seopress_redirections_type'           => $csv_type_redirects[2], 
+                    '_seopress_redirections_enabled'        => $csv_type_redirects[3], 
+                    '_seopress_redirections_param'          => $csv_type_redirects[4]
+                ]
+            ]);
         }
     }
     wp_safe_redirect( admin_url( 'edit.php?post_type=seopress_404' ) );
@@ -264,6 +286,7 @@ function seopress_export_redirections_settings() {
             $redirects_html .= ';';
             $redirects_html .= get_post_meta(get_the_ID(),'_seopress_redirections_param',true);
             $redirects_html .= ';';
+            $redirects_html .= get_post_meta(get_the_ID(),'seopress_404_count',true);
             $redirects_html .= "\n";
         }
         wp_reset_postdata();

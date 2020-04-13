@@ -148,7 +148,7 @@ if (!function_exists('seopress_advanced_appearance_term_metaboxe_position_option
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_display_seo_term_metaboxe() {
     
-    add_action('init','seopress_init_term_metabox');
+    add_action('init','seopress_init_term_metabox', 11);
 
     function seopress_init_term_metabox() {
         if (function_exists('seopress_get_taxonomies')) {

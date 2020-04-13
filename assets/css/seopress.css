@@ -677,6 +677,17 @@
     font-size: 14px;
     width: 524px;
 }
+#seopress_cpt .facebook-snippet-box .notice,
+#seopress_cpt .twitter-snippet-box .notice {
+    padding: 10px 14px;
+    margin: 0 0 10px 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+#seopress_cpt .facebook-snippet-box .notice span,
+#seopress_cpt .twitter-snippet-box .notice span {
+    font-weight: bold;
+}
 #seopress_cpt .snippet-meta {
     display:flex;
     overflow: hidden;
@@ -748,7 +759,84 @@
     height: 274px;
     width: 524px;
     object-fit: cover;
+    background-color: #edeff0;
+    text-align: center;
+    border-bottom: none;
 }
+
+#seopress_cpt .twitter-snippet-box {
+    color: #4b4f56;
+    font-size: 14px;
+    width: 436px;
+}
+#seopress_cpt .snippet-twitter-url {
+    color: #8899A6;
+    font-size: 14px;
+    white-space: normal;
+    line-height: 11px;
+    text-transform: uppercase;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+}
+#seopress_cpt .twitter-snippet-box .twitter-snippet-text {
+    border: 1px solid #dadde1;
+    background-color: #fff;
+    padding: 10px 12px;
+    border-radius: 0 0 10px 10px;
+}
+#seopress_cpt .twitter-snippet-box .title-desc {
+    max-height: 46px;
+    overflow: hidden;
+}
+#seopress_cpt .twitter-snippet-box .snippet-twitter-img,
+#seopress_cpt .twitter-snippet-box .snippet-twitter-img-default,
+#seopress_cpt .twitter-snippet-box .snippet-twitter-img-custom {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+#seopress_cpt .twitter-snippet-box .snippet-twitter-title,
+#seopress_cpt .twitter-snippet-box .snippet-twitter-title-custom,
+#seopress_cpt .twitter-snippet-box .snippet-twitter-title-default {
+    font-size: 1em;
+    line-height: 20px;
+    margin-bottom: 5px;
+    max-height: 1.3em;
+    color: #000;
+    font-weight: 700;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+}
+#seopress_cpt .twitter-snippet-box .snippet-twitter-description,
+#seopress_cpt .twitter-snippet-box .snippet-twitter-description-custom,
+#seopress_cpt .twitter-snippet-box .snippet-twitter-description-default {
+    color: #000;
+    font-size: 14px;
+    line-height: 20px;
+    word-break: break-word;
+    font-family: Helvetica, Arial, sans-serif;
+    max-height: 80px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    width: 100%;
+}
+#seopress_cpt .twitter-snippet-box img {
+    display: block;
+    height: 200px;
+    width: 436px;
+    object-fit: cover;
+    background-color: #edeff0;
+    text-align: center;
+    border-bottom: none;
+}
+
 #seopress_cpt .wrap-seopress-counters, #seopress_pro_cpt .wrap-seopress-counters {
     text-align: right;
     background: #e9ecef;

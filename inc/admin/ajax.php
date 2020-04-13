@@ -15,7 +15,7 @@ function seopress_do_real_preview() {
 
             foreach ( $_COOKIE as $name => $value ) {
                 if ( 'PHPSESSID' !== $name ) {
-                    $cookies[] = new WP_Http_Cookie( array( 'name' => $name, 'value' => $value ) );
+                    $cookies[] = new WP_Http_Cookie( ['name' => $name, 'value' => $value] );
                 }
             }
         }
@@ -30,11 +30,11 @@ function seopress_do_real_preview() {
         } else {
             //Get cookies
             if (isset($_COOKIE)) { 
-                $cookies = array();
+                $cookies = [];
         
                 foreach ( $_COOKIE as $name => $value ) {
                     if ( 'PHPSESSID' !== $name ) {
-                        $cookies[] = new WP_Http_Cookie( array( 'name' => $name, 'value' => $value ) );
+                        $cookies[] = new WP_Http_Cookie( [ 'name' => $name, 'value' => $value ] );
                     }
                 }
             }
@@ -49,20 +49,6 @@ function seopress_do_real_preview() {
                 $seopress_origin = $_GET['origin'];
             }
 
-            //Get post content (used for Words counter)
-            $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
-
-            //Themify compatibility
-            if ( defined( 'THEMIFY_DIR' ) ) {
-                $seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
-            }
-
-            //Oxygen Builder compatibility
-            if (is_plugin_active('oxygen/functions.php') && !is_plugin_active('oxygen-gutenberg/oxygen-gutenberg.php')) {
-                $seopress_get_the_content = esc_attr(wp_strip_all_tags(do_shortcode(get_post_meta($seopress_get_the_id, 'ct_builder_shortcodes', true), true)));
-            }
-
-            $seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
             //Tax name
             if ( isset( $_GET['tax_name'] ) ) {
                 $seopress_tax_name = $_GET['tax_name'];
@@ -71,12 +57,12 @@ function seopress_do_real_preview() {
             //Init
             $title = '';
             $meta_desc = '';
-            $data = array();
+            $data = [];
 
             //Save Target KWs
             if(isset($_GET['seopress_analysis_target_kw'])) {
                 delete_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw');
-                update_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', esc_html($_GET['seopress_analysis_target_kw']));
+                update_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', sanitize_text_field($_GET['seopress_analysis_target_kw']));
             }
 
             //DOM
@@ -111,6 +97,19 @@ function seopress_do_real_preview() {
                 $response = wp_remote_retrieve_body($response);
 
                 if($dom->loadHTML('<?xml encoding="utf-8" ?>' .$response)) {
+
+                    $data = get_post_meta($seopress_get_the_id, '_seopress_analysis_data', true) ? get_post_meta($seopress_get_the_id, '_seopress_analysis_data', true) : $data = [];
+
+                    //Get post content (used for Words counter)
+                    $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
+
+                    //Themify compatibility
+                    if ( defined( 'THEMIFY_DIR' ) ) {
+                        $seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
+                    }
+
+                    $seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
+
                     //Get Target Keywords
                     if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
                         $data['target_kws'] = strtolower($_GET['seopress_analysis_target_kw']);
@@ -297,9 +296,11 @@ function seopress_do_real_preview() {
                         }
 
                         //Keywords density
-                        foreach ($seopress_analysis_target_kw as $kw) {
-                            if (preg_match_all('#\b('.$kw.')\b#iu', strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $m)) {
-                                $data['kws_density']['matches'][$kw][] = $m[0];
+                        if (!is_plugin_active('oxygen/functions.php') && !function_exists('ct_template_output')) { //disable for Oxygen
+                            foreach ($seopress_analysis_target_kw as $kw) {
+                                if (preg_match_all('#\b('.$kw.')\b#iu', strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $m)) {
+                                    $data['kws_density']['matches'][$kw][] = $m[0];
+                                }
                             }
                         }
 
@@ -383,11 +384,13 @@ function seopress_do_real_preview() {
                 }
 
                 //Words Counter
-                if ($seopress_get_the_content !='') {
-                    $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
+                if (!is_plugin_active('oxygen/functions.php') && !function_exists('ct_template_output')) { //disable for Oxygen
+                    if ($seopress_get_the_content !='') {
+                        $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
 
-                    $words_counter_unique = count(array_unique($matches[0]));
-                    $data['words_counter_unique'] = $words_counter_unique;
+                        $words_counter_unique = count(array_unique($matches[0]));
+                        $data['words_counter_unique'] = $words_counter_unique;
+                    }
                 }
 
                 //Get schemas

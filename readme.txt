@@ -4,9 +4,9 @@ Contributors: rainbowgeek, juliobox, maigret
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 3.8.4
+Stable tag: 3.8.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,11 +14,12 @@ Boost your SEO with SEOPress, a simple, fast and powerful SEO plugin for WordPre
 
 == Description ==
 
-SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage redirections 301 and so much more.<br>
+SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage redirections 301 and so much more.<br>
 
-<strong>No advertising, no footprints, white label, in backend AND frontend</strong>
-<strong>Content analysis to help you write search-engine optimized content</strong>
-<strong>Import your post and term metadatas from other plugins in 1 click</strong>
+✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
+✔ <strong>Content analysis to help you write search-engine optimized content</strong>
+✔ <strong>Import your post and term metadatas from other plugins in 1 click</strong>
+✔ <strong>Trusted by 100,000 WordPress websites since 2017.</strong>
 
 <a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / year / unlimited sites</strong></a>
 
@@ -32,7 +33,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Meta descriptions (with dynamic variables too)</li>
 	<li>Open Graph Data</li>
 	<li>Google Knowledge Graph</li>
-	<li>Google Analytics with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">GDPR compatibility</a>)</li>
+	<li><strong>Google Analytics</strong> and <strong>Matomo</strong> with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">GDPR compatibility</a>)</li>
 	<li>Twitter Card</li>
 	<li>Canonical URL</li> 
 	<li>Meta robots (noindex, nofollow, noodp, noimageindex, noarchive, nosnippet)</li>
@@ -52,6 +53,7 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>Content analysis</li>
 	<li>Mobile / Desktop Google Preview</li>
 	<li>Facebook Preview</li>
+	<li>Twitter Preview</li>
 	<li>...</li>
 </ul>
 
@@ -123,6 +125,8 @@ SEOPress is a powerful plugin to optimize your SEO, boost your traffic, improve 
 	<li>TranslatePress</li>
 	<li>Elementor</li>
 	<li>Divi</li>
+	<li>Oxygen Builder</li>
+	<li>Beaver Builder</li>
 	<li>WP-Rocket</li>
 	<li>WooCommerce</li>
 	<li>Easy Digital Downloads</li>
@@ -222,6 +226,51 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.8.5 =
+* NEW Matomo tracking integration! 🎉
+* NEW Twitter Preview! 🎉
+* NEW Display custom taxonomy and custom post type in Breadcrumbs based on your settings 🎉 (PRO)
+* NEW Product stock/availability for automatic Product schema 🎉 (PRO)
+* NEW WooCommerce product attributes for automatic schemas 🎉 (PRO)
+* NEW Add "Article", "AdvertiserContentArticle", "SatiricalArticle", "TechArticle", "AnalysisNewsArticle", "AskPublicNewsArticle", "BackgroundNewsArticle", "OpinionNewsArticle", "ReportageNewsArticle", "ReviewNewsArticle", "LiveBlogPosting" subtypes for Article schema (PRO)
+* NEW Add 'seopress_matomo_cookie_domain' hook to filter Matomo cookie domain (https://www.seopress.org/support/hooks/filter-matomo-cookie-domain/)
+* NEW Add 'seopress_matomo_site_domain' hook to filter Matomo site domain (https://www.seopress.org/support/hooks/filter-matomo-prepend-site-domain/)
+* NEW Add 'seopress_matomo_dnt' hook to filter Matomo Do Not Track feature (https://www.seopress.org/support/hooks/filter-do-not-track-dnt-matomo-feature/)
+* NEW Add 'seopress_matomo_disable_cookies' hook to filter disable cookies feature (https://www.seopress.org/support/hooks/filter-disable-all-tracking-cookies-matomo-feature/)
+* NEW Add 'seopress_matomo_linker' hook to filter cross domains feature (https://www.seopress.org/support/hooks/filter-the-cross-domains-matomo-feature/)
+* NEW Add 'seopress_matomo_link_tracking' hook to filter link tracking feature (https://www.seopress.org/support/hooks/filter-download-outlink-tracking-matomo-feature/)
+* NEW Add 'seopress_matomo_cd_author_ev' hook to filter author custom dimension (https://www.seopress.org/support/hooks/filter-author-custom-dimension-in-matomo/)
+* NEW Add 'seopress_matomo_cd_categories_ev' hook to filter categories custom dimension (https://www.seopress.org/support/hooks/filter-categories-custom-dimension-in-matomo/)
+* NEW Add 'seopress_matomo_cd_tags_ev' hook to filter tags custom dimension (https://www.seopress.org/support/hooks/filter-tags-custom-dimension-in-matomo/)
+* NEW Add 'seopress_matomo_cd_cpt_ev' hook to filter custom post type custom dimension (https://www.seopress.org/support/hooks/filter-custom-post-type-custom-dimension-in-matomo/)
+* NEW Add 'seopress_matomo_cd_logged_in_ev' hook to filter connected users custom dimension (https://www.seopress.org/support/hooks/filter-connected-users-custom-dimension-in-matomo/)
+* NEW Add 'seopress_matomo_no_js' hook to filter no JS feature (https://www.seopress.org/support/hooks/filter-no-js-matomo-feature/)
+* NEW Add 'seopress_matomo_tracking_html' hook to filter the full tracking snippet (https://www.seopress.org/support/hooks/filter-matomo-tracking-code/)
+* INFO Automatically add "coverageStartTime", "coverageEndTime" for LiveBlogPosting schema
+* INFO New checks for Facebook and Twitter preview (format, dimensions, ratio, image url)
+* INFO Improve UI for broken link checker
+* INFO Add domain not found if no status code to broken link checker
+* INFO Remove last link in breadcrumb to follow latest Google guidelines (https://developers.google.com/search/docs/data-types/breadcrumb#html_example)
+* INFO Improve Toolset compatibility (thanks to their support team)
+* INFO Oxygen compatibility with SEOPress (thanks to their support team)
+* INFO ECWID compatibility with SEOPress
+* INFO Add count column to CSV redirect export file (props to @wpchannel)
+* INFO Improve White Label
+* INFO LocalBusiness schema can now be display for a specific page (default is now homepage) from SEO, PRO, Local Business
+* INFO Possibility to add seconds for the duration of a video (Video schema)
+* FIX additional tracking code in footer which was not displayed dynamically after the acceptance of cookies without complete reloading of the page
+* FIX Broken link checker if post_content is select
+* FIX Anchor column in broken link checker post type
+* FIX paginated sitemaps with Polylang
+* FIX Link in admin features list to schema tab (props to @wpchannel)
+* FIX autodraft with WP Customer Area (props to Yi Qi)
+* FIX Fatal error: Uncaught Error: Call to undefined function wp_date if WP < 5.3
+* FIX Custom canonical for blog page (notice in options-title.php line 1280)
+* FIX target keywords with special characters wasn't working as expected
+* FIX placeholders for social meta in SEO metabox if mulitple tags found in source code
+* FIX i18n strings
+* FIX unique ID property for Local Business schema
+* FIX W3C errors for breadcrumbs
 = 3.8.4 =
 * NEW New properties for virtual, postponed, and canceled events: "eventStatus", "eventAttendanceMode", "previousStartDate" properties due to COVID-19 (PRO)
 * INFO Improve translations
@@ -335,287 +384,5 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * FIX Performance issue with PRO
 * FIX Send parameters to redirect URL
 * FIX seopress-block-editor.js?ver=3.7.8:36 Uncaught TypeError: Cannot read property 'length' of undefined
-= 3.7.8 =
-* NEW Pixel counter for title and meta description now works with each language / alphabet! Faster, more reliable and universal!
-* NEW Facebook Preview!
-* NEW Cookie bar customization: change background, color, buttons... from SEO, Google Analytics, Cookie bar / GDPR tab
-* NEW Add new checks to content analysis for social networks (Open Graph / Twitter cards) to detect duplicated tags/conflicts
-* NEW %%post_thumbnail_url%% global dynamic variable to display post thumbnail URL (https://www.seopress.org/support/guides/manage-titles-meta-descriptions/)
-* NEW %%currentmonth_short%% global dynamic variable to display current month in 3 letters (https://www.seopress.org/support/guides/manage-titles-meta-descriptions/)
-* NEW 'seopress_titles_post_thumbnail_url' hook to filter post thumbnail URL (https://www.seopress.org/support/hooks/filter-seopress_titles_post_thumbnail_url-dynamic-variable/)
-* INFO Content analysis now displays duplicate H1 title values for faster identification
-* INFO Add Post title and Permalink to the metadata export file (PRO)
-* INFO wpForo compatibility with SEOPress
-* INFO Improve compatibility with Jetpack CDN (thanks to @jeherve)
-* INFO Improve UI in content analysis if transparent / white images
-* INFO Remove SEO admin bar for user roles without "manage_options" capability to improve UX
-* FIX Facebook OG:Image URL encoding if no featured thumbnail or custom og:image set (thanks to @bitofseo)
-* FIX Keywords in permalink was case sensitive
-= 3.7.7.1 =
-* FIX Remove /category/ in permalinks to target "category" taxonomy only by default
-= 3.7.7 =
-* NEW WordPress 4.7 is now the minimum required to use SEOPress (WP 5.3 is recommended)
-* NEW Add %%page%% dynamic variable, current page number with context (eg: "Page 1 of 4")
-* NEW Add "Remove hentry post class" option (SEO > Advanced > Advanced tab) to prevent Google from seeing this as a schema
-* NEW Add "Remove author website in comments" option (SEO > Advanced > Advanced tab)
-* NEW Add "Remove website field in comments" option (SEO > Advanced > Advanced tab)
-* NEW Add "Clean manually all your 404 errors" feature (SEO > Tools > Redirections > Clean your 404 errors)
-* NEW article:tag meta property on singular post for Open Graph protocol
-* NEW article:section meta property on singular post for Open Graph protocol
-* NEW Add a notification to alert admin if PHP module DOM is missing from SEO notifications center
-* NEW Add "Remove default breadcrumbs JSON-LD structured data (WooCommerce 3+)" option (SEO > PRO > WooCommerce)
-* NEW Add 'seopress_context_paged' hook to filter %%page%% dynamic variable (https://www.seopress.org/support/hooks/filter-page-dynamic-variable/)
-* NEW 'seopress_social_og_tag' hook to filter article:tag metas (https://www.seopress.org/support/hooks/filter-article-tag-meta/)
-* NEW 'seopress_social_og_section' hook to filter article:section meta (https://www.seopress.org/support/hooks/filter-article-section-meta-tag/)
-* NEW 'seopress_titles_template_variables' hook to filter dynamic variables in meta title / desc... (https://www.seopress.org/support/hooks/filter-dynamic-variables-array/)
-* NEW 'seopress_sitemaps_html_post_date' hook to filter date in HTML sitemap (https://www.seopress.org/support/hooks/filter-to-enable-disable-post-date-by-post-type-in-html-sitemap/)
-* NEW Content analysis: check if one your target keyword is in your slug
-* INFO add new characters to content analysis to avoid "NAN" error
-* INFO Update Admin Columns PRO compatibility (thanks to Stefan)
-* INFO The notification about the license activation is now only show for users with "manage_options" capability
-* INFO Improve code design
-* INFO Add “ and ” characters to pixels counter
-* INFO Improve plugin updater to avoid 403 error on license activation
-* FIX Warning count() error if no main menu selected from "Add SiteNavigationElement schema" feature
-* FIX Replace category_link (deprecated) by term_link
-* FIX a notice on 404 page in specific case
-* FIX Incorrect message about PRO version in Configuration wizard (thanks to @Noomia)
-* FIX Bulk edit for post types generated by Toolset plugin
-* FIX Undefined variable in plugin-licence.php file
-* FIX Change CSV separator for Export metadata tool (',' to ';')
-= 3.7.6 =
-* NEW Add SiteNavigationElement schema (SEO > PRO > Structured data types to enable this schema on your main menu)
-* INFO Add compatibility to Oxygen Builder for additional tracking code (body tag)
-* INFO add new characters to content analysis to avoid "NAN" error
-* FIX Change CSV seperator for Export metadata tool (',' to ';') to match import metadata tool seperator 
-* FIX Export CSV in specific cases
-* FIX XML sitemaps if WordPress is located in a subdirectory
-* FIX Short description for WooCommerce in Product Automatic schema
-* FIX Warning: DOMDocument::loadHTML(): Empty string supplied as input in XML sitemaps
-= 3.7.5 =
-* NEW Review schema: Add item type CreativeWorkSeason, CreativeWorkSeries, Episode, Game, MediaObject, MusicPlaylist, MusicRecording, Organization to solve "Thing is not a known valid target type for the itemReviewed property."
-* NEW Add custom tracking code just before the body closing tag
-* NEW Add an option to display/hide any SEO metaboxes for each custom post type
-* NEW 'seopress_custom_footer_tracking' hook to filter additional tracking code in body footer (https://www.seopress.org/support/hooks/filter-html-additional-tracking-code-in-footer-body/)
-* NEW 'seopress_sitemaps_xml_index' hook to filter XML index sitemap (https://www.seopress.org/support/hooks/filter-xml-index-sitemap/)
-* NEW 'seopress_sitemaps_xml_single' hook to filter XML single post type sitemap (https://www.seopress.org/support/hooks/filter-xml-single-post-type-sitemap/)
-* NEW 'seopress_sitemaps_xml_single_term' hook to filter XML single taxonomy sitemap (https://www.seopress.org/support/hooks/filter-xml-sitemap-single-taxonomy/)
-* NEW 'seopress_sitemaps_xml_author' hook to filter XML author sitemap (https://www.seopress.org/support/hooks/filter-xml-author-sitemap/)
-* NEW 'seopress_sitemaps_xml_video' hook to filter XML video sitemap (https://www.seopress.org/support/hooks/filter-xml-video-sitemap/)
-* NEW 'seopress_sitemaps_xml_news' hook to filter XML news sitemap (https://www.seopress.org/support/hooks/filter-xml-news-sitemap/)
-* INFO Support %%sitedesc%% dynamic variable (alias of %%tagline%%') in title / meta description
-* INFO Support %%excerpt%% dynamic variable (alias of %%post_excerpt%%') in title / meta description
-* INFO Support %%date%% dynamic variable (alias of %%post_date%%') in title / meta description
-* INFO Display author meta only if username is not equal to display name
-* INFO Improve UI
-* INFO Improve content analysis (UX/UI)
-* INFO Improve block editor (Gutenberg) compatibility
-* FIX XML sitemaps with Polylang
-* FIX Add '59' value for minutes in LocalBusiness schema to manage stores open 24 hours a day
-* FIX Solved undefined in broken link checker bot (log textarea)
-= 3.7.4 =
-* NEW Author meta name for singular page (enabled by default)
-* NEW 'seopress_robots_txt_file' hook to filter robots.txt file (useful with Polylang and multidomain option https://www.seopress.org/support/hooks/filter-robots-txt-file-seopress-pro/)
-* NEW 'seopress_get_custom_fields' hook to filter custom fields list in Schemas (https://www.seopress.org/support/hooks/filter-custom-fields-list-in-schemas/)
-* INFO Support hierarchical custom post type for breadcrumbs (PRO)
-* INFO Improve documentation for robots.txt page
-* INFO Improve primary category feature for post
-* INFO Breadcrumbs is now matching primary category (if set)
-* FIX get_home_url() for XSL sitemap with Polylang
-* FIX replace wp_count_posts by pll_count_posts if Polylang activated for XML Sitemap index
-* FIX check when applying "rsd_link" option (thanks to @bomalo)
-* FIX Site is experience difficulties error after requesting the bot in specific cases
-= 3.7.3 =
-* NEW WordPress 5.3 compatibility
-* NEW Export metadata to a CSV file! (PRO)
-* NEW Added multi-domain support for XML sitemaps with Polylang (https://www.seopress.org/support/guides/multidomain-xml-sitemap-with-polylang-and-seopress/)
-* NEW Import post metadata from Squirrly (https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/)
-* NEW 'seopress_metadata_query_args' hook to filter CSV metadata export query (https://www.seopress.org/support/hooks/filter-the-arguments-of-the-metadata-export-query/)
-* NEW 'seopress_post_types' hook to filter custom post type used by SEOPress
-* NEW 'seopress_sitemaps_single_img_url' hook to filter standard image URLs in XML image sitemaps (use it inside a mu-plugin)
-* NEW 'seopress_sitemaps_single_shortcodes' hook to filter execution of shortcodes in XML image sitemaps (use it inside a mu-plugin)
-* INFO Improve XML image sitemaps for featured images, product galleries...
-* INFO Breadcrumbs options can now be translated from WPML / Polylang (wpml-config.xml)
-* FIX Call to undefined function is_product() in /wp-seopress/inc/functions/variables/dynamic-variables.php:97
-* FIX JS error in content analysis metabox on Google Suggestions
-= 3.7.2 =
-* NEW Custom taxonomy for automatic schemas (eg: Brand for product schema) - PRO
-* NEW Add image caption and title to XML Image Sitemaps
-* NEW Image sitemaps now support shortcodes (useful with DIVI page builder)
-* NEW Add %%post_content%% dynamic variable to get the post content / product description
-* NEW 'seopress_titles_product_cat' hook to filter product categories using %%wc_single_cat%%
-* NEW 'seopress_titles_product_tag' hook to filter product categories using %%wc_single_tag%%
-* NEW 'seopress_titles_cat' hook to filter product categories using %%post_category%%
-* NEW 'seopress_titles_tag' hook to filter product tags using %%post_tag%%
-* INFO Improve schemas rendering to avoid "}" missing error in Google Search Console
-* FIX UI - Hide Redirections tab in SEO > Tools if SEOPress PRO is not enabled
-* FIX new meta robots
-* FIX Call to undefined function is_product() in /wp-seopress-pro/inc/functions/options-woocommerce.php:8
-= 3.7.1 =
-* NEW JobPosting schema (PRO)
-* NEW 'seopress_metabox_seo_tabs' hook to filter tabs in SEO metabox
-* NEW 'seopress_schemas_auto_job_html' hook to filter JobPosting global schema
-* NEW 'seopress_schemas_job_html' hook to filter JobPosting manual schema
-* NEW 'seopress_sitemaps_max_posts_per_sitemap' hook to filter max posts per paginated sitemap
-* INFO GA: we now follow all external links, even if you have not defined an empty target attribute
-* INFO Performance optimization
-* INFO Improving security
-* INFO Improving the user experience
-= 3.7 =
-* NEW Import metadata from CSV file: title, meta description, meta robots and more... (SEO > Tools > Data) - PRO
-* NEW Support the new Google meta robots (max-snippet:-1, max-image-preview:large, max-video-preview:-1), ON by default
-* INFO Improve translations
-* FIX %%current_pagination%% for first page
-* FIX robots.txt with Elementor didn't load in specific configurations
-* FIX Outbound links count in content analysis
-* FIX Last separator for breadcrumbs with "seopress_pro_breadcrumbs_crumbs" hook
-= 3.6.5 =
-* NEW XML Author sitemap
-* NEW 'seopress_schemas_organization_html' hook to filter Organization schema
-* NEW 'seopress_remove_feature_titles' hook to remove Titles and metas block in SEO > Dashboard
-* NEW 'seopress_remove_feature_xml_sitemap' hook to remove Titles and metas block in SEO > Dashboard
-* NEW 'seopress_remove_feature_social' hook to remove Social block in SEO > Dashboard
-* NEW 'seopress_remove_feature_google_analytics' hook to remove Google Analytics block in SEO > Dashboard
-* NEW 'seopress_remove_feature_advanced' hook to remove Advanced block in SEO > Dashboard
-* NEW 'seopress_remove_feature_woocommerce' hook to remove WooCommerce block in SEO > Dashboard
-* NEW 'seopress_remove_feature_edd' hook to remove Easy Digital Downloads block in SEO > Dashboard
-* NEW 'seopress_remove_feature_local_business' hook to remove Local Business block in SEO > Dashboard
-* NEW 'seopress_remove_feature_dublin_core' hook to remove Dublin Core block in SEO > Dashboard
-* NEW 'seopress_remove_feature_breadcrumbs' hook to remove Breadcrumbs block in SEO > Dashboard
-* NEW 'seopress_remove_feature_schemas' hook to remove Schemas block in SEO > Dashboard
-* NEW 'seopress_remove_feature_page_speed' hook to remove Page Speed block in SEO > Dashboard
-* NEW 'seopress_remove_feature_robots' hook to remove Robots block in SEO > Dashboard
-* NEW 'seopress_remove_feature_news' hook to remove News block in SEO > Dashboard
-* NEW 'seopress_remove_feature_redirects' hook to remove Redirects block in SEO > Dashboard
-* NEW 'seopress_remove_feature_bot' hook to remove Bot (broken links) block in SEO > Dashboard
-* NEW 'seopress_remove_feature_backlinks' hook to remove Backlinks block in SEO > Dashboard
-* NEW 'seopress_remove_feature_rewrite' hook to remove Rewrite block in SEO > Dashboard
-* NEW 'seopress_remove_feature_htaccess' hook to remove htaccess block in SEO > Dashboard
-* NEW 'seopress_remove_feature_rss' hook to remove RSS block in SEO > Dashboard
-* NEW 'seopress_remove_feature_tools' hook to remove Tools (Import / Export) block in SEO > Dashboard
-* NEW 'seopress_remove_feature_license' hook to remove License block in SEO > Dashboard
-* INFO Aria-label attribute in breadcrumbs is now translatable
-* INFO %%current_pagination%% is now set to 1 by default
-* FIX 'seopress_sitemaps_html_pages_query' hook to include $cpt_key parameter
-* FIX bounce rate with custom dimensions
-* FIX Hierarchical post types in HTML sitemap
-* FIX CSS bug in SEO dashboard with WordPress 5.2.3
-= 3.6.4 =
-* NEW Add 'seopress_bot_query' hook to filter the broken links checker query
-* INFO Relevanssi users: posts marked as noindex are no longer indexed by default (Relevanssi 4.3.2 required)
-* INFO Updated Chart JS library
-* FIX primary category in XML sitemaps
-* FIX meta robots / canonical tags for static blog page
-* FIX Breadcrumbs with before / after HTML hooks (thanks to @wpchannel)
-= 3.6.3 =
-* INFO Improve code quality
-* INFO Improve security
-* FIX Notice: Undefined index: seopress_backlinks_majestic_key
-* FIX Notice: Undefined index: seopress_robots_file
-* FIX Notice: Undefined index: seopress_rss_before_html
-* FIX Notice: Undefined index: seopress_rss_after_html
-* FIX Saving FAQ manual schema
-* FIX Saving Service description manual schema
-* FIX Saving Recipe ingredients manual schema
-* FIX Saving Recipe instructions manual schema
-* FIX Pixels counter color
-* FIX Some CSS
-* FIX map_meta_cap was called incorrectly. The post type seopress_404 is not registered, so it may not be reliable to check the capability "edit_post" against a post of that type.
-* FIX Undefined variable in installation wizard
-= 3.6.2.1 =
-* FIX Video duration for manual edit (automatic schema)
-* FIX Notice: Undefined variable: seopress_excerpt_length
-* FIX undefined 'post_author' variable if no posts in author archive
-* FIX %%post_author%% and %%author_bio%% variables
-* FIX Redirections with HTML entities
-= 3.6.2 =
-* NEW Add custom manual / automatic schema with dynamic variables (PRO)
-* NEW Add custom tracking code after opening body tag like Google Tag Manager 🍾
-* NEW Add meta name "thumbnail" option in SEO > Titles and metas > Single post types to display post thumbnail in Google Custom Search (eg: https://wordpress.org/search/seopress)
-* NEW Add FAQ global schema (PRO)
-* NEW Add 'keywords' for Recipe schema (PRO)
-* NEW Add 'recipeCuisine' for Recipe schema (PRO)
-* NEW Add 'recipeIngredient' for Recipe schema (PRO)
-* NEW Add 'recipeInstructions' for Recipe schema (PRO)
-* NEW Add 'BlogPosting' for Article schema (PRO)
-* NEW 'seopress_schemas_auto_faq_html' hook to filter FAQ global schema
-* NEW 'seopress_sitemaps_single_img' hook to add custom fields to XML image sitemaps
-* NEW 'seopress_sitemaps_html_pages_depth_query' hook to filter depth for hierarchical contents in HTML sitemap
-* NEW 'seopress_custom_body_tracking' hook to filter custom body tracking
-* NEW 'seopress_titles_template_variables_array' && 'seopress_titles_template_replace_array' hook to filter dynamic variables for title tag / meta description
-* NEW Add keywords density to content analysis to help you avoid keyword stuffing
-* NEW Add outbound links to content analysis (in links tab)
-* INFO WP-Rocket now automatically detect our XML sitemaps (WP-Rocket 3.3.7 required)
-* INFO Add quick button separator for title fields
-* INFO You can now disable BOT / Broken links checker from the SEO dashboard (admin bar, menu page and post type)
-* INFO Improve content analysis by removing empty target keywords
-* INFO Remove Alexa Rank feature (the API is no longer provided for free by Amazon)
-* INFO Translate Google Analytics UA option field with WPML / Polylang
-* INFO Automatic schemas tab is now the default one in Structured Data Types metabox
-* INFO Checks if the redirects feature is active before importing redirects 
-* FIX Some translation strings / localize strings
-* FIX wpml-config.xml file, WPML / Polylang users can now translate Archives title and meta description (eg: shop page)
-* FIX Recipe schema: cooking time / calories / yield / total time
-* FIX Custom tracking code in head
-* FIX Remove Website schema if nositelinkssearchbox option is ON
-= 3.6.1.1 =
-* FIX s(...).tabs is not a function in seopress-cookies.min.js
-= 3.6.1 =
-* INFO PHP 5.6 is now the minimum requirement
-* INFO Small performance improvements
-* INFO Refactoring some JS files (drastic weight reduction)
-* INFO Support %%title%% dynamic variable (alias of %%post_title%%') in title / meta description
-* INFO Remove query strings for social sharing and image XML sitemaps
-* FIX Canonical placeholder value in SEO metabox for terms taxonomy
-* FIX Undefined variable: html
-* FIX Breadcrumbs shortcode
-* FIX Fatal error SEOPRESS_Language_Packs
-* FIX Notice array to string conversion
-* FIX Saving image fields for automatic schemas
-= 3.6 =
-* NEW Using the pixel to calculate the length of title / meta description (beta)
-* NEW All translations are now maintained on TranslationsPress
-* NEW Remove static Shop page defined in WooCommerce settings from Breadcrumbs (PRO)
-* NEW Google Ads (SEO > Google Analytics > Tracking tab)
-* NEW Import redirects from Yoast Premium (PRO)
-* NEW Service schema (automatic and manual - PRO)
-* NEW "seopress_metaboxe_term_seo_priority" hook to filter SEO metabox priority in terms taxonomy
-* NEW "seopress_gtag_ua" hook to filter Google UA tag + features
-* NEW "seopress_gtag_ads" hook to filter Google Ads tag
-* NEW "seopress_pro_breadcrumbs_crumbs" hook to filter crumbs for breadcrumbs
-* NEW "seopress_sitemaps_html_cpt" hook to filter post types for HTML sitemap
-* NEW Add 'seopress_schemas_auto_service_html' hook to filter automatic service schema (PRO)
-* INFO Refactoring broken links checker feature (PRO)
-* INFO Remove stop words feature
-* INFO JSON-LD breadcrumbs is now automatically called in the head of your document (if enabled). No longer need to manually add the function in your theme.
-* INFO Improve UI for License page / displaying license error
-* INFO Improve UI for Tools page
-* INFO Improve CSS for Schemas
-* INFO Improve SEO metabox UI for term taxonomy
-* INFO Improve Content Analysis metabox UI
-* INFO Removal of the version number in the header of the SEO dashboard (too confusing)
-* INFO Significant performance improvement for Google Analytics widget in Dashboard
-* INFO Improve select values for automatic schemas
-* INFO Better Admin Columns PRO integration (thanks Stefan from ACPRO team @admincolumns)
-* INFO Minify some JS files to slightly improve performance
-* INFO Remove 100 CSS lines in seopress-pro.css
-* FIX Social meta tags for Shop Page (WooCommerce)
-* FIX Some translation strings
-* FIX Add a check to avoid displaying empty automatic schemas
-* FIX White Label: Remove SEOPress admin header
-* FIX SEO metabox position for term taxonomy is now using the setting defined in SEO > Advanced
-* FIX Undefined variable: article_img_height for article schema
-* FIX Undefined variable: article_img_width for article schema
-* FIX Redirections category filtering in backend
-* FIX JS error ctx is not defined when configuring Google Analytics widget in Dashboard
-* FIX Notice Only variables should be passed by reference in Import tool page
-* FIX CSS position sticky with Safari
-* FIX CSS for FAQ schema (Structured data types metabox)
-* FIX Display the searched keyword in the breadcrumb
-* FIX HTML Entities decode in placeholders for SEO metabox
-* FIX Product Global Identifiers type and value for manual Product schema
-* FIX Using WooCommerce product metas with automatic schemas
-* FIX Broken link checker percentage of completion
-* FIX Strip HTML comments in title / schemas (especially those of Gutenberg)
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View complete changelog</a>

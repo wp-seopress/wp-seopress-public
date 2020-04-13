@@ -306,7 +306,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     <div class="box-left">
                         <span class="dashicons dashicons-facebook-alt"></span>
                         <br><br>
-                        <span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">'.__('Ask Facebook to update his cache','wp-seopress').'</a>
+                        <span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">'.__('Ask Facebook to update its cache','wp-seopress').'</a>
                         <p>'.__('<span class="label">Did you know?</span> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tags are defined below.','wp-seopress').'</p>
                         <p>
                             <label for="seopress_social_fb_title_meta">'. __( 'Facebook Title', 'wp-seopress' ) .'</label>
@@ -332,6 +332,10 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                                 echo '<p><span class="dashicons dashicons-warning"></span>'.__('The Social Networks feature is disabled. Still seing informations from the FB Preview? You probably have social tags added by your theme or a plugin.','wp-seopress').'</p>';
                             }
                             echo '<div class="facebook-snippet-box">
+                                <div class="snippet-fb-img-alert alert1" style="display:none"><p class="notice notice-error">'.__('File type not supported by Facebook. Please choose another image.', 'wp-seopress').'</p></div>
+                                <div class="snippet-fb-img-alert alert2" style="display:none"><p class="notice notice-error">'.__('Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image.', 'wp-seopress').'</p></div>
+                                <div class="snippet-fb-img-alert alert3" style="display:none"><p class="notice notice-error">'.__('File error. Please choose another image.', 'wp-seopress').'</p></div>
+                                <div class="snippet-fb-img-alert alert4" style="display:none"><p class="notice notice-info">'.__('Your image ratio is: ', 'wp-seopress').'<span></span>. '.__('The closer to 1.91 the better.','wp-seopress').'</p></div>
                                 <div class="snippet-fb-img"><img src="" width="524" height="274" alt="" aria-label=""/></div>
                                 <div class="snippet-fb-img-custom" style="display:none"><img src="" width="524" height="274" alt="" aria-label=""/></div>
                                 <div class="snippet-fb-img-default" style="display:none"><img src="" width="524" height="274" alt="" aria-label=""/></div>
@@ -380,6 +384,44 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                             <span class="advise">'. __('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress') .'</span>
                             <input id="seopress_social_twitter_img_upload" class="button" type="button" aria-label="'.__('Twitter Thumbnail','wp-seopress').'" value="'.__('Upload an Image','wp-seopress').'" />
                         </p>
+                    </div>
+                    <div class="box-right">
+                        <div class="twitter-snippet-preview">
+                            <h3>'.__('Twitter Preview','wp-seopress').'</h3>';
+                            if(seopress_get_toggle_option('social')=='1') {
+                                echo '<p>'.__('This is what your post will look like in Twitter. You have to publish your post to get the Twitter Preview.','wp-seopress').'</p>';
+                            } else {
+                                echo '<p><span class="dashicons dashicons-warning"></span>'.__('The Social Networks feature is disabled. Still seing informations from the FB Preview? You probably have social tags added by your theme or a plugin.','wp-seopress').'</p>';
+                            }
+                            echo '<div class="twitter-snippet-box">
+                                <div class="snippet-twitter-img-alert alert1" style="display:none"><p class="notice notice-error">'.__('File type not supported by Twitter. Please choose another image.', 'wp-seopress').'</p></div>
+                                <div class="snippet-twitter-img-alert alert2" style="display:none"><p class="notice notice-error">'.__('Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress').'</p></div>
+                                <div class="snippet-twitter-img-alert alert3" style="display:none"><p class="notice notice-error">'.__('File error. Please choose another image.', 'wp-seopress').'</p></div>
+                                <div class="snippet-twitter-img-alert alert4" style="display:none"><p class="notice notice-info">'.__('Your image ratio is: ', 'wp-seopress').'<span></span>. '.__('The closer to 1 the better (with large card, 2 is better).','wp-seopress').'</p></div>
+                                <div class="snippet-twitter-img"><img src="" width="524" height="274" alt="" aria-label=""/></div>
+                                <div class="snippet-twitter-img-custom" style="display:none"><img src="" width="600" height="314" alt="" aria-label=""/></div>
+                                <div class="snippet-twitter-img-default" style="display:none"><img src="" width="600" height="314" alt="" aria-label=""/></div>
+
+                                <div class="twitter-snippet-text">
+                                    <div class="title-desc">
+                                        <div class="snippet-twitter-title"></div>
+                                        <div class="snippet-twitter-title-custom" style="display:none"></div>';
+                                        global $tag;
+                                        if (get_the_title()) {
+                                            echo '<div class="snippet-twitter-title-default" style="display:none">'.get_the_title().' - '.get_bloginfo('name').'</div>';
+                                        } elseif ($tag) {
+                                            echo '<div class="snippet-twitter-title-default" style="display:none">'.$tag->name.' - '.get_bloginfo('name').'</div>';
+                                        }
+                                echo   '<div class="snippet-twitter-description">...</div>
+                                        <div class="snippet-twitter-description-custom" style="display:none"></div>
+                                        <div class="snippet-twitter-description-default" style="display:none"></div>';
+                            echo    '</div>
+                                     <div class="snippet-meta">
+                                        <div class="snippet-twitter-url"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>';
             }

@@ -477,34 +477,34 @@ class SEOPRESS_Admin_Setup_Wizard {
 			?>
 
 			<label class="location-prompt" for="knowledge_name"><?php esc_html_e( 'Your name/organization', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_name" class="location-input" name="knowledge_name" placeholder="<?php esc_html_e('eg: SEOPress', 'wp-seopress'); ?>" value="<?php echo $knowledge_name; ?>" />
+			<input type="text" id="knowledge_name" class="location-input" name="knowledge_name" placeholder="<?php esc_html_e('eg: My Company Name', 'wp-seopress'); ?>" value="<?php echo $knowledge_name; ?>" />
 
 			<label class="location-prompt" for="knowledge_img"><?php esc_html_e( 'Your photo/organization logo', 'wp-seopress' ); ?></label>
 			<input type="text" id="knowledge_img" class="location-input" name="knowledge_img" placeholder="<?php esc_html_e('eg: https://www.example.com/logo.png', 'wp-seopress'); ?>" value="<?php echo $knowledge_img; ?>" />
 
 			<label class="location-prompt" for="knowledge_fb"><?php esc_html_e( 'Facebook page URL', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_fb" class="location-input" name="knowledge_fb" placeholder="<?php esc_html_e('eg: https://facebook.com/seopresspro','wp-seopress'); ?>" value="<?php echo $knowledge_fb; ?>" />
+			<input type="text" id="knowledge_fb" class="location-input" name="knowledge_fb" placeholder="<?php esc_html_e('eg: https://facebook.com/my-page-url','wp-seopress'); ?>" value="<?php echo $knowledge_fb; ?>" />
 
 			<label class="location-prompt" for="knowledge_tw"><?php esc_html_e( 'Twitter Username', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_tw" class="location-input" name="knowledge_tw" placeholder="<?php esc_html_e('eg: @wp_seopress', 'wp-seopress'); ?>" value="<?php echo $knowledge_tw; ?>" />
+			<input type="text" id="knowledge_tw" class="location-input" name="knowledge_tw" placeholder="<?php esc_html_e('eg: @my_twitter_account', 'wp-seopress'); ?>" value="<?php echo $knowledge_tw; ?>" />
 
 			<label class="location-prompt" for="knowledge_pin"><?php esc_html_e( 'Pinterest URL', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_pin" class="location-input" name="knowledge_pin" placeholder="<?php esc_html_e('eg: https://pinterest.com/wpbuy/', 'wp-seopress'); ?>" value="<?php echo $knowledge_pin; ?>" />
+			<input type="text" id="knowledge_pin" class="location-input" name="knowledge_pin" placeholder="<?php esc_html_e('eg: https://pinterest.com/my-page-url/', 'wp-seopress'); ?>" value="<?php echo $knowledge_pin; ?>" />
 
 			<label class="location-prompt" for="knowledge_insta"><?php esc_html_e( 'Instagram URL', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_insta" class="location-input" name="knowledge_insta" placeholder="<?php esc_html_e('eg: https://www.instagram.com/wp_seopress/', 'wp-seopress'); ?>" value="<?php echo $knowledge_insta; ?>" />
+			<input type="text" id="knowledge_insta" class="location-input" name="knowledge_insta" placeholder="<?php esc_html_e('eg: https://www.instagram.com/my-page-url/', 'wp-seopress'); ?>" value="<?php echo $knowledge_insta; ?>" />
 
 			<label class="location-prompt" for="knowledge_yt"><?php esc_html_e( 'YouTube URL', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_yt" class="location-input" name="knowledge_yt" placeholder="<?php esc_html_e('eg: https://www.youtube.com/SEOPress', 'wp-seopress'); ?>" value="<?php echo $knowledge_yt; ?>" />
+			<input type="text" id="knowledge_yt" class="location-input" name="knowledge_yt" placeholder="<?php esc_html_e('eg: https://www.youtube.com/my-channel-url', 'wp-seopress'); ?>" value="<?php echo $knowledge_yt; ?>" />
 
 			<label class="location-prompt" for="knowledge_li"><?php esc_html_e( 'LinkedIn URL', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_li" class="location-input" name="knowledge_li" placeholder="<?php esc_html_e('eg: http://linkedin.com/company/seopress/', 'wp-seopress'); ?>" value="<?php echo $knowledge_li; ?>" />
+			<input type="text" id="knowledge_li" class="location-input" name="knowledge_li" placeholder="<?php esc_html_e('eg: http://linkedin.com/company/my-company-url/', 'wp-seopress'); ?>" value="<?php echo $knowledge_li; ?>" />
 
 			<label class="location-prompt" for="knowledge_mys"><?php esc_html_e( 'MySpace URL', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_mys" class="location-input" name="knowledge_mys" placeholder="<?php esc_html_e('eg: https://myspace.com/your-page', 'wp-seopress'); ?>" value="<?php echo $knowledge_mys; ?>" />
+			<input type="text" id="knowledge_mys" class="location-input" name="knowledge_mys" placeholder="<?php esc_html_e('eg: https://myspace.com/my-page-url', 'wp-seopress'); ?>" value="<?php echo $knowledge_mys; ?>" />
 
 			<label class="location-prompt" for="knowledge_sound"><?php esc_html_e( 'Soundcloud URL', 'wp-seopress' ); ?></label>
-			<input type="text" id="knowledge_sound" class="location-input" name="knowledge_sound" placeholder="<?php esc_html_e('eg: https://soundcloud.com/michaelmccannmusic', 'wp-seopress'); ?>" value="<?php echo $knowledge_sound; ?>" />
+			<input type="text" id="knowledge_sound" class="location-input" name="knowledge_sound" placeholder="<?php esc_html_e('eg: https://soundcloud.com/my-page-url', 'wp-seopress'); ?>" value="<?php echo $knowledge_sound; ?>" />
 
 			<label class="location-prompt" for="knowledge_tu"><?php esc_html_e( 'Tumblr URL', 'wp-seopress' ); ?></label>
 			<input type="text" id="knowledge_tu" class="location-input" name="knowledge_tu" placeholder="<?php esc_html_e('eg: https://your-site.tumblr.com', 'wp-seopress'); ?>" value="<?php echo $knowledge_tu; ?>" />

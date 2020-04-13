@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.4
+Version: 3.8.5
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -54,7 +54,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.4' );
+define( 'SEOPRESS_VERSION', '3.8.5' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +65,7 @@ function seopress_init($hook) {
 
 	global $pagenow;
 	global $typenow;
+
 	if ( is_admin() || is_network_admin() ) {
 		require_once dirname( __FILE__ ) . '/inc/admin/plugin-upgrader.php';
 		require_once dirname( __FILE__ ) . '/inc/admin/admin.php';
@@ -442,7 +443,7 @@ function seopress_get_post_types() {
 	$operator = 'and'; // 'and' or 'or'
 
 	$post_types = get_post_types( $args, $output, $operator );
-	unset($post_types['attachment'], $post_types['seopress_404'], $post_types['elementor_library']);
+	unset($post_types['attachment'], $post_types['seopress_404'], $post_types['elementor_library'], $post_types['cuar_private_file'], $post_types['cuar_private_page'], $post_types['ct_template']);
 	$post_types = apply_filters('seopress_post_types', $post_types);
 	return $post_types;
 }
@@ -460,9 +461,13 @@ function seopress_get_taxonomies( $with_terms = false ) {
 		'show_ui' => true,
 		'public'  => true,
 	];
+	$args = apply_filters('seopress_get_taxonomies_args', $args);
+	
 	$output = 'objects'; // or objects
 	$operator = 'and'; // 'and' or 'or'
 	$taxonomies = get_taxonomies( $args, $output, $operator );
+	
+	$taxonomies = apply_filters('seopress_get_taxonomies_list', $taxonomies);
 
 	if ( ! $with_terms ) {
 		return $taxonomies;
@@ -471,6 +476,7 @@ function seopress_get_taxonomies( $with_terms = false ) {
 	foreach ( $taxonomies as $_tax_slug => &$_tax ) {
 		$_tax->terms = get_terms( [ 'taxonomy' => $_tax_slug ] );
 	}
+
 	return $taxonomies;
 }
 
@@ -781,8 +787,13 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_op
 // Remove Admin Bar with Content Analysis
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_remove_admin_bar() {
-	if ( isset($_GET['no_admin_bar'] ) && '1' === $_GET['no_admin_bar'] ) {
-		add_filter( 'show_admin_bar', '__return_false' );
+    if ( current_user_can( 'edit_posts' ) ) {
+		if ( isset($_GET['no_admin_bar'] ) && '1' === $_GET['no_admin_bar'] ) {
+			add_filter( 'show_admin_bar', '__return_false' );
+			if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) { //disable for Oxygen
+				add_action( 'template_redirect', 'seopress_get_oxygen_content' );
+			}
+		}
 	}
 }
 add_action('plugins_loaded', 'seopress_remove_admin_bar');
@@ -1048,4 +1059,43 @@ function seopress_if_key_exists(array $arr, $key) {
 	}
 
 	return false;
+}
+
+/**
+ * Get Oxygen Content
+ *
+ * @since 3.8.5
+ * @author Benjamin Denis
+ *
+ * @return null
+ **/
+function seopress_get_oxygen_content() {
+	if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
+		
+		$seopress_get_the_content = ct_template_output();
+
+		if ($seopress_get_the_content !='') {
+
+			//Get Target Keywords
+			if (get_post_meta(get_the_ID(),'_seopress_analysis_target_kw',true)) {
+				$seopress_analysis_target_kw = array_filter(explode(',', strtolower(get_post_meta(get_the_ID(),'_seopress_analysis_target_kw',true))));
+
+				//Keywords density
+				foreach ($seopress_analysis_target_kw as $kw) {
+					if (preg_match_all('#\b('.$kw.')\b#iu', strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $m)) {
+						$data['kws_density']['matches'][$kw][] = $m[0];
+					}
+				}
+			}
+
+			//Words Counter
+			$data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
+
+			$words_counter_unique = count(array_unique($matches[0]));
+			$data['words_counter_unique'] = $words_counter_unique;
+
+			//Update analysis
+			update_post_meta(get_the_ID(), '_seopress_analysis_data', $data);
+		}
+	}
 }

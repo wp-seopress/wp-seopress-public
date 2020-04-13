@@ -225,7 +225,7 @@
                     admin_url( 'edit.php?post_type=seopress_schemas' ) => __('See schemas','wp-seopress')
                 ],
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_schemas' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets' ) => __('Manage','wp-seopress')
                 ],
                 'help' => [
                     'en'        => 'https://www.seopress.org/support/guides/#structured-data-types?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
