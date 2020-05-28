@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.5
+Version: 3.8.6
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -54,7 +54,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.5' );
+define( 'SEOPRESS_VERSION', '3.8.6' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -229,7 +229,7 @@ function seopress_add_admin_options_scripts( $hook ) {
 
 		$seopress_ajax_permalinks = [
 			'seopress_nonce'            => wp_create_nonce('seopress_flush_permalinks_nonce'),
-			'seopress_flush_permalinks' => admin_url('options-permalink.php'),
+			'seopress_ajax_permalinks' 	=> admin_url( 'admin-ajax.php'),
 		];
 		wp_localize_script( 'seopress-xml-ajax', 'seopressAjaxResetPermalinks', $seopress_ajax_permalinks );
 
@@ -335,6 +335,15 @@ function seopress_compatibility_woocommerce() {
 	}
 }
 add_action( 'wp_head', 'seopress_compatibility_woocommerce', 0 );
+
+/**
+ * Remove WPML home url filter
+ *
+ * @since 3.8.6
+ */
+function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
+	return $url;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Credits footer
@@ -649,6 +658,17 @@ function seopress_xml_sitemap_author_enable_option() {
 	}
 }
 
+function seopress_xml_sitemap_img_enable_option() {
+	$seopress_xml_sitemap_img_enable_option = get_option("seopress_xml_sitemap_option_name");
+	if ( ! empty ( $seopress_xml_sitemap_img_enable_option ) ) {
+		foreach ($seopress_xml_sitemap_img_enable_option as $key => $seopress_xml_sitemap_img_enable_value)
+			$options[$key] = $seopress_xml_sitemap_img_enable_value;
+		 if (isset($seopress_xml_sitemap_img_enable_option['seopress_xml_sitemap_img_enable'])) { 
+		 	return $seopress_xml_sitemap_img_enable_option['seopress_xml_sitemap_img_enable'];
+		 }
+	}
+}
+
 //Rewrite Rules for XML Sitemap
 if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_option('xml-sitemap') =='1') {
 	add_action( 'init', 'seopress_xml_sitemap_rewrite' );
@@ -782,21 +802,34 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_op
 		return $template;
 	}
 }
-
+function seopress_disable_qm( $allcaps, $caps, $args ) {
+	$allcaps['view_query_monitor'] = false; 
+	return $allcaps;
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Remove Admin Bar with Content Analysis
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_remove_admin_bar() {
+function seopress_clean_content_analysis() {
     if ( current_user_can( 'edit_posts' ) ) {
 		if ( isset($_GET['no_admin_bar'] ) && '1' === $_GET['no_admin_bar'] ) {
+
+			//Remove admin bar
 			add_filter( 'show_admin_bar', '__return_false' );
-			if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) { //disable for Oxygen
+
+			//Disable Query Monitor
+			add_filter( 'user_has_cap', 'seopress_disable_qm', 10, 3);
+			
+			//Disable wptexturize
+			add_filter('run_wptexturize', '__return_false');
+			
+			//Oxygen compatibility
+			if (function_exists('ct_template_output')) { //disable for Oxygen
 				add_action( 'template_redirect', 'seopress_get_oxygen_content' );
 			}
 		}
 	}
 }
-add_action('plugins_loaded', 'seopress_remove_admin_bar');
+add_action('plugins_loaded', 'seopress_clean_content_analysis');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Test abolute URLs (return true if absolute)
@@ -841,6 +874,24 @@ function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
 		<span class="sp-tooltip-headings">'.$tooltip_title.'</span>
 		<span class="sp-tooltip-desc">'.$tooltip_desc.'</span>
 		<span class="sp-tooltip-code">'.$tooltip_code.'</span>
+	</span></span>';
+
+	return $html;
+}
+
+/**
+ * Generate Tooltip (alternative version)
+ * @since 3.8.6
+ * @param string $tooltip_title, $tooltip_desc, $tooltip_code
+ * @return string tooltip title, tooltip description, tooltip url
+ * @author Benjamin
+ */
+function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc) {
+	$html = 
+	'<span class="sp-tooltip alt">'.$tooltip_anchor.'
+	<span class="sp-tooltiptext">
+		<span class="sp-tooltip-desc">'.$tooltip_desc.'</span>
+	</span>
 	</span>';
 
 	return $html;
@@ -1074,11 +1125,16 @@ function seopress_get_oxygen_content() {
 		
 		$seopress_get_the_content = ct_template_output();
 
+		if ($seopress_get_the_content =='') {
+			//Get post content
+			$seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', get_the_ID()));
+		}
+
 		if ($seopress_get_the_content !='') {
 
 			//Get Target Keywords
 			if (get_post_meta(get_the_ID(),'_seopress_analysis_target_kw',true)) {
-				$seopress_analysis_target_kw = array_filter(explode(',', strtolower(get_post_meta(get_the_ID(),'_seopress_analysis_target_kw',true))));
+				$seopress_analysis_target_kw = array_filter(explode(',', strtolower(esc_attr(get_post_meta(get_the_ID(),'_seopress_analysis_target_kw',true)))));
 
 				//Keywords density
 				foreach ($seopress_analysis_target_kw as $kw) {
@@ -1091,11 +1147,81 @@ function seopress_get_oxygen_content() {
 			//Words Counter
 			$data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
 
-			$words_counter_unique = count(array_unique($matches[0]));
+			if (!empty($matches[0])) {
+				$words_counter_unique = count(array_unique($matches[0]));
+			} else {
+				$words_counter_unique = '0';
+			}
 			$data['words_counter_unique'] = $words_counter_unique;
 
 			//Update analysis
 			update_post_meta(get_the_ID(), '_seopress_analysis_data', $data);
 		}
 	}
+}
+
+/**
+ * Output follow us links to wizard
+ *
+ * @since 3.8.6
+ * @author Benjamin Denis
+ *
+ **/
+function seopress_wizard_follow_us() {
+	?>
+	<li class="seopress-wizard-additional-steps">
+		<div class="seopress-wizard-next-step-description">
+			<p class="next-step-heading"><?php esc_html_e( 'Follow us:', 'wp-seopress' ); ?></p>
+		</div>
+		<div class="seopress-wizard-next-step-action step">
+			<ul class="recommended-step">
+				<li class="recommended-item">
+					<a href="https://www.facebook.com/seopresspro/" target="_blank">
+						<span class="dashicons dashicons-facebook"></span>
+						<?php _e('Like our Facebook page','wp-seopress'); ?>
+					</a>
+				</li>
+				<li class="recommended-item">
+					<a href="https://www.facebook.com/groups/seopress/" target="_blank">
+						<span class="dashicons dashicons-facebook"></span>
+						<?php _e('Join our Facebook Community group','wp-seopress'); ?>
+					</a>
+				</li>
+				<li class="recommended-item">
+					<a href="https://www.youtube.com/seopress" target="_blank">
+						<span class="dashicons dashicons-video-alt3"></span>
+						<?php _e('Watch our guided tour videos to learn more about SEOPress','wp-seopress'); ?>
+					</a>
+				</li>
+				<li class="recommended-item">
+					<?php
+						if (function_exists('seopress_get_locale')) {
+							if (seopress_get_locale() =='fr') {
+								$link = 'https://www.seopress.org/fr/blog/category/tutoriels/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
+							} else {
+								$link = 'https://www.seopress.org/blog/how-to/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
+							}
+						} 
+					?>
+					<a href="<?php echo $link; ?>" target="_blank">
+						<span class="dashicons dashicons-format-aside"></span>
+						<?php _e('Read our blog posts about SEO concepts, tutorials and more','wp-seopress'); ?>
+					</a>
+				</li>
+				<li class="recommended-item">
+					<a href="https://twitter.com/wp_seopress" target="_blank">
+						<span class="dashicons dashicons-twitter"></span>
+						<?php _e('Follow us on Twitter','wp-seopress'); ?>
+					</a>
+				</li>
+				<li class="recommended-item">
+					<a href="https://www.instagram.com/wp_seopress/" target="_blank">
+						<span class="dashicons dashicons-instagram"></span>
+						<?php _e('The off side of SEOPress','wp-seopress'); ?>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</li>
+	<?php
 }

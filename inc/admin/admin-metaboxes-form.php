@@ -530,18 +530,18 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                                 <div id="wrap-videos" data-count="'.$total.'">';
                                     foreach ($seopress_video[0] as $key => $value) {
 
-                                        $check_url = isset($seopress_video[0][$key]["url"]) ? $seopress_video[0][$key]["url"] : NULL;
-                                        $check_internal_video = isset($seopress_video[0][$key]["internal_video"]) ? $seopress_video[0][$key]["internal_video"] : NULL;
-                                        $check_title = isset($seopress_video[0][$key]["title"]) ? $seopress_video[0][$key]["title"] : NULL;
-                                        $check_desc = isset($seopress_video[0][$key]["desc"]) ? $seopress_video[0][$key]["desc"] : NULL;
-                                        $check_thumbnail = isset($seopress_video[0][$key]["thumbnail"]) ? $seopress_video[0][$key]["thumbnail"] : NULL;
-                                        $check_duration = isset($seopress_video[0][$key]["duration"]) ? $seopress_video[0][$key]["duration"] : NULL;
-                                        $check_rating = isset($seopress_video[0][$key]["rating"]) ? $seopress_video[0][$key]["rating"] : NULL;
-                                        $check_view_count = isset($seopress_video[0][$key]["view_count"]) ? $seopress_video[0][$key]["view_count"] : NULL;
-                                        $check_view_count = isset($seopress_video[0][$key]["view_count"]) ? $seopress_video[0][$key]["view_count"] : NULL;
-                                        $check_tag = isset($seopress_video[0][$key]["tag"]) ? $seopress_video[0][$key]["tag"] : NULL;
-                                        $check_cat = isset($seopress_video[0][$key]["cat"]) ? $seopress_video[0][$key]["cat"] : NULL;
-                                        $check_family_friendly = isset($seopress_video[0][$key]["family_friendly"]) ? $seopress_video[0][$key]["family_friendly"] : NULL;
+                                        $check_url = isset($seopress_video[0][$key]["url"]) ? esc_attr($seopress_video[0][$key]["url"]) : NULL;
+                                        $check_internal_video = isset($seopress_video[0][$key]["internal_video"]) ? esc_attr($seopress_video[0][$key]["internal_video"]) : NULL;
+                                        $check_title = isset($seopress_video[0][$key]["title"]) ? esc_attr($seopress_video[0][$key]["title"]) : NULL;
+                                        $check_desc = isset($seopress_video[0][$key]["desc"]) ? esc_attr($seopress_video[0][$key]["desc"]) : NULL;
+                                        $check_thumbnail = isset($seopress_video[0][$key]["thumbnail"]) ? esc_attr($seopress_video[0][$key]["thumbnail"]) : NULL;
+                                        $check_duration = isset($seopress_video[0][$key]["duration"]) ? esc_attr($seopress_video[0][$key]["duration"]) : NULL;
+                                        $check_rating = isset($seopress_video[0][$key]["rating"]) ? esc_attr($seopress_video[0][$key]["rating"]) : NULL;
+                                        $check_view_count = isset($seopress_video[0][$key]["view_count"]) ? esc_attr($seopress_video[0][$key]["view_count"]) : NULL;
+                                        $check_view_count = isset($seopress_video[0][$key]["view_count"]) ? esc_attr($seopress_video[0][$key]["view_count"]) : NULL;
+                                        $check_tag = isset($seopress_video[0][$key]["tag"]) ? esc_attr($seopress_video[0][$key]["tag"]) : NULL;
+                                        $check_cat = isset($seopress_video[0][$key]["cat"]) ? esc_attr($seopress_video[0][$key]["cat"]) : NULL;
+                                        $check_family_friendly = isset($seopress_video[0][$key]["family_friendly"]) ? esc_attr($seopress_video[0][$key]["family_friendly"]) : NULL;
 
                                     echo '<div class="video">
                                             <h3 class="accordion-section-title" tabindex="0">'.__('Video ','wp-seopress').$check_title.'</h3>

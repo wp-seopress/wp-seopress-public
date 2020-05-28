@@ -12,6 +12,7 @@ $seopress_paged ='1';
 $seopress_context_paged = '';
 $the_author_meta ='';
 $sep = '';
+$seopress_get_post_title = '';
 $seopress_excerpt ='';
 $seopress_content ='';
 $post_thumbnail_url ='';
@@ -100,6 +101,12 @@ if (get_search_query() !='') {
 }
 $get_search_query = apply_filters('seopress_get_search_query', $get_search_query);
 
+//Post Title
+if (is_singular() && isset($post)) {
+    $seopress_get_post_title = esc_attr( strip_tags( get_post_field( 'post_title', $post->ID ) ) );
+}
+
+//Post Excerpt
 if ($seopress_excerpt !='') {
     $seopress_get_the_excerpt = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes($seopress_excerpt), true)))), $seopress_excerpt_length);
 } elseif ($post !='') {
@@ -112,6 +119,7 @@ if ($seopress_excerpt !='') {
     $seopress_get_the_excerpt = null;
 }
 
+//Post Content
 if ($post !='') {
     if (get_post_field('post_content', $post->ID) !='') {
         $seopress_content = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_post_field('post_content', $post->ID), true))))), $seopress_excerpt_length);
@@ -122,12 +130,13 @@ if ($post !='') {
     $seopress_content = null;
 }
 
+//WooCommerce
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'woocommerce/woocommerce.php' )) {
     if (is_singular(array('product'))) {
         //Woo Cat product
         $woo_single_cats = get_the_terms( $post->ID, 'product_cat' );
-                            
+        
         if ( $woo_single_cats && ! is_wp_error( $woo_single_cats ) ) {
             
             $woo_single_cat = array();
@@ -227,8 +236,8 @@ $seopress_titles_template_replace_array = array(
     get_bloginfo('name'), 
     get_bloginfo('description'),
     get_bloginfo('description'),
-    the_title_attribute('echo=0'),
-    the_title_attribute('echo=0'),
+    $seopress_get_post_title,
+    $seopress_get_post_title,
     $seopress_get_the_excerpt,
     $seopress_get_the_excerpt,
     $seopress_content,

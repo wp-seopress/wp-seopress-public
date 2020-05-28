@@ -9,9 +9,6 @@ if (function_exists('seopress_sitemaps_headers')) {
 }
 
 //WPML
-function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
-	return $url;
-}
 add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
 
 function seopress_xml_sitemap_author() {

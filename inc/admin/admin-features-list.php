@@ -60,8 +60,8 @@
             ],
             'google-analytics' => [
                 'icon'  => 'dashicons-chart-area',
-                'title' => __('Google Analytics','wp-seopress'),
-                'desc'  => __('Track everything about your visitors with Google Analytics', 'wp-seopress'),
+                'title' => __('Analytics','wp-seopress'),
+                'desc'  => __('Track everything about your visitors with Google Analytics / Matomo', 'wp-seopress'),
                 'btn_secondary' => [
                     admin_url( 'admin.php?page=seopress-google-analytics' ) => __('Manage','wp-seopress')
                 ],
@@ -84,6 +84,25 @@
                 'filter' => 'seopress_remove_feature_advanced'
             ]
         ];
+        if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
+            $features['insights'] = [
+                'icon'  => 'dashicons-chart-bar',
+                'title' => __('Insights','wp-seopress'),
+                'desc'  => __('Track your keyword positions and backlinks directly in your WordPress.', 'wp-seopress'),
+                'btn_secondary' => [
+                    admin_url( 'admin.php?page=seopress-insights#tab=tab_seopress_insights_settings' ) => __('Manage','wp-seopress')
+                ],
+                'help' => [
+                    'en'        => 'https://www.seopress.org/insights/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
+                    'fr'        => 'https://www.seopress.org/fr/insights/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
+                    'title'     => __('Read our guide','wp-seopress'),
+                    'aria'      => __('Guide to optimize your WooCommerce SEO - new window','wp-seopress'),
+                    'external'  => true
+                ],
+                'toggle' => false,
+                'filter' => 'seopress_remove_feature_insights'
+            ];
+        }
         if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
             $features['woocommerce'] = [
                     'icon'  => 'dashicons-cart',

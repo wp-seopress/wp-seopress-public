@@ -188,7 +188,7 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$close_btn = __('X','wp-seopress');
 			}
 
-			$user_msg = '<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" tabindex="11">'.$consent_btn.'</button><button id="seopress-user-consent-close" tabindex="12">'.$close_btn.'</button></p></div>';
+			$user_msg = '<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" type="button" tabindex="11">'.$consent_btn.'</button><button type="button" id="seopress-user-consent-close" tabindex="12">'.$close_btn.'</button></p></div>';
 
 		    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn);
 
@@ -747,13 +747,14 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 	var links = document.querySelectorAll('a');
 	for (let i = 0; i < links.length; i++) {
 		links[i].addEventListener('click', function(e) {
-			var n = this.href.includes('".get_home_url()."');
+			var n = this.href.includes('".wp_parse_url( get_home_url(), PHP_URL_HOST )."');
 			if (n == false) {
 				gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
 			}
 		});
 		}
-	});";
+	});
+";
 				$seopress_google_analytics_click_event['link_tracking'] = apply_filters('seopress_gtag_link_tracking_ev', $seopress_google_analytics_click_event['link_tracking']);
 				$seopress_google_analytics_html .= $seopress_google_analytics_click_event['link_tracking'];
 			}
@@ -763,13 +764,17 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 		if (seopress_google_analytics_download_tracking_enable_option() !='') {
 			if (seopress_google_analytics_download_tracking_option() !='') {
 				$seopress_google_analytics_click_event['download_tracking'] = 
-"jQuery(document).ready(function() {
-	jQuery('a').filter(function() {
-		return this.href.match(/.*\.(".seopress_google_analytics_download_tracking_option().")(\?.*)?$/);
-	}).click(function(e) {
-		gtag('event', 'click', {'event_category': 'downloads','event_label' : this.href});
+"window.addEventListener('load', function () {
+	var donwload_links = document.querySelectorAll('a');
+	for (let j = 0; j < donwload_links.length; j++) {
+		donwload_links[j].addEventListener('click', function(e) {
+			var down = this.href.match(/.*\.(".seopress_google_analytics_download_tracking_option().")(\?.*)?$/);
+			if (down != null) {
+				gtag('event', 'click', {'event_category': 'downloads','event_label' : this.href});
+			}
+		});
+		}
 	});
-});
 ";
 				$seopress_google_analytics_click_event['download_tracking'] = apply_filters('seopress_gtag_download_tracking_ev', $seopress_google_analytics_click_event['download_tracking']);
 				$seopress_google_analytics_html .= $seopress_google_analytics_click_event['download_tracking'];
@@ -780,14 +785,17 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 		if (seopress_google_analytics_affiliate_tracking_enable_option() !='') {
 			if (seopress_google_analytics_affiliate_tracking_option() !='') {
 				$seopress_google_analytics_click_event['outbound_tracking'] = 
-"jQuery(document).ready(function() {
-	jQuery('a').filter(function() {
-    	return this.href.match(/(?:\/".seopress_google_analytics_affiliate_tracking_option()."\/)/gi);
-    }).click(function(e) {
-		gtag('event', 'click', {'event_category': 'outbound/affiliate','event_label' : this.href});
-    });
-});
-";
+"window.addEventListener('load', function () {
+	var outbound_links = document.querySelectorAll('a');
+	for (let k = 0; k < outbound_links.length; k++) {
+		outbound_links[k].addEventListener('click', function(e) {
+			var out = this.href.match(/(?:\/".seopress_google_analytics_affiliate_tracking_option()."\/)/gi);
+			if (out != null) {
+				gtag('event', 'click', {'event_category': 'outbound/affiliate','event_label' : this.href});
+			}
+		});
+		}
+	});";
 				$seopress_google_analytics_click_event['outbound_tracking'] = apply_filters('seopress_gtag_outbound_tracking_ev', $seopress_google_analytics_click_event['outbound_tracking']);
 				$seopress_google_analytics_html .= $seopress_google_analytics_click_event['outbound_tracking'];
 			}

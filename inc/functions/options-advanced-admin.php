@@ -406,8 +406,8 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
                     break;
 
                 case 'seopress_score' :
-                    if (get_post_meta($post_id, "_seopress_analysis_data", true)) {
-                        $ca = get_post_meta($post_id, "_seopress_analysis_data", true);
+                    if (get_post_meta($post_id, "_seopress_analysis_data")) {
+                        $ca = get_post_meta($post_id, "_seopress_analysis_data");
                         echo '<div class="analysis-score">';
                             if (isset($ca[0]["score"]) && $ca[0]["score"] == 1) {
                                 echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">

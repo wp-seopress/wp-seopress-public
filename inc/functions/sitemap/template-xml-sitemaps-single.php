@@ -12,9 +12,6 @@ if (function_exists('seopress_sitemaps_headers')) {
 remove_filter( 'post_link_category', 'seopress_titles_primary_cat_hook', 10, 3 ); 
 
 //WPML
-function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
-	return $url;
-}
 add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
 
 add_filter( 'seopress_sitemaps_single_query', function( $args ) {
@@ -35,17 +32,6 @@ add_action( 'the_post', function( $post ) {
 	);
 	do_action( 'wpml_switch_language', $language );
 });
-
-function seopress_xml_sitemap_img_enable_option() {
-	$seopress_xml_sitemap_img_enable_option = get_option("seopress_xml_sitemap_option_name");
-	if ( ! empty ( $seopress_xml_sitemap_img_enable_option ) ) {
-		foreach ($seopress_xml_sitemap_img_enable_option as $key => $seopress_xml_sitemap_img_enable_value)
-			$options[$key] = $seopress_xml_sitemap_img_enable_value;
-		 if (isset($seopress_xml_sitemap_img_enable_option['seopress_xml_sitemap_img_enable'])) { 
-		 	return $seopress_xml_sitemap_img_enable_option['seopress_xml_sitemap_img_enable'];
-		 }
-	}
-}
 
 function seopress_xml_sitemap_single() {
 	if( get_query_var( 'seopress_cpt') !== '' ) {

@@ -51,7 +51,7 @@ function seopress_admin_header() { ?>
                                 <li>
                                     <a href="<?php echo admin_url( 'admin.php?page=seopress-google-analytics' ); ?>">
                                         <span class="dashicons dashicons-chart-area"></span>
-                                        <?php _e( 'Google Analytics', 'wp-seopress' ); ?>
+                                        <?php _e( 'Analytics', 'wp-seopress' ); ?>
                                     </a>
                                 </li>
                                 <li>
@@ -61,6 +61,15 @@ function seopress_admin_header() { ?>
                                     </a>
                                 </li>
                                 <?php include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+                                if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) { ?>
+                                    <li>
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-insights#tab=tab_seopress_insights_settings' ); ?>">
+                                            <span class="dashicons dashicons-chart-bar"></span>
+                                            <?php _e( 'Insights', 'wp-seopress' ); ?>
+                                        </a>
+                                    </li>
+                                <?php
+                                }
                                 if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) { ?>
                                     <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_woocommerce' ); ?>">

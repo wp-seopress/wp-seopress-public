@@ -704,7 +704,7 @@ class seopress_options
                                     <p><input type="hidden" name="seopress_action" value="export_csv_metadata" /></p>
                                     <p>
                                         <?php wp_nonce_field( 'seopress_export_csv_metadata_nonce', 'seopress_export_csv_metadata_nonce' ); ?>
-                                        <button id="seopress-metadata-export" class="button"><?php _e('Export','wp-seopress'); ?></button>
+                                        <button id="seopress-metadata-export" type="button" class="button"><?php _e('Export','wp-seopress'); ?></button>
                                         <span class="spinner"></span>
                                         <div class="log"></div>
                                     </p>
@@ -778,7 +778,7 @@ class seopress_options
                                 <li><?php _e('Focus keywords','wp-seopress'); ?></li>
                             </ul>
                             <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast data.', 'wp-seopress' ); ?></p>
-                            <button id="seopress-yoast-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <button id="seopress-yoast-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
                         </div><!-- .inside -->
@@ -797,7 +797,7 @@ class seopress_options
                                 <li><?php _e('Meta Robots (noindex, nofollow)','wp-seopress'); ?></li>
                             </ul>
                             <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update/delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data.', 'wp-seopress' ); ?></p>
-                            <button id="seopress-aio-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <button id="seopress-aio-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
                         </div><!-- .inside -->
@@ -818,7 +818,7 @@ class seopress_options
                                 <li><?php _e('Redirect URL','wp-seopress'); ?></li>
                             </ul>
                             <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Framework data.', 'wp-seopress' ); ?></p>
-                            <button id="seopress-seo-framework-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <button id="seopress-seo-framework-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
                         </div><!-- .inside -->
@@ -839,7 +839,7 @@ class seopress_options
                                 <li><?php _e('Focus keywords','wp-seopress'); ?></li>
                             </ul>
                             <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Rank Math data.', 'wp-seopress' ); ?></p>
-                            <button id="seopress-rk-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <button id="seopress-rk-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
                         </div><!-- .inside -->
@@ -859,7 +859,7 @@ class seopress_options
                                 <li><?php _e('Canonical URL','wp-seopress'); ?></li>
                             </ul>
                             <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update/delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any Squirrly SEO data.', 'wp-seopress' ); ?></p>
-                            <button id="seopress-squirrly-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <button id="seopress-squirrly-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
                         </div><!-- .inside -->
@@ -878,7 +878,7 @@ class seopress_options
                                 <li><?php _e('Meta Robots (noindex or nofollow)','wp-seopress'); ?></li>
                             </ul>
                             <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Ultimate data.', 'wp-seopress' ); ?></p>
-                            <button id="seopress-seo-ultimate-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <button id="seopress-seo-ultimate-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
                         </div><!-- .inside -->
@@ -896,7 +896,7 @@ class seopress_options
                                 <li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
                             </ul>
                             <p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any WP Meta SEO data.', 'wp-seopress' ); ?></p>
-                            <button id="seopress-wp-meta-seo-migrate" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+                            <button id="seopress-wp-meta-seo-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
                             <span class="spinner"></span>
                             <div class="log"></div>
                         </div><!-- .inside -->
@@ -2804,7 +2804,7 @@ class seopress_options
         echo '&nbsp;';
         echo '<a href="https://www.google.com/ping?sitemap='.get_option( 'home' ).'/sitemaps.xml/" target="_blank" class="button"><span class="dashicons dashicons-share-alt2"></span>'.__('Ping Google manually','wp-seopress').'</a>';        
         echo '&nbsp;';
-        echo '<button id="seopress-flush-permalinks" class="button"><span class="dashicons dashicons-admin-links"></span>'.__('Flush permalinks','wp-seopress').'</button>';
+        echo '<button type="button" id="seopress-flush-permalinks" class="button"><span class="dashicons dashicons-admin-links"></span>'.__('Flush permalinks','wp-seopress').'</button>';
         echo '<span class="spinner"></span>';
     } 
 
@@ -4148,9 +4148,9 @@ class seopress_options
     {
         $options = get_option( 'seopress_social_option_name' );
         
-        $options_set = isset($options['seopress_social_knowledge_img']) ? $options['seopress_social_knowledge_img'] : NULL;
+        $options_set = isset($options['seopress_social_knowledge_img']) ? esc_attr($options['seopress_social_knowledge_img']) : NULL;
         
-        $check = isset($options['seopress_social_knowledge_img']);      
+        $check = isset($options['seopress_social_knowledge_img']);
 
         echo '<input id="seopress_social_knowledge_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_knowledge_img]" aria-label="'.__('Your photo/organization logo','wp-seopress').'" placeholder="'.esc_html__('Select your logo','wp-seopress').'"  />
         
@@ -4174,7 +4174,7 @@ class seopress_options
         }
         echo '<br>';
         echo '<br>';
-        echo '<img style="width:200px;max-height:300px;" src="'.seopress_social_knowledge_img_option().'"/>';
+        echo '<img style="width:200px;max-height:300px;" src="'.esc_attr(seopress_social_knowledge_img_option()).'"/>';
     }
 
     public function seopress_social_knowledge_phone_callback()
@@ -4385,7 +4385,7 @@ class seopress_options
     {
         $options = get_option( 'seopress_social_option_name' );
         
-        $options_set = isset($options['seopress_social_facebook_img']) ? $options['seopress_social_facebook_img'] : NULL;
+        $options_set = isset($options['seopress_social_facebook_img']) ? esc_attr($options['seopress_social_facebook_img']) : NULL;
         
         $check = isset($options['seopress_social_facebook_img']);
 
@@ -4497,7 +4497,7 @@ class seopress_options
     {      
         $options = get_option( 'seopress_social_option_name' );
         
-        $options_set = isset($options['seopress_social_twitter_card_img']) ? $options['seopress_social_twitter_card_img'] : NULL;
+        $options_set = isset($options['seopress_social_twitter_card_img']) ? esc_attr($options['seopress_social_twitter_card_img']) : NULL;
         
         $check = isset($options['seopress_social_twitter_card_img']);      
 

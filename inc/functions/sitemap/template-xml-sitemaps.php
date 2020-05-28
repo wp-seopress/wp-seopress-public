@@ -9,9 +9,6 @@ if (function_exists('seopress_sitemaps_headers')) {
 }
 
 //WPML
-function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
-    return $url;
-}
 add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
 
 add_filter( 'seopress_sitemaps_index_cpt_query', function( $args ) {
@@ -215,6 +212,28 @@ function seopress_xml_sitemap_index() {
 		$seopress_sitemaps .= '</loc>';
 		$seopress_sitemaps .= "\n";
 		$seopress_sitemaps .= '</sitemap>';
+	}
+
+	// Custom sitemap
+	$custom_sitemap = null;
+	$custom_sitemap = apply_filters('seopress_sitemaps_external_link', $custom_sitemap);
+	if(isset($custom_sitemap)) {
+		foreach($custom_sitemap as $key => $sitemap) {
+			$seopress_sitemaps .= "\n";
+			$seopress_sitemaps .= '<sitemap>';
+			$seopress_sitemaps .= "\n";
+			$seopress_sitemaps .= '<loc>';
+			$seopress_sitemaps .= $sitemap['sitemap_url'];
+			$seopress_sitemaps .= '</loc>';
+			if(isset($sitemap['sitemap_last_mod'])) {
+				$seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= '<lastmod>';
+				$seopress_sitemaps .= $sitemap['sitemap_last_mod'];
+				$seopress_sitemaps .= '</lastmod>';
+			}
+			$seopress_sitemaps .= "\n";
+			$seopress_sitemaps .= '</sitemap>';
+		}
 	}
 
 	$seopress_sitemaps .= "\n";

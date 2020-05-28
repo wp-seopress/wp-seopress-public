@@ -10,12 +10,9 @@ echo '<div class="wrap-seopress-analysis">
         <div class="col-left">
             <p>
                 <label for="seopress_analysis_target_kw_meta">'. __( 'Target keywords', 'wp-seopress' ) .'
-                <span class="sp-tooltip">
-                    <span class="dashicons dashicons-editor-help"></span>
-                    <span class="sp-tooltiptext">'.__('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them (eg: "my super keyword,another keyword,keyword")','wp-seopress').'</span>
-                </span>
+                    '. seopress_tooltip(__('Target keywords','wp-seopress'), __('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them','wp-seopress'), esc_html('my super keyword,another keyword,keyword')).'
                 </label>
-                <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" aria-label="'.__('Target keywords','wp-seopress').'" value="'.$seopress_analysis_target_kw.'" />
+                <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" aria-label="'.__('Target keywords','wp-seopress').'" value="'.esc_attr($seopress_analysis_target_kw).'" />
             </p>';
             if (empty($seopress_analysis_data)) {
                 echo '<div id="seopress_launch_analysis" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Analyze my content','wp-seopress').'</div>';
@@ -29,14 +26,11 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
     echo '<div class="col-right">
             <p>
                 <label for="seopress_google_suggest_kw_meta">'. __( 'Google suggestions', 'wp-seopress' ) .'
-                    <span class="sp-tooltip">
-                        <span class="dashicons dashicons-editor-help"></span>
-                        <span class="sp-tooltiptext">'.__('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.','wp-seopress').'</span>
-                    </span>
+                    '. seopress_tooltip(__('Google suggestions','wp-seopress'), __('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.','wp-seopress'), esc_html('my super keyword,another keyword,keyword')).'
                 </label>
                 <input id="seopress_google_suggest_kw_meta" type="text" name="seopress_google_suggest_kw" placeholder="Get suggestions from Google" aria-label="Google suggestions" value="">
             </p>
-            <button id="seopress_get_suggestions" class="button">'.__('Get suggestions!','wp-seopress').'</button>
+            <button id="seopress_get_suggestions" type="button" class="button">'.__('Get suggestions!','wp-seopress').'</button>
             ';
             echo "<ul id='seopress_suggestions'></ul>";
 
@@ -158,11 +152,11 @@ $analyzes = array(
 );
 
 //Schemas
-if (!empty($seopress_analysis_data['0']['json']) && isset($seopress_analysis_data['0']['json'])) {
+if (!empty($seopress_analysis_data['json']) || isset($seopress_analysis_data['json'])) {
     $desc = '<p>'.__('We found these schemas in the source code of this page:','wp-seopress').'</p>';
 
     $desc .= '<ul>';
-        $json_ld = array_filter($seopress_analysis_data['0']['json']);
+        $json_ld = array_filter($seopress_analysis_data['json']);
         foreach(array_count_values($json_ld) as $key => $value) {
             $html = NULL;
             if ($value > 1) {
@@ -191,13 +185,13 @@ $analyzes['old_post']['desc'] = $desc;
 
 //Word counters
 $desc = NULL;
-if (isset($seopress_analysis_data['0']['words_counter']) || isset($seopress_analysis_data['0']['words_counter_unique'])) {
+if (isset($seopress_analysis_data['words_counter']) || isset($seopress_analysis_data['words_counter_unique'])) {
     $desc = '<p>'.__('Words counter is not a direct ranking factor. But, your content must be as qualitative as possible, with relevant and unique information. To fulfill these conditions, your article requires a minimum of paragraphs, so words.','wp-seopress').'</p>
     <ul>
-        <li>'.$seopress_analysis_data['0']['words_counter'].' '.__('words found.','wp-seopress').'</li>
-        <li>'.$seopress_analysis_data['0']['words_counter_unique'].' '.__('unique words found.','wp-seopress').'</li>';
+        <li>'.$seopress_analysis_data['words_counter'].' '.__('words found.','wp-seopress').'</li>
+        <li>'.$seopress_analysis_data['words_counter_unique'].' '.__('unique words found.','wp-seopress').'</li>';
 
-        if ($seopress_analysis_data['0']['words_counter'] >= 299) {
+        if ($seopress_analysis_data['words_counter'] >= 299) {
             $desc .= '<li><span class="dashicons dashicons-yes"></span>'.__('Your content is composed of more than 300 words, which is the minimum for a post.','wp-seopress').'</li>';
         } else {
             $desc .= '<li><span class="dashicons dashicons-no-alt"></span>'.__('Your content is too short. Add a few more paragraphs!','wp-seopress').'</li>';
@@ -212,8 +206,8 @@ if (isset($seopress_analysis_data['0']['words_counter']) || isset($seopress_anal
 }
 
 //Keywords density
-if (!empty($seopress_analysis_data['0']['kws_density']['matches']) && isset($seopress_analysis_data['0']['words_counter'])) {
-    $target_kws_density = $seopress_analysis_data['0']['kws_density']['matches'];
+if (!empty($seopress_analysis_data['kws_density']['matches']) && isset($seopress_analysis_data['words_counter'])) {
+    $target_kws_density = $seopress_analysis_data['kws_density']['matches'];
     
     $desc = '<ul>';
         foreach ($target_kws_density as $key => $value) {
@@ -221,7 +215,7 @@ if (!empty($seopress_analysis_data['0']['kws_density']['matches']) && isset($seo
                 $kw_count = count($_value);
             }
             $kw_name = $key;
-            $kw_density = round($kw_count/$seopress_analysis_data['0']['words_counter']*100, 2);
+            $kw_density = round($kw_count/$seopress_analysis_data['words_counter']*100, 2);
             $desc .= '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times in your content, a keyword density of %s%%','wp-seopress'), $kw_name, $kw_count, $kw_density).'</li>';
         }
     $desc .= '</ul>';
@@ -234,10 +228,10 @@ if (!empty($seopress_analysis_data['0']['kws_density']['matches']) && isset($seo
 }
 
 //Keywords in permalink
-if (!empty($seopress_analysis_data['0']['kws_permalink']['matches'])) {
+if (!empty($seopress_analysis_data['kws_permalink']['matches'])) {
     $desc = '<p><span class="dashicons dashicons-yes"></span>'.__('Cool, one of your target keyword is used in your permalink.','wp-seopress').'</p>';
 
-    $target_kws_permalink = $seopress_analysis_data['0']['kws_permalink']['matches'];
+    $target_kws_permalink = $seopress_analysis_data['kws_permalink']['matches'];
     
     $desc .= '<ul>';
     foreach ($target_kws_permalink as $key => $value) {
@@ -254,14 +248,14 @@ if (!empty($seopress_analysis_data['0']['kws_permalink']['matches'])) {
 //Headings
 //H1
 $desc = NULL;
-if (!empty($seopress_analysis_data['0']['h1']['matches'])) {
+if (!empty($seopress_analysis_data['h1']['matches'])) {
     $desc .= '<h4>'.__('H1 (Heading 1)','wp-seopress').'</h4>';
 
-    $count = $seopress_analysis_data['0']['h1']['nomatches']['count'];
+    $count = $seopress_analysis_data['h1']['nomatches']['count'];
 
-    $target_kws_h1 = $seopress_analysis_data['0']['h1']['matches'];
+    $target_kws_h1 = $seopress_analysis_data['h1']['matches'];
 
-    $all_h1 = $seopress_analysis_data['0']['h1']['values'];
+    $all_h1 = $seopress_analysis_data['h1']['values'];
 
     $desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Heading 1 (H1).','wp-seopress').'</p>';
     
@@ -293,10 +287,10 @@ if (!empty($seopress_analysis_data['0']['h1']['matches'])) {
 
 //H2
 $desc .= '<h4>'.__('H2 (Heading 2)','wp-seopress').'</h4>';
-if (!empty($seopress_analysis_data['0']['h2']['matches'])) {
+if (!empty($seopress_analysis_data['h2']['matches'])) {
     $desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Heading 2 (H2).','wp-seopress').'</p>';
     $desc .= '<ul>';
-        $target_kws_h2 = $seopress_analysis_data['0']['h2']['matches'];
+        $target_kws_h2 = $seopress_analysis_data['h2']['matches'];
         foreach ($target_kws_h2 as $key => $value) {
             foreach ($value as $_key => $_value) {
                 $kw_count = count($value);
@@ -314,10 +308,10 @@ if (!empty($seopress_analysis_data['0']['h2']['matches'])) {
 
 //H3
 $desc .= '<h4>'.__('H3 (Heading 3)','wp-seopress').'</h4>';
-if (!empty($seopress_analysis_data['0']['h3']['matches'])) {
+if (!empty($seopress_analysis_data['h3']['matches'])) {
     $desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in Heading 3 (H3).','wp-seopress').'</p>';
     $desc .= '<ul>';
-        $target_kws_h3 = $seopress_analysis_data['0']['h3']['matches'];
+        $target_kws_h3 = $seopress_analysis_data['h3']['matches'];
         foreach ($target_kws_h3 as $key => $value) {
             foreach ($value as $_key => $_value) {
                 $kw_count = count($value);
@@ -337,10 +331,10 @@ $analyzes['headings']['desc'] = $desc;
 //Meta Title
 if ($seopress_titles_title !='') {
     $desc = NULL;
-    if (!empty($seopress_analysis_data['0']['meta_title']['matches'])) {
+    if (!empty($seopress_analysis_data['meta_title']['matches'])) {
         $desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in the Meta Title.','wp-seopress').'</p>';
         $desc .= '<ul>';
-            $target_kws_title = $seopress_analysis_data['0']['meta_title']['matches'];
+            $target_kws_title = $seopress_analysis_data['meta_title']['matches'];
             foreach ($target_kws_title as $key => $value) {
                 foreach ($value as $_key => $_value) {
                     $kw_count = count($_value);
@@ -371,10 +365,10 @@ if ($seopress_titles_title !='') {
 //Meta description
 if ($seopress_titles_desc !='') {
     $desc = NULL;
-    if (!empty($seopress_analysis_data['0']['meta_description']['matches'])) {
+    if (!empty($seopress_analysis_data['meta_description']['matches'])) {
         $desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('Target keywords were found in the Meta description.','wp-seopress').'</p>';
         $desc .= '<ul>';
-            $target_kws_desc = $seopress_analysis_data['0']['meta_description']['matches'];
+            $target_kws_desc = $seopress_analysis_data['meta_description']['matches'];
             foreach ($target_kws_desc as $key => $value) {
                 foreach ($value as $_key => $_value) {
                     $kw_count = count($_value);
@@ -408,10 +402,10 @@ $desc = NULL;
 
 $desc .= '<h4>'.__('Open Graph Title','wp-seopress').'</h4>';
 
-if (!empty($seopress_analysis_data['0']['og_title']['count'])) {
-    $count = $seopress_analysis_data['0']['og_title']['count'];
+if (!empty($seopress_analysis_data['og_title']['count'])) {
+    $count = $seopress_analysis_data['og_title']['count'];
 
-    $all_og_title = $seopress_analysis_data['0']['og_title']['values'];
+    $all_og_title = $seopress_analysis_data['og_title']['values'];
 
     if ($count > 1) {
         $analyzes['social']['impact'] = 'high';
@@ -436,11 +430,11 @@ if (!empty($seopress_analysis_data['0']['og_title']['count'])) {
 //og:description
 $desc .= '<h4>'.__('Open Graph Description','wp-seopress').'</h4>';
 
-if (!empty($seopress_analysis_data['0']['og_desc']['count'])) {
+if (!empty($seopress_analysis_data['og_desc']['count'])) {
 
-    $count = $seopress_analysis_data['0']['og_desc']['count'];
+    $count = $seopress_analysis_data['og_desc']['count'];
 
-    $all_og_desc = $seopress_analysis_data['0']['og_desc']['values'];
+    $all_og_desc = $seopress_analysis_data['og_desc']['values'];
 
     if ($count > 1) {
         $analyzes['social']['impact'] = 'high';
@@ -465,11 +459,11 @@ if (!empty($seopress_analysis_data['0']['og_desc']['count'])) {
 //og:image
 $desc .= '<h4>'.__('Open Graph Image','wp-seopress').'</h4>';
 
-if (!empty($seopress_analysis_data['0']['og_img']['count'])) {
+if (!empty($seopress_analysis_data['og_img']['count'])) {
 
-    $count = $seopress_analysis_data['0']['og_img']['count'];
+    $count = $seopress_analysis_data['og_img']['count'];
 
-    $all_og_img = $seopress_analysis_data['0']['og_img']['values'];
+    $all_og_img = $seopress_analysis_data['og_img']['values'];
 
     if ($count > 0) {
         $desc .= '<p><span class="dashicons dashicons-yes"></span>'.sprintf(esc_html__('We found %d og:image in your content.','wp-seopress'), $count).'</p>';
@@ -490,11 +484,11 @@ if (!empty($seopress_analysis_data['0']['og_img']['count'])) {
 //og:url
 $desc .= '<h4>'.__('Open Graph URL','wp-seopress').'</h4>';
 
-if (!empty($seopress_analysis_data['0']['og_url']['count'])) {
+if (!empty($seopress_analysis_data['og_url']['count'])) {
 
-    $count = $seopress_analysis_data['0']['og_url']['count'];
+    $count = $seopress_analysis_data['og_url']['count'];
 
-    $all_og_url = $seopress_analysis_data['0']['og_url']['values'];
+    $all_og_url = $seopress_analysis_data['og_url']['values'];
 
     if ($count > 1) {
         $analyzes['social']['impact'] = 'high';
@@ -519,11 +513,11 @@ if (!empty($seopress_analysis_data['0']['og_url']['count'])) {
 //og:site_name
 $desc .= '<h4>'.__('Open Graph Site Name','wp-seopress').'</h4>';
 
-if (!empty($seopress_analysis_data['0']['og_site_name']['count'])) {
+if (!empty($seopress_analysis_data['og_site_name']['count'])) {
 
-    $count = $seopress_analysis_data['0']['og_site_name']['count'];
+    $count = $seopress_analysis_data['og_site_name']['count'];
 
-    $all_og_site_name = $seopress_analysis_data['0']['og_site_name']['values'];
+    $all_og_site_name = $seopress_analysis_data['og_site_name']['values'];
 
     if ($count > 1) {
         $analyzes['social']['impact'] = 'high';
@@ -548,11 +542,11 @@ if (!empty($seopress_analysis_data['0']['og_site_name']['count'])) {
 //twitter:title
 $desc .= '<h4>'.__('Twitter Title','wp-seopress').'</h4>';
 
-if (!empty($seopress_analysis_data['0']['tw_title']['count'])) {
+if (!empty($seopress_analysis_data['tw_title']['count'])) {
 
-    $count = $seopress_analysis_data['0']['tw_title']['count'];
+    $count = $seopress_analysis_data['tw_title']['count'];
 
-    $all_tw_title = $seopress_analysis_data['0']['tw_title']['values'];
+    $all_tw_title = $seopress_analysis_data['tw_title']['values'];
 
     if ($count > 1) {
         $analyzes['social']['impact'] = 'high';
@@ -577,11 +571,11 @@ if (!empty($seopress_analysis_data['0']['tw_title']['count'])) {
 //twitter:description
 $desc .= '<h4>'.__('Twitter Description','wp-seopress').'</h4>';
 
-if (!empty($seopress_analysis_data['0']['tw_desc']['count'])) {
+if (!empty($seopress_analysis_data['tw_desc']['count'])) {
 
-    $count = $seopress_analysis_data['0']['tw_desc']['count'];
+    $count = $seopress_analysis_data['tw_desc']['count'];
 
-    $all_tw_desc = $seopress_analysis_data['0']['tw_desc']['values'];
+    $all_tw_desc = $seopress_analysis_data['tw_desc']['values'];
 
     if ($count > 1) {
         $analyzes['social']['impact'] = 'high';
@@ -606,11 +600,11 @@ if (!empty($seopress_analysis_data['0']['tw_desc']['count'])) {
 //twitter:image
 $desc .= '<h4>'.__('Twitter Image','wp-seopress').'</h4>';
 
-if (!empty($seopress_analysis_data['0']['tw_img']['count'])) {
+if (!empty($seopress_analysis_data['tw_img']['count'])) {
 
-    $count = $seopress_analysis_data['0']['tw_img']['count'];
+    $count = $seopress_analysis_data['tw_img']['count'];
 
-    $all_tw_img = $seopress_analysis_data['0']['tw_img']['values'];
+    $all_tw_img = $seopress_analysis_data['tw_img']['values'];
 
     if ($count > 0) {
         $desc .= '<p><span class="dashicons dashicons-yes"></span>'.sprintf(esc_html__('We found %d twitter:image in your content.','wp-seopress'), $count).'</p>';
@@ -631,14 +625,14 @@ $analyzes['social']['desc'] = $desc;
 
 //Robots
 $desc = NULL;
-if (!empty($seopress_analysis_data['0']['meta_robots'])) {
+if (!empty($seopress_analysis_data['meta_robots'])) {
 
-    $meta_robots = $seopress_analysis_data['0']['meta_robots']['0'];
+    $meta_robots = $seopress_analysis_data['meta_robots'];
     
-    if (count($seopress_analysis_data['0']['meta_robots']) > 1) {
+    if (count($seopress_analysis_data['meta_robots']) > 1) {
         $analyzes['robots']['impact'] = 'high';
 
-        $count_meta_robots = count($seopress_analysis_data['0']['meta_robots']);
+        $count_meta_robots = count($seopress_analysis_data['meta_robots']);
 
         $desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %s meta robots in your page. There is probably something wrong with your theme!','wp-seopress'), $count_meta_robots).'</p>';
     }
@@ -679,8 +673,8 @@ if (!empty($seopress_analysis_data['0']['meta_robots'])) {
 }
 
 //Meta Google
-if (!empty($seopress_analysis_data['0']['meta_google'])) {
-    $meta_google = $seopress_analysis_data['0']['meta_google'];
+if (!empty($seopress_analysis_data['meta_google'])) {
+    $meta_google = $seopress_analysis_data['meta_google'];
 
     if (preg_match('/noimageindex/', json_encode($meta_google))) {
         $analyzes['robots']['impact'] = 'high';
@@ -706,17 +700,17 @@ if (!empty($seopress_analysis_data['0']['meta_google'])) {
 $analyzes['robots']['desc'] = $desc;
 
 //Img alt
-if (!empty($seopress_analysis_data['0']['img'])) {
-    $images = isset($seopress_analysis_data['0']['img']['images']) ? $seopress_analysis_data['0']['img']['images'] : NULL;
+if (!empty($seopress_analysis_data['img'])) {
+    $images = isset($seopress_analysis_data['img']['images']) ? $seopress_analysis_data['img']['images'] : NULL;
 
     $desc = '<div class="wrap-analysis-img">';
 
-    if (isset($images) && !empty($images)) {
+    if (!empty($images)) {
         $analyzes['img_alt']['impact'] = 'high';
         $desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('No alternative text found for these images. Alt tags are important for both SEO and accessibility. Edit your images using the media library or your favorite page builder and fill in alternative text fields.','wp-seopress').'</p>';
     
         //Standard images & galleries
-        if (isset($images) && !empty($images)) {
+        if (!empty($images)) {
             $desc .= '<ul class="attachments">';
                 foreach($images as $img) {
                     $desc .= '<li class="attachment"><img src="'.$img.'"/></li>';
@@ -735,12 +729,12 @@ if (!empty($seopress_analysis_data['0']['img'])) {
 }
 
 //Nofollow links
-if (!empty($seopress_analysis_data['0']['nofollow_links'])) {
-    $count = count($seopress_analysis_data['0']['nofollow_links']);
+if (!empty($seopress_analysis_data['nofollow_links'])) {
+    $count = count($seopress_analysis_data['nofollow_links']);
     
     $desc = '<p>'.sprintf( esc_html__( 'We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:', 'wp-seopress' ), $count ).'</p>';
     $desc .= '<ul>';
-        foreach ($seopress_analysis_data['0']['nofollow_links'] as $links) {
+        foreach ($seopress_analysis_data['nofollow_links'] as $links) {
             foreach ($links as $href => $link) {
                 $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="'.$href.'" target="_blank">'.$link.'</a><span class="dashicons dashicons-external"></span></li>';
             }
@@ -754,12 +748,12 @@ if (!empty($seopress_analysis_data['0']['nofollow_links'])) {
 
 //Outbound links
 $desc = '<p>'.__('Internet is built on the principle of hyperlink. It is therefore perfectly normal to make links between different websites. However, avoid making links to low quality sites, SPAM... If you are not sure about the quality of a site, add the attribute "nofollow" to your link.').'</p>';
-if (!empty($seopress_analysis_data['0']['outbound_links'])) {
-    $count = count($seopress_analysis_data['0']['outbound_links']);
+if (!empty($seopress_analysis_data['outbound_links'])) {
+    $count = count($seopress_analysis_data['outbound_links']);
 
     $desc .= '<p>'.sprintf( __('We found %s outbound links in your page. Below, the list:', 'wp-seopress'), $count ).'</p>';
     $desc .= '<ul>';
-        foreach ($seopress_analysis_data['0']['outbound_links'] as $links) {
+        foreach ($seopress_analysis_data['outbound_links'] as $links) {
             foreach ($links as $href => $link) {
                 $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="'.$href.'" target="_blank">'.$link.'</a><span class="dashicons dashicons-external"></span></li>';
             }
@@ -772,25 +766,32 @@ if (!empty($seopress_analysis_data['0']['outbound_links'])) {
 $analyzes['outbound_links']['desc'] = $desc;
 
         echo '<div id="seopress-analysis-tabs">
-                <div id="seopress-analysis-tabs-1">
-                    <div class="analysis-score">';
+                <div id="seopress-analysis-tabs-1">';
+                    echo '<div class="analysis-score">';
                         $impact = array_unique(array_values(wp_list_pluck($analyzes, 'impact')));
                         $svg = '<svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                     <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                                     <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 101.788px;"></circle>
                                 </svg>';
                         $tooltip = '<span class="sp-tooltip">
-                        <span class="dashicons dashicons-editor-help"></span>
-                        <span class="sp-tooltiptext">'.__('<strong>Should be improved:</strong> red or orange dots <br> <strong>Good:</strong> yellow or green dots','wp-seopress').'</span>
-                    </span>';
-                        if (in_array('medium', $impact) || in_array('high', $impact)) {
-                            echo '<p class="notgood">'.$svg.'<span>'.__('Should be improved','wp-seopress').$tooltip.'</span></p>';
-                            $seopress_analysis_data['0']['score'] = false;
+                                <span class="dashicons dashicons-editor-help"></span>
+                                <span class="sp-tooltiptext">'.__('<strong>Should be improved:</strong> red or orange dots <br> <strong>Good:</strong> yellow or green dots','wp-seopress').'</span>
+                            </span>';
+
+                        if (!empty($impact)) {
+                            if (in_array('medium', $impact) || in_array('high', $impact)) {
+                                echo '<p class="notgood">'.$svg.'<span>'.__('Should be improved','wp-seopress').$tooltip.'</span></p>';
+                                $score = false;
+                            } else {
+                                echo '<p class="good">'.$svg.'<span>'.__('Good','wp-seopress').$tooltip.'</span></p>';
+                                $score = true;
+                            }
                         } else {
-                            echo '<p class="good">'.$svg.'<span>'.__('Good','wp-seopress').$tooltip.'</span></p>';
-                            $seopress_analysis_data['0']['score'] = true;
+                            $score = false;
                         }
+                        
                         if (!empty($seopress_analysis_data)) {
+                            $seopress_analysis_data['score'] = $score;
                             update_post_meta(get_the_ID(), '_seopress_analysis_data', $seopress_analysis_data);
                         }
                         echo '<span><a href="#" id="expand-all">'.__('Expand','wp-seopress').'</a> / <a href="#" id="close-all">'.__('Close','wp-seopress').'</a></span>';
@@ -803,7 +804,7 @@ $analyzes['outbound_links']['desc'] = $desc;
                             $pos_a = array_search($a['impact'], $order);
                             $pos_b = array_search($b['impact'], $order);
                             return $pos_a - $pos_b;
-                         });
+                        });
 
                         foreach($analyzes as $key => $value) {
                             echo '<div class="gr-analysis">';

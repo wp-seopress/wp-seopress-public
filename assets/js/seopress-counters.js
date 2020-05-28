@@ -180,6 +180,16 @@ function pixelDesc(e) {
     return formattedWidth;
 }
 
+function sp_is_valid_url(str) {
+	var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+	  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+	  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+	  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+	  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+	  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+	return !!pattern.test(str);
+}
+
 function sp_social_img(social_slug) {
 	jQuery(".snippet-"+social_slug+"-img-alert").css("display", "none");
 	var meta_img_val = jQuery('#seopress_social_'+social_slug+'_img_meta').val();
@@ -188,48 +198,53 @@ function sp_social_img(social_slug) {
 		var meta_img_val = jQuery('#seopress_social_'+social_slug+'_img_meta').attr('placeholder');
 	}
 
-	meta_img_val.length > 0 ? (jQuery('.snippet-'+social_slug+'-img-custom img').attr("src", meta_img_val),
-	jQuery(".snippet-"+social_slug+"-img").css("display", "none"),
-	jQuery(".snippet-"+social_slug+"-img-custom").css("display", "block"),
-	jQuery(".snippet-"+social_slug+"-img-default").css("display", "none")) : 0 == meta_img_val.length && (jQuery(".snippet-"+social_slug+"-img-default").css("display", "block"),
-	jQuery(".snippet-"+social_slug+"-img-custom").css("display", "none"), jQuery(".snippet-"+social_slug+"-img").css("display", "none"));
+	// Check valid URL
+	if (sp_is_valid_url(meta_img_val) === true) {
+		meta_img_val.length > 0 ? (jQuery('.snippet-'+social_slug+'-img-custom img').attr("src", meta_img_val),
+		jQuery(".snippet-"+social_slug+"-img").css("display", "none"),
+		jQuery(".snippet-"+social_slug+"-img-custom").css("display", "block"),
+		jQuery(".snippet-"+social_slug+"-img-default").css("display", "none")) : 0 == meta_img_val.length && (jQuery(".snippet-"+social_slug+"-img-default").css("display", "block"),
+		jQuery(".snippet-"+social_slug+"-img-custom").css("display", "none"), jQuery(".snippet-"+social_slug+"-img").css("display", "none"));
 
-	if(meta_img_val.length > 0) {
-		// Check file URL
-		jQuery.get(meta_img_val).done(function() {
-			// Extract filetype
-			var meta_img_filetype = meta_img_val.split(/\#|\?/)[0].split('.').pop().trim();
-			var types = ['jpg', 'jpeg', 'gif', 'png'];
+		if(meta_img_val.length > 0) {
+			// Check file URL
+			jQuery.get(meta_img_val).done(function() {
+				// Extract filetype
+				var meta_img_filetype = meta_img_val.split(/\#|\?/)[0].split('.').pop().trim();
+				var types = ['jpg', 'jpeg', 'gif', 'png'];
 
-			if(types.indexOf(meta_img_filetype) == -1) {
-				jQuery(".snippet-"+social_slug+"-img-alert.alert1").css("display", "block");
-			} else {
-				// Extract image size
-				var tmp_img = new Image();
-				tmp_img.src = meta_img_val;
-				jQuery(tmp_img).one('load',function(){
-					pic_real_width = parseInt(tmp_img.width);
-					pic_real_height = parseInt(tmp_img.height);
-					
-					// Default minimum size
-					if (social_slug == 'fb') {
-						min_width = 200,
-						min_height = 200
-					} else {
-						min_width = 144,
-						min_height = 144
-					}
-					if(pic_real_width < min_width || pic_real_height < min_height) {
-						jQuery(".snippet-"+social_slug+"-img-alert.alert2").css("display", "block");
-					}
-					ratio_img = (pic_real_width / pic_real_height).toFixed(2);
-					jQuery(".snippet-"+social_slug+"-img-alert.alert4").css("display", "block");
-					jQuery(".snippet-"+social_slug+"-img-alert.alert4 span").text(ratio_img);
-				});
-			}
-		}).fail(function() {
-			jQuery(".snippet-"+social_slug+"-img-alert.alert3").css("display", "block");
-		});
+				if(types.indexOf(meta_img_filetype) == -1) {
+					jQuery(".snippet-"+social_slug+"-img-alert.alert1").css("display", "block");
+				} else {
+					// Extract image size
+					var tmp_img = new Image();
+					tmp_img.src = meta_img_val;
+					jQuery(tmp_img).one('load',function(){
+						pic_real_width = parseInt(tmp_img.width);
+						pic_real_height = parseInt(tmp_img.height);
+						
+						// Default minimum size
+						if (social_slug == 'fb') {
+							min_width = 200,
+							min_height = 200
+						} else {
+							min_width = 144,
+							min_height = 144
+						}
+						if(pic_real_width < min_width || pic_real_height < min_height) {
+							jQuery(".snippet-"+social_slug+"-img-alert.alert2").css("display", "block");
+						}
+						ratio_img = (pic_real_width / pic_real_height).toFixed(2);
+						jQuery(".snippet-"+social_slug+"-img-alert.alert4").css("display", "block");
+						jQuery(".snippet-"+social_slug+"-img-alert.alert4 span").text(ratio_img);
+					});
+				}
+			}).fail(function() {
+				jQuery(".snippet-"+social_slug+"-img-alert.alert3").css("display", "block");
+			});
+		}
+	} else {
+		jQuery(".snippet-"+social_slug+"-img-alert.alert3").css("display", "block");
 	}
 }
 

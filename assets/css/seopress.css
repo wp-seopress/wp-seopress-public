@@ -45,6 +45,7 @@
     display: inline-block;
     cursor: help;
     vertical-align: bottom;
+    text-align: left;
 }
 
 .sp-tooltip .dashicons {

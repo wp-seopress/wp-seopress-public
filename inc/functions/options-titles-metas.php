@@ -1296,7 +1296,7 @@ if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex
 			echo $seopress_titles_canonical."\n";
 		}
 		add_action( 'wp_head', 'seopress_titles_canonical_term_hook', 1 );
-	} else { //DEFAULT CANONICAL
+	} elseif (!is_404()) { //DEFAULT CANONICAL
 		function seopress_titles_canonical_hook() {
 			global $wp;
 			if (seopress_advanced_advanced_trailingslash_option()) {

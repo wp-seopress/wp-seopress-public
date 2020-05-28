@@ -1,12 +1,12 @@
 === SEOPress ===
 Authors: rainbowgeek
-Contributors: rainbowgeek, juliobox, maigret
+Contributors: rainbowgeek, juliobox, maigret, mgris
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 3.8.5
+Stable tag: 3.8.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,11 +102,11 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>🇷🇺 Русский (Russian) - professional translation</li>
 	<li>🇯🇵 日本語 (Japanese) - professional translation</li>
 	<li>🇮🇳 हिन्दी (Hindi) - professional translation</li>
+	<li>🇧🇷 Português do Brasil (Portuguese (Brazil)) - professional translation</li>
 	<li>🇬🇷 Ελληνικά (Greek)</li>
 	<li>🇧🇬 Български (Bulgarian)</li>
 	<li>🇮🇩 Bahasa Indonesia (Indonesian)</li>
 	<li>🇮🇹 Italiano (Italian)</li>
-	<li>🇧🇷 Português do Brasil (Portuguese (Brazil))</li>
 	<li>🇻🇳 Loki Web (Vietnamese)</li>
 	<li>🇷🇴 Română (Romanian)</li>
 	<li>🇸🇦 العربية (Arabic)</li>
@@ -226,6 +226,37 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.8.6 =
+* NEW Elementor Breadcrumbs widget 🎉 (PRO)
+* NEW Set a primary category for WooCommerce products 🎉 (SEO metabox, Advanced tab)
+* NEW 'seopress_sitemaps_external_link' hook to add external sitemaps URL to index sitemaps (https://www.seopress.org/support/hooks/add-external-urls-to-xml-index-sitemaps/)
+* NEW 'seopress_sitemaps_news_keywords' hook to add keywords to Google News sitemap (https://www.seopress.org/support/hooks/add-target-keywords-to-google-news-xml-sitemaps/)
+* NEW Add post type column in broken link checker
+* NEW Brazilian Portuguese language (Free and PRO) 🇧🇷
+* INFO Add images to Google News Sitemap (PRO)
+* INFO Remove shop page option in breadcrumbs is back
+* INFO Improve "Test redirection" link for Redirections
+* INFO Improve WPML compatibility for redirects
+* INFO i18n Google Analytics (props to @lriaudel)
+* INFO Improve security (props to @eringerm)
+* INFO Improve compatibility with Query Monitor (props to @sabrinazeidan)
+* INFO Remove Jquery dependency from Google Analytics tracking
+* FIX Conflict with GiveWP
+* FIX Target keyword with special characters
+* FIX Primary category for posts
+* FIX Improved saving of content analysis
+* FIX Flush permalinks button from Sitemap settings page
+* FIX Duplicate query with 404/301 feature enabled
+* FIX Alternative text check for content analysis
+* FIX Warning illegal offset when adding a new post without content
+* FIX WordPress error in Google Preview
+* FIX JS Warning if no social image found from post editing
+* FIX Remove /category/ option after adding new category to avoid manual flushing
+* FIX Notice: Undefined variable: seopress_get_ua (props to @wpchannel)
+* FIX Remove canonical / social meta tags on 404 pages (props to @bartekduls)
+* FIX Default currency for automatic product schema is now based on WC / EDD currency settings
+= 3.8.5.1 =
+* FIX Fatal error with Google Preview with some configurations
 = 3.8.5 =
 * NEW Matomo tracking integration! 🎉
 * NEW Twitter Preview! 🎉
