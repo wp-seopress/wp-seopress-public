@@ -10,6 +10,7 @@ global $pagenow;
 //=================================================================================================
 //License notice
 if ( current_user_can( seopress_capability( 'manage_options', 'notice' ) ) && is_seopress_page() ) {
+    //PRO
     if (get_option( 'seopress_pro_license_status' ) !='valid' && is_plugin_active('wp-seopress-pro/seopress-pro.php') && !is_multisite()) {
         function seopress_notice_license() {
             $screen_id = get_current_screen();
@@ -29,6 +30,28 @@ if ( current_user_can( seopress_capability( 'manage_options', 'notice' ) ) && is
             }
         }
         add_action( 'seopress_admin_notices', 'seopress_notice_license' );
+    }
+
+    //INSIGHTS
+    if (get_option( 'seopress_insights_license_status' ) !='valid' && is_plugin_active('wp-seopress-insights/seopress-insights.php') && !is_multisite()) {
+        function seopress_notice_insights_license() {
+            $screen_id = get_current_screen();
+            if ($screen_id->parent_base ==='seopress-option') {
+                $class = 'notice notice-error';
+                $message = '<strong>'.__( 'Welcome to SEOPress Insights!', 'wp-seopress' ).'</strong>';
+                $message .= '<p>'.__( 'Please activate your license to get access to our API (rankings and backlinks), receive automatic updates and get premium support.', 'wp-seopress' ).'</p>';
+                $message .= '<a class="button button-primary" href="'.admin_url( 'admin.php?page=seopress-insights#tab=tab_seopress_insights_license' ).'">'.__('Activate License', 'wp-seopress').'</a>';
+                if (seopress_get_locale() =='fr') {
+                    $sp_license_guide = 'https://www.seopress.org/fr/support/guides/activer-licence-seopress-pro/';
+                } else {
+                    $sp_license_guide = 'https://www.seopress.org/support/guides/activate-seopress-pro-license/';
+                }
+                $message .= '<a href="'.$sp_license_guide.'" target="_blank" style="vertical-align: middle;line-height: 28px;margin: 0 0 0 5px;">'.__('Need help?', 'wp-seopress').'</a>';
+
+                printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
+            }
+        }
+        add_action( 'seopress_admin_notices', 'seopress_notice_insights_license' );
     }
 }
 

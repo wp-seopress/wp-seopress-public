@@ -63,7 +63,7 @@ function seopress_admin_header() { ?>
                                 <?php include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
                                 if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) { ?>
                                     <li>
-                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-insights#tab=tab_seopress_insights_settings' ); ?>">
+                                        <a href="<?php echo admin_url( 'admin.php?page=seopress-insights' ); ?>">
                                             <span class="dashicons dashicons-chart-bar"></span>
                                             <?php _e( 'Insights', 'wp-seopress' ); ?>
                                         </a>
@@ -137,12 +137,6 @@ function seopress_admin_header() { ?>
                                         <a href="<?php echo admin_url( 'edit.php?post_type=seopress_bot' ); ?>">
                                             <span class="dashicons dashicons-admin-generic"></span>
                                             <?php _e( 'Broken links', 'wp-seopress' ); ?>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo admin_url( 'edit.php?post_type=seopress_backlinks' ); ?>">
-                                            <span class="dashicons dashicons-admin-links"></span>
-                                            <?php _e( 'Backlinks', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
                                     <li>

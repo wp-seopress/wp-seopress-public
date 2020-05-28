@@ -262,6 +262,9 @@ function seopress_display_seo_term_metaboxe() {
         }
 
         $seopress_robots_canonical         = get_term_meta($term->term_id,'_seopress_robots_canonical',true);
+        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+            $seopress_robots_breadcrumbs   = get_term_meta($term->term_id,'_seopress_robots_breadcrumbs',true);
+        }
         $seopress_social_fb_title          = get_term_meta($term->term_id,'_seopress_social_fb_title',true);
         $seopress_social_fb_desc           = get_term_meta($term->term_id,'_seopress_social_fb_desc',true);
         $seopress_social_fb_img            = get_term_meta($term->term_id,'_seopress_social_fb_img',true);    
@@ -328,6 +331,11 @@ function seopress_display_seo_term_metaboxe() {
                 update_term_meta( $term_id, '_seopress_robots_snippet', 'yes' );
             } else {
                 delete_term_meta( $term_id, '_seopress_robots_snippet', '' );
+            }
+            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                if(isset($_POST['seopress_robots_breadcrumbs'])){
+                    update_term_meta($term_id, '_seopress_robots_breadcrumbs', esc_html($_POST['seopress_robots_breadcrumbs']));
+                }
             }
             if(isset($_POST['seopress_robots_canonical'])){
                 update_term_meta($term_id, '_seopress_robots_canonical', esc_html($_POST['seopress_robots_canonical']));

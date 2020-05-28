@@ -123,15 +123,15 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
 						if($_cpt_value =='1') {
 							$args = array(
 								'posts_per_page' => 1000,
-                                'order'=> $seopress_xml_sitemap_html_order_option,
-                                'orderby' => $seopress_xml_sitemap_html_orderby_option,
-                                'post_type' => $cpt_key,
-                                'post_status' => 'publish',
-                                'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ),
-                                'fields' => 'ids',
-                                'exclude' => $seopress_xml_sitemap_html_exclude_option,
-                                'suppress_filters' => false
-                            );
+								'order'=> $seopress_xml_sitemap_html_order_option,
+								'orderby' => $seopress_xml_sitemap_html_orderby_option,
+								'post_type' => $cpt_key,
+								'post_status' => 'publish',
+								'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ),
+								'fields' => 'ids',
+								'exclude' => $seopress_xml_sitemap_html_exclude_option,
+								'suppress_filters' => false
+							);
 							if ($cpt_key =='post') {
 								
 								if (get_post_type_archive_link($cpt_key) && get_option( 'page_for_posts' ) !=0) { 
@@ -143,7 +143,7 @@ if (seopress_xml_sitemap_html_enable_option() =='1') {
 								$args_cat_query = array(
 									'orderby'	=>	'name',
 									'order'		=>	'ASC',
-                                	'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ),
+									'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ),
 									'exclude' => $seopress_xml_sitemap_html_exclude_option,
 									'suppress_filters' => false,
 								);

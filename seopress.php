@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.6
+Version: 3.8.7
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -44,7 +44,8 @@ function seopress_activation() {
 register_activation_hook(__FILE__, 'seopress_activation');
 
 function seopress_deactivation() {
-	deactivate_plugins('wp-seopress-pro/seopress-pro.php');
+	deactivate_plugins( [ 'wp-seopress-pro/seopress-pro.php', 'wp-seopress-insights/seopress-insights.php' ] );
+
 	delete_option( 'seopress_activated' );
 	flush_rewrite_rules();
 	do_action('seopress_deactivation');
@@ -54,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.6' );
+define( 'SEOPRESS_VERSION', '3.8.7' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,40 +177,44 @@ function seopress_add_admin_options_scripts( $hook ) {
 
 		$seopress_migrate = [
 			'seopress_aio_migrate'				=> [
-				'seopress_nonce'					=> wp_create_nonce('seopress_aio_migrate_nonce'),
-				'seopress_aio_migration'			=> admin_url( 'admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_aio_migrate_nonce'),
+				'seopress_aio_migration'				=> admin_url( 'admin-ajax.php'),
 			],
 			'seopress_yoast_migrate'			=> [
-				'seopress_nonce'					=> wp_create_nonce('seopress_yoast_migrate_nonce'),
-				'seopress_yoast_migration'			=> admin_url( 'admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_yoast_migrate_nonce'),
+				'seopress_yoast_migration'				=> admin_url( 'admin-ajax.php'),
 			],
 			'seopress_seo_framework_migrate'	=> [
-				'seopress_nonce'					=> wp_create_nonce('seopress_seo_framework_migrate_nonce'),
-				'seopress_seo_framework_migration'	=> admin_url( 'admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_seo_framework_migrate_nonce'),
+				'seopress_seo_framework_migration'		=> admin_url( 'admin-ajax.php'),
 			],
 			'seopress_rk_migrate'				=> [
-				'seopress_nonce'					=> wp_create_nonce('seopress_rk_migrate_nonce'),
-				'seopress_rk_migration'				=> admin_url( 'admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_rk_migrate_nonce'),
+				'seopress_rk_migration'					=> admin_url( 'admin-ajax.php'),
 			],
 			'seopress_squirrly_migrate'			=> [
-				'seopress_nonce'					=> wp_create_nonce('seopress_squirrly_migrate_nonce'),
-				'seopress_squirrly_migration'		=> admin_url( 'admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_squirrly_migrate_nonce'),
+				'seopress_squirrly_migration'			=> admin_url( 'admin-ajax.php'),
 			],
 			'seopress_seo_ultimate_migrate'		=> [
-				'seopress_nonce' 					=> wp_create_nonce('seopress_seo_ultimate_migrate_nonce'),
-				'seopress_seo_ultimate_migration'	=> admin_url( 'admin-ajax.php'),
+				'seopress_nonce' 						=> wp_create_nonce('seopress_seo_ultimate_migrate_nonce'),
+				'seopress_seo_ultimate_migration'		=> admin_url( 'admin-ajax.php'),
 			],
 			'seopress_wp_meta_seo_migrate'		=> [
-				'seopress_nonce'					=> wp_create_nonce('seopress_meta_seo_migrate_nonce'),
-				'seopress_wp_meta_seo_migration'	=> admin_url( 'admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_meta_seo_migrate_nonce'),
+				'seopress_wp_meta_seo_migration'		=> admin_url( 'admin-ajax.php'),
+			],
+			'seopress_premium_seo_pack_migrate'	=> [
+				'seopress_nonce'						=> wp_create_nonce('seopress_premium_seo_pack_migrate_nonce'),
+				'seopress_premium_seo_pack_migration'	=> admin_url( 'admin-ajax.php'),
 			],
 			'seopress_metadata_csv'				=> [
-				'seopress_nonce'					=> wp_create_nonce('seopress_export_csv_metadata_nonce'),
-				'seopress_metadata_export'			=> admin_url( 'admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_export_csv_metadata_nonce'),
+				'seopress_metadata_export'				=> admin_url( 'admin-ajax.php'),
 			],
 			'i18n'								=> [
-				'migration'							=> __( 'Migration completed!', 'wp-seopress' ),
-				'export'							=>__( 'Export completed!', 'wp-seopress' ),
+				'migration'								=> __( 'Migration completed!', 'wp-seopress' ),
+				'export'								=>__( 'Export completed!', 'wp-seopress' ),
 			]
 		];
 		wp_localize_script( 'seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate );
@@ -301,7 +306,10 @@ function seopress_admin_body_class( $classes ) {
 		'seopress-pro-page' => true, 
 		'seopress-bot-batch' => true, 
 		'seopress-license' => true,
-		'seopress-insights' => true
+		'seopress-insights' => true,
+		'seopress-insights-rankings' => true,
+		'seopress-insights-backlinks' => true,
+		'seopress-insights-settings' => true
 	];
 	if ( isset( $_pages[ $_GET['page'] ] ) ) {
 		$classes .= " seopress-styles ";
@@ -418,10 +426,10 @@ function seopress_plugin_action_links($links, $file) {
 		$website_link = '<a href="https://www.seopress.org/support/" target="_blank">'.__("Docs","wp-seopress").'</a>';
 		$wizard_link = '<a href="'.admin_url('admin.php?page=seopress-setup').'">'.__("Configuration Wizard","wp-seopress").'</a>';
 		if ( !is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
-			$pro_link = '<a href="https://www.seopress.org/seopress-pro/" style="color:#a00;font-weight:bold" target="_blank">'.__("GO PRO!","wp-seopress").'</a>';
+			$pro_link = '<a href="https://www.seopress.org/seopress-pro/" style="color:red;font-weight:bold" target="_blank">'.__("GO PRO!","wp-seopress").'</a>';
 			array_unshift($links, $pro_link);
 		}
-		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {
+		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) || is_plugin_active( 'wp-seopress-insights/seopress-insights.php' )) {
 			if ( array_key_exists( 'deactivate', $links ) && in_array( $file, array(
 				'wp-seopress/seopress.php'
 			)));
@@ -959,7 +967,7 @@ function seopress_notification($args) {
 				if (function_exists('seopress_get_locale')) {
 					if (seopress_get_locale() =='fr' && isset($link['fr'])) {
 						$href = ' href="'.$link['fr'].'"';
-					} else {
+					} elseif (isset($link['en'])) {
 						$href = ' href="'.$link['en'].'"';
 					}
 				}
@@ -1022,12 +1030,16 @@ function seopress_capability( $cap, $context = '' ) {
  * @return (bool)
  **/
 function is_seopress_page() {
-	if ( ! is_admin() || ! isset( $_REQUEST['page'] ) ) {
+	if ( ! is_admin() && ( ! isset( $_REQUEST['page'] ) || ! isset( $_REQUEST['post_type'] ) ) ) {
 		return false;
 	}
-	return 0 === strpos( $_REQUEST['page'], 'seopress' );
+	
+	if ( isset( $_REQUEST['page'] ) ) {
+		return 0 === strpos( $_REQUEST['page'], 'seopress' );
+	} elseif ( isset( $_REQUEST['post_type'] ) ) {
+		return 0 === strpos( $_REQUEST['post_type'], 'seopress' );
+	}
 }
-
 /**
  * Only add our notices on our pages
  *

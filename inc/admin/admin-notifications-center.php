@@ -179,6 +179,7 @@
                             'seo-by-rank-math/rank-math.php' => 'Rank Math',
                             'seo-ultimate/seo-ultimate.php' => 'SEO Ultimate',
                             'wp-meta-seo/wp-meta-seo.php' => 'WP Meta SEO',
+                            'premium-seo-pack/plugin.php' => 'Premium SEO Pack',
                         );
 
                         foreach($seo_plugins as $key => $value) {
@@ -233,7 +234,7 @@
                                         'low' => __('Low impact','wp-seopress')
                                     ],
                                     'link' => [
-                                        'en' => 'https://www.namecheap.com/?aff=105841',
+                                        'en' => 'https://www.seopress.org/go/namecheap',
                                         'title' => __('Buy an SSL!','wp-seopress'),
                                         'external' => true
                                     ],

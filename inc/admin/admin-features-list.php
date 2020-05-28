@@ -90,7 +90,7 @@
                 'title' => __('Insights','wp-seopress'),
                 'desc'  => __('Track your keyword positions and backlinks directly in your WordPress.', 'wp-seopress'),
                 'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-insights#tab=tab_seopress_insights_settings' ) => __('Manage','wp-seopress')
+                    admin_url( 'admin.php?page=seopress-insights' ) => __('Manage','wp-seopress')
                 ],
                 'help' => [
                     'en'        => 'https://www.seopress.org/insights/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
@@ -292,19 +292,6 @@
                     'external'  => true
                 ],
                 'filter' => 'seopress_remove_feature_bot'
-            ];
-            $features['backlinks'] = [
-                'icon'  => 'dashicons-admin-links',
-                'title' => __('Backlinks','wp-seopress'),
-                'desc'  => __('Check your backlinks with Majestic API.', 'wp-seopress'),
-                'btn_primary' => [
-                    admin_url( 'edit.php?post_type=seopress_backlinks' ) => __('See backlinks','wp-seopress')
-                ],
-                'btn_secondary' => [
-                    admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_backlinks' ) => __('Manage','wp-seopress')
-                ],
-                'filter' => 'seopress_remove_feature_backlinks',
-                'toggle' => false
             ];
             $features['rewrite'] = [
                 'icon'  => 'dashicons-admin-links',

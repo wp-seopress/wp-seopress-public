@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 3.8.6
+Stable tag: 3.8.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,7 +31,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Installation wizard to quickly setup your site</li>
 	<li>Titles (with dyanmic variables: custom fields, terms taxonomie...)</li>
 	<li>Meta descriptions (with dynamic variables too)</li>
-	<li>Open Graph Data</li>
+	<li>Open Graph Data for social media (Facebook, LinkedIn, Instagram, Twitter, Pinterest, WhatsApp...)</li>
 	<li>Google Knowledge Graph</li>
 	<li><strong>Google Analytics</strong> and <strong>Matomo</strong> with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">GDPR compatibility</a>)</li>
 	<li>Twitter Card</li>
@@ -48,7 +48,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Redirect attachment pages to their file URL</li>
 	<li>Automatically set the image title / alt / caption / description</li>
 	<li>Import / Export settings from site to site.</li>
-	<li>Import posts and terms metadata from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, and Squirrly</li>
+	<li>Import posts and terms metadata from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack and Squirrly</li>
 	<li>W3C check</li>
 	<li>Content analysis</li>
 	<li>Mobile / Desktop Google Preview</li>
@@ -69,12 +69,11 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Breadcrumbs optimized with Schema.org, A11Y ready</li>
 	<li>Google Analytics Stats in Dashboard</li>
 	<li>Google Local Business</li>
-	<li>Backlinks (required a Majestic paid account)</li>
 	<li>SEOPress BOT: scan all your links in content to find errors (eg: 404...)</li>
 	<li>WooCommerce: Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema (barcode), disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li>Easy Digital Downloads: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li>Dublin Core</li>
-	<li>Custom Breadcrumbs for single post types</li>
+	<li>Custom Breadcrumbs for single post types / term taxonomy</li>
 	<li>Google Page Speed</li>
 	<li>Google Analytics Events: track external links, downloads (PDF, DOCX...), affiliate links...</li>
 	<li>Robots.txt</li>
@@ -173,7 +172,7 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 
 = Can I import my post and term metadata from other plugins? =
 
-You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/">SEO Ultimate (post metas only, not terms)</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/">WP Meta SEO</a> in one click to SEOPress without losing traffic.
+You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/">WP Meta SEO</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
 
 = How to use Google Tag Manager / Facebook Pixel with SEOPress? =
 
@@ -226,6 +225,37 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.8.7 =
+<a href="https://www.seopress.org/blog/og-image-post-type-custom-breadcrumbs-term-taxonomy-seopress-3-8-7/" target="_blank">Read our blog post</a>
+* NEW Import post and term metadata from Premium SEO Pack plugin (https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/)
+* NEW Italian translation (by entersys.it) 🇮🇹
+* NEW Custom breadcrumbs title for term taxonomy
+* NEW Custom og:image for custom post type archive
+* NEW 'seopress_remove_pro_settings_tabs' hook to hide specific SEOPress PRO settings tabs (https://www.seopress.org/support/hooks/hide-specific-pro-tabs-settings/)
+* NEW 'seopress_sitemaps_news_keywords_value' hook to filter keywords in News sitemap (https://www.seopress.org/support/hooks/filter-keywords-in-xml-news-sitemap/)
+* NEW Sol currency for schemas
+* INFO Redirections: import CSV file with comma or semicolon separator
+* INFO Improve compatibility with BeTheme WordPress theme
+* INFO Improve searchbox in Redirections CPT
+* INFO Improve compatibility with the Block Editor (Gutenberg)
+* INFO Add a warning indicator if the post is noindex on Advanced tab (SEO metabox)
+* INFO i18n translations
+* INFO "keywords in permalinks" verification removed for homepage (because no slug)
+* INFO Refactoring import tool
+* INFO Refactoring GA custom dimensions
+* INFO Display Video sitemap tab in SEO metabox only if Video sitemap option is enabled
+* INFO Update plugin updater
+* INFO Redirects are now priority over 404 if redirect identical to a 404 error from the list of redirects
+* FIX Product currency for automatic schema if manually set
+* FIX Trailing slash for News and Video XML sitemaps (no impact for SEO/Search Console)
+* FIX White label: "Remove "You like SEOPress? Don't forget to rate it 5 stars!" on SEOPress post type (Schemas, Redirections...)
+* FIX Display content before / after each post in RSS feeds if full text displayed
+* FIX Redirections with status "published" only are now redirected
+* FIX Import redirections from CSV whose URLs contains + signs
+= 3.8.6.2 =
+* FIX Redirections with WPML
+= 3.8.6.1 =
+* FIX Redirections with parameters / WPML compatibility
 = 3.8.6 =
 * NEW Elementor Breadcrumbs widget 🎉 (PRO)
 * NEW Set a primary category for WooCommerce products 🎉 (SEO metabox, Advanced tab)

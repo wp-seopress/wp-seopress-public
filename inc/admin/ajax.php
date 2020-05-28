@@ -117,6 +117,12 @@ function seopress_do_real_preview() {
 						$seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
 					}
 
+					//BeTheme is activated
+					$theme = wp_get_theme();
+					if ( 'betheme' == $theme->template || 'Betheme' == $theme->parent_theme ) {
+						$seopress_get_the_content = $seopress_get_the_content.get_post_meta($seopress_get_the_id, 'mfn-page-items-seo', true); 
+					}
+
 					$seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
 
 					//Get Target Keywords
@@ -641,8 +647,8 @@ function seopress_aio_migration() {
 
 	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
 
-		if ( isset( $_POST['offset2']) && isset( $_POST['offset2'] )) {
-			$offset2 = absint($_POST['offset2']);
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
 		}
 
 		global $wpdb;
@@ -651,13 +657,13 @@ function seopress_aio_migration() {
 		$increment = 200;
 		global $post;
 
-		if ($offset2 > $total_count_posts) {
+		if ($offset > $total_count_posts) {
 			wp_reset_query();
 
 			$args = array(
 				//'number' => $increment,
 				'hide_empty' => false,
-				//'offset' => $offset2,
+				//'offset' => $offset,
 				'fields' => 'ids',
 			);
 			$aio_query_terms = get_terms($args);
@@ -704,14 +710,14 @@ function seopress_aio_migration() {
 					}
 				}
 			}
-			$offset2 = 'done';
+			$offset = 'done';
 			wp_reset_query();
 		} else {
 			$args = array(
 				'posts_per_page' => $increment,
 				'post_type' => 'any',
 				'post_status' => 'any',
-				'offset' => $offset2,
+				'offset' => $offset,
 			);
 
 			$aio_query = get_posts( $args );
@@ -758,10 +764,10 @@ function seopress_aio_migration() {
 					}
 				}
 			}
-			$offset2 += $increment;
+			$offset += $increment;
 		}
 		$data = array();
-		$data['offset2'] = $offset2;
+		$data['offset'] = $offset;
 		wp_send_json_success($data);
 		die();
 	}
@@ -776,8 +782,8 @@ function seopress_seo_framework_migration() {
 
 	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
 
-		if ( isset( $_POST['offset3']) && isset( $_POST['offset3'] )) {
-			$offset3 = absint($_POST['offset3']);
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
 		}
 
 		global $wpdb;
@@ -786,13 +792,13 @@ function seopress_seo_framework_migration() {
 		$increment = 200;
 		global $post;
 
-		if ($offset3 > $total_count_posts) {
+		if ($offset > $total_count_posts) {
 			wp_reset_query();
 
 			$args = array(
 				//'number' => $increment,
 				'hide_empty' => false,
-				//'offset' => $offset3,
+				//'offset' => $offset,
 				'fields' => 'ids',
 			);
 			$seo_framework_query_terms = get_terms($args);
@@ -820,14 +826,14 @@ function seopress_seo_framework_migration() {
 					}
 				}
 			}
-			$offset3 = 'done';
+			$offset = 'done';
 			wp_reset_query();
 		} else {
 			$args = array(
 				'posts_per_page' => $increment,
 				'post_type' => 'any',
 				'post_status' => 'any',
-				'offset' => $offset3,
+				'offset' => $offset,
 			);
 
 			$seo_framework_query = get_posts( $args );
@@ -877,10 +883,10 @@ function seopress_seo_framework_migration() {
 					}
 				}
 			}
-			$offset3 += $increment;
+			$offset += $increment;
 		}
 		$data = array();
-		$data['offset3'] = $offset3;
+		$data['offset'] = $offset;
 		wp_send_json_success($data);
 		die();
 	}
@@ -895,8 +901,8 @@ function seopress_rk_migration() {
 
 	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
 
-		if ( isset( $_POST['offset4']) && isset( $_POST['offset4'] )) {
-			$offset4 = absint($_POST['offset4']);
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
 		}
 
 		global $wpdb;
@@ -905,7 +911,7 @@ function seopress_rk_migration() {
 		$increment = 200;
 		global $post;
 
-		if ($offset4 > $total_count_posts) {
+		if ($offset > $total_count_posts) {
 			wp_reset_query();
 
 			$args = array(
@@ -972,14 +978,14 @@ function seopress_rk_migration() {
 
 				}
 			}
-			$offset4 = 'done';
+			$offset = 'done';
 			wp_reset_query();
 		} else {
 			$args = array(
 				'posts_per_page' => $increment,
 				'post_type' => 'any',
 				'post_status' => 'any',
-				'offset' => $offset4,
+				'offset' => $offset,
 			);
 
 			$rk_query = get_posts( $args );
@@ -1040,10 +1046,10 @@ function seopress_rk_migration() {
 					}
 				}
 			}
-			$offset4 += $increment;
+			$offset += $increment;
 		}
 		$data = array();
-		$data['offset4'] = $offset4;
+		$data['offset'] = $offset;
 		wp_send_json_success($data);
 		die();
 	}
@@ -1058,8 +1064,8 @@ function seopress_squirrly_migration() {
 
 	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
 
-		if ( isset( $_POST['offset5']) && isset( $_POST['offset5'] )) {
-			$offset5 = absint($_POST['offset5']);
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
 		}
 
 		global $wpdb;
@@ -1110,10 +1116,10 @@ function seopress_squirrly_migration() {
 					}
 				}
 			}
-			$offset5 = 'done';
+			$offset = 'done';
 		}
 		$data = array();
-		$data['offset5'] = $offset5;
+		$data['offset'] = $offset;
 		wp_send_json_success($data);
 		die();
 	}
@@ -1131,8 +1137,8 @@ function seopress_seo_ultimate_migration() {
 
 	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
 
-		if ( isset( $_POST['offset7']) && isset( $_POST['offset7'] )) {
-			$offset7 = absint($_POST['offset7']);
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
 		}
 		
 		global $wpdb;
@@ -1142,15 +1148,15 @@ function seopress_seo_ultimate_migration() {
 		$increment = 200;
 		global $post;
 		
-		if ($offset7 > $total_count_posts) {
-			$offset7 = 'done';
+		if ($offset > $total_count_posts) {
+			$offset = 'done';
 			wp_reset_query();
 		} else {
 			$args = array(  
 				'posts_per_page' => $increment,  
 				'post_type' => 'any',
 				'post_status' => 'any',
-				'offset' => $offset7, 
+				'offset' => $offset, 
 			);
 			
 			$su_query = get_posts( $args );
@@ -1180,10 +1186,10 @@ function seopress_seo_ultimate_migration() {
 					}
 				}
 			}
-			$offset7 += $increment;
+			$offset += $increment;
 		}
 		$data = array();
-		$data['offset7'] = $offset7;
+		$data['offset'] = $offset;
 		wp_send_json_success($data);
 		die();
 	}
@@ -1201,8 +1207,8 @@ function seopress_wp_meta_seo_migration() {
 
 	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
 
-		if ( isset( $_POST['offset8']) && isset( $_POST['offset8'] )) {
-			$offset8 = absint($_POST['offset8']);
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
 		}
 		
 		global $wpdb;
@@ -1211,7 +1217,7 @@ function seopress_wp_meta_seo_migration() {
 		$increment = 200;
 		global $post;
 		
-		if ($offset8 > $total_count_posts) {
+		if ($offset > $total_count_posts) {
 			wp_reset_query();
 
 			$args = array(
@@ -1230,14 +1236,14 @@ function seopress_wp_meta_seo_migration() {
 					}
 				}
 			}
-			$offset8 = 'done';
+			$offset = 'done';
 			wp_reset_query();
 		} else {
 			$args = array(  
 				'posts_per_page' => $increment,
 				'post_type' => 'any',
 				'post_status' => 'any',
-				'offset' => $offset8,
+				'offset' => $offset,
 			);
 			
 			$wp_meta_seo_query = get_posts( $args );
@@ -1270,15 +1276,132 @@ function seopress_wp_meta_seo_migration() {
 					}
 				}
 			}
-			$offset8 += $increment;
+			$offset += $increment;
 		}
 		$data = array();
-		$data['offset8'] = $offset8;
+		$data['offset'] = $offset;
 		wp_send_json_success($data);
 		die();
 	}
 }
 add_action('wp_ajax_seopress_wp_meta_seo_migration', 'seopress_wp_meta_seo_migration');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/* Premium SEO Pack migration
+* @since 3.8.7
+* @author Benjamin Denis
+*/
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_premium_seo_pack_migration() {
+	check_ajax_referer( 'seopress_premium_seo_pack_migrate_nonce', $_POST['_ajax_nonce'], true );
+
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
+		}
+
+		global $wpdb;
+
+		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+
+		$increment = 200;
+		global $post;
+
+		if ($offset > $total_count_posts) {
+			wp_reset_query();
+
+			$premium_query_terms = get_option('psp_taxonomy_seo');
+
+			if ($premium_query_terms) {
+
+				foreach ($premium_query_terms as $taxonomies => $taxonomie) {
+					foreach ($taxonomie as $term_id => $term_value) {
+						if ($term_value['psp_meta']['title'] !='') { //Import title tag
+							update_term_meta($term_id, '_seopress_titles_title', $term_value['psp_meta']['title']);
+						}
+						if ($term_value['psp_meta']['description'] !='') { //Import meta desc
+							update_term_meta($term_id, '_seopress_titles_desc', $term_value['psp_meta']['description']);
+						}
+						if ($term_value['psp_meta']['facebook_titlu'] !='') { //Import Facebook Title
+							update_term_meta($term_id, '_seopress_social_fb_title', $term_value['psp_meta']['facebook_titlu']);
+						}
+						if ($term_value['psp_meta']['facebook_desc'] !='') { //Import Facebook Desc
+							update_term_meta($term_id, '_seopress_social_fb_desc', $term_value['psp_meta']['facebook_desc']);
+						}
+						if ($term_value['psp_meta']['facebook_image'] !='') { //Import Facebook Image
+							update_term_meta($term_id, '_seopress_social_fb_img', $term_value['psp_meta']['facebook_image']);
+						}
+						if ($term_value['psp_meta']['robots_index'] =='noindex') { //Import Robots NoIndex
+							update_term_meta($term_id, '_seopress_robots_index', "yes");
+						}
+						if ($term_value['psp_meta']['robots_follow'] =='nofollow') { //Import Robots NoFollow
+							update_term_meta($term_id, '_seopress_robots_follow', "yes");
+						}
+						if ($term_value['psp_meta']['canonical'] !='') { //Import Canonical URL
+							update_term_meta($term_id, '_seopress_robots_canonical', $term_value['psp_meta']['canonical']);
+						}
+					}
+				}
+			}
+			$offset = 'done';
+			wp_reset_query();
+		} else {
+			$args = array(
+				'posts_per_page' => $increment,
+				'post_type' => 'any',
+				'post_status' => 'any',
+				'offset' => $offset,
+			);
+
+			$premium_query = get_posts( $args );
+
+			if ($premium_query) {
+				foreach ($premium_query as $post) {
+					$psp_meta = get_post_meta($post->ID, 'psp_meta', true);
+
+					if (!empty($psp_meta)) {
+						if (!empty($psp_meta['title'])) { //Import title tag
+							update_post_meta($post->ID, '_seopress_titles_title', $psp_meta['title']);
+						}
+						if (!empty($psp_meta['description'])) { //Import meta desc
+							update_post_meta($post->ID, '_seopress_titles_desc', $psp_meta['description']);
+						}
+						if (!empty($psp_meta['facebook_titlu'])) { //Import Facebook Title
+							update_post_meta($post->ID, '_seopress_social_fb_title', $psp_meta['facebook_titlu']);
+						}
+						if (!empty($psp_meta['facebook_desc'])) { //Import Facebook Desc
+							update_post_meta($post->ID, '_seopress_social_fb_desc', $psp_meta['facebook_desc']);
+						}
+						if (!empty($psp_meta['facebook_image'])) { //Import Facebook Image
+							update_post_meta($post->ID, '_seopress_social_fb_img', $psp_meta['facebook_image']);
+						}
+						if ($psp_meta['robots_index'] == 'noindex') { //Import Robots NoIndex
+							update_post_meta($post->ID, '_seopress_robots_index', "yes");
+						}
+						if ($psp_meta['robots_follow'] == 'nofollow') { //Import Robots NoIndex
+							update_post_meta($post->ID, '_seopress_robots_follow', "yes");
+						}
+						if (!empty($psp_meta['canonical'])) { //Import Canonical URL
+							update_post_meta($post->ID, '_seopress_robots_canonical', $psp_meta['canonical']);
+						}
+						if (!empty($psp_meta['mfocus_keyword'])) { //Import Focus Keywords
+							$target_kw = preg_split('/\r\n|\r|\n/', $psp_meta['mfocus_keyword']);
+
+							update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',',$target_kw));
+						}
+					}
+				}
+			}
+			$offset += $increment;
+		}
+		$data = array();
+		$data['offset'] = $offset;
+		wp_send_json_success($data);
+		die();
+	}
+}
+add_action('wp_ajax_seopress_premium_seo_pack_migration', 'seopress_premium_seo_pack_migration');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Export SEOPress metadata to CSV
@@ -1288,8 +1411,8 @@ function seopress_metadata_export() {
 
 	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
 
-		if ( isset( $_POST['offset6']) && isset( $_POST['offset6'] )) {
-			$offset6 = absint($_POST['offset6']);
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
 		}
 
 		$seopress_get_post_types = array();
@@ -1328,7 +1451,7 @@ function seopress_metadata_export() {
 		$settings["canonical_url"] = array();
 		$settings["target_kw"] = array();
 
-		if ($offset6 > $total_count_posts) {
+		if ($offset > $total_count_posts) {
 			wp_reset_query();
 
 			update_option('seopress_metadata_csv', $csv);
@@ -1341,17 +1464,17 @@ function seopress_metadata_export() {
 
 			$download_url = add_query_arg( $args, admin_url('admin.php') );
 
-			$offset6 = 'done';
+			$offset = 'done';
 		} else {
 			$args = array(
 				'post_type' => $seopress_get_post_types,
 				'posts_per_page' => $increment,
-				'offset' => $offset6,
+				'offset' => $offset,
 				'post_status' => 'any',
 				'order' => 'DESC',
 				'orderby' => 'date',
 			);
-			$args = apply_filters( 'seopress_metadata_query_args', $args, $seopress_get_post_types, $increment, $offset6 );
+			$args = apply_filters( 'seopress_metadata_query_args', $args, $seopress_get_post_types, $increment, $offset );
 			$meta_query = get_posts( $args );
 
 			if ($meta_query) {
@@ -1420,12 +1543,12 @@ function seopress_metadata_export() {
 
 				}
 			}
-			$offset6 += $increment;
+			$offset += $increment;
 			update_option('seopress_metadata_csv', $csv);
 		}
 
 		$data = array();
-		$data['offset6'] = $offset6;
+		$data['offset'] = $offset;
 		$data['url'] = $download_url;
 		wp_send_json_success($data);
 

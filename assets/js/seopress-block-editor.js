@@ -1,16 +1,15 @@
 //Retrieve title / meta-desc from source code
 jQuery(document).ready(function($) {
-
-
-
 const { subscribe, select } = wp.data;
 let hasSaved = false;
 
     subscribe( () => {
-        var isSavingPost = wp.data.select('core/editor').isSavingPost();
+        //var isSavingPost = wp.data.select('core/editor').isSavingPost();
         var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+        var isSavingMetaBoxes = wp.data.select('core/edit-post').isSavingMetaBoxes();
+
       
-        if (isSavingPost && !isAutosavingPost && !hasSaved) {
+        if (isSavingMetaBoxes && !isAutosavingPost && !hasSaved) {
         
             $.ajax({
                 method : 'GET',
@@ -37,6 +36,7 @@ let hasSaved = false;
                     typeof s.data.tw_title ==="undefined" ? tw_title = "" : tw_title = s.data.tw_title.values;
                     typeof s.data.tw_desc ==="undefined" ? tw_desc = "" : tw_desc = s.data.tw_desc.values;
                     typeof s.data.tw_img ==="undefined" ? tw_img = "" : tw_img = s.data.tw_img.values;
+                    typeof s.data.meta_robots ==="undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots[0];
     
                     var data_arr = {og_title : og_title,
                         og_desc : og_desc,
@@ -56,6 +56,17 @@ let hasSaved = false;
                                 key = data_arr[key][0];
                             }
                         }
+                    }
+
+                    // Meta Robots
+                    meta_robots = meta_robots.toString();
+
+                    $("#sp-advanced-alert").empty();
+
+                    var if_noindex = new RegExp('noindex');
+
+                    if(if_noindex.test(meta_robots)){
+                        $("#sp-advanced-alert").append('<span class="impact high" aria-hidden="true"></span>');
                     }
 
                     // Google Preview
@@ -116,6 +127,6 @@ let hasSaved = false;
                 },
             });
         }
-        hasSaved = !! isSavingPost;
+        hasSaved = !! isSavingMetaBoxes; //isSavingPost != 0;
     });
 });

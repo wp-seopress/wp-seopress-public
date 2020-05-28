@@ -9,6 +9,7 @@ $data_tax = '';
 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
     $current_id = get_the_id();
     $origin = 'post';
+    $title = get_the_title($current_id);
 
     function seopress_titles_single_cpt_date_option() {
         global $post;
@@ -34,6 +35,7 @@ if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
     $current_id = $tag->term_id;
     $origin = 'term';
     $data_tax = $tag->taxonomy;
+    $title = $tag->name;
 }
 
 function seopress_redirections_value($seopress_redirections_value) {
@@ -55,7 +57,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
         
         if ("seopress_404" != $typenow) {
             $seo_tabs['title-tab'] = '<li><a href="#tabs-1"><span class="dashicons dashicons-editor-table"></span>'. __( 'Titles settings', 'wp-seopress' ) .'</a></li>';
-            $seo_tabs['advanced-tab'] = '<li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'wp-seopress' ) .'</a></li>';
+            $seo_tabs['advanced-tab'] = '<li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'wp-seopress' ) .'<span id="sp-advanced-alert"></span></a></li>';
             $seo_tabs['social-tab'] = '<li><a href="#tabs-3"><span class="dashicons dashicons-share"></span>'. __( 'Social', 'wp-seopress' ) .'</a></li>';
         }
        
@@ -69,7 +71,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     }
                 }
             }
-            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('xml-sitemap') =='1') {
+            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('xml-sitemap') =='1' && seopress_xml_sitemap_video_enable_option() =='1') {
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                     if ("seopress_404" != $typenow) {
                         $seo_tabs['video-tab'] = '<li><a href="#tabs-6"><span class="dashicons dashicons-format-video"></span>'. __( 'Video Sitemap', 'wp-seopress' ) .'</a></li>';
@@ -288,16 +290,14 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         </p>';
                     }
                     
-                    if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
-                        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                            echo '<p>
-                                <label for="seopress_robots_breadcrumbs_meta">'. __( 'Custom breadcrumbs', 'wp-seopress' ) .'</label>
-                                <span class="description">'.__('Enter a custom value, useful if your title is too long','wp-seopress').'</span>
-                            </p>
-                            <p>
-                                <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.esc_html(sprintf(__('Current breadcrumbs: %s','wp-seopress'),get_the_title($post))).'" aria-label="'.__('Custom breadcrumbs','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
-                            </p>';
-                        }
+                    if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                        echo '<p>
+                            <label for="seopress_robots_breadcrumbs_meta">'. __( 'Custom breadcrumbs', 'wp-seopress' ) .'</label>
+                            <span class="description">'.__('Enter a custom value, useful if your title is too long','wp-seopress').'</span>
+                        </p>
+                        <p>
+                            <input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="'.esc_html(sprintf(__('Current breadcrumbs: %s','wp-seopress'),$title)).'" aria-label="'.__('Custom breadcrumbs','wp-seopress').'" value="'.$seopress_robots_breadcrumbs.'" />
+                        </p>';
                     }
                 echo '</div>';
             }
@@ -329,13 +329,14 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                             if(seopress_get_toggle_option('social')=='1') {
                                 echo '<p>'.__('This is what your post will look like in Facebook. You have to publish your post to get the Facebook Preview.','wp-seopress').'</p>';
                             } else {
-                                echo '<p><span class="dashicons dashicons-warning"></span>'.__('The Social Networks feature is disabled. Still seing informations from the FB Preview? You probably have social tags added by your theme or a plugin.','wp-seopress').'</p>';
+                                echo '<p class="notice notice-error" style="margin: 0 0 1rem 0">'.__('The Social Networks feature is disabled. Still seing informations from the FB Preview? You probably have social tags added by your theme or a plugin.','wp-seopress').'</p>';
                             }
                             echo '<div class="facebook-snippet-box">
                                 <div class="snippet-fb-img-alert alert1" style="display:none"><p class="notice notice-error">'.__('File type not supported by Facebook. Please choose another image.', 'wp-seopress').'</p></div>
                                 <div class="snippet-fb-img-alert alert2" style="display:none"><p class="notice notice-error">'.__('Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image.', 'wp-seopress').'</p></div>
                                 <div class="snippet-fb-img-alert alert3" style="display:none"><p class="notice notice-error">'.__('File error. Please choose another image.', 'wp-seopress').'</p></div>
                                 <div class="snippet-fb-img-alert alert4" style="display:none"><p class="notice notice-info">'.__('Your image ratio is: ', 'wp-seopress').'<span></span>. '.__('The closer to 1.91 the better.','wp-seopress').'</p></div>
+                                <div class="snippet-fb-img-alert alert5" style="display:none"><p class="notice notice-error">'.__('File URL is not valid.', 'wp-seopress').'</p></div>
                                 <div class="snippet-fb-img"><img src="" width="524" height="274" alt="" aria-label=""/></div>
                                 <div class="snippet-fb-img-custom" style="display:none"><img src="" width="524" height="274" alt="" aria-label=""/></div>
                                 <div class="snippet-fb-img-default" style="display:none"><img src="" width="524" height="274" alt="" aria-label=""/></div>
@@ -398,6 +399,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                                 <div class="snippet-twitter-img-alert alert2" style="display:none"><p class="notice notice-error">'.__('Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress').'</p></div>
                                 <div class="snippet-twitter-img-alert alert3" style="display:none"><p class="notice notice-error">'.__('File error. Please choose another image.', 'wp-seopress').'</p></div>
                                 <div class="snippet-twitter-img-alert alert4" style="display:none"><p class="notice notice-info">'.__('Your image ratio is: ', 'wp-seopress').'<span></span>. '.__('The closer to 1 the better (with large card, 2 is better).','wp-seopress').'</p></div>
+                                <div class="snippet-twitter-img-alert alert5" style="display:none"><p class="notice notice-error">'.__('File URL is not valid.', 'wp-seopress').'</p></div>
                                 <div class="snippet-twitter-img"><img src="" width="524" height="274" alt="" aria-label=""/></div>
                                 <div class="snippet-twitter-img-custom" style="display:none"><img src="" width="600" height="314" alt="" aria-label=""/></div>
                                 <div class="snippet-twitter-img-default" style="display:none"><img src="" width="600" height="314" alt="" aria-label=""/></div>
@@ -456,7 +458,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         <option ' . selected( 'with_ignored_param', $seopress_redirections_param, false ) . ' value="with_ignored_param">'. __( 'Exclude all parameters and pass them to the redirection', 'wp-seopress' ) .'</option>
                     </select></p>';
                 }
-                echo '<p>';                
+                echo '<p>';
                     if ($seopress_redirections_enabled =='yes') {
                         $status_code = array('410','451');
                         if ($seopress_redirections_value !='' || in_array($seopress_redirections_type, $status_code)) {
@@ -505,7 +507,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     }
                 }
             }
-            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('xml-sitemap') =='1') {
+            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('xml-sitemap') =='1' && seopress_xml_sitemap_video_enable_option() =='1') {
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                     if ("seopress_404" != $typenow) {
 
