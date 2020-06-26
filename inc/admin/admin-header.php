@@ -64,7 +64,7 @@ function seopress_admin_header() { ?>
                                 if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) { ?>
                                     <li>
                                         <a href="<?php echo admin_url( 'admin.php?page=seopress-insights' ); ?>">
-                                            <span class="dashicons dashicons-chart-bar"></span>
+                                            <span class="dashicons dashicons-chart-line"></span>
                                             <?php _e( 'Insights', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
@@ -113,7 +113,7 @@ function seopress_admin_header() { ?>
                                             <?php _e( 'Google Page Speed', 'wp-seopress' ); ?>
                                         </a>
                                     </li>
-                                    <?php if (!is_multisite()) { ?>
+                                    <?php if (!is_multisite() || (is_multisite() && defined('SUBDOMAIN_INSTALL') && constant('SUBDOMAIN_INSTALL') === true)) { ?>//subdomains or single site
                                         <li>
                                             <a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_robots' ); ?>">
                                                 <span class="dashicons dashicons-media-text"></span>

@@ -46,6 +46,9 @@
     cursor: help;
     vertical-align: bottom;
     text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .sp-tooltip .dashicons {
@@ -65,6 +68,7 @@
     border: 1px solid #e2e4e7;
     background: #fff;
     word-break: break-word;
+    text-transform: none;
 }
 
 .sp-tooltip .sp-tooltiptext::before {
@@ -91,7 +95,9 @@
     left: 30px;
 }
 
-.sp-tooltip:hover .sp-tooltiptext {
+.sp-tooltip:hover .sp-tooltiptext,
+.sp-tooltip:focus .sp-tooltiptext,
+.sp-tooltip:active .sp-tooltiptext {
     visibility: visible;
 }
 
@@ -114,7 +120,7 @@
     font-family: Menlo, Monaco, Andale Mono, Courier New, monospace;
     display: block;
     word-break: break-all;
-    color: #42b72a;
+    color: #1a7a06;
     font-size: 11px;
 }
 
@@ -1556,6 +1562,7 @@ body.seopress-styles {
 #seopress-notice a {
     position: relative;
     text-decoration: none;
+    margin: 0 0 0 0.3rem;
 }
 
 #seopress-notice a .tooltip {
@@ -2008,9 +2015,13 @@ body.seopress-styles {
     top: 1rem;
 }
 
-#seopress-content .seopress-page-list .seopress-feature .seopress-doc:hover,.seopress-option #seopress-tabs .seopress-doc:hover {
+#seopress-content .seopress-page-list .seopress-feature .seopress-doc:hover,.seopress-option #seopress-tabs .seopress-doc:hover,
+#seopress-content .seopress-page-list .seopress-feature .seopress-doc:active,.seopress-option #seopress-tabs .seopress-doc:active,
+#seopress-content .seopress-page-list .seopress-feature .seopress-doc:focus,.seopress-option #seopress-tabs .seopress-doc:focus {
     color: #747474;
     background: 0 0;
+    box-shadow: none;
+    border: none;
 }
 
 #seopress-content .seopress-page-list .seopress-feature .seopress-doc:hover .dashicons {
@@ -2343,6 +2354,19 @@ body.seopress-styles {
     padding: 2px 4px;
     border-radius: 4px;
     font-weight: bold;
+}
+
+#seopress_add_to_insights {
+	margin-left: 1rem;
+}
+
+#seopress_add_to_insights_status {
+    display: inline-block;
+    font-weight: bold;
+    margin: 0 0 0 1rem;
+    vertical-align: middle;
+    padding: 0.3rem;
+    font-style: italic;
 }
 
 #seopress-content input.toggle+label,.seopress-option input.toggle+label, #seopress_cpt #tabs-1 input.toggle+label {

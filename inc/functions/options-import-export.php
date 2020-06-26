@@ -321,6 +321,77 @@ function seopress_export_redirections_settings() {
 }
 add_action( 'admin_init', 'seopress_export_redirections_settings' );
 
+//Export Redirections to txt file for .htaccess
+function seopress_export_redirections_htaccess_settings() {
+	if( empty( $_POST['seopress_action'] ) || 'export_redirections_htaccess' != $_POST['seopress_action'] ) {
+		return;
+	}
+	if( ! wp_verify_nonce( $_POST['seopress_export_redirections_htaccess_nonce'], 'seopress_export_redirections_htaccess_nonce' ) ) {
+		return;
+	}
+	if( ! current_user_can( seopress_capability( 'manage_options', 'export_settings' ) ) ) {
+		return;
+	}
+
+	//Init
+	$redirects_html = '';
+
+	$args = array(
+		'post_type' => 'seopress_404',
+		'posts_per_page' => '-1',
+		'meta_query' => array(
+			array(
+				'key'     => '_seopress_redirections_type',
+				'value'   => array('301','302','307','410','451'),
+				'compare' => 'IN',
+			),
+			array(
+				'key'     => '_seopress_redirections_enabled',
+				'value'   => 'yes',
+			),
+		),
+	);
+	$seopress_redirects_query = new WP_Query( $args );
+
+	if ( $seopress_redirects_query->have_posts() ) {
+		while ( $seopress_redirects_query->have_posts() ) {
+			$seopress_redirects_query->the_post();
+
+			switch( get_post_meta(get_the_ID(),'_seopress_redirections_type',true) ) {
+				case '301' :
+					$type = 'redirect 301 ';
+					break;
+				case '302' :
+					$type = 'redirect 302 ';
+					break;
+				case '307' :
+					$type = 'redirect 307 ';
+					break;
+				case '410' :
+					$type = 'redirect 410 ';
+					break;
+				case '451' :
+					$type = 'redirect 451 ';
+					break;
+			}
+			
+			$redirects_html .= $type . ' /' . untrailingslashit( urldecode( urlencode( esc_attr( wp_filter_nohtml_kses( get_the_title() ) ) ) ) ) . ' ';
+			$redirects_html .= urldecode( urlencode( esc_attr( wp_filter_nohtml_kses( get_post_meta( get_the_ID(),'_seopress_redirections_value',true ) ) ) ) );
+			$redirects_html .= "\n";
+		}
+		wp_reset_postdata();
+	}
+
+	ignore_user_abort( true );
+	echo $redirects_html;
+	nocache_headers();
+	header( 'Content-Type: text/plain; charset=utf-8' );
+	header( 'Content-Disposition: attachment; filename=seopress-redirections-htaccess-export-' . date( 'm-d-Y' ) . '.txt' );
+	header( "Expires: 0" );
+	exit;
+}
+add_action( 'admin_init', 'seopress_export_redirections_htaccess_settings' );
+
 //Import Redirections from Redirections plugin JSON file
 function seopress_import_redirections_plugin_settings() {
 	if( empty( $_POST['seopress_action'] ) || 'import_redirections_plugin_settings' != $_POST['seopress_action'] ) {

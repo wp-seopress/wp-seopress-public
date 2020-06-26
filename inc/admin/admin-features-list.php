@@ -86,7 +86,7 @@
         ];
         if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
             $features['insights'] = [
-                'icon'  => 'dashicons-chart-bar',
+                'icon'  => 'dashicons-chart-line',
                 'title' => __('Insights','wp-seopress'),
                 'desc'  => __('Track your keyword positions and backlinks directly in your WordPress.', 'wp-seopress'),
                 'btn_secondary' => [
@@ -199,7 +199,7 @@
                 'filter' => 'seopress_remove_feature_page_speed',
                 'toggle' => false
             ];
-            if (!is_multisite()) {
+            if (!is_multisite() || (is_multisite() && defined('SUBDOMAIN_INSTALL') && constant('SUBDOMAIN_INSTALL') === true)) {//subdomains or single site
                 $features['robots'] = [
                     'icon'  => 'dashicons-media-text',
                     'title' => __('robots.txt','wp-seopress'),
@@ -231,7 +231,7 @@
                     'en'        => 'https://www.seopress.org/support/guides/enable-google-news-xml-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
                     'fr'        => 'https://www.seopress.org/fr/support/guides/activer-plan-de-site-xml-google-news/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
                     'title'     => __('Read our guide','wp-seopress'),
-                    'aria'      => __('Guide to edit your robots.txt file - new window','wp-seopress'),
+                    'aria'      => __('Guide to create your xml news sitemap - new window','wp-seopress'),
                     'external'  => true
                 ],
                 'filter' => 'seopress_remove_feature_news'

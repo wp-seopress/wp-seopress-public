@@ -551,6 +551,7 @@ class seopress_options
 				$plugin_settings_tabs = [
 					'tab_seopress_google_analytics_enable'              => __( "General", "wp-seopress" ), 
 					'tab_seopress_google_analytics_features'            => __( "Tracking", "wp-seopress" ),
+					'tab_seopress_google_analytics_ecommerce'           => __( "Ecommerce", "wp-seopress" ),
 					'tab_seopress_google_analytics_events'              => __( "Events", "wp-seopress" ),
 					'tab_seopress_google_analytics_custom_dimensions'   => __( "Custom Dimensions", "wp-seopress" ),
 					'tab_seopress_google_analytics_dashboard'           => __( "Stats in Dashboard", "wp-seopress" ),
@@ -579,6 +580,7 @@ class seopress_options
 			<div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_custom_dimensions') { echo 'active'; } ?>" id="tab_seopress_google_analytics_custom_dimensions"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-custom-dimensions' ); ?></div>
 			<?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
 				<div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_dashboard') { echo 'active'; } ?>" id="tab_seopress_google_analytics_dashboard"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-dashboard' ); ?></div>
+				<div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_ecommerce') { echo 'active'; } ?>" id="tab_seopress_google_analytics_ecommerce"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-ecommerce' ); ?></div>
 			<?php } ?>
 			<div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_gdpr') { echo 'active'; } ?>" id="tab_seopress_google_analytics_gdpr"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-gdpr' ); ?></div>
 			<div class="seopress-tab <?php if ($current_tab == 'tab_seopress_google_analytics_matomo') { echo 'active'; } ?>" id="tab_seopress_google_analytics_matomo"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-matomo' ); ?></div>
@@ -944,7 +946,7 @@ class seopress_options
 										<ul>
 											<li><?php _e( 'URL to match (without your domain name)', 'wp-seopress'); ?></li>
 											<li><?php _e( 'URL to redirect in absolute,','wp-seopress'); ?></li>
-											<li><?php _e( 'type of redirection (301, 302 or 307),','wp-seopress'); ?></li>
+											<li><?php _e( 'type of redirection (301, 302 or 307, 410, 451),','wp-seopress'); ?></li>
 											<li><?php _e( 'Yes to enable the redirect (leave it empty to disable the redirect)','wp-seopress'); ?></li>
 											<li><?php _e( 'the query parameter without the quotes ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection),', 'wp-seopress' ); ?>
 											<li><?php _e( 'and, the last parameter, the counter (optional).','wp-seopress'); ?></li>
@@ -1036,12 +1038,28 @@ class seopress_options
 									</form>
 								</div><!-- .inside -->
 							</div><!-- .postbox -->
+							<div id="section-export-redirects-htaccess" class="postbox section-tool">
+								<div class="inside">
+									<h3><span><?php _e( 'Export Redirections for an .htaccess file', 'wp-seopress' ); ?></span></h3>
+									<p><?php _e( 'Export all redirects from this site to a txt file. Then copy and paste the formatted URLs into your .htaccess file.', 'wp-seopress' ); ?></p>
+									<p><?php _e( 'Only active redirections will be exported.', 'wp-seopress' ); ?></p>
+									<p><?php _e( 'Save your .htaccess file before editing it. <strong>Safety first!</strong>', 'wp-seopress' ); ?></p>
+									<p><?php _e( 'Do not forget to test every redirects!', 'wp-seopress' ); ?></p>
+									<form method="post">
+										<p><input type="hidden" name="seopress_action" value="export_redirections_htaccess" /></p>
+										<p>
+											<?php wp_nonce_field( 'seopress_export_redirections_htaccess_nonce', 'seopress_export_redirections_htaccess_nonce' ); ?>
+											<?php submit_button( __( 'Export', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+										</p>
+									</form>
+								</div><!-- .inside -->
+							</div><!-- .postbox -->
 							<div id="section-clean-404" class="postbox section-tool">
 								<div class="inside">
 									<h3><span><?php _e( 'Clean your 404', 'wp-seopress' ); ?></span></h3>
 									<p><?php _e( 'Delete all your 404 errors. We don‘t delete any redirects.', 'wp-seopress' ); ?></p>
 									<p><?php echo sprintf(__( 'Make sure you have enabled 404 cleaning from SEO, PRO, <a href="%s">404/301</a> tab to be able to delete all your 404 errors.', 'wp-seopress' ), admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404' )); ?></p>
-									<p><?php 
+									<p class="seopress-help"><?php 
 									if (function_exists('seopress_get_locale')) {
 										if (seopress_get_locale() =='fr') {
 											$seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/fr/support/guides/nettoyez-vos-erreurs-404-a-laide-dune-requete-mysql/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
@@ -1436,7 +1454,7 @@ class seopress_options
 		   __("noarchive","wp-seopress"), // Title
 			array( $this, 'seopress_titles_noarchive_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
-			'seopress_setting_section_titles_advanced' // Section                  
+			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		add_settings_field(
@@ -1444,7 +1462,7 @@ class seopress_options
 		   __("nosnippet","wp-seopress"), // Title
 			array( $this, 'seopress_titles_nosnippet_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
-			'seopress_setting_section_titles_advanced' // Section                  
+			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		add_settings_field(
@@ -1452,7 +1470,7 @@ class seopress_options
 		   __("nositelinkssearchbox","wp-seopress"), // Title
 			array( $this, 'seopress_titles_nositelinkssearchbox_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
-			'seopress_setting_section_titles_advanced' // Section                  
+			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		add_settings_field(
@@ -1460,7 +1478,15 @@ class seopress_options
 		   __("Indicate paginated content to Google","wp-seopress"), // Title
 			array( $this, 'seopress_titles_paged_rel_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
-			'seopress_setting_section_titles_advanced' // Section                  
+			'seopress_setting_section_titles_advanced' // Section
+		);
+
+		add_settings_field(
+			'seopress_titles_paged_noindex', // ID
+		   __("noindex on paged archives","wp-seopress"), // Title
+			array( $this, 'seopress_titles_paged_noindex_callback' ), // Callback
+			'seopress-settings-admin-titles-advanced', // Page
+			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		//XML Sitemap SECTION======================================================================
@@ -1865,7 +1891,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_roles', // ID
-		   __("Exclude user roles from tracking","wp-seopress"), // Title
+		   __("Exclude user roles from tracking (Google Analytics and Matomo)","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_roles_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-enable', // Page
 			'seopress_setting_section_google_analytics_enable' // Section
@@ -2834,7 +2860,7 @@ class seopress_options
 			}
 		}
 
-		echo '<p><span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['blank'].'" target="_blank">'.__('Blank sitemap?', 'wp-seopress').'</a> - ';
+		echo '<p class="seopress-help"><span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['blank'].'" target="_blank">'.__('Blank sitemap?', 'wp-seopress').'</a> - ';
 		echo '<span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['404'].'" target="_blank">'.__('404 error?', 'wp-seopress').'</a></p><br>';
 
 		echo '<a href="'.get_option( 'home' ).'/sitemaps.xml" target="_blank" class="button"><span class="dashicons dashicons-visibility"></span>'.__('View your sitemap','wp-seopress').'</a>';
@@ -2847,6 +2873,7 @@ class seopress_options
 
 	public function print_section_info_html_sitemap() {
 		print __('<p>Create an HTML Sitemap for your visitors and boost your SEO.</p>', 'wp-seopress');
+		print __('<p>Limited to 1,000 posts per post type. You can change the order and sorting criteria below.</p>', 'wp-seopress');
 
 		if (function_exists('seopress_get_locale')) {
 			if (seopress_get_locale() =='fr') {
@@ -2869,7 +2896,7 @@ class seopress_options
 
 	public function print_section_info_social_knowledge() {
 		print __('<p>Configure Google Knowledge Graph.</p>', 'wp-seopress');
-		echo '<p><span class="dashicons dashicons-external"></span><a href="https://developers.google.com/search/docs/guides/enhance-site" target="_blank">'.__('Learn more on Google official website.','wp-seopress').'</a></p>';
+		echo '<p class="seopress-help"><span class="dashicons dashicons-external"></span><a href="https://developers.google.com/search/docs/guides/enhance-site" target="_blank">'.__('Learn more on Google official website.','wp-seopress').'</a></p>';
 	}
 
 	public function print_section_info_social_accounts() {
@@ -2910,6 +2937,7 @@ class seopress_options
 
 	public function print_section_info_google_analytics_gdpr() {
 		print __('<p>Manage user consent for GDPR and customize your cookie bar easily.</p>', 'wp-seopress');
+		echo '<p>'. __('Works with <strong>Google Analytics</strong> and <strong>Matomo</strong>.', 'wp-seopress').'</p>';
 	}
 
 	public function print_section_info_google_analytics_features() {
@@ -3821,9 +3849,9 @@ class seopress_options
 
 	public function seopress_titles_paged_rel_callback()
 	{
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_paged_rel']);      
+		$check = isset($options['seopress_titles_paged_rel']);
 		
 		echo '<input id="seopress_titles_paged_rel" name="seopress_titles_option_name[seopress_titles_paged_rel]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3831,18 +3859,37 @@ class seopress_options
 		
 		echo '<label for="seopress_titles_paged_rel">'. __( 'Add rel next/prev link in head of paginated archive pages', 'wp-seopress' ) .'</label>';
 		
-		echo '<p class="description"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/webmasters/answer/1663744?hl=en" target="_blank">'.__('Learn more on Google website','wp-seopress').'</p>';
+		echo '<p class="description seopress-help"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/webmasters/answer/1663744?hl=en" target="_blank">'.__('Learn more on Google website','wp-seopress').'</p>';
 		
 		if (isset($this->options['seopress_titles_paged_rel'])) {
 			esc_attr( $this->options['seopress_titles_paged_rel']);
 		}
 	}
 
+	public function seopress_titles_paged_noindex_callback()
+	{
+		$options = get_option( 'seopress_titles_option_name' );
+		
+		$check = isset($options['seopress_titles_paged_noindex']);
+		
+		echo '<input id="seopress_titles_paged_noindex" name="seopress_titles_option_name[seopress_titles_paged_noindex]" type="checkbox"';
+		if ('1' == $check) echo 'checked="yes"'; 
+		echo ' value="1"/>';
+		
+		echo '<label for="seopress_titles_paged_noindex">'. __( 'Add a "noindex" meta robots for all paginated archive pages', 'wp-seopress' ) .'</label>';
+
+		echo '<p class="description">'.__('eg: https://example.com/category/my-category/page/2/','wp-seopress').'</p>';
+				
+		if (isset($this->options['seopress_titles_paged_noindex'])) {
+			esc_attr( $this->options['seopress_titles_paged_noindex']);
+		}
+	}
+
 	public function seopress_xml_sitemap_general_enable_callback()
 	{
-		$options = get_option( 'seopress_xml_sitemap_option_name' );  
+		$options = get_option( 'seopress_xml_sitemap_option_name' );
 		
-		$check = isset($options['seopress_xml_sitemap_general_enable']);      
+		$check = isset($options['seopress_xml_sitemap_general_enable']);
 		
 		echo '<input id="seopress_xml_sitemap_general_enable" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_general_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4495,7 +4542,7 @@ class seopress_options
 
 		echo '<pre>&lt;meta property="fb:pages" content="page ID"/&gt;</pre>';
 
-		echo '<br><span class="dashicons dashicons-external"></span><a href="https://www.facebook.com/help/1503421039731588" target="_blank">'.__('How do I find my Facebook Page ID?','wp-seopress').'</a>';
+		echo '<br><span class="seopress-help dashicons dashicons-external"></span><a class="seopress-help" href="https://www.facebook.com/help/1503421039731588" target="_blank">'.__('How do I find my Facebook Page ID?','wp-seopress').'</a>';
 	}
 
 	public function seopress_social_facebook_admin_id_callback()
@@ -4517,11 +4564,11 @@ class seopress_options
 		printf('<input type="text" name="seopress_social_option_name[seopress_social_facebook_app_id]" value="%s"/>',
 		esc_html( $check ));
 
-		echo '<p class="description">'.__('The Facebook app ID of the site\'s app. In order to use Facebook Insights you must add the app ID to your page. Insights lets you view analytics for traffic to your site from Facebook. Find the app ID in your App Dashboard. <a href="https://developers.facebook.com/apps/redirect/dashboard" target="_blank">More info here</a> <span class="dashicons dashicons-external"></span>', 'wp-seopress').'</p>';
+		echo '<p class="description">'.__('The Facebook app ID of the site\'s app. In order to use Facebook Insights you must add the app ID to your page. Insights lets you view analytics for traffic to your site from Facebook. Find the app ID in your App Dashboard. <a class="seopress-help" href="https://developers.facebook.com/apps/redirect/dashboard" target="_blank">More info here</a> <span class="seopress-help dashicons dashicons-external"></span>', 'wp-seopress').'</p>';
 		
 		echo '<pre>&lt;meta property="fb:app_id" content="app ID"/&gt;</pre>';
 
-		echo '<br><span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/docs/apps/register" target="_blank">'.__('How to create a Facebook App ID','wp-seopress').'</a>';
+		echo '<br><span class="seopress-help dashicons dashicons-external"></span><a class="seopress-help" href="https://developers.facebook.com/docs/apps/register" target="_blank">'.__('How to create a Facebook App ID','wp-seopress').'</a>';
 	}
 
 	public function seopress_social_twitter_card_callback()
@@ -4623,7 +4670,7 @@ class seopress_options
 		esc_html( $check )
 		);
 
-		echo '<p class="description"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/analytics/answer/1032385?hl=en" target="_blank">'.__('Find your tracking ID','wp-seopress').'</a></p>';
+		echo '<p class="seopress-help description"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/analytics/answer/1032385?hl=en" target="_blank">'.__('Find your tracking ID','wp-seopress').'</a></p>';
 		
 	}
 
@@ -4883,7 +4930,7 @@ class seopress_options
 		'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_optimize]" placeholder="'.esc_html__('Enter your Google Optimize container ID','wp-seopress').'" value="%s" aria-label="'.__('GTM-XXXXXXX','wp-seopress').'"/>',
 		esc_html($check));
 
-		echo '<p class="description">'.__('Google Optimize offers A/B testing, website testing & personalization tools.','wp-seopress').' <a href="https://marketingplatform.google.com/about/optimize/" target="_blank">'.__('Learn more','wp-seopress').'</a><span class="dashicons dashicons-external"></span></p>';
+		echo '<p class="description">'.__('Google Optimize offers A/B testing, website testing & personalization tools.','wp-seopress').' <a class="seopress-help" href="https://marketingplatform.google.com/about/optimize/" target="_blank">'.__('Learn more','wp-seopress').'</a><span class="seopress-help dashicons dashicons-external"></span></p>';
 	}
 
 	public function seopress_google_analytics_ads_callback()
@@ -4925,7 +4972,7 @@ class seopress_options
 			}
 		}
 
-		echo '<a href="'.$seopress_docs_link['support']['analytics']['gtm'].'" target="_blank">'. __('Learn more','wp-seopress').'</span></a><span class="dashicons dashicons-external"></span></p>';
+		echo '<a class="seopress-help" href="'.$seopress_docs_link['support']['analytics']['gtm'].'" target="_blank">'. __('Learn more','wp-seopress').'</span></a><span class="seopress-help dashicons dashicons-external"></span></p>';
 	}
 	
 	public function seopress_google_analytics_other_tracking_footer_callback()
@@ -4952,8 +4999,8 @@ class seopress_options
 		echo '<label for="seopress_google_analytics_remarketing">'. __( 'Enable remarketing, demographics, and interests reporting', 'wp-seopress' ) .'</label>';
 
 		echo '<p class="description">'. __('A remarketing audience is a list of cookies or mobile-advertising IDs that represents a group of users you want to re-engage because of their likelihood to convert.','wp-seopress').'
-			<a href="https://support.google.com/analytics/answer/2611268?hl=en" target="_blank">'.__('Learn more','wp-seopress').'</a>
-			<span class="dashicons dashicons-external"></span>
+			<a class="seopress-help" href="https://support.google.com/analytics/answer/2611268?hl=en" target="_blank">'.__('Learn more','wp-seopress').'</a>
+			<span class="seopress-help dashicons dashicons-external"></span>
 			</p>';
 
 		if (isset($this->options['seopress_google_analytics_remarketing'])) {
@@ -4974,8 +5021,8 @@ class seopress_options
 		echo '<label for="seopress_google_analytics_ip_anonymization">'. __( 'Enable IP Anonymization', 'wp-seopress' ) .'</label>';
 
 		echo '<p class="description">'. __('When a customer of Analytics requests IP address anonymization, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network.','wp-seopress').'
-			<a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization" target="_blank">'.__('Learn more','wp-seopress').'</a>
-			<span class="dashicons dashicons-external"></span>
+			<a class="seopress-help" href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization" target="_blank">'.__('Learn more','wp-seopress').'</a>
+			<span class="seopress-help dashicons dashicons-external"></span>
 			</p>';
 
 		if (isset($this->options['seopress_google_analytics_ip_anonymization'])) {
@@ -4996,8 +5043,8 @@ class seopress_options
 		echo '<label for="seopress_google_analytics_link_attribution">'. __( 'Enhanced Link Attribution', 'wp-seopress' ) .'</label>';
 
 		echo '<p class="description">'. __('Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs.','wp-seopress').'
-			<a href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-link-attribution" target="_blank">'.__('Learn more','wp-seopress').'</a>
-			<span class="dashicons dashicons-external"></span>
+			<a class="seopress-help" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-link-attribution" target="_blank">'.__('Learn more','wp-seopress').'</a>
+			<span class="seopress-help dashicons dashicons-external"></span>
 			</p>';
 
 		if (isset($this->options['seopress_google_analytics_link_attribution'])) {
@@ -5018,8 +5065,8 @@ class seopress_options
 		echo '<label for="seopress_google_analytics_cross_enable">'. __( 'Enable cross-domain tracking', 'wp-seopress' ) .'</label>';
 
 		echo '<p class="description">'. __('Cross domain tracking makes it possible for Analytics to see sessions on two related sites (such as an ecommerce site and a separate shopping cart site) as a single session. This is sometimes called site linking.','wp-seopress').'
-			<a href="https://developers.google.com/analytics/devguides/collection/gtagjs/cross-domain" target="_blank">'.__('Learn more','wp-seopress').'</a>
-			<span class="dashicons dashicons-external"></span>
+			<a class="seopress-help" href="https://developers.google.com/analytics/devguides/collection/gtagjs/cross-domain" target="_blank">'.__('Learn more','wp-seopress').'</a>
+			<span class="seopress-help dashicons dashicons-external"></span>
 			</p>';
 
 		if (isset($this->options['seopress_google_analytics_cross_enable'])) {
@@ -5506,7 +5553,7 @@ class seopress_options
 		echo '<label for="seopress_advanced_advanced_image_auto_alt_editor">'. __( 'When sending an image file, automatically set the alternative text based on the filename', 'wp-seopress' ) .'</label>';
 
 		if ( !is_plugin_active( 'imageseo/imageseo.php' )) {
-			echo '<p class="description"><a href="https://imageseo.io?_from=seopress" target="_blank">'.__('We recommend Image SEO plugin to optimize your image ALT texts and names for Search Engines using AI and Machine Learning. Starting from just €4.99.','wp-seopress-pro').'</a><span class="dashicons dashicons-external"></span></p>';
+			echo '<p class="seopress-help description"><a href="https://www.seopress.org/go/image-seo" target="_blank">'.__('We recommend Image SEO plugin to optimize your image ALT texts and names for Search Engines using AI and Machine Learning. Starting from just €4.99.','wp-seopress-pro').'</a><span class="dashicons dashicons-external"></span></p>';
 		}
 		
 		if (isset($this->options['seopress_advanced_advanced_image_auto_alt_editor'])) {

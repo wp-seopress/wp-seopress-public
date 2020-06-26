@@ -123,6 +123,11 @@ function seopress_do_real_preview() {
 						$seopress_get_the_content = $seopress_get_the_content.get_post_meta($seopress_get_the_id, 'mfn-page-items-seo', true); 
 					}
 
+					//Add WC product excerpt
+					if ($seopress_get_post_type =='product') {
+						$seopress_get_the_content =  $seopress_get_the_content.get_the_excerpt($seopress_get_the_id);
+					}
+
 					$seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
 
 					//Get Target Keywords
@@ -320,7 +325,6 @@ function seopress_do_real_preview() {
 						if (!is_plugin_active('oxygen/functions.php') && !function_exists('ct_template_output')) { //disable for Oxygen
 							foreach ($seopress_analysis_target_kw as $kw) {
 								if (preg_match_all('#\b('.$kw.')\b#iu', stripslashes_deep(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content))), $m)) {
-									
 									$data['kws_density']['matches'][$kw][] = $m[0];
 								}
 							}
@@ -329,6 +333,12 @@ function seopress_do_real_preview() {
 						//Keywords in permalink
 						$post = get_post($seopress_get_the_id);
 						$kw_slug = urldecode($post->post_name);
+
+						if (is_plugin_active('permalink-manager-pro/permalink-manager.php')) {
+							global $permalink_manager_uris;
+							$kw_slug = urldecode($permalink_manager_uris[$seopress_get_the_id]);
+						}
+
 						$kw_slug = str_replace("-", " ", $kw_slug);
 
 						if (isset($kw_slug)) {
@@ -349,20 +359,23 @@ function seopress_do_real_preview() {
 						$data_img = array();
 						foreach ($imgs as $img) {
 							if ($img->hasAttribute('src')) {
-								if ($img->hasAttribute('width') || $img->hasAttribute('height')) {
-									if ($img->getAttribute('width') > 1 || $img->getAttribute('height') > 1) {
-										if ($img->getAttribute('alt') ==='' || !$img->hasAttribute('alt')) {//if alt is empty or doesn't exist
-											$data_img[] .= $img->getAttribute('src');
+								//Exclude avatars from analysis
+								if (!preg_match_all('#\b(avatar)\b#iu', $img->getAttribute('class'), $m)) {
+									if ($img->hasAttribute('width') || $img->hasAttribute('height')) {
+										if ($img->getAttribute('width') > 1 || $img->getAttribute('height') > 1) {
+											if ($img->getAttribute('alt') ==='' || !$img->hasAttribute('alt')) {//if alt is empty or doesn't exist
+												$data_img[] .= $img->getAttribute('src');
+											}
 										}
+									} elseif ($img->getAttribute('alt') ==='' || !$img->hasAttribute('alt')) {//if alt is empty or doesn't exist
+										$img_src = download_url($img->getAttribute('src'));
+										if (is_wp_error($img_src) === false) {
+											if (filesize($img_src) > 100) {//Ignore files under 100 bytes
+												$data_img[] .= $img->getAttribute('src');
+											}
+											@unlink($img_src);
+										}  
 									}
-								} elseif ($img->getAttribute('alt') ==='' || !$img->hasAttribute('alt')) {//if alt is empty or doesn't exist
-									$img_src = download_url($img->getAttribute('src'));
-									if (is_wp_error($img_src) === false) {
-										if (filesize($img_src) > 100) {//Ignore files under 100 bytes
-											$data_img[] .= $img->getAttribute('src');
-										}
-										@unlink($img_src);
-									}  
 								}
 							}
 							$data['img']['images'] = $data_img;
@@ -389,14 +402,16 @@ function seopress_do_real_preview() {
 					$nofollow_links = $xpath->query("//a[contains(@rel, 'nofollow')]");
 					if (!empty($nofollow_links)) {
 						foreach ($nofollow_links as $key=>$link) {
-							$data['nofollow_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
+							if (!preg_match_all('#\b(cancel-comment-reply-link)\b#iu', $link->getAttribute('id'), $m) && !preg_match_all('#\b(comment-reply-link)\b#iu', $link->getAttribute('class'), $m)) {
+								$data['nofollow_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
+							}
 						}
 					}
 				}
 
 				//outbound links
 				$site_url  = wp_parse_url(get_home_url(), PHP_URL_HOST);
-				$outbound_links = $xpath->query("//a[not(contains(@href, '".$site_url."'))]");
+				$outbound_links = $xpath->query("//a[not(contains(@href, '".$site_url."')]");
 				if (!empty($outbound_links)) {
 					foreach ($outbound_links as $key=>$link) {
 						if (!empty(wp_parse_url($link->getAttribute('href'), PHP_URL_HOST))) {

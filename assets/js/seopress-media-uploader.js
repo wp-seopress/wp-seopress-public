@@ -46,8 +46,8 @@ jQuery(document).ready(function($){
 			mediaUploader.on('select', function() {
 				attachment = mediaUploader.state().get('selection').first().toJSON();
 				$(item + '_meta').val(attachment.url);
-				if(item == '#seopress_social_fb_img') { sp_social_img('fb'); }
-				if(item == '#seopress_social_twitter_img') { sp_social_img('twitter'); }
+				if(item == '#seopress_social_fb_img' && typeof sp_social_img !="undefined") { sp_social_img('fb'); }
+				if(item == '#seopress_social_twitter_img' && typeof sp_social_img !="undefined") { sp_social_img('twitter'); }
 			});
 			
 			// Open the uploader dialog

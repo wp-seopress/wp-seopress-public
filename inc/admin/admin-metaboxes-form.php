@@ -71,7 +71,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                     }
                 }
             }
-            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('xml-sitemap') =='1' && seopress_xml_sitemap_video_enable_option() =='1') {
+            if (function_exists('seopress_get_toggle_option') && seopress_get_toggle_option('xml-sitemap') =='1' && function_exists('seopress_xml_sitemap_video_enable_option') && seopress_xml_sitemap_video_enable_option() =='1') {
                 if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' ) {
                     if ("seopress_404" != $typenow) {
                         $seo_tabs['video-tab'] = '<li><a href="#tabs-6"><span class="dashicons dashicons-format-video"></span>'. __( 'Video Sitemap', 'wp-seopress' ) .'</a></li>';
@@ -392,7 +392,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                             if(seopress_get_toggle_option('social')=='1') {
                                 echo '<p>'.__('This is what your post will look like in Twitter. You have to publish your post to get the Twitter Preview.','wp-seopress').'</p>';
                             } else {
-                                echo '<p><span class="dashicons dashicons-warning"></span>'.__('The Social Networks feature is disabled. Still seing informations from the FB Preview? You probably have social tags added by your theme or a plugin.','wp-seopress').'</p>';
+                                echo '<p class="notice notice-error" style="margin: 0 0 1rem 0">'.__('The Social Networks feature is disabled. Still seing informations from the Twitter Preview? You probably have social tags added by your theme or a plugin.','wp-seopress').'</p>';
                             }
                             echo '<div class="twitter-snippet-box">
                                 <div class="snippet-twitter-img-alert alert1" style="display:none"><p class="notice notice-error">'.__('File type not supported by Twitter. Please choose another image.', 'wp-seopress').'</p></div>
@@ -484,8 +484,8 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
                         }
                     }
                     ?>
-                    <span class="dashicons dashicons-external"></span>
-                    <a href="<?php echo $seopress_docs_link['support']['redirection']; ?>" target="_blank" class="seopress-doc"><?php _e('Need help with your redirections? Read our guide.','wp-seopress'); ?></a>
+                    <span class="seopress-help dashicons dashicons-external"></span>
+                    <a href="<?php echo $seopress_docs_link['support']['redirection']; ?>" target="_blank" class="seopress-help seopress-doc"><?php _e('Need help with your redirections? Read our guide.','wp-seopress'); ?></a>
                     <?php echo 
                 '</p>
             </div>';

@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.7
+Version: 3.8.8
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.7' );
+define( 'SEOPRESS_VERSION', '3.8.8' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,11 +305,7 @@ function seopress_admin_body_class( $classes ) {
 		'seopress-import-export' => true, 
 		'seopress-pro-page' => true, 
 		'seopress-bot-batch' => true, 
-		'seopress-license' => true,
-		'seopress-insights' => true,
-		'seopress-insights-rankings' => true,
-		'seopress-insights-backlinks' => true,
-		'seopress-insights-settings' => true
+		'seopress-license' => true
 	];
 	if ( isset( $_pages[ $_GET['page'] ] ) ) {
 		$classes .= " seopress-styles ";
@@ -352,6 +348,13 @@ add_action( 'wp_head', 'seopress_compatibility_woocommerce', 0 );
 function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
 	return $url;
 }
+
+/**
+ * Remove default WP XML sitemaps
+ *
+ * @since 3.8.8
+ */
+remove_action( 'init', 'wp_sitemaps_get_server' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Credits footer
@@ -534,6 +537,26 @@ function seopress_check_ssl() {
 	} else {
 		return 'http://';
 	}
+}
+
+/**
+  * Get IP address
+  *
+  * @author Benjamin Denis
+  * @return (string) $ip
+  **/
+function seopress_get_ip_address(){
+    foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+        if (array_key_exists($key, $_SERVER) === true){
+            foreach (explode(',', $_SERVER[$key]) as $ip){
+                $ip = trim($ip); // just to be safe
+
+                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+                    return $ip;
+                }
+            }
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -877,16 +900,16 @@ function seopress_get_locale() {
  */
 function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
 	$html = 
-	'<span class="sp-tooltip"><span class="dashicons dashicons-editor-help"></span>
-	<span class="sp-tooltiptext">
+	'<button type="button" class="sp-tooltip"><span class="dashicons dashicons-editor-help"></span>
+	<span class="sp-tooltiptext" role="tooltip" tabindex="0">
 		<span class="sp-tooltip-headings">'.$tooltip_title.'</span>
 		<span class="sp-tooltip-desc">'.$tooltip_desc.'</span>
 		<span class="sp-tooltip-code">'.$tooltip_code.'</span>
-	</span></span>';
+	</span></button>';
 
 	return $html;
 }
-
+//aria-describedby
 /**
  * Generate Tooltip (alternative version)
  * @since 3.8.6
@@ -896,11 +919,11 @@ function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
  */
 function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc) {
 	$html = 
-	'<span class="sp-tooltip alt">'.$tooltip_anchor.'
-	<span class="sp-tooltiptext">
+	'<button type="button" class="sp-tooltip alt">'.$tooltip_anchor.'
+	<span class="sp-tooltiptext" role="tooltip" tabindex="0">
 		<span class="sp-tooltip-desc">'.$tooltip_desc.'</span>
 	</span>
-	</span>';
+	</button>';
 
 	return $html;
 }

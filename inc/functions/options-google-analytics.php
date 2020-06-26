@@ -562,6 +562,40 @@ function seopress_google_analytics_cd_logged_in_user_option() {
 	}
 }
 
+// Get option for "Measure purchases"
+function seopress_google_analytics_purchases_option() {
+	$seopress_google_analytics_add_to_cart_option = get_option("seopress_google_analytics_option_name");
+	if ( ! empty ( $seopress_google_analytics_add_to_cart_option ) ) {
+		foreach ($seopress_google_analytics_add_to_cart_option as $key => $seopress_google_analytics_add_to_cart_value)
+			$options[$key] = $seopress_google_analytics_add_to_cart_value;
+			if (isset($seopress_google_analytics_add_to_cart_option['seopress_google_analytics_purchases'])) { 
+			return $seopress_google_analytics_add_to_cart_option['seopress_google_analytics_purchases'];
+			}
+	}
+}
+// Get option for "Add to cart event"
+function seopress_google_analytics_add_to_cart_option() {
+	$seopress_google_analytics_add_to_cart_option = get_option("seopress_google_analytics_option_name");
+	if ( ! empty ( $seopress_google_analytics_add_to_cart_option ) ) {
+		foreach ($seopress_google_analytics_add_to_cart_option as $key => $seopress_google_analytics_add_to_cart_value)
+			$options[$key] = $seopress_google_analytics_add_to_cart_value;
+			if (isset($seopress_google_analytics_add_to_cart_option['seopress_google_analytics_add_to_cart'])) { 
+			return $seopress_google_analytics_add_to_cart_option['seopress_google_analytics_add_to_cart'];
+			}
+	}
+}
+// Get option for "Remove from cart event"
+function seopress_google_analytics_remove_from_cart_option() {
+	$seopress_google_analytics_remove_from_option = get_option("seopress_google_analytics_option_name");
+	if ( ! empty ( $seopress_google_analytics_remove_from_option ) ) {
+		foreach ($seopress_google_analytics_remove_from_option as $key => $seopress_google_analytics_remove_from_value)
+			$options[$key] = $seopress_google_analytics_remove_from_value;
+			if (isset($seopress_google_analytics_remove_from_option['seopress_google_analytics_remove_from_cart'])) { 
+			return $seopress_google_analytics_remove_from_option['seopress_google_analytics_remove_from_cart'];
+			}
+	}
+}
+
 //Build Custom GA
 function seopress_google_analytics_js($echo) {
 	if (seopress_google_analytics_ua_option() !='' && seopress_google_analytics_enable_option() =='1') {
@@ -800,6 +834,9 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 				$seopress_google_analytics_html .= $seopress_google_analytics_click_event['outbound_tracking'];
 			}
 		}
+
+		// Google Enhanced Ecommerce
+		require_once dirname( __FILE__ ) . '/options-google-ecommerce.php';
 		
 		//Anonymize IP
 		if (seopress_google_analytics_ip_anonymization_option() =='1') {
@@ -856,7 +893,12 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 				$seopress_google_analytics_html .= "\n";
 			}
 		}
-		
+
+		// E-commerce
+		if(isset($seopress_google_analytics_click_event['purchase_tracking'])) {
+			$seopress_google_analytics_html .= $seopress_google_analytics_click_event['purchase_tracking'];
+		}
+
 		$seopress_google_analytics_html .= "</script>";
 		$seopress_google_analytics_html .= "\n";
 		
@@ -946,7 +988,7 @@ require_once ( dirname( __FILE__ ) . '/options-matomo.php');
 if (seopress_google_analytics_half_disable_option() =='1' || (((isset($_COOKIE["seopress-user-consent-accept"]) && $_COOKIE["seopress-user-consent-accept"] =='1') && seopress_google_analytics_disable_option() =='1') || (seopress_google_analytics_disable_option() !='1'))) { //User consent cookie OK
 	if (is_user_logged_in()) {
 		global $wp_roles;
-		
+
 		//Get current user role
 		if(isset(wp_get_current_user()->roles[0])) {
 			$seopress_user_role = wp_get_current_user()->roles[0];
@@ -966,6 +1008,11 @@ if (seopress_google_analytics_half_disable_option() =='1' || (((isset($_COOKIE["
 					add_action( 'wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1 );
 					add_action( 'wp_footer', 'seopress_custom_tracking_footer_hook', 1030, 1 );
 
+					//ecommerce
+					if (seopress_google_analytics_purchases_option()=='1' || seopress_google_analytics_add_to_cart_option()=='1' || seopress_google_analytics_remove_from_cart_option()=='1') {
+						add_action( 'wp_enqueue_scripts','seopress_google_analytics_ecommerce_js', 20, 1);
+					}
+
 					//Oxygen Builder
 					add_action( 'ct_before_builder', 'seopress_custom_tracking_body_hook', 1020, 1 );
 				}
@@ -980,6 +1027,11 @@ if (seopress_google_analytics_half_disable_option() =='1' || (((isset($_COOKIE["
 				add_action( 'wp_head', 'seopress_custom_tracking_head_hook', 1010, 1 );
 				add_action( 'wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1 );
 				add_action( 'wp_footer', 'seopress_custom_tracking_footer_hook', 1030, 1 );
+
+				//ecommerce
+				if (seopress_google_analytics_purchases_option()=='1' || seopress_google_analytics_add_to_cart_option()=='1' || seopress_google_analytics_remove_from_cart_option()=='1') {
+					add_action( 'wp_enqueue_scripts','seopress_google_analytics_ecommerce_js', 20, 1);
+				}
 
 				//Oxygen Builder
 				add_action( 'ct_before_builder', 'seopress_custom_tracking_body_hook', 1020, 1 );
@@ -996,6 +1048,11 @@ if (seopress_google_analytics_half_disable_option() =='1' || (((isset($_COOKIE["
 		add_action( 'wp_head', 'seopress_custom_tracking_head_hook', 1010, 1 );
 		add_action( 'wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1 );
 		add_action( 'wp_footer', 'seopress_custom_tracking_footer_hook', 1030, 1 );
+
+		//ecommerce
+		if (seopress_google_analytics_purchases_option()=='1' || seopress_google_analytics_add_to_cart_option()=='1' || seopress_google_analytics_remove_from_cart_option()=='1') {
+			add_action( 'wp_enqueue_scripts','seopress_google_analytics_ecommerce_js', 20, 1);
+		}
 
 		add_action( 'ct_before_builder', 'seopress_custom_tracking_body_hook', 1020, 1 );
 	}

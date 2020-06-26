@@ -15,9 +15,15 @@ echo '<div class="wrap-seopress-analysis">
 				<input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw" placeholder="'.esc_html__('Enter your target keywords','wp-seopress').'" aria-label="'.__('Target keywords','wp-seopress').'" value="'.esc_attr($seopress_analysis_target_kw).'" />
 			</p>';
 			if (empty($seopress_analysis_data)) {
-				echo '<div id="seopress_launch_analysis" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Analyze my content','wp-seopress').'</div>';
+				echo '<button id="seopress_launch_analysis" type="button" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Analyze my content','wp-seopress').'</button>';
 			} else {
-				echo '<div id="seopress_launch_analysis" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Refresh analysis','wp-seopress').'</div>';
+				echo '<button id="seopress_launch_analysis" type="button" class="button" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Refresh analysis','wp-seopress').'</button>';
+			}
+			
+			if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) {
+				echo '<button id="seopress_add_to_insights" type="button" class="button-secondary" data_id="'.get_the_ID().'" data_post_type="'.get_current_screen()->post_type.'">'.__('Track with Insights','wp-seopress').'</button>';
+				echo '<div id="seopress_add_to_insights_status"></div>';
+				echo '<span class="spinner"></span>';
 			}
 
 			echo '<br><p><span class="howto">'.__('To get the most accurate analysis, save your post first.','wp-seopress').'</span></p>';
@@ -779,10 +785,7 @@ $analyzes['outbound_links']['desc'] = $desc;
 									<circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
 									<circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 101.788px;"></circle>
 								</svg>';
-						$tooltip = '<span class="sp-tooltip">
-								<span class="dashicons dashicons-editor-help"></span>
-								<span class="sp-tooltiptext">'.__('<strong>Should be improved:</strong> red or orange dots <br> <strong>Good:</strong> yellow or green dots','wp-seopress').'</span>
-							</span>';
+						$tooltip = seopress_tooltip(__('Content analysis','wp-seopress'), __('<strong>Should be improved:</strong> red or orange dots <br> <strong>Good:</strong> yellow or green dots','wp-seopress'), '');
 
 						if (!empty($impact)) {
 							if (in_array('medium', $impact) || in_array('high', $impact)) {

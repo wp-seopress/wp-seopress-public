@@ -37,7 +37,7 @@ foreach ($seopress_array_filters as $key => $value) {
 }
 
 //Template variables
-if (seopress_titles_sep_option()) {
+if (function_exists('seopress_titles_sep_option') && seopress_titles_sep_option()) {
     $sep = seopress_titles_sep_option();
 } else {
     $sep = '-';
@@ -68,12 +68,12 @@ if (isset($wp_query->max_num_pages)) {
 }
 
 if (is_singular() && isset($post->post_author)){
-    $the_author_meta = get_the_author_meta('display_name', $post->post_author);
+    $the_author_meta = esc_attr(get_the_author_meta('display_name', $post->post_author));
     $author_bio = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description', $post->post_author))))));
 }
 
 if (is_author()) {
-    $the_author_meta = get_the_author_meta('display_name');
+    $the_author_meta = esc_attr(get_the_author_meta('display_name'));
     $author_bio = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description'))))));
 }
 
