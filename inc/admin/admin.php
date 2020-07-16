@@ -251,24 +251,22 @@ class seopress_options
 				'content'   => $seopress_titles_help_tab_content,
 			));
 
-			if (function_exists('seopress_get_locale')) {
-				if (seopress_get_locale() =='fr') {
-					$screen->set_help_sidebar(
-						'<ul>
-							<li><a href="https://www.seopress.org/fr/support/guides/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Browse our guides","wp-seopress").'</a></li>
-							<li><a href="https://www.seopress.org/fr/support/faq/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our FAQ","wp-seopress").'</a></li>
-							<li><a href="https://www.seopress.org/fr/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Check our website","wp-seopress").'</a></li>
-						</ul>'
-					);
-				} else {
-					$screen->set_help_sidebar(
-						'<ul>
-							<li><a href="https://www.seopress.org/support/guides/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Browse our guides","wp-seopress").'</a></li>
-							<li><a href="https://www.seopress.org/support/faq/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our FAQ","wp-seopress").'</a></li>
-							<li><a href="https://www.seopress.org/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Check our website","wp-seopress").'</a></li>
-						</ul>'
-					);
-				}
+			if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+				$screen->set_help_sidebar(
+					'<ul>
+						<li><a href="https://www.seopress.org/fr/support/guides/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Browse our guides","wp-seopress").'</a></li>
+						<li><a href="https://www.seopress.org/fr/support/faq/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our FAQ","wp-seopress").'</a></li>
+						<li><a href="https://www.seopress.org/fr/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Check our website","wp-seopress").'</a></li>
+					</ul>'
+				);
+			} else {
+				$screen->set_help_sidebar(
+					'<ul>
+						<li><a href="https://www.seopress.org/support/guides/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Browse our guides","wp-seopress").'</a></li>
+						<li><a href="https://www.seopress.org/support/faq/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our FAQ","wp-seopress").'</a></li>
+						<li><a href="https://www.seopress.org/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Check our website","wp-seopress").'</a></li>
+					</ul>'
+				);
 			}
 		}
 		add_action('load-'.$seopress_titles_help_tab, 'seopress_titles_help_tab');
@@ -278,7 +276,7 @@ class seopress_options
 
 			$seopress_google_analytics_help_tab_content = '
 				<p>'.__('Watch our video to learn how to connect your WordPress site with Google Analytics and get statistics right in your dashboard (PRO only).','wp-seopress').'</p>
-			'.wp_oembed_get('https://www.youtube.com/watch?v=NKvjb9Z571c', array('width'=>530));
+			'.wp_oembed_get('https://www.youtube.com/watch?v=2EWdogYuFgs', array('width'=>530));
 
 			$screen->add_help_tab( array(
 				'id'    => 'seopress_google_analytics_help_tab',
@@ -286,20 +284,18 @@ class seopress_options
 				'content'   => $seopress_google_analytics_help_tab_content,
 			));
 
-			if (function_exists('seopress_get_locale')) {
-				if (seopress_get_locale() =='fr') {
-					$screen->set_help_sidebar(
-						'<ul>
-							<li><a href="https://www.seopress.org/fr/support/guides/connectez-site-wordpress-a-google-analytics/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our guide","wp-seopress").'</a></li>
-						</ul>'
-					);
-				} else {
-					$screen->set_help_sidebar(
-						'<ul>
-							<li><a href="https://www.seopress.org/support/guides/connect-wordpress-site-google-analytics/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our guide","wp-seopress").'</a></li>
-						</ul>'
-					);
-				}
+			if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+				$screen->set_help_sidebar(
+					'<ul>
+						<li><a href="https://www.seopress.org/fr/support/guides/connectez-site-wordpress-a-google-analytics/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our guide","wp-seopress").'</a></li>
+					</ul>'
+				);
+			} else {
+				$screen->set_help_sidebar(
+					'<ul>
+						<li><a href="https://www.seopress.org/support/guides/connect-wordpress-site-google-analytics/?utm_source=plugin&utm_medium=wp-admin-help-tab&utm_campaign=seopress" target="_blank">'.__("Read our guide","wp-seopress").'</a></li>
+					</ul>'
+				);
 			}
 		}
 		add_action('load-'.$seopress_google_analytics_help_tab, 'seopress_google_analytics_help_tab');
@@ -1060,12 +1056,10 @@ class seopress_options
 									<p><?php _e( 'Delete all your 404 errors. We don‘t delete any redirects.', 'wp-seopress' ); ?></p>
 									<p><?php echo sprintf(__( 'Make sure you have enabled 404 cleaning from SEO, PRO, <a href="%s">404/301</a> tab to be able to delete all your 404 errors.', 'wp-seopress' ), admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404' )); ?></p>
 									<p class="seopress-help"><?php 
-									if (function_exists('seopress_get_locale')) {
-										if (seopress_get_locale() =='fr') {
-											$seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/fr/support/guides/nettoyez-vos-erreurs-404-a-laide-dune-requete-mysql/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-										} else {
-											$seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/support/guides/delete-your-404-errors-with-a-mysql-query/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-										}
+									if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+										$seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/fr/support/guides/nettoyez-vos-erreurs-404-a-laide-dune-requete-mysql/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+									} else {
+										$seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/support/guides/delete-your-404-errors-with-a-mysql-query/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 									}
 									echo sprintf(__('You can also use <span class="dashicons dashicons-external"></span><a href="%s" target="_blank">this MySQL query</a> if necessary.','wp-seopress'),$seopress_docs_link['support']['redirects']['query']); ?></p>
 									<form method="post">
@@ -2850,14 +2844,12 @@ class seopress_options
 		}
 		echo '<p>'.__('Noindex content will not be displayed in Sitemaps.', 'wp-seopress').'</p>';
 
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['sitemaps']['error']['blank'] = 'https://www.seopress.org/fr/support/guides/xml-sitemap-page-blanche/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-				$seopress_docs_link['sitemaps']['error']['404'] = 'https://www.seopress.org/fr/support/guides/plan-de-site-xml-retourne-erreur-404/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['sitemaps']['error']['blank'] = 'https://www.seopress.org/support/guides/xml-sitemap-blank-page/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-				$seopress_docs_link['sitemaps']['error']['404'] = 'https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['sitemaps']['error']['blank'] = 'https://www.seopress.org/fr/support/guides/xml-sitemap-page-blanche/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+			$seopress_docs_link['sitemaps']['error']['404'] = 'https://www.seopress.org/fr/support/guides/plan-de-site-xml-retourne-erreur-404/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['sitemaps']['error']['blank'] = 'https://www.seopress.org/support/guides/xml-sitemap-blank-page/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+			$seopress_docs_link['sitemaps']['error']['404'] = 'https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 
 		echo '<p class="seopress-help"><span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['blank'].'" target="_blank">'.__('Blank sitemap?', 'wp-seopress').'</a> - ';
@@ -2875,12 +2867,10 @@ class seopress_options
 		print __('<p>Create an HTML Sitemap for your visitors and boost your SEO.</p>', 'wp-seopress');
 		print __('<p>Limited to 1,000 posts per post type. You can change the order and sorting criteria below.</p>', 'wp-seopress');
 
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['sitemaps']['html'] = 'https://www.seopress.org/fr/support/guides/activer-plan-de-site-html/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['sitemaps']['html'] = 'https://www.seopress.org/support/guides/enable-html-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['sitemaps']['html'] = 'https://www.seopress.org/fr/support/guides/activer-plan-de-site-html/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['sitemaps']['html'] = 'https://www.seopress.org/support/guides/enable-html-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 
 		echo '<a class="seopress-doc" href="'.$seopress_docs_link['sitemaps']['html'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to enable a HTML Sitemap - new window','wp-seopress').'</span></a></p>';
@@ -2953,14 +2943,12 @@ class seopress_options
 		
 		echo '<p>'.__('Custom dimensions also work with <strong>Matomo</strong> tracking code.','wp-seopress').'</p>';
 
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['analytics']['custom_dimensions'] = 'https://www.seopress.org/fr/support/guides/creer-dimensions-personnalisees-google-analytics/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['analytics']['custom_dimensions'] = 'https://www.seopress.org/support/guides/create-custom-dimension-google-analytics/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['analytics']['custom_dimensions'] = 'https://www.seopress.org/fr/support/guides/creer-dimensions-personnalisees-google-analytics/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['analytics']['custom_dimensions'] = 'https://www.seopress.org/support/guides/create-custom-dimension-google-analytics/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
-						
+
 		echo '<a class="seopress-doc" href="'.$seopress_docs_link['support']['analytics']['custom_dimensions'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to create custom dimensions in Google Analytics - new window','wp-seopress').'</span></a></p>';
 	}
 
@@ -3858,9 +3846,7 @@ class seopress_options
 		echo ' value="1"/>';
 		
 		echo '<label for="seopress_titles_paged_rel">'. __( 'Add rel next/prev link in head of paginated archive pages', 'wp-seopress' ) .'</label>';
-		
-		echo '<p class="description seopress-help"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/webmasters/answer/1663744?hl=en" target="_blank">'.__('Learn more on Google website','wp-seopress').'</p>';
-		
+
 		if (isset($this->options['seopress_titles_paged_rel'])) {
 			esc_attr( $this->options['seopress_titles_paged_rel']);
 		}
@@ -3897,12 +3883,10 @@ class seopress_options
 		
 		echo '<label for="seopress_xml_sitemap_general_enable">'. __( 'Enable XML Sitemap', 'wp-seopress' ) .'</label>';
 		
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['sitemaps'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['sitemaps'] = 'https://www.seopress.org/support/guides/enable-xml-sitemaps/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['sitemaps'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['sitemaps'] = 'https://www.seopress.org/support/guides/enable-xml-sitemaps/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 
 		echo '<a href="'.$seopress_docs_link['support']['sitemaps'].'" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to enable XML Sitemaps - new window','wp-seopress').'</span></a>';
@@ -3926,12 +3910,10 @@ class seopress_options
 
 		echo '<p class="description">'.__('Images in XML sitemaps are visible only from the source code.','wp-seopress').'</p>';
 
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['sitemaps']['image'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml-images/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['sitemaps']['image'] = 'https://www.seopress.org/support/guides/enable-xml-image-sitemaps/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['sitemaps']['image'] = 'https://www.seopress.org/fr/support/guides/activer-sitemap-xml-images/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['sitemaps']['image'] = 'https://www.seopress.org/support/guides/enable-xml-image-sitemaps/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 
 		echo '<a href="'.$seopress_docs_link['support']['sitemaps']['image'].'" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to enable XML image sitemaps - new window','wp-seopress').'</span></a>';
@@ -3954,12 +3936,10 @@ class seopress_options
 			
 			echo '<label for="seopress_xml_sitemap_video_enable">'. __( 'Enable Video Sitemaps', 'wp-seopress' ) .'</label>';
 
-			if (function_exists('seopress_get_locale')) {
-				if (seopress_get_locale() =='fr') {
-					$seopress_docs_link['support']['sitemaps']['video'] = 'https://www.seopress.org/fr/support/guides/plan-de-site-xml-video/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-				} else {
-					$seopress_docs_link['support']['sitemaps']['video'] = 'https://www.seopress.org/support/guides/enable-video-xml-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-				}
+			if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+				$seopress_docs_link['support']['sitemaps']['video'] = 'https://www.seopress.org/fr/support/guides/plan-de-site-xml-video/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+			} else {
+				$seopress_docs_link['support']['sitemaps']['video'] = 'https://www.seopress.org/support/guides/enable-video-xml-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 			}
 
 			printf('<p class="description">'.__('Your video sitemap is empty? Read our guide to learn more about <a href="%s" target="_blank">adding videos to your sitemap.</a>','wp-seopress').'</p>', $seopress_docs_link['support']['sitemaps']['video']);
@@ -4003,12 +3983,10 @@ class seopress_options
 		
 		echo '<label for="seopress_xml_sitemap_html_enable">'. __( 'Enable HTML Sitemap', 'wp-seopress' ) .'</label>';
 
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['sitemaps']['html'] = 'https://www.seopress.org/fr/support/guides/activer-plan-de-site-html/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['sitemaps']['html'] = 'https://www.seopress.org/support/guides/enable-html-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['sitemaps']['html'] = 'https://www.seopress.org/fr/support/guides/activer-plan-de-site-html/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['sitemaps']['html'] = 'https://www.seopress.org/support/guides/enable-html-sitemap/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 
 		echo '<a href="'.$seopress_docs_link['support']['sitemaps']['html'].'" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Guide to enable a HTML Sitemap - new window','wp-seopress').'</span></a>';
@@ -4690,14 +4668,12 @@ class seopress_options
 
 		echo '<p class="description">'.__('User roles excluded from tracking will not see the consent message.<br> If you use a caching plugin, you have to exclude this JS file in your settings: <br><strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</strong> <br>and this cookie <strong>seopress-user-consent-accept</strong>','wp-seopress').'</p>';
 
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['analytics']['custom_tracking'] = 'https://www.seopress.org/fr/support/hooks/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['analytics']['custom_tracking'] = 'https://www.seopress.org/support/hooks/add-custom-tracking-code-with-user-consent/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['analytics']['custom_tracking'] = 'https://www.seopress.org/fr/support/hooks/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['analytics']['custom_tracking'] = 'https://www.seopress.org/support/hooks/add-custom-tracking-code-with-user-consent/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
-						
+
 		echo '<a class="seopress-doc" href="'.$seopress_docs_link['support']['analytics']['custom_tracking'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Hook to add custom tracking code with user consent - new window','wp-seopress').'</span></a></p>';
 
 		if (isset($this->options['seopress_google_analytics_disable'])) {
@@ -4733,12 +4709,10 @@ class seopress_options
 		'<textarea id="seopress_google_analytics_opt_out_msg" name="seopress_google_analytics_option_name[seopress_google_analytics_opt_out_msg]" rows="4" placeholder="'.esc_html__('Enter your message (HTML allowed)','wp-seopress').'" aria-label="'.__('This message will only appear if request user\'s consent is enabled.','wp-seopress').'">%s</textarea>',
 		esc_html( $check ));
 
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['analytics']['consent_msg'] = 'https://www.seopress.org/fr/support/hooks/filtrer-le-message-du-consentement-utilisateur/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['analytics']['consent_msg'] = 'https://www.seopress.org/support/hooks/filter-user-consent-message/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['analytics']['consent_msg'] = 'https://www.seopress.org/fr/support/hooks/filtrer-le-message-du-consentement-utilisateur/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['analytics']['consent_msg'] = 'https://www.seopress.org/support/hooks/filter-user-consent-message/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 
 		echo '<a class="seopress-doc" href="'.$seopress_docs_link['support']['analytics']['consent_msg'].'" target="_blank"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text">'. __('Hook to filter user consent message - new window','wp-seopress').'</span></a></p>';
@@ -4964,12 +4938,10 @@ class seopress_options
 		echo '<p class="description">'.__('This code will be added just after the opening body tag of your page.','wp-seopress').'</p>';
 		echo '<p class="description">'.__('You don‘t see your code? Make sure to call <strong>wp_body_open();</strong> just after the opening body tag in your theme.','wp-seopress').'</p>';
 
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['analytics']['gtm'] = 'https://www.seopress.org/fr/support/guides/google-tag-manager-site-wordpress-seopress/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['analytics']['gtm'] = 'https://www.seopress.org/support/guides/google-tag-manager-wordpress-seopress/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['analytics']['gtm'] = 'https://www.seopress.org/fr/support/guides/google-tag-manager-site-wordpress-seopress/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['analytics']['gtm'] = 'https://www.seopress.org/support/guides/google-tag-manager-wordpress-seopress/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 
 		echo '<a class="seopress-help" href="'.$seopress_docs_link['support']['analytics']['gtm'].'" target="_blank">'. __('Learn more','wp-seopress').'</span></a><span class="seopress-help dashicons dashicons-external"></span></p>';
@@ -6211,12 +6183,10 @@ class seopress_options
 				esc_attr( $this->options['seopress_advanced_security_metaboxe_role'][$key]);
 			}
 		}
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['security']['metaboxe_seo'] = 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-seo-par-types-de-contenu/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['security']['metaboxe_seo'] = 'https://www.seopress.org/support/hooks/filter-seo-metaboxe-call-by-post-type/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['security']['metaboxe_seo'] = 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-seo-par-types-de-contenu/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['security']['metaboxe_seo'] = 'https://www.seopress.org/support/hooks/filter-seo-metaboxe-call-by-post-type/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 		?>
 		<a href="<?php echo $seopress_docs_link['support']['security']['metaboxe_seo']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Hook to filter structured data types metabox call by post type - new window','wp-seopress'); ?></span></a>
@@ -6246,12 +6216,10 @@ class seopress_options
 				esc_attr( $this->options['seopress_advanced_security_metaboxe_ca_role'][$key]);
 			}
 		}
-		if (function_exists('seopress_get_locale')) {
-			if (seopress_get_locale() =='fr') {
-				$seopress_docs_link['support']['security']['metaboxe_ca'] = 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-danalyse-de-contenu-par-types-de-contenu/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			} else {
-				$seopress_docs_link['support']['security']['metaboxe_ca'] = 'https://www.seopress.org/support/hooks/filter-content-analysis-metaboxe-call-by-post-type/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-			}
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['security']['metaboxe_ca'] = 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-danalyse-de-contenu-par-types-de-contenu/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['security']['metaboxe_ca'] = 'https://www.seopress.org/support/hooks/filter-content-analysis-metaboxe-call-by-post-type/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 		?>
 		<a href="<?php echo $seopress_docs_link['support']['security']['metaboxe_ca']; ?>" target="_blank" class="seopress-doc"><span class="dashicons dashicons-editor-help"></span><span class="screen-reader-text"><?php _e('Hook to filter structured data types metabox call by post type - new window','wp-seopress'); ?></span></a>

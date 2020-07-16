@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 3.8.8
+Stable tag: 3.8.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -190,6 +190,8 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 <h3>Featured on</h3>
 <ul>
 	<li>WP Beginner</li>
+	<li>HubSpot</li>
+	<li>GoDaddy</li>
 	<li>Forbes</li>
 	<li>Search Engine Journal</li>
 	<li>Elementor</li>
@@ -271,6 +273,28 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.8.9 =
+* NEW Design for Configuration Wizard
+* NEW Oembed for LinkedIn!
+* NEW Onboarding for Redirections / Schemas post type list
+* NEW Dynamic variable %%currentmonth_num%% to display the current month in digital format
+* NEW "seopress_titles_custom_tax" hook to filter %%_ct_your_custom_taxonomy_slug%% dynamic variable (https://www.seopress.org/support/hooks/filter-_ct_your_custom_taxonomy_slug-dynamic-variable/)
+* NEW "seopress_oembed_thumbnail" hook to filter the post thumbnail array used in oembed (https://www.seopress.org/support/hooks/filter-post-thumbnail-in-oembed/)
+* NEW "seopress_oembed_thumbnail_size" hook to filter the post thumbnail size used in oembed (https://www.seopress.org/support/hooks/filter-post-thumbnail-size-used-in-oembed/)
+* NEW "seopress_oembed_title" hook to filter the post title used in oembed (https://www.seopress.org/support/hooks/filter-title-used-in-oembed/)
+* NEW "Disable all automatic schemas for this post?" option from Structured Data Types metabox
+* NEW "Disable this automatic schema for this post?" option from Structured Data Types metabox
+* INFO Responsive design enhancements
+* INFO White label: Remove SEOPress logo in Wizard
+* INFO Update link to Rich Snippets Google testing tool
+* INFO Remove hreflang tags from TranslatePress v2 if noindex
+* FIX Outbound links in Content Analysis
+* FIX call_user_func_array() expects parameter 1 to be a valid callback, class 'SEOPRESS_CSV_Importers' does not have a method 'post_importer_compatibility'
+* FIX PHP comments in SEOPress submenu
+* FIX Breadcrumbs issue with WooCommerce
+* FIX Import tool for Configuration Wizard
+* FIX "Undefined variable: seopress_get_post_type" from /inc/admin/ajax.php line 127
+* FIX Keywords in Permalinks with dashes
 = 3.8.8 =
 * NEW Google Enhanced Ecommerce! Measure purchases, additions and removals from shopping carts 🎉 (PRO)
 * NEW robots.txt file for multisite and multidomain installations (PRO)

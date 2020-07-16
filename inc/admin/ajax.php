@@ -42,7 +42,9 @@ function seopress_do_real_preview() {
 			//Get post type
 			if ( isset( $_GET['post_type'] ) ) {
 				$seopress_get_post_type = $_GET['post_type'];
-			}
+			} else {
+				$seopress_get_post_type = NULL;
+			} 
 
 			//Origin
 			if ( isset( $_GET['origin'] ) ) {
@@ -137,6 +139,7 @@ function seopress_do_real_preview() {
 
 						//Manage keywords with special characters
 						foreach ($seopress_analysis_target_kw as $key => $kw) {
+							$kw = str_replace("-", " ", $kw);
 							$seopress_analysis_target_kw[$key] = htmlspecialchars_decode($kw,ENT_QUOTES);
 						}
 					}
@@ -411,7 +414,7 @@ function seopress_do_real_preview() {
 
 				//outbound links
 				$site_url  = wp_parse_url(get_home_url(), PHP_URL_HOST);
-				$outbound_links = $xpath->query("//a[not(contains(@href, '".$site_url."')]");
+				$outbound_links = $xpath->query("//a[not(contains(@href, '".$site_url."'))]");
 				if (!empty($outbound_links)) {
 					foreach ($outbound_links as $key=>$link) {
 						if (!empty(wp_parse_url($link->getAttribute('href'), PHP_URL_HOST))) {
@@ -419,7 +422,7 @@ function seopress_do_real_preview() {
 						}
 					}
 				}
-
+				
 				//Words Counter
 				if (!is_plugin_active('oxygen/functions.php') && !function_exists('ct_template_output')) { //disable for Oxygen
 					if ($seopress_get_the_content !='') {
@@ -1430,7 +1433,7 @@ function seopress_metadata_export() {
 			$offset = absint($_POST['offset']);
 		}
 
-		$seopress_get_post_types = array();
+		$seopress_get_post_types = [];
 		foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
 			$seopress_get_post_types[] = $seopress_cpt_key;
 		}

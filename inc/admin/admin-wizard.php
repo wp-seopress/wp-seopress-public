@@ -199,7 +199,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 			<?php do_action( 'admin_head' ); ?>
 		</head>
 		<body class="seopress-setup wp-core-ui">
-			<h1 id="seopress-logo"><a href="https://www.seopress.org/" target="_blank"><img src="<?php echo plugins_url('assets/img/logo-seopress.svg', dirname(dirname(__FILE__))); ?>" alt="SEOPress" /></a></h1>
 		<?php
 	}
 
@@ -232,7 +231,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 				if ( $step_key === $this->step ) {
 					?>
-					<li class="active"><?php echo esc_html( $step['name'] ); ?></li>
+					<li class="active"><span><?php echo esc_html( $step['name'] ); ?></span></li>
 					<?php
 				} elseif ( $is_completed ) {
 					?>
@@ -242,7 +241,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 					<?php
 				} else {
 					?>
-					<li><?php echo esc_html( $step['name'] ); ?></li>
+					<li><span><?php echo esc_html( $step['name'] ); ?></span></li>
 					<?php
 				}
 			}
@@ -284,6 +283,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 				<option value="squirrly-migration-tool"><?php _e('Squirrly SEO','wp-seopress'); ?></option>
 				<option value="seo-ultimate-migration-tool"><?php _e('SEO Ultimate','wp-seopress'); ?></option>
 				<option value="wp-meta-seo-migration-tool"><?php _e('WP Meta SEO','wp-seopress'); ?></option>
+				<option value="premium-seo-pack-migration-tool"><?php _e('Premium SEO Pack','wp-seopress'); ?></option>
 			</select>
 
 			<br><br>

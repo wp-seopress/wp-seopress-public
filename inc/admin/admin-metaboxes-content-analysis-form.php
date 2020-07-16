@@ -26,7 +26,7 @@ echo '<div class="wrap-seopress-analysis">
 				echo '<span class="spinner"></span>';
 			}
 
-			echo '<br><p><span class="howto">'.__('To get the most accurate analysis, save your post first.','wp-seopress').'</span></p>';
+			echo '<br><p><span class="howto">'.__('To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would.','wp-seopress').'</span></p>';
 echo    '</div>';
 if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 	echo '<div class="col-right">

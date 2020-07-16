@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.8
+Version: 3.8.9
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.8' );
+define( 'SEOPRESS_VERSION', '3.8.9' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -288,7 +288,7 @@ add_action( 'admin_print_scripts-edit.php', 'seopress_add_admin_options_scripts_
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Admin Body Class
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-add_filter( 'admin_body_class', 'seopress_admin_body_class' );
+add_filter( 'admin_body_class', 'seopress_admin_body_class', 100 );
 function seopress_admin_body_class( $classes ) {
 	if ( ! isset($_GET['page'] ) ) {
 		return $classes;
@@ -909,7 +909,7 @@ function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
 
 	return $html;
 }
-//aria-describedby
+
 /**
  * Generate Tooltip (alternative version)
  * @since 3.8.6
@@ -987,12 +987,10 @@ function seopress_notification($args) {
 				';
 			
 				$href = '';
-				if (function_exists('seopress_get_locale')) {
-					if (seopress_get_locale() =='fr' && isset($link['fr'])) {
-						$href = ' href="'.$link['fr'].'"';
-					} elseif (isset($link['en'])) {
-						$href = ' href="'.$link['en'].'"';
-					}
+				if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr' &&  isset($link['fr'])) {
+					$href = ' href="'.$link['fr'].'"';
+				} elseif (isset($link['en'])) {
+					$href = ' href="'.$link['en'].'"';
 				}
 
 				$target = '';
@@ -1079,6 +1077,9 @@ function seopress_remove_other_notices() {
 		remove_all_actions( 'user_admin_notices' );
 		remove_all_actions( 'all_admin_notices' );
 		add_action( 'admin_notices', 'seopress_admin_notices' );
+		if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) {
+			add_action( 'admin_notices', 'seopress_insights_notice' );
+		}
 	}
 }
 
@@ -1230,12 +1231,10 @@ function seopress_wizard_follow_us() {
 				</li>
 				<li class="recommended-item">
 					<?php
-						if (function_exists('seopress_get_locale')) {
-							if (seopress_get_locale() =='fr') {
-								$link = 'https://www.seopress.org/fr/blog/category/tutoriels/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
-							} else {
-								$link = 'https://www.seopress.org/blog/how-to/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
-							}
+						if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+							$link = 'https://www.seopress.org/fr/blog/category/tutoriels/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
+						} else {
+							$link = 'https://www.seopress.org/blog/how-to/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
 						} 
 					?>
 					<a href="<?php echo $link; ?>" target="_blank">
