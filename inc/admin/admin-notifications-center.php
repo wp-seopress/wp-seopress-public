@@ -109,6 +109,36 @@
                             ];
                             seopress_notification($args);
                         }
+                        if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
+                            function seopress_get_hidden_notices_insights_wizard_option() {
+                                $seopress_get_hidden_notices_insights_wizard_option = get_option("seopress_notices");
+                                if ( ! empty ( $seopress_get_hidden_notices_insights_wizard_option ) ) {
+                                    foreach ($seopress_get_hidden_notices_insights_wizard_option as $key => $seopress_get_hidden_notices_insights_wizard_value)
+                                        $options[$key] = $seopress_get_hidden_notices_insights_wizard_value;
+                                        if (isset($seopress_get_hidden_notices_insights_wizard_option['notice-insights-wizard'])) {
+                                            return $seopress_get_hidden_notices_insights_wizard_option['notice-insights-wizard'];
+                                        }
+                                }
+                            }
+                            if(seopress_get_hidden_notices_insights_wizard_option() !='1') {
+                                $args = [
+                                    'id' => 'notice-insights-wizard',
+                                    'title' => __('Configure SEOPress Insights in a few minutes with our installation wizard','wp-seopress'),
+                                    'desc' => __('Track your keywords positions and backlinks directly on your WordPress site.','wp-seopress'),
+                                    'impact' => [
+                                        'info' => __('Wizard','wp-seopress')
+                                    ],
+                                    'link' => [
+                                        'en' => admin_url( 'admin.php?page=seopress-insights-setup' ),
+                                        'title' => __('Start the wizard','wp-seopress'),
+                                        'external' => true
+                                    ],
+                                    'icon' => 'dashicons-admin-tools',
+                                    'deleteable' => true
+                                ];
+                                seopress_notification($args);
+                            }
+                        }
                         if (get_theme_support('title-tag') !='1') {
                             function seopress_get_hidden_notices_title_tag_option() {
                                 $seopress_get_hidden_notices_title_tag_option = get_option("seopress_notices");
@@ -149,6 +179,7 @@
                             'seo-by-rank-math/rank-math.php' => 'Rank Math',
                             'seo-ultimate/seo-ultimate.php' => 'SEO Ultimate',
                             'wp-meta-seo/wp-meta-seo.php' => 'WP Meta SEO',
+                            'premium-seo-pack/plugin.php' => 'Premium SEO Pack',
                         );
 
                         foreach($seo_plugins as $key => $value) {
@@ -203,7 +234,7 @@
                                         'low' => __('Low impact','wp-seopress')
                                     ],
                                     'link' => [
-                                        'en' => 'https://www.namecheap.com/?aff=105841',
+                                        'en' => 'https://www.seopress.org/go/namecheap',
                                         'title' => __('Buy an SSL!','wp-seopress'),
                                         'external' => true
                                     ],
@@ -400,7 +431,7 @@
                                 $args = [
                                     'id' => 'notice-posts-number',
                                     'title' => __('Display more posts per page on homepage and archives','wp-seopress'),
-                                    'desc' => __('To reduce the number pages search engines have to crawl to find all your articles, it is recommended displaying more posts per page. This should not be a problem for your users. Using mobile, we prefer to scroll down rather than clicking on next page links. If you can do it, try adding an infinite scroll to your post listings.','wp-seopress'),
+                                    'desc' => __('To reduce the number pages search engines have to crawl to find all your articles, it is recommended displaying more posts per page. This should not be a problem for your users. Using mobile, we prefer to scroll down rather than clicking on next page links.','wp-seopress'),
                                     'impact' => [
                                         'medium' => __('Medium impact','wp-seopress')
                                     ],
@@ -618,7 +649,7 @@
                             }
                         ?>
                         <br>
-                        <button id="seopress-reverse-submit" class="button button-primary" name="submit">
+                        <button id="seopress-reverse-submit"  type="button" class="button button-primary" name="submit">
                             <?php _e('Get list','wp-seopress'); ?>
                         </button>
 

@@ -13,12 +13,14 @@ jQuery(document).ready(function($) {
 				_ajax_nonce: seopressAjaxGAUserConsent.seopress_nonce,
 			},
 			success : function( data ) {
-				$('head').append(data.data.gtag_js);
-				$('head').append(data.data.matomo_js);
-				$('head').append(data.data.custom);
-				$('head').append(data.data.head_js);
-				$('body').prepend(data.data.body_js);
-				$('body').append(data.data.footer_js);
+				if (data.data) {
+					$('head').append(data.data.gtag_js);
+					$('head').append(data.data.matomo_js);
+					$('head').append(data.data.custom);
+					$('head').append(data.data.head_js);
+					$('body').prepend(data.data.body_js);
+					$('body').append(data.data.footer_js);
+				}
 				Cookies.set('seopress-user-consent-accept', '1', { expires: 30 });
 			},
 		});

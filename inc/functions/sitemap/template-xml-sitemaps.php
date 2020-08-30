@@ -9,9 +9,6 @@ if (function_exists('seopress_sitemaps_headers')) {
 }
 
 //WPML
-function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
-    return $url;
-}
 add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
 
 add_filter( 'seopress_sitemaps_index_cpt_query', function( $args ) {
@@ -87,7 +84,25 @@ function seopress_xml_sitemap_index() {
 							$paged = 1;
 						}
 
-						$args = array('post_type' => $cpt_key, 'offset' => $offset, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ), 'order' => 'DESC', 'orderby' => 'modified', 'lang' => '', 'has_password' => false, 'suppress_filters' => true);
+						$args = [
+							'post_type' => $cpt_key, 
+							'offset' => $offset, 
+							'post_status' => 'publish', 
+							'ignore_sticky_posts' => true, 
+							'posts_per_page' => 1, 
+							'meta_query' => [
+								[
+									'key' => '_seopress_robots_index', 
+									'value' => 'yes', 
+									'compare' => 'NOT EXISTS'
+								]
+							], 
+							'order' => 'DESC', 
+							'orderby' => 'modified', 
+							'lang' => '', 
+							'has_password' => false, 
+							'suppress_filters' => true
+						];
 						
 						$args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
 
@@ -125,11 +140,11 @@ function seopress_xml_sitemap_index() {
 			}
 		}
 		foreach ($seopress_xml_terms_list as $term_value) {
-			$args = array(
+			$args = [
 			    'taxonomy' => $term_value,
 			    'hide_empty' => false,
 			    'lang' => ''
-			);
+			];
 			$args = apply_filters('seopress_sitemaps_index_tax_query', $args, $term_value);
 			
 			$terms = get_terms($args);
@@ -172,7 +187,23 @@ function seopress_xml_sitemap_index() {
 		    }
 		}
 		
-		$args = array('post_type' => $seopress_xml_sitemap_news_cpt_array, 'post_status' => 'publish', 'ignore_sticky_posts' => true, 'posts_per_page' => 1, 'orderby' => 'modified', 'meta_query' => array( array( 'key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS' ) ), 'order' => 'DESC', 'lang' => '', 'has_password' => false);
+		$args = [
+			'post_type' => $seopress_xml_sitemap_news_cpt_array,
+			'post_status' => 'publish', 
+			'ignore_sticky_posts' => true, 
+			'posts_per_page' => 1, 
+			'orderby' => 'modified', 
+			'meta_query' => [ 
+				[
+					'key' => '_seopress_robots_index', 
+					'value' => 'yes', 
+					'compare' => 'NOT EXISTS'
+				]
+			], 
+			'order' => 'DESC', 
+			'lang' => '', 
+			'has_password' => false
+		];
 
 		$args = apply_filters('seopress_sitemaps_index_gnews_query', $args);
 
@@ -215,6 +246,28 @@ function seopress_xml_sitemap_index() {
 		$seopress_sitemaps .= '</loc>';
 		$seopress_sitemaps .= "\n";
 		$seopress_sitemaps .= '</sitemap>';
+	}
+
+	//Custom sitemap
+	$custom_sitemap = null;
+	$custom_sitemap = apply_filters('seopress_sitemaps_external_link', $custom_sitemap);
+	if(isset($custom_sitemap)) {
+		foreach($custom_sitemap as $key => $sitemap) {
+			$seopress_sitemaps .= "\n";
+			$seopress_sitemaps .= '<sitemap>';
+			$seopress_sitemaps .= "\n";
+			$seopress_sitemaps .= '<loc>';
+			$seopress_sitemaps .= $sitemap['sitemap_url'];
+			$seopress_sitemaps .= '</loc>';
+			if(isset($sitemap['sitemap_last_mod'])) {
+				$seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= '<lastmod>';
+				$seopress_sitemaps .= $sitemap['sitemap_last_mod'];
+				$seopress_sitemaps .= '</lastmod>';
+			}
+			$seopress_sitemaps .= "\n";
+			$seopress_sitemaps .= '</sitemap>';
+		}
 	}
 
 	$seopress_sitemaps .= "\n";

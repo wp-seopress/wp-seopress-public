@@ -2,7 +2,7 @@ jQuery(document).ready(function($) {
 	$('#seopress-flush-permalinks,#seopress-flush-permalinks2').on('click', function() {
 		$.ajax({
 			method : 'GET',
-			url : seopressAjaxResetPermalinks.seopress_flush_permalinks,
+			url : seopressAjaxResetPermalinks.seopress_ajax_permalinks,
 			data: {
 				action: 'seopress_flush_permalinks',
 				_ajax_nonce: seopressAjaxResetPermalinks.seopress_nonce,

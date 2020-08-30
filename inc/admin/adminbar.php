@@ -41,7 +41,7 @@ function seopress_admin_bar_links() {
 			$wp_admin_bar->add_menu( array(
 				'parent'	=> 'seopress_custom_top_level',
 				'id'		=> 'seopress_custom_sub_menu_google_analytics',
-				'title'		=> __( 'Google Analytics', 'wp-seopress' ),
+				'title'		=> __( 'Analytics', 'wp-seopress' ),
 				'href'		=> admin_url( 'admin.php?page=seopress-google-analytics' ),
 			));
 			$wp_admin_bar->add_menu( array(
@@ -49,14 +49,22 @@ function seopress_admin_bar_links() {
 				'id'		=> 'seopress_custom_sub_menu_advanced',
 				'title'		=> __( 'Advanced', 'wp-seopress' ),
 				'href'		=> admin_url( 'admin.php?page=seopress-advanced' ),
-			));	
+			));
+			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'parent'	=> 'seopress_custom_top_level',
+					'id'		=> 'seopress_custom_sub_menu_insights',
+					'title'		=> __( 'Insights', 'wp-seopress' ),
+					'href'		=> admin_url( 'admin.php?page=seopress-insights' ),
+				));
+			}
 			$wp_admin_bar->add_menu( array(
 				'parent'	=> 'seopress_custom_top_level',
 				'id'		=> 'seopress_custom_sub_menu_import_export',
 				'title'		=> __( 'Tools', 'wp-seopress' ),
 				'href'		=> admin_url( 'admin.php?page=seopress-import-export' ),
 			));
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 				if(seopress_get_toggle_option('bot')=='1') {
 					$wp_admin_bar->add_menu( array(
@@ -102,12 +110,6 @@ function seopress_admin_bar_links() {
 						'href'		=> admin_url( 'edit.php?post_type=seopress_bot' ),
 					));
 				}
-				$wp_admin_bar->add_menu( array(
-					'parent'	=> 'seopress_custom_top_level',
-					'id'		=> 'seopress_custom_sub_menu_backlinks',
-					'title'		=> __( 'Backlinks', 'wp-seopress' ),
-					'href'		=> admin_url( 'edit.php?post_type=seopress_backlinks' ),
-				));
 			}
 			$wp_admin_bar->add_menu( array(
 				'parent'	=> 'seopress_custom_top_level',

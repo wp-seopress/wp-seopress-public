@@ -3,9 +3,11 @@ Great people who contributed to this plugin :
 Developers:
 - Benjamin Denis: contact@seopress.org / @wp_seopress
 - Julio Potier: @juliobox
+- Mickael Gris: @mgris
 
 SEO consultant:
 - Alan Cladx: @cladxxx
+- Neil McCarthy: @GoodnessNeil
 
 A11Y:
 - Thierry Pigot: @thierrypigot
@@ -18,8 +20,9 @@ Beta testers / feedbacks:
 - Sébastien Serre: @sebastienserre
 - Ludovic Riaudel: @lriaudel
 - Philippe Fronzes: @novaldi64
+- Déborah Donnier @deborahdonnier
 
-Integrations:
+Integrations (https://www.seopress.org/integrations/):
 - The Admin Columns PRO team
 - The Polylang team
 - The WPML team
@@ -34,11 +37,11 @@ Translators:
 - Japan: WP-Translations
 - Hindi: WP-Translations
 - Dutch: WP-Translations
-- Italian: Déborah Donnier @deborahdonnier
+- Italian: entersys.it
 - Vietnamese: Anh
 - Russian: WP-Translations
 - Tamil: Sankar Srinivasan
-- Brazilian Portuguese: Daniel Pechmann
+- Brazilian Portuguese: WP-Translations
 - Telugu: Manoj Kumar
 - Indonesian: Tomtom
 - Bulgarian: @ilivanov

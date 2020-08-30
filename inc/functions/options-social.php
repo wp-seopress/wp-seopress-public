@@ -351,7 +351,9 @@ function seopress_social_facebook_og_url_hook() {
 			$seopress_social_og_url = apply_filters('seopress_social_og_url', $seopress_social_og_url);
 	    }
 
-		echo $seopress_social_og_url."\n";
+		if (!is_404()) {
+			echo $seopress_social_og_url."\n";
+		}
 	}
 }
 add_action( 'wp_head', 'seopress_social_facebook_og_url_hook', 1 );
@@ -367,7 +369,9 @@ function seopress_social_facebook_og_site_name_hook() {
 			$seopress_social_og_site_name = apply_filters('seopress_social_og_site_name', $seopress_social_og_site_name);
 	    }
 
-		echo $seopress_social_og_site_name."\n";
+		if (!is_404()) {
+			echo $seopress_social_og_site_name."\n";
+		}
 	}
 }
 add_action( 'wp_head', 'seopress_social_facebook_og_site_name_hook', 1 );
@@ -406,7 +410,9 @@ function seopress_social_facebook_og_locale_hook() {
 	    }
 
 		if (isset($seopress_social_og_locale) && $seopress_social_og_locale !='') {
-			echo $seopress_social_og_locale."\n";
+			if (!is_404()) {
+				echo $seopress_social_og_locale."\n";
+			}
 		}
 	}
 }
@@ -437,8 +443,10 @@ function seopress_social_facebook_og_type_hook() {
 			//Hook on post OG type - 'seopress_social_og_type'
 			if (has_filter('seopress_social_og_type')) {
 				$seopress_social_og_type = apply_filters('seopress_social_og_type', $seopress_social_og_type);
-		    }
-			echo $seopress_social_og_type."\n";
+			}
+			if (!is_404()) {
+				echo $seopress_social_og_type."\n";
+			}
 		}
 	}
 }
@@ -584,7 +592,9 @@ function seopress_social_fb_title_hook() {
 			$seopress_social_og_title = apply_filters('seopress_social_og_title', $seopress_social_og_title);
 	    }
 	    if (isset($seopress_social_og_title) && $seopress_social_og_title !='') {
-	    	echo $seopress_social_og_title;
+			if (!is_404()) {
+				echo $seopress_social_og_title;
+			}
 		}
 	}
 }
@@ -663,7 +673,9 @@ function seopress_social_fb_desc_hook() {
 			$seopress_social_og_desc = apply_filters('seopress_social_og_desc', $seopress_social_og_desc);
 	    }
 	    if (isset($seopress_social_og_desc) && $seopress_social_og_desc !='') {
-	    	echo $seopress_social_og_desc;
+			if (!is_404()) {
+				echo $seopress_social_og_desc;
+			}
 		}
 	}
 }
@@ -695,6 +707,19 @@ function seopress_social_facebook_img_option() {
 			$options[$key] = $seopress_social_facebook_img_value;
 		 if (isset($seopress_social_facebook_img_option['seopress_social_facebook_img'])) {
 		 	return $seopress_social_facebook_img_option['seopress_social_facebook_img'];
+		 }
+	}
+}
+
+function seopress_social_facebook_img_cpt_option() {
+	$seopress_get_current_cpt = get_post_type();
+
+	$seopress_social_facebook_img_cpt_option = get_option("seopress_social_option_name");
+	if ( ! empty ( $seopress_social_facebook_img_cpt_option ) ) {
+		foreach ($seopress_social_facebook_img_cpt_option as $key => $seopress_social_facebook_img_cpt_value)
+			$options[$key] = $seopress_social_facebook_img_cpt_value;
+		 if (isset($seopress_social_facebook_img_cpt_option['seopress_social_facebook_img_cpt'][$seopress_get_current_cpt]['url'])) {
+		 	return $seopress_social_facebook_img_cpt_option['seopress_social_facebook_img_cpt'][$seopress_get_current_cpt]['url'];
 		 }
 	}
 }
@@ -847,6 +872,10 @@ function seopress_social_fb_img_hook() {
 			
 			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_fb_img_term_option());
 
+		} elseif ( is_post_type_archive() && seopress_social_facebook_og_option() =='1' && seopress_social_facebook_img_cpt_option() !='') {//Default OG:IMAGE from global settings
+			
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_facebook_img_cpt_option());
+
 		} elseif (seopress_social_facebook_og_option() =='1' && seopress_social_facebook_img_option() !='') {//Default OG:IMAGE from global settings
 			
 			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_facebook_img_option());
@@ -857,7 +886,9 @@ function seopress_social_fb_img_hook() {
 			$seopress_social_og_thumb = apply_filters('seopress_social_og_thumb', $seopress_social_og_thumb);
 	    }
 	    if (isset($seopress_social_og_thumb) && $seopress_social_og_thumb !='') {
-	    	echo $seopress_social_og_thumb;
+			if (!is_404()) {
+				echo $seopress_social_og_thumb;
+			}
 	    }
 	}
 }
@@ -900,7 +931,9 @@ function seopress_social_facebook_admin_id_hook() {
 
 		$seopress_social_admin_id = '<meta property="fb:admins" content="'.seopress_social_facebook_admin_id_option().'" />';
 
-		echo $seopress_social_admin_id."\n";
+		if (!is_404()) {
+			echo $seopress_social_admin_id."\n";
+		}
 	}
 }
 add_action( 'wp_head', 'seopress_social_facebook_admin_id_hook', 1 );
@@ -921,7 +954,9 @@ function seopress_social_facebook_app_id_hook() {
 
 		$seopress_social_app_id = '<meta property="fb:app_id" content="'.seopress_social_facebook_app_id_option().'" />';
 
-		echo $seopress_social_app_id."\n";
+		if (!is_404()) {
+			echo $seopress_social_app_id."\n";
+		}
 	}
 }
 add_action( 'wp_head', 'seopress_social_facebook_app_id_hook', 1 );
@@ -974,8 +1009,11 @@ function seopress_social_twitter_card_summary_hook() {
 		//Hook on post Twitter card summary - 'seopress_social_twitter_card_summary'
 		if (has_filter('seopress_social_twitter_card_summary')) {
 			$seopress_social_twitter_card_summary = apply_filters('seopress_social_twitter_card_summary', $seopress_social_twitter_card_summary);
-	    }
-		echo $seopress_social_twitter_card_summary."\n";
+		}
+		
+		if (!is_404()) {
+			echo $seopress_social_twitter_card_summary."\n";
+		}
 	}
 }
 add_action( 'wp_head', 'seopress_social_twitter_card_summary_hook', 1 );
@@ -989,8 +1027,11 @@ function seopress_social_twitter_card_site_hook() {
 		//Hook on post Twitter card site - 'seopress_social_twitter_card_site'
 		if (has_filter('seopress_social_twitter_card_site')) {
 			$seopress_social_twitter_card_site = apply_filters('seopress_social_twitter_card_site', $seopress_social_twitter_card_site);
-	    }
-		echo $seopress_social_twitter_card_site."\n";
+		}
+		
+		if (!is_404()) {
+			echo $seopress_social_twitter_card_site."\n";
+		}
 	}
 }
 add_action( 'wp_head', 'seopress_social_twitter_card_site_hook', 1 );
@@ -1013,7 +1054,9 @@ function seopress_social_twitter_card_creator_hook() {
 		$seopress_social_twitter_card_creator = apply_filters('seopress_social_twitter_card_creator', $seopress_social_twitter_card_creator);
     }
     if (isset($seopress_social_twitter_card_creator) && $seopress_social_twitter_card_creator !='') {
-    	echo $seopress_social_twitter_card_creator."\n";
+		if (!is_404()) {
+			echo $seopress_social_twitter_card_creator."\n";
+		}
 	}
 }
 add_action( 'wp_head', 'seopress_social_twitter_card_creator_hook', 1 );
@@ -1088,7 +1131,9 @@ function seopress_social_twitter_title_hook() {
 			$seopress_social_twitter_card_title = apply_filters('seopress_social_twitter_card_title', $seopress_social_twitter_card_title);
 	    }
 	    if (isset($seopress_social_twitter_card_title) && $seopress_social_twitter_card_title !='') {
-	    	echo $seopress_social_twitter_card_title."\n";
+			if (!is_404()) {
+				echo $seopress_social_twitter_card_title."\n";
+			}
 	    }
 	}
 }
@@ -1171,7 +1216,9 @@ function seopress_social_twitter_desc_hook() {
 			$seopress_social_twitter_card_desc = apply_filters('seopress_social_twitter_card_desc', $seopress_social_twitter_card_desc);
 	    }
 	    if (isset($seopress_social_twitter_card_desc) && $seopress_social_twitter_card_desc !='') {
-	    	echo $seopress_social_twitter_card_desc."\n";
+			if (!is_404()) {
+				echo $seopress_social_twitter_card_desc."\n";
+			}
 	    }
 	}
 }
@@ -1300,7 +1347,9 @@ function seopress_social_twitter_img_hook() {
 			$seopress_social_twitter_card_thumb = apply_filters('seopress_social_twitter_card_thumb', $seopress_social_twitter_card_thumb);
 	    }
 	    if (isset($seopress_social_twitter_card_thumb) && $seopress_social_twitter_card_thumb !='') {
-	    	echo $seopress_social_twitter_card_thumb."\n";
+			if (!is_404()) {
+				echo $seopress_social_twitter_card_thumb."\n";
+			}
 	    }
 	}
 }

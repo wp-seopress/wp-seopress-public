@@ -444,7 +444,7 @@ function seopress_display_ca_metaboxe() {
         wp_localize_script( 'seopress-cpt-counters-js', 'seopressAjaxRealPreview', $seopress_real_preview );
 
         $seopress_analysis_target_kw            = get_post_meta($post->ID,'_seopress_analysis_target_kw',true);
-        $seopress_analysis_data                 = get_post_meta($post->ID,'_seopress_analysis_data');
+        $seopress_analysis_data                 = get_post_meta($post->ID,'_seopress_analysis_data', true);
         $seopress_titles_title                  = get_post_meta($post->ID,'_seopress_titles_title',true);
         $seopress_titles_desc                   = get_post_meta($post->ID,'_seopress_titles_desc',true);
 
