@@ -301,6 +301,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <li><?php _e('Meta Robots (noindex, nofollow...)','wp-seopress'); ?></li>
                         <li><?php _e('Canonical URL','wp-seopress'); ?></li>
                         <li><?php _e('Focus keywords','wp-seopress'); ?></li>
+                        <li><?php _e('Primary category','wp-seopress'); ?></li>
                     </ul>
                     <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast data.', 'wp-seopress' ); ?></p>
                     <button id="seopress-yoast-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>

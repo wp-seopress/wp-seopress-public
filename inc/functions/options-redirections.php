@@ -88,14 +88,24 @@ function seopress_redirections_value() {
 }
 
 function seopress_redirections_hook() {
- 	if ((is_tax() || is_category() || is_tag()) && seopress_redirections_term_enabled() =='yes') {
+	//If the current screen is: Elementor editor
+	if ( class_exists('\Elementor\Plugin') && \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+		return;
+	}
+	
+	//If the current screen is: Elementor preview mode
+	if ( class_exists('\Elementor\Plugin') && \Elementor\Plugin::$instance->preview->is_preview_mode() ) {
+		return;
+	}
+
+	if ((is_tax() || is_category() || is_tag()) && seopress_redirections_term_enabled() =='yes') {
 		if (seopress_redirections_term_type() && seopress_redirections_value() !='') {
-			wp_redirect(seopress_redirections_value(), seopress_redirections_term_type());
+			header('Location:'.seopress_redirections_value(), true, seopress_redirections_term_type());
 			exit();
 		}
 	} elseif (seopress_redirections_enabled() =='yes') {
 		if (seopress_redirections_type() && seopress_redirections_value() !='') {
-			wp_redirect(seopress_redirections_value(), seopress_redirections_type());
+			header('Location:'.seopress_redirections_value(), true, seopress_redirections_type());
 			exit();
 		}
 	}

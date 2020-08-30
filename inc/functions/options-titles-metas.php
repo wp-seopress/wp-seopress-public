@@ -328,7 +328,7 @@ function seopress_titles_the_title() {
 					$term = wp_get_post_terms( $post->ID, $value );
 					if (!is_wp_error($term)) {
 						$terms = esc_attr($term[0]->name);
-						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms);
+						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
 					}
 				}
 			}
@@ -379,7 +379,7 @@ function seopress_titles_the_title() {
 					$term = wp_get_post_terms( $post->ID, $value );
 					if (!is_wp_error($term)) {
 						$terms = esc_attr($term[0]->name);
-						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms);
+						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
 					}
 				}
 			}
@@ -524,7 +524,7 @@ function seopress_titles_the_description_content() {
 					$term = wp_get_post_terms( $post->ID, $value );
 					if (!is_wp_error($term)) {
 						$terms = esc_attr($term[0]->name);
-						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms);
+						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
 					}
 				}
 			}
@@ -573,7 +573,7 @@ function seopress_titles_the_description_content() {
 					$term = wp_get_post_terms( $post->ID, $value );
 					if (!is_wp_error($term)) {
 						$terms = esc_attr($term[0]->name);
-						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms);
+						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
 					}
 				}
 			}
@@ -1177,31 +1177,75 @@ if (get_option('blog_public') !='0') {// Discourage search engines from indexing
 				}
 				array_push($seopress_comma_array, $seopress_titles_nosnippet);
 			}
-
-			//new meta robots
-			if (!in_array('noindex', $seopress_comma_array) && !in_array('nosnippet', $seopress_comma_array)) {
-				$seopress_titles_max_snippet = 'max-snippet:-1, max-image-preview:large, max-video-preview:-1';
-				array_push($seopress_comma_array, $seopress_titles_max_snippet);
-			}
 			
 			//remove hreflang tag from Polylang if noindex
 			if (in_array('noindex', $seopress_comma_array)) {
 				add_filter( 'pll_rel_hreflang_attributes', 'seopress_remove_hreflang_polylang' );
 			}
 
+			if (!in_array('noindex', $seopress_comma_array) && !in_array('nofollow', $seopress_comma_array)) {
+				$seopress_titles_max_snippet = 'index, follow';
+				array_unshift($seopress_comma_array, $seopress_titles_max_snippet);
+			}
+
+			if (in_array('nofollow', $seopress_comma_array) && !in_array('noindex', $seopress_comma_array)) {
+				$seopress_titles_max_snippet = 'index';
+				array_unshift($seopress_comma_array, $seopress_titles_max_snippet);
+			}
+
+			if (in_array('noindex', $seopress_comma_array) && !in_array('nofollow', $seopress_comma_array)) {
+				$seopress_titles_max_snippet = 'follow';
+				array_unshift($seopress_comma_array, $seopress_titles_max_snippet);
+			}
+
+			//Default meta robots
 			$seopress_titles_robots = '<meta name="robots" content="';
 
 			$seopress_comma_count = count($seopress_comma_array);
 			for ($i = 0; $i < $seopress_comma_count; $i++) {
 				$seopress_titles_robots .= $seopress_comma_array[$i];
-			   	if ($i < ($seopress_comma_count - 1)) {
+				if ($i < ($seopress_comma_count - 1)) {
 					$seopress_titles_robots .= ', ';
-			   	}
+				}
 			}
 
 			$seopress_titles_robots .= '" />';
 			$seopress_titles_robots .= "\n";
 
+			//new meta robots
+			if (!in_array('noindex', $seopress_comma_array)) {
+					$seopress_titles_max_snippet = 'max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+					array_push($seopress_comma_array, $seopress_titles_max_snippet);
+				
+
+				//Googlebot
+				$seopress_titles_robots .= '<meta name="googlebot" content="';
+				
+				$seopress_comma_count = count($seopress_comma_array);
+				for ($i = 0; $i < $seopress_comma_count; $i++) {
+					$seopress_titles_robots .= $seopress_comma_array[$i];
+					if ($i < ($seopress_comma_count - 1)) {
+						$seopress_titles_robots .= ', ';
+					}
+				}
+
+				$seopress_titles_robots .= '" />';
+				$seopress_titles_robots .= "\n";
+
+				//Bingbot
+				$seopress_titles_robots .= '<meta name="bingbot" content="';
+
+				$seopress_comma_count = count($seopress_comma_array);
+				for ($i = 0; $i < $seopress_comma_count; $i++) {
+					$seopress_titles_robots .= $seopress_comma_array[$i];
+					if ($i < ($seopress_comma_count - 1)) {
+						$seopress_titles_robots .= ', ';
+					}
+				}
+
+				$seopress_titles_robots .= '" />';
+				$seopress_titles_robots .= "\n";
+			}
 			//Hook on meta robots all - 'seopress_titles_robots'
 			if (has_filter('seopress_titles_robots')) {
 				$seopress_titles_robots = apply_filters('seopress_titles_robots', $seopress_titles_robots);

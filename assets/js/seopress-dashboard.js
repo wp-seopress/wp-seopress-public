@@ -3,7 +3,24 @@ jQuery(document).ready(function($) {
 	if (!$.trim( $("#seopress-notifications-center").html() )) {
 		$('#seopress-notifications-center').remove();
 	}
-	const notices = ["notice-get-started","notice-wizard","notice-insights-wizard","notice-divide-comments","notice-review","notice-trailingslash","notice-posts-number","notice-rss-use-excerpt","notice-search-console","notice-google-business","notice-ssl","notice-title-tag", "notice-go-pro"]
+	const notices = [
+		"notice-get-started",
+		"notice-wizard",
+		"notice-insights-wizard",
+		"notice-divide-comments",
+		"notice-review",
+		"notice-trailingslash",
+		"notice-posts-number",
+		"notice-rss-use-excerpt",
+		"notice-search-console",
+		"notice-google-business",
+		"notice-ssl",
+		"notice-title-tag",
+		"notice-enfold",
+		"notice-themes",
+		"notice-page-builders",
+		"notice-go-pro"
+	]
 	notices.forEach(function (item) {
 		$('#'+item).on('click', function() {
 			$('#'+item).attr('data-notice', $('#'+item).attr('data-notice') == '1' ? '0' : '1');
@@ -26,7 +43,25 @@ jQuery(document).ready(function($) {
 		});
 	});
 
-	const features = ["titles","xml-sitemap","social","google-analytics","advanced","local-business","woocommerce","edd","dublin-core","rich-snippets","breadcrumbs","robots","news","404","bot","rewrite","white-label"]
+	const features = [
+		"titles",
+		"xml-sitemap",
+		"social",
+		"google-analytics",
+		"advanced",
+		"local-business",
+		"woocommerce",
+		"edd",
+		"dublin-core",
+		"rich-snippets",
+		"breadcrumbs",
+		"robots",
+		"news",
+		"404",
+		"bot",
+		"rewrite",
+		"white-label"
+	]
 	features.forEach(function (item) {
 		$('#toggle-'+item).on('click', function() {
 			$('#toggle-'+item).attr('data-toggle', $('#toggle-'+item).attr('data-toggle') == '1' ? '0' : '1');

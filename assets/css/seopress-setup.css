@@ -486,6 +486,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="color"]:focu
 	position: relative;
 	border-bottom: 2px solid #ccc;
 	line-height: 24px;
+	font-size: 16px;
 }
 
 .seopress-setup-steps li a {
@@ -522,7 +523,6 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="color"]:focu
 }
 
 .seopress-setup-steps li.active {
-	border-color: #6259e6;
 	color: #6259e6;
 	font-weight: 700;
 	text-decoration: none;
@@ -536,9 +536,29 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="color"]:focu
 	border-color: #6259e6;
 }
 
+@keyframes fade {
+	0%		{border-color: #6259e600;left:-100%;}
+	100%	{border-color: #6259e6;left: 0;}
+}
+
+.seopress-setup-steps li.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    animation-name: fade;
+    animation-duration: 2s;
+    width: 100%;
+    animation-iteration-count: 1;
+    height: 2px;
+    background: #6259e6;
+    z-index: -1;
+}
+
 .seopress-setup-steps li.done {
 	border-color: #6259e6;
-	color: #6259e6
+	color: #6259e6;
+	z-index: 10;
 }
 
 .seopress-setup-steps li.done::before {
@@ -1399,6 +1419,7 @@ p.jetpack-terms {
 	text-align: left;
 	display: inline-block;
 	width: 100%;
+	box-sizing: border-box;
 }
 
 .seopress-setup-content .recommended-step a {

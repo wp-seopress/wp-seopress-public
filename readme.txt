@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 3.8.9.1
+Stable tag: 3.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -273,6 +273,38 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.9 <a href="https://www.seopress.org/blog/elementor-integration-seopress-3-9/">Read our Blog post update</a> =
+* NEW Free Elementor integration (first iteration) 🎉
+* NEW Automatically set the image Alt text from target keywords if empty (this setting is retroactive, no need to resave your post content)
+* NEW Hide SEOPress columns in post list (SEO, Titles and metas, Single post types, Click to hide any SEO metaboxes / columns for this post type)
+* NEW White label options: change plugin name, description, author and website url in plugins list for both SEOPress and SEOPress PRO (PRO)
+* NEW Add quick edit feature for Redirection post type (PRO)
+* NEW Notification to automatically generate meta description with Divi, Oxygen, Enfold (Avia Layout), WP Bakery
+* NEW Notification for Enfold theme if SEO settings are not correctly setup to avoid any SEO issue
+* NEW "seopress_sitemaps_index_lastmod" hook to disable lastmod column in the index sitemaps to get a huge performance boost with large amount of posts (1,5 seconds to load 1 million posts - https://www.seopress.org/support/hooks/disable-lastmod-column-in-index-sitemaps/)
+* INFO Optimization of structured data in database for better performance
+* INFO White label improvements: "Remove SEOPress menu/submenu pages" option now also remove items from SEOPress dashboard page
+* INFO "seopress_get_pro_schemas_manual" hook as a fallback to display previous data before cleaning (https://www.seopress.org/support/hooks/get-old-manual-schemas-fallback/)
+* INFO Adding new Google PageSpeed Insights KPI: Cumulative Layout Shift (CLS), Largest Contentful Paint (LCP) (SEO, PRO, PageSpeed Insights)
+* INFO Google PageSpeed Insights is now using the mobile index score
+* INFO Add meta robots for Googlebot / Bingbot
+* INFO Import Yoast Primary Category with our import tool
+* INFO Quick buttons improvements to avoid empty spaces at the beginning of the fields
+* INFO Add a second argument "taxonomy name" to "seopress_titles_custom_tax" hook to filter %%_ct_your_custom_taxonomy_slug%% dynamic variable (https://www.seopress.org/support/hooks/filter-_ct_your_custom_taxonomy_slug-dynamic-variable/)
+* INFO Add notice if "Override every og:image tag" option is enabled without a default OG image set from Social Networks settings
+* INFO Improve UI in schemas
+* INFO Improve UI when adding a new redirection
+* INFO Improve post list with all SEOPress columns
+* INFO Add redirection settings from the SEO metabox to import / export metadata to a CSV file
+* FIX Compatibility issue with WP All Import for XML sitemaps
+* FIX Content analysis with special charaters in target keywords
+* FIX "term title" small button from SEO metabox for Terms
+* FIX Broken link checker error in post type list
+* FIX an issue on import tool from other plugins
+* FIX 404 monitoring encoding issue with non UTF-8 charaters
+* FIX 410/451 redirects from the SEO metabox (post editing screen)
+* FIX i18n strings
+* FIX Improve accessibility
 = 3.8.9.1 =
 * FIX JS error for import tool with WP 5.5
 = 3.8.9 =

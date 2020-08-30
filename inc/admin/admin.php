@@ -242,6 +242,7 @@ class seopress_options
 					<li><span>'.__('%%currentdate%%','wp-seopress').'</span>'.__('Current date','wp-seopress').'</li>
 					<li><span>'.__('%%currenttime%%','wp-seopress').'</span>'.__('Current time','wp-seopress').'</li>
 					<li><span>'.__('%%author_bio%%','wp-seopress').'</span>'.__('Author bio, meta desc only','wp-seopress').'</li>
+					<li><span>'.__('%%currentmonth_num%%','wp-seopress').'</span>'.__('Current month in digital format','wp-seopress').'</li>
 				</ul>
 			'.wp_oembed_get('https://www.youtube.com/watch?v=HEa8m9u4mOk', array('width'=>530));
 
@@ -775,6 +776,7 @@ class seopress_options
 								<li><?php _e('Meta Robots (noindex, nofollow...)','wp-seopress'); ?></li>
 								<li><?php _e('Canonical URL','wp-seopress'); ?></li>
 								<li><?php _e('Focus keywords','wp-seopress'); ?></li>
+								<li><?php _e('Primary category','wp-seopress'); ?></li>
 							</ul>
 							<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast data.', 'wp-seopress' ); ?></p>
 							<button id="seopress-yoast-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
@@ -1158,7 +1160,7 @@ class seopress_options
 	 * Register and add settings
 	 */
 	public function page_init()
-	{        
+	{
 		register_setting(
 			'seopress_option_group', // Option group
 			'seopress_option_name', // Option name
@@ -1181,7 +1183,7 @@ class seopress_options
 			'seopress_social_option_group', // Option group
 			'seopress_social_option_name', // Option name
 			array( $this, 'sanitize' ) // Sanitize
-		);        
+		);
 
 		register_setting(
 			'seopress_google_analytics_option_group', // Option group
@@ -1208,47 +1210,47 @@ class seopress_options
 			//__("Home","wp-seopress"), // Title
 			array( $this, 'print_section_info_titles' ), // Callback
 			'seopress-settings-admin-titles-home' // Page
-		);  
+		);
 
 		add_settings_field(
 			'seopress_titles_sep', // ID
-		   __("Separator","wp-seopress"), // Title
+			__("Separator","wp-seopress"), // Title
 			array( $this, 'seopress_titles_sep_callback' ), // Callback
 			'seopress-settings-admin-titles-home', // Page
-			'seopress_setting_section_titles_home' // Section                  
+			'seopress_setting_section_titles_home' // Section
 		);
 
 		add_settings_field(
 			'seopress_titles_home_site_title', // ID
-		   __("Site title","wp-seopress"), // Title
+			__("Site title","wp-seopress"), // Title
 			array( $this, 'seopress_titles_home_site_title_callback' ), // Callback
 			'seopress-settings-admin-titles-home', // Page
-			'seopress_setting_section_titles_home' // Section                  
+			'seopress_setting_section_titles_home' // Section
 		);
 
 		add_settings_field(
 			'seopress_titles_home_site_desc', // ID
-		   __("Meta description","wp-seopress"), // Title
+			__("Meta description","wp-seopress"), // Title
 			array( $this, 'seopress_titles_home_site_desc_callback' ), // Callback
 			'seopress-settings-admin-titles-home', // Page
-			'seopress_setting_section_titles_home' // Section                  
+			'seopress_setting_section_titles_home' // Section
 		);
 
 		//Single Post Types SECTION================================================================
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_titles_single', // ID
 			'',
 			//__("Single Post Types","wp-seopress"), // Title
 			array( $this, 'print_section_info_single' ), // Callback
 			'seopress-settings-admin-titles-single' // Page
-		);  
+		);
 
 		add_settings_field(
 			'seopress_titles_single_titles', // ID
 			'',
 			array( $this, 'seopress_titles_single_titles_callback' ), // Callback
 			'seopress-settings-admin-titles-single', // Page
-			'seopress_setting_section_titles_single' // Section                  
+			'seopress_setting_section_titles_single' // Section
 		);
 
 		//Archives SECTION=========================================================================
@@ -1258,14 +1260,14 @@ class seopress_options
 			//__("Archives","wp-seopress"), // Title
 			array( $this, 'print_section_info_archives' ), // Callback
 			'seopress-settings-admin-titles-archives' // Page
-		);  
+		);
 
 		add_settings_field(
 			'seopress_titles_archives_titles', // ID
 			'',
 			array( $this, 'seopress_titles_archives_titles_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1274,7 +1276,7 @@ class seopress_options
 			//__('Title template','wp-seopress'),
 			array( $this, 'seopress_titles_archives_author_title_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1283,7 +1285,7 @@ class seopress_options
 			//__('Meta description template','wp-seopress'),
 			array( $this, 'seopress_titles_archives_author_desc_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1292,7 +1294,7 @@ class seopress_options
 			//__("noindex","wp-seopress"), // Title
 			array( $this, 'seopress_titles_archives_author_noindex_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                 
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1301,7 +1303,7 @@ class seopress_options
 			//__("disable","wp-seopress"), // Title
 			array( $this, 'seopress_titles_archives_author_disable_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                 
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1310,7 +1312,7 @@ class seopress_options
 			//__('Title template','wp-seopress'),
 			array( $this, 'seopress_titles_archives_date_title_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1319,7 +1321,7 @@ class seopress_options
 			//__('Meta description template','wp-seopress'),
 			array( $this, 'seopress_titles_archives_date_desc_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1328,7 +1330,7 @@ class seopress_options
 			//__("noindex","wp-seopress"), // Title
 			array( $this, 'seopress_titles_archives_date_noindex_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                 
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1337,7 +1339,7 @@ class seopress_options
 			//__("disable","wp-seopress"), // Title
 			array( $this, 'seopress_titles_archives_date_disable_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                 
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1346,7 +1348,7 @@ class seopress_options
 			//__('Title template','wp-seopress'),
 			array( $this, 'seopress_titles_archives_search_title_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1355,7 +1357,7 @@ class seopress_options
 			//__('Meta description template','wp-seopress'),
 			array( $this, 'seopress_titles_archives_search_desc_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1364,7 +1366,7 @@ class seopress_options
 			//__('noindex','wp-seopress'),
 			array( $this, 'seopress_titles_archives_search_title_noindex_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1373,7 +1375,7 @@ class seopress_options
 			//__('Title template','wp-seopress'),
 			array( $this, 'seopress_titles_archives_404_title_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		add_settings_field(
@@ -1382,28 +1384,28 @@ class seopress_options
 			//__('Meta description template','wp-seopress'),
 			array( $this, 'seopress_titles_archives_404_desc_callback' ), // Callback
 			'seopress-settings-admin-titles-archives', // Page
-			'seopress_setting_section_titles_archives' // Section                  
+			'seopress_setting_section_titles_archives' // Section
 		);
 
 		//Taxonomies SECTION=======================================================================
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_titles_tax', // ID
 			'',
 			//__("Taxonomies","wp-seopress"), // Title
 			array( $this, 'print_section_info_tax' ), // Callback
 			'seopress-settings-admin-titles-tax' // Page
-		);  
+		);
 
 		add_settings_field(
 			'seopress_titles_tax_titles', // ID
 			'',
 			array( $this, 'seopress_titles_tax_titles_callback' ), // Callback
 			'seopress-settings-admin-titles-tax', // Page
-			'seopress_setting_section_titles_tax' // Section                  
+			'seopress_setting_section_titles_tax' // Section
 		);
 
 		//Advanced SECTION=========================================================================
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_titles_advanced', // ID
 			'',
 			//__("Advanced","wp-seopress"), // Title
@@ -1413,39 +1415,39 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_titles_noindex', // ID
-		   __("noindex","wp-seopress"), // Title
+			__("noindex","wp-seopress"), // Title
 			array( $this, 'seopress_titles_noindex_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
-			'seopress_setting_section_titles_advanced' // Section                  
+			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_titles_nofollow', // ID
-		   __("nofollow","wp-seopress"), // Title
+			__("nofollow","wp-seopress"), // Title
 			array( $this, 'seopress_titles_nofollow_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
-			'seopress_setting_section_titles_advanced' // Section                  
+			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_titles_noodp', // ID
-		   __("noodp","wp-seopress"), // Title
+			__("noodp","wp-seopress"), // Title
 			array( $this, 'seopress_titles_noodp_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
-			'seopress_setting_section_titles_advanced' // Section                  
+			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_titles_noimageindex', // ID
-		   __("noimageindex","wp-seopress"), // Title
+			__("noimageindex","wp-seopress"), // Title
 			array( $this, 'seopress_titles_noimageindex_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
-			'seopress_setting_section_titles_advanced' // Section                  
+			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_titles_noarchive', // ID
-		   __("noarchive","wp-seopress"), // Title
+			__("noarchive","wp-seopress"), // Title
 			array( $this, 'seopress_titles_noarchive_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
 			'seopress_setting_section_titles_advanced' // Section
@@ -1453,7 +1455,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_titles_nosnippet', // ID
-		   __("nosnippet","wp-seopress"), // Title
+			__("nosnippet","wp-seopress"), // Title
 			array( $this, 'seopress_titles_nosnippet_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
 			'seopress_setting_section_titles_advanced' // Section
@@ -1461,7 +1463,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_titles_nositelinkssearchbox', // ID
-		   __("nositelinkssearchbox","wp-seopress"), // Title
+			__("nositelinkssearchbox","wp-seopress"), // Title
 			array( $this, 'seopress_titles_nositelinkssearchbox_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
 			'seopress_setting_section_titles_advanced' // Section
@@ -1469,7 +1471,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_titles_paged_rel', // ID
-		   __("Indicate paginated content to Google","wp-seopress"), // Title
+			__("Indicate paginated content to Google","wp-seopress"), // Title
 			array( $this, 'seopress_titles_paged_rel_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
 			'seopress_setting_section_titles_advanced' // Section
@@ -1477,14 +1479,14 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_titles_paged_noindex', // ID
-		   __("noindex on paged archives","wp-seopress"), // Title
+			__("noindex on paged archives","wp-seopress"), // Title
 			array( $this, 'seopress_titles_paged_noindex_callback' ), // Callback
 			'seopress-settings-admin-titles-advanced', // Page
 			'seopress_setting_section_titles_advanced' // Section
 		);
 
 		//XML Sitemap SECTION======================================================================
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_xml_sitemap_general', // ID
 			'',
 			//__("General","wp-seopress"), // Title
@@ -1494,47 +1496,47 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_xml_sitemap_general_enable', // ID
-		   __("Enable XML Sitemap","wp-seopress"), // Title
+			__("Enable XML Sitemap","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_general_enable_callback' ), // Callback
 			'seopress-settings-admin-xml-sitemap-general', // Page
-			'seopress_setting_section_xml_sitemap_general' // Section                  
+			'seopress_setting_section_xml_sitemap_general' // Section
 		);
 
 		add_settings_field(
 			'seopress_xml_sitemap_img_enable', // ID
-		   __("Enable XML Image Sitemaps","wp-seopress"), // Title
+			__("Enable XML Image Sitemaps","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_img_enable_callback' ), // Callback
 			'seopress-settings-admin-xml-sitemap-general', // Page
-			'seopress_setting_section_xml_sitemap_general' // Section                  
+			'seopress_setting_section_xml_sitemap_general' // Section
 		);
 
 		if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
 			add_settings_field(
 				'seopress_xml_sitemap_video_enable_callback', // ID
-			   __("Enable XML Video Sitemaps","wp-seopress"), // Title
+				__("Enable XML Video Sitemaps","wp-seopress"), // Title
 				array( $this, 'seopress_xml_sitemap_video_enable_callback' ), // Callback
 				'seopress-settings-admin-xml-sitemap-general', // Page
-				'seopress_setting_section_xml_sitemap_general' // Section                  
+				'seopress_setting_section_xml_sitemap_general' // Section
 			);
 		}
 
 		add_settings_field(
 			'seopress_xml_sitemap_author_enable', // ID
-		   __("Enable Author Sitemap","wp-seopress"), // Title
+			__("Enable Author Sitemap","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_author_enable_callback' ), // Callback
 			'seopress-settings-admin-xml-sitemap-general', // Page
-			'seopress_setting_section_xml_sitemap_general' // Section                  
+			'seopress_setting_section_xml_sitemap_general' // Section
 		);
 		
 		add_settings_field(
 			'seopress_xml_sitemap_html_enable', // ID
-		   __("Enable HTML Sitemap","wp-seopress"), // Title
+			__("Enable HTML Sitemap","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_html_enable_callback' ), // Callback
 			'seopress-settings-admin-xml-sitemap-general', // Page
-			'seopress_setting_section_xml_sitemap_general' // Section                  
+			'seopress_setting_section_xml_sitemap_general' // Section
 		);
 
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_xml_sitemap_post_types', // ID
 			'',
 			//__("Post Types","wp-seopress"), // Title
@@ -1544,13 +1546,13 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_xml_sitemap_post_types_list', // ID
-		   __("Check to INCLUDE Post Types","wp-seopress"), // Title
+			__("Check to INCLUDE Post Types","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_post_types_list_callback' ), // Callback
 			'seopress-settings-admin-xml-sitemap-post-types', // Page
-			'seopress_setting_section_xml_sitemap_post_types' // Section                  
+			'seopress_setting_section_xml_sitemap_post_types' // Section
 		);
 
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_xml_sitemap_taxonomies', // ID
 			'',
 			//__("Taxonomies","wp-seopress"), // Title
@@ -1560,13 +1562,13 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_xml_sitemap_taxonomies_list', // ID
-		   __("Check to INCLUDE Taxonomies","wp-seopress"), // Title
+			__("Check to INCLUDE Taxonomies","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_taxonomies_list_callback' ), // Callback
 			'seopress-settings-admin-xml-sitemap-taxonomies', // Page
-			'seopress_setting_section_xml_sitemap_taxonomies' // Section                  
+			'seopress_setting_section_xml_sitemap_taxonomies' // Section
 		);
 		
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_html_sitemap', // ID
 			'',
 			//__("HTML Sitemap","wp-seopress"), // Title
@@ -1576,46 +1578,46 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_xml_sitemap_html_mapping', // ID
-		   __("Enter a post, page or custom post type ID(s) to display the sitemap","wp-seopress"), // Title
+			__("Enter a post, page or custom post type ID(s) to display the sitemap","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_html_mapping_callback' ), // Callback
 			'seopress-settings-admin-html-sitemap', // Page
-			'seopress_setting_section_html_sitemap' // Section                  
+			'seopress_setting_section_html_sitemap' // Section
 		);
 
 		add_settings_field(
 			'seopress_xml_sitemap_html_exclude', // ID
-		   __("Exclude some Posts, Pages, Custom Post Types or Terms IDs","wp-seopress"), // Title
+			__("Exclude some Posts, Pages, Custom Post Types or Terms IDs","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_html_exclude_callback' ), // Callback
 			'seopress-settings-admin-html-sitemap', // Page
-			'seopress_setting_section_html_sitemap' // Section                  
+			'seopress_setting_section_html_sitemap' // Section
 		);
 
 		add_settings_field(
 			'seopress_xml_sitemap_html_order', // ID
-		   __("Sort order","wp-seopress"), // Title
+			__("Sort order","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_html_order_callback' ), // Callback
 			'seopress-settings-admin-html-sitemap', // Page
-			'seopress_setting_section_html_sitemap' // Section                  
+			'seopress_setting_section_html_sitemap' // Section
 		);
 
 		add_settings_field(
 			'seopress_xml_sitemap_html_orderby', // ID
-		   __("Order posts by","wp-seopress"), // Title
+			__("Order posts by","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_html_orderby_callback' ), // Callback
 			'seopress-settings-admin-html-sitemap', // Page
-			'seopress_setting_section_html_sitemap' // Section                  
+			'seopress_setting_section_html_sitemap' // Section
 		);
 
 		add_settings_field(
 			'seopress_xml_sitemap_html_date', // ID
-		   __("Disable the display of the publication date","wp-seopress"), // Title
+			__("Disable the display of the publication date","wp-seopress"), // Title
 			array( $this, 'seopress_xml_sitemap_html_date_callback' ), // Callback
 			'seopress-settings-admin-html-sitemap', // Page
-			'seopress_setting_section_html_sitemap' // Section                  
+			'seopress_setting_section_html_sitemap' // Section
 		);
 
 		//Knowledge graph SECTION======================================================================
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_social_knowledge', // ID
 			'',
 			//__("Knowledge graph","wp-seopress"), // Title
@@ -1625,50 +1627,50 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_knowledge_type', // ID
-		   __("Person or organization","wp-seopress"), // Title
+			__("Person or organization","wp-seopress"), // Title
 			array( $this, 'seopress_social_knowledge_type_callback' ), // Callback
 			'seopress-settings-admin-social-knowledge', // Page
-			'seopress_setting_section_social_knowledge' // Section                  
+			'seopress_setting_section_social_knowledge' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_knowledge_name', // ID
-		   __("Your name/organization","wp-seopress"), // Title
+			__("Your name/organization","wp-seopress"), // Title
 			array( $this, 'seopress_social_knowledge_name_callback' ), // Callback
 			'seopress-settings-admin-social-knowledge', // Page
-			'seopress_setting_section_social_knowledge' // Section                  
+			'seopress_setting_section_social_knowledge' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_knowledge_img', // ID
-		   __("Your photo/organization logo","wp-seopress"), // Title
+			__("Your photo/organization logo","wp-seopress"), // Title
 			array( $this, 'seopress_social_knowledge_img_callback' ), // Callback
 			'seopress-settings-admin-social-knowledge', // Page
-			'seopress_setting_section_social_knowledge' // Section                  
+			'seopress_setting_section_social_knowledge' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_knowledge_phone', // ID
-		   __("Organization's phone number (only for Organizations)","wp-seopress"), // Title
+			__("Organization's phone number (only for Organizations)","wp-seopress"), // Title
 			array( $this, 'seopress_social_knowledge_phone_callback' ), // Callback
 			'seopress-settings-admin-social-knowledge', // Page
-			'seopress_setting_section_social_knowledge' // Section                  
+			'seopress_setting_section_social_knowledge' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_knowledge_contact_type', // ID
-		   __("Contact type (only for Organizations)","wp-seopress"), // Title
+			__("Contact type (only for Organizations)","wp-seopress"), // Title
 			array( $this, 'seopress_social_knowledge_contact_type_callback' ), // Callback
 			'seopress-settings-admin-social-knowledge', // Page
-			'seopress_setting_section_social_knowledge' // Section                  
+			'seopress_setting_section_social_knowledge' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_knowledge_contact_option', // ID
-		   __("Contact option (only for Organizations)","wp-seopress"), // Title
+			__("Contact option (only for Organizations)","wp-seopress"), // Title
 			array( $this, 'seopress_social_knowledge_contact_option_callback' ), // Callback
 			'seopress-settings-admin-social-knowledge', // Page
-			'seopress_setting_section_social_knowledge' // Section                  
+			'seopress_setting_section_social_knowledge' // Section
 		);
 
 		//Social SECTION=====================================================================================
@@ -1682,71 +1684,71 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_accounts_facebook', // ID
-		   __("Facebook Page URL","wp-seopress"), // Title
+			__("Facebook Page URL","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_facebook_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
-			'seopress_setting_section_social_accounts' // Section                  
+			'seopress_setting_section_social_accounts' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_accounts_twitter', // ID
-		   __("Twitter Username","wp-seopress"), // Title
+			__("Twitter Username","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_twitter_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
-			'seopress_setting_section_social_accounts' // Section                  
+			'seopress_setting_section_social_accounts' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_accounts_pinterest', // ID
-		   __("Pinterest URL","wp-seopress"), // Title
+			__("Pinterest URL","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_pinterest_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
-			'seopress_setting_section_social_accounts' // Section                  
+			'seopress_setting_section_social_accounts' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_accounts_instagram', // ID
-		   __("Instagram URL","wp-seopress"), // Title
+			__("Instagram URL","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_instagram_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
-			'seopress_setting_section_social_accounts' // Section                  
+			'seopress_setting_section_social_accounts' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_accounts_youtube', // ID
-		   __("YouTube URL","wp-seopress"), // Title
+			__("YouTube URL","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_youtube_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
-			'seopress_setting_section_social_accounts' // Section                  
+			'seopress_setting_section_social_accounts' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_accounts_linkedin', // ID
-		   __("LinkedIn URL","wp-seopress"), // Title
+			__("LinkedIn URL","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_linkedin_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
-			'seopress_setting_section_social_accounts' // Section                  
+			'seopress_setting_section_social_accounts' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_accounts_myspace', // ID
-		   __("MySpace URL","wp-seopress"), // Title
+			__("MySpace URL","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_myspace_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
-			'seopress_setting_section_social_accounts' // Section                  
+			'seopress_setting_section_social_accounts' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_accounts_soundcloud', // ID
-		   __("Soundcloud URL","wp-seopress"), // Title
+			__("Soundcloud URL","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_soundcloud_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
-			'seopress_setting_section_social_accounts' // Section                  
+			'seopress_setting_section_social_accounts' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_accounts_tumblr', // ID
-		   __("Tumblr URL","wp-seopress"), // Title
+			__("Tumblr URL","wp-seopress"), // Title
 			array( $this, 'seopress_social_accounts_tumblr_callback' ), // Callback
 			'seopress-settings-admin-social-accounts', // Page
 			'seopress_setting_section_social_accounts' // Section
@@ -1763,7 +1765,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_facebook_og', // ID
-		   __("Enable Open Graph Data","wp-seopress"), // Title
+			__("Enable Open Graph Data","wp-seopress"), // Title
 			array( $this, 'seopress_social_facebook_og_callback' ), // Callback
 			'seopress-settings-admin-social-facebook', // Page
 			'seopress_setting_section_social_facebook' // Section
@@ -1771,7 +1773,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_facebook_img', // ID
-		   __("Select a default image","wp-seopress"), // Title
+			__("Select a default image","wp-seopress"), // Title
 			array( $this, 'seopress_social_facebook_img_callback' ), // Callback
 			'seopress-settings-admin-social-facebook', // Page
 			'seopress_setting_section_social_facebook' // Section
@@ -1779,7 +1781,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_facebook_img_default', // ID
-		   __("Apply this image to all your og:image tag","wp-seopress"), // Title
+			__("Apply this image to all your og:image tag","wp-seopress"), // Title
 			array( $this, 'seopress_social_facebook_img_default_callback' ), // Callback
 			'seopress-settings-admin-social-facebook', // Page
 			'seopress_setting_section_social_facebook' // Section
@@ -1787,7 +1789,7 @@ class seopress_options
 		
 		add_settings_field(
 			'seopress_social_facebook_img_cpt', // ID
-		   __("Define custom og:image tag for post type archive pages","wp-seopress"), // Title
+			__("Define custom og:image tag for post type archive pages","wp-seopress"), // Title
 			array( $this, 'seopress_social_facebook_img_cpt_callback' ), // Callback
 			'seopress-settings-admin-social-facebook', // Page
 			'seopress_setting_section_social_facebook' // Section
@@ -1795,7 +1797,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_facebook_link_ownership_id', // ID
-		   __("Facebook Link Ownership ID","wp-seopress"), // Title
+			__("Facebook Link Ownership ID","wp-seopress"), // Title
 			array( $this, 'seopress_social_facebook_link_ownership_id_callback' ), // Callback
 			'seopress-settings-admin-social-facebook', // Page
 			'seopress_setting_section_social_facebook' // Section
@@ -1803,7 +1805,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_facebook_admin_id', // ID
-		   __("Facebook Admin ID","wp-seopress"), // Title
+			__("Facebook Admin ID","wp-seopress"), // Title
 			array( $this, 'seopress_social_facebook_admin_id_callback' ), // Callback
 			'seopress-settings-admin-social-facebook', // Page
 			'seopress_setting_section_social_facebook' // Section
@@ -1811,10 +1813,10 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_facebook_app_id', // ID
-		   __("Facebook App ID","wp-seopress"), // Title
+			__("Facebook App ID","wp-seopress"), // Title
 			array( $this, 'seopress_social_facebook_app_id_callback' ), // Callback
 			'seopress-settings-admin-social-facebook', // Page
-			'seopress_setting_section_social_facebook' // Section                  
+			'seopress_setting_section_social_facebook' // Section
 		);
 
 		//Twitter SECTION==========================================================================
@@ -1828,31 +1830,31 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_social_twitter_card', // ID
-		   __("Enable Twitter Card","wp-seopress"), // Title
+			__("Enable Twitter Card","wp-seopress"), // Title
 			array( $this, 'seopress_social_twitter_card_callback' ), // Callback
 			'seopress-settings-admin-social-twitter', // Page
-			'seopress_setting_section_social_twitter' // Section                  
+			'seopress_setting_section_social_twitter' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_twitter_card_og', // ID
-		   __("Use Open Graph if no Twitter Card is filled","wp-seopress"), // Title
+			__("Use Open Graph if no Twitter Card is filled","wp-seopress"), // Title
 			array( $this, 'seopress_social_twitter_card_og_callback' ), // Callback
 			'seopress-settings-admin-social-twitter', // Page
-			'seopress_setting_section_social_twitter' // Section                  
+			'seopress_setting_section_social_twitter' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_twitter_card_img', // ID
-		   __("Default Twitter Image","wp-seopress"), // Title
+			__("Default Twitter Image","wp-seopress"), // Title
 			array( $this, 'seopress_social_twitter_card_img_callback' ), // Callback
 			'seopress-settings-admin-social-twitter', // Page
-			'seopress_setting_section_social_twitter' // Section                  
+			'seopress_setting_section_social_twitter' // Section
 		);
 
 		add_settings_field(
 			'seopress_social_twitter_card_img_size', // ID
-		   __("Image size for Twitter Summary card","wp-seopress"), // Title
+			__("Image size for Twitter Summary card","wp-seopress"), // Title
 			array( $this, 'seopress_social_twitter_card_img_size_callback' ), // Callback
 			'seopress-settings-admin-social-twitter', // Page
 			'seopress_setting_section_social_twitter' // Section
@@ -1869,7 +1871,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_enable', // ID
-		   __("Enable Google Analytics tracking","wp-seopress"), // Title
+			__("Enable Google Analytics tracking","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_enable_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-enable', // Page
 			'seopress_setting_section_google_analytics_enable' // Section
@@ -1877,7 +1879,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_ua', // ID
-		   __("Enter your tracking ID","wp-seopress"), // Title
+			__("Enter your tracking ID","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_ua_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-enable', // Page
 			'seopress_setting_section_google_analytics_enable' // Section
@@ -1885,7 +1887,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_roles', // ID
-		   __("Exclude user roles from tracking (Google Analytics and Matomo)","wp-seopress"), // Title
+			__("Exclude user roles from tracking (Google Analytics and Matomo)","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_roles_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-enable', // Page
 			'seopress_setting_section_google_analytics_enable' // Section
@@ -1902,7 +1904,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_disable', // ID
-		   __("Analytics tracking opt-in","wp-seopress"), // Title
+			__("Analytics tracking opt-in","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_disable_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1918,7 +1920,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_opt_out_msg', // ID
-		   __("Consent message for user tracking","wp-seopress"), // Title
+			__("Consent message for user tracking","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_opt_out_msg_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1926,7 +1928,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_opt_out_msg_ok', // ID
-		   __("Accept button for user tracking","wp-seopress"), // Title
+			__("Accept button for user tracking","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_opt_out_msg_ok_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1934,7 +1936,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_opt_out_msg_close', // ID
-		   __("Close button","wp-seopress"), // Title
+			__("Close button","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_opt_out_msg_close_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1942,7 +1944,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_pos', // ID
-		   __("Cookie bar position","wp-seopress"), // Title
+			__("Cookie bar position","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_pos_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1950,7 +1952,7 @@ class seopress_options
 		
 		add_settings_field(
 			'seopress_google_analytics_cb_bg', // ID
-		   __("Cookie bar background color","wp-seopress"), // Title
+			__("Cookie bar background color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_bg_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1958,7 +1960,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_txt_col', // ID
-		   __("Cookie bar text color","wp-seopress"), // Title
+			__("Cookie bar text color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_txt_col_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1966,7 +1968,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_lk_col', // ID
-		   __("Cookie bar link color","wp-seopress"), // Title
+			__("Cookie bar link color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_lk_col_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1974,7 +1976,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_btn_bg', // ID
-		   __("Cookie bar button background color","wp-seopress"), // Title
+			__("Cookie bar button background color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_btn_bg_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1982,7 +1984,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_btn_col', // ID
-		   __("Cookie bar button color","wp-seopress"), // Title
+			__("Cookie bar button color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_btn_col_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1990,7 +1992,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_btn_bg_hov', // ID
-		   __("Cookie bar button hover background color","wp-seopress"), // Title
+			__("Cookie bar button hover background color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_btn_bg_hov_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -1998,7 +2000,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_btn_col_hov', // ID
-		   __("Cookie bar button hover color","wp-seopress"), // Title
+			__("Cookie bar button hover color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_btn_col_hov_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -2006,7 +2008,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_btn_sec_bg', // ID
-		   __("Cookie bar secondary button background color","wp-seopress"), // Title
+			__("Cookie bar secondary button background color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_btn_sec_bg_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -2014,7 +2016,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_btn_sec_col', // ID
-		   __("Cookie bar secondary button color","wp-seopress"), // Title
+			__("Cookie bar secondary button color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_btn_sec_col_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -2022,7 +2024,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_btn_sec_bg_hov', // ID
-		   __("Cookie bar secondary button hover background color","wp-seopress"), // Title
+			__("Cookie bar secondary button hover background color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_btn_sec_bg_hov_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -2030,7 +2032,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_cb_btn_sec_col_hov', // ID
-		   __("Cookie bar secondary button hover color","wp-seopress"), // Title
+			__("Cookie bar secondary button hover color","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_btn_sec_col_hov_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
@@ -2048,82 +2050,82 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_google_analytics_optimize', // ID
-		   __("Enable Google Optimize","wp-seopress"), // Title
+			__("Enable Google Optimize","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_optimize_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_ads', // ID
-		   __("Enable Google Ads","wp-seopress"), // Title
+			__("Enable Google Ads","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_ads_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_other_tracking', // ID
-		   __("Add an additional tracking code (like Facebook Pixel, Hotjar...)","wp-seopress"), // Title
+			__("Add an additional tracking code (like Facebook Pixel, Hotjar...)","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_other_tracking_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_other_tracking_body', // ID
-		   __("[BODY] Add an additional tracking code (like Google Tag Manager...)","wp-seopress"), // Title
+			__("[BODY] Add an additional tracking code (like Google Tag Manager...)","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_other_tracking_body_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_other_tracking_footer', // ID
-		   __("[BODY (FOOTER)] Add an additional tracking code (like Google Tag Manager...)","wp-seopress"), // Title
+			__("[BODY (FOOTER)] Add an additional tracking code (like Google Tag Manager...)","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_other_tracking_footer_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_remarketing', // ID
-		   __("Enable remarketing, demographics, and interests reporting","wp-seopress"), // Title
+			__("Enable remarketing, demographics, and interests reporting","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_remarketing_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_ip_anonymization', // ID
-		   __("Enable IP Anonymization","wp-seopress"), // Title
+			__("Enable IP Anonymization","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_ip_anonymization_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_link_attribution', // ID
-		   __("Enhanced Link Attribution","wp-seopress"), // Title
+			__("Enhanced Link Attribution","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_link_attribution_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
-		);        
+			'seopress_setting_section_google_analytics_features' // Section
+		);
 
 		add_settings_field(
 			'seopress_google_analytics_cross_domain_enable', // ID
-		   __("Enable cross-domain tracking","wp-seopress"), // Title
+			__("Enable cross-domain tracking","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cross_enable_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_cross_domain', // ID
-		   __("Cross domains","wp-seopress"), // Title
+			__("Cross domains","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cross_domain_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-features', // Page
-			'seopress_setting_section_google_analytics_features' // Section                  
+			'seopress_setting_section_google_analytics_features' // Section
 		);
 
 		//Google Analytics Events SECTION==========================================================
@@ -2134,46 +2136,46 @@ class seopress_options
 			//__("Google Analytics","wp-seopress"), // Title
 			array( $this, 'print_section_info_google_analytics_events' ), // Callback
 			'seopress-settings-admin-google-analytics-events' // Page
-		);  
+		);
 
 		add_settings_field(
 			'seopress_google_analytics_link_tracking_enable', // ID
-		   __("Enable external links tracking","wp-seopress"), // Title
+			__("Enable external links tracking","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_link_tracking_enable_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-events', // Page
-			'seopress_setting_section_google_analytics_events' // Section                  
+			'seopress_setting_section_google_analytics_events' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_download_tracking_enable', // ID
-		   __("Enable downloads tracking (eg: PDF, XLSX, DOCX...)","wp-seopress"), // Title
+			__("Enable downloads tracking (eg: PDF, XLSX, DOCX...)","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_download_tracking_enable_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-events', // Page
-			'seopress_setting_section_google_analytics_events' // Section                  
+			'seopress_setting_section_google_analytics_events' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_download_tracking', // ID
-		   __("Track downloads' clicks","wp-seopress"), // Title
+			__("Track downloads' clicks","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_download_tracking_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-events', // Page
-			'seopress_setting_section_google_analytics_events' // Section                  
+			'seopress_setting_section_google_analytics_events' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_affiliate_tracking_enable', // ID
-		   __("Enable affiliate/outbound links tracking (eg: aff, go, out, recommends)","wp-seopress"), // Title
+			__("Enable affiliate/outbound links tracking (eg: aff, go, out, recommends)","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_affiliate_tracking_enable_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-events', // Page
-			'seopress_setting_section_google_analytics_events' // Section                  
+			'seopress_setting_section_google_analytics_events' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_affiliate_tracking', // ID
-		   __("Track affiliate/outbound links","wp-seopress"), // Title
+			__("Track affiliate/outbound links","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_affiliate_tracking_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-events', // Page
-			'seopress_setting_section_google_analytics_events' // Section                  
+			'seopress_setting_section_google_analytics_events' // Section
 		);
 
 		//Google Analytics Custom Dimensions SECTION===============================================
@@ -2184,46 +2186,46 @@ class seopress_options
 			//__("Google Analytics","wp-seopress"), // Title
 			array( $this, 'print_section_info_google_analytics_custom_dimensions' ), // Callback
 			'seopress-settings-admin-google-analytics-custom-dimensions' // Page
-		);  
+		);
 
 		add_settings_field(
 			'seopress_google_analytics_cd_author', // ID
-		   __("Track Authors","wp-seopress"), // Title
+			__("Track Authors","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cd_author_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-custom-dimensions', // Page
-			'seopress_setting_section_google_analytics_custom_dimensions' // Section                  
+			'seopress_setting_section_google_analytics_custom_dimensions' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_cd_category', // ID
-		   __("Track Categories","wp-seopress"), // Title
+			__("Track Categories","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cd_category_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-custom-dimensions', // Page
-			'seopress_setting_section_google_analytics_custom_dimensions' // Section                  
+			'seopress_setting_section_google_analytics_custom_dimensions' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_cd_tag', // ID
-		   __("Track Tags","wp-seopress"), // Title
+			__("Track Tags","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cd_tag_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-custom-dimensions', // Page
-			'seopress_setting_section_google_analytics_custom_dimensions' // Section                  
+			'seopress_setting_section_google_analytics_custom_dimensions' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_cd_post_type', // ID
-		   __("Track Post Types","wp-seopress"), // Title
+			__("Track Post Types","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cd_post_type_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-custom-dimensions', // Page
-			'seopress_setting_section_google_analytics_custom_dimensions' // Section                  
+			'seopress_setting_section_google_analytics_custom_dimensions' // Section
 		);
 
 		add_settings_field(
 			'seopress_google_analytics_cd_logged_in_user', // ID
-		   __("Track Logged In Users","wp-seopress"), // Title
+			__("Track Logged In Users","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cd_logged_in_user_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-custom-dimensions', // Page
-			'seopress_setting_section_google_analytics_custom_dimensions' // Section                  
+			'seopress_setting_section_google_analytics_custom_dimensions' // Section
 		);
 
 		//Matomo SECTION===========================================================================
@@ -2333,67 +2335,75 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_attachments', // ID
-		   __("Redirect attachment pages to post parent","wp-seopress"), // Title
+			__("Redirect attachment pages to post parent","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_attachments_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_attachments_file', // ID
-		   __("Redirect attachment pages to their file URL","wp-seopress"), // Title
+			__("Redirect attachment pages to their file URL","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_attachments_file_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_replytocom', // ID
-		   __("Remove ?replytocom link to avoid duplicate content","wp-seopress"), // Title
+			__("Remove ?replytocom link to avoid duplicate content","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_replytocom_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_image_auto_title_editor', // ID
-		   __("Automatically set the image Title","wp-seopress"), // Title
+			__("Automatically set the image Title","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_image_auto_title_editor_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_image_auto_alt_editor', // ID
-		   __("Automatically set the image Alt text","wp-seopress"), // Title
+			__("Automatically set the image Alt text","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_image_auto_alt_editor_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
+		);
+
+		add_settings_field(
+			'seopress_advanced_advanced_image_auto_alt_target_kw', // ID
+			__("Automatically set the image Alt text from target keywords","wp-seopress"), // Title
+			array( $this, 'seopress_advanced_advanced_image_auto_alt_target_kw_callback' ), // Callback
+			'seopress-settings-admin-advanced-advanced', // Page
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_image_auto_caption_editor', // ID
-		   __("Automatically set the image Caption","wp-seopress"), // Title
+			__("Automatically set the image Caption","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_image_auto_caption_editor_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_image_auto_desc_editor', // ID
-		   __("Automatically set the image Description","wp-seopress"), // Title
+			__("Automatically set the image Description","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_image_auto_desc_editor_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_tax_desc_editor', // ID
-		   __("Add WP Editor to taxonomy description textarea","wp-seopress"), // Title
+			__("Add WP Editor to taxonomy description textarea","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_tax_desc_editor_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
 			'seopress_setting_section_advanced_advanced' // Section
-		);    
+		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_category_url', // ID
@@ -2413,7 +2423,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_wp_generator', // ID
-		   __("Remove WordPress generator meta tag","wp-seopress"), // Title
+			__("Remove WordPress generator meta tag","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_wp_generator_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
 			'seopress_setting_section_advanced_advanced' // Section
@@ -2421,7 +2431,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_hentry', // ID
-		   __("Remove hentry post class","wp-seopress"), // Title
+			__("Remove hentry post class","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_hentry_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
 			'seopress_setting_section_advanced_advanced' // Section
@@ -2429,7 +2439,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_comments_author_url', // ID
-		   __("Remove author URL","wp-seopress"), // Title
+			__("Remove author URL","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_comments_author_url_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
 			'seopress_setting_section_advanced_advanced' // Section
@@ -2437,7 +2447,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_comments_website', // ID
-		   __("Remove website field in comment form","wp-seopress"), // Title
+			__("Remove website field in comment form","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_comments_website_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
 			'seopress_setting_section_advanced_advanced' // Section
@@ -2445,7 +2455,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_wp_shortlink', // ID
-		   __("Remove WordPress shortlink meta tag","wp-seopress"), // Title
+			__("Remove WordPress shortlink meta tag","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_wp_shortlink_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
 			'seopress_setting_section_advanced_advanced' // Section
@@ -2453,54 +2463,54 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_wp_wlw', // ID
-		   __("Remove Windows Live Writer meta tag","wp-seopress"), // Title
+			__("Remove Windows Live Writer meta tag","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_wp_wlw_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_wp_rsd', // ID
-		   __("Remove RSD meta tag","wp-seopress"), // Title
+			__("Remove RSD meta tag","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_wp_rsd_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_google', // ID
-		   __("Google site verification","wp-seopress"), // Title
+			__("Google site verification","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_google_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_bing', // ID
-		   __("Bing site verification","wp-seopress"), // Title
+			__("Bing site verification","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_bing_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
-		);        
+			'seopress_setting_section_advanced_advanced' // Section
+		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_pinterest', // ID
-		   __("Pinterest site verification","wp-seopress"), // Title
+			__("Pinterest site verification","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_pinterest_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_advanced_yandex', // ID
-		   __("Yandex site verification","wp-seopress"), // Title
+			__("Yandex site verification","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_yandex_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
-			'seopress_setting_section_advanced_advanced' // Section                  
+			'seopress_setting_section_advanced_advanced' // Section
 		); 
 
 		//Appearance SECTION=======================================================================
-		add_settings_section( 
+		add_settings_section(
 			'seopress_setting_section_advanced_appearance', // ID
 			'',
 			//__("Appearance","wp-seopress"), // Title
@@ -2510,7 +2520,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_appearance_adminbar', // ID
-		   __("SEOPress in admin bar","wp-seopress"), // Title
+			__("SEOPress in admin bar","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_adminbar_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
 			'seopress_setting_section_advanced_appearance' // Section
@@ -2518,7 +2528,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_appearance_metabox_position', // ID
-		   __("Move SEOPress metabox's position","wp-seopress"), // Title
+			__("Move SEOPress metabox's position","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_metaboxe_position_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
 			'seopress_setting_section_advanced_appearance' // Section
@@ -2526,7 +2536,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_appearance_schema_default_tab', // ID
-		   __("Set default tab for Structured data metabox","wp-seopress"), // Title
+			__("Set default tab for Structured data metabox","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_schema_default_tab_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
 			'seopress_setting_section_advanced_appearance' // Section
@@ -2534,147 +2544,157 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_appearance_notifications', // ID
-		   __("Hide Notifications Center","wp-seopress"), // Title
+			__("Hide Notifications Center","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_notifications_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_seo_tools', // ID
-		   __("Hide SEO tools","wp-seopress"), // Title
+			__("Hide SEO tools","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_seo_tools_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_useful_links', // ID
-		   __("Hide Useful Links","wp-seopress"), // Title
+			__("Hide Useful Links","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_useful_links_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_title_col', // ID
-		   __("Show Title tag column in post types","wp-seopress"), // Title
+			__("Show Title tag column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_title_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		); 
 
 		add_settings_field(
 			'seopress_advanced_appearance_meta_desc_col', // ID
-		   __("Show Meta description column in post types","wp-seopress"), // Title
+			__("Show Meta description column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_meta_desc_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_redirect_enable_col', // ID
-		   __("Show Redirection Enable column in post types","wp-seopress"), // Title
+			__("Show Redirection Enable column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_redirect_enable_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_redirect_url_col', // ID
-		   __("Show Redirect URL column in post types","wp-seopress"), // Title
+			__("Show Redirect URL column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_redirect_url_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_canonical', // ID
-		   __("Show canonical URL column in post types","wp-seopress"), // Title
+			__("Show canonical URL column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_canonical_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_target_kw_col', // ID
-		   __("Show Target Keyword column in post types","wp-seopress"), // Title
+			__("Show Target Keyword column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_target_kw_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_noindex_col', // ID
-		   __("Show noindex column in post types","wp-seopress"), // Title
+			__("Show noindex column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_noindex_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_nofollow_col', // ID
-		   __("Show nofollow column in post types","wp-seopress"), // Title
+			__("Show nofollow column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_nofollow_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_words_col', // ID
-		   __("Show total number of words column in post types","wp-seopress"), // Title
+			__("Show total number of words column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_words_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_w3c_col', // ID
-		   __("Show W3C validator column in post types","wp-seopress"), // Title
+			__("Show W3C validator column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_w3c_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 		if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
 			add_settings_field(
 				'seopress_advanced_appearance_ps_col', // ID
-			   __("Show Google Page Speed column in post types","wp-seopress"), // Title
+				__("Show Google Page Speed column in post types","wp-seopress"), // Title
 				array( $this, 'seopress_advanced_appearance_ps_col_callback' ), // Callback
 				'seopress-settings-admin-advanced-appearance', // Page
-				'seopress_setting_section_advanced_appearance' // Section                  
+				'seopress_setting_section_advanced_appearance' // Section
+			);
+		}
+
+		if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
+			add_settings_field(
+				'seopress_advanced_appearance_insights_col', // ID
+				__("Show Insights column in post types","wp-seopress"), // Title
+				array( $this, 'seopress_advanced_appearance_insights_col_callback' ), // Callback
+				'seopress-settings-admin-advanced-appearance', // Page
+				'seopress_setting_section_advanced_appearance' // Section
 			);
 		}
 
 		add_settings_field(
 			'seopress_advanced_appearance_score_col', // ID
-		   __("Show content analysis score column in post types","wp-seopress"), // Title
+			__("Show content analysis score column in post types","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_score_col_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_genesis_seo_metaboxe', // ID
-		   __("Hide Genesis SEO Metabox","wp-seopress"), // Title
+			__("Hide Genesis SEO Metabox","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_genesis_seo_metaboxe_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_genesis_seo_menu', // ID
-		   __("Hide Genesis SEO Settings link","wp-seopress"), // Title
+			__("Hide Genesis SEO Settings link","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_genesis_seo_menu_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_appearance_advice_schema', // ID
-		   __("Hide advice in Structured Data Types metabox","wp-seopress"), // Title
+			__("Hide advice in Structured Data Types metabox","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_advice_schema_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
-			'seopress_setting_section_advanced_appearance' // Section                  
+			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		//Security SECTION=======================================================================
@@ -2688,18 +2708,18 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_security_metaboxe_role', // ID
-		   __("Block SEO metabox to user roles","wp-seopress"), // Title
+			__("Block SEO metabox to user roles","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_security_metaboxe_role_callback' ), // Callback
 			'seopress-settings-admin-advanced-security', // Page
-			'seopress_setting_section_advanced_security' // Section                  
+			'seopress_setting_section_advanced_security' // Section
 		);
 
 		add_settings_field(
 			'seopress_advanced_security_metaboxe_ca_role', // ID
-		   __("Block Content analysis metabox to user roles","wp-seopress-pro"), // Title
+			__("Block Content analysis metabox to user roles","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_security_metaboxe_ca_role_callback' ), // Callback
 			'seopress-settings-admin-advanced-security', // Page
-			'seopress_setting_section_advanced_security' // Section                  
+			'seopress_setting_section_advanced_security' // Section
 		);
 	}
 
@@ -2797,6 +2817,15 @@ class seopress_options
 	 
 	public function print_section_info_titles() {
 		print __('<p>Customize your title & meta description for homepage</p>', 'wp-seopress');
+
+		echo "<script>function sp_get_field_length(e) {
+			if (e.val().length > 0) {
+				meta = e.val() + ' ';
+			} else {
+				meta = e.val();
+			}
+			return meta;
+		}</script>";
 	}
 
 	public function print_section_info_single() {
@@ -3035,18 +3064,18 @@ class seopress_options
 				};
 				echo ' value="1"/>';
 
-				echo '<label for="seopress_titles_single_cpt_enable['.$seopress_cpt_key.']">'. __( 'Click to hide any SEO metaboxes for this post type', 'wp-seopress' ) .'</label>';
+				echo '<label for="seopress_titles_single_cpt_enable['.$seopress_cpt_key.']">'. __( 'Click to hide any SEO metaboxes / columns for this post type', 'wp-seopress' ) .'</label>';
 
 				if ('1' == $check) {
-					echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to display any SEO metaboxes for this post type', 'wp-seopress') .'</span>';
-					echo '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to hide any SEO metaboxes for this post type', 'wp-seopress') .'</span>';
+					echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to display any SEO metaboxes / columns for this post type', 'wp-seopress') .'</span>';
+					echo '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to hide any SEO metaboxes / columns for this post type', 'wp-seopress') .'</span>';
 				} else {
-					echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to hide any SEO metaboxes for this post type', 'wp-seopress') .'</span>';
-					echo '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to display any SEO metaboxes for this post type', 'wp-seopress') .'</span>';
+					echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to hide any SEO metaboxes / columns for this post type', 'wp-seopress') .'</span>';
+					echo '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__( 'Click to display any SEO metaboxes / columns for this post type', 'wp-seopress') .'</span>';
 				}
 
-				$toggle_txt_on = '<span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to display any SEO metaboxes for this post type','wp-seopress');
-				$toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to hide any SEO metaboxes for this post type','wp-seopress');
+				$toggle_txt_on = '<span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to display any SEO metaboxes / columns for this post type','wp-seopress');
+				$toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to hide any SEO metaboxes / columns for this post type','wp-seopress');
 				
 				echo "<script>
 				jQuery(document).ready(function($) {
@@ -3079,20 +3108,20 @@ class seopress_options
 				echo "<script>
 					jQuery(document).ready(function($) {
 						$('#seopress-tag-single-title-".$seopress_cpt_key."').click(function() {
-							$('#seopress_titles_single_titles_".$seopress_cpt_key."').val($('#seopress_titles_single_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-single-title-".$seopress_cpt_key."').attr('data-tag'));
+							$('#seopress_titles_single_titles_".$seopress_cpt_key."').val(sp_get_field_length($('#seopress_titles_single_titles_".$seopress_cpt_key."')) + $('#seopress-tag-single-title-".$seopress_cpt_key."').attr('data-tag'));
 						});
 						$('#seopress-tag-sep-".$seopress_cpt_key."').click(function() {
-							$('#seopress_titles_single_titles_".$seopress_cpt_key."').val($('#seopress_titles_single_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-sep-".$seopress_cpt_key."').attr('data-tag'));
+							$('#seopress_titles_single_titles_".$seopress_cpt_key."').val(sp_get_field_length($('#seopress_titles_single_titles_".$seopress_cpt_key."')) + $('#seopress-tag-sep-".$seopress_cpt_key."').attr('data-tag'));
 						});
 						$('#seopress-tag-single-sitetitle-".$seopress_cpt_key."').click(function() {
-							$('#seopress_titles_single_titles_".$seopress_cpt_key."').val($('#seopress_titles_single_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-single-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
+							$('#seopress_titles_single_titles_".$seopress_cpt_key."').val(sp_get_field_length($('#seopress_titles_single_titles_".$seopress_cpt_key."')) + $('#seopress-tag-single-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
 						});
 					});
 				</script>";
 
 				printf(
 				'<input type="text" id="seopress_titles_single_titles_'.$seopress_cpt_key.'" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][title]" value="%s"/>',
-				esc_html( $check )   
+				esc_html( $check )
 				);
 
 				echo '<div class="wrap-tags"><span id="seopress-tag-single-title-'.$seopress_cpt_key.'" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>';
@@ -3263,13 +3292,13 @@ class seopress_options
 				echo "<script>
 					jQuery(document).ready(function($) {
 						$('#seopress-tag-tax-title-".$seopress_tax_key."').click(function() {
-							$('#seopress_titles_tax_titles_".$seopress_tax_key."').val($('#seopress_titles_tax_titles_".$seopress_tax_key."').val() + ' ' + $('#seopress-tag-tax-title-".$seopress_tax_key."').attr('data-tag'));
+							$('#seopress_titles_tax_titles_".$seopress_tax_key."').val(sp_get_field_length($('#seopress_titles_tax_titles_".$seopress_tax_key."')) + $('#seopress-tag-tax-title-".$seopress_tax_key."').attr('data-tag'));
 						});
 						$('#seopress-tag-sep-".$seopress_tax_key."').click(function() {
-							$('#seopress_titles_tax_titles_".$seopress_tax_key."').val($('#seopress_titles_tax_titles_".$seopress_tax_key."').val() + ' ' + $('#seopress-tag-sep-".$seopress_tax_key."').attr('data-tag'));
+							$('#seopress_titles_tax_titles_".$seopress_tax_key."').val(sp_get_field_length($('#seopress_titles_tax_titles_".$seopress_tax_key."')) + $('#seopress-tag-sep-".$seopress_tax_key."').attr('data-tag'));
 						});
 						$('#seopress-tag-tax-sitetitle-".$seopress_tax_key."').click(function() {
-							$('#seopress_titles_tax_titles_".$seopress_tax_key."').val($('#seopress_titles_tax_titles_".$seopress_tax_key."').val() + ' ' + $('#seopress-tag-tax-sitetitle-".$seopress_tax_key."').attr('data-tag'));
+							$('#seopress_titles_tax_titles_".$seopress_tax_key."').val(sp_get_field_length($('#seopress_titles_tax_titles_".$seopress_tax_key."')) + $('#seopress-tag-tax-sitetitle-".$seopress_tax_key."').attr('data-tag'));
 						});
 					});
 				</script>";
@@ -3305,8 +3334,8 @@ class seopress_options
 
 				echo "<script>
 					jQuery(document).ready(function($) {
-						jQuery('#seopress-tag-tax-desc-".$seopress_tax_key."').click(function() {
-							jQuery('#seopress_titles_tax_desc_".$seopress_tax_key."').val(jQuery('#seopress_titles_tax_desc_".$seopress_tax_key."').val() + ' ' + jQuery('#seopress-tag-tax-desc-".$seopress_tax_key."').attr('data-tag'));
+						$('#seopress-tag-tax-desc-".$seopress_tax_key."').click(function() {
+							$('#seopress_titles_tax_desc_".$seopress_tax_key."').val(sp_get_field_length($('#seopress_titles_tax_desc_".$seopress_tax_key."')) + $('#seopress-tag-tax-desc-".$seopress_tax_key."').attr('data-tag'));
 						});
 					});
 				</script>";
@@ -3392,13 +3421,13 @@ class seopress_options
 					echo "<script>
 						jQuery(document).ready(function($) {
 							$('#seopress-tag-archive-title-".$seopress_cpt_key."').click(function() {
-								$('#seopress_titles_archive_titles_".$seopress_cpt_key."').val($('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-archive-title-".$seopress_cpt_key."').attr('data-tag'));
+								$('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(sp_get_field_length($('#seopress_titles_archive_titles_".$seopress_cpt_key."')) + $('#seopress-tag-archive-title-".$seopress_cpt_key."').attr('data-tag'));
 							});
 							$('#seopress-tag-archive-sep-".$seopress_cpt_key."').click(function() {
-								$('#seopress_titles_archive_titles_".$seopress_cpt_key."').val($('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-archive-sep-".$seopress_cpt_key."').attr('data-tag'));
+								$('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(sp_get_field_length($('#seopress_titles_archive_titles_".$seopress_cpt_key."')) + $('#seopress-tag-archive-sep-".$seopress_cpt_key."').attr('data-tag'));
 							});
 							$('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').click(function() {
-								$('#seopress_titles_archive_titles_".$seopress_cpt_key."').val($('#seopress_titles_archive_titles_".$seopress_cpt_key."').val() + ' ' + $('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
+								$('#seopress_titles_archive_titles_".$seopress_cpt_key."').val(sp_get_field_length($('#seopress_titles_archive_titles_".$seopress_cpt_key."')) + $('#seopress-tag-archive-sitetitle-".$seopress_cpt_key."').attr('data-tag'));
 							});
 						});
 					</script>";
@@ -4472,7 +4501,11 @@ class seopress_options
 		
 		echo '<label for="seopress_social_facebook_img_default">'. __( 'Override every <strong>og:image</strong> tag with this default image (except if a custom og:image has already been set from the SEO metabox).', 'wp-seopress' ) .'</label>';
 
-		echo '<p class="description">'.__('This setting doesn‘t apply for the homepage.','wp-seopress').'</p>';
+		$def_og_img = isset($options['seopress_social_facebook_img']) ? $options['seopress_social_facebook_img'] : '';
+
+		if ($def_og_img =='') {
+			echo '<br><br><p class="seopress-notice notice-error">'.__('Please define a default OG Image from the field above','wp-seopress').'</p>';
+		}
 		
 		if (isset($this->options['seopress_social_facebook_img_default'])) {
 			esc_attr( $this->options['seopress_social_facebook_img_default']);
@@ -5525,13 +5558,32 @@ class seopress_options
 		echo '<label for="seopress_advanced_advanced_image_auto_alt_editor">'. __( 'When sending an image file, automatically set the alternative text based on the filename', 'wp-seopress' ) .'</label>';
 
 		if ( !is_plugin_active( 'imageseo/imageseo.php' )) {
-			echo '<p class="seopress-help description"><a href="https://www.seopress.org/go/image-seo" target="_blank">'.__('We recommend Image SEO plugin to optimize your image ALT texts and names for Search Engines using AI and Machine Learning. Starting from just €4.99.','wp-seopress-pro').'</a><span class="dashicons dashicons-external"></span></p>';
+			echo '<p class="seopress-help description"><a href="https://www.seopress.org/go/image-seo" target="_blank">'.__('We recommend Image SEO plugin to optimize your image ALT texts and names for Search Engines using AI and Machine Learning. Starting from just €4.99.','wp-seopress').'</a><span class="dashicons dashicons-external"></span></p>';
 		}
 		
 		if (isset($this->options['seopress_advanced_advanced_image_auto_alt_editor'])) {
 			esc_attr( $this->options['seopress_advanced_advanced_image_auto_alt_editor']);
 		}
-	} 
+	}
+
+	public function seopress_advanced_advanced_image_auto_alt_target_kw_callback()
+	{
+		$options = get_option( 'seopress_advanced_option_name' );  
+		
+		$check = isset($options['seopress_advanced_advanced_image_auto_alt_target_kw']);
+		
+		echo '<input id="seopress_advanced_advanced_image_auto_alt_target_kw" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_alt_target_kw]" type="checkbox"';
+		if ('1' == $check) echo 'checked="yes"'; 
+		echo ' value="1"/>';
+		
+		echo '<label for="seopress_advanced_advanced_image_auto_alt_target_kw">'. __( 'Use the target keywords if not alternative text set for the image', 'wp-seopress' ) .'</label>';
+
+		echo '<p class="description">'.__('This setting will be applied to images without any alt text on frontend only. This setting is retroactive. If you turn it off, alt texts that were previously empty will be empty again.','wp-seopress').'</p>';
+		
+		if (isset($this->options['seopress_advanced_advanced_image_auto_alt_target_kw'])) {
+			esc_attr( $this->options['seopress_advanced_advanced_image_auto_alt_target_kw']);
+		}
+	}
 
 	public function seopress_advanced_advanced_image_auto_caption_editor_callback()
 	{
@@ -6090,6 +6142,25 @@ class seopress_options
 		}
 	}
 
+	public function seopress_advanced_appearance_insights_col_callback()
+	{
+		if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
+			$options = get_option( 'seopress_advanced_option_name' );
+			
+			$check = isset($options['seopress_advanced_appearance_insights_col']);
+			
+			echo '<input id="seopress_advanced_appearance_insights_col" name="seopress_advanced_option_name[seopress_advanced_appearance_insights_col]" type="checkbox"';
+			if ('1' == $check) echo 'checked="yes"'; 
+			echo ' value="1"/>';
+			
+			echo '<label for="seopress_advanced_appearance_insights_col">'. __( 'Display SEO Insights column to check rankings', 'wp-seopress' ) .'</label>';
+
+			if (isset($this->options['seopress_advanced_appearance_insights_col'])) {
+				esc_attr( $this->options['seopress_advanced_appearance_insights_col']);
+			}
+		}
+	}
+
 	public function seopress_advanced_appearance_score_col_callback()
 	{
 		if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
@@ -6130,7 +6201,7 @@ class seopress_options
 	{
 		$options = get_option( 'seopress_advanced_option_name' );  
 		
-		$check = isset($options['seopress_advanced_appearance_genesis_seo_menu']);      
+		$check = isset($options['seopress_advanced_appearance_genesis_seo_menu']);
 		
 		echo '<input id="seopress_advanced_appearance_genesis_seo_menu" name="seopress_advanced_option_name[seopress_advanced_appearance_genesis_seo_menu]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6147,7 +6218,7 @@ class seopress_options
 	{
 		$options = get_option( 'seopress_advanced_option_name' );  
 		
-		$check = isset($options['seopress_advanced_appearance_advice_schema']);      
+		$check = isset($options['seopress_advanced_appearance_advice_schema']);
 		
 		echo '<input id="seopress_advanced_appearance_advice_schema" name="seopress_advanced_option_name[seopress_advanced_appearance_advice_schema]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6171,7 +6242,7 @@ class seopress_options
 	
 		foreach ($wp_roles->get_names() as $key => $value) {
 
-			$check = isset($options['seopress_advanced_security_metaboxe_role'][$key]);  
+			$check = isset($options['seopress_advanced_security_metaboxe_role'][$key]);
 
 			echo '<input id="seopress_advanced_security_metaboxe_role_'.$key.'" name="seopress_advanced_option_name[seopress_advanced_security_metaboxe_role]['.$key.']" type="checkbox"';
 			if ('1' == $check) echo 'checked="yes"'; 
@@ -6195,7 +6266,7 @@ class seopress_options
 
 	public function seopress_advanced_security_metaboxe_ca_role_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
 		global $wp_roles;
 

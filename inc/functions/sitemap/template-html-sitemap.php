@@ -6,7 +6,12 @@ $args = apply_filters( 'seopress_sitemaps_html_query', $args, $cpt_key );
 if (is_post_type_hierarchical($cpt_key)) {
 	$postslist = get_posts( $args );
 	
-	$args2 = array('post_type' => $cpt_key, 'include'=>$postslist, 'sort_order' => $seopress_xml_sitemap_html_order_option, 'sort_column' => $seopress_xml_sitemap_html_orderby_option);
+	$args2 = [ 
+		'post_type' => $cpt_key, 
+		'include' => $postslist, 
+		'sort_order' => $seopress_xml_sitemap_html_order_option, 
+		'sort_column' => $seopress_xml_sitemap_html_orderby_option
+	];
 
 	$args2 = apply_filters('seopress_sitemaps_html_pages_query', $args2, $cpt_key);
 	$postslist = get_pages( $args2 );

@@ -28,12 +28,23 @@
          var $seopress_desc = $( '#seopress_desc-' + $post_id ).text();
          var $seopress_tkw = $( '#seopress_tkw-' + $post_id ).text();
          var $seopress_canonical = $( '#seopress_canonical-' + $post_id ).text();
+         var $seopress_redirections_enable = $( '#post-' + $post_id + ' .column-seopress_404_redirect_enable' ).html();
+         var $seopress_redirections_type = $( '#post-' + $post_id + ' .column-seopress_404_redirect_type' ).text();
+         var $seopress_redirections_value = $( '#post-' + $post_id + ' .column-seopress_404_redirect_value' ).text();
 
          // populate the data
          $edit_row.find( 'input[name="seopress_title"]' ).val( $seopress_title );
          $edit_row.find( 'textarea[name="seopress_desc"]' ).val( $seopress_desc );
          $edit_row.find( 'input[name="seopress_tkw"]' ).val( $seopress_tkw );
          $edit_row.find( 'input[name="seopress_canonical"]' ).val( $seopress_canonical );
+         
+         if( $seopress_redirections_enable == '<span class="dashicons dashicons-yes"></span>' ) {
+            $edit_row.find( 'input[name="seopress_redirections_enabled"]' ).prop('checked', true );
+         }
+         if( $seopress_redirections_type != '404' ) {
+            $edit_row.find( 'select[name="seopress_redirections_type"] option[value="'+$seopress_redirections_type+'"]' ).prop( 'selected', true );
+         }
+         $edit_row.find( 'input[name="seopress_redirections_value"]' ).val( $seopress_redirections_value );
       }
    };
 

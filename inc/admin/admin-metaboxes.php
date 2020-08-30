@@ -181,14 +181,14 @@ function seopress_display_seo_metaboxe() {
             wp_enqueue_script('jquery-ui-accordion');
 
             //Register Google Snippet Preview / Content Analysis JS
-            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters' . $prefix . '.js', dirname( dirname( __FILE__ ) ) ), [ 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ], SEOPRESS_VERSION );
+            wp_enqueue_script( 'seopress-cpt-counters-js', plugins_url( 'assets/js/seopress-counters' . $prefix . '.js', dirname( dirname( __FILE__ ) ) ), [ 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ], SEOPRESS_VERSION, true );
 
              //If Gutenberg ON
              if ( function_exists( 'get_current_screen' ) ) {
                 $get_current_screen = get_current_screen();
                 if ( isset( $get_current_screen->is_block_editor ) ) {
                     if ( $get_current_screen->is_block_editor ) {
-                        wp_enqueue_script( 'seopress-block-editor-js', plugins_url( 'assets/js/seopress-block-editor' . $prefix . '.js', dirname( dirname( __FILE__ ) ) ), [ 'jquery' ], SEOPRESS_VERSION );
+                        wp_enqueue_script( 'seopress-block-editor-js', plugins_url( 'assets/js/seopress-block-editor' . $prefix . '.js', dirname( dirname( __FILE__ ) ) ), [ 'jquery' ], SEOPRESS_VERSION, true );
                     }
                 }
             }

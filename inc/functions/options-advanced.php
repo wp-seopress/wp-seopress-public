@@ -199,4 +199,65 @@ if (is_home() || is_front_page()) {
 	add_action( 'wp_head', 'seopress_advanced_advanced_yandex_hook', 2 );
 }
 
+//Automatic alt text based on target kw
+function seopress_advanced_advanced_image_auto_alt_target_kw_option() {
+	$seopress_advanced_advanced_image_auto_alt_target_kw_option = get_option("seopress_advanced_option_name");
+	if ( ! empty ( $seopress_advanced_advanced_image_auto_alt_target_kw_option ) ) {
+		foreach ($seopress_advanced_advanced_image_auto_alt_target_kw_option as $key => $seopress_advanced_advanced_image_auto_alt_target_kw_value)
+			$options[$key] = $seopress_advanced_advanced_image_auto_alt_target_kw_value;
+		if (isset($seopress_advanced_advanced_image_auto_alt_target_kw_option['seopress_advanced_advanced_image_auto_alt_target_kw'])) {
+			return $seopress_advanced_advanced_image_auto_alt_target_kw_option['seopress_advanced_advanced_image_auto_alt_target_kw'];
+		}
+	}
+}
 
+if (seopress_advanced_advanced_image_auto_alt_target_kw_option() !='') {
+	function seopress_auto_img_alt_thumb_target_kw( $atts, $attachment ) {
+		if (!is_admin()) {
+			if (empty($atts['alt'])) {
+				if (get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true) !='') {
+					$atts['alt'] = esc_html(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true));
+				}
+			}
+		}
+		return $atts;
+	}
+	add_filter( 'wp_get_attachment_image_attributes', 'seopress_auto_img_alt_thumb_target_kw', 10, 2 );
+
+	function seopress_auto_img_alt_target_kw($content) {
+			if ($content =='') {
+				return $content;
+			}
+
+			$dom = new domDocument;
+			$internalErrors = libxml_use_internal_errors(true);
+			
+			if (function_exists('mb_convert_encoding')) {
+				$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+			} else {
+				$dom->loadHTML('<?xml encoding="utf-8" ?>'.$content);
+			}
+
+			$dom->preserveWhiteSpace = false;
+
+			if ($dom->getElementsByTagName('img') !='') {
+				$images = $dom->getElementsByTagName('img');
+			}
+			
+			libxml_use_internal_errors($internalErrors);
+
+			if ((isset($images) && !empty ($images) && $images->length>=1)) {
+				foreach($images as $img) {
+					if ($img->getAttribute('alt') =='') {
+						if (get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true) !='') {
+							$img = $img->setAttribute('alt', htmlspecialchars(esc_html(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true))));
+						}
+					}
+				}
+			}
+			$content = $dom->saveHTML();
+
+			return $content;
+	}
+	add_filter('the_content', 'seopress_auto_img_alt_target_kw', 20, 1);
+}

@@ -140,10 +140,12 @@ function seopress_do_real_preview() {
 						//Manage keywords with special characters
 						foreach ($seopress_analysis_target_kw as $key => $kw) {
 							$kw = str_replace("-", " ", $kw);
-							$seopress_analysis_target_kw[$key] = htmlspecialchars_decode($kw,ENT_QUOTES);
+							$seopress_analysis_target_kw[] = htmlspecialchars_decode($kw,ENT_QUOTES);
 						}
+						//Remove duplicates
+						$seopress_analysis_target_kw = array_unique($seopress_analysis_target_kw);
 					}
-
+					
 					$xpath = new DOMXPath($dom);
 
 					//Title
@@ -512,7 +514,7 @@ add_action('wp_ajax_seopress_hide_notices', 'seopress_hide_notices');
 function seopress_yoast_migration() {
 	check_ajax_referer( 'seopress_yoast_migrate_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -645,6 +647,23 @@ function seopress_yoast_migration() {
 
 						update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',',$y_fkws_clean));
 					}
+
+					//Primary category
+					if ( class_exists( 'WPSEO_Primary_Term' ) ) {
+						if ( get_post_type( $post->ID ) == 'product' ) {
+							$tax = 'product_cat';
+						} else {
+							$tax = 'category';
+						}
+
+						$primary_term = new WPSEO_Primary_Term( $tax, $post->ID );
+						
+						$primary_term = $primary_term->get_primary_term();
+
+						if ( $primary_term !='' && is_int( $primary_term ) ) {
+							update_post_meta( $post->ID, '_seopress_robots_primary_cat', $primary_term );
+						}
+					}
 				}
 			}
 			$offset += $increment;
@@ -663,7 +682,7 @@ add_action('wp_ajax_seopress_yoast_migration', 'seopress_yoast_migration');
 function seopress_aio_migration() {
 	check_ajax_referer( 'seopress_aio_migrate_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -798,7 +817,7 @@ add_action('wp_ajax_seopress_aio_migration', 'seopress_aio_migration');
 function seopress_seo_framework_migration() {
 	check_ajax_referer( 'seopress_seo_framework_migrate_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -917,7 +936,7 @@ add_action('wp_ajax_seopress_seo_framework_migration', 'seopress_seo_framework_m
 function seopress_rk_migration() {
 	check_ajax_referer( 'seopress_rk_migrate_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -1080,7 +1099,7 @@ add_action('wp_ajax_seopress_rk_migration', 'seopress_rk_migration');
 function seopress_squirrly_migration() {
 	check_ajax_referer( 'seopress_squirrly_migrate_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -1153,7 +1172,7 @@ add_action('wp_ajax_seopress_squirrly_migration', 'seopress_squirrly_migration')
 function seopress_seo_ultimate_migration() {
 	check_ajax_referer( 'seopress_seo_ultimate_migrate_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -1223,7 +1242,7 @@ add_action('wp_ajax_seopress_seo_ultimate_migration', 'seopress_seo_ultimate_mig
 function seopress_wp_meta_seo_migration() {
 	check_ajax_referer( 'seopress_meta_seo_migrate_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -1313,7 +1332,7 @@ add_action('wp_ajax_seopress_wp_meta_seo_migration', 'seopress_wp_meta_seo_migra
 function seopress_premium_seo_pack_migration() {
 	check_ajax_referer( 'seopress_premium_seo_pack_migrate_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -1427,7 +1446,7 @@ add_action('wp_ajax_seopress_premium_seo_pack_migration', 'seopress_premium_seo_
 function seopress_metadata_export() {
 	check_ajax_referer( 'seopress_export_csv_metadata_nonce', $_POST['_ajax_nonce'], true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) && is_admin() ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
 
 		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
 			$offset = absint($_POST['offset']);
@@ -1449,25 +1468,28 @@ function seopress_metadata_export() {
 		$csv = get_option('seopress_metadata_csv');
 		$download_url = '';
 
-		$settings["id"] = array();
-		$settings["post_title"] = array();
-		$settings["url"] = array();
-		$settings["meta_title"] = array();
-		$settings["meta_desc"] = array();
-		$settings["fb_title"] = array();
-		$settings["fb_desc"] = array();
-		$settings["fb_img"] = array();
-		$settings["tw_title"] = array();
-		$settings["tw_desc"] = array();
-		$settings["tw_img"] = array();
-		$settings["noindex"] = array();
-		$settings["nofollow"] = array();
-		$settings["noodp"] = array();
-		$settings["noimageindex"] = array();
-		$settings["noarchive"] = array();
-		$settings["nosnippet"] = array();
-		$settings["canonical_url"] = array();
-		$settings["target_kw"] = array();
+		$settings["id"] = 				[];
+		$settings["post_title"] =		[];
+		$settings["url"] =				[];
+		$settings["meta_title"] =		[];
+		$settings["meta_desc"] =		[];
+		$settings["fb_title"] =			[];
+		$settings["fb_desc"] =			[];
+		$settings["fb_img"] =			[];
+		$settings["tw_title"] =			[];
+		$settings["tw_desc"] =			[];
+		$settings["tw_img"] =			[];
+		$settings["noindex"] =			[];
+		$settings["nofollow"] =			[];
+		$settings["noodp"] =			[];
+		$settings["noimageindex"] =		[];
+		$settings["noarchive"] =		[];
+		$settings["nosnippet"] =		[];
+		$settings["canonical_url"] =	[];
+		$settings["redirect_active"] =	[];
+		$settings["redirect_type"] =	[];
+		$settings["redirect_url"] =		[];
+		$settings["target_kw"] =		[];
 
 		if ($offset > $total_count_posts) {
 			wp_reset_query();
@@ -1534,30 +1556,62 @@ function seopress_metadata_export() {
 
 					array_push($settings["canonical_url"], get_post_meta( $post->ID, '_seopress_robots_canonical', true ));
 
+					array_push($settings["redirect_active"], get_post_meta( $post->ID, '_seopress_redirections_enabled', true ));
+					
+					array_push($settings["redirect_type"], get_post_meta( $post->ID, '_seopress_redirections_type', true ));
+					
+					array_push($settings["redirect_url"], get_post_meta( $post->ID, '_seopress_redirections_value', true ));
+
 					array_push($settings["target_kw"], get_post_meta( $post->ID, '_seopress_analysis_target_kw', true ));
 
-					$csv[] = array_merge($settings["id"],$settings["post_title"],$settings["url"],$settings["meta_title"],$settings["meta_desc"],$settings["fb_title"],$settings["fb_desc"],$settings["fb_img"],$settings["tw_title"],$settings["tw_desc"],$settings["tw_img"],$settings["noindex"],$settings["nofollow"],$settings["noodp"],$settings["noimageindex"],$settings["noarchive"],$settings["nosnippet"],$settings["canonical_url"],$settings["target_kw"]);
+					$csv[] = array_merge(
+						$settings["id"],
+						$settings["post_title"],
+						$settings["url"],
+						$settings["meta_title"],
+						$settings["meta_desc"],
+						$settings["fb_title"],
+						$settings["fb_desc"],
+						$settings["fb_img"],
+						$settings["tw_title"],
+						$settings["tw_desc"],
+						$settings["tw_img"],
+						$settings["noindex"],
+						$settings["nofollow"],
+						$settings["noodp"],
+						$settings["noimageindex"],
+						$settings["noarchive"],
+						$settings["nosnippet"],
+						$settings["canonical_url"],
+						$settings["redirect_active"],
+						$settings["redirect_type"],
+						$settings["redirect_url"],
+						$settings["target_kw"]
+					);
 
 					//Clean arrays
-					$settings["id"] = array();
-					$settings["post_title"] = array();
-					$settings["url"] = array();
-					$settings["meta_title"] = array();
-					$settings["meta_desc"] = array();
-					$settings["fb_title"] = array();
-					$settings["fb_desc"] = array();
-					$settings["fb_img"] = array();
-					$settings["tw_title"] = array();
-					$settings["tw_desc"] = array();
-					$settings["tw_img"] = array();
-					$settings["noindex"] = array();
-					$settings["nofollow"] = array();
-					$settings["noodp"] = array();
-					$settings["noimageindex"] = array();
-					$settings["noarchive"] = array();
-					$settings["nosnippet"] = array();
-					$settings["canonical_url"] = array();
-					$settings["target_kw"] = array();
+					$settings["id"] =				[];
+					$settings["post_title"] =		[];
+					$settings["url"] =				[];
+					$settings["meta_title"] =		[];
+					$settings["meta_desc"] =		[];
+					$settings["fb_title"] =			[];
+					$settings["fb_desc"] =			[];
+					$settings["fb_img"] =			[];
+					$settings["tw_title"] =			[];
+					$settings["tw_desc"] =			[];
+					$settings["tw_img"] =			[];
+					$settings["noindex"] =			[];
+					$settings["nofollow"] =			[];
+					$settings["noodp"] =			[];
+					$settings["noimageindex"] =		[];
+					$settings["noarchive"] =		[];
+					$settings["nosnippet"] =		[];
+					$settings["canonical_url"] =	[];
+					$settings["redirect_active"] =	[];
+					$settings["redirect_type"] =	[];
+					$settings["redirect_url"] =		[];
+					$settings["target_kw"] =		[];
 
 				}
 			}

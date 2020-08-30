@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.8.9.1
+Version: 3.9
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.8.9.1' );
+define( 'SEOPRESS_VERSION', '3.9' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,6 +102,11 @@ function seopress_init($hook) {
 			default :
 				break;
 		}
+	}
+
+	//Elementor
+	if ( did_action( 'elementor/loaded' ) ) {
+		include_once dirname( __FILE__ ) . '/inc/admin/page-builders/elementor/elementor-addon.php';
 	}
 }
 add_action('plugins_loaded', 'seopress_init', 999);
@@ -360,17 +365,13 @@ remove_action( 'init', 'wp_sitemaps_get_server' );
 //Credits footer
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_custom_credits_footer() {
-	return '<span id="seopress-footer-credits">
+	$html = '<span id="seopress-footer-credits">
 				<span class="dashicons dashicons-wordpress"></span>
-				'.__( "You like SEOPress? Don't forget to rate it 5 stars!", "wp-seopress" ).'
-
-				<span class="wporg-ratings rating-stars">
-					<a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=1#postform" data-rating="1" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-					<a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=2#postform" data-rating="2" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-					<a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=3#postform" data-rating="3" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-					<a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=4#postform" data-rating="4" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-					<a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate=5#postform" data-rating="5" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>
-				</span>
+				'.__( "You like SEOPress? Don't forget to rate it 5 stars!", "wp-seopress" ).'<span class="wporg-ratings rating-stars">';
+				for ($i=1; $i < 6; $i++) { 
+					$html .= '<a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate='.$i.'#postform" data-rating="'.$i.'" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>';
+				}
+				$html .= '</span>
 				<script>
 					jQuery(document).ready( function($) {
 						$(".rating-stars").find("a").hover(
@@ -390,6 +391,7 @@ function seopress_custom_credits_footer() {
 					});
 				</script>
 			</span>';
+	return $html;
 }
 if ((isset($_GET['page']) && (
 	$_GET['page'] == 'seopress-option' 
@@ -463,7 +465,16 @@ function seopress_get_post_types() {
 	$operator = 'and'; // 'and' or 'or'
 
 	$post_types = get_post_types( $args, $output, $operator );
-	unset($post_types['attachment'], $post_types['seopress_404'], $post_types['elementor_library'], $post_types['cuar_private_file'], $post_types['cuar_private_page'], $post_types['ct_template']);
+	unset(
+		$post_types['attachment'],
+		$post_types['seopress_rankings'],
+		$post_types['seopress_backlinks'],
+		$post_types['seopress_404'],
+		$post_types['elementor_library'],
+		$post_types['cuar_private_file'],
+		$post_types['cuar_private_page'],
+		$post_types['ct_template']
+	);
 	$post_types = apply_filters('seopress_post_types', $post_types);
 	return $post_types;
 }

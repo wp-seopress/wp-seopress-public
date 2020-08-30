@@ -26,7 +26,15 @@ function seopress_xml_sitemap_author() {
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= apply_filters('seopress_sitemaps_urlset', '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' );
-	$args = array('fields' => 'ID', 'orderby' => 'nicename', 'order' => 'ASC', 'has_published_posts' => array('post'), 'blog_id' => absint(get_current_blog_id()), 'lang' => '');
+	$args = [ 
+		'fields' => 'ID', 
+		'orderby' => 'nicename', 
+		'order' => 'ASC', 
+		'has_published_posts' => 
+			[ 'post' ], 
+			'blog_id' => absint(get_current_blog_id()), 
+			'lang' => ''
+	];
 	$args = apply_filters('seopress_sitemaps_author_query', $args);
 	
 	$authorslist = get_users($args);
@@ -34,11 +42,11 @@ function seopress_xml_sitemap_author() {
 	foreach ( $authorslist as $author ) {
 		$seopress_sitemaps_url = '';
 		// array with all the information needed for a sitemap url
-		$seopress_url = array(
+		$seopress_url = [
 			'loc' => htmlspecialchars(urldecode(esc_url(get_author_posts_url($author)))),
 			'mod' => '',
-			'images' => array()
-		);
+			'images' => []
+		];
 		$seopress_sitemaps_url .= "\n";
 		$seopress_sitemaps_url .= '<url>';
 		$seopress_sitemaps_url .= "\n";

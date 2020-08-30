@@ -289,6 +289,16 @@ function seopress_advanced_appearance_ps_col_option() {
 		 }
 	}
 }
+function seopress_advanced_appearance_insights_col_option() {
+	$seopress_advanced_appearance_insights_col_option = get_option("seopress_advanced_option_name");
+	if ( ! empty ( $seopress_advanced_appearance_insights_col_option ) ) {
+		foreach ($seopress_advanced_appearance_insights_col_option as $key => $seopress_advanced_appearance_insights_col_value)
+			$options[$key] = $seopress_advanced_appearance_insights_col_value;
+		 if (isset($seopress_advanced_appearance_insights_col_option['seopress_advanced_appearance_insights_col'])) {
+			return $seopress_advanced_appearance_insights_col_option['seopress_advanced_appearance_insights_col'];
+		 }
+	}
+}
 function seopress_advanced_appearance_score_col_option() {
 	$seopress_advanced_appearance_score_col_option = get_option("seopress_advanced_option_name");
 	if ( ! empty ( $seopress_advanced_appearance_score_col_option ) ) {
@@ -300,14 +310,81 @@ function seopress_advanced_appearance_score_col_option() {
 	}
 }
 
-if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_appearance_meta_desc_col_option() !='' || seopress_advanced_appearance_redirect_enable_col_option() !='' || seopress_advanced_appearance_redirect_url_col_option() !='' ||
-	seopress_advanced_appearance_canonical_option() !='' || seopress_advanced_appearance_target_kw_col_option() !='' || seopress_advanced_appearance_noindex_col_option() !='' || seopress_advanced_appearance_nofollow_col_option() !='' || seopress_advanced_appearance_words_col_option() !='' || seopress_advanced_appearance_w3c_col_option() !='' || seopress_advanced_appearance_ps_col_option() !='' || seopress_advanced_appearance_score_col_option() !='') {
+function seopress_insights_query_all_rankings() {
+	if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) {
+		//Init
+		$rankings = [];
+
+		//Args
+		$args = [
+			'order'         	=> 'ASC',
+			'post_type'     	=> 'seopress_rankings',
+			'posts_per_page' 	=> -1,
+			'fields' => 'ids',
+		];
+	
+		$args = apply_filters( 'seopress_insights_dashboard_rankings_list_query', $args );
+	
+		//Query rankings
+		$kw_query = new WP_Query( $args );
+	
+		// The Loop
+		if ( $kw_query->have_posts() ) {
+			while ( $kw_query->have_posts() ) {
+				$kw_query->the_post();
+				$data = get_post_meta( get_the_ID(), 'seopress_insights_data', false );
+	
+				if ( !empty( $data[0] ) ) {
+					array_multisort( $data[0], SORT_DESC, SORT_REGULAR );
+				}
+			}
+		}
+		/* Restore original Post Data */
+		wp_reset_postdata();
+
+		return $data[0];
+	}
+}
+
+if (seopress_advanced_appearance_title_col_option() !='' 
+|| seopress_advanced_appearance_meta_desc_col_option() !='' 
+|| seopress_advanced_appearance_redirect_enable_col_option() !='' 
+|| seopress_advanced_appearance_redirect_url_col_option() !='' 
+|| seopress_advanced_appearance_canonical_option() !='' 
+|| seopress_advanced_appearance_target_kw_col_option() !='' 
+|| seopress_advanced_appearance_noindex_col_option() !='' 
+|| seopress_advanced_appearance_nofollow_col_option() !='' 
+|| seopress_advanced_appearance_words_col_option() !='' 
+|| seopress_advanced_appearance_w3c_col_option() !='' 
+|| seopress_advanced_appearance_ps_col_option() !='' 
+|| seopress_advanced_appearance_insights_col_option() !='' 
+|| seopress_advanced_appearance_score_col_option() !='') {
+	function seopress_titles_single_cpt_enable_option($cpt) {
+		$current_cpt = NULL;
+		$seopress_titles_single_enable_option = get_option("seopress_titles_option_name");
+		if ( ! empty ( $seopress_titles_single_enable_option ) ) {
+			foreach ($seopress_titles_single_enable_option as $key => $seopress_titles_single_enable_value) {
+				$options[$key] = $seopress_titles_single_enable_value;
+				if (isset($seopress_titles_single_enable_option['seopress_titles_single_titles'][$cpt]['enable'])) {
+					$current_cpt = $seopress_titles_single_enable_option['seopress_titles_single_titles'][$cpt]['enable'];
+				}
+			}
+		}
+		return $current_cpt;
+	}
+
+	add_action('current_screen', 'seopress_add_columns');
 	function seopress_add_columns() {
-		foreach (seopress_get_post_types() as $key => $value) {
-			add_filter('manage_'.$key.'_posts_columns', 'seopress_title_columns');
-			add_action('manage_'.$key.'_posts_custom_column', 'seopress_title_display_column', 10, 2);
-			if ( is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' )) {
-				add_filter('manage_edit-'.$key.'_columns', 'seopress_title_columns');
+		if (isset(get_current_screen()->post_type)) {
+			$key = get_current_screen()->post_type;
+			if (seopress_titles_single_cpt_enable_option($key) === NULL && $key !='') {
+				if (array_key_exists($key, seopress_get_post_types())) {
+					add_filter('manage_'.$key.'_posts_columns', 'seopress_title_columns');
+					add_action('manage_'.$key.'_posts_custom_column', 'seopress_title_display_column', 10, 2);
+					if ( is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' )) {
+						add_filter('manage_edit-'.$key.'_columns', 'seopress_title_columns');
+					}
+				}
 			}
 		}
 
@@ -347,6 +424,9 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
 			}
 			if(seopress_advanced_appearance_ps_col_option() !='') {
 				$columns['seopress_ps'] = __('Page Speed', 'wp-seopress');
+			}
+			if(seopress_advanced_appearance_insights_col_option() !='') {
+				$columns['seopress_insights'] = __('Insights', 'wp-seopress');
 			}
 			return $columns;
 		}
@@ -405,7 +485,7 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
 				case 'seopress_ps' :
 					echo '<div class="seopress-request-page-speed seopress-button" data_permalink="'.esc_url(get_the_permalink()).'" title="'.esc_attr(__('Analyze this page with Google Page Speed','wp-seopress')).'"><span class="dashicons dashicons-dashboard"></span></div>';
 					break;
-
+				
 				case 'seopress_score' :
 					if (get_post_meta($post_id, "_seopress_analysis_data")) {
 						$ca = get_post_meta($post_id, "_seopress_analysis_data");
@@ -425,12 +505,90 @@ if (seopress_advanced_appearance_title_col_option() !='' || seopress_advanced_ap
 					}
 					break;
 
+				case 'seopress_insights' :
+					if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) {
+						foreach( seopress_insights_query_all_rankings() as $key => $value ) {
+							if( !empty( $value ) && $value['url'] == get_the_permalink( $post_id ) ) {
+								$rankings[$value['ts']][] = [
+									'keyword'           => get_the_title(),
+									'p'          		=> $value['p'],
+									'url'               => $value['url'],
+									'search_volume'     => $value['search_volume'],
+									'cpc'               => $value['cpc'],
+									'competition'       => $value['competition'],
+									'date'              => date('Y/m/d',$value['ts']),
+								];
+							}
+						}
+
+						if ( !empty( $rankings ) ) {
+					
+							foreach( $rankings as $key => $value ) {
+								$avg_pos[] 	= $value[0]['p'];
+								$kws[] 		= $value[0]['keyword'];
+							}
+					
+							echo '<div class="wrap-insights-post">';
+					
+								echo '<p><span class="dashicons dashicons-chart-line"></span>';
+								
+								if ( !empty( $kws ) ) {
+					
+									$kws = array_unique($kws);
+					
+									$html = '<ul>';
+									foreach( $kws as $kw ) {
+										$html .= '<li><span class="dashicons dashicons-minus"></span>' . $kw . '</li>';
+									}
+									$html .= '</ul>';
+									
+									echo seopress_tooltip( __( 'Insights from these keywords:', 'wp-seopress-insights' ), sprintf( '%s', $html ), '' );
+								}
+					
+								echo '</p>';
+					
+								//Average position
+								echo '<p class="widget-insights-title">'. __( 'Average position: ', 'wp-seopress-insights' ) . '</p>';
+					
+								if ( !empty($avg_pos ) ) {
+									echo '<p>';
+									
+									echo '<span>' . round( array_sum( $avg_pos ) / count( $avg_pos ), 2 ) . '</span>';
+					
+									//Variation
+									if ( isset( $avg_pos[0]) && $avg_pos[1] ) {
+										$p_variation = $avg_pos[0] - $avg_pos[1];
+					
+										if ($avg_pos[0] < $avg_pos[1]) {
+											$p_variation_rel = '<span class="up"><span class="dashicons dashicons-arrow-up-alt"></span> '. abs( $p_variation ) . '</span>';
+										} elseif ($avg_pos[0] == $avg_pos[1]) {
+											$p_variation_rel = '<span class="stable">=</span>';
+										} else {
+											$p_variation_rel = '<span class="down"><span class="dashicons dashicons-arrow-up-alt"></span> ' . abs( $p_variation ) . '</span>';
+										}
+					
+										echo $p_variation_rel;
+									}
+					
+									echo '</p>';
+								}
+					
+								//Latest position
+								echo '<p class="widget-insights-title">'. __( 'Latest position: ', 'wp-seopress-insights' ) .'</p>';
+					
+								$p = array_key_first($rankings);
+								echo '<p><span>' . $rankings[$p][0]['p'] . '</span></p>';
+							echo '</div>';
+						}
+					}
+					break;
+	
 				default :
 					break;
 			}
 		}
 	}
-	add_action('init', 'seopress_add_columns', 999);
+	
 
 	//Sortable columns
 	foreach (seopress_get_post_types() as $key => $value) {

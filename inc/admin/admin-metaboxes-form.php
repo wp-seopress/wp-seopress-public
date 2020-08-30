@@ -119,10 +119,13 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
 							'.__(' (maximum recommended limit)','wp-seopress').'
 						</div>
 						
-						<div class="wrap-tags">
-							<span id="seopress-tag-single-title" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>
-
-							<span id="seopress-tag-single-site-title" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>
+						<div class="wrap-tags">';
+						if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
+							echo '<span id="seopress-tag-single-title" data-tag="%%term_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Term Title','wp-seopress').'</span>';
+						} else {
+							echo '<span id="seopress-tag-single-title" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>';
+						}
+						echo '<span id="seopress-tag-single-site-title" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>
 
 							<span id="seopress-tag-single-sep" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>
 						</div>
@@ -142,17 +145,14 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
 							<strong>'.__(' / 940 pixels - ','wp-seopress').'</strong>
 							<div id="seopress_titles_desc_counters"></div>
 							'.__(' (maximum recommended limit)','wp-seopress').'
-						</div>';
+						</div>
+						<div class="wrap-tags">';
 						if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
-							echo '<div class="wrap-tags">
-								<span id="seopress-tag-single-excerpt" data-tag="%%_category_description%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Category / term description','wp-seopress').'</span>
-							</div>';
+							echo '<span id="seopress-tag-single-excerpt" data-tag="%%_category_description%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Category / term description','wp-seopress').'</span>';
 						} else {
-							echo '<div class="wrap-tags">
-								<span id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Excerpt','wp-seopress').'</span>
-							</div>';
+							echo '<span id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Excerpt','wp-seopress').'</span>';
 						}
-					echo '</div>';
+					echo '</div></div>';
 					
 					$toggle_preview = 1;
 					$toggle_preview = apply_filters('seopress_toggle_mobile_preview', $toggle_preview);

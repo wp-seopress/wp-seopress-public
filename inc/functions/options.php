@@ -5,14 +5,14 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 //Permalink structure for TrailingSlash
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_advanced_advanced_trailingslash_option() {
-    $seopress_advanced_advanced_trailingslash_option = get_option("seopress_advanced_option_name");
-    if ( ! empty ( $seopress_advanced_advanced_trailingslash_option ) ) {
-        foreach ($seopress_advanced_advanced_trailingslash_option as $key => $seopress_advanced_advanced_trailingslash_value)
-            $options[$key] = $seopress_advanced_advanced_trailingslash_value;
-         if (isset($seopress_advanced_advanced_trailingslash_option['seopress_advanced_advanced_trailingslash'])) {
-            return $seopress_advanced_advanced_trailingslash_option['seopress_advanced_advanced_trailingslash'];
-         }
-    }
+	$seopress_advanced_advanced_trailingslash_option = get_option("seopress_advanced_option_name");
+	if ( ! empty ( $seopress_advanced_advanced_trailingslash_option ) ) {
+		foreach ($seopress_advanced_advanced_trailingslash_option as $key => $seopress_advanced_advanced_trailingslash_value)
+			$options[$key] = $seopress_advanced_advanced_trailingslash_value;
+		 if (isset($seopress_advanced_advanced_trailingslash_option['seopress_advanced_advanced_trailingslash'])) {
+			return $seopress_advanced_advanced_trailingslash_option['seopress_advanced_advanced_trailingslash'];
+		 }
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,11 +57,11 @@ if (seopress_get_toggle_option('titles') =='1') {
 
 		if (seopress_titles_archives_author_disable_option() =='1' && $wp_query->is_author && !is_feed()) {
 			wp_redirect(get_home_url(), '301');
-	        exit;
+			exit;
 		}
 		if (seopress_titles_archives_date_disable_option() =='1' && $wp_query->is_date && !is_feed()) {
 			wp_redirect(get_home_url(), '301');
-	        exit;
+			exit;
 		}
 		return false;
 	}
@@ -254,11 +254,11 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 
 		wp_enqueue_script( 'seopress-cookies-ajax', plugins_url( 'assets/js/seopress-cookies-ajax' . $prefix . '.js', dirname( dirname( __FILE__ ) ) ), [ 'jquery', 'seopress-cookies' ], SEOPRESS_VERSION, true );
 
-        $seopress_cookies_user_consent = [
-	        'seopress_nonce'                => wp_create_nonce('seopress_cookies_user_consent_nonce'),
-	        'seopress_cookies_user_consent' => admin_url('admin-ajax.php'),
-	    ];
-	    wp_localize_script( 'seopress-cookies-ajax', 'seopressAjaxGAUserConsent', $seopress_cookies_user_consent );
+		$seopress_cookies_user_consent = [
+			'seopress_nonce'                => wp_create_nonce('seopress_cookies_user_consent_nonce'),
+			'seopress_cookies_user_consent' => admin_url('admin-ajax.php'),
+		];
+		wp_localize_script( 'seopress-cookies-ajax', 'seopressAjaxGAUserConsent', $seopress_cookies_user_consent );
 	}
 
 	//Triggers WooCommerce JS
@@ -267,10 +267,10 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 		wp_enqueue_script('seopress-analytics', plugins_url( 'assets/js/seopress-analytics' . $prefix . '.js', dirname( dirname( __FILE__ ) ) ), [], SEOPRESS_VERSION, true);
 
 		$seopress_analytics = [
-	        'seopress_nonce'                => wp_create_nonce('seopress_analytics_nonce'),
-	        'seopress_analytics' 			=> admin_url('admin-ajax.php'),
-	    ];
-	    wp_localize_script( 'seopress-analytics', 'seopressAjaxAnalytics', $seopress_analytics );
+			'seopress_nonce'                => wp_create_nonce('seopress_analytics_nonce'),
+			'seopress_analytics' 			=> admin_url('admin-ajax.php'),
+		];
+		wp_localize_script( 'seopress-analytics', 'seopressAjaxAnalytics', $seopress_analytics );
 	}
 
 	//Ecommerce
@@ -340,7 +340,7 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 
 	add_action('wp_head', 'seopress_load_google_analytics_options', 0);
 	function seopress_load_google_analytics_options() {
-	    require_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics + Matomo
+		require_once ( dirname( __FILE__ ) . '/options-google-analytics.php'); //Google Analytics + Matomo
 	}
 
 	function seopress_cookies_user_consent() {
@@ -404,7 +404,7 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 add_action('wp', 'seopress_load_redirections_options', 0);
 function seopress_load_redirections_options() {
 	if (!is_admin()){
-	    require_once ( dirname( __FILE__ ) . '/options-redirections.php'); //Redirections
+		require_once ( dirname( __FILE__ ) . '/options-redirections.php'); //Redirections
 	}
 }
 
@@ -454,12 +454,12 @@ if (seopress_get_toggle_option('advanced') =='1') {
 	add_action('wp_head', 'seopress_load_advanced_options', 0);
 	function seopress_load_advanced_options() {
 		if (!is_admin()){
-		    require_once ( dirname( __FILE__ ) . '/options-advanced.php'); //Advanced
+			require_once ( dirname( __FILE__ ) . '/options-advanced.php'); //Advanced
 		}
 	}
 	add_action('init', 'seopress_load_advanced_admin_options', 11);
 	function seopress_load_advanced_admin_options() {
-	    require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
+		require_once ( dirname( __FILE__ ) . '/options-advanced-admin.php'); //Advanced (admin)
 		//Admin bar
 		function seopress_advanced_appearance_adminbar_option() {
 			$seopress_advanced_appearance_adminbar_option = get_option("seopress_advanced_option_name");
@@ -559,32 +559,32 @@ if (seopress_get_toggle_option('advanced') =='1') {
 				$categories = get_categories( array( 'hide_empty' => false ) );
 				add_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ), 10, 4 );
 			} else {
-		    	$categories = get_categories( array( 'hide_empty' => false ) );
+				$categories = get_categories( array( 'hide_empty' => false ) );
 		 	}
-		    if ( is_array( $categories ) && ! empty( $categories ) ) {
-		        $slugs = array();
+			if ( is_array( $categories ) && ! empty( $categories ) ) {
+				$slugs = array();
 
-		        foreach ( $categories as $category ) {
-		            if ( is_object( $category ) && ! is_wp_error( $category ) ) {
-		                if ( 0 == $category->category_parent )
-		                    $slugs[] = $category->slug;
-		                else
-		                    $slugs[] = trim( get_category_parents( $category->term_id, false, '/', true ), '/' );
-		            }
-		        }
+				foreach ( $categories as $category ) {
+					if ( is_object( $category ) && ! is_wp_error( $category ) ) {
+						if ( 0 == $category->category_parent )
+							$slugs[] = $category->slug;
+						else
+							$slugs[] = trim( get_category_parents( $category->term_id, false, '/', true ), '/' );
+					}
+				}
 
-		        if ( ! empty( $slugs ) ) {
-		            $rules = array();
+				if ( ! empty( $slugs ) ) {
+					$rules = array();
 
-		            foreach ( $slugs as $slug ) {
-		                $rules[ '(' . $slug . ')/feed/(feed|rdf|rss|rss2|atom)?/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
-		                $rules[ '(' . $slug . ')/(feed|rdf|rss|rss2|atom)/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
-		                $rules[ '(' . $slug . ')(/page/(\d+))?/?$' ] = 'index.php?category_name=$matches[1]&paged=$matches[3]';
-		            }
-		        }
-		    }
-		    $rules = apply_filters('seopress_category_rewrite_rules', $rules);
-		    return $rules;
+					foreach ( $slugs as $slug ) {
+						$rules[ '(' . $slug . ')/feed/(feed|rdf|rss|rss2|atom)?/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
+						$rules[ '(' . $slug . ')/(feed|rdf|rss|rss2|atom)/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
+						$rules[ '(' . $slug . ')(/page/(\d+))?/?$' ] = 'index.php?category_name=$matches[1]&paged=$matches[3]';
+					}
+				}
+			}
+			$rules = apply_filters('seopress_category_rewrite_rules', $rules);
+			return $rules;
 		}
 
 		function seopress_remove_category_base( $termlink, $term, $taxonomy ) {
@@ -630,8 +630,8 @@ if (seopress_get_toggle_option('advanced') =='1') {
 				if (preg_match('/\/'.$category_base.'\//', $current_url)) {
 					$new_url = str_replace('/'.$category_base, '', $current_url);
 					wp_redirect($new_url, 301 );
-		    		exit();
-	    		}
+					exit();
+				}
 			}
 		}
 	}

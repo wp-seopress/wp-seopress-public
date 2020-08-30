@@ -206,27 +206,31 @@ function seopress_admin_header() { ?>
 					?>
 					<div id="seopress-notice">
 						<div class="small">
-							<a href="<?php echo $seopress_docs_link['changelog']; ?>" alt="<?php _e('See the changelog (new window)','wp-seopress'); ?>" target="_blank">
+							<a href="<?php echo $seopress_docs_link['changelog']; ?>" target="_blank">
 								<div class="dashicons dashicons-media-text"></div>
 								<div class="tooltip"><?php _e('See the changelog','wp-seopress'); ?></div>
 							</a>
-							<a href="mailto:contact@seopress.org" alt="<?php _e('Send feedback','wp-seopress'); ?>" target="_blank">
+							<a href="mailto:contact@seopress.org" target="_blank">
 								<div class="dashicons dashicons-megaphone"></div>
 								<div class="tooltip"><?php _e('Send feedback','wp-seopress'); ?></div>
 							</a>
-							<a href="https://twitter.com/wp_seopress" alt="<?php _e('Follow us on Twitter (new window)','wp-seopress'); ?>" target="_blank">
+							<a href="https://www.facebook.com/groups/seopress/" target="_blank">
+								<div class="dashicons dashicons-facebook"></div>
+								<div class="tooltip"><?php _e('Join our Facebook Community group','wp-seopress'); ?></div>
+							</a>
+							<a href="https://twitter.com/wp_seopress" target="_blank">
 								<div class="dashicons dashicons-twitter"></div>
 								<div class="tooltip"><?php _e('Follow us on Twitter','wp-seopress'); ?></div>
 							</a>
-							<a href="https://www.youtube.com/SEOPress" alt="<?php _e('Follow us on YouTube (new window)','wp-seopress'); ?>" target="_blank">
+							<a href="https://www.youtube.com/SEOPress" target="_blank">
 								<div class="dashicons dashicons-video-alt3"></div>
 								<div class="tooltip"><?php _e('Follow us on YouTube','wp-seopress'); ?></div>
 							</a>
-							<a href="<?php echo $seopress_docs_link['website']; ?>" alt="<?php _e('Official website (new window)','wp-seopress'); ?>" target="_blank">
+							<a href="<?php echo $seopress_docs_link['website']; ?>" target="_blank">
 								<div class="dashicons dashicons-info"></div>
 								<div class="tooltip"><?php _e('Official website','wp-seopress'); ?></div>
 							</a>
-							<a href="<?php echo $seopress_docs_link['support']; ?>" alt="<?php _e('Support (new window)','wp-seopress'); ?>" target="_blank">
+							<a href="<?php echo $seopress_docs_link['support']; ?>" target="_blank">
 								<div class="dashicons dashicons-editor-help"></div>
 								<div class="tooltip"><?php _e('Support','wp-seopress'); ?></div>
 							</a>
