@@ -2,11 +2,11 @@
 Authors: rainbowgeek
 Contributors: rainbowgeek, juliobox, maigret, mgris, gmulti
 Donate link: https://www.seopress.org/
-Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
+Tags: SEO, sitemap, schema, content analysis, redirection
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 3.9
+Stable tag: 3.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,9 +21,20 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 ✔ <strong>Import your post and term metadatas from other plugins in 1 click</strong>
 ✔ <strong>Trusted by 100,000 WordPress websites since 2017.</strong>
 
-<a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / year / unlimited sites</strong></a>
+<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / year / unlimited sites</strong></a>
 
 [youtube https://www.youtube.com/watch?v=FwaJA5MY6sc]
+
+<a href="https://www.seopress.org/features/" target="_blank">Features</a> | <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/" target="_blank">Migrate</a> | <a href="https://www.seopress.org/pricing/" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">White Label</a>
+
+<h3>Why SEOPress is the best WordPress SEO plugin?</h3>
+
+<ul>
+	<li><a href="https://www.seopress.org/seopress-productivity/"><strong>Save time</strong></a>: you prefer to work with Excel or Google Spreadsheets? No problem, you can import / export your metadata from CSV files with SEOPress PRO in few clicks!</li>
+	<li><a href="https://www.seopress.org/pricing/"><strong>Save money</strong></a>: SEOPress PRO is available for just $39 / year. Without any sites limit. Yes, you read that right: 1 site or 100 sites, the total price is still $39 / year!</li>
+	<li><a href="https://www.seopress.org/features/"><strong>All in one SEO plugin</strong></a>: comes with all the features you need to optimize the SEO of your WordPress site. No need to install additional extensions to manage redirects, schemas, XML sitemaps... You reduce the risk of conflicts and maintenance costs. You don't need a special feature? Deactivate it with one click without losing your configuration. Child's play !</li>
+	<li><strong>Easy AND ready to use</strong>: you doesn't need to know SEO or code to use SEOPress. Most of the parameters are automatically set. And thanks to our installation wizard, configuring SEOPress has never been easier. To go further, we provide many <a href="https://www.seopress.org/blog/how-to/" target="_blank">free tutorials to learn SEO</a> in order to better understand how to position your content on search engines.</li>
+</ul>
 
 <h3>SEOPress Free Features</h3>
 
@@ -45,7 +56,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Remove ?replytocom to avoid duplicate content</li>
 	<li>Redirect attachment pages to post parent</li>
 	<li>Redirect attachment pages to their file URL</li>
-	<li>Image SEO: Automatically set the image title / alt / caption / description</li>
+	<li><strong>Image SEO</strong>: Automatically set the image title / alt / caption / description</li>
 	<li>Import / Export settings from site to site.</li>
 	<li>Import posts and terms metadata from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack and Squirrly</li>
 	<li>W3C check</li>
@@ -104,7 +115,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Easily customize your RSS feeds</li>
 </ul>
 
-<h4><a href="https://www.seopress.org/seopress-pro?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO now!</strong></a></h4>
+<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO now!</strong></a>
 
 <h3>WooCommerce SEO (SEOPress PRO required)</h3>
 We support WooCommerce and Easy Digital Downloads for e-commerce sites.
@@ -121,6 +132,8 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 	<li>Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema (barcode)</li>
 	<li>...</li>
 </ul>
+
+<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Increase your sales now!</strong></a>
 
 <h3>Translations</h3>
 
@@ -187,7 +200,7 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 	<li><a href="https://www.seopress.org/account/your-tickets/" target="_blank">Email (PRO only)</a></li>
 </ul>
 
-<h3>Featured on</h3>
+<h3>SEOPress featured on</h3>
 <ul>
 	<li>WP Beginner</li>
 	<li>HubSpot</li>
@@ -273,6 +286,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 3.9.1 =
+* FIX Fatal error: Cannot redeclare seopress_title_columns()
 = 3.9 <a href="https://www.seopress.org/blog/elementor-integration-seopress-3-9/">Read our Blog post update</a> =
 * NEW Free Elementor integration (first iteration) 🎉
 * NEW Automatically set the image Alt text from target keywords if empty (this setting is retroactive, no need to resave your post content)
