@@ -946,7 +946,7 @@ class seopress_options
 											<li><?php _e( 'URL to redirect in absolute,','wp-seopress'); ?></li>
 											<li><?php _e( 'type of redirection (301, 302 or 307, 410, 451),','wp-seopress'); ?></li>
 											<li><?php _e( 'Yes to enable the redirect (leave it empty to disable the redirect)','wp-seopress'); ?></li>
-											<li><?php _e( 'the query parameter without the quotes ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection),', 'wp-seopress' ); ?>
+											<li><?php _e( 'the query parameter without the quotes ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection),', 'wp-seopress' ); ?></li>
 											<li><?php _e( 'and, the last parameter, the counter (optional).','wp-seopress'); ?></li>
 										</ul>
 									</p>
