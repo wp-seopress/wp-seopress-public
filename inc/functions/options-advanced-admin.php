@@ -373,7 +373,12 @@ if (seopress_advanced_appearance_title_col_option() !=''
 		return $current_cpt;
 	}
 
-	add_action('current_screen', 'seopress_add_columns');
+	add_action('current_screen', 'seopress_did_add_columns');
+	function seopress_did_add_columns() {
+		if (did_action( 'current_screen' ) === 1) {
+			seopress_add_columns();
+		}
+	}
 	function seopress_add_columns() {
 		if (isset(get_current_screen()->post_type)) {
 			$key = get_current_screen()->post_type;

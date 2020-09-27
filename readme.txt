@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 4.0
+Stable tag: 4.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -297,6 +297,10 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 4.0.1 =
+* FIX Fatal Error Cannot redeclare seopress_title_columns() with TablePress
+* FIX Fatal Error wp-seopress-pro/inc/action-scheduler/classes/migration/ActionScheduler_DBStoreMigrator.php
+* FIX Remove redirect notice
 = 4.0 <a href="https://www.seopress.org/blog/elementor-integration-semi-automatic-redirections-seopress-4-0/">Read our Blog post update</a> =
 * NEW Elementor integration (part 2): now with Google Preview and Content Analysis
 * NEW Semi-automatic redirections when you delete/change a slug (PRO) 🎉
