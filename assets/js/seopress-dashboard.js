@@ -7,6 +7,7 @@ jQuery(document).ready(function($) {
 		"notice-get-started",
 		"notice-wizard",
 		"notice-insights-wizard",
+		"notice-tagdiv",
 		"notice-divide-comments",
 		"notice-review",
 		"notice-trailingslash",

@@ -16,6 +16,7 @@ $seopress_get_post_title = '';
 $seopress_excerpt ='';
 $seopress_content ='';
 $post_thumbnail_url ='';
+$post_url ='';
 $post_category ='';
 $post_tag ='';
 $get_search_query ='';
@@ -80,6 +81,11 @@ if (is_author()) {
 if (is_singular() && isset($post)) {
 	$post_thumbnail_url = get_the_post_thumbnail_url($post, 'full');
 	$post_thumbnail_url = apply_filters('seopress_titles_post_thumbnail_url', $post_thumbnail_url);
+}
+
+if (is_singular() && isset($post)) {
+	$post_url = esc_url(get_permalink($post));
+	$post_url = apply_filters('seopress_titles_post_url', $post_url);
 }
 
 if (is_single() && has_category()) {
@@ -192,6 +198,7 @@ $seopress_titles_template_variables_array = array(
 	'%%excerpt%%',
 	'%%post_content%%',
 	'%%post_thumbnail_url%%',
+	'%%post_url%%',
 	'%%post_date%%',
 	'%%date%%',
 	'%%post_modified_date%%',
@@ -243,6 +250,7 @@ $seopress_titles_template_replace_array = array(
 	$seopress_get_the_excerpt,
 	$seopress_content,
 	$post_thumbnail_url,
+	$post_url,
 	get_the_date(),
 	get_the_date(),
 	get_the_modified_date(),
@@ -295,6 +303,7 @@ $variables = array(
 	'post_category' => $post_category,
 	'post_tag' => $post_tag,
 	'post_thumbnail_url' => $post_thumbnail_url,
+	'post_url' => $post_url,
 	'get_search_query' => $get_search_query,
 	'woo_single_cat_html' => $woo_single_cat_html,
 	'woo_single_tag_html' => $woo_single_tag_html,

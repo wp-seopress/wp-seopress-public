@@ -1441,6 +1441,132 @@ function seopress_premium_seo_pack_migration() {
 add_action('wp_ajax_seopress_premium_seo_pack_migration', 'seopress_premium_seo_pack_migration');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+/* wpSEO migration
+* @since 4.0
+* @author Benjamin Denis
+*/
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_wpseo_migration() {
+	check_ajax_referer( 'seopress_wpseo_migrate_nonce', $_POST['_ajax_nonce'], true );
+
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+
+		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
+			$offset = absint($_POST['offset']);
+		}
+
+		global $wpdb;
+
+		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+
+		$increment = 200;
+		global $post;
+
+		if ($offset > $total_count_posts) {
+			wp_reset_query();
+
+			$args = array(
+				'hide_empty' => false,
+				'fields' => 'ids',
+			);
+			$wpseo_query_terms = get_terms($args);
+
+			if ($wpseo_query_terms) { 
+				foreach ($wpseo_query_terms as $term_id) {
+					if (get_option('wpseo_category_'.$term_id.'_title') !='') { //Import title tag
+						update_term_meta($term_id, '_seopress_titles_title', get_option('wpseo_category_'.$term_id.'_title'));
+					}
+					if (get_option('wpseo_category_'.$term_id) !='') { //Import meta desc
+						update_term_meta($term_id, '_seopress_titles_desc', get_option('wpseo_category_'.$term_id));
+					}
+					if (get_option('wpseo_category_'.$term_id.'_og_title') !='') { //Import Facebook Title
+						update_term_meta($term_id, '_seopress_social_fb_title', get_option('wpseo_category_'.$term_id.'_og_title'));
+						update_term_meta($term_id, '_seopress_social_twitter_title', get_option('wpseo_category_'.$term_id.'_og_title'));
+					}
+					if (get_option('wpseo_category_'.$term_id.'_og_desc') !='') { //Import Facebook Desc
+						update_term_meta($term_id, '_seopress_social_fb_desc', get_option('wpseo_category_'.$term_id.'_og_desc'));
+						update_term_meta($term_id, '_seopress_social_twitter_desc', get_option('wpseo_category_'.$term_id.'_og_desc'));
+					}
+					if (get_option('wpseo_category_'.$term_id.'_og_image') !='') { //Import Facebook Image
+						update_term_meta($term_id, '_seopress_social_fb_img', get_option('wpseo_category_'.$term_id.'_og_image'));
+						update_term_meta($term_id, '_seopress_social_twitter_img', get_option('wpseo_category_'.$term_id.'_og_image'));
+					}
+					if (get_option('wpseo_category_'.$term_id.'_canonical') !='') { //Import Canonical URL
+						update_term_meta($term_id, '_seopress_robots_canonical', get_option('wpseo_category_'.$term_id.'_canonical'));
+					}
+					if (get_option('wpseo_category_'.$term_id.'_redirect') !='') { //Import Redirect URL
+						update_term_meta($term_id, '_seopress_redirections_value', get_option('wpseo_category_'.$term_id.'_redirect'));
+						update_term_meta($term_id, '_seopress_redirections_enabled', 'yes');
+					}
+					if (get_option('wpseo_category_'.$term_id.'_robots') =='4' || get_option('wpseo_category_'.$term_id.'_robots') =='5' || get_option('wpseo_category_'.$term_id.'_robots') =='3') { //Import Robots NoIndex
+						update_term_meta($term_id, '_seopress_robots_index', "yes");
+					}
+					if (get_option('wpseo_category_'.$term_id.'_robots') =='2') { //Import Robots NoFollow
+						update_term_meta($term_id, '_seopress_robots_follow', "yes");
+					}
+				}
+			}
+			$offset = 'done';
+			wp_reset_query();
+		} else {
+			$args = array(
+				'posts_per_page' => $increment,
+				'post_type' => 'any',
+				'post_status' => 'any',
+				'offset' => $offset,
+			);
+
+			$wpseo_query = get_posts( $args );
+
+			if ($wpseo_query) {  
+				foreach ($wpseo_query as $post) {
+					if (get_post_meta($post->ID, '_wpseo_edit_title', true) !='') { //Import title tag
+						update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_wpseo_edit_title', true));
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_description', true) !='') { //Import meta desc
+						update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_wpseo_edit_description', true));
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_og_title', true) !='') { //Import Facebook Title
+						update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_wpseo_edit_og_title', true));
+						update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_wpseo_edit_og_title', true));
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_og_description', true) !='') { //Import Facebook Desc
+						update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_wpseo_edit_og_description', true));
+						update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_wpseo_edit_og_description', true));
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_og_image', true) !='') { //Import Facebook Image
+						update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_wpseo_edit_og_image', true));
+						update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_wpseo_edit_og_image', true));
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_keyword_0', true) !='') { //Import Target Keyword
+						update_post_meta($post->ID, '_seopress_analysis_target_kw', get_post_meta($post->ID, '_wpseo_edit_keyword_0', true));
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_canonical', true) !='') { //Import Canonical URL
+						update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_wpseo_edit_canonical', true));
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_redirect', true) !='') { //Import Redirect URL
+						update_post_meta($post->ID, '_seopress_redirections_value', get_post_meta($post->ID, '_wpseo_edit_redirect', true));
+						update_post_meta($post->ID, '_seopress_redirections_enabled', 'yes');//Enable the redirect
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_robots', true) =='4' || get_post_meta($post->ID, '_wpseo_edit_robots', true) =='5' || get_post_meta($post->ID, '_wpseo_edit_robots', true) =='3') { //Import Robots NoIndex
+						update_post_meta($post->ID, '_seopress_robots_index', "yes");
+					}
+					if (get_post_meta($post->ID, '_wpseo_edit_robots', true) =='2') { //Import Robots NoFollow
+						update_post_meta($post->ID, '_seopress_robots_follow', "yes");
+					}
+				}
+			}
+			$offset += $increment;
+		}
+		$data = array();
+		$data['offset'] = $offset;
+		wp_send_json_success($data);
+		die();
+	}
+}
+add_action('wp_ajax_seopress_wpseo_migration', 'seopress_wpseo_migration');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 //Export SEOPress metadata to CSV
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_metadata_export() {

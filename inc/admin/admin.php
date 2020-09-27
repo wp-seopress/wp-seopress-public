@@ -31,6 +31,11 @@ class seopress_options
 		//Enable features==========================================================================
 		$seopress_toggle_options = get_option('seopress_toggle');
 
+		//Init if option doesn't exist
+		if($seopress_toggle_options === false){
+			$seopress_toggle_options = [];
+		}
+
 		$seopress_toggle_options['toggle-titles'] = '1';
 		$seopress_toggle_options['toggle-xml-sitemap'] = '1';
 		$seopress_toggle_options['toggle-social'] = '1';
@@ -47,10 +52,18 @@ class seopress_options
 		$seopress_toggle_options['toggle-404'] = '1';
 		$seopress_toggle_options['toggle-bot'] = '1';
 
-		add_option('seopress_toggle', $seopress_toggle_options);
+		//Check if the value is an array (important!)
+		if(is_array($seopress_toggle_options)) {
+			add_option('seopress_toggle', $seopress_toggle_options);
+		}
 
 		//Titles & metas===========================================================================
 		$seopress_titles_options = get_option('seopress_titles_option_name');
+
+		//Init if option doesn't exist
+		if($seopress_titles_options === false){
+			$seopress_titles_options = [];
+		}
 		
 		//Site Title
 		$seopress_titles_options['seopress_titles_home_site_title'] = '%%sitetitle%%';
@@ -71,18 +84,18 @@ class seopress_options
 			foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
 				//Title
 				if ($seopress_tax_key =='category') {
-					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%_category_title%% %%current_pagination%% %%sep%% %%sitetitle%%';  
+					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%_category_title%% %%current_pagination%% %%sep%% %%sitetitle%%';
 				} elseif ($seopress_tax_key =='post_tag') {
-					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%tag_title%% %%current_pagination%% %%sep%% %%sitetitle%%';  
+					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%tag_title%% %%current_pagination%% %%sep%% %%sitetitle%%';
 				} else {
 					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%term_title%% %%current_pagination%% %%sep%% %%sitetitle%%';
 				}
 
 				//Desc
 				if ($seopress_tax_key =='category') {
-					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%_category_description%%';  
+					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%_category_description%%';
 				} elseif ($seopress_tax_key =='post_tag') {
-					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%tag_description%%';  
+					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%tag_description%%';
 				} else {
 					$seopress_titles_options['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%term_description%%';
 				}
@@ -104,6 +117,9 @@ class seopress_options
 		$seopress_titles_options['seopress_titles_archives_date_title'] = '%%archive_date%% %%sep%% %%sitetitle%%';
 		$seopress_titles_options['seopress_titles_archives_date_noindex'] = '1';
 
+		//BuddyPress Groups
+		$seopress_titles_options['seopress_titles_bp_groups_title'] = '%%post_title%% %%sep%% %%sitetitle%%';
+
 		//Search
 		$seopress_titles_options['seopress_titles_archives_search_title'] = '%%search_keywords%% %%sep%% %%sitetitle%%';
 
@@ -113,10 +129,18 @@ class seopress_options
 		//Link rel prev/next
 		$seopress_titles_options['seopress_titles_paged_rel'] = '1';
 
-		add_option('seopress_titles_option_name', $seopress_titles_options);
+		//Check if the value is an array (important!)
+		if(is_array($seopress_titles_options)) {
+			add_option('seopress_titles_option_name', $seopress_titles_options);
+		}
 
 		//XML Sitemap==============================================================================
 		$seopress_xml_sitemap_options = get_option('seopress_xml_sitemap_option_name');
+
+		//Init if option doesn't exist
+		if($seopress_xml_sitemap_options === false){
+			$seopress_xml_sitemap_options = [];
+		}
 
 		$seopress_xml_sitemap_options['seopress_xml_sitemap_general_enable'] = '1';
 		$seopress_xml_sitemap_options['seopress_xml_sitemap_img_enable'] = '1';
@@ -141,11 +165,11 @@ class seopress_options
 		$args = array(
 			'show_ui' => true,
 			'public' => true,
-		  
+		
 		); 
 		$output = 'objects'; // or objects
 		$operator = 'and'; // 'and' or 'or'
-		$taxonomies = get_taxonomies( $args, $output, $operator );  
+		$taxonomies = get_taxonomies( $args, $output, $operator );
 
 		foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
 			if ($seopress_tax_key =='category' || $seopress_tax_key =='post_tag') {
@@ -153,25 +177,45 @@ class seopress_options
 			}
 		}
 
-		add_option('seopress_xml_sitemap_option_name', $seopress_xml_sitemap_options);
+		//Check if the value is an array (important!)
+		if(is_array($seopress_xml_sitemap_options)) {
+			add_option('seopress_xml_sitemap_option_name', $seopress_xml_sitemap_options);
+		}
 
 		//Social===================================================================================
 		$seopress_social_options = get_option('seopress_social_option_name');
 
+		//Init if option doesn't exist
+		if($seopress_social_options === false){
+			$seopress_social_options = [];
+		}
+
 		$seopress_social_options['seopress_social_facebook_og'] = '1';
 		$seopress_social_options['seopress_social_twitter_card'] = '1';
 
-		add_option('seopress_social_option_name', $seopress_social_options);
+		//Check if the value is an array (important!)
+		if(is_array($seopress_social_options)) {
+			add_option('seopress_social_option_name', $seopress_social_options);
+		}
 
 		//Advanced=================================================================================
 		$seopress_advanced_option_name = get_option('seopress_advanced_option_name');
+
+		//Init if option doesn't exist
+		if($seopress_advanced_option_name === false){
+			$seopress_advanced_option_name = [];
+		}
 
 		$seopress_advanced_option_name['seopress_advanced_advanced_attachments'] = '1';
 		$seopress_advanced_option_name['seopress_advanced_advanced_tax_desc_editor'] = '1';
 		$seopress_advanced_option_name['seopress_advanced_appearance_title_col'] = '1';
 		$seopress_advanced_option_name['seopress_advanced_appearance_meta_desc_col'] = '1';
+		$seopress_advanced_option_name['seopress_advanced_appearance_score_col'] = '1';
 
-		add_option('seopress_advanced_option_name', $seopress_advanced_option_name);
+		//Check if the value is an array (important!)
+		if(is_array($seopress_advanced_option_name)) {
+			add_option('seopress_advanced_option_name', $seopress_advanced_option_name);
+		}
 	}
 
 	/**
@@ -207,6 +251,7 @@ class seopress_options
 					<li><span>'.__('%%post_excerpt%% (alias %%excerpt%%)','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
 					<li><span>'.__('%%post_content%%','wp-seopress').'</span>'.__('Post content / product long description','wp-seopress').'</li>
 					<li><span>'.__('%%post_thumbnail_url%%','wp-seopress').'</span>'.__('Post thumbnail URL','wp-seopress').'</li>
+					<li><span>'.__('%%post_url%%','wp-seopress').'</span>'.__('Post URL (permalink)','wp-seopress').'</li>
 					<li><span>'.__('%%post_date%% (alias %%date%%)','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
 					<li><span>'.__('%%post_modified_date%%','wp-seopress').'</span>'.__('Last modified post date','wp-seopress').'</li>
 					<li><span>'.__('%%post_author%%','wp-seopress').'</span>'.__('Post author','wp-seopress').'</li>
@@ -760,6 +805,7 @@ class seopress_options
 							<option value="seo-ultimate-migration-tool"><?php _e('SEO Ultimate','wp-seopress'); ?></option>
 							<option value="wp-meta-seo-migration-tool"><?php _e('WP Meta SEO','wp-seopress'); ?></option>
 							<option value="premium-seo-pack-migration-tool"><?php _e('Premium SEO Pack','wp-seopress'); ?></option>
+							<option value="wpseo-migration-tool"><?php _e('wpSEO','wp-seopress'); ?></option>
 						</select>
 						<br><br>
 					</div>
@@ -922,6 +968,28 @@ class seopress_options
 							<div class="log"></div>
 						</div><!-- .inside -->
 					</div><!-- .postbox -->
+
+					<!-- wpSEO import tool -->
+					<div id="wpseo-migration-tool" class="postbox section-tool">
+						<div class="inside">
+							<h3><span><?php _e( 'Import posts and terms metadata from wpSEO', 'wp-seopress' ); ?></span></h3>
+							<p><?php _e( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ); ?></p>
+							<ul>
+								<li><?php _e('Title tags','wp-seopress'); ?></li>
+								<li><?php _e('Meta description','wp-seopress'); ?></li>
+								<li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+								<li><?php _e('Twitter tags (title, description and image thumbnail)','wp-seopress'); ?></li>
+								<li><?php _e('Meta Robots (noindex, nofollow)','wp-seopress'); ?></li>
+								<li><?php _e('Canonical URL','wp-seopress'); ?></li>
+								<li><?php _e('Redirect URL','wp-seopress'); ?></li>
+								<li><?php _e('Main keyword','wp-seopress'); ?></li>
+							</ul>
+							<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any wpSEO data.', 'wp-seopress' ); ?></p>
+							<button id="seopress-wpseo-migrate" type="button" class="button"><?php _e('Migrate now','wp-seopress'); ?></button>
+							<span class="spinner"></span>
+							<div class="log"></div>
+						</div><!-- .inside -->
+					</div><!-- .postbox -->
 				</div>
 				<div class="seopress-tab <?php if ($current_tab == 'tab_seopress_tool_redirects') { echo 'active'; } ?>" id="tab_seopress_tool_redirects">
 					<?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
@@ -946,7 +1014,7 @@ class seopress_options
 											<li><?php _e( 'URL to redirect in absolute,','wp-seopress'); ?></li>
 											<li><?php _e( 'type of redirection (301, 302 or 307, 410, 451),','wp-seopress'); ?></li>
 											<li><?php _e( 'Yes to enable the redirect (leave it empty to disable the redirect)','wp-seopress'); ?></li>
-											<li><?php _e( 'the query parameter without the quotes ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection),', 'wp-seopress' ); ?>
+											<li><?php _e( 'the query parameter without the quotes ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection),', 'wp-seopress' ); ?></li>
 											<li><?php _e( 'and, the last parameter, the counter (optional).','wp-seopress'); ?></li>
 										</ul>
 									</p>
@@ -955,6 +1023,8 @@ class seopress_options
 											<?php _e('Download a CSV example','wp-seopress'); ?>
 										</a>
 									</p>
+									<p><?php _e('Duplicate entries will be automatically removed during import.','wp-seopress'); ?></p>
+									<p><strong><?php _e('Select your separator:','wp-seopress'); ?></strong></p>
 									<form method="post" enctype="multipart/form-data">
 										<p>
 											<input id="import_sep_comma" name="import_sep" type="radio" value="comma"/>
@@ -1249,6 +1319,30 @@ class seopress_options
 			'seopress_titles_single_titles', // ID
 			'',
 			array( $this, 'seopress_titles_single_titles_callback' ), // Callback
+			'seopress-settings-admin-titles-single', // Page
+			'seopress_setting_section_titles_single' // Section
+		);
+
+		add_settings_field(
+			'seopress_titles_bp_groups_title', // ID
+			'',
+			array( $this, 'seopress_titles_bp_groups_title_callback' ), // Callback
+			'seopress-settings-admin-titles-single', // Page
+			'seopress_setting_section_titles_single' // Section
+		);
+
+		add_settings_field(
+			'seopress_titles_bp_groups_desc', // ID
+			'',
+			array( $this, 'seopress_titles_bp_groups_desc_callback' ), // Callback
+			'seopress-settings-admin-titles-single', // Page
+			'seopress_setting_section_titles_single' // Section
+		);
+
+		add_settings_field(
+			'seopress_titles_bp_groups_noindex', // ID
+			'',
+			array( $this, 'seopress_titles_bp_groups_noindex_callback' ), // Callback
 			'seopress-settings-admin-titles-single', // Page
 			'seopress_setting_section_titles_single' // Section
 		);
@@ -2407,7 +2501,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_category_url', // ID
-		   __("Remove /category/ in URL","wp-seopress"), // Title
+			__("Remove /category/ in URL","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_category_url_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
 			'seopress_setting_section_advanced_advanced' // Section
@@ -2415,7 +2509,7 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_advanced_trailingslash', // ID
-		   __("Disable trailing slash for metas","wp-seopress"), // Title
+			__("Disable trailing slash for metas","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_advanced_trailingslash_callback' ), // Callback
 			'seopress-settings-admin-advanced-advanced', // Page
 			'seopress_setting_section_advanced_advanced' // Section
@@ -2859,7 +2953,7 @@ class seopress_options
 			if (current($server_software) =='nginx' ) { //IF NGINX
 				echo '<p>'.__('Your server uses NGINX. If XML Sitemaps doesn\'t work properly, you need to add this rule to your configuration:', 'wp-seopress').'</p><br>';
 				echo '<pre style="margin:0;padding:10px;font-weight: bold;background:#F3F3F3;display:inline-block;width: 100%">
-					location ~ ([^/]*)sitemap(.*)\.x(m|s)l$ {              
+					location ~ ([^/]*)sitemap(.*)\.x(m|s)l$ {
 						## SEOPress
 						rewrite ^/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
 						rewrite ^/sitemaps/news.xml$ /index.php?seopress_news=$1 last;
@@ -2872,21 +2966,25 @@ class seopress_options
 			}
 		}
 		echo '<p>'.__('Noindex content will not be displayed in Sitemaps.', 'wp-seopress').'</p>';
+		echo '<p>'.__('If you disable globally this feature (using the blue toggle from above), the native WordPress XML sitemaps will be re-activated.', 'wp-seopress').'</p>';
 
 		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
 			$seopress_docs_link['sitemaps']['error']['blank'] = 'https://www.seopress.org/fr/support/guides/xml-sitemap-page-blanche/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 			$seopress_docs_link['sitemaps']['error']['404'] = 'https://www.seopress.org/fr/support/guides/plan-de-site-xml-retourne-erreur-404/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+			$seopress_docs_link['sitemaps']['error']['html'] = 'https://www.seopress.org/fr/support/guides/exclure-fichiers-xml-xsl-extensions-cache/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		} else {
 			$seopress_docs_link['sitemaps']['error']['blank'] = 'https://www.seopress.org/support/guides/xml-sitemap-blank-page/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 			$seopress_docs_link['sitemaps']['error']['404'] = 'https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+			$seopress_docs_link['sitemaps']['error']['html'] = 'https://www.seopress.org/support/guides/how-to-exclude-xml-and-xsl-files-from-caching-plugins/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 		}
 
 		echo '<p class="seopress-help"><span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['blank'].'" target="_blank">'.__('Blank sitemap?', 'wp-seopress').'</a> - ';
-		echo '<span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['404'].'" target="_blank">'.__('404 error?', 'wp-seopress').'</a></p><br>';
+		echo '<span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['404'].'" target="_blank">'.__('404 error?', 'wp-seopress').'</a> - ';
+		echo '<span class="dashicons dashicons-external"></span><a href="'.$seopress_docs_link['sitemaps']['error']['html'].'" target="_blank">'.__('HTML error? Exclude XML and XSL from caching plugins!', 'wp-seopress').'</a></p><br>';
 
 		echo '<a href="'.get_option( 'home' ).'/sitemaps.xml" target="_blank" class="button"><span class="dashicons dashicons-visibility"></span>'.__('View your sitemap','wp-seopress').'</a>';
 		echo '&nbsp;';
-		echo '<a href="https://www.google.com/ping?sitemap='.get_option( 'home' ).'/sitemaps.xml/" target="_blank" class="button"><span class="dashicons dashicons-share-alt2"></span>'.__('Ping Google manually','wp-seopress').'</a>';        
+		echo '<a href="https://www.google.com/ping?sitemap='.get_option( 'home' ).'/sitemaps.xml/" target="_blank" class="button"><span class="dashicons dashicons-share-alt2"></span>'.__('Ping Google manually','wp-seopress').'</a>';
 		echo '&nbsp;';
 		echo '<button type="button" id="seopress-flush-permalinks" class="button"><span class="dashicons dashicons-admin-links"></span>'.__('Flush permalinks','wp-seopress').'</button>';
 		echo '<span class="spinner"></span>';
@@ -2934,7 +3032,7 @@ class seopress_options
 			<li>'.__('First image of your post content','wp-seopress').'</li>
 			<li>'.__('Global OG Image set in SEO > Social > Open Graph','wp-seopress').'</li>
 		</ol>';
-	}    
+	}
 
 	public function print_section_info_social_twitter() {
 		print __('<p>Manage your Twitter card.</p>', 'wp-seopress');
@@ -3021,7 +3119,7 @@ class seopress_options
 		printf(
 			'<input type="text" id="seopress_titles_home_site_title" name="seopress_titles_option_name[seopress_titles_home_site_title]" placeholder="'.esc_html__('My awesome website','wp-seopress').'" aria-label="'.__('Site title','wp-seopress').'" value="%s"/>',
 			esc_html( $this->options['seopress_titles_home_site_title'])
-		);        
+		);
 		echo '<div class="wrap-tags"><span id="seopress-tag-site-title" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
 		echo '<span id="seopress-tag-site-sep" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
 		echo '<span id="seopress-tag-site-desc" data-tag="%%tagline%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Tagline','wp-seopress').'</span>';
@@ -3052,7 +3150,7 @@ class seopress_options
 			//Single on/off CPT
 			echo '<div class="seopress_wrap_single_cpt">';
 
-				$options = get_option( 'seopress_titles_option_name' );  
+				$options = get_option( 'seopress_titles_option_name' );
 			
 				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['enable']) ? $options['seopress_titles_single_titles'][$seopress_cpt_key]['enable'] : NULL;
 
@@ -3152,9 +3250,9 @@ class seopress_options
 			//Single No-Index CPT
 			echo '<div class="seopress_wrap_single_cpt">';
 
-				$options = get_option( 'seopress_titles_option_name' );  
+				$options = get_option( 'seopress_titles_option_name' );
 			
-				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['noindex']);      
+				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['noindex']);
 				
 				echo '<input id="seopress_titles_single_cpt_noindex['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][noindex]" type="checkbox"';
 				if ('1' == $check) echo 'checked="yes"'; 
@@ -3171,9 +3269,9 @@ class seopress_options
 			//Single No-Follow CPT
 			echo '<div class="seopress_wrap_single_cpt">';
 
-				$options = get_option( 'seopress_titles_option_name' );  
+				$options = get_option( 'seopress_titles_option_name' );
 			
-				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['nofollow']);      
+				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['nofollow']);
 				
 				echo '<input id="seopress_titles_single_cpt_nofollow['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][nofollow]" type="checkbox"';
 				if ('1' == $check) echo 'checked="yes"'; 
@@ -3190,9 +3288,9 @@ class seopress_options
 			//Single Published / modified date CPT
 			echo '<div class="seopress_wrap_single_cpt">';
 
-				$options = get_option( 'seopress_titles_option_name' );  
+				$options = get_option( 'seopress_titles_option_name' );
 			
-				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['date']);      
+				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['date']);
 				
 				echo '<input id="seopress_titles_single_cpt_date['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][date]" type="checkbox"';
 				if ('1' == $check) echo 'checked="yes"'; 
@@ -3209,9 +3307,9 @@ class seopress_options
 			//Single meta thumbnail CPT
 			echo '<div class="seopress_wrap_single_cpt">';
 
-				$options = get_option( 'seopress_titles_option_name' );  
+				$options = get_option( 'seopress_titles_option_name' );
 			
-				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs']);      
+				$check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs']);
 				
 				echo '<input id="seopress_titles_single_cpt_thumb_gcs['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_single_titles]['.$seopress_cpt_key.'][thumb_gcs]" type="checkbox"';
 				if ('1' == $check) echo 'checked="yes"'; 
@@ -3227,6 +3325,61 @@ class seopress_options
 		}
 	}
 
+	//BuddyPress Groups
+	public function seopress_titles_bp_groups_title_callback()
+	{
+		echo '<h2>'.__('BuddyPress groups','wp-seopress').'</h2>';
+		
+		_e('Title template','wp-seopress');
+		echo "<br/>";
+
+		$check = isset($this->options['seopress_titles_bp_groups_title']) ? $this->options['seopress_titles_bp_groups_title'] : NULL;
+
+		printf(
+		'<input id="seopress_titles_bp_groups_title" type="text" name="seopress_titles_option_name[seopress_titles_bp_groups_title]" value="%s"/>',
+		esc_html( $check )
+		);
+
+		echo '<div class="wrap-tags"><span id="seopress-tag-post-title-bd-groups" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>';
+		echo '<span id="seopress-tag-sep-bd-groups" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
+		echo '<span id="seopress-tag-site-title-bd-groups" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
+		echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
+		
+	}
+
+	public function seopress_titles_bp_groups_desc_callback()
+	{
+		_e('Meta description template','wp-seopress');
+		echo "<br/>";
+		
+		$check = isset($this->options['seopress_titles_bp_groups_desc']) ? $this->options['seopress_titles_bp_groups_desc'] : NULL;
+
+		printf(
+		'<textarea name="seopress_titles_option_name[seopress_titles_bp_groups_desc]">%s</textarea>',
+		esc_html( $check )
+		
+		);
+		
+	}
+
+	public function seopress_titles_bp_groups_noindex_callback()
+	{
+
+		$options = get_option( 'seopress_titles_option_name' );
+		
+		$check = isset($options['seopress_titles_bp_groups_noindex']);
+		
+		echo '<input id="seopress_titles_bp_groups_noindex" name="seopress_titles_option_name[seopress_titles_bp_groups_noindex]" type="checkbox"';
+		if ('1' == $check) echo 'checked="yes"'; 
+		echo ' value="1"/>';
+		
+		echo '<label for="seopress_titles_bp_groups_noindex">'. __( 'Do not display BuddyPress groups in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
+		
+		if (isset($this->options['seopress_titles_bp_groups_noindex'])) {
+			esc_attr( $this->options['seopress_titles_bp_groups_noindex']);
+		}
+	}
+
 	//Taxonomies
 	public function seopress_titles_tax_titles_callback()
 	{
@@ -3237,7 +3390,7 @@ class seopress_options
 			//Single on/off Tax
 			echo '<div class="seopress_wrap_tax">';
 
-				$options = get_option( 'seopress_titles_option_name' );  
+				$options = get_option( 'seopress_titles_option_name' );
 			
 				$check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['enable']) ? $options['seopress_titles_tax_titles'][$seopress_tax_key]['enable'] : NULL;
 
@@ -3305,11 +3458,11 @@ class seopress_options
 
 				printf(
 				'<input type="text" id="seopress_titles_tax_titles_'.$seopress_tax_key.'" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][title]" value="%s"/>',
-				esc_html($check)   
+				esc_html($check) 
 				);
 
 				if ($seopress_tax_key =='category') {
-					  echo '<div class="wrap-tags"><span id="seopress-tag-tax-title-'.$seopress_tax_key.'" data-tag="%%_category_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Category Title','wp-seopress').'</span>';
+					echo '<div class="wrap-tags"><span id="seopress-tag-tax-title-'.$seopress_tax_key.'" data-tag="%%_category_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Category Title','wp-seopress').'</span>';
 				} elseif ($seopress_tax_key =='post_tag') {
 					echo '<div class="wrap-tags"><span id="seopress-tag-tax-title-'.$seopress_tax_key.'" data-tag="%%tag_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Tag Title','wp-seopress').'</span>';
 				} else {
@@ -3346,7 +3499,7 @@ class seopress_options
 				);
 
 				if ($seopress_tax_key =='category') {
-					  echo '<div class="wrap-tags"><span id="seopress-tag-tax-desc-'.$seopress_tax_key.'" data-tag="%%_category_description%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Category Description','wp-seopress').'</span>';
+					echo '<div class="wrap-tags"><span id="seopress-tag-tax-desc-'.$seopress_tax_key.'" data-tag="%%_category_description%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Category Description','wp-seopress').'</span>';
 				} elseif ($seopress_tax_key =='post_tag') {
 					echo '<div class="wrap-tags"><span id="seopress-tag-tax-desc-'.$seopress_tax_key.'" data-tag="%%tag_description%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Tag Description','wp-seopress').'</span>';
 				} else {
@@ -3360,9 +3513,9 @@ class seopress_options
 			//Tax No-Index
 			echo '<div class="seopress_wrap_tax">';
 
-				$options = get_option( 'seopress_titles_option_name' );  
+				$options = get_option( 'seopress_titles_option_name' );
 			
-				$check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['noindex']);      
+				$check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['noindex']);
 				
 				echo '<input id="seopress_titles_tax_noindex['.$seopress_tax_key.']" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][noindex]" type="checkbox"';
 				if ('1' == $check) echo 'checked="yes"'; 
@@ -3379,9 +3532,9 @@ class seopress_options
 			//Tax No-Follow
 			echo '<div class="seopress_wrap_tax">';
 
-				$options = get_option( 'seopress_titles_option_name' );  
+				$options = get_option( 'seopress_titles_option_name' );
 			
-				$check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['nofollow']);      
+				$check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['nofollow']);
 				
 				echo '<input id="seopress_titles_tax_nofollow['.$seopress_tax_key.']" name="seopress_titles_option_name[seopress_titles_tax_titles]['.$seopress_tax_key.'][nofollow]" type="checkbox"';
 				if ('1' == $check) echo 'checked="yes"'; 
@@ -3434,7 +3587,7 @@ class seopress_options
 
 					printf(
 					'<input type="text" id="seopress_titles_archive_titles_'.$seopress_cpt_key.'" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][title]" value="%s"/>',
-					esc_html($check)   
+					esc_html($check) 
 					);
 
 					echo '<div class="wrap-tags"><span id="seopress-tag-archive-title-'.$seopress_cpt_key.'" data-tag="%%cpt_plural%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Type Archive Name','wp-seopress').'</span>';
@@ -3465,9 +3618,9 @@ class seopress_options
 				//Archive No-Index CPT
 				echo '<div class="seopress_wrap_archive_cpt">';
 
-					$options = get_option( 'seopress_titles_option_name' );  
+					$options = get_option( 'seopress_titles_option_name' );
 				
-					$check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']);      
+					$check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']);
 					
 					echo '<input id="seopress_titles_archive_cpt_noindex['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][noindex]" type="checkbox"';
 					if ('1' == $check) echo 'checked="yes"'; 
@@ -3484,9 +3637,9 @@ class seopress_options
 				//Archive No-Follow CPT
 				echo '<div class="seopress_wrap_archive_cpt">';
 
-					$options = get_option( 'seopress_titles_option_name' );  
+					$options = get_option( 'seopress_titles_option_name' );
 				
-					$check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow']);      
+					$check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow']);
 					
 					echo '<input id="seopress_titles_archive_cpt_nofollow['.$seopress_cpt_key.']" name="seopress_titles_option_name[seopress_titles_archive_titles]['.$seopress_cpt_key.'][nofollow]" type="checkbox"';
 					if ('1' == $check) echo 'checked="yes"'; 
@@ -3542,9 +3695,9 @@ class seopress_options
 	public function seopress_titles_archives_author_noindex_callback()
 	{
 
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_archives_author_noindex']);      
+		$check = isset($options['seopress_titles_archives_author_noindex']);
 		
 		echo '<input id="seopress_titles_archives_author_noindex" name="seopress_titles_option_name[seopress_titles_archives_author_noindex]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3554,15 +3707,15 @@ class seopress_options
 		
 		if (isset($this->options['seopress_titles_archives_author_noindex'])) {
 			esc_attr( $this->options['seopress_titles_archives_author_noindex']);
-		}  
+		}
 	}
 
 	public function seopress_titles_archives_author_disable_callback()
 	{
 
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_archives_author_disable']);      
+		$check = isset($options['seopress_titles_archives_author_disable']);
 		
 		echo '<input id="seopress_titles_archives_author_disable" name="seopress_titles_option_name[seopress_titles_archives_author_disable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3572,7 +3725,7 @@ class seopress_options
 		
 		if (isset($this->options['seopress_titles_archives_author_disable'])) {
 			esc_attr( $this->options['seopress_titles_archives_author_disable']);
-		}  
+		}
 	}
 
 	public function seopress_titles_archives_date_title_callback()
@@ -3596,7 +3749,7 @@ class seopress_options
 	}
 
 	public function seopress_titles_archives_date_desc_callback()
-	{        
+	{
 		_e('Meta description template','wp-seopress');
 		echo "<br/>";
 		
@@ -3612,9 +3765,9 @@ class seopress_options
 	public function seopress_titles_archives_date_noindex_callback()
 	{
 
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_archives_date_noindex']);      
+		$check = isset($options['seopress_titles_archives_date_noindex']);
 		
 		echo '<input id="seopress_titles_archives_date_noindex" name="seopress_titles_option_name[seopress_titles_archives_date_noindex]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3624,15 +3777,15 @@ class seopress_options
 		
 		if (isset($this->options['seopress_titles_archives_date_noindex'])) {
 			esc_attr( $this->options['seopress_titles_archives_date_noindex']);
-		}  
+		}
 	}
 
 	public function seopress_titles_archives_date_disable_callback()
 	{
 
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_archives_date_disable']);      
+		$check = isset($options['seopress_titles_archives_date_disable']);
 		
 		echo '<input id="seopress_titles_archives_date_disable" name="seopress_titles_option_name[seopress_titles_archives_date_disable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3642,7 +3795,7 @@ class seopress_options
 		
 		if (isset($this->options['seopress_titles_archives_date_disable'])) {
 			esc_attr( $this->options['seopress_titles_archives_date_disable']);
-		}  
+		}
 	}
 
 	public function seopress_titles_archives_search_title_callback()
@@ -3666,7 +3819,7 @@ class seopress_options
 	}
 
 	public function seopress_titles_archives_search_desc_callback()
-	{        
+	{
 		_e('Meta description template','wp-seopress');
 		echo "<br/>";
 
@@ -3683,7 +3836,7 @@ class seopress_options
 	public function seopress_titles_archives_search_title_noindex_callback()
 	{
 
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
 		$check = isset($options['seopress_titles_archives_search_title_noindex']); 
 		
@@ -3695,7 +3848,7 @@ class seopress_options
 		
 		if (isset($this->options['seopress_titles_archives_search_title_noindex'])) {
 			esc_attr( $this->options['seopress_titles_archives_search_title_noindex']);
-		}  
+		}
 	}
 
 	public function seopress_titles_archives_404_title_callback()
@@ -3716,7 +3869,7 @@ class seopress_options
 	}
 
 	public function seopress_titles_archives_404_desc_callback()
-	{        
+	{
 		_e('Meta description template','wp-seopress');
 		echo "<br/>";
 		
@@ -3733,9 +3886,9 @@ class seopress_options
 	//Advanced
 	public function seopress_titles_noindex_callback()
 	{
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_noindex']);      
+		$check = isset($options['seopress_titles_noindex']);
 		
 		echo '<input id="seopress_titles_noindex" name="seopress_titles_option_name[seopress_titles_noindex]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3752,9 +3905,9 @@ class seopress_options
 
 	public function seopress_titles_nofollow_callback()
 	{
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_nofollow']);      
+		$check = isset($options['seopress_titles_nofollow']);
 		
 		echo '<input id="seopress_titles_nofollow" name="seopress_titles_option_name[seopress_titles_nofollow]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3771,9 +3924,9 @@ class seopress_options
 
 	public function seopress_titles_noodp_callback()
 	{
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_noodp']);      
+		$check = isset($options['seopress_titles_noodp']);
 		
 		echo '<input id="seopress_titles_noodp" name="seopress_titles_option_name[seopress_titles_noodp]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3790,9 +3943,9 @@ class seopress_options
 
 	public function seopress_titles_noimageindex_callback()
 	{
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_noimageindex']);      
+		$check = isset($options['seopress_titles_noimageindex']);
 		
 		echo '<input id="seopress_titles_noimageindex" name="seopress_titles_option_name[seopress_titles_noimageindex]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3809,9 +3962,9 @@ class seopress_options
 
 	public function seopress_titles_noarchive_callback()
 	{
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_noarchive']);      
+		$check = isset($options['seopress_titles_noarchive']);
 		
 		echo '<input id="seopress_titles_noarchive" name="seopress_titles_option_name[seopress_titles_noarchive]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3828,9 +3981,9 @@ class seopress_options
 
 	public function seopress_titles_nosnippet_callback()
 	{
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_nosnippet']);      
+		$check = isset($options['seopress_titles_nosnippet']);
 		
 		echo '<input id="seopress_titles_nosnippet" name="seopress_titles_option_name[seopress_titles_nosnippet]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3847,9 +4000,9 @@ class seopress_options
 
 	public function seopress_titles_nositelinkssearchbox_callback()
 	{
-		$options = get_option( 'seopress_titles_option_name' );  
+		$options = get_option( 'seopress_titles_option_name' );
 		
-		$check = isset($options['seopress_titles_nositelinkssearchbox']);      
+		$check = isset($options['seopress_titles_nositelinkssearchbox']);
 		
 		echo '<input id="seopress_titles_nositelinkssearchbox" name="seopress_titles_option_name[seopress_titles_nositelinkssearchbox]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3927,9 +4080,9 @@ class seopress_options
 
 	public function seopress_xml_sitemap_img_enable_callback()
 	{
-		$options = get_option( 'seopress_xml_sitemap_option_name' );  
+		$options = get_option( 'seopress_xml_sitemap_option_name' );
 		
-		$check = isset($options['seopress_xml_sitemap_img_enable']);      
+		$check = isset($options['seopress_xml_sitemap_img_enable']);
 		
 		echo '<input id="seopress_xml_sitemap_img_enable" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_img_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -3955,9 +4108,9 @@ class seopress_options
 	public function seopress_xml_sitemap_video_enable_callback()
 	{
 		if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-			$options = get_option( 'seopress_xml_sitemap_option_name' );  
+			$options = get_option( 'seopress_xml_sitemap_option_name' );
 			
-			$check = isset($options['seopress_xml_sitemap_video_enable']);      
+			$check = isset($options['seopress_xml_sitemap_video_enable']);
 			
 			echo '<input id="seopress_xml_sitemap_video_enable" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_video_enable]" type="checkbox"';
 			if ('1' == $check) echo 'checked="yes"'; 
@@ -3983,9 +4136,9 @@ class seopress_options
 
 	public function seopress_xml_sitemap_author_enable_callback()
 	{
-		$options = get_option( 'seopress_xml_sitemap_option_name' );  
+		$options = get_option( 'seopress_xml_sitemap_option_name' );
 		
-		$check = isset($options['seopress_xml_sitemap_author_enable']);      
+		$check = isset($options['seopress_xml_sitemap_author_enable']);
 		
 		echo '<input id="seopress_xml_sitemap_author_enable" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_author_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4002,9 +4155,9 @@ class seopress_options
 
 	public function seopress_xml_sitemap_html_enable_callback()
 	{
-		$options = get_option( 'seopress_xml_sitemap_option_name' );  
+		$options = get_option( 'seopress_xml_sitemap_option_name' );
 		
-		$check = isset($options['seopress_xml_sitemap_html_enable']);      
+		$check = isset($options['seopress_xml_sitemap_html_enable']);
 		
 		echo '<input id="seopress_xml_sitemap_html_enable" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4027,9 +4180,9 @@ class seopress_options
 
 	public function seopress_xml_sitemap_post_types_list_callback()
 	{
-		$options = get_option( 'seopress_xml_sitemap_option_name' );  
+		$options = get_option( 'seopress_xml_sitemap_option_name' );
 		
-		$check = isset($options['seopress_xml_sitemap_post_types_list']);      
+		$check = isset($options['seopress_xml_sitemap_post_types_list']);
 		
 		global $wp_post_types;
 
@@ -4050,9 +4203,9 @@ class seopress_options
 			//List all post types
 			echo '<div class="seopress_wrap_single_cpt">';
 
-				$options = get_option( 'seopress_xml_sitemap_option_name' );  
+				$options = get_option( 'seopress_xml_sitemap_option_name' );
 				
-				$check = isset($options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include']);      
+				$check = isset($options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include']);
 				
 				echo '<input id="seopress_xml_sitemap_post_types_list_include['.$seopress_cpt_key.']" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_post_types_list]['.$seopress_cpt_key.'][include]" type="checkbox"';
 				if ('1' == $check) echo 'checked="yes"'; 
@@ -4074,18 +4227,18 @@ class seopress_options
 
 	public function seopress_xml_sitemap_taxonomies_list_callback()
 	{
-		$options = get_option( 'seopress_xml_sitemap_option_name' );  
+		$options = get_option( 'seopress_xml_sitemap_option_name' );
 		
-		$check = isset($options['seopress_xml_sitemap_taxonomies_list']);      
+		$check = isset($options['seopress_xml_sitemap_taxonomies_list']);
 		
 		$args = array(
 			'show_ui' => true,
 			'public' => true,
-		  
+		
 		); 
 		$output = 'objects'; // or objects
 		$operator = 'and'; // 'and' or 'or'
-		$taxonomies = get_taxonomies( $args, $output, $operator );  
+		$taxonomies = get_taxonomies( $args, $output, $operator );
 
 		foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
 			
@@ -4094,9 +4247,9 @@ class seopress_options
 			//List all taxonomies
 			echo '<div class="seopress_wrap_single_tax">';
 
-				$options = get_option( 'seopress_xml_sitemap_option_name' );  
+				$options = get_option( 'seopress_xml_sitemap_option_name' );
 			
-				$check = isset($options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_key]['include']);      
+				$check = isset($options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_key]['include']);
 				
 				echo '<input id="seopress_xml_sitemap_taxonomies_list_include['.$seopress_tax_key.']" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_taxonomies_list]['.$seopress_tax_key.'][include]" type="checkbox"';
 				if ('1' == $check) echo 'checked="yes"'; 
@@ -4141,7 +4294,7 @@ class seopress_options
 		$options = get_option( 'seopress_xml_sitemap_option_name' ); 
 		
 		$selected = isset($options['seopress_xml_sitemap_html_order']) ? $options['seopress_xml_sitemap_html_order'] : NULL;
-		   
+		 
 		echo '<select id="seopress_xml_sitemap_html_order" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_order]">';
 			echo ' <option '; 
 				if ('DESC' == $selected) echo 'selected="selected"'; 
@@ -4161,7 +4314,7 @@ class seopress_options
 		$options = get_option( 'seopress_xml_sitemap_option_name' ); 
 		
 		$selected = isset($options['seopress_xml_sitemap_html_orderby']) ? $options['seopress_xml_sitemap_html_orderby'] : NULL;
-		   
+		 
 		echo '<select id="seopress_xml_sitemap_html_orderby" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_orderby]">';
 			echo ' <option '; 
 				if ('date' == $selected) echo 'selected="selected"'; 
@@ -4187,9 +4340,9 @@ class seopress_options
 
 	public function seopress_xml_sitemap_html_date_callback()
 	{
-		$options = get_option( 'seopress_xml_sitemap_option_name' );  
+		$options = get_option( 'seopress_xml_sitemap_option_name' );
 		
-		$check = isset($options['seopress_xml_sitemap_html_date']);      
+		$check = isset($options['seopress_xml_sitemap_html_date']);
 		
 		echo '<input id="seopress_xml_sitemap_html_date" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_date]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4204,7 +4357,7 @@ class seopress_options
 
 	public function seopress_social_knowledge_type_callback()
 	{
-		$options = get_option( 'seopress_social_option_name' );    
+		$options = get_option( 'seopress_social_option_name' );
 		
 		$selected = isset($options['seopress_social_knowledge_type']) ? $options['seopress_social_knowledge_type'] : NULL;
 				
@@ -4243,7 +4396,7 @@ class seopress_options
 		
 		$check = isset($options['seopress_social_knowledge_img']);
 
-		echo '<input id="seopress_social_knowledge_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_knowledge_img]" aria-label="'.__('Your photo/organization logo','wp-seopress').'" placeholder="'.esc_html__('Select your logo','wp-seopress').'"  />
+		echo '<input id="seopress_social_knowledge_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_knowledge_img]" aria-label="'.__('Your photo/organization logo','wp-seopress').'" placeholder="'.esc_html__('Select your logo','wp-seopress').'"/>
 		
 		<input id="seopress_social_knowledge_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />';
 
@@ -4281,7 +4434,7 @@ class seopress_options
 
 	public function seopress_social_knowledge_contact_type_callback()
 	{
-		$options = get_option( 'seopress_social_option_name' );    
+		$options = get_option( 'seopress_social_option_name' );
 		
 		$selected = isset($options['seopress_social_knowledge_contact_type']) ? $options['seopress_social_knowledge_contact_type'] : NULL;
 				
@@ -4325,7 +4478,7 @@ class seopress_options
 
 	public function seopress_social_knowledge_contact_option_callback()
 	{
-		$options = get_option( 'seopress_social_option_name' );    
+		$options = get_option( 'seopress_social_option_name' );
 		
 		$selected = isset($options['seopress_social_knowledge_contact_option']) ? $options['seopress_social_knowledge_contact_option'] : NULL;
 		
@@ -4369,7 +4522,7 @@ class seopress_options
 		
 		);
 		
-	}    
+	}
 
 	public function seopress_social_accounts_pinterest_callback()
 	{
@@ -4457,9 +4610,9 @@ class seopress_options
 
 	public function seopress_social_facebook_og_callback()
 	{
-		$options = get_option( 'seopress_social_option_name' );  
+		$options = get_option( 'seopress_social_option_name' );
 		
-		$check = isset($options['seopress_social_facebook_og']);      
+		$check = isset($options['seopress_social_facebook_og']);
 		
 		echo '<input id="seopress_social_facebook_og" name="seopress_social_option_name[seopress_social_facebook_og]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4478,7 +4631,7 @@ class seopress_options
 		
 		$options_set = isset($options['seopress_social_facebook_img']) ? esc_attr($options['seopress_social_facebook_img']) : NULL;
 		
-		echo '<input id="seopress_social_fb_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_facebook_img]" aria-label="'.__('Select a default image','wp-seopress').'" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'"  />
+		echo '<input id="seopress_social_fb_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_facebook_img]" aria-label="'.__('Select a default image','wp-seopress').'" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'"/>
 		
 		<input id="seopress_social_fb_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />';
 
@@ -4514,11 +4667,11 @@ class seopress_options
 	
 	public function seopress_social_facebook_img_cpt_callback()
 	{	
-		if  (!empty( seopress_get_post_types() ) ) {
+		if(!empty( seopress_get_post_types() ) ) {
 			$post_types = seopress_get_post_types();
 			unset($post_types['post'], $post_types['page']);
 
-			if  (!empty( $post_types ) ) {
+			if(!empty( $post_types ) ) {
 				foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) {
 					echo '<h2>'.$seopress_cpt_value->labels->name.' <em><small>['.$seopress_cpt_value->name.']</small></em></h2>';
 
@@ -4527,7 +4680,7 @@ class seopress_options
 					$options_set = isset($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) ? esc_attr($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) : NULL;
 					
 					echo '<p>
-						<input id="seopress_social_facebook_img_cpt_meta['.$seopress_cpt_key.']" class="seopress_social_facebook_img_cpt_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_facebook_img_cpt]['.$seopress_cpt_key.'][url]" aria-label="'.__('Select a default image','wp-seopress').'" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'"  />
+						<input id="seopress_social_facebook_img_cpt_meta['.$seopress_cpt_key.']" class="seopress_social_facebook_img_cpt_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_facebook_img_cpt]['.$seopress_cpt_key.'][url]" aria-label="'.__('Select a default image','wp-seopress').'" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'"/>
 						
 						<input id="seopress_social_facebook_img_cpt['.$seopress_cpt_key.']" class="seopress_social_facebook_img_cpt button" type="button" value="'.__('Upload an Image','wp-seopress').'" />
 					</p>';
@@ -4584,9 +4737,9 @@ class seopress_options
 
 	public function seopress_social_twitter_card_callback()
 	{
-		$options = get_option( 'seopress_social_option_name' );  
+		$options = get_option( 'seopress_social_option_name' );
 		
-		$check = isset($options['seopress_social_twitter_card']);      
+		$check = isset($options['seopress_social_twitter_card']);
 		
 		echo '<input id="seopress_social_twitter_card" name="seopress_social_option_name[seopress_social_twitter_card]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4601,9 +4754,9 @@ class seopress_options
 
 	public function seopress_social_twitter_card_og_callback()
 	{
-		$options = get_option( 'seopress_social_option_name' );  
+		$options = get_option( 'seopress_social_option_name' );
 		
-		$check = isset($options['seopress_social_twitter_card_og']);      
+		$check = isset($options['seopress_social_twitter_card_og']);
 		
 		echo '<input id="seopress_social_twitter_card_og" name="seopress_social_option_name[seopress_social_twitter_card_og]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4617,14 +4770,14 @@ class seopress_options
 	}
 
 	public function seopress_social_twitter_card_img_callback()
-	{      
+	{
 		$options = get_option( 'seopress_social_option_name' );
 		
 		$options_set = isset($options['seopress_social_twitter_card_img']) ? esc_attr($options['seopress_social_twitter_card_img']) : NULL;
 		
-		$check = isset($options['seopress_social_twitter_card_img']);      
+		$check = isset($options['seopress_social_twitter_card_img']);
 
-		echo '<input id="seopress_social_twitter_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_twitter_card_img]" aria-label="'.__('Default Twitter Image','wp-seopress').'" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'"  />
+		echo '<input id="seopress_social_twitter_img_meta" type="text" value="'.$options_set.'" name="seopress_social_option_name[seopress_social_twitter_card_img]" aria-label="'.__('Default Twitter Image','wp-seopress').'" placeholder="'.esc_html__('Select your default thumbnail','wp-seopress').'"/>
 		
 		<input id="seopress_social_twitter_img_upload" class="button" type="button" value="'.__('Upload an Image','wp-seopress').'" />';
 
@@ -4636,8 +4789,8 @@ class seopress_options
 	}
 
 	public function seopress_social_twitter_card_img_size_callback()
-	{      
-		$options = get_option( 'seopress_social_option_name' );    
+	{
+		$options = get_option( 'seopress_social_option_name' );
 		
 		$selected = isset($options['seopress_social_twitter_card_img_size']) ? $options['seopress_social_twitter_card_img_size'] : NULL;
 				
@@ -4657,9 +4810,9 @@ class seopress_options
 
 	public function seopress_google_analytics_enable_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_enable']);      
+		$check = isset($options['seopress_google_analytics_enable']);
 		
 		echo '<input id="seopress_google_analytics_enable" name="seopress_google_analytics_option_name[seopress_google_analytics_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4687,9 +4840,9 @@ class seopress_options
 
 	public function seopress_google_analytics_disable_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_disable']);      
+		$check = isset($options['seopress_google_analytics_disable']);
 		
 		echo '<input id="seopress_google_analytics_disable" name="seopress_google_analytics_option_name[seopress_google_analytics_disable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -4906,7 +5059,7 @@ class seopress_options
 
 	public function seopress_google_analytics_roles_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
 		global $wp_roles;
 
@@ -4915,7 +5068,7 @@ class seopress_options
 	
 		foreach ($wp_roles->get_names() as $key => $value) {
 
-			$check = isset($options['seopress_google_analytics_roles'][$key]);  
+			$check = isset($options['seopress_google_analytics_roles'][$key]);
 
 			echo '<input id="seopress_google_analytics_roles_'.$key.'" name="seopress_google_analytics_option_name[seopress_google_analytics_roles]['.$key.']" type="checkbox"';
 			if ('1' == $check) echo 'checked="yes"'; 
@@ -5037,9 +5190,9 @@ class seopress_options
 
 	public function seopress_google_analytics_link_attribution_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_link_attribution']);      
+		$check = isset($options['seopress_google_analytics_link_attribution']);
 		
 		echo '<input id="seopress_google_analytics_link_attribution" name="seopress_google_analytics_option_name[seopress_google_analytics_link_attribution]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5055,13 +5208,13 @@ class seopress_options
 		if (isset($this->options['seopress_google_analytics_link_attribution'])) {
 			esc_attr( $this->options['seopress_google_analytics_link_attribution']);
 		}
-	}    
+	}
 
 	public function seopress_google_analytics_cross_enable_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_cross_enable']);      
+		$check = isset($options['seopress_google_analytics_cross_enable']);
 		
 		echo '<input id="seopress_google_analytics_cross_enable" name="seopress_google_analytics_option_name[seopress_google_analytics_cross_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5093,9 +5246,9 @@ class seopress_options
 
 	public function seopress_google_analytics_link_tracking_enable_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_link_tracking_enable']);      
+		$check = isset($options['seopress_google_analytics_link_tracking_enable']);
 		
 		echo '<input id="seopress_google_analytics_link_tracking_enable" name="seopress_google_analytics_option_name[seopress_google_analytics_link_tracking_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5110,9 +5263,9 @@ class seopress_options
 
 	public function seopress_google_analytics_download_tracking_enable_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_download_tracking_enable']);      
+		$check = isset($options['seopress_google_analytics_download_tracking_enable']);
 		
 		echo '<input id="seopress_google_analytics_download_tracking_enable" name="seopress_google_analytics_option_name[seopress_google_analytics_download_tracking_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5141,9 +5294,9 @@ class seopress_options
 
 	public function seopress_google_analytics_affiliate_tracking_enable_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_affiliate_tracking_enable']);      
+		$check = isset($options['seopress_google_analytics_affiliate_tracking_enable']);
 		
 		echo '<input id="seopress_google_analytics_affiliate_tracking_enable" name="seopress_google_analytics_option_name[seopress_google_analytics_affiliate_tracking_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5172,7 +5325,7 @@ class seopress_options
 
 	public function seopress_google_analytics_cd_author_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );    
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
 		$selected = isset($options['seopress_google_analytics_cd_author']) ? $options['seopress_google_analytics_cd_author'] : NULL;
 		
@@ -5195,7 +5348,7 @@ class seopress_options
 
 	public function seopress_google_analytics_cd_category_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );    
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
 		$selected = isset($options['seopress_google_analytics_cd_category']) ? $options['seopress_google_analytics_cd_category'] : NULL;
 		
@@ -5218,7 +5371,7 @@ class seopress_options
 
 	public function seopress_google_analytics_cd_tag_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );    
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
 		$selected = isset($options['seopress_google_analytics_cd_tag']) ? $options['seopress_google_analytics_cd_tag'] : NULL;
 		
@@ -5241,7 +5394,7 @@ class seopress_options
 
 	public function seopress_google_analytics_cd_post_type_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );    
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
 		$selected = isset($options['seopress_google_analytics_cd_post_type']) ? $options['seopress_google_analytics_cd_post_type'] : NULL;
 		
@@ -5264,7 +5417,7 @@ class seopress_options
 
 	public function seopress_google_analytics_cd_logged_in_user_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );    
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
 		$selected = isset($options['seopress_google_analytics_cd_logged_in_user']) ? $options['seopress_google_analytics_cd_logged_in_user'] : NULL;
 		
@@ -5287,9 +5440,9 @@ class seopress_options
 
 	public function seopress_google_analytics_matomo_enable_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_matomo_enable']);      
+		$check = isset($options['seopress_google_analytics_matomo_enable']);
 		
 		echo '<input id="seopress_google_analytics_matomo_enable" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_enable]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5332,9 +5485,9 @@ class seopress_options
 
 	public function seopress_google_analytics_matomo_subdomains_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_matomo_subdomains']);      
+		$check = isset($options['seopress_google_analytics_matomo_subdomains']);
 		
 		echo '<input id="seopress_google_analytics_matomo_subdomains" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_subdomains]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5351,9 +5504,9 @@ class seopress_options
 
 	public function seopress_google_analytics_matomo_site_domain_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_matomo_site_domain']);      
+		$check = isset($options['seopress_google_analytics_matomo_site_domain']);
 		
 		echo '<input id="seopress_google_analytics_matomo_site_domain" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_site_domain]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5370,9 +5523,9 @@ class seopress_options
 
 	public function seopress_google_analytics_matomo_no_js_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_matomo_no_js']);      
+		$check = isset($options['seopress_google_analytics_matomo_no_js']);
 		
 		echo '<input id="seopress_google_analytics_matomo_no_js" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_no_js]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5387,9 +5540,9 @@ class seopress_options
 	
 	public function seopress_google_analytics_matomo_cross_domain_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_matomo_cross_domain']);      
+		$check = isset($options['seopress_google_analytics_matomo_cross_domain']);
 		
 		echo '<input id="seopress_google_analytics_matomo_cross_domain" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_cross_domain]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5418,9 +5571,9 @@ class seopress_options
 
 	public function seopress_google_analytics_matomo_dnt_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_matomo_dnt']);      
+		$check = isset($options['seopress_google_analytics_matomo_dnt']);
 		
 		echo '<input id="seopress_google_analytics_matomo_dnt" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_dnt]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5437,9 +5590,9 @@ class seopress_options
 
 	public function seopress_google_analytics_matomo_no_cookies_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_matomo_no_cookies']);      
+		$check = isset($options['seopress_google_analytics_matomo_no_cookies']);
 		
 		echo '<input id="seopress_google_analytics_matomo_no_cookies" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_no_cookies]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5454,9 +5607,9 @@ class seopress_options
 
 	public function seopress_google_analytics_matomo_link_tracking_callback()
 	{
-		$options = get_option( 'seopress_google_analytics_option_name' );  
+		$options = get_option( 'seopress_google_analytics_option_name' );
 		
-		$check = isset($options['seopress_google_analytics_matomo_link_tracking']);      
+		$check = isset($options['seopress_google_analytics_matomo_link_tracking']);
 		
 		echo '<input id="seopress_google_analytics_matomo_link_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_link_tracking]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5477,9 +5630,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_attachments_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_attachments']);      
+		$check = isset($options['seopress_advanced_advanced_attachments']);
 		
 		echo '<input id="seopress_advanced_advanced_attachments" name="seopress_advanced_option_name[seopress_advanced_advanced_attachments]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5494,9 +5647,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_attachments_file_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_attachments_file']);      
+		$check = isset($options['seopress_advanced_advanced_attachments_file']);
 		
 		echo '<input id="seopress_advanced_advanced_attachments_file" name="seopress_advanced_option_name[seopress_advanced_advanced_attachments_file]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5509,13 +5662,13 @@ class seopress_options
 		if (isset($this->options['seopress_advanced_advanced_attachments_file'])) {
 			esc_attr( $this->options['seopress_advanced_advanced_attachments_file']);
 		}
-	}    
+	}
 
 	public function seopress_advanced_advanced_replytocom_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_replytocom']);      
+		$check = isset($options['seopress_advanced_advanced_replytocom']);
 		
 		echo '<input id="seopress_advanced_advanced_replytocom" name="seopress_advanced_option_name[seopress_advanced_advanced_replytocom]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5530,9 +5683,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_image_auto_title_editor_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_image_auto_title_editor']);      
+		$check = isset($options['seopress_advanced_advanced_image_auto_title_editor']);
 		
 		echo '<input id="seopress_advanced_advanced_image_auto_title_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_title_editor]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5547,9 +5700,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_image_auto_alt_editor_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_image_auto_alt_editor']);      
+		$check = isset($options['seopress_advanced_advanced_image_auto_alt_editor']);
 		
 		echo '<input id="seopress_advanced_advanced_image_auto_alt_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_alt_editor]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5568,7 +5721,7 @@ class seopress_options
 
 	public function seopress_advanced_advanced_image_auto_alt_target_kw_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
 		$check = isset($options['seopress_advanced_advanced_image_auto_alt_target_kw']);
 		
@@ -5587,9 +5740,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_image_auto_caption_editor_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_image_auto_caption_editor']);      
+		$check = isset($options['seopress_advanced_advanced_image_auto_caption_editor']);
 		
 		echo '<input id="seopress_advanced_advanced_image_auto_caption_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_caption_editor]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5604,9 +5757,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_image_auto_desc_editor_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_image_auto_desc_editor']);      
+		$check = isset($options['seopress_advanced_advanced_image_auto_desc_editor']);
 		
 		echo '<input id="seopress_advanced_advanced_image_auto_desc_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_desc_editor]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5621,9 +5774,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_tax_desc_editor_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_tax_desc_editor']);      
+		$check = isset($options['seopress_advanced_advanced_tax_desc_editor']);
 		
 		echo '<input id="seopress_advanced_advanced_tax_desc_editor" name="seopress_advanced_option_name[seopress_advanced_advanced_tax_desc_editor]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5638,9 +5791,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_category_url_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_category_url']);      
+		$check = isset($options['seopress_advanced_advanced_category_url']);
 		
 		echo '<input id="seopress_advanced_advanced_category_url" name="seopress_advanced_option_name[seopress_advanced_advanced_category_url]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5655,9 +5808,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_trailingslash_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_trailingslash']);      
+		$check = isset($options['seopress_advanced_advanced_trailingslash']);
 		
 		echo '<input id="seopress_advanced_advanced_trailingslash" name="seopress_advanced_option_name[seopress_advanced_advanced_trailingslash]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5672,9 +5825,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_wp_generator_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_wp_generator']);      
+		$check = isset($options['seopress_advanced_advanced_wp_generator']);
 		
 		echo '<input id="seopress_advanced_advanced_wp_generator" name="seopress_advanced_option_name[seopress_advanced_advanced_wp_generator]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5689,9 +5842,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_hentry_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_hentry']);      
+		$check = isset($options['seopress_advanced_advanced_hentry']);
 		
 		echo '<input id="seopress_advanced_advanced_hentry" name="seopress_advanced_option_name[seopress_advanced_advanced_hentry]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5723,7 +5876,7 @@ class seopress_options
 
 	public function seopress_advanced_advanced_comments_website_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
 		$check = isset($options['seopress_advanced_advanced_comments_website']);
 		
@@ -5740,9 +5893,9 @@ class seopress_options
 
 	public function seopress_advanced_advanced_wp_shortlink_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_advanced_wp_shortlink']);      
+		$check = isset($options['seopress_advanced_advanced_wp_shortlink']);
 		
 		echo '<input id="seopress_advanced_advanced_wp_shortlink" name="seopress_advanced_option_name[seopress_advanced_advanced_wp_shortlink]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5805,21 +5958,21 @@ class seopress_options
 
 	public function seopress_advanced_advanced_bing_callback()
 	{
-	   $check = isset($this->options['seopress_advanced_advanced_bing']) ? $this->options['seopress_advanced_advanced_bing'] : NULL;
+	 $check = isset($this->options['seopress_advanced_advanced_bing']) ? $this->options['seopress_advanced_advanced_bing'] : NULL;
 
-	   printf(
+	 printf(
 		'<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_bing]" placeholder="'.esc_html__('Enter Bing meta value site verification','wp-seopress').'" aria-label="'.__('Bing site verification','wp-seopress').'" value="%s"/>',
 		esc_html( $check )
 		
 		);
-	   echo '<p class="description">'.__('If your site is already verified in <strong>Bing Webmaster tools</strong>, you can leave this field empty.','wp-seopress').'</p>';
+	 echo '<p class="description">'.__('If your site is already verified in <strong>Bing Webmaster tools</strong>, you can leave this field empty.','wp-seopress').'</p>';
 		
 	}
 
 	public function seopress_advanced_advanced_pinterest_callback()
 	{
 		$check = isset($this->options['seopress_advanced_advanced_pinterest']) ? $this->options['seopress_advanced_advanced_pinterest'] : NULL;
-			   
+			 
 		printf(
 		'<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_pinterest]" placeholder="'.esc_html__('Enter Pinterest meta value site verification','wp-seopress').'" aria-label="'.__('Pinterest site verification','wp-seopress').'" value="%s"/>',
 		esc_html( $check )
@@ -5842,9 +5995,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_adminbar_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_adminbar']);      
+		$check = isset($options['seopress_advanced_appearance_adminbar']);
 		
 		echo '<input id="seopress_advanced_appearance_adminbar" name="seopress_advanced_option_name[seopress_advanced_appearance_adminbar]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5859,7 +6012,7 @@ class seopress_options
 
 	public function seopress_advanced_appearance_metaboxe_position_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );    
+		$options = get_option( 'seopress_advanced_option_name' );
 		
 		$selected = isset($options['seopress_advanced_appearance_metaboxe_position']) ? $options['seopress_advanced_appearance_metaboxe_position'] : NULL;
 				
@@ -5904,9 +6057,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_notifications_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_notifications']);      
+		$check = isset($options['seopress_advanced_appearance_notifications']);
 		
 		echo '<input id="seopress_advanced_appearance_notifications" name="seopress_advanced_option_name[seopress_advanced_appearance_notifications]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5917,13 +6070,13 @@ class seopress_options
 		if (isset($this->options['seopress_advanced_appearance_notifications'])) {
 			esc_attr( $this->options['seopress_advanced_appearance_notifications']);
 		}
-	}    
+	}
 
 	public function seopress_advanced_appearance_seo_tools_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_seo_tools']);      
+		$check = isset($options['seopress_advanced_appearance_seo_tools']);
 		
 		echo '<input id="seopress_advanced_appearance_seo_tools" name="seopress_advanced_option_name[seopress_advanced_appearance_seo_tools]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5934,13 +6087,13 @@ class seopress_options
 		if (isset($this->options['seopress_advanced_appearance_seo_tools'])) {
 			esc_attr( $this->options['seopress_advanced_appearance_seo_tools']);
 		}
-	}    
+	}
 
 	public function seopress_advanced_appearance_useful_links_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_useful_links']);      
+		$check = isset($options['seopress_advanced_appearance_useful_links']);
 		
 		echo '<input id="seopress_advanced_appearance_useful_links" name="seopress_advanced_option_name[seopress_advanced_appearance_useful_links]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5955,9 +6108,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_title_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_title_col']);      
+		$check = isset($options['seopress_advanced_appearance_title_col']);
 		
 		echo '<input id="seopress_advanced_appearance_title_col" name="seopress_advanced_option_name[seopress_advanced_appearance_title_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5972,9 +6125,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_meta_desc_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_meta_desc_col']);      
+		$check = isset($options['seopress_advanced_appearance_meta_desc_col']);
 		
 		echo '<input id="seopress_advanced_appearance_meta_desc_col" name="seopress_advanced_option_name[seopress_advanced_appearance_meta_desc_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -5989,9 +6142,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_redirect_enable_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_redirect_enable_col']);      
+		$check = isset($options['seopress_advanced_appearance_redirect_enable_col']);
 		
 		echo '<input id="seopress_advanced_appearance_redirect_enable_col" name="seopress_advanced_option_name[seopress_advanced_appearance_redirect_enable_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6002,13 +6155,13 @@ class seopress_options
 		if (isset($this->options['seopress_advanced_appearance_redirect_enable_col'])) {
 			esc_attr( $this->options['seopress_advanced_appearance_redirect_enable_col']);
 		}
-	}    
+	}
 
 	public function seopress_advanced_appearance_redirect_url_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_redirect_url_col']);      
+		$check = isset($options['seopress_advanced_appearance_redirect_url_col']);
 		
 		echo '<input id="seopress_advanced_appearance_redirect_url_col" name="seopress_advanced_option_name[seopress_advanced_appearance_redirect_url_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6023,9 +6176,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_canonical_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_canonical']);      
+		$check = isset($options['seopress_advanced_appearance_canonical']);
 		
 		echo '<input id="seopress_advanced_appearance_canonical" name="seopress_advanced_option_name[seopress_advanced_appearance_canonical]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6040,9 +6193,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_target_kw_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_target_kw_col']);      
+		$check = isset($options['seopress_advanced_appearance_target_kw_col']);
 		
 		echo '<input id="seopress_advanced_appearance_target_kw_col" name="seopress_advanced_option_name[seopress_advanced_appearance_target_kw_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6057,9 +6210,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_noindex_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_noindex_col']);      
+		$check = isset($options['seopress_advanced_appearance_noindex_col']);
 		
 		echo '<input id="seopress_advanced_appearance_noindex_col" name="seopress_advanced_option_name[seopress_advanced_appearance_noindex_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6074,9 +6227,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_nofollow_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_nofollow_col']);      
+		$check = isset($options['seopress_advanced_appearance_nofollow_col']);
 		
 		echo '<input id="seopress_advanced_appearance_nofollow_col" name="seopress_advanced_option_name[seopress_advanced_appearance_nofollow_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6091,9 +6244,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_words_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_words_col']);      
+		$check = isset($options['seopress_advanced_appearance_words_col']);
 		
 		echo '<input id="seopress_advanced_appearance_words_col" name="seopress_advanced_option_name[seopress_advanced_appearance_words_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6108,9 +6261,9 @@ class seopress_options
 
 	public function seopress_advanced_appearance_w3c_col_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
-		$check = isset($options['seopress_advanced_appearance_w3c_col']);      
+		$check = isset($options['seopress_advanced_appearance_w3c_col']);
 		
 		echo '<input id="seopress_advanced_appearance_w3c_col" name="seopress_advanced_option_name[seopress_advanced_appearance_w3c_col]" type="checkbox"';
 		if ('1' == $check) echo 'checked="yes"'; 
@@ -6199,7 +6352,7 @@ class seopress_options
 
 	public function seopress_advanced_appearance_genesis_seo_menu_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
 		$check = isset($options['seopress_advanced_appearance_genesis_seo_menu']);
 		
@@ -6212,11 +6365,11 @@ class seopress_options
 		if (isset($this->options['seopress_advanced_appearance_genesis_seo_menu'])) {
 			esc_attr( $this->options['seopress_advanced_appearance_genesis_seo_menu']);
 		}
-	}    
+	}
 
 	public function seopress_advanced_appearance_advice_schema_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
 		$check = isset($options['seopress_advanced_appearance_advice_schema']);
 		
@@ -6233,7 +6386,7 @@ class seopress_options
 
 	public function seopress_advanced_security_metaboxe_role_callback()
 	{
-		$options = get_option( 'seopress_advanced_option_name' );  
+		$options = get_option( 'seopress_advanced_option_name' );
 		
 		global $wp_roles;
 
@@ -6275,7 +6428,7 @@ class seopress_options
 	
 		foreach ($wp_roles->get_names() as $key => $value) {
 
-			$check = isset($options['seopress_advanced_security_metaboxe_ca_role'][$key]);  
+			$check = isset($options['seopress_advanced_security_metaboxe_ca_role'][$key]);
 
 			echo '<input id="seopress_advanced_security_metaboxe_ca_role_'.$key.'" name="seopress_advanced_option_name[seopress_advanced_security_metaboxe_ca_role]['.$key.']" type="checkbox"';
 			if ('1' == $check) echo 'checked="yes"';

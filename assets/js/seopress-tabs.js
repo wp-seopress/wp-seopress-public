@@ -87,6 +87,15 @@ jQuery(document).ready(function($) {
 	$('#seopress-tag-sep-404').click(function() {
 		$("#seopress_titles_archives_404_title").val(sp_get_field_length($("#seopress_titles_archives_404_title")) + $('#seopress-tag-sep-404').attr('data-tag'));
 	});
+	$('#seopress-tag-post-title-bd-groups').click(function() {
+		$("#seopress_titles_bp_groups_title").val(sp_get_field_length($("#seopress_titles_bp_groups_title")) + $('#seopress-tag-post-title-bd-groups').attr('data-tag'));
+	});
+	$('#seopress-tag-sep-bd-groups').click(function() {
+		$("#seopress_titles_bp_groups_title").val(sp_get_field_length($("#seopress_titles_bp_groups_title")) + $('#seopress-tag-sep-bd-groups').attr('data-tag'));
+	});
+	$('#seopress-tag-site-title-bd-groups').click(function() {
+		$("#seopress_titles_bp_groups_title").val(sp_get_field_length($("#seopress_titles_bp_groups_title")) + $('#seopress-tag-site-title-bd-groups').attr('data-tag'));
+	});
 	$('.more-tags').click(function() {
 		$('#contextual-help-link').click();
 	});

@@ -86,6 +86,18 @@ function seopress_titles_archives_author_title_option() {
 	}
 };
 
+//BuddyPress Groups single Titles
+function seopress_titles_bp_groups_title_option() {
+	$seopress_titles_bp_groups_title_option = get_option("seopress_titles_option_name");
+	if ( ! empty ( $seopress_titles_bp_groups_title_option ) ) {
+		foreach ($seopress_titles_bp_groups_title_option as $key => $seopress_titles_bp_groups_title_value)
+			$options[$key] = $seopress_titles_bp_groups_title_value;
+		 if (isset($seopress_titles_bp_groups_title_option['seopress_titles_bp_groups_title'])) {
+		 	return $seopress_titles_bp_groups_title_option['seopress_titles_bp_groups_title'];
+		 }
+	}
+};
+
 //Date archive Titles
 function seopress_titles_archives_date_title_option() {
 	$seopress_titles_archives_date_title_option = get_option("seopress_titles_option_name");
@@ -203,6 +215,18 @@ function seopress_titles_archives_author_desc_option() {
 	}
 };
 
+//Author archives Desc
+function seopress_titles_bp_groups_desc_option() {
+	$seopress_titles_bp_groups_desc_option = get_option("seopress_titles_option_name");
+	if ( ! empty ( $seopress_titles_bp_groups_desc_option ) ) {
+		foreach ($seopress_titles_bp_groups_desc_option as $key => $seopress_titles_bp_groups_desc_value)
+			$options[$key] = $seopress_titles_bp_groups_desc_value;
+		 if (isset($seopress_titles_bp_groups_desc_option['seopress_titles_bp_groups_desc'])) {
+		 	return $seopress_titles_bp_groups_desc_option['seopress_titles_bp_groups_desc'];
+		 }
+	}
+};
+
 //Date archives Desc
 function seopress_titles_archives_date_desc_option() {
 	$seopress_titles_archives_date_desc_option = get_option("seopress_titles_option_name");
@@ -295,7 +319,27 @@ function seopress_titles_the_title() {
 
 			$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title);
 		}
-	} elseif (is_singular()) { //IS SINGULAR
+	} elseif (function_exists('bp_is_group') && bp_is_group()) {
+		if (seopress_titles_bp_groups_title_option() !='') {
+			$seopress_titles_the_title = esc_attr(seopress_titles_bp_groups_title_option());
+
+			$seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title);
+		}
+ 	} elseif (is_singular()) { //IS SINGULAR
+		//IS BUDDYPRESS ACTIVITY PAGE
+		if (function_exists('bp_is_current_component') && bp_is_current_component( 'activity' ) == true) {
+			$post->ID = buddypress()->pages->activity->id;
+		}
+		//IS BUDDYPRESS MEMBERS PAGE
+		if (function_exists('bp_is_current_component') && bp_is_current_component( 'members' ) == true) {
+			$post->ID = buddypress()->pages->members->id;
+		}
+
+		//IS BUDDYPRESS GROUPS PAGE
+		if (function_exists('bp_is_current_component') && bp_is_current_component( 'groups' ) == true) {
+			$post->ID = buddypress()->pages->groups->id;
+		}
+
 		if (get_post_meta($post->ID,'_seopress_titles_title',true)) { //IS METABOXE
 			$seopress_titles_the_title = esc_attr(get_post_meta($post->ID,'_seopress_titles_title',true));
 
@@ -347,7 +391,7 @@ function seopress_titles_the_title() {
 			}
 		}
 		else { //DEFAULT GLOBAL
-
+			
 			$seopress_titles_single_titles_option = esc_attr(seopress_titles_single_titles_option());
 
 			preg_match_all('/%%_cf_(.*?)%%/', $seopress_titles_single_titles_option, $matches); //custom fields
@@ -491,7 +535,13 @@ function seopress_titles_the_description_content() {
 
 			$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
 		}
-	} elseif (is_singular()) { //IS SINGLE
+	} elseif (function_exists('bp_is_group') && bp_is_group()) {
+		if (seopress_titles_bp_groups_desc_option() !='') {
+			$seopress_titles_the_description = esc_attr(seopress_titles_bp_groups_desc_option());
+
+			$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
+		}
+ 	} elseif (is_singular()) { //IS SINGLE
 		if (get_post_meta($post->ID,'_seopress_titles_desc',true)) { //IS METABOXE
 			$seopress_titles_the_description = esc_attr(get_post_meta($post->ID,'_seopress_titles_desc',true));
 
@@ -708,6 +758,18 @@ function seopress_titles_archives_author_noindex_option() {
 	}
 };
 
+//noindex Author archives
+function seopress_titles_bp_groups_noindex_option() {
+	$seopress_titles_bp_groups_noindex_option = get_option("seopress_titles_option_name");
+	if ( ! empty ( $seopress_titles_bp_groups_noindex_option ) ) {
+		foreach ($seopress_titles_bp_groups_noindex_option as $key => $seopress_titles_bp_groups_noindex_value)
+			$options[$key] = $seopress_titles_bp_groups_noindex_value;
+		 if (isset($seopress_titles_bp_groups_noindex_option['seopress_titles_bp_groups_noindex'])) {
+		 	return $seopress_titles_bp_groups_noindex_option['seopress_titles_bp_groups_noindex'];
+		 }
+	}
+};
+
 //noindex Date archives
 function seopress_titles_archives_date_noindex_option() {
 	$seopress_titles_archives_date_noindex_option = get_option("seopress_titles_option_name");
@@ -823,6 +885,8 @@ function seopress_titles_noindex_bypass() {
 			$seopress_titles_noindex = seopress_titles_tax_noindex_option();
 		} elseif (is_author() && seopress_titles_archives_author_noindex_option()) { //Is Author archive
 			$seopress_titles_noindex = seopress_titles_archives_author_noindex_option();
+		} elseif (function_exists('bp_is_group') && bp_is_group() && seopress_titles_bp_groups_noindex_option()) { //Is BuddyPress group single
+			$seopress_titles_noindex = seopress_titles_bp_groups_noindex_option();
 		} elseif (is_date() && seopress_titles_archives_date_noindex_option()) { //Is Date archive
 			$seopress_titles_noindex = seopress_titles_archives_date_noindex_option();
 		} elseif (is_search() && seopress_titles_archives_search_title_noindex_option()) {//Is Search
@@ -1393,7 +1457,7 @@ if (function_exists('seopress_titles_noindex_bypass') && seopress_titles_noindex
 			if (is_search()) {
 				$seopress_titles_canonical = '<link rel="canonical" href="'.htmlspecialchars(urldecode(get_home_url().'/search/'.get_search_query())).'" />';
 			} elseif (is_paged()){
-				$seopress_titles_canonical = '<link rel="canonical" href="'.htmlspecialchars(urldecode(get_pagenum_link('1'))).'" />';
+				$seopress_titles_canonical = '<link rel="canonical" href="'.htmlspecialchars(urldecode($current_url)).'" />';
 			} elseif (is_singular()) {
 				$seopress_titles_canonical = '<link rel="canonical" href="'.htmlspecialchars(urldecode(get_permalink())).'" />';
 			} else {

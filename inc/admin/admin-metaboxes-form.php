@@ -60,7 +60,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
 			$seo_tabs['advanced-tab'] = '<li><a href="#tabs-2"><span class="dashicons dashicons-admin-generic"></span>'. __( 'Advanced', 'wp-seopress' ) .'<span id="sp-advanced-alert"></span></a></li>';
 			$seo_tabs['social-tab'] = '<li><a href="#tabs-3"><span class="dashicons dashicons-share"></span>'. __( 'Social', 'wp-seopress' ) .'</a></li>';
 		}
-	   
+
 		$seo_tabs['redirect-tab'] = '<li><a href="#tabs-4"><span class="dashicons dashicons-admin-links"></span>'. __( 'Redirection', 'wp-seopress' ) .'</a></li>';
 		
 		if (is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )) {

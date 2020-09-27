@@ -148,6 +148,9 @@ function seopress_import_redirections_settings() {
 		return str_getcsv( $v, $sep, '\"' );
 	}, file( $import_file,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES ) );
 
+	//Remove duplicates from CSV
+	$csv = array_unique($csv, SORT_REGULAR);
+	
 	foreach ($csv as $key => $value) {
 		$csv_line = $value;
 

@@ -153,7 +153,8 @@ if (seopress_get_toggle_option('social') =='1') {
 	add_action('wp_head', 'seopress_load_social_options', 0);
 	function seopress_load_social_options() {
 		if (!is_admin()){
-			if( (function_exists('is_wpforo_page') && is_wpforo_page()) || ( class_exists('Ecwid_Store_Page') && Ecwid_Store_Page::is_store_page())) {//disable on wpForo pages to avoid conflicts
+			//disable on wpForo, LifterLMS private area, Ecwid store pages to avoid conflicts
+			if( (function_exists( 'is_llms_private_area' ) && is_llms_private_area()) || (function_exists('is_wpforo_page') && is_wpforo_page()) || ( class_exists('Ecwid_Store_Page') && Ecwid_Store_Page::is_store_page()) ) {
 				//do nothing
 			} else {
 				require_once ( dirname( __FILE__ ) . '/options-social.php'); //Social

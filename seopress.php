@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 3.9.2
+Version: 4.0
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '3.9.2' );
+define( 'SEOPRESS_VERSION', '4.0' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,6 +213,10 @@ function seopress_add_admin_options_scripts( $hook ) {
 				'seopress_nonce'						=> wp_create_nonce('seopress_premium_seo_pack_migrate_nonce'),
 				'seopress_premium_seo_pack_migration'	=> admin_url( 'admin-ajax.php'),
 			],
+			'seopress_wpseo_migrate'			=> [
+				'seopress_nonce'						=> wp_create_nonce('seopress_wpseo_migrate_nonce'),
+				'seopress_wpseo_migration'				=> admin_url( 'admin-ajax.php'),
+			],
 			'seopress_metadata_csv'				=> [
 				'seopress_nonce'						=> wp_create_nonce('seopress_export_csv_metadata_nonce'),
 				'seopress_metadata_export'				=> admin_url( 'admin-ajax.php'),
@@ -281,7 +285,7 @@ function seopress_admin_bar_css() {
 		wp_enqueue_style( 'seopress-admin-bar' );
 	}
 }
-add_action('init', 'seopress_admin_bar_css', 10, 1);
+add_action('init', 'seopress_admin_bar_css', 12, 1);
 
 //Quick Edit
 function seopress_add_admin_options_scripts_quick_edit() {
@@ -353,13 +357,6 @@ add_action( 'wp_head', 'seopress_compatibility_woocommerce', 0 );
 function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
 	return $url;
 }
-
-/**
- * Remove default WP XML sitemaps
- *
- * @since 3.8.8
- */
-remove_action( 'init', 'wp_sitemaps_get_server' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Credits footer
@@ -497,6 +494,10 @@ function seopress_get_taxonomies( $with_terms = false ) {
 	$output = 'objects'; // or objects
 	$operator = 'and'; // 'and' or 'or'
 	$taxonomies = get_taxonomies( $args, $output, $operator );
+
+	unset(
+		$taxonomies['seopress_bl_competitors']
+	);
 	
 	$taxonomies = apply_filters('seopress_get_taxonomies_list', $taxonomies);
 
@@ -522,7 +523,7 @@ function seopress_get_custom_fields() {
 
 		$limit = (int) apply_filters( 'postmeta_form_limit', 250 );
 		$cf_keys = $wpdb->get_col( $wpdb->prepare( "
-			SELECT meta_key
+			SELECT DISTINCT meta_key
 			FROM $wpdb->postmeta
 			GROUP BY meta_key
 			HAVING meta_key NOT LIKE '\_%%'
@@ -709,6 +710,15 @@ function seopress_xml_sitemap_img_enable_option() {
 		 	return $seopress_xml_sitemap_img_enable_option['seopress_xml_sitemap_img_enable'];
 		 }
 	}
+}
+
+/**
+ * Remove default WP XML sitemaps
+ *
+ * @since 3.8.8
+ */
+if (seopress_get_toggle_option('xml-sitemap') =='1') {
+	remove_action( 'init', 'wp_sitemaps_get_server' );
 }
 
 //Rewrite Rules for XML Sitemap

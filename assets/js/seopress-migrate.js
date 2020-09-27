@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
 	}).trigger('change');
 	
 	//Import from SEO plugins
-	const seo_plugins = ["yoast","aio","seo-framework","rk","squirrly","seo-ultimate","wp-meta-seo","premium-seo-pack","metadata"]
+	const seo_plugins = ["yoast","aio","seo-framework","rk","squirrly","seo-ultimate","wp-meta-seo","premium-seo-pack","wpseo","metadata"]
 	seo_plugins.forEach(function (item) {
 		$('#seopress-'+item+'-migrate').on('click', function(e) {
 			e.preventDefault();
@@ -68,6 +68,11 @@ jQuery(document).ready(function($) {
 					url = seopressAjaxMigrate.seopress_premium_seo_pack_migrate.seopress_premium_seo_pack_migration;
 					action = 'seopress_premium_seo_pack_migration';
 					_ajax_nonce = seopressAjaxMigrate.seopress_premium_seo_pack_migrate.seopress_nonce;
+					break;
+				case 'seopress-wpseo-migrate':
+					url = seopressAjaxMigrate.seopress_wpseo_migrate.seopress_wpseo_migration;
+					action = 'seopress_wpseo_migration';
+					_ajax_nonce = seopressAjaxMigrate.seopress_wpseo_migrate.seopress_nonce;
 					break;
 				case 'seopress-metadata-migrate':
 					url = seopressAjaxMigrate.seopress_metadata_csv.seopress_metadata_export;

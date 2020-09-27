@@ -139,6 +139,108 @@
 								seopress_notification($args);
 							}
 						}
+						//DIVI SEO options conflict
+						$theme = wp_get_theme();
+						if ( 'Divi' == $theme->template || 'Divi' == $theme->parent_theme ) {
+							$divi_options = get_option('et_divi');
+							if (!empty($divi_options)) {
+								if ($divi_options['divi_seo_home_title'] =='on' ||
+								$divi_options['divi_seo_home_description'] =='on' ||
+								$divi_options['divi_seo_home_keywords'] =='on' ||
+								$divi_options['divi_seo_home_canonical'] =='on' ||
+								$divi_options['divi_seo_single_title'] =='on' ||
+								$divi_options['divi_seo_single_description'] =='on' ||
+								$divi_options['divi_seo_single_keywords'] =='on' ||
+								$divi_options['divi_seo_single_canonical'] =='on' ||
+								$divi_options['divi_seo_index_canonical'] =='on' ||
+								$divi_options['divi_seo_index_description'] =='on'
+								) {
+									$args = [
+										'id' => 'notice-divi-seo',
+										'title' => __('We noticed that some SEO DIVI options are enabled!','wp-seopress'),
+										'desc' => __('To avoid any SEO conflicts, please disable every SEO options from <strong>DIVI theme options page, SEO tab</strong>.','wp-seopress'),
+										'impact' => [
+											'high' => __('High impact','wp-seopress')
+										],
+										'link' => [
+											'en' => admin_url( 'admin.php?page=et_divi_options#seo-1' ),
+											'title' => __('Fix this!','wp-seopress'),
+											'external' => false
+										],
+										'icon' => 'dashicons-admin-plugins',
+										'deleteable' => false
+									];
+									seopress_notification($args);
+								}
+							}
+						}
+						if (substr(get_option( 'permalink_structure' ), -1) !='/' && seopress_advanced_advanced_trailingslash_option() =='') {
+							$args = [
+								'id' => 'notice-permalinks',
+								'title' => __('Your permalinks doesn\'t have a trailingslash','wp-seopress'),
+								'desc' => __('To avoid any SEO issues, we recommend you to activate the "<strong>Disable trailing slash for metas</strong>" option from our <strong>Advanced settings page</strong>. Do not forget to clear your cache if necessary.','wp-seopress'),
+								'impact' => [
+									'high' => __('High impact','wp-seopress')
+								],
+								'link' => [
+									'en' => admin_url( 'admin.php?page=seopress-advanced#tab=tab_seopress_advanced_advanced' ),
+									'title' => __('Fix this!','wp-seopress'),
+									'external' => false
+								],
+								'icon' => 'dashicons-admin-links',
+								'deleteable' => false
+							];
+							seopress_notification($args);
+						}
+						if (substr(get_option( 'permalink_structure' ), -1) =='/' && seopress_advanced_advanced_trailingslash_option() =='1') {
+							$args = [
+								'id' => 'notice-permalinks',
+								'title' => __('Your permalinks have a trailingslash','wp-seopress'),
+								'desc' => __('To avoid any SEO issues, we recommend you to de-activate the "<strong>Disable trailing slash for metas</strong>" option from our <strong>Advanced settings page</strong>. Do not forget to clear your cache if necessary.','wp-seopress'),
+								'impact' => [
+									'high' => __('High impact','wp-seopress')
+								],
+								'link' => [
+									'en' => admin_url( 'admin.php?page=seopress-advanced#tab=tab_seopress_advanced_advanced' ),
+									'title' => __('Fix this!','wp-seopress'),
+									'external' => false
+								],
+								'icon' => 'dashicons-admin-links',
+								'deleteable' => false
+							];
+							seopress_notification($args);
+						}
+						if (is_plugin_active('td-composer/td-composer.php')) {
+							function seopress_get_hidden_notices_tagdiv_option() {
+								$seopress_get_hidden_notices_tagdiv_option = get_option("seopress_notices");
+								if ( !empty ( $seopress_get_hidden_notices_tagdiv_option ) ) {
+									foreach ($seopress_get_hidden_notices_tagdiv_option as $key => $seopress_get_hidden_notices_tagdiv_value)
+										$options[$key] = $seopress_get_hidden_notices_tagdiv_value;
+										if (isset($seopress_get_hidden_notices_tagdiv_option['notice-tagdiv'])) { 
+										return $seopress_get_hidden_notices_tagdiv_option['notice-tagdiv'];
+										}
+								}
+							}
+							if(seopress_get_hidden_notices_tagdiv_option() !='1') {
+								$args = [
+									'id' => 'notice-tagdiv',
+									'title' => __('TagDiv Composer plugin doesn\'t use <strong>add_theme_support(\'title-tag\');</strong>','wp-seopress'),
+									'desc' => __('Fix this compatibility issue to allow SEOPress generates the correct meta titles.','wp-seopress'),
+									'impact' => [
+										'high' => __('High impact','wp-seopress')
+									],
+									'link' => [
+										'fr' => 'https://www.seopress.org/fr/support/guides/corriger-erreur-compatibilite-extension-tagdiv-composer-newspaper/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
+										'en' => 'https://www.seopress.org/support/guides/fix-compatibility-issue-tagdiv-composer-plugin-newspaper-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
+										'title' => __('Fix this!','wp-seopress'),
+										'external' => true
+									],
+									'icon' => 'dashicons-admin-customizer',
+									'deleteable' => true
+								];
+								seopress_notification($args);
+							}
+						}
 						if (get_theme_support('title-tag') !='1') {
 							function seopress_get_hidden_notices_title_tag_option() {
 								$seopress_get_hidden_notices_title_tag_option = get_option("seopress_notices");
@@ -180,6 +282,7 @@
 							'seo-ultimate/seo-ultimate.php' => 'SEO Ultimate',
 							'wp-meta-seo/wp-meta-seo.php' => 'WP Meta SEO',
 							'premium-seo-pack/plugin.php' => 'Premium SEO Pack',
+							'wpseo/wpseo.php' => 'wpSEO',
 						);
 
 						foreach($seo_plugins as $key => $value) {
