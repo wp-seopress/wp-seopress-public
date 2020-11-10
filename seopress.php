@@ -108,6 +108,7 @@ function seopress_init($hook) {
 	if ( did_action( 'elementor/loaded' ) ) {
 		include_once dirname( __FILE__ ) . '/inc/admin/page-builders/elementor/elementor-addon.php';
 	}
+	include_once dirname( __FILE__ ) . '/inc/admin/page-builders/gutenberg/gutenberg-addon.php';
 }
 add_action('plugins_loaded', 'seopress_init', 999);
 
@@ -302,18 +303,18 @@ function seopress_admin_body_class( $classes ) {
 	if ( ! isset($_GET['page'] ) ) {
 		return $classes;
 	}
-	$_pages = [ 
-		'seopress_csv_importer' => true, 
-		'seopress-option' => true, 
-		'seopress-network-option' => true, 
-		'seopress-titles' => true, 
-		'seopress-xml-sitemap' => true, 
-		'seopress-social' => true, 
-		'seopress-google-analytics' => true, 
-		'seopress-advanced' => true, 
-		'seopress-import-export' => true, 
-		'seopress-pro-page' => true, 
-		'seopress-bot-batch' => true, 
+	$_pages = [
+		'seopress_csv_importer' => true,
+		'seopress-option' => true,
+		'seopress-network-option' => true,
+		'seopress-titles' => true,
+		'seopress-xml-sitemap' => true,
+		'seopress-social' => true,
+		'seopress-google-analytics' => true,
+		'seopress-advanced' => true,
+		'seopress-import-export' => true,
+		'seopress-pro-page' => true,
+		'seopress-bot-batch' => true,
 		'seopress-license' => true
 	];
 	if ( isset( $_pages[ $_GET['page'] ] ) ) {
@@ -365,7 +366,7 @@ function seopress_custom_credits_footer() {
 	$html = '<span id="seopress-footer-credits">
 				<span class="dashicons dashicons-wordpress"></span>
 				'.__( "You like SEOPress? Don't forget to rate it 5 stars!", "wp-seopress" ).'<span class="wporg-ratings rating-stars">';
-				for ($i=1; $i < 6; $i++) { 
+				for ($i=1; $i < 6; $i++) {
 					$html .= '<a href="//wordpress.org/support/view/plugin-reviews/wp-seopress?rate='.$i.'#postform" data-rating="'.$i.'" title="" target="_blank"><span class="dashicons dashicons-star-filled" style="color:#FFDE24 !important;"></span></a>';
 				}
 				$html .= '</span>
@@ -391,17 +392,17 @@ function seopress_custom_credits_footer() {
 	return $html;
 }
 if ((isset($_GET['page']) && (
-	$_GET['page'] == 'seopress-option' 
-	|| $_GET['page'] == 'seopress-network-option' 
-	|| $_GET['page'] == 'seopress-titles' 
-	|| $_GET['page'] == 'seopress-xml-sitemap' 
-	|| $_GET['page'] == 'seopress-social' 
-	|| $_GET['page'] == 'seopress-google-analytics' 
-	|| $_GET['page'] == 'seopress-advanced' 
-	|| $_GET['page'] == 'seopress-pro-page' 
-	|| $_GET['page'] == 'seopress-import-export' 
-	|| $_GET['page'] == 'seopress-bot-batch' 
-	|| $_GET['page'] == 'seopress-insights' 
+	$_GET['page'] == 'seopress-option'
+	|| $_GET['page'] == 'seopress-network-option'
+	|| $_GET['page'] == 'seopress-titles'
+	|| $_GET['page'] == 'seopress-xml-sitemap'
+	|| $_GET['page'] == 'seopress-social'
+	|| $_GET['page'] == 'seopress-google-analytics'
+	|| $_GET['page'] == 'seopress-advanced'
+	|| $_GET['page'] == 'seopress-pro-page'
+	|| $_GET['page'] == 'seopress-import-export'
+	|| $_GET['page'] == 'seopress-bot-batch'
+	|| $_GET['page'] == 'seopress-insights'
 	|| $_GET['page'] == 'seopress-license'))
 	|| (isset($_GET['post_type']) && (
 	$_GET['post_type'] == 'seopress_404'
@@ -490,7 +491,7 @@ function seopress_get_taxonomies( $with_terms = false ) {
 		'public'  => true,
 	];
 	$args = apply_filters('seopress_get_taxonomies_args', $args);
-	
+
 	$output = 'objects'; // or objects
 	$operator = 'and'; // 'and' or 'or'
 	$taxonomies = get_taxonomies( $args, $output, $operator );
@@ -498,7 +499,7 @@ function seopress_get_taxonomies( $with_terms = false ) {
 	unset(
 		$taxonomies['seopress_bl_competitors']
 	);
-	
+
 	$taxonomies = apply_filters('seopress_get_taxonomies_list', $taxonomies);
 
 	if ( ! $with_terms ) {
@@ -706,7 +707,7 @@ function seopress_xml_sitemap_img_enable_option() {
 	if ( ! empty ( $seopress_xml_sitemap_img_enable_option ) ) {
 		foreach ($seopress_xml_sitemap_img_enable_option as $key => $seopress_xml_sitemap_img_enable_value)
 			$options[$key] = $seopress_xml_sitemap_img_enable_value;
-		 if (isset($seopress_xml_sitemap_img_enable_option['seopress_xml_sitemap_img_enable'])) { 
+		 if (isset($seopress_xml_sitemap_img_enable_option['seopress_xml_sitemap_img_enable'])) {
 		 	return $seopress_xml_sitemap_img_enable_option['seopress_xml_sitemap_img_enable'];
 		 }
 	}
@@ -855,7 +856,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_op
 	}
 }
 function seopress_disable_qm( $allcaps, $caps, $args ) {
-	$allcaps['view_query_monitor'] = false; 
+	$allcaps['view_query_monitor'] = false;
 	return $allcaps;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -870,10 +871,10 @@ function seopress_clean_content_analysis() {
 
 			//Disable Query Monitor
 			add_filter( 'user_has_cap', 'seopress_disable_qm', 10, 3);
-			
+
 			//Disable wptexturize
 			add_filter('run_wptexturize', '__return_false');
-			
+
 			//Oxygen compatibility
 			if (function_exists('ct_template_output')) { //disable for Oxygen
 				add_action( 'template_redirect', 'seopress_get_oxygen_content' );
@@ -920,7 +921,7 @@ function seopress_get_locale() {
  * @author Benjamin
  */
 function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
-	$html = 
+	$html =
 	'<button type="button" class="sp-tooltip"><span class="dashicons dashicons-editor-help"></span>
 	<span class="sp-tooltiptext" role="tooltip" tabindex="0">
 		<span class="sp-tooltip-headings">'.$tooltip_title.'</span>
@@ -939,7 +940,7 @@ function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
  * @author Benjamin
  */
 function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc) {
-	$html = 
+	$html =
 	'<button type="button" class="sp-tooltip alt">'.$tooltip_anchor.'
 	<span class="sp-tooltiptext" role="tooltip" tabindex="0">
 		<span class="sp-tooltip-desc">'.$tooltip_desc.'</span>
@@ -996,7 +997,7 @@ function seopress_notification($args) {
 				$html .= '<span class="screen-reader-text">'.reset($impact).'</span>';
 			}
 
-			if (!empty($icon)) { 
+			if (!empty($icon)) {
 				$html .= '<span class="dashicons '.$icon.'"></span>';
 			} else {
 				$html .= '<span class="dashicons dashicons-info"></span>';
@@ -1006,7 +1007,7 @@ function seopress_notification($args) {
 					<p>'.$title.'</p>
 					<p>'.$desc.'</p>
 				';
-			
+
 				$href = '';
 				if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr' &&  isset($link['fr'])) {
 					$href = ' href="'.$link['fr'].'"';
@@ -1018,7 +1019,7 @@ function seopress_notification($args) {
 				if (isset($link['external']) && $link['external'] === true) {
 					$target = ' target="_blank"';
 				}
-				
+
 				if (!empty($link) || $deleteable === true) {
 					$html .= '<div class="notice-right">';
 
@@ -1075,7 +1076,7 @@ function is_seopress_page() {
 	if ( ! is_admin() && ( ! isset( $_REQUEST['page'] ) || ! isset( $_REQUEST['post_type'] ) ) ) {
 		return false;
 	}
-	
+
 	if ( isset( $_REQUEST['page'] ) ) {
 		return 0 === strpos( $_REQUEST['page'], 'seopress' );
 	} elseif ( isset( $_REQUEST['post_type'] ) ) {
@@ -1179,7 +1180,7 @@ function seopress_if_key_exists(array $arr, $key) {
  **/
 function seopress_get_oxygen_content() {
 	if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
-		
+
 		$seopress_get_the_content = ct_template_output();
 
 		if ($seopress_get_the_content =='') {
@@ -1256,7 +1257,7 @@ function seopress_wizard_follow_us() {
 							$link = 'https://www.seopress.org/fr/blog/category/tutoriels/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
 						} else {
 							$link = 'https://www.seopress.org/blog/how-to/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
-						} 
+						}
 					?>
 					<a href="<?php echo $link; ?>" target="_blank">
 						<span class="dashicons dashicons-format-aside"></span>
