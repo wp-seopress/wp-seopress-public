@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 4.1.5.1
+Stable tag: 4.1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,6 +310,13 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 8. Installation Wizard
 
 == Changelog ==
+= 4.1.6 =
+* NEW Import your redirect categories when importing redirects from CSV file
+* NEW 'seopress_sitemaps_home_url' hook to filter home_url in XML sitemaps (https://www.seopress.org/support/hooks/filter-home_url-in-xml-sitemaps/)
+* INFO Add a link to find your Google Ads conversion ID (https://www.seopress.org/support/guides/how-to-find-your-google-ads-conversions-id/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress)
+* INFO Add a link to create an automatic FAQ schema with ACF repeater field (https://www.seopress.org/support/guides/create-an-automatic-faq-schema-with-acf-repeater-fields/)
+* INFO Delete 404 errors manually even if enable 404 cleaning CRON is disabled (it was too confusing for the users)
+* FIX Revert: Exclude posts and terms from XML sitemaps if custom canonical URL set from SEO metabox
 = 4.1.5.1 =
 * FIX DomDocument issue if "Automatically set the image Alt text from target keywords option" is enabled
 = 4.1.5 =

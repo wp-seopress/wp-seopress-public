@@ -35,7 +35,9 @@ function seopress_xml_sitemap_index() {
 	
 	if (function_exists('pll_home_url')) {
         $home_url = site_url().'/';
-    }
+	}
+	
+	$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
 
 	$seopress_sitemaps ='<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
@@ -53,32 +55,16 @@ function seopress_xml_sitemap_index() {
 						'post_status' => 'publish', 
 						'meta_query' => 
 						[
-							'relation' => 'AND',
+							'relation' => 'OR',
 							[
-								'relation' => 'OR',
-								[
-									'key' => '_seopress_robots_index', 
-									'value' => '', 
-									'compare' => 'NOT EXISTS' 
-								],
-								[
-									'key' => '_seopress_robots_index', 
-									'value' => 'yes', 
-									'compare' => '!=' 
-								],
+								'key' => '_seopress_robots_index', 
+								'value' => '', 
+								'compare' => 'NOT EXISTS' 
 							],
 							[
-								'relation' => 'OR',
-								[
-									'key' => '_seopress_robots_canonical', 
-									'value' => '', 
-									'compare' => 'NOT EXISTS' 
-								],
-								[
-									'key' => '_seopress_robots_canonical', 
-									'value' => '', 
-									'compare' => '=' 
-								],
+								'key' => '_seopress_robots_index', 
+								'value' => 'yes', 
+								'compare' => '!=' 
 							],
 						],
 						'fields' => 'ids', 
@@ -135,8 +121,6 @@ function seopress_xml_sitemap_index() {
 								'ignore_sticky_posts' 	=> true, 
 								'posts_per_page' 		=> 1,
 								'meta_query' => 
-								[
-									'relation' => 'AND',
 									[
 										'relation' => 'OR',
 										[
@@ -150,20 +134,6 @@ function seopress_xml_sitemap_index() {
 											'compare' => '!=' 
 										],
 									],
-									[
-										'relation' => 'OR',
-										[
-											'key' => '_seopress_robots_canonical', 
-											'value' => '', 
-											'compare' => 'NOT EXISTS' 
-										],
-										[
-											'key' => '_seopress_robots_canonical', 
-											'value' => '', 
-											'compare' => '=' 
-										],
-									],
-								],
 								'order' 				=> 'DESC', 
 								'orderby' 				=> 'modified', 
 								'lang' 					=> '', 
@@ -203,32 +173,16 @@ function seopress_xml_sitemap_index() {
 						'fields' => 'ids',
 						'meta_query' => 
 						[
-							'relation' => 'AND',
+							'relation' => 'OR',
 							[
-								'relation' => 'OR',
-								[
-									'key' => '_seopress_robots_index', 
-									'value' => '', 
-									'compare' => 'NOT EXISTS' 
-								],
-								[
-									'key' => '_seopress_robots_index', 
-									'value' => 'yes', 
-									'compare' => '!=' 
-								],
+								'key' => '_seopress_robots_index', 
+								'value' => '', 
+								'compare' => 'NOT EXISTS' 
 							],
 							[
-								'relation' => 'OR',
-								[
-									'key' => '_seopress_robots_canonical', 
-									'value' => '', 
-									'compare' => 'NOT EXISTS' 
-								],
-								[
-									'key' => '_seopress_robots_canonical', 
-									'value' => '', 
-									'compare' => '=' 
-								],
+								'key' => '_seopress_robots_index', 
+								'value' => 'yes', 
+								'compare' => '!=' 
 							],
 						],
 					];

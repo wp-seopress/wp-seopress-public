@@ -1062,14 +1062,15 @@ class seopress_options
 							<div id="section-import-redirects" class="postbox section-tool">
 								<div class="inside">
 									<h3><span><?php _e( 'Import Redirections', 'wp-seopress' ); ?></span></h3>
-									<p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have 6 columns in this order:','wp-seopress'); ?>
+									<p><?php _e( 'Import your own redirections from a .csv file (separator ";"). You must have these columns in this order:','wp-seopress'); ?>
 										<ul>
 											<li><?php _e( 'URL to match (without your domain name)', 'wp-seopress'); ?></li>
 											<li><?php _e( 'URL to redirect in absolute,','wp-seopress'); ?></li>
 											<li><?php _e( 'type of redirection (301, 302 or 307, 410, 451),','wp-seopress'); ?></li>
 											<li><?php _e( 'Yes to enable the redirect (leave it empty to disable the redirect)','wp-seopress'); ?></li>
 											<li><?php _e( 'the query parameter without the quotes ("exact_match" = Exact match with all parameters, "without_param" = Exclude all parameters or "with_ignored_param" = Exclude all parameters and pass them to the redirection),', 'wp-seopress' ); ?></li>
-											<li><?php _e( 'and, the last parameter, the counter (optional).','wp-seopress'); ?></li>
+											<li><?php _e( 'the counter (optional),','wp-seopress'); ?></li>
+											<li><?php _e( 'and, the last parameter, category redirect IDs separated by commas (optional).','wp-seopress'); ?></li>
 										</ul>
 									</p>
 									<p>
@@ -1180,7 +1181,6 @@ class seopress_options
 								<div class="inside">
 									<h3><span><?php _e( 'Clean your 404', 'wp-seopress' ); ?></span></h3>
 									<p><?php _e( 'Delete all your 404 errors. We don‘t delete any redirects.', 'wp-seopress' ); ?></p>
-									<p><?php echo sprintf(__( 'Make sure you have enabled 404 cleaning from SEO, PRO, <a href="%s">404/301</a> tab to be able to delete all your 404 errors.', 'wp-seopress' ), admin_url( 'admin.php?page=seopress-pro-page#tab=tab_seopress_404' )); ?></p>
 									<p class="seopress-help"><?php 
 									if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
 										$seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/fr/support/guides/nettoyez-vos-erreurs-404-a-laide-dune-requete-mysql/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
@@ -5309,7 +5309,11 @@ class seopress_options
 		'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_optimize]" placeholder="'.esc_html__('Enter your Google Optimize container ID','wp-seopress').'" value="%s" aria-label="'.__('GTM-XXXXXXX','wp-seopress').'"/>',
 		esc_html($check));
 
-		echo '<p class="description">'.__('Google Optimize offers A/B testing, website testing & personalization tools.','wp-seopress').' <a class="seopress-help" href="https://marketingplatform.google.com/about/optimize/" target="_blank">'.__('Learn more','wp-seopress').'</a><span class="seopress-help dashicons dashicons-external"></span></p>';
+		echo '<p class="description">'.__('Google Optimize offers A/B testing, website testing & personalization tools.','wp-seopress').' 
+		<a class="seopress-help" href="https://marketingplatform.google.com/about/optimize/" target="_blank">
+			'.__('Learn more','wp-seopress').'
+		</a>
+		<span class="seopress-help dashicons dashicons-external"></span></p>';
 	}
 
 	public function seopress_google_analytics_ads_callback()
@@ -5319,6 +5323,19 @@ class seopress_options
 		printf(
 		'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ads]" placeholder="'.esc_html__('Enter your Google Ads conversion ID (eg: AW-123456789)','wp-seopress').'" value="%s" aria-label="'.__('AW-XXXXXXXXX','wp-seopress').'"/>',
 		esc_html($check));
+
+		if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
+			$seopress_docs_link['support']['analytics']['gads'] = 'https://www.seopress.org/fr/support/guides/trouver-votre-id-de-conversion-google-ads/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		} else {
+			$seopress_docs_link['support']['analytics']['gads'] = 'https://www.seopress.org/support/guides/how-to-find-your-google-ads-conversions-id/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+		}
+
+		echo '<p class="description">
+				<a class="seopress-help" href="'.$seopress_docs_link['support']['analytics']['gads'].'" target="_blank">
+					'. __('Learn how to find your Google Ads Conversion ID','wp-seopress').'
+				</a>
+			<span class="seopress-help dashicons dashicons-external"></span></p>';
+
 	}
 
 	public function seopress_google_analytics_other_tracking_callback()

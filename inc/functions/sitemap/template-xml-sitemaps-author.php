@@ -22,6 +22,8 @@ function seopress_xml_sitemap_author() {
 		$home_url = site_url().'/';
 	}
 
+	$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
+
 	$seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";

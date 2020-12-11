@@ -176,6 +176,13 @@ function seopress_import_redirections_settings() {
 			}
 		}
 
+		//Seventh column: redirect categories
+		if (!empty($csv_line[6])) { 
+			$cats = array_values(explode(',',$csv_line[6]));
+			$cats = array_map( 'intval', $cats );
+			$cats = array_unique( $cats );
+		}
+
 		if (!empty($csv_line[0])) {
 			$count = NULL;
 			if (!empty($csv_line[5])) {
@@ -191,9 +198,14 @@ function seopress_import_redirections_settings() {
 						'_seopress_redirections_enabled'    => $csv_type_redirects[3], 
 						'_seopress_redirections_param'      => $csv_type_redirects[4],
 						'seopress_404_count'                => $count
-					]
+					],
 				]
 			);
+
+			//Assign terms
+			if (!empty($csv_line[6])) {
+				wp_set_object_terms( $id, $cats, 'seopress_404_cat' );
+			}
 		}
 	}
 
@@ -298,6 +310,11 @@ function seopress_export_redirections_settings() {
 	if ( $seopress_redirects_query->have_posts() ) {
 		while ( $seopress_redirects_query->have_posts() ) {
 			$seopress_redirects_query->the_post();
+
+			$redirect_categories = get_the_terms( get_the_ID(), 'seopress_404_cat' );
+			$redirect_categories = '"'.join(', ', wp_list_pluck($redirect_categories, 'term_id')).'"';
+
+
 			$redirects_html .= '"'.urldecode(urlencode(esc_attr(wp_filter_nohtml_kses(get_the_title())))).'"';
 			$redirects_html .= ';';
 			$redirects_html .= '"'.urldecode(urlencode(esc_attr(wp_filter_nohtml_kses(get_post_meta(get_the_ID(),'_seopress_redirections_value',true))))).'"';
@@ -309,6 +326,8 @@ function seopress_export_redirections_settings() {
 			$redirects_html .= get_post_meta(get_the_ID(),'_seopress_redirections_param',true);
 			$redirects_html .= ';';
 			$redirects_html .= get_post_meta(get_the_ID(),'seopress_404_count',true);
+			$redirects_html .= ";";
+			$redirects_html .= $redirect_categories;
 			$redirects_html .= "\n";
 		}
 		wp_reset_postdata();
@@ -553,7 +572,7 @@ function seopress_clean_404() {
 	}
 
 	add_filter('seopress_404_cleaning_query', 'seopress_clean_404_query_hook');
-	do_action('seopress_404_cron_cleaning');
+	do_action('seopress_404_cron_cleaning', true);
 	wp_safe_redirect( admin_url( 'edit.php?post_type=seopress_404' ) );
 	exit;
 }

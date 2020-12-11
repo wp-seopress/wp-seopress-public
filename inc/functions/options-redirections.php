@@ -67,7 +67,7 @@ function seopress_redirections_value() {
 		$seopress_redirections_value = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 		$seopress_redirections_query = new WP_Query( array( 
 				'post_type' => 'seopress_404', 
-				'posts_per_page' => '-1',           
+				'posts_per_page' => '-1',
 				'update_post_term_cache' => false, // don't retrieve post terms
 				'update_post_meta_cache' => false, // don't retrieve post meta 
 			) 
