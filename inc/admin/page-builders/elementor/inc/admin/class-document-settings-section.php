@@ -46,6 +46,9 @@ class Document_Settings_Section {
 			$post_type = $post->post_type;
 			$origin = 'post';
 			$keywords = get_post_meta( $post_id, '_seopress_analysis_target_kw', true );
+			if ( class_exists('\Elementor\Plugin') && \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+				$is_elementor = true;
+			}
 		}
 
 		$seopress_real_preview = array(
@@ -56,7 +59,8 @@ class Document_Settings_Section {
 			'post_type' => $post_type,
 			'post_tax' => $term,
 			'origin' => $origin,
-			'keywords' => $keywords
+			'keywords' => $keywords,
+			'is_elementor' => $is_elementor
 		);
 		
         wp_localize_script( 'seopress-elementor-base-script', 'seopressElementorBase', $seopress_real_preview );
@@ -292,7 +296,8 @@ class Document_Settings_Section {
 			$document->add_control(
 				'_seopress_robots_breadcrumbs',
 				[
-					'label' => __( 'Enter a custom value, useful if your title is too long', 'wp-seopress' ),
+					'label' => __( 'Custom breadcrumbs', 'wp-seopress' ),
+					'description' => __( 'Enter a custom value, useful if your title is too long', 'wp-seopress' ),
 					'type' => \Elementor\Controls_Manager::TEXT,
 					'label_block' => true,
 					'separator' => 'none',

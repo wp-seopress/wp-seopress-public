@@ -62,9 +62,16 @@ function seopress_do_real_preview() {
 			$data = [];
 
 			//Save Target KWs
-			if(isset($_GET['seopress_analysis_target_kw'])) {
-				delete_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw');
-				update_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', sanitize_text_field($_GET['seopress_analysis_target_kw']));
+			if (!isset($_GET['is_elementor'])) {
+				if(isset($_GET['seopress_analysis_target_kw'])) {
+					delete_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw');
+					update_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', sanitize_text_field($_GET['seopress_analysis_target_kw']));
+				}
+			}
+
+			//Fix Elementor
+			if (isset($_GET['is_elementor']) && $_GET['is_elementor'] == true) {
+				$_GET['seopress_analysis_target_kw'] = get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true);
 			}
 
 			//DOM

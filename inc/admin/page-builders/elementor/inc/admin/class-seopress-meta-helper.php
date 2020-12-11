@@ -26,6 +26,7 @@ class Seopress_Meta_Helper {
 			'_seopress_redirections_type',
 			'_seopress_redirections_value',
 			'_seopress_analysis_target_kw',
+			'_seopress_analysis_data',
 		];
 	}
 }

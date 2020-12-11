@@ -182,7 +182,7 @@ function seopress_display_seo_metaboxe() {
 
 			//Tagify
 			wp_enqueue_script( 'seopress-tagify-js', plugins_url( 'assets/js/tagify.min.js', dirname( dirname( __FILE__ ) ) ), [ 'jquery' ], SEOPRESS_VERSION, true );
-			wp_register_style('seopress-tagify', plugins_url('assets/css/tagify.min.css', dirname( dirname( __FILE__ ) ) ), [], SEOPRESS_PRO_VERSION);
+			wp_register_style('seopress-tagify', plugins_url('assets/css/tagify.min.css', dirname( dirname( __FILE__ ) ) ), [], SEOPRESS_VERSION);
 			wp_enqueue_style('seopress-tagify');
 
 			//Register Google Snippet Preview / Content Analysis JS

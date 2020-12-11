@@ -13,6 +13,7 @@ function googlePreview() {
             origin: seopressElementorBase.origin,
             post_type: seopressElementorBase.post_type,
             seopress_analysis_target_kw: seopressElementorBase.keywords,
+            is_elementor: seopressElementorBase.is_elementor,
             _ajax_nonce: seopressElementorBase.seopress_nonce
         },
         success: function(t) {
@@ -49,6 +50,7 @@ function socialPreview() {
             origin: seopressElementorBase.origin,
             post_type: seopressElementorBase.post_type,
             seopress_analysis_target_kw: seopressElementorBase.keywords,
+            is_elementor: seopressElementorBase.is_elementor,
             _ajax_nonce: seopressElementorBase.seopress_nonce
         },
         success: socialPreviewFillData
@@ -161,6 +163,7 @@ function contentAnalysis() {
             origin: seopressElementorBase.origin,
             post_type: seopressElementorBase.post_type,
             seopress_analysis_target_kw: seopressElementorBase.keywords,
+            is_elementor: seopressElementorBase.is_elementor,
             _ajax_nonce: seopressElementorBase.seopress_nonce
         },
         beforeSend: function() {
