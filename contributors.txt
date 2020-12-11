@@ -1,8 +1,7 @@
-Great people who contributed to this plugin:
+Great people who contributed to this plugin :
 
 Developers:
 - Benjamin Denis: contact@seopress.org / @wp_seopress
-- Thomas Deneulin: @tdeneulin
 - Julio Potier: @juliobox
 - Mickael Gris: @mgris
 

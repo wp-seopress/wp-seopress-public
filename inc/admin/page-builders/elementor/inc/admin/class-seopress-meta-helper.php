@@ -14,6 +14,8 @@ class Seopress_Meta_Helper {
 			'_seopress_robots_archive',
 			'_seopress_robots_snippet',
 			'_seopress_robots_canonical',
+			'_seopress_robots_primary_cat',
+			'_seopress_robots_breadcrumbs',
 			'_seopress_social_fb_title',
 			'_seopress_social_fb_desc',
 			'_seopress_social_fb_img',

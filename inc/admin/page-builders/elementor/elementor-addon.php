@@ -64,6 +64,7 @@ final class WP_SeoPress_Elementor_Addon {
 			self::$instance->_load_objects();
 		}
 
+
 		return self::$instance;
 	}
 

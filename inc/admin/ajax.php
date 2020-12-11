@@ -50,7 +50,7 @@ function seopress_do_real_preview() {
 			if ( isset( $_GET['origin'] ) ) {
 				$seopress_origin = $_GET['origin'];
 			}
-
+			
 			//Tax name
 			if ( isset( $_GET['tax_name'] ) ) {
 				$seopress_tax_name = $_GET['tax_name'];
@@ -82,11 +82,10 @@ function seopress_do_real_preview() {
 			if (isset($cookies) && !empty($cookies)) {
 				$args['cookies'] = $cookies;
 			}
-
 			$args = apply_filters('seopress_real_preview_remote', $args);
-
+			
 			$data['title'] = $cookies;
-
+			
 			if ($seopress_origin =='post') { //Default: post type
 				$response = wp_remote_get(get_preview_post_link((int)$seopress_get_the_id,array('no_admin_bar' => 1)), $args);
 			} else { //Term taxonomy

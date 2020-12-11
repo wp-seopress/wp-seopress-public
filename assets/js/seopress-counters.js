@@ -446,7 +446,7 @@ jQuery(document).ready(function(e) {
 				e("#seopress_cpt #seopress_robots_canonical_meta").attr("placeholder", s.data.canonical),
 				
 				e("#seopress-analysis-tabs").load(" #seopress-analysis-tabs-1", '', sp_ca_toggle),
-				e(".analysis-score p").removeClass('loading'),
+				e(".analysis-score p").removeClass('loading'),			
 				
 				e(" #seopress_titles_title_counters_val").remove(),
 				e(" #seopress_titles_desc_counters_val").remove(),

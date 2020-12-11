@@ -17,7 +17,50 @@ class Document_Settings_Section {
 		add_action( 'elementor/documents/register_controls', [ $this, 'add_wp_seopress_section_to_document_settings' ] );
 		add_action( 'elementor/document/after_save', [ $this, 'on_save' ], 99, 2 );
 		add_action( 'seopress/page-builders/elementor/save_meta', [ $this, 'on_seopress_meta_save' ], 99 );
-    }
+		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'register_elements_assets'], 9999 );
+	}
+	
+	public function register_elements_assets() {
+		wp_register_script(
+			'seopress-elementor-base-script',
+			SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/js/base.js',
+			array('jquery'),
+			SEOPRESS_VERSION,
+			true
+		);
+
+		global $post;	
+		
+		$term = '';
+		$origin = '';
+		$post_type = '';
+		$post_id = '';
+		$keywords = '';
+
+		if ( is_archive() ) {
+			$origin = 'term';
+		}
+
+		if ( is_singular() ) {
+			$post_id = $post->ID;
+			$post_type = $post->post_type;
+			$origin = 'post';
+			$keywords = get_post_meta( $post_id, '_seopress_analysis_target_kw', true );
+		}
+
+		$seopress_real_preview = array(
+            'seopress_nonce' => wp_create_nonce('seopress_real_preview_nonce'),
+            'seopress_real_preview' => admin_url('admin-ajax.php'),
+			'post_id' => $post_id,
+			'i18n' => array('progress' => __('Analysis in progress...','wp-seopress')),
+			'post_type' => $post_type,
+			'post_tax' => $term,
+			'origin' => $origin,
+			'keywords' => $keywords
+		);
+		
+        wp_localize_script( 'seopress-elementor-base-script', 'seopressElementorBase', $seopress_real_preview );
+	}
 
 	/**
 	 * Add WP SeoPress section under document settings
@@ -53,17 +96,23 @@ class Document_Settings_Section {
 			]
 		);
 
-		$title = get_post_meta( $post_id, '_seopress_titles_title', true );
-		$desc = get_post_meta( $post_id, '_seopress_titles_desc', true );
+		$s_title = get_post_meta( $post_id, '_seopress_titles_title', true );
+		$s_desc = get_post_meta( $post_id, '_seopress_titles_desc', true );
 
+		$original_desc = substr( strip_tags( get_the_content( null, true, $post_id ) ), 0, 140 );
+
+		$desc = $s_desc ? $s_desc : $original_desc;
+		$title = ! empty( $s_title ) ? $s_title : get_the_title( $post_id );
+		
 		$document->add_control(
 			'_seopress_titles_title',
 			[
 				'label' => __( 'Title', 'wp-seopress' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
+				'type'        => 'seopresstextlettercounter',
+				'field_type' => 'text',
 				'label_block' => true,
-				'separator' => 'none', 
-				'default' => $title ? $title : ''
+				'separator' => 'none',
+				'default'	=> $s_title ? $s_title : ''
 			]
 		);
 
@@ -71,10 +120,28 @@ class Document_Settings_Section {
 			'_seopress_titles_desc',
 			[
 				'label' => __( 'Meta Description', 'wp-seopress' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'type'        => 'seopresstextlettercounter',
+				'field_type' => 'textarea',
 				'label_block' => true,
 				'separator' => 'none',
-				'default' => $desc ? $desc : ''
+				'default'	=> $s_desc ? $s_desc : ''
+			]
+		);
+
+		$document->add_control(
+			'social_preview_google',
+			[
+				'label' => __( 'Google Snippet Preview', 'wp-seopress' ),
+				'type' => 'seopress-social-preview',
+				'label_block' => true,
+				'separator' => 'none',
+				'network' => 'google',
+				'title' => $title ? $title : '',
+				'description' => $desc ? $desc : '',
+				'link' => get_permalink( $post_id ),
+				'post_id' => $post_id,
+				'origin' => is_singular() ? 'post' : 'term',
+				'post_type' => get_post_status( $post_id )
 			]
 		);
 
@@ -105,7 +172,9 @@ class Document_Settings_Section {
 		$robots_archive = get_post_meta( $post_id, '_seopress_robots_archive', true );
 		$robots_snippet = get_post_meta( $post_id, '_seopress_robots_snippet', true );
 		$robots_canonical = get_post_meta( $post_id, '_seopress_robots_canonical', true );
-
+		$robots_primary_cat = get_post_meta($post_id,'_seopress_robots_primary_cat',true);
+		$robots_breadcrumbs = get_post_meta($post_id,'_seopress_robots_breadcrumbs',true);
+		
 		$document->add_control(
 			'_seopress_robots_index',
 			[
@@ -183,6 +252,55 @@ class Document_Settings_Section {
 			]
 		);
 
+		global $typenow;
+		global $pagenow;
+		if (($typenow =='post' || $typenow =='product') && ($pagenow == 'post.php' || $pagenow == 'post-new.php')) {
+			$cats = get_categories();
+
+			if ($typenow =='product') {
+				$cats = get_the_terms( $post_id, 'product_cat' );
+			}
+
+			if (!empty($cats)) {
+				$options = [];
+				
+				foreach ($cats as $category) {
+					$options[$category->term_id] = $category->name;
+				}
+				$options['none'] = __('None (will disable this feature)','wp-seopress');
+			}
+
+			if (!empty($options)) {
+				$document->add_control(
+					'_seopress_robots_primary_cat',
+					[
+						'label' => __( 'Select a primary category', 'wp-seopress' ),
+						'description' => __('Set the category that gets used in the %category% permalink if you have multiple categories.','wp-seopress'),
+						'type' => \Elementor\Controls_Manager::SELECT,
+						'label_block' => true,
+						'separator' => 'none',
+						'options' => 
+							$options
+						,
+						'default' => $robots_primary_cat ? (int) $robots_primary_cat : 'none'
+					]
+				);
+			}
+		}
+
+		if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+			$document->add_control(
+				'_seopress_robots_breadcrumbs',
+				[
+					'label' => __( 'Enter a custom value, useful if your title is too long', 'wp-seopress' ),
+					'type' => \Elementor\Controls_Manager::TEXT,
+					'label_block' => true,
+					'separator' => 'none',
+					'default' => $robots_breadcrumbs ? $robots_breadcrumbs : ''
+				]
+			);
+		}
+
 		$document->end_controls_section();
 	}
 
@@ -211,7 +329,27 @@ class Document_Settings_Section {
 		$twitter_image = get_post_meta( $post_id, '_seopress_social_twitter_img', true );
 
 		$default_preview_title = get_the_title( $post_id );
-		$default_preview_desc = substr( strip_tags( get_the_content( null, false, $post_id ) ), 0, 140 );
+		$default_preview_desc = substr( strip_tags( get_the_content( null, true, $post_id ) ), 0, 140 );
+
+		$document->add_control(
+			'_seopress_social_note',
+			[
+				//'label' => __( 'Important Note', 'wp-seopress' ),
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => __( '<p class="elementor-control-field-description"><span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q='.get_permalink(get_the_id()).'" target="_blank">Ask Facebook to update its cache</a></p>', 'wp-seopress' ),
+				//'content_classes' => 'your-class',
+			]
+		);
+
+		$document->add_control(
+			'_seopress_social_note_2',
+			[
+				//'label' => __( 'Important Note', 'wp-seopress' ),
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => __( '<p class="elementor-control-field-description"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tags are defined below.</p>', 'wp-seopress' ),
+				//'content_classes' => 'your-class',
+			]
+		);
 
 		$document->add_control(
 			'_seopress_social_fb_title',
@@ -395,12 +533,48 @@ class Document_Settings_Section {
 			]
 		);
 
+		$keywords = get_post_meta( $post_id, '_seopress_analysis_target_kw', true );
+
+		$document->add_control(
+			'_seopress_analysis_note',
+			[
+				//'label' => __( 'Important Note', 'wp-seopress' ),
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => __( '<p class="elementor-control-field-description">Enter a few keywords for analysis to help you write optimized content.</p><p class="elementor-control-field-description"><strong>Did you know?</strong> Writing content for your users is the most important thing! If it doesn‘t feel natural, your visitors will leave your site, Google will know it and your ranking will be affected.</p>', 'wp-seopress' ),
+				//'content_classes' => 'your-class',
+			]
+		);
+
 		$document->add_control(
 			'_seopress_analysis_target_kw',
 			[
 				'label' => __( 'Target keywords', 'wp-seopress' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
 				'description' => __( 'Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them', 'wp-seopress' ),
+				'label_block' => true,
+				'separator' => 'none',
+				'default' => $keywords ? $keywords : ''
+			]
+		);
+
+		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
+			$document->add_control(
+				'seopress_google_suggest_kw',
+				[
+					'label' => __( 'Google suggestions', 'wp-seopress' ),
+					'type'        => 'seopress-google-suggestions',
+					'label_block' => true,
+					'separator' => 'none',
+				]
+			);
+		}
+
+		$document->add_control(
+			'seopress_content_analyses',
+			[
+				'label' => '',
+				'type'        => 'seopress-content-analysis',
+				'description' => __( 'To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would.', 'wp-seopress' ),
 				'label_block' => true,
 				'separator' => 'none'
 			]
@@ -481,7 +655,7 @@ class Document_Settings_Section {
 			},
 			ARRAY_FILTER_USE_KEY
 		);
-
+		
 		if ( empty( $seopress_meta ) ) {
 			return;
 		}

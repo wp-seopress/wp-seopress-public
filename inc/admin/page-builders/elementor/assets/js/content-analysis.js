@@ -1,0 +1,15 @@
+contentAnalysisToggle();
+
+var contentAnalysisView = elementor.modules.controls.BaseData.extend({
+    onReady: function () {
+        elementor.panel.storage.size.width = '495px';
+        elementor.panel.setSize();
+        
+        contentAnalysis();
+        jQuery(document).on("click", "#seopress_launch_analysis", function() {
+            contentAnalysis();
+        })
+    }
+});
+
+elementor.addControlView('seopress-content-analysis', contentAnalysisView);

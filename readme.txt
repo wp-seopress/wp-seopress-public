@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 4.0.1
+Stable tag: 4.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -297,6 +297,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 7. Installation Wizard
 
 == Changelog ==
+= 4.0.2 =
+* FIX Elementor missing features
 = 4.0.1 =
 * FIX Fatal Error Cannot redeclare seopress_title_columns() with TablePress
 * FIX Fatal Error wp-seopress-pro/inc/action-scheduler/classes/migration/ActionScheduler_DBStoreMigrator.php
