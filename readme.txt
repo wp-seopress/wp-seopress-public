@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 4.1.4
+Stable tag: 4.1.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,6 +310,16 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 8. Installation Wizard
 
 == Changelog ==
+= 4.1.5 =
+* NEW Google Place ID field for Local Business Widget (SEO, PRO, Local Business) to display POI when clicking on the map link (PRO)
+* INFO Exclude posts and terms from XML sitemaps if custom canonical URL set from SEO metabox
+* FIX Empty Term taxonomy XML paginated sitemap
+* FIX Fatal error: Uncaught Error: Call to undefined function seopress_get_option_post_need_redirects() if filter 'seopress_post_automatic_redirect' used
+* FIX White label custom website for SEOPress PRO
+* FIX Conflict with WPML
+* FIX Bulk editing for 404 errors, 'delete_redirections' capability was missing
+* FIX Global LocalBusiness schema
+* FIX DomDocument issue if "Automatically set the image Alt text from target keywords" is enabled (thanks to Emilien Degert)
 = 4.1.4 =
 * INFO Improve cookie bar default design
 * INFO Update NGINX configuration informations on XML sitemaps page
@@ -340,7 +350,7 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * NEW UI for adding/editing/managing target keywords 🎉
 * NEW Paginated XML sitemaps for taxonomies and videos 🎉
 * NEW Import term metadata from CSV file using our import tool (PRO) 🎉
-* NEW Custom user capabilities for Redirections post type (edit_redirection, edit_redirections, edit_others_redirections, publish_redirections, read_redirection, read_private_redirections, delete_redirection, delete_others_redirections, delete_published_redirections)
+* NEW Custom user capabilities for Redirections post type (edit_redirection, edit_redirections, edit_others_redirections, publish_redirections, read_redirection, read_private_redirections, delete_redirection, delete_redirections, delete_others_redirections, delete_published_redirections)
 * NEW Remove noindex item from Admin Bar in backend and frontend option from SEO, Advanced page, Appearance tab
 * NEW Change expiration date of the user consent cookie option from SEO, Analytics page, Cookie bar / GDPR tab
 * NEW Add servesCuisine for LocalBusiness automatic schema

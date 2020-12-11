@@ -66,7 +66,7 @@ function seopress_xml_sitemap_single_term() {
 
 	foreach ( $termslist->terms as $term ) {
 
-		if (!get_term_meta( $term, '_seopress_robots_index', true)) {
+		if (!get_term_meta( $term, '_seopress_robots_index', true) && !get_term_meta( $term, '_seopress_robots_canonical', true)) {
 			$seopress_sitemaps_url = '';
 			// array with all the information needed for a sitemap url
 			$seopress_url = [

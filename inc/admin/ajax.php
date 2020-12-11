@@ -480,7 +480,7 @@ add_action('wp_ajax_seopress_do_real_preview', 'seopress_do_real_preview');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_flush_permalinks() {
 	check_ajax_referer( 'seopress_flush_permalinks_nonce', $_GET['_ajax_nonce'], true );
-	flush_rewrite_rules();
+	flush_rewrite_rules(false);
 	die();
 }
 add_action('wp_ajax_seopress_flush_permalinks', 'seopress_flush_permalinks');

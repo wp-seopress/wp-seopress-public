@@ -51,18 +51,35 @@ function seopress_xml_sitemap_index() {
 						'posts_per_page' => -1, 
 						'post_type' => $cpt_key, 
 						'post_status' => 'publish', 
-						'meta_query' => [
-							'relation' => 'OR',
+						'meta_query' => 
+						[
+							'relation' => 'AND',
 							[
-								'key' => '_seopress_robots_index', 
-								'value' => '', 
-								'compare' => 'NOT EXISTS' 
+								'relation' => 'OR',
+								[
+									'key' => '_seopress_robots_index', 
+									'value' => '', 
+									'compare' => 'NOT EXISTS' 
+								],
+								[
+									'key' => '_seopress_robots_index', 
+									'value' => 'yes', 
+									'compare' => '!=' 
+								],
 							],
 							[
-								'key' => '_seopress_robots_index', 
-								'value' => 'yes', 
-								'compare' => '!=' 
-							] 
+								'relation' => 'OR',
+								[
+									'key' => '_seopress_robots_canonical', 
+									'value' => '', 
+									'compare' => 'NOT EXISTS' 
+								],
+								[
+									'key' => '_seopress_robots_canonical', 
+									'value' => '', 
+									'compare' => '=' 
+								],
+							],
 						],
 						'fields' => 'ids', 
 						'lang' => '', 
@@ -117,18 +134,35 @@ function seopress_xml_sitemap_index() {
 								'post_status' 			=> 'publish', 
 								'ignore_sticky_posts' 	=> true, 
 								'posts_per_page' 		=> 1,
-								'meta_query' => [
-									'relation' => 'OR',
+								'meta_query' => 
+								[
+									'relation' => 'AND',
 									[
-										'key' => '_seopress_robots_index', 
-										'value' => '', 
-										'compare' => 'NOT EXISTS' 
+										'relation' => 'OR',
+										[
+											'key' => '_seopress_robots_index', 
+											'value' => '', 
+											'compare' => 'NOT EXISTS' 
+										],
+										[
+											'key' => '_seopress_robots_index', 
+											'value' => 'yes', 
+											'compare' => '!=' 
+										],
 									],
 									[
-										'key' => '_seopress_robots_index', 
-										'value' => 'yes', 
-										'compare' => '!=' 
-									] 
+										'relation' => 'OR',
+										[
+											'key' => '_seopress_robots_canonical', 
+											'value' => '', 
+											'compare' => 'NOT EXISTS' 
+										],
+										[
+											'key' => '_seopress_robots_canonical', 
+											'value' => '', 
+											'compare' => '=' 
+										],
+									],
 								],
 								'order' 				=> 'DESC', 
 								'orderby' 				=> 'modified', 
@@ -167,24 +201,41 @@ function seopress_xml_sitemap_index() {
 						'hide_empty' => false,
 						'lang' => '',
 						'fields' => 'ids',
-						'meta_query' => [
-							'relation' => 'OR',
+						'meta_query' => 
+						[
+							'relation' => 'AND',
 							[
-								'key' => '_seopress_robots_index', 
-								'value' => '', 
-								'compare' => 'NOT EXISTS' 
+								'relation' => 'OR',
+								[
+									'key' => '_seopress_robots_index', 
+									'value' => '', 
+									'compare' => 'NOT EXISTS' 
+								],
+								[
+									'key' => '_seopress_robots_index', 
+									'value' => 'yes', 
+									'compare' => '!=' 
+								],
 							],
 							[
-								'key' => '_seopress_robots_index', 
-								'value' => 'yes', 
-								'compare' => '!=' 
-							] 
+								'relation' => 'OR',
+								[
+									'key' => '_seopress_robots_canonical', 
+									'value' => '', 
+									'compare' => 'NOT EXISTS' 
+								],
+								[
+									'key' => '_seopress_robots_canonical', 
+									'value' => '', 
+									'compare' => '=' 
+								],
+							],
 						],
 					];
 
 					$args = apply_filters('seopress_sitemaps_index_tax_query', $args, $tax_key);
 
-					$count_terms = wp_count_terms($tax_key, $args);
+					$count_terms = count(get_terms( $args ));
 					
 					//Max terms per paginated sitemap
 					$max = 1000;

@@ -233,9 +233,9 @@ if (seopress_advanced_advanced_image_auto_alt_target_kw_option() !='') {
 			$internalErrors = libxml_use_internal_errors(true);
 			
 			if (function_exists('mb_convert_encoding')) {
-				$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+				$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED); //Remove doctype, HTML/Body tags
 			} else {
-				$dom->loadHTML('<?xml encoding="utf-8" ?>'.$content);
+				$dom->loadHTML('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED); //Remove doctype, HTML/Body tags
 			}
 
 			$dom->preserveWhiteSpace = false;
@@ -255,7 +255,7 @@ if (seopress_advanced_advanced_image_auto_alt_target_kw_option() !='') {
 					}
 				}
 			}
-			$content = $dom->saveHTML();
+			$content = $dom->saveHTML($dom->documentElement); //Fix encoding
 
 			return $content;
 	}

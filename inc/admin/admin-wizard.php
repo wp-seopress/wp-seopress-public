@@ -852,7 +852,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		update_option('seopress_notices',$seopress_notices);
 
 		//Flush permalinks
-		flush_rewrite_rules();
+		flush_rewrite_rules(false);
 		?>
 		<h1><?php esc_html_e( "Your site is now ready for search engines!", 'wp-seopress' ); ?></h1>
 

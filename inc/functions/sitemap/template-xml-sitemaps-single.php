@@ -103,19 +103,36 @@ function seopress_xml_sitemap_single() {
 		'orderby' => 'modified', 
 		'post_type' => $path, 
 		'post_status' => 'publish', 
-		'meta_query' => [
-			'relation' => 'OR',
+		'meta_query' => 
 			[
-				'key' => '_seopress_robots_index', 
-				'value' => '', 
-				'compare' => 'NOT EXISTS' 
+				'relation' => 'AND',
+				[
+					'relation' => 'OR',
+					[
+						'key' => '_seopress_robots_index', 
+						'value' => '', 
+						'compare' => 'NOT EXISTS' 
+					],
+					[
+						'key' => '_seopress_robots_index', 
+						'value' => 'yes', 
+						'compare' => '!=' 
+					],
+				],
+				[
+					'relation' => 'OR',
+					[
+						'key' => '_seopress_robots_canonical', 
+						'value' => '', 
+						'compare' => 'NOT EXISTS' 
+					],
+					[
+						'key' => '_seopress_robots_canonical', 
+						'value' => '', 
+						'compare' => '=' 
+					],
+				],
 			],
-			[
-				'key' => '_seopress_robots_index', 
-				'value' => 'yes', 
-				'compare' => '!=' 
-			] 
-		],
 		'fields' => 'ids', 
 		'lang' => '', 
 		'has_password' => false 
