@@ -322,14 +322,33 @@ function sp_ca_toggle() {
 	});
 }
 
+//Tagify
+var input = document.querySelector('input[id=seopress_analysis_target_kw_meta]');
+
+var target_kw = new Tagify(input, {
+	originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
+})
+
+function seopress_google_suggest(data){
+	
+	var raw_suggestions = String(data);
+	var suggestions_array = raw_suggestions.split(',');
+	
+	var i;
+	for (i = 0; i < suggestions_array.length; i++) {
+		if (suggestions_array[i] != null && suggestions_array[i] != undefined && suggestions_array[i] !='' && suggestions_array[i] !='[object Object]') {
+			document.getElementById('seopress_suggestions').innerHTML += '<li><a href=\"#\" class=\"sp-suggest-btn button button-small\">'+suggestions_array[i]+'</a></li>';
+		}
+	}
+
+	jQuery('.sp-suggest-btn').click(function(e) {
+		e.preventDefault();
+		
+		target_kw.addTags(jQuery(this).text());
+	});
+}
+
 jQuery(document).ready(function(e) {
-	//Tagify
-	var input = document.querySelector('input[id=seopress_analysis_target_kw_meta]');
-
-	new Tagify(input, {
-		originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
-	})
-
 	//default state
 	if (jQuery('#toggle-preview').attr('data-toggle') == '1') {
 		jQuery("#seopress_cpt .google-snippet-preview").addClass("mobile-preview");

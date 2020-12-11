@@ -628,7 +628,7 @@ function seopress_social_fb_desc_home_option() {
 }
 
 function seopress_social_fb_desc_hook() {
-	if (seopress_social_facebook_og_option() =='1') {
+	if (seopress_social_facebook_og_option() =='1' && !is_search()) {
 		global $post;
 		//Init
 		$seopress_social_og_desc ='';
@@ -1168,7 +1168,7 @@ function seopress_social_twitter_desc_home_option() {
 
 function seopress_social_twitter_desc_hook() {
 	//If Twitter cards enable
-	if (seopress_social_twitter_card_option() =='1') {
+	if (seopress_social_twitter_card_option() =='1' && !is_search()) {
 		global $post;
 		setup_postdata( $post );
 		//Init

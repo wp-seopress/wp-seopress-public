@@ -421,7 +421,7 @@ function seopress_titles_the_title() {
 
 				foreach ($matches2['1'] as $key => $value) {
 					$term = wp_get_post_terms( $post->ID, $value );
-					if (!is_wp_error($term)) {
+					if (!is_wp_error($term) && isset($term[0])) {
 						$terms = esc_attr($term[0]->name);
 						$seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
 					}

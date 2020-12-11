@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 4.1.3
+Stable tag: 4.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,6 +310,15 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 8. Installation Wizard
 
 == Changelog ==
+= 4.1.4 =
+* INFO Improve cookie bar default design
+* INFO Update NGINX configuration informations on XML sitemaps page
+* INFO Update updater to support automatic updates
+* FIX Google suggestions to target keywords field
+* FIX Tagify not defined in term taxonomy editing page
+* FIX Conflict with BuddyBoss search page
+* FIX Notice Trying to get property 'name' of non-object 5 in options-titles-metas.php
+* FIX Notice Undefined offset in options-titles-metas.php
 = 4.1.3 =
 * FIX PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Elementor\Core\Settings\Page\Manager::ajax_before_save_settings() must be of the type array, null given
 * FIX Delete bulk edit option for Redirections
@@ -366,55 +375,5 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * FIX Remove BuddyPress groups from Titles and settings if BuddyBoss or BuddyPress is not activated
 * FIX WooCommerce XML sitemaps product attributes
 * FIX Quotes with target keywords
-= 4.0.3 =
-* FIX Elementor CSS
-= 4.0.2 =
-* FIX Elementor missing features
-= 4.0.1 =
-* FIX Fatal Error Cannot redeclare seopress_title_columns() with TablePress
-* FIX Fatal Error wp-seopress-pro/inc/action-scheduler/classes/migration/ActionScheduler_DBStoreMigrator.php
-* FIX Remove redirect notice
-= 4.0 <a href="https://www.seopress.org/blog/elementor-integration-semi-automatic-redirections-seopress-4-0/">Read our Blog post update</a> =
-* NEW Elementor integration (part 2): now with Google Preview and Content Analysis
-* NEW Semi-automatic redirections when you delete/change a slug (PRO) 🎉
-* NEW BuddyPress / BuddyBoss compatibility 🎉
-* NEW Chinese language for the Free version (PRO version will follow soon) 🎉
-* NEW Local Business widget to easily display your business address, phone and more! (PRO) 🎉 (Appearance > Widgets > Local Business)
-* NEW Notice in admin bar if you're site is globally set to noindex
-* NEW Notice in admin bar if you're CPT is globally set to noindex / nofollow
-* NEW Import your post and term metadata from wpSEO plugin (https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/)
-* NEW Notification in SEOPress Dashboard to warn TagDiv / Newspaper users about a compatibility issue
-* NEW Notification in SEOPress Dashboard to warn users if DIVI SEO options are enabled to avoid conflicts
-* NEW Notification in SEOPress Dashboard to warn users about a wrong configuration with permalink structure
-* NEW Dynamic variable for meta / custom schema: %%post_url%% - Post URL (ie: permalink) 
-* NEW 'seopress_post_automatic_redirect' hook to disable automatic redirect suggestions (https://www.seopress.org/support/hooks/disable-automatic-redirect-suggestions/)
-* NEW 'seopress_titles_post_url' hook to filter post URL dynamic variable (https://www.seopress.org/support/hooks/filter-seopress_titles_post_url-dynamic-variable/)
-* NEW 'seopress_lb_widget_title' hook to filter Local Business widget title (https://www.seopress.org/support/hooks/filter-local-business-widget-title/)
-* NEW 'seopress_lb_widget_desc' hook to filter Local Business widget description (https://www.seopress.org/support/hooks/filter-local-business-widget-description/)
-* NEW 'seopress_lb_widget_street_address' hook to filter Local Business widget street address (https://www.seopress.org/support/hooks/filter-local-business-widget-street-address/)
-* NEW 'seopress_lb_widget_city' hook to filter Local Business widget city (https://www.seopress.org/support/hooks/filter-local-business-widget-city/)
-* NEW 'seopress_lb_widget_state' hook to filter Local Business widget state (https://www.seopress.org/support/hooks/filter-local-business-widget-state/)
-* NEW 'seopress_lb_widget_code' hook to filter Local Business widget postal code (https://www.seopress.org/support/hooks/filter-local-business-widget-postal-code/)
-* NEW 'seopress_lb_widget_country' hook to filter Local Business widget country (https://www.seopress.org/support/hooks/filter-local-business-widget-country/)
-* NEW 'seopress_lb_widget_map' hook to filter Local Business widget map (https://www.seopress.org/support/hooks/filter-local-business-widget-map-link/)
-* NEW 'seopress_lb_widget_phone' hook to filter Local Business widget phone number (https://www.seopress.org/support/hooks/filter-local-business-widget-phone-number/)
-* NEW 'seopress_lb_widget_opening_hours' hook to filter Local Business widget opening hours (https://www.seopress.org/support/hooks/filter-local-business-widget-opening-hours/)
-* NEW 'seopress_lb_widget_css' hook to filter Local Business widget custom inline css
-* INFO Automatically remove duplicate entries when importing redirections using a CSV file
-* INFO Updated the following translations: English, French, Spanish, German, Dutch, Russian, Japanese, Hindi, Portuguese
-* INFO Display Content Analysis Score columns in post type by default (SEO > Advanced > Appearance to customze the settings)
-* INFO Add additional checks to avoid fatal error when we set default values
-* INFO Improve schemas upgrader
-* INFO Improve UI for Structured Data Types metabox
-* INFO Improve help for XML sitemaps settings page
-* INFO Native WP XML sitemaps are now disabled only our sitemap feature is enabled (ON by default)
-* INFO Add some comments for translators
-* INFO Change canonical URL for paginated archive pages to current URL
-* FIX Issue when using %%wc_product_attributes%% in custom schema
-* FIX Welcome screen SVG image missing
-* FIX LifterLMS compatibility for private areas
-* FIX Closing <li> tag (thanks to @Presskopp https://github.com/wp-seopress/wp-seopress-public/pull/18)
-* FIX Incorrect conditional tag for Where to display the schema? option (props @maigret)
-* FIX i18n strings
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View complete changelog</a>

@@ -49,28 +49,6 @@ if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
 			}
 
 			echo "<script>
-				function seopress_google_suggest(data){
-					var raw_suggestions = String(data);
-					var suggestions_array = raw_suggestions.split(',');
-					
-					var i;
-					for (i = 0; i < suggestions_array.length; i++) {
-						if (suggestions_array[i] != null && suggestions_array[i] != undefined && suggestions_array[i] !='' && suggestions_array[i] !='[object Object]') {
-							document.getElementById('seopress_suggestions').innerHTML += '<li><a href=\"#\" class=\"sp-suggest-btn button button-small\">'+suggestions_array[i]+'</a></li>';
-						}
-					}
-
-					jQuery('.sp-suggest-btn').click(function(e) {
-						e.preventDefault();
-						if(jQuery('#seopress_analysis_target_kw_meta').val().length == 0){
-							jQuery('#seopress_analysis_target_kw_meta').val(jQuery(this).text() + ',');
-						} else {
-							str = jQuery('#seopress_analysis_target_kw_meta').val();
-							str = str.replace(/,\s*$/, '');
-							jQuery('#seopress_analysis_target_kw_meta').val(str+','+jQuery(this).text());
-						}
-					});
-				}
 				jQuery('#seopress_get_suggestions').on('click', function(data) {
 					data.preventDefault();
 

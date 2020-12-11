@@ -248,7 +248,7 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 		}
 
 		function seopress_cookies_user_consent_styles(){
-			$styles = '<style>.seopress-user-consent {left: 50%;position: fixed;z-index: 8000;padding: 20px;display: block;border: 1px solid #CCC;max-width:100%;';
+			$styles = '<style>.seopress-user-consent {left: 50%;position: fixed;z-index: 8000;padding: 20px;display: inline-flex;justify-content: center;border: 1px solid #CCC;max-width:100%;';
 			
 			//Width
 			if (seopress_google_analytics_cb_width_option() !='') {
@@ -294,7 +294,7 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$styles .= 'background:#F1F1F1;';
 			}
 
-			$styles .='}.seopress-user-consent p:first-child {margin-bottom:20px}.seopress-user-consent p {margin: 0;font-size: 0.8em;align-self: center;';
+			$styles .='}@media (max-width: 782px) {.seopress-user-consent {display: block;}}.seopress-user-consent p:first-child {margin-right:20px}.seopress-user-consent p {margin: 0;font-size: 0.8em;align-self: center;';
 
 			//Text color
 			if (seopress_google_analytics_cb_txt_col_option() !='') {

@@ -3087,12 +3087,12 @@ class seopress_options
 				echo '<pre style="margin:0;padding:10px;font-weight: bold;background:#F3F3F3;display:inline-block;width: 100%">
 					location ~ ([^/]*)sitemap(.*)\.x(m|s)l$ {
 						## SEOPress
-						rewrite ^/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
-						rewrite ^/sitemaps/news.xml$ /index.php?seopress_news=$1 last;
-						rewrite ^/sitemaps/video.xml$ /index.php?seopress_video=$1 last;
-						rewrite ^/sitemaps/author.xml$ /index.php?seopress_author=$1 last;
-						rewrite ^/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;
-						rewrite ^/sitemaps/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?seopress_cpt=$1&seopress_paged=$2 last;
+						rewrite ^.*/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
+						rewrite ^.*/sitemaps/news.xml$ /index.php?seopress_news=$1 last;
+						rewrite ^.*/sitemaps/video.xml$ /index.php?seopress_video=$1 last;
+						rewrite ^.*/sitemaps/author.xml$ /index.php?seopress_author=$1 last;
+						rewrite ^.*/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;
+						rewrite ^.*/sitemaps/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?seopress_cpt=$1&seopress_paged=$2 last;
 					}
 				</pre>';
 			}
