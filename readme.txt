@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 4.1.2
+Stable tag: 4.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -144,6 +144,8 @@ We provide deep integration with Elementor page builder. Directly from Elementor
 	<li>apply FAQ schema on Toggle and / or Accordion Elementor widgets</li>
 	<li>and more!</li>
 </ul>
+
+[youtube https://www.youtube.com/watch?v=amfozNvYzPU]
 
 <h3>Developers will love SEOPress!</h3>
 
@@ -308,6 +310,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 8. Installation Wizard
 
 == Changelog ==
+= 4.1.3 =
+* FIX PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Elementor\Core\Settings\Page\Manager::ajax_before_save_settings() must be of the type array, null given
+* FIX Delete bulk edit option for Redirections
 = 4.1.2 =
 * INFO Label for breadcrumbs in Elementor
 * FIX Elementor content analysis
@@ -326,7 +331,7 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * NEW UI for adding/editing/managing target keywords 🎉
 * NEW Paginated XML sitemaps for taxonomies and videos 🎉
 * NEW Import term metadata from CSV file using our import tool (PRO) 🎉
-* NEW Custom user capabilities for Redirections post type (edit_redirection, edit_redirections, edit_others_redirections, publish_redirections, read_redirection, read_private_redirections, delete_redirection, delete_others_redirections)
+* NEW Custom user capabilities for Redirections post type (edit_redirection, edit_redirections, edit_others_redirections, publish_redirections, read_redirection, read_private_redirections, delete_redirection, delete_others_redirections, delete_published_redirections)
 * NEW Remove noindex item from Admin Bar in backend and frontend option from SEO, Advanced page, Appearance tab
 * NEW Change expiration date of the user consent cookie option from SEO, Analytics page, Cookie bar / GDPR tab
 * NEW Add servesCuisine for LocalBusiness automatic schema
