@@ -275,7 +275,7 @@ class Document_Settings_Section {
 					'_seopress_robots_primary_cat',
 					[
 						'label' => __( 'Select a primary category', 'wp-seopress' ),
-						'description' => __('Set the category that gets used in the %category% permalink if you have multiple categories.','wp-seopress'),
+						'description' => __('Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories.','wp-seopress'),
 						'type' => \Elementor\Controls_Manager::SELECT,
 						'label_block' => true,
 						'separator' => 'none',

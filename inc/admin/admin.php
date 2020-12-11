@@ -118,7 +118,9 @@ class seopress_options
 		$seopress_titles_options['seopress_titles_archives_date_noindex'] = '1';
 
 		//BuddyPress Groups
-		$seopress_titles_options['seopress_titles_bp_groups_title'] = '%%post_title%% %%sep%% %%sitetitle%%';
+		if ( is_plugin_active( 'buddypress/bp-loader.php' ) || is_plugin_active( 'buddyboss-platform/bp-loader.php' )) {
+			$seopress_titles_options['seopress_titles_bp_groups_title'] = '%%post_title%% %%sep%% %%sitetitle%%';
+		}
 
 		//Search
 		$seopress_titles_options['seopress_titles_archives_search_title'] = '%%search_keywords%% %%sep%% %%sitetitle%%';
@@ -736,14 +738,66 @@ class seopress_options
 						<div class="postbox section-tool">
 							<div class="inside">
 								<h3><span><?php _e( 'Import data from a CSV', 'wp-seopress' ); ?></span></h3>
-								<p><?php _e( 'Import your title, meta description, meta robots, social metas from a CSV file with our import tool.', 'wp-seopress' ); ?></p>
+								<p><?php _e( 'Upload a CSV file to quickly import post (post, page, single post type) and term metadata:', 'wp-seopress' ); ?></p>
+								<ul>
+									<li>
+										<?php _e('Meta title','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Meta description','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Meta robots (noindex, nofollow...)','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Facebook Open Graph tags (title, description, image)','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Twitter cards tags (title, description, image)','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Redirection (enable, type, URL)','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Canonical URL','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Target keywords','wp-seopress'); ?>
+									</li>
+								</ul>
 								<a class="button" href="<?php echo admin_url( 'admin.php?page=seopress_csv_importer' ); ?>"><?php _e('Run the importer','wp-seopress'); ?></a>
 							</div><!-- .inside -->
 						</div><!-- .postbox -->
 						<div id="metadata-migration-tool" class="postbox section-tool">
 							<div class="inside">
 								<h3><span><?php _e( 'Export metadata to a CSV', 'wp-seopress' ); ?></span></h3>
-								<p><?php _e( 'Export your SEOPress metadata for this site as a .csv file.', 'wp-seopress' ); ?></p>
+								<p><?php _e( 'Export your post (post, page, single post type) and term metadata for this site as a .csv file.', 'wp-seopress' ); ?></p>
+								<ul>
+									<li>
+										<?php _e('Meta title','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Meta description','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Meta robots (noindex, nofollow...)','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Facebook Open Graph tags (title, description, image)','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Twitter cards tags (title, description, image)','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Redirection (enable, type, URL)','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Canonical URL','wp-seopress'); ?>
+									</li>
+									<li>
+										<?php _e('Target keywords','wp-seopress'); ?>
+									</li>
+								</ul>
 								<form method="post">
 									<p><input type="hidden" name="seopress_action" value="export_csv_metadata" /></p>
 									<p>
@@ -1143,6 +1197,20 @@ class seopress_options
 									</form>
 								</div><!-- .inside -->
 							</div><!-- .postbox -->
+							<div id="section-clean-redirects" class="postbox section-tool">
+								<div class="inside">
+									<h3><span><?php _e( 'Clean all your redirects and 404 errors', 'wp-seopress' ); ?></span></h3>
+									<p><?php _e( 'Delete all your 301, 302, 307, 404, 410 and 451 entries.', 'wp-seopress' ); ?></p>
+									<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Backup your database before deletion. Safety FIRST!', 'wp-seopress' ); ?></p>
+									<form method="post">
+										<p><input type="hidden" name="seopress_action" value="clean_all" /></p>
+										<p>
+											<?php wp_nonce_field( 'seopress_clean_all_nonce', 'seopress_clean_all_nonce' ); ?>
+											<?php submit_button( __( 'Delete', 'wp-seopress' ), 'secondary', 'submit', false ); ?>
+										</p>
+									</form>
+								</div><!-- .inside -->
+							</div><!-- .postbox -->
 						<?php } else { ?>
 							<p><?php _e('Redirections feature is disabled. Please activate it from the PRO page.','wp-seopress'); ?></p>
 							<a href="<?php echo admin_url( 'admin.php?page=seopress-pro-page' ); ?>"><?php _e('Activate Redirections','wp-seopress'); ?></a>
@@ -1167,7 +1235,7 @@ class seopress_options
 					<div class="postbox section-tool">
 						<div class="inside">
 							<h3><span><?php _e( 'Reset All Settings', 'wp-seopress' ); ?></span></h3>
-							<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Delete all options related to SEOPress in your database AND set settings to their default values.', 'wp-seopress' ); ?></p>
+							<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e( '<strong>WARNING:</strong> Delete all options related to this plugin in your database AND set settings to their default values.', 'wp-seopress' ); ?></p>
 							 <form method="post" enctype="multipart/form-data">
 								<p>
 									<input type="hidden" name="seopress_action" value="reset_settings" />
@@ -1323,29 +1391,31 @@ class seopress_options
 			'seopress_setting_section_titles_single' // Section
 		);
 
-		add_settings_field(
-			'seopress_titles_bp_groups_title', // ID
-			'',
-			array( $this, 'seopress_titles_bp_groups_title_callback' ), // Callback
-			'seopress-settings-admin-titles-single', // Page
-			'seopress_setting_section_titles_single' // Section
-		);
+		if ( is_plugin_active( 'buddypress/bp-loader.php' ) || is_plugin_active( 'buddyboss-platform/bp-loader.php' )) {
+			add_settings_field(
+				'seopress_titles_bp_groups_title', // ID
+				'',
+				array( $this, 'seopress_titles_bp_groups_title_callback' ), // Callback
+				'seopress-settings-admin-titles-single', // Page
+				'seopress_setting_section_titles_single' // Section
+			);
 
-		add_settings_field(
-			'seopress_titles_bp_groups_desc', // ID
-			'',
-			array( $this, 'seopress_titles_bp_groups_desc_callback' ), // Callback
-			'seopress-settings-admin-titles-single', // Page
-			'seopress_setting_section_titles_single' // Section
-		);
+			add_settings_field(
+				'seopress_titles_bp_groups_desc', // ID
+				'',
+				array( $this, 'seopress_titles_bp_groups_desc_callback' ), // Callback
+				'seopress-settings-admin-titles-single', // Page
+				'seopress_setting_section_titles_single' // Section
+			);
 
-		add_settings_field(
-			'seopress_titles_bp_groups_noindex', // ID
-			'',
-			array( $this, 'seopress_titles_bp_groups_noindex_callback' ), // Callback
-			'seopress-settings-admin-titles-single', // Page
-			'seopress_setting_section_titles_single' // Section
-		);
+			add_settings_field(
+				'seopress_titles_bp_groups_noindex', // ID
+				'',
+				array( $this, 'seopress_titles_bp_groups_noindex_callback' ), // Callback
+				'seopress-settings-admin-titles-single', // Page
+				'seopress_setting_section_titles_single' // Section
+			);
+		}
 
 		//Archives SECTION=========================================================================
 		add_settings_section( 
@@ -2037,9 +2107,41 @@ class seopress_options
 		);
 
 		add_settings_field(
+			'seopress_google_analytics_cb_exp_date', // ID
+			__("User consent cookie expiration date","wp-seopress"), // Title
+			array( $this, 'seopress_google_analytics_cb_exp_date_callback' ), // Callback
+			'seopress-settings-admin-google-analytics-gdpr', // Page
+			'seopress_setting_section_google_analytics_gdpr' // Section
+		);
+
+		add_settings_field(
 			'seopress_google_analytics_cb_pos', // ID
 			__("Cookie bar position","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_pos_callback' ), // Callback
+			'seopress-settings-admin-google-analytics-gdpr', // Page
+			'seopress_setting_section_google_analytics_gdpr' // Section
+		);
+
+		add_settings_field(
+			'seopress_google_analytics_cb_width', // ID
+			__("Cookie bar width","wp-seopress"), // Title
+			array( $this, 'seopress_google_analytics_cb_width_callback' ), // Callback
+			'seopress-settings-admin-google-analytics-gdpr', // Page
+			'seopress_setting_section_google_analytics_gdpr' // Section
+		);
+
+		add_settings_field(
+			'seopress_google_analytics_cb_backdrop', // ID
+			__("Enable backdrop","wp-seopress"), // Title
+			array( $this, 'seopress_google_analytics_cb_backdrop_callback' ), // Callback
+			'seopress-settings-admin-google-analytics-gdpr', // Page
+			'seopress_setting_section_google_analytics_gdpr' // Section
+		);
+
+		add_settings_field(
+			'seopress_google_analytics_cb_backdrop_bg', // ID
+			__("Backdrop background color","wp-seopress"), // Title
+			array( $this, 'seopress_google_analytics_cb_backdrop_bg_callback' ), // Callback
 			'seopress-settings-admin-google-analytics-gdpr', // Page
 			'seopress_setting_section_google_analytics_gdpr' // Section
 		);
@@ -2614,15 +2716,23 @@ class seopress_options
 
 		add_settings_field(
 			'seopress_advanced_appearance_adminbar', // ID
-			__("SEOPress in admin bar","wp-seopress"), // Title
+			__("SEO in admin bar","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_adminbar_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
 			'seopress_setting_section_advanced_appearance' // Section
 		);
 
 		add_settings_field(
+			'seopress_advanced_appearance_adminbar_noindex', // ID
+			__("Noindex in admin bar","wp-seopress"), // Title
+			array( $this, 'seopress_advanced_appearance_adminbar_noindex_callback' ), // Callback
+			'seopress-settings-admin-advanced-appearance', // Page
+			'seopress_setting_section_advanced_appearance' // Section
+		);
+
+		add_settings_field(
 			'seopress_advanced_appearance_metabox_position', // ID
-			__("Move SEOPress metabox's position","wp-seopress"), // Title
+			__("Move SEO metabox's position","wp-seopress"), // Title
 			array( $this, 'seopress_advanced_appearance_metaboxe_position_callback' ), // Callback
 			'seopress-settings-admin-advanced-appearance', // Page
 			'seopress_setting_section_advanced_appearance' // Section
@@ -2863,7 +2973,21 @@ class seopress_options
 			'seopress_google_analytics_cross_domain',
 			'seopress_google_analytics_matomo_id',
 			'seopress_google_analytics_matomo_site_id',
-			'seopress_google_analytics_matomo_cross_domain_sites'
+			'seopress_google_analytics_matomo_cross_domain_sites',
+			'seopress_google_analytics_cb_backdrop_bg',
+			'seopress_google_analytics_cb_exp_date',
+			'seopress_google_analytics_cb_bg',
+			'seopress_google_analytics_cb_txt_col',
+			'seopress_google_analytics_cb_lk_col',
+			'seopress_google_analytics_cb_btn_bg',
+			'seopress_google_analytics_cb_btn_col',
+			'seopress_google_analytics_cb_btn_bg_hov',
+			'seopress_google_analytics_cb_btn_col_hov',
+			'seopress_google_analytics_cb_btn_sec_bg',
+			'seopress_google_analytics_cb_btn_sec_col',
+			'seopress_google_analytics_cb_btn_sec_bg_hov',
+			'seopress_google_analytics_cb_btn_sec_col_hov',
+			'seopress_google_analytics_cb_width',
 		];
 
 		$seopress_sanitize_site_verification = [
@@ -3066,7 +3190,7 @@ class seopress_options
 	}
 
 	public function print_section_info_google_analytics_custom_dimensions() {
-		print __('<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom metrics in SEOPress are like the default dimensions and metrics in your Analytics account, except you create them yourself.<br> Use them to collect and analyze data that Analytics doesn\'t automatically track.<br> Please note that you also have to setup your custom dimensions in your Google Analytics account. More info by clicking on the help icon.', 'wp-seopress');
+		print __('<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom metrics are like the default dimensions and metrics in your Analytics account, except you create them yourself.<br> Use them to collect and analyze data that Analytics doesn\'t automatically track.<br> Please note that you also have to setup your custom dimensions in your Google Analytics account. More info by clicking on the help icon.', 'wp-seopress');
 		
 		echo '<p>'.__('Custom dimensions also work with <strong>Matomo</strong> tracking code.','wp-seopress').'</p>';
 
@@ -3090,7 +3214,7 @@ class seopress_options
 	}
 
 	public function print_section_info_advanced_appearance() {
-		print __('<p>Customize SEOPress to fit your needs.</p>', 'wp-seopress');
+		print __('<p>Customize the plugin to fit your needs.</p>', 'wp-seopress');
 	}
 
 	public function print_section_info_advanced_security() {
@@ -3328,55 +3452,58 @@ class seopress_options
 	//BuddyPress Groups
 	public function seopress_titles_bp_groups_title_callback()
 	{
-		echo '<h2>'.__('BuddyPress groups','wp-seopress').'</h2>';
-		
-		_e('Title template','wp-seopress');
-		echo "<br/>";
+		if ( is_plugin_active( 'buddypress/bp-loader.php' ) || is_plugin_active( 'buddyboss-platform/bp-loader.php' )) {
+			echo '<h2>'.__('BuddyPress groups','wp-seopress').'</h2>';
+			
+			_e('Title template','wp-seopress');
+			echo "<br/>";
 
-		$check = isset($this->options['seopress_titles_bp_groups_title']) ? $this->options['seopress_titles_bp_groups_title'] : NULL;
+			$check = isset($this->options['seopress_titles_bp_groups_title']) ? $this->options['seopress_titles_bp_groups_title'] : NULL;
 
-		printf(
-		'<input id="seopress_titles_bp_groups_title" type="text" name="seopress_titles_option_name[seopress_titles_bp_groups_title]" value="%s"/>',
-		esc_html( $check )
-		);
+			printf(
+			'<input id="seopress_titles_bp_groups_title" type="text" name="seopress_titles_option_name[seopress_titles_bp_groups_title]" value="%s"/>',
+			esc_html( $check )
+			);
 
-		echo '<div class="wrap-tags"><span id="seopress-tag-post-title-bd-groups" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>';
-		echo '<span id="seopress-tag-sep-bd-groups" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
-		echo '<span id="seopress-tag-site-title-bd-groups" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
-		echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
-		
+			echo '<div class="wrap-tags"><span id="seopress-tag-post-title-bd-groups" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>';
+			echo '<span id="seopress-tag-sep-bd-groups" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
+			echo '<span id="seopress-tag-site-title-bd-groups" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>';
+			echo '<span id="seopress-quick-help" class="tag-title more-tags"><span class="dashicons dashicons-menu"></span>'.__('More tags','wp-seopress').'</span></div>';
+		}
 	}
 
 	public function seopress_titles_bp_groups_desc_callback()
 	{
-		_e('Meta description template','wp-seopress');
-		echo "<br/>";
-		
-		$check = isset($this->options['seopress_titles_bp_groups_desc']) ? $this->options['seopress_titles_bp_groups_desc'] : NULL;
+		if ( is_plugin_active( 'buddypress/bp-loader.php' ) || is_plugin_active( 'buddyboss-platform/bp-loader.php' )) {
+			_e('Meta description template','wp-seopress');
+			echo "<br/>";
+			
+			$check = isset($this->options['seopress_titles_bp_groups_desc']) ? $this->options['seopress_titles_bp_groups_desc'] : NULL;
 
-		printf(
-		'<textarea name="seopress_titles_option_name[seopress_titles_bp_groups_desc]">%s</textarea>',
-		esc_html( $check )
-		
-		);
-		
+			printf(
+			'<textarea name="seopress_titles_option_name[seopress_titles_bp_groups_desc]">%s</textarea>',
+			esc_html( $check )
+			
+			);
+		}
 	}
 
 	public function seopress_titles_bp_groups_noindex_callback()
 	{
-
-		$options = get_option( 'seopress_titles_option_name' );
-		
-		$check = isset($options['seopress_titles_bp_groups_noindex']);
-		
-		echo '<input id="seopress_titles_bp_groups_noindex" name="seopress_titles_option_name[seopress_titles_bp_groups_noindex]" type="checkbox"';
-		if ('1' == $check) echo 'checked="yes"'; 
-		echo ' value="1"/>';
-		
-		echo '<label for="seopress_titles_bp_groups_noindex">'. __( 'Do not display BuddyPress groups in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
-		
-		if (isset($this->options['seopress_titles_bp_groups_noindex'])) {
-			esc_attr( $this->options['seopress_titles_bp_groups_noindex']);
+		if ( is_plugin_active( 'buddypress/bp-loader.php' ) || is_plugin_active( 'buddyboss-platform/bp-loader.php' )) {
+			$options = get_option( 'seopress_titles_option_name' );
+			
+			$check = isset($options['seopress_titles_bp_groups_noindex']);
+			
+			echo '<input id="seopress_titles_bp_groups_noindex" name="seopress_titles_option_name[seopress_titles_bp_groups_noindex]" type="checkbox"';
+			if ('1' == $check) echo 'checked="yes"'; 
+			echo ' value="1"/>';
+			
+			echo '<label for="seopress_titles_bp_groups_noindex">'. __( 'Do not display BuddyPress groups in search engine results <strong>(noindex)</strong>', 'wp-seopress' ) .'</label>';
+			
+			if (isset($this->options['seopress_titles_bp_groups_noindex'])) {
+				esc_attr( $this->options['seopress_titles_bp_groups_noindex']);
+			}
 		}
 	}
 
@@ -3897,6 +4024,8 @@ class seopress_options
 		echo '<label for="seopress_titles_noindex">'. __( 'noindex', 'wp-seopress' ) .'</label>';
 		
 		echo '<p class="description">'.__('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.','wp-seopress').'</p>';
+
+		echo '<p class="description">'. sprintf(__('Check also the <strong>"Search engine visibility"</strong> setting from the <a href="%s">WordPress Reading page</a>.','wp-seopress'),admin_url('options-reading.php')) .'</p>';
 		
 		if (isset($this->options['seopress_titles_noindex'])) {
 			esc_attr( $this->options['seopress_titles_noindex']);
@@ -4383,7 +4512,7 @@ class seopress_options
 		$check = isset($this->options['seopress_social_knowledge_name']) ? $this->options['seopress_social_knowledge_name'] : NULL;
 
 		printf(
-		'<input type="text" name="seopress_social_option_name[seopress_social_knowledge_name]" placeholder="'.esc_html__('eg: SEOPress','wp-seopress').'" aria-label="'.__('Your name/organization','wp-seopress').'" value="%s"/>',
+		'<input type="text" name="seopress_social_option_name[seopress_social_knowledge_name]" placeholder="'.esc_html__('eg: Miremont','wp-seopress').'" aria-label="'.__('Your name/organization','wp-seopress').'" value="%s"/>',
 		esc_html( $check )
 		);
 	}
@@ -4927,6 +5056,23 @@ class seopress_options
 		);
 	}
 
+	public function seopress_google_analytics_cb_exp_date_callback()
+	{
+		$options = get_option( 'seopress_google_analytics_option_name' );
+
+		$check = isset($options['seopress_google_analytics_cb_exp_date']);
+
+		echo '<input type="number" min="1" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_exp_date]"';
+		if ('1' == $check) echo 'value="'.esc_attr($options['seopress_google_analytics_cb_exp_date']).'"';
+		echo ' value="30"/>';
+
+		if (isset($this->options['seopress_google_analytics_cb_exp_date'])) {
+			esc_html( $this->options['seopress_google_analytics_cb_exp_date']);
+		}
+
+		echo '<p class="description">'.__('Default: 30 days before the cookie expiration.','wp-seopress').'</p>';
+	}
+
 	public function seopress_google_analytics_cb_pos_callback()
 	{
 		$options = get_option( 'seopress_google_analytics_option_name' );
@@ -4938,6 +5084,9 @@ class seopress_options
 				if ('bottom' == $selected) echo 'selected="selected"'; 
 				echo ' value="bottom">'. __("Bottom (default)","wp-seopress") .'</option>';
 			echo ' <option ';
+				if ('center' == $selected) echo 'selected="selected"'; 
+				echo ' value="center">'. __("Middle","wp-seopress") .'</option>';
+			echo ' <option ';
 				if ('top' == $selected) echo 'selected="selected"'; 
 				echo ' value="top">'. __("Top","wp-seopress") .'</option>';
 		echo '</select>';
@@ -4947,12 +5096,51 @@ class seopress_options
 		}
 	}
 
+	public function seopress_google_analytics_cb_width_callback()
+	{
+		$check = isset($this->options['seopress_google_analytics_cb_width']) ? $this->options['seopress_google_analytics_cb_width'] : NULL;
+
+		printf(
+		'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_width]" aria-label="'.__('Change the cookie bar width','wp-seopress').'" value="%s"/>',
+		esc_html( $check )
+		);
+
+		echo '<p class="description">'.__('Default unit is Pixels. Add % just after your custom value to use percentages (eg: 80%).','wp-seopress').'</p>';
+	}
+
+	public function seopress_google_analytics_cb_backdrop_callback()
+	{
+		$options = get_option( 'seopress_google_analytics_option_name' );
+		
+		$check = isset($options['seopress_google_analytics_cb_backdrop']);
+		
+		echo '<input id="seopress_google_analytics_cb_backdrop" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_backdrop]" type="checkbox"';
+		if ('1' == $check) echo 'checked="yes"'; 
+		echo ' value="1"/>';
+		
+		echo '<label for="seopress_google_analytics_cb_backdrop">'. __( 'Display a backdrop with the cookie bar', 'wp-seopress' ) .'</label>';
+
+		if (isset($this->options['seopress_google_analytics_cb_backdrop'])) {
+			esc_attr( $this->options['seopress_google_analytics_cb_backdrop']);
+		}
+	}
+
+	public function seopress_google_analytics_cb_backdrop_bg_callback()
+	{
+		$check = isset($this->options['seopress_google_analytics_cb_backdrop_bg']) ? $this->options['seopress_google_analytics_cb_backdrop_bg'] : NULL;
+
+		printf(
+		'<input type="text" data-default-color="rgba(255,255,255,0.8)" data-alpha="true" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_backdrop_bg]" aria-label="'.__('Change the background color of the backdrop','wp-seopress').'" value="%s" class="seopress_admin_color_picker color-picker"/>',
+		esc_html( $check )
+		);
+	}
+
 	public function seopress_google_analytics_cb_bg_callback()
 	{
 		$check = isset($this->options['seopress_google_analytics_cb_bg']) ? $this->options['seopress_google_analytics_cb_bg'] : NULL;
 
 		printf(
-		'<input type="text" data-default-color="#F1F1F1" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_bg]" aria-label="'.__('Change the color of the cookie bar background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+		'<input type="text" data-alpha="true" data-default-color="#F1F1F1" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_bg]" aria-label="'.__('Change the color of the cookie bar background','wp-seopress').'" value="%s" class="seopress_admin_color_picker color-picker"/>',
 		esc_html( $check )
 		);
 	}
@@ -4982,7 +5170,7 @@ class seopress_options
 		$check = isset($this->options['seopress_google_analytics_cb_btn_bg']) ? $this->options['seopress_google_analytics_cb_btn_bg'] : NULL;
 
 		printf(
-		'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg]" aria-label="'.__('Change the color of the cookie bar button background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+		'<input type="text" data-alpha="true" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg]" aria-label="'.__('Change the color of the cookie bar button background','wp-seopress').'" value="%s" class="seopress_admin_color_picker color-picker"/>',
 		esc_html( $check )
 		);
 	}
@@ -4992,7 +5180,7 @@ class seopress_options
 		$check = isset($this->options['seopress_google_analytics_cb_btn_bg_hov']) ? $this->options['seopress_google_analytics_cb_btn_bg_hov'] : NULL;
 
 		printf(
-		'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg_hov]" aria-label="'.__('Change the color of the cookie bar button hover background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+		'<input type="text" data-alpha="true" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_bg_hov]" aria-label="'.__('Change the color of the cookie bar button hover background','wp-seopress').'" value="%s" class="seopress_admin_color_picker color-picker"/>',
 		esc_html( $check )
 		);
 	}
@@ -5022,7 +5210,7 @@ class seopress_options
 		$check = isset($this->options['seopress_google_analytics_cb_btn_sec_bg']) ? $this->options['seopress_google_analytics_cb_btn_sec_bg'] : NULL;
 
 		printf(
-		'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg]" aria-label="'.__('Change the color of the cookie bar secondary button background','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+		'<input type="text" data-alpha="true" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg]" aria-label="'.__('Change the color of the cookie bar secondary button background','wp-seopress').'" value="%s" class="seopress_admin_color_picker color-picker"/>',
 		esc_html( $check )
 		);
 	}
@@ -5042,7 +5230,7 @@ class seopress_options
 		$check = isset($this->options['seopress_google_analytics_cb_btn_sec_bg_hov']) ? $this->options['seopress_google_analytics_cb_btn_sec_bg_hov'] : NULL;
 
 		printf(
-		'<input type="text" data-default-color="#222222" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg_hov]" aria-label="'.__('Change the color of the cookie bar secondary button','wp-seopress').'" value="%s" class="seopress_admin_color_picker"/>',
+		'<input type="text" data-alpha="true" data-default-color="#222222" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg_hov]" aria-label="'.__('Change the color of the cookie bar secondary button','wp-seopress').'" value="%s" class="seopress_admin_color_picker color-picker"/>',
 		esc_html( $check )
 		);
 	}
@@ -6003,10 +6191,27 @@ class seopress_options
 		if ('1' == $check) echo 'checked="yes"'; 
 		echo ' value="1"/>';
 		
-		echo '<label for="seopress_advanced_appearance_adminbar">'. __( 'Remove SEOPress from Admin Bar in backend and frontend', 'wp-seopress' ) .'</label>';
+		echo '<label for="seopress_advanced_appearance_adminbar">'. __( 'Remove SEO from Admin Bar in backend and frontend', 'wp-seopress' ) .'</label>';
 
 		if (isset($this->options['seopress_advanced_appearance_adminbar'])) {
 			esc_attr( $this->options['seopress_advanced_appearance_adminbar']);
+		}
+	}
+
+	public function seopress_advanced_appearance_adminbar_noindex_callback()
+	{
+		$options = get_option( 'seopress_advanced_option_name' );
+		
+		$check = isset($options['seopress_advanced_appearance_adminbar_noindex']);
+		
+		echo '<input id="seopress_advanced_appearance_adminbar_noindex" name="seopress_advanced_option_name[seopress_advanced_appearance_adminbar_noindex]" type="checkbox"';
+		if ('1' == $check) echo 'checked="yes"'; 
+		echo ' value="1"/>';
+		
+		echo '<label for="seopress_advanced_appearance_adminbar_noindex">'. __( 'Remove noindex item from Admin Bar in backend and frontend', 'wp-seopress' ) .'</label>';
+
+		if (isset($this->options['seopress_advanced_appearance_adminbar_noindex'])) {
+			esc_attr( $this->options['seopress_advanced_appearance_adminbar_noindex']);
 		}
 	}
 
@@ -6065,7 +6270,7 @@ class seopress_options
 		if ('1' == $check) echo 'checked="yes"'; 
 		echo ' value="1"/>';
 		
-		echo '<label for="seopress_advanced_appearance_notifications">'. __( 'Hide Notifications Center in SEOPress Dashboard page', 'wp-seopress' ) .'</label>';
+		echo '<label for="seopress_advanced_appearance_notifications">'. __( 'Hide Notifications Center in SEO Dashboard page', 'wp-seopress' ) .'</label>';
 
 		if (isset($this->options['seopress_advanced_appearance_notifications'])) {
 			esc_attr( $this->options['seopress_advanced_appearance_notifications']);
@@ -6082,7 +6287,7 @@ class seopress_options
 		if ('1' == $check) echo 'checked="yes"'; 
 		echo ' value="1"/>';
 		
-		echo '<label for="seopress_advanced_appearance_seo_tools">'. __( 'Hide SEO tools in SEOPress Dashboard page', 'wp-seopress' ) .'</label>';
+		echo '<label for="seopress_advanced_appearance_seo_tools">'. __( 'Hide SEO tools in SEO Dashboard page', 'wp-seopress' ) .'</label>';
 
 		if (isset($this->options['seopress_advanced_appearance_seo_tools'])) {
 			esc_attr( $this->options['seopress_advanced_appearance_seo_tools']);
@@ -6099,7 +6304,7 @@ class seopress_options
 		if ('1' == $check) echo 'checked="yes"'; 
 		echo ' value="1"/>';
 		
-		echo '<label for="seopress_advanced_appearance_useful_links">'. __( 'Hide Useful Links in SEOPress dashboard page', 'wp-seopress' ) .'</label>';
+		echo '<label for="seopress_advanced_appearance_useful_links">'. __( 'Hide Useful Links in SEO dashboard page', 'wp-seopress' ) .'</label>';
 
 		if (isset($this->options['seopress_advanced_appearance_useful_links'])) {
 			esc_attr( $this->options['seopress_advanced_appearance_useful_links']);

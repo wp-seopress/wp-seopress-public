@@ -32,6 +32,9 @@
     float: right;
     margin-left: 6px;
 }
+#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_top_level > a {
+	display: inline-block;
+}
 #wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_top_level .wrap-seopress-noindex .ab-icon::before {
 	color: #eee;
 	vertical-align: middle;
@@ -71,5 +74,5 @@
 }
 #wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex .off::before,
 #wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow .off::before {
-	color: #00b9eb;
+	color: #46b450;
 }

@@ -5,6 +5,7 @@ jQuery(document).ready(function($) {
 	}
 	$('#seopress-user-consent-accept').on('click', function() {
 		$('.seopress-user-consent').remove();
+		$('.seopress-user-consent-backdrop').remove();
 		$.ajax({
 			method : 'GET',
 			url : seopressAjaxGAUserConsent.seopress_cookies_user_consent,
@@ -21,12 +22,13 @@ jQuery(document).ready(function($) {
 					$('body').prepend(data.data.body_js);
 					$('body').append(data.data.footer_js);
 				}
-				Cookies.set('seopress-user-consent-accept', '1', { expires: 30 });
+				Cookies.set('seopress-user-consent-accept', '1', { expires: Number(seopressAjaxGAUserConsent.seopress_cookies_expiration_days) });
 			},
 		});
 	});
 	$('#seopress-user-consent-close').on('click', function() {
 		$('.seopress-user-consent').remove();
-		Cookies.set('seopress-user-consent-close', '1', { expires: 30 });
+		$('.seopress-user-consent-backdrop').remove();
+		Cookies.set('seopress-user-consent-close', '1', { expires: Number(seopressAjaxGAUserConsent.seopress_cookies_expiration_days) });
 	});
 });

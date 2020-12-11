@@ -20,7 +20,8 @@ jQuery(document).ready(function($) {
 		"notice-enfold",
 		"notice-themes",
 		"notice-page-builders",
-		"notice-go-pro"
+		"notice-go-pro",
+		"notice-noindex"
 	]
 	notices.forEach(function (item) {
 		$('#'+item).on('click', function() {

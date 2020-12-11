@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 4.0.3
+Version: 4.1
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '4.0.3' );
+define( 'SEOPRESS_VERSION', '4.1' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -251,6 +251,18 @@ function seopress_add_admin_options_scripts( $hook ) {
 
 	if ( 'seopress-google-analytics' === $_GET['page'] ) {
 		wp_enqueue_style( 'wp-color-picker' );
+
+		wp_enqueue_script( 'wp-color-picker-alpha', plugins_url( 'assets/js/wp-color-picker-alpha.min.js', __FILE__ ), [ 'wp-color-picker' ], SEOPRESS_VERSION, true );
+		$color_picker_strings = [
+			'clear'            => __( 'Clear', 'wp-seopress' ),
+			'clearAriaLabel'   => __( 'Clear color', 'wp-seopress' ),
+			'defaultString'    => __( 'Default', 'wp-seopress' ),
+			'defaultAriaLabel' => __( 'Select default color', 'wp-seopress' ),
+			'pick'             => __( 'Select Color', 'wp-seopress' ),
+			'defaultLabel'     => __( 'Color value', 'wp-seopress' ),
+		];
+		wp_localize_script( 'wp-color-picker-alpha', 'wpColorPickerL10n', $color_picker_strings );
+
 		wp_enqueue_script( 'seopress-admin-tabs-js', plugins_url( 'assets/js/seopress-tabs6' . $prefix . '.js', __FILE__ ), [ 'jquery-ui-tabs', 'wp-color-picker' ], SEOPRESS_VERSION );
 	}
 
@@ -772,7 +784,7 @@ if (seopress_xml_sitemap_general_enable_option() =='1' && seopress_get_toggle_op
 		add_rewrite_rule( '^sitemaps_xsl.xsl$', 'index.php?seopress_sitemap_xsl=1', 'top' );
 
 		//CPT / Taxonomies
-		$urls = array();
+		$urls = [];
 
 		/*CPT*/
 		if (seopress_xml_sitemap_post_types_list_option() !='') {

@@ -26,6 +26,20 @@ function seopress_xml_sitemap_single_term() {
 		$path = get_query_var( 'seopress_cpt');
 	}
 
+	$offset = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), ".xml");
+	$offset = preg_match_all('/\d+/', $offset, $matches);
+	$offset = end($matches[0]);
+
+	//Max posts per paginated sitemap
+	$max = 1000;
+	$max = apply_filters('seopress_sitemaps_max_terms_per_sitemap', $max);
+
+	if (isset($offset) && absint($offset) && $offset !='' && $offset !=0) {
+		$offset = (($offset-1)*$max);
+	} else {
+		$offset = 0;
+	}
+
 	$home_url = home_url().'/';
 	
 	if (function_exists('pll_home_url')) {
@@ -36,48 +50,42 @@ function seopress_xml_sitemap_single_term() {
 	$seopress_sitemaps .='<?xml-stylesheet type="text/xsl" href="'.$home_url.'sitemaps_xsl.xsl"?>';
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= apply_filters('seopress_sitemaps_urlset', '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' );
+
 	$args = [ 
 		'taxonomy' => $path,
-		'hide_empty' => false, 
-		'number' => 1000, 
-		'meta_query' => [
-			'relation' => 'OR',
-			[
-				'key' => '_seopress_robots_index', 
-				'value' => '', 
-				'compare' => 'NOT EXISTS' 
-			],
-			[
-				'key' => '_seopress_robots_index', 
-				'value' => 'yes', 
-				'compare' => '!=' 
-			] 
-		],
-		'fields' => 'ids', 
+		'offset' => $offset,
+		'hide_empty' => false,
+		'number' => 1000,
+		'fields' => 'ids',
 		'lang' => ''
 	];
 
    	$args = apply_filters('seopress_sitemaps_single_term_query', $args, $path);
-	$termslist = get_terms( $args );
-	foreach ( $termslist as $term ) {
-		$seopress_sitemaps_url = '';
-		// array with all the information needed for a sitemap url
-		$seopress_url = [
-			'loc' => htmlspecialchars(urldecode(esc_url(get_term_link($term)))),
-			'mod' => '',
-			'images' => []
-		];
 
-		$seopress_sitemaps_url .= "\n";
-		$seopress_sitemaps_url .= '<url>';
-		$seopress_sitemaps_url .= "\n";
-		$seopress_sitemaps_url .= '<loc>';
-		$seopress_sitemaps_url .= $seopress_url['loc'];
-		$seopress_sitemaps_url .= '</loc>';
-		$seopress_sitemaps_url .= "\n";
-		$seopress_sitemaps_url .= '</url>';
+	$termslist = new WP_Term_Query( $args );
 
-		$seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
+	foreach ( $termslist->terms as $term ) {
+
+		if (!get_term_meta( $term, '_seopress_robots_index', true)) {
+			$seopress_sitemaps_url = '';
+			// array with all the information needed for a sitemap url
+			$seopress_url = [
+				'loc' => htmlspecialchars(urldecode(esc_url(get_term_link($term)))),
+				'mod' => '',
+				'images' => []
+			];
+
+			$seopress_sitemaps_url .= "\n";
+			$seopress_sitemaps_url .= '<url>';
+			$seopress_sitemaps_url .= "\n";
+			$seopress_sitemaps_url .= '<loc>';
+			$seopress_sitemaps_url .= $seopress_url['loc'];
+			$seopress_sitemaps_url .= '</loc>';
+			$seopress_sitemaps_url .= "\n";
+			$seopress_sitemaps_url .= '</url>';
+
+			$seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
+		}
 	}
 	$seopress_sitemaps .= '</urlset>';
 	$seopress_sitemaps .= "\n";

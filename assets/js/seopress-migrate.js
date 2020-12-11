@@ -84,7 +84,7 @@ jQuery(document).ready(function($) {
 			self.process_offset( 0, self, url, action, _ajax_nonce, id );
 		});
 
-		process_offset = function( offset, self, url, action, _ajax_nonce, id ) {
+		process_offset = function( offset, self, url, action, _ajax_nonce, id, post_export, term_export ) {
 
 			i18n = seopressAjaxMigrate.i18n.migration;
 			if (id =='metadata') {
@@ -96,6 +96,8 @@ jQuery(document).ready(function($) {
 				data : {
 					action: action,
 					offset: offset,
+					post_export : post_export,
+					term_export : term_export,
 					_ajax_nonce: _ajax_nonce,
 				},
 				success : function( data ) {
@@ -108,7 +110,7 @@ jQuery(document).ready(function($) {
 							$(location).attr('href',data.data.url);
 						}
 					} else {
-						self.process_offset( parseInt( data.data.offset ), self, url, action, _ajax_nonce, id );
+						self.process_offset( parseInt( data.data.offset ), self, url, action, _ajax_nonce, id, data.data.post_export, data.data.term_export );
 					}
 				},
 			});

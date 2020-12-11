@@ -99,7 +99,7 @@ if( strtotime( $post->post_modified ) < strtotime('-365 days') ) {
 } else {
 	$desc = '<p><span class="dashicons dashicons-yes"></span>'.__('The last modified date of this article is less than 1 year. Cool!','wp-seopress').'</p>';
 }
-$desc .= '<p>'.__('Search engines love fresh content. Regularly update your articles without having to rewrite your content entirely and give them a boost in search rankings. SEOPress takes care of the technical part.','wp-seopress').'</p>';
+$desc .= '<p>'.__('Search engines love fresh content. Regularly update your articles without having to rewrite your content entirely and give them a boost in search rankings. We takes care of the technical part.','wp-seopress').'</p>';
 $analyzes['old_post']['desc'] = $desc;
 
 //Word counters
@@ -337,6 +337,9 @@ if (!empty($seopress_analysis_data['og_title']['count'])) {
 		$analyzes['social']['impact'] = 'high';
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:title in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one og:title in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:title tag from your source code. Below, the list:','wp-seopress').'</p>';
+	} elseif(empty($all_og_title[0])) { //If og:title empty
+		$analyzes['social']['impact'] = 'high';
+		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph Title tag is empty!','wp-seopress').'</p>';
 	} else {
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('We found an Open Graph Title tag in your source code.','wp-seopress').'</p>';
 	}
@@ -360,12 +363,15 @@ if (!empty($seopress_analysis_data['og_desc']['count'])) {
 
 	$count = $seopress_analysis_data['og_desc']['count'];
 
-	$all_og_desc = $seopress_analysis_data['og_desc']['values'];
+	$all_og_desc = isset($seopress_analysis_data['og_desc']['values']) ? $seopress_analysis_data['og_desc']['values'] : [];
 
 	if ($count > 1) {
 		$analyzes['social']['impact'] = 'high';
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:description in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one og:description in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:description tag from your source code. Below, the list:','wp-seopress').'</p>';
+	} elseif(empty($all_og_desc[0])) { //If og:description empty
+		$analyzes['social']['impact'] = 'high';
+		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph Description tag is empty!','wp-seopress').'</p>';
 	} else {
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('We found an Open Graph Description tag in your source code.','wp-seopress').'</p>';
 	}
@@ -389,10 +395,16 @@ if (!empty($seopress_analysis_data['og_img']['count'])) {
 
 	$count = $seopress_analysis_data['og_img']['count'];
 
-	$all_og_img = $seopress_analysis_data['og_img']['values'];
+	$all_og_img = isset($seopress_analysis_data['og_img']['values']) ? $seopress_analysis_data['og_img']['values'] : [];
 
-	if ($count > 0) {
+	if ($count > 0 && !empty($all_og_img[0])) {
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.sprintf(esc_html__('We found %d og:image in your content.','wp-seopress'), $count).'</p>';
+	}
+
+	//If og:image empty
+	if ($count > 0 && empty($all_og_img[0])) {
+		$analyzes['social']['impact'] = 'high';
+		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph Image tag is empty!','wp-seopress').'</p>';
 	}
 
 	if (!empty($all_og_img)) {
@@ -420,6 +432,9 @@ if (!empty($seopress_analysis_data['og_url']['count'])) {
 		$analyzes['social']['impact'] = 'high';
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:url in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one og:url in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:url tag from your source code. Below, the list:','wp-seopress').'</p>';
+	} elseif(empty($all_og_url[0])) { //If og:url empty
+		$analyzes['social']['impact'] = 'high';
+		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph URL tag is empty!','wp-seopress').'</p>';
 	} else {
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('We found an Open Graph URL tag in your source code.','wp-seopress').'</p>';
 	}
@@ -449,6 +464,9 @@ if (!empty($seopress_analysis_data['og_site_name']['count'])) {
 		$analyzes['social']['impact'] = 'high';
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:site_name in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one og:site_name in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:site_name tag from your source code. Below, the list:','wp-seopress').'</p>';
+	} elseif(empty($all_og_site_name[0])) { //If og:site_name empty
+		$analyzes['social']['impact'] = 'high';
+		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Open Graph Site Name tag is empty!','wp-seopress').'</p>';
 	} else {
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('We found an Open Graph Site Name tag in your source code.','wp-seopress').'</p>';
 	}
@@ -478,8 +496,11 @@ if (!empty($seopress_analysis_data['tw_title']['count'])) {
 		$analyzes['social']['impact'] = 'high';
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d twitter:title in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:title tag from your source code. Below, the list:','wp-seopress').'</p>';
+	} elseif(empty($all_tw_title[0])) { //If twitter:title empty
+		$analyzes['social']['impact'] = 'high';
+		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Twitter Title tag is empty!','wp-seopress').'</p>';
 	} else {
-		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('We found a Twitter Title Tag in your source code.','wp-seopress').'</p>';
+		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('We found a Twitter Title tag in your source code.','wp-seopress').'</p>';
 	}
 
 	if (!empty($all_tw_title)) {
@@ -501,12 +522,15 @@ if (!empty($seopress_analysis_data['tw_desc']['count'])) {
 
 	$count = $seopress_analysis_data['tw_desc']['count'];
 
-	$all_tw_desc = $seopress_analysis_data['tw_desc']['values'];
+	$all_tw_desc = isset($seopress_analysis_data['tw_desc']['values']) ? $seopress_analysis_data['tw_desc']['values'] : [];
 
 	if ($count > 1) {
 		$analyzes['social']['impact'] = 'high';
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d twitter:description in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:description tag from your source code. Below, the list:','wp-seopress').'</p>';
+	} elseif(empty($all_tw_desc[0])) { //If twitter:description empty
+		$analyzes['social']['impact'] = 'high';
+		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Twitter Description tag is empty!','wp-seopress').'</p>';
 	} else {
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.__('We found a Twitter Description tag in your source code.','wp-seopress').'</p>';
 	}
@@ -530,10 +554,16 @@ if (!empty($seopress_analysis_data['tw_img']['count'])) {
 
 	$count = $seopress_analysis_data['tw_img']['count'];
 
-	$all_tw_img = $seopress_analysis_data['tw_img']['values'];
+	$all_tw_img = isset($seopress_analysis_data['tw_img']['values']) ? $seopress_analysis_data['tw_img']['values'] : [];
 
-	if ($count > 0) {
+	if ($count > 0 && !empty($all_tw_img[0])) {
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.sprintf(esc_html__('We found %d twitter:image in your content.','wp-seopress'), $count).'</p>';
+	}
+
+	//If twitter:image:src empty
+	if ($count > 0 && empty($all_tw_img[0])) {
+		$analyzes['social']['impact'] = 'high';
+		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.__('Your Twitter Image tag is empty!','wp-seopress').'</p>';
 	}
 
 	if (!empty($all_tw_img)) {

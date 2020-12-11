@@ -44,6 +44,7 @@ function seopress_redirections_value($seopress_redirections_value) {
 	}
 }
 
+
 if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
 	echo '
 		<tr id="term-seopress" class="form-field">
@@ -52,6 +53,7 @@ if ( $pagenow =='term.php' || $pagenow =='edit-tags.php') {
 				<div id="seopress_cpt">
 					<div class="inside">';
 }
+
 
 echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'" data_tax="'.$data_tax.'">';
 		
@@ -126,9 +128,11 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
 							echo '<span id="seopress-tag-single-title" data-tag="%%post_title%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Title','wp-seopress').'</span>';
 						}
 						echo '<span id="seopress-tag-single-site-title" data-tag="%%sitetitle%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Site Title','wp-seopress').'</span>
-
-							<span id="seopress-tag-single-sep" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>
-						</div>
+							<span id="seopress-tag-single-sep" data-tag="%%sep%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Separator','wp-seopress').'</span>';
+							
+							echo seopress_render_dyn_variables("tag-title");
+	
+						echo '</div>
 
 						<p style="margin-bottom:0">
 							<label for="seopress_titles_desc_meta">'
@@ -152,6 +156,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
 						} else {
 							echo '<span id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%" class="tag-title"><span class="dashicons dashicons-plus"></span>'.__('Post Excerpt','wp-seopress').'</span>';
 						}
+						echo seopress_render_dyn_variables("tag-description");
 					echo '</div></div>';
 					
 					$toggle_preview = 1;
@@ -271,7 +276,7 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
 					if (($typenow =='post' || $typenow =='product') && ($pagenow == 'post.php' || $pagenow == 'post-new.php')) {
 						echo '<p>
 							<label for="seopress_robots_primary_cat_meta">'. __( 'Select a primary category', 'wp-seopress' ) .'</label>
-							<span class="description">'.__('Set the category that gets used in the %category% permalink if you have multiple categories.','wp-seopress').'</p>
+							<span class="description">'.__('Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories.','wp-seopress').'</p>
 							<select name="seopress_robots_primary_cat">';
 
 							$cats = get_categories();

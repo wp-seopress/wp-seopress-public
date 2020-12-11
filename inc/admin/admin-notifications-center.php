@@ -490,23 +490,35 @@
 								}
 							}
 						}
-						if (seopress_titles_noindex_option()=='1' || get_option('blog_public') !='1') { 
-							$args = [
-								'id' => 'notice-noindex',
-								'title' => __('Your site is not visible to Search Engines!','wp-seopress'),
-								'desc' => __('You have activated the blocking of the indexing of your site. If your site is under development, this is probably normal. Otherwise, check your settings. Delete this notification using the cross on the right if you are not concerned.','wp-seopress'),
-								'impact' => [
-									'high' => __('High impact','wp-seopress')
-								],
-								'link' => [
-									'en' => admin_url( 'options-reading.php' ),
-									'title' => __('Fix this!','wp-seopress'),
-									'external' => false
-								],
-								'icon' => 'dashicons-warning',
-								'deleteable' => true
-							];
-							seopress_notification($args);
+						function seopress_get_hidden_notices_noindex_option() {
+							$seopress_get_hidden_notices_noindex_option = get_option("seopress_notices");
+							if ( ! empty ( $seopress_get_hidden_notices_noindex_option ) ) {
+								foreach ($seopress_get_hidden_notices_noindex_option as $key => $seopress_get_hidden_notices_noindex_value)
+									$options[$key] = $seopress_get_hidden_notices_noindex_value;
+									if (isset($seopress_get_hidden_notices_noindex_option['notice-noindex'])) {
+										return $seopress_get_hidden_notices_noindex_option['notice-noindex'];
+									}
+							}
+						}
+						if(seopress_get_hidden_notices_noindex_option() !='1') {
+							if (seopress_titles_noindex_option()=='1' || get_option('blog_public') !='1') {
+								$args = [
+									'id' => 'notice-noindex',
+									'title' => __('Your site is not visible to Search Engines!','wp-seopress'),
+									'desc' => __('You have activated the blocking of the indexing of your site. If your site is under development, this is probably normal. Otherwise, check your settings. Delete this notification using the cross on the right if you are not concerned.','wp-seopress'),
+									'impact' => [
+										'high' => __('High impact','wp-seopress')
+									],
+									'link' => [
+										'en' => admin_url( 'options-reading.php' ),
+										'title' => __('Fix this!','wp-seopress'),
+										'external' => false
+									],
+									'icon' => 'dashicons-warning',
+									'deleteable' => true
+								];
+								seopress_notification($args);
+							}
 						}
 						if (get_option('blogname') =='') { 
 							$args = [
@@ -878,7 +890,7 @@
 					<li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.seopress.org/blog/" target="_blank"><?php _e('Our blog: SEO news, how-to, tips and tricks...','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
 					<li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.google.com/webmasters/tools/disavow-links-main" target="_blank"><?php _e('Upload a list of links to disavow to Google','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
 					<?php if ( !is_plugin_active( 'imageseo/imageseo.php' )) {
-						echo '<li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://imageseo.io?_from=seopress" target="_blank">'.__('Image SEO plugin to optimize your image ALT texts and names for Search Engines.','wp-seopress').'</a><span class="dashicons dashicons-external"></span></li>';
+						echo '<li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.seopress.org/go/image-seo" target="_blank">'.__('Image SEO plugin to optimize your image ALT texts and names for Search Engines.','wp-seopress').'</a><span class="dashicons dashicons-external"></span></li>';
 					} ?>
 					<li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://www.dareboost.com/en/home" target="_blank"><?php _e('Dareboost: Test, analyze and optimize your website','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>
 					<li><span class="dashicons dashicons-arrow-right-alt2"></span><a href="https://ga-dev-tools.appspot.com/campaign-url-builder/" target="_blank"><?php _e('Google Campaign URL Builder tool','wp-seopress'); ?></a><span class="dashicons dashicons-external"></span></li>

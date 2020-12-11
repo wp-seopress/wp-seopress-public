@@ -323,6 +323,13 @@ function sp_ca_toggle() {
 }
 
 jQuery(document).ready(function(e) {
+	//Tagify
+	var input = document.querySelector('input[id=seopress_analysis_target_kw_meta]');
+
+	new Tagify(input, {
+		originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
+	})
+
 	//default state
 	if (jQuery('#toggle-preview').attr('data-toggle') == '1') {
 		jQuery("#seopress_cpt .google-snippet-preview").addClass("mobile-preview");

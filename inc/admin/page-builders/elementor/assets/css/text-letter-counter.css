@@ -49,7 +49,9 @@
     margin-bottom: 10px;
 }
 
-.seopress-text-letter-counter  .tag-title, .seopress-option .tag-title {
+.seopress-text-letter-counter  .tag-title, 
+.seopress-option .tag-title,
+.seopress-option .seopress-tag-dropdown {
     padding: 4px 8px;
     position: relative;
     top: 5px;

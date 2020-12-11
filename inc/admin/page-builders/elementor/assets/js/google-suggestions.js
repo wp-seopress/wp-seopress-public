@@ -16,8 +16,10 @@ function seopress_google_suggest(data){
     var suggestions_array = raw_suggestions.split(',');
     
     var i;
-    for (i = 0; i < 10; i++) { 
-        document.getElementById('seopress_suggestions').innerHTML += '<li><a href=\"#\" class=\"sp-suggest-btn button button-small\">'+suggestions_array[i]+'</a></li>';
+    for (i = 0; i < suggestions_array.length; i++) {
+        if (suggestions_array[i] != null && suggestions_array[i] != undefined && suggestions_array[i] !='' && suggestions_array[i] !='[object Object]') {
+            document.getElementById('seopress_suggestions').innerHTML += '<li><a href=\"#\" class=\"sp-suggest-btn button button-small\">'+suggestions_array[i]+'</a></li>';
+        }
     }
 }
 
@@ -35,7 +37,7 @@ const getSuggestions = function(data) {
     }
 }
 
-var googleSuggestiosnView = elementor.modules.controls.BaseData.extend({
+var googleSuggestionsView = elementor.modules.controls.BaseData.extend({
     onReady: function () {
         console.log(this);
         console.log(elementor);
@@ -52,4 +54,4 @@ var googleSuggestiosnView = elementor.modules.controls.BaseData.extend({
     }
 });
 
-elementor.addControlView('seopress-google-suggestions', googleSuggestiosnView);
+elementor.addControlView('seopress-google-suggestions', googleSuggestionsView);

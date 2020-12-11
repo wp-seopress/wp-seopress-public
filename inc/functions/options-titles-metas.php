@@ -1386,6 +1386,9 @@ if (seopress_titles_nositelinkssearchbox_option()) {
 }
 
 //link rel prev/next
+if(seopress_advanced_advanced_trailingslash_option()){
+	add_filter( 'get_pagenum_link', 'user_trailingslashit' );
+}
 if (seopress_titles_paged_rel_option()) {
 	function seopress_titles_paged_rel_hook() {
 		global $paged;

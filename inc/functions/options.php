@@ -246,6 +246,18 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 				}
 		}
 	}
+
+	//Cookie expiration date
+	function seopress_google_analytics_cb_exp_date_option() {
+		$seopress_google_analytics_cb_exp_date_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_cb_exp_date_option ) ) {
+			foreach ($seopress_google_analytics_cb_exp_date_option as $key => $seopress_google_analytics_cb_exp_date_value)
+				$options[$key] = $seopress_google_analytics_cb_exp_date_value;
+				if (isset($seopress_google_analytics_cb_exp_date_option['seopress_google_analytics_cb_exp_date'])) {
+					return $seopress_google_analytics_cb_exp_date_option['seopress_google_analytics_cb_exp_date'];
+				}
+		}
+	}
 	
 	//User Consent JS
 	function seopress_google_analytics_cookies_js() {
@@ -255,9 +267,17 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 
 		wp_enqueue_script( 'seopress-cookies-ajax', plugins_url( 'assets/js/seopress-cookies-ajax' . $prefix . '.js', dirname( dirname( __FILE__ ) ) ), [ 'jquery', 'seopress-cookies' ], SEOPRESS_VERSION, true );
 
+		$days = 30;
+
+		if (seopress_google_analytics_cb_exp_date_option()) {
+			$days = seopress_google_analytics_cb_exp_date_option();
+		}
+		$days = apply_filters('seopress_cookies_expiration_days', $days);
+
 		$seopress_cookies_user_consent = [
 			'seopress_nonce'                => wp_create_nonce('seopress_cookies_user_consent_nonce'),
 			'seopress_cookies_user_consent' => admin_url('admin-ajax.php'),
+			'seopress_cookies_expiration_days' => $days,
 		];
 		wp_localize_script( 'seopress-cookies-ajax', 'seopressAjaxGAUserConsent', $seopress_cookies_user_consent );
 	}

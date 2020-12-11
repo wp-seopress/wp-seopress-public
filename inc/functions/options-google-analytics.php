@@ -160,6 +160,39 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			}
 		}
 
+		function seopress_google_analytics_cb_width_option() {
+			$seopress_google_analytics_cb_width_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_width_option ) ) {
+				foreach ($seopress_google_analytics_cb_width_option as $key => $seopress_google_analytics_cb_width_value)
+					$options[$key] = $seopress_google_analytics_cb_width_value;
+				 if (isset($seopress_google_analytics_cb_width_option['seopress_google_analytics_cb_width'])) {
+				 	return $seopress_google_analytics_cb_width_option['seopress_google_analytics_cb_width'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_backdrop_option() {
+			$seopress_google_analytics_cb_backdrop_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_backdrop_option ) ) {
+				foreach ($seopress_google_analytics_cb_backdrop_option as $key => $seopress_google_analytics_cb_backdrop_value)
+					$options[$key] = $seopress_google_analytics_cb_backdrop_value;
+				 if (isset($seopress_google_analytics_cb_backdrop_option['seopress_google_analytics_cb_backdrop'])) {
+				 	return $seopress_google_analytics_cb_backdrop_option['seopress_google_analytics_cb_backdrop'];
+				 }
+			}
+		}
+
+		function seopress_google_analytics_cb_backdrop_bg_option() {
+			$seopress_google_analytics_cb_backdrop_bg_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_backdrop_bg_option ) ) {
+				foreach ($seopress_google_analytics_cb_backdrop_bg_option as $key => $seopress_google_analytics_cb_backdrop_bg_value)
+					$options[$key] = $seopress_google_analytics_cb_backdrop_bg_value;
+				 if (isset($seopress_google_analytics_cb_backdrop_bg_option['seopress_google_analytics_cb_backdrop_bg'])) {
+				 	return $seopress_google_analytics_cb_backdrop_bg_option['seopress_google_analytics_cb_backdrop_bg'];
+				 }
+			}
+		}
+
 		function seopress_cookies_user_consent_html() {
 			if (seopress_google_analytics_opt_out_msg_option() !='') {
 				$msg = seopress_google_analytics_opt_out_msg_option();
@@ -188,19 +221,45 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$close_btn = __('X','wp-seopress');
 			}
 
-			$user_msg = '<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10"><p>'.$msg.'<button id="seopress-user-consent-accept" type="button" tabindex="11">'.$consent_btn.'</button><button type="button" id="seopress-user-consent-close" tabindex="12">'.$close_btn.'</button></p></div>';
+			$user_msg = '<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10">
+				<p>'.$msg.'</p>
+				<p>
+					<button id="seopress-user-consent-accept" type="button" tabindex="11">'.$consent_btn.'</button>
+					<button type="button" id="seopress-user-consent-close" tabindex="12">'.$close_btn.'</button>
+				</p>
+			</div>';
 
-		    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn);
+			$backdrop = '<div class="seopress-user-consent-backdrop"></div>';
 
-		    echo $user_msg;
+		    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn, $backdrop);
+
+		    echo $user_msg.$backdrop;
 		}
 
 		function seopress_cookies_user_consent_styles(){
-			$styles = '<style>.seopress-user-consent {position: fixed;z-index: 8000;width: 100%;padding: 10px;left: 0;text-align: center;';
+			$styles = '<style>.seopress-user-consent {left: 50%;transform: translate(-50%, -50%);position: fixed;z-index: 8000;padding: 30px;text-align: center;display: flex;justify-content: center;border: 1px solid #CCC;box-shadow: 0 0 10px rgb(204 204 204 / 0.5);border-radius: 5px;flex-wrap: wrap;max-width:100%;';
+			
+			//Width
+			if (seopress_google_analytics_cb_width_option() !='') {
+				$width = seopress_google_analytics_cb_width_option();
+				$needle = '%';
+				
+				if ( strpos( $width, $needle ) !== false )  {
+					$unit = '';
+				} else {
+					$unit = 'px';
+				}
+				
+				$styles .= 'width: '.$width.$unit.';';
+			} else {
+				$styles .= 'width:100%;';
+			}
 			
 			//Position
 			if (seopress_google_analytics_cb_pos_option() ==='top') {
 				$styles .= 'top:0;';
+			} elseif(seopress_google_analytics_cb_pos_option() ==='center') {
+				$styles .= 'top:45%;';
 			} else {
 				$styles .= 'bottom:0;';
 			}
@@ -212,14 +271,14 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$styles .= 'background:#F1F1F1;';
 			}
 
-			$styles .='}.seopress-user-consent p {margin: 0;font-size: 0.8em;justify-content: center;';
+			$styles .='}.seopress-user-consent p {margin: 0;font-size: 0.8em;justify-content: space-around;display: flex;flex-wrap: wrap;width: 100%;';
 
 			//Text color
 			if (seopress_google_analytics_cb_txt_col_option() !='') {
 				$styles .= 'color:'.seopress_google_analytics_cb_txt_col_option().';';
 			}
 
-			$styles .='}.seopress-user-consent button {vertical-align: middle;margin: 0 10px;font-size: 14px;';
+			$styles .='}.seopress-user-consent p:first-child {margin-bottom:20px} .seopress-user-consent button {vertical-align: middle;margin: 0;width: 50%;font-size: 14px;';
 
 			//Btn background color
 			if (seopress_google_analytics_cb_btn_bg_option() !='') {
@@ -243,8 +302,8 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$styles .= 'color:'.seopress_google_analytics_cb_btn_col_hov_option().';';
 			}
 
-			$styles .='}#seopress-user-consent-close{margin: 0 0 0 20px;position: relative;font-weight: bold;border: 1px solid #ccc;';
-
+			$styles .='}#seopress-user-consent-close{margin: 0;position: relative;font-weight: bold;border: 1px solid #ccc;';
+			
 			//Background secondary button
 			if (seopress_google_analytics_cb_btn_sec_bg_option() !='') {
 				$styles .= 'background:'.seopress_google_analytics_cb_btn_sec_bg_option().';';
@@ -284,8 +343,38 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$styles .= '}';
 			}
 
-			$styles .='.seopress-user-consent-hide{display:none;}</style>';
+			$styles .='.seopress-user-consent-hide{display:none;}';
 			
+			if (seopress_google_analytics_cb_backdrop_option() !='') {
+				
+				$bg_backdrop = 'rgba(0,0,0,.65)';
+				if (seopress_google_analytics_cb_backdrop_bg_option() !='') {
+					$bg_backdrop = seopress_google_analytics_cb_backdrop_bg_option();
+				}
+
+				$styles .='.seopress-user-consent-backdrop{-webkit-box-align: center;
+					-webkit-align-items: center;
+					-ms-flex-align: center;
+					align-items: center;
+					background: '.$bg_backdrop.';
+					bottom: 0;
+					-webkit-box-orient: vertical;
+					-webkit-box-direction: normal;
+					-webkit-flex-direction: column;
+					-ms-flex-direction: column;
+					flex-direction: column;
+					left: 0;
+					-webkit-overflow-scrolling: touch;
+					overflow-y: auto;
+					position: fixed;
+					right: 0;
+					-webkit-tap-highlight-color: transparent;
+					top: 0;
+					z-index: 100;}';
+			}
+
+			$styles .='</style>';
+
 			$styles = apply_filters('seopress_rgpd_full_message_styles', $styles);
 			
 			echo $styles;

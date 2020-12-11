@@ -275,6 +275,7 @@ function seopress_display_seo_term_metaboxe() {
         $seopress_redirections_type        = get_term_meta($term->term_id,'_seopress_redirections_type',true);
         $seopress_redirections_value       = get_term_meta($term->term_id,'_seopress_redirections_value',true);
 
+        require_once ( dirname( __FILE__ ) . '/admin-dyn-variables-helper.php'); //Dynamic variables
         require_once ( dirname( __FILE__ ) . '/admin-metaboxes-form.php'); //Metaboxe HTML
     }
 
