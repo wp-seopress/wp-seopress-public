@@ -42,17 +42,17 @@
 
 .elementor-control-field.seopress-content-analyses  .sp-tooltip .sp-tooltiptext::after,
 .elementor-control-field.seopress-content-analyses  .sp-tooltip .sp-tooltiptext::before {
-    border-bottom-style: solid;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-top: none;
-    margin-left: -10px;
-    content: "";
-    position: absolute;
-    height: 0;
-    width: 0;
-    line-height: 0;
-    left: 30px;
+	border-bottom-style: solid;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	border-top: none;
+	margin-left: -10px;
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	line-height: 0;
+	left: 30px;
 }
 
 .elementor-control-field.seopress-content-analyses .sp-tooltip .sp-tooltiptext::before, .sp-tooltip .sp-tooltiptext::after {
@@ -152,8 +152,8 @@
 
 .elementor-control-field.seopress-content-analyses .analysis-score p,
 .elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score p {
-    margin: 1em 0;
-    color: #333;
+	margin: 1em 0;
+	color: #333;
 	font-weight: bold;
 	font-size: 1.2em;
 }
@@ -232,12 +232,12 @@
 
 .elementor-control-field.seopress-content-analyses .gr-analysis-content .impact.high {
 	background: #e25950;
-    box-shadow: none;
-    color: #fff;
-    padding: 2px 4px;
-    margin-left: 5px;
-    border-radius: 4px;
-    font-weight: 700;
+	box-shadow: none;
+	color: #fff;
+	padding: 2px 4px;
+	margin-left: 5px;
+	border-radius: 4px;
+	font-weight: 700;
 }
 
 .elementor-control-field.seopress-content-analyses .gr-analysis .impact.good {
@@ -366,9 +366,9 @@
 }
 
 .elementor-control-field.seopress-content-analyses #seopress-analysis-tabs {
-    clear: both;
-    margin-top: 10px;
-    width: 100%;
+	clear: both;
+	margin-top: 10px;
+	width: 100%;
 }
 
 .elementor-control-field.seopress-content-analyses  .inside {
@@ -405,7 +405,7 @@
 	width: 100%;
 	box-sizing: border-box;
 }
- .dashicons-info,.elementor-control-field.seopress-content-analyses  .ui-tabs .ui-tabs-panel .dashicons-info,#seopress_pro_cpt .dashicons-info {
+.elementor-control-field.seopress-content-analyses .dashicons-info,.elementor-control-field.seopress-content-analyses  .ui-tabs .ui-tabs-panel .dashicons-info,#seopress_pro_cpt .dashicons-info {
 	font-size: 16px;
 	vertical-align: middle;
 	height: 16px;
@@ -423,7 +423,7 @@
 	border-radius: 0;
 	border-bottom: 3px solid #0085ba;
 }
- label,.elementor-control-field.seopress-content-analyses  #tabs-1 label,.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_breadcrumbs_meta],.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_canonical_meta],.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_primary_cat_meta],.elementor-control-field.seopress-content-analyses  #tabs-3 label,.elementor-control-field.seopress-content-analyses  #tabs-4 label,.elementor-control-field.seopress-content-analyses  #tabs-5 label,.elementor-control-field.seopress-content-analyses  #tabs-6 label,.elementor-control-field.seopress-content-analyses  .subsection-title {
+.elementor-control-field.seopress-content-analyses label,.elementor-control-field.seopress-content-analyses  #tabs-1 label,.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_breadcrumbs_meta],.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_canonical_meta],.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_primary_cat_meta],.elementor-control-field.seopress-content-analyses  #tabs-3 label,.elementor-control-field.seopress-content-analyses  #tabs-4 label,.elementor-control-field.seopress-content-analyses  #tabs-5 label,.elementor-control-field.seopress-content-analyses  #tabs-6 label,.elementor-control-field.seopress-content-analyses  .subsection-title {
 	display: block;
 	margin: 20px 0 5px;
 	font-weight: 700;
@@ -432,7 +432,7 @@
 .elementor-control-field.seopress-content-analyses  .wp-color-result {
 	margin: 0;
 }
- input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-1 input,.elementor-control-field.seopress-content-analyses  #tabs-2 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-3 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-3 textarea,.elementor-control-field.seopress-content-analyses  #tabs-4 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-5 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-6 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-6 textarea {
+.elementor-control-field.seopress-content-analyses input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-1 input,.elementor-control-field.seopress-content-analyses  #tabs-2 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-3 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-3 textarea,.elementor-control-field.seopress-content-analyses  #tabs-4 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-5 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-6 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-6 textarea {
 	width: 100%;
 	display: inline-block;
 }
@@ -442,20 +442,20 @@
 }
 
 .elementor-control-field.seopress-content-analyses .dashicons-no-alt, .elementor-control-field.seopress-content-analyses .dashicons-yes {
-    color: #fff;
-    background: #12bd10;
-    border-radius: 50px;
-    margin-right: 10px;
+	color: #fff;
+	background: #12bd10;
+	border-radius: 50px;
+	margin-right: 10px;
 }
 
 .elementor-control-field.seopress-content-analyses .dashicons-no-alt {
-    background: #e25950;
+	background: #e25950;
 }
 
 .elementor-control-field.seopress-content-analyses .gr-analysis-content p {
-    font-size: 13px;
-    line-height: 1.5;
-    margin: 1em 0;
+	font-size: 13px;
+	line-height: 1.5;
+	margin: 1em 0;
 }
 
 .elementor-control-field.seopress-content-analyses .gr-analysis-content ul {
@@ -465,13 +465,13 @@
 .elementor-control-field.seopress-content-analyses .gr-analysis-content li {
 	margin-bottom: 6px;
 	line-height: 1.4;
-    font-size: 13px;
+	font-size: 13px;
 }
 
 #seopress_launch_analysis {
 	background-color: #6d7882;
 	-webkit-box-shadow: 0 0 2px rgba(0,0,0,.12), 0 2px 2px rgba(0,0,0,.2);
-    box-shadow: 0 0 2px rgba(0,0,0,.12), 0 2px 2px rgba(0,0,0,.2);
+	box-shadow: 0 0 2px rgba(0,0,0,.12), 0 2px 2px rgba(0,0,0,.2);
 }
 
 #seopress_launch_analysis:hover {
