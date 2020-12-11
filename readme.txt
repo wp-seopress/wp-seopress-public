@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 4.1.5
+Stable tag: 4.1.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,6 +310,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 8. Installation Wizard
 
 == Changelog ==
+= 4.1.5.1 =
+* FIX DomDocument issue if "Automatically set the image Alt text from target keywords option" is enabled
 = 4.1.5 =
 * NEW Google Place ID field for Local Business Widget (SEO, PRO, Local Business) to display POI when clicking on the map link (PRO)
 * INFO Exclude posts and terms from XML sitemaps if custom canonical URL set from SEO metabox

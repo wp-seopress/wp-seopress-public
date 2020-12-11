@@ -225,39 +225,29 @@ if (seopress_advanced_advanced_image_auto_alt_target_kw_option() !='') {
 	add_filter( 'wp_get_attachment_image_attributes', 'seopress_auto_img_alt_thumb_target_kw', 10, 2 );
 
 	function seopress_auto_img_alt_target_kw($content) {
-			if ($content =='') {
-				return $content;
-			}
-
-			$dom = new domDocument;
-			$internalErrors = libxml_use_internal_errors(true);
-			
-			if (function_exists('mb_convert_encoding')) {
-				$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED); //Remove doctype, HTML/Body tags
-			} else {
-				$dom->loadHTML('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED); //Remove doctype, HTML/Body tags
-			}
-
-			$dom->preserveWhiteSpace = false;
-
-			if ($dom->getElementsByTagName('img') !='') {
-				$images = $dom->getElementsByTagName('img');
-			}
-			
-			libxml_use_internal_errors($internalErrors);
-
-			if ((isset($images) && !empty ($images) && $images->length>=1)) {
-				foreach($images as $img) {
-					if ($img->getAttribute('alt') =='') {
-						if (get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true) !='') {
-							$img = $img->setAttribute('alt', htmlspecialchars(esc_html(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true))));
-						}
-					}
-				}
-			}
-			$content = $dom->saveHTML($dom->documentElement); //Fix encoding
-
+		if ($content =='') {
 			return $content;
+		}
+
+		$regex = '#<img[^>]* alt=(?:\"|\')(?<alt>([^"]*))(?:\"|\')[^>]*>#mU';
+		preg_match_all($regex, $content, $matches);
+
+		$matchesAlt = $matches['alt'];
+		
+		if (empty($matchesAlt)) {
+			return $content;
+		}
+		
+		foreach ($matchesAlt as $key => $alt) {
+			if (!empty($alt)) {
+				continue;
+			}
+			if (get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true) !='') {
+				$alt = htmlspecialchars(esc_html(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)));
+			}
+		}
+
+		return $content;
 	}
 	add_filter('the_content', 'seopress_auto_img_alt_target_kw', 20, 1);
 }
