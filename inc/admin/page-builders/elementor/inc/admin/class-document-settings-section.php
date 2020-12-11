@@ -646,6 +646,10 @@ class Document_Settings_Section {
 	 * @return  void
 	 */
 	public function on_seopress_meta_save( $post_id ) {
+		if ( ! class_exists( '\Elementor\Core\Settings\Manager' ) ) {
+			return;
+		}
+
 		$meta = get_post_meta( $post_id );
 
 		$seopress_meta = array_filter(
@@ -668,12 +672,14 @@ class Document_Settings_Section {
 
 		$seo_data['settings'] = $settings;
 
-		if ( ! class_exists( '\Elementor\Core\Settings\Manager' ) ) {
-			return;
-		}
-
+		$page_settings = get_metadata( 'post', $post_id, \Elementor\Core\Settings\Page\Manager::META_KEY, true);
+		$settings = array_merge( $page_settings, $settings );
+		
+		remove_action( 'seopress/page-builders/elementor/save_meta', [ $this, 'on_seopress_meta_save' ], 99 );
 		$page_settings_manager = \Elementor\Core\Settings\Manager::get_settings_managers( 'page' );
+		$page_settings_manager->ajax_before_save_settings( $settings, $post_id );
 		$page_settings_manager->save_settings( $settings, $post_id );
+		add_action( 'seopress/page-builders/elementor/save_meta', [ $this, 'on_seopress_meta_save' ], 99 );
 	}
 
 	public function get_allowed_meta_keys() {

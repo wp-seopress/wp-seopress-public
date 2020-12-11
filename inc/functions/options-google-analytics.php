@@ -193,6 +193,17 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			}
 		}
 
+		function seopress_google_analytics_cb_txt_align_option() {
+			$seopress_google_analytics_cb_txt_align_option = get_option("seopress_google_analytics_option_name");
+			if ( ! empty ( $seopress_google_analytics_cb_txt_align_option ) ) {
+				foreach ($seopress_google_analytics_cb_txt_align_option as $key => $seopress_google_analytics_cb_txt_align_value)
+					$options[$key] = $seopress_google_analytics_cb_txt_align_value;
+				 if (isset($seopress_google_analytics_cb_txt_align_option['seopress_google_analytics_cb_txt_align'])) {
+				 	return $seopress_google_analytics_cb_txt_align_option['seopress_google_analytics_cb_txt_align'];
+				 }
+			}
+		}
+
 		function seopress_cookies_user_consent_html() {
 			if (seopress_google_analytics_opt_out_msg_option() !='') {
 				$msg = seopress_google_analytics_opt_out_msg_option();
@@ -237,7 +248,7 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 		}
 
 		function seopress_cookies_user_consent_styles(){
-			$styles = '<style>.seopress-user-consent {left: 50%;transform: translate(-50%, -50%);position: fixed;z-index: 8000;padding: 30px;text-align: center;display: flex;justify-content: center;border: 1px solid #CCC;box-shadow: 0 0 10px rgb(204 204 204 / 0.5);border-radius: 5px;flex-wrap: wrap;max-width:100%;';
+			$styles = '<style>.seopress-user-consent {left: 50%;position: fixed;z-index: 8000;padding: 20px;display: block;border: 1px solid #CCC;max-width:100%;';
 			
 			//Width
 			if (seopress_google_analytics_cb_width_option() !='') {
@@ -258,10 +269,22 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 			//Position
 			if (seopress_google_analytics_cb_pos_option() ==='top') {
 				$styles .= 'top:0;';
+				$styles .= 'transform: translate(-50%, 0%);';
 			} elseif(seopress_google_analytics_cb_pos_option() ==='center') {
 				$styles .= 'top:45%;';
+				$styles .= 'transform: translate(-50%, -50%);';
 			} else {
 				$styles .= 'bottom:0;';
+				$styles .= 'transform: translate(-50%, 0);';
+			}
+
+			//Text alignment
+			if (seopress_google_analytics_cb_txt_align_option() ==='left') {
+				$styles .= 'text-align:left;';
+			} elseif(seopress_google_analytics_cb_pos_option() ==='right') {
+				$styles .= 'text-align:right;';
+			} else {
+				$styles .= 'text-align:center;';
 			}
 
 			//Background color
@@ -271,14 +294,14 @@ if (seopress_google_analytics_disable_option() =='1' && ( (empty($_COOKIE["seopr
 				$styles .= 'background:#F1F1F1;';
 			}
 
-			$styles .='}.seopress-user-consent p {margin: 0;font-size: 0.8em;justify-content: space-around;display: flex;flex-wrap: wrap;width: 100%;';
+			$styles .='}.seopress-user-consent p:first-child {margin-bottom:20px}.seopress-user-consent p {margin: 0;font-size: 0.8em;align-self: center;';
 
 			//Text color
 			if (seopress_google_analytics_cb_txt_col_option() !='') {
 				$styles .= 'color:'.seopress_google_analytics_cb_txt_col_option().';';
 			}
 
-			$styles .='}.seopress-user-consent p:first-child {margin-bottom:20px} .seopress-user-consent button {vertical-align: middle;margin: 0;width: 50%;font-size: 14px;';
+			$styles .='}.seopress-user-consent button {vertical-align: middle;margin: 0;font-size: 14px;';
 
 			//Btn background color
 			if (seopress_google_analytics_cb_btn_bg_option() !='') {

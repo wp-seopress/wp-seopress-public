@@ -2123,6 +2123,14 @@ class seopress_options
 		);
 
 		add_settings_field(
+			'seopress_google_analytics_cb_txt_align', // ID
+			__("Text alignment","wp-seopress"), // Title
+			array( $this, 'seopress_google_analytics_cb_txt_align_callback' ), // Callback
+			'seopress-settings-admin-google-analytics-gdpr', // Page
+			'seopress_setting_section_google_analytics_gdpr' // Section
+		);
+
+		add_settings_field(
 			'seopress_google_analytics_cb_width', // ID
 			__("Cookie bar width","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_cb_width_callback' ), // Callback
@@ -5093,6 +5101,29 @@ class seopress_options
 
 		if (isset($this->options['seopress_google_analytics_cb_pos'])) {
 			esc_attr( $this->options['seopress_google_analytics_cb_pos']);
+		}
+	}
+
+	public function seopress_google_analytics_cb_txt_align_callback()
+	{
+		$options = get_option( 'seopress_google_analytics_option_name' );
+
+		$selected = isset($options['seopress_google_analytics_cb_txt_align']) ? $options['seopress_google_analytics_cb_txt_align'] : 'center';
+
+		echo '<select id="seopress_google_analytics_cb_txt_align" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_txt_align]">';
+			echo ' <option '; 
+				if ('left' == $selected) echo 'selected="selected"'; 
+				echo ' value="left">'. __("Left","wp-seopress") .'</option>';
+			echo ' <option ';
+				if ('center' == $selected) echo 'selected="selected"'; 
+				echo ' value="center">'. __("Center (default)","wp-seopress") .'</option>';
+			echo ' <option ';
+				if ('top' == $selected) echo 'selected="selected"'; 
+				echo ' value="right">'. __("Right","wp-seopress") .'</option>';
+		echo '</select>';
+
+		if (isset($this->options['seopress_google_analytics_cb_txt_align'])) {
+			esc_attr( $this->options['seopress_google_analytics_cb_txt_align']);
 		}
 	}
 

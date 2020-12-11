@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 4.1
+Stable tag: 4.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -308,6 +308,13 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 8. Installation Wizard
 
 == Changelog ==
+= 4.1.1 =
+* NEW Add "Text alignment" option for cookie bar
+* INFO Improved cookie bar design
+* FIX Redirections capabilities
+* FIX Elementor compatibility
+* FIX Fatal error with PHP <= 7.3
+* FIX Notice: Trying to get property 'post_type' of non-object in /wp-content/plugins/wp-seopress/inc/admin/adminbar.php on line 68
 = 4.1 =
 * NEW Add FAQ schema to Toggle / Accordion widgets with Elementor (PRO) 🎉
 * NEW Dropdown for meta title / meta description to quickly add dynamic variables! 🎉

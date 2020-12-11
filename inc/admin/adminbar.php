@@ -65,7 +65,7 @@ function seopress_admin_bar_links() {
 			));
 
 			//noindex/nofollow per CPT
-			if (function_exists('get_current_screen') && get_current_screen()->post_type !='') {
+			if (function_exists('get_current_screen') && get_current_screen() != NULL) {
 				$robots = '';
 
 				$options = get_option( 'seopress_titles_option_name' );
