@@ -288,7 +288,7 @@ class seopress_options
 					<li><span>'.__('%%currentyear%%','wp-seopress').'</span>'.__('Current year','wp-seopress').'</li>
 					<li><span>'.__('%%currentdate%%','wp-seopress').'</span>'.__('Current date','wp-seopress').'</li>
 					<li><span>'.__('%%currenttime%%','wp-seopress').'</span>'.__('Current time','wp-seopress').'</li>
-					<li><span>'.__('%%author_bio%%','wp-seopress').'</span>'.__('Author bio, meta desc only','wp-seopress').'</li>
+					<li><span>'.__('%%author_bio%%','wp-seopress').'</span>'.__('Author biography (description), meta desc only','wp-seopress').'</li>
 					<li><span>'.__('%%currentmonth_num%%','wp-seopress').'</span>'.__('Current month in digital format','wp-seopress').'</li>
 				</ul>
 			'.wp_oembed_get('https://www.youtube.com/watch?v=HEa8m9u4mOk', array('width'=>530));
@@ -358,6 +358,10 @@ class seopress_options
 		?>
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
 		<?php
+		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
+			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+		}
+
 		global $wp_version, $title;
 		$current_tab = '';
 		$tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
@@ -381,7 +385,7 @@ class seopress_options
 			echo '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to enable this feature','wp-seopress').'</span>';
 			echo '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>'.__('Click to disable this feature','wp-seopress').'</span>';
 		}
-		
+
 		echo '<div id="seopress-notice-save" style="display: none"><span class="dashicons dashicons-yes"></span><span class="html"></span></div>';
 
 		echo '</'.$tag.'>';
@@ -426,6 +430,9 @@ class seopress_options
 		?>
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option" name="seopress-flush">
 		<?php 
+		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
+			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+		}
 		global $wp_version, $title;
 		$current_tab = '';
 		$tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
@@ -489,7 +496,11 @@ class seopress_options
 		}
 		?>
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
-		<?php 
+		<?php
+		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
+			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+		}
+
 		global $wp_version, $title;
 		$current_tab = '';
 		$tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
@@ -555,7 +566,11 @@ class seopress_options
 		}
 		?>
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
-		<?php 
+		<?php
+		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
+			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+		}
+
 		global $wp_version, $title;
 		$current_tab = '';
 		$tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
@@ -643,7 +658,10 @@ class seopress_options
 		?>
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
 		<?php 
-		
+		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
+			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+		}
+
 		global $wp_version, $title;
 		$current_tab = '';
 		$tag = version_compare( $wp_version, '4.4' ) >= 0 ? 'h1' : 'h2';
@@ -2050,6 +2068,14 @@ class seopress_options
 		);
 
 		add_settings_field(
+			'seopress_google_analytics_ga4', // ID
+			__("Enter your measurement ID (GA4)","wp-seopress"), // Title
+			array( $this, 'seopress_google_analytics_ga4_callback' ), // Callback
+			'seopress-settings-admin-google-analytics-enable', // Page
+			'seopress_setting_section_google_analytics_enable' // Section
+		);
+
+		add_settings_field(
 			'seopress_google_analytics_roles', // ID
 			__("Exclude user roles from tracking (Google Analytics and Matomo)","wp-seopress"), // Title
 			array( $this, 'seopress_google_analytics_roles_callback' ), // Callback
@@ -2528,6 +2554,14 @@ class seopress_options
 			'seopress_setting_section_google_analytics_matomo' // Section
 		);
 
+		add_settings_field(
+			'seopress_google_analytics_matomo_no_heatmaps', // ID
+			__("Disable all heatmaps and session recordings","wp-seopress"), // Title
+			array( $this, 'seopress_google_analytics_matomo_no_heatmaps_callback' ), // Callback
+			'seopress-settings-admin-google-analytics-matomo', // Page
+			'seopress_setting_section_google_analytics_matomo' // Section
+		);
+
 		//Advanced SECTION=========================================================================
 		add_settings_section( 
 			'seopress_setting_section_advanced_advanced', // ID
@@ -2971,6 +3005,7 @@ class seopress_options
 			'seopress_social_facebook_admin_id',
 			'seopress_social_facebook_app_id',
 			'seopress_google_analytics_ua',
+			'seopress_google_analytics_ga4',
 			'seopress_google_analytics_download_tracking',
 			'seopress_google_analytics_opt_out_msg',
 			'seopress_google_analytics_opt_out_msg_ok',
@@ -4975,6 +5010,19 @@ class seopress_options
 		
 	}
 
+	public function seopress_google_analytics_ga4_callback()
+	{
+		$check = isset($this->options['seopress_google_analytics_ga4']) ? $this->options['seopress_google_analytics_ga4'] : NULL;
+
+		printf(
+		'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ga4]" placeholder="'.esc_html__('Enter your measurement ID (G-XXXXXXXXXX)','wp-seopress').'" aria-label="'.__('Enter your measurement ID','wp-seopress').'" value="%s"/>',
+		esc_html( $check )
+		);
+
+		echo '<p class="seopress-help description"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/analytics/answer/9539598?hl=en&ref_topic=9303319" target="_blank">'.__('Find your measurement ID','wp-seopress').'</a></p>';
+		
+	}
+
 	public function seopress_google_analytics_disable_callback()
 	{
 		$options = get_option( 'seopress_google_analytics_option_name' );
@@ -5293,7 +5341,7 @@ class seopress_options
 			if ('1' == $check) echo 'checked="yes"'; 
 			echo ' value="1"/>';
 			
-			echo '<label for="seopress_google_analytics_roles_'.$key.'">'. $value .'</label><br/>';
+			echo '<label for="seopress_google_analytics_roles_'.$key.'"><strong>'. $value . '</strong> (<em>' . translate_user_role(  $value,  'default' ) . '</em>)' .'</label><br/>';
 
 			if (isset($this->options['seopress_google_analytics_roles'][$key])) {
 				esc_attr( $this->options['seopress_google_analytics_roles'][$key]);
@@ -5861,6 +5909,23 @@ class seopress_options
 		
 		if (isset($this->options['seopress_google_analytics_matomo_link_tracking'])) {
 			esc_attr( $this->options['seopress_google_analytics_matomo_link_tracking']);
+		}
+	}
+
+	public function seopress_google_analytics_matomo_no_heatmaps_callback()
+	{
+		$options = get_option( 'seopress_google_analytics_option_name' );
+		
+		$check = isset($options['seopress_google_analytics_matomo_no_heatmaps']);
+		
+		echo '<input id="seopress_google_analytics_matomo_no_heatmaps" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_no_heatmaps]" type="checkbox"';
+		if ('1' == $check) echo 'checked="yes"'; 
+		echo ' value="1"/>';
+		
+		echo '<label for="seopress_google_analytics_matomo_no_heatmaps">'. __( 'Disabling all heatmaps and session recordings', 'wp-seopress' ) .'</label>';
+
+		if (isset($this->options['seopress_google_analytics_matomo_no_heatmaps'])) {
+			esc_attr( $this->options['seopress_google_analytics_matomo_no_heatmaps']);
 		}
 	}
 
@@ -6654,7 +6719,7 @@ class seopress_options
 			if ('1' == $check) echo 'checked="yes"'; 
 			echo ' value="1"/>';
 			
-			echo '<label for="seopress_advanced_security_metaboxe_role_'.$key.'">'. $value .'</label><br/>';
+			echo '<label for="seopress_advanced_security_metaboxe_role_'.$key.'"><strong>'. $value . '</strong> (<em>' . translate_user_role(  $value,  'default' ) . '</em>)' .'</label><br/>';
 
 			if (isset($this->options['seopress_advanced_security_metaboxe_role'][$key])) {
 				esc_attr( $this->options['seopress_advanced_security_metaboxe_role'][$key]);
@@ -6687,7 +6752,7 @@ class seopress_options
 			if ('1' == $check) echo 'checked="yes"';
 			echo ' value="1"/>';
 			
-			echo '<label for="seopress_advanced_security_metaboxe_ca_role_'.$key.'">'. $value .'</label><br/>';
+			echo '<label for="seopress_advanced_security_metaboxe_ca_role_'.$key.'"><strong>'. $value . '</strong> (<em>' . translate_user_role(  $value,  'default' ) . '</em>)' .'</label><br/>';
 
 			if (isset($this->options['seopress_advanced_security_metaboxe_ca_role'][$key])) {
 				esc_attr( $this->options['seopress_advanced_security_metaboxe_ca_role'][$key]);

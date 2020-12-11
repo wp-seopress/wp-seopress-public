@@ -1,8 +1,8 @@
-Great people who contributed to this plugin :
+Great people who contributed to this plugin:
 
 Developers:
 - Benjamin Denis: contact@seopress.org / @wp_seopress
-- Thomas Deneulin: @gmulti
+- Thomas Deneulin: @tdeneulin
 - Julio Potier: @juliobox
 - Mickael Gris: @mgris
 
@@ -30,6 +30,7 @@ Integrations (https://www.seopress.org/integrations/):
 - The Weglot team
 - The TranslatePress team
 - The Elementor team
+- The Oxygen Team
 
 Translators:
 - 🇺🇸 English (UK) (English (UK)) - professional translation</li>

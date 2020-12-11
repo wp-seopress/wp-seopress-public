@@ -66,27 +66,29 @@ function seopress_xml_sitemap_single_term() {
 
 	$termslist = new WP_Term_Query( $args );
 
-	foreach ( $termslist->terms as $term ) {
+	if( ! empty( $termslist ) ){
+		foreach ( $termslist->terms as $term ) {
 
-		if (!get_term_meta( $term, '_seopress_robots_index', true) && !get_term_meta( $term, '_seopress_robots_canonical', true)) {
-			$seopress_sitemaps_url = '';
-			// array with all the information needed for a sitemap url
-			$seopress_url = [
-				'loc' => htmlspecialchars(urldecode(esc_url(get_term_link($term)))),
-				'mod' => '',
-				'images' => []
-			];
+			if (!get_term_meta( $term, '_seopress_robots_index', true) && !get_term_meta( $term, '_seopress_robots_canonical', true)) {
+				$seopress_sitemaps_url = '';
+				// array with all the information needed for a sitemap url
+				$seopress_url = [
+					'loc' => htmlspecialchars(urldecode(esc_url(get_term_link($term)))),
+					'mod' => '',
+					'images' => []
+				];
 
-			$seopress_sitemaps_url .= "\n";
-			$seopress_sitemaps_url .= '<url>';
-			$seopress_sitemaps_url .= "\n";
-			$seopress_sitemaps_url .= '<loc>';
-			$seopress_sitemaps_url .= $seopress_url['loc'];
-			$seopress_sitemaps_url .= '</loc>';
-			$seopress_sitemaps_url .= "\n";
-			$seopress_sitemaps_url .= '</url>';
+				$seopress_sitemaps_url .= "\n";
+				$seopress_sitemaps_url .= '<url>';
+				$seopress_sitemaps_url .= "\n";
+				$seopress_sitemaps_url .= '<loc>';
+				$seopress_sitemaps_url .= $seopress_url['loc'];
+				$seopress_sitemaps_url .= '</loc>';
+				$seopress_sitemaps_url .= "\n";
+				$seopress_sitemaps_url .= '</url>';
 
-			$seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
+				$seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
+			}
 		}
 	}
 	$seopress_sitemaps .= '</urlset>';

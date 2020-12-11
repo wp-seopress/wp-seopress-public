@@ -1,3 +1,9 @@
+@keyframes sp-fade-in-out {
+	0% {opacity: 0;bottom:0;visibility: hidden}
+	25% {opacity: 1;bottom:40px;visibility: visible}
+	75% {opacity: 1;visibility: visible}
+	100% {opacity: 0;visibility:hidden}
+}
 #adminmenu div.wp-menu-image.dashicons-admin-seopress::before, #seopress-header #seopress-admin h1::before {
 	content: "\e800";
 	font-family: seopress !important;
@@ -3014,4 +3020,39 @@ body.seopress-styles {
 }
 #seopress_content_analysis .wrap-insights-post .sp-tooltip-headings {
 	font-weight: bold;
+}
+.components-snackbar-list {
+	position: fixed;
+	right: 0;
+	bottom: 40px;
+	padding-left: 16px;
+	padding-right: 16px;
+	animation-name: sp-fade-in-out;
+  	animation-duration: 5s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	visibility: hidden;
+	z-index: 1;
+}
+.components-snackbar__content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	line-height: 1.4;
+}
+.components-snackbar {
+	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+	font-size: 13px;
+	background-color: #32373c;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0,0,0,.3);
+	color: #fff;
+	padding: 16px 24px;
+	width: 100%;
+	max-width: 600px;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.components-snackbar .dashicons {
+	color:#fff;
 }

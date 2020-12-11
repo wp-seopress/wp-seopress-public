@@ -136,6 +136,18 @@ function seopress_google_analytics_matomo_link_tracking_option() {
 	}
 }
 
+//Matomo no heatmaps
+function seopress_google_analytics_matomo_no_heatmaps_option() {
+	$seopress_google_analytics_matomo_no_heatmaps_option = get_option("seopress_google_analytics_option_name");
+	if ( ! empty ( $seopress_google_analytics_matomo_no_heatmaps_option ) ) {
+		foreach ($seopress_google_analytics_matomo_no_heatmaps_option as $key => $seopress_google_analytics_matomo_no_heatmaps_value)
+			$options[$key] = $seopress_google_analytics_matomo_no_heatmaps_value;
+			if (isset($seopress_google_analytics_matomo_no_heatmaps_option['seopress_google_analytics_matomo_no_heatmaps'])) {
+				return $seopress_google_analytics_matomo_no_heatmaps_option['seopress_google_analytics_matomo_no_heatmaps'];
+			}
+	}
+}
+
 //Build Custom Matomo
 function seopress_matomo_js($echo) {
 	if (seopress_google_analytics_matomo_id_option() !='' && seopress_google_analytics_matomo_site_id_option() !='') {
@@ -196,6 +208,12 @@ var _paq = window._paq || [];\n";
 		if (seopress_google_analytics_matomo_link_tracking_option() =='1') {
 			$seopress_matomo_config['link_tracking'] = "_paq.push(['enableLinkTracking']);\n";
 			$seopress_matomo_config['link_tracking'] = apply_filters('seopress_matomo_link_tracking', $seopress_matomo_config['link_tracking']);
+		}
+
+		//no heatmaps
+		if (seopress_google_analytics_matomo_no_heatmaps_option() =='1') {
+			$seopress_matomo_config['no_heatmaps'] = "_paq.push(['HeatmapSessionRecording::disable']);\n";
+			$seopress_matomo_config['no_heatmaps'] = apply_filters('seopress_matomo_no_heatmaps', $seopress_matomo_config['no_heatmaps']);
 		}
 
 		//dimensions

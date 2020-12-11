@@ -16,7 +16,9 @@ function seopress_xml_sitemap_index_xsl() {
 	
 	if (function_exists('pll_home_url')) {
         $home_url = site_url().'/';
-    }
+	}
+	
+	$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
 
 	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"
 				xmlns:html="http://www.w3.org/TR/REC-html40"

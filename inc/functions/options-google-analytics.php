@@ -710,7 +710,7 @@ function seopress_google_analytics_remove_from_cart_option() {
 
 //Build Custom GA
 function seopress_google_analytics_js($echo) {
-	if (seopress_google_analytics_ua_option() !='' && seopress_google_analytics_enable_option() =='1') {
+	if ((seopress_google_analytics_ua_option() !='' || seopress_google_analytics_ga4_option() !='') && seopress_google_analytics_enable_option() =='1') {
 		//Init
 		$seopress_google_analytics_config = array();
 		$seopress_google_analytics_event = array();
@@ -985,10 +985,20 @@ $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 		}
 
 		//UA
-		$seopress_gtag_ua = "gtag('config', '".seopress_google_analytics_ua_option()."' ".$features.");";
-		$seopress_gtag_ua = apply_filters('seopress_gtag_ua', $seopress_gtag_ua);
-		$seopress_google_analytics_html .= $seopress_gtag_ua;
-		$seopress_google_analytics_html .= "\n";
+		if (seopress_google_analytics_ua_option() !='') {
+			$seopress_gtag_ua = "gtag('config', '".seopress_google_analytics_ua_option()."' ".$features.");";
+			$seopress_gtag_ua = apply_filters('seopress_gtag_ua', $seopress_gtag_ua);
+			$seopress_google_analytics_html .= $seopress_gtag_ua;
+			$seopress_google_analytics_html .= "\n";
+		}
+
+		//Measurement ID
+		if (seopress_google_analytics_ga4_option() !='') {
+			$seopress_gtag_ga4 = "gtag('config', '".seopress_google_analytics_ga4_option()."');";
+			$seopress_gtag_ga4 = apply_filters('seopress_gtag_ga4', $seopress_gtag_ga4);
+			$seopress_google_analytics_html .= $seopress_gtag_ga4;
+			$seopress_google_analytics_html .= "\n";
+		}
 
 		//Ads
 		if (seopress_google_analytics_ads_option() !='') {
@@ -1109,7 +1119,7 @@ if (seopress_google_analytics_half_disable_option() =='1' || (((isset($_COOKIE["
 				if( array_key_exists( $seopress_user_role, seopress_google_analytics_roles_option())) {
 					//do nothing
 				} else {
-					if (seopress_google_analytics_enable_option() =='1' && seopress_google_analytics_ua_option() !='') {
+					if (seopress_google_analytics_enable_option() =='1' && (seopress_google_analytics_ua_option() !='' || seopress_google_analytics_ga4_option() !='')) {
 						add_action( 'wp_head', 'seopress_google_analytics_js_arguments', 999, 1 );
 						add_action( 'wp_head', 'seopress_custom_tracking_hook', 1000, 1 );
 					}	
@@ -1129,7 +1139,7 @@ if (seopress_google_analytics_half_disable_option() =='1' || (((isset($_COOKIE["
 					add_action( 'ct_before_builder', 'seopress_custom_tracking_body_hook', 1020, 1 );
 				}
 			} else {
-				if (seopress_google_analytics_enable_option() =='1' && seopress_google_analytics_ua_option() !='') {
+				if (seopress_google_analytics_enable_option() =='1' && (seopress_google_analytics_ua_option() !='' || seopress_google_analytics_ga4_option() !='')) {
 					add_action( 'wp_head', 'seopress_google_analytics_js_arguments', 999, 1 );
 					add_action( 'wp_head', 'seopress_custom_tracking_hook', 1000, 1 );
 				}
@@ -1150,7 +1160,7 @@ if (seopress_google_analytics_half_disable_option() =='1' || (((isset($_COOKIE["
 			}
 		}
 	} else {
-		if (seopress_google_analytics_enable_option() =='1' && seopress_google_analytics_ua_option() !='') {
+		if (seopress_google_analytics_enable_option() =='1' && (seopress_google_analytics_ua_option() !='' || seopress_google_analytics_ga4_option() !='')) {
 			add_action( 'wp_head', 'seopress_google_analytics_js_arguments', 999, 1 );
 			add_action( 'wp_head', 'seopress_custom_tracking_hook', 1000, 1 );
 		}

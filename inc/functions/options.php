@@ -187,6 +187,18 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 		}
 	}
 
+	//GA4 (measurement ID)
+	function seopress_google_analytics_ga4_option() {
+		$seopress_google_analytics_ga4_option = get_option("seopress_google_analytics_option_name");
+		if ( ! empty ( $seopress_google_analytics_ga4_option ) ) {
+			foreach ($seopress_google_analytics_ga4_option as $key => $seopress_google_analytics_ga4_value)
+				$options[$key] = $seopress_google_analytics_ga4_value;
+				if (isset($seopress_google_analytics_ga4_option['seopress_google_analytics_ga4'])) {
+					return $seopress_google_analytics_ga4_option['seopress_google_analytics_ga4'];
+				}
+		}
+	}
+
 	//User roles
 	function seopress_google_analytics_roles_option() {
 		$seopress_google_analytics_roles_option = get_option("seopress_google_analytics_option_name");
@@ -365,7 +377,7 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 	}
 
 	function seopress_cookies_user_consent() {
-		check_ajax_referer( 'seopress_cookies_user_consent_nonce', $_GET['_ajax_nonce'], true );
+		//check_ajax_referer( 'seopress_cookies_user_consent_nonce', $_GET['_ajax_nonce'], true );
 		if (seopress_google_analytics_half_disable_option() =='1') {//no user consent required
 			wp_send_json_success();
 		} else {

@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 4.1.6
+Version: 4.2
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '4.1.6' );
+define( 'SEOPRESS_VERSION', '4.2' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +108,9 @@ function seopress_init($hook) {
 	if ( did_action( 'elementor/loaded' ) ) {
 		include_once dirname( __FILE__ ) . '/inc/admin/page-builders/elementor/elementor-addon.php';
 	}
+
+	//Block Editor
+	include_once dirname( __FILE__ ) . '/inc/admin/page-builders/gutenberg/gutenberg-addon.php';
 }
 add_action('plugins_loaded', 'seopress_init', 999);
 
@@ -370,6 +373,19 @@ function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_sch
 	return $url;
 }
 
+/**
+ * Remove third-parties metaboxes on our CPT
+ * @author Benjamin Denis
+ * @since 4.2
+ */
+add_action( 'do_meta_boxes' , 'seopress_remove_metaboxes', 10 );
+function seopress_remove_metaboxes() {
+	//Oxygen Builder
+	remove_meta_box('ct_views_cpt','seopress_404','normal');
+	remove_meta_box('ct_views_cpt','seopress_schemas','normal');
+	remove_meta_box('ct_views_cpt','seopress_bot','normal');
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Credits footer
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -480,6 +496,7 @@ function seopress_get_post_types() {
 		$post_types['seopress_backlinks'],
 		$post_types['seopress_404'],
 		$post_types['elementor_library'],
+		$post_types['customer_discount'],
 		$post_types['cuar_private_file'],
 		$post_types['cuar_private_page'],
 		$post_types['ct_template']

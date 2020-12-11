@@ -1,12 +1,12 @@
 === SEOPress ===
 Authors: rainbowgeek
-Contributors: rainbowgeek, juliobox, maigret, mgris, gmulti
+Contributors: rainbowgeek, gmulti, juliobox, maigret, mgris
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
-Tested up to: 5.5
+Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.1.6
+Stable tag: 4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,12 +14,12 @@ Boost your SEO with SEOPress, a simple, fast and powerful SEO plugin for WordPre
 
 == Description ==
 
-SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage redirections 301 and so much more.<br>
+SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
 ✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
-✔ <strong>Content analysis to help you write search-engine optimized content</strong>
+✔ <strong>Content analysis to help you write content optimized for search engines</strong>
 ✔ <strong>Import your post and term metadatas from other plugins in 1 click</strong>
-✔ <strong>Trusted by 100,000 WordPress websites since 2017.</strong>
+✔ <strong>Trusted by over 150,000 WordPress websites since 2017.</strong>
 
 <a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / year / unlimited sites</strong></a>
 
@@ -219,6 +219,14 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 	<li><a href="https://www.seopress.org/account/your-tickets/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Email (PRO only)</a></li>
 </ul>
 
+<h3>Branding guidelines</h3>
+SEOPress is a registered trademark of SEOPress SASU. When writing about SEOPress plugin, please make sure to write it correctly.
+
+SEOPress (correct)
+Seopress (incorrect)
+seo press (incorrect)
+SEOpress (incorrect)
+
 <h3>SEOPress featured on</h3>
 <ul>
 	<li>WP Beginner</li>
@@ -310,6 +318,32 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 8. Installation Wizard
 
 == Changelog ==
+= 4.2 = <a href="https://www.seopress.org/blog/unlimited-manual-schemas-google-analytics-v4-seopress-4-2/">Read our blog post update</a>
+* NEW WordPress 5.6 compatibility 🎉
+* NEW Unlimited manual schemas per post / page / post type (PRO) 🎉
+* NEW Google Analytics v4 compatibility 🎉
+* NEW FAQ block (with schema) for Block Editor (Gutenberg) 🎉
+* NEW CRON to request Google Analytics stats in WP Dashboard hourly to improve performance (PRO)
+* NEW 'seopress_gtag_ga4' hook to filter Google Analytics measurement ID (https://www.seopress.org/support/hooks/filter-measurement-id-for-google-analytics-v4/)
+* NEW 'seopress_matomo_no_heatmaps' hook to filter heatmaps and session recordings deactivation for Matomo (https://www.seopress.org/support/hooks/disable-heatmaps-and-session-recordings-for-matomo/)
+* NEW Automatically add Oxygen images to XML Image sitemaps
+* NEW Disable heatmaps and session recordings option for Matomo
+* NEW Make Local Business and Rich snippet publisher logo options translatable with WPML and Polylang
+* NEW 'seopress_sitemaps_home_url' hook to filter home_url in XSL (sitemaps stylesheet) (https://www.seopress.org/support/hooks/filter-home_url-in-xml-sitemaps/)
+* INFO Change stats in dashboard frequency update from 1 to 2 hours
+* INFO Add visual feedback when saving settings
+* INFO Automatically remove SEOPress from EDD customer_discount post type
+* INFO Remove Oxygen metabox from Redirections and Schemas post types
+* FIX Change "Thing" to "Brand" for Brand property in Product schema
+* FIX 403 error on cookie bar Ajax request
+* FIX Error: Uncaught exception 'Error' with message 'Call to a member function get_id() on bool' 
+* FIX Uncaught Error: Call to undefined function seopress_local_business_page_option() in specific cases
+* FIX Compatibility issue with MalCure plugin
+* FIX Warning: Invalid argument supplied for foreach() in template-xml-sitemaps-single-term.php on line 69
+* FIX Enhanced Ecommerce tracking by adding order status check
+* FIX Title and meta description templates for Author archives with no posts (props @wpchannel)
+* FIX White label hide SEOPress' links option
+* FIX Video sitemap issue
 = 4.1.6 =
 * NEW Import your redirect categories when importing redirects from CSV file
 * NEW 'seopress_sitemaps_home_url' hook to filter home_url in XML sitemaps (https://www.seopress.org/support/hooks/filter-home_url-in-xml-sitemaps/)
