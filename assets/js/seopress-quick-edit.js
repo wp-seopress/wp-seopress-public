@@ -28,6 +28,8 @@
          var $seopress_desc = $( '#seopress_desc-' + $post_id ).text();
          var $seopress_tkw = $( '#seopress_tkw-' + $post_id ).text();
          var $seopress_canonical = $( '#seopress_canonical-' + $post_id ).text();
+         var $seopress_noindex = $( '#post-' + $post_id + ' .column-seopress_noindex' ).html();
+         var $seopress_nofollow = $( '#post-' + $post_id + ' .column-seopress_nofollow' ).html();
          var $seopress_redirections_enable = $( '#post-' + $post_id + ' .column-seopress_404_redirect_enable' ).html();
          var $seopress_redirections_type = $( '#post-' + $post_id + ' .column-seopress_404_redirect_type' ).text();
          var $seopress_redirections_value = $( '#post-' + $post_id + ' .column-seopress_404_redirect_value' ).text();
@@ -37,7 +39,15 @@
          $edit_row.find( 'textarea[name="seopress_desc"]' ).val( $seopress_desc );
          $edit_row.find( 'input[name="seopress_tkw"]' ).val( $seopress_tkw );
          $edit_row.find( 'input[name="seopress_canonical"]' ).val( $seopress_canonical );
-         
+
+         if ($seopress_noindex.includes('<span class="dashicons dashicons-hidden"></span>')) {
+            $edit_row.find( 'input[name="seopress_noindex"]' ).prop('checked', true );
+         }
+
+         if ($seopress_nofollow.includes('<span class="dashicons dashicons-yes"></span>')) {
+            $edit_row.find( 'input[name="seopress_nofollow"]' ).prop('checked', true );
+         }
+
          if( $seopress_redirections_enable == '<span class="dashicons dashicons-yes"></span>' ) {
             $edit_row.find( 'input[name="seopress_redirections_enabled"]' ).prop('checked', true );
          }

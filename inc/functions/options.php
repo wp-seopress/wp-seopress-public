@@ -270,7 +270,7 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 				}
 		}
 	}
-	
+
 	//User Consent JS
 	function seopress_google_analytics_cookies_js() {
 		$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -311,7 +311,7 @@ if (seopress_get_toggle_option('google-analytics') =='1') {
 		check_ajax_referer( 'seopress_analytics_nonce' );
 
 		$items_purchased = [];
-
+        $final = [];
 		// Extract cart
 		global $woocommerce;
 		foreach ( $woocommerce->cart->get_cart() as $key => $item ) {
@@ -517,7 +517,7 @@ if (seopress_get_toggle_option('advanced') =='1') {
 	function seopress_titles_primary_cat_hook($cats_0,  $cats,  $post) {
 		$primary_cat	= NULL;
 		global $post;
-		
+
 		if ($post) {
 			$_seopress_robots_primary_cat = get_post_meta($post->ID,'_seopress_robots_primary_cat',true);
 			if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {
@@ -539,7 +539,7 @@ if (seopress_get_toggle_option('advanced') =='1') {
 
 	function seopress_titles_primary_wc_cat_hook( $terms_0, $terms, $post ) {
 		$primary_cat	= NULL;
-		
+
 		$id = get_the_ID();
 
 		if (function_exists('wc_get_product')) {
@@ -547,7 +547,7 @@ if (seopress_get_toggle_option('advanced') =='1') {
 		}
 		if ($post) {
 			$_seopress_robots_primary_cat = get_post_meta($id,'_seopress_robots_primary_cat',true);
-			
+
 			if (isset($_seopress_robots_primary_cat) && $_seopress_robots_primary_cat !='' && $_seopress_robots_primary_cat !='none') {
 				if ($post->post_type !=NULL && $post->post_type =='product') {
 					$primary_cat = get_term($_seopress_robots_primary_cat, 'product_cat');
@@ -563,7 +563,7 @@ if (seopress_get_toggle_option('advanced') =='1') {
 			return $terms_0;
 		}
 	}
-	add_filter( 'wc_product_post_type_link_product_cat', 'seopress_titles_primary_wc_cat_hook', 10, 3 ); 
+	add_filter( 'wc_product_post_type_link_product_cat', 'seopress_titles_primary_wc_cat_hook', 10, 3 );
 
 	//No /category/ in URL
 	function seopress_advanced_advanced_category_url_option() {
@@ -650,7 +650,7 @@ if (seopress_get_toggle_option('advanced') =='1') {
 			}
 
 			$category_base = get_option( 'category_base' );
-			
+
 			if ($category_base !='') {
 				if (preg_match('/\/'.$category_base.'\//', $current_url)) {
 					$new_url = str_replace('/'.$category_base, '', $current_url);

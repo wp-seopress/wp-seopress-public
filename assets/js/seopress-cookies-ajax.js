@@ -2,6 +2,7 @@
 jQuery(document).ready(function($) {
 	if(Cookies.get('seopress-user-consent-close') ==undefined && Cookies.get('seopress-user-consent-accept') ==undefined) {
 		$('.seopress-user-consent').removeClass('seopress-user-consent-hide');
+		$('.seopress-user-consent-backdrop').removeClass('seopress-user-consent-hide');
 	}
 	$('#seopress-user-consent-accept').on('click', function() {
 		$('.seopress-user-consent').remove();

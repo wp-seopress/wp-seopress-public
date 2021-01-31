@@ -50,7 +50,7 @@ function seopress_import_settings() {
 	}
 	if( ! current_user_can( seopress_capability( 'manage_options', 'import_settings' ) ) ) {
 		return;
-	} 
+	}
 
 	$extension = pathinfo( $_FILES['import_file']['name'], PATHINFO_EXTENSION );
 
@@ -58,7 +58,7 @@ function seopress_import_settings() {
 		wp_die( __( 'Please upload a valid .json file', 'wp-seopress' ) );
 	}
 	$import_file = $_FILES['import_file']['tmp_name'];
-	
+
 	if( empty( $import_file ) ) {
 		wp_die( __( 'Please upload a file to import', 'wp-seopress' ) );
 	}
@@ -121,9 +121,9 @@ function seopress_import_redirections_settings() {
 	if( ! current_user_can( seopress_capability( 'manage_options', 'import_settings' ) ) ) {
 		return;
 	}
-	
+
 	$extension = pathinfo( $_FILES['import_file']['name'], PATHINFO_EXTENSION );
-	
+
 	if( $extension != 'csv' ) {
 		wp_die( __( 'Please upload a valid .csv file', 'wp-seopress' ) );
 	}
@@ -150,7 +150,7 @@ function seopress_import_redirections_settings() {
 
 	//Remove duplicates from CSV
 	$csv = array_unique($csv, SORT_REGULAR);
-	
+
 	foreach ($csv as $key => $value) {
 		$csv_line = $value;
 
@@ -168,7 +168,7 @@ function seopress_import_redirections_settings() {
 		}
 
 		//Fifth column: redirections query param
-		if (!empty($csv_line[4])) { 
+		if (!empty($csv_line[4])) {
 			if ($csv_line[4] =='exact_match' || $csv_line[4] =='with_ignored_param' || $csv_line[4] =='without_param') {
 				$csv_type_redirects[4] = $csv_line[4];
 			} else {
@@ -177,7 +177,7 @@ function seopress_import_redirections_settings() {
 		}
 
 		//Seventh column: redirect categories
-		if (!empty($csv_line[6])) { 
+		if (!empty($csv_line[6])) {
 			$cats = array_values(explode(',',$csv_line[6]));
 			$cats = array_map( 'intval', $cats );
 			$cats = array_unique( $cats );
@@ -189,13 +189,13 @@ function seopress_import_redirections_settings() {
 				$count = $csv_line[5];
 			}
 			$id = wp_insert_post([
-					'post_title' => rawurldecode($csv_line[0]), 
-					'post_type' => 'seopress_404', 
-					'post_status' => 'publish', 
+					'post_title' => rawurldecode($csv_line[0]),
+					'post_type' => 'seopress_404',
+					'post_status' => 'publish',
 					'meta_input' => [
 						'_seopress_redirections_value'      => rawurldecode($csv_line[1]),
-						'_seopress_redirections_type'       => $csv_type_redirects[2], 
-						'_seopress_redirections_enabled'    => $csv_type_redirects[3], 
+						'_seopress_redirections_type'       => $csv_type_redirects[2],
+						'_seopress_redirections_enabled'    => $csv_type_redirects[3],
 						'_seopress_redirections_param'      => $csv_type_redirects[4],
 						'seopress_404_count'                => $count
 					],
@@ -224,8 +224,8 @@ function seopress_import_yoast_redirections() {
 	}
 	if( ! current_user_can( seopress_capability( 'manage_options', 'import_settings' ) ) ) {
 		return;
-	} 
-	
+	}
+
 	$extension = pathinfo( $_FILES['import_file']['name'], PATHINFO_EXTENSION );
 
 	if( $extension != 'csv' ) {
@@ -262,13 +262,13 @@ function seopress_import_yoast_redirections() {
 				}
 			}
 			$id = wp_insert_post([
-				'post_title'        => urldecode($csv_line[0]), 
-				'post_type'         => 'seopress_404', 
-				'post_status'       => 'publish', 
+				'post_title'        => urldecode($csv_line[0]),
+				'post_type'         => 'seopress_404',
+				'post_status'       => 'publish',
 				'meta_input'        => [
-					'_seopress_redirections_value'          => urldecode($csv_line[1]), 
-					'_seopress_redirections_type'           => $csv_type_redirects[2], 
-					'_seopress_redirections_enabled'        => $csv_type_redirects[3], 
+					'_seopress_redirections_value'          => urldecode($csv_line[1]),
+					'_seopress_redirections_type'           => $csv_type_redirects[2],
+					'_seopress_redirections_enabled'        => $csv_type_redirects[3],
 					'_seopress_redirections_param'          => $csv_type_redirects[4]
 				]
 			]);
@@ -396,7 +396,7 @@ function seopress_export_redirections_htaccess_settings() {
 					$type = 'redirect 451 ';
 					break;
 			}
-			
+
 			$redirects_html .= $type . ' /' . untrailingslashit( urldecode( urlencode( esc_attr( wp_filter_nohtml_kses( get_the_title() ) ) ) ) ) . ' ';
 			$redirects_html .= urldecode( urlencode( esc_attr( wp_filter_nohtml_kses( get_post_meta( get_the_ID(),'_seopress_redirections_value',true ) ) ) ) );
 			$redirects_html .= "\n";
@@ -425,7 +425,7 @@ function seopress_import_redirections_plugin_settings() {
 	if( ! current_user_can( seopress_capability( 'manage_options', 'import_settings' ) ) ) {
 		return;
 	}
-	
+
 	$extension = pathinfo( $_FILES['import_file']['name'], PATHINFO_EXTENSION );
 
 	if( $extension != 'json' ) {
@@ -493,7 +493,7 @@ function seopress_import_rk_redirections() {
 		return;
 
 	$extension = pathinfo( $_FILES['import_file']['name'], PATHINFO_EXTENSION );
-	
+
 	if( $extension != 'txt' ) {
 		wp_die( __( 'Please upload a valid .txt file' ) );
 	}
@@ -597,7 +597,7 @@ function seopress_clean_all() {
 		FROM `' . $wpdb->prefix . 'posts` AS `posts`
 		LEFT JOIN `' . $wpdb->prefix . 'postmeta` AS `pm` ON `pm`.`post_id` = `posts`.`ID`
 		WHERE `posts`.`post_type` = \'seopress_404\'';
-	
+
 	$sql = $wpdb->prepare($sql);
 
 	$wpdb->query($sql);
@@ -762,6 +762,7 @@ function seopress_download_batch_export() {
 			$csv_fields[] = 'noarchive';
 			$csv_fields[] = 'nosnippet';
 			$csv_fields[] = 'canonical_url';
+			$csv_fields[] = 'primary_cat';
 			$csv_fields[] = 'redirect_active';
 			$csv_fields[] = 'redirect_type';
 			$csv_fields[] = 'redirect_url';

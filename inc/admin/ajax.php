@@ -1,477 +1,480 @@
 <?php
-defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
+
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Get real preview + content analysis
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_do_real_preview() {
-	check_ajax_referer( 'seopress_real_preview_nonce', $_GET['_ajax_nonce'], true );
+    check_ajax_referer('seopress_real_preview_nonce', $_GET['_ajax_nonce'], true);
 
-	if ( current_user_can( 'edit_posts' ) && is_admin() ) {
-		
-		//Get cookies
-		if (isset($_COOKIE)) {
-			$cookies = array();
+    if (current_user_can('edit_posts') && is_admin()) {
+        //Get cookies
+        if (isset($_COOKIE)) {
+            $cookies = [];
 
-			foreach ( $_COOKIE as $name => $value ) {
-				if ( 'PHPSESSID' !== $name ) {
-					$cookies[] = new WP_Http_Cookie( ['name' => $name, 'value' => $value] );
-				}
-			}
-		}
+            foreach ($_COOKIE as $name => $value) {
+                if ('PHPSESSID' !== $name) {
+                    $cookies[] = new WP_Http_Cookie(['name' => $name, 'value' => $value]);
+                }
+            }
+        }
 
-		//Get post id
-		if ( isset( $_GET['post_id'] ) ) {
-			$seopress_get_the_id = $_GET['post_id'];
-		}
+        //Get post id
+        if (isset($_GET['post_id'])) {
+            $seopress_get_the_id = $_GET['post_id'];
+        }
 
-		if (get_post_meta($seopress_get_the_id,'_seopress_redirections_enabled',true) =='yes') {
-			$data['title'] = __('A redirect is active for this URL. Turn it off to get the Google preview and content analysis.', 'wp-seopress');
-		} else {
-			//Get cookies
-			if (isset($_COOKIE)) { 
-				$cookies = [];
-		
-				foreach ( $_COOKIE as $name => $value ) {
-					if ( 'PHPSESSID' !== $name ) {
-						$cookies[] = new WP_Http_Cookie( [ 'name' => $name, 'value' => $value ] );
-					}
-				}
-			}
+        if ('yes' == get_post_meta($seopress_get_the_id, '_seopress_redirections_enabled', true)) {
+            $data['title'] = __('A redirect is active for this URL. Turn it off to get the Google preview and content analysis.', 'wp-seopress');
+        } else {
+            //Get cookies
+            if (isset($_COOKIE)) {
+                $cookies = [];
 
-			//Get post type
-			if ( isset( $_GET['post_type'] ) ) {
-				$seopress_get_post_type = $_GET['post_type'];
-			} else {
-				$seopress_get_post_type = NULL;
-			} 
+                foreach ($_COOKIE as $name => $value) {
+                    if ('PHPSESSID' !== $name) {
+                        $cookies[] = new WP_Http_Cookie(['name' => $name, 'value' => $value]);
+                    }
+                }
+            }
 
-			//Origin
-			if ( isset( $_GET['origin'] ) ) {
-				$seopress_origin = $_GET['origin'];
-			}
-			
-			//Tax name
-			if ( isset( $_GET['tax_name'] ) ) {
-				$seopress_tax_name = $_GET['tax_name'];
-			}
+            //Get post type
+            if (isset($_GET['post_type'])) {
+                $seopress_get_post_type = $_GET['post_type'];
+            } else {
+                $seopress_get_post_type = null;
+            }
 
-			//Init
-			$title = '';
-			$meta_desc = '';
-			$data = [];
+            //Origin
+            if (isset($_GET['origin'])) {
+                $seopress_origin = $_GET['origin'];
+            }
 
-			//Save Target KWs
-			if (!isset($_GET['is_elementor'])) {
-				if(isset($_GET['seopress_analysis_target_kw'])) {
-					delete_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw');
-					update_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', sanitize_text_field($_GET['seopress_analysis_target_kw']));
-				}
-			}
+            //Tax name
+            if (isset($_GET['tax_name'])) {
+                $seopress_tax_name = $_GET['tax_name'];
+            }
 
-			//Fix Elementor
-			if (isset($_GET['is_elementor']) && $_GET['is_elementor'] == true) {
-				$_GET['seopress_analysis_target_kw'] = get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true);
-			}
+            //Init
+            $title     = '';
+            $meta_desc = '';
+            $data      = [];
 
-			//DOM
-			$dom = new DOMDocument();
-			$internalErrors = libxml_use_internal_errors(true);
-			$dom->preserveWhiteSpace = false;
-			
-			//Get source code
-			$args = array(
-				'blocking' => true,
-				'timeout'  => 30,
-				'sslverify'   => false,
-			);
+            //Save Target KWs
+            if ( ! isset($_GET['is_elementor'])) {
+                if (isset($_GET['seopress_analysis_target_kw'])) {
+                    delete_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw');
+                    update_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', sanitize_text_field($_GET['seopress_analysis_target_kw']));
+                }
+            }
 
-			if (isset($cookies) && !empty($cookies)) {
-				$args['cookies'] = $cookies;
-			}
-			$args = apply_filters('seopress_real_preview_remote', $args);
-			
-			$data['title'] = $cookies;
-			
-			if ($seopress_origin =='post') { //Default: post type
-				$response = wp_remote_get(get_preview_post_link((int)$seopress_get_the_id,array('no_admin_bar' => 1)), $args);
-			} else { //Term taxonomy
-				$response = wp_remote_get(get_term_link((int)$seopress_get_the_id, $seopress_tax_name), $args);
-			}
-			//Check for error
-			if ( is_wp_error( $response ) || wp_remote_retrieve_response_code($response) =='404' ) {
-				$data['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
-			} else {
-				$response = wp_remote_retrieve_body($response);
+            //Fix Elementor
+            if (isset($_GET['is_elementor']) && true == $_GET['is_elementor']) {
+                $_GET['seopress_analysis_target_kw'] = get_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', true);
+            }
 
-				if($dom->loadHTML('<?xml encoding="utf-8" ?>' .$response)) {
+            //DOM
+            $dom                     = new DOMDocument();
+            $internalErrors          = libxml_use_internal_errors(true);
+            $dom->preserveWhiteSpace = false;
 
-					if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
-						$data = get_post_meta($seopress_get_the_id, '_seopress_analysis_data', true) ? get_post_meta($seopress_get_the_id, '_seopress_analysis_data', true) : $data = [];
-						
-						if (!empty($data)) { 
-							$data = array_slice($data, 0, 3);
-						}
-					}
-					
-					//Disable wptexturize
-					add_filter('run_wptexturize', '__return_false');
+            //Get source code
+            $args = [
+                'blocking'    => true,
+                'timeout'     => 30,
+                'sslverify'   => false,
+            ];
 
-					//Get post content (used for Words counter)
-					$seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
+            if (isset($cookies) && ! empty($cookies)) {
+                $args['cookies'] = $cookies;
+            }
+            $args = apply_filters('seopress_real_preview_remote', $args);
 
-					//Themify compatibility
-					if ( defined( 'THEMIFY_DIR' ) ) {
-						$seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
-					}
+            $data['title'] = $cookies;
 
-					//BeTheme is activated
-					$theme = wp_get_theme();
-					if ( 'betheme' == $theme->template || 'Betheme' == $theme->parent_theme ) {
-						$seopress_get_the_content = $seopress_get_the_content.get_post_meta($seopress_get_the_id, 'mfn-page-items-seo', true); 
-					}
+            if ('post' == $seopress_origin) { //Default: post type
+                $response = wp_remote_get(get_preview_post_link((int) $seopress_get_the_id, ['no_admin_bar' => 1]), $args);
+            } else { //Term taxonomy
+                $response = wp_remote_get(get_term_link((int) $seopress_get_the_id, $seopress_tax_name), $args);
+            }
+            //Check for error
+            if (is_wp_error($response) || '404' == wp_remote_retrieve_response_code($response)) {
+                $data['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
+            } else {
+                $response = wp_remote_retrieve_body($response);
 
-					//Add WC product excerpt
-					if ($seopress_get_post_type =='product') {
-						$seopress_get_the_content =  $seopress_get_the_content.get_the_excerpt($seopress_get_the_id);
-					}
+                if ($dom->loadHTML('<?xml encoding="utf-8" ?>' . $response)) {
+                    if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
+                        $data = get_post_meta($seopress_get_the_id, '_seopress_analysis_data', true) ? get_post_meta($seopress_get_the_id, '_seopress_analysis_data', true) : $data = [];
 
-					$seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
+                        if ( ! empty($data)) {
+                            $data = array_slice($data, 0, 3);
+                        }
+                    }
 
-					//Get Target Keywords
-					if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
-						$data['target_kws'] = strtolower(stripslashes_deep($_GET['seopress_analysis_target_kw']));
-						$seopress_analysis_target_kw = array_filter(explode(',', strtolower(get_post_meta($seopress_get_the_id,'_seopress_analysis_target_kw',true))));
-						
-						//Manage keywords with special characters
-						foreach ($seopress_analysis_target_kw as $key => $kw) {
-							$kw = str_replace("-", " ", $kw);//remove dashes
-							$seopress_analysis_target_kw[] = htmlspecialchars_decode($kw,ENT_QUOTES);
-						}
-						
-						//Remove duplicates
-						$seopress_analysis_target_kw = array_unique($seopress_analysis_target_kw);
-					}
-					
-					$xpath = new DOMXPath($dom);
+                    //Disable wptexturize
+                    add_filter('run_wptexturize', '__return_false');
 
-					//Title
-					$list = $dom->getElementsByTagName("title");
-					if ($list->length > 0) {
-						$title = $list->item(0)->textContent;
-						$data['title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($title)));
-						if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
-							foreach ($seopress_analysis_target_kw as $kw) {
-								if (preg_match_all('#\b('.$kw.')\b#iu', $data['title'], $m)) {
-									$data['meta_title']['matches'][$kw][] = $m[0];
-								}
-							}
-						}
-					}
+                    //Get post content (used for Words counter)
+                    $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
 
-					//Meta desc
-					$meta_description = $xpath->query('//meta[@name="description"]/@content');
+                    //Themify compatibility
+                    if (defined('THEMIFY_DIR')) {
+                        $seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
+                    }
 
-					foreach ($meta_description as $key=>$mdesc) {
-						$data['meta_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags($mdesc->nodeValue))));
-					}
+                    //BeTheme is activated
+                    $theme = wp_get_theme();
+                    if ('betheme' == $theme->template || 'Betheme' == $theme->parent_theme) {
+                        $seopress_get_the_content = $seopress_get_the_content . get_post_meta($seopress_get_the_id, 'mfn-page-items-seo', true);
+                    }
 
-					if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
-						if (!empty($meta_description)) {
-							foreach ($meta_description as $meta_desc) {
-								foreach ($seopress_analysis_target_kw as $kw) {
-									if (preg_match_all('#\b('.$kw.')\b#iu', $meta_desc->nodeValue, $m)) {
-										$data['meta_description']['matches'][$kw][] = $m[0];
-									}
-								}
-							}
-						}
-					}
-					
-					//OG:title
-					$og_title = $xpath->query('//meta[@property="og:title"]/@content');
-					
-					if (!empty($og_title)) {
-						$data['og_title']['count'] = count($og_title);
-						foreach ($og_title as $key=>$mogtitle) {
-							$data['og_title']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogtitle->nodeValue)));
-						}
-					}
+                    //Add WC product excerpt
+                    if ('product' == $seopress_get_post_type) {
+                        $seopress_get_the_content =  $seopress_get_the_content . get_the_excerpt($seopress_get_the_id);
+                    }
 
-					//OG:description
-					$og_desc = $xpath->query('//meta[@property="og:description"]/@content');
+                    $seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
 
-					if (!empty($og_desc)) {
-						$data['og_desc']['count'] = count($og_desc);
-						foreach ($og_desc as $key=>$mog_desc) {
-							$data['og_desc']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_desc->nodeValue)));
-						}
-					}
+                    //Get Target Keywords
+                    if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
+                        $data['target_kws']          = esc_html(strtolower(stripslashes_deep($_GET['seopress_analysis_target_kw'])));
+                        $seopress_analysis_target_kw = array_filter(explode(',', strtolower(get_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', true))));
 
-					//OG:image
-					$og_img = $xpath->query('//meta[@property="og:image"]/@content');
+                        //Manage keywords with special characters
+                        foreach ($seopress_analysis_target_kw as $key => $kw) {
+                            $kw                            = str_replace('-', ' ', $kw); //remove dashes
+                            $seopress_analysis_target_kw[] = htmlspecialchars_decode($kw, ENT_QUOTES);
+                        }
 
-					if (!empty($og_img)) {
-						$data['og_img']['count'] = count($og_img);
-						foreach ($og_img as $key=>$mog_img) {
-							$data['og_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_img->nodeValue)));
-						}
-					}
+                        //Remove duplicates
+                        $seopress_analysis_target_kw = array_unique($seopress_analysis_target_kw);
+                    }
 
-					//OG:url
-					$og_url = $xpath->query('//meta[@property="og:url"]/@content');
+                    $xpath = new DOMXPath($dom);
 
-					if (!empty($og_url)) {
-						$data['og_url']['count'] = count($og_url);
-						foreach ($og_url as $key=>$mog_url) {
-							$url = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_url->nodeValue)));
-							$data['og_url']['values'][] = $url;
-							$url = wp_parse_url($url);
-							$data['og_url']['host'] = $url['host'];
-						}
-					}
+                    //Title
+                    $list = $dom->getElementsByTagName('title');
+                    if ($list->length > 0) {
+                        $title         = $list->item(0)->textContent;
+                        $data['title'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($title)));
+                        if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
+                            foreach ($seopress_analysis_target_kw as $kw) {
+                                if (preg_match_all('#\b(' . $kw . ')\b#iu', $data['title'], $m)) {
+                                    $data['meta_title']['matches'][$kw][] = $m[0];
+                                }
+                            }
+                        }
+                    }
 
-					//OG:site_name
-					$og_site_name = $xpath->query('//meta[@property="og:site_name"]/@content');
+                    //Meta desc
+                    $meta_description = $xpath->query('//meta[@name="description"]/@content');
 
-					if (!empty($og_site_name)) {
-						$data['og_site_name']['count'] = count($og_site_name);
-						foreach ($og_site_name as $key=>$mog_site_name) {
-							$data['og_site_name']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_site_name->nodeValue)));
-						}
-					}
+                    foreach ($meta_description as $key=>$mdesc) {
+                        $data['meta_desc'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags($mdesc->nodeValue))));
+                    }
 
-					//Twitter:title
-					$tw_title = $xpath->query('//meta[@name="twitter:title"]/@content');
+                    if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
+                        if ( ! empty($meta_description)) {
+                            foreach ($meta_description as $meta_desc) {
+                                foreach ($seopress_analysis_target_kw as $kw) {
+                                    if (preg_match_all('#\b(' . $kw . ')\b#iu', $meta_desc->nodeValue, $m)) {
+                                        $data['meta_description']['matches'][$kw][] = $m[0];
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-					if (!empty($tw_title)) {
-						$data['tw_title']['count'] = count($tw_title);
-						foreach ($tw_title as $key=>$mtw_title) {
-							$data['tw_title']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_title->nodeValue)));
-						}
-					}
+                    //OG:title
+                    $og_title = $xpath->query('//meta[@property="og:title"]/@content');
 
-					//Twitter:description
-					$tw_desc = $xpath->query('//meta[@name="twitter:description"]/@content');
+                    if ( ! empty($og_title)) {
+                        $data['og_title']['count'] = count($og_title);
+                        foreach ($og_title as $key=>$mogtitle) {
+                            $data['og_title']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mogtitle->nodeValue)));
+                        }
+                    }
 
-					if (!empty($tw_desc)) {
-						$data['tw_desc']['count'] = count($tw_desc);
-						foreach ($tw_desc as $key=>$mtw_desc) {
-							$data['tw_desc']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_desc->nodeValue)));
-						}
-					}
+                    //OG:description
+                    $og_desc = $xpath->query('//meta[@property="og:description"]/@content');
 
-					//Twitter:image
-					$tw_img = $xpath->query('//meta[@name="twitter:image"]/@content');
+                    if ( ! empty($og_desc)) {
+                        $data['og_desc']['count'] = count($og_desc);
+                        foreach ($og_desc as $key=>$mog_desc) {
+                            $data['og_desc']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_desc->nodeValue)));
+                        }
+                    }
 
-					if (!empty($tw_img)) {
-						$data['tw_img']['count'] = count($tw_img);
-						foreach ($tw_img as $key=>$mtw_img) {
-							$data['tw_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_img->nodeValue)));
-						}
-					}
+                    //OG:image
+                    $og_img = $xpath->query('//meta[@property="og:image"]/@content');
 
-					//Twitter:image:src
-					$tw_img = $xpath->query('//meta[@name="twitter:image:src"]/@content');
+                    if ( ! empty($og_img)) {
+                        $data['og_img']['count'] = count($og_img);
+                        foreach ($og_img as $key=>$mog_img) {
+                            $data['og_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_img->nodeValue)));
+                        }
+                    }
 
-					if (!empty($tw_img)) {
-						$count = NULL;
-						if (!empty($data['tw_img']['count'])) {
-							$count = $data['tw_img']['count'];
-						}
-						
-						$data['tw_img']['count'] = count($tw_img) + $count;
+                    //OG:url
+                    $og_url = $xpath->query('//meta[@property="og:url"]/@content');
 
-						foreach ($tw_img as $key=>$mtw_img) {
-							$data['tw_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_img->nodeValue)));
-						}
-					}
+                    if ( ! empty($og_url)) {
+                        $data['og_url']['count'] = count($og_url);
+                        foreach ($og_url as $key=>$mog_url) {
+                            $url                        = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_url->nodeValue)));
+                            $data['og_url']['values'][] = $url;
+                            $url                        = wp_parse_url($url);
+                            $data['og_url']['host']     = $url['host'];
+                        }
+                    }
 
-					//Canonical
-					$canonical = $xpath->query('//link[@rel="canonical"]/@href');
+                    //OG:site_name
+                    $og_site_name = $xpath->query('//meta[@property="og:site_name"]/@content');
 
-					foreach ($canonical as $key=>$mcanonical) {
-						$data['canonical'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mcanonical->nodeValue)));
-					}
+                    if ( ! empty($og_site_name)) {
+                        $data['og_site_name']['count'] = count($og_site_name);
+                        foreach ($og_site_name as $key=>$mog_site_name) {
+                            $data['og_site_name']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mog_site_name->nodeValue)));
+                        }
+                    }
 
-					if(isset($_GET['seopress_analysis_target_kw']) && !empty($_GET['seopress_analysis_target_kw'])) {
-						//h1
-						$h1 = $xpath->query("//h1");
-						if (!empty($h1)) {
-							$data['h1']['nomatches']['count'] = count($h1);
-							foreach ($h1 as $heading1) {
-								foreach ($seopress_analysis_target_kw as $kw) {
-									if (preg_match_all('#\b('.$kw.')\b#iu', $heading1->nodeValue, $m)) {
-										$data['h1']['matches'][$kw][] = $m[0];
-									}
-								}
-								$data['h1']['values'][] = esc_attr($heading1->nodeValue);
-							}
-						}
+                    //Twitter:title
+                    $tw_title = $xpath->query('//meta[@name="twitter:title"]/@content');
 
-						//h2
-						$h2 = $xpath->query("//h2");
-						if (!empty($h2)) {
-							foreach ($h2 as $heading2) {
-								foreach ($seopress_analysis_target_kw as $kw) {
-									if (preg_match_all('#\b('.$kw.')\b#iu', $heading2->nodeValue, $m)) {
-										$data['h2']['matches'][$kw][] = $m[0];
-									}
-								}
-							}
-						}
+                    if ( ! empty($tw_title)) {
+                        $data['tw_title']['count'] = count($tw_title);
+                        foreach ($tw_title as $key=>$mtw_title) {
+                            $data['tw_title']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_title->nodeValue)));
+                        }
+                    }
 
-						//h3
-						$h3 = $xpath->query("//h3");
-						if (!empty($h3)) {
-							foreach ($h3 as $heading3) {
-								foreach ($seopress_analysis_target_kw as $kw) {
-									if (preg_match_all('#\b('.$kw.')\b#iu', $heading3->nodeValue, $m)) {
-										$data['h3']['matches'][$kw][] = $m[0];
-									}
-								}
-							}
-						}
+                    //Twitter:description
+                    $tw_desc = $xpath->query('//meta[@name="twitter:description"]/@content');
 
-						//Keywords density
-						if (!is_plugin_active('oxygen/functions.php') && !function_exists('ct_template_output')) { //disable for Oxygen
-							foreach ($seopress_analysis_target_kw as $kw) {
-								if (preg_match_all('#\b('.$kw.')\b#iu', stripslashes_deep(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content))), $m)) {
-									$data['kws_density']['matches'][$kw][] = $m[0];
-								}
-							}
-						}
+                    if ( ! empty($tw_desc)) {
+                        $data['tw_desc']['count'] = count($tw_desc);
+                        foreach ($tw_desc as $key=>$mtw_desc) {
+                            $data['tw_desc']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_desc->nodeValue)));
+                        }
+                    }
 
-						//Keywords in permalink
-						$post = get_post($seopress_get_the_id);
-						$kw_slug = urldecode($post->post_name);
+                    //Twitter:image
+                    $tw_img = $xpath->query('//meta[@name="twitter:image"]/@content');
 
-						if (is_plugin_active('permalink-manager-pro/permalink-manager.php')) {
-							global $permalink_manager_uris;
-							$kw_slug = urldecode($permalink_manager_uris[$seopress_get_the_id]);
-						}
+                    if ( ! empty($tw_img)) {
+                        $data['tw_img']['count'] = count($tw_img);
+                        foreach ($tw_img as $key=>$mtw_img) {
+                            $data['tw_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_img->nodeValue)));
+                        }
+                    }
 
-						$kw_slug = str_replace("-", " ", $kw_slug);
+                    //Twitter:image:src
+                    $tw_img = $xpath->query('//meta[@name="twitter:image:src"]/@content');
 
-						if (isset($kw_slug)) {
-							foreach ($seopress_analysis_target_kw as $kw) {
-								if (preg_match_all('#\b('.remove_accents($kw).')\b#iu', strip_tags(wp_filter_nohtml_kses($kw_slug)), $m)) {
-									$data['kws_permalink']['matches'][$kw][] = $m[0];
-								}
-							}
-						}
-					}
+                    if ( ! empty($tw_img)) {
+                        $count = null;
+                        if ( ! empty($data['tw_img']['count'])) {
+                            $count = $data['tw_img']['count'];
+                        }
 
-					//Images
-					/*Standard images*/
-					$imgs = $xpath->query("//img");
+                        $data['tw_img']['count'] = count($tw_img) + $count;
 
-					if (!empty($imgs) && $imgs !=NULL) {
-						//init
-						$data_img = array();
-						foreach ($imgs as $img) {
-							if ($img->hasAttribute('src')) {
-								//Exclude avatars from analysis
-								if (!preg_match_all('#\b(avatar)\b#iu', $img->getAttribute('class'), $m)) {
-									if ($img->hasAttribute('width') || $img->hasAttribute('height')) {
-										if ($img->getAttribute('width') > 1 || $img->getAttribute('height') > 1) {
-											if ($img->getAttribute('alt') ==='' || !$img->hasAttribute('alt')) {//if alt is empty or doesn't exist
-												$data_img[] .= $img->getAttribute('src');
-											}
-										}
-									} elseif ($img->getAttribute('alt') ==='' || !$img->hasAttribute('alt')) {//if alt is empty or doesn't exist
-										$img_src = download_url($img->getAttribute('src'));
-										if (is_wp_error($img_src) === false) {
-											if (filesize($img_src) > 100) {//Ignore files under 100 bytes
-												$data_img[] .= $img->getAttribute('src');
-											}
-											@unlink($img_src);
-										}  
-									}
-								}
-							}
-							$data['img']['images'] = $data_img;
-						}
-					}
+                        foreach ($tw_img as $key=>$mtw_img) {
+                            $data['tw_img']['values'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mtw_img->nodeValue)));
+                        }
+                    }
 
-					//Meta robots
-					$meta_robots = $xpath->query('//meta[@name="robots"]/@content');
-					if (!empty($meta_robots)) {
-						foreach ($meta_robots as $key=>$value) {
-							$data['meta_robots'][$key][] = esc_attr($value->nodeValue);
-						}
-					}
+                    //Canonical
+                    $canonical = $xpath->query('//link[@rel="canonical"]/@href');
 
-					//Meta google noimageindex / nositelinkssearchbox
-					$meta_google = $xpath->query('//meta[@name="google"]/@content');
-					if (!empty($meta_google)) {
-						foreach ($meta_google as $key=>$mgnoimg) {
-							$data['meta_google'][$key][] = esc_attr($mgnoimg->nodeValue);
-						}
-					}
+                    foreach ($canonical as $key=>$mcanonical) {
+                        $data['canonical'] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mcanonical->nodeValue)));
+                    }
 
-					//nofollow links
-					$nofollow_links = $xpath->query("//a[contains(@rel, 'nofollow')]");
-					if (!empty($nofollow_links)) {
-						foreach ($nofollow_links as $key=>$link) {
-							if (!preg_match_all('#\b(cancel-comment-reply-link)\b#iu', $link->getAttribute('id'), $m) && !preg_match_all('#\b(comment-reply-link)\b#iu', $link->getAttribute('class'), $m)) {
-								$data['nofollow_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
-							}
-						}
-					}
-				}
+                    foreach ($canonical as $key=>$mcanonical) {
+                        $data['all_canonical'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mcanonical->nodeValue)));
+                    }
 
-				//outbound links
-				$site_url  = wp_parse_url(get_home_url(), PHP_URL_HOST);
-				$outbound_links = $xpath->query("//a[not(contains(@href, '".$site_url."'))]");
-				if (!empty($outbound_links)) {
-					foreach ($outbound_links as $key=>$link) {
-						if (!empty(wp_parse_url($link->getAttribute('href'), PHP_URL_HOST))) {
-							$data['outbound_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
-						}
-					}
-				}
-				
-				//Words Counter
-				if (!is_plugin_active('oxygen/functions.php') && !function_exists('ct_template_output')) { //disable for Oxygen
-					if ($seopress_get_the_content !='') {
-						$data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
+                    if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
+                        //h1
+                        $h1 = $xpath->query('//h1');
+                        if ( ! empty($h1)) {
+                            $data['h1']['nomatches']['count'] = count($h1);
+                            foreach ($h1 as $heading1) {
+                                foreach ($seopress_analysis_target_kw as $kw) {
+                                    if (preg_match_all('#\b(' . $kw . ')\b#iu', $heading1->nodeValue, $m)) {
+                                        $data['h1']['matches'][$kw][] = $m[0];
+                                    }
+                                }
+                                $data['h1']['values'][] = esc_attr($heading1->nodeValue);
+                            }
+                        }
 
-						if (!empty($matches[0])) {
-							$words_counter_unique = count(array_unique($matches[0]));
-						} else {
-							$words_counter_unique = '0';
-						}
-						$data['words_counter_unique'] = $words_counter_unique;
-					}
-				}
+                        //h2
+                        $h2 = $xpath->query('//h2');
+                        if ( ! empty($h2)) {
+                            foreach ($h2 as $heading2) {
+                                foreach ($seopress_analysis_target_kw as $kw) {
+                                    if (preg_match_all('#\b(' . $kw . ')\b#iu', $heading2->nodeValue, $m)) {
+                                        $data['h2']['matches'][$kw][] = $m[0];
+                                    }
+                                }
+                            }
+                        }
 
-				//Get schemas
-				$json_ld = $xpath->query( '//script[@type="application/ld+json"]' );
-				if (!empty($json_ld)) {
-					foreach($json_ld as $node) {
-						$json = json_decode($node->nodeValue, true);
-						if (isset($json['@type'])) {
-							$data['json'][] = $json['@type'];
-						}
-					}
-				}
-			}
+                        //h3
+                        $h3 = $xpath->query('//h3');
+                        if ( ! empty($h3)) {
+                            foreach ($h3 as $heading3) {
+                                foreach ($seopress_analysis_target_kw as $kw) {
+                                    if (preg_match_all('#\b(' . $kw . ')\b#iu', $heading3->nodeValue, $m)) {
+                                        $data['h3']['matches'][$kw][] = $m[0];
+                                    }
+                                }
+                            }
+                        }
 
-			libxml_use_internal_errors($internalErrors);
-		}
+                        //Keywords density
+                        if ( ! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
+                            foreach ($seopress_analysis_target_kw as $kw) {
+                                if (preg_match_all('#\b(' . $kw . ')\b#iu', stripslashes_deep(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content))), $m)) {
+                                    $data['kws_density']['matches'][$kw][] = $m[0];
+                                }
+                            }
+                        }
 
-		//Send data
-		if(isset($data)){
-			update_post_meta($seopress_get_the_id, '_seopress_analysis_data', $data);
-		}
+                        //Keywords in permalink
+                        $post    = get_post($seopress_get_the_id);
+                        $kw_slug = urldecode($post->post_name);
 
-		//Re-enable QM
-		remove_filter( 'user_has_cap', 'seopress_disable_qm', 10, 3);
+                        if (is_plugin_active('permalink-manager-pro/permalink-manager.php')) {
+                            global $permalink_manager_uris;
+                            $kw_slug = urldecode($permalink_manager_uris[$seopress_get_the_id]);
+                        }
 
-		//Return
-		wp_send_json_success($data);
-	}
+                        $kw_slug = str_replace('-', ' ', $kw_slug);
+
+                        if (isset($kw_slug)) {
+                            foreach ($seopress_analysis_target_kw as $kw) {
+                                if (preg_match_all('#\b(' . remove_accents($kw) . ')\b#iu', strip_tags(wp_filter_nohtml_kses($kw_slug)), $m)) {
+                                    $data['kws_permalink']['matches'][$kw][] = $m[0];
+                                }
+                            }
+                        }
+                    }
+
+                    //Images
+                    /*Standard images*/
+                    $imgs = $xpath->query('//img');
+
+                    if ( ! empty($imgs) && null != $imgs) {
+                        //init
+                        $data_img = [];
+                        foreach ($imgs as $img) {
+                            if ($img->hasAttribute('src')) {
+                                //Exclude avatars from analysis
+                                if ( ! preg_match_all('#\b(avatar)\b#iu', $img->getAttribute('class'), $m)) {
+                                    if ($img->hasAttribute('width') || $img->hasAttribute('height')) {
+                                        if ($img->getAttribute('width') > 1 || $img->getAttribute('height') > 1) {
+                                            if ('' === $img->getAttribute('alt') || ! $img->hasAttribute('alt')) {//if alt is empty or doesn't exist
+                                                $data_img[] .= $img->getAttribute('src');
+                                            }
+                                        }
+                                    } elseif ('' === $img->getAttribute('alt') || ! $img->hasAttribute('alt')) {//if alt is empty or doesn't exist
+                                        $img_src = download_url($img->getAttribute('src'));
+                                        if (false === is_wp_error($img_src)) {
+                                            if (filesize($img_src) > 100) {//Ignore files under 100 bytes
+                                                $data_img[] .= $img->getAttribute('src');
+                                            }
+                                            @unlink($img_src);
+                                        }
+                                    }
+                                }
+                            }
+                            $data['img']['images'] = $data_img;
+                        }
+                    }
+
+                    //Meta robots
+                    $meta_robots = $xpath->query('//meta[@name="robots"]/@content');
+                    if ( ! empty($meta_robots)) {
+                        foreach ($meta_robots as $key=>$value) {
+                            $data['meta_robots'][$key][] = esc_attr($value->nodeValue);
+                        }
+                    }
+
+                    //Meta google noimageindex / nositelinkssearchbox
+                    $meta_google = $xpath->query('//meta[@name="google"]/@content');
+                    if ( ! empty($meta_google)) {
+                        foreach ($meta_google as $key=>$mgnoimg) {
+                            $data['meta_google'][$key][] = esc_attr($mgnoimg->nodeValue);
+                        }
+                    }
+
+                    //nofollow links
+                    $nofollow_links = $xpath->query("//a[contains(@rel, 'nofollow')]");
+                    if ( ! empty($nofollow_links)) {
+                        foreach ($nofollow_links as $key=>$link) {
+                            if ( ! preg_match_all('#\b(cancel-comment-reply-link)\b#iu', $link->getAttribute('id'), $m) && ! preg_match_all('#\b(comment-reply-link)\b#iu', $link->getAttribute('class'), $m)) {
+                                $data['nofollow_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
+                            }
+                        }
+                    }
+                }
+
+                //outbound links
+                $site_url       = wp_parse_url(get_home_url(), PHP_URL_HOST);
+                $outbound_links = $xpath->query("//a[not(contains(@href, '" . $site_url . "'))]");
+                if ( ! empty($outbound_links)) {
+                    foreach ($outbound_links as $key=>$link) {
+                        if ( ! empty(wp_parse_url($link->getAttribute('href'), PHP_URL_HOST))) {
+                            $data['outbound_links'][$key][$link->getAttribute('href')] = esc_attr($link->nodeValue);
+                        }
+                    }
+                }
+
+                //Words Counter
+                if ( ! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
+                    if ('' != $seopress_get_the_content) {
+                        $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
+
+                        if ( ! empty($matches[0])) {
+                            $words_counter_unique = count(array_unique($matches[0]));
+                        } else {
+                            $words_counter_unique = '0';
+                        }
+                        $data['words_counter_unique'] = $words_counter_unique;
+                    }
+                }
+
+                //Get schemas
+                $json_ld = $xpath->query('//script[@type="application/ld+json"]');
+                if ( ! empty($json_ld)) {
+                    foreach ($json_ld as $node) {
+                        $json = json_decode($node->nodeValue, true);
+                        if (isset($json['@type'])) {
+                            $data['json'][] = $json['@type'];
+                        }
+                    }
+                }
+            }
+
+            libxml_use_internal_errors($internalErrors);
+        }
+
+        //Send data
+        if (isset($data)) {
+            update_post_meta($seopress_get_the_id, '_seopress_analysis_data', $data);
+        }
+
+        //Re-enable QM
+        remove_filter('user_has_cap', 'seopress_disable_qm', 10, 3);
+
+        //Return
+        wp_send_json_success($data);
+    }
 }
 add_action('wp_ajax_seopress_do_real_preview', 'seopress_do_real_preview');
 
@@ -479,9 +482,11 @@ add_action('wp_ajax_seopress_do_real_preview', 'seopress_do_real_preview');
 //Flush permalinks
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_flush_permalinks() {
-	check_ajax_referer( 'seopress_flush_permalinks_nonce', $_GET['_ajax_nonce'], true );
-	flush_rewrite_rules(false);
-	die();
+    check_ajax_referer('seopress_flush_permalinks_nonce', $_GET['_ajax_nonce'], true);
+    if (current_user_can(seopress_capability('manage_options', 'flush')) && is_admin()) {
+        flush_rewrite_rules(false);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_flush_permalinks', 'seopress_flush_permalinks');
 
@@ -489,14 +494,16 @@ add_action('wp_ajax_seopress_flush_permalinks', 'seopress_flush_permalinks');
 //Dashboard toggle features
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_toggle_features() {
-	check_ajax_referer( 'seopress_toggle_features_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_toggle_features_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( isset( $_POST['feature']) && isset( $_POST['feature_value'] )) {
-		$seopress_toggle_options = get_option('seopress_toggle');
-		$seopress_toggle_options[$_POST['feature']] = $_POST['feature_value'];
-		update_option('seopress_toggle', $seopress_toggle_options, 'yes');
-	}
-	die();
+    if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
+        if (isset($_POST['feature']) && isset($_POST['feature_value'])) {
+            $seopress_toggle_options                    = get_option('seopress_toggle');
+            $seopress_toggle_options[$_POST['feature']] = $_POST['feature_value'];
+            update_option('seopress_toggle', $seopress_toggle_options, 'yes');
+        }
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_toggle_features', 'seopress_toggle_features');
 
@@ -504,14 +511,16 @@ add_action('wp_ajax_seopress_toggle_features', 'seopress_toggle_features');
 //Dashboard hide notices
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_hide_notices() {
-	check_ajax_referer( 'seopress_hide_notices_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_hide_notices_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( isset( $_POST['notice']) && isset( $_POST['notice_value'] )) {
-		$seopress_notices_options = get_option('seopress_notices');
-		$seopress_notices_options[$_POST['notice']] = $_POST['notice_value'];
-		update_option('seopress_notices', $seopress_notices_options, 'yes');
-	}
-	die();
+    if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
+        if (isset($_POST['notice']) && isset($_POST['notice_value'])) {
+            $seopress_notices_options                   = get_option('seopress_notices');
+            $seopress_notices_options[$_POST['notice']] = $_POST['notice_value'];
+            update_option('seopress_notices', $seopress_notices_options, 'yes');
+        }
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_hide_notices', 'seopress_hide_notices');
 
@@ -519,167 +528,165 @@ add_action('wp_ajax_seopress_hide_notices', 'seopress_hide_notices');
 //Yoast migration
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_yoast_migration() {
-	check_ajax_referer( 'seopress_yoast_migrate_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_yoast_migrate_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
+        global $wpdb;
 
-		global $wpdb;
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
 
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+        $increment = 200;
+        global $post;
 
-		$increment = 200;
-		global $post;
+        if ($offset > $total_count_posts) {
+            wp_reset_query();
 
-		if ($offset > $total_count_posts) {
-			wp_reset_query();
+            $yoast_query_terms = get_option('wpseo_taxonomy_meta');
 
-			$yoast_query_terms = get_option('wpseo_taxonomy_meta');
+            if ($yoast_query_terms) {
+                foreach ($yoast_query_terms as $taxonomies => $taxonomie) {
+                    foreach ($taxonomie as $term_id => $term_value) {
+                        if ('' != $term_value['wpseo_title']) { //Import title tag
+                            update_term_meta($term_id, '_seopress_titles_title', $term_value['wpseo_title']);
+                        }
+                        if ('' != $term_value['wpseo_desc']) { //Import meta desc
+                            update_term_meta($term_id, '_seopress_titles_desc', $term_value['wpseo_desc']);
+                        }
+                        if ('' != $term_value['wpseo_opengraph-title']) { //Import Facebook Title
+                            update_term_meta($term_id, '_seopress_social_fb_title', $term_value['wpseo_opengraph-title']);
+                        }
+                        if ('' != $term_value['wpseo_opengraph-description']) { //Import Facebook Desc
+                            update_term_meta($term_id, '_seopress_social_fb_desc', $term_value['wpseo_opengraph-description']);
+                        }
+                        if ('' != $term_value['wpseo_opengraph-image']) { //Import Facebook Image
+                            update_term_meta($term_id, '_seopress_social_fb_img', $term_value['wpseo_opengraph-image']);
+                        }
+                        if ('' != $term_value['wpseo_twitter-title']) { //Import Twitter Title
+                            update_term_meta($term_id, '_seopress_social_twitter_title', $term_value['wpseo_twitter-title']);
+                        }
+                        if ('' != $term_value['wpseo_twitter-description']) { //Import Twitter Desc
+                            update_term_meta($term_id, '_seopress_social_twitter_desc', $term_value['wpseo_twitter-description']);
+                        }
+                        if ('' != $term_value['wpseo_twitter-image']) { //Import Twitter Image
+                            update_term_meta($term_id, '_seopress_social_twitter_img', $term_value['wpseo_twitter-image']);
+                        }
+                        if ('noindex' == $term_value['wpseo_noindex']) { //Import Robots NoIndex
+                            update_term_meta($term_id, '_seopress_robots_index', 'yes');
+                        }
+                        if ('' != $term_value['wpseo_canonical']) { //Import Canonical URL
+                            update_term_meta($term_id, '_seopress_robots_canonical', $term_value['wpseo_canonical']);
+                        }
+                    }
+                }
+            }
+            $offset = 'done';
+            wp_reset_query();
+        } else {
+            $args = [
+                'posts_per_page' => $increment,
+                'post_type'      => 'any',
+                'post_status'    => 'any',
+                'offset'         => $offset,
+            ];
 
-			if ($yoast_query_terms) {
+            $yoast_query = get_posts($args);
 
-				foreach ($yoast_query_terms as $taxonomies => $taxonomie) {
-					foreach ($taxonomie as $term_id => $term_value) {
-						if ($term_value['wpseo_title'] !='') { //Import title tag
-							update_term_meta($term_id, '_seopress_titles_title', $term_value['wpseo_title']);
-						}
-						if ($term_value['wpseo_desc'] !='') { //Import meta desc
-							update_term_meta($term_id, '_seopress_titles_desc', $term_value['wpseo_desc']);
-						}
-						if ($term_value['wpseo_opengraph-title'] !='') { //Import Facebook Title
-							update_term_meta($term_id, '_seopress_social_fb_title', $term_value['wpseo_opengraph-title']);
-						}
-						if ($term_value['wpseo_opengraph-description'] !='') { //Import Facebook Desc
-							update_term_meta($term_id, '_seopress_social_fb_desc', $term_value['wpseo_opengraph-description']);
-						}
-						if ($term_value['wpseo_opengraph-image'] !='') { //Import Facebook Image
-							update_term_meta($term_id, '_seopress_social_fb_img', $term_value['wpseo_opengraph-image']);
-						}
-						if ($term_value['wpseo_twitter-title'] !='') { //Import Twitter Title
-							update_term_meta($term_id, '_seopress_social_twitter_title', $term_value['wpseo_twitter-title']);
-						}
-						if ($term_value['wpseo_twitter-description'] !='') { //Import Twitter Desc
-							update_term_meta($term_id, '_seopress_social_twitter_desc', $term_value['wpseo_twitter-description']);
-						}
-						if ($term_value['wpseo_twitter-image'] !='') { //Import Twitter Image
-							update_term_meta($term_id, '_seopress_social_twitter_img', $term_value['wpseo_twitter-image']);
-						}
-						if ($term_value['wpseo_noindex'] =='noindex') { //Import Robots NoIndex
-							update_term_meta($term_id, '_seopress_robots_index', "yes");
-						}
-						if ($term_value['wpseo_canonical'] !='') { //Import Canonical URL
-							update_term_meta($term_id, '_seopress_robots_canonical', $term_value['wpseo_canonical']);
-						}
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_query();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type' => 'any',
-				'post_status' => 'any',
-				'offset' => $offset,
-			);
+            if ($yoast_query) {
+                foreach ($yoast_query as $post) {
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_title', true)) { //Import title tag
+                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_yoast_wpseo_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_metadesc', true)) { //Import meta desc
+                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_yoast_wpseo_metadesc', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_opengraph-title', true)) { //Import Facebook Title
+                        update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_yoast_wpseo_opengraph-title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_opengraph-description', true)) { //Import Facebook Desc
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_yoast_wpseo_opengraph-description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true)) { //Import Facebook Image
+                        update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_twitter-title', true)) { //Import Twitter Title
+                        update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_yoast_wpseo_twitter-title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_twitter-description', true)) { //Import Twitter Desc
+                        update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_yoast_wpseo_twitter-description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_twitter-image', true)) { //Import Twitter Image
+                        update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_yoast_wpseo_twitter-image', true));
+                    }
+                    if ('1' == get_post_meta($post->ID, '_yoast_wpseo_meta-robots-noindex', true)) { //Import Robots NoIndex
+                        update_post_meta($post->ID, '_seopress_robots_index', 'yes');
+                    }
+                    if ('1' == get_post_meta($post->ID, '_yoast_wpseo_meta-robots-nofollow', true)) { //Import Robots NoFollow
+                        update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true)) { //Import Robots NoOdp, NoImageIndex, NoArchive, NoSnippet
+                        $yoast_wpseo_meta_robots_adv = get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true);
 
-			$yoast_query = get_posts( $args );
+                        if (false !== strpos($yoast_wpseo_meta_robots_adv, 'noodp')) {
+                            update_post_meta($post->ID, '_seopress_robots_odp', 'yes');
+                        }
+                        if (false !== strpos($yoast_wpseo_meta_robots_adv, 'noimageindex')) {
+                            update_post_meta($post->ID, '_seopress_robots_imageindex', 'yes');
+                        }
+                        if (false !== strpos($yoast_wpseo_meta_robots_adv, 'noarchive')) {
+                            update_post_meta($post->ID, '_seopress_robots_archive', 'yes');
+                        }
+                        if (false !== strpos($yoast_wpseo_meta_robots_adv, 'nosnippet')) {
+                            update_post_meta($post->ID, '_seopress_robots_snippet', 'yes');
+                        }
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_canonical', true)) { //Import Canonical URL
+                        update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_yoast_wpseo_canonical', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_focuskw', true) || '' != get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', true)) { //Import Focus Keywords
+                        $y_fkws_clean = []; //reset array
 
-			if ($yoast_query) {
-				foreach ($yoast_query as $post) {
-					if (get_post_meta($post->ID, '_yoast_wpseo_title', true) !='') { //Import title tag
-						update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_yoast_wpseo_title', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_metadesc', true) !='') { //Import meta desc
-						update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_yoast_wpseo_metadesc', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-title', true) !='') { //Import Facebook Title
-						update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_yoast_wpseo_opengraph-title', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-description', true) !='') { //Import Facebook Desc
-						update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_yoast_wpseo_opengraph-description', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true) !='') { //Import Facebook Image
-						update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_twitter-title', true) !='') { //Import Twitter Title
-						update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_yoast_wpseo_twitter-title', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_twitter-description', true) !='') { //Import Twitter Desc
-						update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_yoast_wpseo_twitter-description', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_twitter-image', true) !='') { //Import Twitter Image
-						update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_yoast_wpseo_twitter-image', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-noindex', true) =='1') { //Import Robots NoIndex
-						update_post_meta($post->ID, '_seopress_robots_index', "yes");
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-nofollow', true) =='1') { //Import Robots NoFollow
-						update_post_meta($post->ID, '_seopress_robots_follow', "yes");
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true) !='') { //Import Robots NoOdp, NoImageIndex, NoArchive, NoSnippet
-						$yoast_wpseo_meta_robots_adv = get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true);
+                        $y_fkws = get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', false);
 
-						if (strpos($yoast_wpseo_meta_robots_adv, 'noodp') !== false) {
-							update_post_meta($post->ID, '_seopress_robots_odp', "yes");
-						}
-						if (strpos($yoast_wpseo_meta_robots_adv, 'noimageindex') !== false) {
-							update_post_meta($post->ID, '_seopress_robots_imageindex', "yes");
-						}
-						if (strpos($yoast_wpseo_meta_robots_adv, 'noarchive') !== false) {
-							update_post_meta($post->ID, '_seopress_robots_archive', "yes");
-						}
-						if (strpos($yoast_wpseo_meta_robots_adv, 'nosnippet') !== false) {
-							update_post_meta($post->ID, '_seopress_robots_snippet', "yes");
-						}
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_canonical', true) !='') { //Import Canonical URL
-						update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_yoast_wpseo_canonical', true));
-					}
-					if (get_post_meta($post->ID, '_yoast_wpseo_focuskw', true) !='' || get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', true) !='') { //Import Focus Keywords
-						$y_fkws_clean = array(); //reset array
+                        foreach ($y_fkws as $value) {
+                            foreach (json_decode($value) as $key => $value) {
+                                $y_fkws_clean[] .= $value->keyword;
+                            }
+                        }
 
-						$y_fkws = get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', false);
+                        $y_fkws_clean[] .= get_post_meta($post->ID, '_yoast_wpseo_focuskw', true);
 
-						foreach ($y_fkws as $value) {
-							foreach (json_decode($value) as $key => $value) {
-								$y_fkws_clean[] .= $value->keyword;
-							}
-						}
+                        update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',', $y_fkws_clean));
+                    }
 
-						$y_fkws_clean[] .= get_post_meta($post->ID, '_yoast_wpseo_focuskw', true);
+                    //Primary category
+                    if (class_exists('WPSEO_Primary_Term')) {
+                        if ('product' == get_post_type($post->ID)) {
+                            $tax = 'product_cat';
+                        } else {
+                            $tax = 'category';
+                        }
 
-						update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',',$y_fkws_clean));
-					}
+                        $primary_term = new WPSEO_Primary_Term($tax, $post->ID);
 
-					//Primary category
-					if ( class_exists( 'WPSEO_Primary_Term' ) ) {
-						if ( get_post_type( $post->ID ) == 'product' ) {
-							$tax = 'product_cat';
-						} else {
-							$tax = 'category';
-						}
+                        $primary_term = $primary_term->get_primary_term();
 
-						$primary_term = new WPSEO_Primary_Term( $tax, $post->ID );
-						
-						$primary_term = $primary_term->get_primary_term();
-
-						if ( $primary_term !='' && is_int( $primary_term ) ) {
-							update_post_meta( $post->ID, '_seopress_robots_primary_cat', $primary_term );
-						}
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
+                        if ('' != $primary_term && is_int($primary_term)) {
+                            update_post_meta($post->ID, '_seopress_robots_primary_cat', $primary_term);
+                        }
+                    }
+                }
+            }
+            $offset += $increment;
+        }
+        $data           = [];
+        $data['offset'] = $offset;
+        wp_send_json_success($data);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_yoast_migration', 'seopress_yoast_migration');
 
@@ -687,134 +694,133 @@ add_action('wp_ajax_seopress_yoast_migration', 'seopress_yoast_migration');
 //AIO migration
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_aio_migration() {
-	check_ajax_referer( 'seopress_aio_migrate_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_aio_migrate_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
+        global $wpdb;
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
 
-		global $wpdb;
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+        $increment = 200;
+        global $post;
 
-		$increment = 200;
-		global $post;
+        if ($offset > $total_count_posts) {
+            wp_reset_query();
 
-		if ($offset > $total_count_posts) {
-			wp_reset_query();
+            $args = [
+                //'number' => $increment,
+                'hide_empty' => false,
+                //'offset' => $offset,
+                'fields' => 'ids',
+            ];
+            $aio_query_terms = get_terms($args);
 
-			$args = array(
-				//'number' => $increment,
-				'hide_empty' => false,
-				//'offset' => $offset,
-				'fields' => 'ids',
-			);
-			$aio_query_terms = get_terms($args);
+            if ($aio_query_terms) {
+                foreach ($aio_query_terms as $term_id) {
+                    if ('' != get_term_meta($term_id, '_aioseop_title', true)) { //Import title tag
+                        update_term_meta($term_id, '_seopress_titles_title', get_term_meta($term_id, '_aioseop_title', true));
+                    }
+                    if ('' != get_term_meta($term_id, '_aioseop_description', true)) { //Import meta desc
+                        update_term_meta($term_id, '_seopress_titles_desc', get_term_meta($term_id, '_aioseop_description', true));
+                    }
+                    if ('' != get_term_meta($term_id, '_aioseop_opengraph_settings', true)) { //Import Facebook / Twitter Title
+                        $_aioseop_opengraph_settings = get_term_meta($term_id, '_aioseop_opengraph_settings', true);
+                        if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_title'])) {
+                            update_term_meta($term_id, '_seopress_social_fb_title', $_aioseop_opengraph_settings['aioseop_opengraph_settings_title']);
+                            update_term_meta($term_id, '_seopress_social_twitter_title', $_aioseop_opengraph_settings['aioseop_opengraph_settings_title']);
+                        }
+                    }
+                    if ('' != get_term_meta($term_id, '_aioseop_opengraph_settings', true)) { //Import Facebook / Twitter Title
+                        $_aioseop_opengraph_settings = get_term_meta($term_id, '_aioseop_opengraph_settings', true);
+                        if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_desc'])) {
+                            update_term_meta($term_id, '_seopress_social_fb_desc', $_aioseop_opengraph_settings['aioseop_opengraph_settings_desc']);
+                            update_term_meta($term_id, '_seopress_social_twitter_desc', $_aioseop_opengraph_settings['aioseop_opengraph_settings_desc']);
+                        }
+                    }
+                    if ('' != get_term_meta($term_id, '_aioseop_opengraph_settings', true)) { //Import Facebook Image
+                        $_aioseop_opengraph_settings = get_term_meta($term_id, '_aioseop_opengraph_settings', true);
+                        if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_image'])) {
+                            update_term_meta($term_id, '_seopress_social_fb_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg']);
+                        }
+                    }
+                    if ('' != get_term_meta($term_id, '_aioseop_opengraph_settings', true)) { //Import Twitter Image
+                        $_aioseop_opengraph_settings = get_term_meta($term_id, '_aioseop_opengraph_settings', true);
+                        if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_image'])) {
+                            update_term_meta($term_id, '_seopress_social_twitter_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter']);
+                        }
+                    }
+                    if ('on' == get_term_meta($term_id, '_aioseop_noindex', true)) { //Import Robots NoIndex
+                        update_term_meta($term_id, '_seopress_robots_index', 'yes');
+                    }
+                    if ('on' == get_term_meta($term_id, '_aioseop_nofollow', true)) { //Import Robots NoIndex
+                        update_term_meta($term_id, '_seopress_robots_follow', 'yes');
+                    }
+                }
+            }
+            $offset = 'done';
+            wp_reset_query();
+        } else {
+            $args = [
+                'posts_per_page' => $increment,
+                'post_type'      => 'any',
+                'post_status'    => 'any',
+                'offset'         => $offset,
+            ];
 
-			if ($aio_query_terms) {
-				foreach ($aio_query_terms as $term_id) {
-					if (get_term_meta($term_id, '_aioseop_title', true) !='') { //Import title tag
-						update_term_meta($term_id, '_seopress_titles_title', get_term_meta($term_id, '_aioseop_title', true));
-					}
-					if (get_term_meta($term_id, '_aioseop_description', true) !='') { //Import meta desc
-						update_term_meta($term_id, '_seopress_titles_desc', get_term_meta($term_id, '_aioseop_description', true));
-					}
-					if (get_term_meta($term_id, '_aioseop_opengraph_settings', true) !='') { //Import Facebook / Twitter Title
-						$_aioseop_opengraph_settings = get_term_meta($term_id, '_aioseop_opengraph_settings', true);
-						if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_title'])) {
-							update_term_meta($term_id, '_seopress_social_fb_title', $_aioseop_opengraph_settings['aioseop_opengraph_settings_title']);
-							update_term_meta($term_id, '_seopress_social_twitter_title', $_aioseop_opengraph_settings['aioseop_opengraph_settings_title']);
-						}
-					}
-					if (get_term_meta($term_id, '_aioseop_opengraph_settings', true) !='') { //Import Facebook / Twitter Title
-						$_aioseop_opengraph_settings = get_term_meta($term_id, '_aioseop_opengraph_settings', true);
-						if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_desc'])) {
-							update_term_meta($term_id, '_seopress_social_fb_desc', $_aioseop_opengraph_settings['aioseop_opengraph_settings_desc']);
-							update_term_meta($term_id, '_seopress_social_twitter_desc', $_aioseop_opengraph_settings['aioseop_opengraph_settings_desc']);
-						}
-					}
-					if (get_term_meta($term_id, '_aioseop_opengraph_settings', true) !='') { //Import Facebook Image
-						$_aioseop_opengraph_settings = get_term_meta($term_id, '_aioseop_opengraph_settings', true);
-						if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_image'])) {
-							update_term_meta($term_id, '_seopress_social_fb_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg']);
-						}
-					}
-					if (get_term_meta($term_id, '_aioseop_opengraph_settings', true) !='') { //Import Twitter Image
-						$_aioseop_opengraph_settings = get_term_meta($term_id, '_aioseop_opengraph_settings', true);
-						if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_image'])) {
-							update_term_meta($term_id, '_seopress_social_twitter_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter']);
-						}
-					}
-					if (get_term_meta($term_id, '_aioseop_noindex', true) =='on') { //Import Robots NoIndex
-						update_term_meta($term_id, '_seopress_robots_index', "yes");
-					}
-					if (get_term_meta($term_id, '_aioseop_nofollow', true) =='on') { //Import Robots NoIndex
-						update_term_meta($term_id, '_seopress_robots_follow', "yes");
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_query();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type' => 'any',
-				'post_status' => 'any',
-				'offset' => $offset,
-			);
+            $aio_query = get_posts($args);
 
-			$aio_query = get_posts( $args );
-
-			if ($aio_query) {
-				foreach ($aio_query as $post) {
-					if (get_post_meta($post->ID, '_aioseop_title', true) !='') { //Import title tag
-						update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_aioseop_title', true));
-					}
-					if (get_post_meta($post->ID, '_aioseop_description', true) !='') { //Import meta desc
-						update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_aioseop_description', true));
-					}
-					if (get_post_meta($post->ID, '_aioseop_opengraph_settings', true) !='') { //Import Facebook / Twitter Title
-						$_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
-						if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_title'])) {
-							update_post_meta($post->ID, '_seopress_social_fb_title', $_aioseop_opengraph_settings['aioseop_opengraph_settings_title']);
-							update_post_meta($post->ID, '_seopress_social_twitter_title', $_aioseop_opengraph_settings['aioseop_opengraph_settings_title']);
-						}
-					}
-					if (get_post_meta($post->ID, '_aioseop_opengraph_settings', true) !='') { //Import Facebook / Twitter Desc
-						$_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
-						if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_desc'])) {
-							update_post_meta($post->ID, '_seopress_social_fb_desc', $_aioseop_opengraph_settings['aioseop_opengraph_settings_desc']);
-							update_post_meta($post->ID, '_seopress_social_twitter_desc', $_aioseop_opengraph_settings['aioseop_opengraph_settings_desc']);
-						}
-					}
-					if (get_post_meta($post->ID, '_aioseop_opengraph_settings', true) !='') { //Import Facebook Image
-						$_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
-						if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_image'])) {
-							update_post_meta($post->ID, '_seopress_social_fb_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg']);
-						}
-					}
-					if (get_post_meta($post->ID, '_aioseop_opengraph_settings', true) !='') { //Import Twitter Image
-						$_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
-						if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter'])) {
-							update_post_meta($post->ID, '_seopress_social_twitter_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter']);
-						}
-					}
-					if (get_post_meta($post->ID, '_aioseop_noindex', true) =='on') { //Import Robots NoIndex
-						update_post_meta($post->ID, '_seopress_robots_index', "yes");
-					}
-					if (get_post_meta($post->ID, '_aioseop_nofollow', true) =='on') { //Import Robots NoFollow
-						update_post_meta($post->ID, '_seopress_robots_follow', "yes");
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
+            if ($aio_query) {
+                foreach ($aio_query as $post) {
+                    if ('' != get_post_meta($post->ID, '_aioseop_title', true)) { //Import title tag
+                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_aioseop_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_aioseop_description', true)) { //Import meta desc
+                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_aioseop_description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_aioseop_opengraph_settings', true)) { //Import Facebook / Twitter Title
+                        $_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
+                        if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_title'])) {
+                            update_post_meta($post->ID, '_seopress_social_fb_title', $_aioseop_opengraph_settings['aioseop_opengraph_settings_title']);
+                            update_post_meta($post->ID, '_seopress_social_twitter_title', $_aioseop_opengraph_settings['aioseop_opengraph_settings_title']);
+                        }
+                    }
+                    if ('' != get_post_meta($post->ID, '_aioseop_opengraph_settings', true)) { //Import Facebook / Twitter Desc
+                        $_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
+                        if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_desc'])) {
+                            update_post_meta($post->ID, '_seopress_social_fb_desc', $_aioseop_opengraph_settings['aioseop_opengraph_settings_desc']);
+                            update_post_meta($post->ID, '_seopress_social_twitter_desc', $_aioseop_opengraph_settings['aioseop_opengraph_settings_desc']);
+                        }
+                    }
+                    if ('' != get_post_meta($post->ID, '_aioseop_opengraph_settings', true)) { //Import Facebook Image
+                        $_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
+                        if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_image'])) {
+                            update_post_meta($post->ID, '_seopress_social_fb_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg']);
+                        }
+                    }
+                    if ('' != get_post_meta($post->ID, '_aioseop_opengraph_settings', true)) { //Import Twitter Image
+                        $_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
+                        if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter'])) {
+                            update_post_meta($post->ID, '_seopress_social_twitter_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter']);
+                        }
+                    }
+                    if ('on' == get_post_meta($post->ID, '_aioseop_noindex', true)) { //Import Robots NoIndex
+                        update_post_meta($post->ID, '_seopress_robots_index', 'yes');
+                    }
+                    if ('on' == get_post_meta($post->ID, '_aioseop_nofollow', true)) { //Import Robots NoFollow
+                        update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
+                    }
+                }
+            }
+            $offset += $increment;
+        }
+        $data           = [];
+        $data['offset'] = $offset;
+        wp_send_json_success($data);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_aio_migration', 'seopress_aio_migration');
 
@@ -822,351 +828,186 @@ add_action('wp_ajax_seopress_aio_migration', 'seopress_aio_migration');
 //SEO Framework migration
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_seo_framework_migration() {
-	check_ajax_referer( 'seopress_seo_framework_migrate_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_seo_framework_migrate_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
+        global $wpdb;
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
 
-		global $wpdb;
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+        $increment = 200;
+        global $post;
 
-		$increment = 200;
-		global $post;
+        if ($offset > $total_count_posts) {
+            wp_reset_query();
 
-		if ($offset > $total_count_posts) {
-			wp_reset_query();
+            $args = [
+                //'number' => $increment,
+                'hide_empty' => false,
+                //'offset' => $offset,
+                'fields' => 'ids',
+            ];
+            $seo_framework_query_terms = get_terms($args);
 
-			$args = array(
-				//'number' => $increment,
-				'hide_empty' => false,
-				//'offset' => $offset,
-				'fields' => 'ids',
-			);
-			$seo_framework_query_terms = get_terms($args);
+            if ($seo_framework_query_terms) {
+                foreach ($seo_framework_query_terms as $term_id) {
+                    if ('' != get_term_meta($term_id, 'autodescription-term-settings', true)) {
+                        $term_settings = get_term_meta($term_id, 'autodescription-term-settings', true);
 
-			if ($seo_framework_query_terms) {
-				foreach ($seo_framework_query_terms as $term_id) {
-					if (get_term_meta($term_id, 'autodescription-term-settings', true) !='') {
-						$term_settings = get_term_meta($term_id, 'autodescription-term-settings', true);
+                        if ( ! empty($term_settings['doctitle'])) { //Import title tag
+                            update_term_meta($term_id, '_seopress_titles_title', $term_settings['doctitle']);
+                        }
+                        if ( ! empty($term_settings['description'])) { //Import meta desc
+                            update_term_meta($term_id, '_seopress_titles_desc', $term_settings['description']);
+                        }
+                        if ( ! empty($term_settings['noindex'])) { //Import Robots NoIndex
+                            update_term_meta($term_id, '_seopress_robots_index', 'yes');
+                        }
+                        if ( ! empty($term_settings['nofollow'])) { //Import Robots NoFollow
+                            update_term_meta($term_id, '_seopress_robots_follow', 'yes');
+                        }
+                        if ( ! empty($term_settings['noarchive'])) { //Import Robots NoArchive
+                            update_term_meta($term_id, '_seopress_robots_archive', 'yes');
+                        }
+                    }
+                }
+            }
+            $offset = 'done';
+            wp_reset_query();
+        } else {
+            $args = [
+                'posts_per_page' => $increment,
+                'post_type'      => 'any',
+                'post_status'    => 'any',
+                'offset'         => $offset,
+            ];
 
-						if (!empty($term_settings['doctitle'])) { //Import title tag
-							update_term_meta($term_id, '_seopress_titles_title', $term_settings['doctitle']);
-						}
-						if (!empty($term_settings['description'])) { //Import meta desc
-							update_term_meta($term_id, '_seopress_titles_desc', $term_settings['description']);
-						}
-						if (!empty($term_settings['noindex'])) { //Import Robots NoIndex
-							update_term_meta($term_id, '_seopress_robots_index', "yes");
-						}
-						if (!empty($term_settings['nofollow'])) { //Import Robots NoFollow
-							update_term_meta($term_id, '_seopress_robots_follow', "yes");
-						}
-						if (!empty($term_settings['noarchive'])) { //Import Robots NoArchive
-							update_term_meta($term_id, '_seopress_robots_archive', "yes");
-						}
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_query();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type' => 'any',
-				'post_status' => 'any',
-				'offset' => $offset,
-			);
+            $seo_framework_query = get_posts($args);
 
-			$seo_framework_query = get_posts( $args );
-
-			if ($seo_framework_query) {
-				foreach ($seo_framework_query as $post) {
-					if (get_post_meta($post->ID, '_genesis_title', true) !='') { //Import title tag
-						update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_genesis_title', true));
-					}
-					if (get_post_meta($post->ID, '_genesis_description', true) !='') { //Import meta desc
-						update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_genesis_description', true));
-					}
-					if (get_post_meta($post->ID, '_open_graph_title', true) !='') { //Import Facebook Title
-						update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_open_graph_title', true));
-					}
-					if (get_post_meta($post->ID, '_open_graph_description', true) !='') { //Import Facebook Desc
-						update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_open_graph_description', true));
-					}
-					if (get_post_meta($post->ID, '_social_image_url', true) !='') { //Import Facebook Image
-						update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_social_image_url', true));
-					}
-					if (get_post_meta($post->ID, '_twitter_title', true) !='') { //Import Twitter Title
-						update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_twitter_title', true));
-					}
-					if (get_post_meta($post->ID, '_twitter_description', true) !='') { //Import Twitter Desc
-						update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_twitter_description', true));
-					}
-					if (get_post_meta($post->ID, '_social_image_url', true) !='') { //Import Twitter Image
-						update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_social_image_url', true));
-					}
-					if (get_post_meta($post->ID, '_genesis_noindex', true) =='1') { //Import Robots NoIndex
-						update_post_meta($post->ID, '_seopress_robots_index', "yes");
-					}
-					if (get_post_meta($post->ID, '_genesis_nofollow', true) =='1') { //Import Robots NoFollow
-						update_post_meta($post->ID, '_seopress_robots_follow', "yes");
-					}
-					if (get_post_meta($post->ID, '_genesis_noarchive', true) =='1') { //Import Robots NoArchive
-						update_post_meta($post->ID, '_seopress_robots_archive', "yes");
-					}
-					if (get_post_meta($post->ID, '_genesis_canonical_uri', true) !='') { //Import Canonical URL
-						update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_genesis_canonical_uri', true));
-					}
-					if (get_post_meta($post->ID, 'redirect', true) !='') { //Import Redirect URL
-						update_post_meta($post->ID, '_seopress_redirections_enabled', 'yes');
-						update_post_meta($post->ID, '_seopress_redirections_type', '301');
-						update_post_meta($post->ID, '_seopress_redirections_value', get_post_meta($post->ID, 'redirect', true));
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
+            if ($seo_framework_query) {
+                foreach ($seo_framework_query as $post) {
+                    if ('' != get_post_meta($post->ID, '_genesis_title', true)) { //Import title tag
+                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_genesis_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_genesis_description', true)) { //Import meta desc
+                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_genesis_description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_open_graph_title', true)) { //Import Facebook Title
+                        update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_open_graph_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_open_graph_description', true)) { //Import Facebook Desc
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_open_graph_description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_social_image_url', true)) { //Import Facebook Image
+                        update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_social_image_url', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_twitter_title', true)) { //Import Twitter Title
+                        update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_twitter_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_twitter_description', true)) { //Import Twitter Desc
+                        update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_twitter_description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_social_image_url', true)) { //Import Twitter Image
+                        update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_social_image_url', true));
+                    }
+                    if ('1' == get_post_meta($post->ID, '_genesis_noindex', true)) { //Import Robots NoIndex
+                        update_post_meta($post->ID, '_seopress_robots_index', 'yes');
+                    }
+                    if ('1' == get_post_meta($post->ID, '_genesis_nofollow', true)) { //Import Robots NoFollow
+                        update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
+                    }
+                    if ('1' == get_post_meta($post->ID, '_genesis_noarchive', true)) { //Import Robots NoArchive
+                        update_post_meta($post->ID, '_seopress_robots_archive', 'yes');
+                    }
+                    if ('' != get_post_meta($post->ID, '_genesis_canonical_uri', true)) { //Import Canonical URL
+                        update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_genesis_canonical_uri', true));
+                    }
+                    if ('' != get_post_meta($post->ID, 'redirect', true)) { //Import Redirect URL
+                        update_post_meta($post->ID, '_seopress_redirections_enabled', 'yes');
+                        update_post_meta($post->ID, '_seopress_redirections_type', '301');
+                        update_post_meta($post->ID, '_seopress_redirections_value', get_post_meta($post->ID, 'redirect', true));
+                    }
+                }
+            }
+            $offset += $increment;
+        }
+        $data           = [];
+        $data['offset'] = $offset;
+        wp_send_json_success($data);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_seo_framework_migration', 'seopress_seo_framework_migration');
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//RK migration
-///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_rk_migration() {
-	check_ajax_referer( 'seopress_rk_migrate_nonce', $_POST['_ajax_nonce'], true );
-
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
-
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
-
-		global $wpdb;
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
-
-		$increment = 200;
-		global $post;
-
-		if ($offset > $total_count_posts) {
-			wp_reset_query();
-
-			$args = array(
-				'hide_empty' => false,
-				'fields' => 'ids',
-			);
-			$rk_query_terms = get_terms($args);
-
-			if ($rk_query_terms) {
-				foreach ($rk_query_terms as $term_id) {
-					if (get_term_meta($term_id, 'rank_math_title', true) !='') { //Import title tag
-						update_term_meta($term_id, '_seopress_titles_title', get_term_meta($term_id, 'rank_math_title', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_description', true) !='') { //Import title desc
-						update_term_meta($term_id, '_seopress_titles_desc', get_term_meta($term_id, 'rank_math_description', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_facebook_title', true) !='') { //Import Facebook Title
-						update_term_meta($term_id, '_seopress_social_fb_title', get_term_meta($term_id, 'rank_math_facebook_title', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_facebook_description', true) !='') { //Import Facebook Desc
-						update_term_meta($term_id, '_seopress_social_fb_desc', get_term_meta($term_id, 'rank_math_facebook_description', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_facebook_image', true) !='') { //Import Facebook Image
-						update_term_meta($term_id, '_seopress_social_fb_img', get_term_meta($term_id, 'rank_math_facebook_image', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_twitter_title', true) !='') { //Import Twitter Title
-						update_term_meta($term_id, '_seopress_social_twitter_title', get_term_meta($term_id, 'rank_math_twitter_title', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_twitter_description', true) !='') { //Import Twitter Desc
-						update_term_meta($term_id, '_seopress_social_twitter_desc', get_term_meta($term_id, 'rank_math_twitter_description', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_twitter_image', true) !='') { //Import Twitter Image
-						update_term_meta($term_id, '_seopress_social_twitter_img', get_term_meta($term_id, 'rank_math_twitter_image', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_robots', true) !='') { //Import Robots NoIndex, NoFollow, NoOdp, NoImageIndex, NoArchive, NoSnippet
-						$rank_math_robots = get_term_meta($term_id, 'rank_math_robots', true);
-
-						if (in_array('noindex', $rank_math_robots)) {
-							update_term_meta($term_id, '_seopress_robots_index', "yes");
-						}
-						if (in_array('nofollow', $rank_math_robots)) {
-							update_term_meta($term_id, '_seopress_robots_follow', "yes");
-						}
-						if (in_array('noodp', $rank_math_robots)) {
-							update_term_meta($term_id, '_seopress_robots_odp', "yes");
-						}
-						if (in_array('noimageindex', $rank_math_robots)) {
-							update_term_meta($term_id, '_seopress_robots_imageindex', "yes");
-						}
-						if (in_array('noarchive', $rank_math_robots)) {
-							update_term_meta($term_id, '_seopress_robots_archive', "yes");
-						}
-						if (in_array('nosnippet', $rank_math_robots)) {
-							update_term_meta($term_id, '_seopress_robots_snippet', "yes");
-						}
-					}
-					if (get_term_meta($term_id, 'rank_math_canonical_url', true) !='') { //Import Canonical URL
-						update_term_meta($term_id, '_seopress_robots_canonical', get_term_meta($term_id, 'rank_math_canonical_url', true));
-					}
-					if (get_term_meta($term_id, 'rank_math_focus_keyword', true) !='') { //Import Focus Keywords
-						update_term_meta($term_id, '_seopress_analysis_target_kw', get_term_meta($term_id, 'rank_math_focus_keyword', true));
-					}
-
-
-				}
-			}
-			$offset = 'done';
-			wp_reset_query();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type' => 'any',
-				'post_status' => 'any',
-				'offset' => $offset,
-			);
-
-			$rk_query = get_posts( $args );
-
-			if ($rk_query) {
-				foreach ($rk_query as $post) {
-					if (get_post_meta($post->ID, 'rank_math_title', true) !='') { //Import title tag
-						update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, 'rank_math_title', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_description', true) !='') { //Import meta desc
-						update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, 'rank_math_description', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_facebook_title', true) !='') { //Import Facebook Title
-						update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, 'rank_math_facebook_title', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_facebook_description', true) !='') { //Import Facebook Desc
-						update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, 'rank_math_facebook_description', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_facebook_image', true) !='') { //Import Facebook Image
-						update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, 'rank_math_facebook_image', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_twitter_title', true) !='') { //Import Twitter Title
-						update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, 'rank_math_twitter_title', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_twitter_description', true) !='') { //Import Twitter Desc
-						update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, 'rank_math_twitter_description', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_twitter_image', true) !='') { //Import Twitter Image
-						update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, 'rank_math_twitter_image', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_robots', true) !='') { //Import Robots NoIndex, NoFollow, NoOdp, NoImageIndex, NoArchive, NoSnippet
-						$rank_math_robots = get_post_meta($post->ID, 'rank_math_robots', true);
-
-						if (in_array('noindex', $rank_math_robots)) {
-							update_post_meta($post->ID, '_seopress_robots_index', "yes");
-						}
-						if (in_array('nofollow', $rank_math_robots)) {
-							update_post_meta($post->ID, '_seopress_robots_follow', "yes");
-						}
-						if (in_array('noodp', $rank_math_robots)) {
-							update_post_meta($post->ID, '_seopress_robots_odp', "yes");
-						}
-						if (in_array('noimageindex', $rank_math_robots)) {
-							update_post_meta($post->ID, '_seopress_robots_imageindex', "yes");
-						}
-						if (in_array('noarchive', $rank_math_robots)) {
-							update_post_meta($post->ID, '_seopress_robots_archive', "yes");
-						}
-						if (in_array('nosnippet', $rank_math_robots)) {
-							update_post_meta($post->ID, '_seopress_robots_snippet', "yes");
-						}
-					}
-					if (get_post_meta($post->ID, 'rank_math_canonical_url', true) !='') { //Import Canonical URL
-						update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, 'rank_math_canonical_url', true));
-					}
-					if (get_post_meta($post->ID, 'rank_math_focus_keyword', true) !='') { //Import Focus Keywords
-						update_post_meta($post->ID, '_seopress_analysis_target_kw', get_post_meta($post->ID, 'rank_math_focus_keyword', true));
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
-}
-add_action('wp_ajax_seopress_rk_migration', 'seopress_rk_migration');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Squirrly migration
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_squirrly_migration() {
-	check_ajax_referer( 'seopress_squirrly_migrate_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_squirrly_migrate_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'qss';
+        $blog_id    = get_current_blog_id();
 
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'qss';
-		$blog_id = get_current_blog_id();
+        $count_query = $wpdb->get_results("SELECT * FROM $table_name WHERE blog_id = $blog_id", ARRAY_A);
 
-		$count_query = $wpdb->get_results( "SELECT * FROM $table_name WHERE blog_id = $blog_id", ARRAY_A );
+        if ( ! empty($count_query)) {
+            foreach ($count_query as $value) {
+                $post_id = url_to_postid($value['URL']);
 
-		if (!empty($count_query)) {
-			foreach($count_query as $value) {
-				$post_id = url_to_postid($value['URL']);
+                if (0 != $post_id && ! empty($value['seo'])) {
+                    $seo = maybe_unserialize($value['seo']);
 
-				if ($post_id !=0 && !empty($value['seo'])) {
-					$seo = maybe_unserialize($value['seo']);
-
-					if ($seo['title'] !='') { //Import title tag
-						update_post_meta($post_id, '_seopress_titles_title', $seo['title']);
-					}
-					if ($seo['description'] !='') { //Import description tag
-						update_post_meta($post_id, '_seopress_titles_desc', $seo['description']);
-					}
-					if ($seo['og_title'] !='') { //Import Facebook Title
-						update_post_meta($post_id, '_seopress_social_fb_title', $seo['og_title']);
-					}
-					if ($seo['og_description'] !='') { //Import Facebook Desc
-						update_post_meta($post_id, '_seopress_social_fb_desc', $seo['og_description']);
-					}
-					if ($seo['og_media'] !='') { //Import Facebook Image
-						update_post_meta($post_id, '_seopress_social_fb_img', $seo['og_media']);
-					}
-					if ($seo['tw_title'] !='') { //Import Twitter Title
-						update_post_meta($post_id, '_seopress_social_twitter_title', $seo['tw_title']);
-					}
-					if ($seo['tw_description'] !='') { //Import Twitter Desc
-						update_post_meta($post_id, '_seopress_social_twitter_desc', $seo['tw_description']);
-					}
-					if ($seo['tw_media'] !='') { //Import Twitter Image
-						update_post_meta($post_id, '_seopress_social_twitter_img', $seo['tw_media']);
-					}
-					if ($seo['noindex'] === 1) { //Import noindex
-						update_post_meta($post_id, '_seopress_robots_index', 'yes');
-					}
-					if ($seo['nofollow'] === 1) { //Import nofollow
-						update_post_meta($post_id, '_seopress_robots_follow', 'yes');
-					}
-					if ($seo['canonical'] !='') { //Import canonical
-						update_post_meta($post_id, '_seopress_robots_canonical', $seo['canonical']);
-					}
-				}
-			}
-			$offset = 'done';
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
+                    if ('' != $seo['title']) { //Import title tag
+                        update_post_meta($post_id, '_seopress_titles_title', $seo['title']);
+                    }
+                    if ('' != $seo['description']) { //Import description tag
+                        update_post_meta($post_id, '_seopress_titles_desc', $seo['description']);
+                    }
+                    if ('' != $seo['og_title']) { //Import Facebook Title
+                        update_post_meta($post_id, '_seopress_social_fb_title', $seo['og_title']);
+                    }
+                    if ('' != $seo['og_description']) { //Import Facebook Desc
+                        update_post_meta($post_id, '_seopress_social_fb_desc', $seo['og_description']);
+                    }
+                    if ('' != $seo['og_media']) { //Import Facebook Image
+                        update_post_meta($post_id, '_seopress_social_fb_img', $seo['og_media']);
+                    }
+                    if ('' != $seo['tw_title']) { //Import Twitter Title
+                        update_post_meta($post_id, '_seopress_social_twitter_title', $seo['tw_title']);
+                    }
+                    if ('' != $seo['tw_description']) { //Import Twitter Desc
+                        update_post_meta($post_id, '_seopress_social_twitter_desc', $seo['tw_description']);
+                    }
+                    if ('' != $seo['tw_media']) { //Import Twitter Image
+                        update_post_meta($post_id, '_seopress_social_twitter_img', $seo['tw_media']);
+                    }
+                    if (1 === $seo['noindex']) { //Import noindex
+                        update_post_meta($post_id, '_seopress_robots_index', 'yes');
+                    }
+                    if (1 === $seo['nofollow']) { //Import nofollow
+                        update_post_meta($post_id, '_seopress_robots_follow', 'yes');
+                    }
+                    if ('' != $seo['canonical']) { //Import canonical
+                        update_post_meta($post_id, '_seopress_robots_canonical', $seo['canonical']);
+                    }
+                }
+            }
+            $offset = 'done';
+        }
+        $data           = [];
+        $data['offset'] = $offset;
+        wp_send_json_success($data);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_squirrly_migration', 'seopress_squirrly_migration');
 
@@ -1177,66 +1018,65 @@ add_action('wp_ajax_seopress_squirrly_migration', 'seopress_squirrly_migration')
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_seo_ultimate_migration() {
-	check_ajax_referer( 'seopress_seo_ultimate_migrate_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_seo_ultimate_migrate_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
-		
-		global $wpdb;
+        global $wpdb;
 
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
-		
-		$increment = 200;
-		global $post;
-		
-		if ($offset > $total_count_posts) {
-			$offset = 'done';
-			wp_reset_query();
-		} else {
-			$args = array(  
-				'posts_per_page' => $increment,  
-				'post_type' => 'any',
-				'post_status' => 'any',
-				'offset' => $offset, 
-			);
-			
-			$su_query = get_posts( $args );
-			
-			if ($su_query) {  
-				foreach ($su_query as $post) {
-					if (get_post_meta($post->ID, '_su_title', true) !='') { //Import title tag
-						update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_su_title', true));
-					}
-					if (get_post_meta($post->ID, '_su_description', true) !='') { //Import meta desc
-						update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_su_description', true));
-					}
-					if (get_post_meta($post->ID, '_su_og_title', true) !='') { //Import Facebook Title
-						update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_su_og_title', true));
-					}
-					if (get_post_meta($post->ID, '_su_og_description', true) !='') { //Import Facebook Desc
-						update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_su_og_description', true));
-					}
-					if (get_post_meta($post->ID, '_su_og_image', true) !='') { //Import Facebook Image
-						update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_su_og_image', true));
-					}
-					if (get_post_meta($post->ID, '_su_meta_robots_noindex', true) =='1') { //Import Robots NoIndex
-						update_post_meta($post->ID, '_seopress_robots_index', "yes");
-					}
-					if (get_post_meta($post->ID, '_su_meta_robots_nofollow', true) =='1') { //Import Robots NoFollow
-						update_post_meta($post->ID, '_seopress_robots_follow', "yes");
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
+
+        $increment = 200;
+        global $post;
+
+        if ($offset > $total_count_posts) {
+            $offset = 'done';
+            wp_reset_query();
+        } else {
+            $args = [
+                'posts_per_page' => $increment,
+                'post_type'      => 'any',
+                'post_status'    => 'any',
+                'offset'         => $offset,
+            ];
+
+            $su_query = get_posts($args);
+
+            if ($su_query) {
+                foreach ($su_query as $post) {
+                    if ('' != get_post_meta($post->ID, '_su_title', true)) { //Import title tag
+                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_su_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_su_description', true)) { //Import meta desc
+                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_su_description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_su_og_title', true)) { //Import Facebook Title
+                        update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_su_og_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_su_og_description', true)) { //Import Facebook Desc
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_su_og_description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_su_og_image', true)) { //Import Facebook Image
+                        update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_su_og_image', true));
+                    }
+                    if ('1' == get_post_meta($post->ID, '_su_meta_robots_noindex', true)) { //Import Robots NoIndex
+                        update_post_meta($post->ID, '_seopress_robots_index', 'yes');
+                    }
+                    if ('1' == get_post_meta($post->ID, '_su_meta_robots_nofollow', true)) { //Import Robots NoFollow
+                        update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
+                    }
+                }
+            }
+            $offset += $increment;
+        }
+        $data           = [];
+        $data['offset'] = $offset;
+        wp_send_json_success($data);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_seo_ultimate_migration', 'seopress_seo_ultimate_migration');
 
@@ -1247,86 +1087,85 @@ add_action('wp_ajax_seopress_seo_ultimate_migration', 'seopress_seo_ultimate_mig
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_wp_meta_seo_migration() {
-	check_ajax_referer( 'seopress_meta_seo_migrate_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_meta_seo_migrate_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
-		
-		global $wpdb;
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
-		
-		$increment = 200;
-		global $post;
-		
-		if ($offset > $total_count_posts) {
-			wp_reset_query();
+        global $wpdb;
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
 
-			$args = array(
-				'hide_empty' => false,
-				'fields' => 'ids',
-			);
-			$wp_meta_seo_query_terms = get_terms($args);
+        $increment = 200;
+        global $post;
 
-			if ($wp_meta_seo_query_terms) { 
-				foreach ($wp_meta_seo_query_terms as $term_id) {
-					if (get_term_meta($term_id, 'wpms_category_metatitle', true) !='') { //Import title tag
-						update_term_meta($term_id, '_seopress_titles_title', get_term_meta($term_id, 'wpms_category_metatitle', true));
-					}
-					if (get_term_meta($term_id, 'wpms_category_metadesc', true) !='') { //Import title desc
-						update_term_meta($term_id, '_seopress_titles_desc', get_term_meta($term_id, 'wpms_category_metadesc', true));
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_query();
-		} else {
-			$args = array(  
-				'posts_per_page' => $increment,
-				'post_type' => 'any',
-				'post_status' => 'any',
-				'offset' => $offset,
-			);
-			
-			$wp_meta_seo_query = get_posts( $args );
-			
-			if ($wp_meta_seo_query) {  
-				foreach ($wp_meta_seo_query as $post) {
-					if (get_post_meta($post->ID, '_metaseo_metatitle', true) !='') { //Import title tag
-						update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_metaseo_metatitle', true));
-					}
-					if (get_post_meta($post->ID, '_metaseo_metadesc', true) !='') { //Import meta desc
-						update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_metaseo_metadesc', true));
-					}
-					if (get_post_meta($post->ID, '_metaseo_metaopengraph-title', true) !='') { //Import Facebook Title
-						update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_metaseo_metaopengraph-title', true));
-					}            
-					if (get_post_meta($post->ID, '_metaseo_metaopengraph-desc', true) !='') { //Import Facebook Desc
-						update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_metaseo_metaopengraph-desc', true));
-					}            
-					if (get_post_meta($post->ID, '_metaseo_metaopengraph-image', true) !='') { //Import Facebook Image
-						update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_metaseo_metaopengraph-image', true));
-					}            
-					if (get_post_meta($post->ID, '_metaseo_metatwitter-title', true) !='') { //Import Twitter Title
-						update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_metaseo_metatwitter-title', true));
-					}            
-					if (get_post_meta($post->ID, '_metaseo_metatwitter-desc', true) !='') { //Import Twitter Desc
-						update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_metaseo_metatwitter-desc', true));
-					}            
-					if (get_post_meta($post->ID, '_metaseo_metatwitter-image', true) !='') { //Import Twitter Image
-						update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_metaseo_metatwitter-image', true));
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
+        if ($offset > $total_count_posts) {
+            wp_reset_query();
+
+            $args = [
+                'hide_empty' => false,
+                'fields'     => 'ids',
+            ];
+            $wp_meta_seo_query_terms = get_terms($args);
+
+            if ($wp_meta_seo_query_terms) {
+                foreach ($wp_meta_seo_query_terms as $term_id) {
+                    if ('' != get_term_meta($term_id, 'wpms_category_metatitle', true)) { //Import title tag
+                        update_term_meta($term_id, '_seopress_titles_title', get_term_meta($term_id, 'wpms_category_metatitle', true));
+                    }
+                    if ('' != get_term_meta($term_id, 'wpms_category_metadesc', true)) { //Import title desc
+                        update_term_meta($term_id, '_seopress_titles_desc', get_term_meta($term_id, 'wpms_category_metadesc', true));
+                    }
+                }
+            }
+            $offset = 'done';
+            wp_reset_query();
+        } else {
+            $args = [
+                'posts_per_page' => $increment,
+                'post_type'      => 'any',
+                'post_status'    => 'any',
+                'offset'         => $offset,
+            ];
+
+            $wp_meta_seo_query = get_posts($args);
+
+            if ($wp_meta_seo_query) {
+                foreach ($wp_meta_seo_query as $post) {
+                    if ('' != get_post_meta($post->ID, '_metaseo_metatitle', true)) { //Import title tag
+                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_metaseo_metatitle', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_metaseo_metadesc', true)) { //Import meta desc
+                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_metaseo_metadesc', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_metaseo_metaopengraph-title', true)) { //Import Facebook Title
+                        update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_metaseo_metaopengraph-title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_metaseo_metaopengraph-desc', true)) { //Import Facebook Desc
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_metaseo_metaopengraph-desc', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_metaseo_metaopengraph-image', true)) { //Import Facebook Image
+                        update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_metaseo_metaopengraph-image', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_metaseo_metatwitter-title', true)) { //Import Twitter Title
+                        update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_metaseo_metatwitter-title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_metaseo_metatwitter-desc', true)) { //Import Twitter Desc
+                        update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_metaseo_metatwitter-desc', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_metaseo_metatwitter-image', true)) { //Import Twitter Image
+                        update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_metaseo_metatwitter-image', true));
+                    }
+                }
+            }
+            $offset += $increment;
+        }
+        $data           = [];
+        $data['offset'] = $offset;
+        wp_send_json_success($data);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_wp_meta_seo_migration', 'seopress_wp_meta_seo_migration');
 
@@ -1337,113 +1176,111 @@ add_action('wp_ajax_seopress_wp_meta_seo_migration', 'seopress_wp_meta_seo_migra
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_premium_seo_pack_migration() {
-	check_ajax_referer( 'seopress_premium_seo_pack_migrate_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_premium_seo_pack_migrate_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
+        global $wpdb;
 
-		global $wpdb;
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
 
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+        $increment = 200;
+        global $post;
 
-		$increment = 200;
-		global $post;
+        if ($offset > $total_count_posts) {
+            wp_reset_query();
 
-		if ($offset > $total_count_posts) {
-			wp_reset_query();
+            $premium_query_terms = get_option('psp_taxonomy_seo');
 
-			$premium_query_terms = get_option('psp_taxonomy_seo');
+            if ($premium_query_terms) {
+                foreach ($premium_query_terms as $taxonomies => $taxonomie) {
+                    foreach ($taxonomie as $term_id => $term_value) {
+                        if ('' != $term_value['psp_meta']['title']) { //Import title tag
+                            update_term_meta($term_id, '_seopress_titles_title', $term_value['psp_meta']['title']);
+                        }
+                        if ('' != $term_value['psp_meta']['description']) { //Import meta desc
+                            update_term_meta($term_id, '_seopress_titles_desc', $term_value['psp_meta']['description']);
+                        }
+                        if ('' != $term_value['psp_meta']['facebook_titlu']) { //Import Facebook Title
+                            update_term_meta($term_id, '_seopress_social_fb_title', $term_value['psp_meta']['facebook_titlu']);
+                        }
+                        if ('' != $term_value['psp_meta']['facebook_desc']) { //Import Facebook Desc
+                            update_term_meta($term_id, '_seopress_social_fb_desc', $term_value['psp_meta']['facebook_desc']);
+                        }
+                        if ('' != $term_value['psp_meta']['facebook_image']) { //Import Facebook Image
+                            update_term_meta($term_id, '_seopress_social_fb_img', $term_value['psp_meta']['facebook_image']);
+                        }
+                        if ('noindex' == $term_value['psp_meta']['robots_index']) { //Import Robots NoIndex
+                            update_term_meta($term_id, '_seopress_robots_index', 'yes');
+                        }
+                        if ('nofollow' == $term_value['psp_meta']['robots_follow']) { //Import Robots NoFollow
+                            update_term_meta($term_id, '_seopress_robots_follow', 'yes');
+                        }
+                        if ('' != $term_value['psp_meta']['canonical']) { //Import Canonical URL
+                            update_term_meta($term_id, '_seopress_robots_canonical', $term_value['psp_meta']['canonical']);
+                        }
+                    }
+                }
+            }
+            $offset = 'done';
+            wp_reset_query();
+        } else {
+            $args = [
+                'posts_per_page' => $increment,
+                'post_type'      => 'any',
+                'post_status'    => 'any',
+                'offset'         => $offset,
+            ];
 
-			if ($premium_query_terms) {
+            $premium_query = get_posts($args);
 
-				foreach ($premium_query_terms as $taxonomies => $taxonomie) {
-					foreach ($taxonomie as $term_id => $term_value) {
-						if ($term_value['psp_meta']['title'] !='') { //Import title tag
-							update_term_meta($term_id, '_seopress_titles_title', $term_value['psp_meta']['title']);
-						}
-						if ($term_value['psp_meta']['description'] !='') { //Import meta desc
-							update_term_meta($term_id, '_seopress_titles_desc', $term_value['psp_meta']['description']);
-						}
-						if ($term_value['psp_meta']['facebook_titlu'] !='') { //Import Facebook Title
-							update_term_meta($term_id, '_seopress_social_fb_title', $term_value['psp_meta']['facebook_titlu']);
-						}
-						if ($term_value['psp_meta']['facebook_desc'] !='') { //Import Facebook Desc
-							update_term_meta($term_id, '_seopress_social_fb_desc', $term_value['psp_meta']['facebook_desc']);
-						}
-						if ($term_value['psp_meta']['facebook_image'] !='') { //Import Facebook Image
-							update_term_meta($term_id, '_seopress_social_fb_img', $term_value['psp_meta']['facebook_image']);
-						}
-						if ($term_value['psp_meta']['robots_index'] =='noindex') { //Import Robots NoIndex
-							update_term_meta($term_id, '_seopress_robots_index', "yes");
-						}
-						if ($term_value['psp_meta']['robots_follow'] =='nofollow') { //Import Robots NoFollow
-							update_term_meta($term_id, '_seopress_robots_follow', "yes");
-						}
-						if ($term_value['psp_meta']['canonical'] !='') { //Import Canonical URL
-							update_term_meta($term_id, '_seopress_robots_canonical', $term_value['psp_meta']['canonical']);
-						}
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_query();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type' => 'any',
-				'post_status' => 'any',
-				'offset' => $offset,
-			);
+            if ($premium_query) {
+                foreach ($premium_query as $post) {
+                    $psp_meta = get_post_meta($post->ID, 'psp_meta', true);
 
-			$premium_query = get_posts( $args );
+                    if ( ! empty($psp_meta)) {
+                        if ( ! empty($psp_meta['title'])) { //Import title tag
+                            update_post_meta($post->ID, '_seopress_titles_title', $psp_meta['title']);
+                        }
+                        if ( ! empty($psp_meta['description'])) { //Import meta desc
+                            update_post_meta($post->ID, '_seopress_titles_desc', $psp_meta['description']);
+                        }
+                        if ( ! empty($psp_meta['facebook_titlu'])) { //Import Facebook Title
+                            update_post_meta($post->ID, '_seopress_social_fb_title', $psp_meta['facebook_titlu']);
+                        }
+                        if ( ! empty($psp_meta['facebook_desc'])) { //Import Facebook Desc
+                            update_post_meta($post->ID, '_seopress_social_fb_desc', $psp_meta['facebook_desc']);
+                        }
+                        if ( ! empty($psp_meta['facebook_image'])) { //Import Facebook Image
+                            update_post_meta($post->ID, '_seopress_social_fb_img', $psp_meta['facebook_image']);
+                        }
+                        if ('noindex' == $psp_meta['robots_index']) { //Import Robots NoIndex
+                            update_post_meta($post->ID, '_seopress_robots_index', 'yes');
+                        }
+                        if ('nofollow' == $psp_meta['robots_follow']) { //Import Robots NoIndex
+                            update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
+                        }
+                        if ( ! empty($psp_meta['canonical'])) { //Import Canonical URL
+                            update_post_meta($post->ID, '_seopress_robots_canonical', $psp_meta['canonical']);
+                        }
+                        if ( ! empty($psp_meta['mfocus_keyword'])) { //Import Focus Keywords
+                            $target_kw = preg_split('/\r\n|\r|\n/', $psp_meta['mfocus_keyword']);
 
-			if ($premium_query) {
-				foreach ($premium_query as $post) {
-					$psp_meta = get_post_meta($post->ID, 'psp_meta', true);
-
-					if (!empty($psp_meta)) {
-						if (!empty($psp_meta['title'])) { //Import title tag
-							update_post_meta($post->ID, '_seopress_titles_title', $psp_meta['title']);
-						}
-						if (!empty($psp_meta['description'])) { //Import meta desc
-							update_post_meta($post->ID, '_seopress_titles_desc', $psp_meta['description']);
-						}
-						if (!empty($psp_meta['facebook_titlu'])) { //Import Facebook Title
-							update_post_meta($post->ID, '_seopress_social_fb_title', $psp_meta['facebook_titlu']);
-						}
-						if (!empty($psp_meta['facebook_desc'])) { //Import Facebook Desc
-							update_post_meta($post->ID, '_seopress_social_fb_desc', $psp_meta['facebook_desc']);
-						}
-						if (!empty($psp_meta['facebook_image'])) { //Import Facebook Image
-							update_post_meta($post->ID, '_seopress_social_fb_img', $psp_meta['facebook_image']);
-						}
-						if ($psp_meta['robots_index'] == 'noindex') { //Import Robots NoIndex
-							update_post_meta($post->ID, '_seopress_robots_index', "yes");
-						}
-						if ($psp_meta['robots_follow'] == 'nofollow') { //Import Robots NoIndex
-							update_post_meta($post->ID, '_seopress_robots_follow', "yes");
-						}
-						if (!empty($psp_meta['canonical'])) { //Import Canonical URL
-							update_post_meta($post->ID, '_seopress_robots_canonical', $psp_meta['canonical']);
-						}
-						if (!empty($psp_meta['mfocus_keyword'])) { //Import Focus Keywords
-							$target_kw = preg_split('/\r\n|\r|\n/', $psp_meta['mfocus_keyword']);
-
-							update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',',$target_kw));
-						}
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
+                            update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',', $target_kw));
+                        }
+                    }
+                }
+            }
+            $offset += $increment;
+        }
+        $data           = [];
+        $data['offset'] = $offset;
+        wp_send_json_success($data);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_premium_seo_pack_migration', 'seopress_premium_seo_pack_migration');
 
@@ -1454,122 +1291,121 @@ add_action('wp_ajax_seopress_premium_seo_pack_migration', 'seopress_premium_seo_
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_wpseo_migration() {
-	check_ajax_referer( 'seopress_wpseo_migrate_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_wpseo_migrate_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset']) && isset( $_POST['offset'] )) {
-			$offset = absint($_POST['offset']);
-		}
+        global $wpdb;
 
-		global $wpdb;
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
 
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+        $increment = 200;
+        global $post;
 
-		$increment = 200;
-		global $post;
+        if ($offset > $total_count_posts) {
+            wp_reset_query();
 
-		if ($offset > $total_count_posts) {
-			wp_reset_query();
+            $args = [
+                'hide_empty' => false,
+                'fields'     => 'ids',
+            ];
+            $wpseo_query_terms = get_terms($args);
 
-			$args = array(
-				'hide_empty' => false,
-				'fields' => 'ids',
-			);
-			$wpseo_query_terms = get_terms($args);
+            if ($wpseo_query_terms) {
+                foreach ($wpseo_query_terms as $term_id) {
+                    if ('' != get_option('wpseo_category_' . $term_id . '_title')) { //Import title tag
+                        update_term_meta($term_id, '_seopress_titles_title', get_option('wpseo_category_' . $term_id . '_title'));
+                    }
+                    if ('' != get_option('wpseo_category_' . $term_id)) { //Import meta desc
+                        update_term_meta($term_id, '_seopress_titles_desc', get_option('wpseo_category_' . $term_id));
+                    }
+                    if ('' != get_option('wpseo_category_' . $term_id . '_og_title')) { //Import Facebook Title
+                        update_term_meta($term_id, '_seopress_social_fb_title', get_option('wpseo_category_' . $term_id . '_og_title'));
+                        update_term_meta($term_id, '_seopress_social_twitter_title', get_option('wpseo_category_' . $term_id . '_og_title'));
+                    }
+                    if ('' != get_option('wpseo_category_' . $term_id . '_og_desc')) { //Import Facebook Desc
+                        update_term_meta($term_id, '_seopress_social_fb_desc', get_option('wpseo_category_' . $term_id . '_og_desc'));
+                        update_term_meta($term_id, '_seopress_social_twitter_desc', get_option('wpseo_category_' . $term_id . '_og_desc'));
+                    }
+                    if ('' != get_option('wpseo_category_' . $term_id . '_og_image')) { //Import Facebook Image
+                        update_term_meta($term_id, '_seopress_social_fb_img', get_option('wpseo_category_' . $term_id . '_og_image'));
+                        update_term_meta($term_id, '_seopress_social_twitter_img', get_option('wpseo_category_' . $term_id . '_og_image'));
+                    }
+                    if ('' != get_option('wpseo_category_' . $term_id . '_canonical')) { //Import Canonical URL
+                        update_term_meta($term_id, '_seopress_robots_canonical', get_option('wpseo_category_' . $term_id . '_canonical'));
+                    }
+                    if ('' != get_option('wpseo_category_' . $term_id . '_redirect')) { //Import Redirect URL
+                        update_term_meta($term_id, '_seopress_redirections_value', get_option('wpseo_category_' . $term_id . '_redirect'));
+                        update_term_meta($term_id, '_seopress_redirections_enabled', 'yes');
+                    }
+                    if ('4' == get_option('wpseo_category_' . $term_id . '_robots') || '5' == get_option('wpseo_category_' . $term_id . '_robots') || '3' == get_option('wpseo_category_' . $term_id . '_robots')) { //Import Robots NoIndex
+                        update_term_meta($term_id, '_seopress_robots_index', 'yes');
+                    }
+                    if ('2' == get_option('wpseo_category_' . $term_id . '_robots')) { //Import Robots NoFollow
+                        update_term_meta($term_id, '_seopress_robots_follow', 'yes');
+                    }
+                }
+            }
+            $offset = 'done';
+            wp_reset_query();
+        } else {
+            $args = [
+                'posts_per_page' => $increment,
+                'post_type'      => 'any',
+                'post_status'    => 'any',
+                'offset'         => $offset,
+            ];
 
-			if ($wpseo_query_terms) { 
-				foreach ($wpseo_query_terms as $term_id) {
-					if (get_option('wpseo_category_'.$term_id.'_title') !='') { //Import title tag
-						update_term_meta($term_id, '_seopress_titles_title', get_option('wpseo_category_'.$term_id.'_title'));
-					}
-					if (get_option('wpseo_category_'.$term_id) !='') { //Import meta desc
-						update_term_meta($term_id, '_seopress_titles_desc', get_option('wpseo_category_'.$term_id));
-					}
-					if (get_option('wpseo_category_'.$term_id.'_og_title') !='') { //Import Facebook Title
-						update_term_meta($term_id, '_seopress_social_fb_title', get_option('wpseo_category_'.$term_id.'_og_title'));
-						update_term_meta($term_id, '_seopress_social_twitter_title', get_option('wpseo_category_'.$term_id.'_og_title'));
-					}
-					if (get_option('wpseo_category_'.$term_id.'_og_desc') !='') { //Import Facebook Desc
-						update_term_meta($term_id, '_seopress_social_fb_desc', get_option('wpseo_category_'.$term_id.'_og_desc'));
-						update_term_meta($term_id, '_seopress_social_twitter_desc', get_option('wpseo_category_'.$term_id.'_og_desc'));
-					}
-					if (get_option('wpseo_category_'.$term_id.'_og_image') !='') { //Import Facebook Image
-						update_term_meta($term_id, '_seopress_social_fb_img', get_option('wpseo_category_'.$term_id.'_og_image'));
-						update_term_meta($term_id, '_seopress_social_twitter_img', get_option('wpseo_category_'.$term_id.'_og_image'));
-					}
-					if (get_option('wpseo_category_'.$term_id.'_canonical') !='') { //Import Canonical URL
-						update_term_meta($term_id, '_seopress_robots_canonical', get_option('wpseo_category_'.$term_id.'_canonical'));
-					}
-					if (get_option('wpseo_category_'.$term_id.'_redirect') !='') { //Import Redirect URL
-						update_term_meta($term_id, '_seopress_redirections_value', get_option('wpseo_category_'.$term_id.'_redirect'));
-						update_term_meta($term_id, '_seopress_redirections_enabled', 'yes');
-					}
-					if (get_option('wpseo_category_'.$term_id.'_robots') =='4' || get_option('wpseo_category_'.$term_id.'_robots') =='5' || get_option('wpseo_category_'.$term_id.'_robots') =='3') { //Import Robots NoIndex
-						update_term_meta($term_id, '_seopress_robots_index', "yes");
-					}
-					if (get_option('wpseo_category_'.$term_id.'_robots') =='2') { //Import Robots NoFollow
-						update_term_meta($term_id, '_seopress_robots_follow', "yes");
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_query();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type' => 'any',
-				'post_status' => 'any',
-				'offset' => $offset,
-			);
+            $wpseo_query = get_posts($args);
 
-			$wpseo_query = get_posts( $args );
-
-			if ($wpseo_query) {  
-				foreach ($wpseo_query as $post) {
-					if (get_post_meta($post->ID, '_wpseo_edit_title', true) !='') { //Import title tag
-						update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_wpseo_edit_title', true));
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_description', true) !='') { //Import meta desc
-						update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_wpseo_edit_description', true));
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_og_title', true) !='') { //Import Facebook Title
-						update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_wpseo_edit_og_title', true));
-						update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_wpseo_edit_og_title', true));
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_og_description', true) !='') { //Import Facebook Desc
-						update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_wpseo_edit_og_description', true));
-						update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_wpseo_edit_og_description', true));
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_og_image', true) !='') { //Import Facebook Image
-						update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_wpseo_edit_og_image', true));
-						update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_wpseo_edit_og_image', true));
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_keyword_0', true) !='') { //Import Target Keyword
-						update_post_meta($post->ID, '_seopress_analysis_target_kw', get_post_meta($post->ID, '_wpseo_edit_keyword_0', true));
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_canonical', true) !='') { //Import Canonical URL
-						update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_wpseo_edit_canonical', true));
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_redirect', true) !='') { //Import Redirect URL
-						update_post_meta($post->ID, '_seopress_redirections_value', get_post_meta($post->ID, '_wpseo_edit_redirect', true));
-						update_post_meta($post->ID, '_seopress_redirections_enabled', 'yes');//Enable the redirect
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_robots', true) =='4' || get_post_meta($post->ID, '_wpseo_edit_robots', true) =='5' || get_post_meta($post->ID, '_wpseo_edit_robots', true) =='3') { //Import Robots NoIndex
-						update_post_meta($post->ID, '_seopress_robots_index', "yes");
-					}
-					if (get_post_meta($post->ID, '_wpseo_edit_robots', true) =='2') { //Import Robots NoFollow
-						update_post_meta($post->ID, '_seopress_robots_follow', "yes");
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data = array();
-		$data['offset'] = $offset;
-		wp_send_json_success($data);
-		die();
-	}
+            if ($wpseo_query) {
+                foreach ($wpseo_query as $post) {
+                    if ('' != get_post_meta($post->ID, '_wpseo_edit_title', true)) { //Import title tag
+                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_wpseo_edit_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_wpseo_edit_description', true)) { //Import meta desc
+                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_wpseo_edit_description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_wpseo_edit_og_title', true)) { //Import Facebook Title
+                        update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_wpseo_edit_og_title', true));
+                        update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_wpseo_edit_og_title', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_wpseo_edit_og_description', true)) { //Import Facebook Desc
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_wpseo_edit_og_description', true));
+                        update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_wpseo_edit_og_description', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_wpseo_edit_og_image', true)) { //Import Facebook Image
+                        update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_wpseo_edit_og_image', true));
+                        update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_wpseo_edit_og_image', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_wpseo_edit_keyword_0', true)) { //Import Target Keyword
+                        update_post_meta($post->ID, '_seopress_analysis_target_kw', get_post_meta($post->ID, '_wpseo_edit_keyword_0', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_wpseo_edit_canonical', true)) { //Import Canonical URL
+                        update_post_meta($post->ID, '_seopress_robots_canonical', get_post_meta($post->ID, '_wpseo_edit_canonical', true));
+                    }
+                    if ('' != get_post_meta($post->ID, '_wpseo_edit_redirect', true)) { //Import Redirect URL
+                        update_post_meta($post->ID, '_seopress_redirections_value', get_post_meta($post->ID, '_wpseo_edit_redirect', true));
+                        update_post_meta($post->ID, '_seopress_redirections_enabled', 'yes'); //Enable the redirect
+                    }
+                    if ('4' == get_post_meta($post->ID, '_wpseo_edit_robots', true) || '5' == get_post_meta($post->ID, '_wpseo_edit_robots', true) || '3' == get_post_meta($post->ID, '_wpseo_edit_robots', true)) { //Import Robots NoIndex
+                        update_post_meta($post->ID, '_seopress_robots_index', 'yes');
+                    }
+                    if ('2' == get_post_meta($post->ID, '_wpseo_edit_robots', true)) { //Import Robots NoFollow
+                        update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
+                    }
+                }
+            }
+            $offset += $increment;
+        }
+        $data           = [];
+        $data['offset'] = $offset;
+        wp_send_json_success($data);
+        exit();
+    }
 }
 add_action('wp_ajax_seopress_wpseo_migration', 'seopress_wpseo_migration');
 
@@ -1577,361 +1413,364 @@ add_action('wp_ajax_seopress_wpseo_migration', 'seopress_wpseo_migration');
 //Export SEOPress metadata to CSV
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_metadata_export() {
-	check_ajax_referer( 'seopress_export_csv_metadata_nonce', $_POST['_ajax_nonce'], true );
+    check_ajax_referer('seopress_export_csv_metadata_nonce', $_POST['_ajax_nonce'], true);
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
 
-		if ( isset( $_POST['offset'] ) ) {
-			$offset = absint($_POST['offset']);
-		}
+        $post_export = '';
+        if (isset($_POST['post_export'])) {
+            $post_export = esc_attr($_POST['post_export']);
+        }
 
-		$post_export = '';
-		if ( isset( $_POST['post_export'] ) ) {
-			$post_export = esc_attr($_POST['post_export']);
-		}
+        $term_export = '';
+        if (isset($_POST['term_export'])) {
+            $term_export = esc_attr($_POST['term_export']);
+        }
 
-		$term_export = '';
-		if ( isset( $_POST['term_export'] ) ) {
-			$term_export = esc_attr($_POST['term_export']);
-		}
+        //Get post types
+        $seopress_get_post_types = [];
+        foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+            $seopress_get_post_types[] = $seopress_cpt_key;
+        }
 
-		//Get post types
-		$seopress_get_post_types = [];
-		foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
-			$seopress_get_post_types[] = $seopress_cpt_key;
-		}
-		
-		//Get taxonomies
-		$seopress_get_taxonomies = [];
-		foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
-			$seopress_get_taxonomies[] = $seopress_tax_key;
-		}
+        //Get taxonomies
+        $seopress_get_taxonomies = [];
+        foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
+            $seopress_get_taxonomies[] = $seopress_tax_key;
+        }
 
-		global $wpdb;
-		global $post;
+        global $wpdb;
+        global $post;
 
-		//Count posts
-		$i = 1;
-		$sql = '(';
-		$count = count($seopress_get_post_types);
-		foreach($seopress_get_post_types as $cpt) {
-			$sql .= '(post_type = "' . $cpt . '")';
-		
-			if ($i < $count) {
-				$sql .= ' OR ';
-			}
-		
-			$i++;
-		}
-		$sql .=')';
-		
-		$total_count_posts = (int)$wpdb->get_var( "SELECT count(*) 
-		FROM {$wpdb->posts} 
-		WHERE $sql 
-		AND (post_status = 'publish' OR post_status = 'pending' OR post_status = 'draft' OR post_status = 'auto-draft' OR post_status = 'future' OR post_status = 'private' OR post_status = 'inherit' OR post_status = 'trash') " );
-		
-		//Count terms
-		$total_count_terms = (int)$wpdb->get_var( "SELECT count(*) FROM {$wpdb->terms}" );
+        //Count posts
+        $i     = 1;
+        $sql   = '(';
+        $count = count($seopress_get_post_types);
+        foreach ($seopress_get_post_types as $cpt) {
+            $sql .= '(post_type = "' . $cpt . '")';
 
-		$increment = 200;
+            if ($i < $count) {
+                $sql .= ' OR ';
+            }
 
-		$csv = '';
-		$csv = get_option('seopress_metadata_csv');
-		$download_url = '';
+            ++$i;
+        }
+        $sql .= ')';
 
-		$settings["id"] = 				[];
-		$settings["post_title"] =		[];
-		$settings["url"] =				[];
-		$settings["meta_title"] =		[];
-		$settings["meta_desc"] =		[];
-		$settings["fb_title"] =			[];
-		$settings["fb_desc"] =			[];
-		$settings["fb_img"] =			[];
-		$settings["tw_title"] =			[];
-		$settings["tw_desc"] =			[];
-		$settings["tw_img"] =			[];
-		$settings["noindex"] =			[];
-		$settings["nofollow"] =			[];
-		$settings["noodp"] =			[];
-		$settings["noimageindex"] =		[];
-		$settings["noarchive"] =		[];
-		$settings["nosnippet"] =		[];
-		$settings["canonical_url"] =	[];
-		$settings["redirect_active"] =	[];
-		$settings["redirect_type"] =	[];
-		$settings["redirect_url"] =		[];
-		$settings["target_kw"] =		[];
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*)
+		FROM {$wpdb->posts}
+		WHERE $sql
+		AND (post_status = 'publish' OR post_status = 'pending' OR post_status = 'draft' OR post_status = 'auto-draft' OR post_status = 'future' OR post_status = 'private' OR post_status = 'inherit' OR post_status = 'trash') ");
 
-		//Posts
-		if ($post_export !='done') {
-			if ($offset > $total_count_posts) {
-				wp_reset_query();
-				//Reset offset once Posts export is done
-				$offset = 0;
-				update_option('seopress_metadata_csv', $csv);
-				$post_export = 'done';
-			} else {
-				$args = array(
-					'post_type' => $seopress_get_post_types,
-					'posts_per_page' => $increment,
-					'offset' => $offset,
-					'post_status' => 'any',
-					'order' => 'DESC',
-					'orderby' => 'date',
-				);
-				$args = apply_filters( 'seopress_metadata_query_args', $args, $seopress_get_post_types, $increment, $offset );
-				$meta_query = get_posts( $args );
+        //Count terms
+        $total_count_terms = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->terms}");
 
-				if ($meta_query) {
-					// The Loop
-					foreach ($meta_query as $post) {
-						array_push($settings["id"], $post->ID);
+        $increment = 200;
 
-						array_push($settings["post_title"], $post->post_title);
+        $csv          = '';
+        $csv          = get_option('seopress_metadata_csv');
+        $download_url = '';
 
-						array_push($settings["url"], get_permalink($post));
+        $settings['id']              = 				[];
+        $settings['post_title']      =		[];
+        $settings['url']             =				[];
+        $settings['meta_title']      =		[];
+        $settings['meta_desc']       =		[];
+        $settings['fb_title']        =			[];
+        $settings['fb_desc']         =			[];
+        $settings['fb_img']          =			[];
+        $settings['tw_title']        =			[];
+        $settings['tw_desc']         =			[];
+        $settings['tw_img']          =			[];
+        $settings['noindex']         =			[];
+        $settings['nofollow']        =			[];
+        $settings['noodp']           =			[];
+        $settings['noimageindex']    =		[];
+        $settings['noarchive']       =		[];
+        $settings['nosnippet']       =		[];
+        $settings['canonical_url']   =	[];
+        $settings['primary_cat']     =	[];
+        $settings['redirect_active'] =	[];
+        $settings['redirect_type']   =	[];
+        $settings['redirect_url']    =		[];
+        $settings['target_kw']       =		[];
 
-						array_push($settings["meta_title"], get_post_meta( $post->ID, '_seopress_titles_title', true ));
+        //Posts
+        if ('done' != $post_export) {
+            if ($offset > $total_count_posts) {
+                wp_reset_query();
+                //Reset offset once Posts export is done
+                $offset = 0;
+                update_option('seopress_metadata_csv', $csv);
+                $post_export = 'done';
+            } else {
+                $args = [
+                    'post_type'      => $seopress_get_post_types,
+                    'posts_per_page' => $increment,
+                    'offset'         => $offset,
+                    'post_status'    => 'any',
+                    'order'          => 'DESC',
+                    'orderby'        => 'date',
+                ];
+                $args       = apply_filters('seopress_metadata_query_args', $args, $seopress_get_post_types, $increment, $offset);
+                $meta_query = get_posts($args);
 
-						array_push($settings["meta_desc"], get_post_meta( $post->ID, '_seopress_titles_desc', true ));
+                if ($meta_query) {
+                    // The Loop
+                    foreach ($meta_query as $post) {
+                        array_push($settings['id'], $post->ID);
 
-						array_push($settings["fb_title"], get_post_meta( $post->ID, '_seopress_social_fb_title', true ));
+                        array_push($settings['post_title'], $post->post_title);
 
-						array_push($settings["fb_desc"], get_post_meta( $post->ID, '_seopress_social_fb_desc', true ));
+                        array_push($settings['url'], get_permalink($post));
 
-						array_push($settings["fb_img"], get_post_meta( $post->ID, '_seopress_social_fb_img', true ));
+                        array_push($settings['meta_title'], get_post_meta($post->ID, '_seopress_titles_title', true));
 
-						array_push($settings["tw_title"], get_post_meta( $post->ID, '_seopress_social_twitter_title', true ));
+                        array_push($settings['meta_desc'], get_post_meta($post->ID, '_seopress_titles_desc', true));
 
-						array_push($settings["tw_desc"], get_post_meta( $post->ID, '_seopress_social_twitter_desc', true ));
+                        array_push($settings['fb_title'], get_post_meta($post->ID, '_seopress_social_fb_title', true));
 
-						array_push($settings["tw_img"], get_post_meta( $post->ID, '_seopress_social_twitter_img', true ));
+                        array_push($settings['fb_desc'], get_post_meta($post->ID, '_seopress_social_fb_desc', true));
 
-						array_push($settings["noindex"], get_post_meta( $post->ID, '_seopress_robots_index', true ));
+                        array_push($settings['fb_img'], get_post_meta($post->ID, '_seopress_social_fb_img', true));
 
-						array_push($settings["nofollow"], get_post_meta( $post->ID, '_seopress_robots_follow', true ));
+                        array_push($settings['tw_title'], get_post_meta($post->ID, '_seopress_social_twitter_title', true));
 
-						array_push($settings["noodp"], get_post_meta( $post->ID, '_seopress_robots_odp', true ));
+                        array_push($settings['tw_desc'], get_post_meta($post->ID, '_seopress_social_twitter_desc', true));
 
-						array_push($settings["noimageindex"], get_post_meta( $post->ID, '_seopress_robots_imageindex', true ));
+                        array_push($settings['tw_img'], get_post_meta($post->ID, '_seopress_social_twitter_img', true));
 
-						array_push($settings["noarchive"], get_post_meta( $post->ID, '_seopress_robots_archive', true ));
+                        array_push($settings['noindex'], get_post_meta($post->ID, '_seopress_robots_index', true));
 
-						array_push($settings["nosnippet"], get_post_meta( $post->ID, '_seopress_robots_snippet', true ));
+                        array_push($settings['nofollow'], get_post_meta($post->ID, '_seopress_robots_follow', true));
 
-						array_push($settings["canonical_url"], get_post_meta( $post->ID, '_seopress_robots_canonical', true ));
+                        array_push($settings['noodp'], get_post_meta($post->ID, '_seopress_robots_odp', true));
 
-						array_push($settings["redirect_active"], get_post_meta( $post->ID, '_seopress_redirections_enabled', true ));
-						
-						array_push($settings["redirect_type"], get_post_meta( $post->ID, '_seopress_redirections_type', true ));
-						
-						array_push($settings["redirect_url"], get_post_meta( $post->ID, '_seopress_redirections_value', true ));
+                        array_push($settings['noimageindex'], get_post_meta($post->ID, '_seopress_robots_imageindex', true));
 
-						array_push($settings["target_kw"], get_post_meta( $post->ID, '_seopress_analysis_target_kw', true ));
+                        array_push($settings['noarchive'], get_post_meta($post->ID, '_seopress_robots_archive', true));
 
-						$csv[] = array_merge(
-							$settings["id"],
-							$settings["post_title"],
-							$settings["url"],
-							$settings["meta_title"],
-							$settings["meta_desc"],
-							$settings["fb_title"],
-							$settings["fb_desc"],
-							$settings["fb_img"],
-							$settings["tw_title"],
-							$settings["tw_desc"],
-							$settings["tw_img"],
-							$settings["noindex"],
-							$settings["nofollow"],
-							$settings["noodp"],
-							$settings["noimageindex"],
-							$settings["noarchive"],
-							$settings["nosnippet"],
-							$settings["canonical_url"],
-							$settings["redirect_active"],
-							$settings["redirect_type"],
-							$settings["redirect_url"],
-							$settings["target_kw"]
-						);
+                        array_push($settings['nosnippet'], get_post_meta($post->ID, '_seopress_robots_snippet', true));
 
-						//Clean arrays
-						$settings["id"] =				[];
-						$settings["post_title"] =		[];
-						$settings["url"] =				[];
-						$settings["meta_title"] =		[];
-						$settings["meta_desc"] =		[];
-						$settings["fb_title"] =			[];
-						$settings["fb_desc"] =			[];
-						$settings["fb_img"] =			[];
-						$settings["tw_title"] =			[];
-						$settings["tw_desc"] =			[];
-						$settings["tw_img"] =			[];
-						$settings["noindex"] =			[];
-						$settings["nofollow"] =			[];
-						$settings["noodp"] =			[];
-						$settings["noimageindex"] =		[];
-						$settings["noarchive"] =		[];
-						$settings["nosnippet"] =		[];
-						$settings["canonical_url"] =	[];
-						$settings["redirect_active"] =	[];
-						$settings["redirect_type"] =	[];
-						$settings["redirect_url"] =		[];
-						$settings["target_kw"] =		[];
+                        array_push($settings['canonical_url'], get_post_meta($post->ID, '_seopress_robots_canonical', true));
 
-					}
-				}
-				$offset += $increment;
-				update_option('seopress_metadata_csv', $csv);
-			}
-		} elseif ($term_export !='done') {
-			//Terms
-			if ($offset > $total_count_terms) {
-				update_option('seopress_metadata_csv', $csv);
-				$post_export = 'done';
-				$term_export = 'done';
-			} else {
-				$args = [
-					'taxonomy' => $seopress_get_taxonomies,
-					'number' => $increment,
-					'offset' => $offset,
-					'order' => 'DESC',
-					'orderby' => 'date',
-					'hide_empty' => false,
-				];
-				
-				$args = apply_filters( 'seopress_metadata_query_terms_args', $args, $seopress_get_taxonomies, $increment, $offset );
-				
-				$meta_query = get_terms( $args );
+                        array_push($settings['primary_cat'], get_post_meta($post->ID, 'seopress_robots_primary_cat', true));
 
-				if ($meta_query) {
-					// The Loop
-					foreach ($meta_query as $term) {
-						array_push($settings["id"], $term->term_id);
+                        array_push($settings['redirect_active'], get_post_meta($post->ID, '_seopress_redirections_enabled', true));
 
-						array_push($settings["post_title"], $term->name);
+                        array_push($settings['redirect_type'], get_post_meta($post->ID, '_seopress_redirections_type', true));
 
-						array_push($settings["url"], get_term_link($term));
+                        array_push($settings['redirect_url'], get_post_meta($post->ID, '_seopress_redirections_value', true));
 
-						array_push($settings["meta_title"], get_term_meta( $term->term_id, '_seopress_titles_title', true ));
+                        array_push($settings['target_kw'], get_post_meta($post->ID, '_seopress_analysis_target_kw', true));
 
-						array_push($settings["meta_desc"], get_term_meta( $term->term_id, '_seopress_titles_desc', true ));
+                        $csv[] = array_merge(
+                            $settings['id'],
+                            $settings['post_title'],
+                            $settings['url'],
+                            $settings['meta_title'],
+                            $settings['meta_desc'],
+                            $settings['fb_title'],
+                            $settings['fb_desc'],
+                            $settings['fb_img'],
+                            $settings['tw_title'],
+                            $settings['tw_desc'],
+                            $settings['tw_img'],
+                            $settings['noindex'],
+                            $settings['nofollow'],
+                            $settings['noodp'],
+                            $settings['noimageindex'],
+                            $settings['noarchive'],
+                            $settings['nosnippet'],
+                            $settings['canonical_url'],
+                            $settings['primary_cat'],
+                            $settings['redirect_active'],
+                            $settings['redirect_type'],
+                            $settings['redirect_url'],
+                            $settings['target_kw']
+                        );
 
-						array_push($settings["fb_title"], get_term_meta( $term->term_id, '_seopress_social_fb_title', true ));
+                        //Clean arrays
+                        $settings['id']              =				[];
+                        $settings['post_title']      =		[];
+                        $settings['url']             =				[];
+                        $settings['meta_title']      =		[];
+                        $settings['meta_desc']       =		[];
+                        $settings['fb_title']        =			[];
+                        $settings['fb_desc']         =			[];
+                        $settings['fb_img']          =			[];
+                        $settings['tw_title']        =			[];
+                        $settings['tw_desc']         =			[];
+                        $settings['tw_img']          =			[];
+                        $settings['noindex']         =			[];
+                        $settings['nofollow']        =			[];
+                        $settings['noodp']           =			[];
+                        $settings['noimageindex']    =		[];
+                        $settings['noarchive']       =		[];
+                        $settings['nosnippet']       =		[];
+                        $settings['canonical_url']   =	[];
+                        $settings['primary_cat']     =	[];
+                        $settings['redirect_active'] =	[];
+                        $settings['redirect_type']   =	[];
+                        $settings['redirect_url']    =		[];
+                        $settings['target_kw']       =		[];
+                    }
+                }
+                $offset += $increment;
+                update_option('seopress_metadata_csv', $csv);
+            }
+        } elseif ('done' != $term_export) {
+            //Terms
+            if ($offset > $total_count_terms) {
+                update_option('seopress_metadata_csv', $csv);
+                $post_export = 'done';
+                $term_export = 'done';
+            } else {
+                $args = [
+                    'taxonomy'   => $seopress_get_taxonomies,
+                    'number'     => $increment,
+                    'offset'     => $offset,
+                    'order'      => 'DESC',
+                    'orderby'    => 'date',
+                    'hide_empty' => false,
+                ];
 
-						array_push($settings["fb_desc"], get_term_meta( $term->term_id, '_seopress_social_fb_desc', true ));
+                $args = apply_filters('seopress_metadata_query_terms_args', $args, $seopress_get_taxonomies, $increment, $offset);
 
-						array_push($settings["fb_img"], get_term_meta( $term->term_id, '_seopress_social_fb_img', true ));
+                $meta_query = get_terms($args);
 
-						array_push($settings["tw_title"], get_term_meta( $term->term_id, '_seopress_social_twitter_title', true ));
+                if ($meta_query) {
+                    // The Loop
+                    foreach ($meta_query as $term) {
+                        array_push($settings['id'], $term->term_id);
 
-						array_push($settings["tw_desc"], get_term_meta( $term->term_id, '_seopress_social_twitter_desc', true ));
+                        array_push($settings['post_title'], $term->name);
 
-						array_push($settings["tw_img"], get_term_meta( $term->term_id, '_seopress_social_twitter_img', true ));
+                        array_push($settings['url'], get_term_link($term));
 
-						array_push($settings["noindex"], get_term_meta( $term->term_id, '_seopress_robots_index', true ));
+                        array_push($settings['meta_title'], get_term_meta($term->term_id, '_seopress_titles_title', true));
 
-						array_push($settings["nofollow"], get_term_meta( $term->term_id, '_seopress_robots_follow', true ));
+                        array_push($settings['meta_desc'], get_term_meta($term->term_id, '_seopress_titles_desc', true));
 
-						array_push($settings["noodp"], get_term_meta( $term->term_id, '_seopress_robots_odp', true ));
+                        array_push($settings['fb_title'], get_term_meta($term->term_id, '_seopress_social_fb_title', true));
 
-						array_push($settings["noimageindex"], get_term_meta( $term->term_id, '_seopress_robots_imageindex', true ));
+                        array_push($settings['fb_desc'], get_term_meta($term->term_id, '_seopress_social_fb_desc', true));
 
-						array_push($settings["noarchive"], get_term_meta( $term->term_id, '_seopress_robots_archive', true ));
+                        array_push($settings['fb_img'], get_term_meta($term->term_id, '_seopress_social_fb_img', true));
 
-						array_push($settings["nosnippet"], get_term_meta( $term->term_id, '_seopress_robots_snippet', true ));
+                        array_push($settings['tw_title'], get_term_meta($term->term_id, '_seopress_social_twitter_title', true));
 
-						array_push($settings["canonical_url"], get_term_meta( $term->term_id, '_seopress_robots_canonical', true ));
+                        array_push($settings['tw_desc'], get_term_meta($term->term_id, '_seopress_social_twitter_desc', true));
 
-						array_push($settings["redirect_active"], get_term_meta( $term->term_id, '_seopress_redirections_enabled', true ));
-						
-						array_push($settings["redirect_type"], get_term_meta( $term->term_id, '_seopress_redirections_type', true ));
-						
-						array_push($settings["redirect_url"], get_term_meta( $term->term_id, '_seopress_redirections_value', true ));
+                        array_push($settings['tw_img'], get_term_meta($term->term_id, '_seopress_social_twitter_img', true));
 
-						array_push($settings["target_kw"], get_term_meta( $term->term_id, '_seopress_analysis_target_kw', true ));
+                        array_push($settings['noindex'], get_term_meta($term->term_id, '_seopress_robots_index', true));
 
-						$csv[] = array_merge(
-							$settings["id"],
-							$settings["post_title"],
-							$settings["url"],
-							$settings["meta_title"],
-							$settings["meta_desc"],
-							$settings["fb_title"],
-							$settings["fb_desc"],
-							$settings["fb_img"],
-							$settings["tw_title"],
-							$settings["tw_desc"],
-							$settings["tw_img"],
-							$settings["noindex"],
-							$settings["nofollow"],
-							$settings["noodp"],
-							$settings["noimageindex"],
-							$settings["noarchive"],
-							$settings["nosnippet"],
-							$settings["canonical_url"],
-							$settings["redirect_active"],
-							$settings["redirect_type"],
-							$settings["redirect_url"],
-							$settings["target_kw"]
-						);
+                        array_push($settings['nofollow'], get_term_meta($term->term_id, '_seopress_robots_follow', true));
 
-						//Clean arrays
-						$settings["id"] =				[];
-						$settings["post_title"] =		[];
-						$settings["url"] =				[];
-						$settings["meta_title"] =		[];
-						$settings["meta_desc"] =		[];
-						$settings["fb_title"] =			[];
-						$settings["fb_desc"] =			[];
-						$settings["fb_img"] =			[];
-						$settings["tw_title"] =			[];
-						$settings["tw_desc"] =			[];
-						$settings["tw_img"] =			[];
-						$settings["noindex"] =			[];
-						$settings["nofollow"] =			[];
-						$settings["noodp"] =			[];
-						$settings["noimageindex"] =		[];
-						$settings["noarchive"] =		[];
-						$settings["nosnippet"] =		[];
-						$settings["canonical_url"] =	[];
-						$settings["redirect_active"] =	[];
-						$settings["redirect_type"] =	[];
-						$settings["redirect_url"] =		[];
-						$settings["target_kw"] =		[];
+                        array_push($settings['noodp'], get_term_meta($term->term_id, '_seopress_robots_odp', true));
 
-					}
-				}
-				$offset += $increment;
-				$post_export = 'done';
-				update_option('seopress_metadata_csv', $csv);
-			}
-		} else {
-			$post_export = 'done';
-			$term_export = 'done';
-		}
+                        array_push($settings['noimageindex'], get_term_meta($term->term_id, '_seopress_robots_imageindex', true));
 
-		//Create download URL
-		if ($post_export =='done' && $term_export =='done') {
-			$args = array_merge( $_POST, array(
-				'nonce'      => wp_create_nonce( 'seopress_csv_batch_export_nonce' ),
-				'page' => 'seopress-import-export',
-				'seopress_action' => 'seopress_download_batch_export',
-			) );
+                        array_push($settings['noarchive'], get_term_meta($term->term_id, '_seopress_robots_archive', true));
 
-			$download_url = add_query_arg( $args, admin_url('admin.php') );
+                        array_push($settings['nosnippet'], get_term_meta($term->term_id, '_seopress_robots_snippet', true));
 
-			$offset = 'done';
-		}
+                        array_push($settings['canonical_url'], get_term_meta($term->term_id, '_seopress_robots_canonical', true));
 
-		//Return data to JSON
-		$data = [];
-		$data['offset'] = $offset;
-		$data['url'] = $download_url;
-		$data['post_export'] = $post_export;
-		$data['term_export'] = $term_export;
-		wp_send_json_success($data);
+                        array_push($settings['redirect_active'], get_term_meta($term->term_id, '_seopress_redirections_enabled', true));
 
-		die();
-	}
+                        array_push($settings['redirect_type'], get_term_meta($term->term_id, '_seopress_redirections_type', true));
+
+                        array_push($settings['redirect_url'], get_term_meta($term->term_id, '_seopress_redirections_value', true));
+
+                        array_push($settings['target_kw'], get_term_meta($term->term_id, '_seopress_analysis_target_kw', true));
+
+                        $csv[] = array_merge(
+                            $settings['id'],
+                            $settings['post_title'],
+                            $settings['url'],
+                            $settings['meta_title'],
+                            $settings['meta_desc'],
+                            $settings['fb_title'],
+                            $settings['fb_desc'],
+                            $settings['fb_img'],
+                            $settings['tw_title'],
+                            $settings['tw_desc'],
+                            $settings['tw_img'],
+                            $settings['noindex'],
+                            $settings['nofollow'],
+                            $settings['noodp'],
+                            $settings['noimageindex'],
+                            $settings['noarchive'],
+                            $settings['nosnippet'],
+                            $settings['canonical_url'],
+                            $settings['redirect_active'],
+                            $settings['redirect_type'],
+                            $settings['redirect_url'],
+                            $settings['target_kw']
+                        );
+
+                        //Clean arrays
+                        $settings['id']              =				[];
+                        $settings['post_title']      =		[];
+                        $settings['url']             =				[];
+                        $settings['meta_title']      =		[];
+                        $settings['meta_desc']       =		[];
+                        $settings['fb_title']        =			[];
+                        $settings['fb_desc']         =			[];
+                        $settings['fb_img']          =			[];
+                        $settings['tw_title']        =			[];
+                        $settings['tw_desc']         =			[];
+                        $settings['tw_img']          =			[];
+                        $settings['noindex']         =			[];
+                        $settings['nofollow']        =			[];
+                        $settings['noodp']           =			[];
+                        $settings['noimageindex']    =		[];
+                        $settings['noarchive']       =		[];
+                        $settings['nosnippet']       =		[];
+                        $settings['canonical_url']   =	[];
+                        $settings['redirect_active'] =	[];
+                        $settings['redirect_type']   =	[];
+                        $settings['redirect_url']    =		[];
+                        $settings['target_kw']       =		[];
+                    }
+                }
+                $offset += $increment;
+                $post_export = 'done';
+                update_option('seopress_metadata_csv', $csv);
+            }
+        } else {
+            $post_export = 'done';
+            $term_export = 'done';
+        }
+
+        //Create download URL
+        if ('done' == $post_export && 'done' == $term_export) {
+            $args = array_merge($_POST, [
+                'nonce'           => wp_create_nonce('seopress_csv_batch_export_nonce'),
+                'page'            => 'seopress-import-export',
+                'seopress_action' => 'seopress_download_batch_export',
+            ]);
+
+            $download_url = add_query_arg($args, admin_url('admin.php'));
+
+            $offset = 'done';
+        }
+
+        //Return data to JSON
+        $data                = [];
+        $data['offset']      = $offset;
+        $data['url']         = $download_url;
+        $data['post_export'] = $post_export;
+        $data['term_export'] = $term_export;
+        wp_send_json_success($data);
+
+        exit();
+    }
 }
+
 add_action('wp_ajax_seopress_metadata_export', 'seopress_metadata_export');
