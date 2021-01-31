@@ -246,57 +246,60 @@ class seopress_options
 
 			$seopress_titles_help_tab_content = '
 				<ul>
-					<li><span>'.__('%%sep%%','wp-seopress').'</span>'.__('Separator (eg: - )','wp-seopress').'</li>
-					<li><span>'.__('%%sitetitle%% (alias: %%sitename%%)','wp-seopress').'</span>'.__('Site Title','wp-seopress').'</li>
-					<li><span>'.__('%%tagline%% (alias %%sitedesc%%)','wp-seopress').'</span>'.__('Tagline','wp-seopress').'</li>
-					<li><span>'.__('%%post_title%% (alias %%title%%)','wp-seopress').'</span>'.__('Post Title (post, page, custom post type)','wp-seopress').'</li>
-					<li><span>'.__('%%post_excerpt%% (alias %%excerpt%%)','wp-seopress').'</span>'.__('Post excerpt','wp-seopress').'</li>
-					<li><span>'.__('%%post_content%%','wp-seopress').'</span>'.__('Post content / product long description','wp-seopress').'</li>
-					<li><span>'.__('%%post_thumbnail_url%%','wp-seopress').'</span>'.__('Post thumbnail URL','wp-seopress').'</li>
-					<li><span>'.__('%%post_url%%','wp-seopress').'</span>'.__('Post URL (permalink)','wp-seopress').'</li>
-					<li><span>'.__('%%post_date%% (alias %%date%%)','wp-seopress').'</span>'.__('Post date','wp-seopress').'</li>
-					<li><span>'.__('%%post_modified_date%%','wp-seopress').'</span>'.__('Last modified post date','wp-seopress').'</li>
-					<li><span>'.__('%%post_author%%','wp-seopress').'</span>'.__('Post author','wp-seopress').'</li>
-					<li><span>'.__('%%post_category%%','wp-seopress').'</span>'.__('Post category','wp-seopress').'</li>
-					<li><span>'.__('%%post_tag%%','wp-seopress').'</span>'.__('Post tag','wp-seopress').'</li>
-					<li><span>'.__('%%_category_title%%','wp-seopress').'</span>'.__('Category title','wp-seopress').'</li>
-					<li><span>'.__('%%_category_description%%','wp-seopress').'</span>'.__('Category description','wp-seopress').'</li>
-					<li><span>'.__('%%tag_title%%','wp-seopress').'</span>'.__('Tag title','wp-seopress').'</li>
-					<li><span>'.__('%%tag_description%%','wp-seopress').'</span>'.__('Tag description','wp-seopress').'</li>
-					<li><span>'.__('%%term_title%%','wp-seopress').'</span>'.__('Term title','wp-seopress').'</li>
-					<li><span>'.__('%%term_description%%','wp-seopress').'</span>'.__('Term description','wp-seopress').'</li>
-					<li><span>'.__('%%search_keywords%%','wp-seopress').'</span>'.__('Search keywords','wp-seopress').'</li>
-					<li><span>'.__('%%current_pagination%%','wp-seopress').'</span>'.__('Current number page','wp-seopress').'</li>
-					<li><span>'.__('%%page%%','wp-seopress').'</span>'.__('Current page number with context (i.e. page 1 of 3)','wp-seopress').'</li>
-					<li><span>'.__('%%cpt_plural%%','wp-seopress').'</span>'.__('Plural Post Type Archive name','wp-seopress').'</li>
-					<li><span>'.__('%%archive_title%%','wp-seopress').'</span>'.__('Archive title','wp-seopress').'</li>
-					<li><span>'.__('%%archive_date%%','wp-seopress').'</span>'.__('Date Archive','wp-seopress').'</li>
-					<li><span>'.__('%%archive_date_day%%','wp-seopress').'</span>'.__('Day Archive date','wp-seopress').'</li>
-					<li><span>'.__('%%archive_date_month%%','wp-seopress').'</span>'.__('Month Archive title','wp-seopress').'</li>
-					<li><span>'.__('%%archive_date_year%%','wp-seopress').'</span>'.__('Year Archive title','wp-seopress').'</li>
-					<li><span>'.__('%%_cf_your_custom_field_name%%','wp-seopress').'</span>'.__('Custom fields from post, page or post type (replace <span style="color:red;margin:0">your_custom_field_name</span> with your custom field name)','wp-seopress').'</li>
-					<li><span>'.__('%%_ct_your_custom_taxonomy_slug%%','wp-seopress').'</span>'.__('Custom term taxonomy from post, page or post type (replace <span style="color:red;margin:0">your_custom_taxonomy_slug</span> with your custom taxonomy slug)','wp-seopress').'</li>
-					<li><span>'.__('%%wc_single_cat%%','wp-seopress').'</span>'.__('Single product category','wp-seopress').'</li>
-					<li><span>'.__('%%wc_single_tag%%','wp-seopress').'</span>'.__('Single product tag','wp-seopress').'</li>
-					<li><span>'.__('%%wc_single_short_desc%%','wp-seopress').'</span>'.__('Single product short description','wp-seopress').'</li>
-					<li><span>'.__('%%wc_single_price%%','wp-seopress').'</span>'.__('Single product price','wp-seopress').'</li>
-					<li><span>'.__('%%wc_single_price_exc_tax%%','wp-seopress').'</span>'.__('Single product price taxes excluded','wp-seopress').'</li>
-					<li><span>'.__('%%wc_sku%%','wp-seopress').'</span>'.__('Single SKU product','wp-seopress').'</li>
-					<li><span>'.__('%%currentday%%','wp-seopress').'</span>'.__('Current day','wp-seopress').'</li>
-					<li><span>'.__('%%currentmonth%%','wp-seopress').'</span>'.__('Current month','wp-seopress').'</li>
-					<li><span>'.__('%%currentmonth_short%%','wp-seopress').'</span>'.__('Current month in 3 letters, eg: "Jan" for "January"','wp-seopress').'</li>
-					<li><span>'.__('%%currentyear%%','wp-seopress').'</span>'.__('Current year','wp-seopress').'</li>
-					<li><span>'.__('%%currentdate%%','wp-seopress').'</span>'.__('Current date','wp-seopress').'</li>
-					<li><span>'.__('%%currenttime%%','wp-seopress').'</span>'.__('Current time','wp-seopress').'</li>
-					<li><span>'.__('%%author_bio%%','wp-seopress').'</span>'.__('Author biography (description), meta desc only','wp-seopress').'</li>
-					<li><span>'.__('%%currentmonth_num%%','wp-seopress').'</span>'.__('Current month in digital format','wp-seopress').'</li>
+					<li><span>%%sep%%</span>'.__('Separator (eg: - )','wp-seopress').'</li>
+					<li><span>%%sitetitle%% (alias: %%sitename%%)</span>'.__('Site Title','wp-seopress').'</li>
+					<li><span>%%tagline%% (alias %%sitedesc%%)</span>'.__('Tagline','wp-seopress').'</li>
+					<li><span>%%post_title%% (alias %%title%%)</span>'.__('Post Title (post, page, custom post type)','wp-seopress').'</li>
+					<li><span>%%post_excerpt%% (alias %%excerpt%%)</span>'.__('Post excerpt','wp-seopress').'</li>
+					<li><span>%%post_content%%</span>'.__('Post content / product long description','wp-seopress').'</li>
+					<li><span>%%post_thumbnail_url%%</span>'.__('Post thumbnail URL','wp-seopress').'</li>
+					<li><span>%%post_url%%</span>'.__('Post URL (permalink)','wp-seopress').'</li>
+					<li><span>%%post_date%% (alias %%date%%)</span>'.__('Post date','wp-seopress').'</li>
+					<li><span>%%post_modified_date%%</span>'.__('Last modified post date','wp-seopress').'</li>
+					<li><span>%%post_author%%</span>'.__('Post author','wp-seopress').'</li>
+					<li><span>%%post_category%%</span>'.__('Post category','wp-seopress').'</li>
+					<li><span>%%post_tag%%</span>'.__('Post tag','wp-seopress').'</li>
+					<li><span>%%_category_title%%</span>'.__('Category title','wp-seopress').'</li>
+					<li><span>%%_category_description%%</span>'.__('Category description','wp-seopress').'</li>
+					<li><span>%%tag_title%%</span>'.__('Tag title','wp-seopress').'</li>
+					<li><span>%%tag_description%%</span>'.__('Tag description','wp-seopress').'</li>
+					<li><span>%%term_title%%</span>'.__('Term title','wp-seopress').'</li>
+					<li><span>%%term_description%%</span>'.__('Term description','wp-seopress').'</li>
+					<li><span>%%search_keywords%%</span>'.__('Search keywords','wp-seopress').'</li>
+					<li><span>%%current_pagination%%</span>'.__('Current number page','wp-seopress').'</li>
+					<li><span>%%page%%</span>'.__('Current page number with context (i.e. page 1 of 3)','wp-seopress').'</li>
+					<li><span>%%cpt_plural%%</span>'.__('Plural Post Type Archive name','wp-seopress').'</li>
+					<li><span>%%archive_title%%</span>'.__('Archive title','wp-seopress').'</li>
+					<li><span>%%archive_date%%</span>'.__('Date Archive','wp-seopress').'</li>
+					<li><span>%%archive_date_day%%</span>'.__('Day Archive date','wp-seopress').'</li>
+					<li><span>%%archive_date_month%%</span>'.__('Month Archive title','wp-seopress').'</li>
+					<li><span>%%archive_date_year%%</span>'.__('Year Archive title','wp-seopress').'</li>
+					<li><span>%%_cf_your_custom_field_name%%</span>';
+			/* translators: do not translate: your_custom_field_name */
+			$seopress_titles_help_tab_content .= __('Custom fields from post, page or post type (replace <span style="color:red;margin:0">your_custom_field_name</span> with your custom field name)','wp-seopress').'</li>';
+			/* translators: do not translate: your_custom_taxonomy_slug */
+			$seopress_titles_help_tab_content .= '<li><span>%%_ct_your_custom_taxonomy_slug%%</span>'.__('Custom term taxonomy from post, page or post type (replace <span style="color:red;margin:0">your_custom_taxonomy_slug</span> with your custom taxonomy slug)','wp-seopress').'</li>
+					<li><span>%%wc_single_cat%%</span>'.__('Single product category','wp-seopress').'</li>
+					<li><span>%%wc_single_tag%%</span>'.__('Single product tag','wp-seopress').'</li>
+					<li><span>%%wc_single_short_desc%%</span>'.__('Single product short description','wp-seopress').'</li>
+					<li><span>%%wc_single_price%%</span>'.__('Single product price','wp-seopress').'</li>
+					<li><span>%%wc_single_price_exc_tax%%</span>'.__('Single product price taxes excluded','wp-seopress').'</li>
+					<li><span>%%wc_sku%%</span>'.__('Single SKU product','wp-seopress').'</li>
+					<li><span>%%currentday%%</span>'.__('Current day','wp-seopress').'</li>
+					<li><span>%%currentmonth%%</span>'.__('Current month','wp-seopress').'</li>
+					<li><span>%%currentmonth_short%%</span>'.__('Current month in 3 letters, eg: "Jan" for "January"','wp-seopress').'</li>
+					<li><span>%%currentyear%%</span>'.__('Current year','wp-seopress').'</li>
+					<li><span>%%currentdate%%</span>'.__('Current date','wp-seopress').'</li>
+					<li><span>%%currenttime%%</span>'.__('Current time','wp-seopress').'</li>
+					<li><span>%%author_bio%%</span>'.__('Author biography (description), meta desc only','wp-seopress').'</li>
+					<li><span>%%currentmonth_num%%</span>'.__('Current month in digital format','wp-seopress').'</li>
 				</ul>
 			'.wp_oembed_get('https://www.youtube.com/watch?v=HEa8m9u4mOk', array('width'=>530));
 
 			$screen->add_help_tab( array(
-				'id'    => 'seopress_titles_help_tab',
-				'title' => __('Templates variables'),
-				'content'   => $seopress_titles_help_tab_content,
+				'id'		=> 'seopress_titles_help_tab',
+				'title'		=> __('Templates variables', 'wp-seopress'),
+				'content'	=> $seopress_titles_help_tab_content,
 			));
 
 			if (function_exists('seopress_get_locale') && seopress_get_locale() =='fr') {
@@ -359,7 +362,7 @@ class seopress_options
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
 		<?php
 		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
-			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+			echo '<div class="components-snackbar-list" role="status" aria-live="polite" aria-atomic="true"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
 		}
 
 		global $wp_version, $title;
@@ -431,7 +434,7 @@ class seopress_options
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option" name="seopress-flush">
 		<?php 
 		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
-			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+			echo '<div class="components-snackbar-list" role="status" aria-live="polite" aria-atomic="true"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
 		}
 		global $wp_version, $title;
 		$current_tab = '';
@@ -498,7 +501,7 @@ class seopress_options
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
 		<?php
 		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
-			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+			echo '<div class="components-snackbar-list" role="status" aria-live="polite" aria-atomic="true"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
 		}
 
 		global $wp_version, $title;
@@ -568,7 +571,7 @@ class seopress_options
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
 		<?php
 		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
-			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+			echo '<div class="components-snackbar-list" role="status" aria-live="polite" aria-atomic="true"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
 		}
 
 		global $wp_version, $title;
@@ -659,7 +662,7 @@ class seopress_options
 		<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option">
 		<?php 
 		if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
-			echo '<div class="components-snackbar-list"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
+			echo '<div class="components-snackbar-list" role="status" aria-live="polite" aria-atomic="true"><div class="components-snackbar"><div class="components-snackbar__content"><span class="dashicons dashicons-yes"></span>'.__('Your settings has been saved.','wp-seopress').'</div></div></div>';
 		}
 
 		global $wp_version, $title;
@@ -1205,6 +1208,7 @@ class seopress_options
 									} else {
 										$seopress_docs_link['support']['redirects']['query'] = 'https://www.seopress.org/support/guides/delete-your-404-errors-with-a-mysql-query/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
 									}
+									/* translators: %s link to documentation */
 									echo sprintf(__('You can also use <span class="dashicons dashicons-external"></span><a href="%s" target="_blank">this MySQL query</a> if necessary.','wp-seopress'),$seopress_docs_link['support']['redirects']['query']); ?></p>
 									<form method="post">
 										<p><input type="hidden" name="seopress_action" value="clean_404" /></p>
@@ -3190,7 +3194,7 @@ class seopress_options
 	public function print_section_info_social_facebook() {
 		print __('<p>Manage Open Graph data.</p>', 'wp-seopress');
 
-		echo __('<p>We generate the <strong>og:image</strong> meta in this order:</p>','wp-seopress');
+		_e('<p>We generate the <strong>og:image</strong> meta in this order:</p>','wp-seopress');
 
 		echo '
 		<ol>
@@ -3204,7 +3208,7 @@ class seopress_options
 	public function print_section_info_social_twitter() {
 		print __('<p>Manage your Twitter card.</p>', 'wp-seopress');
 
-		echo __('<p>We generate the <strong>twitter:image</strong> meta in this order:</p>','wp-seopress');
+		_e('<p>We generate the <strong>twitter:image</strong> meta in this order:</p>','wp-seopress');
 
 		echo '
 		<ol>
@@ -4068,6 +4072,7 @@ class seopress_options
 		
 		echo '<p class="description">'.__('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.','wp-seopress').'</p>';
 
+		/* translators: %s link to plugin settings page */
 		echo '<p class="description">'. sprintf(__('Check also the <strong>"Search engine visibility"</strong> setting from the <a href="%s">WordPress Reading page</a>.','wp-seopress'),admin_url('options-reading.php')) .'</p>';
 		
 		if (isset($this->options['seopress_titles_noindex'])) {
@@ -5620,7 +5625,8 @@ class seopress_options
 				
 			for ($i=1; $i <= 20 ; $i++) { 
 				echo ' <option '; 
-				if ('dimension'.$i.'' == $selected) echo 'selected="selected"'; 
+				if ('dimension'.$i.'' == $selected) echo 'selected="selected"';
+					/* translators: %d dimension number */
 					echo ' value="dimension'.$i.'">'. sprintf(__("Custom Dimension #%d","wp-seopress"), $i) .'</option>';
 			}
 		echo '</select>';
@@ -5644,6 +5650,7 @@ class seopress_options
 			for ($i=1; $i <= 20 ; $i++) { 
 				echo ' <option '; 
 				if ('dimension'.$i.'' == $selected) echo 'selected="selected"'; 
+					/* translators: %d dimension number */
 					echo ' value="dimension'.$i.'">'. sprintf(__("Custom Dimension #%d","wp-seopress"), $i) .'</option>';
 			}
 		echo '</select>';
@@ -5666,7 +5673,8 @@ class seopress_options
 			
 			for ($i=1; $i <= 20 ; $i++) { 
 				echo ' <option '; 
-				if ('dimension'.$i.'' == $selected) echo 'selected="selected"'; 
+				if ('dimension'.$i.'' == $selected) echo 'selected="selected"';
+					/* translators: %d dimension number */
 					echo ' value="dimension'.$i.'">'. sprintf(__("Custom Dimension #%d","wp-seopress"), $i) .'</option>';
 			}
 		echo '</select>';
@@ -5689,7 +5697,8 @@ class seopress_options
 			
 			for ($i=1; $i <= 20 ; $i++) { 
 				echo ' <option '; 
-				if ('dimension'.$i.'' == $selected) echo 'selected="selected"'; 
+				if ('dimension'.$i.'' == $selected) echo 'selected="selected"';
+					/* translators: %d dimension number */
 					echo ' value="dimension'.$i.'">'. sprintf(__("Custom Dimension #%d","wp-seopress"), $i) .'</option>';
 			}
 		echo '</select>';
@@ -5712,7 +5721,8 @@ class seopress_options
 			
 			for ($i=1; $i <= 20 ; $i++) { 
 				echo ' <option '; 
-				if ('dimension'.$i.'' == $selected) echo 'selected="selected"'; 
+				if ('dimension'.$i.'' == $selected) echo 'selected="selected"';
+					/* translators: %d dimension number */
 					echo ' value="dimension'.$i.'">'. sprintf(__("Custom Dimension #%d","wp-seopress"), $i) .'</option>';
 			}
 		echo '</select>';

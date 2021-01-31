@@ -3,7 +3,7 @@
 Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
-Version: 4.2
+Version: 4.2.1
 Author: SEOPress
 Author URI: https://www.seopress.org/
 License: GPLv2
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define( 'SEOPRESS_VERSION', '4.2' );
+define( 'SEOPRESS_VERSION', '4.2.1' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +66,7 @@ function seopress_init($hook) {
 
 	global $pagenow;
 	global $typenow;
+	global $wp_version;
 
 	if ( is_admin() || is_network_admin() ) {
 		require_once dirname( __FILE__ ) . '/inc/admin/plugin-upgrader.php';
@@ -110,9 +111,40 @@ function seopress_init($hook) {
 	}
 
 	//Block Editor
-	include_once dirname( __FILE__ ) . '/inc/admin/page-builders/gutenberg/gutenberg-addon.php';
+	if (version_compare( $wp_version, '5.0', '>=' ) ) {
+		include_once dirname( __FILE__ ) . '/inc/admin/page-builders/gutenberg/gutenberg-addon.php';
+	}
 }
 add_action('plugins_loaded', 'seopress_init', 999);
+
+/**
+ * Get first key of an array if PHP < 7.3
+ * @since 4.2.1
+ * @return string
+ * @author Benjamin
+ */
+if (!function_exists('array_key_first')) {
+	function array_key_first(array $arr) {
+		foreach($arr as $key => $unused) {
+			return $key;
+		}
+		return NULL;
+	}
+}
+
+/**
+ * Get last key of an array if PHP < 7.3
+ * @since 4.2.1
+ * @return string
+ * @author Benjamin
+ */
+if (!function_exists('array_key_last')) {
+	function array_key_last(array $arr) {
+		end($arr);
+		$key = key($arr); 
+		return $key;
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Loads dynamic variables for titles, metas, schemas...

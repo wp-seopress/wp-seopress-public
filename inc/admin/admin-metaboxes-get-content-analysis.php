@@ -135,6 +135,7 @@ if (!empty($seopress_analysis_data['kws_density']['matches']) && isset($seopress
 			}
 			$kw_name = $key;
 			$kw_density = round($kw_count/$seopress_analysis_data['words_counter']*100, 2);
+			/* translators: %s target keyword %d count target keyword %s keyword density in % */
 			$desc .= '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times in your content, a keyword density of %s%%','wp-seopress'), $kw_name, $kw_count, $kw_density).'</li>';
 		}
 	$desc .= '</ul>';
@@ -192,11 +193,13 @@ if (!empty($seopress_analysis_data['h1']['matches'])) {
 			$kw_count = count($value);
 		}
 		$kw_name = $key;
+		/* translators: %s target keyword %d count target keyword */
 		$desc .= '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
 	}
 
 	$desc .= '</ul>';
 	if ($count > 1) {
+		/* translators: %d: count heading 1 */
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d Heading 1 (H1) in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility. Below, the list:','wp-seopress').'</p>';
 		$analyzes['headings']['impact'] = 'high';
@@ -222,6 +225,7 @@ if (!empty($seopress_analysis_data['h2']['matches'])) {
 				$kw_count = count($value);
 			}
 			$kw_name = $key;
+			/* translators: %s target keyword %d count target keyword */
 			$desc .= '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
 		}
 	$desc .= '</ul>';
@@ -243,6 +247,7 @@ if (!empty($seopress_analysis_data['h3']['matches'])) {
 				$kw_count = count($value);
 			}
 			$kw_name = $key;
+			/* translators: %s target keyword %d count target keyword */
 			$desc .= '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
 		}
 	$desc .= '</ul>';
@@ -266,6 +271,7 @@ if ($seopress_titles_title !='') {
 					$kw_count = count($_value);
 				}
 				$kw_name = $key;
+				/* translators: %s target keyword %d count target keyword */
 				$desc .= '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
 			}
 		$desc .= '</ul>';
@@ -300,6 +306,7 @@ if ($seopress_titles_desc !='') {
 					$kw_count = count($_value);
 				}
 				$kw_name = $key;
+				/* translators: %s target keyword %d count target keyword */
 				$desc .= '<li><span class="dashicons dashicons-minus"></span>'.sprintf(esc_html__('%s was found %d times.','wp-seopress'), $kw_name, $kw_count).'</li>';
 			}
 		$desc .= '</ul>';
@@ -335,6 +342,7 @@ if (!empty($seopress_analysis_data['og_title']['count'])) {
 
 	if ($count > 1) {
 		$analyzes['social']['impact'] = 'high';
+		/* translators: %d count Open Graph Title */
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:title in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one og:title in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:title tag from your source code. Below, the list:','wp-seopress').'</p>';
 	} elseif(empty($all_og_title[0])) { //If og:title empty
@@ -367,6 +375,7 @@ if (!empty($seopress_analysis_data['og_desc']['count'])) {
 
 	if ($count > 1) {
 		$analyzes['social']['impact'] = 'high';
+		/* translators: %d count Open Graph Description */
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:description in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one og:description in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:description tag from your source code. Below, the list:','wp-seopress').'</p>';
 	} elseif(empty($all_og_desc[0])) { //If og:description empty
@@ -398,6 +407,7 @@ if (!empty($seopress_analysis_data['og_img']['count'])) {
 	$all_og_img = isset($seopress_analysis_data['og_img']['values']) ? $seopress_analysis_data['og_img']['values'] : [];
 
 	if ($count > 0 && !empty($all_og_img[0])) {
+		/* translators: %d count Open Graph Image */
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.sprintf(esc_html__('We found %d og:image in your content.','wp-seopress'), $count).'</p>';
 	}
 
@@ -430,6 +440,7 @@ if (!empty($seopress_analysis_data['og_url']['count'])) {
 
 	if ($count > 1) {
 		$analyzes['social']['impact'] = 'high';
+		/* translators: %d count Open Graph URL */
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:url in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one og:url in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:url tag from your source code. Below, the list:','wp-seopress').'</p>';
 	} elseif(empty($all_og_url[0])) { //If og:url empty
@@ -462,6 +473,7 @@ if (!empty($seopress_analysis_data['og_site_name']['count'])) {
 
 	if ($count > 1) {
 		$analyzes['social']['impact'] = 'high';
+		/* translators: %d count Open Graph site name */
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d og:site_name in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one og:site_name in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:site_name tag from your source code. Below, the list:','wp-seopress').'</p>';
 	} elseif(empty($all_og_site_name[0])) { //If og:site_name empty
@@ -494,6 +506,7 @@ if (!empty($seopress_analysis_data['tw_title']['count'])) {
 
 	if ($count > 1) {
 		$analyzes['social']['impact'] = 'high';
+		/* translators: %d count Twitter Title */
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d twitter:title in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:title tag from your source code. Below, the list:','wp-seopress').'</p>';
 	} elseif(empty($all_tw_title[0])) { //If twitter:title empty
@@ -526,6 +539,7 @@ if (!empty($seopress_analysis_data['tw_desc']['count'])) {
 
 	if ($count > 1) {
 		$analyzes['social']['impact'] = 'high';
+		/* translators: %d count Twitter Description */
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %d twitter:description in your content.','wp-seopress'), $count).'</p>';
 		$desc .= '<p>'.__('You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:description tag from your source code. Below, the list:','wp-seopress').'</p>';
 	} elseif(empty($all_tw_desc[0])) { //If twitter:description empty
@@ -557,6 +571,7 @@ if (!empty($seopress_analysis_data['tw_img']['count'])) {
 	$all_tw_img = isset($seopress_analysis_data['tw_img']['values']) ? $seopress_analysis_data['tw_img']['values'] : [];
 
 	if ($count > 0 && !empty($all_tw_img[0])) {
+		/* translators: %d count Twitter Image */
 		$desc .= '<p><span class="dashicons dashicons-yes"></span>'.sprintf(esc_html__('We found %d twitter:image in your content.','wp-seopress'), $count).'</p>';
 	}
 
@@ -589,7 +604,8 @@ if (!empty($seopress_analysis_data['meta_robots'])) {
 		$analyzes['robots']['impact'] = 'high';
 
 		$count_meta_robots = count($seopress_analysis_data['meta_robots']);
-
+		
+		/* translators: %d count meta robots tag */
 		$desc .= '<p><span class="dashicons dashicons-no-alt"></span>'.sprintf(esc_html__('We found %s meta robots in your page. There is probably something wrong with your theme!','wp-seopress'), $count_meta_robots).'</p>';
 	}
 
@@ -688,6 +704,7 @@ if (!empty($seopress_analysis_data['img'])) {
 if (!empty($seopress_analysis_data['nofollow_links'])) {
 	$count = count($seopress_analysis_data['nofollow_links']);
 	
+	/* translators: %d count nofollow attributes */
 	$desc = '<p>'.sprintf( esc_html__( 'We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:', 'wp-seopress' ), $count ).'</p>';
 	$desc .= '<ul>';
 		foreach ($seopress_analysis_data['nofollow_links'] as $links) {
@@ -707,6 +724,7 @@ $desc = '<p>'.__('Internet is built on the principle of hyperlink. It is therefo
 if (!empty($seopress_analysis_data['outbound_links'])) {
 	$count = count($seopress_analysis_data['outbound_links']);
 
+	/* translators: %d count outbound links */
 	$desc .= '<p>'.sprintf( __('We found %s outbound links in your page. Below, the list:', 'wp-seopress'), $count ).'</p>';
 	$desc .= '<ul>';
 		foreach ($seopress_analysis_data['outbound_links'] as $links) {

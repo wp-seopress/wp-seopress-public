@@ -261,7 +261,8 @@ echo '<div id="seopress-tabs" data_id="'.$current_id.'" data_origin="'.$origin.'
 					</p>
 					<p class="description">';
 						$url = admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_single');
-						echo sprintf(__('You cannot uncheck a parameter? This is normal, and it‘s most likely defined in the global settings of the extension.','wp-seopress'), $url);
+						/* translators: %s: link to plugin settings page */
+						echo sprintf(__('You cannot uncheck a parameter? This is normal, and it‘s most likely defined in the <a href="%s">global settings of the plugin.</a>','wp-seopress'), $url);
 						echo '</p>
 					<p>
 						<label for="seopress_robots_canonical_meta">'. __( 'Canonical URL', 'wp-seopress' ) .'

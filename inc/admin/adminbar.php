@@ -80,8 +80,10 @@ function seopress_admin_bar_links() {
 					}
 					
 					if (get_current_screen()->taxonomy) {
+						/* translators: %s taxonomy name */
 						$robots .= '<span class="wrap-seopress-cpt-seo">'.sprintf(__('SEO for "%s"','wp-seopress'), get_current_screen()->taxonomy).'</span>';
 					} else {
+						/* translators: %s custom post type name */
 						$robots .= '<span class="wrap-seopress-cpt-seo">'.sprintf(__('SEO for "%s"','wp-seopress'), get_current_screen()->post_type).'</span>';
 					}
 					$robots .= '<span class="wrap-seopress-cpt-noindex">';

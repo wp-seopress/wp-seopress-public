@@ -64,6 +64,7 @@ if (isset($wp_query->max_num_pages)) {
 	} else {
 		$current_page = 1;
 	}
+	/* translators: %d current page (eg: 2) %2$d total number of pages (eg: 30) */
 	$seopress_context_paged = sprintf(__('Page %d of %2$d','wp-seopress'),$current_page, $wp_query->max_num_pages);
 	$seopress_context_paged = apply_filters('seopress_context_paged', $seopress_context_paged);
 }

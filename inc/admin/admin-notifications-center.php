@@ -289,6 +289,7 @@
 							if (is_plugin_active($key)) { 
 								$args = [
 									'id' => 'notice-seo-plugins',
+									/* translators: %s name of a SEO plugin (eg: Yoast SEO) */
 									'title' => sprintf(__('We noticed that you use <strong>%s</strong> plugin.','wp-seopress'), $value),
 									'desc' => __('Do you want to migrate all your metadata to SEOPress? Do not use multiple SEO plugins at once to avoid conflicts!','wp-seopress'),
 									'impact' => [
@@ -336,6 +337,7 @@
 								if(seopress_get_hidden_notices_pbuilders_option() !='1') {
 									$args = [
 										'id' => 'notice-page-builders',
+										/* translators: %s name of a page builder plugin (eg: Oxygen) */
 										'title' => sprintf(__('Generate automatic meta description for <strong>%s</strong> plugin.','wp-seopress'), $value),
 										'desc' => __('Your page builder is using shortcodes to save its data. To automatically generate your meta description based on your post content, you will have to add some hooks to your functions.php.','wp-seopress'),
 										'impact' => [
@@ -375,6 +377,7 @@
 								if(seopress_get_hidden_notices_themes_option() !='1') {
 									$args = [
 										'id' => 'notice-themes',
+										/* translators: %s name of a WP theme (eg: Enfold) */
 										'title' => sprintf(__('Generate automatic meta description for <strong>%s</strong> theme.','wp-seopress'), $value),
 										'desc' => __('Your theme is using shortcodes to save its data. To automatically generate your meta description based on your post content, you will have to add some hooks to your functions.php.','wp-seopress'),
 										'impact' => [
