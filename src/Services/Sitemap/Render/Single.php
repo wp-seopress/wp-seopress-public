@@ -39,6 +39,10 @@ class Single {
      * @return void
      */
     public function render() {
+        if ( ! function_exists('seopress_get_service')) {
+            return;
+        }
+
         seopress_get_service('SitemapHeaders')->printHeaders();
 
         //Remove primary category

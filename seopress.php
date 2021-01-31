@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 4.3.0
+Version: 4.3.0.1
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '4.3.0');
+define('SEOPRESS_VERSION', '4.3.0.1');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_TEMPLATE_DIR', SEOPRESS_PLUGIN_DIR_PATH . 'templates');
@@ -773,6 +773,10 @@ function seopress_get_toggle_advanced_option() {
  * @deprecated 4.3.0
  */
 function seopress_xml_sitemap_general_enable_option() {
+    if ( ! function_exists('seopress_get_service')) {
+        return '1';
+    }
+
     return seopress_get_service('SitemapOption')->isEnabled();
 }
 
@@ -780,6 +784,10 @@ function seopress_xml_sitemap_general_enable_option() {
  * @deprecated 4.3.0
  */
 function seopress_xml_sitemap_post_types_list_option() {
+    if ( ! function_exists('seopress_get_service')) {
+        return '';
+    }
+
     return seopress_get_service('SitemapOption')->getPostTypesList();
 }
 
@@ -787,6 +795,10 @@ function seopress_xml_sitemap_post_types_list_option() {
  * @deprecated 4.3.0
  */
 function seopress_xml_sitemap_taxonomies_list_option() {
+    if ( ! function_exists('seopress_get_service')) {
+        return '';
+    }
+
     return seopress_get_service('SitemapOption')->getTaxonomiesList();
 }
 
@@ -794,6 +806,10 @@ function seopress_xml_sitemap_taxonomies_list_option() {
  * @deprecated 4.3.0
  */
 function seopress_xml_sitemap_author_enable_option() {
+    if ( ! function_exists('seopress_get_service')) {
+        return '';
+    }
+
     return seopress_get_service('SitemapOption')->authorIsEnable();
 }
 
@@ -801,12 +817,20 @@ function seopress_xml_sitemap_author_enable_option() {
  * @deprecated 4.3.0
  */
 function seopress_xml_sitemap_img_enable_option() {
+    if ( ! function_exists('seopress_get_service')) {
+        return '';
+    }
+
     return seopress_get_service('SitemapOption')->imageIsEnable();
 }
 
 //Rewrite Rules for XML Sitemap
 if ('1' == seopress_xml_sitemap_general_enable_option() && '1' == seopress_get_toggle_option('xml-sitemap')) {
     function seopress_sitemaps_headers() {
+        if(!function_exists('seopress_get_service')){
+            return;
+        }
+
         seopress_get_service('SitemapHeaders')->printHeaders();
     }
 

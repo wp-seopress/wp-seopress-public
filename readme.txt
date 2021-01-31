@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.3.0
+Stable tag: 4.3.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,7 +100,6 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li><strong>Dublin Core</strong> meta tags</li>
 	<li><strong>Custom Breadcrumbs</strong> for single post types / term taxonomy</li>
 	<li><strong>Google Page Speed Insights</strong> to analyse your site performances</li>
-	<li><strong>Google Analytics Events</strong>: track external links, downloads (PDF, DOCX...), affiliate links...</li>
 	<li><strong>Google Enhanced Ecommerce for WooCommerce</strong>: measure purchases, additions to and removals from shopping carts</li>
 	<li>Edit your <strong>robots.txt</strong> file from the admin (multisite / multidomain ready)</li>
 	<li><strong>Google News Sitemap</strong> to get your posts on Google News</li>
@@ -321,6 +320,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 4.3.0.1 =
+* FIX Fatal error
 = 4.3 (14/01/2021) =
 * NEW PHP 8 compatibility
 * NEW "Disable notifications on slug changes or post deletions" option from SEO, PRO, 404/301 tab (PRO)

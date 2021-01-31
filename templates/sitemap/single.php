@@ -37,6 +37,9 @@ $urlset = '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:sch
 echo apply_filters('seopress_sitemaps_urlset', $urlset);
 
 if (true == get_post_type_archive_link($path) && 0 == $offset) {
+    if ( ! function_exists('seopress_get_service')) {
+        return;
+    }
     if ('1' != seopress_get_service('TitleOption')->getTitlesCptNoIndexByPath($path)) {
         $sitemap_url = '';
         // array with all the information needed for a sitemap url

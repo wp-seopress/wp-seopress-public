@@ -45,6 +45,9 @@ class Render implements ExecuteHooksFrontend {
             if (function_exists('seopress_xml_sitemap_post_types_list_option')
                 && '' != seopress_xml_sitemap_post_types_list_option()
                 && array_key_exists(get_query_var('seopress_cpt'), seopress_xml_sitemap_post_types_list_option())) {
+                if ( ! function_exists('seopress_get_service')) {
+                    return;
+                }
                 /*
                  * @since 4.3.0
                  */

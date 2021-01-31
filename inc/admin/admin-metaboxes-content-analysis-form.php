@@ -67,5 +67,7 @@ if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
 		</div>";
 }
 
-$analyzes = seopress_get_service('GetContentAnalysis')->getAnalyzes($post);
-seopress_get_service('RenderContentAnalysis')->render($analyzes, $seopress_analysis_data);
+if (function_exists('seopress_get_service')) {
+    $analyzes = seopress_get_service('GetContentAnalysis')->getAnalyzes($post);
+    seopress_get_service('RenderContentAnalysis')->render($analyzes, $seopress_analysis_data);
+}
