@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.3.0.1
+Stable tag: 4.3.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -320,8 +320,13 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
-= 4.3.0.1 =
+= 4.3.0.2 (19/01/2021) =
+* FIX Analytics tracking code if no UA-XXX set
+* FIX Conflict Google Analytics with UpdraftPlus (PRO)
+= 4.3.0.1 (15/01/2021) =
 * FIX Fatal error
+* FIX Product price with taxes for automatic product schema (default: sale price, fallback: regular price)
+* FIX Fatal error get_price in specific cases
 = 4.3 (14/01/2021) =
 * NEW PHP 8 compatibility
 * NEW "Disable notifications on slug changes or post deletions" option from SEO, PRO, 404/301 tab (PRO)
