@@ -64,6 +64,10 @@ class DescriptionMeta implements ExecuteHooksFrontend {
     protected function getContent() {
         $context = seopress_get_service('ContextPage')->getContext();
 
+        if ( ! function_exists('seopress_titles_sep_option')) {
+            require_once SEOPRESS_PLUGIN_DIR_PATH . '/inc/functions/options-titles-metas.php';
+        }
+
         $variables = null;
         $variables = apply_filters('seopress_dyn_variables_fn', $variables);
 

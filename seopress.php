@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 4.4.0
+Version: 4.4.0.1
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '4.4.0');
+define('SEOPRESS_VERSION', '4.4.0.1');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_TEMPLATE_DIR', SEOPRESS_PLUGIN_DIR_PATH . 'templates');
@@ -73,6 +73,37 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
         'main_file' => 'seopress',
         'root'      => __DIR__,
     ]);
+}
+
+function seopress_titles_single_cpt_enable_option($cpt) {
+    $current_cpt                          = null;
+    $seopress_titles_single_enable_option = get_option('seopress_titles_option_name');
+    if ( ! empty($seopress_titles_single_enable_option)) {
+        foreach ($seopress_titles_single_enable_option as $key => $seopress_titles_single_enable_value) {
+            $options[$key] = $seopress_titles_single_enable_value;
+            if (isset($seopress_titles_single_enable_option['seopress_titles_single_titles'][$cpt]['enable'])) {
+                $current_cpt = $seopress_titles_single_enable_option['seopress_titles_single_titles'][$cpt]['enable'];
+            }
+        }
+    }
+
+    return $current_cpt;
+}
+
+//Archive CPT Titles
+function seopress_titles_archive_titles_option() {
+    global $post;
+    $seopress_get_current_cpt = get_post_type($post);
+
+    $seopress_titles_archive_titles_option = get_option('seopress_titles_option_name');
+    if ( ! empty($seopress_titles_archive_titles_option)) {
+        foreach ($seopress_titles_archive_titles_option as $key => $seopress_titles_archive_titles_value) {
+            $options[$key] = $seopress_titles_archive_titles_value;
+        }
+        if (isset($seopress_titles_archive_titles_option['seopress_titles_archive_titles'][$seopress_get_current_cpt]['title'])) {
+            return $seopress_titles_archive_titles_option['seopress_titles_archive_titles'][$seopress_get_current_cpt]['title'];
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

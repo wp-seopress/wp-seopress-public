@@ -377,21 +377,6 @@ if ('' != seopress_advanced_appearance_title_col_option()
 || '' != seopress_advanced_appearance_ps_col_option()
 || '' != seopress_advanced_appearance_insights_col_option()
 || '' != seopress_advanced_appearance_score_col_option()) {
-    function seopress_titles_single_cpt_enable_option($cpt) {
-        $current_cpt                          = null;
-        $seopress_titles_single_enable_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_single_enable_option)) {
-            foreach ($seopress_titles_single_enable_option as $key => $seopress_titles_single_enable_value) {
-                $options[$key] = $seopress_titles_single_enable_value;
-                if (isset($seopress_titles_single_enable_option['seopress_titles_single_titles'][$cpt]['enable'])) {
-                    $current_cpt = $seopress_titles_single_enable_option['seopress_titles_single_titles'][$cpt]['enable'];
-                }
-            }
-        }
-
-        return $current_cpt;
-    }
-
     function seopress_add_columns() {
         if (isset(get_current_screen()->post_type)) {
             $key = get_current_screen()->post_type;
@@ -406,7 +391,6 @@ if ('' != seopress_advanced_appearance_title_col_option()
             }
         }
     }
-
 
     //Sortable columns
     foreach (seopress_get_post_types() as $key => $value) {

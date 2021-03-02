@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.4.0
+Stable tag: 4.4.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -320,6 +320,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 4.4.0.1 (12/02/2021) =
+* FIX Fatal errors
 = 4.4 (10/02/2021) =
 * NEW Complete code refactoring on Titles and metas feature 🎉
 * NEW Preview dynamic tags on post list columns 🎉

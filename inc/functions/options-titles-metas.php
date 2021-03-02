@@ -61,21 +61,7 @@ function seopress_titles_single_titles_option() {
     }
 }
 
-//Archive CPT Titles
-function seopress_titles_archive_titles_option() {
-    global $post;
-    $seopress_get_current_cpt = get_post_type($post);
 
-    $seopress_titles_archive_titles_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archive_titles_option)) {
-        foreach ($seopress_titles_archive_titles_option as $key => $seopress_titles_archive_titles_value) {
-            $options[$key] = $seopress_titles_archive_titles_value;
-        }
-        if (isset($seopress_titles_archive_titles_option['seopress_titles_archive_titles'][$seopress_get_current_cpt]['title'])) {
-            return $seopress_titles_archive_titles_option['seopress_titles_archive_titles'][$seopress_get_current_cpt]['title'];
-        }
-    }
-}
 
 //Tax archives Titles
 function seopress_titles_tax_titles_option() {
