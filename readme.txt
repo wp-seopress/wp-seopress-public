@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 4.3.0.2
+Stable tag: 4.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -320,10 +320,32 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
-= 4.3.0.2 (19/01/2021) =
+= 4.4 (10/02/2021) =
+* NEW Complete code refactoring on Titles and metas feature 🎉
+* NEW Preview dynamic tags on post list columns 🎉
+* NEW Live preview when adding dynamic variables for Google Preview 🎉
+* NEW Add Local Business types to automatic schemas as new mapping option to avoid entering manually a business type 🎉 (PRO)
+* NEW Support variable products for automatic product schema (PRO) 🎉
+* NEW Support Global Product Identifiers for variable products (PRO)
+* NEW Dashboard notification if Google Analytics is enabled without UA or GA4 ids
+* NEW White Label option to change the SEO menu name (PRO)
+* NEW Add post ID to automatic schemas as new mapping option (PRO)
+* INFO Remove jQuery for Google Analytics Enhanced Ecommerce (no more jQuery with GA tracking code 🎉)
+* INFO Improve wizard assistant user interface
+* INFO Stop adding uppercase on the first letter of each word when automatically adding media attributes (eg: alt tag)
+* INFO Add new help tabs for Sitemaps and Social networks settings page to improve user experience
+* FIX Cornerstone compatibility issue with our content analysis feature
+* FIX Oxygen compatibility issue with our content analysis feature ("2 meta robots found")
+* FIX CSV broken link export with specific PHP configuration
+* FIX Social tags for term taxonomies
+* FIX White label: some SEOPress links weren't hidden
+* FIX WPML XML configuration file (wpml-config.xml)
+* FIX GA Enhanced Ecommerce check on status order for measuring purchases
+* FIX GA Enhanced Ecommerce add_to_cart event from archive product page
+= 4.3.0.2 19/01/2021 =
 * FIX Analytics tracking code if no UA-XXX set
 * FIX Conflict Google Analytics with UpdraftPlus (PRO)
-= 4.3.0.1 (15/01/2021) =
+= 4.3.0.1 15/01/2021 =
 * FIX Fatal error
 * FIX Product price with taxes for automatic product schema (default: sale price, fallback: regular price)
 * FIX Fatal error get_price in specific cases

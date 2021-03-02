@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 4.3.0.2
+Version: 4.4.0
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '4.3.0.2');
+define('SEOPRESS_VERSION', '4.4.0');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_TEMPLATE_DIR', SEOPRESS_PLUGIN_DIR_PATH . 'templates');
@@ -535,34 +535,40 @@ function seopress_plugin_action_links($links, $file) {
  *
  * @author Benjamin Denis
  *
+ * @deprecated 4.4.0
+ *
  * @return (array) $wp_post_types
  **/
 function seopress_get_post_types() {
-    global $wp_post_types;
+    if ( ! function_exists('seopress_get_service')) {
+        global $wp_post_types;
 
-    $args = [
-        'show_ui' => true,
-        'public'  => true,
-    ];
+        $args = [
+            'show_ui' => true,
+            'public'  => true,
+        ];
 
-    $output   = 'objects'; // names or objects, note names is the default
-    $operator = 'and'; // 'and' or 'or'
+        $output   = 'objects'; // names or objects, note names is the default
+        $operator = 'and'; // 'and' or 'or'
 
-    $post_types = get_post_types($args, $output, $operator);
-    unset(
-        $post_types['attachment'],
-        $post_types['seopress_rankings'],
-        $post_types['seopress_backlinks'],
-        $post_types['seopress_404'],
-        $post_types['elementor_library'],
-        $post_types['customer_discount'],
-        $post_types['cuar_private_file'],
-        $post_types['cuar_private_page'],
-        $post_types['ct_template']
-    );
-    $post_types = apply_filters('seopress_post_types', $post_types);
+        $post_types = get_post_types($args, $output, $operator);
+        unset(
+            $post_types['attachment'],
+            $post_types['seopress_rankings'],
+            $post_types['seopress_backlinks'],
+            $post_types['seopress_404'],
+            $post_types['elementor_library'],
+            $post_types['customer_discount'],
+            $post_types['cuar_private_file'],
+            $post_types['cuar_private_page'],
+            $post_types['ct_template']
+        );
+        $post_types = apply_filters('seopress_post_types', $post_types);
 
-    return $post_types;
+        return $post_types;
+    }
+
+    return seopress_get_service('WordPressData')->getPostTypes();
 }
 
 /**
@@ -827,7 +833,7 @@ function seopress_xml_sitemap_img_enable_option() {
 //Rewrite Rules for XML Sitemap
 if ('1' == seopress_xml_sitemap_general_enable_option() && '1' == seopress_get_toggle_option('xml-sitemap')) {
     function seopress_sitemaps_headers() {
-        if(!function_exists('seopress_get_service')){
+        if ( ! function_exists('seopress_get_service')) {
             return;
         }
 

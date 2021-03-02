@@ -36,40 +36,59 @@ abstract class Kernel {
         switch (current_filter()) {
             case 'plugins_loaded':
                 foreach (self::getContainer()->getActions() as $key => $class) {
-                    $class = new $class();
-                    switch (true) {
-                        case $class instanceof ExecuteHooksBackend:
-                            if (is_admin()) {
-                                $class->hooks();
-                            }
-                            break;
+                    try {
+                        if ( ! class_exists($class)) {
+                            continue;
+                        }
 
-                        case $class instanceof ExecuteHooksFrontend:
-                            if ( ! is_admin()) {
-                                $class->hooks();
-                            }
-                            break;
+                        $class = new $class();
+                        switch (true) {
+                            case $class instanceof ExecuteHooksBackend:
+                                if (is_admin()) {
+                                    $class->hooks();
+                                }
+                                break;
 
-                        case $class instanceof ExecuteHooks:
-                            $class->hooks();
-                            break;
+                            case $class instanceof ExecuteHooksFrontend:
+                                if ( ! is_admin()) {
+                                    $class->hooks();
+                                }
+                                break;
+
+                            case $class instanceof ExecuteHooks:
+                                $class->hooks();
+                                break;
+                        }
+                    } catch (\Exception $e) {
                     }
                 }
                 break;
             case 'activate_' . self::$data['slug'] . '/' . self::$data['main_file'] . '.php':
                 foreach (self::getContainer()->getActions() as $key => $class) {
-                    $class = new $class();
+                    try {
+                        if ( ! class_exists($class)) {
+                            continue;
+                        }
+                        $class = new $class();
 
-                    if ($class instanceof ActivationHook) {
-                        $class->activate();
+                        if ($class instanceof ActivationHook) {
+                            $class->activate();
+                        }
+                    } catch (\Exception $e) {
                     }
                 }
                 break;
             case 'deactivate_' . self::$data['slug'] . '/' . self::$data['main_file'] . '.php':
                 foreach (self::getContainer()->getActions() as $key => $class) {
-                    $class = new $class();
-                    if ($class instanceof DeactivationHook) {
-                        $class->deactivate();
+                    try {
+                        if ( ! class_exists($class)) {
+                            continue;
+                        }
+                        $class = new $class();
+                        if ($class instanceof DeactivationHook) {
+                            $class->deactivate();
+                        }
+                    } catch (\Exception $e) {
                     }
                 }
                 break;
@@ -83,6 +102,7 @@ abstract class Kernel {
      */
     public static function buildContainer() {
         self::buildClasses(self::$data['root'] . '/src/Services', 'services', 'Services\\');
+        self::buildClasses(self::$data['root'] . '/src/Thirds', 'services', 'Thirds\\');
         self::buildClasses(self::$data['root'] . '/src/Actions', 'actions', 'Actions\\');
     }
 

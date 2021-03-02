@@ -754,17 +754,10 @@ function seopress_google_analytics_js($echo) {
         //Init
         $seopress_google_analytics_config = [];
         $seopress_google_analytics_event  = [];
-        
-        $g_id = '';
-        if ('' != seopress_google_analytics_ga4_option()) {
-            $g_id = seopress_google_analytics_ga4_option();
-        } elseif ('' != seopress_google_analytics_ua_option()) {
-            $g_id = seopress_google_analytics_ua_option();
-        }
 
         $seopress_google_analytics_html = "\n";
         $seopress_google_analytics_html .=
-        "<script async src='https://www.googletagmanager.com/gtag/js?id=" . $g_id . "'></script>
+        "<script async src='https://www.googletagmanager.com/gtag/js?id=" . seopress_google_analytics_ua_option() . "'></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}";

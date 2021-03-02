@@ -605,6 +605,71 @@
                             }
                         }
 
+                        function seopress_ga_enable_option() {
+                            $seopress_ga_enable_option = get_option('seopress_google_analytics_option_name');
+                            if ( ! empty($seopress_ga_enable_option)) {
+                                foreach ($seopress_ga_enable_option as $key => $seopress_ga_enable_value) {
+                                    $options[$key] = $seopress_ga_enable_value;
+                                }
+                                if (isset($seopress_ga_enable_option['seopress_google_analytics_enable'])) {
+                                    return $seopress_ga_enable_option['seopress_google_analytics_enable'];
+                                }
+                            }
+                        }
+                        function seopress_ga_ua_option() {
+                            $seopress_ga_ua_option = get_option('seopress_google_analytics_option_name');
+                            if ( ! empty($seopress_ga_ua_option)) {
+                                foreach ($seopress_ga_ua_option as $key => $seopress_ga_ua_value) {
+                                    $options[$key] = $seopress_ga_ua_value;
+                                }
+                                if (isset($seopress_ga_ua_option['seopress_google_analytics_ua'])) {
+                                    return $seopress_ga_ua_option['seopress_google_analytics_ua'];
+                                }
+                            }
+                        }
+                        function seopress_ga4_option() {
+                            $seopress_ga4_option = get_option('seopress_google_analytics_option_name');
+                            if ( ! empty($seopress_ga4_option)) {
+                                foreach ($seopress_ga4_option as $key => $seopress_ga4_value) {
+                                    $options[$key] = $seopress_ga4_value;
+                                }
+                                if (isset($seopress_ga4_option['seopress_google_analytics_ga4'])) {
+                                    return $seopress_ga4_option['seopress_google_analytics_ga4'];
+                                }
+                            }
+                        }
+                        if ('' === seopress_ga_ua_option() && '' === seopress_ga4_option() && '1' === seopress_ga_enable_option()) {
+                            function seopress_get_hidden_notices_analytics_option() {
+                                $seopress_get_hidden_notices_analytics_option = get_option('seopress_notices');
+                                if ( ! empty($seopress_get_hidden_notices_analytics_option)) {
+                                    foreach ($seopress_get_hidden_notices_analytics_option as $key => $seopress_get_hidden_notices_analytics_value) {
+                                        $options[$key] = $seopress_get_hidden_notices_analytics_value;
+                                    }
+                                    if (isset($seopress_get_hidden_notices_analytics_option['notice-ga-ids'])) {
+                                        return $seopress_get_hidden_notices_analytics_option['notice-ga-ids'];
+                                    }
+                                }
+                            }
+                            if ('1' != seopress_get_hidden_notices_analytics_option()) {
+                                $args = [
+                                    'id'     => 'notice-ga-ids',
+                                    'title'  => __('You have activated Google Analytics tracking without adding identifiers!', 'wp-seopress'),
+                                    'desc'   => __('Google Analytics will not track your visitors until you finish the configuration.', 'wp-seopress'),
+                                    'impact' => [
+                                        'medium' => __('Medium impact', 'wp-seopress'),
+                                    ],
+                                    'link' => [
+                                        'en'       => admin_url('admin.php?page=seopress-google-analytics'),
+                                        'title'    => __('Fix this!', 'wp-seopress'),
+                                        'external' => false,
+                                    ],
+                                    'icon'       => 'dashicons-chart-area',
+                                    'deleteable' => true,
+                                ];
+                                seopress_notification($args);
+                            }
+                        }
+
                         function seopress_get_hidden_notices_review_option() {
                             $seopress_get_hidden_notices_review_option = get_option('seopress_notices');
                             if ( ! empty($seopress_get_hidden_notices_review_option)) {

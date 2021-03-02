@@ -500,7 +500,11 @@ class SEOPRESS_Admin_Setup_Wizard {
 			<label class="location-prompt" for="site_sep"><?php esc_html_e('Separator', 'wp-seopress'); ?></label>
 			<input type="text" id="site_sep" class="location-input" name="site_sep" placeholder="<?php esc_html_e('eg: |', 'wp-seopress'); ?>" required value="<?php echo $site_sep; ?>" />
 
-			<label class="location-prompt" for="site_title"><?php esc_html_e('Site title', 'wp-seopress'); ?></label>
+            <p class="seopress-wizard-service-info seopress-wizard-services description">
+                <?php _e('This separator will be used by the dynamic variable <strong>%%sep%%</strong> in your title and meta description templates.', 'wp-seopress'); ?>
+            </p>
+
+			<label class="location-prompt" for="site_title"><?php esc_html_e('Home site title', 'wp-seopress'); ?></label>
 			<input type="text" id="site_title" class="location-input" name="site_title" placeholder="<?php esc_html_e('eg: My super website', 'wp-seopress'); ?>" required value="<?php echo $site_title; ?>" />
 
 			<label class="location-prompt" for="knowledge_type"><?php esc_html_e('Person or organization', 'wp-seopress'); ?></label>

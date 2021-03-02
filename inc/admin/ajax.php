@@ -94,10 +94,16 @@ function seopress_do_real_preview() {
             $data['title'] = $cookies;
 
             if ('post' == $seopress_origin) { //Default: post type
-                $response = wp_remote_get(get_preview_post_link((int) $seopress_get_the_id, ['no_admin_bar' => 1]), $args);
+                //Oxygen compatibility
+                if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
+                    $response = wp_remote_get(get_permalink((int) $seopress_get_the_id), $args);
+                } else {
+                    $response = wp_remote_get(get_preview_post_link((int) $seopress_get_the_id, ['no_admin_bar' => 1]), $args);
+                }
             } else { //Term taxonomy
                 $response = wp_remote_get(get_term_link((int) $seopress_get_the_id, $seopress_tax_name), $args);
             }
+
             //Check for error
             if (is_wp_error($response) || '404' == wp_remote_retrieve_response_code($response)) {
                 $data['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
@@ -119,8 +125,8 @@ function seopress_do_real_preview() {
                     //Get post content (used for Words counter)
                     $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
 
-                    //Themify compatibility
-                    if (defined('THEMIFY_DIR')) {
+                    //Themify / Cornerstone compatibility
+                    if (defined('THEMIFY_DIR') || is_plugin_active('cornerstone/cornerstone.php')) {
                         $seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
                     }
 

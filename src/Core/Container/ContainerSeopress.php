@@ -115,8 +115,12 @@ class ContainerSeopress implements ManageContainer {
             return null;
         }
 
-        if (is_string($this->services[$name])) {
-            $this->services[$name] = new $this->services[$name]();
+        try {
+            if (is_string($this->services[$name]) && class_exists($this->services[$name])) {
+                $this->services[$name] = new $this->services[$name]();
+            }
+        } catch (\Exception $e) {
+            $this->services[$name] = null;
         }
 
         return $this->services[$name];

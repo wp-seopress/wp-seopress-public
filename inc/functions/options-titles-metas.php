@@ -5,30 +5,44 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //=================================================================================================
 //Titles
 //Titles & Metas
-//Separator
+/**
+ * Separator.
+ *
+ * @deprecated 4.4.0
+ *
+ * @return string
+ */
 function seopress_titles_sep_option() {
-    $seopress_titles_sep_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_sep_option)) {
-        foreach ($seopress_titles_sep_option as $key => $seopress_titles_sep_value) {
-            $options[$key] = $seopress_titles_sep_value;
-        }
-        if (isset($seopress_titles_sep_option['seopress_titles_sep'])) {
-            return $seopress_titles_sep_option['seopress_titles_sep'];
+    if ( ! function_exists('seopress_get_service')) {
+        $seopress_titles_sep_option = get_option('seopress_titles_option_name');
+        if ( ! empty($seopress_titles_sep_option)) {
+            if (isset($seopress_titles_sep_option['seopress_titles_sep'])) {
+                return $seopress_titles_sep_option['seopress_titles_sep'];
+            }
         }
     }
+
+    return seopress_get_service('TitleOption')->getSeparator();
 }
 
-//Homepage Title
+/**
+ * Home site title meta.
+ *
+ * @deprecated 4.4.0
+ *
+ * @return string
+ */
 function seopress_titles_home_site_title_option() {
-    $seopress_titles_home_site_title_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_home_site_title_option)) {
-        foreach ($seopress_titles_home_site_title_option as $key => $seopress_titles_home_site_title_value) {
-            $options[$key] = $seopress_titles_home_site_title_value;
-        }
-        if (isset($seopress_titles_home_site_title_option['seopress_titles_home_site_title'])) {
+    if ( ! function_exists('seopress_get_service')) {
+        $seopress_titles_home_site_title_option = get_option('seopress_titles_option_name');
+        if ( ! empty($seopress_titles_home_site_title_option)) {
             return $seopress_titles_home_site_title_option['seopress_titles_home_site_title'];
         }
+
+        return null;
     }
+
+    return seopress_get_service('TitleOption')->getHomeSiteTitle();
 }
 
 //Single CPT Titles
@@ -157,17 +171,24 @@ function seopress_titles_paged_rel_option() {
     }
 }
 
-//Homepage Description
+/**
+ * Homepage Description.
+ *
+ * @since 4.4.0
+ *
+ * @return string
+ */
 function seopress_titles_home_site_desc_option() {
-    $seopress_titles_home_site_desc_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_home_site_desc_option)) {
-        foreach ($seopress_titles_home_site_desc_option as $key => $seopress_titles_home_site_desc_value) {
-            $options[$key] = $seopress_titles_home_site_desc_value;
+    if ( ! function_exists('seopress_get_service')) {
+        $seopress_titles_home_site_title_option = get_option('seopress_titles_option_name');
+        if ( ! empty($seopress_titles_home_site_title_option)) {
+            return $seopress_titles_home_site_title_option['seopress_titles_home_site_desc'];
         }
-        if (isset($seopress_titles_home_site_desc_option['seopress_titles_home_site_desc'])) {
-            return $seopress_titles_home_site_desc_option['seopress_titles_home_site_desc'];
-        }
+
+        return null;
     }
+
+    return seopress_get_service('TitleOption')->getHomeDescriptionTitle();
 }
 
 //Single CPT Description
@@ -493,10 +514,14 @@ function seopress_titles_the_title() {
     if (has_filter('seopress_titles_title')) {
         $seopress_titles_title_template = apply_filters('seopress_titles_title', $seopress_titles_title_template);
     }
+
     //Return Title tag
     return $seopress_titles_title_template;
 }
-add_filter('pre_get_document_title', 'seopress_titles_the_title', 10);
+
+if (apply_filters('seopress_old_pre_get_document_title', ! function_exists('seopress_get_service'))) {
+    add_filter('pre_get_document_title', 'seopress_titles_the_title', 10);
+}
 
 //THE Meta Description
 function seopress_titles_the_description_content() {
@@ -709,7 +734,10 @@ function seopress_titles_the_description() {
         echo $html;
     }
 }
-add_action('wp_head', 'seopress_titles_the_description', 1);
+
+if (apply_filters('seopress_old_wp_head_description', false)) {
+    add_action('wp_head', 'seopress_titles_the_description', 1);
+}
 
 //Advanced
 //noindex

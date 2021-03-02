@@ -6,6 +6,21 @@ if ( ! defined('ABSPATH')) {
     exit;
 }
 
-class Separator {
+use SEOPress\Models\GetTagValue;
+
+class Separator implements GetTagValue {
     const NAME = 'sep';
+
+    const DEFAULT_SEPARATOR = '-';
+
+    public function getValue($args = null) {
+        $context   = isset($args[0]) ? $args[0] : null;
+
+        $separator = seopress_get_service('TitleOption')->getSeparator();
+        if (empty($separator)) {
+            $separator = self::DEFAULT_SEPARATOR;
+        }
+
+        return apply_filters('seopress_get_tag_separator_value', $separator, $context);
+    }
 }

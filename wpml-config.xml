@@ -36,4 +36,26 @@
       <key name="seopress_google_analytics_opt_out_msg_ok"/>
     </key>
   </admin-texts>
+  <custom-fields>
+    <custom-field action="translate">_seopress_titles_title</custom-field>
+    <custom-field action="translate">_seopress_titles_desc</custom-field>
+    <custom-field action="translate">_seopress_robots_canonical</custom-field>
+    <custom-field action="copy">_seopress_robots_primary_cat</custom-field>
+    <custom-field action="translate">_seopress_robots_breadcrumbs</custom-field>
+    <custom-field action="translate">_seopress_social_fb_title</custom-field>
+    <custom-field action="translate">_seopress_social_fb_desc</custom-field>
+    <custom-field action="copy">_seopress_social_fb_img</custom-field>
+    <custom-field action="translate">_seopress_social_twitter_title</custom-field>
+    <custom-field action="translate">_seopress_social_twitter_desc</custom-field>
+    <custom-field action="copy">_seopress_social_twitter_img</custom-field>
+    <custom-field action="copy">_seopress_redirections_type</custom-field>
+    <custom-field action="translate">_seopress_redirections_value</custom-field>
+    <custom-field action="copy">_seopress_robots_index</custom-field>
+    <custom-field action="copy">_seopress_robots_follow</custom-field>
+    <custom-field action="copy">_seopress_robots_odp</custom-field>
+    <custom-field action="copy">_seopress_robots_imageindex</custom-field>
+    <custom-field action="copy">_seopress_robots_archive</custom-field>
+    <custom-field action="copy">_seopress_robots_snippet</custom-field>
+    <custom-field action="copy">_seopress_redirections_enabled</custom-field>
+  </custom-fields>
 </wpml-config>

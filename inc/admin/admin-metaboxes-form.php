@@ -5,6 +5,7 @@ global $typenow;
 global $pagenow;
 
 $data_tax = '';
+$termId   = '';
 
 if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
     $current_id = get_the_id();
@@ -34,9 +35,15 @@ if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
 } elseif ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) {
     global $tag;
     $current_id = $tag->term_id;
+    $termId     = $tag->term_id;
     $origin     = 'term';
     $data_tax   = $tag->taxonomy;
     $title      = $tag->name;
+}
+
+$isHomeId = get_option('page_on_front');
+if ('0' === $isHomeId) {
+    $isHomeId = '';
 }
 
 function seopress_redirections_value($seopress_redirections_value) {
@@ -54,7 +61,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) {
 					<div class="inside">';
 }
 
-echo '<div id="seopress-tabs" data_id="' . $current_id . '" data_origin="' . $origin . '" data_tax="' . $data_tax . '">';
+echo '<div id="seopress-tabs" data-home-id="' . $isHomeId . '" data-term-id="' . $termId . '" data_id="' . $current_id . '" data_origin="' . $origin . '" data_tax="' . $data_tax . '">';
 
         if ('seopress_404' != $typenow) {
             $seo_tabs['title-tab']    = '<li><a href="#tabs-1"><span class="dashicons dashicons-editor-table"></span>' . __('Titles settings', 'wp-seopress') . '</a></li>';
@@ -94,7 +101,7 @@ echo '<div id="seopress-tabs" data_id="' . $current_id . '" data_origin="' . $or
         if ('seopress_404' != $typenow) {
             if (array_key_exists('title-tab', $seo_tabs)) {
                 echo '<div id="tabs-1">';
-                if (is_plugin_active('woocommerce/woocommerce.php')) {
+                if (is_plugin_active('woocommerce/woocommerce.php') && function_exists('wc_get_page_id')) {
                     $shop_page_id = wc_get_page_id('shop');
                     if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
                         if ($post && absint($shop_page_id) === absint($post->ID)) {
@@ -482,15 +489,17 @@ echo '<div id="seopress-tabs" data_id="' . $current_id . '" data_origin="' . $or
                 }
             }
 
-            if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale()) {
-                $seopress_docs_link['support']['redirection'] = 'https://www.seopress.org/fr/support/guides/activer-redirections-301-surveillance-404/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-            } else {
-                $seopress_docs_link['support']['redirection'] = 'https://www.seopress.org/support/guides/redirections/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
-            } ?>
-					<span class="seopress-help dashicons dashicons-external"></span>
-					<a href="<?php echo $seopress_docs_link['support']['redirection']; ?>" target="_blank" class="seopress-help seopress-doc"><?php _e('Need help with your redirections? Read our guide.', 'wp-seopress'); ?></a>
-					<?php echo '</p>
-			</div>';
+            if ((function_exists('seopress_mu_white_label_help_links_option') && '1' !== seopress_mu_white_label_help_links_option()) || (function_exists('seopress_white_label_help_links_option') && '1' !== seopress_white_label_help_links_option())) {
+                if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale()) {
+                    $seopress_docs_link['support']['redirection'] = 'https://www.seopress.org/fr/support/guides/activer-redirections-301-surveillance-404/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                } else {
+                    $seopress_docs_link['support']['redirection'] = 'https://www.seopress.org/support/guides/redirections/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
+                } ?>
+                        <span class="seopress-help dashicons dashicons-external"></span>
+                        <a href="<?php echo $seopress_docs_link['support']['redirection']; ?>" target="_blank" class="seopress-help seopress-doc"><?php _e('Need help with your redirections? Read our guide.', 'wp-seopress'); ?></a>
+                        <?php echo '</p>';
+            }
+            echo '</div>';
         }
         if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
             if (function_exists('seopress_get_toggle_option') && '1' == seopress_get_toggle_option('news')) {

@@ -7,8 +7,8 @@ defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 use SEOPress\Core\Hooks\ActivationHook;
 use SEOPress\Helpers\TagCompose;
 use SEOPress\Tags\PostTitle;
+use SEOPress\Tags\SiteTagline;
 use SEOPress\Tags\SiteTitle;
-use SEOPress\Tags\Tagline;
 
 class Init implements ActivationHook {
     /**
@@ -191,7 +191,7 @@ class Init implements ActivationHook {
         //Site Title
         $titleOptions = [
             'seopress_titles_home_site_title' => TagCompose::getValueWithTag(PostTitle::NAME),
-            'seopress_titles_home_site_desc'  => TagCompose::getValueWithTag(Tagline::NAME),
+            'seopress_titles_home_site_desc'  => TagCompose::getValueWithTag(SiteTagline::NAME),
         ];
 
         //Post Types
