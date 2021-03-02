@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c7c565f74fc78701b8b8b5bea63c77f2c5179fa1',
+    'reference' => 'dc1b13e2afd276e8e283386d16f25b759614663a',
     'name' => 'wp-seopress/wp-seopress',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c7c565f74fc78701b8b8b5bea63c77f2c5179fa1',
+      'reference' => 'dc1b13e2afd276e8e283386d16f25b759614663a',
     ),
   ),
 );

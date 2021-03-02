@@ -595,9 +595,10 @@ class seopress_options {
 		 <?php
 
             $plugin_settings_tabs = [
-                'tab_seopress_advanced_advanced'   => __('Advanced', 'wp-seopress'),
-                'tab_seopress_advanced_appearance' => __('Appearance', 'wp-seopress'),
-                'tab_seopress_advanced_security'   => __('Security', 'wp-seopress'),
+                'tab_seopress_advanced_image'       => __('Image SEO', 'wp-seopress'),
+                'tab_seopress_advanced_advanced'    => __('Advanced', 'wp-seopress'),
+                'tab_seopress_advanced_appearance'  => __('Appearance', 'wp-seopress'),
+                'tab_seopress_advanced_security'    => __('Security', 'wp-seopress'),
             ];
 
         echo '<div class="nav-tab-wrapper">';
@@ -605,9 +606,14 @@ class seopress_options {
             echo '<a id="' . $tab_key . '-tab" class="nav-tab" href="?page=seopress-advanced#tab=' . $tab_key . '">' . $tab_caption . '</a>';
         }
         echo '</div>'; ?>
-			<div class="seopress-tab <?php if ('tab_seopress_advanced_advanced' == $current_tab) {
+        <div class="seopress-tab <?php if ('tab_seopress_advanced_image' == $current_tab) {
             echo 'active';
-        } ?>" id="tab_seopress_advanced_advanced"><?php do_settings_sections('seopress-settings-admin-advanced-advanced'); ?></div>
+        } ?>" id="tab_seopress_advanced_image"><?php do_settings_sections('seopress-settings-admin-advanced-image'); ?>
+        </div>
+		<div class="seopress-tab <?php if ('tab_seopress_advanced_advanced' == $current_tab) {
+            echo 'active';
+        } ?>" id="tab_seopress_advanced_advanced"><?php do_settings_sections('seopress-settings-admin-advanced-advanced'); ?>
+        </div>
 			<div class="seopress-tab <?php if ('tab_seopress_advanced_appearance' == $current_tab) {
             echo 'active';
         } ?>" id="tab_seopress_advanced_appearance"><?php do_settings_sections('seopress-settings-admin-advanced-appearance'); ?></div>
@@ -2289,6 +2295,79 @@ class seopress_options {
             'seopress_setting_section_google_analytics_matomo' // Section
         );
 
+        //Image SECTION============================================================================
+        add_settings_section(
+            'seopress_setting_section_advanced_image', // ID
+            '',
+            //__("Image SEO","wp-seopress"), // Title
+            [$this, 'print_section_info_advanced_image'], // Callback
+            'seopress-settings-admin-advanced-image' // Page
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_attachments', // ID
+            __('Redirect attachment pages to post parent', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_advanced_attachments_callback'], // Callback
+            'seopress-settings-admin-advanced-image', // Page
+            'seopress_setting_section_advanced_image' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_attachments_file', // ID
+            __('Redirect attachment pages to their file URL', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_advanced_attachments_file_callback'], // Callback
+            'seopress-settings-admin-advanced-image', // Page
+            'seopress_setting_section_advanced_image' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_replytocom', // ID
+            __('Remove ?replytocom link to avoid duplicate content', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_advanced_replytocom_callback'], // Callback
+            'seopress-settings-admin-advanced-image', // Page
+            'seopress_setting_section_advanced_image' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_title_editor', // ID
+            __('Automatically set the image Title', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_advanced_image_auto_title_editor_callback'], // Callback
+            'seopress-settings-admin-advanced-image', // Page
+            'seopress_setting_section_advanced_image' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_alt_editor', // ID
+            __('Automatically set the image Alt text', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_advanced_image_auto_alt_editor_callback'], // Callback
+            'seopress-settings-admin-advanced-image', // Page
+            'seopress_setting_section_advanced_image' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_alt_target_kw', // ID
+            __('Automatically set the image Alt text from target keywords', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_advanced_image_auto_alt_target_kw_callback'], // Callback
+            'seopress-settings-admin-advanced-image', // Page
+            'seopress_setting_section_advanced_image' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_caption_editor', // ID
+            __('Automatically set the image Caption', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_advanced_image_auto_caption_editor_callback'], // Callback
+            'seopress-settings-admin-advanced-image', // Page
+            'seopress_setting_section_advanced_image' // Section
+        );
+
+        add_settings_field(
+            'seopress_advanced_advanced_image_auto_desc_editor', // ID
+            __('Automatically set the image Description', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_advanced_image_auto_desc_editor_callback'], // Callback
+            'seopress-settings-admin-advanced-image', // Page
+            'seopress_setting_section_advanced_image' // Section
+        );
+
         //Advanced SECTION=========================================================================
         add_settings_section(
             'seopress_setting_section_advanced_advanced', // ID
@@ -2296,70 +2375,6 @@ class seopress_options {
             //__("Advanced","wp-seopress"), // Title
             [$this, 'print_section_info_advanced_advanced'], // Callback
             'seopress-settings-admin-advanced-advanced' // Page
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_attachments', // ID
-            __('Redirect attachment pages to post parent', 'wp-seopress'), // Title
-            [$this, 'seopress_advanced_advanced_attachments_callback'], // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_attachments_file', // ID
-            __('Redirect attachment pages to their file URL', 'wp-seopress'), // Title
-            [$this, 'seopress_advanced_advanced_attachments_file_callback'], // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_replytocom', // ID
-            __('Remove ?replytocom link to avoid duplicate content', 'wp-seopress'), // Title
-            [$this, 'seopress_advanced_advanced_replytocom_callback'], // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_image_auto_title_editor', // ID
-            __('Automatically set the image Title', 'wp-seopress'), // Title
-            [$this, 'seopress_advanced_advanced_image_auto_title_editor_callback'], // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_image_auto_alt_editor', // ID
-            __('Automatically set the image Alt text', 'wp-seopress'), // Title
-            [$this, 'seopress_advanced_advanced_image_auto_alt_editor_callback'], // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_image_auto_alt_target_kw', // ID
-            __('Automatically set the image Alt text from target keywords', 'wp-seopress'), // Title
-            [$this, 'seopress_advanced_advanced_image_auto_alt_target_kw_callback'], // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_image_auto_caption_editor', // ID
-            __('Automatically set the image Caption', 'wp-seopress'), // Title
-            [$this, 'seopress_advanced_advanced_image_auto_caption_editor_callback'], // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section
-        );
-
-        add_settings_field(
-            'seopress_advanced_advanced_image_auto_desc_editor', // ID
-            __('Automatically set the image Description', 'wp-seopress'), // Title
-            [$this, 'seopress_advanced_advanced_image_auto_desc_editor_callback'], // Callback
-            'seopress-settings-admin-advanced-advanced', // Page
-            'seopress_setting_section_advanced_advanced' // Section
         );
 
         add_settings_field(
@@ -2985,6 +3000,10 @@ class seopress_options {
         echo __('<p>Use Matomo to track your users with privacy in mind.</p>', 'wp-seopress');
 
         echo '<p>' . __('Your <strong>Custom Dimensions</strong> will also work with Matomo tracking code', 'wp-seopress') . '</p>';
+    }
+
+    public function print_section_info_advanced_image() {
+        echo __('<p>Image SEO options.</p>', 'wp-seopress');
     }
 
     public function print_section_info_advanced_advanced() {

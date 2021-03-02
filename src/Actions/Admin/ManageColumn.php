@@ -115,25 +115,24 @@ class ManageColumn implements ExecuteHooksBackend {
     public function displayColumn($column, $post_id) {
         switch ($column) {
             case 'seopress_title':
-                $title   = get_post_meta($post_id, '_seopress_titles_title', true);
+                $metaPostTitle   = get_post_meta($post_id, '_seopress_titles_title', true);
+
                 $context = seopress_get_service('ContextPage')->buildContextWithCurrentId($post_id)->getContext();
-                $title   = $this->tagsToStringService->replace($title, $context);
-                ?>
-                <div id="seopress_title-<?php echo esc_attr($post_id); ?>">
-                    <?php echo esc_html($title); ?>
-                </div>
-                <?php
+                $title   = $this->tagsToStringService->replace($metaPostTitle, $context);
+                if (empty($title)) {
+                    $title = $metaPostTitle;
+                }
+                echo sprintf('<div id="seopress_title-%s">%s</div>', esc_attr($post_id), $title);
                 break;
 
             case 'seopress_desc':
-                $description   = get_post_meta($post_id, '_seopress_titles_desc', true);
-                $context       = seopress_get_service('ContextPage')->buildContextWithCurrentId($post_id)->getContext();
-                $description   = $this->tagsToStringService->replace($description, $context);
-                ?>
-                <div id="seopress_desc-<?php echo esc_attr($post_id); ?>">
-                    <?php echo esc_html($description); ?>
-                </div>
-                <?php
+                $metaDescription   = get_post_meta($post_id, '_seopress_titles_desc', true);
+                $context           = seopress_get_service('ContextPage')->buildContextWithCurrentId($post_id)->getContext();
+                $description       = $this->tagsToStringService->replace($metaDescription, $context);
+                if (empty($description)) {
+                    $description = $metaDescription;
+                }
+                echo sprintf('<div id="seopress_desc-%s">%s</div>', esc_attr($post_id), $description);
                 break;
 
             case 'seopress_redirect_enable':
