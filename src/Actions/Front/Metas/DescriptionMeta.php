@@ -21,7 +21,7 @@ class DescriptionMeta implements ExecuteHooksFrontend {
     }
 
     public function render() {
-        if (apply_filters('seopress_old_wp_head_description', false)) {
+        if (apply_filters('seopress_old_wp_head_description', true)) {
             return;
         }
 

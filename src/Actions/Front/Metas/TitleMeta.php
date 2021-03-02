@@ -57,7 +57,7 @@ class TitleMeta implements ExecuteHooksFrontend {
             require_once SEOPRESS_PLUGIN_DIR_PATH . '/inc/functions/options-titles-metas.php';
         }
 
-        if (apply_filters('seopress_old_pre_get_document_title', ! $defaultHook)) {
+        if (apply_filters('seopress_old_pre_get_document_title', true)) {
             return;
         }
 

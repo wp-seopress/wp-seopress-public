@@ -61,8 +61,6 @@ function seopress_titles_single_titles_option() {
     }
 }
 
-
-
 //Tax archives Titles
 function seopress_titles_tax_titles_option() {
     $queried_object           = get_queried_object();
@@ -505,7 +503,7 @@ function seopress_titles_the_title() {
     return $seopress_titles_title_template;
 }
 
-if (apply_filters('seopress_old_pre_get_document_title', ! function_exists('seopress_get_service'))) {
+if (apply_filters('seopress_old_pre_get_document_title', true)) {
     add_filter('pre_get_document_title', 'seopress_titles_the_title', 10);
 }
 
@@ -721,7 +719,7 @@ function seopress_titles_the_description() {
     }
 }
 
-if (apply_filters('seopress_old_wp_head_description', false)) {
+if (apply_filters('seopress_old_wp_head_description', true)) {
     add_action('wp_head', 'seopress_titles_the_description', 1);
 }
 
