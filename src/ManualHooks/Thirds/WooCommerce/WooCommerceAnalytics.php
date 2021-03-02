@@ -21,10 +21,6 @@ class WooCommerceAnalytics {
             return;
         }
 
-        if (seopress_google_analytics_purchases_option()) {
-            $this->wooCommerceAnalytics->measurePurchase();
-        }
-
         if (seopress_google_analytics_add_to_cart_option()) {
             // Listing page
             add_action('woocommerce_after_shop_loop_item', [$this, 'addToCart']);

@@ -96,7 +96,10 @@ function seopress_do_real_preview() {
             if ('post' == $seopress_origin) { //Default: post type
                 //Oxygen compatibility
                 if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
-                    $response = wp_remote_get(get_permalink((int) $seopress_get_the_id), $args);
+                    $post_url = get_permalink((int) $seopress_get_the_id);
+                    $post_url = add_query_arg('no_admin_bar', 1, $post_url);
+
+                    $response = wp_remote_get($post_url, $args);
                 } else {
                     $response = wp_remote_get(get_preview_post_link((int) $seopress_get_the_id, ['no_admin_bar' => 1]), $args);
                 }
