@@ -57,6 +57,9 @@ class ManageColumn implements ExecuteHooksBackend {
     }
 
     public function addColumn($columns) {
+        if ( ! function_exists('seopress_advanced_appearance_title_col_option')) {
+            require_once SEOPRESS_PLUGIN_DIR_PATH . '/inc/functions/options-advanced-admin.php';
+        }
         if ( ! empty(seopress_advanced_appearance_title_col_option())) {
             $columns['seopress_title'] = __('Title tag', 'wp-seopress');
         }
