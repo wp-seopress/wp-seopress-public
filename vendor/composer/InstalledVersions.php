@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'a864a9dd2dff912a2d4864830f15db71baaf798b',
+    'reference' => 'c5a0e845031b44c1d5f1a3bb29e943c2d836d2b9',
     'name' => 'wp-seopress/wp-seopress',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'a864a9dd2dff912a2d4864830f15db71baaf798b',
+      'reference' => 'c5a0e845031b44c1d5f1a3bb29e943c2d836d2b9',
     ),
   ),
 );

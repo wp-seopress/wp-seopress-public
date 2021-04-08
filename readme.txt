@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.5.0.1
+Stable tag: 4.5.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -324,8 +324,10 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 4.5.0.2 =
+* FIX PHP Error: Call to undefined function seopress_white_label_help_links_option()
 = 4.5.0.1 =
-* PHP Fatal error: Uncaught Error: Call to undefined function SEOPress\Tags\Schema\seopress_social_knowledge_phone_number_option()
+* FIX PHP Fatal error: Uncaught Error: Call to undefined function SEOPress\Tags\Schema\seopress_social_knowledge_phone_number_option()
 = 4.5 (25/03/2021) https://www.seopress.org/blog/seopress-4-5/ =
 * NEW HTML sitemap enhancements: add HTML classes
 * NEW HTML sitemap enhancements: new option to remove links from archive pages

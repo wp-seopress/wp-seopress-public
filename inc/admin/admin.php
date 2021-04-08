@@ -46,7 +46,7 @@ class seopress_options {
         if (function_exists('seopress_get_toggle_white_label_option')) {
             $white_label_toggle = seopress_get_toggle_white_label_option();
             if ('1' === $white_label_toggle) {
-                if ('1' === seopress_white_label_help_links_option()) {
+                if (function_exists('seopress_white_label_help_links_option') && '1' === seopress_white_label_help_links_option()) {
                     return;
                 }
             }
