@@ -399,6 +399,7 @@ if ('' != seopress_advanced_appearance_title_col_option()
 
     function seopress_admin_sortable_columns($columns) {
         $columns['seopress_noindex'] = 'seopress_noindex';
+        $columns['seopress_nofollow'] = 'seopress_nofollow';
 
         return $columns;
     }
@@ -411,6 +412,10 @@ if ('' != seopress_advanced_appearance_title_col_option()
             $orderby = $query->get('orderby');
             if ('seopress_noindex' == $orderby) {
                 $query->set('meta_key', '_seopress_robots_index');
+                $query->set('orderby', 'meta_value');
+            }
+            if ('seopress_nofollow' == $orderby) {
+                $query->set('meta_key', '_seopress_robots_follow');
                 $query->set('orderby', 'meta_value');
             }
         }
@@ -880,6 +885,37 @@ function seopress_bulk_quick_edit_save_post($post_id) {
             update_post_meta($post_id, '_seopress_robots_follow', 'yes');
         } else {
             delete_post_meta($post_id, '_seopress_robots_follow');
+        }
+    }
+
+    //Elementor sync
+    if (did_action('elementor/loaded')) {
+        $elementor = get_post_meta($post_id, '_elementor_page_settings', true);
+
+        if ( ! empty($elementor)) {
+            if (isset($_REQUEST['seopress_title'])) {
+                $elementor['_seopress_titles_title'] = esc_html($_REQUEST['seopress_title']);
+            }
+            if (isset($_REQUEST['seopress_desc'])) {
+                $elementor['_seopress_titles_desc'] = esc_html($_REQUEST['seopress_desc']);
+            }
+            if (isset($_REQUEST['seopress_noindex'])) {
+                $elementor['_seopress_robots_index'] = 'yes';
+            } else {
+                $elementor['_seopress_robots_index'] = '';
+            }
+            if (isset($_REQUEST['seopress_nofollow'])) {
+                $elementor['_seopress_robots_follow'] = 'yes';
+            } else {
+                $elementor['_seopress_robots_follow'] = '';
+            }
+            if (isset($_REQUEST['seopress_canonical'])) {
+                $elementor['_seopress_robots_canonical'] = esc_html($_REQUEST['seopress_canonical']);
+            }
+            if (isset($_REQUEST['seopress_tkw'])) {
+                $elementor['_seopress_analysis_target_kw'] = esc_html($_REQUEST['seopress_tkw']);
+            }
+            update_post_meta($post_id, '_elementor_page_settings', $elementor);
         }
     }
 }

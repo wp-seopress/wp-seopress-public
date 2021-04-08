@@ -500,7 +500,7 @@ echo '<div id="seopress-tabs" data-home-id="' . $data_attr['isHomeId'] . '" data
                     }
                 }
             }
-            if (function_exists('seopress_get_toggle_option') && '1' == seopress_get_toggle_option('xml-sitemap') && '1' == seopress_xml_sitemap_video_enable_option()) {
+            if (function_exists('seopress_get_toggle_option') && '1' == seopress_get_toggle_option('xml-sitemap') && function_exists('seopress_xml_sitemap_video_enable_option') && '1' == seopress_xml_sitemap_video_enable_option()) {
                 if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
                     if ('seopress_404' != $typenow) {
                         //Init $seopress_video array if empty

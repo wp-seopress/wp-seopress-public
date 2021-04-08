@@ -186,7 +186,11 @@ function seopress_xml_sitemap_index() {
 
                     $args = apply_filters('seopress_sitemaps_index_tax_query', $args, $tax_key);
 
-                    $count_terms = count(get_terms($args));
+                    $termsData   = get_terms($args);
+                    $count_terms = 0;
+                    if (is_array($termsData) && ! is_wp_error($termsData)) {
+                        $count_terms = count($termsData);
+                    }
 
                     //Max terms per paginated sitemap
                     $max = 1000;

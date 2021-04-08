@@ -2,7 +2,8 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-class seopress_options {
+class seopress_options
+{
     /**
      * Holds the values to be used in the fields callbacks.
      */
@@ -776,7 +777,7 @@ class seopress_options {
 							<option value="premium-seo-pack-migration-tool"><?php _e('Premium SEO Pack', 'wp-seopress'); ?></option>
 							<option value="wpseo-migration-tool"><?php _e('wpSEO', 'wp-seopress'); ?></option>
 							<option value="platinum-seo-migration-tool"><?php _e('Platinum SEO Pack', 'wp-seopress'); ?></option>
-							<option value="smartcrawl-migration-tool"><?php _e('SmartCrawl', 'wp-seopress'); ?></option>
+							<option value="smart-crawl-migration-tool"><?php _e('SmartCrawl', 'wp-seopress'); ?></option>
 							<option value="seopressor-migration-tool"><?php _e('SEOPressor', 'wp-seopress'); ?></option>
 						</select>
 						<br><br>
@@ -990,9 +991,9 @@ class seopress_options {
                     </div><!-- .postbox -->
 
                     <!-- Smart Crawl import tool -->
-                    <div id="smartcrawl-migration-tool" class="postbox section-tool">
+                    <div id="smart-crawl-migration-tool" class="postbox section-tool">
                         <div class="inside">
-                            <h3><span><?php _e('Import posts and terms metadata from Smart Crawl', 'wp-seopress'); ?></span></h3>
+                            <h3><span><?php _e('Import posts and terms metadata from SmartCrawl', 'wp-seopress'); ?></span></h3>
                             <p><?php _e('By clicking Migrate, we\'ll import:', 'wp-seopress'); ?></p>
                             <ul>
                                 <li><?php _e('Title tags', 'wp-seopress'); ?></li>
@@ -1892,6 +1893,14 @@ class seopress_options {
         );
 
         add_settings_field(
+            'seopress_google_analytics_hook', // ID
+            __('Where to display the cookie bar?', 'wp-seopress'), // Title
+            [$this, 'seopress_google_analytics_hook_callback'], // Callback
+            'seopress-settings-admin-google-analytics-gdpr', // Page
+            'seopress_setting_section_google_analytics_gdpr' // Section
+        );
+
+        add_settings_field(
             'seopress_google_analytics_disable', // ID
             __('Analytics tracking opt-in', 'wp-seopress'), // Title
             [$this, 'seopress_google_analytics_disable_callback'], // Callback
@@ -2111,7 +2120,7 @@ class seopress_options {
 
         add_settings_field(
             'seopress_google_analytics_other_tracking', // ID
-            __('Add an additional tracking code (like Facebook Pixel, Hotjar...)', 'wp-seopress'), // Title
+            __('[HEAD] Add an additional tracking code (like Facebook Pixel, Hotjar...)', 'wp-seopress'), // Title
             [$this, 'seopress_google_analytics_other_tracking_callback'], // Callback
             'seopress-settings-admin-google-analytics-features', // Page
             'seopress_setting_section_google_analytics_features' // Section
@@ -3078,7 +3087,7 @@ class seopress_options {
         echo '
 		<ol>
 			<li>' . __('Custom OG Image from SEO metabox', 'wp-seopress') . '</li>
-			<li>' . __('Post thumbnail', 'wp-seopress') . '</li>
+			<li>' . __('Post thumbnail / Product category thumbnail', 'wp-seopress') . '</li>
 			<li>' . __('First image of your post content', 'wp-seopress') . '</li>
 			<li>' . __('Global OG Image set in SEO > Social > Open Graph', 'wp-seopress') . '</li>
 		</ol>';
@@ -3092,7 +3101,7 @@ class seopress_options {
         echo '
 		<ol>
 			<li>' . __('Custom Twitter image from SEO metabox', 'wp-seopress') . '</li>
-			<li>' . __('Post thumbnail', 'wp-seopress') . '</li>
+			<li>' . __('Post thumbnail / Product category thumbnail', 'wp-seopress') . '</li>
 			<li>' . __('First image of your post content', 'wp-seopress') . '</li>
 			<li>' . __('Global Twitter:image set in SEO > Social > Twitter Card', 'wp-seopress') . '</li>
 		</ol>';
@@ -4941,6 +4950,36 @@ class seopress_options {
         );
 
         echo '<p class="seopress-help description"><span class="dashicons dashicons-external"></span><a href="https://support.google.com/analytics/answer/9539598?hl=en&ref_topic=9303319" target="_blank">' . __('Find your measurement ID', 'wp-seopress') . '</a></p>';
+    }
+
+    public function seopress_google_analytics_hook_callback() {
+        $options = get_option('seopress_google_analytics_option_name');
+
+        $selected = isset($options['seopress_google_analytics_hook']) ? $options['seopress_google_analytics_hook'] : null;
+
+        echo '<select id="seopress_google_analytics_hook" name="seopress_google_analytics_option_name[seopress_google_analytics_hook]">';
+        echo ' <option ';
+        if ('wp_body_open' == $selected) {
+            echo 'selected="selected"';
+        }
+        echo ' value="wp_body_open">' . __('After the opening body tag (recommended)', 'wp-seopress') . '</option>';
+        echo ' <option ';
+        if ('wp_footer' == $selected) {
+            echo 'selected="selected"';
+        }
+        echo ' value="wp_footer">' . __('Footer', 'wp-seopress') . '</option>';
+        echo ' <option ';
+        if ('wp_head' == $selected) {
+            echo 'selected="selected"';
+        }
+        echo ' value="wp_head">' . __('Head (not recommended)', 'wp-seopress') . '</option>';
+        echo '</select>';
+
+        echo '<p class="description">'.__('Your theme must be compatible with wp_body_open hook introduced in WordPress 5.2 if "opening body tag" option selected.').'</p>';
+
+        if (isset($this->options['seopress_google_analytics_hook'])) {
+            esc_attr($this->options['seopress_google_analytics_hook']);
+        }
     }
 
     public function seopress_google_analytics_disable_callback() {

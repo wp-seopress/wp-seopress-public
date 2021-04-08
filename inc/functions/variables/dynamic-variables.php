@@ -120,7 +120,9 @@ $get_search_query = apply_filters('seopress_get_search_query', $get_search_query
 
 //Post Title
 if (is_singular() && isset($post)) {
-    $seopress_get_post_title = esc_attr(strip_tags(get_post_field('post_title', $post->ID)));
+    $seopress_get_post_title = get_post_field('post_title', $post->ID);
+    $seopress_get_post_title = str_replace('<br>', ' ', $seopress_get_post_title);
+    $seopress_get_post_title = esc_attr(strip_tags($seopress_get_post_title));
 }
 
 //Post Excerpt

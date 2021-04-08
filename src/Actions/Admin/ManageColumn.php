@@ -8,7 +8,8 @@ if ( ! defined('ABSPATH')) {
 
 use SEOPress\Core\Hooks\ExecuteHooksBackend;
 
-class ManageColumn implements ExecuteHooksBackend {
+class ManageColumn implements ExecuteHooksBackend
+{
     /**
      * @since 4.4.0
      */
@@ -22,38 +23,22 @@ class ManageColumn implements ExecuteHooksBackend {
      * @return void
      */
     public function hooks() {
-        add_action('current_screen', [$this, 'didAddColumns']);
+        add_action('init', [$this, 'setup']);
     }
 
-    /**
-     * @since 4.4.0
-     *
-     * @return void
-     */
-    public function didAddColumns() {
-        if (1 !== did_action('current_screen')) {
-            return;
-        }
-
-        if ( ! isset(get_current_screen()->post_type)) {
-            return;
-        }
-
-        $postType = get_current_screen()->post_type;
-        if (null !== seopress_titles_single_cpt_enable_option($postType) || empty($postType)) {
-            return;
-        }
+    public function setup() {
         $listPostTypes = seopress_get_service('WordPressData')->getPostTypes();
 
-        if ( ! array_key_exists($postType, $listPostTypes)) {
+        if (empty($listPostTypes)) {
             return;
         }
 
-        add_filter('manage_' . $postType . '_posts_columns', [$this, 'addColumn']);
-        add_action('manage_' . $postType . '_posts_custom_column', [$this, 'displayColumn'], 10, 2);
-        if (is_plugin_active('easy-digital-downloads/easy-digital-downloads.php')) {
-            add_filter('manage_edit-' . $postType . '_columns', [$this, 'addColumn']);
+        foreach ($listPostTypes as $key => $value) {
+            add_filter('manage_' . $key . '_posts_columns', [$this, 'addColumn']);
+            add_action('manage_' . $key . '_posts_custom_column', [$this, 'displayColumn'], 10, 2);
         }
+
+        add_filter('manage_edit-download_columns', [$this, 'addColumn'], 10, 2);
     }
 
     public function addColumn($columns) {

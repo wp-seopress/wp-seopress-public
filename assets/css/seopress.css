@@ -1111,28 +1111,28 @@ table.wp-list-table .manage_column.column-seopress_insights {
     width: 95%;
 }
 
-table.fixed thead .column-seopress_title,
-table.fixed thead .column-seopress_desc {
+.post-type-product table.fixed thead .column-seopress_title,
+.post-type-product table.fixed thead .column-seopress_desc {
     width: 8%;
 }
 
-table.fixed thead .column-seopress_redirect_enable,
-table.fixed thead .column-seopress_redirect_url,
-table.fixed thead .column-seopress_canonical,
-table.fixed thead .column-seopress_tkw,
-.fixed .column-seopress_w3c,
-.fixed .column-seopress_words,
-.fixed .column-seopress_ps {
+.post-type-product table.fixed thead .column-seopress_redirect_enable,
+.post-type-product table.fixed thead .column-seopress_redirect_url,
+.post-type-product table.fixed thead .column-seopress_canonical,
+.post-type-product table.fixed thead .column-seopress_tkw,
+.post-type-product .fixed .column-seopress_w3c,
+.post-type-product .fixed .column-seopress_words,
+.post-type-product .fixed .column-seopress_ps {
     width: 6%;
 }
 
-.fixed .column-seopress_score {
+.post-type-product .fixed .column-seopress_score {
     width: 50px;
 }
 
 table.fixed thead .column-seopress_nofollow,
 table.fixed thead .column-seopress_noindex {
-    width: 5%;
+    width: 100px;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -1155,9 +1155,7 @@ table.fixed thead .column-seopress_noindex {
     table.fixed thead .column-seopress_score,
     table.fixed thead .column-seopress_w3c,
     table.fixed thead .column-seopress_words,
-    table.fixed thead .column-seopress_ps
-    {
-        width: 10%;
+    table.fixed thead .column-seopress_ps {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

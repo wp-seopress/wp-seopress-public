@@ -4,509 +4,522 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 
 //Google Analytics
 //=================================================================================================
+function seopress_google_analytics_hook_option() {
+    $seopress_google_analytics_hook_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_hook_option)) {
+        foreach ($seopress_google_analytics_hook_option as $key => $seopress_google_analytics_hook_value) {
+            $options[$key] = $seopress_google_analytics_hook_value;
+        }
+        if (isset($seopress_google_analytics_hook_option['seopress_google_analytics_hook'])) {
+            return $seopress_google_analytics_hook_option['seopress_google_analytics_hook'];
+        }
+    }
+}
+function seopress_google_analytics_opt_out_msg_ok_option() {
+    $seopress_google_analytics_opt_out_msg_ok_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_opt_out_msg_ok_option)) {
+        foreach ($seopress_google_analytics_opt_out_msg_ok_option as $key => $seopress_google_analytics_opt_out_msg_ok_value) {
+            $options[$key] = $seopress_google_analytics_opt_out_msg_ok_value;
+        }
+        if (isset($seopress_google_analytics_opt_out_msg_ok_option['seopress_google_analytics_opt_out_msg_ok'])) {
+            return $seopress_google_analytics_opt_out_msg_ok_option['seopress_google_analytics_opt_out_msg_ok'];
+        }
+    }
+}
 
-        function seopress_google_analytics_opt_out_msg_ok_option() {
-            $seopress_google_analytics_opt_out_msg_ok_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_opt_out_msg_ok_option)) {
-                foreach ($seopress_google_analytics_opt_out_msg_ok_option as $key => $seopress_google_analytics_opt_out_msg_ok_value) {
-                    $options[$key] = $seopress_google_analytics_opt_out_msg_ok_value;
-                }
-                if (isset($seopress_google_analytics_opt_out_msg_ok_option['seopress_google_analytics_opt_out_msg_ok'])) {
-                    return $seopress_google_analytics_opt_out_msg_ok_option['seopress_google_analytics_opt_out_msg_ok'];
-                }
-            }
+function seopress_google_analytics_opt_out_msg_close_option() {
+    $seopress_google_analytics_opt_out_msg_close_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_opt_out_msg_close_option)) {
+        foreach ($seopress_google_analytics_opt_out_msg_close_option as $key => $seopress_google_analytics_opt_out_msg_close_value) {
+            $options[$key] = $seopress_google_analytics_opt_out_msg_close_value;
+        }
+        if (isset($seopress_google_analytics_opt_out_msg_close_option['seopress_google_analytics_opt_out_msg_close'])) {
+            return $seopress_google_analytics_opt_out_msg_close_option['seopress_google_analytics_opt_out_msg_close'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_bg_option() {
+    $seopress_google_analytics_cb_bg_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_bg_option)) {
+        foreach ($seopress_google_analytics_cb_bg_option as $key => $seopress_google_analytics_cb_bg_value) {
+            $options[$key] = $seopress_google_analytics_cb_bg_value;
+        }
+        if (isset($seopress_google_analytics_cb_bg_option['seopress_google_analytics_cb_bg'])) {
+            return $seopress_google_analytics_cb_bg_option['seopress_google_analytics_cb_bg'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_txt_col_option() {
+    $seopress_google_analytics_cb_txt_col_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_txt_col_option)) {
+        foreach ($seopress_google_analytics_cb_txt_col_option as $key => $seopress_google_analytics_cb_txt_col_value) {
+            $options[$key] = $seopress_google_analytics_cb_txt_col_value;
+        }
+        if (isset($seopress_google_analytics_cb_txt_col_option['seopress_google_analytics_cb_txt_col'])) {
+            return $seopress_google_analytics_cb_txt_col_option['seopress_google_analytics_cb_txt_col'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_lk_col_option() {
+    $seopress_google_analytics_cb_lk_col_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_lk_col_option)) {
+        foreach ($seopress_google_analytics_cb_lk_col_option as $key => $seopress_google_analytics_cb_lk_col_value) {
+            $options[$key] = $seopress_google_analytics_cb_lk_col_value;
+        }
+        if (isset($seopress_google_analytics_cb_lk_col_option['seopress_google_analytics_cb_lk_col'])) {
+            return $seopress_google_analytics_cb_lk_col_option['seopress_google_analytics_cb_lk_col'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_btn_bg_option() {
+    $seopress_google_analytics_cb_btn_bg_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_btn_bg_option)) {
+        foreach ($seopress_google_analytics_cb_btn_bg_option as $key => $seopress_google_analytics_cb_btn_bg_value) {
+            $options[$key] = $seopress_google_analytics_cb_btn_bg_value;
+        }
+        if (isset($seopress_google_analytics_cb_btn_bg_option['seopress_google_analytics_cb_btn_bg'])) {
+            return $seopress_google_analytics_cb_btn_bg_option['seopress_google_analytics_cb_btn_bg'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_btn_bg_hov_option() {
+    $seopress_google_analytics_cb_btn_bg_hov_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_btn_bg_hov_option)) {
+        foreach ($seopress_google_analytics_cb_btn_bg_hov_option as $key => $seopress_google_analytics_cb_btn_bg_hov_value) {
+            $options[$key] = $seopress_google_analytics_cb_btn_bg_hov_value;
+        }
+        if (isset($seopress_google_analytics_cb_btn_bg_hov_option['seopress_google_analytics_cb_btn_bg_hov'])) {
+            return $seopress_google_analytics_cb_btn_bg_hov_option['seopress_google_analytics_cb_btn_bg_hov'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_btn_col_option() {
+    $seopress_google_analytics_cb_btn_col_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_btn_col_option)) {
+        foreach ($seopress_google_analytics_cb_btn_col_option as $key => $seopress_google_analytics_cb_btn_col_value) {
+            $options[$key] = $seopress_google_analytics_cb_btn_col_value;
+        }
+        if (isset($seopress_google_analytics_cb_btn_col_option['seopress_google_analytics_cb_btn_col'])) {
+            return $seopress_google_analytics_cb_btn_col_option['seopress_google_analytics_cb_btn_col'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_btn_col_hov_option() {
+    $seopress_google_analytics_cb_btn_col_hov_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_btn_col_hov_option)) {
+        foreach ($seopress_google_analytics_cb_btn_col_hov_option as $key => $seopress_google_analytics_cb_btn_col_hov_value) {
+            $options[$key] = $seopress_google_analytics_cb_btn_col_hov_value;
+        }
+        if (isset($seopress_google_analytics_cb_btn_col_hov_option['seopress_google_analytics_cb_btn_col_hov'])) {
+            return $seopress_google_analytics_cb_btn_col_hov_option['seopress_google_analytics_cb_btn_col_hov'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_btn_sec_bg_option() {
+    $seopress_google_analytics_cb_btn_sec_bg_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_btn_sec_bg_option)) {
+        foreach ($seopress_google_analytics_cb_btn_sec_bg_option as $key => $seopress_google_analytics_cb_btn_sec_bg_value) {
+            $options[$key] = $seopress_google_analytics_cb_btn_sec_bg_value;
+        }
+        if (isset($seopress_google_analytics_cb_btn_sec_bg_option['seopress_google_analytics_cb_btn_sec_bg'])) {
+            return $seopress_google_analytics_cb_btn_sec_bg_option['seopress_google_analytics_cb_btn_sec_bg'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_btn_sec_col_option() {
+    $seopress_google_analytics_cb_btn_sec_col_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_btn_sec_col_option)) {
+        foreach ($seopress_google_analytics_cb_btn_sec_col_option as $key => $seopress_google_analytics_cb_btn_sec_col_value) {
+            $options[$key] = $seopress_google_analytics_cb_btn_sec_col_value;
+        }
+        if (isset($seopress_google_analytics_cb_btn_sec_col_option['seopress_google_analytics_cb_btn_sec_col'])) {
+            return $seopress_google_analytics_cb_btn_sec_col_option['seopress_google_analytics_cb_btn_sec_col'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_btn_sec_bg_hov_option() {
+    $seopress_google_analytics_cb_btn_sec_bg_hov_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_btn_sec_bg_hov_option)) {
+        foreach ($seopress_google_analytics_cb_btn_sec_bg_hov_option as $key => $seopress_google_analytics_cb_btn_sec_bg_hov_value) {
+            $options[$key] = $seopress_google_analytics_cb_btn_sec_bg_hov_value;
+        }
+        if (isset($seopress_google_analytics_cb_btn_sec_bg_hov_option['seopress_google_analytics_cb_btn_sec_bg_hov'])) {
+            return $seopress_google_analytics_cb_btn_sec_bg_hov_option['seopress_google_analytics_cb_btn_sec_bg_hov'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_btn_sec_col_hov_option() {
+    $seopress_google_analytics_cb_btn_sec_col_hov_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_btn_sec_col_hov_option)) {
+        foreach ($seopress_google_analytics_cb_btn_sec_col_hov_option as $key => $seopress_google_analytics_cb_btn_sec_col_hov_value) {
+            $options[$key] = $seopress_google_analytics_cb_btn_sec_col_hov_value;
+        }
+        if (isset($seopress_google_analytics_cb_btn_sec_col_hov_option['seopress_google_analytics_cb_btn_sec_col_hov'])) {
+            return $seopress_google_analytics_cb_btn_sec_col_hov_option['seopress_google_analytics_cb_btn_sec_col_hov'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_pos_option() {
+    $seopress_google_analytics_cb_pos_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_pos_option)) {
+        foreach ($seopress_google_analytics_cb_pos_option as $key => $seopress_google_analytics_cb_pos_value) {
+            $options[$key] = $seopress_google_analytics_cb_pos_value;
+        }
+        if (isset($seopress_google_analytics_cb_pos_option['seopress_google_analytics_cb_pos'])) {
+            return $seopress_google_analytics_cb_pos_option['seopress_google_analytics_cb_pos'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_width_option() {
+    $seopress_google_analytics_cb_width_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_width_option)) {
+        foreach ($seopress_google_analytics_cb_width_option as $key => $seopress_google_analytics_cb_width_value) {
+            $options[$key] = $seopress_google_analytics_cb_width_value;
+        }
+        if (isset($seopress_google_analytics_cb_width_option['seopress_google_analytics_cb_width'])) {
+            return $seopress_google_analytics_cb_width_option['seopress_google_analytics_cb_width'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_backdrop_option() {
+    $seopress_google_analytics_cb_backdrop_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_backdrop_option)) {
+        foreach ($seopress_google_analytics_cb_backdrop_option as $key => $seopress_google_analytics_cb_backdrop_value) {
+            $options[$key] = $seopress_google_analytics_cb_backdrop_value;
+        }
+        if (isset($seopress_google_analytics_cb_backdrop_option['seopress_google_analytics_cb_backdrop'])) {
+            return $seopress_google_analytics_cb_backdrop_option['seopress_google_analytics_cb_backdrop'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_backdrop_bg_option() {
+    $seopress_google_analytics_cb_backdrop_bg_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_backdrop_bg_option)) {
+        foreach ($seopress_google_analytics_cb_backdrop_bg_option as $key => $seopress_google_analytics_cb_backdrop_bg_value) {
+            $options[$key] = $seopress_google_analytics_cb_backdrop_bg_value;
+        }
+        if (isset($seopress_google_analytics_cb_backdrop_bg_option['seopress_google_analytics_cb_backdrop_bg'])) {
+            return $seopress_google_analytics_cb_backdrop_bg_option['seopress_google_analytics_cb_backdrop_bg'];
+        }
+    }
+}
+
+function seopress_google_analytics_cb_txt_align_option() {
+    $seopress_google_analytics_cb_txt_align_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_cb_txt_align_option)) {
+        foreach ($seopress_google_analytics_cb_txt_align_option as $key => $seopress_google_analytics_cb_txt_align_value) {
+            $options[$key] = $seopress_google_analytics_cb_txt_align_value;
+        }
+        if (isset($seopress_google_analytics_cb_txt_align_option['seopress_google_analytics_cb_txt_align'])) {
+            return $seopress_google_analytics_cb_txt_align_option['seopress_google_analytics_cb_txt_align'];
+        }
+    }
+}
+
+function seopress_google_analytics_opt_out_edit_choice_option() {
+    $seopress_google_analytics_opt_out_edit_choice_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_opt_out_edit_choice_option)) {
+        foreach ($seopress_google_analytics_opt_out_edit_choice_option as $key => $seopress_google_analytics_opt_out_edit_choice_value) {
+            $options[$key] = $seopress_google_analytics_opt_out_edit_choice_value;
+        }
+        if (isset($seopress_google_analytics_opt_out_edit_choice_option['seopress_google_analytics_opt_out_edit_choice'])) {
+            return $seopress_google_analytics_opt_out_edit_choice_option['seopress_google_analytics_opt_out_edit_choice'];
+        }
+    }
+}
+
+function seopress_google_analytics_opt_out_msg_edit_option() {
+    $seopress_google_analytics_opt_out_msg_edit_option = get_option('seopress_google_analytics_option_name');
+    if ( ! empty($seopress_google_analytics_opt_out_msg_edit_option)) {
+        foreach ($seopress_google_analytics_opt_out_msg_edit_option as $key => $seopress_google_analytics_opt_out_msg_edit_value) {
+            $options[$key] = $seopress_google_analytics_opt_out_msg_edit_value;
+        }
+        if (isset($seopress_google_analytics_opt_out_msg_edit_option['seopress_google_analytics_opt_out_msg_edit'])) {
+            return $seopress_google_analytics_opt_out_msg_edit_option['seopress_google_analytics_opt_out_msg_edit'];
+        }
+    }
+}
+
+function seopress_cookies_user_consent_html() {
+    if ('' != seopress_google_analytics_opt_out_msg_option()) {
+        $msg = seopress_google_analytics_opt_out_msg_option();
+    } elseif (get_option('wp_page_for_privacy_policy')) {
+        $msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.&nbsp;<a href="[seopress_privacy_page]">Read more</a>', 'wp-seopress');
+    } else {
+        $msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.', 'wp-seopress');
+    }
+
+    if (get_option('wp_page_for_privacy_policy') && '' != $msg) {
+        $seopress_privacy_page = esc_url(get_permalink(get_option('wp_page_for_privacy_policy')));
+        $msg                   = str_replace('[seopress_privacy_page]', $seopress_privacy_page, $msg);
+    }
+
+    $msg = apply_filters('seopress_rgpd_message', $msg);
+
+    if ('' != seopress_google_analytics_opt_out_msg_ok_option()) {
+        $consent_btn = seopress_google_analytics_opt_out_msg_ok_option();
+    } else {
+        $consent_btn = __('Accept', 'wp-seopress');
+    }
+
+    if ('' != seopress_google_analytics_opt_out_msg_close_option()) {
+        $close_btn = seopress_google_analytics_opt_out_msg_close_option();
+    } else {
+        $close_btn = __('X', 'wp-seopress');
+    }
+
+    $user_msg = '<div data-nosnippet class="seopress-user-consent seopress-user-message seopress-user-consent-hide">
+        <p>' . $msg . '</p>
+        <p>
+            <button id="seopress-user-consent-accept" type="button">' . $consent_btn . '</button>
+            <button type="button" id="seopress-user-consent-close">' . $close_btn . '</button>
+        </p>
+    </div>';
+
+    $backdrop = '<div class="seopress-user-consent-backdrop seopress-user-consent-hide"></div>';
+
+    $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn, $backdrop);
+
+    echo $user_msg . $backdrop;
+}
+
+function seopress_cookies_edit_choice_html() {
+    if ('1' === seopress_google_analytics_opt_out_edit_choice_option()) {
+        if ('' != seopress_google_analytics_opt_out_msg_edit_option()) {
+            $edit_cookie_btn = seopress_google_analytics_opt_out_msg_edit_option();
+        } else {
+            $edit_cookie_btn = __('Manage cookies', 'wp-seopress');
         }
 
-        function seopress_google_analytics_opt_out_msg_close_option() {
-            $seopress_google_analytics_opt_out_msg_close_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_opt_out_msg_close_option)) {
-                foreach ($seopress_google_analytics_opt_out_msg_close_option as $key => $seopress_google_analytics_opt_out_msg_close_value) {
-                    $options[$key] = $seopress_google_analytics_opt_out_msg_close_value;
-                }
-                if (isset($seopress_google_analytics_opt_out_msg_close_option['seopress_google_analytics_opt_out_msg_close'])) {
-                    return $seopress_google_analytics_opt_out_msg_close_option['seopress_google_analytics_opt_out_msg_close'];
-                }
-            }
+        $user_msg = '<div data-nosnippet class="seopress-user-consent seopress-edit-choice">
+            <p>
+                <button id="seopress-user-consent-edit" type="button">' . $edit_cookie_btn . '</button>
+            </p>
+        </div>';
+
+        $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $edit_cookie_btn);
+
+        echo $user_msg;
+    }
+}
+
+function seopress_cookies_user_consent_styles() {
+    $styles = '<style>.seopress-user-consent {left: 50%;position: fixed;z-index: 8000;padding: 20px;display: inline-flex;justify-content: center;border: 1px solid #CCC;max-width:100%;';
+
+    //Width
+    if ('' != seopress_google_analytics_cb_width_option()) {
+        $width  = seopress_google_analytics_cb_width_option();
+        $needle = '%';
+
+        if (false !== strpos($width, $needle)) {
+            $unit = '';
+        } else {
+            $unit = 'px';
         }
 
-        function seopress_google_analytics_cb_bg_option() {
-            $seopress_google_analytics_cb_bg_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_bg_option)) {
-                foreach ($seopress_google_analytics_cb_bg_option as $key => $seopress_google_analytics_cb_bg_value) {
-                    $options[$key] = $seopress_google_analytics_cb_bg_value;
-                }
-                if (isset($seopress_google_analytics_cb_bg_option['seopress_google_analytics_cb_bg'])) {
-                    return $seopress_google_analytics_cb_bg_option['seopress_google_analytics_cb_bg'];
-                }
-            }
+        $styles .= 'width: ' . $width . $unit . ';';
+    } else {
+        $styles .= 'width:100%;';
+    }
+
+    //Position
+    if ('top' === seopress_google_analytics_cb_pos_option()) {
+        $styles .= 'top:0;';
+        $styles .= 'transform: translate(-50%, 0%);';
+    } elseif ('center' === seopress_google_analytics_cb_pos_option()) {
+        $styles .= 'top:45%;';
+        $styles .= 'transform: translate(-50%, -50%);';
+    } else {
+        $styles .= 'bottom:0;';
+        $styles .= 'transform: translate(-50%, 0);';
+    }
+
+    //Text alignment
+    if ('left' === seopress_google_analytics_cb_txt_align_option()) {
+        $styles .= 'text-align:left;';
+    } elseif ('right' === seopress_google_analytics_cb_pos_option()) {
+        $styles .= 'text-align:right;';
+    } else {
+        $styles .= 'text-align:center;';
+    }
+
+    //Background color
+    if ('' != seopress_google_analytics_cb_bg_option()) {
+        $styles .= 'background:' . seopress_google_analytics_cb_bg_option() . ';';
+    } else {
+        $styles .= 'background:#F1F1F1;';
+    }
+
+    $styles .= '}@media (max-width: 782px) {.seopress-user-consent {display: block;}}.seopress-user-consent.seopress-user-message p:first-child {margin-right:20px}.seopress-user-consent p {margin: 0;font-size: 0.8em;align-self: center;';
+
+    //Text color
+    if ('' != seopress_google_analytics_cb_txt_col_option()) {
+        $styles .= 'color:' . seopress_google_analytics_cb_txt_col_option() . ';';
+    }
+
+    $styles .= '}.seopress-user-consent button {vertical-align: middle;margin: 0;font-size: 14px;';
+
+    //Btn background color
+    if ('' != seopress_google_analytics_cb_btn_bg_option()) {
+        $styles .= 'background:' . seopress_google_analytics_cb_btn_bg_option() . ';';
+    }
+
+    //Btn text color
+    if ('' != seopress_google_analytics_cb_btn_col_option()) {
+        $styles .= 'color:' . seopress_google_analytics_cb_btn_col_option() . ';';
+    }
+
+    $styles .= '}.seopress-user-consent button:hover{';
+
+    //Background hover color
+    if ('' != seopress_google_analytics_cb_btn_bg_hov_option()) {
+        $styles .= 'background:' . seopress_google_analytics_cb_btn_bg_hov_option() . ';';
+    }
+
+    //Text hover color
+    if ('' != seopress_google_analytics_cb_btn_col_hov_option()) {
+        $styles .= 'color:' . seopress_google_analytics_cb_btn_col_hov_option() . ';';
+    }
+
+    $styles .= '}#seopress-user-consent-close{margin: 0;position: relative;font-weight: bold;border: 1px solid #ccc;';
+
+    //Background secondary button
+    if ('' != seopress_google_analytics_cb_btn_sec_bg_option()) {
+        $styles .= 'background:' . seopress_google_analytics_cb_btn_sec_bg_option() . ';';
+    } else {
+        $styles .= 'background:none;';
+    }
+
+    //Color secondary button
+    if ('' != seopress_google_analytics_cb_btn_sec_col_option()) {
+        $styles .= 'color:' . seopress_google_analytics_cb_btn_sec_col_option() . ';';
+    } else {
+        $styles .= 'color:inherit;';
+    }
+
+    $styles .= '}#seopress-user-consent-close:hover{cursor:pointer;';
+
+    //Background secondary button hover
+    if ('' != seopress_google_analytics_cb_btn_sec_bg_hov_option()) {
+        $styles .= 'background:' . seopress_google_analytics_cb_btn_sec_bg_hov_option() . ';';
+    } else {
+        $styles .= 'background:#222;';
+    }
+
+    //Color secondary button hover
+    if ('' != seopress_google_analytics_cb_btn_sec_col_hov_option()) {
+        $styles .= 'color:' . seopress_google_analytics_cb_btn_sec_col_hov_option() . ';';
+    } else {
+        $styles .= 'color:#fff;';
+    }
+
+    $styles .= '}';
+
+    //Link color
+    if ('' != seopress_google_analytics_cb_lk_col_option()) {
+        $styles .= '.seopress-user-consent a{';
+        $styles .= 'color:' . seopress_google_analytics_cb_lk_col_option();
+        $styles .= '}';
+    }
+
+    $styles .= '.seopress-user-consent-hide{display:none;}';
+
+    if ('' != seopress_google_analytics_cb_backdrop_option()) {
+        $bg_backdrop = 'rgba(0,0,0,.65)';
+        if ('' != seopress_google_analytics_cb_backdrop_bg_option()) {
+            $bg_backdrop = seopress_google_analytics_cb_backdrop_bg_option();
         }
 
-        function seopress_google_analytics_cb_txt_col_option() {
-            $seopress_google_analytics_cb_txt_col_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_txt_col_option)) {
-                foreach ($seopress_google_analytics_cb_txt_col_option as $key => $seopress_google_analytics_cb_txt_col_value) {
-                    $options[$key] = $seopress_google_analytics_cb_txt_col_value;
-                }
-                if (isset($seopress_google_analytics_cb_txt_col_option['seopress_google_analytics_cb_txt_col'])) {
-                    return $seopress_google_analytics_cb_txt_col_option['seopress_google_analytics_cb_txt_col'];
-                }
-            }
-        }
+        $styles .= '.seopress-user-consent-backdrop{-webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background: ' . $bg_backdrop . ';
+            bottom: 0;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            left: 0;
+            -webkit-overflow-scrolling: touch;
+            overflow-y: auto;
+            position: fixed;
+            right: 0;
+            -webkit-tap-highlight-color: transparent;
+            top: 0;
+            z-index: 100;}';
+    }
 
-        function seopress_google_analytics_cb_lk_col_option() {
-            $seopress_google_analytics_cb_lk_col_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_lk_col_option)) {
-                foreach ($seopress_google_analytics_cb_lk_col_option as $key => $seopress_google_analytics_cb_lk_col_value) {
-                    $options[$key] = $seopress_google_analytics_cb_lk_col_value;
-                }
-                if (isset($seopress_google_analytics_cb_lk_col_option['seopress_google_analytics_cb_lk_col'])) {
-                    return $seopress_google_analytics_cb_lk_col_option['seopress_google_analytics_cb_lk_col'];
-                }
-            }
-        }
+    $styles .= '.seopress-edit-choice{
+        background: none;
+        justify-content: start;
+        z-index: 7500;
+        border: none;
+        width: inherit;
+        transform: none;
+        left: inherit;
+        bottom: 0;
+        top: inherit;
+    }';
 
-        function seopress_google_analytics_cb_btn_bg_option() {
-            $seopress_google_analytics_cb_btn_bg_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_btn_bg_option)) {
-                foreach ($seopress_google_analytics_cb_btn_bg_option as $key => $seopress_google_analytics_cb_btn_bg_value) {
-                    $options[$key] = $seopress_google_analytics_cb_btn_bg_value;
-                }
-                if (isset($seopress_google_analytics_cb_btn_bg_option['seopress_google_analytics_cb_btn_bg'])) {
-                    return $seopress_google_analytics_cb_btn_bg_option['seopress_google_analytics_cb_btn_bg'];
-                }
-            }
-        }
+    $styles .= '</style>';
 
-        function seopress_google_analytics_cb_btn_bg_hov_option() {
-            $seopress_google_analytics_cb_btn_bg_hov_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_btn_bg_hov_option)) {
-                foreach ($seopress_google_analytics_cb_btn_bg_hov_option as $key => $seopress_google_analytics_cb_btn_bg_hov_value) {
-                    $options[$key] = $seopress_google_analytics_cb_btn_bg_hov_value;
-                }
-                if (isset($seopress_google_analytics_cb_btn_bg_hov_option['seopress_google_analytics_cb_btn_bg_hov'])) {
-                    return $seopress_google_analytics_cb_btn_bg_hov_option['seopress_google_analytics_cb_btn_bg_hov'];
-                }
-            }
-        }
+    $styles = apply_filters('seopress_rgpd_full_message_styles', $styles);
 
-        function seopress_google_analytics_cb_btn_col_option() {
-            $seopress_google_analytics_cb_btn_col_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_btn_col_option)) {
-                foreach ($seopress_google_analytics_cb_btn_col_option as $key => $seopress_google_analytics_cb_btn_col_value) {
-                    $options[$key] = $seopress_google_analytics_cb_btn_col_value;
-                }
-                if (isset($seopress_google_analytics_cb_btn_col_option['seopress_google_analytics_cb_btn_col'])) {
-                    return $seopress_google_analytics_cb_btn_col_option['seopress_google_analytics_cb_btn_col'];
-                }
-            }
-        }
+    echo $styles;
+}
 
-        function seopress_google_analytics_cb_btn_col_hov_option() {
-            $seopress_google_analytics_cb_btn_col_hov_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_btn_col_hov_option)) {
-                foreach ($seopress_google_analytics_cb_btn_col_hov_option as $key => $seopress_google_analytics_cb_btn_col_hov_value) {
-                    $options[$key] = $seopress_google_analytics_cb_btn_col_hov_value;
-                }
-                if (isset($seopress_google_analytics_cb_btn_col_hov_option['seopress_google_analytics_cb_btn_col_hov'])) {
-                    return $seopress_google_analytics_cb_btn_col_hov_option['seopress_google_analytics_cb_btn_col_hov'];
-                }
-            }
-        }
+function seopress_cookies_user_consent_render() {
+    $hook = 'wp_head';
+    if (seopress_google_analytics_hook_option() !='') {
+        $hook = seopress_google_analytics_hook_option();
+    }
 
-        function seopress_google_analytics_cb_btn_sec_bg_option() {
-            $seopress_google_analytics_cb_btn_sec_bg_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_btn_sec_bg_option)) {
-                foreach ($seopress_google_analytics_cb_btn_sec_bg_option as $key => $seopress_google_analytics_cb_btn_sec_bg_value) {
-                    $options[$key] = $seopress_google_analytics_cb_btn_sec_bg_value;
-                }
-                if (isset($seopress_google_analytics_cb_btn_sec_bg_option['seopress_google_analytics_cb_btn_sec_bg'])) {
-                    return $seopress_google_analytics_cb_btn_sec_bg_option['seopress_google_analytics_cb_btn_sec_bg'];
-                }
-            }
-        }
+    add_action($hook, 'seopress_cookies_user_consent_html');
+    add_action($hook, 'seopress_cookies_edit_choice_html');
+    add_action($hook, 'seopress_cookies_user_consent_styles');
+}
 
-        function seopress_google_analytics_cb_btn_sec_col_option() {
-            $seopress_google_analytics_cb_btn_sec_col_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_btn_sec_col_option)) {
-                foreach ($seopress_google_analytics_cb_btn_sec_col_option as $key => $seopress_google_analytics_cb_btn_sec_col_value) {
-                    $options[$key] = $seopress_google_analytics_cb_btn_sec_col_value;
-                }
-                if (isset($seopress_google_analytics_cb_btn_sec_col_option['seopress_google_analytics_cb_btn_sec_col'])) {
-                    return $seopress_google_analytics_cb_btn_sec_col_option['seopress_google_analytics_cb_btn_sec_col'];
-                }
-            }
-        }
+if ('1' == seopress_google_analytics_disable_option()) {
+    if (is_user_logged_in()) {
+        global $wp_roles;
 
-        function seopress_google_analytics_cb_btn_sec_bg_hov_option() {
-            $seopress_google_analytics_cb_btn_sec_bg_hov_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_btn_sec_bg_hov_option)) {
-                foreach ($seopress_google_analytics_cb_btn_sec_bg_hov_option as $key => $seopress_google_analytics_cb_btn_sec_bg_hov_value) {
-                    $options[$key] = $seopress_google_analytics_cb_btn_sec_bg_hov_value;
-                }
-                if (isset($seopress_google_analytics_cb_btn_sec_bg_hov_option['seopress_google_analytics_cb_btn_sec_bg_hov'])) {
-                    return $seopress_google_analytics_cb_btn_sec_bg_hov_option['seopress_google_analytics_cb_btn_sec_bg_hov'];
-                }
-            }
-        }
-
-        function seopress_google_analytics_cb_btn_sec_col_hov_option() {
-            $seopress_google_analytics_cb_btn_sec_col_hov_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_btn_sec_col_hov_option)) {
-                foreach ($seopress_google_analytics_cb_btn_sec_col_hov_option as $key => $seopress_google_analytics_cb_btn_sec_col_hov_value) {
-                    $options[$key] = $seopress_google_analytics_cb_btn_sec_col_hov_value;
-                }
-                if (isset($seopress_google_analytics_cb_btn_sec_col_hov_option['seopress_google_analytics_cb_btn_sec_col_hov'])) {
-                    return $seopress_google_analytics_cb_btn_sec_col_hov_option['seopress_google_analytics_cb_btn_sec_col_hov'];
-                }
-            }
-        }
-
-        function seopress_google_analytics_cb_pos_option() {
-            $seopress_google_analytics_cb_pos_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_pos_option)) {
-                foreach ($seopress_google_analytics_cb_pos_option as $key => $seopress_google_analytics_cb_pos_value) {
-                    $options[$key] = $seopress_google_analytics_cb_pos_value;
-                }
-                if (isset($seopress_google_analytics_cb_pos_option['seopress_google_analytics_cb_pos'])) {
-                    return $seopress_google_analytics_cb_pos_option['seopress_google_analytics_cb_pos'];
-                }
-            }
-        }
-
-        function seopress_google_analytics_cb_width_option() {
-            $seopress_google_analytics_cb_width_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_width_option)) {
-                foreach ($seopress_google_analytics_cb_width_option as $key => $seopress_google_analytics_cb_width_value) {
-                    $options[$key] = $seopress_google_analytics_cb_width_value;
-                }
-                if (isset($seopress_google_analytics_cb_width_option['seopress_google_analytics_cb_width'])) {
-                    return $seopress_google_analytics_cb_width_option['seopress_google_analytics_cb_width'];
-                }
-            }
-        }
-
-        function seopress_google_analytics_cb_backdrop_option() {
-            $seopress_google_analytics_cb_backdrop_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_backdrop_option)) {
-                foreach ($seopress_google_analytics_cb_backdrop_option as $key => $seopress_google_analytics_cb_backdrop_value) {
-                    $options[$key] = $seopress_google_analytics_cb_backdrop_value;
-                }
-                if (isset($seopress_google_analytics_cb_backdrop_option['seopress_google_analytics_cb_backdrop'])) {
-                    return $seopress_google_analytics_cb_backdrop_option['seopress_google_analytics_cb_backdrop'];
-                }
-            }
-        }
-
-        function seopress_google_analytics_cb_backdrop_bg_option() {
-            $seopress_google_analytics_cb_backdrop_bg_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_backdrop_bg_option)) {
-                foreach ($seopress_google_analytics_cb_backdrop_bg_option as $key => $seopress_google_analytics_cb_backdrop_bg_value) {
-                    $options[$key] = $seopress_google_analytics_cb_backdrop_bg_value;
-                }
-                if (isset($seopress_google_analytics_cb_backdrop_bg_option['seopress_google_analytics_cb_backdrop_bg'])) {
-                    return $seopress_google_analytics_cb_backdrop_bg_option['seopress_google_analytics_cb_backdrop_bg'];
-                }
-            }
-        }
-
-        function seopress_google_analytics_cb_txt_align_option() {
-            $seopress_google_analytics_cb_txt_align_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_cb_txt_align_option)) {
-                foreach ($seopress_google_analytics_cb_txt_align_option as $key => $seopress_google_analytics_cb_txt_align_value) {
-                    $options[$key] = $seopress_google_analytics_cb_txt_align_value;
-                }
-                if (isset($seopress_google_analytics_cb_txt_align_option['seopress_google_analytics_cb_txt_align'])) {
-                    return $seopress_google_analytics_cb_txt_align_option['seopress_google_analytics_cb_txt_align'];
-                }
-            }
-        }
-
-        function seopress_google_analytics_opt_out_edit_choice_option() {
-            $seopress_google_analytics_opt_out_edit_choice_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_opt_out_edit_choice_option)) {
-                foreach ($seopress_google_analytics_opt_out_edit_choice_option as $key => $seopress_google_analytics_opt_out_edit_choice_value) {
-                    $options[$key] = $seopress_google_analytics_opt_out_edit_choice_value;
-                }
-                if (isset($seopress_google_analytics_opt_out_edit_choice_option['seopress_google_analytics_opt_out_edit_choice'])) {
-                    return $seopress_google_analytics_opt_out_edit_choice_option['seopress_google_analytics_opt_out_edit_choice'];
-                }
-            }
-        }
-
-        function seopress_google_analytics_opt_out_msg_edit_option() {
-            $seopress_google_analytics_opt_out_msg_edit_option = get_option('seopress_google_analytics_option_name');
-            if ( ! empty($seopress_google_analytics_opt_out_msg_edit_option)) {
-                foreach ($seopress_google_analytics_opt_out_msg_edit_option as $key => $seopress_google_analytics_opt_out_msg_edit_value) {
-                    $options[$key] = $seopress_google_analytics_opt_out_msg_edit_value;
-                }
-                if (isset($seopress_google_analytics_opt_out_msg_edit_option['seopress_google_analytics_opt_out_msg_edit'])) {
-                    return $seopress_google_analytics_opt_out_msg_edit_option['seopress_google_analytics_opt_out_msg_edit'];
-                }
-            }
-        }
-
-        function seopress_cookies_user_consent_html() {
-            if ('' != seopress_google_analytics_opt_out_msg_option()) {
-                $msg = seopress_google_analytics_opt_out_msg_option();
-            } elseif (get_option('wp_page_for_privacy_policy')) {
-                $msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.&nbsp;<a href="[seopress_privacy_page]">Read more</a>', 'wp-seopress');
-            } else {
-                $msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.', 'wp-seopress');
-            }
-
-            if (get_option('wp_page_for_privacy_policy') && '' != $msg) {
-                $seopress_privacy_page = esc_url(get_permalink(get_option('wp_page_for_privacy_policy')));
-                $msg                   = str_replace('[seopress_privacy_page]', $seopress_privacy_page, $msg);
-            }
-
-            $msg = apply_filters('seopress_rgpd_message', $msg);
-
-            if ('' != seopress_google_analytics_opt_out_msg_ok_option()) {
-                $consent_btn = seopress_google_analytics_opt_out_msg_ok_option();
-            } else {
-                $consent_btn = __('Accept', 'wp-seopress');
-            }
-
-            if ('' != seopress_google_analytics_opt_out_msg_close_option()) {
-                $close_btn = seopress_google_analytics_opt_out_msg_close_option();
-            } else {
-                $close_btn = __('X', 'wp-seopress');
-            }
-
-            $user_msg = '<div data-nosnippet class="seopress-user-consent seopress-user-message seopress-user-consent-hide">
-                <p>' . $msg . '</p>
-                <p>
-                    <button id="seopress-user-consent-accept" type="button">' . $consent_btn . '</button>
-                    <button type="button" id="seopress-user-consent-close">' . $close_btn . '</button>
-                </p>
-            </div>';
-
-            $backdrop = '<div class="seopress-user-consent-backdrop seopress-user-consent-hide"></div>';
-
-            $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn, $backdrop);
-
-            echo $user_msg . $backdrop;
-        }
-
-        function seopress_cookies_edit_choice_html() {
-            if ('1' === seopress_google_analytics_opt_out_edit_choice_option()) {
-                if ('' != seopress_google_analytics_opt_out_msg_edit_option()) {
-                    $edit_cookie_btn = seopress_google_analytics_opt_out_msg_edit_option();
+        //Get current user role
+        if (isset(wp_get_current_user()->roles[0])) {
+            $seopress_user_role = wp_get_current_user()->roles[0];
+            //If current user role matchs values from SEOPress GA settings then apply
+            if (function_exists('seopress_google_analytics_roles_option') && '' != seopress_google_analytics_roles_option()) {
+                if (array_key_exists($seopress_user_role, seopress_google_analytics_roles_option())) {
+                    //do nothing
                 } else {
-                    $edit_cookie_btn = __('Manage cookies', 'wp-seopress');
+                    seopress_cookies_user_consent_render();
                 }
-
-                $user_msg = '<div data-nosnippet class="seopress-user-consent seopress-edit-choice">
-                    <p>
-                        <button id="seopress-user-consent-edit" type="button">' . $edit_cookie_btn . '</button>
-                    </p>
-                </div>';
-
-                $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $edit_cookie_btn);
-
-                echo $user_msg;
+            } else {
+                seopress_cookies_user_consent_render();
             }
+        } else {
+            seopress_cookies_user_consent_render();
         }
-
-        function seopress_cookies_user_consent_styles() {
-            $styles = '<style>.seopress-user-consent {left: 50%;position: fixed;z-index: 8000;padding: 20px;display: inline-flex;justify-content: center;border: 1px solid #CCC;max-width:100%;';
-
-            //Width
-            if ('' != seopress_google_analytics_cb_width_option()) {
-                $width  = seopress_google_analytics_cb_width_option();
-                $needle = '%';
-
-                if (false !== strpos($width, $needle)) {
-                    $unit = '';
-                } else {
-                    $unit = 'px';
-                }
-
-                $styles .= 'width: ' . $width . $unit . ';';
-            } else {
-                $styles .= 'width:100%;';
-            }
-
-            //Position
-            if ('top' === seopress_google_analytics_cb_pos_option()) {
-                $styles .= 'top:0;';
-                $styles .= 'transform: translate(-50%, 0%);';
-            } elseif ('center' === seopress_google_analytics_cb_pos_option()) {
-                $styles .= 'top:45%;';
-                $styles .= 'transform: translate(-50%, -50%);';
-            } else {
-                $styles .= 'bottom:0;';
-                $styles .= 'transform: translate(-50%, 0);';
-            }
-
-            //Text alignment
-            if ('left' === seopress_google_analytics_cb_txt_align_option()) {
-                $styles .= 'text-align:left;';
-            } elseif ('right' === seopress_google_analytics_cb_pos_option()) {
-                $styles .= 'text-align:right;';
-            } else {
-                $styles .= 'text-align:center;';
-            }
-
-            //Background color
-            if ('' != seopress_google_analytics_cb_bg_option()) {
-                $styles .= 'background:' . seopress_google_analytics_cb_bg_option() . ';';
-            } else {
-                $styles .= 'background:#F1F1F1;';
-            }
-
-            $styles .= '}@media (max-width: 782px) {.seopress-user-consent {display: block;}}.seopress-user-consent.seopress-user-message p:first-child {margin-right:20px}.seopress-user-consent p {margin: 0;font-size: 0.8em;align-self: center;';
-
-            //Text color
-            if ('' != seopress_google_analytics_cb_txt_col_option()) {
-                $styles .= 'color:' . seopress_google_analytics_cb_txt_col_option() . ';';
-            }
-
-            $styles .= '}.seopress-user-consent button {vertical-align: middle;margin: 0;font-size: 14px;';
-
-            //Btn background color
-            if ('' != seopress_google_analytics_cb_btn_bg_option()) {
-                $styles .= 'background:' . seopress_google_analytics_cb_btn_bg_option() . ';';
-            }
-
-            //Btn text color
-            if ('' != seopress_google_analytics_cb_btn_col_option()) {
-                $styles .= 'color:' . seopress_google_analytics_cb_btn_col_option() . ';';
-            }
-
-            $styles .= '}.seopress-user-consent button:hover{';
-
-            //Background hover color
-            if ('' != seopress_google_analytics_cb_btn_bg_hov_option()) {
-                $styles .= 'background:' . seopress_google_analytics_cb_btn_bg_hov_option() . ';';
-            }
-
-            //Text hover color
-            if ('' != seopress_google_analytics_cb_btn_col_hov_option()) {
-                $styles .= 'color:' . seopress_google_analytics_cb_btn_col_hov_option() . ';';
-            }
-
-            $styles .= '}#seopress-user-consent-close{margin: 0;position: relative;font-weight: bold;border: 1px solid #ccc;';
-
-            //Background secondary button
-            if ('' != seopress_google_analytics_cb_btn_sec_bg_option()) {
-                $styles .= 'background:' . seopress_google_analytics_cb_btn_sec_bg_option() . ';';
-            } else {
-                $styles .= 'background:none;';
-            }
-
-            //Color secondary button
-            if ('' != seopress_google_analytics_cb_btn_sec_col_option()) {
-                $styles .= 'color:' . seopress_google_analytics_cb_btn_sec_col_option() . ';';
-            } else {
-                $styles .= 'color:inherit;';
-            }
-
-            $styles .= '}#seopress-user-consent-close:hover{cursor:pointer;';
-
-            //Background secondary button hover
-            if ('' != seopress_google_analytics_cb_btn_sec_bg_hov_option()) {
-                $styles .= 'background:' . seopress_google_analytics_cb_btn_sec_bg_hov_option() . ';';
-            } else {
-                $styles .= 'background:#222;';
-            }
-
-            //Color secondary button hover
-            if ('' != seopress_google_analytics_cb_btn_sec_col_hov_option()) {
-                $styles .= 'color:' . seopress_google_analytics_cb_btn_sec_col_hov_option() . ';';
-            } else {
-                $styles .= 'color:#fff;';
-            }
-
-            $styles .= '}';
-
-            //Link color
-            if ('' != seopress_google_analytics_cb_lk_col_option()) {
-                $styles .= '.seopress-user-consent a{';
-                $styles .= 'color:' . seopress_google_analytics_cb_lk_col_option();
-                $styles .= '}';
-            }
-
-            $styles .= '.seopress-user-consent-hide{display:none;}';
-
-            if ('' != seopress_google_analytics_cb_backdrop_option()) {
-                $bg_backdrop = 'rgba(0,0,0,.65)';
-                if ('' != seopress_google_analytics_cb_backdrop_bg_option()) {
-                    $bg_backdrop = seopress_google_analytics_cb_backdrop_bg_option();
-                }
-
-                $styles .= '.seopress-user-consent-backdrop{-webkit-box-align: center;
-					-webkit-align-items: center;
-					-ms-flex-align: center;
-					align-items: center;
-					background: ' . $bg_backdrop . ';
-					bottom: 0;
-					-webkit-box-orient: vertical;
-					-webkit-box-direction: normal;
-					-webkit-flex-direction: column;
-					-ms-flex-direction: column;
-					flex-direction: column;
-					left: 0;
-					-webkit-overflow-scrolling: touch;
-					overflow-y: auto;
-					position: fixed;
-					right: 0;
-					-webkit-tap-highlight-color: transparent;
-					top: 0;
-					z-index: 100;}';
-            }
-
-            $styles .= '.seopress-edit-choice{
-                background: none;
-                justify-content: start;
-                z-index: 7500;
-                border: none;
-                width: inherit;
-                transform: none;
-                left: inherit;
-                bottom: 0;
-                top: inherit;
-            }';
-
-            $styles .= '</style>';
-
-            $styles = apply_filters('seopress_rgpd_full_message_styles', $styles);
-
-            echo $styles;
-        }
-
-        if ('1' == seopress_google_analytics_disable_option()) {
-            if (is_user_logged_in()) {
-                global $wp_roles;
-
-                //Get current user role
-                if (isset(wp_get_current_user()->roles[0])) {
-                    $seopress_user_role = wp_get_current_user()->roles[0];
-                    //If current user role matchs values from SEOPress GA settings then apply
-                    if (function_exists('seopress_google_analytics_roles_option') && '' != seopress_google_analytics_roles_option()) {
-                        if (array_key_exists($seopress_user_role, seopress_google_analytics_roles_option())) {
-                            //do nothing
-                        } else {
-                            add_action('wp_head', 'seopress_cookies_user_consent_html');
-                            add_action('wp_head', 'seopress_cookies_edit_choice_html');
-                            add_action('wp_head', 'seopress_cookies_user_consent_styles');
-                        }
-                    } else {
-                        add_action('wp_head', 'seopress_cookies_user_consent_html');
-                        add_action('wp_head', 'seopress_cookies_edit_choice_html');
-                        add_action('wp_head', 'seopress_cookies_user_consent_styles');
-                    }
-                } else {
-                    add_action('wp_head', 'seopress_cookies_user_consent_html');
-                    add_action('wp_head', 'seopress_cookies_edit_choice_html');
-                    add_action('wp_head', 'seopress_cookies_user_consent_styles');
-                }
-            } else {
-                add_action('wp_head', 'seopress_cookies_user_consent_html');
-                add_action('wp_head', 'seopress_cookies_edit_choice_html');
-                add_action('wp_head', 'seopress_cookies_user_consent_styles');
-            }
-        }
+    } else {
+        seopress_cookies_user_consent_render();
+    }
+}
 
 //Optimize
 function seopress_google_analytics_optimize_option() {

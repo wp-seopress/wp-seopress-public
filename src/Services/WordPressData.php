@@ -6,7 +6,8 @@ if ( ! defined('ABSPATH')) {
     exit;
 }
 
-class WordPressData {
+class WordPressData
+{
     public function getPostTypes() {
         global $wp_post_types;
 

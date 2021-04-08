@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.5.0.2
+Stable tag: 4.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -324,6 +324,23 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 4.5.1 (08/04/2021) =
+* NEW Where to display the cookie bar? option from SEO, Analytics, Cookie bar tab
+* INFO Stop loading the CSS for the admin bar if it doesn't show up
+* INFO Allow HTML in Homepage field for Breadcrumbs
+* FIX Fatal error: Call to undefined function seopress_xml_sitemap_video_enable_option()
+* FIX Opening hours for Local Business widget
+* FIX Heading 1 in content analysis if no target keywords
+* FIX SEO columns design in posts list
+* FIX Quick edit design issue on save
+* FIX SmartCrawl import tool
+* FIX PHP Warning: count(): Parameter must be an array or an object that implements in XML sitemaps
+* FIX Warning: date() expects parameter 2 to be int, string given
+* FIX Redirections capabilities on older versions of WordPress (< 5.0)
+* FIX White Label links in plugins list
+* FIX Primary category hierarchy in breadcrumbs
+* FIX Oxygen compatibility for Word counters / Keyword density
+* FIX i18n
 = 4.5.0.2 =
 * FIX PHP Error: Call to undefined function seopress_white_label_help_links_option()
 = 4.5.0.1 =

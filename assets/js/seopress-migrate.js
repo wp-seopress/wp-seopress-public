@@ -41,7 +41,7 @@ jQuery(document).ready(function ($) {
         "premium-seo-pack",
         "wpseo",
         "platinum-seo",
-        "smartcrawl",
+        "smart-crawl",
         "seopressor",
         "metadata",
     ];

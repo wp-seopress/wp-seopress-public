@@ -22,7 +22,9 @@ class PostTitle implements GetTagValue {
         if (
             (isset($context['is_home']) || isset($context['is_single']))
             && isset($context['post']) && $context['post']) {
-            $value = esc_attr(strip_tags(get_post_field('post_title', $context['post']->ID)));
+            $value = get_post_field('post_title', $context['post']->ID);
+            $value = str_replace('<br>', ' ', $value);
+            $value = esc_attr(strip_tags($value));
         }
 
         return apply_filters('seopress_get_tag_post_title_value', $value, $context);

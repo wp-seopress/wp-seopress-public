@@ -13,7 +13,8 @@ if ( ! defined('ABSPATH')) {
 /**
  * SEOPRESS_Admin_Setup_Wizard class.
  */
-class SEOPRESS_Admin_Setup_Wizard {
+class SEOPRESS_Admin_Setup_Wizard
+{
     /**
      * Current step.
      *
@@ -298,7 +299,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 				<option value="premium-seo-pack-migration-tool"><?php _e('Premium SEO Pack', 'wp-seopress'); ?></option>
 				<option value="wpseo-migration-tool"><?php _e('wpSEO', 'wp-seopress'); ?></option>
 				<option value="platinum-seo-migration-tool"><?php _e('Platinum SEO Pack', 'wp-seopress'); ?></option>
-				<option value="smartcrawl-migration-tool"><?php _e('SmartCrawl', 'wp-seopress'); ?></option>
+				<option value="smart-crawl-migration-tool"><?php _e('SmartCrawl', 'wp-seopress'); ?></option>
 				<option value="seopressor-migration-tool"><?php _e('SEOPressor', 'wp-seopress'); ?></option>
 			</select>
 
@@ -520,9 +521,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 				</div><!-- .postbox -->
 
 				<!-- Smart Crawl import tool -->
-				<div id="smartcrawl-migration-tool" class="postbox section-tool seopress-wizard-services">
+				<div id="smart-crawl-migration-tool" class="postbox section-tool seopress-wizard-services">
 					<div class="inside">
-						<h3><span><?php _e('Import posts and terms metadata from Smart Crawl', 'wp-seopress'); ?></span></h3>
+						<h3><span><?php _e('Import posts and terms metadata from SmartCrawl', 'wp-seopress'); ?></span></h3>
                         <p><?php _e('By clicking Migrate, we\'ll import:', 'wp-seopress'); ?></p>
 						<ul>
 							<li><?php _e('Title tags', 'wp-seopress'); ?></li>

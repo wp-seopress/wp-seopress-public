@@ -306,11 +306,11 @@ function seopress_do_real_preview() {
                         $data['all_canonical'][] = esc_attr(stripslashes_deep(wp_filter_nohtml_kses($mcanonical->nodeValue)));
                     }
 
-                    if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
-                        //h1
-                        $h1 = $xpath->query('//h1');
-                        if ( ! empty($h1)) {
-                            $data['h1']['nomatches']['count'] = count($h1);
+                    //h1
+                    $h1 = $xpath->query('//h1');
+                    if ( ! empty($h1)) {
+                        $data['h1']['nomatches']['count'] = count($h1);
+                        if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
                             foreach ($h1 as $heading1) {
                                 foreach ($seopress_analysis_target_kw as $kw) {
                                     if (preg_match_all('#\b(' . $kw . ')\b#iu', $heading1->nodeValue, $m)) {
@@ -320,7 +320,9 @@ function seopress_do_real_preview() {
                                 $data['h1']['values'][] = esc_attr($heading1->nodeValue);
                             }
                         }
+                    }
 
+                    if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
                         //h2
                         $h2 = $xpath->query('//h2');
                         if ( ! empty($h2)) {
