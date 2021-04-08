@@ -289,6 +289,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 			<br><br>
 
+            <p class="description"><?php _e('You don\'t have to enable the selected SEO plugin to run the import.', 'wp-seopress'); ?></p>
+
 			<div class="store-address-container">
                 <!-- Yoast import tool -->
                 <div id="yoast-migration-tool" class="postbox section-tool seopress-wizard-services">

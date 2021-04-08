@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 4.4.0.6
+Version: 4.4.0.7
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '4.4.0.6');
+define('SEOPRESS_VERSION', '4.4.0.7');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_TEMPLATE_DIR', SEOPRESS_PLUGIN_DIR_PATH . 'templates');
@@ -419,6 +419,16 @@ function seopress_admin_body_class($classes) {
 
     return $classes;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//WP compatibility
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Remove WP default meta robots (added in WP 5.7)
+ *
+ * @since 4.4.0.7
+ */
+remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //3rd plugins compatibility
@@ -1106,18 +1116,6 @@ function seopress_notification($args) {
  * @return (string)
  **/
 function seopress_capability($cap, $context = '') {
-    /**
-     * Filter the capability to allow other roles to use the plugin.
-     *
-     * @since 3.8.2
-     *
-     * @author Julio Potier
-     *
-     * @param (string) $cap
-     * @param (string) $context
-     *
-     * @return (string)
-     **/
     $newcap = apply_filters('seopress_capability', $cap, $context);
     if ( ! current_user_can($newcap)) {
         return $cap;

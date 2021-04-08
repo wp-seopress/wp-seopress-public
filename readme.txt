@@ -4,9 +4,9 @@ Contributors: rainbowgeek, gmulti, juliobox, maigret, mgris
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.4.0.6
+Stable tag: 4.4.0.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -320,6 +320,13 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 4.4.0.7 (05/03/2021) =
+* NEW WordPress 5.7 compatibility
+* INFO Improve UI
+* FIX Site Title default setting
+* FIX Automatic Product schema without WooCommerce
+* FIX seopress_mu_white_label_admin_title_callback warning in multisite setup
+* FIX JS error at checkout preventing users to remove products
 = 4.4.0.6 (26/02/2021) =
 * INFO Improve UI by adding a new tab (Image SEO) to the Advanced settings page
 * FIX Quick edit metadata from posts list

@@ -190,7 +190,7 @@ class Init implements ActivationHook {
 
         //Site Title
         $titleOptions = [
-            'seopress_titles_home_site_title' => TagCompose::getValueWithTag(PostTitle::NAME),
+            'seopress_titles_home_site_title' => TagCompose::getValueWithTag(SiteTitle::NAME),
             'seopress_titles_home_site_desc'  => TagCompose::getValueWithTag(SiteTagline::NAME),
         ];
 

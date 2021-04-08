@@ -76,7 +76,8 @@ class WooCommerceAnalytics {
         if (apply_filters('seopress_fallback_woocommerce_analytics', false)) {
             return;
         }
-        $this->wooCommerceAnalytics->removeFromCart($sprintf, $cartKey);
+
+        return $this->wooCommerceAnalytics->removeFromCart($sprintf, $cartKey);
     }
 
     /**

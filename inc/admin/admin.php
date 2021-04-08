@@ -798,6 +798,7 @@ class seopress_options {
 							<option value="wpseo-migration-tool"><?php _e('wpSEO', 'wp-seopress'); ?></option>
 						</select>
 						<br><br>
+                        <p class="description"><?php _e('You don\'t have to enable the selected SEO plugin to run the import.', 'wp-seopress'); ?></p>
 					</div>
 					<!-- Yoast import tool -->
 					<div id="yoast-migration-tool" class="postbox section-tool">

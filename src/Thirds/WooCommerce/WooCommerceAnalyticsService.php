@@ -233,11 +233,11 @@ class WooCommerceAnalyticsService {
                     return;
                 }
 
-                gtag('event', 'remove_from_cart', {'items': " . json_encode($final) . "'});
+                gtag('event', 'remove_from_cart', {'items': " . json_encode($final) . '});
             })
 
         });
-        </script>";
+        </script>';
 
         $js = apply_filters('seopress_gtag_ec_remove_from_cart_checkout_ev', $js, $final);
 
