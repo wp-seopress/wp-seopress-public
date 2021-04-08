@@ -79,19 +79,24 @@ trait UseTags {
      * @param string $directory
      * @param array  $tags
      * @param string $subNamespace
+     * @param mixed  $namespacesOption
      *
      * @return array
      */
-    public function buildTags($directory, $tags = [], $subNamespace = '') {
+    public function buildTags($directory, $tags = [], $namespacesOption) {
         $files  = array_diff(scandir($directory), ['..', '.']);
 
         foreach ($files as $filename) {
             $class     = str_replace('.php', '', $filename);
-            $classFile = sprintf('\\SEOPress\\Tags\\%s%s', $subNamespace, $class);
+            $classFile = sprintf($namespacesOption['root'], $namespacesOption['subNamespace'], $class);
+
             $fullPath  = sprintf('%s/%s', $directory, $filename);
 
             if (is_dir($fullPath)) {
-                $tags = $this->buildTags($fullPath, $tags, $filename . '\\');
+                $tags                             = $this->buildTags($fullPath, $tags, [
+                    'root'         => $namespacesOption['root'],
+                    'subNamespace' => $namespacesOption['subNamespace'] . $filename . '\\',
+                ]);
             } else {
                 if (defined($classFile . '::NAME')) {
                     $name = $classFile::NAME;
@@ -102,6 +107,7 @@ trait UseTags {
                 $tags[$name] = [
                     'class'  => $classFile,
                     'name'   => $name,
+                    'schema' => 0 === strpos($classFile, "\SEOPress\Tags\Schema\\") ? true : false,
                     'alias'  => defined($classFile . '::ALIAS') ? $classFile::ALIAS : [],
                     'custom' => defined($classFile . '::CUSTOM_FORMAT') ? $classFile::CUSTOM_FORMAT : null,
                     'input'  => TagCompose::getValueWithTag($name),
@@ -122,7 +128,13 @@ trait UseTags {
             return apply_filters('seopress_tags_available', $this->tagsAvailable);
         }
 
-        $this->tagsAvailable = $this->buildTags(SEOPRESS_PLUGIN_DIR_PATH . 'src/Tags');
+        $tags = $this->buildTags(SEOPRESS_PLUGIN_DIR_PATH . 'src/Tags', [], ['root' => '\\SEOPress\\Tags\\%s%s', 'subNamespace' => '']);
+
+        if (defined('SEOPRESS_PRO_PLUGIN_DIR_PATH') && file_exists(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags') && is_dir(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags')) {
+            $tags = $this->buildTags(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags', $tags, ['root' => '\\SEOPressPro\\Tags\\%s%s', 'subNamespace' => '']);
+        }
+
+        $this->tagsAvailable = $tags;
 
         return apply_filters('seopress_tags_available', $this->tagsAvailable);
     }

@@ -1,299 +1,337 @@
 function sp_titles_counters() {
     const $ = jQuery;
     let elementTitleMeta = $("#seopress_titles_title_meta");
+    if ($("#seopress_titles_title_meta").length) {
 
-    if ($(".snippet-title-custom:visible").length > 0) {
-        elementTitleMeta = $(".snippet-title-custom");
-    } else if ($(".snippet-title:visible").length > 0) {
-        elementTitleMeta = $(".snippet-title");
-    } else if ($(".snippet-title-default:visible").length > 0) {
-        elementTitleMeta = $(".snippet-title-default");
-    }
+        if ($(".snippet-title-custom:visible").length > 0) {
+            elementTitleMeta = $(".snippet-title-custom");
+        } else if ($(".snippet-title:visible").length > 0) {
+            elementTitleMeta = $(".snippet-title");
+        } else if ($(".snippet-title-default:visible").length > 0) {
+            elementTitleMeta = $(".snippet-title-default");
+        }
 
-    var meta_title_val = elementTitleMeta.val();
-    var meta_title_placeholder = jQuery("#seopress_titles_title_meta").attr(
-        "placeholder"
-    );
-
-    jQuery("#seopress_titles_title_counters").after(
-        '<div id="seopress_titles_title_counters_val">/ 60</div>'
-    ),
-        meta_title_val.length > 0
-            ? (jQuery("#seopress_titles_title_counters").text(
-                  meta_title_val.length
-              ),
-              jQuery("#seopress_titles_title_pixel").text(
-                  pixelTitle(meta_title_val)
-              ))
-            : meta_title_placeholder.length &&
-              (jQuery("#seopress_titles_title_counters").text(
-                  meta_title_placeholder.length
-              ),
-              jQuery("#seopress_titles_title_pixel").text(
-                  pixelTitle(meta_title_placeholder)
-              )),
-        meta_title_val.length > 60
-            ? jQuery("#seopress_titles_title_counters").css("color", "red")
-            : meta_title_placeholder.length > 60 &&
-              jQuery("#seopress_titles_title_counters").css("color", "red"),
-        pixelTitle(meta_title_val) > 568
-            ? jQuery("#seopress_titles_title_pixel").css("color", "red")
-            : pixelTitle(meta_title_placeholder) > 568 &&
-              jQuery("#seopress_titles_title_pixel").css("color", "red");
-
-    if (meta_title_val.length) {
-        var progress = Math.round((pixelTitle(meta_title_val) / 568) * 100);
-    } else {
-        var progress = Math.round(
-            (pixelTitle(meta_title_placeholder) / 568) * 100
+        var meta_title_val = elementTitleMeta.val();
+        var meta_title_placeholder = jQuery("#seopress_titles_title_meta").attr(
+            "placeholder"
         );
-    }
 
-    if (progress >= 100) {
-        progress = 100;
-    }
-
-    jQuery("#seopress_titles_title_counters_progress").attr(
-        "aria-valuenow",
-        progress
-    ),
-        jQuery("#seopress_titles_title_counters_progress").text(progress + "%"),
-        jQuery("#seopress_titles_title_counters_progress").css(
-            "width",
-            progress + "%"
+        jQuery("#seopress_titles_title_counters").after(
+            '<div id="seopress_titles_title_counters_val">/ 60</div>'
         ),
-        jQuery(
-            "#seopress_titles_title_meta, #seopress-tag-single-title, #seopress-tag-single-site-title, #seopress-tag-single-sep"
-        ).on("keyup paste change click", function (e) {
-            var meta_title_val = $("#seopress_titles_title_meta").val();
-            if ($(".snippet-title-custom:visible").length > 0) {
-                meta_title_val = $(".snippet-title-custom").text();
-            } else if ($(".snippet-title:visible").length > 0) {
-                meta_title_val = $(".snippet-title").text();
-            } else if ($(".snippet-title-default:visible").length > 0) {
-                meta_title_val = $(".snippet-title-default").text();
-            }
+            meta_title_val.length > 0
+                ? (jQuery("#seopress_titles_title_counters").text(
+                    meta_title_val.length
+                ),
+                    jQuery("#seopress_titles_title_pixel").text(
+                        pixelTitle(meta_title_val)
+                    ))
+                : meta_title_placeholder.length &&
+                (jQuery("#seopress_titles_title_counters").text(
+                    meta_title_placeholder.length
+                ),
+                    jQuery("#seopress_titles_title_pixel").text(
+                        pixelTitle(meta_title_placeholder)
+                    )),
+            meta_title_val.length > 60
+                ? jQuery("#seopress_titles_title_counters").css("color", "red")
+                : meta_title_placeholder.length > 60 &&
+                jQuery("#seopress_titles_title_counters").css("color", "red"),
+            pixelTitle(meta_title_val) > 568
+                ? jQuery("#seopress_titles_title_pixel").css("color", "red")
+                : pixelTitle(meta_title_placeholder) > 568 &&
+                jQuery("#seopress_titles_title_pixel").css("color", "red");
 
-            var meta_title_placeholder = jQuery(
-                "#seopress_titles_title_meta"
-            ).attr("placeholder");
+        if (meta_title_val.length) {
+            var progress = Math.round((pixelTitle(meta_title_val) / 568) * 100);
+        } else {
+            var progress = Math.round(
+                (pixelTitle(meta_title_placeholder) / 568) * 100
+            );
+        }
 
-            jQuery("#seopress_titles_title_counters").css("color", "inherit"),
-                jQuery("#seopress_titles_title_pixel").css("color", "inherit"),
-                meta_title_val.length > 60 &&
+        if (progress >= 100) {
+            progress = 100;
+        }
+
+        jQuery("#seopress_titles_title_counters_progress").attr(
+            "aria-valuenow",
+            progress
+        ),
+            jQuery("#seopress_titles_title_counters_progress").text(progress + "%"),
+            jQuery("#seopress_titles_title_counters_progress").css(
+                "width",
+                progress + "%"
+            ),
+            jQuery(
+                "#seopress_titles_title_meta, #seopress-tag-single-title, #seopress-tag-single-site-title, #seopress-tag-single-sep"
+            ).on("keyup paste change click", function (e) {
+                var meta_title_val = $("#seopress_titles_title_meta").val();
+                if ($(".snippet-title-custom:visible").length > 0) {
+                    meta_title_val = $(".snippet-title-custom").text();
+                } else if ($(".snippet-title:visible").length > 0) {
+                    meta_title_val = $(".snippet-title").text();
+                } else if ($(".snippet-title-default:visible").length > 0) {
+                    meta_title_val = $(".snippet-title-default").text();
+                }
+
+                var meta_title_placeholder = jQuery(
+                    "#seopress_titles_title_meta"
+                ).attr("placeholder");
+
+                jQuery("#seopress_titles_title_counters").css("color", "inherit"),
+                    jQuery("#seopress_titles_title_pixel").css("color", "inherit"),
+                    meta_title_val.length > 60 &&
                     jQuery("#seopress_titles_title_counters").css(
                         "color",
                         "red"
                     ),
-                pixelTitle(meta_title_val) > 568 &&
+                    pixelTitle(meta_title_val) > 568 &&
                     jQuery("#seopress_titles_title_pixel").css("color", "red");
 
-            if (meta_title_val.length == 0) {
-                meta_title_placeholder.length > 60 &&
-                    jQuery("#seopress_titles_title_counters").css(
-                        "color",
-                        "red"
-                    ),
-                    pixelTitle(meta_title_placeholder) > 568 &&
+                if (meta_title_val.length == 0) {
+                    meta_title_placeholder.length > 60 &&
+                        jQuery("#seopress_titles_title_counters").css(
+                            "color",
+                            "red"
+                        ),
+                        pixelTitle(meta_title_placeholder) > 568 &&
                         jQuery("#seopress_titles_title_pixel").css(
                             "color",
                             "red"
                         );
-            }
+                }
 
-            meta_title_val.length > 0
-                ? (jQuery("#seopress_titles_title_counters").text(
-                      meta_title_val.length
-                  ),
-                  jQuery("#seopress_titles_title_pixel").text(
-                      pixelTitle(meta_title_val)
-                  ))
-                : meta_title_placeholder.length &&
-                  (jQuery("#seopress_titles_title_counters").text(
-                      meta_title_placeholder.length
-                  ),
-                  jQuery("#seopress_titles_title_pixel").text(
-                      pixelTitle(meta_title_placeholder)
-                  ));
-            // meta_title_val.length > 0
-            //     ? (jQuery(".snippet-title").css("display", "none"),
-            //       jQuery(".snippet-title-default").css("display", "none"))
-            //     : 0 == meta_title_val.length &&
-            //       (jQuery(".snippet-title-default").css("display", "block"),
-            //       jQuery(".snippet-title").css("display", "none"));
+                meta_title_val.length > 0
+                    ? (jQuery("#seopress_titles_title_counters").text(
+                        meta_title_val.length
+                    ),
+                        jQuery("#seopress_titles_title_pixel").text(
+                            pixelTitle(meta_title_val)
+                        ))
+                    : meta_title_placeholder.length &&
+                    (jQuery("#seopress_titles_title_counters").text(
+                        meta_title_placeholder.length
+                    ),
+                        jQuery("#seopress_titles_title_pixel").text(
+                            pixelTitle(meta_title_placeholder)
+                        ));
+                // meta_title_val.length > 0
+                //     ? (jQuery(".snippet-title").css("display", "none"),
+                //       jQuery(".snippet-title-default").css("display", "none"))
+                //     : 0 == meta_title_val.length &&
+                //       (jQuery(".snippet-title-default").css("display", "block"),
+                //       jQuery(".snippet-title").css("display", "none"));
 
-            if (meta_title_val.length) {
-                var progress = Math.round(
-                    (pixelTitle(meta_title_val) / 568) * 100
-                );
-            } else {
-                var progress = Math.round(
-                    (pixelTitle(meta_title_placeholder) / 568) * 100
-                );
-            }
+                if (meta_title_val.length) {
+                    var progress = Math.round(
+                        (pixelTitle(meta_title_val) / 568) * 100
+                    );
+                } else {
+                    var progress = Math.round(
+                        (pixelTitle(meta_title_placeholder) / 568) * 100
+                    );
+                }
 
-            if (progress >= 100) {
-                progress = 100;
-            }
+                if (progress >= 100) {
+                    progress = 100;
+                }
 
-            jQuery("#seopress_titles_title_counters_progress").attr(
-                "aria-valuenow",
-                progress
-            ),
-                jQuery("#seopress_titles_title_counters_progress").text(
-                    progress + "%"
+                jQuery("#seopress_titles_title_counters_progress").attr(
+                    "aria-valuenow",
+                    progress
                 ),
-                jQuery("#seopress_titles_title_counters_progress").css(
-                    "width",
-                    progress + "%"
-                );
-        });
+                    jQuery("#seopress_titles_title_counters_progress").text(
+                        progress + "%"
+                    ),
+                    jQuery("#seopress_titles_title_counters_progress").css(
+                        "width",
+                        progress + "%"
+                    );
+            });
+    }
 }
 
 function sp_meta_desc_counters() {
-    var meta_desc_val = jQuery("#seopress_titles_desc_meta").val();
-    var meta_desc_placeholder = jQuery("#seopress_titles_desc_meta").attr(
-        "placeholder"
-    );
-
-    jQuery("#seopress_titles_desc_counters").after(
-        '<div id="seopress_titles_desc_counters_val">/ 160</div>'
-    ),
-        meta_desc_val.length > 0
-            ? (jQuery("#seopress_titles_desc_counters").text(
-                  meta_desc_val.length
-              ),
-              jQuery("#seopress_titles_desc_pixel").text(
-                  pixelDesc(meta_desc_val)
-              ))
-            : meta_desc_placeholder.length &&
-              (jQuery("#seopress_titles_desc_counters").text(
-                  meta_desc_placeholder.length
-              ),
-              jQuery("#seopress_titles_desc_pixel").text(
-                  pixelDesc(meta_desc_placeholder)
-              )),
-        meta_desc_val.length > 160
-            ? jQuery("#seopress_titles_desc_counters").css("color", "red")
-            : meta_desc_placeholder.length > 160 &&
-              jQuery("#seopress_titles_desc_counters").css("color", "red"),
-        pixelDesc(meta_desc_val) > 940
-            ? jQuery("#seopress_titles_desc_pixel").css("color", "red")
-            : pixelDesc(meta_desc_placeholder) > 940 &&
-              jQuery("#seopress_titles_desc_pixel").css("color", "red");
-
-    if (meta_desc_val.length) {
-        var progress = Math.round((pixelDesc(meta_desc_val) / 940) * 100);
-    } else {
-        var progress = Math.round(
-            (pixelDesc(meta_desc_placeholder) / 940) * 100
+    if (jQuery("#seopress_titles_desc_meta").length) {
+        var meta_desc_val = jQuery("#seopress_titles_desc_meta").val();
+        var meta_desc_placeholder = jQuery("#seopress_titles_desc_meta").attr(
+            "placeholder"
         );
-    }
 
-    if (progress >= 100) {
-        progress = 100;
-    }
-
-    jQuery("#seopress_titles_desc_counters_progress").attr(
-        "aria-valuenow",
-        progress
-    ),
-        jQuery("#seopress_titles_desc_counters_progress").text(progress + "%"),
-        jQuery("#seopress_titles_desc_counters_progress").css(
-            "width",
-            progress + "%"
+        jQuery("#seopress_titles_desc_counters").after(
+            '<div id="seopress_titles_desc_counters_val">/ 160</div>'
         ),
-        jQuery("#seopress_titles_desc_meta, #seopress-tag-single-excerpt").on(
-            "keyup paste change click",
-            function (e) {
-                var meta_desc_val = jQuery("#seopress_titles_desc_meta").val();
-                var meta_desc_placeholder = jQuery(
-                    "#seopress_titles_desc_meta"
-                ).attr("placeholder");
-
-                jQuery("#seopress_titles_desc_counters").css(
-                    "color",
-                    "inherit"
+            meta_desc_val.length > 0
+                ? (jQuery("#seopress_titles_desc_counters").text(
+                    meta_desc_val.length
                 ),
-                    jQuery("#seopress_titles_desc_pixel").css(
+                    jQuery("#seopress_titles_desc_pixel").text(
+                        pixelDesc(meta_desc_val)
+                    ))
+                : meta_desc_placeholder.length &&
+                (jQuery("#seopress_titles_desc_counters").text(
+                    meta_desc_placeholder.length
+                ),
+                    jQuery("#seopress_titles_desc_pixel").text(
+                        pixelDesc(meta_desc_placeholder)
+                    )),
+            meta_desc_val.length > 160
+                ? jQuery("#seopress_titles_desc_counters").css("color", "red")
+                : meta_desc_placeholder.length > 160 &&
+                jQuery("#seopress_titles_desc_counters").css("color", "red"),
+            pixelDesc(meta_desc_val) > 940
+                ? jQuery("#seopress_titles_desc_pixel").css("color", "red")
+                : pixelDesc(meta_desc_placeholder) > 940 &&
+                jQuery("#seopress_titles_desc_pixel").css("color", "red");
+
+        if (meta_desc_val.length) {
+            var progress = Math.round((pixelDesc(meta_desc_val) / 940) * 100);
+        } else {
+            var progress = Math.round(
+                (pixelDesc(meta_desc_placeholder) / 940) * 100
+            );
+        }
+
+        if (progress >= 100) {
+            progress = 100;
+        }
+
+        jQuery("#seopress_titles_desc_counters_progress").attr(
+            "aria-valuenow",
+            progress
+        ),
+            jQuery("#seopress_titles_desc_counters_progress").text(progress + "%"),
+            jQuery("#seopress_titles_desc_counters_progress").css(
+                "width",
+                progress + "%"
+            ),
+            jQuery("#seopress_titles_desc_meta, #seopress-tag-single-excerpt").on(
+                "keyup paste change click",
+                function (e) {
+                    var meta_desc_val = jQuery("#seopress_titles_desc_meta").val();
+                    var meta_desc_placeholder = jQuery(
+                        "#seopress_titles_desc_meta"
+                    ).attr("placeholder");
+
+                    jQuery("#seopress_titles_desc_counters").css(
                         "color",
                         "inherit"
                     ),
-                    meta_desc_val.length > 160 &&
+                        jQuery("#seopress_titles_desc_pixel").css(
+                            "color",
+                            "inherit"
+                        ),
+                        meta_desc_val.length > 160 &&
                         jQuery("#seopress_titles_desc_counters").css(
                             "color",
                             "red"
                         ),
-                    pixelDesc(meta_desc_val) > 940 &&
+                        pixelDesc(meta_desc_val) > 940 &&
                         jQuery("#seopress_titles_desc_pixel").css(
                             "color",
                             "red"
                         );
 
-                if (meta_desc_val.length == 0) {
-                    meta_desc_placeholder.length > 160 &&
-                        jQuery("#seopress_titles_desc_counters").css(
-                            "color",
-                            "red"
-                        ),
-                        pixelDesc(meta_desc_placeholder) > 940 &&
+                    if (meta_desc_val.length == 0) {
+                        meta_desc_placeholder.length > 160 &&
+                            jQuery("#seopress_titles_desc_counters").css(
+                                "color",
+                                "red"
+                            ),
+                            pixelDesc(meta_desc_placeholder) > 940 &&
                             jQuery("#seopress_titles_desc_pixel").css(
                                 "color",
                                 "red"
                             );
-                }
+                    }
 
-                meta_desc_val.length > 0
-                    ? (jQuery("#seopress_titles_desc_counters").text(
-                          meta_desc_val.length
-                      ),
-                      jQuery("#seopress_titles_desc_pixel").text(
-                          pixelDesc(meta_desc_val)
-                      ))
-                    : meta_desc_placeholder.length &&
-                      (jQuery("#seopress_titles_desc_counters").text(
-                          meta_desc_placeholder.length
-                      ),
-                      jQuery("#seopress_titles_desc_pixel").text(
-                          pixelDesc(meta_desc_placeholder)
-                      )),
                     meta_desc_val.length > 0
-                        ? (jQuery(".snippet-description-custom").text(
-                              e.target.value
-                          ),
-                          jQuery(".snippet-description").css("display", "none"),
-                          jQuery(".snippet-description-custom").css(
-                              "display",
-                              "inline"
-                          ),
-                          jQuery(".snippet-description-default").css(
-                              "display",
-                              "none"
-                          ))
-                        : 0 == meta_desc_val.length &&
-                          (jQuery(".snippet-description-default").css(
-                              "display",
-                              "inline"
-                          ),
-                          jQuery(".snippet-description-custom").css(
-                              "display",
-                              "none"
-                          ),
-                          jQuery(".snippet-description").css(
-                              "display",
-                              "none"
-                          ));
+                        ? (jQuery("#seopress_titles_desc_counters").text(
+                            meta_desc_val.length
+                        ),
+                            jQuery("#seopress_titles_desc_pixel").text(
+                                pixelDesc(meta_desc_val)
+                            ))
+                        : meta_desc_placeholder.length &&
+                        (jQuery("#seopress_titles_desc_counters").text(
+                            meta_desc_placeholder.length
+                        ),
+                            jQuery("#seopress_titles_desc_pixel").text(
+                                pixelDesc(meta_desc_placeholder)
+                            )),
+                        meta_desc_val.length > 0
+                            ? (jQuery(".snippet-description-custom").text(
+                                e.target.value
+                            ),
+                                jQuery(".snippet-description").css("display", "none"),
+                                jQuery(".snippet-description-custom").css(
+                                    "display",
+                                    "inline"
+                                ),
+                                jQuery(".snippet-description-default").css(
+                                    "display",
+                                    "none"
+                                ))
+                            : 0 == meta_desc_val.length &&
+                            (jQuery(".snippet-description-default").css(
+                                "display",
+                                "inline"
+                            ),
+                                jQuery(".snippet-description-custom").css(
+                                    "display",
+                                    "none"
+                                ),
+                                jQuery(".snippet-description").css(
+                                    "display",
+                                    "none"
+                                ));
+
+                    if (meta_desc_val.length) {
+                        var progress = Math.round(
+                            (pixelDesc(meta_desc_val) / 940) * 100
+                        );
+                    } else {
+                        var progress = Math.round(
+                            (pixelDesc(meta_desc_placeholder) / 940) * 100
+                        );
+                    }
+
+                    if (progress >= 100) {
+                        progress = 100;
+                    }
+
+                    jQuery("#seopress_titles_desc_counters_progress").attr(
+                        "aria-valuenow",
+                        progress
+                    ),
+                        jQuery("#seopress_titles_desc_counters_progress").text(
+                            progress + "%"
+                        ),
+                        jQuery("#seopress_titles_desc_counters_progress").css(
+                            "width",
+                            progress + "%"
+                        );
+                }
+            ),
+            jQuery("#excerpt, .editor-post-excerpt textarea").keyup(function (e) {
+                var meta_desc_val = jQuery("#seopress_titles_desc_meta").val();
+                var meta_desc_placeholder = jQuery(
+                    "#seopress_titles_desc_meta"
+                ).attr("placeholder");
+
+                0 == meta_desc_val.length &&
+                    0 == jQuery(".snippet-description-custom").val().length &&
+                    (jQuery(".snippet-description-custom").text(e.target.value),
+                        jQuery(".snippet-description").css("display", "none"),
+                        jQuery(".snippet-description-custom").css("display", "inline"),
+                        jQuery(".snippet-description-default").css("display", "none"));
 
                 if (meta_desc_val.length) {
-                    var progress = Math.round(
-                        (pixelDesc(meta_desc_val) / 940) * 100
-                    );
+                    var progress = meta_desc_val.length;
                 } else {
-                    var progress = Math.round(
-                        (pixelDesc(meta_desc_placeholder) / 940) * 100
-                    );
+                    var progress = meta_desc_placeholder.length;
                 }
-
                 if (progress >= 100) {
                     progress = 100;
                 }
@@ -309,42 +347,8 @@ function sp_meta_desc_counters() {
                         "width",
                         progress + "%"
                     );
-            }
-        ),
-        jQuery("#excerpt, .editor-post-excerpt textarea").keyup(function (e) {
-            var meta_desc_val = jQuery("#seopress_titles_desc_meta").val();
-            var meta_desc_placeholder = jQuery(
-                "#seopress_titles_desc_meta"
-            ).attr("placeholder");
-
-            0 == meta_desc_val.length &&
-                0 == jQuery(".snippet-description-custom").val().length &&
-                (jQuery(".snippet-description-custom").text(e.target.value),
-                jQuery(".snippet-description").css("display", "none"),
-                jQuery(".snippet-description-custom").css("display", "inline"),
-                jQuery(".snippet-description-default").css("display", "none"));
-
-            if (meta_desc_val.length) {
-                var progress = meta_desc_val.length;
-            } else {
-                var progress = meta_desc_placeholder.length;
-            }
-            if (progress >= 100) {
-                progress = 100;
-            }
-
-            jQuery("#seopress_titles_desc_counters_progress").attr(
-                "aria-valuenow",
-                progress
-            ),
-                jQuery("#seopress_titles_desc_counters_progress").text(
-                    progress + "%"
-                ),
-                jQuery("#seopress_titles_desc_counters_progress").css(
-                    "width",
-                    progress + "%"
-                );
-        });
+            });
+    }
 }
 
 function pixelTitle(e) {
@@ -381,251 +385,255 @@ function sp_is_valid_url(string) {
 }
 
 function sp_social_img(social_slug) {
-    jQuery(".snippet-" + social_slug + "-img-alert").css("display", "none");
-    var meta_img_val = jQuery(
-        "#seopress_social_" + social_slug + "_img_meta"
-    ).val();
-
-    if (meta_img_val == "") {
+    if (jQuery("#seopress_social_fb_title_meta").length) {
+        jQuery(".snippet-" + social_slug + "-img-alert").css("display", "none");
         var meta_img_val = jQuery(
             "#seopress_social_" + social_slug + "_img_meta"
-        ).attr("placeholder");
-    }
+        ).val();
 
-    // Check valid URL
-    if (sp_is_valid_url(meta_img_val) === true) {
-        meta_img_val.length > 0
-            ? (jQuery(".snippet-" + social_slug + "-img-custom img").attr(
-                  "src",
-                  meta_img_val
-              ),
-              jQuery(".snippet-" + social_slug + "-img").css("display", "none"),
-              jQuery(".snippet-" + social_slug + "-img-custom").css(
-                  "display",
-                  "block"
-              ),
-              jQuery(".snippet-" + social_slug + "-img-default").css(
-                  "display",
-                  "none"
-              ))
-            : 0 == meta_img_val.length &&
-              (jQuery(".snippet-" + social_slug + "-img-default").css(
-                  "display",
-                  "block"
-              ),
-              jQuery(".snippet-" + social_slug + "-img-custom").css(
-                  "display",
-                  "none"
-              ),
-              jQuery(".snippet-" + social_slug + "-img").css(
-                  "display",
-                  "none"
-              ));
+        if (meta_img_val == "") {
+            var meta_img_val = jQuery(
+                "#seopress_social_" + social_slug + "_img_meta"
+            ).attr("placeholder");
+        }
 
-        if (meta_img_val.length > 0) {
-            // Check file URL
-            jQuery
-                .get(meta_img_val)
-                .done(function () {
-                    // Extract filetype
-                    var meta_img_filetype = meta_img_val
-                        .split(/\#|\?/)[0]
-                        .split(".")
-                        .pop()
-                        .trim();
-                    var types = ["jpg", "jpeg", "gif", "png"];
-
-                    if (types.indexOf(meta_img_filetype) == -1) {
-                        jQuery(
-                            ".snippet-" + social_slug + "-img-alert.alert1"
-                        ).css("display", "block");
-                    } else {
-                        // Extract image size
-                        var tmp_img = new Image();
-                        tmp_img.src = meta_img_val;
-                        jQuery(tmp_img).one("load", function () {
-                            pic_real_width = parseInt(tmp_img.width);
-                            pic_real_height = parseInt(tmp_img.height);
-
-                            // Default minimum size
-                            if (social_slug == "fb") {
-                                (min_width = 200), (min_height = 200);
-                            } else {
-                                (min_width = 144), (min_height = 144);
-                            }
-                            if (
-                                pic_real_width < min_width ||
-                                pic_real_height < min_height
-                            ) {
-                                jQuery(
-                                    ".snippet-" +
-                                        social_slug +
-                                        "-img-alert.alert2"
-                                ).css("display", "block");
-                            }
-                            ratio_img = (
-                                pic_real_width / pic_real_height
-                            ).toFixed(2);
-                            jQuery(
-                                ".snippet-" + social_slug + "-img-alert.alert4"
-                            ).css("display", "block");
-                            jQuery(
-                                ".snippet-" +
-                                    social_slug +
-                                    "-img-alert.alert4 span"
-                            ).text(ratio_img);
-                        });
-                    }
-                })
-                .fail(function () {
-                    jQuery(".snippet-" + social_slug + "-img-alert.alert3").css(
+        // Check valid URL
+        if (sp_is_valid_url(meta_img_val) === true) {
+            meta_img_val.length > 0
+                ? (jQuery(".snippet-" + social_slug + "-img-custom img").attr(
+                    "src",
+                    meta_img_val
+                ),
+                    jQuery(".snippet-" + social_slug + "-img").css("display", "none"),
+                    jQuery(".snippet-" + social_slug + "-img-custom").css(
                         "display",
                         "block"
-                    );
-                });
+                    ),
+                    jQuery(".snippet-" + social_slug + "-img-default").css(
+                        "display",
+                        "none"
+                    ))
+                : 0 == meta_img_val.length &&
+                (jQuery(".snippet-" + social_slug + "-img-default").css(
+                    "display",
+                    "block"
+                ),
+                    jQuery(".snippet-" + social_slug + "-img-custom").css(
+                        "display",
+                        "none"
+                    ),
+                    jQuery(".snippet-" + social_slug + "-img").css(
+                        "display",
+                        "none"
+                    ));
+
+            if (meta_img_val.length > 0) {
+                // Check file URL
+                jQuery
+                    .get(meta_img_val)
+                    .done(function () {
+                        // Extract filetype
+                        var meta_img_filetype = meta_img_val
+                            .split(/\#|\?/)[0]
+                            .split(".")
+                            .pop()
+                            .trim();
+                        var types = ["jpg", "jpeg", "gif", "png"];
+
+                        if (types.indexOf(meta_img_filetype) == -1) {
+                            jQuery(
+                                ".snippet-" + social_slug + "-img-alert.alert1"
+                            ).css("display", "block");
+                        } else {
+                            // Extract image size
+                            var tmp_img = new Image();
+                            tmp_img.src = meta_img_val;
+                            jQuery(tmp_img).one("load", function () {
+                                pic_real_width = parseInt(tmp_img.width);
+                                pic_real_height = parseInt(tmp_img.height);
+
+                                // Default minimum size
+                                if (social_slug == "fb") {
+                                    (min_width = 200), (min_height = 200);
+                                } else {
+                                    (min_width = 144), (min_height = 144);
+                                }
+                                if (
+                                    pic_real_width < min_width ||
+                                    pic_real_height < min_height
+                                ) {
+                                    jQuery(
+                                        ".snippet-" +
+                                        social_slug +
+                                        "-img-alert.alert2"
+                                    ).css("display", "block");
+                                }
+                                ratio_img = (
+                                    pic_real_width / pic_real_height
+                                ).toFixed(2);
+                                jQuery(
+                                    ".snippet-" + social_slug + "-img-alert.alert4"
+                                ).css("display", "block");
+                                jQuery(
+                                    ".snippet-" +
+                                    social_slug +
+                                    "-img-alert.alert4 span"
+                                ).text(ratio_img);
+                            });
+                        }
+                    })
+                    .fail(function () {
+                        jQuery(".snippet-" + social_slug + "-img-alert.alert3").css(
+                            "display",
+                            "block"
+                        );
+                    });
+            }
+        } else {
+            jQuery(".snippet-" + social_slug + "-img-alert.alert5").css(
+                "display",
+                "block"
+            );
         }
-    } else {
-        jQuery(".snippet-" + social_slug + "-img-alert.alert5").css(
-            "display",
-            "block"
-        );
     }
 }
 
 function sp_social() {
-    // FACEBOOK
-    jQuery(
-        "#seopress_social_fb_title_meta, #seopress-tag-single-title, #seopress-tag-single-site-title, #seopress-tag-single-sep"
-    ).on("keyup paste change click", function (e) {
-        var meta_fb_title_val = jQuery("#seopress_social_fb_title_meta").val();
-
-        meta_fb_title_val.length > 0
-            ? (jQuery(".snippet-fb-title-custom").text(e.target.value),
-              jQuery(".snippet-fb-title").css("display", "none"),
-              jQuery(".snippet-fb-title-custom").css("display", "block"),
-              jQuery(".snippet-fb-title-default").css("display", "none"))
-            : 0 == meta_fb_title_val.length &&
-              (jQuery(".snippet-fb-title-default").css("display", "block"),
-              jQuery(".snippet-fb-title-custom").css("display", "none"),
-              jQuery(".snippet-fb-title").css("display", "none"));
-    });
-
-    jQuery("#seopress_social_fb_desc_meta").on(
-        "keyup paste change click",
-        function (e) {
-            var meta_fb_desc_val = jQuery(
-                "#seopress_social_fb_desc_meta"
-            ).val();
-
-            meta_fb_desc_val.length > 0
-                ? (jQuery(".snippet-fb-description-custom").text(
-                      e.target.value
-                  ),
-                  jQuery(".snippet-fb-description").css("display", "none"),
-                  jQuery(".snippet-fb-description-custom").css(
-                      "display",
-                      "block"
-                  ),
-                  jQuery(".snippet-fb-description-default").css(
-                      "display",
-                      "none"
-                  ))
-                : 0 == meta_fb_desc_val.length &&
-                  (jQuery(".snippet-fb-description-default").css(
-                      "display",
-                      "block"
-                  ),
-                  jQuery(".snippet-fb-description-custom").css(
-                      "display",
-                      "none"
-                  ),
-                  jQuery(".snippet-fb-description").css("display", "none"));
-        }
-    );
-
-    sp_social_img("fb");
-    jQuery("#seopress_social_fb_img_meta").on(
-        "keyup paste change click",
-        function () {
-            sp_social_img("fb");
-        }
-    );
-
-    // TWITTER
-    jQuery("#seopress_social_twitter_title_meta").on(
-        "keyup paste change click",
-        function (e) {
-            var meta_fb_title_val = jQuery(
-                "#seopress_social_twitter_title_meta"
-            ).val();
+    if (jQuery("#seopress_social_fb_title_meta").length) {
+        // FACEBOOK
+        jQuery(
+            "#seopress_social_fb_title_meta, #seopress-tag-single-title, #seopress-tag-single-site-title, #seopress-tag-single-sep"
+        ).on("keyup paste change click", function (e) {
+            var meta_fb_title_val = jQuery("#seopress_social_fb_title_meta").val();
 
             meta_fb_title_val.length > 0
-                ? (jQuery(".snippet-twitter-title-custom").text(e.target.value),
-                  jQuery(".snippet-twitter-title").css("display", "none"),
-                  jQuery(".snippet-twitter-title-custom").css(
-                      "display",
-                      "block"
-                  ),
-                  jQuery(".snippet-twitter-title-default").css(
-                      "display",
-                      "none"
-                  ))
+                ? (jQuery(".snippet-fb-title-custom").text(e.target.value),
+                    jQuery(".snippet-fb-title").css("display", "none"),
+                    jQuery(".snippet-fb-title-custom").css("display", "block"),
+                    jQuery(".snippet-fb-title-default").css("display", "none"))
                 : 0 == meta_fb_title_val.length &&
-                  (jQuery(".snippet-twitter-title-default").css(
-                      "display",
-                      "block"
-                  ),
-                  jQuery(".snippet-twitter-title-custom").css(
-                      "display",
-                      "none"
-                  ),
-                  jQuery(".snippet-twitter-title").css("display", "none"));
-        }
-    );
+                (jQuery(".snippet-fb-title-default").css("display", "block"),
+                    jQuery(".snippet-fb-title-custom").css("display", "none"),
+                    jQuery(".snippet-fb-title").css("display", "none"));
+        });
 
-    jQuery("#seopress_social_twitter_desc_meta").on(
-        "keyup paste change click",
-        function (e) {
-            var meta_fb_desc_val = jQuery(
-                "#seopress_social_twitter_desc_meta"
-            ).val();
+        jQuery("#seopress_social_fb_desc_meta").on(
+            "keyup paste change click",
+            function (e) {
+                var meta_fb_desc_val = jQuery(
+                    "#seopress_social_fb_desc_meta"
+                ).val();
 
-            meta_fb_desc_val.length > 0
-                ? (jQuery(".snippet-twitter-description-custom").text(
-                      e.target.value
-                  ),
-                  jQuery(".snippet-twitter-description").css("display", "none"),
-                  jQuery(".snippet-twitter-description-custom").css(
-                      "display",
-                      "block"
-                  ),
-                  jQuery(".snippet-twitter-description-default").css(
-                      "display",
-                      "none"
-                  ))
-                : 0 == meta_fb_desc_val.length &&
-                  (jQuery(".snippet-twitter-description-default").css(
-                      "display",
-                      "block"
-                  ),
-                  jQuery(".snippet-twitter-description-custom").css(
-                      "display",
-                      "none"
-                  ),
-                  jQuery(".snippet-twitter-description").css(
-                      "display",
-                      "none"
-                  ));
-        }
-    );
+                meta_fb_desc_val.length > 0
+                    ? (jQuery(".snippet-fb-description-custom").text(
+                        e.target.value
+                    ),
+                        jQuery(".snippet-fb-description").css("display", "none"),
+                        jQuery(".snippet-fb-description-custom").css(
+                            "display",
+                            "block"
+                        ),
+                        jQuery(".snippet-fb-description-default").css(
+                            "display",
+                            "none"
+                        ))
+                    : 0 == meta_fb_desc_val.length &&
+                    (jQuery(".snippet-fb-description-default").css(
+                        "display",
+                        "block"
+                    ),
+                        jQuery(".snippet-fb-description-custom").css(
+                            "display",
+                            "none"
+                        ),
+                        jQuery(".snippet-fb-description").css("display", "none"));
+            }
+        );
 
-    sp_social_img("twitter");
-    jQuery("#seopress_social_twitter_img_meta").on(
-        "keyup paste change click",
-        function () {
-            sp_social_img("twitter");
-        }
-    );
+        sp_social_img("fb");
+        jQuery("#seopress_social_fb_img_meta").on(
+            "keyup paste change click",
+            function () {
+                sp_social_img("fb");
+            }
+        );
+
+        // TWITTER
+        jQuery("#seopress_social_twitter_title_meta").on(
+            "keyup paste change click",
+            function (e) {
+                var meta_fb_title_val = jQuery(
+                    "#seopress_social_twitter_title_meta"
+                ).val();
+
+                meta_fb_title_val.length > 0
+                    ? (jQuery(".snippet-twitter-title-custom").text(e.target.value),
+                        jQuery(".snippet-twitter-title").css("display", "none"),
+                        jQuery(".snippet-twitter-title-custom").css(
+                            "display",
+                            "block"
+                        ),
+                        jQuery(".snippet-twitter-title-default").css(
+                            "display",
+                            "none"
+                        ))
+                    : 0 == meta_fb_title_val.length &&
+                    (jQuery(".snippet-twitter-title-default").css(
+                        "display",
+                        "block"
+                    ),
+                        jQuery(".snippet-twitter-title-custom").css(
+                            "display",
+                            "none"
+                        ),
+                        jQuery(".snippet-twitter-title").css("display", "none"));
+            }
+        );
+
+        jQuery("#seopress_social_twitter_desc_meta").on(
+            "keyup paste change click",
+            function (e) {
+                var meta_fb_desc_val = jQuery(
+                    "#seopress_social_twitter_desc_meta"
+                ).val();
+
+                meta_fb_desc_val.length > 0
+                    ? (jQuery(".snippet-twitter-description-custom").text(
+                        e.target.value
+                    ),
+                        jQuery(".snippet-twitter-description").css("display", "none"),
+                        jQuery(".snippet-twitter-description-custom").css(
+                            "display",
+                            "block"
+                        ),
+                        jQuery(".snippet-twitter-description-default").css(
+                            "display",
+                            "none"
+                        ))
+                    : 0 == meta_fb_desc_val.length &&
+                    (jQuery(".snippet-twitter-description-default").css(
+                        "display",
+                        "block"
+                    ),
+                        jQuery(".snippet-twitter-description-custom").css(
+                            "display",
+                            "none"
+                        ),
+                        jQuery(".snippet-twitter-description").css(
+                            "display",
+                            "none"
+                        ));
+            }
+        );
+
+        sp_social_img("twitter");
+        jQuery("#seopress_social_twitter_img_meta").on(
+            "keyup paste change click",
+            function () {
+                sp_social_img("twitter");
+            }
+        );
+    }
 }
 
 //Content Analysis - Toggle
@@ -710,14 +718,35 @@ jQuery(document).ready(function (e) {
         );
     });
     function s() {
+        //Post ID
+        if (typeof e("#seopress-tabs").attr("data_id") !== "undefined") {
+            var post_id = e("#seopress-tabs").attr("data_id");
+        } else if (typeof e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_id") !== "undefined") {
+            var post_id = e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_id")
+        }
+
+        //Tax origin
+        if (typeof e("#seopress-tabs").attr("data_tax") !== "undefined") {
+            var tax_name = e("#seopress-tabs").attr("data_tax");
+        } else if (typeof e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_tax") !== "undefined") {
+            var tax_name = e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_tax")
+        }
+
+        //Origin
+        if (typeof e("#seopress-tabs").attr("data_origin") !== "undefined") {
+            var origin = e("#seopress-tabs").attr("data_origin");
+        } else if (typeof e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_origin") !== "undefined") {
+            var origin = e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_origin")
+        }
+
         e.ajax({
             method: "GET",
             url: seopressAjaxRealPreview.seopress_real_preview,
             data: {
                 action: "seopress_do_real_preview",
-                post_id: e("#seopress-tabs").attr("data_id"),
-                tax_name: e("#seopress-tabs").attr("data_tax"),
-                origin: e("#seopress-tabs").attr("data_origin"),
+                post_id: post_id,
+                tax_name: tax_name,
+                origin: origin,
                 post_type: e("#seopress_launch_analysis").attr(
                     "data_post_type"
                 ),

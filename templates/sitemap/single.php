@@ -49,6 +49,9 @@ if (true == get_post_type_archive_link($path) && 0 == $offset) {
             'images' => [],
         ];
         $sitemap_url = sprintf("<url>\n<loc>%s</loc>\n</url>", htmlspecialchars(urldecode(get_post_type_archive_link($path))));
+
+        $sitemap_url = apply_filters('seopress_sitemaps_no_archive_link', $sitemap_url, $path);
+
         echo apply_filters('seopress_sitemaps_url', $sitemap_url, $seopress_url);
     }
 }
@@ -61,22 +64,26 @@ $args = [
     'post_type'      => $path,
     'post_status'    => 'publish',
     'meta_query'     => [
-    'relation' => 'OR',
-    [
-        'key'     => '_seopress_robots_index',
-        'value'   => '',
-        'compare' => 'NOT EXISTS',
-    ],
-    [
-        'key'     => '_seopress_robots_index',
-        'value'   => 'yes',
-        'compare' => '!=',
-    ],
+        'relation' => 'OR',
+        [
+            'key'     => '_seopress_robots_index',
+            'value'   => '',
+            'compare' => 'NOT EXISTS',
+        ],
+        [
+            'key'     => '_seopress_robots_index',
+            'value'   => 'yes',
+            'compare' => '!=',
+        ],
     ],
     'fields'       => 'ids',
     'lang'         => '',
     'has_password' => false,
 ];
+
+if ($path ==='attachment') {
+    unset($args['post_status']);
+}
 
 $args = apply_filters('seopress_sitemaps_single_query', $args, $path);
 

@@ -27,6 +27,7 @@ $woo_single_price                     ='';
 $woo_single_price_exc_tax             ='';
 $woo_single_sku                       = '';
 $author_bio                           ='';
+$target_kw                            ='';
 
 //Excerpt length
 $seopress_excerpt_length = 50;
@@ -73,6 +74,10 @@ if (isset($wp_query->max_num_pages)) {
 if (is_singular() && isset($post->post_author)) {
     $the_author_meta = esc_attr(get_the_author_meta('display_name', $post->post_author));
     $author_bio      = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description', $post->post_author))))));
+}
+
+if (is_singular() && get_post_meta( $post->ID, '_seopress_analysis_target_kw', true )) {
+    $target_kw = get_post_meta( $post->ID, '_seopress_analysis_target_kw', true );
 }
 
 if (is_author() && is_int(get_queried_object_id())) {
@@ -238,6 +243,7 @@ $seopress_titles_template_variables_array = [
     '%%currenttime%%',
     '%%author_bio%%',
     '%%currentmonth_num%%',
+    '%%target_keyword%%'
 ];
 
 $seopress_titles_template_variables_array = apply_filters('seopress_titles_template_variables_array', $seopress_titles_template_variables_array);
@@ -290,6 +296,7 @@ $seopress_titles_template_replace_array = [
     current_time(get_option('time_format')),
     $author_bio,
     date_i18n('n'),
+    $target_kw
 ];
 
 $seopress_titles_template_replace_array = apply_filters('seopress_titles_template_replace_array', $seopress_titles_template_replace_array);

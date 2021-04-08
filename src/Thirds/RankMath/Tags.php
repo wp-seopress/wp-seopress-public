@@ -48,7 +48,7 @@ class Tags {
         '%name%'                                            => 'post_author',
         '%user_description%'                                => '',
         '%id%'                                              => '',
-        '%focuskw%'                                         => '',
+        '%focuskw%'                                         => 'target_keyword',
         '%customfield(field-name)%'                         => '',
         '%page%'                                            => 'page',
         '%pagenumber%'                                      => 'current_pagination',

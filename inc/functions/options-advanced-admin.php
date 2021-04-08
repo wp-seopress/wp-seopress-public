@@ -868,15 +868,19 @@ function seopress_bulk_quick_edit_save_post($post_id) {
     if (isset($_REQUEST['seopress_canonical'])) {
         update_post_meta($post_id, '_seopress_robots_canonical', esc_html($_REQUEST['seopress_canonical']));
     }
-    if (isset($_REQUEST['seopress_noindex'])) {
-        update_post_meta($post_id, '_seopress_robots_index', 'yes');
-    } else {
-        delete_post_meta($post_id, '_seopress_robots_index', '');
+    if ('' != seopress_advanced_appearance_noindex_col_option()) {
+        if (isset($_REQUEST['seopress_noindex'])) {
+            update_post_meta($post_id, '_seopress_robots_index', 'yes');
+        } else {
+            delete_post_meta($post_id, '_seopress_robots_index');
+        }
     }
-    if (isset($_REQUEST['seopress_nofollow'])) {
-        update_post_meta($post_id, '_seopress_robots_follow', 'yes');
-    } else {
-        delete_post_meta($post_id, '_seopress_robots_follow', '');
+    if ('' != seopress_advanced_appearance_nofollow_col_option()) {
+        if (isset($_REQUEST['seopress_nofollow'])) {
+            update_post_meta($post_id, '_seopress_robots_follow', 'yes');
+        } else {
+            delete_post_meta($post_id, '_seopress_robots_follow');
+        }
     }
 }
 

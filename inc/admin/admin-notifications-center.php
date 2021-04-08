@@ -151,16 +151,17 @@
                         if ('Divi' == $theme->template || 'Divi' == $theme->parent_theme) {
                             $divi_options = get_option('et_divi');
                             if ( ! empty($divi_options)) {
-                                if ('on' == $divi_options['divi_seo_home_title'] ||
-                                'on' == $divi_options['divi_seo_home_description'] ||
-                                'on' == $divi_options['divi_seo_home_keywords'] ||
-                                'on' == $divi_options['divi_seo_home_canonical'] ||
-                                'on' == $divi_options['divi_seo_single_title'] ||
-                                'on' == $divi_options['divi_seo_single_description'] ||
-                                'on' == $divi_options['divi_seo_single_keywords'] ||
-                                'on' == $divi_options['divi_seo_single_canonical'] ||
-                                'on' == $divi_options['divi_seo_index_canonical'] ||
-                                'on' == $divi_options['divi_seo_index_description']
+                                if (
+                                    (array_key_exists('divi_seo_home_title', $divi_options) && 'on' == $divi_options['divi_seo_home_title']) ||
+                                    (array_key_exists('divi_seo_home_description', $divi_options) && 'on' == $divi_options['divi_seo_home_description']) ||
+                                    (array_key_exists('divi_seo_home_keywords', $divi_options) && 'on' == $divi_options['divi_seo_home_keywords']) ||
+                                    (array_key_exists('divi_seo_home_canonical', $divi_options) && 'on' == $divi_options['divi_seo_home_canonical']) ||
+                                    (array_key_exists('divi_seo_single_title', $divi_options) && 'on' == $divi_options['divi_seo_single_title']) ||
+                                    (array_key_exists('divi_seo_single_description', $divi_options) && 'on' == $divi_options['divi_seo_single_description']) ||
+                                    (array_key_exists('divi_seo_single_keywords', $divi_options) && 'on' == $divi_options['divi_seo_single_keywords']) ||
+                                    (array_key_exists('divi_seo_single_canonical', $divi_options) && 'on' == $divi_options['divi_seo_single_canonical']) ||
+                                    (array_key_exists('divi_seo_index_canonical', $divi_options) && 'on' == $divi_options['divi_seo_index_canonical']) ||
+                                    (array_key_exists('divi_seo_index_description', $divi_options) && 'on' == $divi_options['divi_seo_index_description'])
                                 ) {
                                     $args = [
                                         'id'     => 'notice-divi-seo',
@@ -282,16 +283,19 @@
                             }
                         }
                         $seo_plugins = [
-                            'wordpress-seo/wp-seo.php'                    => 'Yoast SEO',
-                            'wordpress-seo-premium/wp-seo-premium.php'    => 'Yoast SEO Premium',
-                            'all-in-one-seo-pack/all_in_one_seo_pack.php' => 'All In One SEO',
-                            'autodescription/autodescription.php'         => 'The SEO Framework',
-                            'squirrly-seo/squirrly.php'                   => 'Squirrly SEO',
-                            'seo-by-rank-math/rank-math.php'              => 'Rank Math',
-                            'seo-ultimate/seo-ultimate.php'               => 'SEO Ultimate',
-                            'wp-meta-seo/wp-meta-seo.php'                 => 'WP Meta SEO',
-                            'premium-seo-pack/plugin.php'                 => 'Premium SEO Pack',
-                            'wpseo/wpseo.php'                             => 'wpSEO',
+                            'wordpress-seo/wp-seo.php'                       => 'Yoast SEO',
+                            'wordpress-seo-premium/wp-seo-premium.php'       => 'Yoast SEO Premium',
+                            'all-in-one-seo-pack/all_in_one_seo_pack.php'    => 'All In One SEO',
+                            'autodescription/autodescription.php'            => 'The SEO Framework',
+                            'squirrly-seo/squirrly.php'                      => 'Squirrly SEO',
+                            'seo-by-rank-math/rank-math.php'                 => 'Rank Math',
+                            'seo-ultimate/seo-ultimate.php'                  => 'SEO Ultimate',
+                            'wp-meta-seo/wp-meta-seo.php'                    => 'WP Meta SEO',
+                            'premium-seo-pack/plugin.php'                    => 'Premium SEO Pack',
+                            'wpseo/wpseo.php'                                => 'wpSEO',
+                            'platinum-seo-pack/platinum-seo-pack.php'        => 'Platinum SEO Pack',
+                            'smartcrawl-seo/wpmu-dev-seo.php'                => 'SmartCrawl',
+                            'seo-pressor/seo-pressor.php'                    => 'SEOPressor',
                         ];
 
                         foreach ($seo_plugins as $key => $value) {
@@ -328,8 +332,9 @@
                             }
                         }
                         $pbuilder_plugins = [
-                            'oxygen/functions.php'        => 'Oxygen',
-                            'js_composer/js_composer.php' => 'WP Bakery',
+                            'oxygen/functions.php'              => 'Oxygen',
+                            'js_composer/js_composer.php'       => 'WP Bakery',
+                            'fusion-builder/fusion-builder.php' => 'Fusion Builder',
                         ];
                         foreach ($pbuilder_plugins as $key => $value) {
                             if (is_plugin_active($key)) {
@@ -345,24 +350,28 @@
                                     }
                                 }
                                 if ('1' != seopress_get_hidden_notices_pbuilders_option()) {
-                                    $args = [
-                                        'id' => 'notice-page-builders',
-                                        /* translators: %s name of a page builder plugin (eg: Oxygen) */
-                                        'title'  => sprintf(__('Generate automatic meta description for <strong>%s</strong> plugin.', 'wp-seopress'), $value),
-                                        'desc'   => __('Your page builder is using shortcodes to save its data. To automatically generate your meta description based on your post content, you will have to add some hooks to your functions.php.', 'wp-seopress'),
-                                        'impact' => [
-                                            'medium' => __('Medium impact', 'wp-seopress'),
-                                        ],
-                                        'link' => [
-                                            'en'       => 'https://www.seopress.org/support/guides/generate-automatic-meta-description-from-page-builders/',
-                                            'fr'       => 'https://www.seopress.org/fr/support/guides/generez-automatiquement-meta-descriptions-divi-oxygen-builder/',
-                                            'title'    => __('Learn more', 'wp-seopress'),
-                                            'external' => true,
-                                        ],
-                                        'icon'       => 'dashicons-admin-tools',
-                                        'deleteable' => true,
-                                    ];
-                                    seopress_notification($args);
+                                    if (('1' !== seopress_setting_section_tools_compatibility_oxygen_option() && 'Oxygen' === $value) ||
+                                    ('1' !== seopress_setting_section_tools_compatibility_bakery_option() && 'WP Bakery' === $value) ||
+                                    ('1' !== seopress_setting_section_tools_compatibility_fusion_option() && 'Fusion Builder' === $value)
+                                    ) {
+                                        $args = [
+                                            'id' => 'notice-page-builders',
+                                            /* translators: %s name of a page builder plugin (eg: Oxygen) */
+                                            'title'  => sprintf(__('Generate automatic meta description for <strong>%s</strong> plugin.', 'wp-seopress'), $value),
+                                            'desc'   => __('Your page builder is using shortcodes to save its data. To automatically generate your meta description based on your post content, go to our Compatibility Center.', 'wp-seopress'),
+                                            'impact' => [
+                                                'medium' => __('Medium impact', 'wp-seopress'),
+                                            ],
+                                            'link' => [
+                                                'en'       => admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_compatibility'),
+                                                'title'    => __('Fix this!', 'wp-seopress'),
+                                                'external' => false,
+                                            ],
+                                            'icon'       => 'dashicons-admin-tools',
+                                            'deleteable' => true,
+                                        ];
+                                        seopress_notification($args);
+                                    }
                                 }
                                 break;
                             }
@@ -386,24 +395,25 @@
                                     }
                                 }
                                 if ('1' != seopress_get_hidden_notices_themes_option()) {
-                                    $args = [
-                                        'id' => 'notice-themes',
-                                        /* translators: %s name of a WP theme (eg: Enfold) */
-                                        'title'  => sprintf(__('Generate automatic meta description for <strong>%s</strong> theme.', 'wp-seopress'), $value),
-                                        'desc'   => __('Your theme is using shortcodes to save its data. To automatically generate your meta description based on your post content, you will have to add some hooks to your functions.php.', 'wp-seopress'),
-                                        'impact' => [
-                                            'medium' => __('Medium impact', 'wp-seopress'),
-                                        ],
-                                        'link' => [
-                                            'en'       => 'https://www.seopress.org/support/guides/generate-automatic-meta-description-from-page-builders/',
-                                            'fr'       => 'https://www.seopress.org/fr/support/guides/generez-automatiquement-meta-descriptions-divi-oxygen-builder/',
-                                            'title'    => __('Learn more', 'wp-seopress'),
-                                            'external' => true,
-                                        ],
-                                        'icon'       => 'dashicons-admin-tools',
-                                        'deleteable' => true,
-                                    ];
-                                    seopress_notification($args);
+                                    if (('1' !== seopress_setting_section_tools_compatibility_divi_option() && 'Divi' === $value) || ('1' !== seopress_setting_section_tools_compatibility_avia_option() && 'Enfold (Avia Layout Builder)' === $value)) {
+                                        $args = [
+                                            'id' => 'notice-themes',
+                                            /* translators: %s name of a WP theme (eg: Enfold) */
+                                            'title'  => sprintf(__('Generate automatic meta description for <strong>%s</strong> theme.', 'wp-seopress'), $value),
+                                            'desc'   => __('Your theme is using shortcodes to save its data. To automatically generate your meta description based on your post content, go to our Compatibility Center.', 'wp-seopress'),
+                                            'impact' => [
+                                                'medium' => __('Medium impact', 'wp-seopress'),
+                                            ],
+                                            'link' => [
+                                                'en'       => admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_compatibility'),
+                                                'title'    => __('Fix this!', 'wp-seopress'),
+                                                'external' => false,
+                                            ],
+                                            'icon'       => 'dashicons-admin-tools',
+                                            'deleteable' => true,
+                                        ];
+                                        seopress_notification($args);
+                                    }
                                 }
                                 break;
                             }

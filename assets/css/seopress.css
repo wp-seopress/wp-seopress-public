@@ -250,6 +250,11 @@
     color: #0073aa;
 }
 
+#seopress_content_analysis a.nounderline,
+#seopress_content_analysis a.nounderline:hover {
+    text-decoration: none;
+}
+
 #seopress_content_analysis .wrap-seopress-analysis {
     display: inline-block;
     width: 100%;
@@ -1106,25 +1111,56 @@ table.wp-list-table .manage_column.column-seopress_insights {
     width: 95%;
 }
 
+table.fixed thead .column-seopress_title,
+table.fixed thead .column-seopress_desc {
+    width: 8%;
+}
+
+table.fixed thead .column-seopress_redirect_enable,
+table.fixed thead .column-seopress_redirect_url,
+table.fixed thead .column-seopress_canonical,
+table.fixed thead .column-seopress_tkw,
 .fixed .column-seopress_w3c,
 .fixed .column-seopress_words,
-.fixed .column-seopress_ps,
-.fixed .column-seopress_score {
+.fixed .column-seopress_ps {
     width: 6%;
+}
+
+.fixed .column-seopress_score {
+    width: 50px;
 }
 
 table.fixed thead .column-seopress_nofollow,
 table.fixed thead .column-seopress_noindex {
-    width: 8%;
+    width: 5%;
 }
+
 @media only screen and (max-width: 1200px) {
+    table.fixed .column-seopress_title > div,
+    table.fixed .column-seopress_desc > div,
+    table.fixed .column-seopress_redirect_enable > div,
+    table.fixed .column-seopress_redirect_url > div,
+    table.fixed .column-seopress_canonical > div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    table.fixed thead .column-seopress_redirect_enable,
+    table.fixed thead .column-seopress_redirect_url,
+    table.fixed thead .column-seopress_canonical,
+    table.fixed thead .column-seopress_tkw,
     table.fixed thead .column-seopress_nofollow,
     table.fixed thead .column-seopress_noindex,
+    table.fixed thead .column-seopress_score,
     table.fixed thead .column-seopress_w3c,
     table.fixed thead .column-seopress_words,
-    table.fixed thead .column-seopress_ps,
-    table.fixed thead .column-seopress_score {
+    table.fixed thead .column-seopress_ps
+    {
         width: 10%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -2401,7 +2437,8 @@ body.seopress-styles {
 .seopress-button,
 .seopress-option .tag-title,
 #seopress_pro_cpt .tag-title,
-#seopress_cpt .seopress-tag-dropdown {
+#seopress_cpt .seopress-tag-dropdown,
+#seopress-tabs .seopress-tag-dropdown {
     cursor: pointer;
     font-weight: 500;
     border-radius: 4px;
@@ -2460,14 +2497,16 @@ body.seopress-styles {
 }
 
 #seopress_cpt .sp-wrap-tag-variables-list,
-#seopress_pro_cpt .sp-wrap-tag-variables-list {
+#seopress_pro_cpt .sp-wrap-tag-variables-list,
+#seopress-tabs .sp-wrap-tag-variables-list {
     position: relative;
     float: left;
     display: none;
 }
 
 #seopress_cpt .sp-tag-variables-list,
-#seopress_pro_cpt .sp-tag-variables-list {
+#seopress_pro_cpt .sp-tag-variables-list,
+#seopress-tabs .sp-tag-variables-list {
     background: #fff;
     position: absolute;
     left: -42px;
@@ -2489,24 +2528,29 @@ body.seopress-styles {
 }
 
 #seopress_cpt .sp-wrap-tag-variables-list.open,
-#seopress_pro_cpt .sp-wrap-tag-variables-list.open {
+#seopress_pro_cpt .sp-wrap-tag-variables-list.open,
+#seopress-tabs .sp-wrap-tag-variables-list.open {
     display: block;
 }
 
 #seopress_cpt .seopress-tag-single-all.tag-title .dashicons,
 #seopress_cpt .seopress-tag-single-all.seopress-tag-dropdown .dashicons,
-#seopress_pro_cpt .seopress-tag-single-all.tag-title .dashicons {
+#seopress_pro_cpt .seopress-tag-single-all.tag-title .dashicons,
+#seopress-tabs .seopress-tag-single-all.tag-title .dashicons,
+#seopress-tabs .seopress-tag-single-all.tag-description .dashicons {
     margin: 0;
     transition: all 150ms linear;
 }
 
 #seopress_cpt .seopress-tag-single-all.open .dashicons,
-#seopress_pro_cpt .seopress-tag-single-all.open .dashicons {
+#seopress_pro_cpt .seopress-tag-single-all.open .dashicons,
+#seopress-tabs .seopress-tag-single-all.open .dashicons {
     transform: rotateX(180deg);
 }
 
 #seopress_cpt .sp-tag-variables-list li,
-#seopress_pro_cpt .sp-tag-variables-list li {
+#seopress_pro_cpt .sp-tag-variables-list li,
+#seopress-tabs .sp-tag-variables-list li {
     padding: 8px 12px;
     cursor: pointer;
     margin: 0;
@@ -2514,7 +2558,8 @@ body.seopress-styles {
 }
 
 #seopress_cpt .sp-tag-variables-list li span,
-#seopress_pro_cpt .sp-tag-variables-list li span {
+#seopress_pro_cpt .sp-tag-variables-list li span,
+#seopress-tabs .sp-tag-variables-list li span {
     display: block;
     font-weight: bold;
     font-size: 12px;
@@ -2522,13 +2567,15 @@ body.seopress-styles {
 }
 
 #seopress_cpt .sp-tag-variables-list li:hover,
-#seopress_pro_cpt .sp-tag-variables-list li:hover {
+#seopress_pro_cpt .sp-tag-variables-list li:hover,
+#seopress-tabs .sp-tag-variables-list li:hover {
     background: #0385ba;
     color: #fff;
 }
 
 #seopress_cpt .sp-tag-variables-list li::after,
-#seopress_pro_cpt .sp-tag-variables-list li::after {
+#seopress_pro_cpt .sp-tag-variables-list li::after,
+#seopress-tabs .sp-tag-variables-list li::after {
     content: attr(data-value);
     display: inline-block;
     background: #e9ecef;
@@ -2542,7 +2589,8 @@ body.seopress-styles {
 #seopress_cpt .tag-title .dashicons,
 .seopress-option .tag-title .dashicons,
 #seopress_pro_cpt .tag-title .dashicons,
-#seopress_cpt .seopress-tag-dropdown .dashicons {
+#seopress_cpt .seopress-tag-dropdown .dashicons,
+#seopress-tabs .seopress-tag-dropdown .dashicons {
     padding: 0;
     height: 16px;
     width: 16px;
@@ -2554,7 +2602,6 @@ body.seopress-styles {
 .seopress-overlay-tag-dropdown {
     position: absolute;
     display: none;
-
     top: 0;
     left: 0;
     width: 100%;
@@ -2569,7 +2616,8 @@ body.seopress-styles {
 #seopress_cpt .tag-title,
 .seopress-option .tag-title,
 #seopress_pro_cpt .tag-title,
-#seopress_cpt .seopress-tag-dropdown {
+#seopress_cpt .seopress-tag-dropdown,
+#seopress-tabs .seopress-tag-dropdown {
     padding: 4px 8px;
     position: relative;
     top: 5px;
@@ -2597,7 +2645,10 @@ body.seopress-styles {
 .seopress-tag-dropdown:hover,
 #seopress_cpt .seopress-tag-dropdown .tag-title:active,
 #seopress_cpt-option .seopress-tag-dropdown .tag-title:focus,
-#seopress_cpt-option .seopress-tag-dropdown .tag-title:hover {
+#seopress_cpt-option .seopress-tag-dropdown .tag-title:hover,
+#seopress-tabs .seopress-tag-dropdown .tag-title:active,
+#seopress-tabs .seopress-tag-dropdown .tag-title:focus,
+#seopress-tabs .seopress-tag-dropdown .tag-title:hover {
     background: #232323;
     color: #fff;
     user-select: none;

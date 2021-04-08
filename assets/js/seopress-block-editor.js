@@ -8,17 +8,38 @@ let hasSaved = false;
         var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
         var isSavingMetaBoxes = wp.data.select('core/edit-post').isSavingMetaBoxes();
 
-      
+
         if (isSavingMetaBoxes && !isAutosavingPost && !hasSaved) {
-        
+
+            //Post ID
+            if (typeof $("#seopress-tabs").attr("data_id") !== "undefined") {
+                var post_id = $("#seopress-tabs").attr("data_id");
+            } else if (typeof $("#seopress_content_analysis .wrap-seopress-analysis").attr("data_id") !== "undefined") {
+                var post_id = $("#seopress_content_analysis .wrap-seopress-analysis").attr("data_id")
+            }
+
+            //Tax origin
+            if (typeof $("#seopress-tabs").attr("data_tax") !== "undefined") {
+                var tax_name = $("#seopress-tabs").attr("data_tax");
+            } else if (typeof $("#seopress_content_analysis .wrap-seopress-analysis").attr("data_tax") !== "undefined") {
+                var tax_name = $("#seopress_content_analysis .wrap-seopress-analysis").attr("data_tax")
+            }
+
+            //Origin
+            if (typeof $("#seopress-tabs").attr("data_origin") !== "undefined") {
+                var origin = $("#seopress-tabs").attr("data_origin");
+            } else if (typeof $("#seopress_content_analysis .wrap-seopress-analysis").attr("data_origin") !== "undefined") {
+                var origin = $("#seopress_content_analysis .wrap-seopress-analysis").attr("data_origin")
+            }
+
             $.ajax({
                 method : 'GET',
                 url : seopressAjaxRealPreview.seopress_real_preview,
                 data: {
                     action: 'seopress_do_real_preview',
-                    post_id: $('#seopress-tabs').attr('data_id'),
-                    tax_name: $('#seopress-tabs').attr('data_tax'),
-                    origin: $('#seopress-tabs').attr('data_origin'),
+                    post_id: post_id,
+                    tax_name: tax_name,
+                    origin: origin,
                     post_type: $('#seopress_launch_analysis').attr('data_post_type'),
                     seopress_analysis_target_kw: $('#seopress_analysis_target_kw_meta').val(),
                     _ajax_nonce: seopressAjaxRealPreview.seopress_nonce,
@@ -37,17 +58,17 @@ let hasSaved = false;
                     typeof s.data.tw_desc ==="undefined" ? tw_desc = "" : tw_desc = s.data.tw_desc.values;
                     typeof s.data.tw_img ==="undefined" ? tw_img = "" : tw_img = s.data.tw_img.values;
                     typeof s.data.meta_robots ==="undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots[0];
-    
+
                     var data_arr = {og_title : og_title,
                         og_desc : og_desc,
-                        og_img : og_img, 
+                        og_img : og_img,
                         og_url : og_url,
                         og_site_name : og_site_name,
                         tw_title : tw_title,
                         tw_desc : tw_desc,
                         tw_img : tw_img
                     };
-    
+
                     for (var key in data_arr) {
                         if (data_arr.length) {
                             if (data_arr[key].length > 1) {

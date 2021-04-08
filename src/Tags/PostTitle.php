@@ -20,7 +20,7 @@ class PostTitle implements GetTagValue {
         }
 
         if (
-            ($context['is_home'] || $context['is_single'])
+            (isset($context['is_home']) || isset($context['is_single']))
             && isset($context['post']) && $context['post']) {
             $value = esc_attr(strip_tags(get_post_field('post_title', $context['post']->ID)));
         }

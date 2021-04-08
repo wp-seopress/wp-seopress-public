@@ -167,12 +167,10 @@ class GetContent {
      */
     protected function analyzeHeadings($analyzes, $data, $post) {
         //H1
-        $desc = null;
+        $desc = '<h4>' . __('H1 (Heading 1)', 'wp-seopress') . '</h4>';
+
         if ( ! empty($data['h1']['matches'])) {
-            $desc .= '<h4>' . __('H1 (Heading 1)', 'wp-seopress') . '</h4>';
-
             $count = $data['h1']['nomatches']['count'];
-
             $target_kws_h1 = $data['h1']['matches'];
 
             $all_h1 = $data['h1']['values'];
@@ -194,14 +192,23 @@ class GetContent {
                 $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . sprintf(esc_html__('We found %d Heading 1 (H1) in your content.', 'wp-seopress'), $count) . '</p>';
                 $desc .= '<p>' . __('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility. Below, the list:', 'wp-seopress') . '</p>';
                 $analyzes['headings']['impact'] = 'high';
-            }
 
-            if ( ! empty($all_h1)) {
-                $desc .= '<ul>';
-                foreach ($all_h1 as $h1) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $h1 . '</li>';
+
+                if ( ! empty($all_h1)) {
+                    $desc .= '<ul>';
+                    foreach ($all_h1 as $h1) {
+                        $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $h1 . '</li>';
+                    }
+                    $desc .= '</ul>';
                 }
-                $desc .= '</ul>';
+            }
+        } elseif ( isset($data['h1']['nomatches']['count']) && $data['h1']['nomatches']['count'] === 0 ) {
+            $desc .= '<p><span class="dashicons dashicons-no-alt"></span><strong>' . __('No Heading 1 (H1) found in your content. This is required for both SEO and Acessibility!', 'wp-seopress') . '</strong></p>';
+            $analyzes['headings']['impact'] = 'high';
+        } else {
+            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('None of your target keywords were found in Heading 1 (H1).', 'wp-seopress') . '</p>';
+            if ('high' != $analyzes['headings']['impact']) {
+                $analyzes['headings']['impact'] = 'medium';
             }
         }
 
@@ -791,6 +798,39 @@ class GetContent {
      *
      * @return array
      */
+    protected function analyzeInboundLinks($analyzes, $data, $post) {
+        $desc = '<p>' . __('Internal linking is important for SEO and user experience. Always try to link your content together, with quality link anchors.') . '</p>';
+        if ( ! empty($data['inbound_links']['count'])) {
+            $count = $data['inbound_links']['count'];
+
+            $desc .= '<p>' . sprintf(__('We found %s inbound links to this page.', 'wp-seopress'), $count) . '</p>';
+
+            if ( ! empty($data['inbound_links']['links'])) {
+                $desc .= '<ul>';
+                foreach ($data['inbound_links']['links'] as $id => $permalink) {
+                    foreach ($permalink as $href => $link) {
+                        $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . $href . '" target="_blank">' . $link . '</a>
+                        <a class="nounderline" href="' . get_edit_post_link($id) . '" title="' . sprintf(__('edit %s', 'wp-seopress'), esc_html(get_the_title($id))) . '"><span class="dashicons dashicons-edit-large"></span></a></li>';
+                    }
+                }
+                $desc .= '</ul>';
+            }
+        } else {
+            $analyzes['inbound_links']['impact'] = 'medium';
+            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('This page doesn\'t have any inbound links from other content. Links from archive pages are not considered inbound links due to lack of context.', 'wp-seopress') . '</p>';
+        }
+        $analyzes['inbound_links']['desc'] = $desc;
+
+        return $analyzes;
+    }
+
+    /**
+     * @param array   $analyzes
+     * @param array   $data
+     * @param WP_Post $post
+     *
+     * @return array
+     */
     protected function analyzeCanonical($analyzes, $data, $post) {
         $desc = '<p>' . __('A canonical URL is required by search engines to handle duplicate content.') . '</p>';
         if ( ! empty($data['all_canonical'])) {
@@ -863,6 +903,9 @@ class GetContent {
 
         //Outbound links
         $analyzes = $this->analyzeOutboundLinks($analyzes, $data, $post);
+
+        //Inbound links
+        $analyzes = $this->analyzeInboundLinks($analyzes, $data, $post);
 
         $analyzes = $this->analyzeCanonical($analyzes, $data, $post);
 

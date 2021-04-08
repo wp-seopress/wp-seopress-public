@@ -129,6 +129,10 @@ function seopress_xml_sitemap_single() {
         'has_password' => false,
     ];
 
+    if ($path ==='attachment') {
+        unset($args['post_status']);
+    }
+
     $args = apply_filters('seopress_sitemaps_single_query', $args, $path);
 
     $postslist = get_posts($args);

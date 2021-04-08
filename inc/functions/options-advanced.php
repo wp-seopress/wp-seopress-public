@@ -230,6 +230,8 @@ if ('' != seopress_advanced_advanced_image_auto_alt_target_kw_option()) {
             if (empty($atts['alt'])) {
                 if ('' != get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)) {
                     $atts['alt'] = esc_html(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true));
+
+                    $atts['alt'] = apply_filters('seopress_auto_image_alt_target_kw', $atts['alt']);
                 }
             }
         }
@@ -253,6 +255,8 @@ if ('' != seopress_advanced_advanced_image_auto_alt_target_kw_option()) {
         }
 
         $target_keyword = get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true);
+
+        $target_keyword = apply_filters('seopress_auto_image_alt_target_kw', $target_keyword);
 
         if (empty($target_keyword)) {
             return $content;

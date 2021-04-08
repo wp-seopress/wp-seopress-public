@@ -60,7 +60,6 @@ class WooCommerceAnalyticsService {
                         catch(e){}
                     }
                     else{
-                        console.log('named item')
                         id = namedItem.value
                     }
 
@@ -108,6 +107,23 @@ class WooCommerceAnalyticsService {
                     }
 
                     const quantity = document.querySelector('input.qty').value || '1';
+                    const formProductVariation = document.querySelector('form[data-product_variations]')
+                    const variationItem = document.querySelector('.variation_id')
+
+                    let price = " . (float) esc_js($product->get_price()) . "
+                    if(formProductVariation && variationItem){
+                        try{
+                            const variations = JSON.parse(formProductVariation.dataset.product_variations)
+                            const variationId = variationItem.value
+                            for(const variation of variations){
+                                if(variation.variation_id == Number(variationId)){
+                                    price = variation.display_price
+                                }
+                            }
+                        }
+                        catch{
+                        }
+                    }
 
                     gtag('event', 'add_to_cart', {
                         'items': [ {
@@ -115,12 +131,11 @@ class WooCommerceAnalyticsService {
                             'name': '" . esc_js($product->get_title()) . "',
                             'list_name': '" . esc_js(get_the_title()) . "',
                             'quantity': quantity,
-                            'price': " . (float) esc_js($product->get_price()) . ",
+                            'price': price,
                             'category': " . json_encode($items_purchased_category) . '
                         }]
                     });
                 })
-
             });
         </script>
         ';

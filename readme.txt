@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.4.0.7
+Stable tag: 4.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -210,6 +210,9 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Premium SEO Pack</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Squirrly</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">wpSEO</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Platinum SEO Pack</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">SmartCrawl</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">SEOPressor</a></li>
 </ul>
 
 <h3>Help and support</h3>
@@ -231,6 +234,7 @@ SEOpress (incorrect)
 <h3>SEOPress featured on</h3>
 <ul>
 	<li>WP Beginner</li>
+	<li>Neil Patel</li>
 	<li>HubSpot</li>
 	<li>GoDaddy</li>
 	<li>Forbes</li>
@@ -261,7 +265,7 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 
 = Can I import my post and term metadata from other plugins? =
 
-You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/">WP Meta SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/">wpSEO</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
+You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">WP Meta SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">wpSEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Platinum SEO Pack</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SmartCrawl</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SEOPressor</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
 
 = How to use Google Tag Manager / Facebook Pixel with SEOPress? =
 
@@ -320,87 +324,47 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
-= 4.4.0.7 (05/03/2021) =
-* NEW WordPress 5.7 compatibility
-* INFO Improve UI
-* FIX Site Title default setting
-* FIX Automatic Product schema without WooCommerce
-* FIX seopress_mu_white_label_admin_title_callback warning in multisite setup
-* FIX JS error at checkout preventing users to remove products
-= 4.4.0.6 (26/02/2021) =
-* INFO Improve UI by adding a new tab (Image SEO) to the Advanced settings page
-* FIX Quick edit metadata from posts list
-* FIX WooCommerce Breadcrumbs Shop page
-= 4.4.0.5 (19/02/2021) =
-* FIX "Use the target keywords if not alternative text set for the image" option
-= 4.4.0.4 (18/02/2021) =
-* INFO Add "View my RSS feed" button to SEO, PRO, RSS tab
-* INFO Improve performance for video xml sitemap
-* FIX Help tabs missing
-* FIX Content analysis compatibility for Oxygen Page Builder
-* FIX Variable products for automatic schema
-* FIX Product currency property for automatic product schema
-* FIX Ecommerce tracking on purchases
-* FIX PHP Fatal error: Uncaught Error: Call to a member function is_type()
-= 4.4.0.3 (12/02/2021) =
-* FIX Fatal errors in posts list
-= 4.4.0.2 (12/02/2021) =
-* FIX Homepage title
-= 4.4.0.1 (12/02/2021) =
-* FIX Fatal errors
-= 4.4 (10/02/2021) =
-* NEW Complete code refactoring on Titles and metas feature 🎉
-* NEW Preview dynamic tags on post list columns 🎉
-* NEW Live preview when adding dynamic variables for Google Preview 🎉
-* NEW Add Local Business types to automatic schemas as new mapping option to avoid entering manually a business type 🎉 (PRO)
-* NEW Support variable products for automatic product schema (PRO) 🎉
-* NEW Support Global Product Identifiers for variable products (PRO)
-* NEW Dashboard notification if Google Analytics is enabled without UA or GA4 ids
-* NEW White Label option to change the SEO menu name (PRO)
-* NEW Add post ID to automatic schemas as new mapping option (PRO)
-* INFO Remove jQuery for Google Analytics Enhanced Ecommerce (no more jQuery with GA tracking code 🎉)
-* INFO Improve wizard assistant user interface
-* INFO Stop adding uppercase on the first letter of each word when automatically adding media attributes (eg: alt tag)
-* INFO Add new help tabs for Sitemaps and Social networks settings page to improve user experience
-* FIX Cornerstone compatibility issue with our content analysis feature
-* FIX Oxygen compatibility issue with our content analysis feature ("2 meta robots found")
-* FIX CSV broken link export with specific PHP configuration
-* FIX Social tags for term taxonomies
-* FIX White label: some SEOPress links weren't hidden
-* FIX WPML XML configuration file (wpml-config.xml)
-* FIX GA Enhanced Ecommerce check on status order for measuring purchases
-* FIX GA Enhanced Ecommerce add_to_cart event from archive product page
-= 4.3.0.2 19/01/2021 =
-* FIX Analytics tracking code if no UA-XXX set
-* FIX Conflict Google Analytics with UpdraftPlus (PRO)
-= 4.3.0.1 15/01/2021 =
-* FIX Fatal error
-* FIX Product price with taxes for automatic product schema (default: sale price, fallback: regular price)
-* FIX Fatal error get_price in specific cases
-= 4.3 (14/01/2021) =
-* NEW PHP 8 compatibility
-* NEW "Disable notifications on slug changes or post deletions" option from SEO, PRO, 404/301 tab (PRO)
-* NEW "Canonical URL" check added to content analysis
-* NEW Quickly enable/disable noindex/nofollow using Quick Edit feature from post lists
-* NEW Import Primary Category with our CSV import tool (PRO)
-* NEW Add a new field for automatic schema to get product price with taxes (PRO)
-* INFO Refactoring XML sitemaps feature to avoid conflicts with other plugins / themes
-* INFO Improve configuration wizard
-* INFO Improve design and accessibility for SEO columns from post lists
-* INFO Remove recommended links if White Label is enabled
-* INFO Improve UI / UX
+= 4.5 (25/03/2021) https://www.seopress.org/blog/seopress-4-5/ =
+* NEW HTML sitemap enhancements: add HTML classes
+* NEW HTML sitemap enhancements: new option to remove links from archive pages
+* NEW HTML sitemap enhancements: new shortcode attribute to request specific custom post types
+* NEW Dynamic variable: %%target_keyword%%
+* NEW Import tools: Platinum SEO Pack, SmartCrawl and SEOPressor
+* NEW Allow user to change its choice about cookies (SEO, Analytics, Cookie bar tab to enable the option)
+* NEW Compatibility center (SEO, Tools) for better integration with other plugins (eg: Page Builders) without adding code
+* NEW Add our dynamic variables dropdown to global meta title / meta description settings page
+* NEW Add heading 1 (H1) check to Content Analysis feature
+* NEW Add Inbound links / Orphaned pages check to Content Analysis feature
+* NEW Use dynamic variables in social metadata (Open Graph and Twitter cards)
+* NEW Multiple opening hours (morning / afternoon) for global Local Business schema (PRO)
+* NEW 'seopress_resize_panel_elementor' hook to prevent SEOPress resizes the Elementor Panel (https://www.seopress.org/support/hooks/disable-automatic-resizing-of-elementor-panel/)
+* NEW 'seopress_titles_robots_attrs' hook to add meta robots attributes (https://www.seopress.org/support/hooks/filter-meta-robots-attributes/)
+* NEW 'seopress_sitemaps_no_archive_link' hook to remove archive links in XML sitemaps (https://www.seopress.org/support/hooks/filter-custom-post-type-archive-link-in-xml-single-sitemaps/)
+* NEW 'seopress_breadcrumbs_force_archive_name' hook to force archive name display on CPT with no archive (https://www.seopress.org/support/hooks/force-the-display-of-the-custom-post-type-archive-page-even-if-it-does-not-exist-in-breadcrumbs/)
+* NEW 'seopress_sitemaps_html_remove_archive' hook to filter archive names in HTML sitemap (https://www.seopress.org/support/hooks/remove-archive-links-per-post-type-in-html-sitemap/)
+* NEW 'seopress_auto_image_alt_target_kw' hook to use target keywords for the alternative texts of the images (https://www.seopress.org/support/hooks/filter-automatic-image-alt-tag-with-target-keywords/)
+* NEW 'seopress_export_redirections_query' hook to filter export redirections query (https://www.seopress.org/support/hooks/filter-export-redirections-query/)
+* NEW 'seopress_gtag_ec_status' hook to change status of WC orders sent to Google Analytics Enhanced Ecommerce (https://www.seopress.org/support/hooks/filter-woocommerce-order-status-sent-to-google-analytics-enhanced-ecommerce/)
+* INFO Improve accessibility for cookie bar
+* INFO Improve SEO columns display for posts, pages, custom post type lists
+* INFO Improve UI to warn users if some content are set to noindex and still included in XML sitemaps
+* INFO Improve UI / i18n for Google Analytics widget
+* INFO Improve UI if error on license activation
+* INFO Improve UI for BlogPosting schema
+* INFO Improve UI for global LocalBusiness schema
+* INFO Automatically add custom fields created with Toolset plugin to our Schema feature
+* INFO SEO and Content Analysis metaboxes are now completely independent (and prevent a lot of errors / warnings)
 * INFO Strengthening security
-* INFO "seopress_sitemaps_single_img" filter can now be used without adding images to post content
-* INFO Converting Rank Math dynamic variables on migration
-* FIX Google Analysis stats in dashboard widget
-* FIX "Show content analysis score column in post types" option from SEO, Advanced, Appearance tab
-* FIX "Set default tab for Structured data metabox" option from SEO, Advanced, Appearance tab
-* FIX Password protected page meta
-* FIX Cookie bar backdrop
-* FIX RSS after/before content
-* FIX noindex on WooCommerce pages if WC toggle off
-* FIX Block editor notification on post save
-* FIX Conflict with Post Type Order plugin
-* FIX Notice: trying to get property "name" of non-object
+* FIX Quick edit JS errors if noindex/nofollow columns are blocked (props to @mbis)
+* FIX i18n for Type of Employment on non English languages
+* FIX Webarx graph conflict
+* FIX Broken link checker error with 404 links
+* FIX PHP 8 errors with DIVI
+* FIX PHP 8 error with Google Preview for terms taxonomy
+* FIX Product variable price sent to Add to cart GA Enhanced Ecommerce event
+* FIX Elementor synchronization when duplicating posts
+* FIX Attachment XML sitemaps
+* FIX Oxygen content analysis in specific cases
+* FIX AIO import tool
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

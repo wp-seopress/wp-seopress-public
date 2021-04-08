@@ -4,8 +4,7 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 
 //Google Analytics
 //=================================================================================================
-if ('1' == seopress_google_analytics_disable_option() && ((empty($_COOKIE['seopress-user-consent-accept']) || '1' != $_COOKIE['seopress-user-consent-accept']) || (empty($_COOKIE['seopress-user-consent-close']) || '1' != $_COOKIE['seopress-user-consent-close']))) {
-    if ((empty($_COOKIE['seopress-user-consent-accept']) || '1' != $_COOKIE['seopress-user-consent-accept']) && (empty($_COOKIE['seopress-user-consent-close']) || '1' != $_COOKIE['seopress-user-consent-close'])) {
+
         function seopress_google_analytics_opt_out_msg_ok_option() {
             $seopress_google_analytics_opt_out_msg_ok_option = get_option('seopress_google_analytics_option_name');
             if ( ! empty($seopress_google_analytics_opt_out_msg_ok_option)) {
@@ -222,11 +221,35 @@ if ('1' == seopress_google_analytics_disable_option() && ((empty($_COOKIE['seopr
             }
         }
 
+        function seopress_google_analytics_opt_out_edit_choice_option() {
+            $seopress_google_analytics_opt_out_edit_choice_option = get_option('seopress_google_analytics_option_name');
+            if ( ! empty($seopress_google_analytics_opt_out_edit_choice_option)) {
+                foreach ($seopress_google_analytics_opt_out_edit_choice_option as $key => $seopress_google_analytics_opt_out_edit_choice_value) {
+                    $options[$key] = $seopress_google_analytics_opt_out_edit_choice_value;
+                }
+                if (isset($seopress_google_analytics_opt_out_edit_choice_option['seopress_google_analytics_opt_out_edit_choice'])) {
+                    return $seopress_google_analytics_opt_out_edit_choice_option['seopress_google_analytics_opt_out_edit_choice'];
+                }
+            }
+        }
+
+        function seopress_google_analytics_opt_out_msg_edit_option() {
+            $seopress_google_analytics_opt_out_msg_edit_option = get_option('seopress_google_analytics_option_name');
+            if ( ! empty($seopress_google_analytics_opt_out_msg_edit_option)) {
+                foreach ($seopress_google_analytics_opt_out_msg_edit_option as $key => $seopress_google_analytics_opt_out_msg_edit_value) {
+                    $options[$key] = $seopress_google_analytics_opt_out_msg_edit_value;
+                }
+                if (isset($seopress_google_analytics_opt_out_msg_edit_option['seopress_google_analytics_opt_out_msg_edit'])) {
+                    return $seopress_google_analytics_opt_out_msg_edit_option['seopress_google_analytics_opt_out_msg_edit'];
+                }
+            }
+        }
+
         function seopress_cookies_user_consent_html() {
             if ('' != seopress_google_analytics_opt_out_msg_option()) {
                 $msg = seopress_google_analytics_opt_out_msg_option();
             } elseif (get_option('wp_page_for_privacy_policy')) {
-                $msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.&nbsp;<a href="[seopress_privacy_page]" tabindex="10">Read more</a>', 'wp-seopress');
+                $msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.&nbsp;<a href="[seopress_privacy_page]">Read more</a>', 'wp-seopress');
             } else {
                 $msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.', 'wp-seopress');
             }
@@ -250,19 +273,39 @@ if ('1' == seopress_google_analytics_disable_option() && ((empty($_COOKIE['seopr
                 $close_btn = __('X', 'wp-seopress');
             }
 
-            $user_msg = '<div class="seopress-user-consent seopress-user-consent-hide" tabindex="10">
-				<p>' . $msg . '</p>
-				<p>
-					<button id="seopress-user-consent-accept" type="button" tabindex="11">' . $consent_btn . '</button>
-					<button type="button" id="seopress-user-consent-close" tabindex="12">' . $close_btn . '</button>
-				</p>
-			</div>';
+            $user_msg = '<div data-nosnippet class="seopress-user-consent seopress-user-message seopress-user-consent-hide">
+                <p>' . $msg . '</p>
+                <p>
+                    <button id="seopress-user-consent-accept" type="button">' . $consent_btn . '</button>
+                    <button type="button" id="seopress-user-consent-close">' . $close_btn . '</button>
+                </p>
+            </div>';
 
             $backdrop = '<div class="seopress-user-consent-backdrop seopress-user-consent-hide"></div>';
 
             $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn, $backdrop);
 
             echo $user_msg . $backdrop;
+        }
+
+        function seopress_cookies_edit_choice_html() {
+            if ('1' === seopress_google_analytics_opt_out_edit_choice_option()) {
+                if ('' != seopress_google_analytics_opt_out_msg_edit_option()) {
+                    $edit_cookie_btn = seopress_google_analytics_opt_out_msg_edit_option();
+                } else {
+                    $edit_cookie_btn = __('Manage cookies', 'wp-seopress');
+                }
+
+                $user_msg = '<div data-nosnippet class="seopress-user-consent seopress-edit-choice">
+                    <p>
+                        <button id="seopress-user-consent-edit" type="button">' . $edit_cookie_btn . '</button>
+                    </p>
+                </div>';
+
+                $user_msg = apply_filters('seopress_rgpd_full_message', $user_msg, $edit_cookie_btn);
+
+                echo $user_msg;
+            }
         }
 
         function seopress_cookies_user_consent_styles() {
@@ -312,7 +355,7 @@ if ('1' == seopress_google_analytics_disable_option() && ((empty($_COOKIE['seopr
                 $styles .= 'background:#F1F1F1;';
             }
 
-            $styles .= '}@media (max-width: 782px) {.seopress-user-consent {display: block;}}.seopress-user-consent p:first-child {margin-right:20px}.seopress-user-consent p {margin: 0;font-size: 0.8em;align-self: center;';
+            $styles .= '}@media (max-width: 782px) {.seopress-user-consent {display: block;}}.seopress-user-consent.seopress-user-message p:first-child {margin-right:20px}.seopress-user-consent p {margin: 0;font-size: 0.8em;align-self: center;';
 
             //Text color
             if ('' != seopress_google_analytics_cb_txt_col_option()) {
@@ -413,6 +456,18 @@ if ('1' == seopress_google_analytics_disable_option() && ((empty($_COOKIE['seopr
 					z-index: 100;}';
             }
 
+            $styles .= '.seopress-edit-choice{
+                background: none;
+                justify-content: start;
+                z-index: 7500;
+                border: none;
+                width: inherit;
+                transform: none;
+                left: inherit;
+                bottom: 0;
+                top: inherit;
+            }';
+
             $styles .= '</style>';
 
             $styles = apply_filters('seopress_rgpd_full_message_styles', $styles);
@@ -432,24 +487,26 @@ if ('1' == seopress_google_analytics_disable_option() && ((empty($_COOKIE['seopr
                         if (array_key_exists($seopress_user_role, seopress_google_analytics_roles_option())) {
                             //do nothing
                         } else {
-                            add_action('wp_footer', 'seopress_cookies_user_consent_html');
+                            add_action('wp_head', 'seopress_cookies_user_consent_html');
+                            add_action('wp_head', 'seopress_cookies_edit_choice_html');
                             add_action('wp_head', 'seopress_cookies_user_consent_styles');
                         }
                     } else {
-                        add_action('wp_footer', 'seopress_cookies_user_consent_html');
+                        add_action('wp_head', 'seopress_cookies_user_consent_html');
+                        add_action('wp_head', 'seopress_cookies_edit_choice_html');
                         add_action('wp_head', 'seopress_cookies_user_consent_styles');
                     }
                 } else {
-                    add_action('wp_footer', 'seopress_cookies_user_consent_html');
+                    add_action('wp_head', 'seopress_cookies_user_consent_html');
+                    add_action('wp_head', 'seopress_cookies_edit_choice_html');
                     add_action('wp_head', 'seopress_cookies_user_consent_styles');
                 }
             } else {
-                add_action('wp_footer', 'seopress_cookies_user_consent_html');
+                add_action('wp_head', 'seopress_cookies_user_consent_html');
+                add_action('wp_head', 'seopress_cookies_edit_choice_html');
                 add_action('wp_head', 'seopress_cookies_user_consent_styles');
             }
         }
-    }
-}
 
 //Optimize
 function seopress_google_analytics_optimize_option() {

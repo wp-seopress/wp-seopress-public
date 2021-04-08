@@ -12,8 +12,13 @@ var textLetterCounterView = elementor.modules.controls.BaseData.extend({
     currentEl: null,
 
     onReady: function () {
-        elementor.panel.storage.size.width = "495px";
-        elementor.panel.setSize();
+        if (
+            seopressFiltersElementor.resize_panel &&
+            seopressFiltersElementor.resize_panel === "1"
+        ) {
+            elementor.panel.storage.size.width = "495px";
+            elementor.panel.setSize();
+        }
 
         this.getCurrentElement.value = this.model.get("default");
         this.countLength(true);

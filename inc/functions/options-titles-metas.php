@@ -1316,6 +1316,8 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
         //Default meta robots
         $seopress_titles_robots = '<meta name="robots" content="';
 
+        $seopress_comma_array = apply_filters('seopress_titles_robots_attrs', $seopress_comma_array);
+
         $seopress_comma_count = count($seopress_comma_array);
         for ($i = 0; $i < $seopress_comma_count; ++$i) {
             $seopress_titles_robots .= $seopress_comma_array[$i];
@@ -1335,6 +1337,8 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
             //Googlebot
             $seopress_titles_robots .= '<meta name="googlebot" content="';
 
+            $seopress_comma_array = apply_filters('seopress_titles_robots_attrs', $seopress_comma_array);
+
             $seopress_comma_count = count($seopress_comma_array);
             for ($i = 0; $i < $seopress_comma_count; ++$i) {
                 $seopress_titles_robots .= $seopress_comma_array[$i];
@@ -1348,6 +1352,8 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
 
             //Bingbot
             $seopress_titles_robots .= '<meta name="bingbot" content="';
+
+            $seopress_comma_array = apply_filters('seopress_titles_robots_attrs', $seopress_comma_array);
 
             $seopress_comma_count = count($seopress_comma_array);
             for ($i = 0; $i < $seopress_comma_count; ++$i) {

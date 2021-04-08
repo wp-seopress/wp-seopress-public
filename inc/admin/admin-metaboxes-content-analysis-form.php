@@ -1,7 +1,11 @@
 <?php
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
-echo '<div class="wrap-seopress-analysis">
+
+
+$data_attr = seopress_metaboxes_init();
+
+echo '<div class="wrap-seopress-analysis" data-home-id="' . $data_attr['isHomeId'] . '" data-term-id="' . $data_attr['termId'] . '" data_id="' . $data_attr['current_id'] . '" data_origin="' . $data_attr['origin'] . '" data_tax="' . $data_attr['data_tax'] . '">
 		<p>
 			' . __('Enter a few keywords for analysis to help you write optimized content.', 'wp-seopress') . '
 		</p>

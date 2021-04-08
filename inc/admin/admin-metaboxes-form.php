@@ -4,52 +4,32 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 global $typenow;
 global $pagenow;
 
-$data_tax = '';
-$termId   = '';
-
-if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
-    $current_id = get_the_id();
-    $origin     = 'post';
-    $title      = get_the_title($current_id);
-
-    function seopress_titles_single_cpt_date_option() {
-        global $post;
-        $seopress_get_current_cpt = get_post_type($post);
-
-        $seopress_titles_single_cpt_date_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_single_cpt_date_option)) {
-            foreach ($seopress_titles_single_cpt_date_option as $key => $seopress_titles_single_cpt_date_value) {
-                $options[$key] = $seopress_titles_single_cpt_date_value;
-            }
-            if (isset($seopress_titles_single_cpt_date_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['date'])) {
-                return $seopress_titles_single_cpt_date_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['date'];
-            }
-        }
-    }
-
-    function seopress_display_date_snippet() {
-        if (seopress_titles_single_cpt_date_option()) {
-            return '<div class="snippet-date">' . get_the_modified_date('M j, Y') . ' - </div>';
-        }
-    }
-} elseif ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) {
-    global $tag;
-    $current_id = $tag->term_id;
-    $termId     = $tag->term_id;
-    $origin     = 'term';
-    $data_tax   = $tag->taxonomy;
-    $title      = $tag->name;
-}
-
-$isHomeId = get_option('page_on_front');
-if ('0' === $isHomeId) {
-    $isHomeId = '';
-}
-
 function seopress_redirections_value($seopress_redirections_value) {
     if ('' != $seopress_redirections_value) {
         return $seopress_redirections_value;
     }
+}
+
+$data_attr             = [];
+$data_attr['data_tax'] = '';
+$data_attr['termId']   = '';
+
+if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
+    $data_attr['current_id'] = get_the_id();
+    $data_attr['origin']     = 'post';
+    $data_attr['title']      = get_the_title($data_attr['current_id']);
+} elseif ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) {
+    global $tag;
+    $data_attr['current_id'] = $tag->term_id;
+    $data_attr['termId']     = $tag->term_id;
+    $data_attr['origin']     = 'term';
+    $data_attr['data_tax']   = $tag->taxonomy;
+    $data_attr['title']      = $tag->name;
+}
+
+$data_attr['isHomeId'] = get_option('page_on_front');
+if ('0' === $data_attr['isHomeId']) {
+    $data_attr['isHomeId'] = '';
 }
 
 if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) {
@@ -61,7 +41,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) {
 					<div class="inside">';
 }
 
-echo '<div id="seopress-tabs" data-home-id="' . $isHomeId . '" data-term-id="' . $termId . '" data_id="' . $current_id . '" data_origin="' . $origin . '" data_tax="' . $data_tax . '">';
+echo '<div id="seopress-tabs" data-home-id="' . $data_attr['isHomeId'] . '" data-term-id="' . $data_attr['termId'] . '" data_id="' . $data_attr['current_id'] . '" data_origin="' . $data_attr['origin'] . '" data_tax="' . $data_attr['data_tax'] . '">';
 
         if ('seopress_404' != $typenow) {
             $seo_tabs['title-tab']    = '<li><a href="#tabs-1"><span class="dashicons dashicons-editor-table"></span>' . __('Titles settings', 'wp-seopress') . '</a></li>';
@@ -193,8 +173,10 @@ echo '<div id="seopress-tabs" data-home-id="' . $isHomeId . '" data-term-id="' .
                     $gp_title       = '<div class="snippet-title-default" style="display:none">' . get_the_title() . ' - ' . get_bloginfo('name') . '</div>';
                     $gp_permalink   = '<div class="snippet-permalink">' . htmlspecialchars(urldecode(get_permalink())) . '</div>';
                 } elseif ($tag) {
-                    $gp_title       = '<div class="snippet-title-default" style="display:none">' . $tag->name . ' - ' . get_bloginfo('name') . '</div>';
-                    $gp_permalink   = '<div class="snippet-permalink">' . htmlspecialchars(urldecode(get_term_link($tag))) . '</div>';
+                    if (false === is_wp_error(get_term_link($tag))) {
+                        $gp_title       = '<div class="snippet-title-default" style="display:none">' . $tag->name . ' - ' . get_bloginfo('name') . '</div>';
+                        $gp_permalink   = '<div class="snippet-permalink">' . htmlspecialchars(urldecode(get_term_link($tag))) . '</div>';
+                    }
                 }
 
                 $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="16" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC" width="16" alt="favicon"></div>';
@@ -309,7 +291,7 @@ echo '<div id="seopress-tabs" data-home-id="' . $isHomeId . '" data-term-id="' .
 							<span class="description">' . __('Enter a custom value, useful if your title is too long', 'wp-seopress') . '</span>
 						</p>
 						<p>
-							<input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="' . esc_html(sprintf(__('Current breadcrumbs: %s', 'wp-seopress'), $title)) . '" aria-label="' . __('Custom breadcrumbs', 'wp-seopress') . '" value="' . $seopress_robots_breadcrumbs . '" />
+							<input id="seopress_robots_breadcrumbs_meta" type="text" name="seopress_robots_breadcrumbs" placeholder="' . esc_html(sprintf(__('Current breadcrumbs: %s', 'wp-seopress'), $data_attr['title'])) . '" aria-label="' . __('Custom breadcrumbs', 'wp-seopress') . '" value="' . $seopress_robots_breadcrumbs . '" />
 						</p>';
                 }
                 echo '</div>';

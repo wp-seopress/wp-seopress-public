@@ -306,6 +306,9 @@ function seopress_export_redirections_settings() {
             ],
         ],
     ];
+
+    $args = apply_filters('seopress_export_redirections_query', $args);
+
     $seopress_redirects_query = new WP_Query($args);
 
     if ($seopress_redirects_query->have_posts()) {

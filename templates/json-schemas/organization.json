@@ -1,0 +1,15 @@
+{
+    "@context": "https://schema.org",
+    "@type": "%%knowledge_type%%",
+    "name": "%%social_knowledge_name%%",
+    "url": "%%siteurl%%",
+    "logo": "%%social_knowledge_image%%",
+    "sameAs": [
+        "%%social_account_facebook%%",
+        "%%social_account_twitter%%",
+        "%%social_account_pinterest%%",
+        "%%social_account_instagram%%",
+        "%%social_account_youtube%%",
+        "%%social_account_linkedin%%"
+    ]
+}

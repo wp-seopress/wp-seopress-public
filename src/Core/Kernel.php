@@ -120,8 +120,14 @@ abstract class Kernel {
             $files      = array_diff(scandir($path), ['..', '.']);
             foreach ($files as $filename) {
                 $pathCheck = $path . '/' . $filename;
+
                 if (is_dir($pathCheck)) {
                     self::buildClasses($pathCheck, $type, $namespace . $filename . '\\');
+                    continue;
+                }
+
+                $pathinfo = pathinfo($filename);
+                if (isset($pathinfo['extension']) && 'php' !== $pathinfo['extension']) {
                     continue;
                 }
 

@@ -93,6 +93,18 @@ class SEOPRESS_Admin_Setup_Wizard {
                 'seopress_nonce'						        => wp_create_nonce('seopress_wpseo_migrate_nonce'),
                 'seopress_wpseo_migration'				=> admin_url('admin-ajax.php'),
             ],
+            'seopress_platinum_seo_migrate'			=> [
+                'seopress_nonce'						               => wp_create_nonce('seopress_platinum_seo_migrate_nonce'),
+                'seopress_platinum_seo_migration'				=> admin_url('admin-ajax.php'),
+            ],
+            'seopress_smart_crawl_migrate'			=> [
+                'seopress_nonce'						              => wp_create_nonce('seopress_smart_crawl_migrate_nonce'),
+                'seopress_smart_crawl_migration'				=> admin_url('admin-ajax.php'),
+            ],
+            'seopress_seopressor_migrate'			=> [
+                'seopress_nonce'						             => wp_create_nonce('seopress_seopressor_migrate_nonce'),
+                'seopress_seopressor_migration'				=> admin_url('admin-ajax.php'),
+            ],
             'seopress_metadata_csv'				=> [
                 'seopress_nonce'					        => wp_create_nonce('seopress_export_csv_metadata_nonce'),
                 'seopress_metadata_export'			=> admin_url('admin-ajax.php'),
@@ -285,6 +297,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 				<option value="wp-meta-seo-migration-tool"><?php _e('WP Meta SEO', 'wp-seopress'); ?></option>
 				<option value="premium-seo-pack-migration-tool"><?php _e('Premium SEO Pack', 'wp-seopress'); ?></option>
 				<option value="wpseo-migration-tool"><?php _e('wpSEO', 'wp-seopress'); ?></option>
+				<option value="platinum-seo-migration-tool"><?php _e('Platinum SEO Pack', 'wp-seopress'); ?></option>
+				<option value="smartcrawl-migration-tool"><?php _e('SmartCrawl', 'wp-seopress'); ?></option>
+				<option value="seopressor-migration-tool"><?php _e('SEOPressor', 'wp-seopress'); ?></option>
 			</select>
 
 			<br><br>
@@ -314,14 +329,16 @@ class SEOPRESS_Admin_Setup_Wizard {
 
                 <!-- All In One import tool -->
                 <div id="aio-migration-tool" class="postbox section-tool seopress-wizard-services">
-                    <h3><span><?php _e('Import posts and terms metadata from All In One SEO', 'wp-seopress'); ?></span></h3>
+                    <h3><span><?php _e('Import posts metadata from All In One SEO', 'wp-seopress'); ?></span></h3>
                     <p><?php _e('By clicking Migrate, we\'ll import:', 'wp-seopress'); ?></p>
                     <ul>
                         <li><?php _e('Title tags', 'wp-seopress'); ?></li>
                         <li><?php _e('Meta description', 'wp-seopress'); ?></li>
                         <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)', 'wp-seopress'); ?></li>
-                        <li><?php _e('Twitter image thumbnail', 'wp-seopress'); ?></li>
-                        <li><?php _e('Meta Robots (noindex, nofollow)', 'wp-seopress'); ?></li>
+                        <li><?php _e('Twitter tags (title, description and image thumbnail)', 'wp-seopress'); ?></li>
+                        <li><?php _e('Meta Robots (noindex, nofollow...)', 'wp-seopress'); ?></li>
+                        <li><?php _e('Canonical URL', 'wp-seopress'); ?></li>
+                        <li><?php _e('Focus keywords', 'wp-seopress'); ?></li>
                     </ul>
                     <p style="color:red"><span class="dashicons dashicons-warning"></span> <?php _e('<strong>WARNING:</strong> Migration will update/delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data.', 'wp-seopress'); ?></p>
                     <button id="seopress-aio-migrate" type="button" class="button"><?php _e('Migrate now', 'wp-seopress'); ?></button>
@@ -454,6 +471,72 @@ class SEOPRESS_Admin_Setup_Wizard {
 						<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e('<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any wpSEO data.', 'wp-seopress'); ?></p>
 						<button id="seopress-wpseo-migrate" type="button" class="button"><?php _e('Migrate now', 'wp-seopress'); ?></button>
 						<span class="spinner"></span>
+						<div class="log"></div>
+					</div><!-- .inside -->
+				</div><!-- .postbox -->
+                <!-- Platinum SEO import tool -->
+				<div id="platinum-seo-migration-tool" class="postbox section-tool seopress-wizard-services">
+					<div class="inside">
+						<h3><span><?php _e('Import posts and terms metadata from Platinum SEO Pack', 'wp-seopress'); ?></span></h3>
+						<p><?php _e('By clicking Migrate, we\'ll import:', 'wp-seopress'); ?></p>
+						<ul>
+							<li><?php _e('Title tags', 'wp-seopress'); ?></li>
+							<li><?php _e('Meta description', 'wp-seopress'); ?></li>
+							<li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)', 'wp-seopress'); ?></li>
+							<li><?php _e('Twitter tags (title, description and image thumbnail)', 'wp-seopress'); ?></li>
+							<li><?php _e('Meta Robots (noindex, nofollow, noarchive, nosnippet, noimageindex)', 'wp-seopress'); ?></li>
+							<li><?php _e('Canonical URL', 'wp-seopress'); ?></li>
+							<li><?php _e('Redirect URL', 'wp-seopress'); ?></li>
+							<li><?php _e('Primary category', 'wp-seopress'); ?></li>
+							<li><?php _e('Keywords', 'wp-seopress'); ?></li>
+						</ul>
+						<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e('<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any Platinum SEO data.', 'wp-seopress'); ?></p>
+						<button id="seopress-platinum-seo-migrate" type="button" class="button"><?php _e('Migrate now', 'wp-seopress'); ?></button>
+                        <span class="spinner"></span>
+						<div class="log"></div>
+					</div><!-- .inside -->
+				</div><!-- .postbox -->
+
+                <!-- SEOPressor import tool -->
+                <div id="seopressor-migration-tool" class="postbox section-tool seopress-wizard-services">
+                    <div class="inside">
+                        <h3><span><?php _e('Import posts metadata from SEOPressor', 'wp-seopress'); ?></span></h3>
+                        <p><?php _e('By clicking Migrate, we\'ll import:', 'wp-seopress'); ?></p>
+                        <ul>
+                            <li><?php _e('Title tags', 'wp-seopress'); ?></li>
+                            <li><?php _e('Meta description', 'wp-seopress'); ?></li>
+                            <li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)', 'wp-seopress'); ?></li>
+                            <li><?php _e('Twitter tags (title, description and image thumbnail)', 'wp-seopress'); ?></li>
+							<li><?php _e('Meta Robots (noindex, nofollow, noarchive, nosnippet, noodp, noimageindex)', 'wp-seopress'); ?></li>
+							<li><?php _e('Canonical URL', 'wp-seopress'); ?></li>
+							<li><?php _e('Redirect URL', 'wp-seopress'); ?></li>
+							<li><?php _e('Keywords', 'wp-seopress'); ?></li>
+						</ul>
+						<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e('<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEOPressor data.', 'wp-seopress'); ?></p>
+						<button id="seopress-seopressor-migrate" type="button" class="button"><?php _e('Migrate now', 'wp-seopress'); ?></button>
+						<span class="spinner"></span>
+						<div class="log"></div>
+					</div><!-- .inside -->
+				</div><!-- .postbox -->
+
+				<!-- Smart Crawl import tool -->
+				<div id="smartcrawl-migration-tool" class="postbox section-tool seopress-wizard-services">
+					<div class="inside">
+						<h3><span><?php _e('Import posts and terms metadata from Smart Crawl', 'wp-seopress'); ?></span></h3>
+                        <p><?php _e('By clicking Migrate, we\'ll import:', 'wp-seopress'); ?></p>
+						<ul>
+							<li><?php _e('Title tags', 'wp-seopress'); ?></li>
+							<li><?php _e('Meta description', 'wp-seopress'); ?></li>
+							<li><?php _e('Facebook Open Graph tags (title, description and image thumbnail)', 'wp-seopress'); ?></li>
+							<li><?php _e('Twitter tags (title, description and image thumbnail)', 'wp-seopress'); ?></li>
+                            <li><?php _e('Meta Robots (noindex, nofollow, noarchive, nosnippet)', 'wp-seopress'); ?></li>
+							<li><?php _e('Canonical URL', 'wp-seopress'); ?></li>
+							<li><?php _e('Redirect URL', 'wp-seopress'); ?></li>
+							<li><?php _e('Focus keywords', 'wp-seopress'); ?></li>
+						</ul>
+						<p style="color:red"><span class="dashicons dashicons-info"></span> <?php _e('<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any SmartCrawl data.', 'wp-seopress'); ?></p>
+						<button id="seopress-smart-crawl-migrate" type="button" class="button"><?php _e('Migrate now', 'wp-seopress'); ?></button>
+                        <span class="spinner"></span>
 						<div class="log"></div>
 					</div><!-- .inside -->
 				</div><!-- .postbox -->

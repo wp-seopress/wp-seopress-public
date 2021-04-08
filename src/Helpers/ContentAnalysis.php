@@ -79,6 +79,11 @@ abstract class ContentAnalysis {
                 'impact' => 'good',
                 'desc'   => null,
             ],
+            'inbound_links'=> [
+                'title'  => __('Inbound Links', 'wp-seopress'),
+                'impact' => 'good',
+                'desc'   => null,
+            ],
         ];
 
         return apply_filters('seopress_get_content_analysis_data', $data);

@@ -13,7 +13,11 @@ if (is_plugin_active('woocommerce/woocommerce.php')) {
                 $order = wc_get_order($order_id);
 
                 //Check order status
-                if (method_exists($order, 'get_status') && ('processing' === $order->get_status()) || 'completed' === $order->get_status()) {
+
+                $status = ['completed', 'processing'];
+                $status = apply_filters('seopress_gtag_ec_status', $status);
+
+                if (method_exists($order, 'get_status') && (in_array($order->get_status(), $status))) {
                     $items_purchased = [];
                     foreach ($order->get_items() as $item) {
                         // Get Product object

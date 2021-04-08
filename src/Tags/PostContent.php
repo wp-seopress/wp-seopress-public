@@ -26,7 +26,11 @@ class PostContent implements GetTagValue {
             return $value;
         }
 
-        if ( ! $context['is_404'] && ! empty($context['post'])) {
+        if ( ! isset($context['post'])) {
+            return $value;
+        }
+
+        if (isset($context['is_404']) && ! $context['is_404'] && ! empty($context['post'])) {
             if (has_excerpt($context['post']->ID)) {
                 $value = get_post_field('post_content', $context['post']->ID);
             }

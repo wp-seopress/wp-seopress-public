@@ -1,48 +1,52 @@
 <?php
+
 namespace WPSeoPressElementorAddon\Controls;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	die();
+if ( ! defined('ABSPATH')) {
+    exit();
 }
 
 class Social_Preview_Control extends \Elementor\Base_Control {
-	public function get_type() {
-		return 'seopress-social-preview';
-	}
+    public function get_type() {
+        return 'seopress-social-preview';
+    }
 
-	public function enqueue() {
-		wp_enqueue_style( 
-			'sp-el-social-preview-style',
-			SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/social-preview.css'
-		);
+    public function enqueue() {
+        wp_enqueue_style(
+            'sp-el-social-preview-style',
+            SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/social-preview.css'
+        );
 
-		wp_enqueue_script(
-			'sp-el-social-preview-script',
-			SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/js/social-preview.js',
-			array('seopress-elementor-base-script'),
-			11,
-			true
-		);
-	}
+        wp_enqueue_script(
+            'sp-el-social-preview-script',
+            SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/js/social-preview.js',
+            ['seopress-elementor-base-script'],
+            11,
+            true
+        );
 
-	protected function get_default_settings() {
-		return [
-			'image' => null,
-			'title' => '',
-			'description' => ''
-		];
-	}
+        wp_localize_script('sp-el-social-preview-script', 'seopressFiltersElementor', [
+            'resize_panel' => apply_filters('seopress_resize_panel_elementor', true),
+        ]);
+    }
 
-	public function content_template() {
-		$site_url = explode( '//', get_bloginfo('url') )[1];
-		?>
+    protected function get_default_settings() {
+        return [
+            'image'       => null,
+            'title'       => '',
+            'description' => '',
+        ];
+    }
+
+    public function content_template() {
+        $site_url = explode('//', get_bloginfo('url'))[1]; ?>
 		<# if ( data.network === 'facebook' ) { #>
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-field facebook-snippet-box">
 				<div class="snippet-fb-img-alert alert1" style="display:none"><p class="notice notice-error"><?php _e('File type not supported by Facebook. Please choose another image.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-fb-img-alert alert2" style="display:none"><p class="notice notice-error"><?php _e('Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-fb-img-alert alert3" style="display:none"><p class="notice notice-error"><?php _e('File error. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-fb-img-alert alert4" style="display:none"><p class="notice notice-info"><?php _e('Your image ratio is: ', 'wp-seopress'); ?><span></span><?php _e('. The closer to 1.91 the better.','wp-seopress'); ?></p></div>
+				<div class="snippet-fb-img-alert alert4" style="display:none"><p class="notice notice-info"><?php _e('Your image ratio is: ', 'wp-seopress'); ?><span></span><?php _e('. The closer to 1.91 the better.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-fb-img-alert alert5" style="display:none"><p class="notice notice-error"><?php _e('File URL is not valid.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-fb-img">
 					<img src="{{{data.image}}}">
@@ -51,7 +55,7 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 					<div class="snippet-meta">
 						<div class="snippet-fb-url"><?php echo $site_url; ?></div>
 						<div class="fb-sep">|</div>
-						<div class="fb-by"><?php _e( 'By', 'wp-seopress' ); ?>&nbsp;</div>
+						<div class="fb-by"><?php _e('By', 'wp-seopress'); ?>&nbsp;</div>
 						<div class="snippet-fb-site-name"><?php echo get_bloginfo('name'); ?></div>
 					</div>
 					<div class="title-desc">
@@ -66,7 +70,7 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 				<div class="snippet-twitter-img-alert alert1" style="display:none"><p class="notice notice-error"><?php _e('File type not supported by Twitter. Please choose another image.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-twitter-img-alert alert2" style="display:none"><p class="notice notice-error"><?php _e('Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-twitter-img-alert alert3" style="display:none"><p class="notice notice-error"><?php _e('File error. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-twitter-img-alert alert4" style="display:none"><p class="notice notice-info"><?php _e('Your image ratio is: ', 'wp-seopress'); ?><span></span><?php _e('. The closer to 1 the better (with large card, 2 is better).','wp-seopress'); ?></p></div>
+				<div class="snippet-twitter-img-alert alert4" style="display:none"><p class="notice notice-info"><?php _e('Your image ratio is: ', 'wp-seopress'); ?><span></span><?php _e('. The closer to 1 the better (with large card, 2 is better).', 'wp-seopress'); ?></p></div>
 				<div class="snippet-twitter-img-alert alert5" style="display:none"><p class="notice notice-error"><?php _e('File URL is not valid.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-twitter-img-default">
 					<img src="{{{data.image}}}">
@@ -88,7 +92,7 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 					<div class="wrap-toggle-preview">
 						<p>
 							<span class="dashicons dashicons-smartphone"></span>
-							<?php _e( 'Mobile Preview', 'wp-seopress' ); ?>
+							<?php _e('Mobile Preview', 'wp-seopress'); ?>
 							<input type="checkbox" name="toggle-preview" id="toggle-preview" class="toggle" data-toggle="1">
 							<label for="toggle-preview"></label>
 						</p>
@@ -108,5 +112,5 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 			</div>
 		<# } #>
 		<?php
-	}
+    }
 }

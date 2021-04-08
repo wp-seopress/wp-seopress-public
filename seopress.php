@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 4.4.0.7
+Version: 4.5.0
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -55,11 +55,12 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '4.4.0.7');
+define('SEOPRESS_VERSION', '4.5.0');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_TEMPLATE_DIR', SEOPRESS_PLUGIN_DIR_PATH . 'templates');
 define('SEOPRESS_TEMPLATE_SITEMAP_DIR', SEOPRESS_TEMPLATE_DIR . '/sitemap');
+define('SEOPRESS_TEMPLATE_JSON_SCHEMAS', SEOPRESS_TEMPLATE_DIR . '/json-schemas');
 
 use SEOPress\Core\Kernel;
 
@@ -303,6 +304,18 @@ function seopress_add_admin_options_scripts($hook) {
                 'seopress_nonce'						        => wp_create_nonce('seopress_wpseo_migrate_nonce'),
                 'seopress_wpseo_migration'				=> admin_url('admin-ajax.php'),
             ],
+            'seopress_platinum_seo_migrate'			=> [
+                'seopress_nonce'						               => wp_create_nonce('seopress_platinum_seo_migrate_nonce'),
+                'seopress_platinum_seo_migration'				=> admin_url('admin-ajax.php'),
+            ],
+            'seopress_smart_crawl_migrate'			=> [
+                'seopress_nonce'						              => wp_create_nonce('seopress_smart_crawl_migrate_nonce'),
+                'seopress_smart_crawl_migration'				=> admin_url('admin-ajax.php'),
+            ],
+            'seopress_seopressor_migrate'			=> [
+                'seopress_nonce'						             => wp_create_nonce('seopress_seopressor_migrate_nonce'),
+                'seopress_seopressor_migration'				=> admin_url('admin-ajax.php'),
+            ],
             'seopress_metadata_csv'				=> [
                 'seopress_nonce'						        => wp_create_nonce('seopress_export_csv_metadata_nonce'),
                 'seopress_metadata_export'				=> admin_url('admin-ajax.php'),
@@ -423,12 +436,12 @@ function seopress_admin_body_class($classes) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //WP compatibility
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-/**
+/*
  * Remove WP default meta robots (added in WP 5.7)
  *
  * @since 4.4.0.7
  */
-remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
+remove_filter('wp_robots', 'wp_robots_max_image_preview_large');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //3rd plugins compatibility
@@ -666,6 +679,16 @@ function seopress_get_custom_fields() {
             HAVING meta_key NOT LIKE '\_%%'
             ORDER BY meta_key
             LIMIT %d", $limit));
+
+        if (is_plugin_active('types/wpcf.php')) {
+            $wpcf_fields = get_option('wpcf-fields');
+
+            if ( ! empty($wpcf_fields)) {
+                foreach ($wpcf_fields as $key => $value) {
+                    $cf_keys[] = $value['meta_key'];
+                }
+            }
+        }
 
         $cf_keys = apply_filters('seopress_get_custom_fields', $cf_keys);
 
@@ -1249,26 +1272,26 @@ function seopress_get_oxygen_content() {
     if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
         $seopress_get_the_content = ct_template_output();
 
-        if ('' == $seopress_get_the_content) {
+        if ($seopress_get_the_content) {
             //Get post content
             $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', get_the_ID()));
         }
 
-        if ('' != $seopress_get_the_content) {
+        if ($seopress_get_the_content) {
             //Get Target Keywords
             if (get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)) {
                 $seopress_analysis_target_kw = array_filter(explode(',', strtolower(esc_attr(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)))));
 
                 //Keywords density
                 foreach ($seopress_analysis_target_kw as $kw) {
-                    if (preg_match_all('#\b(' . $kw . ')\b#iu', strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $m)) {
+                    if (preg_match_all('#\b(' . $kw . ')\b#iu', normalize_whitespace(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content))), $m)) {
                         $data['kws_density']['matches'][$kw][] = $m[0];
                     }
                 }
             }
 
             //Words Counter
-            $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
+            $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", normalize_whitespace(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content))), $matches);
 
             if ( ! empty($matches[0])) {
                 $words_counter_unique = count(array_unique($matches[0]));
@@ -1278,7 +1301,7 @@ function seopress_get_oxygen_content() {
             $data['words_counter_unique'] = $words_counter_unique;
 
             //Update analysis
-            update_post_meta(get_the_ID(), '_seopress_analysis_data', $data);
+            update_post_meta(get_the_ID(), '_seopress_analysis_data_oxygen', $data);
         }
     }
 }

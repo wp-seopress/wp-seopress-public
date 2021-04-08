@@ -46,6 +46,7 @@ function seopress_get_dyn_variables() {
         '%%currenttime%%'                   => __('Current time', 'wp-seopress'),
         '%%author_bio%%'                    => __('Author biography', 'wp-seopress'),
         '%%currentmonth_num%%'              => __('Current month in digital format', 'wp-seopress'),
+        '%%target_keyword%%'                => __('Target keyword', 'wp-seopress'),
     ];
 }
 
