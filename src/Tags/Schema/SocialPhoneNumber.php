@@ -8,7 +8,8 @@ if ( ! defined('ABSPATH')) {
 
 use SEOPress\Models\GetTagValue;
 
-class SocialPhoneNumber implements GetTagValue {
+class SocialPhoneNumber implements GetTagValue
+{
     const NAME = 'social_phone_number';
 
     /**
@@ -21,7 +22,7 @@ class SocialPhoneNumber implements GetTagValue {
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
 
-        $value   = seopress_social_knowledge_phone_number_option();
+        $value   = seopress_get_service('SocialOption')->getSocialKnowledgePhone();
 
         return apply_filters('seopress_get_tag_schema_social_phone_number', $value, $context);
     }

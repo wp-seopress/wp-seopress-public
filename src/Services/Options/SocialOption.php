@@ -6,7 +6,8 @@ defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 
 use SEOPress\Constants\Options;
 
-class SocialOption {
+class SocialOption
+{
     /**
      * @since 4.5.0
      *
@@ -116,5 +117,32 @@ class SocialOption {
      */
     public function getSocialKnowledgeImage() {
         return $this->searchOptionByKey('seopress_social_knowledge_img');
+    }
+
+    /**
+     * @since 4.5.0
+     *
+     * @return string
+     */
+    public function getSocialKnowledgePhone() {
+        return $this->searchOptionByKey('seopress_social_knowledge_phone');
+    }
+
+    /**
+     * @since 4.5.0
+     *
+     * @return string
+     */
+    public function getSocialKnowledgeContactType() {
+        return $this->searchOptionByKey('seopress_social_knowledge_contact_type');
+    }
+
+    /**
+     * @since 4.5.0
+     *
+     * @return string
+     */
+    public function getSocialKnowledgeContactOption() {
+        return $this->searchOptionByKey('seopress_social_knowledge_contact_option');
     }
 }

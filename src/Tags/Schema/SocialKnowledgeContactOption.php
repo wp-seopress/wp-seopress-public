@@ -8,7 +8,8 @@ if ( ! defined('ABSPATH')) {
 
 use SEOPress\Models\GetTagValue;
 
-class SocialKnowledgeContactOption implements GetTagValue {
+class SocialKnowledgeContactOption implements GetTagValue
+{
     const NAME = 'social_knowledge_contact_option';
 
     /**
@@ -21,7 +22,7 @@ class SocialKnowledgeContactOption implements GetTagValue {
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
 
-        $value = seopress_social_knowledge_contact_option_option();
+        $value   = seopress_get_service('SocialOption')->getSocialKnowledgeContactOption();
         if ('None' === $value) {
             $value = '';
         }

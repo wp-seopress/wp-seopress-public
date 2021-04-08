@@ -8,7 +8,8 @@ if ( ! defined('ABSPATH')) {
 
 use SEOPress\Models\GetTagValue;
 
-class SocialKnowledgeContactType implements GetTagValue {
+class SocialKnowledgeContactType implements GetTagValue
+{
     const NAME = 'social_knowledge_contact_type';
 
     /**
@@ -21,7 +22,7 @@ class SocialKnowledgeContactType implements GetTagValue {
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
 
-        $value   = seopress_social_knowledge_contact_type_option();
+        $value   = seopress_get_service('SocialOption')->getSocialKnowledgeContactType();
 
         return apply_filters('seopress_get_tag_schema_social_knowledge_contact_type', $value, $context);
     }
