@@ -696,8 +696,8 @@ if (is_user_logged_in()) {
         global $wp_roles;
 
         //Get current user role
-        if (isset(wp_get_current_user()->roles[0])) {
-            $seopress_user_role = wp_get_current_user()->roles[0];
+        if (isset(wp_get_current_user()->roles) && is_array(wp_get_current_user()->roles) && !empty(wp_get_current_user()->roles)) {
+            $seopress_user_role = current(wp_get_current_user()->roles);
 
             //If current user role matchs values from Security settings then apply -- SEO Metaboxe
             if (function_exists('seopress_advanced_security_metaboxe_role_hook_option') && '' != seopress_advanced_security_metaboxe_role_hook_option()) {
