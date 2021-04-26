@@ -130,9 +130,11 @@ function seopress_block_faq_render_frontend($attributes)
                 ];
     $entities[] = $entity;
 
-    $image = wp_get_attachment_image_src($faq['image'], $attributes['imageSize']);
+    if ( isset( $faq['image'] ) && ! empty( $faq['image'] ) ) {
+    	$image = wp_get_attachment_image_src( $faq['image'], $attributes['imageSize'] );
+	}
     $image_url = '';
-    if ($image) {
+    if ( isset( $image ) && ! empty( $image ) ) {
         $image_url = $image[0];
     } ?>
 				<?php echo $listItemStyle; ?>
