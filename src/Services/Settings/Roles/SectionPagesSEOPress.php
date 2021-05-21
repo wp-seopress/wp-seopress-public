@@ -31,8 +31,8 @@ class SectionPagesSEOPress {
             $nameKey     = \sprintf('%s_%s', 'seopress_advanced_security_metaboxe', $keySettings);
             $dataOptions = isset($options[$nameKey]) ? $options[$nameKey] : [];
 
-            if ($uniqueKey ==='titles-metas_editor') { ?>
-                <p class="description"><?php _e('Check a user role to authorized it to edit a specific SEO page.','wp-seopress'); ?></p><br>
+            if ('titles-metas_editor' === $uniqueKey) { ?>
+                <p class="description"><?php _e('Check a user role to authorized it to edit a specific SEO page.', 'wp-seopress'); ?></p><br>
             <?php } ?>
 
             <div>
@@ -83,8 +83,13 @@ class SectionPagesSEOPress {
         $menus = $submenu['seopress-option'];
 
         foreach ($menus as $key => $item) {
-            $keyClean = sanitize_title($item[0]);
-            if (in_array($keyClean, ['dashboard', 'license', 'schemas', 'redirections', 'broken-links'])) {
+            $keyClean = $item[2];
+            if (in_array($item[2], [
+                'seopress-option', // dashboard
+                'seopress-license',
+                'edit.php?post_type=seopress_schemas',
+                'edit.php?post_type=seopress_404',
+                'edit.php?post_type=seopress_bot', ])) {
                 continue;
             }
 

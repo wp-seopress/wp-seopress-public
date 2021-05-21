@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.6.0
+Stable tag: 4.6.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -324,6 +324,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 4.6.0.2 =
+* FIX Custom capabilities
+* FIX WC undefined function in specific cases
+= 4.6.0.1 =
+* FIX Fatal error
 = 4.6 (29/04/2021) - https://www.seopress.org/blog/seopress-4-6/ =
 * NEW Custom capabilities 🎉 (SEO, Advanced, Security)
 * NEW Bricks compatibility with our content analysis feature

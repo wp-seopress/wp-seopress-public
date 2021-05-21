@@ -52,25 +52,21 @@ abstract class PagesAdmin {
      */
     public static function getCapabilityByPage($page) {
         switch ($page) {
-            case 'titles-metas':
+            case 'seopress-titles':
                 return self::TITLE_METAS;
-            case 'xml-html-sitemap':
+            case 'seopress-xml-sitemap':
                 return self::XML_HTML_SITEMAP;
-            case 'social-networks':
+            case 'seopress-social':
                 return self::SOCIAL_NETWORKS;
-            case 'analytics':
+            case 'seopress-google-analytics':
                 return self::ANALYTICS;
-            case 'tools':
+            case 'seopress-import-export':
                 return self::TOOLS;
-            case 'pro':
+            case 'seopress-pro-page':
                 return self::PRO;
-            case 'advanced':
+            case 'seopress-advanced':
                 return self::ADVANCED;
-            case 'schemas':
-                return self::SCHEMAS;
-            case 'license':
-                return self::LICENSE;
-            case 'bot':
+            case 'seopress-bot-batch':
                 return self::BOT;
             default:
                 return apply_filters('seopress_get_capability_by_page', null);
@@ -87,25 +83,21 @@ abstract class PagesAdmin {
     public static function getPageByCapability($capability) {
         switch ($capability) {
             case self::TITLE_METAS:
-                return 'titles-metas';
+                return 'seopress-titles';
             case self::XML_HTML_SITEMAP:
-                return 'xml-html-sitemap';
+                return 'seopress-xml-sitemap';
             case self::SOCIAL_NETWORKS:
-                return 'social-networks';
+                return 'seopress-social';
             case self::ANALYTICS:
-                return 'analytics';
+                return 'seopress-google-analytics';
             case self::TOOLS:
-                return 'tools';
+                return 'seopress-import-export';
             case self::PRO:
-                return 'pro';
+                return 'seopress-pro-page';
             case self::ADVANCED:
-                return 'advanced';
-            case self::SCHEMAS:
-                return 'schemas';
-            case self::LICENSE:
-                return 'license';
+                return 'seopress-advanced';
             case self::BOT:
-                return 'bot';
+                return 'seopress-bot-batch';
             default:
                 return apply_filters('seopress_get_page_by_capability', null);
         }
