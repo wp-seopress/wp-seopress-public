@@ -25,8 +25,12 @@ class GetContent {
             foreach (array_count_values($json_ld) as $key => $value) {
                 $html = null;
                 if ($value > 1) {
-                    $html                          = '<span class="impact high">' . __('duplicated schema - x', 'wp-seopress') . $value . '</span>';
-                    $analyzes['schemas']['impact'] = 'high';
+                    if ('Review' !== $key) {
+                        $html                          = '<span class="impact high">' . __('duplicated schema - x', 'wp-seopress') . $value . '</span>';
+                        $analyzes['schemas']['impact'] = 'high';
+                    } else {
+                        $html                          = ' <span class="impact">' . __('x', 'wp-seopress') . $value . '</span>';
+                    }
                 }
                 $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $key . $html . '</li>';
             }
@@ -170,7 +174,7 @@ class GetContent {
         $desc = '<h4>' . __('H1 (Heading 1)', 'wp-seopress') . '</h4>';
 
         if ( ! empty($data['h1']['matches'])) {
-            $count = $data['h1']['nomatches']['count'];
+            $count         = $data['h1']['nomatches']['count'];
             $target_kws_h1 = $data['h1']['matches'];
 
             $all_h1 = $data['h1']['values'];
@@ -193,7 +197,6 @@ class GetContent {
                 $desc .= '<p>' . __('You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility. Below, the list:', 'wp-seopress') . '</p>';
                 $analyzes['headings']['impact'] = 'high';
 
-
                 if ( ! empty($all_h1)) {
                     $desc .= '<ul>';
                     foreach ($all_h1 as $h1) {
@@ -202,7 +205,7 @@ class GetContent {
                     $desc .= '</ul>';
                 }
             }
-        } elseif ( isset($data['h1']['nomatches']['count']) && $data['h1']['nomatches']['count'] === 0 ) {
+        } elseif (isset($data['h1']['nomatches']['count']) && 0 === $data['h1']['nomatches']['count']) {
             $desc .= '<p><span class="dashicons dashicons-no-alt"></span><strong>' . __('No Heading 1 (H1) found in your content. This is required for both SEO and Acessibility!', 'wp-seopress') . '</strong></p>';
             $analyzes['headings']['impact'] = 'high';
         } else {

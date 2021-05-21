@@ -981,6 +981,19 @@ function seopress_titles_paged_noindex_option() {
     }
 }
 
+//noindex attachments page
+function seopress_titles_attachments_noindex_option() {
+    $seopress_titles_attachments_noindex_option = get_option('seopress_titles_option_name');
+    if ( ! empty($seopress_titles_attachments_noindex_option)) {
+        foreach ($seopress_titles_attachments_noindex_option as $key => $seopress_titles_attachments_noindex_value) {
+            $options[$key] = $seopress_titles_attachments_noindex_value;
+        }
+        if (isset($seopress_titles_attachments_noindex_option['seopress_titles_attachments_noindex'])) {
+            return $seopress_titles_attachments_noindex_option['seopress_titles_attachments_noindex'];
+        }
+    }
+}
+
 //noindex single CPT
 function seopress_titles_noindex_post_option() {
     $_seopress_robots_index = get_post_meta(get_the_ID(), '_seopress_robots_index', true);
@@ -1070,6 +1083,8 @@ function seopress_titles_noindex_bypass() {
         } elseif ('1' == seopress_get_toggle_option('woocommerce') && function_exists('is_wc_endpoint_url') && function_exists('seopress_woocommerce_customer_account_page_no_index_option') && (is_wc_endpoint_url() && seopress_woocommerce_customer_account_page_no_index_option())) { //IS WooCommerce Customer account pages
             $seopress_titles_noindex = seopress_woocommerce_customer_account_page_no_index_option();
         } elseif (is_404()) { //Is 404 page
+            $seopress_titles_noindex = 'noindex';
+        } elseif (is_attachment() && seopress_titles_attachments_noindex_option()) {
             $seopress_titles_noindex = 'noindex';
         }
     }
@@ -1598,8 +1613,8 @@ function seopress_titles_canonical_post_option() {
 
 function seopress_titles_canonical_term_option() {
     $queried_object = get_queried_object();
-    $termId =  $queried_object !== null ? $queried_object->term_id : '';
-    if(!empty($termId)){
+    $termId         =  null !== $queried_object ? $queried_object->term_id : '';
+    if ( ! empty($termId)) {
         $_seopress_robots_canonical = get_term_meta($termId, '_seopress_robots_canonical', true);
         if ('' != $_seopress_robots_canonical) {
             return $_seopress_robots_canonical;

@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.6.0.2
+Stable tag: 4.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 			<li>article schema</li>
 			<li>local business schema</li>
 			<li>service schema</li>
+			<li>how-to schema</li>
 			<li>FAQ schema</li>
 			<li>course schema</li>
 			<li>recipe schema</li>
@@ -324,6 +325,42 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 4.7 (19/05/2021) - <a href="https://www.seopress.org/blog/seopress-4-7/">Read our blog post update</a> =
+* NEW Apply automatic schemas based on post ID
+* NEW Speakable schema (visible under Article manual or automatic schema)
+* NEW ReviewBody property for Review schema (manual and automatic)
+* NEW Menu and acceptsReservations properties for Local Business schema (manual and automatic)
+* NEW Video property for Recipe schema (manual and automatic)
+* NEW Author property (custom) for Article schema (manual and automatic)
+* NEW Add Organizer Name and Organizer URL properties to Event schema (manual and automatic)
+* NEW Add Start Date Timezone property to Event schema (manual and automatic)
+* NEW 'seopress_schemas_mapping_select', 'seopress_schemas_dyn_variables' and 'seopress_schemas_dyn_variables_replace' hooks to filter available dynamic variables for automatic schemas (https://www.seopress.org/support/hooks/filter-predefined-dynamic-variables-for-automatic-schemas/)
+* NEW "noindex on attachment pages" option (SEO, Titles & metas, Advanced tab)
+* NEW "seopress_schemas_auto_article_json" hooks to filter article automatic JSON schema
+* NEW "seopress_schemas_auto_lb_json" hooks to filter local business automatic JSON schema
+* NEW "seopress_schemas_auto_faq_json" hooks to filter FAQ automatic JSON schema
+* NEW "seopress_schemas_auto_course_json" hooks to filter course automatic JSON schema
+* NEW "seopress_schemas_auto_recipe_json" hooks to filter recipe automatic JSON schema
+* NEW "seopress_schemas_auto_job_json" hooks to filter job automatic JSON schema
+* NEW "seopress_schemas_auto_video_json" hooks to filter video automatic JSON schema
+* NEW "seopress_schemas_auto_event_json" hooks to filter event automatic JSON schema
+* NEW "seopress_schemas_auto_product_json" hooks to filter product automatic JSON schema
+* NEW "seopress_schemas_auto_softwareapp_json" hooks to filter software application automatic JSON schema
+* NEW "seopress_schemas_auto_service_json" hooks to filter service automatic JSON schema
+* NEW "seopress_schemas_auto_review_json" hooks to filter review automatic JSON schema
+* INFO Dutch language updated
+* INFO Improve UI for Opening hours property with Local Business schema
+* INFO Automatically disable SEO options from Jetpack plugin to prevent any SEO conflicts
+* FIX "location" property with Event schema with specific conditions
+* FIX Trying to get property 'term_id' of non-object
+* FIX Video schema : Warning A non-numeric value encountered
+* FIX recipeCuisine property for Recipe manual schema
+* FIX %%currentmonth%% and %%currentmonth_num%% dynamic variables
+* FIX Analytics JS conflict with caching plugin in specific cases
+* FIX "seopress_can_post_redirect" autoload option
+* FIX Dynamic variables for custom manual schema
+* FIX Quick edit feature for Redirections post type
+* FIX Archive link if not available in HTML sitemap (thanks @ajoah)
 = 4.6.0.2 =
 * FIX Custom capabilities
 * FIX WC undefined function in specific cases

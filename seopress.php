@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 4.6.0.2
+Version: 4.7.0
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -55,7 +55,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '4.6.0.2');
+define('SEOPRESS_VERSION', '4.7.0');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_TEMPLATE_DIR', SEOPRESS_PLUGIN_DIR_PATH . 'templates');
@@ -452,7 +452,7 @@ remove_filter('wp_robots', 'wp_robots_max_image_preview_large');
  * @todo use wp_robots API
  */
 function seopress_robots_wc_pages($robots) {
-    include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    include_once ABSPATH . 'wp-admin/includes/plugin.php';
     if (is_plugin_active('woocommerce/woocommerce.php')) {
         if (function_exists('wc_get_page_id')) {
             if (is_page(wc_get_page_id('cart')) || is_page(wc_get_page_id('checkout')) || is_page(wc_get_page_id('myaccount'))) {
@@ -480,6 +480,7 @@ function seopress_compatibility_jetpack() {
     if (function_exists('is_plugin_active')) {
         if (is_plugin_active('jetpack/jetpack.php') && ! is_admin()) {
             add_filter('jetpack_enable_open_graph', '__return_false');
+            add_filter('jetpack_disable_seo_tools', '__return_true');
         }
     }
 }

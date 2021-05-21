@@ -36,7 +36,7 @@ if ( ! empty($postslist)) {
         $html .= '</ul>'; // 0 means display all levels.
     } else {
         $html .= '<ul class="sp-list-posts">';
-        if ('post' != $cpt_key && isset($obj->labels->name)) {//check if not Post cpt
+        if ('post' != $cpt_key && isset($obj->labels->name) && get_post_type_archive_link($cpt_key)) {//check if not Post cpt
             if (false === $display_archive) {
                 $html .= '<li><a href="' . get_post_type_archive_link($cpt_key) . '">' . $obj->labels->name . '</a></li>';
             }

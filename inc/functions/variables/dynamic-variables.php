@@ -76,28 +76,28 @@ if (isset($wp_query->max_num_pages)) {
 }
 
 if (is_singular() && isset($post->post_author)) {
-    $the_author_meta = esc_attr(get_the_author_meta('display_name', $post->post_author));
+    $the_author_meta   = esc_attr(get_the_author_meta('display_name', $post->post_author));
     $author_first_name = esc_attr(get_the_author_meta('first_name', $post->post_author));
-    $author_last_name = esc_attr(get_the_author_meta('last_name', $post->post_author));
-    $author_website = esc_attr(get_the_author_meta('url', $post->post_author));
-    $author_nickname = esc_attr(get_the_author_meta('nickname', $post->post_author));
-    $author_bio      = esc_attr(get_the_author_meta('description', $post->post_author));
+    $author_last_name  = esc_attr(get_the_author_meta('last_name', $post->post_author));
+    $author_website    = esc_attr(get_the_author_meta('url', $post->post_author));
+    $author_nickname   = esc_attr(get_the_author_meta('nickname', $post->post_author));
+    $author_bio        = esc_attr(get_the_author_meta('description', $post->post_author));
 }
 
-if (is_singular() && get_post_meta( $post->ID, '_seopress_analysis_target_kw', true )) {
-    $target_kw = get_post_meta( $post->ID, '_seopress_analysis_target_kw', true );
+if (is_singular() && get_post_meta($post->ID, '_seopress_analysis_target_kw', true)) {
+    $target_kw = get_post_meta($post->ID, '_seopress_analysis_target_kw', true);
 }
 
 if (is_author() && is_int(get_queried_object_id())) {
     $user_info = get_userdata(get_queried_object_id());
 
     if (isset($user_info)) {
-        $the_author_meta = esc_attr($user_info->display_name);
+        $the_author_meta   = esc_attr($user_info->display_name);
         $author_first_name = esc_attr($user_info->first_name);
-        $author_last_name = esc_attr($user_info->last_name);
-        $author_website = esc_attr($user_info->url);
-        $author_nickname = esc_attr($user_info->nickname);
-        $author_bio      = esc_attr($user_info->description);
+        $author_last_name  = esc_attr($user_info->last_name);
+        $author_website    = esc_attr($user_info->url);
+        $author_nickname   = esc_attr($user_info->nickname);
+        $author_bio        = esc_attr($user_info->description);
     }
 }
 
@@ -261,7 +261,7 @@ $seopress_titles_template_variables_array = [
     '%%author_nickname%%',
     '%%author_bio%%',
     '%%currentmonth_num%%',
-    '%%target_keyword%%'
+    '%%target_keyword%%',
 ];
 
 $seopress_titles_template_variables_array = apply_filters('seopress_titles_template_variables_array', $seopress_titles_template_variables_array);
@@ -318,7 +318,7 @@ $seopress_titles_template_replace_array = [
     $author_nickname,
     $author_bio,
     date_i18n('n'),
-    $target_kw
+    $target_kw,
 ];
 
 $seopress_titles_template_replace_array = apply_filters('seopress_titles_template_replace_array', $seopress_titles_template_replace_array);

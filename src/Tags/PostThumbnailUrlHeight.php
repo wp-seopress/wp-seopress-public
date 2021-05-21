@@ -19,7 +19,7 @@ class PostThumbnailUrlHeight implements GetTagValue {
             return $value;
         }
 
-        if ($context['is_single'] && ! empty($context['post']->ID)) {
+        if (isset($context['is_single'], $context['post']) && $context['is_single'] && ! empty($context['post'])) {
             $size = wp_get_attachment_image_src(get_post_thumbnail_id($context['post']->ID), 'large');
             if (isset($size[1])) {
                 $value = $size[2];

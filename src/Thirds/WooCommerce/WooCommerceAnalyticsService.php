@@ -51,7 +51,7 @@ class WooCommerceAnalyticsService {
                         return;
                     }
 
-                    var id = null
+                    var id = null;
 
                     if(!namedItem){
                         try{

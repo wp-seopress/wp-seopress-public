@@ -24,24 +24,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '4.6.x-dev',
-    'version' => '4.6.9999999.9999999-dev',
+    'pretty_version' => '4.7.x-dev',
+    'version' => '4.7.9999999.9999999-dev',
     'aliases' => 
     array (
     ),
-    'reference' => '34b18a17d6e9e3834b81cbe95984b8963a75bd5b',
+    'reference' => '551b1a9dcad34a59219c8f791f68098d6378fcb0',
     'name' => 'wp-seopress/wp-seopress',
   ),
   'versions' => 
   array (
     'wp-seopress/wp-seopress' => 
     array (
-      'pretty_version' => '4.6.x-dev',
-      'version' => '4.6.9999999.9999999-dev',
+      'pretty_version' => '4.7.x-dev',
+      'version' => '4.7.9999999.9999999-dev',
       'aliases' => 
       array (
       ),
-      'reference' => '34b18a17d6e9e3834b81cbe95984b8963a75bd5b',
+      'reference' => '551b1a9dcad34a59219c8f791f68098d6378fcb0',
     ),
   ),
 );

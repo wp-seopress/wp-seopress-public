@@ -12,6 +12,6 @@ class CurrentMonthNum implements GetTagValue {
     const NAME = 'currentmonth_num';
 
     public function getValue($args = null) {
-        return date_i18n('F');
+        return date_i18n('n');
     }
 }

@@ -19,7 +19,7 @@ class PostThumbnailUrl implements GetTagValue {
             return $value;
         }
 
-        if ($context['is_single'] && ! empty($context['post'])) {
+        if (isset($context['is_single'], $context['post']) && $context['is_single'] && ! empty($context['post'])) {
             $value = get_the_post_thumbnail_url($context['post'], 'full');
             /**
              * @deprecated 4.4.0

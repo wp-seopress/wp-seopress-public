@@ -1484,6 +1484,14 @@ class seopress_options {
             'seopress_setting_section_titles_advanced' // Section
         );
 
+        add_settings_field(
+            'seopress_titles_attachments_noindex', // ID
+            __('noindex on attachment pages', 'wp-seopress'), // Title
+            [$this, 'seopress_titles_attachments_noindex_callback'], // Callback
+            'seopress-settings-admin-titles-advanced', // Page
+            'seopress_setting_section_titles_advanced' // Section
+        );
+
         //XML Sitemap SECTION======================================================================
         add_settings_section(
             'seopress_setting_section_xml_sitemap_general', // ID
@@ -3173,8 +3181,8 @@ class seopress_options {
 
     public function print_section_info_tools_compatibility() {
         echo '<p>' . __('Our <strong>Compatibility Center</strong> makes it easy to integrate SEOPress with your favorite tools.', 'wp-seopress') . '</p>';
-        echo '<p>' . __('Even though a lot of things are completely transparent to you and automated, sometimes it is necessary to leave the final choice to you.', 'wp-seopress') . '</p>';
-        echo '<p style="color:red">' . __('<span class="dashicons dashicons-info"></span> <strong>Warning</strong>: always test your site after activating one of these options. Running shortcodes to automatically generate meta title / description can have side effects. Clear your cache if necessary.', 'wp-seopress') . '</p>';
+        echo '<p>' . __('SEOPress works out of the box with the page builders listed below. Checking these options is only necessary for generating automatic meta description based on your post content.', 'wp-seopress') . '</p>';
+        echo '<p class="seopress-notice" style="color:red">' . __('<strong>Warning</strong>: Running shortcodes to automatically generate meta description can have side effects / slow down your site.', 'wp-seopress') . '</p>';
 
         if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale()) {
             $seopress_docs_link['support']['compatibility']['automatic'] = 'https://www.seopress.org/fr/support/guides/generez-automatiquement-meta-descriptions-divi-oxygen-builder/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress';
@@ -3946,7 +3954,7 @@ class seopress_options {
     }
 
     public function seopress_titles_archives_404_title_callback() {
-        echo '<h2>' . __('404 archives', 'wp-seopress') . '</h2>';
+        echo '<h2>' . __('404 page', 'wp-seopress') . '</h2>';
 
         _e('Title template', 'wp-seopress');
         echo '<br/>';
@@ -4150,6 +4158,26 @@ class seopress_options {
 
         if (isset($this->options['seopress_titles_paged_noindex'])) {
             esc_attr($this->options['seopress_titles_paged_noindex']);
+        }
+    }
+
+    public function seopress_titles_attachments_noindex_callback() {
+        $options = get_option('seopress_titles_option_name');
+
+        $check = isset($options['seopress_titles_attachments_noindex']);
+
+        echo '<input id="seopress_titles_attachments_noindex" name="seopress_titles_option_name[seopress_titles_attachments_noindex]" type="checkbox"';
+        if ('1' == $check) {
+            echo 'checked="yes"';
+        }
+        echo ' value="1"/>';
+
+        echo '<label for="seopress_titles_attachments_noindex">' . __('Add a "noindex" meta robots for all attachment pages', 'wp-seopress') . '</label>';
+
+        echo '<p class="description">' . __('eg: https://example.com/my-media-attachment-page', 'wp-seopress') . '</p>';
+
+        if (isset($this->options['seopress_titles_attachments_noindex'])) {
+            esc_attr($this->options['seopress_titles_attachments_noindex']);
         }
     }
 
@@ -4383,7 +4411,7 @@ class seopress_options {
 
         echo '<br><br><p>' . __('To include specific custom post types, use the CPT attribute:', 'wp-seopress') . '</p>';
 
-        echo '<pre>[seopress_html_sitemap cpt="post,product"]</pre>';
+        echo '<pre>[seopress_html_sitemap cpt="post,page,product"]</pre>';
     }
 
     public function seopress_xml_sitemap_html_exclude_callback() {
@@ -6877,9 +6905,7 @@ class seopress_options {
         }
         echo ' value="1"/>';
 
-        echo '<label for="seopress_setting_section_tools_compatibility_oxygen">' . __('Enable Oxygen Builder compatibility', 'wp-seopress') . '</label>';
-
-        echo '<p class="description">' . __('Enable automatic meta description with <strong>%%oxygen%%</strong> dynamic variable.', 'wp-seopress') . '</p>';
+        echo '<label for="seopress_setting_section_tools_compatibility_oxygen">' . __('Enable automatic meta description with <strong>%%oxygen%%</strong> dynamic variable.', 'wp-seopress') . '</label>';
 
         if (isset($this->options['seopress_setting_section_tools_compatibility_oxygen'])) {
             esc_attr($this->options['seopress_setting_section_tools_compatibility_oxygen']);
@@ -6897,9 +6923,7 @@ class seopress_options {
         }
         echo ' value="1"/>';
 
-        echo '<label for="seopress_setting_section_tools_compatibility_divi">' . __('Enable Divi Builder compatibility', 'wp-seopress') . '</label>';
-
-        echo '<p class="description">' . __('Enable automatic meta description with <strong>%%divi%%</strong> dynamic variable.', 'wp-seopress') . '</p>';
+        echo '<label for="seopress_setting_section_tools_compatibility_divi">' . __('Enable automatic meta description with <strong>%%divi%%</strong> dynamic variable.', 'wp-seopress') . '</label>';
 
         if (isset($this->options['seopress_setting_section_tools_compatibility_divi'])) {
             esc_attr($this->options['seopress_setting_section_tools_compatibility_divi']);
@@ -6917,9 +6941,7 @@ class seopress_options {
         }
         echo ' value="1"/>';
 
-        echo '<label for="seopress_setting_section_tools_compatibility_bakery">' . __('Enable WP Bakery Builder compatibility', 'wp-seopress') . '</label>';
-
-        echo '<p class="description">' . __('Enable automatic meta description with <strong>%%wpbakery%%</strong> dynamic variable.', 'wp-seopress') . '</p>';
+        echo '<label for="seopress_setting_section_tools_compatibility_bakery">' . __('Enable automatic meta description with <strong>%%wpbakery%%</strong> dynamic variable.', 'wp-seopress') . '</label>';
 
         if (isset($this->options['seopress_setting_section_tools_compatibility_bakery'])) {
             esc_attr($this->options['seopress_setting_section_tools_compatibility_bakery']);
@@ -6937,9 +6959,7 @@ class seopress_options {
         }
         echo ' value="1"/>';
 
-        echo '<label for="seopress_setting_section_tools_compatibility_avia">' . __('Enable Avia Layout Builder compatibility', 'wp-seopress') . '</label>';
-
-        echo '<p class="description">' . __('Enable automatic meta description with <strong>%%aviabuilder%%</strong> dynamic variable.', 'wp-seopress') . '</p>';
+        echo '<label for="seopress_setting_section_tools_compatibility_avia">' . __('Enable automatic meta description with <strong>%%aviabuilder%%</strong> dynamic variable.', 'wp-seopress') . '</label>';
 
         if (isset($this->options['seopress_setting_section_tools_compatibility_avia'])) {
             esc_attr($this->options['seopress_setting_section_tools_compatibility_avia']);
@@ -6957,9 +6977,7 @@ class seopress_options {
         }
         echo ' value="1"/>';
 
-        echo '<label for="seopress_setting_section_tools_compatibility_fusion">' . __('Enable Fusion Builder compatibility', 'wp-seopress') . '</label>';
-
-        echo '<p class="description">' . __('Enable automatic meta description with <strong>%%fusionbuilder%%</strong> dynamic variable.', 'wp-seopress') . '</p>';
+        echo '<label for="seopress_setting_section_tools_compatibility_fusion">' . __('Enable automatic meta description with <strong>%%fusionbuilder%%</strong> dynamic variable.', 'wp-seopress') . '</label>';
 
         if (isset($this->options['seopress_setting_section_tools_compatibility_fusion'])) {
             esc_attr($this->options['seopress_setting_section_tools_compatibility_fusion']);
