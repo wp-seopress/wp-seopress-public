@@ -422,6 +422,26 @@ if ('' != seopress_advanced_appearance_title_col_option()
     }
 }
 
+//Remove Content Analysis Metaboxe
+function seopress_advanced_appearance_ca_metaboxe_hook_option() {
+    $seopress_advanced_appearance_ca_metaboxe_hook_option = get_option('seopress_advanced_option_name');
+    if ( ! empty($seopress_advanced_appearance_ca_metaboxe_hook_option)) {
+        foreach ($seopress_advanced_appearance_ca_metaboxe_hook_option as $key => $seopress_advanced_appearance_ca_metaboxe_hook_value) {
+            $options[$key] = $seopress_advanced_appearance_ca_metaboxe_hook_value;
+        }
+        if (isset($seopress_advanced_appearance_ca_metaboxe_hook_option['seopress_advanced_appearance_ca_metaboxe'])) {
+            return $seopress_advanced_appearance_ca_metaboxe_hook_option['seopress_advanced_appearance_ca_metaboxe'];
+        }
+    }
+}
+
+if ('' != seopress_advanced_appearance_ca_metaboxe_hook_option()) {
+    function seopress_advanced_appearance_ca_metaboxe_hook() {
+        add_filter('seopress_metaboxe_content_analysis', '__return_false');
+    }
+    add_action('init', 'seopress_advanced_appearance_ca_metaboxe_hook', 999);
+}
+
 //Remove Genesis SEO Metaboxe
 function seopress_advanced_appearance_genesis_seo_metaboxe_hook_option() {
     $seopress_advanced_appearance_genesis_seo_metaboxe_hook_option = get_option('seopress_advanced_option_name');

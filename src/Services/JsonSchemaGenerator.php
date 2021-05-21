@@ -27,13 +27,17 @@ class JsonSchemaGenerator {
      */
     public function getJsonFromSchema($schema, $context= [], $options = []) {
         $classJsonSchema = $this->getSchemaClass($schema);
-        $jsonData        = $classJsonSchema->getJsonData($context);
+        if (null === $classJsonSchema) {
+            return null;
+        }
 
-        $jsonData = $this->tagsToString->replaceDataToString($jsonData, $context, $options);
+        $jsonData        = $classJsonSchema->getJsonData($context);
 
         if (isset($context['variables'])) {
             $jsonData = $this->variablesToString->replaceDataToString($jsonData, $context['variables'], $options);
         }
+
+        $jsonData = $this->tagsToString->replaceDataToString($jsonData, $context, $options);
 
         if ( ! empty($jsonData)) {
             $jsonData = $classJsonSchema->cleanValues($jsonData);
@@ -56,7 +60,8 @@ class JsonSchemaGenerator {
         }
 
         foreach ($data as $key => $schema) {
-            $data[$key]      = $this->getJsonFromSchema($schema, $context, ['remove_empty'=> true]);
+            $context['key_get_json_schema']  = $key;
+            $data[$key]                      = $this->getJsonFromSchema($schema, $context, ['remove_empty'=> true]);
         }
 
         return apply_filters('seopress_json_schema_generator_get_jsons', $data);
@@ -76,6 +81,10 @@ class JsonSchemaGenerator {
         $data = $this->getJsons($data, $context);
 
         foreach ($data as $key => $value) {
+            if (null === $value) {
+                unset($data[$key]);
+                continue;
+            }
             $data[$key] = json_encode($data[$key]);
         }
 

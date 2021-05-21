@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.5.1
+Stable tag: 4.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,7 +61,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Redirect attachment pages to their file URL</li>
 	<li><strong>Image SEO</strong>: Automatically set the image title / alt / caption / description</li>
 	<li>Import / Export settings from site to site.</li>
-	<li>Import posts and terms metadata from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack and Squirrly</li>
+	<li><a href="https://www.seopress.org/migrate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme">Import posts and terms metadata</a> from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack, Squirrly and many other SEO plugins</li>
 	<li>...</li>
 </ul>
 
@@ -199,7 +199,7 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 
 <a href="https://www.seopress.org/integrations/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">All our integrations</a>
 
-<h3>Import your post and term metadata from other SEO plugins in 1-click</h3>
+<h3><a href="https://www.seopress.org/migrate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Import your post and term metadata from other SEO plugins in 1-click</a></h3>
 <ul>
 	<li><a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Yoast SEO</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">All In One SEO</a></li>
@@ -324,68 +324,68 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
-= 4.5.1 (08/04/2021) =
-* NEW Where to display the cookie bar? option from SEO, Analytics, Cookie bar tab
-* INFO Stop loading the CSS for the admin bar if it doesn't show up
-* INFO Allow HTML in Homepage field for Breadcrumbs
-* FIX Fatal error: Call to undefined function seopress_xml_sitemap_video_enable_option()
-* FIX Opening hours for Local Business widget
-* FIX Heading 1 in content analysis if no target keywords
-* FIX SEO columns design in posts list
-* FIX Quick edit design issue on save
-* FIX SmartCrawl import tool
-* FIX PHP Warning: count(): Parameter must be an array or an object that implements in XML sitemaps
-* FIX Warning: date() expects parameter 2 to be int, string given
-* FIX Redirections capabilities on older versions of WordPress (< 5.0)
-* FIX White Label links in plugins list
-* FIX Primary category hierarchy in breadcrumbs
-* FIX Oxygen compatibility for Word counters / Keyword density
-* FIX i18n
-= 4.5.0.2 =
-* FIX PHP Error: Call to undefined function seopress_white_label_help_links_option()
-= 4.5.0.1 =
-* FIX PHP Fatal error: Uncaught Error: Call to undefined function SEOPress\Tags\Schema\seopress_social_knowledge_phone_number_option()
-= 4.5 (25/03/2021) https://www.seopress.org/blog/seopress-4-5/ =
-* NEW HTML sitemap enhancements: add HTML classes
-* NEW HTML sitemap enhancements: new option to remove links from archive pages
-* NEW HTML sitemap enhancements: new shortcode attribute to request specific custom post types
-* NEW Dynamic variable: %%target_keyword%%
-* NEW Import tools: Platinum SEO Pack, SmartCrawl and SEOPressor
-* NEW Allow user to change its choice about cookies (SEO, Analytics, Cookie bar tab to enable the option)
-* NEW Compatibility center (SEO, Tools) for better integration with other plugins (eg: Page Builders) without adding code
-* NEW Add our dynamic variables dropdown to global meta title / meta description settings page
-* NEW Add heading 1 (H1) check to Content Analysis feature
-* NEW Add Inbound links / Orphaned pages check to Content Analysis feature
-* NEW Use dynamic variables in social metadata (Open Graph and Twitter cards)
-* NEW Multiple opening hours (morning / afternoon) for global Local Business schema (PRO)
-* NEW 'seopress_resize_panel_elementor' hook to prevent SEOPress resizes the Elementor Panel (https://www.seopress.org/support/hooks/disable-automatic-resizing-of-elementor-panel/)
-* NEW 'seopress_titles_robots_attrs' hook to add meta robots attributes (https://www.seopress.org/support/hooks/filter-meta-robots-attributes/)
-* NEW 'seopress_sitemaps_no_archive_link' hook to remove archive links in XML sitemaps (https://www.seopress.org/support/hooks/filter-custom-post-type-archive-link-in-xml-single-sitemaps/)
-* NEW 'seopress_breadcrumbs_force_archive_name' hook to force archive name display on CPT with no archive (https://www.seopress.org/support/hooks/force-the-display-of-the-custom-post-type-archive-page-even-if-it-does-not-exist-in-breadcrumbs/)
-* NEW 'seopress_sitemaps_html_remove_archive' hook to filter archive names in HTML sitemap (https://www.seopress.org/support/hooks/remove-archive-links-per-post-type-in-html-sitemap/)
-* NEW 'seopress_auto_image_alt_target_kw' hook to use target keywords for the alternative texts of the images (https://www.seopress.org/support/hooks/filter-automatic-image-alt-tag-with-target-keywords/)
-* NEW 'seopress_export_redirections_query' hook to filter export redirections query (https://www.seopress.org/support/hooks/filter-export-redirections-query/)
-* NEW 'seopress_gtag_ec_status' hook to change status of WC orders sent to Google Analytics Enhanced Ecommerce (https://www.seopress.org/support/hooks/filter-woocommerce-order-status-sent-to-google-analytics-enhanced-ecommerce/)
-* INFO Improve accessibility for cookie bar
-* INFO Improve SEO columns display for posts, pages, custom post type lists
-* INFO Improve UI to warn users if some content are set to noindex and still included in XML sitemaps
-* INFO Improve UI / i18n for Google Analytics widget
-* INFO Improve UI if error on license activation
-* INFO Improve UI for BlogPosting schema
-* INFO Improve UI for global LocalBusiness schema
-* INFO Automatically add custom fields created with Toolset plugin to our Schema feature
-* INFO SEO and Content Analysis metaboxes are now completely independent (and prevent a lot of errors / warnings)
-* INFO Strengthening security
-* FIX Quick edit JS errors if noindex/nofollow columns are blocked (props to @mbis)
-* FIX i18n for Type of Employment on non English languages
-* FIX Webarx graph conflict
-* FIX Broken link checker error with 404 links
-* FIX PHP 8 errors with DIVI
-* FIX PHP 8 error with Google Preview for terms taxonomy
-* FIX Product variable price sent to Add to cart GA Enhanced Ecommerce event
-* FIX Elementor synchronization when duplicating posts
-* FIX Attachment XML sitemaps
-* FIX Oxygen content analysis in specific cases
-* FIX AIO import tool
+= 4.6 (29/04/2021) - https://www.seopress.org/blog/seopress-4-6/ =
+* NEW Custom capabilities 🎉 (SEO, Advanced, Security)
+* NEW Bricks compatibility with our content analysis feature
+* NEW %%author_first_name%% dynamic variable to request user first name
+* NEW %%author_last_name%% dynamic variable to request user last name
+* NEW %%author_website%% dynamic variable to request user website
+* NEW %%author_nickname%% dynamic variable to request user nickname
+* NEW %%_ucf_your_user_meta%% dynamic variable to request user meta
+* NEW Complete refactoring of the manual schema module
+* NEW "Display a text before the Breadcrumbs" option
+* NEW Add og:locale and og:locale:alternate support for WPML
+* NEW Option to disable content analysis metabox (SEO, Advanced, Advanced tab)
+* NEW "seopress_remove_category_base" hook to filter /category/ slug
+* NEW Hooks to filter manual schemas:
+    * seopress_get_json_data_organization
+    * seopress_get_json_data_image
+    * seopress_get_json_data_contact_point
+    * seopress_pro_get_json_data_author
+    * seopress_pro_get_json_data_article
+    * seopress_pro_get_json_data_aggreagate_rating
+    * seopress_pro_get_json_data_brand
+    * seopress_pro_get_json_data_course
+    * seopress_pro_get_json_data_event
+    * seopress_pro_get_json_data_faq
+    * seopress_pro_get_json_data_geo
+    * seopress_pro_get_json_data_how_to_step
+    * seopress_pro_get_json_data_job
+    * seopress_pro_get_json_data_local_business
+    * seopress_pro_get_json_data_main_entity
+    * seopress_pro_get_json_data_main_entity_of_page
+    * seopress_pro_get_json_data_monetary_amount
+    * seopress_pro_get_json_data_nutrition_information
+    * seopress_pro_get_json_data_offer
+    * seopress_pro_get_json_data_opening_hours
+    * seopress_pro_get_json_data_person
+    * seopress_pro_get_json_data_place
+    * seopress_pro_get_json_data_postal_address
+    * seopress_pro_get_json_data_product
+    * seopress_pro_get_json_data_rating
+    * seopress_pro_get_json_data_recipe
+    * seopress_pro_get_json_data_review
+    * seopress_pro_get_json_data_service
+    * seopress_pro_get_json_data_site_navigation_element
+    * seopress_pro_get_json_data_software_app
+    * seopress_pro_get_json_data_thing
+    * seopress_pro_get_json_data_video
+    * seopress_pro_get_json_data_virtual_location
+* INFO Improve Themify Builer compatibility with Content Analysis
+* INFO Improve Oxygen compatibility in specific cases
+* INFO Allow to show taxonomies in Breadcrumbs for Page post type
+* INFO Elementor Dark mode compatibility
+* FIX Duplicated meta robots on WC pages (checkout, cart, account)
+* FIX Remove /category/ slug with WPML if the slug is translated
+* FIX Fatal error when connecting Google Analytics / Google Console if no permission
+* FIX Google Analytics widget logout after view lock
+* FIX Google Analytics listing properties error handling
+* FIX Canonical URL on paginated pages (is_singular && is_paged)
+* FIX PHP notice queried object
+* FIX JS Encoding for Google Preview
+* FIX Missing compatibility center options in export file
+* FIX Undefined index: image with FAQ Block (props to @audrasjb)
+* FIX LocalBusiness widget in specific cases
+* FIX SEOPress metaboxes not loaded in specific cases (props to @J-Brk)
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

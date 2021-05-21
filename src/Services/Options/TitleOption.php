@@ -6,7 +6,8 @@ defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 
 use SEOPress\Constants\Options;
 
-class TitleOption {
+class TitleOption
+{
     /**
      * @since 4.3.0
      *
@@ -60,7 +61,12 @@ class TitleOption {
      * @return string
      */
     public function getSeparator() {
-        return $this->searchOptionByKey('seopress_titles_sep');
+        $separator = $this->searchOptionByKey('seopress_titles_sep');
+        if ( ! $separator) {
+            return '-';
+        }
+
+        return $separator;
     }
 
     /**

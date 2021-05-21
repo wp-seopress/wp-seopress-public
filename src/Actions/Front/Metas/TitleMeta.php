@@ -163,6 +163,21 @@ class TitleMeta implements ExecuteHooksFrontend {
                     }
                 }
 
+                preg_match_all('/%%_ucf_(.*?)%%/', $titleOption, $matches3); //user meta
+
+                if ( ! empty($matches3)) {
+                    $seopress_titles_ucf_template_variables_array = [];
+                    $seopress_titles_ucf_template_replace_array   = [];
+
+                    foreach ($matches3['0'] as $key => $value) {
+                        $seopress_titles_ucf_template_variables_array[] = $value;
+                    }
+
+                    foreach ($matches3['1'] as $key => $value) {
+                        $seopress_titles_ucf_template_replace_array[] = esc_attr(get_user_meta(get_current_user_id(), $value, true));
+                    }
+                }
+
                 //Default
                 $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $titleOption);
 
@@ -174,6 +189,11 @@ class TitleMeta implements ExecuteHooksFrontend {
                 //Custom terms taxonomy
                 if ( ! empty($matches2) && ! empty($seopress_titles_ct_template_variables_array) && ! empty($seopress_titles_ct_template_replace_array)) {
                     $titleTemplate = str_replace($seopress_titles_ct_template_variables_array, $seopress_titles_ct_template_replace_array, $titleTemplate);
+                }
+
+                //User meta
+                if ( ! empty($matches3) && ! empty($seopress_titles_ucf_template_variables_array) && ! empty($seopress_titles_ucf_template_replace_array)) {
+                    $titleTemplate = str_replace($seopress_titles_ucf_template_variables_array, $seopress_titles_ucf_template_replace_array, $titleTemplate);
                 }
             } else { //DEFAULT GLOBAL
                 $seopress_titles_single_titles_option = esc_attr(seopress_titles_single_titles_option());
@@ -212,6 +232,21 @@ class TitleMeta implements ExecuteHooksFrontend {
                     }
                 }
 
+                preg_match_all('/%%_ucf_(.*?)%%/', $seopress_titles_single_titles_option, $matches3); //user meta
+
+                if ( ! empty($matches3)) {
+                    $seopress_titles_ucf_template_variables_array = [];
+                    $seopress_titles_ucf_template_replace_array   = [];
+
+                    foreach ($matches3['0'] as $key => $value) {
+                        $seopress_titles_ucf_template_variables_array[] = $value;
+                    }
+
+                    foreach ($matches3['1'] as $key => $value) {
+                        $seopress_titles_ucf_template_replace_array[] = esc_attr(get_user_meta(get_current_user_id(), $value, true));
+                    }
+                }
+
                 //Default
                 $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_single_titles_option);
 
@@ -223,6 +258,11 @@ class TitleMeta implements ExecuteHooksFrontend {
                 //Custom terms taxonomy
                 if ( ! empty($matches2) && ! empty($seopress_titles_ct_template_variables_array) && ! empty($seopress_titles_ct_template_replace_array)) {
                     $titleTemplate = str_replace($seopress_titles_ct_template_variables_array, $seopress_titles_ct_template_replace_array, $titleTemplate);
+                }
+
+                //User meta
+                if ( ! empty($matches3) && ! empty($seopress_titles_ucf_template_variables_array) && ! empty($seopress_titles_ucf_template_replace_array)) {
+                    $titleTemplate = str_replace($seopress_titles_ucf_template_variables_array, $seopress_titles_ucf_template_replace_array, $titleTemplate);
                 }
             }
         } elseif (is_post_type_archive() && seopress_titles_archive_titles_option()) { //IS POST TYPE ARCHIVE
@@ -241,7 +281,30 @@ class TitleMeta implements ExecuteHooksFrontend {
         } elseif (is_author() && seopress_titles_archives_author_title_option()) { //IS AUTHOR
             $seopress_titles_archives_author_title_option = esc_attr(seopress_titles_archives_author_title_option());
 
-            $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archives_author_title_option);
+            preg_match_all('/%%_ucf_(.*?)%%/', $seopress_titles_archives_author_title_option, $matches); //custom fields
+
+            if ( ! empty($matches)) {
+                $seopress_titles_cf_template_variables_array = [];
+                $seopress_titles_cf_template_replace_array   = [];
+
+                foreach ($matches['0'] as $key => $value) {
+                    $seopress_titles_cf_template_variables_array[] = $value;
+                }
+
+                foreach ($matches['1'] as $key => $value) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_user_meta(get_current_user_id(), $value, true));
+                }
+            }
+
+            //Default
+            $titleTemplate = esc_attr(seopress_titles_archives_author_title_option());
+
+            //Custom fields
+            if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
+                $titleTemplate = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $titleTemplate);
+            }
+
+            $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $titleTemplate);
         } elseif (is_date() && seopress_titles_archives_date_title_option()) { //IS DATE
             $seopress_titles_archives_date_title_option = esc_attr(seopress_titles_archives_date_title_option());
 

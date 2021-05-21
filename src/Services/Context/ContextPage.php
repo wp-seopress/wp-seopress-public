@@ -1,12 +1,13 @@
 <?php
 
-namespace SEOPress\Services;
+namespace SEOPress\Services\Context;
 
 if ( ! defined('ABSPATH')) {
     exit;
 }
 
-class ContextPage {
+class ContextPage
+{
     protected $context = null;
 
     /**
@@ -61,45 +62,52 @@ class ContextPage {
      */
     public function buildContextDefault() {
         global $post;
+        global $product;
 
         $context = [
-            'post'         => $post,
-            'term_id'      => null,
-            'is_single'    => false,
-            'is_home'      => false,
-            'is_product'   => false,
-            'is_archive'   => false,
-            'is_category'  => false,
-            'is_author'    => false,
-            'is_404'       => false,
-            'has_category' => false,
-            'has_tag'      => false,
-            'paged'        => get_query_var('paged'),
+            'post'           => $post,
+            'product'        => $product,
+            'term_id'        => null,
+            'is_single'      => false,
+            'is_home'        => false,
+            'is_product'     => false,
+            'is_archive'     => false,
+            'is_category'    => false,
+            'is_author'      => false,
+            'is_404'         => false,
+            'has_category'   => false,
+            'has_tag'        => false,
+            'paged'          => get_query_var('paged'),
+            'schemas_manual' => [],
         ];
 
         if (is_singular()) {
-            $context = array_replace(['is_single' => true], $context);
+            $schemasManual = get_post_meta($context['post']->ID, '_seopress_pro_schemas_manual', true);
+            if ( ! $schemasManual) {
+                $schemasManual = [];
+            }
+            $context       = array_replace($context, ['is_single' => true, 'schemas_manual' => $schemasManual]);
         }
         if (is_home() || is_front_page()) {
-            $context = array_replace(['is_home' => true], $context);
+            $context = array_replace($context, ['is_home' => true]);
         }
         if (is_post_type_archive()) {
-            $context = array_replace(['is_archive' => true], $context);
+            $context = array_replace($context, ['is_archive' => true]);
         }
         if (is_tax() || is_category() || is_tag()) {
-            $context = array_replace(['is_category' => true], $context);
+            $context = array_replace($context, ['is_category' => true]);
         }
         if (is_author()) {
-            $context = array_replace(['is_author' => true], $context);
+            $context = array_replace($context, ['is_author' => true]);
         }
         if (is_404()) {
-            $context = array_replace(['is_404' => true], $context);
+            $context = array_replace($context, ['is_404' => true]);
         }
         if (has_category()) {
-            $context = array_replace(['has_category' => true], $context);
+            $context = array_replace($context, ['has_category' => true]);
         }
         if (has_tag()) {
-            $context = array_replace(['has_tag' => true], $context);
+            $context = array_replace($context, ['has_tag' => true]);
         }
 
         $this->context = $context;

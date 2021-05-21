@@ -19,7 +19,7 @@ class Document_Settings_Section {
 		add_action( 'seopress/page-builders/elementor/save_meta', [ $this, 'on_seopress_meta_save' ], 99 );
 		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'register_elements_assets'], 9999 );
 	}
-	
+
 	public function register_elements_assets() {
 		wp_register_script(
 			'seopress-elementor-base-script',
@@ -29,8 +29,22 @@ class Document_Settings_Section {
 			true
 		);
 
-		global $post;	
-		
+        if (get_current_user_id()) {
+            if (get_user_meta(get_current_user_id(), 'elementor_preferences', true )) {
+
+                $settings = get_user_meta(get_current_user_id(), 'elementor_preferences', true );
+
+                if (!empty($settings) && $settings['ui_theme'] =='dark') {
+                    wp_enqueue_style(
+                        'sp-el-dark-mode-style',
+                        SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/dark-mode.css'
+                    );
+                }
+            }
+        }
+
+		global $post;
+
 		$term = '';
 		$origin = '';
 		$post_type = '';
@@ -62,15 +76,15 @@ class Document_Settings_Section {
 			'keywords' => $keywords,
 			'is_elementor' => $is_elementor
 		);
-		
+
         wp_localize_script( 'seopress-elementor-base-script', 'seopressElementorBase', $seopress_real_preview );
 	}
 
 	/**
 	 * Add WP SeoPress section under document settings
-	 * 
+	 *
 	 * @param \Elementor\Core\Base\Document $document
-	 * 
+	 *
 	 * @return void
 	 */
     public function add_wp_seopress_section_to_document_settings( \Elementor\Core\Base\Document $document ) {
@@ -82,13 +96,13 @@ class Document_Settings_Section {
 		$this->_add_redirection_section( $document, $post_id );
 		$this->_add_content_analysis_section( $document, $post_id );
 	}
-	
+
 	/**
 	 * Add title section
 	 *
 	 * @param   \Elementor\Core\Base\Document $document
 	 * @param   int $post_id
-	 * 
+	 *
 	 * @return  void
 	 */
 	private function _add_title_section( $document, $post_id ) {
@@ -107,7 +121,7 @@ class Document_Settings_Section {
 
 		$desc = $s_desc ? $s_desc : $original_desc;
 		$title = ! empty( $s_title ) ? $s_title : get_the_title( $post_id );
-		
+
 		$document->add_control(
 			'_seopress_titles_title',
 			[
@@ -178,7 +192,7 @@ class Document_Settings_Section {
 		$robots_canonical = get_post_meta( $post_id, '_seopress_robots_canonical', true );
 		$robots_primary_cat = get_post_meta($post_id,'_seopress_robots_primary_cat',true);
 		$robots_breadcrumbs = get_post_meta($post_id,'_seopress_robots_breadcrumbs',true);
-		
+
 		$document->add_control(
 			'_seopress_robots_index',
 			[
@@ -211,7 +225,7 @@ class Document_Settings_Section {
 				'default' => 'yes' === $robots_odp ? 'yes' : ''
 			]
 		);
-		
+
 		$document->add_control(
 			'_seopress_robots_imageindex',
 			[
@@ -267,7 +281,7 @@ class Document_Settings_Section {
 
 			if (!empty($cats)) {
 				$options = [];
-				
+
 				foreach ($cats as $category) {
 					$options[$category->term_id] = $category->name;
 				}
@@ -283,7 +297,7 @@ class Document_Settings_Section {
 						'type' => \Elementor\Controls_Manager::SELECT,
 						'label_block' => true,
 						'separator' => 'none',
-						'options' => 
+						'options' =>
 							$options
 						,
 						'default' => $robots_primary_cat ? (int) $robots_primary_cat : 'none'
@@ -666,7 +680,7 @@ class Document_Settings_Section {
 				},
 				ARRAY_FILTER_USE_KEY
 			);
-			
+
 			if ( empty( $seopress_meta ) ) {
 				return;
 			}
@@ -681,7 +695,7 @@ class Document_Settings_Section {
 
 			$page_settings = get_metadata( 'post', $post_id, \Elementor\Core\Settings\Page\Manager::META_KEY, true);
 			$settings = array_merge( $page_settings, $settings );
-			
+
 			remove_action( 'seopress/page-builders/elementor/save_meta', [ $this, 'on_seopress_meta_save' ], 99 );
 			$page_settings_manager = \Elementor\Core\Settings\Manager::get_settings_managers( 'page' );
 			$page_settings_manager->ajax_before_save_settings( $settings, $post_id );

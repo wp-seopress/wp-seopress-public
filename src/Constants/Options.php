@@ -29,6 +29,13 @@ abstract class Options {
     const KEY_OPTION_SOCIAL = 'seopress_social_option_name';
 
     /**
+     * @since 4.6.0
+     *
+     * @var string
+     */
+    const KEY_OPTION_ADVANCED = 'seopress_advanced_option_name';
+
+    /**
      * @since 4.5.0
      *
      * @var string

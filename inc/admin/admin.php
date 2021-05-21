@@ -2,8 +2,9 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-class seopress_options
-{
+use SEOPress\Helpers\PagesAdmin;
+
+class seopress_options {
     /**
      * Holds the values to be used in the fields callbacks.
      */
@@ -37,12 +38,12 @@ class seopress_options
 
         add_menu_page(__('SEOPress Option Page', 'wp-seopress-pro'), $sp_seo_admin_menu['title'], seopress_capability('manage_options', 'menu'), 'seopress-option', [$this, 'create_admin_page'], $sp_seo_admin_menu['icon'], 90);
         add_submenu_page('seopress-option', __('Dashboard', 'wp-seopress'), __('Dashboard', 'wp-seopress'), seopress_capability('manage_options', 'menu'), 'seopress-option', [$this, 'create_admin_page']);
-        $seopress_titles_help_tab           = add_submenu_page('seopress-option', __('Titles & Metas', 'wp-seopress'), __('Titles & Metas', 'wp-seopress'), seopress_capability('manage_options', 'menu'), 'seopress-titles', [$this, 'seopress_titles_page']);
-        $seopress_xml_sitemaps_help_tab     = add_submenu_page('seopress-option', __('XML / Image / Video / HTML Sitemap', 'wp-seopress'), __('XML / HTML Sitemap', 'wp-seopress'), seopress_capability('manage_options', 'menu'), 'seopress-xml-sitemap', [$this, 'seopress_xml_sitemap_page']);
-        $seopress_social_networks_help_tab  = add_submenu_page('seopress-option', __('Social Networks', 'wp-seopress'), __('Social Networks', 'wp-seopress'), seopress_capability('manage_options', 'menu'), 'seopress-social', [$this, 'seopress_social_page']);
-        $seopress_google_analytics_help_tab = add_submenu_page('seopress-option', __('Analytics', 'wp-seopress'), __('Analytics', 'wp-seopress'), seopress_capability('manage_options', 'menu'), 'seopress-google-analytics', [$this, 'seopress_google_analytics_page']);
-        add_submenu_page('seopress-option', __('Advanced', 'wp-seopress'), __('Advanced', 'wp-seopress'), seopress_capability('manage_options', 'menu'), 'seopress-advanced', [$this, 'seopress_advanced_page']);
-        add_submenu_page('seopress-option', __('Tools', 'wp-seopress'), __('Tools', 'wp-seopress'), seopress_capability('manage_options', 'menu'), 'seopress-import-export', [$this, 'seopress_import_export_page']);
+        $seopress_titles_help_tab           = add_submenu_page('seopress-option', __('Titles & Metas', 'wp-seopress'), __('Titles & Metas', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::TITLE_METAS), 'seopress-titles', [$this, 'seopress_titles_page']);
+        $seopress_xml_sitemaps_help_tab     = add_submenu_page('seopress-option', __('XML / Image / Video / HTML Sitemap', 'wp-seopress'), __('XML / HTML Sitemap', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::XML_HTML_SITEMAP), 'seopress-xml-sitemap', [$this, 'seopress_xml_sitemap_page']);
+        $seopress_social_networks_help_tab  = add_submenu_page('seopress-option', __('Social Networks', 'wp-seopress'), __('Social Networks', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::SOCIAL_NETWORKS), 'seopress-social', [$this, 'seopress_social_page']);
+        $seopress_google_analytics_help_tab = add_submenu_page('seopress-option', __('Analytics', 'wp-seopress'), __('Analytics', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::ANALYTICS), 'seopress-google-analytics', [$this, 'seopress_google_analytics_page']);
+        add_submenu_page('seopress-option', __('Advanced', 'wp-seopress'), __('Advanced', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::ADVANCED), 'seopress-advanced', [$this, 'seopress_advanced_page']);
+        add_submenu_page('seopress-option', __('Tools', 'wp-seopress'), __('Tools', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::TOOLS), 'seopress-import-export', [$this, 'seopress_import_export_page']);
 
         if (function_exists('seopress_get_toggle_white_label_option')) {
             $white_label_toggle = seopress_get_toggle_white_label_option();
@@ -2755,6 +2756,14 @@ class seopress_options
         );
 
         add_settings_field(
+            'seopress_advanced_appearance_ca_metaboxe', // ID
+            __('Remove Content Analysis Metabox', 'wp-seopress'), // Title
+            [$this, 'seopress_advanced_appearance_ca_metaboxe_callback'], // Callback
+            'seopress-settings-admin-advanced-appearance', // Page
+            'seopress_setting_section_advanced_appearance' // Section
+        );
+
+        add_settings_field(
             'seopress_advanced_appearance_genesis_seo_metaboxe', // ID
             __('Hide Genesis SEO Metabox', 'wp-seopress'), // Title
             [$this, 'seopress_advanced_appearance_genesis_seo_metaboxe_callback'], // Callback
@@ -2802,6 +2811,8 @@ class seopress_options
             'seopress-settings-admin-advanced-security', // Page
             'seopress_setting_section_advanced_security' // Section
         );
+
+        seopress_get_service('SectionPagesSEOPress')->printSectionPages();
 
         //Tools SECTION=======================================================================
         add_settings_section(
@@ -3157,7 +3168,7 @@ class seopress_options
     }
 
     public function print_section_info_advanced_security() {
-        echo '<p>' . __('Manage security.', 'wp-seopress') . '</p>';
+        echo '<p>' . __('Manage security for user roles.', 'wp-seopress') . '</p>';
     }
 
     public function print_section_info_tools_compatibility() {
@@ -4975,7 +4986,7 @@ class seopress_options
         echo ' value="wp_head">' . __('Head (not recommended)', 'wp-seopress') . '</option>';
         echo '</select>';
 
-        echo '<p class="description">'.__('Your theme must be compatible with wp_body_open hook introduced in WordPress 5.2 if "opening body tag" option selected.').'</p>';
+        echo '<p class="description">' . __('Your theme must be compatible with wp_body_open hook introduced in WordPress 5.2 if "opening body tag" option selected.') . '</p>';
 
         if (isset($this->options['seopress_google_analytics_hook'])) {
             esc_attr($this->options['seopress_google_analytics_hook']);
@@ -6290,6 +6301,8 @@ class seopress_options
 
         echo '<label for="seopress_advanced_advanced_wp_rsd">' . __('Remove Really Simple Discovery meta tag in source code (eg:', 'wp-seopress') . '<em>' . esc_attr('<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.seopress.dev/xmlrpc.php?rsd" />') . '</em>)</label>';
 
+        echo '<p class="description">' . __('WordPress Site Health feature will return a HTTPS warning if you enable this option. This is a false positive of course.', 'wp-seopress') . '</p>';
+
         if (isset($this->options['seopress_advanced_advanced_wp_rsd'])) {
             esc_attr($this->options['seopress_advanced_advanced_wp_rsd']);
         }
@@ -6712,6 +6725,24 @@ class seopress_options
 
         if (isset($this->options['seopress_advanced_appearance_score_col'])) {
             esc_attr($this->options['seopress_advanced_appearance_score_col']);
+        }
+    }
+
+    public function seopress_advanced_appearance_ca_metaboxe_callback() {
+        $options = get_option('seopress_advanced_option_name');
+
+        $check = isset($options['seopress_advanced_appearance_ca_metaboxe']);
+
+        echo '<input id="seopress_advanced_appearance_ca_metaboxe" name="seopress_advanced_option_name[seopress_advanced_appearance_ca_metaboxe]" type="checkbox"';
+        if ('1' == $check) {
+            echo 'checked="yes"';
+        }
+        echo ' value="1"/>';
+
+        echo '<label for="seopress_advanced_appearance_ca_metaboxe">' . __('Remove Content Analysis Metabox', 'wp-seopress') . '</label>';
+
+        if (isset($this->options['seopress_advanced_appearance_ca_metaboxe'])) {
+            esc_attr($this->options['seopress_advanced_appearance_ca_metaboxe']);
         }
     }
 

@@ -8,8 +8,7 @@ if ( ! defined('ABSPATH')) {
 
 use SEOPress\Core\Hooks\ExecuteHooksBackend;
 
-class ManageColumn implements ExecuteHooksBackend
-{
+class ManageColumn implements ExecuteHooksBackend {
     /**
      * @since 4.4.0
      */

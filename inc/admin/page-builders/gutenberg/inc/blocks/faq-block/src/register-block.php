@@ -88,7 +88,7 @@ function seopress_block_faq_render_frontend($attributes)
             $titleCloseTag = '</div>';
             break;
     }
-    
+
     switch ($attributes['listStyle']) {
         case 'ul':
             $listStyleTag = '<ul class="wpseopress-faqs">';
@@ -111,7 +111,7 @@ function seopress_block_faq_render_frontend($attributes)
     }
 
     $entities = [];
-    
+
     ob_start(); ?>
 	<?php echo $listStyleTag; ?>
 		<?php
@@ -130,9 +130,11 @@ function seopress_block_faq_render_frontend($attributes)
                 ];
     $entities[] = $entity;
 
-    $image = wp_get_attachment_image_src($faq['image'], $attributes['imageSize']);
+    if ( isset( $faq['image'] ) && ! empty( $faq['image'] ) ) {
+    	$image = wp_get_attachment_image_src( $faq['image'], $attributes['imageSize'] );
+	}
     $image_url = '';
-    if ($image) {
+    if ( isset( $image ) && ! empty( $image ) ) {
         $image_url = $image[0];
     } ?>
 				<?php echo $listItemStyle; ?>
@@ -161,7 +163,7 @@ function seopress_block_faq_render_frontend($attributes)
 				"mainEntity": '. json_encode($entities) . '
 				}
 			</script>';
-            
+
         echo apply_filters('seopress_schemas_faq_html', $schema);
     } ?>
 	<?php return ob_get_clean();

@@ -651,9 +651,16 @@ if ('1' == seopress_get_toggle_option('advanced')) {
         function seopress_remove_category_base($termlink, $term, $taxonomy) {
             if ('category' == $taxonomy) {
                 $category_base = get_option('category_base');
+
+                if (class_exists('Sitepress') && defined('ICL_LANGUAGE_CODE')) {
+                    $category_base = apply_filters( 'wpml_translate_single_string', 'category', 'WordPress', 'URL category tax slug', ICL_LANGUAGE_CODE );
+                }
+
                 if ('' == $category_base) {
                     $category_base = 'category';
                 }
+
+                $category_base = apply_filters('seopress_remove_category_base', $category_base );
 
                 if ('/' == substr($category_base, 0, 1)) {
                     $category_base = substr($category_base, 1);
@@ -678,6 +685,12 @@ if ('1' == seopress_get_toggle_option('advanced')) {
             }
 
             $category_base = get_option('category_base');
+
+            if (class_exists('Sitepress') && defined('ICL_LANGUAGE_CODE')) {
+                $category_base = apply_filters( 'wpml_translate_single_string', 'category', 'WordPress', 'URL category tax slug', ICL_LANGUAGE_CODE );
+            }
+
+            $category_base = apply_filters('seopress_remove_category_base', $category_base );
 
             if ('' != $category_base) {
                 if (preg_match('/\/' . $category_base . '\//', $current_url)) {

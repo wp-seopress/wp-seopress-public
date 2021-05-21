@@ -7,14 +7,16 @@
     margin-top: -2px;
 }
 
-.elementor-control-field.facebook-snippet-box .facebook-snippet-text .snippet-meta {
+.elementor-control-field.facebook-snippet-box
+    .facebook-snippet-text
+    .snippet-meta {
     display: flex;
     overflow: hidden;
     max-height: 12px;
 }
 
-.elementor-control-field.facebook-snippet-box .fb-by, 
-.elementor-control-field.facebook-snippet-box .snippet-fb-site-name, 
+.elementor-control-field.facebook-snippet-box .fb-by,
+.elementor-control-field.facebook-snippet-box .snippet-fb-site-name,
 .elementor-control-field.facebook-snippet-box .snippet-fb-url {
     color: #606770;
     font-size: 10px;
@@ -53,7 +55,7 @@
     font-size: 10px;
     line-height: 14px;
     word-break: break-word;
-    font-family: Helvetica,Arial,sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     text-overflow: ellipsis;
@@ -86,7 +88,7 @@
 
 .elementor-control-field.facebook-snippet-box img:after,
 .elementor-control-field.twitter-snippet-box img:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
@@ -146,7 +148,7 @@
     color: #000;
     font-size: 10px;
     word-break: break-word;
-    font-family: Helvetica,Arial,sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     overflow: hidden;
     -webkit-box-orient: vertical;
     display: -webkit-box;
@@ -171,7 +173,7 @@
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview {
-    font-family: arial,sans-serif;
+    font-family: arial, sans-serif;
     word-break: break-all;
 }
 
@@ -180,19 +182,29 @@
     margin: 10px 0;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-snippet {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .wrap-snippet {
     margin: 0 0 10px 0;
-    box-shadow: 0 1px 6px rgba(32,33,36,.28);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
     border-radius: 8px;
     padding: 12px 16px;
+    background: #fff;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview .wrap-snippet .wrap-m-icon-permalink, 
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-permalink {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .wrap-snippet
+    .wrap-m-icon-permalink,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-permalink {
     display: none;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview .snippet-permalink {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-permalink {
     color: #006621;
     font-size: 14px;
     font-style: normal;
@@ -203,7 +215,9 @@
     white-space: nowrap;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-m-icon-permalink {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .wrap-m-icon-permalink {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -211,19 +225,25 @@
     display: flex;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-favicon {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-favicon {
     margin-right: 12px;
     vertical-align: middle;
 }
 
-
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-favicon img {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-favicon
+    img {
     width: 16px;
     height: 16px;
     max-width: inherit;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview .snippet-permalink {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-permalink {
     color: #006621;
     font-size: 14px;
     font-style: normal;
@@ -234,26 +254,53 @@
     white-space: nowrap;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-m-icon-permalink .snippet-permalink {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .wrap-m-icon-permalink
+    .snippet-permalink {
     display: block;
     color: #3c4043;
     font-size: 12px;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title, .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title-custom, .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title-default {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-title,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-title-custom,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-title-default {
     color: #1a0dab;
     font-size: 18px;
     font-weight: 400;
     line-height: 21.6px;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-title, .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-title-custom, .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-title-default {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-title,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-title-custom,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-title-default {
     font-size: 16px;
     line-height: 20px;
     margin-bottom: 12px;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description, .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description-custom, .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description-default {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-description,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-description-custom,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-description-default {
     color: #545454;
     font-size: 14px;
     font-weight: 400;
@@ -261,7 +308,15 @@
     display: inline;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-description, .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-description-custom, .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-description-default {
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-description,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-description-custom,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-description-default {
     color: #3c4043;
     font-size: 14px;
     line-height: 20px;
@@ -272,8 +327,7 @@
     align-items: center;
 }
 
-
-.elementor-control-field.google-snippet-box input.toggle+label {
+.elementor-control-field.google-snippet-box input.toggle + label {
     display: inline-block;
     position: relative;
     box-shadow: inset 0 0 0 1px #d5d5d5;
@@ -290,11 +344,11 @@
     position: relative;
 }
 
-.elementor-control-field.google-snippet-box input.toggle+label {
+.elementor-control-field.google-snippet-box input.toggle + label {
     margin: 0;
 }
 
-.elementor-control-field.google-snippet-box input.toggle+label {
+.elementor-control-field.google-snippet-box input.toggle + label {
     display: inline-block;
     position: relative;
     box-shadow: inset 0 0 0 1px #d5d5d5;
@@ -306,12 +360,14 @@
     cursor: pointer;
 }
 
-.elementor-control-field.google-snippet-box input.toggle[data-toggle='1']+label:before {
+.elementor-control-field.google-snippet-box
+    input.toggle[data-toggle="1"]
+    + label:before {
     width: 40px;
     background: #3197d3;
 }
 
-.elementor-control-field.google-snippet-box input.toggle+label:before {
+.elementor-control-field.google-snippet-box input.toggle + label:before {
     content: "";
     position: absolute;
     display: block;
@@ -320,13 +376,13 @@
     top: 0;
     left: 0;
     border-radius: 15px;
-    background: rgba(19,191,17,0);
-    -moz-transition: .25s ease-in-out;
-    -webkit-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
+    background: rgba(19, 191, 17, 0);
+    -moz-transition: 0.25s ease-in-out;
+    -webkit-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
 }
 
-.elementor-control-field.google-snippet-box input.toggle+label:after {
+.elementor-control-field.google-snippet-box input.toggle + label:after {
     content: "";
     position: absolute;
     display: block;
@@ -336,22 +392,26 @@
     left: 0;
     border-radius: 15px;
     background: #fff;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.2);
-    -moz-transition: .25s ease-in-out;
-    -webkit-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+    -moz-transition: 0.25s ease-in-out;
+    -webkit-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
 }
 
-.elementor-control-field.google-snippet-box input.toggle[data-toggle='1']+label:after {
+.elementor-control-field.google-snippet-box
+    input.toggle[data-toggle="1"]
+    + label:after {
     left: 20px;
-    box-shadow: inset 0 0 0 1px #3197d3, 0 2px 4px rgba(0,0,0,.2);
+    box-shadow: inset 0 0 0 1px #3197d3, 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.notice, div.error, div.updated {
+.notice,
+div.error,
+div.updated {
     background: #fff;
     border: 1px solid #ccd0d4;
     border-left-width: 4px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
     margin: 5px 15px 2px;
     padding: 1px 12px;
 }
@@ -368,7 +428,8 @@
     width: 100%;
 }
 
-.notice-error, div.error {
+.notice-error,
+div.error {
     border-left-color: #dc3232;
 }
 
@@ -377,7 +438,7 @@
     width: 100%;
 }
 
-.facebook-snippet-box .notice span, 
+.facebook-snippet-box .notice span,
 .twitter-snippet-box .notice span {
     font-weight: 700;
 }

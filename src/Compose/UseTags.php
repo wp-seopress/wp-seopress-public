@@ -78,12 +78,11 @@ trait UseTags {
      *
      * @param string $directory
      * @param array  $tags
-     * @param string $subNamespace
-     * @param mixed  $namespacesOption
+     * @param array  $namespacesOption
      *
      * @return array
      */
-    public function buildTags($directory, $tags = [], $namespacesOption) {
+    public function buildTags($directory, $namespacesOption, $tags = []) {
         $files  = array_diff(scandir($directory), ['..', '.']);
 
         foreach ($files as $filename) {
@@ -93,10 +92,10 @@ trait UseTags {
             $fullPath  = sprintf('%s/%s', $directory, $filename);
 
             if (is_dir($fullPath)) {
-                $tags                             = $this->buildTags($fullPath, $tags, [
+                $tags  = $this->buildTags($fullPath, [
                     'root'         => $namespacesOption['root'],
                     'subNamespace' => $namespacesOption['subNamespace'] . $filename . '\\',
-                ]);
+                ], $tags);
             } else {
                 if (defined($classFile . '::NAME')) {
                     $name = $classFile::NAME;
@@ -128,10 +127,10 @@ trait UseTags {
             return apply_filters('seopress_tags_available', $this->tagsAvailable);
         }
 
-        $tags = $this->buildTags(SEOPRESS_PLUGIN_DIR_PATH . 'src/Tags', [], ['root' => '\\SEOPress\\Tags\\%s%s', 'subNamespace' => '']);
+        $tags = $this->buildTags(SEOPRESS_PLUGIN_DIR_PATH . 'src/Tags', ['root' => '\\SEOPress\\Tags\\%s%s', 'subNamespace' => '']);
 
         if (defined('SEOPRESS_PRO_PLUGIN_DIR_PATH') && file_exists(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags') && is_dir(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags')) {
-            $tags = $this->buildTags(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags', $tags, ['root' => '\\SEOPressPro\\Tags\\%s%s', 'subNamespace' => '']);
+            $tags = $this->buildTags(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags', ['root' => '\\SEOPressPro\\Tags\\%s%s', 'subNamespace' => ''], $tags);
         }
 
         $this->tagsAvailable = $tags;

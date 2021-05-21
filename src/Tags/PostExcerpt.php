@@ -8,7 +8,8 @@ if ( ! defined('ABSPATH')) {
 
 use SEOPress\Models\GetTagValue;
 
-class PostExcerpt implements GetTagValue {
+class PostExcerpt implements GetTagValue
+{
     const NAME = 'post_excerpt';
 
     const ALIAS = ['wc_single_short_desc'];
@@ -21,13 +22,13 @@ class PostExcerpt implements GetTagValue {
             return $value;
         }
 
-        if ( ! $context['is_404'] && ! empty($context['post'])) {
+        if (isset($context['is_404']) && ! $context['is_404'] && ! empty($context['post'])) {
             if (has_excerpt($context['post']->ID)) {
                 $value = get_the_excerpt();
             }
         }
 
-        if (empty($value) && $context['post']) {
+        if (empty($value) && isset($context['post']->ID)) {
             $content = get_post_field('post_content', $context['post']->ID, true);
             if ( ! empty($content)) {
                 $value = $content;

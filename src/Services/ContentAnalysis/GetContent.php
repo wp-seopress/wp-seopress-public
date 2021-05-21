@@ -181,7 +181,7 @@ class GetContent {
 
             foreach ($target_kws_h1 as $key => $value) {
                 foreach ($value as $_key => $_value) {
-                    $kw_count = count($_value);
+                    $kw_count = count($value);
                 }
                 $kw_name = $key;
                 $desc .= '<li><span class="dashicons dashicons-minus"></span>' . sprintf(esc_html__('%s was found %d times.', 'wp-seopress'), $kw_name, $kw_count) . '</li>';
@@ -220,7 +220,7 @@ class GetContent {
             $target_kws_h2 = $data['h2']['matches'];
             foreach ($target_kws_h2 as $key => $value) {
                 foreach ($value as $_key => $_value) {
-                    $kw_count = count($_value);
+                    $kw_count = count($value);
                 }
                 $kw_name = $key;
                 $desc .= '<li><span class="dashicons dashicons-minus"></span>' . sprintf(esc_html__('%s was found %d times.', 'wp-seopress'), $kw_name, $kw_count) . '</li>';
@@ -241,7 +241,7 @@ class GetContent {
             $target_kws_h3 = $data['h3']['matches'];
             foreach ($target_kws_h3 as $key => $value) {
                 foreach ($value as $_key => $_value) {
-                    $kw_count = count($_value);
+                    $kw_count = count($value);
                 }
                 $kw_name = $key;
                 $desc .= '<li><span class="dashicons dashicons-minus"></span>' . sprintf(esc_html__('%s was found %d times.', 'wp-seopress'), $kw_name, $kw_count) . '</li>';

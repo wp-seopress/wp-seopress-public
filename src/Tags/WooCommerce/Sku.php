@@ -24,7 +24,7 @@ class Sku implements GetTagValue {
             return $value;
         }
 
-        if (is_singular(['product']) || $context['is_product']) {
+        if ((is_singular(['product']) || $context['is_product']) && isset($context['post']->ID)) {
             $product          = wc_get_product($context['post']->ID);
             $value            = $product->get_sku();
         }

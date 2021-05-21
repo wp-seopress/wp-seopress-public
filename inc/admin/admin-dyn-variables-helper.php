@@ -44,7 +44,12 @@ function seopress_get_dyn_variables() {
         '%%currentyear%%'                   => __('Current year', 'wp-seopress'),
         '%%currentdate%%'                   => __('Current date', 'wp-seopress'),
         '%%currenttime%%'                   => __('Current time', 'wp-seopress'),
+        '%%author_first_name%%'             => __('Author first name', 'wp-seopress'),
+        '%%author_last_name%%'              => __('Author last name', 'wp-seopress'),
+        '%%author_website%%'                => __('Author website', 'wp-seopress'),
+        '%%author_nickname%%'               => __('Author nickname', 'wp-seopress'),
         '%%author_bio%%'                    => __('Author biography', 'wp-seopress'),
+        '%%_ucf_your_user_meta%%'           => __('Author user meta', 'wp-seopress'),
         '%%currentmonth_num%%'              => __('Current month in digital format', 'wp-seopress'),
         '%%target_keyword%%'                => __('Target keyword', 'wp-seopress'),
     ];

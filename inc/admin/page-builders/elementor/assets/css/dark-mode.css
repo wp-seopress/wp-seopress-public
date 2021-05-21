@@ -1,0 +1,48 @@
+body .seopress-text-letter-counter .wrap-seopress-counters,
+body .seopress-styles .wrap-seopress-counters {
+    background: #34383c;
+}
+body .seopress-text-letter-counter .sp-progress,
+body .seopress-setup .sp-progress,
+body .seopress-styles .sp-progress {
+    background: #34383c;
+}
+body .google-snippet-preview .wrap-snippet {
+    padding: 5px;
+    background: #fff;
+    width: 100%;
+}
+body .elementor-control-field.google-snippet-box .google-snippet-preview {
+    display: block;
+    width: 100%;
+}
+body .analysis-score p > span {
+    color: #fff;
+}
+body
+    .elementor-control-field.seopress-content-analyses
+    .gr-analysis-title
+    button {
+    background: #6d7882;
+    color: #fff;
+}
+body .elementor-control-field.seopress-content-analyses .gr-analysis-title {
+    border-top: 1px solid #3f4348;
+}
+body
+    .elementor-control-field.seopress-content-analyses
+    .gr-analysis-title
+    button:hover {
+    background: #34383c;
+}
+body .elementor-control-field.seopress-content-analyses h3,
+body .elementor-control-field.seopress-content-analyses h4 {
+    color: #fff;
+    background: #3f4348;
+}
+body
+    .elementor-control-field.seopress-content-analyses
+    .gr-analysis-title
+    button:focus {
+    color: #fff;
+}

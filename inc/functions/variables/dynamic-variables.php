@@ -10,10 +10,10 @@ global $wp_query;
 $seopress_titles_title_template       ='';
 $seopress_titles_description_template ='';
 $seopress_paged                       ='1';
-$seopress_context_paged               = '';
+$seopress_context_paged               ='';
 $the_author_meta                      ='';
-$sep                                  = '';
-$seopress_get_post_title              = '';
+$sep                                  ='';
+$seopress_get_post_title              ='';
 $seopress_excerpt                     ='';
 $seopress_content                     ='';
 $post_thumbnail_url                   ='';
@@ -25,7 +25,11 @@ $woo_single_cat_html                  ='';
 $woo_single_tag_html                  ='';
 $woo_single_price                     ='';
 $woo_single_price_exc_tax             ='';
-$woo_single_sku                       = '';
+$woo_single_sku                       ='';
+$author_first_name                    ='';
+$author_last_name                     ='';
+$author_website                       ='';
+$author_nickname                      ='';
 $author_bio                           ='';
 $target_kw                            ='';
 
@@ -73,7 +77,11 @@ if (isset($wp_query->max_num_pages)) {
 
 if (is_singular() && isset($post->post_author)) {
     $the_author_meta = esc_attr(get_the_author_meta('display_name', $post->post_author));
-    $author_bio      = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_the_author_meta('description', $post->post_author))))));
+    $author_first_name = esc_attr(get_the_author_meta('first_name', $post->post_author));
+    $author_last_name = esc_attr(get_the_author_meta('last_name', $post->post_author));
+    $author_website = esc_attr(get_the_author_meta('url', $post->post_author));
+    $author_nickname = esc_attr(get_the_author_meta('nickname', $post->post_author));
+    $author_bio      = esc_attr(get_the_author_meta('description', $post->post_author));
 }
 
 if (is_singular() && get_post_meta( $post->ID, '_seopress_analysis_target_kw', true )) {
@@ -85,7 +93,11 @@ if (is_author() && is_int(get_queried_object_id())) {
 
     if (isset($user_info)) {
         $the_author_meta = esc_attr($user_info->display_name);
-        $author_bio      = esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes($user_info->description)))));
+        $author_first_name = esc_attr($user_info->first_name);
+        $author_last_name = esc_attr($user_info->last_name);
+        $author_website = esc_attr($user_info->url);
+        $author_nickname = esc_attr($user_info->nickname);
+        $author_bio      = esc_attr($user_info->description);
     }
 }
 
@@ -243,6 +255,10 @@ $seopress_titles_template_variables_array = [
     '%%currentyear%%',
     '%%currentdate%%',
     '%%currenttime%%',
+    '%%author_first_name%%',
+    '%%author_last_name%%',
+    '%%author_website%%',
+    '%%author_nickname%%',
     '%%author_bio%%',
     '%%currentmonth_num%%',
     '%%target_keyword%%'
@@ -296,6 +312,10 @@ $seopress_titles_template_replace_array = [
     date('Y'),
     date_i18n(get_option('date_format')),
     current_time(get_option('time_format')),
+    $author_first_name,
+    $author_last_name,
+    $author_website,
+    $author_nickname,
     $author_bio,
     date_i18n('n'),
     $target_kw
@@ -323,6 +343,10 @@ $variables = [
     'woo_single_price'                         => $woo_single_price,
     'woo_single_price_exc_tax'                 => $woo_single_price_exc_tax,
     'woo_single_sku'                           => $woo_single_sku,
+    'author_first_name'                        => $author_first_name,
+    'author_last_name'                         => $author_last_name,
+    'author_website'                           => $author_website,
+    'author_nickname'                          => $author_nickname,
     'author_bio'                               => $author_bio,
     'seopress_get_the_excerpt'                 => $seopress_get_the_excerpt,
     'seopress_titles_template_variables_array' => $seopress_titles_template_variables_array,

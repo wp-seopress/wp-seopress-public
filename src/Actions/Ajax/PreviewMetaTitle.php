@@ -30,7 +30,7 @@ class PreviewMetaTitle implements ExecuteHooksBackend {
             return;
         }
 
-        $template    = $_GET['template'];
+        $template    = stripcslashes($_GET['template']);
         $postId      = isset($_GET['post_id']) ? (int) $_GET['post_id'] : null;
         $homeId      = isset($_GET['home_id']) ? (int) $_GET['home_id'] : null;
         $termId      = isset($_GET['term_id']) ? (int) $_GET['term_id'] : null;

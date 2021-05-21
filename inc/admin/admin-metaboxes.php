@@ -694,10 +694,10 @@ if (is_user_logged_in()) {
         echo seopress_display_ca_metaboxe();
     } else {
         global $wp_roles;
-
+        $user = wp_get_current_user();
         //Get current user role
-        if (isset(wp_get_current_user()->roles[0])) {
-            $seopress_user_role = wp_get_current_user()->roles[0];
+        if (isset($user->roles) && is_array($user->roles) && ! empty($user->roles)) {
+            $seopress_user_role = current($user->roles);
 
             //If current user role matchs values from Security settings then apply -- SEO Metaboxe
             if (function_exists('seopress_advanced_security_metaboxe_role_hook_option') && '' != seopress_advanced_security_metaboxe_role_hook_option()) {

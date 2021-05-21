@@ -346,8 +346,9 @@ function seopress_social_facebook_og_locale_hook() {
     if ('1' == seopress_social_facebook_og_option()) {
         $seopress_social_og_locale = '<meta property="og:locale" content="' . get_locale() . '" />';
 
-        //Polylang
         include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+        //Polylang
         if (is_plugin_active('polylang/polylang.php') || is_plugin_active('polylang-pro/polylang.php')) {
             //@credits Polylang
             if (did_action('pll_init') && function_exists('PLL')) {
@@ -365,6 +366,33 @@ function seopress_social_facebook_og_locale_hook() {
                 foreach ($alternates as $lang) {
                     $seopress_social_og_locale .= "\n";
                     $seopress_social_og_locale .= '<meta property="og:locale:alternate" content="' . $lang . '" />';
+                }
+            }
+        }
+
+        //WPML
+        if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+
+            if (get_post_type() && get_the_ID()) {
+                $trid = apply_filters( 'wpml_element_trid', NULL, get_the_id(), 'post_'.get_post_type() );
+
+                if (isset($trid)) {
+                    $translations = apply_filters( 'wpml_get_element_translations', NULL, $trid, 'post_'.get_post_type() );
+
+                    if (!empty($translations)) {
+                        foreach($translations as $lang => $object) {
+                            $elid = $object->element_id;
+
+                            if (isset($elid)) {
+                                $my_post_language_details = apply_filters( 'wpml_post_language_details', NULL, $elid ) ;
+
+                                if (!empty($my_post_language_details['locale']) && $my_post_language_details['different_language'] === true) {
+                                    $seopress_social_og_locale .= "\n";
+                                    $seopress_social_og_locale .= '<meta property="og:locale:alternate" content="' . $my_post_language_details['locale'] . '" />';
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1123,7 +1151,6 @@ function seopress_social_twitter_title_hook() {
                 $seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . seopress_social_fb_title_term_option() . '" />';
             } elseif (function_exists('seopress_titles_the_title') && '' != seopress_titles_the_title()) {
                 $seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . esc_attr(seopress_titles_the_title()) . '" />';
-                $seopress_social_twitter_card_title .= "\n";
             } else {
                 $seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . single_term_title('', false) . ' - ' . get_bloginfo('name') . '" />';
             }

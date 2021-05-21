@@ -6,6 +6,7 @@ if ( ! defined('ABSPATH')) {
     exit;
 }
 
+use SEOPress\Helpers\RichSnippetType;
 use SEOPress\Models\GetJsonData;
 use SEOPress\Models\JsonSchemaValue;
 
@@ -21,15 +22,39 @@ class Organization extends JsonSchemaValue implements GetJsonData {
      *
      * @param array $context
      *
-     * @return array|string
+     * @return array
      */
     public function getJsonData($context = null) {
         $data = $this->getArrayJson();
 
+        $typeSchema = isset($context['type']) ? $context['type'] : RichSnippetType::DEFAULT_SNIPPET;
+
+        switch ($typeSchema) {
+            default:
+                $variables = [
+                    'type'                   => '%%knowledge_type%%',
+                    'name'                   => '%%social_knowledge_name%%',
+                    'url'                    => '%%siteurl%%',
+                    'logo'                   => '%%social_knowledge_image%%',
+                    'account_facebook'       => '%%social_account_facebook%%',
+                    'account_twitter'        => '%%social_account_twitter%%',
+                    'account_pinterest'      => '%%social_account_pinterest%%',
+                    'account_instagram'      => '%%social_account_instagram%%',
+                    'account_youtube'        => '%%social_account_youtube%%',
+                    'account_linkedin'       => '%%social_account_linkedin%%',
+                ];
+                break;
+            case RichSnippetType::SUB_TYPE:
+                $variables = isset($context['variables']) ? $context['variables'] : [];
+                break;
+        }
+
+        $data      = seopress_get_service('VariablesToString')->replaceDataToString($data, $variables);
+
         $type = seopress_get_service('SocialOption')->getSocialKnowledgeType();
         if ('Organization' === $type) {
             // Use "contactPoint"
-            $schema = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(ContactPoint::NAME, [], ['remove_empty'=> true]);
+            $schema = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(ContactPoint::NAME, $context, ['remove_empty'=> true]);
             if (count($schema) > 1) {
                 $data['contactPoint'][] = $schema;
             }

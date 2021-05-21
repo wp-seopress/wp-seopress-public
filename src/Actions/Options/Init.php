@@ -10,7 +10,8 @@ use SEOPress\Tags\PostTitle;
 use SEOPress\Tags\SiteTagline;
 use SEOPress\Tags\SiteTitle;
 
-class Init implements ActivationHook {
+class Init implements ActivationHook
+{
     /**
      * @since 4.3.0
      *
@@ -192,6 +193,7 @@ class Init implements ActivationHook {
         $titleOptions = [
             'seopress_titles_home_site_title' => TagCompose::getValueWithTag(SiteTitle::NAME),
             'seopress_titles_home_site_desc'  => TagCompose::getValueWithTag(SiteTagline::NAME),
+            'seopress_titles_sep'             => '-',
         ];
 
         //Post Types
