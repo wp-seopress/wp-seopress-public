@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 4.7.0.1
+Version: 4.7.0.2
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -28,7 +28,7 @@ Domain Path: /languages
 */
 
 // To prevent calling the plugin directly
-if ( ! function_exists('add_action')) {
+if (! function_exists('add_action')) {
     echo 'Please don&rsquo;t call the plugin directly. Thanks :)';
     exit;
 }
@@ -36,14 +36,16 @@ if ( ! function_exists('add_action')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Hooks activation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_activation() {
+function seopress_activation()
+{
     add_option('seopress_activated', 'yes');
     flush_rewrite_rules(false);
     do_action('seopress_activation');
 }
 register_activation_hook(__FILE__, 'seopress_activation');
 
-function seopress_deactivation() {
+function seopress_deactivation()
+{
     deactivate_plugins(['wp-seopress-pro/seopress-pro.php', 'wp-seopress-insights/seopress-insights.php']);
 
     delete_option('seopress_activated');
@@ -55,7 +57,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '4.7.0.1');
+define('SEOPRESS_VERSION', '4.7.0.2');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_TEMPLATE_DIR', SEOPRESS_PLUGIN_DIR_PATH . 'templates');
@@ -76,10 +78,11 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     ]);
 }
 
-function seopress_titles_single_cpt_enable_option($cpt) {
+function seopress_titles_single_cpt_enable_option($cpt)
+{
     $current_cpt                          = null;
     $seopress_titles_single_enable_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_single_enable_option)) {
+    if (! empty($seopress_titles_single_enable_option)) {
         foreach ($seopress_titles_single_enable_option as $key => $seopress_titles_single_enable_value) {
             $options[$key] = $seopress_titles_single_enable_value;
             if (isset($seopress_titles_single_enable_option['seopress_titles_single_titles'][$cpt]['enable'])) {
@@ -92,12 +95,13 @@ function seopress_titles_single_cpt_enable_option($cpt) {
 }
 
 //Archive CPT Titles
-function seopress_titles_archive_titles_option() {
+function seopress_titles_archive_titles_option()
+{
     global $post;
     $seopress_get_current_cpt = get_post_type($post);
 
     $seopress_titles_archive_titles_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archive_titles_option)) {
+    if (! empty($seopress_titles_archive_titles_option)) {
         foreach ($seopress_titles_archive_titles_option as $key => $seopress_titles_archive_titles_value) {
             $options[$key] = $seopress_titles_archive_titles_value;
         }
@@ -110,7 +114,8 @@ function seopress_titles_archive_titles_option() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //SEOPRESS INIT = Admin + Core + API + Translation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_init($hook) {
+function seopress_init($hook)
+{
     load_plugin_textdomain('wp-seopress', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 
     global $pagenow;
@@ -144,7 +149,7 @@ function seopress_init($hook) {
     remove_action('wp_head', 'rel_canonical'); //remove default WordPress Canonical
 
     //Setup/welcome
-    if ( ! empty($_GET['page'])) {
+    if (! empty($_GET['page'])) {
         switch ($_GET['page']) {
             case 'seopress-setup':
                 include_once dirname(__FILE__) . '/inc/admin/admin-wizard.php';
@@ -172,8 +177,9 @@ add_action('plugins_loaded', 'seopress_init', 999);
  * @return string
  * @author Benjamin
  */
-if ( ! function_exists('array_key_first')) {
-    function array_key_first(array $arr) {
+if (! function_exists('array_key_first')) {
+    function array_key_first(array $arr)
+    {
         foreach ($arr as $key => $unused) {
             return $key;
         }
@@ -188,8 +194,9 @@ if ( ! function_exists('array_key_first')) {
  * @return string
  * @author Benjamin
  */
-if ( ! function_exists('array_key_last')) {
-    function array_key_last(array $arr) {
+if (! function_exists('array_key_last')) {
+    function array_key_last(array $arr)
+    {
         end($arr);
         $key = key($arr);
 
@@ -200,7 +207,8 @@ if ( ! function_exists('array_key_last')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Loads dynamic variables for titles, metas, schemas...
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_dyn_variables_init($variables) {
+function seopress_dyn_variables_init($variables)
+{
     $variables = include dirname(__FILE__) . '/inc/functions/variables/dynamic-variables.php';
 
     return $variables;
@@ -211,12 +219,13 @@ add_filter('seopress_dyn_variables_fn', 'seopress_dyn_variables_init');
 //Loads the JS/CSS in admin
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //SEOPRESS Options page
-function seopress_add_admin_options_scripts($hook) {
+function seopress_add_admin_options_scripts($hook)
+{
     $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
     wp_register_style('seopress-admin', plugins_url('assets/css/seopress' . $prefix . '.css', __FILE__), [], SEOPRESS_VERSION);
     wp_enqueue_style('seopress-admin');
 
-    if ( ! isset($_GET['page'])) {
+    if (! isset($_GET['page'])) {
         return;
     }
     if ('seopress-network-option' === $_GET['page']) {
@@ -388,7 +397,8 @@ function seopress_add_admin_options_scripts($hook) {
 add_action('admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1);
 
 //SEOPRESS Admin bar
-function seopress_admin_bar_css() {
+function seopress_admin_bar_css()
+{
     $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
     if (is_user_logged_in() && function_exists('seopress_advanced_appearance_adminbar_option') && '1' != seopress_advanced_appearance_adminbar_option()) {
         if (is_admin_bar_showing()) {
@@ -400,7 +410,8 @@ function seopress_admin_bar_css() {
 add_action('init', 'seopress_admin_bar_css', 12, 1);
 
 //Quick Edit
-function seopress_add_admin_options_scripts_quick_edit() {
+function seopress_add_admin_options_scripts_quick_edit()
+{
     $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
     wp_enqueue_script('seopress-quick-edit', plugins_url('assets/js/seopress-quick-edit' . $prefix . '.js', __FILE__), ['jquery', 'inline-edit-post'], SEOPRESS_VERSION, true);
 }
@@ -410,8 +421,9 @@ add_action('admin_print_scripts-edit.php', 'seopress_add_admin_options_scripts_q
 //Admin Body Class
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 add_filter('admin_body_class', 'seopress_admin_body_class', 100);
-function seopress_admin_body_class($classes) {
-    if ( ! isset($_GET['page'])) {
+function seopress_admin_body_class($classes)
+{
+    if (! isset($_GET['page'])) {
         return $classes;
     }
     $_pages = [
@@ -451,7 +463,8 @@ remove_filter('wp_robots', 'wp_robots_max_image_preview_large');
  * @since 4.6
  * @todo use wp_robots API
  */
-function seopress_robots_wc_pages($robots) {
+function seopress_robots_wc_pages($robots)
+{
     include_once ABSPATH . 'wp-admin/includes/plugin.php';
     if (is_plugin_active('woocommerce/woocommerce.php')) {
         if (function_exists('wc_get_page_id')) {
@@ -476,7 +489,8 @@ add_filter('wp_robots', 'seopress_robots_wc_pages', 20);
 //3rd plugins compatibility
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Jetpack
-function seopress_compatibility_jetpack() {
+function seopress_compatibility_jetpack()
+{
     if (function_exists('is_plugin_active')) {
         if (is_plugin_active('jetpack/jetpack.php') && ! is_admin()) {
             add_filter('jetpack_enable_open_graph', '__return_false');
@@ -491,7 +505,8 @@ add_action('wp_head', 'seopress_compatibility_jetpack', 0);
  *
  * @since 3.8.1
  */
-function seopress_compatibility_woocommerce() {
+function seopress_compatibility_woocommerce()
+{
     if (function_exists('is_plugin_active')) {
         if (is_plugin_active('woocommerce/woocommerce.php') && ! is_admin()) {
             remove_action('wp_head', 'wc_page_noindex');
@@ -511,7 +526,8 @@ add_action('wp_head', 'seopress_compatibility_woocommerce', 0);
  * @param mixed $orig_scheme
  * @param mixed $blog_id
  */
-function seopress_remove_wpml_home_url_filter($home_url, $url, $path, $orig_scheme, $blog_id) {
+function seopress_remove_wpml_home_url_filter($home_url, $url, $path, $orig_scheme, $blog_id)
+{
     return $url;
 }
 
@@ -521,7 +537,8 @@ function seopress_remove_wpml_home_url_filter($home_url, $url, $path, $orig_sche
  * @since 4.2
  */
 add_action('do_meta_boxes', 'seopress_remove_metaboxes', 10);
-function seopress_remove_metaboxes() {
+function seopress_remove_metaboxes()
+{
     //Oxygen Builder
     remove_meta_box('ct_views_cpt', 'seopress_404', 'normal');
     remove_meta_box('ct_views_cpt', 'seopress_schemas', 'normal');
@@ -531,7 +548,8 @@ function seopress_remove_metaboxes() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Credits footer
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_custom_credits_footer() {
+function seopress_custom_credits_footer()
+{
     $html = '<span id="seopress-footer-credits">
 				<span class="dashicons dashicons-wordpress"></span>
 				' . __("You like SEOPress? Don't forget to rate it 5 stars!", 'wp-seopress') . '<span class="wporg-ratings rating-stars">';
@@ -573,12 +591,14 @@ if ((isset($_GET['page']) && (
     || 'seopress-import-export' == $_GET['page']
     || 'seopress-bot-batch' == $_GET['page']
     || 'seopress-insights' == $_GET['page']
-    || 'seopress-license' == $_GET['page']))
+    || 'seopress-license' == $_GET['page']
+))
     || (isset($_GET['post_type']) && (
-    'seopress_404' == $_GET['post_type']
+        'seopress_404' == $_GET['post_type']
     || 'seopress_schemas' == $_GET['post_type']
     || 'seopress_bot' == $_GET['post_type']
-    || 'seopress_backlinks' == $_GET['post_type']))) {
+    || 'seopress_backlinks' == $_GET['post_type']
+    ))) {
     add_filter('admin_footer_text', 'seopress_custom_credits_footer');
 }
 
@@ -587,10 +607,11 @@ if ((isset($_GET['page']) && (
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 add_filter('plugin_action_links', 'seopress_plugin_action_links', 10, 2);
 
-function seopress_plugin_action_links($links, $file) {
+function seopress_plugin_action_links($links, $file)
+{
     static $this_plugin;
 
-    if ( ! $this_plugin) {
+    if (! $this_plugin) {
         $this_plugin = plugin_basename(__FILE__);
     }
 
@@ -598,7 +619,7 @@ function seopress_plugin_action_links($links, $file) {
         $settings_link = '<a href="' . admin_url('admin.php?page=seopress-option') . '">' . __('Settings', 'wp-seopress') . '</a>';
         $website_link  = '<a href="https://www.seopress.org/support/" target="_blank">' . __('Docs', 'wp-seopress') . '</a>';
         $wizard_link   = '<a href="' . admin_url('admin.php?page=seopress-setup') . '">' . __('Configuration Wizard', 'wp-seopress') . '</a>';
-        if ( ! is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+        if (! is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
             $pro_link = '<a href="https://www.seopress.org/seopress-pro/" style="color:red;font-weight:bold" target="_blank">' . __('GO PRO!', 'wp-seopress') . '</a>';
             array_unshift($links, $pro_link);
         }
@@ -628,8 +649,9 @@ function seopress_plugin_action_links($links, $file) {
  *
  * @return (array) $wp_post_types
  **/
-function seopress_get_post_types() {
-    if ( ! function_exists('seopress_get_service')) {
+function seopress_get_post_types()
+{
+    if (! function_exists('seopress_get_service')) {
         global $wp_post_types;
 
         $args = [
@@ -669,7 +691,8 @@ function seopress_get_post_types() {
  *
  * @return (array) $taxonomies
  **/
-function seopress_get_taxonomies($with_terms = false) {
+function seopress_get_taxonomies($with_terms = false)
+{
     $args = [
         'show_ui' => true,
         'public'  => true,
@@ -686,7 +709,7 @@ function seopress_get_taxonomies($with_terms = false) {
 
     $taxonomies = apply_filters('seopress_get_taxonomies_list', $taxonomies);
 
-    if ( ! $with_terms) {
+    if (! $with_terms) {
         return $taxonomies;
     }
 
@@ -700,7 +723,8 @@ function seopress_get_taxonomies($with_terms = false) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Get all custom fields (limit: 250)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_get_custom_fields() {
+function seopress_get_custom_fields()
+{
     $cf_keys = wp_cache_get('seopress_get_custom_fields');
 
     if (false === $cf_keys) {
@@ -718,7 +742,7 @@ function seopress_get_custom_fields() {
         if (is_plugin_active('types/wpcf.php')) {
             $wpcf_fields = get_option('wpcf-fields');
 
-            if ( ! empty($wpcf_fields)) {
+            if (! empty($wpcf_fields)) {
                 foreach ($wpcf_fields as $key => $value) {
                     $cf_keys[] = $value['meta_key'];
                 }
@@ -739,7 +763,8 @@ function seopress_get_custom_fields() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Check SSL for schema.org
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_check_ssl() {
+function seopress_check_ssl()
+{
     if (is_ssl()) {
         return 'https://';
     } else {
@@ -754,7 +779,8 @@ function seopress_check_ssl() {
  *
  * @return (string) $ip
  **/
-function seopress_get_ip_address() {
+function seopress_get_ip_address()
+{
     foreach (['HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR'] as $key) {
         if (true === array_key_exists($key, $_SERVER)) {
             foreach (explode(',', $_SERVER[$key]) as $ip) {
@@ -782,9 +808,10 @@ function seopress_get_ip_address() {
  *
  * @author Benjamin
  */
-function seopress_get_toggle_option($feature) {
+function seopress_get_toggle_option($feature)
+{
     $seopress_get_toggle_option = get_option('seopress_toggle');
-    if ( ! empty($seopress_get_toggle_option)) {
+    if (! empty($seopress_get_toggle_option)) {
         foreach ($seopress_get_toggle_option as $key => $seopress_get_toggle_value) {
             $options[$key] = $seopress_get_toggle_value;
             if (isset($seopress_get_toggle_option['toggle-' . $feature])) {
@@ -798,9 +825,10 @@ function seopress_get_toggle_option($feature) {
 /**
  * @since 3.8
  */
-function seopress_get_toggle_titles_option() {
+function seopress_get_toggle_titles_option()
+{
     $seopress_get_toggle_titles_option = get_option('seopress_toggle');
-    if ( ! empty($seopress_get_toggle_titles_option)) {
+    if (! empty($seopress_get_toggle_titles_option)) {
         foreach ($seopress_get_toggle_titles_option as $key => $seopress_get_toggle_titles_value) {
             $options[$key] = $seopress_get_toggle_titles_value;
         }
@@ -813,9 +841,10 @@ function seopress_get_toggle_titles_option() {
 /**
  * @since 3.8
  */
-function seopress_get_toggle_social_option() {
+function seopress_get_toggle_social_option()
+{
     $seopress_get_toggle_social_option = get_option('seopress_toggle');
-    if ( ! empty($seopress_get_toggle_social_option)) {
+    if (! empty($seopress_get_toggle_social_option)) {
         foreach ($seopress_get_toggle_social_option as $key => $seopress_get_toggle_social_value) {
             $options[$key] = $seopress_get_toggle_social_value;
         }
@@ -828,9 +857,10 @@ function seopress_get_toggle_social_option() {
 /**
  * @since 3.8
  */
-function seopress_get_toggle_xml_sitemap_option() {
+function seopress_get_toggle_xml_sitemap_option()
+{
     $seopress_get_toggle_xml_sitemap_option = get_option('seopress_toggle');
-    if ( ! empty($seopress_get_toggle_xml_sitemap_option)) {
+    if (! empty($seopress_get_toggle_xml_sitemap_option)) {
         foreach ($seopress_get_toggle_xml_sitemap_option as $key => $seopress_get_toggle_xml_sitemap_value) {
             $options[$key] = $seopress_get_toggle_xml_sitemap_value;
         }
@@ -843,9 +873,10 @@ function seopress_get_toggle_xml_sitemap_option() {
 /**
  * @since 3.8
  */
-function seopress_get_toggle_google_analytics_option() {
+function seopress_get_toggle_google_analytics_option()
+{
     $seopress_get_toggle_google_analytics_option = get_option('seopress_toggle');
-    if ( ! empty($seopress_get_toggle_google_analytics_option)) {
+    if (! empty($seopress_get_toggle_google_analytics_option)) {
         foreach ($seopress_get_toggle_google_analytics_option as $key => $seopress_get_toggle_google_analytics_value) {
             $options[$key] = $seopress_get_toggle_google_analytics_value;
         }
@@ -858,9 +889,10 @@ function seopress_get_toggle_google_analytics_option() {
 /**
  * @since 3.8
  */
-function seopress_get_toggle_advanced_option() {
+function seopress_get_toggle_advanced_option()
+{
     $seopress_get_toggle_advanced_option = get_option('seopress_toggle');
-    if ( ! empty($seopress_get_toggle_advanced_option)) {
+    if (! empty($seopress_get_toggle_advanced_option)) {
         foreach ($seopress_get_toggle_advanced_option as $key => $seopress_get_toggle_advanced_value) {
             $options[$key] = $seopress_get_toggle_advanced_value;
         }
@@ -877,8 +909,9 @@ function seopress_get_toggle_advanced_option() {
 /**
  * @deprecated 4.3.0
  */
-function seopress_xml_sitemap_general_enable_option() {
-    if ( ! function_exists('seopress_get_service')) {
+function seopress_xml_sitemap_general_enable_option()
+{
+    if (! function_exists('seopress_get_service')) {
         return '1';
     }
 
@@ -888,8 +921,9 @@ function seopress_xml_sitemap_general_enable_option() {
 /**
  * @deprecated 4.3.0
  */
-function seopress_xml_sitemap_post_types_list_option() {
-    if ( ! function_exists('seopress_get_service')) {
+function seopress_xml_sitemap_post_types_list_option()
+{
+    if (! function_exists('seopress_get_service')) {
         return '';
     }
 
@@ -899,8 +933,9 @@ function seopress_xml_sitemap_post_types_list_option() {
 /**
  * @deprecated 4.3.0
  */
-function seopress_xml_sitemap_taxonomies_list_option() {
-    if ( ! function_exists('seopress_get_service')) {
+function seopress_xml_sitemap_taxonomies_list_option()
+{
+    if (! function_exists('seopress_get_service')) {
         return '';
     }
 
@@ -910,8 +945,9 @@ function seopress_xml_sitemap_taxonomies_list_option() {
 /**
  * @deprecated 4.3.0
  */
-function seopress_xml_sitemap_author_enable_option() {
-    if ( ! function_exists('seopress_get_service')) {
+function seopress_xml_sitemap_author_enable_option()
+{
+    if (! function_exists('seopress_get_service')) {
         return '';
     }
 
@@ -921,8 +957,9 @@ function seopress_xml_sitemap_author_enable_option() {
 /**
  * @deprecated 4.3.0
  */
-function seopress_xml_sitemap_img_enable_option() {
-    if ( ! function_exists('seopress_get_service')) {
+function seopress_xml_sitemap_img_enable_option()
+{
+    if (! function_exists('seopress_get_service')) {
         return '';
     }
 
@@ -931,8 +968,9 @@ function seopress_xml_sitemap_img_enable_option() {
 
 //Rewrite Rules for XML Sitemap
 if ('1' == seopress_xml_sitemap_general_enable_option() && '1' == seopress_get_toggle_option('xml-sitemap')) {
-    function seopress_sitemaps_headers() {
-        if ( ! function_exists('seopress_get_service')) {
+    function seopress_sitemaps_headers()
+    {
+        if (! function_exists('seopress_get_service')) {
             return;
         }
 
@@ -944,7 +982,8 @@ if ('1' == seopress_xml_sitemap_general_enable_option() && '1' == seopress_get_t
         add_filter('request', 'seopress_wpml_block_secondary_languages');
     }
 
-    function seopress_wpml_block_secondary_languages($q) {
+    function seopress_wpml_block_secondary_languages($q)
+    {
         $current_language = apply_filters('wpml_current_language', false);
         $default_language = apply_filters('wpml_default_language', false);
         if ($current_language !== $default_language) {
@@ -959,7 +998,8 @@ if ('1' == seopress_xml_sitemap_general_enable_option() && '1' == seopress_get_t
     }
 }
 
-function seopress_disable_qm($allcaps, $caps, $args) {
+function seopress_disable_qm($allcaps, $caps, $args)
+{
     $allcaps['view_query_monitor'] = false;
 
     return $allcaps;
@@ -967,7 +1007,8 @@ function seopress_disable_qm($allcaps, $caps, $args) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Remove Admin Bar with Content Analysis
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_clean_content_analysis() {
+function seopress_clean_content_analysis()
+{
     if (current_user_can('edit_posts')) {
         if (isset($_GET['no_admin_bar']) && '1' === $_GET['no_admin_bar']) {
             //Remove admin bar
@@ -991,7 +1032,8 @@ add_action('plugins_loaded', 'seopress_clean_content_analysis');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Test abolute URLs (return true if absolute)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_is_absolute($url) {
+function seopress_is_absolute($url)
+{
     $pattern = "%^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@|\d{1,3}(?:\.\d{1,3}){3}|(?:(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)(?:\.(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)*(?:\.[a-z\x{00a1}-\x{ffff}]{2,6}))(?::\d+)?(?:[^\s]*)?$%iu";
 
     return (bool) preg_match($pattern, $url);
@@ -1000,7 +1042,8 @@ function seopress_is_absolute($url) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Manage localized links
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_get_locale() {
+function seopress_get_locale()
+{
     switch (get_user_locale(get_current_user_id())) {
         case 'fr_FR':
         case 'fr_BE':
@@ -1031,7 +1074,8 @@ function seopress_get_locale() {
  *
  * @author Benjamin
  */
-function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
+function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code)
+{
     $html =
     '<button type="button" class="sp-tooltip"><span class="dashicons dashicons-editor-help"></span>
 	<span class="sp-tooltiptext" role="tooltip" tabindex="0">
@@ -1056,7 +1100,8 @@ function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
  *
  * @author Benjamin
  */
-function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc) {
+function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc)
+{
     $html =
     '<button type="button" class="sp-tooltip alt">' . $tooltip_anchor . '
 	<span class="sp-tooltiptext" role="tooltip" tabindex="0">
@@ -1078,7 +1123,8 @@ function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc) {
  *
  * @author Benjamin
  */
-function seopress_remove_utf8_bom($text) {
+function seopress_remove_utf8_bom($text)
+{
     $bom  = pack('H*', 'EFBBBF');
     $text = preg_replace("/^$bom/", '', $text);
 
@@ -1096,8 +1142,9 @@ function seopress_remove_utf8_bom($text) {
  *
  * @author Benjamin
  */
-function seopress_notification($args) {
-    if ( ! empty($args)) {
+function seopress_notification($args)
+{
+    if (! empty($args)) {
         $id             = isset($args['id']) ? $args['id'] : null;
         $title          = isset($args['title']) ? $args['title'] : null;
         $desc           = isset($args['desc']) ? $args['desc'] : null;
@@ -1107,7 +1154,7 @@ function seopress_notification($args) {
         $icon           = isset($args['icon']) ? $args['icon'] : null;
 
         $class = '';
-        if ( ! empty($impact)) {
+        if (! empty($impact)) {
             $class .= ' impact';
             $class .= ' ' . key($impact);
         }
@@ -1118,11 +1165,11 @@ function seopress_notification($args) {
 
         $html = '<div id="' . $id . '-alert" class="seopress-alert">';
 
-        if ( ! empty($impact)) {
+        if (! empty($impact)) {
             $html .= '<span class="screen-reader-text">' . reset($impact) . '</span>';
         }
 
-        if ( ! empty($icon)) {
+        if (! empty($icon)) {
             $html .= '<span class="dashicons ' . $icon . '"></span>';
         } else {
             $html .= '<span class="dashicons dashicons-info"></span>';
@@ -1145,10 +1192,10 @@ function seopress_notification($args) {
             $target = ' target="_blank"';
         }
 
-        if ( ! empty($link) || true === $deleteable) {
+        if (! empty($link) || true === $deleteable) {
             $html .= '<div class="notice-right">';
 
-            if ( ! empty($link)) {
+            if (! empty($link)) {
                 $html .= '<a class="button-primary"' . $href . $target . '>' . $link['title'] . '</a>';
             }
             if (true === $deleteable) {
@@ -1173,9 +1220,10 @@ function seopress_notification($args) {
  *
  * @return (string)
  **/
-function seopress_capability($cap, $context = '') {
+function seopress_capability($cap, $context = '')
+{
     $newcap = apply_filters('seopress_capability', $cap, $context);
-    if ( ! current_user_can($newcap)) {
+    if (! current_user_can($newcap)) {
         return $cap;
     }
 
@@ -1191,8 +1239,9 @@ function seopress_capability($cap, $context = '') {
  *
  * @return (bool)
  **/
-function is_seopress_page() {
-    if ( ! is_admin() && ( ! isset($_REQUEST['page']) || ! isset($_REQUEST['post_type']))) {
+function is_seopress_page()
+{
+    if (! is_admin() && (! isset($_REQUEST['page']) || ! isset($_REQUEST['post_type']))) {
         return false;
     }
 
@@ -1211,7 +1260,8 @@ function is_seopress_page() {
  * @return (bool)
  **/
 add_action('in_admin_header', 'seopress_remove_other_notices');
-function seopress_remove_other_notices() {
+function seopress_remove_other_notices()
+{
     if (is_seopress_page()) {
         remove_all_actions('network_admin_notices');
         remove_all_actions('admin_notices');
@@ -1233,7 +1283,8 @@ function seopress_remove_other_notices() {
  *
  * @return (bool)
  **/
-function seopress_admin_notices() {
+function seopress_admin_notices()
+{
     do_action('seopress_admin_notices');
 }
 
@@ -1246,7 +1297,8 @@ function seopress_admin_notices() {
  *
  * @return (bool)
  **/
-function seopress_get_days() {
+function seopress_get_days()
+{
     $start_of_week = (int) get_option('start_of_week');
 
     return array_map(
@@ -1276,7 +1328,8 @@ function seopress_get_days() {
  *
  * @param mixed $key
  **/
-function seopress_if_key_exists(array $arr, $key) {
+function seopress_if_key_exists(array $arr, $key)
+{
     // is in base array?
     if (array_key_exists($key, $arr)) {
         return true;
@@ -1303,11 +1356,12 @@ function seopress_if_key_exists(array $arr, $key) {
  *
  * @return null
  **/
-function seopress_get_oxygen_content() {
+function seopress_get_oxygen_content()
+{
     if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
         $seopress_get_the_content = ct_template_output();
 
-        if ( ! $seopress_get_the_content) {
+        if (! $seopress_get_the_content) {
             //Get post content
             $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', get_the_ID()));
         }
@@ -1330,7 +1384,7 @@ function seopress_get_oxygen_content() {
             //Words Counter
             $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", $seopress_get_the_content, $matches);
 
-            if ( ! empty($matches[0])) {
+            if (! empty($matches[0])) {
                 $words_counter_unique = count(array_unique($matches[0]));
             } else {
                 $words_counter_unique = '0';
@@ -1351,58 +1405,60 @@ function seopress_get_oxygen_content() {
  * @author Benjamin Denis
  *
  **/
-function seopress_wizard_follow_us() {
+function seopress_wizard_follow_us()
+{
     ?>
-	<li class="seopress-wizard-additional-steps">
-		<div class="seopress-wizard-next-step-description">
-			<p class="next-step-heading"><?php esc_html_e('Follow us:', 'wp-seopress'); ?></p>
-		</div>
-		<div class="seopress-wizard-next-step-action step">
-			<ul class="recommended-step">
-				<li class="recommended-item">
-					<a href="https://www.facebook.com/seopresspro/" target="_blank">
-						<span class="dashicons dashicons-facebook"></span>
-						<?php _e('Like our Facebook page', 'wp-seopress'); ?>
-					</a>
-				</li>
-				<li class="recommended-item">
-					<a href="https://www.facebook.com/groups/seopress/" target="_blank">
-						<span class="dashicons dashicons-facebook"></span>
-						<?php _e('Join our Facebook Community group', 'wp-seopress'); ?>
-					</a>
-				</li>
-				<li class="recommended-item">
-					<a href="https://www.youtube.com/seopress" target="_blank">
-						<span class="dashicons dashicons-video-alt3"></span>
-						<?php _e('Watch our guided tour videos to learn more about SEOPress', 'wp-seopress'); ?>
-					</a>
-				</li>
-				<li class="recommended-item">
-					<?php
+<li class="seopress-wizard-additional-steps">
+    <div class="seopress-wizard-next-step-description">
+        <p class="next-step-heading"><?php esc_html_e('Follow us:', 'wp-seopress'); ?>
+        </p>
+    </div>
+    <div class="seopress-wizard-next-step-action step">
+        <ul class="recommended-step">
+            <li class="recommended-item">
+                <a href="https://www.facebook.com/seopresspro/" target="_blank">
+                    <span class="dashicons dashicons-facebook"></span>
+                    <?php _e('Like our Facebook page', 'wp-seopress'); ?>
+                </a>
+            </li>
+            <li class="recommended-item">
+                <a href="https://www.facebook.com/groups/seopress/" target="_blank">
+                    <span class="dashicons dashicons-facebook"></span>
+                    <?php _e('Join our Facebook Community group', 'wp-seopress'); ?>
+                </a>
+            </li>
+            <li class="recommended-item">
+                <a href="https://www.youtube.com/seopress" target="_blank">
+                    <span class="dashicons dashicons-video-alt3"></span>
+                    <?php _e('Watch our guided tour videos to learn more about SEOPress', 'wp-seopress'); ?>
+                </a>
+            </li>
+            <li class="recommended-item">
+                <?php
                         if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale()) {
                             $link = 'https://www.seopress.org/fr/blog/category/tutoriels/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
                         } else {
                             $link = 'https://www.seopress.org/blog/how-to/?utm_source=plugin&utm_medium=wizard&utm_campaign=seopress';
                         } ?>
-					<a href="<?php echo $link; ?>" target="_blank">
-						<span class="dashicons dashicons-format-aside"></span>
-						<?php _e('Read our blog posts about SEO concepts, tutorials and more', 'wp-seopress'); ?>
-					</a>
-				</li>
-				<li class="recommended-item">
-					<a href="https://twitter.com/wp_seopress" target="_blank">
-						<span class="dashicons dashicons-twitter"></span>
-						<?php _e('Follow us on Twitter', 'wp-seopress'); ?>
-					</a>
-				</li>
-				<li class="recommended-item">
-					<a href="https://www.instagram.com/wp_seopress/" target="_blank">
-						<span class="dashicons dashicons-instagram"></span>
-						<?php _e('The off side of SEOPress', 'wp-seopress'); ?>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</li>
-	<?php
+                <a href="<?php echo $link; ?>" target="_blank">
+                    <span class="dashicons dashicons-format-aside"></span>
+                    <?php _e('Read our blog posts about SEO concepts, tutorials and more', 'wp-seopress'); ?>
+                </a>
+            </li>
+            <li class="recommended-item">
+                <a href="https://twitter.com/wp_seopress" target="_blank">
+                    <span class="dashicons dashicons-twitter"></span>
+                    <?php _e('Follow us on Twitter', 'wp-seopress'); ?>
+                </a>
+            </li>
+            <li class="recommended-item">
+                <a href="https://www.instagram.com/wp_seopress/" target="_blank">
+                    <span class="dashicons dashicons-instagram"></span>
+                    <?php _e('The off side of SEOPress', 'wp-seopress'); ?>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
+<?php
 }
