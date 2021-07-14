@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.7.0
+Stable tag: 4.7.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -325,6 +325,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 4.7.0.1 (21/05/2021) =
+* FIX Remove old file generating a bug in schema rendering
 = 4.7 (19/05/2021) - <a href="https://www.seopress.org/blog/seopress-4-7/">Read our blog post update</a> =
 * NEW Apply automatic schemas based on post ID
 * NEW Speakable schema (visible under Article manual or automatic schema)
