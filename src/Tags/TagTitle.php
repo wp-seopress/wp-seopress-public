@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class TagTitle implements GetTagValue {
     const NAME = 'tag_title';
 
+    public static function getDescription() {
+        return __('Tag Title', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
 

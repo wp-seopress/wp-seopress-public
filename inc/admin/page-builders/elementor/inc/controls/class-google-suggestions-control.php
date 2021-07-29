@@ -56,14 +56,16 @@ class Google_Suggestions_Control extends \Elementor\Base_Control {
 
     public function content_template() {
         ?>
-			<div class="elementor-control-field seopress-google-suggestions">
-                <label for="seopress_google_suggest_kw_meta">
-                    <div>{{{ data.label }}} {{{ data.tooltip }}}</div>
-                    <input id="seopress_google_suggest_kw_meta" type="text" placeholder="{{ data.placeholder }}" aria-label="Google suggestions">
-                </label>
-                <button id="seopress_get_suggestions" type="button" class="button elementor-button elementor-button-default">{{{ data.buttonLabel }}}</button>
-                <ul id='seopress_suggestions'></ul>
-			</div>
-		<?php
+<div class="elementor-control-field seopress-google-suggestions">
+    <label for="seopress_google_suggest_kw_meta">
+        <div>{{{ data.label }}} {{{ data.tooltip }}}</div>
+        <input id="seopress_google_suggest_kw_meta" type="text" placeholder="{{ data.placeholder }}"
+            aria-label="Google suggestions">
+    </label>
+    <button id="seopress_get_suggestions" type="button"
+        class="btn btnSecondary elementor-button elementor-button-default">{{{ data.buttonLabel }}}</button>
+    <ul id='seopress_suggestions'></ul>
+</div>
+<?php
     }
 }

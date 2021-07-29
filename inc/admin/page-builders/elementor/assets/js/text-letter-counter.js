@@ -237,7 +237,7 @@ var textLetterCounterView = elementor.modules.controls.BaseData.extend({
         }
 
         const newValue = $el.val() + " " + $currentBtn.data("tag");
-        console.log($el);
+
         $el.val(newValue);
         $el.trigger("change");
     },

@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class PostTag implements GetTagValue {
     const NAME = 'post_tag';
 
+    public static function getDescription() {
+        return __('Post Tag', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         $value   = '';

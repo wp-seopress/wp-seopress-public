@@ -200,7 +200,8 @@ jQuery(document).ready(function ($) {
                             "disabled"
                         );
                         $(".spinner").css("visibility", "hidden");
-                        $("#" + id + "-migration-tool .log").html(i18n);
+                        $("#" + id + "-migration-tool .log").css("display", "block");
+                        $("#" + id + "-migration-tool .log").html("<div class='seopress-notice is-success'><p>"+i18n+"</p></div>");
 
                         if (data.data.url != "") {
                             $(location).attr("href", data.data.url);

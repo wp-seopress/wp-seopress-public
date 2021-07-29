@@ -13,6 +13,10 @@ class PostDate implements GetTagValue {
 
     const ALIAS = ['date'];
 
+    public static function getDescription() {
+        return __('Post Date', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         $value   = '';

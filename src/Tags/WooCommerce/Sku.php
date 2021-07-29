@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class Sku implements GetTagValue {
     const NAME = 'wc_sku';
 
+    public static function getDescription() {
+        return __('Product SKU', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
 

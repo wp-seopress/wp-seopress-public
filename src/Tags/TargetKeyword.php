@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class TargetKeyword implements GetTagValue {
     const NAME = 'target_keyword';
 
+    public static function getDescription() {
+        return __('Target Keywords', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
 

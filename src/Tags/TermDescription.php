@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class TermDescription implements GetTagValue {
     const NAME = 'term_description';
 
+    public static function getDescription() {
+        return __('Term Description', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
 

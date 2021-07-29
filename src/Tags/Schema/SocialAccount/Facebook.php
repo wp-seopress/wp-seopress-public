@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class Facebook implements GetTagValue {
     const NAME = 'social_account_facebook';
 
+    public static function getDescription() {
+        return __('Facebook URL', 'wp-seopress');
+    }
+
     /**
      * @since 4.5.0
      *

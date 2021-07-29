@@ -11,6 +11,11 @@ use SEOPress\Models\GetTagValue;
 
 class CustomPostMeta extends AbstractCustomTagValue implements GetTagValue {
     const CUSTOM_FORMAT = '_cf_';
+    const NAME          = '_cf_your_custom_field_name';
+
+    public static function getDescription() {
+        return __('Custom fields (replace your_custom_field_name by the name of your custom field)', 'wp-seopress');
+    }
 
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;

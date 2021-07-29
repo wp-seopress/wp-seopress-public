@@ -589,6 +589,32 @@ function seopress_clean_404() {
 }
 add_action('admin_init', 'seopress_clean_404');
 
+//Reset Count column
+function seopress_clean_counters() {
+    if (empty($_POST['seopress_action']) || 'clean_counters' != $_POST['seopress_action']) {
+        return;
+    }
+    if ( ! wp_verify_nonce($_POST['seopress_clean_counters_nonce'], 'seopress_clean_counters_nonce')) {
+        return;
+    }
+    if ( ! current_user_can(seopress_capability('manage_options', '404'))) {
+        return;
+    }
+
+    global $wpdb;
+
+    //SQL query
+    $sql = 'DELETE  FROM `' . $wpdb->prefix . 'postmeta` WHERE `meta_key` = \'seopress_404_count\'';
+
+    $sql = $wpdb->prepare($sql);
+
+    $wpdb->query($sql);
+
+    wp_safe_redirect(admin_url('edit.php?post_type=seopress_404'));
+    exit;
+}
+add_action('admin_init', 'seopress_clean_counters');
+
 //Clean all (redirects / 404 errors)
 function seopress_clean_all() {
     if (empty($_POST['seopress_action']) || 'clean_all' != $_POST['seopress_action']) {

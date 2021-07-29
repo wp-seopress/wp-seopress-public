@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class Youtube implements GetTagValue {
     const NAME = 'social_account_youtube';
 
+    public static function getDescription() {
+        return __('YouTube URL', 'wp-seopress');
+    }
+
     /**
      * @since 4.5.0
      *

@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class SingleCategory implements GetTagValue {
     const NAME = 'wc_single_cat';
 
+    public static function getDescription() {
+        return __('Product Category', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
 

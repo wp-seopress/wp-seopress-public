@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class Linkedin implements GetTagValue {
     const NAME = 'social_account_linkedin';
 
+    public static function getDescription() {
+        return __('LinkedIn URL', 'wp-seopress');
+    }
+
     /**
      * @since 4.5.0
      *

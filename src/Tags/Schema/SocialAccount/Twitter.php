@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class Twitter implements GetTagValue {
     const NAME = 'social_account_twitter';
 
+    public static function getDescription() {
+        return __('Twitter URL', 'wp-seopress');
+    }
+
     /**
      * @since 4.5.0
      *

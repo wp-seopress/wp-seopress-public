@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class CurrentPagination implements GetTagValue {
     const NAME = 'current_pagination';
 
+    public static function getDescription() {
+        return __('Current Number Page', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         $value   = '';

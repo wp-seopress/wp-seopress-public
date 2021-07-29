@@ -4,9 +4,9 @@ Contributors: rainbowgeek, gmulti, juliobox, maigret, mgris
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.7.0.2
+Stable tag: 5.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -325,113 +325,45 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
-= 4.7.0.2 (5/07/2021) =
-* FIX AIO SEO import tool
-= 4.7.0.1 (21/05/2021) =
-* FIX Remove old file generating a bug in schema rendering
-= 4.7 (19/05/2021) - <a href="https://www.seopress.org/blog/seopress-4-7/">Read our blog post update</a> =
-* NEW Apply automatic schemas based on post ID
-* NEW Speakable schema (visible under Article manual or automatic schema)
-* NEW ReviewBody property for Review schema (manual and automatic)
-* NEW Menu and acceptsReservations properties for Local Business schema (manual and automatic)
-* NEW Video property for Recipe schema (manual and automatic)
-* NEW Author property (custom) for Article schema (manual and automatic)
-* NEW Add Organizer Name and Organizer URL properties to Event schema (manual and automatic)
-* NEW Add Start Date Timezone property to Event schema (manual and automatic)
-* NEW 'seopress_schemas_mapping_select', 'seopress_schemas_dyn_variables' and 'seopress_schemas_dyn_variables_replace' hooks to filter available dynamic variables for automatic schemas (https://www.seopress.org/support/hooks/filter-predefined-dynamic-variables-for-automatic-schemas/)
-* NEW "noindex on attachment pages" option (SEO, Titles & metas, Advanced tab)
-* NEW "seopress_schemas_auto_article_json" hooks to filter article automatic JSON schema
-* NEW "seopress_schemas_auto_lb_json" hooks to filter local business automatic JSON schema
-* NEW "seopress_schemas_auto_faq_json" hooks to filter FAQ automatic JSON schema
-* NEW "seopress_schemas_auto_course_json" hooks to filter course automatic JSON schema
-* NEW "seopress_schemas_auto_recipe_json" hooks to filter recipe automatic JSON schema
-* NEW "seopress_schemas_auto_job_json" hooks to filter job automatic JSON schema
-* NEW "seopress_schemas_auto_video_json" hooks to filter video automatic JSON schema
-* NEW "seopress_schemas_auto_event_json" hooks to filter event automatic JSON schema
-* NEW "seopress_schemas_auto_product_json" hooks to filter product automatic JSON schema
-* NEW "seopress_schemas_auto_softwareapp_json" hooks to filter software application automatic JSON schema
-* NEW "seopress_schemas_auto_service_json" hooks to filter service automatic JSON schema
-* NEW "seopress_schemas_auto_review_json" hooks to filter review automatic JSON schema
-* INFO Dutch language updated
-* INFO Improve UI for Opening hours property with Local Business schema
-* INFO Automatically disable SEO options from Jetpack plugin to prevent any SEO conflicts
-* FIX "location" property with Event schema with specific conditions
-* FIX Trying to get property 'term_id' of non-object
-* FIX Video schema : Warning A non-numeric value encountered
-* FIX recipeCuisine property for Recipe manual schema
-* FIX %%currentmonth%% and %%currentmonth_num%% dynamic variables
-* FIX Analytics JS conflict with caching plugin in specific cases
-* FIX "seopress_can_post_redirect" autoload option
-* FIX Dynamic variables for custom manual schema
-* FIX Quick edit feature for Redirections post type
-* FIX Archive link if not available in HTML sitemap (thanks @ajoah)
-= 4.6.0.2 =
-* FIX Custom capabilities
-* FIX WC undefined function in specific cases
-= 4.6.0.1 =
-* FIX Fatal error
-= 4.6 (29/04/2021) - https://www.seopress.org/blog/seopress-4-6/ =
-* NEW Custom capabilities 🎉 (SEO, Advanced, Security)
-* NEW Bricks compatibility with our content analysis feature
-* NEW %%author_first_name%% dynamic variable to request user first name
-* NEW %%author_last_name%% dynamic variable to request user last name
-* NEW %%author_website%% dynamic variable to request user website
-* NEW %%author_nickname%% dynamic variable to request user nickname
-* NEW %%_ucf_your_user_meta%% dynamic variable to request user meta
-* NEW Complete refactoring of the manual schema module
-* NEW "Display a text before the Breadcrumbs" option
-* NEW Add og:locale and og:locale:alternate support for WPML
-* NEW Option to disable content analysis metabox (SEO, Advanced, Advanced tab)
-* NEW "seopress_remove_category_base" hook to filter /category/ slug
-* NEW Hooks to filter manual schemas:
-    * seopress_get_json_data_organization
-    * seopress_get_json_data_image
-    * seopress_get_json_data_contact_point
-    * seopress_pro_get_json_data_author
-    * seopress_pro_get_json_data_article
-    * seopress_pro_get_json_data_aggreagate_rating
-    * seopress_pro_get_json_data_brand
-    * seopress_pro_get_json_data_course
-    * seopress_pro_get_json_data_event
-    * seopress_pro_get_json_data_faq
-    * seopress_pro_get_json_data_geo
-    * seopress_pro_get_json_data_how_to_step
-    * seopress_pro_get_json_data_job
-    * seopress_pro_get_json_data_local_business
-    * seopress_pro_get_json_data_main_entity
-    * seopress_pro_get_json_data_main_entity_of_page
-    * seopress_pro_get_json_data_monetary_amount
-    * seopress_pro_get_json_data_nutrition_information
-    * seopress_pro_get_json_data_offer
-    * seopress_pro_get_json_data_opening_hours
-    * seopress_pro_get_json_data_person
-    * seopress_pro_get_json_data_place
-    * seopress_pro_get_json_data_postal_address
-    * seopress_pro_get_json_data_product
-    * seopress_pro_get_json_data_rating
-    * seopress_pro_get_json_data_recipe
-    * seopress_pro_get_json_data_review
-    * seopress_pro_get_json_data_service
-    * seopress_pro_get_json_data_site_navigation_element
-    * seopress_pro_get_json_data_software_app
-    * seopress_pro_get_json_data_thing
-    * seopress_pro_get_json_data_video
-    * seopress_pro_get_json_data_virtual_location
-* INFO Improve Themify Builer compatibility with Content Analysis
-* INFO Improve Oxygen compatibility in specific cases
-* INFO Allow to show taxonomies in Breadcrumbs for Page post type
-* INFO Elementor Dark mode compatibility
-* FIX Duplicated meta robots on WC pages (checkout, cart, account)
-* FIX Remove /category/ slug with WPML if the slug is translated
-* FIX Fatal error when connecting Google Analytics / Google Console if no permission
-* FIX Google Analytics widget logout after view lock
-* FIX Google Analytics listing properties error handling
-* FIX Canonical URL on paginated pages (is_singular && is_paged)
-* FIX PHP notice queried object
-* FIX JS Encoding for Google Preview
-* FIX Missing compatibility center options in export file
-* FIX Undefined index: image with FAQ Block (props to @audrasjb)
-* FIX LocalBusiness widget in specific cases
-* FIX SEOPress metaboxes not loaded in specific cases (props to @J-Brk)
+= 5.0 <a href="https://www.seopress.org/blog/seopress-5-0/" target="_blank">Read the blog post update</a> =
+* NEW <strong>[HUGE]</strong> Universal SEO Metabox: edit your SEO from all page builders 🎉🎉🎉
+* NEW User modern interface 🎉
+* NEW SEOPress REST API (first iteration) 🎉
+* NEW Remove /product-category/ in your permalinks 🎉
+* NEW Add bestRating / worstRating properties for Review schema (including SoftwareApp)
+* NEW Reset count column for Redirections
+* NEW Bulk actions for Redirections (mark as 301, 302, 307, 410, 451)
+* NEW IP Logging options for Redirections with anonymization IP
+* NEW Add Referrer column in Redirections if available
+* NEW 'seopress_lb_widget_html' hook to filter Local Business HTML widget (https://www.seopress.org/support/hooks/filter-local-business-widget-html/)
+* NEW 'seopress_can_enqueue_universal_metabox' hook to disable the SEO beacon (https://www.seopress.org/support/hooks/disable-seo-beacon/)
+* NEW 'seopress_404_ip' hook to filter IP for 404 monitoring (https://www.seopress.org/support/hooks/filter-ip-address-for-404-monitoring/)
+* NEW 'seopress_sitemaps_html_product_cat_query' hook to filter product categories query in HTML sitemap (https://www.seopress.org/support/hooks/filter-html-sitemap-product-category-query-for-products/)
+* NEW Translation for "Author:"	for Breadcrumbs
+* NEW Notification if Swift Performance is caching your XML sitemap
+* NEW Order products by category in HTML sitemap
+* NEW Check if a target keyword is already used with our Content Analysis feature
+* INFO Improve nofollow links analysis
+* INFO Automatically strip protocol / domain name when adding a redirection origin
+* INFO Add VetenaryCare subtype to Local Business schema (automatic / manual)
+* INFO Add Quick tags to meta description template in global title settings
+* INFO Allow webp images for Facebook / Twitter metas
+* INFO Update i18n
+* FIX Headings analysis issues
+* FIX Notices in Redirections
+* FIX IP logging in Redirections
+* FIX Send full post thumbnail URL in XML sitemaps (props @cookingwithdog)
+* FIX Close and Edit cookies button for WPML / Polylang configuration file
+* FIX Warning preg_match(): Unknown modifier if "/" in category permalink structure
+* FIX CSS conflict with Easy Digital Downloads and WooCommerce
+* FIX Compatibility issue with Thrive Builder
+* FIX Add @id property to Service schema (automatic / manual)
+* FIX Fatal error in rare cases: Uncaught TypeError: end()
+* FIX Cookie bar secondary button options
+* FIX Google Analytics stats in dashboard slowdowns
+* FIX Hide SEO columns in post type list if Advanced toggle is disabled
+* FIX PHP 8 oembed notice
+* FIX Quick tag buttons in Titles and Metas settings page
+* FIX Broken link checker in specific cases
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

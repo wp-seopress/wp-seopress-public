@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class Pinterest implements GetTagValue {
     const NAME = 'social_account_pinterest';
 
+    public static function getDescription() {
+        return __('Pinterest URL', 'wp-seopress');
+    }
+
     /**
      * @since 4.5.0
      *

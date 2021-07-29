@@ -8,9 +8,12 @@ if ( ! defined('ABSPATH')) {
 
 use SEOPress\Models\GetTagValue;
 
-class PostAuthor implements GetTagValue
-{
+class PostAuthor implements GetTagValue {
     const NAME = 'post_author';
+
+    public static function getDescription() {
+        return __('Post Author', 'wp-seopress');
+    }
 
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;

@@ -208,7 +208,7 @@ function sp_social_img(social_slug) {
             jQuery.get(meta_img_val).done(function () {
                 // Extract filetype
                 var meta_img_filetype = meta_img_val.split(/\#|\?/)[0].split('.').pop().trim();
-                var types = ['jpg', 'jpeg', 'gif', 'png'];
+                var types = ['jpg', 'jpeg', 'gif', 'png', 'webp'];
 
                 if (types.indexOf(meta_img_filetype) == -1) {
                     jQuery(".snippet-" + social_slug + "-img-alert.alert1").css("display", "block");

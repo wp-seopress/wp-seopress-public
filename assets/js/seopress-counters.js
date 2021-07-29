@@ -438,7 +438,7 @@ function sp_social_img(social_slug) {
                             .split(".")
                             .pop()
                             .trim();
-                        var types = ["jpg", "jpeg", "gif", "png"];
+                        var types = ["jpg", "jpeg", "gif", "png", "webp"];
 
                         if (types.indexOf(meta_img_filetype) == -1) {
                             jQuery(
@@ -684,7 +684,7 @@ function seopress_google_suggest(data) {
             suggestions_array[i] != "[object Object]"
         ) {
             document.getElementById("seopress_suggestions").innerHTML +=
-                '<li><a href="#" class="sp-suggest-btn button button-small">' +
+                '<li><a href="#" class="sp-suggest-btn components-button is-secondary">' +
                 suggestions_array[i] +
                 "</a></li>";
         }

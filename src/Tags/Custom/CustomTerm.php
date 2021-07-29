@@ -11,6 +11,11 @@ use SEOPress\Models\GetTagValue;
 
 class CustomTerm extends AbstractCustomTagValue implements GetTagValue {
     const CUSTOM_FORMAT = '_ct_';
+    const NAME          = '_ct_your_custom_taxonomy_slug';
+
+    public static function getDescription() {
+        return __('Custom Term', 'wp-seopress');
+    }
 
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;

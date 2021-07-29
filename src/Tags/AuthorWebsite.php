@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class AuthorWebsite implements GetTagValue {
     const NAME = 'author_website';
 
+    public static function getDescription() {
+        return __('Author Website', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         $value   = '';

@@ -69,7 +69,7 @@ class Tags {
             if ( ! empty($value)) {
                 $value = TagCompose::getValueWithTag($value);
             }
-            error_log('replace value : ' . $input);
+
             $input = str_replace($key, $value, $input);
         }
 

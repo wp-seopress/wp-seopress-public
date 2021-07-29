@@ -8,11 +8,14 @@ if ( ! defined('ABSPATH')) {
 
 use SEOPress\Models\GetTagValue;
 
-class PostExcerpt implements GetTagValue
-{
+class PostExcerpt implements GetTagValue {
     const NAME = 'post_excerpt';
 
     const ALIAS = ['wc_single_short_desc'];
+
+    public static function getDescription() {
+        return __('Post Excerpt', 'wp-seopress');
+    }
 
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;

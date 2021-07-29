@@ -20,13 +20,16 @@ function seopress_register_blocks() {
 	seopress_register_block_faq([
 		'dependencies' => [
 			'wp-block-editor', 'wp-blocks', 'wp-components', 'wp-element', 'wp-i18n', 'wp-polyfill'
-		], 
+		],
 		'version' => '32cbd8f1ef6cd98f5a5b3e8855d79aec'
 	]);
 }
 
 
-add_filter( 'block_categories', 'seopress_register_block_categories' );	
+global $wp_version;
+$hook_name = version_compare($wp_version, '5.8') >= 0 ? 'block_categories_all' : 'block_categories';
+
+add_filter( $hook_name, 'seopress_register_block_categories' );
 
 function seopress_register_block_categories( $categories ) {
 	return array_merge(

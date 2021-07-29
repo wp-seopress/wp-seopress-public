@@ -13,6 +13,10 @@ class Separator implements GetTagValue {
 
     const DEFAULT_SEPARATOR = '-';
 
+    public static function getDescription() {
+        return __('Separator', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context   = isset($args[0]) ? $args[0] : null;
 

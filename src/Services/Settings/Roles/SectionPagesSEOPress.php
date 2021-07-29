@@ -21,9 +21,11 @@ class SectionPagesSEOPress {
 
         if ( ! isset($wp_roles)) {
             $wp_roles = new WP_Roles();
-        }
+        } ?>
 
-        foreach ($wp_roles->get_names() as $key => $value) {
+<div class="wrap-user-roles">
+
+    <?php foreach ($wp_roles->get_names() as $key => $value) {
             if ('administrator' === $key) {
                 continue;
             }
@@ -32,25 +34,29 @@ class SectionPagesSEOPress {
             $dataOptions = isset($options[$nameKey]) ? $options[$nameKey] : [];
 
             if ('titles-metas_editor' === $uniqueKey) { ?>
-                <p class="description"><?php _e('Check a user role to authorized it to edit a specific SEO page.', 'wp-seopress'); ?></p><br>
-            <?php } ?>
+    <p class="description">
+        <?php _e('Check a user role to authorized it to edit a specific SEO page.', 'wp-seopress'); ?>
+    </p>
+    <?php } ?>
 
-            <div>
-                <input
-                    type="checkbox"
-                    id="seopress_advanced_security_metaboxe_role_pages_<?php echo $uniqueKey; ?>"
-                    value="1"
-                    name="seopress_advanced_option_name[<?php echo $nameKey; ?>][<?php echo $key; ?>]"
-                    <?php if (isset($dataOptions[$key])) {
+    <p>
+        <label
+            for="seopress_advanced_security_metaboxe_role_pages_<?php echo $uniqueKey; ?>">
+            <input type="checkbox"
+                id="seopress_advanced_security_metaboxe_role_pages_<?php echo $uniqueKey; ?>"
+                value="1"
+                name="seopress_advanced_option_name[<?php echo $nameKey; ?>][<?php echo $key; ?>]"
+                <?php if (isset($dataOptions[$key])) {
                 checked($dataOptions[$key], '1');
             } ?>
-                />
-                <label for="seopress_advanced_security_metaboxe_role_pages_<?php echo $uniqueKey; ?>">
-                    <strong><?php echo $value; ?></strong> (<em><?php echo translate_user_role($value,  'default'); ?></em>)
-                </label>
-            </div>
-            <?php
-        }
+            />
+            <strong><?php echo $value; ?></strong> (<em><?php echo translate_user_role($value,  'default'); ?></em>)
+        </label>
+    </p>
+    <?php
+        } ?>
+</div>
+<?php
     }
 
     /**
@@ -98,7 +104,7 @@ class SectionPagesSEOPress {
                 $item[0],
                 [$this, sprintf('render_%s', $keyClean)],
                 'seopress-settings-admin-advanced-security',
-                'seopress_setting_section_advanced_security'
+                'seopress_setting_section_advanced_security_roles'
             );
         }
 

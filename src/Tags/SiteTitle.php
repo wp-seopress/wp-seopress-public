@@ -13,6 +13,15 @@ class SiteTitle implements GetTagValue {
 
     const ALIAS = ['sitename'];
 
+    /**
+     * 4.8.0.
+     *
+     * @return string
+     */
+    public static function getDescription() {
+        return __('Site Title', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         return get_bloginfo('name');
     }

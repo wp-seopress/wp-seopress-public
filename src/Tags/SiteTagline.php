@@ -13,6 +13,15 @@ class SiteTagline implements GetTagValue {
 
     const ALIAS = ['sitedesc'];
 
+    /**
+     * 4.8.0.
+     *
+     * @return string
+     */
+    public static function getDescription() {
+        return __('Site Tagline', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         return get_bloginfo('description');
     }

@@ -11,6 +11,11 @@ use SEOPress\Models\GetTagValue;
 
 class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
     const CUSTOM_FORMAT = '_ucf_';
+    const NAME          = '_ucf_your_user_meta';
+
+    public static function getDescription() {
+        return __('Custom User Meta', 'wp-seopress');
+    }
 
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
@@ -20,7 +25,7 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
             return $value;
         }
 
-        if ( ! $context['post'] && ! $context['is_author'] ) {
+        if ( ! $context['post'] && ! $context['is_author']) {
             return $value;
         }
         $regex = $this->buildRegex(self::CUSTOM_FORMAT);

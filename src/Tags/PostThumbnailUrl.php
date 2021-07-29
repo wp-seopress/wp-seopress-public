@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class PostThumbnailUrl implements GetTagValue {
     const NAME = 'post_thumbnail_url';
 
+    public static function getDescription() {
+        return __('Post Thumbnail URL', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         $value   = '';

@@ -13,6 +13,10 @@ class PostTitle implements GetTagValue {
 
     const ALIAS = ['title'];
 
+    public static function getDescription() {
+        return __('Post Title', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         $value   = '';

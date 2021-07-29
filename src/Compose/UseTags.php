@@ -103,13 +103,19 @@ trait UseTags {
                     $name = strtolower($class);
                 }
 
+                $description ='';
+                if (method_exists($classFile, 'getDescription')) {
+                    $description = $classFile::getDescription();
+                }
+
                 $tags[$name] = [
-                    'class'  => $classFile,
-                    'name'   => $name,
-                    'schema' => 0 === strpos($classFile, "\SEOPress\Tags\Schema\\") ? true : false,
-                    'alias'  => defined($classFile . '::ALIAS') ? $classFile::ALIAS : [],
-                    'custom' => defined($classFile . '::CUSTOM_FORMAT') ? $classFile::CUSTOM_FORMAT : null,
-                    'input'  => TagCompose::getValueWithTag($name),
+                    'class'        => $classFile,
+                    'name'         => $name,
+                    'schema'       => 0 === strpos($classFile, "\SEOPress\Tags\Schema\\") ? true : false,
+                    'alias'        => defined($classFile . '::ALIAS') ? $classFile::ALIAS : [],
+                    'custom'       => defined($classFile . '::CUSTOM_FORMAT') ? $classFile::CUSTOM_FORMAT : null,
+                    'input'        => TagCompose::getValueWithTag($name),
+                    'description'  => $description,
                 ];
             }
         }
@@ -122,10 +128,7 @@ trait UseTags {
      *
      * @return array
      */
-    public function getTagsAvailable() {
-        if (null !== $this->tagsAvailable) {
-            return apply_filters('seopress_tags_available', $this->tagsAvailable);
-        }
+    public function getTagsAvailable($options = []) {
 
         $tags = $this->buildTags(SEOPRESS_PLUGIN_DIR_PATH . 'src/Tags', ['root' => '\\SEOPress\\Tags\\%s%s', 'subNamespace' => '']);
 
@@ -133,9 +136,28 @@ trait UseTags {
             $tags = $this->buildTags(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags', ['root' => '\\SEOPressPro\\Tags\\%s%s', 'subNamespace' => ''], $tags);
         }
 
-        $this->tagsAvailable = $tags;
+        if(isset($options['without_classes'])){
+            $withoutClasses= isset($options['without_classes']);
+            $withoutClassesPos= isset($options['without_classes_pos']);
+            foreach($tags as $key =>  $tag){
+                if($withoutClasses && \in_array($tag['class'] ,$options['without_classes'])){
+                    unset($tags[$key]);
+                }
 
-        return apply_filters('seopress_tags_available', $this->tagsAvailable);
+                if($withoutClassesPos){
+                    foreach($options['without_classes_pos'] as $classesPos){
+                        if(strpos($tag['class'], $classesPos) !== false){
+                            unset($tags[$key]);
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+
+        return apply_filters('seopress_tags_available', $tags);
     }
 
     /**

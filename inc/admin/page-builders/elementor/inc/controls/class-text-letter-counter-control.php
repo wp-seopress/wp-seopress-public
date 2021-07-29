@@ -11,7 +11,7 @@ class Text_Letter_Counter_Control extends \Elementor\Base_Data_Control {
 	}
 
 	public function enqueue() {
-		wp_enqueue_style( 
+		wp_enqueue_style(
 			'sp-el-text-letter-counter-style',
 			SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/text-letter-counter.css'
 		);
@@ -60,14 +60,14 @@ class Text_Letter_Counter_Control extends \Elementor\Base_Data_Control {
 				<div class="seopress_counters"></div>
 				<?php _e(' (maximum recommended limit)','wp-seopress'); ?>
 			</div>
-			
+
 			<div class="wrap-tags">
 				<# if ( data.field_type === 'text' ) { #>
-					<span class="seopress-tag-single-title tag-title" data-tag="%%post_title%%" ><span class="dashicons dashicons-plus"></span><?php _e( 'Post Title','wp-seopress' ); ?></span>
-					<span class="seopress-tag-single-site-title tag-title" data-tag="%%sitetitle%%"><span class="dashicons dashicons-plus"></span><?php _e( 'Site Title','wp-seopress' ); ?></span>
-					<span class="seopress-tag-single-sep tag-title" data-tag="%%sep%%"><span class="dashicons dashicons-plus"></span><?php _e( 'Separator','wp-seopress' ); ?></span>
+					<span class="seopress-tag-single-title tag-title" data-tag="%%post_title%%" ><span class="dashicons dashicons-plus-alt2"></span><?php _e( 'Post Title','wp-seopress' ); ?></span>
+					<span class="seopress-tag-single-site-title tag-title" data-tag="%%sitetitle%%"><span class="dashicons dashicons-plus-alt2"></span><?php _e( 'Site Title','wp-seopress' ); ?></span>
+					<span class="seopress-tag-single-sep tag-title" data-tag="%%sep%%"><span class="dashicons dashicons-plus-alt2"></span><?php _e( 'Separator','wp-seopress' ); ?></span>
 				<# } else { #>
-					<span class="seopress-tag-single-excerpt tag-title" data-tag="%%post_excerpt%%"><span class="dashicons dashicons-plus"></span><?php _e( 'Post Excerpt', 'wp-seopress' ); ?></span>
+					<span class="seopress-tag-single-excerpt tag-title" data-tag="%%post_excerpt%%"><span class="dashicons dashicons-plus-alt2"></span><?php _e( 'Post Excerpt', 'wp-seopress' ); ?></span>
 				<# } #>
 			</div>
 		</div>

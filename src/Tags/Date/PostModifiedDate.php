@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class PostModifiedDate implements GetTagValue {
     const NAME = 'post_modified_date';
 
+    public static function getDescription() {
+        return __('Post Modified Date', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         $value   = '';

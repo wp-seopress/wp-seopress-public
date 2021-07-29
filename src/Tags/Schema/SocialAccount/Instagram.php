@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class Instagram implements GetTagValue {
     const NAME = 'social_account_instagram';
 
+    public static function getDescription() {
+        return __('Instagram URL', 'wp-seopress');
+    }
+
     /**
      * @since 4.5.0
      *

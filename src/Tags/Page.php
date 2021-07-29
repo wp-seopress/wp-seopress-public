@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class Page implements GetTagValue {
     const NAME = 'page';
 
+    public static function getDescription() {
+        return __('Page number with context', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         global $wp_query;

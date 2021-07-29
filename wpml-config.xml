@@ -34,6 +34,8 @@
       <key name="seopress_google_analytics_ua"/>
       <key name="seopress_google_analytics_opt_out_msg"/>
       <key name="seopress_google_analytics_opt_out_msg_ok"/>
+      <key name="seopress_google_analytics_opt_out_msg_close"/>
+      <key name="seopress_google_analytics_opt_out_msg_edit"/>
     </key>
   </admin-texts>
   <custom-fields>

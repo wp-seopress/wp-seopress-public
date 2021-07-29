@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class GetPrice implements GetTagValue {
     const NAME = 'wc_get_price';
 
+    public static function getDescription() {
+        return __('Product Price', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         if ( ! seopress_get_service('WooCommerceActivate')->isActive()) {

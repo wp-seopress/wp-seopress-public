@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class SinglePriceExcludeTax implements GetTagValue {
     const NAME = 'wc_single_price_exc_tax';
 
+    public static function getDescription() {
+        return __('Product Price Taxes Excluded', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         if ( ! seopress_get_service('WooCommerceActivate')->isActive()) {

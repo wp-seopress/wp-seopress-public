@@ -11,6 +11,10 @@ use SEOPress\Models\GetTagValue;
 class CategoryTitle implements GetTagValue {
     const NAME = '_category_title';
 
+    public static function getDescription() {
+        return __('Category Title', 'wp-seopress');
+    }
+
     public function getValue($args = null) {
         $context = isset($args[0]) ? $args[0] : null;
         $value   = '';

@@ -6,8 +6,7 @@ defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 
 use SEOPress\Constants\Options;
 
-class TitleOption
-{
+class TitleOption {
     /**
      * @since 4.3.0
      *
@@ -85,5 +84,102 @@ class TitleOption
      */
     public function getHomeDescriptionTitle() {
         return $this->searchOptionByKey('seopress_titles_home_site_desc');
+    }
+
+    /**
+     * @since 5.0.0
+     *
+     * @param int|null $id
+     */
+    public function getSingleCptNoIndex($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_single_titles');
+
+        if ( ! isset($option[$currentCpt]['noindex'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['noindex'];
+    }
+
+    /**
+     * @since 5.0.0
+     *
+     * @param int|null $id
+     */
+    public function getSingleCptNoFollow($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_single_titles');
+        if ( ! isset($option[$currentCpt]['nofollow'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['nofollow'];
+    }
+
+    /**
+     * @since 5.0.0
+     */
+    public function getTitleNoIndex() {
+        return $this->searchOptionByKey('seopress_titles_noindex');
+    }
+
+    /**
+     * @since 5.0.0
+     */
+    public function getTitleNoFollow() {
+        return $this->searchOptionByKey('seopress_titles_nofollow');
+    }
+
+    /**
+     * @since 5.0.0
+     */
+    public function getTitleNoOdp() {
+        return $this->searchOptionByKey('seopress_titles_noodp');
+    }
+
+    /**
+     * @since 5.0.0
+     */
+    public function getTitleNoArchive() {
+        return $this->searchOptionByKey('seopress_titles_noarchive');
+    }
+
+    /**
+     * @since 5.0.0
+     */
+    public function getTitleNoSnippet() {
+        return $this->searchOptionByKey('seopress_titles_nosnippet');
+    }
+
+    /**
+     * @since 5.0.0
+     */
+    public function getTitleNoImageIndex() {
+        return $this->searchOptionByKey('seopress_titles_noimageindex');
     }
 }

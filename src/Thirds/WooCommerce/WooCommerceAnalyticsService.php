@@ -2,17 +2,19 @@
 
 namespace SEOPress\Thirds\WooCommerce;
 
-if ( ! defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     exit;
 }
 
-class WooCommerceAnalyticsService {
+class WooCommerceAnalyticsService
+{
     /**
      * @since 4.4.0
      *
      * @return void
      */
-    public function addToCart() {
+    public function addToCart()
+    {
         // Get current product
         global $product;
 
@@ -83,7 +85,8 @@ class WooCommerceAnalyticsService {
      *
      * @return void
      */
-    public function singleAddToCart() {
+    public function singleAddToCart()
+    {
         // Get current product
         global $product;
 
@@ -153,7 +156,8 @@ class WooCommerceAnalyticsService {
      *
      * @return void
      */
-    public function removeFromCart($sprintf, $cart_item_key) {
+    public function removeFromCart($sprintf, $cart_item_key)
+    {
         // Extract cart and get current product data
         global $woocommerce;
         foreach ($woocommerce->cart->get_cart() as $key => $item) {
@@ -211,7 +215,8 @@ class WooCommerceAnalyticsService {
      *
      * @return void
      */
-    public function updateCartOrCheckout() {
+    public function updateCartOrCheckout()
+    {
         // Extract cart
         global $woocommerce;
         foreach ($woocommerce->cart->get_cart() as $key => $item) {
