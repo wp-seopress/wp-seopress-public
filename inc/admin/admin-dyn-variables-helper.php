@@ -63,14 +63,7 @@ function seopress_get_dyn_variables()
  */
 function seopress_render_dyn_variables($classes)
 {
-    //Classic Editor compatibility
-    if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-        $btn_classes_secondary = 'components-button is-secondary';
-    } else {
-        $btn_classes_secondary = 'button button-secondary';
-    }
-
-    $html = sprintf('<button type="button" class="'.$btn_classes_secondary.' seopress-tag-single-all seopress-tag-dropdown %s"><span class="dashicons dashicons-arrow-down-alt2"></span></button>', $classes);
+    $html = sprintf('<button type="button" class="btn btnSecondary seopress-tag-single-all seopress-tag-dropdown %s"><span class="dashicons dashicons-arrow-down-alt2"></span></button>', $classes);
     if (! empty(seopress_get_dyn_variables())) {
         $html .= '<div class="sp-wrap-tag-variables-list"><ul class="sp-tag-variables-list">';
         foreach (seopress_get_dyn_variables() as $key => $value) {

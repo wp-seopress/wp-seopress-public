@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 5.0.2
+Stable tag: 5.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -331,6 +331,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 5.0.3 =
+* FIX Fatal error: Uncaught Error: Call to undefined function seopress_render_dyn_variables() if "Hide help icons and SEOPress documentation links" (White Label) is enabled
+* FIX Some CSS
 = 5.0.2 =
 * NEW Allow user to drag and drop the beacon
 * INFO Allow users with edit_posts capability to use the universal SEO metabox in frontend

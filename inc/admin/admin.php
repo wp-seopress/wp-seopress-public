@@ -16,6 +16,8 @@ class seopress_options
      */
     public function __construct()
     {
+        require_once dirname(__FILE__) . '/admin-dyn-variables-helper.php'; //Dynamic variables
+
         add_action('admin_menu', [$this, 'add_plugin_page'], 10);
         add_action('admin_init', [$this, 'page_init']);
         add_action('admin_init', [$this, 'seopress_feature_save'], 30);

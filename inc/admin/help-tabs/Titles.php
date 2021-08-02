@@ -7,8 +7,6 @@ function seopress_titles_help_tab() {
 
     $screen = get_current_screen();
 
-    require_once dirname(dirname(__FILE__)) . '/admin-dyn-variables-helper.php'; //Dynamic variables
-
     $dyn_var = seopress_get_dyn_variables();
 
     $seopress_titles_help_tab_content = '<ul>';
