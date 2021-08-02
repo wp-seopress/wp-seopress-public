@@ -35,11 +35,11 @@ class EnqueueModuleMetabox
         if (function_exists('get_current_screen')) {
             $currentScreen = \get_current_screen();
 
-            if(method_exists($currentScreen, 'is_block_editor') &&  $currentScreen->is_block_editor() === false){
+            if($currentScreen && method_exists($currentScreen, 'is_block_editor') &&  $currentScreen->is_block_editor() === false){
                 $response = false;
             }
 
-            if(!seopress_get_service('AdvancedOption')->getAccessUniversalMetaboxGutenberg() && method_exists($currentScreen, 'is_block_editor') &&  $currentScreen->is_block_editor() !== false){
+            if($currentScreen && !seopress_get_service('AdvancedOption')->getAccessUniversalMetaboxGutenberg() && method_exists($currentScreen, 'is_block_editor') &&  $currentScreen->is_block_editor() !== false){
                 $response = false;
             }
         }

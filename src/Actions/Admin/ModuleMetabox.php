@@ -20,7 +20,7 @@ class ModuleMetabox implements ExecuteHooks
         add_action('admin_enqueue_scripts', [$this, 'enqueue']);
         add_action('init', [$this, 'enqueue']);
 
-        if (current_user_can(seopress_capability('manage_options'))) {
+        if (current_user_can(seopress_capability('edit_posts'))) {
             add_action('wp_enqueue_scripts', [$this, 'enqueueFrontend']);
         }
     }
