@@ -393,6 +393,26 @@ function seopress_advanced_appearance_universal_metabox_callback() {
     }
 }
 
+function seopress_advanced_appearance_universal_metabox_disable_callback() {
+    $options = get_option('seopress_advanced_option_name');
+
+    $check = isset($options['seopress_advanced_appearance_universal_metabox_disable']); ?>
+
+<label for="seopress_advanced_appearance_universal_metabox_disable">
+    <input id="seopress_advanced_appearance_universal_metabox_disable"
+        name="seopress_advanced_option_name[seopress_advanced_appearance_universal_metabox_disable]"
+        type="checkbox"
+        <?php checked($check, "1"); ?>
+        value="1"/>
+
+    <?php _e('Disable the universal SEO metabox', 'wp-seopress'); ?>
+</label>
+
+<?php if (isset($options['seopress_advanced_appearance_adminbar'])) {
+        esc_attr($options['seopress_advanced_appearance_adminbar']);
+    }
+}
+
 function seopress_advanced_appearance_adminbar_noindex_callback() {
     $options = get_option('seopress_advanced_option_name');
 

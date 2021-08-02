@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 5.0.0
+Stable tag: 5.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,6 +16,7 @@ Boost your SEO with SEOPress, a simple, fast and powerful SEO plugin for WordPre
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
+✔ <strong>Universal SEO metabox: edit your SEO metadata from any page builder / theme builder</strong>
 ✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 ✔ <strong>Content analysis to help you write content optimized for search engines</strong>
 ✔ <strong>Import your post and term metadatas from other plugins in 1 click</strong>
@@ -134,6 +135,11 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 </ul>
 
 <a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Increase your sales now!</strong></a>
+
+<h3><a href="https://www.seopress.org/blog/seopress-5-0/">Universal SEO metabox</a>: edit your metadata from any page builder / editor</h3>
+
+[youtube https://youtu.be/sf0ocG7vQMM]
+
 
 <h3><a href="https://wordpress.org/plugins/elementor/">Elementor</a> + SEOPress: perfect combo!</h3>
 We provide deep integration with Elementor page builder. Directly from Elementor settings, you can:
@@ -325,6 +331,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 5.0.1 =
+* NEW Option to disable the universal SEO metabox from SEO, Advanced, Appearance tab
+* INFO Improve a11y
+* FIX Wrong link in SEO Dashboard page
+* FIX Fatal error in Breadcrumbs.php
 = 5.0 <a href="https://www.seopress.org/blog/seopress-5-0/" target="_blank">Read the blog post update</a> =
 * NEW <strong>[HUGE]</strong> Universal SEO Metabox: edit your SEO from all page builders 🎉🎉🎉
 * NEW User modern interface 🎉

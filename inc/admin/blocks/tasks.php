@@ -44,7 +44,7 @@
             if ('valid' === get_option('seopress_pro_license_status') && is_plugin_active('wp-seopress-pro/seopress-pro.php') && ! is_multisite()) {
                 $done = 'done'; ?>
             <li class="seopress-item has-action seopress-item-inner">
-                <a href="<?php echo admin_url('admin.php?page=seopress-import-export'); ?>"
+                <a href="<?php echo admin_url('admin.php?page=seopress-license'); ?>"
                     class="seopress-item-inner check <?php echo $done; ?>">
                     <?php _e('Activate your license key', 'wp-seopress'); ?>
                 </a>

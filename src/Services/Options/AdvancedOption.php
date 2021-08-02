@@ -48,4 +48,13 @@ class AdvancedOption
     public function getAccessUniversalMetaboxGutenberg(){
         return $this->searchOptionByKey('seopress_advanced_appearance_universal_metabox');
     }
+
+    /**
+     * @since 5.0.0
+     *
+     * @return string
+     */
+    public function getDisableUniversalMetaboxGutenberg(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_universal_metabox_disable');
+    }
 }

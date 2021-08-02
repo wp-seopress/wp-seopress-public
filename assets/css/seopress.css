@@ -146,6 +146,9 @@
     margin-right: 5px;
     text-decoration: none;
 }
+#seopress-news-panel .seopress-item-inner .dashicons {
+    vertical-align: top;
+}
 .seopress-button {
     text-transform: uppercase;
     background: #fff;

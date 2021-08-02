@@ -44,6 +44,10 @@ class EnqueueModuleMetabox
             }
         }
 
+        if(seopress_get_service('AdvancedOption')->getDisableUniversalMetaboxGutenberg()){
+            $response = false;
+        }
+
         return apply_filters('seopress_can_enqueue_universal_metabox', $response);
     }
 }

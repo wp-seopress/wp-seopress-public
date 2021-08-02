@@ -84,7 +84,7 @@
                     </p>
 
                     <h3 class="seopress-item-title">
-                        <?php echo esc_html($item->get_title()); ?>
+                        <?php echo esc_html($item->get_title()); ?><span class="dashicons dashicons-external"></span>
                     </h3>
                     <p class="seopress-item-content"><?php echo $item->get_description(); ?>
                     </p>

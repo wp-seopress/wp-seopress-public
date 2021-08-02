@@ -150,8 +150,15 @@ add_settings_field(
 
 add_settings_field(
     'seopress_advanced_appearance_universal_metabox', // ID
-    __('Universal Metabox', 'wp-seopress'), // Title
+    __('Universal Metabox (Gutenberg)', 'wp-seopress'), // Title
     'seopress_advanced_appearance_universal_metabox_callback', // Callback
+    'seopress-settings-admin-advanced-appearance', // Page
+    'seopress_setting_section_advanced_appearance' // Section
+);
+add_settings_field(
+    'seopress_advanced_appearance_universal_metabox_disable', // ID
+    __('Disable Universal Metabox', 'wp-seopress'), // Title
+    'seopress_advanced_appearance_universal_metabox_disable_callback', // Callback
     'seopress-settings-admin-advanced-appearance', // Page
     'seopress_setting_section_advanced_appearance' // Section
 );
