@@ -70,24 +70,25 @@ class ContentAnalysis implements ExecuteHooks
         $apiHeader->hooks();
 
         $id   = (int) $request->get_param('id');
-        $targetKeywords   =  $request->get_param('target_keywords');
 
+        $linkPreview   = seopress_get_service('RequestPreview')->getLinkRequest($id);
         $str  = seopress_get_service('RequestPreview')->getDomById($id);
         $data = seopress_get_service('DomFilterContent')->getData($str, $id);
         $data = seopress_get_service('DomAnalysis')->getDataAnalyze($data, [
             "id" => $id,
-            "target_keywords" => $targetKeywords
         ]);
 
         $saveData = [
             'words_counter' => null,
-            'score' => null
+            'score' => null,
         ];
+
         if (isset($data['words_counter'])) {
             $saveData['words_counter'] = $data['words_counter'];
         }
 
         update_post_meta($id, '_seopress_content_analysis_api', $saveData);
+        $data['link_preview'] = $linkPreview;
 
         return new \WP_REST_Response($data);
     }

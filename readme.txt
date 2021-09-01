@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 5.0.4
+Stable tag: 5.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 <ul>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
 	<li><a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results</li>
+	<li><strong>Internal linking suggestions</strong></li>
 	<li><strong>Google Suggestions in Content Analysis</strong> to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.</li>
 	<li><a href="https://www.seopress.org/features/google-structured-data-types/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Structured Data types</strong> (schema.org)</a>:
 		<ol>
@@ -167,13 +168,13 @@ SEOPress is translated into multiple languages including:
 	<li>🇳🇱 Nederlands (Dutch) - professional translation</li>
 	<li>🇷🇺 Русский (Russian) - professional translation</li>
 	<li>🇯🇵 日本語 (Japanese) - professional translation</li>
+	<li>🇮🇹 Italiano (Italian) - professional translation</li>
 	<li>🇮🇳 हिन्दी (Hindi) - professional translation</li>
 	<li>🇨🇳 中文 (Chinese (China)) - professional translation</li>
 	<li>🇧🇷 Português do Brasil (Portuguese (Brazil)) - professional translation</li>
 	<li>🇬🇷 Ελληνικά (Greek)</li>
 	<li>🇧🇬 Български (Bulgarian)</li>
 	<li>🇮🇩 Bahasa Indonesia (Indonesian)</li>
-	<li>🇮🇹 Italiano (Italian)</li>
 	<li>🇻🇳 Loki Web (Vietnamese)</li>
 	<li>🇷🇴 Română (Romanian)</li>
 	<li>🇸🇦 العربية (Arabic)</li>
@@ -320,80 +321,39 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 <a href="https://www.seopress.org/support/faq/" target="_blank">Read our complete FAQ on our site</a>
 
 == Screenshots ==
-1. SEOPress Elementor integration
-2. SEOPress notifications center
-3. SEOPress dashboard
-4. SEO metabox: Titles settings
-5. SEO metabox: Social tab
-6. Content analysis metabox
-7. SEOPress PRO
-8. Installation Wizard
-9. Schemas metabox
+1. SEOPress metabox
+2. Facebook / Twitter social Preview
+3. Content analysis metabox
+4. SEOPress Configuration wizard
+5. SEOPress Dashboard: welcome screen
+6. SEOPress Dashboard: notification center / control panel
+7. SEOPress PRO settings
+8. Elementor integration
+9. Divi integration
+10. Oxygen integration
+11. Beaver builder integration
+12. Schema metabox
 
 == Changelog ==
-= 5.0.4 =
-* NEW Edit homepage with universal SEO metabox
-* INFO Disable Universal SEO metabox by default (will not affect users who already have version 5.0 of SEOPress)
-* INFO Add an option to disable the universal SEO metabox from the configuration wizard
-* INFO Strengthening security (thanks to Wordfence)
-* FIX Add schema notification
-* FIX Pixel counter for title and meta description
-* FIX Notice: Undefined index: bestRating wp-seopress-pro/src/JsonSchemas/Review.php
-* FIX WordPress < 5.0 compatibility (is_block_editor() error)
-* FIX PHP Fatal error:  Uncaught TypeError: method_exists(): Argument #1 ($object_or_class) must be of type object|string, null given in wp-seopress/src/Actions/Admin/ModuleMetabox.php:44
-* FIX Warning: Undefined variable $sp_seo_admin_menu in wp-seopress-pro/inc/admin/admin.php on line 134 (Multisite only)
-= 5.0.3 =
-* FIX Fatal error: Uncaught Error: Call to undefined function seopress_render_dyn_variables() if "Hide help icons and SEOPress documentation links" (White Label) is enabled
-* FIX Some CSS
-= 5.0.2 =
-* NEW Allow user to drag and drop the beacon
-* INFO Allow users with edit_posts capability to use the universal SEO metabox in frontend
-* FIX Fatal error:  Uncaught TypeError: method_exists() in some cases
-* FIX Fatal error: Uncaught Error: Call to undefined function seopress_feature_save() (WP multisite only)
-= 5.0.1 =
-* NEW Option to disable the universal SEO metabox from SEO, Advanced, Appearance tab
-* INFO Improve a11y
-* FIX Wrong link in SEO Dashboard page
-* FIX Fatal error in Breadcrumbs.php
-= 5.0 <a href="https://www.seopress.org/blog/seopress-5-0/" target="_blank">Read the blog post update</a> =
-* NEW <strong>[HUGE]</strong> Universal SEO Metabox: edit your SEO from all page builders 🎉🎉🎉
-* NEW User modern interface 🎉
-* NEW SEOPress REST API (first iteration) 🎉
-* NEW Remove /product-category/ in your permalinks 🎉
-* NEW Add bestRating / worstRating properties for Review schema (including SoftwareApp)
-* NEW Reset count column for Redirections
-* NEW Bulk actions for Redirections (mark as 301, 302, 307, 410, 451)
-* NEW IP Logging options for Redirections with anonymization IP
-* NEW Add Referrer column in Redirections if available
-* NEW 'seopress_lb_widget_html' hook to filter Local Business HTML widget (https://www.seopress.org/support/hooks/filter-local-business-widget-html/)
-* NEW 'seopress_can_enqueue_universal_metabox' hook to disable the SEO beacon (https://www.seopress.org/support/hooks/disable-seo-beacon/)
-* NEW 'seopress_404_ip' hook to filter IP for 404 monitoring (https://www.seopress.org/support/hooks/filter-ip-address-for-404-monitoring/)
-* NEW 'seopress_sitemaps_html_product_cat_query' hook to filter product categories query in HTML sitemap (https://www.seopress.org/support/hooks/filter-html-sitemap-product-category-query-for-products/)
-* NEW Translation for "Author:"	for Breadcrumbs
-* NEW Notification if Swift Performance is caching your XML sitemap
-* NEW Order products by category in HTML sitemap
-* NEW Check if a target keyword is already used with our Content Analysis feature
-* INFO Improve nofollow links analysis
-* INFO Automatically strip protocol / domain name when adding a redirection origin
-* INFO Add VetenaryCare subtype to Local Business schema (automatic / manual)
-* INFO Add Quick tags to meta description template in global title settings
-* INFO Allow webp images for Facebook / Twitter metas
-* INFO Update i18n
-* FIX Headings analysis issues
-* FIX Notices in Redirections
-* FIX IP logging in Redirections
-* FIX Send full post thumbnail URL in XML sitemaps (props @cookingwithdog)
-* FIX Close and Edit cookies button for WPML / Polylang configuration file
-* FIX Warning preg_match(): Unknown modifier if "/" in category permalink structure
-* FIX CSS conflict with Easy Digital Downloads and WooCommerce
-* FIX Compatibility issue with Thrive Builder
-* FIX Add @id property to Service schema (automatic / manual)
-* FIX Fatal error in rare cases: Uncaught TypeError: end()
-* FIX Cookie bar secondary button options
-* FIX Google Analytics stats in dashboard slowdowns
-* FIX Hide SEO columns in post type list if Advanced toggle is disabled
-* FIX PHP 8 oembed notice
-* FIX Quick tag buttons in Titles and Metas settings page
-* FIX Broken link checker in specific cases
+= 5.1 <a href="https://www.seopress.org/blog/seopress-5-1/" target="_blank">Read the blog post update</a> =
+* NEW Internal linking suggestions 🎉🎉🎉 (PRO)
+* NEW Video and News sitemaps added to universal SEO metabox
+* NEW 'seopress_automatic_redirect_cpt' hook to filter post types to watch for automatic redirection suggestions (https://www.seopress.org/support/hooks/filter-post-types-to-watch-for-automatic-redirections/)
+* NEW 'seopress_beacon_svg' hook to filter beacon SVG icon for universal SEO metabox
+* INFO Update French language
+* INFO Add author URL in schema
+* FIX Broken link checker (go to SEO, BOT, Settings and select post types to scan)
+* FIX Compatibility issue with Slider PRO
+* FIX FAQ block: duplicated image and incorrect alt text attribute
+* FIX Fatal error is_plugin_active in rare cases
+* FIX Local business schema manual type (automatic)
+* FIX i18n
+* FIX Missing information from Social Preview
+* FIX CSS on UI
+* FIX Conflict with Post Types Order plugin
+* FIX Global social image buttons for each post types
+* FIX Use published date in xml sitemaps if modified_date is older
+* FIX Universal SEO metabox with Block Editor
+* FIX Words counter / keyword density with Oxygen Builder
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

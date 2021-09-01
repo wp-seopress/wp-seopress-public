@@ -68,4 +68,35 @@ jQuery(document).ready(function ($) {
             mediaUploader.open();
         });
     });
+
+    $(".seopress-btn-upload-media").click(function (e) {
+        e.preventDefault();
+
+        var mediaUploader;
+
+        // If the uploader object has already been created, reopen the dialog
+        if (mediaUploader) {
+            mediaUploader.open();
+            return;
+        }
+        // Extend the wp.media object
+        mediaUploader = wp.media.frames.file_frame = wp.media({
+            multiple: false,
+        });
+
+        var _self = $(this);
+
+        mediaUploader.on("select", function () {
+            attachment = mediaUploader
+                .state()
+                .get("selection")
+                .first()
+                .toJSON();
+
+            $(_self.data("input-value")).val(attachment.url);
+        });
+
+        // Open the uploader dialog
+        mediaUploader.open();
+    });
 });

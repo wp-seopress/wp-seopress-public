@@ -56,6 +56,8 @@ if (true == get_post_type_archive_link($path) && 0 == $offset) {
     }
 }
 
+remove_all_filters('pre_get_posts');
+
 $args = [
     'posts_per_page' => 1000,
     'offset'         => $offset,
@@ -94,10 +96,21 @@ foreach ($postslist as $post) {
     $dom    = '';
     $images = '';
 
+    $modified_date = '';
     if (get_the_modified_date('c', $post)) {
-        $seopress_mod = get_the_modified_date('c', $post);
-    } else {
-        $seopress_mod = get_post_modified_time('c', false, $post);
+        $modified_date = get_the_modified_date('c', $post);
+    }
+    else{
+        $modified_date = get_post_modified_time('c', false, $post);
+    }
+
+    $post_date = get_the_date('c', $post);
+    $seopress_mod = $modified_date;
+
+    if(!empty($modified_date)){
+        if((new DateTime($post_date)) > (new DateTime($modified_date))){
+            $seopress_mod = $post_date;
+        }
     }
 
     // initialize the sitemap url output

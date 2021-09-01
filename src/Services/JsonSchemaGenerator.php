@@ -38,7 +38,6 @@ class JsonSchemaGenerator {
         }
 
         $jsonData = $this->tagsToString->replaceDataToString($jsonData, $context, $options);
-
         if ( ! empty($jsonData)) {
             $jsonData = $classJsonSchema->cleanValues($jsonData);
         }

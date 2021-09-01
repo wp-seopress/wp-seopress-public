@@ -355,7 +355,7 @@ function seopress_social_facebook_img_cpt_callback()
 
 <p>
     <input
-        id="seopress_social_facebook_img_cpt_meta[<?php echo $seopress_cpt_key; ?>]"
+        id="seopress_social_facebook_img_cpt_meta_<?php echo $seopress_cpt_key; ?>"
         class="seopress_social_facebook_img_cpt_meta" type="text"
         value="<?php echo $options_set; ?>"
         name="seopress_social_option_name[seopress_social_facebook_img_cpt][<?php echo $seopress_cpt_key; ?>][url]"
@@ -364,7 +364,8 @@ function seopress_social_facebook_img_cpt_callback()
 
     <input
         id="seopress_social_facebook_img_upload"
-        class="seopress_social_facebook_img_cpt btn btnSecondary"
+        class="seopress_social_facebook_img_cpt seopress-btn-upload-media btn btnSecondary"
+        data-input-value="#seopress_social_facebook_img_cpt_meta_<?php echo $seopress_cpt_key; ?>"
         type="button"
         value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
 

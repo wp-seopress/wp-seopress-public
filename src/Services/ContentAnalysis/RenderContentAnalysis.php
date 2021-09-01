@@ -62,7 +62,7 @@ class RenderContentAnalysis {
                                             <?php if (isset($value['impact'])) { ?>
                                                 <span class="impact <?php echo $value['impact']; ?>" aria-hidden="true"></span>
                                             <?php } ?>
-                                            <span class="sp-arrow" aria-hidden="true"></span>
+                                            <span class="seopress-arrow" aria-hidden="true"></span>
                                             <?php echo $value['title']; ?>
                                         </button>
                                     </h3>

@@ -113,7 +113,11 @@ function seopress_do_real_preview()
                     //Useful for Page / Theme builders
                     $custom_args = apply_filters('seopress_real_preview_custom_args', $custom_args);
 
-                    $response = wp_remote_get(get_preview_post_link((int) $seopress_get_the_id, $custom_args), $args);
+					$link = add_query_arg('no_admin_bar', 1, get_preview_post_link((int) $seopress_get_the_id, $custom_args));
+
+					$link = apply_filters('seopress_get_dom_link', $link, $seopress_get_the_id);
+
+                    $response = wp_remote_get($link, $args);
                 }
             } else { //Term taxonomy
                 $response = wp_remote_get(get_term_link((int) $seopress_get_the_id, $seopress_tax_name), $args);

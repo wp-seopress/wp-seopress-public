@@ -56,7 +56,7 @@
             <?php
                 $dashboard_settings_tabs = [
                     'tab_seopress_analytics'        => __('Google Analytics', 'wp-seopress'),
-                    'tab_seopress_page_speed'       => __('PageSpeed', 'wp-seopress'),
+                    'tab_seopress_ps'       => __('PageSpeed', 'wp-seopress'),
                     'tab_seopress_seo_tools'        => __('SEO Tools', 'wp-seopress'),
                 ];
             ?>
@@ -98,7 +98,7 @@
 
             <div class="wrap-seopress-tab-content"
                 data-score="<?php echo $ps_score; ?>">
-                <div id="tab_seopress_page_speed" class="seopress-tab seopress-page-speed inside<?php if ('tab_seopress_page_speed' == $current_tab) {
+                <div id="tab_seopress_ps" class="seopress-tab seopress-page-speed inside<?php if ('tab_seopress_ps' == $current_tab) {
                 echo 'active';
             }?>">
                     <p><?php _e('The speed score is based on the lab data analyzed by Lighthouse.', 'wp-seopress'); ?>
@@ -117,7 +117,7 @@
                             <span><?php echo $ps_score . '%'; ?></span>
                         </div>
 
-                        <a href="<?php echo admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed'); ?>"
+                        <a href="<?php echo admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_ps'); ?>"
                             class="btn btnSecondary">
                             <?php _e('See full report', 'wp-seopress'); ?>
                         </a>

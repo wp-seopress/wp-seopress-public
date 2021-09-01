@@ -196,7 +196,7 @@
 }
 
 .elementor-control-field.seopress-content-analyses .analysis-score .notgood #bar,
-.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score #bar.notgood { 
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score #bar.notgood {
 	stroke-dashoffset: 565;
 	stroke: #ffb900;
 }
@@ -290,14 +290,14 @@
 	outline-offset: -2px;
 	outline: 1px dotted #555d66;
 }
-.elementor-control-field.seopress-content-analyses  .gr-analysis-title button .sp-arrow::after {
+.elementor-control-field.seopress-content-analyses  .gr-analysis-title button .seopress-arrow::after {
 	content:"\f343";
 	font-family: "Dashicons";
 	position: absolute;
 	right: 10px;
 	top: calc(50% - 7px);
 }
-.elementor-control-field.seopress-content-analyses  .gr-analysis-title button.open .sp-arrow::after {
+.elementor-control-field.seopress-content-analyses  .gr-analysis-title button.open .seopress-arrow::after {
 	content:"\f347";
 }
 .elementor-control-field.seopress-content-analyses  .gr-analysis-content {

@@ -159,8 +159,8 @@ jQuery(document).ready(function ($) {
             $('#tab_seopress_seo_tools-tab').addClass("nav-tab-active");
             $('#tab_seopress_seo_tools').addClass("active");
         } else if (clean_hash[1] == '3') { //Page Speed Tab
-            $('#tab_seopress_page_speed-tab').addClass("nav-tab-active");
-            $('#tab_seopress_page_speed_tools').addClass("active");
+            $('#tab_seopress_ps-tab').addClass("nav-tab-active");
+            $('#tab_seopress_ps_tools').addClass("active");
         } else if (seopress_admin_tab_session_storage) {
             $('#seopress-admin-tabs').find('.nav-tab.nav-tab-active').removeClass("nav-tab-active");
             $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");
@@ -184,7 +184,7 @@ jQuery(document).ready(function ($) {
         } else if (clean_hash[1] == 2) {
             sessionStorage.setItem("seopress_admin_tab", 'tab_seopress_seo_tools');
         } else if (clean_hash[1] == 3) {
-            sessionStorage.setItem("seopress_admin_tab", 'tab_seopress_page_speed_tools');
+            sessionStorage.setItem("seopress_admin_tab", 'tab_seopress_ps_tools');
         } else {
             sessionStorage.setItem("seopress_admin_tab", hash);
         }

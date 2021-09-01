@@ -116,6 +116,7 @@ function seopress_block_faq_render_frontend($attributes)
 	<?php echo $listStyleTag; ?>
 		<?php
             foreach ($attributes['faqs'] as $faq) :
+
                 if (empty($faq['question'])) {
                     continue;
                 }
@@ -130,9 +131,13 @@ function seopress_block_faq_render_frontend($attributes)
                 ];
     $entities[] = $entity;
 
-    if ( isset( $faq['image'] ) && ! empty( $faq['image'] ) ) {
+    $image = '';
+    $image_alt = '';
+    if ( isset( $faq['image'] ) && is_int( $faq['image'] ) ) {
     	$image = wp_get_attachment_image_src( $faq['image'], $attributes['imageSize'] );
-	}
+        $image_alt = get_post_meta($faq['image'], '_wp_attachment_image_alt', true);
+    }
+
     $image_url = '';
     if ( isset( $image ) && ! empty( $image ) ) {
         $image_url = $image[0];
@@ -142,7 +147,7 @@ function seopress_block_faq_render_frontend($attributes)
 					<div class="wpseopress-faq-answer">
 						<div class="wpseopress-faq-answer-image">
 							<?php if (! empty($image_url)): ?>
-								<img src="<?php echo $image_url; ?>" alt="Image">
+								<img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
 							<?php endif; ?>
 						</div>
 						<?php if (! empty($faq['answer'])): ?>

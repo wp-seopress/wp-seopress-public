@@ -485,7 +485,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
 add_action('wp', 'seopress_load_redirections_options', 0);
 function seopress_load_redirections_options()
 {
-    if (is_plugin_active('thrive-visual-editor/thrive-visual-editor.php')) {
+    if (function_exists('is_plugin_active') && is_plugin_active('thrive-visual-editor/thrive-visual-editor.php')) {
         return;
     }
     if (! is_admin()) {

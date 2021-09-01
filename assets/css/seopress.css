@@ -408,7 +408,7 @@ table.fixed thead .column-seopress_noindex {
     background: #fff;
     position: fixed;
     top: 32px;
-    z-index: 100;
+    z-index: 110;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -683,7 +683,7 @@ table.fixed thead .column-seopress_noindex {
     font-weight: bold;
     width: 100%;
 }
-.has-action {
+.seopress-option .has-action {
     display: flex;
     align-items: center;
 }
@@ -932,24 +932,29 @@ table.fixed thead .column-seopress_noindex {
 }
 #seopress_content_analysis .analysis-score svg circle,
 .column-seopress_score .analysis-score svg circle,
-#tab_seopress_page_speed .ps-score svg circle {
+#tab_seopress_page_speed .ps-score svg circle,
+#tab_seopress_ps .ps-score svg circle {
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 1s linear;
     stroke: #ccc;
     stroke-width: 2em;
 }
-#tab_seopress_page_speed .ps-score {
+#tab_seopress_page_speed .ps-score,
+#tab_seopress_ps .ps-score {
     position: relative;
     display: inline-block;
 }
-#tab_seopress_page_speed .ps-score svg {
+#tab_seopress_page_speed .ps-score svg,
+#tab_seopress_ps .ps-score svg {
     width: 60px;
     height: 60px;
 }
-#tab_seopress_page_speed .ps-score svg circle {
+#tab_seopress_page_speed .ps-score svg circle,
+#tab_seopress_ps .ps-score svg circle {
     stroke-width: 1em;
 }
-#tab_seopress_page_speed .ps-score span {
+#tab_seopress_page_speed .ps-score span,
+#tab_seopress_ps .ps-score span {
     font-weight: bold;
     left: 0;
     position: absolute;
@@ -961,13 +966,16 @@ table.fixed thead .column-seopress_noindex {
     justify-content: center;
     margin: 0;
 }
-#tab_seopress_page_speed .ps-score.green #bar {
+#tab_seopress_page_speed .ps-score.green #bar,
+#tab_seopress_ps .ps-score.green #bar {
     stroke: var(--colorSuccess);
 }
-#tab_seopress_page_speed .ps-score.yellow #bar {
+#tab_seopress_page_speed .ps-score.yellow #bar,
+#tab_seopress_ps .ps-score.yellow #bar {
     stroke: var(--colorWarning);
 }
-#tab_seopress_page_speed .ps-score.red #bar {
+#tab_seopress_page_speed .ps-score.red #bar,
+#tab_seopress_ps .ps-score.red #bar {
     stroke: var(--colorAlert);
 }
 #seopress_content_analysis .gr-analysis {
@@ -1069,14 +1077,14 @@ table.fixed thead .column-seopress_noindex {
     outline-offset: -2px;
     outline: 1px dotted #555d66;
 }
-#seopress_content_analysis .gr-analysis-title button .sp-arrow::after {
+#seopress_content_analysis .gr-analysis-title button .seopress-arrow::after {
     content: "\f343";
     font-family: "Dashicons";
     position: absolute;
     right: 10px;
     top: calc(50% - 7px);
 }
-#seopress_content_analysis .gr-analysis-title button.open .sp-arrow::after {
+#seopress_content_analysis .gr-analysis-title button.open .seopress-arrow::after {
     content: "\f347";
 }
 #seopress_content_analysis .gr-analysis-content {
@@ -1566,10 +1574,14 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     text-align: center;
     border-bottom: none;
 }
+.term-php #seopress_cpt .facebook-snippet-box img,
+.term-php #seopress_cpt .twitter-snippet-box img {
+    width: 100%;
+    height: auto;
+}
 #seopress_cpt .twitter-snippet-box {
     color: #4b4f56;
     font-size: 14px;
-    width: 436px;
 }
 #seopress_cpt .snippet-twitter-url {
     color: #8899a6;
@@ -2344,6 +2356,12 @@ body .seopress-cart-list h3 {
     display: inline-flex;
     width: 100%;
     margin: 10px 0;
+}
+.seopress-option .wrap-tags {
+    flex-wrap: wrap;
+}
+.seopress-option .wrap-tags button {
+    margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 782px) {

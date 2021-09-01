@@ -28,8 +28,7 @@ class EnqueueModuleMetabox
             $response = false;
         }
 
-
-        if(!is_singular()){
+        if(!is_admin() && !is_singular()){
             $response = false;
         }
 

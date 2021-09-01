@@ -81,6 +81,8 @@ class ModuleMetabox implements ExecuteHooks
         $args = array_merge([
             'SEOPRESS_URL_DIST'       => SEOPRESS_URL_DIST,
             'SEOPRESS_URL_ASSETS'     => SEOPRESS_URL_ASSETS,
+            'SITENAME'                => get_bloginfo('name'),
+            'SITEURL'                 => site_url(),
             'ADMIN_URL_TITLES'        => admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_single'),
             'TAGS'                    => array_values($tags),
             'REST_URL'                => rest_url(),
@@ -98,6 +100,11 @@ class ModuleMetabox implements ExecuteHooks
             'ROLES_BLOCKED' => [
                 'GLOBAL' => $settingsAdvanced->getSecurityMetaboxRole(),
                 'CONTENT_ANALYSIS' => $settingsAdvanced->getSecurityMetaboxRoleContentAnalysis()
+            ],
+            'SUB_TABS' => [
+                'GOOGLE_NEWS' => apply_filters('seopress_active_google_news', false),
+                'VIDEO_SITEMAP' => apply_filters('seopress_active_video_sitemap', false),
+                'INTERNAL_LINKING' => apply_filters('seopress_active_internal_linking', false),
             ],
             'FAVICON' => get_site_icon_url(32),
             'BEACON_SVG' => apply_filters('seopress_beacon_svg', SEOPRESS_URL_ASSETS.'/img/beacon.svg'),

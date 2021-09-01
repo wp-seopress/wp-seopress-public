@@ -50,8 +50,10 @@ class DomAnalysis
             }
         }
 
+        $post = get_post($id);
+
         //Add WC product excerpt
-        if ('product' == $seopress_get_post_type) {
+        if ('product' == $post->post_type) {
             $content =  $content . get_the_excerpt($id);
         }
 
@@ -85,8 +87,8 @@ class DomAnalysis
 
         //Manage keywords with special characters
         foreach ($targetKeywords as $key => $kw) {
-            $kw                            = str_replace('-', ' ', $kw); //remove dashes
-            $targetKeywords[] = htmlspecialchars_decode($kw, ENT_QUOTES);
+            $kw               = str_replace('-', ' ', $kw); //remove dashes
+            $targetKeywords[$key] = trim(htmlspecialchars_decode($kw, ENT_QUOTES));
         }
 
         //Remove duplicates
@@ -202,6 +204,29 @@ class DomAnalysis
             'value' => strtotime($post->post_modified) < strtotime('-365 days')
         ];
 
+
+        $dataOxygen = get_post_meta($post->ID, '_seopress_analysis_data_oxygen', true);
+
+        //Oxygen builder
+        if ($dataOxygen) {
+            if(isset($dataOxygen['words_counter'])){
+                $data['words_counter'] = $dataOxygen['words_counter'];
+            }
+            if(isset($dataOxygen['words_counter_unique'])){
+                $data['words_counter_unique'] = $dataOxygen['words_counter_unique'];
+            }
+            if(isset($dataOxygen['kws_density'])){
+                foreach($dataOxygen['kws_density'] as $key => $densities){
+                    foreach($densities as $keyDensity => $density){
+                        $data['kws_density']['matches'][]= [
+                            "key" => $keyDensity,
+                            "count" => isset($density[0]) ? count($density[0]) : 0
+                        ];
+                    }
+
+                }
+            }
+        }
 
         return $data;
     }
