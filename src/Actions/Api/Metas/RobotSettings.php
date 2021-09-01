@@ -52,6 +52,10 @@ class RobotSettings implements ExecuteHooks
                     return false;
                 }
 
+                if(!current_user_can('edit_posts')){
+                    return false;
+                }
+
                 return true;
             },
         ]);
@@ -72,7 +76,12 @@ class RobotSettings implements ExecuteHooks
                 if (! isset($params[$value['key']])) {
                     continue;
                 }
-                update_post_meta($id, $value['key'], $params[$value['key']]);
+                $item = $params[$value['key']];
+                if(in_array($value['type'], ['input', 'textarea'])){
+                    $item = esc_html($item);
+                }
+
+                update_post_meta($id, $value['key'], $item);
             }
 
             return new \WP_REST_Response([

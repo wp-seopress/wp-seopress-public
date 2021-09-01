@@ -482,20 +482,20 @@ function seopress_do_real_preview()
                     }
                 }
 
-                //inbound links
+                //Internal links
                 $permalink = get_permalink((int) $seopress_get_the_id);
                 $args      = [
                     's'         => $permalink,
                     'post_type' => 'any',
                 ];
-                $inbound_links = new WP_Query($args);
+                $internal_links = new WP_Query($args);
 
-                if ($inbound_links->have_posts()) {
-                    $data['inbound_links']['count'] = $inbound_links->found_posts;
+                if ($internal_links->have_posts()) {
+                    $data['internal_links']['count'] = $internal_links->found_posts;
 
-                    while ($inbound_links->have_posts()) {
-                        $inbound_links->the_post();
-                        $data['inbound_links']['links'][get_the_ID()] = [get_the_permalink() => get_the_title()];
+                    while ($internal_links->have_posts()) {
+                        $internal_links->the_post();
+                        $data['internal_links']['links'][get_the_ID()] = [get_the_permalink() => get_the_title()];
                     }
                 }
                 wp_reset_postdata();

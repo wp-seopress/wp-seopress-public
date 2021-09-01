@@ -51,6 +51,10 @@ class TargetKeywords implements ExecuteHooks
                     return false;
                 }
 
+                if(!current_user_can('edit_posts')){
+                    return false;
+                }
+
                 return true;
             },
         ]);

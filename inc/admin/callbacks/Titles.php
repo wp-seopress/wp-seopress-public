@@ -655,7 +655,7 @@ function seopress_titles_tax_titles_callback()
                     <div class=" wrap-tags">
                         <span
                             id="seopress-tag-tax-title-<?php echo $seopress_tax_key; ?>"
-                            data-tag="%%_category_title%%" class="tag-title">
+                            data-tag="%%_category_title%%" class="btn btnSecondary tag-title">
                             <span class="dashicons dashicons-plus-alt2"></span>
                             <?php _e('Category Title', 'wp-seopress'); ?>
                         </span>

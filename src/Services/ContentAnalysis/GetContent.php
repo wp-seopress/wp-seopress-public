@@ -816,17 +816,17 @@ class GetContent
      *
      * @return array
      */
-    protected function analyzeInboundLinks($analyzes, $data, $post)
+    protected function analyzeInternalLinks($analyzes, $data, $post)
     {
-        $desc = '<p>' . __('Inbounk links are important for SEO and user experience. Always try to link your content together, with quality link anchors.') . '</p>';
-        if (! empty($data['inbound_links']['count'])) {
-            $count = $data['inbound_links']['count'];
+        $desc = '<p>' . __('Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.') . '</p>';
+        if (! empty($data['internal_links']['count'])) {
+            $count = $data['internal_links']['count'];
 
-            $desc .= '<p>' . sprintf(__('We found %s inbound links to this page.', 'wp-seopress'), $count) . '</p>';
+            $desc .= '<p>' . sprintf(__('We found %s internal links to this page.', 'wp-seopress'), $count) . '</p>';
 
-            if (! empty($data['inbound_links']['links'])) {
+            if (! empty($data['internal_links']['links'])) {
                 $desc .= '<ul>';
-                foreach ($data['inbound_links']['links'] as $id => $permalink) {
+                foreach ($data['internal_links']['links'] as $id => $permalink) {
                     foreach ($permalink as $href => $link) {
                         $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . $href . '" target="_blank">' . $link . '</a>
                         <a class="nounderline" href="' . get_edit_post_link($id) . '" title="' . sprintf(__('edit %s', 'wp-seopress'), esc_html(get_the_title($id))) . '"><span class="dashicons dashicons-edit-large"></span></a></li>';
@@ -835,10 +835,10 @@ class GetContent
                 $desc .= '</ul>';
             }
         } else {
-            $analyzes['inbound_links']['impact'] = 'medium';
-            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('This page doesn\'t have any inbound links from other content. Links from archive pages are not considered inbound links due to lack of context.', 'wp-seopress') . '</p>';
+            $analyzes['internal_links']['impact'] = 'medium';
+            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('This page doesn\'t have any internal links from other content. Links from archive pages are not considered internal links due to lack of context.', 'wp-seopress') . '</p>';
         }
-        $analyzes['inbound_links']['desc'] = $desc;
+        $analyzes['internal_links']['desc'] = $desc;
 
         return $analyzes;
     }
@@ -925,8 +925,8 @@ class GetContent
         //Outbound links
         $analyzes = $this->analyzeOutboundLinks($analyzes, $data, $post);
 
-        //Inbound links
-        $analyzes = $this->analyzeInboundLinks($analyzes, $data, $post);
+        //internal links
+        $analyzes = $this->analyzeInternalLinks($analyzes, $data, $post);
 
         $analyzes = $this->analyzeCanonical($analyzes, $data, $post);
 

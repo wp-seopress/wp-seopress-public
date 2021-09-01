@@ -746,6 +746,7 @@ class SEOPRESS_Admin_Setup_Wizard {
         $category_url                     = isset($seopress_advanced_option['seopress_advanced_advanced_category_url']);
         $product_category_url             = isset($seopress_advanced_option['seopress_advanced_advanced_product_cat_url']);
         $meta_title                       = isset($seopress_advanced_option['seopress_advanced_appearance_title_col']);
+        $universal_seo_metabox            = isset($seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable']);
         $meta_desc                        = isset($seopress_advanced_option['seopress_advanced_appearance_meta_desc_col']);
         $robots_noindex                   = isset($seopress_advanced_option['seopress_advanced_appearance_noindex_col']);
         $robots_nofollow                  = isset($seopress_advanced_option['seopress_advanced_appearance_nofollow_col']);
@@ -825,6 +826,28 @@ class SEOPRESS_Admin_Setup_Wizard {
         </li>
         <li class="description">
             <?php printf(__('Shorten your URLs by removing %s and improve your SEO.', 'wp-seopress'), $category_base); ?>
+        </li>
+    </ul>
+
+    <h2>
+        <?php _e('Universal SEO metabox', 'wp-seopress'); ?>
+    </h2>
+
+    <ul class="seopress-wizard-services">
+        <li class="description">
+            <?php _e('Edit your SEO metadata from your page or theme builder. Default: <strong>Enabled</strong>.', 'wp-seopress'); ?>
+        </li>
+        <!-- Show meta title -->
+        <li class="seopress-wizard-service-item checkbox">
+            <label for="universal_seo_metabox">
+                <input id="universal_seo_metabox" name="universal_seo_metabox" type="checkbox" class="location-input" <?php if ('1' == $universal_seo_metabox) {
+            echo 'checked="yes"';
+        } ?> value="1"/>
+                <?php _e('No, I prefer to use the good old one SEO metabox', 'wp-seopress'); ?>
+            </label>
+        </li>
+        <li class="description">
+            <?php _e('You can change this setting at anytime from SEO, Advanced settings page, Appearance tab.', 'wp-seopress'); ?>
         </li>
     </ul>
 
@@ -922,6 +945,8 @@ class SEOPRESS_Admin_Setup_Wizard {
         //Advanced
         $seopress_advanced_option['seopress_advanced_advanced_attachments_file']    = isset($_POST['attachments_file']) ? esc_attr(wp_unslash($_POST['attachments_file'])) : null;
         $seopress_advanced_option['seopress_advanced_advanced_category_url']        = isset($_POST['category_url']) ? esc_attr(wp_unslash($_POST['category_url'])) : null;
+
+        $seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable']         = isset($_POST['universal_seo_metabox']) ? esc_attr(wp_unslash($_POST['universal_seo_metabox'])) : null;
 
         $seopress_advanced_option['seopress_advanced_appearance_title_col']         = isset($_POST['meta_title']) ? esc_attr(wp_unslash($_POST['meta_title'])) : null;
         $seopress_advanced_option['seopress_advanced_appearance_meta_desc_col']     = isset($_POST['meta_desc']) ? esc_attr(wp_unslash($_POST['meta_desc'])) : null;

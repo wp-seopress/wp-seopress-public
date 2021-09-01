@@ -121,8 +121,8 @@ class DomFilterContent
                 'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\OutboundLinks',
                 'value'   => '',
             ],
-            'inbound_links' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\InboundLinks',
+            'internal_links' => [
+                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\InternalLinks',
                 'value'   => '',
                 'options' => [
                     'id' => $id,

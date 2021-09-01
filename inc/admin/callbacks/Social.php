@@ -363,9 +363,11 @@ function seopress_social_facebook_img_cpt_callback()
         placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>" />
 
     <input
-        id="seopress_social_facebook_img_cpt[<?php echo $seopress_cpt_key; ?>]"
-        class="seopress_social_facebook_img_cpt btn btnSecondary" type="button"
+        id="seopress_social_facebook_img_upload"
+        class="seopress_social_facebook_img_cpt btn btnSecondary"
+        type="button"
         value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
+
 </p>
 
 <?php if (isset($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url'])) {

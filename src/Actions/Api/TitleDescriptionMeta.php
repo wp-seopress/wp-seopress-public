@@ -48,6 +48,10 @@ class TitleDescriptionMeta implements ExecuteHooks {
                     return false;
                 }
 
+                if(!current_user_can('edit_posts')){
+                    return false;
+                }
+
                 return true;
             },
         ]);
@@ -84,8 +88,7 @@ class TitleDescriptionMeta implements ExecuteHooks {
             if ( ! isset($params[$key])) {
                 continue;
             }
-
-            update_post_meta($id, $value, $params[$key]);
+            update_post_meta($id, $value, esc_html($params[$key]));
         }
 
         return new \WP_REST_Response([

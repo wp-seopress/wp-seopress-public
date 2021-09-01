@@ -55,6 +55,26 @@ class AdvancedOption
      * @return string
      */
     public function getDisableUniversalMetaboxGutenberg(){
-        return $this->searchOptionByKey('seopress_advanced_appearance_universal_metabox_disable');
+        $data = $this->getOption();
+
+        if(!isset($data['seopress_advanced_appearance_universal_metabox_disable'])){
+            return true;
+        }
+
+        return $data['seopress_advanced_appearance_universal_metabox_disable'] === '1';
+    }
+
+    /**
+     * @since 5.0.3
+     */
+    public function getSecurityMetaboxRole(){
+        return $this->searchOptionByKey('seopress_advanced_security_metaboxe_role');
+    }
+
+    /**
+     * @since 5.0.3
+     */
+    public function getSecurityMetaboxRoleContentAnalysis(){
+        return $this->searchOptionByKey('seopress_advanced_security_metaboxe_ca_role');
     }
 }

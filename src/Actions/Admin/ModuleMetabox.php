@@ -41,9 +41,8 @@ class ModuleMetabox implements ExecuteHooks
         $isGutenberg = false;
         if(function_exists('get_current_screen')){
             $currentScreen = get_current_screen();
-            if(method_exists($currentScreen,'is_block_editor')){
+            if($currentScreen && method_exists($currentScreen,'is_block_editor')){
                 $isGutenberg = true === get_current_screen()->is_block_editor();
-
             }
         }
 
@@ -75,6 +74,9 @@ class ModuleMetabox implements ExecuteHooks
             $country_code = 'US';
         }
 
+        $settingsAdvanced = seopress_get_service('AdvancedOption');
+        $user = wp_get_current_user();
+        $roles = ( array ) $user->roles;
 
         $args = array_merge([
             'SEOPRESS_URL_DIST'       => SEOPRESS_URL_DIST,
@@ -91,6 +93,11 @@ class ModuleMetabox implements ExecuteHooks
                 'ACTIVE'        => apply_filters('seopress_ui_metabox_google_suggest', false),
                 'LOCALE'       => $locale,
                 'COUNTRY_CODE' => $country_code,
+            ],
+            'USER_ROLES' => array_values($roles),
+            'ROLES_BLOCKED' => [
+                'GLOBAL' => $settingsAdvanced->getSecurityMetaboxRole(),
+                'CONTENT_ANALYSIS' => $settingsAdvanced->getSecurityMetaboxRoleContentAnalysis()
             ],
             'FAVICON' => get_site_icon_url(32),
             'BEACON_SVG' => apply_filters('seopress_beacon_svg', SEOPRESS_URL_ASSETS.'/img/beacon.svg'),
@@ -110,9 +117,7 @@ class ModuleMetabox implements ExecuteHooks
      */
     public function enqueueFrontend()
     {
-        if (is_singular()) {
-            $this->enqueueModule(['POST_ID' => get_the_ID()]);
-        }
+        $this->enqueueModule(['POST_ID' => get_the_ID()]);
     }
 
     /**

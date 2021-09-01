@@ -396,7 +396,15 @@ function seopress_advanced_appearance_universal_metabox_callback() {
 function seopress_advanced_appearance_universal_metabox_disable_callback() {
     $options = get_option('seopress_advanced_option_name');
 
-    $check = isset($options['seopress_advanced_appearance_universal_metabox_disable']); ?>
+    if(!$options){
+        $check = "1";
+    }
+    else{
+        $check = isset($options['seopress_advanced_appearance_universal_metabox_disable']) && $options['seopress_advanced_appearance_universal_metabox_disable'] === '1' ? true : false;
+    }
+
+
+    ?>
 
 <label for="seopress_advanced_appearance_universal_metabox_disable">
     <input id="seopress_advanced_appearance_universal_metabox_disable"

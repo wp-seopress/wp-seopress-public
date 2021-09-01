@@ -22,7 +22,6 @@ class seopress_options
         add_action('admin_init', [$this, 'page_init']);
         add_action('admin_init', [$this, 'seopress_feature_save'], 30);
         add_action('admin_init', [$this, 'seopress_feature_title'], 20);
-        add_action('admin_init', [$this, 'sanitize'], 20);
         add_action('admin_init', [$this, 'load_sections'], 30);
         add_action('admin_init', [$this, 'load_callbacks'], 40);
     }
@@ -158,7 +157,55 @@ class seopress_options
 
     public function page_init()
     {
-        require_once dirname(__FILE__) . '/settings/Main.php';
+
+        register_setting(
+            'seopress_option_group', // Option group
+            'seopress_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
+        register_setting(
+            'seopress_titles_option_group', // Option group
+            'seopress_titles_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
+        register_setting(
+            'seopress_xml_sitemap_option_group', // Option group
+            'seopress_xml_sitemap_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
+        register_setting(
+            'seopress_social_option_group', // Option group
+            'seopress_social_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
+        register_setting(
+            'seopress_google_analytics_option_group', // Option group
+            'seopress_google_analytics_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
+        register_setting(
+            'seopress_advanced_option_group', // Option group
+            'seopress_advanced_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
+        register_setting(
+            'seopress_tools_option_group', // Option group
+            'seopress_tools_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
+        register_setting(
+            'seopress_import_export_option_group', // Option group
+            'seopress_import_export_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
         require_once dirname(__FILE__) . '/settings/Titles.php';
         require_once dirname(__FILE__) . '/settings/Sitemaps.php';
         require_once dirname(__FILE__) . '/settings/Social.php';
@@ -170,7 +217,16 @@ class seopress_options
 
     public function sanitize($input)
     {
+
         require_once dirname(__FILE__) . '/sanitize/Sanitize.php';
+
+        if(isset($_POST['option_page']) && $_POST['option_page'] === 'seopress_advanced_option_group'){
+            if(!isset($input['seopress_advanced_appearance_universal_metabox_disable'])){
+                $input['seopress_advanced_appearance_universal_metabox_disable'] = '';
+            }
+        }
+
+        return seopress_sanitize_options_fields($input);
     }
 
     public function load_sections()

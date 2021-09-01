@@ -79,8 +79,8 @@ abstract class ContentAnalysis {
                 'impact' => 'good',
                 'desc'   => null,
             ],
-            'inbound_links'=> [
-                'title'  => __('Inbound Links', 'wp-seopress'),
+            'internal_links'=> [
+                'title'  => __('Internal Links', 'wp-seopress'),
                 'impact' => 'good',
                 'desc'   => null,
             ],

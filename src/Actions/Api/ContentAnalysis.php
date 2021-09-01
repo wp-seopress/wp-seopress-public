@@ -46,7 +46,18 @@ class ContentAnalysis implements ExecuteHooks
                     },
                 ],
             ],
-            'permission_callback' => '__return_true',
+            'permission_callback' => function ($request) {
+                $nonce = $request->get_header('x-wp-nonce');
+                if ( ! wp_verify_nonce($nonce, 'wp_rest')) {
+                    return false;
+                }
+
+                if(!current_user_can('edit_posts')){
+                    return false;
+                }
+
+                return true;
+            },
         ]);
     }
 

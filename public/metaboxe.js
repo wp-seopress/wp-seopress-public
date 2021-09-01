@@ -18416,15 +18416,19 @@ var ADVANCED = "ADVANCED";
 var SOCIAL = "SOCIAL";
 var REDIRECTION = "REDIRECTION";
 var OVERVIEW = "OVERVIEW";
+var ROLE_GLOBAL = "GLOBAL";
+var ROLE_CONTENT_ANALYSIS = "CONTENT_ANALYSIS";
 var __ = wp.i18n.__;
 var getTabs = function getTabs() {
   return [{
     key: TITLE_DESCRIPTION_META,
     title: __("Titles & Metas", "wp-seopress"),
+    type_role: ROLE_GLOBAL,
     default_sub_tab: TITLE_SETTINGS
   }, {
     key: CONTENT_ANALYSIS,
     title: __("Content Analysis", "wp-seopress"),
+    type_role: ROLE_CONTENT_ANALYSIS,
     default_sub_tab: OVERVIEW
   }];
 };
@@ -18455,6 +18459,8 @@ var getSubTabs = function getSubTabs() {
 
 
 
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -18523,7 +18529,61 @@ var MetaboxContext_MetaboxContextProvider = function MetaboxContextProvider(_ref
       isGutenberg = _useState4[0],
       setIsGutenberg = _useState4[1];
 
-  var _useState5 = Object(react["useState"])(TITLE_DESCRIPTION_META),
+  var getTabDefault = function getTabDefault() {
+    var currentUserRoles = get_default()(SEOPRESS_DATA, "USER_ROLES", null);
+
+    var rolesMetabox = get_default()(SEOPRESS_DATA, "ROLES_BLOCKED", {});
+
+    var tabs = getTabs();
+
+    var _iterator = _createForOfIteratorHelper(tabs),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var _tab = _step.value;
+
+        var typeRole = get_default()(_tab, "type_role", null);
+
+        var currentRoleTab = get_default()(rolesMetabox, [typeRole], null);
+
+        var isBlocked = false;
+
+        var _iterator2 = _createForOfIteratorHelper(currentUserRoles),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var userRole = _step2.value;
+
+            if (!isNil_default()(currentRoleTab) && !isNil_default()(get_default()(currentRoleTab, userRole, null))) {
+              isBlocked = true;
+            }
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+
+        if (isBlocked) {
+          continue;
+        }
+
+        return _tab.key;
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    return find_default()(getTabs(), {
+      key: TITLE_DESCRIPTION_META
+    }).key;
+  };
+
+  var _useState5 = Object(react["useState"])(getTabDefault()),
       _useState6 = _slicedToArray(_useState5, 2),
       tab = _useState6[0],
       setTab = _useState6[1];
@@ -27738,7 +27798,7 @@ var RecommendedLimit_RecommendedLimit = function RecommendedLimit(_ref) {
     style: {
       width: "".concat(percent, "%")
     }
-  }, percent, "%"), /*#__PURE__*/react_default.a.createElement(ProgressInformation, null, children));
+  }, percent.toFixed(1), "%"), /*#__PURE__*/react_default.a.createElement(ProgressInformation, null, children));
 };
 
 /* harmony default export */ var components_RecommendedLimit = (RecommendedLimit_RecommendedLimit);
@@ -27805,7 +27865,7 @@ var TitleDescriptionPreviewContext_TitleDescriptionPreviewContextProvider = func
 };
 // CONCATENATED MODULE: ./app/react/helpers/getPercentPixelValue.js
 var getPercentPixelValue = function getPercentPixelValue(pixelValue, maximum) {
-  return Math.ceil(pixelValue * 100 / maximum);
+  return pixelValue * 100 / maximum;
 };
 // CONCATENATED MODULE: ./app/react/helpers/getPixelValue.js
 var getPixelValue = function getPixelValue(value) {
@@ -37287,16 +37347,16 @@ var images_Component = function Component(_ref) {
   severity: images_getSeverity,
   component: images_Component
 });
-// CONCATENATED MODULE: ./app/react/services/content-analysis/inboundLinks.js
+// CONCATENATED MODULE: ./app/react/services/content-analysis/internalLinks.js
 
 
 
 
-var inboundLinks_ = wp.i18n.__;
-var inboundLinks_KEY = "inbound_links";
+var internalLinks_ = wp.i18n.__;
+var internalLinks_KEY = "internal_links";
 
-var inboundLinks_getSeverity = function getSeverity(data, options) {
-  var items = get_default()(data, [inboundLinks_KEY, "value"], []);
+var internalLinks_getSeverity = function getSeverity(data, options) {
+  var items = get_default()(data, [internalLinks_KEY, "value"], []);
 
   if (isEmpty_default()(items)) {
     return "medium";
@@ -37305,18 +37365,18 @@ var inboundLinks_getSeverity = function getSeverity(data, options) {
   return "good";
 };
 
-var inboundLinks_Component = function Component(_ref) {
+var internalLinks_Component = function Component(_ref) {
   var data = _ref.data,
       _ref$options = _ref.options,
       options = _ref$options === void 0 ? {} : _ref$options;
 
-  var items = get_default()(data, [inboundLinks_KEY, "value"], []);
+  var items = get_default()(data, [internalLinks_KEY, "value"], []);
 
-  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("p", null, inboundLinks_("Inbounk links are important for SEO and user experience. Always try to link your content together, with quality link anchors.")), isEmpty_default()(items) && /*#__PURE__*/react_default.a.createElement("p", null, /*#__PURE__*/react_default.a.createElement(NoAlt, {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("p", null, internalLinks_("Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.")), isEmpty_default()(items) && /*#__PURE__*/react_default.a.createElement("p", null, /*#__PURE__*/react_default.a.createElement(NoAlt, {
     className: "sp-dashicons-not"
-  }), inboundLinks_("This page doesn't have any inbound links from other content. Links from archive pages are not considered inbound links due to lack of context.", "wp-seopress")), !isEmpty_default()(items) && /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("p", null, inboundLinks_("We found ".concat(items.length, " inbound links in your page. Below, the list:"), "wp-seopress")), /*#__PURE__*/react_default.a.createElement("ul", null, items.map(function (item, key) {
+  }), internalLinks_("This page doesn't have any internal links from other content. Links from archive pages are not considered internal links due to lack of context.", "wp-seopress")), !isEmpty_default()(items) && /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("p", null, internalLinks_("We found ".concat(items.length, " internal links in your page. Below, the list:"), "wp-seopress")), /*#__PURE__*/react_default.a.createElement("ul", null, items.map(function (item, key) {
     return /*#__PURE__*/react_default.a.createElement("li", {
-      key: "inbound_".concat(key)
+      key: "internal_".concat(key)
     }, /*#__PURE__*/react_default.a.createElement("span", {
       className: "dashicons dashicons-minus"
     }), /*#__PURE__*/react_default.a.createElement("a", {
@@ -37331,11 +37391,11 @@ var inboundLinks_Component = function Component(_ref) {
   }))));
 };
 
-/* harmony default export */ var inboundLinks = ({
-  key: inboundLinks_KEY,
-  title: inboundLinks_("Inbound Links", "wp-seopress"),
-  severity: inboundLinks_getSeverity,
-  component: inboundLinks_Component
+/* harmony default export */ var internalLinks = ({
+  key: internalLinks_KEY,
+  title: internalLinks_("Internal Links", "wp-seopress"),
+  severity: internalLinks_getSeverity,
+  component: internalLinks_Component
 });
 // CONCATENATED MODULE: ./app/react/services/content-analysis/metaDescription.js
 
@@ -38200,7 +38260,7 @@ var oldPost_Component = function Component(_ref) {
 // CONCATENATED MODULE: ./app/react/services/content-analysis/index.js
 
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = content_analysis_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function content_analysis_createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = content_analysis_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function content_analysis_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return content_analysis_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return content_analysis_arrayLikeToArray(o, minLen); }
 
@@ -38223,7 +38283,7 @@ function content_analysis_arrayLikeToArray(arr, len) { if (len == null || len > 
 
 
 var content_analysis_getContentAnalysis = function getContentAnalysis() {
-  return [wordsCounter, canonicalUrl, content_analysis_heading, content_analysis_metaTitle, content_analysis_metaDescription, socialTags, metaRobots, content_analysis_schemas, content_analysis_images, noFollowLinks, outboundLinks, inboundLinks, keywordsPermalink, keywordsDensity, oldPost];
+  return [wordsCounter, canonicalUrl, content_analysis_heading, content_analysis_metaTitle, content_analysis_metaDescription, socialTags, metaRobots, content_analysis_schemas, content_analysis_images, noFollowLinks, outboundLinks, internalLinks, keywordsPermalink, keywordsDensity, oldPost];
 };
 
 var content_analysis_getContentAnalysisBySeverity = function getContentAnalysisBySeverity(contents, args) {
@@ -38234,7 +38294,7 @@ var content_analysis_getContentAnalysisBySeverity = function getContentAnalysisB
 var getFullSeverity = function getFullSeverity(contents, args) {
   var fullSeverity = "good";
 
-  var _iterator = _createForOfIteratorHelper(contents),
+  var _iterator = content_analysis_createForOfIteratorHelper(contents),
       _step;
 
   try {
@@ -39156,6 +39216,10 @@ var filter_default = /*#__PURE__*/__webpack_require__.n(filter);
 // CONCATENATED MODULE: ./app/react/layout/Tabs/index.js
 
 
+
+
+function Tabs_createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = Tabs_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
 function Tabs_slicedToArray(arr, i) { return Tabs_arrayWithHoles(arr) || Tabs_iterableToArrayLimit(arr, i) || Tabs_unsupportedIterableToArray(arr, i) || Tabs_nonIterableRest(); }
 
 function Tabs_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -39211,10 +39275,41 @@ var Tabs_Tabs = function Tabs(_ref3) {
     }
   };
 
+  var currentUserRoles = get_default()(SEOPRESS_DATA, "USER_ROLES", []);
+
+  var rolesMetabox = get_default()(SEOPRESS_DATA, "ROLES_BLOCKED", {});
+
   return /*#__PURE__*/react_default.a.createElement(SCTabContainer, null, getTabs().map(function (tab, keyParent) {
     var subTabs = filter_default()(getSubTabs(), {
       parent: tab.key
     });
+
+    var typeRole = get_default()(tab, "type_role", null);
+
+    var currentRoleTab = get_default()(rolesMetabox, [typeRole], null);
+
+    var isBlocked = false;
+
+    var _iterator = Tabs_createForOfIteratorHelper(currentUserRoles),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var userRole = _step.value;
+
+        if (!isNil_default()(currentRoleTab) && get_default()(currentRoleTab, userRole, "") === "1") {
+          isBlocked = true;
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    if (isBlocked) {
+      return null;
+    }
 
     return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, {
       key: tab.key

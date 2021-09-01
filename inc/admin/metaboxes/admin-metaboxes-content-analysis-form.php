@@ -4,13 +4,6 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 
 $data_attr = seopress_metaboxes_init();
 
-//Classic Editor compatibility
-if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-    $btn_classes_secondary = 'components-button is-secondary';
-} else {
-    $btn_classes_secondary = 'button button-secondary';
-}
-
 ?>
 
 <div class="wrap-seopress-analysis"
@@ -41,19 +34,19 @@ if (function_exists('get_current_screen') && true === get_current_screen()->is_b
                 value="<?php esc_attr_e($seopress_analysis_target_kw); ?>" />
         </p>
         <?php if (empty($seopress_analysis_data)) { ?>
-        <button id="seopress_launch_analysis" type="button" class="<?php echo $btn_classes_secondary; ?>"
+        <button id="seopress_launch_analysis" type="button" class="<?php echo seopress_btn_secondary_classes(); ?>"
             data_id="<?php echo get_the_ID(); ?>"
             data_post_type="<?php echo get_current_screen()->post_type; ?>"><?php _e('Analyze my content', 'wp-seopress'); ?></button>
         <?php } else { ?>
         <button id="seopress_launch_analysis" type="button"
-            class="<?php echo $btn_classes_secondary; ?>"
+            class="<?php echo seopress_btn_secondary_classes(); ?>"
             data_id="<?php echo get_the_ID(); ?>"
             data_post_type="<?php echo get_current_screen()->post_type; ?>"><?php _e('Refresh analysis', 'wp-seopress'); ?></button>
         <?php }
 
             if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) { ?>
         <button id="seopress_add_to_insights" type="button"
-            class="<?php echo $btn_classes_secondary; ?>"
+            class="<?php echo seopress_btn_secondary_classes(); ?>"
             data_id="<?php echo get_the_ID(); ?>"
             data_post_type="<?php echo get_current_screen()->post_type; ?>">
             <?php _e('Track with Insights', 'wp-seopress'); ?>
@@ -78,7 +71,7 @@ if (function_exists('get_current_screen') && true === get_current_screen()->is_b
             <span class="description"><?php _e('Click on a suggestion below to add it as a target keyword.', 'wp-seopress'); ?></span>
         </p>
         <button id="seopress_get_suggestions" type="button"
-            class="<?php echo $btn_classes_secondary; ?>">
+            class="<?php echo seopress_btn_secondary_classes(); ?>">
             <?php _e('Get suggestions!', 'wp-seopress'); ?>
         </button>
 

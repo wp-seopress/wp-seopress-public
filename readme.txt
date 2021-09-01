@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 5.0.3
+Stable tag: 5.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -331,6 +331,17 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 9. Schemas metabox
 
 == Changelog ==
+= 5.0.4 =
+* NEW Edit homepage with universal SEO metabox
+* INFO Disable Universal SEO metabox by default (will not affect users who already have version 5.0 of SEOPress)
+* INFO Add an option to disable the universal SEO metabox from the configuration wizard
+* INFO Strengthening security (thanks to Wordfence)
+* FIX Add schema notification
+* FIX Pixel counter for title and meta description
+* FIX Notice: Undefined index: bestRating wp-seopress-pro/src/JsonSchemas/Review.php
+* FIX WordPress < 5.0 compatibility (is_block_editor() error)
+* FIX PHP Fatal error:  Uncaught TypeError: method_exists(): Argument #1 ($object_or_class) must be of type object|string, null given in wp-seopress/src/Actions/Admin/ModuleMetabox.php:44
+* FIX Warning: Undefined variable $sp_seo_admin_menu in wp-seopress-pro/inc/admin/admin.php on line 134 (Multisite only)
 = 5.0.3 =
 * FIX Fatal error: Uncaught Error: Call to undefined function seopress_render_dyn_variables() if "Hide help icons and SEOPress documentation links" (White Label) is enabled
 * FIX Some CSS
@@ -338,6 +349,7 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * NEW Allow user to drag and drop the beacon
 * INFO Allow users with edit_posts capability to use the universal SEO metabox in frontend
 * FIX Fatal error:  Uncaught TypeError: method_exists() in some cases
+* FIX Fatal error: Uncaught Error: Call to undefined function seopress_feature_save() (WP multisite only)
 = 5.0.1 =
 * NEW Option to disable the universal SEO metabox from SEO, Advanced, Appearance tab
 * INFO Improve a11y

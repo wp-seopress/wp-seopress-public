@@ -14,13 +14,6 @@ $data_attr             = [];
 $data_attr['data_tax'] = '';
 $data_attr['termId']   = '';
 
-//Classic Editor compatibility
-if (function_exists('get_current_screen') && true === get_current_screen()->is_block_editor()) {
-    $btn_classes_secondary = 'components-button is-secondary';
-} else {
-    $btn_classes_secondary = 'button button-secondary';
-}
-
 if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
     $data_attr['current_id'] = get_the_id();
     $data_attr['origin']     = 'post';
@@ -131,15 +124,15 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
 
                             <div class="wrap-tags">
                                 <?php if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
-                                <button type="button" class="<?php echo $btn_classes_secondary; ?> tag-title" id="seopress-tag-single-title" data-tag="%%term_title%%"><span
+                                <button type="button" class="<?php echo seopress_btn_secondary_classes(); ?> tag-title" id="seopress-tag-single-title" data-tag="%%term_title%%"><span
                                         class="dashicons dashicons-plus-alt2"></span><?php _e('Term Title', 'wp-seopress'); ?></button>
                                 <?php } else { ?>
-                                <button type="button" class="<?php echo $btn_classes_secondary; ?> tag-title" id="seopress-tag-single-title" data-tag="%%post_title%%"><span
+                                <button type="button" class="<?php echo seopress_btn_secondary_classes(); ?> tag-title" id="seopress-tag-single-title" data-tag="%%post_title%%"><span
                                         class="dashicons dashicons-plus-alt2"></span><?php _e('Post Title', 'wp-seopress'); ?></button>
                                 <?php } ?>
-                                <button type="button" class="<?php echo $btn_classes_secondary; ?> tag-title" id="seopress-tag-single-site-title" data-tag="%%sitetitle%%">
+                                <button type="button" class="<?php echo seopress_btn_secondary_classes(); ?> tag-title" id="seopress-tag-single-site-title" data-tag="%%sitetitle%%">
                                     <span class="dashicons dashicons-plus-alt2"></span><?php _e('Site Title', 'wp-seopress'); ?></button>
-                                <button type="button" class="<?php echo $btn_classes_secondary; ?> tag-title" id="seopress-tag-single-sep" data-tag="%%sep%%"><span
+                                <button type="button" class="<?php echo seopress_btn_secondary_classes(); ?> tag-title" id="seopress-tag-single-sep" data-tag="%%sep%%"><span
                                         class="dashicons dashicons-plus-alt2"></span><?php _e('Separator', 'wp-seopress'); ?></button>
 
                                 <?php echo seopress_render_dyn_variables('tag-title'); ?>
@@ -169,11 +162,11 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             </div>
                             <div class="wrap-tags">
                                 <?php if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
-                                <button type="button" class="<?php echo $btn_classes_secondary; ?> tag-title" id="seopress-tag-single-excerpt" data-tag="%%_category_description%%">
+                                <button type="button" class="<?php echo seopress_btn_secondary_classes(); ?> tag-title" id="seopress-tag-single-excerpt" data-tag="%%_category_description%%">
                                     <span class="dashicons dashicons-plus-alt2"></span><?php _e('Category / term description', 'wp-seopress'); ?>
                                 </button>
                                 <?php } else { ?>
-                                <button type="button" class="<?php echo $btn_classes_secondary; ?> tag-title" id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%">
+                                <button type="button" class="<?php echo seopress_btn_secondary_classes(); ?> tag-title" id="seopress-tag-single-excerpt" data-tag="%%post_excerpt%%">
                                     <span class="dashicons dashicons-plus-alt2"></span><?php _e('Post Excerpt', 'wp-seopress'); ?>
                                 </button>
                                 <?php }
@@ -420,7 +413,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             </p>
                             <p>
                                 <input id="seopress_social_fb_img_upload"
-                                    class="<?php echo $btn_classes_secondary; ?>"
+                                    class="<?php echo seopress_btn_secondary_classes(); ?>"
                                     type="button"
                                     value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
                             </p>
@@ -535,7 +528,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             </p>
                             <p>
                                 <input id="seopress_social_twitter_img_upload"
-                                    class="<?php echo $btn_classes_secondary; ?>"
+                                    class="<?php echo seopress_btn_secondary_classes(); ?>"
                                     type="button"
                                     aria-label="<?php _e('Twitter Thumbnail', 'wp-seopress'); ?>"
                                     value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
@@ -684,7 +677,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             } ?>
                             <a href="<?php echo $href; ?>"
                                 id="seopress_redirections_value_default"
-                                class="<?php echo $btn_classes_secondary; ?>"
+                                class="<?php echo seopress_btn_secondary_classes(); ?>"
                                 target="_blank">
                                 <?php _e('Test your URL', 'wp-seopress'); ?>
                             </a>
@@ -830,7 +823,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
 
 
                                         <input
-                                            class="<?php echo $btn_classes_secondary; ?> seopress_video_thumbnail_upload seopress_media_upload"
+                                            class="<?php echo seopress_btn_secondary_classes(); ?> seopress_video_thumbnail_upload seopress_media_upload"
                                             type="button"
                                             aria-label="<?php _e('Video Thumbnail', 'wp-seopress'); ?>"
                                             value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
@@ -920,7 +913,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                         </div>
                         <p>
                             <a href="#" id="add-video"
-                                class="add-video <?php echo $btn_classes_secondary; ?>">
+                                class="add-video <?php echo seopress_btn_secondary_classes(); ?>">
                                 <?php _e('Add video', 'wp-seopress'); ?>
                             </a>
                         </p>

@@ -4,7 +4,7 @@ namespace SEOPress\Services\ContentAnalysis\GetContent;
 
 defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 
-class InboundLinks
+class InternalLinks
 {
     public function getDataByXPath($xpath, $options)
     {

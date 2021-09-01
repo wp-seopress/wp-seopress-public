@@ -741,3 +741,25 @@ function sp_submit_button($value ='', $classes = 'btn btnPrimary', $type = 'subm
 
     echo $html;
 }
+
+/**
+ * Generate HTML buttons classes
+ *
+ * @since 5.0
+ *
+ * @author Benjamin Denis
+ * @return
+ */
+function seopress_btn_secondary_classes() {
+    //Classic Editor compatibility
+    global $pagenow;
+    if (function_exists('get_current_screen') && method_exists(get_current_screen(), 'is_block_editor') && true === get_current_screen()->is_block_editor()) {
+        $btn_classes_secondary = 'components-button is-secondary';
+    } elseif (isset($pagenow) && ($pagenow === 'term.php' || $pagenow === 'post.php') ) {
+        $btn_classes_secondary = 'button button-secondary';
+    } else {
+        $btn_classes_secondary = 'btn btnSecondary';
+    }
+
+    return $btn_classes_secondary;
+}
