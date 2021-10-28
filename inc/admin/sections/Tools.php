@@ -18,7 +18,10 @@ function print_section_info_tools_compatibility()
     <?php _e('Even though a lot of things are completely transparent to you and automated, sometimes it is necessary to leave the final choice to you.', 'wp-seopress'); ?>
 </p>
 
-<div class="seopress-notice is-warning">
+<div class="seopress-notice is-error">
+    <p>
+        <?php _e('This feature will be deprecated soon.', 'wp-seopress-pro'); ?>
+    </p>
     <p>
         <?php _e('<strong>Warning</strong>: always test your site after activating one of these options. Running shortcodes to automatically generate meta title / description can have side effects. Clear your cache if necessary.', 'wp-seopress'); ?>
         <?php echo seopress_tooltip_link($docs['compatibility']['automatic'], __('Learn more about automatic meta descriptions', 'wp-seopress-pro')); ?>

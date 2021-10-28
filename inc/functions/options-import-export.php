@@ -68,46 +68,46 @@ function seopress_import_settings() {
     $settings = (array) json_decode(seopress_remove_utf8_bom(file_get_contents($import_file)), true);
 
     if (false !== $settings['seopress_activated']) {
-        update_option('seopress_activated', $settings['seopress_activated']);
+        update_option('seopress_activated', $settings['seopress_activated'], false);
     }
     if (false !== $settings['seopress_titles_option_name']) {
-        update_option('seopress_titles_option_name', $settings['seopress_titles_option_name']);
+        update_option('seopress_titles_option_name', $settings['seopress_titles_option_name'], false);
     }
     if (false !== $settings['seopress_social_option_name']) {
-        update_option('seopress_social_option_name', $settings['seopress_social_option_name']);
+        update_option('seopress_social_option_name', $settings['seopress_social_option_name'], false);
     }
     if (false !== $settings['seopress_google_analytics_option_name']) {
-        update_option('seopress_google_analytics_option_name', $settings['seopress_google_analytics_option_name']);
+        update_option('seopress_google_analytics_option_name', $settings['seopress_google_analytics_option_name'], false);
     }
     if (false !== $settings['seopress_advanced_option_name']) {
-        update_option('seopress_advanced_option_name', $settings['seopress_advanced_option_name']);
+        update_option('seopress_advanced_option_name', $settings['seopress_advanced_option_name'], false);
     }
     if (false !== $settings['seopress_xml_sitemap_option_name']) {
-        update_option('seopress_xml_sitemap_option_name', $settings['seopress_xml_sitemap_option_name']);
+        update_option('seopress_xml_sitemap_option_name', $settings['seopress_xml_sitemap_option_name'], false);
     }
     if (false !== $settings['seopress_pro_option_name']) {
-        update_option('seopress_pro_option_name', $settings['seopress_pro_option_name']);
+        update_option('seopress_pro_option_name', $settings['seopress_pro_option_name'], false);
     }
     if (false !== $settings['seopress_pro_mu_option_name']) {
-        update_option('seopress_pro_mu_option_name', $settings['seopress_pro_mu_option_name']);
+        update_option('seopress_pro_mu_option_name', $settings['seopress_pro_mu_option_name'], false);
     }
     if (false !== $settings['seopress_pro_license_key']) {
-        update_option('seopress_pro_license_key', $settings['seopress_pro_license_key']);
+        update_option('seopress_pro_license_key', $settings['seopress_pro_license_key'], false);
     }
     if (false !== $settings['seopress_pro_license_status']) {
-        update_option('seopress_pro_license_status', $settings['seopress_pro_license_status']);
+        update_option('seopress_pro_license_status', $settings['seopress_pro_license_status'], false);
     }
     if (false !== $settings['seopress_bot_option_name']) {
-        update_option('seopress_bot_option_name', $settings['seopress_bot_option_name']);
+        update_option('seopress_bot_option_name', $settings['seopress_bot_option_name'], false);
     }
     if (false !== $settings['seopress_toggle']) {
-        update_option('seopress_toggle', $settings['seopress_toggle']);
+        update_option('seopress_toggle', $settings['seopress_toggle'], false);
     }
     if (false !== $settings['seopress_google_analytics_lock_option_name']) {
-        update_option('seopress_google_analytics_lock_option_name', $settings['seopress_google_analytics_lock_option_name']);
+        update_option('seopress_google_analytics_lock_option_name', $settings['seopress_google_analytics_lock_option_name'], false);
     }
     if (false !== $settings['seopress_tools_option_name']) {
-        update_option('seopress_tools_option_name', $settings['seopress_tools_option_name']);
+        update_option('seopress_tools_option_name', $settings['seopress_tools_option_name'], false);
     }
 
     wp_safe_redirect(admin_url('admin.php?page=seopress-import-export&success=true'));
@@ -141,7 +141,7 @@ function seopress_import_redirections_settings() {
         wp_die(__('Please choose a separator', 'wp-seopress'));
     }
 
-    $csv = array_map(function ($v) {
+    $csv = array_map(function ($item) {
         if ('comma' == $_POST['import_sep']) {
             $sep = ',';
         } elseif ('semicolon' == $_POST['import_sep']) {
@@ -150,7 +150,7 @@ function seopress_import_redirections_settings() {
             wp_die(__('Invalid separator'));
         }
 
-        return str_getcsv($v, $sep, '\"');
+        return str_getcsv($item, $sep, '\"');
     }, file($import_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 
     //Remove duplicates from CSV
@@ -318,13 +318,18 @@ function seopress_export_redirections_settings() {
     if ($seopress_redirects_query->have_posts()) {
         while ($seopress_redirects_query->have_posts()) {
             $seopress_redirects_query->the_post();
-
             $redirect_categories = get_the_terms(get_the_ID(), 'seopress_404_cat');
-            $redirect_categories = '"' . join(', ', wp_list_pluck($redirect_categories, 'term_id')) . '"';
 
-            $redirects_html .= '"' . urldecode(urlencode(esc_attr(wp_filter_nohtml_kses(get_the_title())))) . '"';
+            if(!empty($redirect_categories)){
+                $redirect_categories = join(', ', wp_list_pluck($redirect_categories, 'term_id'));
+            }
+            else{
+                $redirect_categories = "";
+            }
+
+            $redirects_html .= html_entity_decode(urldecode(urlencode(esc_attr(wp_filter_nohtml_kses(get_the_title())))));
             $redirects_html .= ';';
-            $redirects_html .= '"' . urldecode(urlencode(esc_attr(wp_filter_nohtml_kses(get_post_meta(get_the_ID(), '_seopress_redirections_value', true))))) . '"';
+            $redirects_html .= html_entity_decode(urldecode(urlencode(esc_attr(wp_filter_nohtml_kses(get_post_meta(get_the_ID(), '_seopress_redirections_value', true))))));
             $redirects_html .= ';';
             $redirects_html .= get_post_meta(get_the_ID(), '_seopress_redirections_type', true);
             $redirects_html .= ';';

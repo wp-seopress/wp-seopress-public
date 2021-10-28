@@ -412,6 +412,10 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <?php _e('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'); ?>
                             </p>
                             <p>
+                                <input type="hidden" name="seopress_social_fb_img_attachment_id" id="seopress_social_fb_img_attachment_id" value="<?php echo esc_html($seopress_social_fb_img_attachment_id); ?>">
+                                <input type="hidden" name="seopress_social_fb_img_width" id="seopress_social_fb_img_width" value="<?php echo esc_html($seopress_social_fb_img_width); ?>">
+                                <input type="hidden" name="seopress_social_fb_img_height" id="seopress_social_fb_img_height" value="<?php echo esc_html($seopress_social_fb_img_height); ?>">
+
                                 <input id="seopress_social_fb_img_upload"
                                     class="<?php echo seopress_btn_secondary_classes(); ?>"
                                     type="button"
@@ -527,6 +531,10 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <?php _e('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress'); ?>
                             </p>
                             <p>
+                                <input type="hidden" name="seopress_social_twitter_img_attachment_id" id="seopress_social_twitter_img_attachment_id" value="<?php echo esc_html($seopress_social_twitter_img_attachment_id); ?>">
+                                <input type="hidden" name="seopress_social_twitter_img_width" id="seopress_social_twitter_img_width" value="<?php echo esc_html($seopress_social_twitter_img_width); ?>">
+                                <input type="hidden" name="seopress_social_twitter_img_height" id="seopress_social_twitter_img_height" value="<?php echo esc_html($seopress_social_twitter_img_height); ?>">
+
                                 <input id="seopress_social_twitter_img_upload"
                                     class="<?php echo seopress_btn_secondary_classes(); ?>"
                                     type="button"

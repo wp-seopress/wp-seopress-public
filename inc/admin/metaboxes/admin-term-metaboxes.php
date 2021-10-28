@@ -282,9 +282,15 @@ function seopress_display_seo_term_metaboxe() {
         $seopress_social_fb_title          = get_term_meta($term->term_id, '_seopress_social_fb_title', true);
         $seopress_social_fb_desc           = get_term_meta($term->term_id, '_seopress_social_fb_desc', true);
         $seopress_social_fb_img            = get_term_meta($term->term_id, '_seopress_social_fb_img', true);
+        $seopress_social_fb_img_attachment_id = get_post_meta($term->term_id, '_seopress_social_fb_img_attachment_id', true);
+        $seopress_social_fb_img_width = get_post_meta($term->term_id, '_seopress_social_fb_img_width', true);
+        $seopress_social_fb_img_height = get_post_meta($term->term_id, '_seopress_social_fb_img_height', true);
         $seopress_social_twitter_title     = get_term_meta($term->term_id, '_seopress_social_twitter_title', true);
         $seopress_social_twitter_desc      = get_term_meta($term->term_id, '_seopress_social_twitter_desc', true);
         $seopress_social_twitter_img       = get_term_meta($term->term_id, '_seopress_social_twitter_img', true);
+        $seopress_social_twitter_img_attachment_id            = get_post_meta($term->term_id, '_seopress_social_twitter_img_attachment_id', true);
+        $seopress_social_twitter_img_width            = get_post_meta($term->term_id, '_seopress_social_twitter_img_width', true);
+        $seopress_social_twitter_img_height            = get_post_meta($term->term_id, '_seopress_social_twitter_img_height', true);
         $seopress_redirections_enabled     = get_term_meta($term->term_id, '_seopress_redirections_enabled', true);
         $seopress_redirections_type        = get_term_meta($term->term_id, '_seopress_redirections_type', true);
         $seopress_redirections_value       = get_term_meta($term->term_id, '_seopress_redirections_value', true);

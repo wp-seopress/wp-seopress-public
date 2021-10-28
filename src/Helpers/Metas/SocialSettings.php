@@ -51,6 +51,18 @@ abstract class SocialSettings {
                 'description'        => __('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'),
             ],
             [
+                'key'                => '_seopress_social_fb_img_attachment_id',
+                'type'               => 'hidden',
+            ],
+            [
+                'key'                => '_seopress_social_fb_img_width',
+                'type'               => 'hidden',
+            ],
+            [
+                'key'                => '_seopress_social_fb_img_height',
+                'type'               => 'hidden',
+            ],
+            [
                 'key'         => '_seopress_social_twitter_title',
                 'type'        => 'input',
                 'placeholder' => __('Enter your Twitter title', 'wp-seopress'),
@@ -77,6 +89,18 @@ abstract class SocialSettings {
                 'label'              => __('Twitter Thumbnail', 'wp-seopress'),
                 'visible'            => true,
                 'description'        => __('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress'),
+            ],
+            [
+                'key'                => '_seopress_social_twitter_img_attachment_id',
+                'type'               => 'hidden',
+            ],
+            [
+                'key'                => '_seopress_social_twitter_img_width',
+                'type'               => 'hidden',
+            ],
+            [
+                'key'                => '_seopress_social_twitter_img_height',
+                'type'               => 'hidden',
             ],
         ], $id);
 

@@ -216,7 +216,7 @@ function seopress_metadata_export() {
                 wp_reset_query();
                 //Reset offset once Posts export is done
                 $offset = 0;
-                update_option('seopress_metadata_csv', $csv);
+                update_option('seopress_metadata_csv', $csv, false);
                 $post_export = 'done';
             } else {
                 $args = [
@@ -332,12 +332,12 @@ function seopress_metadata_export() {
                     }
                 }
                 $offset += $increment;
-                update_option('seopress_metadata_csv', $csv);
+                update_option('seopress_metadata_csv', $csv, false);
             }
         } elseif ('done' != $term_export) {
             //Terms
             if ($offset > $total_count_terms) {
-                update_option('seopress_metadata_csv', $csv);
+                update_option('seopress_metadata_csv', $csv, false);
                 $post_export = 'done';
                 $term_export = 'done';
             } else {
@@ -453,7 +453,7 @@ function seopress_metadata_export() {
                 }
                 $offset += $increment;
                 $post_export = 'done';
-                update_option('seopress_metadata_csv', $csv);
+                update_option('seopress_metadata_csv', $csv, false);
             }
         } else {
             $post_export = 'done';

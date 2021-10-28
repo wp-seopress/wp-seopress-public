@@ -20,7 +20,6 @@ class SocialMeta
             case '_seopress_social_twitter_title':
             case '_seopress_social_twitter_desc':
             case '_seopress_social_twitter_img':
-
                 return "twitter";
         }
     }
@@ -31,7 +30,7 @@ class SocialMeta
                 return 'title';
             case '_seopress_social_fb_desc':
             case '_seopress_social_twitter_desc':
-                    return 'description';
+                return 'description';
 
             case '_seopress_social_fb_img':
             case '_seopress_social_twitter_img':

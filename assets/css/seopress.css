@@ -1084,7 +1084,10 @@ table.fixed thead .column-seopress_noindex {
     right: 10px;
     top: calc(50% - 7px);
 }
-#seopress_content_analysis .gr-analysis-title button.open .seopress-arrow::after {
+#seopress_content_analysis
+    .gr-analysis-title
+    button.open
+    .seopress-arrow::after {
     content: "\f347";
 }
 #seopress_content_analysis .gr-analysis-content {
@@ -2030,6 +2033,11 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     margin: 15px 0 30px 0;
     width: auto;
 }
+
+.seopress-hidden {
+    display: none;
+}
+
 .seopress-notice pre {
     background: #fff;
 }

@@ -34,7 +34,7 @@ class Document_Settings_Section {
             if (get_user_meta(get_current_user_id(), 'elementor_preferences', true)) {
                 $settings = get_user_meta(get_current_user_id(), 'elementor_preferences', true);
 
-                if ( ! empty($settings) && 'dark' == $settings['ui_theme']) {
+                if ( ! empty($settings) && isset($settings['ui_theme']) && 'dark' == $settings['ui_theme']) {
                     wp_enqueue_style(
                         'sp-el-dark-mode-style',
                         SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/dark-mode.css'

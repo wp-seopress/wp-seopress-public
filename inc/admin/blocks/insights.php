@@ -117,7 +117,7 @@
                             <span><?php echo $ps_score . '%'; ?></span>
                         </div>
 
-                        <a href="<?php echo admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_ps'); ?>"
+                        <a href="<?php echo admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed'); ?>"
                             class="btn btnSecondary">
                             <?php _e('See full report', 'wp-seopress'); ?>
                         </a>

@@ -577,6 +577,29 @@ if ('1' == seopress_get_toggle_option('advanced')) {
             }
         }
     }
+
+    //Add nofollow noopener noreferrer to comments form link
+    function seopress_advanced_advanced_comments_form_link_option()
+    {
+        $seopress_advanced_advanced_comments_form_link_option = get_option('seopress_advanced_option_name');
+        if (! empty($seopress_advanced_advanced_comments_form_link_option)) {
+            foreach ($seopress_advanced_advanced_comments_form_link_option as $key => $seopress_advanced_advanced_comments_form_link_value) {
+                $options[$key] = $seopress_advanced_advanced_comments_form_link_value;
+            }
+            if (isset($seopress_advanced_advanced_comments_form_link_option['seopress_advanced_advanced_comments_form_link'])) {
+                return $seopress_advanced_advanced_comments_form_link_option['seopress_advanced_advanced_comments_form_link'];
+            }
+        }
+    }
+    if ('1' == seopress_advanced_advanced_comments_form_link_option()) {
+        /* Custom attributes on comment link */
+        add_filter('comments_popup_link_attributes', 'seopress_comments_popup_link_attributes');
+        function seopress_comments_popup_link_attributes($attr) {
+            $attr = 'rel="nofollow noopener noreferrer"';
+            return $attr;
+        }
+    }
+
     //primary category
     function seopress_titles_primary_cat_hook($cats_0, $cats, $post)
     {
@@ -802,17 +825,14 @@ if ('1' == seopress_get_toggle_option('advanced')) {
 
                 if (! empty($slugs)) {
                     $rules = [];
-
                     foreach ($slugs as $slug) {
-                        // $rules['(' . $slug . ')/feed/(feed|rdf|rss|rss2|atom)?/?$'] = 'index.php?product_cat=$matches[1]&feed=$matches[2]';
-                        // $rules['(' . $slug . ')/(feed|rdf|rss|rss2|atom)/?$']       = 'index.php?product_cat=$matches[1]&feed=$matches[2]';
                         $rules['(' . $slug . ')(/page/(\d+))?/?$']                  = 'index.php?product_cat=$matches[1]&paged=$matches[3]';
+                        $rules[$slug . '/(.+?)/page/?([0-9]{1,})/?$']                = 'index.php?product_cat=$matches[1]&paged=$matches[2]';
+                        $rules[$slug . '/(.+?)/?$']                                  = 'index.php?product_cat=$matches[1]';
 
                         $rules[$slug . '/(.+?)/feed/(feed|rdf|rss|rss2|atom)/?$'] = 'index.php?product_cat=$matches[1]&feed=$matches[2]';
                         $rules[$slug . '/(.+?)/(feed|rdf|rss|rss2|atom)/?$']      = 'index.php?product_cat=$matches[1]&feed=$matches[2]';
                         $rules[$slug . '/(.+?)/embed/?$']                         = 'index.php?product_cat=$matches[1]&embed=true';
-                        //$rules[$slug . '/(.+?)/page/?([0-9]{1,})/?$']             = 'index.php?product_cat=$matches[1]&paged=$matches[2]';
-                        $rules[$slug . '/(.+?)/?$']                               = 'index.php?product_cat=$matches[1]';
                     }
                 }
             }

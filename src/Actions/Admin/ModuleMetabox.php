@@ -46,7 +46,7 @@ class ModuleMetabox implements ExecuteHooks
             }
         }
 
-        $dependencies = ['wp-i18n'];
+        $dependencies = ['wp-i18n','jquery-ui-datepicker'];
         if ($isGutenberg) {
             $dependencies = array_merge($dependencies, ['wp-components', 'wp-edit-post', 'wp-plugins']);
         }
@@ -101,10 +101,14 @@ class ModuleMetabox implements ExecuteHooks
                 'GLOBAL' => $settingsAdvanced->getSecurityMetaboxRole(),
                 'CONTENT_ANALYSIS' => $settingsAdvanced->getSecurityMetaboxRoleContentAnalysis()
             ],
+            'TABS' => [
+                'SCHEMAS' => apply_filters('seopress_active_schemas_manual_universal_metabox', false)
+            ],
             'SUB_TABS' => [
                 'GOOGLE_NEWS' => apply_filters('seopress_active_google_news', false),
                 'VIDEO_SITEMAP' => apply_filters('seopress_active_video_sitemap', false),
                 'INTERNAL_LINKING' => apply_filters('seopress_active_internal_linking', false),
+                'SCHEMA_MANUAL' =>  apply_filters('seopress_active_schemas', false)
             ],
             'FAVICON' => get_site_icon_url(32),
             'BEACON_SVG' => apply_filters('seopress_beacon_svg', SEOPRESS_URL_ASSETS.'/img/beacon.svg'),

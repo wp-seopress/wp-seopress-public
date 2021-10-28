@@ -76,6 +76,14 @@ add_settings_field(
 );
 
 add_settings_field(
+    'seopress_advanced_advanced_comments_form_link', // ID
+    __('Add "nofollow noopener noreferrer" rel attributes to the comments form link', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_comments_form_link_callback', // Callback
+    'seopress-settings-admin-advanced-advanced', // Page
+    'seopress_setting_section_advanced_advanced' // Section
+);
+
+add_settings_field(
     'seopress_advanced_advanced_wp_shortlink', // ID
     __('Remove WordPress shortlink meta tag', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_shortlink_callback', // Callback

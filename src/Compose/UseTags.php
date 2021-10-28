@@ -6,7 +6,7 @@ use SEOPress\Helpers\TagCompose;
 use SEOPress\Models\GetTagValue;
 
 trait UseTags {
-    protected $tagsAvailable = null;
+    protected $tagsAvailable = [];
 
     /**
      * @since 4.4.0
@@ -130,6 +130,12 @@ trait UseTags {
      */
     public function getTagsAvailable($options = []) {
 
+        $hash = md5(serialize($options));
+        if(isset($this->tagsAvailable[$hash])){
+            return $this->tagsAvailable[$hash];
+        }
+
+
         $tags = $this->buildTags(SEOPRESS_PLUGIN_DIR_PATH . 'src/Tags', ['root' => '\\SEOPress\\Tags\\%s%s', 'subNamespace' => '']);
 
         if (defined('SEOPRESS_PRO_PLUGIN_DIR_PATH') && file_exists(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags') && is_dir(SEOPRESS_PRO_PLUGIN_DIR_PATH . 'src/Tags')) {
@@ -156,8 +162,9 @@ trait UseTags {
         }
 
 
+        $this->tagsAvailable[$hash] = apply_filters('seopress_tags_available', $tags);
 
-        return apply_filters('seopress_tags_available', $tags);
+        return $this->tagsAvailable[$hash];
     }
 
     /**

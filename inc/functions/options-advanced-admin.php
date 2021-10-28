@@ -15,7 +15,7 @@ if (current_user_can(seopress_capability('manage_options', 'notice')) && is_seop
         function seopress_notice_license()
         {
             $screen_id = get_current_screen();
-            if ('seopress-option' === $screen_id->parent_base) {
+            if ('seopress-option' === $screen_id->parent_base && 'seo_page_seopress-license' !== $screen_id->base) {
                 $docs = seopress_get_docs_links();
 
                 $class   = 'seopress-notice is-error';

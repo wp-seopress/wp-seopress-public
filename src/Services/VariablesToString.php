@@ -59,6 +59,7 @@ class VariablesToString {
 
         foreach ($variables[1] as $key => $variable) {
             $value  = $this->getValueFromContext($variable, $context);
+
             $string = str_replace($variables[0][$key], $value, $string);
         }
 

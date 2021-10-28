@@ -32,16 +32,31 @@ if ('1' != seopress_get_hidden_notices_get_started_option()) {
 } ?>
     <div class="seopress-dashboard-columns">
         <div class="seopress-dashboard-column">
-            <?php include_once dirname(dirname(__FILE__)) . '/blocks/intro.php'; ?>
-            <?php include_once dirname(dirname(__FILE__)) . '/blocks/tasks.php'; ?>
-            <?php include_once dirname(dirname(__FILE__)) . '/blocks/notifications-center.php'; ?>
+            <?php
+                include_once dirname(dirname(__FILE__)) . '/blocks/intro.php';
+                if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+                    //do nothing
+                } else {
+                    include_once dirname(dirname(__FILE__)) . '/blocks/tasks.php';
+                    include_once dirname(dirname(__FILE__)) . '/blocks/notifications-center.php';
+                }
+            ?>
         </div>
         <div class="seopress-dashboard-column">
             <?php
                 if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                    include_once dirname(dirname(__FILE__)) . '/blocks/insights.php';
+                    if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+                        //do nothing
+                    } else {
+                        include_once dirname(dirname(__FILE__)) . '/blocks/insights.php';
+                    }
                 } ?>
-            <?php include_once dirname(dirname(__FILE__)) . '/blocks/news.php'; ?>
+            <?php
+            if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+                //do nothing
+            } else {
+                include_once dirname(dirname(__FILE__)) . '/blocks/news.php';
+            } ?>
             <?php include_once dirname(dirname(__FILE__)) . '/admin-features-list.php'; ?>
         </div>
     </div>

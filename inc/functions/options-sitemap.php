@@ -177,8 +177,12 @@ if ('1' == seopress_xml_sitemap_html_enable_option()) {
                         $html .= '<div class="sp-wrap-cpt">';
                     }
                     $obj = get_post_type_object($cpt_key);
+
                     if ($obj) {
-                        $html .= '<h2 class="sp-cpt-name">' . $obj->labels->name . '</h2>';
+                        $cpt_name = $obj->labels->name;
+                        $cpt_name = apply_filters('seopress_sitemaps_html_cpt_name', $cpt_name, $obj->name);
+
+                        $html .= '<h2 class="sp-cpt-name">' . $cpt_name . '</h2>';
                     }
                     foreach ($cpt_value as $_cpt_key => $_cpt_value) {
                         if ('1' == $_cpt_value) {
@@ -223,21 +227,26 @@ if ('1' == seopress_xml_sitemap_html_enable_option()) {
                                     $html .= '<div class="sp-wrap-cats">';
 
                                     foreach ($cats as $cat) {
-                                        $html .= '<h3 class="sp-cat-name">' . $cat->name . '</h3>';
+                                        if ( ! is_wp_error($cat) && is_object($cat)) {
+                                            $html .= '<div class="sp-wrap-cat">';
+                                            $html .= '<h3 class="sp-cat-name">' . $cat->name . '</h3>';
 
-                                        if ('post' === $cpt_key) {
-                                            unset($args['cat']);
-                                            $args['cat'][] = $cat->term_id;
-                                        } elseif ('product' === $cpt_key) {
-                                            unset($args['tax_query']);
-                                            $args['tax_query'] = [[
-                                                'taxonomy' => 'product_cat',
-                                                'field'    => 'term_id',
-                                                'terms'    => $cat->term_id,
-                                            ]];
+                                            if ('post' === $cpt_key) {
+                                                unset($args['cat']);
+                                                $args['cat'][] = $cat->term_id;
+                                            } elseif ('product' === $cpt_key) {
+                                                unset($args['tax_query']);
+                                                $args['tax_query'] = [[
+                                                    'taxonomy' => 'product_cat',
+                                                    'field'    => 'term_id',
+                                                    'terms'    => $cat->term_id,
+                                                ]];
+                                            }
+
+                                            require dirname(__FILE__) . '/sitemap/template-html-sitemap.php';
+
+                                            $html .= '</div>';
                                         }
-
-                                        require dirname(__FILE__) . '/sitemap/template-html-sitemap.php';
                                     }
 
                                     $html .= '</div>';

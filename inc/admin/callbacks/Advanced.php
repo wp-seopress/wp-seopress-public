@@ -230,6 +230,26 @@ function seopress_advanced_advanced_comments_website_callback() {
     }
 }
 
+function seopress_advanced_advanced_comments_form_link_callback() {
+    $options = get_option('seopress_advanced_option_name');
+
+    $check = isset($options['seopress_advanced_advanced_comments_form_link']); ?>
+
+<label for="seopress_advanced_advanced_comments_form_link">
+    <input id="seopress_advanced_advanced_comments_form_link"
+        name="seopress_advanced_option_name[seopress_advanced_advanced_comments_form_link]" type="checkbox" <?php if ('1' == $check) { ?>
+    checked="yes"
+    <?php } ?>
+    value="1"/>
+
+    <?php _e('Prevent search engines to follow / index the link to the comments form (<em>eg: https://www.example.com/my-blog-post/#respond</em>)', 'wp-seopress'); ?>
+</label>
+
+<?php if (isset($options['seopress_advanced_advanced_comments_form_link'])) {
+        esc_attr($options['seopress_advanced_advanced_comments_form_link']);
+    }
+}
+
 function seopress_advanced_advanced_wp_shortlink_callback() {
     $options = get_option('seopress_advanced_option_name');
 

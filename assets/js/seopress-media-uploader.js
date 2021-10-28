@@ -62,6 +62,12 @@ jQuery(document).ready(function ($) {
                 ) {
                     sp_social_img("twitter");
                 }
+
+                if ($(item + "_attachment_id").length != 0) {
+                    $(item + "_attachment_id").val(attachment.id);
+                    $(item + "_width").val(attachment.width);
+                    $(item + "_height").val(attachment.height);
+                }
             });
 
             // Open the uploader dialog

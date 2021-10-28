@@ -87,6 +87,17 @@ if ('attachment' === $path) {
     unset($args['post_status']);
 }
 
+if ( $path == 'product' ) {
+    $args['tax_query'][] = [
+        'taxonomy' => 'product_visibility',
+        'field'    => 'slug',
+        'terms'    => ['exclude-from-catalog'],
+        'operator' => 'NOT IN',
+    ];
+}
+
+
+
 $args = apply_filters('seopress_sitemaps_single_query', $args, $path);
 
 $postslist = get_posts($args);

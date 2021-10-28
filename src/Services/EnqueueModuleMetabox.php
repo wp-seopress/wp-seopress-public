@@ -87,6 +87,13 @@ class EnqueueModuleMetabox
             $response = false;
         }
 
+        if(isset($_POST['can_enqueue_seopress_metabox']) && $_POST['can_enqueue_seopress_metabox'] !== '1'){
+            $response = false;
+        }
+        if(isset($_POST['can_enqueue_seopress_metabox']) && $_POST['can_enqueue_seopress_metabox'] === '1'){
+            $response = true;
+        }
+
         return apply_filters('seopress_can_enqueue_universal_metabox', $response);
     }
 }

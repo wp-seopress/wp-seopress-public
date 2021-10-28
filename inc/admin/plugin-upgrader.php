@@ -58,7 +58,7 @@ function seopress_upgrader() {
 
 		$options['free'] = SEOPRESS_VERSION;
 
-		update_option( 'seopress_versions', $options );
+		update_option( 'seopress_versions', $options, false );
 	}
 }
 

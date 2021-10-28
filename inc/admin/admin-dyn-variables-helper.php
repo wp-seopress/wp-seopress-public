@@ -30,6 +30,7 @@ function seopress_get_dyn_variables()
         '%%archive_date%%'                  => __('Archive date', 'wp-seopress'),
         '%%archive_date_day%%'              => __('Day Archive date', 'wp-seopress'),
         '%%archive_date_month%%'            => __('Month Archive title', 'wp-seopress'),
+        '%%archive_date_month_name%%'       => __('Month name Archive title', 'wp-seopress'),
         '%%archive_date_year%%'             => __('Year Archive title', 'wp-seopress'),
         '%%_cf_your_custom_field_name%%'    => __('Custom fields from post, page or post type', 'wp-seopress'),
         '%%_ct_your_custom_taxonomy_slug%%' => __('Custom term taxonomy from post, page or post type', 'wp-seopress'),

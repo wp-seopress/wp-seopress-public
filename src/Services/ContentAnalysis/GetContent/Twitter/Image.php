@@ -9,9 +9,15 @@ class Image {
         $values = $xpath->query('//meta[@name="twitter:image"]/@content');
 
         $data = [];
-        if (empty($values)) {
+
+        if ($values->length === 0) {
+            $values = $xpath->query('//meta[@name="twitter:image:src"]/@content');
+        }
+
+        if ($values->length === 0) {
             return $data;
         }
+
         foreach ($values as $key => $item) {
             $data[] = $item->nodeValue;
         }

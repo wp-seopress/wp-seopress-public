@@ -5,8 +5,8 @@ Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
 Tested up to: 5.8
-Requires PHP: 5.6
-Stable tag: 5.1.0
+Requires PHP: 7.0
+Stable tag: 5.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 ✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 ✔ <strong>Content analysis to help you write content optimized for search engines</strong>
 ✔ <strong>Import your post and term metadatas from other plugins in 1 click</strong>
-✔ <strong>Trusted by over 150,000 WordPress websites since 2017.</strong>
+✔ <strong>Trusted by over 200,000 WordPress websites since 2017.</strong>
 
 <a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / year / unlimited sites</strong></a>
 
@@ -73,7 +73,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 <ul>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
 	<li><a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results</li>
-	<li><strong>Internal linking suggestions</strong></li>
+	<li>Internal linking suggestions</li>
 	<li><strong>Google Suggestions in Content Analysis</strong> to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.</li>
 	<li><a href="https://www.seopress.org/features/google-structured-data-types/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Structured Data types</strong> (schema.org)</a>:
 		<ol>
@@ -335,7 +335,44 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 5.1 <a href="https://www.seopress.org/blog/seopress-5-1/" target="_blank">Read the blog post update</a> =
+= 5.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-2/" target="_blank">Read the blog post update</a> =
+* NEW Universal SEO metabox now with schemas
+* NEW Performance improvement and code factorization
+* NEW Import CSV metadata now supports comma and semi-colon as delimiter
+* NEW Breadcrumbs: add new options to translate "Page" and "Attachments" from SEO, PRO, Breadcrumbs
+* NEW Add "nofollow noopener noreferrer" rel attributes to the comments form link (SEO, Advanced, Advanced tab)
+* NEW %%archive_date_month_name%% dynamic variable in meta to output month name in archive page
+* NEW 'seopress_get_tag_site_url_value' hook to filter site_url tag in meta / schema (https://www.seopress.org/support/hooks/filter-site_url-tag/)
+* NEW 'seopress_sitemaps_html_cpt_name' hook to filter custom post type name in HTML sitemap (https://www.seopress.org/support/hooks/filter-custom-post-type-name-in-html-sitemap/)
+* NEW 'seopress_rss_dyn_vars' and 'seopress_rss_dyn_vars_value' hooks to filter dynamic variables in RSS feeds (https://www.seopress.org/support/hooks/add-your-custom-global-dynamic-variables-for-rss-feeds/)
+* INFO Display Blog page for date archive in Breadcrumbs
+* INFO Add new HTML class to wrap post and product categories in HTML sitemap
+* INFO Remove author meta in source code
+* INFO Remove WooCommerce products with visibility "hidden" from XML sitemaps
+* INFO Update updater
+* INFO Author URL missing for automatic schemas
+* INFO Check user capabilities before displaying automatic redirection suggestions notices
+* INFO Add image field for HowToStep (How-to schema)
+* INFO Remove Action Scheduler
+* FIX Remove /product-category/ with paginated archive pages (flush your permalinks if you're using this option)
+* FIX RSS feeds: display content before / after each post (excerpt of full text)
+* FIX Wrong quick tags for global meta description template
+* FIX Export Redirections to CSV file
+* FIX Missing tooltips from SEO universal metabox
+* FIX Green circle of the SEO score in the list of posts
+* FIX JS Arrow state for each analysis
+* FIX Warning Opening Hours (Local Business schema)
+* FIX Warning in Schemas post type list if a taxonomy no longer exists
+* FIX Page Speed full report button link
+* FIX WPML / Polylang config XML file
+* FIX White label for SEO dashboard and Wizard
+* FIX CSS conflicts with default WP theme for Universal SEO metabox
+* FIX Trying to get property 'name' / 'term_id' of non-object in HTML sitemap
+* FIX Uncaught TypeError: array_sum() in /wp-seopress-pro/inc/admin/dashboard-google-analytics.php:224
+* FIX Warning: Undefined array key "ui_theme" /inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php on line 37
+* FIX WPML: Fatal error when adding 'og:locale:alternate' link to non-existent post (thanks @vdwijngaert for reporting this)
+* FIX Redirections: Filter by Count
+= 5.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-1/" target="_blank">Read the blog post update</a> =
 * NEW Internal linking suggestions 🎉🎉🎉 (PRO)
 * NEW Video and News sitemaps added to universal SEO metabox
 * NEW 'seopress_automatic_redirect_cpt' hook to filter post types to watch for automatic redirection suggestions (https://www.seopress.org/support/hooks/filter-post-types-to-watch-for-automatic-redirections/)

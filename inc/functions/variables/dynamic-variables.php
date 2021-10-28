@@ -32,6 +32,7 @@ $author_website                       ='';
 $author_nickname                      ='';
 $author_bio                           ='';
 $target_kw                            ='';
+$month_name_archive                   ='';
 
 //Excerpt length
 $seopress_excerpt_length = 50;
@@ -208,6 +209,11 @@ if (is_plugin_active('woocommerce/woocommerce.php')) {
         $woo_single_sku = $product->get_sku();
     }
 }
+if (get_query_var('monthnum')) {
+    $month_name_archive  = get_query_var('monthnum');
+    $date   = DateTime::createFromFormat('!m', $month_name_archive);
+    $month_name_archive = esc_attr(wp_strip_all_tags(($date->format('F'))));
+}
 
 $seopress_titles_template_variables_array = [
     '%%sep%%',
@@ -242,6 +248,7 @@ $seopress_titles_template_variables_array = [
     '%%archive_date%%',
     '%%archive_date_day%%',
     '%%archive_date_month%%',
+    '%%archive_date_month_name%%',
     '%%archive_date_year%%',
     '%%wc_single_cat%%',
     '%%wc_single_tag%%',
@@ -299,6 +306,7 @@ $seopress_titles_template_replace_array = [
     get_query_var('monthnum') . ' - ' . get_query_var('year'),
     get_query_var('day'),
     get_query_var('monthnum'),
+    $month_name_archive,
     get_query_var('year'),
     $woo_single_cat_html,
     $woo_single_tag_html,

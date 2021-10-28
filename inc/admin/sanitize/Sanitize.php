@@ -5,6 +5,9 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 function seopress_sanitize_options_fields($input){
 
     $seopress_sanitize_fields = [
+        'seopress_social_facebook_img_attachment_id',
+        'seopress_social_facebook_img_attachment_width',
+        'seopress_social_facebook_img_attachment_height',
         'seopress_titles_home_site_title',
         'seopress_titles_home_site_desc',
         'seopress_titles_archives_author_title',
@@ -70,6 +73,15 @@ function seopress_sanitize_options_fields($input){
         'seopress_advanced_advanced_yandex',
     ];
 
+    $newOptions = ['seopress_social_facebook_img_attachment_id', 'seopress_social_facebook_img_height', 'seopress_social_facebook_img_width'];
+
+    foreach ($newOptions as $key => $value) {
+        if(!isset($input[$value]) && isset($_POST[$value])){
+            $input[$value] = $_POST[$value];
+        }
+    }
+
+
     foreach ($seopress_sanitize_fields as $value) {
         if ( ! empty($input['seopress_google_analytics_opt_out_msg']) && 'seopress_google_analytics_opt_out_msg' == $value) {
             $args = [
@@ -106,7 +118,6 @@ function seopress_sanitize_options_fields($input){
             }
         }
     }
-
 
     return $input;
 

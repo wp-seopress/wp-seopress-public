@@ -282,13 +282,25 @@ function seopress_social_facebook_img_callback()
 {
     $options = get_option('seopress_social_option_name');
 
-    $options_set = isset($options['seopress_social_facebook_img']) ? esc_attr($options['seopress_social_facebook_img']) : null; ?>
+    $options_set = isset($options['seopress_social_facebook_img']) ? esc_attr($options['seopress_social_facebook_img']) : null;
+    $options_set_attachment_id = isset($options['seopress_social_facebook_img_attachment_id']) ? esc_attr($options['seopress_social_facebook_img_attachment_id']) : null;
+    $options_set_width = isset($options['seopress_social_facebook_img_width']) ? esc_attr($options['seopress_social_facebook_img_width']) : null;
+    $options_set_height = isset($options['seopress_social_facebook_img_height']) ? esc_attr($options['seopress_social_facebook_img_height']) : null;
+
+
+
+    ?>
 
 <input id="seopress_social_fb_img_meta" type="text"
     value="<?php echo $options_set; ?>"
     name="seopress_social_option_name[seopress_social_facebook_img]"
     aria-label="<?php _e('Select a default image', 'wp-seopress'); ?>"
     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>" />
+
+
+<input type="hidden" name="seopress_social_facebook_img_width" id="seopress_social_fb_img_width" value="<?php echo esc_html($options_set_width); ?>">
+<input type="hidden" name="seopress_social_facebook_img_height" id="seopress_social_fb_img_height" value="<?php echo esc_html($options_set_height); ?>">
+<input type="hidden" name="seopress_social_facebook_img_attachment_id" id="seopress_social_fb_img_attachment_id" value="<?php echo esc_html($options_set_attachment_id); ?>">
 
 <input id="seopress_social_fb_img_upload" class="btn btnSecondary" type="button"
     value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />

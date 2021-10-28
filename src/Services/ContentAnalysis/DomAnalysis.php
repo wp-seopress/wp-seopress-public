@@ -138,8 +138,7 @@ class DomAnalysis
             }
         }
 
-        $postContent = $this->getPostContentAnalyze($options['id']);
-
+        $postContent = apply_filters('seopress_dom_analysis_get_post_content', $this->getPostContentAnalyze($options['id']));
 
         //Keywords density
         $data['kws_density'] = [

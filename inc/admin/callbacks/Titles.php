@@ -254,24 +254,6 @@ function seopress_titles_single_titles_callback()
                                         '#seopress-tag-single-desc-<?php echo $seopress_cpt_key; ?>'
                                     ).attr('data-tag'));
                             });
-                        $('#seopress-tag-desc-sep-<?php echo $seopress_cpt_key; ?>')
-                            .click(function() {
-                                $('#seopress_titles_single_desc_<?php echo $seopress_cpt_key; ?>')
-                                    .val(sp_get_field_length($(
-                                        '#seopress_titles_single_desc_<?php echo $seopress_cpt_key; ?>'
-                                    )) + $(
-                                        '#seopress-tag-desc-sep-<?php echo $seopress_cpt_key; ?>'
-                                    ).attr('data-tag'));
-                            });
-                        $('#seopress-tag-single-desc-sitetitle-<?php echo $seopress_cpt_key; ?>')
-                            .click(function() {
-                                $('#seopress_titles_single_desc_<?php echo $seopress_cpt_key; ?>')
-                                    .val(sp_get_field_length($(
-                                        '#seopress_titles_single_desc_<?php echo $seopress_cpt_key; ?>'
-                                    )) + $(
-                                        '#seopress-tag-single-desc-sitetitle-<?php echo $seopress_cpt_key; ?>'
-                                    ).attr('data-tag'));
-                            });
                     });
                 </script>
 
@@ -282,25 +264,10 @@ function seopress_titles_single_titles_callback()
                 <div class="wrap-tags">
                     <button type="button" class="btn btnSecondary tag-title"
                         id="seopress-tag-single-desc-<?php echo $seopress_cpt_key; ?>"
-                        data-tag="%%post_title%%">
+                        data-tag="%%post_excerpt%%">
                         <span class="dashicons dashicons-plus-alt2"></span>
-                        <?php _e('Post Title', 'wp-seopress'); ?>
+                        <?php _e('Post excerpt', 'wp-seopress'); ?>
                     </button>
-
-                    <button type="button" class="btn btnSecondary tag-title"
-                        id="seopress-tag-desc-sep-<?php echo $seopress_cpt_key; ?>"
-                        data-tag="%%sep%%">
-                        <span class="dashicons dashicons-plus-alt2"></span>
-                        <?php _e('Separator', 'wp-seopress'); ?>
-                    </span>
-
-                    <button type="button" class="btn btnSecondary tag-title"
-                        id="seopress-tag-single-desc-sitetitle-<?php echo $seopress_cpt_key; ?>"
-                        data-tag="%%sitetitle%%">
-                        <span class="dashicons dashicons-plus-alt2"></span>
-                        <?php _e('Site Title', 'wp-seopress'); ?>
-                    </button>
-
                     <?php
             echo seopress_render_dyn_variables('tag-description'); ?>
                 </div>

@@ -145,6 +145,7 @@ function seopress_do_real_preview()
 
                     //Get post content (used for Words counter)
                     $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
+                    $seopress_get_the_content = apply_filters('seopress_dom_analysis_get_post_content', $seopress_get_the_content);
 
                     //Cornerstone compatibility
                     if (is_plugin_active('cornerstone/cornerstone.php')) {
@@ -576,7 +577,7 @@ function seopress_toggle_features()
         if (isset($_POST['feature']) && isset($_POST['feature_value'])) {
             $seopress_toggle_options                    = get_option('seopress_toggle');
             $seopress_toggle_options[$_POST['feature']] = $_POST['feature_value'];
-            update_option('seopress_toggle', $seopress_toggle_options, 'yes');
+            update_option('seopress_toggle', $seopress_toggle_options, 'yes', false);
         }
         exit();
     }
@@ -647,7 +648,7 @@ function seopress_hide_notices()
         if (isset($_POST['notice']) && isset($_POST['notice_value'])) {
             $seopress_notices_options                   = get_option('seopress_notices');
             $seopress_notices_options[$_POST['notice']] = $_POST['notice_value'];
-            update_option('seopress_notices', $seopress_notices_options, 'yes');
+            update_option('seopress_notices', $seopress_notices_options, 'yes', false);
         }
         exit();
     }
