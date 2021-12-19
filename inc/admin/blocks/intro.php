@@ -7,7 +7,7 @@
 ?>
 
 
-<div class="seopress-intro">
+<div id="seopress-intro" class="seopress-intro">
     <h2><?php _e('Your SEO today', 'wp-seopress'); ?></h2>
     <p><?php _e('To do\'s, tips, and insights for your business', ''); ?></p>
 </div>

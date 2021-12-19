@@ -614,7 +614,7 @@ function seopress_google_analytics_ads_callback() {
 '<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ads]" placeholder="' . esc_html__('Enter your Google Ads conversion ID (eg: AW-123456789)', 'wp-seopress') . '" value="%s" aria-label="' . __('AW-XXXXXXXXX', 'wp-seopress') . '"/>',
 esc_html($check)); ?>
 <p class="description">
-    <a class="seopress-help" href="' . $docs['analytics']['gads'] . '" target="_blank">
+    <a class="seopress-help" href="<?php echo $docs['analytics']['gads']; ?>" target="_blank">
         <?php _e('Learn how to find your Google Ads Conversion ID', 'wp-seopress'); ?>
     </a>
     <span class="seopress-help dashicons dashicons-external"></span>

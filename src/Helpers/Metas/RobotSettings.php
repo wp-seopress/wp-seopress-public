@@ -7,11 +7,11 @@ if ( ! defined('ABSPATH')) {
 }
 
 abstract class RobotSettings {
-    protected static function getRobotPrimaryCats($postType) {
+    protected static function getRobotPrimaryCats($id, $postType) {
         $cats = get_categories();
 
         if ('product' == $postType) {
-            $cats = get_the_terms($post, 'product_cat');
+            $cats = get_the_terms($id, 'product_cat');
         }
 
         $default = [
@@ -108,7 +108,7 @@ abstract class RobotSettings {
                 'default'     => '',
                 'label'       => __('Select a primary category', 'wp-seopress'),
                 'description' => __('Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress'),
-                'options'     => self::getRobotPrimaryCats($postType),
+                'options'     => self::getRobotPrimaryCats($id, $postType),
                 'visible'     => ('post' === $postType || 'product' === $postType),
             ],
         ], $id);

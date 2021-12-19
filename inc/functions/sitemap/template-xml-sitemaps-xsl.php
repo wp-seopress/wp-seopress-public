@@ -13,11 +13,11 @@ add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 )
 
 function seopress_xml_sitemap_index_xsl() {
 	$home_url = home_url().'/';
-	
+
 	if (function_exists('pll_home_url')) {
         $home_url = site_url().'/';
 	}
-	
+
 	$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
 
 	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"
@@ -34,7 +34,9 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='<title>XML Sitemaps</title>';
 	$seopress_sitemaps_xsl .='<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
 	$seopress_sitemaps_xsl .="\n";
-	$seopress_sitemaps_xsl .='<style type="text/css">
+	$seopress_sitemaps_xsl_css = '<style type="text/css">';
+
+	$seopress_sitemaps_xsl_css .= apply_filters('seopress_sitemaps_xsl_css', '
 	* {
 		margin: 0;
 		padding: 0;
@@ -116,9 +118,11 @@ function seopress_xml_sitemap_index_xsl() {
 		width: 30%;
 	    display: inline-block;
 		padding: 0 10px;
-	}
-	</style>';
-	
+	}');
+
+	$seopress_sitemaps_xsl_css .= '</style>';
+
+    $seopress_sitemaps_xsl .= $seopress_sitemaps_xsl_css;
 	$seopress_sitemaps_xsl .='</head>';
 	$seopress_sitemaps_xsl .='<body>';
 	$seopress_sitemaps_xsl .='<div id="main">';
@@ -152,7 +156,7 @@ function seopress_xml_sitemap_index_xsl() {
     $seopress_sitemaps_xsl .='<li>';
     $seopress_sitemaps_xsl .='<xsl:variable name="url_loc"><xsl:value-of select="sitemap:loc"/></xsl:variable>';
 	$seopress_sitemaps_xsl .='<span class="item-loc"><a href="{$url_loc}"><xsl:value-of select="sitemap:loc" /></a></span>';
-	
+
 	$seopress_sitemaps_xsl .= '<xsl:if test="sitemap:lastmod">';
 	$seopress_sitemaps_xsl .='<span class="item-lastmod"><xsl:value-of select="sitemap:lastmod" /></span>';
 	$seopress_sitemaps_xsl .='</xsl:if>';
@@ -168,6 +172,8 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='</xsl:template>';
 
 	$seopress_sitemaps_xsl .='</xsl:stylesheet>';
+
+    $seopress_sitemaps_xsl = apply_filters('seopress_sitemaps_xsl', $seopress_sitemaps_xsl);
 
 	return $seopress_sitemaps_xsl;
 }

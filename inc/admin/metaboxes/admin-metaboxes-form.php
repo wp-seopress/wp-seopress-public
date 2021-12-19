@@ -403,7 +403,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                     <?php _e('Facebook Thumbnail', 'wp-seopress'); ?>
                                 </label>
                                 <input id="seopress_social_fb_img_meta" type="text" name="seopress_social_fb_img"
-                                    class="components-text-control__input"
+                                    class="components-text-control__input seopress_social_fb_img_meta"
                                     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>"
                                     aria-label="<?php _e('Facebook Thumbnail', 'wp-seopress'); ?>"
                                     value="<?php echo $seopress_social_fb_img; ?>" />
@@ -459,11 +459,11 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                         </p>
                                     </div>
                                     <div class="snippet-fb-img"><img src="" width="524" height="274" alt=""
-                                            aria-label="" /></div>
+                                            aria-label="" /><span class="seopress_social_fb_img_upload"></span></div>
                                     <div class="snippet-fb-img-custom" style="display:none"><img src="" width="524"
-                                            height="274" alt="" aria-label="" /></div>
+                                            height="274" alt="" aria-label="" /><span class="seopress_social_fb_img_upload"></span></div>
                                     <div class="snippet-fb-img-default" style="display:none"><img src="" width="524"
-                                            height="274" alt="" aria-label="" /></div>
+                                            height="274" alt="" aria-label="" /><span class="seopress_social_fb_img_upload"></span></div>
                                     <div class="facebook-snippet-text">
                                         <div class="snippet-meta">
                                             <div class="snippet-fb-url"></div>
@@ -523,7 +523,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             <p>
                                 <label for="seopress_social_twitter_img_meta"><?php _e('Twitter Thumbnail', 'wp-seopress'); ?></label>
                                 <input id="seopress_social_twitter_img_meta" type="text"
-                                    class="components-text-control__input" name="seopress_social_twitter_img"
+                                    class="components-text-control__input seopress_social_twitter_img_meta" name="seopress_social_twitter_img"
                                     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>"
                                     value="<?php echo $seopress_social_twitter_img; ?>" />
                             </p>
@@ -576,11 +576,11 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                         </p>
                                     </div>
                                     <div class="snippet-twitter-img"><img src="" width="524" height="274" alt=""
-                                            aria-label="" /></div>
+                                            aria-label="" /><span class="seopress_social_twitter_img_upload"></span></div>
                                     <div class="snippet-twitter-img-custom" style="display:none"><img src="" width="600"
-                                            height="314" alt="" aria-label="" /></div>
+                                            height="314" alt="" aria-label="" /><span class="seopress_social_twitter_img_upload"></span></div>
                                     <div class="snippet-twitter-img-default" style="display:none"><img src=""
-                                            width="600" height="314" alt="" aria-label="" /></div>
+                                            width="600" height="314" alt="" aria-label="" /><span class="seopress_social_twitter_img_upload"></span></div>
 
                                     <div class="twitter-snippet-text">
                                         <div class="title-desc">
@@ -611,7 +611,9 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                     <?php }
                     }
 
-                    if (array_key_exists('redirect-tab', $seo_tabs)) { ?>
+                    if (array_key_exists('redirect-tab', $seo_tabs)) {
+
+                        ?>
                     <div id="tabs-4">
                         <p>
                             <label for="seopress_redirections_enabled_meta" id="seopress_redirections_enabled">
@@ -620,6 +622,29 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 />
                                 <?php _e('Enable redirection?', 'wp-seopress'); ?>
                             </label>
+                        </p>
+                        <p>
+                            <label for="seopress_redirections_enabled_regex_meta" id="seopress_redirections_enabled_regex">
+                                <input type="checkbox" name="seopress_redirections_enabled_regex"
+                                    id="seopress_redirections_enabled_regex_meta" value="yes" <?php echo checked($seopress_redirections_enabled_regex, 'yes', false); ?>
+                                />
+                                <?php _e('Regex?', 'wp-seopress'); ?>
+                            </label>
+                        </p>
+                        <p>
+                            <label for="seopress_redirections_logged_status"><?php _e('Select a login status: ', 'wp-seopress'); ?></label>
+
+                            <select id="seopress_redirections_logged_status" name="seopress_redirections_logged_status">
+                                <option <?php echo selected('both', $seopress_redirections_logged_status); ?>
+                                    value="both"><?php _e('All', 'wp-seopress'); ?>
+                                </option>
+                                <option <?php echo selected('only_logged_in', $seopress_redirections_logged_status); ?>
+                                    value="only_logged_in"><?php _e('Only Logged In', 'wp-seopress'); ?>
+                                </option>
+                                <option <?php echo selected('only_not_logged_in', $seopress_redirections_logged_status); ?>
+                                    value="only_not_logged_in"><?php _e('Only Not Logged In', 'wp-seopress'); ?>
+                                </option>
+                            </select>
                         </p>
                         <p>
 
@@ -646,12 +671,43 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                         <p>
                             <label for="seopress_redirections_value_meta"><?php _e('URL redirection', 'wp-seopress'); ?></label>
                             <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value"
-                                class="components-text-control__input"
+                                class="components-text-control__input js-seopress_redirections_value_meta"
                                 placeholder="<?php esc_html_e('Enter your new URL in absolute (eg: https://www.example.com/)', 'wp-seopress'); ?>"
                                 aria-label="<?php _e('URL redirection', 'wp-seopress'); ?>"
                                 value="<?php echo $seopress_redirections_value; ?>" />
 
                         </p>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function(){
+
+                                var cache = {};
+                                jQuery( ".js-seopress_redirections_value_meta" ).autocomplete({
+                                    source: async function( request, response ) {
+                                        var term = request.term;
+                                        if ( term in cache ) {
+                                            response( cache[ term ] );
+                                            return;
+                                        }
+
+                                        const dataResponse = await fetch("<?php echo rest_url(); ?>seopress/v1/search-url?url=" + term)
+                                        const data = await dataResponse.json();
+
+                                        cache[ term ] = data.map(item => {
+                                            return {
+                                                label: item.post_title + " (" + item.guid + ")",
+                                                value: item.guid
+                                            }
+                                        });
+                                        response( cache[term] );
+                                    },
+
+                                    minLength: 3,
+                                });
+
+
+                            })
+                        </script>
                         <?php if ('seopress_404' == $typenow) { ?>
                         <p>
                             <label for="seopress_redirections_param_meta"><?php _e('Query parameters', 'wp-seopress'); ?></label>

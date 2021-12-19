@@ -203,26 +203,28 @@ class DomAnalysis
             'value' => strtotime($post->post_modified) < strtotime('-365 days')
         ];
 
-
-        $dataOxygen = get_post_meta($post->ID, '_seopress_analysis_data_oxygen', true);
-
         //Oxygen builder
-        if ($dataOxygen) {
-            if(isset($dataOxygen['words_counter'])){
-                $data['words_counter'] = $dataOxygen['words_counter'];
-            }
-            if(isset($dataOxygen['words_counter_unique'])){
-                $data['words_counter_unique'] = $dataOxygen['words_counter_unique'];
-            }
-            if(isset($dataOxygen['kws_density'])){
-                foreach($dataOxygen['kws_density'] as $key => $densities){
-                    foreach($densities as $keyDensity => $density){
-                        $data['kws_density']['matches'][]= [
-                            "key" => $keyDensity,
-                            "count" => isset($density[0]) ? count($density[0]) : 0
-                        ];
-                    }
+        if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) { //disable for Oxygen
+            $dataOxygen = get_post_meta($post->ID, '_seopress_analysis_data_oxygen', true);
 
+
+            if ($dataOxygen) {
+                if(isset($dataOxygen['words_counter'])){
+                    $data['words_counter'] = $dataOxygen['words_counter'];
+                }
+                if(isset($dataOxygen['words_counter_unique'])){
+                    $data['words_counter_unique'] = $dataOxygen['words_counter_unique'];
+                }
+                if(isset($dataOxygen['kws_density'])){
+                    foreach($dataOxygen['kws_density'] as $key => $densities){
+                        foreach($densities as $keyDensity => $density){
+                            $data['kws_density']['matches'][]= [
+                                "key" => $keyDensity,
+                                "count" => isset($density[0]) ? count($density[0]) : 0
+                            ];
+                        }
+
+                    }
                 }
             }
         }

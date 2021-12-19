@@ -23,11 +23,16 @@ class AuthorUrl implements GetTagValue {
             return $value;
         }
 
-        if ($context['is_single'] && isset($context['post']->post_author)) {
+
+        if(isset($context['post']->post_author)){
+            $value = get_the_author_meta('user_url', $context['post']->post_author);
+        }
+
+        if ($context['is_single'] && isset($context['post']->post_author) && empty($value)) {
             $value      = get_author_posts_url($context['post']->post_author);
         }
 
-        if ($context['is_author'] && is_int(get_queried_object_id())) {
+        if ($context['is_author'] && is_int(get_queried_object_id()) && empty($value)) {
             $value = get_author_posts_url(get_queried_object_id());
         }
 

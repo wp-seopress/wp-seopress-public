@@ -22,6 +22,53 @@ add_filter('seopress_sitemaps_single_term_query', function ($args) {
     return $args;
 });
 
+add_filter('seopress_sitemaps_term_single_url', function($url, $term) {
+    //Exclude custom canonical from sitemaps
+    if (get_term_meta($term->term_id, '_seopress_robots_canonical', true)) {
+        return null;
+    }
+
+    //Exclude hidden languages
+    //@credits WPML compatibility team
+    if (function_exists('icl_object_id') && defined('ICL_SITEPRESS_VERSION')) { //WPML
+        global $sitepress, $sitepress_settings;
+
+        // Check that at least ID is set in post object.
+        if ( ! isset( $term->term_id ) ) {
+            return $url;
+        }
+
+        // Get list of hidden languages.
+        $hidden_languages = $sitepress->get_setting( 'hidden_languages', array() );
+
+        // If there are no hidden languages return original URL.
+        if ( empty( $hidden_languages ) ) {
+            return $url;
+        }
+
+        // Get language information for post.
+        $language_info = $sitepress->term_translations()->get_element_lang_code( $term->term_id );
+
+        // If language code is one of the hidden languages return null to skip the post.
+        if ( in_array( $language_info, $hidden_languages, true ) ) {
+            return null;
+        }
+    }
+
+    return $url;
+}, 10, 2);
+
+// Polylang: remove hidden languages
+function seopress_pll_exclude_hidden_lang($args) {
+    if (function_exists('get_languages_list') && is_plugin_active('polylang/polylang.php') || is_plugin_active('polylang-pro/polylang.php')) {
+        $languages = PLL()->model->get_languages_list();
+        if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
+            $args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );
+        }
+    }
+    return $args;
+}
+
 function seopress_xml_sitemap_single_term() {
     if ('' !== get_query_var('seopress_cpt')) {
         $path = get_query_var('seopress_cpt');
@@ -61,9 +108,11 @@ function seopress_xml_sitemap_single_term() {
         'offset'     => $offset,
         'hide_empty' => false,
         'number'     => 1000,
-        'fields'     => 'ids',
+        //'fields'     => 'ids',
         'lang'       => '',
     ];
+
+    $args = seopress_pll_exclude_hidden_lang($args);
 
     $args = apply_filters('seopress_sitemaps_single_term_query', $args, $path);
 
@@ -80,16 +129,20 @@ function seopress_xml_sitemap_single_term() {
                     'images' => [],
                 ];
 
-                $seopress_sitemaps_url .= "\n";
-                $seopress_sitemaps_url .= '<url>';
-                $seopress_sitemaps_url .= "\n";
-                $seopress_sitemaps_url .= '<loc>';
-                $seopress_sitemaps_url .= $seopress_url['loc'];
-                $seopress_sitemaps_url .= '</loc>';
-                $seopress_sitemaps_url .= "\n";
-                $seopress_sitemaps_url .= '</url>';
+                $seopress_url = apply_filters( 'seopress_sitemaps_term_single_url', $seopress_url, $term );
 
-                $seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
+                if (!empty($seopress_url['loc'])) {
+                    $seopress_sitemaps_url .= "\n";
+                    $seopress_sitemaps_url .= '<url>';
+                    $seopress_sitemaps_url .= "\n";
+                    $seopress_sitemaps_url .= '<loc>';
+                    $seopress_sitemaps_url .= $seopress_url['loc'];
+                    $seopress_sitemaps_url .= '</loc>';
+                    $seopress_sitemaps_url .= "\n";
+                    $seopress_sitemaps_url .= '</url>';
+
+                    $seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
+                }
             }
         }
     }

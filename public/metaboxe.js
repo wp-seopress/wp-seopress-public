@@ -25846,11 +25846,35 @@ var SCInput = styled_components_browser_esm(Forms_FilteredPropsInputField).withC
   componentId: "sc-1bv2xq-1"
 })(["&&&&{width:100%;font-family:var(--fontFamily);padding:6px 8px;margin:0;box-shadow:0 0 0 transparent;transition:box-shadow 0.1s linear;background:none;color:var(--colorP);border-radius:2px;border:1px solid var(--color);font-size:var(--fontSize);line-height:normal;appearance:none;&:focus,&:active{border-color:var(--backgroundPrimary);box-shadow:0 0 0 1px var(--backgroundPrimary);outline:2px solid transparent;}}"]);
 /* harmony default export */ const Input = (SCInput);
+;// CONCATENATED MODULE: ./app/react/ui/ProgressBar/index.js
+
+var SCProgressBar = styled_components_browser_esm.div.withConfig({
+  componentId: "sc-8f3q3f-0"
+})(["&&&{overflow:hidden;font-size:0.75rem;background-color:#e9ecef;border-radius:0.25rem;}"]);
+/* harmony default export */ const ProgressBar = (SCProgressBar);
+;// CONCATENATED MODULE: ./app/react/ui/ProgressBar/ProgressInformation/index.js
+
+var SCProgressInformation = styled_components_browser_esm.div.withConfig({
+  componentId: "sc-1jd5cu1-0"
+})(["&&&{text-align:right;background:#e9ecef;padding:2px 5px;display:flex;font-size:12px;justify-content:flex-end;border-radius:0 0 0.25rem 0.25rem;}"]);
+/* harmony default export */ const ProgressInformation = (SCProgressInformation);
+;// CONCATENATED MODULE: ./app/react/components/RecommendedLimitField/index.js
+
+
+
+
+var RecommendedLimitField = function RecommendedLimitField(_ref) {
+  var children = _ref.children;
+  return /*#__PURE__*/react.createElement(ProgressBar, null, /*#__PURE__*/react.createElement(ProgressInformation, null, children));
+};
+
+/* harmony default export */ const components_RecommendedLimitField = (RecommendedLimitField);
 ;// CONCATENATED MODULE: ./app/react/components/Forms/components/Input/index.js
 
 
 
-var Input_excluded = ["name", "id", "value", "type", "emptyIcon", "setFieldValue"];
+
+var Input_excluded = ["name", "id", "value", "type", "emptyIcon", "setFieldValue", "item"];
 
 function Input_extends() { Input_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Input_extends.apply(this, arguments); }
 
@@ -25874,6 +25898,8 @@ function Input_objectWithoutPropertiesLoose(source, excluded) { if (source == nu
 
 
 
+var Input_ = wp.i18n.__;
+
 var FieldInput = function FieldInput(_ref) {
   var name = _ref.name,
       id = _ref.id,
@@ -25883,6 +25909,7 @@ var FieldInput = function FieldInput(_ref) {
       _ref$emptyIcon = _ref.emptyIcon,
       emptyIcon = _ref$emptyIcon === void 0 ? false : _ref$emptyIcon,
       setFieldValue = _ref.setFieldValue,
+      item = _ref.item,
       rest = Input_objectWithoutProperties(_ref, Input_excluded);
 
   var _useState = (0,react.useState)(value),
@@ -25901,7 +25928,7 @@ var FieldInput = function FieldInput(_ref) {
   }, 200), []);
 
   if (!emptyIcon) {
-    return /*#__PURE__*/react.createElement(Input, Input_extends({
+    return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Input, Input_extends({
       name: name,
       id: id,
       type: type,
@@ -25909,10 +25936,18 @@ var FieldInput = function FieldInput(_ref) {
       onChange: function onChange(e) {
         setFormValue(e.target.value);
       }
-    }, rest));
+    }, rest)), !isNil_default()(get_default()(item, "recommended_limit", null)) && /*#__PURE__*/react.createElement("div", {
+      style: {
+        marginTop: 5
+      }
+    }, /*#__PURE__*/react.createElement(components_RecommendedLimitField, null, /*#__PURE__*/react.createElement("span", {
+      style: {
+        color: ""
+      }
+    }, formValue.length), " ", "/\xA0", /*#__PURE__*/react.createElement("strong", null, item.recommended_limit), " ", /*#__PURE__*/react.createElement("span", null, " (", Input_("maximum limit", "wp-seopress"), ")"))));
   }
 
-  return /*#__PURE__*/react.createElement("div", {
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
     style: {
       position: "relative",
       width: "100%"
@@ -25946,7 +25981,15 @@ var FieldInput = function FieldInput(_ref) {
 
       setFieldValue(name, "");
     }
-  }));
+  })), !isNil_default()(get_default()(item, "recommended_limit", null)) && /*#__PURE__*/react.createElement("div", {
+    style: {
+      marginTop: 5
+    }
+  }, /*#__PURE__*/react.createElement(components_RecommendedLimitField, null, /*#__PURE__*/react.createElement("span", {
+    style: {
+      color: ""
+    }
+  }, formValue.length), " ", "/\xA0", /*#__PURE__*/react.createElement("strong", null, item.recommended_limit), " ", /*#__PURE__*/react.createElement("span", null, " (", Input_("maximum limit", "wp-seopress"), ")"))));
 };
 
 /* harmony default export */ const components_Input = (FieldInput);
@@ -25954,7 +25997,9 @@ var FieldInput = function FieldInput(_ref) {
 var classnames = __webpack_require__(4184);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 ;// CONCATENATED MODULE: ./app/react/components/Forms/components/TextArea/index.js
-var TextArea_excluded = ["name", "className"];
+
+
+var TextArea_excluded = ["name", "className", "item"];
 
 function TextArea_extends() { TextArea_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return TextArea_extends.apply(this, arguments); }
 
@@ -25966,18 +26011,29 @@ function TextArea_objectWithoutPropertiesLoose(source, excluded) { if (source ==
 
 
 
+var TextArea_ = wp.i18n.__;
+
 var FieldTextarea = function FieldTextarea(_ref) {
   var name = _ref.name,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? "" : _ref$className,
+      item = _ref.item,
       rest = TextArea_objectWithoutProperties(_ref, TextArea_excluded);
 
-  return /*#__PURE__*/react.createElement(Field, TextArea_extends({
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Field, TextArea_extends({
     name: name,
     type: "textarea",
     as: "textarea",
     className: classnames_default()(className, "form-textarea")
-  }, rest));
+  }, rest)), !isNil_default()(get_default()(item, "recommended_limit", null)) && /*#__PURE__*/react.createElement("div", {
+    style: {
+      marginTop: 5
+    }
+  }, /*#__PURE__*/react.createElement(components_RecommendedLimitField, null, /*#__PURE__*/react.createElement("span", {
+    style: {
+      color: ""
+    }
+  }, formValue.length), " ", "/\xA0", /*#__PURE__*/react.createElement("strong", null, item.recommended_limit), " ", /*#__PURE__*/react.createElement("span", null, " (", TextArea_("maximum limit", "wp-seopress"), ")"))));
 };
 
 /* harmony default export */ const TextArea = (FieldTextarea);
@@ -28041,24 +28097,12 @@ var TagsChoice = function TagsChoice(_ref) {
 };
 
 /* harmony default export */ const components_TagsChoice = (TagsChoice);
-;// CONCATENATED MODULE: ./app/react/ui/ProgressBar/index.js
-
-var SCProgressBar = styled_components_browser_esm.div.withConfig({
-  componentId: "sc-8f3q3f-0"
-})(["&&&{overflow:hidden;font-size:0.75rem;background-color:#e9ecef;border-radius:0.25rem;}"]);
-/* harmony default export */ const ProgressBar = (SCProgressBar);
 ;// CONCATENATED MODULE: ./app/react/ui/ProgressBar/CurrentProgress/index.js
 
 var SCCurrentProgress = styled_components_browser_esm.div.withConfig({
   componentId: "sc-djzxn7-0"
 })(["&&&{display:flex;flex-direction:column;justify-content:center;color:#fff;text-align:center;white-space:nowrap;background-color:#0085ba;transition:width 0.6s ease;font-size:12px;}"]);
 /* harmony default export */ const CurrentProgress = (SCCurrentProgress);
-;// CONCATENATED MODULE: ./app/react/ui/ProgressBar/ProgressInformation/index.js
-
-var SCProgressInformation = styled_components_browser_esm.div.withConfig({
-  componentId: "sc-1jd5cu1-0"
-})(["&&&{text-align:right;background:#e9ecef;padding:2px 5px;display:flex;font-size:12px;justify-content:flex-end;border-radius:0 0 0.25rem 0.25rem;}"]);
-/* harmony default export */ const ProgressInformation = (SCProgressInformation);
 ;// CONCATENATED MODULE: ./app/react/components/RecommendedLimit/index.js
 
 
@@ -29388,28 +29432,305 @@ var FieldDate = function FieldDate(_ref) {
 
 var OpeningHours_excluded = ["name", "id", "value"];
 
+function OpeningHours_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = OpeningHours_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function OpeningHours_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function OpeningHours_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function OpeningHours_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { OpeningHours_ownKeys(Object(source), true).forEach(function (key) { OpeningHours_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { OpeningHours_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function OpeningHours_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function OpeningHours_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = OpeningHours_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function OpeningHours_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 
 
-
+var OpeningHours_ = wp.i18n.__;
 var DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 var HOURS = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
 var MINUTES = ["00", "15", "30", "45", "59"];
 
-var FieldOpeningHours = function FieldOpeningHours(_ref) {
+var OpeningHoursMorning = function OpeningHoursMorning(_ref) {
   var name = _ref.name,
-      id = _ref.id,
-      value = _ref.value,
-      rest = OpeningHours_objectWithoutProperties(_ref, OpeningHours_excluded);
+      currentValue = _ref.currentValue,
+      legacyValue = _ref.legacyValue,
+      setFieldValue = _ref.setFieldValue,
+      index = _ref.index,
+      day = _ref.day;
+
+  var handleChangeOpening = function handleChangeOpening(checked) {
+    setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
+      seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
+        if (keyItem !== index) {
+          return item;
+        }
+
+        return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
+          am: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am), {}, {
+            open: checked ? "1" : ""
+          })
+        });
+      })
+    }));
+  };
+
+  var handleChangeHour = function handleChangeHour(value, type) {
+    setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
+      seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
+        if (keyItem !== index) {
+          return item;
+        }
+
+        return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
+          am: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am), {}, OpeningHours_defineProperty({}, type, OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am[type]), {}, {
+            hours: value
+          })))
+        });
+      })
+    }));
+  };
+
+  var handleChangeMinutes = function handleChangeMinutes(value, type) {
+    setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
+      seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
+        if (keyItem !== index) {
+          return item;
+        }
+
+        return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
+          am: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am), {}, OpeningHours_defineProperty({}, type, OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am[type]), {}, {
+            mins: value
+          })))
+        });
+      })
+    }));
+  };
+
+  return /*#__PURE__*/react.createElement("div", {
+    className: "flex items-center",
+    style: {
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/react.createElement(SCCheckboxDefault, {
+    type: "checkbox",
+    value: "1",
+    checked: get_default()(legacyValue, [index, "am", "open"]),
+    onChange: function onChange(e) {
+      return handleChangeOpening(e.target.checked);
+    }
+  }), /*#__PURE__*/react.createElement("span", {
+    style: {
+      minWidth: "14%"
+    }
+  }, OpeningHours_("Open in the morning?", "wp-seopress")), /*#__PURE__*/react.createElement(SCSelectDefault, {
+    name: "".concat(name, "[seopress_local_business_opening_hours][").concat(index, "][am][start][hours]"),
+    value: get_default()(legacyValue, [index, "am", "start", "hours"]),
+    style: {
+      marginLeft: 10
+    },
+    onChange: function onChange(e) {
+      handleChangeHour(e.target.value, "start");
+    }
+  }, HOURS.map(function (hour) {
+    return /*#__PURE__*/react.createElement("option", {
+      key: "day_".concat(day, "_hour_am_start_").concat(hour),
+      value: hour
+    }, hour);
+  })), /*#__PURE__*/react.createElement("span", {
+    style: {
+      marginLeft: 5,
+      marginRight: 5
+    }
+  }, ":"), /*#__PURE__*/react.createElement(SCSelectDefault, {
+    style: {
+      marginRight: 10
+    },
+    onChange: function onChange(e) {
+      handleChangeMinutes(e.target.value, "start");
+    },
+    name: "".concat(name, "[seopress_local_business_opening_hours][").concat(index, "][am][start][mins]"),
+    value: get_default()(legacyValue, [index, "am", "start", "mins"])
+  }, MINUTES.map(function (hour) {
+    return /*#__PURE__*/react.createElement("option", {
+      key: "day_".concat(day, "_min_am_start_").concat(hour),
+      value: hour
+    }, hour);
+  })), "-", /*#__PURE__*/react.createElement(SCSelectDefault, {
+    name: "".concat(name, "[seopress_local_business_opening_hours][").concat(index, "][am][end][hours]"),
+    style: {
+      marginLeft: 10
+    },
+    value: get_default()(legacyValue, [index, "am", "end", "hours"]),
+    onChange: function onChange(e) {
+      handleChangeHour(e.target.value, "end");
+    }
+  }, HOURS.map(function (hour) {
+    return /*#__PURE__*/react.createElement("option", {
+      key: "day_".concat(day, "_hour_am_end_").concat(hour),
+      value: hour
+    }, hour);
+  })), /*#__PURE__*/react.createElement("span", {
+    style: {
+      marginLeft: 5,
+      marginRight: 5
+    }
+  }, ":"), /*#__PURE__*/react.createElement(SCSelectDefault, {
+    name: "".concat(name, "[seopress_local_business_opening_hours][").concat(index, "][am][end][mins]"),
+    value: get_default()(legacyValue, [index, "am", "end", "mins"]),
+    onChange: function onChange(e) {
+      handleChangeMinutes(e.target.value, "end");
+    }
+  }, MINUTES.map(function (min) {
+    return /*#__PURE__*/react.createElement("option", {
+      key: "day_".concat(day, "_min_am_end_").concat(min),
+      value: min
+    }, min);
+  })));
+};
+
+var OpeningHoursAfternoon = function OpeningHoursAfternoon(_ref2) {
+  var name = _ref2.name,
+      currentValue = _ref2.currentValue,
+      legacyValue = _ref2.legacyValue,
+      setFieldValue = _ref2.setFieldValue,
+      index = _ref2.index,
+      day = _ref2.day;
+
+  var handleChangeOpening = function handleChangeOpening(checked) {
+    setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
+      seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
+        if (keyItem !== index) {
+          return item;
+        }
+
+        return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
+          pm: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm), {}, {
+            open: checked ? "1" : ""
+          })
+        });
+      })
+    }));
+  };
+
+  var handleChangeHour = function handleChangeHour(value, type) {
+    setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
+      seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
+        if (keyItem !== index) {
+          return item;
+        }
+
+        return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
+          pm: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm), {}, OpeningHours_defineProperty({}, type, OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm[type]), {}, {
+            hours: value
+          })))
+        });
+      })
+    }));
+  };
+
+  var handleChangeMinutes = function handleChangeMinutes(value, type) {
+    setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
+      seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
+        if (keyItem !== index) {
+          return item;
+        }
+
+        return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
+          pm: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm), {}, OpeningHours_defineProperty({}, type, OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm[type]), {}, {
+            mins: value
+          })))
+        });
+      })
+    }));
+  };
+
+  return /*#__PURE__*/react.createElement("div", {
+    className: "flex items-center",
+    style: {
+      marginBottom: 8
+    }
+  }, /*#__PURE__*/react.createElement(SCCheckboxDefault, {
+    type: "checkbox",
+    value: "1",
+    checked: get_default()(legacyValue, [index, "pm", "open"]),
+    onChange: function onChange(e) {
+      return handleChangeOpening(e.target.checked);
+    }
+  }), /*#__PURE__*/react.createElement("span", {
+    style: {
+      minWidth: "14%"
+    }
+  }, OpeningHours_("Open in the afternoon?", "wp-seopress")), /*#__PURE__*/react.createElement(SCSelectDefault, {
+    name: "".concat(name, "[seopress_local_business_opening_hours][").concat(index, "][pm][start][hours]"),
+    value: get_default()(legacyValue, [index, "pm", "start", "hours"]),
+    style: {
+      marginLeft: 10
+    },
+    onChange: function onChange(e) {
+      handleChangeHour(e.target.value, "start");
+    }
+  }, HOURS.map(function (hour) {
+    return /*#__PURE__*/react.createElement("option", {
+      key: "day_".concat(day, "_hour_am_start_").concat(hour),
+      value: hour
+    }, hour);
+  })), /*#__PURE__*/react.createElement("span", {
+    style: {
+      marginLeft: 5,
+      marginRight: 5
+    }
+  }, ":"), /*#__PURE__*/react.createElement(SCSelectDefault, {
+    style: {
+      marginRight: 10
+    },
+    onChange: function onChange(e) {
+      handleChangeMinutes(e.target.value, "start");
+    },
+    name: "".concat(name, "[seopress_local_business_opening_hours][").concat(index, "][pm][start][hours]"),
+    value: get_default()(legacyValue, [index, "pm", "start", "mins"])
+  }, MINUTES.map(function (hour) {
+    return /*#__PURE__*/react.createElement("option", {
+      key: "day_".concat(day, "_min_am_start_").concat(hour),
+      value: hour
+    }, hour);
+  })), "-", /*#__PURE__*/react.createElement(SCSelectDefault, {
+    name: "".concat(name, "[seopress_local_business_opening_hours][").concat(index, "][pm][end][hours]"),
+    style: {
+      marginLeft: 10
+    },
+    value: get_default()(legacyValue, [index, "pm", "end", "hours"]),
+    onChange: function onChange(e) {
+      handleChangeHour(e.target.value, "end");
+    }
+  }, HOURS.map(function (hour) {
+    return /*#__PURE__*/react.createElement("option", {
+      key: "day_".concat(day, "_hour_am_end_").concat(hour),
+      value: hour
+    }, hour);
+  })), /*#__PURE__*/react.createElement("span", {
+    style: {
+      marginLeft: 5,
+      marginRight: 5
+    }
+  }, ":"), /*#__PURE__*/react.createElement(SCSelectDefault, {
+    name: "".concat(name, "[seopress_local_business_opening_hours][").concat(index, "][pm][end][mins]"),
+    value: get_default()(legacyValue, [index, "pm", "end", "mins"]),
+    onChange: function onChange(e) {
+      handleChangeMinutes(e.target.value, "end");
+    }
+  }, MINUTES.map(function (min) {
+    return /*#__PURE__*/react.createElement("option", {
+      key: "day_".concat(day, "_min_am_end_").concat(min),
+      value: min
+    }, min);
+  })));
+};
+
+var FieldOpeningHours = function FieldOpeningHours(_ref3) {
+  var name = _ref3.name,
+      id = _ref3.id,
+      value = _ref3.value,
+      rest = OpeningHours_objectWithoutProperties(_ref3, OpeningHours_excluded);
 
   var getDefaultValue = function getDefaultValue(value) {
     if (isEmpty_default()(value) || isNil_default()(value)) {
@@ -29596,288 +29917,21 @@ var FieldOpeningHours = function FieldOpeningHours(_ref) {
           })
         }));
       }
-    }), "Closed all the day?"), /*#__PURE__*/react.createElement("div", {
-      className: "flex items-center",
-      style: {
-        marginBottom: 8
-      }
-    }, /*#__PURE__*/react.createElement(SCCheckboxDefault, {
-      type: "checkbox",
-      value: "1",
-      checked: get_default()(legacyValue, [key, "am", "open"]),
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              am: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am), {}, {
-                open: e.target.checked ? "1" : ""
-              })
-            });
-          })
-        }));
-      }
-    }), "Open in the morning?", /*#__PURE__*/react.createElement(SCSelectDefault, {
-      name: "".concat(name, "[seopress_local_business_opening_hours][").concat(key, "][am][start][hours]"),
-      value: get_default()(legacyValue, [key, "am", "start", "hours"]),
-      style: {
-        marginLeft: 10
-      },
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              am: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am), {}, {
-                start: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am.start), {}, {
-                  hours: e.target.value
-                })
-              })
-            });
-          })
-        }));
-      }
-    }, HOURS.map(function (hour, key) {
-      return /*#__PURE__*/react.createElement("option", {
-        key: "day_".concat(day, "_hour_am_start_").concat(hour),
-        value: hour
-      }, hour);
-    })), /*#__PURE__*/react.createElement("span", {
-      style: {
-        marginLeft: 5,
-        marginRight: 5
-      }
-    }, ":"), /*#__PURE__*/react.createElement(SCSelectDefault, {
-      style: {
-        marginRight: 10
-      },
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              am: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am), {}, {
-                start: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am.start), {}, {
-                  mins: e.target.value
-                })
-              })
-            });
-          })
-        }));
-      },
-      name: "".concat(name, "[seopress_local_business_opening_hours][am][start][mins]"),
-      value: get_default()(legacyValue, [key, "am", "start", "mins"])
-    }, MINUTES.map(function (hour, key) {
-      return /*#__PURE__*/react.createElement("option", {
-        key: "day_".concat(day, "_min_am_start_").concat(hour),
-        value: hour
-      }, hour);
-    })), "-", /*#__PURE__*/react.createElement(SCSelectDefault, {
-      name: "".concat(name, "[seopress_local_business_opening_hours][").concat(key, "][am][end][hours]"),
-      style: {
-        marginLeft: 10
-      },
-      value: get_default()(legacyValue, [key, "am", "end", "hours"]),
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              am: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am), {}, {
-                end: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am.end), {}, {
-                  hours: e.target.value
-                })
-              })
-            });
-          })
-        }));
-      }
-    }, HOURS.map(function (hour, key) {
-      return /*#__PURE__*/react.createElement("option", {
-        key: "day_".concat(day, "_hour_am_end_").concat(hour),
-        value: hour
-      }, hour);
-    })), /*#__PURE__*/react.createElement("span", {
-      style: {
-        marginLeft: 5,
-        marginRight: 5
-      }
-    }, ":"), /*#__PURE__*/react.createElement(SCSelectDefault, {
-      name: "".concat(name, "[seopress_local_business_opening_hours][").concat(key, "][am][end][mins]"),
-      value: get_default()(legacyValue, [key, "am", "end", "mins"]),
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              am: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am), {}, {
-                end: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.am.end), {}, {
-                  mins: e.target.value
-                })
-              })
-            });
-          })
-        }));
-      }
-    }, MINUTES.map(function (min, key) {
-      return /*#__PURE__*/react.createElement("option", {
-        key: "day_".concat(day, "_min_am_end_").concat(min),
-        value: min
-      }, min);
-    }))), /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement(SCCheckboxDefault, {
-      type: "checkbox",
-      value: "1",
-      checked: get_default()(legacyValue, [key, "pm", "open"]),
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              pm: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm), {}, {
-                open: e.target.checked ? "1" : ""
-              })
-            });
-          })
-        }));
-      }
-    }), "Open in the afternoon?", /*#__PURE__*/react.createElement(SCSelectDefault, {
-      name: "".concat(name, "[seopress_local_business_opening_hours][").concat(key, "][pm][start][hours]"),
-      style: {
-        marginLeft: 10
-      },
-      value: get_default()(legacyValue, [key, "pm", "start", "hours"]),
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              pm: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm), {}, {
-                start: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm.start), {}, {
-                  hours: e.target.value
-                })
-              })
-            });
-          })
-        }));
-      }
-    }, HOURS.map(function (hour, key) {
-      return /*#__PURE__*/react.createElement("option", {
-        key: "day_".concat(day, "_hour_pm_start_").concat(hour),
-        value: hour
-      }, hour);
-    })), /*#__PURE__*/react.createElement("span", {
-      style: {
-        marginLeft: 5,
-        marginRight: 5
-      }
-    }, ":"), /*#__PURE__*/react.createElement(SCSelectDefault, {
-      name: "".concat(name, "[seopress_local_business_opening_hours][").concat(key, "][pm][start][mins]"),
-      style: {
-        marginRight: 10
-      },
-      value: get_default()(legacyValue, [key, "pm", "start", "mins"]),
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              pm: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm), {}, {
-                start: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm.start), {}, {
-                  mins: e.target.value
-                })
-              })
-            });
-          })
-        }));
-      }
-    }, MINUTES.map(function (min, key) {
-      return /*#__PURE__*/react.createElement("option", {
-        key: "day_".concat(day, "_min_pm_start_").concat(min),
-        value: min
-      }, min);
-    })), "-", /*#__PURE__*/react.createElement(SCSelectDefault, {
-      name: "".concat(name, "[seopress_local_business_opening_hours][").concat(key, "][pm][end][hours]"),
-      style: {
-        marginLeft: 10
-      },
-      value: get_default()(legacyValue, [key, "pm", "end", "hours"]),
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              pm: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm), {}, {
-                end: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm.end), {}, {
-                  hours: e.target.value
-                })
-              })
-            });
-          })
-        }));
-      }
-    }, HOURS.map(function (hour, key) {
-      return /*#__PURE__*/react.createElement("option", {
-        key: "day_".concat(day, "_hour_pm_end_").concat(hour),
-        value: hour
-      }, hour);
-    })), /*#__PURE__*/react.createElement("span", {
-      style: {
-        marginLeft: 5,
-        marginRight: 5
-      }
-    }, ":"), /*#__PURE__*/react.createElement(SCSelectDefault, {
-      name: "".concat(name, "[seopress_local_business_opening_hours][").concat(key, "][pm][end][mins]"),
-      value: get_default()(legacyValue, [key, "pm", "end", "mins"]),
-      onChange: function onChange(e) {
-        rest.setFieldValue(name, OpeningHours_objectSpread(OpeningHours_objectSpread({}, currentValue), {}, {
-          seopress_local_business_opening_hours: currentValue.seopress_local_business_opening_hours.map(function (item, keyItem) {
-            if (keyItem !== key) {
-              return item;
-            }
-
-            return OpeningHours_objectSpread(OpeningHours_objectSpread({}, item), {}, {
-              pm: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm), {}, {
-                end: OpeningHours_objectSpread(OpeningHours_objectSpread({}, item.pm.end), {}, {
-                  mins: e.target.value
-                })
-              })
-            });
-          })
-        }));
-      }
-    }, MINUTES.map(function (min, key) {
-      return /*#__PURE__*/react.createElement("option", {
-        key: "day_".concat(day, "_min_pm_end_").concat(min),
-        value: min
-      }, min);
-    }))));
+    }), "Closed all the day?"), /*#__PURE__*/react.createElement(OpeningHoursMorning, {
+      name: name,
+      day: day,
+      currentValue: currentValue,
+      legacyValue: legacyValue,
+      setFieldValue: rest.setFieldValue,
+      index: key
+    }), /*#__PURE__*/react.createElement(OpeningHoursAfternoon, {
+      name: name,
+      day: day,
+      currentValue: currentValue,
+      legacyValue: legacyValue,
+      setFieldValue: rest.setFieldValue,
+      index: key
+    }));
   }));
 };
 
@@ -31072,7 +31126,11 @@ var FieldRepeaterFaq = function FieldRepeaterFaq(_ref) {
     }, /*#__PURE__*/react.createElement(Heading, null, /*#__PURE__*/react.createElement(AccordionItemHeadingWrapper, null, /*#__PURE__*/react.createElement(AccordionItemButtonWrapper, null, /*#__PURE__*/react.createElement(Button, null, /*#__PURE__*/react.createElement("div", null, "#", key + 1, " - ", item.question), /*#__PURE__*/react.createElement("span", {
       className: "seopress-arrow",
       "aria-hidden": "true"
-    })))), /*#__PURE__*/react.createElement(AccordionItemPanel, null, /*#__PURE__*/react.createElement("p", null, Faq_("Question (required)", "wp-seopress-pro")), /*#__PURE__*/react.createElement(SCInputDefault, {
+    })))), /*#__PURE__*/react.createElement(AccordionItemPanel, null, /*#__PURE__*/react.createElement("p", {
+      style: {
+        fontWeight: "bold"
+      }
+    }, Faq_("Question (required)", "wp-seopress-pro")), /*#__PURE__*/react.createElement(SCInputDefault, {
       type: "text",
       value: item.question,
       onChange: function onChange(e) {
@@ -31086,7 +31144,11 @@ var FieldRepeaterFaq = function FieldRepeaterFaq(_ref) {
           });
         }));
       }
-    }), /*#__PURE__*/react.createElement("p", null, Faq_("Answer (required)", "wp-seopress-pro")), /*#__PURE__*/react.createElement("textarea", {
+    }), /*#__PURE__*/react.createElement("p", {
+      style: {
+        fontWeight: "bold"
+      }
+    }, Faq_("Answer (required)", "wp-seopress-pro")), /*#__PURE__*/react.createElement("textarea", {
       className: "form-textarea",
       style: {
         width: "100%"
@@ -31133,6 +31195,34 @@ var FieldRepeaterFaq = function FieldRepeaterFaq(_ref) {
 };
 
 /* harmony default export */ const Faq = (FieldRepeaterFaq);
+;// CONCATENATED MODULE: ./app/react/components/Forms/components/Time/index.js
+var Time_excluded = ["name", "id", "value"];
+
+function Time_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = Time_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function Time_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+var FieldTime = function FieldTime(_ref) {
+  var name = _ref.name,
+      id = _ref.id,
+      value = _ref.value,
+      rest = Time_objectWithoutProperties(_ref, Time_excluded);
+
+  return /*#__PURE__*/react.createElement("input", {
+    type: "time",
+    name: name,
+    id: id,
+    value: value,
+    className: "form-input-date",
+    onChange: function onChange(e) {
+      rest.setFieldValue(name, e.target.value);
+    }
+  });
+};
+
+/* harmony default export */ const Time = (FieldTime);
 ;// CONCATENATED MODULE: ./app/react/components/Forms/components/DynamicField/index.js
 
 
@@ -31146,6 +31236,7 @@ function DynamicField_defineProperty(obj, key, value) { if (key in obj) { Object
 function DynamicField_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = DynamicField_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function DynamicField_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 
 
 
@@ -31178,7 +31269,7 @@ var DynamicField = function DynamicField(_ref) {
   var nameForm = isNil_default()(nameInput) ? item.key : nameInput;
   var valueForm = isNil_default()(itemValue) ? values[item.key] : itemValue;
   (0,react.useEffect)(function () {
-    if ((isNil_default()(valueForm) || isEmpty_default()(valueForm)) && !isNil_default()(item.value)) {
+    if ((isNil_default()(valueForm) || isEmpty_default()(valueForm)) && !isNil_default()(item.value) && item.type !== "checkbox") {
       rest.setFieldValue(nameForm, get_default()(item, "value", ""));
     }
   }, [valueForm]);
@@ -31206,23 +31297,26 @@ var DynamicField = function DynamicField(_ref) {
     className: classnames_default()({
       "w-full": item.type === "input" || item.type === "select" || item.type === "textarea"
     }),
-    value: checkboxLegacyValue ? "yes" : null,
-    onChange: rest.handleChange
+    value: checkboxLegacyValue ? "yes" : "1",
+    onChange: function onChange(e) {
+      rest.setFieldValue(nameForm, e.target.checked);
+    }
   }), item.label)), item.type === "input" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(components_Input, {
     id: nameForm,
     name: nameForm,
     placeholder: placeholder ? placeholder : item.placeholder,
     value: valueForm || "",
-    className: "w-full",
+    className: classnames_default()("w-full", get_default()(item, "class", "")),
     emptyIcon: emptyIcon,
-    setFieldValue: rest.setFieldValue
+    setFieldValue: rest.setFieldValue,
+    item: item
   })), item.type === "number" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(components_Input, {
     id: nameForm,
     name: nameForm,
     placeholder: placeholder ? placeholder : item.placeholder,
     type: "number",
     value: valueForm || "",
-    className: "w-full",
+    className: classnames_default()("w-full", get_default()(item, "class", "")),
     emptyIcon: emptyIcon,
     setFieldValue: rest.setFieldValue,
     step: get_default()(item, "step", null),
@@ -31233,16 +31327,17 @@ var DynamicField = function DynamicField(_ref) {
     name: nameForm,
     placeholder: placeholder ? placeholder : item.placeholder,
     value: valueForm || "",
-    className: "w-full",
+    className: classnames_default()("w-full", get_default()(item, "class", "")),
     style: {
       resize: "vertical"
-    }
+    },
+    item: item
   })), item.type === "select" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(components_Select, DynamicField_extends({
     id: nameForm,
     name: nameForm,
     placeholder: item.placeholder,
     value: valueForm || "",
-    className: "w-full",
+    className: classnames_default()("w-full", get_default()(item, "class", "")),
     options: item.options,
     onChange: rest.handleChange
   }, rest))), item.type === "upload" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(MediaUpload, DynamicField_extends({
@@ -31250,7 +31345,7 @@ var DynamicField = function DynamicField(_ref) {
     name: nameForm,
     placeholder: placeholder ? placeholder : item.placeholder,
     value: valueForm || "",
-    className: "w-full",
+    className: classnames_default()("w-full", get_default()(item, "class", "")),
     emptyIcon: emptyIcon,
     setFieldValue: rest.setFieldValue,
     combinedValuesForm: combinedValuesForm
@@ -31258,22 +31353,27 @@ var DynamicField = function DynamicField(_ref) {
     id: nameForm,
     name: nameForm,
     value: valueForm || "",
-    className: "w-full"
+    className: classnames_default()("w-full", get_default()(item, "class", ""))
+  }, rest))), item.type === "time" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Time, DynamicField_extends({
+    id: nameForm,
+    name: nameForm,
+    value: valueForm || "",
+    className: classnames_default()("w-full", get_default()(item, "class", ""))
   }, rest))), item.type === "opening_hours" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(OpeningHours, DynamicField_extends({
     id: nameForm,
     name: nameForm,
     value: valueForm || "",
-    className: "w-full"
+    className: classnames_default()("w-full", get_default()(item, "class", ""))
   }, rest))), item.type === "repeater_how_to" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(HowTo, DynamicField_extends({
     id: nameForm,
     name: nameForm,
     value: valueForm || "",
-    className: "w-full"
+    className: classnames_default()("w-full", get_default()(item, "class", ""))
   }, rest))), item.type === "repeater_faq" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(Faq, DynamicField_extends({
     id: nameForm,
     name: nameForm,
     value: valueForm || "",
-    className: "w-full"
+    className: classnames_default()("w-full", get_default()(item, "class", ""))
   }, rest))));
 };
 
@@ -32025,23 +32125,67 @@ var saveRedirectionSettings = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+;// CONCATENATED MODULE: ./app/react/components/SelectChoice/index.js
+
+
+
+
+
+var SelectChoice_ = wp.i18n.__;
+
+var SelectChoice = function SelectChoice(_ref) {
+  var items = _ref.items,
+      _ref$handleChoiceItem = _ref.handleChoiceItem,
+      handleChoiceItem = _ref$handleChoiceItem === void 0 ? function () {} : _ref$handleChoiceItem;
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+    className: "flex items-center flex-wrap"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "relative",
+    style: {
+      alignSelf: "start"
+    }
+  }, /*#__PURE__*/react.createElement(ui_TagsChoice, null, items.map(function (tag) {
+    var name = get_default()(tag, "item.name", get_default()(tag, "name", ""));
+
+    var input = get_default()(tag, "item.input", get_default()(tag, "input", ""));
+
+    return /*#__PURE__*/react.createElement(TagsChoiceItem, {
+      key: name,
+      onClick: function onClick() {
+        handleChoiceItem(input);
+      },
+      onKeyUp: function onKeyUp(e) {
+        if (e.keyCode === 27) {
+          e.preventDefault();
+        }
+
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          handleChoiceItem(input);
+        }
+      },
+      tabIndex: "0"
+    }, !isEmpty_default()(name) && /*#__PURE__*/react.createElement(SCTagsChoiceItemName, null, name), !isEmpty_default()(input) && /*#__PURE__*/react.createElement(SCTagsChoiceItemValue, null, input));
+  })))));
+};
+
+/* harmony default export */ const components_SelectChoice = (SelectChoice);
 ;// CONCATENATED MODULE: ./app/react/layout/Main/components/Redirection/index.js
 
 
 
-var Redirection_excluded = ["values"];
 
-function Redirection_extends() { Redirection_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Redirection_extends.apply(this, arguments); }
 
-function Redirection_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = Redirection_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function Redirection_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+var Redirection_excluded = ["data", "values", "loading"],
+    _excluded2 = ["values"];
 
 function Redirection_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function Redirection_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Redirection_ownKeys(Object(source), true).forEach(function (key) { Redirection_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Redirection_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function Redirection_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function Redirection_extends() { Redirection_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Redirection_extends.apply(this, arguments); }
 
 function Redirection_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -32059,6 +32203,16 @@ function Redirection_iterableToArrayLimit(arr, i) { var _i = arr == null ? null 
 
 function Redirection_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function Redirection_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = Redirection_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function Redirection_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+
 
 
 
@@ -32069,8 +32223,132 @@ function Redirection_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Redirection_ = wp.i18n.__;
 
-var RedirectionLayout = function RedirectionLayout(_ref) {
-  var mainBarRef = _ref.mainBarRef;
+var RedirectionLayoutWithFormik = function RedirectionLayoutWithFormik(_ref) {
+  var data = _ref.data,
+      values = _ref.values,
+      loading = _ref.loading,
+      rest = Redirection_objectWithoutProperties(_ref, Redirection_excluded);
+
+  var _useFormikContext = useFormikContext(),
+      valuesFormik = _useFormikContext.values;
+
+  var fieldValue = getIn(valuesFormik, "_seopress_redirections_value");
+
+  var _useState = (0,react.useState)([]),
+      _useState2 = Redirection_slicedToArray(_useState, 2),
+      redirectionProposition = _useState2[0],
+      setRedirectionProposition = _useState2[1];
+
+  var _useState3 = (0,react.useState)(false),
+      _useState4 = Redirection_slicedToArray(_useState3, 2),
+      focusSuggest = _useState4[0],
+      setFocusSuggest = _useState4[1];
+
+  var _useState5 = (0,react.useState)(fieldValue),
+      _useState6 = Redirection_slicedToArray(_useState5, 2),
+      redirectionValue = _useState6[0],
+      setRedirectionValue = _useState6[1];
+
+  var isInitialMount = (0,react.useRef)(true);
+  var ref = (0,react.useRef)();
+  hooks_useOnClickOutside(ref, function () {
+    return setFocusSuggest(false);
+  });
+  var fetchRedirectionProposition = (0,react.useCallback)(debounce_default()( /*#__PURE__*/function () {
+    var _ref2 = Redirection_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
+      var dataResponse, data;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch("".concat(SEOPRESS_DATA.REST_URL, "seopress/v1/search-url?url=").concat(value));
+
+            case 2:
+              dataResponse = _context.sent;
+              _context.next = 5;
+              return dataResponse.json();
+
+            case 5:
+              data = _context.sent;
+              setRedirectionProposition(data.map(function (item) {
+                return {
+                  name: item.post_title,
+                  input: item.guid
+                };
+              }));
+              setFocusSuggest(true);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }(), 200), []);
+  (0,react.useEffect)(function () {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    rest.setFieldValue("_seopress_redirections_value", redirectionValue);
+
+    if (isEmpty_default()(redirectionValue) || redirectionValue.length < 3) {
+      return;
+    }
+
+    fetchRedirectionProposition(redirectionValue);
+  }, [redirectionValue]);
+  return /*#__PURE__*/react.createElement(Form, null, data.map(function (item, key) {
+    if (!item.visible) {
+      return;
+    }
+
+    return /*#__PURE__*/react.createElement(react.Fragment, {
+      key: "social_form_".concat(key)
+    }, /*#__PURE__*/react.createElement("div", {
+      className: "mt-3"
+    }, item.key !== "_seopress_redirections_value" && /*#__PURE__*/react.createElement(components_DynamicField, Redirection_extends({
+      item: item,
+      values: values
+    }, rest)), item.key === "_seopress_redirections_value" && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(components_Label, {
+      htmlFor: item.key
+    }, item.label), /*#__PURE__*/react.createElement(Input, {
+      name: item.key,
+      id: item.key,
+      type: "text",
+      value: redirectionValue,
+      placeholder: get_default()(item, "placeholder", ""),
+      onChange: function onChange(e) {
+        setRedirectionValue(e.target.value);
+      },
+      style: {
+        width: "100%"
+      }
+    }), focusSuggest && !isEmpty_default()(redirectionProposition) && /*#__PURE__*/react.createElement("div", {
+      ref: ref
+    }, /*#__PURE__*/react.createElement(components_SelectChoice, {
+      handleChoiceItem: function handleChoiceItem(value) {
+        setRedirectionValue(value);
+        setFocusSuggest(false);
+      },
+      items: redirectionProposition
+    })))));
+  }), /*#__PURE__*/react.createElement("div", {
+    className: "sp-fixed"
+  }, /*#__PURE__*/react.createElement(components_ButtonSubmit, {
+    loading: loading
+  }, Redirection_("Save", "wp-seopress"))));
+};
+
+var RedirectionLayout = function RedirectionLayout(_ref3) {
+  var mainBarRef = _ref3.mainBarRef;
   var postId = getCurrentPostId();
 
   var _useRedirectionSettin = metas_useRedirectionSettings({
@@ -32086,43 +32364,43 @@ var RedirectionLayout = function RedirectionLayout(_ref) {
     };
   });
 
-  var _useState = (0,react.useState)(false),
-      _useState2 = Redirection_slicedToArray(_useState, 2),
-      loading = _useState2[0],
-      setLoading = _useState2[1];
+  var _useState7 = (0,react.useState)(false),
+      _useState8 = Redirection_slicedToArray(_useState7, 2),
+      loading = _useState8[0],
+      setLoading = _useState8[1];
 
   var _useContext = (0,react.useContext)(NotificationContext),
       actions = _useContext.actions;
 
   var handleOnSubmit = /*#__PURE__*/function () {
-    var _ref2 = Redirection_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(values) {
+    var _ref4 = Redirection_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(values) {
       var data;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               setLoading(true);
-              _context.next = 3;
+              _context2.next = 3;
               return saveRedirectionSettings(postId, Redirection_objectSpread(Redirection_objectSpread({}, values), {}, {
                 _seopress_redirections_enabled: values._seopress_redirections_enabled ? "yes" : ""
               }));
 
             case 3:
-              data = _context.sent;
+              data = _context2.sent;
               mutate();
               setLoading(false);
               actions.setMessage(Redirection_("Your settings have been saved.", "wp-seopress"));
 
             case 7:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
-    return function handleOnSubmit(_x) {
-      return _ref2.apply(this, arguments);
+    return function handleOnSubmit(_x2) {
+      return _ref4.apply(this, arguments);
     };
   }();
 
@@ -32137,29 +32415,15 @@ var RedirectionLayout = function RedirectionLayout(_ref) {
     enableReinitialize: true,
     onSubmit: handleOnSubmit,
     initialValues: initialValues
-  }, function (_ref3) {
-    var values = _ref3.values,
-        rest = Redirection_objectWithoutProperties(_ref3, Redirection_excluded);
+  }, function (_ref5) {
+    var values = _ref5.values,
+        rest = Redirection_objectWithoutProperties(_ref5, _excluded2);
 
-    return /*#__PURE__*/react.createElement(Form, null, data.map(function (item, key) {
-      if (!item.visible) {
-        return;
-      }
-
-      return /*#__PURE__*/react.createElement(react.Fragment, {
-        key: "social_form_".concat(key)
-      }, /*#__PURE__*/react.createElement("div", {
-        className: "mt-3"
-      }, /*#__PURE__*/react.createElement(components_DynamicField, Redirection_extends({
-        item: item,
-        values: values,
-        checkboxLegacyValue: item.key === "_seopress_redirections_enabled"
-      }, rest))));
-    }), /*#__PURE__*/react.createElement("div", {
-      className: "sp-fixed"
-    }, /*#__PURE__*/react.createElement(components_ButtonSubmit, {
+    return /*#__PURE__*/react.createElement(RedirectionLayoutWithFormik, Redirection_extends({
+      data: data,
+      values: values,
       loading: loading
-    }, Redirection_("Save", "wp-seopress"))));
+    }, rest));
   }));
 };
 
@@ -41537,7 +41801,7 @@ var saveVideoSitemapSettings = /*#__PURE__*/function () {
 
 
 var VideoSitemap_excluded = ["fields", "values"],
-    _excluded2 = ["values"];
+    VideoSitemap_excluded2 = ["values"];
 
 function VideoSitemap_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -41739,7 +42003,7 @@ var VideoSitemapLayout = function VideoSitemapLayout(_ref2) {
     })
   }, function (_ref4) {
     var values = _ref4.values,
-        rest = VideoSitemap_objectWithoutProperties(_ref4, _excluded2);
+        rest = VideoSitemap_objectWithoutProperties(_ref4, VideoSitemap_excluded2);
 
     return /*#__PURE__*/react.createElement(Form, null, responseVideoSitemap.data.map(function (item, key) {
       if (!item.visible) {
@@ -41962,18 +42226,21 @@ var saveSchemasManual = /*#__PURE__*/function () {
 
 
 
-var SchemasManual_excluded = ["schemasAvailable", "fields", "schema", "arrayHelpers", "index", "fieldsAvailable"],
-    SchemasManual_excluded2 = ["values"];
-
-function SchemasManual_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function SchemasManual_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { SchemasManual_ownKeys(Object(source), true).forEach(function (key) { SchemasManual_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { SchemasManual_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function SchemasManual_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var SchemasManual_excluded = ["schemasAvailable", "fields", "schema", "arrayHelpers", "index", "fieldsAvailable", "setExpandAll", "expandAll"],
+    SchemasManual_excluded2 = ["values", "fields", "schemas", "loading"],
+    _excluded3 = ["values"];
 
 function SchemasManual_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function SchemasManual_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { SchemasManual_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { SchemasManual_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function SchemasManual_toConsumableArray(arr) { return SchemasManual_arrayWithoutHoles(arr) || SchemasManual_iterableToArray(arr) || SchemasManual_unsupportedIterableToArray(arr) || SchemasManual_nonIterableSpread(); }
+
+function SchemasManual_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function SchemasManual_iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function SchemasManual_arrayWithoutHoles(arr) { if (Array.isArray(arr)) return SchemasManual_arrayLikeToArray(arr); }
 
 function SchemasManual_slicedToArray(arr, i) { return SchemasManual_arrayWithHoles(arr) || SchemasManual_iterableToArrayLimit(arr, i) || SchemasManual_unsupportedIterableToArray(arr, i) || SchemasManual_nonIterableRest(); }
 
@@ -41988,6 +42255,12 @@ function SchemasManual_iterableToArrayLimit(arr, i) { var _i = arr == null ? nul
 function SchemasManual_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function SchemasManual_extends() { SchemasManual_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return SchemasManual_extends.apply(this, arguments); }
+
+function SchemasManual_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function SchemasManual_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { SchemasManual_ownKeys(Object(source), true).forEach(function (key) { SchemasManual_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { SchemasManual_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function SchemasManual_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function SchemasManual_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = SchemasManual_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
@@ -42014,6 +42287,8 @@ var RepeaterSchema = /*#__PURE__*/react.memo(function RepeaterSchema(_ref) {
       arrayHelpers = _ref.arrayHelpers,
       index = _ref.index,
       fieldsAvailable = _ref.fieldsAvailable,
+      setExpandAll = _ref.setExpandAll,
+      expandAll = _ref.expandAll,
       rest = SchemasManual_objectWithoutProperties(_ref, SchemasManual_excluded);
 
   var type = get_default()(schema, "_seopress_pro_rich_snippets_type", null);
@@ -42024,7 +42299,34 @@ var RepeaterSchema = /*#__PURE__*/react.memo(function RepeaterSchema(_ref) {
 
   var notices = get_default()(itemSchemaAvailable, "notices", []);
 
-  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(AccordionItem, null, /*#__PURE__*/react.createElement(Heading, null, /*#__PURE__*/react.createElement(AccordionItemHeadingWrapper, null, /*#__PURE__*/react.createElement(AccordionItemButtonWrapper, null, /*#__PURE__*/react.createElement(Button, null, /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("p", {
+  var handleExpand = function handleExpand(e) {
+    e.preventDefault();
+    setExpandAll(function (expands) {
+      return expands.map(function (item) {
+        if (item.key !== index) {
+          return item;
+        }
+
+        return SchemasManual_objectSpread(SchemasManual_objectSpread({}, item), {}, {
+          open: !get_default()(item, "open", true)
+        });
+      });
+    });
+  };
+
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(AccordionItem, {
+    dangerouslySetExpanded: get_default()(find_default()(expandAll, {
+      key: index
+    }), "open", false)
+  }, /*#__PURE__*/react.createElement(Heading, null, /*#__PURE__*/react.createElement(AccordionItemHeadingWrapper, {
+    onClick: handleExpand,
+    onKeyUp: function onKeyUp(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        handleExpand(e);
+      }
+    }
+  }, /*#__PURE__*/react.createElement(AccordionItemButtonWrapper, null, /*#__PURE__*/react.createElement(Button, null, /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("p", {
     style: {
       fontWeight: "bold",
       marginBottom: 5
@@ -42047,11 +42349,22 @@ var RepeaterSchema = /*#__PURE__*/react.memo(function RepeaterSchema(_ref) {
       color: "#cc1818",
       boxShadow: "inset 0 0 0 1px #cc1818",
       marginLeft: "auto",
-      marginRight: 50
+      marginRight: 50,
+      fontWeight: 500
     },
     onClick: function onClick(e) {
       e.stopPropagation;
       arrayHelpers.remove(index);
+      setExpandAll(function (expands) {
+        return expands.filter(function (item) {
+          return item.key !== index;
+        }).map(function (item, key) {
+          return {
+            key: key,
+            open: false
+          };
+        });
+      });
     }
   }, SchemasManual_("Delete schema", "wp-seopress")), /*#__PURE__*/react.createElement("span", {
     className: "seopress-arrow",
@@ -42083,14 +42396,124 @@ var RepeaterSchema = /*#__PURE__*/react.memo(function RepeaterSchema(_ref) {
 });
 var DEFAULT_TYPE = "articles";
 
-var SchemasManualLayout = function SchemasManualLayout(_ref3) {
-  var mainBarRef = _ref3.mainBarRef;
+var FormSchemaManualLayout = function FormSchemaManualLayout(_ref3) {
+  var values = _ref3.values,
+      fields = _ref3.fields,
+      schemas = _ref3.schemas,
+      loading = _ref3.loading,
+      rest = SchemasManual_objectWithoutProperties(_ref3, SchemasManual_excluded2);
+
+  var _useState = (0,react.useState)(get_default()(values, "schemas", []).map(function (item, key) {
+    return {
+      key: key,
+      open: false
+    };
+  })),
+      _useState2 = SchemasManual_slicedToArray(_useState, 2),
+      expandAll = _useState2[0],
+      setExpandAll = _useState2[1];
+
+  var getSchemaDefault = function getSchemaDefault() {
+    var item = get_default()(fields, DEFAULT_TYPE, []).reduce(function (previous, current) {
+      return SchemasManual_objectSpread(SchemasManual_objectSpread({}, previous), {}, SchemasManual_defineProperty({}, current.key, get_default()(current, "value", "")));
+    }, {});
+
+    return SchemasManual_objectSpread(SchemasManual_objectSpread({}, item), {}, {
+      _seopress_pro_rich_snippets_type: DEFAULT_TYPE
+    });
+  };
+
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("div", {
+    className: "flex items-center"
+  }, /*#__PURE__*/react.createElement("div", {
+    style: {
+      marginLeft: "auto"
+    }
+  }, /*#__PURE__*/react.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      setExpandAll(function (expandAll) {
+        return expandAll.map(function (item) {
+          return SchemasManual_objectSpread(SchemasManual_objectSpread({}, item), {}, {
+            open: true
+          });
+        });
+      });
+    }
+  }, SchemasManual_("Expand", "wp-seopress")), " ", "/", " ", /*#__PURE__*/react.createElement("a", {
+    href: "#",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      setExpandAll(function (expandAll) {
+        return expandAll.map(function (item) {
+          return SchemasManual_objectSpread(SchemasManual_objectSpread({}, item), {}, {
+            open: false
+          });
+        });
+      });
+    }
+  }, SchemasManual_("Close", "wp-seopress")))), /*#__PURE__*/react.createElement(Form, null, /*#__PURE__*/react.createElement(Accordion, {
+    style: {
+      marginTop: 10
+    },
+    allowMultipleExpanded: true,
+    allowZeroExpanded: true
+  }, /*#__PURE__*/react.createElement(FieldArray, {
+    name: "schemas",
+    render: function render(arrayHelpers) {
+      return /*#__PURE__*/react.createElement(react.Fragment, null, values.schemas.map(function (schema, key) {
+        var fieldsSchema = get_default()(fields, schema._seopress_pro_rich_snippets_type, null);
+
+        if (isNil_default()(fieldsSchema)) {
+          return;
+        }
+
+        return /*#__PURE__*/react.createElement(react.Fragment, {
+          key: "schema_manual_".concat(key)
+        }, /*#__PURE__*/react.createElement(RepeaterSchema, SchemasManual_extends({
+          arrayHelpers: arrayHelpers,
+          fields: fieldsSchema,
+          schema: schema,
+          index: key,
+          schemasAvailable: schemas,
+          fieldsAvailable: fields,
+          expandAll: expandAll,
+          setExpandAll: setExpandAll
+        }, rest)));
+      }), /*#__PURE__*/react.createElement("div", {
+        className: "sp-fixed"
+      }, /*#__PURE__*/react.createElement(ui_Button, {
+        style: {
+          marginRight: 12
+        },
+        type: "button",
+        secondary: true,
+        onClick: function onClick(e) {
+          e.stopPropagation;
+          arrayHelpers.push(getSchemaDefault());
+          setExpandAll(function (expandAll) {
+            return [].concat(SchemasManual_toConsumableArray(expandAll), [{
+              key: expandAll.length,
+              open: false
+            }]);
+          });
+        }
+      }, SchemasManual_("Add a schema", "wp-seopress")), /*#__PURE__*/react.createElement(components_ButtonSubmit, {
+        loading: loading
+      }, SchemasManual_("Save", "wp-seopress"))));
+    }
+  }))));
+};
+
+var SchemasManualLayout = function SchemasManualLayout(_ref4) {
+  var mainBarRef = _ref4.mainBarRef;
   var postId = getCurrentPostId();
 
-  var _useState = (0,react.useState)(false),
-      _useState2 = SchemasManual_slicedToArray(_useState, 2),
-      loading = _useState2[0],
-      setLoading = _useState2[1];
+  var _useState3 = (0,react.useState)(false),
+      _useState4 = SchemasManual_slicedToArray(_useState3, 2),
+      loading = _useState4[0],
+      setLoading = _useState4[1];
 
   var _useContext = (0,react.useContext)(NotificationContext),
       actions = _useContext.actions;
@@ -42109,7 +42532,7 @@ var SchemasManualLayout = function SchemasManualLayout(_ref3) {
   });
 
   var handleOnSubmit = /*#__PURE__*/function () {
-    var _ref4 = SchemasManual_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(values) {
+    var _ref5 = SchemasManual_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(values) {
       var data;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -42134,24 +42557,13 @@ var SchemasManualLayout = function SchemasManualLayout(_ref3) {
     }));
 
     return function handleOnSubmit(_x) {
-      return _ref4.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }();
 
   var data = responseSchemas.data,
       fields = responseSchemas.fields,
       schemas = responseSchemas.schemas;
-
-  var getSchemaDefault = function getSchemaDefault() {
-    var item = get_default()(fields, DEFAULT_TYPE, []).reduce(function (previous, current) {
-      return SchemasManual_objectSpread(SchemasManual_objectSpread({}, previous), {}, SchemasManual_defineProperty({}, current.key, get_default()(current, "value", "")));
-    }, {});
-
-    return SchemasManual_objectSpread(SchemasManual_objectSpread({}, item), {}, {
-      _seopress_pro_rich_snippets_type: DEFAULT_TYPE
-    });
-  };
-
   return /*#__PURE__*/react.createElement("div", {
     ref: mainBarRef,
     tabIndex: "0"
@@ -42161,53 +42573,16 @@ var SchemasManualLayout = function SchemasManualLayout(_ref3) {
     initialValues: {
       schemas: isNil_default()(data) ? [] : data
     }
-  }, function (_ref5) {
-    var values = _ref5.values,
-        rest = SchemasManual_objectWithoutProperties(_ref5, SchemasManual_excluded2);
+  }, function (_ref6) {
+    var values = _ref6.values,
+        rest = SchemasManual_objectWithoutProperties(_ref6, _excluded3);
 
-    return /*#__PURE__*/react.createElement(Form, null, /*#__PURE__*/react.createElement(Accordion, {
-      style: {
-        marginTop: 10
-      },
-      allowMultipleExpanded: true,
-      allowZeroExpanded: true
-    }, /*#__PURE__*/react.createElement(FieldArray, {
-      name: "schemas",
-      render: function render(arrayHelpers) {
-        return /*#__PURE__*/react.createElement(react.Fragment, null, values.schemas.map(function (schema, key) {
-          var fieldsSchema = get_default()(fields, schema._seopress_pro_rich_snippets_type, null);
-
-          if (isNil_default()(fieldsSchema)) {
-            return;
-          }
-
-          return /*#__PURE__*/react.createElement(react.Fragment, {
-            key: "schema_manual_".concat(key)
-          }, /*#__PURE__*/react.createElement(RepeaterSchema, SchemasManual_extends({
-            arrayHelpers: arrayHelpers,
-            fields: fieldsSchema,
-            schema: schema,
-            index: key,
-            schemasAvailable: schemas,
-            fieldsAvailable: fields
-          }, rest)));
-        }), /*#__PURE__*/react.createElement("div", {
-          className: "sp-fixed"
-        }, /*#__PURE__*/react.createElement(ui_Button, {
-          style: {
-            marginRight: 12
-          },
-          type: "button",
-          secondary: true,
-          onClick: function onClick(e) {
-            e.stopPropagation;
-            arrayHelpers.push(getSchemaDefault());
-          }
-        }, SchemasManual_("Add a schema", "wp-seopress")), /*#__PURE__*/react.createElement(components_ButtonSubmit, {
-          loading: loading
-        }, SchemasManual_("Save", "wp-seopress"))));
-      }
-    })));
+    return /*#__PURE__*/react.createElement(FormSchemaManualLayout, SchemasManual_extends({
+      loading: loading,
+      values: values,
+      fields: fields,
+      schemas: schemas
+    }, rest));
   }));
 };
 
@@ -42561,7 +42936,7 @@ function GlobalStyle_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var METABOX_MODULE_NAME = "seopress-js-module-seo-metabox";
-var SCGlobalStyle = We(["&&&{.seopress-ui-datepicker{--primaryColor:#007cba;--paragraphColor:#757575;--fontSize:13px;--fontFamily:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif;--color:#757575;--colorDark:#1e1e1e;--colorAlert:#a00;--colorWarning:#ffba00;--colorSuccess:#4ab866;--colorLowAlert:#e39f48;--colorPre:#37864b;--colorIcon:#d7dade;--lineHeight:24px;--titleColor:#3c434a;--titleFontSize:20px;--titleFontWeight:normal;--titleMargin:10px 0;--backgroundPrimary:#007cba;--backgroundPrimaryHover:#006ba1;--backgroundSecondaryHover:#f0f0f0;--borderColor:#a7aaad;--borderColorLight:#dcdcde;--borderColorLight40:rgba(220,220,222,0.4);--borderColorCard:#e2e4e7;--borderColorTab:#c3c4c7;}.seopress-ui-datepicker{padding:0;margin:0;border-radius:0;background-color:#fff;border:1px solid var(--borderColorLight);border-top:none;box-shadow:0 3px 6px rgba(0,0,0,0.075);min-width:17em;width:auto !important;z-index:999999 !important;}body.wp-admin:not(.rtl) .seopress-ui-datepicker{margin-left:-1px;}body.wp-admin.rtl .seopress-ui-datepicker{margin-right:-1px;}.seopress-ui-datepicker *{padding:0;font-family:var(--fontFamily);border-radius:0;}.seopress-ui-datepicker table{font-size:--var(--fontSize);margin:0;border:none;border-collapse:collapse;}.seopress-ui-datepicker .ui-widget-header,.seopress-ui-datepicker .ui-datepicker-header{background-image:none;border:none;color:var(--primaryColor);font-weight:normal;}.seopress-ui-datepicker .ui-datepicker-header .ui-state-hover{background:transparent;border-color:transparent;cursor:pointer;}.seopress-ui-datepicker .ui-datepicker-title{margin:0;padding:10px 0;color:var(--colorDark);font-size:var(--fontSize);line-height:14px;text-align:center;font-weight:bold;}.seopress-ui-datepicker .ui-datepicker-prev,.seopress-ui-datepicker .ui-datepicker-next{position:relative;top:0;height:34px;width:34px;}.seopress-ui-datepicker .ui-state-hover.ui-datepicker-prev,.seopress-ui-datepicker .ui-state-hover.ui-datepicker-next{border:none;}.seopress-ui-datepicker .ui-datepicker-prev,.seopress-ui-datepicker .ui-datepicker-prev-hover{left:0;}.seopress-ui-datepicker .ui-datepicker-next,.seopress-ui-datepicker .ui-datepicker-next-hover{right:0;}.seopress-ui-datepicker .ui-datepicker-next span,.seopress-ui-datepicker .ui-datepicker-prev span{display:none;}.seopress-ui-datepicker .ui-datepicker-prev{float:left;}.seopress-ui-datepicker .ui-datepicker-next{float:right;}.seopress-ui-datepicker .ui-datepicker-prev:before,.seopress-ui-datepicker .ui-datepicker-next:before{font:normal 20px/34px \"dashicons\";padding-left:0;color:var(--primaryColor);speak:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;width:34px;height:34px;}.seopress-ui-datepicker .ui-datepicker-prev:before{content:\"\f341\";}.seopress-ui-datepicker .ui-datepicker-next:before{content:\"\f345\";}.seopress-ui-datepicker .ui-datepicker-prev-hover:before,.seopress-ui-datepicker .ui-datepicker-next-hover:before{opacity:0.7;}.seopress-ui-datepicker select.ui-datepicker-month,.seopress-ui-datepicker select.ui-datepicker-year{width:33%;}.seopress-ui-datepicker thead{color:#fff;font-weight:600;}.seopress-ui-datepicker th{padding:10px;}.seopress-ui-datepicker td{padding:0;border:1px solid var(--borderColorCard);}.seopress-ui-datepicker td.ui-datepicker-other-month{border:transparent;}.seopress-ui-datepicker tr:first-of-type td{border-top:1px solid #f0f0f0;}.seopress-ui-datepicker td.ui-datepicker-week-end{background-color:var(--borderColorCard);border:1px solid #f0f0f0;}.seopress-ui-datepicker td.ui-datepicker-today{background-color:var(--backgroundSecondaryHover);}.seopress-ui-datepicker td.ui-datepicker-current-day{background:#bbdd88;}.seopress-ui-datepicker td .ui-state-default{background:transparent;border:none;text-align:center;text-decoration:none;width:auto;display:block;padding:5px 10px;font-weight:normal;color:#444;}.seopress-ui-datepicker td.ui-state-disabled .ui-state-default{opacity:0.5;}.seopress-ui-datepicker thead{background:var(--backgroundPrimary);}.seopress-ui-datepicker td .ui-state-hover{background:var(--backgroundPrimary);color:#fff;}}body #", "{--primaryColor:#007cba;--paragraphColor:#757575;--fontSize:13px;--fontFamily:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif;--color:#757575;--colorP:#3c434a;--colorDark:#1e1e1e;--colorAlert:#a00;--colorWarning:#ffba00;--colorSuccess:#4ab866;--colorLowAlert:#e39f48;--colorPre:#37864b;--colorIcon:#d7dade;--lineHeight:24px;--titleColor:#3c434a;--titleFontSize:20px;--titleFontWeight:normal;--titleMargin:10px 0;--backgroundPrimary:#007cba;--backgroundPrimaryHover:#006ba1;--backgroundSecondaryHover:#f0f0f0;--borderColor:#a7aaad;--borderColorLight:#dcdcde;--borderColorLight40:rgba(220,220,222,0.4);--borderColorCard:#e2e4e7;--borderColorTab:#c3c4c7;--fontWeight:normal;.sp-tooltip{position:relative;margin-left:5px;display:inline-block;cursor:help;vertical-align:bottom;text-align:left;background:none;border:none;padding:0;.dashicons{color:var(--colorDark);}.sp-tooltiptext{visibility:hidden;position:absolute;z-index:999999999;width:350px;left:-20px;padding:20px;top:25px;font-weight:400;box-shadow:0 3px 30px rgb(25 30 35 / 10%);border:1px solid var(--borderColorLight40);background:#fff;word-break:break-word;text-transform:none;&::before{top:-8px;}&::after{border:8px solid #fff;top:-6px;}&::after{border-bottom-style:solid;border-left-color:transparent;border-right-color:transparent;border-top:none;margin-left:-10px;content:\"\";position:absolute;height:0;width:0;line-height:0;left:30px;}}&:hover .sp-tooltiptext,&:focus .sp-tooltiptext,&:active .sp-tooltiptext{visibility:visible;}.sp-tooltip-headings{font-size:18px;font-weight:600;margin-bottom:20px;display:block;}.sp-tooltip-desc{margin-bottom:20px;display:block;border-bottom:1px solid var(--borderColorLight40);padding-bottom:20px;font-size:var(--fontSize);line-height:1.5;}.sp-tooltip-code{font-family:Menlo,Monaco,Andale Mono,Courier New,monospace;display:block;word-break:break-all;color:var(--colorPre);font-size:11px;}}.flex{display:flex;}.inline-flex{display:inline-flex;}.flex-wrap{flex-wrap:wrap;}.items-center{align-items:center;}.justify-content{justify-content:space-evenly;}.mt-0{margin-top:0 !important;}.mt-1{margin-top:0.25rem !important;}.mt-2{margin-top:0.5rem !important;}.mt-3{margin-top:1rem !important;}.mt-4{margin-top:1.5rem !important;}.mt-5{margin-top:3rem !important;}.mt-auto{margin-top:auto !important;}.me-0{margin-right:0 !important;}.me-1{margin-right:0.25rem !important;}.me-2{margin-right:0.5rem !important;}.me-3{margin-right:1rem !important;}.me-4{margin-right:1.5rem !important;}.me-5{margin-right:3rem !important;}.me-auto{margin-right:auto !important;}.mb-0{margin-bottom:0 !important;}.mb-1{margin-bottom:0.25rem !important;}.mb-2{margin-bottom:0.5rem !important;}.mb-3{margin-bottom:1rem !important;}.mb-4{margin-bottom:1.5rem !important;}.mb-5{margin-bottom:3rem !important;}.mb-auto{margin-bottom:auto !important;}.ms-0{margin-left:0 !important;}.ms-1{margin-left:0.25rem !important;}.ms-2{margin-left:0.5rem !important;}.ms-3{margin-left:1rem !important;}.ms-4{margin-left:1.5rem !important;}.ms-5{margin-left:3rem !important;}.ms-auto{margin-left:auto !important;}.w-1\\/2{width:50%;}.w-1\\/5{width:20%;}.w-2\\/5{width:40%;}.w-3\\/5{width:60%;}.w-4\\/5{width:80%;}.w-1\\/4{width:25%;}.w-2\\/4{width:50%;}.w-3\\/4{width:75%;}.w-1\\/12{width:8.3%;}.w-2\\/12{width:16.6%;}.w-3\\/12{width:25%;}.w-4\\/12{width:33%;}.w-5\\/12{width:41.6%;}.w-6\\/12{width:50%;}.w-7\\/12{width:58.3%;}.w-8\\/12{width:66%;}.w-9\\/12{width:75%;}.w-10\\/12{width:83.3%;}.w-11\\/12{width:91.6%;}.w-full{width:100%;}.relative{position:relative;}.absolute{position:absolute;}.form-textarea{font-family:var(--fontFamily);padding:6px 8px;box-shadow:0 0 0 transparent;transition:box-shadow 0.1s linear;color:var(--colorP);border-radius:2px;border:1px solid var(--color);font-size:var(--fontSize);line-height:normal;appearance:none;background:none;}.form-textarea:focus,.form-textarea:active{border-color:var(--backgroundPrimary);box-shadow:0 0 0 1px var(--backgroundPrimary);outline:2px solid transparent;}.form-input-date{width:100%;font-family:var(--fontFamily);padding:6px 8px;margin:0;box-shadow:0 0 0 transparent;transition:box-shadow 0.1s linear;background:none;color:var(--colorP);border-radius:2px;border:1px solid var(--color);font-size:var(--fontSize);line-height:normal;appearance:none;&:focus,&:active{border-color:var(--backgroundPrimary);box-shadow:0 0 0 1px var(--backgroundPrimary);outline:2px solid transparent;}}@keyframes sp-fade-in-out{0%{opacity:0;bottom:0;visibility:hidden;}25%{opacity:1;bottom:40px;visibility:visible;}75%{opacity:1;visibility:visible;}100%{opacity:0;visibility:hidden;}}@keyframes sp-beacon-toggle{0%{opacity:0;bottom:-20px;visibility:hidden;}100%{opacity:1;bottom:0px;visibility:visible;}}font-size:var(--fontSize);font-family:var(--fontFamily);font-weight:var(--fontWeight);line-height:var(--lineHeight);-moz-osx-font-smoothing:auto;-webkit-font-smoothing:auto;color:var(--colorP);letter-spacing:inherit;input[type=\"checkbox\"]{font-family:var(--fontFamily);padding:6px 8px;box-shadow:0 0 0 transparent;transition:box-shadow 0.1s linear;border-radius:2px;border:1px solid var(--color);font-size:16px;line-height:normal;border:1px solid var(--colorDark);margin-right:12px;transition:none;border-radius:2px;background:#fff;color:var(--colorDark);clear:none;cursor:pointer;display:inline-block;line-height:0;margin:-1px 4px 0 0 !important;outline:0;padding:0 !important;text-align:center;vertical-align:top;width:20px;height:20px;-webkit-appearance:none;appearance:none;transition:0.1s border-color ease-in-out;}input[type=\"checkbox\"]:focus{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--primaryColor);outline:2px solid transparent;}input[type=\"checkbox\"]:checked::before{content:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e\");background:var(--primaryColor);margin:-1px;width:20px;height:20px;left:0;top:0;}h1,h2,h3,h4,h5,h6{display:block;font-weight:600;text-align:left;}h1:not(*):before,h1:before,h2:before,h3:before,h4:before,h5:before,h6:before,h1:after,h2:after,h3:after,h4:after,h5:after,h6:after{content:none;}p{font-family:var(--fontFamily);font-size:var(--fontSize);font-weight:var(--fontWeight);color:var(--colorP);line-height:1.5;margin:1em 0;}a{color:var(--primaryColor);text-decoration:underline;}ul{list-style:none;padding:0;margin:0;}a:hover{text-decoration:underline;}.description{display:block;font-size:12px;color:var(--color);margin:0.5em 0;}.description-alt{padding:1em 0;border-top:1px solid var(--borderColorLight);border-bottom:1px solid var(--borderColorLight);display:flex;}.description-alt svg{vertical-align:middle;align-self:center;fill:#f0b849;flex-shrink:0;margin-right:16px;}.sp-fixed{position:sticky;width:100%;left:0px;bottom:-21px;display:flex;background:#fff;border-top:1px solid var(--borderColorLight);margin-top:20px;padding:15px 0 5px 0;}.resizable{position:relative;}.resizable::after{content:\"\";transition:all 150ms linear;opacity:0;background:var(--backgroundPrimary);position:absolute;top:0;left:0;height:5px;width:100%;}.resizable:hover::after,.resizable:focus::after,.resizable:active::after{opacity:1;}.sp-seo-metabox{position:fixed;left:10%;bottom:0;z-index:100100;background-color:rgb(255,255,255);width:70%;height:400px;box-sizing:border-box;flex-shrink:0;box-shadow:rgb(0 0 0 / 5%) 0px 0px 0px 1px,rgb(0 0 0 / 15%) 0px 5px 30px 0px,rgb(0 0 0 / 5%) 0px 3px 3px 0px;border-radius:4px;border:none;animation-name:sp-beacon-toggle;animation-duration:200ms;animation-iteration-count:1;animation-fill-mode:forwards;max-height:calc(100% - 93px);}.sp-cursor-pointer{cursor:pointer;}@media only screen and (max-width:600px){.sp-seo-metabox{height:auto;overflow-y:auto;}.flex{flex-wrap:wrap;}[class^=\"w-\"]{width:100%;}}.seopress-notice{margin:5px 0 35px 0px;background:rgb(0 124 186 / 10%);border-left:4px solid var(--primaryColor);padding:8px 12px;position:static !important;top:0 !important;left:0 !important;&.is-warning{border-left-color:#f0b849;background:#fef8ee;}pre{background:none !important;}}.seopress-list{margin:0 !important;li::before{content:\"\" !important;}}}@keyframes anim-loading{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}.anim-loading-layout{animation-name:anim-loading-layout;animation-duration:1s;animation-iteration-count:infinite;animation-fill-mode:forwards;}@keyframes anim-loading-layout{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}.analysis-score{svg{display:inline-block;height:30px;width:30px;margin:0;border-radius:100%;position:relative;font-weight:600;shape-rendering:geometricprecision;font-size:.5rem;vertical-align:middle;margin-right:15px;circle{stroke-dashoffset:0;transition:stroke-dashoffset 1s linear;stroke:#ccc;stroke-width:2em;}}&.notgood #bar{stroke-dashoffset:565;stroke:var(--colorWarning);}&.good #bar{stroke-dashoffset:0;stroke:var(--colorSuccess);}}.dashicons{vertical-align:middle;}.sp-dashicons-ok,.sp-dashicons-not{color:#fff;background:var(--colorSuccess);border-radius:50px;margin-right:10px;}.sp-dashicons-not{background:var(--colorAlert);}.seopress-arrow::after{content:\"\f343\";font-family:\"Dashicons\";position:absolute;right:10px;top:calc(50% - 12px);fontSize:14px;}.sp-seo-metabox .accordion__button[aria-expanded=true] .seopress-arrow:after{content:\"\f347\";}.sp-google-preview{margin-left:10px;flex-grow:1;}@media only screen and (max-width:600px){.sp-google-preview{margin-left:0;}}.media-frame-title h1::after,.media-frame-title h1::before,.media-attachments-filter-heading::before,.media-sidebar h2::before{content:none;}.media-router .media-menu-item{text-transform:none;background:inherit;color:inherit;font-weight:normal;letter-spacing:inherit;}.media-modal .delete-attachment,.media-modal .trash-attachment,.media-modal .untrash-attachment{font-size:inherit;text-transform:none;}body.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox,body.block-editor-page.folded #seopress-js-module-seo-metabox .sp-seo-metabox,body.is-fullscreen-mode.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox{max-width:100%;width:100% !important;left:0px;box-shadow:none;border-right:1px solid var(--borderColorLight);", "}body.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox{max-width:calc(100% - 160px);left:160px;", "}body.block-editor-page.folded:not(.is-fullscreen-mode) #seopress-js-module-seo-metabox .sp-seo-metabox{left:36px;max-width:calc(100% - 36px);", "}@media only screen and (max-width:1400px){body:not(.wp-admin) #seopress-js-module-seo-metabox .sp-seo-metabox{width:100%;max-width:100%;min-width:100%;left:0;}}@media only screen and (max-width:782px){body.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox,body.block-editor-page.folded #seopress-js-module-seo-metabox .sp-seo-metabox,body.block-editor-page.auto-fold #seopress-js-module-seo-metabox .sp-seo-metabox,body.is-fullscreen-mode.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox,body.block-editor-page.folded:not(.is-fullscreen-mode) #seopress-js-module-seo-metabox .sp-seo-metabox{width:100%;max-width:100%;min-width:100%;left:0;}}"], METABOX_MODULE_NAME, function (_ref) {
+var SCGlobalStyle = We(["&&&{.seopress-ui-datepicker{--primaryColor:#007cba;--paragraphColor:#757575;--fontSize:13px;--fontFamily:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif;--color:#757575;--colorDark:#1e1e1e;--colorAlert:#a00;--colorWarning:#ffba00;--colorSuccess:#4ab866;--colorLowAlert:#e39f48;--colorPre:#37864b;--colorIcon:#d7dade;--lineHeight:24px;--titleColor:#3c434a;--titleFontSize:20px;--titleFontWeight:normal;--titleMargin:10px 0;--backgroundPrimary:#007cba;--backgroundPrimaryHover:#006ba1;--backgroundSecondaryHover:#f0f0f0;--borderColor:#a7aaad;--borderColorLight:#dcdcde;--borderColorLight40:rgba(220,220,222,0.4);--borderColorCard:#e2e4e7;--borderColorTab:#c3c4c7;}.seopress-ui-datepicker{padding:0;margin:0;border-radius:0;background-color:#fff;border:1px solid var(--borderColorLight);border-top:none;box-shadow:0 3px 6px rgba(0,0,0,0.075);min-width:17em;width:auto !important;z-index:999999 !important;}body.wp-admin:not(.rtl) .seopress-ui-datepicker{margin-left:-1px;}body.wp-admin.rtl .seopress-ui-datepicker{margin-right:-1px;}.seopress-ui-datepicker *{padding:0;font-family:var(--fontFamily);border-radius:0;}.seopress-ui-datepicker table{font-size:--var(--fontSize);margin:0;border:none;border-collapse:collapse;}.seopress-ui-datepicker .ui-widget-header,.seopress-ui-datepicker .ui-datepicker-header{background-image:none;border:none;color:var(--primaryColor);font-weight:normal;}.seopress-ui-datepicker .ui-datepicker-header .ui-state-hover{background:transparent;border-color:transparent;cursor:pointer;}.seopress-ui-datepicker .ui-datepicker-title{margin:0;padding:10px 0;color:var(--colorDark);font-size:var(--fontSize);line-height:14px;text-align:center;font-weight:bold;}.seopress-ui-datepicker .ui-datepicker-prev,.seopress-ui-datepicker .ui-datepicker-next{position:relative;top:0;height:34px;width:34px;}.seopress-ui-datepicker .ui-state-hover.ui-datepicker-prev,.seopress-ui-datepicker .ui-state-hover.ui-datepicker-next{border:none;}.seopress-ui-datepicker .ui-datepicker-prev,.seopress-ui-datepicker .ui-datepicker-prev-hover{left:0;}.seopress-ui-datepicker .ui-datepicker-next,.seopress-ui-datepicker .ui-datepicker-next-hover{right:0;}.seopress-ui-datepicker .ui-datepicker-next span,.seopress-ui-datepicker .ui-datepicker-prev span{display:none;}.seopress-ui-datepicker .ui-datepicker-prev{float:left;}.seopress-ui-datepicker .ui-datepicker-next{float:right;}.seopress-ui-datepicker .ui-datepicker-prev:before,.seopress-ui-datepicker .ui-datepicker-next:before{font:normal 20px/34px \"dashicons\";padding-left:0;color:var(--primaryColor);speak:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;width:34px;height:34px;}.seopress-ui-datepicker .ui-datepicker-prev:before{content:\"\f341\";}.seopress-ui-datepicker .ui-datepicker-next:before{content:\"\f345\";}.seopress-ui-datepicker .ui-datepicker-prev-hover:before,.seopress-ui-datepicker .ui-datepicker-next-hover:before{opacity:0.7;}.seopress-ui-datepicker select.ui-datepicker-month,.seopress-ui-datepicker select.ui-datepicker-year{width:33%;}.seopress-ui-datepicker thead{color:#fff;font-weight:600;}.seopress-ui-datepicker th{padding:10px;}.seopress-ui-datepicker td{padding:0;border:1px solid var(--borderColorCard);}.seopress-ui-datepicker td.ui-datepicker-other-month{border:transparent;}.seopress-ui-datepicker tr:first-of-type td{border-top:1px solid #f0f0f0;}.seopress-ui-datepicker td.ui-datepicker-week-end{background-color:var(--borderColorCard);border:1px solid #f0f0f0;}.seopress-ui-datepicker td.ui-datepicker-today{background-color:var(--backgroundSecondaryHover);}.seopress-ui-datepicker td.ui-datepicker-current-day{background:#bbdd88;}.seopress-ui-datepicker td .ui-state-default{background:transparent;border:none;text-align:center;text-decoration:none;width:auto;display:block;padding:5px 10px;font-weight:normal;color:#444;}.seopress-ui-datepicker td.ui-state-disabled .ui-state-default{opacity:0.5;}.seopress-ui-datepicker thead{background:var(--backgroundPrimary);}.seopress-ui-datepicker td .ui-state-hover{background:var(--backgroundPrimary);color:#fff;}}body #", "{--primaryColor:#007cba;--paragraphColor:#757575;--fontSize:13px;--fontFamily:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif;--color:#757575;--colorP:#3c434a;--colorDark:#1e1e1e;--colorAlert:#a00;--colorWarning:#ffba00;--colorSuccess:#4ab866;--colorLowAlert:#e39f48;--colorPre:#37864b;--colorIcon:#d7dade;--lineHeight:24px;--titleColor:#3c434a;--titleFontSize:20px;--titleFontWeight:normal;--titleMargin:10px 0;--backgroundPrimary:#007cba;--backgroundPrimaryHover:#006ba1;--backgroundSecondaryHover:#f0f0f0;--borderColor:#a7aaad;--borderColorLight:#dcdcde;--borderColorLight40:rgba(220,220,222,0.4);--borderColorCard:#e2e4e7;--borderColorTab:#c3c4c7;--fontWeight:normal;.sp-tooltip{position:relative;margin-left:5px;display:inline-block;cursor:help;vertical-align:bottom;text-align:left;background:none;border:none;padding:0;.dashicons{color:var(--colorDark);}.sp-tooltiptext{visibility:hidden;position:absolute;z-index:999999999;width:350px;left:-20px;padding:20px;top:25px;font-weight:400;box-shadow:0 3px 30px rgb(25 30 35 / 10%);border:1px solid var(--borderColorLight40);background:#fff;word-break:break-word;text-transform:none;&::before{top:-8px;}&::after{border:8px solid #fff;top:-6px;}&::after{border-bottom-style:solid;border-left-color:transparent;border-right-color:transparent;border-top:none;margin-left:-10px;content:\"\";position:absolute;height:0;width:0;line-height:0;left:30px;}}&:hover .sp-tooltiptext,&:focus .sp-tooltiptext,&:active .sp-tooltiptext{visibility:visible;}.sp-tooltip-headings{font-size:18px;font-weight:600;margin-bottom:20px;display:block;}.sp-tooltip-desc{margin-bottom:20px;display:block;border-bottom:1px solid var(--borderColorLight40);padding-bottom:20px;font-size:var(--fontSize);line-height:1.5;}.sp-tooltip-code{font-family:Menlo,Monaco,Andale Mono,Courier New,monospace;display:block;word-break:break-all;color:var(--colorPre);font-size:11px;}}.flex{display:flex;}.inline-flex{display:inline-flex;}.flex-wrap{flex-wrap:wrap;}.items-center{align-items:center;}.justify-content{justify-content:space-evenly;}.mt-0{margin-top:0 !important;}.mt-1{margin-top:0.25rem !important;}.mt-2{margin-top:0.5rem !important;}.mt-3{margin-top:1rem !important;}.mt-4{margin-top:1.5rem !important;}.mt-5{margin-top:3rem !important;}.mt-auto{margin-top:auto !important;}.me-0{margin-right:0 !important;}.me-1{margin-right:0.25rem !important;}.me-2{margin-right:0.5rem !important;}.me-3{margin-right:1rem !important;}.me-4{margin-right:1.5rem !important;}.me-5{margin-right:3rem !important;}.me-auto{margin-right:auto !important;}.mb-0{margin-bottom:0 !important;}.mb-1{margin-bottom:0.25rem !important;}.mb-2{margin-bottom:0.5rem !important;}.mb-3{margin-bottom:1rem !important;}.mb-4{margin-bottom:1.5rem !important;}.mb-5{margin-bottom:3rem !important;}.mb-auto{margin-bottom:auto !important;}.ms-0{margin-left:0 !important;}.ms-1{margin-left:0.25rem !important;}.ms-2{margin-left:0.5rem !important;}.ms-3{margin-left:1rem !important;}.ms-4{margin-left:1.5rem !important;}.ms-5{margin-left:3rem !important;}.ms-auto{margin-left:auto !important;}.w-1\\/2{width:50%;}.w-1\\/5{width:20%;}.w-2\\/5{width:40%;}.w-3\\/5{width:60%;}.w-4\\/5{width:80%;}.w-1\\/4{width:25%;}.w-2\\/4{width:50%;}.w-3\\/4{width:75%;}.w-1\\/12{width:8.3%;}.w-2\\/12{width:16.6%;}.w-3\\/12{width:25%;}.w-4\\/12{width:33%;}.w-5\\/12{width:41.6%;}.w-6\\/12{width:50%;}.w-7\\/12{width:58.3%;}.w-8\\/12{width:66%;}.w-9\\/12{width:75%;}.w-10\\/12{width:83.3%;}.w-11\\/12{width:91.6%;}.w-full{width:100%;}.relative{position:relative;}.absolute{position:absolute;}.form-textarea{font-family:var(--fontFamily);padding:6px 8px;box-shadow:0 0 0 transparent;transition:box-shadow 0.1s linear;color:var(--colorP);border-radius:2px;border:1px solid var(--color);font-size:var(--fontSize);line-height:normal;appearance:none;background:none;}.form-textarea:focus,.form-textarea:active{border-color:var(--backgroundPrimary);box-shadow:0 0 0 1px var(--backgroundPrimary);outline:2px solid transparent;}.seopress-textarea-high-size{height:100px;}.form-input-date{width:100%;font-family:var(--fontFamily);padding:6px 8px;margin:0;box-shadow:0 0 0 transparent;transition:box-shadow 0.1s linear;background:none;color:var(--colorP);border-radius:2px;border:1px solid var(--color);font-size:var(--fontSize);line-height:normal;appearance:none;&:focus,&:active{border-color:var(--backgroundPrimary);box-shadow:0 0 0 1px var(--backgroundPrimary);outline:2px solid transparent;}}@keyframes sp-fade-in-out{0%{opacity:0;bottom:0;visibility:hidden;}25%{opacity:1;bottom:40px;visibility:visible;}75%{opacity:1;visibility:visible;}100%{opacity:0;visibility:hidden;}}@keyframes sp-beacon-toggle{0%{opacity:0;bottom:-20px;visibility:hidden;}100%{opacity:1;bottom:0px;visibility:visible;}}font-size:var(--fontSize);font-family:var(--fontFamily);font-weight:var(--fontWeight);line-height:var(--lineHeight);-moz-osx-font-smoothing:auto;-webkit-font-smoothing:auto;color:var(--colorP);letter-spacing:inherit;input[type=\"checkbox\"]{font-family:var(--fontFamily);padding:6px 8px;box-shadow:0 0 0 transparent;transition:box-shadow 0.1s linear;border-radius:2px;border:1px solid var(--color);font-size:16px;line-height:normal;border:1px solid var(--colorDark);margin-right:12px;transition:none;border-radius:2px;background:#fff;color:var(--colorDark);clear:none;cursor:pointer;display:inline-block;line-height:0;margin:-1px 4px 0 0 !important;outline:0;padding:0 !important;text-align:center;vertical-align:top;width:20px;height:20px;-webkit-appearance:none;appearance:none;transition:0.1s border-color ease-in-out;}input[type=\"checkbox\"]:focus{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--primaryColor);outline:2px solid transparent;}input[type=\"checkbox\"]:checked::before{content:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e\");background:var(--primaryColor);margin:-1px;width:20px;height:20px;left:0;top:0;}h1,h2,h3,h4,h5,h6{display:block;font-weight:600;text-align:left;}h1:not(*):before,h1:before,h2:before,h3:before,h4:before,h5:before,h6:before,h1:after,h2:after,h3:after,h4:after,h5:after,h6:after{content:none;}p{font-family:var(--fontFamily);font-size:var(--fontSize);font-weight:var(--fontWeight);color:var(--colorP);line-height:1.5;margin:1em 0;}a{color:var(--primaryColor);text-decoration:underline;}ul{list-style:none;padding:0;margin:0;}a:hover{text-decoration:underline;}.description{display:block;font-size:12px;color:var(--color);margin:0.5em 0;}.description-alt{padding:1em 0;border-top:1px solid var(--borderColorLight);border-bottom:1px solid var(--borderColorLight);display:flex;}.description-alt svg{vertical-align:middle;align-self:center;fill:#f0b849;flex-shrink:0;margin-right:16px;}.sp-fixed{position:sticky;width:100%;left:0px;bottom:-21px;display:flex;background:#fff;border-top:1px solid var(--borderColorLight);margin-top:20px;padding:15px 0 5px 0;}.resizable{position:relative;}.resizable::after{content:\"\";transition:all 150ms linear;opacity:0;background:var(--backgroundPrimary);position:absolute;top:0;left:0;height:5px;width:100%;}.resizable:hover::after,.resizable:focus::after,.resizable:active::after{opacity:1;}.sp-seo-metabox{position:fixed;left:10%;bottom:0;z-index:100100;background-color:rgb(255,255,255);width:70%;height:400px;box-sizing:border-box;flex-shrink:0;box-shadow:rgb(0 0 0 / 5%) 0px 0px 0px 1px,rgb(0 0 0 / 15%) 0px 5px 30px 0px,rgb(0 0 0 / 5%) 0px 3px 3px 0px;border-radius:4px;border:none;animation-name:sp-beacon-toggle;animation-duration:200ms;animation-iteration-count:1;animation-fill-mode:forwards;max-height:calc(100% - 93px);}.sp-cursor-pointer{cursor:pointer;}@media only screen and (max-width:600px){.sp-seo-metabox{height:auto;overflow-y:auto;}.flex{flex-wrap:wrap;}[class^=\"w-\"]{width:100%;}}.seopress-notice{margin:5px 0 35px 0px;background:rgb(0 124 186 / 10%);border-left:4px solid var(--primaryColor);padding:8px 12px;position:static !important;top:0 !important;left:0 !important;&.is-warning{border-left-color:#f0b849;background:#fef8ee;}pre{background:none !important;}}.seopress-list{margin:0 !important;li::before{content:\"\" !important;}}}@keyframes anim-loading{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}.anim-loading-layout{animation-name:anim-loading-layout;animation-duration:1s;animation-iteration-count:infinite;animation-fill-mode:forwards;}@keyframes anim-loading-layout{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}.analysis-score{svg{display:inline-block;height:30px;width:30px;margin:0;border-radius:100%;position:relative;font-weight:600;shape-rendering:geometricprecision;font-size:.5rem;vertical-align:middle;margin-right:15px;circle{stroke-dashoffset:0;transition:stroke-dashoffset 1s linear;stroke:#ccc;stroke-width:2em;}}&.notgood #bar{stroke-dashoffset:101px;stroke:var(--colorWarning);}&.good #bar{stroke-dashoffset:0;stroke:var(--colorSuccess);}}.dashicons{vertical-align:middle;}.sp-dashicons-ok,.sp-dashicons-not{color:#fff;background:var(--colorSuccess);border-radius:50px;margin-right:10px;}.sp-dashicons-not{background:var(--colorAlert);}.seopress-arrow::after{content:\"\f343\";font-family:\"Dashicons\";position:absolute;right:10px;top:calc(50% - 12px);fontSize:14px;}.sp-seo-metabox .accordion__button[aria-expanded=true] .seopress-arrow:after{content:\"\f347\";}.sp-google-preview{margin-left:10px;flex-grow:1;}@media only screen and (max-width:600px){.sp-google-preview{margin-left:0;}}.media-frame-title h1::after,.media-frame-title h1::before,.media-attachments-filter-heading::before,.media-sidebar h2::before{content:none;}.media-router .media-menu-item{text-transform:none;background:inherit;color:inherit;font-weight:normal;letter-spacing:inherit;}.media-modal .delete-attachment,.media-modal .trash-attachment,.media-modal .untrash-attachment{font-size:inherit;text-transform:none;}body.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox,body.block-editor-page.folded #seopress-js-module-seo-metabox .sp-seo-metabox,body.is-fullscreen-mode.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox{max-width:100%;width:100% !important;left:0px;box-shadow:none;border-right:1px solid var(--borderColorLight);", "}body.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox{max-width:calc(100% - 160px);left:160px;", "}body.block-editor-page.folded:not(.is-fullscreen-mode) #seopress-js-module-seo-metabox .sp-seo-metabox{left:36px;max-width:calc(100% - 36px);", "}@media only screen and (max-width:1400px){body:not(.wp-admin) #seopress-js-module-seo-metabox .sp-seo-metabox{width:100%;max-width:100%;min-width:100%;left:0;}}@media only screen and (max-width:782px){body.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox,body.block-editor-page.folded #seopress-js-module-seo-metabox .sp-seo-metabox,body.block-editor-page.auto-fold #seopress-js-module-seo-metabox .sp-seo-metabox,body.is-fullscreen-mode.block-editor-page #seopress-js-module-seo-metabox .sp-seo-metabox,body.block-editor-page.folded:not(.is-fullscreen-mode) #seopress-js-module-seo-metabox .sp-seo-metabox{width:100%;max-width:100%;min-width:100%;left:0;}}"], METABOX_MODULE_NAME, function (_ref) {
   var isSidebarGutenbergOpened = _ref.isSidebarGutenbergOpened;
   return isSidebarGutenbergOpened && "\n            max-width: calc(100% - 280px);\n        ";
 }, function (_ref2) {

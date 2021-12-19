@@ -53,6 +53,7 @@ function print_section_info_google_analytics_features()
 
 function print_section_info_google_analytics_events()
 {
+    $docs = seopress_get_docs_links();
     ?>
 <div class="sp-section-header">
     <h2>
@@ -63,6 +64,12 @@ function print_section_info_google_analytics_events()
     <?php _e('Track events in Google Analytics.', 'wp-seopress'); ?>
 </p>
 
+<p class="seopress-help description">
+    <span class="dashicons dashicons-external"></span>
+    <a href="<?php echo $docs['analytics']['events']; ?>" target="_blank">
+        <?php _e('Learn how to track events with Google Analytics','wp-seopress'); ?>
+    </a>
+</p>
 <?php
 }
 

@@ -2,27 +2,6 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-/*
- * Global noindex from SEO, Titles settings
- * @since 4.0
- * @param string $feature
- * @return string 1 if true
- * @author Benjamin
- */
-if ( ! function_exists('seopress_global_noindex_option')) {
-    function seopress_global_noindex_option() {
-        $seopress_titles_noindex_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_noindex_option)) {
-            foreach ($seopress_titles_noindex_option as $key => $seopress_titles_noindex_value) {
-                $options[$key] = $seopress_titles_noindex_value;
-            }
-            if (isset($seopress_titles_noindex_option['seopress_titles_noindex'])) {
-                return $seopress_titles_noindex_option['seopress_titles_noindex'];
-            }
-        }
-    }
-}
-
 //Noindex alert?
 function seopress_advanced_appearance_adminbar_noindex_option() {
     $seopress_advanced_appearance_adminbar_noindex_option = get_option('seopress_advanced_option_name');

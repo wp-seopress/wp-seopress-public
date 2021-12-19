@@ -52,6 +52,7 @@ class Organization extends JsonSchemaValue implements GetJsonData {
         $data      = seopress_get_service('VariablesToString')->replaceDataToString($data, $variables);
 
         $type = seopress_get_service('SocialOption')->getSocialKnowledgeType();
+
         if ('Organization' === $type) {
             // Use "contactPoint"
             $schema = seopress_get_service('JsonSchemaGenerator')->getJsonFromSchema(ContactPoint::NAME, $context, ['remove_empty'=> true]);

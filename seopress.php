@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 5.2.0
+Version: 5.3.0
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -32,13 +32,24 @@ if ( ! function_exists('add_action')) {
     echo 'Please don&rsquo;t call the plugin directly. Thanks :)';
     exit;
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//CRON
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_cron() {
+    //CRON - Ping Google for XML Sitemaps
+    if ( ! wp_next_scheduled('seopress_xml_sitemaps_ping_cron')) {
+        wp_schedule_event(time(), 'daily', 'seopress_xml_sitemaps_ping_cron');
+    }
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Hooks activation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_activation() {
     add_option('seopress_activated', 'yes');
     flush_rewrite_rules(false);
+
+    seopress_cron();
+
     do_action('seopress_activation');
 }
 register_activation_hook(__FILE__, 'seopress_activation');
@@ -48,6 +59,10 @@ function seopress_deactivation() {
 
     delete_option('seopress_activated');
     flush_rewrite_rules(false);
+
+    //Remove our CRON
+    wp_clear_scheduled_hook('seopress_xml_sitemaps_ping_cron');
+
     do_action('seopress_deactivation');
 }
 register_deactivation_hook(__FILE__, 'seopress_deactivation');
@@ -55,7 +70,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '5.2.0');
+define('SEOPRESS_VERSION', '5.3.0');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -74,6 +89,7 @@ use SEOPress\Core\Kernel;
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
     require_once __DIR__ . '/seopress-functions.php';
+    require_once __DIR__ . '/inc/admin/cron.php';
 
     Kernel::execute([
         'file'      => __FILE__,
@@ -118,6 +134,10 @@ function seopress_titles_archive_titles_option() {
 //SEOPRESS INIT = Admin + Core + API + Translation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_init($hook) {
+    //CRON
+    seopress_cron();
+
+    //i18n
     load_plugin_textdomain('wp-seopress', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 
     global $pagenow;
@@ -204,18 +224,24 @@ function seopress_add_admin_options_scripts($hook) {
 
     //Toggle / Notices JS
     $_pages = [
-        'seopress-option'           => true,
-        'seopress-network-option'   => true,
-        'seopress-titles'           => true,
-        'seopress-xml-sitemap'      => true,
-        'seopress-social'           => true,
-        'seopress-google-analytics' => true,
-        'seopress-pro-page'         => true,
-        'seopress-advanced'         => true,
-        'seopress-import-export'    => true,
+        'seopress-option'               => true,
+        'seopress-network-option'       => true,
+        'seopress-titles'               => true,
+        'seopress-xml-sitemap'          => true,
+        'seopress-social'               => true,
+        'seopress-google-analytics'     => true,
+        'seopress-pro-page'             => true,
+        'seopress-advanced'             => true,
+        'seopress-import-export'        => true,
+        'seopress-bot-batch'            => true,
+        'seopress-license'              => true,
+        'seopress-insights'             => true,
+        'seopress-insights-rankings'    => true,
+        'seopress-insights-backlinks'   => true,
+        'seopress-insights-trends'      => true,
     ];
     if (isset($_pages[$_GET['page']])) {
-        wp_enqueue_script('seopress-toggle-ajax', plugins_url('assets/js/seopress-dashboard' . $prefix . '.js', __FILE__), ['jquery'], SEOPRESS_VERSION, true);
+        wp_enqueue_script('seopress-toggle-ajax', plugins_url('assets/js/seopress-dashboard' . $prefix . '.js', __FILE__), ['jquery', 'jquery-ui-sortable'], SEOPRESS_VERSION, true);
 
         //Features
         $seopress_toggle_features = [
@@ -224,6 +250,13 @@ function seopress_add_admin_options_scripts($hook) {
             'i18n'                     => __('has been successfully updated!', 'wp-seopress'),
         ];
         wp_localize_script('seopress-toggle-ajax', 'seopressAjaxToggleFeatures', $seopress_toggle_features);
+
+        //Drag and drop
+        $seopress_dnd_features = [
+            'seopress_nonce' => wp_create_nonce('seopress_dnd_features_nonce'),
+            'seopress_dnd_features' => admin_url('admin-ajax.php'),
+        ];
+        wp_localize_script('seopress-toggle-ajax', 'seopressAjaxDndFeatures', $seopress_dnd_features);
     }
     unset($_pages);
 
@@ -414,6 +447,10 @@ function seopress_admin_body_class($classes) {
         'seopress-pro-page'         => true,
         'seopress-bot-batch'        => true,
         'seopress-license'          => true,
+        'seopress-insights'             => true,
+        'seopress-insights-rankings'    => true,
+        'seopress-insights-backlinks'   => true,
+        'seopress-insights-trends'      => true,
     ];
     if (isset($_pages[$_GET['page']])) {
         $classes .= ' seopress-styles ';

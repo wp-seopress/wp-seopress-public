@@ -144,7 +144,8 @@ function seopress_metadata_export() {
 
         //Get post types
         $seopress_get_post_types = [];
-        foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+        $postTypes = seopress_get_service('WordPressData')->getPostTypes();
+        foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
             $seopress_get_post_types[] = $seopress_cpt_key;
         }
 

@@ -389,22 +389,26 @@ if ('' != seopress_advanced_appearance_title_col_option()
 || '' != seopress_advanced_appearance_score_col_option()) {
     function seopress_add_columns()
     {
-        if (isset(get_current_screen()->post_type)) {
-            $key = get_current_screen()->post_type;
-            if (null === seopress_titles_single_cpt_enable_option($key) && '' != $key) {
-                if (array_key_exists($key, seopress_get_post_types())) {
-                    add_filter('manage_' . $key . '_posts_columns', 'seopress_title_columns');
-                    add_action('manage_' . $key . '_posts_custom_column', 'seopress_title_display_column', 10, 2);
-                    if (is_plugin_active('easy-digital-downloads/easy-digital-downloads.php')) {
-                        add_filter('manage_edit-' . $key . '_columns', 'seopress_title_columns');
-                    }
+        if (!isset(get_current_screen()->post_type)) {
+            return;
+        }
+
+        $key = get_current_screen()->post_type;
+        if (null === seopress_titles_single_cpt_enable_option($key) && '' != $key) {
+            $postTypes = seopress_get_service('WordPressData')->getPostTypes();
+            if (array_key_exists($key, $postTypes)) {
+                add_filter('manage_' . $key . '_posts_columns', 'seopress_title_columns');
+                add_action('manage_' . $key . '_posts_custom_column', 'seopress_title_display_column', 10, 2);
+                if (is_plugin_active('easy-digital-downloads/easy-digital-downloads.php')) {
+                    add_filter('manage_edit-' . $key . '_columns', 'seopress_title_columns');
                 }
             }
         }
     }
 
+    $postTypes = seopress_get_service('WordPressData')->getPostTypes();
     //Sortable columns
-    foreach (seopress_get_post_types() as $key => $value) {
+    foreach ($postTypes as $key => $value) {
         add_filter('manage_edit-' . $key . '_sortable_columns', 'seopress_admin_sortable_columns');
     }
 
@@ -501,9 +505,11 @@ if ('' != seopress_advanced_appearance_genesis_seo_menu_option()) {
     add_action('init', 'seopress_advanced_appearance_genesis_seo_menu_hook', 999);
 }
 
+$postTypes = seopress_get_service('WordPressData')->getPostTypes();
+
 //Bulk actions
 //noindex
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_noindex');
 }
 foreach (seopress_get_taxonomies() as $key => $value) {
@@ -521,7 +527,7 @@ function seopress_bulk_actions_noindex($bulk_actions)
     return $bulk_actions;
 }
 
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_noindex_handler', 10, 3);
 }
 foreach (seopress_get_taxonomies() as $key => $value) {
@@ -562,8 +568,10 @@ function seopress_bulk_action_noindex_admin_notice()
     }
 }
 
+
+$postTypes = seopress_get_service('WordPressData')->getPostTypes();
 //index
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_index');
 }
 foreach (seopress_get_taxonomies() as $key => $value) {
@@ -580,7 +588,7 @@ function seopress_bulk_actions_index($bulk_actions)
     return $bulk_actions;
 }
 
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_index_handler', 10, 3);
 }
 foreach (seopress_get_taxonomies() as $key => $value) {
@@ -622,7 +630,7 @@ function seopress_bulk_action_index_admin_notice()
 }
 
 //nofollow
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_nofollow');
 }
 foreach (seopress_get_taxonomies() as $key => $value) {
@@ -638,7 +646,7 @@ function seopress_bulk_actions_nofollow($bulk_actions)
 
     return $bulk_actions;
 }
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_nofollow_handler', 10, 3);
 }
 foreach (seopress_get_taxonomies() as $key => $value) {
@@ -680,7 +688,7 @@ function seopress_bulk_action_nofollow_admin_notice()
 }
 
 //follow
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_follow');
 }
 foreach (seopress_get_taxonomies() as $key => $value) {
@@ -697,7 +705,7 @@ function seopress_bulk_actions_follow($bulk_actions)
     return $bulk_actions;
 }
 
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_follow_handler', 10, 3);
 }
 foreach (seopress_get_taxonomies() as $key => $value) {
@@ -739,7 +747,7 @@ function seopress_bulk_action_follow_admin_notice()
 }
 
 //enable 301
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_redirect_enable');
 }
 
@@ -749,7 +757,7 @@ function seopress_bulk_actions_redirect_enable($bulk_actions)
 
     return $bulk_actions;
 }
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_redirect_enable_handler', 10, 3);
 }
 
@@ -784,7 +792,7 @@ function seopress_bulk_action_redirect_enable_admin_notice()
 }
 
 //disable 301
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_redirect_disable');
 }
 
@@ -794,7 +802,7 @@ function seopress_bulk_actions_redirect_disable($bulk_actions)
 
     return $bulk_actions;
 }
-foreach (seopress_get_post_types() as $key => $value) {
+foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_redirect_disable_handler', 10, 3);
 }
 

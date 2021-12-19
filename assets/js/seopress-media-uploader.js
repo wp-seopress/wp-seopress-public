@@ -26,6 +26,8 @@ jQuery(document).ready(function ($) {
         "#seopress_social_knowledge_img",
         "#seopress_social_twitter_img",
         "#seopress_social_fb_img",
+        ".seopress_social_fb_img",
+        ".seopress_social_twitter_img"
     ];
 
     array.forEach(function (item) {
@@ -51,13 +53,13 @@ jQuery(document).ready(function ($) {
                     .toJSON();
                 $(item + "_meta").val(attachment.url);
                 if (
-                    item == "#seopress_social_fb_img" &&
+                    (item == "#seopress_social_fb_img" || item == ".seopress_social_fb_img") &&
                     typeof sp_social_img != "undefined"
                 ) {
                     sp_social_img("fb");
                 }
                 if (
-                    item == "#seopress_social_twitter_img" &&
+                    (item == "#seopress_social_twitter_img" || item == ".seopress_social_twitter_img") &&
                     typeof sp_social_img != "undefined"
                 ) {
                     sp_social_img("twitter");

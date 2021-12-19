@@ -33,6 +33,10 @@ function print_section_info_xml_sitemap_general()
     <p>
         <?php _e('The XML sitemap is an <strong>exploration aid</strong>. Not having a sitemap will absolutely <strong>NOT prevent engines from indexing your content</strong>. For this, opt for meta robots.', 'wp-seopress'); ?>
     </p>
+
+    <p>
+        <?php _e('This is the URL of your index sitemaps to submit to search engines:','wp-seopress'); ?>
+        <pre><?php echo get_option('home'); ?>/sitemaps.xml</pre></p>
 </div>
 
 <p>
@@ -85,6 +89,10 @@ rewrite ^.*/sitemaps/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?seopress_cpt=$1&s
     <a href="<?php echo $docs['sitemaps']['error']['html']; ?>"
         target="_blank">
         <?php _e('HTML error? Exclude XML and XSL from caching plugins!', 'wp-seopress'); ?></a>
+    <span class="dashicons dashicons-external"></span>
+    <a href="<?php echo array_shift($docs['get_started']['sitemaps']); ?>"
+        target="_blank">
+        <?php _e('Add your XML sitemaps to Google Search Console (video)', 'wp-seopress'); ?></a>
 </p>
 
 <p>

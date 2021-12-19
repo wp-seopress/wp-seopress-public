@@ -31,6 +31,7 @@ function seopress_export_settings() {
     $settings['seopress_toggle']                                = get_option('seopress_toggle');
     $settings['seopress_google_analytics_lock_option_name']     = get_option('seopress_google_analytics_lock_option_name');
     $settings['seopress_tools_option_name']                     = get_option('seopress_tools_option_name');
+    $settings['seopress_dashboard_option_name']                 = get_option('seopress_dashboard_option_name');
 
     ignore_user_abort(true);
     nocache_headers();
@@ -188,6 +189,18 @@ function seopress_import_redirections_settings() {
             $cats = array_unique($cats);
         }
 
+        $regex_enable = '';
+        //regex enabled
+        $csv_line[7]= strtolower($csv_line[7]);
+        if ('yes' === $csv_line[3]) {
+            $regex_enable = 'yes';
+        }
+        if ( ! empty($csv_line[7])) {
+            $cats = array_values(explode(',', $csv_line[6]));
+            $cats = array_map('intval', $cats);
+            $cats = array_unique($cats);
+        }
+
         if ( ! empty($csv_line[0])) {
             $count = null;
             if ( ! empty($csv_line[5])) {
@@ -201,6 +214,7 @@ function seopress_import_redirections_settings() {
                         '_seopress_redirections_value'      => rawurldecode($csv_line[1]),
                         '_seopress_redirections_type'       => $csv_type_redirects[2],
                         '_seopress_redirections_enabled'    => $csv_type_redirects[3],
+                        '_seopress_redirections_enabled_regex'  => $regex_enable,
                         '_seopress_redirections_param'      => $csv_type_redirects[4],
                         'seopress_404_count'                => $count,
                     ],
@@ -257,6 +271,11 @@ function seopress_import_yoast_redirections() {
         //Fifth column: redirections query param
         $csv_type_redirects[4] = 'exact_match';
 
+        $regex_enable = '';
+        if(isset($_value[3]) && $_value[3] == 'regex') {
+            $regex_enable = 'yes';
+        }
+
         if ( ! empty($csv_line[0])) {
             $csv_line[0] = substr($csv_line[0], 1);
             if ( ! empty($csv_line[1])) {
@@ -274,6 +293,7 @@ function seopress_import_yoast_redirections() {
                     '_seopress_redirections_value'          => urldecode($csv_line[1]),
                     '_seopress_redirections_type'           => $csv_type_redirects[2],
                     '_seopress_redirections_enabled'        => $csv_type_redirects[3],
+                    '_seopress_redirections_enabled_regex'        => $regex_enable,
                     '_seopress_redirections_param'          => $csv_type_redirects[4],
                 ],
             ]);
@@ -340,6 +360,8 @@ function seopress_export_redirections_settings() {
             $redirects_html .= get_post_meta(get_the_ID(), 'seopress_404_count', true);
             $redirects_html .= ';';
             $redirects_html .= $redirect_categories;
+            $redirects_html .= ';';
+            $redirects_html .= get_post_meta(get_the_ID(), '_seopress_redirections_enabled_regex', true);
             $redirects_html .= "\n";
         }
         wp_reset_postdata();
@@ -474,6 +496,10 @@ function seopress_import_redirections_plugin_settings() {
         if ( ! empty(true == $redirect_value['enabled'])) {
             $enabled ='yes';
         }
+        $regex_enable ='';
+        if ( ! empty($redirect_value['regex'])) {
+            $regex_enable ='yes';
+        }
 
         wp_insert_post([
             'post_title'  => ltrim(urldecode($redirect_value['url']), '/'),
@@ -483,6 +509,7 @@ function seopress_import_redirections_plugin_settings() {
                 '_seopress_redirections_value'   => urldecode($redirect_value['action_data']['url']),
                 '_seopress_redirections_type'    => $type,
                 '_seopress_redirections_enabled' => $enabled,
+                '_seopress_redirections_enabled_regex' => $regex_enable,
                 '_seopress_redirections_param'   => $param,
             ],
         ]);

@@ -25,7 +25,9 @@ jQuery(document).ready(function ($) {
         "notice-go-pro",
         "notice-noindex",
         "notice-tasks",
-        "notice-insights"
+        "notice-insights",
+        "notice-robots-txt",
+        "notice-robots-txt-valid",
     ]
     notices.forEach(function (item) {
         $('#' + item).on('click', function () {
@@ -129,6 +131,19 @@ jQuery(document).ready(function ($) {
             },
         });
     });
+    $('#seopress_tools').on('click', function () {
+        $('#notice-insights-alert').toggleClass('is-active');
+        $('#seopress_tools').attr('data-toggle', $('#seopress_tools').attr('data-toggle') == '1' ? '0' : '1');
+        $.ajax({
+            method: 'POST',
+            url: seopressAjaxDisplay.seopress_display,
+            data: {
+                action: 'seopress_display',
+                tools_center: $('#seopress_tools').attr('data-toggle'),
+                _ajax_nonce: seopressAjaxDisplay.seopress_nonce,
+            },
+        });
+    });
     $('#notifications_center').on('click', function () {
         $('#seopress-notifications-center').toggleClass('is-active');
         $('#notifications_center').attr('data-toggle', $('#notifications_center').attr('data-toggle') == '1' ? '0' : '1');
@@ -210,5 +225,32 @@ jQuery(document).ready(function ($) {
         $(this).attr("disabled", "disabled");
         $('#spinner-reverse.spinner').css("visibility", "visible");
         $('#spinner-reverse.spinner').css("float", "none");
+    });
+
+    //Drag and drop for cards
+    $(".seopress-dashboard-columns .seopress-dashboard-column:last-child").sortable({
+        items: ".seopress-card",
+        placeholder: "sp-dashboard-card-highlight",
+        cancel: ".seopress-intro, .seopress-card-popover",
+        handle: ".seopress-card-title",
+        opacity: 0.9,
+        forcePlaceholderSize: true,
+        update: function (e) {
+            const item = jQuery(e.target);
+
+            var postData = item.sortable("toArray", {
+                attribute: "id",
+            });
+
+            $.ajax({
+                method: "POST",
+                url: seopressAjaxDndFeatures.seopress_dnd_features,
+                data: {
+                    action: "seopress_dnd_features",
+                    order: postData,
+                    _ajax_nonce: seopressAjaxDndFeatures.seopress_nonce,
+                },
+            });
+        },
     });
 });

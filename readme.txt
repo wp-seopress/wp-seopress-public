@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge grap
 Requires at least: 4.7+
 Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 5.2.0
+Stable tag: 5.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -335,62 +335,57 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 5.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-2/" target="_blank">Read the blog post update</a> =
-* NEW Universal SEO metabox now with schemas
-* NEW Performance improvement and code factorization
-* NEW Import CSV metadata now supports comma and semi-colon as delimiter
-* NEW Breadcrumbs: add new options to translate "Page" and "Attachments" from SEO, PRO, Breadcrumbs
-* NEW Add "nofollow noopener noreferrer" rel attributes to the comments form link (SEO, Advanced, Advanced tab)
-* NEW %%archive_date_month_name%% dynamic variable in meta to output month name in archive page
-* NEW 'seopress_get_tag_site_url_value' hook to filter site_url tag in meta / schema (https://www.seopress.org/support/hooks/filter-site_url-tag/)
-* NEW 'seopress_sitemaps_html_cpt_name' hook to filter custom post type name in HTML sitemap (https://www.seopress.org/support/hooks/filter-custom-post-type-name-in-html-sitemap/)
-* NEW 'seopress_rss_dyn_vars' and 'seopress_rss_dyn_vars_value' hooks to filter dynamic variables in RSS feeds (https://www.seopress.org/support/hooks/add-your-custom-global-dynamic-variables-for-rss-feeds/)
-* INFO Display Blog page for date archive in Breadcrumbs
-* INFO Add new HTML class to wrap post and product categories in HTML sitemap
-* INFO Remove author meta in source code
-* INFO Remove WooCommerce products with visibility "hidden" from XML sitemaps
+= 5.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-3/" target="_blank">Read the blog post update</a> =
+* NEW Regular expressions for redirects (PRO)
+* NEW Autocomplete for Redirections (PRO)
+* NEW Conditions for Redirections: if user logged in, logged out, both (PRO)
+* NEW Page Speed Insights redesign, now with Core Web Vitals score, Desktop + Mobile scores, Save as PDF, CRON (PRO)
+* NEW Exclude WPML hidden languages from XML sitemaps (post, page, post type and term taxonomy)
+* NEW Exclude Polylang PRO hidden languages from XML sitemaps (post, page, post type and term taxonomy)
+* NEW Accordion for SEOPress FAQ block (PRO)
+* NEW Ping Google and Bing daily automatically for XML Sitemaps
+* NEW Drag and drop for SEO dashboard cards
+* NEW Notification if a physical robots.txt file already exists
+* NEW Notification if your site has disallow all in robots.txt
+* NEW Autodetect WooCommerce fields for automatic product schema on creation
+* NEW 'seopress_sitemaps_xsl_css' hook to filter XML sitemaps CSS (props @edwinsiebel - https://www.seopress.org/support/hooks/filter-css-of-xsl-sitemaps/)
+* NEW 'seopress_sitemaps_xsl' hook to filter XSL sitemaps (props @edwinsiebel - https://www.seopress.org/support/hooks/filter-xsl-sitemap/)
+* NEW 'seopress_before_redirect' action hook to run custom code before the redirection (https://www.seopress.org/support/hooks/add-action-before-redirect/)
+* NEW 'seopress_sitemaps_single_url' hook to filter each URL fron single xml sitemaps (https://www.seopress.org/support/hooks/filter-the-urls-of-each-item-of-a-singular-xml-sitemap/)
+* NEW 'seopress_sitemaps_term_single_url' hook to filter each URL fron term xml sitemaps (https://www.seopress.org/support/hooks/filter-the-urls-of-each-item-of-a-taxonomy-xml-sitemap/)
+* NEW 'seopress_sitemaps_xml_ping_url' hook to filter xml sitemaps URL sent via the ping (https://www.seopress.org/support/hooks/filter-index-xml-sitemap-url-sent-to-google/)
+* NEW 'seopress_sitemaps_xml_ping_args' hook to filter xml sitemaps args for the ping (https://www.seopress.org/support/hooks/filter-the-arguments-of-the-ping-sitemap-query-for-google/)
+* NEW 'seopress_faq_block_inline_css' hook to filter inline CSS for FAQ block (https://www.seopress.org/support/hooks/disable-seopress-faq-block-inline-css/)
+* NEW 'seopress_faq_block_html' hook to filter the HTML of our FAQ block (https://www.seopress.org/support/hooks/filter-block-faq-html-block-editor/)
+* INFO Redirect sitemap_index.xml, wp-sitemap.xml to sitemaps.xml to avoid resubmit sitemaps in Google Search Console
+* INFO Author subtype for schemas will now use the website field first, else the author archive URL
+* INFO Add GTIN12 to product global Identifiers type (PRO)
+* INFO Remove nofollow links from comments area to content analysis
 * INFO Update updater
-* INFO Author URL missing for automatic schemas
-* INFO Check user capabilities before displaying automatic redirection suggestions notices
-* INFO Add image field for HowToStep (How-to schema)
-* INFO Remove Action Scheduler
-* FIX Remove /product-category/ with paginated archive pages (flush your permalinks if you're using this option)
-* FIX RSS feeds: display content before / after each post (excerpt of full text)
-* FIX Wrong quick tags for global meta description template
-* FIX Export Redirections to CSV file
-* FIX Missing tooltips from SEO universal metabox
-* FIX Green circle of the SEO score in the list of posts
-* FIX JS Arrow state for each analysis
-* FIX Warning Opening Hours (Local Business schema)
-* FIX Warning in Schemas post type list if a taxonomy no longer exists
-* FIX Page Speed full report button link
-* FIX WPML / Polylang config XML file
-* FIX White label for SEO dashboard and Wizard
-* FIX CSS conflicts with default WP theme for Universal SEO metabox
-* FIX Trying to get property 'name' / 'term_id' of non-object in HTML sitemap
-* FIX Uncaught TypeError: array_sum() in /wp-seopress-pro/inc/admin/dashboard-google-analytics.php:224
-* FIX Warning: Undefined array key "ui_theme" /inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php on line 37
-* FIX WPML: Fatal error when adding 'og:locale:alternate' link to non-existent post (thanks @vdwijngaert for reporting this)
-* FIX Redirections: Filter by Count
-= 5.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-1/" target="_blank">Read the blog post update</a> =
-* NEW Internal linking suggestions 🎉🎉🎉 (PRO)
-* NEW Video and News sitemaps added to universal SEO metabox
-* NEW 'seopress_automatic_redirect_cpt' hook to filter post types to watch for automatic redirection suggestions (https://www.seopress.org/support/hooks/filter-post-types-to-watch-for-automatic-redirections/)
-* NEW 'seopress_beacon_svg' hook to filter beacon SVG icon for universal SEO metabox
-* INFO Update French language
-* INFO Add author URL in schema
-* FIX Broken link checker (go to SEO, BOT, Settings and select post types to scan)
-* FIX Compatibility issue with Slider PRO
-* FIX FAQ block: duplicated image and incorrect alt text attribute
-* FIX Fatal error is_plugin_active in rare cases
-* FIX Local business schema manual type (automatic)
+* INFO Edit your social images (Facebook and Twitter) by clicking on the preview
+* INFO Display 100 entries in Redirections post type
+* INFO Knowledge Graph is now outputted on homepage only
+* INFO Improve hyphenation in Google Snippet Preview
+* INFO Disabling RSS feeds will redirect them to homepage if requested
+* FIX Exclude custom canonical URLs from xml sitemaps
+* FIX Product price amount OG tag
+* FIX Temporary fix to remove Add to cart GA event for archive page / related products if Elementor PRO is enabled to prevent a conflict
+* FIX Duplicated queries seopress_get_page_by_title()
+* FIX Publisher logo
+* FIX News xml sitemap with "&" in Publication Name field
+* FIX Documentation panel for Insights
+* FIX Author URL in schema (automatic and manual)
+* FIX Disable Orgnization / Person schemas from Knowledge Graph if Social feature is set to OFF
+* FIX "seopress_rich_snippets_publisher_logo" missing for wpml-config.xml file (WPML and Polylang users)
+* FIX Publisher logo Width and Height (it might be necessary to reupload it from SEO, PRO, Structured Data Types)
+* FIX Custom Shop page breadcrumbs
+* FIX Help link for Google Ads option
+* FIX Universal SEO metabox error with singular WC product in frontend
+* FIX Google Analytics dashboard widget configuration settings
+* FIX Conflict with Thrive builder
+* FIX Conflit with Remove /category/ in URL with Events Calendar plugin
+* FIX Some CSS
+* FIX CRON tasks
 * FIX i18n
-* FIX Missing information from Social Preview
-* FIX CSS on UI
-* FIX Conflict with Post Types Order plugin
-* FIX Global social image buttons for each post types
-* FIX Use published date in xml sitemaps if modified_date is older
-* FIX Universal SEO metabox with Block Editor
-* FIX Words counter / keyword density with Oxygen Builder
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

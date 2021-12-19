@@ -102,7 +102,7 @@ class SocialSettings implements ExecuteHooks {
 
         $data = [];
         foreach ($metas as $key => $value) {
-            if ($value['use_default']) {
+            if (isset($value['use_default']) && $value['use_default']) {
                 $data[] = array_merge($value, [
                     'can_modify' => false,
                     'value'      => $value['default'],

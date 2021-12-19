@@ -60,34 +60,6 @@ if ( ! function_exists('array_key_last')) {
  * @return (array) $wp_post_types
  */
 function seopress_get_post_types() {
-    if ( ! function_exists('seopress_get_service')) {
-        global $wp_post_types;
-
-        $args = [
-            'show_ui' => true,
-            'public'  => true,
-        ];
-
-        $output   = 'objects'; // names or objects, note names is the default
-        $operator = 'and'; // 'and' or 'or'
-
-        $post_types = get_post_types($args, $output, $operator);
-        unset(
-            $post_types['attachment'],
-            $post_types['seopress_rankings'],
-            $post_types['seopress_backlinks'],
-            $post_types['seopress_404'],
-            $post_types['elementor_library'],
-            $post_types['customer_discount'],
-            $post_types['cuar_private_file'],
-            $post_types['cuar_private_page'],
-            $post_types['ct_template']
-        );
-        $post_types = apply_filters('seopress_post_types', $post_types);
-
-        return $post_types;
-    }
-
     return seopress_get_service('WordPressData')->getPostTypes();
 }
 
@@ -309,7 +281,7 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
     $list             = '';
 
     if ('cpt' === $type) {
-        $templates   = seopress_get_post_types();
+        $templates   = $postTypes = seopress_get_service('WordPressData')->getPostTypes();
         $notice_i18n = __('Custom Post Types', 'wp-seopress');
     }
     if ('tax' === $type) {
@@ -762,4 +734,39 @@ function seopress_btn_secondary_classes() {
     }
 
     return $btn_classes_secondary;
+}
+
+/*
+ * Global noindex from SEO, Titles settings
+ * @since 4.0
+ * @param string $feature
+ * @return string 1 if true
+ * @author Benjamin
+ */
+if ( ! function_exists('seopress_global_noindex_option')) {
+    function seopress_global_noindex_option() {
+        $seopress_titles_noindex_option = get_option('seopress_titles_option_name');
+        if ( ! empty($seopress_titles_noindex_option)) {
+            foreach ($seopress_titles_noindex_option as $key => $seopress_titles_noindex_value) {
+                $options[$key] = $seopress_titles_noindex_value;
+            }
+            if (isset($seopress_titles_noindex_option['seopress_titles_noindex'])) {
+                return $seopress_titles_noindex_option['seopress_titles_noindex'];
+            }
+        }
+    }
+}
+
+/*
+ * Disable Add to cart GA tracking code on archive page / related products for Elementor PRO to avoid a JS conflict
+ * @since 5.3
+ * @return empty string
+ * @author Benjamin
+ */
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if (is_plugin_active('elementor-pro/elementor-pro.php')) {
+    add_filter('seopress_gtag_ec_add_to_cart_archive_ev', 'sp_elementor_gtag_ec_add_to_cart_archive_ev');
+    function sp_elementor_gtag_ec_add_to_cart_archive_ev($js) {
+        return '';
+    }
 }

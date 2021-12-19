@@ -485,7 +485,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
 add_action('wp', 'seopress_load_redirections_options', 0);
 function seopress_load_redirections_options()
 {
-    if (function_exists('is_plugin_active') && is_plugin_active('thrive-visual-editor/thrive-visual-editor.php')) {
+    if (function_exists('is_plugin_active') && is_plugin_active('thrive-visual-editor/thrive-visual-editor.php') && is_admin()) {
         return;
     }
     if (! is_admin()) {
@@ -604,7 +604,6 @@ if ('1' == seopress_get_toggle_option('advanced')) {
     function seopress_titles_primary_cat_hook($cats_0, $cats, $post)
     {
         $primary_cat	= null;
-        global $post;
 
         if ($post) {
             $_seopress_robots_primary_cat = get_post_meta($post->ID, '_seopress_robots_primary_cat', true);
@@ -744,6 +743,9 @@ if ('1' == seopress_get_toggle_option('advanced')) {
         add_action('template_redirect', 'seopress_category_redirect', 1);
         function seopress_category_redirect()
         {
+            if (!is_category()) {
+                return;
+            }
             global $wp;
 
             if (seopress_advanced_advanced_trailingslash_option()) {

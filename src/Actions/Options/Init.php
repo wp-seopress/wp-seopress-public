@@ -198,8 +198,9 @@ class Init implements ActivationHook
         ];
 
         //Post Types
-        if (function_exists('seopress_get_post_types') && ! empty(seopress_get_post_types())) {
-            foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+        $postTypes = seopress_get_service('WordPressData')->getPostTypes();
+        if ( ! empty($postTypes)) {
+            foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
                 $titleOptions['seopress_titles_single_titles'][$seopress_cpt_key] = [
                     'title' => sprintf(
                         '%s %s %s',
@@ -236,8 +237,9 @@ class Init implements ActivationHook
         }
 
         //Archives
-        if (function_exists('seopress_get_post_types') && ! empty(seopress_get_post_types())) {
-            foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+        $postTypes = seopress_get_service('WordPressData')->getPostTypes();
+        if (! empty($postTypes)) {
+            foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
                 $titleOptions['seopress_titles_archive_titles'][$seopress_cpt_key]['title'] = '%%cpt_plural%% %%current_pagination%% %%sep%% %%sitetitle%%';
             }
         }

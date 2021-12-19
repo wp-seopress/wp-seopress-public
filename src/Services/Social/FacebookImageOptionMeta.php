@@ -30,7 +30,7 @@ class FacebookImageOptionMeta {
             $value = get_post_meta(get_the_ID(), '_seopress_social_fb_img_attachment_id', true);
         }
 
-        if(empty($value) &&  '1' === seopress_social_facebook_img_default_option() ){
+        if(empty($value) &&  '1' === seopress_social_facebook_img_default_option() && empty(get_post_meta(get_the_ID(), '_seopress_social_fb_img', true)) ){
             $options = get_option('seopress_social_option_name');
             $value = isset($options['seopress_social_facebook_img_attachment_id']) ? $options['seopress_social_facebook_img_attachment_id'] : null;
         }
@@ -59,7 +59,7 @@ class FacebookImageOptionMeta {
                 return $this->getMetasBy('url');
             }
 
-            return $this->getMetasByAttachmentId($id);
+            return $this->getMetasStringByAttachmentId($id);
         }
 
         return '';
@@ -73,14 +73,37 @@ class FacebookImageOptionMeta {
 
         $postId = attachment_url_to_postid($url);
 
-        return $this->getMetasByAttachmentId($postId);
+        if(empty($postId) && !empty($url)){
+            return $this->getMetasStringByUrl($url);
+        }
+
+        return $this->getMetasStringByAttachmentId($postId);
     }
 
 
-    public function getMetasByAttachmentId($postId){
+    public function getMetasStringByUrl($url){
+        $str = '';
+
+        //OG:IMAGE
+        $str = '';
+        $str .= '<meta property="og:image" content="' . esc_attr($url) . '" />';
+        $str .= "\n";
+
+        //OG:IMAGE:SECURE_URL IF SSL
+        if (is_ssl()) {
+            $str .= '<meta property="og:image:secure_url" content="' . esc_attr($url) . '" />';
+            $str .= "\n";
+        }
+
+        return $str;
+
+    }
+
+    public function getMetasStringByAttachmentId($postId){
         $str = '';
 
         $imageSrc = wp_get_attachment_image_src($postId, 'full');
+
         if(empty($imageSrc)){
             return $str;
         }

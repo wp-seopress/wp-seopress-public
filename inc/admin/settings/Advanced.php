@@ -215,7 +215,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_advanced_appearance_seo_tools', // ID
-    __('Hide SEO tools', 'wp-seopress'), // Title
+    __('Hide Site Overview', 'wp-seopress'), // Title
     'seopress_advanced_appearance_seo_tools_callback', // Callback
     'seopress-settings-admin-advanced-appearance', // Page
     'seopress_setting_section_advanced_appearance' // Section

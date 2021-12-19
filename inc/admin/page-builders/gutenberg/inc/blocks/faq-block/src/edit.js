@@ -18,7 +18,7 @@ const { withSelect } = wp.data
 
 function WPSeopress_FAQ(props) {
     const { attributes } = props
-    const { listStyle, titleWrapper, imageSize, showFAQScheme } = attributes
+    const { listStyle, titleWrapper, imageSize, showFAQScheme, showAccordion } = attributes
 
     const showFAQs = () => {
         return (
@@ -56,7 +56,7 @@ function WPSeopress_FAQ(props) {
                         </div>
                         <div className="wpseopress-faq-cta">
                             <button
-                                className="button button-link-delete"
+                                className="components-button is-tertiary is-destructive"
                                 value={__('Remove', 'wp-seopress')}
                                 onClick={() => removeFAQ(i)}
                             >
@@ -99,7 +99,7 @@ function WPSeopress_FAQ(props) {
                         </div>
                         <div className="wpseopress-faq-cta">
                             <button
-                                className="button button-link-delete"
+                                className="components-button is-tertiary is-destructive"
                                 value={__('Remove', 'wp-seopress')}
                                 onClick={() => removeFAQ(i)}
                             >
@@ -364,6 +364,18 @@ function WPSeopress_FAQ(props) {
                         }}
                     />
                 </PanelRow>
+                <p>{__('Display', 'wp-seopress')}</p>
+                <PanelRow>
+                    <ToggleControl
+                        label={__('Enable accordion', 'wp-seopress')}
+                        checked={!!showAccordion}
+                        onChange={(e) => {
+                            props.setAttributes({
+                                showAccordion: !showAccordion,
+                            })
+                        }}
+                    />
+                </PanelRow>
             </PanelBody>
         </InspectorControls>
     )
@@ -379,7 +391,7 @@ function WPSeopress_FAQ(props) {
                     <button
                         type="button"
                         title={__('Add FAQ', 'wp-seopress')}
-                        className="add-faq button button-link-add"
+                        className="add-faq components-button is-secondary"
                         onClick={(e) => {
                             e.preventDefault()
                             addFAQ()

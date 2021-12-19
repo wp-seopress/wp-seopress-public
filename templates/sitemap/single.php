@@ -1,5 +1,4 @@
 <?php
-
 defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 
 if ('' !== get_query_var('seopress_cpt')) {
@@ -29,9 +28,7 @@ if (function_exists('pll_home_url')) {
 $home_url = apply_filters('seopress_sitemaps_home_url', $home_url);
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 printf('<?xml-stylesheet type="text/xsl" href="%s"?>', $home_url . 'sitemaps_xsl.xsl');
-?>
 
-<?php
 $urlset = '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 
 echo apply_filters('seopress_sitemaps_urlset', $urlset);
@@ -78,9 +75,8 @@ $args = [
             'compare' => '!=',
         ],
     ],
-    'fields'       => 'ids',
     'lang'         => '',
-    'has_password' => false,
+    'has_password' => false
 ];
 
 if ('attachment' === $path) {
@@ -96,7 +92,13 @@ if ( $path == 'product' ) {
     ];
 }
 
-
+// Polylang: remove hidden languages
+if (function_exists('get_languages_list') && is_plugin_active('polylang/polylang.php') || is_plugin_active('polylang-pro/polylang.php')) {
+    $languages = PLL()->model->get_languages_list();
+    if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
+        $args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );
+    }
+}
 
 $args = apply_filters('seopress_sitemaps_single_query', $args, $path);
 
@@ -110,8 +112,7 @@ foreach ($postslist as $post) {
     $modified_date = '';
     if (get_the_modified_date('c', $post)) {
         $modified_date = get_the_modified_date('c', $post);
-    }
-    else{
+    } else {
         $modified_date = get_post_modified_time('c', false, $post);
     }
 
@@ -133,7 +134,11 @@ foreach ($postslist as $post) {
         'images' => [],
     ];
 
-    $sitemapData .= sprintf("\n<url>\n<loc>%s</loc>\n<lastmod>%s</lastmod>", $seopress_url['loc'], $seopress_url['mod']);
+    $seopress_url = apply_filters( 'seopress_sitemaps_single_url', $seopress_url, $post );
+
+    if (!empty($seopress_url['loc'])) {
+        $sitemapData .= sprintf("\n<url>\n<loc>%s</loc>\n<lastmod>%s</lastmod>", $seopress_url['loc'], $seopress_url['mod']);
+    }
 
     //XML Image Sitemaps
     if ('1' == seopress_xml_sitemap_img_enable_option()) {
@@ -337,7 +342,9 @@ foreach ($postslist as $post) {
         }
     }
 
-    $sitemapData .= '</url>';
+    if (!empty($seopress_url['loc'])) {
+        $sitemapData .= '</url>';
+    }
 
     echo apply_filters('seopress_sitemaps_url', $sitemapData, $seopress_url);
 }

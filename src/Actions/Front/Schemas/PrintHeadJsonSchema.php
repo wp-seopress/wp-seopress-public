@@ -18,6 +18,26 @@ class PrintHeadJsonSchema implements ExecuteHooksFrontend {
     }
 
     public function render() {
+        /**
+         * Check if Social toggle is ON
+         *
+         * @since 5.3
+         * @author Benjamin
+         */
+        if (seopress_get_toggle_option('social') !=='1') {
+            return;
+        }
+
+        /**
+         * Check if is homepage
+         *
+         * @since 5.3
+         * @author Benjamin
+         */
+        if (!is_front_page()) {
+            return;
+        }
+
         if ('none' === seopress_get_service('SocialOption')->getSocialKnowledgeType()) {
             return;
         }

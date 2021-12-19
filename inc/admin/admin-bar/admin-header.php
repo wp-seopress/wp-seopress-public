@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-function seopress_admin_header() {
+function seopress_admin_header($context = "") {
     $docs = seopress_get_docs_links(); ?>
 
 <div id="seopress-header" class="seopress-option">
@@ -53,7 +53,12 @@ function seopress_admin_header() {
                         <label for="seopress-search" class="screen-reader-text"><?php _e('Search', 'wp-seopress'); ?></label>
                     </form>
                     <ul class="seopress-list-items" role="menu">
-                        <?php foreach ($docs['get_started'] as $key => $value) {
+                        <?php
+                        $docs_started = $docs['get_started'];
+                        if ($context ==='insights') {
+                            $docs_started = $docs['get_started_insights'];
+                        }
+                        foreach ($docs_started as $key => $value) {
         foreach ($value as $_key => $_value) {
             ?>
                         <li class="seopress-item">
@@ -106,8 +111,7 @@ function seopress_admin_header() {
                     </p>
 
                     <?php
-                            $options = get_option('seopress_advanced_option_name');
-    $check                           = isset($options['seopress_advanced_appearance_news']); ?>
+    $check = isset($options['seopress_advanced_appearance_news']); ?>
 
                     <p>
                         <input id="seopress_news" class="toggle" data-toggle=<?php if ('1' == $check) {
@@ -121,6 +125,24 @@ function seopress_admin_header() {
                         <label for="seopress_news"></label>
                         <label for="seopress_advanced_option_name[seopress_advanced_appearance_news]">
                             <?php _e('Hide SEO News?', 'wp-seopress'); ?>
+                        </label>
+                    </p>
+
+                    <?php
+    $check = isset($options['seopress_advanced_appearance_seo_tools']); ?>
+
+                    <p>
+                        <input id="seopress_tools" class="toggle" data-toggle=<?php if ('1' == $check) {
+        echo '1';
+    } else {
+        echo '0';
+    } ?> name="seopress_advanced_option_name[seopress_advanced_appearance_seo_tools]" type="checkbox"
+                        <?php if ('1' == $check) {
+        echo 'checked="yes"';
+    } ?>/>
+                        <label for="seopress_tools"></label>
+                        <label for="seopress_advanced_option_name[seopress_advanced_appearance_seo_tools]">
+                            <?php _e('Hide Site Overview?', 'wp-seopress'); ?>
                         </label>
                     </p>
                 </div>

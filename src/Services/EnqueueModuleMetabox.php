@@ -12,6 +12,12 @@ class EnqueueModuleMetabox
     {
         $response = true;
 
+        global $pagenow;
+
+        if ('widgets.php' == $pagenow) {
+            $response = false;
+        }
+
         if (isset($_GET['seopress_preview']) || isset($_GET['preview'])) {
             $response = false;
         }

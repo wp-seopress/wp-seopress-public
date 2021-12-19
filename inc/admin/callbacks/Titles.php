@@ -85,7 +85,8 @@ function seopress_titles_single_titles_callback()
 
     $docs = seopress_get_docs_links();
 
-    foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+    $postTypes = seopress_get_service('WordPressData')->getPostTypes();
+    foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
         ?>
         <h3>
             <?php echo $seopress_cpt_value->labels->name; ?>
@@ -790,7 +791,8 @@ function seopress_titles_archives_titles_callback()
 {
     $options = get_option('seopress_titles_option_name');
 
-    foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+    $postTypes = seopress_get_service('WordPressData')->getPostTypes();
+    foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
         if (! in_array($seopress_cpt_key, ['post', 'page'])) {
             $check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['title']) ? $options['seopress_titles_archive_titles'][$seopress_cpt_key]['title'] : null; ?>
                                         <h3><?php echo $seopress_cpt_value->labels->name; ?>

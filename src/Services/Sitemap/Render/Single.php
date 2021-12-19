@@ -31,6 +31,43 @@ class Single {
               ]);
             do_action('wpml_switch_language', $language);
         });
+
+
+        add_filter('seopress_sitemaps_single_url', function($url, $post) {
+            //Exclude custom canonical from sitemaps
+            if (get_post_meta($post->ID, '_seopress_robots_canonical', true)) {
+                return null;
+            }
+
+            //Exclude hidden languages
+            //@credits WPML compatibility team
+            if (function_exists('icl_object_id') && defined('ICL_SITEPRESS_VERSION')) { //WPML
+                global $sitepress, $sitepress_settings;
+
+                // Check that at least ID is set in post object.
+                if ( ! isset( $post->ID ) ) {
+                    return $url;
+                }
+
+                // Get list of hidden languages.
+                $hidden_languages = $sitepress->get_setting( 'hidden_languages', array() );
+
+                // If there are no hidden languages return original URL.
+                if ( empty( $hidden_languages ) ) {
+                    return $url;
+                }
+
+                // Get language information for post.
+                $language_info = $sitepress->post_translations()->get_element_lang_code( $post->ID );
+
+                // If language code is one of the hidden languages return null to skip the post.
+                if ( in_array( $language_info, $hidden_languages, true ) ) {
+                    return null;
+                }
+            }
+
+            return $url;
+        }, 10, 2);
     }
 
     /**

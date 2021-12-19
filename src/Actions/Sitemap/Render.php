@@ -76,7 +76,14 @@ class Render implements ExecuteHooksFrontend {
     public function sitemapShortcut() {
         //Redirect sitemap.xml to sitemaps.xml
         $get_current_url = get_home_url() . $_SERVER['REQUEST_URI'];
-        if (in_array($get_current_url, [get_home_url() . '/sitemap.xml/', get_home_url() . '/sitemap.xml'])) {
+        if (in_array($get_current_url, [
+                get_home_url() . '/sitemap.xml/',
+                get_home_url() . '/sitemap.xml',
+                get_home_url() . '/wp-sitemap.xml/',
+                get_home_url() . '/wp-sitemap.xml',
+                get_home_url() . '/sitemap_index.xml/',
+                get_home_url() . '/sitemap_index.xml',
+            ])) {
             wp_safe_redirect(get_home_url() . '/sitemaps.xml', 301);
             exit();
         }

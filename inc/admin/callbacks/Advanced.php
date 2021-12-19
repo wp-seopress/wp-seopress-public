@@ -568,7 +568,7 @@ function seopress_advanced_appearance_seo_tools_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('Hide SEO tools in SEO Dashboard page', 'wp-seopress'); ?></label>
+    <?php _e('Hide Site Overview in SEO Dashboard page', 'wp-seopress'); ?></label>
 
 <?php if (isset($options['seopress_advanced_appearance_seo_tools'])) {
         esc_attr($options['seopress_advanced_appearance_seo_tools']);

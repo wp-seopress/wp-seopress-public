@@ -10,7 +10,7 @@ class LinkNoFollow
     {
         $data = [];
 
-        $items = $xpath->query("//a[contains(@rel, 'nofollow')]");
+        $items = $xpath->query("//a[contains(@rel, 'nofollow') and not(contains(@rel, 'ugc'))]");
 
         foreach ($items as $link) {
             if (! preg_match_all('#\b(cancel-comment-reply-link)\b#iu', $link->getAttribute('id'), $m) && ! preg_match_all('#\b(comment-reply-link)\b#iu', $link->getAttribute('class'), $m)) {

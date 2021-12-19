@@ -5,14 +5,14 @@
         exit;
     }
 ?>
-<div class="seopress-page-list seopress-card">
+<div id="seopress-page-list" class="seopress-page-list seopress-card">
     <div class="seopress-card-title">
         <h2><?php _e('SEO management', 'wp-seopress'); ?>
         </h2>
+        <span class="dashicons dashicons-sort"></span>
     </div>
 
     <?php
-        $features = [];
         $features = [
             'titles' => [
                 'title'         => __('Titles & Metas', 'wp-seopress'),

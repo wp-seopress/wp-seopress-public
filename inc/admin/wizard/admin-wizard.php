@@ -579,7 +579,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 </p>
 
 <form method="post" class="seopress-wizard-indexing-form">
-	<?php if ( ! empty(seopress_get_post_types())) { ?>
+	<?php
+    $postTypes = seopress_get_service('WordPressData')->getPostTypes();
+    if ( ! empty($postTypes)) { ?>
 	<div class="seopress-wizard-services">
 		<h2>
 			<?php _e('For which single post types, should indexing be disabled?', 'wp-seopress'); ?>
@@ -588,7 +590,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		<ul>
 			<?php
 							//Post Types
-							foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+							foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
 								$seopress_titles_single_titles = isset($seopress_titles_option['seopress_titles_single_titles'][$seopress_cpt_key]['noindex']); ?>
 
 			<h3><?php echo $seopress_cpt_value->labels->name; ?>
@@ -615,8 +617,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 	</div>
 	<?php } ?>
 
-	<?php if ( ! empty(seopress_get_post_types())) {
-		$cpt = seopress_get_post_types();
+	<?php
+    $postTypes = seopress_get_service('WordPressData')->getPostTypes();
+    if ( ! empty($postTypes)) {
+		$cpt = $postTypes;
 		unset($cpt['post']);
 		unset($cpt['page']);
 		?>
@@ -715,9 +719,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 		//Get options
 		$seopress_titles_option = get_option('seopress_titles_option_name');
-
+        $postTypes = seopress_get_service('WordPressData')->getPostTypes();
 		//Post Types noindex
-		foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+		foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
 			if (isset($_POST['seopress_titles_option_name']['seopress_titles_single_titles'][$seopress_cpt_key]['noindex'])) {
 				$noindex = esc_attr(wp_unslash($_POST['seopress_titles_option_name']['seopress_titles_single_titles'][$seopress_cpt_key]['noindex']));
 			} else {
@@ -727,7 +731,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		}
 
 		//Post Type archives noindex
-		foreach (seopress_get_post_types() as $seopress_cpt_key => $seopress_cpt_value) {
+		foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
 			if (isset($_POST['seopress_titles_option_name']['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex'])) {
 				$noindex = esc_attr(wp_unslash($_POST['seopress_titles_option_name']['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']));
 			} else {

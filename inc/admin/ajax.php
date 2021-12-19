@@ -466,7 +466,7 @@ function seopress_do_real_preview()
                     }
 
                     //nofollow links
-                    $nofollow_links = $xpath->query("//a[contains(@rel, 'nofollow')]");
+                    $nofollow_links = $xpath->query("//a[contains(@rel, 'nofollow') and not(contains(@rel, 'ugc'))]");
                     if (! empty($nofollow_links)) {
                         foreach ($nofollow_links as $key=>$link) {
                             if (! preg_match_all('#\b(cancel-comment-reply-link)\b#iu', $link->getAttribute('id'), $m) && ! preg_match_all('#\b(comment-reply-link)\b#iu', $link->getAttribute('class'), $m)) {
@@ -576,13 +576,33 @@ function seopress_toggle_features()
     if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
         if (isset($_POST['feature']) && isset($_POST['feature_value'])) {
             $seopress_toggle_options                    = get_option('seopress_toggle');
-            $seopress_toggle_options[$_POST['feature']] = $_POST['feature_value'];
+            $seopress_toggle_options[$_POST['feature']] = esc_attr($_POST['feature_value']);
             update_option('seopress_toggle', $seopress_toggle_options, 'yes', false);
         }
         exit();
     }
 }
 add_action('wp_ajax_seopress_toggle_features', 'seopress_toggle_features');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Dashboard drag and drop features
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_dnd_features()
+{
+    check_ajax_referer('seopress_dnd_features_nonce');
+    if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
+        if (isset($_POST['order']) && $_POST['order']) {
+            $cards_order = get_option('seopress_dashboard_option_name');
+
+            $cards_order['cards_order'] = $_POST['order'];
+
+            update_option('seopress_dashboard_option_name', $cards_order);
+        }
+    }
+
+    wp_send_json_success();
+}
+add_action('wp_ajax_seopress_dnd_features', 'seopress_dnd_features');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Dashboard News Panel
@@ -628,6 +648,18 @@ function seopress_display()
                 $seopress_advanced_option_name['seopress_advanced_appearance_news'] = esc_attr($_POST['news_center']);
             } else {
                 unset($seopress_advanced_option_name['seopress_advanced_appearance_news']);
+            }
+
+            update_option('seopress_advanced_option_name', $seopress_advanced_option_name, false);
+        }
+        //Tools Panel
+        if (isset($_POST['tools_center'])) {
+            $seopress_advanced_option_name                    = get_option('seopress_advanced_option_name');
+
+            if ('1' == $_POST['tools_center']) {
+                $seopress_advanced_option_name['seopress_advanced_appearance_seo_tools'] = esc_attr($_POST['tools_center']);
+            } else {
+                unset($seopress_advanced_option_name['seopress_advanced_appearance_seo_tools']);
             }
 
             update_option('seopress_advanced_option_name', $seopress_advanced_option_name, false);

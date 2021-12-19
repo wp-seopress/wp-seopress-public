@@ -46,6 +46,10 @@ function seopress_register_block_faq($asset_file)
             'showFAQScheme' => array(
                 'type' => 'boolean',
                 'default' => false
+            ),
+            'showAccordion' => array(
+                'type' => 'boolean',
+                'default' => false
             )
         ),
         'render_callback' => 'seopress_block_faq_render_frontend',
@@ -115,13 +119,14 @@ function seopress_block_faq_render_frontend($attributes)
     ob_start(); ?>
 	<?php echo $listStyleTag; ?>
 		<?php
+            $i = 1;
             foreach ($attributes['faqs'] as $faq) :
 
                 if (empty($faq['question'])) {
                     continue;
                 }
 
-    $entity = [
+                $entity = [
                     '@type' => 'Question',
                     'name' => $faq['question'],
                     'acceptedAnswer' => [
@@ -129,35 +134,64 @@ function seopress_block_faq_render_frontend($attributes)
                         'text' => ! empty($faq['answer']) ? $faq['answer'] : ''
                     ]
                 ];
-    $entities[] = $entity;
+                $entities[] = $entity;
 
-    $image = '';
-    $image_alt = '';
-    if ( isset( $faq['image'] ) && is_int( $faq['image'] ) ) {
-    	$image = wp_get_attachment_image_src( $faq['image'], $attributes['imageSize'] );
-        $image_alt = get_post_meta($faq['image'], '_wp_attachment_image_alt', true);
-    }
+                $accordion = $attributes['showAccordion'];
 
-    $image_url = '';
-    if ( isset( $image ) && ! empty( $image ) ) {
-        $image_url = $image[0];
-    } ?>
-				<?php echo $listItemStyle; ?>
-					<?php echo $titleTag . $faq['question'] . $titleCloseTag; ?>
-					<div class="wpseopress-faq-answer">
-						<div class="wpseopress-faq-answer-image">
-							<?php if (! empty($image_url)): ?>
-								<img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
-							<?php endif; ?>
-						</div>
-						<?php if (! empty($faq['answer'])): ?>
-							<p class="wpseopress-faq-answer-desc"><?php echo $faq['answer']; ?></p>
-						<?php endif; ?>
-					</div>
-				<?php echo $listItemStyleClosingTag; ?>
+                if ($accordion) {
+                    //Load our inline CSS only once
+                    if (!isset($css)) {
+                        $css = '<style>.wpseopress-hide {display: none;}.wpseopress-accordion-button{width:100%}</style>';
+                        $css = apply_filters( 'seopress_faq_block_inline_css', $css );
+                        echo $css;
+                    }
+                    //Our simple accordion JS
+                    wp_enqueue_script('seopress-accordion', plugins_url('accordion.js', __FILE__), '', SEOPRESS_VERSION, true);
+                }
+
+                $image = '';
+                $image_alt = '';
+                if ( isset( $faq['image'] ) && is_int( $faq['image'] ) ) {
+                    $image = wp_get_attachment_image_src( $faq['image'], $attributes['imageSize'] );
+                    $image_alt = get_post_meta($faq['image'], '_wp_attachment_image_alt', true);
+                }
+
+                $image_url = '';
+                if ( isset( $image ) && ! empty( $image ) ) {
+                    $image_url = $image[0];
+                } ?>
+                <?php echo $listItemStyle; ?>
+                    <?php if ($accordion) { ?>
+                        <div id="wpseopress-faq-title-<?php echo $i; ?>" class="wpseopress-wrap-faq-question">
+                            <button class="wpseopress-accordion-button" type="button" aria-expanded="false" aria-controls="wpseopress-faq-answer-<?php echo $i; ?>">
+                    <?php } ?>
+                    <?php echo $titleTag . $faq['question'] . $titleCloseTag; ?>
+                    <?php if ($accordion) { ?>
+                            </button>
+                        </div>
+                    <?php } ?>
+
+                    <?php if ($accordion) { ?>
+                        <div id="wpseopress-faq-answer-<?php echo $i; ?>" class="wpseopress-faq-answer wpseopress-hide" aria-labelledby="wpseopress-faq-title-<?php echo $i; ?>">
+                    <?php } else { ?>
+                        <div class="wpseopress-faq-answer">
+                    <?php } ?>
+                        <div class="wpseopress-faq-answer-image">
+                            <?php if (! empty($image_url)): ?>
+                                <img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
+                            <?php endif; ?>
+                        </div>
+                        <?php if (! empty($faq['answer'])): ?>
+                            <p class="wpseopress-faq-answer-desc"><?php echo $faq['answer']; ?></p>
+                        <?php endif; ?>
+                    </div>
+                <?php echo $listItemStyleClosingTag;
+                $i = $i++;
+                ?>
 			<?php endforeach; ?>
-	<?php echo $listStyleCloseTag; ?>
-	<?php
+	<?php echo $listStyleCloseTag;
+
+    //FAQ Schema
     $seopress_get_toggle_rich_snippets_option = get_option('seopress_toggle');
     $seopress_get_toggle_rich_snippets_option = isset($seopress_get_toggle_rich_snippets_option['toggle-rich-snippets']) ? $seopress_get_toggle_rich_snippets_option['toggle-rich-snippets'] : '0';
     if ('0' != $seopress_get_toggle_rich_snippets_option && (int) $attributes['showFAQScheme']) {
@@ -170,6 +204,7 @@ function seopress_block_faq_render_frontend($attributes)
 			</script>';
 
         echo apply_filters('seopress_schemas_faq_html', $schema);
-    } ?>
-	<?php return ob_get_clean();
+    }
+    $html = apply_filters('seopress_faq_block_html', ob_get_clean());
+    return $html;
 }

@@ -32,6 +32,46 @@ add_action('the_post', function ($post) {
     do_action('wpml_switch_language', $language);
 });
 
+// Polylang: remove hidden languages
+function seopress_pll_exclude_hidden_lang($args) {
+    if (function_exists('get_languages_list') && is_plugin_active('polylang/polylang.php') || is_plugin_active('polylang-pro/polylang.php')) {
+        $languages = PLL()->model->get_languages_list();
+        if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
+            $args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );
+        }
+    }
+    return $args;
+}
+
+//WPML: remove hidden languages
+function seopress_wpml_exclude_hidden_lang($url) {
+    //@credits WPML compatibility team
+    if (function_exists('get_setting') && is_plugin_active('sitepress-multilingual-cms/sitepress.php')) { //WPML
+        global $sitepress, $sitepress_settings;
+
+        // Check that at least ID is set in post object.
+        if ( ! isset( $post->ID ) ) {
+            return $url;
+        }
+
+        // Get list of hidden languages.
+        $hidden_languages = $sitepress->get_setting( 'hidden_languages', array() );
+
+        // If there are no hidden languages return original URL.
+        if ( empty( $hidden_languages ) ) {
+            return $url;
+        }
+
+        // Get language information for post.
+        $language_info = $sitepress->post_translations()->get_element_lang_code( $post->ID );
+
+        // If language code is one of the hidden languages return null to skip the post.
+        if ( in_array( $language_info, $hidden_languages, true ) ) {
+            return null;
+        }
+    }
+}
+
 function seopress_xml_sitemap_index() {
     $home_url = home_url() . '/';
 
@@ -72,6 +112,9 @@ function seopress_xml_sitemap_index() {
                         'lang'         => '',
                         'has_password' => false,
                     ];
+
+                    //Polylang: exclude hidden languages
+                    $args = seopress_pll_exclude_hidden_lang($args);
 
                     $args = apply_filters('seopress_sitemaps_index_post_types_query', $args, $cpt_key);
 
@@ -139,6 +182,8 @@ function seopress_xml_sitemap_index() {
                                 'has_password' 			=> false,
                             ];
 
+                            $args = seopress_pll_exclude_hidden_lang($args);
+
                             $args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
 
                             $get_latest_post = new WP_Query($args);
@@ -184,6 +229,9 @@ function seopress_xml_sitemap_index() {
                             ],
                         ],
                     ];
+
+                    //Polylang: exclude hidden languages
+                    $args = seopress_pll_exclude_hidden_lang($args);
 
                     $args = apply_filters('seopress_sitemaps_index_tax_query', $args, $tax_key);
 
@@ -276,6 +324,9 @@ function seopress_xml_sitemap_index() {
             'has_password' => false,
         ];
 
+        //Polylang: exclude hidden languages
+        $args = seopress_pll_exclude_hidden_lang($args);
+
         $args = apply_filters('seopress_sitemaps_index_gnews_query', $args);
 
         $get_latest_post = new WP_Query($args);
@@ -338,6 +389,9 @@ function seopress_xml_sitemap_index() {
             'fields'       => 'ids',
         ];
 
+        //Polylang: exclude hidden languages
+        $args = seopress_pll_exclude_hidden_lang($args);
+
         $args = apply_filters('seopress_sitemaps_index_video_query', $args, $cpt_key);
 
         $ids  = get_posts($args);
@@ -365,6 +419,9 @@ function seopress_xml_sitemap_index() {
             'lang'         => '',
             'fields'       => 'ids',
         ];
+
+        //Polylang: exclude hidden languages
+        $args = seopress_pll_exclude_hidden_lang($args);
 
         $posts       = get_posts($args);
         $count_posts = count($posts);

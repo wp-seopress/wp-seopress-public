@@ -1,5 +1,11 @@
+.wpseopress-faqs-actions {
+    border: 1px solid #1e1e1e;
+    padding: 1rem;
+    background: #fff;
+    margin-top: 1rem;
+}
 .wpseopress-answer-meta {
-    .wp-block-wp-seopress-image { 
+    .wp-block-wp-seopress-image {
         .components-button.editor-post-featured-image__preview {
             text-align: left;
         }
@@ -8,14 +14,10 @@
 .wpseopress-faq-cta {
     display: flex;
     justify-content: flex-end;
-
-    .button-link-delete, .button-link-delete:hover {
-        border: 1px solid #a00;         
-    }
 }
 
-.wpseopress-faqs-list-style, 
-.wpseopress-faqs-title-wrapper, 
+.wpseopress-faqs-list-style,
+.wpseopress-faqs-title-wrapper,
 .wpseopress-faqs-image-size {
     button.components-button.is-primary {
         background-color: #007cba;

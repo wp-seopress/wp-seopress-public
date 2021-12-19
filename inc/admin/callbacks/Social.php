@@ -344,8 +344,8 @@ value="1"/>
 
 function seopress_social_facebook_img_cpt_callback()
 {
-    if (! empty(seopress_get_post_types())) {
-        $post_types = seopress_get_post_types();
+    $post_types = seopress_get_service('WordPressData')->getPostTypes();
+    if (! empty($post_types)) {
         unset($post_types['post'], $post_types['page']);
 
         if (! empty($post_types)) {
