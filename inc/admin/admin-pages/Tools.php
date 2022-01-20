@@ -12,11 +12,12 @@ $docs = seopress_get_docs_links();
 <div class="seopress-option">
     <?php
             echo $this->seopress_feature_title(null);
-    $current_tab = ''; ?>
+    $current_tab = '';
+
+    ?>
     <div id="seopress-tabs" class="wrap">
         <?php
                 $plugin_settings_tabs = [
-                    'tab_seopress_tool_compatibility'  => __('Compatibility Center', 'wp-seopress'),
                     'tab_seopress_tool_data'           => __('Data', 'wp-seopress'),
                     'tab_seopress_tool_settings'       => __('Settings', 'wp-seopress'),
                     'tab_seopress_tool_plugins'        => __('Plugins', 'wp-seopress'),
@@ -34,18 +35,6 @@ $docs = seopress_get_docs_links();
         echo '<a id="' . $tab_key . '-tab" class="nav-tab" href="?page=seopress-import-export#tab=' . $tab_key . '">' . $tab_caption . '</a>';
     }
     echo '</div>'; ?>
-        <div class="seopress-tab <?php if ('tab_seopress_tool_compatibility' == $current_tab) {
-        echo 'active';
-    } ?>" id="tab_seopress_tool_compatibility">
-            <form method="post"
-                action="<?php echo admin_url('options.php'); ?>">
-                <?php
-                settings_fields('seopress_tools_option_group');
-    do_settings_sections('seopress-settings-admin-tools-compatibility');
-    sp_submit_button(__('Save changes', 'wp-seopress-pro'));
-    ?>
-            </form>
-        </div>
         <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
         <div class="seopress-tab <?php if ('tab_seopress_tool_data' == $current_tab) {
         echo 'active';

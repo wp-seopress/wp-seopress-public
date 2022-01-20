@@ -4,14 +4,14 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 5.3.0
+Version: 5.4
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
 Domain Path: /languages
 */
 
-/*  Copyright 2016 - 2021 - Benjamin Denis  (email : contact@seopress.org)
+/*  Copyright 2016 - 2022 - Benjamin Denis  (email : contact@seopress.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
@@ -70,7 +70,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '5.3.0');
+define('SEOPRESS_VERSION', '5.4');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -231,6 +231,7 @@ function seopress_add_admin_options_scripts($hook) {
         'seopress-social'               => true,
         'seopress-google-analytics'     => true,
         'seopress-pro-page'             => true,
+        'seopress-instant-indexing'     => true,
         'seopress-advanced'             => true,
         'seopress-import-export'        => true,
         'seopress-bot-batch'            => true,
@@ -365,7 +366,7 @@ function seopress_add_admin_options_scripts($hook) {
     }
 
     //Tabs
-    if ('seopress-titles' === $_GET['page'] || 'seopress-xml-sitemap' === $_GET['page'] || 'seopress-social' === $_GET['page'] || 'seopress-google-analytics' === $_GET['page'] || 'seopress-advanced' === $_GET['page'] || 'seopress-import-export' === $_GET['page']) {
+    if ('seopress-titles' === $_GET['page'] || 'seopress-xml-sitemap' === $_GET['page'] || 'seopress-social' === $_GET['page'] || 'seopress-google-analytics' === $_GET['page'] || 'seopress-advanced' === $_GET['page'] || 'seopress-import-export' === $_GET['page'] || 'seopress-instant-indexing' === $_GET['page']) {
         wp_enqueue_script('seopress-admin-tabs-js', plugins_url('assets/js/seopress-tabs' . $prefix . '.js', __FILE__), ['jquery-ui-tabs'], SEOPRESS_VERSION);
     }
 
@@ -397,6 +398,21 @@ function seopress_add_admin_options_scripts($hook) {
     if ('seopress-social' === $_GET['page']) {
         wp_enqueue_script('seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader' . $prefix . '.js', __FILE__), ['jquery'], SEOPRESS_VERSION, false);
         wp_enqueue_media();
+    }
+
+    //Instant Indexing
+    if ('seopress-instant-indexing' === $_GET['page']) {
+        $seopress_instant_indexing_post = [
+            'seopress_nonce'               => wp_create_nonce('seopress_instant_indexing_post_nonce'),
+            'seopress_instant_indexing_post' => admin_url('admin-ajax.php'),
+        ];
+        wp_localize_script('seopress-admin-tabs-js', 'seopressAjaxInstantIndexingPost', $seopress_instant_indexing_post);
+
+        $seopress_instant_indexing_generate_api_key = [
+            'seopress_nonce'               => wp_create_nonce('seopress_instant_indexing_generate_api_key_nonce'),
+            'seopress_instant_indexing_generate_api_key' => admin_url('admin-ajax.php'),
+        ];
+        wp_localize_script('seopress-admin-tabs-js', 'seopressAjaxInstantIndexingApiKey', $seopress_instant_indexing_generate_api_key);
     }
 
     //CSV Importer
@@ -435,22 +451,23 @@ function seopress_admin_body_class($classes) {
         return $classes;
     }
     $_pages = [
-        'seopress_csv_importer'     => true,
-        'seopress-option'           => true,
-        'seopress-network-option'   => true,
-        'seopress-titles'           => true,
-        'seopress-xml-sitemap'      => true,
-        'seopress-social'           => true,
-        'seopress-google-analytics' => true,
-        'seopress-advanced'         => true,
-        'seopress-import-export'    => true,
-        'seopress-pro-page'         => true,
-        'seopress-bot-batch'        => true,
-        'seopress-license'          => true,
-        'seopress-insights'             => true,
-        'seopress-insights-rankings'    => true,
-        'seopress-insights-backlinks'   => true,
-        'seopress-insights-trends'      => true,
+        'seopress_csv_importer'             => true,
+        'seopress-option'                   => true,
+        'seopress-network-option'           => true,
+        'seopress-titles'                   => true,
+        'seopress-xml-sitemap'              => true,
+        'seopress-social'                   => true,
+        'seopress-google-analytics'         => true,
+        'seopress-advanced'                 => true,
+        'seopress-import-export'            => true,
+        'seopress-pro-page'                 => true,
+        'seopress-instant-indexing'         => true,
+        'seopress-bot-batch'                => true,
+        'seopress-license'                  => true,
+        'seopress-insights'                 => true,
+        'seopress-insights-rankings'        => true,
+        'seopress-insights-backlinks'       => true,
+        'seopress-insights-trends'          => true,
     ];
     if (isset($_pages[$_GET['page']])) {
         $classes .= ' seopress-styles ';

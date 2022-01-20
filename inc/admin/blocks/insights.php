@@ -80,6 +80,8 @@
                     <?php
                         $seopress_page_speed_results     = [];
                         $seopress_page_speed_results     = json_decode(get_transient('seopress_results_page_speed'), true);
+                        $seopress_page_speed_desktop_results     = [];
+                        $seopress_page_speed_desktop_results     = json_decode(get_transient('seopress_results_page_speed_desktop'), true);
                         $cwv_svg = '<svg enable-background="new 0 0 24 24" focusable="false" height="15" viewBox="0 0 24 24" width="15" style="fill:#06f;vertical-align:middle"><g><g><path d="M0,0h24v24H0V0z" fill="none"></path></g></g><g><path d="M17,3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V5C19,3.9,18.1,3,17,3z"></path></g></svg>';
 
                         $fetchTime = '';
@@ -88,7 +90,7 @@
                         $core_web_vitals_score = '';
                         if (! empty($seopress_page_speed_results)) {
                             $ps_score = seopress_pro_get_ps_score($seopress_page_speed_results);
-                            $ps_score_desktop = seopress_pro_get_ps_score($seopress_page_speed_results, false);
+                            $ps_score_desktop = seopress_pro_get_ps_score($seopress_page_speed_desktop_results);
                             $core_web_vitals_score = seopress_pro_get_cwv_score($seopress_page_speed_results);
                         }
                     ?>
@@ -98,14 +100,14 @@
                         echo 'active';
                     }?>">
                             <h3><?php _e('Google Page Speed Score','wp-seopress'); ?></h3>
-                            <p><?php _e('Learn how your site has performed, based on data from your actual users around the world.','wp-seopress-pro'); ?>
+                            <p><?php _e('Learn how your site has performed, based on data from your actual users around the world.','wp-seopress'); ?>
                             </p>
                             <?php if ($ps_score && $ps_score_desktop) { ?>
                                 <div class="seopress-cwv seopress-summary-item-data">
                                     <?php echo $ps_score; ?>
                                     <?php echo $ps_score_desktop; ?>
                                     <p class="wrap-scale">
-                                        <?php _e('<span><span class="score red"></span>0-49</span><span><span class="score yellow"></span>50-89</span><span><span class="score green"></span>90-100</span>','wp-seopress-pro') ?>
+                                        <?php _e('<span><span class="score red"></span>0-49</span><span><span class="score yellow"></span>50-89</span><span><span class="score green"></span>90-100</span>','wp-seopress') ?>
                                     </p>
                                 </div>
                                 <div class="seopress-cwv">
@@ -118,16 +120,16 @@
                                     <?php } ?>
                                     <div>
                                         <h3>
-                                            <?php _e('Core Web Vitals Assessment: ', 'wp-seopress-pro'); ?>
+                                            <?php _e('Core Web Vitals Assessment: ', 'wp-seopress'); ?>
 
                                             <?php if ($core_web_vitals_score === true) { ?>
-                                            <span class="green"><?php _e('Passed', 'wp-seopress-pro'); ?></span>
+                                            <span class="green"><?php _e('Passed', 'wp-seopress'); ?></span>
                                             <?php } else { ?>
-                                            <span class="red"><?php _e('Failed', 'wp-seopress-pro'); ?></span>
+                                            <span class="red"><?php _e('Failed', 'wp-seopress'); ?></span>
                                             <?php }
                                             echo $core_web_vitals_score; ?>
                                         </h3>
-                                        <p><?php printf(__('Computed from the %s Core Web Vitals metrics over the latest 28-day collection period.', 'wp-seopress-pro'), $cwv_svg); ?></p>
+                                        <p><?php printf(__('Computed from the %s Core Web Vitals metrics over the latest 28-day collection period.', 'wp-seopress'), $cwv_svg); ?></p>
                                     </div>
                                 </div>
                             <?php } else {  ?>

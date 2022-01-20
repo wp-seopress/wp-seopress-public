@@ -34,16 +34,9 @@
         <?php
             function seopress_advanced_appearance_universal_metabox_option()
             {
-                $seopress_advanced_appearance_universal_metabox_option = get_option('seopress_advanced_option_name');
-                if (! empty($seopress_advanced_appearance_universal_metabox_option)) {
-                    foreach ($seopress_advanced_appearance_universal_metabox_option as $key => $seopress_advanced_appearance_universal_metabox_value) {
-                        $options[$key] = $seopress_advanced_appearance_universal_metabox_value;
-                    }
-                    if (isset($seopress_advanced_appearance_universal_metabox_option['seopress_advanced_appearance_universal_metabox'])) {
-                        return $seopress_advanced_appearance_universal_metabox_option['seopress_advanced_appearance_universal_metabox'];
-                    }
-                }
+                return seopress_get_service('AdvancedOption')->getAccessUniversalMetaboxGutenberg();
             }
+
             function seopress_get_hidden_notices_usm_option()
             {
                 $seopress_get_hidden_notices_usm_option = get_option('seopress_notices');
@@ -355,6 +348,33 @@
                     seopress_notification($args);
                 }
             }
+            $indexing_plugins = [
+                'indexnow/indexnow-url-submission.php'                       => 'IndexNow',
+                'bing-webmaster-tools/bing-url-submission.php'               => 'Bing Webmaster Url Submission',
+                'fast-indexing-api/instant-indexing.php'                     => 'Instant Indexing',
+            ];
+
+            foreach ($indexing_plugins as $key => $value) {
+                if (is_plugin_active($key)) {
+                    $args = [
+                        'id' => 'notice-indexing-plugins',
+                        /* translators: %s name of a WP plugin (eg: IndexNow) */
+                        'title'  => sprintf(__('We noticed that you use <strong>%s</strong> plugin.', 'wp-seopress'), $value),
+                        'desc'   => __('To prevent any conflicts with our Indexing feature, please disable it.', 'wp-seopress'),
+                        'impact' => [
+                            'high' => __('High impact', 'wp-seopress'),
+                        ],
+                        'link' => [
+                            'en'       => admin_url('plugins.php'),
+                            'title'    => __('Fix this!', 'wp-seopress'),
+                            'external' => false,
+                        ],
+                        'icon'       => 'dashicons-admin-plugins',
+                        'deleteable' => false,
+                    ];
+                    seopress_notification($args);
+                }
+            }
             if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                 if (1 == seopress_404_cleaning_option() && ! wp_next_scheduled('seopress_404_cron_cleaning')) {
                     $args = [
@@ -516,7 +536,7 @@
             }
             if (function_exists('extension_loaded') && ! extension_loaded('dom')) {
                 $args = [
-                    'id'     => 'notice-ssl-alert',
+                    'id'     => 'notice-dom',
                     'title'  => __('PHP module "DOM" is missing on your server.', 'wp-seopress'),
                     'desc'   => __('This PHP module, installed by default with PHP, is required by many plugins including SEOPress. Please contact your host as soon as possible to solve this.', 'wp-seopress'),
                     'impact' => [
@@ -528,7 +548,25 @@
                         'title'    => __('Learn more', 'wp-seopress'),
                         'external' => true,
                     ],
-                    'deleteable' => true,
+                    'deleteable' => false,
+                ];
+                seopress_notification($args);
+            }
+            if (function_exists('extension_loaded') && ! extension_loaded('mbstring')) {
+                $args = [
+                    'id'     => 'notice-mbstring',
+                    'title'  => __('PHP module "mbstring" is missing on your server.', 'wp-seopress'),
+                    'desc'   => __('This PHP module, installed by default with PHP, is required by many plugins including SEOPress. Please contact your host as soon as possible to solve this.', 'wp-seopress'),
+                    'impact' => [
+                        'high' => __('High impact', 'wp-seopress'),
+                    ],
+                    'link' => [
+                        'fr'       => 'https://www.seopress.org/fr/support/guides/debutez-seopress/',
+                        'en'       => 'https://www.seopress.org/support/guides/get-started-seopress/',
+                        'title'    => __('Learn more', 'wp-seopress'),
+                        'external' => true,
+                    ],
+                    'deleteable' => false,
                 ];
                 seopress_notification($args);
             }

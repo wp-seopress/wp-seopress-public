@@ -100,6 +100,7 @@ class CustomCapabilities implements ExecuteHooksBackend
             case 'social_networks':
             case 'analytics':
             case 'tools':
+            case 'instant_indexing':
             case 'titles_metas':
             case 'advanced':
             case 'pro':
@@ -111,6 +112,7 @@ class CustomCapabilities implements ExecuteHooksBackend
                     'social_networks',
                     'analytics',
                     'tools',
+                    'instant_indexing',
                     'titles_metas',
                     'advanced',
                     'pro',
@@ -163,6 +165,11 @@ class CustomCapabilities implements ExecuteHooksBackend
     public function capabilitySaveTools($cap)
     {
         return PagesAdmin::getCustomCapability('tools');
+    }
+
+    public function capabilitySaveInstantIndexing($cap)
+    {
+        return PagesAdmin::getCustomCapability('instant_indexing');
     }
 
     public function capabilitySaveImportExport($cap)

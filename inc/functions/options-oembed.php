@@ -18,6 +18,8 @@ function seopress_oembed_title_hook($post)
     //If OG title set
     if (get_post_meta($post->ID, '_seopress_social_fb_title', true) !='') {
         $seopress_oembed_title = get_post_meta($post->ID, '_seopress_social_fb_title', true);
+    } elseif (get_post_meta($post->ID, '_seopress_titles_title', true) !='') {
+        $seopress_oembed_title = get_post_meta($post->ID, '_seopress_titles_title', true);
     } elseif (get_the_title($post) !='') {
         $seopress_oembed_title = the_title_attribute(['before'=>'','after'=>'','echo'=>false,'post'=>$post]);
     }

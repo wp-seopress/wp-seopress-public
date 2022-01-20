@@ -176,11 +176,11 @@ function seopress_block_faq_render_frontend($attributes)
                     <?php } else { ?>
                         <div class="wpseopress-faq-answer">
                     <?php } ?>
-                        <div class="wpseopress-faq-answer-image">
-                            <?php if (! empty($image_url)): ?>
+                    <?php if (! empty($image_url)): ?>
+                            <div class="wpseopress-faq-answer-image">
                                 <img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
-                            <?php endif; ?>
-                        </div>
+                            </div>
+                        <?php endif; ?>
                         <?php if (! empty($faq['answer'])): ?>
                             <p class="wpseopress-faq-answer-desc"><?php echo $faq['answer']; ?></p>
                         <?php endif; ?>

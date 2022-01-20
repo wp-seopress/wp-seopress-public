@@ -68,6 +68,10 @@ class RedirectionSettings implements ExecuteHooks {
         $params = $request->get_params();
 
         try {
+
+            //Elementor sync
+            $elementor = get_post_meta($id, '_elementor_page_settings', true);
+
             foreach ($metas as $key => $value) {
                 if ( ! isset($params[$value['key']])) {
                     continue;
@@ -79,6 +83,14 @@ class RedirectionSettings implements ExecuteHooks {
                 }
 
                 update_post_meta($id, $value['key'], $item);
+
+                if (! empty($elementor)) {
+                    $elementor[$value['key']] = $item;
+                }
+            }
+
+            if(!empty($elementor)){
+                update_post_meta($id, '_elementor_page_settings', $elementor);
             }
 
             return new \WP_REST_Response([

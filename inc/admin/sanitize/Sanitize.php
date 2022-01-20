@@ -60,6 +60,8 @@ function seopress_sanitize_options_fields($input){
         'seopress_google_analytics_cb_btn_sec_bg_hov',
         'seopress_google_analytics_cb_btn_sec_col_hov',
         'seopress_google_analytics_cb_width',
+        'seopress_instant_indexing_bing_api_key',
+        'seopress_instant_indexing_manual_batch',
     ];
 
     $seopress_esc_attr = [
@@ -96,6 +98,8 @@ function seopress_sanitize_options_fields($input){
             $input[$value] = wp_kses($input[$value], $args);
         } elseif (( ! empty($input['seopress_google_analytics_other_tracking']) && 'seopress_google_analytics_other_tracking' == $value) || ( ! empty($input['seopress_google_analytics_other_tracking_body']) && 'seopress_google_analytics_other_tracking_body' == $value) || ( ! empty($input['seopress_google_analytics_other_tracking_footer']) && 'seopress_google_analytics_other_tracking_footer' == $value)) {
             $input[$value] = $input[$value]; //No sanitization for this field
+        } elseif ( ! empty($input['seopress_instant_indexing_manual_batch']) && 'seopress_instant_indexing_manual_batch' == $value) {
+            $input[$value] = sanitize_textarea_field($input[$value]);
         } elseif ( ! empty($input[$value])) {
             $input[$value] = sanitize_text_field($input[$value]);
         }

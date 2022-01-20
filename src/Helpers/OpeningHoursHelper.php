@@ -9,13 +9,13 @@ if ( ! defined('ABSPATH')) {
 abstract class OpeningHoursHelper {
     public static function getDays() {
         return [
-            __('Monday', 'wp-seopress-pro'),
-            __('Tuesday', 'wp-seopress-pro'),
-            __('Wednesday', 'wp-seopress-pro'),
-            __('Thursday', 'wp-seopress-pro'),
-            __('Friday', 'wp-seopress-pro'),
-            __('Saturday', 'wp-seopress-pro'),
-            __('Sunday', 'wp-seopress-pro'),
+            __('Monday', 'wp-seopress'),
+            __('Tuesday', 'wp-seopress'),
+            __('Wednesday', 'wp-seopress'),
+            __('Thursday', 'wp-seopress'),
+            __('Friday', 'wp-seopress'),
+            __('Saturday', 'wp-seopress'),
+            __('Sunday', 'wp-seopress'),
         ];
     }
 

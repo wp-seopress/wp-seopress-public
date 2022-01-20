@@ -33,15 +33,6 @@ function seopress_titles_sep_option() {
  * @return string
  */
 function seopress_titles_home_site_title_option() {
-    if ( ! function_exists('seopress_get_service')) {
-        $seopress_titles_home_site_title_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_home_site_title_option)) {
-            return $seopress_titles_home_site_title_option['seopress_titles_home_site_title'];
-        }
-
-        return null;
-    }
-
     return seopress_get_service('TitleOption')->getHomeSiteTitle();
 }
 
@@ -78,81 +69,51 @@ function seopress_titles_tax_titles_option() {
 }
 
 //Author archive Titles
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_titles_archives_author_title_option() {
-    $seopress_titles_archives_author_title_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archives_author_title_option)) {
-        foreach ($seopress_titles_archives_author_title_option as $key => $seopress_titles_archives_author_title_value) {
-            $options[$key] = $seopress_titles_archives_author_title_value;
-        }
-        if (isset($seopress_titles_archives_author_title_option['seopress_titles_archives_author_title'])) {
-            return $seopress_titles_archives_author_title_option['seopress_titles_archives_author_title'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getArchivesAuthorTitle();
 }
 
 //BuddyPress Groups single Titles
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_titles_bp_groups_title_option() {
-    $seopress_titles_bp_groups_title_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_bp_groups_title_option)) {
-        foreach ($seopress_titles_bp_groups_title_option as $key => $seopress_titles_bp_groups_title_value) {
-            $options[$key] = $seopress_titles_bp_groups_title_value;
-        }
-        if (isset($seopress_titles_bp_groups_title_option['seopress_titles_bp_groups_title'])) {
-            return $seopress_titles_bp_groups_title_option['seopress_titles_bp_groups_title'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleBpGroups();
 }
 
 //Date archive Titles
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_titles_archives_date_title_option() {
-    $seopress_titles_archives_date_title_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archives_date_title_option)) {
-        foreach ($seopress_titles_archives_date_title_option as $key => $seopress_titles_archives_date_title_value) {
-            $options[$key] = $seopress_titles_archives_date_title_value;
-        }
-        if (isset($seopress_titles_archives_date_title_option['seopress_titles_archives_date_title'])) {
-            return $seopress_titles_archives_date_title_option['seopress_titles_archives_date_title'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleArchivesDate();
 }
 
 //Search archive Titles
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_titles_archives_search_title_option() {
-    $seopress_titles_archives_search_title_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archives_search_title_option)) {
-        foreach ($seopress_titles_archives_search_title_option as $key => $seopress_titles_archives_search_title_value) {
-            $options[$key] = $seopress_titles_archives_search_title_value;
-        }
-        if (isset($seopress_titles_archives_search_title_option['seopress_titles_archives_search_title'])) {
-            return $seopress_titles_archives_search_title_option['seopress_titles_archives_search_title'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleArchivesSearch();
 }
 
 //404 archive Titles
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_titles_archives_404_title_option() {
-    $seopress_titles_archives_404_title_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archives_404_title_option)) {
-        foreach ($seopress_titles_archives_404_title_option as $key => $seopress_titles_archives_404_title_value) {
-            $options[$key] = $seopress_titles_archives_404_title_value;
-        }
-        if (isset($seopress_titles_archives_404_title_option['seopress_titles_archives_404_title'])) {
-            return $seopress_titles_archives_404_title_option['seopress_titles_archives_404_title'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleArchives404();
 }
 
 //Link rel prev/next
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_titles_paged_rel_option() {
-    $seopress_titles_paged_rel_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_paged_rel_option)) {
-        foreach ($seopress_titles_paged_rel_option as $key => $seopress_titles_paged_rel_value) {
-            $options[$key] = $seopress_titles_paged_rel_value;
-        }
-        if (isset($seopress_titles_paged_rel_option['seopress_titles_paged_rel'])) {
-            return $seopress_titles_paged_rel_option['seopress_titles_paged_rel'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getPagedRel();
 }
 
 /**
@@ -163,15 +124,6 @@ function seopress_titles_paged_rel_option() {
  * @return string
  */
 function seopress_titles_home_site_desc_option() {
-    if ( ! function_exists('seopress_get_service')) {
-        $seopress_titles_home_site_title_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_home_site_title_option)) {
-            return $seopress_titles_home_site_title_option['seopress_titles_home_site_desc'];
-        }
-
-        return null;
-    }
-
     return seopress_get_service('TitleOption')->getHomeDescriptionTitle();
 }
 
@@ -224,16 +176,11 @@ function seopress_titles_tax_desc_option() {
 }
 
 //Author archives Desc
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_titles_archives_author_desc_option() {
-    $seopress_titles_archives_author_desc_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archives_author_desc_option)) {
-        foreach ($seopress_titles_archives_author_desc_option as $key => $seopress_titles_archives_author_desc_value) {
-            $options[$key] = $seopress_titles_archives_author_desc_value;
-        }
-        if (isset($seopress_titles_archives_author_desc_option['seopress_titles_archives_author_desc'])) {
-            return $seopress_titles_archives_author_desc_option['seopress_titles_archives_author_desc'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getArchivesAuthorDescription();
 }
 
 //Author archives Desc
@@ -567,7 +514,15 @@ function seopress_titles_the_title() {
 }
 
 if (apply_filters('seopress_old_pre_get_document_title', true)) {
-    add_filter('pre_get_document_title', 'seopress_titles_the_title', 10);
+    $priority = apply_filters( 'seopress_titles_the_title_priority', 10 );
+    add_filter('pre_get_document_title', 'seopress_titles_the_title', $priority);
+
+    //Avoid TEC rewriting our title tag on Venue and Organizer pages
+    if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
+        if (function_exists('tribe_is_venue') && tribe_is_venue() || function_exists('tribe_is_organizer') && tribe_is_organizer()) {
+            add_filter('tribe_events_title_tag', 'seopress_titles_the_title', 20);
+        }
+    }
 }
 
 //THE Meta Description

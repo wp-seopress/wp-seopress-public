@@ -19,6 +19,8 @@ abstract class PagesAdmin {
 
     const TOOLS            = 'tools';
 
+    const INSTANT_INDEXING = 'instant_indexing';
+
     const PRO              = 'pro';
 
     const SCHEMAS          = 'schemas';
@@ -36,6 +38,7 @@ abstract class PagesAdmin {
             self::ANALYTICS,
             self::ADVANCED,
             self::TOOLS,
+            self::INSTANT_INDEXING,
             self::PRO,
             self::SCHEMAS,
             self::BOT,
@@ -62,6 +65,8 @@ abstract class PagesAdmin {
                 return self::ANALYTICS;
             case 'seopress-import-export':
                 return self::TOOLS;
+            case 'seopress-instant-indexing':
+                return self::INSTANT_INDEXING;
             case 'seopress-pro-page':
                 return self::PRO;
             case 'seopress-advanced':
@@ -92,6 +97,8 @@ abstract class PagesAdmin {
                 return 'seopress-google-analytics';
             case self::TOOLS:
                 return 'seopress-import-export';
+            case self::INSTANT_INDEXING:
+                return 'seopress-instant-indexing';
             case self::PRO:
                 return 'seopress-pro-page';
             case self::ADVANCED:

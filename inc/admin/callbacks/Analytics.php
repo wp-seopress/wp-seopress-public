@@ -628,12 +628,16 @@ function seopress_google_analytics_other_tracking_callback() {
     $check   = isset($options['seopress_google_analytics_other_tracking']) ? $options['seopress_google_analytics_other_tracking'] : null;
 
     printf(
-'<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (head)', 'wp-seopress') . '" aria-label="' . __('Additional tracking code field', 'wp-seopress') . '">%s</textarea>',
+'<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (head). Do NOT paste GA4 or Universal Analytics codes here. They are automatically added to your source code.', 'wp-seopress') . '" aria-label="' . __('Additional tracking code field', 'wp-seopress') . '">%s</textarea>',
 esc_textarea($check)); ?>
 <p class="description">
     <?php _e('This code will be added in the head section of your page.', 'wp-seopress'); ?>
 </p>
-
+    <div class="seopress-notice is-warning">
+        <p>
+            <?php _e('<strong>GA4 or Universal Analytics</strong> codes are <strong>automatically added to your source code</strong> if you have enter your <strong>Measurement ID and / or your Universal Analytics ID</strong> from <strong>General</strong> tab.', 'wp-seopress'); ?>
+        </p>
+    </div>
 <?php
 }
 

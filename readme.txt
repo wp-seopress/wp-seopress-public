@@ -2,11 +2,11 @@
 Authors: rainbowgeek
 Contributors: rainbowgeek, gmulti, juliobox, maigret, mgris
 Donate link: https://www.seopress.org/
-Tags: SEO, XML sitemap, meta title, open graph, content analysis, knowledge graph, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
+Tags: SEO, XML sitemap, meta title, open graph, content analysis, instant indexing, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
 Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 5.3.0
+Stable tag: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Boost your SEO with SEOPress, a simple, fast and powerful SEO plugin for WordPre
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
-✔ <strong>Universal SEO metabox: edit your SEO metadata from any page builder / theme builder</strong>
+✔ <strong><a href="https://www.seopress.org/features/page-builders-integration/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Universal SEO metabox</a>: edit your SEO metadata from any page builder / theme builder</strong>
 ✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 ✔ <strong>Content analysis to help you write content optimized for search engines</strong>
 ✔ <strong>Import your post and term metadatas from other plugins in 1 click</strong>
@@ -26,7 +26,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 
 [youtube https://www.youtube.com/watch?v=FwaJA5MY6sc]
 
-<a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Features</a> | <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Migrate</a> | <a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">White Label</a>
+<a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Features</a> | <a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Migrate</a> | <a href="https://www.seopress.org/wordpress-seo-plugins/pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">White Label</a>
 
 <h3>Why SEOPress is the best WordPress SEO plugin?</h3>
 
@@ -34,19 +34,20 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li><a href="https://www.seopress.org/seopress-productivity/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Save time</strong></a>: you prefer to work with Excel or Google Spreadsheets? No problem, you can import / export your metadata from CSV files with SEOPress PRO in few clicks!</li>
 	<li><a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Save money</strong></a>: SEOPress PRO is available for just $39 / year. Without any sites limit. Yes, you read that right: 1 site or 100 sites, the total price is still $39 / year!</li>
 	<li><a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>All in one SEO plugin</strong></a>: comes with all the features you need to optimize the SEO of your WordPress site. No need to install additional extensions to manage redirects, schemas, XML sitemaps... You reduce the risk of conflicts and maintenance costs. You don't need a special feature? Deactivate it with one click without losing your configuration. Child's play !</li>
-	<li><strong>Easy AND ready to use</strong>: you doesn't need to know SEO or code to use SEOPress. Most of the parameters are automatically set. And thanks to our installation wizard, configuring SEOPress has never been easier. To go further, we provide many <a href="https://www.seopress.org/blog/how-to/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">free tutorials</a> and <a href="https://www.seopress.org/support/ebooks/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">ebooks to learn SEO</a> in order to better understand how to position your content on search engines.</li>
+	<li><strong>Easy AND ready to use</strong>: you doesn't need to know SEO or code to use SEOPress. Most of the parameters are automatically set. And thanks to our installation wizard, configuring SEOPress has never been easier. To go further, we provide many <a href="https://www.seopress.org/support/tutorials/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">free tutorials</a> and <a href="https://www.seopress.org/support/ebooks/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">ebooks to learn SEO</a> in order to better understand how to position your content on search engines.</li>
 </ul>
 
 <h3>SEOPress Free Features</h3>
 
 <ul>
+    <li><a href="https://www.seopress.org/support/guides/google-indexing-api-with-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Google and Bing Instant Indexing</strong></a> to quickly index its content in these search engines</li>
 	<li><strong>Installation wizard</strong> to quickly setup your site</li>
 	<li><strong>Content analysis</strong> with unlimited keywords to help you write optimized content for search engines</li>
 	<li><strong>Mobile / Desktop Google Preview</strong> to see how your post will looks like in Google search results</li>
 	<li><strong>Facebook & Twitter Social Preview</strong> to see how your post will looks like on social media to increase conversions</li>
 	<li><strong>Titles</strong> (with <a href="https://www.seopress.org/support/guides/manage-titles-meta-descriptions/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme">dynamic variables</a>: custom fields, terms taxonomie...)</li>
 	<li><strong>Meta descriptions</strong> (with dynamic variables too)</li>
-	<li><strong>Open Graph and Twitter Cards</strong> to improve social media sharing (Facebook, LinkedIn, Instagram, Twitter, Pinterest, WhatsApp...)</li>
+	<li><a href="https://www.seopress.org/features/social-media/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Open Graph and Twitter Cards</strong></a> to improve social media sharing (Facebook, LinkedIn, Instagram, Twitter, Pinterest, WhatsApp...)</li>
 	<li><strong>Google Knowledge Graph</strong></li>
 	<li><a href="https://www.seopress.org/features/google-analytics/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Google Analytics</strong> and <strong>Matomo</strong></a> with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">GDPR compatibility</a>)</li>
 	<li><strong>Custom Canonical URL</strong></li>
@@ -60,13 +61,13 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Remove ?replytocom to avoid duplicate content</li>
 	<li>Redirect attachment pages to post parent</li>
 	<li>Redirect attachment pages to their file URL</li>
-	<li><strong>Image SEO</strong>: Automatically set the image title / alt / caption / description</li>
+	<li><a href="https://www.seopress.org/features/image-seo/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Image SEO</strong></a>: Automatically set the image title / alt / caption / description</li>
 	<li>Import / Export settings from site to site.</li>
-	<li><a href="https://www.seopress.org/migrate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme">Import posts and terms metadata</a> from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack, Squirrly and many other SEO plugins</li>
+	<li><a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme">Import posts and terms metadata</a> from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack, Squirrly and many other SEO plugins</li>
 	<li>...</li>
 </ul>
 
-<a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Check out all SEOPress Free features here</a>
+<a href="https://www.seopress.org/wordpress-seo-plugins/free/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Check out all SEOPress Free features here</a>
 
 <h3>SEOPress PRO: to go further with your SEO</h3>
 
@@ -94,25 +95,25 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 			<li>custom schema</li>
 		</ol>
 	<li><strong>Automatic Schemas</strong> with advanced conditions (AND, OR, Post types, taxonomies)</li>
-	<li><a href="https://www.seopress.org/support/guides/enable-breadcrumbs/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Breadcrumbs</strong></a> optimized with Schema.org, A11Y ready. Elementor users? <a href="https://www.youtube.com/watch?v=ID4xm1UVikc" target="_blank">Try our custom breadcrumbs widget!</a></li>
-	<li><a href="https://www.seopress.org/features/google-analytics/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Google Analytics Stats in Dashboard</strong></a> to quickly see your metrics without leaving your site</li>
-	<li><strong>Google Local Business</strong> to boost your local store</li>
+	<li><a href="https://www.seopress.org/features/breadcrumbs/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Breadcrumbs</strong></a> optimized with Schema.org, A11Y ready. Elementor users? <a href="https://www.youtube.com/watch?v=ID4xm1UVikc" target="_blank">Try our custom breadcrumbs widget!</a></li>
+	<li><a href="https://www.seopress.org/features/google-analytics/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Analytics Stats in Dashboard</strong></a> to quickly see your metrics without leaving your site</li>
+	<li><a href="https://www.seopress.org/features/local-seo/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Local Business</strong></a> to boost your local store</li>
 	<li><strong>Broken link checker (SEOPress BOT)</strong>: scan all your links in content to find errors (eg: 404...)</li>
-	<li><strong>WooCommerce</strong>: Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema (barcode), disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
+	<li><a href="https://www.seopress.org/features/woocommerce-seo/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>WooCommerce</strong></a>: Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema (barcode), disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li><strong>Easy Digital Downloads</strong>: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li><strong>Dublin Core</strong> meta tags</li>
 	<li><strong>Custom Breadcrumbs</strong> for single post types / term taxonomy</li>
-	<li><strong>Google Page Speed Insights</strong> to analyse your site performances</li>
-	<li><strong>Google Enhanced Ecommerce for WooCommerce</strong>: measure purchases, additions to and removals from shopping carts</li>
-	<li>Edit your <strong>robots.txt</strong> file from the admin (multisite / multidomain ready)</li>
+	<li><strong>Google Page Speed Insights</strong> to analyse your site performances on Mobile / Desktop + your Core Web Vitals</li>
+	<li><a href="https://www.seopress.org/features/google-analytics/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Enhanced Ecommerce for WooCommerce</strong></a>: measure purchases, additions to and removals from shopping carts</li>
+	<li><a href="https://www.seopress.org/features/htaccess-robots-txt/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Edit your <strong>robots.txt</strong></a> file from the admin (multisite / multidomain ready)</li>
 	<li><strong>Google News Sitemap</strong> to get your posts on Google News</li>
 	<li><strong>404 Monitoring</strong>: Monitor your 404 errors to improve user experience, performances and increase the crawl budget allocated by Google</li>
 	<li><strong>Redirect 404 to homepage/custom url automatically</strong> with custom status code (301, 302, 307, 410 or 451)</li>
 	<li>Email notifications on 404</li>
-	<li><strong>Redirect manager</strong>: create unlimited 301, 302, 307, 410 and 451 redirections. Import / export redirections to CSV or htaccess file.</li>
+	<li><a href="https://www.seopress.org/features/301-redirects/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Redirect manager</strong></a>: create unlimited 301, 302, 307, 410 and 451 redirections. Regular expressions supported. Import / export redirections to CSV or htaccess file.</li>
 	<li>Import redirections using CSV</li>
 	<li>Import redirections from Redirections plugin (via a JSON file)</li>
-	<li>Edit your <strong>htaccess file</strong> from the admin</li>
+	<li><a href="https://www.seopress.org/features/htaccess-robots-txt/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Edit your <strong>htaccess file</strong></a> from the admin</li>
 	<li>Easily customize your <strong>RSS feeds</strong></li>
 	<li>...</li>
 </ul>
@@ -142,7 +143,7 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 [youtube https://youtu.be/sf0ocG7vQMM]
 
 
-<h3><a href="https://wordpress.org/plugins/elementor/">Elementor</a> + SEOPress: perfect combo!</h3>
+<h3>Elementor + SEOPress: perfect combo!</h3>
 We provide deep integration with Elementor page builder. Directly from Elementor settings, you can:
 <ul>
 	<li>edit your SEO metadata (title, meta description, meta robots)</li>
@@ -157,6 +158,8 @@ We provide deep integration with Elementor page builder. Directly from Elementor
 <h3>Developers will love SEOPress!</h3>
 
 Hundreds of hooks are available to extend SEOPress. <a href="https://www.seopress.org/support/hooks/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Browse them all here</a>!
+
+Plus we have a <a href="https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme">REST API</a> to build static websites.
 
 <h3>Translations</h3>
 SEOPress is translated into multiple languages including:
@@ -188,7 +191,7 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 <h3>SEOPress integrates seamlessly with popular e-commerce, translation, performance and analytics tools.</h3>
 <ul>
 	<li>Classic Editor</li>
-	<li><a href="https://wordpress.org/support/article/wordpress-editor/">Block Editor</a></li>
+	<li>Block Editor</li>
 	<li>WPML</li>
 	<li>Polylang</li>
 	<li>MultilingualPress</li>
@@ -207,7 +210,7 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 
 <a href="https://www.seopress.org/integrations/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">All our integrations</a>
 
-<h3><a href="https://www.seopress.org/migrate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Import your post and term metadata from other SEO plugins in 1-click</a></h3>
+<h3><a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Import your post and term metadata from other SEO plugins in 1-click</a></h3>
 <ul>
 	<li><a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Yoast SEO</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">All In One SEO</a></li>
@@ -231,7 +234,7 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 	<li><a href="https://www.seopress.org/account/your-tickets/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Email (PRO only)</a></li>
 </ul>
 
-<h3>Branding guidelines</h3>
+<h3><a href="https://www.seopress.org/about/brand-assets/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Branding guidelines</a></h3>
 SEOPress is a registered trademark of SEOPress SASU. When writing about SEOPress plugin, please make sure to write it correctly.
 
 SEOPress (correct)
@@ -335,57 +338,33 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 5.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-3/" target="_blank">Read the blog post update</a> =
-* NEW Regular expressions for redirects (PRO)
-* NEW Autocomplete for Redirections (PRO)
-* NEW Conditions for Redirections: if user logged in, logged out, both (PRO)
-* NEW Page Speed Insights redesign, now with Core Web Vitals score, Desktop + Mobile scores, Save as PDF, CRON (PRO)
-* NEW Exclude WPML hidden languages from XML sitemaps (post, page, post type and term taxonomy)
-* NEW Exclude Polylang PRO hidden languages from XML sitemaps (post, page, post type and term taxonomy)
-* NEW Accordion for SEOPress FAQ block (PRO)
-* NEW Ping Google and Bing daily automatically for XML Sitemaps
-* NEW Drag and drop for SEO dashboard cards
-* NEW Notification if a physical robots.txt file already exists
-* NEW Notification if your site has disallow all in robots.txt
-* NEW Autodetect WooCommerce fields for automatic product schema on creation
-* NEW 'seopress_sitemaps_xsl_css' hook to filter XML sitemaps CSS (props @edwinsiebel - https://www.seopress.org/support/hooks/filter-css-of-xsl-sitemaps/)
-* NEW 'seopress_sitemaps_xsl' hook to filter XSL sitemaps (props @edwinsiebel - https://www.seopress.org/support/hooks/filter-xsl-sitemap/)
-* NEW 'seopress_before_redirect' action hook to run custom code before the redirection (https://www.seopress.org/support/hooks/add-action-before-redirect/)
-* NEW 'seopress_sitemaps_single_url' hook to filter each URL fron single xml sitemaps (https://www.seopress.org/support/hooks/filter-the-urls-of-each-item-of-a-singular-xml-sitemap/)
-* NEW 'seopress_sitemaps_term_single_url' hook to filter each URL fron term xml sitemaps (https://www.seopress.org/support/hooks/filter-the-urls-of-each-item-of-a-taxonomy-xml-sitemap/)
-* NEW 'seopress_sitemaps_xml_ping_url' hook to filter xml sitemaps URL sent via the ping (https://www.seopress.org/support/hooks/filter-index-xml-sitemap-url-sent-to-google/)
-* NEW 'seopress_sitemaps_xml_ping_args' hook to filter xml sitemaps args for the ping (https://www.seopress.org/support/hooks/filter-the-arguments-of-the-ping-sitemap-query-for-google/)
-* NEW 'seopress_faq_block_inline_css' hook to filter inline CSS for FAQ block (https://www.seopress.org/support/hooks/disable-seopress-faq-block-inline-css/)
-* NEW 'seopress_faq_block_html' hook to filter the HTML of our FAQ block (https://www.seopress.org/support/hooks/filter-block-faq-html-block-editor/)
-* INFO Redirect sitemap_index.xml, wp-sitemap.xml to sitemaps.xml to avoid resubmit sitemaps in Google Search Console
-* INFO Author subtype for schemas will now use the website field first, else the author archive URL
-* INFO Add GTIN12 to product global Identifiers type (PRO)
-* INFO Remove nofollow links from comments area to content analysis
-* INFO Update updater
-* INFO Edit your social images (Facebook and Twitter) by clicking on the preview
-* INFO Display 100 entries in Redirections post type
-* INFO Knowledge Graph is now outputted on homepage only
-* INFO Improve hyphenation in Google Snippet Preview
-* INFO Disabling RSS feeds will redirect them to homepage if requested
-* FIX Exclude custom canonical URLs from xml sitemaps
-* FIX Product price amount OG tag
-* FIX Temporary fix to remove Add to cart GA event for archive page / related products if Elementor PRO is enabled to prevent a conflict
-* FIX Duplicated queries seopress_get_page_by_title()
-* FIX Publisher logo
-* FIX News xml sitemap with "&" in Publication Name field
-* FIX Documentation panel for Insights
-* FIX Author URL in schema (automatic and manual)
-* FIX Disable Orgnization / Person schemas from Knowledge Graph if Social feature is set to OFF
-* FIX "seopress_rich_snippets_publisher_logo" missing for wpml-config.xml file (WPML and Polylang users)
-* FIX Publisher logo Width and Height (it might be necessary to reupload it from SEO, PRO, Structured Data Types)
-* FIX Custom Shop page breadcrumbs
-* FIX Help link for Google Ads option
-* FIX Universal SEO metabox error with singular WC product in frontend
-* FIX Google Analytics dashboard widget configuration settings
-* FIX Conflict with Thrive builder
-* FIX Conflit with Remove /category/ in URL with Events Calendar plugin
-* FIX Some CSS
-* FIX CRON tasks
-* FIX i18n
+= 5.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-4/" target="_blank">Read the blog post update</a> =
+* NEW Google & Bing instant indexing (first iteration - https://www.seopress.org/support/guides/google-indexing-api-with-seopress/) 🎉
+* NEW Add menu / acceptsReservations properties to global Local Business schema (SEO, PRO, Local Business)
+* NEW Notification to detect if mbstring PHP module is missing on your server
+* NEW Notification to detect if "IndexNow", "Instant Indexing", or "Bing Webmaster Url Submission" is installed and activated on your site to prevent any conflict with our Instant Indexing feature
+* NEW "Description" field for manual / automatic article schema
+* NEW 'seopress_pro_breadcrumbs_html_class' + 'seopress_pro_breadcrumbs_html_class_ol' to filter the breadcrumbs HTML classes (https://www.seopress.org/support/hooks/filter-the-breadcrumbs-html-classes/)
+* NEW 'seopress_stop_attachment_url_to_postid' to disable attachment_url_to_postid function
+* INFO Performance improvement for OG image tags
+* INFO Improve Redirections UI with new view filters and bulk actions
+* INFO Improve FAQ schema user interface
+* INFO Improve Local Business widget (new HTML class "sp-lb-closed-all-day", display "closed" only if "Closed all the day?" option is checked)
+* INFO Use custom meta title if no FB title available for oembed sharing (LinkedIn)
+* INFO Minify metaboxe.js to reduce file size by 43% when using the universal SEO metabox
+* INFO Do not exclude custom canonical if equals to permalink in XML sitemaps
+* INFO Localized our news widget for French audience
+* INFO Add all social settings options to wpml-config.xml file to translate them with WPML / Polylang
+* INFO Improve UI
+* FIX Ping button for News XML sitemap
+* FIX Missing URL tag in XML sitemaps if custom canonical tag
+* FIX Warning Undefined variables Redirect tab on term taxonomies
+* FIX Term taxonomy invidually set to noindex in XML sitemaps
+* FIX Empty "wpseopress-faq-answer-image" div if no image for FAQ Block
+* FIX global product identifiers parent / child inheritance with automatic product schema and variable products
+* FIX Fatal error tribe_is_venue or tribe_is_organizer with the Events Calendar plugin in specific cases
+* FIX Conflict with PODS
+* FIX Conflict with WooCommerce Memberships
+* FIX Textdomain
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

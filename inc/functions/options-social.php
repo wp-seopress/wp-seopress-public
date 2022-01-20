@@ -6,252 +6,196 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //=================================================================================================
 //Knowledge Graph
 //Type
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_knowledge_type_option() {
-    $seopress_social_knowledge_type_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_knowledge_type_option)) {
-        foreach ($seopress_social_knowledge_type_option as $key => $seopress_social_knowledge_type_value) {
-            $options[$key] = $seopress_social_knowledge_type_value;
-        }
-        if (isset($seopress_social_knowledge_type_option['seopress_social_knowledge_type'])) {
-            return $seopress_social_knowledge_type_option['seopress_social_knowledge_type'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialKnowledgeType();
 }
 
 //Person name
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_knowledge_name_option() {
-    $seopress_social_knowledge_name_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_knowledge_name_option)) {
-        foreach ($seopress_social_knowledge_name_option as $key => $seopress_social_knowledge_name_value) {
-            $options[$key] = $seopress_social_knowledge_name_value;
-        }
-        if (isset($seopress_social_knowledge_name_option['seopress_social_knowledge_name'])) {
-            return $seopress_social_knowledge_name_option['seopress_social_knowledge_name'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialKnowledgeName();
 }
 
 //Logo
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_knowledge_img_option() {
-    $seopress_social_knowledge_img_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_knowledge_img_option)) {
-        foreach ($seopress_social_knowledge_img_option as $key => $seopress_social_knowledge_img_value) {
-            $options[$key] = $seopress_social_knowledge_img_value;
-        }
-        if (isset($seopress_social_knowledge_img_option['seopress_social_knowledge_img'])) {
-            return $seopress_social_knowledge_img_option['seopress_social_knowledge_img'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialKnowledgeImage();
 }
 //Phone number
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_knowledge_phone_number_option() {
-    $seopress_social_knowledge_phone_number_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_knowledge_phone_number_option)) {
-        foreach ($seopress_social_knowledge_phone_number_option as $key => $seopress_social_knowledge_phone_number_value) {
-            $options[$key] = $seopress_social_knowledge_phone_number_value;
-        }
-        if (isset($seopress_social_knowledge_phone_number_option['seopress_social_knowledge_phone'])) {
-            return $seopress_social_knowledge_phone_number_option['seopress_social_knowledge_phone'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialKnowledgePhone();
 }
 //Contact type
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_knowledge_contact_type_option() {
-    $seopress_social_knowledge_contact_type_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_knowledge_contact_type_option)) {
-        foreach ($seopress_social_knowledge_contact_type_option as $key => $seopress_social_knowledge_contact_type_value) {
-            $options[$key] = $seopress_social_knowledge_contact_type_value;
-        }
-        if (isset($seopress_social_knowledge_contact_type_option['seopress_social_knowledge_contact_type'])) {
-            return $seopress_social_knowledge_contact_type_option['seopress_social_knowledge_contact_type'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialKnowledgeContactType();
 }
 //Contact option
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_knowledge_contact_option_option() {
-    $seopress_social_knowledge_contact_option_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_knowledge_contact_option_option)) {
-        foreach ($seopress_social_knowledge_contact_option_option as $key => $seopress_social_knowledge_contact_option_value) {
-            $options[$key] = $seopress_social_knowledge_contact_option_value;
-        }
-        if (isset($seopress_social_knowledge_contact_option_option['seopress_social_knowledge_contact_option'])) {
-            return $seopress_social_knowledge_contact_option_option['seopress_social_knowledge_contact_option'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialKnowledgeContactOption();
 }
 
 //Accounts
 //Facebook
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_accounts_facebook_option() {
-    $seopress_social_accounts_facebook_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_accounts_facebook_option)) {
-        foreach ($seopress_social_accounts_facebook_option as $key => $seopress_social_accounts_facebook_value) {
-            $options[$key] = $seopress_social_accounts_facebook_value;
-        }
-        if (isset($seopress_social_accounts_facebook_option['seopress_social_accounts_facebook'])) {
-            return $seopress_social_accounts_facebook_option['seopress_social_accounts_facebook'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialAccountsFacebook();
 }
 
 //Twitter
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_accounts_twitter_option() {
-    $seopress_social_accounts_twitter_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_accounts_twitter_option)) {
-        foreach ($seopress_social_accounts_twitter_option as $key => $seopress_social_accounts_twitter_value) {
-            $options[$key] = $seopress_social_accounts_twitter_value;
-        }
-        if (isset($seopress_social_accounts_twitter_option['seopress_social_accounts_twitter'])) {
-            return $seopress_social_accounts_twitter_option['seopress_social_accounts_twitter'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialAccountsTwitter();
 }
 
 //Pinterest
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_accounts_pinterest_option() {
-    $seopress_social_accounts_pinterest_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_accounts_pinterest_option)) {
-        foreach ($seopress_social_accounts_pinterest_option as $key => $seopress_social_accounts_pinterest_value) {
-            $options[$key] = $seopress_social_accounts_pinterest_value;
-        }
-        if (isset($seopress_social_accounts_pinterest_option['seopress_social_accounts_pinterest'])) {
-            return $seopress_social_accounts_pinterest_option['seopress_social_accounts_pinterest'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialAccountsPinterest();
 }
 
 //Instagram
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_accounts_instagram_option() {
-    $seopress_social_accounts_instagram_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_accounts_instagram_option)) {
-        foreach ($seopress_social_accounts_instagram_option as $key => $seopress_social_accounts_instagram_value) {
-            $options[$key] = $seopress_social_accounts_instagram_value;
-        }
-        if (isset($seopress_social_accounts_instagram_option['seopress_social_accounts_instagram'])) {
-            return $seopress_social_accounts_instagram_option['seopress_social_accounts_instagram'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialAccountsInstagram();
 }
 
 //YouTube
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_accounts_youtube_option() {
-    $seopress_social_accounts_youtube_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_accounts_youtube_option)) {
-        foreach ($seopress_social_accounts_youtube_option as $key => $seopress_social_accounts_youtube_value) {
-            $options[$key] = $seopress_social_accounts_youtube_value;
-        }
-        if (isset($seopress_social_accounts_youtube_option['seopress_social_accounts_youtube'])) {
-            return $seopress_social_accounts_youtube_option['seopress_social_accounts_youtube'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialAccountsYoutube();
 }
 
 //LinkedIn
+/**
+ * @deprecated  5.4.0
+ */
 function seopress_social_accounts_linkedin_option() {
-    $seopress_social_accounts_linkedin_option = get_option('seopress_social_option_name');
-    if ( ! empty($seopress_social_accounts_linkedin_option)) {
-        foreach ($seopress_social_accounts_linkedin_option as $key => $seopress_social_accounts_linkedin_value) {
-            $options[$key] = $seopress_social_accounts_linkedin_value;
-        }
-        if (isset($seopress_social_accounts_linkedin_option['seopress_social_accounts_linkedin'])) {
-            return $seopress_social_accounts_linkedin_option['seopress_social_accounts_linkedin'];
-        }
-    }
+    return seopress_get_service('SocialOption')->getSocialAccountsLinkedin();
 }
 
 function seopress_social_accounts_jsonld_hook() {
     $seopress_comma_array = [];
 
-    //If enable (!=none)
-    if ('none' != seopress_social_knowledge_type_option()) {
-        if ('' != seopress_social_accounts_facebook_option()) {
-            $seopress_social_accounts_facebook_option = json_encode(seopress_social_accounts_facebook_option());
-            array_push($seopress_comma_array, $seopress_social_accounts_facebook_option);
-        }
-        if ('' != seopress_social_accounts_twitter_option()) {
-            $seopress_social_accounts_twitter_option = json_encode('https://twitter.com/' . seopress_social_accounts_twitter_option());
-            array_push($seopress_comma_array, $seopress_social_accounts_twitter_option);
-        }
-        if ('' != seopress_social_accounts_pinterest_option()) {
-            $seopress_social_accounts_pinterest_option = json_encode(seopress_social_accounts_pinterest_option());
-            array_push($seopress_comma_array, $seopress_social_accounts_pinterest_option);
-        }
-        if ('' != seopress_social_accounts_instagram_option()) {
-            $seopress_social_accounts_instagram_option = json_encode(seopress_social_accounts_instagram_option());
-            array_push($seopress_comma_array, $seopress_social_accounts_instagram_option);
-        }
-        if ('' != seopress_social_accounts_youtube_option()) {
-            $seopress_social_accounts_youtube_option = json_encode(seopress_social_accounts_youtube_option());
-            array_push($seopress_comma_array, $seopress_social_accounts_youtube_option);
-        }
-        if ('' != seopress_social_accounts_linkedin_option()) {
-            $seopress_social_accounts_linkedin_option = json_encode(seopress_social_accounts_linkedin_option());
-            array_push($seopress_comma_array, $seopress_social_accounts_linkedin_option);
-        }
-        if ('' != seopress_social_knowledge_type_option()) {
-            $seopress_social_knowledge_type_option = json_encode(seopress_social_knowledge_type_option());
-        } else {
-            $seopress_social_knowledge_type_option = json_encode('Organization');
-        }
-        if ('' != seopress_social_knowledge_name_option() && 'none' != seopress_social_knowledge_type_option()) {
-            $seopress_social_knowledge_name_option = json_encode(seopress_social_knowledge_name_option());
-        } elseif ('none' != seopress_social_knowledge_type_option()) {
-            $seopress_social_knowledge_name_option = json_encode(get_bloginfo('name'));
-        }
-        if ('' != seopress_social_knowledge_img_option() && 'Organization' == seopress_social_knowledge_type_option()) {
-            $seopress_social_knowledge_img_option = json_encode(seopress_social_knowledge_img_option());
-        }
-        if ('' != seopress_social_knowledge_phone_number_option()) {
-            $seopress_social_knowledge_phone_number_option = json_encode(seopress_social_knowledge_phone_number_option());
-        }
-        if ('' != seopress_social_knowledge_contact_type_option()) {
-            $seopress_social_knowledge_contact_type_option = json_encode(seopress_social_knowledge_contact_type_option());
-        }
-        if ('' != seopress_social_knowledge_contact_option_option()) {
-            $seopress_social_knowledge_contact_option_option = json_encode(seopress_social_knowledge_contact_option_option());
-        }
+    $knowledgeTypeOption = seopress_get_service('SocialOption')->getSocialKnowledgeType();
 
-        $html = '<script type="application/ld+json">';
-        $html .= '{"@context" : "' . seopress_check_ssl() . 'schema.org","@type" : ' . $seopress_social_knowledge_type_option . ',';
-        if ('' != seopress_social_knowledge_img_option() && 'Organization' == seopress_social_knowledge_type_option()) {
-            $html .= '"logo": ' . $seopress_social_knowledge_img_option . ',';
-        }
-        $html .= '"name" : ' . $seopress_social_knowledge_name_option . ',"url" : ' . json_encode(get_home_url());
-
-        if ('Organization' == seopress_social_knowledge_type_option()
-            && '' != seopress_social_knowledge_phone_number_option()
-            && '' != seopress_social_knowledge_contact_type_option()
-            ) {
-            if ($seopress_social_knowledge_phone_number_option && $seopress_social_knowledge_contact_type_option) {
-                $html .= ',"contactPoint": [{
-					"@type": "ContactPoint",
-					"telephone": ' . $seopress_social_knowledge_phone_number_option . ',';
-                if ('' != $seopress_social_knowledge_contact_option_option && 'None' != $seopress_social_knowledge_contact_option_option) {
-                    $html .= '"contactOption": ' . $seopress_social_knowledge_contact_option_option . ',';
-                }
-                $html .= '"contactType": ' . $seopress_social_knowledge_contact_type_option . '
-				}]';
-            }
-        }
-
-        if ('' != seopress_social_accounts_facebook_option() || '' != seopress_social_accounts_twitter_option() || '' != seopress_social_accounts_pinterest_option() || '' != seopress_social_accounts_instagram_option() || '' != seopress_social_accounts_youtube_option() || '' != seopress_social_accounts_linkedin_option()) {
-            $html .= ',"sameAs" : [';
-            $seopress_comma_count = count($seopress_comma_array);
-            for ($i = 0; $i < $seopress_comma_count; ++$i) {
-                $html .= $seopress_comma_array[$i];
-                if ($i < ($seopress_comma_count - 1)) {
-                    $html .= ', ';
-                }
-            }
-            $html .= ']';
-        }
-        $html .= '}';
-        $html .= '</script>';
-        $html .= "\n";
-
-        $html = apply_filters('seopress_schemas_organization_html', $html);
-        echo $html;
+    //If not enable (=none)
+    if ('none' === $knowledgeTypeOption) {
+        return;
     }
+
+    if ('' != seopress_social_accounts_facebook_option()) {
+        $seopress_social_accounts_facebook_option = json_encode(seopress_social_accounts_facebook_option());
+        array_push($seopress_comma_array, $seopress_social_accounts_facebook_option);
+    }
+    if ('' != seopress_social_accounts_twitter_option()) {
+        $seopress_social_accounts_twitter_option = json_encode('https://twitter.com/' . seopress_social_accounts_twitter_option());
+        array_push($seopress_comma_array, $seopress_social_accounts_twitter_option);
+    }
+    if ('' != seopress_social_accounts_pinterest_option()) {
+        $seopress_social_accounts_pinterest_option = json_encode(seopress_social_accounts_pinterest_option());
+        array_push($seopress_comma_array, $seopress_social_accounts_pinterest_option);
+    }
+    if ('' != seopress_social_accounts_instagram_option()) {
+        $seopress_social_accounts_instagram_option = json_encode(seopress_social_accounts_instagram_option());
+        array_push($seopress_comma_array, $seopress_social_accounts_instagram_option);
+    }
+    if ('' != seopress_social_accounts_youtube_option()) {
+        $seopress_social_accounts_youtube_option = json_encode(seopress_social_accounts_youtube_option());
+        array_push($seopress_comma_array, $seopress_social_accounts_youtube_option);
+    }
+    if ('' != seopress_social_accounts_linkedin_option()) {
+        $seopress_social_accounts_linkedin_option = json_encode(seopress_social_accounts_linkedin_option());
+        array_push($seopress_comma_array, $seopress_social_accounts_linkedin_option);
+    }
+    if ('' != $knowledgeTypeOption) {
+        $seopress_social_knowledge_type_option = json_encode($knowledgeTypeOption);
+    } else {
+        $seopress_social_knowledge_type_option = json_encode('Organization');
+    }
+    if ('' != seopress_social_knowledge_name_option() && 'none' != $knowledgeTypeOption) {
+        $seopress_social_knowledge_name_option = json_encode(seopress_social_knowledge_name_option());
+    } elseif ('none' != $knowledgeTypeOption) {
+        $seopress_social_knowledge_name_option = json_encode(get_bloginfo('name'));
+    }
+    if ('' != seopress_social_knowledge_img_option() && 'Organization' == $knowledgeTypeOption) {
+        $seopress_social_knowledge_img_option = json_encode(seopress_social_knowledge_img_option());
+    }
+    if ('' != seopress_social_knowledge_phone_number_option()) {
+        $seopress_social_knowledge_phone_number_option = json_encode(seopress_social_knowledge_phone_number_option());
+    }
+    if ('' != seopress_social_knowledge_contact_type_option()) {
+        $seopress_social_knowledge_contact_type_option = json_encode(seopress_social_knowledge_contact_type_option());
+    }
+    if ('' != seopress_social_knowledge_contact_option_option()) {
+        $seopress_social_knowledge_contact_option_option = json_encode(seopress_social_knowledge_contact_option_option());
+    }
+
+    $html = '<script type="application/ld+json">';
+    $html .= '{"@context" : "' . seopress_check_ssl() . 'schema.org","@type" : ' . $seopress_social_knowledge_type_option . ',';
+    if ('' != seopress_social_knowledge_img_option() && 'Organization' == $knowledgeTypeOption) {
+        $html .= '"logo": ' . $seopress_social_knowledge_img_option . ',';
+    }
+    $html .= '"name" : ' . $seopress_social_knowledge_name_option . ',"url" : ' . json_encode(get_home_url());
+
+    if ('Organization' == $knowledgeTypeOption
+        && '' != seopress_social_knowledge_phone_number_option()
+        && '' != seopress_social_knowledge_contact_type_option()
+        ) {
+        if ($seopress_social_knowledge_phone_number_option && $seopress_social_knowledge_contact_type_option) {
+            $html .= ',"contactPoint": [{
+                "@type": "ContactPoint",
+                "telephone": ' . $seopress_social_knowledge_phone_number_option . ',';
+            if ('' != $seopress_social_knowledge_contact_option_option && 'None' != $seopress_social_knowledge_contact_option_option) {
+                $html .= '"contactOption": ' . $seopress_social_knowledge_contact_option_option . ',';
+            }
+            $html .= '"contactType": ' . $seopress_social_knowledge_contact_type_option . '
+            }]';
+        }
+    }
+
+    if ('' != seopress_social_accounts_facebook_option() || '' != seopress_social_accounts_twitter_option() || '' != seopress_social_accounts_pinterest_option() || '' != seopress_social_accounts_instagram_option() || '' != seopress_social_accounts_youtube_option() || '' != seopress_social_accounts_linkedin_option()) {
+        $html .= ',"sameAs" : [';
+        $seopress_comma_count = count($seopress_comma_array);
+        for ($i = 0; $i < $seopress_comma_count; ++$i) {
+            $html .= $seopress_comma_array[$i];
+            if ($i < ($seopress_comma_count - 1)) {
+                $html .= ', ';
+            }
+        }
+        $html .= ']';
+    }
+    $html .= '}';
+    $html .= '</script>';
+    $html .= "\n";
+
+    $html = apply_filters('seopress_schemas_organization_html', $html);
+    echo $html;
 }
 if (apply_filters('seopress_old_social_accounts_jsonld_hook', ! function_exists('seopress_get_service'))) {
     add_action('wp_head', 'seopress_social_accounts_jsonld_hook', 1);
@@ -634,6 +578,9 @@ function seopress_social_fb_desc_home_option() {
 
 function seopress_social_fb_desc_hook() {
     if ('1' == seopress_social_facebook_og_option() && ! is_search()) {
+        if (function_exists('wc_memberships_is_post_content_restricted') && wc_memberships_is_post_content_restricted()) {
+            return false;
+        }
         global $post;
         //Init
         $seopress_social_og_desc ='';
@@ -828,9 +775,18 @@ function seopress_thumbnail_in_content() {
     }
 }
 
-function seopress_social_fb_img_size_from_url($url) {
-    if (function_exists('attachment_url_to_postid')) {
+function seopress_social_fb_img_size_from_url($url, $post_id = null) {
+    if (!function_exists('attachment_url_to_postid')) {
+        return;
+    }
+
+    $stop_attachment_url_to_postid = apply_filters( 'seopress_stop_attachment_url_to_postid', false );
+
+    if ($post_id) {
+        $post_id = get_post_thumbnail_id($post_id);
+    } elseif ($stop_attachment_url_to_postid === false) {
         $post_id 			= attachment_url_to_postid($url);
+
         //If cropped image
         if (0 != $post_id) {
             $dir  = wp_upload_dir();
@@ -844,36 +800,36 @@ function seopress_social_fb_img_size_from_url($url) {
                 $post_id = attachment_url_to_postid($url);
             }
         }
-
-        $image_src = wp_get_attachment_image_src($post_id, 'full');
-
-        //OG:IMAGE
-        $seopress_social_og_img = '';
-        $seopress_social_og_img .= '<meta property="og:image" content="' . $url . '" />';
-        $seopress_social_og_img .= "\n";
-
-        //OG:IMAGE:SECURE_URL IF SSL
-        if (is_ssl()) {
-            $seopress_social_og_img .= '<meta property="og:image:secure_url" content="' . $url . '" />';
-            $seopress_social_og_img .= "\n";
-        }
-
-        //OG:IMAGE:WIDTH + OG:IMAGE:HEIGHT
-        if ( ! empty($image_src)) {
-            $seopress_social_og_img .= '<meta property="og:image:width" content="' . $image_src[1] . '" />';
-            $seopress_social_og_img .= "\n";
-            $seopress_social_og_img .= '<meta property="og:image:height" content="' . $image_src[2] . '" />';
-            $seopress_social_og_img .= "\n";
-        }
-
-        //OG:IMAGE:ALT
-        if ('' != get_post_meta($post_id, '_wp_attachment_image_alt', true)) {
-            $seopress_social_og_img .= '<meta property="og:image:alt" content="' . esc_attr(get_post_meta($post_id, '_wp_attachment_image_alt', true)) . '" />';
-            $seopress_social_og_img .= "\n";
-        }
-
-        return $seopress_social_og_img;
     }
+
+    $image_src = wp_get_attachment_image_src($post_id, 'full');
+
+    //OG:IMAGE
+    $seopress_social_og_img = '';
+    $seopress_social_og_img .= '<meta property="og:image" content="' . $url . '" />';
+    $seopress_social_og_img .= "\n";
+
+    //OG:IMAGE:SECURE_URL IF SSL
+    if (is_ssl()) {
+        $seopress_social_og_img .= '<meta property="og:image:secure_url" content="' . $url . '" />';
+        $seopress_social_og_img .= "\n";
+    }
+
+    //OG:IMAGE:WIDTH + OG:IMAGE:HEIGHT
+    if ( ! empty($image_src)) {
+        $seopress_social_og_img .= '<meta property="og:image:width" content="' . $image_src[1] . '" />';
+        $seopress_social_og_img .= "\n";
+        $seopress_social_og_img .= '<meta property="og:image:height" content="' . $image_src[2] . '" />';
+        $seopress_social_og_img .= "\n";
+    }
+
+    //OG:IMAGE:ALT
+    if ('' != get_post_meta($post_id, '_wp_attachment_image_alt', true)) {
+        $seopress_social_og_img .= '<meta property="og:image:alt" content="' . esc_attr(get_post_meta($post_id, '_wp_attachment_image_alt', true)) . '" />';
+        $seopress_social_og_img .= "\n";
+    }
+
+    return $seopress_social_og_img;
 }
 
 function seopress_social_fb_img_hook() {
@@ -894,7 +850,7 @@ function seopress_social_fb_img_hook() {
 
         } elseif ((is_singular() || (function_exists('is_shop') && is_shop())) && '1' == seopress_social_facebook_og_option() && has_post_thumbnail()) {//If post thumbnail
 
-            $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(get_the_post_thumbnail_url($post, 'full'));
+            $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(get_the_post_thumbnail_url($post, 'full'), $post->ID);
 
         } elseif ((is_singular() || (function_exists('is_shop') && is_shop())) && '1' == seopress_social_facebook_og_option() && '' != seopress_thumbnail_in_content()) {//First image of post content
 
@@ -1216,6 +1172,9 @@ function seopress_social_twitter_desc_home_option() {
 function seopress_social_twitter_desc_hook() {
     //If Twitter cards enable
     if ('1' == seopress_social_twitter_card_option() && ! is_search()) {
+        if (function_exists('wc_memberships_is_post_content_restricted') && wc_memberships_is_post_content_restricted()) {
+            return false;
+        }
         global $post;
         setup_postdata($post);
 
@@ -1263,7 +1222,6 @@ function seopress_social_twitter_desc_hook() {
         } elseif ('1' == seopress_social_facebook_og_option() && function_exists('seopress_titles_the_description_content') && '' != seopress_titles_the_description_content() && '1' == seopress_social_twitter_card_og_option()) {
             $seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . seopress_titles_the_description_content() . '" />';
         } elseif ('' != get_the_excerpt()) {
-            setup_postdata($post);
             $seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(get_the_excerpt()))), $seopress_excerpt_length) . '" />';
         }
 
@@ -1420,4 +1378,5 @@ function seopress_social_twitter_img_hook() {
         }
     }
 }
+
 add_action('wp_head', 'seopress_social_twitter_img_hook', 1);

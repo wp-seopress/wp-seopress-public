@@ -857,9 +857,18 @@ class SEOPRESS_Admin_Setup_Wizard {
 	</h2>
 
 	<ul class="seopress-wizard-services">
+        <!-- Universal SEO metabox overview -->
 		<li class="description">
 			<?php _e('Edit your SEO metadata from your page or theme builder. Default: <strong>Enabled</strong>.', 'wp-seopress'); ?>
-		</li>
+        </li>
+        <?php if (!defined('SEOPRESS_WL_ADMIN_HEADER')) { ?>
+            <li class="description">
+                <div class="wrap-iframe">
+                    <?php echo wp_oembed_get('https://www.youtube.com/watch?v=sf0ocG7vQMM'); ?>
+                </div>
+            </li>
+        <?php } ?>
+
 		<!-- Universal SEO metabox for page builers -->
 		<li class="seopress-wizard-service-item checkbox">
 			<label for="universal_seo_metabox">

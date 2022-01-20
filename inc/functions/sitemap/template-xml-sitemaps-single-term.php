@@ -24,7 +24,12 @@ add_filter('seopress_sitemaps_single_term_query', function ($args) {
 
 add_filter('seopress_sitemaps_term_single_url', function($url, $term) {
     //Exclude custom canonical from sitemaps
-    if (get_term_meta($term->term_id, '_seopress_robots_canonical', true)) {
+    if (get_term_meta($term->term_id, '_seopress_robots_canonical', true) && get_term_link( $term->term_id ) !== get_term_meta($term->term_id, '_seopress_robots_canonical', true)) {
+        return null;
+    }
+
+    //Exclude noindex
+    if (get_term_meta($term->term_id, '_seopress_robots_index', true)) {
         return null;
     }
 
@@ -120,29 +125,27 @@ function seopress_xml_sitemap_single_term() {
 
     if (is_array($termslist->terms) && ! empty($termslist->terms)) {
         foreach ($termslist->terms as $term) {
-            if ( ! get_term_meta($term, '_seopress_robots_index', true) && ! get_term_meta($term, '_seopress_robots_canonical', true)) {
-                $seopress_sitemaps_url = '';
-                // array with all the information needed for a sitemap url
-                $seopress_url = [
-                    'loc'    => htmlspecialchars(urldecode(esc_url(get_term_link($term)))),
-                    'mod'    => '',
-                    'images' => [],
-                ];
+            $seopress_sitemaps_url = '';
+            // array with all the information needed for a sitemap url
+            $seopress_url = [
+                'loc'    => htmlspecialchars(urldecode(esc_url(get_term_link($term)))),
+                'mod'    => '',
+                'images' => [],
+            ];
 
-                $seopress_url = apply_filters( 'seopress_sitemaps_term_single_url', $seopress_url, $term );
+            $seopress_url = apply_filters( 'seopress_sitemaps_term_single_url', $seopress_url, $term );
 
-                if (!empty($seopress_url['loc'])) {
-                    $seopress_sitemaps_url .= "\n";
-                    $seopress_sitemaps_url .= '<url>';
-                    $seopress_sitemaps_url .= "\n";
-                    $seopress_sitemaps_url .= '<loc>';
-                    $seopress_sitemaps_url .= $seopress_url['loc'];
-                    $seopress_sitemaps_url .= '</loc>';
-                    $seopress_sitemaps_url .= "\n";
-                    $seopress_sitemaps_url .= '</url>';
+            if (!empty($seopress_url['loc'])) {
+                $seopress_sitemaps_url .= "\n";
+                $seopress_sitemaps_url .= '<url>';
+                $seopress_sitemaps_url .= "\n";
+                $seopress_sitemaps_url .= '<loc>';
+                $seopress_sitemaps_url .= $seopress_url['loc'];
+                $seopress_sitemaps_url .= '</loc>';
+                $seopress_sitemaps_url .= "\n";
+                $seopress_sitemaps_url .= '</url>';
 
-                    $seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
-                }
+                $seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
             }
         }
     }

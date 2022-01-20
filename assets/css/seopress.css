@@ -739,10 +739,12 @@ table.fixed thead .column-seopress_noindex {
     font-weight: normal;
     margin: 0;
 }
-.seopress-list-items .seopress-item .seopress-item-inner.check {
+.seopress-list-items .seopress-item .seopress-item-inner.check,
+.indexing-log {
     position: relative;
 }
-.seopress-list-items .seopress-item .seopress-item-inner.check::before {
+.seopress-list-items .seopress-item .seopress-item-inner.check::before,
+.indexing-log::before {
     content: "";
     width: 32px;
     height: 32px;
@@ -756,11 +758,20 @@ table.fixed thead .column-seopress_noindex {
     line-height: 32px;
     text-align: center;
 }
-.seopress-list-items .seopress-item .seopress-item-inner.done::before {
+.seopress-list-items .seopress-item .seopress-item-inner.done::before,
+.indexing-log.indexing-done::before,
+.indexing-log.indexing-failed::before {
     background: var(--backgroundPrimary);
     border: none;
     content: "\f15e";
     font-family: "Dashicons";
+}
+.indexing-log.indexing-done::before {
+    background: var(--colorSuccess);
+}
+.indexing-log.indexing-failed::before {
+    background: var(--colorAlert);
+    content: "\f335";
 }
 /* Tooltip */
 .sp-tooltip {
@@ -1767,6 +1778,9 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     font-style: italic;
 }
 /* Counters */
+.seo_page_seopress-instant-indexing .wrap-sp-progress {
+    max-width: 35rem;
+}
 #seopress_cpt .wrap-seopress-counters,
 #seopress_pro_cpt .wrap-seopress-counters,
 .seopress-styles .wrap-seopress-counters,

@@ -736,6 +736,8 @@ class GetContent
                     }
                     $desc .= '</ul>';
                 }
+
+                $desc .= '<p>' . __('Note that we scan all your source code, it means, some missing alternative texts of images might be located in your header, sidebar or footer.', 'wp-seopress') . '</p>';
             } else {
                 $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('All alternative tags are filled in. Good work!', 'wp-seopress') . '</p>';
             }

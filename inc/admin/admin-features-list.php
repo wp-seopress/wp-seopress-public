@@ -38,6 +38,12 @@
                 'btn_primary'   => admin_url('admin.php?page=seopress-google-analytics'),
                 'filter'        => 'seopress_remove_feature_google_analytics',
             ],
+            'instant-indexing' => [
+                'title'         => __('Instant Indexing', 'wp-seopress'),
+                'desc'          => __('Ping Google & Bing to quickly index your content', 'wp-seopress'),
+                'btn_primary'   => admin_url('admin.php?page=seopress-instant-indexing'),
+                'filter'        => 'seopress_remove_feature_instant_indexing',
+            ],
             'advanced' => [
                 'title'         => __('Advanced', 'wp-seopress'),
                 'desc'          => __('Advanced SEO options for advanced users!', 'wp-seopress'),

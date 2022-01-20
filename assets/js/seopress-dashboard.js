@@ -56,6 +56,7 @@ jQuery(document).ready(function ($) {
         "xml-sitemap",
         "social",
         "google-analytics",
+        "instant-indexing",
         "advanced",
         "local-business",
         "woocommerce",

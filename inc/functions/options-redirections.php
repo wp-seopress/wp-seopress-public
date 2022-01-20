@@ -11,7 +11,7 @@ function seopress_redirections_enabled() {
 	} else {
 		global $post;
 		if ($post) {
-			if (get_post_meta($post->ID,'_seopress_redirections_enabled',true)) { 
+			if (get_post_meta($post->ID,'_seopress_redirections_enabled',true)) {
 				$seopress_redirections_enabled = get_post_meta($post->ID,'_seopress_redirections_enabled',true);
 				return $seopress_redirections_enabled;
 			}
@@ -20,22 +20,26 @@ function seopress_redirections_enabled() {
 }
 
 function seopress_redirections_term_enabled() {
-	if (get_queried_object_id()) {
-		$_seopress_redirections_enabled = get_term_meta(get_queried_object_id(),'_seopress_redirections_enabled',true);
-		if ($_seopress_redirections_enabled != '') {
-			return $_seopress_redirections_enabled;
-		}
+	if (!get_queried_object_id()) {
+        return;
 	}
+
+    $value = get_term_meta(get_queried_object_id(),'_seopress_redirections_enabled',true);
+    if (empty($value)) {
+        return;
+    }
+
+    return $value;
 }
 
 //Type
 function seopress_redirections_type() {
-	if (is_home() && get_option( 'page_for_posts' ) !='' && get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_type',true)) { 
+	if (is_home() && get_option( 'page_for_posts' ) !='' && get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_type',true)) {
 		$seopress_redirections_type = get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_type',true);
 		return $seopress_redirections_type;
 	} else {
 		global $post;
-		if (get_post_meta($post->ID,'_seopress_redirections_type',true)) { 
+		if (get_post_meta($post->ID,'_seopress_redirections_type',true)) {
 			$seopress_redirections_type = get_post_meta($post->ID,'_seopress_redirections_type',true);
 			return $seopress_redirections_type;
 		}
@@ -43,12 +47,15 @@ function seopress_redirections_type() {
 }
 
 function seopress_redirections_term_type() {
-	if (get_queried_object_id()) {
-		$_seopress_redirections_type = get_term_meta(get_queried_object_id(),'_seopress_redirections_type',true);
-		if ($_seopress_redirections_type != '') {
-			return $_seopress_redirections_type;
-		}
+	if (!get_queried_object_id()) {
+        return;
 	}
+    $value = get_term_meta(get_queried_object_id(),'_seopress_redirections_type',true);
+    if (empty($value)) {
+        return;
+    }
+
+    return $value;
 }
 
 //URL to redirect
@@ -65,12 +72,12 @@ function seopress_redirections_value() {
 		return $seopress_redirections_value;
 	} else {
 		$seopress_redirections_value = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-		$seopress_redirections_query = new WP_Query( array( 
-				'post_type' => 'seopress_404', 
+		$seopress_redirections_query = new WP_Query( array(
+				'post_type' => 'seopress_404',
 				'posts_per_page' => '-1',
 				'update_post_term_cache' => false, // don't retrieve post terms
-				'update_post_meta_cache' => false, // don't retrieve post meta 
-			) 
+				'update_post_meta_cache' => false, // don't retrieve post meta
+			)
 		);
 		$all_titles = array();
 		if ( $seopress_redirections_query->have_posts() ) {
@@ -92,7 +99,7 @@ function seopress_redirections_hook() {
 	if ( class_exists('\Elementor\Plugin') && \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
 		return;
 	}
-	
+
 	//If the current screen is: Elementor preview mode
 	if ( class_exists('\Elementor\Plugin') && \Elementor\Plugin::$instance->preview->is_preview_mode() ) {
 		return;
@@ -115,14 +122,7 @@ add_action('template_redirect', 'seopress_redirections_hook', 1);
 
 //Attachments redirects
 function seopress_advanced_advanced_attachments_option() {
-	$seopress_advanced_advanced_attachments_option = get_option("seopress_advanced_option_name");
-	if ( ! empty ( $seopress_advanced_advanced_attachments_option ) ) {
-		foreach ($seopress_advanced_advanced_attachments_option as $key => $seopress_advanced_advanced_attachments_value)
-			$options[$key] = $seopress_advanced_advanced_attachments_value;
-		 if (isset($seopress_advanced_advanced_attachments_option['seopress_advanced_advanced_attachments'])) { 
-		 	return $seopress_advanced_advanced_attachments_option['seopress_advanced_advanced_attachments'];
-		 }
-	}
+	return seopress_get_service('AdvancedOption')->getAdvancedAttachments();
 }
 
 function seopress_redirections_attachments(){
@@ -141,15 +141,11 @@ function seopress_redirections_attachments(){
 add_action( 'template_redirect', 'seopress_redirections_attachments', 2 );
 
 //Attachments redirects to file URL
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_attachments_file_option() {
-	$seopress_advanced_advanced_attachments_file_option = get_option("seopress_advanced_option_name");
-	if ( ! empty ( $seopress_advanced_advanced_attachments_file_option ) ) {
-		foreach ($seopress_advanced_advanced_attachments_file_option as $key => $seopress_advanced_advanced_attachments_file_value)
-			$options[$key] = $seopress_advanced_advanced_attachments_file_value;
-		 if (isset($seopress_advanced_advanced_attachments_file_option['seopress_advanced_advanced_attachments_file'])) { 
-		 	return $seopress_advanced_advanced_attachments_file_option['seopress_advanced_advanced_attachments_file'];
-		 }
-	}
+	return seopress_get_service('AdvancedOption')->getAdvancedAttachmentsFile();
 }
 
 function seopress_redirections_attachments_file(){

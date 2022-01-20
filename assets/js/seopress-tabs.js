@@ -9,6 +9,7 @@ jQuery(document).ready(function ($) {
             "seopress_google_analytics_enable",
         ],
         ["seopress_tool_settings", "seopress_tool_settings"],
+        ["seopress_instant_indexing_settings", "seopress_instant_indexing_settings"],
     ];
 
     features.forEach(function (item) {
@@ -83,27 +84,27 @@ jQuery(document).ready(function ($) {
     $("#seopress-tag-site-title").click(function () {
         $("#seopress_titles_home_site_title").val(
             sp_get_field_length($("#seopress_titles_home_site_title")) +
-                $("#seopress-tag-site-title").attr("data-tag")
+            $("#seopress-tag-site-title").attr("data-tag")
         );
     });
 
     $("#seopress-tag-site-desc").click(function () {
         $("#seopress_titles_home_site_title").val(
             sp_get_field_length($("#seopress_titles_home_site_title")) +
-                $("#seopress-tag-site-desc").attr("data-tag")
+            $("#seopress-tag-site-desc").attr("data-tag")
         );
     });
     $("#seopress-tag-site-sep").click(function () {
         $("#seopress_titles_home_site_title").val(
             sp_get_field_length($("#seopress_titles_home_site_title")) +
-                $("#seopress-tag-site-sep").attr("data-tag")
+            $("#seopress-tag-site-sep").attr("data-tag")
         );
     });
 
     $("#seopress-tag-meta-desc").click(function () {
         $("#seopress_titles_home_site_desc").val(
             sp_get_field_length($("#seopress_titles_home_site_desc")) +
-                $("#seopress-tag-meta-desc").attr("data-tag")
+            $("#seopress-tag-meta-desc").attr("data-tag")
         );
     });
 
@@ -111,19 +112,19 @@ jQuery(document).ready(function ($) {
     $("#seopress-tag-post-author").click(function () {
         $("#seopress_titles_archive_post_author").val(
             sp_get_field_length($("#seopress_titles_archive_post_author")) +
-                $("#seopress-tag-post-author").attr("data-tag")
+            $("#seopress-tag-post-author").attr("data-tag")
         );
     });
     $("#seopress-tag-sep-author").click(function () {
         $("#seopress_titles_archive_post_author").val(
             sp_get_field_length($("#seopress_titles_archive_post_author")) +
-                $("#seopress-tag-sep-author").attr("data-tag")
+            $("#seopress-tag-sep-author").attr("data-tag")
         );
     });
     $("#seopress-tag-site-title-author").click(function () {
         $("#seopress_titles_archive_post_author").val(
             sp_get_field_length($("#seopress_titles_archive_post_author")) +
-                $("#seopress-tag-site-title-author").attr("data-tag")
+            $("#seopress-tag-site-title-author").attr("data-tag")
         );
     });
 
@@ -131,19 +132,19 @@ jQuery(document).ready(function ($) {
     $("#seopress-tag-archive-date").click(function () {
         $("#seopress_titles_archives_date_title").val(
             sp_get_field_length($("#seopress_titles_archives_date_title")) +
-                $("#seopress-tag-archive-date").attr("data-tag")
+            $("#seopress-tag-archive-date").attr("data-tag")
         );
     });
     $("#seopress-tag-sep-date").click(function () {
         $("#seopress_titles_archives_date_title").val(
             sp_get_field_length($("#seopress_titles_archives_date_title")) +
-                $("#seopress-tag-sep-date").attr("data-tag")
+            $("#seopress-tag-sep-date").attr("data-tag")
         );
     });
     $("#seopress-tag-site-title-date").click(function () {
         $("#seopress_titles_archives_date_title").val(
             sp_get_field_length($("#seopress_titles_archives_date_title")) +
-                $("#seopress-tag-site-title-date").attr("data-tag")
+            $("#seopress-tag-site-title-date").attr("data-tag")
         );
     });
 
@@ -151,19 +152,19 @@ jQuery(document).ready(function ($) {
     $("#seopress-tag-search-keywords").click(function () {
         $("#seopress_titles_archives_search_title").val(
             sp_get_field_length($("#seopress_titles_archives_search_title")) +
-                $("#seopress-tag-search-keywords").attr("data-tag")
+            $("#seopress-tag-search-keywords").attr("data-tag")
         );
     });
     $("#seopress-tag-sep-search").click(function () {
         $("#seopress_titles_archives_search_title").val(
             sp_get_field_length($("#seopress_titles_archives_search_title")) +
-                $("#seopress-tag-sep-search").attr("data-tag")
+            $("#seopress-tag-sep-search").attr("data-tag")
         );
     });
     $("#seopress-tag-site-title-search").click(function () {
         $("#seopress_titles_archives_search_title").val(
             sp_get_field_length($("#seopress_titles_archives_search_title")) +
-                $("#seopress-tag-site-title-search").attr("data-tag")
+            $("#seopress-tag-site-title-search").attr("data-tag")
         );
     });
 
@@ -171,13 +172,13 @@ jQuery(document).ready(function ($) {
     $("#seopress-tag-site-title-404").click(function () {
         $("#seopress_titles_archives_404_title").val(
             sp_get_field_length($("#seopress_titles_archives_404_title")) +
-                $("#seopress-tag-site-title-404").attr("data-tag")
+            $("#seopress-tag-site-title-404").attr("data-tag")
         );
     });
     $("#seopress-tag-sep-404").click(function () {
         $("#seopress_titles_archives_404_title").val(
             sp_get_field_length($("#seopress_titles_archives_404_title")) +
-                $("#seopress-tag-sep-404").attr("data-tag")
+            $("#seopress-tag-sep-404").attr("data-tag")
         );
     });
 
@@ -185,19 +186,19 @@ jQuery(document).ready(function ($) {
     $("#seopress-tag-post-title-bd-groups").click(function () {
         $("#seopress_titles_bp_groups_title").val(
             sp_get_field_length($("#seopress_titles_bp_groups_title")) +
-                $("#seopress-tag-post-title-bd-groups").attr("data-tag")
+            $("#seopress-tag-post-title-bd-groups").attr("data-tag")
         );
     });
     $("#seopress-tag-sep-bd-groups").click(function () {
         $("#seopress_titles_bp_groups_title").val(
             sp_get_field_length($("#seopress_titles_bp_groups_title")) +
-                $("#seopress-tag-sep-bd-groups").attr("data-tag")
+            $("#seopress-tag-sep-bd-groups").attr("data-tag")
         );
     });
     $("#seopress-tag-site-title-bd-groups").click(function () {
         $("#seopress_titles_bp_groups_title").val(
             sp_get_field_length($("#seopress_titles_bp_groups_title")) +
-                $("#seopress-tag-site-title-bd-groups").attr("data-tag")
+            $("#seopress-tag-site-title-bd-groups").attr("data-tag")
         );
     });
 
@@ -212,14 +213,14 @@ jQuery(document).ready(function ($) {
             if (_self.hasClass("tag-title")) {
                 input_title.val(
                     sp_get_field_length(input_title) +
-                        $(current).attr("data-value")
+                    $(current).attr("data-value")
                 );
                 input_title.trigger("paste");
             }
             if (_self.hasClass("tag-description")) {
                 input_desc.val(
                     sp_get_field_length(input_desc) +
-                        $(current).attr("data-value")
+                    $(current).attr("data-value")
                 );
                 input_desc.trigger("paste");
             }
@@ -259,6 +260,88 @@ jQuery(document).ready(function ($) {
                 alreadyBind = true;
                 $(document).on("click", closeItem);
             }
+        });
+    });
+
+    //Instant Indexing: Display keywords counter
+    if ($("#seopress_instant_indexing_manual_batch").length) {
+        newLines = $('#seopress_instant_indexing_manual_batch').val().split("\n").length;
+        $('#seopress_instant_indexing_url_count').text(newLines);
+        var lines = 50;
+        var linesUsed = $('#seopress_instant_indexing_url_count');
+
+        if (newLines) {
+            var progress = Math.round(newLines / 50 * 100);
+
+            if (progress >= 100) {
+                progress = 100;
+            }
+
+            $('#seopress_instant_indexing_url_progress').attr('aria-valuenow', progress),
+                $('#seopress_instant_indexing_url_progress').text(progress + '%'),
+                $('#seopress_instant_indexing_url_progress').css('width', progress + '%')
+        }
+
+        $("#seopress_instant_indexing_manual_batch").on('keyup paste change click focus mouseout', function (e) {
+
+
+            newLines = $(this).val().split("\n").length;
+            linesUsed.text(newLines);
+
+            if (newLines > lines) {
+                linesUsed.css('color', 'red');
+            } else {
+                linesUsed.css('color', '');
+            }
+
+            if (newLines) {
+                var progress = Math.round(newLines / 50 * 100);
+            }
+
+            if (progress >= 100) {
+                progress = 100;
+            }
+            $('#seopress_instant_indexing_url_progress').attr('aria-valuenow', progress),
+                $('#seopress_instant_indexing_url_progress').text(progress + '%'),
+                $('#seopress_instant_indexing_url_progress').css('width', progress + '%')
+        });
+    }
+
+    //Instant Indexing: Batch URLs
+    $('.seopress-instant-indexing-batch').on('click', function () {
+        $('#seopress-tabs .spinner').css(
+            "visibility",
+            "visible"
+        );
+        $('#seopress-tabs .spinner').css(
+            "float",
+            "none"
+        );
+        $.ajax({
+            method: 'POST',
+            url: seopressAjaxInstantIndexingPost.seopress_instant_indexing_post,
+            data: {
+                action: 'seopress_instant_indexing_post',
+                _ajax_nonce: seopressAjaxInstantIndexingPost.seopress_nonce,
+            },
+            success: function (data) {
+                window.location.reload(true);
+            },
+        });
+    });
+
+    //Instant Indexing: refresh API Key
+    $('.seopress-instant-indexing-refresh-api-key').on('click', function () {
+        $.ajax({
+            method: 'POST',
+            url: seopressAjaxInstantIndexingApiKey.seopress_instant_indexing_generate_api_key,
+            data: {
+                action: 'seopress_instant_indexing_generate_api_key',
+                _ajax_nonce: seopressAjaxInstantIndexingApiKey.seopress_nonce,
+            },
+            success: function (data) {
+                window.location.reload(true);
+            },
         });
     });
 });

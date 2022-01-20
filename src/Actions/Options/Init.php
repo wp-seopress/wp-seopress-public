@@ -157,6 +157,7 @@ class Init implements ActivationHook
             'toggle-xml-sitemap'      => '1',
             'toggle-social'           => '1',
             'toggle-google-analytics' => '1',
+            'toggle-instant-indexing' => '1',
             'toggle-advanced'         => '1',
             'toggle-dublin-core'      => '1',
             'toggle-local-business'   => '1',

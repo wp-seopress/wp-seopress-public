@@ -64,7 +64,20 @@
                 include_once ABSPATH . WPINC . '/feed.php';
 
                 // Get a SimplePie feed object from the specified feed source.
+
+                $wplang         = get_locale();
+
                 $rss = fetch_feed('https://www.seopress.org/feed');
+
+                $fr = [
+                    'fr_FR',
+                    'fr_BE',
+                    'fr_CA'
+                ];
+
+                if (in_array($wplang, $fr)) {
+                    $rss = fetch_feed('https://www.seopress.org/fr/feed');
+                }
 
                 $maxitems = 0;
 

@@ -39,6 +39,9 @@ function seopress_get_docs_links()
                 'audit_bl'              => ['Auditer les backlinks de votre site WordPress (dans WordPress)' => 'https://www.seopress.org/fr/support/tutoriels/auditer-les-backlinks-de-votre-site-wordpress-dans-wordpress/' . $utm3],
                 'importance_bl'         => ['L’importance des backlinks' => 'https://www.seopress.org/fr/support/tutoriels/limportance-des-backlinks/' . $utm3],
             ],
+            'universal' => [
+                'introduction' => 'https://www.seopress.org/fr/fonctionnalites/integration-constructeurs-de-page/' . $utm,
+            ],
             'titles' => [
                 'thumbnail' => 'https://support.google.com/programmable-search/answer/1626955?hl=fr',
                 'wrong_meta' => 'https://www.seopress.org/fr/support/guides/google-utilise-une-balise-titre-meta-description-incorrecte-dans-les-resultats-de-recherche/' . $utm,
@@ -88,6 +91,7 @@ function seopress_get_docs_links()
             ],
             'breadcrumbs' => [
                 'sep' => 'https://www.seopress.org/fr/support/hooks/filtrer-le-separateur-du-fil-dariane/' . $utm,
+                'i18n' => 'https://www.seopress.org/fr/support/guides/traduire-les-options-de-seopress-avec-wpml-polylang/' . $utm,
             ],
             'redirects'   => [
                 'enable' => 'https://www.seopress.org/fr/support/guides/activer-les-redirections-301-et-la-surveillance-des-404/' . $utm,
@@ -101,6 +105,10 @@ function seopress_get_docs_links()
             ],
             'page_speed' => [
                 'cwv' => 'https://www.seopress.org/fr/newsroom/reportage/les-core-web-vitals-et-leurs-effets-sur-le-seo-des-sites-wordpress/' . $utm,
+                'api' => 'https://www.seopress.org/fr/support/guides/ajouter-cle-api-google-page-speed-insights-seopress/' . $utm,
+            ],
+            'indexing_api' => [
+                'google' => 'https://www.seopress.org/fr/support/guides/api-google-instant-indexing-avec-seopress/' . $utm,
             ],
             'tools' => [
                 'csv_import' => 'https://www.seopress.org/fr/support/guides/importer-metadonnees-csv-seopress-pro/' . $utm,
@@ -138,6 +146,9 @@ function seopress_get_docs_links()
                 'optimize_kw'           => ['Optimize WordPress posts for a keyword' => 'https://www.seopress.org/support/tutorials/optimize-wordpress-posts-for-a-keyword/' . $utm3],
                 'audit_bl'              => ['Audit the backlinks of your WordPress site (in WordPress)' => 'https://www.seopress.org/support/tutorials/audit-the-backlinks-of-your-wordpress-site-in-wordpress/' . $utm3],
                 'importance_bl'         => ['The importance of backlinks' => 'https://www.seopress.org/support/tutorials/the-importance-of-backlinks/' . $utm3],
+            ],
+            'universal' => [
+                'introduction' => 'https://www.seopress.org/features/page-builders-integration/' . $utm,
             ],
             'titles' => [
                 'thumbnail' => 'https://support.google.com/programmable-search/answer/1626955?hl=en',
@@ -188,6 +199,7 @@ function seopress_get_docs_links()
             ],
             'breadcrumbs' => [
                 'sep' => 'https://www.seopress.org/support/hooks/filter-breadcrumbs-separator/' . $utm,
+                'i18n' => 'https://www.seopress.org/support/guides/translate-seopress-options-with-wpml-polylang/' . $utm,
             ],
             'redirects'   => [
                 'enable' => 'https://www.seopress.org/support/guides/redirections/' . $utm,
@@ -201,6 +213,10 @@ function seopress_get_docs_links()
             ],
             'page_speed' => [
                 'cwv' => 'https://www.seopress.org/newsroom/featured-stories/core-web-vitals-and-wordpress-seo/' . $utm,
+                'api' => 'https://www.seopress.org/support/guides/add-your-google-page-speed-insights-api-key-to-seopress/' . $utm,
+            ],
+            'indexing_api' => [
+                'google' => 'https://www.seopress.org/support/guides/google-indexing-api-with-seopress/' . $utm,
             ],
             'tools' => [
                 'csv_import' => 'https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/' . $utm,

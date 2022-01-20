@@ -19,6 +19,7 @@ class seopress_options
         require_once dirname(__FILE__) . '/admin-dyn-variables-helper.php'; //Dynamic variables
 
         add_action('admin_menu', [$this, 'add_plugin_page'], 10);
+        add_action('admin_init', [$this, 'set_default_values'], 10);
         add_action('admin_init', [$this, 'page_init']);
         add_action('admin_init', [$this, 'seopress_feature_save'], 30);
         add_action('admin_init', [$this, 'seopress_feature_title'], 20);
@@ -94,12 +95,13 @@ class seopress_options
             $sp_seo_admin_menu['title'] = apply_filters('seopress_seo_admin_menu_title', $sp_seo_admin_menu['title']);
         }
 
-        add_menu_page(__('SEOPress Option Page', 'wp-seopress-pro'), $sp_seo_admin_menu['title'], seopress_capability('manage_options', 'menu'), 'seopress-option', [$this, 'create_admin_page'], $sp_seo_admin_menu['icon'], 90);
+        add_menu_page(__('SEOPress Option Page', 'wp-seopress'), $sp_seo_admin_menu['title'], seopress_capability('manage_options', 'menu'), 'seopress-option', [$this, 'create_admin_page'], $sp_seo_admin_menu['icon'], 90);
         add_submenu_page('seopress-option', __('Dashboard', 'wp-seopress'), __('Dashboard', 'wp-seopress'), seopress_capability('manage_options', 'menu'), 'seopress-option', [$this, 'create_admin_page']);
         $seopress_titles_help_tab           = add_submenu_page('seopress-option', __('Titles & Metas', 'wp-seopress'), __('Titles & Metas', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::TITLE_METAS), 'seopress-titles', [$this, 'seopress_titles_page']);
         $seopress_xml_sitemaps_help_tab     = add_submenu_page('seopress-option', __('XML - HTML Sitemap', 'wp-seopress'), __('XML - HTML Sitemap', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::XML_HTML_SITEMAP), 'seopress-xml-sitemap', [$this, 'seopress_xml_sitemap_page']);
         $seopress_social_networks_help_tab  = add_submenu_page('seopress-option', __('Social Networks', 'wp-seopress'), __('Social Networks', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::SOCIAL_NETWORKS), 'seopress-social', [$this, 'seopress_social_page']);
         $seopress_google_analytics_help_tab = add_submenu_page('seopress-option', __('Analytics', 'wp-seopress'), __('Analytics', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::ANALYTICS), 'seopress-google-analytics', [$this, 'seopress_google_analytics_page']);
+        add_submenu_page('seopress-option', __('Instant Indexing', 'wp-seopress'), __('Instant Indexing', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::INSTANT_INDEXING), 'seopress-instant-indexing', [$this, 'seopress_instant_indexing_page']);
         add_submenu_page('seopress-option', __('Advanced', 'wp-seopress'), __('Advanced', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::ADVANCED), 'seopress-advanced', [$this, 'seopress_advanced_page']);
         add_submenu_page('seopress-option', __('Tools', 'wp-seopress'), __('Tools', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::TOOLS), 'seopress-import-export', [$this, 'seopress_import_export_page']);
 
@@ -150,9 +152,26 @@ class seopress_options
         require_once dirname(__FILE__) . '/admin-pages/Tools.php';
     }
 
+    public function seopress_instant_indexing_page()
+    {
+        require_once dirname(__FILE__) . '/admin-pages/InstantIndexing.php';
+    }
+
     public function create_admin_page()
     {
         require_once dirname(__FILE__) . '/admin-pages/Main.php';
+    }
+
+    public function set_default_values()
+    {
+        $seopress_instant_indexing_option_name = get_option('seopress_instant_indexing_option_name');
+
+        //Init if option doesn't exist
+        if (false === $seopress_instant_indexing_option_name) {
+            if ('1' == seopress_get_toggle_option('instant-indexing')) {
+                seopress_instant_indexing_generate_api_key_fn();
+            }
+        }
     }
 
     public function page_init()
@@ -206,13 +225,19 @@ class seopress_options
             [$this, 'sanitize'] // Sanitize
         );
 
+        register_setting(
+            'seopress_instant_indexing_option_group', // Option group
+            'seopress_instant_indexing_option_name', // Option name
+            [$this, 'sanitize'] // Sanitize
+        );
+
         require_once dirname(__FILE__) . '/settings/Titles.php';
         require_once dirname(__FILE__) . '/settings/Sitemaps.php';
         require_once dirname(__FILE__) . '/settings/Social.php';
         require_once dirname(__FILE__) . '/settings/Analytics.php';
         require_once dirname(__FILE__) . '/settings/ImageSEO.php';
         require_once dirname(__FILE__) . '/settings/Advanced.php';
-        require_once dirname(__FILE__) . '/settings/Tools.php';
+        require_once dirname(__FILE__) . '/settings/InstantIndexing.php';
     }
 
     public function sanitize($input)
@@ -237,7 +262,7 @@ class seopress_options
         require_once dirname(__FILE__) . '/sections/Analytics.php';
         require_once dirname(__FILE__) . '/sections/ImageSEO.php';
         require_once dirname(__FILE__) . '/sections/Advanced.php';
-        require_once dirname(__FILE__) . '/sections/Tools.php';
+        require_once dirname(__FILE__) . '/sections/InstantIndexing.php';
     }
 
     public function load_callbacks()
@@ -248,7 +273,7 @@ class seopress_options
         require_once dirname(__FILE__) . '/callbacks/Analytics.php';
         require_once dirname(__FILE__) . '/callbacks/ImageSEO.php';
         require_once dirname(__FILE__) . '/callbacks/Advanced.php';
-        require_once dirname(__FILE__) . '/callbacks/Tools.php';
+        require_once dirname(__FILE__) . '/callbacks/InstantIndexing.php';
     }
 }
 

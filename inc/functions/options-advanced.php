@@ -5,16 +5,11 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //Advanced
 //=================================================================================================
 //?replytocom
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_replytocom_option() {
-    $seopress_advanced_advanced_replytocom_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_replytocom_option)) {
-        foreach ($seopress_advanced_advanced_replytocom_option as $key => $seopress_advanced_advanced_replytocom_value) {
-            $options[$key] = $seopress_advanced_advanced_replytocom_value;
-        }
-        if (isset($seopress_advanced_advanced_replytocom_option['seopress_advanced_advanced_replytocom'])) {
-            return $seopress_advanced_advanced_replytocom_option['seopress_advanced_advanced_replytocom'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedReplytocom();
 }
 
 if ('1' == seopress_advanced_advanced_replytocom_option()) {
@@ -25,16 +20,11 @@ function seopress_remove_reply_to_com($link) {
 }
 
 //WordPress Meta generator
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_wp_generator_option() {
-    $seopress_advanced_advanced_wp_generator_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_wp_generator_option)) {
-        foreach ($seopress_advanced_advanced_wp_generator_option as $key => $seopress_advanced_advanced_wp_generator_value) {
-            $options[$key] = $seopress_advanced_advanced_wp_generator_value;
-        }
-        if (isset($seopress_advanced_advanced_wp_generator_option['seopress_advanced_advanced_wp_generator'])) {
-            return $seopress_advanced_advanced_wp_generator_option['seopress_advanced_advanced_wp_generator'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedWPGenerator();
 }
 
 if ('1' == seopress_advanced_advanced_wp_generator_option()) {
@@ -42,17 +32,13 @@ if ('1' == seopress_advanced_advanced_wp_generator_option()) {
 }
 
 //Remove hentry post class
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_hentry_option() {
-    $seopress_advanced_advanced_hentry_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_hentry_option)) {
-        foreach ($seopress_advanced_advanced_hentry_option as $key => $seopress_advanced_advanced_hentry_value) {
-            $options[$key] = $seopress_advanced_advanced_hentry_value;
-        }
-        if (isset($seopress_advanced_advanced_hentry_option['seopress_advanced_advanced_hentry'])) {
-            return $seopress_advanced_advanced_hentry_option['seopress_advanced_advanced_hentry'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedHentry();
 }
+
 if ('1' == seopress_advanced_advanced_hentry_option()) {
     function seopress_advanced_advanced_hentry_hook($classes) {
         $classes = array_diff($classes, ['hentry']);
@@ -62,17 +48,12 @@ if ('1' == seopress_advanced_advanced_hentry_option()) {
     add_filter('post_class', 'seopress_advanced_advanced_hentry_hook');
 }
 
-//WordPress Shortlink
+//WordPress
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_wp_shortlink_option() {
-    $seopress_advanced_advanced_wp_shortlink_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_wp_shortlink_option)) {
-        foreach ($seopress_advanced_advanced_wp_shortlink_option as $key => $seopress_advanced_advanced_wp_shortlink_value) {
-            $options[$key] = $seopress_advanced_advanced_wp_shortlink_value;
-        }
-        if (isset($seopress_advanced_advanced_wp_shortlink_option['seopress_advanced_advanced_wp_shortlink'])) {
-            return $seopress_advanced_advanced_wp_shortlink_option['seopress_advanced_advanced_wp_shortlink'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedWPShortlink();
 }
 
 if ('1' == seopress_advanced_advanced_wp_shortlink_option()) {
@@ -80,16 +61,11 @@ if ('1' == seopress_advanced_advanced_wp_shortlink_option()) {
 }
 
 //WordPress WLWManifest
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_wp_wlw_option() {
-    $seopress_advanced_advanced_wp_wlw_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_wp_wlw_option)) {
-        foreach ($seopress_advanced_advanced_wp_wlw_option as $key => $seopress_advanced_advanced_wp_wlw_value) {
-            $options[$key] = $seopress_advanced_advanced_wp_wlw_value;
-        }
-        if (isset($seopress_advanced_advanced_wp_wlw_option['seopress_advanced_advanced_wp_wlw'])) {
-            return $seopress_advanced_advanced_wp_wlw_option['seopress_advanced_advanced_wp_wlw'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedWPManifest();
 }
 
 if ('1' == seopress_advanced_advanced_wp_wlw_option()) {
@@ -97,16 +73,11 @@ if ('1' == seopress_advanced_advanced_wp_wlw_option()) {
 }
 
 //WordPress RSD
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_wp_rsd_option() {
-    $seopress_advanced_advanced_wp_rsd_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_wp_rsd_option)) {
-        foreach ($seopress_advanced_advanced_wp_rsd_option as $key => $seopress_advanced_advanced_wp_rsd_value) {
-            $options[$key] = $seopress_advanced_advanced_wp_rsd_value;
-        }
-        if (isset($seopress_advanced_advanced_wp_rsd_option['seopress_advanced_advanced_wp_rsd'])) {
-            return $seopress_advanced_advanced_wp_rsd_option['seopress_advanced_advanced_wp_rsd'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedWPRSD();
 }
 
 if ('1' == seopress_advanced_advanced_wp_rsd_option()) {
@@ -114,16 +85,11 @@ if ('1' == seopress_advanced_advanced_wp_rsd_option()) {
 }
 
 //Google site verification
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_google_option() {
-    $seopress_advanced_advanced_google_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_google_option)) {
-        foreach ($seopress_advanced_advanced_google_option as $key => $seopress_advanced_advanced_google_value) {
-            $options[$key] = $seopress_advanced_advanced_google_value;
-        }
-        if (isset($seopress_advanced_advanced_google_option['seopress_advanced_advanced_google'])) {
-            return $seopress_advanced_advanced_google_option['seopress_advanced_advanced_google'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification();
 }
 
 function seopress_advanced_advanced_google_hook() {
@@ -138,16 +104,11 @@ if (is_home() || is_front_page()) {
 }
 
 //Bing site verification
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_bing_option() {
-    $seopress_advanced_advanced_bing_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_bing_option)) {
-        foreach ($seopress_advanced_advanced_bing_option as $key => $seopress_advanced_advanced_bing_value) {
-            $options[$key] = $seopress_advanced_advanced_bing_value;
-        }
-        if (isset($seopress_advanced_advanced_bing_option['seopress_advanced_advanced_bing'])) {
-            return $seopress_advanced_advanced_bing_option['seopress_advanced_advanced_bing'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedBingVerification();
 }
 
 function seopress_advanced_advanced_bing_hook() {
@@ -162,16 +123,11 @@ if (is_home() || is_front_page()) {
 }
 
 //Pinterest site verification
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_advanced_pinterest_option() {
-    $seopress_advanced_advanced_pinterest_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_pinterest_option)) {
-        foreach ($seopress_advanced_advanced_pinterest_option as $key => $seopress_advanced_advanced_pinterest_value) {
-            $options[$key] = $seopress_advanced_advanced_pinterest_value;
-        }
-        if (isset($seopress_advanced_advanced_pinterest_option['seopress_advanced_advanced_pinterest'])) {
-            return $seopress_advanced_advanced_pinterest_option['seopress_advanced_advanced_pinterest'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAdvancedPinterestVerification();
 }
 
 function seopress_advanced_advanced_pinterest_hook() {
@@ -187,24 +143,16 @@ if (is_home() || is_front_page()) {
 }
 
 //Yandex site verification
-function seopress_advanced_advanced_yandex_option() {
-    $seopress_advanced_advanced_yandex_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_advanced_yandex_option)) {
-        foreach ($seopress_advanced_advanced_yandex_option as $key => $seopress_advanced_advanced_yandex_value) {
-            $options[$key] = $seopress_advanced_advanced_yandex_value;
-        }
-        if (isset($seopress_advanced_advanced_yandex_option['seopress_advanced_advanced_yandex'])) {
-            return $seopress_advanced_advanced_yandex_option['seopress_advanced_advanced_yandex'];
-        }
-    }
-}
-
 function seopress_advanced_advanced_yandex_hook() {
-    if ('' != seopress_advanced_advanced_yandex_option()) {
-        $seopress_advanced_advanced_yandex = '<meta name="yandex-verification" content="' . seopress_advanced_advanced_yandex_option() . '" />';
-        $seopress_advanced_advanced_yandex .= "\n";
-        echo $seopress_advanced_advanced_yandex;
+    $contentYandex = seopress_get_service('AdvancedOption')->getAdvancedYandexVerification();
+
+    if(empty($contentYandex)){
+        return;
     }
+
+    $meta = '<meta name="yandex-verification" content="' . $contentYandex . '" />';
+    $meta .= "\n";
+    echo $meta;
 }
 
 if (is_home() || is_front_page()) {

@@ -117,7 +117,7 @@ function seopress_advanced_advanced_product_cat_url_callback() {
     } else { ?>
         <div class="seopress-notice is-warning">
             <p>
-                <?php _e('You need to enable <strong>WooCommerce</strong> to apply these settings.', 'wp-seopress-pro'); ?>
+                <?php _e('You need to enable <strong>WooCommerce</strong> to apply these settings.', 'wp-seopress'); ?>
             </p>
         </div>
         <?php
@@ -414,6 +414,7 @@ function seopress_advanced_appearance_universal_metabox_callback() {
 }
 
 function seopress_advanced_appearance_universal_metabox_disable_callback() {
+    $docs = function_exists('seopress_get_docs_links') ? seopress_get_docs_links() : '';
     $options = get_option('seopress_advanced_option_name');
 
     if(!$options){
@@ -435,6 +436,13 @@ function seopress_advanced_appearance_universal_metabox_disable_callback() {
 
     <?php _e('Disable the universal SEO metabox', 'wp-seopress'); ?>
 </label>
+
+<p class="description">
+    <a class="seopress-help" href="<?php echo $docs['universal']['introduction']; ?>" target="_blank">
+        <?php _e('Learn more about how we interface with all page builders to optimize your productivity','wp-seopress'); ?>
+        <span class="seopress-help dashicons dashicons-external"></span>
+    </a>
+</p>
 
 <?php if (isset($options['seopress_advanced_appearance_adminbar'])) {
         esc_attr($options['seopress_advanced_appearance_adminbar']);

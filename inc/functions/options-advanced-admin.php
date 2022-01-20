@@ -63,57 +63,27 @@ if (isset($pagenow) && 'options-permalink.php' == $pagenow) {
 //Automatic title on media file
 function seopress_advanced_advanced_image_auto_title_editor_option()
 {
-    $seopress_advanced_advanced_image_auto_title_editor_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_advanced_image_auto_title_editor_option)) {
-        foreach ($seopress_advanced_advanced_image_auto_title_editor_option as $key => $seopress_advanced_advanced_image_auto_title_editor_value) {
-            $options[$key] = $seopress_advanced_advanced_image_auto_title_editor_value;
-        }
-        if (isset($seopress_advanced_advanced_image_auto_title_editor_option['seopress_advanced_advanced_image_auto_title_editor'])) {
-            return $seopress_advanced_advanced_image_auto_title_editor_option['seopress_advanced_advanced_image_auto_title_editor'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getImageAutoTitleEditor();
+
 }
 
 //Automatic alt text on media file
 function seopress_advanced_advanced_image_auto_alt_editor_option()
 {
-    $seopress_advanced_advanced_image_auto_alt_editor_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_advanced_image_auto_alt_editor_option)) {
-        foreach ($seopress_advanced_advanced_image_auto_alt_editor_option as $key => $seopress_advanced_advanced_image_auto_alt_editor_value) {
-            $options[$key] = $seopress_advanced_advanced_image_auto_alt_editor_value;
-        }
-        if (isset($seopress_advanced_advanced_image_auto_alt_editor_option['seopress_advanced_advanced_image_auto_alt_editor'])) {
-            return $seopress_advanced_advanced_image_auto_alt_editor_option['seopress_advanced_advanced_image_auto_alt_editor'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getImageAutoAltEditor();
 }
 
 //Automatic caption on media file
 function seopress_advanced_advanced_image_auto_caption_editor_option()
 {
-    $seopress_advanced_advanced_image_auto_caption_editor_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_advanced_image_auto_caption_editor_option)) {
-        foreach ($seopress_advanced_advanced_image_auto_caption_editor_option as $key => $seopress_advanced_advanced_image_auto_caption_editor_value) {
-            $options[$key] = $seopress_advanced_advanced_image_auto_caption_editor_value;
-        }
-        if (isset($seopress_advanced_advanced_image_auto_caption_editor_option['seopress_advanced_advanced_image_auto_caption_editor'])) {
-            return $seopress_advanced_advanced_image_auto_caption_editor_option['seopress_advanced_advanced_image_auto_caption_editor'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getImageAutoCaptionEditor();
+
 }
 
 //Automatic desc on media file
 function seopress_advanced_advanced_image_auto_desc_editor_option()
 {
-    $seopress_advanced_advanced_image_auto_desc_editor_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_advanced_image_auto_desc_editor_option)) {
-        foreach ($seopress_advanced_advanced_image_auto_desc_editor_option as $key => $seopress_advanced_advanced_image_auto_desc_editor_value) {
-            $options[$key] = $seopress_advanced_advanced_image_auto_desc_editor_value;
-        }
-        if (isset($seopress_advanced_advanced_image_auto_desc_editor_option['seopress_advanced_advanced_image_auto_desc_editor'])) {
-            return $seopress_advanced_advanced_image_auto_desc_editor_option['seopress_advanced_advanced_image_auto_desc_editor'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getImageAutoDescriptionEditor();
 }
 
 if ('' != seopress_advanced_advanced_image_auto_title_editor_option() ||
@@ -165,214 +135,158 @@ if ('' != seopress_advanced_advanced_image_auto_title_editor_option() ||
 }
 
 //Metaboxe position
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_metaboxe_position_option()
 {
-    $seopress_advanced_appearance_metaboxe_position_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_metaboxe_position_option)) {
-        foreach ($seopress_advanced_appearance_metaboxe_position_option as $key => $seopress_advanced_appearance_metaboxe_position_value) {
-            $options[$key] = $seopress_advanced_appearance_metaboxe_position_value;
-        }
-        if (isset($seopress_advanced_appearance_metaboxe_position_option['seopress_advanced_appearance_metaboxe_position'])) {
-            return $seopress_advanced_appearance_metaboxe_position_option['seopress_advanced_appearance_metaboxe_position'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceMetaboxePosition();
+
 }
 
 //Set default tab in schema metabox
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_schema_default_tab_option()
 {
-    $seopress_advanced_appearance_schema_default_tab_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_schema_default_tab_option)) {
-        foreach ($seopress_advanced_appearance_schema_default_tab_option as $key => $seopress_advanced_appearance_schema_default_tab_value) {
-            $options[$key] = $seopress_advanced_appearance_schema_default_tab_value;
-        }
-        if (isset($seopress_advanced_appearance_schema_default_tab_option['seopress_advanced_appearance_schema_default_tab'])) {
-            return $seopress_advanced_appearance_schema_default_tab_option['seopress_advanced_appearance_schema_default_tab'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceSchemaDefaultTab();
+
 }
 
 //Columns in post types
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_title_col_option()
 {
-    $seopress_advanced_appearance_title_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_title_col_option)) {
-        foreach ($seopress_advanced_appearance_title_col_option as $key => $seopress_advanced_appearance_title_col_value) {
-            $options[$key] = $seopress_advanced_appearance_title_col_value;
-        }
-        if (isset($seopress_advanced_appearance_title_col_option['seopress_advanced_appearance_title_col'])) {
-            return $seopress_advanced_appearance_title_col_option['seopress_advanced_appearance_title_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceTitleCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_meta_desc_col_option()
 {
-    $seopress_advanced_appearance_meta_desc_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_meta_desc_col_option)) {
-        foreach ($seopress_advanced_appearance_meta_desc_col_option as $key => $seopress_advanced_appearance_meta_desc_col_value) {
-            $options[$key] = $seopress_advanced_appearance_meta_desc_col_value;
-        }
-        if (isset($seopress_advanced_appearance_meta_desc_col_option['seopress_advanced_appearance_meta_desc_col'])) {
-            return $seopress_advanced_appearance_meta_desc_col_option['seopress_advanced_appearance_meta_desc_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceMetaDescriptionCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_redirect_url_col_option()
 {
-    $seopress_advanced_appearance_redirect_url_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_redirect_url_col_option)) {
-        foreach ($seopress_advanced_appearance_redirect_url_col_option as $key => $seopress_advanced_appearance_redirect_url_col_value) {
-            $options[$key] = $seopress_advanced_appearance_redirect_url_col_value;
-        }
-        if (isset($seopress_advanced_appearance_redirect_url_col_option['seopress_advanced_appearance_redirect_url_col'])) {
-            return $seopress_advanced_appearance_redirect_url_col_option['seopress_advanced_appearance_redirect_url_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceRedirectUrlCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_redirect_enable_col_option()
 {
-    $seopress_advanced_appearance_redirect_enable_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_redirect_enable_col_option)) {
-        foreach ($seopress_advanced_appearance_redirect_enable_col_option as $key => $seopress_advanced_appearance_redirect_enable_col_value) {
-            $options[$key] = $seopress_advanced_appearance_redirect_enable_col_value;
-        }
-        if (isset($seopress_advanced_appearance_redirect_enable_col_option['seopress_advanced_appearance_redirect_enable_col'])) {
-            return $seopress_advanced_appearance_redirect_enable_col_option['seopress_advanced_appearance_redirect_enable_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceRedirectEnableCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_canonical_option()
 {
-    $seopress_advanced_appearance_canonical_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_canonical_option)) {
-        foreach ($seopress_advanced_appearance_canonical_option as $key => $seopress_advanced_appearance_canonical_value) {
-            $options[$key] = $seopress_advanced_appearance_canonical_value;
-        }
-        if (isset($seopress_advanced_appearance_canonical_option['seopress_advanced_appearance_canonical'])) {
-            return $seopress_advanced_appearance_canonical_option['seopress_advanced_appearance_canonical'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceCanonical();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_target_kw_col_option()
 {
-    $seopress_advanced_appearance_target_kw_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_target_kw_col_option)) {
-        foreach ($seopress_advanced_appearance_target_kw_col_option as $key => $seopress_advanced_appearance_target_kw_col_value) {
-            $options[$key] = $seopress_advanced_appearance_target_kw_col_value;
-        }
-        if (isset($seopress_advanced_appearance_target_kw_col_option['seopress_advanced_appearance_target_kw_col'])) {
-            return $seopress_advanced_appearance_target_kw_col_option['seopress_advanced_appearance_target_kw_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceTargetKwCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_noindex_col_option()
 {
-    $seopress_advanced_appearance_noindex_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_noindex_col_option)) {
-        foreach ($seopress_advanced_appearance_noindex_col_option as $key => $seopress_advanced_appearance_noindex_col_value) {
-            $options[$key] = $seopress_advanced_appearance_noindex_col_value;
-        }
-        if (isset($seopress_advanced_appearance_noindex_col_option['seopress_advanced_appearance_noindex_col'])) {
-            return $seopress_advanced_appearance_noindex_col_option['seopress_advanced_appearance_noindex_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceNoIndexCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_nofollow_col_option()
 {
-    $seopress_advanced_appearance_nofollow_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_nofollow_col_option)) {
-        foreach ($seopress_advanced_appearance_nofollow_col_option as $key => $seopress_advanced_appearance_nofollow_col_value) {
-            $options[$key] = $seopress_advanced_appearance_nofollow_col_value;
-        }
-        if (isset($seopress_advanced_appearance_nofollow_col_option['seopress_advanced_appearance_nofollow_col'])) {
-            return $seopress_advanced_appearance_nofollow_col_option['seopress_advanced_appearance_nofollow_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceNoFollowCol();
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_words_col_option()
 {
-    $seopress_advanced_appearance_words_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_words_col_option)) {
-        foreach ($seopress_advanced_appearance_words_col_option as $key => $seopress_advanced_appearance_words_col_value) {
-            $options[$key] = $seopress_advanced_appearance_words_col_value;
-        }
-        if (isset($seopress_advanced_appearance_words_col_option['seopress_advanced_appearance_words_col'])) {
-            return $seopress_advanced_appearance_words_col_option['seopress_advanced_appearance_words_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceWordsCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_ps_col_option()
 {
-    $seopress_advanced_appearance_ps_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_ps_col_option)) {
-        foreach ($seopress_advanced_appearance_ps_col_option as $key => $seopress_advanced_appearance_ps_col_value) {
-            $options[$key] = $seopress_advanced_appearance_ps_col_value;
-        }
-        if (isset($seopress_advanced_appearance_ps_col_option['seopress_advanced_appearance_ps_col'])) {
-            return $seopress_advanced_appearance_ps_col_option['seopress_advanced_appearance_ps_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearancePsCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_insights_col_option()
 {
-    $seopress_advanced_appearance_insights_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_insights_col_option)) {
-        foreach ($seopress_advanced_appearance_insights_col_option as $key => $seopress_advanced_appearance_insights_col_value) {
-            $options[$key] = $seopress_advanced_appearance_insights_col_value;
-        }
-        if (isset($seopress_advanced_appearance_insights_col_option['seopress_advanced_appearance_insights_col'])) {
-            return $seopress_advanced_appearance_insights_col_option['seopress_advanced_appearance_insights_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceInsightsCol();
+
 }
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_score_col_option()
 {
-    $seopress_advanced_appearance_score_col_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_score_col_option)) {
-        foreach ($seopress_advanced_appearance_score_col_option as $key => $seopress_advanced_appearance_score_col_value) {
-            $options[$key] = $seopress_advanced_appearance_score_col_value;
-        }
-        if (isset($seopress_advanced_appearance_score_col_option['seopress_advanced_appearance_score_col'])) {
-            return $seopress_advanced_appearance_score_col_option['seopress_advanced_appearance_score_col'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceScoreCol();
 }
 
 function seopress_insights_query_all_rankings()
 {
-    if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-        //Init
-        $rankings = [];
+    if (!is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
+        return;
+    }
 
-        //Args
-        $args = [
-            'order'         	 => 'ASC',
-            'post_type'     	 => 'seopress_rankings',
-            'posts_per_page' 	=> -1,
-            'fields'          => 'ids',
-        ];
+    //Init
+    $rankings = [];
 
-        $args = apply_filters('seopress_insights_dashboard_rankings_list_query', $args);
+    //Args
+    $args = [
+        'order'         	 => 'ASC',
+        'post_type'     	 => 'seopress_rankings',
+        'posts_per_page' 	=> -1,
+        'fields'          => 'ids',
+    ];
 
-        //Query rankings
-        $kw_query = new WP_Query($args);
+    $args = apply_filters('seopress_insights_dashboard_rankings_list_query', $args);
 
-        // The Loop
-        if ($kw_query->have_posts()) {
-            while ($kw_query->have_posts()) {
-                $kw_query->the_post();
-                $data = get_post_meta(get_the_ID(), 'seopress_insights_data', false);
+    //Query rankings
+    $kw_query = new WP_Query($args);
 
-                if (! empty($data[0])) {
-                    array_multisort($data[0], SORT_DESC, SORT_REGULAR);
-                }
+    // The Loop
+    if ($kw_query->have_posts()) {
+        while ($kw_query->have_posts()) {
+            $kw_query->the_post();
+            $data = get_post_meta(get_the_ID(), 'seopress_insights_data', false);
+
+            if (! empty($data[0])) {
+                array_multisort($data[0], SORT_DESC, SORT_REGULAR);
             }
         }
-        /* Restore original Post Data */
-        wp_reset_postdata();
-
-        return $data[0];
     }
+    /* Restore original Post Data */
+    wp_reset_postdata();
+
+    return $data[0];
 }
 
 if ('' != seopress_advanced_appearance_title_col_option()
@@ -440,17 +354,13 @@ if ('' != seopress_advanced_appearance_title_col_option()
 }
 
 //Remove Content Analysis Metaboxe
+/**
+ * @deprecated 5.4.0
+ */
 function seopress_advanced_appearance_ca_metaboxe_hook_option()
 {
-    $seopress_advanced_appearance_ca_metaboxe_hook_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_ca_metaboxe_hook_option)) {
-        foreach ($seopress_advanced_appearance_ca_metaboxe_hook_option as $key => $seopress_advanced_appearance_ca_metaboxe_hook_value) {
-            $options[$key] = $seopress_advanced_appearance_ca_metaboxe_hook_value;
-        }
-        if (isset($seopress_advanced_appearance_ca_metaboxe_hook_option['seopress_advanced_appearance_ca_metaboxe'])) {
-            return $seopress_advanced_appearance_ca_metaboxe_hook_option['seopress_advanced_appearance_ca_metaboxe'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceCaMetaboxe();
+
 }
 
 if ('' != seopress_advanced_appearance_ca_metaboxe_hook_option()) {
@@ -464,15 +374,8 @@ if ('' != seopress_advanced_appearance_ca_metaboxe_hook_option()) {
 //Remove Genesis SEO Metaboxe
 function seopress_advanced_appearance_genesis_seo_metaboxe_hook_option()
 {
-    $seopress_advanced_appearance_genesis_seo_metaboxe_hook_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_genesis_seo_metaboxe_hook_option)) {
-        foreach ($seopress_advanced_appearance_genesis_seo_metaboxe_hook_option as $key => $seopress_advanced_appearance_genesis_seo_metaboxe_hook_value) {
-            $options[$key] = $seopress_advanced_appearance_genesis_seo_metaboxe_hook_value;
-        }
-        if (isset($seopress_advanced_appearance_genesis_seo_metaboxe_hook_option['seopress_advanced_appearance_genesis_seo_metaboxe'])) {
-            return $seopress_advanced_appearance_genesis_seo_metaboxe_hook_option['seopress_advanced_appearance_genesis_seo_metaboxe'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceGenesisSeoMetaboxe();
+
 }
 
 if ('' != seopress_advanced_appearance_genesis_seo_metaboxe_hook_option()) {
@@ -486,15 +389,7 @@ if ('' != seopress_advanced_appearance_genesis_seo_metaboxe_hook_option()) {
 //Remove Genesis SEO Menu Link
 function seopress_advanced_appearance_genesis_seo_menu_option()
 {
-    $seopress_advanced_appearance_genesis_seo_menu_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_appearance_genesis_seo_menu_option)) {
-        foreach ($seopress_advanced_appearance_genesis_seo_menu_option as $key => $seopress_advanced_appearance_genesis_seo_menu_value) {
-            $options[$key] = $seopress_advanced_appearance_genesis_seo_menu_value;
-        }
-        if (isset($seopress_advanced_appearance_genesis_seo_menu_option['seopress_advanced_appearance_genesis_seo_menu'])) {
-            return $seopress_advanced_appearance_genesis_seo_menu_option['seopress_advanced_appearance_genesis_seo_menu'];
-        }
-    }
+    return seopress_get_service('AdvancedOption')->getAppearanceGenesisSeoMenu();
 }
 
 if ('' != seopress_advanced_appearance_genesis_seo_menu_option()) {
@@ -889,7 +784,7 @@ function seopress_bulk_quick_edit_custom_box($column_name)
                 ?>
         <label class="alignleft">
             <input type="checkbox" name="seopress_noindex" value="yes">
-            <span class="checkbox-title"><?php _e('Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>', 'wp-seopress-pro'); ?></span>
+            <span class="checkbox-title"><?php _e('Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>', 'wp-seopress'); ?></span>
         </label>
         <?php
                 break;
@@ -897,7 +792,7 @@ function seopress_bulk_quick_edit_custom_box($column_name)
                 ?>
         <label class="alignleft">
             <input type="checkbox" name="seopress_nofollow" value="yes">
-            <span class="checkbox-title"><?php _e('Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress-pro'); ?></span>
+            <span class="checkbox-title"><?php _e('Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress'); ?></span>
         </label>
         <?php
                 break;
