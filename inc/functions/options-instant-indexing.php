@@ -2,11 +2,6 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-require_once SEOPRESS_PLUGIN_DIR_PATH . '/vendor/autoload.php';
-use Google;
-use Google_Service_Indexing;
-use Google_Service_Indexing_UrlNotification;
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Generate dynamically the Instant Indexing API key
 ///////////////////////////////////////////////////////////////////////////////////////////////////

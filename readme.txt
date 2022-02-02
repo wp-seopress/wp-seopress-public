@@ -2,11 +2,11 @@
 Authors: rainbowgeek
 Contributors: rainbowgeek, gmulti, juliobox, maigret, mgris
 Donate link: https://www.seopress.org/
-Tags: SEO, XML sitemap, meta title, open graph, content analysis, instant indexing, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
+Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content analysis, instant indexing, breadcrumbs, analytics, rich snippets, broken link
 Requires at least: 4.7+
 Tested up to: 5.9
 Requires PHP: 7.2
-Stable tag: 5.4.2
+Stable tag: 5.4.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.4.3 =
+* FIX Warning: use statement with non-compound name
 = 5.4.2 =
 * ⚠️ PHP 7.2 is now the minimum requirement to use SEOPress. Contact your host to update.
 * NEW WordPress 5.9 compatibility
