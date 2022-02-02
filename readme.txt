@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 5.9
 Requires PHP: 7.2
-Stable tag: 5.4.3
+Stable tag: 5.4.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.4.4 =
+* FIX Guzzle conflict
+* FIX AIOSEO import tool
 = 5.4.3 =
 * FIX Warning: use statement with non-compound name
 = 5.4.2 =

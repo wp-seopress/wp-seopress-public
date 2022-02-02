@@ -696,5 +696,4 @@ require_once __DIR__ . '/ajax-migrate/wp-meta-seo.php';
 require_once __DIR__ . '/ajax-migrate/seo-ultimate.php';
 require_once __DIR__ . '/ajax-migrate/squirrly.php';
 require_once __DIR__ . '/ajax-migrate/seo-framework.php';
-require_once __DIR__ . '/ajax-migrate/aio.php';
 require_once __DIR__ . '/ajax-migrate/yoast.php';

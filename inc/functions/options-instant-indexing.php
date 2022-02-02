@@ -174,6 +174,7 @@ function seopress_instant_indexing_fn() {
 function seopress_instant_indexing_post()
 {
     check_ajax_referer('seopress_instant_indexing_post_nonce');
+    require_once WP_PLUGIN_DIR . '/wp-seopress/vendor/autoload.php';
     if (current_user_can(seopress_capability('manage_options', 'instant-indexing')) && is_admin()) {
         seopress_instant_indexing_fn();
     }
