@@ -1,0 +1,19 @@
+{
+  "name": "seopress",
+  "version": "1.0.0",
+  "description": "SeoPress Blocks",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
+  "author": "SEOPress",
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "@wordpress/scripts": "12.4.0"
+  },
+  "dependencies": {
+    "@wordpress/i18n": "^3.16.0"
+  }
+}

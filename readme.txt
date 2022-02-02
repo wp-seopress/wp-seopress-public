@@ -6,7 +6,7 @@ Tags: SEO, XML sitemap, meta title, open graph, content analysis, instant indexi
 Requires at least: 4.7+
 Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 5.4
+Stable tag: 5.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.4.1 =
+* FIX Fatal error on author archives
 = 5.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-4/" target="_blank">Read the blog post update</a> =
 * NEW Google & Bing instant indexing (first iteration - https://www.seopress.org/support/guides/google-indexing-api-with-seopress/) 🎉
 * NEW Add menu / acceptsReservations properties to global Local Business schema (SEO, PRO, Local Business)

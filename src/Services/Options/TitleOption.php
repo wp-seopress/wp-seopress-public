@@ -184,6 +184,20 @@ class TitleOption {
     }
 
     /**
+     * @since 5.4.1
+     */
+    public function getArchivesAuthorTitle(){
+        return $this->searchOptionByKey('seopress_titles_archives_author_title');
+    }
+
+    /**
+     * @since 5.4.1
+     */
+    public function getArchivesAuthorDescription(){
+        return $this->searchOptionByKey('seopress_titles_archives_author_desc');
+    }
+
+    /**
      * @since 5.4.0
      */
     public function getTitleArchivesDate(){
