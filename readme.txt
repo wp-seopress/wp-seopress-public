@@ -4,9 +4,9 @@ Contributors: rainbowgeek, gmulti, juliobox, maigret, mgris
 Donate link: https://www.seopress.org/
 Tags: SEO, XML sitemap, meta title, open graph, content analysis, instant indexing, redirection, breadcrumbs, google analytics, rich snippets, broken link checker, Schema.org
 Requires at least: 4.7+
-Tested up to: 5.8
-Requires PHP: 7.0
-Stable tag: 5.4.1
+Tested up to: 5.9
+Requires PHP: 7.2
+Stable tag: 5.4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -338,6 +338,15 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.4.2 =
+* ⚠️ PHP 7.2 is now the minimum requirement to use SEOPress. Contact your host to update.
+* NEW WordPress 5.9 compatibility
+* NEW Choose which search engine to use for instant indexing (Google and/or Bing)
+* INFO End of the complete removal of the compatibility center for more performance
+* FIX Google / Bing instant indexing
+* FIX Prevent Guzzle conflict
+* FIX Search / sorting / filtering in Redirections manager
+* FIX Homepage metadata editing with SEO metabox
 = 5.4.1 =
 * FIX Fatal error on author archives
 = 5.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-4/" target="_blank">Read the blog post update</a> =

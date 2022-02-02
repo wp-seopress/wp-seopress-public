@@ -21,14 +21,10 @@ function seopress_advanced_advanced_trailingslash_option()
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //SEOPRESS Core
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//Tools - Compatibility Center
-require_once dirname(__FILE__) . '/options-tools.php';
-
 // Instant Indexing
 if ('1' == seopress_get_toggle_option('instant-indexing')) {
     require_once dirname(__FILE__) . '/options-instant-indexing.php';
 }
-
 
 //Import / Export tool
 add_action('init', 'seopress_enable', 999);

@@ -12,6 +12,14 @@ add_settings_section(
 );
 
 add_settings_field(
+    'seopress_instant_indexing_google_engine', // ID
+    __('Select search engines', 'wp-seopress'), // Title
+    'seopress_instant_indexing_google_engine_callback', // Callback
+    'seopress-settings-admin-instant-indexing', // Page
+    'seopress_setting_section_instant_indexing' // Section
+);
+
+add_settings_field(
     'seopress_instant_indexing_google_action', // ID
     __('Which action to run for Google?', 'wp-seopress'), // Title
     'seopress_instant_indexing_google_action_callback', // Callback

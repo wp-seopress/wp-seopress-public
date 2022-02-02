@@ -2,6 +2,40 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
+function seopress_instant_indexing_google_engine_callback()
+{
+    $options = get_option('seopress_instant_indexing_option_name');
+
+    $search_engines = [
+        'google' => 'Google',
+        'bing'=> 'Bing'
+    ];
+
+    if (!empty($search_engines)) {
+        foreach ($search_engines as $key => $value) {
+            $check = isset($options['engines'][$key]);
+            ?>
+            <div class="seopress_wrap_single_cpt">
+                <label
+                    for="seopress_instant_indexing_engines[<?php echo $key; ?>]">
+                    <input
+                        id="seopress_instant_indexing_engines[<?php echo $key; ?>]"
+                        name="seopress_instant_indexing_option_name[engines][<?php echo $key; ?>]"
+                        type="checkbox" <?php if ('1' == $check) { ?>
+                    checked="yes"
+                    <?php } ?>
+                    value="1"/>
+                    <?php echo $value; ?>
+                </label>
+            </div>
+        <?php
+            if (isset($options['engines'][$key])) {
+                esc_attr($options['engines'][$key]);
+            }
+        }
+    }
+}
+
 function seopress_instant_indexing_google_action_callback() {
     $options = get_option('seopress_instant_indexing_option_name');
 
@@ -44,8 +78,11 @@ function seopress_instant_indexing_manual_batch_callback() {
     $check      = isset($options['seopress_instant_indexing_manual_batch']) ? esc_attr($options['seopress_instant_indexing_manual_batch']) : null;
 
     //URLs
-    $urls                = isset($log['log']['urls']) ? $log['log']['urls'] : null;
-    $date                = isset($log['log']['date']) ? $log['log']['date'] : null;
+    $urls       = isset($log['log']['urls']) ? $log['log']['urls'] : null;
+    $date       = isset($log['log']['date']) ? $log['log']['date'] : null;
+
+    //General errors
+    $error       = isset($log['error']) ? $log['error'] : null;
 
     //Bing
     $bing_response       = isset($log['bing']['response']) ? $log['bing']['response'] : null;
@@ -82,7 +119,10 @@ esc_html($check));
 <p><em><?php echo $date; ?></em></p>
 
 <?php
-if ($bing_response !== null) {
+if (!empty($error)) { ?>
+    <span class="indexing-log indexing-failed"></span><?php echo $error; ?>
+<?php }
+if (!empty($bing_response['response'])) {
     switch ($bing_response['response']['code']) {
         case 200:
             $msg = __('URLs submitted successfully', 'wp-seopress');
@@ -113,6 +153,7 @@ if ($bing_response !== null) {
         <code><?php echo esc_html($msg); ?></code>
     </div>
 <?php }
+
     if (!empty($google_response)) { ?>
         <div class="wrap-google-response">
             <h4><?php _e('Google Response','wp-seopress'); ?></h4>
@@ -121,6 +162,8 @@ if ($bing_response !== null) {
             if ( is_a( $google_response, 'Google\Service\Exception' ) ) {
                     $error = json_decode($result->getMessage(), true);
                     echo '<span class="indexing-log indexing-failed"></span><code>' . $error['error']['code'] . ' - ' . $error['error']['message'] . '</code>';
+            } elseif (!empty($google_response['error'])) {
+                echo '<span class="indexing-log indexing-failed"></span><code>' . $google_response['error']['code'] . ' - ' . $google_response['error']['message'] . '</code>';
             } else { ?>
                 <p><span class="indexing-log indexing-done"></span><code><?php _e('URLs submitted successfully', 'wp-seopress'); ?></code></p>
                 <ul>

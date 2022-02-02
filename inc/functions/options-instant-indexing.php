@@ -50,37 +50,49 @@ add_action('template_redirect', 'seopress_instant_indexing_api_key_txt');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_instant_indexing_fn() {
     $options            = get_option('seopress_instant_indexing_option_name');
-    $log                = get_option('seopress_instant_indexing_log_option_name');
+    $engines            = isset($options['engines']) ? $options['engines'] : null;
     $actions            = isset($options['seopress_instant_indexing_google_action']) ? esc_attr($options['seopress_instant_indexing_google_action']) : 'URL_UPDATED';
-    $urls               = isset($options['seopress_instant_indexing_manual_batch']) ? esc_attr($options['seopress_instant_indexing_manual_batch']) : null;
-    $google_api_key     = isset($options['seopress_instant_indexing_google_api_key']) ? $options['seopress_instant_indexing_google_api_key'] : null;
-    $bing_api_key       = isset($options['seopress_instant_indexing_bing_api_key']) ? base64_decode(esc_attr($options['seopress_instant_indexing_bing_api_key'])) : null;
-    $bing_url = 'https://api.indexnow.org/indexnow/';
-    $google_url = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
+    $urls               = isset($options['seopress_instant_indexing_manual_batch']) ? esc_attr($options['seopress_instant_indexing_manual_batch']) : '';
+    $google_api_key     = isset($options['seopress_instant_indexing_google_api_key']) ? $options['seopress_instant_indexing_google_api_key'] : '';
+    $bing_api_key       = isset($options['seopress_instant_indexing_bing_api_key']) ? base64_decode(esc_attr($options['seopress_instant_indexing_bing_api_key'])) : '';
+    $bing_url           = 'https://api.indexnow.org/indexnow/';
+    $google_url         = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
+
+    //Clean logs
+    delete_option('seopress_instant_indexing_log_option_name');
+
+    //Check we have URLs to submit
+    if ($urls === '') {
+        $log['error'] = __('No URLs to submit','wp-seopress');
+        update_option('seopress_instant_indexing_log_option_name', $log);
+        return;
+    }
+
+    //Check we have at least one search engine selected
+    if (empty($engines)) {
+        $log['error'] = __('No search engines selected','wp-seopress');
+        update_option('seopress_instant_indexing_log_option_name', $log);
+        return;
+    }
+
+    //Check we have setup at least one API key
+    if ($google_api_key === '' && $bing_api_key === '') {
+        $log['error'] = __('No API key defined from the settings tab','wp-seopress');
+        update_option('seopress_instant_indexing_log_option_name', $log);
+        return;
+    }
 
     $json = json_decode($google_api_key, true);
     $json = $json['project_id'];
 
-    //Check we have URLs to submit
-    if ($urls === null) {
-        return;
-    }
-
-    //Check we have setup at least one API
-    if ($google_api_key === null || $bing_api_key === null) {
-        return;
-    }
-
-    //Clean logs
-    $log['urls'] = '';
 
     //Prepare the URLS
     $urls 	= preg_split('/\r\n|\r|\n/', $urls);
 
     $urls = array_slice($urls, 0, 100);
 
-    if ($bing_api_key !== null) {
-
+    //Bing API
+    if ($bing_api_key !== '' && $engines['bing'] === '1') {
         $host = wp_parse_url(get_home_url(), PHP_URL_HOST);
 
         $body   = [
@@ -108,17 +120,18 @@ function seopress_instant_indexing_fn() {
         if (is_wp_error($response)) {
             $message = $response->get_error_message();
             $log['bing']['status'] = $message;
-
-            update_option('seopress_instant_indexing_log_option_name', $log);
         }
 
         $log['bing']['response'] = $response;
-    } else {
-        $log['bing']['response'] = __('Bing API key is missing', 'wp-seopress');
+    } elseif ($engines['bing'] === '1') {
+        $log['bing']['response']['error'] = [
+            'code' => 401,
+            'message' => __('Bing API key is missing', 'wp-seopress')
+        ];
     }
 
-    //Google
-    if ($google_api_key !== null) {
+    //Google API
+    if ($google_api_key !== '' && $engines['google'] === '1') {
         try {
             $client = new Google_Client();
 
@@ -136,7 +149,6 @@ function seopress_instant_indexing_fn() {
                 $postBody->setUrl( $url );
                 $postBody->setType( $actions );
                 $batch->add( $service->urlNotifications->publish( $postBody ) );
-
             }
             $results = $batch->execute();
         }
@@ -145,8 +157,11 @@ function seopress_instant_indexing_fn() {
         }
 
         $log['google']['response'] = $results;
-    } else {
-        $log['google']['response'] = __('Google API key is missing', 'wp-seopress');
+    } elseif ($engines['google'] === '1') {
+        $log['google']['response']['error'] = [
+            'code' => 401,
+            'message' => __('Google API key is missing', 'wp-seopress')
+        ];
     }
 
     //Log URLs submitted
