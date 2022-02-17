@@ -56,7 +56,8 @@ class RobotMeta
             if ($value['use_default']) {
                 $data[$name] = $value['default'];
             } else {
-                $result = get_post_meta($id, $value['key'], true);
+	            $fn = $context['is_category'] ? 'get_term_meta' : 'get_post_meta';
+	            $result = $fn($id, $value['key'], true);
                 $data[$name] = 'checkbox' === $value['type'] ? ($result === true || $result === 'yes' ? true : false) : $result;
             }
         }

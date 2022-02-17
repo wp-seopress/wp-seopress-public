@@ -21,7 +21,8 @@ class TitleMeta
 
         $id = $context['post']->ID;
 
-        $value = get_post_meta($id, '_seopress_titles_title', true);
+	    $fn = $context['is_category'] ? 'get_term_meta' : 'get_post_meta';
+	    $value = $fn($id, '_seopress_titles_title', true);
 
         return seopress_get_service('TagsToString')->replace($value, $context);
     }

@@ -56,7 +56,8 @@ class SocialMeta
 
         foreach ($metas as $key => $value) {
             $type = $this->getTypeSocial($value['key']);
-            $result = get_post_meta($id, $value['key'], true);
+	        $fn = $context['is_category'] ? 'get_term_meta' : 'get_post_meta';
+	        $result = $fn($id, $value['key'], true);
             $keySocial = $this->getKeySocial($value['key']);
 
             $data[$type][$keySocial] = $result;
