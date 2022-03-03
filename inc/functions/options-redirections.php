@@ -107,12 +107,12 @@ function seopress_redirections_hook() {
 
 	if ((is_tax() || is_category() || is_tag()) && seopress_redirections_term_enabled() =='yes') {
 		if (seopress_redirections_term_type() && seopress_redirections_value() !='') {
-			header('Location:'.seopress_redirections_value(), true, seopress_redirections_term_type());
+			wp_redirect(seopress_redirections_value(), seopress_redirections_term_type(), 'SEOPress');
 			exit();
 		}
 	} elseif (seopress_redirections_enabled() =='yes') {
 		if (seopress_redirections_type() && seopress_redirections_value() !='') {
-			header('Location:'.seopress_redirections_value(), true, seopress_redirections_type());
+			wp_redirect(seopress_redirections_value(), seopress_redirections_type(), 'SEOPress');
 			exit();
 		}
 	}
