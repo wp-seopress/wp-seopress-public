@@ -30,7 +30,7 @@ class EnqueueModuleMetabox
             $response = false;
         }
 
-        if (isset($_GET['vcv-editable'])) {
+        if (isset($_GET['et_bfb'])) {
             $response = false;
         }
 

@@ -3,6 +3,11 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_migration_tool($plugin, $name) {
+    $seo_title = 'SEOPress';
+    if (function_exists('seopress_get_toggle_white_label_option') && '1' == seopress_get_toggle_white_label_option()) {
+        $seo_title = seopress_white_label_plugin_list_title_option() ? seopress_white_label_plugin_list_title_option() : 'SEOPress';
+    }
+
     $html = '<div id="' . $plugin . '-migration-tool" class="postbox section-tool">
         <div class="inside">
                 <h3>' . sprintf(__('Import posts and terms (if available) metadata from %s', 'wp-seopress'), $name) . '</h3>
@@ -35,7 +40,7 @@ function seopress_migration_tool($plugin, $name) {
 
                 <div class="seopress-notice is-warning">
                     <p>
-                        ' . sprintf(__('<strong>WARNING:</strong> Migration will delete / update all <strong>SEOPress posts and terms metadata</strong>. Some dynamic variables will not be interpreted. We do <strong>NOT delete any %s data</strong>.', 'wp-seopress'), $name) . '
+                        ' . sprintf(__('<strong>WARNING:</strong> Migration will delete / update all <strong>%1$s posts and terms metadata</strong>. Some dynamic variables will not be interpreted. We do <strong>NOT delete any %2$s data</strong>.', 'wp-seopress'), $seo_title, $name) . '
                     </p>
                 </div>
 

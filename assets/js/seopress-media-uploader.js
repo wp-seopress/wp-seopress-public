@@ -27,7 +27,8 @@ jQuery(document).ready(function ($) {
         "#seopress_social_twitter_img",
         "#seopress_social_fb_img",
         ".seopress_social_fb_img",
-        ".seopress_social_twitter_img"
+        ".seopress_social_twitter_img",
+        "#knowledge_img"
     ];
 
     array.forEach(function (item) {

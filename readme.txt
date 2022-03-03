@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 5.9
 Requires PHP: 7.2
-Stable tag: 5.4.4
+Stable tag: 5.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -175,6 +175,7 @@ SEOPress is translated into multiple languages including:
 	<li>🇮🇳 हिन्दी (Hindi) - professional translation</li>
 	<li>🇨🇳 中文 (Chinese (China)) - professional translation</li>
 	<li>🇧🇷 Português do Brasil (Portuguese (Brazil)) - professional translation</li>
+	<li>🇵🇱 Polskie (Polish) - professional translation</li>
 	<li>🇬🇷 Ελληνικά (Greek)</li>
 	<li>🇧🇬 Български (Bulgarian)</li>
 	<li>🇮🇩 Bahasa Indonesia (Indonesian)</li>
@@ -338,49 +339,38 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 5.4.4 =
-* FIX Guzzle conflict
-* FIX AIOSEO import tool
-= 5.4.3 =
-* FIX Warning: use statement with non-compound name
-= 5.4.2 =
-* ⚠️ PHP 7.2 is now the minimum requirement to use SEOPress. Contact your host to update.
-* NEW WordPress 5.9 compatibility
-* NEW Choose which search engine to use for instant indexing (Google and/or Bing)
-* INFO End of the complete removal of the compatibility center for more performance
-* FIX Google / Bing instant indexing
-* FIX Prevent Guzzle conflict
-* FIX Search / sorting / filtering in Redirections manager
-* FIX Homepage metadata editing with SEO metabox
-= 5.4.1 =
-* FIX Fatal error on author archives
-= 5.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-4/" target="_blank">Read the blog post update</a> =
-* NEW Google & Bing instant indexing (first iteration - https://www.seopress.org/support/guides/google-indexing-api-with-seopress/) 🎉
-* NEW Add menu / acceptsReservations properties to global Local Business schema (SEO, PRO, Local Business)
-* NEW Notification to detect if mbstring PHP module is missing on your server
-* NEW Notification to detect if "IndexNow", "Instant Indexing", or "Bing Webmaster Url Submission" is installed and activated on your site to prevent any conflict with our Instant Indexing feature
-* NEW "Description" field for manual / automatic article schema
-* NEW 'seopress_pro_breadcrumbs_html_class' + 'seopress_pro_breadcrumbs_html_class_ol' to filter the breadcrumbs HTML classes (https://www.seopress.org/support/hooks/filter-the-breadcrumbs-html-classes/)
-* NEW 'seopress_stop_attachment_url_to_postid' to disable attachment_url_to_postid function
-* INFO Performance improvement for OG image tags
-* INFO Improve Redirections UI with new view filters and bulk actions
-* INFO Improve FAQ schema user interface
-* INFO Improve Local Business widget (new HTML class "sp-lb-closed-all-day", display "closed" only if "Closed all the day?" option is checked)
-* INFO Use custom meta title if no FB title available for oembed sharing (LinkedIn)
-* INFO Minify metaboxe.js to reduce file size by 43% when using the universal SEO metabox
-* INFO Do not exclude custom canonical if equals to permalink in XML sitemaps
-* INFO Localized our news widget for French audience
-* INFO Add all social settings options to wpml-config.xml file to translate them with WPML / Polylang
-* INFO Improve UI
-* FIX Ping button for News XML sitemap
-* FIX Missing URL tag in XML sitemaps if custom canonical tag
-* FIX Warning Undefined variables Redirect tab on term taxonomies
-* FIX Term taxonomy invidually set to noindex in XML sitemaps
-* FIX Empty "wpseopress-faq-answer-image" div if no image for FAQ Block
-* FIX global product identifiers parent / child inheritance with automatic product schema and variable products
-* FIX Fatal error tribe_is_venue or tribe_is_organizer with the Events Calendar plugin in specific cases
-* FIX Conflict with PODS
-* FIX Conflict with WooCommerce Memberships
-* FIX Textdomain
+= 5.5.1 =
+* FIX Error with migration tool if PRO not activated
+= 5.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-5/" target="_blank">Read the blog post update</a> =
+* NEW Regular expressions enhanced for our redirect manager: you can now passed matches to the destination URL (https://www.seopress.org/support/guides/redirections/ - PRO)
+* NEW Installation Wizard enhanced
+* NEW Polish language (Free already available, PRO incoming soon)
+* NEW SEOPress terms metadata added to SEOPress REST API
+* NEW SEOPress global settings added to SEOPress REST API
+* NEW Test your own URL for Page Speed Insights (PRO)
+* NEW "Ignore existing values" option for CSV import tool (PRO)
+* NEW Support %%_cf_your_custom_field_name%% dynamic variable for term taxonomy
+* NEW Support %%_cf_your_custom_field_name%% dynamic variable for social sharing (posts and taxonomies)
+* NEW 'seopress_content_analysis_target_keywords' hook to filter analyzed target keywords by the content analysis feature (https://www.seopress.org/support/hooks/filter-analyzed-target-keywords-by-the-content-analysis/)
+* NEW 'seopress_pro_breadcrumbs_last_item_linkable' hook to force the last item to be linkable (https://www.seopress.org/support/hooks/force-link-on-last-item-of-breadcrumbs/)
+* INFO Add Instant Indexing item to SEO admin bar
+* INFO Better user experience for Instant Indexing feature
+* INFO Decrease severity of having a Headings 3 from medium to low for content analysis feature
+* FIX Divi and Visual Composer compatibility with our universal SEO metabox
+* FIX Documentation link
+* FIX Language Packs for the PRO (go to WP, Updates, Update translations)
+* FIX Alternative texts of images analysis if no media found
+* FIX Meta title / description checks in content analysis
+* FIX Link for "Enable structured data types option" notification
+* FIX Price for variable products with automatic product schema
+* FIX Rendering dynamic variables when sharing a post on LinkdedIn (WP-JSON oembed)
+* FIX Autoload on "seopress_instant_indexing_log_option_name" option
+* FIX WooCommerce options with TwentyTwentyTwo theme
+* FIX Conflict with Polylang and our Local Business widget
+* FIX IndexNow API (Bing) "Something went wrong" false positive for Instant Indexing feature
+* FIX Notification link to fix robots.txt with multisite installation
+* FIX Page Speed integration
+* FIX Type of employment quick buttons (Job Schema - PRO)
+* FIX Fatal error: Cannot unset string offset (CustomCapabilities.php)
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

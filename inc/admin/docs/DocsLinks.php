@@ -118,6 +118,10 @@ function seopress_get_docs_links()
                 'account'        => 'https://www.seopress.org/fr/mon-compte/' . $utm,
                 'license_errors' => 'https://www.seopress.org/fr/support/guides/activer-votre-licence-seopress-pro-insights/' . $utm,
             ],
+            'addons' => [
+                'pro' => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-pro/' . $utm,
+                'insights' => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-insights/' . $utm,
+            ]
         ];
     } else {
         $docs = [
@@ -226,6 +230,10 @@ function seopress_get_docs_links()
                 'account'        => 'https://www.seopress.org/account/' . $utm,
                 'license_errors' => 'https://www.seopress.org/support/guides/activate-seopress-pro-license/' . $utm,
             ],
+            'addons' => [
+                'pro' => 'https://www.seopress.org/wordpress-seo-plugins/pro/' . $utm,
+                'insights' => 'https://www.seopress.org/wordpress-seo-plugins/insights/' . $utm,
+            ]
         ];
     }
 

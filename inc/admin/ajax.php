@@ -60,9 +60,10 @@ function seopress_do_real_preview()
             }
 
             //Init
-            $title     = '';
-            $meta_desc = '';
-            $data      = [];
+            $title      = '';
+            $meta_desc  = '';
+            $link       = '';
+            $data       = [];
 
             //Save Target KWs
             if (! isset($_GET['is_elementor'])) {
@@ -99,13 +100,13 @@ function seopress_do_real_preview()
             if ('post' == $seopress_origin) { //Default: post type
                 //Oxygen compatibility
                 if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
-                    $post_url = get_permalink((int) $seopress_get_the_id);
-                    $post_url = add_query_arg('no_admin_bar', 1, $post_url);
+                    $link = get_permalink((int) $seopress_get_the_id);
+                    $link = add_query_arg('no_admin_bar', 1, $link);
 
-                    $response = wp_remote_get($post_url, $args);
+                    $response = wp_remote_get($link, $args);
                     if (200 !== wp_remote_retrieve_response_code($response)) {
-                        $post_url = get_permalink((int) $seopress_get_the_id);
-                        $response = wp_remote_get($post_url, $args);
+                        $link = get_permalink((int) $seopress_get_the_id);
+                        $response = wp_remote_get($link, $args);
                     }
                 } else {
                     $custom_args = ['no_admin_bar' => 1];
@@ -120,8 +121,11 @@ function seopress_do_real_preview()
                     $response = wp_remote_get($link, $args);
                 }
             } else { //Term taxonomy
-                $response = wp_remote_get(get_term_link((int) $seopress_get_the_id, $seopress_tax_name), $args);
+                $link = get_term_link((int) $seopress_get_the_id, $seopress_tax_name);
+                $response = wp_remote_get($link, $args);
             }
+
+            $data['link_preview'] = $link;
 
             //Check for error
             if (is_wp_error($response) || '404' == wp_remote_retrieve_response_code($response)) {
@@ -159,10 +163,10 @@ function seopress_do_real_preview()
                     }
 
                     //Themify compatibility
-                    if (defined('THEMIFY_DIR')) {
+                    if (defined('THEMIFY_DIR') && method_exists('ThemifyBuilder_Data_Manager', '_get_all_builder_text_content')) {
                         global $ThemifyBuilder;
                         $builder_data = $ThemifyBuilder->get_builder_data($seopress_get_the_id);
-                        $plain_text   = ThemifyBuilder_Data_Manager::_get_all_builder_text_content($builder_data);
+                        $plain_text   = \ThemifyBuilder_Data_Manager::_get_all_builder_text_content($builder_data);
                         $plain_text   = do_shortcode($plain_text);
 
                         if ('' != $plain_text) {
@@ -191,6 +195,8 @@ function seopress_do_real_preview()
                     if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
                         $data['target_kws']          = esc_html(strtolower(stripslashes_deep($_GET['seopress_analysis_target_kw'])));
                         $seopress_analysis_target_kw = array_filter(explode(',', strtolower(get_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', true))));
+
+                        $seopress_analysis_target_kw = apply_filters( 'seopress_content_analysis_target_keywords', $seopress_analysis_target_kw, $seopress_get_the_id );
 
                         //Manage keywords with special characters
                         foreach ($seopress_analysis_target_kw as $key => $kw) {
@@ -423,29 +429,34 @@ function seopress_do_real_preview()
 
                     if (! empty($imgs) && null != $imgs) {
                         //init
-                        $data_img = [];
+                        $img_without_alt = [];
+                        $img_with_alt = [];
                         foreach ($imgs as $img) {
                             if ($img->hasAttribute('src')) {
-                                //Exclude avatars from analysis
-                                if (! preg_match_all('#\b(avatar)\b#iu', $img->getAttribute('class'), $m)) {
+                                if (! preg_match_all('#\b(avatar)\b#iu', $img->getAttribute('class'), $m)) {//Exclude avatars from analysis
                                     if ($img->hasAttribute('width') || $img->hasAttribute('height')) {
-                                        if ($img->getAttribute('width') > 1 || $img->getAttribute('height') > 1) {
+                                        if ($img->getAttribute('width') > 1 || $img->getAttribute('height') > 1) {//Ignore files with width and heigh <= 1
                                             if ('' === $img->getAttribute('alt') || ! $img->hasAttribute('alt')) {//if alt is empty or doesn't exist
-                                                $data_img[] .= $img->getAttribute('src');
+                                                $img_without_alt[] .= $img->getAttribute('src');
+                                            } else {
+                                                $img_with_alt[] .= $img->getAttribute('src');
                                             }
                                         }
                                     } elseif ('' === $img->getAttribute('alt') || ! $img->hasAttribute('alt')) {//if alt is empty or doesn't exist
                                         $img_src = download_url($img->getAttribute('src'));
                                         if (false === is_wp_error($img_src)) {
                                             if (filesize($img_src) > 100) {//Ignore files under 100 bytes
-                                                $data_img[] .= $img->getAttribute('src');
+                                                $img_without_alt[] .= $img->getAttribute('src');
+                                            } else {
+                                                $img_with_alt[] .= $img->getAttribute('src');
                                             }
                                             @unlink($img_src);
                                         }
                                     }
                                 }
                             }
-                            $data['img']['images'] = $data_img;
+                            $data['img']['images']['without_alt'] = $img_without_alt;
+                            $data['img']['images']['with_alt'] = $img_with_alt;
                         }
                     }
 

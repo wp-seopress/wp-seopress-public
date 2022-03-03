@@ -669,6 +669,8 @@ function seopress_get_oxygen_content() {
             if (get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)) {
                 $seopress_analysis_target_kw = array_filter(explode(',', strtolower(esc_attr(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)))));
 
+                $seopress_analysis_target_kw = apply_filters( 'seopress_content_analysis_target_keywords', $seopress_analysis_target_kw, get_the_ID() );
+
                 //Keywords density
                 foreach ($seopress_analysis_target_kw as $kw) {
                     if (preg_match_all('#\b(' . $kw . ')\b#iu', $seopress_get_the_content, $m)) {

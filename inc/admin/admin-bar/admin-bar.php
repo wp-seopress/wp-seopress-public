@@ -126,6 +126,12 @@ function seopress_admin_bar_links() {
             ]);
             $wp_admin_bar->add_menu([
                 'parent'	=> 'seopress_custom_top_level',
+                'id'		   => 'seopress_custom_sub_menu_instant_indexing',
+                'title'		=> __('Instant Indexing', 'wp-seopress'),
+                'href'		 => admin_url('admin.php?page=seopress-instant-indexing'),
+            ]);
+            $wp_admin_bar->add_menu([
+                'parent'	=> 'seopress_custom_top_level',
                 'id'		   => 'seopress_custom_sub_menu_advanced',
                 'title'		=> __('Advanced', 'wp-seopress'),
                 'href'		 => admin_url('admin.php?page=seopress-advanced'),

@@ -3,9 +3,12 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 //Init
-global $post;
+if (isset($is_oembed) && $is_oembed === false) {
+    global $post;
+}
 global $term;
 global $wp_query;
+
 
 $seopress_titles_title_template       ='';
 $seopress_titles_description_template ='';
@@ -76,7 +79,7 @@ if (isset($wp_query->max_num_pages)) {
     $seopress_context_paged = apply_filters('seopress_context_paged', $seopress_context_paged);
 }
 
-if (is_singular() && isset($post->post_author)) {
+if ((is_singular() || $is_oembed === true) && isset($post->post_author)) {
     $the_author_meta   = esc_attr(get_the_author_meta('display_name', $post->post_author));
     $author_first_name = esc_attr(get_the_author_meta('first_name', $post->post_author));
     $author_last_name  = esc_attr(get_the_author_meta('last_name', $post->post_author));
@@ -85,7 +88,7 @@ if (is_singular() && isset($post->post_author)) {
     $author_bio        = esc_attr(get_the_author_meta('description', $post->post_author));
 }
 
-if (is_singular() && get_post_meta($post->ID, '_seopress_analysis_target_kw', true)) {
+if ((is_singular() || $is_oembed === true) && get_post_meta($post->ID, '_seopress_analysis_target_kw', true)) {
     $target_kw = get_post_meta($post->ID, '_seopress_analysis_target_kw', true);
 }
 
@@ -102,24 +105,24 @@ if (is_author() && is_int(get_queried_object_id())) {
     }
 }
 
-if (is_singular() && isset($post)) {
+if ((is_singular() || $is_oembed === true) && isset($post)) {
     $post_thumbnail_url = get_the_post_thumbnail_url($post, 'full');
     $post_thumbnail_url = apply_filters('seopress_titles_post_thumbnail_url', $post_thumbnail_url);
 }
 
-if (is_singular() && isset($post)) {
+if ((is_singular() || $is_oembed === true) && isset($post)) {
     $post_url = esc_url(get_permalink($post));
     $post_url = apply_filters('seopress_titles_post_url', $post_url);
 }
 
-if (is_single() && has_category()) {
-    $post_category_array = get_the_terms(get_the_id(), 'category');
+if ((is_single() || $is_oembed === true) && has_category('', $post)) {
+    $post_category_array = get_the_terms($post->ID, 'category');
     $post_category       = $post_category_array[0]->name;
     $post_category       = apply_filters('seopress_titles_cat', $post_category);
 }
 
-if (is_single() && has_tag()) {
-    $post_tag_array = get_the_terms(get_the_id(), 'post_tag');
+if ((is_single() || $is_oembed === true) && has_tag('', $post)) {
+    $post_tag_array = get_the_terms($post->ID, 'post_tag');
     $post_tag       = $post_tag_array[0]->name;
     $post_tag       = apply_filters('seopress_titles_tag', $post_tag);
 }
@@ -132,7 +135,7 @@ if ('' != get_search_query()) {
 $get_search_query = apply_filters('seopress_get_search_query', $get_search_query);
 
 //Post Title
-if (is_singular() && isset($post)) {
+if ((is_singular() || $is_oembed === true) && isset($post)) {
     $seopress_get_post_title = get_post_field('post_title', $post->ID);
     $seopress_get_post_title = str_replace('<br>', ' ', $seopress_get_post_title);
     $seopress_get_post_title = esc_attr(strip_tags($seopress_get_post_title));
@@ -165,7 +168,7 @@ if ('' != $post) {
 //WooCommerce
 include_once ABSPATH . 'wp-admin/includes/plugin.php';
 if (is_plugin_active('woocommerce/woocommerce.php')) {
-    if (is_singular(['product'])) {
+    if (is_singular(['product']) || $is_oembed === true) {
         //Woo Cat product
         $woo_single_cats = get_the_terms($post->ID, 'product_cat');
 
@@ -196,17 +199,21 @@ if (is_plugin_active('woocommerce/woocommerce.php')) {
             $woo_single_tag_html = stripslashes_deep(wp_filter_nohtml_kses(join(', ', $woo_single_tag)));
         }
 
-        //Woo Price
-        $product          = wc_get_product($post->ID);
-        $woo_single_price = wc_get_price_including_tax($product);
-
-        //Woo Price tax excluded
-        $product                  = wc_get_product($post->ID);
-        $woo_single_price_exc_tax = wc_get_price_excluding_tax($product);
-
-        //Woo SKU Number
-        $product        = wc_get_product($post->ID);
-        $woo_single_sku = $product->get_sku();
+        if (isset($post->ID) && function_exists('wc_get_product')) {
+            $product          = wc_get_product($post->ID);
+            //Woo Price
+            if (function_exists('wc_get_price_including_tax')) {
+                $woo_single_price = wc_get_price_including_tax($product);
+            }
+            //Woo Price tax excluded
+            if (function_exists('wc_get_price_excluding_tax')) {
+                $woo_single_price_exc_tax = wc_get_price_excluding_tax($product);
+            }
+            //Woo SKU Number
+            if (method_exists($product, 'get_sku')) {
+                $woo_single_sku = $product->get_sku();
+            }
+        }
     }
 }
 if (get_query_var('monthnum')) {
@@ -286,9 +293,9 @@ $seopress_titles_template_replace_array = [
     $seopress_content,
     $post_thumbnail_url,
     $post_url,
-    get_the_date(),
-    get_the_date(),
-    get_the_modified_date(),
+    get_the_date('', $post),
+    get_the_date('', $post),
+    get_the_modified_date('', $post),
     $the_author_meta,
     $post_category,
     $post_tag,

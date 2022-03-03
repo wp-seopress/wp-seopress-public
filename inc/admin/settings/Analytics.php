@@ -54,7 +54,7 @@ add_settings_section(
 
 add_settings_field(
     'seopress_google_analytics_hook', // ID
-    __('Where to display the cookie bar?', 'wp-seopress'), // Title
+    __('Where to load the cookie bar?', 'wp-seopress'), // Title
     'seopress_google_analytics_hook_callback', // Callback
     'seopress-settings-admin-google-analytics-gdpr', // Page
     'seopress_setting_section_google_analytics_gdpr' // Section
