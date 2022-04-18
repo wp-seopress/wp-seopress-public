@@ -71,10 +71,6 @@ class CustomCapabilities implements ExecuteHooksBackend
                         continue;
                     }
 
-                    if($capability === null){
-                        continue;
-                    }
-
                     $role->remove_cap(\sprintf('seopress_manage_%s', $capability));
                 }
             } else {

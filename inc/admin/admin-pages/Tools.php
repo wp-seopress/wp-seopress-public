@@ -298,7 +298,7 @@ $docs = seopress_get_docs_links();
                     <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="seopress_action" value="reset_settings" />
                         <?php wp_nonce_field('seopress_reset_nonce', 'seopress_reset_nonce'); ?>
-                        <?php sp_submit_button(__('Reset settings', 'wp-seopress'), 'btn btnSecondary is-deletable'); ?>
+                        <?php sp_submit_button(__('Reset settings', 'wp-seopress'), 'btn btnSecondary'); ?>
                     </form>
                 </div><!-- .inside -->
             </div><!-- .postbox -->

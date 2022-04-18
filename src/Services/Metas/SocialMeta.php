@@ -46,26 +46,17 @@ class SocialMeta
     public function getValue($context)
     {
         $data = ["og" => [], "twitter" => []];
-
-        $callback = 'get_post_meta';
-        $id = null;
-        if(isset($context['post'])){
-            $id = $context['post']->ID;
-        }
-        else if(isset($context['term_id'])){
-            $id = $context['term_id'];
-            $callback = 'get_term_meta';
-        }
-
-        if($id === null){
+        if(!isset($context['post'])){
             return $data;
         }
+
+        $id = $context['post']->ID;
 
         $metas = SocialSettings::getMetaKeys($id);
 
         foreach ($metas as $key => $value) {
             $type = $this->getTypeSocial($value['key']);
-            $result = $callback($id, $value['key'], true);
+            $result = get_post_meta($id, $value['key'], true);
             $keySocial = $this->getKeySocial($value['key']);
 
             $data[$type][$keySocial] = $result;

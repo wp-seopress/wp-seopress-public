@@ -1071,7 +1071,7 @@
                                     'high' => __('High impact', 'wp-seopress'),
                                 ],
                                 'link' => [
-                                    'en'       => is_multisite() ? network_admin_url('admin.php?page=seopress-network-option#tab=tab_seopress_robots') : admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_robots'),
+                                    'en'       => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_robots'),
                                     'title'    => __('Fix this!', 'wp-seopress'),
                                     'external' => false,
                                 ],

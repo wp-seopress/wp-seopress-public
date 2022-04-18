@@ -39,21 +39,11 @@ class RobotMeta
     public function getValue($context)
     {
         $data = [];
-
-        $id = null;
-
-        $callback = 'get_post_meta';
-        if(isset($context['post'])){
-            $id = $context['post']->ID;
-        }
-        else if(isset($context['term_id'])){
-            $id = $context['term_id'];
-            $callback = 'get_term_meta';
-        }
-
-        if(!$id){
+        if(!isset($context['post'])){
             return $data;
         }
+
+        $id = $context['post']->ID;
 
         $metas = RobotSettings::getMetaKeys($id);
 
@@ -66,7 +56,7 @@ class RobotMeta
             if ($value['use_default']) {
                 $data[$name] = $value['default'];
             } else {
-                $result = $callback($id, $value['key'], true);
+                $result = get_post_meta($id, $value['key'], true);
                 $data[$name] = 'checkbox' === $value['type'] ? ($result === true || $result === 'yes' ? true : false) : $result;
             }
         }

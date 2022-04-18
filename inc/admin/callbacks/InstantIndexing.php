@@ -17,9 +17,9 @@ function seopress_instant_indexing_google_engine_callback()
             ?>
             <div class="seopress_wrap_single_cpt">
                 <label
-                    for="seopress_instant_indexing_engines_<?php echo $key; ?>">
+                    for="seopress_instant_indexing_engines[<?php echo $key; ?>]">
                     <input
-                        id="seopress_instant_indexing_engines_<?php echo $key; ?>"
+                        id="seopress_instant_indexing_engines[<?php echo $key; ?>]"
                         name="seopress_instant_indexing_option_name[engines][<?php echo $key; ?>]"
                         type="checkbox" <?php if ('1' == $check) { ?>
                     checked="yes"
@@ -54,9 +54,9 @@ function seopress_instant_indexing_google_action_callback() {
     } ?>
 
     <label
-        for="seopress_instant_indexing_google_action_include_<?php echo $key; ?>">
+        for="seopress_instant_indexing_google_action_include[<?php echo $key; ?>]">
         <input
-            id="seopress_instant_indexing_google_action_include_<?php echo $key; ?>"
+            id="seopress_instant_indexing_google_action_include[<?php echo $key; ?>]"
             name="seopress_instant_indexing_option_name[seopress_instant_indexing_google_action]" type="radio" <?php if ($key == $check) { ?>
         checked="yes"
         <?php } ?>
@@ -106,8 +106,9 @@ esc_html($check));
     </div>
 </div>
 
+<p class="description"><?php _e('Make sure to save changes before submitting any URLs.','wp-seopress'); ?></p>
+
 <p>
-    <br>
     <button type="button" class="seopress-instant-indexing-batch btn btnPrimary">
         <?php _e('Submit URLs to Google & Bing', 'wp-seopress'); ?>
     </button>
@@ -127,9 +128,6 @@ if (!empty($bing_response['response'])) {
         case 200:
             $msg = __('URLs submitted successfully', 'wp-seopress');
             break;
-        case 202:
-            $msg = __('URL received. IndexNow key validation pending.', 'wp-seopress');
-            break;
         case 400:
             $msg = __('Bad request: Invalid format', 'wp-seopress');
             break;
@@ -148,7 +146,7 @@ if (!empty($bing_response['response'])) {
     <div class="wrap-bing-response">
         <h4><?php _e('Bing Response','wp-seopress'); ?></h4>
 
-        <?php if ($bing_response['response']['code'] == 200 || $bing_response['response']['code'] == 202) { ?>
+        <?php if ($bing_response['response']['code'] == 200) { ?>
             <span class="indexing-log indexing-done"></span>
         <?php } else { ?>
             <span class="indexing-log indexing-failed"></span>
@@ -162,12 +160,11 @@ if (!empty($bing_response['response'])) {
             <h4><?php _e('Google Response','wp-seopress'); ?></h4>
 
             <?php
-            $google_exception = $google_response[array_key_first($google_response)];
-            if ( is_a( $google_exception, 'Google\Service\Exception' ) ) {
-                $error = json_decode($google_exception->getMessage(), true);
-                echo '<span class="indexing-log indexing-failed"></span><code>' . esc_html($error['error']['code']) . ' - ' . esc_html($error['error']['message']) . '</code>';
+            if ( is_a( $google_response, 'Google\Service\Exception' ) ) {
+                    $error = json_decode($result->getMessage(), true);
+                    echo '<span class="indexing-log indexing-failed"></span><code>' . $error['error']['code'] . ' - ' . $error['error']['message'] . '</code>';
             } elseif (!empty($google_response['error'])) {
-                echo '<span class="indexing-log indexing-failed"></span><code>' . esc_html($google_response['error']['code']) . ' - ' . esc_html($google_response['error']['message']) . '</code>';
+                echo '<span class="indexing-log indexing-failed"></span><code>' . $google_response['error']['code'] . ' - ' . $google_response['error']['message'] . '</code>';
             } else { ?>
                 <p><span class="indexing-log indexing-done"></span><code><?php _e('URLs submitted successfully', 'wp-seopress'); ?></code></p>
                 <ul>
@@ -239,7 +236,7 @@ function seopress_instant_indexing_bing_api_key_callback() {
     $options = get_option('seopress_instant_indexing_option_name');
     $check   = isset($options['seopress_instant_indexing_bing_api_key']) ? esc_attr($options['seopress_instant_indexing_bing_api_key']) : null; ?>
 
-    <input type="text" id="seopress_instant_indexing_bing_api_key" name="seopress_instant_indexing_option_name[seopress_instant_indexing_bing_api_key]"
+    <input type="text" name="seopress_instant_indexing_option_name[seopress_instant_indexing_bing_api_key]"
     placeholder="<?php esc_html_e('Enter your Bing Instant Indexing API', 'wp-seopress'); ?>"
     aria-label="<?php _e('Enter your Bing Instant Indexing API', 'wp-seopress'); ?>"
     value="<?php echo $check; ?>" />
@@ -261,13 +258,68 @@ function seopress_instant_indexing_automate_submission_callback() {
     } ?>
     value="1"/>
 
-    <label for="seopress_instant_indexing_automate_submission"><?php _e('Enable automatic URL submission for IndexNow API', 'wp-seopress'); ?></label>
+    <label for="seopress_instant_indexing_automate_submission"><?php _e('Enable automatic URL submission', 'wp-seopress'); ?></label>
 
     <p class="description">
-        <?php _e('Notify search engines using IndexNow protocol (currently Bing and Yandex) whenever a post is created, updated or deleted.', 'wp-seopress'); ?>
+        <?php _e('Notify search engines whenever a post is created, updated or deleted.', 'wp-seopress'); ?>
     </p>
 
     <?php if (isset($options['seopress_instant_indexing_automate_submission'])) {
         esc_attr($options['seopress_instant_indexing_automate_submission']);
+    }
+}
+
+function seopress_instant_indexing_automate_submission_cpt_callback()
+{
+    $options = get_option('seopress_instant_indexing_automate_submission');
+
+    $check = isset($options['seopress_instant_indexing_automate_submission_cpt']);
+
+    global $wp_post_types;
+
+    $args = [
+        'show_ui' => true,
+        'public'  => true,
+    ];
+
+    $output       = 'objects'; // names or objects, note names is the default
+    $operator     = 'and'; // 'and' or 'or'
+
+    $post_types = get_post_types($args, $output, $operator);
+    unset($post_types['attachment']);
+
+    foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) { ?>
+<h3>
+    <?php echo $seopress_cpt_value->labels->name; ?>
+    <em><small>[<?php echo $seopress_cpt_value->name; ?>]</small></em>
+</h3>
+
+<!--List all post types-->
+<div class="seopress_wrap_single_cpt">
+
+    <?php
+        $options = get_option('seopress_instant_indexing_automate_submission');
+        $check   = isset($options['seopress_instant_indexing_automate_submission_cpt'][$seopress_cpt_key]['include']);
+        ?>
+
+    <label
+        for="seopress_instant_indexing_automate_submission_cpt_include[<?php echo $seopress_cpt_key; ?>]">
+        <input
+            id="seopress_instant_indexing_automate_submission_cpt_include[<?php echo $seopress_cpt_key; ?>]"
+            name="seopress_instant_indexing_automate_submission[seopress_instant_indexing_automate_submission_cpt][<?php echo $seopress_cpt_key; ?>][include]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Include', 'wp-seopress'); ?>
+    </label>
+
+    <?php
+        if (isset($options['seopress_instant_indexing_automate_submission_cpt'][$seopress_cpt_key]['include'])) {
+            esc_attr($options['seopress_instant_indexing_automate_submission_cpt'][$seopress_cpt_key]['include']);
+        }
+        ?>
+</div>
+<?php
     }
 }

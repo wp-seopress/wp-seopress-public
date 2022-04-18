@@ -10,18 +10,19 @@ class ContextPage
 {
     protected $context = null;
 
-    protected function buildTerm($id, $options){
-        $taxonomy = isset($options['taxonomy']) ? $options['taxonomy'] : 'category';
-        $term = get_term_by('id', $id, $taxonomy);
-
-        if ($term) {
-            $this->setIsCategory(true);
-            $this->setTermId($id);
-        }
-    }
-
-    protected function buildPost($id){
+    /**
+     * @since 4.4.0
+     *
+     * @param int   $id
+     * @param array $options
+     *
+     * @return void
+     */
+    public function buildContextWithCurrentId($id, $options = []) {
         $homeId = get_option('page_on_front');
+
+        $this->buildContextDefault();
+
         $isPostType = get_post_type($id);
 
         if ($isPostType) {
@@ -50,30 +51,6 @@ class ContextPage
             $this->setIsCategory(true);
             $this->setTermId($id);
         }
-    }
-
-    /**
-     * @since 4.4.0
-     *
-     * @param int   $id
-     * @param array $options
-     *
-     * @return void
-     */
-    public function buildContextWithCurrentId($id, $options = []) {
-        $typeBuild = isset($options['type']) ? $options['type'] : 'post';
-
-        $this->buildContextDefault();
-
-        switch($typeBuild) {
-            case 'post':
-                $this->buildPost($id);
-                break;
-            case 'term':
-                $this->buildTerm($id, $options);
-                break;
-        }
-
 
         return $this;
     }

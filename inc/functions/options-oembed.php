@@ -15,12 +15,6 @@ function seopress_oembed_title_hook($post)
     //Init
     $seopress_oembed_title ='';
 
-    $variables = null;
-    $variables = apply_filters('seopress_dyn_variables_fn', $variables, $post, true);
-
-    $seopress_titles_template_variables_array 	= $variables['seopress_titles_template_variables_array'];
-    $seopress_titles_template_replace_array 	= $variables['seopress_titles_template_replace_array'];
-
     //If OG title set
     if (get_post_meta($post->ID, '_seopress_social_fb_title', true) !='') {
         $seopress_oembed_title = get_post_meta($post->ID, '_seopress_social_fb_title', true);
@@ -29,56 +23,6 @@ function seopress_oembed_title_hook($post)
     } elseif (get_the_title($post) !='') {
         $seopress_oembed_title = the_title_attribute(['before'=>'','after'=>'','echo'=>false,'post'=>$post]);
     }
-
-    //Apply dynamic variables
-    preg_match_all('/%%_cf_(.*?)%%/', $seopress_oembed_title, $matches); //custom fields
-
-    if ( ! empty($matches)) {
-        $seopress_titles_cf_template_variables_array = [];
-        $seopress_titles_cf_template_replace_array   = [];
-
-        foreach ($matches['0'] as $key => $value) {
-            $seopress_titles_cf_template_variables_array[] = $value;
-        }
-
-        foreach ($matches['1'] as $key => $value) {
-            $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
-        }
-    }
-
-    preg_match_all('/%%_ct_(.*?)%%/', $seopress_oembed_title, $matches2); //custom terms taxonomy
-
-    if ( ! empty($matches2)) {
-        $seopress_titles_ct_template_variables_array = [];
-        $seopress_titles_ct_template_replace_array   = [];
-
-        foreach ($matches2['0'] as $key => $value) {
-            $seopress_titles_ct_template_variables_array[] = $value;
-        }
-
-        foreach ($matches2['1'] as $key => $value) {
-            $term = wp_get_post_terms($post->ID, $value);
-            if ( ! is_wp_error($term)) {
-                $terms                                       = esc_attr($term[0]->name);
-                $seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
-            }
-        }
-    }
-
-    //Default
-    $seopress_oembed_title = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_oembed_title);
-
-    //Custom fields
-    if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
-        $seopress_oembed_title = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_oembed_title);
-    }
-
-    //Custom terms taxonomy
-    if ( ! empty($matches2) && ! empty($seopress_titles_ct_template_variables_array) && ! empty($seopress_titles_ct_template_replace_array)) {
-        $seopress_oembed_title = str_replace($seopress_titles_ct_template_variables_array, $seopress_titles_ct_template_replace_array, $seopress_oembed_title);
-    }
-
-    $seopress_oembed_title = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_oembed_title);
 
     //Hook on post oEmbed title - 'seopress_oembed_title'
     $seopress_oembed_title = apply_filters('seopress_oembed_title', $seopress_oembed_title);

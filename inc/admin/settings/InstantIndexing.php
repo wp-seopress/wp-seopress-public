@@ -59,10 +59,18 @@ add_settings_field(
     'seopress_setting_section_instant_indexing_settings' // Section
 );
 
-add_settings_field(
-    'seopress_instant_indexing_automate_submission', // ID
-    __('Automatically notify search engines', 'wp-seopress'), // Title
-    'seopress_instant_indexing_automate_submission_callback', // Callback
-    'seopress-settings-admin-instant-indexing-settings', // Page
-    'seopress_setting_section_instant_indexing_settings' // Section
-);
+// add_settings_field(
+//     'seopress_instant_indexing_automate_submission', // ID
+//     __('Automate URL Submission', 'wp-seopress'), // Title
+//     'seopress_instant_indexing_automate_submission_callback', // Callback
+//     'seopress-settings-admin-instant-indexing-settings', // Page
+//     'seopress_setting_section_instant_indexing_settings' // Section
+// );
+
+// add_settings_field(
+//     'seopress_instant_indexing_automate_submission_cpt', // ID
+//     __('Automate Submission for specific post types', 'wp-seopress'), // Title
+//     'seopress_instant_indexing_automate_submission_cpt_callback', // Callback
+//     'seopress-settings-admin-instant-indexing-settings', // Page
+//     'seopress_setting_section_instant_indexing_settings' // Section
+// );

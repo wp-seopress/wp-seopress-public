@@ -4,9 +4,12 @@ jQuery(document).ready(function ($) {
         ["seopress_xml_sitemap_tab", "seopress_xml_sitemap_general"],
         ["seopress_social_tab", "seopress_social_knowledge"],
         ["seopress_advanced_tab", "seopress_advanced_image"],
-        ["seopress_google_analytics_enable", "seopress_google_analytics_enable"],
+        [
+            "seopress_google_analytics_enable",
+            "seopress_google_analytics_enable",
+        ],
         ["seopress_tool_settings", "seopress_tool_settings"],
-        ["seopress_instant_indexing_general", "seopress_instant_indexing_general"],
+        ["seopress_instant_indexing_settings", "seopress_instant_indexing_settings"],
     ];
 
     features.forEach(function (item) {
@@ -304,41 +307,28 @@ jQuery(document).ready(function ($) {
         });
     }
 
-
-    $('#seopress_instant_indexing_google_action_include[URL_UPDATED]').is(':checked') ? true : false,
-
-
-        //Instant Indexing: Batch URLs
-        $('.seopress-instant-indexing-batch').on('click', function () {
-            $('#seopress-tabs .spinner').css(
-                "visibility",
-                "visible"
-            );
-            $('#seopress-tabs .spinner').css(
-                "float",
-                "none"
-            );
-
-            $.ajax({
-                method: 'POST',
-                url: seopressAjaxInstantIndexingPost.seopress_instant_indexing_post,
-                data: {
-                    action: 'seopress_instant_indexing_post',
-                    urls_to_submit: $('#seopress_instant_indexing_manual_batch').val(),
-                    indexnow_api: $('#seopress_instant_indexing_bing_api_key').val(),
-                    google_api: $('#seopress_instant_indexing_google_api_key').val(),
-                    update_action: $('#seopress_instant_indexing_google_action_include_URL_UPDATED').is(':checked') ? 'URL_UPDATED' : false,
-                    delete_action: $('#seopress_instant_indexing_google_action_include_URL_DELETED').is(':checked') ? 'URL_DELETED' : false,
-                    google: $('#seopress_instant_indexing_engines_google').is(':checked') ? true : false,
-                    bing: $('#seopress_instant_indexing_engines_bing').is(':checked') ? true : false,
-                    automatic_submission: $('#seopress_instant_indexing_automate_submission').is(':checked') ? true : false,
-                    _ajax_nonce: seopressAjaxInstantIndexingPost.seopress_nonce,
-                },
-                success: function (data) {
-                    window.location.reload(true);
-                },
-            });
+    //Instant Indexing: Batch URLs
+    $('.seopress-instant-indexing-batch').on('click', function () {
+        $('#seopress-tabs .spinner').css(
+            "visibility",
+            "visible"
+        );
+        $('#seopress-tabs .spinner').css(
+            "float",
+            "none"
+        );
+        $.ajax({
+            method: 'POST',
+            url: seopressAjaxInstantIndexingPost.seopress_instant_indexing_post,
+            data: {
+                action: 'seopress_instant_indexing_post',
+                _ajax_nonce: seopressAjaxInstantIndexingPost.seopress_nonce,
+            },
+            success: function (data) {
+                window.location.reload(true);
+            },
         });
+    });
 
     //Instant Indexing: refresh API Key
     $('.seopress-instant-indexing-refresh-api-key').on('click', function () {

@@ -62,7 +62,6 @@ function seopress_sanitize_options_fields($input){
         'seopress_google_analytics_cb_width',
         'seopress_instant_indexing_bing_api_key',
         'seopress_instant_indexing_manual_batch',
-        //'seopress_instant_indexing_google_api_key',
     ];
 
     $seopress_esc_attr = [

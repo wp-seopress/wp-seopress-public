@@ -167,7 +167,7 @@ class ManageColumn implements ExecuteHooksBackend
                 break;
 
             case 'seopress_ps':
-                echo '<a href="'.admin_url('admin.php?page=seopress-pro-page&data_permalink='.esc_url(get_the_permalink().'#tab=tab_seopress_page_speed')).'" class="seopress-button" title="' . esc_attr(__('Analyze this page with Google Page Speed', 'wp-seopress')) . '"><span class="dashicons dashicons-dashboard"></span></a>';
+                echo '<div class="seopress-request-page-speed seopress-button" data_permalink="' . esc_url(get_the_permalink()) . '" title="' . esc_attr(__('Analyze this page with Google Page Speed', 'wp-seopress')) . '"><span class="dashicons dashicons-dashboard"></span></div>';
                 break;
 
             case 'seopress_score':

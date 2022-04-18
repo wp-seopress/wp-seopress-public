@@ -463,26 +463,6 @@ function seopress_titles_the_title() {
         } else {
             $seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_tax_titles_option);
         }
-
-        preg_match_all('/%%_cf_(.*?)%%/', $seopress_titles_title_template, $matches); //custom fields
-
-        if ( ! empty($matches)) {
-            $seopress_titles_cf_template_variables_array = [];
-            $seopress_titles_cf_template_replace_array   = [];
-
-            foreach ($matches['0'] as $key => $value) {
-                $seopress_titles_cf_template_variables_array[] = $value;
-            }
-
-            foreach ($matches['1'] as $key => $value) {
-                $seopress_titles_cf_template_replace_array[] = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, $value, true));
-            }
-        }
-
-        //Custom fields
-        if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
-            $seopress_titles_title_template = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_titles_title_template);
-        }
     } elseif (is_author() && seopress_titles_archives_author_title_option()) { //IS AUTHOR
         $seopress_titles_archives_author_title_option = esc_attr(seopress_titles_archives_author_title_option());
 
@@ -764,26 +744,6 @@ function seopress_titles_the_description_content() {
             $seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_description_template);
         } else {
             $seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
-        }
-
-        preg_match_all('/%%_cf_(.*?)%%/', $seopress_titles_the_description, $matches); //custom fields
-
-        if ( ! empty($matches)) {
-            $seopress_titles_cf_template_variables_array = [];
-            $seopress_titles_cf_template_replace_array   = [];
-
-            foreach ($matches['0'] as $key => $value) {
-                $seopress_titles_cf_template_variables_array[] = $value;
-            }
-
-            foreach ($matches['1'] as $key => $value) {
-                $seopress_titles_cf_template_replace_array[] = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, $value, true));
-            }
-        }
-
-        //Custom fields
-        if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
-            $seopress_titles_description_template = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_titles_description_template);
         }
     } elseif (is_author() && seopress_titles_archives_author_desc_option()) { //IS AUTHOR
         $seopress_titles_archives_author_desc_option = esc_attr(seopress_titles_archives_author_desc_option());

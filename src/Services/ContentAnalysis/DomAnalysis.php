@@ -39,7 +39,7 @@ class DomAnalysis
         }
 
         //Themify compatibility
-        if (defined('THEMIFY_DIR') && method_exists('ThemifyBuilder_Data_Manager', '_get_all_builder_text_content')) {
+        if (defined('THEMIFY_DIR')) {
             global $ThemifyBuilder;
             $builder_data = $ThemifyBuilder->get_builder_data($id);
             $plain_text   = ThemifyBuilder_Data_Manager::_get_all_builder_text_content($builder_data);
@@ -84,8 +84,6 @@ class DomAnalysis
         $targetKeywords = isset($options['target_keywords']) && !empty($options['target_keywords']) ? $options['target_keywords'] : get_post_meta($options['id'], '_seopress_analysis_target_kw', true);
 
         $targetKeywords = array_filter(explode(',', strtolower($targetKeywords)));
-
-        $targetKeywords = apply_filters( 'seopress_content_analysis_target_keywords', $targetKeywords, $options['id'] );
 
         //Manage keywords with special characters
         foreach ($targetKeywords as $key => $kw) {
