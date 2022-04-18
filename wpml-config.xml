@@ -1,0 +1,63 @@
+<wpml-config>
+  <admin-texts>
+    <key name="seopress_titles_option_name">
+      <key name="seopress_titles_home_site_title"/>
+      <key name="seopress_titles_home_site_desc"/>
+      <key name="seopress_titles_single_titles">
+        <key name="*">
+          <key name="title"/>
+          <key name="description"/>
+        </key>
+      </key>
+      <key name="seopress_titles_archive_titles">
+        <key name="*">
+          <key name="title"/>
+          <key name="description"/>
+        </key>
+      </key>
+      <key name="seopress_titles_archives_author_title"/>
+      <key name="seopress_titles_archives_author_desc"/>
+      <key name="seopress_titles_archives_date_title"/>
+      <key name="seopress_titles_archives_date_desc"/>
+      <key name="seopress_titles_archives_search_title"/>
+      <key name="seopress_titles_archives_search_desc"/>
+      <key name="seopress_titles_archives_404_title"/>
+      <key name="seopress_titles_archives_404_desc"/>
+      <key name="seopress_titles_tax_titles">
+        <key name="*">
+          <key name="title"/>
+          <key name="description"/>
+        </key>
+      </key>
+    </key>
+    <key name="seopress_google_analytics_option_name">
+      <key name="seopress_google_analytics_ua"/>
+      <key name="seopress_google_analytics_opt_out_msg"/>
+      <key name="seopress_google_analytics_opt_out_msg_ok"/>
+      <key name="seopress_google_analytics_opt_out_msg_close"/>
+      <key name="seopress_google_analytics_opt_out_msg_edit"/>
+    </key>
+  </admin-texts>
+  <custom-fields>
+    <custom-field action="translate">_seopress_titles_title</custom-field>
+    <custom-field action="translate">_seopress_titles_desc</custom-field>
+    <custom-field action="translate">_seopress_robots_canonical</custom-field>
+    <custom-field action="translate">_seopress_robots_primary_cat</custom-field>
+    <custom-field action="translate">_seopress_robots_breadcrumbs</custom-field>
+    <custom-field action="translate">_seopress_social_fb_title</custom-field>
+    <custom-field action="translate">_seopress_social_fb_desc</custom-field>
+    <custom-field action="translate">_seopress_social_fb_img</custom-field>
+    <custom-field action="translate">_seopress_social_twitter_title</custom-field>
+    <custom-field action="translate">_seopress_social_twitter_desc</custom-field>
+    <custom-field action="translate">_seopress_social_twitter_img</custom-field>
+    <custom-field action="translate">_seopress_redirections_type</custom-field>
+    <custom-field action="translate">_seopress_redirections_value</custom-field>
+    <custom-field action="translate">_seopress_robots_index</custom-field>
+    <custom-field action="translate">_seopress_robots_follow</custom-field>
+    <custom-field action="translate">_seopress_robots_odp</custom-field>
+    <custom-field action="translate">_seopress_robots_imageindex</custom-field>
+    <custom-field action="translate">_seopress_robots_archive</custom-field>
+    <custom-field action="translate">_seopress_robots_snippet</custom-field>
+    <custom-field action="translate">_seopress_redirections_enabled</custom-field>
+  </custom-fields>
+</wpml-config>

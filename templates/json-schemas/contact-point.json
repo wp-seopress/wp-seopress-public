@@ -1,0 +1,6 @@
+{
+    "@type": "ContactPoint",
+    "telephone": "%%social_phone_number%%",
+    "contactOption": "%%social_knowledge_contact_option%%",
+    "contactType": "%%social_knowledge_contact_type%%"
+}

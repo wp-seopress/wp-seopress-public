@@ -1,0 +1,5956 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SEOPress\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
+"Last-Translator: Stefan Ilivanov (CMS Bulgaria) <info@cmsbg.info>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-04-13 14:16+0200\n"
+"PO-Revision-Date: 2021-07-27 12:01+0200\n"
+"Language: bg_BG\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;esc_attr__;_e;_x;esc_attr_e;esc_html__;esc_html_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/admin/admin-bar/admin-bar.php:47 inc/admin/admin.php:86
+#: inc/admin/metaboxes/admin-metaboxes-form.php:39
+#: inc/admin/metaboxes/admin-metaboxes.php:222
+#: inc/admin/metaboxes/admin-metaboxes.php:225
+#: inc/admin/page-builders/gutenberg/gutenberg-addon.php:36
+#: inc/functions/options-advanced-admin.php:790
+msgid "SEO"
+msgstr "SEO"
+
+#: inc/admin/admin-bar/admin-bar.php:55 inc/admin/admin-bar/admin-bar.php:95
+#: src/Actions/Admin/ManageColumn.php:138
+#, fuzzy
+msgid "Manage all your titles & metas for post types, taxonomies, archives..."
+msgstr "Управление на всички заглавия и мета данни"
+
+#: inc/admin/admin-features-list.php:18
+#: inc/admin/admin-features-list.php:34
+#: inc/admin/admin-features-list.php:50
+#: inc/admin/admin-features-list.php:66
+#: inc/admin/admin-features-list.php:82
+#: inc/admin/admin-features-list.php:93
+#: inc/admin/admin-features-list.php:109
+#: inc/admin/admin-features-list.php:118
+#: inc/admin/admin-features-list.php:127
+#: inc/admin/admin-features-list.php:136
+#: inc/admin/admin-features-list.php:155
+#: inc/admin/admin-features-list.php:171
+#: inc/admin/admin-features-list.php:192
+#: inc/admin/admin-features-list.php:209
+#: inc/admin/admin-features-list.php:228
+#: inc/admin/admin-features-list.php:247
+#: inc/admin/admin-features-list.php:285
+#: inc/admin/admin-features-list.php:295
+#: inc/admin/admin-features-list.php:305
+#: inc/admin/admin-features-list.php:316
+#: inc/admin/admin-features-list.php:327
+#: inc/admin/admin-features-list.php:345
+msgid "Manage"
+msgstr "Управление"
+
+#: inc/admin/admin-features-list.php:23
+#: inc/admin/admin-features-list.php:39
+#: inc/admin/admin-features-list.php:55
+#: inc/admin/admin-features-list.php:71
+#: inc/admin/admin-features-list.php:98
+#: inc/admin/admin-features-list.php:144
+#: inc/admin/admin-features-list.php:160
+#: inc/admin/admin-features-list.php:176
+#: inc/admin/admin-features-list.php:197
+#: inc/admin/admin-features-list.php:214
+#: inc/admin/admin-features-list.php:233
+#: inc/admin/admin-features-list.php:252
+#: inc/admin/admin-features-list.php:271
+#: inc/admin/admin-features-list.php:332
+#: inc/admin/admin-features-list.php:350
+#: inc/admin/admin.php:293
+#: inc/admin/admin.php:299
+msgid "Read our guide"
+msgstr ""
+
+#: inc/admin/admin-bar/admin-bar.php:98
+#, fuzzy
+msgid "Guide to manage your titles and meta descriptions - new window"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/admin-features-list.php:31
+#: inc/admin/admin.php:192
+#, fuzzy
+msgid "XML / Image / Video / HTML Sitemap"
+msgstr "XML / Снимка / HTML карта на сайта"
+
+#: inc/admin/admin-bar/admin-bar.php:110
+#, fuzzy
+msgid "Manage your XML / Image / Video / HTML Sitemap"
+msgstr "Управление на Вашата XML / Снимкова / HTML карта на сайта"
+
+#: inc/admin/admin-bar/admin-bar.php:127 inc/admin/admin.php:93
+msgid "Titles & Metas"
+msgstr "Заглавия и Мета данни"
+
+#: inc/admin/admin-bar/admin-bar.php:133 inc/admin/admin.php:94
+msgid "XML / HTML Sitemap"
+msgstr "XML / HTML карта на сайта"
+
+#: inc/admin/admin-features-list.php:47
+#: inc/admin/admin-header.php:48
+#: inc/admin/admin.php:193
+#: inc/admin/adminbar.php:38
+msgid "Social Networks"
+msgstr ""
+
+#: inc/admin/admin-bar/admin-bar.php:145 inc/admin/admin-features-list.php:35
+#: inc/admin/admin.php:96
+#, fuzzy
+#| msgid "Google Analytics"
+msgid "Analytics"
+msgstr "Google Analytics"
+
+#: inc/admin/admin-bar/admin-bar.php:151 inc/admin/admin-features-list.php:41
+#: inc/admin/admin-pages/Advanced.php:21 inc/admin/admin-pages/Titles.php:22
+#: inc/admin/admin.php:97 inc/admin/metaboxes/admin-metaboxes-form.php:55
+msgid "Advanced"
+msgstr "Разширени"
+
+#: inc/admin/admin-features-list.php:63
+#: inc/admin/admin-header.php:54
+#: inc/admin/adminbar.php:44
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: inc/admin/admin-features-list.php:64
+msgid "Track everything about your visitors with Google Analytics"
+msgstr "Проследяване на всякаква информация за посетителите Ви с Google Analytics"
+
+#: inc/admin/admin-bar/admin-bar.php:174
+msgid "BOT"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:79
+#: inc/admin/admin-header.php:60
+#: inc/admin/admin-metaboxes-form.php:58
+#: inc/admin/admin.php:195
+#: inc/admin/admin.php:356
+#: inc/admin/admin.php:636
+#: inc/admin/adminbar.php:50
+msgid "Advanced"
+msgstr "Разширени"
+
+#: inc/admin/admin-bar/admin-bar.php:187
+#: inc/admin/blocks/notifications-center.php:857
+msgid "PRO"
+msgstr "PRO"
+
+#: inc/admin/admin-features-list.php:90
+#: inc/admin/admin-header.php:68
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: inc/admin/admin-bar/admin-bar.php:202 inc/admin/admin-features-list.php:121
+#: inc/admin/admin-pages/Tools.php:23
+msgid "Redirections"
+msgstr "Пренасочвания"
+
+#: inc/admin/admin-bar/admin-bar.php:210
+msgid "Broken Links"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:106
+#: inc/admin/admin-header.php:74
+msgid "Easy Digital Downloads"
+msgstr ""
+
+#: inc/admin/admin-bar/admin-header.php:18 inc/admin/admin-pages/Titles.php:18
+msgid "Home"
+msgstr "Начало"
+
+#: inc/admin/admin-features-list.php:115
+#: inc/admin/admin-header.php:80
+msgid "Local Business"
+msgstr ""
+
+#: inc/admin/admin-bar/admin-header.php:38
+#: inc/admin/admin-bar/admin-header.php:46
+msgid "Documentation"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:124
+#: inc/admin/admin-header.php:86
+msgid "Dublin Core"
+msgstr "Dublin Core"
+
+#: inc/admin/admin-features-list.php:125
+msgid "Add Dublin Core meta tags"
+msgstr "Добавяне на Dublin Core мета етикети"
+
+#: inc/admin/admin-features-list.php:133
+msgid "Structured Data Types"
+msgstr "Структурирани типове данни"
+
+#: inc/admin/admin-features-list.php:134
+#, fuzzy
+msgid "Add data types to your content: articles, courses, recipes, videos, events, products and more."
+msgstr "Добавяне на типови данни към Вашето съдържание: статии, курсове, рецепти, видео клипове, събития и продукти"
+
+#: inc/admin/admin-features-list.php:139
+#: inc/admin/admin-features-list.php:225
+msgid "See schemas"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:145
+#: inc/admin/admin-features-list.php:234
+msgid "Guide to add schemas with SEOPress PRO - new window"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:152
+#: inc/admin/admin-header.php:98
+msgid "Breadcrumbs"
+msgstr "Breadcrumbs"
+
+#: inc/admin/admin-features-list.php:153
+msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
+msgstr "Включване на Breadcrumbs за Вашата тема ще подобри SEO в SERP"
+
+#: inc/admin/admin-bar/admin-header.php:127
+msgid "Hide SEO News?"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:168
+#: inc/admin/admin-header.php:104
+msgid "Google Page Speed"
+msgstr "Google Page Speed"
+
+#: inc/admin/admin-dyn-variables-helper.php:8 inc/admin/callbacks/Titles.php:47
+#: inc/admin/callbacks/Titles.php:65
+msgid "Tagline"
+msgstr "Подзаглавие"
+
+#: inc/admin/admin-dyn-variables-helper.php:9
+#: inc/admin/callbacks/Sitemaps.php:310 inc/admin/callbacks/Titles.php:214
+#: inc/admin/callbacks/Titles.php:285 inc/admin/callbacks/Titles.php:455
+#: inc/admin/metaboxes/admin-metaboxes-form.php:131
+#: inc/admin/page-builders/elementor/inc/controls/class-text-letter-counter-control.php:66
+msgid "Post Title"
+msgstr "Заглавие на публикация"
+
+#: inc/admin/admin-features-list.php:186
+#: inc/admin/admin-header.php:111
+msgid "robots.txt"
+msgstr ""
+
+#: inc/admin/admin-dyn-variables-helper.php:11
+#, fuzzy
+#| msgid "Enter your meta description"
+msgid "Post content / product description"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/admin-dyn-variables-helper.php:12
+#, fuzzy
+msgid "View your robots.txt"
+msgstr "Промяна на файла robots.txt"
+
+#: inc/admin/admin-features-list.php:198
+#: inc/admin/admin-features-list.php:215
+#, fuzzy
+msgid "Guide to edit your robots.txt file - new window"
+msgstr "Промяна на файла robots.txt"
+
+#: inc/admin/admin-features-list.php:206
+#: inc/admin/admin-header.php:118
+msgid "Google News Sitemap"
+msgstr "Google Новини - карта на сайта"
+
+#: inc/admin/admin-dyn-variables-helper.php:15
+#, fuzzy
+#| msgid "%%post_date%%"
+msgid "Post modified date"
+msgstr "%%post_date%%"
+
+#: inc/admin/admin-features-list.php:222
+#: inc/admin/adminbar.php:85
+msgid "Schemas"
+msgstr ""
+
+#: inc/admin/admin-dyn-variables-helper.php:17
+#, fuzzy
+#| msgid "Post author"
+msgid "Post category"
+msgstr "Автор"
+
+#: inc/admin/admin-features-list.php:241
+#: inc/admin/admin-header.php:124
+#: inc/admin/admin.php:675
+#: inc/admin/adminbar.php:93
+msgid "Redirections"
+msgstr "Пренасочвания"
+
+#: inc/admin/admin-dyn-variables-helper.php:19
+msgid "Category title"
+msgstr "Заглавие на категория"
+
+#: inc/admin/admin-dyn-variables-helper.php:20
+msgid "Category description"
+msgstr "Описание на категория"
+
+#: inc/admin/admin-dyn-variables-helper.php:21
+msgid "Tag title"
+msgstr "Заглавие на етикет"
+
+#: inc/admin/admin-features-list.php:260
+#: inc/admin/admin-header.php:130
+msgid "Broken links"
+msgstr ""
+
+#: inc/admin/admin-dyn-variables-helper.php:23
+msgid "Term title"
+msgstr "Заглавие на термин"
+
+#: inc/admin/admin-dyn-variables-helper.php:24
+msgid "Term description"
+msgstr "Описание на термин"
+
+#: inc/admin/admin-dyn-variables-helper.php:25
+msgid "Search keywords"
+msgstr "Търсене на кл. думи"
+
+#: inc/admin/admin-dyn-variables-helper.php:26
+msgid "Current number page"
+msgstr "Текущ номер на страница"
+
+#: inc/admin/admin-features-list.php:279
+#: inc/admin/admin-header.php:136
+#: inc/admin/adminbar.php:108
+msgid "Backlinks"
+msgstr ""
+
+#: inc/admin/admin-dyn-variables-helper.php:28
+msgid "Plural Post Type Archive name"
+msgstr "Име на архивна страница"
+
+#: inc/admin/admin-dyn-variables-helper.php:29
+#, fuzzy
+#| msgid "Archive date"
+msgid "Archive title"
+msgstr "Дата на архива"
+
+#: inc/admin/admin-features-list.php:292
+#: inc/admin/admin-header.php:142
+#, fuzzy
+msgid "URL Rewriting"
+msgstr "Уеб адрес (URL) за пренасочване"
+
+#: inc/admin/admin-dyn-variables-helper.php:31
+#, fuzzy
+msgid "Customize your permalinks."
+msgstr "Изчистване на статичните връзки"
+
+#: inc/admin/admin-features-list.php:302
+#: inc/admin/admin-header.php:155
+msgid ".htaccess"
+msgstr ""
+
+#: inc/admin/admin-dyn-variables-helper.php:33
+#, fuzzy
+#| msgid "Archive date"
+msgid "Year Archive title"
+msgstr "Дата на архива"
+
+#: inc/admin/admin-features-list.php:313
+#: inc/admin/admin-header.php:162
+msgid "RSS"
+msgstr "Заглавие на публикация (публикация, страница, допълнителен тип публикация)"
+
+#: inc/admin/admin-dyn-variables-helper.php:35
+#, fuzzy
+#| msgid "Post Title (post, page, custom post type)"
+msgid "Custom term taxonomy from post, page or post type"
+msgstr "Заглавие на публикация (публикация, страница, допълнителен тип публикация)"
+
+#: inc/admin/admin-features-list.php:324
+#: inc/admin/admin-header.php:175
+#: inc/admin/admin.php:196
+#: inc/admin/adminbar.php:56
+msgid "Tools"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:325
+#, fuzzy
+msgid "Import/Export plugin settings from site to site."
+msgstr "Импорт / Експорт на SEOPress настройките от сайт към сайт."
+
+#: inc/admin/admin-features-list.php:333
+msgid "Guide to Export/Import/Reset settings - new window"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:342
+#: inc/admin/admin-header.php:168
+#: inc/admin/admin-notifications-center.php:525
+#: inc/admin/adminbar.php:72
+msgid "License"
+msgstr "Лиценз"
+
+#: inc/admin/admin-dyn-variables-helper.php:39
+#, fuzzy
+msgid "Edit your license key."
+msgstr "Променете Вашия SEOPress лицензионен ключ."
+
+#: inc/admin/admin-dyn-variables-helper.php:40
+msgid "Single product price taxes excluded"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:406
+#: inc/admin/admin-features-list.php:410
+#, fuzzy
+msgid "Click to disable"
+msgstr "Щракнете, за да изключите функцията"
+
+#: inc/admin/admin-features-list.php:407
+#: inc/admin/admin-features-list.php:409
+#, fuzzy
+msgid "Click to enable"
+msgstr "Щракнете, за да включите функцията"
+
+#: inc/admin/admin-dyn-variables-helper.php:43
+msgid "Current month"
+msgstr ""
+
+#: inc/admin/admin-dyn-variables-helper.php:44
+msgid "Current month in 3 letters"
+msgstr ""
+
+#: inc/admin/admin-get-started.php:11
+msgid "Launch our installation wizard to quickly and easily configure the basic SEO settings for your site. Browse our video guides to go further. Can't find the answers to your questions? Open a ticket from your customer area. A happiness engineer will be happy to help you."
+msgstr ""
+
+#: inc/admin/admin-dyn-variables-helper.php:46
+#, fuzzy
+#| msgid "Current number page"
+msgid "Current date"
+msgstr "Текущ номер на страница"
+
+#: inc/admin/admin-dyn-variables-helper.php:47
+#, fuzzy
+#| msgid "Current number page"
+msgid "Current time"
+msgstr "Текущ номер на страница"
+
+#: inc/admin/admin-dyn-variables-helper.php:48
+msgid "Author first name"
+msgstr ""
+
+#: inc/admin/admin-dyn-variables-helper.php:49
+#, fuzzy
+#| msgid "Track Authors"
+msgid "Author last name"
+msgstr "Следене на автори"
+
+#: inc/admin/admin-header.php:24
+#: inc/admin/admin-notifications-center.php:554
+#: inc/admin/adminbar.php:78
+msgid "PRO"
+msgstr "PRO"
+
+#: inc/admin/admin-dyn-variables-helper.php:52
+msgid "Author biography"
+msgstr ""
+
+#: inc/admin/admin-header.php:36
+#: inc/admin/admin.php:191
+#: inc/admin/adminbar.php:26
+msgid "Titles & Metas"
+msgstr "Заглавия и Мета данни"
+
+#: inc/admin/admin-header.php:42
+#: inc/admin/admin.php:192
+#: inc/admin/adminbar.php:32
+msgid "XML / HTML Sitemap"
+msgstr "XML / HTML карта на сайта"
+
+#: inc/admin/admin-dyn-variables-helper.php:55
+#, fuzzy
+msgid "Structured Data Types (schema.org)"
+msgstr "Структурирани типове данни"
+
+#: inc/admin/admin-features-list.php:10
+msgid "SEO management"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:17
+msgid "Titles & metas"
+msgstr "Заглавия и мета данни"
+
+#: inc/admin/admin-features-list.php:18
+#, fuzzy
+#| msgid "Manage all your titles & metas"
+msgid "Manage all your titles & metas for post types, taxonomies, archives..."
+msgstr "Управление на всички заглавия и мета данни"
+
+#: inc/admin/admin-header.php:204
+#: inc/admin/admin-header.php:206
+msgid "Send feedback"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:24
+#, fuzzy
+#| msgid "Manage your XML / Image / HTML Sitemap"
+msgid "Manage your XML / Image / Video / HTML Sitemap"
+msgstr "Управление на Вашата XML / Снимкова / HTML карта на сайта"
+
+#: inc/admin/admin-header.php:210
+#: inc/admin/admin-wizard.php:871
+msgid "Follow us on Twitter"
+msgstr "Проследяване на всякаква информация за посетителите Ви с Google Analytics"
+
+#: inc/admin/admin-features-list.php:42
+msgid "Advanced SEO options for advanced users!"
+msgstr "Разширени SEO опции за напреднали потребители!"
+
+#: inc/admin/admin-features-list.php:50
+msgid "Track your keyword positions and backlinks directly in your WordPress."
+msgstr ""
+
+#: inc/admin/admin-features-list.php:58
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: inc/admin/admin-features-list.php:59
+msgid "Improve WooCommerce SEO"
+msgstr "Подобавяне на WooCommerce SEO"
+
+#: inc/admin/admin-features-list.php:64
+msgid "Easy Digital Downloads"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:65
+msgid "Improve Easy Digital Downloads SEO"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:70
+msgid "Local Business"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:71
+msgid "Add Google Local Business data type"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:76
+msgid "Dublin Core"
+msgstr "Dublin Core"
+
+#: inc/admin/admin-features-list.php:77
+msgid "Add Dublin Core meta tags"
+msgstr "Добавяне на Dublin Core мета етикети"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:8
+msgid "Writing content for your users is the most important thing! If it doesn‘t feel natural, your visitors will leave your site, Google will know it and your ranking will be affected."
+msgstr ""
+
+#: inc/admin/admin-features-list.php:83
+#, fuzzy
+msgid "Target keywords"
+msgstr "Търсене на кл. думи"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:15
+msgid "Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them (eg: \"my super keyword,another keyword,keyword\")"
+msgstr "Добавяне на типови данни към Вашето съдържание: статии, курсове, рецепти, видео клипове, събития и продукти"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:18
+#, fuzzy
+msgid "Enter your target keywords"
+msgstr "Въведете Вашите ключови думи за Google новини"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:21
+msgid "Analyze my content"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:89
+msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs"
+msgstr "Включване на Breadcrumbs за Вашата тема ще подобри SEO в SERP"
+
+#: inc/admin/admin-features-list.php:94
+msgid "Google Page Speed"
+msgstr "Google Page Speed"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:31
+#, fuzzy
+msgid "Google suggestions"
+msgstr "Новини от Google"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:34
+msgid "Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:39
+#, fuzzy
+msgid "Get suggestions!"
+msgstr "Нулиране на настройките"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:94
+#, fuzzy
+msgid "Structured data types"
+msgstr "Структурирани типове данни"
+
+#: inc/admin/admin-features-list.php:110
+msgid "Optimize your site for Google News"
+msgstr "Оптимизирайте Вашия сайт за Google новини"
+
+#: inc/admin/admin-features-list.php:116
+msgid "Create / manage your schemas"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:122
+msgid "Monitor 404, create 301, 302 and 307 redirections"
+msgstr "Мониторинг на 404, създаване на 301, 302 и 307 пренасочвания"
+
+#: inc/admin/admin-features-list.php:127
+msgid "Broken links"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:114
+#, fuzzy
+msgid "Keywords in permalink"
+msgstr "Премахване на спиращи думи от статичните връзки"
+
+#: inc/admin/admin-features-list.php:133
+#, fuzzy
+msgid "Headings"
+msgstr "Настройки"
+
+#: inc/admin/admin-features-list.php:134
+#, fuzzy
+msgid "Meta title"
+msgstr "Заглавие на етикет"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:129
+#: inc/admin/admin-metaboxes-form.php:130
+#: inc/admin/admin-metaboxes-form.php:131
+#: inc/admin/admin-metaboxes-form.php:133
+#: inc/admin/admin-wizard.php:294
+#: inc/admin/admin-wizard.php:313
+#: inc/admin/admin-wizard.php:330
+#: inc/admin/admin-wizard.php:349
+#: inc/admin/admin-wizard.php:368
+#: inc/admin/admin-wizard.php:386
+#: inc/admin/admin-wizard.php:403
+#: inc/admin/admin.php:773
+#: inc/admin/admin.php:794
+#: inc/admin/admin.php:813
+#: inc/admin/admin.php:834
+#: inc/admin/admin.php:855
+#: inc/admin/admin.php:875
+#: inc/admin/admin.php:894
+#: inc/admin/admin.php:1190
+#: inc/admin/admin.php:2952
+#: inc/functions/options-advanced-admin.php:814
+msgid "Meta description"
+msgstr "Мета описание"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:134
+#, fuzzy
+msgid "Social meta tags"
+msgstr "Заглавия на етикети"
+
+#: inc/admin/admin-features-list.php:148
+msgid "RSS"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:149
+msgid "Configure default WordPress RSS."
+msgstr ""
+
+#: inc/admin/admin-features-list.php:157
+#, fuzzy
+msgid "NoFollow Links"
+msgstr "Nofollow?"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:154
+msgid "Outbound Links"
+msgstr ""
+
+#: inc/admin/admin-features-list.php:165
+#, fuzzy
+#| msgid "Edit your SEOPress license key."
+msgid "Edit your license key."
+msgstr "Променете Вашия SEOPress лицензионен ключ."
+
+#: inc/admin/admin-pages/Advanced.php:20
+msgid "Image SEO"
+msgstr ""
+
+#: inc/admin/admin-pages/Advanced.php:22
+msgid "Appearance"
+msgstr "Изглед"
+
+#: inc/admin/admin-pages/Advanced.php:23
+msgid "Security"
+msgstr "Сигурност"
+
+#: inc/admin/admin-pages/Advanced.php:52 inc/admin/admin-pages/Analytics.php:82
+#: inc/admin/admin-pages/Sitemaps.php:43 inc/admin/admin-pages/Social.php:43
+#: inc/admin/admin-pages/Titles.php:47 inc/admin/admin-pages/Tools.php:45
+#: seopress-functions.php:728
+msgid "Save changes"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:189
+msgid "Search engines love fresh content. Regularly update your articles without having to rewrite your content entirely and give them a boost in search rankings. SEOPress takes care of the technical part."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:195
+msgid "Words counter is not a direct ranking factor. But, your content must be as qualitative as possible, with relevant and unique information. To fulfill these conditions, your article requires a minimum of paragraphs, so words."
+msgstr ""
+
+#: inc/admin/admin-pages/Analytics.php:23
+#, fuzzy
+#| msgid "WooCommerce"
+msgid "Ecommerce"
+msgstr "WooCommerce"
+
+#: inc/admin/admin-pages/Analytics.php:24
+#: inc/admin/admin-pages/Analytics.php:34
+msgid "Events"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:201
+msgid "Your content is composed of more than 300 words, which is the minimum for a post."
+msgstr ""
+
+#: inc/admin/admin-pages/Analytics.php:26
+msgid "Stats in Dashboard"
+msgstr "Статистики в Таблото"
+
+#: inc/admin/admin-pages/Analytics.php:27
+#: inc/admin/admin-pages/Analytics.php:36
+msgid "Cookie bar / GDPR"
+msgstr ""
+
+#: inc/admin/admin-pages/Analytics.php:28
+#: inc/admin/admin-pages/Analytics.php:37
+msgid "Matomo"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:228
+msgid "Learn more about <a href=\"https://www.youtube.com/watch?v=Rk4qgQdp2UA\" target=\"_blank\">keywords stuffing</a>."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:232
+msgid "We were unable to calculate the density of your keywords. You probably haven‘t added any content or your target keywords were not find in your post content."
+msgstr ""
+
+#: inc/admin/admin-pages/Sitemaps.php:21
+msgid "HTML Sitemap"
+msgstr "HTML карта на сайта"
+
+#: inc/admin/admin-pages/Social.php:18
+msgid "Knowledge Graph"
+msgstr "Графика"
+
+#: inc/admin/admin-pages/Social.php:19
+msgid "Your social accounts"
+msgstr "Вашите социални профили"
+
+#: inc/admin/admin-pages/Social.php:20
+#, fuzzy
+#| msgid "Facebook App ID"
+msgid "Facebook (Open Graph)"
+msgstr "ID на Facebook App"
+
+#: inc/admin/admin-pages/Social.php:21
+#, fuzzy
+#| msgid "Twitter Title"
+msgid "Twitter (Twitter card)"
+msgstr "Заглавие за Twitter"
+
+#: inc/admin/admin-pages/Titles.php:19
+msgid "Single Post Types"
+msgstr "Типове публикации"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:281
+msgid "You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility. Below, the list:"
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:19
+#, fuzzy
+#| msgid "Notifications Center"
+msgid "Compatibility Center"
+msgstr "Център за известия"
+
+#: inc/admin/admin-pages/Tools.php:20
+msgid "Data"
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:21 seopress.php:529
+msgid "Settings"
+msgstr "Настройки"
+
+#: inc/admin/admin-pages/Tools.php:22
+msgid "Plugins"
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:24
+msgid "Reset"
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:56
+#, fuzzy
+#| msgid "Import posts metadata from Yoast"
+msgid "Import data from a CSV"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-pages/Tools.php:59
+msgid "Upload a CSV file to quickly import post (post, page, single post type) and term metadata."
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:60
+#, fuzzy
+#| msgid "Import posts metadata from Yoast"
+msgid "Learn how to import SEO metadata from a CSV file"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-pages/Tools.php:64 inc/admin/admin-pages/Tools.php:110
+#: inc/admin/metaboxes/admin-metaboxes-form.php:104
+#: src/Helpers/ContentAnalysis.php:48
+#, fuzzy
+msgid "Your custom title is too long."
+msgstr "Заглавието на сайта Ви е празно!"
+
+#: inc/admin/admin-pages/Tools.php:67 inc/admin/admin-pages/Tools.php:113
+#: inc/admin/callbacks/Titles.php:60
+#: inc/admin/metaboxes/admin-metaboxes-form.php:143
+#: inc/admin/metaboxes/admin-metaboxes-form.php:144
+#: inc/admin/metaboxes/admin-metaboxes-form.php:150
+#: inc/admin/migrate/MigrationTools.php:14 inc/admin/settings/Titles.php:32
+#: inc/functions/options-advanced-admin.php:801
+#: src/Helpers/ContentAnalysis.php:53
+msgid "Meta description"
+msgstr "Мета описание"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:368
+msgid "No custom title is set for this post. If the global meta title suits you, you can ignore this recommendation."
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:73 inc/admin/admin-pages/Tools.php:119
+#, fuzzy
+msgid "Target keywords were found in the Meta description."
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/admin-pages/Tools.php:76 inc/admin/admin-pages/Tools.php:122
+#, fuzzy
+#| msgid "Twitter tags (title, description and image thumbnail)"
+msgid "Twitter cards tags (title, description, image)"
+msgstr "Twitter етикети (заглавие, описание и миниатюра)"
+
+#: inc/admin/admin-pages/Tools.php:79 inc/admin/admin-pages/Tools.php:125
+#, fuzzy
+msgid "You custom meta description is too long."
+msgstr "Добавяне на колона Мета описание"
+
+#: inc/admin/admin-pages/Tools.php:82 inc/admin/admin-pages/Tools.php:128
+#: inc/admin/migrate/MigrationTools.php:29
+#, fuzzy
+msgid "The length of your meta description is correct"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:402
+msgid "No custom meta description is set for this post. If the global meta description suits you, you can ignore this recommendation."
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:88 inc/admin/admin-pages/Tools.php:134
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:26
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:27
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:31
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:566
+#: inc/functions/options-advanced-admin.php:810
+#, fuzzy
+msgid "Open Graph Title"
+msgstr "Включване на Open Graph данни"
+
+#: inc/admin/admin-pages/Tools.php:94
+msgid "Run the importer"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:419
+msgid "You should not use more than one og:title in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:title tag from your source code. Below, the list:"
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:106
+#, fuzzy
+#| msgid "Import posts metadata from Yoast"
+msgid "Learn how to export SEO metadata to a CSV file"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-pages/Tools.php:142 inc/admin/admin-pages/Tools.php:169
+msgid "Export"
+msgstr "Експорт"
+
+#: inc/admin/admin-pages/Tools.php:158
+#, fuzzy
+msgid "Open Graph Description"
+msgstr "Описание на термин"
+
+#: inc/admin/admin-pages/Tools.php:161
+msgid "Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site."
+msgstr "Експорт на настройките на добавката за този сайт в .json файл. Това позволява по-късно да ги импортирате в друг сайт."
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:448
+msgid "You should not use more than one og:description in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:description tag from your source code. Below, the list:"
+msgstr "Импорт на настройките на добавката от .json файл. Този файл може да бъде получен след експорт на настройките от друг сайт."
+
+#: inc/admin/admin-pages/Tools.php:192
+msgid "Import"
+msgstr "Импорт"
+
+#: inc/admin/admin-pages/Tools.php:196
+msgid "Import completed!"
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:205 inc/admin/wizard/admin-wizard.php:332
+#, fuzzy
+msgid "Open Graph Image"
+msgstr "Включване на Open Graph данни"
+
+#: inc/admin/admin-pages/Tools.php:226 inc/admin/wizard/admin-wizard.php:352
+#, fuzzy
+#| msgid "Select your logo"
+msgid "Select an option"
+msgstr "Изберете Вашето лого"
+
+#: inc/admin/admin-pages/Tools.php:234 inc/admin/wizard/admin-wizard.php:360
+msgid "You don't have to enable the selected SEO plugin to run the import."
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:248
+msgid "Redirections feature is disabled. Please activate it from the <strong>PRO page</strong>."
+msgstr ""
+
+#: inc/admin/admin-pages/Tools.php:253
+#, fuzzy
+msgid "Open Graph URL"
+msgstr "Включване на Open Graph данни"
+
+#: inc/admin/admin-pages/Tools.php:265
+msgid "Reset All Notices From Notifications Center"
+msgstr "Нулиране на известията от центъра за известия"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:502
+msgid "You should not use more than one og:url in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:url tag from your source code. Below, the list:"
+msgstr "Избирайки нулиране на известията, Вие ще виждате известията отново в Таблото на добавката."
+
+#: inc/admin/admin-pages/Tools.php:274
+msgid "Reset notices"
+msgstr "Нулиране на бележките"
+
+#: inc/admin/admin-pages/Tools.php:281
+msgid "Reset All Settings"
+msgstr "Нулиране на всички настройки"
+
+#: inc/admin/admin-pages/Tools.php:285
+#, fuzzy
+#| msgid ""
+#| "<strong>WARNING:</strong> Delete all options related to SEOPress in your "
+#| "database AND set settings to their default values."
+msgid "<strong>WARNING:</strong> Delete all options related to this plugin in your database."
+msgstr "<strong>ВНИМАНИЕ:</strong> Изтривайки всички опции свързани със SEOPress във Вашата база, добавката ще избере настройките по подразбиране."
+
+#: inc/admin/admin-pages/Tools.php:292
+msgid "Reset settings"
+msgstr "Нулиране на настройките"
+
+#: inc/admin/admin.php:36
+msgid "Your settings have been saved."
+msgstr ""
+
+#: inc/admin/admin.php:62 inc/admin/admin.php:66
+msgid "Click to disable this feature"
+msgstr "Щракнете, за да изключите функцията"
+
+#: inc/admin/admin.php:63 inc/admin/admin.php:65
+msgid "Click to enable this feature"
+msgstr "Щракнете, за да включите функцията"
+
+#: inc/admin/admin.php:91
+#, fuzzy
+msgid "Open Graph Site Name"
+msgstr "Включване на Open Graph данни"
+
+#: inc/admin/admin.php:92
+msgid "Dashboard"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:531
+msgid "You should not use more than one og:site_name in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:site_name tag from your source code. Below, the list:"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:533
+msgid "We found an Open Graph Site Name tag in your source code."
+msgstr ""
+
+#: inc/admin/ajax.php:118
+msgid "To get your Google snippet preview, publish your post!"
+msgstr ""
+
+#: inc/admin/ajax.php:120
+#, php-format
+msgid "We found %d twitter:title in your content."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:560
+msgid "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:title tag from your source code. Below, the list:"
+msgstr ""
+
+#: inc/admin/blocks/get-started.php:14
+msgid "How-to get started"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:574
+#, fuzzy
+msgid "Your Twitter Title is missing!"
+msgstr "Заглавието на сайта Ви е празно!"
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:578
+#, fuzzy
+msgid "Twitter Description"
+msgstr "Описание за Twitter"
+
+#: inc/admin/blocks/get-started.php:22
+msgid "Get started"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:589
+msgid "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:description tag from your source code. Below, the list:"
+msgstr ""
+
+#: inc/admin/blocks/insights.php:23
+msgid "Stats overview"
+msgstr ""
+
+#: inc/admin/blocks/insights.php:34 inc/admin/blocks/tasks.php:22
+#, fuzzy
+msgid "Your Twitter Description is missing!"
+msgstr "Въведете Вашето описание за Twitter"
+
+#: inc/admin/blocks/insights.php:43
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: inc/admin/blocks/insights.php:44
+#, fuzzy
+msgid "Twitter Image"
+msgstr "Снимка по подразбиране за Twitter"
+
+#: inc/admin/blocks/insights.php:45
+msgid "SEO Tools"
+msgstr ""
+
+#: inc/admin/blocks/insights.php:92
+msgid "The speed score is based on the lab data analyzed by Lighthouse."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:643
+#, php-format
+msgid "We found %s meta robots in your page. There is probably something wrong with your theme!"
+msgstr ""
+
+#: inc/admin/blocks/insights.php:114
+msgid "<strong>Scale:</strong><span class=\"slow\"></span>0-49 (slow) <span class=\"average\"></span>50-89 (average) <span class=\"fast\"></span>90-100 (fast)"
+msgstr ""
+
+#: inc/admin/blocks/insights.php:118
+msgid "Last analysis: "
+msgstr ""
+
+#: inc/admin/blocks/insights.php:120
+msgid " at "
+msgstr ""
+
+#: inc/admin/blocks/insights.php:134
+msgid "Sessions"
+msgstr ""
+
+#: inc/admin/blocks/insights.php:137
+msgid "Users"
+msgstr ""
+
+#: inc/admin/blocks/insights.php:140
+msgid "Page Views"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:673
+msgid "nosnippet is on! Search engines will not display a snippet of this page in search results."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:675
+msgid "nosnippet is off. Search engines will display a snippet of this page in search results."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:678
+msgid "We found no meta robots on this page. It means, your page is index,follow. Search engines will index it, and follow links. "
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:687
+msgid "noimageindex is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed)."
+msgstr ""
+
+#: inc/admin/blocks/insights.php:169
+msgid "No stats found"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:696
+msgid "nositelinkssearchbox is on! Google will not display a sitelinks searchbox in search results."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:698
+#: inc/admin/admin-metaboxes-content-analysis-form.php:703
+msgid "nositelinkssearchbox is off. Google will probably display a sitelinks searchbox in search results."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:716
+msgid "No alternative text found for these images. Alt tags are important for both SEO and accessibility. Edit your images using the media library or your favorite page builder and fill in alternative text fields."
+msgstr ""
+
+#: inc/admin/blocks/insights.php:204
+msgid "No domain found."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:734
+msgid "We could not find any image in your content. Content with media is a plus for your SEO."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:741
+#, php-format
+msgid "We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:"
+msgstr ""
+
+#: inc/admin/blocks/insights.php:229
+msgid "Number of websites on your server: "
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:756
+msgid "Internet is built on the principle of hyperlink. It is therefore perfectly normal to make links between different websites. However, avoid making links to low quality sites, SPAM... If you are not sure about the quality of a site, add the attribute \"nofollow\" to your link."
+msgstr ""
+
+#: inc/admin/blocks/intro.php:11
+msgid "Your SEO today"
+msgstr ""
+
+#: inc/admin/blocks/intro.php:12
+msgid "To do's, tips, and insights for your business"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-content-analysis-form.php:784
+msgid "<strong>Should be improved:</strong> red or orange dots <br> <strong>Good:</strong> yellow or green dots"
+msgstr ""
+
+#: inc/admin/blocks/news.php:42
+msgid "How many items would you like to display?"
+msgstr ""
+
+#: inc/admin/blocks/news.php:49
+msgid "Save"
+msgstr ""
+
+#: inc/admin/blocks/news.php:74
+msgid "No items"
+msgstr ""
+
+#: inc/admin/blocks/news.php:82
+#, php-format
+msgid "Learn more about %s in a new tab"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:48
+#: inc/admin/admin-metaboxes.php:163
+#: inc/admin/admin-metaboxes.php:166
+#: inc/admin/admin.php:189
+#: inc/admin/adminbar.php:13
+#: inc/functions/options-advanced-admin.php:804
+msgid "SEO"
+msgstr "SEO"
+
+#: inc/admin/admin-metaboxes-form.php:57
+msgid "Titles settings"
+msgstr "Настройки за заглавията"
+
+#: inc/admin/blocks/notifications-center.php:56
+msgid "Configure SEOPress in a few minutes with our installation wizard"
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:57
+msgid "The best way to quickly setup SEOPress on your site."
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:59
+#: inc/admin/blocks/notifications-center.php:89
+msgid "Wizard"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:75
+#, fuzzy
+msgid "Video Sitemap"
+msgstr "Вижте картата на сайта"
+
+#: inc/admin/admin-metaboxes-form.php:98
+msgid "This is your <strong>Shop page</strong>. Go to <strong>SEO > Titles & Metas > Archives > Products</strong> "
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:98
+#, fuzzy
+msgid "to edit your title and meta description"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/admin-metaboxes-form.php:105
+#: inc/admin/admin-metaboxes-form.php:108
+msgid "Title"
+msgstr "Заглавие"
+
+#: inc/admin/admin-metaboxes-form.php:106
+msgid "Titles are critical to give users a quick insight into the content of a result and why it’s relevant to their query. It's often the primary piece of information used to decide which result to click on, so it's important to use high-quality titles on your web pages."
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:121
+msgid "We noticed that some SEO DIVI options are enabled!"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:117
+#: inc/admin/admin-metaboxes-form.php:142
+#, fuzzy
+msgid " (maximum recommended limit)"
+msgstr "(максимално препоръчвано ограничение)"
+
+#: inc/admin/admin-metaboxes-form.php:121
+#: inc/admin/admin.php:3045
+#: inc/admin/admin.php:4080
+msgid "Post Title"
+msgstr "Заглавие на публикация"
+
+#: inc/admin/admin-metaboxes-form.php:123
+#: inc/admin/admin.php:204
+#: inc/admin/admin.php:2943
+#: inc/admin/admin.php:3049
+#: inc/admin/admin.php:3239
+#: inc/admin/admin.php:3362
+#: inc/admin/admin.php:3440
+#: inc/admin/admin.php:3511
+#: inc/admin/admin.php:3581
+#: inc/admin/admin.php:3631
+msgid "Site Title"
+msgstr "Заглавие на сайта"
+
+#: inc/admin/admin-metaboxes-form.php:125
+#: inc/admin/admin-wizard.php:458
+#: inc/admin/admin.php:1174
+#: inc/admin/admin.php:2930
+#: inc/admin/admin.php:2944
+#: inc/admin/admin.php:3047
+#: inc/admin/admin.php:3237
+#: inc/admin/admin.php:3360
+#: inc/admin/admin.php:3439
+#: inc/admin/admin.php:3510
+#: inc/admin/admin.php:3580
+#: inc/admin/admin.php:3632
+msgid "Separator"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:131
+msgid "A meta description tag should generally inform and interest users with a short, relevant summary of what a particular page is about. <br>They are like a pitch that convince the user that the page is exactly what they're looking for. <br>There's no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width."
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:159
+msgid "Your permalinks have a trailingslash"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:146
+#, fuzzy
+msgid "Category / term description"
+msgstr "Описание на категория"
+
+#: inc/admin/admin-metaboxes-form.php:150
+#, fuzzy
+msgid "Post Excerpt"
+msgstr "Откъс от публикация"
+
+#: inc/admin/admin-metaboxes-form.php:161
+msgid "Google Snippet Preview"
+msgstr "Преглед на Google откъс"
+
+#: inc/admin/admin-metaboxes-form.php:162
+#, fuzzy
+msgid "Snippet Preview"
+msgstr "Преглед на Google откъс"
+
+#: inc/admin/admin-metaboxes-form.php:162
+msgid "The Google preview is a simulation. <br>There is no reliable preview because it depends on the screen resolution, the device used, the expression sought, and Google. <br>There is not one snippet for one URL but several. <br>All the data in this overview comes directly from your source code. <br>This is what the crawlers will see."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:164
+#, fuzzy
+msgid "This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview."
+msgstr "Така ще изглежда Вашата страница в резултатите от търсене в Google"
+
+#: inc/admin/admin-metaboxes-form.php:169
+#, fuzzy
+msgid "Mobile Preview"
+msgstr "Преглед на Google откъс"
+
+#: inc/admin/admin-metaboxes-form.php:216
+msgid "Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:221
+msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:217
+msgid "By checking this option, you will add a meta robots tag with the value \"noindex\". <br>Search engines will not index this URL in the search results."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:223
+#, fuzzy
+msgid "Do not follow links for this page <strong>(nofollow)</strong>"
+msgstr "Да не следва връзките за всички страници."
+
+#: inc/admin/blocks/notifications-center.php:259
+#, php-format
+msgid "We noticed that you use <strong>%s</strong> plugin."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:224
+msgid "By checking this option, you will add a meta robots tag with the value \"nofollow\". <br>Search engines will not follow links from this URL."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:230
+#, fuzzy
+msgid "Do not use Open Directory project metadata for titles or excerpts for this page <strong>(noodp)</strong>"
+msgstr "Да не ползва мета данни за заглавия или откъси от проекта Open Directory за всички страници."
+
+#: inc/admin/blocks/notifications-center.php:279
+msgid "You have enabled 404 cleaning BUT the scheduled task is not running."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:231
+msgid "By checking this option, you will add a meta robots tag with the value \"noodp\". <br>Note that Google and Yahoo have stopped considering this tag since the closing of DMOZ directory."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:237
+#, fuzzy
+msgid "Do not index images for this page <strong>(noimageindex)</strong>"
+msgstr "Да не индексира снимките за целия сайт."
+
+#: inc/admin/admin-metaboxes-form.php:238
+msgid "\"noimageindex\" robots meta tag"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:238
+msgid "By checking this option, you will add a meta robots tag with the value \"noimageindex\". <br> Note that your images can always be indexed if they are linked from other pages."
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:327
+msgid "Global meta title missing for several custom post types!"
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:346
+#, fuzzy
+msgid "Do not display a \"Cached\" link in the Google search results <strong>(noarchive)</strong>"
+msgstr "Да не показва връзката \"Кеширано\" в резултатите от търсене на Google."
+
+#: inc/admin/blocks/notifications-center.php:384
+msgid "Global meta description missing for several taxonomies!"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:245
+msgid "By checking this option, you will add a meta robots tag with the value \"noarchive\"."
+msgstr ""
+
+#: inc/admin/callbacks/Titles.php:418
+#, fuzzy
+#| msgid "Display date in Google search results?"
+msgid "Display post thumbnail in Google Custom Search results?"
+msgstr "Да показва ли дата в резултатите от търсенето ?"
+
+#: inc/admin/callbacks/Titles.php:439
+msgid "BuddyPress groups"
+msgstr ""
+
+#: inc/admin/callbacks/Titles.php:503
+#, fuzzy
+msgid "Do not display a description in search results for this page <strong>(nosnippet)</strong>"
+msgstr "Да не показва описание в резултатите от търсене на Google."
+
+#: inc/admin/callbacks/Titles.php:547 inc/admin/callbacks/Titles.php:558
+#: inc/admin/callbacks/Titles.php:563 inc/admin/callbacks/Titles.php:572
+msgid "Click to hide any SEO metaboxes for this taxonomy"
+msgstr ""
+
+#: inc/admin/callbacks/Titles.php:554 inc/admin/callbacks/Titles.php:567
+#: inc/admin/callbacks/Titles.php:571
+msgid "Click to display any SEO metaboxes for this taxonomy"
+msgstr ""
+
+#: inc/admin/callbacks/Titles.php:653
+msgid "Category Title"
+msgstr "Заглавие на категория"
+
+#: inc/admin/callbacks/Titles.php:661
+msgid "Tag Title"
+msgstr "Заглавие на етикет"
+
+#: inc/admin/callbacks/Titles.php:669
+#: inc/admin/metaboxes/admin-metaboxes-form.php:128
+msgid "Term Title"
+msgstr "Заглавие на термин"
+
+#: inc/admin/callbacks/Titles.php:726
+msgid "Category Description"
+msgstr "Описание на категория"
+
+#: inc/admin/callbacks/Titles.php:734
+msgid "Tag Description"
+msgstr "Описание на етикет"
+
+#: inc/admin/callbacks/Titles.php:742
+msgid "Term Description"
+msgstr "Описание на термин"
+
+#: inc/admin/callbacks/Titles.php:764
+msgid "Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:252
+msgid "By checking this option, you will add a meta robots tag with the value \"nosnippet\"."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:257
+msgid "You cannot uncheck a parameter? This is normal, and it‘s most likely defined in the global settings of the extension."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:260
+#: inc/admin/admin-metaboxes-form.php:261
+#: inc/admin/admin-metaboxes-form.php:264
+#: inc/admin/admin-wizard.php:298
+#: inc/admin/admin-wizard.php:334
+#: inc/admin/admin-wizard.php:353
+#: inc/admin/admin-wizard.php:372
+#: inc/admin/admin.php:777
+#: inc/admin/admin.php:817
+#: inc/admin/admin.php:838
+#: inc/admin/admin.php:859
+msgid "Canonical URL"
+msgstr "Каноничен уеб адрес"
+
+#: inc/admin/callbacks/Titles.php:886
+msgid "Post Type Archive Name"
+msgstr "Име на архивен тип публикация"
+
+#: inc/admin/callbacks/Titles.php:970
+msgid "A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. <br>For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. <br>Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color).\n"
+"                            The canonical can be in a different domain than a duplicate."
+msgstr "Да не показва връзката \"Кеширано\" в резултатите от търсене на Google."
+
+#: inc/admin/callbacks/Titles.php:1478 inc/admin/settings/Titles.php:283
+msgid "nosnippet"
+msgstr "nosnippet"
+
+#: inc/admin/callbacks/Titles.php:1482
+msgid "Do not display a description in the Google search results for all pages."
+msgstr "Да не показва описание в резултатите от търсене на Google."
+
+#: inc/admin/callbacks/Titles.php:1504 inc/admin/settings/Titles.php:291
+msgid "nositelinkssearchbox"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:272
+msgid "Set the category that gets used in the %category% permalink if you have multiple categories."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:282
+#: inc/admin/admin-wizard.php:469
+#: inc/admin/admin.php:4123
+#, fuzzy
+msgid "None (will disable this feature)"
+msgstr "Щракнете, за да изключите функцията"
+
+#: inc/admin/callbacks/Titles.php:1552
+msgid "Add a \"noindex\" meta robots for all paginated archive pages"
+msgstr ""
+
+#: inc/admin/callbacks/Titles.php:1556
+#, fuzzy
+msgid "Custom breadcrumbs"
+msgstr "Breadcrumbs"
+
+#: inc/admin/callbacks/Titles.php:1578
+msgid "Add a \"noindex\" meta robots for all attachment pages"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:298
+#, fuzzy,php-format
+msgid "Current breadcrumbs: %s"
+msgstr "Breadcrumbs"
+
+#: inc/admin/callbacks/Tools.php:16
+msgid "Enable Oxygen Builder compatibility"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:310
+msgid "<span class=\"label\">Did you know?</span> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tags are defined below."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:312
+#: inc/admin/admin-metaboxes-form.php:313
+msgid "Facebook Title"
+msgstr "Заглавие за Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:313
+msgid "Enter your Facebook title"
+msgstr "Въведете Вашето заглавие за Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:316
+#: inc/admin/admin-metaboxes-form.php:317
+msgid "Facebook description"
+msgstr "Описание за Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:317
+msgid "Enter your Facebook description"
+msgstr "Въведете Вашето описание за Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:320
+#: inc/admin/admin-metaboxes-form.php:321
+msgid "Facebook Thumbnail"
+msgstr "Миниатюра за Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:321
+#: inc/admin/admin-metaboxes-form.php:383
+#: inc/admin/admin.php:4392
+#: inc/admin/admin.php:4504
+msgid "Select your default thumbnail"
+msgstr "Изберете миниатюра по подразбиране"
+
+#: inc/admin/admin-metaboxes-form.php:322
+#: inc/admin/admin.php:4396
+msgid "Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:323
+#: inc/admin/admin-metaboxes-form.php:385
+#: inc/admin/admin-metaboxes-form.php:573
+#: inc/admin/admin.php:4157
+#: inc/admin/admin.php:4394
+#: inc/admin/admin.php:4506
+msgid "Upload an Image"
+msgstr "Качване на снимка"
+
+#: inc/admin/admin-metaboxes-form.php:328
+#, fuzzy
+msgid "Facebook Preview"
+msgstr "Заглавие за Facebook"
+
+#: inc/admin/admin-metaboxes-form.php:330
+msgid "This is what your post will look like in Facebook. You have to publish your post to get the Facebook Preview."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:332
+#: inc/admin/admin-metaboxes-form.php:394
+msgid "The Social Networks feature is disabled. Still seing informations from the FB Preview? You probably have social tags added by your theme or a plugin."
+msgstr ""
+
+#: inc/admin/callbacks/Tools.php:76
+msgid "Enable Avia Layout Builder compatibility"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:336
+msgid "Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image."
+msgstr ""
+
+#: inc/admin/callbacks/Tools.php:96
+msgid "Enable Fusion Builder compatibility"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:338
+#: inc/admin/admin-metaboxes-form.php:400
+#, fuzzy
+msgid "Your image ratio is: "
+msgstr "Заглавието на сайта Ви е празно!"
+
+#: inc/admin/admin-metaboxes-form.php:338
+msgid "The closer to 1.91 the better."
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:21
+msgid "Installation de SEOPress"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:22
+msgid "Activater votre clé de licence pour recevoir les mises à jours automatiques"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:23
+msgid "Configurez SEOPress en 5 minutes"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:24
+msgid "Migrer vos métadonnées SEO depuis d'autres extensions"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:384
+#: inc/admin/admin.php:4508
+msgid "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:390
+#, fuzzy
+msgid "Twitter Preview"
+msgstr "Заглавие за Twitter"
+
+#: inc/admin/admin-metaboxes-form.php:392
+msgid "This is what your post will look like in Twitter. You have to publish your post to get the Twitter Preview."
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:27
+msgid "Mesurez votre trafic avec Google Analytics"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:398
+msgid "Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image."
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:29
+msgid "Optimisez votre taux de clics sur les réseaux sociaux"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:103
+msgid "Installation of SEOPress"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:104
+#, fuzzy
+#| msgid "You have to enter your licence key to get updates and support"
+msgid "Activate your license key to receive automatic updates"
+msgstr "Вие нямате лицензионен ключ, за да получавате обновления и поддръжка"
+
+#: inc/admin/docs/DocsLinks.php:105
+msgid "Configure SEOPress in 5 minutes"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:106
+msgid "Migrate your SEO metadata from other plugins"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:107
+msgid "Promote the exploration of your WordPress site by search engine robots"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:108
+msgid "Optimize content from A to Z with SEOPress"
+msgstr ""
+
+#: inc/admin/docs/DocsLinks.php:109
+#, fuzzy
+#| msgid "Track everything about your visitors with Google Analytics"
+msgid "Measure your traffic with Google Analytics"
+msgstr "Проследяване на всякаква информация за посетителите Ви с Google Analytics"
+
+#: inc/admin/docs/DocsLinks.php:110
+#, fuzzy
+#| msgid "Add your site to Google. It's free!"
+msgid "Add your WordPress site to Google’s index"
+msgstr "Добавете Вашия сайт в Google, безплатно е!"
+
+#: inc/admin/docs/DocsLinks.php:111
+#, fuzzy
+#| msgid "Optimize your site for Google News"
+msgid "Optimize your click-through rate on social networks"
+msgstr "Оптимизирайте Вашия сайт за Google новини"
+
+#: inc/admin/help-tabs/Analytics.php:11
+msgid "Watch our video to learn how to connect your WordPress site with Google Analytics and get statistics right in your dashboard (PRO only)."
+msgstr ""
+
+#: inc/admin/help-tabs/Analytics.php:16 inc/admin/help-tabs/Sitemaps.php:15
+#: inc/admin/help-tabs/Social.php:15
+msgid "How-to"
+msgstr ""
+
+#: inc/admin/help-tabs/Analytics.php:22 inc/admin/help-tabs/Sitemaps.php:21
+#: inc/admin/help-tabs/Social.php:21
+msgid "Read our guide"
+msgstr ""
+
+#: inc/admin/help-tabs/Sitemaps.php:10
+msgid "Watch our video to learn how to enable XML sitemaps to improve crawling and add them to Google Search Console."
+msgstr ""
+
+#: inc/admin/help-tabs/Social.php:10
+msgid "Watch our video to learn how to edit your Open Graph and Twitter Cards tags to improve social sharing."
+msgstr ""
+
+#: inc/admin/help-tabs/Titles.php:29
+msgid "Templates variables"
+msgstr "Променливи за шаблони"
+
+#: inc/admin/help-tabs/Titles.php:35
+#, fuzzy
+msgid "Exclude this post from Video Sitemap?"
+msgstr "Изключване на публикацията от картата на сайта за Google новини?"
+
+#: inc/admin/admin-metaboxes-form.php:528
+msgid "If your post is set to noindex, it will be automatically excluded from the sitemap."
+msgstr ""
+
+#: inc/admin/help-tabs/Titles.php:42
+msgid "Read our FAQ"
+msgstr ""
+
+#: inc/admin/help-tabs/Titles.php:43
+msgid "Check our website"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:552
+#, fuzzy
+msgid "Enter your video URL"
+msgstr "Въведете Вашият уеб адрес (URL)"
+
+#: inc/admin/admin-metaboxes-form.php:552
+msgid "Video URL"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:557
+msgid "NOT an external video (eg: video hosting on YouTube, Vimeo, Wistia...)? Check this if your video is hosting on this server."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:27
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:568
+msgid "Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:30
+#, fuzzy
+msgid "Enter your video title"
+msgstr "Въведете Вашето заглавие"
+
+#: inc/admin/admin-metaboxes-form.php:562
+#, fuzzy
+msgid "Video title"
+msgstr "Заглавие на сайта"
+
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:41
+#: inc/admin/page-builders/elementor/inc/controls/class-content-analysis-control.php:46
+msgid "Refresh analysis"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:48
+msgid "Track with Insights"
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:567
+#, fuzzy
+msgid "Enter your video description"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:61
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:62
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:579
+#: inc/admin/page-builders/elementor/inc/controls/class-google-suggestions-control.php:50
+#: inc/admin/page-builders/elementor/inc/controls/class-google-suggestions-control.php:51
+#, fuzzy
+msgid "Video description"
+msgstr "Мета описание"
+
+#: inc/admin/admin-metaboxes-form.php:568
+msgid "2048 characters max.; default: meta description. If not available, use the beginning of the post content."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:65
+#: inc/admin/page-builders/elementor/inc/controls/class-google-suggestions-control.php:52
+#, fuzzy
+#| msgid "Reset settings"
+msgid "Get suggestions from Google"
+msgstr "Нулиране на настройките"
+
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:67
+msgid "Click on a suggestion below to add it as a target keyword."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:70
+#: inc/admin/page-builders/elementor/inc/controls/class-google-suggestions-control.php:53
+#, fuzzy
+msgid "Select your video thumbnail"
+msgstr "Изберете миниатюра по подразбиране"
+
+#: inc/admin/admin-metaboxes-form.php:573
+#, fuzzy
+msgid "Video Thumbnail"
+msgstr "Twitter миниатюра"
+
+#: inc/admin/admin-metaboxes-form.php:574
+msgid "Minimum size: 160x90px (1920x1080 max), JPG, PNG or GIF formats. Default: your post featured image."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:58
+msgid "Redirection"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:64
+msgid "Google News"
+msgstr "Новини от Google"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:71
+#, fuzzy
+#| msgid "View your sitemap"
+msgid "Video Sitemap"
+msgstr "Вижте картата на сайта"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:94
+#, php-format
+msgid "This is your <strong>Shop page</strong>. Go to <a href=\"%s\"><strong>SEO > Titles & Metas > Archives > Products</strong></a> to edit your title and meta description."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:103
+#: inc/admin/metaboxes/admin-metaboxes-form.php:110
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:126
+msgid "Title"
+msgstr "Заглавие"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:104
+msgid "Titles are critical to give users a quick insight into the content of a result and why it’s relevant to their query. It's often the primary piece of information used to decide which result to click on, so it's important to use high-quality titles on your web pages."
+msgstr ""
+
+#: inc/admin/admin-metaboxes-form.php:579
+msgid "The duration of the video in seconds. Value must be between 0 and 28800 (8 hours)."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:120
+#: inc/admin/page-builders/elementor/inc/controls/class-text-letter-counter-control.php:55
+msgid " / 568 pixels - "
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:122
+#: inc/admin/metaboxes/admin-metaboxes-form.php:161
+#: inc/admin/page-builders/elementor/inc/controls/class-text-letter-counter-control.php:61
+#, fuzzy
+#| msgid "(maximum recommended limit)"
+msgid " (maximum recommended limit)"
+msgstr "(максимално препоръчвано ограничение)"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:144
+msgid "A meta description tag should generally inform and interest users with a short, relevant summary of what a particular page is about. <br>They are like a pitch that convince the user that the page is exactly what they're looking for. <br>There's no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:149
+msgid "Enter your meta description"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:159
+#: inc/admin/page-builders/elementor/inc/controls/class-text-letter-counter-control.php:57
+msgid " / 940 pixels - "
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:166
+#, fuzzy
+msgid "Video tags"
+msgstr "Заглавия на етикети"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:169
+#: inc/admin/page-builders/elementor/inc/controls/class-text-letter-counter-control.php:70
+#, fuzzy
+msgid "Enter your video tags"
+msgstr "Въведете Вашите домейни"
+
+#: inc/admin/admin-metaboxes-form.php:593
+msgid "32 tags max., separate tags with commas. Default: target keywords + post tags if available."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:189
+#, fuzzy
+msgid "Video categories"
+msgstr "Следене на категории"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:194
+#: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:95
+#, fuzzy
+msgid "Enter your video categories"
+msgstr "Въведете Вашите домейни"
+
+#: inc/admin/admin-metaboxes-form.php:598
+msgid "256 characters max., usually a video will belong to a single category, separate categories with commas. Default: first post category if available."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:247
+#, php-format
+msgid "You cannot uncheck a parameter? This is normal, and it‘s most likely defined in the <a href=\"%s\">global settings of the plugin.</a>"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:256
+#: inc/functions/options-advanced-admin.php:827
+msgid "Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:257
+msgid "\"noindex\" robots meta tag"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:257
+msgid "By checking this option, you will add a meta robots tag with the value \"noindex\". <br>Search engines will not index this URL in the search results."
+msgstr ""
+
+#: inc/admin/admin-metaboxes.php:201
+#: inc/admin/admin-metaboxes.php:442
+#: inc/admin/admin-term-metaboxes.php:203
+msgid "Analysis in progress..."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:268
+msgid "\"nofollow\" robots meta tag"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:268
+msgid "By checking this option, you will add a meta robots tag with the value \"nofollow\". <br>Search engines will not follow links from this URL."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:277
+#, fuzzy
+#| msgid ""
+#| "Do not use Open Directory project metadata for titles or excerpts for all "
+#| "pages."
+msgid "Do not use Open Directory project metadata for titles or excerpts for this page <strong>(noodp)</strong>"
+msgstr "Да не ползва мета данни за заглавия или откъси от проекта Open Directory за всички страници."
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:278
+msgid "\"noodp\" robots meta tag"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:278
+msgid "By checking this option, you will add a meta robots tag with the value \"noodp\". <br>Note that Google and Yahoo have stopped considering this tag since the closing of DMOZ directory."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:286
+#, fuzzy
+#| msgid "Do not index images from the entire site."
+msgid "Do not index images for this page <strong>(noimageindex)</strong>"
+msgstr "Да не индексира снимките за целия сайт."
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:287
+msgid "\"noimageindex\" robots meta tag"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:287
+msgid "By checking this option, you will add a meta robots tag with the value \"noimageindex\". <br> Note that your images can always be indexed if they are linked from other pages."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:127
+msgid "This error indicates that your theme uses a deprecated function to generate the title tag of your pages. SEOPress will not be able to generate your custom title tags if this error is not fixed."
+msgstr "Да не показва връзката \"Кеширано\" в резултатите от търсене на Google."
+
+#: inc/admin/admin-notifications-center.php:129
+#: inc/admin/admin-notifications-center.php:161
+#: inc/admin/admin-notifications-center.php:222
+#: inc/admin/admin-notifications-center.php:252
+#: inc/admin/admin-notifications-center.php:270
+#: inc/admin/admin-notifications-center.php:287
+#: inc/admin/admin-notifications-center.php:375
+#: inc/admin/admin-notifications-center.php:451
+#: inc/admin/admin-notifications-center.php:488
+#: inc/admin/admin-notifications-center.php:506
+msgid "High impact"
+msgstr "Силен ефект"
+
+#: inc/admin/admin-notifications-center.php:134
+#: inc/admin/admin-notifications-center.php:201
+#: inc/admin/admin-notifications-center.php:227
+#: inc/admin/admin.php:4821
+#: inc/admin/admin.php:4863
+#: inc/admin/admin.php:4890
+#: inc/admin/admin.php:4912
+#: inc/admin/admin.php:4934
+#: inc/admin/admin.php:4956
+msgid "Learn more"
+msgstr "Научете повече"
+
+#: inc/admin/admin-notifications-center.php:158
+#, php-format
+msgid "We noticed that you use <strong>%s</strong> plugin."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:159
+msgid "Do you want to migrate all your metadata to SEOPress? Do not use multiple SEO plugins at once to avoid conflicts!"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:304
+#, fuzzy
+#| msgid ""
+#| "Do not display a description in the Google search results for all pages."
+msgid "Do not display a description in search results for this page <strong>(nosnippet)</strong>"
+msgstr "Да не показва описание в резултатите от търсене на Google."
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:305
+msgid "\"nosnippet\" robots meta tag"
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:179
+msgid "To solve this, please disable and re-enable SEOPress PRO. No data will be lost."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:200
+msgid "Your site doesn't use an SSL certificate!"
+msgstr "Вашият сайт няма SSL сертификат!"
+
+#: inc/admin/admin-notifications-center.php:201
+msgid "Https is considered by Google as a positive signal for the ranking of your site. It also reassures your visitors for data security, and improves trust."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:317
+msgid "Default value: "
+msgstr "Стойност по подразбиране: "
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:324
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:293
+msgid "Select a primary category"
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:220
+msgid "This PHP module, installed by default with PHP, is required by many plugins including SEOPress. Please contact your host as soon as possible to solve this."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:349
+#: inc/admin/metaboxes/admin-metaboxes-form.php:356
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:309
+#, fuzzy
+#| msgid "Breadcrumbs"
+msgid "Custom breadcrumbs"
+msgstr "Breadcrumbs"
+
+#: inc/admin/admin-notifications-center.php:250
+msgid "You have activated the blocking of the indexing of your site. If your site is under development, this is probably normal. Otherwise, check your settings. Delete this notification using the cross on the right if you are not concerned."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:355
+#, fuzzy, php-format
+#| msgid "Breadcrumbs"
+msgid "Current breadcrumbs: %s"
+msgstr "Breadcrumbs"
+
+#: inc/admin/admin-notifications-center.php:268
+msgid "Your Site Title is used by WordPress, your theme and your plugins including SEOPress. It is an essential component in the generation of title tags, but not only. Enter one!"
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:284
+#: inc/admin/admin.php:2764
+msgid "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
+msgstr "Вашите статични връзки не са SEO оптимизирани! Изберете качествени връзки, за да поправите това."
+
+#: inc/admin/admin-notifications-center.php:285
+#: inc/admin/admin-notifications-center.php:314
+msgid "Why is this important? Showing only the summary of each article significantly reduces the theft of your content by third party sites. Not to mention, the increase in your traffic, your advertising revenue, conversions..."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:313
+#, fuzzy
+msgid "Your RSS feed shows full text!"
+msgstr "Вашият RSS поток показва целия текст!"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:393
+#: inc/admin/metaboxes/admin-metaboxes-form.php:397
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:383
+msgid "Facebook description"
+msgstr "Описание за Facebook"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:396
+msgid "Enter your Facebook description"
+msgstr "Въведете Вашето описание за Facebook"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:401
+#: inc/admin/metaboxes/admin-metaboxes-form.php:406
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:394
+msgid "Facebook Thumbnail"
+msgstr "Миниатюра за Facebook"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:421
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:407
+#, fuzzy
+msgid "You like SEOPress? Please help us by rating us 5 stars!"
+msgstr "Харесвате ли SEOPress? Не забравяйте да ни дадете 5 звезди!"
+
+#: inc/admin/admin-notifications-center.php:344
+msgid "Support the development and improvement of the plugin by taking 15 seconds of your time to leave us a user review on the official WordPress plugins repository. Thank you!"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:434
+#: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:46
+msgid "File type not supported by Facebook. Please choose another image."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:438
+#: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:47
+msgid "Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:372
+msgid "Break comments into pages is ON!"
+msgstr "Разделянето на коментарите на страници е включено!"
+
+#: inc/admin/admin-notifications-center.php:373
+msgid "Enabling this option will create duplicate content for each article beyond x comments. This can have a disastrous effect by creating a large number of poor quality pages, and slowing the Google bot unnecessarily, so your ranking in search results."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:446
+#: inc/admin/metaboxes/admin-metaboxes-form.php:558
+#: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:49
+#: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:73
+#, fuzzy
+#| msgid "Your site title is empty!"
+msgid "Your image ratio is: "
+msgstr "Заглавието на сайта Ви е празно!"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:447
+msgid "The closer to 1.91 the better."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:403
+msgid "To reduce the number pages search engines have to crawl to find all your articles, it is recommended displaying more posts per page. This should not be a problem for your users. Using mobile, we prefer to scroll down rather than clicking on next page links. If you can do it, try adding an infinite scroll to your post listings."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:464
+msgid "By "
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:421
+msgid "XML Sitemaps are useful to facilitate the crawling of your content by search engine robots. Indirectly, this can benefit your ranking by reducing the crawl bugdet."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:448
+#, fuzzy
+msgid "Do you have a Google My Business page? It's free!"
+msgstr "Имате ли Google Бизнес страница? Безплатно е!"
+
+#: inc/admin/admin-notifications-center.php:449
+msgid "Local Business websites should have a My Business page to improve visibility in search results. Click on the cross on the right to delete this notification if you are not concerned."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:510
+#: inc/admin/metaboxes/admin-metaboxes-form.php:514
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:432
+msgid "Twitter description"
+msgstr "Описание за Twitter"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:513
+msgid "Enter your Twitter description"
+msgstr "Въведете Вашето описание за Twitter"
+
+#: inc/admin/admin-notifications-center.php:486
+msgid "Is your brand new site online? So reference it as quickly as possible on Google to get your first visitors via Google Search Console. Already the case? Click on the cross on the right to remove this alert."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:535
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:456
+#, fuzzy
+#| msgid "Twitter Title"
+msgid "Twitter Preview"
+msgstr "Заглавие за Twitter"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:538
+msgid "This is what your post will look like in Twitter. You have to publish your post to get the Twitter Preview."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:504
+msgid "Please enable <strong>Structured Data Types metabox for your posts, pages and custom post types</strong> option in order to use automatic and manual schemas. (SEO > PRO > Structured Data Types (schema.org)"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:546
+#: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:70
+msgid "File type not supported by Twitter. Please choose another image."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:523
+msgid "Please activate the SEOPress PRO license key to automatically receive updates to guarantee you the best user experience possible."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:559
+msgid "The closer to 1 the better (with large card, 2 is better)."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:552
+msgid "The PRO version of SEOPress allows you to easily manage your structured data (schemas), add a breadcrumb optimized for SEO and accessibility, improve SEO for WooCommerce, gain productivity with our import / export tool from a CSV of your metadata and so much more."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:614
+#, fuzzy
+msgid "Upgrade now!"
+msgstr "Мигрирай сега"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:618
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:510
+msgid "301 Moved Permanently"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:621
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:511
+msgid "302 Found / Moved Temporarily"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:624
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:512
+msgid "307 Moved Temporarily"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:627
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:513
+msgid "410 Gone"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:630
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:514
+msgid "451 Unavailable For Legal Reasons"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:635
+#: inc/admin/metaboxes/admin-metaboxes-form.php:639
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:505
+msgid "URL redirection"
+msgstr "Уеб адрес (URL) за пренасочване"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:638
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:523
+msgid "Enter your new URL in absolute (eg: https://www.example.com/)"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:645
+msgid "Query parameters"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:648
+msgid "Exactly match all parameters"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:651
+msgid "Exclude all parameters"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:654
+msgid "Exclude all parameters and pass them to the redirection"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:677
+msgid "Test your URL"
+msgstr "Тествайте Вашия уеб адрес (URL)"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:688
+msgid "Need help with your redirections? Read our guide."
+msgstr ""
+
+#: inc/admin/admin-notifications-center.php:635
+msgid "Image SEO plugin to optimize your image ALT texts and names for Search Engines."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:754
+msgid "Video "
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:759
+msgid "Video URL (required)"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:96
+#: seopress.php:211
+msgid "Migration completed!"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:97
+#: seopress.php:212
+msgid "Export completed!"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:787
+#, fuzzy
+msgid "Import SEO settings"
+msgstr "Настройки за импорт"
+
+#: inc/admin/admin-wizard.php:117
+#: inc/admin/admin-wizard.php:454
+#, fuzzy
+msgid "Your site"
+msgstr "Вижте картата на сайта"
+
+#: inc/admin/admin-wizard.php:122
+#: inc/admin/admin-wizard.php:564
+msgid "Indexing"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:127
+#: inc/admin/admin-wizard.php:720
+#, fuzzy
+msgid "Advanced options"
+msgstr "<p>Разширени SEO опции</p>"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:800
+#, fuzzy
+#| msgid "Meta description"
+msgid "Video description"
+msgstr "Мета описание"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:801
+msgid "2048 characters max.; default: meta description. If not available, use the beginning of the post content."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:805
+msgid "Video Thumbnail (required)"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:812
+#, fuzzy
+#| msgid "Select your default thumbnail"
+msgid "Select your video thumbnail"
+msgstr "Изберете миниатюра по подразбиране"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:819
+#, fuzzy
+#| msgid "Twitter Thumbnail"
+msgid "Video Thumbnail"
+msgstr "Twitter миниатюра"
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:822
+msgid "Minimum size: 160x90px (1920x1080 max), JPG, PNG or GIF formats. Default: your post featured image."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:827
+msgid "Video Duration (recommended)"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:832
+msgid "Duration in seconds"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:833
+msgid "Video duration"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:269
+msgid "The following wizard will help you configure SEOPress and get you started quickly."
+msgstr ""
+
+#: inc/admin/admin-wizard.php:270
+msgid "The first step is to import your previous settings from other plugins to keep your SEO."
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:844
+#: inc/admin/metaboxes/admin-metaboxes-form.php:845
+msgid "Video rating"
+msgstr ""
+
+#: inc/admin/metaboxes/admin-metaboxes-form.php:847
+msgid "Allowed values are float numbers in the range 0.0 to 5.0."
+msgstr ""
+
+#: inc/admin/admin-wizard.php:273
+#: inc/admin/admin.php:753
+#, fuzzy
+msgid "Import posts and terms metadata from"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-wizard.php:275
+#: inc/admin/admin.php:755
+#: inc/admin/admin.php:911
+#, fuzzy
+msgid "Select an option"
+msgstr "Изберете Вашето лого"
+
+#: inc/admin/admin-wizard.php:276
+#: inc/admin/admin.php:756
+msgid "Yoast SEO"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:277
+#: inc/admin/admin.php:757
+msgid "All In One SEO"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:278
+#: inc/admin/admin.php:758
+msgid "The SEO Framework"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:279
+#: inc/admin/admin.php:759
+msgid "Rank Math"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:280
+#: inc/admin/admin.php:760
+msgid "Squirrly SEO"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:281
+#: inc/admin/admin.php:761
+msgid "SEO Ultimate"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:282
+#: inc/admin/admin.php:762
+msgid "WP Meta SEO"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:290
+#: inc/admin/admin.php:769
+msgid "Import posts and terms metadata from Yoast"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:291
+#: inc/admin/admin-wizard.php:310
+#: inc/admin/admin-wizard.php:327
+#: inc/admin/admin-wizard.php:346
+#: inc/admin/admin-wizard.php:365
+#: inc/admin/admin-wizard.php:383
+#: inc/admin/admin-wizard.php:400
+#: inc/admin/admin.php:770
+#: inc/admin/admin.php:791
+#: inc/admin/admin.php:810
+#: inc/admin/admin.php:831
+#: inc/admin/admin.php:852
+#: inc/admin/admin.php:872
+#: inc/admin/admin.php:891
+msgid "By clicking Migrate, we'll import:"
+msgstr "Като щракнете Мигриране, ние ще импортираме."
+
+#: inc/admin/admin-wizard.php:293
+#: inc/admin/admin-wizard.php:312
+#: inc/admin/admin-wizard.php:329
+#: inc/admin/admin-wizard.php:348
+#: inc/admin/admin-wizard.php:367
+#: inc/admin/admin-wizard.php:385
+#: inc/admin/admin-wizard.php:402
+#: inc/admin/admin.php:772
+#: inc/admin/admin.php:793
+#: inc/admin/admin.php:812
+#: inc/admin/admin.php:833
+#: inc/admin/admin.php:854
+#: inc/admin/admin.php:874
+#: inc/admin/admin.php:893
+msgid "Title tags"
+msgstr "Заглавия на етикети"
+
+#: inc/admin/admin-wizard.php:295
+#: inc/admin/admin-wizard.php:314
+#: inc/admin/admin-wizard.php:331
+#: inc/admin/admin-wizard.php:350
+#: inc/admin/admin-wizard.php:369
+#: inc/admin/admin-wizard.php:387
+#: inc/admin/admin-wizard.php:404
+#: inc/admin/admin.php:774
+#: inc/admin/admin.php:795
+#: inc/admin/admin.php:814
+#: inc/admin/admin.php:835
+#: inc/admin/admin.php:856
+#: inc/admin/admin.php:876
+#: inc/admin/admin.php:895
+msgid "Facebook Open Graph tags (title, description and image thumbnail)"
+msgstr "Facebook Open Graph етикети (заглавие, описание и миниатюра)"
+
+#: inc/admin/admin-wizard.php:296
+#: inc/admin/admin-wizard.php:332
+#: inc/admin/admin-wizard.php:351
+#: inc/admin/admin-wizard.php:370
+#: inc/admin/admin-wizard.php:388
+#: inc/admin/admin-wizard.php:405
+#: inc/admin/admin.php:775
+#: inc/admin/admin.php:815
+#: inc/admin/admin.php:836
+#: inc/admin/admin.php:857
+#: inc/admin/admin.php:877
+#: inc/admin/admin.php:896
+msgid "Twitter tags (title, description and image thumbnail)"
+msgstr "Twitter етикети (заглавие, описание и миниатюра)"
+
+#: inc/admin/admin-wizard.php:297
+#: inc/admin/admin.php:776
+msgid "Meta Robots (noindex, nofollow...)"
+msgstr "Мета роботи (noindex, nofollow...)"
+
+#: inc/admin/admin-wizard.php:299
+#: inc/admin/admin-wizard.php:354
+#: inc/admin/admin.php:778
+#: inc/admin/admin.php:839
+#, fuzzy
+msgid "Focus keywords"
+msgstr "Търсене на кл. думи"
+
+#: inc/admin/admin-wizard.php:301
+#: inc/admin/admin.php:780
+#, fuzzy
+msgid "<strong>WARNING:</strong> Migration will delete / update all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Yoast data."
+msgstr "<strong>ВНИМАНИЕ:</strong> Миграцията ще изтрие всички SEOPress мета данни за публикациите"
+
+#: inc/admin/admin-wizard.php:302
+#: inc/admin/admin-wizard.php:319
+#: inc/admin/admin-wizard.php:338
+#: inc/admin/admin-wizard.php:357
+#: inc/admin/admin-wizard.php:375
+#: inc/admin/admin-wizard.php:392
+#: inc/admin/admin-wizard.php:408
+#: inc/admin/admin.php:781
+#: inc/admin/admin.php:800
+#: inc/admin/admin.php:821
+#: inc/admin/admin.php:842
+#: inc/admin/admin.php:862
+#: inc/admin/admin.php:881
+#: inc/admin/admin.php:899
+msgid "Migrate now"
+msgstr "Мигрирай сега"
+
+#: inc/admin/admin-wizard.php:309
+#: inc/admin/admin.php:790
+#, fuzzy
+msgid "Import posts and terms metadata from All In One SEO"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-wizard.php:315
+#: inc/admin/admin.php:796
+#, fuzzy
+msgid "Twitter image thumbnail"
+msgstr "Twitter миниатюра"
+
+#: inc/admin/admin-wizard.php:316
+#: inc/admin/admin.php:797
+#, fuzzy
+msgid "Meta Robots (noindex, nofollow)"
+msgstr "Мета роботи (noindex, nofollow...)"
+
+#: inc/admin/admin-wizard.php:318
+#: inc/admin/admin.php:799
+#, fuzzy
+msgid "<strong>WARNING:</strong> Migration will update/delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any AIO data."
+msgstr "<strong>ВНИМАНИЕ:</strong> Миграцията ще изтрие всички SEOPress мета данни за публикациите"
+
+#: inc/admin/admin-wizard.php:326
+#: inc/admin/admin.php:809
+#, fuzzy
+msgid "Import posts and terms metadata from The SEO Framework"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-wizard.php:333
+#: inc/admin/admin.php:816
+#, fuzzy
+msgid "Meta Robots (noindex, nofollow, noarchive)"
+msgstr "Мета роботи (noindex, nofollow...)"
+
+#: inc/admin/admin-wizard.php:335
+#: inc/admin/admin.php:818
+#: inc/functions/options-advanced-admin.php:324
+#, fuzzy
+msgid "Redirect URL"
+msgstr "Пренасочвания"
+
+#: inc/admin/admin-wizard.php:337
+#: inc/admin/admin.php:820
+#, fuzzy
+msgid "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Framework data."
+msgstr "<strong>ВНИМАНИЕ:</strong> Миграцията ще изтрие всички SEOPress мета данни за публикациите"
+
+#: inc/admin/admin-wizard.php:345
+#: inc/admin/admin.php:830
+#, fuzzy
+msgid "Import posts and terms metadata from Rank Math"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-wizard.php:352
+#: inc/admin/admin.php:837
+#, fuzzy
+msgid "Meta Robots (noindex, nofollow, noarchive, noimageindex)"
+msgstr "Мета роботи (noindex, nofollow...)"
+
+#: inc/admin/admin-wizard.php:356
+#: inc/admin/admin.php:841
+#, fuzzy
+msgid "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts and terms metadata. Some dynamic variables will not be interpreted. We do NOT delete any Rank Math data."
+msgstr "<strong>ВНИМАНИЕ:</strong> Миграцията ще изтрие всички SEOPress мета данни за публикациите"
+
+#: inc/admin/admin-wizard.php:364
+#: inc/admin/admin.php:851
+#, fuzzy
+msgid "Import posts metadata from Squirrly SEO"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-wizard.php:371
+#: inc/admin/admin-wizard.php:389
+#: inc/admin/admin.php:858
+#: inc/admin/admin.php:878
+#, fuzzy
+msgid "Meta Robots (noindex or nofollow)"
+msgstr "Мета роботи (noindex, nofollow...)"
+
+#: inc/admin/admin-wizard.php:374
+#, fuzzy
+msgid "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any Squirrly SEO data."
+msgstr "<strong>ВНИМАНИЕ:</strong> Миграцията ще изтрие всички SEOPress мета данни за публикациите"
+
+#: inc/admin/admin-wizard.php:382
+#: inc/admin/admin.php:871
+#, fuzzy
+msgid "Import posts metadata from SEO Ultimate"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-wizard.php:391
+#: inc/admin/admin.php:880
+#, fuzzy
+msgid "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any SEO Ultimate data."
+msgstr "<strong>ВНИМАНИЕ:</strong> Миграцията ще изтрие всички SEOPress мета данни за публикациите"
+
+#: inc/admin/admin-wizard.php:399
+#: inc/admin/admin.php:890
+#, fuzzy
+msgid "Import posts and terms metadata from WP Meta SEO"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin-wizard.php:407
+#: inc/admin/admin.php:898
+#, fuzzy
+msgid "<strong>WARNING:</strong> Migration will update / delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any WP Meta SEO data."
+msgstr "<strong>ВНИМАНИЕ:</strong> Миграцията ще изтрие всички SEOPress мета данни за публикациите"
+
+#: inc/admin/admin-wizard.php:415
+#: inc/admin/admin-wizard.php:844
+msgid "Next step"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:456
+msgid "To build title tags and knowledge graph for Google, you need to fill out the fields below to configure the general settings. "
+msgstr ""
+
+#: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:49
+msgid ". The closer to 1.91 the better."
+msgstr ""
+
+#: inc/admin/admin-wizard.php:461
+#: inc/admin/admin.php:1182
+#: inc/admin/admin.php:2940
+msgid "Site title"
+msgstr "Заглавие на сайта"
+
+#: inc/admin/admin-wizard.php:462
+#, fuzzy
+msgid "eg: My super website"
+msgstr "Моят прекрасен сайт"
+
+#: inc/admin/admin-wizard.php:464
+#: inc/admin/admin.php:1579
+msgid "Person or organization"
+msgstr "Частно лице или огранизация"
+
+#: inc/admin/admin-wizard.php:466
+msgid "Choose a knowledge type"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:472
+#: inc/admin/admin.php:4126
+msgid "Person"
+msgstr "Частно лице"
+
+#: inc/admin/admin-wizard.php:475
+#: inc/admin/admin.php:4129
+msgid "Organization"
+msgstr "Организация"
+
+#: inc/admin/admin-wizard.php:479
+#: inc/admin/admin.php:1587
+#: inc/admin/admin.php:4142
+#, fuzzy
+msgid "Your name/organization"
+msgstr "Вашето име / Организация"
+
+#: inc/admin/admin-wizard.php:480
+msgid "eg: My Company Name"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:482
+#: inc/admin/admin.php:1595
+#: inc/admin/admin.php:4155
+#, fuzzy
+msgid "Your photo/organization logo"
+msgstr "Вашата снимка / Лого на организацията"
+
+#: inc/admin/admin-wizard.php:483
+#, fuzzy
+msgid "eg: https://www.example.com/logo.png"
+msgstr "пример: https://www.facebook.com/your-page"
+
+#: inc/admin/admin-wizard.php:485
+#, fuzzy
+msgid "Facebook page URL"
+msgstr "Уеб адрес към Facebook страница"
+
+#: inc/admin/admin-wizard.php:486
+#: inc/admin/admin.php:4263
+#, fuzzy
+msgid "eg: https://facebook.com/my-page-url"
+msgstr "пример: https://www.facebook.com/your-page"
+
+#: inc/admin/admin-wizard.php:488
+#: inc/admin/admin.php:1644
+msgid "Twitter Username"
+msgstr "Twitter потребител"
+
+#: inc/admin/admin-wizard.php:489
+#: inc/admin/admin.php:4276
+msgid "eg: @my_twitter_account"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:491
+#: inc/admin/admin.php:1652
+#: inc/admin/admin.php:4288
+msgid "Pinterest URL"
+msgstr "Pinterest URL"
+
+#: inc/admin/admin-wizard.php:492
+#: inc/admin/admin.php:4288
+#, fuzzy
+msgid "eg: https://pinterest.com/my-page-url/"
+msgstr "пример: https://pinterest.com/wpbuy/"
+
+#: inc/admin/admin-wizard.php:494
+#: inc/admin/admin.php:1660
+#: inc/admin/admin.php:4300
+msgid "Instagram URL"
+msgstr "Instagram URL"
+
+#: inc/admin/admin-wizard.php:495
+#: inc/admin/admin.php:4300
+#, fuzzy
+msgid "eg: https://www.instagram.com/my-page-url/"
+msgstr "пример: https://www.instagram.com/your-name/"
+
+#: inc/admin/admin-wizard.php:497
+#: inc/admin/admin.php:1668
+#: inc/admin/admin.php:4312
+msgid "YouTube URL"
+msgstr "YouTube URL"
+
+#: inc/admin/admin-wizard.php:498
+#: inc/admin/admin.php:4312
+#, fuzzy
+msgid "eg: https://www.youtube.com/my-channel-url"
+msgstr "пример: https://www.youtube.com/channel/UCpQzarWu55UzCIH7-OW6pwA"
+
+#: inc/admin/admin-wizard.php:500
+#: inc/admin/admin.php:1676
+#: inc/admin/admin.php:4324
+msgid "LinkedIn URL"
+msgstr "LinkedIn URL"
+
+#: inc/admin/admin-wizard.php:501
+#: inc/admin/admin.php:4324
+msgid "eg: http://linkedin.com/company/my-company-url/"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:503
+#: inc/admin/admin.php:1684
+#: inc/admin/admin.php:4336
+msgid "MySpace URL"
+msgstr "MySpace URL"
+
+#: inc/admin/admin-wizard.php:504
+#: inc/admin/admin.php:4336
+#, fuzzy
+msgid "eg: https://myspace.com/my-page-url"
+msgstr "пример: https://myspace.com/your-page"
+
+#: inc/admin/admin-wizard.php:506
+#: inc/admin/admin.php:1692
+#: inc/admin/admin.php:4348
+msgid "Soundcloud URL"
+msgstr "Soundcloud URL"
+
+#: inc/admin/admin-wizard.php:507
+#: inc/admin/admin.php:4348
+#, fuzzy
+msgid "eg: https://soundcloud.com/my-page-url"
+msgstr "пример: https://soundcloud.com/michaelmccannmusic"
+
+#: inc/admin/admin-wizard.php:509
+#: inc/admin/admin.php:1700
+#: inc/admin/admin.php:4360
+msgid "Tumblr URL"
+msgstr "Tumblr URL"
+
+#: inc/admin/admin-wizard.php:510
+#: inc/admin/admin.php:4360
+msgid "eg: https://your-site.tumblr.com"
+msgstr "пример: https://your-site.tumblr.com"
+
+#: inc/admin/admin-wizard.php:513
+#: inc/admin/admin-wizard.php:656
+#: inc/admin/admin-wizard.php:763
+msgid "Continue"
+msgstr ""
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:540
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/edit.js:209
+msgid "OL"
+msgstr ""
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:548
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/edit.js:220
+msgid "UL"
+msgstr ""
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:548
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/edit.js:224
+#, fuzzy
+msgid "Default: index"
+msgstr "По подразбиране"
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:558
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/edit.js:236
+msgid "H2"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:589
+msgid "Do not display this single post type in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:574
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/edit.js:258
+msgid "H4"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:618
+msgid "Do not display this post type archive in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:590
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/edit.js:280
+msgid "H6"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:647
+msgid "Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:730
+#: inc/admin/admin.php:3471
+msgid "Do not display author archives in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:733
+msgid "You only have one author on your site? Check this option to avoid duplicate content."
+msgstr ""
+
+#: inc/admin/admin-wizard.php:742
+#: inc/admin/admin.php:5658
+msgid "Redirect attachment pages to their file URL (https://www.example.com/my-image-file.jpg)"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:745
+msgid "By default, SEOPress redirects your Attachment pages to the parent post. Optimize this by redirecting the user directly to the URL of the media file."
+msgstr ""
+
+#: inc/admin/admin-wizard.php:754
+#: inc/admin/admin.php:5783
+msgid "Remove /category/ in your permalinks"
+msgstr "Премахване на /category/ от вашите статични връзки"
+
+#: inc/admin/admin-wizard.php:757
+msgid "Shorten your URLs by removing /category/ and improve your SEO."
+msgstr ""
+
+#: inc/admin/admin-wizard.php:807
+#, fuzzy
+msgid "Your site is now ready for search engines!"
+msgstr "Вашият сайт не е видим за търсачките!"
+
+#: inc/admin/admin-wizard.php:812
+#: inc/functions/options-advanced-admin.php:18
+msgid "Welcome to SEOPress PRO!"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:815
+#: inc/functions/options-advanced-admin.php:19
+#, fuzzy
+msgid "Please activate your license to receive automatic updates and get premium support."
+msgstr "Вие нямате лицензионен ключ, за да получавате обновления и поддръжка"
+
+#: inc/admin/admin-wizard.php:820
+#: inc/functions/options-advanced-admin.php:20
+#, fuzzy
+msgid "Activate License"
+msgstr "Лиценз"
+
+#: inc/admin/admin-wizard.php:827
+msgid "Go PRO with SEOPress PRO!"
+msgstr ""
+
+#: inc/admin/admin-wizard.php:830
+msgid "When you upgrade to the PRO version, you get a lot of additional features, like automatic and manual schemas, Video Sitemap, WooCommerce enhancements, Analytics statistics in your Dashboard, breadcrumbs, redirections, and more."
+msgstr ""
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:763
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/image-control.js:71
+msgid "To edit the background image, you need permission to upload media."
+msgstr ""
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:769
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:779
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:781
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/image-control.js:81
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/image-control.js:96
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/image-control.js:104
+#, fuzzy
+msgid "Create your XML sitemaps"
+msgstr "Вижте картата на сайта"
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/build/index.js:788
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/image-control.js:115
+msgid "Remove Image"
+msgstr ""
+
+#: inc/admin/page-builders/gutenberg/inc/blocks/faq-block/src/index.js:8
+msgid "FAQ"
+msgstr ""
+
+#: inc/admin/sections/Advanced.php:9
+#, fuzzy
+msgid "Configure your XML sitemaps"
+msgstr "Вижте картата на сайта"
+
+#: inc/admin/sections/Advanced.php:19
+#, fuzzy
+msgid "Follow us:"
+msgstr "Nofollow?"
+
+#: inc/admin/sections/Advanced.php:29
+#, fuzzy
+msgid "Like our Facebook page"
+msgstr "Въведете Вашето заглавие за Facebook"
+
+#: inc/admin/sections/Advanced.php:33
+msgid "Check a user role to prevent it to edit a specific metabox."
+msgstr ""
+
+#: inc/admin/sections/Advanced.php:45
+msgid "SEOPress settings pages"
+msgstr ""
+
+#: inc/admin/sections/Advanced.php:49
+msgid "Check a user role to allow it to edit a specific settings page."
+msgstr ""
+
+#: inc/admin/sections/Analytics.php:9
+#, fuzzy
+msgid "Visit Dashboard"
+msgstr "Статистики в Таблото"
+
+#: inc/admin/admin-wizard.php:899
+#, fuzzy
+msgid "Review Settings"
+msgstr "Нулиране на настройките"
+
+#: inc/admin/admin-wizard.php:902
+#, fuzzy
+msgid "Knowledge base"
+msgstr "Графика"
+
+#: inc/admin/sections/Analytics.php:33
+#, fuzzy
+#| msgid "<p>Configure your Google Analytics tracking code</p>"
+msgid "Configure your Google Analytics tracking code."
+msgstr "<p>Конфигуриране на Вашия код за следене в Google Analytics</p>"
+
+#: inc/admin/sections/Analytics.php:43
+#, fuzzy
+#| msgid "Track everything about your visitors with Google Analytics"
+msgid "Track events in Google Analytics."
+msgstr "Проследяване на всякаква информация за посетителите Ви с Google Analytics"
+
+#: inc/admin/sections/Analytics.php:53
+#, fuzzy
+msgid "Analytics"
+msgstr "Google Analytics"
+
+#: inc/admin/sections/Analytics.php:56
+msgid "Custom dimensions and custom metrics are like the default dimensions and metrics in your Analytics account, except you create them yourself."
+msgstr ""
+
+#: inc/admin/sections/Analytics.php:59
+msgid "Use them to collect and analyze data that Analytics doesn't automatically track."
+msgstr ""
+
+#: inc/admin/sections/Analytics.php:62
+msgid "Please note that you also have to setup your custom dimensions in your Google Analytics account. More info by clicking on the help icon."
+msgstr ""
+
+#: inc/admin/sections/Analytics.php:67
+msgid "Custom dimensions also work with <strong>Matomo</strong> tracking code."
+msgstr ""
+
+#: inc/admin/admin.php:205
+#: inc/admin/admin.php:2945
+#: inc/admin/admin.php:2956
+msgid "Tagline"
+msgstr "Подзаглавие"
+
+#: inc/admin/admin.php:206
+#, fuzzy,php-format
+msgid "%%post_title%% (alias %%title%%)"
+msgstr "%%post_title%%"
+
+#: inc/admin/admin.php:206
+msgid "Post Title (post, page, custom post type)"
+msgstr "Заглавие на публикация (публикация, страница, допълнителен тип публикация)"
+
+#: inc/admin/admin.php:207
+#, fuzzy,php-format
+msgid "%%post_excerpt%% (alias %%excerpt%%)"
+msgstr "%%post_excerpt%%"
+
+#: inc/admin/sections/Sitemaps.php:11
+#, fuzzy
+#| msgid ""
+#| "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix "
+#| "this."
+msgid "Your permalinks are not <strong>SEO Friendly</strong>! Enable <strong>pretty permalinks</strong> to fix this."
+msgstr "Вашите статични връзки не са SEO оптимизирани! Изберете качествени връзки, за да поправите това."
+
+#: inc/admin/admin.php:208
+#, fuzzy,php-format
+msgid "%%post_content%%"
+msgstr "%%post_date%%"
+
+#: inc/admin/admin.php:208
+#, fuzzy
+msgid "Post content / product long description"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/admin.php:209
+#, fuzzy,php-format
+msgid "%%post_thumbnail_url%%"
+msgstr "%%post_title%%"
+
+#: inc/admin/sections/Sitemaps.php:51
+#, fuzzy
+msgid "Post thumbnail URL"
+msgstr "Twitter миниатюра"
+
+#: inc/admin/admin.php:210
+#, fuzzy,php-format
+msgid "%%post_date%% (alias %%date%%)"
+msgstr "%%post_date%%"
+
+#: inc/admin/sections/Sitemaps.php:61
+msgid "Blank sitemap?"
+msgstr ""
+
+#: inc/admin/admin.php:211
+#, fuzzy,php-format
+msgid "%%post_modified_date%%"
+msgstr "%%post_date%%"
+
+#: inc/admin/sections/Sitemaps.php:73
+msgid "HTML error? Exclude XML and XSL from caching plugins!"
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:80
+msgid "View your sitemap"
+msgstr "Вижте картата на сайта"
+
+#: inc/admin/admin.php:212
+#: inc/admin/admin.php:3438
+msgid "Post author"
+msgstr "Автор"
+
+#: inc/admin/admin.php:213
+#, fuzzy,php-format
+msgid "%%post_category%%"
+msgstr "%%post_author%%"
+
+#: inc/admin/sections/Sitemaps.php:101
+#, fuzzy
+msgid "Post category"
+msgstr "Автор"
+
+#: inc/admin/admin.php:214
+#, fuzzy,php-format
+msgid "%%post_tag%%"
+msgstr "%%post_date%%"
+
+#: inc/admin/sections/Sitemaps.php:123
+#, fuzzy
+msgid "Post tag"
+msgstr "Дата на публикуване"
+
+#: inc/admin/admin.php:215
+#, php-format
+msgid "%%_category_title%%"
+msgstr "%%_category_title%%"
+
+#: inc/admin/admin.php:215
+msgid "Category title"
+msgstr "Заглавие на категория"
+
+#: inc/admin/admin.php:216
+#, php-format
+msgid "%%_category_description%%"
+msgstr "%%_category_description%%"
+
+#: inc/admin/admin.php:216
+msgid "Category description"
+msgstr "Описание на категория"
+
+#: inc/admin/admin.php:217
+#, php-format
+msgid "%%tag_title%%"
+msgstr "%%tag_title%%"
+
+#: inc/admin/admin.php:217
+msgid "Tag title"
+msgstr "Заглавие на етикет"
+
+#: inc/admin/admin.php:218
+#, php-format
+msgid "%%tag_description%%"
+msgstr "%%tag_description%%"
+
+#: inc/admin/sections/Sitemaps.php:133
+#, fuzzy
+#| msgid "<p>Include / Exclude Taxonomies</p>"
+msgid "Include/Exclude Taxonomies."
+msgstr "<p>Включване / Изключване на класификациите</p>"
+
+#: inc/admin/sections/Social.php:8
+#, fuzzy
+#| msgid "<p>Configure Google Knowledge Graph</p>"
+msgid "Configure Google Knowledge Graph."
+msgstr "<p>Конфигуриране на Google Knowledge Graph</p>"
+
+#: inc/admin/sections/Social.php:14
+msgid "Learn more on Google official website."
+msgstr ""
+
+#: inc/admin/sections/Social.php:24
+#, fuzzy
+#| msgid "<p>Link your site with your social accounts</p>"
+msgid "Link your site with your social accounts."
+msgstr "<p>Свържете Вашия сайт със социалните си профили</p>"
+
+#: inc/admin/sections/Social.php:25
+msgid "Use markup on your website to add your social profile information to a Google Knowledge panel."
+msgstr ""
+
+#: inc/admin/sections/Social.php:27
+msgid "Knowledge panels prominently display your social profile information in some Google Search results."
+msgstr ""
+
+#: inc/admin/sections/Social.php:29
+msgid "Filling in these fields does not guarantee the display of this data in search results."
+msgstr ""
+
+#: inc/admin/sections/Social.php:39
+#, fuzzy
+#| msgid "<p>Manage Open Graph datas</p>"
+msgid "Manage Open Graph data."
+msgstr "<p>Управление на Open Graph данни</p>"
+
+#: inc/admin/sections/Social.php:40 inc/admin/sections/Social.php:72
+#, fuzzy
+#| msgid "Enable Twitter Card"
+msgid "Manage Facebook Open Graph and Twitter Cards metas - new window"
+msgstr "Включване на Twitter картичка"
+
+#: inc/admin/sections/Social.php:45
+msgid "We generate the <strong>og:image</strong> meta in this order:"
+msgstr ""
+
+#: inc/admin/sections/Social.php:50
+msgid "Custom OG Image from SEO metabox"
+msgstr ""
+
+#: inc/admin/sections/Social.php:53 inc/admin/sections/Social.php:85
+msgid "Post thumbnail / Product category thumbnail"
+msgstr ""
+
+#: inc/admin/sections/Social.php:56 inc/admin/sections/Social.php:88
+msgid "First image of your post content"
+msgstr ""
+
+#: inc/admin/admin.php:225
+#, fuzzy,php-format
+msgid "%%archive_title%%"
+msgstr "%%tag_title%%"
+
+#: inc/admin/sections/Social.php:71
+#, fuzzy
+msgid "Archive title"
+msgstr "Дата на архива"
+
+#: inc/admin/admin.php:226
+#, fuzzy,php-format
+msgid "%%archive_date%%"
+msgstr "Дата на архива"
+
+#: inc/admin/admin.php:226
+msgid "Date Archive"
+msgstr "Дата на архива"
+
+#: inc/admin/admin.php:227
+#, fuzzy,php-format
+msgid "%%archive_date_day%%"
+msgstr "Дата на архива"
+
+#: inc/admin/admin.php:227
+#, fuzzy
+msgid "Day Archive date"
+msgstr "Дата на архива"
+
+#: inc/admin/sections/Social.php:91
+msgid "Global Twitter:image set in SEO > Social > Twitter Card"
+msgstr ""
+
+#: inc/admin/sections/Titles.php:7
+#, fuzzy
+msgid "Month Archive title"
+msgstr "Дата на архива"
+
+#: inc/admin/admin.php:229
+#, fuzzy,php-format
+msgid "%%archive_date_year%%"
+msgstr "Дата на архива"
+
+#: inc/admin/sections/Titles.php:32
+#, fuzzy
+msgid "Year Archive title"
+msgstr "Дата на архива"
+
+#: inc/admin/sections/Titles.php:40
+#, fuzzy
+#| msgid "<p>Customize your metas for all taxonomies archives</p>"
+msgid "Customize your metas for all taxonomies archives."
+msgstr "<p>Настройте Вашите мета данни за всички класифицирани архиви</p>"
+
+#: inc/admin/sections/Titles.php:48
+#, fuzzy
+#| msgid "<p>Customize your metas for all archives</p>"
+msgid "Customize your metas for all archives."
+msgstr "<p>Настройте Вашите мета данни за всички архиви</p>"
+
+#: inc/admin/admin.php:230
+msgid "Custom fields from post, page or post type (replace <span style=\"color:red;margin:0\">your_custom_field_name</span> with your custom field name)"
+msgstr ""
+
+#: inc/admin/sections/Tools.php:12
+msgid "Even though a lot of things are completely transparent to you and automated, sometimes it is necessary to leave the final choice to you."
+msgstr ""
+
+#: inc/admin/admin.php:231
+msgid "Custom term taxonomy from post, page or post type (replace <span style=\"color:red;margin:0\">your_custom_taxonomy_slug</span> with your custom taxonomy slug)"
+msgstr ""
+
+#: inc/admin/sections/Tools.php:18
+#, fuzzy
+#| msgid "Enter your meta description"
+msgid "Learn more about automatic meta descriptions"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/settings/Advanced.php:16
+msgid "Add WP Editor to taxonomy description textarea"
+msgstr ""
+
+#: inc/admin/settings/Advanced.php:24
+msgid "Remove /category/ in URL"
+msgstr "Премахване на /category/ в URL"
+
+#: inc/admin/settings/Advanced.php:32
+#, fuzzy
+#| msgid "Remove /category/ in URL"
+msgid "Remove /product-category/ in URL"
+msgstr "Премахване на /category/ в URL"
+
+#: inc/admin/settings/Advanced.php:48
+msgid "Remove WordPress generator meta tag"
+msgstr ""
+
+#: inc/admin/settings/Advanced.php:56
+msgid "Remove hentry post class"
+msgstr ""
+
+#: inc/admin/settings/Advanced.php:64
+#, fuzzy
+#| msgid "Remove /category/ in URL"
+msgid "Remove author URL"
+msgstr "Премахване на /category/ в URL"
+
+#: inc/admin/settings/Advanced.php:72
+msgid "Remove website field in comment form"
+msgstr ""
+
+#: inc/admin/settings/Advanced.php:80
+msgid "Remove WordPress shortlink meta tag"
+msgstr ""
+
+#: inc/admin/admin.php:234
+#, fuzzy
+msgid "Single product short description"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/settings/Advanced.php:96
+msgid "Remove RSD meta tag"
+msgstr ""
+
+#: inc/admin/settings/Advanced.php:145
+#, fuzzy
+msgid "Single product price"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/settings/Advanced.php:153
+#, fuzzy
+#| msgid "SEOPress in admin bar"
+msgid "Noindex in admin bar"
+msgstr "SEOPress в административната лента"
+
+#: inc/admin/settings/Advanced.php:161
+msgid "Move SEO metabox's position"
+msgstr ""
+
+#: inc/admin/settings/Advanced.php:170
+msgid "Set default tab for Structured data metabox"
+msgstr ""
+
+#: inc/admin/settings/Advanced.php:179
+#, fuzzy
+#| msgid "Notifications Center"
+msgid "Hide Notifications Center"
+msgstr "Център за известия"
+
+#: inc/admin/settings/Advanced.php:187
+msgid "Hide SEO News"
+msgstr ""
+
+#: inc/admin/settings/Advanced.php:195
+msgid "Hide SEO tools"
+msgstr ""
+
+#: inc/admin/admin.php:238
+#, fuzzy,php-format
+msgid "%%currentday%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/settings/Advanced.php:219
+#, fuzzy
+msgid "Current day"
+msgstr "Текущ номер на страница"
+
+#: inc/admin/admin.php:239
+#, fuzzy,php-format
+msgid "%%currentmonth%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/settings/Advanced.php:235
+#, fuzzy
+#| msgid "Show noindex column in post types"
+msgid "Show canonical URL column in post types"
+msgstr "Показва колона noindex в типове публикации"
+
+#: inc/admin/admin.php:240
+#, fuzzy,php-format
+msgid "%%currentmonth_short%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/settings/Advanced.php:267
+msgid "Show total number of words column in post types"
+msgstr ""
+
+#: inc/admin/admin.php:241
+#, fuzzy,php-format
+msgid "%%currentyear%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/settings/Advanced.php:286
+#, fuzzy
+msgid "Current year"
+msgstr "Текущ номер на страница"
+
+#: inc/admin/admin.php:242
+#, fuzzy,php-format
+msgid "%%currentdate%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/settings/Advanced.php:311
+#, fuzzy
+msgid "Current date"
+msgstr "Текущ номер на страница"
+
+#: inc/admin/admin.php:243
+#, fuzzy,php-format
+msgid "%%currenttime%%"
+msgstr "%%current_pagination%%"
+
+#: inc/admin/settings/Advanced.php:327
+#, fuzzy
+msgid "Current time"
+msgstr "Текущ номер на страница"
+
+#: inc/admin/admin.php:244
+#, fuzzy,php-format
+msgid "%%author_bio%%"
+msgstr "%%post_author%%"
+
+#: inc/admin/settings/Advanced.php:360
+#, fuzzy
+msgid "Author bio, meta desc only"
+msgstr "Въведете Вашето мета описание"
+
+#: inc/admin/settings/Analytics.php:16
+msgid "Enable Google Analytics tracking"
+msgstr "Включване на Google Analytics следене"
+
+#: inc/admin/admin.php:258
+#: inc/admin/admin.php:266
+msgid "Browse our guides"
+msgstr ""
+
+#: inc/admin/admin.php:259
+#: inc/admin/admin.php:267
+msgid "Read our FAQ"
+msgstr ""
+
+#: inc/admin/admin.php:260
+#: inc/admin/admin.php:268
+msgid "Check our website"
+msgstr ""
+
+#: inc/admin/admin.php:280
+msgid "Watch our video to learn how to connect your WordPress site with Google Analytics and get statistics right in your dashboard (PRO only)."
+msgstr ""
+
+#: inc/admin/settings/Analytics.php:105
+msgid "Close button"
+msgstr ""
+
+#: inc/admin/admin.php:334
+#: inc/admin/admin.php:338
+#: inc/admin/admin.php:401
+#: inc/admin/admin.php:405
+#: inc/admin/admin.php:466
+#: inc/admin/admin.php:470
+#: inc/admin/admin.php:533
+#: inc/admin/admin.php:537
+#: inc/admin/admin.php:618
+#: inc/admin/admin.php:622
+msgid "Click to disable this feature"
+msgstr "Щракнете, за да изключите функцията"
+
+#: inc/admin/admin.php:335
+#: inc/admin/admin.php:337
+#: inc/admin/admin.php:402
+#: inc/admin/admin.php:404
+#: inc/admin/admin.php:467
+#: inc/admin/admin.php:469
+#: inc/admin/admin.php:534
+#: inc/admin/admin.php:536
+#: inc/admin/admin.php:619
+#: inc/admin/admin.php:621
+msgid "Click to enable this feature"
+msgstr "Щракнете, за да включите функцията"
+
+#: inc/admin/settings/Analytics.php:129
+msgid "Cookie bar position"
+msgstr ""
+
+#: inc/admin/settings/Analytics.php:137
+msgid "Text alignment"
+msgstr ""
+
+#: inc/admin/settings/Analytics.php:145
+msgid "Cookie bar width"
+msgstr ""
+
+#: inc/admin/admin.php:355
+#: inc/admin/admin.php:421
+msgid "Taxonomies"
+msgstr "Класификации"
+
+#: inc/admin/admin.php:419
+#: inc/admin/admin.php:552
+#: inc/admin/admin.php:562
+msgid "General"
+msgstr "Общо"
+
+#: inc/admin/settings/Analytics.php:283
+msgid "[HEAD] Add an additional tracking code (like Facebook Pixel, Hotjar...)"
+msgstr ""
+
+#: inc/admin/settings/Analytics.php:291
+msgid "[BODY] Add an additional tracking code (like Google Tag Manager...)"
+msgstr ""
+
+#: inc/admin/settings/Analytics.php:299
+msgid "[BODY (FOOTER)] Add an additional tracking code (like Google Tag Manager...)"
+msgstr ""
+
+#: inc/admin/settings/Analytics.php:365
+msgid "Enable downloads tracking (eg: PDF, XLSX, DOCX...)"
+msgstr ""
+
+#: inc/admin/settings/Analytics.php:381
+msgid "Enable affiliate/outbound links tracking (eg: aff, go, out, recommends)"
+msgstr ""
+
+#: inc/admin/settings/Analytics.php:407
+msgid "Track Authors"
+msgstr "Следене на автори"
+
+#: inc/admin/settings/Analytics.php:415
+msgid "Track Categories"
+msgstr "Следене на категории"
+
+#: inc/admin/settings/Analytics.php:423
+msgid "Track Tags"
+msgstr "Следене на етикети"
+
+#: inc/admin/settings/Analytics.php:431
+msgid "Track Post Types"
+msgstr "Следене на типове публикации"
+
+#: inc/admin/settings/Analytics.php:439
+msgid "Track Logged In Users"
+msgstr "Следене на влезлите в системата потребители"
+
+#: inc/admin/settings/Analytics.php:456
+#, fuzzy
+msgid "Facebook (Open Graph)"
+msgstr "ID на Facebook App"
+
+#: inc/admin/settings/Analytics.php:472
+#, fuzzy
+msgid "Twitter (Twitter card)"
+msgstr "Заглавие за Twitter"
+
+#: inc/admin/admin.php:553
+#: inc/admin/admin.php:563
+msgid "Tracking"
+msgstr "Проследяване"
+
+#: inc/admin/admin.php:554
+#: inc/admin/admin.php:564
+msgid "Events"
+msgstr ""
+
+#: inc/admin/admin.php:555
+#: inc/admin/admin.php:565
+msgid "Custom Dimensions"
+msgstr "Допълнителни размери"
+
+#: inc/admin/settings/Analytics.php:527
+msgid "Disable all tracking cookies"
+msgstr ""
+
+#: inc/admin/admin.php:557
+#: inc/admin/admin.php:566
+msgid "Cookie bar / GDPR"
+msgstr ""
+
+#: inc/admin/admin.php:558
+#: inc/admin/admin.php:567
+msgid "Matomo"
+msgstr ""
+
+#: inc/admin/settings/ImageSEO.php:16
+msgid "Redirect attachment pages to post parent"
+msgstr "Пренасочване на прикачени страници към основната"
+
+#: inc/admin/settings/ImageSEO.php:24
+#, fuzzy
+#| msgid "Redirect attachment pages to post parent"
+msgid "Redirect attachment pages to their file URL"
+msgstr "Пренасочване на прикачени страници към основната"
+
+#: inc/admin/settings/ImageSEO.php:32
+msgid "Remove ?replytocom link to avoid duplicate content"
+msgstr ""
+
+#: inc/admin/admin.php:673
+#: seopress.php:408
+msgid "Settings"
+msgstr "Настройки"
+
+#: inc/admin/admin.php:674
+msgid "Plugins"
+msgstr ""
+
+#: inc/admin/settings/ImageSEO.php:48
+msgid "Automatically set the image Alt text"
+msgstr ""
+
+#: inc/admin/admin.php:694
+#, fuzzy
+msgid "Import data from a CSV"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin.php:695
+msgid "Import your title, meta description, meta robots, social metas from a CSV file with our import tool."
+msgstr ""
+
+#: inc/admin/settings/ImageSEO.php:72
+msgid "Automatically set the image Description"
+msgstr ""
+
+#: inc/admin/admin.php:701
+#, fuzzy
+msgid "Export metadata to a CSV"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/settings/Sitemaps.php:33
+#, fuzzy
+msgid "Export your SEOPress metadata for this site as a .csv file."
+msgstr "Импорт / Експорт на SEOPress настройките от сайт към сайт."
+
+#: inc/admin/admin.php:707
+#: inc/admin/admin.php:725
+#: inc/admin/admin.php:1005
+msgid "Export"
+msgstr "Експорт"
+
+#: inc/admin/admin.php:719
+#, fuzzy
+msgid "Export plugin settings"
+msgstr "Експорт на настройките"
+
+#: inc/admin/admin.php:720
+msgid "Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site."
+msgstr "Експорт на настройките на добавката за този сайт в .json файл. Това позволява по-късно да ги импортирате в друг сайт."
+
+#: inc/admin/admin.php:733
+#, fuzzy
+msgid "Import plugin settings"
+msgstr "Настройки за импорт"
+
+#: inc/admin/admin.php:734
+msgid "Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above."
+msgstr "Импорт на настройките на добавката от .json файл. Този файл може да бъде получен след експорт на настройките от друг сайт."
+
+#: inc/admin/admin.php:742
+#: inc/admin/admin.php:944
+#: inc/admin/admin.php:960
+#: inc/admin/admin.php:976
+#: inc/admin/admin.php:992
+msgid "Import"
+msgstr "Импорт"
+
+#: inc/admin/settings/Sitemaps.php:138
+msgid "Remove links from archive pages"
+msgstr ""
+
+#: inc/admin/settings/Social.php:16 inc/admin/wizard/admin-wizard.php:433
+msgid "Person or organization"
+msgstr "Частно лице или огранизация"
+
+#: inc/admin/settings/Social.php:48
+#, fuzzy
+msgid "<strong>WARNING:</strong> Migration will update/delete all SEOPress posts metadata. Some dynamic variables will not be interpreted. We do NOT delete any Squirrly SEO data."
+msgstr "<strong>ВНИМАНИЕ:</strong> Миграцията ще изтрие всички SEOPress мета данни за публикациите"
+
+#: inc/admin/settings/Social.php:56
+#, fuzzy
+msgid "Import your redirections"
+msgstr "Уеб адрес (URL) за пренасочване"
+
+#: inc/admin/settings/Social.php:81 inc/admin/wizard/admin-wizard.php:476
+msgid "Twitter Username"
+msgstr "Twitter потребител"
+
+#: inc/admin/settings/Social.php:130
+msgid "Enable Open Graph Data"
+msgstr "Включване на Open Graph данни"
+
+#: inc/admin/settings/Social.php:146
+msgid "Apply this image to all your og:image tag"
+msgstr ""
+
+#: inc/admin/settings/Social.php:154
+msgid "Define custom og:image tag for post type archive pages"
+msgstr ""
+
+#: inc/admin/settings/Social.php:162
+#, fuzzy
+#| msgid "Facebook Admin ID"
+msgid "Facebook Link Ownership ID"
+msgstr "ID на Facebook админ"
+
+#: inc/admin/admin.php:922
+msgid "Import your own redirections from a .csv file (separator \";\"). You must have 6 columns in this order:"
+msgstr ""
+
+#: inc/admin/settings/Social.php:178
+msgid "Facebook App ID"
+msgstr "ID на Facebook App"
+
+#: inc/admin/settings/Social.php:195
+msgid "Enable Twitter Card"
+msgstr "Включване на Twitter картичка"
+
+#: inc/admin/settings/Social.php:203
+#, fuzzy
+msgid "URL to redirect in absolute,"
+msgstr "Уеб адрес (URL) за пренасочване"
+
+#: inc/admin/settings/Social.php:219
+msgid "Image size for Twitter Summary card"
+msgstr "Размер на снимка за Twitter картичка"
+
+#: inc/admin/settings/Titles.php:299
+msgid "Indicate paginated content to Google"
+msgstr ""
+
+#: inc/admin/admin.php:928
+msgid "the query parameter (\"exact_match\" = Exact match with all parameters, \"without_param\" = Exclude all parameters or \"with_ignored_param\" = Exclude all parameters and pass them to the redirection),"
+msgstr ""
+
+#: inc/admin/settings/Titles.php:314
+msgid "noindex on attachment pages"
+msgstr ""
+
+#: inc/admin/settings/Tools.php:16
+msgid "Oxygen Builder compatibility"
+msgstr ""
+
+#: inc/admin/settings/Tools.php:24
+msgid "Divi Builder compatibility"
+msgstr ""
+
+#: inc/admin/admin.php:952
+msgid "Import your own redirections from a .json file generated by the Redirections plugin (make sure to select <strong>\"WordPress redirects\"</strong> when you export your file). Note that we do not support certain options, like regex. To avoid conflicts, make sure there are no duplicates between your file and existing redirects."
+msgstr ""
+
+#: inc/admin/admin.php:967
+#, fuzzy
+msgid "Import Redirections from Yoast Premium"
+msgstr "Импорт на мета данни от YOAST"
+
+#: inc/admin/admin.php:968
+msgid "Import your own redirections from a .csv file generated by Yoast Premium. Note that we don't support certain options, like regex. To avoid conflicts, make sure there are no duplicates between your file and existing redirects."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:113 seopress.php:322
+msgid "Migration completed!"
+msgstr ""
+
+#: inc/admin/admin.php:984
+msgid "Import your own redirections from a .txt file generated by Rank Math. Note that we don't support certain options, like regex. To avoid conflicts, make sure there are no duplicates between your file and existing redirects."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:129
+#, fuzzy
+msgid "Export Redirections"
+msgstr "Пренасочвания"
+
+#: inc/admin/wizard/admin-wizard.php:134 inc/admin/wizard/admin-wizard.php:408
+#, fuzzy
+msgid "Export all redirections for this site as a .csv file. This allows you to easily import the redirections into another site, to Excel / Google Sheets..."
+msgstr "Експорт на настройките на добавката за този сайт в .json файл. Това позволява по-късно да ги импортирате в друг сайт."
+
+#: inc/admin/wizard/admin-wizard.php:139 inc/admin/wizard/admin-wizard.php:562
+msgid "Indexing"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:144 inc/admin/wizard/admin-wizard.php:754
+#, fuzzy
+#| msgid "<p>Advanced SEO options</p>"
+msgid "Advanced options"
+msgstr "<p>Разширени SEO опции</p>"
+
+#: inc/admin/admin.php:1014
+#, php-format
+msgid "Make sure you have enabled 404 cleaning from SEO, PRO, <a href=\"%s\">404/301</a> tab to be able to delete all your 404 errors."
+msgstr ""
+
+#: inc/admin/admin.php:1023
+#, php-format
+msgid "You can also use <span class=\"dashicons dashicons-external\"></span><a href=\"%s\" target=\"_blank\">this MySQL query</a> if necessary."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:245
+msgid "Not right now"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:248
+msgid "Skip this step"
+msgstr ""
+
+#: inc/admin/admin.php:1035
+#, fuzzy
+msgid "Activate Redirections"
+msgstr "Пренасочвания"
+
+#: inc/admin/admin.php:1042
+msgid "Reset All Notices From Notifications Center"
+msgstr "Нулиране на известията от центъра за известия"
+
+#: inc/admin/admin.php:1043
+#, fuzzy
+msgid "By clicking Reset Notices, all notices in the notifications center will be set to their initial status."
+msgstr "Избирайки нулиране на известията, Вие ще виждате известията отново в Таблото на добавката."
+
+#: inc/admin/admin.php:1048
+msgid "Reset notices"
+msgstr "Нулиране на бележките"
+
+#: inc/admin/admin.php:1056
+msgid "Reset All Settings"
+msgstr "Нулиране на всички настройки"
+
+#: inc/admin/admin.php:1057
+msgid "<strong>WARNING:</strong> Delete all options related to SEOPress in your database AND set settings to their default values."
+msgstr "<strong>ВНИМАНИЕ:</strong> Изтривайки всички опции свързани със SEOPress във Вашата база, добавката ще избере настройките по подразбиране."
+
+#: inc/admin/wizard/admin-wizard.php:329
+msgid "No data to migrate? Click \"Next step\" button!"
+msgstr ""
+
+#: inc/admin/admin.php:1375
+#: inc/admin/admin.php:3662
+msgid "noindex"
+msgstr "noindex"
+
+#: inc/admin/admin.php:1383
+#: inc/admin/admin.php:3681
+msgid "nofollow"
+msgstr "nofollow"
+
+#: inc/admin/admin.php:1391
+#: inc/admin/admin.php:3700
+msgid "noodp"
+msgstr "noodp"
+
+#: inc/admin/admin.php:1399
+#: inc/admin/admin.php:3719
+msgid "noimageindex"
+msgstr "noimageindex"
+
+#: inc/admin/admin.php:1407
+#: inc/admin/admin.php:3738
+msgid "noarchive"
+msgstr "noarchive"
+
+#: inc/admin/admin.php:1415
+#: inc/admin/admin.php:3757
+msgid "nosnippet"
+msgstr "nosnippet"
+
+#: inc/admin/admin.php:1423
+#: inc/admin/admin.php:3776
+msgid "nositelinkssearchbox"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:457
+msgid "eg: My Company Name"
+msgstr ""
+
+#: inc/admin/admin.php:1448
+#: inc/admin/admin.php:3814
+msgid "Enable XML Sitemap"
+msgstr "Включване на XML карта на сайта"
+
+#: inc/admin/admin.php:1456
+msgid "Enable XML Image Sitemaps"
+msgstr "Включване на XML карта на сайта за снимки"
+
+#: inc/admin/admin.php:1465
+#, fuzzy
+msgid "Enable XML Video Sitemaps"
+msgstr "Включване на XML карта на сайта за снимки"
+
+#: inc/admin/admin.php:1474
+#: inc/admin/admin.php:3901
+#, fuzzy
+msgid "Enable Author Sitemap"
+msgstr "Включване на XML карта на сайта"
+
+#: inc/admin/admin.php:1482
+#: inc/admin/admin.php:3920
+msgid "Enable HTML Sitemap"
+msgstr "Включване на HTML карта на сайта"
+
+#: inc/admin/wizard/admin-wizard.php:568
+#, fuzzy
+#| msgid "Default"
+msgid "Default: index"
+msgstr "По подразбиране"
+
+#: inc/admin/wizard/admin-wizard.php:575
+msgid "For which single post types, should indexing be disabled?"
+msgstr ""
+
+#: inc/admin/admin.php:1530
+#: inc/admin/admin.php:4029
+msgid "Enter a post, page or custom post type ID(s) to display the sitemap"
+msgstr "Въведете ID на публикация, страница, допълнителен тип публикация за да се виждат в картата на сайта"
+
+#: inc/admin/admin.php:1538
+#: inc/admin/admin.php:4043
+#, fuzzy
+msgid "Exclude some Posts, Pages, Custom Post Types or Terms IDs"
+msgstr "Изключване на някои Публикации, Страници или Допълнителни типове публикации"
+
+#: inc/admin/wizard/admin-wizard.php:633
+msgid "Do not display this post type archive in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:647
+msgid "For which taxonomy archives, should indexing be disabled?"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:669
+msgid "Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/admin.php:1603
+#: inc/admin/admin.php:4185
+#, fuzzy
+msgid "Organization's phone number (only for Organizations)"
+msgstr "Телефонен номер на организацията (само за организации)"
+
+#: inc/admin/admin.php:1611
+#, fuzzy
+msgid "Contact type (only for Organizations)"
+msgstr "Тип на контакта (само за организации)"
+
+#: inc/admin/admin.php:1619
+#, fuzzy
+msgid "Contact option (only for Organizations)"
+msgstr "Опция за контакт (само за организации)"
+
+#: inc/admin/admin.php:1636
+#: inc/admin/admin.php:4263
+msgid "Facebook Page URL"
+msgstr "Уеб адрес към Facebook страница"
+
+#: inc/admin/wizard/admin-wizard.php:821
+#, php-format
+msgid "Shorten your URLs by removing %s and improve your SEO."
+msgstr ""
+
+#: inc/admin/admin.php:1725
+#: inc/admin/admin.php:4392
+msgid "Select a default image"
+msgstr "Изберете снимка по подразбиране"
+
+#: inc/admin/wizard/admin-wizard.php:860
+msgid "Quickly know if a content is in noindex."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:873
+msgid "Quickly know if a content is in nofollow."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:886
+#, fuzzy
+msgid "Facebook Link Ownership ID"
+msgstr "ID на Facebook админ"
+
+#: inc/admin/wizard/admin-wizard.php:946
+msgid "Start monitoring your rankings and backlinks <br>directly from your WordPress admin"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:949
+msgid "Track your keyword positions from Google Search results daily."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:952
+msgid "Monitor and analyse your top 1,000 Backlinks weekly."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:955
+#, fuzzy
+msgid "Use Open Graph if no Twitter Card is filled"
+msgstr "Включване на Twitter картичка"
+
+#: inc/admin/admin.php:1790
+#: inc/admin/admin.php:4504
+msgid "Default Twitter Image"
+msgstr "Снимка по подразбиране за Twitter"
+
+#: inc/admin/wizard/admin-wizard.php:966
+#, fuzzy
+#| msgid "SEOPress"
+msgid "Get SEOPress Insights"
+msgstr "SEOPress"
+
+#: inc/admin/wizard/admin-wizard.php:986
+#, fuzzy
+#| msgid "Your site is not visible to Search Engines!"
+msgid "Your site is now ready for search engines!"
+msgstr "Вашият сайт не е видим за търсачките!"
+
+#: inc/admin/admin.php:1823
+#: inc/admin/admin.php:2191
+#: inc/admin/admin.php:4557
+msgid "Enter your tracking ID"
+msgstr "Въведете Вашето ID за следене"
+
+#: inc/admin/wizard/admin-wizard.php:1000
+#: inc/functions/options-advanced-admin.php:24
+#, fuzzy
+#| msgid "You have to enter your licence key to get updates and support"
+msgid "Please activate your license to receive automatic updates and get premium support."
+msgstr "Вие нямате лицензионен ключ, за да получавате обновления и поддръжка"
+
+#: inc/admin/wizard/admin-wizard.php:1007
+#: inc/functions/options-advanced-admin.php:26
+#, fuzzy
+msgid "Analytics tracking opt-in"
+msgstr "Включване на Google Analytics следене"
+
+#: inc/admin/wizard/admin-wizard.php:1014
+msgid "Go PRO with SEOPress PRO!"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1017
+msgid "When you upgrade to the PRO version, you get a lot of additional features, like automatic and manual schemas, Video Sitemap, WooCommerce enhancements, Analytics statistics in your Dashboard, breadcrumbs, redirections, and more."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1024
+msgid "Buy SEOPress PRO - $39 / unlimited sites"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1035
+#, fuzzy
+#| msgid "View your sitemap"
+msgid "Create your XML sitemaps"
+msgstr "Вижте картата на сайта"
+
+#: inc/admin/wizard/admin-wizard.php:1037
+msgid "Build custom XML sitemaps to improve Google's crawling of your site."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1044
+#, fuzzy
+#| msgid "View your sitemap"
+msgid "Configure your XML sitemaps"
+msgstr "Вижте картата на сайта"
+
+#: inc/admin/wizard/admin-wizard.php:1052
+#, fuzzy
+#| msgid "Nofollow?"
+msgid "Follow us:"
+msgstr "Nofollow?"
+
+#: inc/admin/wizard/admin-wizard.php:1061
+#, fuzzy
+#| msgid "Enter your Facebook title"
+msgid "Like our Facebook page"
+msgstr "Въведете Вашето заглавие за Facebook"
+
+#: inc/admin/wizard/admin-wizard.php:1068
+msgid "Join our Facebook Community group"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1075
+msgid "Watch our guided tour videos to learn more about SEOPress"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1082
+msgid "Read our blog posts about SEO concepts, tutorials and more"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1089
+msgid "Follow us on Twitter"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1096
+msgid "The off side of SEOPress"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1105
+msgid "You can also:"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1112
+#, fuzzy
+#| msgid "Stats in Dashboard"
+msgid "Visit Dashboard"
+msgstr "Статистики в Таблото"
+
+#: inc/admin/wizard/admin-wizard.php:1116
+#, fuzzy
+msgid "Enable Google Optimize"
+msgstr "Включване на Google Analytics следене"
+
+#: inc/admin/wizard/admin-wizard.php:1121
+#, fuzzy
+msgid "Enable Google Ads"
+msgstr "Включване на Google Analytics следене"
+
+#: inc/functions/options-advanced-admin.php:39
+#: inc/functions/options-advanced-admin.php:49
+msgid "WARNING"
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:40
+msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
+msgstr ""
+
+#: inc/admin/admin.php:2026
+msgid "[BODY (FOOTER)] Add an additional tracking code (like Google Tag Manager...)"
+msgstr ""
+
+#: inc/admin/admin.php:2034
+#: inc/admin/admin.php:4887
+#, fuzzy
+msgid "Enable remarketing, demographics, and interests reporting"
+msgstr "Включване демографска информация и интереси."
+
+#: inc/admin/admin.php:2042
+#: inc/admin/admin.php:4909
+msgid "Enable IP Anonymization"
+msgstr "Включване на следене на анонимни IP"
+
+#: inc/admin/admin.php:2050
+#: inc/admin/admin.php:4931
+msgid "Enhanced Link Attribution"
+msgstr "Разширени атрибути за връзка"
+
+#: inc/admin/admin.php:2058
+#: inc/admin/admin.php:4953
+msgid "Enable cross-domain tracking"
+msgstr "Включване на следене за кръстосани домейни"
+
+#: inc/admin/admin.php:2066
+#: inc/admin/admin.php:4970
+#: inc/admin/admin.php:5565
+msgid "Cross domains"
+msgstr "Кръстосани домейни"
+
+#: inc/admin/admin.php:2084
+#: inc/admin/admin.php:4987
+msgid "Enable external links tracking"
+msgstr ""
+
+#: inc/functions/options-google-analytics.php:262
+msgid "By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.&nbsp;<a href=\"[seopress_privacy_page]\">Read more</a>"
+msgstr ""
+
+#: inc/admin/admin.php:2100
+#: inc/admin/admin.php:5016
+msgid "Track downloads' clicks"
+msgstr ""
+
+#: inc/functions/options-google-analytics.php:283
+msgid "X"
+msgstr ""
+
+#: inc/admin/admin.php:2116
+#: inc/admin/admin.php:5047
+msgid "Track affiliate/outbound links"
+msgstr ""
+
+#: inc/functions/options-google-analytics.php:961
+#: inc/functions/options-matomo.php:266
+#, fuzzy
+#| msgid "Post Types"
+msgid "Post types"
+msgstr "Типове публикации"
+
+#: inc/functions/options-google-analytics.php:975
+#: inc/functions/options-matomo.php:275
+msgid "Connected users"
+msgstr ""
+
+#: inc/functions/options-import-export.php:60
+#: inc/functions/options-import-export.php:439
+msgid "Please upload a valid .json file"
+msgstr "Моля качете валиден .json файл"
+
+#: inc/functions/options-import-export.php:65
+#: inc/functions/options-import-export.php:137
+#: inc/functions/options-import-export.php:241
+#: inc/functions/options-import-export.php:443
+#: inc/functions/options-import-export.php:512
+msgid "Please upload a file to import"
+msgstr "Изберете файл за импорт"
+
+#: inc/functions/options-import-export.php:133
+#: inc/functions/options-import-export.php:237
+msgid "Please upload a valid .csv file"
+msgstr ""
+
+#: inc/admin/admin.php:2183
+#, fuzzy
+msgid "Enable Matomo tracking"
+msgstr "Включване на следене за кръстосани домейни"
+
+#: inc/functions/options-import-export.php:508
+#, fuzzy
+msgid "Enter your site ID"
+msgstr "Въведете Вашето заглавие"
+
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:125
+msgid "XML Sitemaps"
+msgstr ""
+
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:128
+#, php-format
+msgid "This XML Sitemap Index file contains %s sitemaps."
+msgstr ""
+
+#: inc/admin/admin.php:2223
+#: inc/admin/admin.php:5534
+msgid "Track users with JavaScript disabled"
+msgstr ""
+
+#: inc/admin/admin.php:2231
+#: inc/admin/admin.php:5551
+#, fuzzy
+msgid "Enables cross domain linking"
+msgstr "Включване на следене за кръстосани домейни"
+
+#: inc/admin/admin.php:2239
+#, fuzzy
+msgid "Cross domain"
+msgstr "Кръстосани домейни"
+
+#: inc/admin/admin.php:2246
+#, fuzzy
+msgid "Enable DoNotTrack detection"
+msgstr "Включване на пренасочване?"
+
+#: node_modules/@wordpress/api-fetch/build-module/middlewares/media-upload.js:62
+#: node_modules/@wordpress/api-fetch/src/middlewares/media-upload.js:69
+msgid "Media upload failed. If this is a photo or a large image, please scale it down and try again."
+msgstr ""
+
+#: node_modules/@wordpress/api-fetch/build-module/utils/response.js:37
+#: node_modules/@wordpress/api-fetch/src/utils/response.js:36
+msgid "The response is not a valid JSON response."
+msgstr ""
+
+#: node_modules/@wordpress/api-fetch/build-module/utils/response.js:77
+#: node_modules/@wordpress/api-fetch/src/utils/response.js:80
+msgid "An unknown error occurred."
+msgstr ""
+
+#: inc/admin/admin.php:2287
+#, fuzzy
+msgid "Redirect attachment pages to their file URL"
+msgstr "Пренасочване на прикачени страници към основната"
+
+#: node_modules/@wordpress/i18n/build-module/create-i18n.js:376
+#: node_modules/@wordpress/i18n/build/create-i18n.js:386
+#: node_modules/@wordpress/i18n/src/create-i18n.js:399
+msgid "ltr"
+msgstr ""
+
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:56
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:66
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:67
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:73
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:163
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:201
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:204
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:209
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:373
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:376
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:385
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:388
+#: node_modules/@wordpress/i18n/src/test/default-i18n.js:14
+#: node_modules/@wordpress/i18n/src/test/default-i18n.js:18
+msgid "hello"
+msgstr ""
+
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:80
+msgid "feed"
+msgstr ""
+
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:168
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:212
+msgid "cheeseburger"
+msgstr ""
+
+#: node_modules/@wordpress/i18n/src/test/create-i18n.js:217
+#, javascript-format
+msgid "%d cat"
+msgstr ""
+
+#: node_modules/@wordpress/i18n/src/test/subscribe-i18n.js:19
+msgid "original"
+msgstr ""
+
+#: node_modules/@wordpress/media-utils/build-module/components/media-upload/index.js:193
+#: node_modules/@wordpress/media-utils/src/components/media-upload/index.js:234
+#, fuzzy
+#| msgid "Select your logo"
+msgid "Select or Upload Media"
+msgstr "Изберете Вашето лого"
+
+#: inc/admin/admin.php:2351
+#: inc/admin/admin.php:5800
+msgid "Disable trailing slash for metas"
+msgstr ""
+
+#: node_modules/@wordpress/media-utils/build-module/utils/upload-media.js:125
+#: node_modules/@wordpress/media-utils/src/utils/upload-media.js:143
+msgid "Sorry, this file type is not supported here."
+msgstr ""
+
+#: node_modules/@wordpress/media-utils/build-module/utils/upload-media.js:135
+#: node_modules/@wordpress/media-utils/src/utils/upload-media.js:154
+msgid "This file exceeds the maximum upload size for this site."
+msgstr ""
+
+#: node_modules/@wordpress/media-utils/build-module/utils/upload-media.js:145
+#: node_modules/@wordpress/media-utils/src/utils/upload-media.js:165
+#, fuzzy
+msgid "Remove author URL"
+msgstr "Премахване на /category/ в URL"
+
+#: node_modules/@wordpress/media-utils/build-module/utils/upload-media.js:181
+#: node_modules/@wordpress/media-utils/src/utils/upload-media.js:203
+#, javascript-format
+msgid "Error while uploading file %s to the media library."
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/bridge/ArgumentsTest.java:63
+msgid "exampleChildKey"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:222
+msgid "m1k1"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:223
+msgid "m1k2"
+msgstr ""
+
+#: inc/admin/admin.php:2415
+#: inc/admin/admin.php:5931
+msgid "Google site verification"
+msgstr "Проверка на сайта чрез Google"
+
+#: inc/admin/admin.php:2423
+#: inc/admin/admin.php:5945
+msgid "Bing site verification"
+msgstr "Проверка на сайта чрез Bing"
+
+#: inc/admin/admin.php:2431
+#: inc/admin/admin.php:5958
+msgid "Pinterest site verification"
+msgstr "Проверка на сайта чрез Pinterest"
+
+#: inc/admin/admin.php:2439
+#: inc/admin/admin.php:5970
+msgid "Yandex site verification"
+msgstr "Проверка на сайта чрез Yandex"
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:485
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:589
+msgid "a"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:487
+msgid "c"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:491
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:593
+msgid "newkey"
+msgstr ""
+
+#: inc/admin/admin.php:2480
+#, fuzzy
+msgid "Hide Notifications Center"
+msgstr "Център за известия"
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:665
+msgid "two-bytes"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:666
+msgid "three-bytes"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:667
+msgid "four-bytes"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/androidTest/java/com/facebook/react/tests/CatalystNativeJSToJavaParametersTestCase.java:670
+msgid "mixed"
+msgstr ""
+
+#: inc/admin/admin.php:2520
+#, fuzzy
+msgid "Show Redirection Enable column in post types"
+msgstr "Показване на колона мета описание в типове публикации"
+
+#: inc/admin/admin.php:2528
+#, fuzzy
+msgid "Show Redirect URL column in post types"
+msgstr "Показва колона noindex в типове публикации"
+
+#: inc/admin/admin.php:2536
+#, fuzzy
+msgid "Show canonical URL column in post types"
+msgstr "Показва колона noindex в типове публикации"
+
+#: inc/admin/admin.php:2544
+#, fuzzy
+msgid "Show Target Keyword column in post types"
+msgstr "Показване на колона етикет Заглавие в типове публикации"
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/animated/InterpolationAnimatedNode.java:187
+msgid "extrapolateLeft"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/animated/InterpolationAnimatedNode.java:188
+msgid "extrapolateRight"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/animated/NativeAnimatedNodesManager.java:126
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/animated/NativeAnimatedNodesManager.java:250
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/animated/TransformAnimatedNode.java:44
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java:111
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java:112
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java:356
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java:368
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/FileReaderModule.java:89
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/FileReaderModule.java:90
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/uimanager/layoutanimation/AbstractLayoutAnimation.java:72
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/view/ReactDrawableHelper.java:37
+msgid "type"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/animated/TransformAnimatedNode.java:43
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/uimanager/layoutanimation/AbstractLayoutAnimation.java:65
+msgid "property"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/common/DebugServerException.java:77
+msgid "filename"
+msgstr ""
+
+#: inc/admin/admin.php:2593
+#, fuzzy
+msgid "Show content analysis score column in post types"
+msgstr "Показва колона noindex в типове публикации"
+
+#: inc/admin/admin.php:2601
+#, fuzzy
+msgid "Hide Genesis SEO Metabox"
+msgstr "Скрива Genesis SEO мета"
+
+#: inc/admin/admin.php:2609
+#, fuzzy
+msgid "Hide Genesis SEO Settings link"
+msgstr "Скрива Genesis SEO мета"
+
+#: inc/admin/admin.php:2617
+#, fuzzy
+msgid "Hide advice in Structured Data Types metabox"
+msgstr "Структурирани типове данни"
+
+#: inc/admin/admin.php:2634
+#, fuzzy
+msgid "Block SEO metabox to user roles"
+msgstr "Блокиране на SEO мета за потребителски роли"
+
+#: inc/admin/admin.php:2642
+#, fuzzy
+msgid "Block Content analysis metabox to user roles"
+msgstr "Блокиране на SEO мета за потребителски роли"
+
+#: inc/admin/admin.php:2742
+#, fuzzy
+msgid "<p>Customize your title & meta description for homepage</p>"
+msgstr "<p>Настройте Вашите заглавия и мета данни за началната страница</p>"
+
+#: inc/admin/admin.php:2746
+msgid "<p>Customize your titles & metas for Single Custom Post Types</p>"
+msgstr "<p>Настройте Вашите заглавия и мета данни за избрана допълнителна публикация</p>"
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java:118
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java:223
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java:340
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/FileReaderModule.java:53
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/FileReaderModule.java:78
+msgid "blobId"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/blob/BlobModule.java:363
+msgid "data"
+msgstr ""
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/share/ShareModule.java:58
+#, fuzzy
+#| msgid "Title"
+msgid "title"
+msgstr "Заглавие"
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/uimanager/ReactAccessibilityDelegate.java:212
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/picker/ReactPickerItem.java:22
+msgid "label"
+msgstr ""
+
+#: inc/admin/admin.php:2768
+msgid "To view your sitemap, enable permalinks (not default one), and save settings to flush them."
+msgstr "За да видите Вашата карта, включете статичните връзки (не на опцията по подразбиране) и натиснете запис, за да изчистите кеша."
+
+#: inc/admin/admin.php:2774
+msgid "Your server uses NGINX. If XML Sitemaps doesn't work properly, you need to add this rule to your configuration:"
+msgstr ""
+
+#: inc/admin/admin.php:2788
+msgid "Noindex content will not be displayed in Sitemaps."
+msgstr "Съдържанието което е отбелязано с noindex, няма да се вижда в картата на сайта."
+
+#: node_modules/@wordpress/url/node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/view/ReactDrawableHelper.java:39
+msgid "attribute"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs-parser/index.js:372
+#: node_modules/metro-inspector-proxy/node_modules/yargs-parser/index.js:372
+#: node_modules/metro/node_modules/yargs-parser/index.js:372
+#, javascript-format
+msgid "Argument unexpected for: %s"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs-parser/index.js:382
+#: node_modules/logkitty/node_modules/yargs-parser/index.js:392
+#: node_modules/logkitty/node_modules/yargs-parser/index.js:446
+#: node_modules/metro-inspector-proxy/node_modules/yargs-parser/index.js:382
+#: node_modules/metro-inspector-proxy/node_modules/yargs-parser/index.js:392
+#: node_modules/metro-inspector-proxy/node_modules/yargs-parser/index.js:446
+#: node_modules/metro/node_modules/yargs-parser/index.js:382
+#: node_modules/metro/node_modules/yargs-parser/index.js:392
+#: node_modules/metro/node_modules/yargs-parser/index.js:446
+#: node_modules/yargs-parser/index.js:367
+#, javascript-format
+msgid "Not enough arguments following: %s"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs-parser/index.js:591
+#: node_modules/metro-inspector-proxy/node_modules/yargs-parser/index.js:591
+#: node_modules/metro/node_modules/yargs-parser/index.js:591
+#: node_modules/yargs-parser/index.js:541
+#, javascript-format
+msgid "Invalid JSON config file: %s"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs-parser/index.js:941
+#: node_modules/metro-inspector-proxy/node_modules/yargs-parser/index.js:941
+#: node_modules/metro/node_modules/yargs-parser/index.js:941
+#, javascript-format
+msgid "Invalid configuration: %s, opts.count excludes opts.array."
+msgstr ""
+
+#: inc/admin/admin.php:2812
+#, fuzzy
+msgid "<p>Create an HTML Sitemap for your visitors and boost your SEO.</p>"
+msgstr "<p>Създайте HTML за вашите посетите и да подобрите Вашето SEO</p>"
+
+#: inc/admin/admin.php:2822
+#: inc/admin/admin.php:3930
+msgid "Guide to enable a HTML Sitemap - new window"
+msgstr ""
+
+#: inc/admin/admin.php:2826
+#, fuzzy
+msgid "<p>Include/Exclude Post Types.</p>"
+msgstr "<p>Включване / Изключване на типове публикации</p>"
+
+#: inc/admin/admin.php:2830
+#, fuzzy
+msgid "<p>Include/Exclude Taxonomies.</p>"
+msgstr "<p>Включване / Изключване на класификациите</p>"
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:213
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:213
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:213
+#, fuzzy
+msgid "<p>Configure Google Knowledge Graph.</p>"
+msgstr "<p>Конфигуриране на Google Knowledge Graph</p>"
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:215
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:215
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:215
+#: node_modules/yargs/lib/usage.js:225
+msgid "aliases:"
+msgstr ""
+
+#: inc/admin/admin.php:2839
+msgid "<p>Link your site with your social accounts. Use markup on your website to add your social profile information to a Google Knowledge panel. Knowledge panels prominently display your social profile information in some Google Search results. Filling in these fields does not guarantee the display of this data in search results. It may take a long time to see these social-network links.</p>"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:222
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:303
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:222
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:303
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:222
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:303
+#, fuzzy
+msgid "<p>Manage Open Graph data.</p>"
+msgstr "<p>Управление на Open Graph данни</p>"
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:241
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:241
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:241
+msgid "Options:"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:290
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:290
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:290
+#: node_modules/yargs/lib/usage.js:288
+msgid "boolean"
+msgstr ""
+
+#: inc/admin/admin.php:2850
+#: inc/admin/admin.php:2864
+#, fuzzy
+msgid "Post thumbnail"
+msgstr "Twitter миниатюра"
+
+#: inc/admin/admin.php:2851
+#: inc/admin/admin.php:2865
+msgid "First image of your post content"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:298
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:298
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:298
+#: node_modules/yargs/lib/usage.js:292
+msgid "array"
+msgstr ""
+
+#: inc/admin/admin.php:2857
+#, fuzzy
+msgid "<p>Manage your Twitter card.</p>"
+msgstr "<p>Управление на Вашата Twitter картичка</p>"
+
+#: inc/admin/admin.php:2859
+msgid "<p>We generate the <strong>twitter:image</strong> meta in this order:</p>"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:307
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:307
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:307
+#: node_modules/yargs/lib/usage.js:297
+msgid "required"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:308
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:308
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:308
+#: node_modules/yargs/lib/usage.js:298
+msgid "choices:"
+msgstr ""
+
+#: inc/admin/admin.php:2871
+#, fuzzy
+msgid "<p>Link your Google Analytics to your website. The tracking code will be automatically added to your site.</p>"
+msgstr "<p>Свържете Вашия сайт с Google Analytics</p>"
+
+#: inc/admin/admin.php:2875
+msgid "<p>Manage user consent for GDPR and customize your cookie bar easily.</p>"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/usage.js:457
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/usage.js:457
+#: node_modules/metro/node_modules/yargs/build/lib/usage.js:457
+#: node_modules/yargs/lib/usage.js:223 node_modules/yargs/lib/usage.js:458
+#, fuzzy
+msgid "<p>Configure your Google Analytics tracking code.</p>"
+msgstr "<p>Конфигуриране на Вашия код за следене в Google Analytics</p>"
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/validation.js:155
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/validation.js:155
+#: node_modules/metro/node_modules/yargs/build/lib/validation.js:155
+#: node_modules/yargs/lib/validation.js:147
+#, fuzzy
+msgid "<p>Track events in Google Analytics.</p>"
+msgstr "Проследяване на всякаква информация за посетителите Ви с Google Analytics"
+
+#: inc/admin/admin.php:2887
+msgid "<p>Configure your Google Analytics custom dimensions. <br>Custom dimensions and custom metrics in SEOPress are like the default dimensions and metrics in your Analytics account, except you create them yourself.<br> Use them to collect and analyze data that Analytics doesn't automatically track.<br> Please note that you also have to setup your custom dimensions in your Google Analytics account. More info by clicking on the help icon."
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/validation.js:181
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/validation.js:181
+#: node_modules/metro/node_modules/yargs/build/lib/validation.js:181
+#: node_modules/yargs/lib/validation.js:180
+#, javascript-format
+msgid "Argument check failed: %s"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/validation.js:248
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/validation.js:248
+#: node_modules/metro/node_modules/yargs/build/lib/validation.js:248
+#: node_modules/yargs/lib/validation.js:256
+msgid "Implications failed:"
+msgstr ""
+
+#: node_modules/logkitty/node_modules/yargs/build/lib/validation.js:284
+#: node_modules/metro-inspector-proxy/node_modules/yargs/build/lib/validation.js:284
+#: node_modules/metro/node_modules/yargs/build/lib/validation.js:284
+#: node_modules/yargs/lib/validation.js:295
+#, javascript-format
+msgid "Arguments %s and %s are mutually exclusive"
+msgstr ""
+
+#: inc/admin/admin.php:2905
+msgid "Your <strong>Custom Dimensions</strong> will also work with Matomo tracking code"
+msgstr ""
+
+#: inc/admin/admin.php:2909
+#, fuzzy
+msgid "<p>Advanced SEO options.</p>"
+msgstr "<p>Разширени SEO опции</p>"
+
+#: inc/admin/admin.php:2913
+#, fuzzy
+msgid "<p>Customize SEOPress to fit your needs.</p>"
+msgstr "<p>Настройте SEOPress за да отговори на Вашите нужди</p>"
+
+#: inc/admin/admin.php:2917
+#, fuzzy
+msgid "<p>Manage security.</p>"
+msgstr "<p>Управление на сигурността</p>"
+
+#: node_modules/react-devtools-core/dist/standalone.js:40
+msgid "react.fragment"
+msgstr ""
+
+#: inc/admin/admin.php:2934
+#, fuzzy,php-format
+msgid "Use this separator with %%sep%% in your title and meta description."
+msgstr "Въведете Вашето мета описание"
+
+#: node_modules/react-devtools-core/dist/standalone.js:40
+msgid "react.profiler"
+msgstr ""
+
+#: inc/admin/admin.php:2946
+#: inc/admin/admin.php:2957
+#: inc/admin/admin.php:3051
+#: inc/admin/admin.php:3241
+#: inc/admin/admin.php:3274
+#: inc/admin/admin.php:3364
+#: inc/admin/admin.php:3441
+#: inc/admin/admin.php:3512
+#: inc/admin/admin.php:3582
+#: inc/admin/admin.php:3633
+msgid "More tags"
+msgstr "Още етикети"
+
+#: node_modules/react-devtools-core/dist/standalone.js:40
+msgid "react.context"
+msgstr ""
+
+#: node_modules/react-devtools-core/dist/standalone.js:40
+msgid "react.forward_ref"
+msgstr ""
+
+#: inc/admin/admin.php:2985
+#: inc/admin/admin.php:2989
+#: inc/admin/admin.php:2991
+#: inc/admin/admin.php:2996
+msgid "Click to hide any SEO metaboxes for this post type"
+msgstr ""
+
+#: inc/admin/admin.php:2988
+#: inc/admin/admin.php:2992
+#: inc/admin/admin.php:2995
+msgid "Click to display any SEO metaboxes for this post type"
+msgstr ""
+
+#: inc/admin/admin.php:3020
+#: inc/admin/admin.php:3207
+#: inc/admin/admin.php:3336
+#: inc/admin/admin.php:3429
+#: inc/admin/admin.php:3500
+#: inc/admin/admin.php:3570
+#: inc/admin/admin.php:3623
+msgid "Title template"
+msgstr "Заглавие на шаблон"
+
+#: inc/admin/admin.php:3058
+#: inc/admin/admin.php:3250
+#: inc/admin/admin.php:3371
+#: inc/admin/admin.php:3447
+#: inc/admin/admin.php:3518
+#: inc/admin/admin.php:3588
+#: inc/admin/admin.php:3638
+msgid "Meta description template"
+msgstr "Мета описание на шаблон"
+
+#: inc/admin/admin.php:3081
+msgid "Do not display this single post type in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/admin.php:3100
+msgid "Do not follow links for this single post type <strong>(nofollow)</strong>"
+msgstr ""
+
+#: node_modules/react-devtools-core/dist/standalone.js:40
+msgid "react.cache"
+msgstr ""
+
+#: inc/admin/admin.php:3138
+#, fuzzy
+msgid "Display post thumbnail in Google Custom Search results?"
+msgstr "Да показва ли дата в резултатите от търсенето ?"
+
+#: inc/admin/admin.php:3170
+#: inc/admin/admin.php:3174
+#: inc/admin/admin.php:3176
+#: inc/admin/admin.php:3181
+msgid "Click to hide any SEO metaboxes for this taxonomy"
+msgstr ""
+
+#: inc/admin/admin.php:3173
+#: inc/admin/admin.php:3177
+#: inc/admin/admin.php:3180
+msgid "Click to display any SEO metaboxes for this taxonomy"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "comment2"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "regexp"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "operator"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "eof"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "expand"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "punc"
+msgstr ""
+
+#: inc/admin/admin.php:3289
+msgid "Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/admin.php:3308
+msgid "Do not follow links for this taxonomy archive <strong>(nofollow)</strong>"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+#, fuzzy
+msgid "See archive"
+msgstr "Търсене в архиви"
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "("
+msgstr ""
+
+#: inc/admin/admin.php:3394
+msgid "Do not display this post type archive in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: inc/admin/admin.php:3413
+msgid "Do not follow links for this post type archive <strong>(nofollow)</strong>"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid ";"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid ","
+msgstr ""
+
+#: inc/admin/admin.php:3498
+#: inc/admin/admin.php:3509
+msgid "Date archives"
+msgstr "Дата на архиви"
+
+#: inc/admin/admin.php:3541
+msgid "Do not display date archives in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "{"
+msgstr ""
+
+#: node_modules/terser/dist/bundle.min.js:1
+msgid "["
+msgstr ""
+
+#: node_modules/webidl-conversions/lib/index.js:105
+msgid "is not a finite number"
+msgstr ""
+
+#: inc/admin/admin.php:3612
+msgid "Do not display search archives in search engine results <strong>(noindex)</strong>"
+msgstr ""
+
+#: node_modules/webidl-conversions/lib/index.js:198
+msgid "is outside the range of a single-precision floating-point value"
+msgstr ""
+
+#: inc/admin/admin.php:3664
+msgid "Do not display all pages of the site in Google search results and do not display \"Cached\" links in search results."
+msgstr "Да не показва всички страници от сайта в резултатит от Google търсене и да не показва връзки към \"Кеширано\"."
+
+#: node_modules/webidl-conversions/lib/index.js:239
+msgid "is not a valid ByteString"
+msgstr ""
+
+#: inc/admin/admin.php:3702
+msgid "Do not use Open Directory project metadata for titles or excerpts for all pages."
+msgstr "Да не ползва мета данни за заглавия или откъси от проекта Open Directory за всички страници."
+
+#: node_modules/webidl-conversions/lib/index.js:288
+msgid "is not a function"
+msgstr ""
+
+#: inc/admin/admin.php:3740
+msgid "Do not display a \"Cached\" link in the Google search results."
+msgstr "Да не показва връзката \"Кеширано\" в резултатите от търсене на Google."
+
+#: inc/admin/admin.php:3759
+msgid "Do not display a description in the Google search results for all pages."
+msgstr "Да не показва описание в резултатите от търсене на Google."
+
+#: inc/admin/admin.php:3778
+msgid "Prevents Google to display a sitelinks searchbox in search results. Enable this option will remove the \"Website\" schema from your source code."
+msgstr ""
+
+#: node_modules/yargs/lib/validation.js:40
+#, javascript-format
+msgid "Too many non-option arguments: got %s, maximum of %s"
+msgstr ""
+
+#: seopress-functions.php:315
+#, fuzzy
+#| msgid "Post Types"
+msgid "Custom Post Types"
+msgstr "Типове публикации"
+
+#: seopress-functions.php:319
+#, fuzzy
+#| msgid "Taxonomies"
+msgid "Custom Taxonomies"
+msgstr "Класификации"
+
+#: seopress-functions.php:348
+#, php-format
+msgid "Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below."
+msgstr ""
+
+#: seopress.php:219
+msgid "has been successfully updated!"
+msgstr ""
+
+#: inc/admin/admin.php:3841
+msgid "Enable Image Sitemaps (standard images, image galleries, featured image, WooCommerce product images)"
+msgstr ""
+
+#: seopress.php:350
+msgid "Clear color"
+msgstr ""
+
+#: seopress.php:352
+#, fuzzy
+msgid "Guide to enable XML image sitemaps - new window"
+msgstr "Включване на XML карта на сайта за снимки"
+
+#: seopress.php:353
+#, fuzzy
+msgid "Enable Video Sitemaps"
+msgstr "Включване на карта на сайта за снимки"
+
+#: inc/admin/admin.php:3881
+#, php-format
+msgid "Your video sitemap is empty? Read our guide to learn more about <a href=\"%s\" target=\"_blank\">adding videos to your sitemap.</a>"
+msgstr ""
+
+#: seopress.php:530
+msgid "Docs"
+msgstr ""
+
+#: inc/admin/admin.php:3903
+msgid "Make sure to enable author archive from SEO, titles and metas, archives tab.</a>"
+msgstr ""
+
+#: inc/admin/admin.php:3970
+#: inc/admin/admin.php:4014
+msgid "Include"
+msgstr "Включва"
+
+#: inc/admin/admin.php:3973
+msgid "You should never include attachment post type in your sitemap. Be careful if you checked this."
+msgstr ""
+
+#: src/Actions/Admin/ManageColumn.php:66
+#, fuzzy
+#| msgid "noindex"
+msgid "noindex?"
+msgstr "noindex"
+
+#: src/Actions/Admin/ManageColumn.php:69
+#, fuzzy
+#| msgid "nofollow"
+msgid "nofollow?"
+msgstr "nofollow"
+
+#: src/Actions/Admin/ManageColumn.php:72
+msgid "Score"
+msgstr ""
+
+#: src/Actions/Admin/ManageColumn.php:75
+msgid "Words"
+msgstr ""
+
+#: inc/admin/admin.php:4057
+msgid "DESC (descending order from highest to lowest values (3, 2, 1; c, b, a))"
+msgstr ""
+
+#: src/Actions/Admin/ManageColumn.php:157
+msgid "Analyze this page with Google Page Speed"
+msgstr ""
+
+#: inc/admin/admin.php:4077
+#, fuzzy
+msgid "Default (date)"
+msgstr "Стойност по подразбиране: "
+
+#: src/Actions/Admin/ManageColumn.php:173
+#: src/Services/ContentAnalysis/RenderContentAnalysis.php:23
+msgid "Should be improved"
+msgstr ""
+
+#: inc/admin/admin.php:4086
+#, fuzzy
+msgid "Post ID"
+msgstr "Дата на публикуване"
+
+#: src/Actions/Admin/ManageColumn.php:220
+msgid "Average position: "
+msgstr ""
+
+#: inc/admin/admin.php:4107
+#, fuzzy
+msgid "Disable date after each post, page, post type?"
+msgstr "Заглавие на публикация (публикация, страница, допълнителен тип публикация)"
+
+#: src/Actions/Options/Init.php:261
+msgid "404 - Page not found"
+msgstr "404 - Страницата не е намерена"
+
+#: src/Helpers/ContentAnalysis.php:18
+#, fuzzy
+msgid "eg: SEOPress"
+msgstr "SEOPress"
+
+#: src/Helpers/ContentAnalysis.php:23
+msgid "Last modified date"
+msgstr ""
+
+#: src/Helpers/ContentAnalysis.php:28
+msgid "Words counter"
+msgstr ""
+
+#: src/Helpers/ContentAnalysis.php:33
+msgid "Keywords density"
+msgstr ""
+
+#: src/Helpers/ContentAnalysis.php:38
+#, fuzzy
+#| msgid "Remove stop words in permalinks"
+msgid "Keywords in permalink"
+msgstr "Премахване на спиращи думи от статичните връзки"
+
+#: src/Helpers/ContentAnalysis.php:43
+#, fuzzy
+#| msgid "Settings"
+msgid "Headings"
+msgstr "Настройки"
+
+#: src/Helpers/ContentAnalysis.php:58
+#, fuzzy
+#| msgid "Title tags"
+msgid "Social meta tags"
+msgstr "Заглавия на етикети"
+
+#: src/Helpers/ContentAnalysis.php:63
+msgid "Meta robots"
+msgstr ""
+
+#: src/Helpers/ContentAnalysis.php:68
+msgid "Alternative texts of images"
+msgstr ""
+
+#: src/Helpers/ContentAnalysis.php:73
+#, fuzzy
+#| msgid "Nofollow?"
+msgid "NoFollow Links"
+msgstr "Nofollow?"
+
+#: src/Helpers/ContentAnalysis.php:78
+msgid "Outbound Links"
+msgstr ""
+
+#: src/Helpers/ContentAnalysis.php:83
+msgid "Inbound Links"
+msgstr ""
+
+#: src/Helpers/OpeningHoursHelper.php:12
+msgid "Monday"
+msgstr ""
+
+#: src/Helpers/OpeningHoursHelper.php:13
+msgid "Tuesday"
+msgstr ""
+
+#: src/Helpers/OpeningHoursHelper.php:14
+msgid "Wednesday"
+msgstr ""
+
+#: src/Helpers/OpeningHoursHelper.php:15
+msgid "Thursday"
+msgstr ""
+
+#: inc/admin/admin.php:4244
+#: inc/admin/admin.php:5065
+#: inc/admin/admin.php:5142
+#: inc/admin/admin.php:5219
+#: inc/admin/admin.php:5296
+#: inc/admin/admin.php:5373
+msgid "None"
+msgstr "Няма"
+
+#: src/Helpers/OpeningHoursHelper.php:17
+msgid "Saturday"
+msgstr ""
+
+#: src/Helpers/OpeningHoursHelper.php:18
+msgid "Sunday"
+msgstr ""
+
+#: inc/admin/admin.php:4276
+#, fuzzy
+msgid "Twitter Page URL"
+msgstr "Twitter потребител"
+
+#: src/Services/ContentAnalysis/GetContent.php:29
+msgid "duplicated schema - x"
+msgstr ""
+
+#: inc/admin/admin.php:4413
+msgid "Override every <strong>og:image</strong> tag with this default image (except if a custom og:image has already been set from the SEO metabox)."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:41
+msgid "No schemas found in the source code of this page."
+msgstr ""
+
+#: inc/admin/admin.php:4429
+msgid "One or more Facebook Page IDs that are associated with a URL in order to enable link editing and instant article publishing."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:60
+msgid "The last modified date of this article is less than 1 year. Cool!"
+msgstr ""
+
+#: inc/admin/admin.php:4443
+msgid "The ID (or comma-separated list for properties that can accept multiple IDs) of an app, person using the app, or Page Graph API object."
+msgstr ""
+
+#: inc/admin/admin.php:4455
+msgid "The Facebook app ID of the site's app. In order to use Facebook Insights you must add the app ID to your page. Insights lets you view analytics for traffic to your site from Facebook. Find the app ID in your App Dashboard. <a href=\"https://developers.facebook.com/apps/redirect/dashboard\" target=\"_blank\">More info here</a> <span class=\"dashicons dashicons-external\"></span>"
+msgstr ""
+
+#: inc/admin/admin.php:4459
+#, fuzzy
+msgid "How to create a Facebook App ID"
+msgstr "ID на Facebook App"
+
+#: inc/admin/admin.php:4472
+msgid "Enable Twitter card"
+msgstr "Включване на Twitter картички"
+
+#: inc/admin/admin.php:4489
+#, fuzzy
+msgid "Use OG if no Twitter Cards"
+msgstr "Включване на Twitter картичка"
+
+#: inc/admin/admin.php:4524
+msgid "Default"
+msgstr "По подразбиране"
+
+#: src/Services/ContentAnalysis/GetContent.php:81
+msgid "unique words found."
+msgstr ""
+
+#: inc/admin/admin.php:4545
+#, fuzzy
+msgid "Enable Google Analytics tracking (Global Site Tag: gtag.js)"
+msgstr "Включване на Google Analytics следене"
+
+#: src/Services/ContentAnalysis/GetContent.php:86
+msgid "Your content is too short. Add a few more paragraphs!"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:93
+msgid "No content? Add a few more paragraphs!"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:118
+#, php-format
+msgid "%s was found %d times in your content, a keyword density of %s%%"
+msgstr ""
+
+#: inc/admin/admin.php:4577
+msgid "<strong>The user must click the Accept button to allow tracking.</strong>"
+msgstr ""
+
+#: inc/admin/admin.php:4579
+msgid "User roles excluded from tracking will not see the consent message.<br> If you use a caching plugin, you have to exclude this JS file in your settings: <br><strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</strong> <br>and this cookie <strong>seopress-user-consent-accept</strong>"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:141
+msgid "Cool, one of your target keyword is used in your permalink."
+msgstr ""
+
+#: inc/admin/admin.php:4606
+msgid "Display and automatically accept the user‘s consent on page load (not fully GDPR)"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:157
+msgid "You should add one of your target keyword in your permalink."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:174
+msgid "H1 (Heading 1)"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:182
+msgid "Target keywords were found in Heading 1 (H1)."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:191
+#: src/Services/ContentAnalysis/GetContent.php:229
+#: src/Services/ContentAnalysis/GetContent.php:250
+#: src/Services/ContentAnalysis/GetContent.php:285
+#: src/Services/ContentAnalysis/GetContent.php:331
+#, php-format
+msgid "%s was found %d times."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:196
+#, php-format
+msgid "We found %d Heading 1 (H1) in your content."
+msgstr ""
+
+#: inc/admin/admin.php:4635
+msgid "Shortcode allowed to get the privacy page set in WordPress settings: [seopress_privacy_page]"
+msgstr ""
+
+#: inc/admin/admin.php:4643
+#: inc/functions/options-google-analytics.php:182
+msgid "Accept"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:212
+#, fuzzy
+msgid "Change the button value"
+msgstr "Промени настройката"
+
+#: inc/admin/admin.php:4653
+#, fuzzy
+msgid "default: X"
+msgstr "По подразбиране"
+
+#: inc/admin/admin.php:4653
+#, fuzzy
+msgid "Change the close button value"
+msgstr "Промени настройката"
+
+#: src/Services/ContentAnalysis/GetContent.php:233
+msgid "None of your target keywords were found in Heading 2 (H2)."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:240
+msgid "H3 (Heading 3)"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:242
+msgid "Target keywords were found in Heading 3 (H3)."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:254
+msgid "None of your target keywords were found in Heading 3 (H3)."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:277
+msgid "Target keywords were found in the Meta Title."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:291
+msgid "None of your target keywords were found in the Meta Title."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:296
+#, fuzzy
+#| msgid "Your site title is empty!"
+msgid "Your custom title is too long."
+msgstr "Заглавието на сайта Ви е празно!"
+
+#: src/Services/ContentAnalysis/GetContent.php:299
+msgid "The length of your title is correct"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:304
+msgid "No custom title is set for this post. If the global meta title suits you, you can ignore this recommendation."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:323
+#, fuzzy
+#| msgid "Enter your meta description"
+msgid "Target keywords were found in the Meta description."
+msgstr "Въведете Вашето мета описание"
+
+#: src/Services/ContentAnalysis/GetContent.php:337
+msgid "None of your target keywords were found in the Meta description."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:342
+#, fuzzy
+#| msgid "Add meta description column"
+msgid "You custom meta description is too long."
+msgstr "Добавяне на колона Мета описание"
+
+#: src/Services/ContentAnalysis/GetContent.php:345
+#, fuzzy
+#| msgid "Enter your meta description"
+msgid "The length of your meta description is correct"
+msgstr "Въведете Вашето мета описание"
+
+#: src/Services/ContentAnalysis/GetContent.php:350
+msgid "No custom meta description is set for this post. If the global meta description suits you, you can ignore this recommendation."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:367
+#, fuzzy
+#| msgid "Enable Open Graph Data"
+msgid "Open Graph Title"
+msgstr "Включване на Open Graph данни"
+
+#: src/Services/ContentAnalysis/GetContent.php:376
+#, php-format
+msgid "We found %d og:title in your content."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:377
+msgid "You should not use more than one og:title in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:title tag from your source code. Below, the list:"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:380
+#, fuzzy
+#| msgid "Your site title is empty!"
+msgid "Your Open Graph Title tag is empty!"
+msgstr "Заглавието на сайта Ви е празно!"
+
+#: src/Services/ContentAnalysis/GetContent.php:382
+msgid "We found an Open Graph Title tag in your source code."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:394
+msgid "Your Open Graph Title is missing!"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:398
+#, fuzzy
+msgid "Enter your Google Optimize container ID"
+msgstr "Въведете Вашите ключови думи за Google новини"
+
+#: src/Services/ContentAnalysis/GetContent.php:407
+#, php-format
+msgid "We found %d og:description in your content."
+msgstr ""
+
+#: inc/admin/admin.php:4821
+msgid "Google Optimize offers A/B testing, website testing & personalization tools."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:411
+#, fuzzy
+#| msgid "Term Description"
+msgid "Your Open Graph Description tag is empty!"
+msgstr "Описание на термин"
+
+#: src/Services/ContentAnalysis/GetContent.php:413
+msgid "We found an Open Graph Description tag in your source code."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:425
+msgid "Your Open Graph Description is missing!"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:429
+#, fuzzy
+#| msgid "Enable Open Graph Data"
+msgid "Open Graph Image"
+msgstr "Включване на Open Graph данни"
+
+#: src/Services/ContentAnalysis/GetContent.php:437
+#, php-format
+msgid "We found %d og:image in your content."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:443
+#, fuzzy
+#| msgid "Enable Open Graph Data"
+msgid "Your Open Graph Image tag is empty!"
+msgstr "Включване на Open Graph данни"
+
+#: src/Services/ContentAnalysis/GetContent.php:455
+msgid "Your Open Graph Image is missing!"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:459
+#, fuzzy
+#| msgid "Enable Open Graph Data"
+msgid "Open Graph URL"
+msgstr "Включване на Open Graph данни"
+
+#: src/Services/ContentAnalysis/GetContent.php:468
+#, php-format
+msgid "We found %d og:url in your content."
+msgstr ""
+
+#: inc/admin/admin.php:4853
+msgid "You don‘t see your code? Make sure to call <strong>wp_body_open();</strong> just after the opening body tag in your theme."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:472
+#, fuzzy
+#| msgid "Your site title is empty!"
+msgid "Your Open Graph URL tag is empty!"
+msgstr "Заглавието на сайта Ви е празно!"
+
+#: src/Services/ContentAnalysis/GetContent.php:474
+msgid "We found an Open Graph URL tag in your source code."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:486
+msgid "Your Open Graph URL is missing!"
+msgstr ""
+
+#: inc/admin/admin.php:4889
+msgid "A remarketing audience is a list of cookies or mobile-advertising IDs that represents a group of users you want to re-engage because of their likelihood to convert."
+msgstr ""
+
+#: inc/admin/admin.php:4911
+msgid "When a customer of Analytics requests IP address anonymization, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network."
+msgstr ""
+
+#: inc/admin/admin.php:4933
+msgid "Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs."
+msgstr ""
+
+#: inc/admin/admin.php:4955
+msgid "Cross domain tracking makes it possible for Analytics to see sessions on two related sites (such as an ecommerce site and a separate shopping cart site) as a single session. This is sometimes called site linking."
+msgstr ""
+
+#: inc/admin/admin.php:4970
+#: inc/admin/admin.php:5565
+msgid "Enter your domains: seopress.org,sub.seopress.org,sub2.seopress.org"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:530
+#, php-format
+msgid "We found %d twitter:title in your content."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:531
+msgid "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:title tag from your source code. Below, the list:"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:534
+#, fuzzy
+#| msgid "Your site title is empty!"
+msgid "Your Twitter Title tag is empty!"
+msgstr "Заглавието на сайта Ви е празно!"
+
+#: src/Services/ContentAnalysis/GetContent.php:536
+msgid "We found a Twitter Title tag in your source code."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:548
+#, fuzzy
+msgid "Enable affiliate/outbound tracking"
+msgstr "Включване на следене за кръстосани домейни"
+
+#: src/Services/ContentAnalysis/GetContent.php:552
+#, fuzzy
+#| msgid "Twitter description"
+msgid "Twitter Description"
+msgstr "Описание за Twitter"
+
+#: src/Services/ContentAnalysis/GetContent.php:561
+#, php-format
+msgid "We found %d twitter:description in your content."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:562
+msgid "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:description tag from your source code. Below, the list:"
+msgstr ""
+
+#: inc/admin/admin.php:5068
+#: inc/admin/admin.php:5145
+#: inc/admin/admin.php:5222
+#: inc/admin/admin.php:5299
+#: inc/admin/admin.php:5376
+msgid "Custom Dimension #1"
+msgstr "Допълнителен размер #1"
+
+#: inc/admin/admin.php:5071
+#: inc/admin/admin.php:5148
+#: inc/admin/admin.php:5225
+#: inc/admin/admin.php:5302
+#: inc/admin/admin.php:5379
+msgid "Custom Dimension #2"
+msgstr "Допълнителен размер #2"
+
+#: inc/admin/admin.php:5074
+#: inc/admin/admin.php:5151
+#: inc/admin/admin.php:5228
+#: inc/admin/admin.php:5305
+#: inc/admin/admin.php:5382
+msgid "Custom Dimension #3"
+msgstr "Допълнителен размер #3"
+
+#: inc/admin/admin.php:5077
+#: inc/admin/admin.php:5154
+#: inc/admin/admin.php:5231
+#: inc/admin/admin.php:5308
+#: inc/admin/admin.php:5385
+msgid "Custom Dimension #4"
+msgstr "Допълнителен размер #4"
+
+#: inc/admin/admin.php:5080
+#: inc/admin/admin.php:5157
+#: inc/admin/admin.php:5234
+#: inc/admin/admin.php:5311
+#: inc/admin/admin.php:5388
+msgid "Custom Dimension #5"
+msgstr "Допълнителен размер #5"
+
+#: inc/admin/admin.php:5083
+#: inc/admin/admin.php:5160
+#: inc/admin/admin.php:5237
+#: inc/admin/admin.php:5314
+#: inc/admin/admin.php:5391
+msgid "Custom Dimension #6"
+msgstr "Допълнителен размер #6"
+
+#: inc/admin/admin.php:5086
+#: inc/admin/admin.php:5163
+#: inc/admin/admin.php:5240
+#: inc/admin/admin.php:5317
+#: inc/admin/admin.php:5394
+msgid "Custom Dimension #7"
+msgstr "Допълнителен размер #7"
+
+#: inc/admin/admin.php:5089
+#: inc/admin/admin.php:5166
+#: inc/admin/admin.php:5243
+#: inc/admin/admin.php:5320
+#: inc/admin/admin.php:5397
+msgid "Custom Dimension #8"
+msgstr "Допълнителен размер #8"
+
+#: inc/admin/admin.php:5092
+#: inc/admin/admin.php:5169
+#: inc/admin/admin.php:5246
+#: inc/admin/admin.php:5323
+#: inc/admin/admin.php:5400
+msgid "Custom Dimension #9"
+msgstr "Допълнителен размер #9"
+
+#: inc/admin/admin.php:5095
+#: inc/admin/admin.php:5172
+#: inc/admin/admin.php:5249
+#: inc/admin/admin.php:5326
+#: inc/admin/admin.php:5403
+msgid "Custom Dimension #10"
+msgstr "Допълнителен размер #10"
+
+#: inc/admin/admin.php:5098
+#: inc/admin/admin.php:5175
+#: inc/admin/admin.php:5252
+#: inc/admin/admin.php:5329
+#: inc/admin/admin.php:5406
+msgid "Custom Dimension #11"
+msgstr "Допълнителен размер #11"
+
+#: inc/admin/admin.php:5101
+#: inc/admin/admin.php:5178
+#: inc/admin/admin.php:5255
+#: inc/admin/admin.php:5332
+#: inc/admin/admin.php:5409
+msgid "Custom Dimension #12"
+msgstr "Допълнителен размер #12"
+
+#: inc/admin/admin.php:5104
+#: inc/admin/admin.php:5181
+#: inc/admin/admin.php:5258
+#: inc/admin/admin.php:5335
+#: inc/admin/admin.php:5412
+msgid "Custom Dimension #13"
+msgstr "Допълнителен размер #13"
+
+#: inc/admin/admin.php:5107
+#: inc/admin/admin.php:5184
+#: inc/admin/admin.php:5261
+#: inc/admin/admin.php:5338
+#: inc/admin/admin.php:5415
+msgid "Custom Dimension #14"
+msgstr "Допълнителен размер #14"
+
+#: inc/admin/admin.php:5110
+#: inc/admin/admin.php:5187
+#: inc/admin/admin.php:5264
+#: inc/admin/admin.php:5341
+#: inc/admin/admin.php:5418
+msgid "Custom Dimension #15"
+msgstr "Допълнителен размер #15"
+
+#: inc/admin/admin.php:5113
+#: inc/admin/admin.php:5190
+#: inc/admin/admin.php:5267
+#: inc/admin/admin.php:5344
+#: inc/admin/admin.php:5421
+msgid "Custom Dimension #16"
+msgstr "Допълнителен размер #16"
+
+#: inc/admin/admin.php:5116
+#: inc/admin/admin.php:5193
+#: inc/admin/admin.php:5270
+#: inc/admin/admin.php:5347
+#: inc/admin/admin.php:5424
+msgid "Custom Dimension #17"
+msgstr "Допълнителен размер #17"
+
+#: inc/admin/admin.php:5119
+#: inc/admin/admin.php:5196
+#: inc/admin/admin.php:5273
+#: inc/admin/admin.php:5350
+#: inc/admin/admin.php:5427
+msgid "Custom Dimension #18"
+msgstr "Допълнителен размер #18"
+
+#: inc/admin/admin.php:5122
+#: inc/admin/admin.php:5199
+#: inc/admin/admin.php:5276
+#: inc/admin/admin.php:5353
+#: inc/admin/admin.php:5430
+msgid "Custom Dimension #19"
+msgstr "Допълнителен размер #19"
+
+#: inc/admin/admin.php:5125
+#: inc/admin/admin.php:5202
+#: inc/admin/admin.php:5279
+#: inc/admin/admin.php:5356
+#: inc/admin/admin.php:5433
+msgid "Custom Dimension #20"
+msgstr "Допълнителен размер #20"
+
+#: inc/admin/admin.php:5451
+msgid "Enable Matomo tracking (Matomo account required)"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:579
+#, fuzzy
+#| msgid "Enter your Twitter description"
+msgid "Your Twitter Description is missing!"
+msgstr "Въведете Вашето описание за Twitter"
+
+#: src/Services/ContentAnalysis/GetContent.php:583
+#, fuzzy
+msgid "Matomo Cloud URL"
+msgstr "Soundcloud URL"
+
+#: src/Services/ContentAnalysis/GetContent.php:591
+#, php-format
+msgid "We found %d twitter:image in your content."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:597
+#, fuzzy
+msgid "Enter your site ID here"
+msgstr "Въведете Вашето заглавие"
+
+#: src/Services/ContentAnalysis/GetContent.php:609
+msgid "Your Twitter Image is missing!"
+msgstr ""
+
+#: inc/admin/admin.php:5482
+msgid "To find your site ID, go to your <strong>Matomo Cloud account, Websites, Manage page</strong>. Look at \"Site ID\" on the right part."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:638
+msgid "<strong>noindex</strong> is on! Search engines can't index this page."
+msgstr ""
+
+#: inc/admin/admin.php:5498
+msgid "If one visitor visits x.example.com and y.example.com, they will be counted as a unique visitor."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:645
+msgid "<strong>nofollow</strong> is on! Search engines can't follow your links on this page."
+msgstr ""
+
+#: inc/admin/admin.php:5517
+msgid "If someone visits the 'About' page on blog.example.com it will be recorded as 'blog / About'. This is the easiest way to get an overview of your traffic by sub-domain."
+msgstr ""
+
+#: inc/admin/admin.php:5553
+msgid "By default, the visitor ID that identifies a unique visitor is stored in the browser's first party cookies which can only be accessed by pages on the same domain. Enabling cross domain linking lets you track all the actions and pageviews of a specific visitor into the same visit even when they view pages on several domains. Whenever a user clicks on a link to one of your website's alias URLs, it will append a URL parameter pk_vid forwarding the Visitor ID."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:656
+msgid "<strong>noarchive</strong> is off. Search engines will probably cache your page."
+msgstr ""
+
+#: inc/admin/admin.php:5584
+msgid "Tracking requests will not be sent if visitors do not wish to be tracked."
+msgstr ""
+
+#: inc/admin/admin.php:5601
+msgid "Disables all first party cookies. Existing Matomo cookies for this website will be deleted on the next page view."
+msgstr ""
+
+#: inc/admin/admin.php:5618
+#, fuzzy
+msgid "Enabling Download & Outlink tracking"
+msgstr "Включване на следене за кръстосани домейни"
+
+#: src/Services/ContentAnalysis/GetContent.php:677
+msgid "By default, any file ending with one of these extensions will be considered a \"download\" in the Matomo interface: 7z|aac|arc|arj|apk|asf|asx|avi|bin|bz|bz2|csv|deb|dmg|doc|\n"
+"        exe|flv|gif|gz|gzip|hqx|jar|jpg|jpeg|js|mp2|mp3|mp4|mpg|\n"
+"        mpeg|mov|movie|msi|msp|odb|odf|odg|odp|ods|odt|ogg|ogv|\n"
+"        pdf|phps|png|ppt|qt|qtm|ra|ram|rar|rpm|sea|sit|tar|\n"
+"        tbz|tbz2|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip"
+msgstr ""
+
+#: inc/admin/admin.php:5641
+msgid "Redirect attachment pages to post parent (or homepage if none)"
+msgstr "Пренасочване на прикачени страници към основната (или начална страница ако няма)"
+
+#: inc/admin/admin.php:5660
+msgid "If this option is checked, it will take precedence over the redirection of attachments to the post's parent."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:688
+msgid "<strong>nositelinkssearchbox is</strong> off. Google will probably display a sitelinks searchbox in search results."
+msgstr ""
+
+#: inc/admin/admin.php:5694
+msgid "When sending an image file, automatically set the title based on the filename"
+msgstr ""
+
+#: inc/admin/admin.php:5711
+msgid "When sending an image file, automatically set the alternative text based on the filename"
+msgstr ""
+
+#: inc/admin/admin.php:5714
+msgid "We recommend Image SEO plugin to optimize your image ALT texts and names for Search Engines using AI and Machine Learning. Starting from just €4.99."
+msgstr ""
+
+#: inc/admin/admin.php:5732
+msgid "When sending an image file, automatically set the caption based on the filename"
+msgstr ""
+
+#: inc/admin/admin.php:5749
+msgid "When sending an image file, automatically set the description based on the filename"
+msgstr ""
+
+#: inc/admin/admin.php:5766
+#, fuzzy
+msgid "Add TINYMCE editor to term description"
+msgstr "Описание за Twitter"
+
+#: src/Services/ContentAnalysis/GetContent.php:790
+msgid "This page doesn't have any outbound links."
+msgstr ""
+
+#: inc/admin/admin.php:5800
+msgid "You must check this box if the structure of your permalinks DOES NOT contain a slash at the end (eg: /%postname%)"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:809
+#, php-format
+msgid "We found %s inbound links to this page."
+msgstr ""
+
+#: inc/admin/admin.php:5834
+msgid "Remove hentry post class to prevent Google from seeing this as structured data (schema)"
+msgstr ""
+
+#: inc/admin/admin.php:5851
+msgid "Remove comment author URL in comments if the website is filled from profile page"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:838
+msgid "A canonical URL is required by search engines to handle duplicate content."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:842
+#, php-format
+msgid "We found %s canonical URL in your source code. Below, the list:"
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:851
+msgid "You must fix this. Canonical URL duplication is bad for SEO."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:856
+msgid "This page doesn't have any canonical URL because your post is set to <strong>noindex</strong>. This is normal."
+msgstr ""
+
+#: src/Services/ContentAnalysis/GetContent.php:859
+msgid "This page doesn't have any canonical URL."
+msgstr ""
+
+#: inc/admin/admin.php:5936
+msgid "If your site is already verified in <strong>Google Search Console</strong>, you can leave this field empty."
+msgstr ""
+
+#: src/Services/ContentAnalysis/RenderContentAnalysis.php:37
+msgid "Expand"
+msgstr ""
+
+#: inc/admin/admin.php:5949
+msgid "If your site is already verified in <strong>Bing Webmaster tools</strong>, you can leave this field empty."
+msgstr ""
+
+#: src/Services/Settings/Roles/SectionPagesSEOPress.php:38
+msgid "Check a user role to authorized it to edit a specific SEO page."
+msgstr ""
+
+#, fuzzy
+msgid "Remove SEOPress from Admin Bar in backend and frontend"
+msgstr "Премахване на SEOPress от административната лента"
+
+#, fuzzy
+msgid "Hide SEO tools in SEOPress Dashboard page"
+msgstr "Скриване на известията от таблото в SEOPress"
+
+#, fuzzy
+msgid "Hide Useful Links in SEOPress dashboard page"
+msgstr "Скриване на известията от таблото в SEOPress"
+
+#, fuzzy
+msgid "Add redirection enable column"
+msgstr "Добавяне на колона Мета описание"
+
+#, fuzzy
+msgid "Add redirection URL column"
+msgstr "Добавяне на колона Заглавие"
+
+#, fuzzy
+msgid "Add canonical URL column"
+msgstr "Добавяне на колона Заглавие"
+
+#, fuzzy
+msgid "Add target keyword column"
+msgstr "Добавяне на колона Заглавие"
+
+#: inc/admin/admin.php:6290
+msgid "Display Content Analysis results column (\"Good\" or \"Should be improved\")"
+msgstr ""
+
+#, fuzzy
+msgid "Remove Genesis SEO Metabox"
+msgstr "Премахва Genesis SEO мета"
+
+#: inc/admin/admin.php:6325
+#, fuzzy
+msgid "Remove Genesis SEO link in WP Admin Menu"
+msgstr "Премахва Genesis SEO мета"
+
+#: inc/admin/admin.php:6380
+#: inc/admin/admin.php:6415
+msgid "Hook to filter structured data types metabox call by post type - new window"
+msgstr ""
+
+#: inc/admin/ajax.php:29
+msgid "A redirect is active for this URL. Turn it off to get the Google preview and content analysis."
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:40
+msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:50
+msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
+msgstr ""
+
+#: inc/functions/options-advanced-admin.php:321
+#, fuzzy
+msgid "Redirect?"
+msgstr "Пренасочвания"
+
+#: inc/functions/options-advanced-admin.php:327
+#: inc/functions/options-advanced-admin.php:830
+#, fuzzy
+msgid "Canonical"
+msgstr "Каноничен уеб адрес"
+
+#, fuzzy
+msgid "Enable redirection"
+msgstr "Включване на пренасочване?"
+
+#, fuzzy
+msgid "Disable redirection"
+msgstr "Включване на пренасочване?"
+
+#, fuzzy
+msgid "Description"
+msgstr "Описание на етикет"
+
+#: inc/functions/options-advanced-admin.php:943
+msgid "The description is not prominent by default; however, some themes may show it."
+msgstr ""
+
+#: inc/functions/options-google-analytics.php:167
+msgid "By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.&nbsp;<a href=\"[seopress_privacy_page]\" tabindex=\"10\">Read more</a>"
+msgstr ""
+
+#: inc/functions/options-google-analytics.php:169
+msgid "By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc."
+msgstr ""
+
+#, fuzzy
+msgid "Authors"
+msgstr "Следене на автори"
+
+#, fuzzy
+msgid "Categories"
+msgstr "Следене на категории"
+
+#: inc/functions/options-google-analytics.php:707
+#: inc/functions/options-matomo.php:248
+#, fuzzy
+msgid "Post types"
+msgstr "Типове публикации"
+
+#: inc/functions/options-import-export.php:376
+#, fuzzy
+msgid "Please upload a valid .txt file"
+msgstr "Моля качете валиден .json файл"
+

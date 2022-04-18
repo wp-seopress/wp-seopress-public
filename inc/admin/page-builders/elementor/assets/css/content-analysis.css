@@ -1,0 +1,479 @@
+.elementor-control-field.seopress-content-analyses .sp-tooltip {
+	position: relative;
+	margin-left: 5px;
+	display: inline-block;
+	cursor: help;
+	vertical-align: bottom;
+	text-align: left;
+	background: none;
+	border: none;
+	padding: 0;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip .dashicons {
+	color: #666;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip .sp-tooltiptext {
+	visibility: hidden;
+	position: absolute;
+	z-index: 999999999;
+	width: 300px;
+	right: -260px;
+	padding: 20px;
+	top: 25px;
+	font-weight: 400;
+	box-shadow: 0 3px 30px rgba(25, 30, 35, 0.1);
+	border: 1px solid #e2e4e7;
+	background: #fff;
+	word-break: break-word;
+	text-transform: none;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip .sp-tooltiptext::before {
+	border: 8px solid #e2e4e7;
+	top: -8px;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip .sp-tooltiptext::after {
+	border: 8px solid #fff;
+	top: -6px;
+}
+
+.elementor-control-field.seopress-content-analyses  .sp-tooltip .sp-tooltiptext::after,
+.elementor-control-field.seopress-content-analyses  .sp-tooltip .sp-tooltiptext::before {
+	border-bottom-style: solid;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	border-top: none;
+	margin-left: -10px;
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	line-height: 0;
+	left: 30px;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip .sp-tooltiptext::before, .sp-tooltip .sp-tooltiptext::after {
+	border-bottom-style: solid;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	border-top: none;
+	margin-left: -10px;
+	content: "";
+	position: absolute;
+	height: 0;
+	width: 0;
+	line-height: 0;
+	left: 30px;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip:hover .sp-tooltiptext,
+.elementor-control-field.seopress-content-analyses .sp-tooltip:focus .sp-tooltiptext,
+.elementor-control-field.seopress-content-analyses .sp-tooltip:active .sp-tooltiptext {
+	visibility: visible;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip .sp-tooltip-headings {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 20px;
+	display: block;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip .sp-tooltip-desc {
+	margin-bottom: 20px;
+	display: block;
+	border-bottom: 1px solid #e2e4e7;
+	padding-bottom: 20px;
+	font-size: 13px;
+}
+
+.elementor-control-field.seopress-content-analyses .sp-tooltip .sp-tooltip-code {
+	font-family: Menlo, Monaco, Andale Mono, Courier New, monospace;
+	display: block;
+	word-break: break-all;
+	color: #1a7a06;
+	font-size: 11px;
+}
+
+.elementor-control-field.seopress-content-analyses .analysis-score .sp-tooltip {
+	vertical-align: middle;
+	font-size: 0.75em;
+}
+
+.elementor-control-field.seopress-content-analyses a {
+	color: #0073aa;
+}
+
+.elementor-control-field.seopress-content-analyses .wrap-seopress-analysis {
+	display: inline-block;
+	width: 100%;
+}
+
+.elementor-control-field.seopress-content-analyses .col-left {
+	width: calc(50% - 30px);
+	float: left;
+	margin-right: 30px;
+}
+
+.elementor-control-field.seopress-content-analyses .col-right {
+	float: right;
+	width: 50%;
+}
+
+.elementor-control-field.seopress-content-analyses #seopress_suggestions {
+	display: inline-block;
+	width: 100%;
+	margin: 0;
+	height: auto;
+	padding: 20px 0;
+}
+
+.elementor-control-field.seopress-content-analyses #seopress_suggestions li {
+	list-style: none;
+	margin: 5px;
+	display: inline-block;
+}
+
+.elementor-control-field.seopress-content-analyses .analysis-score {
+	clear: both;
+	border-top: 1px solid #e2e4e7;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score {
+	display: flex;
+	align-content: center;
+}
+
+.elementor-control-field.seopress-content-analyses .analysis-score p,
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score p {
+	margin: 1em 0;
+	color: #333;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.elementor-control-field.seopress-content-analyses .analysis-score svg,
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score svg {
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	margin: 0;
+	border-radius: 100%;
+	position: relative;
+	font-weight: 600;
+	shape-rendering: geometricprecision;
+	font-size: 0.5rem;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score p,
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score svg {
+	margin: 0;
+}
+
+@keyframes loadingPulse{
+	0%{stroke:#adc5d2}
+	50%{stroke:#00a0d2}
+	100%{stroke:#adc5d2}
+}
+
+.elementor-control-field.seopress-content-analyses .analysis-score .loading #bar {
+	stroke-dashoffset: 0 !important;
+	stroke: #adc5d2 !important;
+	animation: loadingPulse 3s infinite ease-in-out;
+}
+
+.elementor-control-field.seopress-content-analyses .analysis-score .good #bar,
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score #bar.good {
+	stroke: #46b450;
+}
+
+.elementor-control-field.seopress-content-analyses .analysis-score .notgood #bar,
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score #bar.notgood {
+	stroke-dashoffset: 565;
+	stroke: #ffb900;
+}
+
+.elementor-control-field.seopress-content-analyses .analysis-score svg circle,
+.elementor-control-field.seopress-content-analyses .column-seopress_score .analysis-score svg circle {
+	stroke-dashoffset: 0;
+	transition: stroke-dashoffset 1s linear;
+	stroke: #ccc;
+	stroke-width: 2em;
+}
+
+.elementor-control-field.seopress-content-analyses .gr-analysis {
+	clear: both;
+}
+
+.elementor-control-field.seopress-content-analyses .gr-analysis-title {
+	border-top: 1px solid #e2e4e7;
+	position: relative;
+}
+
+.elementor-control-field.seopress-content-analyses .gr-analysis-title .impact {
+	position: absolute;
+	left: 10px;
+	top:calc(50% - 5px);
+	width: 10px;
+	height: 10px;
+	border-radius: 50px;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #fff;
+}
+
+.elementor-control-field.seopress-content-analyses .gr-analysis-content .impact.high {
+	background: #e25950;
+	box-shadow: none;
+	color: #fff;
+	padding: 2px 4px;
+	margin-left: 5px;
+	border-radius: 4px;
+	font-weight: 700;
+}
+
+.elementor-control-field.seopress-content-analyses .gr-analysis .impact.good {
+	background: #46b450;
+	box-shadow: 0 0 5px #46b450;
+}
+.elementor-control-field.seopress-content-analyses  .gr-analysis .impact.low {
+	background: #FFDE24;
+	box-shadow: 0 0 5px #FFDE24;
+}
+.elementor-control-field.seopress-content-analyses .gr-analysis .impact.medium {
+	background: #e39f48;
+	box-shadow: 0 0 5px #e39f48;
+}
+
+.elementor-control-field.seopress-content-analyses  .impact.high, .elementor-control-field.seopress-content-analyses .gr-analysis .impact.high {
+	background: #e25950;
+	box-shadow: 0 0 5px #e25950;
+}
+.elementor-control-field.seopress-content-analyses .gr-analysis-content .impact.high {
+	background: #e25950;
+	box-shadow: none;
+	color:#fff;
+	padding: 2px 4px;
+	margin-left: 5px;
+	border-radius: 4px;
+	font-weight: bold;
+}
+
+.elementor-control-field.seopress-content-analyses  .gr-analysis-title button {
+	background: #fff;
+	border: 0;
+	cursor: pointer;
+	display: block;
+	margin: 0;
+	position: relative;
+	text-align: left;
+	width: 100%;
+	padding: 15px 30px;
+	align-items: center;
+	transition: all 300ms linear;
+}
+.elementor-control-field.seopress-content-analyses  .gr-analysis-title button:hover {
+	background: #f3f4f5;
+}
+.elementor-control-field.seopress-content-analyses  .gr-analysis-title button:focus {
+	color: #191e23;
+	border: none;
+	box-shadow: none;
+	outline-offset: -2px;
+	outline: 1px dotted #555d66;
+}
+.elementor-control-field.seopress-content-analyses  .gr-analysis-title button .seopress-arrow::after {
+	content:"\f343";
+	font-family: "Dashicons";
+	position: absolute;
+	right: 10px;
+	top: calc(50% - 7px);
+}
+.elementor-control-field.seopress-content-analyses  .gr-analysis-title button.open .seopress-arrow::after {
+	content:"\f347";
+}
+.elementor-control-field.seopress-content-analyses  .gr-analysis-content {
+	padding: 0 1rem 0.5rem 1rem;
+	display: none;
+	width: 100%;
+	border-top: 1px solid #e2e4e7;
+	box-sizing: border-box;
+}
+
+.elementor-control-field.seopress-content-analyses table.wp-list-table .manage_column.column-seopress_noindex,
+.elementor-control-field.seopress-content-analyses table.wp-list-table .manage_column.column-seopress_tkw,
+.elementor-control-field.seopress-content-analyses table.wp-list-table .manage_column.column-seopress_redirect_url,
+.elementor-control-field.seopress-content-analyses table.wp-list-table .manage_column.column-seopress_canonical,
+.elementor-control-field.seopress-content-analyses table.wp-list-table .manage_column.column-seopress_redirect_enable,
+.elementor-control-field.seopress-content-analyses table.wp-list-table .manage_column.column-seopress_desc,
+.elementor-control-field.seopress-content-analyses table.wp-list-table .manage_column.column-seopress_title,
+.elementor-control-field.seopress-content-analyses table.wp-list-table .manage_column.column-seopress_insights {
+	width: 7%!important;
+}
+.elementor-control-field.seopress-content-analyses h3 {
+	margin: 0;
+	font-size: 1em;
+}
+.elementor-control-field.seopress-content-analyses h4 {
+	border-bottom: 1px solid #e2e4e7;
+	padding-bottom: 0.5rem;
+	text-transform: uppercase;
+	font-size: 0.85em;
+	position: -webkit-sticky; /* Required for Safari */
+	position: sticky;
+	top: 0;
+	background: #fff;
+	color: #444;
+	font-weight: 600;
+	margin: 1.33em 0;
+}
+.elementor-control-field.seopress-content-analyses .wrap-analysis-img ul {
+	display: flex;
+	flex-wrap: wrap;
+}
+.elementor-control-field.seopress-content-analyses .wrap-analysis-img ul li {
+	padding: 0;
+	text-align: left;
+	cursor: default;
+}
+.elementor-control-field.seopress-content-analyses .wrap-analysis-img h4 {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+}
+.elementor-control-field.seopress-content-analyses .wrap-analysis-img ul li img {
+	max-width: 150px;
+	max-height: 150px;
+	object-fit: cover;
+	border: 1px solid #f3f4f5;
+	cursor: default;
+	padding: 1px;
+}
+
+.elementor-control-field.seopress-content-analyses  .notice {
+	padding: 10px 14px;
+}
+
+.elementor-control-field.seopress-content-analyses  .dashicons {
+	vertical-align: middle;
+}
+
+.elementor-control-field.seopress-content-analyses #seopress-analysis-tabs {
+	clear: both;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.elementor-control-field.seopress-content-analyses  .inside {
+	margin: 0;
+	padding: 0;
+}
+
+.elementor-control-field.seopress-content-analyses  .ui-tabs .ui-tabs-nav {
+	display: inline-block;
+	min-height: 26px;
+	position: relative;
+	width: 100%;
+	z-index: 10;
+	margin: 0;
+	border-radius: 0;
+	padding: 0;
+	background: #f3f4f5;
+	border: none;
+}
+
+.elementor-control-field.seopress-content-analyses  .ui-helper-clearfix:after {
+	content: none;
+}
+
+.seopress_page_seopress-titles #seopress-tabs .form-table td,.seopress_page_seopress-titles .form-table td {
+	padding: 0;
+}
+
+.elementor-control-field.seopress-content-analyses  .ui-tabs .ui-tabs-panel {
+	background: #FFF;
+	border-radius: 0;
+	display: inline-block;
+	padding: 1em 1.4em;
+	width: 100%;
+	box-sizing: border-box;
+}
+.elementor-control-field.seopress-content-analyses .dashicons-info,.elementor-control-field.seopress-content-analyses  .ui-tabs .ui-tabs-panel .dashicons-info,#seopress_pro_cpt .dashicons-info {
+	font-size: 16px;
+	vertical-align: middle;
+	height: 16px;
+	width: 16px;
+}
+
+.elementor-control-field.seopress-content-analyses  .ui-tabs .ui-tabs-nav li,.elementor-control-field.seopress-content-analyses  .ui-tabs-anchor {
+	cursor: pointer!important;
+}
+
+.elementor-control-field.seopress-content-analyses  .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+	position: relative;
+	z-index: 60;
+	cursor: pointer;
+	border-radius: 0;
+	border-bottom: 3px solid #0085ba;
+}
+.elementor-control-field.seopress-content-analyses label,.elementor-control-field.seopress-content-analyses  #tabs-1 label,.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_breadcrumbs_meta],.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_canonical_meta],.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_primary_cat_meta],.elementor-control-field.seopress-content-analyses  #tabs-3 label,.elementor-control-field.seopress-content-analyses  #tabs-4 label,.elementor-control-field.seopress-content-analyses  #tabs-5 label,.elementor-control-field.seopress-content-analyses  #tabs-6 label,.elementor-control-field.seopress-content-analyses  .subsection-title {
+	display: block;
+	margin: 20px 0 5px;
+	font-weight: 700;
+}
+
+.elementor-control-field.seopress-content-analyses  .wp-color-result {
+	margin: 0;
+}
+.elementor-control-field.seopress-content-analyses input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-1 input,.elementor-control-field.seopress-content-analyses  #tabs-2 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-3 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-3 textarea,.elementor-control-field.seopress-content-analyses  #tabs-4 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-5 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-6 input[type=text],.elementor-control-field.seopress-content-analyses  #tabs-6 textarea {
+	width: 100%;
+	display: inline-block;
+}
+
+.elementor-control-field.seopress-content-analyses  #tabs-1 input {
+	width: 100%;
+}
+
+.elementor-control-field.seopress-content-analyses .dashicons-no-alt, .elementor-control-field.seopress-content-analyses .dashicons-yes {
+	color: #fff;
+	background: #12bd10;
+	border-radius: 50px;
+	margin-right: 10px;
+}
+
+.elementor-control-field.seopress-content-analyses .dashicons-no-alt {
+	background: #e25950;
+}
+
+.elementor-control-field.seopress-content-analyses .gr-analysis-content p {
+	font-size: 13px;
+	line-height: 1.5;
+	margin: 1em 0;
+}
+
+.elementor-control-field.seopress-content-analyses .gr-analysis-content ul {
+	margin: 13px 0;
+}
+
+.elementor-control-field.seopress-content-analyses .gr-analysis-content li {
+	margin-bottom: 6px;
+	line-height: 1.4;
+	font-size: 13px;
+}
+
+#seopress_launch_analysis {
+	background-color: #6d7882;
+	-webkit-box-shadow: 0 0 2px rgba(0,0,0,.12), 0 2px 2px rgba(0,0,0,.2);
+	box-shadow: 0 0 2px rgba(0,0,0,.12), 0 2px 2px rgba(0,0,0,.2);
+}
+
+#seopress_launch_analysis:hover {
+	opacity: 0.8;
+}

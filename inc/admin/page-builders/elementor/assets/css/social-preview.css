@@ -1,0 +1,444 @@
+.elementor-control-field.facebook-snippet-box .facebook-snippet-text {
+    border: 1px solid #dadde1;
+    background-color: #f2f3f5;
+    padding: 10px 12px;
+    max-width: 100%;
+    width: 100%;
+    margin-top: -2px;
+}
+
+.elementor-control-field.facebook-snippet-box
+    .facebook-snippet-text
+    .snippet-meta {
+    display: flex;
+    overflow: hidden;
+    max-height: 12px;
+}
+
+.elementor-control-field.facebook-snippet-box .fb-by,
+.elementor-control-field.facebook-snippet-box .snippet-fb-site-name,
+.elementor-control-field.facebook-snippet-box .snippet-fb-url {
+    color: #606770;
+    font-size: 10px;
+    white-space: normal;
+    line-height: 11px;
+    text-transform: uppercase;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+}
+
+.elementor-control-field.facebook-snippet-box .fb-sep {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #606770;
+    line-height: 11px;
+    font-size: 10px;
+}
+
+.elementor-control-field.facebook-snippet-box .snippet-fb-title {
+    font-size: 12px;
+    line-height: 14px;
+    margin: 3px 0 0;
+    padding-top: 2px;
+    color: #1d2129;
+    font-weight: 700;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.elementor-control-field.facebook-snippet-box .snippet-fb-description-custom {
+    color: #606770;
+    font-size: 10px;
+    line-height: 14px;
+    word-break: break-word;
+    font-family: Helvetica, Arial, sans-serif;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    width: 100%;
+    margin-top: 3px;
+}
+
+.elementor-control-field.facebook-snippet-box,
+.elementor-control-field.twitter-snippet-box {
+    color: #4b4f56;
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+.elementor-control-field.facebook-snippet-box .snippet-fb-img {
+    width: 100%;
+    position: relative;
+}
+
+.elementor-control-field.facebook-snippet-box img {
+    display: block;
+    height: 156px;
+    width: 100%;
+    object-fit: cover;
+    background-color: #edeff0;
+    text-align: center;
+    border-bottom: none;
+}
+
+.elementor-control-field.facebook-snippet-box img:after,
+.elementor-control-field.twitter-snippet-box img:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: #edeff0;
+    top: 0;
+    left: 0;
+    border: 1px solid #dadde1;
+}
+
+.elementor-control-field.twitter-snippet-box .snippet-twitter-img-default {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    height: 130px;
+    position: relative;
+    width: 100%;
+}
+
+.elementor-control-field.twitter-snippet-box img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    background-color: #edeff0;
+    text-align: center;
+    border-bottom: none;
+}
+
+.elementor-control-field.twitter-snippet-box .snippet-fb-description-custom {
+    word-break: break-all;
+}
+
+.elementor-control-field.twitter-snippet-box .twitter-snippet-text {
+    border: 1px solid #dadde1;
+    background-color: #fff;
+    padding: 8px 12px;
+    border-radius: 0 0 10px 10px;
+    margin-top: -2px;
+    width: 100%;
+}
+
+.elementor-control-field.twitter-snippet-box .snippet-twitter-title {
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    color: #000;
+    font-weight: 700;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.elementor-control-field.twitter-snippet-box .snippet-twitter-description {
+    color: #000;
+    font-size: 10px;
+    word-break: break-word;
+    font-family: Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    white-space: normal;
+    width: 100%;
+}
+
+.elementor-control-field.twitter-snippet-box .snippet-meta {
+    display: flex;
+    margin-top: 5px;
+}
+
+.elementor-control-field.twitter-snippet-box .snippet-twitter-url {
+    color: #8899a6;
+    font-size: 10px;
+    white-space: normal;
+    text-transform: uppercase;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+}
+
+.elementor-control-field.google-snippet-box .google-snippet-preview {
+    font-family: arial, sans-serif;
+    word-break: break-all;
+}
+
+.elementor-control-field.google-snippet-box .wrap-toggle-preview {
+    position: relative;
+    margin: 10px 0;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .wrap-snippet {
+    margin: 0 0 10px 0;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-radius: 8px;
+    padding: 12px 16px;
+    background: #fff;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .wrap-snippet
+    .wrap-m-icon-permalink,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-permalink {
+    display: none;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-permalink {
+    color: #006621;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .wrap-m-icon-permalink {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 12px;
+    display: flex;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-favicon {
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-favicon
+    img {
+    width: 16px;
+    height: 16px;
+    max-width: inherit;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-permalink {
+    color: #006621;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .wrap-m-icon-permalink
+    .snippet-permalink {
+    display: block;
+    color: #3c4043;
+    font-size: 12px;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-title,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-title-custom,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-title-default {
+    color: #1a0dab;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-title,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-title-custom,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-title-default {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 12px;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-description,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-description-custom,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview
+    .snippet-description-default {
+    color: #545454;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    display: inline;
+}
+
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-description,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-description-custom,
+.elementor-control-field.google-snippet-box
+    .google-snippet-preview.mobile-preview
+    .snippet-description-default {
+    color: #3c4043;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.elementor-control-field.google-snippet-box .wrap-toggle-preview p {
+    display: flex;
+    align-items: center;
+}
+
+.elementor-control-field.google-snippet-box input.toggle + label {
+    display: inline-block;
+    position: relative;
+    box-shadow: inset 0 0 0 1px #d5d5d5;
+    text-indent: -5000px;
+    height: 20px;
+    width: 40px;
+    border-radius: 15px;
+}
+
+.elementor-control-field.google-snippet-box input.toggle {
+    max-height: 0;
+    max-width: 0;
+    opacity: 0;
+    position: relative;
+}
+
+.elementor-control-field.google-snippet-box input.toggle + label {
+    margin: 0;
+}
+
+.elementor-control-field.google-snippet-box input.toggle + label {
+    display: inline-block;
+    position: relative;
+    box-shadow: inset 0 0 0 1px #d5d5d5;
+    text-indent: -5000px;
+    height: 20px;
+    width: 40px;
+    border-radius: 15px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.elementor-control-field.google-snippet-box
+    input.toggle[data-toggle="1"]
+    + label:before {
+    width: 40px;
+    background: #3197d3;
+}
+
+.elementor-control-field.google-snippet-box input.toggle + label:before {
+    content: "";
+    position: absolute;
+    display: block;
+    height: 20px;
+    width: 30px;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+    background: rgba(19, 191, 17, 0);
+    -moz-transition: 0.25s ease-in-out;
+    -webkit-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
+}
+
+.elementor-control-field.google-snippet-box input.toggle + label:after {
+    content: "";
+    position: absolute;
+    display: block;
+    height: 20px;
+    width: 20px;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+    -moz-transition: 0.25s ease-in-out;
+    -webkit-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
+}
+
+.elementor-control-field.google-snippet-box
+    input.toggle[data-toggle="1"]
+    + label:after {
+    left: 20px;
+    box-shadow: inset 0 0 0 1px #3197d3, 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.notice,
+div.error,
+div.updated {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-left-width: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    margin: 5px 15px 2px;
+    padding: 1px 12px;
+}
+
+.notice-info {
+    border-left-color: #00a0d2;
+}
+
+.facebook-snippet-box .notice,
+.twitter-snippet-box .notice {
+    padding: 10px 14px;
+    margin: 0 0 10px 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.notice-error,
+div.error {
+    border-left-color: #dc3232;
+}
+
+.snippet-fb-img-alert,
+.snippet-twitter-img-alert {
+    width: 100%;
+}
+
+.facebook-snippet-box .notice span,
+.twitter-snippet-box .notice span {
+    font-weight: 700;
+}
