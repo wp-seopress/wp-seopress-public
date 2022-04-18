@@ -1,0 +1,445 @@
+html {
+	background-color: #f6f7f7;
+	margin: 0;
+}
+body.seopress-setup {
+	box-shadow: none;
+	background: #f6f7f7;
+	padding: 0;
+	margin: 0;
+	max-width: 100%;
+	border: none;
+}
+body.seopress-setup input[type="text"], body.seopress-setup input[type="password"], body.seopress-setup input[type="number"], body.seopress-setup textarea, body.seopress-setup select {
+    min-width: inherit;
+    width: 100%;
+    display: inline-block;
+}
+body.seopress-setup label {
+    width: 100%;
+    display: inline-block;
+}
+.media-frame-title h1,
+.uploader-inline h2 {
+    border: none;
+}
+.seopress-setup .wrap iframe {
+    max-width: 100%;
+}
+.wp-core-ui select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="color"]:focus,
+input[type="date"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="email"]:focus,
+input[type="month"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="time"]:focus,
+input[type="url"]:focus,
+input[type="week"]:focus,
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+select:focus,
+textarea:focus {
+	border-color: var(--backgroundPrimary);
+	box-shadow: 0 0 0 1px var(--backgroundPrimary);
+	outline: 2px solid transparent;
+}
+.spinner {
+	display: inline-block;
+	vertical-align: middle;
+}
+.seopress-setup-content {
+    width: 100%;
+    padding: 25px 40px 40px;
+}
+.admin_page_seopress_csv_importer.seopress-styles .seopress-option {
+    margin: 40px auto;
+    background: #fff;
+    padding: 10px 1.5rem;
+    display: block;
+    max-width: 700px;
+}
+.admin_page_seopress_csv_importer .description {
+	color: var(--color);
+	margin-top: 4px;
+	display: block;
+}
+.admin_page_seopress_csv_importer .description code {
+	background: 0 0;
+	padding: 0;
+	white-space: pre-line;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+.admin_page_seopress_csv_importer .seopress-setup-content table thead th {
+	font-weight: bold;
+}
+.admin_page_seopress_csv_importer
+	.seopress-setup-content
+	table
+	tr:nth-child(odd)
+	td {
+	background: #fbfbfb;
+}
+.admin_page_seopress_csv_importer .seopress-setup-content table td select {
+	width: 100%;
+}
+.admin_page_seopress_csv_importer .seopress-wizard-services {
+	padding: 0;
+}
+.seopress-setup .seopress-setup-footer {
+    padding: 0 40px 20px;
+    position: relative;
+    width: 100%;
+}
+.admin_page_seopress_csv_importer.seopress-setup .seopress-setup-content {
+    max-width: inherit;
+    margin: 0 auto 20px;
+}
+table.seopress-importer-mapping-table,
+table.seopress-importer-error-log-table {
+    border: none;
+    box-shadow: none;
+}
+.seopress-importer-mapping-table tr:nth-child(odd) {
+    background: #fbfbfb;
+}
+.seopress-importer-done,
+.seopress-progress-form-content {
+    padding: 0 0 20px 0;
+}
+.seopress-setup-content h1,
+.seopress-setup-content h2,
+.seopress-setup-content h3,
+.seopress-setup-content table {
+	margin: 30px 0 10px;
+	border: 0;
+	padding: 0;
+	color: var(--colorDark);
+	clear: none;
+	font-weight: 500;
+}
+.seopress-setup-content p {
+	font-size: var(--fontSize);
+}
+.seopress-setup-content p.intro {
+    font-weight: bold;
+    font-size: 14px;
+}
+#seopress-tabs.wrap ul {
+    display: inline-block;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 0 0 5px;
+    list-style: none;
+}
+.seopress-setup-content table {
+	font-size: var(--fontSize);
+}
+.seopress-setup-content .m0 {
+	margin: 0;
+}
+.seopress-option .section-tool::after {
+	content: none;
+}
+.seopress-setup-content .seopress-setup-next-steps {
+	margin: 0 0 24px;
+	padding-bottom: 2px;
+}
+.seopress-setup-content .seopress-setup-next-steps h2 {
+	margin-bottom: 12px;
+}
+.seopress-setup-content
+	.seopress-setup-next-steps
+	.seopress-setup-next-steps-first {
+	float: left;
+	width: 50%;
+}
+.seopress-setup-content
+	.seopress-setup-next-steps
+	.seopress-setup-next-steps-last {
+	float: right;
+	width: 50%;
+}
+.seopress-setup-content .seopress-setup-next-steps ul {
+	padding: 0 2em 0 0;
+	list-style: none outside;
+	margin: 0;
+}
+.seopress-setup-content .seopress-setup-next-steps ul li a {
+	display: block;
+	padding: 0 0 0.75em;
+}
+.seopress-setup-content .seopress-setup-next-steps ul li a::before {
+	color: var(--color);
+	font: normal 20px/1 'dashicons';
+	speak: none;
+	display: inline-block;
+	padding: 0 10px 0 0;
+	top: 1px;
+	position: relative;
+	text-decoration: none !important;
+	vertical-align: top;
+}
+.seopress-setup-steps {
+	padding: 0 10px;
+	margin: 0;
+	list-style: none outside;
+	color: var(--color);
+	width: 100%;
+	height: 60px;
+	border-bottom: 1px solid var(--borderColorCard);
+	align-items: center;
+	justify-content: center;
+	background: #fff;
+	display: inline-flex;
+}
+.seopress-setup-steps li {
+	width: 100%;
+	display: flex;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	position: relative;
+	line-height: 24px;
+	font-size: 16px;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.seopress-setup-steps li .icon {
+	margin-left: 10px;
+}
+.seopress-setup-steps li a {
+	text-decoration: none;
+	position: relative;
+	z-index: 1;
+	color: var(--colorDark);
+	line-height: 24px;
+	font-size: 16px;
+	transition: color 300ms linear;
+}
+.seopress-setup-steps li .icon::after {
+	content: attr(data-step);
+	border: 1px solid var(--borderColorLight40);
+	border-radius: 100%;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	background: var(--borderColorLight40);
+	line-height: 24px;
+	color: var(--color);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 10px;
+}
+.seopress-setup-steps li.active .icon::after {
+	background: var(--backgroundPrimary);
+	color: #fff;
+	border: 1px solid var(--backgroundPrimary);
+}
+.seopress-setup-steps li.active {
+	color: var(--backgroundPrimary);
+	font-weight: 700;
+	text-decoration: none;
+	position: relative;
+	z-index: 1;
+	color: var(--colorDark);
+	line-height: 24px;
+}
+.seopress-setup-steps li .divider {
+	flex-grow: 1;
+	border-bottom: 1px solid var(--borderColorLight40);
+	margin-left: 10px;
+}
+.seopress-setup-steps li.done .icon::after {
+	content: "\f15e";
+	font-family: "dashicons";
+	color: #fff;
+	background: var(--backgroundPrimary);
+	border: 1px solid var(--backgroundPrimary);
+}
+.seopress-setup .seopress-setup-actions {
+    margin:20px auto;
+    position:relative;
+}
+.seopress-setup-footer-links {
+	font-size: 0.85em;
+	color: var(--color);
+	margin: 1.18em auto;
+	display: inline-block;
+	text-align: center;
+}
+.no_nav_menu .seopress-setup-steps {
+	display: none;
+}
+.seopress-setup.no_nav_menu .seopress-setup-content {
+	max-width: 50rem;
+}
+.seopress-setup.no_nav_menu p.seopress-setup-actions {
+    font-size: 18px;
+}
+.seopress-setup-sub-steps {
+    padding: 0;
+}
+.seopress-wizard-services {
+	border-bottom: 1px solid var(--borderColorLight40);
+	padding: 0 0 20px 0;
+	margin: 0 0 20px 0;
+	list-style: none;
+	display: inline-block;
+	width: 100%;
+}
+.seopress-wizard-services:first-child {
+	border-top: 1px solid var(--borderColorLight40);
+	padding-top: 20px;
+}
+.seopress-wizard-services ul {
+	padding: 0;
+}
+.seopress-wizard-services p {
+	margin: 0 0 1em 0;
+	padding: 0;
+	font-size: 1em;
+	line-height: 1.5em;
+}
+.seopress-wizard-services h3 {
+    margin: 2rem 0 1rem 0;
+}
+.seopress-wizard-service-item {
+	display: flex;
+	flex-wrap: nowrap;
+	padding: 0;
+	align-items: center;
+	margin: 1rem 0;
+}
+.seopress-wizard-service-item {
+	margin-top: 0;
+}
+.description {
+    margin: 0 0 2em 0;
+}
+.seopress-wizard-service-item:last-child {
+	border-bottom: 0;
+}
+.seopress-wizard-services.manual .seopress-wizard-service-item {
+	display: none;
+}
+.seopress-wizard-next-steps {
+	border-radius: 4px;
+	list-style: none;
+	padding: 0;
+}
+.seopress-wizard-next-steps li {
+	padding: 0;
+}
+.seopress-wizard-next-steps .seopress-wizard-next-step-item {
+	display: flex;
+	border-top: 1px solid var(--borderColorLight40);
+}
+.seopress-wizard-next-steps .seopress-wizard-next-step-item:first-child {
+	border-top: 0;
+}
+.seopress-wizard-next-steps .seopress-wizard-next-step-description {
+	padding: 20px;
+	flex-grow: 1;
+}
+.seopress-wizard-next-steps .seopress-wizard-next-step-action {
+	flex-grow: 0;
+	display: flex;
+	align-items: center;
+	padding: 0 20px;
+	margin: 0;
+}
+.seopress-wizard-next-steps p.next-step-heading {
+	margin: 0;
+	font-variant: all-petite-caps;
+}
+.seopress-wizard-next-steps p.next-step-extra-info {
+	margin: 0;
+}
+.seopress-wizard-next-steps h3.next-step-description {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 600;
+}
+.seopress-wizard-next-steps .seopress-wizard-additional-steps {
+	border-top: 1px solid var(--borderColorLight40);
+}
+
+.seopress-wizard-next-steps
+	.seopress-wizard-additional-steps
+	.seopress-wizard-next-step-description {
+	margin-bottom: 0;
+}
+.seopress-wizard-next-steps
+	.seopress-wizard-additional-steps
+	.seopress-setup-actions {
+	margin: 0 0 1.5em 0;
+}
+.seopress-wizard-next-steps
+	.seopress-wizard-additional-steps
+	.seopress-setup-actions a {
+        margin: 0 0 1em 0;
+    }
+.seopress-setup-content .recommended-step {
+	padding: 0;
+	display: inline-block;
+	width: 100%;
+}
+.seopress-setup-content .recommended-step a {
+	text-decoration: none;
+}
+@media only screen and (max-width: 768px) {
+	.seopress-setup .seopress-setup-content {
+		margin: 25px auto 24px;
+	}
+	#seopress-logo img {
+		max-width: 80%;
+	}
+	.seopress-wizard-service-item {
+		flex-wrap: wrap;
+	}
+	.seopress-wizard-service-item .seopress-wizard-service-enable {
+		order: 2;
+		padding: 20px 0 0;
+	}
+	.seopress-wizard-service-item .seopress-wizard-service-description {
+		order: 3;
+	}
+	.seopress-wizard-service-item .seopress-wizard-service-name {
+		padding: 20px 20px 0;
+		justify-content: space-between !important;
+	}
+	.seopress-wizard-service-item .seopress-wizard-service-name img {
+		margin: 0;
+	}
+	.seopress-wizard-next-steps .seopress-wizard-next-step-item {
+		flex-wrap: wrap;
+	}
+	.seopress-wizard-next-steps
+		.seopress-wizard-next-step-item
+		.seopress-wizard-next-step-description {
+		margin-bottom: 0;
+	}
+	.seopress-wizard-next-steps
+		.seopress-wizard-next-step-item
+		.seopress-wizard-next-step-action
+		p {
+		margin: 0;
+	}
+	.seopress-setup-steps li a {
+		text-indent: -9999px;
+		position: absolute;
+		left: calc(50% - 24px);
+		top: -10px;
+	}
+	.seopress-setup-steps li span {
+		display: none;
+	}
+}
