@@ -19,12 +19,14 @@ function seopress_wpseo_migration() {
         global $wpdb;
 
         $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
+        $total_count_terms = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->terms}");
 
         $increment = 200;
         global $post;
 
         if ($offset > $total_count_posts) {
             wp_reset_query();
+            $count_items = $total_count_posts;
 
             $args = [
                 'hide_empty' => false,
@@ -118,8 +120,18 @@ function seopress_wpseo_migration() {
                 }
             }
             $offset += $increment;
+
+            if ($offset >= $total_count_posts) {
+                $count_items = $total_count_posts;
+            } else {
+                $count_items = $offset;
+            }
         }
         $data           = [];
+
+        $data['count']          = $count_items;
+        $data['total']          = $total_count_posts + $total_count_terms;
+
         $data['offset'] = $offset;
         wp_send_json_success($data);
         exit();

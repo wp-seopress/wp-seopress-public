@@ -32,6 +32,34 @@ function seopress_redirections_term_enabled() {
     return $value;
 }
 
+//Login status
+function seopress_redirections_logged_status() {
+	if (is_home() && get_option( 'page_for_posts' ) !='' && get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_logged_status',true)) {
+		$seopress_redirections_logged_status = get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_logged_status',true);
+		return $seopress_redirections_logged_status;
+	} else {
+		global $post;
+		if ($post) {
+			if (get_post_meta($post->ID,'_seopress_redirections_logged_status',true)) {
+				$seopress_redirections_logged_status = get_post_meta($post->ID,'_seopress_redirections_logged_status',true);
+				return $seopress_redirections_logged_status;
+			}
+		}
+	}
+}
+function seopress_redirections_term_logged_status() {
+	if (!get_queried_object_id()) {
+        return;
+	}
+
+    $value = get_term_meta(get_queried_object_id(),'_seopress_redirections_logged_status',true);
+    if (empty($value)) {
+        return;
+    }
+
+    return $value;
+}
+
 //Type
 function seopress_redirections_type() {
 	if (is_home() && get_option( 'page_for_posts' ) !='' && get_post_meta(get_option( 'page_for_posts' ),'_seopress_redirections_type',true)) {
@@ -105,16 +133,25 @@ function seopress_redirections_hook() {
 		return;
 	}
 
+    $metaValueByLoggedIn = \is_user_logged_in() ? 'only_logged_in' : 'only_not_logged_in';
+
+    // Term
 	if ((is_tax() || is_category() || is_tag()) && seopress_redirections_term_enabled() =='yes') {
-		if (seopress_redirections_term_type() && seopress_redirections_value() !='') {
-			header('Location:'.seopress_redirections_value(), true, seopress_redirections_term_type());
-			exit();
-		}
-	} elseif (seopress_redirections_enabled() =='yes') {
-		if (seopress_redirections_type() && seopress_redirections_value() !='') {
-			header('Location:'.seopress_redirections_value(), true, seopress_redirections_type());
-			exit();
-		}
+        if (seopress_redirections_term_logged_status() === $metaValueByLoggedIn || seopress_redirections_term_logged_status() === 'both' || empty(seopress_redirections_term_logged_status())) {
+            if (seopress_redirections_term_type() && seopress_redirections_value() !='') {
+                wp_redirect( seopress_redirections_value(), seopress_redirections_term_type() );
+                exit();
+            }
+        }
+	}
+    // Post
+    elseif (seopress_redirections_enabled() =='yes') {
+        if (seopress_redirections_logged_status() === $metaValueByLoggedIn || seopress_redirections_logged_status() === 'both' || empty(seopress_redirections_logged_status())) {
+            if (seopress_redirections_type() && seopress_redirections_value() !='') {
+                wp_redirect( seopress_redirections_value(), seopress_redirections_type() );
+                exit();
+            }
+        }
 	}
 }
 add_action('template_redirect', 'seopress_redirections_hook', 1);

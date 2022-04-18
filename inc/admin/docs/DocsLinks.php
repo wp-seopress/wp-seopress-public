@@ -70,6 +70,13 @@ function seopress_get_docs_links()
                 'ecommerce'         => 'https://www.seopress.org/fr/support/guides/configurer-le-commerce-electronique-ameliore-pour-google-analytics/' . $utm,
                 'events'            => 'https://www.seopress.org/fr/support/guides/suivre-vos-telechargements-liens-affilies-sortants-et-externes-google-analytics/' . $utm,
                 'ga4_property'      => 'https://support.google.com/analytics/answer/9744165?hl=en&ref_topic=9303319#analyticsjs',
+                'api' => [
+                    'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=fr',
+                    'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=fr'
+                ],
+                'clarity' => [
+                    'project' => 'https://www.seopress.org/fr/support/guides/trouver-mon-id-de-project-microsoft-clarity/' . $utm,
+                ]
             ],
             'compatibility' => [
                 'automatic' => 'https://www.seopress.org/fr/support/guides/generez-automatiquement-les-metas-descriptions-depuis-divi-oxygen-builder-fusion-builder/' . $utm,
@@ -78,6 +85,7 @@ function seopress_get_docs_links()
                 'metaboxe_seo'        => 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-seo-par-types-de-contenu/' . $utm,
                 'metaboxe_ca'         => 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-danalyse-de-contenu-par-types-de-contenu/' . $utm,
                 'metaboxe_data_types' => 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-types-de-donnees-structurees-par-types-de-contenu/' . $utm,
+                'ga_widget'           => 'https://www.seopress.org/fr/support/hooks/filtrer-la-capacite-du-widget-google-analytics-du-tableau-de-bord/' . $utm,
             ],
             'google_preview' => [
                 'authentification' => 'https://www.seopress.org/fr/support/hooks/filtrer-la-requete-distante-google-snippet-preview/' . $utm,
@@ -106,9 +114,11 @@ function seopress_get_docs_links()
             'page_speed' => [
                 'cwv' => 'https://www.seopress.org/fr/newsroom/reportage/les-core-web-vitals-et-leurs-effets-sur-le-seo-des-sites-wordpress/' . $utm,
                 'api' => 'https://www.seopress.org/fr/support/guides/ajouter-cle-api-google-page-speed-insights-seopress/' . $utm,
+                'google' => 'https://console.cloud.google.com/apis/library/pagespeedonline.googleapis.com?hl=fr',
             ],
             'indexing_api' => [
                 'google' => 'https://www.seopress.org/fr/support/guides/api-google-instant-indexing-avec-seopress/' . $utm,
+                'api' => 'https://console.cloud.google.com/apis/library/indexing.googleapis.com?hl=fr',
             ],
             'tools' => [
                 'csv_import' => 'https://www.seopress.org/fr/support/guides/importer-metadonnees-csv-seopress-pro/' . $utm,
@@ -118,6 +128,10 @@ function seopress_get_docs_links()
                 'account'        => 'https://www.seopress.org/fr/mon-compte/' . $utm,
                 'license_errors' => 'https://www.seopress.org/fr/support/guides/activer-votre-licence-seopress-pro-insights/' . $utm,
             ],
+            'addons' => [
+                'pro' => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-pro/' . $utm,
+                'insights' => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-insights/' . $utm,
+            ]
         ];
     } else {
         $docs = [
@@ -178,6 +192,13 @@ function seopress_get_docs_links()
                 'ecommerce'         => 'https://www.seopress.org/support/guides/how-to-setup-google-enhanced-ecommerce/' . $utm,
                 'events'            => 'https://www.seopress.org/support/guides/how-to-track-file-downloads-affiliates-outbound-and-external-links-with-google-analytics/' . $utm,
                 'ga4_property'      => 'https://support.google.com/analytics/answer/9744165?hl=en&ref_topic=9303319#analyticsjs',
+                'api' => [
+                    'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=en',
+                    'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=en'
+                ],
+                'clarity' => [
+                    'project' => 'https://www.seopress.org/support/guides/find-my-microsoft-clarity-project-id/' . $utm,
+                ]
             ],
             'compatibility' => [
                 'automatic' => 'https://www.seopress.org/support/guides/generate-automatic-meta-description-from-page-builders/' . $utm,
@@ -186,6 +207,7 @@ function seopress_get_docs_links()
                 'metaboxe_seo'        => 'https://www.seopress.org/support/hooks/filter-seo-metaboxe-call-by-post-type/' . $utm,
                 'metaboxe_ca'         => 'https://www.seopress.org/support/hooks/filter-content-analysis-metabox-call-by-post-type/' . $utm,
                 'metaboxe_data_types' => 'https://www.seopress.org/support/hooks/filter-structured-data-types-metabox-call-by-post-type/' . $utm,
+                'ga_widget'           => 'https://www.seopress.org/support/hooks/filter-google-analytics-dashboard-widget-capability/' . $utm,
             ],
             'google_preview' => [
                 'authentification' => 'https://www.seopress.org/support/hooks/filter-google-snippet-preview-remote-request/' . $utm,
@@ -214,9 +236,11 @@ function seopress_get_docs_links()
             'page_speed' => [
                 'cwv' => 'https://www.seopress.org/newsroom/featured-stories/core-web-vitals-and-wordpress-seo/' . $utm,
                 'api' => 'https://www.seopress.org/support/guides/add-your-google-page-speed-insights-api-key-to-seopress/' . $utm,
+                'google' => 'https://console.cloud.google.com/apis/library/pagespeedonline.googleapis.com?hl=en',
             ],
             'indexing_api' => [
                 'google' => 'https://www.seopress.org/support/guides/google-indexing-api-with-seopress/' . $utm,
+                'api' => 'https://console.cloud.google.com/apis/library/indexing.googleapis.com?hl=en',
             ],
             'tools' => [
                 'csv_import' => 'https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/' . $utm,
@@ -226,6 +250,10 @@ function seopress_get_docs_links()
                 'account'        => 'https://www.seopress.org/account/' . $utm,
                 'license_errors' => 'https://www.seopress.org/support/guides/activate-seopress-pro-license/' . $utm,
             ],
+            'addons' => [
+                'pro' => 'https://www.seopress.org/wordpress-seo-plugins/pro/' . $utm,
+                'insights' => 'https://www.seopress.org/wordpress-seo-plugins/insights/' . $utm,
+            ]
         ];
     }
 

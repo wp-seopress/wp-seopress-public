@@ -66,9 +66,10 @@ class RobotSettings implements ExecuteHooks
      */
     public function processPut(\WP_REST_Request $request)
     {
+        $id     = $request->get_param('id');
+
         $metas = MetaRobotSettingsHelper::getMetaKeys($id);
 
-        $id     = $request->get_param('id');
         $params = $request->get_params();
 
         try {

@@ -633,11 +633,6 @@ esc_textarea($check)); ?>
 <p class="description">
     <?php _e('This code will be added in the head section of your page.', 'wp-seopress'); ?>
 </p>
-    <div class="seopress-notice is-warning">
-        <p>
-            <?php _e('<strong>GA4 or Universal Analytics</strong> codes are <strong>automatically added to your source code</strong> if you have enter your <strong>Measurement ID and / or your Universal Analytics ID</strong> from <strong>General</strong> tab.', 'wp-seopress'); ?>
-        </p>
-    </div>
 <?php
 }
 
@@ -1259,4 +1254,41 @@ function seopress_google_analytics_matomo_no_heatmaps_callback() {
 <?php if (isset($options['seopress_google_analytics_matomo_no_heatmaps'])) {
         esc_attr($options['seopress_google_analytics_matomo_no_heatmaps']);
     }
+}
+function seopress_google_analytics_clarity_enable_callback() {
+    $options = get_option('seopress_google_analytics_option_name');
+    $check   = isset($options['seopress_google_analytics_clarity_enable']); ?>
+
+
+<label for="seopress_google_analytics_clarity_enable">
+    <input id="seopress_google_analytics_clarity_enable"
+        name="seopress_google_analytics_option_name[seopress_google_analytics_clarity_enable]" type="checkbox" <?php if ('1' == $check) { ?>
+    checked="yes"
+    <?php } ?>
+    value="1"/>
+    <?php _e('Add Microsoft Clarity code to your site', 'wp-seopress'); ?>
+</label>
+
+<?php if (isset($options['seopress_google_analytics_clarity_enable'])) {
+        esc_attr($options['seopress_google_analytics_clarity_enable']);
+    }
+}
+
+function seopress_google_analytics_clarity_project_id_callback() {
+    $docs = seopress_get_docs_links();
+    $options = get_option('seopress_google_analytics_option_name');
+    $check   = isset($options['seopress_google_analytics_clarity_project_id']) ? $options['seopress_google_analytics_clarity_project_id'] : null;
+
+    printf(
+'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_clarity_project_id]" placeholder="' . esc_html__('Enter your Project ID', 'wp-seopress') . '" aria-label="' . __('Enter your Project ID', 'wp-seopress') . '" value="%s"/>',
+esc_html($check)
+); ?>
+
+<p class="seopress-help description">
+    <span class="dashicons dashicons-external"></span>
+    <a href="<?php echo $docs['analytics']['clarity']['project']; ?>" target="_blank">
+        <?php _e('Find your project ID', 'wp-seopress'); ?>
+    </a>
+</p>
+<?php
 }

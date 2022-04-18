@@ -70,7 +70,7 @@ $docs = seopress_get_docs_links();
                             <?php _e('Twitter cards tags (title, description, image)', 'wp-seopress'); ?>
                         </li>
                         <li>
-                            <?php _e('Redirection (enable, type, URL)', 'wp-seopress'); ?>
+                            <?php _e('Redirection (enable, login status, type, URL)', 'wp-seopress'); ?>
                         </li>
                         <li>
                             <?php _e('Primary category', 'wp-seopress'); ?>
@@ -116,7 +116,7 @@ $docs = seopress_get_docs_links();
                             <?php _e('Twitter cards tags (title, description, image)', 'wp-seopress'); ?>
                         </li>
                         <li>
-                            <?php _e('Redirection (enable, type, URL)', 'wp-seopress'); ?>
+                            <?php _e('Redirection (enable, login status, type, URL)', 'wp-seopress'); ?>
                         </li>
                         <li>
                             <?php _e('Primary category', 'wp-seopress'); ?>
@@ -298,7 +298,7 @@ $docs = seopress_get_docs_links();
                     <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="seopress_action" value="reset_settings" />
                         <?php wp_nonce_field('seopress_reset_nonce', 'seopress_reset_nonce'); ?>
-                        <?php sp_submit_button(__('Reset settings', 'wp-seopress'), 'btn btnSecondary'); ?>
+                        <?php sp_submit_button(__('Reset settings', 'wp-seopress'), 'btn btnSecondary is-deletable'); ?>
                     </form>
                 </div><!-- .inside -->
             </div><!-- .postbox -->

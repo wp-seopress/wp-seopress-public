@@ -234,7 +234,7 @@
                     seopress_notification($args);
                 }
             }
-            if ('1' != get_theme_support('title-tag')) {
+            if ('1' != get_theme_support('title-tag') && true !== wp_is_block_theme()) {
                 function seopress_get_hidden_notices_title_tag_option()
                 {
                     $seopress_get_hidden_notices_title_tag_option = get_option('seopress_notices');
@@ -1071,7 +1071,7 @@
                                     'high' => __('High impact', 'wp-seopress'),
                                 ],
                                 'link' => [
-                                    'en'       => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_robots'),
+                                    'en'       => is_multisite() ? network_admin_url('admin.php?page=seopress-network-option#tab=tab_seopress_robots') : admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_robots'),
                                     'title'    => __('Fix this!', 'wp-seopress'),
                                     'external' => false,
                                 ],

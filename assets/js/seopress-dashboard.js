@@ -74,6 +74,10 @@ jQuery(document).ready(function ($) {
     features.forEach(function (item) {
         $('#toggle-' + item).on('click', function () {
             $('#toggle-' + item).attr('data-toggle', $('#toggle-' + item).attr('data-toggle') == '1' ? '0' : '1');
+
+            $(this).siblings('#titles-state-default').toggleClass('feature-state-off');
+            $(this).siblings('#titles-state').toggleClass('feature-state-off');
+
             $.ajax({
                 method: 'POST',
                 url: seopressAjaxToggleFeatures.seopress_toggle_features,
@@ -83,7 +87,7 @@ jQuery(document).ready(function ($) {
                     feature_value: $('#toggle-' + item).attr('data-toggle'),
                     _ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
                 },
-                success: function (data) {
+                success: function () {
                     window.history.pushState("", "", window.location.href + "&settings-updated=true");
                     $('#seopress-notice-save').show();
                     $('#seopress-notice-save').delay(3500).fadeOut();

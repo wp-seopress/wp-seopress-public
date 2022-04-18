@@ -9,7 +9,14 @@ function print_section_instant_indexing_general() {
         <?php _e('Instant Indexing', 'wp-seopress'); ?>
     </h2>
 </div>
+
 <p><?php _e('You can use the Indexing API to tell Google & Bing to update or remove pages from the Google / Bing index. The process can takes few minutes. You can submit your URLs in batches of 100 (max 200 request per day for Google).','wp-seopress'); ?></p>
+
+<p class="seopress-help">
+    <span class="dashicons dashicons-external"></span>
+    <a href="<?php echo $docs['indexing_api']['google']; ?>" target="_blank"><?php _e('401 / 403 error?','wp-seopress'); ?></a>
+</p>
+
 <div class="seopress-notice">
     <h3><?php _e('How does this work?', 'wp-seopress'); ?></h3>
     <ol>

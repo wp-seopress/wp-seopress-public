@@ -18,12 +18,14 @@ function seopress_wp_meta_seo_migration() {
 
         global $wpdb;
         $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
+        $total_count_terms = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->terms}");
 
         $increment = 200;
         global $post;
 
         if ($offset > $total_count_posts) {
             wp_reset_query();
+            $count_items = $total_count_posts;
 
             $args = [
                 'hide_empty' => false,
@@ -32,6 +34,7 @@ function seopress_wp_meta_seo_migration() {
             $wp_meta_seo_query_terms = get_terms($args);
 
             if ($wp_meta_seo_query_terms) {
+
                 foreach ($wp_meta_seo_query_terms as $term_id) {
                     if ('' != get_term_meta($term_id, 'wpms_category_metatitle', true)) { //Import title tag
                         update_term_meta($term_id, '_seopress_titles_title', get_term_meta($term_id, 'wpms_category_metatitle', true));
@@ -82,8 +85,18 @@ function seopress_wp_meta_seo_migration() {
                 }
             }
             $offset += $increment;
+
+            if ($offset >= $total_count_posts) {
+                $count_items = $total_count_posts;
+            } else {
+                $count_items = $offset;
+            }
         }
         $data           = [];
+
+        $data['count']          = $count_items;
+        $data['total']          = $total_count_posts + $total_count_terms;
+
         $data['offset'] = $offset;
         wp_send_json_success($data);
         exit();

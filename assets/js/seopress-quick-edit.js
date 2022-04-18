@@ -22,8 +22,8 @@
             var $post_row = $('#post-' + $post_id);
 
             // get the data
-            var $seopress_title = $('.column-seopress_title', $post_row).text();
-            var $seopress_desc = $('.column-seopress_desc', $post_row).text();
+            var $seopress_title = $('.column-seopress_title .hidden', $post_row).text();
+            var $seopress_desc = $('.column-seopress_desc .hidden', $post_row).text();
             var $seopress_tkw = $('.column-seopress_tkw', $post_row).text();
             var $seopress_canonical = $('.column-seopress_canonical', $post_row).text();
             var $seopress_noindex = $('.column-seopress_noindex', $post_row).html();

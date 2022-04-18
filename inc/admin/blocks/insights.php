@@ -89,7 +89,7 @@
                         $ps_score = '';
                         $core_web_vitals_score = '';
                         if (! empty($seopress_page_speed_results)) {
-                            $ps_score = seopress_pro_get_ps_score($seopress_page_speed_results);
+                            $ps_score = seopress_pro_get_ps_score($seopress_page_speed_results, true);
                             $ps_score_desktop = seopress_pro_get_ps_score($seopress_page_speed_desktop_results);
                             $core_web_vitals_score = seopress_pro_get_cwv_score($seopress_page_speed_results);
                         }
@@ -123,11 +123,12 @@
                                             <?php _e('Core Web Vitals Assessment: ', 'wp-seopress'); ?>
 
                                             <?php if ($core_web_vitals_score === true) { ?>
-                                            <span class="green"><?php _e('Passed', 'wp-seopress'); ?></span>
+                                            <span class="green"><?php _e('Passed', 'wp-seopress-pro'); ?></span>
+                                            <?php } elseif ($core_web_vitals_score === null) { ?>
+                                            <span class="red"><?php _e('No data found', 'wp-seopress-pro'); ?></span>
                                             <?php } else { ?>
-                                            <span class="red"><?php _e('Failed', 'wp-seopress'); ?></span>
-                                            <?php }
-                                            echo $core_web_vitals_score; ?>
+                                            <span class="red"><?php _e('Failed', 'wp-seopress-pro'); ?></span>
+                                            <?php } ?>
                                         </h3>
                                         <p><?php printf(__('Computed from the %s Core Web Vitals metrics over the latest 28-day collection period.', 'wp-seopress'), $cwv_svg); ?></p>
                                     </div>

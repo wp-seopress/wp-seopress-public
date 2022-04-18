@@ -51,9 +51,8 @@ class ModuleMetabox implements ExecuteHooks
             $dependencies = array_merge($dependencies, ['wp-components', 'wp-edit-post', 'wp-plugins']);
         }
 
-        $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         wp_enqueue_media();
-        wp_enqueue_script('seopress-metabox', SEOPRESS_URL_DIST . '/metaboxe' . $prefix . '.js', $dependencies, SEOPRESS_VERSION, true);
+        wp_enqueue_script('seopress-metabox', SEOPRESS_URL_DIST . '/metaboxe.js', $dependencies, SEOPRESS_VERSION, true);
         $value = wp_create_nonce('seopress_rest');
 
         $tags = seopress_get_service('TagsToString')->getTagsAvailable([

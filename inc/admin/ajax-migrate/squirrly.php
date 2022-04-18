@@ -64,6 +64,7 @@ function seopress_squirrly_migration() {
             $offset = 'done';
         }
         $data           = [];
+
         $data['offset'] = $offset;
         wp_send_json_success($data);
         exit();

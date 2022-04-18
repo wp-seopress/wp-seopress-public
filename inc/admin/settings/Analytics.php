@@ -54,7 +54,7 @@ add_settings_section(
 
 add_settings_field(
     'seopress_google_analytics_hook', // ID
-    __('Where to display the cookie bar?', 'wp-seopress'), // Title
+    __('Where to load the cookie bar?', 'wp-seopress'), // Title
     'seopress_google_analytics_hook_callback', // Callback
     'seopress-settings-admin-google-analytics-gdpr', // Page
     'seopress_setting_section_google_analytics_gdpr' // Section
@@ -279,30 +279,6 @@ add_settings_field(
 );
 
 add_settings_field(
-    'seopress_google_analytics_other_tracking', // ID
-    __('[HEAD] Add an additional tracking code (like Facebook Pixel, Hotjar...)', 'wp-seopress'), // Title
-    'seopress_google_analytics_other_tracking_callback', // Callback
-    'seopress-settings-admin-google-analytics-features', // Page
-    'seopress_setting_section_google_analytics_features' // Section
-);
-
-add_settings_field(
-    'seopress_google_analytics_other_tracking_body', // ID
-    __('[BODY] Add an additional tracking code (like Google Tag Manager...)', 'wp-seopress'), // Title
-    'seopress_google_analytics_other_tracking_body_callback', // Callback
-    'seopress-settings-admin-google-analytics-features', // Page
-    'seopress_setting_section_google_analytics_features' // Section
-);
-
-add_settings_field(
-    'seopress_google_analytics_other_tracking_footer', // ID
-    __('[BODY (FOOTER)] Add an additional tracking code (like Google Tag Manager...)', 'wp-seopress'), // Title
-    'seopress_google_analytics_other_tracking_footer_callback', // Callback
-    'seopress-settings-admin-google-analytics-features', // Page
-    'seopress_setting_section_google_analytics_features' // Section
-);
-
-add_settings_field(
     'seopress_google_analytics_remarketing', // ID
     __('Enable remarketing, demographics, and interests reporting', 'wp-seopress'), // Title
     'seopress_google_analytics_remarketing_callback', // Callback
@@ -340,6 +316,40 @@ add_settings_field(
     'seopress_google_analytics_cross_domain_callback', // Callback
     'seopress-settings-admin-google-analytics-features', // Page
     'seopress_setting_section_google_analytics_features' // Section
+);
+
+//Google Analytics Custom Tracking SECTION=========================================================
+
+add_settings_section(
+    'seopress_setting_section_google_analytics_custom_tracking', // ID
+    '',
+    //__("Google Analytics","wp-seopress"), // Title
+    'print_section_info_google_analytics_custom_tracking', // Callback
+    'seopress-settings-admin-google-analytics-custom-tracking' // Page
+);
+
+add_settings_field(
+    'seopress_google_analytics_other_tracking', // ID
+    __('[HEAD] Add an additional tracking code (like Facebook Pixel, Hotjar...)', 'wp-seopress'), // Title
+    'seopress_google_analytics_other_tracking_callback', // Callback
+    'seopress-settings-admin-google-analytics-custom-tracking', // Page
+    'seopress_setting_section_google_analytics_custom_tracking' // Section
+);
+
+add_settings_field(
+    'seopress_google_analytics_other_tracking_body', // ID
+    __('[BODY] Add an additional tracking code (like Google Tag Manager...)', 'wp-seopress'), // Title
+    'seopress_google_analytics_other_tracking_body_callback', // Callback
+    'seopress-settings-admin-google-analytics-custom-tracking', // Page
+    'seopress_setting_section_google_analytics_custom_tracking' // Section
+);
+
+add_settings_field(
+    'seopress_google_analytics_other_tracking_footer', // ID
+    __('[BODY (FOOTER)] Add an additional tracking code (like Google Tag Manager...)', 'wp-seopress'), // Title
+    'seopress_google_analytics_other_tracking_footer_callback', // Callback
+    'seopress-settings-admin-google-analytics-custom-tracking', // Page
+    'seopress_setting_section_google_analytics_custom_tracking' // Section
 );
 
 //Google Analytics Events SECTION==========================================================
@@ -544,4 +554,29 @@ add_settings_field(
     'seopress_google_analytics_matomo_no_heatmaps_callback', // Callback
     'seopress-settings-admin-google-analytics-matomo', // Page
     'seopress_setting_section_google_analytics_matomo' // Section
+);
+
+//Microsoft Clarity SECTION========================================================================
+add_settings_section(
+    'seopress_setting_section_google_analytics_clarity', // ID
+    '',
+    //__("Microsoft Clarity","wp-seopress"), // Title
+    'print_section_info_google_analytics_clarity', // Callback
+    'seopress-settings-admin-google-analytics-clarity' // Page
+);
+
+add_settings_field(
+    'seopress_google_analytics_clarity_enable', // ID
+    __('Enable Microsoft Clarity', 'wp-seopress'), // Title
+    'seopress_google_analytics_clarity_enable_callback', // Callback
+    'seopress-settings-admin-google-analytics-clarity', // Page
+    'seopress_setting_section_google_analytics_clarity' // Section
+);
+
+add_settings_field(
+    'seopress_google_analytics_clarity_project_id', // ID
+    __('Enter your Clarity project ID', 'wp-seopress'), // Title
+    'seopress_google_analytics_clarity_project_id_callback', // Callback
+    'seopress-settings-admin-google-analytics-clarity', // Page
+    'seopress_setting_section_google_analytics_clarity' // Section
 );

@@ -292,8 +292,7 @@ function seopress_display_seo_term_metaboxe() {
         $seopress_social_twitter_img_width            = get_post_meta($term->term_id, '_seopress_social_twitter_img_width', true);
         $seopress_social_twitter_img_height            = get_post_meta($term->term_id, '_seopress_social_twitter_img_height', true);
         $seopress_redirections_enabled     = get_term_meta($term->term_id, '_seopress_redirections_enabled', true);
-        $seopress_redirections_enabled_regex    = get_post_meta($term->term_id, '_seopress_redirections_enabled_regex', true);
-        $seopress_redirections_logged_status   = get_post_meta($term->term_id, '_seopress_redirections_logged_status', true);
+        $seopress_redirections_logged_status   = get_term_meta($term->term_id, '_seopress_redirections_logged_status', true);
         $seopress_redirections_type        = get_term_meta($term->term_id, '_seopress_redirections_type', true);
         $seopress_redirections_value       = get_term_meta($term->term_id, '_seopress_redirections_value', true);
 
@@ -390,6 +389,9 @@ function seopress_display_seo_term_metaboxe() {
         if (in_array('redirect-tab', $seo_tabs)) {
             if (isset($_POST['seopress_redirections_type'])) {
                 update_term_meta($term_id, '_seopress_redirections_type', $_POST['seopress_redirections_type']);
+            }
+            if (isset($_POST['seopress_redirections_logged_status'])) {
+                update_term_meta($term_id, '_seopress_redirections_logged_status', $_POST['seopress_redirections_logged_status']);
             }
             if (isset($_POST['seopress_redirections_value'])) {
                 update_term_meta($term_id, '_seopress_redirections_value', esc_html($_POST['seopress_redirections_value']));

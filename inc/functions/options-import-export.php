@@ -838,6 +838,7 @@ function seopress_download_batch_export() {
             $csv_fields[] = 'canonical_url';
             $csv_fields[] = 'primary_cat';
             $csv_fields[] = 'redirect_active';
+            $csv_fields[] = 'redirect_status';
             $csv_fields[] = 'redirect_type';
             $csv_fields[] = 'redirect_url';
             $csv_fields[] = 'target_kw';

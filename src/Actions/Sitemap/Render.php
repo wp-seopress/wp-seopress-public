@@ -74,6 +74,9 @@ class Render implements ExecuteHooksFrontend {
      * @return void
      */
     public function sitemapShortcut() {
+        if ('1' !== seopress_get_toggle_option('xml-sitemap')) {
+            return;
+        }
         //Redirect sitemap.xml to sitemaps.xml
         $get_current_url = get_home_url() . $_SERVER['REQUEST_URI'];
         if (in_array($get_current_url, [

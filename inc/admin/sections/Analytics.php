@@ -51,6 +51,26 @@ function print_section_info_google_analytics_features()
 <?php
 }
 
+function print_section_info_google_analytics_custom_tracking()
+{
+    ?>
+<div class="sp-section-header">
+    <h2>
+        <?php _e('Custom Tracking', 'wp-seopress'); ?>
+    </h2>
+</div>
+<p>
+    <?php _e('Add your own scripts like GTM or Facebook Pixel by copy and paste the provided code to the HEAD/BODY or FOOTER.', 'wp-seopress'); ?>
+</p>
+
+<div class="seopress-notice is-warning">
+    <p>
+        <?php _e('<strong>GA4 or Universal Analytics</strong> codes are <strong>automatically added to your source code</strong> if you have enter your <strong>Measurement ID and / or your Universal Analytics ID</strong> from <strong>General</strong> tab.', 'wp-seopress'); ?>
+    </p>
+</div>
+<?php
+}
+
 function print_section_info_google_analytics_events()
 {
     $docs = seopress_get_docs_links();
@@ -120,6 +140,27 @@ function print_section_info_google_analytics_matomo()
 <div class="seopress-notice">
     <p>
         <?php _e('Your <strong>Custom Dimensions</strong> will also work with Matomo tracking code.', 'wp-seopress'); ?>
+    </p>
+</div>
+
+<?php
+}
+
+function print_section_info_google_analytics_clarity()
+{
+    ?>
+<div class="sp-section-header">
+    <h2>
+        <?php _e('Microsoft Clarity', 'wp-seopress'); ?>
+    </h2>
+</div>
+<p>
+    <?php _e('Use Microsoft Clarity to capture session recordings, get instant heatmaps and powerful Insights for Free. Know how people interact with your site to improve user experience and conversions.', 'wp-seopress'); ?>
+</p>
+
+<div class="seopress-notice">
+    <p>
+        <?php printf(__('Create your first Microsoft Clarity projet <a href="%s" target="_blank">here</a>.', 'wp-seopress'), esc_url('https://clarity.microsoft.com/')); ?>
     </p>
 </div>
 

@@ -18,6 +18,7 @@ jQuery(document).ready(function ($) {
                 if (data.data) {
                     $('head').append(data.data.gtag_js);
                     $('head').append(data.data.matomo_js);
+                    $('head').append(data.data.clarity_js);
                     $('head').append(data.data.custom);
                     $('head').append(data.data.head_js);
                     $('body').prepend(data.data.body_js);

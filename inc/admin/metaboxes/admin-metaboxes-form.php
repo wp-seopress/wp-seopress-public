@@ -623,14 +623,16 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <?php _e('Enable redirection?', 'wp-seopress'); ?>
                             </label>
                         </p>
-                        <p>
-                            <label for="seopress_redirections_enabled_regex_meta" id="seopress_redirections_enabled_regex">
-                                <input type="checkbox" name="seopress_redirections_enabled_regex"
-                                    id="seopress_redirections_enabled_regex_meta" value="yes" <?php echo checked($seopress_redirections_enabled_regex, 'yes', false); ?>
-                                />
-                                <?php _e('Regex?', 'wp-seopress'); ?>
-                            </label>
-                        </p>
+                        <?php if ('seopress_404' == $typenow) { ?>
+                            <p>
+                                <label for="seopress_redirections_enabled_regex_meta" id="seopress_redirections_enabled_regex">
+                                    <input type="checkbox" name="seopress_redirections_enabled_regex"
+                                        id="seopress_redirections_enabled_regex_meta" value="yes" <?php echo checked($seopress_redirections_enabled_regex, 'yes', false); ?>
+                                    />
+                                    <?php _e('Regex?', 'wp-seopress'); ?>
+                                </label>
+                            </p>
+                        <?php } ?>
                         <p>
                             <label for="seopress_redirections_logged_status"><?php _e('Select a login status: ', 'wp-seopress'); ?></label>
 

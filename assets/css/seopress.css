@@ -116,6 +116,12 @@
     color: var(--primaryColor);
     background: transparent;
 }
+.seopress-option .btnSecondary.is-deletable,
+.seopress-styles .btnSecondary.is-deletable {
+    border-color: rgb(204, 24, 24);
+    color: rgb(204, 24, 24);
+    box-shadow: rgb(204 24 24) 0px 0px 0px 1px inset;
+}
 .seopress-option .btnTertiary,
 .seopress-styles .btnTertiary,
 .post-type-seopress_404 .btnTertiary,
@@ -130,11 +136,18 @@
     box-shadow: inset 0 0 0 1px var(--primaryColor);
 }
 .seopress-option hr,
-.seopress-styles hr {
+.seopress-styles hr,
+.seopress-setup hr {
     align-self: center;
     flex-grow: 1;
     height: 1px;
     margin: 0 10px;
+    border: 0;
+    border-top: 1px solid #dcdcde;
+    border-bottom: 1px solid #f6f7f7;
+}
+.seopress-setup hr {
+    margin-left: 10px;
 }
 #seopress-tabs.wrap .list-none {
     list-style: none;
@@ -1690,7 +1703,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     color: #4b4f56;
     font-size: 14px;
     width: 504px;
-
+    max-width: 100%;
 }
 #seopress_cpt .snippet-twitter-url {
     color: #8899a6;
@@ -1846,13 +1859,16 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
         margin: 85px 22px 22px;
     }
 }
-.seopress-styles .seopress-option h1 {
+.seopress-styles .seopress-option h1, .seopress-setup .seopress-option h1 {
     font-size: var(--titleFontSize);
     color: var(--titleColor);
     font-weight: var(--titleFontWeight);
     margin: var(--titleMargin);
     display: flex;
     justify-content: space-between;
+}
+.seopress-setup .seopress-option h1 {
+    margin-bottom: 30px;
 }
 /* Titles & metas */
 .seopress_wrap_single_cpt,
@@ -2801,7 +2817,7 @@ body .seopress-cart-list h3 {
         grid-template-columns: repeat(1, 1fr);
     }
 }
-.seopress-styles .wrap {
+.seopress-styles .wrap, .seopress-setup .wrap {
     margin: 0;
     display: flex;
     position: relative;
@@ -2813,6 +2829,7 @@ body .seopress-cart-list h3 {
     margin: inherit;
 }
 @media only screen and (max-width: 782px) {
+    .seopress-setup .wrap,
     .seopress-styles .wrap {
         display: inherit;
         position: inherit;
@@ -2883,6 +2900,9 @@ body .seopress-cart-list h3 {
     text-align: left;
     font-weight: normal;
     white-space: normal;
+    line-height: 1.71428571;
+    font-size: 14px;
+    text-decoration: none;
 }
 #seopress-admin-tabs .nav-tab {
     background: 0 0;

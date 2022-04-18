@@ -296,14 +296,14 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
                 if (!array_key_exists($key, $options['seopress_titles_single_titles'])) {
                     $cpt_titles_empty[] = $key;
                 } else {
-                    $data = $options['seopress_titles_single_titles'][$key][$metadata];
+                    $data = isset($options['seopress_titles_single_titles'][$key][$metadata]) ? $options['seopress_titles_single_titles'][$key][$metadata] : '';
                 }
             }
             if ('tax' === $type) {
                 if (!array_key_exists($key, $options['seopress_titles_tax_titles'])) {
                     $cpt_titles_empty[] = $key;
                 } else {
-                    $data = $options['seopress_titles_tax_titles'][$key][$metadata];
+                    $data = isset($options['seopress_titles_tax_titles'][$key][$metadata]) ? $options['seopress_titles_tax_titles'][$key][$metadata] : '';
                 }
             }
         }
@@ -669,6 +669,8 @@ function seopress_get_oxygen_content() {
             if (get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)) {
                 $seopress_analysis_target_kw = array_filter(explode(',', strtolower(esc_attr(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)))));
 
+                $seopress_analysis_target_kw = apply_filters( 'seopress_content_analysis_target_keywords', $seopress_analysis_target_kw, get_the_ID() );
+
                 //Keywords density
                 foreach ($seopress_analysis_target_kw as $kw) {
                     if (preg_match_all('#\b(' . $kw . ')\b#iu', $seopress_get_the_content, $m)) {
@@ -727,7 +729,7 @@ function seopress_btn_secondary_classes() {
     global $pagenow;
     if (function_exists('get_current_screen') && method_exists(get_current_screen(), 'is_block_editor') && true === get_current_screen()->is_block_editor()) {
         $btn_classes_secondary = 'components-button is-secondary';
-    } elseif (isset($pagenow) && ($pagenow === 'term.php' || $pagenow === 'post.php') ) {
+    } elseif (isset($pagenow) && ($pagenow === 'term.php' || $pagenow === 'post.php' || $pagenow === 'post-new.php') ) {
         $btn_classes_secondary = 'button button-secondary';
     } else {
         $btn_classes_secondary = 'btn btnSecondary';

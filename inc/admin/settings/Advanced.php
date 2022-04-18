@@ -387,3 +387,18 @@ add_settings_field(
 );
 
 seopress_get_service('SectionPagesSEOPress')->printSectionPages();
+
+if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+    $versions = get_option('seopress_versions');
+    $actual_version = isset($versions['pro']) ? $versions['pro'] : 0;
+
+    if (version_compare($actual_version, '5.6', '>=')) {
+        add_settings_section(
+            'seopress_setting_section_advanced_security_ga', // ID
+            '',
+            //__("Security","wp-seopress"), // Title
+            'print_section_info_advanced_security_ga', // Callback
+            'seopress-settings-admin-advanced-security' // Page
+        );
+    }
+}

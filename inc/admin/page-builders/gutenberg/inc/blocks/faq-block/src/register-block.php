@@ -119,9 +119,8 @@ function seopress_block_faq_render_frontend($attributes)
     ob_start(); ?>
 	<?php echo $listStyleTag; ?>
 		<?php
-            $i = 1;
             foreach ($attributes['faqs'] as $faq) :
-
+                $i = rand();
                 if (empty($faq['question'])) {
                     continue;
                 }
@@ -186,7 +185,6 @@ function seopress_block_faq_render_frontend($attributes)
                         <?php endif; ?>
                     </div>
                 <?php echo $listItemStyleClosingTag;
-                $i = $i++;
                 ?>
 			<?php endforeach; ?>
 	<?php echo $listStyleCloseTag;

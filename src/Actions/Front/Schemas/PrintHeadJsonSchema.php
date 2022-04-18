@@ -43,11 +43,10 @@ class PrintHeadJsonSchema implements ExecuteHooksFrontend {
         }
 
         $jsons = seopress_get_service('JsonSchemaGenerator')->getJsonsEncoded([
-            'organization',
-        ]); ?>
-        <script type="application/ld+json">
-            <?php echo apply_filters('seopress_schemas_organization_html', $jsons[0]); ?>
-        </script>
+            'organization'
+        ]);
+        ?>
+        <script type="application/ld+json"><?php echo apply_filters('seopress_schemas_organization_html', $jsons[0]); ?></script>
         <?php
     }
 }

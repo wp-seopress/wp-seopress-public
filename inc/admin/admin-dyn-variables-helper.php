@@ -32,7 +32,7 @@ function seopress_get_dyn_variables()
         '%%archive_date_month%%'            => __('Month Archive title', 'wp-seopress'),
         '%%archive_date_month_name%%'       => __('Month name Archive title', 'wp-seopress'),
         '%%archive_date_year%%'             => __('Year Archive title', 'wp-seopress'),
-        '%%_cf_your_custom_field_name%%'    => __('Custom fields from post, page or post type', 'wp-seopress'),
+        '%%_cf_your_custom_field_name%%'    => __('Custom fields from post, page, post type and term taxonomy', 'wp-seopress'),
         '%%_ct_your_custom_taxonomy_slug%%' => __('Custom term taxonomy from post, page or post type', 'wp-seopress'),
         '%%wc_single_cat%%'                 => __('Single product category', 'wp-seopress'),
         '%%wc_single_tag%%'                 => __('Single product tag', 'wp-seopress'),
@@ -51,7 +51,7 @@ function seopress_get_dyn_variables()
         '%%author_website%%'                => __('Author website', 'wp-seopress'),
         '%%author_nickname%%'               => __('Author nickname', 'wp-seopress'),
         '%%author_bio%%'                    => __('Author biography', 'wp-seopress'),
-        '%%_ucf_your_user_meta%%'           => __('Author user meta', 'wp-seopress'),
+        '%%_ucf_your_user_meta%%'           => __('Custom User Meta', 'wp-seopress'),
         '%%currentmonth_num%%'              => __('Current month in digital format', 'wp-seopress'),
         '%%target_keyword%%'                => __('Target keyword', 'wp-seopress'),
     ];

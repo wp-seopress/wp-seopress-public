@@ -446,6 +446,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
                             $data 					          = [];
                             $data['gtag_js'] 		  = seopress_google_analytics_js(false);
                             $data['matomo_js'] 		= seopress_matomo_js(false);
+                            $data['clarity_js'] 		= seopress_clarity_js(false);
                             $data['body_js'] 		  = seopress_google_analytics_body_code(false);
                             $data['head_js'] 		  = seopress_google_analytics_head_code(false);
                             $data['footer_js'] 		= seopress_google_analytics_footer_code(false);
@@ -458,6 +459,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
                         $data 					          = [];
                         $data['gtag_js'] 		  = seopress_google_analytics_js(false);
                         $data['matomo_js'] 		= seopress_matomo_js(false);
+                        $data['clarity_js'] 		= seopress_clarity_js(false);
                         $data['body_js'] 		  = seopress_google_analytics_body_code(false);
                         $data['head_js'] 		  = seopress_google_analytics_head_code(false);
                         $data['footer_js'] 		= seopress_google_analytics_footer_code(false);
@@ -471,6 +473,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
                 $data 					          = [];
                 $data['gtag_js'] 		  = seopress_google_analytics_js(false);
                 $data['matomo_js'] 		= seopress_matomo_js(false);
+                $data['clarity_js'] 		= seopress_clarity_js(false);
                 $data['body_js'] 		  = seopress_google_analytics_body_code(false);
                 $data['head_js'] 		  = seopress_google_analytics_head_code(false);
                 $data['footer_js'] 		= seopress_google_analytics_footer_code(false);

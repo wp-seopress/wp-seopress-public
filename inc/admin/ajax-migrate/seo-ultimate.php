@@ -65,6 +65,15 @@ function seopress_seo_ultimate_migration() {
         }
         $data           = [];
         $data['offset'] = $offset;
+
+        $data['total'] = $total_count_posts;
+
+        if ($offset >= $total_count_posts) {
+            $data['count'] = $total_count_posts;
+        } else {
+            $data['count'] = $offset;
+        }
+
         wp_send_json_success($data);
         exit();
     }

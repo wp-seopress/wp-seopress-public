@@ -20,21 +20,25 @@ if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
     $plugin_settings_tabs = [
                     'tab_seopress_google_analytics_enable'              => __('General', 'wp-seopress'),
                     'tab_seopress_google_analytics_features'            => __('Tracking', 'wp-seopress'),
+                    'tab_seopress_google_analytics_custom_tracking'     => __('Custom Tracking', 'wp-seopress'),
                     'tab_seopress_google_analytics_ecommerce'           => __('Ecommerce', 'wp-seopress'),
                     'tab_seopress_google_analytics_events'              => __('Events', 'wp-seopress'),
                     'tab_seopress_google_analytics_custom_dimensions'   => __('Custom Dimensions', 'wp-seopress'),
                     'tab_seopress_google_analytics_dashboard'           => __('Stats in Dashboard', 'wp-seopress'),
                     'tab_seopress_google_analytics_gdpr'                => __('Cookie bar / GDPR', 'wp-seopress'),
                     'tab_seopress_google_analytics_matomo'              => __('Matomo', 'wp-seopress'),
+                    'tab_seopress_google_analytics_clarity'             => __('Clarity', 'wp-seopress'),
                 ];
 } else {
     $plugin_settings_tabs = [
                     'tab_seopress_google_analytics_enable'              => __('General', 'wp-seopress'),
                     'tab_seopress_google_analytics_features'            => __('Tracking', 'wp-seopress'),
+                    'tab_seopress_google_analytics_custom_tracking'     => __('Custom Tracking', 'wp-seopress'),
                     'tab_seopress_google_analytics_events'              => __('Events', 'wp-seopress'),
                     'tab_seopress_google_analytics_custom_dimensions'   => __('Custom Dimensions', 'wp-seopress'),
                     'tab_seopress_google_analytics_gdpr'                => __('Cookie bar / GDPR', 'wp-seopress'),
                     'tab_seopress_google_analytics_matomo'              => __('Matomo', 'wp-seopress'),
+                    'tab_seopress_google_analytics_clarity'             => __('Clarity', 'wp-seopress'),
                 ];
 }
 
@@ -50,6 +54,10 @@ echo '</div>'; ?>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_features' == $current_tab) {
     echo 'active';
 } ?>" id="tab_seopress_google_analytics_features"><?php do_settings_sections('seopress-settings-admin-google-analytics-features'); ?>
+        </div>
+        <div class="seopress-tab <?php if ('tab_seopress_google_analytics_custom_tracking' == $current_tab) {
+    echo 'active';
+} ?>" id="tab_seopress_google_analytics_custom_tracking"><?php do_settings_sections('seopress-settings-admin-google-analytics-custom-tracking'); ?>
         </div>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_events' == $current_tab) {
     echo 'active';
@@ -76,6 +84,10 @@ echo '</div>'; ?>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_matomo' == $current_tab) {
     echo 'active';
 } ?>" id="tab_seopress_google_analytics_matomo"><?php do_settings_sections('seopress-settings-admin-google-analytics-matomo'); ?>
+        </div>
+        <div class="seopress-tab <?php if ('tab_seopress_google_analytics_clarity' == $current_tab) {
+    echo 'active';
+} ?>" id="tab_seopress_google_analytics_clarity"><?php do_settings_sections('seopress-settings-admin-google-analytics-clarity'); ?>
         </div>
     </div>
 

@@ -32,6 +32,20 @@ abstract class RedirectionSettings {
                 'visible'     => true,
             ],
             [
+                'key'         => '_seopress_redirections_logged_status',
+                'type'        => 'select',
+                'placeholder' => '',
+                'use_default' => '',
+                'default'     => '',
+                'label'       => __('Select a login status:', 'wp-seopress'),
+                'options'     => [
+                    ['value' => 'both', 'label' =>  __('All', 'wp-seopress')],
+                    ['value' => 'only_logged_in', 'label' =>  __('Only Logged In', 'wp-seopress')],
+                    ['value' => 'only_not_logged_in', 'label' =>  __('Only Not Logged In', 'wp-seopress')],
+                ],
+                'visible'     => true,
+            ],
+            [
                 'key'         => '_seopress_redirections_type',
                 'type'        => 'select',
                 'placeholder' => '',

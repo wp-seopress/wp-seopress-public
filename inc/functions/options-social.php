@@ -298,18 +298,20 @@ function seopress_social_facebook_og_locale_hook() {
             if (did_action('pll_init') && function_exists('PLL')) {
                 $alternates = [];
 
-                foreach (PLL()->model->get_languages_list() as $language) {
-                    if (PLL()->curlang->slug !== $language->slug && PLL()->links->get_translation_url($language) && isset($language->facebook)) {
-                        $alternates[] = $language->facebook;
+                if (!empty(PLL()->model->get_languages_list())) {
+                    foreach (PLL()->model->get_languages_list() as $language) {
+                        if (isset(PLL()->curlang->slug) && PLL()->curlang->slug !== $language->slug && PLL()->links->get_translation_url($language) && isset($language->facebook)) {
+                            $alternates[] = $language->facebook;
+                        }
                     }
-                }
 
-                // There is a risk that 2 languages have the same Facebook locale. So let's make sure to output each locale only once.
-                $alternates = array_unique($alternates);
+                    // There is a risk that 2 languages have the same Facebook locale. So let's make sure to output each locale only once.
+                    $alternates = array_unique($alternates);
 
-                foreach ($alternates as $lang) {
-                    $seopress_social_og_locale .= "\n";
-                    $seopress_social_og_locale .= '<meta property="og:locale:alternate" content="' . $lang . '" />';
+                    foreach ($alternates as $lang) {
+                        $seopress_social_og_locale .= "\n";
+                        $seopress_social_og_locale .= '<meta property="og:locale:alternate" content="' . $lang . '" />';
+                    }
                 }
             }
         }
@@ -533,6 +535,30 @@ function seopress_social_fb_title_hook() {
         }
 
         //Apply dynamic variables
+        preg_match_all('/%%_cf_(.*?)%%/', $seopress_social_og_title, $matches); //custom fields
+
+        if ( ! empty($matches)) {
+            $seopress_titles_cf_template_variables_array = [];
+            $seopress_titles_cf_template_replace_array   = [];
+
+            foreach ($matches['0'] as $key => $value) {
+                $seopress_titles_cf_template_variables_array[] = $value;
+            }
+
+            foreach ($matches['1'] as $key => $value) {
+                if (is_singular()) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
+                } elseif (is_tax() || is_category() || is_tag()) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, $value, true));
+                }
+            }
+        }
+
+        //Custom fields
+        if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
+            $seopress_social_og_title = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_social_og_title);
+        }
+
         $seopress_social_og_title = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_og_title);
 
         //Hook on post OG title - 'seopress_social_og_title'
@@ -631,6 +657,30 @@ function seopress_social_fb_desc_hook() {
         }
 
         //Apply dynamic variables
+        preg_match_all('/%%_cf_(.*?)%%/', $seopress_social_og_desc, $matches); //custom fields
+
+        if ( ! empty($matches)) {
+            $seopress_titles_cf_template_variables_array = [];
+            $seopress_titles_cf_template_replace_array   = [];
+
+            foreach ($matches['0'] as $key => $value) {
+                $seopress_titles_cf_template_variables_array[] = $value;
+            }
+
+            foreach ($matches['1'] as $key => $value) {
+                if (is_singular()) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
+                } elseif (is_tax() || is_category() || is_tag()) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, $value, true));
+                }
+            }
+        }
+
+        //Custom fields
+        if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
+            $seopress_social_og_desc = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_social_og_desc);
+        }
+
         $seopress_social_og_desc = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_og_desc);
 
         //Hook on post OG description - 'seopress_social_og_desc'
@@ -1127,6 +1177,30 @@ function seopress_social_twitter_title_hook() {
         }
 
         //Apply dynamic variables
+        preg_match_all('/%%_cf_(.*?)%%/', $seopress_social_twitter_card_title, $matches); //custom fields
+
+        if ( ! empty($matches)) {
+            $seopress_titles_cf_template_variables_array = [];
+            $seopress_titles_cf_template_replace_array   = [];
+
+            foreach ($matches['0'] as $key => $value) {
+                $seopress_titles_cf_template_variables_array[] = $value;
+            }
+
+            foreach ($matches['1'] as $key => $value) {
+                if (is_singular()) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
+                } elseif (is_tax() || is_category() || is_tag()) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, $value, true));
+                }
+            }
+        }
+
+        //Custom fields
+        if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
+            $seopress_social_twitter_card_title = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_social_twitter_card_title);
+        }
+
         $seopress_social_twitter_card_title = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_twitter_card_title);
 
         //Hook on post Twitter card title - 'seopress_social_twitter_card_title'
@@ -1226,6 +1300,30 @@ function seopress_social_twitter_desc_hook() {
         }
 
         //Apply dynamic variables
+        preg_match_all('/%%_cf_(.*?)%%/', $seopress_social_twitter_card_desc, $matches); //custom fields
+
+        if ( ! empty($matches)) {
+            $seopress_titles_cf_template_variables_array = [];
+            $seopress_titles_cf_template_replace_array   = [];
+
+            foreach ($matches['0'] as $key => $value) {
+                $seopress_titles_cf_template_variables_array[] = $value;
+            }
+
+            foreach ($matches['1'] as $key => $value) {
+                if (is_singular()) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
+                } elseif (is_tax() || is_category() || is_tag()) {
+                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, $value, true));
+                }
+            }
+        }
+
+        //Custom fields
+        if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
+            $seopress_social_twitter_card_desc = str_replace($seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_social_twitter_card_desc);
+        }
+
         $seopress_social_twitter_card_desc = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_twitter_card_desc);
 
         //Hook on post Twitter card description - 'seopress_social_twitter_card_desc'

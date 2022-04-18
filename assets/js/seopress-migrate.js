@@ -201,7 +201,7 @@ jQuery(document).ready(function ($) {
                         );
                         $(".spinner").css("visibility", "hidden");
                         $("#" + id + "-migration-tool .log").css("display", "block");
-                        $("#" + id + "-migration-tool .log").html("<div class='seopress-notice is-success'><p>"+i18n+"</p></div>");
+                        $("#" + id + "-migration-tool .log").html("<div class='seopress-notice is-success'><p>" + i18n + "</p></div>");
 
                         if (data.data.url != "") {
                             $(location).attr("href", data.data.url);
@@ -217,6 +217,11 @@ jQuery(document).ready(function ($) {
                             data.data.post_export,
                             data.data.term_export
                         );
+                        if (data.data.total) {
+                            progress = (data.data.count / data.data.total * 100).toFixed(2);
+                            $("#" + id + "-migration-tool .log").css("display", "block");
+                            $("#" + id + "-migration-tool .log").html("<div class='seopress-notice'><p>" + progress + "%</p></div>");
+                        }
                     }
                 },
             });
