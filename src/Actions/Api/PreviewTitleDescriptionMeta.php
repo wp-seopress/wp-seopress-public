@@ -41,6 +41,12 @@ class PreviewTitleDescriptionMeta implements ExecuteHooks {
 
         $title       = $request->get_param('title');
         $description = $request->get_param('description');
+        $post_thumbnail = get_the_post_thumbnail_url($id, 'full') ? get_the_post_thumbnail_url($id, 'full') : '';
+
+        $post_date = '';
+        if (seopress_get_service('TitleOption')->getSingleCptDate($id)) {
+            $post_date = get_the_modified_date('M j, Y', $id) ? get_the_modified_date('M j, Y', $id) : '';
+        }
 
         if (null === $title && null === $description) {
             return new \WP_REST_Response([
@@ -71,6 +77,8 @@ class PreviewTitleDescriptionMeta implements ExecuteHooks {
         return new \WP_REST_Response([
             'title'           => $title,
             'description'     => $description,
+            'post_thumbnail' => $post_thumbnail,
+            'post_date' => $post_date,
         ]);
     }
 }

@@ -141,6 +141,34 @@ class TitleOption {
         return $option[$currentCpt]['nofollow'];
     }
 
+        /**
+     * @since 5.7
+     *
+     * @param int|null $id
+     */
+    public function getSingleCptDate($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_single_titles');
+
+        if ( ! isset($option[$currentCpt]['date'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['date'];
+    }
+
     /**
      * @since 5.0.0
      */

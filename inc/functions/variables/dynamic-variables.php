@@ -201,17 +201,20 @@ if (is_plugin_active('woocommerce/woocommerce.php')) {
 
         if (isset($post->ID) && function_exists('wc_get_product')) {
             $product          = wc_get_product($post->ID);
-            //Woo Price
-            if (method_exists($product, 'get_price') && function_exists('wc_get_price_including_tax')) {
-                $woo_single_price = wc_get_price_including_tax($product);
-            }
-            //Woo Price tax excluded
-            if (method_exists($product, 'get_price') && function_exists('wc_get_price_excluding_tax')) {
-                $woo_single_price_exc_tax = wc_get_price_excluding_tax($product);
-            }
-            //Woo SKU Number
-            if (method_exists($product, 'get_sku')) {
-                $woo_single_sku = $product->get_sku();
+
+            if (isset($product) && is_object($product)) {
+                //Woo Price
+                if (method_exists($product, 'get_price') && function_exists('wc_get_price_including_tax')) {
+                    $woo_single_price = wc_get_price_including_tax($product);
+                }
+                //Woo Price tax excluded
+                if (method_exists($product, 'get_price') && function_exists('wc_get_price_excluding_tax')) {
+                    $woo_single_price_exc_tax = wc_get_price_excluding_tax($product);
+                }
+                //Woo SKU Number
+                if (method_exists($product, 'get_sku')) {
+                    $woo_single_sku = $product->get_sku();
+                }
             }
         }
     }

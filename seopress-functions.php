@@ -655,7 +655,7 @@ function seopress_if_key_exists(array $arr, $key) {
  */
 function seopress_get_oxygen_content() {
     if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
-        $seopress_get_the_content = ct_template_output();
+        $seopress_get_the_content = ct_template_output(true); //shortcodes?
 
         if ( ! $seopress_get_the_content) {
             //Get post content

@@ -661,6 +661,12 @@ function seopress_display_ca_metaboxe()
         ];
         wp_localize_script('seopress-cpt-counters-js', 'seopressAjaxRealPreview', $seopress_real_preview);
 
+        $seopress_inspect_url = [
+            'seopress_nonce'            => wp_create_nonce('seopress_inspect_url_nonce'),
+            'seopress_inspect_url'      => admin_url('admin-ajax.php'),
+        ];
+        wp_localize_script('seopress-cpt-counters-js', 'seopressAjaxInspectUrl', $seopress_inspect_url);
+
         $seopress_analysis_target_kw            = get_post_meta($post->ID, '_seopress_analysis_target_kw', true);
         $seopress_analysis_data                 = get_post_meta($post->ID, '_seopress_analysis_data', true);
         $seopress_titles_title                  = get_post_meta($post->ID, '_seopress_titles_title', true);

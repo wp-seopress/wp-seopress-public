@@ -1,3 +1,11 @@
+//Init tabs
+jQuery(document).ready(function ($) {
+    if ($("#seopress-ca-tabs").length) {
+        $("#seopress-ca-tabs .hidden").removeClass("hidden");
+        $("#seopress-ca-tabs").tabs();
+    }
+});
+
 function sp_titles_counters() {
     const $ = jQuery;
     let elementTitleMeta = $("#seopress_titles_title_meta");
@@ -646,18 +654,24 @@ function sp_ca_toggle() {
             stop = false;
         }
         jQuery(this).toggleClass("open");
+        jQuery(this).attr('aria-expanded', (jQuery(this).attr('aria-expanded') == "false" ? true : false));
         jQuery(this).parent().parent().next(".gr-analysis-content").toggle();
+        jQuery(this).parent().parent().next(".gr-analysis-content").attr('aria-hidden', (jQuery(this).parent().parent().next(".gr-analysis-content").attr('aria-hidden') == "true" ? false : true));
     });
 
     //Show all
     jQuery("#expand-all").on("click", function (e) {
         e.preventDefault();
         jQuery(".gr-analysis-content").show();
+        jQuery(".gr-analysis-title button").attr('aria-expanded', true);
+        jQuery(".gr-analysis-content").attr('aria-hidden', false);
     });
     //Hide all
     jQuery("#close-all").on("click", function (e) {
         e.preventDefault();
         jQuery(".gr-analysis-content").hide();
+        jQuery(".gr-analysis-title button").attr('aria-expanded', false);
+        jQuery(".gr-analysis-content").attr('aria-hidden', true);
     });
 }
 
@@ -959,4 +973,33 @@ jQuery(document).ready(function (e) {
             s();
         }),
         sp_ca_toggle();
+
+    //Inspect URL
+    jQuery('#seopress_inspect_url').on("click", function () {
+        jQuery(this).attr("disabled", "disabled");
+        jQuery('.spinner').css("visibility", "visible");
+        jQuery('.spinner').css("float", "none");
+
+        //Post ID
+        if (typeof e("#seopress-tabs").attr("data_id") !== "undefined") {
+            var post_id = e("#seopress-tabs").attr("data_id");
+        } else if (typeof e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_id") !== "undefined") {
+            var post_id = e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_id")
+        }
+
+        e.ajax({
+            method: "POST",
+            url: seopressAjaxInspectUrl.seopress_inspect_url,
+            data: {
+                action: "seopress_inspect_url",
+                post_id: post_id,
+                _ajax_nonce: seopressAjaxInspectUrl.seopress_nonce,
+            },
+            success: function () {
+                jQuery('.spinner').css("visibility", "hidden");
+                jQuery('#seopress_inspect_url').removeAttr("disabled");
+                jQuery("#seopress-ca-tabs-1").load(" #seopress-ca-tabs-1");
+            }
+        });
+    });
 });

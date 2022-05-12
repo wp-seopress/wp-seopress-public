@@ -34,6 +34,9 @@ class Router implements ExecuteHooks {
         //XSL Sitemap
         add_rewrite_rule('^sitemaps_xsl.xsl$', 'index.php?seopress_sitemap_xsl=1', 'top');
 
+        //XSL Video Sitemap
+        add_rewrite_rule('^sitemaps_video_xsl.xsl$', 'index.php?seopress_sitemap_video_xsl=1', 'top');
+
         add_rewrite_rule('sitemaps/([^/]+?)-sitemap([0-9]+)?\.xml$', 'index.php?seopress_cpt=$matches[1]&seopress_paged=$matches[2]', 'top');
 
         //XML Author
@@ -53,6 +56,7 @@ class Router implements ExecuteHooks {
     public function queryVars($vars) {
         $vars[] = 'seopress_sitemap';
         $vars[] = 'seopress_sitemap_xsl';
+        $vars[] = 'seopress_sitemap_video_xsl';
         $vars[] = 'seopress_cpt';
         $vars[] = 'seopress_paged';
         $vars[] = 'seopress_author';

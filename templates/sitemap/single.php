@@ -41,11 +41,11 @@ if (true == get_post_type_archive_link($path) && 0 == $offset) {
         $sitemap_url = '';
         // array with all the information needed for a sitemap url
         $seopress_url = [
-            'loc'    => htmlspecialchars(urldecode(get_post_type_archive_link($path))),
+            'loc'    => htmlspecialchars(urldecode(trailingslashit(get_post_type_archive_link($path)))),
             'mod'    => '',
             'images' => [],
         ];
-        $sitemap_url = sprintf("<url>\n<loc>%s</loc>\n</url>", htmlspecialchars(urldecode(get_post_type_archive_link($path))));
+        $sitemap_url = sprintf("<url>\n<loc>%s</loc>\n</url>", htmlspecialchars(urldecode(trailingslashit(get_post_type_archive_link($path)))));
 
         $sitemap_url = apply_filters('seopress_sitemaps_no_archive_link', $sitemap_url, $path);
 
@@ -221,35 +221,15 @@ foreach ($postslist as $post) {
                                             $seopress_image_loc = '<![CDATA[' . $url . ']]>';
                                             $seopress_image_loc = sprintf('<![CDATA[%s]]>', $url);
                                         }
-                                        $seopress_image_caption = '';
-                                        if ('' != $img->getAttribute('alt')) {
-                                            $caption                = htmlspecialchars($img->getAttribute('alt'));
-                                            $seopress_image_caption = sprintf('<![CDATA[%s]]>', $caption);
-                                        }
-                                        $seopress_image_title = '';
-                                        if ('' != $img->getAttribute('title')) {
-                                            $title                = htmlspecialchars($img->getAttribute('title'));
-                                            $seopress_image_title = sprintf('<![CDATA[%s]]>', $title);
-                                        }
 
                                         $seopress_url['images'][] = [
                                             'src'   => $seopress_image_loc,
-                                            'title' => $seopress_image_title,
-                                            'alt'   => $seopress_image_caption,
                                         ];
 
                                         /*
                                         * Build up the template.
                                         */
                                         $sitemapData .= sprintf("\n<image:image>\n<image:loc>%s</image:loc>", $seopress_image_loc);
-
-                                        if ('' != $seopress_image_title) {
-                                            $sitemapData .= sprintf("\n<image:title>%s</image:title>", $seopress_image_title);
-                                        }
-
-                                        if ('' != $seopress_image_caption) {
-                                            $sitemapData .= sprintf("\n<image:caption>%s</image:caption>", $seopress_image_caption);
-                                        }
 
                                         $sitemapData .= "\n</image:image>";
                                     }
@@ -263,22 +243,8 @@ foreach ($postslist as $post) {
                         foreach ($product_img as $product_attachment_id) {
                             $seopress_image_loc = '<![CDATA[' . esc_attr(wp_filter_nohtml_kses(wp_get_attachment_url($product_attachment_id))) . ']]>';
 
-                            $seopress_image_title = '';
-                            if ('' != get_the_title($product_attachment_id)) {
-                                $title                = htmlspecialchars(get_the_title($product_attachment_id));
-                                $seopress_image_title = sprintf('<![CDATA[%s]]>', $title);
-                            }
-
-                            $seopress_image_caption = '';
-                            if ('' != get_post_meta($product_attachment_id, '_wp_attachment_image_alt', true)) {
-                                $caption                = htmlspecialchars(get_post_meta($product_attachment_id, '_wp_attachment_image_alt', true));
-                                $seopress_image_caption = sprintf('<![CDATA[%s]]>', $caption);
-                            }
-
                             $seopress_url['images'][] = [
                                 'src'     => $seopress_image_loc,
-                                'title'   => $seopress_image_title,
-                                'caption' => $seopress_image_caption,
                             ];
 
                             /*
@@ -287,14 +253,6 @@ foreach ($postslist as $post) {
 
                             $sitemapData .= sprintf("\n<image:image>\n<image:loc>%s</image:loc>", $seopress_image_loc);
 
-                            if ('' != $seopress_image_title) {
-                                $sitemapData .= sprintf("\n<image:title>%s</image:title>", $seopress_image_title);
-                            }
-
-                            if ('' != $seopress_image_caption) {
-                                $sitemapData .= sprintf("\n<image:caption>%s</image:caption>", $seopress_image_caption);
-                            }
-
                             $sitemapData .= "\n</image:image>";
                         }
                     }
@@ -302,36 +260,14 @@ foreach ($postslist as $post) {
                     if ('' != $post_thumbnail) {
                         $seopress_image_loc = '<![CDATA[' . $post_thumbnail . ']]>';
 
-                        $seopress_image_title = '';
-                        if ('' != get_the_title($post_thumbnail_id)) {
-                            $title                = htmlspecialchars(get_the_title($post_thumbnail_id));
-                            $seopress_image_title = sprintf('<![CDATA[%s]]>', $title);
-                        }
-
-                        $seopress_image_caption = '';
-                        if ('' != get_post_meta($post_thumbnail_id, '_wp_attachment_image_alt', true)) {
-                            $caption                = htmlspecialchars(get_post_meta($post_thumbnail_id, '_wp_attachment_image_alt', true));
-                            $seopress_image_caption = sprintf('<![CDATA[%s]]>', $caption);
-                        }
-
                         $seopress_url['images'][] = [
                             'src'     => $seopress_image_loc,
-                            'title'   => $seopress_image_title,
-                            'caption' => $seopress_image_caption,
                         ];
 
                         /*
                         * Build up the template.
                         */
                         $sitemapData .= sprintf("\n<image:image>\n<image:loc>%s</image:loc>", $seopress_image_loc);
-
-                        if ('' != $seopress_image_title) {
-                            $sitemapData .= sprintf("\n<image:title>%s</image:title>", $seopress_image_title);
-                        }
-
-                        if ('' != $seopress_image_caption) {
-                            $sitemapData .= sprintf("\n<image:caption>%s</image:caption>", $seopress_image_caption);
-                        }
 
                         $sitemapData .= "\n</image:image>";
                     }

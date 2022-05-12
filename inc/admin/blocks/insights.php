@@ -8,16 +8,17 @@
         if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
             //do nothing
         } else {
-
-            function seopress_google_analytics_dashboard_widget_option()
-            {
-                $seopress_google_analytics_dashboard_widget_option = get_option('seopress_google_analytics_option_name');
-                if (! empty($seopress_google_analytics_dashboard_widget_option)) {
-                    foreach ($seopress_google_analytics_dashboard_widget_option as $key => $seopress_google_analytics_dashboard_widget_value) {
-                        $options[$key] = $seopress_google_analytics_dashboard_widget_value;
-                    }
-                    if (isset($seopress_google_analytics_dashboard_widget_option['seopress_google_analytics_dashboard_widget'])) {
-                        return $seopress_google_analytics_dashboard_widget_option['seopress_google_analytics_dashboard_widget'];
+            $sp_versions = get_option('seopress_versions');
+            if (isset($sp_versions['pro']) && version_compare($sp_versions['pro'], '5.7', '<')) {
+                function seopress_google_analytics_dashboard_widget_option() {
+                    $seopress_google_analytics_dashboard_widget_option = get_option('seopress_google_analytics_option_name');
+                    if ( ! empty($seopress_google_analytics_dashboard_widget_option)) {
+                        foreach ($seopress_google_analytics_dashboard_widget_option as $key => $seopress_google_analytics_dashboard_widget_value) {
+                            $options[$key] = $seopress_google_analytics_dashboard_widget_value;
+                        }
+                        if (isset($seopress_google_analytics_dashboard_widget_option['seopress_google_analytics_dashboard_widget'])) {
+                            return $seopress_google_analytics_dashboard_widget_option['seopress_google_analytics_dashboard_widget'];
+                        }
                     }
                 }
             }

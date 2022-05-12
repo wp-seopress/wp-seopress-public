@@ -4,15 +4,17 @@ Contributors: rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdubroeucq
 Donate link: https://www.seopress.org/
 Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content analysis, instant indexing, breadcrumbs, analytics, rich snippets, broken link
 Requires at least: 4.7+
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.6
+Stable tag: 5.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Boost your SEO with SEOPress, a simple, fast and powerful SEO plugin for WordPress. No ads, no footprints, no anonymous data sent, white label.
 
 == Description ==
+
+<h3>The only WordPress SEO plugin fully integrated with all page builders and themes!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -22,7 +24,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 ✔ <strong>Import your post and term metadatas from other plugins in 1 click</strong>
 ✔ <strong>Trusted by over 230,000 WordPress websites since 2017.</strong>
 
-<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $39 / year / unlimited sites</strong></a>
+<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / unlimited sites</strong></a>
 
 [youtube https://www.youtube.com/watch?v=FwaJA5MY6sc]
 
@@ -32,7 +34,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 
 <ul>
 	<li><a href="https://www.seopress.org/seopress-productivity/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Save time</strong></a>: you prefer to work with Excel or Google Spreadsheets? No problem, you can import / export your metadata from CSV files with SEOPress PRO in few clicks!</li>
-	<li><a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Save money</strong></a>: SEOPress PRO is available for just $39 / year. Without any sites limit. Yes, you read that right: 1 site or 100 sites, the total price is still $39 / year!</li>
+	<li><a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Save money</strong></a>: SEOPress PRO is available for just $49 / year. Without any sites limit. Yes, you read that right: 1 site or 100 sites, the total price is still $49 / year!</li>
 	<li><a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>All in one SEO plugin</strong></a>: comes with all the features you need to optimize the SEO of your WordPress site. No need to install additional extensions to manage redirects, schemas, XML sitemaps... You reduce the risk of conflicts and maintenance costs. You don't need a special feature? Deactivate it with one click without losing your configuration. Child's play !</li>
 	<li><strong>Easy AND ready to use</strong>: you doesn't need to know SEO or code to use SEOPress. Most of the parameters are automatically set. And thanks to our installation wizard, configuring SEOPress has never been easier. To go further, we provide many <a href="https://www.seopress.org/support/tutorials/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">free tutorials</a> and <a href="https://www.seopress.org/support/ebooks/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">ebooks to learn SEO</a> in order to better understand how to position your content on search engines.</li>
 </ul>
@@ -74,8 +76,9 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 
 <ul>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
-	<li><a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results</li>
+	<li><a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results. YouTube videos are automatically added.</li>
 	<li>Internal linking suggestions</li>
+    <li>Inspect URL with Google Search Console: get details about crawling, indexing, mobile compatibility, schemas and more.</li>
 	<li><strong>Google Suggestions in Content Analysis</strong> to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.</li>
 	<li><a href="https://www.seopress.org/features/google-structured-data-types/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Structured Data types</strong> (schema.org)</a>:
 		<ol>
@@ -156,6 +159,23 @@ We provide deep integration with Elementor page builder. Directly from Elementor
 
 [youtube https://www.youtube.com/watch?v=amfozNvYzPU]
 
+<h3>SEOPress Insights: Off-site SEO plugin to track your rankings and backlinks in WordPress</h3>
+
+<ul>
+    <li><strong>Keyword rank tracker</strong>: 37 Google Search locations available</li>
+    <li>Track <strong>50 keywords</strong> per site daily</li>
+    <li>Track your <strong>competitors</strong>: who ranks first on your keywords</li>
+    <li>Monitor and analyze your <strong>backlinks</strong> weekly</li>
+    <li><strong>Google trends</strong> to find new and relevant ideas for your content marketing strategy</li>
+    <li>Your <strong>data accessible for life</strong>: export it to a CSV, PDF or Excel file. Sort, order, filter your data right from your WordPress.</li>
+    <li>Receive <strong>email alerts</strong> for your rankings to easily follow them</li>
+    <li><strong>Slack alerts</strong> incoming soon!</li>
+</ul>
+
+[youtube https://youtu.be/n-a2U4_anWA]
+
+<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress Insights now!</strong></a>
+
 <h3>Developers will love SEOPress!</h3>
 
 Hundreds of hooks are available to extend SEOPress. <a href="https://www.seopress.org/support/hooks/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Browse them all here</a>!
@@ -193,7 +213,7 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 <h3>SEOPress integrates seamlessly with popular e-commerce, translation, performance and analytics tools.</h3>
 <ul>
 	<li>Classic Editor</li>
-	<li>Block Editor</li>
+	<li>Block Editor + 4 SEOPress blocks: FAQ, How-to, Breadcrumbs and Local Business</li>
 	<li>WPML</li>
 	<li>Polylang</li>
 	<li>MultilingualPress</li>
@@ -342,37 +362,30 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 5.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-6/">Read the blog post update</a> =
-* NEW Local Business block to display business information with the Block Editor (PRO)
-* NEW Microsoft Clarity integration: capture session recordings, get instant heatmaps and powerful Insights for Free
-* NEW Edit Google Analytics stats in Dashboard widget permissions from SEO, Advanced, Security tab
-* NEW Define license key in wp-config.php (PRO - https://www.seopress.org/support/guides/activate-seopress-pro-license/#add-my-license-key-to-wp-config-php)
-* NEW directApply property for Job schema (automatic and manual)
-* NEW 'seopress_pro_breadcrumbs_html_markup' hook to filter schema markup for HTML breadcrumbs (https://www.seopress.org/support/hooks/remove-schema-markup-from-html-breadcrumbs/)
-* NEW 'seopress_clarity_tracking_js' hook to filter Microsoft Clarity tracking code (https://www.seopress.org/support/hooks/filter-microsoft-clarity-tracking-code/)
-* INFO Support login status field for CSV metadata import tool
-* INFO Several UI / UX enhancements for CSV metadata import tool and migration tools from other SEO plugins
-* INFO Improve UX/UI for automatic schemas
-* INFO Remove regex option from SEO metabox when editing term taxonomy because it doesn't make sense
-* INFO Replace header() by wp_redirect (props @ajoah)
-* INFO Remove add_theme_support( 'title-tag' ); notification is Full Site Editing (FSE) is enabled
-* INFO Improve A11Y for FAQ block (aria controls and aria labelledby)
-* INFO Quick access links to Google APIs from the UI
-* INFO Improve breadcrumbs markup for search engines
-* INFO Performance improvement for Google Analytics Dashboard widget
-* FIX Login status to Redirections tab when editing term taxonomy
-* FIX Twitter Preview for SEO metabox on term taxonomy
-* FIX Redirect XML sitemaps if Sitemaps feature is disabled
-* FIX SiteNavigationElement JSON schema
-* FIX UI for toggle features
-* FIX Fatal error get_price() for LinkedIn (oembed JSON)
-* FIX Disable shortcodes when running broken link checker if "post_content" option set
-* FIX Internal links analysis with Oxygen Builder
-* FIX 403 forbidden key for Bing IndexNow API
-* FIX Elementor deprecations for our Breadcrumbs widget and SEO integration
-* FIX Undefined index 'description' in SEO Dashboard
-* FIX Quick edit dynamic variables from post types list
-* FIX Month name translation in date archive when using %%archive_date_month_name%%
-* FIX Undefined variable: id in RobotSettings (props to @mvdhoek1)
+= 5.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-7/">Read the blog post update</a> =
+* NEW Inspect URL with Google Search Console when you create / edit a post content 🎉
+* NEW Matomo On-Premise (self-hosted) tracking 🎉
+* NEW Automatically activate your SEOPress PRO license key with the define SEOPRESS_LICENSE_KEY (PRO) 🎉
+* NEW Automatically add your YouTube videos to XML video sitemap (PRO) 🎉
+* NEW Breadcrumbs block for Gutenberg 🎉
+* NEW How-to block for Gutenberg 🎉
+* NEW 'seopress_sitemaps_video_xsl' hook to filter video XML stylesheet (https://www.seopress.org/support/hooks/filter-xsl-video-sitemap/)
+* NEW 'seopress_inspect_url_permalink' hook to filter inspected URL (https://www.seopress.org/support/hooks/filter-url-to-inspect-with-google-inspect-url-api/)
+* NEW 'seopress_inspect_url_home_url' hook to filter home URL with inspect URL tool (https://www.seopress.org/support/hooks/filter-home-url-for-google-inspect-url-api/)
+* INFO Remove deprecated xml sitemaps tags by Google for Video, Image and News sitemaps
+* INFO Add post thumbnail to Google mobile preview
+* INFO Add post date to Google preview for Universal SEO metabox
+* INFO Improve accessibility for SEO Dashboard and Content Analysis metabox
+* INFO Upgrade our universal SEO metabox to React 18
+* INFO Strengthening of security
+* INFO Update Monolog 3rd party library
+* INFO Improve performance for GA stats in Dashboard widget if disabled
+* FIX Universal SEO metabox: disable News and Video sitemaps tabs if disabled from global settings
+* FIX Compatibility issue with TranslatePress: missing a trailing slash for post type archive link in XML sitemaps
+* FIX Compatibility issue with The Event Calendar (single event and category event archive page)
+* FIX OG and Twitter image if a user directly paste a URL to set these fields
+* FIX Content analysis with Oxygen Builder in specific cases
+* FIX HTML sitemap shortcode with FSE themes
+* FIX Fatal error with WC and oembed if not a singular product
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

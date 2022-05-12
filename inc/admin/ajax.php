@@ -125,8 +125,6 @@ function seopress_do_real_preview()
                 $response = wp_remote_get($link, $args);
             }
 
-            $data['link_preview'] = $link;
-
             //Check for error
             if (is_wp_error($response) || '404' == wp_remote_retrieve_response_code($response)) {
                 $data['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
@@ -143,6 +141,8 @@ function seopress_do_real_preview()
                             $data = array_slice($data, 0, 3);
                         }
                     }
+
+                    $data['link_preview'] = $link;
 
                     //Disable wptexturize
                     add_filter('run_wptexturize', '__return_false');
@@ -724,6 +724,67 @@ function seopress_hide_notices()
     }
 }
 add_action('wp_ajax_seopress_hide_notices', 'seopress_hide_notices');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Regenerate Video XML Sitemap
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function seopress_video_xml_sitemap_regenerate()
+{
+    check_ajax_referer('seopress_video_regenerate_nonce', $_POST['_ajax_nonce'], true);
+
+    if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
+        if (isset($_POST['offset']) && isset($_POST['offset'])) {
+            $offset = absint($_POST['offset']);
+        }
+
+        global $wpdb;
+
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
+
+        $increment = 1;
+        global $post;
+
+        if ($offset > $total_count_posts) {
+            wp_reset_query();
+            $count_items = $total_count_posts;
+            $offset = 'done';
+        } else {
+            $args = [
+                'posts_per_page' => $increment,
+                'post_type'      => 'any',
+                'post_status'    => ['pending', 'draft', 'publish', 'future'],
+                'offset'         => $offset,
+            ];
+
+            $video_query = get_posts($args);
+
+            if ($video_query) {
+                foreach ($video_query as $post) {
+                    seopress_pro_video_xml_sitemap($post->ID, $post);
+                }
+            }
+            $offset += $increment;
+        }
+        $data           = [];
+
+        $data['total'] = $total_count_posts;
+
+        if ($offset >= $total_count_posts) {
+            $data['count'] = $total_count_posts;
+        } else {
+            $data['count'] = $offset;
+        }
+
+        $data['offset'] = $offset;
+
+        //Clear cache
+        delete_transient( '_seopress_sitemap_ids_video' );
+
+        wp_send_json_success($data);
+        exit();
+    }
+}
+add_action('wp_ajax_seopress_video_xml_sitemap_regenerate', 'seopress_video_xml_sitemap_regenerate');
 
 require_once __DIR__ . '/ajax-migrate/smart-crawl.php';
 require_once __DIR__ . '/ajax-migrate/seopressor.php';

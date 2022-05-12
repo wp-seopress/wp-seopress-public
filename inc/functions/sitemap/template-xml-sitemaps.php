@@ -428,6 +428,12 @@ function seopress_xml_sitemap_index() {
 
         foreach ($posts as $key => $postID) {
             $seopress_video	= get_post_meta($postID, '_seopress_video', true);
+            $seopress_video_xml_yt = get_post_meta($postID, '_seopress_video_xml_yt', true);
+
+            if ( !empty($seopress_video_xml_yt)) {
+                continue;
+            }
+
             if ( ! $seopress_video) {
                 --$count_posts;
                 unset($posts[$key]);

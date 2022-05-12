@@ -46,4 +46,8 @@ class ToggleOption {
     public function getToggleLocalBusiness() {
         return $this->searchOptionByKey('local-business');
     }
+
+    public function getToggleGoogleNews(){
+        return $this->searchOptionByKey('news');
+    }
 }

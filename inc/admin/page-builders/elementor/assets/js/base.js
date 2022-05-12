@@ -138,18 +138,24 @@ function contentAnalysisToggle() {
             stop = false;
         }
         jQuery(this).toggleClass('open');
-        jQuery(this).parent().parent().next('.gr-analysis-content').toggle();
+        jQuery(this).attr('aria-expanded', (jQuery(this).attr('aria-expanded') == "false" ? true : false));
+        jQuery(this).parent().parent().next(".gr-analysis-content").toggle();
+        jQuery(this).parent().parent().next(".gr-analysis-content").attr('aria-hidden', (jQuery(this).parent().parent().next(".gr-analysis-content").attr('aria-hidden') == "true" ? false : true));
     });
 
     //Show all
     jQuery(document).on('click', '#expand-all', function (e) {
         e.preventDefault();
         jQuery('.gr-analysis-content').show();
+        jQuery(".gr-analysis-title button").attr('aria-expanded', true);
+        jQuery(".gr-analysis-content").attr('aria-hidden', false);
     });
     //Hide all
     jQuery(document).on('click', '#close-all', function (e) {
         e.preventDefault();
         jQuery('.gr-analysis-content').hide();
+        jQuery(".gr-analysis-title button").attr('aria-expanded', false);
+        jQuery(".gr-analysis-content").attr('aria-hidden', true);
     });
 }
 

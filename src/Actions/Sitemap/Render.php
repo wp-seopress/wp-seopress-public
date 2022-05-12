@@ -39,6 +39,8 @@ class Render implements ExecuteHooksFrontend {
             $filename = 'template-xml-sitemaps.php';
         } elseif ('1' === get_query_var('seopress_sitemap_xsl')) {
             $filename = 'template-xml-sitemaps-xsl.php';
+        } elseif ('1' === get_query_var('seopress_sitemap_video_xsl')) {
+            $filename = 'template-xml-sitemaps-video-xsl.php';
         } elseif ('1' === get_query_var('seopress_author')) {
             $filename = 'template-xml-sitemaps-author.php';
         } elseif ('' !== get_query_var('seopress_cpt')) {
@@ -60,9 +62,11 @@ class Render implements ExecuteHooksFrontend {
             }
         }
 
-        if (null !== $filename && file_exists(SEOPRESS_PLUGIN_DIR_PATH . 'inc/functions/sitemap/' . $filename)) {
+        if ($filename === 'template-xml-sitemaps-video-xsl.php') {
+            include SEOPRESS_PRO_PLUGIN_DIR_PATH . 'inc/functions/video-sitemap/' . $filename;
+            exit();
+        } elseif (null !== $filename && file_exists(SEOPRESS_PLUGIN_DIR_PATH . 'inc/functions/sitemap/' . $filename)) {
             include SEOPRESS_PLUGIN_DIR_PATH . 'inc/functions/sitemap/' . $filename;
-
             exit();
         }
     }

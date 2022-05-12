@@ -134,7 +134,7 @@ function print_section_info_google_analytics_matomo()
     </h2>
 </div>
 <p>
-    <?php _e('Use Matomo to track your users with privacy in mind.', 'wp-seopress'); ?>
+    <?php _e('Use Matomo to track your users with privacy in mind. We support both On Premise and Cloud installations.', 'wp-seopress'); ?>
 </p>
 
 <div class="seopress-notice">
@@ -160,7 +160,7 @@ function print_section_info_google_analytics_clarity()
 
 <div class="seopress-notice">
     <p>
-        <?php printf(__('Create your first Microsoft Clarity projet <a href="%s" target="_blank">here</a>.', 'wp-seopress'), esc_url('https://clarity.microsoft.com/')); ?>
+        <?php printf(__('Create your first Microsoft Clarity project <a href="%s" target="_blank">here</a>.', 'wp-seopress'), esc_url('https://clarity.microsoft.com/')); ?>
     </p>
 </div>
 

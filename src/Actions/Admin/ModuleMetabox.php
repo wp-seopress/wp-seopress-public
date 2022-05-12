@@ -107,6 +107,7 @@ class ModuleMetabox implements ExecuteHooks
             'SUB_TABS' => [
                 'GOOGLE_NEWS' => apply_filters('seopress_active_google_news', false),
                 'VIDEO_SITEMAP' => apply_filters('seopress_active_video_sitemap', false),
+                'INSPECT_URL' => apply_filters('seopress_active_inspect_url', false),
                 'INTERNAL_LINKING' => apply_filters('seopress_active_internal_linking', false),
                 'SCHEMA_MANUAL' =>  apply_filters('seopress_active_schemas', false)
             ],

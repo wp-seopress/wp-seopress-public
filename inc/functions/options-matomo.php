@@ -3,7 +3,6 @@ defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thank
 
 //MATOMO TRACKING
 
-
 //Matomo Tracking
 function seopress_google_analytics_matomo_enable_option() {
 	$seopress_google_analytics_matomo_enable_option = get_option("seopress_google_analytics_option_name");
@@ -12,6 +11,18 @@ function seopress_google_analytics_matomo_enable_option() {
 			$options[$key] = $seopress_google_analytics_matomo_enable_value;
 			if (isset($seopress_google_analytics_matomo_enable_option['seopress_google_analytics_matomo_enable'])) {
 				return $seopress_google_analytics_matomo_enable_option['seopress_google_analytics_matomo_enable'];
+			}
+	}
+}
+
+//Matomo self hosting
+function seopress_google_analytics_matomo_self_hosted_option() {
+	$seopress_google_analytics_matomo_self_hosted_option = get_option("seopress_google_analytics_option_name");
+	if ( ! empty ( $seopress_google_analytics_matomo_self_hosted_option ) ) {
+		foreach ($seopress_google_analytics_matomo_self_hosted_option as $key => $seopress_google_analytics_matomo_self_hosted_value)
+			$options[$key] = $seopress_google_analytics_matomo_self_hosted_value;
+			if (isset($seopress_google_analytics_matomo_self_hosted_option['seopress_google_analytics_matomo_self_hosted'])) {
+				return $seopress_google_analytics_matomo_self_hosted_option['seopress_google_analytics_matomo_self_hosted'];
 			}
 	}
 }
@@ -154,11 +165,11 @@ function seopress_matomo_js($echo) {
 		//Init
 		$seopress_matomo_config = [];
 		$seopress_matomo_event = [];
-		
+
 		$seopress_matomo_html = "\n";
 		$seopress_matomo_html .="<script async>
 var _paq = window._paq || [];\n";
-		
+
 		//subdomains
 		if (seopress_google_analytics_matomo_subdomains_option() =='1') {
 			$seopress_matomo_config['subdomains'] = "_paq.push(['setCookieDomain', '*.".get_home_url()."']);\n";
@@ -187,8 +198,8 @@ var _paq = window._paq || [];\n";
 		if (seopress_google_analytics_matomo_cross_domain_option() =='1' && seopress_google_analytics_matomo_cross_domain_sites_option()) {
 
 			$domains = array_map('trim',array_filter(explode(',',seopress_google_analytics_matomo_cross_domain_sites_option())));
-			
-			if (!empty($domains)) { 
+
+			if (!empty($domains)) {
 				$domains_count = count($domains);
 
 				$link_domains = '';
@@ -203,7 +214,7 @@ var _paq = window._paq || [];\n";
 				$seopress_matomo_config['set_domains'] = apply_filters('seopress_matomo_linker', $seopress_matomo_config['set_domains']);
 			}
 		}
-		
+
 		//link tracking
 		if (seopress_google_analytics_matomo_link_tracking_option() =='1') {
 			$seopress_matomo_config['link_tracking'] = "_paq.push(['enableLinkTracking']);\n";
@@ -230,7 +241,7 @@ var _paq = window._paq || [];\n";
 			if (seopress_google_analytics_cd_category_option() !='none') {
 				if (is_single() && has_category()) {
 					$categories = get_the_category();
-					
+
 					if ( ! empty( $categories ) ) {
 						$get_first_category = esc_html( $categories[0]->name );
 					}
@@ -239,7 +250,7 @@ var _paq = window._paq || [];\n";
 				}
 			}
 		}
-		
+
 		if (seopress_google_analytics_cd_tag_option() !='') {
 			if (seopress_google_analytics_cd_tag_option() !='none') {
 				if (is_single() && has_tag()) {
@@ -259,7 +270,7 @@ var _paq = window._paq || [];\n";
 				}
 			}
 		}
-		
+
 		if (seopress_google_analytics_cd_post_type_option() !='') {
 			if (seopress_google_analytics_cd_post_type_option() !='none') {
 				if (is_single()) {
@@ -268,7 +279,7 @@ var _paq = window._paq || [];\n";
 				}
 			}
 		}
-		
+
 		if (seopress_google_analytics_cd_logged_in_user_option() !='') {
 			if (seopress_google_analytics_cd_logged_in_user_option() !='none') {
 				if (wp_get_current_user()->ID) {
@@ -284,36 +295,41 @@ var _paq = window._paq || [];\n";
 				$seopress_matomo_html .= $value;
 			}
 		}
-		
+
 		//send data dimensions
 		if (!empty($seopress_matomo_event)) {
 			foreach($seopress_matomo_event as $key => $value) {
 				$seopress_matomo_html .= $value;
 			}
 		}
-		
+
+        $seopress_matomo_src = "cdn.matomo.cloud/".seopress_google_analytics_matomo_id_option()."/matomo.js";
+        if (seopress_google_analytics_matomo_self_hosted_option() === '1') {
+            $seopress_matomo_src = seopress_google_analytics_matomo_id_option();
+        }
+
 		$seopress_matomo_html .= "_paq.push(['trackPageView']);
 (function() {
 	var u='https://".seopress_google_analytics_matomo_id_option()."/';
 	_paq.push(['setTrackerUrl', u+'matomo.php']);
 	_paq.push(['setSiteId', '".seopress_google_analytics_matomo_site_id_option()."']);
 	var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-	g.type='text/javascript'; g.async=true; g.defer=true; g.src='//cdn.matomo.cloud/".seopress_google_analytics_matomo_id_option()."/matomo.js'; s.parentNode.insertBefore(g,s);
+	g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://".$seopress_matomo_src."/matomo.js'; s.parentNode.insertBefore(g,s);
 	})();\n";
-		
+
 		$seopress_matomo_html .= "</script>\n";
-		
+
 		//no JS
 		$no_js = NULL;
 		if (seopress_google_analytics_matomo_no_js_option() =='1') {
 			$no_js = '<noscript><p><img src="https://'.seopress_google_analytics_matomo_id_option().'/matomo.php?idsite='.seopress_google_analytics_matomo_site_id_option().'&amp;rec=1" style="border:0;" alt="" /></p></noscript>';
 			$no_js = apply_filters('seopress_matomo_no_js', $no_js);
 		}
-		
+
 		if ($no_js) {
 			$seopress_matomo_html .= $no_js;
 		}
-		
+
 		$seopress_matomo_html = apply_filters('seopress_matomo_tracking_html', $seopress_matomo_html);
 
 		if ($echo == true) {

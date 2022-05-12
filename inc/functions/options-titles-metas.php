@@ -450,7 +450,7 @@ function seopress_titles_the_title() {
                 $seopress_titles_title_template = str_replace($seopress_titles_ucf_template_variables_array, $seopress_titles_ucf_template_replace_array, $seopress_titles_title_template);
             }
         }
-    } elseif (is_post_type_archive() && seopress_titles_archive_titles_option()) { //IS POST TYPE ARCHIVE
+    } elseif (is_post_type_archive() && !is_tax() && seopress_titles_archive_titles_option()) { //IS POST TYPE ARCHIVE (!is_tax required for TEC)
         $seopress_titles_archive_titles_option = esc_attr(seopress_titles_archive_titles_option());
 
         $seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archive_titles_option);
@@ -539,8 +539,19 @@ if (apply_filters('seopress_old_pre_get_document_title', true)) {
 
     //Avoid TEC rewriting our title tag on Venue and Organizer pages
     if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
-        if (function_exists('tribe_is_venue') && tribe_is_venue() || function_exists('tribe_is_organizer') && tribe_is_organizer()) {
-            add_filter('tribe_events_title_tag', 'seopress_titles_the_title', 20);
+        if (
+            function_exists('tribe_is_event') && tribe_is_event() ||
+            function_exists('tribe_is_venue') && tribe_is_venue() ||
+            function_exists('tribe_is_organizer') && tribe_is_organizer()
+            // function_exists('tribe_is_month') && tribe_is_month() && is_tax() ||
+            // function_exists('tribe_is_upcoming') && tribe_is_upcoming() && is_tax() ||
+            // function_exists('tribe_is_past') && tribe_is_past() && is_tax() ||
+            // function_exists('tribe_is_week') && tribe_is_week() && is_tax() ||
+            // function_exists('tribe_is_day') && tribe_is_day() && is_tax() ||
+            // function_exists('tribe_is_map') && tribe_is_map() && is_tax() ||
+            // function_exists('tribe_is_photo') && tribe_is_photo() && is_tax()
+        ) {
+            add_filter('pre_get_document_title', 'seopress_titles_the_title', 20);
         }
     }
 }
@@ -752,7 +763,7 @@ function seopress_titles_the_description_content() {
                 $seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
             }
         }
-    } elseif (is_post_type_archive() && seopress_titles_archive_desc_option()) { //IS POST TYPE ARCHIVE
+    } elseif (is_post_type_archive() && !is_tax() && seopress_titles_archive_desc_option()) { //IS POST TYPE ARCHIVE (!is_tax() required for TEC)
         $seopress_titles_the_description = esc_attr(seopress_titles_archive_desc_option());
 
         $seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);

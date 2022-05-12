@@ -166,6 +166,7 @@ class Init implements ActivationHook
             'toggle-robots'           => '1',
             'toggle-404'              => '1',
             'toggle-bot'              => '1',
+            'toggle-inspect-url'      => '1',
         ];
 
         if (is_plugin_active('woocommerce/woocommerce.php')) {

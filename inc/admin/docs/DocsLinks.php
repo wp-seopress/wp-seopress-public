@@ -74,6 +74,9 @@ function seopress_get_docs_links()
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=fr',
                     'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=fr'
                 ],
+                'matomo' => [
+                    'on_premise' => 'https://www.seopress.org/fr/support/guides/comment-utiliser-matomo-en-auto-heberge-avec-seopress-free/' . $utm,
+                ],
                 'clarity' => [
                     'project' => 'https://www.seopress.org/fr/support/guides/trouver-mon-id-de-project-microsoft-clarity/' . $utm,
                 ]
@@ -126,11 +129,15 @@ function seopress_get_docs_links()
             ],
             'license' => [
                 'account'        => 'https://www.seopress.org/fr/mon-compte/' . $utm,
-                'license_errors' => 'https://www.seopress.org/fr/support/guides/activer-votre-licence-seopress-pro-insights/' . $utm,
+                'license_errors' => 'https://www.seopress.org/fr/support/guides/activer-votre-licence-seopress-pro-insights/'. $utm . '#je-ne-peux-toujours-pas-activer-ma-cle-de-licence',
+                'license_define' => 'https://www.seopress.org/fr/support/guides/activer-votre-licence-seopress-pro-insights/' . $utm . '#ajouter-ma-cle-de-licence-dans-wp-config-php',
             ],
             'addons' => [
                 'pro' => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-pro/' . $utm,
                 'insights' => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-insights/' . $utm,
+            ],
+            'insights' => [
+                'slack_webhook' => 'https://api.slack.com/messaging/webhooks/' . $utm
             ]
         ];
     } else {
@@ -196,6 +203,9 @@ function seopress_get_docs_links()
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=en',
                     'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=en'
                 ],
+                'matomo' => [
+                    'on_premise' => 'https://www.seopress.org/support/guides/how-to-use-matomo-on-premise-with-seopress-free/' . $utm,
+                ],
                 'clarity' => [
                     'project' => 'https://www.seopress.org/support/guides/find-my-microsoft-clarity-project-id/' . $utm,
                 ]
@@ -248,11 +258,15 @@ function seopress_get_docs_links()
             ],
             'license' => [
                 'account'        => 'https://www.seopress.org/account/' . $utm,
-                'license_errors' => 'https://www.seopress.org/support/guides/activate-seopress-pro-license/' . $utm,
+                'license_errors' => 'https://www.seopress.org/support/guides/activate-seopress-pro-license/' . $utm . '#i-still-cant-activate-my-license-key',
+                'license_define' => 'https://www.seopress.org/support/guides/activate-seopress-pro-license/' . $utm . '#add-my-license-key-to-wp-config-php',
             ],
             'addons' => [
                 'pro' => 'https://www.seopress.org/wordpress-seo-plugins/pro/' . $utm,
                 'insights' => 'https://www.seopress.org/wordpress-seo-plugins/insights/' . $utm,
+            ],
+            'insights' => [
+                'slack_webhook' => 'https://api.slack.com/messaging/webhooks/' . $utm
             ]
         ];
     }

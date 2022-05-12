@@ -49,6 +49,15 @@ class Sitemap {
     }
 
     /**
+     * @since 5.7.0
+     *
+     * @return string|null
+     */
+    public function videoIsEnabled() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_video_enable');
+    }
+
+    /**
      * @since 4.3.0
      *
      * @return string|null

@@ -1030,13 +1030,46 @@ function seopress_google_analytics_matomo_enable_callback() {
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Enable Matomo tracking (Matomo account required)', 'wp-seopress'); ?>
+
+    <?php _e('Enable Matomo tracking', 'wp-seopress'); ?>
+    <p class="description">
+        <?php _e('A Matomo Cloud account or a self hosted Matomo installation is required.', 'wp-seopress'); ?>
+    </p>
 </label>
 
 <?php if (isset($options['seopress_google_analytics_matomo_enable'])) {
         esc_attr($options['seopress_google_analytics_matomo_enable']);
     }
 }
+
+function seopress_google_analytics_matomo_self_hosted_callback() {
+    $docs = seopress_get_docs_links();
+    $options = get_option('seopress_google_analytics_option_name');
+    $check   = isset($options['seopress_google_analytics_matomo_self_hosted']); ?>
+
+
+<label for="seopress_google_analytics_matomo_self_hosted">
+    <input id="seopress_google_analytics_matomo_self_hosted"
+        name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_self_hosted]" type="checkbox" <?php if ('1' == $check) { ?>
+    checked="yes"
+    <?php } ?>
+    value="1"/>
+
+    <?php _e('Yes, self-hosted installation', 'wp-seopress'); ?>
+    <p class="description">
+        <?php _e('If you use Matomo Cloud, uncheck this option.', 'wp-seopress'); ?>
+    </p>
+    <p class="description">
+        <span class="dashicons dashicons-external"></span>
+        <?php printf('<a href="%s" target="_blank">'.__('Learn how to install Matomo On-Premise on your server.', 'wp-seopress').'</a>', $docs['analytics']['matomo']['on_premise']); ?>
+    </p>
+</label>
+
+<?php if (isset($options['seopress_google_analytics_matomo_self_hosted'])) {
+        esc_attr($options['seopress_google_analytics_matomo_self_hosted']);
+    }
+}
+
 function seopress_google_analytics_matomo_id_callback() {
     $options = get_option('seopress_google_analytics_option_name');
 
@@ -1044,10 +1077,10 @@ function seopress_google_analytics_matomo_id_callback() {
 
     printf('<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_id]" placeholder="'
         . esc_html__('Enter "example" if you Matomo account URL is "example.matomo.cloud"', ' wp-seopress')
-        . '" value="%s" aria-label="' . __('Matomo Cloud URL', 'wp-seopress') . '"/>', esc_html($check)); ?>
+        . '" value="%s" aria-label="' . __('Matomo URL (Cloud or Self-hosted)', 'wp-seopress') . '"/>', esc_html($check)); ?>
 
 <p class="description">
-    <?php _e('Enter only the <strong>host</strong> like this example.matomo.cloud'); ?>
+    <?php _e('Enter only the <strong>host</strong> like this example.matomo.cloud (Cloud) or matomo.example.com (self-hosted).'); ?>
 </p>
 
 <?php
@@ -1065,7 +1098,8 @@ function seopress_google_analytics_matomo_site_id_callback() {
         ); ?>
 
 <p class="description">
-    <?php _e('To find your site ID, go to your <strong>Matomo Cloud account, Websites, Manage page</strong>. Look at "Site ID" on the right part.', 'wp-seopress'); ?>
+    <?php _e('To find your site ID, go to your <strong>Matomo Cloud account, Websites, Manage page</strong>. Look at "Site ID" on the right part.', 'wp-seopress'); ?><br>
+    <?php _e('For self-hosted installations, go to your Matomo administration, Settings, Websites, Manage. From the list of your websites, find the ID line.', 'wp-seopress'); ?>
 </p>
 <?php
 }

@@ -183,36 +183,41 @@
             if (isset($value['filter'])) {
                 $seopress_feature = apply_filters($value['filter'], true);
             }
+            ?>
 
-            if (true === $seopress_feature) {
-                $title            = isset($value['title']) ? $value['title'] : null;
-                $desc             = isset($value['desc']) ? $value['desc'] : null;
-                $btn_primary      = isset($value['btn_primary']) ? $value['btn_primary'] : '';
-                $toggle           = isset($value['toggle']) ? $value['toggle'] : true; ?>
-        <a href="<?php echo $btn_primary; ?>"
-            class="seopress-cart-list inner">
-            <?php
-                            if (true === $toggle) {
-                                if ('1' == seopress_get_toggle_option($key)) {
-                                    $seopress_get_toggle_option = '1';
-                                } else {
-                                    $seopress_get_toggle_option = '0';
-                                } ?>
-            <input type="checkbox" name="toggle-<?php echo $key; ?>"
-                id="toggle-<?php echo $key; ?>" class="toggle"
-                data-toggle="<?php echo $seopress_get_toggle_option; ?>">
-            <label for="toggle-<?php echo $key; ?>"></label>
-            <?php
-                            } ?>
-            <div class="seopress-card-item">
-                <h3><?php echo $title; ?>
-                </h3>
-                <p><?php echo $desc; ?>
-                </p>
+            <div class="seopress-cart-list inner">
+
+                <?php
+                if (true === $seopress_feature) {
+                    $title            = isset($value['title']) ? $value['title'] : null;
+                    $desc             = isset($value['desc']) ? $value['desc'] : null;
+                    $btn_primary      = isset($value['btn_primary']) ? $value['btn_primary'] : '';
+                    $toggle           = isset($value['toggle']) ? $value['toggle'] : true;
+
+                    if (true === $toggle) {
+                        if ('1' == seopress_get_toggle_option($key)) {
+                            $seopress_get_toggle_option = '1';
+                        } else {
+                            $seopress_get_toggle_option = '0';
+                        } ?>
+                        <span class="screen-reader-text"><?php printf(__('Toggle %s','wp-seopress'), $title); ?></span>
+                        <input type="checkbox" name="toggle-<?php echo $key; ?>" id="toggle-<?php echo $key; ?>" class="toggle" data-toggle="<?php echo $seopress_get_toggle_option; ?>">
+                        <label for="toggle-<?php echo $key; ?>"></label>
+                    <?php } ?>
+
+                    <a href="<?php echo $btn_primary; ?>">
+                        <div class="seopress-card-item">
+                            <h3><?php echo $title; ?></h3>
+                            <p><?php echo $desc; ?></p>
+                        </div>
+                    </a>
+                <?php
+                }
+                ?>
+
             </div>
-        </a>
-        <?php
-            }
+
+            <?php
         } ?>
     </div>
     <?php }

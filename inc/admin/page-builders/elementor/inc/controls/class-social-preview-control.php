@@ -106,7 +106,15 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 						</div>
 						<div class="snippet-title">{{{ data.title }}}</div>
 						<div class="snippet-permalink">{{{ data.link }}}</div>
-						<div class="snippet-description-default">{{{ data.description }}}</div>
+                        <div class="wrap-snippet-mobile">
+                            <div class="wrap-meta-desc">
+                                <?php echo seopress_display_date_snippet(); ?>
+						        <div class="snippet-description-default">{{{ data.description }}}</div>
+                            </div>
+                            <div class="wrap-post-thumb">
+                                <?php the_post_thumbnail('full', ['class' => 'snippet-post-thumb']); ?>
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>

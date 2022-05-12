@@ -470,6 +470,14 @@ add_settings_field(
 );
 
 add_settings_field(
+    'seopress_google_analytics_matomo_self_hosted', // ID
+    __('Self hosted Matomo installation', 'wp-seopress'), // Title
+    'seopress_google_analytics_matomo_self_hosted_callback', // Callback
+    'seopress-settings-admin-google-analytics-matomo', // Page
+    'seopress_setting_section_google_analytics_matomo' // Section
+);
+
+add_settings_field(
     'seopress_google_analytics_matomo_id', // ID
     __('Enter your tracking ID', 'wp-seopress'), // Title
     'seopress_google_analytics_matomo_id_callback', // Callback

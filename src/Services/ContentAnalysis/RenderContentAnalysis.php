@@ -35,7 +35,7 @@ class RenderContentAnalysis {
             update_post_meta(get_the_ID(), '_seopress_analysis_data', $analysis_data);
         } ?>
                     <span><a href="#" id="expand-all"><?php echo __('Expand', 'wp-seopress'); ?></a> / <a href="#" id="close-all"><?php echo __('Close', 'wp-seopress'); ?></a></span>
-                </div>
+                </div><!-- .analysis-score -->
                 <?php
                 if ( ! empty($analyzes)) {
                     $order = [
@@ -58,9 +58,10 @@ class RenderContentAnalysis {
                             <?php if (isset($value['title'])) { ?>
                                 <div class="gr-analysis-title">
                                     <h3>
-                                        <button type="button" aria-expanded="true" class="btn-toggle">
+                                        <button type="button" aria-expanded="false" class="btn-toggle">
                                             <?php if (isset($value['impact'])) { ?>
                                                 <span class="impact <?php echo $value['impact']; ?>" aria-hidden="true"></span>
+                                                <span class="screen-reader-text"><?php printf(__('Degree of severity: %s','wp-seopress'), $value['impact']); ?></span>
                                             <?php } ?>
                                             <span class="seopress-arrow" aria-hidden="true"></span>
                                             <?php echo $value['title']; ?>
@@ -69,15 +70,14 @@ class RenderContentAnalysis {
                                 </div>
                             <?php } ?>
                             <?php if (isset($value['desc'])) { ?>
-                                <div class="gr-analysis-content"><?php echo $value['desc']; ?></div>
+                                <div class="gr-analysis-content" aria-hidden="true"><?php echo $value['desc']; ?></div>
                             <?php } ?>
-                        </div>
+                        </div><!-- .gr-analysis -->
                     <?php
                     }
                 } ?>
-                </div>
-            </div>
-        </div>
+                </div><!-- #seopress-analysis-tabs-1 -->
+            </div><!-- #seopress-analysis-tabs -->
         <?php
     }
 }

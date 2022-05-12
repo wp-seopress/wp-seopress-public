@@ -1,4 +1,16 @@
 jQuery(document).ready(function ($) {
+    //Clear the previous image if a user paste a URL to the field
+    $("#seopress_social_fb_img_meta").on('paste', function () {
+        $("#seopress_social_fb_img_attachment_id").val('');
+        $("#seopress_social_fb_img_width").val('');
+        $("#seopress_social_fb_img_height").val('');
+    });
+    $("#seopress_social_twitter_img_meta").on('paste', function () {
+        $("#seopress_social_twitter_img_attachment_id").val('');
+        $("#seopress_social_twitter_img_width").val('');
+        $("#seopress_social_twitter_img_height").val('');
+    });
+
     var mediaUploader;
     $(".button.seopress_social_facebook_img_cpt").click(function (e) {
         e.preventDefault();

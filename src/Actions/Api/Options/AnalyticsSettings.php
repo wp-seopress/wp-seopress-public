@@ -33,6 +33,11 @@ class AnalyticsSettings implements ExecuteHooks {
      * @return boolean
      */
     public function permissionCheck(\WP_REST_Request $request) {
+        $nonce = $request->get_header('x-wp-nonce');
+        if ( ! wp_verify_nonce($nonce, 'wp_rest')) {
+            return false;
+        }
+
         if ( ! user_can( $this->current_user, 'manage_options' )) {
             return false;
         }
@@ -68,7 +73,6 @@ class AnalyticsSettings implements ExecuteHooks {
         foreach($options as $key => $value) {
             $data[$key] = $value;
         }
-
 
         return new \WP_REST_Response($data);
     }
