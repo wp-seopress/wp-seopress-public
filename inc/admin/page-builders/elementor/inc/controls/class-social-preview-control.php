@@ -44,7 +44,7 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-field facebook-snippet-box">
 				<div class="snippet-fb-img-alert alert1" style="display:none"><p class="notice notice-error"><?php _e('File type not supported by Facebook. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-fb-img-alert alert2" style="display:none"><p class="notice notice-error"><?php _e('Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image.', 'wp-seopress'); ?></p></div>
+				<div class="snippet-fb-img-alert alert2" style="display:none"><p class="notice notice-error"><?php _e('Minimum size for Facebook is <strong>200x200px</strong>. Please choose another image.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-fb-img-alert alert3" style="display:none"><p class="notice notice-error"><?php _e('File error. Please choose another image.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-fb-img-alert alert4" style="display:none"><p class="notice notice-info"><?php _e('Your image ratio is: ', 'wp-seopress'); ?><span></span><?php _e('. The closer to 1.91 the better.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-fb-img-alert alert5" style="display:none"><p class="notice notice-error"><?php _e('File URL is not valid.', 'wp-seopress'); ?></p></div>
@@ -68,7 +68,7 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-field twitter-snippet-box">
 				<div class="snippet-twitter-img-alert alert1" style="display:none"><p class="notice notice-error"><?php _e('File type not supported by Twitter. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-twitter-img-alert alert2" style="display:none"><p class="notice notice-error"><?php _e('Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress'); ?></p></div>
+				<div class="snippet-twitter-img-alert alert2" style="display:none"><p class="notice notice-error"><?php _e('Minimum size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-twitter-img-alert alert3" style="display:none"><p class="notice notice-error"><?php _e('File error. Please choose another image.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-twitter-img-alert alert4" style="display:none"><p class="notice notice-info"><?php _e('Your image ratio is: ', 'wp-seopress'); ?><span></span><?php _e('. The closer to 1 the better (with large card, 2 is better).', 'wp-seopress'); ?></p></div>
 				<div class="snippet-twitter-img-alert alert5" style="display:none"><p class="notice notice-error"><?php _e('File URL is not valid.', 'wp-seopress'); ?></p></div>

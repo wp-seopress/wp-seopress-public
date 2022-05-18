@@ -6,15 +6,15 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.7
+Stable tag: 5.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Boost your SEO with SEOPress, a simple, fast and powerful SEO plugin for WordPress. No ads, no footprints, no anonymous data sent, white label.
+Rank higher in search engines with SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. No ads, no footprints, no anonymous data sent, white label.
 
 == Description ==
 
-<h3>The only WordPress SEO plugin fully integrated with all page builders and themes!</h3>
+<h3>Best SEO plugin for WordPress fully integrated with all page builders and themes!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -362,8 +362,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.7.1 =
+* FIX JS for Insights and Documentation link
+* FIX Fatal error with automatic update (PRO)
 = 5.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-7/">Read the blog post update</a> =
-* NEW Inspect URL with Google Search Console when you create / edit a post content 🎉
+* NEW Inspect URL with Google Search Console when you create / edit a post content (PRO) 🎉
 * NEW Matomo On-Premise (self-hosted) tracking 🎉
 * NEW Automatically activate your SEOPress PRO license key with the define SEOPRESS_LICENSE_KEY (PRO) 🎉
 * NEW Automatically add your YouTube videos to XML video sitemap (PRO) 🎉

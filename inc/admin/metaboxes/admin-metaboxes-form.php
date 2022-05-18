@@ -450,7 +450,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                         </p>
                                     </div>
                                     <div class="snippet-fb-img-alert alert2" style="display:none">
-                                        <p class="notice notice-error"><?php _e('Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image.', 'wp-seopress'); ?>
+                                        <p class="notice notice-error"><?php _e('Minimum size for Facebook is <strong>200x200px</strong>. Please choose another image.', 'wp-seopress'); ?>
                                         </p>
                                     </div>
                                     <div class="snippet-fb-img-alert alert3" style="display:none">
@@ -567,7 +567,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                         </p>
                                     </div>
                                     <div class="snippet-twitter-img-alert alert2" style="display:none">
-                                        <p class="notice notice-error"><?php _e('Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress'); ?>
+                                        <p class="notice notice-error"><?php _e('Minimum size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress'); ?>
                                         </p>
                                     </div>
                                     <div class="snippet-twitter-img-alert alert3" style="display:none">

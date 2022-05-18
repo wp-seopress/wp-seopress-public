@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 5.7\n"
+"Project-Id-Version: SEOPress 5.7.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress Team <contact@seopress.org>\n"
 "Language-Team: SEOPress Team <contact@seopress.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-05-12T12:05:10+00:00\n"
+"POT-Creation-Date: 2022-05-18T08:39:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -2161,11 +2161,11 @@ msgid "Learn how to integrate Google Tag Manager"
 msgstr ""
 
 #: inc/admin/callbacks/Analytics.php:670
-msgid "Paste your tracking code here (body footer)"
+msgid "Paste your tracking code here (footer)"
 msgstr ""
 
 #: inc/admin/callbacks/Analytics.php:670
-msgid "Additional tracking code field added to body footer"
+msgid "Additional tracking code field added to footer"
 msgstr ""
 
 #: inc/admin/callbacks/Analytics.php:674
@@ -3686,8 +3686,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:453
 #: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:47
-#: app/react/layout/Main/components/Social/Preview/index.js:265
-msgid "Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image."
+msgid "Minimum size for Facebook is <strong>200x200px</strong>. Please choose another image."
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:457
@@ -3783,8 +3782,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:570
 #: inc/admin/page-builders/elementor/inc/controls/class-social-preview-control.php:71
-#: app/react/layout/Main/components/Social/Preview/index.js:353
-msgid "Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image."
+msgid "Minimum size for Twitter is <strong>144x144px</strong>. Please choose another image."
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:579
@@ -7015,9 +7013,17 @@ msgstr ""
 msgid "Your image ratio is:"
 msgstr ""
 
+#: app/react/layout/Main/components/Social/Preview/index.js:265
+msgid "Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image."
+msgstr ""
+
 #: app/react/layout/Main/components/Social/Preview/index.js:291
 #: app/react/layout/Main/components/Social/Preview/index.js:379
 msgid "Please choose an image"
+msgstr ""
+
+#: app/react/layout/Main/components/Social/Preview/index.js:353
+msgid "Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image."
 msgstr ""
 
 #: app/react/layout/Main/index.js:97

@@ -137,7 +137,7 @@ function seopress_get_docs_links()
                 'insights' => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-insights/' . $utm,
             ],
             'insights' => [
-                'slack_webhook' => 'https://api.slack.com/messaging/webhooks/' . $utm
+                'slack_webhook' => 'https://www.seopress.org/fr/support/guides/configurer-les-notifications-slack-avec-seopress-insights/' . $utm
             ]
         ];
     } else {
@@ -266,7 +266,7 @@ function seopress_get_docs_links()
                 'insights' => 'https://www.seopress.org/wordpress-seo-plugins/insights/' . $utm,
             ],
             'insights' => [
-                'slack_webhook' => 'https://api.slack.com/messaging/webhooks/' . $utm
+                'slack_webhook' => 'https://www.seopress.org/support/guides/how-to-setup-slack-notifications-with-seopress-insights/' . $utm
             ]
         ];
     }

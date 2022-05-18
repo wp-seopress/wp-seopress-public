@@ -667,7 +667,7 @@ function seopress_google_analytics_other_tracking_footer_callback() {
     $check   = isset($options['seopress_google_analytics_other_tracking_footer']) ? $options['seopress_google_analytics_other_tracking_footer'] : null;
 
     printf(
-'<textarea id="seopress_google_analytics_other_tracking_footer" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_footer]" rows="16" placeholder="' . esc_html__('Paste your tracking code here (body footer)', 'wp-seopress') . '" aria-label="' . __('Additional tracking code field added to body footer', 'wp-seopress') . '">%s</textarea>',
+'<textarea id="seopress_google_analytics_other_tracking_footer" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_footer]" rows="16" placeholder="' . esc_html__('Paste your tracking code here (footer)', 'wp-seopress') . '" aria-label="' . __('Additional tracking code field added to footer', 'wp-seopress') . '">%s</textarea>',
 esc_textarea($check)); ?>
 
 <p class="description">
