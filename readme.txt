@@ -1,12 +1,12 @@
 === SEOPress, on-site SEO ===
 Authors: rainbowgeek
-Contributors: rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdubroeucq
+Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdubroeucq
 Donate link: https://www.seopress.org/
 Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content analysis, instant indexing, breadcrumbs, analytics, rich snippets, broken link
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.7.1
+Stable tag: 5.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -362,6 +362,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.7.2 =
+* FIX Google Inspect URL in Content Analysis metabox
 = 5.7.1 =
 * FIX JS for Insights and Documentation link
 * FIX Fatal error with automatic update (PRO)

@@ -34,7 +34,7 @@
             ],
             'google-analytics' => [
                 'title'         => __('Analytics', 'wp-seopress'),
-                'desc'          => __('Track everything about your visitors with Google Analytics / Matomo', 'wp-seopress'),
+                'desc'          => __('Track everything about your visitors with Google Analytics / Matomo / Microsoft Clarity', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-google-analytics'),
                 'filter'        => 'seopress_remove_feature_google_analytics',
             ],

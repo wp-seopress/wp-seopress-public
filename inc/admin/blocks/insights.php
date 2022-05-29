@@ -124,11 +124,11 @@
                                             <?php _e('Core Web Vitals Assessment: ', 'wp-seopress'); ?>
 
                                             <?php if ($core_web_vitals_score === true) { ?>
-                                            <span class="green"><?php _e('Passed', 'wp-seopress-pro'); ?></span>
+                                            <span class="green"><?php _e('Passed', 'wp-seopress'); ?></span>
                                             <?php } elseif ($core_web_vitals_score === null) { ?>
-                                            <span class="red"><?php _e('No data found', 'wp-seopress-pro'); ?></span>
+                                            <span class="red"><?php _e('No data found', 'wp-seopress'); ?></span>
                                             <?php } else { ?>
-                                            <span class="red"><?php _e('Failed', 'wp-seopress-pro'); ?></span>
+                                            <span class="red"><?php _e('Failed', 'wp-seopress'); ?></span>
                                             <?php } ?>
                                         </h3>
                                         <p><?php printf(__('Computed from the %s Core Web Vitals metrics over the latest 28-day collection period.', 'wp-seopress'), $cwv_svg); ?></p>

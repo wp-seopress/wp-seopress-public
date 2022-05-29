@@ -40,8 +40,8 @@ function seopress_instant_indexing_google_action_callback() {
     $options = get_option('seopress_instant_indexing_option_name');
 
     $actions = [
-        'URL_UPDATED' => __('Update URLs', 'wp-seopress-pro'),
-        'URL_DELETED' => esc_attr__('Remove URLs (URL must return a 404 or 410 status code or the page contains <meta name="robots" content="noindex" /> meta tag)', 'wp-seopress-pro'),
+        'URL_UPDATED' => __('Update URLs', 'wp-seopress'),
+        'URL_DELETED' => esc_attr__('Remove URLs (URL must return a 404 or 410 status code or the page contains <meta name="robots" content="noindex" /> meta tag)', 'wp-seopress'),
     ];
 
     foreach ($actions as $key => $value) { ?>
