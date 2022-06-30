@@ -31,7 +31,7 @@ function seopress_admin_header($context = "") {
             <button type="button" role="tab" aria-selected="true" id="activity-panel-tab-help" data-panel="help"
                 class="btn">
                 <span class="dashicons dashicons-editor-help"></span>
-                <?php _e('Documentation', 'wp-seopress'); ?>
+                <?php _e('Help', 'wp-seopress'); ?>
             </button>
         </div>
         <div id="seopress-activity-panel-help" class="seopress-activity-panel-wrapper" tabindex="0" role="tabpanel"

@@ -14,7 +14,9 @@ $data_attr = seopress_metaboxes_init();
     <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.7') >= 0) { ?>
         <ul class="wrap-ca-list">
             <li><a href="#seopress-ca-tabs-2"><?php _e('Overview', 'wp-seopress'); ?></a></li>
-            <li><a href="#seopress-ca-tabs-1"><?php _e('Inspect with Google', 'wp-seopress'); ?></a></li>
+            <?php if (seopress_get_toggle_option('inspect-url') ==='1') { ?>
+                <li><a href="#seopress-ca-tabs-1"><?php _e('Inspect with Google', 'wp-seopress'); ?></a></li>
+            <?php } ?>
         </ul>
     <?php } ?>
     <div id="seopress-ca-tabs-2">
@@ -116,11 +118,13 @@ $data_attr = seopress_metaboxes_init();
             seopress_get_service('RenderContentAnalysis')->render($analyzes, $seopress_analysis_data);
         } ?>
     </div>
-    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.7') >= 0) { ?>
-        <div id="seopress-ca-tabs-1">
-            <?php if (function_exists('seopress_get_service') && !empty($data_attr['current_id'])) {
-                seopress_get_service('RenderGSCInspectUrl')->render($data_attr['current_id']);
-            } ?>
-        </div>
-    <?php } ?>
+    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.7') >= 0) {
+        if (seopress_get_toggle_option('inspect-url') === '1') { ?>
+            <div id="seopress-ca-tabs-1">
+                <?php if (function_exists('seopress_get_service') && !empty($data_attr['current_id'])) {
+                    seopress_get_service('RenderGSCInspectUrl')->render($data_attr['current_id']);
+                } ?>
+            </div>
+        <?php }
+    } ?>
 </div>

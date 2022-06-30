@@ -216,8 +216,9 @@ class Init implements ActivationHook
         }
 
         //Taxonomies
-        if (function_exists('seopress_get_taxonomies') && ! empty(seopress_get_taxonomies())) {
-            foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
+        $taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
+        if (empty($taxonomies)) {
+            foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
                 //Title
                 if ('category' == $seopress_tax_key) {
                     $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%_category_title%% %%current_pagination%% %%sep%% %%sitetitle%%';

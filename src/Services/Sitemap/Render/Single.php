@@ -39,6 +39,11 @@ class Single {
                 return null;
             }
 
+            //If noindex, continue to next post
+            if (get_post_meta($post->ID, '_seopress_robots_index', true) ==='yes') {
+                return null;
+            }
+
             //Exclude hidden languages
             //@credits WPML compatibility team
             if (function_exists('icl_object_id') && defined('ICL_SITEPRESS_VERSION')) { //WPML

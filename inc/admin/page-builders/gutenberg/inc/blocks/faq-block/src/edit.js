@@ -1,4 +1,4 @@
-const { Component, Fragment } = wp.element
+const { Fragment } = wp.element
 
 import {
     PanelBody,
@@ -18,7 +18,7 @@ const { withSelect } = wp.data
 
 function WPSeopress_FAQ(props) {
     const { attributes } = props
-    const { listStyle, titleWrapper, imageSize, showFAQScheme, showAccordion } = attributes
+    const { listStyle, titleWrapper, imageSize, showFAQScheme, showAccordion, isProActive } = attributes
 
     const showFAQs = () => {
         return (
@@ -352,18 +352,22 @@ function WPSeopress_FAQ(props) {
                         </Button>
                     </ButtonGroup>
                 </PanelRow>
-                <p>{__('SEO Settings', 'wp-seopress')}</p>
-                <PanelRow>
-                    <ToggleControl
-                        label={__('Enable FAQ Schema', 'wp-seopress')}
-                        checked={!!showFAQScheme}
-                        onChange={(e) => {
-                            props.setAttributes({
-                                showFAQScheme: !showFAQScheme,
-                            })
-                        }}
-                    />
-                </PanelRow>
+                {isProActive &&
+                    <>
+                        <p>{__('SEO Settings', 'wp-seopress')}</p>
+                        <PanelRow>
+                            <ToggleControl
+                                label={__('Enable FAQ Schema', 'wp-seopress')}
+                                checked={!!showFAQScheme}
+                                onChange={(e) => {
+                                    props.setAttributes({
+                                        showFAQScheme: !showFAQScheme,
+                                    })
+                                }}
+                            />
+                        </PanelRow>
+                    </>
+                }
                 <p>{__('Display', 'wp-seopress')}</p>
                 <PanelRow>
                     <ToggleControl

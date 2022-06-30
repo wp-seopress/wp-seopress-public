@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: SEOPress
-Version: 5.7.2
+Version: 5.8
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -70,7 +70,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '5.7.2');
+define('SEOPRESS_VERSION', '5.8');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -507,6 +507,7 @@ remove_filter('wp_robots', 'wp_robots_max_image_preview_large');
  *
  * @since 4.6
  * @todo use wp_robots API
+ * @updated 5.8
  */
 function seopress_robots_wc_pages($robots) {
     include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -522,6 +523,17 @@ function seopress_robots_wc_pages($robots) {
                     return $robots;
                 }
             }
+        }
+    }
+    //remove noindex on search archive pages
+    if (is_search()) {
+        if ('0' === get_option('blog_public')) {
+            return $robots;
+        } else {
+            unset($robots);
+            $robots = [];
+
+            return $robots;
         }
     }
 
@@ -637,8 +649,8 @@ function seopress_plugin_action_links($links, $file) {
  * @author Benjamin
  */
 function seopress_plugin_update_message( $plugin_data, $new_data ) {
-    if (isset($plugin_data['new_version']) && $plugin_data['new_version'] !== '5.8') {
-        echo '<br /><strong><em>' . sprintf( __( 'Important changes incoming for XML sitemaps in version 5.8: <a href="%s" target="_blank">Learn more</a>.', 'wp-seopress' ), 'https://www.seopress.org/docs/xml-sitemap' ).'</em></strong>';
+    if (isset($plugin_data['new_version']) && $plugin_data['new_version'] <= '5.9') {
+        echo '<br /><strong><em>' . sprintf( __( 'Important changes related to XML sitemaps in version 5.8: <a href="%s" target="_blank">Learn more</a>.', 'wp-seopress' ), 'https://www.seopress.org/docs/xml-sitemap' ).'</em></strong>';
 
     }
 }

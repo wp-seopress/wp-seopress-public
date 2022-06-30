@@ -156,6 +156,11 @@ function seopress_do_real_preview()
                         $seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
                     }
 
+                    //Zion Builder compatibility
+                    if (is_plugin_active('zionbuilder/zionbuilder.php')) {
+                        $seopress_get_the_content = $seopress_get_the_content . get_post_meta($seopress_get_the_id, '_zionbuilder_page_elements', true);
+                    }
+
                     //BeTheme is activated
                     $theme = wp_get_theme();
                     if ('betheme' == $theme->template || 'Betheme' == $theme->parent_theme) {
@@ -183,11 +188,11 @@ function seopress_do_real_preview()
 
                     //Bricks compatibility
                     if (defined('BRICKS_DB_EDITOR_MODE') && ('bricks' == $theme->template || 'Bricks' == $theme->parent_theme)) {
-                        $page_sections = get_post_meta($seopress_get_the_id, '_bricks_page_content', true);
+                        $page_sections = get_post_meta($seopress_get_the_id, BRICKS_DB_PAGE_CONTENT, true);
                         $editor_mode   = get_post_meta($seopress_get_the_id, BRICKS_DB_EDITOR_MODE, true);
 
                         if (is_array($page_sections) && 'wordpress' !== $editor_mode) {
-                            $seopress_get_the_content = Bricks\Frontend::render_sections($page_sections, $seopress_get_the_id, 'content', true);
+                            $seopress_get_the_content = Bricks\Frontend::render_data($page_sections);
                         }
                     }
 
@@ -397,7 +402,7 @@ function seopress_do_real_preview()
                         //Keywords density
                         if (! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
                             foreach ($seopress_analysis_target_kw as $kw) {
-                                if (preg_match_all('#\b(' . $kw . ')\b#iu', stripslashes_deep(strip_tags(wp_filter_nohtml_kses($seopress_get_the_content))), $m)) {
+                                if (preg_match_all('#\b(' . $kw . ')\b#iu', stripslashes_deep(wp_strip_all_tags(wp_filter_nohtml_kses($seopress_get_the_content))), $m)) {
                                     $data['kws_density']['matches'][$kw][] = $m[0];
                                 }
                             }
@@ -546,7 +551,7 @@ function seopress_do_real_preview()
                 //Words Counter
                 if (! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
                     if ('' != $seopress_get_the_content) {
-                        $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
+                        $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", wp_strip_all_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
 
                         if (! empty($matches[0])) {
                             $words_counter_unique = count(array_unique($matches[0]));
@@ -737,9 +742,26 @@ function seopress_video_xml_sitemap_regenerate()
             $offset = absint($_POST['offset']);
         }
 
-        global $wpdb;
+        $cpt = ['any'];
+        if (seopress_xml_sitemap_post_types_list_option()) {
+            unset($cpt[0]);
+            foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
+                foreach ($cpt_value as $_cpt_key => $_cpt_value) {
+                    if ('1' == $_cpt_value) {
+                        $cpt[] = $cpt_key;
+                    }
+                }
+            }
 
-        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts}");
+            $cpt = array_map(function($item) {
+                return "'" . esc_sql($item) . "'";
+            }, $cpt);
+
+            $cpt = implode(",", $cpt);
+        }
+
+        global $wpdb;
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts} WHERE post_status IN ('pending', 'draft', 'publish', 'future') AND post_type IN ( $cpt ) ");
 
         $increment = 1;
         global $post;
@@ -751,7 +773,7 @@ function seopress_video_xml_sitemap_regenerate()
         } else {
             $args = [
                 'posts_per_page' => $increment,
-                'post_type'      => 'any',
+                'post_type'      => $cpt,
                 'post_status'    => ['pending', 'draft', 'publish', 'future'],
                 'offset'         => $offset,
             ];

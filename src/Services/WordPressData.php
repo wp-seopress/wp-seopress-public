@@ -32,4 +32,30 @@ class WordPressData
 
         return $post_types;
     }
+
+    public function getTaxonomies($with_terms = false) {
+        $args = [
+            'show_ui' => true,
+            'public'  => true,
+        ];
+
+        $args = apply_filters('seopress_get_taxonomies_args', $args);
+        $taxonomies = get_taxonomies($args, 'objects');
+
+        unset(
+            $taxonomies['seopress_bl_competitors']
+        );
+
+        $taxonomies = apply_filters('seopress_get_taxonomies_list', $taxonomies);
+
+        if ( ! $with_terms) {
+            return $taxonomies;
+        }
+
+        foreach ($taxonomies as $_tax_slug => &$_tax) {
+            $_tax->terms = get_terms(['taxonomy' => $_tax_slug]);
+        }
+
+        return $taxonomies;
+    }
 }

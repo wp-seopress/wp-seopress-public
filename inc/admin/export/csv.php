@@ -44,7 +44,7 @@ function seopress_metadata_export() {
 
     //Get taxonomies
     $seopress_get_taxonomies = [];
-    foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
+    foreach (seopress_get_service('WordPressData')->getTaxonomies() as $seopress_tax_key => $seopress_tax_value) {
         $seopress_get_taxonomies[] = $seopress_tax_key;
     }
 

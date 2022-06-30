@@ -1038,6 +1038,10 @@ class SEOPRESS_Admin_Setup_Wizard {
                             if (!empty($cpt)) { ?>
                             </ul>
                         <?php }
+
+                        if (empty($cpt)) { ?>
+                        <p><?php _e('You don‘t have any post type archives, you can continue to the next step.','wp-seopress'); ?></p>
+                        <?php }
                     } ?>
 
                     <p class="seopress-setup-actions step">
@@ -1096,7 +1100,11 @@ class SEOPRESS_Admin_Setup_Wizard {
             <div class="seopress-tab active">
 
                 <form method="post" class="seopress-wizard-indexing-form">
-                    <?php if ( ! empty(seopress_get_taxonomies())) { ?>
+                    <?php
+
+                    $taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
+
+                    if ( ! empty($taxonomies)) { ?>
                     <h2>
                         <?php _e('For which taxonomy archives, should indexing be disabled?', 'wp-seopress'); ?>
                     </h2>
@@ -1104,7 +1112,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <ul>
                         <?php
                         //Archives
-                        foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
+                        foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
                             $seopress_titles_tax_titles = isset($seopress_titles_option['seopress_titles_tax_titles'][$seopress_tax_key]['noindex']); ?>
                         <h3><?php echo $seopress_tax_value->labels->name; ?>
                             <em><small>[<?php echo $seopress_tax_value->name; ?>]</small></em>
@@ -1155,7 +1163,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_titles_option = get_option('seopress_titles_option_name');
 
 		//Archives noindex
-		foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) {
+		foreach (seopress_get_service('WordPressData')->getTaxonomies() as $seopress_tax_key => $seopress_tax_value) {
 			if (isset($_POST['seopress_titles_option_name']['seopress_titles_tax_titles'][$seopress_tax_key]['noindex'])) {
 				$noindex = esc_attr(wp_unslash($_POST['seopress_titles_option_name']['seopress_titles_tax_titles'][$seopress_tax_key]['noindex']));
 			} else {

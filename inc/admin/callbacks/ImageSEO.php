@@ -45,6 +45,30 @@ function seopress_advanced_advanced_attachments_file_callback() {
     }
 }
 
+function seopress_advanced_advanced_clean_filename_callback() {
+    $options = get_option('seopress_advanced_option_name');
+
+    $check = isset($options['seopress_advanced_advanced_clean_filename']); ?>
+
+<label for="seopress_advanced_advanced_clean_filename">
+    <input id="seopress_advanced_advanced_clean_filename"
+        name="seopress_advanced_option_name[seopress_advanced_advanced_clean_filename]" type="checkbox" <?php if ('1' == $check) { ?>
+    checked="yes"
+    <?php } ?>
+    value="1"/>
+
+    <?php _e('When send a media, remove accents, spaces, capital letters... and force UTF-8 encoding', 'wp-seopress'); ?>
+</label>
+
+<p class="description">
+    <?php _e('e.g. "ExãMple 1 cópy!.jpg" => "example-1-copy.jpg"', 'wp-seopress'); ?>
+</p>
+
+<?php if (isset($options['seopress_advanced_advanced_clean_filename'])) {
+        esc_attr($options['seopress_advanced_advanced_clean_filename']);
+    }
+}
+
 function seopress_advanced_advanced_image_auto_title_editor_callback() {
     $options = get_option('seopress_advanced_option_name');
 
@@ -59,6 +83,10 @@ function seopress_advanced_advanced_image_auto_title_editor_callback() {
 
     <?php _e('When sending an image file, automatically set the title based on the filename', 'wp-seopress'); ?>
 </label>
+
+<p class="description">
+    <?php _e('We use the product title for WooCommerce products.', 'wp-seopress'); ?>
+</p>
 
 <?php if (isset($options['seopress_advanced_advanced_image_auto_title_editor'])) {
         esc_attr($options['seopress_advanced_advanced_image_auto_title_editor']);

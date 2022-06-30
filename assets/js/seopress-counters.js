@@ -1,6 +1,8 @@
 //Init tabs
-jQuery(document).ready(function ($) {
-    if ($("#seopress-ca-tabs").length) {
+document.addEventListener("DOMContentLoaded", function () {
+    const $ = jQuery;
+
+    if ($("#seopress-ca-tabs").length && $("#seopress-ca-tabs .wrap-ca-list").length) {
         $("#seopress-ca-tabs .hidden").removeClass("hidden");
         $("#seopress-ca-tabs").tabs();
     }

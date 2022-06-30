@@ -41,4 +41,11 @@ abstract class Options {
      * @var string
      */
     const KEY_TOGGLE_OPTION = 'seopress_toggle';
+
+    /**
+     * @since 5.8.0
+     *
+     * @var string
+     */
+    const KEY_OPTION_GOOGLE_ANALYTICS = 'seopress_google_analytics_option_name';
 }

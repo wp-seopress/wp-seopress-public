@@ -282,4 +282,16 @@ class AdvancedOption
     public function getAppearanceGenesisSeoMenu(){
         return $this->searchOptionByKey('seopress_advanced_appearance_genesis_seo_menu');
     }
+    /**
+     * @since 5.8
+     */
+    public function getAdvancedCleaningFileName(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_clean_filename');
+    }
+    /**
+     * @since 5.8
+     */
+    public function getAdvancedImageAutoAltTargetKw(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_image_auto_alt_target_kw');
+    }
 }

@@ -200,6 +200,8 @@ if ('1' == seopress_xml_sitemap_html_enable_option()) {
                             'fields'           => 'ids',
                             'exclude'          => $seopress_xml_sitemap_html_exclude_option,
                             'suppress_filters' => false,
+                            'no_found_rows'    => true,
+                            'nopaging'         => true,
                         ];
                         if ('post' === $cpt_key || 'product' === $cpt_key) {
                             if (get_post_type_archive_link($cpt_key) && 0 != get_option('page_for_posts')) {
@@ -233,7 +235,7 @@ if ('1' == seopress_xml_sitemap_html_enable_option()) {
                                 foreach ($cats as $cat) {
                                     if ( ! is_wp_error($cat) && is_object($cat)) {
                                         $html .= '<div class="sp-wrap-cat">';
-                                        $html .= '<h3 class="sp-cat-name">' . $cat->name . '</h3>';
+                                        $html .= '<h3 class="sp-cat-name"><a href="'. get_term_link($cat->term_id) .'">' . $cat->name . '</a></h3>';
 
                                         if ('post' === $cpt_key) {
                                             unset($args['cat']);

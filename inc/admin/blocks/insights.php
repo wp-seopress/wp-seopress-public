@@ -69,6 +69,10 @@
                             'tab_seopress_ps'       => __('PageSpeed', 'wp-seopress'),
                             'tab_seopress_seo_tools'        => __('SEO Tools', 'wp-seopress'),
                         ];
+
+                        if (seopress_get_toggle_option('google-analytics') !=='1') {
+                            unset($dashboard_settings_tabs['tab_seopress_analytics']);
+                        }
                     ?>
 
                     <div class="nav-tab-wrapper">
@@ -97,59 +101,11 @@
                     ?>
 
                     <div class="wrap-seopress-tab-content">
-                        <div id="tab_seopress_ps" class="seopress-tab seopress-page-speed inside<?php if ('tab_seopress_ps' == $current_tab) {
-                        echo 'active';
-                    }?>">
-                            <h3><?php _e('Google Page Speed Score','wp-seopress'); ?></h3>
-                            <p><?php _e('Learn how your site has performed, based on data from your actual users around the world.','wp-seopress'); ?>
-                            </p>
-                            <?php if ($ps_score && $ps_score_desktop) { ?>
-                                <div class="seopress-cwv seopress-summary-item-data">
-                                    <?php echo $ps_score; ?>
-                                    <?php echo $ps_score_desktop; ?>
-                                    <p class="wrap-scale">
-                                        <?php _e('<span><span class="score red"></span>0-49</span><span><span class="score yellow"></span>50-89</span><span><span class="score green"></span>90-100</span>','wp-seopress') ?>
-                                    </p>
-                                </div>
-                                <div class="seopress-cwv">
-                                    <?php if ($core_web_vitals_score === true) { ?>
-                                    <img src="<?php echo SEOPRESS_PRO_ASSETS_DIR; ?>/img/cwv-pass.svg"
-                                        alt='' width='96' height='96' />
-                                    <?php } else { ?>
-                                    <img src="<?php echo SEOPRESS_PRO_ASSETS_DIR; ?>/img/cwv-fail.svg"
-                                        alt='' width='96' height='96' />
-                                    <?php } ?>
-                                    <div>
-                                        <h3>
-                                            <?php _e('Core Web Vitals Assessment: ', 'wp-seopress'); ?>
-
-                                            <?php if ($core_web_vitals_score === true) { ?>
-                                            <span class="green"><?php _e('Passed', 'wp-seopress'); ?></span>
-                                            <?php } elseif ($core_web_vitals_score === null) { ?>
-                                            <span class="red"><?php _e('No data found', 'wp-seopress'); ?></span>
-                                            <?php } else { ?>
-                                            <span class="red"><?php _e('Failed', 'wp-seopress'); ?></span>
-                                            <?php } ?>
-                                        </h3>
-                                        <p><?php printf(__('Computed from the %s Core Web Vitals metrics over the latest 28-day collection period.', 'wp-seopress'), $cwv_svg); ?></p>
-                                    </div>
-                                </div>
-                            <?php } else {  ?>
-                                <p><?php _e('No data available.','wp-seopress'); ?></p>
-                            <?php } ?>
-                            <p>
-                                <a href="<?php echo admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed'); ?>"
-                                    class="btn btnSecondary">
-                                    <?php _e('See full report', 'wp-seopress'); ?>
-                                </a>
-                            </p>
-                        </div>
-
-                        <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                        <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && seopress_get_toggle_option('google-analytics')) { ?>
                         <div id="tab_seopress_analytics" class="seopress-tab seopress-analytics <?php if ('tab_seopress_analytics' == $current_tab) {
                         echo 'active';
                     } ?>">
-                            <?php if ('1' == seopress_get_toggle_option('google-analytics') && '1' !== seopress_google_analytics_dashboard_widget_option()) {
+                            <?php if ('1' !== seopress_google_analytics_dashboard_widget_option()) {
                         $stats = get_transient('seopress_results_google_analytics');
                         $html  = [];
                         if (! empty($stats['sessions'])) {
@@ -204,6 +160,54 @@
                             <?php } ?>
                         </div>
                         <?php } ?>
+
+                        <div id="tab_seopress_ps" class="seopress-tab seopress-page-speed inside<?php if ('tab_seopress_ps' == $current_tab) {
+                        echo 'active';
+                    }?>">
+                            <h3><?php _e('Google Page Speed Score','wp-seopress'); ?></h3>
+                            <p><?php _e('Learn how your site has performed, based on data from your actual users around the world.','wp-seopress'); ?>
+                            </p>
+                            <?php if ($ps_score && $ps_score_desktop) { ?>
+                                <div class="seopress-cwv seopress-summary-item-data">
+                                    <?php echo $ps_score; ?>
+                                    <?php echo $ps_score_desktop; ?>
+                                    <p class="wrap-scale">
+                                        <?php _e('<span><span class="score red"></span>0-49</span><span><span class="score yellow"></span>50-89</span><span><span class="score green"></span>90-100</span>','wp-seopress') ?>
+                                    </p>
+                                </div>
+                                <div class="seopress-cwv">
+                                    <?php if ($core_web_vitals_score === true) { ?>
+                                    <img src="<?php echo SEOPRESS_PRO_ASSETS_DIR; ?>/img/cwv-pass.svg"
+                                        alt='' width='96' height='96' />
+                                    <?php } else { ?>
+                                    <img src="<?php echo SEOPRESS_PRO_ASSETS_DIR; ?>/img/cwv-fail.svg"
+                                        alt='' width='96' height='96' />
+                                    <?php } ?>
+                                    <div>
+                                        <h3>
+                                            <?php _e('Core Web Vitals Assessment: ', 'wp-seopress'); ?>
+
+                                            <?php if ($core_web_vitals_score === true) { ?>
+                                            <span class="green"><?php _e('Passed', 'wp-seopress'); ?></span>
+                                            <?php } elseif ($core_web_vitals_score === null) { ?>
+                                            <span class="red"><?php _e('No data found', 'wp-seopress'); ?></span>
+                                            <?php } else { ?>
+                                            <span class="red"><?php _e('Failed', 'wp-seopress'); ?></span>
+                                            <?php } ?>
+                                        </h3>
+                                        <p><?php printf(__('Computed from the %s Core Web Vitals metrics over the latest 28-day collection period.', 'wp-seopress'), $cwv_svg); ?></p>
+                                    </div>
+                                </div>
+                            <?php } else {  ?>
+                                <p><?php _e('No data available.','wp-seopress'); ?></p>
+                            <?php } ?>
+                            <p>
+                                <a href="<?php echo admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed'); ?>"
+                                    class="btn btnSecondary">
+                                    <?php _e('See full report', 'wp-seopress'); ?>
+                                </a>
+                            </p>
+                        </div>
 
                         <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') ) { ?>
                         <div id="tab_seopress_seo_tools" class="seopress-tab seopress-useful-tools inside <?php if ('tab_seopress_seo_tools' == $current_tab) {

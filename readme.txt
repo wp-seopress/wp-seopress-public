@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.7.2
+Stable tag: 5.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 ✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 ✔ <strong>Content analysis to help you write content optimized for search engines</strong>
 ✔ <strong>Import your post and term metadatas from other plugins in 1 click</strong>
-✔ <strong>Trusted by over 230,000 WordPress websites since 2017.</strong>
+✔ <strong>Trusted by over 250,000 WordPress websites since 2017.</strong>
 
 <a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / unlimited sites</strong></a>
 
@@ -362,35 +362,44 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 5.7.2 =
-* FIX Google Inspect URL in Content Analysis metabox
-= 5.7.1 =
-* FIX JS for Insights and Documentation link
-* FIX Fatal error with automatic update (PRO)
-= 5.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-7/">Read the blog post update</a> =
-* NEW Inspect URL with Google Search Console when you create / edit a post content (PRO) 🎉
-* NEW Matomo On-Premise (self-hosted) tracking 🎉
-* NEW Automatically activate your SEOPress PRO license key with the define SEOPRESS_LICENSE_KEY (PRO) 🎉
-* NEW Automatically add your YouTube videos to XML video sitemap (PRO) 🎉
-* NEW Breadcrumbs block for Gutenberg 🎉
-* NEW How-to block for Gutenberg 🎉
-* NEW 'seopress_sitemaps_video_xsl' hook to filter video XML stylesheet (https://www.seopress.org/support/hooks/filter-xsl-video-sitemap/)
-* NEW 'seopress_inspect_url_permalink' hook to filter inspected URL (https://www.seopress.org/support/hooks/filter-url-to-inspect-with-google-inspect-url-api/)
-* NEW 'seopress_inspect_url_home_url' hook to filter home URL with inspect URL tool (https://www.seopress.org/support/hooks/filter-home-url-for-google-inspect-url-api/)
-* INFO Remove deprecated xml sitemaps tags by Google for Video, Image and News sitemaps
-* INFO Add post thumbnail to Google mobile preview
-* INFO Add post date to Google preview for Universal SEO metabox
-* INFO Improve accessibility for SEO Dashboard and Content Analysis metabox
-* INFO Upgrade our universal SEO metabox to React 18
-* INFO Strengthening of security
-* INFO Update Monolog 3rd party library
-* INFO Improve performance for GA stats in Dashboard widget if disabled
-* FIX Universal SEO metabox: disable News and Video sitemaps tabs if disabled from global settings
-* FIX Compatibility issue with TranslatePress: missing a trailing slash for post type archive link in XML sitemaps
-* FIX Compatibility issue with The Event Calendar (single event and category event archive page)
-* FIX OG and Twitter image if a user directly paste a URL to set these fields
-* FIX Content analysis with Oxygen Builder in specific cases
-* FIX HTML sitemap shortcode with FSE themes
-* FIX Fatal error with WC and oembed if not a singular product
+= 5.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-8/">Read the blog post update</a> =
+
+<strong>Make sure to update both Free and PRO version to 5.8</strong>
+
+* NEW Quickly edit your primary category for post and products with the Block Editor 🎉
+* NEW Image SEO: cleaning image file when upload a media (e.g. "ExãMple 1 cópy!.jpg" => "example-1-copy.jpg") 🎉
+* NEW Prevent 500 errors when editing / saving .htaccess file 🎉
+* NEW Automatically use the Product title when sending images to set the image Title, Alt, Caption and Description (Product post type only)
+* NEW Add link on term archives for html sitemap
+* NEW Try to automatically override Storefront‘s default breadcrumbs with SEOPress one (PRO)
+* NEW Add noindex on add-to-cart links in robots.txt file (go to SEO, PRO, robots.txt tab to add this new rule)
+* NEW XML sub-sitemaps URL to better follow the official guidelines of Google (https://www.seopress.org/docs/xml-sitemap)
+* NEW 'seopress_sitemaps_cpt' hook to filter list of custom post types of XML sitemaps settings (https://www.seopress.org/support/hooks/filter-list-of-post-types-from-xml-sitemap-options/)
+* NEW 'seopress_sitemaps_tax' hook to filter list of taxonomies of XML sitemaps settings (https://www.seopress.org/support/hooks/filter-list-of-taxonomies-from-xml-sitemap-options/)
+* INFO Improve SEO Dashboard
+* INFO Optimize video xml sitemap regeneration performance
+* INFO Improve Alt text missing UI in Content Analysis
+* INFO Improve word counter for Content Analysis
+* INFO Add CPT key and Post ID to "seopress_auto_image_title" hook (https://www.seopress.org/support/hooks/filter-automatic-image-title/)
+* INFO Automatic handling of the site url to avoid errors with Google Inspect URL
+* INFO Stop pinging Bing for XML sitemaps since it's officially deprecated
+* INFO Use the Site icon if no image available for Open Graph Image tag
+* INFO Improve block FAQ schema logic
+* INFO Update updater
+* FIX Bricks (1.4) compatibility issue with our content analysis feature
+* FIX Archives indexing for our Wizard if no post type archives available
+* FIX SEOPress blocks icons alignment in Gutenberg blocks panel
+* FIX Duplicated meta robots on search archive page
+* FIX Knowledge graph option (Person or Organization) option with French translation
+* FIX GA4 tracking script URL
+* FIX Import / Export Indexing options
+* FIX Zion Builder compatibility for Content Analysis
+* FIX Social Icons Widget & Block by WPZOOM compatibility issue with Block Editor and SEOPress PRO
+* FIX Video xml sitemap missing video caused by a transient issue
+* FIX Missing alt text for images analysis with Universal SEO metabox
+* FIX UI: Remove GA tab from SEO dashboard if disabled
+* FIX Primary post / product categories in XML sitemaps
+* FIX Missing sameAs properties for Article automatic schema
+* FIX i18n
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

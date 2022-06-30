@@ -254,7 +254,7 @@
                             'high' => __('High impact', 'wp-seopress'),
                         ],
                         'link' => [
-                            'fr'       => 'https://www.seopress.org/fr/support/guides/corriger-erreur-compatibilite-extension-tagdiv-composer-newspaper/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
+                            'fr'       => 'https://www.seopress.org/fr/support/guides/corriger-lerreur-de-compatibilite-avec-lextension-tagdiv-composer-inclus-dans-le-theme-newspaper/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
                             'en'       => 'https://www.seopress.org/support/guides/fix-compatibility-issue-tagdiv-composer-plugin-newspaper-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
                             'title'    => __('Fix this!', 'wp-seopress'),
                             'external' => true,

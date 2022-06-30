@@ -32,6 +32,11 @@ class DomAnalysis
             $content = get_post_field('post_content', $id);
         }
 
+         //Zion Builder compatibility
+         if (is_plugin_active('zionbuilder/zionbuilder.php')) {
+            $content = $content . get_post_meta($id, '_zionbuilder_page_elements', true);
+        }
+
         //BeTheme is activated
         $theme = wp_get_theme();
         if ('betheme' == $theme->template || 'Betheme' == $theme->parent_theme) {
@@ -59,13 +64,11 @@ class DomAnalysis
 
         $content = apply_filters('seopress_content_analysis_content', $content, $id);
 
-        //Bricks compatibility
         if (defined('BRICKS_DB_EDITOR_MODE') && ('bricks' == $theme->template || 'Bricks' == $theme->parent_theme)) {
-            $page_sections = get_post_meta($id, '_bricks_page_content', true);
+            $page_sections = get_post_meta($id, BRICKS_DB_PAGE_CONTENT, true);
             $editor_mode   = get_post_meta($id, BRICKS_DB_EDITOR_MODE, true);
-
             if (is_array($page_sections) && 'wordpress' !== $editor_mode) {
-                $content = Bricks\Frontend::render_sections($page_sections, $id, 'content', true);
+                $content = \Bricks\Frontend::render_data($page_sections);
             }
         }
 
@@ -161,9 +164,10 @@ class DomAnalysis
         }
 
 
+        //Words Counter
         if (! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
             if (!empty($postContent)) {
-                $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses($postContent)), $matches);
+                $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", wp_strip_all_tags(wp_filter_nohtml_kses($postContent)), $matches);
 
                 if (! empty($matches[0])) {
                     $wordsCounterUnique = count(array_unique($matches[0]));

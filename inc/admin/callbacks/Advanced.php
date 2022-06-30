@@ -60,6 +60,10 @@ function seopress_advanced_advanced_category_url_callback() {
     printf(__('Remove <strong>%s</strong> in your permalinks', 'wp-seopress'), $category_base); ?>
 </label>
 
+<p class="description">
+    <?php _e('e.g. "https://example.com/category/my-post-category/" => "https://example.com/my-post-category/"','wp-seopress'); ?>
+</p>
+
 <div class="seopress-notice">
     <p>
         <?php _e('You have to flush your permalinks each time you change this setting.', 'wp-seopress'); ?>
@@ -101,12 +105,16 @@ function seopress_advanced_advanced_product_cat_url_callback() {
 
     </label>
 
+    <p class="description">
+        <?php _e('e.g. "https://example.com/product-category/my-product-category/" => "https://example.com/my-product-category/"','wp-seopress'); ?>
+    </p>
+
     <div class="seopress-notice">
         <p>
             <?php _e('You have to flush your permalinks each time you change this setting.', 'wp-seopress'); ?>
         </p>
         <p>
-            <?php _e('Make sure you don\'t have indentical URLs after activating this option to prevent conflicts.', 'wp-seopress'); ?>
+            <?php _e('Make sure you don\'t have identical URLs after activating this option to prevent conflicts.', 'wp-seopress'); ?>
         </p>
     </div>
 

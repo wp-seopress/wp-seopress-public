@@ -160,34 +160,32 @@ function seopress_display_seo_term_metaboxe() {
     add_action('init', 'seopress_init_term_metabox', 11);
 
     function seopress_init_term_metabox() {
-        if (function_exists('seopress_get_taxonomies')) {
-            $seopress_get_taxonomies = seopress_get_taxonomies();
-            $seopress_get_taxonomies = apply_filters('seopress_metaboxe_term_seo', $seopress_get_taxonomies);
+        $seopress_get_taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
+        $seopress_get_taxonomies = apply_filters('seopress_metaboxe_term_seo', $seopress_get_taxonomies);
 
-            if ( ! empty($seopress_get_taxonomies)) {
-                if (function_exists('seopress_advanced_appearance_term_metaboxe_position_option')) {
-                    switch (seopress_advanced_appearance_term_metaboxe_position_option()) {
-                        case 'high':
-                            $priority = 1;
-                            break;
-                        case 'default':
-                            $priority = 10;
-                            break;
-                        case 'low':
-                            $priority = 100;
-                            break;
-                        default:
-                            $priority = 10;
-                            break;
-                    }
-                } else {
-                    $priority = 10;
+        if ( ! empty($seopress_get_taxonomies)) {
+            if (function_exists('seopress_advanced_appearance_term_metaboxe_position_option')) {
+                switch (seopress_advanced_appearance_term_metaboxe_position_option()) {
+                    case 'high':
+                        $priority = 1;
+                        break;
+                    case 'default':
+                        $priority = 10;
+                        break;
+                    case 'low':
+                        $priority = 100;
+                        break;
+                    default:
+                        $priority = 10;
+                        break;
                 }
-                $priority = apply_filters('seopress_metaboxe_term_seo_priority', $priority);
-                foreach ($seopress_get_taxonomies as $key => $value) {
-                    add_action($key . '_edit_form', 'seopress_tax', $priority, 2); //Edit term page
-                    add_action('edit_' . $key,   'seopress_tax_save_term', $priority, 2); //Edit save term
-                }
+            } else {
+                $priority = 10;
+            }
+            $priority = apply_filters('seopress_metaboxe_term_seo_priority', $priority);
+            foreach ($seopress_get_taxonomies as $key => $value) {
+                add_action($key . '_edit_form', 'seopress_tax', $priority, 2); //Edit term page
+                add_action('edit_' . $key,   'seopress_tax_save_term', $priority, 2); //Edit save term
             }
         }
     }

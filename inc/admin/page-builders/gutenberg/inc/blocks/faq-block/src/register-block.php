@@ -22,7 +22,7 @@ function seopress_register_block_faq($asset_file)
 
     register_block_type('wpseopress/faq-block', [
         'editor_script' => 'wp-seopress-gutenberg-faq-block',
-        'editor_style' => 'wp-seopress-gutenberg-faq-block',
+        'editor_style'  => 'wp-seopress-gutenberg-faq-block',
         'attributes' => array(
             'faqs' => array(
                 'type'    => 'array',
@@ -50,6 +50,10 @@ function seopress_register_block_faq($asset_file)
             'showAccordion' => array(
                 'type' => 'boolean',
                 'default' => false
+            ),
+            'isProActive' => array(
+                'type'    => 'boolean',
+                'default' => is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )
             )
         ),
         'render_callback' => 'seopress_block_faq_render_frontend',
@@ -189,10 +193,8 @@ function seopress_block_faq_render_frontend($attributes)
 			<?php endforeach; ?>
 	<?php echo $listStyleCloseTag;
 
-    //FAQ Schema
-    $seopress_get_toggle_rich_snippets_option = get_option('seopress_toggle');
-    $seopress_get_toggle_rich_snippets_option = isset($seopress_get_toggle_rich_snippets_option['toggle-rich-snippets']) ? $seopress_get_toggle_rich_snippets_option['toggle-rich-snippets'] : '0';
-    if ('0' != $seopress_get_toggle_rich_snippets_option && (int) $attributes['showFAQScheme']) {
+    // FAQ Schema
+    if ( (bool) $attributes['isProActive'] && (int) $attributes['showFAQScheme'] ) {
         $schema = '<script type="application/ld+json">
 				{
 				"@context": "https://schema.org",

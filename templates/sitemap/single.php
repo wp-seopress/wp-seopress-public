@@ -62,21 +62,8 @@ $args = [
     'orderby'        => 'modified',
     'post_type'      => $path,
     'post_status'    => 'publish',
-    'meta_query'     => [
-        'relation' => 'OR',
-        [
-            'key'     => '_seopress_robots_index',
-            'value'   => '',
-            'compare' => 'NOT EXISTS',
-        ],
-        [
-            'key'     => '_seopress_robots_index',
-            'value'   => 'yes',
-            'compare' => '!=',
-        ],
-    ],
     'lang'         => '',
-    'has_password' => false
+    'has_password' => false,
 ];
 
 if ('attachment' === $path) {
@@ -103,6 +90,32 @@ if (function_exists('get_languages_list') && is_plugin_active('polylang/polylang
 $args = apply_filters('seopress_sitemaps_single_query', $args, $path);
 
 $postslist = get_posts($args);
+
+//primary category
+function seopress_sitemaps_primary_cat_hook($cats_0, $cats, $post) {
+    $primary_cat	= null;
+
+    if ($post) {
+        $_seopress_robots_primary_cat = get_post_meta($post->ID, '_seopress_robots_primary_cat', true);
+        if (isset($_seopress_robots_primary_cat) && '' != $_seopress_robots_primary_cat && 'none' != $_seopress_robots_primary_cat) {
+            if (null != $post->post_type && 'product' == $post->post_type) {
+                $primary_cat = get_term($_seopress_robots_primary_cat, 'product_cat');
+            } elseif (null != $post->post_type && 'post' == $post->post_type) {
+                $primary_cat = get_category($_seopress_robots_primary_cat);
+            }
+
+            if (! is_wp_error($primary_cat) && null != $primary_cat) {
+                return $primary_cat;
+            }
+        } else {
+            //no primary cat
+            return $cats_0;
+        }
+    } else {
+        return $cats_0;
+    }
+}
+
 foreach ($postslist as $post) {
     setup_postdata($post);
 
@@ -123,6 +136,14 @@ foreach ($postslist as $post) {
         if((new DateTime($post_date)) > (new DateTime($modified_date))){
             $seopress_mod = $post_date;
         }
+    }
+
+    // primary category
+    if ( $path == 'post' ) {
+        add_filter('post_link_category', 'seopress_sitemaps_primary_cat_hook', 10, 3);
+    }
+    if ( $path == 'product' ) {
+        add_filter('wc_product_post_type_link_product_cat', 'seopress_sitemaps_primary_cat_hook', 10, 3);
     }
 
     // initialize the sitemap url output

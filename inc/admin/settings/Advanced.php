@@ -44,6 +44,14 @@ add_settings_field(
 );
 
 add_settings_field(
+    'seopress_advanced_advanced_replytocom', // ID
+    __('Remove ?replytocom link to avoid duplicate content', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_replytocom_callback', // Callback
+    'seopress-settings-admin-advanced-advanced', // Page
+    'seopress_setting_section_advanced_advanced' // Section
+);
+
+add_settings_field(
     'seopress_advanced_advanced_wp_generator', // ID
     __('Remove WordPress generator meta tag', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_generator_callback', // Callback

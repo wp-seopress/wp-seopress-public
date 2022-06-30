@@ -922,6 +922,12 @@ function seopress_social_fb_img_hook() {
 
             $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_facebook_img_option());
 
+        } elseif (!empty(get_option('site_icon'))) { //Site icon
+
+            $site_icon = wp_get_attachment_url(get_option('site_icon'));
+
+            $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url($site_icon);
+
         }
 
         //Hook on post OG thumbnail - 'seopress_social_og_thumb'

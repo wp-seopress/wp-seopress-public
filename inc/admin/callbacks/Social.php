@@ -9,7 +9,7 @@ function seopress_social_knowledge_type_callback()
     $selected = isset($options['seopress_social_knowledge_type']) ? $options['seopress_social_knowledge_type'] : null; ?>
 
 <select id="seopress_social_knowledge_type" name="seopress_social_option_name[seopress_social_knowledge_type]">
-    <option <?php if ('None' == $selected) { ?>
+    <option <?php if ('none' == $selected) { ?>
         selected="selected"
         <?php } ?>
         value="none"><?php _e('None (will disable this feature)', 'wp-seopress'); ?>
@@ -20,7 +20,7 @@ function seopress_social_knowledge_type_callback()
         value="Person"><?php _e('Person', 'wp-seopress'); ?>
     </option>
     <option <?php if ('Organization' == $selected) { ?>
-        selected="selected
+        selected="selected"
         <?php } ?>
         value="Organization"><?php _e('Organization', 'wp-seopress'); ?>
     </option>
@@ -306,6 +306,8 @@ function seopress_social_facebook_img_callback()
     value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
 
 <p class="description"><?php _e('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'); ?>
+</p>
+<p class="description"><?php _e('If no default image is set, we‘ll use your site icon defined from the Customizer.', 'wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_social_facebook_img'])) {

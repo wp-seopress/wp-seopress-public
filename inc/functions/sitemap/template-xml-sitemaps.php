@@ -149,7 +149,7 @@ function seopress_xml_sitemap_index() {
                         $seopress_sitemaps .= '<sitemap>';
                         $seopress_sitemaps .= "\n";
                         $seopress_sitemaps .= '<loc>';
-                        $seopress_sitemaps .= $home_url . 'sitemaps/' . $cpt_key . '-sitemap' . $paged . '.xml';
+                        $seopress_sitemaps .= $home_url . $cpt_key . '-sitemap' . $paged . '.xml';
                         $seopress_sitemaps .= '</loc>';
                         $seopress_sitemaps .= "\n";
 
@@ -270,7 +270,7 @@ function seopress_xml_sitemap_index() {
                         $seopress_sitemaps .= '<sitemap>';
                         $seopress_sitemaps .= "\n";
                         $seopress_sitemaps .= '<loc>';
-                        $seopress_sitemaps .= $home_url . 'sitemaps/' . $tax_key . '-sitemap' . $paged . '.xml';
+                        $seopress_sitemaps .= $home_url . $tax_key . '-sitemap' . $paged . '.xml';
                         $seopress_sitemaps .= '</loc>';
                         $seopress_sitemaps .= "\n";
                         $seopress_sitemaps .= '</sitemap>';
@@ -335,7 +335,7 @@ function seopress_xml_sitemap_index() {
             $seopress_sitemaps .= '<sitemap>';
             $seopress_sitemaps .= "\n";
             $seopress_sitemaps .= '<loc>';
-            $seopress_sitemaps .= $home_url . 'sitemaps/news.xml';
+            $seopress_sitemaps .= $home_url . 'news.xml';
             $seopress_sitemaps .= '</loc>';
             $seopress_sitemaps .= "\n";
             $seopress_sitemaps .= '<lastmod>';
@@ -479,7 +479,7 @@ function seopress_xml_sitemap_index() {
             $seopress_sitemaps .= '<sitemap>';
             $seopress_sitemaps .= "\n";
             $seopress_sitemaps .= '<loc>';
-            $seopress_sitemaps .= $home_url . 'sitemaps/video' . $paged . '.xml';
+            $seopress_sitemaps .= $home_url . 'video' . $paged . '.xml';
             $seopress_sitemaps .= '</loc>';
             $seopress_sitemaps .= "\n";
             $seopress_sitemaps .= '</sitemap>';
@@ -492,7 +492,7 @@ function seopress_xml_sitemap_index() {
         $seopress_sitemaps .= '<sitemap>';
         $seopress_sitemaps .= "\n";
         $seopress_sitemaps .= '<loc>';
-        $seopress_sitemaps .= $home_url . 'sitemaps/author.xml';
+        $seopress_sitemaps .= $home_url . 'author.xml';
         $seopress_sitemaps .= '</loc>';
         $seopress_sitemaps .= "\n";
         $seopress_sitemaps .= '</sitemap>';

@@ -84,6 +84,9 @@ function print_section_info_social_facebook()
         <li>
             <?php _e('Global OG Image set in SEO > Social > Open Graph', 'wp-seopress'); ?>
         </li>
+        <li>
+            <?php _e('Site icon from the Customizer', 'wp-seopress'); ?>
+        </li>
     </ol>
 </div>
 

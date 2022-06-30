@@ -28,9 +28,9 @@ add_settings_field(
 );
 
 add_settings_field(
-    'seopress_advanced_advanced_replytocom', // ID
-    __('Remove ?replytocom link to avoid duplicate content', 'wp-seopress'), // Title
-    'seopress_advanced_advanced_replytocom_callback', // Callback
+    'seopress_advanced_advanced_clean_filename', // ID
+    __('Cleaning media filename', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_clean_filename_callback', // Callback
     'seopress-settings-admin-advanced-image', // Page
     'seopress_setting_section_advanced_image' // Section
 );

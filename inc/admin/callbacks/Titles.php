@@ -490,7 +490,8 @@ function seopress_titles_tax_titles_callback()
     echo seopress_get_empty_templates('tax', 'title');
     echo seopress_get_empty_templates('tax', 'description');
 
-    foreach (seopress_get_taxonomies() as $seopress_tax_key => $seopress_tax_value) { ?>
+    $taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
+    foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) { ?>
                 <h3>
                     <?php echo $seopress_tax_value->labels->name; ?>
                     <em>

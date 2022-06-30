@@ -155,7 +155,7 @@ function seopress_xml_sitemap_post_types_list_callback()
     $output       = 'objects'; // names or objects, note names is the default
     $operator     = 'and'; // 'and' or 'or'
 
-    $post_types = get_post_types($args, $output, $operator);
+    $post_types = apply_filters( 'seopress_sitemaps_cpt', get_post_types($args, $output, $operator) );
 
     foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) { ?>
 <h3>
@@ -214,7 +214,7 @@ function seopress_xml_sitemap_taxonomies_list_callback()
 
     $output         = 'objects'; // or objects
     $operator       = 'and'; // 'and' or 'or'
-    $taxonomies     = get_taxonomies($args, $output, $operator);
+    $taxonomies     = apply_filters( 'seopress_sitemaps_tax', get_taxonomies($args, $output, $operator) );
 
     foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) { ?>
 <h3>

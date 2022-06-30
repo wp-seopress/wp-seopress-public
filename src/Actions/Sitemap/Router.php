@@ -37,11 +37,11 @@ class Router implements ExecuteHooks {
         //XSL Video Sitemap
         add_rewrite_rule('^sitemaps_video_xsl.xsl$', 'index.php?seopress_sitemap_video_xsl=1', 'top');
 
-        add_rewrite_rule('sitemaps/([^/]+?)-sitemap([0-9]+)?\.xml$', 'index.php?seopress_cpt=$matches[1]&seopress_paged=$matches[2]', 'top');
+        add_rewrite_rule('([^/]+?)-sitemap([0-9]+)?\.xml$', 'index.php?seopress_cpt=$matches[1]&seopress_paged=$matches[2]', 'top');
 
         //XML Author
         if (1 == seopress_xml_sitemap_author_enable_option()) {
-            add_rewrite_rule('sitemaps/author.xml?$', 'index.php?seopress_author=1', 'top');
+            add_rewrite_rule('author.xml?$', 'index.php?seopress_author=1', 'top');
         }
     }
 

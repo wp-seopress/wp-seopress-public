@@ -22,7 +22,7 @@
             ],
             'xml-sitemap' => [
                 'title'         => __('XML & HTML Sitemaps', 'wp-seopress'),
-                'desc'          => __('Manage your XML - Image - Video - HTML Sitemap', 'wp-seopress'),
+                'desc'          => __('Manage your XML - Image - Video - HTML Sitemap.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-xml-sitemap'),
                 'filter'        => 'seopress_remove_feature_xml_sitemap',
             ],
@@ -34,19 +34,19 @@
             ],
             'google-analytics' => [
                 'title'         => __('Analytics', 'wp-seopress'),
-                'desc'          => __('Track everything about your visitors with Google Analytics / Matomo / Microsoft Clarity', 'wp-seopress'),
+                'desc'          => __('Track everything about your visitors with Google Analytics / Matomo / Microsoft Clarity.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-google-analytics'),
                 'filter'        => 'seopress_remove_feature_google_analytics',
             ],
             'instant-indexing' => [
                 'title'         => __('Instant Indexing', 'wp-seopress'),
-                'desc'          => __('Ping Google & Bing to quickly index your content', 'wp-seopress'),
+                'desc'          => __('Ping Google & Bing to quickly index your content.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-instant-indexing'),
                 'filter'        => 'seopress_remove_feature_instant_indexing',
             ],
             'advanced' => [
-                'title'         => __('Advanced', 'wp-seopress'),
-                'desc'          => __('Advanced SEO options for advanced users!', 'wp-seopress'),
+                'title'         => __('Image SEO & Advanced settings', 'wp-seopress'),
+                'desc'          => __('Optimize your images for SEO. Configure advanced settings.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-advanced'),
                 'filter'        => 'seopress_remove_feature_advanced',
             ],
@@ -63,25 +63,25 @@
         if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
             $features['woocommerce'] = [
                     'title'         => __('WooCommerce', 'wp-seopress'),
-                    'desc'          => __('Improve WooCommerce SEO', 'wp-seopress'),
+                    'desc'          => __('Improve WooCommerce SEO.', 'wp-seopress'),
                     'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_woocommerce'),
                     'filter'        => 'seopress_remove_feature_woocommerce',
                 ];
             $features['edd'] = [
                     'title'         => __('Easy Digital Downloads', 'wp-seopress'),
-                    'desc'          => __('Improve Easy Digital Downloads SEO', 'wp-seopress'),
+                    'desc'          => __('Improve Easy Digital Downloads SEO.', 'wp-seopress'),
                     'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_edd'),
                     'filter'        => 'seopress_remove_feature_edd',
                 ];
             $features['local-business'] = [
                     'title'         => __('Local Business', 'wp-seopress'),
-                    'desc'          => __('Add Google Local Business data type', 'wp-seopress'),
+                    'desc'          => __('Add Google Local Business data type.', 'wp-seopress'),
                     'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_local_business'),
                     'filter'        => 'seopress_remove_feature_local_business',
                 ];
             $features['dublin-core'] = [
                 'title'         => __('Dublin Core', 'wp-seopress'),
-                'desc'          => __('Add Dublin Core meta tags', 'wp-seopress'),
+                'desc'          => __('Add Dublin Core meta tags.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_dublin_core'),
                 'filter'        => 'seopress_remove_feature_dublin_core',
             ];
@@ -93,40 +93,47 @@
             ];
             $features['breadcrumbs'] = [
                 'title'         => __('Breadcrumbs', 'wp-seopress'),
-                'desc'          => __('Enable Breadcrumbs for your theme and improve your SEO in SERPs', 'wp-seopress'),
+                'desc'          => __('Enable Breadcrumbs for your theme and improve your SEO in SERPs.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_breadcrumbs'),
                 'filter'        => 'seopress_remove_feature_breadcrumbs',
             ];
             $features['page-speed'] = [
                 'title'         => __('Google Page Speed', 'wp-seopress'),
-                'desc'          => __('Track your website performance to improve SEO with Google Page Speed', 'wp-seopress'),
+                'desc'          => __('Track your website performance to improve SEO with Google Page Speed.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_page_speed'),
                 'filter'        => 'seopress_remove_feature_page_speed',
                 'toggle'        => false,
             ];
+            $features['inspect-url'] = [
+                'title'         => __('Inspect URL with Google Search Console', 'wp-seopress'),
+                'desc'          => __('Inspect your URL for details about crawling, indexing, mobile compatibility, schemas and more.', 'wp-seopress'),
+                'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_inspect_url'),
+                'filter'        => 'seopress_remove_feature_inspect_url',
+                'toggle'        => true,
+            ];
             if (! is_multisite() || (is_multisite() && defined('SUBDOMAIN_INSTALL') && true === constant('SUBDOMAIN_INSTALL'))) {//subdomains or single site
                 $features['robots'] = [
                     'title'       => __('robots.txt', 'wp-seopress'),
-                    'desc'        => __('Edit your robots.txt file', 'wp-seopress'),
+                    'desc'        => __('Edit your robots.txt file.', 'wp-seopress'),
                     'btn_primary' => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_robots'),
                     'filter'      => 'seopress_remove_feature_robots',
                 ];
             }
             $features['news'] = [
                 'title'         => __('Google News Sitemap', 'wp-seopress'),
-                'desc'          => __('Optimize your site for Google News', 'wp-seopress'),
+                'desc'          => __('Optimize your site for Google News.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_news'),
                 'filter'        => 'seopress_remove_feature_news',
             ];
             $features['rich-snippets'] = [
                 'title'       => __('Schemas', 'wp-seopress'),
-                'desc'        => __('Create / manage your schemas', 'wp-seopress'),
+                'desc'        => __('Create / manage your schemas.', 'wp-seopress'),
                 'btn_primary' => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets'),
                 'filter'      => 'seopress_remove_feature_schemas',
             ];
             $features['404'] = [
                 'title'       => __('Redirections', 'wp-seopress'),
-                'desc'        => __('Monitor 404, create 301, 302 and 307 redirections', 'wp-seopress'),
+                'desc'        => __('Monitor 404, create 301, 302 and 307 redirections.', 'wp-seopress'),
                 'btn_primary' => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_404'),
                 'filter'      => 'seopress_remove_feature_redirects',
             ];

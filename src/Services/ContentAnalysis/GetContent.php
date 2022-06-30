@@ -725,6 +725,7 @@ class GetContent
     {
         if (! empty($data['img']['images']['without_alt'])) {
             $images = isset($data['img']['images']['without_alt']) ? $data['img']['images']['without_alt'] : null;
+            $context = isset($data['img']['images']['img_with_context']) ? $data['img']['images']['img_with_context'] : null;
 
             $desc = '<div class="wrap-analysis-img">';
 
@@ -736,7 +737,7 @@ class GetContent
                 if (! empty($images)) {
                     $desc .= '<ul class="attachments">';
                     foreach ($images as $img) {
-                        $desc .= '<li class="attachment"><img src="' . $img . '"/></li>';
+                        $desc .= '<li class="attachment"><figure><img src="' . $img . '"/><figcaption style="word-break: break-all;">'.$img.'</figcaption></figure></li>';
                     }
                     $desc .= '</ul>';
                 }
@@ -863,7 +864,7 @@ class GetContent
         if (! empty($data['all_canonical'])) {
             $count = count($data['all_canonical']);
 
-            $desc .= '<p>' . sprintf(__('We found %s canonical URL in your source code. Below, the list:', 'wp-seopress'), $count) . '</p>';
+            $desc .= '<p>' . sprintf(_n('We found %s canonical URL in your source code. Below, the list:', 'We found %s canonical URLs in your source code. Below, the list:', 'wp-seopress'), number_format_i18n($count)) . '</p>';
             $desc .= '<ul>';
             foreach ($data['all_canonical'] as $link) {
                 $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . $link . '" target="_blank">' . $link . '</a><span class="dashicons dashicons-external"></span></li>';

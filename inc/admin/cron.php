@@ -5,9 +5,10 @@ if ( ! defined('ABSPATH')) {
 }
 
 /**
- * Automatically ping Google / Bing daily for XML sitemaps
+ * Automatically ping Google daily for XML sitemaps
  *
  * @since 5.3.0
+ * @updated 5.8.0
  *
  */
 function seopress_xml_sitemaps_ping_cron_action() {
@@ -31,6 +32,5 @@ function seopress_xml_sitemaps_ping_cron_action() {
     $args = apply_filters( 'seopress_sitemaps_xml_ping_args', $args);
 
     wp_remote_get('https://www.google.com/ping?sitemap='.$url, $args);
-    wp_remote_get('https://www.bing.com/ping?sitemap='.$url, $args);
 }
 add_action('seopress_xml_sitemaps_ping_cron', 'seopress_xml_sitemaps_ping_cron_action');

@@ -102,7 +102,7 @@ class seopress_options
         $seopress_social_networks_help_tab  = add_submenu_page('seopress-option', __('Social Networks', 'wp-seopress'), __('Social Networks', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::SOCIAL_NETWORKS), 'seopress-social', [$this, 'seopress_social_page']);
         $seopress_google_analytics_help_tab = add_submenu_page('seopress-option', __('Analytics', 'wp-seopress'), __('Analytics', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::ANALYTICS), 'seopress-google-analytics', [$this, 'seopress_google_analytics_page']);
         add_submenu_page('seopress-option', __('Instant Indexing', 'wp-seopress'), __('Instant Indexing', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::INSTANT_INDEXING), 'seopress-instant-indexing', [$this, 'seopress_instant_indexing_page']);
-        add_submenu_page('seopress-option', __('Advanced', 'wp-seopress'), __('Advanced', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::ADVANCED), 'seopress-advanced', [$this, 'seopress_advanced_page']);
+        add_submenu_page('seopress-option', __('Image SEO & Advanced settings', 'wp-seopress'), __('Advanced', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::ADVANCED), 'seopress-advanced', [$this, 'seopress_advanced_page']);
         add_submenu_page('seopress-option', __('Tools', 'wp-seopress'), __('Tools', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::TOOLS), 'seopress-import-export', [$this, 'seopress_import_export_page']);
 
         if (function_exists('seopress_get_toggle_white_label_option')) {

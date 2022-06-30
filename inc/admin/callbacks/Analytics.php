@@ -37,6 +37,12 @@ esc_html($check)
         <?php _e('Find your tracking ID', 'wp-seopress'); ?>
     </a>
 </p>
+
+<div class="seopress-notice is-warning">
+    <p>
+        <?php _e('<strong>Universal Analytics</strong> will stop working in <strong>June 2023</strong>. We invite you to use GA4 now or an alternative like Matomo.','wp-seopress'); ?>
+    </p>
+</div>
 <?php
 }
 

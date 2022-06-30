@@ -60,6 +60,29 @@ if (isset($pagenow) && 'options-permalink.php' == $pagenow) {
 
 //Advanced
 //=================================================================================================
+//Cleaning filename
+if (seopress_get_service('AdvancedOption')->getAdvancedCleaningFileName() === '1') {
+    function seopress_image_seo_cleaning_filename($filename) {
+        /* Force the file name in UTF-8 (encoding Windows / OS X / Linux) */
+        $filename = mb_convert_encoding($filename, "UTF-8");
+
+        $char_not_clean = array('/À/','/Á/','/Â/','/Ã/','/Ä/','/Å/','/Ç/','/È/','/É/','/Ê/','/Ë/','/Ì/','/Í/','/Î/','/Ï/','/Ò/','/Ó/','/Ô/','/Õ/','/Ö/','/Ù/','/Ú/','/Û/','/Ü/','/Ý/','/à/','/á/','/â/','/ã/','/ä/','/å/','/ç/','/è/','/é/','/ê/','/ë/','/ì/','/í/','/î/','/ï/','/ð/','/ò/','/ó/','/ô/','/õ/','/ö/','/ù/','/ú/','/û/','/ü/','/ý/','/ÿ/', '/©/');
+        $clean = array('a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','o','o','o','o','u','u','u','u','y','a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','o','o','o','o','o','u','u','u','u','y','y','copy');
+
+        $friendly_filename = preg_replace($char_not_clean, $clean, $filename);
+
+        /* After replacement, we destroy the last residues */
+        $friendly_filename = utf8_decode($friendly_filename);
+        $friendly_filename = preg_replace('/\?/', '', $friendly_filename);
+
+        /* Remove uppercase */
+        $friendly_filename = strtolower($friendly_filename);
+
+        return $friendly_filename;
+    }
+    add_filter('sanitize_file_name', 'seopress_image_seo_cleaning_filename', 10);
+}
+
 //Automatic title on media file
 function seopress_advanced_advanced_image_auto_title_editor_option()
 {
@@ -94,7 +117,15 @@ if ('' != seopress_advanced_advanced_image_auto_title_editor_option() ||
     function seopress_auto_image_attr($post_ID)
     {
         if (wp_attachment_is_image($post_ID)) {
-            $img_attr = get_post($post_ID)->post_title;
+
+            $parent = get_post($post_ID)->post_parent ? get_post($post_ID)->post_parent : null;
+            $cpt = get_post_type($parent) ?  get_post_type($parent) : null;
+
+            if (isset($cpt) && isset($parent) && $cpt === 'product') { //use the product title for WC products
+                $img_attr = get_post($parent)->post_title;
+            } else {
+                $img_attr = get_post($post_ID)->post_title;
+            }
 
             // Sanitize the title: remove hyphens, underscores & extra spaces:
             $img_attr = preg_replace('%\s*[-_\s]+\s*%', ' ', $img_attr);
@@ -102,7 +133,7 @@ if ('' != seopress_advanced_advanced_image_auto_title_editor_option() ||
             // Lowercase attributes
             $img_attr = strtolower($img_attr);
 
-            $img_attr = apply_filters('seopress_auto_image_title', $img_attr);
+            $img_attr = apply_filters('seopress_auto_image_title', $img_attr, $cpt, $parent);
 
             // Create an array with the image meta (Title, Caption, Description) to be updated
             $img_attr_array = ['ID'=>$post_ID]; // Image (ID) to be updated
@@ -407,7 +438,8 @@ $postTypes = seopress_get_service('WordPressData')->getPostTypes();
 foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_noindex');
 }
-foreach (seopress_get_taxonomies() as $key => $value) {
+
+foreach (seopress_get_service('WordPressData')->getTaxonomies() as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_noindex');
 }
 
@@ -425,7 +457,7 @@ function seopress_bulk_actions_noindex($bulk_actions)
 foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_noindex_handler', 10, 3);
 }
-foreach (seopress_get_taxonomies() as $key => $value) {
+foreach (seopress_get_service('WordPressData')->getTaxonomies() as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_noindex_handler', 10, 3);
 }
 if (is_plugin_active('woocommerce/woocommerce.php')) {
@@ -469,7 +501,7 @@ $postTypes = seopress_get_service('WordPressData')->getPostTypes();
 foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_index');
 }
-foreach (seopress_get_taxonomies() as $key => $value) {
+foreach (seopress_get_service('WordPressData')->getTaxonomies() as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_index');
 }
 if (is_plugin_active('woocommerce/woocommerce.php')) {
@@ -486,7 +518,7 @@ function seopress_bulk_actions_index($bulk_actions)
 foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_index_handler', 10, 3);
 }
-foreach (seopress_get_taxonomies() as $key => $value) {
+foreach (seopress_get_service('WordPressData')->getTaxonomies() as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_index_handler', 10, 3);
 }
 if (is_plugin_active('woocommerce/woocommerce.php')) {
@@ -528,7 +560,7 @@ function seopress_bulk_action_index_admin_notice()
 foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_nofollow');
 }
-foreach (seopress_get_taxonomies() as $key => $value) {
+foreach (seopress_get_service('WordPressData')->getTaxonomies() as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_nofollow');
 }
 if (is_plugin_active('woocommerce/woocommerce.php')) {
@@ -544,7 +576,7 @@ function seopress_bulk_actions_nofollow($bulk_actions)
 foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_nofollow_handler', 10, 3);
 }
-foreach (seopress_get_taxonomies() as $key => $value) {
+foreach (seopress_get_service('WordPressData')->getTaxonomies() as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_nofollow_handler', 10, 3);
 }
 if (is_plugin_active('woocommerce/woocommerce.php')) {
@@ -586,7 +618,7 @@ function seopress_bulk_action_nofollow_admin_notice()
 foreach ($postTypes as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_follow');
 }
-foreach (seopress_get_taxonomies() as $key => $value) {
+foreach (seopress_get_service('WordPressData')->getTaxonomies() as $key => $value) {
     add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_follow');
 }
 if (is_plugin_active('woocommerce/woocommerce.php')) {
@@ -603,7 +635,7 @@ function seopress_bulk_actions_follow($bulk_actions)
 foreach ($postTypes as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_follow_handler', 10, 3);
 }
-foreach (seopress_get_taxonomies() as $key => $value) {
+foreach (seopress_get_service('WordPressData')->getTaxonomies() as $key => $value) {
     add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_follow_handler', 10, 3);
 }
 if (is_plugin_active('woocommerce/woocommerce.php')) {
@@ -959,7 +991,7 @@ if ('' != seopress_advanced_advanced_tax_desc_editor_option() && current_user_ca
 <?php
         }
     }
-    $seopress_get_taxonomies = seopress_get_taxonomies();
+    $seopress_get_taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
     foreach ($seopress_get_taxonomies as $key => $value) {
         add_action($key . '_edit_form_fields', 'seopress_tax_desc_wp_editor', 9, 1);
     }
