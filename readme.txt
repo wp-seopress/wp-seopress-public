@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.8
+Stable tag: 5.8.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -362,6 +362,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.8.0.1 =
+* FIX Fatal error if PRO not up to date
+* FIX Can't redeclare seopress_register_meta on plugin deactivation
 = 5.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-8/">Read the blog post update</a> =
 
 <strong>Make sure to update both Free and PRO version to 5.8</strong>

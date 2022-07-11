@@ -50,6 +50,58 @@ if ( ! function_exists('array_key_last')) {
     }
 }
 
+/**
+ * Get all registered post types.
+ *
+ * @author Benjamin Denis
+ *
+ * @deprecated 4.4.0
+ *
+ * @return (array) $wp_post_types
+ */
+function seopress_get_post_types() {
+    return seopress_get_service('WordPressData')->getPostTypes();
+}
+
+/**
+ * Get all registered custom taxonomies.
+ *
+ * @author Benjamin Denis
+ *
+ * @deprecated 5.8.0
+ *
+ * @param bool $with_terms
+ *
+ * @return array $taxonomies
+ **/
+function seopress_get_taxonomies($with_terms = false) {
+    $args = [
+        'show_ui' => true,
+        'public'  => true,
+    ];
+    $args = apply_filters('seopress_get_taxonomies_args', $args);
+
+    $output     = 'objects'; // or objects
+    $operator   = 'and'; // 'and' or 'or'
+    $taxonomies = get_taxonomies($args, $output, $operator);
+
+    unset(
+        $taxonomies['seopress_bl_competitors']
+    );
+
+    $taxonomies = apply_filters('seopress_get_taxonomies_list', $taxonomies);
+
+    if ( ! $with_terms) {
+        return $taxonomies;
+    }
+
+    foreach ($taxonomies as $_tax_slug => &$_tax) {
+        $_tax->terms = get_terms(['taxonomy' => $_tax_slug]);
+    }
+
+    return $taxonomies;
+}
+
 
 /**
  * Get all custom fields (limit: 250).
