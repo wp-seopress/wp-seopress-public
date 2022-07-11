@@ -62,6 +62,7 @@ function print_section_info_xml_sitemap_general()
 	rewrite ^.*/video.xml$ /index.php?seopress_video=$1 last;
 	rewrite ^.*/author.xml$ /index.php?seopress_author=$1 last;
 	rewrite ^.*/sitemaps_xsl\.xsl$ /index.php?seopress_sitemap_xsl=1 last;
+    rewrite ^.*/sitemaps_video_xsl\.xsl$ /index.php?seopress_sitemap_video_xsl=1 last;
 	rewrite ^.*/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?seopress_cpt=$1&seopress_paged=$2 last;
 }</pre>
 </div>

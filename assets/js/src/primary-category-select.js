@@ -12,15 +12,17 @@ class TermSelect extends Component {
             primaryTermId: 'none',
             selectableTerms: [],
         }
-        this.metaboxField = document.querySelector('#seopress_robots_primary_cat');
     }
 
     componentDidMount() {
         const primaryTermId = this.props.primaryTermId || 'none';
         this.setState({ primaryTermId });
-        this.metaboxField.addEventListener('change', e => {
-            this.setState({ primaryTermId: e.target.value });
-        });
+        this.metaboxField = document.querySelector('#seopress_robots_primary_cat');
+        if (this.metaboxField) {
+            this.metaboxField.addEventListener('change', e => {
+                this.setState({ primaryTermId: e.target.value });
+            });
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -36,12 +38,14 @@ class TermSelect extends Component {
     }
 
     updateMetabox(selectedTermId) {
-        const options = this.getOptions().map(option => {
-            const selected = option.value == selectedTermId ? 'selected="selected"' : '';
-            return `<option value="${option.value}" ${selected}>${option.label}</option>`;
-        });
-        this.metaboxField.value = selectedTermId;
-        this.metaboxField.innerHTML = options.join('');
+        if (this.metaboxField) {
+            const options = this.getOptions().map(option => {
+                const selected = option.value == selectedTermId ? 'selected="selected"' : '';
+                return `<option value="${option.value}" ${selected}>${option.label}</option>`;
+            });
+            this.metaboxField.value = selectedTermId;
+            this.metaboxField.innerHTML = options.join('');
+        }
     }
 
     getOptions() {
@@ -84,8 +88,8 @@ wp.hooks.addFilter(
         return (
             <>
                 <PostTaxonomies {...props} />
-                {props.slug && 'category' == props.slug &&
-                    < PanelRow className="seopress-primary-term-picker">
+                {props.slug && 'category' === props.slug &&
+                    <PanelRow className="seopress-primary-term-picker">
                         <PrimaryTermSelect {...props} />
                     </PanelRow>
                 }
