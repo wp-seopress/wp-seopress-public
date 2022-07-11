@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 5.8.0.3\n"
+"Project-Id-Version: SEOPress 5.8.0.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress Team <contact@seopress.org>\n"
 "Language-Team: SEOPress Team <contact@seopress.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-04T09:43:33+00:00\n"
+"POT-Creation-Date: 2022-07-06T12:44:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -6347,17 +6347,23 @@ msgstr ""
 msgid "This page doesn't have any internal links from other content. Links from archive pages are not considered internal links due to lack of context."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:876
+#: src/Services/ContentAnalysis/GetContent.php:867
+msgid "We found %s canonical URL in your source code. Below, the list:"
+msgid_plural "We found %s canonical URLs in your source code. Below, the list:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Services/ContentAnalysis/GetContent.php:877
 #: app/react/services/content-analysis/canonicalUrl.js:96
 msgid "You must fix this. Canonical URL duplication is bad for SEO."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:881
+#: src/Services/ContentAnalysis/GetContent.php:882
 #: app/react/services/content-analysis/canonicalUrl.js:49
 msgid "This page doesn't have any canonical URL because your post is set to <strong>noindex</strong>. This is normal."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:884
+#: src/Services/ContentAnalysis/GetContent.php:885
 #: app/react/services/content-analysis/canonicalUrl.js:58
 msgid "This page doesn't have any canonical URL."
 msgstr ""

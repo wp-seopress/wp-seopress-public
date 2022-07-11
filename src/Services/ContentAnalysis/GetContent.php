@@ -864,7 +864,8 @@ class GetContent
         if (! empty($data['all_canonical'])) {
             $count = count($data['all_canonical']);
 
-            $desc .= '<p>' . sprintf(_n('We found %s canonical URL in your source code. Below, the list:', 'We found %s canonical URLs in your source code. Below, the list:', 'wp-seopress'), number_format_i18n($count)) . '</p>';
+            $desc .= '<p>' . sprintf(_n('We found %s canonical URL in your source code. Below, the list:', 'We found %s canonical URLs in your source code. Below, the list:', $count, 'wp-seopress'), number_format_i18n($count)) . '</p>';
+
             $desc .= '<ul>';
             foreach ($data['all_canonical'] as $link) {
                 $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . $link . '" target="_blank">' . $link . '</a><span class="dashicons dashicons-external"></span></li>';
