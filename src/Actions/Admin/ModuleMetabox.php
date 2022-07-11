@@ -52,7 +52,7 @@ class ModuleMetabox implements ExecuteHooks
         }
 
         wp_enqueue_media();
-        wp_enqueue_script('seopress-metabox', SEOPRESS_URL_DIST . '/metaboxe.js', $dependencies, SEOPRESS_VERSION, true);
+        wp_enqueue_script('seopress-metabox', SEOPRESS_URL_PUBLIC . '/metaboxe.js', $dependencies, SEOPRESS_VERSION, true);
         $value = wp_create_nonce('seopress_rest');
 
         $tags = seopress_get_service('TagsToString')->getTagsAvailable([
@@ -79,7 +79,7 @@ class ModuleMetabox implements ExecuteHooks
         $roles = ( array ) $user->roles;
 
         $args = array_merge([
-            'SEOPRESS_URL_DIST'       => SEOPRESS_URL_DIST,
+            'SEOPRESS_URL_PUBLIC'       => SEOPRESS_URL_PUBLIC,
             'SEOPRESS_URL_ASSETS'     => SEOPRESS_URL_ASSETS,
             'SITENAME'                => get_bloginfo('name'),
             'SITEURL'                 => site_url(),

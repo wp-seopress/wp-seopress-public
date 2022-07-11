@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 5.8.0.4\n"
+"Project-Id-Version: SEOPress 5.8.0.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress Team <contact@seopress.org>\n"
 "Language-Team: SEOPress Team <contact@seopress.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-06T12:44:39+00:00\n"
+"POT-Creation-Date: 2022-07-08T13:09:11+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -620,7 +620,7 @@ msgstr ""
 #: inc/admin/admin-pages/Sitemaps.php:43
 #: inc/admin/admin-pages/Social.php:43
 #: inc/admin/admin-pages/Titles.php:54
-#: seopress-functions.php:714
+#: seopress-functions.php:718
 msgid "Save changes"
 msgstr ""
 
@@ -1032,7 +1032,7 @@ msgid "Get started"
 msgstr ""
 
 #: inc/admin/blocks/get-started.php:25
-#: seopress-functions.php:505
+#: seopress-functions.php:509
 msgid "Dismiss"
 msgstr ""
 
@@ -2702,8 +2702,11 @@ msgstr ""
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:286
 #: inc/admin/wizard/admin-wizard.php:714
 #: src/Helpers/Metas/RobotSettings.php:19
+#: app/gutenberg/primary-category-select/primary-category-select.js:75
 #: assets/js/build/primary-category-select.js:1
-#: assets/js/src/primary-category-select.js:53
+#: assets/js/src/primary-category-select.js:58
+#: public/gutenberg/primary-category-select.js:1
+#: assets/js/build/primary-category-select.js:106
 msgid "None (will disable this feature)"
 msgstr ""
 
@@ -3696,8 +3699,11 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:334
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:293
 #: src/Helpers/Metas/RobotSettings.php:109
+#: app/gutenberg/primary-category-select/primary-category-select.js:92
 #: assets/js/build/primary-category-select.js:1
-#: assets/js/src/primary-category-select.js:65
+#: assets/js/src/primary-category-select.js:74
+#: public/gutenberg/primary-category-select.js:1
+#: assets/js/build/primary-category-select.js:118
 msgid "Select a primary category"
 msgstr ""
 
@@ -4137,15 +4143,15 @@ msgstr ""
 msgid "Add video"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes.php:280
-#: inc/admin/metaboxes/admin-metaboxes.php:656
+#: inc/admin/metaboxes/admin-metaboxes.php:283
+#: inc/admin/metaboxes/admin-metaboxes.php:659
 #: inc/admin/metaboxes/admin-term-metaboxes.php:215
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:72
 #: inc/admin/page-builders/elementor/inc/controls/class-content-analysis-control.php:35
 msgid "Analysis in progress..."
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes.php:637
+#: inc/admin/metaboxes/admin-metaboxes.php:640
 #: src/Services/ContentAnalysis/RenderContentAnalysis.php:19
 msgid "Content analysis"
 msgstr ""
@@ -5624,7 +5630,7 @@ msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %s: "Custom Post Types" or "Custom Taxonomies" %s: "title" or "description"
-#: seopress-functions.php:332
+#: seopress-functions.php:336
 msgid "Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 

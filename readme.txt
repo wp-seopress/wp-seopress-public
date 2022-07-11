@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.8.0.4
+Stable tag: 5.8.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -362,6 +362,10 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.8.0.5 =
+* FIX Downgrade Google Auth API to prevent errors with hosting using PHP parser
+* FIX "Sorry, you do not have permission to edit the _seopress_robots_primary_cat custom field." error
+* FIX Remove "Inspect URL with Google" tab from Universal SEO metabox if disabled
 = 5.8.0.4 =
 * FIX Fatal error in Content Analysis metabox causing jQuery errors (thanks to @polishdreamer)
 = 5.8.0.3 =

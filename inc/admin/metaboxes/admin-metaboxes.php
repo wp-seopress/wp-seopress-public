@@ -242,6 +242,7 @@ function seopress_display_seo_metaboxe()
     function seopress_cpt($post)
     {
         global $typenow;
+        global $wp_version;
         $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         wp_nonce_field(plugin_basename(__FILE__), 'seopress_cpt_nonce');
 
@@ -267,7 +268,9 @@ function seopress_display_seo_metaboxe()
                 if (isset($get_current_screen->is_block_editor)) {
                     if ($get_current_screen->is_block_editor) {
                         wp_enqueue_script('seopress-block-editor-js', SEOPRESS_ASSETS_DIR . '/js/seopress-block-editor' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, true);
-                        wp_enqueue_script( 'seopress-primary-category-js', SEOPRESS_ASSETS_DIR . '/js/build/primary-category-select.js', ['wp-hooks'], SEOPRESS_VERSION, true);
+                        if ( version_compare( $wp_version, '5.8', '>=' ) ) {
+                            wp_enqueue_script( 'seopress-primary-category-js', SEOPRESS_ASSETS_DIR . '/js/build/primary-category-select.js', ['wp-hooks'], SEOPRESS_VERSION, true);
+                        }
                     }
                 }
             }

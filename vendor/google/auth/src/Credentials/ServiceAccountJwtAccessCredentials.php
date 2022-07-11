@@ -49,22 +49,15 @@ class ServiceAccountJwtAccessCredentials extends CredentialsLoader implements
 
     /**
      * The quota project associated with the JSON credentials
-     *
-     * @var string
      */
     protected $quotaProject;
 
     /**
-     * @var string
-     */
-    public $projectId;
-
-    /**
      * Create a new ServiceAccountJwtAccessCredentials.
      *
-     * @param string|array<mixed> $jsonKey JSON credential file path or JSON credentials
+     * @param string|array $jsonKey JSON credential file path or JSON credentials
      *   as an associative array
-     * @param string|string[] $scope the scope of the access request, expressed
+     * @param string|array $scope the scope of the access request, expressed
      *   either as an Array or as a space-delimited String.
      */
     public function __construct($jsonKey, $scope = null)
@@ -74,7 +67,7 @@ class ServiceAccountJwtAccessCredentials extends CredentialsLoader implements
                 throw new \InvalidArgumentException('file does not exist');
             }
             $jsonKeyStream = file_get_contents($jsonKey);
-            if (!$jsonKey = json_decode((string) $jsonKeyStream, true)) {
+            if (!$jsonKey = json_decode($jsonKeyStream, true)) {
                 throw new \LogicException('invalid json for auth config');
             }
         }
@@ -107,10 +100,10 @@ class ServiceAccountJwtAccessCredentials extends CredentialsLoader implements
     /**
      * Updates metadata with the authorization token.
      *
-     * @param array<mixed> $metadata metadata hashmap
+     * @param array $metadata metadata hashmap
      * @param string $authUri optional auth uri
      * @param callable $httpHandler callback which delivers psr7 request
-     * @return array<mixed> updated metadata hashmap
+     * @return array updated metadata hashmap
      */
     public function updateMetadata(
         $metadata,
@@ -132,7 +125,9 @@ class ServiceAccountJwtAccessCredentials extends CredentialsLoader implements
      *
      * @param callable $httpHandler
      *
-     * @return null|array{access_token:string} A set of auth related metadata
+     * @return array|void A set of auth related metadata, containing the
+     * following keys:
+     *   - access_token (string)
      */
     public function fetchAuthToken(callable $httpHandler = null)
     {
@@ -153,7 +148,7 @@ class ServiceAccountJwtAccessCredentials extends CredentialsLoader implements
         // Set the self-signed access token in OAuth2 for getLastReceivedToken
         $this->auth->setAccessToken($access_token);
 
-        return ['access_token' => $access_token];
+        return array('access_token' => $access_token);
     }
 
     /**
@@ -165,7 +160,7 @@ class ServiceAccountJwtAccessCredentials extends CredentialsLoader implements
     }
 
     /**
-     * @return array<mixed>
+     * @return array
      */
     public function getLastReceivedToken()
     {

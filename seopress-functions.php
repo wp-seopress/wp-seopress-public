@@ -296,17 +296,21 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
 
         if (!empty($options)) {
             if ('cpt' === $type) {
-                if (!array_key_exists($key, $options['seopress_titles_single_titles'])) {
-                    $cpt_titles_empty[] = $key;
-                } else {
-                    $data = isset($options['seopress_titles_single_titles'][$key][$metadata]) ? $options['seopress_titles_single_titles'][$key][$metadata] : '';
+                if (!empty($options['seopress_titles_single_titles'])) {
+                    if (!array_key_exists($key, $options['seopress_titles_single_titles'])) {
+                        $cpt_titles_empty[] = $key;
+                    } else {
+                        $data = isset($options['seopress_titles_single_titles'][$key][$metadata]) ? $options['seopress_titles_single_titles'][$key][$metadata] : '';
+                    }
                 }
             }
             if ('tax' === $type) {
-                if (!array_key_exists($key, $options['seopress_titles_tax_titles'])) {
-                    $cpt_titles_empty[] = $key;
-                } else {
-                    $data = isset($options['seopress_titles_tax_titles'][$key][$metadata]) ? $options['seopress_titles_tax_titles'][$key][$metadata] : '';
+                if (!empty($options['seopress_titles_tax_titles'])) {
+                    if (!array_key_exists($key, $options['seopress_titles_tax_titles'])) {
+                        $cpt_titles_empty[] = $key;
+                    } else {
+                        $data = isset($options['seopress_titles_tax_titles'][$key][$metadata]) ? $options['seopress_titles_tax_titles'][$key][$metadata] : '';
+                    }
                 }
             }
         }

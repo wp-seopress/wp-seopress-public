@@ -28,8 +28,6 @@ use Google\Auth\ProjectIdProviderInterface;
 use Google\Auth\SignBlobInterface;
 
 /**
- * @deprecated
- *
  * AppIdentityCredentials supports authorization on Google App Engine.
  *
  * It can be used to authorize requests using the AuthTokenMiddleware or
@@ -63,14 +61,14 @@ class AppIdentityCredentials extends CredentialsLoader implements
     /**
      * Result of fetchAuthToken.
      *
-     * @var array<mixed>
+     * @var array
      */
     protected $lastReceivedToken;
 
     /**
      * Array of OAuth2 scopes to be requested.
      *
-     * @var string[]
+     * @var array
      */
     private $scope;
 
@@ -80,11 +78,11 @@ class AppIdentityCredentials extends CredentialsLoader implements
     private $clientName;
 
     /**
-     * @param string|string[] $scope One or more scopes.
+     * @param array $scope One or more scopes.
      */
-    public function __construct($scope = [])
+    public function __construct($scope = array())
     {
-        $this->scope = is_array($scope) ? $scope : explode(' ', (string) $scope);
+        $this->scope = $scope;
     }
 
     /**
@@ -117,12 +115,10 @@ class AppIdentityCredentials extends CredentialsLoader implements
      * the GuzzleHttp\ClientInterface instance passed in will not be used.
      *
      * @param callable $httpHandler callback which delivers psr7 request
-     * @return array<mixed> {
-     *     A set of auth related metadata, containing the following
-     *
-     *     @type string $access_token
-     *     @type string $expiration_time
-     * }
+     * @return array A set of auth related metadata, containing the following
+     *     keys:
+     *         - access_token (string)
+     *         - expiration_time (string)
      */
     public function fetchAuthToken(callable $httpHandler = null)
     {
@@ -132,8 +128,10 @@ class AppIdentityCredentials extends CredentialsLoader implements
             return [];
         }
 
-        /** @phpstan-ignore-next-line */
-        $token = AppIdentityService::getAccessToken($this->scope);
+        // AppIdentityService expects an array when multiple scopes are supplied
+        $scope = is_array($this->scope) ? $this->scope : explode(' ', $this->scope);
+
+        $token = AppIdentityService::getAccessToken($scope);
         $this->lastReceivedToken = $token;
 
         return $token;
@@ -152,7 +150,6 @@ class AppIdentityCredentials extends CredentialsLoader implements
     {
         $this->checkAppEngineContext();
 
-        /** @phpstan-ignore-next-line */
         return base64_encode(AppIdentityService::signForApp($stringToSign)['signature']);
     }
 
@@ -164,7 +161,7 @@ class AppIdentityCredentials extends CredentialsLoader implements
      * @param callable $httpHandler Not used by this type.
      * @return string|null
      */
-    public function getProjectId(callable $httpHandler = null)
+    public function getProjectId(callable $httpHander = null)
     {
         try {
             $this->checkAppEngineContext();
@@ -172,7 +169,6 @@ class AppIdentityCredentials extends CredentialsLoader implements
             return null;
         }
 
-        /** @phpstan-ignore-next-line */
         return AppIdentityService::getApplicationId();
     }
 
@@ -190,7 +186,6 @@ class AppIdentityCredentials extends CredentialsLoader implements
         $this->checkAppEngineContext();
 
         if (!$this->clientName) {
-            /** @phpstan-ignore-next-line */
             $this->clientName = AppIdentityService::getServiceAccountName();
         }
 
@@ -198,7 +193,7 @@ class AppIdentityCredentials extends CredentialsLoader implements
     }
 
     /**
-     * @return array{access_token:string,expires_at:int}|null
+     * @return array|null
      */
     public function getLastReceivedToken()
     {
@@ -223,9 +218,6 @@ class AppIdentityCredentials extends CredentialsLoader implements
         return '';
     }
 
-    /**
-     * @return void
-     */
     private function checkAppEngineContext()
     {
         if (!self::onAppEngine() || !class_exists('google\appengine\api\app_identity\AppIdentityService')) {

@@ -50,4 +50,8 @@ class ToggleOption {
     public function getToggleGoogleNews(){
         return $this->searchOptionByKey('news');
     }
+
+    public function getToggleInspectUrl(){
+        return $this->searchOptionByKey('inspect-url');
+    }
 }

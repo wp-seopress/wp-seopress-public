@@ -126,8 +126,6 @@ class GCECredentials extends CredentialsLoader implements
 
     /**
      * Result of fetchAuthToken.
-     *
-     * @var array<mixed>
      */
     protected $lastReceivedToken;
 
@@ -168,7 +166,7 @@ class GCECredentials extends CredentialsLoader implements
 
     /**
      * @param Iam $iam [optional] An IAM instance.
-     * @param string|string[] $scope [optional] the scope of the access request,
+     * @param string|array $scope [optional] the scope of the access request,
      *        expressed either as an array or as a space-delimited string.
      * @param string $targetAudience [optional] The audience for the ID token.
      * @param string $quotaProject [optional] Specifies a project to bill for access
@@ -299,7 +297,7 @@ class GCECredentials extends CredentialsLoader implements
      */
     public static function onAppEngineFlexible()
     {
-        return substr((string) getenv('GAE_INSTANCE'), 0, 4) === 'aef-';
+        return substr(getenv('GAE_INSTANCE'), 0, 4) === 'aef-';
     }
 
     /**
@@ -353,14 +351,15 @@ class GCECredentials extends CredentialsLoader implements
      *
      * @param callable $httpHandler callback which delivers psr7 request
      *
-     * @return array<mixed> {
-     *     A set of auth related metadata, based on the token type.
+     * @return array A set of auth related metadata, based on the token type.
      *
-     *     @type string $access_token for access tokens
-     *     @type int    $expires_in   for access tokens
-     *     @type string $token_type   for access tokens
-     *     @type string $id_token     for ID tokens
-     * }
+     * Access tokens have the following keys:
+     *   - access_token (string)
+     *   - expires_in (int)
+     *   - token_type (string)
+     * ID tokens have the following keys:
+     *   - id_token (string)
+     *
      * @throws \Exception
      */
     public function fetchAuthToken(callable $httpHandler = null)
@@ -373,7 +372,7 @@ class GCECredentials extends CredentialsLoader implements
             $this->hasCheckedOnGce = true;
         }
         if (!$this->isOnGce) {
-            return [];  // return an empty array with no access token
+            return array();  // return an empty array with no access token
         }
 
         $response = $this->getFromMetadata($httpHandler, $this->tokenUri);
@@ -403,7 +402,7 @@ class GCECredentials extends CredentialsLoader implements
     }
 
     /**
-     * @return array{access_token:string,expires_at:int}|null
+     * @return array|null
      */
     public function getLastReceivedToken()
     {

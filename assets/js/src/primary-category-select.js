@@ -8,6 +8,7 @@ class TermSelect extends Component {
         super(...arguments);
         this.onChange = this.onChange.bind(this);
         this.updateMetabox = this.updateMetabox.bind(this);
+        this.onMetaboxChange = this.onMetaboxChange.bind(this);
         this.state = {
             primaryTermId: 'none',
             selectableTerms: [],
@@ -19,9 +20,13 @@ class TermSelect extends Component {
         this.setState({ primaryTermId });
         this.metaboxField = document.querySelector('#seopress_robots_primary_cat');
         if (this.metaboxField) {
-            this.metaboxField.addEventListener('change', e => {
-                this.setState({ primaryTermId: e.target.value });
-            });
+            this.metaboxField.addEventListener('change', this.onMetaboxChange);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.metaboxField) {
+            this.metaboxField.removeEventListener('change', this.onMetaboxChange);
         }
     }
 
@@ -38,7 +43,7 @@ class TermSelect extends Component {
     }
 
     updateMetabox(selectedTermId) {
-        if (this.metaboxField) {
+        if (this.metaboxField && this.state.selectableTerms && this.state.selectableTerms.length) {
             const options = this.getOptions().map(option => {
                 const selected = option.value == selectedTermId ? 'selected="selected"' : '';
                 return `<option value="${option.value}" ${selected}>${option.label}</option>`;
@@ -59,8 +64,12 @@ class TermSelect extends Component {
         this.setState({ primaryTermId: termId });
     }
 
+    onMetaboxChange(e) {
+        this.setState({ primaryTermId: e.target.value });
+    }
+
     render() {
-        return !!this.state.selectableTerms.length && (
+        return !!this.metaboxField && !!this.state.selectableTerms.length && (
             <SelectControl
                 label={__('Select a primary category', 'wp-seopress')}
                 value={this.state.primaryTermId}
@@ -75,7 +84,7 @@ class TermSelect extends Component {
 const PrimaryTermSelect = withSelect((select, { slug }) => {
     const taxonomy = select('core').getTaxonomy(slug);
     const selectedTermIds = taxonomy ? select('core/editor').getEditedPostAttribute(taxonomy.rest_base) : [];
-    const allTerms = select('core').getEntityRecords('taxonomy', slug, { per_page: -1 }) || [];
+    const allTerms = select('core').getEntityRecords('taxonomy', slug, { per_page: -1, context: 'view' }) || [];
     const primaryTermId = select('core/editor').getEditedPostAttribute('meta')['_seopress_robots_primary_cat'] || 'none';
     return { taxonomy, allTerms, primaryTermId, selectedTermIds }
 })(TermSelect);
