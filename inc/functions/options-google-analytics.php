@@ -935,7 +935,7 @@ function gtag(){dataLayer.push(arguments);}";
 
         //Measurement ID
         if ('' != seopress_google_analytics_ga4_option()) {
-            $seopress_gtag_ga4 = "gtag('config', '" . seopress_google_analytics_ga4_option() . "');";
+            $seopress_gtag_ga4 = "gtag('config', '" . seopress_google_analytics_ga4_option() . "' " . $features . ');';
             $seopress_gtag_ga4 = apply_filters('seopress_gtag_ga4', $seopress_gtag_ga4);
             $seopress_google_analytics_html .= $seopress_gtag_ga4;
             $seopress_google_analytics_html .= "\n";

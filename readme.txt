@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.8.0.2
+Stable tag: 5.8.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -362,6 +362,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.8.0.3 =
+* FIX Block editor compatibility issue with older versions of WordPress (< 6.0)
 = 5.8.0.2 =
 * FIX JS error with editor
 = 5.8.0.1 =

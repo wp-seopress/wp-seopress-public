@@ -28,7 +28,7 @@ class TermSelect extends Component {
     componentDidUpdate(prevProps, prevState) {
         // If available terms or selected terms have changed, check state.
         if (prevProps.allTerms !== this.props.allTerms || prevProps.selectedTermIds !== this.props.selectedTermIds) {
-            const selectableTerms = this.props.allTerms.filter(term => this.props.selectedTermIds.includes(term.id));
+            const selectableTerms = this.props.allTerms && this.props.allTerms.length ? this.props.allTerms.filter(term => this.props.selectedTermIds.includes(term.id)) : [];
             const primaryTermId = !this.props.selectedTermIds.length || !this.props.selectedTermIds.includes(parseInt(this.state.primaryTermId)) ? 'none' : this.state.primaryTermId;
             this.setState({ selectableTerms, primaryTermId });
         }
@@ -75,7 +75,7 @@ class TermSelect extends Component {
 const PrimaryTermSelect = withSelect((select, { slug }) => {
     const taxonomy = select('core').getTaxonomy(slug);
     const selectedTermIds = taxonomy ? select('core/editor').getEditedPostAttribute(taxonomy.rest_base) : [];
-    const allTerms = select('core').getEntityRecords('taxonomy', slug, { per_page: -1 })
+    const allTerms = select('core').getEntityRecords('taxonomy', slug, { per_page: -1 }) || [];
     const primaryTermId = select('core/editor').getEditedPostAttribute('meta')['_seopress_robots_primary_cat'] || 'none';
     return { taxonomy, allTerms, primaryTermId, selectedTermIds }
 })(TermSelect);
