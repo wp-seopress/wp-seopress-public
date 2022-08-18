@@ -48,7 +48,7 @@ class CustomCapabilities implements ExecuteHooksBackend
 
         if (isset($roles->role_objects['administrator'])) {
             $role  = $roles->role_objects['administrator'];
-            foreach ($pages as $key => $value) {
+            foreach ($pages as $value) {
                 $role->add_cap(\sprintf('seopress_manage_%s', $value), true);
             }
         }

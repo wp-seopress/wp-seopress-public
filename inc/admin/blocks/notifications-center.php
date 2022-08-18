@@ -36,7 +36,36 @@
             {
                 return seopress_get_service('AdvancedOption')->getAccessUniversalMetaboxGutenberg();
             }
-
+            function seopress_get_hidden_notices_review_option()
+            {
+                $seopress_get_hidden_notices_review_option = get_option('seopress_notices');
+                if (! empty($seopress_get_hidden_notices_review_option)) {
+                    foreach ($seopress_get_hidden_notices_review_option as $key => $seopress_get_hidden_notices_review_value) {
+                        $options[$key] = $seopress_get_hidden_notices_review_value;
+                    }
+                    if (isset($seopress_get_hidden_notices_review_option['notice-review'])) {
+                        return $seopress_get_hidden_notices_review_option['notice-review'];
+                    }
+                }
+            }
+            if ('1' != seopress_get_hidden_notices_review_option()) {
+                $args = [
+                    'id'     => 'notice-review',
+                    'title'  => __('You like SEOPress? Please help us by rating us 5 stars!', 'wp-seopress'),
+                    'desc'   => __('Support the development and improvement of the plugin by taking 15 seconds of your time to leave us a user review on the official WordPress plugins repository. Thank you!', 'wp-seopress'),
+                    'impact' => [
+                        'info' => __('Information', 'wp-seopress'),
+                    ],
+                    'link' => [
+                        'en'       => 'https://wordpress.org/support/view/plugin-reviews/wp-seopress?rate=5#postform',
+                        'title'    => __('Rate us!', 'wp-seopress'),
+                        'external' => true,
+                    ],
+                    'icon'       => 'dashicons-thumbs-up',
+                    'deleteable' => true,
+                ];
+                seopress_notification($args);
+            }
             function seopress_get_hidden_notices_usm_option()
             {
                 $seopress_get_hidden_notices_usm_option = get_option('seopress_notices');
@@ -195,42 +224,6 @@
                         seopress_notification($args);
                     }
                 }
-            }
-            if ('/' != substr(get_option('permalink_structure'), -1) && '' == seopress_advanced_advanced_trailingslash_option()) {
-                $args = [
-                    'id'     => 'notice-permalinks',
-                    'title'  => __('Your permalinks don\'t have a trailingslash', 'wp-seopress'),
-                    'desc'   => __('To avoid any SEO issues, we recommend you to activate the "<strong>Disable trailing slash for metas</strong>" option from our <strong>Advanced settings page</strong>. Do not forget to clear your cache if necessary.', 'wp-seopress'),
-                    'impact' => [
-                        'high' => __('High impact', 'wp-seopress'),
-                    ],
-                    'link' => [
-                        'en'       => admin_url('admin.php?page=seopress-advanced#tab=seopress_advanced_advanced'),
-                        'title'    => __('Fix this!', 'wp-seopress'),
-                        'external' => false,
-                    ],
-                    'icon'       => 'dashicons-admin-links',
-                    'deleteable' => false,
-                ];
-                seopress_notification($args);
-            }
-            if ('/' == substr(get_option('permalink_structure'), -1) && '1' == seopress_advanced_advanced_trailingslash_option()) {
-                $args = [
-                    'id'     => 'notice-permalinks',
-                    'title'  => __('Your permalinks have a trailingslash', 'wp-seopress'),
-                    'desc'   => __('To avoid any SEO issues, we recommend you to de-activate the "<strong>Disable trailing slash for metas</strong>" option from our <strong>Advanced settings page</strong>. Do not forget to clear your cache if necessary.', 'wp-seopress'),
-                    'impact' => [
-                        'high' => __('High impact', 'wp-seopress'),
-                    ],
-                    'link' => [
-                        'en'       => admin_url('admin.php?page=seopress-advanced#tab=seopress_advanced_advanced'),
-                        'title'    => __('Fix this!', 'wp-seopress'),
-                        'external' => false,
-                    ],
-                    'icon'       => 'dashicons-admin-links',
-                    'deleteable' => false,
-                ];
-                seopress_notification($args);
             }
             if (is_plugin_active('td-composer/td-composer.php')) {
                 function seopress_get_hidden_notices_tagdiv_option()
@@ -782,37 +775,6 @@
                     ];
                     seopress_notification($args);
                 }
-            }
-
-            function seopress_get_hidden_notices_review_option()
-            {
-                $seopress_get_hidden_notices_review_option = get_option('seopress_notices');
-                if (! empty($seopress_get_hidden_notices_review_option)) {
-                    foreach ($seopress_get_hidden_notices_review_option as $key => $seopress_get_hidden_notices_review_value) {
-                        $options[$key] = $seopress_get_hidden_notices_review_value;
-                    }
-                    if (isset($seopress_get_hidden_notices_review_option['notice-review'])) {
-                        return $seopress_get_hidden_notices_review_option['notice-review'];
-                    }
-                }
-            }
-            if ('1' != seopress_get_hidden_notices_review_option()) {
-                $args = [
-                    'id'     => 'notice-review',
-                    'title'  => __('You like SEOPress? Please help us by rating us 5 stars!', 'wp-seopress'),
-                    'desc'   => __('Support the development and improvement of the plugin by taking 15 seconds of your time to leave us a user review on the official WordPress plugins repository. Thank you!', 'wp-seopress'),
-                    'impact' => [
-                        'info' => __('Information', 'wp-seopress'),
-                    ],
-                    'link' => [
-                        'en'       => 'https://wordpress.org/support/view/plugin-reviews/wp-seopress?rate=5#postform',
-                        'title'    => __('Rate us!', 'wp-seopress'),
-                        'external' => true,
-                    ],
-                    'icon'       => 'dashicons-thumbs-up',
-                    'deleteable' => true,
-                ];
-                seopress_notification($args);
             }
             if ('1' == get_option('page_comments')) {
                 function seopress_get_hidden_notices_divide_comments_option()

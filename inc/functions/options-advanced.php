@@ -2,6 +2,7 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
+//Remove reply to com link
 if ('1' == seopress_get_service('AdvancedOption')->getAdvancedReplytocom()) {
     add_filter('comment_reply_link', 'seopress_remove_reply_to_com');
 }
@@ -9,6 +10,26 @@ function seopress_remove_reply_to_com($link) {
     return preg_replace('/href=\'(.*(\?|&)replytocom=(\d+)#respond)/', 'href=\'#comment-$3', $link);
 }
 
+//Remove noreferrer on links
+if ('1' == seopress_get_service('AdvancedOption')->getAdvancedNoReferrer()) {
+    add_filter('the_content', 'seopress_remove_noreferrer', 999);
+}
+function seopress_remove_noreferrer($content) {
+    if (empty($content)) {
+        return $content;
+    }
+
+    $attrs = [
+        "noreferrer " => "",
+        " noreferrer" => ""
+    ];
+
+    $attrs = apply_filters( 'seopress_link_attrs', $attrs );
+
+    return strtr($content, $attrs);
+}
+
+//Remove WP meta generator
 if ('1' == seopress_get_service('AdvancedOption')->getAdvancedWPGenerator()) {
     remove_action('wp_head', 'wp_generator');
 }
@@ -16,6 +37,7 @@ if ('1' == seopress_get_service('AdvancedOption')->getAdvancedWPGenerator()) {
 //Remove hentry post class
 if ('1' == seopress_get_service('AdvancedOption')->getAdvancedHentry()) {
     function seopress_advanced_advanced_hentry_hook($classes) {
+
         $classes = array_diff($classes, ['hentry']);
 
         return $classes;
@@ -40,60 +62,58 @@ if ('1' == seopress_get_service('AdvancedOption')->getAdvancedWPRSD()) {
 
 //Google site verification
 function seopress_advanced_advanced_google_hook() {
-    $optionGoogle = seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification();
-    if (!empty($optionGoogle)) {
-        $seopress_advanced_advanced_google = '<meta name="google-site-verification" content="' . $optionGoogle . '" />';
-        $seopress_advanced_advanced_google .= "\n";
-        echo $seopress_advanced_advanced_google;
+    if (is_home() || is_front_page()) {
+        $optionGoogle = seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification();
+        if (!empty($optionGoogle)) {
+            $seopress_advanced_advanced_google = '<meta name="google-site-verification" content="' . $optionGoogle . '" />';
+            $seopress_advanced_advanced_google .= "\n";
+            echo $seopress_advanced_advanced_google;
+        }
     }
 }
-if (is_home() || is_front_page()) {
-    add_action('wp_head', 'seopress_advanced_advanced_google_hook', 2);
-}
+add_action('wp_head', 'seopress_advanced_advanced_google_hook', 2);
 
 //Bing site verification
 function seopress_advanced_advanced_bing_hook() {
-    $optionBing = seopress_get_service('AdvancedOption')->getAdvancedBingVerification();
-    if (!empty($optionBing)) {
-        $seopress_advanced_advanced_bing = '<meta name="msvalidate.01" content="' . $optionBing . '" />';
-        $seopress_advanced_advanced_bing .= "\n";
-        echo $seopress_advanced_advanced_bing;
+    if (is_home() || is_front_page()) {
+        $optionBing = seopress_get_service('AdvancedOption')->getAdvancedBingVerification();
+        if (!empty($optionBing)) {
+            $seopress_advanced_advanced_bing = '<meta name="msvalidate.01" content="' . $optionBing . '" />';
+            $seopress_advanced_advanced_bing .= "\n";
+            echo $seopress_advanced_advanced_bing;
+        }
     }
 }
-if (is_home() || is_front_page()) {
-    add_action('wp_head', 'seopress_advanced_advanced_bing_hook', 2);
-}
+add_action('wp_head', 'seopress_advanced_advanced_bing_hook', 2);
 
 //Pinterest site verification
 function seopress_advanced_advanced_pinterest_hook() {
-    $optionPinterest =seopress_get_service('AdvancedOption')->getAdvancedPinterestVerification();
-    if (!empty($optionPinterest)) {
-        $seopress_advanced_advanced_pinterest = '<meta name="p:domain_verify" content="' . $optionPinterest . '" />';
-        $seopress_advanced_advanced_pinterest .= "\n";
-        echo $seopress_advanced_advanced_pinterest;
+    if (is_home() || is_front_page()) {
+        $optionPinterest =seopress_get_service('AdvancedOption')->getAdvancedPinterestVerification();
+        if (!empty($optionPinterest)) {
+            $seopress_advanced_advanced_pinterest = '<meta name="p:domain_verify" content="' . $optionPinterest . '" />';
+            $seopress_advanced_advanced_pinterest .= "\n";
+            echo $seopress_advanced_advanced_pinterest;
+        }
     }
 }
-
-if (is_home() || is_front_page()) {
-    add_action('wp_head', 'seopress_advanced_advanced_pinterest_hook', 2);
-}
+add_action('wp_head', 'seopress_advanced_advanced_pinterest_hook', 2);
 
 //Yandex site verification
 function seopress_advanced_advanced_yandex_hook() {
-    $contentYandex = seopress_get_service('AdvancedOption')->getAdvancedYandexVerification();
+    if (is_home() || is_front_page()) {
+        $contentYandex = seopress_get_service('AdvancedOption')->getAdvancedYandexVerification();
 
-    if(empty($contentYandex)){
-        return;
+        if(empty($contentYandex)){
+            return;
+        }
+
+        $meta = '<meta name="yandex-verification" content="' . $contentYandex . '" />';
+        $meta .= "\n";
+        echo $meta;
     }
-
-    $meta = '<meta name="yandex-verification" content="' . $contentYandex . '" />';
-    $meta .= "\n";
-    echo $meta;
 }
-
-if (is_home() || is_front_page()) {
-    add_action('wp_head', 'seopress_advanced_advanced_yandex_hook', 2);
-}
+add_action('wp_head', 'seopress_advanced_advanced_yandex_hook', 2);
 
 //Automatic alt text based on target kw
 if (!empty(seopress_get_service('AdvancedOption')->getAdvancedImageAutoAltTargetKw())) {

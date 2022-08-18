@@ -298,7 +298,7 @@ function seopress_titles_single_titles_callback()
                 <?php $cpt_in_sitemap = seopress_get_service('SitemapOption')->getPostTypesList();
 
         if ('1' == $check && isset($cpt_in_sitemap[$seopress_cpt_key]) && '1' === $cpt_in_sitemap[$seopress_cpt_key]['include']) { ?>
-                <div class="seopress-notice is-error">
+                <div class="seopress-notice is-error is-inline">
                     <p>
                         <?php printf(__('This custom post type is <strong>NOT</strong> excluded from your XML sitemaps despite the fact that it is set to <strong>NOINDEX</strong>. We recommend that you <a href="%s">check this out here</a>.', 'wp-seopress'), admin_url('admin.php?page=seopress-xml-sitemap')); ?>
                     </p>
@@ -738,6 +738,13 @@ function seopress_titles_tax_titles_callback()
                                                 <?php } ?>
                                                 value="1"/>
                                                 <?php _e('Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                                                <?php if ($seopress_tax_key ==='post_tag') { ?>
+													<div class="seopress-notice is-warning is-inline">
+														<p>
+															<?php _e('We do not recommend indexing <strong>tags</strong> which are, in the vast majority of cases, a source of duplicate content.', 'wp-seopress'); ?>
+														</p>
+													</div>
+												<?php } ?>
                                             </label>
 
                                             <?php $tax_in_sitemap = seopress_get_service('SitemapOption')->getTaxonomiesList();

@@ -63,30 +63,12 @@ class TitleMeta implements ExecuteHooksFrontend {
 
         $context = seopress_get_service('ContextPage')->getContext();
 
-        $variables = null;
-        $variables = apply_filters('seopress_dyn_variables_fn', $variables);
+        $variables = apply_filters('seopress_dyn_variables_fn', null);
 
         $post                                     = $variables['post'];
-        $term                                     = $variables['term'];
         $titleTemplate                            = $variables['seopress_titles_title_template'];
-        $seopress_titles_description_template     = $variables['seopress_titles_description_template'];
-        $seopress_paged                           = $variables['seopress_paged'];
-        $the_author_meta                          = $variables['the_author_meta'];
-        $sep                                      = $variables['sep'];
-        $seopress_excerpt                         = $variables['seopress_excerpt'];
-        $post_category                            = $variables['post_category'];
-        $post_tag                                 = $variables['post_tag'];
-        $get_search_query                         = $variables['get_search_query'];
-        $woo_single_cat_html                      = $variables['woo_single_cat_html'];
-        $woo_single_tag_html                      = $variables['woo_single_tag_html'];
-        $woo_single_price                         = $variables['woo_single_price'];
-        $woo_single_price_exc_tax                 = $variables['woo_single_price_exc_tax'];
-        $woo_single_sku                           = $variables['woo_single_sku'];
-        $author_bio                               = $variables['author_bio'];
-        $seopress_get_the_excerpt                 = $variables['seopress_get_the_excerpt'];
         $seopress_titles_template_variables_array = $variables['seopress_titles_template_variables_array'];
         $seopress_titles_template_replace_array   = $variables['seopress_titles_template_replace_array'];
-        $seopress_excerpt_length                  = $variables['seopress_excerpt_length'];
         $page_id                                  = get_option('page_for_posts');
 
         if (is_front_page() && is_home() && isset($post) && '' == get_post_meta($post->ID, '_seopress_titles_title', true)) { //HOMEPAGE

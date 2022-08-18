@@ -670,12 +670,14 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <option <?php echo selected('307', $seopress_redirections_type, false); ?>
                                     value="307"><?php _e('307 Moved Temporarily', 'wp-seopress'); ?>
                                 </option>
-                                <option <?php echo selected('410', $seopress_redirections_type, false); ?>
-                                    value="410"><?php _e('410 Gone', 'wp-seopress'); ?>
-                                </option>
-                                <option <?php echo selected('451', $seopress_redirections_type, false); ?>
-                                    value="451"><?php _e('451 Unavailable For Legal Reasons', 'wp-seopress'); ?>
-                                </option>
+                                <?php if ('seopress_404' == $typenow) { ?>
+                                    <option <?php echo selected('410', $seopress_redirections_type, false); ?>
+                                        value="410"><?php _e('410 Gone', 'wp-seopress'); ?>
+                                    </option>
+                                    <option <?php echo selected('451', $seopress_redirections_type, false); ?>
+                                        value="451"><?php _e('451 Unavailable For Legal Reasons', 'wp-seopress'); ?>
+                                    </option>
+                                <?php } ?>
                             </select>
                         </p>
                         <p>

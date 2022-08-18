@@ -2,12 +2,23 @@
 
 namespace SEOPress\ManualHooks\Thirds\WooCommerce;
 
+use SEOPress\Thirds\WooCommerce\WooCommerceAnalyticsService;
+
 if ( ! defined('ABSPATH')) {
     exit;
 }
 
 class WooCommerceAnalytics {
+
+    /**
+     * @var WooCommerceAnalyticsService
+     */
+    protected $wooCommerceAnalytics;
+
     public function __construct() {
+        /**
+         * @var WooCommerceAnalyticsService
+         */
         $this->wooCommerceAnalytics = seopress_get_service('WooCommerceAnalyticsService');
     }
 
@@ -21,7 +32,9 @@ class WooCommerceAnalytics {
             return;
         }
 
-        if (seopress_google_analytics_add_to_cart_option()) {
+        $addToCartOption = seopress_get_service('GoogleAnalyticsOption')->getAddToCart();
+
+        if ($addToCartOption) {
             // Listing page
             add_action('woocommerce_after_shop_loop_item', [$this, 'addToCart']);
 
@@ -29,12 +42,14 @@ class WooCommerceAnalytics {
             add_action('woocommerce_after_add_to_cart_button', [$this, 'singleAddToCart']);
         }
 
-        if (seopress_google_analytics_remove_from_cart_option()) {
+        $removeFromCartOption = seopress_get_service('GoogleAnalyticsOption')->getRemoveFromCart();
+
+        if ($removeFromCartOption) {
             // Cart page
             add_filter('woocommerce_cart_item_remove_link', [$this, 'removeFromCart'], 10, 2);
         }
 
-        if (seopress_google_analytics_add_to_cart_option() && seopress_google_analytics_remove_from_cart_option()) {
+        if ($addToCartOption && $removeFromCartOption) {
             // Before update
             add_action('woocommerce_cart_actions', [$this, 'updateCartOrCheckout']);
         }

@@ -21,6 +21,13 @@ function seopress_xml_sitemaps_ping_cron_action() {
     if ('1' !== seopress_xml_sitemap_general_enable_option() || '1' !== seopress_get_toggle_option('xml-sitemap')) {
         return;
     }
+
+    //Disable if IndexNow is enabled
+    $options = get_option('seopress_instant_indexing_option_name');
+    if ('1' == seopress_get_toggle_option('instant-indexing') && isset($options['engines']['bing']) && $options['engines']['bing'] === '1') {
+        return;
+    }
+
     $url = rawurlencode(get_option('home').'/sitemaps.xml/');
 
     $url = apply_filters( 'seopress_sitemaps_xml_ping_url', $url);

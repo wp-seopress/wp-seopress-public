@@ -55,9 +55,7 @@ abstract class RedirectionSettings {
                 'options'     => [
                     ['value' => 301, 'label' =>  __('301 Moved Permanently', 'wp-seopress')],
                     ['value' => 302, 'label' =>  __('302 Found / Moved Temporarily', 'wp-seopress')],
-                    ['value' => 307, 'label' =>  __('307 Moved Temporarily', 'wp-seopress')],
-                    ['value' => 410, 'label' =>  __('410 Gone', 'wp-seopress')],
-                    ['value' => 451, 'label' =>  __('451 Unavailable For Legal Reasons', 'wp-seopress')],
+                    ['value' => 307, 'label' =>  __('307 Moved Temporarily', 'wp-seopress')]
                 ],
                 'visible'     => true,
             ],

@@ -81,7 +81,7 @@ class Document_Settings_Section {
     }
 
     /**
-     * Add WP SeoPress section under document settings.
+     * Add WP SEOPress section under document settings.
      *
      * @return void
      */
@@ -509,9 +509,7 @@ class Document_Settings_Section {
                 'options'     => [
                     301 => __('301 Moved Permanently', 'wp-seopress'),
                     302 => __('302 Found / Moved Temporarily', 'wp-seopress'),
-                    307 => __('307 Moved Temporarily', 'wp-seopress'),
-                    410 => __('410 Gone', 'wp-seopress'),
-                    451 => __('451 Unavailable For Legal Reasons', 'wp-seopress'),
+                    307 => __('307 Moved Temporarily', 'wp-seopress')
                 ],
                 'default' => $redirections_type ? (int) $redirections_type : 301,
             ]

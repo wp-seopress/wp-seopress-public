@@ -41,11 +41,11 @@ if (true == get_post_type_archive_link($path) && 0 == $offset) {
         $sitemap_url = '';
         // array with all the information needed for a sitemap url
         $seopress_url = [
-            'loc'    => htmlspecialchars(urldecode(trailingslashit(get_post_type_archive_link($path)))),
+            'loc'    => htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path)))),
             'mod'    => '',
             'images' => [],
         ];
-        $sitemap_url = sprintf("<url>\n<loc>%s</loc>\n</url>", htmlspecialchars(urldecode(trailingslashit(get_post_type_archive_link($path)))));
+        $sitemap_url = sprintf("<url>\n<loc>%s</loc>\n</url>", htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path)))));
 
         $sitemap_url = apply_filters('seopress_sitemaps_no_archive_link', $sitemap_url, $path);
 
@@ -70,7 +70,7 @@ if ('attachment' === $path) {
     unset($args['post_status']);
 }
 
-if ( $path == 'product' ) {
+if (is_plugin_active('woocommerce/woocommerce.php') && $path == 'product' ) {
     $args['tax_query'][] = [
         'taxonomy' => 'product_visibility',
         'field'    => 'slug',

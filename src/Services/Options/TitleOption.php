@@ -259,4 +259,39 @@ class TitleOption {
     public function getTitleBpGroups(){
         return $this->searchOptionByKey('seopress_titles_bp_groups_title');
     }
+
+    /**
+     * @since 5.9.0
+     */
+    public function getBpGroupsDesc(){
+        return $this->searchOptionByKey('seopress_titles_bp_groups_desc');
+    }
+
+    /**
+     * @since 5.9.0
+     */
+    public function getArchivesDateDesc(){
+        return $this->searchOptionByKey('seopress_titles_archives_date_desc');
+    }
+
+    /**
+     * @since 5.9.0
+     */
+    public function getArchivesSearchDesc(){
+        return $this->searchOptionByKey('seopress_titles_archives_search_desc');
+    }
+
+    /**
+     * @since 5.9.0
+     */
+    public function getArchives404Desc(){
+        return $this->searchOptionByKey('seopress_titles_archives_404_desc');
+    }
+
+    /**
+     * @since 5.9.0
+     */
+    public function geNoSiteLinksSearchBox(){
+        return $this->searchOptionByKey('seopress_titles_nositelinkssearchbox');
+    }
 }

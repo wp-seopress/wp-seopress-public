@@ -67,3 +67,66 @@ function print_section_info_advanced_security_roles()
 
 <?php
 }
+
+function print_section_info_advanced_appearance_col()
+{ ?>
+<hr>
+
+<h3>
+    <?php _e('Columns', 'wp-seopress'); ?>
+</h3>
+
+<p><?php _e('Customize the SEO columns.','wp-seopress'); ?></p>
+
+<?php
+}
+
+function print_section_info_advanced_appearance_metabox()
+{ ?>
+<hr>
+
+<h3>
+    <?php _e('Metaboxes', 'wp-seopress'); ?>
+</h3>
+
+<p><?php _e('Edit your SEO metadata directly from your favorite page builder.','wp-seopress'); ?></p>
+
+<?php
+}
+
+function print_section_info_advanced_appearance_dashboard()
+{ ?>
+<hr>
+
+<h3>
+    <?php _e('SEO Dashboard', 'wp-seopress'); ?>
+</h3>
+
+<p><?php _e('Customize the SEO dashboard UI.','wp-seopress'); ?></p>
+
+<?php
+}
+
+function print_section_info_advanced_appearance_admin_bar()
+{ ?>
+<hr>
+
+<h3>
+    <?php _e('Admin bar', 'wp-seopress'); ?>
+</h3>
+
+<p><?php _e('The admin bar appears on the top of your pages when logged in to your WP admin.','wp-seopress'); ?></p>
+
+<?php
+}
+
+function print_section_info_advanced_appearance_misc()
+{ ?>
+<hr>
+
+<h3>
+    <?php _e('Misc', 'wp-seopress'); ?>
+</h3>
+
+<?php
+}

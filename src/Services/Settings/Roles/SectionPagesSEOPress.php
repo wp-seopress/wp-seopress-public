@@ -21,11 +21,9 @@ class SectionPagesSEOPress {
 
         if ( ! isset($wp_roles)) {
             $wp_roles = new WP_Roles();
-        } ?>
+        }
 
-<div class="wrap-user-roles">
-
-    <?php foreach ($wp_roles->get_names() as $key => $value) {
+        foreach ($wp_roles->get_names() as $key => $value) {
             if ('administrator' === $key) {
                 continue;
             }
@@ -54,9 +52,7 @@ class SectionPagesSEOPress {
         </label>
     </p>
     <?php
-        } ?>
-</div>
-<?php
+        }
     }
 
     /**

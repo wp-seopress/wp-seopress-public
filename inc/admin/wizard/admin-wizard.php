@@ -663,11 +663,16 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_titles_option = get_option('seopress_titles_option_name');
 		$seopress_social_option = get_option('seopress_social_option_name');
 
+        $current_user = wp_get_current_user();
+		$current_user_email = isset($current_user->user_email) ? $current_user->user_email : null;
+
 		$site_sep        = isset($seopress_titles_option['seopress_titles_sep']) ? $seopress_titles_option['seopress_titles_sep'] : null;
 		$site_title      = isset($seopress_titles_option['seopress_titles_home_site_title']) ? $seopress_titles_option['seopress_titles_home_site_title'] : null;
 		$knowledge_type  = isset($seopress_social_option['seopress_social_knowledge_type']) ? $seopress_social_option['seopress_social_knowledge_type'] : null;
 		$knowledge_name  = isset($seopress_social_option['seopress_social_knowledge_name']) ? $seopress_social_option['seopress_social_knowledge_name'] : null;
-		$knowledge_img   = isset($seopress_social_option['seopress_social_knowledge_img']) ? $seopress_social_option['seopress_social_knowledge_img'] : null; ?>
+		$knowledge_img   = isset($seopress_social_option['seopress_social_knowledge_img']) ? $seopress_social_option['seopress_social_knowledge_img'] : null;
+		$knowledge_email = isset($seopress_social_option['seopress_social_knowledge_email']) ? $seopress_social_option['seopress_social_knowledge_email'] : $current_user_email;
+		$knowledge_nl    = isset($seopress_social_option['seopress_social_knowledge_nl']); ?>
 
         <div class="seopress-setup-content">
             <h1><?php esc_html_e('Your site', 'wp-seopress'); ?><hr role="presentation"></h1>
@@ -739,11 +744,29 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <p>
                         <label for="knowledge_img_meta"><?php esc_html_e('Your photo/organization logo', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_img_meta" class="location-input" name="knowledge_img"
-                            placeholder="<?php esc_html_e('eg: https://www.example.com/logo.png', 'wp-seopress'); ?>"
-                            value="<?php echo $knowledge_img; ?>" />
+                        placeholder="<?php esc_html_e('eg: https://www.example.com/logo.png', 'wp-seopress'); ?>"
+                        value="<?php echo $knowledge_img; ?>" />
 
                         <input id="knowledge_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
                     </p>
+
+                    <?php if (function_exists('seopress_get_toggle_white_label_option') && '1' !== seopress_get_toggle_white_label_option()) { ?>
+                        <p>
+                            <label for="knowledge_email"><?php esc_html_e('Your email', 'wp-seopress'); ?></label>
+                            <input type="text" id="knowledge_email" class="location-input" name="knowledge_email"
+                                placeholder="<?php esc_html_e('eg: enter', 'wp-seopress'); ?>"
+                                value="<?php echo $knowledge_email; ?>" />
+                        </p>
+
+                        <p>
+                            <label for="knowledge_nl">
+                                <input id="knowledge_nl" class="location-input" name="knowledge_nl" type="checkbox" <?php if ('1' == $knowledge_nl) {
+                                echo 'checked="yes"';
+                            } ?> value="1"/>
+                                <?php _e('Be alerted to changes in Google’s algorithm, get product updates, tutorials and ebooks to improve your conversion and traffic.'); ?>
+                            </label>
+                        </p>
+                    <?php } ?>
 
                     <p class="seopress-setup-actions step">
                         <button type="submit" class="btnPrimary btn btnNext"
@@ -774,13 +797,31 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_titles_option['seopress_titles_home_site_title'] = isset($_POST['site_title']) ? sanitize_text_field(wp_unslash($_POST['site_title'])) : '';
 
 		//Social
-		$seopress_social_option['seopress_social_knowledge_type'] = isset($_POST['knowledge_type']) ? esc_attr(wp_unslash($_POST['knowledge_type'])) : '';
-		$seopress_social_option['seopress_social_knowledge_name'] = isset($_POST['knowledge_name']) ? sanitize_text_field(wp_unslash($_POST['knowledge_name'])) : '';
-		$seopress_social_option['seopress_social_knowledge_img']  = isset($_POST['knowledge_img']) ? sanitize_text_field(wp_unslash($_POST['knowledge_img'])) : '';
+		$seopress_social_option['seopress_social_knowledge_type']   = isset($_POST['knowledge_type']) ? esc_attr(wp_unslash($_POST['knowledge_type'])) : '';
+		$seopress_social_option['seopress_social_knowledge_name']   = isset($_POST['knowledge_name']) ? sanitize_text_field(wp_unslash($_POST['knowledge_name'])) : '';
+		$seopress_social_option['seopress_social_knowledge_img']    = isset($_POST['knowledge_img']) ? sanitize_text_field(wp_unslash($_POST['knowledge_img'])) : '';
+		$seopress_social_option['seopress_social_knowledge_email']  = isset($_POST['knowledge_email']) ? sanitize_text_field(wp_unslash($_POST['knowledge_email'])) : '';
+		$seopress_social_option['seopress_social_knowledge_nl']     = isset($_POST['knowledge_nl']) ? esc_attr(wp_unslash($_POST['knowledge_nl'])) : null;
 
 		//Save options
 		update_option('seopress_titles_option_name', $seopress_titles_option, false);
 		update_option('seopress_social_option_name', $seopress_social_option, false);
+
+        //Send email to SG if we have user consent
+        if (function_exists('seopress_get_toggle_white_label_option') && '1' !== seopress_get_toggle_white_label_option()) {
+            if (isset($seopress_social_option['seopress_social_knowledge_email']) && $seopress_social_option['seopress_social_knowledge_nl'] === '1') {
+                $endpoint_url = 'https://www.seopress.org/wizard-nl/';
+                $body = ['email' => $seopress_social_option['seopress_social_knowledge_email'], 'lang' => seopress_get_locale()];
+
+                $response = wp_remote_post( $endpoint_url, array(
+                        'method' => 'POST',
+                        'body' => $body,
+                        'timeout' => 5,
+                        'blocking' => true
+                    )
+                );
+            }
+        }
 
 		wp_safe_redirect(esc_url_raw($this->get_next_step_link()));
 		exit;
@@ -913,6 +954,9 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <?php _e('For which single post types, should indexing be disabled?', 'wp-seopress'); ?>
                     </h2>
 
+                    <p><?php _e('Custom post types are a content type in WordPress. By default, <strong>Post</strong> and <strong>Page</strong> are the <strong>default post types</strong>.','wp-seopress'); ?></p>
+                    <p><?php _e('You can create your own type of content like "product" or "business": these are <strong>custom post types</strong>.','wp-seopress'); ?></p>
+
                     <ul>
                         <?php
                                         //Post Types
@@ -1010,6 +1054,9 @@ class SEOPRESS_Admin_Setup_Wizard {
                             <h2>
                                 <?php _e('For which post type archives, should indexing be disabled?', 'wp-seopress'); ?>
                             </h2>
+
+                            <p><?php _e('<strong>Archive pages</strong> are automatically generated by WordPress. They group specific content such as your latest articles, a product category or your content by author or date.', 'wp-seopress'); ?></p>
+                            <p><?php _e('Below the list of your <strong>post type archives</strong>:', 'wp-seopress'); ?></p>
 
                             <ul>
                             <?php
@@ -1109,6 +1156,9 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <?php _e('For which taxonomy archives, should indexing be disabled?', 'wp-seopress'); ?>
                     </h2>
 
+                    <p><?php _e('<strong>Taxonomies</strong> are the method of classifying content and data in WordPress. When you use a taxonomy you’re grouping similar things together. The taxonomy refers to the sum of those groups.','wp-seopress'); ?></p>
+                    <p><?php _e('<strong>Categories</strong> and <strong>Tags</strong> are the default taxonomies. You can add your own taxonomies like "product categories": these are called <strong>custom taxonomies</strong>.','wp-seopress'); ?></p>
+
                     <ul>
                         <?php
                         //Archives
@@ -1129,6 +1179,13 @@ class SEOPRESS_Admin_Setup_Wizard {
                             } ?>
                                 value="1"/>
                                 <?php _e('Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                                <?php if ($seopress_tax_key =='post_tag') { ?>
+                                    <div class="seopress-notice is-warning is-inline">
+                                        <p>
+                                            <?php _e('We do not recommend indexing <strong>tags</strong> which are, in the vast majority of cases, a source of duplicate content.', 'wp-seopress'); ?>
+                                        </p>
+                                    </div>
+                                <?php } ?>
                             </label>
                         </li>
                         <?php
@@ -1248,29 +1305,31 @@ class SEOPRESS_Admin_Setup_Wizard {
                             <?php printf(__('Shorten your URLs by removing %s and improve your SEO.', 'wp-seopress'), $category_base); ?>
                         </li>
 
-                        <!-- Remove /product-category/ in URLs -->
-                        <li class="seopress-wizard-service-item checkbox">
-                            <label for="product_category_url">
-                                <input id="product_category_url" name="product_category_url" type="checkbox" class="location-input"
-                                    <?php if ('1' == $product_category_url) {
-                            echo 'checked="yes"';
-                        } ?> value="1"/>
-                                <?php
-                                    $category_base = get_option('woocommerce_permalinks');
-                        $category_base             = $category_base['category_base'];
+                        <?php if (is_plugin_active('woocommerce/woocommerce.php')) { ?>
+                            <!-- Remove /product-category/ in URLs -->
+                            <li class="seopress-wizard-service-item checkbox">
+                                <label for="product_category_url">
+                                    <input id="product_category_url" name="product_category_url" type="checkbox" class="location-input"
+                                        <?php if ('1' == $product_category_url) {
+                                echo 'checked="yes"';
+                            } ?> value="1"/>
+                                    <?php
+                                        $category_base = get_option('woocommerce_permalinks');
+                            $category_base             = $category_base['category_base'];
 
-                        if ('' != $category_base) {
-                            $category_base = '/' . $category_base . '/';
-                        } else {
-                            $category_base = '/product-category/';
-                        }
+                            if ('' != $category_base) {
+                                $category_base = '/' . $category_base . '/';
+                            } else {
+                                $category_base = '/product-category/';
+                            }
 
-                        printf(__('Remove <strong>%s</strong> in your permalinks', 'wp-seopress'), $category_base); ?>
-                            </label>
-                        </li>
-                        <li class="description">
-                            <?php printf(__('Shorten your URLs by removing %s and improve your SEO.', 'wp-seopress'), $category_base); ?>
-                        </li>
+                            printf(__('Remove <strong>%s</strong> in your permalinks', 'wp-seopress'), $category_base); ?>
+                                </label>
+                            </li>
+                            <li class="description">
+                                <?php printf(__('Shorten your URLs by removing %s and improve your SEO.', 'wp-seopress'), $category_base); ?>
+                            </li>
+                        <?php } ?>
                     </ul>
 
                     <p class="seopress-setup-actions step">
@@ -1305,6 +1364,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_advanced_option['seopress_advanced_advanced_attachments_file']    = isset($_POST['attachments_file']) ? esc_attr(wp_unslash($_POST['attachments_file'])) : null;
 		$seopress_advanced_option['seopress_advanced_advanced_category_url']        = isset($_POST['category_url']) ? esc_attr(wp_unslash($_POST['category_url'])) : null;
 
+        if (is_plugin_active('woocommerce/woocommerce.php')) {
+		    $seopress_advanced_option['seopress_advanced_advanced_product_cat_url']        = isset($_POST['product_category_url']) ? esc_attr(wp_unslash($_POST['product_category_url'])) : null;
+        }
+
 		//Save options
 		update_option('seopress_titles_option_name', $seopress_titles_option, false);
 		update_option('seopress_advanced_option_name', $seopress_advanced_option, false);
@@ -1319,8 +1382,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 */
 	public function seopress_setup_universal() {
 		$seopress_advanced_option         = get_option('seopress_advanced_option_name');
-		$universal_seo_block_editor       = isset($seopress_advanced_option['seopress_advanced_appearance_universal_metabox']);
-		$universal_seo_metabox            = isset($seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable']); ?>
+		$universal_seo_metabox            = isset($seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable']) ? esc_attr($seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable']) : null;
+        ?>
 
         <div class="seopress-setup-content">
 
@@ -1347,22 +1410,10 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <!-- Universal SEO metabox for page builers -->
                         <li class="seopress-wizard-service-item checkbox">
                             <label for="universal_seo_metabox">
-                                <input id="universal_seo_metabox" name="universal_seo_metabox" type="checkbox" class="location-input" <?php if ('1' == $universal_seo_metabox) {
+                                <input id="universal_seo_metabox" name="universal_seo_metabox" type="checkbox" class="location-input" <?php if ('1' !== $universal_seo_metabox) {
                             echo 'checked="yes"';
                         } ?> value="1"/>
-                                <?php _e('No, I prefer to use the good old one SEO metabox', 'wp-seopress'); ?>
-                            </label>
-                        </li>
-                        <li class="description">
-                            <?php _e('You can change this setting at anytime from SEO, Advanced settings page, Appearance tab.', 'wp-seopress'); ?>
-                        </li>
-                        <!-- Universal SEO metabox for Block Editor -->
-                        <li class="seopress-wizard-service-item checkbox">
-                            <label for="universal_seo_block_editor">
-                                <input id="universal_seo_block_editor" name="universal_seo_block_editor" type="checkbox" class="location-input" <?php if ('1' == $universal_seo_block_editor) {
-                            echo 'checked="yes"';
-                        } ?> value="1"/>
-                                <?php _e('Yes, enable the universal SEO metabox for the Block Editor too', 'wp-seopress'); ?>
+                                <?php _e('Yes, please enable the universal SEO metabox!', 'wp-seopress'); ?>
                             </label>
                         </li>
                         <li class="description">
@@ -1395,10 +1446,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_advanced_option = get_option('seopress_advanced_option_name');
 
 		//Advanced
-		$seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable']         = isset($_POST['universal_seo_metabox']) ? esc_attr(wp_unslash($_POST['universal_seo_metabox'])) : null;
-		$seopress_advanced_option['seopress_advanced_appearance_universal_metabox']                 = isset($_POST['universal_seo_block_editor']) ? esc_attr(wp_unslash($_POST['universal_seo_block_editor'])) : null;
+		$seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable']         = isset($_POST['universal_seo_metabox']) ? '' : '1';
+		$seopress_advanced_option['seopress_advanced_appearance_universal_metabox']                 = isset($_POST['universal_seo_metabox']) ? '1' : '';
 
-		//Save options
+        //Save options
 		update_option('seopress_advanced_option_name', $seopress_advanced_option, false);
 
 		if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {

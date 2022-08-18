@@ -50,6 +50,7 @@ class GetTerm implements ExecuteHooks
 
         $social = seopress_get_service('SocialMeta')->getValue($context);
         $robots = seopress_get_service('RobotMeta')->getValue($context);
+        $redirections = seopress_get_service('RedirectionMeta')->getValue($context);
 
         $canonical =  '';
         if(isset($robots['canonical'])){
@@ -63,7 +64,8 @@ class GetTerm implements ExecuteHooks
             "canonical" => $canonical,
             "og" => $social['og'],
             "twitter" => $social['twitter'],
-            "robots" => $robots
+            "robots" => $robots,
+            "redirections" => $redirections
         ];
 
         return apply_filters('seopress_headless_get_post', $data, $id, $context);

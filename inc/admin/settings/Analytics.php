@@ -35,14 +35,6 @@ add_settings_field(
     'seopress_setting_section_google_analytics_enable' // Section
 );
 
-add_settings_field(
-    'seopress_google_analytics_roles', // ID
-    __('Exclude user roles from tracking (Google Analytics and Matomo)', 'wp-seopress'), // Title
-    'seopress_google_analytics_roles_callback', // Callback
-    'seopress-settings-admin-google-analytics-enable', // Page
-    'seopress_setting_section_google_analytics_enable' // Section
-);
-
 //Cookie bar / GDPR SECTION================================================================
 add_settings_section(
     'seopress_setting_section_google_analytics_gdpr', // ID
@@ -450,6 +442,24 @@ add_settings_field(
     'seopress_google_analytics_cd_logged_in_user_callback', // Callback
     'seopress-settings-admin-google-analytics-custom-dimensions', // Page
     'seopress_setting_section_google_analytics_custom_dimensions' // Section
+);
+
+//Google Analytics Advanced SECTION================================================================
+
+add_settings_section(
+    'seopress_setting_section_google_analytics_advanced', // ID
+    '',
+    //__("Advanced","wp-seopress"), // Title
+    'print_section_info_google_analytics_advanced', // Callback
+    'seopress-settings-admin-google-analytics-advanced' // Page
+);
+
+add_settings_field(
+    'seopress_google_analytics_roles', // ID
+    __('Exclude user roles from tracking (Google Analytics and Matomo)', 'wp-seopress'), // Title
+    'seopress_google_analytics_roles_callback', // Callback
+    'seopress-settings-admin-google-analytics-advanced', // Page
+    'seopress_setting_section_google_analytics_advanced' // Section
 );
 
 //Matomo SECTION===========================================================================

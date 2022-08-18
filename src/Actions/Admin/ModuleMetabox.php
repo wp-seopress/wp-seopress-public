@@ -38,6 +38,16 @@ class ModuleMetabox implements ExecuteHooks
             return;
         }
 
+        //AMP compatibility
+        if ( function_exists( 'amp_is_request' ) && amp_is_request() ) {
+            return;
+        }
+
+        //Bricks builder compatibility
+        if (function_exists('bricks_is_builder_main') && bricks_is_builder_main() === false) {
+            return;
+        }
+
         $isGutenberg = false;
         if(function_exists('get_current_screen')){
             $currentScreen = get_current_screen();

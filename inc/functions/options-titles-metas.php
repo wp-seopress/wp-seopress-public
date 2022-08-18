@@ -185,54 +185,22 @@ function seopress_titles_archives_author_desc_option() {
 
 //Author archives Desc
 function seopress_titles_bp_groups_desc_option() {
-    $seopress_titles_bp_groups_desc_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_bp_groups_desc_option)) {
-        foreach ($seopress_titles_bp_groups_desc_option as $key => $seopress_titles_bp_groups_desc_value) {
-            $options[$key] = $seopress_titles_bp_groups_desc_value;
-        }
-        if (isset($seopress_titles_bp_groups_desc_option['seopress_titles_bp_groups_desc'])) {
-            return $seopress_titles_bp_groups_desc_option['seopress_titles_bp_groups_desc'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getBpGroupsDesc();
 }
 
 //Date archives Desc
 function seopress_titles_archives_date_desc_option() {
-    $seopress_titles_archives_date_desc_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archives_date_desc_option)) {
-        foreach ($seopress_titles_archives_date_desc_option as $key => $seopress_titles_archives_date_desc_value) {
-            $options[$key] = $seopress_titles_archives_date_desc_value;
-        }
-        if (isset($seopress_titles_archives_date_desc_option['seopress_titles_archives_date_desc'])) {
-            return $seopress_titles_archives_date_desc_option['seopress_titles_archives_date_desc'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getArchivesDateDesc();
 }
 
 //Search archives Desc
 function seopress_titles_archives_search_desc_option() {
-    $seopress_titles_archives_search_desc_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archives_search_desc_option)) {
-        foreach ($seopress_titles_archives_search_desc_option as $key => $seopress_titles_archives_search_desc_value) {
-            $options[$key] = $seopress_titles_archives_search_desc_value;
-        }
-        if (isset($seopress_titles_archives_search_desc_option['seopress_titles_archives_search_desc'])) {
-            return $seopress_titles_archives_search_desc_option['seopress_titles_archives_search_desc'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getArchivesSearchDesc();
 }
 
 //404 archives Desc
 function seopress_titles_archives_404_desc_option() {
-    $seopress_titles_archives_404_desc_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_archives_404_desc_option)) {
-        foreach ($seopress_titles_archives_404_desc_option as $key => $seopress_titles_archives_404_desc_value) {
-            $options[$key] = $seopress_titles_archives_404_desc_value;
-        }
-        if (isset($seopress_titles_archives_404_desc_option['seopress_titles_archives_404_desc'])) {
-            return $seopress_titles_archives_404_desc_option['seopress_titles_archives_404_desc'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getArchives404Desc();
 }
 
 //THE Title Tag
@@ -1165,15 +1133,7 @@ function seopress_titles_tax_nofollow_option() {
 
 //nofollow Global Avanced tab
 function seopress_titles_nofollow_option() {
-    $seopress_titles_nofollow_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_nofollow_option)) {
-        foreach ($seopress_titles_nofollow_option as $key => $seopress_titles_nofollow_value) {
-            $options[$key] = $seopress_titles_nofollow_value;
-        }
-        if (isset($seopress_titles_nofollow_option['seopress_titles_nofollow'])) {
-            return $seopress_titles_nofollow_option['seopress_titles_nofollow'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleNoFollow();
 }
 
 function seopress_titles_nofollow_post_option() {
@@ -1284,15 +1244,7 @@ add_action('wp_head', 'seopress_titles_single_cpt_thumb_gcs', 1);
 
 //noodp
 function seopress_titles_noodp_option() {
-    $seopress_titles_noodp_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_noodp_option)) {
-        foreach ($seopress_titles_noodp_option as $key => $seopress_titles_noodp_value) {
-            $options[$key] = $seopress_titles_noodp_value;
-        }
-        if (isset($seopress_titles_noodp_option['seopress_titles_noodp'])) {
-            return $seopress_titles_noodp_option['seopress_titles_noodp'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleNoOdp();
 }
 
 function seopress_titles_noodp_post_option() {
@@ -1319,15 +1271,7 @@ function seopress_titles_noodp_bypass() {
 
 //noarchive
 function seopress_titles_noarchive_option() {
-    $seopress_titles_noarchive_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_noarchive_option)) {
-        foreach ($seopress_titles_noarchive_option as $key => $seopress_titles_noarchive_value) {
-            $options[$key] = $seopress_titles_noarchive_value;
-        }
-        if (isset($seopress_titles_noarchive_option['seopress_titles_noarchive'])) {
-            return $seopress_titles_noarchive_option['seopress_titles_noarchive'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleNoArchive();
 }
 
 function seopress_titles_noarchive_post_option() {
@@ -1354,15 +1298,7 @@ function seopress_titles_noarchive_bypass() {
 
 //nosnippet
 function seopress_titles_nosnippet_option() {
-    $seopress_titles_nosnippet_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_nosnippet_option)) {
-        foreach ($seopress_titles_nosnippet_option as $key => $seopress_titles_nosnippet_value) {
-            $options[$key] = $seopress_titles_nosnippet_value;
-        }
-        if (isset($seopress_titles_nosnippet_option['seopress_titles_nosnippet'])) {
-            return $seopress_titles_nosnippet_option['seopress_titles_nosnippet'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleNoSnippet();
 }
 
 function seopress_titles_nosnippet_post_option() {
@@ -1525,15 +1461,7 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
 
 //noimageindex
 function seopress_titles_noimageindex_option() {
-    $seopress_titles_noimageindex_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_noimageindex_option)) {
-        foreach ($seopress_titles_noimageindex_option as $key => $seopress_titles_noimageindex_value) {
-            $options[$key] = $seopress_titles_noimageindex_value;
-        }
-        if (isset($seopress_titles_noimageindex_option['seopress_titles_noimageindex'])) {
-            return $seopress_titles_noimageindex_option['seopress_titles_noimageindex'];
-        }
-    }
+    return seopress_get_service('TitleOption')->getTitleNoImageIndex();
 }
 
 function seopress_titles_noimageindex_post_option() {
@@ -1573,15 +1501,7 @@ if (seopress_titles_noimageindex_bypass() || has_filter('seopress_titles_noimage
 
 //nositelinkssearchbox
 function seopress_titles_nositelinkssearchbox_option() {
-    $seopress_titles_nositelinkssearchbox_option = get_option('seopress_titles_option_name');
-    if ( ! empty($seopress_titles_nositelinkssearchbox_option)) {
-        foreach ($seopress_titles_nositelinkssearchbox_option as $key => $seopress_titles_nositelinkssearchbox_value) {
-            $options[$key] = $seopress_titles_nositelinkssearchbox_value;
-        }
-        if (isset($seopress_titles_nositelinkssearchbox_option['seopress_titles_nositelinkssearchbox'])) {
-            return $seopress_titles_nositelinkssearchbox_option['seopress_titles_nositelinkssearchbox'];
-        }
-    }
+    return seopress_get_service('TitleOption')->geNoSiteLinksSearchBox();
 }
 
 if (seopress_titles_nositelinkssearchbox_option()) {
@@ -1593,9 +1513,6 @@ if (seopress_titles_nositelinkssearchbox_option()) {
 }
 
 //link rel prev/next
-if (seopress_advanced_advanced_trailingslash_option()) {
-    add_filter('get_pagenum_link', 'user_trailingslashit');
-}
 if (seopress_titles_paged_rel_option()) {
     function seopress_titles_paged_rel_hook() {
         global $paged;
@@ -1664,11 +1581,9 @@ if (function_exists('seopress_titles_noindex_bypass') && '1' != seopress_titles_
     } elseif ( ! is_404()) { //DEFAULT CANONICAL
         function seopress_titles_canonical_hook() {
             global $wp;
-            if (seopress_advanced_advanced_trailingslash_option()) {
-                $current_url = home_url(add_query_arg([], $wp->request));
-            } else {
-                $current_url = trailingslashit(home_url(add_query_arg([], $wp->request)));
-            }
+
+            $current_url = user_trailingslashit(home_url(add_query_arg([], $wp->request)));
+
             if (is_search()) {
                 $seopress_titles_canonical = '<link rel="canonical" href="' . htmlspecialchars(urldecode(get_home_url() . '/search/' . get_search_query())) . '" />';
             } elseif (is_paged() && is_singular()) {//Paginated pages

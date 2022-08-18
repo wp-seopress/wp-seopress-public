@@ -157,7 +157,7 @@ if (!empty($bing_response['response'])) {
     </div>
 <?php }
 
-    if (!empty($google_response)) { ?>
+    if (is_array($google_response) && !empty($google_response)) { ?>
         <div class="wrap-google-response">
             <h4><?php _e('Google Response','wp-seopress'); ?></h4>
 
@@ -255,13 +255,14 @@ function seopress_instant_indexing_automate_submission_callback() {
 
     $check = isset($options['seopress_instant_indexing_automate_submission']); ?>
 
-    <input id="seopress_instant_indexing_automate_submission" name="seopress_instant_indexing_option_name[seopress_instant_indexing_automate_submission]" type="checkbox"
-    <?php if ('1' == $check) {
-        echo 'checked="yes"';
-    } ?>
-    value="1"/>
-
-    <label for="seopress_instant_indexing_automate_submission"><?php _e('Enable automatic URL submission for IndexNow API', 'wp-seopress'); ?></label>
+    <label for="seopress_instant_indexing_automate_submission">
+        <input id="seopress_instant_indexing_automate_submission" name="seopress_instant_indexing_option_name[seopress_instant_indexing_automate_submission]" type="checkbox"
+        <?php if ('1' == $check) {
+            echo 'checked="yes"';
+        } ?>
+        value="1"/>
+        <?php _e('Enable automatic URL submission for IndexNow API', 'wp-seopress'); ?>
+    </label>
 
     <p class="description">
         <?php _e('Notify search engines using IndexNow protocol (currently Bing and Yandex) whenever a post is created, updated or deleted.', 'wp-seopress'); ?>

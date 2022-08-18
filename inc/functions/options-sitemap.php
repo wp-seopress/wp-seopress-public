@@ -5,101 +5,68 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //XML/HTML Sitemap
 //=================================================================================================
 //HTML Sitemap Enable
+/**
+ * @deprecated 5.9.0
+ */
 function seopress_xml_sitemap_html_enable_option()
 {
-    $seopress_xml_sitemap_html_enable_option = get_option('seopress_xml_sitemap_option_name');
-    if (! empty($seopress_xml_sitemap_html_enable_option)) {
-        foreach ($seopress_xml_sitemap_html_enable_option as $key => $seopress_xml_sitemap_html_enable_value) {
-            $options[$key] = $seopress_xml_sitemap_html_enable_value;
-        }
-        if (isset($seopress_xml_sitemap_html_enable_option['seopress_xml_sitemap_html_enable'])) {
-            return $seopress_xml_sitemap_html_enable_option['seopress_xml_sitemap_html_enable'];
-        }
-    }
+    return seopress_get_service('SitemapOption')->getHtmlEnable();
 }
 
 //HTML Sitemap mapping
+/**
+ * @deprecated 5.9.0
+ */
 function seopress_xml_sitemap_html_mapping_option()
 {
-    $seopress_xml_sitemap_html_mapping_option = get_option('seopress_xml_sitemap_option_name');
-    if (! empty($seopress_xml_sitemap_html_mapping_option)) {
-        foreach ($seopress_xml_sitemap_html_mapping_option as $key => $seopress_xml_sitemap_html_mapping_value) {
-            $options[$key] = $seopress_xml_sitemap_html_mapping_value;
-        }
-        if (isset($seopress_xml_sitemap_html_mapping_option['seopress_xml_sitemap_html_mapping'])) {
-            return $seopress_xml_sitemap_html_mapping_option['seopress_xml_sitemap_html_mapping'];
-        }
-    }
+    return seopress_get_service('SitemapOption')->getHtmlMapping();
 }
 
 //HTML Sitemap Exclude
+/**
+ * @deprecated 5.9.0
+ */
 function seopress_xml_sitemap_html_exclude_option()
 {
-    $seopress_xml_sitemap_html_exclude_option = get_option('seopress_xml_sitemap_option_name');
-    if (! empty($seopress_xml_sitemap_html_exclude_option)) {
-        foreach ($seopress_xml_sitemap_html_exclude_option as $key => $seopress_xml_sitemap_html_exclude_value) {
-            $options[$key] = $seopress_xml_sitemap_html_exclude_value;
-        }
-        if (isset($seopress_xml_sitemap_html_exclude_option['seopress_xml_sitemap_html_exclude'])) {
-            return $seopress_xml_sitemap_html_exclude_option['seopress_xml_sitemap_html_exclude'];
-        }
-    }
+    return seopress_get_service('SitemapOption')->getHtmlExclude();
+
 }
 
 //HTML Sitemap Order
+/**
+ * @deprecated 5.9.0
+ */
 function seopress_xml_sitemap_html_order_option()
 {
-    $seopress_xml_sitemap_html_order_option = get_option('seopress_xml_sitemap_option_name');
-    if (! empty($seopress_xml_sitemap_html_order_option)) {
-        foreach ($seopress_xml_sitemap_html_order_option as $key => $seopress_xml_sitemap_html_order_value) {
-            $options[$key] = $seopress_xml_sitemap_html_order_value;
-        }
-        if (isset($seopress_xml_sitemap_html_order_option['seopress_xml_sitemap_html_order'])) {
-            return $seopress_xml_sitemap_html_order_option['seopress_xml_sitemap_html_order'];
-        }
-    }
+    return seopress_get_service('SitemapOption')->getHtmlOrder();
 }
 
 //HTML Sitemap Order by
+/**
+ * @deprecated 5.9.0
+ */
 function seopress_xml_sitemap_html_orderby_option()
 {
-    $seopress_xml_sitemap_html_orderby_option = get_option('seopress_xml_sitemap_option_name');
-    if (! empty($seopress_xml_sitemap_html_orderby_option)) {
-        foreach ($seopress_xml_sitemap_html_orderby_option as $key => $seopress_xml_sitemap_html_orderby_value) {
-            $options[$key] = $seopress_xml_sitemap_html_orderby_value;
-        }
-        if (isset($seopress_xml_sitemap_html_orderby_option['seopress_xml_sitemap_html_orderby'])) {
-            return $seopress_xml_sitemap_html_orderby_option['seopress_xml_sitemap_html_orderby'];
-        }
-    }
+    return seopress_get_service('SitemapOption')->getHtmlOrderBy();
+
 }
 
 //HTML Sitemap Date
+/**
+ * @deprecated 5.9.0
+ */
 function seopress_xml_sitemap_html_date_option()
 {
-    $seopress_xml_sitemap_html_date_option = get_option('seopress_xml_sitemap_option_name');
-    if (! empty($seopress_xml_sitemap_html_date_option)) {
-        foreach ($seopress_xml_sitemap_html_date_option as $key => $seopress_xml_sitemap_html_date_value) {
-            $options[$key] = $seopress_xml_sitemap_html_date_value;
-        }
-        if (isset($seopress_xml_sitemap_html_date_option['seopress_xml_sitemap_html_date'])) {
-            return $seopress_xml_sitemap_html_date_option['seopress_xml_sitemap_html_date'];
-        }
-    }
+    return seopress_get_service('SitemapOption')->getHtmlDate();
 }
 
 //HTML Sitemap Archive links
+/**
+ * @deprecated 5.9.0
+ */
 function seopress_xml_sitemap_html_archive_links_option()
 {
-    $seopress_xml_sitemap_html_archive_links_option = get_option('seopress_xml_sitemap_option_name');
-    if (! empty($seopress_xml_sitemap_html_archive_links_option)) {
-        foreach ($seopress_xml_sitemap_html_archive_links_option as $key => $seopress_xml_sitemap_html_archive_links_value) {
-            $options[$key] = $seopress_xml_sitemap_html_archive_links_value;
-        }
-        if (isset($seopress_xml_sitemap_html_archive_links_option['seopress_xml_sitemap_html_archive_links'])) {
-            return $seopress_xml_sitemap_html_archive_links_option['seopress_xml_sitemap_html_archive_links'];
-        }
-    }
+    return seopress_get_service('SitemapOption')->getHtmlArchiveLinks();
 }
 
 if ('1' == seopress_xml_sitemap_html_enable_option()) {

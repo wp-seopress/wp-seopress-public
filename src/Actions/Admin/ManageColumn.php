@@ -7,9 +7,15 @@ if (! defined('ABSPATH')) {
 }
 
 use SEOPress\Core\Hooks\ExecuteHooksBackend;
+use SEOPress\Services\TagsToString;
 
 class ManageColumn implements ExecuteHooksBackend
 {
+    /**
+     * @var TagsToString
+     */
+    protected $tagsToStringService;
+
     /**
      * @since 4.4.0
      */

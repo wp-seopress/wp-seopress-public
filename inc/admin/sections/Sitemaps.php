@@ -25,23 +25,64 @@ function print_section_info_xml_sitemap_general()
 </div>
 <?php } ?>
 
-<div class="seopress-notice">
-    <p>
-        <?php _e('A sitemap is a file where you provide information about the <strong>pages, images, videos... and the relationships between them</strong>. Search engines like Google read this file to <strong>crawl your site more efficiently</strong>.', 'wp-seopress'); ?>
-    </p>
-
-    <p>
-        <?php _e('The XML sitemap is an <strong>exploration aid</strong>. Not having a sitemap will absolutely <strong>NOT prevent engines from indexing your content</strong>. For this, opt for meta robots.', 'wp-seopress'); ?>
-    </p>
-
-    <p>
-        <?php _e('This is the URL of your index sitemaps to submit to search engines:','wp-seopress'); ?>
-        <pre><?php echo get_option('home'); ?>/sitemaps.xml</pre></p>
-</div>
+<p>
+    <?php _e('A sitemap is a file where you provide information about the <strong>pages, images, videos... and the relationships between them</strong>. Search engines like Google read this file to <strong>crawl your site more efficiently</strong>.', 'wp-seopress'); ?>
+</p>
 
 <p>
-    <?php _e('To view your sitemap, enable permalinks (not default one), and save settings to flush them.', 'wp-seopress'); ?>
+    <?php _e('The XML sitemap is an <strong>exploration aid</strong>. Not having a sitemap will absolutely <strong>NOT prevent engines from indexing your content</strong>. For this, opt for meta robots.', 'wp-seopress'); ?>
 </p>
+
+<p><?php _e('This is the URL of your index sitemaps to submit to search engines:','wp-seopress'); ?></p>
+
+<p>
+    <pre><span class="dashicons dashicons-external"></span><a href="<?php echo get_option('home'); ?>/sitemaps.xml" target="_blank"><?php echo get_option('home'); ?>/sitemaps.xml</a></pre>
+</p>
+
+<p>
+    <a href="https://www.google.com/ping?sitemap=<?php echo get_option('home'); ?>/sitemaps.xml/"
+        target="_blank" class="btn btnSecondary">
+        <?php _e('Ping Google manually', 'wp-seopress'); ?>
+    </a>
+
+    <button type="button" id="seopress-flush-permalinks" class="btn btnSecondary">
+        <?php _e('Flush permalinks', 'wp-seopress'); ?>
+    </button>
+    <span class="spinner"></span>
+</p>
+
+<div class="seopress-notice">
+    <p>
+        <?php _e('To view your sitemap, <strong>enable permalinks</strong> (not default one), and save settings to flush them.', 'wp-seopress'); ?>
+    </p>
+    <p>
+        <?php _e('<strong>Noindex content</strong> will not be displayed in Sitemaps. Same for custom canonical URLs.', 'wp-seopress'); ?>
+    </p>
+    <p>
+        <?php _e('If you disable globally this feature (using the blue toggle from above), the <strong>native WordPress XML sitemaps</strong> will be re-activated.', 'wp-seopress'); ?>
+    </p>
+
+    <p class="seopress-help">
+        <span class="dashicons dashicons-external"></span>
+        <a href="<?php echo $docs['sitemaps']['error']['blank']; ?>"
+            target="_blank">
+            <?php _e('Blank sitemap?', 'wp-seopress'); ?></a>
+
+        <span class="dashicons dashicons-external"></span>
+        <a href="<?php echo $docs['sitemaps']['error']['404']; ?>"
+            target="_blank">
+            <?php _e('404 error?', 'wp-seopress'); ?></a>
+
+        <span class="dashicons dashicons-external"></span>
+        <a href="<?php echo $docs['sitemaps']['error']['html']; ?>"
+            target="_blank">
+            <?php _e('HTML error? Exclude XML and XSL from caching plugins!', 'wp-seopress'); ?></a>
+        <span class="dashicons dashicons-external"></span>
+        <a href="<?php echo array_shift($docs['get_started']['sitemaps']); ?>"
+            target="_blank">
+            <?php _e('Add your XML sitemaps to Google Search Console (video)', 'wp-seopress'); ?></a>
+    </p>
+</div>
 
 <?php if (isset($_SERVER['SERVER_SOFTWARE'])) {
         $server_software = explode('/', $_SERVER['SERVER_SOFTWARE']);
@@ -68,50 +109,6 @@ function print_section_info_xml_sitemap_general()
 </div>
 <?php }
     } ?>
-<p>
-    <?php _e('<strong>Noindex content</strong> will not be displayed in Sitemaps.', 'wp-seopress'); ?>
-</p>
-<p>
-    <?php _e('If you disable globally this feature (using the blue toggle from above), the native WordPress XML sitemaps will be re-activated.', 'wp-seopress'); ?>
-</p>
-
-<p class="seopress-help">
-    <span class="dashicons dashicons-external"></span>
-    <a href="<?php echo $docs['sitemaps']['error']['blank']; ?>"
-        target="_blank">
-        <?php _e('Blank sitemap?', 'wp-seopress'); ?></a>
-
-    <span class="dashicons dashicons-external"></span>
-    <a href="<?php echo $docs['sitemaps']['error']['404']; ?>"
-        target="_blank">
-        <?php _e('404 error?', 'wp-seopress'); ?></a>
-
-    <span class="dashicons dashicons-external"></span>
-    <a href="<?php echo $docs['sitemaps']['error']['html']; ?>"
-        target="_blank">
-        <?php _e('HTML error? Exclude XML and XSL from caching plugins!', 'wp-seopress'); ?></a>
-    <span class="dashicons dashicons-external"></span>
-    <a href="<?php echo array_shift($docs['get_started']['sitemaps']); ?>"
-        target="_blank">
-        <?php _e('Add your XML sitemaps to Google Search Console (video)', 'wp-seopress'); ?></a>
-</p>
-
-<p>
-    <a href="<?php echo get_option('home'); ?>/sitemaps.xml"
-        target="_blank" class="btn btnSecondary">
-        <?php _e('View your sitemap', 'wp-seopress'); ?>
-    </a>
-
-    <a href="https://www.google.com/ping?sitemap=<?php echo get_option('home'); ?>/sitemaps.xml/"
-        target="_blank" class="btn btnSecondary">
-        <?php _e('Ping Google manually', 'wp-seopress'); ?>
-    </a>
-
-    <button type="button" id="seopress-flush-permalinks" class="btn btnSecondary">
-        <?php _e('Flush permalinks', 'wp-seopress'); ?>
-    </button>
-    <span class="spinner"></span>
-</p>
 
 <?php
 }
@@ -142,6 +139,25 @@ function print_section_info_html_sitemap()
     </a>
 </p>
 
+
+<div class="seopress-notice">
+        <h3><?php _e('How to use the HTML Sitemap?', 'wp-seopress-pro'); ?></h3>
+
+        <h4><?php _e('Block Editor', 'wp-seopress-pro'); ?></h4>
+        <p><?php _e('Add the HTML sitemap block using the <strong>Block Editor</strong>.', 'wp-seopress-pro'); ?></p>
+
+        <hr>
+        <h4><?php _e('Shortcode', 'wp-seopress-pro'); ?></h4>
+
+        <p><?php _e('You can also use this shortcode in your content (post, page, post type...):', 'wp-seopress-pro'); ?></p>
+        <pre>[seopress_html_sitemap]</pre>
+
+        <p><?php _e('To include specific custom post types, use the CPT attribute:', 'wp-seopress-pro'); ?></p>
+        <pre>[seopress_html_sitemap cpt="post,product"]</pre>
+
+        <h4><?php _e('Other', 'wp-seopress-pro'); ?></h4>
+        <p><?php _e('Dynamically display the sitemap by entering an ID to the first field below.', 'wp-seopress-pro'); ?></p>
+    </div>
 <?php
 }
 

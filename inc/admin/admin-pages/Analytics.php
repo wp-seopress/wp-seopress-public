@@ -16,31 +16,15 @@ settings_fields('seopress_google_analytics_option_group'); ?>
     <div id="seopress-tabs" class="wrap">
         <?php
             $current_tab = '';
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-    $plugin_settings_tabs = [
-                    'tab_seopress_google_analytics_enable'              => __('General', 'wp-seopress'),
-                    'tab_seopress_google_analytics_features'            => __('Tracking', 'wp-seopress'),
-                    'tab_seopress_google_analytics_custom_tracking'     => __('Custom Tracking', 'wp-seopress'),
-                    'tab_seopress_google_analytics_ecommerce'           => __('Ecommerce', 'wp-seopress'),
-                    'tab_seopress_google_analytics_events'              => __('Events', 'wp-seopress'),
-                    'tab_seopress_google_analytics_custom_dimensions'   => __('Custom Dimensions', 'wp-seopress'),
-                    'tab_seopress_google_analytics_dashboard'           => __('Stats in Dashboard', 'wp-seopress'),
-                    'tab_seopress_google_analytics_gdpr'                => __('Cookie bar / GDPR', 'wp-seopress'),
-                    'tab_seopress_google_analytics_matomo'              => __('Matomo', 'wp-seopress'),
-                    'tab_seopress_google_analytics_clarity'             => __('Clarity', 'wp-seopress'),
-                ];
-} else {
-    $plugin_settings_tabs = [
-                    'tab_seopress_google_analytics_enable'              => __('General', 'wp-seopress'),
-                    'tab_seopress_google_analytics_features'            => __('Tracking', 'wp-seopress'),
-                    'tab_seopress_google_analytics_custom_tracking'     => __('Custom Tracking', 'wp-seopress'),
-                    'tab_seopress_google_analytics_events'              => __('Events', 'wp-seopress'),
-                    'tab_seopress_google_analytics_custom_dimensions'   => __('Custom Dimensions', 'wp-seopress'),
-                    'tab_seopress_google_analytics_gdpr'                => __('Cookie bar / GDPR', 'wp-seopress'),
-                    'tab_seopress_google_analytics_matomo'              => __('Matomo', 'wp-seopress'),
-                    'tab_seopress_google_analytics_clarity'             => __('Clarity', 'wp-seopress'),
-                ];
-}
+
+            $plugin_settings_tabs = [
+                'tab_seopress_google_analytics_enable'              => __('Google Analytics', 'wp-seopress'),
+                'tab_seopress_google_analytics_matomo'              => __('Matomo', 'wp-seopress'),
+                'tab_seopress_google_analytics_clarity'             => __('Clarity', 'wp-seopress'),
+                'tab_seopress_google_analytics_custom_dimensions'   => __('Advanced', 'wp-seopress'),
+                'tab_seopress_google_analytics_gdpr'                => __('Cookie bar / GDPR', 'wp-seopress'),
+                'tab_seopress_google_analytics_custom_tracking'     => __('Custom Tracking', 'wp-seopress'),
+            ];
 
 echo '<div class="nav-tab-wrapper">';
 foreach ($plugin_settings_tabs as $tab_key => $tab_caption) {
@@ -49,34 +33,25 @@ foreach ($plugin_settings_tabs as $tab_key => $tab_caption) {
 echo '</div>'; ?>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_enable' == $current_tab) {
     echo 'active';
-} ?>" id="tab_seopress_google_analytics_enable"><?php do_settings_sections('seopress-settings-admin-google-analytics-enable'); ?>
-        </div>
-        <div class="seopress-tab <?php if ('tab_seopress_google_analytics_features' == $current_tab) {
-    echo 'active';
-} ?>" id="tab_seopress_google_analytics_features"><?php do_settings_sections('seopress-settings-admin-google-analytics-features'); ?>
+} ?>" id="tab_seopress_google_analytics_enable">
+            <?php do_settings_sections('seopress-settings-admin-google-analytics-enable'); ?>
+            <?php do_settings_sections('seopress-settings-admin-google-analytics-features'); ?>
+            <?php do_settings_sections('seopress-settings-admin-google-analytics-events'); ?>
+            <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                do_settings_sections('seopress-settings-admin-google-analytics-ecommerce');
+                do_settings_sections('seopress-settings-admin-google-analytics-dashboard');
+            } ?>
         </div>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_custom_tracking' == $current_tab) {
     echo 'active';
 } ?>" id="tab_seopress_google_analytics_custom_tracking"><?php do_settings_sections('seopress-settings-admin-google-analytics-custom-tracking'); ?>
         </div>
-        <div class="seopress-tab <?php if ('tab_seopress_google_analytics_events' == $current_tab) {
-    echo 'active';
-} ?>" id="tab_seopress_google_analytics_events"><?php do_settings_sections('seopress-settings-admin-google-analytics-events'); ?>
-        </div>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_custom_dimensions' == $current_tab) {
     echo 'active';
-} ?>" id="tab_seopress_google_analytics_custom_dimensions"><?php do_settings_sections('seopress-settings-admin-google-analytics-custom-dimensions'); ?>
+} ?>" id="tab_seopress_google_analytics_custom_dimensions">
+            <?php do_settings_sections('seopress-settings-admin-google-analytics-custom-dimensions'); ?>
+            <?php do_settings_sections('seopress-settings-admin-google-analytics-advanced'); ?>
         </div>
-        <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-        <div class="seopress-tab <?php if ('tab_seopress_google_analytics_dashboard' == $current_tab) {
-    echo 'active';
-} ?>" id="tab_seopress_google_analytics_dashboard"><?php do_settings_sections('seopress-settings-admin-google-analytics-dashboard'); ?>
-        </div>
-        <div class="seopress-tab <?php if ('tab_seopress_google_analytics_ecommerce' == $current_tab) {
-    echo 'active';
-} ?>" id="tab_seopress_google_analytics_ecommerce"><?php do_settings_sections('seopress-settings-admin-google-analytics-ecommerce'); ?>
-        </div>
-        <?php } ?>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_gdpr' == $current_tab) {
     echo 'active';
 } ?>" id="tab_seopress_google_analytics_gdpr"><?php do_settings_sections('seopress-settings-admin-google-analytics-gdpr'); ?>

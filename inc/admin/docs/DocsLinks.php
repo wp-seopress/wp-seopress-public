@@ -114,6 +114,8 @@ function seopress_get_docs_links()
                 'add'     => 'https://www.seopress.org/fr/support/tutoriels/comment-utiliser-les-schemas-dans-votre-site-wordpress-avec-seopress-pro-1/' . $utm,
                 'faq_acf' => 'https://www.seopress.org/fr/support/guides/creer-un-schema-faq-automatique-avec-les-champs-repeteurs-dacf/' . $utm,
                 'dynamic' => 'https://www.seopress.org/fr/support/guides/gerez-vos-balises-titres-et-metas/' . $utm,
+                'variables' => 'https://www.seopress.org/fr/support/hooks/filtrer-la-liste-des-variables-dynamiques-predefinies-pour-les-schemas-automatiques/' . $utm,
+                'custom_fields' => 'https://www.seopress.org/fr/support/hooks/filtrer-la-liste-des-champs-personnalises-dans-les-schemas/' . $utm,
             ],
             'page_speed' => [
                 'cwv' => 'https://www.seopress.org/fr/newsroom/reportage/les-core-web-vitals-et-leurs-effets-sur-le-seo-des-sites-wordpress/' . $utm,
@@ -244,6 +246,8 @@ function seopress_get_docs_links()
                 'add'     => 'https://www.seopress.org/support/tutorials/how-to-add-schema-to-wordpress-with-seopress-1/' . $utm,
                 'faq_acf' => 'https://www.seopress.org/support/guides/create-an-automatic-faq-schema-with-acf-repeater-fields/' . $utm,
                 'dynamic' => 'https://www.seopress.org/support/guides/manage-titles-meta-descriptions/' . $utm,
+                'variables' => 'https://www.seopress.org/support/hooks/filter-predefined-dynamic-variables-for-automatic-schemas/' . $utm,
+                'custom_fields' => 'https://www.seopress.org/support/hooks/filter-custom-fields-list-in-schemas/' . $utm,
             ],
             'page_speed' => [
                 'cwv' => 'https://www.seopress.org/newsroom/featured-stories/core-web-vitals-and-wordpress-seo/' . $utm,

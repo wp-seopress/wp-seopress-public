@@ -194,7 +194,13 @@ class RenderGSCInspectUrl {
                 $referringUrls = $data->inspectionResult->indexStatusResult->referringUrls ? $data->inspectionResult->indexStatusResult->referringUrls : '';
 
                 //Mobile Verdict
-                $verdict_mobile = $data->inspectionResult->mobileUsabilityResult->verdict ? $data->inspectionResult->mobileUsabilityResult->verdict : '';
+                $verdict_mobile = '';
+                if(\property_exists($data, 'inspectionResult') && \property_exists($data->inspectionResult, 'mobileUsabilityResult')) {
+                    $verdict_mobile = $data->inspectionResult->mobileUsabilityResult->verdict ? $data->inspectionResult->mobileUsabilityResult->verdict : '';
+                }
+
+                $$verdict_mobile_i18n = '';
+                $$verdict_mobile_i18n_desc = '';
                 if (!empty($verdict_mobile)) {
                     switch ($verdict_mobile) {
                         case 'VERDICT_UNSPECIFIED':

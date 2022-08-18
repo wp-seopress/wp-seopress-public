@@ -92,4 +92,67 @@ class Sitemap {
     public function imageIsEnable() {
         return $this->searchOptionByKey('seopress_xml_sitemap_img_enable');
     }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string|null
+     */
+    public function getHtmlEnable() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_html_enable');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string|null
+     */
+    public function getHtmlMapping() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_html_mapping');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string|null
+     */
+    public function getHtmlExclude() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_html_exclude');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string|null
+     */
+    public function getHtmlOrder() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_html_order');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string|null
+     */
+    public function getHtmlOrderBy() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_html_orderby');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string|null
+     */
+    public function getHtmlDate() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_html_date');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string|null
+     */
+    public function getHtmlArchiveLinks() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_html_archive_links');
+    }
 }

@@ -154,7 +154,7 @@
     align-self: center;
     flex-grow: 1;
     height: 1px;
-    margin: 0 10px;
+    margin: 0;
     border: 0;
     border-top: 1px solid #dcdcde;
     border-bottom: 1px solid #f6f7f7;
@@ -174,6 +174,10 @@
     vertical-align: middle;
     margin-right: 5px;
     text-decoration: none;
+}
+
+.seopress-activity-panel .dashicons {
+    margin-right: 0;
 }
 
 #seopress-news-panel .seopress-item-inner .dashicons {
@@ -394,6 +398,10 @@ body .seopress-option input[type="checkbox"]:active,
 
 .form-table td p.seopress_wrap_archive_cpt {
     margin-bottom: 15px;
+}
+
+.form-table td label {
+    display: block;
 }
 
 table.wp-list-table .manage_column.column-seopress_noindex,
@@ -819,6 +827,10 @@ table.fixed thead .column-seopress_noindex {
     align-items: center;
 }
 
+.seopress-list-items .seopress-item .seopress-item-inner.done {
+    text-decoration: line-through;
+}
+
 .seopress-list-items .seopress-item .seopress-item-inner:hover {
     background: var(--backgroundSecondaryHover);
 }
@@ -886,6 +898,13 @@ table.fixed thead .column-seopress_noindex {
     text-align: center;
 }
 
+.seopress-list-items .seopress-item .seopress-item-inner.check::before {
+    content: attr(data-index);
+    color: var(--primaryColor);
+    font-size: 16px;
+    border-color: var(--primaryColor);
+}
+
 .seopress-list-items .seopress-item .seopress-item-inner.done::before,
 .indexing-log.indexing-done::before,
 .indexing-log.indexing-failed::before {
@@ -893,6 +912,26 @@ table.fixed thead .column-seopress_noindex {
     border: none;
     content: "\f15e";
     font-family: "Dashicons";
+    color: #fff;
+    font-size: 24px;
+}
+
+.seopress-list-items .seopress-item.is-active:first-child a {
+    box-shadow: inset 5px 0 0 0 var(--primaryColor);
+    transition: box-shadow .1s linear;
+}
+
+.seopress-list-items .seopress-item.is-active:first-child a::after {
+    content: '';
+    box-shadow: inset 5px 0 0 0 var(--primaryColor);
+    transition: box-shadow .1s linear;
+    background-color: var(--primaryColor);
+    opacity: .1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
 }
 
 .indexing-log.indexing-done::before {
@@ -2555,6 +2594,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 
 .seopress-option .sp-section-header h2 {
     font-size: 1.5em;
+    margin: 20px 0;
 }
 
 .seopress-option .sp-section-header>.dashicons {
@@ -2613,6 +2653,12 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 .seopress-notice.is-error {
     border-left-color: #cc1818;
     background: rgb(244 162 162 / 30%);
+}
+
+.seopress-setup .seopress-notice.is-inline,
+#seopress-tabs .seopress-notice.is-inline {
+    margin-bottom: 0;
+    width: fit-content;
 }
 
 #seopress-tabs.wrap {

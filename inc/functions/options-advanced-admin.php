@@ -188,6 +188,7 @@ function seopress_advanced_appearance_schema_default_tab_option()
 //Columns in post types
 /**
  * @deprecated 5.4.0
+ * @use seopress_get_service('AdvancedOption')
  */
 function seopress_advanced_appearance_title_col_option()
 {

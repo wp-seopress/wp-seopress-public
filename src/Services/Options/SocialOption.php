@@ -145,4 +145,51 @@ class SocialOption
     public function getSocialKnowledgeContactOption() {
         return $this->searchOptionByKey('seopress_social_knowledge_contact_option');
     }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string
+     */
+    public function getSocialTwitterCard() {
+        return $this->searchOptionByKey('seopress_social_twitter_card');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string
+     */
+    public function getSocialTwitterCardOg() {
+        return $this->searchOptionByKey('seopress_social_twitter_card_og');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string
+     */
+    public function getSocialTwitterImgSize() {
+        return $this->searchOptionByKey('seopress_social_twitter_card_img_size');
+    }
+
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string
+     */
+    public function getSocialFacebookImgDefault() {
+        return $this->searchOptionByKey('seopress_social_facebook_img_default');
+    }
+
+    /**
+     * @since 5.9.0
+     *
+     * @return string
+     */
+    public function getSocialFacebookImg() {
+        return $this->searchOptionByKey('seopress_social_facebook_img');
+    }
+
 }

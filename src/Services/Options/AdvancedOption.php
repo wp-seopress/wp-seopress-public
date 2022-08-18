@@ -102,6 +102,13 @@ class AdvancedOption
     /**
      * @since 5.4.0
      */
+    public function getAdvancedNoReferrer(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_noreferrer');
+    }
+
+    /**
+     * @since 5.4.0
+     */
     public function getAdvancedWPGenerator(){
         return $this->searchOptionByKey('seopress_advanced_advanced_wp_generator');
     }
@@ -293,5 +300,12 @@ class AdvancedOption
      */
     public function getAdvancedImageAutoAltTargetKw(){
         return $this->searchOptionByKey('seopress_advanced_advanced_image_auto_alt_target_kw');
+    }
+
+    /**
+     * @since 5.8
+     */
+    public function getSecurityGaWidgetRole(){
+        return $this->searchOptionByKey('seopress_advanced_security_ga_widget_role');
     }
 }

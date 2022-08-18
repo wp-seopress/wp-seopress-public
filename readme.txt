@@ -6,11 +6,11 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.8.0.5
+Stable tag: 5.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Rank higher in search engines with SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. No ads, no footprints, no anonymous data sent, white label.
+SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank higher in search engines, fully white label.
 
 == Description ==
 
@@ -197,6 +197,7 @@ SEOPress is translated into multiple languages including:
 	<li>🇨🇳 中文 (Chinese (China)) - professional translation</li>
 	<li>🇧🇷 Português do Brasil (Portuguese (Brazil)) - professional translation</li>
 	<li>🇵🇱 Polskie (Polish) - professional translation</li>
+	<li>🇸🇪 Svenska (Swedish) - professional translation</li>
 	<li>🇬🇷 Ελληνικά (Greek)</li>
 	<li>🇧🇬 Български (Bulgarian)</li>
 	<li>🇮🇩 Bahasa Indonesia (Indonesian)</li>
@@ -362,57 +363,30 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 5.8.0.5 =
-* FIX Downgrade Google Auth API to prevent errors with hosting using PHP parser
-* FIX "Sorry, you do not have permission to edit the _seopress_robots_primary_cat custom field." error
-* FIX Remove "Inspect URL with Google" tab from Universal SEO metabox if disabled
-= 5.8.0.4 =
-* FIX Fatal error in Content Analysis metabox causing jQuery errors (thanks to @polishdreamer)
-= 5.8.0.3 =
-* FIX Block editor compatibility issue with older versions of WordPress (< 6.0)
-= 5.8.0.2 =
-* FIX JS error with editor
-= 5.8.0.1 =
-* FIX Fatal error if PRO not up to date
-* FIX Can't redeclare seopress_register_meta on plugin deactivation
-= 5.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-8/">Read the blog post update</a> =
-
-<strong>Make sure to update both Free and PRO version to 5.8</strong>
-
-* NEW Quickly edit your primary category for post and products with the Block Editor 🎉
-* NEW Image SEO: cleaning image file when upload a media (e.g. "ExãMple 1 cópy!.jpg" => "example-1-copy.jpg") 🎉
-* NEW Prevent 500 errors when editing / saving .htaccess file 🎉
-* NEW Automatically use the Product title when sending images to set the image Title, Alt, Caption and Description (Product post type only)
-* NEW Add link on term archives for html sitemap
-* NEW Try to automatically override Storefront‘s default breadcrumbs with SEOPress one (PRO)
-* NEW Add noindex on add-to-cart links in robots.txt file (go to SEO, PRO, robots.txt tab to add this new rule)
-* NEW XML sub-sitemaps URL to better follow the official guidelines of Google (https://www.seopress.org/docs/xml-sitemap)
-* NEW 'seopress_sitemaps_cpt' hook to filter list of custom post types of XML sitemaps settings (https://www.seopress.org/support/hooks/filter-list-of-post-types-from-xml-sitemap-options/)
-* NEW 'seopress_sitemaps_tax' hook to filter list of taxonomies of XML sitemaps settings (https://www.seopress.org/support/hooks/filter-list-of-taxonomies-from-xml-sitemap-options/)
-* INFO Improve SEO Dashboard
-* INFO Optimize video xml sitemap regeneration performance
-* INFO Improve Alt text missing UI in Content Analysis
-* INFO Improve word counter for Content Analysis
-* INFO Add CPT key and Post ID to "seopress_auto_image_title" hook (https://www.seopress.org/support/hooks/filter-automatic-image-title/)
-* INFO Automatic handling of the site url to avoid errors with Google Inspect URL
-* INFO Stop pinging Bing for XML sitemaps since it's officially deprecated
-* INFO Use the Site icon if no image available for Open Graph Image tag
-* INFO Improve block FAQ schema logic
-* INFO Update updater
-* FIX Bricks (1.4) compatibility issue with our content analysis feature
-* FIX Archives indexing for our Wizard if no post type archives available
-* FIX SEOPress blocks icons alignment in Gutenberg blocks panel
-* FIX Duplicated meta robots on search archive page
-* FIX Knowledge graph option (Person or Organization) option with French translation
-* FIX GA4 tracking script URL
-* FIX Import / Export Indexing options
-* FIX Zion Builder compatibility for Content Analysis
-* FIX Social Icons Widget & Block by WPZOOM compatibility issue with Block Editor and SEOPress PRO
-* FIX Video xml sitemap missing video caused by a transient issue
-* FIX Missing alt text for images analysis with Universal SEO metabox
-* FIX UI: Remove GA tab from SEO dashboard if disabled
-* FIX Primary post / product categories in XML sitemaps
-* FIX Missing sameAs properties for Article automatic schema
+= 5.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-9/">Read the blog post update</a> =
+* NEW Google Analytics v4 widget to get stats in WP Dashboard 🎉
+* NEW HTML Sitemap block for Gutenberg 🎉
+* NEW Compatibility with official AMP plugin (first iteration) 🎉
+* NEW Dozens of user interface and user experience enhancements
+* NEW Swedish language (professional translation) 🇸🇪
+* NEW Option to remove noreferrer attribute on links (SEO, Advanced, Advanced tab)
+* NEW 'seopress_link_attrs' hook to filter link attribute on post_content (https://www.seopress.org/support/hooks/filter-link-attributes-on-post_content/)
+* NEW Add redirection meta to the SEOPress REST API (https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/)
+* INFO Universal SEO metabox: change quick button order 'site separator' and 'site title' to match global settings (UI)
+* INFO Remove 'Disable trailing slash for metas' option from Advanced settings: we now automatically take care of this
+* INFO Disable Bing XML sitemap ping (CRON) if IndexNow is enabled (Instant Indexing)
+* INFO If 'seopress_404_cleaning_query' filter used, the period is now dynamically displayed to the UI
+* INFO Improve Google Preview encoding for universal SEO metabox
+* INFO Oxygen v4 compatibility for keyword density and word counters
+* FIX Uncaught TypeError: array_key_first() /wp-seopress/inc/admin/callbacks/InstantIndexing.php:165
+* FIX Empty xml sub sitemap for product if WC is disabled
+* FIX Bricks builder compatibility: duplicated beacon on homepage
+* FIX Trailingslash for post type archive link in XML sitemaps
+* FIX OG type for products
+* FIX Redirection suggestion URL by using home_url() instead of site_url()
+* FIX Missing addressCountry field for manual Job schema
+* FIX Primary product category
+* FIX Undefined $html variable with Local Business block
 * FIX i18n
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

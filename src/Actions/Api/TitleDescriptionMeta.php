@@ -67,8 +67,8 @@ class TitleDescriptionMeta implements ExecuteHooks {
         $description = get_post_meta($id, '_seopress_titles_desc', true);
 
         return new \WP_REST_Response([
-            'title'           => $title,
-            'description'     => $description,
+            'title'           => html_entity_decode($title, ENT_QUOTES | ENT_XML1, 'UTF-8'),
+            'description'     => html_entity_decode($description, ENT_QUOTES | ENT_XML1, 'UTF-8'),
         ]);
     }
 
