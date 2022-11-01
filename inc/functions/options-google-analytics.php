@@ -1,6 +1,11 @@
 <?php
-
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+
+//MATOMO
+require_once dirname(__FILE__) . '/options-matomo.php';
+
+//Clarity
+require_once dirname(__FILE__) . '/options-clarity.php';
 
 //Google Analytics
 //=================================================================================================
@@ -807,12 +812,6 @@ function seopress_custom_tracking_head_hook() {
     $echo = true;
     do_action('seopress_custom_head_tracking_html', $echo);
 }
-
-//MATOMO
-require_once dirname(__FILE__) . '/options-matomo.php';
-
-//Clarity
-require_once dirname(__FILE__) . '/options-clarity.php';
 
 if ('1' == seopress_google_analytics_half_disable_option() || (((isset($_COOKIE['seopress-user-consent-accept']) && '1' == $_COOKIE['seopress-user-consent-accept']) && '1' == seopress_google_analytics_disable_option()) || ('1' != seopress_google_analytics_disable_option()))) { //User consent cookie OK
 

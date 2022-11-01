@@ -70,7 +70,7 @@ function seopress_get_docs_links()
                 'gtm'               => 'https://www.seopress.org/fr/support/guides/ajouter-google-tag-manager-a-votre-site-wordpress-avec-seopress/' . $utm,
                 'ecommerce'         => 'https://www.seopress.org/fr/support/guides/configurer-le-commerce-electronique-ameliore-pour-google-analytics/' . $utm,
                 'events'            => 'https://www.seopress.org/fr/support/guides/suivre-vos-telechargements-liens-affilies-sortants-et-externes-google-analytics/' . $utm,
-                'ga4_property'      => 'https://support.google.com/analytics/answer/9744165?hl=en&ref_topic=9303319#analyticsjs',
+                'ga4_property'      => 'https://support.google.com/analytics/answer/9539598?hl=fr&ref_topic=9303319',
                 'api' => [
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=fr',
                     'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=fr'
@@ -202,7 +202,7 @@ function seopress_get_docs_links()
                 'gtm'               => 'https://www.seopress.org/support/guides/google-tag-manager-wordpress-seopress/' . $utm,
                 'ecommerce'         => 'https://www.seopress.org/support/guides/how-to-setup-google-enhanced-ecommerce/' . $utm,
                 'events'            => 'https://www.seopress.org/support/guides/how-to-track-file-downloads-affiliates-outbound-and-external-links-with-google-analytics/' . $utm,
-                'ga4_property'      => 'https://support.google.com/analytics/answer/9744165?hl=en&ref_topic=9303319#analyticsjs',
+                'ga4_property'      => 'https://support.google.com/analytics/answer/9539598?hl=en&ref_topic=9303319',
                 'api' => [
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=en',
                     'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=en'

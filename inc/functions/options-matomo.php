@@ -247,7 +247,8 @@ var _paq = window._paq || [];\n";
 			}
 		}
 
-        $seopress_matomo_src = "cdn.matomo.cloud/".seopress_google_analytics_matomo_id_option()."/matomo.js";
+        $seopress_matomo_src = "cdn.matomo.cloud/".seopress_google_analytics_matomo_id_option();
+
         if (seopress_google_analytics_matomo_self_hosted_option() === '1') {
             $seopress_matomo_src = seopress_google_analytics_matomo_id_option();
         }
@@ -258,7 +259,7 @@ var _paq = window._paq || [];\n";
 	_paq.push(['setTrackerUrl', u+'matomo.php']);
 	_paq.push(['setSiteId', '".seopress_google_analytics_matomo_site_id_option()."']);
 	var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-	g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://".$seopress_matomo_src."/matomo.js'; s.parentNode.insertBefore(g,s);
+	g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://".untrailingslashit($seopress_matomo_src)."/matomo.js'; s.parentNode.insertBefore(g,s);
 	})();\n";
 
 		$seopress_matomo_html .= "</script>\n";

@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.9
+Stable tag: 5.9.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -363,6 +363,10 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 5.9.0.1 =
+* INFO Update GA4 docs link
+* FIX Cookie bar error
+* FIX Matomo Cloud URL
 = 5.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-9/">Read the blog post update</a> =
 * NEW Google Analytics v4 widget to get stats in WP Dashboard 🎉
 * NEW HTML Sitemap block for Gutenberg 🎉
