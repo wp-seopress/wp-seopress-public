@@ -74,7 +74,8 @@ function seopress_get_docs_links()
                 'ga4_property'      => 'https://www.seopress.org/fr/support/guides/trouver-id-de-propriete-google-analytics-4/' . $utm,
                 'api' => [
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=fr',
-                    'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=fr'
+                    'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=fr',
+                    'data'      => 'https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com?hl=fr'
                 ],
                 'matomo' => [
                     'on_premise' => 'https://www.seopress.org/fr/support/guides/comment-utiliser-matomo-en-auto-heberge-avec-seopress-free/' . $utm,
@@ -208,7 +209,8 @@ function seopress_get_docs_links()
                 'ga4_property'      => 'https://www.seopress.org/support/guides/find-my-google-analytics-4-property-id/' . $utm,
                 'api' => [
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=en',
-                    'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=en'
+                    'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=en',
+                    'data'      => 'https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com?hl=en'
                 ],
                 'matomo' => [
                     'on_premise' => 'https://www.seopress.org/support/guides/how-to-use-matomo-on-premise-with-seopress-free/' . $utm,

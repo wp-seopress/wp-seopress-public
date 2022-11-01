@@ -866,45 +866,45 @@
                     seopress_notification($args);
                 }
 
-                try {
-                    $contentRobotsTxt = @file_get_contents(site_url('robots.txt'));
-                    if(!empty($contentRobotsTxt)){
-                        $contentRobotsTxt = explode("\n", $contentRobotsTxt);
+                if ('1' !== seopress_get_hidden_notices_robots_txt_valid()) {
+                    try {
+                        $contentRobotsTxt = wp_remote_retrieve_body( wp_remote_get( site_url( 'robots.txt' ), $args ) );
+                        if(!empty($contentRobotsTxt)){
+                            $contentRobotsTxt = explode("\n", $contentRobotsTxt);
 
-                        $checkDisallowAfter = false;
-                        $validRobotsTxt = true;
-                        foreach($contentRobotsTxt as $line){
-                            if(strpos($line, 'User-agent:') !== false && strpos($line, '*') !== false){
-                                $checkDisallowAfter = true;
+                            $checkDisallowAfter = false;
+                            $validRobotsTxt = true;
+                            foreach($contentRobotsTxt as $line){
+                                if(strpos($line, 'User-agent:') !== false && strpos($line, '*') !== false){
+                                    $checkDisallowAfter = true;
+                                }
+
+                                if(trim($line) === 'Disallow: /' && $checkDisallowAfter){
+                                    $validRobotsTxt = false;
+                                }
                             }
 
-                            if(trim($line) === 'Disallow: /' && $checkDisallowAfter){
-                                $validRobotsTxt = false;
+                            if(!$validRobotsTxt  && '1' !== seopress_get_hidden_notices_robots_txt_valid() && empty(seopress_get_hidden_notices_robots_txt_valid())){
+                                $args = [
+                                    'id'     => 'notice-robots-txt-valid',
+                                    'title'  => __('Your site is not indexable!', 'wp-seopress'),
+                                    'desc'   => __('Your robots.txt file contains a rule that prevents search engines to index your all site: <code>Disallow: /</code>', 'wp-seopress'),
+                                    'impact' => [
+                                        'high' => __('High impact', 'wp-seopress'),
+                                    ],
+                                    'link' => [
+                                        'en'       => is_multisite() ? network_admin_url('admin.php?page=seopress-network-option#tab=tab_seopress_robots') : admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_robots'),
+                                        'title'    => __('Fix this!', 'wp-seopress'),
+                                        'external' => false,
+                                    ],
+                                    'deleteable' => true,
+                                ];
+                                seopress_notification($args);
                             }
                         }
+                    } catch (\Exception $e) {
 
-                        if(!$validRobotsTxt  && '1' !== seopress_get_hidden_notices_robots_txt_valid() && empty(seopress_get_hidden_notices_robots_txt_valid())){
-                            $args = [
-                                'id'     => 'notice-robots-txt-valid',
-                                'title'  => __('Your site is not indexable!', 'wp-seopress'),
-                                'desc'   => __('Your robots.txt file contains a rule that prevents search engines to index your all site: <code>Disallow: /</code>', 'wp-seopress'),
-                                'impact' => [
-                                    'high' => __('High impact', 'wp-seopress'),
-                                ],
-                                'link' => [
-                                    'en'       => is_multisite() ? network_admin_url('admin.php?page=seopress-network-option#tab=tab_seopress_robots') : admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_robots'),
-                                    'title'    => __('Fix this!', 'wp-seopress'),
-                                    'external' => false,
-                                ],
-                                'deleteable' => true,
-                            ];
-                            seopress_notification($args);
-                        }
                     }
-
-
-                } catch (\Exception $e) {
-
                 }
             }
             ?>

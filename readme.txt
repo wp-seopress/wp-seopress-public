@@ -3,10 +3,10 @@ Authors: rainbowgeek
 Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdubroeucq
 Donate link: https://www.seopress.org/
 Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content analysis, instant indexing, breadcrumbs, analytics, rich snippets, broken link
-Requires at least: 4.7+
+Requires at least: 5.0+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 6.0
+Stable tag: 6.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -363,6 +363,14 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.0.1 =
+* INFO Bump min version of WP required to 5.0+
+* INFO WPML compatibility for translated archive links in XML sitemaps (thanks to @wpml)
+* FIX Compatibility with SEOPress for MainWP add-on
+* FIX Accordion.js error for FAQ block
+* FIX Doc links
+* FIX Slow file_get_contents request for robots.txt on very specific server configuration
+* FIX Warning from Review.php file
 = 6.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-0/">Read the blog post update</a> =
 * NEW Matomo Analytics as a WP Dashboard widget (PRO) 🎉
 * NEW Pros and cons for Product structured data types (PRO) 🎉

@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 6.0\n"
+"Project-Id-Version: SEOPress 6.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress Team <contact@seopress.org>\n"
 "Language-Team: SEOPress Team <contact@seopress.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-03T12:14:23+00:00\n"
+"POT-Creation-Date: 2022-10-06T15:10:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -1273,7 +1273,7 @@ msgstr ""
 #: inc/admin/blocks/notifications-center.php:712
 #: inc/admin/blocks/notifications-center.php:777
 #: inc/admin/blocks/notifications-center.php:796
-#: inc/admin/blocks/notifications-center.php:896
+#: inc/admin/blocks/notifications-center.php:897
 #: inc/admin/sections/InstantIndexing.php:43
 #: src/Services/ContentAnalysis/RenderGSCInspectUrl.php:30
 msgid "Fix this!"
@@ -1308,7 +1308,7 @@ msgstr ""
 #: inc/admin/blocks/notifications-center.php:755
 #: inc/admin/blocks/notifications-center.php:773
 #: inc/admin/blocks/notifications-center.php:862
-#: inc/admin/blocks/notifications-center.php:892
+#: inc/admin/blocks/notifications-center.php:893
 msgid "High impact"
 msgstr ""
 
@@ -1551,11 +1551,11 @@ msgstr ""
 msgid "A robots.txt file already exists at the root of your site. We invite you to remove it so SEOPress can handle it virtually."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:889
+#: inc/admin/blocks/notifications-center.php:890
 msgid "Your site is not indexable!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:890
+#: inc/admin/blocks/notifications-center.php:891
 msgid "Your robots.txt file contains a rule that prevents search engines to index your all site: <code>Disallow: /</code>"
 msgstr ""
 
@@ -3257,71 +3257,71 @@ msgstr ""
 msgid "eg: https://example.com/my-media-attachment-page"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:158
+#: inc/admin/docs/DocsLinks.php:159
 msgid "Installation of SEOPress"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:159
+#: inc/admin/docs/DocsLinks.php:160
 msgid "Activate your license key to receive automatic updates"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:160
+#: inc/admin/docs/DocsLinks.php:161
 msgid "Configure SEOPress in 5 minutes"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:161
+#: inc/admin/docs/DocsLinks.php:162
 msgid "Migrate your SEO metadata from other plugins"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:162
+#: inc/admin/docs/DocsLinks.php:163
 msgid "Promote the exploration of your WordPress site by search engine robots"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:163
+#: inc/admin/docs/DocsLinks.php:164
 msgid "Optimize content from A to Z with SEOPress"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:164
+#: inc/admin/docs/DocsLinks.php:165
 msgid "Measure your traffic with Google Analytics"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:165
+#: inc/admin/docs/DocsLinks.php:166
 msgid "Add your WordPress site to Google’s index"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:166
+#: inc/admin/docs/DocsLinks.php:167
 msgid "Optimize your click-through rate on social networks"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:167
+#: inc/admin/docs/DocsLinks.php:168
 msgid "Free ebooks to learn SEO"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:170
+#: inc/admin/docs/DocsLinks.php:171
 msgid "Activate your SEOPress Insights license"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:171
+#: inc/admin/docs/DocsLinks.php:172
 msgid "Track your keyword rankings in Google with SEOPress Insights"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:172
+#: inc/admin/docs/DocsLinks.php:173
 msgid "Monitor and analyse your Backlinks with SEOPress Insights"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:173
+#: inc/admin/docs/DocsLinks.php:174
 msgid "Finding SEO keywords for your WordPress site"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:174
+#: inc/admin/docs/DocsLinks.php:175
 msgid "Optimize WordPress posts for a keyword"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:175
+#: inc/admin/docs/DocsLinks.php:176
 msgid "Audit the backlinks of your WordPress site (in WordPress)"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:176
+#: inc/admin/docs/DocsLinks.php:177
 msgid "The importance of backlinks"
 msgstr ""
 

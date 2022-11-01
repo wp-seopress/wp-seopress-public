@@ -33,23 +33,53 @@ $urlset = '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:sch
 
 echo apply_filters('seopress_sitemaps_urlset', $urlset);
 
+//Archive link
 if (true == get_post_type_archive_link($path) && 0 == $offset) {
     if ( ! function_exists('seopress_get_service')) {
         return;
     }
     if ('1' != seopress_get_service('TitleOption')->getTitlesCptNoIndexByPath($path)) {
         $sitemap_url = '';
+        $archive_links = [];
+
+        // WPML Workaround
+        if (class_exists('SitePress')) {
+            $original_language = apply_filters( 'wpml_current_language', NULL );
+            $language_list = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+
+            if (!empty($language_list)) {
+                foreach ($language_list as $key => $language_infos ) {
+                    if ($original_language != $language_infos['language_code']) {
+
+                        // Switch Language
+                        do_action( 'wpml_switch_language', $language_infos['language_code']);
+
+                        $archive_links[] = htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path))));
+
+                        // Restore language to the original
+                        do_action( 'wpml_switch_language', $original_language);
+                    }
+                }
+            }
+        }
+
         // array with all the information needed for a sitemap url
-        $seopress_url = [
-            'loc'    => htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path)))),
-            'mod'    => '',
-            'images' => [],
-        ];
-        $sitemap_url = sprintf("<url>\n<loc>%s</loc>\n</url>", htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path)))));
+        $archive_links[] = htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path))));
 
-        $sitemap_url = apply_filters('seopress_sitemaps_no_archive_link', $sitemap_url, $path);
+        $archive_links = array_unique($archive_links);
 
-        echo apply_filters('seopress_sitemaps_url', $sitemap_url, $seopress_url);
+        foreach($archive_links as $loc) {
+            $seopress_url = [
+                'loc'    => $loc,
+                'mod'    => '',
+                'images' => [],
+            ];
+            $sitemap_url = sprintf("<url>\n<loc>%s</loc>\n</url>", $loc);
+
+            $sitemap_url = apply_filters('seopress_sitemaps_no_archive_link', $sitemap_url, $path);
+
+            echo apply_filters('seopress_sitemaps_url', $sitemap_url, $seopress_url);
+        }
     }
 }
 

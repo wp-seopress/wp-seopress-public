@@ -154,7 +154,7 @@ function seopress_block_faq_render_frontend($attributes)
                         echo $css;
                     }
                     //Our simple accordion JS
-                    wp_enqueue_script('seopress-accordion', SEOPRESS_ASSETS_DIR . '/js/src/blocks/faq/accordion.js', '', SEOPRESS_VERSION, true);
+                    wp_enqueue_script('seopress-accordion', SEOPRESS_URL_PUBLIC . '/editor/blocks/faq/accordion.js', '', SEOPRESS_VERSION, true);
                 }
 
                 $image = '';

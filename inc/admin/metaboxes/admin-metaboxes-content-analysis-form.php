@@ -11,7 +11,7 @@ $data_attr = seopress_metaboxes_init();
     data_id="<?php echo $data_attr['current_id']; ?>"
     data_origin="<?php echo $data_attr['origin']; ?>"
     data_tax="<?php echo $data_attr['data_tax']; ?>">
-    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare('SEOPRESS_PRO_VERSION', '5.7') >= 0) { ?>
+    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.7', '>=')) { ?>
         <ul class="wrap-ca-list">
             <li><a href="#seopress-ca-tabs-2"><?php _e('Overview', 'wp-seopress'); ?></a></li>
             <?php if (seopress_get_toggle_option('inspect-url') ==='1') { ?>
@@ -118,7 +118,7 @@ $data_attr = seopress_metaboxes_init();
             seopress_get_service('RenderContentAnalysis')->render($analyzes, $seopress_analysis_data);
         } ?>
     </div>
-    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare('SEOPRESS_PRO_VERSION', '5.7') >= 0) {
+    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.7', '>=')) {
         if (seopress_get_toggle_option('inspect-url') === '1') { ?>
             <div id="seopress-ca-tabs-1">
                 <?php if (function_exists('seopress_get_service') && !empty($data_attr['current_id'])) {
