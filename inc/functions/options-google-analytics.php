@@ -267,24 +267,22 @@ function seopress_cookies_user_consent_render() {
 }
 
 if ('1' == seopress_google_analytics_disable_option()) {
-    if (!is_user_logged_in()) {
-        seopress_cookies_user_consent_render();
-        return;
-    }
+    if (is_user_logged_in()) {
+        global $wp_roles;
 
-    global $wp_roles;
-
-    //Get current user role
-    if (empty(wp_get_current_user()->roles) || !isset(wp_get_current_user()->roles[0])) {
-        seopress_cookies_user_consent_render();
-        return;
-    }
-
-    $seopress_user_role = wp_get_current_user()->roles[0];
-    //If current user role matchs values from SEOPress GA settings then apply
-    if (function_exists('seopress_google_analytics_roles_option') && '' != seopress_google_analytics_roles_option()) {
-        if (array_key_exists($seopress_user_role, seopress_google_analytics_roles_option())) {
-            //do nothing
+        //Get current user role
+        if (isset(wp_get_current_user()->roles[0])) {
+            $seopress_user_role = wp_get_current_user()->roles[0];
+            //If current user role matchs values from SEOPress GA settings then apply
+            if (function_exists('seopress_google_analytics_roles_option') && '' != seopress_google_analytics_roles_option()) {
+                if (array_key_exists($seopress_user_role, seopress_google_analytics_roles_option())) {
+                    //do nothing
+                } else {
+                    seopress_cookies_user_consent_render();
+                }
+            } else {
+                seopress_cookies_user_consent_render();
+            }
         } else {
             seopress_cookies_user_consent_render();
         }

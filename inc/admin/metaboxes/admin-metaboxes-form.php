@@ -742,7 +742,15 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                         if ('' != $seopress_redirections_value || in_array($seopress_redirections_type, $status_code)) {
                             if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
                                 if ('seopress_404' == $typenow) {
-                                    $href = get_home_url() . '/' . get_the_title();
+
+                                    $parse_url = wp_parse_url(get_home_url());
+
+                                    $home_url = get_home_url();
+                                    if ( ! empty($parse_url['scheme']) && ! empty($parse_url['host'])) {
+                                        $home_url = $parse_url['scheme'] . '://' . $parse_url['host'];
+                                    }
+
+                                    $href = $home_url . '/' . get_the_title();
                                 } else {
                                     $href = get_the_permalink();
                                 }
