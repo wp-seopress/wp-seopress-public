@@ -156,9 +156,20 @@ function print_section_info_google_analytics_matomo()
         <?php _e('Matomo', 'wp-seopress'); ?>
     </h2>
 </div>
+
+<div class="seopress-sub-tabs">
+    <a href="#seopress-matomo-tracking"><?php _e('Tracking', 'wp-seopress'); ?></a>
+    <?php if ( is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?> | <a href="#seopress-matomo-stats"><?php _e('Stats in Dashboard', 'wp-seopress'); ?></a><?php } ?>
+</div>
+
 <p>
     <?php _e('Use Matomo to track your users with privacy in mind. We support both On Premise and Cloud installations.', 'wp-seopress'); ?>
 </p>
+
+<hr>
+<h3 id="seopress-matomo-tracking">
+    <?php _e('Tracking', 'wp-seopress'); ?>
+</h3>
 
 <div class="seopress-notice">
     <p>

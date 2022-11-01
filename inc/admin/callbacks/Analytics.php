@@ -1295,6 +1295,7 @@ function seopress_google_analytics_matomo_no_heatmaps_callback() {
         esc_attr($options['seopress_google_analytics_matomo_no_heatmaps']);
     }
 }
+
 function seopress_google_analytics_clarity_enable_callback() {
     $options = get_option('seopress_google_analytics_option_name');
     $check   = isset($options['seopress_google_analytics_clarity_enable']); ?>

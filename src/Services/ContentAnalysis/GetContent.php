@@ -110,7 +110,7 @@ class GetContent
      */
     protected function analyzeKeywordsDensity($analyzes, $data, $post)
     {
-        if (! empty($data['kws_density']['matches']) && isset($data['words_counter'])) {
+        if (! empty($data['kws_density']['matches']) && isset($data['words_counter']) && $data['words_counter'] > 0) {
             $target_kws_density = $data['kws_density']['matches'];
 
             $desc = '<ul>';

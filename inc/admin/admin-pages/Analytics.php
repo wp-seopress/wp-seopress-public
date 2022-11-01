@@ -59,6 +59,7 @@ echo '</div>'; ?>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_matomo' == $current_tab) {
     echo 'active';
 } ?>" id="tab_seopress_google_analytics_matomo"><?php do_settings_sections('seopress-settings-admin-google-analytics-matomo'); ?>
+<?php do_settings_sections('seopress-settings-admin-google-analytics-matomo-widget'); ?>
         </div>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_clarity' == $current_tab) {
     echo 'active';

@@ -145,6 +145,10 @@ class DomAnalysis
 
         $postContent = apply_filters('seopress_dom_analysis_get_post_content', $this->getPostContentAnalyze($options['id']));
 
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            $data['analyzed_content'] = $postContent;
+        }
+
         //Keywords density
         $data['kws_density'] = [
             "matches" => []
@@ -167,7 +171,7 @@ class DomAnalysis
         //Words Counter
         if (! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
             if (!empty($postContent)) {
-                $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", wp_strip_all_tags(wp_filter_nohtml_kses($postContent)), $matches);
+                $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", normalize_whitespace(wp_strip_all_tags($postContent)), $matches);
 
                 if (! empty($matches[0])) {
                     $wordsCounterUnique = count(array_unique($matches[0]));

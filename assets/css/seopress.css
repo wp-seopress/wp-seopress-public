@@ -41,6 +41,8 @@
 #seopress_cpt,
 #seopress_content_analysis,
 #seopress_pro_cpt,
+#seopress_matomo_dashboard_widget,
+#seopress_ga_dashboard_widget,
 .column-seopress_score,
 .seopress-ui-datepicker {
     --primaryColor: #007cba;
@@ -388,19 +390,19 @@ body .seopress-option input[type="checkbox"]:active,
 }
 
 /* Table */
-.form-table td {
+.seopress-tab .form-table td {
     padding: 15px 0;
 }
 
-.form-table td p {
+.seopress-tab .form-table td p {
     margin: 4px 0;
 }
 
-.form-table td p.seopress_wrap_archive_cpt {
+.seopress-tab .form-table td p.seopress_wrap_archive_cpt {
     margin-bottom: 15px;
 }
 
-.form-table td label {
+.seopress-tab .form-table td label {
     display: block;
 }
 
@@ -549,9 +551,27 @@ table.fixed thead .column-seopress_noindex {
     width: 50%;
     color: var(--colorDark);
     justify-content: center;
+    box-sizing: border-box;
+}
+
+#seopress_matomo_dashboard_widget .seopress-summary-item:nth-child(even) {
+    border-right: none;
+}
+
+#seopress_matomo_dashboard_widget .seopress-summary-item:nth-last-child(2),
+#seopress_matomo_dashboard_widget .seopress-summary-item:last-child {
+    border-bottom: none;
 }
 
 @media only screen and (max-width: 782px) {
+    #seopress_matomo_dashboard_widget .seopress-summary-item {
+        border-right: none;
+    }
+
+    #seopress_matomo_dashboard_widget .seopress-summary-item:nth-last-child(2) {
+        border-bottom: 1px solid var(--borderColorLight40);
+    }
+
     .seopress-summary-item {
         width: 100%;
     }

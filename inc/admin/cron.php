@@ -12,7 +12,7 @@ if ( ! defined('ABSPATH')) {
  *
  */
 function seopress_xml_sitemaps_ping_cron_action() {
-    //Disable if MainWP add-on is enabled
+    //Disable if MainWP add-on enabled
     if (defined('SEOPRESS_WPMAIN_VERSION')) {
         return;
     }

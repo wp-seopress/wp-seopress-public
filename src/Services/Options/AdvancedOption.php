@@ -50,6 +50,15 @@ class AdvancedOption
     }
 
     /**
+     * @since 6.0.0
+     *
+     * @return string
+     */
+    public function getAppearanceNotification(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_notifications');
+    }
+
+    /**
      * @since 5.0.0
      *
      * @return string

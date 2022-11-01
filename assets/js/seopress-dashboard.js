@@ -9,6 +9,7 @@ jQuery(document).ready(function ($) {
         "notice-wizard",
         "notice-insights-wizard",
         "notice-seo-consultant",
+        "notice-amp-analytics",
         "notice-tagdiv",
         "notice-divide-comments",
         "notice-review",

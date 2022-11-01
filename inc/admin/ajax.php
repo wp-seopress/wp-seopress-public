@@ -186,6 +186,10 @@ function seopress_do_real_preview()
 
                     $seopress_get_the_content = apply_filters('seopress_content_analysis_content', $seopress_get_the_content, $seopress_get_the_id);
 
+                    if (defined('WP_DEBUG') && WP_DEBUG === true) {
+                        $data['analyzed_content'] = $seopress_get_the_content;
+                    }
+
                     //Bricks compatibility
                     if (defined('BRICKS_DB_EDITOR_MODE') && ('bricks' == $theme->template || 'Bricks' == $theme->parent_theme)) {
                         $page_sections = get_post_meta($seopress_get_the_id, BRICKS_DB_PAGE_CONTENT, true);
@@ -402,7 +406,7 @@ function seopress_do_real_preview()
                         //Keywords density
                         if (! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
                             foreach ($seopress_analysis_target_kw as $kw) {
-                                if (preg_match_all('#\b(' . $kw . ')\b#iu', stripslashes_deep(wp_strip_all_tags(wp_filter_nohtml_kses($seopress_get_the_content))), $m)) {
+                                if (preg_match_all('#\b(' . $kw . ')\b#iu', stripslashes_deep(wp_strip_all_tags($seopress_get_the_content)), $m)) {
                                     $data['kws_density']['matches'][$kw][] = $m[0];
                                 }
                             }
@@ -421,7 +425,7 @@ function seopress_do_real_preview()
 
                         if (isset($kw_slug)) {
                             foreach ($seopress_analysis_target_kw as $kw) {
-                                if (preg_match_all('#\b(' . remove_accents($kw) . ')\b#iu', strip_tags(wp_filter_nohtml_kses($kw_slug)), $m)) {
+                                if (preg_match_all('#\b(' . remove_accents($kw) . ')\b#iu', strip_tags($kw_slug), $m)) {
                                     $data['kws_permalink']['matches'][$kw][] = $m[0];
                                 }
                             }
@@ -551,7 +555,7 @@ function seopress_do_real_preview()
                 //Words Counter
                 if (! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
                     if ('' != $seopress_get_the_content) {
-                        $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", wp_strip_all_tags(wp_filter_nohtml_kses($seopress_get_the_content)), $matches);
+                        $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", normalize_whitespace(wp_strip_all_tags($seopress_get_the_content)), $matches);
 
                         if (! empty($matches[0])) {
                             $words_counter_unique = count(array_unique($matches[0]));

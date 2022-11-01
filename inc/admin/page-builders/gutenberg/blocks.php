@@ -29,14 +29,14 @@ function seopress_register_block_categories( $categories ) {
  */
 add_action( 'init', 'seopress_register_blocks', 1000 );
 function seopress_register_blocks() {
-    require_once __DIR__ . '/block-faq.php';
-    require_once __DIR__ . '/block-sitemap.php';
+    require_once __DIR__ . '/blocks/faq/block.php';
+    require_once __DIR__ . '/blocks/sitemap/block.php';
 
 	// FAQ Block
 	seopress_register_block_faq();
 
 	// Sitemap Block
-    register_block_type( SEOPRESS_PLUGIN_DIR_PATH . 'assets/js/src/blocks/sitemap', [
+    register_block_type( __DIR__ . '/blocks/sitemap', [
         'render_callback' => 'seopress_sitemap_block',
         'attributes' => [
             'postTypes' => [

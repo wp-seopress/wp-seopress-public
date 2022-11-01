@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 5.9.0.4
+Version: 6.0
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -70,7 +70,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '5.9.0.4');
+define('SEOPRESS_VERSION', '6.0');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -208,7 +208,8 @@ add_action('plugins_loaded', 'seopress_init', 999);
  * @author Benjamin
  */
 function seopress_dyn_variables_init($variables, $post = '', $is_oembed = false) {
-    return include dirname(__FILE__) . '/inc/functions/variables/dynamic-variables.php';
+    include_once dirname(__FILE__) . '/inc/functions/variables/dynamic-variables.php';
+    return SEOPress\Helpers\CachedMemoizeFunctions::memoize('seopress_get_dynamic_variables')($variables, $post, $is_oembed);
 }
 add_filter('seopress_dyn_variables_fn', 'seopress_dyn_variables_init', 10, 3);
 
@@ -654,6 +655,40 @@ function seopress_plugin_update_message( $plugin_data, $new_data ) {
 }
 add_action( 'in_plugin_update_message-wp-seopress/seopress.php', 'seopress_plugin_update_message', 10, 2 );
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Update notice
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Display an update message if PRO version is too old compare to Free version
+ *
+ * @since 6.0
+ *
+ * @return void
+ *
+ * @author Benjamin
+ */
+function seopress_notice() {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    if ( is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.4') < 0) {
+        $docs = seopress_get_docs_links();
+        ?>
+<div class="notice notice-warning">
+    <p>
+        <?php _e('A new <strong>SEOPress PRO</strong> update (v<code>6.0</code>) is available (current installed version <code>'.SEOPRESS_PRO_VERSION.'</code>). <br>Please update now to get new features and prevent any issues.', 'wp-seopress'); ?>
+    </p>
+    <p>
+        <a href="<?php echo $docs['downloads']; ?>" class="button button-primary" target="_blank">
+            <?php _e('Update SEOPress PRO', 'wp-seopress'); ?>
+        </a>
+    </p>
+</div>
+<?php
+    }
+}
+add_action('admin_notices', 'seopress_notice');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Test if a feature is ON
 ///////////////////////////////////////////////////////////////////////////////////////////////////

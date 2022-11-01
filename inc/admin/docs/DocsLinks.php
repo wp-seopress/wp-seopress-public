@@ -15,6 +15,7 @@ function seopress_get_docs_links()
         $docs = [
             'website'          => 'https://www.seopress.org/fr/' . $utm,
             'blog'             => 'https://www.seopress.org/fr/blog/' . $utm,
+            'downloads'        => 'https://www.seopress.org/fr/mon-compte/mes-telechargements/' . $utm,
             'support'          => 'https://www.seopress.org/fr/support/' . $utm,
             'guides'           => 'https://www.seopress.org/fr/support/guides/' . $utm,
             'faq'              => 'https://www.seopress.org/fr/support/faq/' . $utm,
@@ -70,13 +71,14 @@ function seopress_get_docs_links()
                 'gtm'               => 'https://www.seopress.org/fr/support/guides/ajouter-google-tag-manager-a-votre-site-wordpress-avec-seopress/' . $utm,
                 'ecommerce'         => 'https://www.seopress.org/fr/support/guides/configurer-le-commerce-electronique-ameliore-pour-google-analytics/' . $utm,
                 'events'            => 'https://www.seopress.org/fr/support/guides/suivre-vos-telechargements-liens-affilies-sortants-et-externes-google-analytics/' . $utm,
-                'ga4_property'      => 'https://support.google.com/analytics/answer/9539598?hl=fr&ref_topic=9303319',
+                'ga4_property'      => 'https://www.seopress.org/fr/support/guides/trouver-id-de-propriete-google-analytics-4/' . $utm,
                 'api' => [
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=fr',
                     'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=fr'
                 ],
                 'matomo' => [
                     'on_premise' => 'https://www.seopress.org/fr/support/guides/comment-utiliser-matomo-en-auto-heberge-avec-seopress-free/' . $utm,
+                    'token' => 'https://www.seopress.org/fr/support/guides/connectez-votre-site-wordpress-avec-matomo-analytics/' . $utm,
                 ],
                 'clarity' => [
                     'project' => 'https://www.seopress.org/fr/support/guides/trouver-mon-id-de-project-microsoft-clarity/' . $utm,
@@ -147,6 +149,7 @@ function seopress_get_docs_links()
         $docs = [
             'website'          => 'https://www.seopress.org/' . $utm,
             'blog'             => 'https://www.seopress.org/newsroom/' . $utm,
+            'downloads'        => 'https://www.seopress.org/account/my-downloads/' . $utm,
             'support'          => 'https://www.seopress.org/support/' . $utm,
             'guides'           => 'https://www.seopress.org/support/guides/' . $utm,
             'faq'              => 'https://www.seopress.org/support/faq/' . $utm,
@@ -202,13 +205,14 @@ function seopress_get_docs_links()
                 'gtm'               => 'https://www.seopress.org/support/guides/google-tag-manager-wordpress-seopress/' . $utm,
                 'ecommerce'         => 'https://www.seopress.org/support/guides/how-to-setup-google-enhanced-ecommerce/' . $utm,
                 'events'            => 'https://www.seopress.org/support/guides/how-to-track-file-downloads-affiliates-outbound-and-external-links-with-google-analytics/' . $utm,
-                'ga4_property'      => 'https://support.google.com/analytics/answer/9539598?hl=en&ref_topic=9303319',
+                'ga4_property'      => 'https://www.seopress.org/support/guides/find-my-google-analytics-4-property-id/' . $utm,
                 'api' => [
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=en',
                     'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=en'
                 ],
                 'matomo' => [
                     'on_premise' => 'https://www.seopress.org/support/guides/how-to-use-matomo-on-premise-with-seopress-free/' . $utm,
+                    'token' => 'https://www.seopress.org/support/guides/connect-your-wordpress-site-with-matomo-analytics/' . $utm,
                 ],
                 'clarity' => [
                     'project' => 'https://www.seopress.org/support/guides/find-my-microsoft-clarity-project-id/' . $utm,

@@ -21,31 +21,21 @@ function seopress_enable()
 //Front END
 if ('1' == seopress_get_toggle_option('titles')) {
     //Author archive Disabled
+    /**
+     * @deprecated 6.0.0
+     */
     function seopress_titles_archives_author_disable_option()
     {
-        $seopress_titles_archives_author_disable_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_archives_author_disable_option)) {
-            foreach ($seopress_titles_archives_author_disable_option as $key => $seopress_titles_archives_author_disable_value) {
-                $options[$key] = $seopress_titles_archives_author_disable_value;
-            }
-            if (isset($seopress_titles_archives_author_disable_option['seopress_titles_archives_author_disable'])) {
-                return $seopress_titles_archives_author_disable_option['seopress_titles_archives_author_disable'];
-            }
-        }
+        return seopress_get_service('TitleOption')->getArchiveAuthorDisable();
     }
 
     //Date archive Disabled
+    /**
+     * @deprecated 6.0.0
+     */
     function seopress_titles_archives_date_disable_option()
     {
-        $seopress_titles_archives_date_disable_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_archives_date_disable_option)) {
-            foreach ($seopress_titles_archives_date_disable_option as $key => $seopress_titles_archives_date_disable_value) {
-                $options[$key] = $seopress_titles_archives_date_disable_value;
-            }
-            if (isset($seopress_titles_archives_date_disable_option['seopress_titles_archives_date_disable'])) {
-                return $seopress_titles_archives_date_disable_option['seopress_titles_archives_date_disable'];
-            }
-        }
+        return seopress_get_service('TitleOption')->getArchiveDateDisable();
     }
 
     function seopress_titles_disable_archives()

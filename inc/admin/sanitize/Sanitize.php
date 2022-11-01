@@ -63,6 +63,7 @@ function seopress_sanitize_options_fields($input){
         'seopress_instant_indexing_bing_api_key',
         'seopress_instant_indexing_manual_batch',
         'seopress_google_analytics_clarity_project_id',
+        'seopress_google_analytics_matomo_widget_auth_token',
         //'seopress_instant_indexing_google_api_key',
     ];
 
@@ -85,9 +86,14 @@ function seopress_sanitize_options_fields($input){
         }
     }
 
-
     foreach ($seopress_sanitize_fields as $value) {
-        if ( ! empty($input['seopress_google_analytics_opt_out_msg']) && 'seopress_google_analytics_opt_out_msg' == $value) {
+        if ( ! empty($input['seopress_google_analytics_matomo_widget_auth_token']) && 'seopress_google_analytics_matomo_widget_auth_token' == $value) {
+            $options = get_option('seopress_google_analytics_option_name');
+
+            $token = isset($options['seopress_google_analytics_matomo_widget_auth_token']) ? $options['seopress_google_analytics_matomo_widget_auth_token'] : null;
+
+            $input[$value] = $input[$value] ==='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' ? $token : sanitize_text_field($input[$value]);
+        } elseif ( ! empty($input['seopress_google_analytics_opt_out_msg']) && 'seopress_google_analytics_opt_out_msg' == $value) {
             $args = [
                     'strong' => [],
                     'em'     => [],

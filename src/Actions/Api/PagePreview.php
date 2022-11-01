@@ -48,9 +48,14 @@ class PagePreview implements ExecuteHooks
         $id   = (int) $request->get_param('id');
         $str  = seopress_get_service('RequestPreview')->getDomById($id);
         $data = seopress_get_service('DomFilterContent')->getData($str, $id);
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            $data['analyzed_content'] = seopress_get_service('DomAnalysis')->getPostContentAnalyze($id);
+        }
+
         $data['analysis_target_kw'] = [
             'value' => array_filter(explode(',', strtolower(get_post_meta($id, '_seopress_analysis_target_kw', true))))
         ];
+
         return new \WP_REST_Response($data);
     }
 }

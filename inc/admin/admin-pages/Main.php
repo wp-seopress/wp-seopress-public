@@ -64,7 +64,7 @@ if ('1' != seopress_get_hidden_notices_get_started_option()) {
                 $cards = [
                     'notice-insights-alert' => '/blocks/insights.php',
                     'seopress-news-panel' => '/blocks/news.php',
-                    'seopress-page-list' => '/admin-features-list.php'
+                    'seopress-page-list' => '/blocks/features-list.php'
                 ];
 
                 $order = seopress_dashboard_cards_order_option();

@@ -1331,7 +1331,6 @@ function seopress_remove_hreflang_polylang($hreflangs) {
 }
 
 if ('0' != get_option('blog_public')) {// Discourage search engines from indexing this site is OFF
-    //if (seopress_titles_noindex_bypass() || seopress_titles_nofollow_bypass() || seopress_titles_noodp_bypass() || seopress_titles_noarchive_bypass() || seopress_titles_nosnippet_bypass() || has_filter('seopress_titles_robots')) {
     function seopress_titles_advanced_robots_hook() {
         $seopress_comma_array = [];
 
@@ -1456,7 +1455,6 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
         echo $seopress_titles_robots;
     }
     add_action('wp_head', 'seopress_titles_advanced_robots_hook', 1);
-    //}
 }
 
 //noimageindex

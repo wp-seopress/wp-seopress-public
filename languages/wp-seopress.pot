@@ -1,21 +1,20 @@
-# Copyright (C) 2022 SEOPress
+# Copyright (C) 2022 The SEO Guys at SEOPress
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 5.9.0.4\n"
+"Project-Id-Version: SEOPress 6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress Team <contact@seopress.org>\n"
 "Language-Team: SEOPress Team <contact@seopress.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-23T12:14:02+00:00\n"
+"POT-Creation-Date: 2022-10-03T12:14:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
 
 #. Plugin Name of the plugin
-#. Author of the plugin
 msgid "SEOPress"
 msgstr ""
 
@@ -26,6 +25,10 @@ msgstr ""
 
 #. Description of the plugin
 msgid "One of the best SEO plugins for WordPress."
+msgstr ""
+
+#. Author of the plugin
+msgid "The SEO Guys at SEOPress"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:26
@@ -66,8 +69,8 @@ msgid "nofollow is off."
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:106
-#: inc/admin/admin-features-list.php:18
 #: inc/admin/admin.php:100
+#: inc/admin/blocks/features-list.php:18
 #: app/react/constants/tabs.js:28
 msgid "Titles & Metas"
 msgstr ""
@@ -77,20 +80,20 @@ msgid "XML / HTML Sitemap"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:118
-#: inc/admin/admin-features-list.php:30
 #: inc/admin/admin.php:102
+#: inc/admin/blocks/features-list.php:30
 msgid "Social Networks"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:124
-#: inc/admin/admin-features-list.php:36
 #: inc/admin/admin.php:103
+#: inc/admin/blocks/features-list.php:36
 msgid "Analytics"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:130
-#: inc/admin/admin-features-list.php:42
 #: inc/admin/admin.php:104
+#: inc/admin/blocks/features-list.php:42
 #: inc/admin/sections/InstantIndexing.php:9
 msgid "Instant Indexing"
 msgstr ""
@@ -110,15 +113,15 @@ msgid "Advanced"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:144
-#: inc/admin/admin-features-list.php:56
+#: inc/admin/blocks/features-list.php:56
 #: inc/admin/wizard/admin-wizard.php:262
 #: src/Actions/Admin/ManageColumn.php:94
 msgid "Insights"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:151
-#: inc/admin/admin-features-list.php:164
 #: inc/admin/admin.php:106
+#: inc/admin/blocks/features-list.php:164
 msgid "Tools"
 msgstr ""
 
@@ -127,13 +130,13 @@ msgid "BOT"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:166
-#: inc/admin/admin-features-list.php:172
-#: inc/admin/blocks/notifications-center.php:956
+#: inc/admin/blocks/features-list.php:172
+#: inc/admin/blocks/notifications-center.php:792
 msgid "License"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:172
-#: inc/admin/blocks/notifications-center.php:987
+#: inc/admin/blocks/notifications-center.php:815
 #: inc/admin/wizard/admin-wizard.php:261
 msgid "PRO"
 msgstr ""
@@ -144,8 +147,8 @@ msgid "Schemas"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:187
-#: inc/admin/admin-features-list.php:65
 #: inc/admin/admin-pages/Tools.php:24
+#: inc/admin/blocks/features-list.php:65
 msgid "Redirections"
 msgstr ""
 
@@ -164,7 +167,7 @@ msgid "Home"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-header.php:29
-#: assets/js/src/blocks/faq/edit.js:371
+#: app/editor/blocks/faq/edit.js:371
 msgid "Display"
 msgstr ""
 
@@ -426,175 +429,6 @@ msgstr ""
 msgid "Target keyword"
 msgstr ""
 
-#: inc/admin/admin-features-list.php:10
-msgid "SEO management"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:19
-msgid "Manage all your titles & metas for post types, taxonomies, archives..."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:24
-msgid "XML & HTML Sitemaps"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:25
-msgid "Manage your XML - Image - Video - HTML Sitemap."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:31
-msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:37
-msgid "Track everything about your visitors with Google Analytics / Matomo / Microsoft Clarity."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:43
-msgid "Ping Google & Bing to quickly index your content."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:48
-#: inc/admin/admin.php:105
-msgid "Image SEO & Advanced settings"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:49
-msgid "Optimize your images for SEO. Configure advanced settings."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:57
-msgid "Track your keyword positions and backlinks directly in your WordPress."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:66
-msgid "Monitor 404, create 301, 302 and 307 redirections."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:71
-msgid "Structured Data Types"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:72
-msgid "Add data types to your content: articles, courses, recipes, videos, events, products and more."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:78
-msgid "robots.txt"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:79
-msgid "Edit your robots.txt file."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:86
-msgid ".htaccess"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:87
-msgid "Edit your htaccess file."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:94
-msgid "Local Business"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:95
-msgid "Add Google Local Business data type."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:100
-msgid "Breadcrumbs"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:101
-msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:106
-msgid "WooCommerce"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:107
-msgid "Improve WooCommerce SEO."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:112
-msgid "Easy Digital Downloads"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:113
-msgid "Improve Easy Digital Downloads SEO."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:118
-msgid "Google Page Speed"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:119
-msgid "Track your website performance to improve SEO with Google Page Speed."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:125
-msgid "Inspect URL with Google Search Console"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:126
-msgid "Inspect your URL for details about crawling, indexing, mobile compatibility, schemas and more."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:132
-msgid "Google News Sitemap"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:133
-msgid "Optimize your site for Google News."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:138
-msgid "Broken links"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:139
-msgid "Scan your site to find SEO problems."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:144
-msgid "Dublin Core"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:145
-msgid "Add Dublin Core meta tags."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:150
-msgid "URL Rewriting"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:151
-msgid "Customize your permalinks."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:156
-msgid "RSS"
-msgstr ""
-
-#: inc/admin/admin-features-list.php:157
-msgid "Configure default WordPress RSS."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:165
-msgid "Import/Export plugin settings from site to site."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:173
-msgid "Edit your license key."
-msgstr ""
-
-#: inc/admin/admin-features-list.php:204
-msgid "Toggle %s"
-msgstr ""
-
 #: inc/admin/admin-pages/Advanced.php:20
 #: inc/admin/sections/ImageSEO.php:10
 msgid "Image SEO"
@@ -611,12 +445,12 @@ msgid "Security"
 msgstr ""
 
 #: inc/admin/admin-pages/Advanced.php:52
-#: inc/admin/admin-pages/Analytics.php:69
+#: inc/admin/admin-pages/Analytics.php:70
 #: inc/admin/admin-pages/InstantIndexing.php:51
 #: inc/admin/admin-pages/Sitemaps.php:43
 #: inc/admin/admin-pages/Social.php:43
 #: inc/admin/admin-pages/Titles.php:54
-#: seopress-functions.php:751
+#: seopress-functions.php:757
 msgid "Save changes"
 msgstr ""
 
@@ -659,7 +493,7 @@ msgstr ""
 #: inc/admin/admin-pages/Tools.php:22
 #: inc/admin/admin-pages/Tools.php:155
 #: inc/admin/sections/InstantIndexing.php:54
-#: seopress.php:611
+#: seopress.php:612
 msgid "Settings"
 msgstr ""
 
@@ -974,6 +808,11 @@ msgstr ""
 msgid "XML - HTML Sitemap"
 msgstr ""
 
+#: inc/admin/admin.php:105
+#: inc/admin/blocks/features-list.php:48
+msgid "Image SEO & Advanced settings"
+msgstr ""
+
 #: inc/admin/ajax.php:32
 msgid "A redirect is active for this URL. Turn it off to get the Google preview and content analysis."
 msgstr ""
@@ -984,6 +823,170 @@ msgstr ""
 
 #: inc/admin/ajax.php:132
 msgid "Your site is protected by an authentification. <a href=\"%s\" target=\"_blank\">Fix this</a> <span class=\"dashicons dashicons-external\"></span>"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:10
+msgid "SEO management"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:19
+msgid "Manage all your titles & metas for post types, taxonomies, archives..."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:24
+msgid "XML & HTML Sitemaps"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:25
+msgid "Manage your XML - Image - Video - HTML Sitemap."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:31
+msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:37
+msgid "Track everything about your visitors with Google Analytics / Matomo / Microsoft Clarity."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:43
+msgid "Ping Google & Bing to quickly index your content."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:49
+msgid "Optimize your images for SEO. Configure advanced settings."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:57
+msgid "Track your keyword positions and backlinks directly in your WordPress."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:66
+msgid "Monitor 404, create 301, 302 and 307 redirections."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:71
+msgid "Structured Data Types"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:72
+msgid "Add data types to your content: articles, courses, recipes, videos, events, products and more."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:78
+msgid "robots.txt"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:79
+msgid "Edit your robots.txt file."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:86
+msgid ".htaccess"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:87
+msgid "Edit your htaccess file."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:94
+msgid "Local Business"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:95
+msgid "Add Google Local Business data type."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:100
+msgid "Breadcrumbs"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:101
+msgid "Enable Breadcrumbs for your theme and improve your SEO in SERPs."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:106
+msgid "WooCommerce"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:107
+msgid "Improve WooCommerce SEO."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:112
+msgid "Easy Digital Downloads"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:113
+msgid "Improve Easy Digital Downloads SEO."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:118
+msgid "Google Page Speed"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:119
+msgid "Track your website performance to improve SEO with Google Page Speed."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:125
+msgid "Inspect URL with Google Search Console"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:126
+msgid "Inspect your URL for details about crawling, indexing, mobile compatibility, schemas and more."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:132
+msgid "Google News Sitemap"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:133
+msgid "Optimize your site for Google News."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:138
+msgid "Broken links"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:139
+msgid "Scan your site to find SEO problems."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:144
+msgid "Dublin Core"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:145
+msgid "Add Dublin Core meta tags."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:150
+msgid "URL Rewriting"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:151
+msgid "Customize your permalinks."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:156
+msgid "RSS"
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:157
+msgid "Configure default WordPress RSS."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:165
+msgid "Import/Export plugin settings from site to site."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:173
+msgid "Edit your license key."
+msgstr ""
+
+#: inc/admin/blocks/features-list.php:204
+msgid "Toggle %s"
 msgstr ""
 
 #: inc/admin/blocks/get-started.php:14
@@ -1003,7 +1006,7 @@ msgid "Get started"
 msgstr ""
 
 #: inc/admin/blocks/get-started.php:25
-#: seopress-functions.php:509
+#: seopress-functions.php:515
 msgid "Dismiss"
 msgstr ""
 
@@ -1166,152 +1169,169 @@ msgstr ""
 msgid "All news"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:54
-#: inc/admin/blocks/tasks.php:97
+#: inc/admin/blocks/notifications-center.php:38
+#: inc/admin/blocks/tasks.php:141
 msgid "You like SEOPress? Please help us by rating us 5 stars!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:55
+#: inc/admin/blocks/notifications-center.php:39
 msgid "Support the development and improvement of the plugin by taking 15 seconds of your time to leave us a user review on the official WordPress plugins repository. Thank you!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:57
+#: inc/admin/blocks/notifications-center.php:41
 msgid "Information"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:61
+#: inc/admin/blocks/notifications-center.php:45
 msgid "Rate us!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:84
+#: inc/admin/blocks/notifications-center.php:60
 msgid "Enable our universal SEO metabox for the Block Editor"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:85
+#: inc/admin/blocks/notifications-center.php:61
 msgid "By default, our new SEO metabox is disabled for Gutenberg. Test it without further delay!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:87
-#: inc/admin/blocks/notifications-center.php:117
-#: inc/admin/blocks/notifications-center.php:148
-#: inc/admin/blocks/notifications-center.php:179
+#: inc/admin/blocks/notifications-center.php:63
+#: inc/admin/blocks/notifications-center.php:85
+#: inc/admin/blocks/notifications-center.php:108
+#: inc/admin/blocks/notifications-center.php:131
 msgid "Wizard"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:91
+#: inc/admin/blocks/notifications-center.php:67
 msgid "Activate it"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:114
+#: inc/admin/blocks/notifications-center.php:82
 msgid "Configure SEOPress in a few minutes with our installation wizard"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:115
+#: inc/admin/blocks/notifications-center.php:83
 msgid "The best way to quickly setup SEOPress on your site."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:121
-#: inc/admin/blocks/notifications-center.php:152
+#: inc/admin/blocks/notifications-center.php:89
+#: inc/admin/blocks/notifications-center.php:112
 msgid "Start the wizard"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:145
+#: inc/admin/blocks/notifications-center.php:105
 msgid "Configure SEOPress Insights in a few minutes with our installation wizard"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:146
+#: inc/admin/blocks/notifications-center.php:106
 msgid "Track your keywords positions and backlinks directly on your WordPress site."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:176
+#: inc/admin/blocks/notifications-center.php:128
 msgid "Talk to a SEO consultant"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:177
+#: inc/admin/blocks/notifications-center.php:129
 msgid "Your site is growing and you want support for your SEO strategy, increase your sales and conversions? We are there for that. Contact us!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:184
+#: inc/admin/blocks/notifications-center.php:136
 msgid "Yes, please"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:211
-msgid "We noticed that some SEO DIVI options are enabled!"
+#: inc/admin/blocks/notifications-center.php:155
+msgid "Use Google Analytics with AMP plugin"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:212
-msgid "To avoid any SEO conflicts, please disable every SEO option from <strong>DIVI theme options page, SEO tab</strong>."
+#: inc/admin/blocks/notifications-center.php:156
+msgid "Your site is using the AMP official plugin. To track users with Google Analytics on AMP pages, please go to this settings page."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:214
-#: inc/admin/blocks/notifications-center.php:247
-#: inc/admin/blocks/notifications-center.php:280
-#: inc/admin/blocks/notifications-center.php:325
-#: inc/admin/blocks/notifications-center.php:362
-#: inc/admin/blocks/notifications-center.php:389
-#: inc/admin/blocks/notifications-center.php:438
-#: inc/admin/blocks/notifications-center.php:458
-#: inc/admin/blocks/notifications-center.php:477
-#: inc/admin/blocks/notifications-center.php:496
-#: inc/admin/blocks/notifications-center.php:515
-#: inc/admin/blocks/notifications-center.php:567
-#: inc/admin/blocks/notifications-center.php:585
-#: inc/admin/blocks/notifications-center.php:630
-#: inc/admin/blocks/notifications-center.php:649
-#: inc/admin/blocks/notifications-center.php:666
-#: inc/admin/blocks/notifications-center.php:798
-#: inc/admin/blocks/notifications-center.php:878
-#: inc/admin/blocks/notifications-center.php:919
-#: inc/admin/blocks/notifications-center.php:937
-#: inc/admin/blocks/notifications-center.php:1034
-#: inc/admin/blocks/notifications-center.php:1064
-msgid "High impact"
+#: inc/admin/blocks/notifications-center.php:158
+#: inc/admin/blocks/notifications-center.php:605
+#: inc/admin/blocks/notifications-center.php:642
+#: inc/admin/blocks/notifications-center.php:690
+#: inc/admin/blocks/notifications-center.php:708
+msgid "Medium impact"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:218
-#: inc/admin/blocks/notifications-center.php:252
-#: inc/admin/blocks/notifications-center.php:329
-#: inc/admin/blocks/notifications-center.php:393
-#: inc/admin/blocks/notifications-center.php:442
-#: inc/admin/blocks/notifications-center.php:462
-#: inc/admin/blocks/notifications-center.php:481
-#: inc/admin/blocks/notifications-center.php:500
-#: inc/admin/blocks/notifications-center.php:519
-#: inc/admin/blocks/notifications-center.php:634
-#: inc/admin/blocks/notifications-center.php:653
-#: inc/admin/blocks/notifications-center.php:670
-#: inc/admin/blocks/notifications-center.php:701
-#: inc/admin/blocks/notifications-center.php:770
-#: inc/admin/blocks/notifications-center.php:834
-#: inc/admin/blocks/notifications-center.php:852
-#: inc/admin/blocks/notifications-center.php:941
-#: inc/admin/blocks/notifications-center.php:960
-#: inc/admin/blocks/notifications-center.php:1068
+#: inc/admin/blocks/notifications-center.php:162
+#: inc/admin/blocks/notifications-center.php:198
+#: inc/admin/blocks/notifications-center.php:224
+#: inc/admin/blocks/notifications-center.php:277
+#: inc/admin/blocks/notifications-center.php:341
+#: inc/admin/blocks/notifications-center.php:382
+#: inc/admin/blocks/notifications-center.php:402
+#: inc/admin/blocks/notifications-center.php:421
+#: inc/admin/blocks/notifications-center.php:440
+#: inc/admin/blocks/notifications-center.php:459
+#: inc/admin/blocks/notifications-center.php:550
+#: inc/admin/blocks/notifications-center.php:569
+#: inc/admin/blocks/notifications-center.php:586
+#: inc/admin/blocks/notifications-center.php:609
+#: inc/admin/blocks/notifications-center.php:646
+#: inc/admin/blocks/notifications-center.php:694
+#: inc/admin/blocks/notifications-center.php:712
+#: inc/admin/blocks/notifications-center.php:777
+#: inc/admin/blocks/notifications-center.php:796
+#: inc/admin/blocks/notifications-center.php:896
 #: inc/admin/sections/InstantIndexing.php:43
 #: src/Services/ContentAnalysis/RenderGSCInspectUrl.php:30
 msgid "Fix this!"
 msgstr ""
 
+#: inc/admin/blocks/notifications-center.php:191
+msgid "We noticed that some SEO DIVI options are enabled!"
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:192
+msgid "To avoid any SEO conflicts, please disable every SEO option from <strong>DIVI theme options page, SEO tab</strong>."
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:194
+#: inc/admin/blocks/notifications-center.php:219
 #: inc/admin/blocks/notifications-center.php:244
+#: inc/admin/blocks/notifications-center.php:273
+#: inc/admin/blocks/notifications-center.php:310
+#: inc/admin/blocks/notifications-center.php:337
+#: inc/admin/blocks/notifications-center.php:378
+#: inc/admin/blocks/notifications-center.php:398
+#: inc/admin/blocks/notifications-center.php:417
+#: inc/admin/blocks/notifications-center.php:436
+#: inc/admin/blocks/notifications-center.php:455
+#: inc/admin/blocks/notifications-center.php:499
+#: inc/admin/blocks/notifications-center.php:517
+#: inc/admin/blocks/notifications-center.php:546
+#: inc/admin/blocks/notifications-center.php:565
+#: inc/admin/blocks/notifications-center.php:582
+#: inc/admin/blocks/notifications-center.php:666
+#: inc/admin/blocks/notifications-center.php:730
+#: inc/admin/blocks/notifications-center.php:755
+#: inc/admin/blocks/notifications-center.php:773
+#: inc/admin/blocks/notifications-center.php:862
+#: inc/admin/blocks/notifications-center.php:892
+msgid "High impact"
+msgstr ""
+
+#: inc/admin/blocks/notifications-center.php:216
 msgid "TagDiv Composer plugin doesn't use <strong>add_theme_support('title-tag');</strong>"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:245
+#: inc/admin/blocks/notifications-center.php:217
 msgid "Fix this compatibility issue to allow SEOPress generates the correct meta titles."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:277
+#: inc/admin/blocks/notifications-center.php:241
 msgid "Your theme doesn't use <strong>add_theme_support('title-tag');</strong>"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:278
+#: inc/admin/blocks/notifications-center.php:242
 msgid "This error indicates that your theme uses a deprecated function to generate the title tag of your pages. SEOPress will not be able to generate your custom title tags if this error is not fixed."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:285
-#: inc/admin/blocks/notifications-center.php:552
-#: inc/admin/blocks/notifications-center.php:572
-#: inc/admin/blocks/notifications-center.php:590
+#: inc/admin/blocks/notifications-center.php:249
+#: inc/admin/blocks/notifications-center.php:484
+#: inc/admin/blocks/notifications-center.php:504
+#: inc/admin/blocks/notifications-center.php:522
 #: inc/admin/callbacks/Analytics.php:605
 #: inc/admin/callbacks/Analytics.php:702
 #: inc/admin/callbacks/Analytics.php:730
@@ -1320,229 +1340,222 @@ msgstr ""
 msgid "Learn more"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:322
+#: inc/admin/blocks/notifications-center.php:270
 msgid "Your XML sitemap is cached!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:323
+#: inc/admin/blocks/notifications-center.php:271
 msgid "Swift Performance is caching your XML sitemap. You must disable this option to prevent any compatibility issue (Swift Performance > Settings > Caching, General tab)."
 msgstr ""
 
 #. translators: %s name of a SEO plugin (eg: Yoast SEO)
 #. translators: %s name of a WP plugin (eg: IndexNow)
-#: inc/admin/blocks/notifications-center.php:359
-#: inc/admin/blocks/notifications-center.php:386
+#: inc/admin/blocks/notifications-center.php:307
+#: inc/admin/blocks/notifications-center.php:334
 #: inc/admin/sections/InstantIndexing.php:41
 msgid "We noticed that you use <strong>%s</strong> plugin."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:360
+#: inc/admin/blocks/notifications-center.php:308
 msgid "Do you want to migrate all your metadata to SEOPress? Do not use multiple SEO plugins at once to avoid conflicts!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:366
+#: inc/admin/blocks/notifications-center.php:314
 msgid "Migrate!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:387
+#: inc/admin/blocks/notifications-center.php:335
 #: inc/admin/sections/InstantIndexing.php:42
 msgid "To prevent any conflicts with our Indexing feature, please disable it."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:406
+#: inc/admin/blocks/notifications-center.php:354
 msgid "You have enabled 404 cleaning BUT the scheduled task is not running."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:407
+#: inc/admin/blocks/notifications-center.php:355
 msgid "To solve this, please disable and re-enable SEOPress PRO. No data will be lost."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:435
+#: inc/admin/blocks/notifications-center.php:375
 msgid "Enfold theme is not correctly setup for SEO!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:436
+#: inc/admin/blocks/notifications-center.php:376
 msgid "You must disable \"Meta tag robots\" option from Enfold settings (SEO Support tab) to avoid any SEO issues."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:455
+#: inc/admin/blocks/notifications-center.php:395
 msgid "Global meta title missing for several custom post types!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:474
+#: inc/admin/blocks/notifications-center.php:414
 msgid "Global meta description missing for several custom post types!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:493
+#: inc/admin/blocks/notifications-center.php:433
 msgid "Global meta title missing for several taxonomies!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:512
+#: inc/admin/blocks/notifications-center.php:452
 msgid "Global meta description missing for several taxonomies!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:545
+#: inc/admin/blocks/notifications-center.php:477
 msgid "Your site doesn't use an SSL certificate!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:546
+#: inc/admin/blocks/notifications-center.php:478
 msgid "Https is considered by Google as a positive signal for the ranking of your site. It also reassures your visitors for data security, and improves trust."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:548
+#: inc/admin/blocks/notifications-center.php:480
 msgid "Low impact"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:564
+#: inc/admin/blocks/notifications-center.php:496
 msgid "PHP module \"DOM\" is missing on your server."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:565
-#: inc/admin/blocks/notifications-center.php:583
+#: inc/admin/blocks/notifications-center.php:497
+#: inc/admin/blocks/notifications-center.php:515
 msgid "This PHP module, installed by default with PHP, is required by many plugins including SEOPress. Please contact your host as soon as possible to solve this."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:582
+#: inc/admin/blocks/notifications-center.php:514
 msgid "PHP module \"mbstring\" is missing on your server."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:627
+#: inc/admin/blocks/notifications-center.php:543
 msgid "Your site is not visible to Search Engines!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:628
+#: inc/admin/blocks/notifications-center.php:544
 msgid "You have activated the blocking of the indexing of your site. If your site is under development, this is probably normal. Otherwise, check your settings. Delete this notification using the cross on the right if you are not concerned."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:646
+#: inc/admin/blocks/notifications-center.php:562
 msgid "Your site title is empty!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:647
+#: inc/admin/blocks/notifications-center.php:563
 msgid "Your Site Title is used by WordPress, your theme and your plugins including SEOPress. It is an essential component in the generation of title tags, but not only. Enter one!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:663
+#: inc/admin/blocks/notifications-center.php:579
 msgid "Your permalinks are not SEO Friendly! Enable pretty permalinks to fix this."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:664
-#: inc/admin/blocks/notifications-center.php:695
+#: inc/admin/blocks/notifications-center.php:580
+#: inc/admin/blocks/notifications-center.php:603
 msgid "Why is this important? Showing only the summary of each article significantly reduces the theft of your content by third party sites. Not to mention, the increase in your traffic, your advertising revenue, conversions..."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:694
+#: inc/admin/blocks/notifications-center.php:602
 msgid "Your RSS feed shows full text!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:697
-#: inc/admin/blocks/notifications-center.php:766
-#: inc/admin/blocks/notifications-center.php:830
-#: inc/admin/blocks/notifications-center.php:848
-msgid "Medium impact"
-msgstr ""
-
-#: inc/admin/blocks/notifications-center.php:763
+#: inc/admin/blocks/notifications-center.php:639
 msgid "You have activated Google Analytics tracking without adding identifiers!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:764
+#: inc/admin/blocks/notifications-center.php:640
 msgid "Google Analytics will not track your visitors until you finish the configuration."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:795
+#: inc/admin/blocks/notifications-center.php:663
 msgid "Break comments into pages is ON!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:796
+#: inc/admin/blocks/notifications-center.php:664
 msgid "Enabling this option will create duplicate content for each article beyond x comments. This can have a disastrous effect by creating a large number of poor quality pages, and slowing the Google bot unnecessarily, so your ranking in search results."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:802
+#: inc/admin/blocks/notifications-center.php:670
 msgid "Disable this!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:827
+#: inc/admin/blocks/notifications-center.php:687
 msgid "Display more posts per page on homepage and archives"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:828
+#: inc/admin/blocks/notifications-center.php:688
 msgid "To reduce the number pages search engines have to crawl to find all your articles, it is recommended displaying more posts per page. This should not be a problem for your users. Using mobile, we prefer to scroll down rather than clicking on next page links."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:845
+#: inc/admin/blocks/notifications-center.php:705
 msgid "You don't have an XML Sitemap!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:846
+#: inc/admin/blocks/notifications-center.php:706
 msgid "XML Sitemaps are useful to facilitate the crawling of your content by search engine robots. Indirectly, this can benefit your ranking by reducing the crawl bugdet."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:875
+#: inc/admin/blocks/notifications-center.php:727
 msgid "Do you have a Google My Business page? It's free!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:876
+#: inc/admin/blocks/notifications-center.php:728
 msgid "Local Business websites should have a My Business page to improve visibility in search results. Click on the cross on the right to delete this notification if you are not concerned."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:882
+#: inc/admin/blocks/notifications-center.php:734
 msgid "Create your page now!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:916
+#: inc/admin/blocks/notifications-center.php:752
 msgid "Add your site to Google. It's free!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:917
+#: inc/admin/blocks/notifications-center.php:753
 msgid "Is your brand new site online? So reference it as quickly as possible on Google to get your first visitors via Google Search Console. Already the case? Click on the cross on the right to remove this alert."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:923
+#: inc/admin/blocks/notifications-center.php:759
 msgid "Add your site to Search Console!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:934
+#: inc/admin/blocks/notifications-center.php:770
 msgid "Structured data types is not correctly enabled"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:935
+#: inc/admin/blocks/notifications-center.php:771
 msgid "Please enable <strong>Structured Data Types metabox for your posts, pages and custom post types</strong> option in order to use automatic and manual schemas. (SEO > PRO > Structured Data Types (schema.org)"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:953
+#: inc/admin/blocks/notifications-center.php:789
 msgid "You have to enter your licence key to get updates and support"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:954
+#: inc/admin/blocks/notifications-center.php:790
 msgid "Please activate the SEOPress PRO license key to automatically receive updates to guarantee you the best user experience possible."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:984
+#: inc/admin/blocks/notifications-center.php:812
 msgid "Take your SEO to the next level with SEOPress PRO!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:985
+#: inc/admin/blocks/notifications-center.php:813
 msgid "The PRO version of SEOPress allows you to easily manage your structured data (schemas), add a breadcrumb optimized for SEO and accessibility, improve SEO for WooCommerce, gain productivity with our import / export tool from a CSV of your metadata and so much more."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:992
+#: inc/admin/blocks/notifications-center.php:820
 msgid "Upgrade now!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:1031
+#: inc/admin/blocks/notifications-center.php:859
 msgid "A physical robots.txt file has been found"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:1032
+#: inc/admin/blocks/notifications-center.php:860
 msgid "A robots.txt file already exists at the root of your site. We invite you to remove it so SEOPress can handle it virtually."
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:1061
+#: inc/admin/blocks/notifications-center.php:889
 msgid "Your site is not indexable!"
 msgstr ""
 
-#: inc/admin/blocks/notifications-center.php:1062
+#: inc/admin/blocks/notifications-center.php:890
 msgid "Your robots.txt file contains a rule that prevents search engines to index your all site: <code>Disallow: /</code>"
 msgstr ""
 
@@ -1554,23 +1567,23 @@ msgstr ""
 msgid "Hide this"
 msgstr ""
 
-#: inc/admin/blocks/tasks.php:50
+#: inc/admin/blocks/tasks.php:97
 msgid "Activate your license key"
 msgstr ""
 
-#: inc/admin/blocks/tasks.php:56
+#: inc/admin/blocks/tasks.php:102
 msgid "Generate XML sitemaps"
 msgstr ""
 
-#: inc/admin/blocks/tasks.php:62
+#: inc/admin/blocks/tasks.php:107
 msgid "Be social"
 msgstr ""
 
-#: inc/admin/blocks/tasks.php:67
+#: inc/admin/blocks/tasks.php:112
 msgid "Improve Local SEO"
 msgstr ""
 
-#: inc/admin/blocks/tasks.php:73
+#: inc/admin/blocks/tasks.php:117
 msgid "Add Structured Data Types to increase visibility in SERPs"
 msgstr ""
 
@@ -2369,15 +2382,15 @@ msgstr ""
 msgid "Disabling all heatmaps and session recordings"
 msgstr ""
 
-#: inc/admin/callbacks/Analytics.php:1309
+#: inc/admin/callbacks/Analytics.php:1310
 msgid "Add Microsoft Clarity code to your site"
 msgstr ""
 
-#: inc/admin/callbacks/Analytics.php:1323
+#: inc/admin/callbacks/Analytics.php:1324
 msgid "Enter your Project ID"
 msgstr ""
 
-#: inc/admin/callbacks/Analytics.php:1330
+#: inc/admin/callbacks/Analytics.php:1331
 msgid "Find your project ID"
 msgstr ""
 
@@ -2645,12 +2658,8 @@ msgstr ""
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:286
 #: inc/admin/wizard/admin-wizard.php:719
 #: src/Helpers/Metas/RobotSettings.php:19
-#: app/gutenberg/primary-category-select/index.js:75
-#: assets/js/build/primary-category-select.js:1
-#: assets/js/src/primary-category-select.js:58
-#: public/gutenberg/primary-category-select.js:1
-#: public/gutenberg/primary-category-select/index.js:1
-#: assets/js/build/primary-category-select.js:106
+#: app/editor/primary-category-select/index.js:58
+#: public/editor/primary-category-select/index.js:1
 msgid "None (will disable this feature)"
 msgstr ""
 
@@ -2915,7 +2924,7 @@ msgid "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:549
-#: seopress.php:405
+#: seopress.php:406
 msgid "Default"
 msgstr ""
 
@@ -3248,71 +3257,71 @@ msgstr ""
 msgid "eg: https://example.com/my-media-attachment-page"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:155
+#: inc/admin/docs/DocsLinks.php:158
 msgid "Installation of SEOPress"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:156
+#: inc/admin/docs/DocsLinks.php:159
 msgid "Activate your license key to receive automatic updates"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:157
+#: inc/admin/docs/DocsLinks.php:160
 msgid "Configure SEOPress in 5 minutes"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:158
+#: inc/admin/docs/DocsLinks.php:161
 msgid "Migrate your SEO metadata from other plugins"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:159
+#: inc/admin/docs/DocsLinks.php:162
 msgid "Promote the exploration of your WordPress site by search engine robots"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:160
+#: inc/admin/docs/DocsLinks.php:163
 msgid "Optimize content from A to Z with SEOPress"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:161
+#: inc/admin/docs/DocsLinks.php:164
 msgid "Measure your traffic with Google Analytics"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:162
+#: inc/admin/docs/DocsLinks.php:165
 msgid "Add your WordPress site to Google’s index"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:163
+#: inc/admin/docs/DocsLinks.php:166
 msgid "Optimize your click-through rate on social networks"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:164
+#: inc/admin/docs/DocsLinks.php:167
 msgid "Free ebooks to learn SEO"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:167
+#: inc/admin/docs/DocsLinks.php:170
 msgid "Activate your SEOPress Insights license"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:168
+#: inc/admin/docs/DocsLinks.php:171
 msgid "Track your keyword rankings in Google with SEOPress Insights"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:169
+#: inc/admin/docs/DocsLinks.php:172
 msgid "Monitor and analyse your Backlinks with SEOPress Insights"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:170
+#: inc/admin/docs/DocsLinks.php:173
 msgid "Finding SEO keywords for your WordPress site"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:171
+#: inc/admin/docs/DocsLinks.php:174
 msgid "Optimize WordPress posts for a keyword"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:172
+#: inc/admin/docs/DocsLinks.php:175
 msgid "Audit the backlinks of your WordPress site (in WordPress)"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:173
+#: inc/admin/docs/DocsLinks.php:176
 msgid "The importance of backlinks"
 msgstr ""
 
@@ -3654,12 +3663,8 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:334
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:293
 #: src/Helpers/Metas/RobotSettings.php:109
-#: app/gutenberg/primary-category-select/index.js:92
-#: assets/js/build/primary-category-select.js:1
-#: assets/js/src/primary-category-select.js:74
-#: public/gutenberg/primary-category-select.js:1
-#: public/gutenberg/primary-category-select/index.js:1
-#: assets/js/build/primary-category-select.js:118
+#: app/editor/primary-category-select/index.js:74
+#: public/editor/primary-category-select/index.js:1
 msgid "Select a primary category"
 msgstr ""
 
@@ -4284,6 +4289,8 @@ msgstr ""
 
 #: inc/admin/sections/Analytics.php:16
 #: inc/admin/sections/Analytics.php:54
+#: inc/admin/sections/Analytics.php:161
+#: inc/admin/sections/Analytics.php:171
 msgid "Tracking"
 msgstr ""
 
@@ -4297,6 +4304,7 @@ msgid "Ecommerce"
 msgstr ""
 
 #: inc/admin/sections/Analytics.php:18
+#: inc/admin/sections/Analytics.php:162
 msgid "Stats in Dashboard"
 msgstr ""
 
@@ -4364,23 +4372,23 @@ msgstr ""
 msgid "Guide to create custom dimensions in Google Analytics - new window"
 msgstr ""
 
-#: inc/admin/sections/Analytics.php:160
+#: inc/admin/sections/Analytics.php:166
 msgid "Use Matomo to track your users with privacy in mind. We support both On Premise and Cloud installations."
 msgstr ""
 
-#: inc/admin/sections/Analytics.php:165
+#: inc/admin/sections/Analytics.php:176
 msgid "Your <strong>Custom Dimensions</strong> will also work with Matomo tracking code."
 msgstr ""
 
-#: inc/admin/sections/Analytics.php:177
+#: inc/admin/sections/Analytics.php:188
 msgid "Microsoft Clarity"
 msgstr ""
 
-#: inc/admin/sections/Analytics.php:181
+#: inc/admin/sections/Analytics.php:192
 msgid "Use Microsoft Clarity to capture session recordings, get instant heatmaps and powerful Insights for Free. Know how people interact with your site to improve user experience and conversions."
 msgstr ""
 
-#: inc/admin/sections/Analytics.php:186
+#: inc/admin/sections/Analytics.php:197
 msgid "Create your first Microsoft Clarity project <a href=\"%s\" target=\"_blank\">here</a>."
 msgstr ""
 
@@ -4486,6 +4494,38 @@ msgstr ""
 
 #: inc/admin/sections/Sitemaps.php:130
 msgid "Limited to 1,000 posts per post type. You can change the order and sorting criteria below."
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:144
+msgid "How to use the HTML Sitemap?"
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:146
+msgid "Block Editor"
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:147
+msgid "Add the HTML sitemap block using the <strong>Block Editor</strong>."
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:150
+msgid "Shortcode"
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:152
+msgid "You can also use this shortcode in your content (post, page, post type...):"
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:155
+msgid "To include specific custom post types, use the CPT attribute:"
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:158
+msgid "Other"
+msgstr ""
+
+#: inc/admin/sections/Sitemaps.php:159
+msgid "Dynamically display the sitemap by entering an ID to the first field below."
 msgstr ""
 
 #: inc/admin/sections/Sitemaps.php:173
@@ -5058,12 +5098,12 @@ msgid "noindex on attachment pages"
 msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:131
-#: seopress.php:368
+#: seopress.php:369
 msgid "Migration completed!"
 msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:132
-#: seopress.php:370
+#: seopress.php:371
 msgid "Export completed!"
 msgstr ""
 
@@ -5621,23 +5661,23 @@ msgstr ""
 msgid "Please choose a separator"
 msgstr ""
 
-#: inc/functions/options-instant-indexing.php:115
+#: inc/functions/options-instant-indexing.php:119
 msgid "No URLs to submit"
 msgstr ""
 
-#: inc/functions/options-instant-indexing.php:122
+#: inc/functions/options-instant-indexing.php:126
 msgid "No search engines selected"
 msgstr ""
 
-#: inc/functions/options-instant-indexing.php:129
+#: inc/functions/options-instant-indexing.php:133
 msgid "No API key defined from the settings tab"
 msgstr ""
 
-#: inc/functions/options-instant-indexing.php:181
+#: inc/functions/options-instant-indexing.php:185
 msgid "Bing API key is missing"
 msgstr ""
 
-#: inc/functions/options-instant-indexing.php:216
+#: inc/functions/options-instant-indexing.php:220
 msgid "Google API key is missing"
 msgstr ""
 
@@ -5663,61 +5703,69 @@ msgstr ""
 msgid "Page %d of %2$d"
 msgstr ""
 
-#: seopress-functions.php:288
+#: seopress-functions.php:294
 msgid "Custom Post Types"
 msgstr ""
 
-#: seopress-functions.php:292
+#: seopress-functions.php:298
 msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %s: "Custom Post Types" or "Custom Taxonomies" %s: "title" or "description"
-#: seopress-functions.php:336
+#: seopress-functions.php:342
 msgid "Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 
-#: seopress.php:258
+#: seopress.php:259
 msgid "has been successfully updated!"
 msgstr ""
 
-#: seopress.php:369
+#: seopress.php:370
 msgid "Regeneration completed!"
 msgstr ""
 
-#: seopress.php:403
+#: seopress.php:404
 msgid "Clear"
 msgstr ""
 
-#: seopress.php:404
+#: seopress.php:405
 msgid "Clear color"
 msgstr ""
 
-#: seopress.php:406
+#: seopress.php:407
 msgid "Select default color"
 msgstr ""
 
-#: seopress.php:407
+#: seopress.php:408
 msgid "Select Color"
 msgstr ""
 
-#: seopress.php:408
+#: seopress.php:409
 msgid "Color value"
 msgstr ""
 
-#: seopress.php:612
+#: seopress.php:613
 msgid "Docs"
 msgstr ""
 
-#: seopress.php:613
+#: seopress.php:614
 msgid "Configuration Wizard"
 msgstr ""
 
-#: seopress.php:615
+#: seopress.php:616
 msgid "GO PRO!"
 msgstr ""
 
-#: seopress.php:651
+#: seopress.php:652
 msgid "Important changes related to XML sitemaps in version 5.8: <a href=\"%s\" target=\"_blank\">Learn more</a>."
+msgstr ""
+
+#: seopress.php:680
+msgid "A new <strong>SEOPress PRO</strong> update (v<code>6.0</code>) is available (current installed version <code>"
+msgstr ""
+
+#: seopress.php:684
+msgid "Update SEOPress PRO"
 msgstr ""
 
 #: src/Actions/Admin/ManageColumn.php:64
@@ -5799,7 +5847,7 @@ msgid "Keywords in permalink"
 msgstr ""
 
 #: src/Helpers/ContentAnalysis.php:43
-#: app/react/services/content-analysis/heading.js:178
+#: app/react/services/content-analysis/heading.js:206
 msgid "Headings"
 msgstr ""
 
@@ -5809,7 +5857,7 @@ msgid "Social meta tags"
 msgstr ""
 
 #: src/Helpers/ContentAnalysis.php:63
-#: app/react/services/content-analysis/metaRobots.js:257
+#: app/react/services/content-analysis/metaRobots.js:272
 msgid "Meta robots"
 msgstr ""
 
@@ -6017,7 +6065,7 @@ msgid "We found %d Heading 1 (H1) in your content."
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:204
-#: app/react/services/content-analysis/heading.js:139
+#: app/react/services/content-analysis/heading.js:167
 msgid "You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility. Below, the list:"
 msgstr ""
 
@@ -6073,6 +6121,7 @@ msgid "The length of your title is correct"
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:314
+#: app/react/services/content-analysis/heading.js:69
 #: app/react/services/content-analysis/metaTitle.js:46
 msgid "No custom title is set for this post. If the global meta title suits you, you can ignore this recommendation."
 msgstr ""
@@ -6320,6 +6369,7 @@ msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:684
 #: app/react/services/content-analysis/metaRobots.js:86
+#: app/react/services/content-analysis/metaRobots.js:101
 msgid "We found no meta robots on this page. It means, your page is index,follow. Search engines will index it, and follow links. "
 msgstr ""
 
@@ -6918,6 +6968,202 @@ msgstr ""
 msgid "Product SKU"
 msgstr ""
 
+#: app/editor/blocks/faq/edit.js:32
+#: app/editor/blocks/faq/edit.js:75
+msgid "Question..."
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:49
+#: app/editor/blocks/faq/edit.js:92
+msgid "Answer..."
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:60
+#: app/editor/blocks/faq/edit.js:63
+#: app/editor/blocks/faq/edit.js:103
+#: app/editor/blocks/faq/edit.js:106
+msgid "Remove"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:185
+msgid "FAQ Settings"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:186
+msgid "List Style"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:198
+#: public/editor/blocks/faq/index.js:1
+msgctxt "Div tag List"
+msgid "NONE"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:209
+#: public/editor/blocks/faq/index.js:1
+msgctxt "Numbered List"
+msgid "OL"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:220
+#: public/editor/blocks/faq/index.js:1
+msgctxt "Unordered List"
+msgid "UL"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:224
+msgid "Title Wrapper"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:236
+#: public/editor/blocks/faq/index.js:1
+msgctxt "H2 title tag"
+msgid "H2"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:247
+#: public/editor/blocks/faq/index.js:1
+msgctxt "H3 title tag"
+msgid "H3"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:258
+#: public/editor/blocks/faq/index.js:1
+msgctxt "H4 title tag"
+msgid "H4"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:269
+#: public/editor/blocks/faq/index.js:1
+msgctxt "H5 title tag"
+msgid "H5"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:280
+#: public/editor/blocks/faq/index.js:1
+msgctxt "H6 title tag"
+msgid "H6"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:291
+#: public/editor/blocks/faq/index.js:1
+msgctxt "P title tag"
+msgid "P"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:302
+#: public/editor/blocks/faq/index.js:1
+msgctxt "DIV title tag"
+msgid "DIV"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:306
+msgid "Image Size"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:318
+#: public/editor/blocks/faq/index.js:1
+msgctxt "Thubmnail Size"
+msgid "S"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:329
+#: public/editor/blocks/faq/index.js:1
+msgctxt "Medium Size"
+msgid "M"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:340
+#: public/editor/blocks/faq/index.js:1
+msgctxt "Large Size"
+msgid "L"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:351
+#: public/editor/blocks/faq/index.js:1
+msgctxt "Original Size"
+msgid "XL"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:357
+msgid "SEO Settings"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:360
+msgid "Enable FAQ Schema"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:374
+msgid "Enable accordion"
+msgstr ""
+
+#: app/editor/blocks/faq/edit.js:397
+#: app/editor/blocks/faq/edit.js:404
+msgid "Add FAQ"
+msgstr ""
+
+#: app/editor/blocks/faq/image-control.js:70
+#: public/editor/blocks/faq/index.js:1
+msgid "To edit the background image, you need permission to upload media."
+msgstr ""
+
+#: app/editor/blocks/faq/image-control.js:81
+#: app/editor/blocks/faq/image-control.js:96
+#: app/editor/blocks/faq/image-control.js:104
+#: public/editor/blocks/faq/index.js:1
+msgid "Set Image"
+msgstr ""
+
+#: app/editor/blocks/faq/image-control.js:115
+#: public/editor/blocks/faq/index.js:1
+msgid "Remove Image"
+msgstr ""
+
+#: app/editor/blocks/faq/index.js:7
+#: public/editor/blocks/faq/index.js:1
+msgid "FAQ"
+msgstr ""
+
+#: app/editor/blocks/sitemap/edit.js:11
+#: public/editor/blocks/sitemap/index.js:1
+msgid "It looks like the Sitemap feature is not enabled from your SEO settings. You must activate it to use this block. Make sure the HTML sitemap option is also enabled."
+msgstr ""
+
+#: app/editor/blocks/sitemap/edit.js:12
+#: public/editor/blocks/sitemap/index.js:1
+msgid "Review settings"
+msgstr ""
+
+#: app/editor/blocks/sitemap/index.js:6
+#: public/editor/blocks/sitemap/index.js:1
+msgid "Sitemap"
+msgstr ""
+
+#: app/editor/blocks/sitemap/index.js:7
+#: public/editor/blocks/sitemap/index.js:1
+msgid "Display an HTML sitemap."
+msgstr ""
+
+#: app/editor/blocks/sitemap/index.js:8
+#: public/editor/blocks/sitemap/index.js:1
+msgid "sitemap"
+msgstr ""
+
+#: app/editor/blocks/sitemap/index.js:8
+#: public/editor/blocks/sitemap/index.js:1
+msgid "navigation"
+msgstr ""
+
+#: app/editor/blocks/sitemap/inspector.js:17
+#: public/editor/blocks/sitemap/index.js:1
+msgid "Post types to display"
+msgstr ""
+
+#: app/editor/blocks/sitemap/inspector.js:20
+#: public/editor/blocks/sitemap/index.js:1
+msgid "By default, if you have not selected any post types below, we’ll automatically take the ones set from the Sitemap setting page."
+msgstr ""
+
 #: app/react/components/Forms/components/Input/index.js:62
 #: app/react/components/Forms/components/Input/index.js:137
 #: app/react/components/Forms/components/TextArea/index.js:32
@@ -6979,6 +7225,24 @@ msgstr ""
 
 #: app/react/components/Forms/components/Repeater/HowTo/index.js:250
 msgid "Add step"
+msgstr ""
+
+#: app/react/components/Forms/components/Repeater/NegativeNotesReview/index.js:68
+msgid "Your negative statement (required)"
+msgstr ""
+
+#: app/react/components/Forms/components/Repeater/NegativeNotesReview/index.js:115
+#: app/react/components/Forms/components/Repeater/PositiveNotesReview/index.js:115
+msgid "Remove note"
+msgstr ""
+
+#: app/react/components/Forms/components/Repeater/NegativeNotesReview/index.js:136
+#: app/react/components/Forms/components/Repeater/PositiveNotesReview/index.js:136
+msgid "Add a statement"
+msgstr ""
+
+#: app/react/components/Forms/components/Repeater/PositiveNotesReview/index.js:68
+msgid "Your positive statement (required)"
 msgstr ""
 
 #: app/react/components/Forms/MetaTitleDescription/index.js:121
@@ -7165,6 +7429,10 @@ msgstr ""
 msgid "Delete schema"
 msgstr ""
 
+#: app/react/layout/Main/components/SchemasManual/index.js:237
+msgid "It is recommended to enter as many properties as possible to maximize the chances of getting a rich snippet in Google search results."
+msgstr ""
+
 #: app/react/layout/Main/components/SchemasManual/index.js:334
 msgid "Add a schema"
 msgstr ""
@@ -7198,62 +7466,63 @@ msgid_plural "We found %d canonicals URLs in your source code. Below, the list:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/react/services/content-analysis/heading.js:66
-#: app/react/services/content-analysis/heading.js:93
+#: app/react/services/content-analysis/heading.js:63
+#: app/react/services/content-analysis/heading.js:94
+#: app/react/services/content-analysis/heading.js:121
 msgid "Heading"
 msgstr ""
 
-#: app/react/services/content-analysis/heading.js:148
+#: app/react/services/content-analysis/heading.js:176
 msgid "Below the list:"
 msgstr ""
 
 #: app/react/services/content-analysis/metaRobots.js:60
-#: app/react/services/content-analysis/metaRobots.js:223
+#: app/react/services/content-analysis/metaRobots.js:238
 msgid "is off. Google will index the images on this page."
 msgstr ""
 
 #: app/react/services/content-analysis/metaRobots.js:68
-#: app/react/services/content-analysis/metaRobots.js:243
+#: app/react/services/content-analysis/metaRobots.js:258
 msgid "is off. Google will probably display a sitelinks searchbox in search results."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:130
+#: app/react/services/content-analysis/metaRobots.js:145
 msgid "is on! Search engines can't index this page."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:140
+#: app/react/services/content-analysis/metaRobots.js:155
 msgid "is off. Search engines will index this page."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:150
+#: app/react/services/content-analysis/metaRobots.js:165
 msgid "is on! Search engines can't follow your links on this page."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:160
+#: app/react/services/content-analysis/metaRobots.js:175
 msgid "is off. Search engines will follow links on this page."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:170
+#: app/react/services/content-analysis/metaRobots.js:185
 msgid "is on! Search engines will not cache your page."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:180
+#: app/react/services/content-analysis/metaRobots.js:195
 msgid "is off. Search engines will probably cache your page."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:190
+#: app/react/services/content-analysis/metaRobots.js:205
 msgid "is on! Search engines will not display a snippet of this page in search results."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:200
+#: app/react/services/content-analysis/metaRobots.js:215
 msgid "is off. Search engines will display a snippet of this page in search results."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:213
+#: app/react/services/content-analysis/metaRobots.js:228
 msgid "is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed)."
 msgstr ""
 
-#: app/react/services/content-analysis/metaRobots.js:233
+#: app/react/services/content-analysis/metaRobots.js:248
 msgid "is on! Google will not display a sitelinks searchbox in search results."
 msgstr ""
 
@@ -7302,200 +7571,4 @@ msgstr ""
 
 #: app/react/services/content-analysis/socialTags.js:216
 msgid "We found a"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:32
-#: assets/js/src/blocks/faq/edit.js:75
-msgid "Question..."
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:49
-#: assets/js/src/blocks/faq/edit.js:92
-msgid "Answer..."
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:60
-#: assets/js/src/blocks/faq/edit.js:63
-#: assets/js/src/blocks/faq/edit.js:103
-#: assets/js/src/blocks/faq/edit.js:106
-msgid "Remove"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:185
-msgid "FAQ Settings"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:186
-msgid "List Style"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:198
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "Div tag List"
-msgid "NONE"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:209
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "Numbered List"
-msgid "OL"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:220
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "Unordered List"
-msgid "UL"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:224
-msgid "Title Wrapper"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:236
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "H2 title tag"
-msgid "H2"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:247
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "H3 title tag"
-msgid "H3"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:258
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "H4 title tag"
-msgid "H4"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:269
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "H5 title tag"
-msgid "H5"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:280
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "H6 title tag"
-msgid "H6"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:291
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "P title tag"
-msgid "P"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:302
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "DIV title tag"
-msgid "DIV"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:306
-msgid "Image Size"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:318
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "Thubmnail Size"
-msgid "S"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:329
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "Medium Size"
-msgid "M"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:340
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "Large Size"
-msgid "L"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:351
-#: public/gutenberg/blocks/faq/index.js:1
-msgctxt "Original Size"
-msgid "XL"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:357
-msgid "SEO Settings"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:360
-msgid "Enable FAQ Schema"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:374
-msgid "Enable accordion"
-msgstr ""
-
-#: assets/js/src/blocks/faq/edit.js:397
-#: assets/js/src/blocks/faq/edit.js:404
-msgid "Add FAQ"
-msgstr ""
-
-#: assets/js/src/blocks/faq/image-control.js:70
-#: public/gutenberg/blocks/faq/index.js:1
-msgid "To edit the background image, you need permission to upload media."
-msgstr ""
-
-#: assets/js/src/blocks/faq/image-control.js:81
-#: assets/js/src/blocks/faq/image-control.js:96
-#: assets/js/src/blocks/faq/image-control.js:104
-#: public/gutenberg/blocks/faq/index.js:1
-msgid "Set Image"
-msgstr ""
-
-#: assets/js/src/blocks/faq/image-control.js:115
-#: public/gutenberg/blocks/faq/index.js:1
-msgid "Remove Image"
-msgstr ""
-
-#: assets/js/src/blocks/faq/index.js:7
-#: public/gutenberg/blocks/faq/index.js:1
-msgid "FAQ"
-msgstr ""
-
-#: assets/js/src/blocks/sitemap/edit.js:11
-#: public/gutenberg/blocks/sitemap/index.js:1
-msgid "It looks like the Sitemap feature is not enabled from your SEO settings. You must activate it to use this block. Make sure the HTML sitemap option is also enabled."
-msgstr ""
-
-#: assets/js/src/blocks/sitemap/edit.js:12
-#: public/gutenberg/blocks/sitemap/index.js:1
-msgid "Review settings"
-msgstr ""
-
-#: assets/js/src/blocks/sitemap/index.js:6
-#: public/gutenberg/blocks/sitemap/index.js:1
-msgid "Sitemap"
-msgstr ""
-
-#: assets/js/src/blocks/sitemap/index.js:7
-#: public/gutenberg/blocks/sitemap/index.js:1
-msgid "Display an HTML sitemap."
-msgstr ""
-
-#: assets/js/src/blocks/sitemap/index.js:8
-#: public/gutenberg/blocks/sitemap/index.js:1
-msgid "sitemap"
-msgstr ""
-
-#: assets/js/src/blocks/sitemap/index.js:8
-#: public/gutenberg/blocks/sitemap/index.js:1
-msgid "navigation"
-msgstr ""
-
-#: assets/js/src/blocks/sitemap/inspector.js:17
-#: public/gutenberg/blocks/sitemap/index.js:1
-msgid "Post types to display"
-msgstr ""
-
-#: assets/js/src/blocks/sitemap/inspector.js:20
-#: public/gutenberg/blocks/sitemap/index.js:1
-msgid "By default, if you have not selected any post types below, we’ll automatically take the ones set from the Sitemap setting page."
 msgstr ""

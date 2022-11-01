@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 4.7+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 5.9.0.4
+Stable tag: 6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -363,40 +363,34 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 5.9.0.4 =
-* FIX Compatibility with SEOPress for MainWP add-on
-= 5.9.0.3 =
-* FIX Regression with Analytics and Cookie bar
-= 5.9.0.2 =
-* FIX Fatal error "seopress_amp_compatibility_wp" with older versions of SEOPress PRO (< 5.4 - December 2021)
-= 5.9.0.1 =
-* INFO Update GA4 docs link
-* FIX Cookie bar error
-* FIX Matomo Cloud URL
-= 5.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-5-9/">Read the blog post update</a> =
-* NEW Google Analytics v4 widget to get stats in WP Dashboard 🎉
-* NEW HTML Sitemap block for Gutenberg 🎉
-* NEW Compatibility with official AMP plugin (first iteration) 🎉
-* NEW Dozens of user interface and user experience enhancements
-* NEW Swedish language (professional translation) 🇸🇪
-* NEW Option to remove noreferrer attribute on links (SEO, Advanced, Advanced tab)
-* NEW 'seopress_link_attrs' hook to filter link attribute on post_content (https://www.seopress.org/support/hooks/filter-link-attributes-on-post_content/)
-* NEW Add redirection meta to the SEOPress REST API (https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/)
-* INFO Universal SEO metabox: change quick button order 'site separator' and 'site title' to match global settings (UI)
-* INFO Remove 'Disable trailing slash for metas' option from Advanced settings: we now automatically take care of this
-* INFO Disable Bing XML sitemap ping (CRON) if IndexNow is enabled (Instant Indexing)
-* INFO If 'seopress_404_cleaning_query' filter used, the period is now dynamically displayed to the UI
-* INFO Improve Google Preview encoding for universal SEO metabox
-* INFO Oxygen v4 compatibility for keyword density and word counters
-* FIX Uncaught TypeError: array_key_first() /wp-seopress/inc/admin/callbacks/InstantIndexing.php:165
-* FIX Empty xml sub sitemap for product if WC is disabled
-* FIX Bricks builder compatibility: duplicated beacon on homepage
-* FIX Trailingslash for post type archive link in XML sitemaps
-* FIX OG type for products
-* FIX Redirection suggestion URL by using home_url() instead of site_url()
-* FIX Missing addressCountry field for manual Job schema
-* FIX Primary product category
-* FIX Undefined $html variable with Local Business block
-* FIX i18n
+= 6.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-0/">Read the blog post update</a> =
+* NEW Matomo Analytics as a WP Dashboard widget (PRO) 🎉
+* NEW Pros and cons for Product structured data types (PRO) 🎉
+* NEW +2000% performance improvement on frontend 🎉
+* NEW WP Job Manager breadcrumbs compatibility
+* NEW "Stop WordPress to attempt to guess a redirect URL for a 404 request" option (SEO, PRO, Redirections / 404)
+* NEW "seopress_content_analysis_cleaning" hook to run custom action when cleaning content for analysis (https://www.seopress.org/support/hooks/run-custom-action-when-cleaning-content-for-analysis/)
+* INFO Automatically enable by default IndexNow for Bing and Yandex on new installs
+* INFO Exclude TablePress "edit" links from Content Analysis - NoFollow links
+* INFO Update our block icons for the Block Editor
+* INFO Improve Page Speed PDF export
+* INFO Remove log for Page Speed CRON
+* INFO Add a notice if SEOPress PRO version is extremely old to prevent any issues
+* INFO Improve Get started block from SEO Dashboard page
+* INFO We now automatically flush permalinks when saving XML sitemaps global settings
+* INFO Drop support for Oxygen < 4.0 (please update!)
+* FIX Remove duplicated posts in HTML sitemap
+* FIX Warning: Use of undefined constant SEOPRESS_PRO_VERSION - assumed 'SEOPRESS_PRO_VERSION'
+* FIX Regenerate IndexNow key button in specific cases
+* FIX Useless quotes for Post Author name with automatic Recipe schema
+* FIX CSS conflicts with table
+* FIX CSS conflits between Universal SEO metabox and a WP theme
+* FIX Warning on plugin activation related to the significant keywords SQL table
+* FIX Duplicated custom tracking for BODY tag with Oxygen v4
+* FIX Tracking scripts with Oxygen v4
+* FIX Word counters with inline CSS
+* FIX Sitemap block not listing all CPT
+* FIX Test URL redirection button in specific cases
+* FIX Doc links
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

@@ -44,6 +44,15 @@ if (! empty($postslist)) {
 
         foreach ($postslist as $post) {
             setup_postdata($post);
+
+            //Prevent duplicated items
+            if ($cpt_key === 'post' || $cpt_key === 'product') {
+                $tax = $cpt_key ==='product' ? $tax = 'product_cat'  : $tax = 'category';
+                if (!has_term($cat, $tax, $post)) {
+                    continue;
+                }
+            }
+
             $html .= '<li>';
             $html .= '<a href="' . get_permalink($post) . '">' . get_the_title($post) . '</a>';
             if ('1' != seopress_xml_sitemap_html_date_option()) {

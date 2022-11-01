@@ -167,14 +167,24 @@ class seopress_options
         if (defined('SEOPRESS_WPMAIN_VERSION')) {
             return;
         }
-        
+
+        //IndewNow======================================================================================
         $seopress_instant_indexing_option_name = get_option('seopress_instant_indexing_option_name');
 
         //Init if option doesn't exist
         if (false === $seopress_instant_indexing_option_name) {
+            $seopress_instant_indexing_option_name = [];
+
             if ('1' == seopress_get_toggle_option('instant-indexing')) {
-                seopress_instant_indexing_generate_api_key_fn();
+                seopress_instant_indexing_generate_api_key_fn(true);
             }
+
+            $seopress_instant_indexing_option_name['seopress_instant_indexing_automate_submission'] = '1';
+        }
+
+        //Check if the value is an array (important!)
+        if (is_array($seopress_instant_indexing_option_name)) {
+            add_option('seopress_instant_indexing_option_name', $seopress_instant_indexing_option_name);
         }
     }
 
@@ -284,3 +294,19 @@ class seopress_options
 if (is_admin()) {
     $my_settings_page = new seopress_options();
 }
+
+/**
+ * Automatically flush permalinks after saving XML sitemaps global settings
+ * @since 6.0.0
+ *
+ * @param string $option
+ * @param string $old_value
+ * @param string $value
+ *
+ * @return void
+ */
+add_action('updated_option', function( $option, $old_value, $value ) {
+    if ($option ==='seopress_xml_sitemap_option_name') {
+        flush_rewrite_rules(false);
+    }
+}, 10, 3);

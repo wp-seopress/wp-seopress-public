@@ -294,4 +294,18 @@ class TitleOption {
     public function geNoSiteLinksSearchBox(){
         return $this->searchOptionByKey('seopress_titles_nositelinkssearchbox');
     }
+
+    /**
+     * @since 6.0.0
+     */
+    public function getArchiveAuthorDisable(){
+        return $this->searchOptionByKey('seopress_titles_archives_author_disable');
+    }
+
+    /**
+     * @since 6.0.0
+     */
+    public function getArchiveDateDisable(){
+        return $this->searchOptionByKey('seopress_titles_archives_date_disable');
+    }
 }

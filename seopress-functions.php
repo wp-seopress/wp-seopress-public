@@ -214,10 +214,16 @@ function seopress_clean_content_analysis() {
             //Disable wptexturize
             add_filter('run_wptexturize', '__return_false');
 
+            //Remove Edit nofollow links from TablePress
+            add_filter( 'tablepress_edit_link_below_table', '__return_false');
+
             //Oxygen compatibility
             if (function_exists('ct_template_output')) {
                 add_action('template_redirect', 'seopress_get_oxygen_content');
             }
+
+            //Allow user to run custom action to clean content
+            do_action('seopress_content_analysis_cleaning');
         }
     }
 }

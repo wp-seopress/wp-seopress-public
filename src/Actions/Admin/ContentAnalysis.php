@@ -27,7 +27,6 @@ class ContentAnalysis implements ExecuteHooksBackend {
             return $content;
         }
 
-        $content = $content . seopress_get_service('ContentAnalysisAcfFields')->addAcfContent($id);
-        return strip_tags($content);
+        return $content . seopress_get_service('ContentAnalysisAcfFields')->addAcfContent($id);
     }
 }

@@ -43,6 +43,53 @@
         </div>
         <div class="seopress-card-content">
             <?php
+                /**
+                 * Check if XML sitemaps feature is correctly enabled by the user
+                 *
+                 * @since 6.0
+                 * @author Benjamin
+                 *
+                 */
+                function seopress_tasks_sitemaps() {
+                    $options = get_option('seopress_xml_sitemap_option_name');
+                    if (isset($options['seopress_xml_sitemap_general_enable']) && ('1' === seopress_get_toggle_option('xml-sitemap'))) {
+                        return 'done';
+                    }
+
+                    return;
+                }
+
+                /**
+                 * Check if Social Networds feature is correctly enabled by the user
+                 *
+                 * @since 6.0
+                 * @author Benjamin
+                 *
+                 */
+                function seopress_tasks_social_networks() {
+                    $options = get_option('seopress_social_option_name');
+                    if (isset($options['seopress_social_facebook_og']) && ('1' === seopress_get_toggle_option('social'))) {
+                        return 'done';
+                    }
+
+                    return;
+                }
+
+                /**
+                 * Check if Schemas feature is correctly enabled by the user
+                 *
+                 * @since 6.0
+                 * @author Benjamin
+                 *
+                 */
+                function seopress_tasks_schemas() {
+                    $options = get_option('seopress_pro_option_name');
+                    if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && isset($options['seopress_rich_snippets_enable']) && '1' === seopress_get_toggle_option('rich-snippets')) {
+                        return 'done';
+                    }
+
+                    return;
+                }
                 $tasks = [
                     [
                         'done' => ('valid' === get_option('seopress_pro_license_status') && is_plugin_active('wp-seopress-pro/seopress-pro.php') && ! is_multisite()) ? 'done' : '',
@@ -50,14 +97,12 @@
                         'label' => __('Activate your license key', 'wp-seopress'),
                     ],
                     [
-                        $options = get_option('seopress_xml_sitemap_option_name'),
-                        'done' => isset($options['seopress_xml_sitemap_general_enable']) ? 'done' : '',
+                        'done' => seopress_tasks_sitemaps(),
                         'link' => admin_url('admin.php?page=seopress-xml-sitemap'),
                         'label' => __('Generate XML sitemaps', 'wp-seopress'),
                     ],
                     [
-                        $options = get_option('seopress_social_option_name'),
-                        'done' => isset($options['seopress_social_facebook_og']) ? 'done' : '',
+                        'done' => seopress_tasks_social_networks(),
                         'link' => admin_url('admin.php?page=seopress-social'),
                         'label' => __('Be social', 'wp-seopress'),
                     ],
@@ -67,8 +112,7 @@
                         'label' => __('Improve Local SEO', 'wp-seopress'),
                     ],
                     [
-                        $options = get_option('seopress_pro_option_name'),
-                        'done' => (is_plugin_active('wp-seopress-pro/seopress-pro.php') && isset($options['seopress_rich_snippets_enable'])) ? 'done' : '',
+                        'done' => seopress_tasks_schemas(),
                         'link' => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets'),
                         'label' => __('Add Structured Data Types to increase visibility in SERPs', 'wp-seopress'),
                     ]

@@ -5,25 +5,29 @@ if (! defined('ABSPATH')) {
 }
 
 function seopress_register_block_faq() {
-    $asset_file = include SEOPRESS_PLUGIN_DIR_PATH . 'public/gutenberg/blocks/faq/index.asset.php';
+    $path = SEOPRESS_PLUGIN_DIR_PATH . 'public/editor/blocks/faq/index.asset.php';
+    if(!file_exists($path)){
+        return;
+    }
 
+    $asset_file = include_once $path;
     wp_register_script(
-        'wp-seopress-gutenberg-faq-block',
-        SEOPRESS_URL_PUBLIC . '/gutenberg/blocks/faq/index.js',
+        'wp-seopress-faq-block',
+        SEOPRESS_URL_PUBLIC . '/editor/blocks/faq/index.js',
         $asset_file['dependencies'],
         $asset_file['version']
     );
 
     wp_register_style(
-        'wp-seopress-gutenberg-faq-block',
-        SEOPRESS_URL_PUBLIC . '/gutenberg/blocks/faq/index.css',
+        'wp-seopress-faq-block',
+        SEOPRESS_URL_PUBLIC . '/editor/blocks/faq/index.css',
         '',
         $asset_file['version']
     );
 
     register_block_type('wpseopress/faq-block', [
-        'editor_script' => 'wp-seopress-gutenberg-faq-block',
-        'editor_style'  => 'wp-seopress-gutenberg-faq-block',
+        'editor_script' => 'wp-seopress-faq-block',
+        'editor_style'  => 'wp-seopress-faq-block',
         'attributes' => array(
             'faqs' => array(
                 'type'    => 'array',

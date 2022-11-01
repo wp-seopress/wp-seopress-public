@@ -141,22 +141,22 @@ function print_section_info_html_sitemap()
 
 
 <div class="seopress-notice">
-        <h3><?php _e('How to use the HTML Sitemap?', 'wp-seopress-pro'); ?></h3>
+        <h3><?php _e('How to use the HTML Sitemap?', 'wp-seopress'); ?></h3>
 
-        <h4><?php _e('Block Editor', 'wp-seopress-pro'); ?></h4>
-        <p><?php _e('Add the HTML sitemap block using the <strong>Block Editor</strong>.', 'wp-seopress-pro'); ?></p>
+        <h4><?php _e('Block Editor', 'wp-seopress'); ?></h4>
+        <p><?php _e('Add the HTML sitemap block using the <strong>Block Editor</strong>.', 'wp-seopress'); ?></p>
 
         <hr>
-        <h4><?php _e('Shortcode', 'wp-seopress-pro'); ?></h4>
+        <h4><?php _e('Shortcode', 'wp-seopress'); ?></h4>
 
-        <p><?php _e('You can also use this shortcode in your content (post, page, post type...):', 'wp-seopress-pro'); ?></p>
+        <p><?php _e('You can also use this shortcode in your content (post, page, post type...):', 'wp-seopress'); ?></p>
         <pre>[seopress_html_sitemap]</pre>
 
-        <p><?php _e('To include specific custom post types, use the CPT attribute:', 'wp-seopress-pro'); ?></p>
+        <p><?php _e('To include specific custom post types, use the CPT attribute:', 'wp-seopress'); ?></p>
         <pre>[seopress_html_sitemap cpt="post,product"]</pre>
 
-        <h4><?php _e('Other', 'wp-seopress-pro'); ?></h4>
-        <p><?php _e('Dynamically display the sitemap by entering an ID to the first field below.', 'wp-seopress-pro'); ?></p>
+        <h4><?php _e('Other', 'wp-seopress'); ?></h4>
+        <p><?php _e('Dynamically display the sitemap by entering an ID to the first field below.', 'wp-seopress'); ?></p>
     </div>
 <?php
 }

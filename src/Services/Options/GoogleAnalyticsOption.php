@@ -653,6 +653,14 @@ class GoogleAnalyticsOption
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getMatomoAuthToken() {
+        return $this->searchOptionByKey('seopress_google_analytics_matomo_widget_auth_token');
+    }
+
+    /**
      * @since 5.9.0
      *
      * @return string
@@ -687,5 +695,4 @@ class GoogleAnalyticsOption
     public function getAuthSecretId() {
         return $this->searchOptionByKey('seopress_google_analytics_auth_secret_id');
     }
-
 }
