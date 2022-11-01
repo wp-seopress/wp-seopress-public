@@ -164,6 +164,10 @@ class seopress_options
 
     public function set_default_values()
     {
+        if (defined('SEOPRESS_WPMAIN_VERSION')) {
+            return;
+        }
+        
         $seopress_instant_indexing_option_name = get_option('seopress_instant_indexing_option_name');
 
         //Init if option doesn't exist

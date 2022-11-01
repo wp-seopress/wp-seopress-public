@@ -12,6 +12,10 @@ if ( ! defined('ABSPATH')) {
  *
  */
 function seopress_xml_sitemaps_ping_cron_action() {
+    //Disable if MainWP add-on is enabled
+    if (defined('SEOPRESS_WPMAIN_VERSION')) {
+        return;
+    }
 
     //If site is set to noindex globally
     if ('1' === seopress_global_noindex_option() || '0' === get_option('blog_public')) {
