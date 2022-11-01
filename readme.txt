@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 6.0.1
+Stable tag: 6.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -363,6 +363,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.0.2 =
+* FIX AIOSEO import tool
 = 6.0.1 =
 * INFO Bump min version of WP required to 5.0+
 * INFO WPML compatibility for translated archive links in XML sitemaps (thanks to @wpml)

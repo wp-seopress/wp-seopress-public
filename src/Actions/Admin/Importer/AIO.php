@@ -31,7 +31,7 @@ class AIO implements ExecuteHooksBackend {
         global $wpdb;
         $args = [
             'posts_per_page' => $increment,
-            'post_type'      => 'testimonials',
+            'post_type'      => 'any',
             'post_status'    => 'any',
             'offset'         => $offset,
         ];
