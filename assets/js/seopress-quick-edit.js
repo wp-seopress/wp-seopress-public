@@ -47,7 +47,7 @@
                 $(':input[name="seopress_nofollow"]', $edit_row).attr('checked', 'checked');
             }
 
-            if ($seopress_redirections_enable && $seopress_redirections_enable == '<span class="dashicons dashicons-yes"></span>') {
+            if ($seopress_redirections_enable && $seopress_redirections_enable == '<span class="dashicons dashicons-yes-alt"></span>') {
                 $(':input[name="seopress_redirections_enabled"]', $edit_row).attr('checked', 'checked');
             }
             if ($seopress_redirections_regex_enable && $seopress_redirections_regex_enable == '<span class="dashicons dashicons-yes"></span>') {

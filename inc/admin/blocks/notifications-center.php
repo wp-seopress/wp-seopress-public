@@ -297,6 +297,7 @@
                 'platinum-seo-pack/platinum-seo-pack.php'        => 'Platinum SEO Pack',
                 'smartcrawl-seo/wpmu-dev-seo.php'                => 'SmartCrawl',
                 'seo-pressor/seo-pressor.php'                    => 'SEOPressor',
+                'slim-seo/slim-seo.php'                          => 'Slim SEO'
             ];
 
             foreach ($seo_plugins as $key => $value) {

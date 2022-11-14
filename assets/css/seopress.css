@@ -27,7 +27,7 @@
 
 #adminmenu div.wp-menu-image.dashicons-admin-seopress::before {
     content: "\e800";
-    font-family: seopress;
+    font-family: seopress !important;
     font-weight: 700;
     font-size: 12px;
     line-height: 20px;
@@ -235,7 +235,7 @@ body .seopress-option h3 {
 #seopress_content_analysis textarea,
 #seopress_cpt input[type="text"],
 #seopress_cpt textarea,
-#seopress_pro_cpt input[type="text"],
+#seopress_pro_cpt input[type="text"]:not(.hidden),
 #seopress_pro_cpt textarea {
     width: 100%;
     display: inline-block;
@@ -554,20 +554,38 @@ table.fixed thead .column-seopress_noindex {
     box-sizing: border-box;
 }
 
+#seopress_ga_dashboard_widget .seopress-summary-item:nth-child(even),
 #seopress_matomo_dashboard_widget .seopress-summary-item:nth-child(even) {
     border-right: none;
 }
 
+#seopress_ga_dashboard_widget .seopress-summary-item:nth-last-child(2),
+#seopress_ga_dashboard_widget .seopress-summary-item:last-child,
 #seopress_matomo_dashboard_widget .seopress-summary-item:nth-last-child(2),
 #seopress_matomo_dashboard_widget .seopress-summary-item:last-child {
     border-bottom: none;
 }
 
+#tab_seopress_analytics .spinner,
+#tab_seopress_matomo .spinner {
+    top: 10px;
+    position: relative;
+    left: 10px;
+}
+
+#tab_seopress_analytics .wrap-chart-stat,
+#tab_seopress_matomo .wrap-chart-stat {
+    padding: 0 1rem;
+}
+
 @media only screen and (max-width: 782px) {
+
+    #seopress_ga_dashboard_widget .seopress-summary-item,
     #seopress_matomo_dashboard_widget .seopress-summary-item {
         border-right: none;
     }
 
+    #seopress_ga_dashboard_widget .seopress-summary-item:nth-last-child(2),
     #seopress_matomo_dashboard_widget .seopress-summary-item:nth-last-child(2) {
         border-bottom: 1px solid var(--borderColorLight40);
     }
@@ -2087,7 +2105,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 .seopress_social_twitter_img_upload:hover::after {
     content: "\f464";
     position: absolute;
-    font-family: "dashicons";
+    font-family: "Dashicons";
     width: 100%;
     height: 100%;
     top: 0;
@@ -2369,6 +2387,8 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     border-radius: 3px;
     color: var(--colorDark);
     font-size: var(--fontSize);
+    word-break: break-all;
+    white-space: pre-line;
     /* display: none; */
 }
 
@@ -2388,6 +2408,10 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     width: 100%;
     max-width: 64rem;
     margin: 0 auto;
+}
+
+.wrap-seopress-tab-content .seopress-tools-card {
+    padding: 16px 25px;
 }
 
 #seopress-tabs .seopress-tab {

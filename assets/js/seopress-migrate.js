@@ -107,6 +107,7 @@ jQuery(document).ready(function ($) {
         "platinum-seo",
         "smart-crawl",
         "seopressor",
+        "slim-seo",
         "metadata",
     ];
     seo_plugins.forEach(function (item) {
@@ -218,6 +219,15 @@ jQuery(document).ready(function ($) {
                     action = "seopress_seopressor_migration";
                     _ajax_nonce =
                         seopressAjaxMigrate.seopress_seopressor_migrate
+                            .seopress_nonce;
+                    break;
+                case "seopress-slim-seo-migrate":
+                    url =
+                        seopressAjaxMigrate.seopress_slim_seo_migrate
+                            .seopress_slim_seo_migration;
+                    action = "seopress_slim_seo_migration";
+                    _ajax_nonce =
+                        seopressAjaxMigrate.seopress_slim_seo_migrate
                             .seopress_nonce;
                     break;
                 case "seopress-metadata-migrate":

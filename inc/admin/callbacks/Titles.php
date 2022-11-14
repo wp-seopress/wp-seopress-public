@@ -50,6 +50,24 @@ function seopress_titles_home_site_title_callback()
     <?php echo seopress_render_dyn_variables('tag-title');
 }
 
+function seopress_titles_home_site_title_alt_callback()
+{
+    $options = get_option('seopress_titles_option_name');
+    $check   = isset($options['seopress_titles_home_site_title_alt']) ? $options['seopress_titles_home_site_title_alt'] : null;
+    $docs = seopress_get_docs_links();
+    ?>
+
+<input type="text" id="seopress_titles_home_site_title_alt"
+    name="seopress_titles_option_name[seopress_titles_home_site_title_alt]"
+    placeholder="<?php esc_html_e('My alternative site title', 'wp-seopress'); ?>"
+    aria-label="<?php _e('Alternative site title', 'wp-seopress'); ?>"
+    value="<?php esc_html_e($check); ?>" />
+
+    <p class="description"><?php printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the <a href="%s" target="_blank">content guidelines</a>.<span class="dashicons dashicons-external"></span>','wp-seopress'), $docs['titles']['alt_title']); ?></p>
+
+    <?php
+}
+
 function seopress_titles_home_site_desc_callback()
 {
     $options = get_option('seopress_titles_option_name');

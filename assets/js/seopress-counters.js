@@ -961,6 +961,7 @@ jQuery(document).ready(function (e) {
                         "",
                         sp_ca_toggle
                     ),
+                    e('#seopress-wrap-notice-target-kw').load(" #seopress-notice-target-kw", ''),
                     e(".analysis-score p").removeClass("loading"),
                     e(" #seopress_titles_title_counters_val").remove(),
                     e(" #seopress_titles_desc_counters_val").remove(),

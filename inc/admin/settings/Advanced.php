@@ -454,4 +454,14 @@ if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
             'seopress-settings-admin-advanced-security' // Page
         );
     }
+
+    if (version_compare($actual_version, '6.1', '>=')) {
+        add_settings_section(
+            'seopress_setting_section_advanced_security_matomo', // ID
+            '',
+            //__("Security","wp-seopress"), // Title
+            'print_section_info_advanced_security_matomo', // Callback
+            'seopress-settings-admin-advanced-security' // Page
+        );
+    }
 }

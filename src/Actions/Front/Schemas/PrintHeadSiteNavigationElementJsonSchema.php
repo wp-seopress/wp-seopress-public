@@ -45,6 +45,10 @@ class PrintHeadSiteNavigationElementJsonSchema implements ExecuteHooksFrontend {
         $jsons = seopress_get_service('JsonSchemaGenerator')->getJsonsEncoded([
             'site-navigation-element'
         ]);
+
+        if ($jsons[0] === '[]') {
+            return;
+        }
         ?>
         <script type="application/ld+json"><?php echo apply_filters('seopress_schemas_site_navigation_element_html', $jsons[0]); ?></script>
         <?php

@@ -49,7 +49,7 @@ class CountTargetKeywordsUse implements ExecuteHooks
         $id   = (int) $request->get_param('id');
         $targetKeywords   =  $request->get_param('keywords');
 
-        $data = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($targetKeywords);
+        $data = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($targetKeywords, $id);
 
         return new \WP_REST_Response($data);
     }

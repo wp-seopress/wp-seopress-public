@@ -68,7 +68,7 @@ class TargetKeywords implements ExecuteHooks
         $id     = $request->get_param('id');
         $targetKeywords   =  array_filter(explode(',', strtolower(get_post_meta($id, '_seopress_analysis_target_kw', true))));
 
-        $data = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($targetKeywords);
+        $data = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($targetKeywords, $id);
 
         return new \WP_REST_Response([
             'value' => $targetKeywords,
@@ -91,7 +91,8 @@ class TargetKeywords implements ExecuteHooks
         }
 
         try {
-            update_post_meta($id, '_seopress_analysis_target_kw', $params['_seopress_analysis_target_kw']);
+            $targetKeywords = implode(',',array_map('trim', explode(',',$params['_seopress_analysis_target_kw'])));
+            update_post_meta($id, '_seopress_analysis_target_kw', $targetKeywords);
 
             return new \WP_REST_Response([
                 'code' => 'success',

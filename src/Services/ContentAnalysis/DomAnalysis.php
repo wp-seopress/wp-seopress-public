@@ -25,7 +25,7 @@ class DomAnalysis
     public function getPostContentAnalyze($id)
     {
         //Get post content (used for Words counter)
-        $content = apply_filters('the_content', get_post_field('post_content', $id));
+        $content = get_post_field('post_content', $id);
 
         //Cornerstone compatibility
         if (is_plugin_active('cornerstone/cornerstone.php')) {
@@ -147,6 +147,7 @@ class DomAnalysis
 
         if (defined('WP_DEBUG') && WP_DEBUG) {
             $data['analyzed_content'] = $postContent;
+            $data['analyzed_content_id'] = $options['id'];
         }
 
         //Keywords density

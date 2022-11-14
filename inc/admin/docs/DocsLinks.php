@@ -47,6 +47,7 @@ function seopress_get_docs_links()
             'titles' => [
                 'thumbnail' => 'https://support.google.com/programmable-search/answer/1626955?hl=fr',
                 'wrong_meta' => 'https://www.seopress.org/fr/support/guides/google-utilise-une-balise-titre-meta-description-incorrecte-dans-les-resultats-de-recherche/' . $utm,
+                'alt_title' => 'https://developers.google.com/search/docs/appearance/site-names#content-guidelines' . $utm,
             ],
             'sitemaps' => [
                 'error' => [
@@ -93,6 +94,7 @@ function seopress_get_docs_links()
                 'metaboxe_ca'         => 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-danalyse-de-contenu-par-types-de-contenu/' . $utm,
                 'metaboxe_data_types' => 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-types-de-donnees-structurees-par-types-de-contenu/' . $utm,
                 'ga_widget'           => 'https://www.seopress.org/fr/support/hooks/filtrer-la-capacite-du-widget-google-analytics-du-tableau-de-bord/' . $utm,
+                'matomo_widget'       => 'https://www.seopress.org/fr/support/hooks/filtrer-capacite-widget-matomo-analytics-dashboard/' . $utm,
             ],
             'google_preview' => [
                 'authentification' => 'https://www.seopress.org/fr/support/hooks/filtrer-la-requete-distante-google-snippet-preview/' . $utm,
@@ -182,6 +184,7 @@ function seopress_get_docs_links()
             'titles' => [
                 'thumbnail' => 'https://support.google.com/programmable-search/answer/1626955?hl=en',
                 'wrong_meta' => 'https://www.seopress.org/support/guides/google-uses-the-wrong-meta-title-meta-description-in-search-results/' . $utm,
+                'alt_title' => 'https://developers.google.com/search/docs/appearance/site-names#content-guidelines' . $utm,
             ],
             'sitemaps' => [
                 'error' => [
@@ -228,6 +231,7 @@ function seopress_get_docs_links()
                 'metaboxe_ca'         => 'https://www.seopress.org/support/hooks/filter-content-analysis-metabox-call-by-post-type/' . $utm,
                 'metaboxe_data_types' => 'https://www.seopress.org/support/hooks/filter-structured-data-types-metabox-call-by-post-type/' . $utm,
                 'ga_widget'           => 'https://www.seopress.org/support/hooks/filter-google-analytics-dashboard-widget-capability/' . $utm,
+                'matomo_widget'       => 'https://www.seopress.org/support/hooks/filter-matomo-analytics-dashboard-widget-capability/' . $utm
             ],
             'google_preview' => [
                 'authentification' => 'https://www.seopress.org/support/hooks/filter-google-snippet-preview-remote-request/' . $utm,

@@ -62,6 +62,18 @@ class GetPost implements ExecuteHooks
             unset($robots['canonical']);
         }
 
+        $primarycat =  '';
+        if(isset($robots['primarycat'])){
+            $primarycat = $robots['primarycat'];
+            unset($robots['primarycat']);
+        }
+
+        $breadcrumbs =  '';
+        if(isset($robots['breadcrumbs'])){
+            $breadcrumbs = $robots['breadcrumbs'];
+            unset($robots['breadcrumbs']);
+        }
+
         $data = [
             "title" => $title,
             "description" => $description,
@@ -69,6 +81,8 @@ class GetPost implements ExecuteHooks
             "og" => $social['og'],
             "twitter" => $social['twitter'],
             "robots" => $robots,
+            "primarycat" => $primarycat,
+            "breadcrumbs" => $breadcrumbs,
             "redirections" => $redirections
         ];
 

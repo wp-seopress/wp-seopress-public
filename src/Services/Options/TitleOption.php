@@ -82,6 +82,15 @@ class TitleOption {
      *
      * @return string
      */
+    public function getHomeSiteTitleAlt() {
+        return $this->searchOptionByKey('seopress_titles_home_site_title_alt');
+    }
+
+    /**
+     * @since 4.4.0
+     *
+     * @return string
+     */
     public function getHomeDescriptionTitle() {
         return $this->searchOptionByKey('seopress_titles_home_site_desc');
     }

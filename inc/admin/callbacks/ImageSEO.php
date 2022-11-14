@@ -57,7 +57,7 @@ function seopress_advanced_advanced_clean_filename_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When send a media, remove accents, spaces, capital letters... and force UTF-8 encoding', 'wp-seopress'); ?>
+    <?php _e('When upload a media, remove accents, spaces, capital letters... and force UTF-8 encoding', 'wp-seopress'); ?>
 </label>
 
 <p class="description">
@@ -81,7 +81,7 @@ function seopress_advanced_advanced_image_auto_title_editor_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When sending an image file, automatically set the title based on the filename', 'wp-seopress'); ?>
+    <?php _e('When uploading an image file, automatically set the title based on the filename', 'wp-seopress'); ?>
 </label>
 
 <p class="description">
@@ -105,7 +105,7 @@ function seopress_advanced_advanced_image_auto_alt_editor_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When sending an image file, automatically set the alternative text based on the filename', 'wp-seopress'); ?>
+    <?php _e('When uploading an image file, automatically set the alternative text based on the filename', 'wp-seopress'); ?>
 </label>
 
 <?php if ( ! is_plugin_active('imageseo/imageseo.php')) {
@@ -157,7 +157,7 @@ function seopress_advanced_advanced_image_auto_caption_editor_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When sending an image file, automatically set the caption based on the filename', 'wp-seopress'); ?>
+    <?php _e('When uploading an image file, automatically set the caption based on the filename', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_advanced_advanced_image_auto_caption_editor'])) {
@@ -176,7 +176,7 @@ function seopress_advanced_advanced_image_auto_desc_editor_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When sending an image file, automatically set the description based on the filename', 'wp-seopress'); ?>
+    <?php _e('When uploading an image file, automatically set the description based on the filename', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_advanced_advanced_image_auto_desc_editor'])) {

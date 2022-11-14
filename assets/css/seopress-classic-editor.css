@@ -1,0 +1,25 @@
+#wp-link-wrap {
+    height: 560px;
+}
+
+#wp-link .link-sponsored,
+#wp-link .link-no-follow,
+#wp-link .link-ugc {
+    padding: 3px 0 0;
+}
+
+.has-text-field #wp-link .query-results {
+    top: 270px;
+}
+
+@media screen and (max-width: 782px) {
+    .has-text-field #wp-link .query-results {
+        top: inherit;
+    }
+
+    #wp-link .link-sponsored,
+    #wp-link .link-no-follow,
+    #wp-link .link-ugc {
+        padding-top: 10px;
+    }
+}

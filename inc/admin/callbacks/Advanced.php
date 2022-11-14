@@ -13,8 +13,13 @@ function seopress_advanced_advanced_replytocom_callback() {
 	checked="yes"
 	<?php } ?>
 	value="1"/>
-	<?php _e('Remove ?replytocom link in source code', 'wp-seopress'); ?>
+
+    <?php _e('Remove ?replytocom link in source code and replace it with a simple anchor', 'wp-seopress'); ?>
 </label>
+
+<p class="description">
+    <?php _e( 'e.g. "https://www.example.com/my-blog-post/?replytocom=10#respond" => "#comment-10"', 'wp-seopress' ); ?>
+</p>
 
 <?php if (isset($options['seopress_advanced_advanced_replytocom'])) {
 		esc_attr($options['seopress_advanced_advanced_replytocom']);
@@ -169,6 +174,8 @@ function seopress_advanced_advanced_wp_generator_callback() {
 	<?php _e('Remove WordPress meta generator in source code', 'wp-seopress'); ?>
 </label>
 
+<pre><?php esc_attr_e('<meta name="generator" content="WordPress 6.0.3" />', 'wp-seopress'); ?></pre>
+
 <?php if (isset($options['seopress_advanced_advanced_wp_generator'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_generator']);
 	}
@@ -246,8 +253,11 @@ function seopress_advanced_advanced_comments_form_link_callback() {
 	<?php } ?>
 	value="1"/>
 
-	<?php _e('Prevent search engines to follow / index the link to the comments form (<em>eg: https://www.example.com/my-blog-post/#respond</em>)', 'wp-seopress'); ?>
+    <?php _e('Prevent search engines to follow / index the link to the comments form', 'wp-seopress'); ?>
+
 </label>
+
+<pre>https://www.example.com/my-blog-post/#respond</pre>
 
 <?php if (isset($options['seopress_advanced_advanced_comments_form_link'])) {
 		esc_attr($options['seopress_advanced_advanced_comments_form_link']);
@@ -266,11 +276,10 @@ function seopress_advanced_advanced_wp_shortlink_callback() {
 	<?php } ?>
 	value="1"/>
 
-	<?php _e('Remove WordPress shortlink meta tag in source code (eg:', 'wp-seopress'); ?>
-	<em>
-		<?php echo esc_attr('<link rel="shortlink" href="https://www.example.com/"/>'); ?>
-	</em>)
+	<?php _e('Remove WordPress shortlink meta tag in source code', 'wp-seopress'); ?>
 </label>
+
+<pre><?php esc_attr_e('<link rel="shortlink" href="https://www.example.com/"/>'); ?></pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_shortlink'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_shortlink']);
@@ -289,11 +298,10 @@ function seopress_advanced_advanced_wp_wlw_callback() {
 	<?php } ?>
 	value="1"/>
 
-	<?php _e('Remove Windows Live Writer meta tag in source code (eg:', 'wp-seopress'); ?>
-	<em>
-		<?php echo esc_attr('<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.example.com/wp-includes/wlwmanifest.xml" />'); ?>
-	</em>)
+	<?php _e('Remove Windows Live Writer meta tag in source code', 'wp-seopress'); ?>
 </label>
+
+<pre><?php esc_attr_e('<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.example.com/wp-includes/wlwmanifest.xml" />'); ?></pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_wlw'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_wlw']);
@@ -312,15 +320,14 @@ function seopress_advanced_advanced_wp_rsd_callback() {
 	<?php } ?>
 	value="1"/>
 
-	<?php _e('Remove Really Simple Discovery meta tag in source code (eg:', 'wp-seopress'); ?>
-	<em>
-		<?php echo esc_attr('<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.example.com/xmlrpc.php?rsd" />'); ?>
-	</em>)
+	<?php _e('Remove Really Simple Discovery meta tag in source code', 'wp-seopress'); ?>
 </label>
 
 <p class="description">
 	<?php _e('WordPress Site Health feature will return a HTTPS warning if you enable this option. This is a false positive of course.', 'wp-seopress'); ?>
 </p>
+
+<pre><?php esc_attr_e('<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.example.com/xmlrpc.php?rsd" />'); ?></pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_rsd'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_rsd']);

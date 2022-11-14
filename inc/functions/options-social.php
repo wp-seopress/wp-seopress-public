@@ -207,19 +207,47 @@ if (function_exists('seopress_titles_nositelinkssearchbox_option') && '1' == seo
 } else {
     function seopress_social_website_option() {
         $target = get_home_url() . '/?s={search_term_string}';
-        echo '<script type="application/ld+json">';
-        echo '{
-				"@context": "' . seopress_check_ssl() . 'schema.org",
-				"@type": "WebSite",
-				"url" : ' . json_encode(get_home_url()) . ',
-				"potentialAction": {
-					"@type": "SearchAction",
-					"target": ' . json_encode($target) . ',
-					"query-input": "required name=search_term_string"
-				}
-			}';
-        echo '</script>';
-        echo "\n";
+        $site_tile = !empty(seopress_get_service('TitleOption')->getHomeSiteTitle()) ? seopress_get_service('TitleOption')->getHomeSiteTitle() : get_bloginfo('name');
+        $alt_site_title = !empty(seopress_get_service('TitleOption')->getHomeSiteTitleAlt()) ? seopress_get_service('TitleOption')->getHomeSiteTitleAlt() : get_bloginfo('name');
+        $site_desc = !empty(seopress_get_service('TitleOption')->getHomeDescriptionTitle()) ? seopress_get_service('TitleOption')->getHomeDescriptionTitle() : get_bloginfo('description');
+
+
+        $variables = null;
+        $variables = apply_filters('seopress_dyn_variables_fn', $variables);
+
+        $seopress_titles_template_variables_array 	= $variables['seopress_titles_template_variables_array'];
+        $seopress_titles_template_replace_array 	= $variables['seopress_titles_template_replace_array'];
+
+        $site_tile = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $site_tile);
+        $alt_site_title = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $alt_site_title);
+        $site_desc = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $site_desc);
+
+        $website_schema = [
+            '@context' => seopress_check_ssl() . 'schema.org',
+            '@type' => 'WebSite',
+            'name' => esc_html($site_tile),
+            'alternateName' => esc_html($alt_site_title),
+            'description' => esc_html($site_desc),
+            'url' => get_home_url(),
+            'potentialAction' => [
+                '@type' => 'SearchAction',
+                'target' => [
+                    '@type' => 'EntryPoint',
+                    'urlTemplate' => $target
+                ],
+                'query-input' => 'required name=search_term_string'
+            ],
+        ];
+
+        $website_schema = apply_filters( 'seopress_schemas_website', $website_schema );
+
+        $jsonld = '<script type="application/ld+json">';
+        $jsonld .= json_encode($website_schema);
+        $jsonld .= '</script>';
+        $jsonld .= "\n";
+
+
+        echo $jsonld;
     }
     if (is_home() || is_front_page()) {
         add_action('wp_head', 'seopress_social_website_option', 1);

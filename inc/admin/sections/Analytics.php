@@ -111,6 +111,11 @@ function print_section_info_google_analytics_custom_dimensions()
     </h2>
 </div>
 
+<div class="seopress-sub-tabs">
+    <a href="#seopress-analytics-cd"><?php _e('Custom Dimensions', 'wp-seopress'); ?></a> |
+    <a href="#seopress-analytics-misc"><?php _e('Misc', 'wp-seopress'); ?></a>
+</div>
+
 <div class="seopress-notice">
     <p>
         <?php _e('All advanced settings work with <strong>Google Analytics</strong> and <strong>Matomo</strong> tracking code.', 'wp-seopress'); ?>
@@ -118,7 +123,7 @@ function print_section_info_google_analytics_custom_dimensions()
 </div>
 
 <hr>
-<h3><?php _e('Custom Dimensions','wp-seopress'); ?></h3>
+<h3 id="seopress-analytics-cd"><?php _e('Custom Dimensions','wp-seopress'); ?></h3>
 
 <p>
     <?php _e('Configure your Google Analytics custom dimensions.', 'wp-seopress'); ?>
@@ -143,7 +148,7 @@ function print_section_info_google_analytics_advanced()
 ?>
 <br>
 <hr>
-<h3><?php _e('Misc','wp-seopress'); ?></h3>
+<h3 id="seopress-analytics-misc"><?php _e('Misc','wp-seopress'); ?></h3>
 
 <?php
 }

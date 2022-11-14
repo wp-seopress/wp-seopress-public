@@ -147,13 +147,13 @@ function seopress_block_faq_render_frontend($attributes)
                 $accordion = $attributes['showAccordion'];
 
                 if ($accordion) {
-                    //Load our inline CSS only once
+                    // Load our inline CSS only once
                     if (!isset($css)) {
                         $css = '<style>.wpseopress-hide {display: none;}.wpseopress-accordion-button{width:100%}</style>';
                         $css = apply_filters( 'seopress_faq_block_inline_css', $css );
                         echo $css;
                     }
-                    //Our simple accordion JS
+                    // Our simple accordion JS
                     wp_enqueue_script('seopress-accordion', SEOPRESS_URL_PUBLIC . '/editor/blocks/faq/accordion.js', '', SEOPRESS_VERSION, true);
                 }
 

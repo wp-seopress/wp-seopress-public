@@ -175,12 +175,12 @@ jQuery(document).ready(function ($) {
     if (typeof sessionStorage != 'undefined') {
         var seopress_admin_tab_session_storage = sessionStorage.getItem("seopress_admin_tab");
 
-        if (clean_hash[1] == '1') { //Notifications Tab
+        if (clean_hash[1] == '1') { //Analytics Tab
             $('#tab_seopress_analytics-tab').addClass("nav-tab-active");
             $('#tab_seopress_analytics').addClass("active");
-        } else if (clean_hash[1] == '2') { //SEO Tools Tab
-            $('#tab_seopress_seo_tools-tab').addClass("nav-tab-active");
-            $('#tab_seopress_seo_tools').addClass("active");
+        } else if (clean_hash[1] == '2') { //Matomo Tab
+            $('#tab_seopress_matomo-tab').addClass("nav-tab-active");
+            $('#tab_seopress_matomo').addClass("active");
         } else if (clean_hash[1] == '3') { //Page Speed Tab
             $('#tab_seopress_ps-tab').addClass("nav-tab-active");
             $('#tab_seopress_ps_tools').addClass("active");
@@ -205,7 +205,7 @@ jQuery(document).ready(function ($) {
         if (clean_hash[1] == 1) {
             sessionStorage.setItem("seopress_admin_tab", 'tab_seopress_analytics');
         } else if (clean_hash[1] == 2) {
-            sessionStorage.setItem("seopress_admin_tab", 'tab_seopress_seo_tools');
+            sessionStorage.setItem("seopress_admin_tab", 'tab_seopress_matomo');
         } else if (clean_hash[1] == 3) {
             sessionStorage.setItem("seopress_admin_tab", 'tab_seopress_ps_tools');
         } else {
@@ -214,25 +214,6 @@ jQuery(document).ready(function ($) {
 
         $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");
         $('#' + hash).addClass("active");
-    });
-    //Request Reverse Domains
-    $('#seopress-reverse-submit').on('click', function () {
-        $.ajax({
-            method: 'GET',
-            url: seopressAjaxReverse.seopress_request_reverse,
-            data: {
-                action: 'seopress_request_reverse',
-                _ajax_nonce: seopressAjaxReverse.seopress_nonce,
-            },
-            success: function (data) {
-                window.location.reload(true);
-            },
-        });
-    });
-    $('#seopress-reverse-submit').on('click', function () {
-        $(this).attr("disabled", "disabled");
-        $('#spinner-reverse.spinner').css("visibility", "visible");
-        $('#spinner-reverse.spinner').css("float", "none");
     });
 
     //Drag and drop for cards

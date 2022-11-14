@@ -123,6 +123,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 				'seopress_nonce'						             => wp_create_nonce('seopress_seopressor_migrate_nonce'),
 				'seopress_seopressor_migration'				=> admin_url('admin-ajax.php'),
 			],
+			'seopress_slim_seo_migrate'			=> [
+				'seopress_nonce'						             => wp_create_nonce('seopress_slim_seo_migrate_nonce'),
+				'seopress_slim_seo_migration'				=> admin_url('admin-ajax.php'),
+			],
 			'seopress_metadata_csv'				=> [
 				'seopress_nonce'					        => wp_create_nonce('seopress_export_csv_metadata_nonce'),
 				'seopress_metadata_export'			=> admin_url('admin-ajax.php'),
@@ -611,6 +615,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                             'platinum-seo'     => 'Platinum SEO Pack',
                             'smart-crawl'      => 'SmartCrawl',
                             'seopressor'       => 'SEOPressor',
+                            'slim-seo'         => 'Slim SEO',
                         ];
 
                     echo '<p>
@@ -660,6 +665,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 * Init "Step 2.0: Your site - General".
 	 */
 	public function seopress_setup_site() {
+        $docs = seopress_get_docs_links();
 		$seopress_titles_option = get_option('seopress_titles_option_name');
 		$seopress_social_option = get_option('seopress_social_option_name');
 
@@ -668,6 +674,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 		$site_sep        = isset($seopress_titles_option['seopress_titles_sep']) ? $seopress_titles_option['seopress_titles_sep'] : null;
 		$site_title      = isset($seopress_titles_option['seopress_titles_home_site_title']) ? $seopress_titles_option['seopress_titles_home_site_title'] : null;
+		$alt_site_title  = isset($seopress_titles_option['seopress_titles_home_site_title_alt']) ? $seopress_titles_option['seopress_titles_home_site_title_alt'] : null;
 		$knowledge_type  = isset($seopress_social_option['seopress_social_knowledge_type']) ? $seopress_social_option['seopress_social_knowledge_type'] : null;
 		$knowledge_name  = isset($seopress_social_option['seopress_social_knowledge_name']) ? $seopress_social_option['seopress_social_knowledge_name'] : null;
 		$knowledge_img   = isset($seopress_social_option['seopress_social_knowledge_img']) ? $seopress_social_option['seopress_social_knowledge_img'] : null;
@@ -707,6 +714,15 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <p class="description">
                         <?php _e('The site title will be used by the dynamic variable <strong>%%sitetitle%%</strong> in your title and meta description templates.', 'wp-seopress'); ?>
                     </p>
+
+                    <p>
+                        <label for="alt_site_title"><?php esc_html_e('Alternative site title', 'wp-seopress'); ?></label>
+                        <input type="text" id="alt_site_title" class="location-input" name="alt_site_title"
+                            placeholder="<?php esc_html_e('eg: My alternative site title', 'wp-seopress'); ?>"
+                            required value="<?php echo $alt_site_title; ?>" />
+                    </p>
+
+                    <p class="description"><?php printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the <a href="%s" target="_blank">content guidelines</a>.<span class="dashicons dashicons-external"></span>','wp-seopress'), $docs['titles']['alt_title']); ?></p>
 
                     <p>
                         <label for="knowledge_type"><?php esc_html_e('Person or organization', 'wp-seopress'); ?></label>
@@ -795,6 +811,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		//Titles
 		$seopress_titles_option['seopress_titles_sep']             = isset($_POST['site_sep']) ? esc_attr(wp_unslash($_POST['site_sep'])) : '';
 		$seopress_titles_option['seopress_titles_home_site_title'] = isset($_POST['site_title']) ? sanitize_text_field(wp_unslash($_POST['site_title'])) : '';
+		$seopress_titles_option['seopress_titles_home_site_title_alt'] = isset($_POST['alt_site_title']) ? sanitize_text_field(wp_unslash($_POST['alt_site_title'])) : '';
 
 		//Social
 		$seopress_social_option['seopress_social_knowledge_type']   = isset($_POST['knowledge_type']) ? esc_attr(wp_unslash($_POST['knowledge_type'])) : '';

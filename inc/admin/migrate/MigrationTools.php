@@ -24,13 +24,13 @@ function seopress_migration_tool($plugin, $name) {
     if ('wp-meta-seo' != $plugin && 'seo-ultimate' != $plugin) {
         $html .= '<li>' . __('Meta Robots (noindex, nofollow...)', 'wp-seopress') . '</li>';
     }
-    if ('wp-meta-seo' != $plugin && 'seo-ultimate' != $plugin) {
+    if ('wp-meta-seo' != $plugin && 'seo-ultimate' != $plugin && 'slim-seo' != $plugin) {
         $html .= '<li>' . __('Canonical URL', 'wp-seopress') . '</li>';
     }
-    if ('wp-meta-seo' != $plugin && 'seo-ultimate' != $plugin && 'squirrly' != $plugin) {
+    if ('wp-meta-seo' != $plugin && 'seo-ultimate' != $plugin && 'squirrly' != $plugin && 'slim-seo' != $plugin) {
         $html .= '<li>' . __('Focus / target keywords', 'wp-seopress') . '</li>';
     }
-    if ('wp-meta-seo' != $plugin && 'premium-seo-pack' != $plugin && 'seo-ultimate' != $plugin && 'squirrly' != $plugin && 'seo-framework' != $plugin && 'aio' != $plugin) {
+    if ('wp-meta-seo' != $plugin && 'premium-seo-pack' != $plugin && 'seo-ultimate' != $plugin && 'squirrly' != $plugin && 'seo-framework' != $plugin && 'aio' != $plugin && 'slim-seo' != $plugin) {
         $html .= '<li>' . __('Primary category', 'wp-seopress') . '</li>';
     }
     if ('wpseo' == $plugin || 'platinum-seo' == $plugin || 'smart-crawl' == $plugin || 'seopressor' == $plugin || 'rk' == $plugin || 'seo-framework' == $plugin || 'aio' == $plugin) {

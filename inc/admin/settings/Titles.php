@@ -28,6 +28,14 @@ add_settings_field(
 );
 
 add_settings_field(
+    'seopress_titles_home_site_title_alt', // ID
+    __('Alternative site title', 'wp-seopress'), // Title
+    'seopress_titles_home_site_title_alt_callback', // Callback
+    'seopress-settings-admin-titles-home', // Page
+    'seopress_setting_section_titles_home' // Section
+);
+
+add_settings_field(
     'seopress_titles_home_site_desc', // ID
     __('Meta description', 'wp-seopress'), // Title
     'seopress_titles_home_site_desc_callback', // Callback

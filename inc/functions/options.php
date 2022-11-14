@@ -405,7 +405,7 @@ if ('1' == seopress_get_toggle_option('xml-sitemap')) {
         require_once dirname(__FILE__) . '/options-sitemap.php'; //XML / HTML Sitemap
     }
 }
-if ('1' == seopress_get_toggle_option('advanced')) {
+if ('1' === seopress_get_toggle_option('advanced')) {
     //Remove comment author url
     function seopress_advanced_advanced_comments_author_url_option()
     {
@@ -751,7 +751,7 @@ if ('1' == seopress_get_toggle_option('advanced')) {
                     $category_base = 'product-category';
                 }
 
-                $category_base = apply_filters('seopress_remove_category_base', $category_base);
+                $category_base = apply_filters('seopress_remove_product_category_base', $category_base);
 
                 if ('/' == substr($category_base, 0, 1)) {
                     $category_base = substr($category_base, 1);

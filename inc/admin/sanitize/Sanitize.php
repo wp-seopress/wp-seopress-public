@@ -9,6 +9,7 @@ function seopress_sanitize_options_fields($input){
         'seopress_social_facebook_img_attachment_width',
         'seopress_social_facebook_img_attachment_height',
         'seopress_titles_home_site_title',
+        'seopress_titles_home_site_title_alt',
         'seopress_titles_home_site_desc',
         'seopress_titles_archives_author_title',
         'seopress_titles_archives_author_desc',

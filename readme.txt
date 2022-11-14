@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdu
 Donate link: https://www.seopress.org/
 Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content analysis, instant indexing, breadcrumbs, analytics, rich snippets, broken link
 Requires at least: 5.0+
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.0.2
+Stable tag: 6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -247,6 +247,7 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Platinum SEO Pack</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">SmartCrawl</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">SEOPressor</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Slim SEO</a></li>
 </ul>
 
 <h3>Help and support</h3>
@@ -301,7 +302,7 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 
 = Can I import my post and term metadata from other plugins? =
 
-You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">WP Meta SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">wpSEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Platinum SEO Pack</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SmartCrawl</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SEOPressor</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
+You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">WP Meta SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">wpSEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Platinum SEO Pack</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SmartCrawl</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SEOPressor</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Slim SEO</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
 
 = How to use Google Tag Manager / Facebook Pixel with SEOPress? =
 
@@ -363,44 +364,32 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.0.2 =
-* FIX AIOSEO import tool
-= 6.0.1 =
-* INFO Bump min version of WP required to 5.0+
-* INFO WPML compatibility for translated archive links in XML sitemaps (thanks to @wpml)
-* FIX Compatibility with SEOPress for MainWP add-on
-* FIX Accordion.js error for FAQ block
-* FIX Doc links
-* FIX Slow file_get_contents request for robots.txt on very specific server configuration
-* FIX Warning from Review.php file
-= 6.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-0/">Read the blog post update</a> =
-* NEW Matomo Analytics as a WP Dashboard widget (PRO) 🎉
-* NEW Pros and cons for Product structured data types (PRO) 🎉
-* NEW +2000% performance improvement on frontend 🎉
-* NEW WP Job Manager breadcrumbs compatibility
-* NEW "Stop WordPress to attempt to guess a redirect URL for a 404 request" option (SEO, PRO, Redirections / 404)
-* NEW "seopress_content_analysis_cleaning" hook to run custom action when cleaning content for analysis (https://www.seopress.org/support/hooks/run-custom-action-when-cleaning-content-for-analysis/)
-* INFO Automatically enable by default IndexNow for Bing and Yandex on new installs
-* INFO Exclude TablePress "edit" links from Content Analysis - NoFollow links
-* INFO Update our block icons for the Block Editor
-* INFO Improve Page Speed PDF export
-* INFO Remove log for Page Speed CRON
-* INFO Add a notice if SEOPress PRO version is extremely old to prevent any issues
-* INFO Improve Get started block from SEO Dashboard page
-* INFO We now automatically flush permalinks when saving XML sitemaps global settings
-* INFO Drop support for Oxygen < 4.0 (please update!)
-* FIX Remove duplicated posts in HTML sitemap
-* FIX Warning: Use of undefined constant SEOPRESS_PRO_VERSION - assumed 'SEOPRESS_PRO_VERSION'
-* FIX Regenerate IndexNow key button in specific cases
-* FIX Useless quotes for Post Author name with automatic Recipe schema
-* FIX CSS conflicts with table
-* FIX CSS conflits between Universal SEO metabox and a WP theme
-* FIX Warning on plugin activation related to the significant keywords SQL table
-* FIX Duplicated custom tracking for BODY tag with Oxygen v4
-* FIX Tracking scripts with Oxygen v4
-* FIX Word counters with inline CSS
-* FIX Sitemap block not listing all CPT
-* FIX Test URL redirection button in specific cases
-* FIX Doc links
+= 6.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-1/">Read the blog post update</a> =
+* NEW Support for Site names in Google Search
+* NEW PHP 8.1 compatibility
+* NEW Add "nofollow", "UGC", "sponsored" link attributes with Classic Editor
+* NEW Import SEO metadata from Slim SEO plugin
+* NEW Add a notice to content analysis metabox if a target keyword is already used from another content
+* NEW 'seopress_pro_breadcrumbs_terms' hook to filter terms taxonomy from the Breadcrumbs (https://www.seopress.org/support/hooks/filter-taxonomy-terms-in-the-breadcrumbs/)
+* NEW 'seopress_schemas_website' hook to filter Website schema (https://www.seopress.org/support/hooks/filter-website-schema/)
+* NEW 'seopress_matomo_dashboard_widget_cap' hook to filter Matomo Analytics capability (https://www.seopress.org/support/hooks/filter-matomo-analytics-dashboard-widget-capability/)
+* INFO Update Website schema to follow new Google guidelines
+* INFO Update GA4 stats in dashboard CSS widget
+* INFO REST API: add custom breadcrumbs, attachment ID, image width and image height to post and term metadata endpoints
+* INFO Add post/page/post type/term ID as third item for each crumbs of the Breadcrumbs for better flexibility
+* INFO Remove request reverse domains from SEO dashboard
+* INFO Improve UI for Redirections manager
+* FIX 404 errors sorting (SEO, Redirections)
+* FIX A user capability issue with Matomo Analytics & Google Analytics widgets
+* FIX Word counters with Elementor in specific cases
+* FIX Undefined SEOPRESS_PRO_VERSION constant
+* FIX Stop showing Matomo widget if no site ID or tracking ID set
+* FIX Improve compatibility with Oxygen for Content Analysis
+* FIX Saving attachment ID / width / height for term SEO metadata
+* FIX Saving Service type value for automatic Service schema
+* FIX GA4 stats in dashboard if no GA3 property associated with the Google account
+* FIX i18n
+* FIX WPML configuration file
+* FIX CSS
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

@@ -8,21 +8,6 @@
         if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
             //do nothing
         } else {
-            $sp_versions = get_option('seopress_versions');
-            if (isset($sp_versions['pro']) && version_compare($sp_versions['pro'], '5.7', '<')) {
-                function seopress_google_analytics_dashboard_widget_option() {
-                    $seopress_google_analytics_dashboard_widget_option = get_option('seopress_google_analytics_option_name');
-                    if ( ! empty($seopress_google_analytics_dashboard_widget_option)) {
-                        foreach ($seopress_google_analytics_dashboard_widget_option as $key => $seopress_google_analytics_dashboard_widget_value) {
-                            $options[$key] = $seopress_google_analytics_dashboard_widget_value;
-                        }
-                        if (isset($seopress_google_analytics_dashboard_widget_option['seopress_google_analytics_dashboard_widget'])) {
-                            return $seopress_google_analytics_dashboard_widget_option['seopress_google_analytics_dashboard_widget'];
-                        }
-                    }
-                }
-            }
-
             function seopress_get_hidden_notices_insights_option()
             {
                 $seopress_get_hidden_notices_insights_option = get_option('seopress_notices');
@@ -66,12 +51,23 @@
                     <?php
                         $dashboard_settings_tabs = [
                             'tab_seopress_analytics'        => __('Google Analytics', 'wp-seopress'),
+                            'tab_seopress_matomo'        => __('Matomo Analytics', 'wp-seopress'),
                             'tab_seopress_ps'       => __('PageSpeed', 'wp-seopress'),
-                            'tab_seopress_seo_tools'        => __('SEO Tools', 'wp-seopress'),
                         ];
 
-                        if (seopress_get_toggle_option('google-analytics') !=='1') {
+                        //GA
+                        if (seopress_get_toggle_option('google-analytics') !=='1' || (function_exists('seopress_google_analytics_dashboard_widget_option') && seopress_google_analytics_dashboard_widget_option() === '1')) {
                             unset($dashboard_settings_tabs['tab_seopress_analytics']);
+                        }
+
+                        //Matomo
+                        if (seopress_get_toggle_option('google-analytics') !=='1' || (function_exists('seopress_google_analytics_matomo_dashboard_widget_option') && '1' === seopress_google_analytics_matomo_dashboard_widget_option())) {
+                            unset($dashboard_settings_tabs['tab_seopress_matomo']);
+                        }
+
+                        $matomoID = seopress_get_service('GoogleAnalyticsOption')->getMatomoId() ? seopress_get_service('GoogleAnalyticsOption')->getMatomoId() : null;
+                        if (empty($matomoID)) {
+                            unset($dashboard_settings_tabs['tab_seopress_matomo']);
                         }
                     ?>
 
@@ -102,63 +98,23 @@
 
                     <div class="wrap-seopress-tab-content">
                         <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && seopress_get_toggle_option('google-analytics')) { ?>
-                        <div id="tab_seopress_analytics" class="seopress-tab seopress-analytics <?php if ('tab_seopress_analytics' == $current_tab) {
-                        echo 'active';
-                    } ?>">
-                            <?php if ('1' !== seopress_google_analytics_dashboard_widget_option()) {
-                        $stats = get_transient('seopress_results_google_analytics');
-                        $html  = [];
-                        if (! empty($stats['sessions'])) {
-                            $html[__('Sessions', 'wp-seopress')] = $stats['sessions'];
-                        }
-                        if (! empty($stats['users'])) {
-                            $html[__('Users', 'wp-seopress')] = $stats['users'];
-                        }
-                        if (! empty($stats['pageviews'])) {
-                            $html[__('Page Views', 'wp-seopress')] = $stats['pageviews'];
-                        }
-                        if (! empty($stats['pageviewsPerSession'])) {
-                            $html[__('Page view / session', 'wp-seopress')] = $stats['pageviewsPerSession'];
-                        }
-                        if (! empty($stats['avgSessionDuration'])) {
-                            $html[__('Average session duration', 'wp-seopress')] = $stats['avgSessionDuration'];
-                        }
-                        if (! empty($stats['bounceRate'])) {
-                            $html[__('Bounce rate', 'wp-seopress')] = $stats['bounceRate'];
-                        }
-                        if (! empty($stats['percentNewSessions'])) {
-                            $html[__('New sessions', 'wp-seopress')] = $stats['percentNewSessions'];
-                        } ?>
+                            <div id="tab_seopress_analytics" class="seopress-tab seopress-analytics <?php if ('tab_seopress_analytics' == $current_tab) { echo 'active'; } ?>">
+                                <?php if (function_exists('seopress_google_analytics_dashboard_widget_option') && '1' !== seopress_google_analytics_dashboard_widget_option()) {
+                                    if (function_exists('seopress_ga_dashboard_widget_display')) {
+                                        seopress_ga_dashboard_widget_display();
+                                    }
+                                } ?>
+                            </div>
+                        <?php } ?>
 
-                            <div class="seopress-summary-items">
-                                <?php if (! empty($html)) { ?>
-                                    <?php foreach ($html as $key => $value) { ?>
-                                        <div class="seopress-summary-item">
-                                    <div class="seopress-summary-item-label">
-                                        <?php echo $key; ?>
-                                    </div>
-                                    <div class="seopress-summary-item-data">
-                                        <?php echo $value; ?>
-                                    </div>
-                                    </div>
-                                    <?php } ?>
-                                <?php } else { ?>
-                                    <p class="inside"><?php _e('No stats found', 'wp-seopress'); ?></p>
-                                <?php } ?>
+                        <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && seopress_get_toggle_option('google-analytics')) { ?>
+                            <div id="tab_seopress_matomo" class="seopress-tab seopress-analytics <?php if ('tab_seopress_matomo' == $current_tab) { echo 'active'; } ?>">
+                                <?php if (function_exists('seopress_google_analytics_matomo_dashboard_widget_option') && '1' !== seopress_google_analytics_matomo_dashboard_widget_option() && !empty($matomoID)) {
+                                    if (function_exists('seopress_matomo_dashboard_widget_display')) {
+                                        seopress_matomo_dashboard_widget_display();
+                                    }
+                                } ?>
                             </div>
-                            <?php
-                    } else { ?>
-                            <div class="seopress-summary-items">
-                                <div class="seopress-summary-item">
-                                    <p>
-                                        <a class="btn btnSecondary" href="<?php echo admin_url( 'admin.php?page=seopress-google-analytics#tab=tab_seopress_google_analytics_dashboard' ); ?>">
-                                            <?php _e('Connect Google Analytics','wp-seopress'); ?>
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                            <?php } ?>
-                        </div>
                         <?php } ?>
 
                         <div id="tab_seopress_ps" class="seopress-tab seopress-page-speed inside<?php if ('tab_seopress_ps' == $current_tab) {
@@ -208,86 +164,6 @@
                                 </a>
                             </p>
                         </div>
-
-                        <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') ) { ?>
-                        <div id="tab_seopress_seo_tools" class="seopress-tab seopress-useful-tools inside <?php if ('tab_seopress_seo_tools' == $current_tab) {
-                        echo 'active';
-                    } ?>">
-
-                            <!-- Reverse -->
-                            <div class="widget widget-reverse">
-                                <h3 class="widget-title"><?php _e('Check websites setup on your server', 'wp-seopress'); ?>
-                                </h3>
-
-                                <p>
-                                    <?php
-                                        if ('' != get_transient('seopress_results_reverse')) {
-                                            $seopress_results_reverse = (array) json_decode(get_transient('seopress_results_reverse'));
-
-                                            //Init
-                                            $seopress_results_reverse_remote_ip_address = __('Not found', 'wp-seopress');
-                                            if (isset($seopress_results_reverse['remoteIpAddress'])) {
-                                                $seopress_results_reverse_remote_ip_address = $seopress_results_reverse['remoteIpAddress'];
-                                            }
-
-                                            $seopress_results_reverse_last_scrape = __('No scrape.', 'wp-seopress');
-                                            if (isset($seopress_results_reverse['lastScrape'])) {
-                                                $seopress_results_reverse_last_scrape = $seopress_results_reverse['lastScrape'];
-                                            }
-
-                                            $seopress_results_reverse_domain_count = __('No domain found.', 'wp-seopress');
-                                            if (isset($seopress_results_reverse['domainCount'])) {
-                                                $seopress_results_reverse_domain_count = $seopress_results_reverse['domainCount'];
-                                            }
-
-                                            $seopress_results_reverse_domain_array = '';
-                                            if (isset($seopress_results_reverse['domainArray'])) {
-                                                $seopress_results_reverse_domain_array = $seopress_results_reverse['domainArray'];
-                                            } ?>
-                                <p class="remote-ip">
-                                    <strong>
-                                        <?php _e('Server IP Address: ', 'wp-seopress'); ?>
-                                    </strong>
-                                    <?php echo $seopress_results_reverse_remote_ip_address; ?>
-                                </p>
-
-                                <p class="last-scrape">
-                                    <strong>
-                                        <?php _e('Last scrape: ', 'wp-seopress'); ?>
-                                    </strong>
-                                    <?php echo $seopress_results_reverse_last_scrape; ?>
-                                </p>
-
-                                <p class="domain-count">
-                                    <strong>
-                                        <?php _e('Number of websites on your server: ', 'wp-seopress'); ?>
-                                    </strong>
-                                    <?php echo $seopress_results_reverse_domain_count; ?>
-                                </p>
-                                <?php if ('' != $seopress_results_reverse_domain_array) { ?>
-                                <ul>
-                                    <?php foreach ($seopress_results_reverse_domain_array as $key => $value) { ?>
-                                    <li>
-                                        <span class="dashicons dashicons-minus"></span>
-                                        <a href="//' . preg_replace('#^https?://#', '', $value[0]) . '" target="_blank">
-                                            <?php echo $value[0]; ?>
-                                        </a>
-                                        <span class="dashicons dashicons-external"></span>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                                <?php }
-                                        }
-                                    ?>
-
-                                <button id="seopress-reverse-submit" type="button" class="btn btnSecondary" name="submit">
-                                    <?php _e('Get list', 'wp-seopress'); ?>
-                                </button>
-
-                                <span id="spinner-reverse" class="spinner"></span>
-                            </div>
-                        </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>

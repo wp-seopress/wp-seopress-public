@@ -145,6 +145,7 @@ jQuery(document).ready(function ($) {
                         $('#seopress_cpt #seopress_robots_canonical_meta').attr('placeholder', s.data.canonical),
 
                         $('#seopress-analysis-tabs').load(" #seopress-analysis-tabs-1", '', sp_ca_toggle),
+                        $('#seopress-wrap-notice-target-kw').load(" #seopress-notice-target-kw", ''),
                         $(".analysis-score p").removeClass('loading')
                 },
             });

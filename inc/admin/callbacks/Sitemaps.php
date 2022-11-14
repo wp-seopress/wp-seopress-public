@@ -145,19 +145,13 @@ function seopress_xml_sitemap_post_types_list_callback()
 
     $check = isset($options['seopress_xml_sitemap_post_types_list']);
 
-    global $wp_post_types;
+    $postTypes = seopress_get_service('WordPressData')->getPostTypes();
 
-    $args = [
-        'show_ui' => true,
-        'public'  => true,
-    ];
+    $postTypes[] = get_post_type_object('attachment');
 
-    $output       = 'objects'; // names or objects, note names is the default
-    $operator     = 'and'; // 'and' or 'or'
+    $postTypes = apply_filters( 'seopress_sitemaps_cpt', $postTypes );
 
-    $post_types = apply_filters( 'seopress_sitemaps_cpt', get_post_types($args, $output, $operator) );
-
-    foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) { ?>
+    foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) { ?>
 <h3>
     <?php echo $seopress_cpt_value->labels->name; ?>
     <em><small>[<?php echo $seopress_cpt_value->name; ?>]</small></em>
@@ -207,14 +201,9 @@ function seopress_xml_sitemap_taxonomies_list_callback()
 
     $check = isset($options['seopress_xml_sitemap_taxonomies_list']);
 
-    $args = [
-        'show_ui' => true,
-        'public'  => true,
-    ];
+    $taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
 
-    $output         = 'objects'; // or objects
-    $operator       = 'and'; // 'and' or 'or'
-    $taxonomies     = apply_filters( 'seopress_sitemaps_tax', get_taxonomies($args, $output, $operator) );
+    $taxonomies = apply_filters( 'seopress_sitemaps_tax', $taxonomies );
 
     foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) { ?>
 <h3>

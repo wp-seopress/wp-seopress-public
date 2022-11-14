@@ -15,11 +15,17 @@ class SocialMeta
             case '_seopress_social_fb_title':
             case '_seopress_social_fb_desc':
             case '_seopress_social_fb_img':
+            case '_seopress_social_fb_img_attachment_id':
+            case '_seopress_social_fb_img_width':
+            case '_seopress_social_fb_img_height':
                 return 'og';
 
             case '_seopress_social_twitter_title':
             case '_seopress_social_twitter_desc':
             case '_seopress_social_twitter_img':
+            case '_seopress_social_twitter_img_attachment_id':
+            case '_seopress_social_twitter_img_width':
+            case '_seopress_social_twitter_img_height':
                 return "twitter";
         }
     }
@@ -35,6 +41,15 @@ class SocialMeta
             case '_seopress_social_fb_img':
             case '_seopress_social_twitter_img':
                 return "image";
+            case '_seopress_social_fb_img_attachment_id':
+            case '_seopress_social_twitter_img_attachment_id':
+                return "attachment_id";
+            case '_seopress_social_fb_img_width':
+            case '_seopress_social_twitter_img_width':
+                return "image_width";
+            case '_seopress_social_fb_img_height':
+            case '_seopress_social_twitter_img_height':
+                return "image_height";
         }
     }
 

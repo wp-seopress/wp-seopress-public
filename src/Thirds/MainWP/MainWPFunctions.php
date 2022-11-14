@@ -3,7 +3,7 @@ if ( ! defined('ABSPATH')) {
     exit;
 }
 
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.4', '<')) { //Quick fix to prevent fatal error for SEOPress < 5.4
+if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && defined('SEOPRESS_PRO_VERSION') && version_compare(SEOPRESS_PRO_VERSION, '5.4', '<')) { //Quick fix to prevent fatal error for SEOPress < 5.4
     //do nothing
 } else {
     /**

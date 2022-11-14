@@ -695,7 +695,6 @@ function seopress_get_oygen_content_v4($data, $content = ""){
  */
 function seopress_get_oxygen_content() {
     if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
-
         if (!empty(get_post_meta(get_the_ID(), 'ct_builder_json', true))) {
             $oxygen_content = get_post_meta(get_the_ID(), 'ct_builder_json', true);
             $seopress_get_the_content = seopress_get_oygen_content_v4(json_decode($oxygen_content, true));
@@ -703,12 +702,11 @@ function seopress_get_oxygen_content() {
             $seopress_get_the_content = ct_template_output(true); //shortcodes?
         }
 
+        //Get post content
         if ( ! $seopress_get_the_content) {
-            //Get post content
             $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', get_the_ID()));
+            $seopress_get_the_content = normalize_whitespace(wp_strip_all_tags($seopress_get_the_content));
         }
-
-        $seopress_get_the_content = normalize_whitespace(wp_strip_all_tags($seopress_get_the_content));
 
         if ($seopress_get_the_content) {
             //Get Target Keywords

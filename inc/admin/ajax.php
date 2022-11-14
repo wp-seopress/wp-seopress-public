@@ -148,7 +148,7 @@ function seopress_do_real_preview()
                     add_filter('run_wptexturize', '__return_false');
 
                     //Get post content (used for Words counter)
-                    $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', $seopress_get_the_id));
+                    $seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
                     $seopress_get_the_content = apply_filters('seopress_dom_analysis_get_post_content', $seopress_get_the_content);
 
                     //Cornerstone compatibility
@@ -207,14 +207,8 @@ function seopress_do_real_preview()
 
                         $seopress_analysis_target_kw = apply_filters( 'seopress_content_analysis_target_keywords', $seopress_analysis_target_kw, $seopress_get_the_id );
 
-                        //Manage keywords with special characters
-                        foreach ($seopress_analysis_target_kw as $key => $kw) {
-                            $kw                            = str_replace('-', ' ', $kw); //remove dashes
-                            $seopress_analysis_target_kw[] = htmlspecialchars_decode($kw, ENT_QUOTES);
-                        }
 
-                        //Remove duplicates
-                        $seopress_analysis_target_kw = array_unique($seopress_analysis_target_kw);
+                        $data['target_kws_count'] = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($seopress_analysis_target_kw, $seopress_get_the_id);
                     }
 
                     $xpath = new DOMXPath($dom);
@@ -814,6 +808,7 @@ add_action('wp_ajax_seopress_video_xml_sitemap_regenerate', 'seopress_video_xml_
 
 require_once __DIR__ . '/ajax-migrate/smart-crawl.php';
 require_once __DIR__ . '/ajax-migrate/seopressor.php';
+require_once __DIR__ . '/ajax-migrate/slim-seo.php';
 require_once __DIR__ . '/ajax-migrate/platinum.php';
 require_once __DIR__ . '/ajax-migrate/wpseo.php';
 require_once __DIR__ . '/ajax-migrate/premium-seo-pack.php';

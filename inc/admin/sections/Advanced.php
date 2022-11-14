@@ -25,6 +25,15 @@ function print_section_info_advanced_appearance()
         <?php _e('Appearance', 'wp-seopress'); ?>
     </h2>
 </div>
+
+<div class="seopress-sub-tabs">
+    <a href="#seopress-advanced-metaboxes"><?php _e('Metaboxes', 'wp-seopress'); ?></a> |
+    <a href="#seopress-advanced-adminbar"><?php _e('Admin bar', 'wp-seopress'); ?></a> |
+    <a href="#seopress-advanced-seo-dashboard"><?php _e('SEO Dashboard', 'wp-seopress'); ?></a> |
+    <a href="#seopress-advanced-columns"><?php _e('Columns', 'wp-seopress'); ?></a> |
+    <a href="#seopress-advanced-misc"><?php _e('Misc', 'wp-seopress'); ?></a>
+</div>
+
 <p>
     <?php _e('Customize the plugin to fit your needs.', 'wp-seopress'); ?>
 </p>
@@ -40,7 +49,19 @@ function print_section_info_advanced_security()
         <?php _e('Security', 'wp-seopress'); ?>
     </h2>
 </div>
-<h3>
+
+<div class="seopress-sub-tabs">
+    <a href="#seopress-security-metaboxes"><?php _e('SEOPress metaboxes', 'wp-seopress'); ?></a> |
+    <a href="#seopress-security-settings"><?php _e('SEOPress settings pages', 'wp-seopress'); ?></a>
+</div>
+
+<p>
+    <?php _e('Control access to SEO settings and metaboxes by user roles.', 'wp-seopress'); ?>
+</p>
+
+<hr>
+
+<h3 id="seopress-security-metaboxes">
     <?php _e('SEOPress metaboxes', 'wp-seopress'); ?>
 </h3>
 
@@ -57,7 +78,7 @@ function print_section_info_advanced_security_roles()
 
 <hr>
 
-<h3>
+<h3 id="seopress-security-settings">
     <?php _e('SEOPress settings pages', 'wp-seopress'); ?>
 </h3>
 
@@ -72,7 +93,7 @@ function print_section_info_advanced_appearance_col()
 { ?>
 <hr>
 
-<h3>
+<h3 id="seopress-advanced-columns">
     <?php _e('Columns', 'wp-seopress'); ?>
 </h3>
 
@@ -85,7 +106,7 @@ function print_section_info_advanced_appearance_metabox()
 { ?>
 <hr>
 
-<h3>
+<h3 id="seopress-advanced-metaboxes">
     <?php _e('Metaboxes', 'wp-seopress'); ?>
 </h3>
 
@@ -98,7 +119,7 @@ function print_section_info_advanced_appearance_dashboard()
 { ?>
 <hr>
 
-<h3>
+<h3 id="seopress-advanced-seo-dashboard">
     <?php _e('SEO Dashboard', 'wp-seopress'); ?>
 </h3>
 
@@ -111,7 +132,7 @@ function print_section_info_advanced_appearance_admin_bar()
 { ?>
 <hr>
 
-<h3>
+<h3 id="seopress-advanced-adminbar">
     <?php _e('Admin bar', 'wp-seopress'); ?>
 </h3>
 
@@ -124,7 +145,7 @@ function print_section_info_advanced_appearance_misc()
 { ?>
 <hr>
 
-<h3>
+<h3 id="seopress-advanced-misc">
     <?php _e('Misc', 'wp-seopress'); ?>
 </h3>
 

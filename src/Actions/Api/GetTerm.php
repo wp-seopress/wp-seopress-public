@@ -58,6 +58,16 @@ class GetTerm implements ExecuteHooks
             unset($robots['canonical']);
         }
 
+        if(isset($robots['primarycat'])){
+            unset($robots['primarycat']);
+        }
+
+        $breadcrumbs =  '';
+        if(isset($robots['breadcrumbs'])){
+            $breadcrumbs = $robots['breadcrumbs'];
+            unset($robots['breadcrumbs']);
+        }
+
         $data = [
             "title" => $title,
             "description" => $description,
@@ -65,6 +75,7 @@ class GetTerm implements ExecuteHooks
             "og" => $social['og'],
             "twitter" => $social['twitter'],
             "robots" => $robots,
+            "breadcrumbs" => $breadcrumbs,
             "redirections" => $redirections
         ];
 

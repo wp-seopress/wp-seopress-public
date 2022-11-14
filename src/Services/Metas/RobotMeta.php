@@ -26,6 +26,10 @@ class RobotMeta
                 return 'noimageindex';
             case '_seopress_robots_canonical':
                 return 'canonical';
+            case '_seopress_robots_primary_cat':
+                return 'primarycat';
+            case '_seopress_robots_breadcrumbs':
+                return 'breadcrumbs';
         }
 
         return null;

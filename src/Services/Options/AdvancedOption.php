@@ -317,4 +317,11 @@ class AdvancedOption
     public function getSecurityGaWidgetRole(){
         return $this->searchOptionByKey('seopress_advanced_security_ga_widget_role');
     }
+
+    /**
+     * @since 6.1
+     */
+    public function getSecurityMatomoWidgetRole(){
+        return $this->searchOptionByKey('seopress_advanced_security_matomo_widget_role');
+    }
 }

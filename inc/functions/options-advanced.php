@@ -2,6 +2,44 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
+//Attachments redirects
+function seopress_advanced_advanced_attachments_option() {
+	return seopress_get_service('AdvancedOption')->getAdvancedAttachments();
+}
+
+function seopress_redirections_attachments(){
+	if (seopress_advanced_advanced_attachments_option() =='1') {
+		global $post;
+		if ( is_attachment() && isset($post->post_parent) && is_numeric($post->post_parent) && ($post->post_parent != 0) ) {
+	    	wp_redirect( get_permalink( $post->post_parent ), 301 );
+	    	exit();
+		    wp_reset_postdata();
+		} elseif (is_attachment() && isset($post->post_parent) && is_numeric($post->post_parent) && ($post->post_parent == 0)) {
+			wp_redirect(get_home_url(), 302);
+			exit();
+		}
+	}
+}
+add_action( 'template_redirect', 'seopress_redirections_attachments', 2 );
+
+//Attachments redirects to file URL
+/**
+ * @deprecated 5.4.0
+ */
+function seopress_advanced_advanced_attachments_file_option() {
+	return seopress_get_service('AdvancedOption')->getAdvancedAttachmentsFile();
+}
+
+function seopress_redirections_attachments_file(){
+	if (seopress_advanced_advanced_attachments_file_option() =='1') {
+		if ( is_attachment() ) {
+			wp_redirect( wp_get_attachment_url(), 301 );
+			exit();
+		}
+	}
+}
+add_action( 'template_redirect', 'seopress_redirections_attachments_file', 1 );
+
 //Remove reply to com link
 if ('1' == seopress_get_service('AdvancedOption')->getAdvancedReplytocom()) {
     add_filter('comment_reply_link', 'seopress_remove_reply_to_com');
