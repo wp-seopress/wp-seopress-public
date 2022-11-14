@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.1
+Stable tag: 6.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -364,6 +364,10 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.1.1 =
+* FIX Dynamic variables if null
+* FIX wpml-config.xml file with WPML and Polylang (PRO)
+
 = 6.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-1/">Read the blog post update</a> =
 * NEW Support for Site names in Google Search
 * NEW PHP 8.1 compatibility
