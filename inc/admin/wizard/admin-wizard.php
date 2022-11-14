@@ -717,9 +717,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
                     <p>
                         <label for="alt_site_title"><?php esc_html_e('Alternative site title', 'wp-seopress'); ?></label>
-                        <input type="text" id="alt_site_title" class="location-input" name="alt_site_title"
-                            placeholder="<?php esc_html_e('eg: My alternative site title', 'wp-seopress'); ?>"
-                            required value="<?php echo $alt_site_title; ?>" />
+                        <input type="text" id="alt_site_title" class="location-input" name="alt_site_title" placeholder="<?php esc_html_e('eg: My alternative site title', 'wp-seopress'); ?>" value="<?php echo $alt_site_title; ?>" />
                     </p>
 
                     <p class="description"><?php printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the <a href="%s" target="_blank">content guidelines</a>.<span class="dashicons dashicons-external"></span>','wp-seopress'), $docs['titles']['alt_title']); ?></p>
