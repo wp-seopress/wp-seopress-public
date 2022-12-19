@@ -255,7 +255,7 @@ class I18nUniversalMetabox
                             'Target keywords were found in Heading %s (H%s).',
                             "wp-seopress"
                         ),
-                        'heading_hn' => __(`Heading H%s`, "wp-seopress"),
+                        'heading_hn' => __("Heading H%s", "wp-seopress"),
                         'heading' => __("Heading", "wp-seopress"),
                         'no_heading' => __(
                             'No custom title is set for this post. If the global meta title suits you, you can ignore this recommendation.',

@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.2
+Stable tag: 6.2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -369,6 +369,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.2.0.1 =
+* FIX i18n warning
+
 = 6.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-2/">Read the blog post update</a> =
 * NEW Google Search Console iteration #2: add clicks, positions, CTR, impressions columns to post/page/post type (PRO)
 * INFO Add uninstall.php file to clean up database when uninstalling (https://www.seopress.org/support/guides/uninstall-seopress/)
