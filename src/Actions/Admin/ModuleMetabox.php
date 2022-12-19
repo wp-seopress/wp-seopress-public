@@ -56,7 +56,7 @@ class ModuleMetabox implements ExecuteHooks
             }
         }
 
-        $dependencies = ['wp-i18n','jquery-ui-datepicker'];
+        $dependencies = ['jquery-ui-datepicker'];
         if ($isGutenberg) {
             $dependencies = array_merge($dependencies, ['wp-components', 'wp-edit-post', 'wp-plugins']);
         }
@@ -88,6 +88,12 @@ class ModuleMetabox implements ExecuteHooks
         $user = wp_get_current_user();
         $roles = ( array ) $user->roles;
 
+        $postId = is_singular() ? get_the_ID() : null;
+        $postType = null;
+        if($postId){
+            $postType = get_post_type($postId);
+        }
+
         $args = array_merge([
             'SEOPRESS_URL_PUBLIC'       => SEOPRESS_URL_PUBLIC,
             'SEOPRESS_URL_ASSETS'     => SEOPRESS_URL_ASSETS,
@@ -97,7 +103,8 @@ class ModuleMetabox implements ExecuteHooks
             'TAGS'                    => array_values($tags),
             'REST_URL'                => rest_url(),
             'NONCE'                   => wp_create_nonce('wp_rest'),
-            'POST_ID'                 => is_singular() ? get_the_ID() : null,
+            'POST_ID'                 => $postId,
+            'POST_TYPE'               => $postType,
             'IS_GUTENBERG'            => apply_filters('seopress_module_metabox_is_gutenberg', $isGutenberg),
             'SELECTOR_GUTENBERG'      => apply_filters('seopress_module_metabox_selector_gutenberg', '.edit-post-header .edit-post-header-toolbar__left'),
             'TOGGLE_MOBILE_PREVIEW' => apply_filters('seopress_toggle_mobile_preview', 1),
@@ -126,10 +133,7 @@ class ModuleMetabox implements ExecuteHooks
         ], $argsLocalize);
 
         wp_localize_script('seopress-metabox', 'SEOPRESS_DATA', $args);
-
-        if (function_exists('wp_set_script_translations')) {
-            wp_set_script_translations('seopress-metabox', 'wp-seopress', SEOPRESS_PLUGIN_DIR_PATH . 'languages/');
-        }
+        wp_localize_script('seopress-metabox', 'SEOPRESS_I18N', seopress_get_service('I18nUniversalMetabox')->getTranslations());
     }
 
     /**

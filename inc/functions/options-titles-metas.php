@@ -1242,33 +1242,6 @@ function seopress_titles_single_cpt_thumb_gcs() {
 }
 add_action('wp_head', 'seopress_titles_single_cpt_thumb_gcs', 1);
 
-//noodp
-function seopress_titles_noodp_option() {
-    return seopress_get_service('TitleOption')->getTitleNoOdp();
-}
-
-function seopress_titles_noodp_post_option() {
-    $_seopress_robots_odp = get_post_meta(get_the_ID(), '_seopress_robots_odp', true);
-    if ('yes' == $_seopress_robots_odp) {
-        return $_seopress_robots_odp;
-    }
-}
-
-function seopress_titles_noodp_bypass() {
-    $page_id = get_option('page_for_posts');
-    if (seopress_titles_noodp_option()) {
-        return seopress_titles_noodp_option();
-    } elseif (is_singular() && seopress_titles_noodp_post_option()) {
-        return seopress_titles_noodp_post_option();
-    } elseif (is_home() && '' != get_post_meta($page_id, '_seopress_robots_odp', true)) { //BLOG PAGE
-        return get_post_meta($page_id, '_seopress_robots_odp', true);
-    } elseif (is_tax() || is_category() || is_tag()) {
-        if ('yes' == get_term_meta(get_queried_object()->{'term_id'}, '_seopress_robots_odp', true)) {
-            return get_term_meta(get_queried_object()->{'term_id'}, '_seopress_robots_odp', true);
-        }
-    }
-}
-
 //noarchive
 function seopress_titles_noarchive_option() {
     return seopress_get_service('TitleOption')->getTitleNoArchive();
@@ -1323,6 +1296,33 @@ function seopress_titles_nosnippet_bypass() {
     }
 }
 
+//noimageindex
+function seopress_titles_noimageindex_option() {
+    return seopress_get_service('TitleOption')->getTitleNoImageIndex();
+}
+
+function seopress_titles_noimageindex_post_option() {
+    $_seopress_robots_imageindex = get_post_meta(get_the_ID(), '_seopress_robots_imageindex', true);
+    if ('yes' == $_seopress_robots_imageindex) {
+        return $_seopress_robots_imageindex;
+    }
+}
+
+function seopress_titles_noimageindex_bypass() {
+    if (seopress_titles_noimageindex_option()) {
+        return seopress_titles_noimageindex_option();
+    } elseif (is_singular() && seopress_titles_noimageindex_post_option()) {
+        return seopress_titles_noimageindex_post_option();
+    } elseif (is_tax() || is_category() || is_tag()) {
+        $queried_object = get_queried_object();
+        if (null != $queried_object) {
+            if ('yes' == get_term_meta($queried_object->term_id, '_seopress_robots_imageindex', true)) {
+                return get_term_meta($queried_object->term_id, '_seopress_robots_imageindex', true);
+            }
+        }
+    }
+}
+
 //Polylang
 function seopress_remove_hreflang_polylang($hreflangs) {
     $hreflangs = [];
@@ -1350,14 +1350,6 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
             }
             array_push($seopress_comma_array, $seopress_titles_nofollow);
         }
-        if ('' != seopress_titles_noodp_bypass()) {
-            $seopress_titles_noodp = 'noodp';
-            //Hook on meta robots noodp - 'seopress_titles_noodp'
-            if (has_filter('seopress_titles_noodp')) {
-                $seopress_titles_noodp = apply_filters('seopress_titles_noodp', $seopress_titles_noodp);
-            }
-            array_push($seopress_comma_array, $seopress_titles_noodp);
-        }
         if ('' != seopress_titles_noarchive_bypass()) {
             $seopress_titles_noarchive = 'noarchive';
             //Hook on meta robots noarchive - 'seopress_titles_noarchive'
@@ -1365,6 +1357,14 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
                 $seopress_titles_noarchive = apply_filters('seopress_titles_noarchive', $seopress_titles_noarchive);
             }
             array_push($seopress_comma_array, $seopress_titles_noarchive);
+        }
+        if ('' != seopress_titles_noimageindex_bypass()) {
+            $seopress_titles_noimageindex = 'noimageindex';
+            //Hook on meta robots noimageindex - 'seopress_titles_noimageindex'
+            if (has_filter('seopress_titles_noimageindex')) {
+                $seopress_titles_noimageindex = apply_filters('seopress_titles_noimageindex', $seopress_titles_noimageindex);
+            }
+            array_push($seopress_comma_array, $seopress_titles_noimageindex);
         }
         if ('' != seopress_titles_nosnippet_bypass()) {
             $seopress_titles_nosnippet = 'nosnippet';
@@ -1455,46 +1455,6 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
         echo $seopress_titles_robots;
     }
     add_action('wp_head', 'seopress_titles_advanced_robots_hook', 1);
-}
-
-//noimageindex
-function seopress_titles_noimageindex_option() {
-    return seopress_get_service('TitleOption')->getTitleNoImageIndex();
-}
-
-function seopress_titles_noimageindex_post_option() {
-    $_seopress_robots_imageindex = get_post_meta(get_the_ID(), '_seopress_robots_imageindex', true);
-    if ('yes' == $_seopress_robots_imageindex) {
-        return $_seopress_robots_imageindex;
-    }
-}
-
-function seopress_titles_noimageindex_bypass() {
-    if (seopress_titles_noimageindex_option()) {
-        return seopress_titles_noimageindex_option();
-    } elseif (is_singular() && seopress_titles_noimageindex_post_option()) {
-        return seopress_titles_noimageindex_post_option();
-    } elseif (is_tax() || is_category() || is_tag()) {
-        $queried_object = get_queried_object();
-        if (null != $queried_object) {
-            if ('yes' == get_term_meta($queried_object->term_id, '_seopress_robots_imageindex', true)) {
-                return get_term_meta($queried_object->term_id, '_seopress_robots_imageindex', true);
-            }
-        }
-    }
-}
-
-if (seopress_titles_noimageindex_bypass() || has_filter('seopress_titles_noimageindex')) {
-    function seopress_titles_advanced_google_hook() {
-        $seopress_titles_noimageindex = '<meta name="google" content="noimageindex" />';
-        //Hook on meta robots noimageindex - 'seopress_titles_noimageindex'
-        if (has_filter('seopress_titles_noimageindex')) {
-            $seopress_titles_noimageindex = apply_filters('seopress_titles_noimageindex', $seopress_titles_noimageindex);
-        }
-        //Return noimageindex tag
-        echo $seopress_titles_noimageindex . "\n";
-    }
-    add_action('wp_head', 'seopress_titles_advanced_google_hook', 1);
 }
 
 //nositelinkssearchbox

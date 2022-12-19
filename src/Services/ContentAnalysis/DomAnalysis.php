@@ -32,6 +32,11 @@ class DomAnalysis
             $content = get_post_field('post_content', $id);
         }
 
+        //ThriveBuilder compatibility
+        if (is_plugin_active('thrive-visual-editor/thrive-visual-editor.php') && empty($content)) {
+            $content = get_post_meta($id, 'tve_updated_post', true);
+        }
+
          //Zion Builder compatibility
          if (is_plugin_active('zionbuilder/zionbuilder.php')) {
             $content = $content . get_post_meta($id, '_zionbuilder_page_elements', true);

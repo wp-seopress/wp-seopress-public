@@ -50,6 +50,7 @@ class Render implements ExecuteHooksFrontend {
                 if ( ! function_exists('seopress_get_service')) {
                     return;
                 }
+
                 /*
                  * @since 4.3.0
                  */
@@ -60,7 +61,14 @@ class Render implements ExecuteHooksFrontend {
                 && array_key_exists(get_query_var('seopress_cpt'), seopress_xml_sitemap_taxonomies_list_option())) {
                 $filename = 'template-xml-sitemaps-single-term.php';
             }
+            else{
+                global $wp_query;
+                $wp_query->set_404();
+                status_header(404);
+                return;
+            }
         }
+
 
         if ($filename === 'template-xml-sitemaps-video-xsl.php') {
             include SEOPRESS_PRO_PLUGIN_DIR_PATH . 'inc/functions/video-sitemap/' . $filename;
@@ -69,6 +77,7 @@ class Render implements ExecuteHooksFrontend {
             include SEOPRESS_PLUGIN_DIR_PATH . 'inc/functions/sitemap/' . $filename;
             exit();
         }
+
     }
 
     /**

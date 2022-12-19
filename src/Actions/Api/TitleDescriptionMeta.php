@@ -89,7 +89,8 @@ class TitleDescriptionMeta implements ExecuteHooks {
                 continue;
             }
 
-            if ($params[$key] ==='') {
+            if (empty($params[$key])) {
+                delete_post_meta($id, $value);
                 continue;
             }
             update_post_meta($id, $value, esc_html($params[$key]));

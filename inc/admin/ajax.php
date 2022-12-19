@@ -156,6 +156,11 @@ function seopress_do_real_preview()
                         $seopress_get_the_content = get_post_field('post_content', $seopress_get_the_id);
                     }
 
+                    //ThriveBuilder compatibility
+                    if (is_plugin_active('thrive-visual-editor/thrive-visual-editor.php') && empty($seopress_get_the_content)) {
+                        $seopress_get_the_content = get_post_meta($seopress_get_the_id, 'tve_updated_post', true);
+                    }
+
                     //Zion Builder compatibility
                     if (is_plugin_active('zionbuilder/zionbuilder.php')) {
                         $seopress_get_the_content = $seopress_get_the_content . get_post_meta($seopress_get_the_id, '_zionbuilder_page_elements', true);
@@ -471,14 +476,6 @@ function seopress_do_real_preview()
                         }
                     }
 
-                    //Meta google noimageindex / nositelinkssearchbox
-                    $meta_google = $xpath->query('//meta[@name="google"]/@content');
-                    if (! empty($meta_google)) {
-                        foreach ($meta_google as $key=>$mgnoimg) {
-                            $data['meta_google'][$key][] = esc_attr($mgnoimg->nodeValue);
-                        }
-                    }
-
                     //nofollow links
                     $nofollow_links = $xpath->query("//a[contains(@rel, 'nofollow') and not(contains(@rel, 'ugc'))]");
                     if (! empty($nofollow_links)) {
@@ -755,11 +752,11 @@ function seopress_video_xml_sitemap_regenerate()
                 return "'" . esc_sql($item) . "'";
             }, $cpt);
 
-            $cpt = implode(",", $cpt);
+            $cpt_string = implode(",", $cpt);
         }
 
         global $wpdb;
-        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts} WHERE post_status IN ('pending', 'draft', 'publish', 'future') AND post_type IN ( $cpt ) ");
+        $total_count_posts = (int) $wpdb->get_var("SELECT count(*) FROM {$wpdb->posts} WHERE post_status IN ('pending', 'draft', 'publish', 'future') AND post_type IN ( $cpt_string ) ");
 
         $increment = 1;
         global $post;

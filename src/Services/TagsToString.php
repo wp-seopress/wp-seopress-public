@@ -72,10 +72,12 @@ class TagsToString {
 
         foreach ($tags[1] as $key => $tag) {
             $value  = $this->getValueFromTag($tag, $context);
-            // if( ! $value) {
-            //     continue;
-            // }
-            $string = str_replace($tags[0][$key], $value, $string);
+            if( ! $value) {
+                $string = str_replace($tags[0][$key], '', $string);
+            }
+            else{
+                $string = str_replace($tags[0][$key], $value, $string);
+            }
         }
 
         return $string;

@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.1.2
+Stable tag: 6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,7 +54,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li><a href="https://www.seopress.org/features/google-analytics/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Google Analytics</strong> and <strong>Matomo</strong></a> with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">GDPR compatibility</a>)</li>
 	<li><strong>Microsoft Clarity integration</strong>: to capture session recordings, get instant heatmaps and powerful Insights for Free. Know how people interact with your site to improve user experience and conversions</li>
     <li><strong>Custom Canonical URL</strong></li>
-	<li><a href="https://www.seopress.org/support/guides/manage-meta-robots/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Meta robots</strong></a> (noindex, nofollow, noodp, noimageindex, noarchive, nosnippet)</li>
+	<li><a href="https://www.seopress.org/support/guides/manage-meta-robots/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Meta robots</strong></a> (noindex, nofollow, noimageindex, noarchive, nosnippet)</li>
 	<li>Build your <a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>custom XML Sitemap</strong></a> to improve search indexing</li>
 	<li><strong>Image XML Sitemaps</strong> to improve search indexing for Google Images</li>
 	<li>Build your custom <strong>HTML Sitemap</strong> to enhanced navigation for visitors and improve search indexing</li>
@@ -79,6 +79,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li><a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results. YouTube videos are automatically added.</li>
 	<li>Internal linking suggestions</li>
     <li>Inspect URL with Google Search Console: get details about crawling, indexing, mobile compatibility, schemas and more.</li>
+    <li>Search Console integration: get insights from your post / page / post type list with clicks, positions, CTR and impressions.</li>
 	<li><strong>Google Suggestions in Content Analysis</strong> to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.</li>
 	<li><a href="https://www.seopress.org/features/google-structured-data-types/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Structured Data types</strong> (schema.org)</a>:
 		<ol>
@@ -325,6 +326,10 @@ For PRO users: support by mail from their customer account.
 
 Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-label/">about SEOPress and GDPR</a>
 
+= Is SEOPress compatible with WordPress multisite? =
+
+Yes!
+
 = Is white label a free feature? =
 
 Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-label/">about SEOPress and the White Label feature</a>
@@ -364,40 +369,31 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.1.2 =
-* FIX Alternative title from Wizard is no longer required
-* FIX Updater "a new version is available" (PRO)
-
-= 6.1.1 =
-* FIX Dynamic variables if null
-* FIX wpml-config.xml file with WPML and Polylang (PRO)
-
-= 6.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-1/">Read the blog post update</a> =
-* NEW Support for Site names in Google Search
-* NEW PHP 8.1 compatibility
-* NEW Add "nofollow", "UGC", "sponsored" link attributes with Classic Editor
-* NEW Import SEO metadata from Slim SEO plugin
-* NEW Add a notice to content analysis metabox if a target keyword is already used from another content
-* NEW 'seopress_pro_breadcrumbs_terms' hook to filter terms taxonomy from the Breadcrumbs (https://www.seopress.org/support/hooks/filter-taxonomy-terms-in-the-breadcrumbs/)
-* NEW 'seopress_schemas_website' hook to filter Website schema (https://www.seopress.org/support/hooks/filter-website-schema/)
-* NEW 'seopress_matomo_dashboard_widget_cap' hook to filter Matomo Analytics capability (https://www.seopress.org/support/hooks/filter-matomo-analytics-dashboard-widget-capability/)
-* INFO Update Website schema to follow new Google guidelines
-* INFO Update GA4 stats in dashboard CSS widget
-* INFO REST API: add custom breadcrumbs, attachment ID, image width and image height to post and term metadata endpoints
-* INFO Add post/page/post type/term ID as third item for each crumbs of the Breadcrumbs for better flexibility
-* INFO Remove request reverse domains from SEO dashboard
-* INFO Improve UI for Redirections manager
-* FIX 404 errors sorting (SEO, Redirections)
-* FIX A user capability issue with Matomo Analytics & Google Analytics widgets
-* FIX Word counters with Elementor in specific cases
-* FIX Undefined SEOPRESS_PRO_VERSION constant
-* FIX Stop showing Matomo widget if no site ID or tracking ID set
-* FIX Improve compatibility with Oxygen for Content Analysis
-* FIX Saving attachment ID / width / height for term SEO metadata
-* FIX Saving Service type value for automatic Service schema
-* FIX GA4 stats in dashboard if no GA3 property associated with the Google account
-* FIX i18n
-* FIX WPML configuration file
-* FIX CSS
+= 6.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-2/">Read the blog post update</a> =
+* NEW Google Search Console iteration #2: add clicks, positions, CTR, impressions columns to post/page/post type (PRO)
+* INFO Add uninstall.php file to clean up database when uninstalling (https://www.seopress.org/support/guides/uninstall-seopress/)
+* INFO Stop saving empty metadata in database
+* INFO Add additional checks for SiteNavigationElement schema generation
+* INFO Update the Google Preview to follow latest changes
+* INFO Remove noodp meta robots
+* INFO Allow users with 'manage_options' cap to change the number of items displayed from SEO, Redirections, Screen options tab
+* INFO Define 'SEOPRESS_WL_ADMIN_HEADER_LOGO' deprecated (https://www.seopress.org/support/hooks/add-your-custom-logo-in-seopress-admin-header/)
+* INFO Disable Content Analysis metabox now also disable significant keywords
+* INFO Remove seopress font to optimize performance
+* INFO Remove '_seopress_robots_primary_cat' from default WP API (we recommand to use our SEOPress REST API instead: https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/)
+* INFO Optimize Twitter Cards
+* FIX Video xml sitemap regeneration process (go to SEO, Tools, Video Sitemap tab, and click Regenerate button if some YouTube videos are missing from the video sitemap)
+* FIX servesCuisine for global Local Business schema (SEO, PRO, Local Business)
+* FIX Do not add the license key to the database if the define 'SEOPRESS_LICENSE_KEY' is used in wp-config.php
+* FIX Add a non breaking space for "Search results:" to breadcrumbs
+* FIX Nginx rewrite rules for XML sitemaps (https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/), thanks to @seobro_agency
+* FIX Returns a 404 error if post type doesn't exist for XML sitemaps
+* FIX Compatibility issue with modal link
+* FIX PHP 8.1: strlen(): Passing null to parameter #1 ($string) of type string is deprecated
+* FIX Thrive Architect compatibility with Content Analysis
+* FIX Compatibility issue with Beaver Builder Ultimate add-on
+* FIX Energy Consumption min/max scale (product schema)
+* FIX Universal SEO Metabox translation
+* FIX Fatal error from Widgets screen if both Polylang and SEOPress enabled
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

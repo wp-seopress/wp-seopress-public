@@ -96,7 +96,7 @@ function print_section_info_xml_sitemap_general()
         <?php _e('Your server uses NGINX. If XML Sitemaps doesn\'t work properly, you need to add this rule to your configuration:', 'wp-seopress'); ?>
     </p>
 
-    <pre>location ~ ([^/]*)sitemap(.*)\.x(m|s)l$ {
+    <pre>location ~ (([^/]*)sitemap(.*)|news|author|video(.*))\.x(m|s)l$ {
 	## SEOPress
 	rewrite ^.*/sitemaps\.xml$ /index.php?seopress_sitemap=1 last;
 	rewrite ^.*/news.xml$ /index.php?seopress_news=$1 last;

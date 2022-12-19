@@ -60,14 +60,6 @@ abstract class RobotSettings {
                 'visible'     => true,
             ],
             [
-                'key'         => '_seopress_robots_odp',
-                'type'        => 'checkbox',
-                'use_default' => $titleOptionService->getTitleNoodp(),
-                'default'     => 'yes',
-                'label'       => __('Do not use Open Directory project metadata for titles or excerpts for this page (noodp)', 'wp-seopress'),
-                'visible'     => true,
-            ],
-            [
                 'key'         => '_seopress_robots_archive',
                 'type'        => 'checkbox',
                 'use_default' => $titleOptionService->getTitleNoArchive(),

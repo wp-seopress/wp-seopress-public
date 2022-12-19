@@ -131,6 +131,13 @@ function seopress_get_docs_links()
                 'google' => 'https://www.seopress.org/fr/support/guides/api-google-instant-indexing-avec-seopress/' . $utm,
                 'api' => 'https://console.cloud.google.com/apis/library/indexing.googleapis.com?hl=fr',
             ],
+            'inspect_url' => [
+                'google' => 'https://www.seopress.org/fr/support/guides/comment-utiliser-lapi-google-inspection-durl-avec-seopress-pro/' . $utm,
+            ],
+            'search_console_api' => [
+                'google' => 'https://www.seopress.org/fr/support/guides/google-search-console-avec-seopress/' . $utm,
+                'api' => 'https://console.cloud.google.com/apis/library/searchconsole.googleapis.com?hl=fr',
+            ],
             'tools' => [
                 'csv_import' => 'https://www.seopress.org/fr/support/guides/importer-metadonnees-csv-seopress-pro/' . $utm,
                 'csv_export' => 'https://www.seopress.org/fr/support/guides/exporter-vos-metadonnees-vers-un-fichier-csv-avec-seopress-pro/' . $utm,
@@ -267,6 +274,13 @@ function seopress_get_docs_links()
             'indexing_api' => [
                 'google' => 'https://www.seopress.org/support/guides/google-indexing-api-with-seopress/' . $utm,
                 'api' => 'https://console.cloud.google.com/apis/library/indexing.googleapis.com?hl=en',
+            ],
+            'inspect_url' => [
+                'google' => 'https://www.seopress.org/support/guides/how-to-use-google-inspect-url-api-with-seopress-pro/' . $utm,
+            ],
+            'search_console_api' => [
+                'google' => 'https://www.seopress.org/support/guides/google-search-console-with-seopress/' . $utm,
+                'api' => 'https://console.cloud.google.com/apis/library/searchconsole.googleapis.com?hl=en',
             ],
             'tools' => [
                 'csv_import' => 'https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/' . $utm,

@@ -96,7 +96,6 @@
     <custom-field action="translate">_seopress_social_twitter_img</custom-field>
     <custom-field action="translate">_seopress_robots_index</custom-field>
     <custom-field action="translate">_seopress_robots_follow</custom-field>
-    <custom-field action="translate">_seopress_robots_odp</custom-field>
     <custom-field action="translate">_seopress_robots_imageindex</custom-field>
     <custom-field action="translate">_seopress_robots_archive</custom-field>
     <custom-field action="translate">_seopress_robots_snippet</custom-field>

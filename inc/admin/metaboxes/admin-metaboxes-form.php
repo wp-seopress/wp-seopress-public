@@ -204,19 +204,21 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
 
                 $gp_title       = '';
                 $gp_permalink   = '';
+                $alt_site_title = !empty(seopress_get_service('TitleOption')->getHomeSiteTitleAlt()) ? seopress_get_service('TitleOption')->getHomeSiteTitleAlt() : get_bloginfo('name');
+
                 if (get_the_title()) {
                     $gp_title       = '<div class="snippet-title-default" style="display:none">' . get_the_title() . ' - ' . get_bloginfo('name') . '</div>';
-                    $gp_permalink   = '<div class="snippet-permalink">' . htmlspecialchars(urldecode(get_permalink())) . '</div>';
+                    $gp_permalink   = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars(urldecode(get_permalink())) . '</div>';
                 } elseif ($tag) {
                     if (false === is_wp_error(get_term_link($tag))) {
                         $gp_title       = '<div class="snippet-title-default" style="display:none">' . $tag->name . ' - ' . get_bloginfo('name') . '</div>';
-                        $gp_permalink   = '<div class="snippet-permalink">' . htmlspecialchars(urldecode(get_term_link($tag))) . '</div>';
+                        $gp_permalink   = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars(urldecode(get_term_link($tag))) . '</div>';
                     }
                 }
 
-                $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="16" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC" width="16" alt="favicon"></div>';
+                $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="18" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC" width="18" alt="favicon"></div>';
                 if (get_site_icon_url(32)) {
-                    $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="16" src="' . get_site_icon_url(32) . '" width="16" alt="favicon"/></div>';
+                    $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="18" src="' . get_site_icon_url(32) . '" width="18" alt="favicon"/></div>';
                 } ?>
 
                                 <div class="wrap-snippet">
@@ -229,7 +231,6 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                         <div class="wrap-meta-desc">
                                             <?php
                         echo $gp_title;
-                        echo $gp_permalink;
 
                         if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
                             echo seopress_display_date_snippet();
@@ -239,9 +240,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                             <div class="snippet-description-custom" style="display:none"></div>
                                             <div class="snippet-description-default" style="display:none"></div>
                                         </div>
-                                        <div class="wrap-post-thumb">
-                                            <?php the_post_thumbnail('full', ['class' => 'snippet-post-thumb']); ?>
-                                        </div>
+                                        <div class="wrap-post-thumb"><?php the_post_thumbnail('full', ['class' => 'snippet-post-thumb']); ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -280,21 +279,12 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             </label>
                         </p>
                         <p>
-                            <label for="seopress_robots_odp_meta">
-                                <input type="checkbox" name="seopress_robots_odp" id="seopress_robots_odp_meta"
-                                    value="yes" <?php echo checked($seopress_robots_odp, 'yes', false); ?>
-                                <?php echo $disabled['robots_odp']; ?>/>
-                                <?php _e('Do not use Open Directory project metadata for titles or excerpts for this page <strong>(noodp)</strong>', 'wp-seopress'); ?>
-                                <?php echo seopress_tooltip(__('"noodp" robots meta tag', 'wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "noodp". <br>Note that Google and Yahoo have stopped considering this tag since the closing of DMOZ directory.', 'wp-seopress'), esc_html('<meta name="robots" content="noodp" />')); ?>
-                            </label>
-                        </p>
-                        <p>
                             <label for="seopress_robots_imageindex_meta">
                                 <input type="checkbox" name="seopress_robots_imageindex"
                                     id="seopress_robots_imageindex_meta" value="yes" <?php echo checked($seopress_robots_imageindex, 'yes', false); ?>
                                 <?php echo $disabled['imageindex']; ?>/>
                                 <?php _e('Do not index images for this page <strong>(noimageindex)</strong>', 'wp-seopress'); ?>
-                                <?php echo seopress_tooltip(__('"noimageindex" robots meta tag', 'wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "noimageindex". <br> Note that your images can always be indexed if they are linked from other pages.', 'wp-seopress'), esc_html('<meta name="google" content="noimageindex" />')); ?>
+                                <?php echo seopress_tooltip(__('"noimageindex" robots meta tag', 'wp-seopress'), __('By checking this option, you will add a meta robots tag with the value "noimageindex". <br> Note that your images can always be indexed if they are linked from other pages.', 'wp-seopress'), esc_html('<meta name="robots" content="noimageindex" />')); ?>
                             </label>
                         </p>
                         <p>
@@ -420,9 +410,9 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <?php _e('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'); ?>
                             </p>
                             <p>
-                                <input type="hidden" name="seopress_social_fb_img_attachment_id" id="seopress_social_fb_img_attachment_id" value="<?php echo esc_html($seopress_social_fb_img_attachment_id); ?>">
-                                <input type="hidden" name="seopress_social_fb_img_width" id="seopress_social_fb_img_width" value="<?php echo esc_html($seopress_social_fb_img_width); ?>">
-                                <input type="hidden" name="seopress_social_fb_img_height" id="seopress_social_fb_img_height" value="<?php echo esc_html($seopress_social_fb_img_height); ?>">
+                                <input type="hidden" name="seopress_social_fb_img_attachment_id" id="seopress_social_fb_img_attachment_id" class="seopress_social_fb_img_attachment_id" value="<?php echo esc_html($seopress_social_fb_img_attachment_id); ?>">
+                                <input type="hidden" name="seopress_social_fb_img_width" id="seopress_social_fb_img_width" class="seopress_social_fb_img_width" value="<?php echo esc_html($seopress_social_fb_img_width); ?>">
+                                <input type="hidden" name="seopress_social_fb_img_height" id="seopress_social_fb_img_height" class="seopress_social_fb_img_height" value="<?php echo esc_html($seopress_social_fb_img_height); ?>">
 
                                 <input id="seopress_social_fb_img_upload"
                                     class="<?php echo seopress_btn_secondary_classes(); ?>"
@@ -539,9 +529,9 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <?php _e('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress'); ?>
                             </p>
                             <p>
-                                <input type="hidden" name="seopress_social_twitter_img_attachment_id" id="seopress_social_twitter_img_attachment_id" value="<?php echo esc_html($seopress_social_twitter_img_attachment_id); ?>">
-                                <input type="hidden" name="seopress_social_twitter_img_width" id="seopress_social_twitter_img_width" value="<?php echo esc_html($seopress_social_twitter_img_width); ?>">
-                                <input type="hidden" name="seopress_social_twitter_img_height" id="seopress_social_twitter_img_height" value="<?php echo esc_html($seopress_social_twitter_img_height); ?>">
+                                <input type="hidden" name="seopress_social_twitter_img_attachment_id" id="seopress_social_twitter_img_attachment_id" class="seopress_social_twitter_img_attachment_id" value="<?php echo esc_html($seopress_social_twitter_img_attachment_id); ?>">
+                                <input type="hidden" name="seopress_social_twitter_img_width" id="seopress_social_twitter_img_width" class="seopress_social_twitter_img_width" value="<?php echo esc_html($seopress_social_twitter_img_width); ?>">
+                                <input type="hidden" name="seopress_social_twitter_img_height" id="seopress_social_twitter_img_height" class="seopress_social_twitter_img_height" value="<?php echo esc_html($seopress_social_twitter_img_height); ?>">
 
                                 <input id="seopress_social_twitter_img_upload"
                                     class="<?php echo seopress_btn_secondary_classes(); ?>"

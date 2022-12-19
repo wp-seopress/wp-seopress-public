@@ -94,6 +94,19 @@ class ManageColumn implements ExecuteHooksBackend
             $columns['seopress_insights'] = __('Insights', 'wp-seopress');
         }
 
+        if (! empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())) {
+            $columns['seopress_search_console_clicks'] = __('Clicks', 'wp-seopress');
+        }
+        if (! empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())) {
+            $columns['seopress_search_console_impressions'] = __('Impressions', 'wp-seopress');
+        }
+        if (! empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())) {
+            $columns['seopress_search_console_ctr'] = __('CTR', 'wp-seopress');
+        }
+        if (! empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())) {
+            $columns['seopress_search_console_position'] = __('Position', 'wp-seopress');
+        }
+
         return $columns;
     }
 
@@ -288,6 +301,46 @@ class ManageColumn implements ExecuteHooksBackend
                         echo '</div>';
                     }
                 }
+                break;
+            case 'seopress_search_console_clicks':
+                $clicks = get_post_meta($post_id, '_seopress_search_console_analysis_clicks', true);
+                if(!$clicks){
+                    echo "0";
+                    return;
+                }
+
+                echo esc_html($clicks);
+
+                break;
+            case 'seopress_search_console_impressions':
+                $impressions = get_post_meta($post_id, '_seopress_search_console_analysis_impressions', true);
+                if(!$impressions){
+                    echo "0";
+                    return;
+                }
+
+                echo esc_html($impressions);
+
+                break;
+            case 'seopress_search_console_ctr':
+                $ctr = get_post_meta($post_id, '_seopress_search_console_analysis_ctr', true);
+                if(!$ctr){
+                    echo "0";
+                    return;
+                }
+
+                echo esc_html(number_format(floatval($ctr)  * 100, 2) . '%');
+
+                break;
+            case 'seopress_search_console_position':
+                $position = get_post_meta($post_id, '_seopress_search_console_analysis_position', true);
+                if(!$position){
+                    echo "0";
+                    return;
+                }
+
+                echo esc_html(number_format(floatval($position), 0));
+
                 break;
         }
     }

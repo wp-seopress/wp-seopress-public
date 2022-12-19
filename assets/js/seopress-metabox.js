@@ -89,28 +89,28 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#seopress-tag-single-title").click(function () {
         $("#seopress_titles_title_meta").val(
             sp_get_field_length($("#seopress_titles_title_meta")) +
-                $("#seopress-tag-single-title").attr("data-tag")
+            $("#seopress-tag-single-title").attr("data-tag")
         );
         $("#seopress_titles_title_meta").trigger("paste");
     });
     $("#seopress-tag-single-site-title").click(function () {
         $("#seopress_titles_title_meta").val(
             sp_get_field_length($("#seopress_titles_title_meta")) +
-                $("#seopress-tag-single-site-title").attr("data-tag")
+            $("#seopress-tag-single-site-title").attr("data-tag")
         );
         $("#seopress_titles_title_meta").trigger("paste");
     });
     $("#seopress-tag-single-excerpt").click(function () {
         $("#seopress_titles_desc_meta").val(
             sp_get_field_length($("#seopress_titles_desc_meta")) +
-                $("#seopress-tag-single-excerpt").attr("data-tag")
+            $("#seopress-tag-single-excerpt").attr("data-tag")
         );
         $("#seopress_titles_title_meta").trigger("paste");
     });
     $("#seopress-tag-single-sep").click(function () {
         $("#seopress_titles_title_meta").val(
             sp_get_field_length($("#seopress_titles_title_meta")) +
-                $("#seopress-tag-single-sep").attr("data-tag")
+            $("#seopress-tag-single-sep").attr("data-tag")
         );
         $("#seopress_titles_title_meta").trigger("paste");
     });
@@ -125,14 +125,14 @@ document.addEventListener("DOMContentLoaded", function () {
             if (_self.hasClass("tag-title")) {
                 $("#seopress_titles_title_meta").val(
                     sp_get_field_length($("#seopress_titles_title_meta")) +
-                        $(current).attr("data-value")
+                    $(current).attr("data-value")
                 );
                 $("#seopress_titles_title_meta").trigger("paste");
             }
             if (_self.hasClass("tag-description")) {
                 $("#seopress_titles_desc_meta").val(
                     sp_get_field_length($("#seopress_titles_desc_meta")) +
-                        $(current).attr("data-value")
+                    $(current).attr("data-value")
                 );
                 $("#seopress_titles_desc_meta").trigger("paste");
             }

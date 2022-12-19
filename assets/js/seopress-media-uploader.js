@@ -1,11 +1,11 @@
 jQuery(document).ready(function ($) {
-    //Clear the previous image if a user paste a URL to the field
-    $("#seopress_social_fb_img_meta").on('paste', function () {
+    //Clear the previous image if a user paste / edit the URL
+    $("#seopress_social_fb_img_meta").on('paste change', function () {
         $("#seopress_social_fb_img_attachment_id").val('');
         $("#seopress_social_fb_img_width").val('');
         $("#seopress_social_fb_img_height").val('');
     });
-    $("#seopress_social_twitter_img_meta").on('paste', function () {
+    $("#seopress_social_twitter_img_meta").on('paste change', function () {
         $("#seopress_social_twitter_img_attachment_id").val('');
         $("#seopress_social_twitter_img_width").val('');
         $("#seopress_social_twitter_img_height").val('');
@@ -36,11 +36,11 @@ jQuery(document).ready(function ($) {
 
     const array = [
         "#seopress_social_knowledge_img",
-        "#seopress_social_twitter_img",
+        "#knowledge_img",
         "#seopress_social_fb_img",
         ".seopress_social_fb_img",
-        ".seopress_social_twitter_img",
-        "#knowledge_img"
+        "#seopress_social_twitter_img",
+        ".seopress_social_twitter_img"
     ];
 
     array.forEach(function (item) {

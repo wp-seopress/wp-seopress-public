@@ -1375,32 +1375,6 @@ function seopress_titles_nofollow_callback()
     }
 }
 
-function seopress_titles_noodp_callback()
-{
-    $options = get_option('seopress_titles_option_name');
-
-    $check = isset($options['seopress_titles_noodp']); ?>
-
-
-                                                                <label for="seopress_titles_noodp">
-                                                                    <input id="seopress_titles_noodp"
-                                                                        name="seopress_titles_option_name[seopress_titles_noodp]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('noodp', 'wp-seopress'); ?>
-                                                                </label>
-
-                                                                <p class="description">
-                                                                    <?php _e('Do not use Open Directory project metadata for titles or excerpts for all pages.', 'wp-seopress'); ?>
-                                                                </p>
-
-                                                                <?php if (isset($options['seopress_titles_noodp'])) {
-        esc_attr($options['seopress_titles_noodp']);
-    }
-}
-
 function seopress_titles_noimageindex_callback()
 {
     $options = get_option('seopress_titles_option_name');

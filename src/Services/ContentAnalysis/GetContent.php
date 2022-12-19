@@ -663,6 +663,13 @@ class GetContent
                 $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>nofollow</strong> is off. Search engines will follow links on this page.', 'wp-seopress') . '</p>';
             }
 
+            if (preg_match('/noimageindex/', json_encode($meta_robots))) {
+                $analyzes['robots']['impact'] = 'high';
+                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('<strong>noimageindex</strong> is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed).', 'wp-seopress') . '</p>';
+            } else {
+                $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>noimageindex</strong> is off. Google will index the images on this page.', 'wp-seopress') . '</p>';
+            }
+
             if (preg_match('/noarchive/', json_encode($meta_robots))) {
                 if ('high' != $analyzes['robots']['impact']) {
                     $analyzes['robots']['impact'] = 'medium';
@@ -687,14 +694,6 @@ class GetContent
         //Meta Google
         if (! empty($data['meta_google'])) {
             $meta_google = $data['meta_google'];
-
-            if (preg_match('/noimageindex/', json_encode($meta_google))) {
-                $analyzes['robots']['impact'] = 'high';
-                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('<strong>noimageindex</strong> is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed).', 'wp-seopress') . '</p>';
-            } else {
-                $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>noimageindex</strong> is off. Google will index the images on this page.', 'wp-seopress') . '</p>';
-            }
-
             if (preg_match('/nositelinkssearchbox/', json_encode($meta_google))) {
                 if ('high' != $analyzes['robots']['impact']) {
                     $analyzes['robots']['impact'] = 'medium';

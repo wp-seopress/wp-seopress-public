@@ -263,14 +263,6 @@ add_settings_field(
 );
 
 add_settings_field(
-    'seopress_titles_noodp', // ID
-    __('noodp', 'wp-seopress'), // Title
-    'seopress_titles_noodp_callback', // Callback
-    'seopress-settings-admin-titles-advanced', // Page
-    'seopress_setting_section_titles_advanced' // Section
-);
-
-add_settings_field(
     'seopress_titles_noimageindex', // ID
     __('noimageindex', 'wp-seopress'), // Title
     'seopress_titles_noimageindex_callback', // Callback

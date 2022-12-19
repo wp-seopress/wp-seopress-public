@@ -15,10 +15,42 @@ class Document_Settings_Section {
      * @return void
      */
     private function _initialize() {
-        add_action('elementor/documents/register_controls', [$this, 'add_wp_seopress_section_to_document_settings']);
+        add_action('elementor/editor/before_enqueue_scripts', [$this, 'check_security']);
+        add_action('elementor/documents/register_controls', [$this, 'add_wp_seopress_section_to_document_settings'], 20);
         add_action('elementor/document/after_save', [$this, 'on_save'], 99, 2);
         add_action('seopress/page-builders/elementor/save_meta', [$this, 'on_seopress_meta_save'], 99);
         add_action('elementor/editor/before_enqueue_scripts', [$this, 'register_elements_assets'], 9999);
+    }
+
+    /**
+     * Is the current user allowed to view metaboxes?
+     *
+     * @return boolean
+     */
+    public function check_security($metabox) {
+        if (is_bool($metabox)) {
+            return true;
+        }
+
+        if (is_super_admin()) {
+            return true;
+        }
+
+        global $wp_roles;
+
+        //Get current user role
+        if (isset(wp_get_current_user()->roles[0])) {
+            $seopress_user_role = wp_get_current_user()->roles[0];
+            //If current user role matchs values from Security settings then apply
+            if (empty($metabox)) {
+                return true;
+            }
+            if (!array_key_exists($seopress_user_role, $metabox)) {
+                return true;
+            }
+
+            return false;
+        }
     }
 
     public function register_elements_assets() {
@@ -88,11 +120,19 @@ class Document_Settings_Section {
     public function add_wp_seopress_section_to_document_settings(\Elementor\Core\Base\Document $document) {
         $post_id = $document->get_main_id();
 
-        $this->_add_title_section($document, $post_id);
-        $this->_add_advanced_section($document, $post_id);
-        $this->_add_social_section($document, $post_id);
-        $this->_add_redirection_section($document, $post_id);
-        $this->_add_content_analysis_section($document, $post_id);
+        $seo_metabox = seopress_get_service('AdvancedOption')->getSecurityMetaboxRole() ? seopress_get_service('AdvancedOption')->getSecurityMetaboxRole() : true;
+        $ca_metabox = seopress_get_service('AdvancedOption')->getSecurityMetaboxRoleContentAnalysis() ? seopress_get_service('AdvancedOption')->getSecurityMetaboxRoleContentAnalysis() : true;
+
+        if ($this->check_security($seo_metabox) === true) {
+            $this->_add_title_section($document, $post_id);
+            $this->_add_advanced_section($document, $post_id);
+            $this->_add_social_section($document, $post_id);
+            $this->_add_redirection_section($document, $post_id);
+        }
+
+        if ($this->check_security($ca_metabox) === true) {
+            $this->_add_content_analysis_section($document, $post_id);
+        }
     }
 
     /**
@@ -183,7 +223,6 @@ class Document_Settings_Section {
 
         $robots_index       = get_post_meta($post_id, '_seopress_robots_index', true);
         $robots_follow      = get_post_meta($post_id, '_seopress_robots_follow', true);
-        $robots_odp         = get_post_meta($post_id, '_seopress_robots_odp', true);
         $robots_imageindex  = get_post_meta($post_id, '_seopress_robots_imageindex', true);
         $robots_archive     = get_post_meta($post_id, '_seopress_robots_archive', true);
         $robots_snippet     = get_post_meta($post_id, '_seopress_robots_snippet', true);
@@ -210,17 +249,6 @@ class Document_Settings_Section {
                 'label_block' => true,
                 'separator'   => 'none',
                 'default'     => 'yes' === $robots_follow ? 'yes' : '',
-            ]
-        );
-
-        $document->add_control(
-            '_seopress_robots_odp',
-            [
-                'label'       => __('Don\'t use Open Directory project metadata for titles or excerpts for this page (noodp)', 'wp-seopress'),
-                'type'        => \Elementor\Controls_Manager::SWITCHER,
-                'label_block' => true,
-                'separator'   => 'none',
-                'default'     => 'yes' === $robots_odp ? 'yes' : '',
             ]
         );
 

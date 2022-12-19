@@ -835,7 +835,6 @@ function seopress_download_batch_export() {
             $csv_fields[] = 'tw_img';
             $csv_fields[] = 'noindex';
             $csv_fields[] = 'nofollow';
-            $csv_fields[] = 'noodp';
             $csv_fields[] = 'noimageindex';
             $csv_fields[] = 'noarchive';
             $csv_fields[] = 'nosnippet';

@@ -61,7 +61,7 @@ class RankMath implements ExecuteHooksBackend {
                 }
             }
 
-            if ('' != get_term_meta($term_id, 'rank_math_robots', true)) { //Import Robots NoIndex, NoFollow, NoOdp, NoImageIndex, NoArchive, NoSnippet
+            if ('' != get_term_meta($term_id, 'rank_math_robots', true)) { //Import Robots NoIndex, NoFollow, NoImageIndex, NoArchive, NoSnippet
                 $rank_math_robots = get_term_meta($term_id, 'rank_math_robots', true);
 
                 if (in_array('noindex', $rank_math_robots)) {
@@ -69,9 +69,6 @@ class RankMath implements ExecuteHooksBackend {
                 }
                 if (in_array('nofollow', $rank_math_robots)) {
                     update_term_meta($term_id, '_seopress_robots_follow', 'yes');
-                }
-                if (in_array('noodp', $rank_math_robots)) {
-                    update_term_meta($term_id, '_seopress_robots_odp', 'yes');
                 }
                 if (in_array('noimageindex', $rank_math_robots)) {
                     update_term_meta($term_id, '_seopress_robots_imageindex', 'yes');
@@ -133,7 +130,7 @@ class RankMath implements ExecuteHooksBackend {
                 }
             }
 
-            if ('' != get_post_meta($post->ID, 'rank_math_robots', true)) { //Import Robots NoIndex, NoFollow, NoOdp, NoImageIndex, NoArchive, NoSnippet
+            if ('' != get_post_meta($post->ID, 'rank_math_robots', true)) { //Import Robots NoIndex, NoFollow, NoImageIndex, NoArchive, NoSnippet
                 $rank_math_robots = get_post_meta($post->ID, 'rank_math_robots', true);
 
                 if (in_array('noindex', $rank_math_robots)) {
@@ -141,9 +138,6 @@ class RankMath implements ExecuteHooksBackend {
                 }
                 if (in_array('nofollow', $rank_math_robots)) {
                     update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
-                }
-                if (in_array('noodp', $rank_math_robots)) {
-                    update_post_meta($post->ID, '_seopress_robots_odp', 'yes');
                 }
                 if (in_array('noimageindex', $rank_math_robots)) {
                     update_post_meta($post->ID, '_seopress_robots_imageindex', 'yes');

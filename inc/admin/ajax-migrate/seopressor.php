@@ -81,9 +81,6 @@ function seopress_seopressor_migration() {
                                 if (in_array('nosnippet', $robots)) { //Import Robots NoSnippet
                                     update_post_meta($post->ID, '_seopress_robots_snippet', 'yes');
                                 }
-                                if (in_array('noodp', $robots)) { //Import Robots NoOdp
-                                    update_post_meta($post->ID, '_seopress_robots_odp', 'yes');
-                                }
                                 if (in_array('noimageindex', $robots)) { //Import Robots NoImageIndex
                                     update_post_meta($post->ID, '_seopress_robots_imageindex', 'yes');
                                 }

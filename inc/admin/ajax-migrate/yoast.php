@@ -107,12 +107,9 @@ function seopress_yoast_migration() {
                     if ('1' == get_post_meta($post->ID, '_yoast_wpseo_meta-robots-nofollow', true)) { //Import Robots NoFollow
                         update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
                     }
-                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true)) { //Import Robots NoOdp, NoImageIndex, NoArchive, NoSnippet
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true)) { //Import Robots NoImageIndex, NoArchive, NoSnippet
                         $yoast_wpseo_meta_robots_adv = get_post_meta($post->ID, '_yoast_wpseo_meta-robots-adv', true);
 
-                        if (false !== strpos($yoast_wpseo_meta_robots_adv, 'noodp')) {
-                            update_post_meta($post->ID, '_seopress_robots_odp', 'yes');
-                        }
                         if (false !== strpos($yoast_wpseo_meta_robots_adv, 'noimageindex')) {
                             update_post_meta($post->ID, '_seopress_robots_imageindex', 'yes');
                         }

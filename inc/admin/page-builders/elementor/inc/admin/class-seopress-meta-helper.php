@@ -9,7 +9,6 @@ class Seopress_Meta_Helper {
 			'_seopress_titles_desc',
 			'_seopress_robots_index',
 			'_seopress_robots_follow',
-			'_seopress_robots_odp',
 			'_seopress_robots_imageindex',
 			'_seopress_robots_archive',
 			'_seopress_robots_snippet',

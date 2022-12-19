@@ -141,17 +141,6 @@ class AIO implements ExecuteHooksBackend {
                 update_post_meta($post->ID, '_seopress_robots_imageindex', 'yes');
             }
 
-            //Meta robots "noodp"
-            $robots_noodp = "SELECT p.robots_noodp, p.post_id
-            FROM {$wpdb->prefix}aioseo_posts p
-            WHERE p.post_id = $post->ID";
-
-            $robots_noodp = $wpdb->get_results($robots_noodp, ARRAY_A);
-
-            if (! empty($robots_noodp[0]['robots_noodp']) && '1' === $robots_noodp[0]['robots_noodp']) {//Import Robots NoOdp
-                update_post_meta($post->ID, '_seopress_robots_odp', 'yes');
-            }
-
             //Meta robots "nosnippet"
             $robots_nosnippet = "SELECT p.robots_nosnippet, p.post_id
             FROM {$wpdb->prefix}aioseo_posts p

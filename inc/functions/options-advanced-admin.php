@@ -332,7 +332,10 @@ if ('' != seopress_advanced_appearance_title_col_option()
 || '' != seopress_advanced_appearance_words_col_option()
 || '' != seopress_advanced_appearance_ps_col_option()
 || '' != seopress_advanced_appearance_insights_col_option()
-|| '' != seopress_advanced_appearance_score_col_option()) {
+|| '' != seopress_advanced_appearance_score_col_option()
+|| !empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())
+
+) {
     function seopress_add_columns()
     {
         if (!isset(get_current_screen()->post_type)) {
@@ -362,6 +365,10 @@ if ('' != seopress_advanced_appearance_title_col_option()
     {
         $columns['seopress_noindex']  = 'seopress_noindex';
         $columns['seopress_nofollow'] = 'seopress_nofollow';
+        $columns['seopress_search_console_clicks'] = 'seopress_search_console_clicks';
+        $columns['seopress_search_console_ctr'] = 'seopress_search_console_ctr';
+        $columns['seopress_search_console_impressions'] = 'seopress_search_console_impressions';
+        $columns['seopress_search_console_position'] = 'seopress_search_console_position';
 
         return $columns;
     }
@@ -371,16 +378,32 @@ if ('' != seopress_advanced_appearance_title_col_option()
     {
         if (! is_admin()) {
             return;
-        } else {
-            $orderby = $query->get('orderby');
-            if ('seopress_noindex' == $orderby) {
-                $query->set('meta_key', '_seopress_robots_index');
-                $query->set('orderby', 'meta_value');
-            }
-            if ('seopress_nofollow' == $orderby) {
-                $query->set('meta_key', '_seopress_robots_follow');
-                $query->set('orderby', 'meta_value');
-            }
+        }
+
+        $orderby = $query->get('orderby');
+        if ('seopress_noindex' == $orderby) {
+            $query->set('meta_key', '_seopress_robots_index');
+            $query->set('orderby', 'meta_value');
+        }
+        if ('seopress_nofollow' == $orderby) {
+            $query->set('meta_key', '_seopress_robots_follow');
+            $query->set('orderby', 'meta_value');
+        }
+        if ('seopress_search_console_clicks' == $orderby) {
+            $query->set('meta_key', '_seopress_search_console_analysis_clicks');
+            $query->set('orderby', 'meta_value_num');
+        }
+        if ('seopress_search_console_impressions' == $orderby) {
+            $query->set('meta_key', '_seopress_search_console_analysis_impressions');
+            $query->set('orderby', 'meta_value_num');
+        }
+        if ('seopress_search_console_ctr' == $orderby) {
+            $query->set('meta_key', '_seopress_search_console_analysis_ctr');
+            $query->set('orderby', 'meta_value_num');
+        }
+        if ('seopress_search_console_position' == $orderby) {
+            $query->set('meta_key', '_seopress_search_console_analysis_position');
+            $query->set('orderby', 'meta_value_num');
         }
     }
 }
@@ -650,8 +673,8 @@ function seopress_bulk_action_follow_handler($redirect_to, $doaction, $post_ids)
     }
     foreach ($post_ids as $post_id) {
         // Perform action for each post.
-        delete_post_meta($post_id, '_seopress_robots_follow', '');
-        delete_term_meta($post_id, '_seopress_robots_follow', '');
+        delete_post_meta($post_id, '_seopress_robots_follow');
+        delete_term_meta($post_id, '_seopress_robots_follow');
     }
     $redirect_to = add_query_arg('bulk_follow_posts', count($post_ids), $redirect_to);
 

@@ -389,6 +389,14 @@ add_settings_field(
     'seopress_setting_section_advanced_appearance_col' // Section
 );
 
+add_settings_field(
+    'seopress_advanced_appearance_search_console', // ID
+    __('Show search console data', 'wp-seopress'), // Title
+    'seopress_advanced_appearance_search_console_callback', // Callback
+    'seopress-settings-admin-advanced-appearance', // Page
+    'seopress_setting_section_advanced_appearance_col' // Section
+);
+
 //Misc
 add_settings_section(
     'seopress_setting_section_advanced_appearance_misc', // ID

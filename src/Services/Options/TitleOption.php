@@ -195,13 +195,6 @@ class TitleOption {
     /**
      * @since 5.0.0
      */
-    public function getTitleNoOdp() {
-        return $this->searchOptionByKey('seopress_titles_noodp');
-    }
-
-    /**
-     * @since 5.0.0
-     */
     public function getTitleNoArchive() {
         return $this->searchOptionByKey('seopress_titles_noarchive');
     }

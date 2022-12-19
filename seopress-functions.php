@@ -559,7 +559,11 @@ function is_seopress_page() {
     if (isset($_REQUEST['page'])) {
         return 0 === strpos($_REQUEST['page'], 'seopress');
     } elseif (isset($_REQUEST['post_type'])) {
-        return 0 === strpos($_REQUEST['post_type'], 'seopress');
+        if (is_array($_REQUEST['post_type']) && !empty($_REQUEST['post_type'])) {
+            return 0 === strpos($_REQUEST['post_type'][0], 'seopress');
+        } else {
+            return 0 === strpos($_REQUEST['post_type'], 'seopress');
+        }
     }
 }
 
@@ -836,4 +840,23 @@ if (is_plugin_active('elementor-pro/elementor-pro.php')) {
     function sp_elementor_gtag_ec_add_to_cart_archive_ev($js) {
         return '';
     }
+}
+
+
+/**
+ * Helper function needed for PHP 8.1 compatibility with "current" function
+ * Get mangled object vars
+ * @since 6.2.0
+ */
+function seopress_maybe_mangled_object_vars($data){
+    if(!function_exists('get_mangled_object_vars')){
+        return $data;
+    }
+
+    if(!is_object($data)){
+        return $data;
+    }
+
+    return get_mangled_object_vars($data);
+
 }

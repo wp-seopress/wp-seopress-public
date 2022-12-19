@@ -87,7 +87,12 @@ class RobotSettings implements ExecuteHooks
                     $item = esc_html($item);
                 }
 
-                update_post_meta($id, $value['key'], $item);
+                if(!empty($item)){
+                    update_post_meta($id, $value['key'], $item);
+                }
+                else{
+                    delete_post_meta($id, $value['key']);
+                }
 
                 if (! empty($elementor)) {
                     $elementor[$value['key']] = $item;

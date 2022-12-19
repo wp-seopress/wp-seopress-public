@@ -122,8 +122,8 @@
                 'toggle'        => false,
             ];
             $features['inspect-url'] = [
-                'title'         => __('Inspect URL with Google Search Console', 'wp-seopress'),
-                'desc'          => __('Inspect your URL for details about crawling, indexing, mobile compatibility, schemas and more.', 'wp-seopress'),
+                'title'         => __('Google Search Console', 'wp-seopress'),
+                'desc'          => __('Get clicks, positions, CTR and impressions</strong>. Inspect your URL for details about crawling, indexing, mobile compatibility, schemas and more.', 'wp-seopress'),
                 'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_inspect_url'),
                 'filter'        => 'seopress_remove_feature_inspect_url',
                 'toggle'        => true,

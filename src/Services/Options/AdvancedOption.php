@@ -298,6 +298,14 @@ class AdvancedOption
     public function getAppearanceGenesisSeoMenu(){
         return $this->searchOptionByKey('seopress_advanced_appearance_genesis_seo_menu');
     }
+
+    /**
+     * @since 5.4.0
+     */
+    public function getAppearanceSearchConsole(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_search_console');
+    }
+
     /**
      * @since 5.8
      */

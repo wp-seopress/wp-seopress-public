@@ -94,7 +94,6 @@ function seopress_metadata_export() {
     $settings['tw_img']          =		[];
     $settings['noindex']         =		[];
     $settings['nofollow']        =		[];
-    $settings['noodp']           =		[];
     $settings['noimageindex']    =		[];
     $settings['noarchive']       =		[];
     $settings['nosnippet']       =		[];
@@ -117,7 +116,6 @@ function seopress_metadata_export() {
         'tw_img' => '_seopress_social_twitter_img',
         'noindex' => '_seopress_robots_index',
         'nofollow' => '_seopress_robots_follow',
-        'noodp' => '_seopress_robots_odp',
         'noimageindex' => '_seopress_robots_imageindex',
         'noarchive' => '_seopress_robots_archive',
         'nosnippet' => '_seopress_robots_snippet',
@@ -182,7 +180,6 @@ function seopress_metadata_export() {
                         $settings['tw_img'],
                         $settings['noindex'],
                         $settings['nofollow'],
-                        $settings['noodp'],
                         $settings['noimageindex'],
                         $settings['noarchive'],
                         $settings['nosnippet'],
@@ -209,7 +206,6 @@ function seopress_metadata_export() {
                     $settings['tw_img']          =			[];
                     $settings['noindex']         =			[];
                     $settings['nofollow']        =			[];
-                    $settings['noodp']           =			[];
                     $settings['noimageindex']    =		[];
                     $settings['noarchive']       =		[];
                     $settings['nosnippet']       =		[];
@@ -284,7 +280,6 @@ function seopress_metadata_export() {
                         $settings['tw_img'],
                         $settings['noindex'],
                         $settings['nofollow'],
-                        $settings['noodp'],
                         $settings['noimageindex'],
                         $settings['noarchive'],
                         $settings['nosnippet'],
@@ -311,7 +306,6 @@ function seopress_metadata_export() {
                     $settings['tw_img']          =			[];
                     $settings['noindex']         =			[];
                     $settings['nofollow']        =			[];
-                    $settings['noodp']           =			[];
                     $settings['noimageindex']    =		[];
                     $settings['noarchive']       =		[];
                     $settings['nosnippet']       =		[];

@@ -839,6 +839,29 @@ function seopress_advanced_appearance_score_col_callback() {
 	}
 }
 
+
+function seopress_advanced_appearance_search_console_callback() {
+    if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+        $options = get_option('seopress_advanced_option_name');
+
+        $check = isset($options['seopress_advanced_appearance_search_console']); ?>
+
+    <label for="seopress_advanced_appearance_search_console">
+        <input id="seopress_advanced_appearance_search_console"
+            name="seopress_advanced_option_name[seopress_advanced_appearance_search_console]" type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+
+        <?php _e('Display Search Console Data (clicks, impressions, CTR, positions)', 'wp-seopress');
+    } ?>
+</label>
+
+<?php if (isset($options['seopress_advanced_appearance_search_console'])) {
+		esc_attr($options['seopress_advanced_appearance_search_console']);
+	}
+}
+
 function seopress_advanced_appearance_ca_metaboxe_callback() {
 	$options = get_option('seopress_advanced_option_name');
 
@@ -853,6 +876,11 @@ function seopress_advanced_appearance_ca_metaboxe_callback() {
 
 	<?php _e('Remove Content Analysis Metabox', 'wp-seopress'); ?>
 </label>
+
+
+<p class="description">
+	<?php _e('By checking this option, we will no longer track the significant keywords.','wp-seopress'); ?>
+</p>
 
 <?php if (isset($options['seopress_advanced_appearance_ca_metaboxe'])) {
 		esc_attr($options['seopress_advanced_appearance_ca_metaboxe']);

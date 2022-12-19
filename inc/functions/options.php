@@ -476,7 +476,7 @@ if ('1' === seopress_get_toggle_option('advanced')) {
 
             function seopress_advanced_appearance_adminbar_hook($wp_admin_bar)
             {
-                $wp_admin_bar->remove_node('seopress_custom_top_level');
+                $wp_admin_bar->remove_node('seopress');
             }
         }
     }
