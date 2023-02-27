@@ -394,6 +394,14 @@ add_settings_field(
     'seopress_setting_section_google_analytics_events' // Section
 );
 
+add_settings_field(
+    'seopress_google_analytics_phone_tracking', // ID
+    __('Track phone links', 'wp-seopress'), // Title
+    'seopress_google_analytics_phone_tracking_callback', // Callback
+    'seopress-settings-admin-google-analytics-events', // Page
+    'seopress_setting_section_google_analytics_events' // Section
+);
+
 //Google Analytics Custom Dimensions SECTION===============================================
 
 add_settings_section(

@@ -376,6 +376,13 @@ function seopress_get_dynamic_variables($variables, $post, $is_oembed){
 
     $variables = apply_filters('seopress_titles_template_variables', $variables);
 
-    return $variables;
+    //Add WordPress Filters again
+    $seopress_array_filters = ['category_description', 'tag_description', 'term_description'];
+    foreach ($seopress_array_filters as $key => $value) {
+        add_filter($value, 'wpautop');
+    }
 
+    return $variables;
 }
+
+

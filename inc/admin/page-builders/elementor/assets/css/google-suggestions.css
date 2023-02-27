@@ -26,7 +26,7 @@
     padding: 20px;
     top: 25px;
     font-weight: 400;
-    box-shadow: 0 3px 30px rgba(25,30,35,.1);
+    box-shadow: 0 3px 30px rgba(25, 30, 35, .1);
     border: 1px solid #e2e4e7;
     background: #fff;
     word-break: break-word;
@@ -39,8 +39,8 @@
 }
 
 .seopress-google-suggestions .sp-tooltip .sp-tooltiptext::after {
-	border: 8px solid #fff;
-	top: -6px;
+    border: 8px solid #fff;
+    top: -6px;
 }
 
 .seopress-google-suggestions .sp-tooltip .sp-tooltiptext::after,
@@ -74,7 +74,7 @@
 }
 
 .seopress-google-suggestions .sp-tooltip .sp-tooltip-code {
-    font-family: Menlo,Monaco,Andale Mono,Courier New,monospace;
+    font-family: Menlo, Monaco, Andale Mono, Courier New, monospace;
     display: block;
     word-break: break-all;
     color: #1a7a06;
@@ -91,11 +91,13 @@
     margin: 0;
 }
 
-.seopress-google-suggestions .elementor-button.elementor-button-default {
+.seopress-google-suggestions .elementor-button.elementor-button-default,
+#seopress_ai_generate_seo_meta.elementor-button.elementor-button-default {
     background-color: #0071a1;
 }
 
-.seopress-google-suggestions .elementor-button.elementor-button-default:hover {
+.seopress-google-suggestions .elementor-button.elementor-button-default:hover,
+#seopress_ai_generate_seo_meta.elementor-button.elementor-button-default:hover {
     background-color: #0071a1;
     opacity: 0.8;
 }
@@ -117,7 +119,7 @@
 .seopress-google-suggestions #seopress_suggestions li:hover {
     background: #f1f1f1;
     border-color: #016087;
-    
+
 }
 
 .seopress-google-suggestions #seopress_suggestions li a {
@@ -135,5 +137,5 @@
 .elementor-control-field.seopress-google-suggestions .sp-tooltip:hover .sp-tooltiptext,
 .elementor-control-field.seopress-google-suggestions .sp-tooltip:focus .sp-tooltiptext,
 .elementor-control-field.seopress-google-suggestions .sp-tooltip:active .sp-tooltiptext {
-	visibility: visible;
+    visibility: visible;
 }

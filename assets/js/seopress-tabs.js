@@ -348,8 +348,10 @@ jQuery(document).ready(function ($) {
                 action: 'seopress_instant_indexing_generate_api_key',
                 _ajax_nonce: seopressAjaxInstantIndexingApiKey.seopress_nonce,
             },
-            success: function (data) {
-                window.location.reload(true);
+            success: function (success) {
+                if (success.success === true) {
+                    window.location.reload(true);
+                }
             },
         });
     });

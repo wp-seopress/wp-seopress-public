@@ -377,6 +377,16 @@ class GoogleAnalyticsOption
     }
 
     /**
+     * Events phone tracking
+     * @since 6.3.0
+     *
+     * @return string
+     */
+    public function getPhoneTracking() {
+        return $this->searchOptionByKey('seopress_google_analytics_phone_tracking');
+    }
+
+    /**
      * Custom Dimension Author
      * @since 5.8.0
      *

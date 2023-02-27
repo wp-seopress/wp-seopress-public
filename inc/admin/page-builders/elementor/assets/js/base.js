@@ -2,6 +2,12 @@ var elSocialData = [];
 elSocialData.fbDefaultImage = '';
 elSocialData.twDefaultImage = '';
 
+jQuery(document).ready(function () {
+    jQuery(document).on("click", "#seopress_ai_generate_seo_meta", function () {
+        sp_ai_generate_meta();
+    });
+});
+
 function googlePreview() {
     jQuery.ajax({
         method: "GET",
@@ -203,50 +209,128 @@ function sp_is_valid_url(string) {
 }
 
 function sp_social_img(social_slug) {
-    jQuery(".snippet-" + social_slug + "-img-alert").css("display", "none");
-    const imgSelector = social_slug == 'fb' ? '.snippet-' + social_slug + '-img img' : '.snippet-' + social_slug + '-img-default img';
-    var meta_img_val = jQuery(imgSelector).attr('src');
+    const $ = jQuery;
+    if ($("#seopress_social_fb_title_meta").length) {
+        $(".snippet-" + social_slug + "-img-alert").hide();
+        var meta_img_val = $(
+            "#seopress_social_" + social_slug + "_img_meta"
+        ).val();
 
-    // Check valid URL
-    if (typeof meta_img_val != 'undefined' && sp_is_valid_url(meta_img_val) === true) {
-        if (meta_img_val.length > 0) {
-            // Check file URL
-            jQuery.get(meta_img_val).done(function () {
-                // Extract filetype
-                var meta_img_filetype = meta_img_val.split(/\#|\?/)[0].split('.').pop().trim();
-                var types = ['jpg', 'jpeg', 'gif', 'png', 'webp'];
-
-                if (types.indexOf(meta_img_filetype) == -1) {
-                    jQuery(".snippet-" + social_slug + "-img-alert.alert1").css("display", "block");
-                } else {
-                    // Extract image size
-                    var tmp_img = new Image();
-                    tmp_img.src = meta_img_val;
-                    jQuery(tmp_img).one('load', function () {
-                        pic_real_width = parseInt(tmp_img.width);
-                        pic_real_height = parseInt(tmp_img.height);
-
-                        // Default minimum size
-                        if (social_slug == 'fb') {
-                            min_width = 200,
-                                min_height = 200
-                        } else {
-                            min_width = 144,
-                                min_height = 144
-                        }
-                        if (pic_real_width < min_width || pic_real_height < min_height) {
-                            jQuery(".snippet-" + social_slug + "-img-alert.alert2").css("display", "block");
-                        }
-                        ratio_img = (pic_real_width / pic_real_height).toFixed(2);
-                        jQuery(".snippet-" + social_slug + "-img-alert.alert4").css("display", "block");
-                        jQuery(".snippet-" + social_slug + "-img-alert.alert4 span").text(ratio_img);
-                    });
-                }
-            }).fail(function () {
-                jQuery(".snippet-" + social_slug + "-img-alert.alert3").css("display", "block");
-            });
+        if (meta_img_val == "") {
+            var meta_img_val = $(
+                "#seopress_social_" + social_slug + "_img_meta"
+            ).attr("placeholder");
         }
-    } else {
-        jQuery(document).find(".snippet-" + social_slug + "-img-alert.alert5").css("display", "block");
+
+        // Check valid URL
+        if (sp_is_valid_url(meta_img_val) === true) {
+            meta_img_val.length > 0
+                ? ($(".snippet-" + social_slug + "-img-custom img").attr("src", meta_img_val),
+                    $(".snippet-" + social_slug + "-img").hide(),
+                    $(".snippet-" + social_slug + "-img-custom").show(),
+                    $(".snippet-" + social_slug + "-img-default").hide())
+                : 0 == meta_img_val.length &&
+                ($(".snippet-" + social_slug + "-img-default").show(),
+                    $(".snippet-" + social_slug + "-img-custom").show(),
+                    $(".snippet-" + social_slug + "-img").hide());
+
+            if (meta_img_val.length > 0) {
+                // Check file URL
+                $
+                    .get(meta_img_val)
+                    .done(function () {
+                        // Extract filetype
+                        var meta_img_filetype = meta_img_val
+                            .split(/\#|\?/)[0]
+                            .split(".")
+                            .pop()
+                            .trim();
+                        var types = ["jpg", "jpeg", "gif", "png", "webp"];
+
+                        if (types.indexOf(meta_img_filetype) == -1) {
+                            $(".snippet-" + social_slug + "-img-alert.alert1").show();
+                        } else {
+                            // Extract image size
+                            var tmp_img = new Image();
+                            tmp_img.src = meta_img_val;
+                            $(tmp_img).one("load", function () {
+                                pic_real_width = parseInt(tmp_img.width);
+                                pic_real_height = parseInt(tmp_img.height);
+
+                                // Default minimum size
+                                if (social_slug == "fb") {
+                                    (min_width = 200), (min_height = 200);
+                                } else {
+                                    (min_width = 144), (min_height = 144);
+                                }
+                                if (
+                                    pic_real_width < min_width ||
+                                    pic_real_height < min_height
+                                ) {
+                                    $(
+                                        ".snippet-" +
+                                        social_slug +
+                                        "-img-alert.alert2"
+                                    ).show();
+                                }
+                                ratio_img = (
+                                    pic_real_width / pic_real_height
+                                ).toFixed(2);
+                                $(
+                                    ".snippet-" + social_slug + "-img-alert.alert4"
+                                ).show();
+                                $(
+                                    ".snippet-" +
+                                    social_slug +
+                                    "-img-alert.alert4 span"
+                                ).text(ratio_img);
+                            });
+                            // check filesize
+                            fetch(meta_img_val)
+                                .then(response => {
+                                    const fileSize = Number(response.headers.get('Content-Length'));
+                                    if ((fileSize / 1024) > 300) {
+                                        $(".snippet-" + social_slug + "-img-alert.alert6").show();
+                                        $(".snippet-" + social_slug + "-img-alert.alert6 span").text(Math.round(fileSize / 1024) + 'KB.');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        }
+                    })
+                    .fail(function () {
+                        $(".snippet-" + social_slug + "-img-alert.alert3").show();
+                    });
+            }
+        } else {
+            $(".snippet-" + social_slug + "-img-alert.alert5").show();
+        }
     }
+}
+
+function sp_ai_generate_meta() {
+    const $ = jQuery;
+    //Open AI
+    $(this).attr("disabled", "disabled");
+    $('.spinner').css("visibility", "visible");
+    $('.spinner').css("float", "none");
+
+    jQuery.ajax({
+        method: "POST",
+        url: seopressAjaxAIMetaSEO.seopress_ai_generate_seo_meta,
+        data: {
+            action: "seopress_ai_generate_seo_meta",
+            post_id: seopressElementorBase.post_id,
+            _ajax_nonce: seopressAjaxAIMetaSEO.seopress_nonce,
+        },
+        success: function (data) {
+            $('.spinner').css("visibility", "hidden");
+            $('#seopress_ai_generate_seo_meta').removeAttr("disabled");
+            if (data.success === true) {
+                $("input[data-setting=_seopress_titles_title]").val(data.data.title);
+                $("textarea[data-setting=_seopress_titles_desc]").val(data.data.desc);
+            }
+        }
+    });
 }

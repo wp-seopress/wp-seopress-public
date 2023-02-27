@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.2.0.2
+Stable tag: 6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -336,7 +336,7 @@ Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-l
 
 = Is it compatible with the core XML sitemaps (WP 5.5+)? =
 
-Yes! We automatically disable the native WordPress XML sitemaps to avoid any SEO conflicts. Plus, we our sitemaps are much powerful!
+Yes! We automatically disable the native WordPress XML sitemaps to avoid any SEO conflicts. Plus, our sitemaps are much more powerful!
 
 = My XML sitemap returns a 404 error =
 
@@ -369,37 +369,39 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.2.0.2 =
-* FIX Google Suggestions (PRO)
-
-= 6.2.0.1 =
-* FIX i18n warning
-
-= 6.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-2/">Read the blog post update</a> =
-* NEW Google Search Console iteration #2: add clicks, positions, CTR, impressions columns to post/page/post type (PRO)
-* INFO Add uninstall.php file to clean up database when uninstalling (https://www.seopress.org/support/guides/uninstall-seopress/)
-* INFO Stop saving empty metadata in database
-* INFO Add additional checks for SiteNavigationElement schema generation
-* INFO Update the Google Preview to follow latest changes
-* INFO Remove noodp meta robots
-* INFO Allow users with 'manage_options' cap to change the number of items displayed from SEO, Redirections, Screen options tab
-* INFO Define 'SEOPRESS_WL_ADMIN_HEADER_LOGO' deprecated (https://www.seopress.org/support/hooks/add-your-custom-logo-in-seopress-admin-header/)
-* INFO Disable Content Analysis metabox now also disable significant keywords
-* INFO Remove seopress font to optimize performance
-* INFO Remove '_seopress_robots_primary_cat' from default WP API (we recommend to use our SEOPress REST API instead: https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/)
-* INFO Optimize Twitter Cards
-* FIX Video xml sitemap regeneration process (go to SEO, Tools, Video Sitemap tab, and click Regenerate button if some YouTube videos are missing from the video sitemap)
-* FIX servesCuisine for global Local Business schema (SEO, PRO, Local Business)
-* FIX Do not add the license key to the database if the define 'SEOPRESS_LICENSE_KEY' is used in wp-config.php
-* FIX Add a non breaking space for "Search results:" to breadcrumbs
-* FIX Nginx rewrite rules for XML sitemaps (https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/), thanks to @seobro_agency
-* FIX Returns a 404 error if post type doesn't exist for XML sitemaps
-* FIX Compatibility issue with modal link
-* FIX PHP 8.1: strlen(): Passing null to parameter #1 ($string) of type string is deprecated
-* FIX Thrive Architect compatibility with Content Analysis
-* FIX Compatibility issue with Beaver Builder Ultimate add-on
-* FIX Energy Consumption min/max scale (product schema)
-* FIX Universal SEO Metabox translation
-* FIX Fatal error from Widgets screen if both Polylang and SEOPress enabled
+= 6.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-3/">Read the blog post update</a> =
+* NEW OpenAI integration: generate automagically meta title and description for your content. Bulk actions supported (PRO) 🤯
+* NEW Track phone links with Google Analytics
+* NEW Display an alert from Social Preview if image filesize is superior to 300KB for WhatsApp
+* NEW 404 email alerts: you can now receive weekly reports instead of 1 mail for each new 404
+* NEW Add missing UploadedDate property for manual / automatic Video schema (PRO)
+* NEW 'seopress_gtag_phone_tracking_ev' hook to filter phone links JS tracking (https://www.seopress.org/support/hooks/filter-phone-tracking-links-in-google-analytics/)
+* NEW 'seopress_ai_openai_meta_title' hook to filter sentence to generate meta title
+* NEW 'seopress_ai_openai_meta_desc' hook to filter sentence to generate meta description
+* NEW 'seopress_ai_openai_request_args' hook to filter arguments sent to OpenAI to generate title and description
+* NEW 'seopress_image_seo_before_cleaning' hook to filter media filename before cleaning (https://www.seopress.org/support/hooks/filter-media-filename-before-cleaning/)
+* NEW 'seopress_image_seo_after_cleaning' hook to filter media filename after cleaning (https://www.seopress.org/support/hooks/filter-media-filename-after-cleaning/)
+* NEW 'seopress_image_seo_clean_input' hook to filter input characters (https://www.seopress.org/support/hooks/filter-replaced-characters-from-media-files-inout/)
+* NEW 'seopress_image_seo_clean_output' hook to filter output characters (https://www.seopress.org/support/hooks/filter-replaced-characters-from-media-files-inout/)
+* INFO Automatically get your Google Search Console metrics daily (CRON task)
+* INFO Update CSS for Elementor integration (including Dark Mode)
+* INFO Update the code for Google Optimize
+* INFO 'seopress_gtag_optimize_id' hook is now deprecated
+* INFO Add documentation links for Redirection metabox
+* INFO Import primary post / product categories from SEO Framework
+* INFO Quickly set RSS feeds to noindex from SEO, PRO, Robots.txt tab
+* FIX Matomo tracking code for subdomains / cross domains
+* FIX CSS for Universal SEO metabox
+* FIX jQuery autocomplete error when editing a term taxonomy
+* FIX Term metabox social preview CSS
+* FIX Google Analytics PHP warnings
+* FIX Regenerate button for Bing IndexNow API key
+* FIX Import JSON redirects from Rank Math
+* FIX InspectURL with non UTF-8 language
+* FIX Line breaks / paragraphs for term / category / autor description in archive pages
+* FIX Automatic Local Business opening hours properties
+* FIX Fatal error with How-to block on Widgets screen
+* FIX Primary category
+* FIX i18n
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

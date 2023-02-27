@@ -72,7 +72,8 @@ jQuery(document).ready(function ($) {
         "404",
         "bot",
         "rewrite",
-        "white-label"
+        "white-label",
+        "ai"
     ]
     features.forEach(function (item) {
         $('#toggle-' + item).on('click', function () {

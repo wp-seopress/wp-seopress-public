@@ -529,9 +529,13 @@ function seopress_import_redirections_plugin_settings() {
 }
 add_action('admin_init', 'seopress_import_redirections_plugin_settings');
 
-//Import Redirections from Rank Math plugin TXT file
-//@since 3.8.2
-//@author Benjamin Denis
+/**
+ * Import Redirections from Rank Math plugin JSON file
+ *
+ * @since 3.8.2
+ * @updated 6.3.0
+ *
+ */
 function seopress_import_rk_redirections() {
     if (empty($_POST['seopress_action']) || 'import_rk_redirections' != $_POST['seopress_action']) {
         return;
@@ -545,8 +549,8 @@ function seopress_import_rk_redirections() {
 
     $extension = pathinfo($_FILES['import_file']['name'], PATHINFO_EXTENSION);
 
-    if ('txt' != $extension) {
-        wp_die(__('Please upload a valid .txt file'));
+    if ('json' != $extension) {
+        wp_die(__('Please upload a valid .json file'));
     }
     $import_file = $_FILES['import_file']['tmp_name'];
     if (empty($import_file)) {
@@ -569,19 +573,27 @@ function seopress_import_rk_redirections() {
 
         $param = 'exact_match';
 
-        $enabled ='';
+        $enabled = '';
         if ( ! empty('active' == $redirect_value['status'])) {
             $enabled ='yes';
         }
 
-        $redirect ='';
+        $redirect = '';
         if ( ! empty($redirect_value['url_to'])) {
             $redirect = urldecode($redirect_value['url_to']);
         }
 
-        $count ='';
+        $count = '';
         if ( ! empty($redirect_value['hits'])) {
-            $count = $redirect_value['hits'];
+            $count = (int)$redirect_value['hits'];
+        }
+
+        $regex = '';
+        if ( ! empty($redirect_value['sources'])) {
+            $sources = maybe_unserialize($redirect_value['sources']);
+            if(in_array("regex", array_column($sources, 'comparison'))) {
+                $regex = 'yes';
+            }
         }
 
         wp_insert_post(
@@ -593,7 +605,7 @@ function seopress_import_rk_redirections() {
                     '_seopress_redirections_value'   => $redirect,
                     '_seopress_redirections_type'    => $type,
                     '_seopress_redirections_enabled' => $enabled,
-                    '_seopress_redirections_enabled_regex' => '',
+                    '_seopress_redirections_enabled_regex' => $regex,
                     '_seopress_redirections_logged_status'  => 'both',
                     'seopress_404_count'             => $count,
                     '_seopress_redirections_param'   => $param,

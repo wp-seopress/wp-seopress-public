@@ -109,7 +109,7 @@ function seopress_admin_bar_links() {
             $wp_admin_bar->add_menu([
                 'parent'	=> 'seopress',
                 'id'		   => 'seopress_custom_sub_menu_xml_sitemap',
-                'title'		=> __('XML / HTML Sitemap', 'wp-seopress'),
+                'title'		=> __('XML - HTML Sitemap', 'wp-seopress'),
                 'href'		 => admin_url('admin.php?page=seopress-xml-sitemap'),
             ]);
             $wp_admin_bar->add_menu([
@@ -152,26 +152,20 @@ function seopress_admin_bar_links() {
                 'href'		 => admin_url('admin.php?page=seopress-import-export'),
             ]);
             if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                if ('1' == seopress_get_toggle_option('bot')) {
-                    $wp_admin_bar->add_menu([
-                        'parent'	=> 'seopress',
-                        'id'		   => 'seopress_custom_sub_menu_bot',
-                        'title'		=> __('BOT', 'wp-seopress'),
-                        'href'		 => admin_url('admin.php?page=seopress-bot-batch'),
-                    ]);
-                }
-                $wp_admin_bar->add_menu([
-                    'parent'	=> 'seopress',
-                    'id'		   => 'seopress_custom_sub_menu_license',
-                    'title'		=> __('License', 'wp-seopress'),
-                    'href'		 => admin_url('admin.php?page=seopress-license'),
-                ]);
                 $wp_admin_bar->add_menu([
                     'parent'	=> 'seopress',
                     'id'		   => 'seopress_custom_sub_menu_pro',
                     'title'		=> __('PRO', 'wp-seopress'),
                     'href'		 => admin_url('admin.php?page=seopress-pro-page'),
                 ]);
+                if ('1' == seopress_get_toggle_option('bot')) {
+                    $wp_admin_bar->add_menu([
+                        'parent'	=> 'seopress',
+                        'id'		   => 'seopress_custom_sub_menu_bot',
+                        'title'		=> __('Audit', 'wp-seopress'),
+                        'href'		 => admin_url('admin.php?page=seopress-bot-batch'),
+                    ]);
+                }
                 if ('1' == seopress_get_toggle_option('rich-snippets')) {
                     $wp_admin_bar->add_menu([
                         'parent'	=> 'seopress',
@@ -196,6 +190,12 @@ function seopress_admin_bar_links() {
                         'href'		 => admin_url('edit.php?post_type=seopress_bot'),
                     ]);
                 }
+                $wp_admin_bar->add_menu([
+                    'parent'	=> 'seopress',
+                    'id'		   => 'seopress_custom_sub_menu_license',
+                    'title'		=> __('License', 'wp-seopress'),
+                    'href'		 => admin_url('admin.php?page=seopress-license'),
+                ]);
             }
             $wp_admin_bar->add_menu([
                 'parent'	=> 'seopress',

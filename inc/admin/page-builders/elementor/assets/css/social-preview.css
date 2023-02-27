@@ -17,7 +17,7 @@
 .elementor-control-field.facebook-snippet-box .snippet-fb-site-name,
 .elementor-control-field.facebook-snippet-box .snippet-fb-url {
     color: #606770;
-    font-size: 10px;
+    font-size: 12px;
     white-space: normal;
     line-height: 11px;
     text-transform: uppercase;
@@ -35,37 +35,39 @@
 }
 
 .elementor-control-field.facebook-snippet-box .snippet-fb-title {
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 16px;
+    line-height: 20px;
     margin: 3px 0 0;
     padding-top: 2px;
     color: #1d2129;
     font-weight: 700;
+    overflow: hidden;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     text-overflow: ellipsis;
     white-space: normal;
     word-break: break-word;
+    max-height: 22px;
 }
 
 .elementor-control-field.facebook-snippet-box .snippet-fb-description-custom {
     color: #606770;
-    font-size: 10px;
-    line-height: 14px;
+    font-size: 14px;
+    line-height: 20px;
     word-break: break-word;
     font-family: Helvetica, Arial, sans-serif;
+    max-height: 80px;
+    overflow: hidden;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     text-overflow: ellipsis;
     white-space: normal;
     width: 100%;
-    margin-top: 3px;
 }
 
 .elementor-control-field.facebook-snippet-box,
 .elementor-control-field.twitter-snippet-box {
     color: #4b4f56;
-    font-size: 10px;
     margin-top: 10px;
 }
 
@@ -129,9 +131,10 @@
 }
 
 .elementor-control-field.twitter-snippet-box .snippet-twitter-title {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 20px;
     margin-bottom: 5px;
+    max-height: 1.3em;
     color: #000;
     font-weight: 700;
     overflow: hidden;
@@ -144,9 +147,11 @@
 
 .elementor-control-field.twitter-snippet-box .snippet-twitter-description {
     color: #000;
-    font-size: 10px;
+    font-size: 14px;
+    line-height: 20px;
     word-break: break-word;
     font-family: Helvetica, Arial, sans-serif;
+    max-height: 80px px;
     overflow: hidden;
     -webkit-box-orient: vertical;
     display: -webkit-box;
@@ -162,8 +167,9 @@
 
 .elementor-control-field.twitter-snippet-box .snippet-twitter-url {
     color: #8899a6;
-    font-size: 10px;
+    font-size: 14px;
     white-space: normal;
+    line-height: 11px;
     text-transform: uppercase;
     -webkit-box-orient: vertical;
     display: -webkit-box;
@@ -173,6 +179,10 @@
 .elementor-control-field.google-snippet-box .google-snippet-preview {
     font-family: arial, sans-serif;
     word-break: break-all;
+}
+
+.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview {
+    font-family: Roboto, Helvetica Neue, Arial, sans-serif;
 }
 
 .elementor-control-field.google-snippet-box .wrap-toggle-preview {
@@ -191,12 +201,18 @@
 .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-date {
     color: grey;
     display: inline;
+    font-size: 14px;
 }
 
-.elementor-control-field.google-snippet-box .google-snippet-preview .wrap-snippet .wrap-m-icon-permalink,
-.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-permalink,
-.elementor-control-field.google-snippet-box .google-snippet-preview .wrap-post-thumb {
+.elementor-control-field.google-snippet-box .google-snippet-preview .wrap-snippet .wrap-m-icon-permalink .snippet-favicon,
+.elementor-control-field.google-snippet-box .google-snippet-preview .wrap-post-thumb,
+.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-post-thumb:empty,
+.elementor-control-field.google-snippet-box .google-snippet-preview .snippet-sitename {
     display: none;
+}
+
+.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-snippet .wrap-m-icon-permalink .snippet-favicon {
+    display: block;
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-snippet-mobile {
@@ -217,62 +233,83 @@
     max-width: inherit;
     height: 104px;
     border-radius: 8px;
-}
-
-.elementor-control-field.google-snippet-box .google-snippet-preview .snippet-permalink {
-    color: #006621;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    object-fit: cover;
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-m-icon-permalink {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-bottom: 12px;
+    margin-bottom: 11px;
     display: flex;
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-favicon {
-    margin-right: 12px;
     vertical-align: middle;
+    background-color: #f1f3f4;
+    border-radius: 50%;
+    border: 1px solid #ecedef;
+    -webkit-text-size-adjust: none;
+    display: inline-block;
+    line-height: 26px;
+    padding: 0 4px;
+    margin-right: 12px;
+    width: 28px;
+    height: 28px;
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-favicon img {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     max-width: inherit;
-}
-
-.elementor-control-field.google-snippet-box .google-snippet-preview .snippet-permalink {
-    color: #006621;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-m-icon-permalink .snippet-permalink {
     display: block;
-    color: #3c4043;
+    color: #202124;
     font-size: 12px;
+}
+
+.elementor-control-field.google-snippet-box .google-snippet-preview .snippet-permalink {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #3c434a;
+}
+
+.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-m-icon-permalink .snippet-sitename {
+    color: #202124;
+    font-family: Google Sans, Roboto, Helvetica Neue, Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+    display: block;
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title,
 .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title-custom,
 .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title-default {
     color: #1a0dab;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
-    line-height: 21.6px;
+    line-height: 26px;
+    margin-bottom: 3px;
+    padding-top: 5px;
+}
+
+.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-title,
+.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-title-custom,
+.elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-title-default {
+    color: #1558d6;
+    padding-top: 0;
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-title,
@@ -286,7 +323,7 @@
 .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description,
 .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description-custom,
 .elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description-default {
-    color: #545454;
+    color: rgb(77, 81, 86);
     font-size: 14px;
     font-weight: 400;
     line-height: 18.2px;
@@ -296,7 +333,7 @@
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-description,
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-description-custom,
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-description-default {
-    color: #3c4043;
+    color: rgb(77, 81, 86);
     font-size: 14px;
     line-height: 20px;
 }

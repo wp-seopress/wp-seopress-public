@@ -366,6 +366,11 @@ function seopress_google_analytics_affiliate_tracking_option() {
     return seopress_get_service('GoogleAnalyticsOption')->getAffiliateTracking();
 }
 
+//Events Phone tracking Enable
+function seopress_google_analytics_phone_tracking_option() {
+    return seopress_get_service('GoogleAnalyticsOption')->getPhoneTracking();
+}
+
 //Custom Dimension Author
 function seopress_google_analytics_cd_author_option() {
     return seopress_get_service('GoogleAnalyticsOption')->getCdAuthor();
@@ -406,7 +411,6 @@ function seopress_google_analytics_remove_from_cart_option() {
     return seopress_get_service('GoogleAnalyticsOption')->getRemoveToCart();
 }
 
-
 //Build Custom GA
 function seopress_google_analytics_js($echo) {
     if (('' != seopress_google_analytics_ua_option() || '' != seopress_google_analytics_ga4_option()) && '1' == seopress_google_analytics_enable_option()) {
@@ -442,13 +446,6 @@ function gtag(){dataLayer.push(arguments);}";
                 $seopress_google_analytics_config['linker'] = "'linker': {'domains': [" . $link_domains . ']},';
                 $seopress_google_analytics_config['linker'] = apply_filters('seopress_gtag_linker', $seopress_google_analytics_config['linker']);
             }
-        }
-
-        //Optimize
-        $optimizeOption = seopress_get_service('GoogleAnalyticsOption')->getOptimize();
-        if (!empty($optimizeOption)) {
-            $seopress_google_analytics_config['optimize'] = "'optimize_id': '" . $optimizeOption . "',";
-            $seopress_google_analytics_config['optimize'] = apply_filters('seopress_gtag_optimize_id', $seopress_google_analytics_config['optimize']);
         }
 
         //Remarketing
@@ -646,6 +643,24 @@ for (let i = 0; i < links.length; i++) {
             }
         }
 
+        //Phone tracking
+        if (!empty(seopress_get_service('GoogleAnalyticsOption')->getPhoneTracking())) {
+            $seopress_google_analytics_click_event['phone_tracking'] =
+"window.addEventListener('load', function () {
+    var links = document.querySelectorAll('a');
+    for (let i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e) {
+            var n = this.href.includes('tel:');
+            if (n === true) {
+                gtag('event', 'click', {'event_category': 'phone','event_label' : this.href.slice(4)});
+            }
+        });
+    }
+});";
+            $seopress_google_analytics_click_event['phone_tracking'] = apply_filters('seopress_gtag_phone_tracking_ev', $seopress_google_analytics_click_event['phone_tracking']);
+            $seopress_google_analytics_html .= $seopress_google_analytics_click_event['phone_tracking'];
+        }
+
         // Google Enhanced Ecommerce
         require_once dirname(__FILE__) . '/options-google-ecommerce.php';
 
@@ -724,6 +739,13 @@ for (let i = 0; i < links.length; i++) {
 
         $seopress_google_analytics_html .= '</script>';
         $seopress_google_analytics_html .= "\n";
+
+        //Optimize
+        $optimizeOption = seopress_get_service('GoogleAnalyticsOption')->getOptimize();
+        if (!empty($optimizeOption)) {
+            $seopress_google_analytics_html .= '<script async src="https://www.googleoptimize.com/optimize.js?id='.$optimizeOption.'"></script>';
+            $seopress_google_analytics_html .= "\n";
+        }
 
         $seopress_google_analytics_html = apply_filters('seopress_gtag_html', $seopress_google_analytics_html);
 

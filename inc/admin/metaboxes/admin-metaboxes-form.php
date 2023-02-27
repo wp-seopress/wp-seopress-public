@@ -97,6 +97,13 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             }
                         } ?>
                         <div class="box-left">
+                            <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && '1' == seopress_get_toggle_option('ai')) {
+                                if ('post-new.php' == $pagenow || 'post.php' == $pagenow) { ?>
+                                <p>
+                                    <button id="seopress_ai_generate_seo_meta" class="<?php echo seopress_btn_secondary_classes(); ?>" type="button"><?php _e('Generate meta with AI','wp-seopress'); ?></button>
+                                </p>
+                            <?php }
+                            }?>
                             <p>
                                 <label for="seopress_titles_title_meta">
                                     <?php
@@ -222,8 +229,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                 } ?>
 
                                 <div class="wrap-snippet">
-                                    <div class="wrap-m-icon-permalink"><?php echo $siteicon . $gp_permalink; ?>
-                                    </div>
+                                    <div class="wrap-m-icon-permalink"><?php echo $siteicon . $gp_permalink; ?></div>
                                     <div class="snippet-title"></div>
                                     <div class="snippet-title-custom" style="display:none"></div>
 
@@ -456,6 +462,11 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                         <p class="notice notice-error"><?php _e('File URL is not valid.', 'wp-seopress'); ?>
                                         </p>
                                     </div>
+                                    <div class="snippet-fb-img-alert alert6" style="display:none">
+                                        <p class="notice notice-warning"><?php _e('Your filesize is: ', 'wp-seopress'); ?><span></span>
+                                            <?php _e('This is superior to 300KB. WhatsApp will not use your image.', 'wp-seopress'); ?>
+                                        </p>
+                                    </div>
                                     <div class="snippet-fb-img"><img src="" width="524" height="274" alt=""
                                             aria-label="" /><span class="seopress_social_fb_img_upload"></span></div>
                                     <div class="snippet-fb-img-custom" style="display:none"><img src="" width="524"
@@ -610,7 +621,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                     }
 
                     if (array_key_exists('redirect-tab', $seo_tabs)) {
-
+                        $docs = seopress_get_docs_links();
                         ?>
                     <div id="tabs-4">
                         <p>
@@ -629,6 +640,10 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                     />
                                     <?php _e('Regex?', 'wp-seopress'); ?>
                                 </label>
+                            </p>
+                            <p class="description">
+                                <a href="<?php echo $docs['redirects']['regex']; ?>" class="seopress-help" target="_blank"><?php _e('Learn how to use regular expressions', 'wp-seopress'); ?></a>
+                                <span class="seopress-help dashicons dashicons-external"></span>
                             </p>
                         <?php } ?>
                         <p>
@@ -759,15 +774,14 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                         }
                     }
 
-                if ((function_exists('seopress_mu_white_label_help_links_option') && '1' !== seopress_mu_white_label_help_links_option()) || (function_exists('seopress_white_label_help_links_option') && '1' !== seopress_white_label_help_links_option())) {
-                    $docs = seopress_get_docs_links(); ?>
-                            <span class="seopress-help dashicons dashicons-external"></span>
+                    if ('seopress_404' === $typenow) {
+                        $docs = seopress_get_docs_links(); ?>
                             <a href="<?php echo $docs['redirects']['enable']; ?>"
                                 target="_blank" class="seopress-help seopress-doc">
-                                <?php _e('Need help with your redirections? Read our guide.', 'wp-seopress'); ?>
+                                <?php _e('Need help with your redirections? Read our guide', 'wp-seopress'); ?>
                             </a>
-                            <?php
-                } ?>
+                            <span class="seopress-help dashicons dashicons-external"></span>
+                        <?php } ?>
                         </p>
                     </div>
                     <?php }

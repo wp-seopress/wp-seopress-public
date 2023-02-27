@@ -62,6 +62,12 @@ class Document_Settings_Section {
             true
         );
 
+        $seopress_ai_generate_seo_meta = [
+            'seopress_nonce'            => wp_create_nonce('seopress_ai_generate_seo_meta_nonce'),
+            'seopress_ai_generate_seo_meta'      => admin_url('admin-ajax.php'),
+        ];
+        wp_localize_script('seopress-elementor-base-script', 'seopressAjaxAIMetaSEO', $seopress_ai_generate_seo_meta);
+
         if (get_current_user_id()) {
             if (get_user_meta(get_current_user_id(), 'elementor_preferences', true)) {
                 $settings = get_user_meta(get_current_user_id(), 'elementor_preferences', true);

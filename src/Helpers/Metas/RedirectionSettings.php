@@ -21,6 +21,16 @@ abstract class RedirectionSettings {
      *    placeholder
      */
     public static function getMetaKeys($id = null) {
+        $defaultStatus = seopress_get_service('RedirectionMeta')->getPostMetaStatus($id);
+        if($defaultStatus === null || empty($defaultStatus)){
+            $defaultStatus = 'both';
+        }
+
+        $defaultType = seopress_get_service('RedirectionMeta')->getPostMetaType($id);
+        if($defaultType === null || empty($defaultType)){
+            $defaultType = 301;
+        }
+
         $data = apply_filters('seopress_api_meta_redirection_settings', [
             [
                 'key'         => '_seopress_redirections_enabled',
@@ -35,8 +45,8 @@ abstract class RedirectionSettings {
                 'key'         => '_seopress_redirections_logged_status',
                 'type'        => 'select',
                 'placeholder' => '',
-                'use_default' => '',
-                'default'     => '',
+                'use_default' => true,
+                'default'     => $defaultStatus,
                 'label'       => __('Select a login status:', 'wp-seopress'),
                 'options'     => [
                     ['value' => 'both', 'label' =>  __('All', 'wp-seopress')],
@@ -49,8 +59,8 @@ abstract class RedirectionSettings {
                 'key'         => '_seopress_redirections_type',
                 'type'        => 'select',
                 'placeholder' => '',
-                'use_default' => '',
-                'default'     => '',
+                'use_default' => true,
+                'default'     => $defaultType,
                 'label'       => __('Select a redirection type:', 'wp-seopress'),
                 'options'     => [
                     ['value' => 301, 'label' =>  __('301 Moved Permanently', 'wp-seopress')],

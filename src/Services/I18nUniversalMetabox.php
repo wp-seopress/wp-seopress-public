@@ -437,6 +437,7 @@ class I18nUniversalMetabox
                     'tooltip_description_2' => __("They are like a pitch that convince the user that the page is exactly what they're looking for.", 'wp-seopress'),
                     'tooltip_description_3' => __("There's no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width.", 'wp-seopress'),
                     'placeholder_description' => __('Enter your description', 'wp-seopress'),
+                    'generate_ai' => __('Generate meta with AI', 'wp-seopress')
                 ],
                 'repeater_how_to' => [
                     'title_step' => __(
@@ -788,6 +789,8 @@ class I18nUniversalMetabox
                         ),
                         "ratio" => __("Your image ratio is:", "wp-seopress"),
                         "ratio_info" => __("The closer to 1.91 the better.", "wp-seopress"),
+                        'img_filesize' => __('Your filesize is: ', 'wp-seopress'),
+                        'filesize_is_too_large' => __('This is superior to 300KB. WhatsApp will not use your image.', 'wp-seopress'),
                         "min_size" => __(
                             "Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image.",
                             "wp-seopress"

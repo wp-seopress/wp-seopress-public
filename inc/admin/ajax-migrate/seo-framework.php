@@ -110,6 +110,20 @@ function seopress_seo_framework_migration() {
                         update_post_meta($post->ID, '_seopress_redirections_type', '301');
                         update_post_meta($post->ID, '_seopress_redirections_value', get_post_meta($post->ID, 'redirect', true));
                     }
+
+                    //Primary category
+                    if ('post' == get_post_type($post->ID)) {
+                        $tax = 'category';
+                    } elseif ('product' == get_post_type($post->ID)) {
+                        $tax = 'product_cat';
+                    }
+                    if (isset($tax)) {
+                        $primary_term = get_post_meta($post->ID, '_primary_term_'.$tax, true);
+
+                        if ('' != $primary_term) {
+                            update_post_meta($post->ID, '_seopress_robots_primary_cat', $primary_term);
+                        }
+                    }
                 }
             }
             $offset += $increment;

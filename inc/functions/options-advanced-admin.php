@@ -63,11 +63,18 @@ if (isset($pagenow) && 'options-permalink.php' == $pagenow) {
 //Cleaning filename
 if (seopress_get_service('AdvancedOption')->getAdvancedCleaningFileName() === '1') {
     function seopress_image_seo_cleaning_filename($filename) {
+        $filename = do_action( 'seopress_image_seo_before_cleaning', $filename );
+
         /* Force the file name in UTF-8 (encoding Windows / OS X / Linux) */
         $filename = mb_convert_encoding($filename, "UTF-8");
 
-        $char_not_clean = array('/À/','/Á/','/Â/','/Ã/','/Ä/','/Å/','/Ç/','/È/','/É/','/Ê/','/Ë/','/Ì/','/Í/','/Î/','/Ï/','/Ò/','/Ó/','/Ô/','/Õ/','/Ö/','/Ù/','/Ú/','/Û/','/Ü/','/Ý/','/à/','/á/','/â/','/ã/','/ä/','/å/','/ç/','/è/','/é/','/ê/','/ë/','/ì/','/í/','/î/','/ï/','/ð/','/ò/','/ó/','/ô/','/õ/','/ö/','/ù/','/ú/','/û/','/ü/','/ý/','/ÿ/', '/©/');
-        $clean = array('a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','o','o','o','o','u','u','u','u','y','a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','o','o','o','o','o','u','u','u','u','y','y','copy');
+        $char_not_clean = ['/•/','/·/','/À/','/Á/','/Â/','/Ã/','/Ä/','/Å/','/Ç/','/È/','/É/','/Ê/','/Ë/','/Ì/','/Í/','/Î/','/Ï/','/Ò/','/Ó/','/Ô/','/Õ/','/Ö/','/Ù/','/Ú/','/Û/','/Ü/','/Ý/','/à/','/á/','/â/','/ã/','/ä/','/å/','/ç/','/è/','/é/','/ê/','/ë/','/ì/','/í/','/î/','/ï/','/ð/','/ò/','/ó/','/ô/','/õ/','/ö/','/ù/','/ú/','/û/','/ü/','/ý/','/ÿ/', '/©/'];
+
+        $char_not_clean = apply_filters( 'seopress_image_seo_clean_input', $char_not_clean );
+
+        $clean = ['-','-','a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','o','o','o','o','u','u','u','u','y','a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','o','o','o','o','o','u','u','u','u','y','y','copy'];
+
+        $clean = apply_filters( 'seopress_image_seo_clean_output', $clean );
 
         $friendly_filename = preg_replace($char_not_clean, $clean, $filename);
 
@@ -77,6 +84,8 @@ if (seopress_get_service('AdvancedOption')->getAdvancedCleaningFileName() === '1
 
         /* Remove uppercase */
         $friendly_filename = strtolower($friendly_filename);
+
+        $friendly_filename = do_action( 'seopress_image_seo_after_cleaning', $friendly_filename );
 
         return $friendly_filename;
     }

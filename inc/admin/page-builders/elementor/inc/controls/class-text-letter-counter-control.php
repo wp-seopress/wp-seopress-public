@@ -37,6 +37,15 @@ class Text_Letter_Counter_Control extends \Elementor\Base_Data_Control {
 		$control_uid = $this->get_control_uid();
 		?>
 		<div class="elementor-control-field seopress-text-letter-counter">
+            <# if ( data.field_type === 'text' ) { #>
+                <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && '1' == seopress_get_toggle_option('ai')) { ?>
+                    <div class="elementor-control-input-wrapper" style="margin-bottom: 20px">
+                        <button id="seopress_ai_generate_seo_meta" class="btn btnSecondary elementor-button elementor-button-default" type="button">
+                            <?php _e('Generate meta with AI','wp-seopress'); ?>
+                        </button>
+                    </div>
+                <?php } ?>
+            <# } #>
 			<label for="<?php echo esc_attr( $control_uid ); ?>" class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-input-wrapper">
 				<# if ( data.field_type === 'text' ) { #>

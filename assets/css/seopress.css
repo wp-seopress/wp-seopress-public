@@ -1109,7 +1109,14 @@ table.fixed thead .column-seopress_noindex {
     align-items: center;
 }
 
-.column-seopress_score .analysis-score {
+.seopress_title.column-seopress_title *,
+.seopress_desc.column-seopress_desc * {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.inline-edit-row fieldset label textarea .column-seopress_score .analysis-score {
     display: flex;
     align-content: center;
 }
@@ -1833,7 +1840,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 }
 
 /* Google / Social Preview */
-#seopress_cpt .google-snippet-preview {
+#seopress_cpt .google-snippet-preview .wrap-snippet {
     font-family: arial, sans-serif;
     word-break: break-all;
 }
@@ -1844,6 +1851,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     padding: 12px 16px;
     border-bottom: 4px solid #f1f3f4;
     border-top: 4px solid #f1f3f4;
+    font-family: Roboto, Helvetica Neue, Arial, sans-serif;
 }
 
 #seopress_cpt .google-snippet-preview>p {
@@ -1908,13 +1916,18 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-bottom: 11px;
-    display: flex;
+    display: inline-flex;
+    align-items: center;
 }
 
 #seopress_cpt .google-snippet-preview.mobile-preview .wrap-m-icon-permalink .snippet-permalink {
     display: block;
     color: #202124;
     font-size: 12px;
+}
+
+#seopress_cpt .google-snippet-preview.mobile-preview .wrap-snippet .wrap-m-icon-permalink .snippet-favicon {
+    display: block;
 }
 
 #seopress_cpt .google-snippet-preview.mobile-preview .snippet-favicon {
@@ -2084,7 +2097,6 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 .term-php #seopress_cpt .facebook-snippet-box img,
 .term-php #seopress_cpt .twitter-snippet-box img {
     width: 100%;
-    height: auto;
 }
 
 .seopress_social_fb_img_upload,
@@ -3084,6 +3096,8 @@ body .seopress-cart-list h3 {
     display: inline-flex;
     width: 100%;
     margin: 10px 0;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .seopress-option .wrap-tags {
@@ -3239,7 +3253,6 @@ body .seopress-cart-list h3 {
     padding: 5px 12px;
     font-size: 10px;
     user-select: none;
-    margin: 0px 5px 0px 0;
     display: inline-flex;
     text-transform: uppercase;
     align-items: center;

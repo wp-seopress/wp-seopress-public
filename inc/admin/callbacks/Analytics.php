@@ -894,6 +894,31 @@ esc_html($check)
 <?php
 }
 
+function seopress_google_analytics_phone_tracking_callback() {
+    $options = get_option('seopress_google_analytics_option_name');
+
+    $check = isset($options['seopress_google_analytics_phone_tracking']); ?>
+
+<label for="seopress_google_analytics_phone_tracking">
+    <input id="seopress_google_analytics_phone_tracking"
+        name="seopress_google_analytics_option_name[seopress_google_analytics_phone_tracking]"
+        type="checkbox" <?php if ('1' == $check) { ?>
+    checked="yes"
+    <?php } ?>
+    value="1"/>
+    <?php _e('Enable tracking of "tel:" links', 'wp-seopress'); ?>
+</label>
+
+<p class="description">
+    <pre>&lt;a href="tel:+33123456789"&gt;</pre>
+</p>
+
+<?php
+    if (isset($options['seopress_google_analytics_phone_tracking'])) {
+        esc_attr($options['seopress_google_analytics_phone_tracking']);
+    }
+}
+
 function seopress_google_analytics_cd_author_callback() {
     $options = get_option('seopress_google_analytics_option_name');
 

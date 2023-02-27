@@ -42,8 +42,8 @@ function seopress_xml_sitemap_img_enable_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Enable Image Sitemaps (standard images, image galleries, featured image, WooCommerce product images)', 'wp-seopress'); ?>
-    <?php echo seopress_tooltip_link($docs['sitemaps']['image'], __('Guide to enable XML image sitemaps - new window', 'wp-seopress')); ?>
+    <?php _e('Enable Image Sitemap (standard images, image galleries, featured image, WooCommerce product images)', 'wp-seopress'); ?>
+    <?php echo seopress_tooltip_link($docs['sitemaps']['image'], __('Guide to enable XML image sitemap - new window', 'wp-seopress')); ?>
 </label>
 
 
@@ -72,8 +72,8 @@ function seopress_xml_sitemap_video_enable_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Enable Video Sitemaps', 'wp-seopress'); ?>
-    <?php echo seopress_tooltip_link($docs['sitemaps']['video'], __('Guide to enable XML video sitemaps - new window', 'wp-seopress')); ?>
+    <?php _e('Enable Video Sitemap', 'wp-seopress'); ?>
+    <?php echo seopress_tooltip_link($docs['sitemaps']['video'], __('Guide to enable XML video sitemap - new window', 'wp-seopress')); ?>
 </label>
 
 

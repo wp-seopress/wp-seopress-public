@@ -30,7 +30,7 @@ function seopress_migration_tool($plugin, $name) {
     if ('wp-meta-seo' != $plugin && 'seo-ultimate' != $plugin && 'squirrly' != $plugin && 'slim-seo' != $plugin) {
         $html .= '<li>' . __('Focus / target keywords', 'wp-seopress') . '</li>';
     }
-    if ('wp-meta-seo' != $plugin && 'premium-seo-pack' != $plugin && 'seo-ultimate' != $plugin && 'squirrly' != $plugin && 'seo-framework' != $plugin && 'aio' != $plugin && 'slim-seo' != $plugin) {
+    if ('wp-meta-seo' != $plugin && 'premium-seo-pack' != $plugin && 'seo-ultimate' != $plugin && 'squirrly' != $plugin && 'aio' != $plugin && 'slim-seo' != $plugin) {
         $html .= '<li>' . __('Primary category', 'wp-seopress') . '</li>';
     }
     if ('wpseo' == $plugin || 'platinum-seo' == $plugin || 'smart-crawl' == $plugin || 'seopressor' == $plugin || 'rk' == $plugin || 'seo-framework' == $plugin || 'aio' == $plugin) {

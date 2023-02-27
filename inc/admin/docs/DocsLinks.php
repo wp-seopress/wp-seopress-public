@@ -113,6 +113,7 @@ function seopress_get_docs_links()
             'redirects'   => [
                 'enable' => 'https://www.seopress.org/fr/support/guides/activer-les-redirections-301-et-la-surveillance-des-404/' . $utm,
                 'query'  => 'https://www.seopress.org/fr/support/guides/nettoyez-vos-erreurs-404-a-laide-dune-requete-mysql/' . $utm,
+                'regex'  => 'https://www.seopress.org/fr/support/guides/activer-les-redirections-301-et-la-surveillance-des-404/' . $utm . '#expressions-regulieres',
             ],
             'schemas' => [
                 'ebook'   => 'https://www.seopress.org/fr/support/ebooks/types-de-donnees-structurees-de-google-schemas/' . $utm,
@@ -257,6 +258,7 @@ function seopress_get_docs_links()
             'redirects'   => [
                 'enable' => 'https://www.seopress.org/support/guides/redirections/' . $utm,
                 'query'  => 'https://www.seopress.org/support/guides/delete-your-404-errors-with-a-mysql-query/' . $utm,
+                'regex'  => 'https://www.seopress.org/support/guides/redirections/' . $utm . '#regular-expressions',
             ],
             'schemas' => [
                 'ebook'   => 'https://www.seopress.org/support/ebooks/master-google-structured-data-types-schemas/' . $utm,

@@ -96,6 +96,12 @@
                 'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_local_business'),
                 'filter'        => 'seopress_remove_feature_local_business',
             ];
+            $features['ai'] = [
+                'title'         => __('AI', 'wp-seopress'),
+                'desc'          => __('Use the power of artificial intelligence to increase your productivity.', 'wp-seopress'),
+                'btn_primary'   => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_ai'),
+                'filter'        => 'seopress_remove_feature_ai',
+            ];
             $features['breadcrumbs'] = [
                 'title'         => __('Breadcrumbs', 'wp-seopress'),
                 'desc'          => __('Enable Breadcrumbs for your theme and improve your SEO in SERPs.', 'wp-seopress'),

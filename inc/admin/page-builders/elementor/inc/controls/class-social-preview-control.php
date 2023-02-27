@@ -43,11 +43,6 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 		<# if ( data.network === 'facebook' ) { #>
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-field facebook-snippet-box">
-				<div class="snippet-fb-img-alert alert1" style="display:none"><p class="notice notice-error"><?php _e('File type not supported by Facebook. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-fb-img-alert alert2" style="display:none"><p class="notice notice-error"><?php _e('Minimum size for Facebook is <strong>200x200px</strong>. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-fb-img-alert alert3" style="display:none"><p class="notice notice-error"><?php _e('File error. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-fb-img-alert alert4" style="display:none"><p class="notice notice-info"><?php _e('Your image ratio is: ', 'wp-seopress'); ?><span></span><?php _e('. The closer to 1.91 the better.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-fb-img-alert alert5" style="display:none"><p class="notice notice-error"><?php _e('File URL is not valid.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-fb-img">
 					<img src="{{{data.image}}}">
 				</div>
@@ -67,11 +62,6 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 		<# } else if( data.network === 'twitter' ) { #>
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-field twitter-snippet-box">
-				<div class="snippet-twitter-img-alert alert1" style="display:none"><p class="notice notice-error"><?php _e('File type not supported by Twitter. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-twitter-img-alert alert2" style="display:none"><p class="notice notice-error"><?php _e('Minimum size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-twitter-img-alert alert3" style="display:none"><p class="notice notice-error"><?php _e('File error. Please choose another image.', 'wp-seopress'); ?></p></div>
-				<div class="snippet-twitter-img-alert alert4" style="display:none"><p class="notice notice-info"><?php _e('Your image ratio is: ', 'wp-seopress'); ?><span></span><?php _e('. The closer to 1 the better (with large card, 2 is better).', 'wp-seopress'); ?></p></div>
-				<div class="snippet-twitter-img-alert alert5" style="display:none"><p class="notice notice-error"><?php _e('File URL is not valid.', 'wp-seopress'); ?></p></div>
 				<div class="snippet-twitter-img-default">
 					<img src="{{{data.image}}}">
 				</div>
@@ -92,20 +82,28 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 					<div class="wrap-toggle-preview">
 						<p>
 							<span class="dashicons dashicons-smartphone"></span>
-							<?php _e('Mobile Preview', 'wp-seopress'); ?>
+							<strong><?php _e('Mobile Preview', 'wp-seopress'); ?></strong>
 							<input type="checkbox" name="toggle-preview" id="toggle-preview" class="toggle" data-toggle="1">
 							<label for="toggle-preview"></label>
 						</p>
 					</div>
+
+                    <?php
+                        $gp_title       = '';
+                        $gp_permalink   = '';
+                        $alt_site_title = !empty(seopress_get_service('TitleOption')->getHomeSiteTitleAlt()) ? seopress_get_service('TitleOption')->getHomeSiteTitleAlt() : get_bloginfo('name');
+
+                        $gp_title       = '<div class="snippet-title-default" style="display:none">' . get_the_title() . ' - ' . get_bloginfo('name') . '</div>';
+                        $gp_permalink   = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars(urldecode(get_permalink())) . '</div>';
+
+                        $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="18" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC" width="18" alt="favicon"></div>';
+                        if (get_site_icon_url(32)) {
+                            $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="18" src="' . get_site_icon_url(32) . '" width="18" alt="favicon"/></div>';
+                        }
+                    ?>
 					<div class="wrap-snippet">
-						<div class="wrap-m-icon-permalink">
-							<div class="snippet-favicon">
-								<img aria-hidden="true" height="16" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC" width="16" alt="favicon">
-							</div>
-							<div class="snippet-permalink">{{{ data.link }}}</div>
-						</div>
+                        <div class="wrap-m-icon-permalink"><?php echo $siteicon . $gp_permalink; ?></div>
 						<div class="snippet-title">{{{ data.title }}}</div>
-						<div class="snippet-permalink">{{{ data.link }}}</div>
                         <div class="wrap-snippet-mobile">
                             <div class="wrap-meta-desc">
                                 <?php echo seopress_display_date_snippet(); ?>

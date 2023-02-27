@@ -121,8 +121,11 @@ var _paq = window._paq || [];\n";
 
 		//subdomains
 		if (seopress_google_analytics_matomo_subdomains_option() =='1') {
-			$seopress_matomo_config['subdomains'] = "_paq.push(['setCookieDomain', '*.".get_home_url()."']);\n";
-			$seopress_matomo_config['subdomains'] = apply_filters('seopress_matomo_cookie_domain', $seopress_matomo_config['subdomains']);
+            $parse_url = wp_parse_url(get_home_url());
+            if ( ! empty($parse_url['host'])) {
+                $seopress_matomo_config['subdomains'] = "_paq.push(['setCookieDomain', '*.".$parse_url['host']."']);\n";
+                $seopress_matomo_config['subdomains'] = apply_filters('seopress_matomo_cookie_domain', $seopress_matomo_config['subdomains']);
+            }
 		}
 
 		//site domain
@@ -154,7 +157,7 @@ var _paq = window._paq || [];\n";
 				$link_domains = '';
 
 				foreach ($domains as $key => $domain) {
-					$link_domains .= "'*.".$domain."'";
+					$link_domains .= "'".$domain."'";
 					if ( $key < $domains_count -1){
 						$link_domains .= ',';
 					}

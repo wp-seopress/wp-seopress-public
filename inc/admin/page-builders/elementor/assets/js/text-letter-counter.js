@@ -5,6 +5,7 @@ jQuery(document).ready(function () {
     });
 });
 
+
 var tagClickInitialized = false;
 
 var textLetterCounterView = elementor.modules.controls.BaseData.extend({

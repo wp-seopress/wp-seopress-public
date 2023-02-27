@@ -25,6 +25,23 @@ class RedirectionMeta
         return null;
     }
 
+    protected function getMetaValue($callback, $id, $meta){
+        switch($callback){
+            case 'get_post_meta':
+                return get_post_meta($id, $meta, true);
+            case 'get_term_meta':
+                return get_term_meta($id, $meta, true);
+        }
+    }
+
+    public function getPostMetaType($postId){
+        return $this->getMetaValue('get_post_meta', $postId, '_seopress_redirections_type');
+    }
+
+    public function getPostMetaStatus($postId){
+        return $this->getMetaValue('get_post_meta', $postId, '_seopress_redirections_logged_status');
+    }
+
     /**
      *
      * @param array $context

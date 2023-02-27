@@ -337,7 +337,7 @@ function seopress_display_seo_metaboxe()
         $seopress_social_twitter_img_height     = get_post_meta($post->ID, '_seopress_social_twitter_img_height', true);
         $seopress_redirections_enabled          = get_post_meta($post->ID, '_seopress_redirections_enabled', true);
         $seopress_redirections_enabled_regex    = get_post_meta($post->ID, '_seopress_redirections_enabled_regex', true);
-        $seopress_redirections_logged_status   = get_post_meta($post->ID, '_seopress_redirections_logged_status', true);
+        $seopress_redirections_logged_status    = get_post_meta($post->ID, '_seopress_redirections_logged_status', true);
         $seopress_redirections_type             = get_post_meta($post->ID, '_seopress_redirections_type', true);
         $seopress_redirections_value            = get_post_meta($post->ID, '_seopress_redirections_value', true);
         $seopress_redirections_param            = get_post_meta($post->ID, '_seopress_redirections_param', true);
@@ -659,7 +659,7 @@ function seopress_display_ca_metaboxe()
         wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify.min.css', [], SEOPRESS_VERSION);
         wp_enqueue_style('seopress-tagify');
 
-        wp_enqueue_script('seopress-cpt-counters-js', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion'], SEOPRESS_VERSION);
+        wp_enqueue_script('seopress-cpt-counters-js', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion', 'jquery-ui-autocomplete'], SEOPRESS_VERSION);
         $seopress_real_preview = [
             'seopress_nonce'         => wp_create_nonce('seopress_real_preview_nonce'),
             'seopress_real_preview'  => admin_url('admin-ajax.php'),
@@ -674,6 +674,12 @@ function seopress_display_ca_metaboxe()
             'seopress_inspect_url'      => admin_url('admin-ajax.php'),
         ];
         wp_localize_script('seopress-cpt-counters-js', 'seopressAjaxInspectUrl', $seopress_inspect_url);
+
+        $seopress_ai_generate_seo_meta = [
+            'seopress_nonce'            => wp_create_nonce('seopress_ai_generate_seo_meta_nonce'),
+            'seopress_ai_generate_seo_meta'      => admin_url('admin-ajax.php'),
+        ];
+        wp_localize_script('seopress-cpt-counters-js', 'seopressAjaxAIMetaSEO', $seopress_ai_generate_seo_meta);
 
         $seopress_analysis_target_kw            = get_post_meta($post->ID, '_seopress_analysis_target_kw', true);
         $seopress_analysis_data                 = get_post_meta($post->ID, '_seopress_analysis_data', true);
