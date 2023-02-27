@@ -1618,57 +1618,29 @@ class SEOPRESS_Admin_Setup_Wizard {
                         </div>
                     </li>
 
-                    <?php if (function_exists('seopress_get_toggle_white_label_option') && '1' !== seopress_get_toggle_white_label_option()) { ?>
-                        <li class="seopress-wizard-additional-steps">
+                    <?php if (!function_exists('seopress_get_toggle_white_label_option') || '1' !== seopress_get_toggle_white_label_option()) {
+                        $current_user = wp_get_current_user();
+                        $user_email = $current_user->user_email ? esc_html( $current_user->user_email ) : '';
+                        ?>
+                        <li class="seopress-wizard-next-step-item">
                             <div class="seopress-wizard-next-step-description">
-                                <p class="next-step-heading"><?php esc_html_e('Follow us:', 'wp-seopress'); ?>
+                                <p class="next-step-heading"><?php esc_html_e('Newsletter', 'wp-seopress'); ?>
                                 </p>
-                            </div>
-                            <div class="seopress-wizard-next-step-action step">
-                                <ul class="recommended-step">
-                                    <li class="seopress-wizard-service-item">
-                                        <a href="<?php echo $docs['external']['facebook']; ?>"
-                                            target="_blank">
-                                            <span class="dashicons dashicons-facebook"></span>
-                                            <?php _e('Like our Facebook page', 'wp-seopress'); ?>
-                                        </a>
-                                    </li>
-                                    <li class="seopress-wizard-service-item">
-                                        <a href="<?php echo $docs['external']['facebook_gr']; ?>"
-                                            target="_blank">
-                                            <span class="dashicons dashicons-facebook"></span>
-                                            <?php _e('Join our Facebook Community group', 'wp-seopress'); ?>
-                                        </a>
-                                    </li>
-                                    <li class="seopress-wizard-service-item">
-                                        <a href="<?php echo $docs['external']['youtube']; ?>"
-                                            target="_blank">
-                                            <span class="dashicons dashicons-video-alt3"></span>
-                                            <?php _e('Watch our guided tour videos to learn more about SEOPress', 'wp-seopress'); ?>
-                                        </a>
-                                    </li>
-                                    <li class="seopress-wizard-service-item">
-                                        <a href="<?php echo $docs['blog']; ?>"
-                                            target="_blank">
-                                            <span class="dashicons dashicons-format-aside"></span>
-                                            <?php _e('Read our blog posts about SEO concepts, tutorials and more', 'wp-seopress'); ?>
-                                        </a>
-                                    </li>
-                                    <li class="seopress-wizard-service-item">
-                                        <a href="<?php echo $docs['external']['twitter']; ?>"
-                                            target="_blank">
-                                            <span class="dashicons dashicons-twitter"></span>
-                                            <?php _e('Follow us on Twitter', 'wp-seopress'); ?>
-                                        </a>
-                                    </li>
-                                    <li class="seopress-wizard-service-item">
-                                        <a href="<?php echo $docs['external']['instagram']; ?>"
-                                            target="_blank">
-                                            <span class="dashicons dashicons-instagram"></span>
-                                            <?php _e('The off side of SEOPress', 'wp-seopress'); ?>
-                                        </a>
-                                    </li>
+                                <h3 class="next-step-description"><?php esc_html_e('SEO news in your inbox. Free.', 'wp-seopress'); ?>
+                                </h3>
+                                <ul class="next-step-extra-info">
+                                    <li><span class="dashicons dashicons-minus"></span><?php esc_html_e('Be alerted to changes in Google’s algorithm', 'wp-seopress'); ?></li>
+                                    <li><span class="dashicons dashicons-minus"></span><?php esc_html_e('The latest innovations of our products', 'wp-seopress'); ?></li>
+                                    <li><span class="dashicons dashicons-minus"></span><?php esc_html_e('Improve your conversions and traffic with our new blog posts', 'wp-seopress'); ?></li>
                                 </ul>
+                            </div>
+                            <div class="seopress-wizard-next-step-action">
+                                <p class="seopress-setup-actions step">
+                                    <a class="btn btnSecondary" target="_blank"
+                                        href="<?php echo $docs['subscribe']; ?>&email=<?php echo $user_email; ?>">
+                                        <?php esc_html_e('Subscribe', 'wp-seopress'); ?>
+                                    </a>
+                                </p>
                             </div>
                         </li>
                     <?php } ?>
@@ -1688,7 +1660,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                                     href="<?php echo esc_url(admin_url('admin.php?page=seopress-option')); ?>">
                                     <?php esc_html_e('Review Settings', 'wp-seopress'); ?>
                                 </a>
-                                <?php if (function_exists('seopress_get_toggle_white_label_option') && '1' !== seopress_get_toggle_white_label_option()) { ?>
+                                <?php if (!function_exists('seopress_get_toggle_white_label_option') || '1' !== seopress_get_toggle_white_label_option()) { ?>
                                     <a class="btn btnSecondary"
                                         href="<?php echo $docs['support']; ?>"
                                         target="_blank">

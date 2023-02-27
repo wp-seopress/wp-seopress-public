@@ -583,8 +583,13 @@ function seopress_remove_other_notices() {
         remove_all_actions('user_admin_notices');
         remove_all_actions('all_admin_notices');
         add_action('admin_notices', 'seopress_admin_notices');
+        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+            if ( version_compare(SEOPRESS_PRO_VERSION, '6.4', '>=')) {
+                add_action('admin_notices', 'seopress_pro_admin_notices');
+            }
+        }
         if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-            add_action('admin_notices', 'seopress_insights_notice');
+            add_action('admin_notices', 'seopress_insights_notices');
         }
     }
 }

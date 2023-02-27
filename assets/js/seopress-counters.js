@@ -927,36 +927,4 @@ jQuery(document).ready(function (e) {
         });
     });
 
-    //Open AI
-    $('#seopress_ai_generate_seo_meta').on("click", function () {
-        $(this).attr("disabled", "disabled");
-        $('.spinner').css("visibility", "visible");
-        $('.spinner').css("float", "none");
-
-        //Post ID
-        if (typeof e("#seopress-tabs").attr("data_id") !== "undefined") {
-            var post_id = e("#seopress-tabs").attr("data_id");
-        } else if (typeof e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_id") !== "undefined") {
-            var post_id = e("#seopress_content_analysis .wrap-seopress-analysis").attr("data_id")
-        }
-
-        e.ajax({
-            method: "POST",
-            url: seopressAjaxAIMetaSEO.seopress_ai_generate_seo_meta,
-            data: {
-                action: "seopress_ai_generate_seo_meta",
-                post_id: post_id,
-                _ajax_nonce: seopressAjaxAIMetaSEO.seopress_nonce,
-            },
-            success: function (data) {
-                $('.spinner').css("visibility", "hidden");
-                $('#seopress_ai_generate_seo_meta').removeAttr("disabled");
-                if (data.success === true) {
-                    $("#seopress_titles_title_meta").val(data.data.title);
-                    $("#seopress_titles_desc_meta").val(data.data.desc);
-                    sp_titles_counters();
-                }
-            }
-        });
-    });
 });

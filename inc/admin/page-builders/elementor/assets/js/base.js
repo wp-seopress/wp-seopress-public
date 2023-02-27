@@ -2,12 +2,6 @@ var elSocialData = [];
 elSocialData.fbDefaultImage = '';
 elSocialData.twDefaultImage = '';
 
-jQuery(document).ready(function () {
-    jQuery(document).on("click", "#seopress_ai_generate_seo_meta", function () {
-        sp_ai_generate_meta();
-    });
-});
-
 function googlePreview() {
     jQuery.ajax({
         method: "GET",
@@ -309,28 +303,3 @@ function sp_social_img(social_slug) {
     }
 }
 
-function sp_ai_generate_meta() {
-    const $ = jQuery;
-    //Open AI
-    $(this).attr("disabled", "disabled");
-    $('.spinner').css("visibility", "visible");
-    $('.spinner').css("float", "none");
-
-    jQuery.ajax({
-        method: "POST",
-        url: seopressAjaxAIMetaSEO.seopress_ai_generate_seo_meta,
-        data: {
-            action: "seopress_ai_generate_seo_meta",
-            post_id: seopressElementorBase.post_id,
-            _ajax_nonce: seopressAjaxAIMetaSEO.seopress_nonce,
-        },
-        success: function (data) {
-            $('.spinner').css("visibility", "hidden");
-            $('#seopress_ai_generate_seo_meta').removeAttr("disabled");
-            if (data.success === true) {
-                $("input[data-setting=_seopress_titles_title]").val(data.data.title);
-                $("textarea[data-setting=_seopress_titles_desc]").val(data.data.desc);
-            }
-        }
-    });
-}

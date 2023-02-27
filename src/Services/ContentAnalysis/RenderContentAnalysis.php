@@ -30,7 +30,7 @@ class RenderContentAnalysis {
             $score = false;
         }
 
-        if ( ! empty($analysis_data)) {
+        if ( ! empty($analysis_data) && is_array($analysis_data)) {
             $analysis_data['score'] = $score;
             update_post_meta(get_the_ID(), '_seopress_analysis_data', $analysis_data);
         } ?>

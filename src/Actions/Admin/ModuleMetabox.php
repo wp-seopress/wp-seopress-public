@@ -118,6 +118,9 @@ class ModuleMetabox implements ExecuteHooks
                 'GLOBAL' => $settingsAdvanced->getSecurityMetaboxRole(),
                 'CONTENT_ANALYSIS' => $settingsAdvanced->getSecurityMetaboxRoleContentAnalysis()
             ],
+            'OPTIONS' => [
+                "AI" => seopress_get_service('ToggleOption')->getToggleAi() === "1" ? true : false,
+            ],
             'TABS' => [
                 'SCHEMAS' => apply_filters('seopress_active_schemas_manual_universal_metabox', false)
             ],

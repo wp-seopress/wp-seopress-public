@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 6.3.2\n"
+"Project-Id-Version: SEOPress 6.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-01T10:24:07+00:00\n"
+"POT-Creation-Date: 2023-02-16T10:13:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes.php:221
 #: inc/admin/metaboxes/admin-metaboxes.php:224
 #: inc/admin/page-builders/gutenberg/blocks.php:21
-#: inc/functions/options-advanced-admin.php:780
+#: inc/functions/options-advanced-admin.php:732
 #: src/Services/I18nUniversalMetabox.php:425
 msgid "SEO"
 msgstr ""
@@ -413,7 +413,7 @@ msgstr ""
 #: inc/admin/admin-pages/Sitemaps.php:43
 #: inc/admin/admin-pages/Social.php:43
 #: inc/admin/admin-pages/Titles.php:54
-#: seopress-functions.php:759
+#: seopress-functions.php:764
 msgid "Save changes"
 msgstr ""
 
@@ -627,7 +627,7 @@ msgid "To get your Google snippet preview, publish your post!"
 msgstr ""
 
 #: inc/admin/ajax.php:131
-msgid "Your site is protected by an authentification. <a href=\"%s\" target=\"_blank\">Fix this</a> <span class=\"dashicons dashicons-external\"></span>"
+msgid "Your site is protected by an authentication. <a href=\"%s\" target=\"_blank\">Fix this</a> <span class=\"dashicons dashicons-external\"></span>"
 msgstr ""
 
 #: inc/admin/blocks/features-list.php:10
@@ -2129,7 +2129,7 @@ msgstr ""
 
 #: inc/admin/callbacks/Social.php:15
 #: inc/admin/metaboxes/admin-metaboxes-form.php:318
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:320
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:314
 #: inc/admin/wizard/admin-wizard.php:733
 #: src/Helpers/Metas/RobotSettings.php:19
 #: app/editor/primary-category-select/index.js:58
@@ -2469,7 +2469,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:133
 #: inc/admin/migrate/MigrationTools.php:19
 #: inc/admin/settings/Titles.php:40
-#: inc/functions/options-advanced-admin.php:791
+#: inc/functions/options-advanced-admin.php:743
 #: src/Helpers/ContentAnalysis.php:53
 #: src/Services/I18nUniversalMetabox.php:120
 #: src/Services/I18nUniversalMetabox.php:435
@@ -2749,71 +2749,71 @@ msgstr ""
 msgid "eg: https://example.com/my-media-attachment-page"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:169
+#: inc/admin/docs/DocsLinks.php:171
 msgid "Installation of SEOPress"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:170
+#: inc/admin/docs/DocsLinks.php:172
 msgid "Activate your license key to receive automatic updates"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:171
+#: inc/admin/docs/DocsLinks.php:173
 msgid "Configure SEOPress in 5 minutes"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:172
+#: inc/admin/docs/DocsLinks.php:174
 msgid "Migrate your SEO metadata from other plugins"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:173
+#: inc/admin/docs/DocsLinks.php:175
 msgid "Promote the exploration of your WordPress site by search engine robots"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:174
+#: inc/admin/docs/DocsLinks.php:176
 msgid "Optimize content from A to Z with SEOPress"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:175
+#: inc/admin/docs/DocsLinks.php:177
 msgid "Measure your traffic with Google Analytics"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:176
+#: inc/admin/docs/DocsLinks.php:178
 msgid "Add your WordPress site to Google’s index"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:177
+#: inc/admin/docs/DocsLinks.php:179
 msgid "Optimize your click-through rate on social networks"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:178
+#: inc/admin/docs/DocsLinks.php:180
 msgid "Free ebooks to learn SEO"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:181
+#: inc/admin/docs/DocsLinks.php:183
 msgid "Activate your SEOPress Insights license"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:182
+#: inc/admin/docs/DocsLinks.php:184
 msgid "Track your keyword rankings in Google with SEOPress Insights"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:183
+#: inc/admin/docs/DocsLinks.php:185
 msgid "Monitor and analyse your Backlinks with SEOPress Insights"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:184
+#: inc/admin/docs/DocsLinks.php:186
 msgid "Finding SEO keywords for your WordPress site"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:185
+#: inc/admin/docs/DocsLinks.php:187
 msgid "Optimize WordPress posts for a keyword"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:186
+#: inc/admin/docs/DocsLinks.php:188
 msgid "Audit the backlinks of your WordPress site (in WordPress)"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:187
+#: inc/admin/docs/DocsLinks.php:189
 msgid "The importance of backlinks"
 msgstr ""
 
@@ -2874,14 +2874,14 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:31
 #: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:32
 #: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:36
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:598
-#: inc/functions/options-advanced-admin.php:800
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:592
+#: inc/functions/options-advanced-admin.php:752
 #: src/Services/I18nUniversalMetabox.php:730
 msgid "Target keywords"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:32
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:600
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:594
 #: src/Services/I18nUniversalMetabox.php:731
 msgid "Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them"
 msgstr ""
@@ -2898,7 +2898,7 @@ msgid "Refresh analysis"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:44
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:624
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:618
 #: src/Services/I18nUniversalMetabox.php:744
 msgid "To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would."
 msgstr ""
@@ -2942,7 +2942,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:86
 #: inc/admin/metaboxes/admin-metaboxes-form.php:93
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:172
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:166
 #: src/Services/I18nUniversalMetabox.php:22
 #: src/Services/I18nUniversalMetabox.php:431
 msgid "Title"
@@ -2999,7 +2999,7 @@ msgid "Post Excerpt"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:170
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:196
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:190
 #: src/Services/I18nUniversalMetabox.php:472
 msgid "Google Snippet Preview"
 msgstr ""
@@ -3035,7 +3035,7 @@ msgid "You cannot uncheck a parameter? This is normal, and it‘s most likely de
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:247
-#: inc/functions/options-advanced-admin.php:817
+#: inc/functions/options-advanced-admin.php:769
 msgid "Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>"
 msgstr ""
 
@@ -3049,7 +3049,7 @@ msgid "By checking this option, you will add a meta robots tag with the value \"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:258
-#: inc/functions/options-advanced-admin.php:825
+#: inc/functions/options-advanced-admin.php:777
 msgid "Do not follow links for this page <strong>(nofollow)</strong>"
 msgstr ""
 
@@ -3107,7 +3107,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:294
 #: inc/admin/metaboxes/admin-metaboxes-form.php:300
 #: inc/admin/migrate/MigrationTools.php:28
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:297
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:291
 #: src/Helpers/ContentAnalysis.php:13
 #: src/Helpers/Metas/RobotSettings.php:92
 #: src/Services/I18nUniversalMetabox.php:368
@@ -3125,7 +3125,7 @@ msgid "Default value: "
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:306
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:327
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:321
 #: src/Helpers/Metas/RobotSettings.php:101
 #: app/editor/primary-category-select/index.js:74
 #: public/editor/primary-category-select/index.js:1
@@ -3133,7 +3133,7 @@ msgid "Select a primary category"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:307
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:328
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:322
 #: src/Helpers/Metas/RobotSettings.php:102
 msgid "Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories."
 msgstr ""
@@ -3150,7 +3150,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:356
 #: inc/admin/metaboxes/admin-metaboxes-form.php:360
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:406
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:400
 #: src/Helpers/Metas/SocialSettings.php:31
 msgid "Facebook Title"
 msgstr ""
@@ -3162,7 +3162,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:364
 #: inc/admin/metaboxes/admin-metaboxes-form.php:368
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:417
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:411
 #: src/Helpers/Metas/SocialSettings.php:40
 msgid "Facebook description"
 msgstr ""
@@ -3174,12 +3174,12 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:372
 #: inc/admin/metaboxes/admin-metaboxes-form.php:377
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:428
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:422
 msgid "Facebook Thumbnail"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:397
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:441
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:435
 #: src/Services/I18nUniversalMetabox.php:785
 msgid "Facebook Preview"
 msgstr ""
@@ -3245,7 +3245,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:483
 #: inc/admin/metaboxes/admin-metaboxes-form.php:487
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:455
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:449
 #: src/Helpers/Metas/SocialSettings.php:71
 #: src/Services/ContentAnalysis/GetContent.php:536
 #: src/Services/I18nUniversalMetabox.php:36
@@ -3259,7 +3259,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:491
 #: inc/admin/metaboxes/admin-metaboxes-form.php:495
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:466
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:460
 #: src/Helpers/Metas/SocialSettings.php:80
 msgid "Twitter description"
 msgstr ""
@@ -3271,13 +3271,13 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:498
 #: inc/admin/metaboxes/admin-metaboxes-form.php:515
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:477
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:471
 #: src/Helpers/Metas/SocialSettings.php:89
 msgid "Twitter Thumbnail"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:521
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:490
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:484
 #: src/Services/I18nUniversalMetabox.php:809
 msgid "Twitter Preview"
 msgstr ""
@@ -3306,7 +3306,7 @@ msgid "The closer to 1 the better (with large card, 2 is better)."
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:597
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:528
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:522
 msgid "Enable redirection?"
 msgstr ""
 
@@ -3342,19 +3342,19 @@ msgid "Select a redirection type: "
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:635
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:544
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:538
 #: src/Helpers/Metas/RedirectionSettings.php:66
 msgid "301 Moved Permanently"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:638
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:545
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:539
 #: src/Helpers/Metas/RedirectionSettings.php:67
 msgid "302 Found / Moved Temporarily"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:641
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:546
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:540
 #: src/Helpers/Metas/RedirectionSettings.php:68
 msgid "307 Moved Temporarily"
 msgstr ""
@@ -3369,13 +3369,13 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:654
 #: inc/admin/metaboxes/admin-metaboxes-form.php:658
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:539
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:533
 #: src/Helpers/Metas/RedirectionSettings.php:76
 msgid "URL redirection"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:657
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:555
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:549
 #: src/Helpers/Metas/RedirectionSettings.php:75
 msgid "Enter your new URL in absolute (eg: https://www.example.com/)"
 msgstr ""
@@ -3407,7 +3407,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes.php:268
 #: inc/admin/metaboxes/admin-metaboxes.php:629
 #: inc/admin/metaboxes/admin-term-metaboxes.php:201
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:110
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:104
 #: inc/admin/page-builders/elementor/inc/controls/class-content-analysis-control.php:35
 msgid "Analysis in progress..."
 msgstr ""
@@ -3474,71 +3474,71 @@ msgstr ""
 msgid "Add <code>rel=\"UGC\"</code> attribute"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:156
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:150
 msgid "SEO Title / Description"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:184
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:178
 msgid "Meta Description"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:225
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:219
 msgid "SEO Advanced"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:242
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:236
 msgid "Don't display this page in search engine results / XML - HTML sitemaps (noindex)"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:253
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:247
 msgid "Don't follow links for this page (nofollow)"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:264
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:258
 msgid "Don't index images for this page (noimageindex)"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:275
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:269
 msgid "Don't display a \"Cached\" link in the Google search results (noarchive)"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:286
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:280
 msgid "Don't display a description in search results for this page (nosnippet)"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:343
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:337
 msgid "Custom breadcrumbs"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:344
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:338
 msgid "Enter a custom value, useful if your title is too long"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:368
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:362
 msgid "SEO Social"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:388
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:382
 msgid "<p class=\"elementor-control-field-description\"><span class=\"dashicons dashicons-external\"></span><a href=\"https://developers.facebook.com/tools/debug/sharing/?q="
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:398
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:392
 msgid "<p class=\"elementor-control-field-description\"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tags are defined below.</p>"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:516
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:510
 msgid "SEO Redirection"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:578
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:572
 msgid "SEO Content Analysis"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:590
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:584
 msgid "<p class=\"elementor-control-field-description\">Enter a few keywords for analysis to help you write optimized content.</p><p class=\"elementor-control-field-description\"><strong>Did you know?</strong> Writing content for your users is the most important thing! If it doesn‘t feel natural, your visitors will leave your site, Google will know it and your ranking will be affected.</p>"
 msgstr ""
 
-#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:611
+#: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:605
 #: inc/admin/page-builders/elementor/inc/controls/class-google-suggestions-control.php:50
 #: inc/admin/page-builders/elementor/inc/controls/class-google-suggestions-control.php:51
 #: src/Services/I18nUniversalMetabox.php:748
@@ -3574,12 +3574,12 @@ msgid "Metaboxes"
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:31
-#: inc/admin/sections/Advanced.php:136
+#: inc/admin/sections/Advanced.php:138
 msgid "Admin bar"
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:32
-#: inc/admin/sections/Advanced.php:123
+#: inc/admin/sections/Advanced.php:125
 msgid "SEO Dashboard"
 msgstr ""
 
@@ -3589,7 +3589,7 @@ msgid "Columns"
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:34
-#: inc/admin/sections/Advanced.php:149
+#: inc/admin/sections/Advanced.php:151
 #: inc/admin/sections/Analytics.php:116
 #: inc/admin/sections/Analytics.php:151
 msgid "Misc"
@@ -3629,11 +3629,11 @@ msgstr ""
 msgid "Edit your SEO metadata directly from your favorite page builder."
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:126
+#: inc/admin/sections/Advanced.php:128
 msgid "Customize the SEO dashboard UI."
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:139
+#: inc/admin/sections/Advanced.php:141
 msgid "The admin bar appears on the top of your pages when logged in to your WP admin."
 msgstr ""
 
@@ -4797,47 +4797,43 @@ msgstr ""
 msgid "Configure your XML sitemaps"
 msgstr ""
 
-#: inc/admin/wizard/admin-wizard.php:1624
-msgid "Follow us:"
+#: inc/admin/wizard/admin-wizard.php:1627
+msgid "Newsletter"
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1629
+msgid "SEO news in your inbox. Free."
+msgstr ""
+
+#: inc/admin/wizard/admin-wizard.php:1632
+msgid "Be alerted to changes in Google’s algorithm"
 msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:1633
-msgid "Like our Facebook page"
+msgid "The latest innovations of our products"
 msgstr ""
 
-#: inc/admin/wizard/admin-wizard.php:1640
-msgid "Join our Facebook Community group"
+#: inc/admin/wizard/admin-wizard.php:1634
+msgid "Improve your conversions and traffic with our new blog posts"
 msgstr ""
 
-#: inc/admin/wizard/admin-wizard.php:1647
-msgid "Watch our guided tour videos to learn more about SEOPress"
+#: inc/admin/wizard/admin-wizard.php:1641
+msgid "Subscribe"
 msgstr ""
 
-#: inc/admin/wizard/admin-wizard.php:1654
-msgid "Read our blog posts about SEO concepts, tutorials and more"
-msgstr ""
-
-#: inc/admin/wizard/admin-wizard.php:1661
-msgid "Follow us on Twitter"
-msgstr ""
-
-#: inc/admin/wizard/admin-wizard.php:1668
-msgid "The off side of SEOPress"
-msgstr ""
-
-#: inc/admin/wizard/admin-wizard.php:1678
+#: inc/admin/wizard/admin-wizard.php:1650
 msgid "You can also:"
 msgstr ""
 
-#: inc/admin/wizard/admin-wizard.php:1685
+#: inc/admin/wizard/admin-wizard.php:1657
 msgid "Visit Dashboard"
 msgstr ""
 
-#: inc/admin/wizard/admin-wizard.php:1689
+#: inc/admin/wizard/admin-wizard.php:1661
 msgid "Review Settings"
 msgstr ""
 
-#: inc/admin/wizard/admin-wizard.php:1695
+#: inc/admin/wizard/admin-wizard.php:1667
 msgid "Knowledge base"
 msgstr ""
 
@@ -4854,72 +4850,72 @@ msgstr ""
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:450
+#: inc/functions/options-advanced-admin.php:402
 msgid "Enable noindex"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:487
+#: inc/functions/options-advanced-admin.php:439
 msgid "%s post to noindex."
 msgid_plural "%s posts to noindex."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:511
+#: inc/functions/options-advanced-admin.php:463
 msgid "Enable index"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:548
+#: inc/functions/options-advanced-admin.php:500
 msgid "%s post to index."
 msgid_plural "%s posts to index."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:570
+#: inc/functions/options-advanced-admin.php:522
 msgid "Enable nofollow"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:606
+#: inc/functions/options-advanced-admin.php:558
 msgid "%s post to nofollow."
 msgid_plural "%s posts to nofollow."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:628
+#: inc/functions/options-advanced-admin.php:580
 msgid "Enable follow"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:665
+#: inc/functions/options-advanced-admin.php:617
 msgid "%s post to follow."
 msgid_plural "%s posts to follow."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:681
+#: inc/functions/options-advanced-admin.php:633
 msgid "Enable redirection"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:710
+#: inc/functions/options-advanced-admin.php:662
 msgid "%s redirections enabled."
 msgid_plural "%s redirections enabled."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:726
+#: inc/functions/options-advanced-admin.php:678
 msgid "Disable redirection"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:754
+#: inc/functions/options-advanced-admin.php:706
 msgid "%s redirection disabled."
 msgid_plural "%s redirections disabled."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:783
+#: inc/functions/options-advanced-admin.php:735
 #: src/Actions/Admin/ManageColumn.php:61
 msgid "Title tag"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:808
+#: inc/functions/options-advanced-admin.php:760
 #: src/Actions/Admin/ManageColumn.php:73
 msgid "Canonical"
 msgstr ""

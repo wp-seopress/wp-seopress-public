@@ -2,7 +2,7 @@
 
 function seopress_get_dyn_variables()
 {
-    return [
+    return apply_filters('seopress_get_dynamic_variables', [
         '%%sep%%'                           => 'Separator',
         '%%sitetitle%%'                     => __('Site Title', 'wp-seopress'),
         '%%tagline%%'                       => __('Tagline', 'wp-seopress'),
@@ -54,7 +54,7 @@ function seopress_get_dyn_variables()
         '%%_ucf_your_user_meta%%'           => __('Custom User Meta', 'wp-seopress'),
         '%%currentmonth_num%%'              => __('Current month in digital format', 'wp-seopress'),
         '%%target_keyword%%'                => __('Target keyword', 'wp-seopress'),
-    ];
+    ]);
 }
 
 /**

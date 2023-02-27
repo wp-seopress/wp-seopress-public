@@ -243,56 +243,9 @@ function seopress_advanced_appearance_ps_col_option()
 /**
  * @deprecated 5.4.0
  */
-function seopress_advanced_appearance_insights_col_option()
-{
-    return seopress_get_service('AdvancedOption')->getAppearanceInsightsCol();
-
-}
-/**
- * @deprecated 5.4.0
- */
 function seopress_advanced_appearance_score_col_option()
 {
     return seopress_get_service('AdvancedOption')->getAppearanceScoreCol();
-}
-
-function seopress_insights_query_all_rankings()
-{
-    if (!is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-        return;
-    }
-
-    //Init
-    $rankings = [];
-
-    //Args
-    $args = [
-        'order'         	 => 'ASC',
-        'post_type'     	 => 'seopress_rankings',
-        'posts_per_page' 	=> -1,
-        'fields'          => 'ids',
-    ];
-
-    $args = apply_filters('seopress_insights_dashboard_rankings_list_query', $args);
-
-    //Query rankings
-    $kw_query = new WP_Query($args);
-
-    // The Loop
-    if ($kw_query->have_posts()) {
-        while ($kw_query->have_posts()) {
-            $kw_query->the_post();
-            $data = get_post_meta(get_the_ID(), 'seopress_insights_data', false);
-
-            if (! empty($data[0])) {
-                array_multisort($data[0], SORT_DESC, SORT_REGULAR);
-            }
-        }
-    }
-    /* Restore original Post Data */
-    wp_reset_postdata();
-
-    return $data[0];
 }
 
 if ('' != seopress_advanced_appearance_title_col_option()
@@ -305,7 +258,6 @@ if ('' != seopress_advanced_appearance_title_col_option()
 || '' != seopress_advanced_appearance_nofollow_col_option()
 || '' != seopress_advanced_appearance_words_col_option()
 || '' != seopress_advanced_appearance_ps_col_option()
-|| '' != seopress_advanced_appearance_insights_col_option()
 || '' != seopress_advanced_appearance_score_col_option()
 || !empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())
 

@@ -54,4 +54,13 @@ class ToggleOption {
     public function getToggleInspectUrl(){
         return $this->searchOptionByKey('inspect-url');
     }
+
+    /**
+     * @since 6.4.0
+     *
+     * @return string
+     */
+    public function getToggleAi(){
+        return $this->searchOptionByKey('ai');
+    }
 }

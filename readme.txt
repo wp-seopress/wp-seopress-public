@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.3.2
+Stable tag: 6.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -373,49 +373,14 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.3.2 =
-* INFO Compliance with the w.org plugin guidelines
-* FIX Revert CSS to display full SEO metadata in post type columns
-* FIX Check if 404 monitoring / Redirections toggle is checked for CRON task
-
-= 6.3.1 =
-* INFO Improve our OpenAI integration
-* INFO Update OpenAI hooks to pass the post id
-* FIX Cleaning media filename
-
-= 6.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-3/">Read the blog post update</a> =
-* NEW OpenAI integration: generate automagically meta title and description for your content. Bulk actions supported (PRO) 🤯
-* NEW Track phone links with Google Analytics
-* NEW Display an alert from Social Preview if image filesize is superior to 300KB for WhatsApp
-* NEW 404 email alerts: you can now receive weekly reports instead of 1 mail for each new 404
-* NEW Add missing UploadedDate property for manual / automatic Video schema (PRO)
-* NEW 'seopress_gtag_phone_tracking_ev' hook to filter phone links JS tracking (https://www.seopress.org/support/hooks/filter-phone-tracking-links-in-google-analytics/)
-* NEW 'seopress_ai_openai_meta_title' hook to filter sentence to generate meta title (https://www.seopress.org/support/hooks/filter-the-request-to-generate-a-meta-title-with-ai/)
-* NEW 'seopress_ai_openai_meta_desc' hook to filter sentence to generate meta description (https://www.seopress.org/support/hooks/filter-the-request-to-generate-a-meta-description-with-ai/)
-* NEW 'seopress_ai_openai_request_args' hook to filter arguments sent to OpenAI to generate title and description (https://www.seopress.org/support/hooks/filter-the-arguments-sent-to-openai-to-generate-seo-metadata/)
-* NEW 'seopress_image_seo_before_cleaning' hook to filter media filename before cleaning (https://www.seopress.org/support/hooks/filter-media-filename-before-cleaning/)
-* NEW 'seopress_image_seo_after_cleaning' hook to filter media filename after cleaning (https://www.seopress.org/support/hooks/filter-media-filename-after-cleaning/)
-* NEW 'seopress_image_seo_clean_input' hook to filter input characters (https://www.seopress.org/support/hooks/filter-replaced-characters-from-media-files-inout/)
-* NEW 'seopress_image_seo_clean_output' hook to filter output characters (https://www.seopress.org/support/hooks/filter-replaced-characters-from-media-files-inout/)
-* INFO Automatically get your Google Search Console metrics daily (CRON task)
-* INFO Update CSS for Elementor integration (including Dark Mode)
-* INFO Update the code for Google Optimize
-* INFO 'seopress_gtag_optimize_id' hook is now deprecated
-* INFO Add documentation links for Redirection metabox
-* INFO Import primary post / product categories from SEO Framework
-* INFO Quickly set RSS feeds to noindex from SEO, PRO, Robots.txt tab
-* FIX Matomo tracking code for subdomains / cross domains
-* FIX CSS for Universal SEO metabox
-* FIX jQuery autocomplete error when editing a term taxonomy
-* FIX Term metabox social preview CSS
-* FIX Google Analytics PHP warnings
-* FIX Regenerate button for Bing IndexNow API key
-* FIX Import JSON redirects from Rank Math
-* FIX InspectURL with non UTF-8 language
-* FIX Line breaks / paragraphs for term / category / autor description in archive pages
-* FIX Automatic Local Business opening hours properties
-* FIX Fatal error with How-to block on Widgets screen
-* FIX Primary category
-* FIX i18n
+= 6.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-4/">Read the blog post update</a> =
+* NEW OpenAI integration #2 iteration (better UX, error handling, universal SEO metabox integration, support for Bricks Builder)
+* NEW Internal linking suggestions for standard content analysis metabox (PRO)
+* NEW 'seopress_get_dynamic_variables' hook to filter the drop-down list of dynamic variables (https://www.seopress.org/support/guides/create-your-custom-dynamic-variable-for-your-meta-title-description-social/)
+* FIX CSS Dynamic tags dropdown list / Social Preview
+* FIX Admin notices for PRO version
+* FIX Prevent Fatal error Cannot access offset of type string on string in wp-seopress/src/Services/ContentAnalysis/RenderContentAnalysis.php:34
+* FIX Check if Google Search Console feature is enabled before running the CRON task
+* FIX Fatal error on plugins deactivation
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

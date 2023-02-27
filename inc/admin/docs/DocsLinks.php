@@ -14,6 +14,7 @@ function seopress_get_docs_links()
     if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale()) {
         $docs = [
             'website'          => 'https://www.seopress.org/fr/' . $utm,
+            'subscribe'        => 'https://www.seopress.org/fr/abonnez-vous/' . $utm,
             'blog'             => 'https://www.seopress.org/fr/blog/' . $utm,
             'downloads'        => 'https://www.seopress.org/fr/mon-compte/mes-telechargements/' . $utm,
             'support'          => 'https://www.seopress.org/fr/support/' . $utm,
@@ -159,6 +160,7 @@ function seopress_get_docs_links()
     } else {
         $docs = [
             'website'          => 'https://www.seopress.org/' . $utm,
+            'subscribe'        => 'https://www.seopress.org/subscribe/' . $utm,
             'blog'             => 'https://www.seopress.org/newsroom/' . $utm,
             'downloads'        => 'https://www.seopress.org/account/my-downloads/' . $utm,
             'support'          => 'https://www.seopress.org/support/' . $utm,
@@ -308,7 +310,6 @@ function seopress_get_docs_links()
         'facebook_gr'   => 'https://www.facebook.com/groups/seopress/' . $utm,
         'youtube'       => 'https://www.youtube.com/seopress' . $utm,
         'twitter'       => 'https://twitter.com/wp_seopress' . $utm,
-        'instagram'     => 'https://www.instagram.com/wp_seopress/' . $utm,
     ];
 
     return $docs;

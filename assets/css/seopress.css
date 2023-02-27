@@ -2085,11 +2085,13 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     background-color: #f0f0f0;
     text-align: center;
     border-bottom: none;
+    max-width: 100%;
 }
 
 .term-php #seopress_cpt .facebook-snippet-box img,
 .term-php #seopress_cpt .twitter-snippet-box img {
     width: 100%;
+    max-width: 100%;
 }
 
 .seopress_social_fb_img_upload,
@@ -2207,6 +2209,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     background-color: #f0f0f0;
     text-align: center;
     border-bottom: none;
+    max-width: 100%;
 }
 
 .wrap-toggle-preview {
@@ -2666,12 +2669,12 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 .seopress-notice {
     margin: 5px 0 35px 15px;
     position: relative;
-    top: 75px;
+    top: 65px;
     left: 25px;
     background: rgb(0 124 186 / 10%);
     border-left: 4px solid var(--primaryColor);
     padding: 8px 12px;
-    width: calc(100% - 108px);
+    width: calc(100% - 80px);
     z-index: 10;
 }
 
@@ -3243,7 +3246,7 @@ body .seopress-cart-list h3 {
 #seopress_pro_cpt .tag-title,
 #seopress_cpt .seopress-tag-dropdown,
 #seopress-tabs .seopress-tag-dropdown {
-    padding: 5px 12px;
+    padding: 5px 10px;
     font-size: 10px;
     user-select: none;
     display: inline-flex;

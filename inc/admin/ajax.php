@@ -128,7 +128,7 @@ function seopress_do_real_preview()
             if (is_wp_error($response) || '404' == wp_remote_retrieve_response_code($response)) {
                 $data['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
             } elseif (is_wp_error($response) || '401' == wp_remote_retrieve_response_code($response)) {
-                $data['title']                   = sprintf(__('Your site is protected by an authentification. <a href="%s" target="_blank">Fix this</a> <span class="dashicons dashicons-external"></span>', 'wp-seopress'), $docs['google_preview']['authentification']);
+                $data['title']                   = sprintf(__('Your site is protected by an authentication. <a href="%s" target="_blank">Fix this</a> <span class="dashicons dashicons-external"></span>', 'wp-seopress'), $docs['google_preview']['authentification']);
             } else {
                 $response = wp_remote_retrieve_body($response);
 

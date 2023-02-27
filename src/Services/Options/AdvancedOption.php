@@ -265,12 +265,6 @@ class AdvancedOption
     /**
      * @since 5.4.0
      */
-    public function getAppearanceInsightsCol(){
-        return $this->searchOptionByKey('seopress_advanced_appearance_insights_col');
-    }
-    /**
-     * @since 5.4.0
-     */
     public function getAppearanceScoreCol(){
         return $this->searchOptionByKey('seopress_advanced_appearance_score_col');
     }
