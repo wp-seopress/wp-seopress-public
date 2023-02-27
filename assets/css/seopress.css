@@ -1911,6 +1911,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     margin-bottom: 11px;
     display: inline-flex;
     align-items: center;
+    width: 100%;
 }
 
 #seopress_cpt .google-snippet-preview.mobile-preview .wrap-m-icon-permalink .snippet-permalink {

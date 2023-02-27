@@ -25,6 +25,7 @@ class seopress_options
         add_action('admin_init', [$this, 'seopress_feature_title'], 20);
         add_action('admin_init', [$this, 'load_sections'], 30);
         add_action('admin_init', [$this, 'load_callbacks'], 40);
+        add_action('admin_init', [$this, 'pre_save_options'], 50);
     }
 
     public function seopress_feature_save()
@@ -288,6 +289,22 @@ class seopress_options
         require_once dirname(__FILE__) . '/callbacks/ImageSEO.php';
         require_once dirname(__FILE__) . '/callbacks/Advanced.php';
         require_once dirname(__FILE__) . '/callbacks/InstantIndexing.php';
+    }
+
+    public function pre_save_options()
+    {
+        add_filter( 'pre_update_option_seopress_instant_indexing_option_name', [$this, 'pre_seopress_instant_indexing_option_name'], 10, 2 );
+    }
+
+    public function pre_seopress_instant_indexing_option_name( $new_value, $old_value )
+    {
+        //If we are saving data from SEO, PRO, Google Search Console tab, we have to save all Indexing options!
+        if (!array_key_exists('seopress_instant_indexing_bing_api_key', $new_value)) {
+            $options = get_option('seopress_instant_indexing_option_name');
+            $options['seopress_instant_indexing_google_api_key'] = $new_value['seopress_instant_indexing_google_api_key'];
+            return $options;
+        }
+        return $new_value;
     }
 }
 
