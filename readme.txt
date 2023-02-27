@@ -6,15 +6,16 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.3
+Stable tag: 6.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank higher in search engines, fully white label.
+SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank higher in search engines, fully white label. Now with AI.
 
 == Description ==
 
 <h3>Best SEO plugin for WordPress fully integrated with all page builders and themes!</h3>
+<h3>Now with AI to automagically generate meta title and description!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -28,7 +29,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 
 [youtube https://www.youtube.com/watch?v=FwaJA5MY6sc]
 
-<a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Features</a> | <a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Migrate</a> | <a href="https://www.seopress.org/wordpress-seo-plugins/pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">White Label</a>
+<a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Features</a> | <a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Migrate</a> | <a href="https://www.seopress.org/wordpress-seo-plugins/pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">White Label</a> | <a href="https://www.seopress.org/features/openai/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">AI</a>
 
 <h3>Why SEOPress is the best WordPress SEO plugin?</h3>
 
@@ -75,6 +76,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 <h3>SEOPress PRO: to go further with your SEO</h3>
 
 <ul>
+	<li><a href="https://www.seopress.org/newsroom/product-news/seopress-6-3/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Use Artificial Intelligence to generate SEO metadata. Bulk actions supported.</li>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
 	<li><a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results. YouTube videos are automatically added.</li>
 	<li>Internal linking suggestions</li>
@@ -155,6 +157,7 @@ We provide deep integration with Elementor page builder. Directly from Elementor
 	<li>edit social meta (Facebook Open Graph and Twitter Cards</li>
 	<li>analyse your content to optimize it for search engines</li>
 	<li>apply FAQ schema on Toggle and / or Accordion Elementor widgets</li>
+	<li>generate automagically meta title and description with AI (OpenAI integration - PRO required)</li>
 	<li>and more!</li>
 </ul>
 
@@ -215,7 +218,8 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 <h3>SEOPress integrates seamlessly with popular e-commerce, translation, performance and analytics tools.</h3>
 <ul>
 	<li>Classic Editor</li>
-	<li>Block Editor + 4 SEOPress blocks: FAQ, How-to, Breadcrumbs and Local Business</li>
+	<li>Block Editor + 5 SEOPress blocks: FAQ, How-to, Breadcrumbs, HTML Sitemap and Local Business</li>
+	<li>OpenAI</li>
 	<li>WPML</li>
 	<li>Polylang</li>
 	<li>MultilingualPress</li>
@@ -369,6 +373,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.3.1 =
+* INFO Improve our OpenAI integration
+* INFO Update OpenAI hooks to pass the post id
+* FIX Cleaning media filename
+
 = 6.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-3/">Read the blog post update</a> =
 * NEW OpenAI integration: generate automagically meta title and description for your content. Bulk actions supported (PRO) 🤯
 * NEW Track phone links with Google Analytics
@@ -376,9 +385,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * NEW 404 email alerts: you can now receive weekly reports instead of 1 mail for each new 404
 * NEW Add missing UploadedDate property for manual / automatic Video schema (PRO)
 * NEW 'seopress_gtag_phone_tracking_ev' hook to filter phone links JS tracking (https://www.seopress.org/support/hooks/filter-phone-tracking-links-in-google-analytics/)
-* NEW 'seopress_ai_openai_meta_title' hook to filter sentence to generate meta title
-* NEW 'seopress_ai_openai_meta_desc' hook to filter sentence to generate meta description
-* NEW 'seopress_ai_openai_request_args' hook to filter arguments sent to OpenAI to generate title and description
+* NEW 'seopress_ai_openai_meta_title' hook to filter sentence to generate meta title (https://www.seopress.org/support/hooks/filter-the-request-to-generate-a-meta-title-with-ai/)
+* NEW 'seopress_ai_openai_meta_desc' hook to filter sentence to generate meta description (https://www.seopress.org/support/hooks/filter-the-request-to-generate-a-meta-description-with-ai/)
+* NEW 'seopress_ai_openai_request_args' hook to filter arguments sent to OpenAI to generate title and description (https://www.seopress.org/support/hooks/filter-the-arguments-sent-to-openai-to-generate-seo-metadata/)
 * NEW 'seopress_image_seo_before_cleaning' hook to filter media filename before cleaning (https://www.seopress.org/support/hooks/filter-media-filename-before-cleaning/)
 * NEW 'seopress_image_seo_after_cleaning' hook to filter media filename after cleaning (https://www.seopress.org/support/hooks/filter-media-filename-after-cleaning/)
 * NEW 'seopress_image_seo_clean_input' hook to filter input characters (https://www.seopress.org/support/hooks/filter-replaced-characters-from-media-files-inout/)

@@ -63,7 +63,7 @@ if (isset($pagenow) && 'options-permalink.php' == $pagenow) {
 //Cleaning filename
 if (seopress_get_service('AdvancedOption')->getAdvancedCleaningFileName() === '1') {
     function seopress_image_seo_cleaning_filename($filename) {
-        $filename = do_action( 'seopress_image_seo_before_cleaning', $filename );
+        $filename = apply_filters( 'seopress_image_seo_before_cleaning', $filename );
 
         /* Force the file name in UTF-8 (encoding Windows / OS X / Linux) */
         $filename = mb_convert_encoding($filename, "UTF-8");
@@ -85,7 +85,7 @@ if (seopress_get_service('AdvancedOption')->getAdvancedCleaningFileName() === '1
         /* Remove uppercase */
         $friendly_filename = strtolower($friendly_filename);
 
-        $friendly_filename = do_action( 'seopress_image_seo_after_cleaning', $friendly_filename );
+        $friendly_filename = apply_filters( 'seopress_image_seo_after_cleaning', $friendly_filename );
 
         return $friendly_filename;
     }
