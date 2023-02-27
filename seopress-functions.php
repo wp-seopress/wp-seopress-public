@@ -589,7 +589,9 @@ function seopress_remove_other_notices() {
             }
         }
         if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-            add_action('admin_notices', 'seopress_insights_notices');
+            if ( version_compare(SEOPRESS_INSIGHTS_VERSION, '1.8.1', '>=')) {
+                add_action('admin_notices', 'seopress_insights_notices');
+            }
         }
     }
 }
