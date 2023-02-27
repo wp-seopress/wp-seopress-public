@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.2.0.1
+Stable tag: 6.2.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -369,6 +369,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.2.0.2 =
+* FIX Google Suggestions (PRO)
+
 = 6.2.0.1 =
 * FIX i18n warning
 
@@ -383,7 +386,7 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * INFO Define 'SEOPRESS_WL_ADMIN_HEADER_LOGO' deprecated (https://www.seopress.org/support/hooks/add-your-custom-logo-in-seopress-admin-header/)
 * INFO Disable Content Analysis metabox now also disable significant keywords
 * INFO Remove seopress font to optimize performance
-* INFO Remove '_seopress_robots_primary_cat' from default WP API (we recommand to use our SEOPress REST API instead: https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/)
+* INFO Remove '_seopress_robots_primary_cat' from default WP API (we recommend to use our SEOPress REST API instead: https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/)
 * INFO Optimize Twitter Cards
 * FIX Video xml sitemap regeneration process (go to SEO, Tools, Video Sitemap tab, and click Regenerate button if some YouTube videos are missing from the video sitemap)
 * FIX servesCuisine for global Local Business schema (SEO, PRO, Local Business)

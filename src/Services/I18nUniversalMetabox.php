@@ -89,7 +89,7 @@ class I18nUniversalMetabox
                     'we_founded_tag' => __("We found an Open Graph", "wp-seopress"),
                     'we_founded_tag_2' => __("tag in your source code.", "wp-seopress"),
                     'tag_empty' => __(
-                        'Your Open Graph % tag is empty!',
+                        'Your Open Graph %s tag is empty!',
                         "wp-seopress"
                     )
                 ],

@@ -610,6 +610,8 @@ var target_kw = new Tagify(input, {
 });
 
 function seopress_google_suggest(data) {
+    const $ = jQuery;
+
     var raw_suggestions = String(data);
     var suggestions_array = raw_suggestions.split(",");
 
