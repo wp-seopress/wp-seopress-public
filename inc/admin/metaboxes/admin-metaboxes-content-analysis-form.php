@@ -11,14 +11,9 @@ $data_attr = seopress_metaboxes_init();
     data_id="<?php echo $data_attr['current_id']; ?>"
     data_origin="<?php echo $data_attr['origin']; ?>"
     data_tax="<?php echo $data_attr['data_tax']; ?>">
-    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.7', '>=')) { ?>
-        <ul class="wrap-ca-list">
-            <li><a href="#seopress-ca-tabs-2"><?php _e('Overview', 'wp-seopress'); ?></a></li>
-            <?php if (seopress_get_toggle_option('inspect-url') ==='1') { ?>
-                <li><a href="#seopress-ca-tabs-1"><?php _e('Inspect with Google', 'wp-seopress'); ?></a></li>
-            <?php } ?>
-        </ul>
-    <?php } ?>
+
+    <?php do_action('seopress_ca_tab_before'); ?>
+
     <div id="seopress-ca-tabs-2">
         <p>
             <?php _e('Enter a few keywords for analysis to help you write optimized content.', 'wp-seopress'); ?>
@@ -44,65 +39,12 @@ $data_attr = seopress_metaboxes_init();
 
             <button id="seopress_launch_analysis" type="button" class="<?php echo seopress_btn_secondary_classes(); ?>" data_id="<?php echo get_the_ID(); ?>" data_post_type="<?php echo get_current_screen()->post_type; ?>"><?php _e('Refresh analysis', 'wp-seopress'); ?></button>
 
-            <?php if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) { ?>
-                <button id="seopress_add_to_insights" type="button"
-                    class="<?php echo seopress_btn_secondary_classes(); ?>"
-                    data_id="<?php echo get_the_ID(); ?>"
-                    data_post_type="<?php echo get_current_screen()->post_type; ?>">
-                    <?php _e('Track with Insights', 'wp-seopress'); ?>
-                </button>
-                <div id="seopress_add_to_insights_status"></div>
-                <span class="spinner"></span>
-            <?php } ?>
+            <?php do_action('seopress_ca_after_resfresh_analysis'); ?>
 
             <p><span class="description"><?php _e('To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would.', 'wp-seopress'); ?></span></p>
         </div>
-        <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-        <div class="col-right">
-            <p>
-                <label for="seopress_google_suggest_kw_meta">
-                    <?php _e('Google suggestions', 'wp-seopress'); ?>
-                    <?php echo seopress_tooltip(__('Google suggestions', 'wp-seopress'), __('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.', 'wp-seopress'), esc_html('my super keyword,another keyword,keyword')); ?>
-                </label>
-                <input id="seopress_google_suggest_kw_meta" type="text" name="seopress_google_suggest_kw"
-                    placeholder="<?php _e('Get suggestions from Google', 'wp-seopress'); ?>"
-                    aria-label="Google suggestions" value="">
-                <span class="description"><?php _e('Click on a suggestion below to add it as a target keyword.', 'wp-seopress'); ?></span>
-            </p>
-            <button id="seopress_get_suggestions" type="button"
-                class="<?php echo seopress_btn_secondary_classes(); ?>">
-                <?php _e('Get suggestions!', 'wp-seopress'); ?>
-            </button>
+            <?php do_action('seopress_ca_before'); ?>
 
-            <ul id='seopress_suggestions'></ul>
-            <?php if ('' != get_locale()) {
-                    $locale       = substr(get_locale(), 0, 2);
-                    $country_code = substr(get_locale(), -2);
-                } else {
-                    $locale       = 'en';
-                    $country_code = 'US';
-                } ?>
-            <script>
-                jQuery('#seopress_get_suggestions').on('click', function(data) {
-                    data.preventDefault();
-
-                    document.getElementById('seopress_suggestions').innerHTML = '';
-
-                    var kws = jQuery('#seopress_google_suggest_kw_meta').val();
-
-                    if (kws) {
-                        var script = document.createElement('script');
-                        script.src =
-                            'https://www.google.com/complete/search?client=firefox&format=rich&hl=<?php echo $locale; ?>&q=' +
-                            kws +
-                            '&gl=<?php echo $country_code; ?>&callback=seopress_google_suggest';
-                        document.body.appendChild(script);
-                    }
-                });
-            </script>
-        </div>
-        <?php }
-        ?>
             <div id="seopress-wrap-notice-target-kw" style="clear:both">
                 <?php
                     $html = '';
@@ -142,13 +84,5 @@ $data_attr = seopress_metaboxes_init();
             seopress_get_service('RenderContentAnalysis')->render($analyzes, $seopress_analysis_data);
         } ?>
     </div>
-    <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && version_compare(SEOPRESS_PRO_VERSION, '5.7', '>=')) {
-        if (seopress_get_toggle_option('inspect-url') === '1') { ?>
-            <div id="seopress-ca-tabs-1">
-                <?php if (function_exists('seopress_get_service') && !empty($data_attr['current_id'])) {
-                    seopress_get_service('RenderGSCInspectUrl')->render($data_attr['current_id']);
-                } ?>
-            </div>
-        <?php }
-    } ?>
+    <?php do_action('seopress_ca_tab_after', $data_attr['current_id']); ?>
 </div>

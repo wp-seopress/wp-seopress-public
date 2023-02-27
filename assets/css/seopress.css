@@ -1109,13 +1109,6 @@ table.fixed thead .column-seopress_noindex {
     align-items: center;
 }
 
-.seopress_title.column-seopress_title *,
-.seopress_desc.column-seopress_desc * {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
 .inline-edit-row fieldset label textarea .column-seopress_score .analysis-score {
     display: flex;
     align-content: center;

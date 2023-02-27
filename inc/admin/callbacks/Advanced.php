@@ -511,32 +511,6 @@ function seopress_advanced_appearance_metaboxe_position_callback() {
 	}
 }
 
-function seopress_advanced_appearance_schema_default_tab_callback() {
-	if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-		$options = get_option('seopress_advanced_option_name');
-
-		$selected = isset($options['seopress_advanced_appearance_schema_default_tab']) ? $options['seopress_advanced_appearance_schema_default_tab'] : null; ?>
-
-<select id="seopress_advanced_appearance_schema_default_tab"
-	name="seopress_advanced_option_name[seopress_advanced_appearance_schema_default_tab]">
-	<option <?php if ('automatic' == $selected) { ?>
-		selected="selected"
-		<?php } ?>
-		value="automatic"><?php _e('Automatic tab (default)', 'wp-seopress'); ?>
-	</option>
-	<option <?php if ('manual' == $selected) { ?>
-		selected="selected"
-		<?php } ?>
-		value="manual"><?php _e('Manual tab', 'wp-seopress'); ?>
-	</option>
-</select>
-
-<?php if (isset($options['seopress_advanced_appearance_schema_default_tab'])) {
-			esc_attr($options['seopress_advanced_appearance_schema_default_tab']);
-		}
-	}
-}
-
 function seopress_advanced_appearance_notifications_callback() {
 	$options = get_option('seopress_advanced_option_name');
 
@@ -776,49 +750,6 @@ function seopress_advanced_appearance_words_col_callback() {
 	}
 }
 
-function seopress_advanced_appearance_ps_col_callback() {
-	if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-		$options = get_option('seopress_advanced_option_name');
-
-		$check = isset($options['seopress_advanced_appearance_ps_col']); ?>
-
-<label for="seopress_advanced_appearance_ps_col">
-	<input id="seopress_advanced_appearance_ps_col"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_ps_col]" type="checkbox" <?php if ('1' == $check) { ?>
-	checked="yes"
-	<?php } ?>
-	value="1"/>
-
-	<?php _e('Display Page Speed column to check performances', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_ps_col'])) {
-			esc_attr($options['seopress_advanced_appearance_ps_col']);
-		}
-	}
-}
-
-function seopress_advanced_appearance_insights_col_callback() {
-	if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-		$options = get_option('seopress_advanced_option_name');
-
-		$check = isset($options['seopress_advanced_appearance_insights_col']); ?>
-<label for="seopress_advanced_appearance_insights_col">
-	<input id="seopress_advanced_appearance_insights_col"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_insights_col]" type="checkbox" <?php if ('1' == $check) { ?>
-	checked="yes"
-	<?php } ?>
-	value="1"/>
-
-	<?php _e('Display SEO Insights column to check rankings', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_insights_col'])) {
-			esc_attr($options['seopress_advanced_appearance_insights_col']);
-		}
-	}
-}
-
 function seopress_advanced_appearance_score_col_callback() {
 	$options = get_option('seopress_advanced_option_name');
 
@@ -836,29 +767,6 @@ function seopress_advanced_appearance_score_col_callback() {
 
 <?php if (isset($options['seopress_advanced_appearance_score_col'])) {
 		esc_attr($options['seopress_advanced_appearance_score_col']);
-	}
-}
-
-
-function seopress_advanced_appearance_search_console_callback() {
-    if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-        $options = get_option('seopress_advanced_option_name');
-
-        $check = isset($options['seopress_advanced_appearance_search_console']); ?>
-
-    <label for="seopress_advanced_appearance_search_console">
-        <input id="seopress_advanced_appearance_search_console"
-            name="seopress_advanced_option_name[seopress_advanced_appearance_search_console]" type="checkbox" <?php if ('1' == $check) { ?>
-        checked="yes"
-        <?php } ?>
-        value="1"/>
-
-        <?php _e('Display Search Console Data (clicks, impressions, CTR, positions)', 'wp-seopress');
-    } ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_search_console'])) {
-		esc_attr($options['seopress_advanced_appearance_search_console']);
 	}
 }
 

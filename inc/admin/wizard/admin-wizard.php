@@ -1585,11 +1585,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 		$docs = seopress_get_docs_links();
 
-        $seo_title = 'SEOPress PRO';
-        if (function_exists('seopress_get_toggle_white_label_option') && '1' == seopress_get_toggle_white_label_option()) {
-            $seo_title = seopress_white_label_plugin_list_title_pro_option() ? seopress_white_label_plugin_list_title_pro_option() : 'SEOPress PRO';
-        }
-
 		//Flush permalinks
 		flush_rewrite_rules(false); ?>
 
@@ -1602,29 +1597,7 @@ class SEOPRESS_Admin_Setup_Wizard {
             <div class="seopress-tab active">
 
                 <ul class="seopress-wizard-next-steps">
-                    <li class="seopress-wizard-next-step-item">
-                        <!-- SEOPress PRO -->
-                        <?php if ('valid' != get_option('seopress_pro_license_status') && is_plugin_active('wp-seopress-pro/seopress-pro.php') && ! is_multisite()) { ?>
-                        <div class="seopress-wizard-next-step-description">
-                            <p class="next-step-heading"><?php esc_html_e('Next step', 'wp-seopress'); ?>
-                            </p>
-                            <h3 class="next-step-description">
-                                <?php printf(esc_html__('Welcome to %s!', 'wp-seopress'), $seo_title); ?>
-                            </h3>
-                            <p class="next-step-extra-info">
-                                <?php esc_html_e('Please activate your license to receive automatic updates and get premium support.', 'wp-seopress'); ?>
-                            </p>
-                        </div>
-                        <div class="seopress-wizard-next-step-action">
-                            <p class="seopress-setup-actions step">
-                                <a class="btn btnPrimary"
-                                    href="<?php echo admin_url('admin.php?page=seopress-license'); ?>">
-                                    <?php _e('Activate License', 'wp-seopress'); ?>
-                                </a>
-                            </p>
-                        </div>
-                        <?php } ?>
-                    </li>
+                    <?php do_action('seopress_wizard_setup_ready'); ?>
 
                     <li class="seopress-wizard-next-step-item">
                         <div class="seopress-wizard-next-step-description">

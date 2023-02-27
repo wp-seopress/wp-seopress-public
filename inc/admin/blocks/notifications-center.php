@@ -24,6 +24,8 @@
         class="seopress-page-list <?php echo $class; ?>"
         style="display: none">
         <?php
+            do_action('seopress_notifications_center_item');
+
             function seopress_advanced_appearance_universal_metabox_option()
             {
                 return seopress_get_service('AdvancedOption')->getAccessUniversalMetaboxGutenberg();
@@ -93,30 +95,6 @@
                     'deleteable' => true,
                 ];
                 seopress_notification($args);
-            }
-            if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-                function seopress_get_hidden_notices_insights_wizard_option()
-                {
-                    return seopress_get_service('NoticeOption')->getNoticeInsightsWizard();
-                }
-                if ('1' != seopress_get_hidden_notices_insights_wizard_option()) {
-                    $args = [
-                        'id'     => 'notice-insights-wizard',
-                        'title'  => __('Configure SEOPress Insights in a few minutes with our installation wizard', 'wp-seopress'),
-                        'desc'   => __('Track your keywords positions and backlinks directly on your WordPress site.', 'wp-seopress'),
-                        'impact' => [
-                            'info' => __('Wizard', 'wp-seopress'),
-                        ],
-                        'link' => [
-                            'en'       => admin_url('admin.php?page=seopress-insights-setup'),
-                            'title'    => __('Start the wizard', 'wp-seopress'),
-                            'external' => true,
-                        ],
-                        'icon'       => 'dashicons-admin-tools',
-                        'deleteable' => true,
-                    ];
-                    seopress_notification($args);
-                }
             }
             function seopress_get_hidden_notices_seo_consultant_option()
             {
@@ -343,18 +321,6 @@
                             'external' => false,
                         ],
                         'icon'       => 'dashicons-admin-plugins',
-                        'deleteable' => false,
-                    ];
-                    seopress_notification($args);
-                }
-            }
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                if (1 == seopress_404_cleaning_option() && ! wp_next_scheduled('seopress_404_cron_cleaning')) {
-                    $args = [
-                        'id'         => 'notice-title-tag',
-                        'title'      => __('You have enabled 404 cleaning BUT the scheduled task is not running.', 'wp-seopress'),
-                        'desc'       => __('To solve this, please disable and re-enable SEOPress PRO. No data will be lost.', 'wp-seopress'),
-                        'icon'       => 'dashicons-clock',
                         'deleteable' => false,
                     ];
                     seopress_notification($args);
@@ -764,44 +730,6 @@
                 ];
                 seopress_notification($args);
             }
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                if (function_exists('seopress_rich_snippets_enable_option') && '1' != seopress_rich_snippets_enable_option()) {
-                    $args = [
-                        'id'     => 'notice-schemas-metabox',
-                        'title'  => __('Structured data types is not correctly enabled', 'wp-seopress'),
-                        'desc'   => __('Please enable <strong>Structured Data Types metabox for your posts, pages and custom post types</strong> option in order to use automatic and manual schemas. (SEO > PRO > Structured Data Types (schema.org)', 'wp-seopress'),
-                        'impact' => [
-                            'high' => __('High impact', 'wp-seopress'),
-                        ],
-                        'link' => [
-                            'en'       => esc_url(admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets')),
-                            'title'    => __('Fix this!', 'wp-seopress'),
-                            'external' => false,
-                        ],
-                        'icon'       => 'dashicons-warning',
-                        'deleteable' => false,
-                    ];
-                    seopress_notification($args);
-                }
-            }
-            if ('valid' != get_option('seopress_pro_license_status') && is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                $args = [
-                    'id'     => 'notice-license',
-                    'title'  => __('You have to enter your licence key to get updates and support', 'wp-seopress'),
-                    'desc'   => __('Please activate the SEOPress PRO license key to automatically receive updates to guarantee you the best user experience possible.', 'wp-seopress'),
-                    'impact' => [
-                        'info' => __('License', 'wp-seopress'),
-                    ],
-                    'link' => [
-                        'en'       => admin_url('admin.php?page=seopress-license'),
-                        'title'    => __('Fix this!', 'wp-seopress'),
-                        'external' => false,
-                    ],
-                    'icon'       => 'dashicons-admin-network',
-                    'deleteable' => false,
-                ];
-                seopress_notification($args);
-            }
             if (! is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                 function seopress_get_hidden_notices_go_pro_option()
                 {
@@ -826,89 +754,7 @@
                     seopress_notification($args);
                 }
             }
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                function seopress_get_hidden_notices_robots_txt_option()
-                {
-                    $options = get_option('seopress_notices');
-                    if (empty($options)) {
-                        return;
-                    }
-                    if (!isset($options['notice-robots-txt'])) {
-                        return;
-                    }
-
-                    return $options['notice-robots-txt'];
-                }
-
-                function seopress_get_hidden_notices_robots_txt_valid()
-                {
-                    $options = get_option('seopress_notices');
-                    if (empty($options)) {
-                        return;
-                    }
-                    if (!isset($options['notice-robots-txt-valid'])) {
-                        return;
-                    }
-
-                    return $options['notice-robots-txt-valid'];
-                }
-
-                if(file_exists(ABSPATH . 'robots.txt') && '1' !== seopress_get_hidden_notices_robots_txt_option() && empty(seopress_get_hidden_notices_robots_txt_option())){
-
-                    $args = [
-                        'id'     => 'notice-robots-txt',
-                        'title'  => __('A physical robots.txt file has been found', 'wp-seopress'),
-                        'desc'   => __('A robots.txt file already exists at the root of your site. We invite you to remove it so SEOPress can handle it virtually.', 'wp-seopress'),
-                        'impact' => [
-                            'high' => __('High impact', 'wp-seopress'),
-                        ],
-                        'deleteable' => true,
-                    ];
-                    seopress_notification($args);
-                }
-
-                if ('1' !== seopress_get_hidden_notices_robots_txt_valid()) {
-                    try {
-                        $contentRobotsTxt = wp_remote_retrieve_body( wp_remote_get( site_url( 'robots.txt' ), $args ) );
-                        if(!empty($contentRobotsTxt)){
-                            $contentRobotsTxt = explode("\n", $contentRobotsTxt);
-
-                            $checkDisallowAfter = false;
-                            $validRobotsTxt = true;
-                            foreach($contentRobotsTxt as $line){
-                                if(strpos($line, 'User-agent:') !== false && strpos($line, '*') !== false){
-                                    $checkDisallowAfter = true;
-                                }
-
-                                if(trim($line) === 'Disallow: /' && $checkDisallowAfter){
-                                    $validRobotsTxt = false;
-                                }
-                            }
-
-                            if(!$validRobotsTxt  && '1' !== seopress_get_hidden_notices_robots_txt_valid() && empty(seopress_get_hidden_notices_robots_txt_valid())){
-                                $args = [
-                                    'id'     => 'notice-robots-txt-valid',
-                                    'title'  => __('Your site is not indexable!', 'wp-seopress'),
-                                    'desc'   => __('Your robots.txt file contains a rule that prevents search engines to index your all site: <code>Disallow: /</code>', 'wp-seopress'),
-                                    'impact' => [
-                                        'high' => __('High impact', 'wp-seopress'),
-                                    ],
-                                    'link' => [
-                                        'en'       => is_multisite() ? network_admin_url('admin.php?page=seopress-network-option#tab=tab_seopress_robots') : admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_robots'),
-                                        'title'    => __('Fix this!', 'wp-seopress'),
-                                        'external' => false,
-                                    ],
-                                    'deleteable' => true,
-                                ];
-                                seopress_notification($args);
-                            }
-                        }
-                    } catch (\Exception $e) {
-
-                    }
-                }
-            }
-            ?>
+        ?>
     </div>
     <!--#seopress-notifications-center-->
 <?php }

@@ -27,15 +27,7 @@ add_settings_field(
     'seopress_setting_section_xml_sitemap_general' // Section
 );
 
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-    add_settings_field(
-        'seopress_xml_sitemap_video_enable', // ID
-        __('Enable XML Video Sitemap', 'wp-seopress'), // Title
-        'seopress_xml_sitemap_video_enable_callback', // Callback
-        'seopress-settings-admin-xml-sitemap-general', // Page
-        'seopress_setting_section_xml_sitemap_general' // Section
-    );
-}
+do_action('seopress_settings_sitemaps_image_after');
 
 add_settings_field(
     'seopress_xml_sitemap_author_enable', // ID

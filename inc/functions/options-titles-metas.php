@@ -1,6 +1,8 @@
 <?php
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
+include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
 //Titles & metas
 //=================================================================================================
 //Titles
@@ -976,49 +978,6 @@ function seopress_titles_noindex_post_option() {
     }
 }
 
-//noindex WooCommerce page
-include_once ABSPATH . 'wp-admin/includes/plugin.php';
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-    if ('1' == seopress_get_toggle_option('woocommerce')) {
-        //Cart page
-        function seopress_woocommerce_cart_page_no_index_option() {
-            $seopress_woocommerce_cart_page_no_index_option = get_option('seopress_pro_option_name');
-            if ( ! empty($seopress_woocommerce_cart_page_no_index_option)) {
-                foreach ($seopress_woocommerce_cart_page_no_index_option as $key => $seopress_woocommerce_cart_page_no_index_value) {
-                    $options[$key] = $seopress_woocommerce_cart_page_no_index_value;
-                }
-                if (isset($seopress_woocommerce_cart_page_no_index_option['seopress_woocommerce_cart_page_no_index'])) {
-                    return $seopress_woocommerce_cart_page_no_index_option['seopress_woocommerce_cart_page_no_index'];
-                }
-            }
-        }
-        //Checkout page
-        function seopress_woocommerce_checkout_page_no_index_option() {
-            $seopress_woocommerce_checkout_page_no_index_option = get_option('seopress_pro_option_name');
-            if ( ! empty($seopress_woocommerce_checkout_page_no_index_option)) {
-                foreach ($seopress_woocommerce_checkout_page_no_index_option as $key => $seopress_woocommerce_checkout_page_no_index_value) {
-                    $options[$key] = $seopress_woocommerce_checkout_page_no_index_value;
-                }
-                if (isset($seopress_woocommerce_checkout_page_no_index_option['seopress_woocommerce_checkout_page_no_index'])) {
-                    return $seopress_woocommerce_checkout_page_no_index_option['seopress_woocommerce_checkout_page_no_index'];
-                }
-            }
-        }
-        //Customer Account
-        function seopress_woocommerce_customer_account_page_no_index_option() {
-            $seopress_woocommerce_customer_account_page_no_index_option = get_option('seopress_pro_option_name');
-            if ( ! empty($seopress_woocommerce_customer_account_page_no_index_option)) {
-                foreach ($seopress_woocommerce_customer_account_page_no_index_option as $key => $seopress_woocommerce_customer_account_page_no_index_value) {
-                    $options[$key] = $seopress_woocommerce_customer_account_page_no_index_value;
-                }
-                if (isset($seopress_woocommerce_customer_account_page_no_index_option['seopress_woocommerce_customer_account_page_no_index'])) {
-                    return $seopress_woocommerce_customer_account_page_no_index_option['seopress_woocommerce_customer_account_page_no_index'];
-                }
-            }
-        }
-    }
-}
-
 function seopress_titles_noindex_bypass() {
     //init
     $seopress_titles_noindex ='';
@@ -1048,20 +1007,14 @@ function seopress_titles_noindex_bypass() {
             $seopress_titles_noindex = seopress_titles_archives_search_title_noindex_option();
         } elseif (is_paged() && seopress_titles_paged_noindex_option()) {//Is paged archive
             $seopress_titles_noindex = seopress_titles_paged_noindex_option();
-        } elseif ('1' == seopress_get_toggle_option('woocommerce') && function_exists('is_cart') && function_exists('seopress_woocommerce_cart_page_no_index_option') && (is_cart() && seopress_woocommerce_cart_page_no_index_option())) { //IS WooCommerce Cart page
-            $seopress_titles_noindex = seopress_woocommerce_cart_page_no_index_option();
-        } elseif ('1' == seopress_get_toggle_option('woocommerce') && function_exists('is_checkout') && function_exists('seopress_woocommerce_checkout_page_no_index_option') && (is_checkout() && seopress_woocommerce_checkout_page_no_index_option())) { //IS WooCommerce Checkout page
-            $seopress_titles_noindex = seopress_woocommerce_checkout_page_no_index_option();
-        } elseif ('1' == seopress_get_toggle_option('woocommerce') && function_exists('is_account_page') && function_exists('seopress_woocommerce_customer_account_page_no_index_option') && (is_account_page() && seopress_woocommerce_customer_account_page_no_index_option())) { //IS WooCommerce Customer account pages
-            $seopress_titles_noindex = seopress_woocommerce_customer_account_page_no_index_option();
-        } elseif ('1' == seopress_get_toggle_option('woocommerce') && function_exists('is_wc_endpoint_url') && function_exists('seopress_woocommerce_customer_account_page_no_index_option') && (is_wc_endpoint_url() && seopress_woocommerce_customer_account_page_no_index_option())) { //IS WooCommerce Customer account pages
-            $seopress_titles_noindex = seopress_woocommerce_customer_account_page_no_index_option();
         } elseif (is_404()) { //Is 404 page
             $seopress_titles_noindex = 'noindex';
         } elseif (is_attachment() && seopress_titles_attachments_noindex_option()) {
             $seopress_titles_noindex = 'noindex';
         }
     }
+
+    $seopress_titles_noindex = apply_filters('seopress_titles_noindex_bypass', $seopress_titles_noindex);
 
     //remove hreflang if noindex
     if ('1' == $seopress_titles_noindex || true == $seopress_titles_noindex) {

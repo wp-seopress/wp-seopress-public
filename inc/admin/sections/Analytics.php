@@ -15,7 +15,7 @@ function print_section_info_google_analytics_enable()
     <a href="#seopress-analytics-general"><?php _e('General', 'wp-seopress'); ?></a> |
     <a href="#seopress-analytics-tracking"><?php _e('Tracking', 'wp-seopress'); ?></a> |
     <a href="#seopress-analytics-events"><?php _e('Events', 'wp-seopress'); ?></a>
-    <?php if ( is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?> | <a href="#seopress-analytics-ecommerce"><?php _e('Ecommerce', 'wp-seopress'); ?></a> | <a href="#seopress-analytics-stats"><?php _e('Stats in Dashboard', 'wp-seopress'); ?></a><?php } ?>
+    <?php do_action('seopress_analytics_settings_section'); ?>
 </div>
 
 <p>
@@ -164,7 +164,7 @@ function print_section_info_google_analytics_matomo()
 
 <div class="seopress-sub-tabs">
     <a href="#seopress-matomo-tracking"><?php _e('Tracking', 'wp-seopress'); ?></a>
-    <?php if ( is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?> | <a href="#seopress-matomo-stats"><?php _e('Stats in Dashboard', 'wp-seopress'); ?></a><?php } ?>
+    <?php do_action('seopress_matomo_settings_section'); ?>
 </div>
 
 <p>

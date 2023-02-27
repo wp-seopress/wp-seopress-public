@@ -56,39 +56,6 @@ function seopress_xml_sitemap_img_enable_callback()
     }
 }
 
-function seopress_xml_sitemap_video_enable_callback()
-{
-    $docs  = seopress_get_docs_links();
-
-    if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-        $options = get_option('seopress_xml_sitemap_option_name');
-
-        $check = isset($options['seopress_xml_sitemap_video_enable']); ?>
-
-
-<label for="seopress_xml_sitemap_video_enable">
-    <input id="seopress_xml_sitemap_video_enable"
-        name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_video_enable]" type="checkbox" <?php if ('1' == $check) { ?>
-    checked="yes"
-    <?php } ?>
-    value="1"/>
-    <?php _e('Enable Video Sitemap', 'wp-seopress'); ?>
-    <?php echo seopress_tooltip_link($docs['sitemaps']['video'], __('Guide to enable XML video sitemap - new window', 'wp-seopress')); ?>
-</label>
-
-
-<p class="description">
-    <?php printf(__('Your video sitemap is empty? Read our guide to learn more about <a href="%s" target="_blank">adding videos to your sitemap.</a>', 'wp-seopress'), $docs['sitemaps']['video']); ?><br>
-    <?php _e('YouTube videos are automatically added when you create / save a post, page or post type.', 'wp-seopress'); ?><br>
-    <?php printf(__('<a href="%s">Regenerate automatic XML Video sitemap for YouTube?</a>', 'wp-seopress'), admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_video')); ?>
-</p>
-
-<?php if (isset($options['seopress_xml_sitemap_video_enable'])) {
-            esc_attr($options['seopress_xml_sitemap_video_enable']);
-        }
-    }
-}
-
 function seopress_xml_sitemap_author_enable_callback()
 {
     $options = get_option('seopress_xml_sitemap_option_name');

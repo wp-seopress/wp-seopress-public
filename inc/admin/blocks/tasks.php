@@ -75,27 +75,7 @@
                     return;
                 }
 
-                /**
-                 * Check if Schemas feature is correctly enabled by the user
-                 *
-                 * @since 6.0
-                 * @author Benjamin
-                 *
-                 */
-                function seopress_tasks_schemas() {
-                    $options = get_option('seopress_pro_option_name');
-                    if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && isset($options['seopress_rich_snippets_enable']) && '1' === seopress_get_toggle_option('rich-snippets')) {
-                        return 'done';
-                    }
-
-                    return;
-                }
                 $tasks = [
-                    [
-                        'done' => ('valid' === get_option('seopress_pro_license_status') && is_plugin_active('wp-seopress-pro/seopress-pro.php') && ! is_multisite()) ? 'done' : '',
-                        'link' => admin_url('admin.php?page=seopress-license'),
-                        'label' => __('Activate your license key', 'wp-seopress'),
-                    ],
                     [
                         'done' => seopress_tasks_sitemaps(),
                         'link' => admin_url('admin.php?page=seopress-xml-sitemap'),
@@ -105,25 +85,10 @@
                         'done' => seopress_tasks_social_networks(),
                         'link' => admin_url('admin.php?page=seopress-social'),
                         'label' => __('Be social', 'wp-seopress'),
-                    ],
-                    [
-                        'done' => (is_plugin_active('wp-seopress-pro/seopress-pro.php') && seopress_get_toggle_option('local-business') === '1') ? 'done' : '',
-                        'link' => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_local_business'),
-                        'label' => __('Improve Local SEO', 'wp-seopress'),
-                    ],
-                    [
-                        'done' => seopress_tasks_schemas(),
-                        'link' => admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_rich_snippets'),
-                        'label' => __('Add Structured Data Types to increase visibility in SERPs', 'wp-seopress'),
                     ]
                 ];
 
-                if (!is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                    unset($tasks[0]);
-                    unset($tasks[3]);
-                    unset($tasks[4]);
-                    $tasks = array_values($tasks);
-                }
+                $tasks = apply_filters('seopress_dashboard_tasks', $tasks);
             ?>
 
             <ul class="seopress-list-items" role="menu">

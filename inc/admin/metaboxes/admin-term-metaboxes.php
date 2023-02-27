@@ -251,26 +251,23 @@ function seopress_display_seo_term_metaboxe() {
             $seopress_robots_imageindex         = get_term_meta($term->term_id, '_seopress_robots_imageindex', true);
         }
 
-        $seopress_robots_canonical         = get_term_meta($term->term_id, '_seopress_robots_canonical', true);
-        if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-            $seopress_robots_breadcrumbs   = get_term_meta($term->term_id, '_seopress_robots_breadcrumbs', true);
-        }
-        $seopress_social_fb_title               = get_term_meta($term->term_id, '_seopress_social_fb_title', true);
-        $seopress_social_fb_desc                = get_term_meta($term->term_id, '_seopress_social_fb_desc', true);
-        $seopress_social_fb_img                 = get_term_meta($term->term_id, '_seopress_social_fb_img', true);
-        $seopress_social_fb_img_attachment_id   = get_term_meta($term->term_id, '_seopress_social_fb_img_attachment_id', true);
-        $seopress_social_fb_img_width           = get_term_meta($term->term_id, '_seopress_social_fb_img_width', true);
-        $seopress_social_fb_img_height          = get_term_meta($term->term_id, '_seopress_social_fb_img_height', true);
-        $seopress_social_twitter_title          = get_term_meta($term->term_id, '_seopress_social_twitter_title', true);
-        $seopress_social_twitter_desc           = get_term_meta($term->term_id, '_seopress_social_twitter_desc', true);
-        $seopress_social_twitter_img            = get_term_meta($term->term_id, '_seopress_social_twitter_img', true);
-        $seopress_social_twitter_img_attachment_id = get_term_meta($term->term_id, '_seopress_social_twitter_img_attachment_id', true);
-        $seopress_social_twitter_img_width = get_term_meta($term->term_id, '_seopress_social_twitter_img_width', true);
-        $seopress_social_twitter_img_height = get_term_meta($term->term_id, '_seopress_social_twitter_img_height', true);
-        $seopress_redirections_enabled     = get_term_meta($term->term_id, '_seopress_redirections_enabled', true);
-        $seopress_redirections_logged_status   = get_term_meta($term->term_id, '_seopress_redirections_logged_status', true);
-        $seopress_redirections_type        = get_term_meta($term->term_id, '_seopress_redirections_type', true);
-        $seopress_redirections_value       = get_term_meta($term->term_id, '_seopress_redirections_value', true);
+        $seopress_robots_canonical                  = get_term_meta($term->term_id, '_seopress_robots_canonical', true);
+        $seopress_social_fb_title                   = get_term_meta($term->term_id, '_seopress_social_fb_title', true);
+        $seopress_social_fb_desc                    = get_term_meta($term->term_id, '_seopress_social_fb_desc', true);
+        $seopress_social_fb_img                     = get_term_meta($term->term_id, '_seopress_social_fb_img', true);
+        $seopress_social_fb_img_attachment_id       = get_term_meta($term->term_id, '_seopress_social_fb_img_attachment_id', true);
+        $seopress_social_fb_img_width               = get_term_meta($term->term_id, '_seopress_social_fb_img_width', true);
+        $seopress_social_fb_img_height              = get_term_meta($term->term_id, '_seopress_social_fb_img_height', true);
+        $seopress_social_twitter_title              = get_term_meta($term->term_id, '_seopress_social_twitter_title', true);
+        $seopress_social_twitter_desc               = get_term_meta($term->term_id, '_seopress_social_twitter_desc', true);
+        $seopress_social_twitter_img                = get_term_meta($term->term_id, '_seopress_social_twitter_img', true);
+        $seopress_social_twitter_img_attachment_id  = get_term_meta($term->term_id, '_seopress_social_twitter_img_attachment_id', true);
+        $seopress_social_twitter_img_width          = get_term_meta($term->term_id, '_seopress_social_twitter_img_width', true);
+        $seopress_social_twitter_img_height         = get_term_meta($term->term_id, '_seopress_social_twitter_img_height', true);
+        $seopress_redirections_enabled              = get_term_meta($term->term_id, '_seopress_redirections_enabled', true);
+        $seopress_redirections_logged_status        = get_term_meta($term->term_id, '_seopress_redirections_logged_status', true);
+        $seopress_redirections_type                 = get_term_meta($term->term_id, '_seopress_redirections_type', true);
+        $seopress_redirections_value                = get_term_meta($term->term_id, '_seopress_redirections_value', true);
 
         require_once dirname(dirname(__FILE__)) . '/admin-dyn-variables-helper.php'; //Dynamic variables
         require_once dirname(__FILE__) . '/admin-metaboxes-form.php'; //Metaboxe HTML
@@ -330,13 +327,6 @@ function seopress_display_seo_term_metaboxe() {
                 update_term_meta($term_id, '_seopress_robots_snippet', 'yes');
             } else {
                 delete_term_meta($term_id, '_seopress_robots_snippet', '');
-            }
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                if (!empty($_POST['seopress_robots_breadcrumbs'])) {
-                    update_term_meta($term_id, '_seopress_robots_breadcrumbs', esc_html($_POST['seopress_robots_breadcrumbs']));
-                } else {
-                    delete_term_meta($term_id, '_seopress_robots_breadcrumbs');
-                }
             }
             if (!empty($_POST['seopress_robots_canonical'])) {
                 update_term_meta($term_id, '_seopress_robots_canonical', esc_html($_POST['seopress_robots_canonical']));
@@ -409,6 +399,8 @@ function seopress_display_seo_term_metaboxe() {
                 delete_term_meta($term_id, '_seopress_redirections_enabled', '');
             }
         }
+
+        do_action('seopress_seo_metabox_term_save', $term_id, $_POST);
     }
 }
 

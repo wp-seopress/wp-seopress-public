@@ -8,31 +8,6 @@ global $pagenow;
 
 //Admin notices
 //=================================================================================================
-//License notice
-if (current_user_can(seopress_capability('manage_options', 'notice')) && is_seopress_page()) {
-    //PRO
-    if ('valid' != get_option('seopress_pro_license_status') && is_plugin_active('wp-seopress-pro/seopress-pro.php') && ! is_multisite()) {
-        function seopress_notice_license()
-        {
-            $screen_id = get_current_screen();
-            if ('seopress-option' === $screen_id->parent_base && 'seo_page_seopress-license' !== $screen_id->base) {
-                $docs = seopress_get_docs_links();
-
-                $class   = 'seopress-notice is-error';
-
-                $message = '<p><strong>' . __('Welcome to SEOPress PRO!', 'wp-seopress') . '</strong></p>';
-
-                $message .= '<p>' . __('Please activate your license to receive automatic updates and get premium support.', 'wp-seopress') . '</p>';
-
-                $message .= '<p><a class="btn btnPrimary" href="' . admin_url('admin.php?page=seopress-license') . '">' . __('Activate License', 'wp-seopress') . '</a></p>';
-
-                printf('<div class="%1$s">%2$s</div>', esc_attr($class), $message);
-            }
-        }
-        add_action('seopress_admin_notices', 'seopress_notice_license');
-    }
-}
-
 //Permalinks notice
 if (isset($pagenow) && 'options-permalink.php' == $pagenow) {
     function seopress_notice_permalinks()
@@ -181,16 +156,6 @@ if ('' != seopress_advanced_advanced_image_auto_title_editor_option() ||
 function seopress_advanced_appearance_metaboxe_position_option()
 {
     return seopress_get_service('AdvancedOption')->getAppearanceMetaboxePosition();
-
-}
-
-//Set default tab in schema metabox
-/**
- * @deprecated 5.4.0
- */
-function seopress_advanced_appearance_schema_default_tab_option()
-{
-    return seopress_get_service('AdvancedOption')->getAppearanceSchemaDefaultTab();
 
 }
 

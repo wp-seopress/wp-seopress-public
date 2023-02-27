@@ -205,12 +205,6 @@ class AdvancedOption
     /**
      * @since 5.4.0
      */
-    public function getAppearanceSchemaDefaultTab(){
-        return $this->searchOptionByKey('seopress_advanced_appearance_schema_default_tab');
-    }
-    /**
-     * @since 5.4.0
-     */
     public function getAppearanceTitleCol(){
         return $this->searchOptionByKey('seopress_advanced_appearance_title_col');
     }

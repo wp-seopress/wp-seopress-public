@@ -87,25 +87,6 @@ class ManageColumn implements ExecuteHooksBackend
         if (! empty(seopress_advanced_appearance_words_col_option())) {
             $columns['seopress_words'] = __('Words', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_ps_col_option())) {
-            $columns['seopress_ps'] = __('Page Speed', 'wp-seopress');
-        }
-        if (! empty(seopress_advanced_appearance_insights_col_option())) {
-            $columns['seopress_insights'] = __('Insights', 'wp-seopress');
-        }
-
-        if (! empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())) {
-            $columns['seopress_search_console_clicks'] = __('Clicks', 'wp-seopress');
-        }
-        if (! empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())) {
-            $columns['seopress_search_console_impressions'] = __('Impressions', 'wp-seopress');
-        }
-        if (! empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())) {
-            $columns['seopress_search_console_ctr'] = __('CTR', 'wp-seopress');
-        }
-        if (! empty(seopress_get_service('AdvancedOption')->getAppearanceSearchConsole())) {
-            $columns['seopress_search_console_position'] = __('Position', 'wp-seopress');
-        }
 
         return $columns;
     }
@@ -187,10 +168,6 @@ class ManageColumn implements ExecuteHooksBackend
                 }
                 break;
 
-            case 'seopress_ps':
-                echo '<a href="'.admin_url('admin.php?page=seopress-pro-page&data_permalink='.esc_url(get_the_permalink().'#tab=tab_seopress_page_speed')).'" class="seopress-button" title="' . esc_attr(__('Analyze this page with Google Page Speed', 'wp-seopress')) . '"><span class="dashicons dashicons-dashboard"></span></a>';
-                break;
-
             case 'seopress_score':
                 $dataApiAnalysis = get_post_meta($post_id, '_seopress_content_analysis_api', true);
                 if (isset($dataApiAnalysis['score']) && $dataApiAnalysis['score'] !== null) {
@@ -225,122 +202,6 @@ class ManageColumn implements ExecuteHooksBackend
                         echo '</div>';
                     }
                 }
-                break;
-
-            case 'seopress_insights':
-                if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-                    foreach (seopress_insights_query_all_rankings() as $key => $value) {
-                        if (! empty($value) && $value['url'] == get_the_permalink($post_id)) {
-                            $rankings[$value['ts']][] = [
-                                'keyword'           => get_the_title(),
-                                'p'          		     => $value['p'],
-                                'url'               => $value['url'],
-                                'search_volume'     => $value['search_volume'],
-                                'cpc'               => $value['cpc'],
-                                'competition'       => $value['competition'],
-                                'date'              => date('Y/m/d', $value['ts']),
-                            ];
-                        }
-                    }
-
-                    if (! empty($rankings)) {
-                        foreach ($rankings as $key => $value) {
-                            $avg_pos[] 	= $value[0]['p'];
-                            $kws[] 		   = $value[0]['keyword'];
-                        }
-
-                        echo '<div class="wrap-insights-post">';
-
-                        echo '<p><span class="dashicons dashicons-chart-line"></span>';
-
-                        if (! empty($kws)) {
-                            $kws = array_unique($kws);
-
-                            $html = '<ul>';
-                            foreach ($kws as $kw) {
-                                $html .= '<li><span class="dashicons dashicons-minus"></span>' . $kw . '</li>';
-                            }
-                            $html .= '</ul>';
-
-                            echo seopress_tooltip(__('Insights from these keywords:', 'wp-seopress-insights'), sprintf('%s', $html), '');
-                        }
-
-                        echo '</p>';
-
-                        //Average position
-                        echo '<p class="widget-insights-title">' . __('Average position: ', 'wp-seopress-insights') . '</p>';
-
-                        if (! empty($avg_pos)) {
-                            echo '<p>';
-
-                            echo '<span>' . round(array_sum($avg_pos) / count($avg_pos), 2) . '</span>';
-
-                            //Variation
-                            if (isset($avg_pos[0]) && $avg_pos[1]) {
-                                $p_variation = $avg_pos[0] - $avg_pos[1];
-
-                                if ($avg_pos[0] < $avg_pos[1]) {
-                                    $p_variation_rel = '<span class="up"><span class="dashicons dashicons-arrow-up-alt"></span> ' . abs($p_variation) . '</span>';
-                                } elseif ($avg_pos[0] == $avg_pos[1]) {
-                                    $p_variation_rel = '<span class="stable">=</span>';
-                                } else {
-                                    $p_variation_rel = '<span class="down"><span class="dashicons dashicons-arrow-up-alt"></span> ' . abs($p_variation) . '</span>';
-                                }
-
-                                echo $p_variation_rel;
-                            }
-
-                            echo '</p>';
-                        }
-
-                        //Latest position
-                        echo '<p class="widget-insights-title">' . __('Latest position: ', 'wp-seopress-insights') . '</p>';
-
-                        $p = array_key_first($rankings);
-                        echo '<p><span>' . $rankings[$p][0]['p'] . '</span></p>';
-                        echo '</div>';
-                    }
-                }
-                break;
-            case 'seopress_search_console_clicks':
-                $clicks = get_post_meta($post_id, '_seopress_search_console_analysis_clicks', true);
-                if(!$clicks){
-                    echo "0";
-                    return;
-                }
-
-                echo esc_html($clicks);
-
-                break;
-            case 'seopress_search_console_impressions':
-                $impressions = get_post_meta($post_id, '_seopress_search_console_analysis_impressions', true);
-                if(!$impressions){
-                    echo "0";
-                    return;
-                }
-
-                echo esc_html($impressions);
-
-                break;
-            case 'seopress_search_console_ctr':
-                $ctr = get_post_meta($post_id, '_seopress_search_console_analysis_ctr', true);
-                if(!$ctr){
-                    echo "0";
-                    return;
-                }
-
-                echo esc_html(number_format(floatval($ctr)  * 100, 2) . '%');
-
-                break;
-            case 'seopress_search_console_position':
-                $position = get_post_meta($post_id, '_seopress_search_console_analysis_position', true);
-                if(!$position){
-                    echo "0";
-                    return;
-                }
-
-                echo esc_html(number_format(floatval($position), 0));
-
                 break;
         }
     }

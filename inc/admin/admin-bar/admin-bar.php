@@ -136,67 +136,15 @@ function seopress_admin_bar_links() {
                 'title'		=> __('Advanced', 'wp-seopress'),
                 'href'		 => admin_url('admin.php?page=seopress-advanced'),
             ]);
-            include_once ABSPATH . 'wp-admin/includes/plugin.php';
-            if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-                $wp_admin_bar->add_menu([
-                    'parent'	=> 'seopress',
-                    'id'		   => 'seopress_custom_sub_menu_insights',
-                    'title'		=> __('Insights', 'wp-seopress'),
-                    'href'		 => admin_url('admin.php?page=seopress-insights'),
-                ]);
-            }
             $wp_admin_bar->add_menu([
                 'parent'	=> 'seopress',
                 'id'		   => 'seopress_custom_sub_menu_import_export',
                 'title'		=> __('Tools', 'wp-seopress'),
                 'href'		 => admin_url('admin.php?page=seopress-import-export'),
             ]);
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                $wp_admin_bar->add_menu([
-                    'parent'	=> 'seopress',
-                    'id'		   => 'seopress_custom_sub_menu_pro',
-                    'title'		=> __('PRO', 'wp-seopress'),
-                    'href'		 => admin_url('admin.php?page=seopress-pro-page'),
-                ]);
-                if ('1' == seopress_get_toggle_option('bot')) {
-                    $wp_admin_bar->add_menu([
-                        'parent'	=> 'seopress',
-                        'id'		   => 'seopress_custom_sub_menu_bot',
-                        'title'		=> __('Audit', 'wp-seopress'),
-                        'href'		 => admin_url('admin.php?page=seopress-bot-batch'),
-                    ]);
-                }
-                if ('1' == seopress_get_toggle_option('rich-snippets')) {
-                    $wp_admin_bar->add_menu([
-                        'parent'	=> 'seopress',
-                        'id'		   => 'seopress_custom_sub_menu_schemas',
-                        'title'		=> __('Schemas', 'wp-seopress'),
-                        'href'		 => admin_url('edit.php?post_type=seopress_schemas'),
-                    ]);
-                }
-                if ('1' == seopress_get_toggle_option('404')) {
-                    $wp_admin_bar->add_menu([
-                        'parent'	=> 'seopress',
-                        'id'		   => 'seopress_custom_sub_menu_404',
-                        'title'		=> __('Redirections', 'wp-seopress'),
-                        'href'		 => admin_url('edit.php?post_type=seopress_404'),
-                    ]);
-                }
-                if ('1' == seopress_get_toggle_option('bot')) {
-                    $wp_admin_bar->add_menu([
-                        'parent'	=> 'seopress',
-                        'id'		   => 'seopress_custom_sub_menu_broken_links',
-                        'title'		=> __('Broken Links', 'wp-seopress'),
-                        'href'		 => admin_url('edit.php?post_type=seopress_bot'),
-                    ]);
-                }
-                $wp_admin_bar->add_menu([
-                    'parent'	=> 'seopress',
-                    'id'		   => 'seopress_custom_sub_menu_license',
-                    'title'		=> __('License', 'wp-seopress'),
-                    'href'		 => admin_url('admin.php?page=seopress-license'),
-                ]);
-            }
+
+            do_action('seopress_admin_bar_items');
+
             $wp_admin_bar->add_menu([
                 'parent'	=> 'seopress',
                 'id'		   => 'seopress_custom_sub_menu_wizard',

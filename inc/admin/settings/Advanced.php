@@ -188,16 +188,6 @@ add_settings_field(
     'seopress_setting_section_advanced_appearance_metabox' // Section
 );
 
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-    add_settings_field(
-        'seopress_advanced_appearance_schema_default_tab', // ID
-        __('Set default tab for Structured data metabox', 'wp-seopress'), // Title
-        'seopress_advanced_appearance_schema_default_tab_callback', // Callback
-        'seopress-settings-admin-advanced-appearance', // Page
-        'seopress_setting_section_advanced_appearance_metabox' // Section
-    );
-}
-
 add_settings_field(
     'seopress_advanced_appearance_ca_metaboxe', // ID
     __('Remove Content Analysis Metabox', 'wp-seopress'), // Title
@@ -361,38 +351,10 @@ add_settings_field(
     'seopress_setting_section_advanced_appearance_col' // Section
 );
 
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-    add_settings_field(
-        'seopress_advanced_appearance_ps_col', // ID
-        __('Show Google Page Speed column in post types', 'wp-seopress'), // Title
-        'seopress_advanced_appearance_ps_col_callback', // Callback
-        'seopress-settings-admin-advanced-appearance', // Page
-        'seopress_setting_section_advanced_appearance_col' // Section
-    );
-}
-
-if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-    add_settings_field(
-        'seopress_advanced_appearance_insights_col', // ID
-        __('Show Insights column in post types', 'wp-seopress'), // Title
-        'seopress_advanced_appearance_insights_col_callback', // Callback
-        'seopress-settings-admin-advanced-appearance', // Page
-        'seopress_setting_section_advanced_appearance_col' // Section
-    );
-}
-
 add_settings_field(
     'seopress_advanced_appearance_score_col', // ID
     __('Show content analysis score column in post types', 'wp-seopress'), // Title
     'seopress_advanced_appearance_score_col_callback', // Callback
-    'seopress-settings-admin-advanced-appearance', // Page
-    'seopress_setting_section_advanced_appearance_col' // Section
-);
-
-add_settings_field(
-    'seopress_advanced_appearance_search_console', // ID
-    __('Show search console data', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_search_console_callback', // Callback
     'seopress-settings-admin-advanced-appearance', // Page
     'seopress_setting_section_advanced_appearance_col' // Section
 );
@@ -449,27 +411,4 @@ add_settings_field(
 
 seopress_get_service('SectionPagesSEOPress')->printSectionPages();
 
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-    $versions = get_option('seopress_versions');
-    $actual_version = isset($versions['pro']) ? $versions['pro'] : 0;
-
-    if (version_compare($actual_version, '5.6', '>=')) {
-        add_settings_section(
-            'seopress_setting_section_advanced_security_ga', // ID
-            '',
-            //__("Security","wp-seopress"), // Title
-            'print_section_info_advanced_security_ga', // Callback
-            'seopress-settings-admin-advanced-security' // Page
-        );
-    }
-
-    if (version_compare($actual_version, '6.1', '>=')) {
-        add_settings_section(
-            'seopress_setting_section_advanced_security_matomo', // ID
-            '',
-            //__("Security","wp-seopress"), // Title
-            'print_section_info_advanced_security_matomo', // Callback
-            'seopress-settings-admin-advanced-security' // Page
-        );
-    }
-}
+do_action('seopress_settings_advanced_after');

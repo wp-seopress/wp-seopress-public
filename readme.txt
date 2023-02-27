@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag: 6.3.1
+Stable tag: 6.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -157,7 +157,7 @@ We provide deep integration with Elementor page builder. Directly from Elementor
 	<li>edit social meta (Facebook Open Graph and Twitter Cards</li>
 	<li>analyse your content to optimize it for search engines</li>
 	<li>apply FAQ schema on Toggle and / or Accordion Elementor widgets</li>
-	<li>generate automagically meta title and description with AI (OpenAI integration - PRO required)</li>
+    <li>generate automagically meta title and description with AI (OpenAI integration - PRO required)</li>
 	<li>and more!</li>
 </ul>
 
@@ -373,6 +373,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.3.2 =
+* INFO Compliance with the w.org plugin guidelines
+* FIX Revert CSS to display full SEO metadata in post type columns
+* FIX Check if 404 monitoring / Redirections toggle is checked for CRON task
+
 = 6.3.1 =
 * INFO Improve our OpenAI integration
 * INFO Update OpenAI hooks to pass the post id
