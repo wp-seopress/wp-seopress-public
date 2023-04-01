@@ -64,6 +64,19 @@ function seopress_titles_single_cpt_enable_option($cpt) {
 }
 
 /**
+ * Get Page Speed Score
+ *
+ * @author Benjamin Denis
+ *
+ * @deprecated 5.4.0
+ *
+ * @return string
+ */
+function seopress_advanced_appearance_ps_col_option() {
+    return seopress_get_service('AdvancedOption')->getAppearancePsCol();
+}
+
+/**
  * Get all registered post types.
  *
  * @author Benjamin Denis

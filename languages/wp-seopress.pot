@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 6.5\n"
+"Project-Id-Version: SEOPress 6.5.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-22T14:56:04+00:00\n"
+"POT-Creation-Date: 2023-03-23T08:22:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -413,7 +413,7 @@ msgstr ""
 #: inc/admin/admin-pages/Sitemaps.php:43
 #: inc/admin/admin-pages/Social.php:43
 #: inc/admin/admin-pages/Titles.php:54
-#: seopress-functions.php:834
+#: seopress-functions.php:847
 msgid "Save changes"
 msgstr ""
 
@@ -687,7 +687,7 @@ msgid "Get started"
 msgstr ""
 
 #: inc/admin/blocks/get-started.php:25
-#: seopress-functions.php:581
+#: seopress-functions.php:594
 msgid "Dismiss"
 msgstr ""
 
@@ -5031,29 +5031,29 @@ msgstr ""
 msgid "Page %d of %2$d"
 msgstr ""
 
-#: seopress-functions.php:307
+#: seopress-functions.php:320
 msgid "Custom Post Types"
 msgstr ""
 
-#: seopress-functions.php:311
+#: seopress-functions.php:324
 msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %s: "Custom Post Types" or "Custom Taxonomies" %s: "title" or "description"
-#: seopress-functions.php:355
+#: seopress-functions.php:368
 msgid "Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 
-#: seopress-functions.php:381
-#: seopress-functions.php:411
+#: seopress-functions.php:394
+#: seopress-functions.php:424
 msgid "WARNING"
 msgstr ""
 
-#: seopress-functions.php:382
+#: seopress-functions.php:395
 msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
 msgstr ""
 
-#: seopress-functions.php:412
+#: seopress-functions.php:425
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
