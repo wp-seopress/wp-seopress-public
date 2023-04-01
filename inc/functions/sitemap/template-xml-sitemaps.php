@@ -93,115 +93,117 @@ function seopress_xml_sitemap_index() {
 
     //CPT
     if ('' !== seopress_get_service('SitemapOption')->getPostTypesList()) {
-        foreach (seopress_get_service('SitemapOption')->getPostTypesList() as $cpt_key => $cpt_value) {
-            foreach ($cpt_value as $_cpt_key => $_cpt_value) {
-                if ('1' == $_cpt_value) {
-                    $args = [
-                        'posts_per_page' => -1,
-                        'post_type'      => $cpt_key,
-                        'post_status'    => 'publish',
-                        'meta_query'     => [
-                            'relation' => 'OR',
-                            [
-                                'key'     => '_seopress_robots_index',
-                                'value'   => '',
-                                'compare' => 'NOT EXISTS',
+        if (!empty(seopress_get_service('SitemapOption')->getPostTypesList())) {
+            foreach (seopress_get_service('SitemapOption')->getPostTypesList() as $cpt_key => $cpt_value) {
+                foreach ($cpt_value as $_cpt_key => $_cpt_value) {
+                    if ('1' == $_cpt_value) {
+                        $args = [
+                            'posts_per_page' => -1,
+                            'post_type'      => $cpt_key,
+                            'post_status'    => 'publish',
+                            'meta_query'     => [
+                                'relation' => 'OR',
+                                [
+                                    'key'     => '_seopress_robots_index',
+                                    'value'   => '',
+                                    'compare' => 'NOT EXISTS',
+                                ],
+                                [
+                                    'key'     => '_seopress_robots_index',
+                                    'value'   => 'yes',
+                                    'compare' => '!=',
+                                ],
                             ],
-                            [
-                                'key'     => '_seopress_robots_index',
-                                'value'   => 'yes',
-                                'compare' => '!=',
-                            ],
-                        ],
-                        'fields'       => 'ids',
-                        'lang'         => '',
-                        'has_password' => false,
-                    ];
+                            'fields'       => 'ids',
+                            'lang'         => '',
+                            'has_password' => false,
+                        ];
 
-                    //Polylang: exclude hidden languages
-                    $args = seopress_pll_exclude_hidden_lang($args);
+                        //Polylang: exclude hidden languages
+                        $args = seopress_pll_exclude_hidden_lang($args);
 
-                    $args = apply_filters('seopress_sitemaps_index_post_types_query', $args, $cpt_key);
+                        $args = apply_filters('seopress_sitemaps_index_post_types_query', $args, $cpt_key);
 
-                    $count_posts = count(get_posts($args));
+                        $count_posts = count(get_posts($args));
 
-                    //Max posts per paginated sitemap
-                    $max = 1000;
-                    $max = apply_filters('seopress_sitemaps_max_posts_per_sitemap', $max);
+                        //Max posts per paginated sitemap
+                        $max = 1000;
+                        $max = apply_filters('seopress_sitemaps_max_posts_per_sitemap', $max);
 
-                    if ($count_posts >= $max) {
-                        $max_loop = $count_posts / $max;
-                    } else {
-                        $max_loop = 1;
-                    }
-
-                    $paged ='';
-                    $i     = '';
-                    for ($i=0; $i < $max_loop; ++$i) {
-                        if (isset($offset) && absint($offset) && '' != $offset && 0 != $offset) {
-                            $offset = ((($i) * $max));
+                        if ($count_posts >= $max) {
+                            $max_loop = $count_posts / $max;
                         } else {
-                            $offset = 0;
+                            $max_loop = 1;
                         }
 
-                        if ($i >= 1 && $i <= $max_loop) {
-                            $paged = $i + 1;
-                        } else {
-                            $paged = 1;
-                        }
-
-                        $seopress_sitemaps .= "\n";
-                        $seopress_sitemaps .= '<sitemap>';
-                        $seopress_sitemaps .= "\n";
-                        $seopress_sitemaps .= '<loc>';
-                        $seopress_sitemaps .= $home_url . $cpt_key . '-sitemap' . $paged . '.xml';
-                        $seopress_sitemaps .= '</loc>';
-                        $seopress_sitemaps .= "\n";
-
-                        //Remove lastmod column in index sitemap for lage sitemap
-                        $display_lastmod = apply_filters('seopress_sitemaps_index_lastmod', false);
-
-                        if (true == $display_lastmod) {
-                            $args = [
-                                'post_type' 			        => $cpt_key,
-                                'offset' 				          => $offset,
-                                'post_status' 			      => 'publish',
-                                'ignore_sticky_posts' 	=> true,
-                                'posts_per_page' 		    => 1,
-                                'meta_query'           => [
-                                        'relation' => 'OR',
-                                        [
-                                            'key'     => '_seopress_robots_index',
-                                            'value'   => '',
-                                            'compare' => 'NOT EXISTS',
-                                        ],
-                                        [
-                                            'key'     => '_seopress_robots_index',
-                                            'value'   => 'yes',
-                                            'compare' => '!=',
-                                        ],
-                                    ],
-                                'order' 				      => 'DESC',
-                                'orderby' 				    => 'modified',
-                                'lang' 					      => '',
-                                'has_password' 			=> false,
-                            ];
-
-                            $args = seopress_pll_exclude_hidden_lang($args);
-
-                            $args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
-
-                            $get_latest_post = new WP_Query($args);
-
-                            if ($get_latest_post->have_posts()) {
-                                $seopress_sitemaps .= '<lastmod>';
-                                $seopress_sitemaps .= date('c', strtotime($get_latest_post->posts[0]->post_modified));
-                                $seopress_sitemaps .= '</lastmod>';
-                                $seopress_sitemaps .= "\n";
+                        $paged ='';
+                        $i     = '';
+                        for ($i=0; $i < $max_loop; ++$i) {
+                            if (isset($offset) && absint($offset) && '' != $offset && 0 != $offset) {
+                                $offset = ((($i) * $max));
+                            } else {
+                                $offset = 0;
                             }
-                        }
 
-                        $seopress_sitemaps .= '</sitemap>';
+                            if ($i >= 1 && $i <= $max_loop) {
+                                $paged = $i + 1;
+                            } else {
+                                $paged = 1;
+                            }
+
+                            $seopress_sitemaps .= "\n";
+                            $seopress_sitemaps .= '<sitemap>';
+                            $seopress_sitemaps .= "\n";
+                            $seopress_sitemaps .= '<loc>';
+                            $seopress_sitemaps .= $home_url . $cpt_key . '-sitemap' . $paged . '.xml';
+                            $seopress_sitemaps .= '</loc>';
+                            $seopress_sitemaps .= "\n";
+
+                            //Remove lastmod column in index sitemap for lage sitemap
+                            $display_lastmod = apply_filters('seopress_sitemaps_index_lastmod', false);
+
+                            if (true == $display_lastmod) {
+                                $args = [
+                                    'post_type' 			        => $cpt_key,
+                                    'offset' 				          => $offset,
+                                    'post_status' 			      => 'publish',
+                                    'ignore_sticky_posts' 	=> true,
+                                    'posts_per_page' 		    => 1,
+                                    'meta_query'           => [
+                                            'relation' => 'OR',
+                                            [
+                                                'key'     => '_seopress_robots_index',
+                                                'value'   => '',
+                                                'compare' => 'NOT EXISTS',
+                                            ],
+                                            [
+                                                'key'     => '_seopress_robots_index',
+                                                'value'   => 'yes',
+                                                'compare' => '!=',
+                                            ],
+                                        ],
+                                    'order' 				      => 'DESC',
+                                    'orderby' 				    => 'modified',
+                                    'lang' 					      => '',
+                                    'has_password' 			=> false,
+                                ];
+
+                                $args = seopress_pll_exclude_hidden_lang($args);
+
+                                $args = apply_filters('seopress_sitemaps_index_cpt_query', $args, $cpt_key);
+
+                                $get_latest_post = new WP_Query($args);
+
+                                if ($get_latest_post->have_posts()) {
+                                    $seopress_sitemaps .= '<lastmod>';
+                                    $seopress_sitemaps .= date('c', strtotime($get_latest_post->posts[0]->post_modified));
+                                    $seopress_sitemaps .= '</lastmod>';
+                                    $seopress_sitemaps .= "\n";
+                                }
+                            }
+
+                            $seopress_sitemaps .= '</sitemap>';
+                        }
                     }
                 }
             }
@@ -212,73 +214,75 @@ function seopress_xml_sitemap_index() {
     if ('' !== seopress_get_service('SitemapOption')->getTaxonomiesList()) {
         //Init
         $seopress_xml_terms_list = [];
-        foreach (seopress_get_service('SitemapOption')->getTaxonomiesList() as $tax_key => $tax_value) {
-            foreach ($tax_value as $_tax_key => $_tax_value) {
-                if ('1' == $_tax_value) {
-                    $args = [
-                        'taxonomy'   => $tax_key,
-                        'hide_empty' => false,
-                        'lang'       => '',
-                        'fields'     => 'ids',
-                        'meta_query' => [
-                            'relation' => 'OR',
-                            [
-                                'key'     => '_seopress_robots_index',
-                                'value'   => '',
-                                'compare' => 'NOT EXISTS',
+        if (!empty(seopress_get_service('SitemapOption')->getTaxonomiesList())) {
+            foreach (seopress_get_service('SitemapOption')->getTaxonomiesList() as $tax_key => $tax_value) {
+                foreach ($tax_value as $_tax_key => $_tax_value) {
+                    if ('1' == $_tax_value) {
+                        $args = [
+                            'taxonomy'   => $tax_key,
+                            'hide_empty' => false,
+                            'lang'       => '',
+                            'fields'     => 'ids',
+                            'meta_query' => [
+                                'relation' => 'OR',
+                                [
+                                    'key'     => '_seopress_robots_index',
+                                    'value'   => '',
+                                    'compare' => 'NOT EXISTS',
+                                ],
+                                [
+                                    'key'     => '_seopress_robots_index',
+                                    'value'   => 'yes',
+                                    'compare' => '!=',
+                                ],
                             ],
-                            [
-                                'key'     => '_seopress_robots_index',
-                                'value'   => 'yes',
-                                'compare' => '!=',
-                            ],
-                        ],
-                    ];
+                        ];
 
-                    //Polylang: exclude hidden languages
-                    $args = seopress_pll_exclude_hidden_lang($args);
+                        //Polylang: exclude hidden languages
+                        $args = seopress_pll_exclude_hidden_lang($args);
 
-                    $args = apply_filters('seopress_sitemaps_index_tax_query', $args, $tax_key);
+                        $args = apply_filters('seopress_sitemaps_index_tax_query', $args, $tax_key);
 
-                    $termsData   = get_terms($args);
-                    $count_terms = 0;
-                    if (is_array($termsData) && ! is_wp_error($termsData)) {
-                        $count_terms = count($termsData);
-                    }
-
-                    //Max terms per paginated sitemap
-                    $max = 1000;
-                    $max = apply_filters('seopress_sitemaps_max_terms_per_sitemap', $max);
-
-                    if ($count_terms >= $max) {
-                        $max_loop = $count_terms / $max;
-                    } else {
-                        $max_loop = 1;
-                    }
-
-                    $paged ='';
-                    $i     = '';
-                    for ($i=0; $i < $max_loop; ++$i) {
-                        if (isset($offset) && absint($offset) && '' != $offset && 0 != $offset) {
-                            $offset = ((($i) * $max));
-                        } else {
-                            $offset = 0;
+                        $termsData   = get_terms($args);
+                        $count_terms = 0;
+                        if (is_array($termsData) && ! is_wp_error($termsData)) {
+                            $count_terms = count($termsData);
                         }
 
-                        if ($i >= 1 && $i <= $max_loop) {
-                            $paged = $i + 1;
+                        //Max terms per paginated sitemap
+                        $max = 1000;
+                        $max = apply_filters('seopress_sitemaps_max_terms_per_sitemap', $max);
+
+                        if ($count_terms >= $max) {
+                            $max_loop = $count_terms / $max;
                         } else {
-                            $paged = 1;
+                            $max_loop = 1;
                         }
 
-                        $seopress_sitemaps .= "\n";
-                        $seopress_sitemaps .= '<sitemap>';
-                        $seopress_sitemaps .= "\n";
-                        $seopress_sitemaps .= '<loc>';
-                        $seopress_sitemaps .= $home_url . $tax_key . '-sitemap' . $paged . '.xml';
-                        $seopress_sitemaps .= '</loc>';
-                        $seopress_sitemaps .= "\n";
-                        $seopress_sitemaps .= '</sitemap>';
+                        $paged ='';
+                        $i     = '';
+                        for ($i=0; $i < $max_loop; ++$i) {
+                            if (isset($offset) && absint($offset) && '' != $offset && 0 != $offset) {
+                                $offset = ((($i) * $max));
+                            } else {
+                                $offset = 0;
+                            }
+
+                            if ($i >= 1 && $i <= $max_loop) {
+                                $paged = $i + 1;
+                            } else {
+                                $paged = 1;
+                            }
+
+                            $seopress_sitemaps .= "\n";
+                            $seopress_sitemaps .= '<sitemap>';
+                            $seopress_sitemaps .= "\n";
+                            $seopress_sitemaps .= '<loc>';
+                            $seopress_sitemaps .= $home_url . $tax_key . '-sitemap' . $paged . '.xml';
+                            $seopress_sitemaps .= '</loc>';
+                            $seopress_sitemaps .= "\n";
+                            $seopress_sitemaps .= '</sitemap>';
+                        }
                     }
                 }
             }
