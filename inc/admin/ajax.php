@@ -77,6 +77,9 @@ function seopress_do_real_preview()
                 $_GET['seopress_analysis_target_kw'] = get_post_meta($seopress_get_the_id, '_seopress_analysis_target_kw', true);
             }
 
+            //Check if Oxygen is enabled for this post type
+            $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.$seopress_get_post_type) ? false : true;
+
             //DOM
             $dom                     = new DOMDocument();
             $internalErrors          = libxml_use_internal_errors(true);
@@ -98,7 +101,7 @@ function seopress_do_real_preview()
 
             if ('post' == $seopress_origin) { //Default: post type
                 //Oxygen compatibility
-                if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
+                if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
                     $link = get_permalink((int) $seopress_get_the_id);
                     $link = add_query_arg('no_admin_bar', 1, $link);
 
@@ -133,7 +136,7 @@ function seopress_do_real_preview()
                 $response = wp_remote_retrieve_body($response);
 
                 if ($dom->loadHTML('<?xml encoding="utf-8" ?>' . $response)) {
-                    if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
+                    if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
                         $data = get_post_meta($seopress_get_the_id, '_seopress_analysis_data', true) ? get_post_meta($seopress_get_the_id, '_seopress_analysis_data', true) : $data = [];
 
                         if (! empty($data)) {
@@ -516,7 +519,7 @@ function seopress_do_real_preview()
                 wp_reset_postdata();
 
                 //Internal links for Oxygen Builder
-                if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
+                if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
                     $args      = [
                         'posts_per_page' => -1,
                         'meta_query' => [
@@ -737,9 +740,9 @@ function seopress_video_xml_sitemap_regenerate()
         }
 
         $cpt = ['any'];
-        if (seopress_xml_sitemap_post_types_list_option()) {
+        if (seopress_get_service('SitemapOption')->getPostTypesList()) {
             unset($cpt[0]);
-            foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
+            foreach (seopress_get_service('SitemapOption')->getPostTypesList() as $cpt_key => $cpt_value) {
                 foreach ($cpt_value as $_cpt_key => $_cpt_value) {
                     if ('1' == $_cpt_value) {
                         $cpt[] = $cpt_key;

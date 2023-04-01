@@ -206,10 +206,10 @@ function seopress_display_seo_metaboxe()
     add_action('add_meta_boxes', 'seopress_init_metabox');
     function seopress_init_metabox()
     {
-        if (function_exists('seopress_advanced_appearance_metaboxe_position_option')) {
-            $seopress_advanced_appearance_metaboxe_position_option = seopress_advanced_appearance_metaboxe_position_option();
+        if (seopress_get_service('AdvancedOption')->getAppearanceMetaboxePosition() !== null) {
+            $metaboxe_position = seopress_get_service('AdvancedOption')->getAppearanceMetaboxePosition();
         } else {
-            $seopress_advanced_appearance_metaboxe_position_option = 'default';
+            $metaboxe_position = 'default';
         }
 
         $seopress_get_post_types = seopress_get_service('WordPressData')->getPostTypes();
@@ -218,10 +218,10 @@ function seopress_display_seo_metaboxe()
 
         if (! empty($seopress_get_post_types) && ! seopress_get_service('EnqueueModuleMetabox')->canEnqueue()) {
             foreach ($seopress_get_post_types as $key => $value) {
-                add_meta_box('seopress_cpt', __('SEO', 'wp-seopress'), 'seopress_cpt', $key, 'normal', $seopress_advanced_appearance_metaboxe_position_option);
+                add_meta_box('seopress_cpt', __('SEO', 'wp-seopress'), 'seopress_cpt', $key, 'normal', $metaboxe_position);
             }
         }
-        add_meta_box('seopress_cpt', __('SEO', 'wp-seopress'), 'seopress_cpt', 'seopress_404', 'normal', $seopress_advanced_appearance_metaboxe_position_option);
+        add_meta_box('seopress_cpt', __('SEO', 'wp-seopress'), 'seopress_cpt', 'seopress_404', 'normal', $metaboxe_position);
     }
 
     function seopress_cpt($post)
@@ -595,10 +595,10 @@ function seopress_display_ca_metaboxe()
     add_action('add_meta_boxes', 'seopress_init_ca_metabox');
     function seopress_init_ca_metabox()
     {
-        if (function_exists('seopress_advanced_appearance_metaboxe_position_option')) {
-            $seopress_advanced_appearance_metaboxe_position_option = seopress_advanced_appearance_metaboxe_position_option();
+        if (seopress_get_service('AdvancedOption')->getAppearanceMetaboxePosition() !== null) {
+            $metaboxe_position = seopress_get_service('AdvancedOption')->getAppearanceMetaboxePosition();
         } else {
-            $seopress_advanced_appearance_metaboxe_position_option = 'default';
+            $metaboxe_position = 'default';
         }
 
         $seopress_get_post_types = seopress_get_service('WordPressData')->getPostTypes();
@@ -607,7 +607,7 @@ function seopress_display_ca_metaboxe()
 
         if (! empty($seopress_get_post_types) && ! seopress_get_service('EnqueueModuleMetabox')->canEnqueue()) {
             foreach ($seopress_get_post_types as $key => $value) {
-                add_meta_box('seopress_content_analysis', __('Content analysis', 'wp-seopress'), 'seopress_content_analysis', $key, 'normal', $seopress_advanced_appearance_metaboxe_position_option);
+                add_meta_box('seopress_content_analysis', __('Content analysis', 'wp-seopress'), 'seopress_content_analysis', $key, 'normal', $metaboxe_position);
             }
         }
     }

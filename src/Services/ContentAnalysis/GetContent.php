@@ -23,7 +23,9 @@ class GetContent
             $desc = '<p>' . __('We found these schemas in the source code of this page:', 'wp-seopress') . '</p>';
 
             $desc .= '<ul>';
-            $json_ld = array_filter($data['json']);
+            $json_ld = array_filter($data['json'], function($value) {
+                return is_string($value) || is_int($value);
+            });
             foreach (array_count_values($json_ld) as $key => $value) {
                 $html = null;
                 if ($value > 1) {

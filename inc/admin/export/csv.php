@@ -6,6 +6,18 @@ if ( ! defined('ABSPATH')) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Export SEOPress metadata to CSV
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+//WPML compatibility
+add_filter('seopress_metadata_query_args', function ($args, $seopress_get_post_types, $increment, $offset) {
+    if (defined('ICL_SITEPRESS_VERSION')) {
+        global $sitepress, $sitepress_settings;
+
+        $sitepress_settings['auto_adjust_ids'] = 0;
+        remove_filter('terms_clauses', [$sitepress, 'terms_clauses']);
+        remove_filter('category_link', [$sitepress, 'category_link_adjust_id'], 1);
+    }
+    return $args;
+}, 10, 4);
+
 function seopress_metadata_export() {
     check_ajax_referer('seopress_export_csv_metadata_nonce', $_POST['_ajax_nonce'], true);
 
@@ -84,6 +96,7 @@ function seopress_metadata_export() {
     $settings['id']              = 		[];
     $settings['post_title']      =		[];
     $settings['url']             =		[];
+    $settings['slug']            =		[];
     $settings['meta_title']      =		[];
     $settings['meta_desc']       =		[];
     $settings['fb_title']        =		[];
@@ -158,6 +171,8 @@ function seopress_metadata_export() {
 
                     array_push($settings['url'], get_permalink($post));
 
+                    array_push($settings['slug'], $post->post_name);
+
                     foreach($metas_key as $key => $meta_key) {
                         if (get_post_meta($post->ID, $meta_key, true)) {
                             array_push($settings[$key], get_post_meta($post->ID, $meta_key, true));
@@ -170,6 +185,7 @@ function seopress_metadata_export() {
                         $settings['id'],
                         $settings['post_title'],
                         $settings['url'],
+                        $settings['slug'],
                         $settings['meta_title'],
                         $settings['meta_desc'],
                         $settings['fb_title'],
@@ -193,29 +209,30 @@ function seopress_metadata_export() {
                     );
 
                     //Clean arrays
-                    $settings['id']              =				[];
-                    $settings['post_title']      =		[];
-                    $settings['url']             =				[];
-                    $settings['meta_title']      =		[];
-                    $settings['meta_desc']       =		[];
-                    $settings['fb_title']        =			[];
-                    $settings['fb_desc']         =			[];
-                    $settings['fb_img']          =			[];
-                    $settings['tw_title']        =			[];
-                    $settings['tw_desc']         =			[];
-                    $settings['tw_img']          =			[];
-                    $settings['noindex']         =			[];
-                    $settings['nofollow']        =			[];
-                    $settings['noimageindex']    =		[];
-                    $settings['noarchive']       =		[];
-                    $settings['nosnippet']       =		[];
+                    $settings['id']              =	[];
+                    $settings['post_title']      =	[];
+                    $settings['url']             =	[];
+                    $settings['slug']            =	[];
+                    $settings['meta_title']      =	[];
+                    $settings['meta_desc']       =	[];
+                    $settings['fb_title']        =	[];
+                    $settings['fb_desc']         =	[];
+                    $settings['fb_img']          =	[];
+                    $settings['tw_title']        =	[];
+                    $settings['tw_desc']         =	[];
+                    $settings['tw_img']          =	[];
+                    $settings['noindex']         =	[];
+                    $settings['nofollow']        =	[];
+                    $settings['noimageindex']    =	[];
+                    $settings['noarchive']       =	[];
+                    $settings['nosnippet']       =	[];
                     $settings['canonical_url']   =	[];
                     $settings['primary_cat']     =	[];
                     $settings['redirect_active'] =	[];
-                    $settings['redirect_status']   =	[];
+                    $settings['redirect_status'] =  [];
                     $settings['redirect_type']   =	[];
-                    $settings['redirect_url']    =		[];
-                    $settings['target_kw']       =		[];
+                    $settings['redirect_url']    =	[];
+                    $settings['target_kw']       =	[];
                 }
             }
             $offset += $increment;
@@ -238,6 +255,7 @@ function seopress_metadata_export() {
         } else {
             $args = [
                 'taxonomy'   => $seopress_get_taxonomies,
+                'taxonomy'   => 'type',
                 'number'     => $increment,
                 'offset'     => $offset,
                 'order'      => 'DESC',
@@ -252,11 +270,19 @@ function seopress_metadata_export() {
             if ($meta_query) {
                 // The Loop
                 foreach ($meta_query as $term) {
+                    if ( is_wp_error($term)) {
+                        continue;
+                    }
+                    if ( !is_object($term)) {
+                        continue;
+                    }
                     array_push($settings['id'], $term->term_id);
 
                     array_push($settings['post_title'], $term->name);
 
                     array_push($settings['url'], get_term_link($term));
+
+                    array_push($settings['slug'], $term->slug);
 
                     foreach($metas_key as $key => $meta_key) {
                         if (get_term_meta($term->term_id, $meta_key, true)) {
@@ -270,6 +296,7 @@ function seopress_metadata_export() {
                         $settings['id'],
                         $settings['post_title'],
                         $settings['url'],
+                        $settings['slug'],
                         $settings['meta_title'],
                         $settings['meta_desc'],
                         $settings['fb_title'],
@@ -293,29 +320,30 @@ function seopress_metadata_export() {
                     );
 
                     //Clean arrays
-                    $settings['id']              =				[];
-                    $settings['post_title']      =		[];
-                    $settings['url']             =				[];
-                    $settings['meta_title']      =		[];
-                    $settings['meta_desc']       =		[];
-                    $settings['fb_title']        =			[];
-                    $settings['fb_desc']         =			[];
-                    $settings['fb_img']          =			[];
-                    $settings['tw_title']        =			[];
-                    $settings['tw_desc']         =			[];
-                    $settings['tw_img']          =			[];
-                    $settings['noindex']         =			[];
-                    $settings['nofollow']        =			[];
-                    $settings['noimageindex']    =		[];
-                    $settings['noarchive']       =		[];
-                    $settings['nosnippet']       =		[];
-                    $settings['canonical_url']   =	[];
-                    $settings['primary_cat']     =	[];
-                    $settings['redirect_active'] =	[];
-                    $settings['redirect_status']   =	[];
-                    $settings['redirect_type']   =	[];
-                    $settings['redirect_url']    =		[];
-                    $settings['target_kw']       =		[];
+                    $settings['id']              = [];
+                    $settings['post_title']      = [];
+                    $settings['url']             = [];
+                    $settings['slug']            = [];
+                    $settings['meta_title']      = [];
+                    $settings['meta_desc']       = [];
+                    $settings['fb_title']        = [];
+                    $settings['fb_desc']         = [];
+                    $settings['fb_img']          = [];
+                    $settings['tw_title']        = [];
+                    $settings['tw_desc']         = [];
+                    $settings['tw_img']          = [];
+                    $settings['noindex']         = [];
+                    $settings['nofollow']        = [];
+                    $settings['noimageindex']    = [];
+                    $settings['noarchive']       = [];
+                    $settings['nosnippet']       = [];
+                    $settings['canonical_url']   = [];
+                    $settings['primary_cat']     = [];
+                    $settings['redirect_active'] = [];
+                    $settings['redirect_status'] = [];
+                    $settings['redirect_type']   = [];
+                    $settings['redirect_url']    = [];
+                    $settings['target_kw']       = [];
                 }
             }
 

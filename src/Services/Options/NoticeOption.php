@@ -219,4 +219,13 @@ class NoticeOption
     public function getNoticeGoPro(){
         return $this->searchOptionByKey('notice-go-pro');
     }
+
+    /**
+     * @since 6.5.0
+     *
+     * @return string
+     */
+    public function getNoticeGoInsights(){
+        return $this->searchOptionByKey('notice-go-insights');
+    }
 }

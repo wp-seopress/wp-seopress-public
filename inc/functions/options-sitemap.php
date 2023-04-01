@@ -116,10 +116,10 @@ if ('1' == seopress_xml_sitemap_html_enable_option()) {
         $html = '';
 
         //CPT
-        if ('' != seopress_xml_sitemap_post_types_list_option()) {
+        if ('' !== seopress_get_service('SitemapOption')->getPostTypesList()) {
             $html .= '<div class="wrap-html-sitemap sp-html-sitemap">';
 
-            $seopress_xml_sitemap_post_types_list_option = seopress_xml_sitemap_post_types_list_option();
+            $seopress_xml_sitemap_post_types_list_option = seopress_get_service('SitemapOption')->getPostTypesList();
 
             if (isset($seopress_xml_sitemap_post_types_list_option['page'])) {
                 $seopress_xml_sitemap_post_types_list_option = ['page' => $seopress_xml_sitemap_post_types_list_option['page']] + $seopress_xml_sitemap_post_types_list_option; //Display page first

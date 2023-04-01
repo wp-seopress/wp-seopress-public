@@ -6,12 +6,17 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //XML Index sitemaps
 
 //Headers
-if (function_exists('seopress_sitemaps_headers')) {
-    seopress_sitemaps_headers();
-}
+seopress_get_service('SitemapHeaders')->printHeaders();
 
-//WPML
-add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
+//WPML - Home URL
+if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+    add_filter('seopress_sitemaps_home_url', function($home_url) {
+        $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
+        return trailingslashit($home_url);
+    });
+} else {
+    add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
+}
 
 add_filter('seopress_sitemaps_index_cpt_query', function ($args) {
     global $sitepress, $sitepress_settings;
@@ -87,8 +92,8 @@ function seopress_xml_sitemap_index() {
     $seopress_sitemaps .= '<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
     //CPT
-    if ('' != seopress_xml_sitemap_post_types_list_option()) {
-        foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
+    if ('' !== seopress_get_service('SitemapOption')->getPostTypesList()) {
+        foreach (seopress_get_service('SitemapOption')->getPostTypesList() as $cpt_key => $cpt_value) {
             foreach ($cpt_value as $_cpt_key => $_cpt_value) {
                 if ('1' == $_cpt_value) {
                     $args = [
@@ -204,10 +209,10 @@ function seopress_xml_sitemap_index() {
     }
 
     //Taxonomies
-    if ('' != seopress_xml_sitemap_taxonomies_list_option()) {
+    if ('' !== seopress_get_service('SitemapOption')->getTaxonomiesList()) {
         //Init
         $seopress_xml_terms_list = [];
-        foreach (seopress_xml_sitemap_taxonomies_list_option() as $tax_key => $tax_value) {
+        foreach (seopress_get_service('SitemapOption')->getTaxonomiesList() as $tax_key => $tax_value) {
             foreach ($tax_value as $_tax_key => $_tax_value) {
                 if ('1' == $_tax_value) {
                     $args = [
@@ -348,9 +353,9 @@ function seopress_xml_sitemap_index() {
 
     //Video sitemap
     if (function_exists('seopress_xml_sitemap_video_enable_option') && '' != seopress_xml_sitemap_video_enable_option()) {
-        if ('' != seopress_xml_sitemap_post_types_list_option()) {
+        if ('' !== seopress_get_service('SitemapOption')->getPostTypesList()) {
             $cpt = [];
-            foreach (seopress_xml_sitemap_post_types_list_option() as $cpt_key => $cpt_value) {
+            foreach (seopress_get_service('SitemapOption')->getPostTypesList() as $cpt_key => $cpt_value) {
                 foreach ($cpt_value as $_cpt_key => $_cpt_value) {
                     if ('1' == $_cpt_value) {
                         $cpt[] = $cpt_key;
@@ -487,7 +492,7 @@ function seopress_xml_sitemap_index() {
     }
 
     //Author sitemap
-    if (function_exists('seopress_xml_sitemap_author_enable_option') && '' != seopress_xml_sitemap_author_enable_option()) {
+    if ('1' === seopress_get_service('SitemapOption')->authorIsEnable()) {
         $seopress_sitemaps .= "\n";
         $seopress_sitemaps .= '<sitemap>';
         $seopress_sitemaps .= "\n";

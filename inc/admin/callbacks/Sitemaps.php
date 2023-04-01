@@ -114,11 +114,14 @@ function seopress_xml_sitemap_post_types_list_callback()
 
     $postTypes = seopress_get_service('WordPressData')->getPostTypes();
 
+    $postTypes = array_filter($postTypes, 'is_post_type_viewable');
+
     $postTypes[] = get_post_type_object('attachment');
 
     $postTypes = apply_filters( 'seopress_sitemaps_cpt', $postTypes );
 
-    foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) { ?>
+    foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
+        ?>
 <h3>
     <?php echo $seopress_cpt_value->labels->name; ?>
     <em><small>[<?php echo $seopress_cpt_value->name; ?>]</small></em>
@@ -169,6 +172,8 @@ function seopress_xml_sitemap_taxonomies_list_callback()
     $check = isset($options['seopress_xml_sitemap_taxonomies_list']);
 
     $taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
+
+    $taxonomies = array_filter($taxonomies, 'is_taxonomy_viewable');
 
     $taxonomies = apply_filters( 'seopress_sitemaps_tax', $taxonomies );
 

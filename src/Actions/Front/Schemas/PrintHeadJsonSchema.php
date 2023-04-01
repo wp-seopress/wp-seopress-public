@@ -10,10 +10,6 @@ use SEOPress\Core\Hooks\ExecuteHooksFrontend;
 
 class PrintHeadJsonSchema implements ExecuteHooksFrontend {
     public function hooks() {
-        if (apply_filters('seopress_old_social_accounts_jsonld_hook', false)) {
-            return;
-        }
-
         add_action('wp_head', [$this, 'render'], 2);
     }
 

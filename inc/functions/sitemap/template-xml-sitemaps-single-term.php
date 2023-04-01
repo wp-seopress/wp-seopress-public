@@ -5,16 +5,26 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //XML
 
 //Headers
-if (function_exists('seopress_sitemaps_headers')) {
-    seopress_sitemaps_headers();
+seopress_get_service('SitemapHeaders')->printHeaders();
+
+//WPML - Home URL
+if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+    add_filter('seopress_sitemaps_home_url', function($home_url) {
+        $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
+        return trailingslashit($home_url);
+    });
+} else {
+    add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
 }
 
-//WPML
-add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
-
 add_filter('seopress_sitemaps_single_term_query', function ($args) {
+
     global $sitepress, $sitepress_settings;
 
+    //If multidomain setup
+    if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+        add_filter('terms_clauses', [$sitepress, 'terms_clauses'], 100, 4);
+    }
     $sitepress_settings['auto_adjust_ids'] = 0;
     remove_filter('terms_clauses', [$sitepress, 'terms_clauses']);
     remove_filter('category_link', [$sitepress, 'category_link_adjust_id'], 1);

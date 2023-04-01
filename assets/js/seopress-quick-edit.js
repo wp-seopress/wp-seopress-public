@@ -28,7 +28,11 @@
             var $seopress_canonical = $('.column-seopress_canonical', $post_row).text();
             var $seopress_noindex = $('.column-seopress_noindex', $post_row).html();
             var $seopress_nofollow = $('.column-seopress_nofollow', $post_row).html();
+            var $seopress_redirect_enable = $('.column-seopress_redirect_enable', $post_row).html();
+            var $seopress_redirect_url = $('.column-seopress_redirect_url', $post_row).text();
+
             var $seopress_redirections_enable = $('.column-seopress_404_redirect_enable', $post_row).html();
+
             var $seopress_redirections_regex_enable = $('.column-seopress_404_redirect_regex_enable', $post_row).html();
             var $seopress_redirections_type = $('.column-seopress_404_redirect_type', $post_row).text();
             var $seopress_redirections_value = $('.column-seopress_404_redirect_value', $post_row).text();
@@ -47,16 +51,29 @@
                 $(':input[name="seopress_nofollow"]', $edit_row).attr('checked', 'checked');
             }
 
+            if ($seopress_redirect_enable && $seopress_redirect_enable == '<span class="dashicons dashicons-yes-alt"></span>') {
+                $(':input[name="seopress_redirections_enabled"]', $edit_row).attr('checked', 'checked');
+            }
+
+            if ($seopress_redirect_url) {
+                $(':input[name="seopress_redirections_value"]', $edit_row).val($seopress_redirect_url);
+            }
+
             if ($seopress_redirections_enable && $seopress_redirections_enable == '<span class="dashicons dashicons-yes-alt"></span>') {
                 $(':input[name="seopress_redirections_enabled"]', $edit_row).attr('checked', 'checked');
             }
+
             if ($seopress_redirections_regex_enable && $seopress_redirections_regex_enable == '<span class="dashicons dashicons-yes"></span>') {
                 $(':input[name="seopress_redirections_enabled_regex"]', $edit_row).attr('checked', 'checked');
             }
+
             if ($seopress_redirections_type && $seopress_redirections_type != '404') {
                 $('select[name="seopress_redirections_type"] option[value="' + $seopress_redirections_type + '"]', $edit_row).attr('selected', 'selected');
             }
-            $(':input[name="seopress_redirections_value"]', $edit_row).val($seopress_redirections_value);
+
+            if ($seopress_redirections_value) {
+                $(':input[name="seopress_redirections_value"]', $edit_row).val($seopress_redirections_value);
+            }
         }
     };
 

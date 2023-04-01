@@ -116,6 +116,14 @@ add_settings_field(
     'seopress_setting_section_social_accounts' // Section
 );
 
+add_settings_field(
+    'seopress_social_accounts_extra', // ID
+    __('Additional accounts', 'wp-seopress'), // Title
+    'seopress_social_accounts_extra_callback', // Callback
+    'seopress-settings-admin-social-accounts', // Page
+    'seopress_setting_section_social_accounts' // Section
+);
+
 //Facebook SECTION=========================================================================
 add_settings_section(
     'seopress_setting_section_social_facebook', // ID

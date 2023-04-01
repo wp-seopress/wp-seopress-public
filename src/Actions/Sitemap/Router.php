@@ -14,7 +14,7 @@ class Router implements ExecuteHooks {
      */
     public function hooks() {
         add_action('init', [$this, 'init']);
-        add_action('query_vars', [$this, 'queryVars']);
+        add_filter('query_vars', [$this, 'queryVars']);
     }
 
     /**
@@ -24,7 +24,7 @@ class Router implements ExecuteHooks {
      * @return void
      */
     public function init() {
-        if ('1' !== seopress_xml_sitemap_general_enable_option() || '1' !== seopress_get_toggle_option('xml-sitemap')) {
+        if ('1' !== seopress_get_service('SitemapOption')->isEnabled() || '1' !== seopress_get_toggle_option('xml-sitemap')) {
             return;
         }
 
@@ -40,7 +40,7 @@ class Router implements ExecuteHooks {
         add_rewrite_rule('([^/]+?)-sitemap([0-9]+)?\.xml$', 'index.php?seopress_cpt=$matches[1]&seopress_paged=$matches[2]', 'top');
 
         //XML Author
-        if (1 == seopress_xml_sitemap_author_enable_option()) {
+        if ('1' === seopress_get_service('SitemapOption')->authorIsEnable()) {
             add_rewrite_rule('author.xml?$', 'index.php?seopress_author=1', 'top');
         }
     }

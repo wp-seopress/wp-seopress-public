@@ -666,7 +666,7 @@
                     seopress_notification($args);
                 }
             }
-            if ('1' != seopress_xml_sitemap_general_enable_option()) {
+            if ('1' !== seopress_get_service('SitemapOption')->isEnabled()) {
                 $args = [
                     'id'     => 'notice-xml-sitemaps',
                     'title'  => __('You don\'t have an XML Sitemap!', 'wp-seopress'),
@@ -744,8 +744,32 @@
                             'info' => __('PRO', 'wp-seopress'),
                         ],
                         'link' => [
-                            'fr'       => 'https://www.seopress.org/fr?utm_source=plugin&utm_medium=notification&utm_campaign=dashboard',
-                            'en'       => 'https://www.seopress.org/?utm_source=plugin&utm_medium=notification&utm_campaign=dashboard',
+                            'fr'       => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-pro/?utm_source=plugin&utm_medium=notification&utm_campaign=dashboard',
+                            'en'       => 'https://www.seopress.org/wordpress-seo-plugins/pro/?utm_source=plugin&utm_medium=notification&utm_campaign=dashboard',
+                            'title'    => __('Upgrade now!', 'wp-seopress'),
+                            'external' => true,
+                        ],
+                        'deleteable' => true,
+                    ];
+                    seopress_notification($args);
+                }
+            }
+            if (! is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
+                function seopress_get_hidden_notices_go_insights_option()
+                {
+                    return seopress_get_service('NoticeOption')->getNoticeGoInsights();
+                }
+                if ('1' != seopress_get_hidden_notices_go_insights_option() && '' == seopress_get_hidden_notices_go_insights_option()) {
+                    $args = [
+                        'id'     => 'notice-go-insights',
+                        'title'  => __('Discover SEOPress Insights, off-site SEO plugin for WordPress!', 'wp-seopress'),
+                        'desc'   => __('Rank & Backlink Tracking directly in your WordPress admin with competition, Google Trends, email and Slack notifications.', 'wp-seopress'),
+                        'impact' => [
+                            'info' => __('Insights', 'wp-seopress'),
+                        ],
+                        'link' => [
+                            'fr'       => 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-insights/?utm_source=plugin&utm_medium=notification&utm_campaign=dashboard',
+                            'en'       => 'https://www.seopress.org/wordpress-seo-plugins/insights/?utm_source=plugin&utm_medium=notification&utm_campaign=dashboard',
                             'title'    => __('Upgrade now!', 'wp-seopress'),
                             'external' => true,
                         ],

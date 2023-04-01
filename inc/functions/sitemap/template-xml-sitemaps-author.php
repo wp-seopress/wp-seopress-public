@@ -5,12 +5,17 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //XML
 
 //Headers
-if (function_exists('seopress_sitemaps_headers')) {
-    seopress_sitemaps_headers();
-}
+seopress_get_service('SitemapHeaders')->printHeaders();
 
-//WPML
-add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
+//WPML - Home URL
+if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+    add_filter('seopress_sitemaps_home_url', function($home_url) {
+        $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
+        return trailingslashit($home_url);
+    });
+} else {
+    add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
+}
 
 function seopress_xml_sitemap_author() {
     if ('' !== get_query_var('seopress_cpt')) {

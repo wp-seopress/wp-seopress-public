@@ -51,6 +51,19 @@ if ( ! function_exists('array_key_last')) {
 }
 
 /**
+ * If a post type should hide SEO columns
+ *
+ * @author Benjamin Denis
+ *
+ * @deprecated 6.5.0
+ *
+ * @return string
+ */
+function seopress_titles_single_cpt_enable_option($cpt) {
+    return seopress_get_service('TitleOption')->getSingleCptEnable($cpt);
+}
+
+/**
  * Get all registered post types.
  *
  * @author Benjamin Denis
@@ -348,6 +361,59 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
         }
     }
 }
+
+/**
+ * Generate Permalink notice to prevent users change the permastructure on a live site.
+ *
+ * @since 6.5
+ *
+ * @return string $message
+ *
+ * @author Benjamin
+ */
+function seopress_notice_permalinks() {
+    global $pagenow;
+    if (isset($pagenow) && 'options-permalink.php' !== $pagenow) {
+        return;
+    }
+
+    $class   = 'notice notice-warning';
+    $message = '<strong>' . __('WARNING', 'wp-seopress') . '</strong>';
+    $message .= '<p>' . __('Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO.', 'wp-seopress') . '</p>';
+
+    printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+}
+add_action('admin_notices', 'seopress_notice_permalinks');
+
+/**
+ * Generate a notice on permalink settings sreen if URL rewriting is disabled.
+ *
+ * @since 6.5.0
+ *
+ * @return string $message
+ *
+ * @author Benjamin
+ */
+function seopress_notice_no_rewrite_url() {
+    //Check we are on the Permalink settings page
+    global $pagenow;
+    if (isset($pagenow) && 'options-permalink.php' !== $pagenow) {
+        return;
+    }
+
+    //Check permalink structure
+    if ('' !== get_option('permalink_structure')) {
+        return;
+    }
+
+    //Display the notice
+    $class   = 'notice notice-warning';
+    $message = '<strong>' . __('WARNING', 'wp-seopress') . '</strong>';
+    $message .= '<p>' . __('URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain).', 'wp-seopress') . '</p>';
+
+    printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), $message);
+}
+add_action('admin_notices', 'seopress_notice_no_rewrite_url');
 
 /**
  * Generate Tooltip.
@@ -705,7 +771,9 @@ function seopress_get_oygen_content_v4($data, $content = ""){
  * @return null
  */
 function seopress_get_oxygen_content() {
-    if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
+    $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.get_post_type(get_the_ID())) ? false : true;
+
+    if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
         if (!empty(get_post_meta(get_the_ID(), 'ct_builder_json', true))) {
             $oxygen_content = get_post_meta(get_the_ID(), 'ct_builder_json', true);
             $seopress_get_the_content = seopress_get_oygen_content_v4(json_decode($oxygen_content, true));
@@ -793,6 +861,29 @@ function seopress_btn_secondary_classes() {
     return $btn_classes_secondary;
 }
 
+/**
+ * Global check.
+ *
+ * @since 3.8
+ *
+ * @param string $feature
+ *
+ * @return string 1 if true
+ *
+ * @author Benjamin
+ */
+function seopress_get_toggle_option($feature) {
+	$seopress_get_toggle_option = get_option('seopress_toggle');
+	if ( ! empty($seopress_get_toggle_option)) {
+		foreach ($seopress_get_toggle_option as $key => $seopress_get_toggle_value) {
+			$options[$key] = $seopress_get_toggle_value;
+			if (isset($seopress_get_toggle_option['toggle-' . $feature])) {
+				return $seopress_get_toggle_option['toggle-' . $feature];
+			}
+		}
+	}
+}
+
 /*
  * Global noindex from SEO, Titles settings
  * @since 4.0
@@ -848,6 +939,7 @@ if (is_plugin_active('elementor-pro/elementor-pro.php')) {
         return '';
     }
 }
+
 
 
 /**

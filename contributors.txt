@@ -16,6 +16,7 @@ A11Y:
 - Claire Bizingre: @accesbilis
 
 Beta testers / feedbacks:
+- Maxime Bernard Jacquet: @maximebj
 - Mickael Gris: mickael.gris@gmail.com / @mickaelgris
 - Aurélien Denis: contact@wpchannel.com / @wpchannel
 - Thomas Piron: @crash_47

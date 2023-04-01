@@ -2251,6 +2251,8 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     font-size: 12px;
     justify-content: flex-end;
     border-radius: 0 0 0.25rem 0.25rem;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
 }
 
 #seopress_cpt .sp-progress,

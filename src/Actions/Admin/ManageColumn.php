@@ -45,8 +45,12 @@ class ManageColumn implements ExecuteHooksBackend
         }
 
         foreach ($listPostTypes as $key => $value) {
-            add_filter('manage_' . $key . '_posts_columns', [$this, 'addColumn']);
-            add_action('manage_' . $key . '_posts_custom_column', [$this, 'displayColumn'], 10, 2);
+            if (null === seopress_get_service('TitleOption')->getSingleCptEnable($key) && '' != $key) {
+                add_filter('manage_' . $key . '_posts_columns', [$this, 'addColumn']);
+                add_action('manage_' . $key . '_posts_custom_column', [$this, 'displayColumn'], 10, 2);
+                add_filter('manage_edit-' . $key . '_sortable_columns', [$this, 'sortableColumn']);
+                add_filter('pre_get_posts', [$this, 'sortColumnsBy']);
+            }
         }
 
         add_filter('manage_edit-download_columns', [$this, 'addColumn'], 10, 2);
@@ -54,37 +58,34 @@ class ManageColumn implements ExecuteHooksBackend
 
     public function addColumn($columns)
     {
-        if (! function_exists('seopress_advanced_appearance_title_col_option')) {
-            require_once SEOPRESS_PLUGIN_DIR_PATH . '/inc/functions/options-advanced-admin.php';
-        }
-        if (! empty(seopress_advanced_appearance_title_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceTitleCol() ==='1') {
             $columns['seopress_title'] = __('Title tag', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_meta_desc_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceMetaDescriptionCol() ==='1') {
             $columns['seopress_desc'] = __('Meta Desc.', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_redirect_enable_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceRedirectEnableCol() ==='1') {
             $columns['seopress_redirect_enable'] = __('Redirect?', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_redirect_url_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceRedirectUrlCol() ==='1') {
             $columns['seopress_redirect_url'] = __('Redirect URL', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_canonical_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceCanonical() ==='1') {
             $columns['seopress_canonical'] = __('Canonical', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_target_kw_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceTargetKwCol() ==='1') {
             $columns['seopress_tkw'] = __('Target Kw', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_noindex_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceNoIndexCol() ==='1') {
             $columns['seopress_noindex'] = __('noindex?', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_nofollow_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceNoFollowCol() ==='1') {
             $columns['seopress_nofollow'] = __('nofollow?', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_score_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceScoreCol() ==='1') {
             $columns['seopress_score'] = __('Score', 'wp-seopress');
         }
-        if (! empty(seopress_advanced_appearance_words_col_option())) {
+        if (seopress_get_service('AdvancedOption')->getAppearanceWordsCol() ==='1') {
             $columns['seopress_words'] = __('Words', 'wp-seopress');
         }
 
@@ -128,7 +129,7 @@ class ManageColumn implements ExecuteHooksBackend
 
             case 'seopress_redirect_enable':
                 if ('yes' == get_post_meta($post_id, '_seopress_redirections_enabled', true)) {
-                    echo '<div id="seopress_redirect_enable-' . esc_attr($post_id) . '"><span class="dashicons dashicons-yes"></span></div>';
+                    echo '<span class="dashicons dashicons-yes-alt"></span>';
                 }
                 break;
             case 'seopress_redirect_url':
@@ -203,6 +204,45 @@ class ManageColumn implements ExecuteHooksBackend
                     }
                 }
                 break;
+        }
+    }
+
+    /**
+     * @since 6.5.0
+     * @see manage_edit' . $postType . '_sortable_columns
+     *
+     * @param string $columns
+     *
+     * @return array $columns
+     */
+    public function sortableColumn($columns) {
+        $columns['seopress_noindex']  = 'seopress_noindex';
+        $columns['seopress_nofollow'] = 'seopress_nofollow';
+
+        return $columns;
+    }
+
+    /**
+     * @since 6.5.0
+     * @see pre_get_posts
+     *
+     * @param string $query
+     *
+     * @return void
+     */
+    public function sortColumnsBy($query) {
+        if (! is_admin()) {
+            return;
+        }
+
+        $orderby = $query->get('orderby');
+        if ('seopress_noindex' == $orderby) {
+            $query->set('meta_key', '_seopress_robots_index');
+            $query->set('orderby', 'meta_value');
+        }
+        if ('seopress_nofollow' == $orderby) {
+            $query->set('meta_key', '_seopress_robots_follow');
+            $query->set('orderby', 'meta_value');
         }
     }
 }

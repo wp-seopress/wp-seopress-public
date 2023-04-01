@@ -22,7 +22,7 @@ function seopress_xml_sitemaps_ping_cron_action() {
         return;
     }
     //Check if XML sitemaps is enabled
-    if ('1' !== seopress_xml_sitemap_general_enable_option() || '1' !== seopress_get_toggle_option('xml-sitemap')) {
+    if ('1' !== seopress_get_service('SitemapOption')->isEnabled() || '1' !== seopress_get_toggle_option('xml-sitemap')) {
         return;
     }
 

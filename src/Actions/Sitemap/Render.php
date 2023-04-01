@@ -30,7 +30,7 @@ class Render implements ExecuteHooksFrontend {
             return;
         }
 
-        if ('1' !== seopress_xml_sitemap_general_enable_option() || '1' !== seopress_get_toggle_option('xml-sitemap')) {
+        if ('1' !== seopress_get_service('SitemapOption')->isEnabled() || '1' !== seopress_get_toggle_option('xml-sitemap')) {
             return;
         }
 
@@ -44,21 +44,15 @@ class Render implements ExecuteHooksFrontend {
         } elseif ('1' === get_query_var('seopress_author')) {
             $filename = 'template-xml-sitemaps-author.php';
         } elseif ('' !== get_query_var('seopress_cpt')) {
-            if (function_exists('seopress_xml_sitemap_post_types_list_option')
-                && '' != seopress_xml_sitemap_post_types_list_option()
-                && array_key_exists(get_query_var('seopress_cpt'), seopress_xml_sitemap_post_types_list_option())) {
-                if ( ! function_exists('seopress_get_service')) {
-                    return;
-                }
-
+            if ('' !== seopress_get_service('SitemapOption')->getPostTypesList()
+                && array_key_exists(get_query_var('seopress_cpt'), seopress_get_service('SitemapOption')->getPostTypesList())) {
                 /*
                  * @since 4.3.0
                  */
                 seopress_get_service('SitemapRenderSingle')->render();
                 exit();
-            } elseif (function_exists('seopress_xml_sitemap_taxonomies_list_option')
-                && '' != seopress_xml_sitemap_taxonomies_list_option()
-                && array_key_exists(get_query_var('seopress_cpt'), seopress_xml_sitemap_taxonomies_list_option())) {
+            } elseif ('' !== seopress_get_service('SitemapOption')->getTaxonomiesList()
+                && array_key_exists(get_query_var('seopress_cpt'), seopress_get_service('SitemapOption')->getTaxonomiesList())) {
                 $filename = 'template-xml-sitemaps-single-term.php';
             }
             else{

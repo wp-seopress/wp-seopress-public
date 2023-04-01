@@ -42,12 +42,15 @@ if ('1' == seopress_get_toggle_option('titles')) {
     {
         global $wp_query;
 
+        $url = apply_filters( 'seopress_disable_archives_redirect_url', get_home_url() );
+        $status = apply_filters( 'seopress_disable_archives_redirect_status' , '301' );
+
         if ('1' == seopress_titles_archives_author_disable_option() && $wp_query->is_author && ! is_feed()) {
-            wp_redirect(get_home_url(), '301');
+            wp_redirect($url, $status);
             exit;
         }
         if ('1' == seopress_titles_archives_date_disable_option() && $wp_query->is_date && ! is_feed()) {
-            wp_redirect(get_home_url(), '301');
+            wp_redirect($url, $status);
             exit;
         }
 
@@ -617,7 +620,7 @@ if ('1' === seopress_get_toggle_option('advanced')) {
                 $category_base = get_option('category_base');
 
                 if (class_exists('Sitepress') && defined('ICL_LANGUAGE_CODE')) {
-                    $category_base = apply_filters('wpml_translate_single_string', 'category', 'WordPress', 'URL category tax slug', ICL_LANGUAGE_CODE);
+                    $category_base = apply_filters('wpml_translate_single_string', $category_base, 'WordPress', 'URL category tax slug', ICL_LANGUAGE_CODE);
                 }
 
                 if ('' == $category_base) {
@@ -651,7 +654,7 @@ if ('1' === seopress_get_toggle_option('advanced')) {
             $category_base = get_option('category_base');
 
             if (class_exists('Sitepress') && defined('ICL_LANGUAGE_CODE')) {
-                $category_base = apply_filters('wpml_translate_single_string', 'category', 'WordPress', 'URL category tax slug', ICL_LANGUAGE_CODE);
+                $category_base = apply_filters('wpml_translate_single_string', $category_base, 'WordPress', 'URL category tax slug', ICL_LANGUAGE_CODE);
             }
 
             $category_base = apply_filters('seopress_remove_category_base', $category_base);
@@ -744,7 +747,7 @@ if ('1' === seopress_get_toggle_option('advanced')) {
                 $category_base = $category_base['category_base'];
 
                 if (class_exists('Sitepress') && defined('ICL_LANGUAGE_CODE')) {
-                    $category_base = apply_filters('wpml_translate_single_string', 'product_cat', 'WordPress', 'URL product category tax slug', ICL_LANGUAGE_CODE);
+                    $category_base = apply_filters('wpml_translate_single_string', $category_base, 'WordPress', 'URL product category tax slug', ICL_LANGUAGE_CODE);
                 }
 
                 if ('' == $category_base) {
@@ -776,7 +779,7 @@ if ('1' === seopress_get_toggle_option('advanced')) {
             $category_base = $category_base['category_base'];
 
             if (class_exists('Sitepress') && defined('ICL_LANGUAGE_CODE')) {
-                $category_base = apply_filters('wpml_translate_single_string', 'product_cat', 'WordPress', 'URL product category tax slug', ICL_LANGUAGE_CODE);
+                $category_base = apply_filters('wpml_translate_single_string', $category_base, 'WordPress', 'URL product category tax slug', ICL_LANGUAGE_CODE);
             }
 
             $category_base = apply_filters('seopress_remove_product_category_base', $category_base);

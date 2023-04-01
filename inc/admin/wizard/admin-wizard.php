@@ -394,8 +394,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 <head>
 	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title><?php printf(esc_html__('%s &rsaquo; Setup Wizard', 'wp-seopress'),$seo_title); ?>
-	</title>
+	<title><?php printf(esc_html__('%s &rsaquo; Setup Wizard', 'wp-seopress'),$seo_title); ?></title>
+    <script type="text/javascript">
+        var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php', 'relative' ) ); ?>';
+    </script>
 	<?php do_action('admin_print_styles'); ?>
 	<?php do_action('admin_enqueue_scripts'); ?>
 	<?php wp_print_scripts('seopress-migrate-ajax'); ?>

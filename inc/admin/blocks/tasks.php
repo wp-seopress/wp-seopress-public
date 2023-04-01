@@ -67,8 +67,7 @@
                  *
                  */
                 function seopress_tasks_social_networks() {
-                    $options = get_option('seopress_social_option_name');
-                    if (isset($options['seopress_social_facebook_og']) && ('1' === seopress_get_toggle_option('social'))) {
+                    if ('1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && ('1' === seopress_get_toggle_option('social'))) {
                         return 'done';
                     }
 

@@ -95,7 +95,7 @@ function seopress_get_dynamic_variables($variables, $post, $is_oembed){
     if (is_author() && is_int(get_queried_object_id())) {
         $user_info = get_userdata(get_queried_object_id());
 
-        if (isset($user_info)) {
+        if (isset($user_info) && is_object($user_info)) {
             $the_author_meta   = esc_attr($user_info->display_name);
             $author_first_name = esc_attr($user_info->first_name);
             $author_last_name  = esc_attr($user_info->last_name);

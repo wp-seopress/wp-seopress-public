@@ -111,6 +111,15 @@ class SocialOption
     }
 
     /**
+     * @since 6.5.0
+     *
+     * @return string
+     */
+    public function getSocialAccountsExtra() {
+        return $this->searchOptionByKey('seopress_social_accounts_extra');
+    }
+
+    /**
      * @since 4.5.0
      *
      * @return string
@@ -184,6 +193,15 @@ class SocialOption
 
 
     /**
+     * @since 6.5.0
+     *
+     * @return string
+     */
+    public function getSocialFacebookOGEnable() {
+        return $this->searchOptionByKey('seopress_social_facebook_og');
+    }
+
+    /**
      * @since 5.9.0
      *
      * @return string
@@ -201,4 +219,30 @@ class SocialOption
         return $this->searchOptionByKey('seopress_social_facebook_img');
     }
 
+    /**
+     * @since 6.5.0
+     *
+     * @return string
+     */
+    public function getSocialFacebookLinkOwnership() {
+        return $this->searchOptionByKey('seopress_social_facebook_link_ownership_id');
+    }
+
+    /**
+     * @since 6.5.0
+     *
+     * @return string
+     */
+    public function getSocialFacebookAdminID() {
+        return $this->searchOptionByKey('seopress_social_facebook_admin_id');
+    }
+
+    /**
+     * @since 6.5.0
+     *
+     * @return string
+     */
+    public function getSocialFacebookAppID() {
+        return $this->searchOptionByKey('seopress_social_facebook_app_id');
+    }
 }

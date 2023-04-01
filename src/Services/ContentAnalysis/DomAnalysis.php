@@ -220,7 +220,9 @@ class DomAnalysis
         ];
 
         //Oxygen builder
-        if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) { //disable for Oxygen
+        $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.$post->post_type) ? false : true;
+
+        if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
             $dataOxygen = get_post_meta($post->ID, '_seopress_analysis_data_oxygen', true);
 
 

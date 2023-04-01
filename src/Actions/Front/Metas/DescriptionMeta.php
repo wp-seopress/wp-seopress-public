@@ -31,7 +31,7 @@ class DescriptionMeta implements ExecuteHooksFrontend {
             return;
         }
 
-        $html = '<meta name="description" content="' . $content . '" />';
+        $html = '<meta name="description" content="' . $content . '">';
         $html .= "\n";
         echo $html;
     }

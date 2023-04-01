@@ -247,8 +247,8 @@ class TitleMeta implements ExecuteHooksFrontend {
                     $titleTemplate = str_replace($seopress_titles_ucf_template_variables_array, $seopress_titles_ucf_template_replace_array, $titleTemplate);
                 }
             }
-        } elseif (is_post_type_archive() && seopress_titles_archive_titles_option()) { //IS POST TYPE ARCHIVE
-            $seopress_titles_archive_titles_option = esc_attr(seopress_titles_archive_titles_option());
+        } elseif (is_post_type_archive() && seopress_get_service('TitleOption')->getArchivesCPTTitle()) { //IS POST TYPE ARCHIVE
+            $seopress_titles_archive_titles_option = esc_attr(seopress_get_service('TitleOption')->getArchivesCPTTitle());
 
             $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archive_titles_option);
         } elseif ((is_tax() || is_category() || is_tag()) && seopress_titles_tax_titles_option()) { //IS TAX

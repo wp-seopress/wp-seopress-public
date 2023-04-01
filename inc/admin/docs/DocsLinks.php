@@ -79,6 +79,9 @@ function seopress_get_docs_links()
                     'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=fr',
                     'data'      => 'https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com?hl=fr'
                 ],
+                'ga_ecommerce' => [
+                    'ev_purchase' => 'https://www.seopress.org/fr/support/hooks/filtrer-les-statuts-des-commandes-woocommerce-envoyees-dans-google-analytics-suivi-ecommerce-ameliore/' . $utm,
+                ],
                 'matomo' => [
                     'on_premise' => 'https://www.seopress.org/fr/support/guides/comment-utiliser-matomo-en-auto-heberge-avec-seopress-free/' . $utm,
                     'token' => 'https://www.seopress.org/fr/support/guides/connectez-votre-site-wordpress-avec-matomo-analytics/' . $utm,
@@ -224,6 +227,9 @@ function seopress_get_docs_links()
                     'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=en',
                     'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=en',
                     'data'      => 'https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com?hl=en'
+                ],
+                'ga_ecommerce' => [
+                    'ev_purchase' => 'https://www.seopress.org/support/hooks/filter-woocommerce-order-status-sent-to-google-analytics-enhanced-ecommerce/' . $utm,
                 ],
                 'matomo' => [
                     'on_premise' => 'https://www.seopress.org/support/guides/how-to-use-matomo-on-premise-with-seopress-free/' . $utm,

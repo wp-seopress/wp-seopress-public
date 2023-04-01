@@ -44,20 +44,22 @@ if (true == get_post_type_archive_link($path) && 0 == $offset) {
 
         // WPML Workaround
         if (class_exists('SitePress')) {
-            $original_language = apply_filters( 'wpml_current_language', NULL );
-            $language_list = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+            if ( 2 !== apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+                $original_language = apply_filters( 'wpml_current_language', NULL );
+                $language_list = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
 
-            if (!empty($language_list)) {
-                foreach ($language_list as $key => $language_infos ) {
-                    if ($original_language != $language_infos['language_code']) {
+                if (!empty($language_list)) {
+                    foreach ($language_list as $key => $language_infos ) {
+                        if ($original_language != $language_infos['language_code']) {
 
-                        // Switch Language
-                        do_action( 'wpml_switch_language', $language_infos['language_code']);
+                            // Switch Language
+                            do_action( 'wpml_switch_language', $language_infos['language_code']);
 
-                        $archive_links[] = htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path))));
+                            $archive_links[] = htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path))));
 
-                        // Restore language to the original
-                        do_action( 'wpml_switch_language', $original_language);
+                            // Restore language to the original
+                            do_action( 'wpml_switch_language', $original_language);
+                        }
                     }
                 }
             }
@@ -191,7 +193,7 @@ foreach ($postslist as $post) {
         $sitemapData .= sprintf("\n<url>\n<loc>%s</loc>\n<lastmod>%s</lastmod>", $seopress_url['loc'], $seopress_url['mod']);
 
         //XML Image Sitemaps
-        if ('1' == seopress_xml_sitemap_img_enable_option()) {
+        if ('1' === seopress_get_service('SitemapOption')->imageIsEnable()) {
             //noimageindex?
             if ('yes' != get_post_meta($post, '_seopress_robots_imageindex', true)) {
                 //Standard images

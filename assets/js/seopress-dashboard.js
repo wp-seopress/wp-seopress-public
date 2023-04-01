@@ -25,6 +25,7 @@ jQuery(document).ready(function ($) {
         "notice-themes",
         "notice-page-builders",
         "notice-go-pro",
+        "notice-go-insights",
         "notice-noindex",
         "notice-tasks",
         "notice-insights",

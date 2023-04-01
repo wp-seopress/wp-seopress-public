@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdu
 Donate link: https://www.seopress.org/
 Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content analysis, instant indexing, breadcrumbs, analytics, rich snippets, broken link
 Requires at least: 5.0+
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.2
-Stable tag: 6.4.0.2
+Stable tag: 6.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -373,22 +373,32 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.4.0.2 =
-* FIX Saving Instant Indexing options
-* FIX SEOPress missing widgets in Elementor
-* FIX CSS
-
-= 6.4.0.1 =
-* FIX Fatal error with SEOPress Insights
-
-= 6.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-4/">Read the blog post update</a> =
-* NEW OpenAI integration #2 iteration (better UX, error handling, universal SEO metabox integration, support for Bricks Builder)
-* NEW Internal linking suggestions for standard content analysis metabox (PRO)
-* NEW 'seopress_get_dynamic_variables' hook to filter the drop-down list of dynamic variables (https://www.seopress.org/support/guides/create-your-custom-dynamic-variable-for-your-meta-title-description-social/)
-* FIX CSS Dynamic tags dropdown list / Social Preview
-* FIX Admin notices for PRO version
-* FIX Prevent Fatal error Cannot access offset of type string on string in wp-seopress/src/Services/ContentAnalysis/RenderContentAnalysis.php:34
-* FIX Check if Google Search Console feature is enabled before running the CRON task
-* FIX Fatal error on plugins deactivation
+= 6.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-5/">Read the blog post update</a> =
+* NEW Multi domain XML sitemaps with WPML 🎉
+* NEW OpenAI integration now with GPT-3.5 turbo model for more efficiency when we automagically generates title and meta description (PRO) 🎉
+* NEW CSV Import/export tool: support for post and term slug (PRO) 🎉
+* NEW Add post thumbnail to RSS feed (PRO) 🎉
+* NEW Automatically installed SEOPress Free on SEOPress PRO activation to avoid confusion 🎉
+* NEW WordPress 6.2 compatibility 🎉
+* NEW Add any social accounts / websites to Organization schema (SEO, Social Networks, Social accounts) like your Wikipedia page, TikTok account etc. 🎉
+* NEW Add 'seopress_pro_video_sitemap_content' hook to filter post content to scan to find new videos to add to the xml video sitemap (PRO - https://www.seopress.org/support/hooks/filter-content-used-to-find-new-video-for-xml-video-sitemap/)
+* NEW 'seopress_disable_archives_redirect_url' hook to filter redirect URL if author / date archives disabled (https://www.seopress.org/support/hooks/filter-redirect-url-if-author-date-archives-disabled/)
+* NEW 'seopress_disable_archives_redirect_status' hook to filter status code of the redirect if author / date archives disabled (https://www.seopress.org/support/hooks/filter-redirect-url-status-code-if-author-date-archives-disabled/)
+* NEW 'seopress_pro_significant_kw_disable_shortcode' hook to disable shortcode execution for internal linking suggestions (https://www.seopress.org/support/hooks/run-shortcodes-to-find-significant-keywords-for-internal-linking-suggestions/)
+* INFO Check if post type / taxonomy are viewable for XML sitemaps
+* INFO Update Article schema to take into account additional social accounts / websites
+* INFO Improve content analysis compatibility for Oxygen if their metabox is hidden for a specific post type
+* INFO Update guidelines for Logo schema
+* FIX Trailing slash on void elements for W3C validator
+* FIX Energy Consumption property for automatic product schema
+* FIX WPML compatibility for CSV SEO metadata export
+* FIX WPML compatibility for removing /product-category/ slug
+* FIX Compatibility issue with SiteOrigin and WP Bakery builders
+* FIX PHP 8.2 compatibility: Attempt to read properties on bool in wp-seopress/inc/functions/variables/dynamic-variables.php on line 104
+* FIX PHP Warnings in wp-seopress-pro/inc/admin/cron.php on line 1075
+* FIX PHP warning array_count_values() in wp-seopress/src/Services/ContentAnalysis/GetContent.php on line 27
+* FIX Undefined ajaxurl in SEOPress wizard
+* FIX White label documentation links
+* FIX Quick edit redirect fields
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

@@ -13,12 +13,26 @@ class Single {
      * @return void
      */
     protected function hooksWPMLCompatibility() {
+        //If multidomain setup
+        if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+            //Home URL
+            add_filter('seopress_sitemaps_home_url', function($home_url) {
+                $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
+                return trailingslashit($home_url);
+            });
+        }
+
         add_filter('seopress_sitemaps_single_query', function ($args) {
             global $sitepress, $sitepress_settings;
 
             $sitepress_settings['auto_adjust_ids'] = 0;
             remove_filter('terms_clauses', [$sitepress, 'terms_clauses']);
             remove_filter('category_link', [$sitepress, 'category_link_adjust_id'], 1);
+
+            //If multidomain setup
+            if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+                $args['suppress_filters'] = false;
+            }
 
             return $args;
         });

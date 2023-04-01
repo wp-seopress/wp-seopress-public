@@ -1091,8 +1091,8 @@ function seopress_google_analytics_matomo_self_hosted_callback() {
         <?php _e('If you use Matomo Cloud, uncheck this option.', 'wp-seopress'); ?>
     </p>
     <p class="description">
-        <span class="dashicons dashicons-external"></span>
-        <?php printf('<a href="%s" target="_blank">'.__('Learn how to install Matomo On-Premise on your server.', 'wp-seopress').'</a>', $docs['analytics']['matomo']['on_premise']); ?>
+        <span class="dashicons dashicons-external seopress-help"></span>
+        <?php printf('<a href="%s" target="_blank" class="seopress-help">'.__('Learn how to install Matomo On-Premise on your server.', 'wp-seopress').'</a>', $docs['analytics']['matomo']['on_premise']); ?>
     </p>
 </label>
 

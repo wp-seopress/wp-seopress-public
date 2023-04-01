@@ -34,7 +34,8 @@ class InternalLinks
         wp_reset_postdata();
 
         //Internal links for Oxygen Builder
-        if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output')) {
+        $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.get_post_type($options['id'])) ? false : true;
+        if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
             $args      = [
                 'posts_per_page' => -1,
                 'meta_query' => [

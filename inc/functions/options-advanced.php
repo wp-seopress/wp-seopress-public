@@ -103,7 +103,7 @@ function seopress_advanced_advanced_google_hook() {
     if (is_home() || is_front_page()) {
         $optionGoogle = seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification();
         if (!empty($optionGoogle)) {
-            $seopress_advanced_advanced_google = '<meta name="google-site-verification" content="' . $optionGoogle . '" />';
+            $seopress_advanced_advanced_google = '<meta name="google-site-verification" content="' . $optionGoogle . '">';
             $seopress_advanced_advanced_google .= "\n";
             echo $seopress_advanced_advanced_google;
         }
@@ -116,7 +116,7 @@ function seopress_advanced_advanced_bing_hook() {
     if (is_home() || is_front_page()) {
         $optionBing = seopress_get_service('AdvancedOption')->getAdvancedBingVerification();
         if (!empty($optionBing)) {
-            $seopress_advanced_advanced_bing = '<meta name="msvalidate.01" content="' . $optionBing . '" />';
+            $seopress_advanced_advanced_bing = '<meta name="msvalidate.01" content="' . $optionBing . '">';
             $seopress_advanced_advanced_bing .= "\n";
             echo $seopress_advanced_advanced_bing;
         }
@@ -129,7 +129,7 @@ function seopress_advanced_advanced_pinterest_hook() {
     if (is_home() || is_front_page()) {
         $optionPinterest =seopress_get_service('AdvancedOption')->getAdvancedPinterestVerification();
         if (!empty($optionPinterest)) {
-            $seopress_advanced_advanced_pinterest = '<meta name="p:domain_verify" content="' . $optionPinterest . '" />';
+            $seopress_advanced_advanced_pinterest = '<meta name="p:domain_verify" content="' . $optionPinterest . '">';
             $seopress_advanced_advanced_pinterest .= "\n";
             echo $seopress_advanced_advanced_pinterest;
         }
@@ -146,7 +146,7 @@ function seopress_advanced_advanced_yandex_hook() {
             return;
         }
 
-        $meta = '<meta name="yandex-verification" content="' . $contentYandex . '" />';
+        $meta = '<meta name="yandex-verification" content="' . $contentYandex . '">';
         $meta .= "\n";
         echo $meta;
     }

@@ -21,8 +21,8 @@ function print_section_info_titles()
     <?php _e('Customize your title & meta description for homepage.', 'wp-seopress'); ?>
 </p>
 
-<span class="dashicons dashicons-external"></span>
-<a href="<?php echo $docs['titles']['wrong_meta']; ?>"
+<span class="dashicons dashicons-external seopress-help"></span>
+<a class="seopress-help" href="<?php echo $docs['titles']['wrong_meta']; ?>"
     target="_blank">
     <?php _e('Wrong meta title / description in SERP?', 'wp-seopress'); ?></a>
 

@@ -829,61 +829,63 @@ function seopress_download_batch_export() {
     if ( ! wp_verify_nonce($_GET['nonce'], 'seopress_csv_batch_export_nonce')) {
         return;
     }
-    if (current_user_can(seopress_capability('manage_options', 'export_settings')) && is_admin()) {
-        if ('' != get_option('seopress_metadata_csv')) {
-            $csv = get_option('seopress_metadata_csv');
+    if ( ! current_user_can(seopress_capability('manage_options', 'export_settings'))) {
+        return;
+    }
+    if ('' != get_option('seopress_metadata_csv')) {
+        $csv = get_option('seopress_metadata_csv');
 
-            $csv_fields   = [];
-            $csv_fields[] = 'id';
-            $csv_fields[] = 'post_title';
-            $csv_fields[] = 'url';
-            $csv_fields[] = 'meta_title';
-            $csv_fields[] = 'meta_desc';
-            $csv_fields[] = 'fb_title';
-            $csv_fields[] = 'fb_desc';
-            $csv_fields[] = 'fb_img';
-            $csv_fields[] = 'tw_title';
-            $csv_fields[] = 'tw_desc';
-            $csv_fields[] = 'tw_img';
-            $csv_fields[] = 'noindex';
-            $csv_fields[] = 'nofollow';
-            $csv_fields[] = 'noimageindex';
-            $csv_fields[] = 'noarchive';
-            $csv_fields[] = 'nosnippet';
-            $csv_fields[] = 'canonical_url';
-            $csv_fields[] = 'primary_cat';
-            $csv_fields[] = 'redirect_active';
-            $csv_fields[] = 'redirect_status';
-            $csv_fields[] = 'redirect_type';
-            $csv_fields[] = 'redirect_url';
-            $csv_fields[] = 'target_kw';
-            ob_start();
-            $output_handle = @fopen('php://output', 'w');
+        $csv_fields   = [];
+        $csv_fields[] = 'id';
+        $csv_fields[] = 'post_title';
+        $csv_fields[] = 'url';
+        $csv_fields[] = 'slug';
+        $csv_fields[] = 'meta_title';
+        $csv_fields[] = 'meta_desc';
+        $csv_fields[] = 'fb_title';
+        $csv_fields[] = 'fb_desc';
+        $csv_fields[] = 'fb_img';
+        $csv_fields[] = 'tw_title';
+        $csv_fields[] = 'tw_desc';
+        $csv_fields[] = 'tw_img';
+        $csv_fields[] = 'noindex';
+        $csv_fields[] = 'nofollow';
+        $csv_fields[] = 'noimageindex';
+        $csv_fields[] = 'noarchive';
+        $csv_fields[] = 'nosnippet';
+        $csv_fields[] = 'canonical_url';
+        $csv_fields[] = 'primary_cat';
+        $csv_fields[] = 'redirect_active';
+        $csv_fields[] = 'redirect_status';
+        $csv_fields[] = 'redirect_type';
+        $csv_fields[] = 'redirect_url';
+        $csv_fields[] = 'target_kw';
+        ob_start();
+        $output_handle = @fopen('php://output', 'w');
 
-            //Insert header row
-            fputcsv($output_handle, $csv_fields, ';');
+        //Insert header row
+        fputcsv($output_handle, $csv_fields, ';');
 
-            //Header
-            ignore_user_abort(true);
-            nocache_headers();
-            header('Content-Type: text/csv; charset=utf-8');
-            header('Content-Disposition: attachment; filename=seopress-metadata-export-' . date('m-d-Y') . '.csv');
-            header('Expires: 0');
-            header('Pragma: public');
+        //Header
+        ignore_user_abort(true);
+        nocache_headers();
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename=seopress-metadata-export-' . date('m-d-Y') . '.csv');
+        header('Expires: 0');
+        header('Pragma: public');
 
-            if ( ! empty($csv)) {
-                foreach ($csv as $value) {
-                    fputcsv($output_handle, $value, ';');
-                }
+        if ( ! empty($csv)) {
+            foreach ($csv as $value) {
+                fputcsv($output_handle, $value, ';');
             }
-
-            // Close output file stream
-            fclose($output_handle);
-
-            //Clean database
-            delete_option('seopress_metadata_csv');
-            exit;
         }
+
+        // Close output file stream
+        fclose($output_handle);
+
+        //Clean database
+        delete_option('seopress_metadata_csv');
+        exit;
     }
 }
 add_action('admin_init', 'seopress_download_batch_export');

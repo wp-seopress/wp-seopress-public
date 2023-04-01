@@ -179,6 +179,25 @@ class TitleOption {
     }
 
     /**
+     * @since 6.5.0
+     *
+     * @param int|null $currentCpt
+     */
+    public function getSingleCptEnable($currentCpt) {
+        if (null === $currentCpt) {
+            return;
+        }
+
+        $option =  $this->searchOptionByKey('seopress_titles_single_titles');
+
+        if ( ! isset($option[$currentCpt]['enable'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['enable'];
+    }
+
+    /**
      * @since 5.0.0
      */
     public function getTitleNoIndex() {
@@ -211,6 +230,34 @@ class TitleOption {
      */
     public function getTitleNoImageIndex() {
         return $this->searchOptionByKey('seopress_titles_noimageindex');
+    }
+
+    /**
+     * @since 6.5.0
+     *
+     * @param int|null $currentCpt
+     */
+    public function getArchivesCPTTitle($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_archive_titles');
+
+        if ( ! isset($option[$currentCpt]['title'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['title'];
     }
 
     /**

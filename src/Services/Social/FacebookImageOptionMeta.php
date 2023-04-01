@@ -15,7 +15,7 @@ class FacebookImageOptionMeta {
             $value = get_post_meta(get_the_ID(), '_seopress_social_fb_img', true);
         }
 
-        if(empty($value) &&  '1' === seopress_social_facebook_img_default_option() ){
+        if(empty($value) &&  '1' === seopress_get_service('SocialOption')->getSocialFacebookImgDefault() ){
             $options = get_option('seopress_social_option_name');
             $value = isset($options['seopress_social_facebook_img']) ? $options['seopress_social_facebook_img'] : null;
         }
@@ -30,7 +30,7 @@ class FacebookImageOptionMeta {
             $value = get_post_meta(get_the_ID(), '_seopress_social_fb_img_attachment_id', true);
         }
 
-        if(empty($value) &&  '1' === seopress_social_facebook_img_default_option() && empty(get_post_meta(get_the_ID(), '_seopress_social_fb_img', true)) ){
+        if(empty($value) &&  '1' === seopress_get_service('SocialOption')->getSocialFacebookImgDefault() && empty(get_post_meta(get_the_ID(), '_seopress_social_fb_img', true)) ){
             $options = get_option('seopress_social_option_name');
             $value = isset($options['seopress_social_facebook_img_attachment_id']) ? $options['seopress_social_facebook_img_attachment_id'] : null;
         }
@@ -86,12 +86,12 @@ class FacebookImageOptionMeta {
 
         //OG:IMAGE
         $str = '';
-        $str .= '<meta property="og:image" content="' . esc_attr($url) . '" />';
+        $str .= '<meta property="og:image" content="' . esc_attr($url) . '">';
         $str .= "\n";
 
         //OG:IMAGE:SECURE_URL IF SSL
         if (is_ssl()) {
-            $str .= '<meta property="og:image:secure_url" content="' . esc_attr($url) . '" />';
+            $str .= '<meta property="og:image:secure_url" content="' . esc_attr($url) . '">';
             $str .= "\n";
         }
 
@@ -127,27 +127,27 @@ class FacebookImageOptionMeta {
 
         //OG:IMAGE
         $str = '';
-        $str .= '<meta property="og:image" content="' . $url . '" />';
+        $str .= '<meta property="og:image" content="' . $url . '">';
         $str .= "\n";
 
         //OG:IMAGE:SECURE_URL IF SSL
         if (is_ssl()) {
-            $str .= '<meta property="og:image:secure_url" content="' . $url . '" />';
+            $str .= '<meta property="og:image:secure_url" content="' . $url . '">';
             $str .= "\n";
         }
 
         //OG:IMAGE:WIDTH + OG:IMAGE:HEIGHT
         if ( ! empty($imageSrc)) {
-            $str .= '<meta property="og:image:width" content="' . $imageSrc[1] . '" />';
+            $str .= '<meta property="og:image:width" content="' . $imageSrc[1] . '">';
             $str .= "\n";
-            $str .= '<meta property="og:image:height" content="' . $imageSrc[2] . '" />';
+            $str .= '<meta property="og:image:height" content="' . $imageSrc[2] . '">';
             $str .= "\n";
         }
 
         //OG:IMAGE:ALT
         $alt = get_post_meta($postId, '_wp_attachment_image_alt', true);
         if (!empty($alt)) {
-            $str .= '<meta property="og:image:alt" content="' . esc_attr(get_post_meta($postId, '_wp_attachment_image_alt', true)) . '" />';
+            $str .= '<meta property="og:image:alt" content="' . esc_attr(get_post_meta($postId, '_wp_attachment_image_alt', true)) . '">';
             $str .= "\n";
         }
 

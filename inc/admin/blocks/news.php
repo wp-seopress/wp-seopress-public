@@ -97,9 +97,10 @@
                     </li>
                     <?php } else { ?>
                     <?php // Loop through each feed item and display each item as a hyperlink.?>
-                    <?php foreach ($rss_items as $item) { ?>
+                    <?php foreach ($rss_items as $item) {
+                        ?>
                     <li class="seopress-item has-action seopress-item-inner">
-                        <a href="<?php echo esc_url($item->get_permalink()); ?>"
+                        <a href="<?php echo esc_url($item->get_permalink() . '?utm_source=rss_dashboard&utm_medium=wp-admin&utm_campaign=seopress'); ?>"
                             target="_blank" class="seopress-item-inner"
                             title="<?php printf(__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
                             <p class="seopress-item-date"><?php echo $item->get_date('M Y'); ?>
@@ -108,8 +109,7 @@
                             <h3 class="seopress-item-title">
                                 <?php echo esc_html($item->get_title()); ?><span class="dashicons dashicons-external"></span>
                             </h3>
-                            <p class="seopress-item-content"><?php echo $item->get_description(); ?>
-                            </p>
+                            <p class="seopress-item-content"><?php echo $item->get_description(); ?></p>
                         </a>
                     </li>
                     <?php } ?>

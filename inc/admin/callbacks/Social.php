@@ -64,23 +64,10 @@ function seopress_social_knowledge_img_callback()
 
 <?php if (isset($options['seopress_social_knowledge_img'])) {
         esc_attr($options['seopress_social_knowledge_img']);
-    }
-
-    function seopress_social_knowledge_img_option()
-    {
-        $seopress_social_knowledge_img_option = get_option('seopress_social_option_name');
-        if (! empty($seopress_social_knowledge_img_option)) {
-            foreach ($seopress_social_knowledge_img_option as $key => $seopress_social_knowledge_img_value) {
-                $options[$key] = $seopress_social_knowledge_img_value;
-            }
-            if (isset($seopress_social_knowledge_img_option['seopress_social_knowledge_img'])) {
-                return $seopress_social_knowledge_img_option['seopress_social_knowledge_img'];
-            }
-        }
     } ?>
 
 <img style="width:300px;max-height:400px;"
-    src="<?php echo esc_attr(seopress_social_knowledge_img_option()); ?>" />
+    src="<?php echo esc_attr(seopress_get_service('SocialOption')->getSocialKnowledgeImage()); ?>" />
 
 <?php
 }
@@ -255,6 +242,20 @@ function seopress_social_accounts_linkedin_callback()
         '<input type="text" name="seopress_social_option_name[seopress_social_accounts_linkedin]" placeholder="' . esc_html__('eg: http://linkedin.com/company/my-company-url/', 'wp-seopress') . '" aria-label="' . __('LinkedIn URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
+}
+
+function seopress_social_accounts_extra_callback() {
+    $docs = function_exists('seopress_get_docs_links') ? seopress_get_docs_links() : '';
+    $options = get_option('seopress_social_option_name');
+    $check   = isset($options['seopress_social_accounts_extra']) ? esc_attr($options['seopress_social_accounts_extra']) : null;
+
+    printf(
+'<textarea id="seopress_social_accounts_extra" name="seopress_social_option_name[seopress_social_accounts_extra]" rows="8" placeholder="' . esc_html__('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress') . '" aria-label="' . __('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress') . '">%s</textarea>',
+esc_html($check)); ?>
+
+<p class="seopress-help description"><?php _e('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress'); ?></p>
+
+<?php
 }
 
 function seopress_social_facebook_og_callback()

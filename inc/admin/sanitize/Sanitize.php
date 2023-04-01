@@ -29,6 +29,7 @@ function seopress_sanitize_options_fields($input){
         'seopress_social_accounts_instagram',
         'seopress_social_accounts_youtube',
         'seopress_social_accounts_linkedin',
+        'seopress_social_accounts_extra',
         'seopress_social_facebook_link_ownership_id',
         'seopress_social_facebook_admin_id',
         'seopress_social_facebook_app_id',
@@ -107,7 +108,7 @@ function seopress_sanitize_options_fields($input){
             $input[$value] = wp_kses($input[$value], $args);
         } elseif (( ! empty($input['seopress_google_analytics_other_tracking']) && 'seopress_google_analytics_other_tracking' == $value) || ( ! empty($input['seopress_google_analytics_other_tracking_body']) && 'seopress_google_analytics_other_tracking_body' == $value) || ( ! empty($input['seopress_google_analytics_other_tracking_footer']) && 'seopress_google_analytics_other_tracking_footer' == $value)) {
             $input[$value] = $input[$value]; //No sanitization for this field
-        } elseif ( ! empty($input['seopress_instant_indexing_manual_batch']) && 'seopress_instant_indexing_manual_batch' == $value) {
+        } elseif (( ! empty($input['seopress_instant_indexing_manual_batch']) && 'seopress_instant_indexing_manual_batch' == $value) || (!empty($input['seopress_social_accounts_extra']) && 'seopress_social_accounts_extra' == $value )) {
             $input[$value] = sanitize_textarea_field($input[$value]);
         } elseif ( ! empty($input[$value])) {
             $input[$value] = sanitize_text_field($input[$value]);
