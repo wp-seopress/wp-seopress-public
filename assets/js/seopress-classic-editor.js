@@ -41,9 +41,9 @@
             editor = ed && !ed.isHidden() ? ed : null;
             const linkNode = getLink();
             if (linkNode) {
-                inputs.sponsored.prop('checked', linkNode.attr('rel')?.includes('sponsored'));
-                inputs.nofollow.prop('checked', linkNode.attr('rel')?.includes('nofollow'));
-                inputs.ugc.prop('checked', linkNode.attr('rel')?.includes('ugc'));
+                inputs.sponsored.prop('checked', undefined !== linkNode.attr('rel') && linkNode.attr('rel')?.includes('sponsored'));
+                inputs.nofollow.prop('checked', undefined !== linkNode.attr('rel') && linkNode.attr('rel')?.includes('nofollow'));
+                inputs.ugc.prop('checked', undefined !== linkNode.attr('rel') && linkNode.attr('rel')?.includes('ugc'));
             }
         }
 

@@ -567,8 +567,14 @@ function seopress_import_rk_redirections() {
 
         $source = '';
         if ( ! empty($redirect_value['sources'])) {
-            $source = maybe_unserialize($redirect_value['sources']);
-            $source = ltrim(urldecode($source[0]['pattern']), '/');
+            if (is_serialized($redirect_value['sources'])) {
+
+                $source = @unserialize(sanitize_text_field($redirect_value['sources']), ['allowed_classes' => false]);
+
+                if (is_array($source)) {
+                    $source = ltrim(urldecode($source[0]['pattern']), '/');
+                }
+            }
         }
 
         $param = 'exact_match';
@@ -590,9 +596,14 @@ function seopress_import_rk_redirections() {
 
         $regex = '';
         if ( ! empty($redirect_value['sources'])) {
-            $sources = maybe_unserialize($redirect_value['sources']);
-            if(in_array("regex", array_column($sources, 'comparison'))) {
-                $regex = 'yes';
+            if (is_serialized($redirect_value['sources'])) {
+                $sources = @unserialize(sanitize_text_field($redirect_value['sources']), ['allowed_classes' => false]);
+
+                if (is_array($sources)) {
+                    if(in_array("regex", array_column($sources, 'comparison'))) {
+                        $regex = 'yes';
+                    }
+                }
             }
         }
 

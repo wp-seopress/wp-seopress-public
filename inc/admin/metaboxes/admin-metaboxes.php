@@ -254,7 +254,11 @@ function seopress_display_seo_metaboxe()
                     if ($get_current_screen->is_block_editor) {
                         wp_enqueue_script('seopress-block-editor-js', SEOPRESS_ASSETS_DIR . '/js/seopress-block-editor' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, true);
                         if ( version_compare( $wp_version, '5.8', '>=' ) ) {
-                            wp_enqueue_script( 'seopress-primary-category-js', SEOPRESS_URL_PUBLIC . '/editor/primary-category-select/index.js', ['wp-hooks'], SEOPRESS_VERSION, true);
+                            global $pagenow;
+
+                            if (('post' == $typenow || 'product' == $typenow) && ('post.php' == $pagenow || 'post-new.php' == $pagenow)) {
+                                wp_enqueue_script( 'seopress-primary-category-js', SEOPRESS_URL_PUBLIC . '/editor/primary-category-select/index.js', ['wp-hooks'], SEOPRESS_VERSION, true);
+                            }
                         }
                     }
                 }

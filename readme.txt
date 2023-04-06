@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.2
 Requires PHP: 7.2
-Stable tag: 6.5.0.2
+Stable tag: 6.5.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -373,6 +373,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.5.0.3 =
+* INFO Strengthening of security
+* FIX JS error "_seopress_robots_primary_cat" preventing editing content in specific cases
+* FIX Link attributes from link modal
+
 = 6.5.0.2 =
 * FIX An issue in specific cases with XML sitemap
 
