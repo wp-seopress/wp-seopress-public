@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 6.7.1
+Version: 6.7.2
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -73,7 +73,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '6.7.1');
+define('SEOPRESS_VERSION', '6.7.2');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -223,7 +223,10 @@ function seopress_add_admin_options_scripts($hook) {
 		'seopress-insights'             => true,
 		'seopress-insights-rankings'    => true,
 		'seopress-insights-backlinks'   => true,
+		'seopress-insights-competitors' => true,
 		'seopress-insights-trends'      => true,
+		'seopress-insights-settings'    => true,
+		'seopress-insights-license'     => true,
 	];
 	if (isset($_pages[$_GET['page']])) {
 		wp_enqueue_script('seopress-toggle-ajax', plugins_url('assets/js/seopress-dashboard' . $prefix . '.js', __FILE__), ['jquery'], SEOPRESS_VERSION, true);
@@ -474,11 +477,12 @@ function seopress_plugin_action_links($links, $file) {
 			unset($links['deactivate']);
 		}
 
-		if ('1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel() && method_exists('seopress_pro_get_service', 'getWhiteLabelHelpLinks') && '1' === seopress_pro_get_service('OptionPro')->getWhiteLabelHelpLinks()) {
-			array_unshift($links, $settings_link, $wizard_link);
-		} else {
-			array_unshift($links, $settings_link, $wizard_link, $website_link);
-		}
+
+        if ( function_exists('seopress_pro_get_service') && '1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel() && method_exists(seopress_pro_get_service('OptionPro'), 'getWhiteLabelHelpLinks') && '1' === seopress_pro_get_service('OptionPro')->getWhiteLabelHelpLinks()) {
+            array_unshift($links, $settings_link, $wizard_link);
+        } else {
+            array_unshift($links, $settings_link, $wizard_link, $website_link);
+        }
 	}
 
 	return $links;

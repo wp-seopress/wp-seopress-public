@@ -12,8 +12,19 @@ class RequestPreview
         //Useful for Page / Theme builders
         $args = apply_filters('seopress_real_preview_custom_args', $args);
 
+        //Oxygen / beTheme compatibility
+        $theme = wp_get_theme();
+        if (
+            (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true)
+            ||
+            ('betheme' == $theme->template || 'Betheme' == $theme->parent_theme)
+        ) {
+            $link = get_permalink((int) $id);
+            $link = add_query_arg('no_admin_bar', 1, $link);
+        } else {
+            $link = add_query_arg('no_admin_bar', 1, get_preview_post_link((int) $id, $args));
+        }
 
-        $link = add_query_arg('no_admin_bar', 1, get_preview_post_link((int) $id, $args));
         $link = apply_filters('seopress_get_dom_link', $link, $id);
 
         return $link;

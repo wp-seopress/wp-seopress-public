@@ -489,7 +489,7 @@ class Notifications {
                     'title'    => __('Fix this!', 'wp-seopress'),
                     'external' => false,
                 ],
-                'deleteable' => true,
+                'deleteable' => false,
                 'status' => $status ? $status : false,
             ];
             if (seopress_get_service('TitleOption')->getTitleNoIndex() ==='1') {

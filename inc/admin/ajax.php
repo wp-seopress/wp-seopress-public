@@ -103,8 +103,13 @@ function seopress_do_real_preview()
             $data['title'] = $cookies;
 
             if ('post' == $seopress_origin) { //Default: post type
-                //Oxygen compatibility
-                if ((is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) ) {
+                //Oxygen / beTheme compatibility
+                $theme = wp_get_theme();
+                if (
+                    (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true)
+                    ||
+                    ('betheme' == $theme->template || 'Betheme' == $theme->parent_theme)
+                ) {
                     $link = get_permalink((int) $seopress_get_the_id);
                     $link = add_query_arg('no_admin_bar', 1, $link);
 

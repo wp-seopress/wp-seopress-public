@@ -87,7 +87,7 @@ trait UseTags {
 
         foreach ($files as $filename) {
 
-            if ( ! preg_match('/\.php$/', $filename)) {
+            if( strtolower($filename) === '.ds_store') {
                 continue;
             }
 

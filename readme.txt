@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.2
 Requires PHP: 7.2
-Stable tag: 6.7.1
+Stable tag: 6.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -374,6 +374,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.7.2 =
+* FIX Compatibility issue with beTheme builder for content analysis
+* FIX White label issue on plugins list
+* FIX Missing tags causing issue with Article schema / dynamic variables in dropdown list
+
 = 6.7.1 =
 * INFO Add a new documentation link for AI feature
 * FIX Documentation links in SEO dashboard
