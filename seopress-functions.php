@@ -50,55 +50,150 @@ if ( ! function_exists('array_key_last')) {
     }
 }
 
+/*
+ * Remove WP default meta robots (added in WP 5.7)
+ *
+ * @since 4.4.0.7
+ */
+remove_filter('wp_robots', 'wp_robots_max_image_preview_large');
+
+/*
+ * Remove WC default meta robots (added in WP 5.7)
+ *
+ * @since 4.6
+ * @todo use wp_robots API
+ * @updated 5.8
+ */
+function seopress_robots_wc_pages($robots) {
+	include_once ABSPATH . 'wp-admin/includes/plugin.php';
+	if (is_plugin_active('woocommerce/woocommerce.php')) {
+		if (function_exists('wc_get_page_id')) {
+			if (is_page(wc_get_page_id('cart')) || is_page(wc_get_page_id('checkout')) || is_page(wc_get_page_id('myaccount'))) {
+				if ('0' === get_option('blog_public')) {
+					return $robots;
+				} else {
+					unset($robots);
+					$robots = [];
+
+					return $robots;
+				}
+			}
+		}
+	}
+	//remove noindex on search archive pages
+	if (is_search()) {
+		if ('0' === get_option('blog_public')) {
+			return $robots;
+		} else {
+			unset($robots);
+			$robots = [];
+
+			return $robots;
+		}
+	}
+
+	return $robots;
+}
+add_filter('wp_robots', 'seopress_robots_wc_pages', 20);
+
 /**
- * If a post type should hide SEO columns
+ * Remove default WC meta robots.
  *
+ * @since 3.8.1
+ */
+function seopress_compatibility_woocommerce() {
+	if (function_exists('is_plugin_active')) {
+		if (is_plugin_active('woocommerce/woocommerce.php') && ! is_admin()) {
+			remove_action('wp_head', 'wc_page_noindex');
+		}
+	}
+}
+add_action('wp_head', 'seopress_compatibility_woocommerce', 0);
+
+/**
+ * Remove Jetpack OpenGraph tags.
+ *
+ * @since 3.5.9
+ */
+function seopress_compatibility_jetpack() {
+	if (function_exists('is_plugin_active')) {
+		if (is_plugin_active('jetpack/jetpack.php') && ! is_admin()) {
+			add_filter('jetpack_enable_open_graph', '__return_false');
+			add_filter('jetpack_disable_seo_tools', '__return_true');
+		}
+	}
+}
+add_action('wp_head', 'seopress_compatibility_jetpack', 0);
+
+/**
+ * Filter the xml sitemap URL used by SiteGround Optimizer for preheating.
+ *
+ * @since 6.6.0
+ *
+ * @param string $url URL to be preheated.
+ */
+if (function_exists('is_plugin_active')) {
+    if (is_plugin_active('sg-cachepress/sg-cachepress.php')) {
+        function sp_sg_file_caching_preheat_xml($url) {
+            $url = get_home_url() . '/sitemaps.xml';
+
+            return $url;
+        }
+        add_filter('sg_file_caching_preheat_xml', 'sp_sg_file_caching_preheat_xml');
+    }
+}
+
+/**
+ * Remove WPML home url filter.
+ *
+ * @since 3.8.6
+ *
+ * @param mixed $home_url
+ * @param mixed $url
+ * @param mixed $path
+ * @param mixed $orig_scheme
+ * @param mixed $blog_id
+ */
+function seopress_remove_wpml_home_url_filter($home_url, $url, $path, $orig_scheme, $blog_id) {
+	return $url;
+}
+
+/*
+ * Remove third-parties metaboxes on our CPT
  * @author Benjamin Denis
- *
+ * @since 4.2
+ */
+add_action('do_meta_boxes', 'seopress_remove_metaboxes', 10);
+function seopress_remove_metaboxes() {
+	//Oxygen Builder
+	remove_meta_box('ct_views_cpt', 'seopress_404', 'normal');
+	remove_meta_box('ct_views_cpt', 'seopress_schemas', 'normal');
+	remove_meta_box('ct_views_cpt', 'seopress_bot', 'normal');
+}
+
+/**
  * @deprecated 6.5.0
- *
- * @return string
  */
 function seopress_titles_single_cpt_enable_option($cpt) {
     return seopress_get_service('TitleOption')->getSingleCptEnable($cpt);
 }
 
 /**
- * Get Page Speed Score
- *
- * @author Benjamin Denis
- *
  * @deprecated 5.4.0
- *
- * @return string
  */
 function seopress_advanced_appearance_ps_col_option() {
     return seopress_get_service('AdvancedOption')->getAppearancePsCol();
 }
 
 /**
- * Get all registered post types.
- *
- * @author Benjamin Denis
- *
  * @deprecated 4.4.0
- *
- * @return (array) $wp_post_types
  */
 function seopress_get_post_types() {
     return seopress_get_service('WordPressData')->getPostTypes();
 }
 
 /**
- * Get all registered custom taxonomies.
- *
- * @author Benjamin Denis
- *
  * @deprecated 5.8.0
- *
- * @param bool $with_terms
- *
- * @return array $taxonomies
  **/
 function seopress_get_taxonomies($with_terms = false) {
     $args = [
@@ -185,6 +280,21 @@ function seopress_check_ssl() {
     } else {
         return 'http://';
     }
+}
+
+/**
+ * Check if a string is base64 encoded
+ *
+ * @author Benjamin Denis
+ *
+ * @return boolean
+ **/
+function seopress_is_base64_string($str) {
+	$decoded = base64_decode($str, true);
+	if ($decoded === false) {
+        return false;
+	}
+	return base64_encode($decoded) === $str;
 }
 
 /**
@@ -897,26 +1007,6 @@ function seopress_get_toggle_option($feature) {
 	}
 }
 
-/*
- * Global noindex from SEO, Titles settings
- * @since 4.0
- * @param string $feature
- * @return string 1 if true
- * @author Benjamin
- */
-if ( ! function_exists('seopress_global_noindex_option')) {
-    function seopress_global_noindex_option() {
-        $seopress_titles_noindex_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_noindex_option)) {
-            foreach ($seopress_titles_noindex_option as $key => $seopress_titles_noindex_value) {
-                $options[$key] = $seopress_titles_noindex_value;
-            }
-            if (isset($seopress_titles_noindex_option['seopress_titles_noindex'])) {
-                return $seopress_titles_noindex_option['seopress_titles_noindex'];
-            }
-        }
-    }
-}
 /*
  * Global trailingslash option from SEO, Advanced, Advanced tab (useful for backwards compatibility with SEOPress < 5.9)
  * @since 5.9

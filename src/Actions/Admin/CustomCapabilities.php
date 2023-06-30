@@ -32,7 +32,7 @@ class CustomCapabilities implements ExecuteHooksBackend
             add_filter('option_page_capability_seopress_pro_option_group', [$this, 'capabilitySavePro']);
             add_filter('option_page_capability_seopress_bot_option_group', [$this, 'capabilitySaveBot']);
 
-            add_action('init', [$this, 'addCapabilities']);
+            add_action('load-themes.php', [$this, 'addCapabilities']);
         }
     }
 

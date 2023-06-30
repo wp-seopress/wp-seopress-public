@@ -301,7 +301,6 @@ body .seopress-option input[type="checkbox"],
 #seopress_content_analysis input[type="checkbox"],
 #seopress_pro_cpt input[type="checkbox"] {
     font-family: var(--fontFamily);
-    padding: 6px 8px;
     box-shadow: 0 0 0 transparent;
     transition: box-shadow 0.1s linear;
     border-radius: 2px;

@@ -174,7 +174,7 @@ function seopress_advanced_advanced_wp_generator_callback() {
 	<?php _e('Remove WordPress meta generator in source code', 'wp-seopress'); ?>
 </label>
 
-<pre><?php esc_attr_e('<meta name="generator" content="WordPress 6.0.3" />', 'wp-seopress'); ?></pre>
+<pre><?php esc_attr_e('<meta name="generator" content="WordPress 6.2" />', 'wp-seopress'); ?></pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_generator'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_generator']);

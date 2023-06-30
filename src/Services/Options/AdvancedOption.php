@@ -319,6 +319,20 @@ class AdvancedOption
     }
 
     /**
+     * @since 6.6.0
+     */
+    public function getAppearanceAdminBar(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_adminbar');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getAppearanceHideSiteOverview(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_seo_tools');
+    }
+
+    /**
      * @since 5.4.0
      */
     public function getAppearanceSearchConsole(){
@@ -326,10 +340,38 @@ class AdvancedOption
     }
 
     /**
+     * @since 6.6.0
+     */
+    public function getAppearanceAdminBarNoIndex(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_adminbar_noindex');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getAppearanceNews(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_news');
+    }
+
+    /**
      * @since 5.8
      */
     public function getAdvancedCleaningFileName(){
         return $this->searchOptionByKey('seopress_advanced_advanced_clean_filename');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getAdvancedRemoveCategoryURL(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_category_url');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getAdvancedRemoveProductCategoryURL(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_product_cat_url');
     }
 
     /**
@@ -351,5 +393,26 @@ class AdvancedOption
      */
     public function getSecurityMatomoWidgetRole(){
         return $this->searchOptionByKey('seopress_advanced_security_matomo_widget_role');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getAdvancedCommentsAuthorURLDisable(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_comments_author_url');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getAdvancedCommentsWebsiteDisable(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_comments_website');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getAdvancedCommentsFormLinkDisable(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_comments_form_link');
     }
 }

@@ -7,27 +7,12 @@
     if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
         //do nothing
     } else {
-
-        function seopress_get_hidden_notices_tasks_option()
-        {
-            $seopress_get_hidden_notices_tasks_option = get_option('seopress_notices');
-            if (! empty($seopress_get_hidden_notices_tasks_option)) {
-                foreach ($seopress_get_hidden_notices_tasks_option as $key => $seopress_get_hidden_notices_tasks_value) {
-                    $options[$key] = $seopress_get_hidden_notices_tasks_value;
-                }
-                if (isset($seopress_get_hidden_notices_tasks_option['notice-tasks'])) {
-                    return $seopress_get_hidden_notices_tasks_option['notice-tasks'];
-                }
-            }
-        }
-
-        if ('1' != seopress_get_hidden_notices_tasks_option()) {
+        if ('1' !== seopress_get_service('NoticeOption')->getNoticeTasks()) {
     ?>
 
     <div id="notice-tasks-alert" class="seopress-card">
         <div class="seopress-card-title">
-            <h2><?php _e('Get ready to improve your SEO', 'wp-seopress'); ?>
-            </h2>
+            <h2><?php _e('Get ready to improve your SEO', 'wp-seopress'); ?></h2>
 
             <span class="seopress-item-toggle-options"></span>
             <div class="seopress-card-popover">

@@ -12,6 +12,13 @@ class CountTargetKeywordsUse
             return [];
         }
 
+        $hashed = md5(serialize($targetKeywords) . $postId);
+        error_log("caheeeddd ====" . $hashed);
+        $cached = get_transient('seopress_content_analysis_count_target_keywords_use_' . $hashed);
+        if(false !== $cached){
+            return $cached;
+        }
+
         $targetKeywords = array_map('trim', $targetKeywords);
 
         global $wpdb;
@@ -39,6 +46,8 @@ class CountTargetKeywordsUse
                 }, $rows)))
             ];
         }
+
+        set_transient('seopress_content_analysis_count_target_keywords_use_' . $hashed, $data, 5 * MINUTE_IN_SECONDS);
 
         return $data;
 

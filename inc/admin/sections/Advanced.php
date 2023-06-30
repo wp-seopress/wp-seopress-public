@@ -112,7 +112,7 @@ function print_section_info_advanced_appearance_metabox()
 
 <p><?php _e('Edit your SEO metadata directly from your favorite page builder.','wp-seopress'); ?></p>
 
-    <?php if ((function_exists('seopress_get_toggle_white_label_option') && '1' !== seopress_get_toggle_white_label_option())) {
+    <?php if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
         echo wp_oembed_get('https://www.youtube.com/watch?v=sf0ocG7vQMM');
     }
 }

@@ -48,8 +48,8 @@ function seopress_get_dynamic_variables($variables, $post, $is_oembed){
     }
 
     //Template variables
-    if (function_exists('seopress_titles_sep_option') && seopress_titles_sep_option()) {
-        $sep = seopress_titles_sep_option();
+    if (seopress_get_service('TitleOption')->getSeparator()) {
+        $sep = seopress_get_service('TitleOption')->getSeparator();
     } else {
         $sep = '-';
     }

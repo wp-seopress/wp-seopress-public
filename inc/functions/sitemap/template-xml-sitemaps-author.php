@@ -8,7 +8,7 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 seopress_get_service('SitemapHeaders')->printHeaders();
 
 //WPML - Home URL
-if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
     add_filter('seopress_sitemaps_home_url', function($home_url) {
         $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
         return trailingslashit($home_url);

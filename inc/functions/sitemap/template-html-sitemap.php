@@ -55,7 +55,7 @@ if (! empty($postslist)) {
 
             $html .= '<li>';
             $html .= '<a href="' . get_permalink($post) . '">' . get_the_title($post) . '</a>';
-            if ('1' != seopress_xml_sitemap_html_date_option()) {
+            if ('1' !== seopress_get_service('SitemapOption')->getHtmlDate()) {
                 $date = apply_filters('seopress_sitemaps_html_post_date', $date, $cpt_key);
                 if (true === $date) {
                     $html .= ' - ' . get_the_date('j F Y', $post);

@@ -12,7 +12,7 @@ function print_section_info_social_knowledge()
 </div>
 
 <p>
-    <?php _e('Configure Google Knowledge Graph.', 'wp-seopress'); ?>
+    <?php _e('Configure Google Knowledge Graph. This will print a schema for search engines on your homepage.', 'wp-seopress'); ?>
 </p>
 
 <p class="seopress-help">

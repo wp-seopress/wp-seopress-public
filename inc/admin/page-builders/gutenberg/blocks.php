@@ -45,7 +45,7 @@ function seopress_register_blocks() {
             ],
             'isSiteMapEnabled' => [
                 'type'    => 'boolean',
-                'default' => ( '1' == seopress_get_toggle_option( 'xml-sitemap' ) ) && ( '1' == seopress_xml_sitemap_html_enable_option() )
+                'default' => ( '1' == seopress_get_toggle_option( 'xml-sitemap' ) ) && ( '1' === seopress_get_service('SitemapOption')->getHtmlEnable() )
             ],
             'optionsPageUrl' => [
                 'type'    => 'string',

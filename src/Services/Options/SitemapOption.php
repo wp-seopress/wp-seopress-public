@@ -6,7 +6,7 @@ defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 
 use SEOPress\Constants\Options;
 
-class Sitemap {
+class SitemapOption {
     const NAME_SERVICE = 'SitemapOption';
 
     /**
@@ -50,7 +50,7 @@ class Sitemap {
 
     /**
      * @since 5.7.0
-     *
+     * @deprecated 6.6.0
      * @return string|null
      */
     public function videoIsEnabled() {

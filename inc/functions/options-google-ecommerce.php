@@ -16,8 +16,12 @@ if (is_plugin_active('woocommerce/woocommerce.php')) {
         if (0 < $order_id && 1 != get_post_meta($order_id, '_seopress_ga_tracked', true)) {
             $order = wc_get_order($order_id);
 
-            //Check order status
+            //Check it's a real order
+            if (is_bool($order)) {
+                return;
+            }
 
+            //Check order status
             $status = ['completed', 'processing'];
             $status = apply_filters('seopress_gtag_ec_status', $status);
 

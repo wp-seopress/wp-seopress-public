@@ -8,7 +8,7 @@ function seopress_instant_indexing_google_engine_callback()
 
     $search_engines = [
         'google' => 'Google',
-        'bing'=> 'Bing'
+        'bing'=> 'Bing / Yandex'
     ];
 
     if (!empty($search_engines)) {

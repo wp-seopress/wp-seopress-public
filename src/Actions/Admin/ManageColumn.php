@@ -32,7 +32,7 @@ class ManageColumn implements ExecuteHooksBackend
     public function hooks()
     {
         if ('1' == seopress_get_toggle_option('advanced')) {
-            add_action('init', [$this, 'setup']);
+            add_action('init', [$this, 'setup'], 20); //priority is important for plugins compatibility like Toolset
         }
     }
 

@@ -71,6 +71,16 @@ class ContentAnalysis implements ExecuteHooks
 
         $id   = (int) $request->get_param('id');
 
+        $exist = get_option('seopress_content_analysis_api_in_progress');
+        if($exist){
+            $data = get_post_meta($id, '_seopress_content_analysis_api');
+            $linkPreview   = seopress_get_service('RequestPreview')->getLinkRequest($id);
+            $data['link_preview'] = $linkPreview;
+            return new \WP_REST_Response($data);
+        }
+
+        update_option('seopress_content_analysis_api_in_progress', true, false);
+
         $linkPreview   = seopress_get_service('RequestPreview')->getLinkRequest($id);
         $str  = seopress_get_service('RequestPreview')->getDomById($id);
         $data = seopress_get_service('DomFilterContent')->getData($str, $id);
@@ -89,6 +99,8 @@ class ContentAnalysis implements ExecuteHooks
 
         update_post_meta($id, '_seopress_content_analysis_api', $saveData);
         $data['link_preview'] = $linkPreview;
+
+        delete_option('seopress_content_analysis_api_in_progress');
 
         return new \WP_REST_Response($data);
     }

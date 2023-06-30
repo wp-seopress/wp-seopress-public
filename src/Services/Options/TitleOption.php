@@ -96,6 +96,62 @@ class TitleOption {
     }
 
     /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentCpt
+     */
+    public function getSingleCptTitle($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_single_titles');
+
+        if ( ! isset($option[$currentCpt]['title'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['title'];
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentCpt
+     */
+    public function getSingleCptDesc($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_single_titles');
+
+        if ( ! isset($option[$currentCpt]['description'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['description'];
+    }
+
+    /**
      * @since 5.0.0
      *
      * @param int|null $id
@@ -150,7 +206,7 @@ class TitleOption {
         return $option[$currentCpt]['nofollow'];
     }
 
-        /**
+    /**
      * @since 5.7
      *
      * @param int|null $id
@@ -176,6 +232,34 @@ class TitleOption {
         }
 
         return $option[$currentCpt]['date'];
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @param int|null $id
+     */
+    public function getSingleCptThumb($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_single_titles');
+
+        if ( ! isset($option[$currentCpt]['thumb_gcs'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['thumb_gcs'];
     }
 
     /**
@@ -261,6 +345,88 @@ class TitleOption {
     }
 
     /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentCpt
+     */
+    public function getArchivesCPTDesc($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_archive_titles');
+
+        if ( ! isset($option[$currentCpt]['description'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['description'];
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentCpt
+     */
+    public function getArchivesCPTNoIndex($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_archive_titles');
+        if ( ! isset($option[$currentCpt]['noindex'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['noindex'];
+    }
+
+        /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentCpt
+     */
+    public function getArchivesCPTNoFollow($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_titles_archive_titles');
+        if ( ! isset($option[$currentCpt]['nofollow'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['nofollow'];
+    }
+
+    /**
      * @since 5.4.1
      */
     public function getArchivesAuthorTitle(){
@@ -272,6 +438,27 @@ class TitleOption {
      */
     public function getArchivesAuthorDescription(){
         return $this->searchOptionByKey('seopress_titles_archives_author_desc');
+    }
+
+    /**
+     * @since 6.0.0
+     */
+    public function getArchiveAuthorDisable(){
+        return $this->searchOptionByKey('seopress_titles_archives_author_disable');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getArchiveAuthorNoIndex(){
+        return $this->searchOptionByKey('seopress_titles_archives_author_noindex');
+    }
+
+    /**
+     * @since 6.0.0
+     */
+    public function getArchiveDateDisable(){
+        return $this->searchOptionByKey('seopress_titles_archives_date_disable');
     }
 
     /**
@@ -296,6 +483,115 @@ class TitleOption {
     }
 
     /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentTax
+     */
+    public function getTaxTitle() {
+        $queried_object           = get_queried_object();
+        $currentTax = null !== $queried_object ? $queried_object->taxonomy : '';
+
+        $option =  $this->searchOptionByKey('seopress_titles_tax_titles');
+
+        if ( ! isset($option[$currentTax]['title'])) {
+            return;
+        }
+
+        return $option[$currentTax]['title'];
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentTax
+     */
+    public function getTaxDesc() {
+        $queried_object           = get_queried_object();
+        $currentTax = null !== $queried_object ? $queried_object->taxonomy : '';
+
+        $option =  $this->searchOptionByKey('seopress_titles_tax_titles');
+
+        if ( ! isset($option[$currentTax]['description'])) {
+            return;
+        }
+
+        return $option[$currentTax]['description'];
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @param int|null $id
+     */
+    public function getTaxNoIndex() {
+        $queried_object = get_queried_object();
+        $currentTax = null !== $queried_object ? $queried_object->taxonomy : '';
+
+        if (null === $queried_object) {
+            global $tax;
+            $currentTax = $tax->name;
+        }
+
+        if (null !== $queried_object && 'yes' === get_term_meta($queried_object->term_id, '_seopress_robots_index', true)) {
+            return get_term_meta($queried_object->term_id, '_seopress_robots_index', true);
+        }
+
+        $option =  $this->searchOptionByKey('seopress_titles_tax_titles');
+
+        if ( ! isset($option[$currentTax]['noindex'])) {
+            return;
+        }
+
+        return $option[$currentTax]['noindex'];
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @param int|null $id
+     */
+    public function getTaxNoFollow() {
+        $queried_object = get_queried_object();
+        $currentTax = null !== $queried_object ? $queried_object->taxonomy : '';
+
+        if (null === $queried_object) {
+            global $tax;
+            $currentTax = $tax->name;
+        }
+
+        if (null !== $queried_object && 'yes' === get_term_meta($queried_object->term_id, '_seopress_robots_follow', true)) {
+            return get_term_meta($queried_object->term_id, '_seopress_robots_follow', true);
+        }
+
+        $option =  $this->searchOptionByKey('seopress_titles_tax_titles');
+
+        if ( ! isset($option[$currentTax]['nofollow'])) {
+            return;
+        }
+
+        return $option[$currentTax]['nofollow'];
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentTax
+     */
+    public function getTaxEnable($currentTax) {
+        if (null === $currentTax) {
+            return;
+        }
+
+        $option =  $this->searchOptionByKey('seopress_titles_tax_titles');
+
+        if ( ! isset($option[$currentTax]['enable'])) {
+            return;
+        }
+
+        return $option[$currentTax]['enable'];
+    }
+
+    /**
      * @since 5.4.0
      */
     public function getPagedRel(){
@@ -317,6 +613,13 @@ class TitleOption {
     }
 
     /**
+     * @since 6.6.0
+     */
+    public function getBpGroupsNoIndex(){
+        return $this->searchOptionByKey('seopress_titles_bp_groups_noindex');
+    }
+
+    /**
      * @since 5.9.0
      */
     public function getArchivesDateDesc(){
@@ -324,10 +627,24 @@ class TitleOption {
     }
 
     /**
+     * @since 6.6.0
+     */
+    public function getArchivesDateNoIndex(){
+        return $this->searchOptionByKey('seopress_titles_archives_date_noindex');
+    }
+
+    /**
      * @since 5.9.0
      */
     public function getArchivesSearchDesc(){
         return $this->searchOptionByKey('seopress_titles_archives_search_desc');
+    }
+
+    /**
+     * @since 6.6.0
+     */
+    public function getArchivesSearchNoIndex(){
+        return $this->searchOptionByKey('seopress_titles_archives_search_title_noindex');
     }
 
     /**
@@ -340,21 +657,21 @@ class TitleOption {
     /**
      * @since 5.9.0
      */
-    public function geNoSiteLinksSearchBox(){
+    public function getNoSiteLinksSearchBox(){
         return $this->searchOptionByKey('seopress_titles_nositelinkssearchbox');
     }
 
     /**
-     * @since 6.0.0
+     * @since 6.6.0
      */
-    public function getArchiveAuthorDisable(){
-        return $this->searchOptionByKey('seopress_titles_archives_author_disable');
+    public function getAttachmentsNoIndex(){
+        return $this->searchOptionByKey('seopress_titles_attachments_noindex');
     }
 
     /**
-     * @since 6.0.0
+     * @since 6.6.0
      */
-    public function getArchiveDateDisable(){
-        return $this->searchOptionByKey('seopress_titles_archives_date_disable');
+    public function getPagedNoIndex(){
+        return $this->searchOptionByKey('seopress_titles_paged_noindex');
     }
 }

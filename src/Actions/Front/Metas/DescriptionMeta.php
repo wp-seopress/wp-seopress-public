@@ -46,7 +46,7 @@ class DescriptionMeta implements ExecuteHooksFrontend {
      */
     protected function getHomeDescriptionTemplate($variablesArray, $variablesReplace) {
         if ( ! function_exists('seopress_get_service')) {
-            $descriptionOption = seopress_titles_home_site_desc_option();
+            $descriptionOption = seopress_get_service('TitleOption')->getHomeDescriptionTitle();
             if (empty($descriptionOption)) {
                 return '';
             }
@@ -63,10 +63,6 @@ class DescriptionMeta implements ExecuteHooksFrontend {
 
     protected function getContent() {
         $context = seopress_get_service('ContextPage')->getContext();
-
-        if ( ! function_exists('seopress_titles_sep_option')) {
-            require_once SEOPRESS_PLUGIN_DIR_PATH . '/inc/functions/options-titles-metas.php';
-        }
 
         $variables = null;
         $variables = apply_filters('seopress_dyn_variables_fn', $variables);
@@ -96,11 +92,11 @@ class DescriptionMeta implements ExecuteHooksFrontend {
         $page_id                                  = get_option('page_for_posts');
 
         if (is_front_page() && is_home() && isset($post) && '' == get_post_meta($post->ID, '_seopress_titles_desc', true)) { //HOMEPAGE
-            if ( ! empty(seopress_titles_home_site_desc_option())) {
+            if ( ! empty(seopress_get_service('TitleOption')->getHomeDescriptionTitle())) {
                 $descriptionTemplate = $this->getHomeDescriptionTemplate($seopress_titles_template_variables_array, $seopress_titles_template_replace_array);
             }
         } elseif (is_front_page() && isset($post) && '' == get_post_meta($post->ID, '_seopress_titles_desc', true)) { //STATIC HOMEPAGE
-            if ( ! empty(seopress_titles_home_site_desc_option())) {
+            if ( ! empty(seopress_get_service('TitleOption')->getHomeDescriptionTitle())) {
                 $descriptionTemplate = $this->getHomeDescriptionTemplate($seopress_titles_template_variables_array, $seopress_titles_template_replace_array);
             }
         } elseif (is_home() && '' != get_post_meta($page_id, '_seopress_titles_desc', true)) { //BLOG PAGE
@@ -112,8 +108,8 @@ class DescriptionMeta implements ExecuteHooksFrontend {
             }
         } elseif (is_home() && ('posts' == get_option('show_on_front'))) { //YOUR LATEST POSTS
             if ( ! function_exists('seopress_get_service')) {
-                if ( ! empty(seopress_titles_home_site_desc_option())) {
-                    $description         = esc_attr(seopress_titles_home_site_desc_option());
+                if ( ! empty(seopress_get_service('TitleOption')->getHomeDescriptionTitle())) {
+                    $description         = esc_attr(seopress_get_service('TitleOption')->getHomeDescriptionTitle());
                     $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $description);
                 }
             } else {
@@ -121,8 +117,8 @@ class DescriptionMeta implements ExecuteHooksFrontend {
                 $descriptionTemplate = $this->tagsToStringService->replace($description, $context);
             }
         } elseif (function_exists('bp_is_group') && bp_is_group()) {
-            if ('' != seopress_titles_bp_groups_desc_option()) {
-                $description = esc_attr(seopress_titles_bp_groups_desc_option());
+            if ('' !== seopress_get_service('TitleOption')->getBpGroupsDesc()) {
+                $description = esc_attr(seopress_get_service('TitleOption')->getBpGroupsDesc());
 
                 $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $description);
             }
@@ -196,8 +192,8 @@ class DescriptionMeta implements ExecuteHooksFrontend {
                     if ( ! empty($matches3) && ! empty($seopress_titles_ucf_template_variables_array) && ! empty($seopress_titles_ucf_template_replace_array)) {
                         $descriptionTemplate = str_replace($seopress_titles_ucf_template_variables_array, $seopress_titles_ucf_template_replace_array, $descriptionTemplate);
                     }
-                } elseif ('' != seopress_titles_single_desc_option()) { //IS GLOBAL
-                    $description = esc_attr(seopress_titles_single_desc_option());
+                } elseif ('' !== seopress_get_service('TitleOption')->getSingleCptDesc($post->ID)) { //IS GLOBAL
+                    $description = esc_attr(seopress_get_service('TitleOption')->getSingleCptDesc($post->ID));
 
                     preg_match_all('/%%_cf_(.*?)%%/', $description, $matches); //custom fields
 
@@ -273,12 +269,12 @@ class DescriptionMeta implements ExecuteHooksFrontend {
                         $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $description);
                     }
                 }
-        } elseif (is_post_type_archive() && seopress_titles_archive_desc_option()) { //IS POST TYPE ARCHIVE
-            $description = esc_attr(seopress_titles_archive_desc_option());
+        } elseif (is_post_type_archive() && seopress_get_service('TitleOption')->getArchivesCPTDesc($post->ID)) { //IS POST TYPE ARCHIVE
+            $description = esc_attr(seopress_get_service('TitleOption')->getArchivesCPTDesc($post->ID));
 
             $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $description);
-        } elseif ((is_tax() || is_category() || is_tag()) && seopress_titles_tax_desc_option()) { //IS TAX
-            $description = esc_attr(seopress_titles_tax_desc_option());
+        } elseif ((is_tax() || is_category() || is_tag()) && seopress_get_service('TitleOption')->getTaxDesc()) { //IS TAX
+            $description = esc_attr(seopress_get_service('TitleOption')->getTaxDesc());
 
             if (get_term_meta(get_queried_object()->{'term_id'}, '_seopress_titles_desc', true)) {
                 $descriptionTemplate = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, '_seopress_titles_desc', true));
@@ -286,8 +282,8 @@ class DescriptionMeta implements ExecuteHooksFrontend {
             } else {
                 $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $description);
             }
-        } elseif (is_author() && seopress_titles_archives_author_desc_option()) { //IS AUTHOR
-            $description = esc_attr(seopress_titles_archives_author_desc_option());
+        } elseif (is_author() && seopress_get_service('TitleOption')->getArchivesAuthorDescription()) { //IS AUTHOR
+            $description = esc_attr(seopress_get_service('TitleOption')->getArchivesAuthorDescription());
 
             preg_match_all('/%%_ucf_(.*?)%%/', $description, $matches); //custom fields
 
@@ -305,7 +301,7 @@ class DescriptionMeta implements ExecuteHooksFrontend {
             }
 
             //Default
-            $descriptionTemplate = esc_attr(seopress_titles_archives_author_desc_option());
+            $descriptionTemplate = esc_attr(seopress_get_service('TitleOption')->getArchivesAuthorDescription());
 
             //Custom fields
             if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
@@ -313,16 +309,16 @@ class DescriptionMeta implements ExecuteHooksFrontend {
             }
 
             $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $descriptionTemplate);
-        } elseif (is_date() && seopress_titles_archives_date_desc_option()) { //IS DATE
-            $description = esc_attr(seopress_titles_archives_date_desc_option());
+        } elseif (is_date() && seopress_get_service('TitleOption')->getArchivesDateDesc()) { //IS DATE
+            $description = esc_attr(seopress_get_service('TitleOption')->getArchivesDateDesc());
 
             $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $description);
-        } elseif (is_search() && seopress_titles_archives_search_desc_option()) { //IS SEARCH
-            $description = esc_attr(seopress_titles_archives_search_desc_option());
+        } elseif (is_search() && seopress_get_service('TitleOption')->getArchivesSearchDesc()) { //IS SEARCH
+            $description = esc_attr(seopress_get_service('TitleOption')->getArchivesSearchDesc());
 
             $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $description);
-        } elseif (is_404() && seopress_titles_archives_404_desc_option()) { //IS 404
-            $description = esc_attr(seopress_titles_archives_404_desc_option());
+        } elseif (is_404() && seopress_get_service('TitleOption')->getArchives404Desc()) { //IS 404
+            $description = esc_attr(seopress_get_service('TitleOption')->getArchives404Desc());
 
             $descriptionTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $description);
         }

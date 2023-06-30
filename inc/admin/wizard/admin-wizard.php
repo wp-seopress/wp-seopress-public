@@ -35,6 +35,13 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 */
 	private $steps = [];
 
+    /**
+	 * SEO title.
+	 *
+	 * @var string
+	 */
+    private $seo_title = '';
+
 	/**
 	 * Hook in tabs.
 	 */
@@ -52,6 +59,11 @@ class SEOPRESS_Admin_Setup_Wizard {
 
             //Load our scripts and CSS
 			add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
+
+            $this->seo_title = 'SEOPress';
+            if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
+                $this->seo_title = method_exists(seopress_pro_get_service('OptionPro'), 'getWhiteLabelListTitle') && seopress_pro_get_service('OptionPro')->getWhiteLabelListTitle() ? seopress_pro_get_service('OptionPro')->getWhiteLabelListTitle() : 'SEOPress';
+            }
 		}
 	}
 
@@ -76,64 +88,64 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 		$seopress_migrate = [
 			'seopress_aio_migrate'				=> [
-				'seopress_nonce'					      => wp_create_nonce('seopress_aio_migrate_nonce'),
+				'seopress_nonce'					=> wp_create_nonce('seopress_aio_migrate_nonce'),
 				'seopress_aio_migration'			=> admin_url('admin-ajax.php'),
 			],
 			'seopress_yoast_migrate'			=> [
-				'seopress_nonce'					        => wp_create_nonce('seopress_yoast_migrate_nonce'),
+				'seopress_nonce'					=> wp_create_nonce('seopress_yoast_migrate_nonce'),
 				'seopress_yoast_migration'			=> admin_url('admin-ajax.php'),
 			],
 			'seopress_seo_framework_migrate'	=> [
-				'seopress_nonce'					               => wp_create_nonce('seopress_seo_framework_migrate_nonce'),
+				'seopress_nonce'					=> wp_create_nonce('seopress_seo_framework_migrate_nonce'),
 				'seopress_seo_framework_migration' 	=> admin_url('admin-ajax.php'),
 			],
 			'seopress_rk_migrate'				=> [
-				'seopress_nonce'					      => wp_create_nonce('seopress_rk_migrate_nonce'),
+				'seopress_nonce'					=> wp_create_nonce('seopress_rk_migrate_nonce'),
 				'seopress_rk_migration'				=> admin_url('admin-ajax.php'),
 			],
 			'seopress_squirrly_migrate' 		=> [
-				'seopress_nonce' 					         => wp_create_nonce('seopress_squirrly_migrate_nonce'),
+				'seopress_nonce' 					=> wp_create_nonce('seopress_squirrly_migrate_nonce'),
 				'seopress_squirrly_migration'		=> admin_url('admin-ajax.php'),
 			],
 			'seopress_seo_ultimate_migrate' 	=> [
-				'seopress_nonce' 					            => wp_create_nonce('seopress_seo_ultimate_migrate_nonce'),
+				'seopress_nonce' 					=> wp_create_nonce('seopress_seo_ultimate_migrate_nonce'),
 				'seopress_seo_ultimate_migration'	=> admin_url('admin-ajax.php'),
 			],
 			'seopress_wp_meta_seo_migrate'		=> [
-				'seopress_nonce' 					           => wp_create_nonce('seopress_meta_seo_migrate_nonce'),
+				'seopress_nonce' 					=> wp_create_nonce('seopress_meta_seo_migrate_nonce'),
 				'seopress_wp_meta_seo_migration'	=> admin_url('admin-ajax.php'),
 			],
 			'seopress_premium_seo_pack_migrate'	=> [
-				'seopress_nonce'						                => wp_create_nonce('seopress_premium_seo_pack_migrate_nonce'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_premium_seo_pack_migrate_nonce'),
 				'seopress_premium_seo_pack_migration'	=> admin_url('admin-ajax.php'),
 			],
 			'seopress_wpseo_migrate'			=> [
-				'seopress_nonce'						        => wp_create_nonce('seopress_wpseo_migrate_nonce'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_wpseo_migrate_nonce'),
 				'seopress_wpseo_migration'				=> admin_url('admin-ajax.php'),
 			],
 			'seopress_platinum_seo_migrate'			=> [
-				'seopress_nonce'						               => wp_create_nonce('seopress_platinum_seo_migrate_nonce'),
-				'seopress_platinum_seo_migration'				=> admin_url('admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_platinum_seo_migrate_nonce'),
+				'seopress_platinum_seo_migration'		=> admin_url('admin-ajax.php'),
 			],
 			'seopress_smart_crawl_migrate'			=> [
-				'seopress_nonce'						              => wp_create_nonce('seopress_smart_crawl_migrate_nonce'),
-				'seopress_smart_crawl_migration'				=> admin_url('admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_smart_crawl_migrate_nonce'),
+				'seopress_smart_crawl_migration'		=> admin_url('admin-ajax.php'),
 			],
 			'seopress_seopressor_migrate'			=> [
-				'seopress_nonce'						             => wp_create_nonce('seopress_seopressor_migrate_nonce'),
-				'seopress_seopressor_migration'				=> admin_url('admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_seopressor_migrate_nonce'),
+				'seopress_seopressor_migration'			=> admin_url('admin-ajax.php'),
 			],
 			'seopress_slim_seo_migrate'			=> [
-				'seopress_nonce'						             => wp_create_nonce('seopress_slim_seo_migrate_nonce'),
-				'seopress_slim_seo_migration'				=> admin_url('admin-ajax.php'),
+				'seopress_nonce'						=> wp_create_nonce('seopress_slim_seo_migrate_nonce'),
+				'seopress_slim_seo_migration'			=> admin_url('admin-ajax.php'),
 			],
 			'seopress_metadata_csv'				=> [
-				'seopress_nonce'					        => wp_create_nonce('seopress_export_csv_metadata_nonce'),
-				'seopress_metadata_export'			=> admin_url('admin-ajax.php'),
+				'seopress_nonce'				=> wp_create_nonce('seopress_export_csv_metadata_nonce'),
+				'seopress_metadata_export'		=> admin_url('admin-ajax.php'),
 			],
 			'i18n'								=> [
-				'migration'							=> __('Migration completed!', 'wp-seopress'),
-				'export'							   => __('Export completed!', 'wp-seopress'),
+				'migration'						=> __('Migration completed!', 'wp-seopress'),
+				'export'						=> __('Export completed!', 'wp-seopress'),
 			],
 		];
 		wp_localize_script('seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate);
@@ -146,11 +158,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 		if (empty($_GET['page']) || 'seopress-setup' !== $_GET['page']) {
 			return;
 		}
-
-        $seo_title = 'SEOPress';
-        if (function_exists('seopress_get_toggle_white_label_option') && '1' == seopress_get_toggle_white_label_option()) {
-            $seo_title = seopress_white_label_plugin_list_title_option() ? seopress_white_label_plugin_list_title_option() : 'SEOPress';
-        }
 
 		$default_steps = [
 			'welcome' => [
@@ -251,7 +258,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                 'parent' => 'advanced'
 			],
 		];
-        if (function_exists('seopress_get_toggle_white_label_option') && '1' === seopress_get_toggle_white_label_option()) {
+        if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
             //do nothing
         } elseif (
                 (
@@ -276,7 +283,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
             if ( ! is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                 $default_steps['pro'] = [
-                    'name'    => sprintf(__('Extend %s', 'wp-seopress'), $seo_title),
+                    'name'    => sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
                     'view'    => [$this, 'seopress_setup_pro'],
                     'handler' => '',
                     'sub_steps' => $sub_steps,
@@ -286,7 +293,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
             if (! is_plugin_active('wp-seopress-insights/seopress-insights.php') && ! is_multisite()) {
                 $default_steps['insights'] = [
-                    'name'    => sprintf(__('Extend %s', 'wp-seopress'), $seo_title),
+                    'name'    => sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
                     'view'    => [$this, 'seopress_setup_insights'],
                     'handler' => '',
                     'sub_steps' => $sub_steps,
@@ -382,11 +389,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 */
 	public function setup_wizard_header() {
 		set_current_screen();
-
-        $seo_title = 'SEOPress';
-        if (function_exists('seopress_get_toggle_white_label_option') && '1' == seopress_get_toggle_white_label_option()) {
-            $seo_title = seopress_white_label_plugin_list_title_option() ? seopress_white_label_plugin_list_title_option() : 'SEOPress';
-        }
         ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -394,7 +396,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 <head>
 	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title><?php printf(esc_html__('%s &rsaquo; Setup Wizard', 'wp-seopress'),$seo_title); ?></title>
+	<title><?php printf(esc_html__('%s &rsaquo; Setup Wizard', 'wp-seopress'),$this->seo_title); ?></title>
     <script type="text/javascript">
         var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php', 'relative' ) ); ?>';
     </script>
@@ -551,21 +553,17 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 * Init "Step 1.1: Welcome".
 	 */
 	public function seopress_setup_welcome() {
-        $seo_title = 'SEOPress';
-        if (function_exists('seopress_get_toggle_white_label_option') && '1' == seopress_get_toggle_white_label_option()) {
-            $seo_title = seopress_white_label_plugin_list_title_option() ? seopress_white_label_plugin_list_title_option() : 'SEOPress';
-        }
 		?>
     <div class="seopress-setup-content">
-        <h1><?php printf(esc_html__('Welcome to %s!', 'wp-seopress'), $seo_title); ?><hr role="presentation"></h1>
+        <h1><?php printf(esc_html__('Welcome to %s!', 'wp-seopress'), $this->seo_title); ?><hr role="presentation"></h1>
 
         <?php $this->setup_wizard_sub_steps(); ?>
 
         <div class="seopress-tab active">
             <form method="post">
                 <?php wp_nonce_field('seopress-setup'); ?>
-                <h2><?php printf(esc_html__('Configure %s with the best settings for your site','wp-seopress'), $seo_title); ?></h2>
-                <p class="store-setup intro"><?php printf(esc_html__('The following wizard will help you configure %s and get you started quickly.', 'wp-seopress'), $seo_title); ?>
+                <h2><?php printf(esc_html__('Configure %s with the best settings for your site','wp-seopress'), $this->seo_title); ?></h2>
+                <p class="store-setup intro"><?php printf(esc_html__('The following wizard will help you configure %s and get you started quickly.', 'wp-seopress'), $this->seo_title); ?>
                 </p>
 
                 <p class="seopress-setup-actions step">
@@ -587,12 +585,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 * Init "Step 1.2: Import SEO settings".
 	 */
 	public function seopress_setup_import_settings() {
-		$seo_title = 'SEOPress';
-		if (function_exists('seopress_get_toggle_white_label_option') && '1' == seopress_get_toggle_white_label_option()) {
-			$seo_title = seopress_white_label_plugin_list_title_option() ? seopress_white_label_plugin_list_title_option() : 'SEOPress';
-		} ?>
+		?>
         <div class="seopress-setup-content">
-            <h1><?php printf(esc_html__('Migrate your SEO metadata to %s!', 'wp-seopress'), $seo_title); ?><hr role="presentation"></h1>
+            <h1><?php printf(esc_html__('Migrate your SEO metadata to %s!', 'wp-seopress'), $this->seo_title); ?><hr role="presentation"></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -600,54 +595,158 @@ class SEOPRESS_Admin_Setup_Wizard {
 	            <form method="post">
 		            <?php wp_nonce_field('seopress-setup'); ?>
 
-                    <p class="store-setup intro"><?php esc_html_e('The first step is to import your previous post and term metadata from other plugins to keep your SEO.', 'wp-seopress'); ?>
-                    </p>
+                    <p class="store-setup intro"><?php esc_html_e('The first step is to import your previous post and term metadata from other plugins to keep your SEO.', 'wp-seopress'); ?></p>
 
                     <?php
-                        $plugins = [
-                            'yoast'            => 'Yoast SEO',
-                            'aio'              => 'All In One SEO',
-                            'seo-framework'    => 'The SEO Framework',
-                            'rk'               => 'Rank Math',
-                            'squirrly'         => 'Squirrly SEO',
-                            'seo-ultimate'     => 'SEO Ultimate',
-                            'wp-meta-seo'      => 'WP Meta SEO',
-                            'premium-seo-pack' => 'Premium SEO Pack',
-                            'wpseo'            => 'wpSEO',
-                            'platinum-seo'     => 'Platinum SEO Pack',
-                            'smart-crawl'      => 'SmartCrawl',
-                            'seopressor'       => 'SEOPressor',
-                            'slim-seo'         => 'Slim SEO',
-                        ];
+                    $plugins = [
+                        'yoast'            => [
+                            'slug' => [
+                                'wordpress-seo/wp-seo.php',
+                                'wordpress-seo-premium/wp-seo-premium.php',
+                            ],
+                            'name' => 'Yoast SEO',
+                        ],
+                        'aio'              => [
+                            'slug' => [
+                                'all-in-one-seo-pack/all_in_one_seo_pack.php',
+                            ],
+                            'name' => 'All In One SEO',
+                        ],
+                        'seo-framework'    => [
+                            'slug' => [
+                                'autodescription/autodescription.php',
+                            ],
+                            'name' => 'The SEO Framework',
+                        ],
+                        'rk'               => [
+                            'slug' => [
+                                'seo-by-rank-math/rank-math.php',
+                            ],
+                            'name' => 'Rank Math',
+                        ],
+                        'squirrly'         => [
+                            'slug' => [
+                                'squirrly-seo/squirrly.php',
+                            ],
+                            'name' => 'Squirrly SEO',
+                        ],
+                        'seo-ultimate'     => [
+                            'slug' => [
+                                'seo-ultimate/seo-ultimate.php',
+                            ],
+                            'name' => 'SEO Ultimate',
+                        ],
+                        'wp-meta-seo'      => [
+                            'slug' => [
+                                'wp-meta-seo/wp-meta-seo.php',
+                            ],
+                            'name' => 'WP Meta SEO',
+                        ],
+                        'premium-seo-pack' => [
+                            'slug' => [
+                                'premium-seo-pack/plugin.php',
+                            ],
+                            'name' => 'Premium SEO Pack',
+                        ],
+                        'wpseo'            => [
+                            'slug' => [
+                                'wpseo/wpseo.php',
+                            ],
+                            'name' => 'wpSEO',
+                        ],
+                        'platinum-seo'     => [
+                            'slug' => [
+                                'platinum-seo-pack/platinum-seo-pack.php',
+                            ],
+                            'name' => 'Platinum SEO Pack'
 
-                    echo '<p>
-                                            <select id="select-wizard-import" name="select-wizard-import">
-                                                <option value="none">' . __('Select an option', 'wp-seopress') . '</option>';
+                        ],
+                        'smart-crawl'      => [
+                            'slug' => [
+                                'smartcrawl-seo/wpmu-dev-seo.php',
+                            ],
+                            'name' => 'SmartCrawl',
+                        ],
+                        'seopressor'       => [
+                            'slug' => [
+                                'seo-pressor/seo-pressor.php',
+                            ],
+                            'name' => 'SEOPressor',
+                        ],
+                        'slim-seo'         => [
+                            'slug' => [
+                                'slim-seo/slim-seo.php',
+                            ],
+                            'name' => 'Slim SEO',
+                        ],
+                    ];
 
-                    foreach ($plugins as $plugin => $name) {
-                        echo '<option value="' . $plugin . '-migration-tool">' . $name . '</option>';
+                    $active_seo_plugins = [];
+
+                    foreach ($plugins as $plugin => $detail) {
+                        foreach($detail['slug'] as $key => $slug) {
+                            if (is_plugin_active($slug)) {
+                                $active_seo_plugins['name'][] = $detail['name'];
+                                $active_seo_plugins['slug'][] = $detail['slug'];
+                            }
+                        }
                     }
-                    echo '</select>
-                                        </p>
 
-                                    <p class="description">' . __('You don\'t have to enable the selected SEO plugin to run the import.', 'wp-seopress') . '</p>';
-
-                    foreach ($plugins as $plugin => $name) {
-                        echo seopress_migration_tool($plugin, $name);
+                    if (!empty($active_seo_plugins)) { ?>
+                        <div class="seopress-notice is-error">
+                            <p><?php _e('One ore more <strong>SEO plugins</strong> are enabled on your site, please deactivate them to avoid any conflicts:', 'wp-seopress'); ?></p>
+                            <ul>
+                                <?php
+                                foreach($active_seo_plugins['name'] as $key => $value) {
+                                    ?>
+                                        <li><span class="dashicons dashicons-minus"></span><?php echo $value; ?></li>
+                                    <?php
+                                } ?>
+                            </ul>
+                        </div>
+                        <?php
                     } ?>
 
+                    <p>
+                        <select id="select-wizard-import" name="select-wizard-import">
+                            <option value="none"><?php _e('Select an option', 'wp-seopress'); ?></option>
 
-                <p class="store-setup"><?php esc_html_e('No data to migrate? Click "Next step" button!', 'wp-seopress'); ?></p>
+                        <?php
+                            foreach ($plugins as $plugin => $detail) {
+                                ?>
+                                    <option
+                                    <?php
+                                        if (!empty($active_seo_plugins)) {
+                                            if (in_array($detail['slug'], $active_seo_plugins['slug'])) {
+                                                echo 'selected';
+                                            }
+                                        }
+                                    ?>
+                                    value="<?php echo $plugin; ?>-migration-tool"><?php echo $detail['name']; ?></option>
+                                <?php
+                            } ?>
+                        </select>
+                    </p>
 
-                <p class="seopress-setup-actions step">
-                    <button type="submit" class="btnPrimary btn btnNext"
-                        value="<?php esc_attr_e('Next step', 'wp-seopress'); ?>"
-                        name="save_step">
-                        <?php esc_html_e('Next step', 'wp-seopress'); ?>
-                    </button>
+                    <p class="description"><?php _e('You don\'t have to enable the selected SEO plugin to run the import.', 'wp-seopress'); ?></p>
 
-                    <?php wp_nonce_field('seopress-setup'); ?>
-                </p>
+                    <?php
+                        foreach ($plugins as $plugin => $detail) {
+                            echo seopress_migration_tool($plugin, $detail['name']);
+                        }
+                    ?>
+
+                    <p class="store-setup"><?php esc_html_e('No data to migrate? Click "Next step" button!', 'wp-seopress'); ?></p>
+
+                    <p class="seopress-setup-actions step">
+                        <button type="submit" class="btnPrimary btn btnNext"
+                            value="<?php esc_attr_e('Next step', 'wp-seopress'); ?>"
+                            name="save_step">
+                            <?php esc_html_e('Next step', 'wp-seopress'); ?>
+                        </button>
+
+                        <?php wp_nonce_field('seopress-setup'); ?>
+                    </p>
                 </form>
             </div>
         </div>
@@ -766,7 +865,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <input id="knowledge_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
                     </p>
 
-                    <?php if (function_exists('seopress_get_toggle_white_label_option') && '1' !== seopress_get_toggle_white_label_option()) { ?>
+                    <?php if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) { ?>
                         <p>
                             <label for="knowledge_email"><?php esc_html_e('Your email', 'wp-seopress'); ?></label>
                             <input type="text" id="knowledge_email" class="location-input" name="knowledge_email"
@@ -825,7 +924,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		update_option('seopress_social_option_name', $seopress_social_option, false);
 
         //Send email to SG if we have user consent
-        if (function_exists('seopress_get_toggle_white_label_option') && '1' !== seopress_get_toggle_white_label_option()) {
+        if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
             if (isset($seopress_social_option['seopress_social_knowledge_email']) && $seopress_social_option['seopress_social_knowledge_nl'] === '1') {
                 $endpoint_url = 'https://www.seopress.org/wizard-nl/';
                 $body = ['email' => $seopress_social_option['seopress_social_knowledge_email'], 'lang' => seopress_get_locale()];
@@ -855,7 +954,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$knowledge_pin   = isset($seopress_social_option['seopress_social_accounts_pinterest']) ? $seopress_social_option['seopress_social_accounts_pinterest'] : null;
 		$knowledge_insta = isset($seopress_social_option['seopress_social_accounts_instagram']) ? $seopress_social_option['seopress_social_accounts_instagram'] : null;
 		$knowledge_yt    = isset($seopress_social_option['seopress_social_accounts_youtube']) ? $seopress_social_option['seopress_social_accounts_youtube'] : null;
-		$knowledge_li    = isset($seopress_social_option['seopress_social_accounts_linkedin']) ? $seopress_social_option['seopress_social_accounts_linkedin'] : null; ?>
+		$knowledge_li    = isset($seopress_social_option['seopress_social_accounts_linkedin']) ? $seopress_social_option['seopress_social_accounts_linkedin'] : null;
+		$knowledge_extra = isset($seopress_social_option['seopress_social_accounts_extra']) ? $seopress_social_option['seopress_social_accounts_extra'] : null;
+        ?>
 
         <div class="seopress-setup-content">
             <h1><?php esc_html_e('Your site', 'wp-seopress'); ?><hr role="presentation"></h1>
@@ -912,6 +1013,13 @@ class SEOPRESS_Admin_Setup_Wizard {
                             value="<?php echo $knowledge_li; ?>" />
                     </p>
 
+                    <p>
+                        <label for="knowledge_extra"><?php esc_html_e('Additional accounts', 'wp-seopress'); ?></label>
+                        <textarea id="knowledge_extra" class="location-input" name="knowledge_extra" rows="8"
+                        placeholder="<?php esc_html_e('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress'); ?>"
+                        aria-label="<?php _e('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress'); ?>"><?php esc_html_e($knowledge_extra); ?></textarea>
+                    </p>
+
                     <p class="seopress-setup-actions step">
                         <button type="submit" class="btnPrimary btn btnNext"
                             value="<?php esc_attr_e('Save & Continue', 'wp-seopress'); ?>"
@@ -942,6 +1050,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_social_option['seopress_social_accounts_instagram']  = isset($_POST['knowledge_insta']) ? sanitize_text_field(wp_unslash($_POST['knowledge_insta'])) : '';
 		$seopress_social_option['seopress_social_accounts_youtube']    = isset($_POST['knowledge_yt']) ? sanitize_text_field(wp_unslash($_POST['knowledge_yt'])) : '';
 		$seopress_social_option['seopress_social_accounts_linkedin']   = isset($_POST['knowledge_li']) ? sanitize_text_field(wp_unslash($_POST['knowledge_li'])) : '';
+		$seopress_social_option['seopress_social_accounts_extra']   = isset($_POST['knowledge_extra']) ? sanitize_textarea_field(wp_unslash($_POST['knowledge_extra'])) : '';
 
 		//Save options
 		update_option('seopress_social_option_name', $seopress_social_option, false);
@@ -1300,7 +1409,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                             </label>
                         </li>
                         <li class="description">
-                            <?php _e('By default, SEOPress redirects your Attachment pages to the parent post. Optimize this by redirecting the user directly to the URL of the media file.', 'wp-seopress'); ?>
+                            <?php printf(__('By default, %s redirects your Attachment pages to the parent post. Optimize this by redirecting the user directly to the URL of the media file.', 'wp-seopress'), $this->seo_title); ?>
                         </li>
 
                         <!-- Remove /category/ in URLs -->
@@ -1418,7 +1527,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <p><?php _e('Edit your SEO metadata directly from your page or theme builder.', 'wp-seopress'); ?></p>
                     <ul>
                         <!-- Universal SEO metabox overview -->
-                        <?php if ((function_exists('seopress_get_toggle_white_label_option') && '1' !== seopress_get_toggle_white_label_option())) { ?>
+                        <?php if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) { ?>
                             <li class="description">
                                 <?php echo wp_oembed_get('https://www.youtube.com/watch?v=sf0ocG7vQMM'); ?>
                             </li>
@@ -1496,6 +1605,9 @@ class SEOPRESS_Admin_Setup_Wizard {
                 <h2><?php _e('Premium SEO features to increase your rankings', 'wp-seopress'); ?></h2>
 
                 <p class="seopress-setup-actions step">
+                    <span class="dashicons dashicons-minus"></span><?php _e('Generate automatically <strong>SEO metadata using AI</strong>.', 'wp-seopress'); ?>
+                </p>
+                <p class="seopress-setup-actions step">
                     <span class="dashicons dashicons-minus"></span><?php _e('Improve your business\'s presence in <strong>local search results</strong>.', 'wp-seopress'); ?>
                 </p>
                 <p class="seopress-setup-actions step">
@@ -1511,7 +1623,10 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <span class="dashicons dashicons-minus"></span><?php _e('Configure your <strong>robots.txt and .htaccess files</strong>.', 'wp-seopress'); ?>
                 </p>
                 <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Observe the evolution of your site via <strong>Google Analytics stats</strong> directly from your WordPress Dashboard.', 'wp-seopress'); ?>
+                    <span class="dashicons dashicons-minus"></span><?php _e('Manage your <strong>redirections</strong>.', 'wp-seopress'); ?>
+                </p>
+                <p class="seopress-setup-actions step">
+                    <span class="dashicons dashicons-minus"></span><?php _e('Observe the evolution of your site via <strong>Google Analytics stats</strong> (or Matomo) directly from your WordPress Dashboard.', 'wp-seopress'); ?>
                 </p>
 
                 <p class="seopress-setup-actions step">
@@ -1553,13 +1668,16 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <span class="dashicons dashicons-minus"></span><?php esc_html_e('Track your keyword positions from Google Search results daily.', 'wp-seopress'); ?>
                 </p>
                 <p class="seopress-setup-actions step">
+                    <span class="dashicons dashicons-minus"></span><?php esc_html_e('Track your competitors.', 'wp-seopress'); ?>
+                </p>
+                <p class="seopress-setup-actions step">
                     <span class="dashicons dashicons-minus"></span><?php esc_html_e('Monitor and analyse your top 1,000 Backlinks weekly.', 'wp-seopress'); ?>
                 </p>
                 <p class="seopress-setup-actions step">
                     <span class="dashicons dashicons-minus"></span><?php esc_html_e('Export your data to CSV, PDF, Excel.', 'wp-seopress'); ?>
                 </p>
                 <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php esc_html_e('Receive your rankings in your inbox.', 'wp-seopress'); ?>
+                    <span class="dashicons dashicons-minus"></span><?php esc_html_e('Receive your rankings / backlinks in your inbox / Slack.', 'wp-seopress'); ?>
                 </p>
 
                 <?php echo wp_oembed_get('https://www.youtube.com/watch?v=n-a2U4_anWA'); ?>
@@ -1619,8 +1737,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                             </p>
                         </div>
                     </li>
-
-                    <?php if (!function_exists('seopress_get_toggle_white_label_option') || '1' !== seopress_get_toggle_white_label_option()) {
+                    <?php if (!method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') || '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
                         $current_user = wp_get_current_user();
                         $user_email = $current_user->user_email ? esc_html( $current_user->user_email ) : '';
                         ?>
@@ -1662,7 +1779,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                                     href="<?php echo esc_url(admin_url('admin.php?page=seopress-option')); ?>">
                                     <?php esc_html_e('Review Settings', 'wp-seopress'); ?>
                                 </a>
-                                <?php if (!function_exists('seopress_get_toggle_white_label_option') || '1' !== seopress_get_toggle_white_label_option()) { ?>
+                                <?php if (!method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') || '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) { ?>
                                     <a class="btn btnSecondary"
                                         href="<?php echo $docs['support']; ?>"
                                         target="_blank">

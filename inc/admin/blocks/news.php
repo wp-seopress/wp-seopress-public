@@ -8,23 +8,9 @@
     if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
         //do nothing
     } else {
-
-            //News Center
-            function seopress_advanced_appearance_news_option() {
-                $seopress_advanced_appearance_news_option = get_option('seopress_advanced_option_name');
-                if ( ! empty($seopress_advanced_appearance_news_option)) {
-                    foreach ($seopress_advanced_appearance_news_option as $key => $seopress_advanced_appearance_news_value) {
-                        $options[$key] = $seopress_advanced_appearance_news_value;
-                    }
-                    if (isset($seopress_advanced_appearance_news_option['seopress_advanced_appearance_news'])) {
-                        return $seopress_advanced_appearance_news_option['seopress_advanced_appearance_news'];
-                    }
-                }
-            }
-
             $docs = seopress_get_docs_links();
 
-            $class = '1' != seopress_advanced_appearance_news_option() ? 'is-active' : '';
+            $class = '1' !== seopress_get_service('AdvancedOption')->getAppearanceNews() ? 'is-active' : '';
         ?>
 
         <div id="seopress-news-panel"

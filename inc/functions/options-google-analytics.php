@@ -1,18 +1,12 @@
 <?php
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-//MATOMO
-require_once dirname(__FILE__) . '/options-matomo.php';
-
-//Clarity
-require_once dirname(__FILE__) . '/options-clarity.php';
-
 //Google Analytics
 //=================================================================================================
 
 function seopress_cookies_user_consent_html() {
-    if ('' != seopress_google_analytics_opt_out_msg_option()) {
-        $msg = seopress_google_analytics_opt_out_msg_option();
+    if (!empty(seopress_get_service('GoogleAnalyticsOption')->getOptOutMsg())) {
+        $msg = seopress_get_service('GoogleAnalyticsOption')->getOptOutMsg();
     } elseif (get_option('wp_page_for_privacy_policy')) {
         $msg = __('By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc.&nbsp;<a href="[seopress_privacy_page]">Read more</a>', 'wp-seopress');
     } else {
@@ -266,7 +260,7 @@ function seopress_cookies_user_consent_render() {
     add_action($hook, 'seopress_cookies_user_consent_styles');
 }
 
-if ('1' == seopress_google_analytics_disable_option()) {
+if ('1' === seopress_get_service('GoogleAnalyticsOption')->getDisable()) {
     if (is_user_logged_in()) {
         global $wp_roles;
 
@@ -274,8 +268,8 @@ if ('1' == seopress_google_analytics_disable_option()) {
         if (isset(wp_get_current_user()->roles[0])) {
             $seopress_user_role = wp_get_current_user()->roles[0];
             //If current user role matchs values from SEOPress GA settings then apply
-            if (function_exists('seopress_google_analytics_roles_option') && '' != seopress_google_analytics_roles_option()) {
-                if (array_key_exists($seopress_user_role, seopress_google_analytics_roles_option())) {
+            if (!empty(seopress_get_service('GoogleAnalyticsOption')->getRoles())) {
+                if (array_key_exists($seopress_user_role, seopress_get_service('GoogleAnalyticsOption')->getRoles())) {
                     //do nothing
                 } else {
                     seopress_cookies_user_consent_render();
@@ -291,131 +285,11 @@ if ('1' == seopress_google_analytics_disable_option()) {
     }
 }
 
-//Optimize
-function seopress_google_analytics_optimize_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getOptimize();
-}
-
-//Ads
-function seopress_google_analytics_ads_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getAds();
-}
-
-//Additional tracking code - head
-function seopress_google_analytics_other_tracking_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getOtherTracking();
-}
-
-//Additional tracking code - body
-function seopress_google_analytics_other_tracking_body_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getOtherTrackingBody();
-}
-
-//Additional tracking code - footer
-function seopress_google_analytics_other_tracking_footer_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getOtherTrackingFooter();
-}
-
-//Remarketing
-function seopress_google_analytics_remarketing_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getRemarketing();
-}
-
-//IP Anonymization
-function seopress_google_analytics_ip_anonymization_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getIpAnonymization();
-}
-
-//Link attribution
-function seopress_google_analytics_link_attribution_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getLinkAttribution();
-}
-
-//Cross Domain Enable
-function seopress_google_analytics_cross_enable_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getCrossEnable();
-}
-
-//Cross Domain
-function seopress_google_analytics_cross_domain_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getCrossDomain();
-}
-
-//Events external links tracking Enable
-function seopress_google_analytics_link_tracking_enable_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getLinkTrackingEnable();
-}
-
-//Events downloads tracking Enable
-function seopress_google_analytics_download_tracking_enable_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getDownloadTrackingEnable();
-}
-
-//Events tracking file types
-function seopress_google_analytics_download_tracking_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getDownloadTracking();
-}
-
-//Events affiliate links tracking Enable
-function seopress_google_analytics_affiliate_tracking_enable_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getAffiliateTrackingEnable();
-}
-
-//Events tracking affiliate match
-function seopress_google_analytics_affiliate_tracking_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getAffiliateTracking();
-}
-
-//Events Phone tracking Enable
-function seopress_google_analytics_phone_tracking_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getPhoneTracking();
-}
-
-//Custom Dimension Author
-function seopress_google_analytics_cd_author_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getCdAuthor();
-}
-
-//Custom Dimension Category
-function seopress_google_analytics_cd_category_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getCdCategory();
-}
-
-//Custom Dimension Tag
-function seopress_google_analytics_cd_tag_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getCdTag();
-}
-
-//Custom Dimension Post Type
-function seopress_google_analytics_cd_post_type_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getCdPostType();
-}
-
-//Custom Dimension Logged In
-function seopress_google_analytics_cd_logged_in_user_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getCdLoggedInUser();
-}
-
-// Get option for "Measure purchases"
-function seopress_google_analytics_purchases_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getPurchases();
-}
-
-// Get option for "Add to cart event"
-function seopress_google_analytics_add_to_cart_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getAddToCart();
-}
-
-// Get option for "Remove from cart event"
-function seopress_google_analytics_remove_from_cart_option() {
-    return seopress_get_service('GoogleAnalyticsOption')->getRemoveToCart();
-}
-
 //Build Custom GA
 function seopress_google_analytics_js($echo) {
-    if (('' != seopress_google_analytics_ua_option() || '' != seopress_google_analytics_ga4_option()) && '1' == seopress_google_analytics_enable_option()) {
+    if (('' !== seopress_get_service('GoogleAnalyticsOption')->getUA() || '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) && '1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption()) {
         //Init
-        $tracking_id = seopress_google_analytics_ua_option() ? seopress_google_analytics_ua_option() : seopress_google_analytics_ga4_option();
+        $tracking_id = seopress_get_service('GoogleAnalyticsOption')->getUA() ? seopress_get_service('GoogleAnalyticsOption')->getUA() : seopress_get_service('GoogleAnalyticsOption')->getGA4();
         $seopress_google_analytics_config = [];
         $seopress_google_analytics_event  = [];
 
@@ -700,16 +574,16 @@ for (let i = 0; i < links.length; i++) {
         }
 
         //UA
-        if ('' != seopress_google_analytics_ua_option()) {
-            $seopress_gtag_ua = "gtag('config', '" . seopress_google_analytics_ua_option() . "' " . $features . ');';
+        if ('' !== seopress_get_service('GoogleAnalyticsOption')->getUA()) {
+            $seopress_gtag_ua = "gtag('config', '" . seopress_get_service('GoogleAnalyticsOption')->getUA() . "' " . $features . ');';
             $seopress_gtag_ua = apply_filters('seopress_gtag_ua', $seopress_gtag_ua);
             $seopress_google_analytics_html .= $seopress_gtag_ua;
             $seopress_google_analytics_html .= "\n";
         }
 
         //Measurement ID
-        if ('' != seopress_google_analytics_ga4_option()) {
-            $seopress_gtag_ga4 = "gtag('config', '" . seopress_google_analytics_ga4_option() . "' " . $features . ');';
+        if ('' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) {
+            $seopress_gtag_ga4 = "gtag('config', '" . seopress_get_service('GoogleAnalyticsOption')->getGA4() . "' " . $features . ');';
             $seopress_gtag_ga4 = apply_filters('seopress_gtag_ga4', $seopress_gtag_ga4);
             $seopress_google_analytics_html .= $seopress_gtag_ga4;
             $seopress_google_analytics_html .= "\n";
@@ -833,83 +707,4 @@ function seopress_custom_tracking_head_hook() {
     do_action('seopress_custom_head_tracking_html', $echo);
 }
 
-if ('1' == seopress_google_analytics_half_disable_option() || (((isset($_COOKIE['seopress-user-consent-accept']) && '1' == $_COOKIE['seopress-user-consent-accept']) && '1' == seopress_google_analytics_disable_option()) || ('1' != seopress_google_analytics_disable_option()))) { //User consent cookie OK
 
-    $addToCartOption = seopress_get_service('GoogleAnalyticsOption')->getAddToCart();
-    $removeFromCartOption = seopress_get_service('GoogleAnalyticsOption')->getRemoveFromCart();
-
-    if (is_user_logged_in()) {
-        global $wp_roles;
-
-        //Get current user role
-        if (isset(wp_get_current_user()->roles[0])) {
-            $seopress_user_role = wp_get_current_user()->roles[0];
-            //If current user role matchs values from SEOPress GA settings then apply
-            if (function_exists('seopress_google_analytics_roles_option') && '' != seopress_google_analytics_roles_option()) {
-                if (array_key_exists($seopress_user_role, seopress_google_analytics_roles_option())) {
-                    //do nothing
-                } else {
-                    if ('1' == seopress_google_analytics_enable_option() && ('' != seopress_google_analytics_ua_option() || '' != seopress_google_analytics_ga4_option())) {
-                        add_action('wp_head', 'seopress_google_analytics_js_arguments', 929, 1);
-                        add_action('wp_head', 'seopress_custom_tracking_hook', 900, 1);
-                    }
-                    if ('1' == seopress_google_analytics_matomo_enable_option() && '' != seopress_google_analytics_matomo_id_option() && '' != seopress_google_analytics_matomo_site_id_option()) {
-                        add_action('wp_head', 'seopress_matomo_js_arguments', 960, 1);
-                    }
-                    if ('1' == seopress_google_analytics_clarity_enable_option() && '' != seopress_google_analytics_clarity_project_id_option()) {
-                        add_action('wp_head', 'seopress_clarity_js_arguments', 970, 1);
-                    }
-                    add_action('wp_head', 'seopress_custom_tracking_head_hook', 980, 1);
-                    add_action('wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1);
-                    add_action('wp_footer', 'seopress_custom_tracking_footer_hook', 1030, 1);
-
-                    //ecommerce
-                    $purchasesOptions = seopress_get_service('GoogleAnalyticsOption')->getPurchases();
-                    if ('1' == $purchasesOptions || '1' == $addToCartOption || '1' == $removeFromCartOption) {
-                        add_action('wp_enqueue_scripts', 'seopress_google_analytics_ecommerce_js', 20, 1);
-                    }
-                }
-            } else {
-                if ('1' == seopress_google_analytics_enable_option() && ('' != seopress_google_analytics_ua_option() || '' != seopress_google_analytics_ga4_option())) {
-                    add_action('wp_head', 'seopress_google_analytics_js_arguments', 929, 1);
-                    add_action('wp_head', 'seopress_custom_tracking_hook', 900, 1);
-                }
-                if ('1' == seopress_google_analytics_matomo_enable_option() && '' != seopress_google_analytics_matomo_id_option() && '' != seopress_google_analytics_matomo_site_id_option()) {
-                    add_action('wp_head', 'seopress_matomo_js_arguments', 960, 1);
-                }
-                if ('1' == seopress_google_analytics_clarity_enable_option() && '' != seopress_google_analytics_clarity_project_id_option()) {
-                    add_action('wp_head', 'seopress_clarity_js_arguments', 970, 1);
-                }
-                add_action('wp_head', 'seopress_custom_tracking_head_hook', 980, 1); //Oxygen: if prioriry >= 990, nothing will be outputed
-                add_action('wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1);
-                add_action('wp_footer', 'seopress_custom_tracking_footer_hook', 1030, 1);
-
-                //ecommerce
-                $purchasesOptions = seopress_get_service('GoogleAnalyticsOption')->getPurchases();
-                if ('1' == $purchasesOptions || '1' == $addToCartOption || '1' == $removeFromCartOption) {
-                    add_action('wp_enqueue_scripts', 'seopress_google_analytics_ecommerce_js', 20, 1);
-                }
-            }
-        }
-    } else {
-        if ('1' == seopress_google_analytics_enable_option() && ('' != seopress_google_analytics_ua_option() || '' != seopress_google_analytics_ga4_option())) {
-            add_action('wp_head', 'seopress_google_analytics_js_arguments', 929, 1);
-            add_action('wp_head', 'seopress_custom_tracking_hook', 900, 1);
-        }
-        if ('1' == seopress_google_analytics_matomo_enable_option() && '' != seopress_google_analytics_matomo_id_option() && '' != seopress_google_analytics_matomo_site_id_option()) {
-            add_action('wp_head', 'seopress_matomo_js_arguments', 960, 1);
-        }
-        if ('1' == seopress_google_analytics_clarity_enable_option() && '' != seopress_google_analytics_clarity_project_id_option()) {
-            add_action('wp_head', 'seopress_clarity_js_arguments', 970, 1);
-        }
-        add_action('wp_head', 'seopress_custom_tracking_head_hook', 980, 1);
-        add_action('wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1);
-        add_action('wp_footer', 'seopress_custom_tracking_footer_hook', 1030, 1);
-
-        //ecommerce
-        $purchasesOptions = seopress_get_service('GoogleAnalyticsOption')->getPurchases();
-        if ('1' == $purchasesOptions || '1' == $addToCartOption || '1' == $removeFromCartOption) {
-            add_action('wp_enqueue_scripts', 'seopress_google_analytics_ecommerce_js', 20, 1);
-        }
-    }
-}

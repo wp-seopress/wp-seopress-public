@@ -13,8 +13,12 @@ class Single {
      * @return void
      */
     protected function hooksWPMLCompatibility() {
+        if (!defined('ICL_SITEPRESS_VERSION')) {
+            return;
+        }
+
         //If multidomain setup
-        if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+        if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
             //Home URL
             add_filter('seopress_sitemaps_home_url', function($home_url) {
                 $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
@@ -30,7 +34,7 @@ class Single {
             remove_filter('category_link', [$sitepress, 'category_link_adjust_id'], 1);
 
             //If multidomain setup
-            if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+            if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
                 $args['suppress_filters'] = false;
             }
 

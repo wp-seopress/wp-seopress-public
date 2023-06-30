@@ -106,10 +106,10 @@ class seopress_options
         add_submenu_page('seopress-option', __('Image SEO & Advanced settings', 'wp-seopress'), __('Advanced', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::ADVANCED), 'seopress-advanced', [$this, 'seopress_advanced_page']);
         add_submenu_page('seopress-option', __('Tools', 'wp-seopress'), __('Tools', 'wp-seopress'), seopress_capability('manage_options', PagesAdmin::TOOLS), 'seopress-import-export', [$this, 'seopress_import_export_page']);
 
-        if (function_exists('seopress_get_toggle_white_label_option')) {
-            $white_label_toggle = seopress_get_toggle_white_label_option();
+        if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel')) {
+            $white_label_toggle = seopress_get_service('ToggleOption')->getToggleWhiteLabel();
             if ('1' === $white_label_toggle) {
-                if (function_exists('seopress_white_label_help_links_option') && '1' === seopress_white_label_help_links_option()) {
+                if (method_exists('seopress_pro_get_service', 'getWhiteLabelHelpLinks') && '1' === seopress_pro_get_service('OptionPro')->getWhiteLabelHelpLinks()) {
                     return;
                 }
             }

@@ -3,170 +3,11 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//Restrict SEO metaboxes to user roles
-///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_advanced_security_metaboxe_role_hook_option()
-{
-    $seopress_advanced_security_metaboxe_role_hook_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_security_metaboxe_role_hook_option)) {
-        foreach ($seopress_advanced_security_metaboxe_role_hook_option as $key => $seopress_advanced_security_metaboxe_role_hook_value) {
-            $options[$key] = $seopress_advanced_security_metaboxe_role_hook_value;
-        }
-        if (isset($seopress_advanced_security_metaboxe_role_hook_option['seopress_advanced_security_metaboxe_role'])) {
-            return $seopress_advanced_security_metaboxe_role_hook_option['seopress_advanced_security_metaboxe_role'];
-        }
-    }
-}
-
-function seopress_advanced_security_metaboxe_ca_role_hook_option()
-{
-    $seopress_advanced_security_metaboxe_ca_role_hook_option = get_option('seopress_advanced_option_name');
-    if (! empty($seopress_advanced_security_metaboxe_ca_role_hook_option)) {
-        foreach ($seopress_advanced_security_metaboxe_ca_role_hook_option as $key => $seopress_advanced_security_metaboxe_ca_role_hook_value) {
-            $options[$key] = $seopress_advanced_security_metaboxe_ca_role_hook_value;
-        }
-        if (isset($seopress_advanced_security_metaboxe_ca_role_hook_option['seopress_advanced_security_metaboxe_ca_role'])) {
-            return $seopress_advanced_security_metaboxe_ca_role_hook_option['seopress_advanced_security_metaboxe_ca_role'];
-        }
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Check global settings
-///////////////////////////////////////////////////////////////////////////////////////////////////
-if (! function_exists('seopress_titles_single_cpt_noindex_option')) {
-    function seopress_titles_single_cpt_noindex_option()
-    {
-        global $post;
-        $seopress_get_current_cpt = get_post_type($post);
-
-        $seopress_titles_single_cpt_noindex_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_single_cpt_noindex_option)) {
-            foreach ($seopress_titles_single_cpt_noindex_option as $key => $seopress_titles_single_cpt_noindex_value) {
-                $options[$key] = $seopress_titles_single_cpt_noindex_value;
-            }
-            if (isset($seopress_titles_single_cpt_noindex_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['noindex'])) {
-                return $seopress_titles_single_cpt_noindex_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['noindex'];
-            }
-        }
-    }
-}
-
-if (! function_exists('seopress_titles_noindex_option')) {
-    function seopress_titles_noindex_option()
-    {
-        $seopress_titles_noindex_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_noindex_option)) {
-            foreach ($seopress_titles_noindex_option as $key => $seopress_titles_noindex_value) {
-                $options[$key] = $seopress_titles_noindex_value;
-            }
-            if (isset($seopress_titles_noindex_option['seopress_titles_noindex'])) {
-                return $seopress_titles_noindex_option['seopress_titles_noindex'];
-            }
-        }
-    }
-}
-
-if (! function_exists('seopress_titles_single_cpt_nofollow_option')) {
-    function seopress_titles_single_cpt_nofollow_option()
-    {
-        global $post;
-        $seopress_get_current_cpt = get_post_type($post);
-
-        $seopress_titles_single_cpt_nofollow_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_single_cpt_nofollow_option)) {
-            foreach ($seopress_titles_single_cpt_nofollow_option as $key => $seopress_titles_single_cpt_nofollow_value) {
-                $options[$key] = $seopress_titles_single_cpt_nofollow_value;
-            }
-            if (isset($seopress_titles_single_cpt_nofollow_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['nofollow'])) {
-                return $seopress_titles_single_cpt_nofollow_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['nofollow'];
-            }
-        }
-    }
-}
-
-if (! function_exists('seopress_titles_nofollow_option')) {
-    function seopress_titles_nofollow_option()
-    {
-        $seopress_titles_nofollow_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_nofollow_option)) {
-            foreach ($seopress_titles_nofollow_option as $key => $seopress_titles_nofollow_value) {
-                $options[$key] = $seopress_titles_nofollow_value;
-            }
-            if (isset($seopress_titles_nofollow_option['seopress_titles_nofollow'])) {
-                return $seopress_titles_nofollow_option['seopress_titles_nofollow'];
-            }
-        }
-    }
-}
-
-if (! function_exists('seopress_titles_noarchive_option')) {
-    function seopress_titles_noarchive_option()
-    {
-        $seopress_titles_noarchive_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_noarchive_option)) {
-            foreach ($seopress_titles_noarchive_option as $key => $seopress_titles_noarchive_value) {
-                $options[$key] = $seopress_titles_noarchive_value;
-            }
-            if (isset($seopress_titles_noarchive_option['seopress_titles_noarchive'])) {
-                return $seopress_titles_noarchive_option['seopress_titles_noarchive'];
-            }
-        }
-    }
-}
-
-if (! function_exists('seopress_titles_nosnippet_option')) {
-    function seopress_titles_nosnippet_option()
-    {
-        $seopress_titles_nosnippet_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_nosnippet_option)) {
-            foreach ($seopress_titles_nosnippet_option as $key => $seopress_titles_nosnippet_value) {
-                $options[$key] = $seopress_titles_nosnippet_value;
-            }
-            if (isset($seopress_titles_nosnippet_option['seopress_titles_nosnippet'])) {
-                return $seopress_titles_nosnippet_option['seopress_titles_nosnippet'];
-            }
-        }
-    }
-}
-
-if (! function_exists('seopress_titles_noimageindex_option')) {
-    function seopress_titles_noimageindex_option()
-    {
-        $seopress_titles_noimageindex_option = get_option('seopress_titles_option_name');
-        if (! empty($seopress_titles_noimageindex_option)) {
-            foreach ($seopress_titles_noimageindex_option as $key => $seopress_titles_noimageindex_value) {
-                $options[$key] = $seopress_titles_noimageindex_value;
-            }
-            if (isset($seopress_titles_noimageindex_option['seopress_titles_noimageindex'])) {
-                return $seopress_titles_noimageindex_option['seopress_titles_noimageindex'];
-            }
-        }
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 //Display metabox in Custom Post Type
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_titles_single_cpt_date_option()
-{
-    global $post;
-    $seopress_get_current_cpt = get_post_type($post);
-
-    $seopress_titles_single_cpt_date_option = get_option('seopress_titles_option_name');
-    if (! empty($seopress_titles_single_cpt_date_option)) {
-        foreach ($seopress_titles_single_cpt_date_option as $key => $seopress_titles_single_cpt_date_value) {
-            $options[$key] = $seopress_titles_single_cpt_date_value;
-        }
-        if (isset($seopress_titles_single_cpt_date_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['date'])) {
-            return $seopress_titles_single_cpt_date_option['seopress_titles_single_titles'][$seopress_get_current_cpt]['date'];
-        }
-    }
-}
-
 function seopress_display_date_snippet()
 {
-    if (seopress_titles_single_cpt_date_option()) {
+    if (seopress_get_service('TitleOption')->getSingleCptDate() ==='1') {
         return '<div class="snippet-date">' . get_the_modified_date('M j, Y') . ' - </div>';
     }
 }
@@ -283,7 +124,7 @@ function seopress_display_seo_metaboxe()
         $seopress_titles_desc                   = get_post_meta($post->ID, '_seopress_titles_desc', true);
 
         $disabled['robots_index'] ='';
-        if (seopress_titles_single_cpt_noindex_option() || seopress_titles_noindex_option() || true === post_password_required($post->ID)) {
+        if (seopress_get_service('TitleOption')->getSingleCptNoIndex() || seopress_get_service('TitleOption')->getTitleNoIndex() || true === post_password_required($post->ID)) {
             $seopress_robots_index              = 'yes';
             $disabled['robots_index']           = 'disabled';
         } else {
@@ -291,7 +132,7 @@ function seopress_display_seo_metaboxe()
         }
 
         $disabled['robots_follow'] ='';
-        if (seopress_titles_single_cpt_nofollow_option() || seopress_titles_nofollow_option()) {
+        if (seopress_get_service('TitleOption')->getSingleCptNoFollow() || seopress_get_service('TitleOption')->getTitleNoFollow()) {
             $seopress_robots_follow             = 'yes';
             $disabled['robots_follow']          = 'disabled';
         } else {
@@ -299,7 +140,7 @@ function seopress_display_seo_metaboxe()
         }
 
         $disabled['archive'] ='';
-        if (seopress_titles_noarchive_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoArchive()) {
             $seopress_robots_archive            = 'yes';
             $disabled['archive']                = 'disabled';
         } else {
@@ -307,7 +148,7 @@ function seopress_display_seo_metaboxe()
         }
 
         $disabled['snippet'] ='';
-        if (seopress_titles_nosnippet_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoSnippet()) {
             $seopress_robots_snippet            = 'yes';
             $disabled['snippet']                = 'disabled';
         } else {
@@ -315,7 +156,7 @@ function seopress_display_seo_metaboxe()
         }
 
         $disabled['imageindex'] ='';
-        if (seopress_titles_noimageindex_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoImageIndex()) {
             $seopress_robots_imageindex         = 'yes';
             $disabled['imageindex']             = 'disabled';
         } else {
@@ -647,31 +488,31 @@ function seopress_display_ca_metaboxe()
         $seopress_titles_title                  = get_post_meta($post->ID, '_seopress_titles_title', true);
         $seopress_titles_desc                   = get_post_meta($post->ID, '_seopress_titles_desc', true);
 
-        if (seopress_titles_single_cpt_noindex_option() || seopress_titles_noindex_option() || true === post_password_required($post->ID)) {
+        if (seopress_get_service('TitleOption')->getSingleCptNoIndex() || seopress_get_service('TitleOption')->getTitleNoIndex() || true === post_password_required($post->ID)) {
             $seopress_robots_index              = 'yes';
         } else {
             $seopress_robots_index              = get_post_meta($post->ID, '_seopress_robots_index', true);
         }
 
-        if (seopress_titles_single_cpt_nofollow_option() || seopress_titles_nofollow_option()) {
+        if (seopress_get_service('TitleOption')->getSingleCptNoFollow() || seopress_get_service('TitleOption')->getTitleNoFollow()) {
             $seopress_robots_follow             = 'yes';
         } else {
             $seopress_robots_follow             = get_post_meta($post->ID, '_seopress_robots_follow', true);
         }
 
-        if (seopress_titles_noarchive_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoArchive()) {
             $seopress_robots_archive            = 'yes';
         } else {
             $seopress_robots_archive            = get_post_meta($post->ID, '_seopress_robots_archive', true);
         }
 
-        if (seopress_titles_nosnippet_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoSnippet()) {
             $seopress_robots_snippet            = 'yes';
         } else {
             $seopress_robots_snippet            = get_post_meta($post->ID, '_seopress_robots_snippet', true);
         }
 
-        if (seopress_titles_noimageindex_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoImageIndex()) {
             $seopress_robots_imageindex         = 'yes';
         } else {
             $seopress_robots_imageindex         = get_post_meta($post->ID, '_seopress_robots_imageindex', true);
@@ -734,8 +575,8 @@ if (is_user_logged_in()) {
             $seopress_user_role = current($user->roles);
 
             //If current user role matchs values from Security settings then apply -- SEO Metaboxe
-            if (function_exists('seopress_advanced_security_metaboxe_role_hook_option') && '' != seopress_advanced_security_metaboxe_role_hook_option()) {
-                if (array_key_exists($seopress_user_role, seopress_advanced_security_metaboxe_role_hook_option())) {
+            if (!empty(seopress_get_service('AdvancedOption')->getSecurityMetaboxRole())) {
+                if (array_key_exists($seopress_user_role, seopress_get_service('AdvancedOption')->getSecurityMetaboxRole())) {
                     //do nothing
                 } else {
                     echo seopress_display_seo_metaboxe();
@@ -745,8 +586,8 @@ if (is_user_logged_in()) {
             }
 
             //If current user role matchs values from Security settings then apply -- SEO Content Analysis
-            if (function_exists('seopress_advanced_security_metaboxe_ca_role_hook_option') && '' != seopress_advanced_security_metaboxe_ca_role_hook_option()) {
-                if (array_key_exists($seopress_user_role, seopress_advanced_security_metaboxe_ca_role_hook_option())) {
+            if (!empty(seopress_get_service('AdvancedOption')->getSecurityMetaboxRoleContentAnalysis())) {
+                if (array_key_exists($seopress_user_role, seopress_get_service('AdvancedOption')->getSecurityMetaboxRoleContentAnalysis())) {
                     //do nothing
                 } else {
                     echo seopress_display_ca_metaboxe();

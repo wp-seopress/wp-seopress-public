@@ -30,7 +30,7 @@ class TitleMeta implements ExecuteHooksFrontend {
      */
     protected function getHomeTitleTemplate($variablesArray, $variablesReplace) {
         if ( ! function_exists('seopress_get_service')) {
-            $titleOption = seopress_titles_home_site_title_option();
+            $titleOption = seopress_get_service('TitleOption')->getHomeSiteTitle();
             if (empty($titleOption)) {
                 return '';
             }
@@ -53,10 +53,6 @@ class TitleMeta implements ExecuteHooksFrontend {
     public function render() {
         $defaultHook = function_exists('seopress_get_service');
 
-        if ( ! function_exists('seopress_titles_sep_option')) {
-            require_once SEOPRESS_PLUGIN_DIR_PATH . '/inc/functions/options-titles-metas.php';
-        }
-
         if (apply_filters('seopress_old_pre_get_document_title', true)) {
             return;
         }
@@ -72,11 +68,11 @@ class TitleMeta implements ExecuteHooksFrontend {
         $page_id                                  = get_option('page_for_posts');
 
         if (is_front_page() && is_home() && isset($post) && '' == get_post_meta($post->ID, '_seopress_titles_title', true)) { //HOMEPAGE
-            if ( ! empty(seopress_titles_home_site_title_option())) {
+            if ( ! empty(seopress_get_service('TitleOption')->getHomeSiteTitle())) {
                 $titleTemplate = $this->getHomeTitleTemplate($seopress_titles_template_variables_array, $seopress_titles_template_replace_array);
             }
         } elseif (is_front_page() && isset($post) && '' == get_post_meta($post->ID, '_seopress_titles_title', true)) { //STATIC HOMEPAGE
-            if ( ! empty(seopress_titles_home_site_title_option())) {
+            if ( ! empty(seopress_get_service('TitleOption')->getHomeSiteTitle())) {
                 $titleTemplate = $this->getHomeTitleTemplate($seopress_titles_template_variables_array, $seopress_titles_template_replace_array);
             }
         } elseif (is_home() && '' != get_post_meta($page_id, '_seopress_titles_title', true)) { //BLOG PAGE
@@ -86,8 +82,8 @@ class TitleMeta implements ExecuteHooksFrontend {
             }
         } elseif (is_home() && ('posts' == get_option('show_on_front'))) { //YOUR LATEST POSTS
             if ( ! function_exists('seopress_get_service')) {
-                if ( ! empty(seopress_titles_home_site_title_option())) {
-                    $titleOption = esc_attr(seopress_titles_home_site_title_option());
+                if ( ! empty(seopress_get_service('TitleOption')->getHomeSiteTitle())) {
+                    $titleOption = esc_attr(seopress_get_service('TitleOption')->getHomeSiteTitle());
 
                     $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $titleOption);
                 }
@@ -96,8 +92,8 @@ class TitleMeta implements ExecuteHooksFrontend {
                 $titleTemplate = $this->tagsToStringService->replace($title, $context);
             }
         } elseif (function_exists('bp_is_group') && bp_is_group()) {
-            if ('' != seopress_titles_bp_groups_title_option()) {
-                $titleOption = esc_attr(seopress_titles_bp_groups_title_option());
+            if ('' !== seopress_get_service('TitleOption')->getTitleBpGroups()) {
+                $titleOption = esc_attr(seopress_get_service('TitleOption')->getTitleBpGroups());
 
                 $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $titleOption);
             }
@@ -178,7 +174,7 @@ class TitleMeta implements ExecuteHooksFrontend {
                     $titleTemplate = str_replace($seopress_titles_ucf_template_variables_array, $seopress_titles_ucf_template_replace_array, $titleTemplate);
                 }
             } else { //DEFAULT GLOBAL
-                $seopress_titles_single_titles_option = esc_attr(seopress_titles_single_titles_option());
+                $seopress_titles_single_titles_option = esc_attr(seopress_get_service('TitleOption')->getSingleCptTitle($post->ID));
 
                 preg_match_all('/%%_cf_(.*?)%%/', $seopress_titles_single_titles_option, $matches); //custom fields
 
@@ -251,8 +247,8 @@ class TitleMeta implements ExecuteHooksFrontend {
             $seopress_titles_archive_titles_option = esc_attr(seopress_get_service('TitleOption')->getArchivesCPTTitle());
 
             $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archive_titles_option);
-        } elseif ((is_tax() || is_category() || is_tag()) && seopress_titles_tax_titles_option()) { //IS TAX
-            $seopress_titles_tax_titles_option = esc_attr(seopress_titles_tax_titles_option());
+        } elseif ((is_tax() || is_category() || is_tag()) && seopress_get_service('TitleOption')->getTaxTitle()) { //IS TAX
+            $seopress_titles_tax_titles_option = esc_attr(seopress_get_service('TitleOption')->getTaxTitle());
 
             if (get_term_meta(get_queried_object()->{'term_id'}, '_seopress_titles_title', true)) {
                 $titleTemplate = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, '_seopress_titles_title', true));
@@ -260,8 +256,8 @@ class TitleMeta implements ExecuteHooksFrontend {
             } else {
                 $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_tax_titles_option);
             }
-        } elseif (is_author() && seopress_titles_archives_author_title_option()) { //IS AUTHOR
-            $seopress_titles_archives_author_title_option = esc_attr(seopress_titles_archives_author_title_option());
+        } elseif (is_author() && seopress_get_service('TitleOption')->getArchivesAuthorTitle()) { //IS AUTHOR
+            $seopress_titles_archives_author_title_option = esc_attr(seopress_get_service('TitleOption')->getArchivesAuthorTitle());
 
             preg_match_all('/%%_ucf_(.*?)%%/', $seopress_titles_archives_author_title_option, $matches); //custom fields
 
@@ -279,7 +275,7 @@ class TitleMeta implements ExecuteHooksFrontend {
             }
 
             //Default
-            $titleTemplate = esc_attr(seopress_titles_archives_author_title_option());
+            $titleTemplate = esc_attr(seopress_get_service('TitleOption')->getArchivesAuthorTitle());
 
             //Custom fields
             if ( ! empty($matches) && ! empty($seopress_titles_cf_template_variables_array) && ! empty($seopress_titles_cf_template_replace_array)) {
@@ -287,16 +283,16 @@ class TitleMeta implements ExecuteHooksFrontend {
             }
 
             $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $titleTemplate);
-        } elseif (is_date() && seopress_titles_archives_date_title_option()) { //IS DATE
-            $seopress_titles_archives_date_title_option = esc_attr(seopress_titles_archives_date_title_option());
+        } elseif (is_date() && seopress_get_service('TitleOption')->getTitleArchivesDate()) { //IS DATE
+            $seopress_titles_archives_date_title_option = esc_attr(seopress_get_service('TitleOption')->getTitleArchivesDate());
 
             $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archives_date_title_option);
-        } elseif (is_search() && seopress_titles_archives_search_title_option()) { //IS SEARCH
-            $seopress_titles_archives_search_title_option = esc_attr(seopress_titles_archives_search_title_option());
+        } elseif (is_search() && seopress_get_service('TitleOption')->getTitleArchivesSearch()) { //IS SEARCH
+            $seopress_titles_archives_search_title_option = esc_attr(seopress_get_service('TitleOption')->getTitleArchivesSearch());
 
             $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archives_search_title_option);
-        } elseif (is_404() && seopress_titles_archives_404_title_option()) { //IS 404
-            $seopress_titles_archives_404_title_option = esc_attr(seopress_titles_archives_404_title_option());
+        } elseif (is_404() && seopress_get_service('TitleOption')->getTitleArchives404()) { //IS 404
+            $seopress_titles_archives_404_title_option = esc_attr(seopress_get_service('TitleOption')->getTitleArchives404());
 
             $titleTemplate = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archives_404_title_option);
         }

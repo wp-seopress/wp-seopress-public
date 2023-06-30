@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.2
 Requires PHP: 7.2
-Stable tag: 6.5.0.3
+Stable tag: 6.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -373,43 +373,40 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.5.0.3 =
-* INFO Strengthening of security
-* FIX JS error "_seopress_robots_primary_cat" preventing editing content in specific cases
+= 6.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-6/">Read the blog post update</a> =
+* NEW Allow user to move the SEOPress beacon (Universal metabox) from the Block Editor
+* NEW Google Search Console option to quickly support Domain Property site
+* NEW Google Search Console option to change the date range
+* NEW Korean language thanks to @keysuck (awaiting approval)
+* NEW Quickly blocks PetalBot and ChatGPT bot from the robots.txt tab (PRO)
+* NEW 'seopress_search_console_date_range' hook to filter Google Search Console date range (https://www.seopress.org/support/hooks/filter-google-search-console-date-range/)
+* NEW 'seopress_search_console_start_date' hook to filter Google Search Console start date (https://www.seopress.org/support/hooks/filter-google-search-console-start-date/)
+* NEW 'seopress_search_console_end_date' hook to filter Google Search Console end date (https://www.seopress.org/support/hooks/filter-google-search-console-end-date/)
+* INFO Wizard: add textarea for extra social accounts
+* INFO Wizard: automatically select the SEO plugin to migrate from
+* INFO Require specific PHP / WP versions from WordPress admin, plugins (thanks to @jeherve)
+* INFO Add our index XML sitemap URL to SiteGround Optimizer when using the preheating feature
+* INFO Performance enhanced / better UI for universal SEO metabox
+* INFO Add preconnect attribute for Matomo Analytics script
+* INFO WPML: improve reliability to remove /product-category/
+* INFO WP Rocket compatibility for preloading XML sitemaps (please update WP Rocket)
+* INFO Product schema is now showing Positive / Negative statements properties even if WooCommerce is disabled
+* FIX Somme issues with our Google Search Console integration
 * FIX Link attributes from link modal
-
-= 6.5.0.2 =
-* FIX An issue in specific cases with XML sitemap
-
-= 6.5.0.1 =
-* FIX Fatal error
-
-= 6.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-5/">Read the blog post update</a> =
-* NEW Multi domain XML sitemaps with WPML 🎉
-* NEW OpenAI integration now with GPT-3.5 turbo model for more efficiency when we automagically generates title and meta description (PRO) 🎉
-* NEW CSV Import/export tool: support for post and term slug (PRO) 🎉
-* NEW Add post thumbnail to RSS feed (PRO) 🎉
-* NEW Automatically installed SEOPress Free on SEOPress PRO activation to avoid confusion 🎉
-* NEW WordPress 6.2 compatibility 🎉
-* NEW Add any social accounts / websites to Organization schema (SEO, Social Networks, Social accounts) like your Wikipedia page, TikTok account etc. 🎉
-* NEW Add 'seopress_pro_video_sitemap_content' hook to filter post content to scan to find new videos to add to the xml video sitemap (PRO - https://www.seopress.org/support/hooks/filter-content-used-to-find-new-video-for-xml-video-sitemap/)
-* NEW 'seopress_disable_archives_redirect_url' hook to filter redirect URL if author / date archives disabled (https://www.seopress.org/support/hooks/filter-redirect-url-if-author-date-archives-disabled/)
-* NEW 'seopress_disable_archives_redirect_status' hook to filter status code of the redirect if author / date archives disabled (https://www.seopress.org/support/hooks/filter-redirect-url-status-code-if-author-date-archives-disabled/)
-* NEW 'seopress_pro_significant_kw_disable_shortcode' hook to disable shortcode execution for internal linking suggestions (https://www.seopress.org/support/hooks/run-shortcodes-to-find-significant-keywords-for-internal-linking-suggestions/)
-* INFO Check if post type / taxonomy are viewable for XML sitemaps
-* INFO Update Article schema to take into account additional social accounts / websites
-* INFO Improve content analysis compatibility for Oxygen if their metabox is hidden for a specific post type
-* INFO Update guidelines for Logo schema
-* FIX Trailing slash on void elements for W3C validator
-* FIX Energy Consumption property for automatic product schema
-* FIX WPML compatibility for CSV SEO metadata export
-* FIX WPML compatibility for removing /product-category/ slug
-* FIX Compatibility issue with SiteOrigin and WP Bakery builders
-* FIX PHP 8.2 compatibility: Attempt to read properties on bool in wp-seopress/inc/functions/variables/dynamic-variables.php on line 104
-* FIX PHP Warnings in wp-seopress-pro/inc/admin/cron.php on line 1075
-* FIX PHP warning array_count_values() in wp-seopress/src/Services/ContentAnalysis/GetContent.php on line 27
-* FIX Undefined ajaxurl in SEOPress wizard
-* FIX White label documentation links
-* FIX Quick edit redirect fields
+* FIX Warning: Undefined array key "query"
+* FIX Warnings in XML sitemaps if not post types and/or taxonomies set
+* FIX WPML multidomain for XML sitemaps
+* FIX Toolset compatibility for SEO columns / custom post types
+* FIX "noimageindex" duplicated in content analysis
+* FIX WC ecommerce tracking: method_exists(): Argument #1 ($object_or_class) must be of type object|string
+* FIX Deprecated: htmlentities with PHP >= 8.1
+* FIX Focus on target keyword fields for Universal SEO metabox
+* FIX IndexNow API key incorrectly saved
+* FIX Incorrect SEO meta when using the WooCommerce searchbox
+* FIX Stop sending empty 404 email alerts
+* FIX Prevent 404 options when saving PRO settings on some hosts
+* FIX OpenAI 400 error with Divi
+* FIX Google Analytics stats in dashboard widget
+* FIX Capabilities in multisite setup
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

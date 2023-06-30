@@ -1,143 +1,5 @@
 <?php
-
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Restrict SEO metaboxes to user roles
-///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_advanced_security_metaboxe_role_hook_option() {
-    $seopress_advanced_security_metaboxe_role_hook_option = get_option('seopress_advanced_option_name');
-    if ( ! empty($seopress_advanced_security_metaboxe_role_hook_option)) {
-        foreach ($seopress_advanced_security_metaboxe_role_hook_option as $key => $seopress_advanced_security_metaboxe_role_hook_value) {
-            $options[$key] = $seopress_advanced_security_metaboxe_role_hook_value;
-        }
-        if (isset($seopress_advanced_security_metaboxe_role_hook_option['seopress_advanced_security_metaboxe_role'])) {
-            return $seopress_advanced_security_metaboxe_role_hook_option['seopress_advanced_security_metaboxe_role'];
-        }
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Check global settings
-///////////////////////////////////////////////////////////////////////////////////////////////////
-if ( ! function_exists('seopress_titles_single_term_noindex_option')) {
-    function seopress_titles_single_term_noindex_option() {
-        global $tax;
-        $seopress_get_current_tax = $tax->name;
-
-        $seopress_titles_single_term_noindex_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_single_term_noindex_option)) {
-            foreach ($seopress_titles_single_term_noindex_option as $key => $seopress_titles_single_term_noindex_value) {
-                $options[$key] = $seopress_titles_single_term_noindex_value;
-            }
-            if (isset($seopress_titles_single_term_noindex_option['seopress_titles_tax_titles'][$seopress_get_current_tax]['noindex'])) {
-                return $seopress_titles_single_term_noindex_option['seopress_titles_tax_titles'][$seopress_get_current_tax]['noindex'];
-            }
-        }
-    }
-}
-
-if ( ! function_exists('seopress_titles_noindex_option')) {
-    function seopress_titles_noindex_option() {
-        $seopress_titles_noindex_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_noindex_option)) {
-            foreach ($seopress_titles_noindex_option as $key => $seopress_titles_noindex_value) {
-                $options[$key] = $seopress_titles_noindex_value;
-            }
-            if (isset($seopress_titles_noindex_option['seopress_titles_noindex'])) {
-                return $seopress_titles_noindex_option['seopress_titles_noindex'];
-            }
-        }
-    }
-}
-
-if ( ! function_exists('seopress_titles_single_term_nofollow_option')) {
-    function seopress_titles_single_term_nofollow_option() {
-        global $tax;
-        $seopress_get_current_tax = $tax->name;
-
-        $seopress_titles_single_term_nofollow_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_single_term_nofollow_option)) {
-            foreach ($seopress_titles_single_term_nofollow_option as $key => $seopress_titles_single_term_nofollow_value) {
-                $options[$key] = $seopress_titles_single_term_nofollow_value;
-            }
-            if (isset($seopress_titles_single_term_nofollow_option['seopress_titles_tax_titles'][$seopress_get_current_tax]['nofollow'])) {
-                return $seopress_titles_single_term_nofollow_option['seopress_titles_tax_titles'][$seopress_get_current_tax]['nofollow'];
-            }
-        }
-    }
-}
-
-if ( ! function_exists('seopress_titles_nofollow_option')) {
-    function seopress_titles_nofollow_option() {
-        $seopress_titles_nofollow_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_nofollow_option)) {
-            foreach ($seopress_titles_nofollow_option as $key => $seopress_titles_nofollow_value) {
-                $options[$key] = $seopress_titles_nofollow_value;
-            }
-            if (isset($seopress_titles_nofollow_option['seopress_titles_nofollow'])) {
-                return $seopress_titles_nofollow_option['seopress_titles_nofollow'];
-            }
-        }
-    }
-}
-
-if ( ! function_exists('seopress_titles_noarchive_option')) {
-    function seopress_titles_noarchive_option() {
-        $seopress_titles_noarchive_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_noarchive_option)) {
-            foreach ($seopress_titles_noarchive_option as $key => $seopress_titles_noarchive_value) {
-                $options[$key] = $seopress_titles_noarchive_value;
-            }
-            if (isset($seopress_titles_noarchive_option['seopress_titles_noarchive'])) {
-                return $seopress_titles_noarchive_option['seopress_titles_noarchive'];
-            }
-        }
-    }
-}
-
-if ( ! function_exists('seopress_titles_nosnippet_option')) {
-    function seopress_titles_nosnippet_option() {
-        $seopress_titles_nosnippet_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_nosnippet_option)) {
-            foreach ($seopress_titles_nosnippet_option as $key => $seopress_titles_nosnippet_value) {
-                $options[$key] = $seopress_titles_nosnippet_value;
-            }
-            if (isset($seopress_titles_nosnippet_option['seopress_titles_nosnippet'])) {
-                return $seopress_titles_nosnippet_option['seopress_titles_nosnippet'];
-            }
-        }
-    }
-}
-
-if ( ! function_exists('seopress_titles_noimageindex_option')) {
-    function seopress_titles_noimageindex_option() {
-        $seopress_titles_noimageindex_option = get_option('seopress_titles_option_name');
-        if ( ! empty($seopress_titles_noimageindex_option)) {
-            foreach ($seopress_titles_noimageindex_option as $key => $seopress_titles_noimageindex_value) {
-                $options[$key] = $seopress_titles_noimageindex_value;
-            }
-            if (isset($seopress_titles_noimageindex_option['seopress_titles_noimageindex'])) {
-                return $seopress_titles_noimageindex_option['seopress_titles_noimageindex'];
-            }
-        }
-    }
-}
-
-//Metaboxe position
-if ( ! function_exists('seopress_advanced_appearance_term_metaboxe_position_option')) {
-    function seopress_advanced_appearance_term_metaboxe_position_option() {
-        $seopress_advanced_appearance_term_metaboxe_position_option = get_option('seopress_advanced_option_name');
-        if ( ! empty($seopress_advanced_appearance_term_metaboxe_position_option)) {
-            foreach ($seopress_advanced_appearance_term_metaboxe_position_option as $key => $seopress_advanced_appearance_term_metaboxe_position_value) {
-                $options[$key] = $seopress_advanced_appearance_term_metaboxe_position_value;
-            }
-            if (isset($seopress_advanced_appearance_term_metaboxe_position_option['seopress_advanced_appearance_metaboxe_position'])) {
-                return $seopress_advanced_appearance_term_metaboxe_position_option['seopress_advanced_appearance_metaboxe_position'];
-            }
-        }
-    }
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Display metabox in Custom Taxonomy
@@ -150,8 +12,8 @@ function seopress_display_seo_term_metaboxe() {
         $seopress_get_taxonomies = apply_filters('seopress_metaboxe_term_seo', $seopress_get_taxonomies);
 
         if ( ! empty($seopress_get_taxonomies)) {
-            if (function_exists('seopress_advanced_appearance_term_metaboxe_position_option')) {
-                switch (seopress_advanced_appearance_term_metaboxe_position_option()) {
+            if (!empty(seopress_get_service('AdvancedOption')->getAppearanceMetaboxePosition())) {
+                switch (seopress_get_service('AdvancedOption')->getAppearanceMetaboxePosition()) {
                     case 'high':
                         $priority = 1;
                         break;
@@ -168,7 +30,9 @@ function seopress_display_seo_term_metaboxe() {
             } else {
                 $priority = 10;
             }
+
             $priority = apply_filters('seopress_metaboxe_term_seo_priority', $priority);
+
             foreach ($seopress_get_taxonomies as $key => $value) {
                 add_action($key . '_edit_form', 'seopress_tax', $priority, 2); //Edit term page
                 add_action('edit_' . $key,   'seopress_tax_save_term', $priority, 2); //Edit save term
@@ -212,7 +76,7 @@ function seopress_display_seo_term_metaboxe() {
         $seopress_titles_desc              = get_term_meta($term->term_id, '_seopress_titles_desc', true);
 
         $disabled['robots_index'] ='';
-        if (seopress_titles_single_term_noindex_option() || seopress_titles_noindex_option()) {
+        if (seopress_get_service('TitleOption')->getTaxNoIndex() || seopress_get_service('TitleOption')->getTitleNoIndex()) {
             $seopress_robots_index              = 'yes';
             $disabled['robots_index']           = 'disabled';
         } else {
@@ -220,7 +84,7 @@ function seopress_display_seo_term_metaboxe() {
         }
 
         $disabled['robots_follow'] ='';
-        if (seopress_titles_single_term_nofollow_option() || seopress_titles_nofollow_option()) {
+        if (seopress_get_service('TitleOption')->getTaxNoFollow() || seopress_get_service('TitleOption')->getTitleNoFollow()) {
             $seopress_robots_follow             = 'yes';
             $disabled['robots_follow']          = 'disabled';
         } else {
@@ -228,7 +92,7 @@ function seopress_display_seo_term_metaboxe() {
         }
 
         $disabled['archive'] ='';
-        if (seopress_titles_noarchive_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoArchive()) {
             $seopress_robots_archive            = 'yes';
             $disabled['archive']                = 'disabled';
         } else {
@@ -236,7 +100,7 @@ function seopress_display_seo_term_metaboxe() {
         }
 
         $disabled['snippet'] ='';
-        if (seopress_titles_nosnippet_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoSnippet()) {
             $seopress_robots_snippet            = 'yes';
             $disabled['snippet']                = 'disabled';
         } else {
@@ -244,7 +108,7 @@ function seopress_display_seo_term_metaboxe() {
         }
 
         $disabled['imageindex'] ='';
-        if (seopress_titles_noimageindex_option()) {
+        if (seopress_get_service('TitleOption')->getTitleNoImageIndex()) {
             $seopress_robots_imageindex         = 'yes';
             $disabled['imageindex']             = 'disabled';
         } else {
@@ -415,8 +279,8 @@ if (is_user_logged_in()) {
             $seopress_user_role = wp_get_current_user()->roles[0];
 
             //If current user role matchs values from Security settings then apply
-            if (function_exists('seopress_advanced_security_metaboxe_role_hook_option') && '' != seopress_advanced_security_metaboxe_role_hook_option()) {
-                if (array_key_exists($seopress_user_role, seopress_advanced_security_metaboxe_role_hook_option())) {
+            if (!empty(seopress_get_service('AdvancedOption')->getSecurityMetaboxRole())) {
+                if (array_key_exists($seopress_user_role, seopress_get_service('AdvancedOption')->getSecurityMetaboxRole())) {
                     //do nothing
                 } else {
                     echo seopress_display_seo_term_metaboxe();

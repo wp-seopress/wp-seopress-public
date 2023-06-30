@@ -28,11 +28,17 @@ function seopress_instant_indexing_generate_api_key_fn($init = false) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_instant_indexing_api_key_txt() {
     $options            = get_option('seopress_instant_indexing_option_name');
-    $api_key            = isset($options['seopress_instant_indexing_bing_api_key']) ? base64_decode(esc_attr($options['seopress_instant_indexing_bing_api_key'])) : null;
+    $api_key            = isset($options['seopress_instant_indexing_bing_api_key']) ? esc_attr($options['seopress_instant_indexing_bing_api_key']) : null;
 
     if ($api_key === null) {
         return;
     }
+
+    if (seopress_is_base64_string($api_key) === false) {
+        return;
+    }
+
+    $api_key = base64_decode($api_key);
 
     global $wp;
     $current_url = home_url( $wp->request );
@@ -111,7 +117,7 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     $actions            = isset($options['seopress_instant_indexing_google_action']) ? esc_attr($options['seopress_instant_indexing_google_action']) : 'URL_UPDATED';
     $urls               = isset($options['seopress_instant_indexing_manual_batch']) ? esc_attr($options['seopress_instant_indexing_manual_batch']) : '';
     $google_api_key     = isset($options['seopress_instant_indexing_google_api_key']) ? $options['seopress_instant_indexing_google_api_key'] : '';
-    $bing_api_key       = isset($options['seopress_instant_indexing_bing_api_key']) ? base64_decode(esc_attr($options['seopress_instant_indexing_bing_api_key'])) : '';
+    $bing_api_key       = isset($options['seopress_instant_indexing_bing_api_key']) ? esc_attr($options['seopress_instant_indexing_bing_api_key']) : '';
     $bing_url           = 'https://api.indexnow.org/indexnow/';
     $google_url         = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
 
@@ -142,47 +148,51 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/6.5.0.3/true';
+        $x_source_info = 'https://www.seopress.org/6.6/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/6.5.0.3/false';
+        $x_source_info = 'https://www.seopress.org/6.6/false';
     }
 
     //Bing API
     if (isset($bing_api_key) && !empty($bing_api_key) && $engines['bing'] === '1') {
-        $host = wp_parse_url(get_home_url(), PHP_URL_HOST);
+        if (seopress_is_base64_string($bing_api_key) === true) {
+            $bing_api_key = base64_decode($bing_api_key);
 
-        $body   = [
-            'host' => $host,
-            'key' => $bing_api_key,
-            'keyLocation'  => trailingslashit( get_home_url() ) . $bing_api_key . '.txt',
-            'urlList' => $urls
-        ];
+            $host = wp_parse_url(get_home_url(), PHP_URL_HOST);
 
-        //Build the POST request
-        $args = [
-            'body'    => json_encode($body),
-            'timeout' => 30,
-            'headers' => [
-                'Content-Type'  => 'application/json',
-                'X-Source-Info' => $x_source_info
-            ],
-        ];
-        $args = apply_filters( 'seopress_instant_indexing_post_request_args', $args );
+            $body   = [
+                'host' => $host,
+                'key' => $bing_api_key,
+                'keyLocation'  => trailingslashit( get_home_url() ) . $bing_api_key . '.txt',
+                'urlList' => $urls
+            ];
 
-        //IndexNow (Bing)
-        $response = wp_remote_post( $bing_url, $args );
+            //Build the POST request
+            $args = [
+                'body'    => json_encode($body),
+                'timeout' => 30,
+                'headers' => [
+                    'Content-Type'  => 'application/json',
+                    'X-Source-Info' => $x_source_info
+                ],
+            ];
+            $args = apply_filters( 'seopress_instant_indexing_post_request_args', $args );
 
-        //Check the response is ok first
-        if (is_wp_error($response)) {
-            $message = $response->get_error_message();
-            $log['bing']['status'] = $message;
+            //IndexNow (Bing)
+            $response = wp_remote_post( $bing_url, $args );
+
+            //Check the response is ok first
+            if (is_wp_error($response)) {
+                $message = $response->get_error_message();
+                $log['bing']['status'] = $message;
+            }
+
+            $log['bing']['response'] = $response;
         }
-
-        $log['bing']['response'] = $response;
     } elseif ($engines['bing'] === '1') {
         $log['bing']['response']['error'] = [
             'code' => 401,

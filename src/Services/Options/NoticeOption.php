@@ -41,6 +41,24 @@ class NoticeOption
     }
 
     /**
+     * @since 6.6.0
+     *
+     * @return string
+     */
+    public function getNoticeGetStarted(){
+        return $this->searchOptionByKey('notice-get-started');
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @return string
+     */
+    public function getNoticeTasks(){
+        return $this->searchOptionByKey('notice-tasks');
+    }
+
+    /**
      * @since 6.0.0
      *
      * @return string
@@ -92,15 +110,6 @@ class NoticeOption
      */
     public function getNoticeAMPAnalytics(){
         return $this->searchOptionByKey('notice-amp-analytics');
-    }
-
-    /**
-     * @since 6.0.0
-     *
-     * @return string
-     */
-    public function getNoticeTagDiv(){
-        return $this->searchOptionByKey('notice-tagdiv');
     }
 
     /**
@@ -227,5 +236,14 @@ class NoticeOption
      */
     public function getNoticeGoInsights(){
         return $this->searchOptionByKey('notice-go-insights');
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @return string
+     */
+    public function getNoticeInsights(){
+        return $this->searchOptionByKey('notice-insights');
     }
 }

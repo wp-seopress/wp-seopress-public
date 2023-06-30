@@ -705,7 +705,6 @@ class GetContent
                 $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>nositelinkssearchbox is</strong> off. Google will probably display a sitelinks searchbox in search results.', 'wp-seopress') . '</p>';
             }
         } else {
-            $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>noimageindex</strong> is off. Google will index the images on this page.', 'wp-seopress') . '</p>';
 
             $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>nositelinkssearchbox</strong> is off. Google will probably display a sitelinks searchbox in search results.', 'wp-seopress') . '</p>';
         }

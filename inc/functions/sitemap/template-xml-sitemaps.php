@@ -9,7 +9,7 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 seopress_get_service('SitemapHeaders')->printHeaders();
 
 //WPML - Home URL
-if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
     add_filter('seopress_sitemaps_home_url', function($home_url) {
         $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
         return trailingslashit($home_url);
@@ -290,7 +290,7 @@ function seopress_xml_sitemap_index() {
     }
 
     //Google News
-    if (function_exists('seopress_xml_sitemap_news_enable_option') && '' != seopress_xml_sitemap_news_enable_option()
+    if (method_exists(seopress_pro_get_service('OptionPro'), 'getGoogleNewsEnable') && '' !== seopress_pro_get_service('OptionPro')->getGoogleNewsEnable()
         && function_exists('seopress_get_toggle_option') && '1' == seopress_get_toggle_option('news')) {
         //Include Custom Post Types
         function seopress_xml_sitemap_news_cpt_option() {
@@ -356,8 +356,8 @@ function seopress_xml_sitemap_index() {
     }
 
     //Video sitemap
-    if (function_exists('seopress_xml_sitemap_video_enable_option') && '' != seopress_xml_sitemap_video_enable_option()) {
-        if ('' !== seopress_get_service('SitemapOption')->getPostTypesList()) {
+    if (method_exists(seopress_pro_get_service('SitemapOptionPro'), 'getSitemapVideoEnable') && '1' === seopress_pro_get_service('SitemapOptionPro')->getSitemapVideoEnable()) {
+        if (!empty(seopress_get_service('SitemapOption')->getPostTypesList())) {
             $cpt = [];
             foreach (seopress_get_service('SitemapOption')->getPostTypesList() as $cpt_key => $cpt_value) {
                 foreach ($cpt_value as $_cpt_key => $_cpt_value) {

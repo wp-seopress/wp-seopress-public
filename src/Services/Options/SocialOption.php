@@ -220,6 +220,34 @@ class SocialOption
     }
 
     /**
+     * @since 6.6.0
+     *
+     * @param int|null $currentCpt
+     */
+    public function getSocialFacebookImgCpt($id = null) {
+        $arg = $id;
+
+        if (null === $id) {
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $arg = $post;
+        }
+
+        $currentCpt = get_post_type($arg);
+
+        $option =  $this->searchOptionByKey('seopress_social_facebook_img_cpt');
+
+        if ( ! isset($option[$currentCpt]['url'])) {
+            return;
+        }
+
+        return $option[$currentCpt]['url'];
+    }
+
+    /**
      * @since 6.5.0
      *
      * @return string

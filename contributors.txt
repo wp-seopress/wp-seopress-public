@@ -23,7 +23,8 @@ Beta testers / feedbacks:
 - Sébastien Serre: @sebastienserre
 - Ludovic Riaudel: @lriaudel
 - Philippe Fronzes: @novaldi64
-- Déborah Donnier @deborahdonnier
+- Déborah Donnier: @deborahdonnier
+- Jérémy Herve: @jeherve
 
 Integrations (https://www.seopress.org/integrations/):
 - The Admin Columns PRO team

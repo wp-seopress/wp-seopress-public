@@ -51,6 +51,14 @@ function print_section_info_xml_sitemap_general()
     <span class="spinner"></span>
 </p>
 
+<?php
+if (is_plugin_active('sg-cachepress/sg-cachepress.php')) { ?>
+    <div class="seopress-notice">
+            <h3><?php _e('SiteGround Optimizer user?', 'wp-seopress'); ?></h3>
+            <p><?php _e('We automatically sent your XML sitemap URL for the preheat caching feature.', 'wp-seopress'); ?></p>
+        </div>
+<?php } ?>
+
 <div class="seopress-notice">
     <p>
         <?php _e('To view your sitemap, <strong>enable permalinks</strong> (not default one), and save settings to flush them.', 'wp-seopress'); ?>
@@ -138,7 +146,6 @@ function print_section_info_html_sitemap()
         </span>
     </a>
 </p>
-
 
 <div class="seopress-notice">
         <h3><?php _e('How to use the HTML Sitemap?', 'wp-seopress'); ?></h3>

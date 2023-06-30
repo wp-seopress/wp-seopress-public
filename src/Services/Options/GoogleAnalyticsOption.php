@@ -517,15 +517,6 @@ class GoogleAnalyticsOption
      *
      * @return string
      */
-    public function getEcommerceEnable(){
-        return $this->searchOptionByKey('seopress_google_analytics_e_commerce_enable');
-    }
-
-    /**
-     * @since 5.8.0
-     *
-     * @return string
-     */
     public function getDisable(){
         return $this->searchOptionByKey('seopress_google_analytics_disable');
     }
@@ -663,6 +654,7 @@ class GoogleAnalyticsOption
     }
 
     /**
+     * @since 6.0.0
      *
      * @return string
      */
@@ -704,5 +696,23 @@ class GoogleAnalyticsOption
      */
     public function getAuthSecretId() {
         return $this->searchOptionByKey('seopress_google_analytics_auth_secret_id');
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @return boolean
+     */
+    public function getClarityEnable() {
+        return $this->searchOptionByKey('seopress_google_analytics_clarity_enable');
+    }
+
+    /**
+     * @since 6.6.0
+     *
+     * @return boolean
+     */
+    public function getClarityProjectId() {
+        return $this->searchOptionByKey('seopress_google_analytics_clarity_project_id');
     }
 }

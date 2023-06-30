@@ -88,7 +88,7 @@ function seopress_do_real_preview()
             //Get source code
             $args = [
                 'blocking'    => true,
-                'timeout'     => 30,
+                'timeout'     => 10,
                 'sslverify'   => false,
             ];
 
@@ -740,7 +740,7 @@ function seopress_video_xml_sitemap_regenerate()
         }
 
         $cpt = ['any'];
-        if (seopress_get_service('SitemapOption')->getPostTypesList()) {
+        if (!empty(seopress_get_service('SitemapOption')->getPostTypesList())) {
             unset($cpt[0]);
             foreach (seopress_get_service('SitemapOption')->getPostTypesList() as $cpt_key => $cpt_value) {
                 foreach ($cpt_value as $_cpt_key => $_cpt_value) {

@@ -4,11 +4,13 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 6.5.0.3
+Version: 6.6
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
 Domain Path: /languages
+Requires PHP: 7.2
+Requires at least: 5.0
 */
 
 /*  Copyright 2016 - 2023 - Benjamin Denis  (email : contact@seopress.org)
@@ -71,7 +73,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '6.5.0.3');
+define('SEOPRESS_VERSION', '6.6');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -407,7 +409,7 @@ add_action('admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1)
 //SEOPRESS Admin bar
 function seopress_admin_bar_css() {
 	$prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-	if (is_user_logged_in() && function_exists('seopress_advanced_appearance_adminbar_option') && '1' != seopress_advanced_appearance_adminbar_option()) {
+	if (is_user_logged_in() && '1' !== seopress_get_service('AdvancedOption')->getAppearanceAdminBar()) {
 		if (is_admin_bar_showing()) {
 			wp_register_style('seopress-admin-bar', plugins_url('assets/css/seopress-admin-bar' . $prefix . '.css', __FILE__), [], SEOPRESS_VERSION);
 			wp_enqueue_style('seopress-admin-bar');
@@ -456,114 +458,17 @@ function seopress_admin_body_class($classes) {
 	return $classes;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//WP compatibility
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/*
- * Remove WP default meta robots (added in WP 5.7)
- *
- * @since 4.4.0.7
- */
-remove_filter('wp_robots', 'wp_robots_max_image_preview_large');
-
-/*
- * Remove WC default meta robots (added in WP 5.7)
- *
- * @since 4.6
- * @todo use wp_robots API
- * @updated 5.8
- */
-function seopress_robots_wc_pages($robots) {
-	include_once ABSPATH . 'wp-admin/includes/plugin.php';
-	if (is_plugin_active('woocommerce/woocommerce.php')) {
-		if (function_exists('wc_get_page_id')) {
-			if (is_page(wc_get_page_id('cart')) || is_page(wc_get_page_id('checkout')) || is_page(wc_get_page_id('myaccount'))) {
-				if ('0' === get_option('blog_public')) {
-					return $robots;
-				} else {
-					unset($robots);
-					$robots = [];
-
-					return $robots;
-				}
-			}
-		}
-	}
-	//remove noindex on search archive pages
-	if (is_search()) {
-		if ('0' === get_option('blog_public')) {
-			return $robots;
-		} else {
-			unset($robots);
-			$robots = [];
-
-			return $robots;
-		}
-	}
-
-	return $robots;
-}
-add_filter('wp_robots', 'seopress_robots_wc_pages', 20);
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//3rd plugins compatibility
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Jetpack
-function seopress_compatibility_jetpack() {
-	if (function_exists('is_plugin_active')) {
-		if (is_plugin_active('jetpack/jetpack.php') && ! is_admin()) {
-			add_filter('jetpack_enable_open_graph', '__return_false');
-			add_filter('jetpack_disable_seo_tools', '__return_true');
-		}
-	}
-}
-add_action('wp_head', 'seopress_compatibility_jetpack', 0);
-
 /**
- * Remove default WC meta robots.
+ * Shortcut settings page
  *
- * @since 3.8.1
- */
-function seopress_compatibility_woocommerce() {
-	if (function_exists('is_plugin_active')) {
-		if (is_plugin_active('woocommerce/woocommerce.php') && ! is_admin()) {
-			remove_action('wp_head', 'wc_page_noindex');
-		}
-	}
-}
-add_action('wp_head', 'seopress_compatibility_woocommerce', 0);
-
-/**
- * Remove WPML home url filter.
+ * @since 3.5.9
  *
- * @since 3.8.6
+ * @param string $links, $file
  *
- * @param mixed $home_url
- * @param mixed $url
- * @param mixed $path
- * @param mixed $orig_scheme
- * @param mixed $blog_id
+ * @return array $links
+ *
+ * @author Benjamin
  */
-function seopress_remove_wpml_home_url_filter($home_url, $url, $path, $orig_scheme, $blog_id) {
-	return $url;
-}
-
-/*
- * Remove third-parties metaboxes on our CPT
- * @author Benjamin Denis
- * @since 4.2
- */
-add_action('do_meta_boxes', 'seopress_remove_metaboxes', 10);
-function seopress_remove_metaboxes() {
-	//Oxygen Builder
-	remove_meta_box('ct_views_cpt', 'seopress_404', 'normal');
-	remove_meta_box('ct_views_cpt', 'seopress_schemas', 'normal');
-	remove_meta_box('ct_views_cpt', 'seopress_bot', 'normal');
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Shortcut settings page
-///////////////////////////////////////////////////////////////////////////////////////////////////
 add_filter('plugin_action_links', 'seopress_plugin_action_links', 10, 2);
 
 function seopress_plugin_action_links($links, $file) {
@@ -588,7 +493,7 @@ function seopress_plugin_action_links($links, $file) {
 			unset($links['deactivate']);
 		}
 
-		if (function_exists('seopress_get_toggle_white_label_option') && '1' == seopress_get_toggle_white_label_option() && function_exists('seopress_white_label_help_links_option') && '1' === seopress_white_label_help_links_option()) {
+		if ('1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel() && method_exists('seopress_pro_get_service', 'getWhiteLabelHelpLinks') && '1' === seopress_pro_get_service('OptionPro')->getWhiteLabelHelpLinks()) {
 			array_unshift($links, $settings_link, $wizard_link);
 		} else {
 			array_unshift($links, $settings_link, $wizard_link, $website_link);
@@ -602,6 +507,8 @@ function seopress_plugin_action_links($links, $file) {
  * Display an upgrade message in the plugins list
  *
  * @since 5.7
+ *
+ * @deprecated 6.6.0
  *
  * @param string $pluin_data, $new_data
  *
@@ -626,7 +533,7 @@ if ('1' == seopress_get_service('SitemapOption')->isEnabled() && '1' == seopress
 	//WPML compatibility
 	if (defined('ICL_SITEPRESS_VERSION')) {
 		//Check if WPML is not setup as multidomain
-		if ( 2 !== apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+		if ( 2 != apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
 			add_filter('request', 'seopress_wpml_block_secondary_languages');
 		}
 	}

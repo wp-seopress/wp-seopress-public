@@ -4,76 +4,11 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 
 //XML/HTML Sitemap
 //=================================================================================================
-//HTML Sitemap Enable
-/**
- * @deprecated 5.9.0
- */
-function seopress_xml_sitemap_html_enable_option()
-{
-    return seopress_get_service('SitemapOption')->getHtmlEnable();
-}
-
-//HTML Sitemap mapping
-/**
- * @deprecated 5.9.0
- */
-function seopress_xml_sitemap_html_mapping_option()
-{
-    return seopress_get_service('SitemapOption')->getHtmlMapping();
-}
-
-//HTML Sitemap Exclude
-/**
- * @deprecated 5.9.0
- */
-function seopress_xml_sitemap_html_exclude_option()
-{
-    return seopress_get_service('SitemapOption')->getHtmlExclude();
-
-}
-
-//HTML Sitemap Order
-/**
- * @deprecated 5.9.0
- */
-function seopress_xml_sitemap_html_order_option()
-{
-    return seopress_get_service('SitemapOption')->getHtmlOrder();
-}
-
-//HTML Sitemap Order by
-/**
- * @deprecated 5.9.0
- */
-function seopress_xml_sitemap_html_orderby_option()
-{
-    return seopress_get_service('SitemapOption')->getHtmlOrderBy();
-
-}
-
-//HTML Sitemap Date
-/**
- * @deprecated 5.9.0
- */
-function seopress_xml_sitemap_html_date_option()
-{
-    return seopress_get_service('SitemapOption')->getHtmlDate();
-}
-
-//HTML Sitemap Archive links
-/**
- * @deprecated 5.9.0
- */
-function seopress_xml_sitemap_html_archive_links_option()
-{
-    return seopress_get_service('SitemapOption')->getHtmlArchiveLinks();
-}
-
-if ('1' == seopress_xml_sitemap_html_enable_option()) {
+if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
     function seopress_xml_sitemap_html_display()
     {
-        if ('' != seopress_xml_sitemap_html_mapping_option()) {
-            if (is_page(explode(',', seopress_xml_sitemap_html_mapping_option()))) {
+        if ('' !== seopress_get_service('SitemapOption')->getHtmlMapping()) {
+            if (is_page(explode(',', seopress_get_service('SitemapOption')->getHtmlMapping()))) {
                 add_filter('the_content', 'seopress_xml_sitemap_html_hook');
             }
         }
@@ -93,22 +28,22 @@ if ('1' == seopress_xml_sitemap_html_enable_option()) {
         );
 
         //Exclude IDs
-        if ('' != seopress_xml_sitemap_html_exclude_option()) {
-            $seopress_xml_sitemap_html_exclude_option = seopress_xml_sitemap_html_exclude_option();
+        if ('' !== seopress_get_service('SitemapOption')->getHtmlExclude()) {
+            $seopress_xml_sitemap_html_exclude_option = seopress_get_service('SitemapOption')->getHtmlExclude();
         } else {
             $seopress_xml_sitemap_html_exclude_option = '';
         }
 
         //Order
-        if ('' != seopress_xml_sitemap_html_order_option()) {
-            $seopress_xml_sitemap_html_order_option = seopress_xml_sitemap_html_order_option();
+        if ('' !== seopress_get_service('SitemapOption')->getHtmlOrder()) {
+            $seopress_xml_sitemap_html_order_option = seopress_get_service('SitemapOption')->getHtmlOrder();
         } else {
             $seopress_xml_sitemap_html_order_option = '';
         }
 
         //Orderby
-        if ('' != seopress_xml_sitemap_html_orderby_option()) {
-            $seopress_xml_sitemap_html_orderby_option = seopress_xml_sitemap_html_orderby_option();
+        if ('' !== seopress_get_service('SitemapOption')->getHtmlOrderBy()) {
+            $seopress_xml_sitemap_html_orderby_option = seopress_get_service('SitemapOption')->getHtmlOrderBy();
         } else {
             $seopress_xml_sitemap_html_orderby_option = '';
         }
@@ -116,7 +51,7 @@ if ('1' == seopress_xml_sitemap_html_enable_option()) {
         $html = '';
 
         //CPT
-        if ('' !== seopress_get_service('SitemapOption')->getPostTypesList()) {
+        if (!empty(seopress_get_service('SitemapOption')->getPostTypesList())) {
             $html .= '<div class="wrap-html-sitemap sp-html-sitemap">';
 
             $seopress_xml_sitemap_post_types_list_option = seopress_get_service('SitemapOption')->getPostTypesList();
@@ -139,7 +74,7 @@ if ('1' == seopress_xml_sitemap_html_enable_option()) {
 
             $display_archive = '';
             foreach ($seopress_xml_sitemap_post_types_list_option as $cpt_key => $cpt_value) {
-                if ('1' !== seopress_xml_sitemap_html_archive_links_option()) {
+                if ('1' !== seopress_get_service('SitemapOption')->getHtmlArchiveLinks()) {
                     $display_archive = false;
                 }
                 $display_archive = apply_filters('seopress_sitemaps_html_remove_archive', $display_archive, $cpt_key);

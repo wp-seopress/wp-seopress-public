@@ -63,4 +63,13 @@ class ToggleOption {
     public function getToggleAi(){
         return $this->searchOptionByKey('ai');
     }
+
+    /**
+     * @since 6.6.0
+     *
+     * @return string
+     */
+    public function getToggleWhiteLabel(){
+        return $this->searchOptionByKey('white-label');
+    }
 }

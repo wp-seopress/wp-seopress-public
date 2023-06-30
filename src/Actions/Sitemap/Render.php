@@ -44,14 +44,14 @@ class Render implements ExecuteHooksFrontend {
         } elseif ('1' === get_query_var('seopress_author')) {
             $filename = 'template-xml-sitemaps-author.php';
         } elseif ('' !== get_query_var('seopress_cpt')) {
-            if ('' !== seopress_get_service('SitemapOption')->getPostTypesList()
+            if (!empty(seopress_get_service('SitemapOption')->getPostTypesList())
                 && array_key_exists(get_query_var('seopress_cpt'), seopress_get_service('SitemapOption')->getPostTypesList())) {
                 /*
                  * @since 4.3.0
                  */
                 seopress_get_service('SitemapRenderSingle')->render();
                 exit();
-            } elseif ('' !== seopress_get_service('SitemapOption')->getTaxonomiesList()
+            } elseif (!empty(seopress_get_service('SitemapOption')->getTaxonomiesList())
                 && array_key_exists(get_query_var('seopress_cpt'), seopress_get_service('SitemapOption')->getTaxonomiesList())) {
                 $filename = 'template-xml-sitemaps-single-term.php';
             }
