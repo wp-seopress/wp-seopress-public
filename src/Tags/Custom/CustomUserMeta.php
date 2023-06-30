@@ -18,12 +18,14 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
     }
 
     public function getValue($args = null) {
+
         $context = isset($args[0]) ? $args[0] : null;
         $tag     = isset($args[1]) ? $args[1] : null;
         $value   = '';
         if (null === $tag || ! $context) {
             return $value;
         }
+
 
         if ( ! $context['post'] && ! $context['is_author']) {
             return $value;
@@ -38,7 +40,15 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
 
         $field = $matches['field'];
 
-        $value = esc_attr(get_user_meta(get_current_user_id(), $field, true));
+        $authorId = get_current_user_id();
+        if($context['is_author'] && isset($context['author']->ID)){
+            $authorId = $context['author']->ID;
+        }
+        if($context['post'] && isset($context['post']->post_author)){
+            $authorId = $context['post']->post_author;
+        }
+
+        $value = esc_attr(get_user_meta($authorId, $field, true));
 
         return apply_filters('seopress_get_tag_' . $tag . '_value', $value, $context);
     }

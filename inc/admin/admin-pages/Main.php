@@ -37,4 +37,5 @@ if (function_exists('seopress_admin_header')) {
         $this->seopress_feature_save();
     ?>
 </div>
+<?php echo $this->seopress_feature_save(); ?>
 <?php

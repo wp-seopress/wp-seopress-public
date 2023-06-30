@@ -516,7 +516,7 @@ function seopress_titles_tax_titles_callback()
                     <em>
                         <small>[<?php echo $seopress_tax_value->name; ?>]</small>
                     </em>
-                </h3>
+
 
                 <!--Single on/off Tax-->
                 <div class="seopress_wrap_tax">
@@ -590,7 +590,8 @@ function seopress_titles_tax_titles_callback()
     esc_attr($options['seopress_titles_tax_titles'][$seopress_tax_key]['enable']);
 } ?>
 
-                </div>
+                    </div>
+                </h3>
 
                 <!--Tax Title-->
                 <?php
@@ -641,12 +642,12 @@ function seopress_titles_tax_titles_callback()
 
         if ('category' == $seopress_tax_key) { ?>
                     <div class=" wrap-tags">
-                        <span
+                        <button type="button"
                             id="seopress-tag-tax-title-<?php echo $seopress_tax_key; ?>"
                             data-tag="%%_category_title%%" class="btn btnSecondary tag-title">
                             <span class="dashicons dashicons-plus-alt2"></span>
                             <?php _e('Category Title', 'wp-seopress'); ?>
-                        </span>
+                        </button>
                         <?php } elseif ('post_tag' == $seopress_tax_key) { ?>
                         <div class="wrap-tags">
                             <button type="button" class="btn btnSecondary tag-title"

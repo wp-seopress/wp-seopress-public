@@ -31,7 +31,7 @@ if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
                 if ($total === 0) {
                     printf(__('Notifications', 'wp-seopress'), $total);
                 } else {
-                    printf(__('You have %d notifications', 'wp-seopress'), $total);
+                    printf(_n('You have %d notification', 'You have %d notifications', $total, 'wp-seopress'), $total);
                 }
                 ?>
             </h2>

@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.2
 Requires PHP: 7.2
-Stable tag: 6.7
+Stable tag: 6.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -218,8 +218,8 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 
 <h3>SEOPress integrates seamlessly with popular e-commerce, translation, performance and analytics tools.</h3>
 <ul>
+	<li>Block Editor + 6 SEOPress blocks: Table of Contents, FAQ, How-to, Breadcrumbs, HTML Sitemap and Local Business</li>
 	<li>Classic Editor</li>
-	<li>Block Editor + 5 SEOPress blocks: FAQ, How-to, Breadcrumbs, HTML Sitemap and Local Business</li>
 	<li>OpenAI</li>
 	<li>WPML</li>
 	<li>Polylang</li>
@@ -374,6 +374,15 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.7.1 =
+* INFO Add a new documentation link for AI feature
+* FIX Documentation links in SEO dashboard
+* FIX CSS
+* FIX Wrong dynamic variable .ds_store with Universal SEO metabox
+* FIX %%_ucf_first_name%% not rendered with Universal SEO metabox
+* FIX Prevent fatal error in specific cases with automatic redirects
+* FIX An issue with Rank Math importer in specific cases
+
 = 6.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-7/">Read the blog post update</a> =
 * NEW Brand new design for our SEO dashboard (first iteration) 🎉
 * NEW Table of Contents block for Gutenberg (PRO) 🎉

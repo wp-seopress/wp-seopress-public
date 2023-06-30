@@ -657,7 +657,9 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 placeholder="<?php esc_html_e('Enter your new URL in absolute (eg: https://www.example.com/)', 'wp-seopress'); ?>"
                                 aria-label="<?php _e('URL redirection', 'wp-seopress'); ?>"
                                 value="<?php echo $seopress_redirections_value; ?>" />
-
+                        </p>
+                        <p class="description">
+                            <?php _e('Enter some keywords to auto-complete this field against your content.','wp-seopress-pro'); ?>
                         </p>
 
                         <script>

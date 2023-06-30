@@ -86,6 +86,11 @@ trait UseTags {
         $files  = array_diff(scandir($directory), ['..', '.']);
 
         foreach ($files as $filename) {
+
+            if ( ! preg_match('/\.php$/', $filename)) {
+                continue;
+            }
+
             $class     = str_replace('.php', '', $filename);
             $classFile = sprintf($namespacesOption['root'], $namespacesOption['subNamespace'], $class);
 

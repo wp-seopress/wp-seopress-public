@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 6.7\n"
+"Project-Id-Version: SEOPress 6.7.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-06-07T13:06:20+00:00\n"
+"POT-Creation-Date: 2023-06-09T13:41:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -94,7 +94,7 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:123
 #: inc/admin/admin.php:108
-#: inc/admin/blocks/features-list.php:50
+#: inc/admin/blocks/features-list.php:51
 #: inc/admin/sections/InstantIndexing.php:9
 msgid "Instant Indexing"
 msgstr ""
@@ -115,7 +115,7 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:135
 #: inc/admin/admin.php:110
-#: inc/admin/blocks/features-list.php:68
+#: inc/admin/blocks/features-list.php:71
 msgid "Tools"
 msgstr ""
 
@@ -255,12 +255,12 @@ msgstr ""
 #: inc/admin/callbacks/Titles.php:37
 #: inc/admin/callbacks/Titles.php:250
 #: inc/admin/callbacks/Titles.php:458
-#: inc/admin/callbacks/Titles.php:679
-#: inc/admin/callbacks/Titles.php:899
-#: inc/admin/callbacks/Titles.php:1042
-#: inc/admin/callbacks/Titles.php:1135
-#: inc/admin/callbacks/Titles.php:1230
-#: inc/admin/callbacks/Titles.php:1294
+#: inc/admin/callbacks/Titles.php:680
+#: inc/admin/callbacks/Titles.php:900
+#: inc/admin/callbacks/Titles.php:1043
+#: inc/admin/callbacks/Titles.php:1136
+#: inc/admin/callbacks/Titles.php:1231
+#: inc/admin/callbacks/Titles.php:1295
 #: inc/admin/metaboxes/admin-metaboxes-form.php:117
 #: inc/admin/page-builders/elementor/inc/controls/class-text-letter-counter-control.php:70
 #: src/Tags/SiteTitle.php:22
@@ -310,7 +310,7 @@ msgid "Post modified date"
 msgstr ""
 
 #: inc/admin/admin-dyn-variables-helper.php:16
-#: inc/admin/callbacks/Titles.php:1033
+#: inc/admin/callbacks/Titles.php:1034
 msgid "Post author"
 msgstr ""
 
@@ -715,7 +715,7 @@ msgid "Dashboard"
 msgstr ""
 
 #: inc/admin/admin.php:109
-#: inc/admin/blocks/features-list.php:57
+#: inc/admin/blocks/features-list.php:59
 msgid "Image SEO & Advanced settings"
 msgstr ""
 
@@ -755,23 +755,23 @@ msgstr ""
 msgid "Track everything about your visitors with Google Analytics / Matomo / Microsoft Clarity."
 msgstr ""
 
-#: inc/admin/blocks/features-list.php:51
+#: inc/admin/blocks/features-list.php:52
 msgid "Ping Google & Bing to quickly index your content."
 msgstr ""
 
-#: inc/admin/blocks/features-list.php:58
+#: inc/admin/blocks/features-list.php:60
 msgid "Optimize your images for SEO. Configure advanced settings."
 msgstr ""
 
-#: inc/admin/blocks/features-list.php:69
+#: inc/admin/blocks/features-list.php:72
 msgid "Import/Export plugin settings from site to site."
 msgstr ""
 
-#: inc/admin/blocks/features-list.php:125
+#: inc/admin/blocks/features-list.php:130
 msgid "Manage"
 msgstr ""
 
-#: inc/admin/blocks/features-list.php:129
+#: inc/admin/blocks/features-list.php:134
 msgid "Toggle %s"
 msgstr ""
 
@@ -873,8 +873,10 @@ msgid "Hidden notifications"
 msgstr ""
 
 #: inc/admin/blocks/notifications.php:34
-msgid "You have %d notifications"
-msgstr ""
+msgid "You have %d notification"
+msgid_plural "You have %d notifications"
+msgstr[0] ""
+msgstr[1] ""
 
 #: inc/admin/blocks/notifications.php:45
 msgid "%d Critical Notification"
@@ -2307,12 +2309,12 @@ msgstr ""
 #: inc/admin/callbacks/Titles.php:42
 #: inc/admin/callbacks/Titles.php:243
 #: inc/admin/callbacks/Titles.php:453
-#: inc/admin/callbacks/Titles.php:672
-#: inc/admin/callbacks/Titles.php:894
-#: inc/admin/callbacks/Titles.php:1037
-#: inc/admin/callbacks/Titles.php:1131
-#: inc/admin/callbacks/Titles.php:1225
-#: inc/admin/callbacks/Titles.php:1298
+#: inc/admin/callbacks/Titles.php:673
+#: inc/admin/callbacks/Titles.php:895
+#: inc/admin/callbacks/Titles.php:1038
+#: inc/admin/callbacks/Titles.php:1132
+#: inc/admin/callbacks/Titles.php:1226
+#: inc/admin/callbacks/Titles.php:1299
 #: inc/admin/metaboxes/admin-metaboxes-form.php:119
 #: inc/admin/page-builders/elementor/inc/controls/class-text-letter-counter-control.php:69
 #: inc/admin/settings/Titles.php:16
@@ -2385,23 +2387,23 @@ msgstr ""
 
 #: inc/admin/callbacks/Titles.php:189
 #: inc/admin/callbacks/Titles.php:437
-#: inc/admin/callbacks/Titles.php:602
-#: inc/admin/callbacks/Titles.php:842
-#: inc/admin/callbacks/Titles.php:1021
-#: inc/admin/callbacks/Titles.php:1115
-#: inc/admin/callbacks/Titles.php:1208
-#: inc/admin/callbacks/Titles.php:1282
+#: inc/admin/callbacks/Titles.php:603
+#: inc/admin/callbacks/Titles.php:843
+#: inc/admin/callbacks/Titles.php:1022
+#: inc/admin/callbacks/Titles.php:1116
+#: inc/admin/callbacks/Titles.php:1209
+#: inc/admin/callbacks/Titles.php:1283
 msgid "Title template"
 msgstr ""
 
 #: inc/admin/callbacks/Titles.php:260
 #: inc/admin/callbacks/Titles.php:471
-#: inc/admin/callbacks/Titles.php:690
-#: inc/admin/callbacks/Titles.php:909
-#: inc/admin/callbacks/Titles.php:1053
-#: inc/admin/callbacks/Titles.php:1146
-#: inc/admin/callbacks/Titles.php:1240
-#: inc/admin/callbacks/Titles.php:1310
+#: inc/admin/callbacks/Titles.php:691
+#: inc/admin/callbacks/Titles.php:910
+#: inc/admin/callbacks/Titles.php:1054
+#: inc/admin/callbacks/Titles.php:1147
+#: inc/admin/callbacks/Titles.php:1241
+#: inc/admin/callbacks/Titles.php:1311
 msgid "Meta description template"
 msgstr ""
 
@@ -2454,188 +2456,188 @@ msgstr ""
 msgid "Click to display any SEO metaboxes for this taxonomy"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:648
+#: inc/admin/callbacks/Titles.php:649
 #: src/Tags/CategoryTitle.php:15
 msgid "Category Title"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:656
+#: inc/admin/callbacks/Titles.php:657
 #: src/Tags/TagTitle.php:15
 msgid "Tag Title"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:664
+#: inc/admin/callbacks/Titles.php:665
 #: inc/admin/metaboxes/admin-metaboxes-form.php:111
 #: src/Tags/TermTitle.php:15
 msgid "Term Title"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:721
+#: inc/admin/callbacks/Titles.php:722
 #: src/Tags/CategoryDescription.php:15
 msgid "Category Description"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:729
+#: inc/admin/callbacks/Titles.php:730
 #: src/Tags/TagDescription.php:15
 msgid "Tag Description"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:737
+#: inc/admin/callbacks/Titles.php:738
 #: src/Tags/TermDescription.php:15
 msgid "Term Description"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:759
+#: inc/admin/callbacks/Titles.php:760
 msgid "Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:763
+#: inc/admin/callbacks/Titles.php:764
 #: inc/admin/wizard/admin-wizard.php:1311
 msgid "We do not recommend indexing <strong>tags</strong> which are, in the vast majority of cases, a source of duplicate content."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:774
+#: inc/admin/callbacks/Titles.php:775
 msgid "This custom taxonomy is <strong>NOT</strong> excluded from your XML sitemaps despite the fact that it is set to <strong>NOINDEX</strong>. We recommend that you check this out."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:804
+#: inc/admin/callbacks/Titles.php:805
 msgid "Do not follow links for this taxonomy archive <strong>(nofollow)</strong>"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:833
+#: inc/admin/callbacks/Titles.php:834
 msgid "See archive"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:889
+#: inc/admin/callbacks/Titles.php:890
 msgid "Post Type Archive Name"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:973
+#: inc/admin/callbacks/Titles.php:974
 msgid "Do not display this post type archive in search engine results <strong>(noindex)</strong>"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1000
+#: inc/admin/callbacks/Titles.php:1001
 msgid "Do not follow links for this post type archive <strong>(nofollow)</strong>"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1017
+#: inc/admin/callbacks/Titles.php:1018
 msgid "Author archives"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1078
+#: inc/admin/callbacks/Titles.php:1079
 #: inc/admin/wizard/admin-wizard.php:1395
 msgid "Do not display author archives in search engine results <strong>(noindex)</strong>"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1099
+#: inc/admin/callbacks/Titles.php:1100
 msgid "Disable author archives"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1111
-#: inc/admin/callbacks/Titles.php:1127
+#: inc/admin/callbacks/Titles.php:1112
+#: inc/admin/callbacks/Titles.php:1128
 msgid "Date archives"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1170
+#: inc/admin/callbacks/Titles.php:1171
 msgid "Do not display date archives in search engine results <strong>(noindex)</strong>"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1192
+#: inc/admin/callbacks/Titles.php:1193
 msgid "Disable date archives"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1204
+#: inc/admin/callbacks/Titles.php:1205
 msgid "Search archives"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1220
+#: inc/admin/callbacks/Titles.php:1221
 #: src/Tags/SearchKeywords.php:15
 msgid "Search Keywords"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1266
+#: inc/admin/callbacks/Titles.php:1267
 msgid "Do not display search archives in search engine results <strong>(noindex)</strong>"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1278
+#: inc/admin/callbacks/Titles.php:1279
 msgid "404 archives"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1337
+#: inc/admin/callbacks/Titles.php:1338
 #: inc/admin/settings/Titles.php:251
 msgid "noindex"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1341
+#: inc/admin/callbacks/Titles.php:1342
 msgid "Do not display all pages of the site in Google search results and do not display \"Cached\" links in search results."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1345
+#: inc/admin/callbacks/Titles.php:1346
 msgid "Check also the <strong>\"Search engine visibility\"</strong> setting from the <a href=\"%s\">WordPress Reading page</a>."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1367
+#: inc/admin/callbacks/Titles.php:1368
 #: inc/admin/settings/Titles.php:259
 msgid "nofollow"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1371
+#: inc/admin/callbacks/Titles.php:1372
 msgid "Do not follow links for all pages."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1393
+#: inc/admin/callbacks/Titles.php:1394
 #: inc/admin/settings/Titles.php:267
 msgid "noimageindex"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1397
+#: inc/admin/callbacks/Titles.php:1398
 msgid "Do not index images from the entire site."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1418
+#: inc/admin/callbacks/Titles.php:1419
 #: inc/admin/settings/Titles.php:275
 msgid "noarchive"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1422
+#: inc/admin/callbacks/Titles.php:1423
 msgid "Do not display a \"Cached\" link in the Google search results."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1444
+#: inc/admin/callbacks/Titles.php:1445
 #: inc/admin/settings/Titles.php:283
 msgid "nosnippet"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1448
+#: inc/admin/callbacks/Titles.php:1449
 msgid "Do not display a description in the Google search results for all pages."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1470
+#: inc/admin/callbacks/Titles.php:1471
 #: inc/admin/settings/Titles.php:291
 msgid "nositelinkssearchbox"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1474
+#: inc/admin/callbacks/Titles.php:1475
 msgid "Prevents Google to display a sitelinks searchbox in search results. Enable this option will remove the \"Website\" schema from your source code."
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1496
+#: inc/admin/callbacks/Titles.php:1497
 msgid "Add rel next/prev link in head of paginated archive pages"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1518
+#: inc/admin/callbacks/Titles.php:1519
 msgid "Add a \"noindex\" meta robots for all paginated archive pages"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1522
+#: inc/admin/callbacks/Titles.php:1523
 msgid "eg: https://example.com/category/my-category/page/2/"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1544
+#: inc/admin/callbacks/Titles.php:1545
 msgid "Add a \"noindex\" meta robots for all attachment pages"
 msgstr ""
 
-#: inc/admin/callbacks/Titles.php:1548
+#: inc/admin/callbacks/Titles.php:1549
 msgid "eg: https://example.com/my-media-attachment-page"
 msgstr ""
 
@@ -2648,7 +2650,7 @@ msgid "Prêt à booster votre SEO ? Débutez en quelques minutes avec SEOPress."
 msgstr ""
 
 #: inc/admin/docs/DocsLinks.php:37
-#: inc/admin/docs/DocsLinks.php:208
+#: inc/admin/docs/DocsLinks.php:226
 msgid "Guides"
 msgstr ""
 
@@ -2657,7 +2659,7 @@ msgid "Découvrez les bases du SEO, comment configurer nos produits pour en tire
 msgstr ""
 
 #: inc/admin/docs/DocsLinks.php:43
-#: inc/admin/docs/DocsLinks.php:214
+#: inc/admin/docs/DocsLinks.php:232
 msgid "Ebooks"
 msgstr ""
 
@@ -2673,55 +2675,55 @@ msgstr ""
 msgid "Débloquez la puissance de SEOPress avec nos actions et filtres."
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:202
+#: inc/admin/docs/DocsLinks.php:220
 msgid "Starter guides"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:203
+#: inc/admin/docs/DocsLinks.php:221
 msgid "Ready to boost your SEO? Get started in minutes with SEOPress."
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:209
+#: inc/admin/docs/DocsLinks.php:227
 msgid "Discover the basics of SEO, how to configure our products to get the most out of them."
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:215
+#: inc/admin/docs/DocsLinks.php:233
 msgid "Free SEO ebooks to improve your rankings, traffic, conversions and sales."
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:220
+#: inc/admin/docs/DocsLinks.php:238
 msgid "Developer Docs"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:221
+#: inc/admin/docs/DocsLinks.php:239
 msgid "Unlock the power of SEOPress with our actions and filters."
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:227
+#: inc/admin/docs/DocsLinks.php:245
 msgid "Activate your SEOPress Insights license"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:228
+#: inc/admin/docs/DocsLinks.php:246
 msgid "Track your keyword rankings in Google with SEOPress Insights"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:229
+#: inc/admin/docs/DocsLinks.php:247
 msgid "Monitor and analyse your Backlinks with SEOPress Insights"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:230
+#: inc/admin/docs/DocsLinks.php:248
 msgid "Finding SEO keywords for your WordPress site"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:231
+#: inc/admin/docs/DocsLinks.php:249
 msgid "Optimize WordPress posts for a keyword"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:232
+#: inc/admin/docs/DocsLinks.php:250
 msgid "Audit the backlinks of your WordPress site (in WordPress)"
 msgstr ""
 
-#: inc/admin/docs/DocsLinks.php:233
+#: inc/admin/docs/DocsLinks.php:251
 msgid "The importance of backlinks"
 msgstr ""
 
@@ -3245,27 +3247,27 @@ msgstr ""
 msgid "Enter your new URL in absolute (eg: https://www.example.com/)"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:695
+#: inc/admin/metaboxes/admin-metaboxes-form.php:697
 msgid "Query parameters"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:698
+#: inc/admin/metaboxes/admin-metaboxes-form.php:700
 msgid "Exactly match all parameters"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:701
+#: inc/admin/metaboxes/admin-metaboxes-form.php:703
 msgid "Exclude all parameters"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:704
+#: inc/admin/metaboxes/admin-metaboxes-form.php:706
 msgid "Exclude all parameters and pass them to the redirection"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:736
+#: inc/admin/metaboxes/admin-metaboxes-form.php:738
 msgid "Test your URL"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:746
+#: inc/admin/metaboxes/admin-metaboxes-form.php:748
 msgid "Need help with your redirections? Read our guide"
 msgstr ""
 
@@ -5105,6 +5107,10 @@ msgstr ""
 
 #: src/Helpers/Metas/RedirectionSettings.php:64
 msgid "Select a redirection type:"
+msgstr ""
+
+#: src/Helpers/Metas/RedirectionSettings.php:77
+msgid "Enter some keywords to auto-complete this field against your content"
 msgstr ""
 
 #: src/Helpers/Metas/RobotSettings.php:51

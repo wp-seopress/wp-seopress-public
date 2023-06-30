@@ -3944,7 +3944,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
     background: rgba(242, 239, 251, 0.3);
     border-radius: 8px;
     display: flex;
-    margin: 24px 0 0 0;
+    margin: 24px 0;
     flex-direction: column;
     align-items: center;
     padding: 40px 0;

@@ -725,7 +725,7 @@ function seopress_clean_content_scans() {
     global $wpdb;
 
     //SQL query
-    $sql = 'DELETE FROM `' . $wpdb->prefix . 'postmeta`	WHERE `meta_key` IN ( \'_seopress_analysis_data\', \'_seopress_content_analysis_api\', \'_seopress_analysis_data_oxygen\')';
+    $sql = 'DELETE FROM `' . $wpdb->prefix . 'postmeta`	WHERE `meta_key` IN ( \'_seopress_analysis_data\', \'_seopress_content_analysis_api\', \'_seopress_analysis_data_oxygen\', \'seopress_content_analysis_api_in_progress\')';
 
     $sql = $wpdb->prepare($sql);
 
