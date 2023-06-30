@@ -61,7 +61,7 @@ function seopress_advanced_advanced_clean_filename_callback() {
 </label>
 
 <p class="description">
-    <?php _e('e.g. "ExãMple 1 cópy!.jpg" => "example-1-copy.jpg"', 'wp-seopress'); ?>
+    <?php _e('e.g. <code>ExãMple 1 cópy!.jpg</code> => <code>example-1-copy.jpg</code>', 'wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_advanced_advanced_clean_filename'])) {

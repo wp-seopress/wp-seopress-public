@@ -690,7 +690,7 @@ function seopress_social_fb_img_hook() {
 
             $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_fb_img_product_cat_option());
 
-        } elseif (is_post_type_archive() && '1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && !empty(seopress_get_service('SocialOption')->getSocialFacebookImgCpt($post->ID)) ) {//Default OG:IMAGE from global settings
+        } elseif (is_post_type_archive() && '1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && !empty(seopress_get_service('SocialOption')->getSocialFacebookImgCpt()) ) {//Default OG:IMAGE from global settings
 
             $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_get_service('SocialOption')->getSocialFacebookImgCpt($post->ID));
 

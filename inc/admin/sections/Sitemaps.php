@@ -39,18 +39,6 @@ function print_section_info_xml_sitemap_general()
     <pre><span class="dashicons dashicons-external"></span><a href="<?php echo get_option('home'); ?>/sitemaps.xml" target="_blank"><?php echo get_option('home'); ?>/sitemaps.xml</a></pre>
 </p>
 
-<p>
-    <a href="https://www.google.com/ping?sitemap=<?php echo get_option('home'); ?>/sitemaps.xml/"
-        target="_blank" class="btn btnSecondary">
-        <?php _e('Ping Google manually', 'wp-seopress'); ?>
-    </a>
-
-    <button type="button" id="seopress-flush-permalinks" class="btn btnSecondary">
-        <?php _e('Flush permalinks', 'wp-seopress'); ?>
-    </button>
-    <span class="spinner"></span>
-</p>
-
 <?php
 if (is_plugin_active('sg-cachepress/sg-cachepress.php')) { ?>
     <div class="seopress-notice">
@@ -61,9 +49,6 @@ if (is_plugin_active('sg-cachepress/sg-cachepress.php')) { ?>
 
 <div class="seopress-notice">
     <p>
-        <?php _e('To view your sitemap, <strong>enable permalinks</strong> (not default one), and save settings to flush them.', 'wp-seopress'); ?>
-    </p>
-    <p>
         <?php _e('<strong>Noindex content</strong> will not be displayed in Sitemaps. Same for custom canonical URLs.', 'wp-seopress'); ?>
     </p>
     <p>
@@ -72,23 +57,23 @@ if (is_plugin_active('sg-cachepress/sg-cachepress.php')) { ?>
 
     <p class="seopress-help">
         <span class="dashicons dashicons-external"></span>
-        <a href="<?php echo $docs['sitemaps']['error']['blank']; ?>"
-            target="_blank">
-            <?php _e('Blank sitemap?', 'wp-seopress'); ?></a>
+        <a href="<?php echo $docs['sitemaps']['error']['blank']; ?>" target="_blank">
+            <?php _e('Blank sitemap?', 'wp-seopress'); ?>
+        </a>
 
         <span class="dashicons dashicons-external"></span>
-        <a href="<?php echo $docs['sitemaps']['error']['404']; ?>"
-            target="_blank">
-            <?php _e('404 error?', 'wp-seopress'); ?></a>
+        <a href="<?php echo $docs['sitemaps']['error']['404']; ?>" target="_blank">
+            <?php _e('404 error?', 'wp-seopress'); ?>
+        </a>
 
         <span class="dashicons dashicons-external"></span>
-        <a href="<?php echo $docs['sitemaps']['error']['html']; ?>"
-            target="_blank">
-            <?php _e('HTML error? Exclude XML and XSL from caching plugins!', 'wp-seopress'); ?></a>
+        <a href="<?php echo $docs['sitemaps']['error']['html']; ?>" target="_blank">
+            <?php _e('HTML error? Exclude XML and XSL from caching plugins!', 'wp-seopress'); ?>
+        </a>
         <span class="dashicons dashicons-external"></span>
-        <a href="<?php echo array_shift($docs['get_started']['sitemaps']); ?>"
-            target="_blank">
-            <?php _e('Add your XML sitemaps to Google Search Console (video)', 'wp-seopress'); ?></a>
+        <a href="<?php echo $docs['sitemaps']['xml']; ?>" target="_blank">
+            <?php _e('Add your XML sitemaps to Google Search Console (video)', 'wp-seopress'); ?>
+        </a>
     </p>
 </div>
 

@@ -98,6 +98,8 @@ class ContentAnalysis implements ExecuteHooks
         }
 
         update_post_meta($id, '_seopress_content_analysis_api', $saveData);
+        delete_post_meta($id, '_seopress_analysis_data');
+
         $data['link_preview'] = $linkPreview;
 
         delete_option('seopress_content_analysis_api_in_progress');
@@ -123,6 +125,7 @@ class ContentAnalysis implements ExecuteHooks
 
 
         update_post_meta($id, '_seopress_content_analysis_api', $data);
+        delete_post_meta($id, '_seopress_analysis_data');
 
         return new \WP_REST_Response(["success" => true]);
     }

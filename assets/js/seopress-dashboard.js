@@ -8,7 +8,6 @@ jQuery(document).ready(function ($) {
         "notice-usm",
         "notice-wizard",
         "notice-insights-wizard",
-        "notice-seo-consultant",
         "notice-amp-analytics",
         "notice-divide-comments",
         "notice-review",
@@ -34,6 +33,7 @@ jQuery(document).ready(function ($) {
     notices.forEach(function (item) {
         $('#' + item).on('click', function () {
             $('#' + item).attr('data-notice', $('#' + item).attr('data-notice') == '1' ? '0' : '1');
+
             $.ajax({
                 method: 'POST',
                 url: seopressAjaxHideNotices.seopress_hide_notices,
@@ -100,33 +100,20 @@ jQuery(document).ready(function ($) {
             });
         });
     });
-    $('#seopress-activity-panel button').on('click', function () {
+    $('#seopress-activity-panel button, #seopress-notifications button').on('click', function () {
         $(this).toggleClass('is-active');
         $('#seopress-activity-panel-' + $(this).data('panel')).toggleClass('is-open');
     });
-    $('#seopress-content').on('click', function () {
-        $('#seopress-activity-panel').find('.is-open').toggleClass('is-open');
-        $('#seopress-activity-panel').find('.is-active').toggleClass('is-active');
+    $('#wpbody-content > form, #seopress-content').on('click', function (e) {
+        if (e.target.id !== 'seopress-see-notifications') {
+            $('#seopress-activity-panel').find('.is-open').toggleClass('is-open');
+            $('#seopress-activity-panel').find('.is-active').toggleClass('is-active');
+        }
     });
     $('.seopress-item-toggle-options').on('click', function () {
         $(this).next('.seopress-card-popover').toggleClass('is-open');
     });
 
-    $('#seopress-news-items').on('click', function () {
-        $.ajax({
-            method: 'POST',
-            url: seopressAjaxNews.seopress_news,
-            data: {
-                action: 'seopress_news',
-                news_max_items: $('#news_max_items').val(),
-                _ajax_nonce: seopressAjaxNews.seopress_nonce,
-            },
-            success: function (data) {
-                $('#seopress-news-panel .seopress-card-content').load(' #seopress-news-panel .seopress-card-content');
-                $('#seopress-news-panel .seopress-card-popover').toggleClass('is-open');
-            },
-        });
-    });
     $('#seopress_news').on('click', function () {
         $('#seopress-news-panel').toggleClass('is-active');
         $('#seopress_news').attr('data-toggle', $('#seopress_news').attr('data-toggle') == '1' ? '0' : '1');
@@ -154,7 +141,7 @@ jQuery(document).ready(function ($) {
         });
     });
     $('#notifications_center').on('click', function () {
-        $('#seopress-notifications-center').toggleClass('is-active');
+        $('#seopress-notifications').toggleClass('is-active');
         $('#notifications_center').attr('data-toggle', $('#notifications_center').attr('data-toggle') == '1' ? '0' : '1');
         $.ajax({
             method: 'POST',
@@ -165,6 +152,22 @@ jQuery(document).ready(function ($) {
                 _ajax_nonce: seopressAjaxDisplay.seopress_nonce,
             },
         });
+    });
+    $('#notice-tasks').on('click', function () {
+        $('#notice-tasks-alert').toggleClass('is-active');
+        $('#notice-tasks').attr('data-toggle', $('#notice-tasks').attr('data-toggle') == '1' ? '0' : '1');
+    });
+    $('#notice-get-started').on('click', function () {
+        $('#notice-get-started-alert').toggleClass('is-active');
+        $('#notice-get-started').attr('data-toggle', $('#notice-get-started').attr('data-toggle') == '1' ? '0' : '1');
+    });
+    $('#notice-go-pro').on('click', function () {
+        $('#notice-go-pro-alert').toggleClass('is-active');
+        $('#notice-go-pro').attr('data-toggle', $('#notice-go-pro').attr('data-toggle') == '1' ? '0' : '1');
+    });
+    $('#notice-go-insights').on('click', function () {
+        $('#notice-go-insights-alert').toggleClass('is-active');
+        $('#notice-go-insights').attr('data-toggle', $('#notice-go-insights').attr('data-toggle') == '1' ? '0' : '1');
     });
 });
 
@@ -215,32 +218,5 @@ jQuery(document).ready(function ($) {
 
         $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");
         $('#' + hash).addClass("active");
-    });
-
-    //Drag and drop for cards
-    $(".seopress-dashboard-columns .seopress-dashboard-column:last-child").sortable({
-        items: ".seopress-card",
-        placeholder: "sp-dashboard-card-highlight",
-        cancel: ".seopress-intro, .seopress-card-popover",
-        handle: ".seopress-card-title",
-        opacity: 0.9,
-        forcePlaceholderSize: true,
-        update: function (e) {
-            const item = jQuery(e.target);
-
-            var postData = item.sortable("toArray", {
-                attribute: "id",
-            });
-
-            $.ajax({
-                method: "POST",
-                url: seopressAjaxDndFeatures.seopress_dnd_features,
-                data: {
-                    action: "seopress_dnd_features",
-                    order: postData,
-                    _ajax_nonce: seopressAjaxDndFeatures.seopress_nonce,
-                },
-            });
-        },
     });
 });

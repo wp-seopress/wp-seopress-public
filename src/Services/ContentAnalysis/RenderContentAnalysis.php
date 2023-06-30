@@ -12,7 +12,7 @@ class RenderContentAnalysis {
                 <div class="analysis-score">
                     <?php
                     $impact = array_unique(array_values(wp_list_pluck($analyzes, 'impact')));
-        $svg                = '<svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    $svg = '<svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                 <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                                 <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                             </svg>';
@@ -33,6 +33,7 @@ class RenderContentAnalysis {
         if ( ! empty($analysis_data) && is_array($analysis_data)) {
             $analysis_data['score'] = $score;
             update_post_meta(get_the_ID(), '_seopress_analysis_data', $analysis_data);
+            delete_post_meta(get_the_ID(), '_seopress_content_analysis_api');
         } ?>
                     <span><a href="#" id="expand-all"><?php echo __('Expand', 'wp-seopress'); ?></a> / <a href="#" id="close-all"><?php echo __('Close', 'wp-seopress'); ?></a></span>
                 </div><!-- .analysis-score -->

@@ -291,7 +291,7 @@ function seopress_xml_sitemap_index() {
 
     //Google News
     if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-        if (method_exists(seopress_pro_get_service('OptionPro'), 'getGoogleNewsEnable') && '' !== seopress_pro_get_service('OptionPro')->getGoogleNewsEnable()
+        if (method_exists(seopress_pro_get_service('OptionPro'), 'getGoogleNewsEnable') && '1' === seopress_pro_get_service('OptionPro')->getGoogleNewsEnable()
             && function_exists('seopress_get_toggle_option') && '1' == seopress_get_toggle_option('news')) {
             //Include Custom Post Types
             function seopress_xml_sitemap_news_cpt_option() {

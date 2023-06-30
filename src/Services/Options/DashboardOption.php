@@ -39,13 +39,4 @@ class DashboardOption
 
         return $data[$key];
     }
-
-    /**
-     * @since 6.6.0
-     *
-     * @return string
-     */
-    public function getDashboardCardsOrder(){
-        return $this->searchOptionByKey('cards_order');
-    }
 }

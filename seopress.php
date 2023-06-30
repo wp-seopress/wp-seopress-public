@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 6.6.3
+Version: 6.7
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -73,7 +73,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '6.6.3');
+define('SEOPRESS_VERSION', '6.7');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -226,7 +226,7 @@ function seopress_add_admin_options_scripts($hook) {
 		'seopress-insights-trends'      => true,
 	];
 	if (isset($_pages[$_GET['page']])) {
-		wp_enqueue_script('seopress-toggle-ajax', plugins_url('assets/js/seopress-dashboard' . $prefix . '.js', __FILE__), ['jquery', 'jquery-ui-sortable'], SEOPRESS_VERSION, true);
+		wp_enqueue_script('seopress-toggle-ajax', plugins_url('assets/js/seopress-dashboard' . $prefix . '.js', __FILE__), ['jquery'], SEOPRESS_VERSION, true);
 
 		//Features
 		$seopress_toggle_features = [
@@ -236,16 +236,6 @@ function seopress_add_admin_options_scripts($hook) {
 		];
 		wp_localize_script('seopress-toggle-ajax', 'seopressAjaxToggleFeatures', $seopress_toggle_features);
 
-		//Drag and drop
-		$seopress_dnd_features = [
-			'seopress_nonce' => wp_create_nonce('seopress_dnd_features_nonce'),
-			'seopress_dnd_features' => admin_url('admin-ajax.php'),
-		];
-		wp_localize_script('seopress-toggle-ajax', 'seopressAjaxDndFeatures', $seopress_dnd_features);
-	}
-	unset($_pages);
-
-	if ('seopress-option' === $_GET['page']) {
 		//Notices
 		$seopress_hide_notices = [
 			'seopress_nonce'        => wp_create_nonce('seopress_hide_notices_nonce'),
@@ -267,8 +257,6 @@ function seopress_add_admin_options_scripts($hook) {
 		];
 		wp_localize_script('seopress-toggle-ajax', 'seopressAjaxDisplay', $seopress_display);
 
-		//Admin Tabs
-		wp_enqueue_script('seopress-reverse-ajax', plugins_url('assets/js/seopress-tabs' . $prefix . '.js', __FILE__), ['jquery-ui-tabs'], SEOPRESS_VERSION);
 	}
 
 	//Migration
@@ -351,16 +339,6 @@ function seopress_add_admin_options_scripts($hook) {
 	//Tabs
 	if ('seopress-titles' === $_GET['page'] || 'seopress-xml-sitemap' === $_GET['page'] || 'seopress-social' === $_GET['page'] || 'seopress-google-analytics' === $_GET['page'] || 'seopress-advanced' === $_GET['page'] || 'seopress-import-export' === $_GET['page'] || 'seopress-instant-indexing' === $_GET['page'] || 'seopress-insights-settings' === $_GET['page']) {
 		wp_enqueue_script('seopress-admin-tabs-js', plugins_url('assets/js/seopress-tabs' . $prefix . '.js', __FILE__), ['jquery-ui-tabs'], SEOPRESS_VERSION);
-	}
-
-	if ('seopress-xml-sitemap' === $_GET['page'] || 'seopress-pro-page' === $_GET['page'] || 'seopress-network-option' === $_GET['page']) {
-		wp_enqueue_script('seopress-xml-ajax', plugins_url('assets/js/seopress-sitemap-ajax' . $prefix . '.js', __FILE__), ['jquery'], SEOPRESS_VERSION, true);
-
-		$seopress_ajax_permalinks = [
-			'seopress_nonce'							=> wp_create_nonce('seopress_flush_permalinks_nonce'),
-			'seopress_ajax_permalinks'					=> admin_url('admin-ajax.php'),
-		];
-		wp_localize_script('seopress-xml-ajax', 'seopressAjaxResetPermalinks', $seopress_ajax_permalinks);
 	}
 
 	if ('seopress-google-analytics' === $_GET['page']) {
@@ -450,6 +428,9 @@ function seopress_admin_body_class($classes) {
 	];
 	if (isset($_pages[$_GET['page']])) {
 		$classes .= ' seopress-styles ';
+	}
+    if (isset($_pages[$_GET['page']]) && 'seopress-option' === $_GET['page']) {
+		$classes .= ' seopress-dashboard ';
 	}
 	if (isset($_pages[$_GET['page']]) && 'seopress_csv_importer' === $_GET['page']) {
 		$classes .= ' seopress-setup ';

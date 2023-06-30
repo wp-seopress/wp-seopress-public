@@ -13,51 +13,28 @@ if (function_exists('seopress_admin_header')) {
 <div id="seopress-content" class="seopress-option">
     <!--Get started-->
     <?php
-if ('1' !== seopress_get_service('NoticeOption')->getNoticeGetStarted()) {
-    if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
-        //do nothing
-    } else {
+        include_once dirname(dirname(__FILE__)) . '/blocks/intro.php';
         include_once dirname(dirname(__FILE__)) . '/blocks/get-started.php';
-    }
-} ?>
+        include_once dirname(dirname(__FILE__)) . '/blocks/features-list.php';
+    ?>
+
     <div class="seopress-dashboard-columns">
         <div class="seopress-dashboard-column">
             <?php
-                include_once dirname(dirname(__FILE__)) . '/blocks/intro.php';
-                if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
-                    //do nothing
-                } else {
-                    include_once dirname(dirname(__FILE__)) . '/blocks/tasks.php';
-                    include_once dirname(dirname(__FILE__)) . '/blocks/notifications-center.php';
-                }
+                include_once dirname(dirname(__FILE__)) . '/blocks/tasks.php';
+                include_once dirname(dirname(__FILE__)) . '/blocks/notifications.php';
             ?>
         </div>
         <div class="seopress-dashboard-column">
             <?php
-
-                $cards = [
-                    'notice-insights-alert' => '/blocks/insights.php',
-                    'seopress-news-panel' => '/blocks/news.php',
-                    'seopress-page-list' => '/blocks/features-list.php'
-                ];
-
-                $order = seopress_get_service('DashboardOption')->getDashboardCardsOrder();
-
-                if (!empty($order)) {
-                    foreach($order as $key => $value) {
-                        if (isset($cards[$value])) {
-                            include_once dirname(dirname(__FILE__)) . $cards[$value];
-                        }
-                    }
-                } else {
-                    foreach($cards as $key => $value) {
-                        include_once dirname(dirname(__FILE__)) . $value;
-                    }
-                }
+                include_once dirname(dirname(__FILE__)) . '/blocks/insights.php';
+                include_once dirname(dirname(__FILE__)) . '/blocks/upsell.php';
             ?>
         </div>
     </div>
-
-    <?php echo $this->seopress_feature_save(); ?>
+    <?php
+        include_once dirname(dirname(__FILE__)) . '/blocks/news.php';
+        $this->seopress_feature_save();
+    ?>
 </div>
 <?php

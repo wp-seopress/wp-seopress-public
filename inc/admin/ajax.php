@@ -93,7 +93,10 @@ function seopress_do_real_preview()
             ];
 
             if (isset($cookies) && ! empty($cookies)) {
-                $args['cookies'] = $cookies;
+                //required to avoid 500 error with WP Bakery
+                if (!class_exists( 'Vc_Manager' )) {
+                    $args['cookies'] = $cookies;
+                }
             }
             $args = apply_filters('seopress_real_preview_remote', $args);
 
@@ -101,7 +104,7 @@ function seopress_do_real_preview()
 
             if ('post' == $seopress_origin) { //Default: post type
                 //Oxygen compatibility
-                if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
+                if ((is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) ) {
                     $link = get_permalink((int) $seopress_get_the_id);
                     $link = add_query_arg('no_admin_bar', 1, $link);
 
@@ -582,6 +585,7 @@ function seopress_do_real_preview()
                 $data  = $data + $data2;
             }
             update_post_meta($seopress_get_the_id, '_seopress_analysis_data', $data);
+            delete_post_meta($seopress_get_the_id, '_seopress_content_analysis_api');
         }
 
         //Re-enable QM
@@ -592,19 +596,6 @@ function seopress_do_real_preview()
     }
 }
 add_action('wp_ajax_seopress_do_real_preview', 'seopress_do_real_preview');
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Flush permalinks
-///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_flush_permalinks()
-{
-    check_ajax_referer('seopress_flush_permalinks_nonce', $_GET['_ajax_nonce'], true);
-    if (current_user_can(seopress_capability('manage_options', 'flush')) && is_admin()) {
-        flush_rewrite_rules(false);
-        exit();
-    }
-}
-add_action('wp_ajax_seopress_flush_permalinks', 'seopress_flush_permalinks');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Dashboard toggle features
@@ -623,43 +614,6 @@ function seopress_toggle_features()
     }
 }
 add_action('wp_ajax_seopress_toggle_features', 'seopress_toggle_features');
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Dashboard drag and drop features
-///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_dnd_features()
-{
-    check_ajax_referer('seopress_dnd_features_nonce');
-    if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
-        if (isset($_POST['order']) && $_POST['order']) {
-            $cards_order = get_option('seopress_dashboard_option_name');
-
-            $cards_order['cards_order'] = $_POST['order'];
-
-            update_option('seopress_dashboard_option_name', $cards_order);
-        }
-    }
-
-    wp_send_json_success();
-}
-add_action('wp_ajax_seopress_dnd_features', 'seopress_dnd_features');
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Dashboard News Panel
-///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_news()
-{
-    check_ajax_referer('seopress_news_nonce', $_POST['_ajax_nonce'], true);
-    if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
-        if (isset($_POST['news_max_items'])) {
-            $seopress_dashboard_option_name                    = get_option('seopress_dashboard_option_name');
-            $seopress_dashboard_option_name['news_max_items']  = intval($_POST['news_max_items']);
-            update_option('seopress_dashboard_option_name', $seopress_dashboard_option_name, false);
-        }
-        exit();
-    }
-}
-add_action('wp_ajax_seopress_news', 'seopress_news');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Dashboard Display Panel

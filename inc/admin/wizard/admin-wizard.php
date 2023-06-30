@@ -555,7 +555,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function seopress_setup_welcome() {
 		?>
     <div class="seopress-setup-content">
-        <h1><?php printf(esc_html__('Welcome to %s!', 'wp-seopress'), $this->seo_title); ?><hr role="presentation"></h1>
+        <h1><?php printf(esc_html__('Welcome to %s!', 'wp-seopress'), $this->seo_title); ?></h1>
 
         <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -587,7 +587,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function seopress_setup_import_settings() {
 		?>
         <div class="seopress-setup-content">
-            <h1><?php printf(esc_html__('Migrate your SEO metadata to %s!', 'wp-seopress'), $this->seo_title); ?><hr role="presentation"></h1>
+            <h1><?php printf(esc_html__('Migrate your SEO metadata to %s!', 'wp-seopress'), $this->seo_title); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -783,7 +783,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$knowledge_nl    = isset($seopress_social_option['seopress_social_knowledge_nl']); ?>
 
         <div class="seopress-setup-content">
-            <h1><?php esc_html_e('Your site', 'wp-seopress'); ?><hr role="presentation"></h1>
+            <h1><?php esc_html_e('Your site', 'wp-seopress'); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -959,7 +959,7 @@ class SEOPRESS_Admin_Setup_Wizard {
         ?>
 
         <div class="seopress-setup-content">
-            <h1><?php esc_html_e('Your site', 'wp-seopress'); ?><hr role="presentation"></h1>
+            <h1><?php esc_html_e('Your site', 'wp-seopress'); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -1066,7 +1066,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_titles_option = get_option('seopress_titles_option_name'); ?>
 
         <div class="seopress-setup-content">
-            <h1><?php esc_html_e('Indexing', 'wp-seopress'); ?><hr role="presentation"></h1>
+            <h1><?php esc_html_e('Indexing', 'wp-seopress'); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -1160,7 +1160,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_titles_option = get_option('seopress_titles_option_name'); ?>
 
         <div class="seopress-setup-content">
-            <h1><?php esc_html_e('Indexing', 'wp-seopress'); ?><hr role="presentation"></h1>
+            <h1><?php esc_html_e('Indexing', 'wp-seopress'); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -1266,7 +1266,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_titles_option = get_option('seopress_titles_option_name'); ?>
 
         <div class="seopress-setup-content">
-            <h1><?php esc_html_e('Indexing', 'wp-seopress'); ?><hr role="presentation"></h1>
+            <h1><?php esc_html_e('Indexing', 'wp-seopress'); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -1375,7 +1375,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
         <div class="seopress-setup-content">
 
-            <h1><?php esc_html_e('Advanced options', 'wp-seopress'); ?><hr role="presentation"></h1>
+            <h1><?php esc_html_e('Advanced options', 'wp-seopress'); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -1513,7 +1513,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
         <div class="seopress-setup-content">
 
-            <h1><?php esc_html_e('Advanced options', 'wp-seopress'); ?><hr role="presentation"></h1>
+            <h1><?php esc_html_e('Advanced options', 'wp-seopress'); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -1596,7 +1596,7 @@ class SEOPRESS_Admin_Setup_Wizard {
         <div class="seopress-setup-content">
 
             <h1 class="seopress-setup-actions step">
-                <?php _e('SEOPress PRO','wp-seopress'); ?><hr role="presentation">
+                <?php _e('SEOPress PRO','wp-seopress'); ?>
             </h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
@@ -1656,7 +1656,7 @@ class SEOPRESS_Admin_Setup_Wizard {
         <div class="seopress-setup-content">
 
             <h1 class="seopress-setup-actions step">
-            <?php _e('SEOPress Insights','wp-seopress'); ?><hr role="presentation">
+                <?php _e('SEOPress Insights','wp-seopress'); ?>
             </h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
@@ -1699,7 +1699,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 */
 	public function seopress_setup_ready() {
 		//Remove SEOPress notice
-		$seopress_notices                  = get_option('seopress_notices');
+		$seopress_notices                  = get_option('seopress_notices', []);
+
 		$seopress_notices['notice-wizard'] = '1';
 		update_option('seopress_notices', $seopress_notices, false);
 
@@ -1710,7 +1711,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
         <div class="seopress-setup-content">
 
-            <h1><?php esc_html_e('Your site is now ready for search engines!', 'wp-seopress'); ?><hr role="presentation"></h1>
+            <h1><?php esc_html_e('Your site is now ready for search engines!', 'wp-seopress'); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -1730,7 +1731,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         </div>
                         <div class="seopress-wizard-next-step-action">
                             <p class="seopress-setup-actions step">
-                                <a class="btn btnSecondary"
+                                <a class="btn btnPrimary"
                                     href="<?php echo admin_url('admin.php?page=seopress-xml-sitemap'); ?>">
                                     <?php esc_html_e('Configure your XML sitemaps', 'wp-seopress'); ?>
                                 </a>
@@ -1771,16 +1772,16 @@ class SEOPRESS_Admin_Setup_Wizard {
                         </div>
                         <div class="seopress-wizard-next-step-action step">
                             <p class="seopress-setup-actions step">
-                                <a class="btn btnSecondary"
+                                <a class="btn btnTertiary"
                                     href="<?php echo esc_url(admin_url()); ?>">
                                     <?php esc_html_e('Visit Dashboard', 'wp-seopress'); ?>
                                 </a>
-                                <a class="btn btnSecondary"
+                                <a class="btn btnTertiary"
                                     href="<?php echo esc_url(admin_url('admin.php?page=seopress-option')); ?>">
                                     <?php esc_html_e('Review Settings', 'wp-seopress'); ?>
                                 </a>
                                 <?php if (!method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') || '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) { ?>
-                                    <a class="btn btnSecondary"
+                                    <a class="btn btnTertiary"
                                         href="<?php echo $docs['support']; ?>"
                                         target="_blank">
                                         <?php esc_html_e('Knowledge base', 'wp-seopress'); ?>

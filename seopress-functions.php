@@ -637,79 +637,18 @@ function seopress_remove_utf8_bom($text) {
  *
  * @param array $args
  *
+ * @deprecated 6.7
+ *
  * @return string HTML notification
  *
  * @author Benjamin
  */
-function seopress_notification($args) {
-    if ( ! empty($args)) {
-        $id             = isset($args['id']) ? $args['id'] : null;
-        $title          = isset($args['title']) ? $args['title'] : null;
-        $desc           = isset($args['desc']) ? $args['desc'] : null;
-        $impact         = isset($args['impact']) ? $args['impact'] : [];
-        $link           = isset($args['link']) ? $args['link'] : null;
-        $deleteable     = isset($args['deleteable']) ? $args['deleteable'] : null;
-        $icon           = isset($args['icon']) ? $args['icon'] : null;
-        $wrap           = isset($args['wrap']) ? $args['wrap'] : null;
 
-        $class = '';
-        if ( ! empty($impact)) {
-            $class .= ' impact';
-            $class .= ' ' . key($impact);
-        }
-
-        if (true === $deleteable) {
-            $class .= ' deleteable';
-        }
-
-        $html = '<div id="' . $id . '-alert" class="seopress-alert seopress-card">';
-
-        if ( ! empty($impact)) {
-            $html .= '<span class="screen-reader-text">' . reset($impact) . '</span>';
-        }
-
-        if ( ! empty($icon)) {
-            $html .= '<span class="dashicons ' . $icon . '"></span>';
-        } else {
-            $html .= '<span class="dashicons dashicons-info"></span>';
-        }
-
-        $html .= '<h3>' . $title . '</h3>';
-
-        if (false === $wrap) {
-            $html .= $desc;
-        } else {
-            $html .= '<p>' . $desc . '</p>';
-        }
-
-        $href = '';
-        if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale() && isset($link['fr'])) {
-            $href = ' href="' . $link['fr'] . '"';
-        } elseif (isset($link['en'])) {
-            $href = ' href="' . $link['en'] . '"';
-        }
-
-        $target = '';
-        if (isset($link['external']) && true === $link['external']) {
-            $target = ' target="_blank"';
-        }
-
-        if ( ! empty($link) || true === $deleteable) {
-            $html .= '<p class="seopress-card-actions">';
-
-            if ( ! empty($link)) {
-                $html .= '<a class="btn btnSecondary"' . $href . $target . '>' . $link['title'] . '</a>';
-            }
-            if (true === $deleteable) {
-                $html .= '<button id="' . $id . '" name="notice-title-tag" type="button" class="btn btnTertiary" data-notice="' . $id . '">' . __('Dismiss', 'wp-seopress') . '</button>';
-            }
-
-            $html .= '</p>';
-        }
-        $html .= '</div>';
-        echo $html;
-    }
+ function seopress_notification($args) {
+    remove_all_actions( 'seopress_notifications_center_item' );
+    return;
 }
+
 /**
  * Filter the capability to allow other roles to use the plugin.
  *
@@ -1061,4 +1000,28 @@ function seopress_maybe_mangled_object_vars($data){
 
     return get_mangled_object_vars($data);
 
+}
+
+/**
+ * Automatically flush permalinks after saving XML sitemaps global settings
+ * @since 6.0.0
+ *
+ * @param string $option
+ * @param string $old_value
+ * @param string $value
+ *
+ * @return void
+ */
+add_action('update_option', function( $option, $old_value, $value ) {
+    if ($option ==='seopress_xml_sitemap_option_name') {
+        set_transient('seopress_flush_rewrite_rules', 1);
+    }
+}, 10, 3);
+
+add_action('init', 'seopress_auto_flush_rewrite_rules');
+function seopress_auto_flush_rewrite_rules() {
+    if (get_transient('seopress_flush_rewrite_rules')) {
+        flush_rewrite_rules(false);
+        delete_transient('seopress_flush_rewrite_rules');
+    }
 }

@@ -44,7 +44,7 @@ class ModuleMetabox implements ExecuteHooks
         }
 
         //Bricks builder compatibility
-        if (function_exists('bricks_is_builder_main') && bricks_is_builder_main() === false) {
+        if (function_exists('bricks_is_builder_call') && bricks_is_builder_call() === true) {
             return;
         }
 

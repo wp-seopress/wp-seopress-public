@@ -116,6 +116,30 @@ add_settings_field(
 );
 
 add_settings_field(
+    'seopress_advanced_advanced_wp_oembed', // ID
+    __('Remove oEmbed links', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_wp_oembed_callback', // Callback
+    'seopress-settings-admin-advanced-advanced', // Page
+    'seopress_setting_section_advanced_advanced' // Section
+);
+
+add_settings_field(
+    'seopress_advanced_advanced_wp_x_pingback', // ID
+    __('Remove WordPress X-Pingback header', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_wp_x_pingback_callback', // Callback
+    'seopress-settings-admin-advanced-advanced', // Page
+    'seopress_setting_section_advanced_advanced' // Section
+);
+
+add_settings_field(
+    'seopress_advanced_advanced_wp_x_powered_by', // ID
+    __('Remove WordPress X-Powered-By header', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_wp_x_powered_by_callback', // Callback
+    'seopress-settings-admin-advanced-advanced', // Page
+    'seopress_setting_section_advanced_advanced' // Section
+);
+
+add_settings_field(
     'seopress_advanced_advanced_google', // ID
     __('Google site verification', 'wp-seopress'), // Title
     'seopress_advanced_advanced_google_callback', // Callback
@@ -204,14 +228,6 @@ add_settings_field(
     'seopress_setting_section_advanced_appearance_metabox' // Section
 );
 
-add_settings_field(
-    'seopress_advanced_appearance_advice_schema', // ID
-    __('Hide advice in Structured Data Types metabox', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_advice_schema_callback', // Callback
-    'seopress-settings-admin-advanced-appearance', // Page
-    'seopress_setting_section_advanced_appearance_metabox' // Section
-);
-
 //SEO Admin bar
 add_settings_section(
     'seopress_setting_section_advanced_appearance_admin_bar', // ID
@@ -244,30 +260,6 @@ add_settings_section(
     //__("Dashboard","wp-seopress"), // Title
     'print_section_info_advanced_appearance_dashboard', // Callback
     'seopress-settings-admin-advanced-appearance' // Page
-);
-
-add_settings_field(
-    'seopress_advanced_appearance_notifications', // ID
-    __('Hide Notifications Center', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_notifications_callback', // Callback
-    'seopress-settings-admin-advanced-appearance', // Page
-    'seopress_setting_section_advanced_appearance_dashboard' // Section
-);
-
-add_settings_field(
-    'seopress_advanced_appearance_news', // ID
-    __('Hide SEO News', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_news_callback', // Callback
-    'seopress-settings-admin-advanced-appearance', // Page
-    'seopress_setting_section_advanced_appearance_dashboard' // Section
-);
-
-add_settings_field(
-    'seopress_advanced_appearance_seo_tools', // ID
-    __('Hide Site Overview', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_seo_tools_callback', // Callback
-    'seopress-settings-admin-advanced-appearance', // Page
-    'seopress_setting_section_advanced_appearance_dashboard' // Section
 );
 
 //Columns

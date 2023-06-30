@@ -125,7 +125,7 @@ function print_section_info_advanced_appearance_dashboard()
     <?php _e('SEO Dashboard', 'wp-seopress'); ?>
 </h3>
 
-<p><?php _e('Customize the SEO dashboard UI.','wp-seopress'); ?></p>
+<p><?php _e('Click the dedicated icon from the toolbar to customize the SEO dashboard.','wp-seopress'); ?></p>
 
 <?php
 }

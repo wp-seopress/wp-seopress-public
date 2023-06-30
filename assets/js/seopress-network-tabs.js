@@ -51,23 +51,4 @@ jQuery(document).ready(function ($) {
     $('#seopress-tag-robots-1, #seopress-tag-robots-2, #seopress-tag-robots-3, #seopress-tag-robots-4, #seopress-tag-robots-5, #seopress-tag-robots-6, #seopress-tag-robots-7, #seopress-tag-robots-8, #seopress-tag-robots-9, #seopress-tag-robots-10, #seopress-tag-robots-11').click(function () {
         $(".seopress_robots_file").val($(".seopress_robots_file").val() + '\n' + $(this).attr('data-tag'));
     });
-    //Flush permalinks
-    $('#seopress-flush-permalinks2').on('click', function () {
-        $.ajax({
-            method: 'GET',
-            url: seopressAjaxResetPermalinks.seopress_ajax_permalinks,
-            data: {
-                action: 'seopress_flush_permalinks',
-                _ajax_nonce: seopressAjaxResetPermalinks.seopress_nonce,
-            },
-            success: function (data) {
-                window.location.reload(true);
-            },
-        });
-    });
-    $('#seopress-flush-permalinks2').on('click', function () {
-        $(this).attr("disabled", "disabled");
-        $('.spinner').css("visibility", "visible");
-        $('.spinner').css("float", "none");
-    });
 });

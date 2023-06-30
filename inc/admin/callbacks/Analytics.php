@@ -89,7 +89,7 @@ function seopress_google_analytics_hook_callback() {
 </select>
 
 <p class="description">
-    <?php _e('Your theme must be compatible with wp_body_open hook introduced in WordPress 5.2 if "opening body tag" option selected.'); ?>
+    <?php _e('Your theme must be compatible with <code>wp_body_open</code> hook introduced in WordPress 5.2 if "opening body tag" option selected.'); ?>
 </p>
 
 <?php if (isset($options['seopress_google_analytics_hook'])) {
@@ -125,7 +125,7 @@ function seopress_google_analytics_disable_callback() {
     <?php _e('If you use a caching plugin, you have to exclude this JS file in your settings:', 'wp-seopress'); ?>
 </p>
 <p class="description">
-    <?php _e('<strong>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</strong> and this cookie <strong>seopress-user-consent-accept</strong>', 'wp-seopress'); ?>
+    <?php _e('<code>/wp-content/plugins/wp-seopress/assets/js/seopress-cookies-ajax.js</code> and this cookie <code>seopress-user-consent-accept</code>', 'wp-seopress'); ?>
     <?php echo seopress_tooltip_link($docs['analytics']['custom_tracking'], __('Hook to add custom tracking code with user consent - new window', 'wp-seopress')); ?>
 </p>
 

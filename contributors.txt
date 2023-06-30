@@ -1,7 +1,7 @@
 Great people who contributed to this plugin:
 
 Developers:
-- Benjamin Denis: contact@seopress.org / @wp_seopress
+- Benjamin Denis: @wp_seopress
 - Thomas Deneulin: @tdeneulin
 - Julio Potier: @juliobox
 - Mickael Gris: @mgris
@@ -17,8 +17,8 @@ A11Y:
 
 Beta testers / feedbacks:
 - Maxime Bernard Jacquet: @maximebj
-- Mickael Gris: mickael.gris@gmail.com / @mickaelgris
-- Aurélien Denis: contact@wpchannel.com / @wpchannel
+- Mickael Gris: @mickaelgris
+- Aurélien Denis: @wpchannel
 - Thomas Piron: @crash_47
 - Sébastien Serre: @sebastienserre
 - Ludovic Riaudel: @lriaudel

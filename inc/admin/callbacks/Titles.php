@@ -83,16 +83,17 @@ function seopress_titles_home_site_desc_callback()
             <?php _e('Tagline', 'wp-seopress'); ?>
         </button>
 
-        <?php echo seopress_render_dyn_variables('tag-description');
+        <?php echo seopress_render_dyn_variables('tag-description'); ?>
+    </div>
 
-    if (get_option('page_for_posts')) { ?>
+    <?php if (get_option('page_for_posts')) { ?>
         <p>
             <a
                 href="<?php echo admin_url('post.php?post=' . get_option('page_for_posts') . '&action=edit'); ?>">
                 <?php _e('Looking to edit your blog page?', 'wp-seopress'); ?>
             </a>
         </p>
-        <?php }
+    <?php }
 }
 
 //Single CPT

@@ -7,24 +7,12 @@
     if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
         //do nothing
     } else {
-        if ('1' !== seopress_get_service('NoticeOption')->getNoticeTasks()) {
+        $class = '1' !== seopress_get_service('NoticeOption')->getNoticeTasks() ? 'is-active' : '';
     ?>
 
-    <div id="notice-tasks-alert" class="seopress-card">
+    <div id="notice-tasks-alert" class="seopress-card <?php echo $class; ?>" style="display: none">
         <div class="seopress-card-title">
             <h2><?php _e('Get ready to improve your SEO', 'wp-seopress'); ?></h2>
-
-            <span class="seopress-item-toggle-options"></span>
-            <div class="seopress-card-popover">
-                <?php
-                    $options = get_option('seopress_dashboard_option_name');
-                    $value   = isset($options['hide_tasks']) ? esc_attr($options['hide_tasks']) : 5;
-                ?>
-
-                <button id="notice-tasks" name="notice-tasks" data-notice="notice-tasks" type="submit" class="btn btnSecondary">
-                    <?php _e('Hide this', 'wp-seopress'); ?>
-                </button>
-            </div>
         </div>
         <div class="seopress-card-content">
             <?php
@@ -85,13 +73,7 @@
                 <?php } ?>
             </ul>
         </div>
-        <div class="seopress-card-footer">
-            <a href="https://wordpress.org/support/view/plugin-reviews/wp-seopress?rate=5#postform" target="_blank">
-                <?php _e('You like SEOPress? Please help us by rating us 5 stars!', 'wp-seopress'); ?>
-            </a>
-            <span class="dashicons dashicons-external"></span>
-        </div>
     </div>
 
-<?php }
+<?php
 }

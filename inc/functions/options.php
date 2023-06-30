@@ -5,9 +5,7 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //SEOPRESS Core
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Instant Indexing
-if ('1' == seopress_get_toggle_option('instant-indexing')) {
-    require_once dirname(__FILE__) . '/options-instant-indexing.php';
-}
+require_once dirname(__FILE__) . '/options-instant-indexing.php';
 
 //Import / Export tool
 add_action('init', 'seopress_enable', 999);

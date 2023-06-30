@@ -4,9 +4,21 @@
         echo 'Please don&rsquo;t call the plugin directly. Thanks :)';
         exit;
     }
+
+    if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+        //do nothing
+    } else {
 ?>
 
 <div id="seopress-intro" class="seopress-intro">
-    <h2><?php _e('Your SEO today', 'wp-seopress'); ?></h2>
-    <p><?php _e('To do\'s, tips, and insights for your business', 'wp-seopress'); ?></p>
+    <div>
+        <img src="<?php echo SEOPRESS_ASSETS_DIR . '/img/logo-seopress-square-alt.svg'; ?>" width="72" height="72" alt=""/>
+    </div>
+
+    <div>
+        <h1><?php printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '6.7'); ?></h1>
+        <p><?php _e('Your control center for SEO.', 'wp-seopress'); ?></p>
+    </div>
 </div>
+
+<?php }

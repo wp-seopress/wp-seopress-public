@@ -62,17 +62,17 @@
         },
         {
             "name": "google/apiclient",
-            "version": "v2.13.2",
-            "version_normalized": "2.13.2.0",
+            "version": "v2.14.0",
+            "version_normalized": "2.14.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client.git",
-                "reference": "53c3168fd1836ec21d28a768f78a8c0e44046ec4"
+                "reference": "789c8b07cad97f420ac0467c782036f955a2ad89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/53c3168fd1836ec21d28a768f78a8c0e44046ec4",
-                "reference": "53c3168fd1836ec21d28a768f78a8c0e44046ec4",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/789c8b07cad97f420ac0467c782036f955a2ad89",
+                "reference": "789c8b07cad97f420ac0467c782036f955a2ad89",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
             "suggest": {
                 "cache/filesystem-adapter": "For caching certs and tokens (using Google\\Client::setCache)"
             },
-            "time": "2023-04-06T14:59:47+00:00",
+            "time": "2023-05-11T21:54:55+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -129,23 +129,23 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client/issues",
-                "source": "https://github.com/googleapis/google-api-php-client/tree/v2.13.2"
+                "source": "https://github.com/googleapis/google-api-php-client/tree/v2.14.0"
             },
             "install-path": "../google/apiclient"
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.298.0",
-            "version_normalized": "0.298.0.0",
+            "version": "v0.302.0",
+            "version_normalized": "0.302.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "68710abd2b921f5df4ae99412fc05bac268acddc"
+                "reference": "ac872f59a7b4631b12628fe990c167d18a71c783"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/68710abd2b921f5df4ae99412fc05bac268acddc",
-                "reference": "68710abd2b921f5df4ae99412fc05bac268acddc",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/ac872f59a7b4631b12628fe990c167d18a71c783",
+                "reference": "ac872f59a7b4631b12628fe990c167d18a71c783",
                 "shasum": ""
             },
             "require": {
@@ -154,7 +154,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^5.7||^8.5.13"
             },
-            "time": "2023-05-01T01:06:14+00:00",
+            "time": "2023-05-16T01:08:12+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -176,7 +176,7 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.298.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.302.0"
             },
             "install-path": "../google/apiclient-services"
         },
@@ -243,22 +243,22 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.5.1",
-            "version_normalized": "7.5.1.0",
+            "version": "7.7.0",
+            "version_normalized": "7.7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b964ca597e86b752cd994f27293e9fa6b6a95ed9"
+                "reference": "fb7566caccf22d74d1ab270de3551f72a58399f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b964ca597e86b752cd994f27293e9fa6b6a95ed9",
-                "reference": "b964ca597e86b752cd994f27293e9fa6b6a95ed9",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/fb7566caccf22d74d1ab270de3551f72a58399f5",
+                "reference": "fb7566caccf22d74d1ab270de3551f72a58399f5",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.5",
+                "guzzlehttp/promises": "^1.5.3 || ^2.0",
                 "guzzlehttp/psr7": "^1.9.1 || ^2.4.5",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
@@ -270,7 +270,8 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.1",
                 "ext-curl": "*",
-                "php-http/client-integration-tests": "^3.0",
+                "php-http/client-integration-tests": "dev-master#2c025848417c1135031fdf9c728ee53d0a7ceaee as 3.0.999",
+                "php-http/message-factory": "^1.1",
                 "phpunit/phpunit": "^8.5.29 || ^9.5.23",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
             },
@@ -279,15 +280,12 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "time": "2023-04-17T16:30:08+00:00",
+            "time": "2023-05-21T14:04:53+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
                     "bin-links": true,
                     "forward-command": false
-                },
-                "branch-alias": {
-                    "dev-master": "7.5-dev"
                 }
             },
             "installation-source": "dist",
@@ -354,7 +352,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.5.1"
+                "source": "https://github.com/guzzle/guzzle/tree/7.7.0"
             },
             "funding": [
                 {
@@ -374,37 +372,36 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.5.2",
-            "version_normalized": "1.5.2.0",
+            "version": "2.0.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "b94b2807d85443f9719887892882d0329d1e2598"
+                "reference": "3a494dc7dc1d7d12e511890177ae2d0e6c107da6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/b94b2807d85443f9719887892882d0329d1e2598",
-                "reference": "b94b2807d85443f9719887892882d0329d1e2598",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/3a494dc7dc1d7d12e511890177ae2d0e6c107da6",
+                "reference": "3a494dc7dc1d7d12e511890177ae2d0e6c107da6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5"
+                "php": "^7.2.5 || ^8.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^4.4 || ^5.1"
+                "bamarni/composer-bin-plugin": "^1.8.1",
+                "phpunit/phpunit": "^8.5.29 || ^9.5.23"
             },
-            "time": "2022-08-28T14:55:35+00:00",
+            "time": "2023-05-21T13:50:22+00:00",
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5-dev"
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": false
                 }
             },
             "installation-source": "dist",
             "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ],
                 "psr-4": {
                     "GuzzleHttp\\Promise\\": "src/"
                 }
@@ -441,7 +438,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/1.5.2"
+                "source": "https://github.com/guzzle/promises/tree/2.0.0"
             },
             "funding": [
                 {

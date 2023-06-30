@@ -151,6 +151,27 @@ class AdvancedOption
     }
 
     /**
+     * @since 6.7.0
+     */
+    public function getAdvancedOEmbed(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_wp_oembed');
+    }
+
+    /**
+     * @since 6.7.0
+     */
+    public function getAdvancedXPingback(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_wp_x_pingback');
+    }
+
+    /**
+     * @since 6.7.0
+     */
+    public function getAdvancedXPoweredBy(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_wp_x_powered_by');
+    }
+
+    /**
      * @since 5.4.0
      */
     public function getAdvancedGoogleVerification(){

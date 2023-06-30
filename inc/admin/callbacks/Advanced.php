@@ -18,7 +18,7 @@ function seopress_advanced_advanced_replytocom_callback() {
 </label>
 
 <p class="description">
-    <?php _e( 'e.g. "https://www.example.com/my-blog-post/?replytocom=10#respond" => "#comment-10"', 'wp-seopress' ); ?>
+    <?php _e( 'e.g. <code>https://www.example.com/my-blog-post/?replytocom=10#respond</code> => <code>#comment-10</code>', 'wp-seopress' ); ?>
 </p>
 
 <?php if (isset($options['seopress_advanced_advanced_replytocom'])) {
@@ -89,7 +89,7 @@ function seopress_advanced_advanced_category_url_callback() {
 </label>
 
 <p class="description">
-	<?php _e('e.g. "https://example.com/category/my-post-category/" => "https://example.com/my-post-category/"','wp-seopress'); ?>
+	<?php _e('e.g. <code>https://example.com/category/my-post-category/</code> => <code>https://example.com/my-post-category/</code>','wp-seopress'); ?>
 </p>
 
 <div class="seopress-notice">
@@ -134,7 +134,7 @@ function seopress_advanced_advanced_product_cat_url_callback() {
 	</label>
 
 	<p class="description">
-		<?php _e('e.g. "https://example.com/product-category/my-product-category/" => "https://example.com/my-product-category/"','wp-seopress'); ?>
+		<?php _e('e.g. <code>https://example.com/product-category/my-product-category/</code> => <code>https://example.com/my-product-category/</code>','wp-seopress'); ?>
 	</p>
 
 	<div class="seopress-notice">
@@ -334,6 +334,86 @@ function seopress_advanced_advanced_wp_rsd_callback() {
 	}
 }
 
+function seopress_advanced_advanced_wp_oembed_callback() {
+	$options = get_option('seopress_advanced_option_name');
+
+	$check = isset($options['seopress_advanced_advanced_wp_oembed']); ?>
+
+<label for="seopress_advanced_advanced_wp_oembed">
+	<input id="seopress_advanced_advanced_wp_oembed"
+		name="seopress_advanced_option_name[seopress_advanced_advanced_wp_oembed]" type="checkbox" <?php if ('1' == $check) { ?>
+	checked="yes"
+	<?php } ?>
+	value="1"/>
+
+	<?php _e('Remove oEmbed links in source code', 'wp-seopress'); ?>
+</label>
+
+<p class="description">
+	<?php _e('This will prevent other blogs to embed one of your posts on their site.', 'wp-seopress'); ?>
+</p>
+
+<pre><?php esc_attr_e('<link rel="alternate" type="application/json+oembed" href="https://www.example.com/wp-json/oembed/1.0/embed?url=https://www.example.com/my-blog-post/" />'); ?></pre>
+
+<pre><?php esc_attr_e('<link rel="alternate" type="text/xml+oembed" href="https://www.example.com/wp-json/oembed/1.0/embed?url=https://www.example.com/my-blog-post/&format=xml" />'); ?></pre>
+
+<?php if (isset($options['seopress_advanced_advanced_wp_oembed'])) {
+		esc_attr($options['seopress_advanced_advanced_wp_oembed']);
+	}
+}
+
+function seopress_advanced_advanced_wp_x_pingback_callback() {
+	$options = get_option('seopress_advanced_option_name');
+
+	$check = isset($options['seopress_advanced_advanced_wp_x_pingback']); ?>
+
+<label for="seopress_advanced_advanced_wp_x_pingback">
+	<input id="seopress_advanced_advanced_wp_x_pingback"
+		name="seopress_advanced_option_name[seopress_advanced_advanced_wp_x_pingback]" type="checkbox" <?php if ('1' == $check) { ?>
+	checked="yes"
+	<?php } ?>
+	value="1"/>
+
+	<?php _e('Remove X-Pingback from HTTP headers', 'wp-seopress'); ?>
+</label>
+
+<p class="description">
+	<?php _e('This will disable pingbacks/trackbacks and increase security (DDOS).', 'wp-seopress'); ?>
+</p>
+
+<pre><?php esc_attr_e('X-Pingback: https://www.example.com/xmlrpc.php'); ?></pre>
+
+<?php if (isset($options['seopress_advanced_advanced_wp_x_pingback'])) {
+		esc_attr($options['seopress_advanced_advanced_wp_x_pingback']);
+	}
+}
+
+function seopress_advanced_advanced_wp_x_powered_by_callback() {
+	$options = get_option('seopress_advanced_option_name');
+
+	$check = isset($options['seopress_advanced_advanced_wp_x_powered_by']); ?>
+
+<label for="seopress_advanced_advanced_wp_x_powered_by">
+	<input id="seopress_advanced_advanced_wp_x_powered_by"
+		name="seopress_advanced_option_name[seopress_advanced_advanced_wp_x_powered_by]" type="checkbox" <?php if ('1' == $check) { ?>
+	checked="yes"
+	<?php } ?>
+	value="1"/>
+
+	<?php _e('Remove X-Powered-By from HTTP headers', 'wp-seopress'); ?>
+</label>
+
+<p class="description">
+	<?php _e('By default, WordPress uses this to display your PHP version.', 'wp-seopress'); ?>
+</p>
+
+<pre><?php esc_attr_e('X-Powered-By: PHP/8.1.9'); ?></pre>
+
+<?php if (isset($options['seopress_advanced_advanced_wp_x_powered_by'])) {
+		esc_attr($options['seopress_advanced_advanced_wp_x_powered_by']);
+	}
+}
+
 function seopress_advanced_advanced_google_callback() {
 	$options = get_option('seopress_advanced_option_name');
 	$check   = isset($options['seopress_advanced_advanced_google']) ? $options['seopress_advanced_advanced_google'] : null;
@@ -508,65 +588,6 @@ function seopress_advanced_appearance_metaboxe_position_callback() {
 
 <?php if (isset($options['seopress_advanced_appearance_metaboxe_position'])) {
 		esc_attr($options['seopress_advanced_appearance_metaboxe_position']);
-	}
-}
-
-function seopress_advanced_appearance_notifications_callback() {
-	$options = get_option('seopress_advanced_option_name');
-
-	$check = isset($options['seopress_advanced_appearance_notifications']); ?>
-
-<label for="seopress_advanced_appearance_notifications">
-	<input id="seopress_advanced_appearance_notifications"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_notifications]" type="checkbox" <?php if ('1' == $check) { ?>
-	checked="yes"
-	<?php } ?>
-	value="1"/>
-
-	<?php _e('Hide Notifications Center in SEO Dashboard page', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_notifications'])) {
-		esc_attr($options['seopress_advanced_appearance_notifications']);
-	}
-}
-
-function seopress_advanced_appearance_news_callback() {
-	$options = get_option('seopress_advanced_option_name');
-
-	$check = isset($options['seopress_advanced_appearance_news']); ?>
-
-<label for="seopress_advanced_appearance_news">
-	<input id="seopress_advanced_appearance_news"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_news]" type="checkbox" <?php if ('1' == $check) { ?>
-	checked="yes"
-	<?php } ?>
-	value="1"/>
-
-	<?php _e('Hide SEO News in SEO Dashboard page', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_news'])) {
-		esc_attr($options['seopress_advanced_appearance_news']);
-	}
-}
-
-function seopress_advanced_appearance_seo_tools_callback() {
-	$options = get_option('seopress_advanced_option_name');
-
-	$check = isset($options['seopress_advanced_appearance_seo_tools']); ?>
-
-<label for="seopress_advanced_appearance_seo_tools">
-	<input id="seopress_advanced_appearance_seo_tools"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_seo_tools]" type="checkbox" <?php if ('1' == $check) { ?>
-	checked="yes"
-	<?php } ?>
-	value="1"/>
-
-	<?php _e('Hide Site Overview in SEO Dashboard page', 'wp-seopress'); ?></label>
-
-<?php if (isset($options['seopress_advanced_appearance_seo_tools'])) {
-		esc_attr($options['seopress_advanced_appearance_seo_tools']);
 	}
 }
 
@@ -832,26 +853,6 @@ function seopress_advanced_appearance_genesis_seo_menu_callback() {
 
 <?php if (isset($options['seopress_advanced_appearance_genesis_seo_menu'])) {
 		esc_attr($options['seopress_advanced_appearance_genesis_seo_menu']);
-	}
-}
-
-function seopress_advanced_appearance_advice_schema_callback() {
-	$options = get_option('seopress_advanced_option_name');
-
-	$check = isset($options['seopress_advanced_appearance_advice_schema']); ?>
-
-<label for="seopress_advanced_appearance_advice_schema">
-	<input id="seopress_advanced_appearance_advice_schema"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_advice_schema]" type="checkbox" <?php if ('1' == $check) { ?>
-	checked="yes"
-	<?php } ?>
-	value="1"/>
-
-	<?php _e('Remove the advice if None schema selected', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_advice_schema'])) {
-		esc_attr($options['seopress_advanced_appearance_advice_schema']);
 	}
 }
 

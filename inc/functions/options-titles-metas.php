@@ -95,7 +95,8 @@ function seopress_titles_the_title() {
                 }
 
                 foreach ($matches['1'] as $key => $value) {
-                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
+                    $custom_field = esc_attr(get_post_meta($post->ID, $value, true));
+                    $seopress_titles_cf_template_replace_array[] = apply_filters('seopress_titles_custom_field', $custom_field, $value);
                 }
             }
 
@@ -129,7 +130,8 @@ function seopress_titles_the_title() {
                 }
 
                 foreach ($matches3['1'] as $key => $value) {
-                    $seopress_titles_ucf_template_replace_array[] = esc_attr(get_user_meta(get_current_user_id(), $value, true));
+                    $user_meta = esc_attr(get_user_meta(get_current_user_id(), $value, true));
+                    $seopress_titles_ucf_template_replace_array[] = apply_filters('seopress_titles_user_meta', $user_meta, $value);
                 }
             }
 
@@ -400,7 +402,8 @@ function seopress_titles_the_description_content() {
                 }
 
                 foreach ($matches['1'] as $key => $value) {
-                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
+                    $custom_field = esc_attr(get_post_meta($post->ID, $value, true));
+                    $seopress_titles_cf_template_replace_array[] = apply_filters('seopress_titles_custom_field', $custom_field, $value);
                 }
             }
 
@@ -434,7 +437,8 @@ function seopress_titles_the_description_content() {
                 }
 
                 foreach ($matches3['1'] as $key => $value) {
-                    $seopress_titles_ucf_template_replace_array[] = esc_attr(get_user_meta(get_current_user_id(), $value, true));
+                    $user_meta = esc_attr(get_user_meta(get_current_user_id(), $value, true));
+                    $seopress_titles_ucf_template_replace_array[] = apply_filters('seopress_titles_user_meta', $user_meta, $value);
                 }
             }
 
@@ -532,7 +536,7 @@ function seopress_titles_the_description_content() {
                 $seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
             }
         }
-    } elseif (is_post_type_archive() && !is_search() && !is_tax() && seopress_get_service('TitleOption')->getArchivesCPTDesc($post->ID)) { //IS POST TYPE ARCHIVE (!is_tax required for TEC, !is_search required for WC search box)
+    } elseif (is_post_type_archive() && !is_search() && !is_tax() && seopress_get_service('TitleOption')->getArchivesCPTDesc()) { //IS POST TYPE ARCHIVE (!is_tax required for TEC, !is_search required for WC search box)
         $seopress_titles_the_description = esc_attr(seopress_get_service('TitleOption')->getArchivesCPTDesc($post->ID));
 
         $seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);

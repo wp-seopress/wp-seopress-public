@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.2
 Requires PHP: 7.2
-Stable tag: 6.6.3
+Stable tag: 6.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -154,7 +154,7 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 We provide deep integration with Elementor page builder. Directly from Elementor settings, you can:
 <ul>
 	<li>edit your SEO metadata (title, meta description, meta robots)</li>
-	<li>edit social meta (Facebook Open Graph and Twitter Cards</li>
+	<li>edit social meta (Facebook Open Graph and Twitter Cards)</li>
 	<li>analyse your content to optimize it for search engines</li>
 	<li>apply FAQ schema on Toggle and / or Accordion Elementor widgets</li>
     <li>generate automagically meta title and description with AI (OpenAI integration - PRO required)</li>
@@ -207,6 +207,7 @@ SEOPress is translated into multiple languages including:
 	<li>🇮🇩 Bahasa Indonesia (Indonesian)</li>
 	<li>🇻🇳 Loki Web (Vietnamese)</li>
 	<li>🇷🇴 Română (Romanian)</li>
+    <li>🇰🇷 한국인 (Korean)</li>
 	<li>🇸🇦 العربية (Arabic)</li>
 	<li>🇮🇷 فارسی (Persian)</li>
 	<li>🇹🇷 Türkçe (Turkish)</li>
@@ -373,49 +374,27 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.6.3 =
-* FIX XML Sitemaps issue
-
-= 6.6.2 =
-* FIX Capabilities
-
-= 6.6.1 =
-* FIX XML Sitemaps issue
-
-= 6.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-6/">Read the blog post update</a> =
-* NEW Allow user to move the SEOPress beacon (Universal metabox) from the Block Editor
-* NEW Google Search Console option to quickly support Domain Property site
-* NEW Google Search Console option to change the date range
-* NEW Korean language thanks to @keysuck (awaiting approval)
-* NEW Quickly blocks PetalBot and ChatGPT bot from the robots.txt tab (PRO)
-* NEW 'seopress_search_console_date_range' hook to filter Google Search Console date range (https://www.seopress.org/support/hooks/filter-google-search-console-date-range/)
-* NEW 'seopress_search_console_start_date' hook to filter Google Search Console start date (https://www.seopress.org/support/hooks/filter-google-search-console-start-date/)
-* NEW 'seopress_search_console_end_date' hook to filter Google Search Console end date (https://www.seopress.org/support/hooks/filter-google-search-console-end-date/)
-* INFO Wizard: add textarea for extra social accounts
-* INFO Wizard: automatically select the SEO plugin to migrate from
-* INFO Require specific PHP / WP versions from WordPress admin, plugins (thanks to @jeherve)
-* INFO Add our index XML sitemap URL to SiteGround Optimizer when using the preheating feature
-* INFO Performance enhanced / better UI for universal SEO metabox
-* INFO Add preconnect attribute for Matomo Analytics script
-* INFO WPML: improve reliability to remove /product-category/
-* INFO WP Rocket compatibility for preloading XML sitemaps (please update WP Rocket)
-* INFO Product schema is now showing Positive / Negative statements properties even if WooCommerce is disabled
-* FIX Somme issues with our Google Search Console integration
-* FIX Link attributes from link modal
-* FIX Warning: Undefined array key "query"
-* FIX Warnings in XML sitemaps if not post types and/or taxonomies set
-* FIX WPML multidomain for XML sitemaps
-* FIX Toolset compatibility for SEO columns / custom post types
-* FIX "noimageindex" duplicated in content analysis
-* FIX WC ecommerce tracking: method_exists(): Argument #1 ($object_or_class) must be of type object|string
-* FIX Deprecated: htmlentities with PHP >= 8.1
-* FIX Focus on target keyword fields for Universal SEO metabox
-* FIX IndexNow API key incorrectly saved
-* FIX Incorrect SEO meta when using the WooCommerce searchbox
-* FIX Stop sending empty 404 email alerts
-* FIX Prevent 404 options when saving PRO settings on some hosts
-* FIX OpenAI 400 error with Divi
-* FIX Google Analytics stats in dashboard widget
-* FIX Capabilities in multisite setup
+= 6.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-7/">Read the blog post update</a> =
+* NEW Brand new design for our SEO dashboard (first iteration) 🎉
+* NEW Table of Contents block for Gutenberg (PRO) 🎉
+* NEW Remove oEmbed links
+* NEW Remove WordPress X-Pingback header
+* NEW Remove WordPress X-Powered-By header
+* NEW Notifications if SEO / Social sharing is not correctly setup from Bricks settings
+* NEW 'seopress_titles_custom_field' hook to filter %%_cf_your_custom_field_name%% dynamic variable in title and meta (https://www.seopress.org/support/hooks/filter-_cf_your_custom_field_name-dynamic-variable/)
+* NEW 'seopress_titles_user_meta' hook to filter %%_ucf_your_user_meta%% dynamic variable in title and meta (https://www.seopress.org/support/hooks/filter-_ucf_your_user_meta-dynamic-variable/)
+* INFO Improve compatibility with PHP 8.1+
+* INFO No more 404 errors in XML sitemaps (flushing permalinks is now automatic)
+* INFO Inspect URL is now using the domain property option if checked from SEO, PRO, Google Search Console (hook is no longer needed)
+* FIX Bricks builder compatibility issue
+* FIX Video sitemap tab issues in Universal SEO metabox
+* FIX Missing hook "seopress_matomo_analytics_cron" on uninstall / deactivation
+* FIX 400 error on IndexNow API key regeneratation
+* FIX Undefined variables in Inspect URL with Google Search Console tab
+* FIX Limit to 5 suggestions the internal linking tab in Universal SEO metabox
+* FIX PHP Warnings with WP Gridbuilder
+* FIX An issue with JSON breadcrumbs on archive pages with no results
+* FIX Deprecated PHP 8.1+ Automatic conversion of false to array
+* FIX Deprecated PHP 8.1+ ltrim()
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

@@ -51,7 +51,7 @@ $docs = seopress_get_docs_links();
                         <input type="hidden" name="seopress_action" value="export_settings" />
                         <?php wp_nonce_field('seopress_export_nonce', 'seopress_export_nonce'); ?>
 
-                        <button id="seopress-export" type="submit" class="btn btnSecondary">
+                        <button id="seopress-export" type="submit" class="btn btnTertiary">
                             <?php _e('Export', 'wp-seopress'); ?>
                         </button>
                     </form>
@@ -74,7 +74,7 @@ $docs = seopress_get_docs_links();
 
                         <?php wp_nonce_field('seopress_import_nonce', 'seopress_import_nonce'); ?>
 
-                        <button id="seopress-import-settings" type="submit" class="btn btnSecondary">
+                        <button id="seopress-import-settings" type="submit" class="btn btnTertiary">
                             <?php _e('Import', 'wp-seopress'); ?>
                         </button>
 
@@ -136,38 +136,57 @@ $docs = seopress_get_docs_links();
             <div class="postbox section-tool">
                 <div class="sp-section-header">
                     <h2>
+                        <?php _e('Cleaning', 'wp-seopress'); ?>
+                    </h2>
+                </div>
+                <div class="inside">
+                    <h3>
+                        <span><?php _e('Clean content scans', 'wp-seopress'); ?></span>
+                    </h3>
+
+                    <p><?php _e('By clicking Delete content scans, all content analyses will be deleted from your database.', 'wp-seopress'); ?></p>
+
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="seopress_action" value="clean_content_scans" />
+                        <?php wp_nonce_field('seopress_clean_content_scans_nonce', 'seopress_clean_content_scans_nonce'); ?>
+                        <?php sp_submit_button(__('Delete content scans', 'wp-seopress'), 'btn btnTertiary'); ?>
+                    </form>
+                </div><!-- .inside -->
+            </div><!-- .postbox -->
+
+            <div class="postbox section-tool">
+                <div class="sp-section-header">
+                    <h2>
                         <?php _e('Reset', 'wp-seopress'); ?>
                     </h2>
                 </div>
                 <div class="inside">
-                    <h3><span><?php _e('Reset All Notices From Notifications Center', 'wp-seopress'); ?></span>
+                    <h3>
+                        <span><?php _e('Reset All Notices From Notifications Center', 'wp-seopress'); ?></span>
                     </h3>
 
-                    <p><?php _e('By clicking Reset Notices, all notices in the notifications center will be set to their initial status.', 'wp-seopress'); ?>
-                    </p>
+                    <p><?php _e('By clicking Reset Notices, all notices in the notifications center will be set to their initial status.', 'wp-seopress'); ?></p>
 
                     <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="seopress_action" value="reset_notices_settings" />
                         <?php wp_nonce_field('seopress_reset_notices_nonce', 'seopress_reset_notices_nonce'); ?>
-                        <?php sp_submit_button(__('Reset notices', 'wp-seopress'), 'btn btnSecondary'); ?>
+                        <?php sp_submit_button(__('Reset notices', 'wp-seopress'), 'btn btnTertiary'); ?>
                     </form>
                 </div><!-- .inside -->
             </div><!-- .postbox -->
 
             <div class="postbox section-tool">
                 <div class="inside">
-                    <h3><?php _e('Reset All Settings', 'wp-seopress'); ?>
-                    </h3>
+                    <h3><?php _e('Reset All Settings', 'wp-seopress'); ?></h3>
 
                     <div class="seopress-notice is-warning">
-                        <p><?php _e('<strong>WARNING:</strong> Delete all options related to this plugin in your database.', 'wp-seopress'); ?>
-                        </p>
+                        <p><?php _e('<strong>WARNING:</strong> Delete all options related to this plugin in your database.', 'wp-seopress'); ?></p>
                     </div>
 
                     <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="seopress_action" value="reset_settings" />
                         <?php wp_nonce_field('seopress_reset_nonce', 'seopress_reset_nonce'); ?>
-                        <?php sp_submit_button(__('Reset settings', 'wp-seopress'), 'btn btnSecondary is-deletable'); ?>
+                        <?php sp_submit_button(__('Reset settings', 'wp-seopress'), 'btn btnTertiary is-deletable'); ?>
                     </form>
                 </div><!-- .inside -->
             </div><!-- .postbox -->

@@ -99,15 +99,6 @@ class NoticeOption
      *
      * @return string
      */
-    public function getNoticeSEOConsultant(){
-        return $this->searchOptionByKey('notice-seo-consultant');
-    }
-
-    /**
-     * @since 6.0.0
-     *
-     * @return string
-     */
     public function getNoticeAMPAnalytics(){
         return $this->searchOptionByKey('notice-amp-analytics');
     }

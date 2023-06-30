@@ -247,7 +247,7 @@ function seopress_instant_indexing_bing_api_key_callback() {
     <button type="button" class="seopress-instant-indexing-refresh-api-key btn btnSecondary"><?php _e('Generate key','wp-seopress'); ?></button>
 
     <p class="description"><?php _e('The Bing Indexing API key is automatically generated. Click Generate key if you want to recreate it, or if it\'s missing.') ?></p>
-    <p class="description"><?php _e('A key should look like this: ', 'wp-seopress'); ?>ZjA2NWI3ZWM3MmNhNDRkODliYmY0YjljMzg5YTk2NGE=</p>
+    <p class="description"><?php _e('A key should look like this: ', 'wp-seopress'); ?><code>ZjA2NWI3ZWM3MmNhNDRkODliYmY0YjljMzg5YTk2NGE=</code></p>
 <?php
 }
 

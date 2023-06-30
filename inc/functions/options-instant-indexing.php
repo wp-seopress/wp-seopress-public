@@ -27,6 +27,11 @@ function seopress_instant_indexing_generate_api_key_fn($init = false) {
 //Create the virtual Instant Indexing API key txt file
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_instant_indexing_api_key_txt() {
+    //Is instant indexing enabled?
+    if ('1' !== seopress_get_toggle_option('instant-indexing')) {
+        return;
+    }
+
     $options            = get_option('seopress_instant_indexing_option_name');
     $api_key            = isset($options['seopress_instant_indexing_bing_api_key']) ? esc_attr($options['seopress_instant_indexing_bing_api_key']) : null;
 
@@ -58,6 +63,11 @@ add_action('template_redirect', 'seopress_instant_indexing_api_key_txt', 0);
 //Batch Instant Indexing
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_instant_indexing_fn($is_manual_submission = true, $permalink = null) {
+    //Is instant indexing enabled?
+    if ('1' !== seopress_get_toggle_option('instant-indexing')) {
+        return;
+    }
+
     if ($is_manual_submission === true) {
         $options            = get_option('seopress_instant_indexing_option_name');
 
@@ -148,13 +158,13 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/6.6.3/true';
+        $x_source_info = 'https://www.seopress.org/6.7/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/6.6.3/false';
+        $x_source_info = 'https://www.seopress.org/6.7/false';
     }
 
     //Bing API
@@ -283,6 +293,11 @@ add_action('wp_ajax_seopress_instant_indexing_generate_api_key', 'seopress_insta
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_instant_indexing_on_post_publish( $new_status, $old_status, $post ) {
     $options            = get_option('seopress_instant_indexing_option_name');
+
+    //Is instant indexing enabled?
+    if ('1' !== seopress_get_toggle_option('instant-indexing')) {
+        return;
+    }
 
     //Is automatic submission enabled?
     if (!isset($options['seopress_instant_indexing_automate_submission'])) {
