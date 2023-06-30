@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.2
 Requires PHP: 7.2
-Stable tag: 6.6
+Stable tag: 6.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -373,6 +373,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.6.1 =
+* FIX XML Sitemaps issue
+
 = 6.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-6/">Read the blog post update</a> =
 * NEW Allow user to move the SEOPress beacon (Universal metabox) from the Block Editor
 * NEW Google Search Console option to quickly support Domain Property site

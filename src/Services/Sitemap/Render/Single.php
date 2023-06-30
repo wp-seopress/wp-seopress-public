@@ -13,43 +13,40 @@ class Single {
      * @return void
      */
     protected function hooksWPMLCompatibility() {
-        if (!defined('ICL_SITEPRESS_VERSION')) {
-            return;
-        }
-
-        //If multidomain setup
-        if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
-            //Home URL
-            add_filter('seopress_sitemaps_home_url', function($home_url) {
-                $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
-                return trailingslashit($home_url);
-            });
-        }
-
-        add_filter('seopress_sitemaps_single_query', function ($args) {
-            global $sitepress, $sitepress_settings;
-
-            $sitepress_settings['auto_adjust_ids'] = 0;
-            remove_filter('terms_clauses', [$sitepress, 'terms_clauses']);
-            remove_filter('category_link', [$sitepress, 'category_link_adjust_id'], 1);
-
+        if (defined('ICL_SITEPRESS_VERSION')) {
             //If multidomain setup
             if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
-                $args['suppress_filters'] = false;
+                //Home URL
+                add_filter('seopress_sitemaps_home_url', function($home_url) {
+                    $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
+                    return trailingslashit($home_url);
+                });
             }
 
-            return $args;
-        });
+            add_filter('seopress_sitemaps_single_query', function ($args) {
+                global $sitepress, $sitepress_settings;
 
-        add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
-        add_action('the_post', function ($post) {
-            $language = apply_filters('wpml_element_language_code', null, [
-                  'element_id'   => $post->ID,
-                  'element_type' => 'page',
-              ]);
-            do_action('wpml_switch_language', $language);
-        });
+                $sitepress_settings['auto_adjust_ids'] = 0;
+                remove_filter('terms_clauses', [$sitepress, 'terms_clauses']);
+                remove_filter('category_link', [$sitepress, 'category_link_adjust_id'], 1);
 
+                //If multidomain setup
+                if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+                    $args['suppress_filters'] = false;
+                }
+
+                return $args;
+            });
+
+            add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
+            add_action('the_post', function ($post) {
+                $language = apply_filters('wpml_element_language_code', null, [
+                    'element_id'   => $post->ID,
+                    'element_type' => 'page',
+                ]);
+                do_action('wpml_switch_language', $language);
+            });
+        }
 
         add_filter('seopress_sitemaps_single_url', function($url, $post) {
             //Exclude custom canonical from sitemaps
