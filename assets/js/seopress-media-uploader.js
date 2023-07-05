@@ -34,7 +34,20 @@ jQuery(document).ready(function ($) {
         mediaUploader.open();
     });
 
-    const array = [
+    const array_placeholder = [
+        "#seopress_social_knowledge_img",
+        "#seopress_social_fb_img",
+        "#seopress_social_twitter_img",
+    ];
+
+    array_placeholder.forEach(function (item) {
+        $(item + "_placeholder_upload").click(function (e) {
+            e.preventDefault();
+            $(item + "_upload").trigger('click');
+        });
+    });
+
+    const array_upload = [
         "#seopress_social_knowledge_img",
         "#knowledge_img",
         "#seopress_social_fb_img",
@@ -43,7 +56,7 @@ jQuery(document).ready(function ($) {
         ".seopress_social_twitter_img"
     ];
 
-    array.forEach(function (item) {
+    array_upload.forEach(function (item) {
         var mediaUploader;
         $(item + "_upload").click(function (e) {
             e.preventDefault();
@@ -83,6 +96,9 @@ jQuery(document).ready(function ($) {
                     $(item + "_width").val(attachment.width);
                     $(item + "_height").val(attachment.height);
                 }
+                $(item + '_src').attr('src', attachment.url);
+
+                $(item + "_placeholder_src").attr('src', $(item + "_meta").val());
             });
 
             // Open the uploader dialog
@@ -119,5 +135,32 @@ jQuery(document).ready(function ($) {
 
         // Open the uploader dialog
         mediaUploader.open();
+    });
+
+    const array_remove = [
+        "#seopress_social_knowledge_img",
+        "#seopress_social_fb_img",
+        "#seopress_social_twitter_img",
+    ];
+
+    array_remove.forEach(function (item) {
+        $(item + "_remove").click(function (e) {
+            e.preventDefault();
+
+            $(item + "_meta").val('');
+            $(item + "_placeholder_src").attr('src', '');
+        });
+    });
+
+    const array_update = [
+        "#seopress_social_knowledge_img",
+        "#seopress_social_fb_img",
+        "#seopress_social_twitter_img",
+    ];
+
+    array_update.forEach(function (item) {
+        $(item + "_meta").on('keyup paste change click focus input mouseout', function () {
+            $(item + "_placeholder_src").attr('src', $(item + "_meta").val());
+        });
     });
 });

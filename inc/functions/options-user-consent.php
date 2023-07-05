@@ -17,7 +17,7 @@ if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable() || (
                 if (array_key_exists($seopress_user_role, seopress_get_service('GoogleAnalyticsOption')->getRoles())) {
                     //do nothing
                 } else {
-                    if ('1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption() && ('' !== seopress_get_service('GoogleAnalyticsOption')->getUA() || '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4())) {
+                    if ('1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption() && '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) {
                         add_action('wp_head', 'seopress_google_analytics_js_arguments', 929, 1);
                         add_action('wp_head', 'seopress_custom_tracking_hook', 900, 1);
                     }
@@ -38,7 +38,7 @@ if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable() || (
                     }
                 }
             } else {
-                if ('1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption() && ('' !== seopress_get_service('GoogleAnalyticsOption')->getUA() || '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4())) {
+                if ('1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption() && '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) {
                     add_action('wp_head', 'seopress_google_analytics_js_arguments', 929, 1);
                     add_action('wp_head', 'seopress_custom_tracking_hook', 900, 1);
                 }
@@ -60,7 +60,7 @@ if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable() || (
             }
         }
     } else {
-        if ('1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption() && ('' !== seopress_get_service('GoogleAnalyticsOption')->getUA() || '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4())) {
+        if ('1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption() && '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) {
             add_action('wp_head', 'seopress_google_analytics_js_arguments', 929, 1);
             add_action('wp_head', 'seopress_custom_tracking_hook', 900, 1);
         }

@@ -22,30 +22,6 @@ function seopress_google_analytics_enable_callback() {
     }
 }
 
-function seopress_google_analytics_ua_callback() {
-    $options = get_option('seopress_google_analytics_option_name');
-    $check   = isset($options['seopress_google_analytics_ua']) ? $options['seopress_google_analytics_ua'] : null;
-
-    printf(
-'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ua]" placeholder="' . esc_html__('Enter your Tracking ID (UA-XXXX-XX)', 'wp-seopress') . '" aria-label="' . __('Enter your tracking ID', 'wp-seopress') . '" value="%s"/>',
-esc_html($check)
-); ?>
-
-<p class="seopress-help description">
-    <span class="dashicons dashicons-external"></span>
-    <a href="https://support.google.com/analytics/answer/1032385?hl=en" target="_blank">
-        <?php _e('Find your tracking ID', 'wp-seopress'); ?>
-    </a>
-</p>
-
-<div class="seopress-notice is-warning">
-    <p>
-        <?php _e('<strong>Universal Analytics</strong> will stop working in <strong>June 2023</strong>. We invite you to use GA4 now or an alternative like Matomo.','wp-seopress'); ?>
-    </p>
-</div>
-<?php
-}
-
 function seopress_google_analytics_ga4_callback() {
     $options = get_option('seopress_google_analytics_option_name');
     $check   = isset($options['seopress_google_analytics_ga4']) ? $options['seopress_google_analytics_ga4'] : null;
@@ -317,7 +293,7 @@ function seopress_google_analytics_cb_width_callback() {
 esc_html($check)
 ); ?>
 <p class="description">
-    <?php _e('Default unit is Pixels. Add % just after your custom value to use percentages (eg: 80%).', 'wp-seopress'); ?>
+    <?php _e('Default unit is Pixels. Add % just after your custom value to use percentages (e.g. 80%).', 'wp-seopress'); ?>
 </p>
 
 <?php
@@ -617,7 +593,7 @@ function seopress_google_analytics_ads_callback() {
 
 <?php
     printf(
-'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ads]" placeholder="' . esc_html__('Enter your Google Ads conversion ID (eg: AW-123456789)', 'wp-seopress') . '" value="%s" aria-label="' . __('AW-XXXXXXXXX', 'wp-seopress') . '"/>',
+'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_ads]" placeholder="' . esc_html__('Enter your Google Ads conversion ID (e.g. AW-123456789)', 'wp-seopress') . '" value="%s" aria-label="' . __('AW-XXXXXXXXX', 'wp-seopress') . '"/>',
 esc_html($check)); ?>
 <p class="description">
     <a class="seopress-help" href="<?php echo $docs['analytics']['gads']; ?>" target="_blank">

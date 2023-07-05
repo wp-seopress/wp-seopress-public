@@ -287,9 +287,9 @@ if ('1' === seopress_get_service('GoogleAnalyticsOption')->getDisable()) {
 
 //Build Custom GA
 function seopress_google_analytics_js($echo) {
-    if (('' !== seopress_get_service('GoogleAnalyticsOption')->getUA() || '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) && '1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption()) {
+    if ('' !== seopress_get_service('GoogleAnalyticsOption')->getGA4() && '1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption()) {
         //Init
-        $tracking_id = seopress_get_service('GoogleAnalyticsOption')->getUA() ? seopress_get_service('GoogleAnalyticsOption')->getUA() : seopress_get_service('GoogleAnalyticsOption')->getGA4();
+        $tracking_id = seopress_get_service('GoogleAnalyticsOption')->getGA4();
         $seopress_google_analytics_config = [];
         $seopress_google_analytics_event  = [];
 
@@ -571,14 +571,6 @@ for (let i = 0; i < links.length; i++) {
                 }
             }
             $features .= '}';
-        }
-
-        //UA
-        if ('' !== seopress_get_service('GoogleAnalyticsOption')->getUA()) {
-            $seopress_gtag_ua = "gtag('config', '" . seopress_get_service('GoogleAnalyticsOption')->getUA() . "' " . $features . ');';
-            $seopress_gtag_ua = apply_filters('seopress_gtag_ua', $seopress_gtag_ua);
-            $seopress_google_analytics_html .= $seopress_gtag_ua;
-            $seopress_google_analytics_html .= "\n";
         }
 
         //Measurement ID

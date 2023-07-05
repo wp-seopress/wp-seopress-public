@@ -265,11 +265,11 @@ jQuery(document).ready(function ($) {
     if ($("#seopress_instant_indexing_manual_batch").length) {
         newLines = $('#seopress_instant_indexing_manual_batch').val().split("\n").length;
         $('#seopress_instant_indexing_url_count').text(newLines);
-        var lines = 50;
+        var lines = 100;
         var linesUsed = $('#seopress_instant_indexing_url_count');
 
         if (newLines) {
-            var progress = Math.round(newLines / 50 * 100);
+            var progress = newLines;
 
             if (progress >= 100) {
                 progress = 100;
@@ -293,7 +293,7 @@ jQuery(document).ready(function ($) {
             }
 
             if (newLines) {
-                var progress = Math.round(newLines / 50 * 100);
+                var progress = newLines;
             }
 
             if (progress >= 100) {

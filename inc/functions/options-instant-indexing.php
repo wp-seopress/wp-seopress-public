@@ -1,5 +1,7 @@
 <?php
 
+use SEOPress\Helpers\PagesAdmin;
+
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,13 +160,13 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/6.7.2/true';
+        $x_source_info = 'https://www.seopress.org/6.8/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/6.7.2/false';
+        $x_source_info = 'https://www.seopress.org/6.8/false';
     }
 
     //Bing API
@@ -265,7 +267,7 @@ function seopress_instant_indexing_post()
 {
     check_ajax_referer('seopress_instant_indexing_post_nonce');
     require_once WP_PLUGIN_DIR . '/wp-seopress/vendor/autoload.php';
-    if (current_user_can(seopress_capability('manage_options', 'instant-indexing')) && is_admin()) {
+    if (current_user_can(seopress_capability('manage_options', PagesAdmin::INSTANT_INDEXING)) && is_admin()) {
         seopress_instant_indexing_fn();
     }
 
@@ -279,7 +281,7 @@ add_action('wp_ajax_seopress_instant_indexing_post', 'seopress_instant_indexing_
 function seopress_instant_indexing_generate_api_key()
 {
     check_ajax_referer('seopress_instant_indexing_generate_api_key_nonce');
-    if (current_user_can(seopress_capability('manage_options', 'instant-indexing')) && is_admin()) {
+    if (current_user_can(seopress_capability('manage_options', PagesAdmin::INSTANT_INDEXING)) && is_admin()) {
         seopress_instant_indexing_generate_api_key_fn();
     }
 
@@ -292,7 +294,7 @@ add_action('wp_ajax_seopress_instant_indexing_generate_api_key', 'seopress_insta
 //Automatic submission
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_instant_indexing_on_post_publish( $new_status, $old_status, $post ) {
-    $options            = get_option('seopress_instant_indexing_option_name');
+    $options = get_option('seopress_instant_indexing_option_name');
 
     //Is instant indexing enabled?
     if ('1' !== seopress_get_toggle_option('instant-indexing')) {

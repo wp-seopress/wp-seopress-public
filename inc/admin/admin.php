@@ -254,7 +254,6 @@ class seopress_options
 
     public function sanitize($input)
     {
-
         require_once dirname(__FILE__) . '/sanitize/Sanitize.php';
 
         if(isset($_POST['option_page']) && $_POST['option_page'] === 'seopress_advanced_option_group'){

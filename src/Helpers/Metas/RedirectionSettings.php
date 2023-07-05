@@ -72,7 +72,7 @@ abstract class RedirectionSettings {
             [
                 'key'         => '_seopress_redirections_value',
                 'type'        => 'input',
-                'placeholder' => __('Enter your new URL in absolute (eg: https://www.example.com/)', 'wp-seopress'),
+                'placeholder' => __('Enter your new URL in absolute (e.g. https://www.example.com/)', 'wp-seopress'),
                 'label'       => __('URL redirection', 'wp-seopress'),
                 'description' => __('Enter some keywords to auto-complete this field against your content', 'wp-seopress'),
                 'use_default' => '',

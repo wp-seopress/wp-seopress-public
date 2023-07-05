@@ -254,7 +254,7 @@ class Notifications {
                 $alerts_high++;
                 $args[] = [
                     'id' => 'notice-seo-plugins',
-                    /* translators: %s name of a SEO plugin (eg: Yoast SEO) */
+                    /* translators: %s name of a SEO plugin (e.g. Yoast SEO) */
                     'title'  => sprintf(__('We noticed that you use <strong>%s</strong> plugin.', 'wp-seopress'), $value),
                     'desc'   => __('Do you want to migrate all your metadata to SEOPress? Do not use multiple SEO plugins at once to avoid conflicts!', 'wp-seopress'),
                     'impact' => [
@@ -281,7 +281,7 @@ class Notifications {
                 $alerts_high++;
                 $args[] = [
                     'id' => 'notice-indexing-plugins',
-                    /* translators: %s name of a WP plugin (eg: IndexNow) */
+                    /* translators: %s name of a WP plugin (e.g. IndexNow) */
                     'title'  => sprintf(__('We noticed that you use <strong>%s</strong> plugin.', 'wp-seopress'), $value),
                     'desc'   => __('To prevent any conflicts with our Indexing feature, please disable it.', 'wp-seopress'),
                     'impact' => [
@@ -476,24 +476,27 @@ class Notifications {
             if ('1' === seopress_get_service('TitleOption')->getTitleNoIndex() || '1' != get_option('blog_public')) {
                 $alerts_high++;
                 $status = true;
-            }
-            $args[] = [
-                'id'     => 'notice-noindex',
-                'title'  => __('Your site is not visible to Search Engines!', 'wp-seopress'),
-                'desc'   => __('You have activated the blocking of the indexing of your site. If your site is under development, this is probably normal. Otherwise, check your settings. Delete this notification using the cross on the right if you are not concerned.', 'wp-seopress'),
-                'impact' => [
-                    'high' => __('High impact', 'wp-seopress'),
-                ],
-                'link' => [
-                    'en'       => admin_url('options-reading.php'),
-                    'title'    => __('Fix this!', 'wp-seopress'),
-                    'external' => false,
-                ],
-                'deleteable' => false,
-                'status' => $status ? $status : false,
-            ];
-            if (seopress_get_service('TitleOption')->getTitleNoIndex() ==='1') {
-                $args['link']['en'] = admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_advanced');
+
+                $link = admin_url('options-reading.php');
+                if (seopress_get_service('TitleOption')->getTitleNoIndex() ==='1') {
+                    $link = admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_advanced');
+                }
+
+                $args[] = [
+                    'id'     => 'notice-noindex',
+                    'title'  => __('Your site is not visible to Search Engines!', 'wp-seopress'),
+                    'desc'   => __('You have activated the blocking of the indexing of your site. If your site is under development, this is probably normal. Otherwise, check your settings. Delete this notification using the cross on the right if you are not concerned.', 'wp-seopress'),
+                    'impact' => [
+                        'high' => __('High impact', 'wp-seopress'),
+                    ],
+                    'link' => [
+                        'en'       => $link,
+                        'title'    => __('Fix this!', 'wp-seopress'),
+                        'external' => false,
+                    ],
+                    'deleteable' => false,
+                    'status' => $status ? $status : false,
+                ];
             }
         }
 
@@ -560,7 +563,7 @@ class Notifications {
         }
 
         $status = false;
-        if ('' === seopress_get_service('GoogleAnalyticsOption')->getUA() && '' === seopress_get_service('GoogleAnalyticsOption')->getGA4() && '1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption()) {
+        if ('' === seopress_get_service('GoogleAnalyticsOption')->getGA4() && '1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption()) {
             if ('1' !== seopress_get_service('NoticeOption')->getNoticeGAIds()) {
                 $alerts_medium++;
                 $status = true;
@@ -669,25 +672,27 @@ class Notifications {
         ];
 
         $status = false;
-        if ('1' !== seopress_get_service('NoticeOption')->getNoticeSearchConsole() && '' === seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification()) {
+        if ('1' !== seopress_get_service('NoticeOption')->getNoticeSearchConsole()) {
             $alerts_high++;
             $status = true;
         }
-        $args[] = [
-            'id'     => 'notice-search-console',
-            'title'  => __('Add your site to Google. It\'s free!', 'wp-seopress'),
-            'desc'   => __('Is your brand new site online? So reference it as quickly as possible on Google to get your first visitors via Google Search Console. Already the case? Click on the cross on the right to remove this alert.', 'wp-seopress'),
-            'impact' => [
-                'high' => __('High impact', 'wp-seopress'),
-            ],
-            'link' => [
-                'en'       => 'https://www.google.com/webmasters/tools/home',
-                'title'    => __('Add your site to Search Console!', 'wp-seopress'),
-                'external' => true,
-            ],
-            'deleteable' => true,
-            'status' => $status ? $status : false,
-        ];
+        if (null === seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification() || '' === seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification()) {
+            $args[] = [
+                'id'     => 'notice-search-console',
+                'title'  => __('Add your site to Google. It\'s free!', 'wp-seopress'),
+                'desc'   => __('Is your brand new site online? So reference it as quickly as possible on Google to get your first visitors via Google Search Console. Already the case? Dismiss this alert.', 'wp-seopress'),
+                'impact' => [
+                    'high' => __('High impact', 'wp-seopress'),
+                ],
+                'link' => [
+                    'en'       => 'https://www.google.com/webmasters/tools/home',
+                    'title'    => __('Add your site to Search Console!', 'wp-seopress'),
+                    'external' => true,
+                ],
+                'deleteable' => true,
+                'status' => $status ? $status : false,
+            ];
+        }
 
         $args['impact']['high'] = $alerts_high;
         $args['impact']['medium'] = $alerts_medium;

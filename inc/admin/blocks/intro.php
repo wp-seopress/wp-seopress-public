@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        <h1><?php printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '6.7.2'); ?></h1>
+        <h1><?php printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '6.8'); ?></h1>
         <p><?php _e('Your control center for SEO.', 'wp-seopress'); ?></p>
     </div>
 </div>

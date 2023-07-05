@@ -37,7 +37,7 @@ function seopress_social_knowledge_name_callback()
     $check   = isset($options['seopress_social_knowledge_name']) ? $options['seopress_social_knowledge_name'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_name]" placeholder="' . esc_html__('eg: Miremont', 'wp-seopress') . '" aria-label="' . __('Your name/organization', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_name]" placeholder="' . esc_html__('e.g. My Local Business', 'wp-seopress') . '" aria-label="' . __('Your name/organization', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -56,20 +56,18 @@ function seopress_social_knowledge_img_callback()
     aria-label="<?php _e('Your photo/organization logo', 'wp-seopress'); ?>"
     placeholder="<?php esc_html_e('Select your logo', 'wp-seopress'); ?>" />
 
-<input id="seopress_social_knowledge_img_upload" class="btn btnSecondary" type="button"
-    value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
+<input id="seopress_social_knowledge_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
+<input id="seopress_social_knowledge_img_remove" class="btn btnLink is-deletable" type="button" value="<?php _e('Remove', 'wp-seopress'); ?>" />
 
-<p class="description"><?php _e('JPG, PNG, WebP and GIF allowed.', 'wp-seopress'); ?>
-</p>
+<p class="description"><?php _e('JPG, PNG, WebP and GIF allowed. The image must be 112x112px, at minimum.', 'wp-seopress'); ?></p>
 
-<?php if (isset($options['seopress_social_knowledge_img'])) {
+<div id="seopress_social_knowledge_img_placeholder_upload" class="seopress-img-placeholder" data_caption="<?php _e('Click to select an image', 'wp-seopress'); ?>">
+    <img id="seopress_social_knowledge_img_placeholder_src" src="<?php echo esc_attr(seopress_get_service('SocialOption')->getSocialKnowledgeImage()); ?>" />
+</div>
+
+    <?php if (isset($options['seopress_social_knowledge_img'])) {
         esc_attr($options['seopress_social_knowledge_img']);
-    } ?>
-
-<img style="width:300px;max-height:400px;"
-    src="<?php echo esc_attr(seopress_get_service('SocialOption')->getSocialKnowledgeImage()); ?>" />
-
-<?php
+    }
 }
 
 function seopress_social_knowledge_phone_callback()
@@ -78,7 +76,7 @@ function seopress_social_knowledge_phone_callback()
     $check   = isset($options['seopress_social_knowledge_phone']) ? $options['seopress_social_knowledge_phone'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_phone]" placeholder="' . esc_html__('eg: +33123456789 (internationalized version required)', 'wp-seopress') . '" aria-label="' . __('Organization\'s phone number (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_phone]" placeholder="' . esc_html__('e.g. +33123456789 (internationalized version required)', 'wp-seopress') . '" aria-label="' . __('Organization\'s phone number (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -184,7 +182,7 @@ function seopress_social_accounts_facebook_callback()
     $check   = isset($options['seopress_social_accounts_facebook']) ? $options['seopress_social_accounts_facebook'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_facebook]" placeholder="' . esc_html__('eg: https://facebook.com/my-page-url', 'wp-seopress') . '" aria-label="' . __('Facebook Page URL', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_facebook]" placeholder="' . esc_html__('e.g. https://facebook.com/my-page-url', 'wp-seopress') . '" aria-label="' . __('Facebook Page URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -195,7 +193,7 @@ function seopress_social_accounts_twitter_callback()
     $check   = isset($options['seopress_social_accounts_twitter']) ? $options['seopress_social_accounts_twitter'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="' . esc_html__('eg: @my_twitter_account', 'wp-seopress') . '" aria-label="' . __('Twitter Page URL', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="' . esc_html__('e.g. @my_twitter_account', 'wp-seopress') . '" aria-label="' . __('Twitter Page URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -206,7 +204,7 @@ function seopress_social_accounts_pinterest_callback()
     $check   = isset($options['seopress_social_accounts_pinterest']) ? $options['seopress_social_accounts_pinterest'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_pinterest]" placeholder="' . esc_html__('eg: https://pinterest.com/my-page-url/', 'wp-seopress') . '" aria-label="' . __('Pinterest URL', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_pinterest]" placeholder="' . esc_html__('e.g. https://pinterest.com/my-page-url/', 'wp-seopress') . '" aria-label="' . __('Pinterest URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -217,7 +215,7 @@ function seopress_social_accounts_instagram_callback()
     $check   = isset($options['seopress_social_accounts_instagram']) ? $options['seopress_social_accounts_instagram'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_instagram]" placeholder="' . esc_html__('eg: https://www.instagram.com/my-page-url/', 'wp-seopress') . '" aria-label="' . __('Instagram URL', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_instagram]" placeholder="' . esc_html__('e.g. https://www.instagram.com/my-page-url/', 'wp-seopress') . '" aria-label="' . __('Instagram URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -228,7 +226,7 @@ function seopress_social_accounts_youtube_callback()
     $check   = isset($options['seopress_social_accounts_youtube']) ? $options['seopress_social_accounts_youtube'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_youtube]" placeholder="' . esc_html__('eg: https://www.youtube.com/my-channel-url', 'wp-seopress') . '" aria-label="' . __('YouTube URL', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_youtube]" placeholder="' . esc_html__('e.g. https://www.youtube.com/my-channel-url', 'wp-seopress') . '" aria-label="' . __('YouTube URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -239,7 +237,7 @@ function seopress_social_accounts_linkedin_callback()
     $check   = isset($options['seopress_social_accounts_linkedin']) ? $options['seopress_social_accounts_linkedin'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_linkedin]" placeholder="' . esc_html__('eg: http://linkedin.com/company/my-company-url/', 'wp-seopress') . '" aria-label="' . __('LinkedIn URL', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_linkedin]" placeholder="' . esc_html__('e.g. http://linkedin.com/company/my-company-url/', 'wp-seopress') . '" aria-label="' . __('LinkedIn URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -250,10 +248,10 @@ function seopress_social_accounts_extra_callback() {
     $check   = isset($options['seopress_social_accounts_extra']) ? esc_attr($options['seopress_social_accounts_extra']) : null;
 
     printf(
-'<textarea id="seopress_social_accounts_extra" name="seopress_social_option_name[seopress_social_accounts_extra]" rows="8" placeholder="' . esc_html__('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress') . '" aria-label="' . __('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress') . '">%s</textarea>',
+'<textarea id="seopress_social_accounts_extra" name="seopress_social_option_name[seopress_social_accounts_extra]" rows="8" placeholder="' . esc_html__('Enter 1 URL per line (e.g. https://example.com/my-profile)', 'wp-seopress') . '" aria-label="' . __('Enter 1 URL per line (e.g. https://example.com/my-profile)', 'wp-seopress') . '">%s</textarea>',
 esc_html($check)); ?>
 
-<p class="seopress-help description"><?php _e('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress'); ?></p>
+<p class="seopress-help description"><?php _e('Enter 1 URL per line (e.g. https://example.com/my-profile)', 'wp-seopress'); ?></p>
 
 <?php
 }
@@ -303,13 +301,16 @@ function seopress_social_facebook_img_callback()
 <input type="hidden" name="seopress_social_facebook_img_height" id="seopress_social_fb_img_height" value="<?php echo esc_html($options_set_height); ?>">
 <input type="hidden" name="seopress_social_facebook_img_attachment_id" id="seopress_social_fb_img_attachment_id" value="<?php echo esc_html($options_set_attachment_id); ?>">
 
-<input id="seopress_social_fb_img_upload" class="btn btnSecondary" type="button"
-    value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
+<input id="seopress_social_fb_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
+<input id="seopress_social_fb_img_remove" class="btn btnLink is-deletable" type="button" value="<?php _e('Remove', 'wp-seopress'); ?>" />
 
-<p class="description"><?php _e('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'); ?>
-</p>
-<p class="description"><?php _e('If no default image is set, we‘ll use your site icon defined from the Customizer.', 'wp-seopress'); ?>
-</p>
+
+<p class="description"><?php _e('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (e.g. 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'); ?></p>
+<p class="description"><?php _e('If no default image is set, we‘ll use your site icon defined from the Customizer.', 'wp-seopress'); ?></p>
+
+<div id="seopress_social_fb_img_placeholder_upload" class="seopress-img-placeholder" data_caption="<?php _e('Click to select an image', 'wp-seopress'); ?>">
+    <img id="seopress_social_fb_img_placeholder_src" style="width: 524px;height: 274px;" src="<?php echo $options_set; ?>" />
+</div>
 
 <?php if (isset($options['seopress_social_facebook_img'])) {
         esc_attr($options['seopress_social_facebook_img']);
@@ -364,10 +365,10 @@ function seopress_social_facebook_img_cpt_callback()
 </p>
 <?php }
 
-                $options = get_option('seopress_social_option_name');
+    $options = get_option('seopress_social_option_name');
 
-                $options_set = isset($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) ? esc_attr($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) : null;
-                ?>
+    $options_set = isset($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) ? esc_attr($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) : null;
+?>
 
 <p>
     <input
@@ -524,12 +525,16 @@ function seopress_social_twitter_card_img_callback()
     aria-label="<?php _e('Default Twitter Image', 'wp-seopress'); ?>"
     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>" />
 
-<input id="seopress_social_twitter_img_upload" class="btn btnSecondary" type="button"
-    value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
+<input id="seopress_social_twitter_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
+<input id="seopress_social_twitter_img_remove" class="btn btnLink is-deletable" type="button" value="<?php _e('Remove', 'wp-seopress'); ?>" />
 
 <p class="description">
     <?php _e('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress'); ?>
 </p>
+
+<div id="seopress_social_twitter_img_placeholder_upload" class="seopress-img-placeholder" data_caption="<?php _e('Click to select an image', 'wp-seopress'); ?>">
+    <img id="seopress_social_twitter_img_placeholder_src" style="width: 600px;height: 314px;" src="<?php echo $options_set; ?>" />
+</div>
 
 <?php if (isset($options['seopress_social_twitter_card_img'])) {
         esc_attr($options['seopress_social_twitter_card_img']);

@@ -30,23 +30,29 @@
                 <?php }
             ?>
         </div>
-        <div class="seopress-notifications-hidden">
-            <div class="seopress-notifications-list-title">
+        <details class="seopress-notifications-hidden">
+            <summary class="seopress-notifications-list-title">
                 <img src="<?php echo SEOPRESS_ASSETS_DIR; ?>/img/ico-notifications-hidden.svg" alt='' width='32' height='32' />
                 <h3 id="seopress-hidden-notifications"><?php _e('Hidden notifications','wp-seopress'); ?></h3>
-            </div>
+            </summary>
             <div class="seopress-notifications-list-content">
                 <?php
                     if (!empty($args)) {
+                        $html = '';
                         foreach($args as $arg) {
                             if (isset($arg['status']) && $arg['status'] === false) {
-                                echo seopress_get_service('Notifications')->renderNotification($arg);
+                                $html .= seopress_get_service('Notifications')->renderNotification($arg);
                             }
+                        }
+                        if (!empty($html)) {
+                            echo $html;
+                        } else {
+                            echo '<p>' . __('You currently have no hidden notifications.', 'wp-seopress') . '</p>';
                         }
                     }
                 ?>
             </div>
-        </div>
+        </details>
     </div>
     <!--#seopress-notifications-center-->
 <?php

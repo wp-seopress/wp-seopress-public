@@ -53,6 +53,33 @@ class SEOPRESS_Uninstall {
         // Delete post meta
         $wpdb->query( "DELETE FROM $wpdb->postmeta WHERE meta_key LIKE '_seopress_%'" );
 
+        // Delete redirections / 404 errors
+        $sql = 'DELETE `posts`, `pm`
+		FROM `' . $wpdb->prefix . 'posts` AS `posts`
+		LEFT JOIN `' . $wpdb->prefix . 'postmeta` AS `pm` ON `pm`.`post_id` = `posts`.`ID`
+		WHERE `posts`.`post_type` = \'seopress_404\'';
+
+        $sql = $wpdb->prepare($sql);
+        $wpdb->query($sql);
+
+        // Delete schemas
+        $sql = 'DELETE `posts`, `pm`
+		FROM `' . $wpdb->prefix . 'posts` AS `posts`
+		LEFT JOIN `' . $wpdb->prefix . 'postmeta` AS `pm` ON `pm`.`post_id` = `posts`.`ID`
+		WHERE `posts`.`post_type` = \'seopress_schemas\'';
+
+        $sql = $wpdb->prepare($sql);
+        $wpdb->query($sql);
+
+        // Delete broken links
+        $sql = 'DELETE `posts`, `pm`
+		FROM `' . $wpdb->prefix . 'posts` AS `posts`
+		LEFT JOIN `' . $wpdb->prefix . 'postmeta` AS `pm` ON `pm`.`post_id` = `posts`.`ID`
+		WHERE `posts`.`post_type` = \'seopress_bot\'';
+
+        $sql = $wpdb->prepare($sql);
+        $wpdb->query($sql);
+
         // Delete global settings
         $options = $wpdb->get_col( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE 'seopress_%'" );
         array_map( 'delete_option', $options );

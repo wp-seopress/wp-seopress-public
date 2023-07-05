@@ -62,7 +62,6 @@
 	  <key name="seopress_social_twitter_card_img_size"/>
 	</key>
 	<key name="seopress_google_analytics_option_name">
-	  <key name="seopress_google_analytics_ua"/>
 	  <key name="seopress_google_analytics_ga4"/>
 	  <key name="seopress_google_analytics_optimize"/>
 	  <key name="seopress_google_analytics_ads"/>

@@ -606,6 +606,10 @@ function seopress_social_fb_img_size_from_url($url, $post_id = null) {
         return;
     }
 
+    if ($url === null) {
+        return;
+    }
+
     $stop_attachment_url_to_postid = apply_filters( 'seopress_stop_attachment_url_to_postid', false );
 
     if ($post_id) {

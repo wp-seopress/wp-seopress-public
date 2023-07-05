@@ -165,6 +165,9 @@ if (!empty($postTypes)) {
 
         add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_redirect_disable');
         add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_redirect_disable_handler', 10, 3);
+
+        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_add_instant_indexing');
+        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_add_instant_indexing_handler', 10, 3);
     }
 }
 
@@ -413,6 +416,56 @@ function seopress_bulk_action_redirect_disable_admin_notice() {
                     $enable_count,
                     'wp-seopress'
                 ) . '</p></div>', $enable_count);
+    }
+}
+
+//add to instant indexing
+function seopress_bulk_actions_add_instant_indexing($bulk_actions) {
+    $bulk_actions['seopress_instant_indexing'] = __('Add to instant indexing queue', 'wp-seopress');
+
+    return $bulk_actions;
+}
+
+function seopress_bulk_action_add_instant_indexing_handler($redirect_to, $doaction, $post_ids) {
+    if ('seopress_instant_indexing' !== $doaction) {
+        return $redirect_to;
+    }
+
+    if (!empty($post_ids)) {
+        $urls = '';
+        $options    = get_option('seopress_instant_indexing_option_name');
+        $check      = isset($options['seopress_instant_indexing_manual_batch']) ? esc_attr($options['seopress_instant_indexing_manual_batch']) : null;
+
+        foreach ($post_ids as $post_id) {
+            // Perform action for each post.
+            $urls .= esc_url(get_the_permalink( $post_id ))."\n";
+        }
+
+        $urls = $check . "\n". $urls;
+
+
+        $urls = implode("\n", array_unique(explode("\n", $urls)));
+        $options['seopress_instant_indexing_manual_batch'] = $urls;
+
+
+        update_option( 'seopress_instant_indexing_option_name', $options );
+    }
+    $redirect_to = add_query_arg('bulk_add_instant_indexing', count($post_ids), $redirect_to);
+
+    return $redirect_to;
+}
+
+add_action('admin_notices', 'seopress_bulk_action_add_instant_indexing_admin_notice');
+function seopress_bulk_action_add_instant_indexing_admin_notice() {
+    if (! empty($_REQUEST['bulk_add_instant_indexing'])) {
+        $queue_count = intval($_REQUEST['bulk_add_instant_indexing']);
+        printf('<div id="message" class="updated fade"><p>' .
+                _n(
+                    '%s post added to instant indexing queue.',
+                    '%s posts added to instant indexing queue.',
+                    $queue_count,
+                    'wp-seopress'
+                ) . '</p></div>', $queue_count);
     }
 }
 

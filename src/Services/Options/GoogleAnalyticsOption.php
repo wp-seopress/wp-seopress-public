@@ -481,15 +481,6 @@ class GoogleAnalyticsOption
      *
      * @return string
      */
-    public function getUA(){
-        return $this->searchOptionByKey('seopress_google_analytics_ua');
-    }
-
-    /**
-     * @since 5.8.0
-     *
-     * @return string
-     */
     public function getGA4(){
         return $this->searchOptionByKey('seopress_google_analytics_ga4');
     }

@@ -3,7 +3,8 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_admin_header($context = "") {
-	$docs = seopress_get_docs_links(); ?>
+	$docs = seopress_get_docs_links();
+    ?>
 
 <div id="seopress-header" class="seopress-option">
 	<div id="seopress-navbar">

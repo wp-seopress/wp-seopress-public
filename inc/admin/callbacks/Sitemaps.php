@@ -217,7 +217,7 @@ function seopress_xml_sitemap_html_mapping_callback()
     $check   = isset($options['seopress_xml_sitemap_html_mapping']) ? $options['seopress_xml_sitemap_html_mapping'] : null;
 
     printf(
-        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_mapping]" placeholder="' . esc_html__('eg: 2, 28, 68', 'wp-seopress') . '" aria-label="' . __('Enter a post, page or custom post type ID(s) to display the sitemap', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_mapping]" placeholder="' . esc_html__('e.g. 2, 28, 68', 'wp-seopress') . '" aria-label="' . __('Enter a post, page or custom post type ID(s) to display the sitemap', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -228,7 +228,7 @@ function seopress_xml_sitemap_html_exclude_callback()
     $check   = isset($options['seopress_xml_sitemap_html_exclude']) ? $options['seopress_xml_sitemap_html_exclude'] : null;
 
     printf(
-        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_exclude]" placeholder="' . esc_html__('eg: 13, 8, 38', 'wp-seopress') . '" aria-label="' . __('Exclude some Posts, Pages, Custom Post Types or Terms IDs', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_exclude]" placeholder="' . esc_html__('e.g. 13, 8, 38', 'wp-seopress') . '" aria-label="' . __('Exclude some Posts, Pages, Custom Post Types or Terms IDs', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -331,7 +331,7 @@ function seopress_xml_sitemap_html_archive_links_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Remove links from archive pages (eg: Products)', 'wp-seopress'); ?>
+    <?php _e('Remove links from archive pages (e.g. Products)', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_xml_sitemap_html_archive_links'])) {

@@ -17,22 +17,7 @@ function seopress_export_settings() {
         return;
     }
 
-    $settings['seopress_activated']                             = get_option('seopress_activated');
-    $settings['seopress_titles_option_name']                    = get_option('seopress_titles_option_name');
-    $settings['seopress_social_option_name']                    = get_option('seopress_social_option_name');
-    $settings['seopress_google_analytics_option_name']          = get_option('seopress_google_analytics_option_name');
-    $settings['seopress_advanced_option_name']                  = get_option('seopress_advanced_option_name');
-    $settings['seopress_xml_sitemap_option_name']               = get_option('seopress_xml_sitemap_option_name');
-    $settings['seopress_pro_option_name']                       = get_option('seopress_pro_option_name');
-    $settings['seopress_pro_mu_option_name']                    = get_option('seopress_pro_mu_option_name');
-    $settings['seopress_pro_license_key']                       = get_option('seopress_pro_license_key');
-    $settings['seopress_pro_license_status']                    = get_option('seopress_pro_license_status');
-    $settings['seopress_bot_option_name']                       = get_option('seopress_bot_option_name');
-    $settings['seopress_toggle']                                = get_option('seopress_toggle');
-    $settings['seopress_google_analytics_lock_option_name']     = get_option('seopress_google_analytics_lock_option_name');
-    $settings['seopress_tools_option_name']                     = get_option('seopress_tools_option_name');
-    $settings['seopress_dashboard_option_name']                 = get_option('seopress_dashboard_option_name');
-    $settings['seopress_instant_indexing_option_name']          = get_option('seopress_instant_indexing_option_name');
+    $settings = seopress_get_service('ExportSettings')->handle();
 
     ignore_user_abort(true);
     nocache_headers();
@@ -69,51 +54,7 @@ function seopress_import_settings() {
 
     $settings = (array) json_decode(seopress_remove_utf8_bom(file_get_contents($import_file)), true);
 
-    if (false !== $settings['seopress_activated']) {
-        update_option('seopress_activated', $settings['seopress_activated'], false);
-    }
-    if (false !== $settings['seopress_titles_option_name']) {
-        update_option('seopress_titles_option_name', $settings['seopress_titles_option_name'], false);
-    }
-    if (false !== $settings['seopress_social_option_name']) {
-        update_option('seopress_social_option_name', $settings['seopress_social_option_name'], false);
-    }
-    if (false !== $settings['seopress_google_analytics_option_name']) {
-        update_option('seopress_google_analytics_option_name', $settings['seopress_google_analytics_option_name'], false);
-    }
-    if (false !== $settings['seopress_advanced_option_name']) {
-        update_option('seopress_advanced_option_name', $settings['seopress_advanced_option_name'], false);
-    }
-    if (false !== $settings['seopress_xml_sitemap_option_name']) {
-        update_option('seopress_xml_sitemap_option_name', $settings['seopress_xml_sitemap_option_name'], false);
-    }
-    if (false !== $settings['seopress_pro_option_name']) {
-        update_option('seopress_pro_option_name', $settings['seopress_pro_option_name'], false);
-    }
-    if (false !== $settings['seopress_pro_mu_option_name']) {
-        update_option('seopress_pro_mu_option_name', $settings['seopress_pro_mu_option_name'], false);
-    }
-    if (false !== $settings['seopress_pro_license_key']) {
-        update_option('seopress_pro_license_key', $settings['seopress_pro_license_key'], false);
-    }
-    if (false !== $settings['seopress_pro_license_status']) {
-        update_option('seopress_pro_license_status', $settings['seopress_pro_license_status'], false);
-    }
-    if (false !== $settings['seopress_bot_option_name']) {
-        update_option('seopress_bot_option_name', $settings['seopress_bot_option_name'], false);
-    }
-    if (false !== $settings['seopress_toggle']) {
-        update_option('seopress_toggle', $settings['seopress_toggle'], false);
-    }
-    if (false !== $settings['seopress_google_analytics_lock_option_name']) {
-        update_option('seopress_google_analytics_lock_option_name', $settings['seopress_google_analytics_lock_option_name'], false);
-    }
-    if (false !== $settings['seopress_tools_option_name']) {
-        update_option('seopress_tools_option_name', $settings['seopress_tools_option_name'], false);
-    }
-    if (false !== $settings['seopress_instant_indexing_option_name']) {
-        update_option('seopress_instant_indexing_option_name', $settings['seopress_instant_indexing_option_name'], false);
-    }
+    seopress_get_service('ImportSettings')->handle($settings);
 
     wp_safe_redirect(admin_url('admin.php?page=seopress-import-export&success=true'));
     exit;

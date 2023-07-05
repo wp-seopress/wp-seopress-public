@@ -339,6 +339,9 @@ function seopress_disable_qm($allcaps, $caps, $args) {
  * @author Benjamin
  */
 function seopress_clean_content_analysis() {
+    if (!is_user_logged_in()) {
+        return;
+    }
     if (current_user_can('edit_posts')) {
         if (isset($_GET['no_admin_bar']) && '1' === $_GET['no_admin_bar']) {
             //Remove admin bar
@@ -403,6 +406,32 @@ function seopress_get_locale() {
     }
 
     return $locale_link;
+}
+
+/**
+ * Returns the language code by supporting multilingual plugins
+ *
+ * @since 6.8
+ *
+ * @return string language code
+ *
+ * @author Benjamin
+ */
+function seopress_get_current_lang() {
+    //Default
+    $lang = get_locale();
+
+    //Polylang
+    if (function_exists('pll_current_language')) {
+        $lang = pll_current_language('locale');
+    }
+
+    //WPML
+    if (defined('ICL_SITEPRESS_VERSION')) {
+        $lang = apply_filters( 'wpml_current_language', NULL );
+    }
+
+    return $lang;
 }
 
 /**
@@ -663,6 +692,7 @@ function seopress_remove_utf8_bom($text) {
  */
 function seopress_capability($cap, $context = '') {
     $newcap = apply_filters('seopress_capability', $cap, $context);
+
     if ( ! current_user_can($newcap)) {
         return $cap;
     }
@@ -1018,7 +1048,7 @@ add_action('update_option', function( $option, $old_value, $value ) {
     }
 }, 10, 3);
 
-add_action('init', 'seopress_auto_flush_rewrite_rules');
+add_action('admin_init', 'seopress_auto_flush_rewrite_rules');
 function seopress_auto_flush_rewrite_rules() {
     if (get_transient('seopress_flush_rewrite_rules')) {
         flush_rewrite_rules(false);

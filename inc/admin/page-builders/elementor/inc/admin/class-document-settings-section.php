@@ -546,7 +546,7 @@ class Document_Settings_Section {
         $document->add_control(
             '_seopress_redirections_value',
             [
-                'label'       => __('Enter your new URL in absolute (eg: https://www.example.com/)', 'wp-seopress'),
+                'label'       => __('Enter your new URL in absolute (e.g. https://www.example.com/)', 'wp-seopress'),
                 'type'        => \Elementor\Controls_Manager::TEXT,
                 'label_block' => true,
                 'separator'   => 'none',

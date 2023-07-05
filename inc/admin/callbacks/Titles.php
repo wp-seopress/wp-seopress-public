@@ -9,7 +9,7 @@ function seopress_titles_sep_callback()
     $check   = isset($options['seopress_titles_sep']) ? $options['seopress_titles_sep'] : null; ?>
 
 <input type="text" id="seopress_titles_sep" name="seopress_titles_option_name[seopress_titles_sep]"
-    placeholder="<?php esc_html_e('Enter your separator, eg: "-"', 'wp-seopress'); ?>"
+    placeholder="<?php esc_html_e('Enter your separator, e.g. "-"', 'wp-seopress'); ?>"
     aria-label="<?php _e('Separator', 'wp-seopress'); ?>"
     value="<?php esc_html_e($check); ?>" />
 
@@ -1520,7 +1520,7 @@ function seopress_titles_paged_noindex_callback()
                                                                 </label>
 
                                                                 <p class="description">
-                                                                    <?php _e('eg: https://example.com/category/my-category/page/2/', 'wp-seopress'); ?>
+                                                                    <?php _e('e.g. https://example.com/category/my-category/page/2/', 'wp-seopress'); ?>
                                                                 </p>
 
                                                                 <?php if (isset($options['seopress_titles_paged_noindex'])) {
@@ -1546,7 +1546,7 @@ function seopress_titles_attachments_noindex_callback()
                                                                 </label>
 
                                                                 <p class="description">
-                                                                    <?php _e('eg: https://example.com/my-media-attachment-page', 'wp-seopress'); ?>
+                                                                    <?php _e('e.g. https://example.com/my-media-attachment-page', 'wp-seopress'); ?>
                                                                 </p>
 
                                                                 <?php if (isset($options['seopress_titles_attachments_noindex'])) {

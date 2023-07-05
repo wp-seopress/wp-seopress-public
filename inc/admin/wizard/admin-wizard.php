@@ -797,7 +797,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <p>
                         <label for="site_sep"><?php esc_html_e('Separator', 'wp-seopress'); ?></label>
                         <input type="text" id="site_sep" class="location-input" name="site_sep"
-                            placeholder="<?php esc_html_e('eg: |', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. |', 'wp-seopress'); ?>"
                             required value="<?php echo $site_sep; ?>" />
                     </p>
 
@@ -808,7 +808,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <p>
                         <label for="site_title"><?php esc_html_e('Home site title', 'wp-seopress'); ?></label>
                         <input type="text" id="site_title" class="location-input" name="site_title"
-                            placeholder="<?php esc_html_e('eg: My super website', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. My super website', 'wp-seopress'); ?>"
                             required value="<?php echo $site_title; ?>" />
                     </p>
 
@@ -818,7 +818,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
                     <p>
                         <label for="alt_site_title"><?php esc_html_e('Alternative site title', 'wp-seopress'); ?></label>
-                        <input type="text" id="alt_site_title" class="location-input" name="alt_site_title" placeholder="<?php esc_html_e('eg: My alternative site title', 'wp-seopress'); ?>" value="<?php echo $alt_site_title; ?>" />
+                        <input type="text" id="alt_site_title" class="location-input" name="alt_site_title" placeholder="<?php esc_html_e('e.g. My alternative site title', 'wp-seopress'); ?>" value="<?php echo $alt_site_title; ?>" />
                     </p>
 
                     <p class="description"><?php printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the <a href="%s" target="_blank">content guidelines</a>.<span class="dashicons dashicons-external"></span>','wp-seopress'), $docs['titles']['alt_title']); ?></p>
@@ -852,14 +852,14 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <p>
                         <label for="knowledge_name"><?php esc_html_e('Your name/organization', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_name" class="location-input" name="knowledge_name"
-                            placeholder="<?php esc_html_e('eg: My Company Name', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. My Company Name', 'wp-seopress'); ?>"
                             value="<?php echo $knowledge_name; ?>" />
                     </p>
 
                     <p>
                         <label for="knowledge_img_meta"><?php esc_html_e('Your photo/organization logo', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_img_meta" class="location-input" name="knowledge_img"
-                        placeholder="<?php esc_html_e('eg: https://www.example.com/logo.png', 'wp-seopress'); ?>"
+                        placeholder="<?php esc_html_e('e.g. https://www.example.com/logo.png', 'wp-seopress'); ?>"
                         value="<?php echo $knowledge_img; ?>" />
 
                         <input id="knowledge_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
@@ -869,7 +869,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <p>
                             <label for="knowledge_email"><?php esc_html_e('Your email', 'wp-seopress'); ?></label>
                             <input type="text" id="knowledge_email" class="location-input" name="knowledge_email"
-                                placeholder="<?php esc_html_e('eg: enter', 'wp-seopress'); ?>"
+                                placeholder="<?php esc_html_e('e.g. enter', 'wp-seopress'); ?>"
                                 value="<?php echo $knowledge_email; ?>" />
                         </p>
 
@@ -974,50 +974,50 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <p>
                         <label for="knowledge_fb"><?php esc_html_e('Facebook page URL', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_fb" class="location-input" name="knowledge_fb"
-                            placeholder="<?php esc_html_e('eg: https://facebook.com/my-page-url', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. https://facebook.com/my-page-url', 'wp-seopress'); ?>"
                             value="<?php echo $knowledge_fb; ?>" />
                     </p>
 
                     <p>
                         <label for="knowledge_tw"><?php esc_html_e('Twitter Username', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_tw" class="location-input" name="knowledge_tw"
-                            placeholder="<?php esc_html_e('eg: @my_twitter_account', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. @my_twitter_account', 'wp-seopress'); ?>"
                             value="<?php echo $knowledge_tw; ?>" />
                     </p>
 
                     <p>
                         <label for="knowledge_pin"><?php esc_html_e('Pinterest URL', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_pin" class="location-input" name="knowledge_pin"
-                            placeholder="<?php esc_html_e('eg: https://pinterest.com/my-page-url/', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. https://pinterest.com/my-page-url/', 'wp-seopress'); ?>"
                             value="<?php echo $knowledge_pin; ?>" />
                     </p>
 
                     <p>
                         <label for="knowledge_insta"><?php esc_html_e('Instagram URL', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_insta" class="location-input" name="knowledge_insta"
-                            placeholder="<?php esc_html_e('eg: https://www.instagram.com/my-page-url/', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. https://www.instagram.com/my-page-url/', 'wp-seopress'); ?>"
                             value="<?php echo $knowledge_insta; ?>" />
                     </p>
 
                     <p>
                         <label for="knowledge_yt"><?php esc_html_e('YouTube URL', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_yt" class="location-input" name="knowledge_yt"
-                            placeholder="<?php esc_html_e('eg: https://www.youtube.com/my-channel-url', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. https://www.youtube.com/my-channel-url', 'wp-seopress'); ?>"
                             value="<?php echo $knowledge_yt; ?>" />
                     </p>
 
                     <p>
                         <label for="knowledge_li"><?php esc_html_e('LinkedIn URL', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_li" class="location-input" name="knowledge_li"
-                            placeholder="<?php esc_html_e('eg: http://linkedin.com/company/my-company-url/', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. http://linkedin.com/company/my-company-url/', 'wp-seopress'); ?>"
                             value="<?php echo $knowledge_li; ?>" />
                     </p>
 
                     <p>
                         <label for="knowledge_extra"><?php esc_html_e('Additional accounts', 'wp-seopress'); ?></label>
                         <textarea id="knowledge_extra" class="location-input" name="knowledge_extra" rows="8"
-                        placeholder="<?php esc_html_e('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress'); ?>"
-                        aria-label="<?php _e('Enter 1 URL per line (eg: https://example.com/my-profile)', 'wp-seopress'); ?>"><?php esc_html_e($knowledge_extra); ?></textarea>
+                        placeholder="<?php esc_html_e('Enter 1 URL per line (e.g. https://example.com/my-profile)', 'wp-seopress'); ?>"
+                        aria-label="<?php _e('Enter 1 URL per line (e.g. https://example.com/my-profile)', 'wp-seopress'); ?>"><?php esc_html_e($knowledge_extra); ?></textarea>
                     </p>
 
                     <p class="seopress-setup-actions step">
@@ -1680,7 +1680,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <span class="dashicons dashicons-minus"></span><?php esc_html_e('Receive your rankings / backlinks in your inbox / Slack.', 'wp-seopress'); ?>
                 </p>
 
-                <?php echo wp_oembed_get('https://www.youtube.com/watch?v=n-a2U4_anWA'); ?>
+                <?php echo wp_oembed_get('https://www.youtube.com/watch?v=p6v9Jd5lRIU'); ?>
 
                 <p class="seopress-setup-actions step">
                     <a class="btn btnPrimary"

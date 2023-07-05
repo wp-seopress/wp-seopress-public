@@ -144,7 +144,7 @@ $docs = seopress_get_docs_links();
                         <span><?php _e('Clean content scans', 'wp-seopress'); ?></span>
                     </h3>
 
-                    <p><?php _e('By clicking Delete content scans, all content analyses will be deleted from your database.', 'wp-seopress'); ?></p>
+                    <p><?php _e('By clicking Delete content scans, all content analysis will be deleted from your database.', 'wp-seopress'); ?></p>
 
                     <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="seopress_action" value="clean_content_scans" />

@@ -24,6 +24,7 @@ class CustomCapabilities implements ExecuteHooksBackend
             add_filter('option_page_capability_seopress_xml_sitemap_option_group', [$this, 'capabilitySaveXmlSitemap']);
             add_filter('option_page_capability_seopress_social_option_group', [$this, 'capabilitySaveSocial']);
             add_filter('option_page_capability_seopress_google_analytics_option_group', [$this, 'capabilitySaveAnalytics']);
+            add_filter('option_page_capability_seopress_instant_indexing_option_group', [$this, 'capabilitySaveInstantIndexing']);
             add_filter('option_page_capability_seopress_advanced_option_group', [$this, 'capabilitySaveAdvanced']);
             add_filter('option_page_capability_seopress_tools_option_group', [$this, 'capabilitySaveTools']);
             add_filter('option_page_capability_seopress_import_export_option_group', [$this, 'capabilitySaveImportExport']);

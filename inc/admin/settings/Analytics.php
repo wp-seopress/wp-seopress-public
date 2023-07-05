@@ -20,14 +20,6 @@ add_settings_field(
 );
 
 add_settings_field(
-    'seopress_google_analytics_ua', // ID
-    __('Enter your tracking ID', 'wp-seopress'), // Title
-    'seopress_google_analytics_ua_callback', // Callback
-    'seopress-settings-admin-google-analytics-enable', // Page
-    'seopress_setting_section_google_analytics_enable' // Section
-);
-
-add_settings_field(
     'seopress_google_analytics_ga4', // ID
     __('Enter your measurement ID (GA4)', 'wp-seopress'), // Title
     'seopress_google_analytics_ga4_callback', // Callback
@@ -364,7 +356,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_google_analytics_download_tracking_enable', // ID
-    __('Enable downloads tracking (eg: PDF, XLSX, DOCX...)', 'wp-seopress'), // Title
+    __('Enable downloads tracking (e.g. PDF, XLSX, DOCX...)', 'wp-seopress'), // Title
     'seopress_google_analytics_download_tracking_enable_callback', // Callback
     'seopress-settings-admin-google-analytics-events', // Page
     'seopress_setting_section_google_analytics_events' // Section
@@ -380,7 +372,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_google_analytics_affiliate_tracking_enable', // ID
-    __('Enable affiliate/outbound links tracking (eg: aff, go, out, recommends)', 'wp-seopress'), // Title
+    __('Enable affiliate/outbound links tracking (e.g. aff, go, out, recommends)', 'wp-seopress'), // Title
     'seopress_google_analytics_affiliate_tracking_enable_callback', // Callback
     'seopress-settings-admin-google-analytics-events', // Page
     'seopress_setting_section_google_analytics_events' // Section

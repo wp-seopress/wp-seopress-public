@@ -41,7 +41,7 @@ function seopress_advanced_advanced_noreferrer_callback() {
 </label>
 
 <p class="description">
-	<?php _e('Useful for affiliate links (eg: Amazon).','wp-seopress'); ?>
+	<?php _e('Useful for affiliate links (e.g. Amazon).','wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_advanced_advanced_noreferrer'])) {

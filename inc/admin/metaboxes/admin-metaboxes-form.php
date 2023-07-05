@@ -378,7 +378,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                     value="<?php echo $seopress_social_fb_img; ?>" />
                             </p>
                             <p class="description">
-                                <?php _e('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (eg: 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'); ?>
+                                <?php _e('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (e.g. 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'); ?>
                             </p>
                             <p>
                                 <input type="hidden" name="seopress_social_fb_img_attachment_id" id="seopress_social_fb_img_attachment_id" class="seopress_social_fb_img_attachment_id" value="<?php echo esc_html($seopress_social_fb_img_attachment_id); ?>">
@@ -654,7 +654,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             <label for="seopress_redirections_value_meta"><?php _e('URL redirection', 'wp-seopress'); ?></label>
                             <input id="seopress_redirections_value_meta" type="text" name="seopress_redirections_value"
                                 class="components-text-control__input js-seopress_redirections_value_meta"
-                                placeholder="<?php esc_html_e('Enter your new URL in absolute (eg: https://www.example.com/)', 'wp-seopress'); ?>"
+                                placeholder="<?php esc_html_e('Enter your new URL in absolute (e.g. https://www.example.com/)', 'wp-seopress'); ?>"
                                 aria-label="<?php _e('URL redirection', 'wp-seopress'); ?>"
                                 value="<?php echo $seopress_redirections_value; ?>" />
                         </p>

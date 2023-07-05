@@ -20,7 +20,7 @@ class GoogleAnalytics implements ExecuteHooksFrontend {
     }
 
     public function analytics($echo) {
-        if (('' !== seopress_get_service('GoogleAnalyticsOption')->getUA() || '' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) && '1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption()) {
+        if ('' !== seopress_get_service('GoogleAnalyticsOption')->getGA4() && '1' === seopress_get_service('GoogleAnalyticsOption')->getEnableOption()) {
             if (seopress_get_service('WooCommerceActivate')->isActive()) {
                 $woocommerceAnalyticsHook = new WooCommerceAnalytics();
                 $woocommerceAnalyticsHook->hooks();
