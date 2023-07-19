@@ -126,6 +126,16 @@ function seopress_compatibility_jetpack() {
 add_action('wp_head', 'seopress_compatibility_jetpack', 0);
 
 /**
+ * Remove Jetpack OpenGraph tags.
+ *
+ * @since 6.9
+ */
+function seopress_compatibility_hello_elementor() {
+	remove_action( 'wp_head', 'hello_elementor_add_description_meta_tag' );
+}
+add_action( 'after_setup_theme', 'seopress_compatibility_hello_elementor' );
+
+/**
  * Filter the xml sitemap URL used by SiteGround Optimizer for preheating.
  *
  * @since 6.6.0
