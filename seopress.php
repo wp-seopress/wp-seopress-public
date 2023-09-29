@@ -11,6 +11,7 @@ Text Domain: wp-seopress
 Domain Path: /languages
 Requires PHP: 7.2
 Requires at least: 5.0
+GitHub Plugin URI: wp-seopress/wp-seopress-public
 */
 
 /*  Copyright 2016 - 2023 - Benjamin Denis  (email : contact@seopress.org)
