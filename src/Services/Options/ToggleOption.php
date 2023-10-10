@@ -13,7 +13,7 @@ class ToggleOption {
      * @return array
      */
     public function getOption($is_multisite) {
-        if ($is_multisite === true) {
+        if ($is_multisite === true && function_exists('get_network')) {
             $network = get_network();
             $main_network_id = $network->site_id;
             return get_blog_option($main_network_id, Options::KEY_TOGGLE_OPTION);
