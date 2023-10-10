@@ -44,20 +44,21 @@ function seopress_display_seo_term_metaboxe() {
         wp_nonce_field(plugin_basename(__FILE__), 'seopress_cpt_nonce');
 
         global $typenow;
+        $prefix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
         //init
         $disabled = [];
 
-        wp_enqueue_script('seopress-cpt-tabs-js', SEOPRESS_ASSETS_DIR . '/js/seopress-metabox.js', ['jquery-ui-tabs'], SEOPRESS_VERSION);
+        wp_enqueue_script('seopress-cpt-tabs-js', SEOPRESS_ASSETS_DIR . '/js/seopress-metabox' . $prefix . '.js', ['jquery-ui-tabs'], SEOPRESS_VERSION);
 
         if ('seopress_404' != $typenow) {
             //Tagify
-            wp_enqueue_script('seopress-tagify-js', SEOPRESS_ASSETS_DIR . '/js/tagify.min.js', ['jquery'], SEOPRESS_VERSION, true);
-            wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify.min.css', [], SEOPRESS_VERSION);
+            wp_enqueue_script('seopress-tagify-js', SEOPRESS_ASSETS_DIR . '/js/tagify' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, true);
+            wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify' . $prefix . '.css', [], SEOPRESS_VERSION);
             wp_enqueue_style('seopress-tagify');
 
             //Register Google Snippet Preview / Content Analysis JS
-            wp_enqueue_script('seopress-cpt-counters-js', SEOPRESS_ASSETS_DIR . '/js/seopress-counters.min.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion', 'jquery-ui-autocomplete'], SEOPRESS_VERSION);
+            wp_enqueue_script('seopress-cpt-counters-js', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion', 'jquery-ui-autocomplete'], SEOPRESS_VERSION);
 
             $seopress_real_preview = [
                 'seopress_nonce'         => wp_create_nonce('seopress_real_preview_nonce'),
@@ -68,7 +69,7 @@ function seopress_display_seo_term_metaboxe() {
             ];
             wp_localize_script('seopress-cpt-counters-js', 'seopressAjaxRealPreview', $seopress_real_preview);
 
-            wp_enqueue_script('seopress-media-uploader-js', SEOPRESS_ASSETS_DIR . '/js/seopress-media-uploader.js', ['jquery'], SEOPRESS_VERSION, false);
+            wp_enqueue_script('seopress-media-uploader-js', SEOPRESS_ASSETS_DIR . '/js/seopress-media-uploader' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, false);
             wp_enqueue_media();
         }
 

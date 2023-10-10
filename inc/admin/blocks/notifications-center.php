@@ -13,6 +13,7 @@
         <div class="seopress-notifications-list-content seopress-notifications-active">
             <?php
                 $args = seopress_get_service('Notifications')->generateAllNotifications();
+                $args = seopress_get_service('Notifications')->orderByImpact($args);
                 if (!empty($args)) {
                     foreach($args as $arg) {
                         if (isset($arg['status']) && $arg['status'] === true) {

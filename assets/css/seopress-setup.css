@@ -20,11 +20,13 @@ body.seopress-setup select {
     min-width: inherit;
     width: 100%;
     display: inline-block;
+    border: 1px solid #8c8f94;
 }
 
 body.seopress-setup label {
     width: 100%;
     display: inline-block;
+    margin-bottom: 5px;
 }
 
 .media-frame-title h1,

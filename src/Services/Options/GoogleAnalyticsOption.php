@@ -447,6 +447,17 @@ class GoogleAnalyticsOption
     }
 
     /**
+
+     * Get option for "View item details"
+     * @since 7.0.0
+     *
+     * @return string
+     */
+    public function getViewItemsDetails() {
+        return $this->searchOptionByKey('seopress_google_analytics_view_product');
+    }
+
+    /**
      * Get option for "Add to cart event"
      * @since 5.8.0
      *

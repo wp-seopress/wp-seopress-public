@@ -170,20 +170,12 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
             // Get current product
             if ($product) {
                 // Set data
-                $items_purchased['id']       = esc_js($product->get_id());
-                $items_purchased['name']     = esc_js($product->get_title());
+                $items_purchased['item_id']       = esc_js($product->get_sku() ? $product->get_sku() : $product->get_id());
+                $items_purchased['item_name']     = esc_js($product->get_title());
+                $items_purchased['list_name'] = esc_js(get_the_title());
                 $items_purchased['quantity'] = (float) esc_js($item['quantity']);
                 $items_purchased['price']    = (float) esc_js($product->get_price());
-
-                // Extract categories
-                $categories = get_the_terms($product->get_id(), 'product_cat');
-                if ($categories) {
-                    foreach ($categories as $category) {
-                        $categories_out[] = $category->name;
-                    }
-                    $categories_js               = esc_js(implode('/', $categories_out));
-                    $items_purchased['category'] = esc_js($categories_js);
-                }
+                $items_purchased = array_merge($items_purchased, seopress_get_service('WooCommerceAnalyticsService')->getProductCategories($product));
             }
             $final[] = $items_purchased;
         }
@@ -499,7 +491,7 @@ if ('1' === seopress_get_toggle_option('advanced')) {
         add_action('template_redirect', 'seopress_category_redirect', 1);
         function seopress_category_redirect()
         {
-            if (!is_category()) {
+            if (!is_404()) {
                 return;
             }
             global $wp;
@@ -613,6 +605,10 @@ if ('1' === seopress_get_toggle_option('advanced')) {
         add_action('template_redirect', 'seopress_product_category_redirect', 1);
         function seopress_product_category_redirect()
         {
+            if (!is_404()) {
+                return;
+            }
+
             global $wp;
 
             $current_url = user_trailingslashit(home_url(add_query_arg([], $wp->request)));
@@ -627,15 +623,16 @@ if ('1' === seopress_get_toggle_option('advanced')) {
             $category_base = apply_filters('seopress_remove_product_category_base', $category_base);
 
             if ('' != $category_base) {
-                if (preg_match('/\/' . $category_base . '\//', $current_url)) {
+                $regex = sprintf('/\/%s\//', str_replace('/', '\/', $category_base));
+                if (preg_match($regex, $current_url)) {
                     $new_url = str_replace('/' . $category_base, '', $current_url);
                     wp_redirect($new_url, 301);
                     exit();
                 }
             } else {
                 $category_base = 'product-category';
-
-                if (preg_match('/\/' . $category_base . '\//', $current_url)) {
+                $regex         = sprintf('/\/%s\//', str_replace('/', '\/', $category_base));
+                if (preg_match($regex, $current_url)) {
                     $new_url = str_replace('/' . $category_base, '', $current_url);
                     wp_redirect($new_url, 301);
                     exit();

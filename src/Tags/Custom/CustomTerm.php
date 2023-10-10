@@ -43,7 +43,8 @@ class CustomTerm extends AbstractCustomTagValue implements GetTagValue {
         if (is_wp_error($terms)) {
             return $value;
         }
-        $value   = esc_attr($terms[0]->name);
+
+        $value   = isset($terms[0]) ? esc_attr($terms[0]->name) : '';
         /**
          * @deprecated 4.4.0
          * Use seopress_get_tag' . $tag . '_value

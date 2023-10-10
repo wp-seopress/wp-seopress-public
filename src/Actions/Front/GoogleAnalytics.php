@@ -16,7 +16,28 @@ class GoogleAnalytics implements ExecuteHooksFrontend {
      * @return void
      */
     public function hooks() {
-        add_action('seopress_google_analytics_html', [$this, 'analytics'], 10, 1);
+        if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable() || (((isset($_COOKIE['seopress-user-consent-accept']) && '1' == $_COOKIE['seopress-user-consent-accept']) && '1' === seopress_get_service('GoogleAnalyticsOption')->getDisable()) || ('1' !== seopress_get_service('GoogleAnalyticsOption')->getDisable()))) { //User consent cookie OK
+            if (is_user_logged_in()) {
+                global $wp_roles;
+
+                //Get current user role
+                if (isset(wp_get_current_user()->roles[0])) {
+                    $seopress_user_role = wp_get_current_user()->roles[0];
+                    //If current user role matchs values from SEOPress GA settings then apply
+                    if (!empty(seopress_get_service('GoogleAnalyticsOption')->getRoles())) {
+                        if (array_key_exists($seopress_user_role, seopress_get_service('GoogleAnalyticsOption')->getRoles())) {
+                            //do nothing
+                        } else {
+                            add_action('init', [$this, 'analytics'], 10, 1);
+                        }
+                    } else {
+                        add_action('init', [$this, 'analytics'], 10, 1);
+                    }
+                }
+            } else {
+                add_action('init', [$this, 'analytics'], 10, 1);
+            }
+        }
     }
 
     public function analytics($echo) {

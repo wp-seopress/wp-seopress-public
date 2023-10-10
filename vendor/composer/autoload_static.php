@@ -35,6 +35,8 @@ class ComposerStaticInite76012623e52cc0c7688781291ccaa14
         'M' => 
         array (
             'Monolog\\' => 8,
+            'MatthiasMullie\\PathConverter\\' => 29,
+            'MatthiasMullie\\Minify\\' => 22,
         ),
         'G' => 
         array (
@@ -84,6 +86,14 @@ class ComposerStaticInite76012623e52cc0c7688781291ccaa14
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'MatthiasMullie\\PathConverter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matthiasmullie/path-converter/src',
+        ),
+        'MatthiasMullie\\Minify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matthiasmullie/minify/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

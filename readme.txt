@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.3
 Requires PHP: 7.2
-Stable tag: 6.9.1
+Stable tag: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,7 +112,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li><strong>Dublin Core</strong> meta tags</li>
 	<li><a href="https://www.seopress.org/features/breadcrumbs/" target="_blank"><strong>Custom Breadcrumbs</strong></a> for single post types / term taxonomy</li>
 	<li><strong>Google Page Speed Insights</strong> to analyse your site performances on Mobile / Desktop + your Core Web Vitals</li>
-	<li><a href="https://www.seopress.org/features/google-analytics/" target="_blank"><strong>Google Enhanced Ecommerce for WooCommerce</strong></a>: measure purchases, additions to and removals from shopping carts</li>
+	<li><a href="https://www.seopress.org/features/google-analytics/" target="_blank"><strong>Google Enhanced Ecommerce for WooCommerce</strong></a>: measure purchases, singular product view details, additions to and removals from shopping carts</li>
 	<li><a href="https://www.seopress.org/features/htaccess-robots-txt/" target="_blank">Edit your <strong>robots.txt</strong></a> file from the admin (multisite / multidomain ready)</li>
 	<li><strong>Google News Sitemap</strong> to get your posts on Google News</li>
 	<li><strong>404 Monitoring</strong>: Monitor your 404 errors to improve user experience, performances and increase the crawl budget allocated by Google</li>
@@ -376,36 +376,41 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.9.1 =
-* FIX Accordion in FAQ block
-
-= 6.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-9/">Read the blog post update</a> =
-* NEW WordPress 6.3 compatibility
-* NEW Add your OpenAI API key to your wp-config.php file (PRO)
-* NEW Quickly check your OpenAI key status from SEO, PRO, AI (PRO)
-* NEW Breadcrumbs block enhanced (PRO)
-* NEW FAQ block enhanced (PRO)
-* NEW White label: Remove update notification link from plugins list (PRO)
-* NEW "seopress_pro_breadcrumbs_html_class_li", "seopress_pro_breadcrumbs_html_class_li_active" to filter breadcrumbs classes (https://www.seopress.org/support/hooks/filter-the-breadcrumbs-html-classes/ - PRO)
-* NEW "seopress_sitemaps_html_product_cat_slug" to filter product category slug (https://www.seopress.org/support/hooks/filter-product-category-slug-used-in-html-sitemap/)
-* NEW Massive update for language packs (Polish, Swedish, French, Spanish, German, Portuguese, Dutch, Korean...)
-* INFO Use Ajax to generate title and meta using AI in bulk (PRO)
-* INFO Improve GDPR (remove UTM links and YouTube embeds from the user interface)
-* INFO Add seopress-white-label body class if White Label is enabled
-* INFO Add comments for translators (i18n)
-* INFO Improved UI for local business hours section
-* INFO Stop saving empty entries for automatic schemas
-* INFO Improved UI by removing bulk actions for CPT/Tax if SEO is disabled from the global settings
-* INFO Improved UI by adding character counter for site title field (SEO, Titles and metas, Home)
-* FIX Move noscript tag to body for Matomo
-* FIX Robots.txt file with multisite setup and subdomains
-* FIX Breadcrumbs compatibility issue with MyListing theme / WP Job Manager
-* FIX Fatal error with Breadcrumbs on rare cases
-* FIX PHP Warnings on social meta ($post->ID is null)
-* FIX PHP Warning Undefined array key "nb_uniq_visitors"
-* FIX PHP Fatal error array_sum for GA widget in specific cases
-* FIX PHP Warnings on custom schema in specific cases
-* FIX Incorrect notice for "Target keyword already used"
-* FIX Search Console metrics: incorrect matching URL if anchors
+= 7.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-0/">Read the blog post update</a> =
+* NEW WooCommerce compatibility: use the Universal SEO metabox with the new editor
+* NEW Generate SEO metadata with AI in WP CLI (PRO)
+* NEW Track product view details with Google Analytics 4 Ecommerce (PRO)
+* NEW Quickly block ChatGPT bots to crawl your website (SEO, PRO, robots.txt)
+* NEW Generate independently SEO metadata from the standard and universal SEO metabox
+* NEW Internal linking: show the anchor with the suggested link
+* NEW 'seopress_gtag_ec_single_view_details_ev' hook to filter the view product details event for GA4 ecommerce (https://www.seopress.org/support/hooks/filter-google-analytics-ecommerce-view-details-item-event/)
+* NEW 'seopress_primary_category_list' hook to filter the primary category / product category list (https://www.seopress.org/support/hooks/filter-primary-categories-product-categories-list/)
+* NEW 'seopress_bot_query_dom_args' hook to filter the query to request the DOM
+* NEW 'seopress_sitemaps_xml_index_item' hook to filter items in Index XML sitemaps
+* NEW 'seopress_sitemaps_html_hierarchical_terms_query' && 'seopress_sitemaps_html_hierarchical_tax_query' hooks to filter hierarchical taxonomies/terms in HTML sitemap (https://www.seopress.org/support/hooks/display-posts-of-custom-post-type-hierarchically-by-custom-taxonomy/)
+* INFO Added number of notifications as badge on notification center icon
+* INFO Order notifications by impact: high, medium, low, info
+* INFO Improve responsive design / CSS for content analysis and structured data types metaboxes
+* INFO Remove "Display archive links in HTML sitemap"
+* INFO 'seopress_sitemaps_html_remove_archive' hook is now deprecated
+* INFO Improved notice when a redirect already exists
+* INFO Add quick tags for global author meta description template
+* INFO Improve UI for Universal SEO metabox
+* INFO Completely remove Universal Analytics (GA3) from the plugin
+* FIX Some User consent cookie bar customization settings
+* FIX GA4 Enhanced Ecommerce for FSE themes
+* FIX Duplicated accordion.js file with FAQ block
+* FIX PHP Undefined array key "bing"
+* FIX PHP Warnings if %%_ct_tax%% is used with empty terms / incorrect tax name
+* FIX Remove jQuery tabs for GA4 widget
+* FIX Do not load GA Enhanced Ecommerce if GA toggle off
+* FIX 'seopress_stop_attachment_url_to_postid' filter
+* FIX Do not display empty values for width / height publisher logo for schemas
+* FIX Matomo JS if disabled
+* FIX Remove /product-category/ option with specific cases
+* FIX White Label with multisite setup
+* FIX PHP Warning:  Undefined array key "host" in redirections
+* FIX FAQ and How-To Blocks errors
+* FIX PHP 8.2 notices
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

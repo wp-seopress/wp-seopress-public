@@ -125,6 +125,12 @@ jQuery(document).ready(function ($) {
             $("#seopress-tag-site-title-author").attr("data-tag")
         );
     });
+    $("#seopress-tag-author-bio").click(function () {
+        $("#seopress_titles_archive_author_desc").val(
+            sp_get_field_length($("#seopress_titles_archive_author_desc")) +
+            $("#seopress-tag-author-bio").attr("data-tag")
+        );
+    });
 
     //Date
     $("#seopress-tag-archive-date").click(function () {

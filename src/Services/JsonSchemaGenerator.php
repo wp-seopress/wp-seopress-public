@@ -11,6 +11,10 @@ use SEOPress\Compose\UseJsonSchema;
 class JsonSchemaGenerator {
     use UseJsonSchema;
 
+    protected $tagsToString;
+
+    protected $variablesToString;
+
     public function __construct() {
         $this->tagsToString      = seopress_get_service('TagsToString');
         $this->variablesToString = seopress_get_service('VariablesToString');

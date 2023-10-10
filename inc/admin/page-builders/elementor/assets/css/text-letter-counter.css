@@ -18,7 +18,7 @@
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    background-color: #0085ba;
+    background-color: #2271b1;
     transition: width .6s ease;
 }
 
@@ -49,7 +49,7 @@
     margin-bottom: 10px;
 }
 
-.seopress-text-letter-counter  .tag-title, 
+.seopress-text-letter-counter  .tag-title,
 .seopress-option .tag-title,
 .seopress-option .seopress-tag-dropdown {
     padding: 4px 8px;

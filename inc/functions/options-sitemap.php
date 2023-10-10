@@ -75,13 +75,7 @@ if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
 
             $seopress_xml_sitemap_post_types_list_option = apply_filters('seopress_sitemaps_html_cpt', $seopress_xml_sitemap_post_types_list_option);
 
-            $display_archive = '';
             foreach ($seopress_xml_sitemap_post_types_list_option as $cpt_key => $cpt_value) {
-                if ('1' !== seopress_get_service('SitemapOption')->getHtmlArchiveLinks()) {
-                    $display_archive = false;
-                }
-                $display_archive = apply_filters('seopress_sitemaps_html_remove_archive', $display_archive, $cpt_key);
-
                 if (! empty($cpt_value)) {
                     $html .= '<div class="sp-wrap-cpt">';
                 }
@@ -108,60 +102,59 @@ if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
                             'no_found_rows'    => true,
                             'nopaging'         => true,
                         ];
-                        if ('post' === $cpt_key || 'product' === $cpt_key) {
-                            if (get_post_type_archive_link($cpt_key) && 0 != get_option('page_for_posts')) {
-                                if (false === $display_archive) {
-                                    $html .= '<ul>';
-                                    $html .= '<li><a href="' . get_post_type_archive_link($cpt_key) . '">' . $obj->labels->name . '</a></li>';
-                                    $html .= '</ul>';
-                                }
-                            }
 
-                            $args_cat_query = [
-                                'orderby'	         => 'name',
-                                'order'		          => 'ASC',
-                                'meta_query'       => [['key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS']],
-                                'exclude'          => $seopress_xml_sitemap_html_exclude_option,
-                                'suppress_filters' => false,
-                            ];
-                            if ('post' === $cpt_key) {
-                                $args_cat_query = apply_filters('seopress_sitemaps_html_cat_query', $args_cat_query);
+                        $args_cat_query = [
+                            'orderby'	         => 'name',
+                            'order'		          => 'ASC',
+                            'meta_query'       => [['key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS']],
+                            'exclude'          => $seopress_xml_sitemap_html_exclude_option,
+                            'suppress_filters' => false,
+                        ];
+                        if ('post' === $cpt_key) {
+                            $args_cat_query = apply_filters('seopress_sitemaps_html_cat_query', $args_cat_query);
 
-                                $cats = get_categories($args_cat_query);
-                            } elseif ('product' === $cpt_key) {
-                                $args_cat_query = apply_filters('seopress_sitemaps_html_product_cat_query', $args_cat_query);
+                            $cats = get_categories($args_cat_query);
+                        } elseif ('product' === $cpt_key) {
+                            $args_cat_query = apply_filters('seopress_sitemaps_html_product_cat_query', $args_cat_query);
 
-                                $cats = get_terms($product_cat_slug, $args_cat_query);
-                            }
+                            $cats = get_terms($product_cat_slug, $args_cat_query);
+                        }
 
-                            if (! empty($cats)) {
-                                $html .= '<div class="sp-wrap-cats">';
+                        if ('post' !== $cpt_key && 'product' !== $cpt_key) {
+                            $cats = apply_filters('seopress_sitemaps_html_hierarchical_terms_query', $cpt_key, $args_cat_query);
+                        }
 
-                                foreach ($cats as $cat) {
-                                    if ( ! is_wp_error($cat) && is_object($cat)) {
-                                        $html .= '<div class="sp-wrap-cat">';
-                                        $html .= '<h3 class="sp-cat-name"><a href="'. get_term_link($cat->term_id) .'">' . $cat->name . '</a></h3>';
+                        if (is_array($cats) && ! empty($cats)) {
+                            $html .= '<div class="sp-wrap-cats">';
 
-                                        if ('post' === $cpt_key) {
-                                            unset($args['cat']);
-                                            $args['cat'][] = $cat->term_id;
-                                        } elseif ('product' === $cpt_key) {
-                                            unset($args['tax_query']);
-                                            $args['tax_query'] = [[
-                                                'taxonomy' => $product_cat_slug,
-                                                'field'    => 'term_id',
-                                                'terms'    => $cat->term_id,
-                                            ]];
-                                        }
+                            foreach ($cats as $cat) {
+                                if ( ! is_wp_error($cat) && is_object($cat)) {
+                                    $html .= '<div class="sp-wrap-cat">';
+                                    $html .= '<h3 class="sp-cat-name"><a href="'. get_term_link($cat->term_id) .'">' . $cat->name . '</a></h3>';
 
-                                        require dirname(__FILE__) . '/sitemap/template-html-sitemap.php';
-
-                                        $html .= '</div>';
+                                    if ('post' === $cpt_key) {
+                                        unset($args['cat']);
+                                        $args['cat'][] = $cat->term_id;
+                                    } elseif ('product' === $cpt_key) {
+                                        unset($args['tax_query']);
+                                        $args['tax_query'] = [[
+                                            'taxonomy' => $product_cat_slug,
+                                            'field'    => 'term_id',
+                                            'terms'    => $cat->term_id,
+                                        ]];
                                     }
-                                }
 
-                                $html .= '</div>';
+                                    if ('post' !== $cpt_key && 'product' !== $cpt_key) {
+                                        $args['tax_query'] = apply_filters('seopress_sitemaps_html_hierarchical_tax_query', $cpt_key, $cat, $args);
+                                    }
+
+                                    require dirname(__FILE__) . '/sitemap/template-html-sitemap.php';
+
+                                    $html .= '</div>';
+                                }
                             }
+
+                            $html .= '</div>';
                         } else {
                             require dirname(__FILE__) . '/sitemap/template-html-sitemap.php';
                         }

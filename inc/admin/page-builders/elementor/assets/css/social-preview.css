@@ -280,7 +280,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #3c434a;
+    color: #1e1e1e;
 }
 
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .wrap-m-icon-permalink .snippet-sitename {

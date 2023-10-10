@@ -1035,53 +1035,61 @@ function seopress_titles_archives_titles_callback()
 
 function seopress_titles_archives_author_title_callback()
 {
-    $options = get_option('seopress_titles_option_name'); ?>
-                                                <h3>
-                                                    <?php _e('Author archives', 'wp-seopress'); ?>
-                                                </h3>
+    $options = get_option('seopress_titles_option_name');
+    ?>
 
-                                                <p>
-                                                    <?php _e('Title template', 'wp-seopress'); ?>
-                                                </p>
+    <h3>
+        <?php _e('Author archives', 'wp-seopress'); ?>
+    </h3>
 
-                                                <?php $check = isset($options['seopress_titles_archives_author_title']) ? $options['seopress_titles_archives_author_title'] : null; ?>
+    <p>
+        <?php _e('Title template', 'wp-seopress'); ?>
+    </p>
 
-                                                <input id="seopress_titles_archive_post_author" type="text"
-                                                    name="seopress_titles_option_name[seopress_titles_archives_author_title]"
-                                                    value="<?php esc_html_e($check); ?>" />
+    <?php $check = isset($options['seopress_titles_archives_author_title']) ? $options['seopress_titles_archives_author_title'] : null; ?>
 
-                                                <div class="wrap-tags">
-                                                    <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-post-author" data-tag="%%post_author%%">
-                                                        <span class="dashicons dashicons-plus-alt2"></span>
-                                                        <?php _e('Post author', 'wp-seopress'); ?>
-                                                    </button>
-                                                    <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-author" data-tag="%%sep%%">
-                                                        <span class="dashicons dashicons-plus-alt2"></span>
-                                                        <?php _e('Separator', 'wp-seopress'); ?>
-                                                    </button>
+    <input id="seopress_titles_archive_post_author" type="text"
+        name="seopress_titles_option_name[seopress_titles_archives_author_title]"
+        value="<?php esc_html_e($check); ?>" />
 
-                                                    <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-author" data-tag="%%sitetitle%%">
-                                                        <span class="dashicons dashicons-plus-alt2"></span>
-                                                        <?php _e('Site Title', 'wp-seopress'); ?>
-                                                    </button>
+    <div class="wrap-tags">
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-post-author" data-tag="%%post_author%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Post author', 'wp-seopress'); ?>
+        </button>
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-author" data-tag="%%sep%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Separator', 'wp-seopress'); ?>
+        </button>
 
-                                                    <?php
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-author" data-tag="%%sitetitle%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Site Title', 'wp-seopress'); ?>
+        </button>
+
+        <?php
         echo seopress_render_dyn_variables('tag-title');
 }
 
 function seopress_titles_archives_author_desc_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
-                                                    <p>
-                                                        <?php _e('Meta description template', 'wp-seopress'); ?>
-                                                    </p>
+    <p>
+        <?php _e('Meta description template', 'wp-seopress'); ?>
+    </p>
 
-                                                    <?php $check = isset($options['seopress_titles_archives_author_desc']) ? $options['seopress_titles_archives_author_desc'] : null; ?>
+    <?php $check = isset($options['seopress_titles_archives_author_desc']) ? $options['seopress_titles_archives_author_desc'] : null; ?>
 
-                                                    <textarea
-                                                        name="seopress_titles_option_name[seopress_titles_archives_author_desc]"><?php esc_html_e($check); ?></textarea>
+    <textarea id="seopress_titles_archive_author_desc" name="seopress_titles_option_name[seopress_titles_archives_author_desc]"><?php esc_html_e($check); ?></textarea>
 
-                                                    <?php
+    <div class="wrap-tags">
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-author-bio" data-tag="%%author_bio%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Author biography', 'wp-seopress'); ?>
+        </button>
+
+        <?php
+        echo seopress_render_dyn_variables('tag-description');
 }
 
 function seopress_titles_archives_author_noindex_callback()
@@ -1091,17 +1099,17 @@ function seopress_titles_archives_author_noindex_callback()
     $check = isset($options['seopress_titles_archives_author_noindex']); ?>
 
 
-                                                    <label for="seopress_titles_archives_author_noindex">
-                                                        <input id="seopress_titles_archives_author_noindex"
-                                                            name="seopress_titles_option_name[seopress_titles_archives_author_noindex]"
-                                                            type="checkbox" <?php if ('1' == $check) { ?>
-                                                        checked="yes"
-                                                        <?php } ?>
-                                                        value="1"/>
-                                                        <?php _e('Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
-                                                    </label>
+    <label for="seopress_titles_archives_author_noindex">
+        <input id="seopress_titles_archives_author_noindex"
+            name="seopress_titles_option_name[seopress_titles_archives_author_noindex]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+    </label>
 
-                                                    <?php if (isset($options['seopress_titles_archives_author_noindex'])) {
+    <?php if (isset($options['seopress_titles_archives_author_noindex'])) {
         esc_attr($options['seopress_titles_archives_author_noindex']);
     }
 }
@@ -1112,17 +1120,17 @@ function seopress_titles_archives_author_disable_callback()
 
     $check = isset($options['seopress_titles_archives_author_disable']); ?>
 
-                                                    <label for="seopress_titles_archives_author_disable">
-                                                        <input id="seopress_titles_archives_author_disable"
-                                                            name="seopress_titles_option_name[seopress_titles_archives_author_disable]"
-                                                            type="checkbox" <?php if ('1' == $check) { ?>
-                                                        checked="yes"
-                                                        <?php } ?>
-                                                        value="1"/>
-                                                        <?php _e('Disable author archives', 'wp-seopress'); ?>
-                                                    </label>
+    <label for="seopress_titles_archives_author_disable">
+        <input id="seopress_titles_archives_author_disable"
+            name="seopress_titles_option_name[seopress_titles_archives_author_disable]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Disable author archives', 'wp-seopress'); ?>
+    </label>
 
-                                                    <?php if (isset($options['seopress_titles_archives_author_disable'])) {
+    <?php if (isset($options['seopress_titles_archives_author_disable'])) {
         esc_attr($options['seopress_titles_archives_author_disable']);
     }
 }
@@ -1130,34 +1138,34 @@ function seopress_titles_archives_author_disable_callback()
 function seopress_titles_archives_date_title_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
-                                                    <h3>
-                                                        <?php _e('Date archives', 'wp-seopress'); ?>
-                                                    </h3>
+    <h3>
+        <?php _e('Date archives', 'wp-seopress'); ?>
+    </h3>
 
-                                                    <p>
-                                                        <?php _e('Title template', 'wp-seopress'); ?>
-                                                    </p>
+    <p>
+        <?php _e('Title template', 'wp-seopress'); ?>
+    </p>
 
-                                                    <?php $check = isset($options['seopress_titles_archives_date_title']) ? $options['seopress_titles_archives_date_title'] : null; ?>
+    <?php $check = isset($options['seopress_titles_archives_date_title']) ? $options['seopress_titles_archives_date_title'] : null; ?>
 
-                                                    <input id="seopress_titles_archives_date_title" type="text"
-                                                        name="seopress_titles_option_name[seopress_titles_archives_date_title]"
-                                                        value="<?php esc_html_e($check); ?>" />
+    <input id="seopress_titles_archives_date_title" type="text"
+        name="seopress_titles_option_name[seopress_titles_archives_date_title]"
+        value="<?php esc_html_e($check); ?>" />
 
-                                                    <div class="wrap-tags">
-                                                        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-archive-date" data-tag="%%archive_date%%">
-                                                            <span class="dashicons dashicons-plus-alt2"></span>
-                                                            <?php _e('Date archives', 'wp-seopress'); ?>
-                                                        </button>
-                                                        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-date" data-tag="%%sep%%">
-                                                            <span class="dashicons dashicons-plus-alt2"></span>
-                                                            <?php _e('Separator', 'wp-seopress'); ?>
-                                                        </button>
-                                                        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-date" data-tag="%%sitetitle%%">
-                                                            <span class="dashicons dashicons-plus-alt2"></span>
-                                                            <?php _e('Site Title', 'wp-seopress'); ?>
-                                                        </button>
-                                                        <?php
+    <div class="wrap-tags">
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-archive-date" data-tag="%%archive_date%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Date archives', 'wp-seopress'); ?>
+        </button>
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-date" data-tag="%%sep%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Separator', 'wp-seopress'); ?>
+        </button>
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-date" data-tag="%%sitetitle%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Site Title', 'wp-seopress'); ?>
+        </button>
+        <?php
     echo seopress_render_dyn_variables('tag-title');
 }
 
@@ -1165,16 +1173,16 @@ function seopress_titles_archives_date_desc_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
 
-                                                        <p>
-                                                            <?php _e('Meta description template', 'wp-seopress'); ?>
-                                                        </p>
+    <p>
+        <?php _e('Meta description template', 'wp-seopress'); ?>
+    </p>
 
-                                                        <?php $check = isset($options['seopress_titles_archives_date_desc']) ? $options['seopress_titles_archives_date_desc'] : null; ?>
+    <?php $check = isset($options['seopress_titles_archives_date_desc']) ? $options['seopress_titles_archives_date_desc'] : null; ?>
 
-                                                        <textarea
-                                                            name="seopress_titles_option_name[seopress_titles_archives_date_desc]"><?php esc_html_e($check); ?></textarea>
+    <textarea
+        name="seopress_titles_option_name[seopress_titles_archives_date_desc]"><?php esc_html_e($check); ?></textarea>
 
-                                                        <?php
+    <?php
 }
 
 function seopress_titles_archives_date_noindex_callback()
@@ -1183,17 +1191,17 @@ function seopress_titles_archives_date_noindex_callback()
 
     $check = isset($options['seopress_titles_archives_date_noindex']); ?>
 
-                                                        <label for="seopress_titles_archives_date_noindex">
-                                                            <input id="seopress_titles_archives_date_noindex"
-                                                                name="seopress_titles_option_name[seopress_titles_archives_date_noindex]"
-                                                                type="checkbox" <?php if ('1' == $check) { ?>
-                                                            checked="yes"
-                                                            <?php } ?>
-                                                            value="1"/>
-                                                            <?php _e('Do not display date archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
-                                                        </label>
+    <label for="seopress_titles_archives_date_noindex">
+        <input id="seopress_titles_archives_date_noindex"
+            name="seopress_titles_option_name[seopress_titles_archives_date_noindex]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Do not display date archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+    </label>
 
-                                                        <?php if (isset($options['seopress_titles_archives_date_noindex'])) {
+    <?php if (isset($options['seopress_titles_archives_date_noindex'])) {
         esc_attr($options['seopress_titles_archives_date_noindex']);
     }
 }
@@ -1205,17 +1213,17 @@ function seopress_titles_archives_date_disable_callback()
     $check = isset($options['seopress_titles_archives_date_disable']); ?>
 
 
-                                                        <label for="seopress_titles_archives_date_disable">
-                                                            <input id="seopress_titles_archives_date_disable"
-                                                                name="seopress_titles_option_name[seopress_titles_archives_date_disable]"
-                                                                type="checkbox" <?php if ('1' == $check) { ?>
-                                                            checked="yes"
-                                                            <?php } ?>
-                                                            value="1"/>
-                                                            <?php _e('Disable date archives', 'wp-seopress'); ?>
-                                                        </label>
+    <label for="seopress_titles_archives_date_disable">
+        <input id="seopress_titles_archives_date_disable"
+            name="seopress_titles_option_name[seopress_titles_archives_date_disable]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Disable date archives', 'wp-seopress'); ?>
+    </label>
 
-                                                        <?php if (isset($options['seopress_titles_archives_date_disable'])) {
+    <?php if (isset($options['seopress_titles_archives_date_disable'])) {
         esc_attr($options['seopress_titles_archives_date_disable']);
     }
 }
@@ -1223,52 +1231,52 @@ function seopress_titles_archives_date_disable_callback()
 function seopress_titles_archives_search_title_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
-                                                        <h3>
-                                                            <?php _e('Search archives', 'wp-seopress'); ?>
-                                                        </h3>
+    <h3>
+        <?php _e('Search archives', 'wp-seopress'); ?>
+    </h3>
 
-                                                        <p>
-                                                            <?php _e('Title template', 'wp-seopress'); ?>
-                                                        </p>
+    <p>
+        <?php _e('Title template', 'wp-seopress'); ?>
+    </p>
 
-                                                        <?php $check = isset($options['seopress_titles_archives_search_title']) ? $options['seopress_titles_archives_search_title'] : null; ?>
+    <?php $check = isset($options['seopress_titles_archives_search_title']) ? $options['seopress_titles_archives_search_title'] : null; ?>
 
-                                                        <input id="seopress_titles_archives_search_title" type="text"
-                                                            name="seopress_titles_option_name[seopress_titles_archives_search_title]"
-                                                            value="<?php esc_html_e($check); ?>" />
+    <input id="seopress_titles_archives_search_title" type="text"
+        name="seopress_titles_option_name[seopress_titles_archives_search_title]"
+        value="<?php esc_html_e($check); ?>" />
 
-                                                        <div class="wrap-tags">
-                                                            <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-search-keywords" data-tag="%%search_keywords%%">
-                                                                <span class="dashicons dashicons-plus-alt2"></span>
-                                                                <?php _e('Search Keywords', 'wp-seopress'); ?>
-                                                            </button>
+    <div class="wrap-tags">
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-search-keywords" data-tag="%%search_keywords%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Search Keywords', 'wp-seopress'); ?>
+        </button>
 
-                                                            <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-search" data-tag="%%sep%%">
-                                                                <span class="dashicons dashicons-plus-alt2"></span>
-                                                                <?php _e('Separator', 'wp-seopress'); ?>
-                                                            </button>
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-search" data-tag="%%sep%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Separator', 'wp-seopress'); ?>
+        </button>
 
-                                                            <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-search" data-tag="%%sitetitle%%">
-                                                                <span class="dashicons dashicons-plus-alt2"></span>
-                                                                <?php _e('Site Title', 'wp-seopress'); ?>
-                                                            </button>
-                                                            <?php
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-search" data-tag="%%sitetitle%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Site Title', 'wp-seopress'); ?>
+        </button>
+        <?php
     echo seopress_render_dyn_variables('tag-title');
 }
 
 function seopress_titles_archives_search_desc_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
-                                                            <p>
-                                                                <?php _e('Meta description template', 'wp-seopress'); ?>
-                                                            </p>
+    <p>
+        <?php _e('Meta description template', 'wp-seopress'); ?>
+    </p>
 
-                                                            <?php $check = isset($options['seopress_titles_archives_search_desc']) ? $options['seopress_titles_archives_search_desc'] : null; ?>
+    <?php $check = isset($options['seopress_titles_archives_search_desc']) ? $options['seopress_titles_archives_search_desc'] : null; ?>
 
-                                                            <textarea
-                                                                name="seopress_titles_option_name[seopress_titles_archives_search_desc]"><?php esc_html_e($check); ?></textarea>
+    <textarea
+        name="seopress_titles_option_name[seopress_titles_archives_search_desc]"><?php esc_html_e($check); ?></textarea>
 
-                                                            <?php
+    <?php
 }
 
 function seopress_titles_archives_search_title_noindex_callback()
@@ -1277,19 +1285,18 @@ function seopress_titles_archives_search_title_noindex_callback()
 
     $check = isset($options['seopress_titles_archives_search_title_noindex']); ?>
 
+    <label for="seopress_titles_archives_search_title_noindex">
+        <input
+            id="seopress_titles_archives_search_title_noindex"
+            name="seopress_titles_option_name[seopress_titles_archives_search_title_noindex]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Do not display search archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+    </label>
 
-                                                            <label for="seopress_titles_archives_search_title_noindex">
-                                                                <input
-                                                                    id="seopress_titles_archives_search_title_noindex"
-                                                                    name="seopress_titles_option_name[seopress_titles_archives_search_title_noindex]"
-                                                                    type="checkbox" <?php if ('1' == $check) { ?>
-                                                                checked="yes"
-                                                                <?php } ?>
-                                                                value="1"/>
-                                                                <?php _e('Do not display search archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
-                                                            </label>
-
-                                                            <?php if (isset($options['seopress_titles_archives_search_title_noindex'])) {
+    <?php if (isset($options['seopress_titles_archives_search_title_noindex'])) {
         esc_attr($options['seopress_titles_archives_search_title_noindex']);
     }
 }
@@ -1297,30 +1304,30 @@ function seopress_titles_archives_search_title_noindex_callback()
 function seopress_titles_archives_404_title_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
-                                                            <h3>
-                                                                <?php _e('404 archives', 'wp-seopress'); ?>
-                                                            </h3>
+    <h3>
+        <?php _e('404 archives', 'wp-seopress'); ?>
+    </h3>
 
-                                                            <p>
-                                                                <?php _e('Title template', 'wp-seopress'); ?>
-                                                            </p>
+    <p>
+        <?php _e('Title template', 'wp-seopress'); ?>
+    </p>
 
-                                                            <?php $check = isset($options['seopress_titles_archives_404_title']) ? $options['seopress_titles_archives_404_title'] : null; ?>
+    <?php $check = isset($options['seopress_titles_archives_404_title']) ? $options['seopress_titles_archives_404_title'] : null; ?>
 
-                                                            <input id="seopress_titles_archives_404_title" type="text"
-                                                                name="seopress_titles_option_name[seopress_titles_archives_404_title]"
-                                                                value="<?php esc_html_e($check); ?>" />
+    <input id="seopress_titles_archives_404_title" type="text"
+        name="seopress_titles_option_name[seopress_titles_archives_404_title]"
+        value="<?php esc_html_e($check); ?>" />
 
-                                                            <div class="wrap-tags">
-                                                                <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-404" data-tag="%%sitetitle%%">
-                                                                    <span class="dashicons dashicons-plus-alt2"></span>
-                                                                    <?php _e('Site Title', 'wp-seopress'); ?>
-                                                                </button>
-                                                                <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-404" data-tag="%%sep%%">
-                                                                    <span class="dashicons dashicons-plus-alt2"></span>
-                                                                    <?php _e('Separator', 'wp-seopress'); ?>
-                                                                </button>
-                                                                <?php
+    <div class="wrap-tags">
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-404" data-tag="%%sitetitle%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Site Title', 'wp-seopress'); ?>
+        </button>
+        <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-404" data-tag="%%sep%%">
+            <span class="dashicons dashicons-plus-alt2"></span>
+            <?php _e('Separator', 'wp-seopress'); ?>
+        </button>
+        <?php
     echo seopress_render_dyn_variables('tag-title');
 }
 
@@ -1328,18 +1335,18 @@ function seopress_titles_archives_404_desc_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
 
-                                                                <p>
-                                                                    <label for="seopress_titles_archives_404_desc">
-                                                                        <?php _e('Meta description template', 'wp-seopress'); ?>
-                                                                    </label>
-                                                                </p>
+    <p>
+        <label for="seopress_titles_archives_404_desc">
+            <?php _e('Meta description template', 'wp-seopress'); ?>
+        </label>
+    </p>
 
-                                                                <?php $check = isset($options['seopress_titles_archives_404_desc']) ? $options['seopress_titles_archives_404_desc'] : null; ?>
+    <?php $check = isset($options['seopress_titles_archives_404_desc']) ? $options['seopress_titles_archives_404_desc'] : null; ?>
 
-                                                                <textarea id="seopress_titles_archives_404_desc"
-                                                                    name="seopress_titles_option_name[seopress_titles_archives_404_desc]"><?php esc_html_e($check); ?></textarea>
+    <textarea id="seopress_titles_archives_404_desc"
+        name="seopress_titles_option_name[seopress_titles_archives_404_desc]"><?php esc_html_e($check); ?></textarea>
 
-                                                                <?php
+    <?php
 }
 
 //Advanced
@@ -1350,28 +1357,28 @@ function seopress_titles_noindex_callback()
     $check = isset($options['seopress_titles_noindex']); ?>
 
 
-                                                                <label for="seopress_titles_noindex">
-                                                                    <input id="seopress_titles_noindex"
-                                                                        name="seopress_titles_option_name[seopress_titles_noindex]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('noindex', 'wp-seopress'); ?>
-                                                                </label>
+    <label for="seopress_titles_noindex">
+        <input id="seopress_titles_noindex"
+            name="seopress_titles_option_name[seopress_titles_noindex]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('noindex', 'wp-seopress'); ?>
+    </label>
 
-                                                                <p class="description">
-                                                                    <?php _e('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.', 'wp-seopress'); ?>
-                                                                </p>
+    <p class="description">
+        <?php _e('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.', 'wp-seopress'); ?>
+    </p>
 
-                                                                <p class="description">
-                                                                    <?php
-                                                                        /* translators: %s documentation URL */
-                                                                        printf(__('Check also the <strong>"Search engine visibility"</strong> setting from the <a href="%s">WordPress Reading page</a>.', 'wp-seopress'), admin_url('options-reading.php'));
-                                                                    ?>
-                                                                </p>
+    <p class="description">
+        <?php
+            /* translators: %s documentation URL */
+            printf(__('Check also the <strong>"Search engine visibility"</strong> setting from the <a href="%s">WordPress Reading page</a>.', 'wp-seopress'), admin_url('options-reading.php'));
+        ?>
+    </p>
 
-                                                                <?php if (isset($options['seopress_titles_noindex'])) {
+    <?php if (isset($options['seopress_titles_noindex'])) {
         esc_attr($options['seopress_titles_noindex']);
     }
 }
@@ -1382,22 +1389,21 @@ function seopress_titles_nofollow_callback()
 
     $check = isset($options['seopress_titles_nofollow']); ?>
 
+    <label for="seopress_titles_nofollow">
+        <input id="seopress_titles_nofollow"
+            name="seopress_titles_option_name[seopress_titles_nofollow]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('nofollow', 'wp-seopress'); ?>
+    </label>
 
-                                                                <label for="seopress_titles_nofollow">
-                                                                    <input id="seopress_titles_nofollow"
-                                                                        name="seopress_titles_option_name[seopress_titles_nofollow]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('nofollow', 'wp-seopress'); ?>
-                                                                </label>
+    <p class="description">
+        <?php _e('Do not follow links for all pages.', 'wp-seopress'); ?>
+    </p>
 
-                                                                <p class="description">
-                                                                    <?php _e('Do not follow links for all pages.', 'wp-seopress'); ?>
-                                                                </p>
-
-                                                                <?php if (isset($options['seopress_titles_nofollow'])) {
+    <?php if (isset($options['seopress_titles_nofollow'])) {
         esc_attr($options['seopress_titles_nofollow']);
     }
 }
@@ -1408,22 +1414,21 @@ function seopress_titles_noimageindex_callback()
 
     $check = isset($options['seopress_titles_noimageindex']); ?>
 
+    <label for="seopress_titles_noimageindex">
+        <input id="seopress_titles_noimageindex"
+            name="seopress_titles_option_name[seopress_titles_noimageindex]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('noimageindex', 'wp-seopress'); ?>
+    </label>
 
-                                                                <label for="seopress_titles_noimageindex">
-                                                                    <input id="seopress_titles_noimageindex"
-                                                                        name="seopress_titles_option_name[seopress_titles_noimageindex]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('noimageindex', 'wp-seopress'); ?>
-                                                                </label>
+    <p class="description">
+        <?php _e('Do not index images from the entire site.', 'wp-seopress'); ?>
+    </p>
 
-                                                                <p class="description">
-                                                                    <?php _e('Do not index images from the entire site.', 'wp-seopress'); ?>
-                                                                </p>
-
-                                                                <?php if (isset($options['seopress_titles_noimageindex'])) {
+    <?php if (isset($options['seopress_titles_noimageindex'])) {
         esc_attr($options['seopress_titles_noimageindex']);
     }
 }
@@ -1434,21 +1439,21 @@ function seopress_titles_noarchive_callback()
 
     $check = isset($options['seopress_titles_noarchive']); ?>
 
-                                                                <label for="seopress_titles_noarchive">
-                                                                    <input id="seopress_titles_noarchive"
-                                                                        name="seopress_titles_option_name[seopress_titles_noarchive]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('noarchive', 'wp-seopress'); ?>
-                                                                </label>
+    <label for="seopress_titles_noarchive">
+        <input id="seopress_titles_noarchive"
+            name="seopress_titles_option_name[seopress_titles_noarchive]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('noarchive', 'wp-seopress'); ?>
+    </label>
 
-                                                                <p class="description">
-                                                                    <?php _e('Do not display a "Cached" link in the Google search results.', 'wp-seopress'); ?>
-                                                                </p>
+    <p class="description">
+        <?php _e('Do not display a "Cached" link in the Google search results.', 'wp-seopress'); ?>
+    </p>
 
-                                                                <?php if (isset($options['seopress_titles_noarchive'])) {
+    <?php if (isset($options['seopress_titles_noarchive'])) {
         esc_attr($options['seopress_titles_noarchive']);
     }
 }
@@ -1459,22 +1464,21 @@ function seopress_titles_nosnippet_callback()
 
     $check = isset($options['seopress_titles_nosnippet']); ?>
 
+    <label for="seopress_titles_nosnippet">
+        <input id="seopress_titles_nosnippet"
+            name="seopress_titles_option_name[seopress_titles_nosnippet]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('nosnippet', 'wp-seopress'); ?>
+    </label>
 
-                                                                <label for="seopress_titles_nosnippet">
-                                                                    <input id="seopress_titles_nosnippet"
-                                                                        name="seopress_titles_option_name[seopress_titles_nosnippet]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('nosnippet', 'wp-seopress'); ?>
-                                                                </label>
+    <p class="description">
+        <?php _e('Do not display a description in the Google search results for all pages.', 'wp-seopress'); ?>
+    </p>
 
-                                                                <p class="description">
-                                                                    <?php _e('Do not display a description in the Google search results for all pages.', 'wp-seopress'); ?>
-                                                                </p>
-
-                                                                <?php if (isset($options['seopress_titles_nosnippet'])) {
+    <?php if (isset($options['seopress_titles_nosnippet'])) {
         esc_attr($options['seopress_titles_nosnippet']);
     }
 }
@@ -1485,22 +1489,21 @@ function seopress_titles_nositelinkssearchbox_callback()
 
     $check = isset($options['seopress_titles_nositelinkssearchbox']); ?>
 
+    <label for="seopress_titles_nositelinkssearchbox">
+        <input id="seopress_titles_nositelinkssearchbox"
+            name="seopress_titles_option_name[seopress_titles_nositelinkssearchbox]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('nositelinkssearchbox', 'wp-seopress'); ?>
+    </label>
 
-                                                                <label for="seopress_titles_nositelinkssearchbox">
-                                                                    <input id="seopress_titles_nositelinkssearchbox"
-                                                                        name="seopress_titles_option_name[seopress_titles_nositelinkssearchbox]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('nositelinkssearchbox', 'wp-seopress'); ?>
-                                                                </label>
+    <p class="description">
+        <?php _e('Prevents Google to display a sitelinks searchbox in search results. Enable this option will remove the "Website" schema from your source code.', 'wp-seopress'); ?>
+    </p>
 
-                                                                <p class="description">
-                                                                    <?php _e('Prevents Google to display a sitelinks searchbox in search results. Enable this option will remove the "Website" schema from your source code.', 'wp-seopress'); ?>
-                                                                </p>
-
-                                                                <?php if (isset($options['seopress_titles_nositelinkssearchbox'])) {
+    <?php if (isset($options['seopress_titles_nositelinkssearchbox'])) {
         esc_attr($options['seopress_titles_nositelinkssearchbox']);
     }
 }
@@ -1511,18 +1514,17 @@ function seopress_titles_paged_rel_callback()
 
     $check = isset($options['seopress_titles_paged_rel']); ?>
 
+    <label for="seopress_titles_paged_rel">
+        <input id="seopress_titles_paged_rel"
+            name="seopress_titles_option_name[seopress_titles_paged_rel]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Add rel next/prev link in head of paginated archive pages', 'wp-seopress'); ?>
+    </label>
 
-                                                                <label for="seopress_titles_paged_rel">
-                                                                    <input id="seopress_titles_paged_rel"
-                                                                        name="seopress_titles_option_name[seopress_titles_paged_rel]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('Add rel next/prev link in head of paginated archive pages', 'wp-seopress'); ?>
-                                                                </label>
-
-                                                                <?php if (isset($options['seopress_titles_paged_rel'])) {
+    <?php if (isset($options['seopress_titles_paged_rel'])) {
         esc_attr($options['seopress_titles_paged_rel']);
     }
 }
@@ -1533,22 +1535,22 @@ function seopress_titles_paged_noindex_callback()
 
     $check = isset($options['seopress_titles_paged_noindex']); ?>
 
-                                                                <label for="seopress_titles_paged_noindex">
+    <label for="seopress_titles_paged_noindex">
 
-                                                                    <input id="seopress_titles_paged_noindex"
-                                                                        name="seopress_titles_option_name[seopress_titles_paged_noindex]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('Add a "noindex" meta robots for all paginated archive pages', 'wp-seopress'); ?>
-                                                                </label>
+        <input id="seopress_titles_paged_noindex"
+            name="seopress_titles_option_name[seopress_titles_paged_noindex]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Add a "noindex" meta robots for all paginated archive pages', 'wp-seopress'); ?>
+    </label>
 
-                                                                <p class="description">
-                                                                    <?php _e('e.g. https://example.com/category/my-category/page/2/', 'wp-seopress'); ?>
-                                                                </p>
+    <p class="description">
+        <?php _e('e.g. https://example.com/category/my-category/page/2/', 'wp-seopress'); ?>
+    </p>
 
-                                                                <?php if (isset($options['seopress_titles_paged_noindex'])) {
+    <?php if (isset($options['seopress_titles_paged_noindex'])) {
         esc_attr($options['seopress_titles_paged_noindex']);
     }
 }
@@ -1559,22 +1561,21 @@ function seopress_titles_attachments_noindex_callback()
 
     $check = isset($options['seopress_titles_attachments_noindex']); ?>
 
+    <label for="seopress_titles_attachments_noindex">
+        <input id="seopress_titles_attachments_noindex"
+            name="seopress_titles_option_name[seopress_titles_attachments_noindex]"
+            type="checkbox" <?php if ('1' == $check) { ?>
+        checked="yes"
+        <?php } ?>
+        value="1"/>
+        <?php _e('Add a "noindex" meta robots for all attachment pages', 'wp-seopress'); ?>
+    </label>
 
-                                                                <label for="seopress_titles_attachments_noindex">
-                                                                    <input id="seopress_titles_attachments_noindex"
-                                                                        name="seopress_titles_option_name[seopress_titles_attachments_noindex]"
-                                                                        type="checkbox" <?php if ('1' == $check) { ?>
-                                                                    checked="yes"
-                                                                    <?php } ?>
-                                                                    value="1"/>
-                                                                    <?php _e('Add a "noindex" meta robots for all attachment pages', 'wp-seopress'); ?>
-                                                                </label>
+    <p class="description">
+        <?php _e('e.g. https://example.com/my-media-attachment-page', 'wp-seopress'); ?>
+    </p>
 
-                                                                <p class="description">
-                                                                    <?php _e('e.g. https://example.com/my-media-attachment-page', 'wp-seopress'); ?>
-                                                                </p>
-
-                                                                <?php if (isset($options['seopress_titles_attachments_noindex'])) {
+    <?php if (isset($options['seopress_titles_attachments_noindex'])) {
         esc_attr($options['seopress_titles_attachments_noindex']);
     }
 }

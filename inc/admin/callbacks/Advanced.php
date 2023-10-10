@@ -484,31 +484,6 @@ function seopress_advanced_appearance_adminbar_callback() {
 	}
 }
 
-function seopress_advanced_appearance_universal_metabox_callback() {
-	$options = get_option('seopress_advanced_option_name');
-
-	if(!$options){
-		$check = "1";
-	} else {
-		$check = isset($options['seopress_advanced_appearance_universal_metabox']) && $options['seopress_advanced_appearance_universal_metabox'] === '1' ? true : false;
-	}
-?>
-
-<label for="seopress_advanced_appearance_universal_metabox">
-	<input id="seopress_advanced_appearance_universal_metabox"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_universal_metabox]"
-		type="checkbox"
-		<?php checked($check, "1"); ?>
-		value="1"/>
-
-	<?php _e('Enable the universal SEO metabox for the Block Editor (Gutenberg)', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_adminbar'])) {
-		esc_attr($options['seopress_advanced_appearance_adminbar']);
-	}
-}
-
 function seopress_advanced_appearance_universal_metabox_disable_callback() {
 	$docs = function_exists('seopress_get_docs_links') ? seopress_get_docs_links() : '';
 	$options = get_option('seopress_advanced_option_name');
@@ -531,11 +506,42 @@ function seopress_advanced_appearance_universal_metabox_disable_callback() {
 </label>
 
 <p class="description">
+    <?php _e('Uncheck this option to edit your SEO directly from your page builder UI.','wp-seopress'); ?>
+</p>
+<p class="description">
 	<a class="seopress-help" href="<?php echo $docs['universal']['introduction']; ?>" target="_blank">
 		<?php _e('Learn more about how we interface with all page builders to optimize your productivity','wp-seopress'); ?>
 		<span class="seopress-help dashicons dashicons-external"></span>
 	</a>
 </p>
+
+<?php if (isset($options['seopress_advanced_appearance_adminbar'])) {
+		esc_attr($options['seopress_advanced_appearance_adminbar']);
+	}
+}
+
+function seopress_advanced_appearance_universal_metabox_callback() {
+	$options = get_option('seopress_advanced_option_name');
+
+	if(!$options){
+		$check = "1";
+	} else {
+		$check = isset($options['seopress_advanced_appearance_universal_metabox']) && $options['seopress_advanced_appearance_universal_metabox'] === '1' ? true : false;
+	}
+?>
+
+<label for="seopress_advanced_appearance_universal_metabox">
+	<input id="seopress_advanced_appearance_universal_metabox"
+		name="seopress_advanced_option_name[seopress_advanced_appearance_universal_metabox]"
+		type="checkbox"
+		<?php checked($check, "1"); ?>
+		value="1"/>
+
+	<?php _e('Enable the universal SEO metabox for the Block Editor (Gutenberg)', 'wp-seopress'); ?>
+
+    <p class="description"><?php _e('Uncheck this option to keep the old SEO metaboxes located below the post content with the Block Editor.','wp-seopress'); ?></p>
+    <p class="description"><?php _e('The previous option must be unchecked.','wp-seopress'); ?></p>
+</label>
 
 <?php if (isset($options['seopress_advanced_appearance_adminbar'])) {
 		esc_attr($options['seopress_advanced_appearance_adminbar']);

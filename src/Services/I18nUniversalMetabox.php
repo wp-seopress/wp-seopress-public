@@ -441,7 +441,9 @@ class I18nUniversalMetabox
                     'tooltip_description_2' => __("They are like a pitch that convince the user that the page is exactly what they're looking for.", 'wp-seopress'),
                     'tooltip_description_3' => __("There's no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width.", 'wp-seopress'),
                     'placeholder_description' => __('Enter your description', 'wp-seopress'),
-                    'generate_ai' => __('Generate meta with AI', 'wp-seopress')
+                    'generate_ai' => __('Generate meta with AI', 'wp-seopress'),
+                    'generate_ai_title' => __('Generate meta title with AI', 'wp-seopress'),
+                    'generate_ai_description' => __('Generate meta description with AI', 'wp-seopress')
                 ],
                 'repeater_how_to' => [
                     'title_step' => __(
@@ -698,6 +700,7 @@ class I18nUniversalMetabox
                     'btn_add_video' => __("Add video", "wp-seopress")
                 ],
                 'internal_linking' => [
+                    'matching' => __("Matching word:","wp-seopress"),
                     'description_1' => __(
                         "Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.",
                         "wp-seopress"

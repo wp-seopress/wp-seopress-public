@@ -778,7 +778,6 @@ class SEOPRESS_Admin_Setup_Wizard {
         $current_user = wp_get_current_user();
 		$current_user_email = isset($current_user->user_email) ? $current_user->user_email : null;
 
-		$site_sep        = isset($seopress_titles_option['seopress_titles_sep']) ? $seopress_titles_option['seopress_titles_sep'] : null;
 		$site_title      = isset($seopress_titles_option['seopress_titles_home_site_title']) ? $seopress_titles_option['seopress_titles_home_site_title'] : null;
 		$alt_site_title  = isset($seopress_titles_option['seopress_titles_home_site_title_alt']) ? $seopress_titles_option['seopress_titles_home_site_title_alt'] : null;
 		$knowledge_type  = isset($seopress_social_option['seopress_social_knowledge_type']) ? $seopress_social_option['seopress_social_knowledge_type'] : null;
@@ -797,17 +796,6 @@ class SEOPRESS_Admin_Setup_Wizard {
                 <form method="post">
                     <h2><?php _e('Tell us more about your site','wp-seopress'); ?></h2>
                     <p><?php esc_html_e('To build title tags and knowledge graph for Google, you need to fill out the fields below to configure the general settings.', 'wp-seopress'); ?>
-                    </p>
-
-                    <p>
-                        <label for="site_sep"><?php esc_html_e('Separator', 'wp-seopress'); ?></label>
-                        <input type="text" id="site_sep" class="location-input" name="site_sep"
-                            placeholder="<?php esc_html_e('e.g. |', 'wp-seopress'); ?>"
-                            required value="<?php echo $site_sep; ?>" />
-                    </p>
-
-                    <p class="description">
-                        <?php _e('This separator will be used by the dynamic variable <strong>%%sep%%</strong> in your title and meta description templates.', 'wp-seopress'); ?>
                     </p>
 
                     <p>
@@ -831,7 +819,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <p>
                         <label for="knowledge_type"><?php esc_html_e('Person or organization', 'wp-seopress'); ?></label>
                         <?php
-                        echo '<select id="knowledge_type" name="knowledge_type" data-placeholder="' . esc_attr__('Choose a knowledge type', 'wp-seopress') . '"	class="location-input wc-enhanced-select dropdown">';
+                        echo '<select id="knowledge_type" name="knowledge_type" data-placeholder="' . esc_attr__('Choose a knowledge type', 'wp-seopress') . '"	class="location-input dropdown">';
                         echo ' <option ';
                         if ('None' == $knowledge_type) {
                             echo 'selected="selected"';
@@ -913,7 +901,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_social_option = get_option('seopress_social_option_name');
 
 		//Titles
-		$seopress_titles_option['seopress_titles_sep']             = isset($_POST['site_sep']) ? esc_attr(wp_unslash($_POST['site_sep'])) : '';
 		$seopress_titles_option['seopress_titles_home_site_title'] = isset($_POST['site_title']) ? sanitize_text_field(wp_unslash($_POST['site_title'])) : '';
 		$seopress_titles_option['seopress_titles_home_site_title_alt'] = isset($_POST['alt_site_title']) ? sanitize_text_field(wp_unslash($_POST['alt_site_title'])) : '';
 

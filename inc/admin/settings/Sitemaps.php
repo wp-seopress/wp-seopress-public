@@ -124,11 +124,3 @@ add_settings_field(
     'seopress-settings-admin-html-sitemap', // Page
     'seopress_setting_section_html_sitemap' // Section
 );
-
-add_settings_field(
-    'seopress_xml_sitemap_html_archive_links', // ID
-    __('Remove links from archive pages', 'wp-seopress'), // Title
-    'seopress_xml_sitemap_html_archive_links_callback', // Callback
-    'seopress-settings-admin-html-sitemap', // Page
-    'seopress_setting_section_html_sitemap' // Section
-);

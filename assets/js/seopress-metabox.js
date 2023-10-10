@@ -2,7 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const $ = jQuery;
 
     $("#seopress-tabs .hidden").removeClass("hidden");
-    $("#seopress-tabs").tabs();
+    $("#seopress-tabs").tabs({
+        classes: {
+            "ui-tabs": "seopress-ui-tabs"
+        }
+    });
 
     function sp_get_field_length(e) {
         if (e.val().length > 0) {

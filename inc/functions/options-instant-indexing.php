@@ -160,17 +160,17 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/6.9.1/true';
+        $x_source_info = 'https://www.seopress.org/7.0/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/6.9.1/false';
+        $x_source_info = 'https://www.seopress.org/7.0/false';
     }
 
     //Bing API
-    if (isset($bing_api_key) && !empty($bing_api_key) && $engines['bing'] === '1') {
+    if (isset($bing_api_key) && !empty($bing_api_key) && !empty($engines['bing']) && $engines['bing'] === '1') {
         if (seopress_is_base64_string($bing_api_key) === true) {
             $bing_api_key = base64_decode($bing_api_key);
 
@@ -205,7 +205,7 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
 
             $log['bing']['response'] = $response;
         }
-    } elseif ($engines['bing'] === '1') {
+    } elseif (!empty($engines['bing']) && $engines['bing'] === '1') {
         $log['bing']['response']['error'] = [
             'code' => 401,
             'message' => __('Bing API key is missing', 'wp-seopress')
@@ -307,6 +307,8 @@ function seopress_instant_indexing_on_post_publish( $new_status, $old_status, $p
     }
 
     $do_submit = false;
+
+    //Check post status
     $type = "add";
     if ($old_status === 'publish' && $new_status === 'publish') {
         $do_submit = true;

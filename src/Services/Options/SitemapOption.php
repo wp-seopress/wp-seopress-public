@@ -146,13 +146,4 @@ class SitemapOption {
     public function getHtmlDate() {
         return $this->searchOptionByKey('seopress_xml_sitemap_html_date');
     }
-
-    /**
-     * @since 5.9.0
-     *
-     * @return string|null
-     */
-    public function getHtmlArchiveLinks() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_archive_links');
-    }
 }

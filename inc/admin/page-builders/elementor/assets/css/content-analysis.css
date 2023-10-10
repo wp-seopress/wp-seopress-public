@@ -421,7 +421,7 @@
 	z-index: 60;
 	cursor: pointer;
 	border-radius: 0;
-	border-bottom: 3px solid #0085ba;
+	border-bottom: 3px solid #2271b1;
 }
 .elementor-control-field.seopress-content-analyses label,.elementor-control-field.seopress-content-analyses  #tabs-1 label,.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_breadcrumbs_meta],.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_canonical_meta],.elementor-control-field.seopress-content-analyses  #tabs-2 label[for=seopress_robots_primary_cat_meta],.elementor-control-field.seopress-content-analyses  #tabs-3 label,.elementor-control-field.seopress-content-analyses  #tabs-4 label,.elementor-control-field.seopress-content-analyses  #tabs-5 label,.elementor-control-field.seopress-content-analyses  #tabs-6 label,.elementor-control-field.seopress-content-analyses  .subsection-title {
 	display: block;

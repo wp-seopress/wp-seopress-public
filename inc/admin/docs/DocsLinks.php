@@ -96,7 +96,6 @@ function seopress_get_docs_links()
 			'ga4_property'      => 'https://www.seopress.org/support/guides/find-my-google-analytics-4-property-id/',
 			'api' => [
 				'analytics' => 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=en',
-				'reporting' => 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=en',
 				'data'      => 'https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com?hl=en'
 			],
 			'ga_ecommerce' => [
@@ -121,7 +120,8 @@ function seopress_get_docs_links()
 			'metaboxe_ca'         => 'https://www.seopress.org/support/hooks/filter-content-analysis-metabox-call-by-post-type/',
 			'metaboxe_data_types' => 'https://www.seopress.org/support/hooks/filter-structured-data-types-metabox-call-by-post-type/',
 			'ga_widget'           => 'https://www.seopress.org/support/hooks/filter-google-analytics-dashboard-widget-capability/',
-			'matomo_widget'       => 'https://www.seopress.org/support/hooks/filter-matomo-analytics-dashboard-widget-capability/'
+			'matomo_widget'       => 'https://www.seopress.org/support/hooks/filter-matomo-analytics-dashboard-widget-capability/',
+            'caps'                => 'https://www.seopress.org/support/guides/seopress-user-capabilities/'
 		],
 		'google_preview' => [
 			'authentification' => 'https://www.seopress.org/support/hooks/filter-google-snippet-preview-remote-request/',
@@ -253,7 +253,6 @@ function seopress_get_docs_links()
 		$docs['analytics']['events'] = 'https://www.seopress.org/fr/support/guides/suivre-vos-telechargements-liens-affilies-sortants-et-externes-google-analytics/';
 		$docs['analytics']['ga4_property'] = 'https://www.seopress.org/fr/support/guides/trouver-id-de-propriete-google-analytics-4/';
 		$docs['analytics']['api']['analytics'] = 'https://console.cloud.google.com/apis/library/analytics.googleapis.com?hl=fr';
-		$docs['analytics']['api']['reporting'] = 'https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com?hl=fr';
 		$docs['analytics']['api']['data'] = 'https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com?hl=fr';
 		$docs['analytics']['ga_ecommerce']['ev_purchase'] = 'https://www.seopress.org/fr/support/hooks/filtrer-les-statuts-des-commandes-woocommerce-envoyees-dans-google-analytics-suivi-ecommerce-ameliore/';
 		$docs['analytics']['matomo']['on_premise'] = 'https://www.seopress.org/fr/support/guides/comment-utiliser-matomo-en-auto-heberge-avec-seopress-free/';
@@ -268,6 +267,7 @@ function seopress_get_docs_links()
 		$docs['security']['metaboxe_data_types'] = 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-types-de-donnees-structurees-par-types-de-contenu/';
 		$docs['security']['ga_widget'] = 'https://www.seopress.org/fr/support/hooks/filtrer-la-capacite-du-widget-google-analytics-du-tableau-de-bord/';
 		$docs['security']['matomo_widget'] = 'https://www.seopress.org/fr/support/hooks/filtrer-capacite-widget-matomo-analytics-dashboard/';
+		$docs['security']['caps'] = 'https://www.seopress.org/fr/support/guides/capacites-utilisateurs-de-seopress/';
 
 		$docs['google_preview']['authentification'] = 'https://www.seopress.org/fr/support/hooks/filtrer-la-requete-distante-google-snippet-preview/';
 

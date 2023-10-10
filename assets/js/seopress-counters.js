@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if ($("#seopress-ca-tabs").length && $("#seopress-ca-tabs .wrap-ca-list").length) {
         $("#seopress-ca-tabs .hidden").removeClass("hidden");
-        $("#seopress-ca-tabs").tabs();
+        $("#seopress-ca-tabs").tabs({
+            classes: {
+                "ui-tabs": "seopress-ui-tabs"
+            }
+        });
     }
 });
 

@@ -32,6 +32,10 @@ class WooCommerceAnalytics {
             return;
         }
 
+        if ('1' !== seopress_get_toggle_option('google-analytics')) {
+            return;
+        }
+
         $addToCartOption = seopress_get_service('GoogleAnalyticsOption')->getAddToCart();
 
         if ($addToCartOption) {
@@ -53,6 +57,12 @@ class WooCommerceAnalytics {
             // Before update
             add_action('woocommerce_cart_actions', [$this, 'updateCartOrCheckout']);
         }
+
+        $getViewItemsDetails = seopress_get_service('GoogleAnalyticsOption')->getViewItemsDetails();
+
+        if ($getViewItemsDetails) {
+            add_action('wp_head', [$this, 'singleViewItemsDetails']);
+        }
     }
 
     /**
@@ -61,9 +71,6 @@ class WooCommerceAnalytics {
      * @return void
      */
     public function addToCart() {
-        if (apply_filters('seopress_fallback_woocommerce_analytics', false)) {
-            return;
-        }
         $this->wooCommerceAnalytics->addToCart();
     }
 
@@ -73,9 +80,6 @@ class WooCommerceAnalytics {
      * @return void
      */
     public function singleAddToCart() {
-        if (apply_filters('seopress_fallback_woocommerce_analytics', false)) {
-            return;
-        }
         $this->wooCommerceAnalytics->singleAddToCart();
     }
 
@@ -88,25 +92,27 @@ class WooCommerceAnalytics {
      * @return void
      */
     public function removeFromCart($sprintf, $cartKey) {
-        if (apply_filters('seopress_fallback_woocommerce_analytics', false)) {
-            return;
-        }
-
         return $this->wooCommerceAnalytics->removeFromCart($sprintf, $cartKey);
     }
 
     /**
      * @since 4.4.0
      *
-     * @param string $sprintf
-     * @param string $cartKey
-     *
      * @return void
      */
     public function updateCartOrCheckout() {
-        if (apply_filters('seopress_fallback_woocommerce_analytics', false)) {
+        $this->wooCommerceAnalytics->updateCartOrCheckout();
+    }
+
+    /**
+     * @since 7.0.0
+     *
+     * @return void
+     */
+    public function singleViewItemsDetails() {
+        if (!is_singular('product')) {
             return;
         }
-        $this->wooCommerceAnalytics->updateCartOrCheckout();
+        $this->wooCommerceAnalytics->singleViewItemsDetails();
     }
 }

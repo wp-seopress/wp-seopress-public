@@ -81,8 +81,8 @@ function seopress_display_seo_metaboxe()
             wp_enqueue_script('jquery-ui-accordion');
 
             //Tagify
-            wp_enqueue_script('seopress-tagify-js', SEOPRESS_ASSETS_DIR . '/js/tagify.min.js', ['jquery'], SEOPRESS_VERSION, true);
-            wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify.min.css', [], SEOPRESS_VERSION);
+            wp_enqueue_script('seopress-tagify-js', SEOPRESS_ASSETS_DIR . '/js/tagify' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, true);
+            wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify' . $prefix . '.css', [], SEOPRESS_VERSION);
             wp_enqueue_style('seopress-tagify');
 
             //Register Google Snippet Preview / Content Analysis JS
@@ -463,8 +463,8 @@ function seopress_display_ca_metaboxe()
         wp_nonce_field(plugin_basename(__FILE__), 'seopress_content_analysis_nonce');
 
         //Tagify
-        wp_enqueue_script('seopress-tagify-js', SEOPRESS_ASSETS_DIR . '/js/tagify.min.js', ['jquery'], SEOPRESS_VERSION, true);
-        wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify.min.css', [], SEOPRESS_VERSION);
+        wp_enqueue_script('seopress-tagify-js', SEOPRESS_ASSETS_DIR . '/js/tagify' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, true);
+        wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify' . $prefix . '.css', [], SEOPRESS_VERSION);
         wp_enqueue_style('seopress-tagify');
 
         wp_enqueue_script('seopress-cpt-counters-js', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion', 'jquery-ui-autocomplete'], SEOPRESS_VERSION);

@@ -46,7 +46,6 @@ class EnqueueModuleMetabox
             $response = true;
         }
 
-
         if (function_exists('get_current_screen')) {
             $currentScreen = \get_current_screen();
 
@@ -65,6 +64,15 @@ class EnqueueModuleMetabox
 
         if(!current_user_can('edit_posts')){
             $response = false;
+        }
+
+        // Compatibility with WooCommerce beta product page
+        if(isset($_GET['page']) && $_GET['page'] === 'wc-admin'){
+            $response = false;
+        }
+
+        if(isset($_GET['path']) && strpos($_GET['path'], 'product') !== false){
+            $response = true;
         }
 
         $settingsAdvanced = seopress_get_service('AdvancedOption');

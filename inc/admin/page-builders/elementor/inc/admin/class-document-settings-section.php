@@ -305,6 +305,8 @@ class Document_Settings_Section {
                 $cats = get_the_terms($post_id, 'product_cat');
             }
 
+            $cats = apply_filters( 'seopress_primary_category_list', $cats );
+
             if ( ! empty($cats)) {
                 $options = [];
 

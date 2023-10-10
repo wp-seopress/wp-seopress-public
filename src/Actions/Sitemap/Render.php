@@ -18,6 +18,35 @@ class Render implements ExecuteHooksFrontend {
     }
 
     /**
+     * @since 7.0
+     *
+     * @return void
+     */
+    protected function hooksWPMLCompatibility() {
+        if (!defined('ICL_SITEPRESS_VERSION')) {
+            return;
+        }
+
+        //Check if WPML is not setup as multidomain
+        if ( 2 != apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+            add_filter('request', function ($q) {
+                $current_language = apply_filters('wpml_current_language', false);
+                $default_language = apply_filters('wpml_default_language', false);
+                if ($current_language !== $default_language) {
+                    unset($q['seopress_sitemap']);
+                    unset($q['seopress_cpt']);
+                    unset($q['seopress_paged']);
+                    unset($q['seopress_author']);
+                    unset($q['seopress_sitemap_xsl']);
+                    unset($q['seopress_sitemap_video_xsl']);
+                }
+
+                return $q;
+            });
+        }
+    }
+
+    /**
      * @since 4.3.0
      * @see @pre_get_posts
      *

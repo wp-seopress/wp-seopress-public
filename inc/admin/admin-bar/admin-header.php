@@ -4,6 +4,11 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 
 function seopress_admin_header($context = "") {
 	$docs = seopress_get_docs_links();
+    $notifications = seopress_get_service('Notifications')->getSeverityNotification('all');
+    $total = 0;
+    if (!empty($notifications['total'])) {
+        $total = $notifications['total'];
+    }
     ?>
 
 <div id="seopress-header" class="seopress-option">
@@ -40,6 +45,9 @@ function seopress_admin_header($context = "") {
 					<path d="M19.5 4H4.5C4.10218 4 3.72064 4.15804 3.43934 4.43934C3.15804 4.72064 3 5.10218 3 5.5V20.5C3 20.8978 3.15804 21.2794 3.43934 21.5607C3.72064 21.842 4.10218 22 4.5 22H19.5C19.8978 22 20.2794 21.842 20.5607 21.5607C20.842 21.2794 21 20.8978 21 20.5V5.5C21 5.10218 20.842 4.72064 20.5607 4.43934C20.2794 4.15804 19.8978 4 19.5 4ZM19.5 5.5V15.25H16.8094C16.6125 15.2495 16.4174 15.2881 16.2356 15.3636C16.0537 15.4391 15.8887 15.5499 15.75 15.6897L13.9397 17.5H10.0603L8.25 15.6897C8.11122 15.5498 7.94601 15.4389 7.76398 15.3634C7.58196 15.2879 7.38674 15.2494 7.18969 15.25H4.5V5.5H19.5ZM19.5 20.5H4.5V16.75H7.18969L9 18.5603C9.13878 18.7002 9.30399 18.8111 9.48602 18.8866C9.66804 18.9621 9.86326 19.0006 10.0603 19H13.9397C14.1367 19.0006 14.332 18.9621 14.514 18.8866C14.696 18.8111 14.8612 18.7002 15 18.5603L16.8103 16.75H19.5V20.5Z" fill="#0C082F"/>
 					<circle cx="20" cy="5" r="4.25" fill="#FF0000" stroke="#F2EFFB" stroke-width="1.5"/>
 				</svg>
+                <?php if ($total > 0) {
+                    echo '<span class="badge">' . $total . '</span>';
+                } ?>
 				<span class="screen-reader-text"><?php _e('Notifications', 'wp-seopress'); ?></span>
 			</button>
 		</div>
@@ -219,13 +227,6 @@ function seopress_admin_header($context = "") {
 			<div id="activity-panel-true">
 				<div class="seopress-activity-panel-header">
 					<div class="seopress-inbox-title">
-						<?php
-							$notifications = seopress_get_service('Notifications')->getSeverityNotification('all');
-							$total = 0;
-							if (!empty($notifications['total'])) {
-								$total = $notifications['total'];
-							}
-						?>
 						<h2><?php
                         /* translators: %d number of notifications */
                         printf(__('Notifications <span>(%d)</span>', 'wp-seopress'), $total); ?></h2>

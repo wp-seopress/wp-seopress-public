@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 6.9.1
+Version: 7.0
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -73,7 +73,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '6.9.1');
+define('SEOPRESS_VERSION', '7.0');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -347,7 +347,7 @@ function seopress_add_admin_options_scripts($hook) {
 	if ('seopress-google-analytics' === $_GET['page']) {
 		wp_enqueue_style('wp-color-picker');
 
-		wp_enqueue_script('wp-color-picker-alpha', plugins_url('assets/js/wp-color-picker-alpha.min.js', __FILE__), ['wp-color-picker'], SEOPRESS_VERSION, true);
+		wp_enqueue_script('wp-color-picker-alpha', plugins_url('assets/js/wp-color-picker-alpha' . $prefix . '.js', __FILE__), ['wp-color-picker'], SEOPRESS_VERSION, true);
 		$color_picker_strings = [
 			'clear'            => __('Clear', 'wp-seopress'),
 			'clearAriaLabel'   => __('Clear color', 'wp-seopress'),
@@ -445,19 +445,18 @@ function seopress_admin_body_class($classes) {
 	return $classes;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Plugin action links
+///////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Shortcut settings page
  *
  * @since 3.5.9
- *
  * @param string $links, $file
- *
  * @return array $links
- *
  * @author Benjamin
  */
 add_filter('plugin_action_links', 'seopress_plugin_action_links', 10, 2);
-
 function seopress_plugin_action_links($links, $file) {
 	static $this_plugin;
 
@@ -489,34 +488,4 @@ function seopress_plugin_action_links($links, $file) {
 	}
 
 	return $links;
-}
-
-/**
- * Handle WPML compatibility for XML sitemaps
- * @since 6.5.0
- * @todo to be moved to render.php
- */
-if ('1' == seopress_get_service('SitemapOption')->isEnabled() && '1' == seopress_get_toggle_option('xml-sitemap')) {
-	//WPML compatibility
-	if (defined('ICL_SITEPRESS_VERSION')) {
-		//Check if WPML is not setup as multidomain
-		if ( 2 != apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
-			add_filter('request', 'seopress_wpml_block_secondary_languages');
-		}
-	}
-
-	function seopress_wpml_block_secondary_languages($q) {
-		$current_language = apply_filters('wpml_current_language', false);
-		$default_language = apply_filters('wpml_default_language', false);
-		if ($current_language !== $default_language) {
-			unset($q['seopress_sitemap']);
-			unset($q['seopress_cpt']);
-			unset($q['seopress_paged']);
-			unset($q['seopress_author']);
-			unset($q['seopress_sitemap_xsl']);
-			unset($q['seopress_sitemap_video_xsl']);
-		}
-
-		return $q;
-	}
 }

@@ -317,24 +317,3 @@ function seopress_xml_sitemap_html_date_callback()
         esc_attr($options['seopress_xml_sitemap_html_date']);
     }
 }
-
-function seopress_xml_sitemap_html_archive_links_callback()
-{
-    $options = get_option('seopress_xml_sitemap_option_name');
-
-    $check = isset($options['seopress_xml_sitemap_html_archive_links']); ?>
-
-
-<label for="seopress_xml_sitemap_html_archive_links">
-    <input id="seopress_xml_sitemap_html_archive_links"
-        name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_archive_links]" type="checkbox" <?php if ('1' == $check) { ?>
-    checked="yes"
-    <?php } ?>
-    value="1"/>
-    <?php _e('Remove links from archive pages (e.g. Products)', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_xml_sitemap_html_archive_links'])) {
-        esc_attr($options['seopress_xml_sitemap_html_archive_links']);
-    }
-}

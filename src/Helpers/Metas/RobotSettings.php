@@ -14,6 +14,8 @@ abstract class RobotSettings {
             $cats = get_the_terms($id, 'product_cat');
         }
 
+        $cats = apply_filters( 'seopress_primary_category_list', $cats );
+
         $default = [
             'term_id' => 'none',
             'name'    => __('None (will disable this feature)', 'wp-seopress'),

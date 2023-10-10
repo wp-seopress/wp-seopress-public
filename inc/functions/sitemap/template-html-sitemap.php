@@ -19,28 +19,21 @@ if (is_post_type_hierarchical($cpt_key)) {
 } else {
     $postslist = get_posts($args);
 }
+
 if (! empty($postslist)) {
     $date = true;
     if (is_post_type_hierarchical($cpt_key)) {
         $walker_page = new Walker_Page();
         $html .= '<ul class="sp-list-posts sp-cpt-hierarchical">';
-        if (get_post_type_archive_link($cpt_key)) {
-            if (false === $display_archive) {
-                $html .= '<li><a href="' . get_post_type_archive_link($cpt_key) . '">' . $obj->labels->name . '</a></li>';
-            }
-        }
+
         $depth = 0;
         $depth = apply_filters('seopress_sitemaps_html_pages_depth_query', $depth);
 
         $html .= $walker_page->walk($postslist, $depth);
         $html .= '</ul>'; // 0 means display all levels.
     } else {
+
         $html .= '<ul class="sp-list-posts">';
-        if ('post' != $cpt_key && 'product' != $cpt_key && isset($obj->labels->name) && get_post_type_archive_link($cpt_key)) {//check if it's not the Post / Product post type
-            if (false === $display_archive) {
-                $html .= '<li><a href="' . get_post_type_archive_link($cpt_key) . '">' . $obj->labels->name . '</a></li>';
-            }
-        }
 
         foreach ($postslist as $post) {
             setup_postdata($post);
@@ -66,4 +59,5 @@ if (! empty($postslist)) {
         wp_reset_postdata();
         $html .= '</ul>';
     }
+
 }

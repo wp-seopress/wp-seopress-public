@@ -99,6 +99,10 @@ if (is_plugin_active('sg-cachepress/sg-cachepress.php')) { ?>
     rewrite ^.*/sitemaps_video_xsl\.xsl$ /index.php?seopress_sitemap_video_xsl=1 last;
 	rewrite ^.*/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?seopress_cpt=$1&seopress_paged=$2 last;
 }</pre>
+
+    <p>
+        <?php _e('Contact your webhost for help and send them these rules.', 'wp-seopress'); ?>
+    </p>
 </div>
 <?php }
     } ?>

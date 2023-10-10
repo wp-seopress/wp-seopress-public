@@ -190,16 +190,17 @@ add_settings_section(
 );
 
 add_settings_field(
-    'seopress_advanced_appearance_universal_metabox', // ID
-    __('Universal Metabox (Gutenberg)', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_universal_metabox_callback', // Callback
-    'seopress-settings-admin-advanced-appearance', // Page
-    'seopress_setting_section_advanced_appearance_metabox' // Section
-);
-add_settings_field(
     'seopress_advanced_appearance_universal_metabox_disable', // ID
     __('Disable Universal Metabox', 'wp-seopress'), // Title
     'seopress_advanced_appearance_universal_metabox_disable_callback', // Callback
+    'seopress-settings-admin-advanced-appearance', // Page
+    'seopress_setting_section_advanced_appearance_metabox' // Section
+);
+
+add_settings_field(
+    'seopress_advanced_appearance_universal_metabox', // ID
+    __('Universal Metabox for the Block Editor', 'wp-seopress'), // Title
+    'seopress_advanced_appearance_universal_metabox_callback', // Callback
     'seopress-settings-admin-advanced-appearance', // Page
     'seopress_setting_section_advanced_appearance_metabox' // Section
 );
@@ -404,3 +405,15 @@ add_settings_field(
 seopress_get_service('SectionPagesSEOPress')->printSectionPages();
 
 do_action('seopress_settings_advanced_after');
+
+if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+    if (method_exists(seopress_pro_get_service('OptionPro'), 'getWhiteLabelHelpLinks') && '1' !== seopress_pro_get_service('OptionPro')->getWhiteLabelHelpLinks()) {
+        add_settings_section(
+            'seopress_setting_section_advanced_caps', // ID
+            '',
+            //__("Capabilities","wp-seopress"), // Title
+            'print_section_info_advanced_caps', // Callback
+            'seopress-settings-admin-advanced-security' // Page
+        );
+    }
+}

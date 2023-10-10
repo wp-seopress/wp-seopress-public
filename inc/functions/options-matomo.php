@@ -27,7 +27,7 @@ add_filter('wp_resource_hints', 'seopress_resource_hints', 10, 2);
 
 //Build Custom Matomo
 function seopress_matomo_js($echo) {
-	if (!empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoId()) && !empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId())) {
+	if ('1' === seopress_get_service('GoogleAnalyticsOption')->getMatomoEnable() && !empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoId()) && !empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId())) {
 		//Init
 		$seopress_matomo_config = [];
 		$seopress_matomo_event = [];
@@ -207,7 +207,7 @@ function seopress_matomo_nojs() {
 
 add_action('seopress_matomo_body_html', 'seopress_matomo_body_js', 10, 1);
 function seopress_matomo_body_js($echo) {
-    if (!empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoId()) && !empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId())) {
+    if ('1' === seopress_get_service('GoogleAnalyticsOption')->getMatomoEnable() && !empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoId()) && !empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId())) {
         //Init
         $html = '';
 

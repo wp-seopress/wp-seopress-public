@@ -9,6 +9,60 @@ if (! defined('ABSPATH')) {
 class WooCommerceAnalyticsService
 {
     /**
+     * Function to convert an array to a JavaScript object using json_encode
+     *
+     * @since 7.0.0
+     *
+     * @return void
+     */
+    public function arrayToJs($array) {
+        $jsonObject = json_encode($array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return substr($jsonObject, 1, -1); // Remove curly braces from the JSON
+    }
+
+    /**
+     * Get product categories
+     *
+     * @since 7.0.0
+     *
+     * @return $categoriesOut array
+     */
+    public function getProductCategories($product)
+    {
+        $categoriesOut = [];
+
+        $categories = get_the_terms($product->get_id(), 'product_cat');
+
+        if ($categories && !is_wp_error($categories)) {
+            $i = 1;
+            foreach ($categories as $category) {
+                $cat_key = 'item_category_' . $i;
+                if ($i === 1) {
+                    $cat_key = 'item_category';
+                }
+                $categoriesOut[$cat_key] = esc_js($category->name);
+                $i++;
+            }
+        }
+
+        return $categoriesOut;
+    }
+
+    /**
+     * Get product SKU, fallback Post ID
+     *
+     * @since 7.0.0
+     *
+     * @return $sku float
+     */
+    public function getProductSku($product)
+    {
+        $sku = $product->get_sku() ? $product->get_sku() : $product->get_id();
+
+        return $sku;
+    }
+
+    /**
      * @since 4.4.0
      *
      * @return void
@@ -19,21 +73,12 @@ class WooCommerceAnalyticsService
         global $product;
 
         // Set data
-        $items_purchased['id']        = esc_js($product->get_id());
-        $items_purchased['name']      = esc_js($product->get_title());
+        $items_purchased['item_id']        = esc_js($this->getProductSku($product));
+        $items_purchased['item_name']      = esc_js($product->get_title());
         $items_purchased['list_name'] = esc_js(get_the_title());
         $items_purchased['quantity']  = (float) esc_js(1);
         $items_purchased['price']     = (float) esc_js($product->get_price());
-
-        // Extract categories
-        $categories = get_the_terms($product->get_id(), 'product_cat');
-        if ($categories) {
-            foreach ($categories as $category) {
-                $categories_out[] = $category->name;
-            }
-            $categories_js               = esc_js(implode('/', $categories_out));
-            $items_purchased['category'] = esc_js($categories_js);
-        }
+        $items_purchased = array_merge($items_purchased, $this->getProductCategories($product));
 
         $js = "
         <script>
@@ -53,19 +98,19 @@ class WooCommerceAnalyticsService
                         return;
                     }
 
-                    var id = null;
+                    var item_id = null;
 
                     if(!namedItem){
                         try{
-                            id = getParameterByName('add-to-cart', new URL(event.target.href).search)
+                            item_id = getParameterByName('add-to-cart', new URL(event.target.href).search)
                         }
                         catch(e){}
                     }
                     else{
-                        id = namedItem.value
+                        item_id = namedItem.value
                     }
 
-                    if(id != " . $items_purchased['id'] . "){
+                    if(item_id != " . $items_purchased['item_id'] . "){
                         return;
                     }
 
@@ -89,17 +134,6 @@ class WooCommerceAnalyticsService
     {
         // Get current product
         global $product;
-
-        // Extract categories
-        $categories               = get_the_terms($product->get_id(), 'product_cat');
-        $items_purchased_category = '';
-        if ($categories) {
-            foreach ($categories as $category) {
-                $categories_out[] = $category->name;
-            }
-            $categories_js               = esc_js(implode('/', $categories_out));
-            $items_purchased_category    = esc_js($categories_js);
-        }
 
         $js = "
         <script>
@@ -130,18 +164,18 @@ class WooCommerceAnalyticsService
 
                     gtag('event', 'add_to_cart', {
                         'items': [ {
-                            'id':'" . esc_js($product->get_id()) . "',
-                            'name': '" . esc_js($product->get_title()) . "',
+                            'item_id':'" . esc_js($this->getProductSku($product)) . "',
+                            'item_name': '" . esc_js($product->get_title()) . "',
                             'list_name': '" . esc_js(get_the_title()) . "',
                             'quantity': quantity,
                             'price': price,
-                            'category': " . json_encode($items_purchased_category) . '
+                            " . $this->arrayToJs($this->getProductCategories($product)) . "
                         }]
                     });
                 })
             });
         </script>
-        ';
+        ";
 
         $js = apply_filters('seopress_gtag_ec_add_to_cart_single_ev', $js);
 
@@ -170,24 +204,11 @@ class WooCommerceAnalyticsService
         // Get current product
         if ($product) {
             // Set data
-            $items_purchased['id']        = esc_js($product->get_id());
-            $items_purchased['name']      = esc_js($product->get_title());
+            $items_purchased['item_id']        = esc_js($this->getProductSku($product));
+            $items_purchased['item_name']      = esc_js($product->get_title());
             $items_purchased['list_name'] = esc_js(get_the_title());
             $items_purchased['price']     = (float) esc_js($product->get_price());
-
-            // Extract categories
-            $categories = get_the_terms($product->get_id(), 'product_cat');
-            if ($categories) {
-                foreach ($categories as $category) {
-                    if (is_object($category) && property_exists($category, 'name')) {
-                        $categories_out[] = $category->name;
-                    } elseif (is_array($category) && isset($category['name'])) {
-                        $categories_out[] = $category['name'];
-                    }
-                }
-                $categories_js               = esc_js(implode('/', $categories_out));
-                $items_purchased['category'] = esc_js($categories_js);
-            }
+            $items_purchased = array_merge($items_purchased, $this->getProductCategories($product));
 
             $sprintf .= "
             <script>
@@ -224,21 +245,13 @@ class WooCommerceAnalyticsService
             // Get current product
             if ($product) {
                 // Set data
-                $items_purchased['id']        = esc_js($product->get_id());
-                $items_purchased['name']      = esc_js($product->get_title());
+                $items_purchased['item_id']        = esc_js($this->getProductSku($product));
+                $items_purchased['item_name']      = esc_js($product->get_title());
                 $items_purchased['list_name'] = esc_js(get_the_title());
                 $items_purchased['quantity']  = (float) esc_js($item['quantity']);
                 $items_purchased['price']     = (float) esc_js($product->get_price());
 
-                // Extract categories
-                $categories = get_the_terms($product->get_id(), 'product_cat');
-                if ($categories) {
-                    foreach ($categories as $category) {
-                        $categories_out[] = $category->name;
-                    }
-                    $categories_js               = esc_js(implode('/', $categories_out));
-                    $items_purchased['category'] = esc_js($categories_js);
-                }
+                $items_purchased = array_merge($items_purchased, $this->getProductCategories($product));
             }
 
             $final[] = $items_purchased;
@@ -260,6 +273,35 @@ class WooCommerceAnalyticsService
         </script>';
 
         $js = apply_filters('seopress_gtag_ec_remove_from_cart_checkout_ev', $js, $final);
+
+        echo $js;
+    }
+
+    /**
+     * @since 7.0.0
+     *
+     */
+    public function singleViewItemsDetails() {
+        // Get current product
+        global $product;
+
+        $js = "
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                gtag('event', 'view_item', {
+                    'items': [{
+                        'item_id': '" . esc_js($this->getProductSku($product)) . "',
+                        'item_name': '" . esc_js($product->get_title()) . "',
+                        'price': " . (float) esc_js($product->get_price()) . ",
+                        'quantity': 1,
+                        " . $this->arrayToJs($this->getProductCategories($product)) . "
+                    }]
+                });
+            });
+        </script>
+        ";
+
+        $js = apply_filters('seopress_gtag_ec_single_view_details_ev', $js);
 
         echo $js;
     }

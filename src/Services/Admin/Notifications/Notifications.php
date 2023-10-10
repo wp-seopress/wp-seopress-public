@@ -5,6 +5,8 @@ namespace SEOPress\Services\Admin\Notifications;
 defined('ABSPATH') || exit;
 
 class Notifications {
+    private $customOrder = ['high', 'medium', 'low', 'info'];
+
     public function generateAllNotifications() {
         $alerts_info = 0;
         $alerts_low = 0;
@@ -419,7 +421,7 @@ class Notifications {
                 'title'  => __('Your site doesn\'t use an SSL certificate!', 'wp-seopress'),
                 'desc'   => __('Https is considered by Google as a positive signal for the ranking of your site. It also reassures your visitors for data security, and improves trust.', 'wp-seopress') . '</a>',
                 'impact' => [
-                    'low' => __('Medium impact', 'wp-seopress'),
+                    'medium' => __('Medium impact', 'wp-seopress'),
                 ],
                 'link' => [
                     'en'       => 'https://webmasters.googleblog.com/2014/08/https-as-ranking-signal.html',
@@ -724,6 +726,34 @@ class Notifications {
         } else {
             return;
         }
+    }
+
+    /**
+     * Order notifications by Impact.
+     *
+     * @since 7.0.0
+     *
+     * @param array $notifications
+     *
+     * @return array notifications
+     */
+    public function orderByImpact($notifications)
+    {
+        usort($notifications, function ($a, $b) {
+            $aImpact = isset($a['impact']) ? array_key_first($a['impact']) : ''; // Get the impact value if 'impact' key exists
+            $bImpact = isset($b['impact']) ? array_key_first($b['impact']) : ''; // Get the impact value if 'impact' key exists
+
+            $aIndex = array_search($aImpact, $this->customOrder);
+            $bIndex = array_search($bImpact, $this->customOrder);
+
+            if ($aIndex === $bIndex) {
+                return 0;
+            }
+
+            return ($aIndex < $bIndex) ? -1 : 1;
+        });
+
+        return $notifications;
     }
 
     /**

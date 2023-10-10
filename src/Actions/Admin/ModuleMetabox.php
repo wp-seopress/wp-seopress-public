@@ -62,7 +62,7 @@ class ModuleMetabox implements ExecuteHooks
         }
 
         wp_enqueue_media();
-        wp_enqueue_script('seopress-metabox', SEOPRESS_URL_PUBLIC . '/metaboxe.js', $dependencies, uniqid(), true);
+        wp_enqueue_script('seopress-metabox', SEOPRESS_URL_PUBLIC . '/metaboxe.js', $dependencies, SEOPRESS_VERSION, true);
         $value = wp_create_nonce('seopress_rest');
 
         $tags = seopress_get_service('TagsToString')->getTagsAvailable([
@@ -73,6 +73,7 @@ class ModuleMetabox implements ExecuteHooks
             ],
             'without_classes_pos' => ['\SEOPress\Tags\Schema', '\SEOPressPro\Tags\Schema']
         ]);
+
 
         $getLocale = get_locale();
         if (!empty($getLocale)) {
@@ -93,6 +94,13 @@ class ModuleMetabox implements ExecuteHooks
             $postType = get_post_type($postId);
         }
 
+
+        // Compatibility with WooCommerce beta product page
+        if(isset($_GET['path']) && strpos($_GET['path'], 'product') && isset($_GET['page']) && $_GET['page'] === 'wc-admin'){
+            $dataPath = explode('/',$_GET['path']);
+            $postId = $dataPath[count($dataPath)-1];
+        }
+
         $args = array_merge([
             'SEOPRESS_URL_PUBLIC'       => SEOPRESS_URL_PUBLIC,
             'SEOPRESS_URL_ASSETS'     => SEOPRESS_URL_ASSETS,
@@ -104,7 +112,6 @@ class ModuleMetabox implements ExecuteHooks
             'NONCE'                   => wp_create_nonce('wp_rest'),
             'POST_ID'                 => $postId,
             'POST_TYPE'               => $postType,
-            'CURRENT_LANG'            => seopress_get_current_lang(),
             'IS_GUTENBERG'            => apply_filters('seopress_module_metabox_is_gutenberg', $isGutenberg),
             'SELECTOR_GUTENBERG'      => apply_filters('seopress_module_metabox_selector_gutenberg', '.edit-post-header .edit-post-header-toolbar__left'),
             'TOGGLE_MOBILE_PREVIEW' => apply_filters('seopress_toggle_mobile_preview', 1),
@@ -158,7 +165,7 @@ class ModuleMetabox implements ExecuteHooks
      */
     public function enqueue($page)
     {
-        if (! in_array($page, ['post.php'], true)) {
+        if (! in_array($page, ['post.php','woocommerce_page_wc-admin'], true)) {
             return;
         }
         $this->enqueueModule();

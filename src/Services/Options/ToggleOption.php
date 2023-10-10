@@ -12,8 +12,14 @@ class ToggleOption {
      *
      * @return array
      */
-    public function getOption() {
-        return get_option(Options::KEY_TOGGLE_OPTION);
+    public function getOption($is_multisite) {
+        if ($is_multisite === true) {
+            $network = get_network();
+            $main_network_id = $network->site_id;
+            return get_blog_option($main_network_id, Options::KEY_TOGGLE_OPTION);
+        } else {
+            return get_option(Options::KEY_TOGGLE_OPTION);
+        }
     }
 
     /**
@@ -23,8 +29,8 @@ class ToggleOption {
      *
      * @return mixed
      */
-    public function searchOptionByKey($key) {
-        $data = $this->getOption();
+    public function searchOptionByKey($key, $is_multisite = false) {
+        $data = $this->getOption($is_multisite);
 
         if (empty($data)) {
             return null;
@@ -70,6 +76,9 @@ class ToggleOption {
      * @return string
      */
     public function getToggleWhiteLabel(){
+        if (is_network_admin() || is_multisite()) {
+            return $this->searchOptionByKey('white-label', true);
+        }
         return $this->searchOptionByKey('white-label');
     }
 }
