@@ -70,7 +70,7 @@ function print_section_info_google_analytics_custom_tracking()
     </h2>
 </div>
 <p>
-    <?php _e('Add your own scripts like GTM or Facebook Pixel by copy and paste the provided code to the HEAD/BODY or FOOTER.', 'wp-seopress'); ?>
+    <?php _e('Add your own scripts like GTM by copy and paste the provided code to the HEAD/BODY or FOOTER.', 'wp-seopress'); ?>
 </p>
 
 <div class="seopress-notice is-warning">

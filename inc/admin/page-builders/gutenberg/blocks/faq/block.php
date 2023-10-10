@@ -92,8 +92,6 @@ function seopress_block_faq_render_frontend( $attributes ){
                         $css = apply_filters( 'seopress_faq_block_inline_css', $css );
                         echo $css;
                     }
-                    // Our simple accordion JS
-                    wp_enqueue_script('seopress-accordion', SEOPRESS_URL_PUBLIC . '/editor/blocks/faq/accordion.js', '', SEOPRESS_VERSION, true);
                 }
 
                 $image = '';

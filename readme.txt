@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.3
 Requires PHP: 7.2
-Stable tag: 6.9
+Stable tag: 6.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -312,9 +312,9 @@ Any questions? Visit our website <a href="https://www.seopress.org" target="_bla
 
 You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/_faq">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/_faq">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/_faq">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/_faq">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/_faq">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/_faq">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/_faq">WP Meta SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/_faq">wpSEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/_faq">Platinum SEO Pack</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/_faq">SmartCrawl</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/_faq">SEOPressor</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/_faq">Slim SEO</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
 
-= How to use Google Tag Manager / Facebook Pixel with SEOPress? =
+= How to use Google Tag Manager / other scripts with SEOPress? =
 
-Go to SEO > Analytics > Custom Tracking tab. Paste GTM / Facebook Pixel tracking code to [HEAD] Add an additional tracking code / [BODY] Add an additional tracking code textarea fields. Save changes and clear your cache.
+Go to SEO > Analytics > Custom Tracking tab. Paste GTM / custom tracking code to [HEAD] Add an additional tracking code / [BODY] Add an additional tracking code textarea fields. Save changes and clear your cache.
 
 = Which types of sitemaps support SEOPress? =
 
@@ -376,6 +376,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 6.9.1 =
+* FIX Accordion in FAQ block
+
 = 6.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-9/">Read the blog post update</a> =
 * NEW WordPress 6.3 compatibility
 * NEW Add your OpenAI API key to your wp-config.php file (PRO)

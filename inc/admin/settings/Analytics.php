@@ -314,7 +314,7 @@ add_settings_section(
 
 add_settings_field(
     'seopress_google_analytics_other_tracking', // ID
-    __('[HEAD] Add an additional tracking code (like Facebook Pixel, Hotjar...)', 'wp-seopress'), // Title
+    __('[HEAD] Add an additional tracking code', 'wp-seopress'), // Title
     'seopress_google_analytics_other_tracking_callback', // Callback
     'seopress-settings-admin-google-analytics-custom-tracking', // Page
     'seopress_setting_section_google_analytics_custom_tracking' // Section
@@ -322,7 +322,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_google_analytics_other_tracking_body', // ID
-    __('[BODY] Add an additional tracking code (like Google Tag Manager...)', 'wp-seopress'), // Title
+    __('[BODY] Add an additional tracking code', 'wp-seopress'), // Title
     'seopress_google_analytics_other_tracking_body_callback', // Callback
     'seopress-settings-admin-google-analytics-custom-tracking', // Page
     'seopress_setting_section_google_analytics_custom_tracking' // Section
@@ -330,7 +330,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_google_analytics_other_tracking_footer', // ID
-    __('[BODY (FOOTER)] Add an additional tracking code (like Google Tag Manager...)', 'wp-seopress'), // Title
+    __('[BODY (FOOTER)] Add an additional tracking code', 'wp-seopress'), // Title
     'seopress_google_analytics_other_tracking_footer_callback', // Callback
     'seopress-settings-admin-google-analytics-custom-tracking', // Page
     'seopress_setting_section_google_analytics_custom_tracking' // Section
