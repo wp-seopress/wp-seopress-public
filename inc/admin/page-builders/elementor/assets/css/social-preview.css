@@ -218,6 +218,10 @@
     display: block;
 }
 
+.elementor-control-field.google-snippet-box .google-snippet-preview .wrap-post-thumb {
+    display: none;
+}
+
 .elementor-control-field.google-snippet-box .google-snippet-preview.mobile-preview .snippet-post-thumb {
     width: 104px;
     max-width: inherit;

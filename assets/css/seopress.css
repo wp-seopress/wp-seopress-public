@@ -2062,6 +2062,11 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     height: 104px;
     border-radius: 8px;
     object-fit: cover;
+    display: block;
+}
+
+#seopress_cpt .google-snippet-preview .snippet-post-thumb {
+    display: none;
 }
 
 #seopress_cpt .google-snippet-preview .wrap-m-icon-permalink {
