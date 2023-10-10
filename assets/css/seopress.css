@@ -2051,13 +2051,6 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     justify-content: space-between;
 }
 
-#seopress_cpt .google-snippet-preview .wrap-snippet .wrap-m-icon-permalink .snippet-favicon,
-#seopress_cpt .google-snippet-preview .wrap-post-thumb,
-#seopress_cpt .google-snippet-preview.mobile-preview .wrap-post-thumb:empty,
-#seopress_cpt .google-snippet-preview .snippet-sitename {
-    display: none;
-}
-
 #seopress_cpt .google-snippet-preview.mobile-preview .wrap-post-thumb:not(:empty) {
     margin-left: 16px;
     display: block;
@@ -2071,7 +2064,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     object-fit: cover;
 }
 
-#seopress_cpt .google-snippet-preview.mobile-preview .wrap-m-icon-permalink {
+#seopress_cpt .google-snippet-preview .wrap-m-icon-permalink {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -2081,36 +2074,49 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     width: 100%;
 }
 
-#seopress_cpt .google-snippet-preview.mobile-preview .wrap-m-icon-permalink .snippet-permalink {
+#seopress_cpt .google-snippet-preview .wrap-m-icon-permalink .snippet-permalink {
     display: block;
     color: #202124;
     font-size: 12px;
 }
 
-#seopress_cpt .google-snippet-preview.mobile-preview .wrap-snippet .wrap-m-icon-permalink .snippet-favicon {
+#seopress_cpt .google-snippet-preview .wrap-snippet .wrap-m-icon-permalink .snippet-favicon {
     display: block;
 }
 
-#seopress_cpt .google-snippet-preview.mobile-preview .snippet-favicon {
+#seopress_cpt .google-snippet-preview .snippet-favicon {
     margin-right: 12px;
     background-color: #f1f3f4;
     border-radius: 50%;
     border: 1px solid #ecedef;
     -webkit-text-size-adjust: none;
     display: block;
-    padding: 4px;
     width: 28px;
     height: 28px;
     text-align: center;
 }
 
+#seopress_cpt .google-snippet-preview.mobile-preview .snippet-favicon {
+    padding: 4px;
+}
+
+#seopress_cpt .google-snippet-preview .snippet-favicon img {
+    width: 26px;
+    height: 26px;
+    max-width: inherit;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 50%;
+}
+
 #seopress_cpt .google-snippet-preview.mobile-preview .snippet-favicon img {
     width: 18px;
     height: 18px;
+    border-radius: 0;
     max-width: inherit;
 }
 
-#seopress_cpt .google-snippet-preview.mobile-preview .snippet-sitename {
+#seopress_cpt .google-snippet-preview .snippet-sitename {
     color: #202124;
     font-family: Google Sans, Roboto, Helvetica Neue, Arial, sans-serif;
     font-weight: 400;
