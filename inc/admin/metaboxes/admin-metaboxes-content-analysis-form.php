@@ -61,7 +61,7 @@ $data_attr = seopress_metaboxes_init();
                             $html .= '<li>
                                     <span class="dashicons dashicons-minus"></span>
                                     <strong>' . $item['key'] . '</strong>
-                                    ' . sprintf(_n('is already used %d time', 'is already used %d times', count($item['rows']), 'wp-seopress'), count($item['rows'])). '
+                                    ' . /* translators: %d number of times the target keyword is used */ sprintf(_n('is already used %d time', 'is already used %d times', count($item['rows']), 'wp-seopress'), count($item['rows'])). '
                                 </li>';
                             $i++;
                         }

@@ -283,7 +283,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
             if ( ! is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                 $default_steps['pro'] = [
-                    'name'    => sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
+                    'name'    => /* translators: %s default: SEOPress */ sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
                     'view'    => [$this, 'seopress_setup_pro'],
                     'handler' => '',
                     'sub_steps' => $sub_steps,
@@ -293,7 +293,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
             if (! is_plugin_active('wp-seopress-insights/seopress-insights.php') && ! is_multisite()) {
                 $default_steps['insights'] = [
-                    'name'    => sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
+                    'name'    => /* translators: %s default: SEOPress */ sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
                     'view'    => [$this, 'seopress_setup_insights'],
                     'handler' => '',
                     'sub_steps' => $sub_steps,
@@ -396,7 +396,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 <head>
 	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title><?php printf(esc_html__('%s &rsaquo; Setup Wizard', 'wp-seopress'),$this->seo_title); ?></title>
+	<title><?php /* translators: %s default: SEOPress */ printf(esc_html__('%s &rsaquo; Setup Wizard', 'wp-seopress'),$this->seo_title); ?></title>
     <script type="text/javascript">
         var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php', 'relative' ) ); ?>';
     </script>
@@ -555,15 +555,20 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function seopress_setup_welcome() {
 		?>
     <div class="seopress-setup-content">
-        <h1><?php printf(esc_html__('Welcome to %s!', 'wp-seopress'), $this->seo_title); ?></h1>
+        <h1>
+            <?php
+                /* translators: %s plugin name, default: SEOPress */
+                printf(esc_html__('Welcome to %s!', 'wp-seopress'), $this->seo_title);
+            ?>
+        </h1>
 
         <?php $this->setup_wizard_sub_steps(); ?>
 
         <div class="seopress-tab active">
             <form method="post">
                 <?php wp_nonce_field('seopress-setup'); ?>
-                <h2><?php printf(esc_html__('Configure %s with the best settings for your site','wp-seopress'), $this->seo_title); ?></h2>
-                <p class="store-setup intro"><?php printf(esc_html__('The following wizard will help you configure %s and get you started quickly.', 'wp-seopress'), $this->seo_title); ?>
+                <h2><?php /* translators: %s default: SEOPress */ printf(esc_html__('Configure %s with the best settings for your site','wp-seopress'), $this->seo_title); ?></h2>
+                <p class="store-setup intro"><?php /* translators: %s default: SEOPress */ printf(esc_html__('The following wizard will help you configure %s and get you started quickly.', 'wp-seopress'), $this->seo_title); ?>
                 </p>
 
                 <p class="seopress-setup-actions step">
@@ -587,7 +592,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function seopress_setup_import_settings() {
 		?>
         <div class="seopress-setup-content">
-            <h1><?php printf(esc_html__('Migrate your SEO metadata to %s!', 'wp-seopress'), $this->seo_title); ?></h1>
+            <h1><?php /* translators: %s default: SEOPress */ printf(esc_html__('Migrate your SEO metadata to %s!', 'wp-seopress'), $this->seo_title); ?></h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
@@ -806,7 +811,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                     </p>
 
                     <p>
-                        <label for="site_title"><?php esc_html_e('Home site title', 'wp-seopress'); ?></label>
+                        <label for="site_title"><?php esc_html_e('Site title', 'wp-seopress'); ?></label>
                         <input type="text" id="site_title" class="location-input" name="site_title"
                             placeholder="<?php esc_html_e('e.g. My super website', 'wp-seopress'); ?>"
                             required value="<?php echo $site_title; ?>" />
@@ -1080,7 +1085,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <?php _e('For which single post types, should indexing be disabled?', 'wp-seopress'); ?>
                     </h2>
 
-                    <p><?php _e('Custom post types are a content type in WordPress. By default, <strong>Post</strong> and <strong>Page</strong> are the <strong>default post types</strong>.','wp-seopress'); ?></p>
+                    <p><?php _e('Custom post types are a content type in WordPress. <strong>Post</strong> and <strong>Page</strong> are the <strong>default post types</strong>.','wp-seopress'); ?></p>
                     <p><?php _e('You can create your own type of content like "product" or "business": these are <strong>custom post types</strong>.','wp-seopress'); ?></p>
 
                     <ul>
@@ -1409,7 +1414,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                             </label>
                         </li>
                         <li class="description">
-                            <?php printf(__('By default, %s redirects your Attachment pages to the parent post. Optimize this by redirecting the user directly to the URL of the media file.', 'wp-seopress'), $this->seo_title); ?>
+                            <?php /* translators: %s default: SEOPress */ printf(__('By default, %s redirects your Attachment pages to the parent post. Optimize this by redirecting the user directly to the URL of the media file.', 'wp-seopress'), $this->seo_title); ?>
                         </li>
 
                         <!-- Remove /category/ in URLs -->
@@ -1428,7 +1433,7 @@ class SEOPRESS_Admin_Setup_Wizard {
                             </label>
                         </li>
                         <li class="description">
-                            <?php printf(__('Shorten your URLs by removing %s and improve your SEO.', 'wp-seopress'), $category_base); ?>
+                            <?php /* translators: %s category base */ printf(__('Shorten your URLs by removing %s and improve your SEO.', 'wp-seopress'), $category_base); ?>
                         </li>
 
                         <?php if (is_plugin_active('woocommerce/woocommerce.php')) { ?>
@@ -1529,7 +1534,9 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <!-- Universal SEO metabox overview -->
                         <?php if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) { ?>
                             <li class="description">
-                                <?php echo wp_oembed_get('https://www.youtube.com/watch?v=sf0ocG7vQMM'); ?>
+                                <a class="wrap-yt-embed" href="https://www.youtube.com/watch?v=sf0ocG7vQMM" target="_blank" title="<?php _e('Watch the universal SEO metabox overview video - Open in a new window', 'wp-seopress'); ?>">
+                                    <img src="<?php echo SEOPRESS_ASSETS_DIR . '/img/yt-universal-metabox.webp'; ?>" alt="<?php _e('Universal SEO metabox video thumbnail','wp-seopress'); ?>" width="500" />
+                                </a>
                             </li>
                         <?php } ?>
 
@@ -1680,7 +1687,9 @@ class SEOPRESS_Admin_Setup_Wizard {
                     <span class="dashicons dashicons-minus"></span><?php esc_html_e('Receive your rankings / backlinks in your inbox / Slack.', 'wp-seopress'); ?>
                 </p>
 
-                <?php echo wp_oembed_get('https://www.youtube.com/watch?v=p6v9Jd5lRIU'); ?>
+                <a class="wrap-yt-embed" href="https://youtu.be/p6v9Jd5lRIU" target="_blank" title="<?php _e('Watch the SEOPress Insights overview video - Open in a new window', 'wp-seopress'); ?>">
+                    <img src="<?php echo SEOPRESS_ASSETS_DIR . '/img/yt-insights.webp'; ?>" alt="<?php _e('SEOPress Insights video thumbnail','wp-seopress'); ?>" width="500" />
+                </a>
 
                 <p class="seopress-setup-actions step">
                     <a class="btn btnPrimary"

@@ -456,7 +456,7 @@ add_settings_section(
 
 add_settings_field(
     'seopress_google_analytics_roles', // ID
-    __('Exclude user roles from tracking (Google Analytics and Matomo)', 'wp-seopress'), // Title
+    __('Exclude user roles from tracking (GA, Matomo, MS Clarity, custom scripts)', 'wp-seopress'), // Title
     'seopress_google_analytics_roles_callback', // Callback
     'seopress-settings-admin-google-analytics-advanced', // Page
     'seopress_setting_section_google_analytics_advanced' // Section

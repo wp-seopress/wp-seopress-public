@@ -38,8 +38,15 @@ $indexing_plugins = [
 foreach ($indexing_plugins as $key => $value) {
     if (is_plugin_active($key)) { ?>
         <div class="seopress-notice is-warning">
-            <h3><?php printf(__('We noticed that you use <strong>%s</strong> plugin.', 'wp-seopress'), $value); ?></h3>
+            <h3>
+                <?php
+                    /* translators: %s Indexing plugin name */
+                    printf(__('We noticed that you use <strong>%s</strong> plugin.', 'wp-seopress'), $value);
+                ?>
+            </h3>
+
             <p><?php printf(__('To prevent any conflicts with our Indexing feature, please disable it.', 'wp-seopress')); ?></p>
+
             <a class="btn btnPrimary" href="<?php echo admin_url('plugins.php'); ?>"><?php _e('Fix this!', 'wp-seopress'); ?></a>
         </div>
         <?php

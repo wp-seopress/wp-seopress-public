@@ -62,7 +62,7 @@ class RenderContentAnalysis {
                                         <button type="button" aria-expanded="false" class="btn-toggle">
                                             <?php if (isset($value['impact'])) { ?>
                                                 <span class="impact <?php echo $value['impact']; ?>" aria-hidden="true"></span>
-                                                <span class="screen-reader-text"><?php printf(__('Degree of severity: %s','wp-seopress'), $value['impact']); ?></span>
+                                                <span class="screen-reader-text"><?php /* translators: %s impact of this analysis, eg: high */ printf(__('Degree of severity: %s','wp-seopress'), $value['impact']); ?></span>
                                             <?php } ?>
                                             <span class="seopress-arrow" aria-hidden="true"></span>
                                             <?php echo $value['title']; ?>

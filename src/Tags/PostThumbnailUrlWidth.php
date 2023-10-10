@@ -12,7 +12,7 @@ class PostThumbnailUrlWidth implements GetTagValue {
     const NAME = 'post_thumbnail_url_width';
 
     public static function getDescription() {
-        return __('Post Thumbnail URL Width', 'wp-seopress');
+        return __('Post Thumbnail Width', 'wp-seopress');
     }
 
     public function getValue($args = null) {

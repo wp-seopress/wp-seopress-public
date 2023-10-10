@@ -182,18 +182,7 @@ var _paq = window._paq || [];\n";
 	g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://".untrailingslashit($seopress_matomo_src)."/matomo.js'; s.parentNode.insertBefore(g,s);
 	})();\n";
 
-		$seopress_matomo_html .= "</script>\n";
-
-		//no JS
-		$no_js = NULL;
-		if (seopress_get_service('GoogleAnalyticsOption')->getMatomoNoJS() ==='1') {
-			$no_js = '<noscript><p><img src="https://'.seopress_get_service('GoogleAnalyticsOption')->getMatomoId().'/matomo.php?idsite='.seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId().'&amp;rec=1" style="border:0;" alt="" /></p></noscript>';
-			$no_js = apply_filters('seopress_matomo_no_js', $no_js);
-		}
-
-		if ($no_js) {
-			$seopress_matomo_html .= $no_js;
-		}
+		$seopress_matomo_html .= "</script>";
 
 		$seopress_matomo_html = apply_filters('seopress_matomo_tracking_html', $seopress_matomo_html);
 
@@ -209,4 +198,36 @@ add_action('seopress_matomo_html', 'seopress_matomo_js', 10, 1);
 function seopress_matomo_js_arguments() {
 	$echo = true;
 	do_action('seopress_matomo_html', $echo);
+}
+
+function seopress_matomo_nojs() {
+	$echo = true;
+	do_action('seopress_matomo_body_html', $echo);
+}
+
+add_action('seopress_matomo_body_html', 'seopress_matomo_body_js', 10, 1);
+function seopress_matomo_body_js($echo) {
+    if (!empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoId()) && !empty(seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId())) {
+        //Init
+        $html = '';
+
+        //no JS
+		$no_js = NULL;
+		if (seopress_get_service('GoogleAnalyticsOption')->getMatomoNoJS() ==='1') {
+			$no_js = '<noscript><p><img src="https://'.seopress_get_service('GoogleAnalyticsOption')->getMatomoId().'/matomo.php?idsite='.seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId().'&amp;rec=1" style="border:0;" alt="" /></p></noscript>';
+			$no_js = apply_filters('seopress_matomo_no_js', $no_js);
+		}
+
+		if ($no_js) {
+			$html .= $no_js;
+		}
+
+		$html = apply_filters('seopress_matomo_tracking_body_html', $html);
+
+		if ($echo == true) {
+			echo $html;
+		} else {
+			return $html;
+		}
+    }
 }

@@ -10,7 +10,7 @@ function seopress_migration_tool($plugin, $name) {
 
     $html = '<div id="' . $plugin . '-migration-tool" class="postbox section-tool">
         <div class="inside">
-                <h3>' . sprintf(__('Import posts and terms (if available) metadata from %s', 'wp-seopress'), $name) . '</h3>
+                <h3>' . /* translators: %s SEO plugin name */ sprintf(__('Import posts and terms (if available) metadata from %s', 'wp-seopress'), $name) . '</h3>
 
                 <p>' . __('By clicking Migrate, we\'ll import:', 'wp-seopress') . '</p>
 
@@ -40,7 +40,7 @@ function seopress_migration_tool($plugin, $name) {
 
                 <div class="seopress-notice is-warning">
                     <p>
-                        ' . sprintf(__('<strong>WARNING:</strong> Migration will delete / update all <strong>%1$s posts and terms metadata</strong>. Some dynamic variables will not be interpreted. We do <strong>NOT delete any %2$s data</strong>.', 'wp-seopress'), $seo_title, $name) . '
+                        ' . /* translators: %1$s defaut: SEOPress, %2$s competitor SEO plugin name */ sprintf(__('<strong>WARNING:</strong> Migration will delete / update all <strong>%1$s posts and terms metadata</strong>. Some dynamic variables will not be interpreted. We do <strong>NOT delete any %2$s data</strong>.', 'wp-seopress'), $seo_title, $name) . '
                     </p>
                 </div>
 

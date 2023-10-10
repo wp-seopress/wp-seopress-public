@@ -8,6 +8,9 @@ use SEOPress\Core\Hooks\ExecuteHooksBackend;
 use SEOPress\Thirds\RankMath\Tags;
 
 class RankMath implements ExecuteHooksBackend {
+
+    protected $tagsRankMath;
+
     public function __construct() {
         $this->tagsRankMath = new Tags();
     }

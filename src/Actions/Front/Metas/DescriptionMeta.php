@@ -7,6 +7,9 @@ defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 use SEOPress\Core\Hooks\ExecuteHooksFrontend;
 
 class DescriptionMeta implements ExecuteHooksFrontend {
+
+    protected $tagsToStringService;
+
     public function __construct() {
         $this->tagsToStringService = seopress_get_service('TagsToString');
     }

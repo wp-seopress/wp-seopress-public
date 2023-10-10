@@ -73,7 +73,10 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
                                 if ($post && absint($shop_page_id) === absint($post->ID)) { ?>
                         <p class="notice notice-info">
-                            <?php printf(__('This is your <strong>Shop page</strong>. Go to <a href="%s"><strong>SEO > Titles & Metas > Archives > Products</strong></a> to edit your title and meta description.', 'wp-seopress'), admin_url('admin.php?page=seopress-titles')); ?>
+                            <?php
+                                /* translators: %s documentation URL */
+                                printf(__('This is your <strong>Shop page</strong>. Go to <a href="%s"><strong>SEO > Titles & Metas > Archives > Products</strong></a> to edit your title and meta description.', 'wp-seopress'), admin_url('admin.php?page=seopress-titles'));
+                            ?>
                         </p>
                         <?php }
                             }
@@ -304,7 +307,11 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                         <?php if (('post' == $typenow || 'product' == $typenow) && ('post.php' == $pagenow || 'post-new.php' == $pagenow)) { ?>
                         <p>
                             <label for="seopress_robots_primary_cat"><?php _e('Select a primary category', 'wp-seopress'); ?></label>
-                            <span class="description"><?php _e('Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress'); ?>
+                            <span class="description">
+                                <?php
+                                    _e('Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress');
+                                ?>
+                            </span>
                         </p>
                         <select id="seopress_robots_primary_cat" name="seopress_robots_primary_cat">
 
@@ -612,7 +619,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             </p>
                         <?php } ?>
                         <p>
-                            <label for="seopress_redirections_logged_status"><?php _e('Select a login status: ', 'wp-seopress'); ?></label>
+                            <label for="seopress_redirections_logged_status"><?php _e('Select a login status:', 'wp-seopress'); ?></label>
 
                             <select id="seopress_redirections_logged_status" name="seopress_redirections_logged_status">
                                 <option <?php echo selected('both', $seopress_redirections_logged_status); ?>
@@ -628,7 +635,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                         </p>
                         <p>
 
-                            <label for="seopress_redirections_type"><?php _e('Select a redirection type: ', 'wp-seopress'); ?></label>
+                            <label for="seopress_redirections_type"><?php _e('Select a redirection type:', 'wp-seopress'); ?></label>
 
                             <select id="seopress_redirections_type" name="seopress_redirections_type">
                                 <option <?php echo selected('301', $seopress_redirections_type, false); ?>

@@ -31,6 +31,18 @@ function seopress_titles_home_site_title_callback()
     aria-label="<?php _e('Site title', 'wp-seopress'); ?>"
     value="<?php esc_html_e($check); ?>" />
 
+<div class="wrap-sp-progress">
+    <div class="sp-progress" style="margin:0">
+        <div id="seopress_titles_title_counters_progress" class="sp-progress-bar"
+            role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="0"
+            aria-valuemax="100">1%</div>
+    </div>
+    <div class="wrap-seopress-counters">
+        <div id="seopress_titles_title_counters"></div>
+        <?php _e(' (maximum recommended limit)', 'wp-seopress'); ?>
+    </div>
+</div>
+
 <div class="wrap-tags">
     <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title" data-tag="%%sitetitle%%">
         <span class="dashicons dashicons-plus-alt2"></span>
@@ -63,7 +75,11 @@ function seopress_titles_home_site_title_alt_callback()
     aria-label="<?php _e('Alternative site title', 'wp-seopress'); ?>"
     value="<?php esc_html_e($check); ?>" />
 
-    <p class="description"><?php printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the <a href="%s" target="_blank">content guidelines</a>.<span class="dashicons dashicons-external"></span>','wp-seopress'), $docs['titles']['alt_title']); ?></p>
+    <p class="description">
+        <?php
+            /* translators: %s documentation URL */
+            printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the %1$s<a href="%2$s" target="_blank">content guidelines</a>.','wp-seopress'), ' <span class="dashicons dashicons-external"></span>', $docs['titles']['alt_title']); ?>
+    </p>
 
     <?php
 }
@@ -132,31 +148,31 @@ function seopress_titles_single_titles_callback()
 
                 <label
                     for="seopress_titles_single_cpt_enable[<?php echo $seopress_cpt_key; ?>]">
-                    <?php _e('Click to hide any SEO metaboxes / columns for this post type', 'wp-seopress'); ?>
+                    <?php _e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </label>
 
                 <?php if ('1' == $check) { ?>
                 <span id="titles-state-default" class="feature-state">
                     <span class="dashicons dashicons-arrow-left-alt"></span>
-                    <?php _e('Click to display any SEO metaboxes / columns for this post type', 'wp-seopress'); ?>
+                    <?php _e('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </span>
                 <span id="titles-state" class="feature-state feature-state-off">
                     <span class="dashicons dashicons-arrow-left-alt"></span>
-                    <?php _e('Click to hide any SEO metaboxes / columns for this post type', 'wp-seopress'); ?>
+                    <?php _e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </span>
                 <?php } else { ?>
                 <span id="titles-state-default" class="feature-state">
                     <span class="dashicons dashicons-arrow-left-alt"></span>
-                    <?php _e('Click to hide any SEO metaboxes / columns for this post type', 'wp-seopress'); ?>
+                    <?php _e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </span>
                 <span id="titles-state" class="feature-state feature-state-off">
                     <span class="dashicons dashicons-arrow-left-alt"></span>
-                    <?php _e('Click to display any SEO metaboxes / columns for this post type', 'wp-seopress'); ?>
+                    <?php _e('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </span>
                 <?php }
 
-        $toggle_txt_on  = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to display any SEO metaboxes / columns for this post type', 'wp-seopress');
-        $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to hide any SEO metaboxes / columns for this post type', 'wp-seopress'); ?>
+        $toggle_txt_on  = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress');
+        $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 <script>
                     jQuery(document).ready(function($) {
                         $('input[data-id=<?php echo $seopress_cpt_key; ?>]')
@@ -319,7 +335,10 @@ function seopress_titles_single_titles_callback()
         if ('1' == $check && isset($cpt_in_sitemap[$seopress_cpt_key]) && '1' === $cpt_in_sitemap[$seopress_cpt_key]['include']) { ?>
                 <div class="seopress-notice is-error is-inline">
                     <p>
-                        <?php printf(__('This custom post type is <strong>NOT</strong> excluded from your XML sitemaps despite the fact that it is set to <strong>NOINDEX</strong>. We recommend that you <a href="%s">check this out here</a>.', 'wp-seopress'), admin_url('admin.php?page=seopress-xml-sitemap')); ?>
+                        <?php
+                            /* translators: %s documentation URL */
+                            printf(__('This custom post type is <strong>NOT</strong> excluded from your XML sitemaps despite the fact that it is set to <strong>NOINDEX</strong>. We recommend that you <a href="%s">check this out here</a>.', 'wp-seopress'), admin_url('admin.php?page=seopress-xml-sitemap'));
+                        ?>
                     </p>
                 </div>
                 <?php }
@@ -408,8 +427,11 @@ function seopress_titles_single_titles_callback()
                 </label>
 
                 <p class="description">
-                    <?php printf(__('This option does not apply to traditional search results. <a href="%s" target="_blank">Learn more</a>', 'wp-seopress'), $docs['titles']['thumbnail']); ?><span
-                        class="dashicons dashicons-external"></span>
+                    <?php
+                        /* translators: %s documentation URL */
+                        printf(__('This option does not apply to traditional search results. <a href="%s" target="_blank">Learn more</a>', 'wp-seopress'), $docs['titles']['thumbnail']);
+                    ?>
+                    <span class="dashicons dashicons-external"></span>
                 </p>
 
                 <?php if (isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs'])) {
@@ -539,32 +561,32 @@ function seopress_titles_tax_titles_callback()
 
                     <label
                         for="seopress_titles_tax_titles_enable[<?php echo $seopress_tax_key; ?>]">
-                        <?php _e('Click to hide any SEO metaboxes for this taxonomy', 'wp-seopress'); ?>
+                        <?php _e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </label>
 
                     <?php
         if ('1' == $check) { ?>
                     <span id="titles-state-default" class="feature-state">
                         <span class="dashicons dashicons-arrow-left-alt"></span>
-                        <?php _e('Click to display any SEO metaboxes for this taxonomy', 'wp-seopress'); ?>
+                        <?php _e('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </span>
                     <span id="titles-state" class="feature-state feature-state-off">
                         <span class="dashicons dashicons-arrow-left-alt"></span>
-                        <?php _e('Click to hide any SEO metaboxes for this taxonomy', 'wp-seopress'); ?>
+                        <?php _e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </span>
                     <?php } else { ?>
                     <span id="titles-state-default" class="feature-state">
                         <span class="dashicons dashicons-arrow-left-alt"></span>
-                        <?php _e('Click to hide any SEO metaboxes for this taxonomy', 'wp-seopress'); ?>
+                        <?php _e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </span>
                     <span id="titles-state" class="feature-state feature-state-off">
                         <span class="dashicons dashicons-arrow-left-alt"></span>
-                        <?php _e('Click to display any SEO metaboxes for this taxonomy', 'wp-seopress'); ?>
+                        <?php _e('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </span>
                     <?php }
 
-        $toggle_txt_on  = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to display any SEO metaboxes for this taxonomy', 'wp-seopress');
-        $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to hide any SEO metaboxes for this taxonomy', 'wp-seopress');
+        $toggle_txt_on  = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress');
+        $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress');
 ?>
                     <script>
                         jQuery(document).ready(function($) {
@@ -1343,7 +1365,10 @@ function seopress_titles_noindex_callback()
                                                                 </p>
 
                                                                 <p class="description">
-                                                                    <?php printf(__('Check also the <strong>"Search engine visibility"</strong> setting from the <a href="%s">WordPress Reading page</a>.', 'wp-seopress'), admin_url('options-reading.php')); ?>
+                                                                    <?php
+                                                                        /* translators: %s documentation URL */
+                                                                        printf(__('Check also the <strong>"Search engine visibility"</strong> setting from the <a href="%s">WordPress Reading page</a>.', 'wp-seopress'), admin_url('options-reading.php'));
+                                                                    ?>
                                                                 </p>
 
                                                                 <?php if (isset($options['seopress_titles_noindex'])) {

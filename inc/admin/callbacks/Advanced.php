@@ -84,7 +84,7 @@ function seopress_advanced_advanced_category_url_callback() {
 	if (get_option('category_base')) {
 		$category_base = '/' . get_option('category_base');
 	}
-
+    /* translators: %s category base, eg: /category/ */
 	printf(__('Remove <strong>%s</strong> in your permalinks', 'wp-seopress'), $category_base); ?>
 </label>
 
@@ -174,7 +174,7 @@ function seopress_advanced_advanced_wp_generator_callback() {
 	<?php _e('Remove WordPress meta generator in source code', 'wp-seopress'); ?>
 </label>
 
-<pre><?php esc_attr_e('<meta name="generator" content="WordPress 6.2" />', 'wp-seopress'); ?></pre>
+<pre><?php echo esc_attr('<meta name="generator" content="WordPress 6.2" />'); ?></pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_generator'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_generator']);

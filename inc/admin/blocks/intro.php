@@ -16,7 +16,12 @@
     </div>
 
     <div>
-        <h1><?php printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '6.8.0.1'); ?></h1>
+        <h1>
+            <?php
+                /* translators: %s displays the current version number */
+                printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '6.9');
+            ?>
+        </h1>
         <p><?php _e('Your control center for SEO.', 'wp-seopress'); ?></p>
     </div>
 </div>

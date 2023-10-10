@@ -139,7 +139,8 @@ function seopress_do_real_preview()
             if (is_wp_error($response) || '404' == wp_remote_retrieve_response_code($response)) {
                 $data['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
             } elseif (is_wp_error($response) || '401' == wp_remote_retrieve_response_code($response)) {
-                $data['title']                   = sprintf(__('Your site is protected by an authentication. <a href="%s" target="_blank">Fix this</a> <span class="dashicons dashicons-external"></span>', 'wp-seopress'), $docs['google_preview']['authentification']);
+                /* translators: %s documentation URL */
+                $data['title']                   = sprintf(__('Your site is protected by an authentication. <a href="%1$s" target="_blank">Fix this</a> %2$s', 'wp-seopress'), $docs['google_preview']['authentification'], ' <span class="dashicons dashicons-external"></span>');
             } else {
                 $response = wp_remote_retrieve_body($response);
 
@@ -470,6 +471,8 @@ function seopress_do_real_preview()
                                             }
                                             @unlink($img_src);
                                         }
+                                    } elseif('' !== $img->getAttribute('alt') || $img->hasAttribute('alt')) {
+                                        $img_with_alt[] .= $img->getAttribute('src');
                                     }
                                 }
                             }

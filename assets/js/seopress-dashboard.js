@@ -188,6 +188,9 @@ jQuery(document).ready(function ($) {
         } else if (clean_hash[1] == '3') { //Page Speed Tab
             $('#tab_seopress_ps-tab').addClass("nav-tab-active");
             $('#tab_seopress_ps_tools').addClass("active");
+        } else if (clean_hash[1] == '4') { //GSC Tab
+            $('#tab_seopress_gsc-tab').addClass("nav-tab-active");
+            $('#tab_seopress_gsc').addClass("active");
         } else if (seopress_admin_tab_session_storage) {
             $('#seopress-admin-tabs').find('.nav-tab.nav-tab-active').removeClass("nav-tab-active");
             $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");

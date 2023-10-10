@@ -1,0 +1,42 @@
+{
+  "apiVersion": 2,
+  "name": "wpseopress/faq-block",
+  "title": "FAQ",
+  "description": "Allows to easily build FAQs",
+  "icon": "index-card",
+  "category": "wpseopress",
+  "textdomain": "wp-seopress",
+  "supports": {
+    "html": false,
+    "color": {
+      "background": true,
+      "gradients": true,
+      "link": true,
+      "text": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontStyle": true,
+      "__experimentalFontWeight": true,
+      "__experimentalLetterSpacing": true,
+      "__experimentalTextTransform": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true,
+        "fontFamily": true,
+        "fontStyle": true,
+        "letterSpacing": true,
+        "textTransform": true,
+        "lineHeight": true
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "viewScript": "file:./accordion.js"
+}

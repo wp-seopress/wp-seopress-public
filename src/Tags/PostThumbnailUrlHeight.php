@@ -12,7 +12,7 @@ class PostThumbnailUrlHeight implements GetTagValue {
     const NAME = 'post_thumbnail_url_height';
 
     public static function getDescription() {
-        return __('Post Thumbnail URL Height', 'wp-seopress');
+        return __('Post Thumbnail Height', 'wp-seopress');
     }
 
     public function getValue($args = null) {

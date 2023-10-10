@@ -4,69 +4,7 @@ if (! defined('ABSPATH')) {
     die();
 }
 
-function seopress_register_block_faq() {
-    $path = SEOPRESS_PLUGIN_DIR_PATH . 'public/editor/blocks/faq/index.asset.php';
-    if(!file_exists($path)){
-        return;
-    }
-
-    $asset_file = include_once $path;
-    wp_register_script(
-        'wp-seopress-faq-block',
-        SEOPRESS_URL_PUBLIC . '/editor/blocks/faq/index.js',
-        $asset_file['dependencies'],
-        $asset_file['version']
-    );
-
-    wp_register_style(
-        'wp-seopress-faq-block',
-        SEOPRESS_URL_PUBLIC . '/editor/blocks/faq/index.css',
-        '',
-        $asset_file['version']
-    );
-
-    register_block_type('wpseopress/faq-block', [
-        'editor_script' => 'wp-seopress-faq-block',
-        'editor_style'  => 'wp-seopress-faq-block',
-        'attributes' => array(
-            'faqs' => array(
-                'type'    => 'array',
-                'default' => array( '' ),
-                'items'   => array(
-                    'type' => 'object',
-                ),
-            ),
-            'listStyle' => array(
-                'type' => 'string',
-                'default' => 'none'
-            ),
-            'titleWrapper' => array(
-                'type' => 'string',
-                'default' => 'p'
-            ),
-            'imageSize' => array(
-                'type' => 'string',
-                'default' => 'thumbnail'
-            ),
-            'showFAQScheme' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'showAccordion' => array(
-                'type' => 'boolean',
-                'default' => false
-            ),
-            'isProActive' => array(
-                'type'    => 'boolean',
-                'default' => is_plugin_active( 'wp-seopress-pro/seopress-pro.php' )
-            )
-        ),
-        'render_callback' => 'seopress_block_faq_render_frontend',
-    ]);
-}
-
-function seopress_block_faq_render_frontend($attributes)
-{
+function seopress_block_faq_render_frontend( $attributes ){
     if (is_admin() || defined('REST_REQUEST')) {
         return;
     }
@@ -102,21 +40,22 @@ function seopress_block_faq_render_frontend($attributes)
             break;
     }
 
+    $wrapper_attributes = get_block_wrapper_attributes([ 'class'=> 'wpseopress-faqs' ]);
     switch ($attributes['listStyle']) {
         case 'ul':
-            $listStyleTag = '<ul class="wpseopress-faqs">';
+            $listStyleTag = sprintf( '<ul %s>', $wrapper_attributes);
             $listStyleCloseTag = '</ul>';
             $listItemStyle = '<li class="wpseopress-faq">';
             $listItemStyleClosingTag = '</li>';
             break;
         case 'ol':
-            $listStyleTag = '<ol class="wpseopress-faqs">';
+            $listStyleTag = sprintf( '<ol %s>', $wrapper_attributes);
             $listStyleCloseTag = '</ol>';
             $listItemStyle = '<li class="wpseopress-faq">';
             $listItemStyleClosingTag = '</li>';
             break;
         default:
-            $listStyleTag = '<div class="wpseopress-faqs">';
+            $listStyleTag = sprintf( '<div %s>', $wrapper_attributes);
             $listStyleCloseTag = '</div>';
             $listItemStyle = '<div class="wpseopress-faq">';
             $listItemStyleClosingTag = '</div>';

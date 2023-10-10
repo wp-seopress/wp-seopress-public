@@ -610,7 +610,7 @@ function seopress_google_analytics_other_tracking_callback() {
     $check   = isset($options['seopress_google_analytics_other_tracking']) ? esc_textarea($options['seopress_google_analytics_other_tracking']) : null;
 
     printf(
-'<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (head). Do NOT paste GA4 or Universal Analytics codes here. They are automatically added to your source code.', 'wp-seopress') . '" aria-label="' . __('Additional tracking code field', 'wp-seopress') . '">%s</textarea>',
+'<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (head). Do NOT paste GA4 or Matomo codes here. They are automatically added to your source code.', 'wp-seopress') . '" aria-label="' . __('Additional tracking code field', 'wp-seopress') . '">%s</textarea>',
 $check); ?>
 <p class="description">
     <?php _e('This code will be added in the head section of your page.', 'wp-seopress'); ?>
@@ -911,7 +911,7 @@ function seopress_google_analytics_cd_author_callback() {
     <option <?php if ('dimension' . $i . '' == $selected) { ?>
         selected="selected"
         <?php } ?>
-        value="dimension<?php echo $i; ?>"><?php printf(__('Custom Dimension #%d', 'wp-seopress'), $i); ?>
+        value="dimension<?php echo $i; ?>"><?php /* translators: %d dimension number */ printf(__('Custom Dimension #%d', 'wp-seopress'), $i); ?>
     </option>
     <?php } ?>
 </select>

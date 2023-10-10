@@ -57,6 +57,30 @@
     color: var(--primaryColor);
 }
 
+.wrap-yt-embed {
+    position: relative;
+    display: inline-block;
+}
+
+.wrap-yt-embed::after {
+    content: "\f522";
+    font-family: 'dashicons';
+    position: absolute;
+    left: calc(50% - 38px);
+    top: calc(50% - 24px);
+    font-size: 40px;
+    background: red;
+    width: 68px;
+    height: 48px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    padding-left: 5px;
+    box-sizing: border-box;
+}
+
 #adminmenu .toplevel_page_seopress-option .wp-menu-image.svg {
     background-size: 24px auto !important;
 }
@@ -462,6 +486,10 @@ table.fixed thead .column-seopress_noindex {
 }
 
 /* SEOPress header */
+body.seopress-white-label .seopress-option {
+    padding-top: 20px;
+}
+
 .seopress-styles #seopress-header {
     padding: 22px 120px 22px 40px;
     height: 64px;
@@ -2265,6 +2293,7 @@ body #seopress_cpt .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 }
 
 /* Counters */
+.seo_page_seopress-titles .wrap-sp-progress,
 .seo_page_seopress-instant-indexing .wrap-sp-progress {
     max-width: 35rem;
 }

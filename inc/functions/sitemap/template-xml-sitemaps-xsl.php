@@ -134,10 +134,10 @@ function seopress_xml_sitemap_index_xsl() {
 	$seopress_sitemaps_xsl .='<h1>'.__('XML Sitemaps','wp-seopress').'</h1>';
 	$seopress_sitemaps_xsl .='<p><a href="'.$home_url.'sitemaps.xml">Index sitemaps</a></p>';
 	$seopress_sitemaps_xsl .='<xsl:if test="sitemap:sitemapindex/sitemap:sitemap">';
-	$seopress_sitemaps_xsl .='<p>'.sprintf(__('This XML Sitemap Index file contains %s sitemaps.','wp-seopress'),'<xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/>').'</p>';
+	$seopress_sitemaps_xsl .='<p>'. /* translators: %s number of xml sub-sitemaps */ sprintf(__('This XML Sitemap Index file contains %s sitemaps.','wp-seopress'),'<xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/>').'</p>';
 	$seopress_sitemaps_xsl .='</xsl:if>';
 	$seopress_sitemaps_xsl .='<xsl:if test="sitemap:urlset/sitemap:url">';
-	$seopress_sitemaps_xsl .='<p>'.sprintf(__('This XML Sitemap contains %s URL(s).','wp-seopress'),'<xsl:value-of select="count(sitemap:urlset/sitemap:url)"/>').'</p>';
+	$seopress_sitemaps_xsl .='<p>'. /* translators: %s number of URLs in an xml sitemap */ sprintf(__('This XML Sitemap contains %s URL(s).','wp-seopress'),'<xsl:value-of select="count(sitemap:urlset/sitemap:url)"/>').'</p>';
 	$seopress_sitemaps_xsl .='</xsl:if>';
 	$seopress_sitemaps_xsl .='<div id="sitemaps">';
 	$seopress_sitemaps_xsl .='<div class="loc">';

@@ -1,0 +1,28 @@
+{
+  "apiVersion": 2,
+  "name": "wpseopress/sitemap",
+  "title": "Sitemap",
+  "description": "Display an HTML sitemap",
+  "icon": "list-view",
+  "category": "wpseopress",
+  "textdomain": "wp-seopress",
+  "supports": {
+    "html": false,
+    "color": {
+      "background": true,
+      "gradients": true,
+      "link": true,
+      "text": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

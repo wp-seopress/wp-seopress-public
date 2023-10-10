@@ -74,7 +74,6 @@ class ModuleMetabox implements ExecuteHooks
             'without_classes_pos' => ['\SEOPress\Tags\Schema', '\SEOPressPro\Tags\Schema']
         ]);
 
-
         $getLocale = get_locale();
         if (!empty($getLocale)) {
             $locale       = substr($getLocale, 0, 2);
@@ -105,6 +104,7 @@ class ModuleMetabox implements ExecuteHooks
             'NONCE'                   => wp_create_nonce('wp_rest'),
             'POST_ID'                 => $postId,
             'POST_TYPE'               => $postType,
+            'CURRENT_LANG'            => seopress_get_current_lang(),
             'IS_GUTENBERG'            => apply_filters('seopress_module_metabox_is_gutenberg', $isGutenberg),
             'SELECTOR_GUTENBERG'      => apply_filters('seopress_module_metabox_selector_gutenberg', '.edit-post-header .edit-post-header-toolbar__left'),
             'TOGGLE_MOBILE_PREVIEW' => apply_filters('seopress_toggle_mobile_preview', 1),

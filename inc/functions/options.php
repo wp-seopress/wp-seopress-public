@@ -257,15 +257,16 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
                             include_once dirname(__FILE__) . '/options-google-analytics.php'; //Google Analytics
                             include_once dirname(__FILE__) . '/options-matomo.php'; //Matomo
                             include_once dirname(__FILE__) . '/options-clarity.php'; //Clarity
-                            $data 					          = [];
-                            $data['gtag_js'] 		  = seopress_google_analytics_js(false);
-                            $data['matomo_js'] 		= seopress_matomo_js(false);
-                            $data['clarity_js'] 		= seopress_clarity_js(false);
-                            $data['body_js'] 		  = seopress_google_analytics_body_code(false);
-                            $data['head_js'] 		  = seopress_google_analytics_head_code(false);
-                            $data['footer_js'] 		= seopress_google_analytics_footer_code(false);
-                            $data['custom'] 		   = '';
-                            $data['custom'] 		   = apply_filters('seopress_custom_tracking', $data['custom']);
+                            $data = [];
+                            $data['gtag_js'] = seopress_google_analytics_js(false);
+                            $data['matomo_js'] = seopress_matomo_js(false);
+                            $data['clarity_js'] = seopress_clarity_js(false);
+                            $data['body_js'] = seopress_google_analytics_body_code(false);
+                            $data['matomo_body_js'] = seopress_matomo_body_js(false);
+                            $data['head_js'] = seopress_google_analytics_head_code(false);
+                            $data['footer_js'] = seopress_google_analytics_footer_code(false);
+                            $data['custom'] = '';
+                            $data['custom'] = apply_filters('seopress_custom_tracking', $data['custom']);
                             wp_send_json_success($data);
                         }
                     } else {
@@ -277,6 +278,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
                         $data['matomo_js'] 		= seopress_matomo_js(false);
                         $data['clarity_js'] 		= seopress_clarity_js(false);
                         $data['body_js'] 		  = seopress_google_analytics_body_code(false);
+                        $data['matomo_body_js'] = seopress_matomo_body_js(false);
                         $data['head_js'] 		  = seopress_google_analytics_head_code(false);
                         $data['footer_js'] 		= seopress_google_analytics_footer_code(false);
                         $data['custom'] 		   = '';
@@ -293,6 +295,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
                 $data['matomo_js'] 		= seopress_matomo_js(false);
                 $data['clarity_js'] 		= seopress_clarity_js(false);
                 $data['body_js'] 		  = seopress_google_analytics_body_code(false);
+                $data['matomo_body_js'] = seopress_matomo_body_js(false);
                 $data['head_js'] 		  = seopress_google_analytics_head_code(false);
                 $data['footer_js'] 		= seopress_google_analytics_footer_code(false);
                 $data['custom'] 		   = '';

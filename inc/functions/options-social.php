@@ -308,6 +308,7 @@ function seopress_social_fb_title_hook() {
     if ('1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable()) {
         //Init
         $seopress_social_og_title ='';
+        global $post;
 
         $variables = null;
         $variables = apply_filters('seopress_dyn_variables_fn', $variables);
@@ -323,7 +324,7 @@ function seopress_social_fb_title_hook() {
                 $seopress_social_og_title .= '<meta property="og:title" content="' . esc_attr(seopress_titles_the_title()) . '">';
                 $seopress_social_og_title .= "\n";
             }
-        } elseif (is_tax() || is_category() || is_tag()) {
+        } elseif ((is_tax() || is_category() || is_tag()) && !is_search()) {
             if ('' != seopress_social_fb_title_term_option()) {
                 $seopress_social_og_title .= '<meta property="og:title" content="' . seopress_social_fb_title_term_option() . '">';
                 $seopress_social_og_title .= "\n";
@@ -361,7 +362,7 @@ function seopress_social_fb_title_hook() {
 
             foreach ($matches['1'] as $key => $value) {
                 if (is_singular()) {
-                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
+                    $seopress_titles_cf_template_replace_array[] = $post !== null ? esc_attr(get_post_meta($post->ID, $value, true)) : '';
                 } elseif (is_tax() || is_category() || is_tag()) {
                     $seopress_titles_cf_template_replace_array[] = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, $value, true));
                 }
@@ -436,7 +437,6 @@ function seopress_social_fb_desc_hook() {
         $seopress_excerpt_length = apply_filters('seopress_excerpt_length', $seopress_excerpt_length);
         setup_postdata($post);
         if (is_home()) {
-
             if ('' != seopress_social_fb_desc_home_option()) {
                 $seopress_social_og_desc .= '<meta property="og:description" content="' . seopress_social_fb_desc_home_option() . '">';
                 $seopress_social_og_desc .= "\n";
@@ -456,7 +456,6 @@ function seopress_social_fb_desc_hook() {
                 $seopress_social_og_desc .= "\n";
             }
         } elseif (is_singular() && '1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && '' != seopress_social_fb_desc_post_option()) {
-
             $seopress_social_og_desc .= '<meta property="og:description" content="' . seopress_social_fb_desc_post_option() . '">';
             $seopress_social_og_desc .= "\n";
         } elseif (function_exists('is_shop') && is_shop() && '1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && '' != seopress_social_fb_desc_post_option()) {
@@ -465,8 +464,8 @@ function seopress_social_fb_desc_hook() {
         } elseif ('1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && function_exists('seopress_titles_the_description_content') && '' != seopress_titles_the_description_content()) {
             $seopress_social_og_desc .= '<meta property="og:description" content="' . seopress_titles_the_description_content() . '">';
             $seopress_social_og_desc .= "\n";
-        } elseif ('1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && '' != get_the_excerpt()) {
-            $seopress_social_og_desc .= '<meta property="og:description" content="' . wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(get_the_excerpt()))), $seopress_excerpt_length) . '">';
+        } elseif ('1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && $post !== null && has_excerpt($post->ID)) {
+            $seopress_social_og_desc .= '<meta property="og:description" content="' . wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses($post->post_excerpt))), $seopress_excerpt_length) . '">';
             $seopress_social_og_desc .= "\n";
         }
 
@@ -561,11 +560,7 @@ function seopress_thumbnail_in_content() {
         $dom            = new domDocument();
         $internalErrors = libxml_use_internal_errors(true);
 
-        if (function_exists('mb_convert_encoding')) {
-            $dom->loadHTML(mb_convert_encoding($seopress_get_the_content, 'HTML-ENTITIES', 'UTF-8'));
-        } else {
-            $dom->loadHTML('<?xml encoding="utf-8" ?>' . $seopress_get_the_content);
-        }
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $seopress_get_the_content);
 
         $dom->preserveWhiteSpace = false;
         if ('' != $dom->getElementsByTagName('img')) {
@@ -614,7 +609,7 @@ function seopress_social_fb_img_size_from_url($url, $post_id = null) {
 
     if ($post_id) {
         $post_id = get_post_thumbnail_id($post_id);
-    } elseif ($stop_attachment_url_to_postid === false) {
+    } elseif ($stop_attachment_url_to_postid === false  && $url !== null) {
         $post_id 			= attachment_url_to_postid($url);
 
         //If cropped image
@@ -686,15 +681,15 @@ function seopress_social_fb_img_hook() {
 
             $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_thumbnail_in_content());
 
-        } elseif ((is_tax() || is_category() || is_tag()) && '' != seopress_social_fb_img_term_option()) {//Custom OG:IMAGE for term from SEO metabox
+        } elseif ((is_tax() || is_category() || is_tag()) && !is_search() && '' != seopress_social_fb_img_term_option()) {//Custom OG:IMAGE for term from SEO metabox
 
             $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_fb_img_term_option());
 
-        } elseif (is_tax('product_cat') && '1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && seopress_social_fb_img_product_cat_option() !='') {//If product category thumbnail
+        } elseif (is_tax('product_cat') && !is_search() && '1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && seopress_social_fb_img_product_cat_option() !='') {//If product category thumbnail
 
             $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_social_fb_img_product_cat_option());
 
-        } elseif (is_post_type_archive() && '1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && !empty(seopress_get_service('SocialOption')->getSocialFacebookImgCpt()) ) {//Default OG:IMAGE from global settings
+        } elseif (is_post_type_archive() && !is_search() && '1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && !empty(seopress_get_service('SocialOption')->getSocialFacebookImgCpt()) ) {//Default OG:IMAGE from global settings
 
             $seopress_social_og_thumb .= seopress_social_fb_img_size_from_url(seopress_get_service('SocialOption')->getSocialFacebookImgCpt($post->ID));
 
@@ -850,6 +845,7 @@ function seopress_social_twitter_title_hook() {
     if ('1' === seopress_get_service('SocialOption')->getSocialTwitterCard()) {
         //Init
         $seopress_social_twitter_card_title ='';
+        global $post;
 
         $variables = null;
         $variables = apply_filters('seopress_dyn_variables_fn', $variables);
@@ -865,7 +861,7 @@ function seopress_social_twitter_title_hook() {
             } elseif (function_exists('seopress_titles_the_title') && '' != seopress_titles_the_title()) {
                 $seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . esc_attr(seopress_titles_the_title()) . '">';
             }
-        } elseif (is_tax() || is_category() || is_tag()) {//Term archive
+        } elseif ((is_tax() || is_category() || is_tag()) && !is_search()) {//Term archive
             if ('' != seopress_social_twitter_title_term_option()) {
                 $seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . seopress_social_twitter_title_term_option() . '">';
             } elseif ('1' === seopress_get_service('SocialOption')->getSocialTwitterCardOg() && '' != seopress_social_fb_title_term_option()) {
@@ -904,7 +900,7 @@ function seopress_social_twitter_title_hook() {
 
             foreach ($matches['1'] as $key => $value) {
                 if (is_singular()) {
-                    $seopress_titles_cf_template_replace_array[] = esc_attr(get_post_meta($post->ID, $value, true));
+                    $seopress_titles_cf_template_replace_array[] = $post !== null ? esc_attr(get_post_meta($post->ID, $value, true)) : '';
                 } elseif (is_tax() || is_category() || is_tag()) {
                     $seopress_titles_cf_template_replace_array[] = esc_attr(get_term_meta(get_queried_object()->{'term_id'}, $value, true));
                 }
@@ -1010,8 +1006,8 @@ function seopress_social_twitter_desc_hook() {
             $seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . seopress_titles_the_description_content() . '">';
         } elseif ('1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && function_exists('seopress_titles_the_description_content') && '' != seopress_titles_the_description_content() && '1' === seopress_get_service('SocialOption')->getSocialTwitterCardOg()) {
             $seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . seopress_titles_the_description_content() . '">';
-        } elseif ('' != get_the_excerpt()) {
-            $seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(get_the_excerpt()))), $seopress_excerpt_length) . '">';
+        } elseif ($post !== null && has_excerpt($post->ID)) {
+            $seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses($post->post_excerpt))), $seopress_excerpt_length) . '">';
         }
 
         //Apply dynamic variables
@@ -1102,11 +1098,11 @@ function seopress_social_twitter_img_hook() {
             $url = get_the_post_thumbnail_url($post, 'large');
         } elseif ('' != seopress_thumbnail_in_content() && (is_singular() || (function_exists('is_shop') && is_shop()))) {
             $url = seopress_thumbnail_in_content();
-        } elseif ((is_tax() || is_category() || is_tag()) && '' != seopress_social_twitter_img_term_option()) {//Term archive
+        } elseif ((is_tax() || is_category() || is_tag()) && !is_search() && '' != seopress_social_twitter_img_term_option()) {//Term archive
             $url = seopress_social_twitter_img_term_option();
-        } elseif ((is_tax() || is_category() || is_tag()) && '' != seopress_social_fb_img_term_option() && '1' === seopress_get_service('SocialOption')->getSocialTwitterCardOg()) {
+        } elseif ((is_tax() || is_category() || is_tag()) && !is_search() && '' != seopress_social_fb_img_term_option() && '1' === seopress_get_service('SocialOption')->getSocialTwitterCardOg()) {
             $url = seopress_social_fb_img_term_option();
-        } elseif (is_tax('product_cat') && seopress_social_fb_img_product_cat_option() !='') {//If product category thumbnail
+        } elseif (is_tax('product_cat') && !is_search() && seopress_social_fb_img_product_cat_option() !='') {//If product category thumbnail
             $url = seopress_social_fb_img_product_cat_option();
         } elseif ('' !== seopress_get_service('SocialOption')->getSocialTwitterImg()) {//Default Twitter
             $url = seopress_get_service('SocialOption')->getSocialTwitterImg();

@@ -226,7 +226,9 @@ function seopress_admin_header($context = "") {
 								$total = $notifications['total'];
 							}
 						?>
-						<h2><?php printf(__('Notifications <span>(%d)</span>', 'wp-seopress'), $total); ?></h2>
+						<h2><?php
+                        /* translators: %d number of notifications */
+                        printf(__('Notifications <span>(%d)</span>', 'wp-seopress'), $total); ?></h2>
 						<a href="#seopress-hidden-notifications" class="btnLink"><?php _e('Show hidden','wp-seopress'); ?></a>
 					</div>
 				</div>

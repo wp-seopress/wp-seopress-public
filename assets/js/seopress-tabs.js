@@ -261,6 +261,67 @@ jQuery(document).ready(function ($) {
         });
     });
 
+
+
+
+
+    if ($("#seopress_titles_home_site_title").length) {
+        const $ = jQuery;
+
+        var progress = 0;
+        var meta_title_placeholder = $("#seopress_titles_home_site_title").attr("placeholder");
+        var initialMetaTitleVal = $("#seopress_titles_home_site_title").val();
+
+        $("#seopress_titles_title_counters").after('<div id="seopress_titles_title_counters_val">/ 60</div>');
+
+        function updateCounters(meta_title_val) {
+            $("#seopress_titles_title_counters").css("color", "inherit");
+
+            if (meta_title_val.length > 60) {
+                $("#seopress_titles_title_counters").css("color", "red");
+            }
+
+            if (meta_title_val.length == 0 && meta_title_placeholder.length > 60) {
+                $("#seopress_titles_title_counters").css("color", "red");
+            }
+
+            $("#seopress_titles_title_counters").text(meta_title_val.length);
+
+            if (meta_title_placeholder.length) {
+                progress = Math.round(meta_title_val.length / 60 * 100);
+            }
+
+            if (progress >= 100) {
+                progress = 100;
+            }
+
+            $("#seopress_titles_title_counters_progress").attr("aria-valuenow", progress);
+            $("#seopress_titles_title_counters_progress").text(progress + "%");
+            $("#seopress_titles_title_counters_progress").css("width", progress + "%");
+        }
+
+        $("#seopress_titles_home_site_title").on("keyup paste change click", function (e) {
+            var meta_title_val = $(this).val();
+
+            if ($(".snippet-title-custom:visible").length > 0) {
+                meta_title_val = $(".snippet-title-custom").text();
+            } else if ($(".snippet-title:visible").length > 0) {
+                meta_title_val = $(".snippet-title").text();
+            } else if ($(".snippet-title-default:visible").length > 0) {
+                meta_title_val = $(".snippet-title-default").text();
+            }
+
+            updateCounters(meta_title_val);
+        });
+
+        // Display character count on initial load
+        updateCounters(initialMetaTitleVal);
+    }
+
+
+
+
+
     //Instant Indexing: Display keywords counter
     if ($("#seopress_instant_indexing_manual_batch").length) {
         newLines = $('#seopress_instant_indexing_manual_batch').val().split("\n").length;

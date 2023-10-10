@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdu
 Donate link: https://www.seopress.org/
 Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content analysis, instant indexing, breadcrumbs, analytics, rich snippets, broken link
 Requires at least: 5.0+
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 7.2
-Stable tag: 6.8.0.1
+Stable tag: 6.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,44 +19,44 @@ SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank 
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
-✔ <strong><a href="https://www.seopress.org/features/page-builders-integration/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Universal SEO metabox</a>: edit all your SEO from any page builder / theme builder. No more back and forth between your editor and the WordPress administration ;</strong>
-✔ <strong>No advertising, no footprints, white label, in backend AND frontend ;</strong>
-✔ <strong>Content analysis to help you write content optimized for search engines with unlimited target keywords ;</strong>
-✔ <strong><a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Import your post and term metadatas</a> from other plugins or CSV file in 1 click</strong>
-✔ <strong>Trusted by over 290,000 WordPress websites since 2017.</strong>
+✔ <strong><a href="https://www.seopress.org/features/page-builders-integration/" target="_blank">Universal SEO metabox</a>: edit all your SEO from any page builder / theme builder. No more back and forth between your editor and the WordPress administration</strong>
+✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
+✔ <strong>Content analysis to help you write content optimized for search engines with unlimited target keywords</strong>
+✔ <strong><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import your post and term metadatas</a> from other plugins or CSV file in 1 click</strong>
+✔ <strong>Trusted by over 290,000 WordPress websites since 2017</strong>
 
-<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / unlimited sites</strong></a>
+<a href="https://www.seopress.org/pricing/" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / unlimited sites</strong></a>
 
 [youtube https://www.youtube.com/watch?v=U-SSr_4uTTQ]
 
-<a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Features</a> | <a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Migrate</a> | <a href="https://www.seopress.org/wordpress-seo-plugins/pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">White Label</a> | <a href="https://www.seopress.org/features/openai/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">AI</a>
+<a href="https://www.seopress.org/features/" target="_blank">Features</a> | <a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Migrate</a> | <a href="https://www.seopress.org/wordpress-seo-plugins/pro/" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">White Label</a> | <a href="https://www.seopress.org/features/openai/" target="_blank">AI</a>
 
 <h3>Why SEOPress is the best WordPress SEO plugin?</h3>
 
 <ul>
-	<li><a href="https://www.seopress.org/seopress-productivity/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Save time</strong></a>: you prefer to work with Excel or Google Spreadsheets? No problem, you can import / export your metadata from CSV files with SEOPress PRO in few clicks!</li>
-	<li><a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Save money</strong></a>: SEOPress PRO is available for just $49 / year. Without any sites limit. Yes, you read that right: 1 site or 100 sites, the total price is still $49 / year!</li>
-	<li><a href="https://www.seopress.org/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>All in one SEO plugin</strong></a>: comes with all the features you need to optimize the SEO of your WordPress site. No need to install additional extensions to manage redirects, schemas, XML sitemaps... You reduce the risk of conflicts and maintenance costs. You don't need a special feature? Deactivate it with one click without losing your configuration. Child's play !</li>
-	<li><strong>Easy AND ready to use</strong>: you doesn't need to know SEO or code to use SEOPress. Most of the parameters are automatically set. And thanks to our installation wizard, configuring SEOPress has never been easier. To go further, we provide many <a href="https://www.seopress.org/support/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">free tutorials</a> and <a href="https://www.seopress.org/support/ebooks/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">ebooks to learn SEO</a> in order to better understand how to position your content on search engines.</li>
+	<li><a href="https://www.seopress.org/seopress-productivity/"><strong>Save time</strong></a>: you prefer to work with Excel or Google Spreadsheets? No problem, you can import / export your metadata from CSV files with SEOPress PRO in few clicks!</li>
+	<li><a href="https://www.seopress.org/pricing/"><strong>Save money</strong></a>: SEOPress PRO is available for just $49 / year. Without any sites limit. Yes, you read that right: 1 site or 100 sites, the total price is still $49 / year!</li>
+	<li><a href="https://www.seopress.org/features/"><strong>All in one SEO plugin</strong></a>: comes with all the features you need to optimize the SEO of your WordPress site. No need to install additional extensions to manage redirects, schemas, XML sitemaps... You reduce the risk of conflicts and maintenance costs. You don't need a special feature? Deactivate it with one click without losing your configuration. Child's play !</li>
+	<li><strong>Easy AND ready to use</strong>: you doesn't need to know SEO or code to use SEOPress. Most of the parameters are automatically set. And thanks to our installation wizard, configuring SEOPress has never been easier. To go further, we provide many <a href="https://www.seopress.org/support/" target="_blank">free tutorials</a> and <a href="https://www.seopress.org/support/ebooks/" target="_blank">ebooks to learn SEO</a> in order to better understand how to position your content on search engines.</li>
 </ul>
 
 <h3>SEOPress Free Features</h3>
 
 <ul>
-    <li><a href="https://www.seopress.org/support/guides/google-indexing-api-with-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Google Indexing API and IndexNow API (Bing / Yandex)</strong></a> to quickly index its content in these search engines</li>
+    <li><a href="https://www.seopress.org/support/guides/google-indexing-api-with-seopress/"><strong>Google Indexing API and IndexNow API (Bing / Yandex)</strong></a> to quickly index its content in these search engines</li>
 	<li><strong>Installation wizard</strong> to quickly setup your site</li>
 	<li><strong>Content analysis</strong> with unlimited keywords to help you write optimized content for search engines</li>
 	<li><strong>Mobile / Desktop Google Preview</strong> to see how your post will looks like in Google search results</li>
 	<li><strong>Facebook & Twitter Social Preview</strong> to see how your post will looks like on social media to increase conversions</li>
-	<li><strong>Titles</strong> (with <a href="https://www.seopress.org/support/guides/manage-titles-meta-descriptions/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme">dynamic variables</a>: custom fields, terms taxonomie...)</li>
+	<li><strong>Titles</strong> (with <a href="https://www.seopress.org/support/guides/manage-titles-meta-descriptions/">dynamic variables</a>: custom fields, terms taxonomie...)</li>
 	<li><strong>Meta descriptions</strong> (with dynamic variables too)</li>
-	<li><a href="https://www.seopress.org/features/social-media/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Open Graph and Twitter Cards</strong></a> to improve social media sharing (Facebook, LinkedIn, Instagram, Twitter, Pinterest, WhatsApp...)</li>
+	<li><a href="https://www.seopress.org/features/social-media/"><strong>Open Graph and Twitter Cards</strong></a> to improve social media sharing (Facebook, LinkedIn, Instagram, Twitter, Pinterest, WhatsApp...)</li>
 	<li><strong>Google Knowledge Graph</strong></li>
-	<li><a href="https://www.seopress.org/features/google-analytics/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Google Analytics</strong> and <strong>Matomo</strong></a> with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">GDPR compatibility</a>)</li>
+	<li><a href="https://www.seopress.org/features/google-analytics/"><strong>Google Analytics</strong> and <strong>Matomo</strong></a> with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">GDPR compatibility</a>)</li>
 	<li><strong>Microsoft Clarity integration</strong>: to capture session recordings, get instant heatmaps and powerful Insights for Free. Know how people interact with your site to improve user experience and conversions</li>
     <li><strong>Custom Canonical URL</strong></li>
-	<li><a href="https://www.seopress.org/support/guides/manage-meta-robots/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>Meta robots</strong></a> (noindex, nofollow, noimageindex, noarchive, nosnippet)</li>
-	<li>Build your <a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>custom XML Sitemap</strong></a> to improve search indexing</li>
+	<li><a href="https://www.seopress.org/support/guides/manage-meta-robots/"><strong>Meta robots</strong></a> (noindex, nofollow, noimageindex, noarchive, nosnippet)</li>
+	<li>Build your <a href="https://www.seopress.org/features/sitemaps/"><strong>custom XML Sitemap</strong></a> to improve search indexing</li>
 	<li><strong>Image XML Sitemaps</strong> to improve search indexing for Google Images</li>
 	<li>Build your custom <strong>HTML Sitemap</strong> to enhanced navigation for visitors and improve search indexing</li>
 	<li>Link your social media accounts to your site</li>
@@ -66,25 +66,25 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Remove ?replytocom to avoid duplicate content</li>
 	<li>Redirect attachment pages to post parent</li>
 	<li>Redirect attachment pages to their file URL</li>
-	<li><a href="https://www.seopress.org/features/image-seo/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Image SEO</strong></a>: Automatically set the image title / alt / caption / description</li>
+	<li><a href="https://www.seopress.org/features/image-seo/" target="_blank"><strong>Image SEO</strong></a>: Automatically set the image title / alt / caption / description</li>
 	<li>Import / Export settings from site to site.</li>
-	<li><a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Import posts and terms metadata</a> from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack, Squirrly and many other SEO plugins</li>
+	<li><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import posts and terms metadata</a> from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack, Squirrly and many other SEO plugins</li>
 	<li>...</li>
 </ul>
 
-<a href="https://www.seopress.org/wordpress-seo-plugins/free/features/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Check out all SEOPress Free features here</a>
+<a href="https://www.seopress.org/wordpress-seo-plugins/free/features/" target="_blank">Check out all SEOPress Free features here</a>
 
 <h3>SEOPress PRO: to go further with your SEO</h3>
 
 <ul>
-	<li><a href="https://www.seopress.org/features/openai/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Use Artificial Intelligence to generate SEO metadata. Bulk actions supported.</li>
-	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
-	<li><a href="https://www.seopress.org/features/sitemaps/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results. YouTube videos are automatically added.</li>
+	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Use Artificial Intelligence to generate SEO metadata. Bulk actions supported.</li>
+	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/" target="_blank"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
+	<li><a href="https://www.seopress.org/features/sitemaps/" target="_blank"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results. YouTube videos are automatically added.</li>
 	<li>Internal linking suggestions</li>
     <li>Inspect URL with Google Search Console: get details about crawling, indexing, mobile compatibility, schemas and more.</li>
-    <li><a href="https://www.seopress.org/features/google-search-console/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Search Console integration</strong></a>: get insights from your post / page / post type list with clicks, positions, CTR and impressions.</li>
-	<li><a href="https://www.seopress.org/features/google-suggest/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Suggestions in Content Analysis</strong></a> to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.</li>
-	<li><a href="https://www.seopress.org/features/google-structured-data-types/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Structured Data types</strong> (schema.org)</a>:
+    <li><a href="https://www.seopress.org/features/google-search-console/" target="_blank"><strong>Search Console integration</strong></a>: get insights from your post / page / post type list with clicks, positions, CTR and impressions.</li>
+	<li><a href="https://www.seopress.org/features/google-suggest/" target="_blank"><strong>Google Suggestions in Content Analysis</strong></a> to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.</li>
+	<li><a href="https://www.seopress.org/features/google-structured-data-types/" target="_blank"><strong>Google Structured Data types</strong> (schema.org)</a>:
 		<ol>
 			<li>article schema</li>
 			<li>local business schema</li>
@@ -103,30 +103,30 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 			<li>custom schema</li>
 		</ol>
 	<li><strong>Automatic Schemas</strong> with advanced conditions (AND, OR, Post types, taxonomies)</li>
-	<li><a href="https://www.seopress.org/features/breadcrumbs/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Breadcrumbs</strong></a> optimized with Schema.org, A11Y ready. Elementor users? <a href="https://www.youtube.com/watch?v=ID4xm1UVikc" target="_blank">Try our custom breadcrumbs widget!</a></li>
-	<li><a href="https://www.seopress.org/features/google-analytics/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Analytics Stats in Dashboard</strong></a> to quickly see your metrics without leaving your site</li>
-	<li><a href="https://www.seopress.org/features/local-seo/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Local Business</strong></a> to boost your local store</li>
+	<li><a href="https://www.seopress.org/features/breadcrumbs/" target="_blank"><strong>Breadcrumbs</strong></a> optimized with Schema.org, A11Y ready. Elementor users? <a href="https://www.youtube.com/watch?v=ID4xm1UVikc" target="_blank">Try our custom breadcrumbs widget!</a></li>
+	<li><a href="https://www.seopress.org/features/google-analytics/" target="_blank"><strong>Google Analytics Stats in Dashboard</strong></a> to quickly see your metrics without leaving your site</li>
+	<li><a href="https://www.seopress.org/features/local-seo/" target="_blank"><strong>Google Local Business</strong></a> to boost your local store</li>
 	<li><strong>Broken link checker (SEOPress BOT)</strong>: scan all your links in content to find errors (e.g. 404...)</li>
-	<li><a href="https://www.seopress.org/features/woocommerce-seo/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>WooCommerce</strong></a>: Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema (barcode), disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
+	<li><a href="https://www.seopress.org/features/woocommerce-seo/" target="_blank"><strong>WooCommerce</strong></a>: Product Global Identifiers type and Product Global Identifiers fields to WooCommerce metabox for product schema (barcode), disable crawling on cart page, checkout page, customer account pages, add OG Price / OG Currency for better sharing and more</li>
 	<li><strong>Easy Digital Downloads</strong>: add OG Price / OG Currency, remove EDD meta generator</li>
 	<li><strong>Dublin Core</strong> meta tags</li>
-	<li><a href="https://www.seopress.org/features/breadcrumbs/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Custom Breadcrumbs</strong></a> for single post types / term taxonomy</li>
+	<li><a href="https://www.seopress.org/features/breadcrumbs/" target="_blank"><strong>Custom Breadcrumbs</strong></a> for single post types / term taxonomy</li>
 	<li><strong>Google Page Speed Insights</strong> to analyse your site performances on Mobile / Desktop + your Core Web Vitals</li>
-	<li><a href="https://www.seopress.org/features/google-analytics/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Google Enhanced Ecommerce for WooCommerce</strong></a>: measure purchases, additions to and removals from shopping carts</li>
-	<li><a href="https://www.seopress.org/features/htaccess-robots-txt/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Edit your <strong>robots.txt</strong></a> file from the admin (multisite / multidomain ready)</li>
+	<li><a href="https://www.seopress.org/features/google-analytics/" target="_blank"><strong>Google Enhanced Ecommerce for WooCommerce</strong></a>: measure purchases, additions to and removals from shopping carts</li>
+	<li><a href="https://www.seopress.org/features/htaccess-robots-txt/" target="_blank">Edit your <strong>robots.txt</strong></a> file from the admin (multisite / multidomain ready)</li>
 	<li><strong>Google News Sitemap</strong> to get your posts on Google News</li>
 	<li><strong>404 Monitoring</strong>: Monitor your 404 errors to improve user experience, performances and increase the crawl budget allocated by Google</li>
 	<li><strong>Redirect 404 to homepage/custom url automatically</strong> with custom status code (301, 302, 307, 410 or 451)</li>
 	<li>Email notifications on 404</li>
-	<li><a href="https://www.seopress.org/features/301-redirects/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Redirect manager</strong></a>: create unlimited 301, 302, 307, 410 and 451 redirections. Regular expressions supported. Import / export redirections to CSV or htaccess file.</li>
+	<li><a href="https://www.seopress.org/features/301-redirects/" target="_blank"><strong>Redirect manager</strong></a>: create unlimited 301, 302, 307, 410 and 451 redirections. Regular expressions supported. Import / export redirections to CSV or htaccess file.</li>
 	<li>Import redirections using CSV</li>
 	<li>Import redirections from Redirections plugin (via a JSON file)</li>
-	<li><a href="https://www.seopress.org/features/htaccess-robots-txt/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Edit your <strong>htaccess file</strong></a> from the admin</li>
+	<li><a href="https://www.seopress.org/features/htaccess-robots-txt/" target="_blank">Edit your <strong>htaccess file</strong></a> from the admin</li>
 	<li>Easily customize your <strong>RSS feeds</strong></li>
 	<li>...</li>
 </ul>
 
-<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress PRO now!</strong></a>
+<a href="https://www.seopress.org/pricing/" target="_blank"><strong>Buy SEOPress PRO now!</strong></a>
 
 <h3>WooCommerce SEO (SEOPress PRO required)</h3>
 We support WooCommerce and Easy Digital Downloads for e-commerce sites.
@@ -144,9 +144,9 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 	<li>...</li>
 </ul>
 
-<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Increase your sales now!</strong></a>
+<a href="https://www.seopress.org/pricing/" target="_blank"><strong>Increase your sales now!</strong></a>
 
-<h3><a href="https://www.seopress.org/features/page-builders-integration/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Universal SEO metabox</a>: edit your metadata from any page builder / editor</h3>
+<h3><a href="https://www.seopress.org/features/page-builders-integration/" target="_blank">Universal SEO metabox</a>: edit your metadata from any page builder / editor</h3>
 
 [youtube https://youtu.be/sf0ocG7vQMM]
 
@@ -178,14 +178,14 @@ We provide deep integration with Elementor page builder. Directly from Elementor
 
 [youtube https://youtu.be/p6v9Jd5lRIU]
 
-<a href="https://www.seopress.org/pricing/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank"><strong>Buy SEOPress Insights now!</strong></a>
+<a href="https://www.seopress.org/pricing/" target="_blank"><strong>Buy SEOPress Insights now!</strong></a>
 
 <h3>Developers will love SEOPress!</h3>
 
 <ul>
-    <li>Hundreds of hooks are available to extend SEOPress. <a href="https://www.seopress.org/support/hooks/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Browse them all here</a>!</li>
-    <li>Plus we have a <a href="https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme">REST API</a> to build static websites.</li>
-    <li>Finally, <a href="https://www.seopress.org/support/guides/seopress-wp-cli/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme"><strong>WP CLI commands</strong></a> are available.</li>
+    <li>Hundreds of hooks are available to extend SEOPress. <a href="https://www.seopress.org/support/hooks/" target="_blank">Browse them all here</a>!</li>
+    <li>Plus we have a <a href="https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/">REST API</a> to build static websites.</li>
+    <li>Finally, <a href="https://www.seopress.org/support/guides/seopress-wp-cli/"><strong>WP CLI commands</strong></a> are available.</li>
 </ul>
 
 <h3>Translations</h3>
@@ -239,35 +239,35 @@ Help localize SEOPress even further by adding your locale – visit <a href="htt
 	<li>...</li>
 </ul>
 
-<a href="https://www.seopress.org/integrations/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">All our integrations</a>
+<a href="https://www.seopress.org/integrations/" target="_blank">All our integrations</a>
 
-<h3><a href="https://www.seopress.org/solutions/migrate-from/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Import your post and term metadata from other SEO plugins in 1-click</a></h3>
+<h3><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import your post and term metadata from other SEO plugins in 1-click</a></h3>
 <ul>
-	<li><a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Yoast SEO</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">All In One SEO</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">SEO Framework</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Rank Math</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">SEO Ultimate</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">WP Meta SEO</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Premium SEO Pack</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Squirrly</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">wpSEO</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Platinum SEO Pack</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">SmartCrawl</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">SEOPressor</a></li>
-	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Slim SEO</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/" target="_blank">Yoast SEO</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/" target="_blank">All In One SEO</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/" target="_blank">SEO Framework</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/" target="_blank">Rank Math</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/" target="_blank">SEO Ultimate</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/" target="_blank">WP Meta SEO</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/" target="_blank">Premium SEO Pack</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/" target="_blank">Squirrly</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/" target="_blank">wpSEO</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/" target="_blank">Platinum SEO Pack</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/" target="_blank">SmartCrawl</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/" target="_blank">SEOPressor</a></li>
+	<li><a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/" target="_blank">Slim SEO</a></li>
 </ul>
 
 <h3>Help and support</h3>
 <ul>
-	<li><a href="https://www.seopress.org/support/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Documentation center</a></li>
+	<li><a href="https://www.seopress.org/support/" target="_blank">Documentation center</a></li>
 	<li><a href="https://www.facebook.com/groups/seopress/" target="_blank">Join our SEOPress official community group</a></li>
 	<li><a href="https://www.seopress.org/support/ebooks/" target="_blank">Learn SEO with our Free ebooks</a></li>
 	<li><a href="https://www.youtube.com/seopress" target="_blank">Our SEOPress YouTube Channel</a></li>
-	<li><a href="https://www.seopress.org/account/your-tickets/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Email (PRO only)</a></li>
+	<li><a href="https://www.seopress.org/account/your-tickets/" target="_blank">Email (PRO only)</a></li>
 </ul>
 
-<h3><a href="https://www.seopress.org/about/brand-assets/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Branding guidelines</a></h3>
+<h3><a href="https://www.seopress.org/about/brand-assets/" target="_blank">Branding guidelines</a></h3>
 SEOPress is a registered trademark of SEOPress SASU. When writing about SEOPress plugin, please make sure to write it correctly.
 
 SEOPress (correct)
@@ -295,10 +295,10 @@ SEOpress (incorrect)
 	<li>...</li>
 </ul>
 
-<a href="https://www.seopress.org/press/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">Complete list on our Press page</a>
+<a href="https://www.seopress.org/press/" target="_blank">Complete list on our Press page</a>
 
 <h3>Our website:</h3>
-Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.org&utm_campaign=seopress&utm_medium=readme" target="_blank">seopress.org</a>
+Any questions? Visit our website <a href="https://www.seopress.org" target="_blank">seopress.org</a>
 
 == Installation ==
 
@@ -310,7 +310,7 @@ Any questions? Visit our website <a href="https://www.seopress.org?utm_source=w.
 
 = Can I import my post and term metadata from other plugins? =
 
-You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">WP Meta SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">wpSEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Platinum SEO Pack</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SmartCrawl</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">SEOPressor</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Slim SEO</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/?utm_source=w.org&utm_campaign=seopress&utm_medium=readme_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
+You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/_faq">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/_faq">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/_faq">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/_faq">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/_faq">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/_faq">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/_faq">WP Meta SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/_faq">wpSEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/_faq">Platinum SEO Pack</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/_faq">SmartCrawl</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/_faq">SEOPressor</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/_faq">Slim SEO</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
 
 = How to use Google Tag Manager / Facebook Pixel with SEOPress? =
 
@@ -376,24 +376,33 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 6.8.0.1 =
-* FIX Compatibility issue with Hello from Elementor
-
-= 6.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-8/">Read the blog post update</a> =
-* NEW Google Search Console widgets (PRO) 🎉
-* NEW OpenAI: we now pass the post language to improve results when generating meta title / description 🎉
-* NEW Application passwords for SEOPress REST API 🎉 (https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/)
-* NEW Semi-automatic redirection notifications on term slug deletion / edition to prevent 404 errors (PRO) 🎉
-* NEW Add bulk actions to send to instant indexing post / page / post type URLs 🎉
-* NEW WP CLI SEOPress commands: import / export SEOPress global configuration to a JSON file (https://www.seopress.org/support/guides/seopress-wp-cli/)
-* INFO Remove pre_get_posts filter for XML index sitemap
-* INFO Improve XML index sitemap performance
-* INFO Improve UI/UX
-* INFO GA3 (Universal Analytics) has been removed from SEOPress as this version has been deprecated / removed by Google
-* INFO Delete all schemas / redirects / broken links entries on uninstallation
-* FIX Test redirection link button in a multisite network
-* FIX Fatal error with Broken links checker
-* FIX Warning if no visits for Matomo widget
-* FIX Instant Indexing capability issue
+= 6.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-6-9/">Read the blog post update</a> =
+* NEW WordPress 6.3 compatibility
+* NEW Add your OpenAI API key to your wp-config.php file (PRO)
+* NEW Quickly check your OpenAI key status from SEO, PRO, AI (PRO)
+* NEW Breadcrumbs block enhanced (PRO)
+* NEW FAQ block enhanced (PRO)
+* NEW White label: Remove update notification link from plugins list (PRO)
+* NEW "seopress_pro_breadcrumbs_html_class_li", "seopress_pro_breadcrumbs_html_class_li_active" to filter breadcrumbs classes (https://www.seopress.org/support/hooks/filter-the-breadcrumbs-html-classes/ - PRO)
+* NEW "seopress_sitemaps_html_product_cat_slug" to filter product category slug (https://www.seopress.org/support/hooks/filter-product-category-slug-used-in-html-sitemap/)
+* NEW Massive update for language packs (Polish, Swedish, French, Spanish, German, Portuguese, Dutch, Korean...)
+* INFO Use Ajax to generate title and meta using AI in bulk (PRO)
+* INFO Improve GDPR (remove UTM links and YouTube embeds from the user interface)
+* INFO Add seopress-white-label body class if White Label is enabled
+* INFO Add comments for translators (i18n)
+* INFO Improved UI for local business hours section
+* INFO Stop saving empty entries for automatic schemas
+* INFO Improved UI by removing bulk actions for CPT/Tax if SEO is disabled from the global settings
+* INFO Improved UI by adding character counter for site title field (SEO, Titles and metas, Home)
+* FIX Move noscript tag to body for Matomo
+* FIX Robots.txt file with multisite setup and subdomains
+* FIX Breadcrumbs compatibility issue with MyListing theme / WP Job Manager
+* FIX Fatal error with Breadcrumbs on rare cases
+* FIX PHP Warnings on social meta ($post->ID is null)
+* FIX PHP Warning Undefined array key "nb_uniq_visitors"
+* FIX PHP Fatal error array_sum for GA widget in specific cases
+* FIX PHP Warnings on custom schema in specific cases
+* FIX Incorrect notice for "Target keyword already used"
+* FIX Search Console metrics: incorrect matching URL if anchors
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

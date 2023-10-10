@@ -68,7 +68,7 @@
                                     </p>
 
                                     <h3 class="seopress-item-title">
-                                        <a href="<?php echo esc_url($item->get_permalink() . '?utm_source=rss_dashboard&utm_medium=wp-admin&utm_campaign=seopress'); ?>" target="_blank" title="<?php printf(__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
+                                        <a href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
                                             <?php echo esc_html($item->get_title()); ?>
                                         </a>
                                     </h3>
@@ -76,7 +76,7 @@
                                     <p class="seopress-item-content"><?php echo $item->get_description(); ?></p>
                                 </div>
                                 <div class="seopress-item-wrap-content">
-                                    <a class="btn btnSecondary" href="<?php echo esc_url($item->get_permalink() . '?utm_source=rss_dashboard&utm_medium=wp-admin&utm_campaign=seopress'); ?>" target="_blank" title="<?php printf(__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
+                                    <a class="btn btnSecondary" href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
                                         <?php _e('Learn more', 'wp-seopress'); ?>
                                     </a>
                                 </div>

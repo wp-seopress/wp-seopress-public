@@ -75,7 +75,7 @@ function print_section_info_google_analytics_custom_tracking()
 
 <div class="seopress-notice is-warning">
     <p>
-        <?php _e('<strong>GA4 or Universal Analytics</strong> codes are <strong>automatically added to your source code</strong> if you have enter your <strong>Measurement ID and / or your Universal Analytics ID</strong> from <strong>General</strong> tab.', 'wp-seopress'); ?>
+        <?php _e('<strong>GA4, Matomo or MS Clarity</strong> codes are <strong>automatically added to your source code</strong> if you have enter your <strong>Measurement ID, Matomo tracking ID and / or MS Clarity project ID</strong> from <strong>Google Analytics / Matomo / Clarity</strong> tabs.', 'wp-seopress'); ?>
     </p>
 </div>
 <?php
@@ -118,7 +118,7 @@ function print_section_info_google_analytics_custom_dimensions()
 
 <div class="seopress-notice">
     <p>
-        <?php _e('All advanced settings work with <strong>Google Analytics</strong> and <strong>Matomo</strong> tracking code.', 'wp-seopress'); ?>
+        <?php _e('All advanced settings work with <strong>Google Analytics</strong> and <strong>Matomo</strong> tracking codes. Excluding user roles also works with <strong>MS Clarity</strong> and <strong>Custom tracking scripts</strong>.', 'wp-seopress'); ?>
     </p>
 </div>
 
@@ -178,7 +178,7 @@ function print_section_info_google_analytics_matomo()
 
 <div class="seopress-notice">
     <p>
-        <?php _e('Your <strong>Custom Dimensions</strong> will also work with Matomo tracking code.', 'wp-seopress'); ?>
+        <?php _e('Your <strong>Custom Dimensions</strong> from Advanced tab will also work with Matomo tracking code.', 'wp-seopress'); ?>
     </p>
 </div>
 
@@ -199,7 +199,10 @@ function print_section_info_google_analytics_clarity()
 
 <div class="seopress-notice">
     <p>
-        <?php printf(__('Create your first Microsoft Clarity project <a href="%s" target="_blank">here</a>.', 'wp-seopress'), esc_url('https://clarity.microsoft.com/')); ?>
+        <?php
+            /* translators: %s MS Clarity website URL */
+            printf(__('Create your first Microsoft Clarity project <a href="%s" target="_blank">here</a>.', 'wp-seopress'), esc_url('https://clarity.microsoft.com/'));
+        ?>
     </p>
 </div>
 

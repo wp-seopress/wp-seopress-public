@@ -112,9 +112,11 @@ function print_section_info_advanced_appearance_metabox()
 
 <p><?php _e('Edit your SEO metadata directly from your favorite page builder.','wp-seopress'); ?></p>
 
-    <?php if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
-        echo wp_oembed_get('https://www.youtube.com/watch?v=sf0ocG7vQMM');
-    }
+    <?php if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) { ?>
+        <a class="wrap-yt-embed" href="https://www.youtube.com/watch?v=sf0ocG7vQMM" target="_blank" title="<?php _e('Watch the universal SEO metabox overview video - Open in a new window', 'wp-seopress'); ?>">
+            <img src="<?php echo SEOPRESS_ASSETS_DIR . '/img/yt-universal-metabox.webp'; ?>" alt="<?php _e('Universal SEO metabox video thumbnail','wp-seopress'); ?>" width="500" />
+        </a>
+    <?php }
 }
 
 function print_section_info_advanced_appearance_dashboard()

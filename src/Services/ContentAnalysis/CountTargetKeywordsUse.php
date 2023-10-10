@@ -13,7 +13,6 @@ class CountTargetKeywordsUse
         }
 
         $hashed = md5(serialize($targetKeywords) . $postId);
-        error_log("caheeeddd ====" . $hashed);
         $cached = get_transient('seopress_content_analysis_count_target_keywords_use_' . $hashed);
         if(false !== $cached){
             return $cached;
@@ -23,11 +22,12 @@ class CountTargetKeywordsUse
 
         global $wpdb;
 
-
-        $query = "SELECT post_id, meta_value
-        FROM {$wpdb->postmeta}
-        WHERE meta_key = '_seopress_analysis_target_kw'
-        AND meta_value LIKE %s";
+        $query = "SELECT pm.post_id, pm.meta_value
+            FROM {$wpdb->postmeta} AS pm
+            JOIN {$wpdb->posts} AS p ON p.ID = pm.post_id
+            WHERE pm.meta_key = '_seopress_analysis_target_kw'
+            AND pm.meta_value LIKE %s
+            AND p.post_status IN ('publish', 'draft', 'pending', 'future') ";
 
         $data = [];
 
@@ -53,4 +53,3 @@ class CountTargetKeywordsUse
 
     }
 }
-

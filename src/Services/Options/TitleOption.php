@@ -524,6 +524,10 @@ class TitleOption {
      * @param int|null $id
      */
     public function getTaxNoIndex() {
+        if (is_search()) {
+            return;
+        }
+
         $queried_object = get_queried_object();
         $currentTax = null !== $queried_object ? $queried_object->taxonomy : '';
 
@@ -551,6 +555,10 @@ class TitleOption {
      * @param int|null $id
      */
     public function getTaxNoFollow() {
+        if (is_search()) {
+            return;
+        }
+
         $queried_object = get_queried_object();
         $currentTax = null !== $queried_object ? $queried_object->taxonomy : '';
 

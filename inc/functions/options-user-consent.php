@@ -23,6 +23,7 @@ if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable() || (
                     }
                     if ('1' === seopress_get_service('GoogleAnalyticsOption')->getMatomoEnable() && '' !== seopress_get_service('GoogleAnalyticsOption')->getMatomoId() && '' !== seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId()) {
                         add_action('wp_head', 'seopress_matomo_js_arguments', 960, 1);
+                        add_action('wp_body_open', 'seopress_matomo_nojs', 960, 1);
                     }
                     if ('1' === seopress_get_service('GoogleAnalyticsOption')->getClarityEnable() && '' !== seopress_get_service('GoogleAnalyticsOption')->getClarityProjectId()) {
                         add_action('wp_head', 'seopress_clarity_js_arguments', 970, 1);
@@ -44,6 +45,7 @@ if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable() || (
                 }
                 if ('1' === seopress_get_service('GoogleAnalyticsOption')->getMatomoEnable() && '' !== seopress_get_service('GoogleAnalyticsOption')->getMatomoId() && '' !== seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId()) {
                     add_action('wp_head', 'seopress_matomo_js_arguments', 960, 1);
+                    add_action('wp_body_open', 'seopress_matomo_nojs', 960, 1);
                 }
                 if ('1' === seopress_get_service('GoogleAnalyticsOption')->getClarityEnable() && '' !== seopress_get_service('GoogleAnalyticsOption')->getClarityProjectId()) {
                     add_action('wp_head', 'seopress_clarity_js_arguments', 970, 1);
@@ -66,6 +68,7 @@ if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable() || (
         }
         if ('1' === seopress_get_service('GoogleAnalyticsOption')->getMatomoEnable() && '' !== seopress_get_service('GoogleAnalyticsOption')->getMatomoId() && '' !== seopress_get_service('GoogleAnalyticsOption')->getMatomoSiteId()) {
             add_action('wp_head', 'seopress_matomo_js_arguments', 960, 1);
+            add_action('wp_body_open', 'seopress_matomo_nojs', 960, 1);
         }
         if ('1' === seopress_get_service('GoogleAnalyticsOption')->getClarityEnable() && '' !== seopress_get_service('GoogleAnalyticsOption')->getClarityProjectId()) {
             add_action('wp_head', 'seopress_clarity_js_arguments', 970, 1);

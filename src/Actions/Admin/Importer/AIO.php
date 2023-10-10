@@ -8,6 +8,9 @@ use SEOPress\Core\Hooks\ExecuteHooksBackend;
 use SEOPress\Thirds\AIO\Tags;
 
 class AIO implements ExecuteHooksBackend {
+
+    protected $tagsAIO;
+
     public function __construct() {
         $this->tagsAIO = new Tags();
     }

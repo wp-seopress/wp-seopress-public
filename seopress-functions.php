@@ -513,7 +513,7 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
         } else {
             $html .= '<div class="seopress-notice is-warning">
     <p>';
-            /* translators: %s: "Custom Post Types" or "Custom Taxonomies" %s: "title" or "description" */
+            /* translators: %s: "Custom Post Types" or "Custom Taxonomies", %s: "title" or "description" */
             $html .= sprintf(__('Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below.', 'wp-seopress'), $notice_i18n, $metadata);
             $html .= '</p>';
             $html .= $list;

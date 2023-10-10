@@ -468,8 +468,8 @@ table.seopress-importer-error-log-table {
         margin: 25px auto 24px;
     }
 
-    #seopress-logo img {
-        max-width: 80%;
+    .seopress-setup img {
+        max-width: 100%;
     }
 
     .seopress-wizard-service-item {

@@ -199,8 +199,8 @@ class Notifications {
                         'high' => __('High impact', 'wp-seopress'),
                     ],
                     'link' => [
-                        'fr'       => 'https://www.seopress.org/fr/support/guides/resoudre-add_theme_support-manquant-dans-votre-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
-                        'en'       => 'https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/?utm_source=plugin&utm_medium=wp-admin&utm_campaign=seopress',
+                        'fr'       => 'https://www.seopress.org/fr/support/guides/resoudre-add_theme_support-manquant-dans-votre-theme/',
+                        'en'       => 'https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/',
                         'title'    => __('Learn more', 'wp-seopress'),
                         'external' => true,
                     ],

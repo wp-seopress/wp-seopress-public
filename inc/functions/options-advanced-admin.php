@@ -148,26 +148,28 @@ $postTypes = seopress_get_service('WordPressData')->getPostTypes();
 
 if (!empty($postTypes)) {
     foreach ($postTypes as $key => $value) {
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_noindex');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_noindex_handler', 10, 3);
+        if (null === seopress_get_service('TitleOption')->getSingleCptEnable($key) && '' != $key) {
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_noindex');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_noindex_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_index');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_index_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_index');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_index_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_nofollow');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_nofollow_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_nofollow');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_nofollow_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_follow');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_follow_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_follow');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_follow_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_redirect_enable');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_redirect_enable_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_redirect_enable');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_redirect_enable_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_redirect_disable');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_redirect_disable_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_redirect_disable');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_redirect_disable_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_add_instant_indexing');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_add_instant_indexing_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_add_instant_indexing');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_add_instant_indexing_handler', 10, 3);
+        }
     }
 }
 
@@ -175,17 +177,19 @@ $taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
 
 if (!empty($taxonomies)) {
     foreach ($taxonomies as $key => $value) {
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_noindex');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_noindex_handler', 10, 3);
+        if (null === seopress_get_service('TitleOption')->getTaxEnable($key) && '' !== $key) {
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_noindex');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_noindex_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_index');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_index_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_index');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_index_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_nofollow');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_nofollow_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_nofollow');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_nofollow_handler', 10, 3);
 
-        add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_follow');
-        add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_follow_handler', 10, 3);
+            add_filter('bulk_actions-edit-' . $key, 'seopress_bulk_actions_follow');
+            add_filter('handle_bulk_actions-edit-' . $key, 'seopress_bulk_action_follow_handler', 10, 3);
+        }
     }
 }
 
@@ -233,6 +237,7 @@ function seopress_bulk_action_noindex_admin_notice()
     if (! empty($_REQUEST['bulk_noindex_posts'])) {
         $noindex_count = intval($_REQUEST['bulk_noindex_posts']);
         printf('<div id="message" class="updated fade"><p>' .
+                /* translators: %s number of posts set to noindex */
                 _n(
                     '%s post to noindex.',
                     '%s posts to noindex.',
@@ -269,6 +274,7 @@ function seopress_bulk_action_index_admin_notice() {
     if (! empty($_REQUEST['bulk_index_posts'])) {
         $index_count = intval($_REQUEST['bulk_index_posts']);
         printf('<div id="message" class="updated fade"><p>' .
+                /* translators: %s number of posts set to index */
                 _n(
                     '%s post to index.',
                     '%s posts to index.',
@@ -305,6 +311,7 @@ function seopress_bulk_action_nofollow_admin_notice() {
     if (! empty($_REQUEST['bulk_nofollow_posts'])) {
         $nofollow_count = intval($_REQUEST['bulk_nofollow_posts']);
         printf('<div id="message" class="updated fade"><p>' .
+            /* translators: %s number of posts set to nofollow */
                 _n(
                     '%s post to nofollow.',
                     '%s posts to nofollow.',
@@ -341,6 +348,7 @@ function seopress_bulk_action_follow_admin_notice() {
     if (! empty($_REQUEST['bulk_follow_posts'])) {
         $follow_count = intval($_REQUEST['bulk_follow_posts']);
         printf('<div id="message" class="updated fade"><p>' .
+                /* translators: %s number of posts set to follow */
                 _n(
                     '%s post to follow.',
                     '%s posts to follow.',
@@ -376,6 +384,7 @@ function seopress_bulk_action_redirect_enable_admin_notice() {
     if (! empty($_REQUEST['bulk_enable_redirects_posts'])) {
         $enable_count = intval($_REQUEST['bulk_enable_redirects_posts']);
         printf('<div id="message" class="updated fade"><p>' .
+                /* translators: %s number of redirections set to enabled */
                 _n(
                     '%s redirections enabled.',
                     '%s redirections enabled.',
@@ -410,6 +419,7 @@ function seopress_bulk_action_redirect_disable_admin_notice() {
     if (! empty($_REQUEST['bulk_disable_redirects_posts'])) {
         $enable_count = intval($_REQUEST['bulk_disable_redirects_posts']);
         printf('<div id="message" class="updated fade"><p>' .
+                /* translators: %s number of redirections set to disabled */
                 _n(
                     '%s redirection disabled.',
                     '%s redirections disabled.',
@@ -460,6 +470,7 @@ function seopress_bulk_action_add_instant_indexing_admin_notice() {
     if (! empty($_REQUEST['bulk_add_instant_indexing'])) {
         $queue_count = intval($_REQUEST['bulk_add_instant_indexing']);
         printf('<div id="message" class="updated fade"><p>' .
+                /* translators: %s number of posts added to instant indexing queue */
                 _n(
                     '%s post added to instant indexing queue.',
                     '%s posts added to instant indexing queue.',

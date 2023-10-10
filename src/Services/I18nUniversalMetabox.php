@@ -37,6 +37,7 @@ class I18nUniversalMetabox
                     'description' => __("Twitter Description", "wp-seopress"),
                     'image' => __("Twitter Image", "wp-seopress"),
                     'missing' => __(
+                        /* translators: %s Twitter tag, eg: twitter:title */
                         'Your %s is missing!',
                         "wp-seopress"
                     ),
@@ -53,6 +54,7 @@ class I18nUniversalMetabox
                     'we_founded_tag' => __("We found a", "wp-seopress"),
                     'we_founded_tag_2' => __("tag in your source code.", "wp-seopress"),
                     'tag_empty' => __(
+                        /* translators: %s Twitter tag, eg: twitter:title */
                         'Your %s tag is empty!',
                         "wp-seopress"
                     ),
@@ -65,6 +67,7 @@ class I18nUniversalMetabox
                     'url' => __("URL", "wp-seopress"),
                     'site_name' => __("Site Name", "wp-seopress"),
                     'missing' => __(
+                        /* translators: %s Facebook tag, eg: og:title */
                         'Your Open Graph %s is missing!',
                         "wp-seopress"
                     ),
@@ -89,6 +92,7 @@ class I18nUniversalMetabox
                     'we_founded_tag' => __("We found an Open Graph", "wp-seopress"),
                     'we_founded_tag_2' => __("tag in your source code.", "wp-seopress"),
                     'tag_empty' => __(
+                        /* translators: %s Facebook tag, eg: og:title */
                         'Your Open Graph %s tag is empty!',
                         "wp-seopress"
                     )
@@ -105,6 +109,7 @@ class I18nUniversalMetabox
                             "wp-seopress"
                         ),
                         'meta_title_found_in' => __(
+                            /* translators: %s meta tag found %s times, eg: meta description found 1 time */
                             '%s was found %s times.',
                             "wp-seopress"
                         ),
@@ -252,9 +257,11 @@ class I18nUniversalMetabox
                     ],
                     'headings' => [
                         'head' => __(
+                            /* translators: %s heading name, eg: h2, %s heading number, eg: 2 */
                             'Target keywords were found in Heading %s (H%s).',
                             "wp-seopress"
                         ),
+                        /* translators: %s heading number, eg: 2 */
                         'heading_hn' => __("Heading H%s", "wp-seopress"),
                         'heading' => __("Heading", "wp-seopress"),
                         'no_heading' => __(
@@ -262,18 +269,22 @@ class I18nUniversalMetabox
                             "wp-seopress"
                         ),
                         'no_heading_detail' =>__(
+                            /* translators: %s heading name, eg: h2, %s heading number, eg: 2 */
                             'No Heading %s (H%s) found in your content. This is required for both SEO and Accessibility!',
                             "wp-seopress"
                         ),
                         'no_target_keywords_detail' => __(
+                            /* translators: %s heading name, eg: h2, %s heading number, eg: 2 */
                             'None of your target keywords were found in Heading %s (H%s).',
                             "wp-seopress"
                         ),
                         'match' => __(
+                            /* translators: %s heading name found %s times, eg: H2 was found 2 times */
                             '%s was found %s times.',
                             "wp-seopress"
                         ),
                         'count_h1' => __(
+                            /* translators: %s number of times a heading is found, eg: 1 */
                             'We found %s Heading 1 (H1) in your content.',
                             "wp-seopress"
                         ),
@@ -312,6 +323,7 @@ class I18nUniversalMetabox
                             "wp-seopress"
                         ),
                         'internal_links_count' => __(
+                            /* translators: %s number of internal links */
                             'We found %s internal links in your page. Below, the list:',
                             "wp-seopress"
                         ),
@@ -323,6 +335,7 @@ class I18nUniversalMetabox
                             "wp-seopress"
                         ),
                         'match' => __(
+                            /* translators: %s number of times a target keyword is found, eg: 1, %s density in %, eg: 1% */
                             '%s was found %s times in your content, a keyword density of %s',
                             "wp-seopress"
                         ),
@@ -353,6 +366,7 @@ class I18nUniversalMetabox
                     ],
                     'no_follow_links' => [
                         'founded' => __(
+                            /* translators: %s number of times a nofollow link is found, eg: 1 */
                             'We found %s links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:',
                             "wp-seopress"
                         ),
@@ -377,8 +391,10 @@ class I18nUniversalMetabox
                         "This page doesn't have any canonical URL.",
                         "wp-seopress"
                     ),
+                    /* translators: %d number of times a canonical tag is found, singular form only */
                     'canonicals_found' => __('We found %d canonical URL in your source code. Below, the list:', 'wp-seopress'),
-                    'canonicals_found_plural' => __('We found %d canonicals URLs in your source code. Below, the list:', 'wp-seopress'),
+                    /* translators: %d number of times a canonical tag is found, plural form only */
+                    'canonicals_found_plural' => __('We found %d canonical URLs in your source code. Below, the list:', 'wp-seopress'),
                     'multiple_canonicals' => __("You must fix this. Canonical URL duplication is bad for SEO.", "wp-seopress"),
                     'duplicated' => __("duplicated schema - x", "wp-seopress"),
                 ],
@@ -495,6 +511,7 @@ class I18nUniversalMetabox
             'layouts' => [
                 'meta_robot' => [
                     'title' => __(
+                        /* translators: %s documentation URL */
                         "You cannot uncheck a parameter? This is normal, and it's most likely defined in the <a href='%s'>global settings of the plugin.</a>",
                         "wp-seopress"
                     ),
@@ -694,6 +711,7 @@ class I18nUniversalMetabox
                         "Link copied in the clipboard",
                         "wp-seopress"
                     ),
+                    /* translators: %s post title */
                     'copy_link' => __("Copy %s link", "wp-seopress"),
                     'open_link' => __(
                         "Open this link in a new window",
@@ -703,6 +721,7 @@ class I18nUniversalMetabox
                         "Edit this link in a new window",
                         "wp-seopress"
                     ),
+                    /* translators: %s post title */
                     'edit_link_aria' => __("Edit %s link", "wp-seopress")
                 ],
                 'content_analysis' => [
@@ -746,8 +765,8 @@ class I18nUniversalMetabox
                     'should_be_improved' =>  __("Should be improved", "wp-seopress"),
                     'keyword_singular' => __("The keyword:", "wp-seopress"),
                     'keyword_plural' => __("These keywords:", "wp-seopress"),
-                    'already_used_singular' => __("is already used %d time", "wp-seopress"),
-                    'already_used_plural' => __("is already used %d times", "wp-seopress"),
+                    'already_used_singular' => /* translators: %d number of times a target keyword is used, singular form only */ __("is already used %d time", "wp-seopress"),
+                    'already_used_plural' => /* translators: %d number of times a target keyword is used, plural form only */ __("is already used %d times", "wp-seopress"),
                 ],
                 'schemas_manual' => [
                     'description' => __('It is recommended to enter as many properties as possible to maximize the chances of getting a rich snippet in Google search results.', 'wp-seopress'),

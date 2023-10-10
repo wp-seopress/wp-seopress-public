@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 6.8.0.1
+Version: 6.9
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -73,7 +73,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '6.8.0.1');
+define('SEOPRESS_VERSION', '6.9');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -81,9 +81,9 @@ define('SEOPRESS_ASSETS_DIR', SEOPRESS_PLUGIN_DIR_URL . 'assets');
 define('SEOPRESS_TEMPLATE_DIR', SEOPRESS_PLUGIN_DIR_PATH . 'templates');
 define('SEOPRESS_TEMPLATE_SITEMAP_DIR', SEOPRESS_TEMPLATE_DIR . '/sitemap');
 define('SEOPRESS_TEMPLATE_JSON_SCHEMAS', SEOPRESS_TEMPLATE_DIR . '/json-schemas');
-define('SEOPRESS_DIRURL', plugin_dir_url(__FILE__));
-define('SEOPRESS_URL_PUBLIC', SEOPRESS_DIRURL . 'public');
-define('SEOPRESS_URL_ASSETS', SEOPRESS_DIRURL . 'assets');
+define('SEOPRESS_PATH_PUBLIC',  SEOPRESS_PLUGIN_DIR_PATH. 'public');
+define('SEOPRESS_URL_PUBLIC', SEOPRESS_PLUGIN_DIR_URL . 'public');
+define('SEOPRESS_URL_ASSETS', SEOPRESS_PLUGIN_DIR_URL . 'assets');
 define('SEOPRESS_DIR_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
 
 use SEOPress\Core\Kernel;
@@ -438,6 +438,9 @@ function seopress_admin_body_class($classes) {
 	if (isset($_pages[$_GET['page']]) && 'seopress_csv_importer' === $_GET['page']) {
 		$classes .= ' seopress-setup ';
 	}
+	if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+		$classes .= ' seopress-white-label ';
+	}
 
 	return $classes;
 }
@@ -487,27 +490,6 @@ function seopress_plugin_action_links($links, $file) {
 
 	return $links;
 }
-
-/**
- * Display an upgrade message in the plugins list
- *
- * @since 5.7
- *
- * @deprecated 6.6.0
- *
- * @param string $pluin_data, $new_data
- *
- * @return void
- *
- * @author Benjamin
- */
-function seopress_plugin_update_message( $plugin_data, $new_data ) {
-	if (isset($plugin_data['new_version']) && $plugin_data['new_version'] <= '5.9') {
-		echo '<br /><strong><em>' . sprintf( __( 'Important changes related to XML sitemaps in version 5.8: <a href="%s" target="_blank">Learn more</a>.', 'wp-seopress' ), 'https://www.seopress.org/docs/xml-sitemap' ).'</em></strong>';
-
-	}
-}
-add_action( 'in_plugin_update_message-wp-seopress/seopress.php', 'seopress_plugin_update_message', 10, 2 );
 
 /**
  * Handle WPML compatibility for XML sitemaps

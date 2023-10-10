@@ -27,6 +27,9 @@ if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
             '[seopress_html_sitemap]'
         );
 
+        $product_cat_slug = 'product_cat';
+        $product_cat_slug = apply_filters('seopress_sitemaps_html_product_cat_slug', $product_cat_slug);
+
         //Exclude IDs
         if ('' !== seopress_get_service('SitemapOption')->getHtmlExclude()) {
             $seopress_xml_sitemap_html_exclude_option = seopress_get_service('SitemapOption')->getHtmlExclude();
@@ -128,7 +131,7 @@ if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
                             } elseif ('product' === $cpt_key) {
                                 $args_cat_query = apply_filters('seopress_sitemaps_html_product_cat_query', $args_cat_query);
 
-                                $cats = get_terms('product_cat', $args_cat_query);
+                                $cats = get_terms($product_cat_slug, $args_cat_query);
                             }
 
                             if (! empty($cats)) {
@@ -145,7 +148,7 @@ if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
                                         } elseif ('product' === $cpt_key) {
                                             unset($args['tax_query']);
                                             $args['tax_query'] = [[
-                                                'taxonomy' => 'product_cat',
+                                                'taxonomy' => $product_cat_slug,
                                                 'field'    => 'term_id',
                                                 'terms'    => $cat->term_id,
                                             ]];

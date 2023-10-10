@@ -140,7 +140,7 @@ if (!empty($bing_response['response'])) {
             $msg = __('Unprocessable Entity: In case of URLs don’t belong to the host or the key is not matching the schema in the protocol', 'wp-seopress');
             break;
         case 429:
-            $msg = __('Too Many Requests: Too Many Requests (potential Spam)', 'wp-seopress');
+            $msg = __('Too Many Requests (potential Spam)', 'wp-seopress');
             break;
         default:
             $msg = __('Something went wrong', 'wp-seopress');

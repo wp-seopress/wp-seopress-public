@@ -22,6 +22,7 @@ jQuery(document).ready(function ($) {
                     $('head').append(data.data.custom);
                     $('head').append(data.data.head_js);
                     $('body').prepend(data.data.body_js);
+                    $('body').prepend(data.data.matomo_body_js);
                     $('body').append(data.data.footer_js);
                 }
                 Cookies.set('seopress-user-consent-accept', '1', { expires: Number(seopressAjaxGAUserConsent.seopress_cookies_expiration_days) });

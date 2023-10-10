@@ -131,7 +131,9 @@
 								</a>
 
 								<?php if (true === $toggle) { ?>
-									<span class="screen-reader-text"><?php printf(__('Toggle %s','wp-seopress'), $title); ?></span>
+									<span class="screen-reader-text"><?php
+                                        /* translators: %s name of the feature, eg: Titles and metas */
+                                        printf(__('Toggle %s','wp-seopress'), $title); ?></span>
 									<input type="checkbox" name="toggle-<?php echo $key; ?>" id="toggle-<?php echo $key; ?>" class="toggle" data-toggle="<?php echo $seopress_get_toggle_option; ?>">
 									<label for="toggle-<?php echo $key; ?>"></label>
 								<?php } ?>
