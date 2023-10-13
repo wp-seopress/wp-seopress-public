@@ -88,7 +88,7 @@ if (true == get_post_type_archive_link($path) && 0 == $offset) {
 remove_all_filters('pre_get_posts');
 
 $args = [
-    'posts_per_page' => 1000,
+    'posts_per_page' => $max,
     'offset'         => $offset,
     'order'          => 'DESC',
     'orderby'        => 'modified',
