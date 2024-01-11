@@ -6,7 +6,7 @@ defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 
 class RequestPreview
 {
-    public function getLinkRequest($id){
+    public function getLinkRequest($id, $taxname = null){
         $args = ['no_admin_bar' => 1];
 
         //Useful for Page / Theme builders
@@ -25,6 +25,12 @@ class RequestPreview
             $link = add_query_arg('no_admin_bar', 1, get_preview_post_link((int) $id, $args));
         }
 
+        if(!empty($taxname)){
+            $link = get_term_link((int) $id, $taxname);
+            $link = add_query_arg('no_admin_bar', 1, $link);
+        }
+
+
         $link = apply_filters('seopress_get_dom_link', $link, $id);
 
         return $link;
@@ -35,7 +41,7 @@ class RequestPreview
      *
      * @return string
      */
-    public function getDomById($id)
+    public function getDomById($id, $taxname = null)
     {
         $args = [
             'redirection' => 2,
@@ -59,7 +65,7 @@ class RequestPreview
 
         $args = apply_filters('seopress_real_preview_remote', $args);
 
-        $link = $this->getLinkRequest($id);
+        $link = $this->getLinkRequest($id, $taxname);
 
         try {
             $response = wp_remote_get($link, $args);

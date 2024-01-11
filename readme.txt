@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.3
 Requires PHP: 7.2
-Stable tag: 7.1
+Stable tag: 7.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -376,6 +376,13 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 7.1.1 =
+* FIX Compatibility issue with Bricks Builder for automatic schemas
+* FIX Compatibility issue with Weglot and redirections
+* FIX Google and social previews for term taxonomy
+* FIX Social account URLs for non-Latin alphabets
+* FIX i18n
+
 = 7.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-1/">Read the blog post update</a> =
 * NEW OpenAI #8 iteration: generation of alternative texts for images (beta) 🎉
 * NEW OpenAI #8 iteration: add GPT-4 model (required at least 1 successful payment of $1 via the OpenAI platform) 🎉

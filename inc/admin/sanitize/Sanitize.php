@@ -107,6 +107,8 @@ function seopress_sanitize_options_fields($input){
             $input[$value] = $input[$value]; //No sanitization for this field
         } elseif (( ! empty($input['seopress_instant_indexing_manual_batch']) && 'seopress_instant_indexing_manual_batch' == $value) || (!empty($input['seopress_social_accounts_extra']) && 'seopress_social_accounts_extra' == $value )) {
             $input[$value] = sanitize_textarea_field($input[$value]);
+        } elseif (( ! empty ($input['seopress_social_accounts_facebook']) && 'seopress_social_accounts_facebook' === $value) || (! empty ($input['seopress_social_accounts_pinterest']) && 'seopress_social_accounts_pinterest' === $value) || (! empty ($input['seopress_social_accounts_instagram']) && 'seopress_social_accounts_instagram' === $value) || (! empty ($input['seopress_social_accounts_youtube']) && 'seopress_social_accounts_youtube' === $value) || (! empty ($input['seopress_social_accounts_linkedin']) && 'seopress_social_accounts_linkedin' === $value)) {
+            $input[$value] = sanitize_url($input[$value]);
         } elseif ( ! empty($input[$value])) {
             $input[$value] = sanitize_text_field($input[$value]);
         }
@@ -131,6 +133,5 @@ function seopress_sanitize_options_fields($input){
     }
 
     return $input;
-
 }
 

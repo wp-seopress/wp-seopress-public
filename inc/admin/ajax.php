@@ -19,6 +19,7 @@ function seopress_do_real_preview()
     }
 
     $id = $_GET['post_id'];
+    $taxname = isset($_GET['tax_name']) ? $_GET['tax_name'] : null;
 
 
     if ('yes' == get_post_meta($id, '_seopress_redirections_enabled', true)) {
@@ -27,9 +28,9 @@ function seopress_do_real_preview()
         return;
     }
 
-    $linkPreview   = seopress_get_service('RequestPreview')->getLinkRequest($id);
+    $linkPreview   = seopress_get_service('RequestPreview')->getLinkRequest($id, $taxname);
 
-    $str  = seopress_get_service('RequestPreview')->getDomById($id);
+    $str  = seopress_get_service('RequestPreview')->getDomById($id, $taxname);
     $data = seopress_get_service('DomFilterContent')->getData($str, $id);
     $data = seopress_get_service('DomAnalysis')->getDataAnalyze($data, [
         "id" => $id,
@@ -185,51 +186,52 @@ function seopress_do_real_preview()
             'matches' => $metaDescription
         ],
         'og_title' => [
-            'count' => count($data['og:title']['value']),
+            'count' => !empty($data['og:title']['value']) ? count($data['og:title']['value']) : '',
             'values'=> $data['og:title']['value']
         ],
         'og_desc' => [
-            'count' => count($data['og:description']['value']),
+            'count' => !empty($data['og:description']['value']) ? count($data['og:description']['value']) : '',
             'values'=> $data['og:description']['value']
         ],
         'og_img' => [
-            'count' => count($data['og:image']['value']),
+            'count' => !empty($data['og:image']['value']) ? count($data['og:image']['value']) : '',
             'values'=> $data['og:image']['value']
         ],
         'og_url' => [
-            'count' => count($data['og:url']['value']),
+            'count' => !empty($data['og:url']['value']) ? count($data['og:url']['value']) : '',
             'values'=> $data['og:url']['value']
         ],
         'og_site_name' => [
-            'count' => count($data['og:site_name']['value']),
+            'count' => !empty($data['og:site_name']['value']) ? count($data['og:site_name']['value']) : '',
             'values'=> $data['og:site_name']['value']
         ],
         'tw_title' => [
-            'count' => count($data['twitter:title']['value']),
+            'count' => !empty($data['twitter:title']['value']) ? count($data['twitter:title']['value']) : '',
             'values'=> $data['twitter:title']['value']
         ],
         'tw_desc' => [
-            'count' => count($data['twitter:description']['value']),
+            'count' => !empty($data['twitter:description']['value']) ? count($data['twitter:description']['value']) : '',
             'values'=> $data['twitter:description']['value']
         ],
         'tw_img' => [
-            'count' => count($data['twitter:image']['value']),
+            'count' => !empty($data['twitter:image']['value']) ? count($data['twitter:image']['value']) : '',
             'values'=> $data['twitter:image']['value']
         ],
         'canonical' => isset($data['canonical']['value'][0]) ? $data['canonical']['value'][0] : '',
         'all_canonical' => $data['canonical']['value'],
-        'h1' => [
-            'nomatches' => ['count' => count($data['h1']['value'])],
+            'h1' => [
+                'nomatches' => ['count' => !empty($data['h1']['value']) ? count($data['h1']['value']) : ''
+            ],
             'values'=> $data['h1']['value'],
             'matches' => $headingH1Matches
         ],
         'h2' => [
-            'nomatches' => ['count' => count($data['h2']['value'])],
+            'nomatches' => ['count' => !empty($data['h2']['value']) ? count($data['h2']['value']) : ''],
             'values'=> $data['h2']['value'],
             'matches' => $headingH2Matches
         ],
         'h3' => [
-            'nomatches' => ['count' => count($data['h3']['value'])],
+            'nomatches' => ['count' => !empty($data['h3']['value']) ? count($data['h3']['value']) : ''],
             'values'=> $data['h3']['value'],
             'matches' => $headingH3Matches
         ],

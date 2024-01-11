@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.1\n"
+"Project-Id-Version: SEOPress 7.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-10-26T08:08:31+00:00\n"
+"POT-Creation-Date: 2023-10-30T14:34:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -722,7 +722,7 @@ msgstr ""
 msgid "Image SEO & Advanced settings"
 msgstr ""
 
-#: inc/admin/ajax.php:25
+#: inc/admin/ajax.php:26
 msgid "A redirect is active for this URL. Turn it off to get the Google preview and content analysis."
 msgstr ""
 
@@ -6925,6 +6925,7 @@ msgid "Remove Image"
 msgstr ""
 
 #: app/editor/blocks/faq/index.js:7
+#: app/editor/blocks/faq/index.js:9
 #: public/editor/blocks/faq/index.js:1
 msgid "FAQ"
 msgstr ""
@@ -6932,11 +6933,6 @@ msgstr ""
 #: app/editor/blocks/faq/index.js:8
 #: public/editor/blocks/faq/index.js:1
 msgid "Allows to easily build FAQs."
-msgstr ""
-
-#: app/editor/blocks/faq/index.js:9
-#: public/editor/blocks/faq/index.js:1
-msgid "faq"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:10
