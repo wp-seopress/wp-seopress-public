@@ -2,16 +2,16 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.2\n"
+"Project-Id-Version: SEOPress 7.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-15T08:36:01+00:00\n"
+"POT-Creation-Date: 2023-12-13T17:32:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
+"X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: wp-seopress\n"
 
 #. Plugin Name of the plugin
@@ -131,7 +131,6 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-header.php:35
 #: app/editor/blocks/faq/inspector.js:123
-#: public/editor/blocks/faq/index.js:1
 msgid "Display"
 msgstr ""
 
@@ -501,7 +500,7 @@ msgstr ""
 #: inc/admin/admin-pages/Sitemaps.php:43
 #: inc/admin/admin-pages/Social.php:43
 #: inc/admin/admin-pages/Titles.php:54
-#: seopress-functions.php:848
+#: seopress-functions.php:774
 msgid "Save changes"
 msgstr ""
 
@@ -724,6 +723,18 @@ msgstr ""
 
 #: inc/admin/ajax.php:26
 msgid "A redirect is active for this URL. Turn it off to get the Google preview and content analysis."
+msgstr ""
+
+#: inc/admin/ajax.php:45
+#: src/Actions/Api/ContentAnalysis.php:124
+#: src/Actions/Api/PagePreview.php:61
+msgid "To get your Google snippet preview, publish your post!"
+msgstr ""
+
+#: inc/admin/ajax.php:48
+#: src/Actions/Api/ContentAnalysis.php:127
+#: src/Actions/Api/PagePreview.php:64
+msgid "Your site is protected by an authentication."
 msgstr ""
 
 #: inc/admin/blocks/features-list.php:10
@@ -1961,13 +1972,16 @@ msgstr ""
 msgid "Disable date after each post, page, post type?"
 msgstr ""
 
+#: inc/admin/callbacks/Sitemaps.php:334
+msgid "Do not display posts and products by categories / product categories?"
+msgstr ""
+
 #: inc/admin/callbacks/Social.php:15
 #: inc/admin/metaboxes/admin-metaboxes-form.php:337
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:316
 #: inc/admin/wizard/admin-wizard.php:787
 #: src/Helpers/Metas/RobotSettings.php:21
 #: app/editor/primary-category-select/index.js:58
-#: public/editor/primary-category-select/index.js:1
 msgid "None (will disable this feature)"
 msgstr ""
 
@@ -2018,7 +2032,6 @@ msgstr ""
 #: app/editor/blocks/faq/edit.js:52
 #: app/editor/blocks/faq/edit.js:92
 #: app/editor/blocks/faq/edit.js:95
-#: public/editor/blocks/faq/index.js:1
 msgid "Remove"
 msgstr ""
 
@@ -2943,7 +2956,6 @@ msgstr ""
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:323
 #: src/Helpers/Metas/RobotSettings.php:103
 #: app/editor/primary-category-select/index.js:74
-#: public/editor/primary-category-select/index.js:1
 msgid "Select a primary category"
 msgstr ""
 
@@ -3226,15 +3238,15 @@ msgstr ""
 msgid "Need help with your redirections? Read our guide"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes.php:113
-#: inc/admin/metaboxes/admin-metaboxes.php:474
+#: inc/admin/metaboxes/admin-metaboxes.php:114
+#: inc/admin/metaboxes/admin-metaboxes.php:475
 #: inc/admin/metaboxes/admin-term-metaboxes.php:66
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:104
 #: inc/admin/page-builders/elementor/inc/controls/class-content-analysis-control.php:35
 msgid "Analysis in progress..."
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes.php:455
+#: inc/admin/metaboxes/admin-metaboxes.php:456
 #: src/Services/ContentAnalysis/RenderContentAnalysis.php:19
 msgid "Content analysis"
 msgstr ""
@@ -4228,6 +4240,10 @@ msgstr ""
 msgid "Disable the display of the publication date"
 msgstr ""
 
+#: inc/admin/settings/Sitemaps.php:130
+msgid "Disable hierarchy for posts and products"
+msgstr ""
+
 #: inc/admin/settings/Social.php:16
 #: inc/admin/wizard/admin-wizard.php:780
 msgid "Person or organization"
@@ -4942,29 +4958,29 @@ msgstr ""
 msgid "Page %d of %2$d"
 msgstr ""
 
-#: seopress-functions.php:464
+#: seopress-functions.php:418
 msgid "Custom Post Types"
 msgstr ""
 
-#: seopress-functions.php:468
+#: seopress-functions.php:422
 msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %s: "Custom Post Types" or "Custom Taxonomies", %s: "title" or "description"
-#: seopress-functions.php:514
+#: seopress-functions.php:468
 msgid "Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 
-#: seopress-functions.php:540
-#: seopress-functions.php:570
+#: seopress-functions.php:494
+#: seopress-functions.php:524
 msgid "WARNING"
 msgstr ""
 
-#: seopress-functions.php:541
+#: seopress-functions.php:495
 msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
 msgstr ""
 
-#: seopress-functions.php:571
+#: seopress-functions.php:525
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
@@ -6894,261 +6910,220 @@ msgstr ""
 
 #: app/editor/blocks/faq/edit.js:21
 #: app/editor/blocks/faq/edit.js:64
-#: public/editor/blocks/faq/index.js:1
 msgid "Question..."
 msgstr ""
 
 #: app/editor/blocks/faq/edit.js:38
 #: app/editor/blocks/faq/edit.js:81
-#: public/editor/blocks/faq/index.js:1
 msgid "Answer..."
 msgstr ""
 
 #: app/editor/blocks/faq/edit.js:182
 #: app/editor/blocks/faq/edit.js:189
-#: public/editor/blocks/faq/index.js:1
 msgid "Add FAQ"
 msgstr ""
 
 #: app/editor/blocks/faq/image-control.js:70
-#: public/editor/blocks/faq/index.js:1
 msgid "To edit the background image, you need permission to upload media."
 msgstr ""
 
 #: app/editor/blocks/faq/image-control.js:81
 #: app/editor/blocks/faq/image-control.js:96
 #: app/editor/blocks/faq/image-control.js:104
-#: public/editor/blocks/faq/index.js:1
 msgid "Set Image"
 msgstr ""
 
 #: app/editor/blocks/faq/image-control.js:115
-#: public/editor/blocks/faq/index.js:1
 msgid "Remove Image"
 msgstr ""
 
 #: app/editor/blocks/faq/index.js:7
 #: app/editor/blocks/faq/index.js:9
-#: public/editor/blocks/faq/index.js:1
 msgid "FAQ"
 msgstr ""
 
 #: app/editor/blocks/faq/index.js:8
-#: public/editor/blocks/faq/index.js:1
 msgid "Allows to easily build FAQs."
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:10
-#: public/editor/blocks/faq/index.js:1
 msgid "FAQ Settings"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:12
-#: public/editor/blocks/faq/index.js:1
 msgid "List Style"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:18
-#: public/editor/blocks/faq/index.js:1
 msgctxt "Div tag List"
 msgid "NONE"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:24
-#: public/editor/blocks/faq/index.js:1
 msgctxt "Numbered List"
 msgid "OL"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:30
-#: public/editor/blocks/faq/index.js:1
 msgctxt "Unordered List"
 msgid "UL"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:35
-#: public/editor/blocks/faq/index.js:1
 msgid "Title Wrapper"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:41
-#: public/editor/blocks/faq/index.js:1
 msgctxt "H2 title tag"
 msgid "H2"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:47
-#: public/editor/blocks/faq/index.js:1
 msgctxt "H3 title tag"
 msgid "H3"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:53
-#: public/editor/blocks/faq/index.js:1
 msgctxt "H4 title tag"
 msgid "H4"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:59
-#: public/editor/blocks/faq/index.js:1
 msgctxt "H5 title tag"
 msgid "H5"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:65
-#: public/editor/blocks/faq/index.js:1
 msgctxt "H6 title tag"
 msgid "H6"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:71
-#: public/editor/blocks/faq/index.js:1
 msgctxt "P title tag"
 msgid "P"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:77
-#: public/editor/blocks/faq/index.js:1
 msgctxt "DIV title tag"
 msgid "DIV"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:82
-#: public/editor/blocks/faq/index.js:1
 msgid "Image Size"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:88
-#: public/editor/blocks/faq/index.js:1
 msgctxt "Thubmnail Size"
 msgid "S"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:94
-#: public/editor/blocks/faq/index.js:1
 msgctxt "Medium Size"
 msgid "M"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:100
-#: public/editor/blocks/faq/index.js:1
 msgctxt "Large Size"
 msgid "L"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:106
-#: public/editor/blocks/faq/index.js:1
 msgctxt "Original Size"
 msgid "XL"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:113
-#: public/editor/blocks/faq/index.js:1
 msgid "SEO Settings"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:115
-#: public/editor/blocks/faq/index.js:1
 msgid "Enable FAQ Schema"
 msgstr ""
 
 #: app/editor/blocks/faq/inspector.js:125
-#: public/editor/blocks/faq/index.js:1
 msgid "Enable accordion"
 msgstr ""
 
 #: app/editor/blocks/sitemap/edit.js:11
-#: public/editor/blocks/sitemap/index.js:1
 msgid "It looks like the Sitemap feature is not enabled from your SEO settings. You must activate it to use this block. Make sure the HTML sitemap option is also enabled."
 msgstr ""
 
 #: app/editor/blocks/sitemap/edit.js:12
-#: public/editor/blocks/sitemap/index.js:1
 msgid "Review settings"
 msgstr ""
 
 #: app/editor/blocks/sitemap/index.js:7
-#: public/editor/blocks/sitemap/index.js:1
 msgid "Sitemap"
 msgstr ""
 
 #: app/editor/blocks/sitemap/index.js:8
-#: public/editor/blocks/sitemap/index.js:1
 msgid "Display an HTML sitemap."
 msgstr ""
 
 #: app/editor/blocks/sitemap/index.js:9
-#: public/editor/blocks/sitemap/index.js:1
 msgid "sitemap"
 msgstr ""
 
 #: app/editor/blocks/sitemap/index.js:9
-#: public/editor/blocks/sitemap/index.js:1
 msgid "navigation"
 msgstr ""
 
 #: app/editor/blocks/sitemap/inspector.js:17
-#: public/editor/blocks/sitemap/index.js:1
 msgid "Post types to display"
 msgstr ""
 
 #: app/editor/blocks/sitemap/inspector.js:20
-#: public/editor/blocks/sitemap/index.js:1
 msgid "By default, if you have not selected any post types below, we’ll automatically take the ones set from the Sitemap setting page."
 msgstr ""
 
-#: public/editor/pre-publish-checklist/index.js:1
+#: app/editor/pre-publish-checklist/index.js:66
 msgid "SEO Checklist"
 msgstr ""
 
-#: public/editor/pre-publish-checklist/index.js:1
-msgid "Wordcount: "
+#: app/editor/pre-publish-checklist/index.js:70
+msgid "Word count: "
 msgstr ""
 
-#: public/editor/pre-publish-checklist/index.js:1
+#: app/editor/pre-publish-checklist/index.js:74
 msgid "Meta title is set."
 msgstr ""
 
-#: public/editor/pre-publish-checklist/index.js:1
-msgid "Meta title is not set."
+#: app/editor/pre-publish-checklist/index.js:74
+msgid "Custom meta title is not set."
 msgstr ""
 
-#: public/editor/pre-publish-checklist/index.js:1
+#: app/editor/pre-publish-checklist/index.js:78
 msgid "Meta description is set."
 msgstr ""
 
-#: public/editor/pre-publish-checklist/index.js:1
-msgid "Meta description is not set."
+#: app/editor/pre-publish-checklist/index.js:78
+msgid "Custom meta description is not set."
 msgstr ""
 
-#: public/editor/pre-publish-checklist/index.js:1
-msgid "Post is set to noindex."
+#: app/editor/pre-publish-checklist/index.js:82
+msgid "This content is set to be indexed."
 msgstr ""
 
-#: public/editor/pre-publish-checklist/index.js:1
-msgid "Post is set to be indexed."
+#: app/editor/pre-publish-checklist/index.js:82
+msgid "This content is set to noindex."
 msgstr ""
 
 #: app/editor/blocks/faq/block.json
-#: public/editor/blocks/faq/block.json
 msgctxt "block title"
 msgid "FAQ"
 msgstr ""
 
 #: app/editor/blocks/faq/block.json
-#: public/editor/blocks/faq/block.json
 msgctxt "block description"
 msgid "Allows to easily build FAQs"
 msgstr ""
 
 #: app/editor/blocks/sitemap/block.json
-#: public/editor/blocks/sitemap/block.json
 msgctxt "block title"
 msgid "Sitemap"
 msgstr ""
 
 #: app/editor/blocks/sitemap/block.json
-#: public/editor/blocks/sitemap/block.json
 msgctxt "block description"
 msgid "Display an HTML sitemap"
 msgstr ""

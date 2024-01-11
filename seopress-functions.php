@@ -189,52 +189,6 @@ function seopress_titles_single_cpt_enable_option($cpt) {
 }
 
 /**
- * @deprecated 5.4.0
- */
-function seopress_advanced_appearance_ps_col_option() {
-    return seopress_get_service('AdvancedOption')->getAppearancePsCol();
-}
-
-/**
- * @deprecated 4.4.0
- */
-function seopress_get_post_types() {
-    return seopress_get_service('WordPressData')->getPostTypes();
-}
-
-/**
- * @deprecated 5.8.0
- **/
-function seopress_get_taxonomies($with_terms = false) {
-    $args = [
-        'show_ui' => true,
-        'public'  => true,
-    ];
-    $args = apply_filters('seopress_get_taxonomies_args', $args);
-
-    $output     = 'objects'; // or objects
-    $operator   = 'and'; // 'and' or 'or'
-    $taxonomies = get_taxonomies($args, $output, $operator);
-
-    unset(
-        $taxonomies['seopress_bl_competitors']
-    );
-
-    $taxonomies = apply_filters('seopress_get_taxonomies_list', $taxonomies);
-
-    if ( ! $with_terms) {
-        return $taxonomies;
-    }
-
-    foreach ($taxonomies as $_tax_slug => &$_tax) {
-        $_tax->terms = get_terms(['taxonomy' => $_tax_slug]);
-    }
-
-    return $taxonomies;
-}
-
-
-/**
  * Get all custom fields (limit: 250).
  *
  * @author Benjamin Denis
@@ -776,34 +730,6 @@ function seopress_admin_notices() {
 }
 
 /**
- * Return the 7 days in correct order.
- *
- * @since 3.8.2
- *
- * @author Julio Potier
- *
- * @return bool
- */
-function seopress_get_days() {
-    $start_of_week = (int) get_option('start_of_week');
-
-    return array_map(
-        function () use ($start_of_week) {
-            static $start_of_week;
-
-            return ucfirst(date_i18n('l', strtotime($start_of_week++ - date('w', 0) . ' day', 0)));
-        },
-        array_combine(
-            array_merge(
-                array_slice(range(0, 6), $start_of_week, 7),
-                array_slice(range(0, 6), 0, $start_of_week)
-            ),
-            range(0, 6)
-        )
-    );
-}
-
-/**
  * Check if a key exists in a multidimensional array.
  *
  * @since 3.8.2
@@ -897,28 +823,6 @@ function seopress_get_toggle_option($feature) {
 		}
 	}
 }
-
-/*
- * Global trailingslash option from SEO, Advanced, Advanced tab (useful for backwards compatibility with SEOPress < 5.9)
- * @since 5.9
- * @return string 1 if true
- * @author Benjamin
- */
-if ( ! function_exists('seopress_advanced_advanced_trailingslash_option')) {
-    function seopress_advanced_advanced_trailingslash_option()
-    {
-        $seopress_advanced_advanced_trailingslash_option = get_option('seopress_advanced_option_name');
-        if (! empty($seopress_advanced_advanced_trailingslash_option)) {
-            foreach ($seopress_advanced_advanced_trailingslash_option as $key => $seopress_advanced_advanced_trailingslash_value) {
-                $options[$key] = $seopress_advanced_advanced_trailingslash_value;
-            }
-            if (isset($seopress_advanced_advanced_trailingslash_option['seopress_advanced_advanced_trailingslash'])) {
-                return $seopress_advanced_advanced_trailingslash_option['seopress_advanced_advanced_trailingslash'];
-            }
-        }
-    }
-}
-
 
 /*
  * Disable Add to cart GA tracking code on archive page / related products for Elementor PRO to avoid a JS conflict

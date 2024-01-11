@@ -124,3 +124,11 @@ add_settings_field(
     'seopress-settings-admin-html-sitemap', // Page
     'seopress_setting_section_html_sitemap' // Section
 );
+
+add_settings_field(
+    'seopress_xml_sitemap_html_no_hierarchy', // ID
+    __('Disable hierarchy for posts and products', 'wp-seopress'), // Title
+    'seopress_xml_sitemap_html_no_hierarchy_callback', // Callback
+    'seopress-settings-admin-html-sitemap', // Page
+    'seopress_setting_section_html_sitemap' // Section
+);

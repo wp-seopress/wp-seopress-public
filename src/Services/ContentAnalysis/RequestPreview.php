@@ -14,6 +14,7 @@ class RequestPreview
 
         //Oxygen / beTheme compatibility
         $theme = wp_get_theme();
+        $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.get_post_type($id)) ? false : true;
         if (
             (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true)
             ||
@@ -43,8 +44,10 @@ class RequestPreview
      */
     public function getDomById($id, $taxname = null)
     {
+
+
         $args = [
-            'redirection' => 2,
+            'redirection'     => 2,
             'timeout'         => 30,
             'sslverify'       => false,
         ];
@@ -69,11 +72,26 @@ class RequestPreview
 
         try {
             $response = wp_remote_get($link, $args);
+
+            $codeResponse = wp_remote_retrieve_response_code($response);
+            if(is_wp_error($response) || in_array($codeResponse, [404, 401])){
+                return [
+                    "success" => false,
+                    "code" => $codeResponse,
+                ];
+            }
+
             $body     = wp_remote_retrieve_body($response);
 
-            return $body;
+            return [
+                "success" => true,
+                "body" => $body,
+            ];
         } catch (\Exception $e) {
-            return null;
+            return [
+                "success" => false,
+                "code" => "",
+            ];
         }
     }
 }

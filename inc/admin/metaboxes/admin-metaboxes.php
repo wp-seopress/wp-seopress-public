@@ -94,6 +94,7 @@ function seopress_display_seo_metaboxe()
                 if (isset($get_current_screen->is_block_editor)) {
                     if ($get_current_screen->is_block_editor) {
                         wp_enqueue_script('seopress-block-editor-js', SEOPRESS_ASSETS_DIR . '/js/seopress-block-editor' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, true);
+                        wp_enqueue_script('seopress-pre-publish-checklist', SEOPRESS_URL_PUBLIC . '/editor/pre-publish-checklist/index.js', [], SEOPRESS_VERSION, true);
                         if ( version_compare( $wp_version, '5.8', '>=' ) ) {
                             global $pagenow;
 

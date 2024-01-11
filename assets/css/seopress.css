@@ -3894,6 +3894,12 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     }
 }
 
+.seopress-img-placeholder img#seopress_rich_snippets_publisher_logo_placeholder_src {
+    max-height: 300px;
+    min-width: 300px;
+    max-width: 300px;
+}
+
 /* Default styles */
 .seopress-dashboard .seopress-option {
     background: url(../img/bg-dashboard.svg) no-repeat 100% 0%;

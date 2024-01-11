@@ -18,6 +18,30 @@ class AdvancedSettings implements ExecuteHooks
                 'auth_callback' => [$this, 'meta_auth']
             ]
         );
+        register_post_meta( '', '_seopress_titles_title',
+            [
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+                'auth_callback' => [$this, 'meta_auth']
+            ]
+        );
+        register_post_meta( '', '_seopress_titles_desc',
+            [
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+                'auth_callback' => [$this, 'meta_auth']
+            ]
+        );
+        register_post_meta( '', '_seopress_robots_index',
+            [
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+                'auth_callback' => [$this, 'meta_auth']
+            ]
+        );
     }
 
     /**

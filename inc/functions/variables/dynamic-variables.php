@@ -49,7 +49,7 @@ function seopress_get_dynamic_variables($variables, $post, $is_oembed){
 
     //Template variables
     if (seopress_get_service('TitleOption')->getSeparator()) {
-        $sep = seopress_get_service('TitleOption')->getSeparator();
+        $sep = htmlspecialchars(seopress_get_service('TitleOption')->getSeparator());
     } else {
         $sep = '-';
     }

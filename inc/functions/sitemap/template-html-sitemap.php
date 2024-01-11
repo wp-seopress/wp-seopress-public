@@ -39,10 +39,12 @@ if (! empty($postslist)) {
             setup_postdata($post);
 
             //Prevent duplicated items
-            if ($cpt_key === 'post' || $cpt_key === 'product') {
-                $tax = $cpt_key ==='product' ? $tax = $product_cat_slug  : $tax = 'category';
-                if (!has_term($cat, $tax, $post)) {
-                    continue;
+            if ('1' !== seopress_get_service('SitemapOption')->getHtmlNoHierarchy()) {
+                if ($cpt_key === 'post' || $cpt_key === 'product') {
+                    $tax = $cpt_key ==='product' ? $tax = $product_cat_slug  : $tax = 'category';
+                    if (!has_term($cat, $tax, $post)) {
+                        continue;
+                    }
                 }
             }
 

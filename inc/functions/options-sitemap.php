@@ -124,7 +124,7 @@ if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
                             $cats = apply_filters('seopress_sitemaps_html_hierarchical_terms_query', $cpt_key, $args_cat_query);
                         }
 
-                        if (is_array($cats) && ! empty($cats)) {
+                        if (is_array($cats) && ! empty($cats) && '1' !== seopress_get_service('SitemapOption')->getHtmlNoHierarchy()) {
                             $html .= '<div class="sp-wrap-cats">';
 
                             foreach ($cats as $cat) {

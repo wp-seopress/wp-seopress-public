@@ -8,6 +8,7 @@ function seopress_sanitize_options_fields($input){
         'seopress_social_facebook_img_attachment_id',
         'seopress_social_facebook_img_attachment_width',
         'seopress_social_facebook_img_attachment_height',
+        'seopress_titles_sep',
         'seopress_titles_home_site_title',
         'seopress_titles_home_site_title_alt',
         'seopress_titles_home_site_desc',
@@ -66,10 +67,6 @@ function seopress_sanitize_options_fields($input){
         //'seopress_instant_indexing_google_api_key',
     ];
 
-    $seopress_esc_attr = [
-        'seopress_titles_sep',
-    ];
-
     $seopress_sanitize_site_verification = [
         'seopress_advanced_advanced_google',
         'seopress_advanced_advanced_bing',
@@ -111,12 +108,6 @@ function seopress_sanitize_options_fields($input){
             $input[$value] = sanitize_url($input[$value]);
         } elseif ( ! empty($input[$value])) {
             $input[$value] = sanitize_text_field($input[$value]);
-        }
-    }
-
-    foreach ($seopress_esc_attr as $value) {
-        if ( ! empty($input[$value])) {
-            $input[$value] = esc_attr($input[$value]);
         }
     }
 

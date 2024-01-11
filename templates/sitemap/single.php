@@ -165,7 +165,7 @@ foreach ($postslist as $post) {
 	$seopress_mod = $modified_date;
 
 	if(!empty($modified_date)){
-		if (new DateTime($post_date) > new DateTime($modified_date)) {
+		if (strtotime($post_date) > strtotime($modified_date)) {
 			$seopress_mod = $post_date;
 		}
 

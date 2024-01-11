@@ -26,7 +26,6 @@ class PreviewMetaTitle implements ExecuteHooksBackend {
     public function get() {
         if ( ! isset($_GET['template'])) { //phpcs:ignore
             wp_send_json_error();
-
             return;
         }
 

@@ -108,7 +108,31 @@ class ContentAnalysis implements ExecuteHooks
         update_option('seopress_content_analysis_api_in_progress', true, false);
 
         $linkPreview   = seopress_get_service('RequestPreview')->getLinkRequest($id);
-        $str  = seopress_get_service('RequestPreview')->getDomById($id);
+
+        $domResult  = seopress_get_service('RequestPreview')->getDomById($id);
+
+        if(!$domResult['success']){
+            $defaultResponse = [
+                'title' =>  '...',
+                'meta_desc' =>  '...',
+            ];
+
+            $docs = seopress_get_docs_links();
+
+            switch($domResult['code']){
+                case 404:
+                    $defaultResponse['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
+                    break;
+                case 401:
+                    $defaultResponse['title'] = __('Your site is protected by an authentication.', 'wp-seopress');
+                    break;
+            }
+
+            return new \WP_REST_Response($defaultResponse);
+        }
+
+        $str = $domResult['data'];
+
         $data = seopress_get_service('DomFilterContent')->getData($str, $id);
         $data = seopress_get_service('DomAnalysis')->getDataAnalyze($data, [
             "id" => $id,
