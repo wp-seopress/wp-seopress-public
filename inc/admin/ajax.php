@@ -75,7 +75,6 @@ function seopress_do_real_preview()
         $metaDescription[$value['key']] = [$fakeTable];
     }
 
-
     $internalLinks = [
         'count' => 0,
         'links' => []
@@ -174,6 +173,7 @@ function seopress_do_real_preview()
     // Need to transform this to keep compatibility with older version
     $dataResponse = [
         'title' =>  $data['title']['value'],
+        'meta_desc' =>  isset($data['description']['value']) ? $data['description']['value'] : '',
         'link_preview' => $linkPreview,
         'analyzed_content' => isset($data['analyzed_content']) ? $data['analyzed_content'] : '',
         'target_kws' => $targetKws,

@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdu
 Donate link: https://www.seopress.org/
 Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content analysis, instant indexing, breadcrumbs, analytics, rich snippets, broken link
 Requires at least: 5.0+
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 7.2
-Stable tag: 7.1.1
+Stable tag: 7.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank 
 == Description ==
 
 <h3>Best SEO plugin for WordPress fully integrated with all page builders and themes!</h3>
-<h3>Now with AI to automagically generate meta title and description!</h3>
+<h3>Now with AI to automagically generate meta title, description and alternative texts for images!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -77,7 +77,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 <h3>SEOPress PRO: to go further with your SEO</h3>
 
 <ul>
-	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Use Artificial Intelligence to generate SEO metadata. Bulk actions supported.</li>
+	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Use Artificial Intelligence to generate SEO metadata and alternative texts for image files. Bulk actions supported.</li>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/" target="_blank"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
 	<li><a href="https://www.seopress.org/features/sitemaps/" target="_blank"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results. YouTube videos are automatically added.</li>
 	<li>Internal linking suggestions</li>
@@ -376,6 +376,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 7.1.2 =
+* NEW Bump WordPress version to 6.4
+* FIX Compatibility issue with Permalink Manager PRO on new post
+* FIX Google Preview if post excerpt is empty
+
 = 7.1.1 =
 * FIX Compatibility issue with Bricks Builder for automatic schemas
 * FIX Compatibility issue with Weglot and redirections
