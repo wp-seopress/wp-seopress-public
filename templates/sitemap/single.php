@@ -21,10 +21,6 @@ if (isset($offset) && absint($offset) && '' != $offset && 0 != $offset) {
 
 $home_url = home_url() . '/';
 
-if (function_exists('pll_home_url')) {
-    $home_url = pll_home_url();
-}
-
 $home_url = apply_filters('seopress_sitemaps_home_url', $home_url);
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 printf('<?xml-stylesheet type="text/xsl" href="%s"?>', $home_url . 'sitemaps_xsl.xsl');

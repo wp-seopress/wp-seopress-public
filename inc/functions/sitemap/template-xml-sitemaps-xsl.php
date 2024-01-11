@@ -19,10 +19,6 @@ if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) 
 function seopress_xml_sitemap_index_xsl() {
 	$home_url = home_url().'/';
 
-	if (function_exists('pll_home_url')) {
-		$home_url = pll_home_url();
-	}
-
 	$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
 
 	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"

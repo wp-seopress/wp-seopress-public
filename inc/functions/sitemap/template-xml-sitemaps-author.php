@@ -24,10 +24,6 @@ function seopress_xml_sitemap_author() {
 
     $home_url = home_url() . '/';
 
-	if (function_exists('pll_home_url')) {
-		$home_url = pll_home_url();
-	}
-
     $home_url = apply_filters('seopress_sitemaps_home_url', $home_url);
 
     $seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';

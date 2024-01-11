@@ -2,16 +2,16 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.3\n"
+"Project-Id-Version: SEOPress 7.3.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-13T17:32:04+00:00\n"
+"POT-Creation-Date: 2023-12-19T09:44:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.9.0\n"
+"X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
 
 #. Plugin Name of the plugin
@@ -3238,15 +3238,15 @@ msgstr ""
 msgid "Need help with your redirections? Read our guide"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes.php:114
-#: inc/admin/metaboxes/admin-metaboxes.php:475
+#: inc/admin/metaboxes/admin-metaboxes.php:116
+#: inc/admin/metaboxes/admin-metaboxes.php:477
 #: inc/admin/metaboxes/admin-term-metaboxes.php:66
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:104
 #: inc/admin/page-builders/elementor/inc/controls/class-content-analysis-control.php:35
 msgid "Analysis in progress..."
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes.php:456
+#: inc/admin/metaboxes/admin-metaboxes.php:458
 #: src/Services/ContentAnalysis/RenderContentAnalysis.php:19
 msgid "Content analysis"
 msgstr ""
@@ -4934,21 +4934,21 @@ msgstr ""
 msgid "Google API key is missing"
 msgstr ""
 
-#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:134
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:130
 msgid "XML Sitemaps"
 msgstr ""
 
 #. translators: %s number of xml sub-sitemaps
-#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:137
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:133
 msgid "This XML Sitemap Index file contains %s sitemaps."
 msgstr ""
 
 #. translators: %s number of URLs in an xml sitemap
-#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:140
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:136
 msgid "This XML Sitemap contains %s URL(s)."
 msgstr ""
 
-#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:147
+#: inc/functions/sitemap/template-xml-sitemaps-xsl.php:143
 msgid "Last update"
 msgstr ""
 
@@ -7076,35 +7076,35 @@ msgstr ""
 msgid "By default, if you have not selected any post types below, we’ll automatically take the ones set from the Sitemap setting page."
 msgstr ""
 
-#: app/editor/pre-publish-checklist/index.js:66
+#: app/editor/pre-publish-checklist/index.js:67
 msgid "SEO Checklist"
 msgstr ""
 
-#: app/editor/pre-publish-checklist/index.js:70
+#: app/editor/pre-publish-checklist/index.js:71
 msgid "Word count: "
 msgstr ""
 
-#: app/editor/pre-publish-checklist/index.js:74
+#: app/editor/pre-publish-checklist/index.js:75
 msgid "Meta title is set."
 msgstr ""
 
-#: app/editor/pre-publish-checklist/index.js:74
+#: app/editor/pre-publish-checklist/index.js:75
 msgid "Custom meta title is not set."
 msgstr ""
 
-#: app/editor/pre-publish-checklist/index.js:78
+#: app/editor/pre-publish-checklist/index.js:79
 msgid "Meta description is set."
 msgstr ""
 
-#: app/editor/pre-publish-checklist/index.js:78
+#: app/editor/pre-publish-checklist/index.js:79
 msgid "Custom meta description is not set."
 msgstr ""
 
-#: app/editor/pre-publish-checklist/index.js:82
+#: app/editor/pre-publish-checklist/index.js:83
 msgid "This content is set to be indexed."
 msgstr ""
 
-#: app/editor/pre-publish-checklist/index.js:82
+#: app/editor/pre-publish-checklist/index.js:83
 msgid "This content is set to noindex."
 msgstr ""
 
