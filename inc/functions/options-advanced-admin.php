@@ -84,7 +84,7 @@ function seopress_auto_image_attr($post_ID) {
             // Lowercase attributes
             $img_attr = strtolower($img_attr);
 
-            $img_attr = apply_filters('seopress_auto_image_title', $img_attr, $cpt, $parent);
+            $img_attr = apply_filters('seopress_auto_image_title', $img_attr, $cpt, $parent, $post_ID);
 
             // Create an array with the image meta (Title, Caption, Description) to be updated
             $img_attr_array = ['ID'=>$post_ID]; // Image (ID) to be updated

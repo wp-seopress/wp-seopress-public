@@ -10,7 +10,6 @@ function seopress_get_docs_links()
 
 	$docs = [
 		'website'          => 'https://www.seopress.org/',
-		'subscribe'        => 'https://www.seopress.org/subscribe/',
 		'blog'             => 'https://www.seopress.org/newsroom/',
 		'downloads'        => 'https://www.seopress.org/account/my-downloads/',
 		'support'          => 'https://www.seopress.org/support/',
@@ -112,9 +111,6 @@ function seopress_get_docs_links()
 		'advanced' => [
 			'imageseo' => 'https://www.seopress.org/support/guides/optimize-an-image-for-seo/',
 		],
-		'compatibility' => [
-			'automatic' => 'https://www.seopress.org/support/guides/generate-automatic-meta-description-from-page-builders/',
-		],
 		'security' => [
 			'metaboxe_seo'        => 'https://www.seopress.org/support/hooks/filter-seo-metaboxe-call-by-post-type/',
 			'metaboxe_ca'         => 'https://www.seopress.org/support/hooks/filter-content-analysis-metabox-call-by-post-type/',
@@ -198,7 +194,6 @@ function seopress_get_docs_links()
 
 	if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale()) {
 		$docs['website']       = 'https://www.seopress.org/fr/';
-		$docs['subscribe']     = 'https://www.seopress.org/fr/abonnez-vous/';
 		$docs['blog']          = 'https://www.seopress.org/fr/blog/';
 		$docs['downloads']     = 'https://www.seopress.org/fr/mon-compte/mes-telechargements/';
 		$docs['support']       = 'https://www.seopress.org/fr/support/';
@@ -259,8 +254,6 @@ function seopress_get_docs_links()
 		$docs['analytics']['matomo']['token'] = 'https://www.seopress.org/fr/support/guides/connectez-votre-site-wordpress-avec-matomo-analytics/';
 		$docs['analytics']['clarity']['project'] = 'https://www.seopress.org/fr/support/guides/trouver-mon-id-de-project-microsoft-clarity/';
 		$docs['advanced']['imageseo'] = 'https://www.seopress.org/fr/support/guides/optimiser-une-image-pour-le-referencement/';
-
-		$docs['compatibility']['automatic'] = 'https://www.seopress.org/fr/support/guides/generez-automatiquement-les-metas-descriptions-depuis-divi-oxygen-builder-fusion-builder/';
 
 		$docs['security']['metaboxe_seo'] = 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-seo-par-types-de-contenu/';
 		$docs['security']['metaboxe_ca'] = 'https://www.seopress.org/fr/support/hooks/filtrer-lappel-de-la-metaboxe-danalyse-de-contenu-par-types-de-contenu/';

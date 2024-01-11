@@ -366,11 +366,6 @@ function seopress_clean_content_analysis() {
             //Remove Edit nofollow links from TablePress
             add_filter( 'tablepress_edit_link_below_table', '__return_false');
 
-            //Oxygen compatibility
-            if (function_exists('ct_template_output')) {
-                add_action('template_redirect', 'seopress_get_oxygen_content');
-            }
-
             //Allow user to run custom action to clean content
             do_action('seopress_content_analysis_cleaning');
         }
@@ -548,7 +543,7 @@ function seopress_notice_permalinks() {
 add_action('admin_notices', 'seopress_notice_permalinks');
 
 /**
- * Generate a notice on permalink settings sreen if URL rewriting is disabled.
+ * Generate a notice on permalink settings screen if URL rewriting is disabled.
  *
  * @since 6.5.0
  *
@@ -833,91 +828,6 @@ function seopress_if_key_exists(array $arr, $key) {
     }
 
     return false;
-}
-
-/**
- * Get Oxygen Content for version 4.0
- *
- * @since 5.9.0
- *
- * @author Thomas Deneulin
- *
- * @return null
- */
-function seopress_get_oygen_content_v4($data, $content = ""){
-    if(!is_array($data)){
-        return $content;
-    }
-
-    if(isset($data['children'])){
-        foreach($data['children'] as $child){
-            $content = seopress_get_oygen_content_v4($child, $content);
-        }
-    }
-
-    if(isset($data['options']['ct_content'])){
-        $content .= $data['options']['ct_content'];
-    }
-
-    return $content . " ";
-
-}
-
-/**
- * Get Oxygen Content.
- *
- * @since 3.8.5
- *
- * @author Benjamin Denis
- *
- * @return null
- */
-function seopress_get_oxygen_content() {
-    $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.get_post_type(get_the_ID())) ? false : true;
-
-    if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
-        if (!empty(get_post_meta(get_the_ID(), 'ct_builder_json', true))) {
-            $oxygen_content = get_post_meta(get_the_ID(), 'ct_builder_json', true);
-            $seopress_get_the_content = seopress_get_oygen_content_v4(json_decode($oxygen_content, true));
-        } else {
-            $seopress_get_the_content = ct_template_output(true); //shortcodes?
-        }
-
-        //Get post content
-        if ( ! $seopress_get_the_content) {
-            $seopress_get_the_content = apply_filters('the_content', get_post_field('post_content', get_the_ID()));
-            $seopress_get_the_content = normalize_whitespace(wp_strip_all_tags($seopress_get_the_content));
-        }
-
-        if ($seopress_get_the_content) {
-            //Get Target Keywords
-            if (get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)) {
-                $seopress_analysis_target_kw = array_filter(explode(',', strtolower(esc_attr(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)))));
-
-                $seopress_analysis_target_kw = apply_filters( 'seopress_content_analysis_target_keywords', $seopress_analysis_target_kw, get_the_ID() );
-
-                //Keywords density
-                foreach ($seopress_analysis_target_kw as $kw) {
-                    if (preg_match_all('#\b(' . $kw . ')\b#iu', $seopress_get_the_content, $m)) {
-                        $data['kws_density']['matches'][$kw][] = $m[0];
-                    }
-                }
-            }
-
-            //Words Counter
-            $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", $seopress_get_the_content, $matches);
-
-            if ( ! empty($matches[0])) {
-                $words_counter_unique = count(array_unique($matches[0]));
-            } else {
-                $words_counter_unique = '0';
-            }
-            $data['words_counter_unique'] = $words_counter_unique;
-
-            //Update analysis
-            update_post_meta(get_the_ID(), '_seopress_analysis_data_oxygen', $data);
-        }
-    }
 }
 
 /**

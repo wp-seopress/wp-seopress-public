@@ -82,11 +82,14 @@ class ManageColumn implements ExecuteHooksBackend
         if (seopress_get_service('AdvancedOption')->getAppearanceNoFollowCol() ==='1') {
             $columns['seopress_nofollow'] = __('nofollow?', 'wp-seopress');
         }
+        if (seopress_get_service('AdvancedOption')->getAppearanceInboundCol() ==='1') {
+            $columns['seopress_inbound'] = __('Inbound links', 'wp-seopress');
+        }
+        if (seopress_get_service('AdvancedOption')->getAppearanceOutboundCol() ==='1') {
+            $columns['seopress_outbound'] = __('Outbound links', 'wp-seopress');
+        }
         if (seopress_get_service('AdvancedOption')->getAppearanceScoreCol() ==='1') {
             $columns['seopress_score'] = __('Score', 'wp-seopress');
-        }
-        if (seopress_get_service('AdvancedOption')->getAppearanceWordsCol() ==='1') {
-            $columns['seopress_words'] = __('Words', 'wp-seopress');
         }
 
         return $columns;
@@ -156,15 +159,34 @@ class ManageColumn implements ExecuteHooksBackend
                 }
                 break;
 
-            case 'seopress_words':
+            case 'seopress_inbound':
                 $dataApiAnalysis = get_post_meta($post_id, '_seopress_content_analysis_api', true);
-                if (isset($dataApiAnalysis['words_counter']) && $dataApiAnalysis['words_counter'] !== null) {
-                    echo $dataApiAnalysis['words_counter'];
-                } else {
-                    if ('' != get_the_content()) {
-                        $seopress_analysis_data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", strip_tags(wp_filter_nohtml_kses(get_the_content())), $matches);
 
-                        echo $seopress_analysis_data['words_counter'];
+                if (isset($dataApiAnalysis['internal_links']) && $dataApiAnalysis['internal_links'] !== null) {
+                    $count = $dataApiAnalysis['internal_links'];
+                    echo '<div id="seopress_inbound-' . esc_attr($post_id) . '">' . esc_html($count) . '</div>';
+                } elseif (get_post_meta($post_id, '_seopress_analysis_data')) {
+                    $data = get_post_meta($post_id, '_seopress_analysis_data', true);
+
+                    if (! empty($data['internal_links'])) {
+                        $count = $data['internal_links']['count'];
+                        echo '<div id="seopress_inbound-' . esc_attr($post_id) . '">' . esc_html($count) . '</div>';
+                    }
+                }
+                break;
+
+            case 'seopress_outbound':
+                $dataApiAnalysis = get_post_meta($post_id, '_seopress_content_analysis_api', true);
+
+                if (isset($dataApiAnalysis['outbound_links']) && $dataApiAnalysis['outbound_links'] !== null) {
+                    $count = $dataApiAnalysis['outbound_links'];
+                    echo '<div id="seopress_outbound-' . esc_attr($post_id) . '">' . esc_html($count) . '</div>';
+                } elseif (get_post_meta($post_id, '_seopress_analysis_data')) {
+                    $data = get_post_meta($post_id, '_seopress_analysis_data', true);
+
+                    if (! empty($data['outbound_links'])) {
+                        $count = count($data['outbound_links']);
+                        echo '<div id="seopress_outbound-' . esc_attr($post_id) . '">' . esc_html($count) . '</div>';
                     }
                 }
                 break;

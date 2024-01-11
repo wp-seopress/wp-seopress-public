@@ -101,9 +101,11 @@ class ModuleMetabox implements ExecuteHooks
             $postId = $dataPath[count($dataPath)-1];
         }
 
+
         $args = array_merge([
             'SEOPRESS_URL_PUBLIC'       => SEOPRESS_URL_PUBLIC,
             'SEOPRESS_URL_ASSETS'     => SEOPRESS_URL_ASSETS,
+            'SEOPRESS_PRO_IS_ACTIVATED' => is_plugin_active('wp-seopress-pro/seopress-pro.php') ? true : false,
             'SITENAME'                => get_bloginfo('name'),
             'SITEURL'                 => site_url(),
             'ADMIN_URL_TITLES'        => admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_single'),

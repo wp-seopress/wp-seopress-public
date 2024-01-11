@@ -108,12 +108,7 @@ function seopress_advanced_advanced_image_auto_alt_editor_callback() {
     <?php _e('When uploading an image file, automatically set the alternative text based on the filename', 'wp-seopress'); ?>
 </label>
 
-<?php if ( ! is_plugin_active('imageseo/imageseo.php')) {
-        if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
-            echo '<p class="seopress-help description"><a href="https://www.seopress.org/go/image-seo" target="_blank">' . __('We recommend Image SEO plugin to optimize your image ALT texts and names for Search Engines using AI and Machine Learning. Starting from just €4.99.', 'wp-seopress') . '</a><span class="dashicons dashicons-external"></span></p>';
-        }
-    }
-
+<?php
     if (isset($options['seopress_advanced_advanced_image_auto_alt_editor'])) {
         esc_attr($options['seopress_advanced_advanced_image_auto_alt_editor']);
     }

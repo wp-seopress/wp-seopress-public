@@ -228,15 +228,6 @@ class GoogleAnalyticsOption
     }
 
     /**
-     * @since 5.8.0
-     *
-     * @return string
-     */
-    public function getOptimize() {
-        return $this->searchOptionByKey('seopress_google_analytics_optimize');
-    }
-
-    /**
      * Ads
      * @since 5.8.0
      *
@@ -274,56 +265,6 @@ class GoogleAnalyticsOption
      */
     public function getOtherTrackingFooter() {
         return $this->searchOptionByKey('seopress_google_analytics_other_tracking_footer');
-    }
-
-    /**
-     * Remarketing
-     * @since 5.8.0
-     *
-     * @return string
-     */
-    public function getRemarketing() {
-        return $this->searchOptionByKey('seopress_google_analytics_remarketing');
-    }
-
-    /**
-     * IP Anonymization
-     * @since 5.8.0
-     *
-     * @return string
-     */
-    public function getIpAnonymization() {
-        return $this->searchOptionByKey('seopress_google_analytics_ip_anonymization');
-    }
-
-    /**
-     * Link attribution
-     * @since 5.8.0
-     *
-     * @return string
-     */
-    public function getLinkAttribution() {
-        return $this->searchOptionByKey('seopress_google_analytics_link_attribution');
-    }
-
-    /**
-     * Cross Domain Enable
-     * @since 5.8.0
-     *
-     * @return string
-     */
-    public function getCrossEnable() {
-        return $this->searchOptionByKey('seopress_google_analytics_cross_enable');
-    }
-
-    /**
-     * Cross Domain
-     * @since 5.8.0
-     *
-     * @return string
-     */
-    public function getCrossDomain() {
-        return $this->searchOptionByKey('seopress_google_analytics_cross_domain');
     }
 
     /**

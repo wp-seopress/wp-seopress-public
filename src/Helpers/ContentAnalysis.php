@@ -24,16 +24,6 @@ abstract class ContentAnalysis {
                 'impact' => 'good',
                 'desc'   => null,
             ],
-            'words_counter'=> [
-                'title'  => __('Words counter', 'wp-seopress'),
-                'impact' => 'good',
-                'desc'   => null,
-            ],
-            'keywords_density'=> [
-                'title'  => __('Keywords density', 'wp-seopress'),
-                'impact' => null,
-                'desc'   => null,
-            ],
             'keywords_permalink'=> [
                 'title'  => __('Keywords in permalink', 'wp-seopress'),
                 'impact' => null,

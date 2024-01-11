@@ -268,60 +268,26 @@ class SEOPRESS_Admin_Setup_Wizard {
                 ! is_plugin_active('wp-seopress-pro/seopress-pro.php')
             )
         {
-            $sub_steps = [
-                'pro' => __('PRO','wp-seopress'),
-                'insights' => __('Insights','wp-seopress'),
+            $default_steps['pro'] = [
+                'breadcrumbs' => true,
+                'name'    => /* translators: %s default: SEOPress */ sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
+                'view'    => [$this, 'seopress_setup_pro'],
+                'handler' => '',
+                'sub_steps' => [
+                    'pro' => __('Go further!','wp-seopress'),
+                ],
+                'parent' => 'pro'
             ];
-
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                unset($sub_steps['pro']);
-            }
-
-            if (is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-                unset($sub_steps['insights']);
-            }
-
-            if ( ! is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-                $default_steps['pro'] = [
-                    'name'    => /* translators: %s default: SEOPress */ sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
-                    'view'    => [$this, 'seopress_setup_pro'],
-                    'handler' => '',
-                    'sub_steps' => $sub_steps,
-                    'parent' => 'pro'
-                ];
-            }
-
-            if (! is_plugin_active('wp-seopress-insights/seopress-insights.php') && ! is_multisite()) {
-                $default_steps['insights'] = [
-                    'name'    => /* translators: %s default: SEOPress */ sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
-                    'view'    => [$this, 'seopress_setup_insights'],
-                    'handler' => '',
-                    'sub_steps' => $sub_steps,
-                    'parent' => 'pro'
-                ];
-            }
-
-            if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && !is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-                $default_steps['insights']['breadcrumbs'] = true;
-            }
-
-            if (!is_plugin_active('wp-seopress-pro/seopress-pro.php') && is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-                $default_steps['pro']['breadcrumbs'] = true;
-            }
-
-            if (!is_plugin_active('wp-seopress-pro/seopress-pro.php') && !is_plugin_active('wp-seopress-insights/seopress-insights.php')) {
-                $default_steps['pro']['breadcrumbs'] = true;
-            }
         }
 
 		$default_steps['ready']  = [
-                'breadcrumbs' => true,
-				'name'    => __('Ready!', 'wp-seopress'),
-				'view'    => [$this, 'seopress_setup_ready'],
-				'handler' => '',
-                'sub_steps' => [
-                    'ready' => __('Ready!', 'wp-seopress')
-                ]
+            'breadcrumbs' => true,
+            'name'    => __('Ready!', 'wp-seopress'),
+            'view'    => [$this, 'seopress_setup_ready'],
+            'handler' => [$this, 'seopress_final_subscribe'],
+            'sub_steps' => [
+                'ready' => __('Ready!', 'wp-seopress')
+            ]
 		];
 
 		$this->steps = apply_filters('seopress_setup_wizard_steps', $default_steps);
@@ -418,36 +384,35 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function setup_wizard_footer() {
 		?>
     </div>
-	<div class="seopress-setup-footer">
-		<?php if ('welcome' === $this->step) { ?>
-		<a class="seopress-setup-footer-links"
-			href="<?php echo esc_url(admin_url()); ?>"><?php esc_html_e('Not right now', 'wp-seopress'); ?></a>
-		<?php } elseif (
-            'import_settings' === $this->step ||
-            'social_accounts' === $this->step ||
-            'indexing_post_types' === $this->step ||
-            'indexing_archives' === $this->step ||
-            'indexing_taxonomies' === $this->step ||
-            'universal' === $this->step ||
-            'site' === $this->step ||
-            'indexing' === $this->step ||
-            'advanced' === $this->step ||
-            'pro' === $this->step ||
-            'insights' === $this->step
-            ) {
-			$skip_link = esc_url($this->get_next_step_link());
-			if ('advanced' === $this->step && defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
-				$skip_link = esc_url_raw($this->get_next_step_link('insights'));
-			}
-			?>
-		<a class="seopress-setup-footer-links"
-			href="<?php echo $skip_link; ?>"><?php esc_html_e('Skip this step', 'wp-seopress'); ?></a>
-		<?php } ?>
-		<?php do_action('seopress_setup_footer');
-        do_action( 'admin_footer', '' );
-		do_action( 'admin_print_footer_scripts' );
-        ?>
-	</div>
+        <div class="seopress-setup-footer">
+            <?php if ('welcome' === $this->step) { ?>
+            <a class="seopress-setup-footer-links"
+                href="<?php echo esc_url(admin_url()); ?>"><?php esc_html_e('Not right now', 'wp-seopress'); ?></a>
+            <?php } elseif (
+                'import_settings' === $this->step ||
+                'social_accounts' === $this->step ||
+                'indexing_post_types' === $this->step ||
+                'indexing_archives' === $this->step ||
+                'indexing_taxonomies' === $this->step ||
+                'universal' === $this->step ||
+                'site' === $this->step ||
+                'indexing' === $this->step ||
+                'advanced' === $this->step ||
+                'pro' === $this->step
+                ) {
+                $skip_link = esc_url($this->get_next_step_link());
+                if ('advanced' === $this->step && defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+                    $skip_link = esc_url_raw($this->get_next_step_link('pro'));
+                }
+                ?>
+            <a class="seopress-setup-footer-links" href="<?php echo $skip_link; ?>"><?php esc_html_e('Skip this step', 'wp-seopress'); ?></a>
+            <?php } ?>
+            <?php
+                do_action('seopress_setup_footer');
+                do_action( 'admin_footer', '' );
+                do_action( 'admin_print_footer_scripts' );
+            ?>
+        </div>
 	</div>
 </body>
 
@@ -465,11 +430,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 	<ol class="seopress-setup-steps">
 		<?php
 				$i = 1;
-
-				if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
-					unset($output_steps['insights']);
-				}
-
 		foreach ($output_steps as $step_key => $step) {
             if (!isset($step['breadcrumbs'])) {
                 continue;
@@ -858,24 +818,6 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <input id="knowledge_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
                     </p>
 
-                    <?php if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) { ?>
-                        <p>
-                            <label for="knowledge_email"><?php esc_html_e('Your email', 'wp-seopress'); ?></label>
-                            <input type="text" id="knowledge_email" class="location-input" name="knowledge_email"
-                                placeholder="<?php esc_html_e('e.g. enter', 'wp-seopress'); ?>"
-                                value="<?php echo $knowledge_email; ?>" />
-                        </p>
-
-                        <p>
-                            <label for="knowledge_nl">
-                                <input id="knowledge_nl" class="location-input" name="knowledge_nl" type="checkbox" <?php if ('1' == $knowledge_nl) {
-                                echo 'checked="yes"';
-                            } ?> value="1"/>
-                                <?php _e('Be alerted to changes in Google’s algorithm, get product updates, tutorials and ebooks to improve your conversion and traffic.'); ?>
-                            </label>
-                        </p>
-                    <?php } ?>
-
                     <p class="seopress-setup-actions step">
                         <button type="submit" class="btnPrimary btn btnNext"
                             value="<?php esc_attr_e('Save & Continue', 'wp-seopress'); ?>"
@@ -914,22 +856,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 		//Save options
 		update_option('seopress_titles_option_name', $seopress_titles_option, false);
 		update_option('seopress_social_option_name', $seopress_social_option, false);
-
-        //Send email to SG if we have user consent
-        if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
-            if (isset($seopress_social_option['seopress_social_knowledge_email']) && $seopress_social_option['seopress_social_knowledge_nl'] === '1') {
-                $endpoint_url = 'https://www.seopress.org/wizard-nl/';
-                $body = ['email' => $seopress_social_option['seopress_social_knowledge_email'], 'lang' => seopress_get_locale()];
-
-                $response = wp_remote_post( $endpoint_url, array(
-                        'method' => 'POST',
-                        'body' => $body,
-                        'timeout' => 5,
-                        'blocking' => true
-                    )
-                );
-            }
-        }
 
 		wp_safe_redirect(esc_url_raw($this->get_next_step_link()));
 		exit;
@@ -1207,7 +1133,64 @@ class SEOPRESS_Admin_Setup_Wizard {
                         if (empty($cpt)) { ?>
                         <p><?php _e('You don‘t have any post type archives, you can continue to the next step.','wp-seopress'); ?></p>
                         <?php }
-                    } ?>
+                    }
+
+                    $seopress_titles_archives_date_noindex = isset($seopress_titles_option['seopress_titles_archives_date_noindex']);
+                    $seopress_titles_archives_search_title_noindex = isset($seopress_titles_option['seopress_titles_archives_search_title_noindex']);
+                    $seopress_titles_archives_author_noindex = isset($seopress_titles_option['seopress_titles_archives_author_noindex']);
+                    ?>
+
+                    <h2>
+                        <?php _e('For which other archives, should indexing be disabled?', 'wp-seopress'); ?>
+                    </h2>
+
+                    <ul>
+                        <h3><?php _e('Date archives','wp-seopress'); ?></h3>
+                        <li class="seopress-wizard-service-item checkbox">
+                            <label
+                                for="seopress_titles_option_name[seopress_titles_archives_date_noindex]">
+                                <input
+                                    id="seopress_titles_option_name[seopress_titles_archives_date_noindex]"
+                                    name="seopress_titles_option_name[seopress_titles_archives_date_noindex]"
+                                    type="checkbox" <?php if ('1' == $seopress_titles_archives_date_noindex) {
+                                                    echo 'checked="yes"';
+                                                } ?>
+                                value="1"/>
+                                <?php _e('Do not display date archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                            </label>
+                        </li>
+
+                        <h3><?php _e('Search archives','wp-seopress'); ?></h3>
+                        <li class="seopress-wizard-service-item checkbox">
+                            <label
+                                for="seopress_titles_option_name[seopress_titles_archives_search_title_noindex]">
+                                <input
+                                    id="seopress_titles_option_name[seopress_titles_archives_search_title_noindex]"
+                                    name="seopress_titles_option_name[seopress_titles_archives_search_title_noindex]"
+                                    type="checkbox" <?php if ('1' == $seopress_titles_archives_search_title_noindex) {
+                                                    echo 'checked="yes"';
+                                                } ?>
+                                value="1"/>
+                                <?php _e('Do not display search archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                            </label>
+                        </li>
+
+                        <h3><?php _e('Author archives','wp-seopress'); ?></h3>
+                        <li class="seopress-wizard-service-item checkbox">
+                            <label
+                                for="seopress_titles_option_name[seopress_titles_archives_author_noindex]">
+                                <input
+                                    id="seopress_titles_option_name[seopress_titles_archives_author_noindex]"
+                                    name="seopress_titles_option_name[seopress_titles_archives_author_noindex]"
+                                    type="checkbox" <?php if ('1' == $seopress_titles_archives_author_noindex) {
+                                                    echo 'checked="yes"';
+                                                } ?>
+                                value="1"/>
+                                <?php _e('Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                            </label>
+                        </li>
+                        <li class="description"><?php _e('You only have one author on your site? Check this option to avoid duplicate content.', 'wp-seopress'); ?></li>
+                    </ul>
 
                     <p class="seopress-setup-actions step">
                         <button type="submit" class="btnPrimary btn btnNext"
@@ -1243,6 +1226,31 @@ class SEOPRESS_Admin_Setup_Wizard {
 			}
 			$seopress_titles_option['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex'] = $noindex;
 		}
+
+        //Date archives noindex
+        if (isset($_POST['seopress_titles_option_name']['seopress_titles_archives_date_noindex'])) {
+            $noindex = esc_attr(wp_unslash($_POST['seopress_titles_option_name']['seopress_titles_archives_date_noindex']));
+        } else {
+            $noindex = null;
+        }
+        $seopress_titles_option['seopress_titles_archives_date_noindex'] = $noindex;
+
+        //Search archives noindex
+        if (isset($_POST['seopress_titles_option_name']['seopress_titles_archives_search_title_noindex'])) {
+            $noindex = esc_attr(wp_unslash($_POST['seopress_titles_option_name']['seopress_titles_archives_search_title_noindex']));
+        } else {
+            $noindex = null;
+        }
+        $seopress_titles_option['seopress_titles_archives_search_title_noindex'] = $noindex;
+
+        //Author indexing
+        if (isset($_POST['seopress_titles_option_name']['seopress_titles_archives_author_noindex'])) {
+            $noindex = esc_attr(wp_unslash($_POST['seopress_titles_option_name']['seopress_titles_archives_author_noindex']));
+        } else {
+            $noindex = null;
+        }
+        $seopress_titles_option['seopress_titles_archives_author_noindex'] = $noindex;
+
 
 		//Save options
 		update_option('seopress_titles_option_name', $seopress_titles_option);
@@ -1358,8 +1366,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 	 *	Init "Step 4: Advanced Step".
 	 */
 	public function seopress_setup_advanced() {
-		$seopress_titles_option           = get_option('seopress_titles_option_name');
-		$author_noindex                   = isset($seopress_titles_option['seopress_titles_archives_author_noindex']);
 		$seopress_advanced_option         = get_option('seopress_advanced_option_name');
 		$attachments_file                 = isset($seopress_advanced_option['seopress_advanced_advanced_attachments_file']);
 		$category_url                     = isset($seopress_advanced_option['seopress_advanced_advanced_category_url']);
@@ -1378,19 +1384,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 
                 <form method="post">
                     <ul>
-                        <!-- Noindex on author archives -->
-                        <li class="seopress-wizard-service-item checkbox">
-                            <label for="author_noindex">
-                                <input id="author_noindex" class="location-input" name="author_noindex" type="checkbox" <?php if ('1' == $author_noindex) {
-                            echo 'checked="yes"';
-                        } ?> value="1"/>
-                                <?php _e('Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
-                            </label>
-                        </li>
-                        <li class="description">
-                            <?php _e('You only have one author on your site? Check this option to avoid duplicate content.', 'wp-seopress'); ?>
-                        </li>
-
                         <!-- Redirect attachment pages to URL -->
                         <li class="seopress-wizard-service-item checkbox">
                             <label for="attachments_file">
@@ -1472,11 +1465,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		check_admin_referer('seopress-setup');
 
 		//Get options
-		$seopress_titles_option   = get_option('seopress_titles_option_name');
 		$seopress_advanced_option = get_option('seopress_advanced_option_name');
-
-		//Author indexing
-		$seopress_titles_option['seopress_titles_archives_author_noindex'] = isset($_POST['author_noindex']) ? esc_attr(wp_unslash($_POST['author_noindex'])) : null;
 
 		//Advanced
 		$seopress_advanced_option['seopress_advanced_advanced_attachments_file']    = isset($_POST['attachments_file']) ? esc_attr(wp_unslash($_POST['attachments_file'])) : null;
@@ -1487,7 +1476,6 @@ class SEOPRESS_Admin_Setup_Wizard {
         }
 
 		//Save options
-		update_option('seopress_titles_option_name', $seopress_titles_option, false);
 		update_option('seopress_advanced_option_name', $seopress_advanced_option, false);
 
 		wp_redirect(esc_url_raw($this->get_next_step_link()));
@@ -1573,7 +1561,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		update_option('seopress_advanced_option_name', $seopress_advanced_option, false);
 
 		if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
-			wp_redirect(esc_url_raw($this->get_next_step_link('insights')));
+			wp_redirect(esc_url_raw($this->get_next_step_link('pro')));
 		} else {
 			wp_redirect(esc_url_raw($this->get_next_step_link()));
 		}
@@ -1590,101 +1578,100 @@ class SEOPRESS_Admin_Setup_Wizard {
         <div class="seopress-setup-content">
 
             <h1 class="seopress-setup-actions step">
-                <?php _e('SEOPress PRO','wp-seopress'); ?>
+                <?php _e('Our Premium SEO plugins','wp-seopress'); ?>
             </h1>
 
             <?php $this->setup_wizard_sub_steps(); ?>
 
             <div class="seopress-tab active">
-                <h2><?php _e('Premium SEO features to increase your rankings', 'wp-seopress'); ?></h2>
+                <div class="cols">
+                    <?php if (! is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
+                        <div class="col col-pro">
+                            <h2>
+                                <img alt="<?php _e('SEOPress PRO logo','wp-seopress'); ?>" width="50" height="50" src="https://www.seopress.org/wp-content/uploads/2021/06/logo-seopress-pro.svg" />
+                                <?php _e('SEOPress PRO', 'wp-seopress'); ?>
+                            </h2>
 
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Generate automatically <strong>SEO metadata using AI</strong>.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Improve your business\'s presence in <strong>local search results</strong>.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Optimize your SEO from your favorite e-commerce plugin: <strong>WooCommerce or Easy Digital Downloads</strong>.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Add an infinity of <strong>Google structured data (schema)</strong> to your content to improve its visibility in search results.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Add your custom <strong>breadcrumbs</strong>.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Configure your <strong>robots.txt and .htaccess files</strong>.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Manage your <strong>redirections</strong>.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('Observe the evolution of your site via <strong>Google Analytics stats</strong> (or Matomo) directly from your WordPress Dashboard.', 'wp-seopress'); ?>
-                </p>
+                            <img alt="" width="100%" style="max-width: 500px" src="https://www.seopress.org/wp-content/uploads/2021/06/seopress-pro-featured.png" />
 
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php _e('And so many other features to increase your rankings, sales and productivity.', 'wp-seopress'); ?>
-                </p>
+                            <h3><?php _e('Premium SEO features to increase your rankings', 'wp-seopress'); ?></h3>
 
-                <img alt="" width="100%" style="max-width: 750px" src="https://www.seopress.org/wp-content/uploads/2021/08/hero-seopress-pro.png" />
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('Generate automatically <strong>SEO metadata using AI</strong>.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('Improve your business\'s presence in <strong>local search results</strong>.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('Optimize your SEO from your favorite e-commerce plugin: <strong>WooCommerce or Easy Digital Downloads</strong>.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('Add an infinity of <strong>Google structured data (schema)</strong> to your content to improve its visibility in search results.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('Add your custom <strong>breadcrumbs</strong>.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('Configure your <strong>robots.txt and .htaccess files</strong>.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('Manage your <strong>redirections</strong>.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('Observe the evolution of your site via <strong>Google Analytics stats</strong> (or Matomo) directly from your WordPress Dashboard.', 'wp-seopress'); ?>
+                            </p>
 
-                <p class="seopress-setup-actions step">
-                    <a class="btn btnPrimary"
-                        href="<?php echo $docs['addons']['pro']; ?>"
-                        target="_blank">
-                        <?php _e('Get SEOPress PRO', 'wp-seopress'); ?>
-                    </a>
-                </p>
-            </div>
-        </div>
-        <?php
-	}
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php _e('And so many other features to increase your rankings, sales and productivity.', 'wp-seopress'); ?>
+                            </p>
 
-	/**
-	 *	Init "Step 5.1: Insights Step".
-	 */
-	public function seopress_setup_insights() {
-		$docs = seopress_get_docs_links(); ?>
-        <!-- SEOPress Insights -->
-        <div class="seopress-setup-content">
+                            <p class="seopress-setup-actions step">
+                                <a class="btn btnPrimary btnPro"
+                                    href="<?php echo $docs['addons']['pro']; ?>"
+                                    target="_blank">
+                                    <?php _e('Get SEOPress PRO', 'wp-seopress'); ?>
+                                </a>
+                            </p>
+                        </div>
+                    <?php } ?>
 
-            <h1 class="seopress-setup-actions step">
-                <?php _e('SEOPress Insights','wp-seopress'); ?>
-            </h1>
+                    <?php if (! is_plugin_active('wp-seopress-insights/seopress-insights.php') && ! is_multisite()) { ?>
+                        <div class="col col-insights">
+                            <h2>
+                                <img alt="<?php _e('SEOPress Insights logo','wp-seopress'); ?>" width="50" height="50" src="https://www.seopress.org/wp-content/uploads/2021/06/logo-seopress-insights.svg" />
+                                <?php _e('SEOPress Insights', 'wp-seopress'); ?>
+                            </h2>
 
-            <?php $this->setup_wizard_sub_steps(); ?>
+                            <img alt="" width="100%" style="max-width: 500px" src="https://www.seopress.org/wp-content/uploads/2021/06/seopress-insights-featured.png" />
 
-            <div class="seopress-tab active">
-                <h2><?php _e('Start monitoring your rankings and backlinks directly from your WordPress admin', 'wp-seopress'); ?></h2>
+                            <h3><?php _e('Start monitoring your rankings and backlinks directly from your WordPress admin', 'wp-seopress'); ?></h3>
 
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php esc_html_e('Track your keyword positions from Google Search results daily.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php esc_html_e('Track your competitors.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php esc_html_e('Monitor and analyse your top 1,000 Backlinks weekly.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php esc_html_e('Export your data to CSV, PDF, Excel.', 'wp-seopress'); ?>
-                </p>
-                <p class="seopress-setup-actions step">
-                    <span class="dashicons dashicons-minus"></span><?php esc_html_e('Receive your rankings / backlinks in your inbox / Slack.', 'wp-seopress'); ?>
-                </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php esc_html_e('Track your keyword positions from Google Search results daily.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php esc_html_e('Track your competitors.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php esc_html_e('Monitor and analyse your top 1,000 Backlinks weekly.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php esc_html_e('Export your data to CSV, PDF, Excel.', 'wp-seopress'); ?>
+                            </p>
+                            <p class="seopress-setup-actions step">
+                                <span class="dashicons dashicons-minus"></span><?php esc_html_e('Receive your rankings / backlinks in your inbox / Slack.', 'wp-seopress'); ?>
+                            </p>
 
-                <a class="wrap-yt-embed" href="https://youtu.be/p6v9Jd5lRIU" target="_blank" title="<?php _e('Watch the SEOPress Insights overview video - Open in a new window', 'wp-seopress'); ?>">
-                    <img src="<?php echo SEOPRESS_ASSETS_DIR . '/img/yt-insights.webp'; ?>" alt="<?php _e('SEOPress Insights video thumbnail','wp-seopress'); ?>" width="500" />
-                </a>
-
-                <p class="seopress-setup-actions step">
-                    <a class="btn btnPrimary"
-                        href="<?php echo $docs['addons']['insights']; ?>"
-                        target="_blank">
-                        <?php _e('Get SEOPress Insights', 'wp-seopress'); ?>
-                    </a>
-                </p>
+                            <p class="seopress-setup-actions step">
+                                <a class="btn btnPrimary btnInsights"
+                                    href="<?php echo $docs['addons']['insights']; ?>"
+                                    target="_blank">
+                                    <?php _e('Get SEOPress Insights', 'wp-seopress'); ?>
+                                </a>
+                            </p>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
         <?php
@@ -1707,11 +1694,14 @@ class SEOPRESS_Admin_Setup_Wizard {
 
         <div class="seopress-setup-content">
 
-            <h1><?php esc_html_e('Your site is now ready for search engines!', 'wp-seopress'); ?></h1>
-
             <?php $this->setup_wizard_sub_steps(); ?>
 
             <div class="seopress-tab active">
+
+                <div class="final">
+                    <h1>🎉 <?php esc_html_e('Congratulations!', 'wp-seopress'); ?> 🎉</h2>
+                    <h2><?php esc_html_e('Your site is now ready for search engines', 'wp-seopress'); ?></h2>
+                </div>
 
                 <ul class="seopress-wizard-next-steps">
                     <?php do_action('seopress_wizard_setup_ready'); ?>
@@ -1738,25 +1728,49 @@ class SEOPRESS_Admin_Setup_Wizard {
                         $current_user = wp_get_current_user();
                         $user_email = $current_user->user_email ? esc_html( $current_user->user_email ) : '';
                         ?>
-                        <li class="seopress-wizard-next-step-item">
-                            <div class="seopress-wizard-next-step-description">
-                                <p class="next-step-heading"><?php esc_html_e('Newsletter', 'wp-seopress'); ?>
-                                </p>
-                                <h3 class="next-step-description"><?php esc_html_e('SEO news in your inbox. Free.', 'wp-seopress'); ?>
-                                </h3>
-                                <ul class="next-step-extra-info">
-                                    <li><span class="dashicons dashicons-minus"></span><?php esc_html_e('Be alerted to changes in Google’s algorithm', 'wp-seopress'); ?></li>
-                                    <li><span class="dashicons dashicons-minus"></span><?php esc_html_e('The latest innovations of our products', 'wp-seopress'); ?></li>
-                                    <li><span class="dashicons dashicons-minus"></span><?php esc_html_e('Improve your conversions and traffic with our new blog posts', 'wp-seopress'); ?></li>
-                                </ul>
-                            </div>
-                            <div class="seopress-wizard-next-step-action">
-                                <p class="seopress-setup-actions step">
-                                    <a class="btn btnSecondary" target="_blank"
-                                        href="<?php echo $docs['subscribe']; ?>&email=<?php echo $user_email; ?>">
-                                        <?php esc_html_e('Subscribe', 'wp-seopress'); ?>
-                                    </a>
-                                </p>
+                        <li class="seopress-wizard-next-step-item wrap-seopress-wizard-nl">
+                            <div class="seopress-wizard-next-step-description seopress-wizard-nl">
+                                <div class="col">
+                                    <img src="<?php echo SEOPRESS_ASSETS_DIR . '/img/ico-newsletter.svg'; ?>" alt="" width="79" height="116" />
+                                </div>
+                                <div class="col">
+                                    <h3 class="next-step-description"><?php esc_html_e('SEO news in your inbox. Free.', 'wp-seopress'); ?></h3>
+
+                                    <ul class="next-step-extra-info">
+                                        <li>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#4e21e7" class="bi bi-check text-primary" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path></svg>
+                                            <?php _e('Be alerted to changes in <strong>Google’s algorithm</strong>', 'wp-seopress'); ?>
+                                        </li>
+                                        <li>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#4e21e7" class="bi bi-check text-primary" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path></svg>
+                                            <?php _e('The <strong>latest innovations</strong> of our products', 'wp-seopress'); ?>
+                                        </li>
+                                        <li>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#4e21e7" class="bi bi-check text-primary" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path></svg>
+                                            <?php _e('Improve your <strong>conversions and traffic</strong> with our new blog posts', 'wp-seopress'); ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <div class="seopress-wizard-next-step-action">
+                                        <?php if (!isset($_GET['sub'])) { ?>
+                                            <p class="seopress-setup-actions step">
+                                                <form method="post">
+                                                    <input type="text" id="seopress_nl" class="location-input" name="seopress_nl" placeholder="<?php esc_html_e('Enter your email address', 'wp-seopress'); ?>" value="<?php echo $user_email; ?>" />
+
+                                                    <button id="seopress_nl_submit" type="submit" class="btnPrimary btn" value="<?php esc_attr_e('Subscribe', 'wp-seopress'); ?>" name="save_step">
+                                                        <?php esc_html_e('Subscribe', 'wp-seopress'); ?>
+                                                    </button>
+                                                    <?php wp_nonce_field('seopress-setup'); ?>
+                                                </form>
+                                            </p>
+
+                                            <?php printf(__('I accept that SEOPress can store and use my email address in order to send me a newsletter. Read our <a href="%s" target="_blank" title="Open in a new window">privacy policy</a>.', 'wp-seopress'), esc_url('https://www.seopress.org/privacy-policy/')); ?>
+                                        <?php } elseif (isset($_GET['sub']) && $_GET['sub'] ==='1') { ?>
+                                            <p style="font-size: 16px;font-weight: bold;"><?php _e('Thank you for your subscription!', 'wp-seopress'); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                </div>
                             </div>
                         </li>
                     <?php } ?>
@@ -1792,6 +1806,33 @@ class SEOPRESS_Admin_Setup_Wizard {
     </div>
 <?php
 	}
+
+    public function seopress_final_subscribe() {
+        check_admin_referer('seopress-setup');
+
+        //Send email to SG if we have user consent
+        if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
+
+            $endpoint_url = 'https://www.seopress.org/wizard-nl/';
+
+            $email = isset($_POST['seopress_nl']) ? sanitize_text_field(wp_unslash($_POST['seopress_nl'])) : '';
+
+            if (!empty($email)) {
+
+                $body = ['email' => $email, 'lang' => seopress_get_locale()];
+
+                $response = wp_remote_post( $endpoint_url, array(
+                        'method' => 'POST',
+                        'body' => $body,
+                        'timeout' => 5,
+                        'blocking' => true
+                    )
+                );
+            }
+        }
+		wp_safe_redirect(esc_url_raw('admin.php?page=seopress-setup&step=ready&parent&sub=1'));
+		exit;
+    }
 }
 
 new SEOPRESS_Admin_Setup_Wizard();

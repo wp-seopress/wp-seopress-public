@@ -15,6 +15,7 @@
 .seopress-option #wpcontent,
 .seopress-styles #wpcontent,
 .post-type-seopress_404 #wpcontent,
+.post-type-seopress_bot #wpcontent,
 .post-type-seopress_schemas #wpcontent,
 #seopress_cpt,
 #seopress_content_analysis,
@@ -453,7 +454,6 @@ table.wp-list-table .manage_column.column-seopress_insights {
 .post-type-product table.fixed thead .column-seopress_redirect_url,
 .post-type-product table.fixed thead .column-seopress_canonical,
 .post-type-product table.fixed thead .column-seopress_tkw,
-.post-type-product .fixed .column-seopress_words,
 .post-type-product .fixed .column-seopress_ps {
     width: 6%;
 }
@@ -463,7 +463,9 @@ table.wp-list-table .manage_column.column-seopress_insights {
 }
 
 table.fixed thead .column-seopress_nofollow,
-table.fixed thead .column-seopress_noindex {
+table.fixed thead .column-seopress_noindex,
+table.fixed thead .column-seopress_outbound,
+table.fixed thead .column-seopress_inbound {
     width: 100px;
 }
 
@@ -485,8 +487,9 @@ table.fixed thead .column-seopress_noindex {
     table.fixed thead .column-seopress_tkw,
     table.fixed thead .column-seopress_nofollow,
     table.fixed thead .column-seopress_noindex,
+    table.fixed thead .column-seopress_outbound,
+    table.fixed thead .column-seopress_inbound,
     table.fixed thead .column-seopress_score,
-    table.fixed thead .column-seopress_words,
     table.fixed thead .column-seopress_ps {
         white-space: nowrap;
         overflow: hidden;

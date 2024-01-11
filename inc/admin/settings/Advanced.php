@@ -337,9 +337,17 @@ add_settings_field(
 );
 
 add_settings_field(
-    'seopress_advanced_appearance_words_col', // ID
-    __('Show total number of words column in post types', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_words_col_callback', // Callback
+    'seopress_advanced_appearance_inbound_col', // ID
+    __('Show inbound column in post types', 'wp-seopress'), // Title
+    'seopress_advanced_appearance_inbound_col_callback', // Callback
+    'seopress-settings-admin-advanced-appearance', // Page
+    'seopress_setting_section_advanced_appearance_col' // Section
+);
+
+add_settings_field(
+    'seopress_advanced_appearance_outbound_col', // ID
+    __('Show outbound column in post types', 'wp-seopress'), // Title
+    'seopress_advanced_appearance_outbound_col_callback', // Callback
     'seopress-settings-admin-advanced-appearance', // Page
     'seopress_setting_section_advanced_appearance_col' // Section
 );

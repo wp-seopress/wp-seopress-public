@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.3
 Requires PHP: 7.2
-Stable tag: 7.0.3
+Stable tag: 7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -376,52 +376,27 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 7.0.3 =
-* FIX Google Preview if post thumbnail
-
-= 7.0.2 =
-* INFO Update the Google Preview to match the new design from search results
-* INFO Improve error handling for OpenAI
-* FIX Language passed to OpenAI when using the Universal SEO metabox
-
-= 7.0.1 =
-* FIX Fatal error get_network()
-
-= 7.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-0/">Read the blog post update</a> =
-* NEW WooCommerce compatibility: use the Universal SEO metabox with the new editor
-* NEW Generate SEO metadata with AI in WP CLI (PRO)
-* NEW Track product view details with Google Analytics 4 Ecommerce (PRO)
-* NEW Quickly block ChatGPT bots to crawl your website (SEO, PRO, robots.txt)
-* NEW Generate independently SEO metadata from the standard and universal SEO metabox
-* NEW Internal linking: show the anchor with the suggested link
-* NEW 'seopress_gtag_ec_single_view_details_ev' hook to filter the view product details event for GA4 ecommerce (https://www.seopress.org/support/hooks/filter-google-analytics-ecommerce-view-details-item-event/)
-* NEW 'seopress_primary_category_list' hook to filter the primary category / product category list (https://www.seopress.org/support/hooks/filter-primary-categories-product-categories-list/)
-* NEW 'seopress_bot_query_dom_args' hook to filter the query to request the DOM
-* NEW 'seopress_sitemaps_xml_index_item' hook to filter items in Index XML sitemaps
-* NEW 'seopress_sitemaps_html_hierarchical_terms_query' && 'seopress_sitemaps_html_hierarchical_tax_query' hooks to filter hierarchical taxonomies/terms in HTML sitemap (https://www.seopress.org/support/hooks/display-posts-of-custom-post-type-hierarchically-by-custom-taxonomy/)
-* INFO Added number of notifications as badge on notification center icon
-* INFO Order notifications by impact: high, medium, low, info
-* INFO Improve responsive design / CSS for content analysis and structured data types metaboxes
-* INFO Remove "Display archive links in HTML sitemap"
-* INFO 'seopress_sitemaps_html_remove_archive' hook is now deprecated
-* INFO Improved notice when a redirect already exists
-* INFO Add quick tags for global author meta description template
-* INFO Improve UI for Universal SEO metabox
-* INFO Completely remove Universal Analytics (GA3) from the plugin
-* FIX Some User consent cookie bar customization settings
-* FIX GA4 Enhanced Ecommerce for FSE themes
-* FIX Duplicated accordion.js file with FAQ block
-* FIX PHP Undefined array key "bing"
-* FIX PHP Warnings if %%_ct_tax%% is used with empty terms / incorrect tax name
-* FIX Remove jQuery tabs for GA4 widget
-* FIX Do not load GA Enhanced Ecommerce if GA toggle off
-* FIX 'seopress_stop_attachment_url_to_postid' filter
-* FIX Do not display empty values for width / height publisher logo for schemas
-* FIX Matomo JS if disabled
-* FIX Remove /product-category/ option with specific cases
-* FIX White Label with multisite setup
-* FIX PHP Warning:  Undefined array key "host" in redirections
-* FIX FAQ and How-To Blocks errors
-* FIX PHP 8.2 notices
+= 7.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-1/">Read the blog post update</a> =
+* NEW OpenAI #8 iteration: generation of alternative texts for images (beta) 🎉
+* NEW OpenAI #8 iteration: add GPT-4 model (required at least 1 successful payment of $1 via the OpenAI platform) 🎉
+* NEW OpenAI #8 iteration: pass target keywords if available to the prompts 🎉
+* NEW Block Google Bard AI Bot from robots.txt file in 1 click (PRO)
+* NEW Display the number of inbound / outbound links from post types list (SEO, Advanced, Appearance)
+* NEW 'seopress_ai_openai_alt_text' to filter the prompt sent to OpenAI to generate alt text for images (https://www.seopress.org/support/hooks/filter-the-prompt-sent-to-openai-to-generate-alt-text-for-images/)
+* INFO Wizard installation enhanced
+* INFO %%page%% dynamic variable no longer outputs something on first paginated archive page
+* INFO Remove deprecated Google Analytics options: remarketing, cross domains, link attribution etc. from the settings
+* INFO Improve UX when adding OpenAI key and checking the key without saving changes
+* INFO 'seopress_auto_image_title' improved with a new parameter: $post_ID of the attachment
+* INFO Stop saving unnecessary information to the database when using the Broken Link Checker
+* INFO Remove Word Counters and Keyword Density analysis, this has no impact on SEO
+* INFO Refactoring content analysis code
+* FIX Invalid argument supplied for foreach() wp-seopress-pro/inc/admin/blocks/insights.php:181
+* FIX CSS in Broken Link Checker screen
+* FIX 'seopress_sitemaps_max_posts_per_sitemap' hook (thanks to @zauddelig)
+* FIX Fatal error with Broken Link Checker in specific cases
+* FIX PHP Deprecated: Implicit conversion from float
+* FIX PHP Warning: Undefined variable $bot_status_type
+* FIX Last update column in XML sub-sitemaps on very specific cases
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

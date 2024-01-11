@@ -225,24 +225,6 @@ class I18nUniversalMetabox
                             "wp-seopress"
                         ),
                     ],
-                    'words_counter' => [
-                        'title' => __("Words counter", "wp-seopress"),
-                        'no_content' => __("No content? Add a few more paragraphs!", "wp-seopress"),
-                        'description' => __(
-                            "Words counter is not a direct ranking factor. But, your content must be as qualitative as possible, with relevant and unique information. To fulfill these conditions, your article requires a minimum of paragraphs, so words.",
-                            "wp-seopress"
-                        ),
-                        'unique_words' => __("unique words found.", "wp-seopress"),
-                        'good' => __(
-                            "Your content is composed of more than 300 words, which is the minimum for a post.",
-                            "wp-seopress"
-                        ),
-                        'bad' => __(
-                            "Your content is too short. Add a few more paragraphs!",
-                            "wp-seopress"
-                        ),
-                        'counter_words' => __("words found.", "wp-seopress"),
-                    ],
                     'old_post' => [
                         'bad' => __("This post is a little old!", "wp-seopress"),
                         'good' => __(
@@ -328,22 +310,6 @@ class I18nUniversalMetabox
                             "wp-seopress"
                         ),
                         'title' => __("Internal Links", "wp-seopress")
-                    ],
-                    'kws_density' => [
-                        'no_match' => __(
-                            "We were unable to calculate the density of your keywords. You probably haven‘t added any content or your target keywords were not find in your post content.",
-                            "wp-seopress"
-                        ),
-                        'match' => __(
-                            /* translators: %s number of times a target keyword is found, eg: 1, %s density in %, eg: 1% */
-                            '%s was found %s times in your content, a keyword density of %s',
-                            "wp-seopress"
-                        ),
-                        'description' => __(
-                            'Learn more about <a href="https://www.youtube.com/watch?v=Rk4qgQdp2UA" target="_blank">keywords stuffing</a>.',
-                            "wp-seopress"
-                        ),
-                        'title' => __("Keywords density", "wp-seopress")
                     ],
                     'kws_permalink' => [
                         'no_apply' => __(

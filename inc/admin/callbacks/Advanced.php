@@ -757,23 +757,43 @@ function seopress_advanced_appearance_nofollow_col_callback() {
 	}
 }
 
-function seopress_advanced_appearance_words_col_callback() {
+function seopress_advanced_appearance_inbound_col_callback() {
 	$options = get_option('seopress_advanced_option_name');
 
-	$check = isset($options['seopress_advanced_appearance_words_col']); ?>
+	$check = isset($options['seopress_advanced_appearance_inbound_col']); ?>
 
-<label for="seopress_advanced_appearance_words_col">
-	<input id="seopress_advanced_appearance_words_col"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_words_col]" type="checkbox" <?php if ('1' == $check) { ?>
+<label for="seopress_advanced_appearance_inbound_col">
+	<input id="seopress_advanced_appearance_inbound_col"
+		name="seopress_advanced_option_name[seopress_advanced_appearance_inbound_col]" type="checkbox" <?php if ('1' == $check) { ?>
 	checked="yes"
 	<?php } ?>
 	value="1"/>
 
-	<?php _e('Display total number of words in content', 'wp-seopress'); ?>
+	<?php _e('Display number of inbound links', 'wp-seopress'); ?>
 </label>
 
-<?php if (isset($options['seopress_advanced_appearance_words_col'])) {
-		esc_attr($options['seopress_advanced_appearance_words_col']);
+<?php if (isset($options['seopress_advanced_appearance_inbound_col'])) {
+		esc_attr($options['seopress_advanced_appearance_inbound_col']);
+	}
+}
+
+function seopress_advanced_appearance_outbound_col_callback() {
+	$options = get_option('seopress_advanced_option_name');
+
+	$check = isset($options['seopress_advanced_appearance_outbound_col']); ?>
+
+<label for="seopress_advanced_appearance_outbound_col">
+	<input id="seopress_advanced_appearance_outbound_col"
+		name="seopress_advanced_option_name[seopress_advanced_appearance_outbound_col]" type="checkbox" <?php if ('1' == $check) { ?>
+	checked="yes"
+	<?php } ?>
+	value="1"/>
+
+	<?php _e('Display number of outbound links', 'wp-seopress'); ?>
+</label>
+
+<?php if (isset($options['seopress_advanced_appearance_outbound_col'])) {
+		esc_attr($options['seopress_advanced_appearance_outbound_col']);
 	}
 }
 

@@ -22,64 +22,6 @@ class DomAnalysis
         return $data;
     }
 
-    public function getPostContentAnalyze($id)
-    {
-        //Get post content (used for Words counter)
-        $content = get_post_field('post_content', $id);
-
-        //Cornerstone compatibility
-        if (is_plugin_active('cornerstone/cornerstone.php')) {
-            $content = get_post_field('post_content', $id);
-        }
-
-        //ThriveBuilder compatibility
-        if (is_plugin_active('thrive-visual-editor/thrive-visual-editor.php') && empty($content)) {
-            $content = get_post_meta($id, 'tve_updated_post', true);
-        }
-
-         //Zion Builder compatibility
-         if (is_plugin_active('zionbuilder/zionbuilder.php')) {
-            $content = $content . get_post_meta($id, '_zionbuilder_page_elements', true);
-        }
-
-        //BeTheme is activated
-        $theme = wp_get_theme();
-        if ('betheme' == $theme->template || 'Betheme' == $theme->parent_theme) {
-            $content = $content . get_post_meta($id, 'mfn-page-items-seo', true);
-        }
-
-        //Themify compatibility
-        if (defined('THEMIFY_DIR') && method_exists('ThemifyBuilder_Data_Manager', '_get_all_builder_text_content')) {
-            global $ThemifyBuilder;
-            $builder_data = $ThemifyBuilder->get_builder_data($id);
-            $plain_text   = ThemifyBuilder_Data_Manager::_get_all_builder_text_content($builder_data);
-            $plain_text   = do_shortcode($plain_text);
-
-            if ('' != $plain_text) {
-                $content = $plain_text;
-            }
-        }
-
-        $post = get_post($id);
-
-        //Add WC product excerpt
-        if ('product' == $post->post_type) {
-            $content =  $content . get_the_excerpt($id);
-        }
-
-        $content = apply_filters('seopress_content_analysis_content', $content, $id);
-
-        if (defined('BRICKS_DB_EDITOR_MODE') && ('bricks' == $theme->template || 'Bricks' == $theme->parent_theme)) {
-            $page_sections = get_post_meta($id, BRICKS_DB_PAGE_CONTENT, true);
-            $editor_mode   = get_post_meta($id, BRICKS_DB_EDITOR_MODE, true);
-            if (is_array($page_sections) && 'wordpress' !== $editor_mode) {
-                $content = \Bricks\Frontend::render_data($page_sections);
-            }
-        }
-
-        return $content;
-    }
-
     public function getDataAnalyze($data, $options)
     {
         if (!isset($options['id'])) {
@@ -148,46 +90,6 @@ class DomAnalysis
             }
         }
 
-        $postContent = apply_filters('seopress_dom_analysis_get_post_content', $this->getPostContentAnalyze($options['id']));
-
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            $data['analyzed_content'] = $postContent;
-            $data['analyzed_content_id'] = $options['id'];
-        }
-
-        //Keywords density
-        $data['kws_density'] = [
-            "matches" => []
-        ];
-        if (! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
-            $matches = $this->getMatches($postContent, $targetKeywords);
-            if ($matches !== null) {
-                $keys = array_keys($matches);
-
-                foreach ($keys as $key => $value) {
-                    $data['kws_density']['matches'][]= [
-                        "key" => $value,
-                        "count" => count($matches[$value][0])
-                    ];
-                }
-            }
-        }
-
-
-        //Words Counter
-        if (! is_plugin_active('oxygen/functions.php') && ! function_exists('ct_template_output')) { //disable for Oxygen
-            if (!empty($postContent)) {
-                $data['words_counter'] = preg_match_all("/\p{L}[\p{L}\p{Mn}\p{Pd}'\x{2019}]*/u", normalize_whitespace(wp_strip_all_tags($postContent)), $matches);
-
-                if (! empty($matches[0])) {
-                    $wordsCounterUnique = count(array_unique($matches[0]));
-                } else {
-                    $wordsCounterUnique = '0';
-                }
-                $data['words_counter_unique'] = $wordsCounterUnique;
-            }
-        }
-
         //Keywords in permalink
         $slug = urldecode($post->post_name);
 
@@ -215,37 +117,10 @@ class DomAnalysis
             }
         }
 
+        //Old post
         $data['old_post'] = [
             'value' => strtotime($post->post_modified) < strtotime('-365 days')
         ];
-
-        //Oxygen builder
-        $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.$post->post_type) ? false : true;
-
-        if (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true) {
-            $dataOxygen = get_post_meta($post->ID, '_seopress_analysis_data_oxygen', true);
-
-
-            if ($dataOxygen) {
-                if(isset($dataOxygen['words_counter'])){
-                    $data['words_counter'] = $dataOxygen['words_counter'];
-                }
-                if(isset($dataOxygen['words_counter_unique'])){
-                    $data['words_counter_unique'] = $dataOxygen['words_counter_unique'];
-                }
-                if(isset($dataOxygen['kws_density'])){
-                    foreach($dataOxygen['kws_density'] as $key => $densities){
-                        foreach($densities as $keyDensity => $density){
-                            $data['kws_density']['matches'][]= [
-                                "key" => $keyDensity,
-                                "count" => isset($density[0]) ? count($density[0]) : 0
-                            ];
-                        }
-
-                    }
-                }
-            }
-        }
 
         return $data;
     }

@@ -63,9 +63,7 @@
 	</key>
 	<key name="seopress_google_analytics_option_name">
 	  <key name="seopress_google_analytics_ga4"/>
-	  <key name="seopress_google_analytics_optimize"/>
 	  <key name="seopress_google_analytics_ads"/>
-	  <key name="seopress_google_analytics_cross_domain"/>
 	  <key name="seopress_google_analytics_download_tracking"/>
 	  <key name="seopress_google_analytics_affiliate_tracking"/>
 	  <key name="seopress_google_analytics_ga4_property_id"/>

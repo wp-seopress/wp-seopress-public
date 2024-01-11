@@ -301,40 +301,6 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}";
         $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 
-        //Cross domains
-        $crossDomains = seopress_get_service('GoogleAnalyticsOption')->getCrossDomain();
-        if ('1' == seopress_get_service('GoogleAnalyticsOption')->getCrossEnable() && $crossDomains) {
-            $domains = array_map('trim', array_filter(explode(',', $crossDomains)));
-
-            if ( ! empty($domains)) {
-                $domains_count = count($domains);
-
-                $link_domains = '';
-
-                foreach ($domains as $key => $domain) {
-                    $link_domains .= "'" . $domain . "'";
-                    if ($key < $domains_count - 1) {
-                        $link_domains .= ',';
-                    }
-                }
-                $seopress_google_analytics_config['linker'] = "'linker': {'domains': [" . $link_domains . ']},';
-                $seopress_google_analytics_config['linker'] = apply_filters('seopress_gtag_linker', $seopress_google_analytics_config['linker']);
-            }
-        }
-
-        //Remarketing
-        $remarketingOption = seopress_get_service('GoogleAnalyticsOption')->getRemarketing();
-        if ('1' != $remarketingOption) {
-            $seopress_google_analytics_config['allow_display_features'] = "'allow_display_features': false,";
-            $seopress_google_analytics_config['allow_display_features'] = apply_filters('seopress_gtag_allow_display_features', $seopress_google_analytics_config['allow_display_features']);
-        }
-
-        //Link attribution
-        if ('1' == seopress_get_service('GoogleAnalyticsOption')->getLinkAttribution()) {
-            $seopress_google_analytics_config['link_attribution'] = "'link_attribution': true,";
-            $seopress_google_analytics_config['link_attribution'] = apply_filters('seopress_gtag_link_attribution', $seopress_google_analytics_config['link_attribution']);
-        }
-
         //Dimensions
         $seopress_google_analytics_config['cd']['cd_hook'] = apply_filters('seopress_gtag_cd_hook_cf', isset($seopress_google_analytics_config['cd']['cd_hook']));
         if ( ! has_filter('seopress_gtag_cd_hook_cf')) {
@@ -538,13 +504,6 @@ for (let i = 0; i < links.length; i++) {
         // Google Enhanced Ecommerce
         require_once dirname(__FILE__) . '/options-google-ecommerce.php';
 
-        //Anonymize IP
-        $ipAnonymize = seopress_get_service('GoogleAnalyticsOption')->getIpAnonymization();
-        if ('1' == $ipAnonymize) {
-            $seopress_google_analytics_config['anonymize_ip'] = "'anonymize_ip': true,";
-            $seopress_google_analytics_config['anonymize_ip'] = apply_filters('seopress_gtag_anonymize_ip', $seopress_google_analytics_config['anonymize_ip']);
-        }
-
         //Send data
         $features = '';
         if ( ! empty($seopress_google_analytics_config['cd']['cd_logged_in']) ||
@@ -605,13 +564,6 @@ for (let i = 0; i < links.length; i++) {
 
         $seopress_google_analytics_html .= '</script>';
         $seopress_google_analytics_html .= "\n";
-
-        //Optimize
-        $optimizeOption = seopress_get_service('GoogleAnalyticsOption')->getOptimize();
-        if (!empty($optimizeOption)) {
-            $seopress_google_analytics_html .= '<script async src="https://www.googleoptimize.com/optimize.js?id='.$optimizeOption.'"></script>';
-            $seopress_google_analytics_html .= "\n";
-        }
 
         $seopress_google_analytics_html = apply_filters('seopress_gtag_html', $seopress_google_analytics_html);
 

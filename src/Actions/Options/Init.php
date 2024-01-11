@@ -270,6 +270,9 @@ class Init implements ActivationHook
         //Link rel prev/next
         $titleOptions['seopress_titles_paged_rel'] = '1';
 
+        //Noindex on attachments
+        $titleOptions['seopress_titles_attachments_noindex'] = '1';
+
         //Check if the value is an array (important!)
         if (is_array($titleOptions)) {
             add_option('seopress_titles_option_name', $titleOptions);

@@ -77,72 +77,6 @@ class GetContent
      *
      * @return array
      */
-    protected function analyzeWordCounters($analyzes, $data, $post)
-    {
-        $desc = null;
-        if (isset($data['words_counter']) || isset($data['words_counter_unique'])) {
-            $desc = '<p>' . __('Words counter is not a direct ranking factor. But, your content must be as qualitative as possible, with relevant and unique information. To fulfill these conditions, your article requires a minimum of paragraphs, so words.', 'wp-seopress') . '</p>
-	<ul>
-		<li>' . $data['words_counter'] . ' ' . __('words found.', 'wp-seopress') . '</li>
-		<li>' . $data['words_counter_unique'] . ' ' . __('unique words found.', 'wp-seopress') . '</li>';
-
-            if ($data['words_counter'] >= 299) {
-                $desc .= '<li><span class="dashicons dashicons-yes"></span>' . __('Your content is composed of more than 300 words, which is the minimum for a post.', 'wp-seopress') . '</li>';
-            } else {
-                $desc .= '<li><span class="dashicons dashicons-no-alt"></span>' . __('Your content is too short. Add a few more paragraphs!', 'wp-seopress') . '</li>';
-                $analyzes['words_counter']['impact'] = 'medium';
-            }
-            $desc .= '</ul>';
-
-            $analyzes['words_counter']['desc'] = $desc;
-        } else {
-            $analyzes['words_counter']['desc']   = '<p><span class="dashicons dashicons-no-alt"></span>' . __('No content? Add a few more paragraphs!', 'wp-seopress') . '</p>';
-            $analyzes['words_counter']['impact'] = 'high';
-        }
-
-        return $analyzes;
-    }
-
-    /**
-     * @param array   $analyzes
-     * @param array   $data
-     * @param WP_Post $post
-     *
-     * @return array
-     */
-    protected function analyzeKeywordsDensity($analyzes, $data, $post)
-    {
-        if (! empty($data['kws_density']['matches']) && isset($data['words_counter']) && $data['words_counter'] > 0) {
-            $target_kws_density = $data['kws_density']['matches'];
-
-            $desc = '<ul>';
-            foreach ($target_kws_density as $key => $value) {
-                foreach ($value as $_key => $_value) {
-                    $kw_count = count($_value);
-                }
-                $kw_name    = $key;
-                $kw_density = round($kw_count / $data['words_counter'] * 100, 2);
-                $desc .= '<li><span class="dashicons dashicons-minus"></span>' . /* translators: %s taget keyword, %d number of times the keyword was found, %s keyword density in % */ sprintf(esc_html__('%s was found %d times in your content, a keyword density of %s%%', 'wp-seopress'), $kw_name, $kw_count, $kw_density) . '</li>';
-            }
-            $desc .= '</ul>';
-            $desc .= '<p class="description">' . __('Learn more about <a href="https://www.youtube.com/watch?v=Rk4qgQdp2UA" target="_blank">keywords stuffing</a>.', 'wp-seopress') . '</p>';
-            $analyzes['keywords_density']['impact'] = 'good';
-            $analyzes['keywords_density']['desc']   = $desc;
-        } else {
-            $analyzes['keywords_density']['desc']   = '<p>' . __('We were unable to calculate the density of your keywords. You probably haven‘t added any content or your target keywords were not find in your post content.', 'wp-seopress') . '</p>';
-            $analyzes['keywords_density']['impact'] = 'high';
-        }
-
-        return $analyzes;
-    }
-
-    /**
-     * @param array   $analyzes
-     * @param array   $data
-     * @param WP_Post $post
-     *
-     * @return array
-     */
     protected function analyzeKeywordsPermalink($analyzes, $data, $post)
     {
         if (! empty($data['kws_permalink']['matches'])) {
@@ -725,7 +659,6 @@ class GetContent
     {
         if (! empty($data['img']['images']['without_alt'])) {
             $images = isset($data['img']['images']['without_alt']) ? $data['img']['images']['without_alt'] : null;
-            $context = isset($data['img']['images']['img_with_context']) ? $data['img']['images']['img_with_context'] : null;
 
             $desc = '<div class="wrap-analysis-img">';
 
@@ -778,7 +711,10 @@ class GetContent
                 }
             }
             $desc .= '</ul>';
-            $analyzes['nofollow_links']['impact'] = 'low';
+            $analyzes['nofollow_links']['impact'] = 'good';
+            if ($count > 3) {
+                $analyzes['nofollow_links']['impact'] = 'low';
+            }
             $analyzes['nofollow_links']['desc']   = $desc;
         } else {
             $analyzes['nofollow_links']['desc'] = '<p><span class="dashicons dashicons-yes"></span>' . __('This page doesn\'t have any nofollow links.', 'wp-seopress') . '</p>';
@@ -893,6 +829,7 @@ class GetContent
     public function getAnalyzes($post)
     {
         $data                   = get_post_meta($post->ID, '_seopress_analysis_data', true);
+
         $analyzes               = ContentAnalysis::getData();
 
         //Schemas
@@ -900,12 +837,6 @@ class GetContent
 
         //Old post
         $analyzes = $this->analyzeOldPost($analyzes, $data, $post);
-
-        //Word counters
-        $analyzes = $this->analyzeWordCounters($analyzes, $data, $post);
-
-        //Keywords density
-        $analyzes = $this->analyzeKeywordsDensity($analyzes, $data, $post);
 
         //Keywords in permalink
         $analyzes = $this->analyzeKeywordsPermalink($analyzes, $data, $post);

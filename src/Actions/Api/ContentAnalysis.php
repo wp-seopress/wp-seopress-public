@@ -115,12 +115,17 @@ class ContentAnalysis implements ExecuteHooks
         ]);
 
         $saveData = [
-            'words_counter' => null,
+            'internal_links' => null,
+            'outbound_links' => null,
             'score' => null,
         ];
 
-        if (isset($data['words_counter'])) {
-            $saveData['words_counter'] = $data['words_counter'];
+        if (isset($data['internal_links'])) {
+            $saveData['internal_links'] = count($data['internal_links']['value']);
+        }
+
+        if (isset($data['outbound_links'])) {
+            $saveData['outbound_links'] = count($data['outbound_links']['value']);
         }
 
         update_post_meta($id, '_seopress_content_analysis_api', $saveData);
@@ -142,10 +147,12 @@ class ContentAnalysis implements ExecuteHooks
     {
         $id   = (int) $request->get_param('id');
         $score   =  $request->get_param('score');
-        $wordsCounter   =  $request->get_param('words_counter');
+        $internal_links   =  $request->get_param('internal_links');
+        $outbound_links   =  $request->get_param('outbound_links');
 
         $data = [
-            'words_counter' => $wordsCounter,
+            'internal_links' => $internal_links,
+            'outbound_links' => $outbound_links,
             'score' => $score
         ];
 

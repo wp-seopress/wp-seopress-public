@@ -298,10 +298,17 @@ class AdvancedOption
     }
 
     /**
-     * @since 5.4.0
+     * @since 7.1.0
      */
-    public function getAppearanceWordsCol(){
-        return $this->searchOptionByKey('seopress_advanced_appearance_words_col');
+    public function getAppearanceInboundCol(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_inbound_col');
+    }
+
+    /**
+     * @since 7.1.0
+     */
+    public function getAppearanceOutboundCol(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_outbound_col');
     }
 
     /**

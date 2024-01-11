@@ -473,6 +473,26 @@ class Notifications {
             ];
         }
 
+        if (function_exists('extension_loaded') && ! extension_loaded('intl')) {
+            $alerts_high++;
+            $args[] = [
+                'id'     => 'notice-intl',
+                'title'  => __('PHP module "intl" is missing on your server.', 'wp-seopress'),
+                'desc'   => __('This PHP module, installed by default with PHP, is required by many plugins including SEOPress. Please contact your host as soon as possible to solve this.', 'wp-seopress'),
+                'impact' => [
+                    'high' => __('High impact', 'wp-seopress'),
+                ],
+                'link' => [
+                    'fr'       => 'https://www.seopress.org/fr/support/guides/debutez-seopress/',
+                    'en'       => 'https://www.seopress.org/support/guides/get-started-seopress/',
+                    'title'    => __('Learn more', 'wp-seopress'),
+                    'external' => true,
+                ],
+                'deleteable' => false,
+                'status' => true,
+            ];
+        }
+
         $status = false;
         if ('1' !== seopress_get_service('NoticeOption')->getNoticeNoIndex()) {
             if ('1' === seopress_get_service('TitleOption')->getTitleNoIndex() || '1' != get_option('blog_public')) {
