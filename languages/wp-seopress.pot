@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.3.1\n"
+"Project-Id-Version: SEOPress 7.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-19T09:44:59+00:00\n"
+"POT-Creation-Date: 2023-12-21T13:08:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -721,19 +721,19 @@ msgstr ""
 msgid "Image SEO & Advanced settings"
 msgstr ""
 
-#: inc/admin/ajax.php:26
+#: inc/admin/ajax.php:24
 msgid "A redirect is active for this URL. Turn it off to get the Google preview and content analysis."
 msgstr ""
 
-#: inc/admin/ajax.php:45
-#: src/Actions/Api/ContentAnalysis.php:124
-#: src/Actions/Api/PagePreview.php:61
+#: inc/admin/ajax.php:41
+#: src/Actions/Api/ContentAnalysis.php:122
+#: src/Actions/Api/PagePreview.php:59
 msgid "To get your Google snippet preview, publish your post!"
 msgstr ""
 
-#: inc/admin/ajax.php:48
-#: src/Actions/Api/ContentAnalysis.php:127
-#: src/Actions/Api/PagePreview.php:64
+#: inc/admin/ajax.php:44
+#: src/Actions/Api/ContentAnalysis.php:125
+#: src/Actions/Api/PagePreview.php:62
 msgid "Your site is protected by an authentication."
 msgstr ""
 

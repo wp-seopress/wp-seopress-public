@@ -54,8 +54,6 @@ class PagePreview implements ExecuteHooks
                 'meta_desc' =>  '...',
             ];
 
-            $docs = seopress_get_docs_links();
-
             switch($domResult['code']){
                 case 404:
                     $defaultResponse['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');

@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.4
 Requires PHP: 7.2
-Stable tag: 7.3.1
+Stable tag: 7.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -378,6 +378,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 7.3.2 =
+* FIX Content analysis with the universal SEO metabox
+
 = 7.3.1 =
 * FIX JS error with the Block Editor
 * FIX Polylang and XML sitemaps

@@ -117,8 +117,6 @@ class ContentAnalysis implements ExecuteHooks
                 'meta_desc' =>  '...',
             ];
 
-            $docs = seopress_get_docs_links();
-
             switch($domResult['code']){
                 case 404:
                     $defaultResponse['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
@@ -131,7 +129,7 @@ class ContentAnalysis implements ExecuteHooks
             return new \WP_REST_Response($defaultResponse);
         }
 
-        $str = $domResult['data'];
+        $str = $domResult['body'];
 
         $data = seopress_get_service('DomFilterContent')->getData($str, $id);
         $data = seopress_get_service('DomAnalysis')->getDataAnalyze($data, [

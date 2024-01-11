@@ -6,8 +6,6 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_do_real_preview()
 {
-    $docs = seopress_get_docs_links();
-
     check_ajax_referer('seopress_real_preview_nonce', $_GET['_ajax_nonce'], true);
 
     if (!current_user_can('edit_posts') || !is_admin()) {
@@ -37,8 +35,6 @@ function seopress_do_real_preview()
             'title' =>  '...',
             'meta_desc' =>  '...',
         ];
-
-        $docs = seopress_get_docs_links();
 
         switch($domResult['code']){
             case 404:
