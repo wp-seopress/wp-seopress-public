@@ -113,7 +113,7 @@ textarea:focus {
 .seopress-setup .seopress-setup-footer {
     padding: 20px 40px;
     position: fixed;
-    width: 100%;
+    width: auto;
     bottom: 0;
     left: 0;
     z-index: 10;

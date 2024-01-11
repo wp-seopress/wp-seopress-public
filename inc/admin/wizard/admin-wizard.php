@@ -366,8 +366,8 @@ class SEOPRESS_Admin_Setup_Wizard {
     <script type="text/javascript">
         var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php', 'relative' ) ); ?>';
     </script>
-	<?php do_action('admin_print_styles'); ?>
 	<?php do_action('admin_enqueue_scripts'); ?>
+	<?php do_action('admin_print_styles'); ?>
 	<?php wp_print_scripts('seopress-migrate-ajax'); ?>
 	<?php wp_print_scripts('seopress-media-uploader'); ?>
 	<?php do_action('admin_head'); ?>

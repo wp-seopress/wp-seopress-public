@@ -94,6 +94,7 @@ function seopress_advanced_advanced_image_auto_title_editor_callback() {
 }
 
 function seopress_advanced_advanced_image_auto_alt_editor_callback() {
+    $docs = seopress_get_docs_links();
     $options = get_option('seopress_advanced_option_name');
 
     $check = isset($options['seopress_advanced_advanced_image_auto_alt_editor']); ?>
@@ -109,6 +110,15 @@ function seopress_advanced_advanced_image_auto_alt_editor_callback() {
 </label>
 
 <?php
+    if ( ! is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+        if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
+        } else {
+            echo '<p class="seopress-help description"><a href="'.$docs['addons']['pro'].'" target="_blank">' . __('Our PRO version can optimize your image ALT texts for Search Engines using AI and Machine Learning.', 'wp-seopress') . '</a><span class="dashicons dashicons-external"></span></p>';
+        }
+    } else {
+        echo '<p class="seopress-help description"><a href="'.admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_ai').'">' . __('Use AI to automatically describe your image files.', 'wp-seopress') . '</a></p>';
+    }
+
     if (isset($options['seopress_advanced_advanced_image_auto_alt_editor'])) {
         esc_attr($options['seopress_advanced_advanced_image_auto_alt_editor']);
     }

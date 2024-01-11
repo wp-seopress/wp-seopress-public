@@ -413,15 +413,3 @@ add_settings_field(
 seopress_get_service('SectionPagesSEOPress')->printSectionPages();
 
 do_action('seopress_settings_advanced_after');
-
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
-    if (method_exists(seopress_pro_get_service('OptionPro'), 'getWhiteLabelHelpLinks') && '1' !== seopress_pro_get_service('OptionPro')->getWhiteLabelHelpLinks()) {
-        add_settings_section(
-            'seopress_setting_section_advanced_caps', // ID
-            '',
-            //__("Capabilities","wp-seopress"), // Title
-            'print_section_info_advanced_caps', // Callback
-            'seopress-settings-admin-advanced-security' // Page
-        );
-    }
-}

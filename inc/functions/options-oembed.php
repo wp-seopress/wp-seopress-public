@@ -12,6 +12,7 @@ defined('ABSPATH') or die('Please don&rsquo;t call the plugin directly. Thanks :
  */
 function seopress_oembed_title_hook($post)
 {
+    global $wp_query;
     //Init
     $seopress_oembed_title ='';
 
@@ -27,7 +28,11 @@ function seopress_oembed_title_hook($post)
     } elseif (get_post_meta($post->ID, '_seopress_titles_title', true) !='') {
         $seopress_oembed_title = get_post_meta($post->ID, '_seopress_titles_title', true);
     } elseif (get_the_title($post) !='') {
-        $seopress_oembed_title = the_title_attribute(['before'=>'','after'=>'','echo'=>false,'post'=>$post]);
+        if ((int)get_option('page_on_front') === $post->ID && null !== seopress_get_service('TitleOption')->getHomeSiteTitle()) {
+            $seopress_oembed_title = esc_attr(seopress_get_service('TitleOption')->getHomeSiteTitle());
+        } else {
+            $seopress_oembed_title = the_title_attribute(['before'=>'','after'=>'','echo'=>false,'post'=>$post]);
+        }
     }
 
     //Apply dynamic variables

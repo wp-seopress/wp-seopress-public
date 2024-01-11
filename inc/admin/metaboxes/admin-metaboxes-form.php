@@ -326,7 +326,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
 
                             <?php $cats = get_categories();
 
-                    if ('product' == $typenow) {
+                    if ('product' == $typenow && seopress_get_service('WooCommerceActivate')->isActive()) {
                         $cats = get_the_terms($post, 'product_cat');
                     }
 
@@ -679,7 +679,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 value="<?php echo $seopress_redirections_value; ?>" />
                         </p>
                         <p class="description">
-                            <?php _e('Enter some keywords to auto-complete this field against your content.','wp-seopress-pro'); ?>
+                            <?php _e('Enter some keywords to auto-complete this field against your content.','wp-seopress'); ?>
                         </p>
 
                         <script>
@@ -750,14 +750,16 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 $href = get_term_link($term);
                             } else {
                                 $href = get_the_permalink();
-                            } ?>
+                            }
+                            if ($seopress_redirections_enabled_regex !=='yes') {
+                            ?>
                             <a href="<?php echo $href; ?>"
                                 id="seopress_redirections_value_default"
                                 class="<?php echo seopress_btn_secondary_classes(); ?>"
                                 target="_blank">
                                 <?php _e('Test your URL', 'wp-seopress'); ?>
                             </a>
-                            <?php
+                            <?php }
                         }
                     }
 

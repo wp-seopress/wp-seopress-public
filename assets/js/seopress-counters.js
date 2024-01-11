@@ -271,7 +271,7 @@ function sp_meta_desc_counters() {
                             )),
                         meta_desc_val.length > 0
                             ? ($(".snippet-description-custom").text(
-                                e.target.value.substr(0, 160) + '...',
+                                e.target.value.substr(0, 160),
                             ),
                                 $(".snippet-description").hide(),
                                 $(".snippet-description-custom").css(
@@ -785,7 +785,7 @@ jQuery(document).ready(function (e) {
                 // Google Preview
                 title = '';
                 if (s.data.title) {
-                    title = s.data.title.substr(0, 60) + '...';
+                    title = s.data.title.substr(0, 60);
                 }
 
                 e("#seopress_cpt .google-snippet-preview .snippet-title").html(title),
@@ -794,7 +794,7 @@ jQuery(document).ready(function (e) {
 
                 meta_desc = '';
                 if (s.data.meta_desc) {
-                    meta_desc = s.data.meta_desc.substr(0, 160) + '...';
+                    meta_desc = s.data.meta_desc.substr(0, 160);
                 }
 
                 e("#seopress_cpt .google-snippet-preview .snippet-description").html(meta_desc),

@@ -53,6 +53,11 @@ class ManageColumn implements ExecuteHooksBackend
             }
         }
 
+        add_filter('manage_media_columns', [$this, 'addMediaColumn']);
+        add_action('manage_media_custom_column', [$this, 'displayMediaColumn'], 10, 2);
+        add_filter('manage_upload_sortable_columns', [$this, 'sortableMediaColumn']);
+        add_filter('pre_get_posts', [$this, 'sortMediaColumnsBy']);
+
         add_filter('manage_edit-download_columns', [$this, 'addColumn'], 10, 2);
     }
 
@@ -91,6 +96,22 @@ class ManageColumn implements ExecuteHooksBackend
         if (seopress_get_service('AdvancedOption')->getAppearanceScoreCol() ==='1') {
             $columns['seopress_score'] = __('Score', 'wp-seopress');
         }
+
+        return $columns;
+    }
+
+    /**
+     * @since 7.2.0
+     * @see manage_media_columns
+     *
+     * @param string $column
+     * @param int    $post_id
+     *
+     * @return void
+     */
+    public function addMediaColumn($columns)
+    {
+        $columns['seopress_alt_text'] = __('Alt text', 'wp-seopress');
 
         return $columns;
     }
@@ -229,6 +250,23 @@ class ManageColumn implements ExecuteHooksBackend
         }
     }
 
+        /**
+     * @since 7.2.0
+     * @see manage_media_custom_column
+     *
+     * @param string $column
+     * @param int    $post_id
+     *
+     * @return void
+     */
+    public function displayMediaColumn($column, $post_id)
+    {
+        switch ($column) {
+            case 'seopress_alt_text':
+                echo get_post_meta($post_id, '_wp_attachment_image_alt', true);
+        }
+    }
+
     /**
      * @since 6.5.0
      * @see manage_edit' . $postType . '_sortable_columns
@@ -240,6 +278,20 @@ class ManageColumn implements ExecuteHooksBackend
     public function sortableColumn($columns) {
         $columns['seopress_noindex']  = 'seopress_noindex';
         $columns['seopress_nofollow'] = 'seopress_nofollow';
+
+        return $columns;
+    }
+
+    /**
+     * @since 7.2.0
+     * @see manage_edit-media_sortable_columns
+     *
+     * @param string $columns
+     *
+     * @return array $columns
+     */
+    public function sortableMediaColumn($columns) {
+        $columns['seopress_alt_text']  = 'seopress_alt_text';
 
         return $columns;
     }
@@ -264,6 +316,26 @@ class ManageColumn implements ExecuteHooksBackend
         }
         if ('seopress_nofollow' == $orderby) {
             $query->set('meta_key', '_seopress_robots_follow');
+            $query->set('orderby', 'meta_value');
+        }
+    }
+
+    /**
+     * @since 7.2.0
+     * @see pre_get_posts
+     *
+     * @param string $query
+     *
+     * @return void
+     */
+    public function sortMediaColumnsBy($query) {
+        if (! is_admin()) {
+            return;
+        }
+
+        $orderby = $query->get('orderby');
+        if ('seopress_alt_text' == $orderby) {
+            $query->set('meta_key', '_wp_attachment_image_alt');
             $query->set('orderby', 'meta_value');
         }
     }

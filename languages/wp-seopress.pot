@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.1.2\n"
+"Project-Id-Version: SEOPress 7.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-02T13:30:26+00:00\n"
+"POT-Creation-Date: 2023-11-15T08:36:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -44,7 +44,7 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:27
 #: inc/admin/admin-bar/admin-bar.php:67
-#: src/Actions/Admin/ManageColumn.php:152
+#: src/Actions/Admin/ManageColumn.php:173
 msgid "noindex is on!"
 msgstr ""
 
@@ -60,7 +60,7 @@ msgid "noindex is off."
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:79
-#: src/Actions/Admin/ManageColumn.php:158
+#: src/Actions/Admin/ManageColumn.php:179
 msgid "nofollow is on!"
 msgstr ""
 
@@ -501,7 +501,7 @@ msgstr ""
 #: inc/admin/admin-pages/Sitemaps.php:43
 #: inc/admin/admin-pages/Social.php:43
 #: inc/admin/admin-pages/Titles.php:54
-#: seopress-functions.php:846
+#: seopress-functions.php:848
 msgid "Save changes"
 msgstr ""
 
@@ -543,7 +543,7 @@ msgstr ""
 #: inc/admin/admin-pages/Tools.php:20
 #: inc/admin/admin-pages/Tools.php:40
 #: inc/admin/sections/InstantIndexing.php:61
-#: seopress.php:468
+#: seopress.php:460
 msgid "Settings"
 msgstr ""
 
@@ -1748,23 +1748,31 @@ msgstr ""
 msgid "We use the product title for WooCommerce products."
 msgstr ""
 
-#: inc/admin/callbacks/ImageSEO.php:108
+#: inc/admin/callbacks/ImageSEO.php:109
 msgid "When uploading an image file, automatically set the alternative text based on the filename"
 msgstr ""
 
-#: inc/admin/callbacks/ImageSEO.php:130
+#: inc/admin/callbacks/ImageSEO.php:116
+msgid "Our PRO version can optimize your image ALT texts for Search Engines using AI and Machine Learning."
+msgstr ""
+
+#: inc/admin/callbacks/ImageSEO.php:119
+msgid "Use AI to automatically describe your image files."
+msgstr ""
+
+#: inc/admin/callbacks/ImageSEO.php:140
 msgid "Use the target keywords if not alternative text set for the image"
 msgstr ""
 
-#: inc/admin/callbacks/ImageSEO.php:134
+#: inc/admin/callbacks/ImageSEO.php:144
 msgid "This setting will be applied to images without any alt text only on frontend. This setting is retroactive. If you turn it off, alt texts that were previously empty will be empty again."
 msgstr ""
 
-#: inc/admin/callbacks/ImageSEO.php:155
+#: inc/admin/callbacks/ImageSEO.php:165
 msgid "When uploading an image file, automatically set the caption based on the filename"
 msgstr ""
 
-#: inc/admin/callbacks/ImageSEO.php:174
+#: inc/admin/callbacks/ImageSEO.php:184
 msgid "When uploading an image file, automatically set the description based on the filename"
 msgstr ""
 
@@ -2247,7 +2255,7 @@ msgid "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:555
-#: seopress.php:354
+#: seopress.php:346
 msgid "Default"
 msgstr ""
 
@@ -3190,6 +3198,10 @@ msgstr ""
 msgid "Enter your new URL in absolute (e.g. https://www.example.com/)"
 msgstr ""
 
+#: inc/admin/metaboxes/admin-metaboxes-form.php:682
+msgid "Enter some keywords to auto-complete this field against your content."
+msgstr ""
+
 #: inc/admin/metaboxes/admin-metaboxes-form.php:717
 msgid "Query parameters"
 msgstr ""
@@ -3206,11 +3218,11 @@ msgstr ""
 msgid "Exclude all parameters and pass them to the redirection"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:758
+#: inc/admin/metaboxes/admin-metaboxes-form.php:760
 msgid "Test your URL"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:768
+#: inc/admin/metaboxes/admin-metaboxes-form.php:770
 msgid "Need help with your redirections? Read our guide"
 msgstr ""
 
@@ -3261,7 +3273,7 @@ msgid "Primary category"
 msgstr ""
 
 #: inc/admin/migrate/MigrationTools.php:37
-#: src/Actions/Admin/ManageColumn.php:71
+#: src/Actions/Admin/ManageColumn.php:76
 msgid "Redirect URL"
 msgstr ""
 
@@ -3381,27 +3393,27 @@ msgid "Advanced SEO options for advanced users."
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:30
-#: inc/admin/sections/Advanced.php:131
+#: inc/admin/sections/Advanced.php:110
 msgid "Metaboxes"
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:31
-#: inc/admin/sections/Advanced.php:161
+#: inc/admin/sections/Advanced.php:140
 msgid "Admin bar"
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:32
-#: inc/admin/sections/Advanced.php:148
+#: inc/admin/sections/Advanced.php:127
 msgid "SEO Dashboard"
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:33
-#: inc/admin/sections/Advanced.php:118
+#: inc/admin/sections/Advanced.php:97
 msgid "Columns"
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:34
-#: inc/admin/sections/Advanced.php:174
+#: inc/admin/sections/Advanced.php:153
 #: inc/admin/sections/Analytics.php:116
 #: inc/admin/sections/Analytics.php:151
 msgid "Misc"
@@ -3412,59 +3424,50 @@ msgid "Customize the plugin to fit your needs."
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:54
-#: inc/admin/sections/Advanced.php:68
+#: inc/admin/sections/Advanced.php:65
 msgid "SEO metaboxes"
 msgstr ""
 
 #: inc/admin/sections/Advanced.php:55
-#: inc/admin/sections/Advanced.php:85
+#: inc/admin/sections/Advanced.php:82
 msgid "SEO settings pages"
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:57
-#: inc/admin/sections/Advanced.php:103
-msgid "SEO capabilities"
-msgstr ""
-
-#: inc/admin/sections/Advanced.php:62
+#: inc/admin/sections/Advanced.php:59
 msgid "Control access to SEO settings and metaboxes by user roles."
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:72
+#: inc/admin/sections/Advanced.php:69
 msgid "Check a user role to prevent it to edit a specific metabox."
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:89
+#: inc/admin/sections/Advanced.php:86
 msgid "Check a user role to allow it to edit a specific settings page."
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:107
-msgid "Read this guide to learn more about <a href=\"%s\" target=\"_blank\">SEOPress‘ capabilities</a>."
-msgstr ""
-
-#: inc/admin/sections/Advanced.php:121
+#: inc/admin/sections/Advanced.php:100
 msgid "Customize the SEO columns."
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:134
+#: inc/admin/sections/Advanced.php:113
 msgid "Edit your SEO metadata directly from your favorite page builder."
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:137
+#: inc/admin/sections/Advanced.php:116
 #: inc/admin/wizard/admin-wizard.php:1512
 msgid "Watch the universal SEO metabox overview video - Open in a new window"
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:138
+#: inc/admin/sections/Advanced.php:117
 #: inc/admin/wizard/admin-wizard.php:1513
 msgid "Universal SEO metabox video thumbnail"
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:151
+#: inc/admin/sections/Advanced.php:130
 msgid "Click the dedicated icon from the toolbar to customize the SEO dashboard."
 msgstr ""
 
-#: inc/admin/sections/Advanced.php:164
+#: inc/admin/sections/Advanced.php:143
 msgid "The admin bar appears on the top of your pages when logged in to your WP admin."
 msgstr ""
 
@@ -4302,7 +4305,7 @@ msgid "Migration completed!"
 msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:148
-#: seopress.php:329
+#: seopress.php:328
 msgid "Export completed!"
 msgstr ""
 
@@ -4824,12 +4827,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/functions/options-advanced-admin.php:502
-#: src/Actions/Admin/ManageColumn.php:62
+#: src/Actions/Admin/ManageColumn.php:67
 msgid "Title tag"
 msgstr ""
 
 #: inc/functions/options-advanced-admin.php:527
-#: src/Actions/Admin/ManageColumn.php:74
+#: src/Actions/Admin/ManageColumn.php:79
 msgid "Canonical"
 msgstr ""
 
@@ -4948,20 +4951,20 @@ msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %s: "Custom Post Types" or "Custom Taxonomies", %s: "title" or "description"
-#: seopress-functions.php:512
+#: seopress-functions.php:514
 msgid "Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 
-#: seopress-functions.php:538
-#: seopress-functions.php:568
+#: seopress-functions.php:540
+#: seopress-functions.php:570
 msgid "WARNING"
 msgstr ""
 
-#: seopress-functions.php:539
+#: seopress-functions.php:541
 msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
 msgstr ""
 
-#: seopress-functions.php:569
+#: seopress-functions.php:571
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
@@ -4969,83 +4972,83 @@ msgstr ""
 msgid "has been successfully updated!"
 msgstr ""
 
-#: seopress.php:328
-msgid "Regeneration completed!"
-msgstr ""
-
-#: seopress.php:352
+#: seopress.php:344
 msgid "Clear"
 msgstr ""
 
-#: seopress.php:353
+#: seopress.php:345
 msgid "Clear color"
 msgstr ""
 
-#: seopress.php:355
+#: seopress.php:347
 msgid "Select default color"
 msgstr ""
 
-#: seopress.php:356
+#: seopress.php:348
 msgid "Select Color"
 msgstr ""
 
-#: seopress.php:357
+#: seopress.php:349
 msgid "Color value"
 msgstr ""
 
-#: seopress.php:469
+#: seopress.php:461
 msgid "Docs"
 msgstr ""
 
-#: seopress.php:470
+#: seopress.php:462
 msgid "Configuration Wizard"
 msgstr ""
 
-#: seopress.php:472
+#: seopress.php:464
 msgid "GO PRO!"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:65
+#: src/Actions/Admin/ManageColumn.php:70
 msgid "Meta Desc."
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:68
+#: src/Actions/Admin/ManageColumn.php:73
 msgid "Redirect?"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:77
+#: src/Actions/Admin/ManageColumn.php:82
 msgid "Target Kw"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:80
+#: src/Actions/Admin/ManageColumn.php:85
 msgid "noindex?"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:83
+#: src/Actions/Admin/ManageColumn.php:88
 msgid "nofollow?"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:86
+#: src/Actions/Admin/ManageColumn.php:91
 msgid "Inbound links"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:89
+#: src/Actions/Admin/ManageColumn.php:94
 msgid "Outbound links"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:92
+#: src/Actions/Admin/ManageColumn.php:97
 msgid "Score"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:202
-#: src/Actions/Admin/ManageColumn.php:218
+#: src/Actions/Admin/ManageColumn.php:114
+msgid "Alt text"
+msgstr ""
+
+#: src/Actions/Admin/ManageColumn.php:223
+#: src/Actions/Admin/ManageColumn.php:239
 #: src/Services/ContentAnalysis/RenderContentAnalysis.php:26
 #: src/Services/I18nUniversalMetabox.php:19
 msgid "Good"
 msgstr ""
 
-#: src/Actions/Admin/ManageColumn.php:207
-#: src/Actions/Admin/ManageColumn.php:223
+#: src/Actions/Admin/ManageColumn.php:228
+#: src/Actions/Admin/ManageColumn.php:244
 #: src/Services/ContentAnalysis/RenderContentAnalysis.php:23
 #: src/Services/I18nUniversalMetabox.php:734
 msgid "Should be improved"

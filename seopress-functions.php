@@ -492,7 +492,9 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
         }
 
         if (empty($data)) {
-            $cpt_titles_empty[] = $key;
+            if (seopress_get_service('TitleOption')->getSingleCptEnable($key) !== '1' && seopress_get_service('TitleOption')->getTaxEnable($key) !== '1') {
+                $cpt_titles_empty[] = $key;
+            }
         }
     }
 

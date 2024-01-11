@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 7.1.2
+Version: 7.2
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -73,7 +73,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '7.1.2');
+define('SEOPRESS_VERSION', '7.2');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -325,18 +325,10 @@ function seopress_add_admin_options_scripts($hook) {
 			],
 			'i18n'								=> [
 				'migration' 							=> __('Migration completed!', 'wp-seopress'),
-				'video' 								=> __('Regeneration completed!', 'wp-seopress'),
 				'export' 								=> __('Export completed!', 'wp-seopress'),
 			],
 		];
 		wp_localize_script('seopress-migrate-ajax', 'seopressAjaxMigrate', $seopress_migrate);
-
-		//Force regenerate video xml sitemap
-		$seopress_video_regenerate = [
-			'seopress_nonce'        					=> wp_create_nonce('seopress_video_regenerate_nonce'),
-			'seopress_video_regenerate'					=> admin_url('admin-ajax.php'),
-		];
-		wp_localize_script('seopress-migrate-ajax', 'seopressAjaxVdeoRegenerate', $seopress_video_regenerate);
 	}
 
 	//Tabs
