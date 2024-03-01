@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.4
 Requires PHP: 7.2
-Stable tag: 7.5
+Stable tag: 7.5.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -379,6 +379,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 7.5.0.1 =
+* FIX Fatal error
+
 = 7.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-5/">Read the blog post update</a> =
 * NEW SEOPress REST API with context 🎉
 * NEW Custom table for our content analysis feature 🎉
