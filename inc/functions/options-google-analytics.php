@@ -501,8 +501,7 @@ for (let i = 0; i < links.length; i++) {
             $seopress_google_analytics_html .= $seopress_google_analytics_click_event['phone_tracking'];
         }
 
-        // Google Enhanced Ecommerce
-        require_once dirname(__FILE__) . '/options-google-ecommerce.php';
+        do_action('seopress_ga4_before_sending_data');
 
         //Send data
         $features = '';

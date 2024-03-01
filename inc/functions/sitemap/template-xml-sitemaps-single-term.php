@@ -117,9 +117,8 @@ function seopress_xml_sitemap_single_term() {
     $args = [
         'taxonomy'   => $path,
         'offset'     => $offset,
-        'hide_empty' => false,
+        'hide_empty' => true,
         'number'     => 1000,
-        //'fields'     => 'ids',
         'lang'       => '',
     ];
 

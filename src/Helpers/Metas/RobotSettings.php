@@ -21,6 +21,10 @@ abstract class RobotSettings {
             'name'    => __('None (will disable this feature)', 'wp-seopress'),
         ];
 
+        if(!is_array($cats)){
+            $cats = [];
+        }
+
         array_unshift($cats, $default);
 
         return $cats;

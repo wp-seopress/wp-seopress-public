@@ -480,6 +480,42 @@ function seopress_bulk_action_add_instant_indexing_admin_notice() {
     }
 }
 
+/**
+ * Bulk action to generate alt text for images
+ *
+ * @param array $bulk_actions
+ *
+ * @return array $bulk_actions
+ */
+add_filter('bulk_actions-upload', 'seopress_bulk_actions_alt_text');
+function seopress_bulk_actions_alt_text($bulk_actions) {
+    $bulk_actions['seopress_alt_text'] = __('Generate alt text from filename', 'wp-seopress');
+
+    return $bulk_actions;
+}
+
+add_filter('handle_bulk_actions-upload', 'seopress_bulk_actions_alt_text_handler', 10, 3);
+function seopress_bulk_actions_alt_text_handler($redirect_to, $doaction, $post_ids) {
+    if ('seopress_alt_text' !== $doaction) {
+        return $redirect_to;
+    }
+    foreach ($post_ids as $post_id) {
+        seopress_auto_image_attr($post_id);
+    }
+    $redirect_to = add_query_arg('bulk_alt_text', count($post_ids), $redirect_to);
+
+    return $redirect_to;
+}
+
+add_action('admin_notices', 'seopress_bulk_actions_alt_text_notice');
+function seopress_bulk_actions_alt_text_notice() {
+    if (! empty($_REQUEST['bulk_alt_text'])) {
+        $alt_text_count = intval($_REQUEST['bulk_alt_text']);
+        /* translators: %s number of media */
+        printf('<div id="message" class="updated fade"><p>' . _n('%s alternative text generated from filename.', '%s alternative texts generated from filename.', $alt_text_count, 'wp-seopress') . '</p></div>', $alt_text_count);
+    }
+}
+
 //Quick Edit
 add_action('quick_edit_custom_box', 'seopress_bulk_quick_edit_custom_box', 10, 2);
 function seopress_bulk_quick_edit_custom_box($column_name) {

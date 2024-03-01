@@ -65,9 +65,11 @@ function print_section_info_advanced_security()
     <?php _e('SEO metaboxes', 'wp-seopress'); ?>
 </h3>
 
-<p>
-    <?php _e('Check a user role to prevent it to edit a specific metabox.', 'wp-seopress'); ?>
-</p>
+<div class="seopress-notice">
+    <p>
+        <?php _e('Check a user role to <strong>PREVENT</strong> it to edit a specific metabox.', 'wp-seopress'); ?>
+    </p>
+</div>
 
 <?php
 }
@@ -82,9 +84,11 @@ function print_section_info_advanced_security_roles()
     <?php _e('SEO settings pages', 'wp-seopress'); ?>
 </h3>
 
-<p>
-    <?php _e('Check a user role to allow it to edit a specific settings page.', 'wp-seopress'); ?>
-</p>
+<div class="seopress-notice">
+    <p>
+        <?php _e('Check a user role to <strong>ALLOW</strong> it to edit a specific settings page.', 'wp-seopress'); ?>
+    </p>
+</div>
 
 <?php
 }

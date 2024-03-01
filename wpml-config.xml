@@ -35,9 +35,12 @@
 	  <key name="seopress_social_knowledge_type"/>
 	  <key name="seopress_social_knowledge_name"/>
 	  <key name="seopress_social_knowledge_img"/>
+	  <key name="seopress_social_knowledge_desc"/>
+	  <key name="seopress_social_knowledge_email"/>
 	  <key name="seopress_social_knowledge_phone"/>
 	  <key name="seopress_social_knowledge_contact_type"/>
 	  <key name="seopress_social_knowledge_contact_option"/>
+	  <key name="seopress_social_knowledge_tax_id"/>
 	  <key name="seopress_social_accounts_facebook"/>
 	  <key name="seopress_social_accounts_twitter"/>
 	  <key name="seopress_social_accounts_pinterest"/>

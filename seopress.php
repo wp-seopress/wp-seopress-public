@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 7.3.2
+Version: 7.4
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -13,7 +13,7 @@ Requires PHP: 7.2
 Requires at least: 5.0
 */
 
-/*  Copyright 2016 - 2023 - Benjamin Denis  (email : contact@seopress.org)
+/*  Copyright 2016 - 2024 - Benjamin Denis  (email : contact@seopress.org)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -36,22 +36,11 @@ if ( ! function_exists('add_action')) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//CRON
-///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_cron() {
-	//CRON - Ping Google for XML Sitemaps
-	if ( ! wp_next_scheduled('seopress_xml_sitemaps_ping_cron')) {
-		wp_schedule_event(time(), 'daily', 'seopress_xml_sitemaps_ping_cron');
-	}
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////
 //Hooks activation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_activation() {
 	add_option('seopress_activated', 'yes');
 	flush_rewrite_rules(false);
-
-	seopress_cron();
 
 	do_action('seopress_activation');
 }
@@ -63,9 +52,6 @@ function seopress_deactivation() {
 	delete_option('seopress_activated');
 	flush_rewrite_rules(false);
 
-	//Remove our CRON
-	wp_clear_scheduled_hook('seopress_xml_sitemaps_ping_cron');
-
 	do_action('seopress_deactivation');
 }
 register_deactivation_hook(__FILE__, 'seopress_deactivation');
@@ -73,7 +59,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '7.3.2');
+define('SEOPRESS_VERSION', '7.4');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -92,7 +78,6 @@ require_once __DIR__ . '/seopress-autoload.php';
 
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 	require_once __DIR__ . '/seopress-functions.php';
-	require_once __DIR__ . '/inc/admin/cron.php';
 
 	Kernel::execute([
 		'file'      => __FILE__,
@@ -106,9 +91,6 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 //SEOPRESS INIT = Admin + Core + API + Translation
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_init($hook) {
-	//CRON
-	seopress_cron();
-
 	//i18n
 	load_plugin_textdomain('wp-seopress', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 

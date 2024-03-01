@@ -57,6 +57,9 @@ class RequestPreview
         if (isset($_COOKIE)) {
             foreach ($_COOKIE as $name => $value) {
                 if ('PHPSESSID' !== $name) {
+                    if (is_array($value)) {
+                        $value = implode('|', $value);
+                    }
                     $cookies[] = new \WP_Http_Cookie(['name' => $name, 'value' => $value]);
                 }
             }

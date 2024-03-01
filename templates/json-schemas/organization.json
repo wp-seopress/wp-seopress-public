@@ -3,6 +3,8 @@
     "@type": "[[type]]",
     "name": "[[name]]",
     "url": "[[url]]",
+    "alternateName": "[[alternate_name]]",
+    "description": "[[description]]",
     "logo": "[[logo]]",
     "sameAs": [
         "[[account_facebook]]",
@@ -12,5 +14,6 @@
         "[[account_youtube]]",
         "[[account_linkedin]]",
         "[[account_extra]]"
-    ]
+    ],
+    "vatID": "[[tax_id]]"
 }

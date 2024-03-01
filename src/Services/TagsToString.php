@@ -91,7 +91,9 @@ class TagsToString {
      * @return array
      */
     protected function removeDataEmpty($data) {
-        return array_filter($data);
+        return array_filter($data, function( $value ){
+            return "0" == $value || ! empty( $value );
+        });
     }
 
     /**

@@ -59,7 +59,11 @@ function seopress_social_knowledge_img_callback()
 <input id="seopress_social_knowledge_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
 <input id="seopress_social_knowledge_img_remove" class="btn btnLink is-deletable" type="button" value="<?php _e('Remove', 'wp-seopress'); ?>" />
 
-<p class="description"><?php _e('JPG, PNG, WebP and GIF allowed. The image must be 112x112px, at minimum.', 'wp-seopress'); ?></p>
+<p class="description">
+    <?php _e('JPG, PNG, WebP and GIF allowed. The minimum allowed image dimension is 200 x 200 pixels.', 'wp-seopress'); ?><br>
+    <?php _e('The size of the image file must not exceed 8 MB. Use images that are at least 1200 x 630 pixels for the best display on high resolution devices.', 'wp-seopress'); ?><br>
+    <?php _e('At the minimum, you should use images that are 600 x 315 pixels to display link page posts with larger images.', 'wp-seopress'); ?>
+</p>
 
 <div id="seopress_social_knowledge_img_placeholder_upload" class="seopress-img-placeholder" data_caption="<?php _e('Click to select an image', 'wp-seopress'); ?>">
     <img id="seopress_social_knowledge_img_placeholder_src" src="<?php echo esc_attr(seopress_get_service('SocialOption')->getSocialKnowledgeImage()); ?>" />
@@ -68,6 +72,28 @@ function seopress_social_knowledge_img_callback()
     <?php if (isset($options['seopress_social_knowledge_img'])) {
         esc_attr($options['seopress_social_knowledge_img']);
     }
+}
+
+function seopress_social_knowledge_desc_callback()
+{
+    $options = get_option('seopress_social_option_name');
+    $check   = isset($options['seopress_social_knowledge_desc']) ? $options['seopress_social_knowledge_desc'] : null;
+
+    printf(
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_desc]" placeholder="' . esc_html__('e.g. The example corporation is well-known for producing high-quality widgets', 'wp-seopress') . '" aria-label="' . __('Description (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
+        esc_html($check)
+    );
+}
+
+function seopress_social_knowledge_email_callback()
+{
+    $options = get_option('seopress_social_option_name');
+    $check   = isset($options['seopress_social_knowledge_email']) ? $options['seopress_social_knowledge_email'] : null;
+
+    printf(
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_email]" placeholder="' . esc_html__('e.g. contact@example.com', 'wp-seopress') . '" aria-label="' . __('Email (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
+        esc_html($check)
+    );
 }
 
 function seopress_social_knowledge_phone_callback()
@@ -174,6 +200,17 @@ function seopress_social_knowledge_contact_option_callback()
 <?php if (isset($options['seopress_social_knowledge_contact_option'])) {
         esc_attr($options['seopress_social_knowledge_contact_option']);
     }
+}
+
+function seopress_social_knowledge_tax_id_callback()
+{
+    $options = get_option('seopress_social_option_name');
+    $check   = isset($options['seopress_social_knowledge_tax_id']) ? $options['seopress_social_knowledge_tax_id'] : null;
+
+    printf(
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_tax_id]" placeholder="' . esc_html__('e.g. FR12345678901', 'wp-seopress') . '" aria-label="' . __('VAT ID (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
+        esc_html($check)
+    );
 }
 
 function seopress_social_accounts_facebook_callback()

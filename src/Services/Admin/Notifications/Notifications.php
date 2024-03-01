@@ -190,7 +190,7 @@ class Notifications {
             }
         }
 
-        if ('1' != get_theme_support('title-tag') && true !== wp_is_block_theme()) {
+        if ('1' != get_theme_support('title-tag') && (function_exists('wp_is_block_theme') && true !== wp_is_block_theme())) {
             if ('1' !== seopress_get_service('NoticeOption')->getNoticeTitleTag()) {
                 $alerts_high++;
                 $args[] = [

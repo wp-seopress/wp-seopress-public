@@ -161,7 +161,7 @@ function seopress_xml_sitemap_index() {
                     if ('1' == $_tax_value) {
                         $args = [
                             'taxonomy'   => $tax_key,
-                            'hide_empty' => false,
+                            'hide_empty' => true,
                             'lang'       => '',
                             'fields'     => 'ids',
                             'meta_query' => [

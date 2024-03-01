@@ -129,6 +129,24 @@ class SocialOption
     }
 
     /**
+     * @since 7.4.0
+     *
+     * @return string
+     */
+    public function getSocialKnowledgeDesc() {
+        return $this->searchOptionByKey('seopress_social_knowledge_desc');
+    }
+
+    /**
+     * @since 7.4.0
+     *
+     * @return string
+     */
+    public function getSocialKnowledgeEmail() {
+        return $this->searchOptionByKey('seopress_social_knowledge_email');
+    }
+
+    /**
      * @since 4.5.0
      *
      * @return string
@@ -153,6 +171,15 @@ class SocialOption
      */
     public function getSocialKnowledgeContactOption() {
         return $this->searchOptionByKey('seopress_social_knowledge_contact_option');
+    }
+
+    /**
+     * @since 7.4.0
+     *
+     * @return string
+     */
+    public function getSocialKnowledgeTaxID() {
+        return $this->searchOptionByKey('seopress_social_knowledge_tax_id');
     }
 
     /**

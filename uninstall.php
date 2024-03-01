@@ -44,6 +44,7 @@ class SEOPRESS_Uninstall {
 	 * Transients, post meta, options, custom tables
      *
 	 * @since 6.2
+     * @updated 7.4
 	 */
 	public function uninstall() {
 		global $wpdb;
@@ -98,6 +99,15 @@ class SEOPRESS_Uninstall {
 
         // Delete custom tables
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_significant_keywords");
+
+        // Clear CRON
+        wp_clear_scheduled_hook('seopress_xml_sitemaps_ping_cron');
+        wp_clear_scheduled_hook('seopress_404_cron_cleaning');
+        wp_clear_scheduled_hook('seopress_google_analytics_cron');
+        wp_clear_scheduled_hook('seopress_page_speed_insights_cron');
+        wp_clear_scheduled_hook('seopress_404_email_alerts_cron');
+        wp_clear_scheduled_hook('seopress_insights_gsc_cron');
+        wp_clear_scheduled_hook('seopress_matomo_analytics_cron');
 	}
 }
 

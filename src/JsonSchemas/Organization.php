@@ -34,6 +34,8 @@ class Organization extends JsonSchemaValue implements GetJsonData {
                 $variables = [
                     'type'                   => '%%knowledge_type%%',
                     'name'                   => '%%social_knowledge_name%%',
+                    'alternate_name'         => '%%site_alternate_name%%',
+                    'description'            => '%%social_knowledge_description%%',
                     'url'                    => '%%siteurl%%',
                     'logo'                   => '%%social_knowledge_image%%',
                     'account_facebook'       => '%%social_account_facebook%%',
@@ -43,6 +45,7 @@ class Organization extends JsonSchemaValue implements GetJsonData {
                     'account_youtube'        => '%%social_account_youtube%%',
                     'account_linkedin'       => '%%social_account_linkedin%%',
                     'account_extra'          => '%%social_account_extra%%',
+                    'tax_id'                 => '%%social_knowledge_tax_id%%',
                 ];
                 break;
 
