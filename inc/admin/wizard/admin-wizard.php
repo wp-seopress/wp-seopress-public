@@ -139,10 +139,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 				'seopress_nonce'						=> wp_create_nonce('seopress_slim_seo_migrate_nonce'),
 				'seopress_slim_seo_migration'			=> admin_url('admin-ajax.php'),
 			],
-			'seopress_metadata_csv'				=> [
-				'seopress_nonce'				=> wp_create_nonce('seopress_export_csv_metadata_nonce'),
-				'seopress_metadata_export'		=> admin_url('admin-ajax.php'),
-			],
 			'i18n'								=> [
 				'migration'						=> __('Migration completed!', 'wp-seopress'),
 				'export'						=> __('Export completed!', 'wp-seopress'),
@@ -744,6 +740,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$knowledge_name  = isset($seopress_social_option['seopress_social_knowledge_name']) ? $seopress_social_option['seopress_social_knowledge_name'] : null;
 		$knowledge_img   = isset($seopress_social_option['seopress_social_knowledge_img']) ? $seopress_social_option['seopress_social_knowledge_img'] : null;
 		$knowledge_email = isset($seopress_social_option['seopress_social_knowledge_email']) ? $seopress_social_option['seopress_social_knowledge_email'] : $current_user_email;
+		$knowledge_phone = isset($seopress_social_option['seopress_social_knowledge_phone']) ? $seopress_social_option['seopress_social_knowledge_phone'] : null;
+		$knowledge_tax_id = isset($seopress_social_option['seopress_social_knowledge_tax_id']) ? $seopress_social_option['seopress_social_knowledge_tax_id'] : null;
 		$knowledge_nl    = isset($seopress_social_option['seopress_social_knowledge_nl']); ?>
 
         <div class="seopress-setup-content">
@@ -824,6 +822,20 @@ class SEOPRESS_Admin_Setup_Wizard {
                         <?php _e('At the minimum, you should use images that are 600 x 315 pixels to display link page posts with larger images.', 'wp-seopress'); ?>
                     </p>
 
+                    <p>
+                        <label for="knowledge_phone_meta"><?php esc_html_e('Organization‘s phone number (only for Organizations)', 'wp-seopress'); ?></label>
+                        <input type="text" id="knowledge_phone_meta" class="location-input" name="knowledge_phone"
+                        placeholder="<?php esc_html_e('e.g. +33123456789 (internationalized version required)', 'wp-seopress'); ?>"
+                        value="<?php echo $knowledge_phone; ?>" />
+                    </p>
+
+                    <p>
+                        <label for="knowledge_tax_id_meta"><?php esc_html_e('VAT ID (only for Organizations)', 'wp-seopress'); ?></label>
+                        <input type="text" id="knowledge_tax_id_meta" class="location-input" name="knowledge_tax_id"
+                        placeholder="<?php esc_html_e('e.g. FR12345678901', 'wp-seopress'); ?>"
+                        value="<?php echo $knowledge_tax_id; ?>" />
+                    </p>
+
                     <p class="seopress-setup-actions step">
                         <button type="submit" class="btnPrimary btn btnNext"
                             value="<?php esc_attr_e('Save & Continue', 'wp-seopress'); ?>"
@@ -857,6 +869,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_social_option['seopress_social_knowledge_name']   = isset($_POST['knowledge_name']) ? sanitize_text_field(wp_unslash($_POST['knowledge_name'])) : '';
 		$seopress_social_option['seopress_social_knowledge_img']    = isset($_POST['knowledge_img']) ? sanitize_text_field(wp_unslash($_POST['knowledge_img'])) : '';
 		$seopress_social_option['seopress_social_knowledge_email']  = isset($_POST['knowledge_email']) ? sanitize_text_field(wp_unslash($_POST['knowledge_email'])) : '';
+		$seopress_social_option['seopress_social_knowledge_phone']  = isset($_POST['knowledge_phone']) ? sanitize_text_field(wp_unslash($_POST['knowledge_phone'])) : '';
+		$seopress_social_option['seopress_social_knowledge_tax_id']  = isset($_POST['knowledge_tax_id']) ? sanitize_text_field(wp_unslash($_POST['knowledge_tax_id'])) : '';
 		$seopress_social_option['seopress_social_knowledge_nl']     = isset($_POST['knowledge_nl']) ? esc_attr(wp_unslash($_POST['knowledge_nl'])) : null;
 
 		//Save options
@@ -903,9 +917,9 @@ class SEOPRESS_Admin_Setup_Wizard {
                     </p>
 
                     <p>
-                        <label for="knowledge_tw"><?php esc_html_e('Twitter Username', 'wp-seopress'); ?></label>
+                        <label for="knowledge_tw"><?php esc_html_e('X Username', 'wp-seopress'); ?></label>
                         <input type="text" id="knowledge_tw" class="location-input" name="knowledge_tw"
-                            placeholder="<?php esc_html_e('e.g. @my_twitter_account', 'wp-seopress'); ?>"
+                            placeholder="<?php esc_html_e('e.g. @my_x_account', 'wp-seopress'); ?>"
                             value="<?php echo $knowledge_tw; ?>" />
                     </p>
 

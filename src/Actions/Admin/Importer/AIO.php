@@ -60,7 +60,7 @@ class AIO implements ExecuteHooksBackend {
             foreach ($getPostMetas as $key => $value) {
                 $metaAIO = get_post_meta($post->ID, $value, true);
                 if ( ! empty($metaAIO)) {
-                    update_post_meta($post->ID, $key, $this->tagsAIO->replaceTags($metaAIO));
+                    update_post_meta($post->ID, $key, esc_html($this->tagsAIO->replaceTags($metaAIO)));
                 }
             }
 
@@ -72,7 +72,7 @@ class AIO implements ExecuteHooksBackend {
             $canonical_url = $wpdb->get_results($canonical_url, ARRAY_A);
 
             if (! empty($canonical_url[0]['canonical_url'])) {//Import Canonical URL
-                update_post_meta($post->ID, '_seopress_robots_canonical', $canonical_url[0]['canonical_url']);
+                update_post_meta($post->ID, '_seopress_robots_canonical', esc_url($canonical_url[0]['canonical_url']));
             }
 
             //OG Image
@@ -83,11 +83,11 @@ class AIO implements ExecuteHooksBackend {
             $og_img_url = $wpdb->get_results($og_img_url, ARRAY_A);
 
             if (! empty($og_img_url[0]['og_image_custom_url'])) {//Import Facebook Image
-                update_post_meta($post->ID, '_seopress_social_fb_img', $og_img_url[0]['og_image_custom_url']);
+                update_post_meta($post->ID, '_seopress_social_fb_img', esc_url($og_img_url[0]['og_image_custom_url']));
             } elseif ('' != get_post_meta($post->ID, '_aioseop_opengraph_settings', true)) { //Import old Facebook Image
                 $_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
                 if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_image'])) {
-                    update_post_meta($post->ID, '_seopress_social_fb_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg']);
+                    update_post_meta($post->ID, '_seopress_social_fb_img', esc_url($_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg']));
                 }
             }
 
@@ -99,11 +99,11 @@ class AIO implements ExecuteHooksBackend {
             $tw_img_url = $wpdb->get_results($tw_img_url, ARRAY_A);
 
             if (! empty($tw_img_url[0]['twitter_image_custom_url'])) {//Import Twitter Image
-                update_post_meta($post->ID, '_seopress_social_twitter_img', $tw_img_url[0]['twitter_image_custom_url']);
+                update_post_meta($post->ID, '_seopress_social_twitter_img', esc_url($tw_img_url[0]['twitter_image_custom_url']));
             } elseif ('' != get_post_meta($post->ID, '_aioseop_opengraph_settings', true)) { //Import old Twitter Image
                 $_aioseop_opengraph_settings = get_post_meta($post->ID, '_aioseop_opengraph_settings', true);
                 if (isset($_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter'])) {
-                    update_post_meta($post->ID, '_seopress_social_twitter_img', $_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter']);
+                    update_post_meta($post->ID, '_seopress_social_twitter_img', esc_url($_aioseop_opengraph_settings['aioseop_opengraph_settings_customimg_twitter']));
                 }
             }
 
@@ -173,14 +173,14 @@ class AIO implements ExecuteHooksBackend {
 
             $keyphrases = $wpdb->get_results($keyphrases, ARRAY_A);
 
-            if (! empty($keyphrases)) {
+            if (! empty($keyphrases) && isset($keyphrases[0]['keyphrases'])) {
                 $keyphrases = json_decode($keyphrases[0]['keyphrases']);
 
                 if (isset($keyphrases->focus->keyphrase)) {
                     $keyphrases = $keyphrases->focus->keyphrase;
 
                     if ('' != $keyphrases) { //Import focus kw
-                        update_post_meta($post->ID, '_seopress_analysis_target_kw', $keyphrases);
+                        update_post_meta($post->ID, '_seopress_analysis_target_kw', esc_html($keyphrases));
                     }
                 }
             }
@@ -225,6 +225,13 @@ class AIO implements ExecuteHooksBackend {
         }
 
         $data           = [];
+        $data['total'] = $total_count_posts;
+
+        if ($offset >= $total_count_posts) {
+            $data['count'] = $total_count_posts;
+        } else {
+            $data['count'] = $offset;
+        }
         $data['offset'] = $offset;
 
         do_action('seopress_third_importer_aio', $offset, $increment);

@@ -45,9 +45,10 @@ class RedirectionMeta
     /**
      *
      * @param array $context
+     * @param bool $useDefault Use default value only if you get the value from the database after this function
      * @return string|null
      */
-    public function getValue($context)
+    public function getValue($context, $useDefault = true)
     {
         $data = [];
 
@@ -74,7 +75,8 @@ class RedirectionMeta
             if($name === null){
                 continue;
             }
-            if ($value['use_default']) {
+
+            if ($value['use_default'] && $useDefault) {
                 $data[$name] = $value['default'];
             } else {
                 $result = $callback($id, $value['key'], true);

@@ -6,7 +6,7 @@ defined('ABSPATH') or exit('Cheatin&#8217; uh?');
 
 class DomAnalysis
 {
-    protected function getMatches($content, $targetKeywords)
+    public function getMatches($content, $targetKeywords)
     {
         $data = [];
         foreach ($targetKeywords as $kw) {
@@ -69,6 +69,20 @@ class DomAnalysis
         return $content;
     }
 
+    public function getKeywords($options){
+        $targetKeywords = isset($options['target_keywords']) && !empty($options['target_keywords']) ? $options['target_keywords'] : get_post_meta($options['id'], '_seopress_analysis_target_kw', true);
+
+        $targetKeywords = array_filter(explode(',', strtolower($targetKeywords)));
+
+        return apply_filters( 'seopress_content_analysis_target_keywords', $targetKeywords, $options['id'] );
+    }
+
+    public function getScore($post){
+        $analyzes = seopress_get_service('GetContentAnalysis')->getAnalyzes($post);
+        $impact = array_unique(array_values(wp_list_pluck($analyzes, 'impact')));
+        return $impact;
+    }
+
     public function getDataAnalyze($data, $options)
     {
         if (!isset($options['id'])) {
@@ -78,11 +92,7 @@ class DomAnalysis
 
         $post = get_post($options['id']);
 
-        $targetKeywords = isset($options['target_keywords']) && !empty($options['target_keywords']) ? $options['target_keywords'] : get_post_meta($options['id'], '_seopress_analysis_target_kw', true);
-
-        $targetKeywords = array_filter(explode(',', strtolower($targetKeywords)));
-
-        $targetKeywords = apply_filters( 'seopress_content_analysis_target_keywords', $targetKeywords, $options['id'] );
+        $targetKeywords = $this->getKeywords($options);
 
         //Manage keywords with special characters
         foreach ($targetKeywords as $key => $kw) {

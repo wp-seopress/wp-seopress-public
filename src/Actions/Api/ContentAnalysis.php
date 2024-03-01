@@ -140,10 +140,25 @@ class ContentAnalysis implements ExecuteHooks
             $saveData['outbound_links'] = count($data['outbound_links']['value']);
         }
 
-        update_post_meta($id, '_seopress_content_analysis_api', $saveData);
+        /**
+         * We delete old values because we have a new structure
+         *
+         * @deprecated
+         * @since 7.3.0
+         */
+        delete_post_meta($id, '_seopress_content_analysis_api');
         delete_post_meta($id, '_seopress_analysis_data');
 
         $data['link_preview'] = $linkPreview;
+
+        $keywords = seopress_get_service('DomAnalysis')->getKeywords([
+            'id' => $id,
+        ]);
+
+        $post = get_post($id);
+        $score = seopress_get_service('DomAnalysis')->getScore($post);
+        $data['score'] = $score;
+        seopress_get_service('ContentAnalysisDatabase')->saveData($id, $data, $keywords);
 
         return new \WP_REST_Response($data);
     }

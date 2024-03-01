@@ -8,7 +8,34 @@ if ( ! defined('ABSPATH')) {
 
 class ContextPage
 {
-    protected $context = null;
+    protected $context;
+
+    protected function getEmptyContext(){
+        return  [
+            'post'           => null,
+            'product'        => null,
+            'term_id'        => null,
+            'is_singular'    => false,
+            'is_single'      => false,
+            'is_post_type_archive' => false,
+            'is_singular'      => false,
+            'is_home'        => false,
+            'is_front_page'  => false,
+            'is_product'     => false,
+            'is_archive'     => false,
+            'is_category'    => false,
+            'is_author'      => false,
+            'is_tax'         => false,
+            'is_tag'         => false,
+            'is_search'      => false,
+            'is_date'        => false,
+            'is_404'         => false,
+            'has_category'   => false,
+            'has_tag'        => false,
+            'paged'          => null,
+            'schemas_manual' => [],
+        ];
+    }
 
     protected function buildTerm($id, $options){
         $taxonomy = isset($options['taxonomy']) ? $options['taxonomy'] : 'category';
@@ -17,16 +44,39 @@ class ContextPage
         if ($term) {
             $this->setIsCategory(true);
             $this->setTermId($id);
+            $this->context['term'] = $term;
         }
     }
 
+    protected function buildIsHome(){
+        if( ! ( $this->context['is_404'] || $this->context['is_search'] || $this->context['is_front_page']  || $this->context['is_archive'] || $this->context['is_singular'] )){
+            $this->context['is_home'] = true;
+        }
+    }
+
+    protected function buildIsFrontPage($id){
+        $showOnFront = get_option( 'show_on_front' );
+        $pageOnFront = get_option( 'page_on_front' );
+
+        if ( 'posts' === $showOnFront && $id === $pageOnFront ) {
+			$this->setIsFrontPage(true);
+            return;
+		} elseif ( 'page' === $showOnFront && $id === $pageOnFront
+		) {
+			$this->setIsFrontPage(true);
+            return;
+		}
+
+        $this->setIsFrontPage(false);
+
+    }
+
     protected function buildPost($id){
-        $homeId = get_option('page_on_front');
+
         $isPostType = get_post_type($id);
 
         if ($isPostType) {
             $this->setPostById((int) $id);
-            $this->setIsSingle(true);
             $terms = get_the_terms($id, 'post_tag');
 
             if ( ! empty($terms)) {
@@ -39,17 +89,23 @@ class ContextPage
             }
 
             $this->setIsPostType($isPostType, true);
+
+            // TODO : Need better verification
+            $this->setIsSingle(true);
+            $this->context['is_singular'] = true;
         }
 
-        if ($id === $homeId && null !== $homeId) {
-            $this->setIsHome(true);
-        }
+        $this->buildIsFrontPage($id);
+
 
         $term = term_exists($id);
         if (null !== $term) {
             $this->setIsCategory(true);
             $this->setTermId($id);
         }
+
+
+        $this->buildIsHome();
     }
 
     /**
@@ -87,22 +143,11 @@ class ContextPage
         global $post;
         global $product;
 
-        $context = [
-            'post'           => $post,
-            'product'        => $product,
-            'term_id'        => null,
-            'is_single'      => false,
-            'is_home'        => false,
-            'is_product'     => false,
-            'is_archive'     => false,
-            'is_category'    => false,
-            'is_author'      => false,
-            'is_404'         => false,
-            'has_category'   => false,
-            'has_tag'        => false,
-            'paged'          => get_query_var('paged'),
-            'schemas_manual' => [],
-        ];
+        $context = $this->getEmptyContext();
+
+        $context['post'] = $post;
+        $context['product'] = $product;
+        $context['paged'] = get_query_var('paged');
 
         if (is_singular()) {
             $schemasManual = get_post_meta($context['post']->ID, '_seopress_pro_schemas_manual', true);
@@ -111,20 +156,40 @@ class ContextPage
             }
             $context       = array_replace($context, ['is_single' => true, 'schemas_manual' => $schemasManual]);
         }
-        if (is_home() || is_front_page()) {
+        if (is_home()) {
             $context = array_replace($context, ['is_home' => true]);
         }
+        if (is_front_page()) {
+            $context = array_replace($context, ['is_front_page' => true]);
+        }
+        if (is_singular()) {
+            $context = array_replace($context, ['is_singular' => true]);
+        }
         if (is_post_type_archive()) {
-            $context = array_replace($context, ['is_archive' => true]);
+            $context = array_replace($context, ['is_archive' => true, 'is_post_type_archive' => true]);
         }
         if (is_tax() || is_category() || is_tag()) {
+            $object = get_queried_object();
+
+            if(property_exists($object, 'term_id')){
+                $context = array_replace($context, ['term_id' => $object->term_id, 'term' => $object ]);
+            }
             $context = array_replace($context, ['is_category' => true]);
+        }
+        if (is_tax()) {
+            $context = array_replace($context, ['is_tax' => true]);
+        }
+        if (is_tag()) {
+            $context = array_replace($context, ['is_tag' => true]);
         }
         if (is_author()) {
             $context = array_replace($context, ['is_author' => true]);
         }
         if (is_404()) {
             $context = array_replace($context, ['is_404' => true]);
+        }
+        if (is_search()) {
+            $context = array_replace($context, ['is_search' => true]);
         }
         if (has_category()) {
             $context = array_replace($context, ['has_category' => true]);
@@ -218,6 +283,16 @@ class ContextPage
      */
     public function setIsHome($value) {
         $this->setContextBooleanByKey('is_home', $value);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $value
+     */
+    public function setIsFrontPage($value) {
+        $this->setContextBooleanByKey('is_front_page', $value);
 
         return $this;
     }

@@ -48,6 +48,11 @@ class ModuleMetabox implements ExecuteHooks
             return;
         }
 
+        //Bricks builder compatibility: duplicated tag on homepage
+        if (isset($_GET['brickspreview'])) {
+            return;
+        }
+
         $isGutenberg = false;
         if(function_exists('get_current_screen')){
             $currentScreen = get_current_screen();
@@ -148,6 +153,7 @@ class ModuleMetabox implements ExecuteHooks
             ],
             'FAVICON' => get_site_icon_url(32),
             'BEACON_SVG' => apply_filters('seopress_beacon_svg', SEOPRESS_URL_ASSETS.'/img/beacon.svg'),
+            'AI_SVG' => apply_filters('seopress_ai_svg', SEOPRESS_URL_ASSETS.'/img/ai.svg'),
         ], $argsLocalize);
 
         wp_localize_script('seopress-metabox', 'SEOPRESS_DATA', $args);

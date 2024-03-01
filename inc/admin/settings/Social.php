@@ -102,7 +102,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_accounts_twitter', // ID
-    __('Twitter Username', 'wp-seopress'), // Title
+    __('X (ex-Twitter) Username', 'wp-seopress'), // Title
     'seopress_social_accounts_twitter_callback', // Callback
     'seopress-settings-admin-social-accounts', // Page
     'seopress_setting_section_social_accounts' // Section
@@ -217,7 +217,7 @@ add_settings_field(
 add_settings_section(
     'seopress_setting_section_social_twitter', // ID
     '',
-    //__("Twitter","wp-seopress"), // Title
+    //__("X (ex-Twitter)","wp-seopress"), // Title
     'print_section_info_social_twitter', // Callback
     'seopress-settings-admin-social-twitter' // Page
 );

@@ -300,4 +300,90 @@ class SocialOption
     public function getSocialFacebookAppID() {
         return $this->searchOptionByKey('seopress_social_facebook_app_id');
     }
+
+    public function getFacebookTitlePostOption($id) {
+
+        if (function_exists('is_shop') && is_shop()) {
+            return get_post_meta(get_option('woocommerce_shop_page_id'), '_seopress_social_fb_title', true);
+        }
+
+        return get_post_meta($id, '_seopress_social_fb_title', true);
+    }
+
+    public function getFacebookDescriptionPostOption($id) {
+
+        if (function_exists('is_shop') && is_shop()) {
+            return get_post_meta(get_option('woocommerce_shop_page_id'), '_seopress_social_fb_desc', true);
+        }
+
+        return get_post_meta($id, '_seopress_social_fb_desc', true);
+    }
+
+    public function getFacebookImagePostOption($id){
+
+        if (function_exists('is_shop') && is_shop()) {
+            return get_post_meta(get_option('woocommerce_shop_page_id'), '_seopress_social_fb_img', true);
+        }
+
+        return get_post_meta($id, '_seopress_social_fb_img', true);
+
+    }
+
+    public function getFacebookImageHomeOption(){
+        $pageId                 = get_option('page_for_posts');
+
+        $value = get_post_meta($pageId, '_seopress_social_fb_img', true);
+        if ( ! empty($value)) {
+            return $value;
+        } elseif (has_post_thumbnail($pageId)) {
+            return get_the_post_thumbnail_url($pageId);
+        }
+
+    }
+
+    public function getTwitterTitlePostOption($id){
+        if (function_exists('is_shop') && is_shop()) {
+            return get_post_meta(get_option('woocommerce_shop_page_id'), '_seopress_social_twitter_title', true);
+        }
+
+        return get_post_meta($id, '_seopress_social_twitter_title', true);
+    }
+
+    public function getTwitterDescriptionPostOption($id) {
+
+        if (function_exists('is_shop') && is_shop()) {
+            return get_post_meta(get_option('woocommerce_shop_page_id'), '_seopress_social_twitter_desc', true);
+        }
+
+        return get_post_meta($id, '_seopress_social_twitter_desc', true);
+    }
+
+    public function getTwitterImagePostOption($id){
+
+        if (function_exists('is_shop') && is_shop()) {
+            return get_post_meta(get_option('woocommerce_shop_page_id'), '_seopress_social_twitter_img', true);
+        }
+
+        return get_post_meta($id, '_seopress_social_twitter_img', true);
+
+    }
+
+    public function getTwitterImageHome(){
+        $id = get_option('page_for_posts');
+        if ( ! empty($_seopress_social_twitter_img)) {
+            $value = get_post_meta($id, '_seopress_social_twitter_img', true);
+            return $value;
+        } elseif (has_post_thumbnail($id)) {
+            return get_the_post_thumbnail_url($id);
+        }
+    }
+
+    /**
+     * @since 7.4.0
+     *
+     * @return string
+     */
+    public function getSocialTwitterImgDefault() {
+        return $this->searchOptionByKey('seopress_social_twitter_card_img');
+    }
 }

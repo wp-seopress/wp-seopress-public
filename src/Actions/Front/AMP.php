@@ -1,11 +1,27 @@
 <?php
 
-if ( ! defined('ABSPATH')) {
-    exit;
-}
-if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && defined('SEOPRESS_PRO_VERSION') && version_compare(SEOPRESS_PRO_VERSION, '5.4', '<')) { //Quick fix to prevent fatal error for SEOPress < 5.4
-    //do nothing
-} else {
+namespace SEOPress\Actions\Front;
+
+
+use SEOPress\Core\Hooks\ExecuteHooksFrontend;
+use SEOPress\ManualHooks\Thirds\WooCommerce\WooCommerceAnalytics;
+
+class AMP implements ExecuteHooksFrontend {
+    /**
+     * @since 4.4.0
+     *
+     * @return void
+     */
+    public function hooks() {
+        if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && defined('SEOPRESS_PRO_VERSION') && version_compare(SEOPRESS_PRO_VERSION, '5.4', '<')) { //Quick fix to prevent fatal error for SEOPress < 5.4
+            return;
+        }
+
+        add_action('wp', [$this, 'amp_compatibility_wp'], 0);
+        add_action('wp_head', [$this, 'amp_compatibility_wp_head'], 0);
+
+    }
+
     /**
      * AMP Compatibility - wp action hook
      *
@@ -13,8 +29,9 @@ if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && defined('SEOPRESS_PR
      *
      * @return void
      */
-    add_action('wp', 'seopress_amp_compatibility_wp', 0);
-    function seopress_amp_compatibility_wp() {
+
+    public function amp_compatibility_wp() {
+
         if ( function_exists( 'amp_is_request' ) && amp_is_request() ) {
             wp_dequeue_script( 'seopress-accordion' );
 
@@ -35,8 +52,8 @@ if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && defined('SEOPRESS_PR
      *
      * @return void
      */
-    add_action('wp_head', 'seopress_amp_compatibility_wp_head', 0);
-    function seopress_amp_compatibility_wp_head() {
+
+    public function amp_compatibility_wp_head() {
         if ( function_exists( 'amp_is_request' ) && amp_is_request() ) {
             wp_dequeue_script( 'seopress-accordion' );
         }

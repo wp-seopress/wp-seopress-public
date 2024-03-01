@@ -39,19 +39,19 @@ function seopress_seo_ultimate_migration() {
             if ($su_query) {
                 foreach ($su_query as $post) {
                     if ('' != get_post_meta($post->ID, '_su_title', true)) { //Import title tag
-                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_su_title', true));
+                        update_post_meta($post->ID, '_seopress_titles_title', esc_html(get_post_meta($post->ID, '_su_title', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_su_description', true)) { //Import meta desc
-                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_su_description', true));
+                        update_post_meta($post->ID, '_seopress_titles_desc', esc_html(get_post_meta($post->ID, '_su_description', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_su_og_title', true)) { //Import Facebook Title
-                        update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_su_og_title', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_title', esc_html(get_post_meta($post->ID, '_su_og_title', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_su_og_description', true)) { //Import Facebook Desc
-                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_su_og_description', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', esc_html(get_post_meta($post->ID, '_su_og_description', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_su_og_image', true)) { //Import Facebook Image
-                        update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_su_og_image', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_img', esc_url(get_post_meta($post->ID, '_su_og_image', true)));
                     }
                     if ('1' == get_post_meta($post->ID, '_su_meta_robots_noindex', true)) { //Import Robots NoIndex
                         update_post_meta($post->ID, '_seopress_robots_index', 'yes');

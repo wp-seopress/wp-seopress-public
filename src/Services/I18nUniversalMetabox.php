@@ -1,6 +1,8 @@
 <?php
 
 namespace SEOPress\Services;
+use SEOPress\Helpers\Currencies;
+use SEOPress\Helpers\Schemas\Course;
 
 if ( ! defined('ABSPATH')) {
     exit;
@@ -20,7 +22,7 @@ class I18nUniversalMetabox
                 'expand' => __("Expand", "wp-seopress"),
                 'close' => __("Close", "wp-seopress"),
                 'title' => __("Title", "wp-seopress"),
-                'twitter' => __("Twitter", "wp-seopress"),
+                'twitter' => __("X", "wp-seopress"),
                 'maximum_limit' => __("maximum limit", "wp-seopress"),
                 'choose_image' => __("Choose an image", "wp-seopress"),
                 'opening_hours_morning' => __("Open in the morning?", "wp-seopress"),
@@ -33,22 +35,22 @@ class I18nUniversalMetabox
             'services' => [
                 'social_meta_tags_title' => __("Social meta tags", "wp-seopress"),
                 'twitter' => [
-                    'title' => __("Twitter Title", "wp-seopress"),
-                    'description' => __("Twitter Description", "wp-seopress"),
-                    'image' => __("Twitter Image", "wp-seopress"),
+                    'title' => __("X Title", "wp-seopress"),
+                    'description' => __("X Description", "wp-seopress"),
+                    'image' => __("X Image", "wp-seopress"),
                     'missing' => __(
-                        /* translators: %s Twitter tag, eg: twitter:title */
+                        /* translators: %s X tag, eg: twitter:title */
                         'Your %s is missing!',
                         "wp-seopress"
                     ),
                     'we_founded' => __("We found", "wp-seopress"),
                     'we_founded_2' => __("in your content.", "wp-seopress"),
                     'help_twitter_title' =>  __(
-                        "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:title tag from your source code. Below, the list:",
+                        "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. X (ex-Twitter) will take the last twitter:title tag from your source code. Below, the list:",
                         "wp-seopress"
                     ),
                     'help_twitter_description' => __(
-                        "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. Twitter will take the last twitter:description tag from your source code. Below, the list:",
+                        "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. X (ex-Twitter) will take the last twitter:description tag from your source code. Below, the list:",
                         "wp-seopress"
                     ),
                     'we_founded_tag' => __("We found a", "wp-seopress"),
@@ -439,6 +441,30 @@ class I18nUniversalMetabox
                     'remove' => __("Remove note", "wp-seopress"),
                     'add' => __("Add a statement", "wp-seopress"),
                 ],
+                'repeater_course_offers' => [
+                    'title'  => __('Offer', 'wp-seopress'),
+                    'remove' => __('Remove offer', 'wp-seopress'),
+                    'add'    => __('Add an offer', 'wp-seopress'),
+                    'category' => __('Category','wp-seopress' ),
+                    'priceCurrency' => __('Currency','wp-seopress' ),
+                    'price'  => __('Price','wp-seopress' ),
+                    'currencies' => Currencies::getOptions(),
+                    'categories' => Course::getCategories(),
+                ],
+                'repeater_course_instances' => [
+                    'title'  => __('Instance', 'wp-seopress'),
+                    'remove' => __('Remove instance', 'wp-seopress'),
+                    'add'    => __('Add an instance', 'wp-seopress'),
+                    'courseMode' => __('Course Mode','wp-seopress' ),
+                    'location' => __('Location','wp-seopress' ),
+                    'duration'  => __('Duration','wp-seopress' ),
+                    'repeatCount'  => __('Repeat count','wp-seopress' ),
+                    'repeatFrequency'  => __('Repeat frequency','wp-seopress' ),
+                    'startDate'  => __('Start Date','wp-seopress' ),
+                    'endDate'  => __('End Date','wp-seopress' ),
+                    'courseModes' => Course::getCourseModes(),
+                    'repeatFrequencies' => Course::getRepeatFrequencies(),
+                ],
             ],
             'google_preview' => [
                 'title'  => __('Google Snippet Preview', 'wp-seopress'),
@@ -744,7 +770,7 @@ class I18nUniversalMetabox
                 ],
                 'social' => [
                     'title' => __(
-                        "LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tags are defined below.",
+                        "LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X (ex-Twitter) does the same if no Twitter cards tags are defined below.",
                         "wp-seopress"
                     ),
                     'facebook_title' => __(
@@ -782,9 +808,9 @@ class I18nUniversalMetabox
                         "choose_image" =>__("Please choose an image", "wp-seopress"),
                     ],
                     "twitter" => [
-                        "title" => __("Twitter Preview", "wp-seopress"),
+                        "title" => __("X Preview", "wp-seopress"),
                         "description" => __(
-                            "This is what your post will look like in Twitter. You have to publish your post to get the Twitter Preview.",
+                            "This is what your post will look like in X (ex-Twitter). You have to publish your post to get the X Preview.",
                             "wp-seopress"
                         ),
                         "ratio" => __("Your image ratio is:", "wp-seopress"),
@@ -793,11 +819,11 @@ class I18nUniversalMetabox
                             "wp-seopress"
                         ),
                         "min_size" => __(
-                            "Minimun size for Twitter is <strong>144x144px</strong>. Please choose another image.",
+                            "Minimun size for X (ex-Twitter) is <strong>144x144px</strong>. Please choose another image.",
                             "wp-seopress"
                         ),
                         "file_support" => __(
-                            "File type not supported by Twitter. Please choose another image.",
+                            "File type not supported by X (ex-Twitter). Please choose another image.",
                             "wp-seopress"
                         ),
                         "error_image" => __(

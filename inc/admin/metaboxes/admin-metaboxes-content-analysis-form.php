@@ -3,6 +3,8 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 $data_attr = seopress_metaboxes_init();
+
+
 ?>
 
 <div id="seopress-ca-tabs" class="wrap-seopress-analysis"
@@ -49,11 +51,11 @@ $data_attr = seopress_metaboxes_init();
                 <?php
                     $html = '';
                     $i = 0;
-                    if (!empty($seopress_analysis_data['target_kws_count'])) {
-                        foreach($seopress_analysis_data['target_kws_count'] as $kw => $item) {
-                            if(!is_array($item)){
-                                continue;
-                            }
+                    $itemData = seopress_get_service('ContentAnalysisDatabase')->getData($post->ID , ["keywords"]);
+                    if (isset($itemData['keywords']) && !empty($itemData['keywords'])) {
+                        $kwsCount = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($itemData['keywords'], $post->ID);
+
+                        foreach($kwsCount as $kw => $item) {
 
                             if(count($item['rows']) === 0){
                                 continue;

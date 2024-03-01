@@ -88,9 +88,9 @@ class RedirectionSettings implements ExecuteHooks {
      * @since 5.0.0
      */
     public function processPut(\WP_REST_Request $request) {
-        $metas = RedirectionSettingsHelper::getMetaKeys($id);
 
         $id     = $request->get_param('id');
+        $metas = RedirectionSettingsHelper::getMetaKeys($id);
         $params = $request->get_params();
 
         try {

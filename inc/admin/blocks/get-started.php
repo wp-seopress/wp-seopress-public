@@ -45,7 +45,7 @@
 
                 <h3><?php _e('Open AI', 'wp-seopress'); ?></h3>
 
-                <p><?php _e('Generate automagically meta title and description with artificial intelligence (AI).', 'wp-seopress'); ?></p>
+                <p><?php _e('Generate automagically meta title, description and alternative texts with artificial intelligence (AI).', 'wp-seopress'); ?></p>
 
                 <p class="seopress-card-actions">
                     <a href="<?php echo $docs['ai']['introduction']; ?>" target="_blank" title="<?php _e('Open AI - new window', 'wp-seopress'); ?>">

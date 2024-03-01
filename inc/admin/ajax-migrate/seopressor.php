@@ -42,28 +42,28 @@ function seopress_seopressor_migration() {
                         $_seop_settings = get_post_meta($post->ID, '_seop_settings', true);
 
                         if ( ! empty($_seop_settings['meta_title'])) { //Import title tag
-                            update_post_meta($post->ID, '_seopress_titles_title', $_seop_settings['meta_title']);
+                            update_post_meta($post->ID, '_seopress_titles_title', esc_html($_seop_settings['meta_title']));
                         }
                         if ( ! empty($_seop_settings['meta_description'])) { //Import meta desc
-                            update_post_meta($post->ID, '_seopress_titles_desc', $_seop_settings['meta_description']);
+                            update_post_meta($post->ID, '_seopress_titles_desc', esc_html($_seop_settings['meta_description']));
                         }
                         if ( ! empty($_seop_settings['fb_title'])) { //Import Facebook Title
-                            update_post_meta($post->ID, '_seopress_social_fb_title', $_seop_settings['fb_title']);
+                            update_post_meta($post->ID, '_seopress_social_fb_title', esc_html($_seop_settings['fb_title']));
                         }
                         if ( ! empty($_seop_settings['fb_description'])) { //Import Facebook Desc
-                            update_post_meta($post->ID, '_seopress_social_fb_desc', $_seop_settings['fb_description']);
+                            update_post_meta($post->ID, '_seopress_social_fb_desc', esc_html($_seop_settings['fb_description']));
                         }
                         if ( ! empty($_seop_settings['fb_img'])) { //Import Facebook Image
-                            update_post_meta($post->ID, '_seopress_social_fb_img', $_seop_settings['fb_img']);
+                            update_post_meta($post->ID, '_seopress_social_fb_img', esc_url($_seop_settings['fb_img']));
                         }
                         if ( ! empty($_seop_settings['tw_title'])) { //Import Twitter Title
-                            update_post_meta($post->ID, '_seopress_social_twitter_title', $_seop_settings['tw_title']);
+                            update_post_meta($post->ID, '_seopress_social_twitter_title', esc_html($_seop_settings['tw_title']));
                         }
                         if ( ! empty($_seop_settings['tw_description'])) { //Import Twitter Desc
-                            update_post_meta($post->ID, '_seopress_social_twitter_desc', $_seop_settings['tw_description']);
+                            update_post_meta($post->ID, '_seopress_social_twitter_desc', esc_html($_seop_settings['tw_description']));
                         }
                         if ( ! empty($_seop_settings['tw_image'])) { //Import Twitter Image
-                            update_post_meta($post->ID, '_seopress_social_twitter_img', $_seop_settings['tw_image']);
+                            update_post_meta($post->ID, '_seopress_social_twitter_img', esc_url($_seop_settings['tw_image']));
                         }
                         if ( ! empty($_seop_settings['meta_rules'])) {
                             $robots = explode('#|#|#', $_seop_settings['meta_rules']);
@@ -88,9 +88,9 @@ function seopress_seopressor_migration() {
                         }
                         if ('' != get_post_meta($post->ID, '_seop_kw_1', true) || '' != get_post_meta($post->ID, '_seop_kw_2', true) || '' != get_post_meta($post->ID, '_seop_kw_3', true)) { //Import Target Keyword
                             $kw   = [];
-                            $kw[] = get_post_meta($post->ID, '_seop_kw_1', true);
-                            $kw[] = get_post_meta($post->ID, '_seop_kw_2', true);
-                            $kw[] = get_post_meta($post->ID, '_seop_kw_3', true);
+                            $kw[] = esc_html(get_post_meta($post->ID, '_seop_kw_1', true));
+                            $kw[] = esc_html(get_post_meta($post->ID, '_seop_kw_2', true));
+                            $kw[] = esc_html(get_post_meta($post->ID, '_seop_kw_3', true));
 
                             $kw = implode(',', $kw);
 
@@ -99,10 +99,10 @@ function seopress_seopressor_migration() {
                             }
                         }
                         if ( ! empty($_seop_settings['meta_canonical'])) { //Import Canonical URL
-                            update_post_meta($post->ID, '_seopress_robots_canonical', $_seop_settings['meta_canonical']);
+                            update_post_meta($post->ID, '_seopress_robots_canonical', esc_url($_seop_settings['meta_canonical']));
                         }
                         if ( ! empty($_seop_settings['meta_redirect'])) { //Import Redirect URL
-                            update_post_meta($post->ID, '_seopress_redirections_value', $_seop_settings['meta_redirect']);
+                            update_post_meta($post->ID, '_seopress_redirections_value', esc_url($_seop_settings['meta_redirect']));
                             update_post_meta($post->ID, '_seopress_redirections_enabled', 'yes'); //Enable the redirect
                         }
                     }

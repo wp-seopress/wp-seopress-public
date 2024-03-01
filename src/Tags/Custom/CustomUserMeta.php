@@ -26,8 +26,7 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
             return $value;
         }
 
-
-        if ( ! $context['post'] && ! $context['is_author']) {
+        if ( ! $context['post']) {
             return $value;
         }
         $regex = $this->buildRegex(self::CUSTOM_FORMAT);
@@ -40,15 +39,18 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
 
         $field = $matches['field'];
 
-        $authorId = get_current_user_id();
-        if($context['is_author'] && isset($context['author']->ID)){
-            $authorId = $context['author']->ID;
-        }
-        if($context['post'] && isset($context['post']->post_author)){
-            $authorId = $context['post']->post_author;
+        $userId = $context['user_id'] ?? get_current_user_id();
+
+        if(!$userId || intval($userId) === 0){
+            if(isset($context['is_author']) && isset($context['author']->ID)){
+                $authorId = $context['author']->ID;
+            }
+            if($context['post'] && isset($context['post']->post_author)){
+                $authorId = $context['post']->post_author;
+            }
         }
 
-        $value = esc_attr(get_user_meta($authorId, $field, true));
+        $value = esc_attr(get_user_meta($userId, $field, true));
 
         return apply_filters('seopress_get_tag_' . $tag . '_value', $value, $context);
     }

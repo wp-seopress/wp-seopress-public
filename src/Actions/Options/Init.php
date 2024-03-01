@@ -9,6 +9,7 @@ use SEOPress\Helpers\TagCompose;
 use SEOPress\Tags\PostTitle;
 use SEOPress\Tags\SiteTagline;
 use SEOPress\Tags\SiteTitle;
+use SEOPress\Constants\MetasDefaultValues;
 
 class Init implements ActivationHook
 {
@@ -205,13 +206,8 @@ class Init implements ActivationHook
         if ( ! empty($postTypes)) {
             foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
                 $titleOptions['seopress_titles_single_titles'][$seopress_cpt_key] = [
-                    'title' => sprintf(
-                        '%s %s %s',
-                        TagCompose::getValueWithTag(PostTitle::NAME),
-                        '%%sep%%',
-                        TagCompose::getValueWithTag(SiteTitle::NAME)
-                    ),
-                    'description' => TagCompose::getValueWithTag('post_excerpt'),
+                    'title' => MetasDefaultValues::getPostTypeTitleValue(),
+                    'description' => MetasDefaultValues::getPostTypeDescriptionValue(),
                 ];
             }
         }
@@ -222,20 +218,20 @@ class Init implements ActivationHook
             foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
                 //Title
                 if ('category' == $seopress_tax_key) {
-                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%_category_title%% %%current_pagination%% %%sep%% %%sitetitle%%';
+                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = MetasDefaultValues::getTaxonomyCategoryValue();
                 } elseif ('post_tag' == $seopress_tax_key) {
-                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%tag_title%% %%current_pagination%% %%sep%% %%sitetitle%%';
+                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = MetasDefaultValues::getTagTitleValue();
                 } else {
-                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = '%%term_title%% %%current_pagination%% %%sep%% %%sitetitle%%';
+                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = MetasDefaultValues::getTermTitleValue();
                 }
 
                 //Desc
                 if ('category' == $seopress_tax_key) {
-                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%_category_description%%';
+                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = MetasDefaultValues::getTaxonomyCategoryDescriptionValue();
                 } elseif ('post_tag' == $seopress_tax_key) {
-                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%tag_description%%';
+                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = MetasDefaultValues::getTagDescriptionValue();
                 } else {
-                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = '%%term_description%%';
+                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = MetasDefaultValues::getTermDescriptionValue();
                 }
             }
         }
@@ -244,25 +240,26 @@ class Init implements ActivationHook
         $postTypes = seopress_get_service('WordPressData')->getPostTypes();
         if (! empty($postTypes)) {
             foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
-                $titleOptions['seopress_titles_archive_titles'][$seopress_cpt_key]['title'] = '%%cpt_plural%% %%current_pagination%% %%sep%% %%sitetitle%%';
+                $titleOptions['seopress_titles_archive_titles'][$seopress_cpt_key]['title'] = MetasDefaultValues::getArchiveTitlePostType();
             }
         }
 
         //Author
-        $titleOptions['seopress_titles_archives_author_title']   = '%%post_author%% %%sep%% %%sitetitle%%';
+        $titleOptions['seopress_titles_archives_author_title']   =  MetasDefaultValues::getAuthorTitleValue();
         $titleOptions['seopress_titles_archives_author_noindex'] = '1';
 
         //Date
-        $titleOptions['seopress_titles_archives_date_title']   = '%%archive_date%% %%sep%% %%sitetitle%%';
+        $titleOptions['seopress_titles_archives_date_title']   = MetasDefaultValues::getArchiveDateTitleValue();
         $titleOptions['seopress_titles_archives_date_noindex'] = '1';
 
         //BuddyPress Groups
         if (is_plugin_active('buddypress/bp-loader.php') || is_plugin_active('buddyboss-platform/bp-loader.php')) {
-            $titleOptions['seopress_titles_bp_groups_title'] = '%%post_title%% %%sep%% %%sitetitle%%';
+            $titleOptions['seopress_titles_bp_groups_title'] = MetasDefaultValues::getPostTypeTitleValue();
         }
 
         //Search
         $titleOptions['seopress_titles_archives_search_title'] = '%%search_keywords%% %%sep%% %%sitetitle%%';
+        $titleOptions['seopress_titles_archives_search_title_noindex'] = '1';
 
         //404
         $titleOptions['seopress_titles_archives_404_title'] = __('404 - Page not found', 'wp-seopress') . ' %%sep%% %%sitetitle%%';

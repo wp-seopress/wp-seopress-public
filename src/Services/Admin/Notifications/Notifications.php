@@ -694,11 +694,11 @@ class Notifications {
         ];
 
         $status = false;
-        if ('1' !== seopress_get_service('NoticeOption')->getNoticeSearchConsole()) {
-            $alerts_high++;
-            $status = true;
-        }
         if (null === seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification() || '' === seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification()) {
+            if ('1' !== seopress_get_service('NoticeOption')->getNoticeSearchConsole()) {
+                $alerts_high++;
+                $status = true;
+            }
             $args[] = [
                 'id'     => 'notice-search-console',
                 'title'  => __('Add your site to Google. It\'s free!', 'wp-seopress'),

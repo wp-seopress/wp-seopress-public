@@ -37,10 +37,10 @@ function seopress_wp_meta_seo_migration() {
 
                 foreach ($wp_meta_seo_query_terms as $term_id) {
                     if ('' != get_term_meta($term_id, 'wpms_category_metatitle', true)) { //Import title tag
-                        update_term_meta($term_id, '_seopress_titles_title', get_term_meta($term_id, 'wpms_category_metatitle', true));
+                        update_term_meta($term_id, '_seopress_titles_title', esc_html(get_term_meta($term_id, 'wpms_category_metatitle', true)));
                     }
                     if ('' != get_term_meta($term_id, 'wpms_category_metadesc', true)) { //Import title desc
-                        update_term_meta($term_id, '_seopress_titles_desc', get_term_meta($term_id, 'wpms_category_metadesc', true));
+                        update_term_meta($term_id, '_seopress_titles_desc', esc_html(get_term_meta($term_id, 'wpms_category_metadesc', true)));
                     }
                 }
             }
@@ -59,28 +59,28 @@ function seopress_wp_meta_seo_migration() {
             if ($wp_meta_seo_query) {
                 foreach ($wp_meta_seo_query as $post) {
                     if ('' != get_post_meta($post->ID, '_metaseo_metatitle', true)) { //Import title tag
-                        update_post_meta($post->ID, '_seopress_titles_title', get_post_meta($post->ID, '_metaseo_metatitle', true));
+                        update_post_meta($post->ID, '_seopress_titles_title', esc_html(get_post_meta($post->ID, '_metaseo_metatitle', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_metaseo_metadesc', true)) { //Import meta desc
-                        update_post_meta($post->ID, '_seopress_titles_desc', get_post_meta($post->ID, '_metaseo_metadesc', true));
+                        update_post_meta($post->ID, '_seopress_titles_desc', esc_html(get_post_meta($post->ID, '_metaseo_metadesc', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_metaseo_metaopengraph-title', true)) { //Import Facebook Title
-                        update_post_meta($post->ID, '_seopress_social_fb_title', get_post_meta($post->ID, '_metaseo_metaopengraph-title', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_title', esc_html(get_post_meta($post->ID, '_metaseo_metaopengraph-title', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_metaseo_metaopengraph-desc', true)) { //Import Facebook Desc
-                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_post_meta($post->ID, '_metaseo_metaopengraph-desc', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', esc_html(get_post_meta($post->ID, '_metaseo_metaopengraph-desc', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_metaseo_metaopengraph-image', true)) { //Import Facebook Image
-                        update_post_meta($post->ID, '_seopress_social_fb_img', get_post_meta($post->ID, '_metaseo_metaopengraph-image', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_img', esc_url(get_post_meta($post->ID, '_metaseo_metaopengraph-image', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_metaseo_metatwitter-title', true)) { //Import Twitter Title
-                        update_post_meta($post->ID, '_seopress_social_twitter_title', get_post_meta($post->ID, '_metaseo_metatwitter-title', true));
+                        update_post_meta($post->ID, '_seopress_social_twitter_title', esc_html(get_post_meta($post->ID, '_metaseo_metatwitter-title', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_metaseo_metatwitter-desc', true)) { //Import Twitter Desc
-                        update_post_meta($post->ID, '_seopress_social_twitter_desc', get_post_meta($post->ID, '_metaseo_metatwitter-desc', true));
+                        update_post_meta($post->ID, '_seopress_social_twitter_desc', esc_html(get_post_meta($post->ID, '_metaseo_metatwitter-desc', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_metaseo_metatwitter-image', true)) { //Import Twitter Image
-                        update_post_meta($post->ID, '_seopress_social_twitter_img', get_post_meta($post->ID, '_metaseo_metatwitter-image', true));
+                        update_post_meta($post->ID, '_seopress_social_twitter_img', esc_url(get_post_meta($post->ID, '_metaseo_metatwitter-image', true)));
                     }
                 }
             }

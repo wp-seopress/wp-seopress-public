@@ -90,6 +90,55 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 300)
     );
 
+    /**
+     * Get Preview meta title
+     */
+    $("#seopress_titles_desc_meta").on(
+        "change paste keyup",
+        debounce(function (e) {
+            const template = $(this).val();
+            const termId = $("#seopress-tabs").data("term-id");
+            const homeId = $("#seopress-tabs").data("home-id");
+
+            $.ajax({
+                method: "GET",
+                url: seopressAjaxRealPreview.ajax_url,
+                data: {
+                    action: "get_preview_meta_description",
+                    template: template,
+                    post_id: $("#seopress-tabs").attr("data_id"),
+                    term_id: termId.length === 0 ? undefined : termId,
+                    home_id: homeId.length === 0 ? undefined : homeId,
+                    nonce: seopressAjaxRealPreview.get_preview_meta_description,
+                },
+                success: function (response) {
+                    const { data } = response;
+
+                    if (data.length > 0) {
+                        $(".snippet-description").hide();
+                        $(".snippet-description-default").hide();
+                        $(".snippet-description-custom").text(data);
+                        $(".snippet-description-custom").show();
+                        if ($("#seopress_titles_desc_counters").length > 0) {
+                            $("#seopress_titles_desc_counters").text(
+                                data.length
+                            );
+                        }
+                        if ($("#seopress_titles_desc_pixel").length > 0) {
+                            $("#seopress_titles_desc_pixel").text(
+                                pixelDesc(data)
+                            );
+                        }
+                    } else {
+                        $(".snippet-description").hide();
+                        $(".snippet-description-custom").hide();
+                        $(".snippet-description-default").show();
+                    }
+                },
+            });
+        }, 300)
+    );
+
     $("#seopress-tag-single-title").click(function () {
         $("#seopress_titles_title_meta").val(
             sp_get_field_length($("#seopress_titles_title_meta")) +

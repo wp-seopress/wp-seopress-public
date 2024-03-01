@@ -101,6 +101,24 @@ class FacebookImageOptionMeta {
 
     }
 
+    public function getOnlyImageUrlFromGlobals(){
+
+        $id = $this->getAttachmentId();
+
+        if(empty($id)){
+            return '';
+        }
+
+        $imageSrc = wp_get_attachment_image_src($id, 'full');
+
+        if(empty($imageSrc)){
+            return "";
+        }
+
+        return $imageSrc[0];
+
+    }
+
     public function getMetasStringByAttachmentId($postId){
         $str = '';
 

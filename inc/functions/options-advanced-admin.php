@@ -23,7 +23,7 @@ function seopress_image_seo_cleaning_filename($filename) {
         $filename = apply_filters( 'seopress_image_seo_before_cleaning', $filename );
 
         /* Force the file name in UTF-8 (encoding Windows / OS X / Linux) */
-        $filename = mb_convert_encoding($filename, "UTF-8");
+        $filename = wp_check_invalid_utf8($filename, true);
 
         $char_not_clean = ['/•/','/·/','/À/','/Á/','/Â/','/Ã/','/Ä/','/Å/','/Ç/','/È/','/É/','/Ê/','/Ë/','/Ì/','/Í/','/Î/','/Ï/','/Ò/','/Ó/','/Ô/','/Õ/','/Ö/','/Ù/','/Ú/','/Û/','/Ü/','/Ý/','/à/','/á/','/â/','/ã/','/ä/','/å/','/ç/','/è/','/é/','/ê/','/ë/','/ì/','/í/','/î/','/ï/','/ð/','/ò/','/ó/','/ô/','/õ/','/ö/','/ù/','/ú/','/û/','/ü/','/ý/','/ÿ/', '/©/'];
 

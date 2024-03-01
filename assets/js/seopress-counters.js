@@ -162,11 +162,13 @@ function sp_titles_counters() {
 
 function sp_meta_desc_counters() {
     const $ = jQuery;
+
     if ($("#seopress_titles_desc_meta").length) {
         var meta_desc_val = $("#seopress_titles_desc_meta").val();
         var meta_desc_placeholder = $("#seopress_titles_desc_meta").attr(
             "placeholder"
         );
+
 
         $("#seopress_titles_desc_counters").after(
             '<div id="seopress_titles_desc_counters_val">/ 160</div>'
@@ -216,7 +218,7 @@ function sp_meta_desc_counters() {
                 progress + "%"
             ),
             $("#seopress_titles_desc_meta, #seopress-tag-single-excerpt").on(
-                "keyup paste change click",
+                "keyup paste change",
                 function (e) {
                     var meta_desc_val = $("#seopress_titles_desc_meta").val();
                     var meta_desc_placeholder = $(
@@ -720,33 +722,33 @@ jQuery(document).ready(function (e) {
                     e(".analysis-score p").addClass("loading");
             },
             success: function (s) {
-                typeof s.data.og_title === "undefined"
-                    ? (og_title = "")
-                    : (og_title = s.data.og_title.values);
-                typeof s.data.og_desc === "undefined"
-                    ? (og_desc = "")
-                    : (og_desc = s.data.og_desc.values);
-                typeof s.data.og_img === "undefined"
-                    ? (og_img = "")
-                    : (og_img = s.data.og_img.values);
-                typeof s.data.og_url === "undefined"
-                    ? (og_url = "")
-                    : (og_url = s.data.og_url.host);
-                typeof s.data.og_site_name === "undefined"
-                    ? (og_site_name = "")
-                    : (og_site_name = s.data.og_site_name.values);
-                typeof s.data.tw_title === "undefined"
-                    ? (tw_title = "")
-                    : (tw_title = s.data.tw_title.values);
-                typeof s.data.tw_desc === "undefined"
-                    ? (tw_desc = "")
-                    : (tw_desc = s.data.tw_desc.values);
-                typeof s.data.tw_img === "undefined"
-                    ? (tw_img = "")
-                    : (tw_img = s.data.tw_img.values);
+                typeof s.data["og:title"] === "undefined"
+                    ? og_title = ""
+                    : og_title = s.data["og:title"].value
+                typeof s.data["og:description"] === "undefined"
+                    ? og_desc = ""
+                    : og_desc = s.data["og:description"].value
+                typeof s.data["og:image"] === "undefined"
+                    ? og_img = ""
+                    : og_img = s.data["og:image"].value
+                typeof s.data["og:url"] === "undefined"
+                    ? og_url = ""
+                    : og_url = s.data["og:url"].value
+                typeof s.data["og:site_name"] === "undefined"
+                    ? og_site_name = ""
+                    : og_site_name = s.data["og:site_name"].value
+                typeof s.data["twitter:title"] === "undefined"
+                    ? tw_title = ""
+                    : tw_title = s.data["twitter:title"].value
+                typeof s.data["twitter:description"] === "undefined"
+                    ? tw_desc = ""
+                    : tw_desc = s.data["twitter:description"].value
+                typeof s.data["twitter:image"] === "undefined"
+                    ? tw_img = ""
+                    : tw_img = s.data["twitter:image"].value
                 typeof s.data.meta_robots === "undefined"
-                    ? (meta_robots = "")
-                    : (meta_robots = s.data.meta_robots[0]);
+                    ? meta_robots = ""
+                    : meta_robots = s.data.meta_robots.value
 
                 var data_arr = {
                     og_title: og_title,
@@ -759,18 +761,9 @@ jQuery(document).ready(function (e) {
                     tw_img: tw_img,
                 };
 
-                for (var key in data_arr) {
-                    if (data_arr.length) {
-                        if (data_arr[key].length > 1) {
-                            key = data_arr[key].slice(-1)[0];
-                        } else {
-                            key = data_arr[key][0];
-                        }
-                    }
-                }
 
                 // Meta Robots
-                meta_robots = meta_robots.toString();
+                meta_robots = meta_robots !== null && meta_robots !== undefined ? meta_robots.toString() : "";
 
                 e("#sp-advanced-alert").empty();
 
@@ -785,7 +778,12 @@ jQuery(document).ready(function (e) {
                 // Google Preview
                 title = '';
                 if (s.data.title) {
-                    title = s.data.title.substr(0, 60);
+                    if(typeof s.data.title.value !== "undefined"){
+                        title = s.data.title.value.substr(0, 60);
+                    }
+                    else {
+                        title = s.data.title.substr(0, 60);
+                    }
                 }
 
                 e("#seopress_cpt .google-snippet-preview .snippet-title").html(title),
@@ -793,7 +791,10 @@ jQuery(document).ready(function (e) {
                     e("#seopress_titles_title_meta").attr("placeholder", title);
 
                 meta_desc = '';
-                if (s.data.meta_desc) {
+                if (s.data.description) {
+                    meta_desc = s.data.description.value.substr(0, 160);
+                }
+                else if(typeof s.data.meta_desc !== "undefined"){
                     meta_desc = s.data.meta_desc.substr(0, 160);
                 }
 

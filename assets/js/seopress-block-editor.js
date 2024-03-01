@@ -49,15 +49,15 @@ jQuery(document).ready(function ($) {
                         $(".analysis-score p").addClass('loading')
                 },
                 success: function (s) {
-                    typeof s.data.og_title === "undefined" ? og_title = "" : og_title = s.data.og_title.values;
-                    typeof s.data.og_desc === "undefined" ? og_desc = "" : og_desc = s.data.og_desc.values;
-                    typeof s.data.og_img === "undefined" ? og_img = "" : og_img = s.data.og_img.values;
-                    typeof s.data.og_url === "undefined" ? og_url = "" : og_url = s.data.og_url.host;
-                    typeof s.data.og_site_name === "undefined" ? og_site_name = "" : og_site_name = s.data.og_site_name.values;
-                    typeof s.data.tw_title === "undefined" ? tw_title = "" : tw_title = s.data.tw_title.values;
-                    typeof s.data.tw_desc === "undefined" ? tw_desc = "" : tw_desc = s.data.tw_desc.values;
-                    typeof s.data.tw_img === "undefined" ? tw_img = "" : tw_img = s.data.tw_img.values;
-                    typeof s.data.meta_robots === "undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots[0];
+                    typeof s.data["og:title"] === "undefined" ? og_title = "" : og_title = s.data["og:title"].value;
+                    typeof s.data["og:description"] === "undefined" ? og_desc = "" : og_desc = s.data["og:description"].value;
+                    typeof s.data["og:image"] === "undefined" ? og_img = "" : og_img = s.data["og:image"].value;
+                    typeof s.data["og:url"] === "undefined" ? og_url = "" : og_url = s.data["og:url"].value;
+                    typeof s.data["og:site_name"] === "undefined" ? og_site_name = "" : og_site_name = s.data["og:site_name"].value;
+                    typeof s.data["twitter:title"] === "undefined" ? tw_title = "" : tw_title = s.data["twitter:title"].value;
+                    typeof s.data["twitter:description"] === "undefined" ? tw_desc = "" : tw_desc = s.data["twitter:description"].value;
+                    typeof s.data["twitter:image"] === "undefined" ? tw_img = "" : tw_img = s.data["twitter:image"].value;
+                    typeof s.data.meta_robots === "undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots.value;
 
                     var data_arr = {
                         og_title: og_title,
@@ -69,16 +69,6 @@ jQuery(document).ready(function ($) {
                         tw_desc: tw_desc,
                         tw_img: tw_img
                     };
-
-                    for (var key in data_arr) {
-                        if (data_arr.length) {
-                            if (data_arr[key].length > 1) {
-                                key = data_arr[key].slice(-1)[0];
-                            } else {
-                                key = data_arr[key][0];
-                            }
-                        }
-                    }
 
                     // Meta Robots
                     meta_robots = meta_robots.toString();

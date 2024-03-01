@@ -181,6 +181,19 @@ class ManageColumn implements ExecuteHooksBackend
                 break;
 
             case 'seopress_inbound':
+                $internalLinks = seopress_get_service('ContentAnalysisDatabase')->getData($post_id, ["internal_links"]);
+
+                if(!empty($internalLinks)){
+                    $count = count($internalLinks);
+                    echo '<div id="seopress_inbound-' . esc_attr($post_id) . '">' . esc_html($count) . '</div>';
+                    return;
+                }
+
+                /**
+                 * @deprecated
+                 * @since 7.3.0
+                 * We don't use this anymore because we use the new table to get the data
+                 */
                 $dataApiAnalysis = get_post_meta($post_id, '_seopress_content_analysis_api', true);
 
                 if (isset($dataApiAnalysis['internal_links']) && $dataApiAnalysis['internal_links'] !== null) {
@@ -197,6 +210,20 @@ class ManageColumn implements ExecuteHooksBackend
                 break;
 
             case 'seopress_outbound':
+                $internalLinks = seopress_get_service('ContentAnalysisDatabase')->getData($post_id, ["outbound_links"]);
+
+                if(!empty($internalLinks)){
+                    $count = count($internalLinks);
+                    echo '<div id="seopress_inbound-' . esc_attr($post_id) . '">' . esc_html($count) . '</div>';
+                    return;
+                }
+
+
+                /**
+                 * @deprecated
+                 * @since 7.3.0
+                 * We don't use this anymore because we use the new table to get the data
+                 */
                 $dataApiAnalysis = get_post_meta($post_id, '_seopress_content_analysis_api', true);
 
                 if (isset($dataApiAnalysis['outbound_links']) && $dataApiAnalysis['outbound_links'] !== null) {
@@ -213,6 +240,34 @@ class ManageColumn implements ExecuteHooksBackend
                 break;
 
             case 'seopress_score':
+
+                $score = seopress_get_service('ContentAnalysisDatabase')->getData($post_id, ["score"]);
+                if(!empty($score)){
+                    if(is_array($score)){
+                        $score = array_shift($score);
+                    }
+
+                    echo '<div class="analysis-score">';
+                    if ($score === 'good') {
+                        echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+                        <circle id="bar" class="good" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+                    </svg><span class="screen-reader-text">' . __('Good', 'wp-seopress') . '</span></p>';
+                    } else {
+                        echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+                        <circle id="bar" class="notgood" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 101.788px;"></circle>
+                    </svg><span class="screen-reader-text">' . __('Should be improved', 'wp-seopress') . '</span></p>';
+                    }
+                    echo '</div>';
+                    return;
+                }
+
+                /**
+                 * @deprecated
+                 * @since 7.3.0
+                 * We don't use this anymore because we use the new table to get the data
+                 */
                 $dataApiAnalysis = get_post_meta($post_id, '_seopress_content_analysis_api', true);
                 if (isset($dataApiAnalysis['score']) && $dataApiAnalysis['score'] !== null) {
                     echo '<div class="analysis-score">';

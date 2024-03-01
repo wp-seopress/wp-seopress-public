@@ -56,222 +56,28 @@ function seopress_do_real_preview()
         "id" => $id,
     ]);
 
-
-    $targetKws = '';
-    $targetKwsCount = [];
-    //Get Target Keywords
-    if (isset($_GET['seopress_analysis_target_kw']) && ! empty($_GET['seopress_analysis_target_kw'])) {
-        $targetKws          = esc_html(strtolower(stripslashes_deep($_GET['seopress_analysis_target_kw'])));
-        $target = array_filter(explode(',', strtolower(get_post_meta($id, '_seopress_analysis_target_kw', true))));
-        $target = apply_filters( 'seopress_content_analysis_target_keywords', $target, $id );
-
-        $targetKwsCount = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($target, $id);
-    }
+    $post = get_post($id);
+    $score = seopress_get_service('DomAnalysis')->getScore($post);
+    $data['score'] = $score;
+    $keywords = seopress_get_service('DomAnalysis')->getKeywords([
+        'id' => $id,
+    ]);
+    seopress_get_service('ContentAnalysisDatabase')->saveData($id, $data, $keywords);
 
 
     /**
-     * Rather than maintaining the transition of information.
-     * We need to change the `GetContent` file to fit the new structure.
-     * This is temporary until the update is complete.
+     * We delete old values because we have a new structure
+     *
+     * @deprecated
+     * @since 7.3.0
      */
-
-    // Morphism: Legacy Meta Title
-    $metaTitleDensity = [];
-    foreach($data['title']['matches'] as $key => $value){
-        $fakeTable = []; // For match compatibiltiy with GetContent:289 (count)
-        for ($i=0; $i < $value['count'] ; $i++) {
-            $fakeTable[] = 1;
-        }
-        $metaTitleDensity[$value['key']] = [$fakeTable];
-    }
-
-    // Morphism: Legacy Meta Description
-    $metaDescription = [];
-    foreach($data['description']['matches'] as $key => $value){
-        $fakeTable = []; // For match compatibiltiy with GetContent:275 (count)
-        for ($i=0; $i < $value['count'] ; $i++) {
-            $fakeTable[] = 1;
-        }
-        $metaDescription[$value['key']] = [$fakeTable];
-    }
-
-    $internalLinks = [
-        'count' => 0,
-        'links' => []
-    ];
-    // Morphism: Legacy Internal Links
-    if(!empty($data['internal_links']['value'])){
-        $internalLinks['count'] = count($data['internal_links']['value']);
-        foreach($data['internal_links']['value'] as $key => $value){
-            $internalLinks['links'][$value['id']] = [
-               $value['url'] => $value['value']
-            ];
-        }
-    }
-
-    // Morphism: Legacy H1 Matches
-    $headingH1Matches = [];
-    if(!empty($data['h1']['matches'])){
-        foreach ($data['h1']['matches'] as $key => $value) {
-            $fakeTable = []; // For match compatibiltiy with GetContent:289 (count)
-            for ($i=0; $i < $value['count'] ; $i++) {
-                $fakeTable[] = 1;
-            }
-
-            $headingH1Matches[$value['key']] = [$fakeTable];
-        }
-    }
-
-    // Morphism: Legacy H2 Matches
-    $headingH2Matches = [];
-    if(!empty($data['h2']['matches'])){
-        foreach ($data['h2']['matches'] as $key => $value) {
-            $fakeTable = []; // For match compatibiltiy with GetContent:289 (count)
-            for ($i=0; $i < $value['count'] ; $i++) {
-                $fakeTable[] = 1;
-            }
-            $headingH2Matches[$value['key']] = [$fakeTable];
-        }
-    }
-
-    // Morphism: Legacy H3 Matches
-    $headingH3Matches = [];
-    if(!empty($data['h3']['matches'])){
-        foreach ($data['h3']['matches'] as $key => $value) {
-            $fakeTable = []; // For match compatibiltiy with GetContent:289 (count)
-            for ($i=0; $i < $value['count'] ; $i++) {
-                $fakeTable[] = 1;
-            }
-            $headingH3Matches[$value['key']] = [$fakeTable];
-        }
-    }
-
-    // Morphism: Legacy images
-    $images = [
-        'images' => [
-            'without_alt' => [],
-            'with_alt' => [],
-        ]
-    ];
-    if(!empty($data['images']['value'])){
-        foreach ($data['images']['value'] as $key => $value) {
-            if(empty($value['alt'])) {
-                $images['images']['without_alt'][] = $value['src'];
-            }
-            else{
-                $images['images']['with_alt'][] = $value['src'];
-            }
-        }
-    }
-
-
-    // Morphism: keywords permalink
-    $kwPermalinks = ['matches' => []];
-    if(!empty($data['kws_permalink']) && !empty($data['kws_permalink']['matches'])){
-        foreach ($data['kws_permalink']['matches'] as $key => $value) {
-            $kwPermalinks['matches'][$value['key']] = $value['count'];
-        }
-    }
-
-    // Morphism: links no follow
-    $linksNoFollow = [];
-    if(!empty($data['links_no_follow']['value'])){
-        foreach ($data['links_no_follow']['value'] as $key => $value) {
-            $linksNoFollow[] = [$value['url'] => $value['value']];
-        }
-    }
-
-
-    $outboundLinks = [];
-    if(!empty($data['outbound_links']['value'])){
-        foreach ($data['outbound_links']['value'] as $key => $value) {
-            $outboundLinks[] = [$value['url'] => $value['value']];
-        }
-    }
-
-
-    // Need to transform this to keep compatibility with older version
-    $dataResponse = [
-        'title' =>  $data['title']['value'],
-        'meta_desc' =>  isset($data['description']['value']) ? $data['description']['value'] : '',
-        'link_preview' => $linkPreview,
-        'analyzed_content' => isset($data['analyzed_content']) ? $data['analyzed_content'] : '',
-        'target_kws' => $targetKws,
-        'target_kws_count' => $targetKwsCount,
-        'meta_title' => [
-            'matches' => $metaTitleDensity,
-        ],
-        'img' => $images,
-        'meta_description' => [
-            'matches' => $metaDescription
-        ],
-        'og_title' => [
-            'count' => !empty($data['og:title']['value']) ? count($data['og:title']['value']) : '',
-            'values'=> $data['og:title']['value']
-        ],
-        'og_desc' => [
-            'count' => !empty($data['og:description']['value']) ? count($data['og:description']['value']) : '',
-            'values'=> $data['og:description']['value']
-        ],
-        'og_img' => [
-            'count' => !empty($data['og:image']['value']) ? count($data['og:image']['value']) : '',
-            'values'=> $data['og:image']['value']
-        ],
-        'og_url' => [
-            'count' => !empty($data['og:url']['value']) ? count($data['og:url']['value']) : '',
-            'values'=> $data['og:url']['value']
-        ],
-        'og_site_name' => [
-            'count' => !empty($data['og:site_name']['value']) ? count($data['og:site_name']['value']) : '',
-            'values'=> $data['og:site_name']['value']
-        ],
-        'tw_title' => [
-            'count' => !empty($data['twitter:title']['value']) ? count($data['twitter:title']['value']) : '',
-            'values'=> $data['twitter:title']['value']
-        ],
-        'tw_desc' => [
-            'count' => !empty($data['twitter:description']['value']) ? count($data['twitter:description']['value']) : '',
-            'values'=> $data['twitter:description']['value']
-        ],
-        'tw_img' => [
-            'count' => !empty($data['twitter:image']['value']) ? count($data['twitter:image']['value']) : '',
-            'values'=> $data['twitter:image']['value']
-        ],
-        'canonical' => isset($data['canonical']['value'][0]) ? $data['canonical']['value'][0] : '',
-        'all_canonical' => $data['canonical']['value'],
-            'h1' => [
-                'nomatches' => ['count' => !empty($data['h1']['value']) ? count($data['h1']['value']) : ''
-            ],
-            'values'=> $data['h1']['value'],
-            'matches' => $headingH1Matches
-        ],
-        'h2' => [
-            'nomatches' => ['count' => !empty($data['h2']['value']) ? count($data['h2']['value']) : ''],
-            'values'=> $data['h2']['value'],
-            'matches' => $headingH2Matches
-        ],
-        'h3' => [
-            'nomatches' => ['count' => !empty($data['h3']['value']) ? count($data['h3']['value']) : ''],
-            'values'=> $data['h3']['value'],
-            'matches' => $headingH3Matches
-        ],
-        'meta_robots' => $data['meta_robots']['value'],
-        'nofollow_links' => $linksNoFollow,
-        'outbound_links' => $outboundLinks,
-        'internal_links' => $internalLinks,
-        'kws_permalink' => $kwPermalinks,
-        'json' => $data['schemas']['value']
-    ];
-
-    $dataResponse['link_preview'] = $linkPreview;
-
-    update_post_meta($id, '_seopress_analysis_data', $dataResponse);
     delete_post_meta($id, '_seopress_content_analysis_api');
+    delete_post_meta($id, '_seopress_analysis_data');
 
     //Re-enable QM
     remove_filter('user_has_cap', 'seopress_disable_qm', 10, 3);
 
-    wp_send_json_success($dataResponse);
+    wp_send_json_success($data);
 
 }
 add_action('wp_ajax_seopress_do_real_preview', 'seopress_do_real_preview');

@@ -359,7 +359,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                         d="M12 15.8c-3.7 0-6.8-3-6.8-6.8s3-6.8 6.8-6.8c3.7 0 6.8 3 6.8 6.8s-3.1 6.8-6.8 6.8zm0-12C9.1 3.8 6.8 6.1 6.8 9s2.4 5.2 5.2 5.2c2.9 0 5.2-2.4 5.2-5.2S14.9 3.8 12 3.8zM8 17.5h8V19H8zM10 20.5h4V22h-4z">
                                     </path>
                                 </svg>
-                                <?php _e('LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tags are defined below.', 'wp-seopress'); ?>
+                                <?php _e('LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X (ex-Twitter) does the same if no Twitter cards tags are defined below.', 'wp-seopress'); ?>
                             </p>
                             <p class="seopress-d-flex seopress-space-between">
                                 <span class="dashicons dashicons-facebook-alt"></span>
@@ -493,7 +493,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <span class="dashicons dashicons-twitter"></span>
                             </p>
                             <p>
-                                <label for="seopress_social_twitter_title_meta"><?php _e('Twitter Title', 'wp-seopress'); ?></label>
+                                <label for="seopress_social_twitter_title_meta"><?php _e('X Title', 'wp-seopress'); ?></label>
                                 <input id="seopress_social_twitter_title_meta" type="text"
                                     class="components-text-control__input" name="seopress_social_twitter_title"
                                     placeholder="<?php esc_html_e('Enter your Twitter title', 'wp-seopress'); ?>"
@@ -501,14 +501,14 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                     value="<?php echo $seopress_social_twitter_title; ?>" />
                             </p>
                             <p>
-                                <label for="seopress_social_twitter_desc_meta"><?php _e('Twitter description', 'wp-seopress'); ?></label>
+                                <label for="seopress_social_twitter_desc_meta"><?php _e('X Description', 'wp-seopress'); ?></label>
                                 <textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc"
                                     class="components-text-control__input"
                                     placeholder="<?php esc_html_e('Enter your Twitter description', 'wp-seopress'); ?>"
                                     aria-label="<?php _e('Twitter description', 'wp-seopress'); ?>"><?php echo $seopress_social_twitter_desc; ?></textarea>
                             </p>
                             <p>
-                                <label for="seopress_social_twitter_img_meta"><?php _e('Twitter Thumbnail', 'wp-seopress'); ?></label>
+                                <label for="seopress_social_twitter_img_meta"><?php _e('X Thumbnail', 'wp-seopress'); ?></label>
                                 <input id="seopress_social_twitter_img_meta" type="text"
                                     class="components-text-control__input seopress_social_twitter_img_meta" name="seopress_social_twitter_img"
                                     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>"
@@ -525,28 +525,28 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <input id="seopress_social_twitter_img_upload"
                                     class="<?php echo seopress_btn_secondary_classes(); ?>"
                                     type="button"
-                                    aria-label="<?php _e('Twitter Thumbnail', 'wp-seopress'); ?>"
+                                    aria-label="<?php _e('X Thumbnail', 'wp-seopress'); ?>"
                                     value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />
                             </p>
                         </div>
                         <div class="box-right">
                             <div class="twitter-snippet-preview">
-                                <h3><?php _e('Twitter Preview', 'wp-seopress'); ?>
+                                <h3><?php _e('X Preview', 'wp-seopress'); ?>
                                 </h3>
                                 <?php if ('1' == seopress_get_toggle_option('social')) { ?>
-                                <p><?php _e('This is what your post will look like in Twitter. You have to publish your post to get the Twitter Preview.', 'wp-seopress'); ?>
+                                <p><?php _e('This is what your post will look like in X (ex-Twitter). You have to publish your post to get the X Preview.', 'wp-seopress'); ?>
                                 </p>
                                 <?php } else { ?>
-                                <p class="notice notice-error"><?php _e('The Social Networks feature is disabled. Still seing informations from the Twitter Preview? You probably have social tags added by your theme or a plugin.', 'wp-seopress'); ?>
+                                <p class="notice notice-error"><?php _e('The Social Networks feature is disabled. Still seing informations from the X Preview? You probably have social tags added by your theme or a plugin.', 'wp-seopress'); ?>
                                 </p>
                                 <?php } ?>
                                 <div class="twitter-snippet-box">
                                     <div class="snippet-twitter-img-alert alert1" style="display:none">
-                                        <p class="notice notice-error"><?php _e('File type not supported by Twitter. Please choose another image.', 'wp-seopress'); ?>
+                                        <p class="notice notice-error"><?php _e('File type not supported by X (ex-Twitter). Please choose another image.', 'wp-seopress'); ?>
                                         </p>
                                     </div>
                                     <div class="snippet-twitter-img-alert alert2" style="display:none">
-                                        <p class="notice notice-error"><?php _e('Minimum size for Twitter is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress'); ?>
+                                        <p class="notice notice-error"><?php _e('Minimum size for X (ex-Twitter) is <strong>144x144px</strong>. Please choose another image.', 'wp-seopress'); ?>
                                         </p>
                                     </div>
                                     <div class="snippet-twitter-img-alert alert3" style="display:none">
@@ -744,7 +744,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             } else {
                                 $href = get_the_permalink();
                             }
-                            if ($seopress_redirections_enabled_regex !=='yes') {
+                            if (isset($seopress_redirections_enabled_regex) && $seopress_redirections_enabled_regex !=='yes') {
                             ?>
                             <a href="<?php echo $href; ?>"
                                 id="seopress_redirections_value_default"

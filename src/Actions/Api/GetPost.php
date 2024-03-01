@@ -52,9 +52,11 @@ class GetPost implements ExecuteHooks
 
         $title = seopress_get_service('TitleMeta')->getValue($context);
         $description = seopress_get_service('DescriptionMeta')->getValue($context);
+        $socialFacebook = seopress_get_service('SocialFacebookMeta')->getValue($context);
+        $socialTwitter = seopress_get_service('SocialTwitterMeta')->getValue($context);
         $social = seopress_get_service('SocialMeta')->getValue($context);
-        $robots = seopress_get_service('RobotMeta')->getValue($context);
-        $redirections = seopress_get_service('RedirectionMeta')->getValue($context);
+        $robots = seopress_get_service('RobotMeta')->getValue($context, false);
+        $redirections = seopress_get_service('RedirectionMeta')->getValue($context, false);
 
         $canonical =  '';
         if(isset($robots['canonical'])){
@@ -78,8 +80,8 @@ class GetPost implements ExecuteHooks
             "title" => $title,
             "description" => $description,
             "canonical" => $canonical,
-            "og" => $social['og'],
-            "twitter" => $social['twitter'],
+            "og" => $socialFacebook,
+            "twitter" => $socialTwitter,
             "robots" => $robots,
             "primarycat" => $primarycat,
             "breadcrumbs" => $breadcrumbs,
@@ -100,7 +102,8 @@ class GetPost implements ExecuteHooks
         $id     = $request->get_param('id');
         $data = $this->getData($id);
 
-        return new \WP_REST_Response($data);
+        wp_send_json_success($data);
+        return;
     }
     /**
      * @since 5.0.0
@@ -123,7 +126,8 @@ class GetPost implements ExecuteHooks
 
             $data = $this->getData($id);
 
-            return new \WP_REST_Response($data);
+            wp_send_json_success($data);
+            return;
         } catch (\Exception $e) {
             return new \WP_Error("unknow");
         }

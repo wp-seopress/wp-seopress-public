@@ -38,19 +38,19 @@ function seopress_slim_seo_migration() {
                         $term_settings = get_term_meta($term_id, 'slim_seo', true);
 
                         if ( ! empty($term_settings['title'])) { //Import title tag
-                            update_term_meta($term_id, '_seopress_titles_title', $term_settings['title']);
+                            update_term_meta($term_id, '_seopress_titles_title', esc_html($term_settings['title']));
                         }
                         if ( ! empty($term_settings['description'])) { //Import meta desc
-                            update_term_meta($term_id, '_seopress_titles_desc', $term_settings['description']);
+                            update_term_meta($term_id, '_seopress_titles_desc', esc_html($term_settings['description']));
                         }
                         if ( ! empty($term_settings['noindex'])) { //Import Robots NoIndex
                             update_term_meta($term_id, '_seopress_robots_index', 'yes');
                         }
                         if ( ! empty($term_settings['facebook_image'])) { //Import FB image
-                            update_term_meta($term_id, '_seopress_social_fb_img', $term_settings['facebook_image']);
+                            update_term_meta($term_id, '_seopress_social_fb_img', esc_url($term_settings['facebook_image']));
                         }
                         if ( ! empty($term_settings['twitter_image'])) { //Import Tw image
-                            update_term_meta($term_id, '_seopress_social_twitter_img', $term_settings['twitter_image']);
+                            update_term_meta($term_id, '_seopress_social_twitter_img', esc_url($term_settings['twitter_image']));
                         }
                     }
                 }
@@ -73,19 +73,19 @@ function seopress_slim_seo_migration() {
                         $post_settings = get_post_meta($post->ID, 'slim_seo', true);
 
                         if ( ! empty($post_settings['title'])) { //Import title tag
-                            update_post_meta($post->ID, '_seopress_titles_title', $post_settings['title']);
+                            update_post_meta($post->ID, '_seopress_titles_title', esc_html($post_settings['title']));
                         }
                         if ( ! empty($post_settings['description'])) { //Import meta desc
-                            update_post_meta($post->ID, '_seopress_titles_desc', $post_settings['description']);
+                            update_post_meta($post->ID, '_seopress_titles_desc', esc_html($post_settings['description']));
                         }
                         if ( ! empty($post_settings['noindex'])) { //Import Robots NoIndex
                             update_post_meta($post->ID, '_seopress_robots_index', 'yes');
                         }
                         if ( ! empty($post_settings['facebook_image'])) { //Import FB image
-                            update_post_meta($post->ID, '_seopress_social_fb_img', $post_settings['facebook_image']);
+                            update_post_meta($post->ID, '_seopress_social_fb_img', esc_url($post_settings['facebook_image']));
                         }
                         if ( ! empty($post_settings['twitter_image'])) { //Import Tw image
-                            update_post_meta($post->ID, '_seopress_social_twitter_img', $post_settings['twitter_image']);
+                            update_post_meta($post->ID, '_seopress_social_twitter_img', esc_url($post_settings['twitter_image']));
                         }
                     }
                 }

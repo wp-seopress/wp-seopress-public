@@ -61,15 +61,15 @@ function seopress_import_settings() {
 }
 add_action('admin_init', 'seopress_import_settings');
 
-//Delete all content scans
+// Delete all content scans
 function seopress_clean_content_scans() {
     if (empty($_POST['seopress_action']) || 'clean_content_scans' != $_POST['seopress_action']) {
         return;
     }
-    if ( ! wp_verify_nonce($_POST['seopress_clean_content_scans_nonce'], 'seopress_clean_content_scans_nonce')) {
+    if (!wp_verify_nonce($_POST['seopress_clean_content_scans_nonce'], 'seopress_clean_content_scans_nonce')) {
         return;
     }
-    if ( ! current_user_can(seopress_capability('manage_options', 'cleaning'))) {
+    if (!current_user_can(seopress_capability('manage_options', 'cleaning'))) {
         return;
     }
 
@@ -79,23 +79,22 @@ function seopress_clean_content_scans() {
     global $wpdb;
 
     // Clean our post metas
-    $sql = 'DELETE FROM `' . $wpdb->prefix . 'postmeta`	WHERE `meta_key` IN ( \'_seopress_analysis_data\', \'_seopress_content_analysis_api\', \'_seopress_analysis_data_oxygen\', \'_seopress_content_analysis_api_in_progress\')';
-
+    $sql = 'DELETE FROM `' . $wpdb->prefix . 'postmeta` WHERE `meta_key` IN ( \'_seopress_analysis_data\', \'_seopress_content_analysis_api\', \'_seopress_analysis_data_oxygen\', \'_seopress_content_analysis_api_in_progress\')';
     $sql = $wpdb->prepare($sql);
-
     $wpdb->query($sql);
 
-    // Clean custom table
-    $sql = 'DELETE FROM `' . $wpdb->prefix . 'seopress_content_analysis`';
-
-    $sql = $wpdb->prepare($sql);
-
-    $wpdb->query($sql);
+    // Clean custom table if it exists
+    if ($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}seopress_content_analysis'") === $wpdb->prefix . 'seopress_content_analysis') {
+        $sql = 'DELETE FROM `' . $wpdb->prefix . 'seopress_content_analysis`';
+        $sql = $wpdb->prepare($sql);
+        $wpdb->query($sql);
+    }
 
     wp_safe_redirect(admin_url('admin.php?page=seopress-import-export'));
     exit;
 }
 add_action('admin_init', 'seopress_clean_content_scans');
+
 
 //Reset SEOPress Notices Settings
 function seopress_reset_notices_settings() {

@@ -7,6 +7,7 @@ include_once ABSPATH . 'wp-admin/includes/plugin.php';
 //=================================================================================================
 //THE Title Tag
 function seopress_titles_the_title() {
+
     $variables = null;
     $variables = apply_filters('seopress_dyn_variables_fn', $variables);
 
@@ -224,6 +225,7 @@ function seopress_titles_the_title() {
         }
     } elseif (is_post_type_archive() && !is_search() && !is_tax() && seopress_get_service('TitleOption')->getArchivesCPTTitle()) { //IS POST TYPE ARCHIVE (!is_tax required for TEC, !is_search required for WC search box)
         $seopress_titles_archive_titles_option = esc_attr(seopress_get_service('TitleOption')->getArchivesCPTTitle());
+
         $seopress_titles_title_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archive_titles_option);
     } elseif ((is_tax() || is_category() || is_tag()) && seopress_get_service('TitleOption')->getTaxTitle()) { //IS TAX
         $seopress_titles_tax_titles_option = esc_attr(seopress_get_service('TitleOption')->getTaxTitle());

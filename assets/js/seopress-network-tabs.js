@@ -48,7 +48,7 @@ jQuery(document).ready(function ($) {
         $('#' + hash).addClass("active");
     });
     //Robots
-    $('#seopress-tag-robots-1, #seopress-tag-robots-2, #seopress-tag-robots-3, #seopress-tag-robots-4, #seopress-tag-robots-5, #seopress-tag-robots-6, #seopress-tag-robots-7, #seopress-tag-robots-8, #seopress-tag-robots-9, #seopress-tag-robots-10, #seopress-tag-robots-11, #seopress-tag-robots-12').click(function () {
+    $('#seopress-tag-robots-1, #seopress-tag-robots-2, #seopress-tag-robots-3, #seopress-tag-robots-4, #seopress-tag-robots-5, #seopress-tag-robots-6, #seopress-tag-robots-7, #seopress-tag-robots-8, #seopress-tag-robots-9, #seopress-tag-robots-10, #seopress-tag-robots-11, #seopress-tag-robots-12, #seopress-tag-robots-13').click(function () {
         $(".seopress_robots_file").val($(".seopress_robots_file").val() + '\n' + $(this).attr('data-tag'));
     });
 });

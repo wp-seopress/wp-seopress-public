@@ -129,7 +129,7 @@ class RankMath implements ExecuteHooksBackend {
             foreach ($getPostMetas as $key => $value) {
                 $metaRankMath = get_post_meta($post->ID, $value, true);
                 if ( ! empty($metaRankMath)) {
-                    update_post_meta($post->ID, $key, $this->tagsRankMath->replaceTags($metaRankMath));
+                    update_post_meta($post->ID, $key, esc_html($this->tagsRankMath->replaceTags($metaRankMath)));
                 }
             }
 
@@ -195,6 +195,14 @@ class RankMath implements ExecuteHooksBackend {
         }
 
         $data           = [];
+
+        $data['total'] = $total_count_posts;
+        if ($offset >= $total_count_posts) {
+            $data['count'] = $total_count_posts;
+        } else {
+            $data['count'] = $offset;
+        }
+
         $data['offset'] = $offset;
 
         do_action('seopress_third_importer_rank_math', $offset, $increment);

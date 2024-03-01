@@ -206,7 +206,82 @@ class TitleOption {
         return $option[$currentCpt]['nofollow'];
     }
 
-    /**
+    public function getArchiveCptTitle($postType = null){
+
+        if($postType === null){
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $postType = get_post_type($post);
+        }
+
+        $option = $this->searchOptionByKey('seopress_titles_archive_titles');
+
+        if ( ! isset($option[$postType]['title'])) {
+            return;
+        }
+
+        return $option[$postType]['title'];
+
+    }
+
+    public function getArchiveCptDescription($postType = null){
+
+        if($postType === null){
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $postType = get_post_type($post);
+        }
+
+        $option = $this->searchOptionByKey('seopress_titles_archive_titles');
+
+        if ( ! isset($option[$postType]['description'])) {
+            return;
+        }
+
+        return $option[$postType]['description'];
+
+    }
+
+    public function getTaxonomyCptTitle($taxonomy = null){
+
+        if($taxonomy === null){
+            $queriedObject           = get_queried_object();
+            $taxonomy = null !== $queriedObject ? $queriedObject->taxonomy : '';
+        }
+
+        $option = $this->searchOptionByKey('seopress_titles_tax_titles');
+
+        if ( ! isset($option[$taxonomy]['title'])) {
+            return;
+        }
+
+        return $option[$taxonomy]['title'];
+
+    }
+    public function getTaxonomyCptDescription($taxonomy = null){
+
+        if($taxonomy === null){
+            $queriedObject           = get_queried_object();
+            $taxonomy = null !== $queriedObject ? $queriedObject->taxonomy : '';
+        }
+
+        $option = $this->searchOptionByKey('seopress_titles_tax_titles');
+
+        if ( ! isset($option[$taxonomy]['description'])) {
+            return;
+        }
+
+        return $option[$taxonomy]['description'];
+
+    }
+
+        /**
      * @since 5.7
      *
      * @param int|null $id
@@ -232,6 +307,28 @@ class TitleOption {
         }
 
         return $option[$currentCpt]['date'];
+    }
+
+    public function getTitleFromSingle($postType = null){
+
+        if($postType === null){
+            global $post;
+            if ( ! isset($post)) {
+                return;
+            }
+
+            $postType = get_post_type($post);
+        }
+
+        $option = $this->searchOptionByKey('seopress_titles_single_titles');
+
+        if ( ! isset($option[$postType]['title'])) {
+            return;
+        }
+
+        return $option[$postType]['title'];
+
+
     }
 
     /**

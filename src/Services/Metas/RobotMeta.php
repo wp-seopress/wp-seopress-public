@@ -36,9 +36,10 @@ class RobotMeta
     /**
      *
      * @param array $context
+     * @param bool $useDefault Use default value only if you get the value from the database after this function
      * @return string|null
      */
-    public function getValue($context)
+    public function getValue($context , $useDefault = true)
     {
         $data = [];
 
@@ -65,10 +66,12 @@ class RobotMeta
             if($name === null){
                 continue;
             }
-            if ($value['use_default']) {
-                $data[$name] = $value['default'];
+
+            if ($value['use_default'] && $useDefault) {
+                $data[$name] = $value['default'] === true || $value['default'] === 'yes' ? true : $value['default'];
             } else {
                 $result = $callback($id, $value['key'], true);
+
                 $data[$name] = 'checkbox' === $value['type'] ? ($result === true || $result === 'yes' ? true : false) : $result;
             }
         }

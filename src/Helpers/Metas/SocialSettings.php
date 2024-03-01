@@ -7,21 +7,9 @@ if ( ! defined('ABSPATH')) {
 }
 
 abstract class SocialSettings {
-    /**
-     * @since 5.0.0
-     *
-     * @param int|null $id
-     *
-     * @return array[]
-     *
-     *    key: string post meta
-     *    use_default: default value need to use
-     *    default: default value
-     *    label: string label
-     *    placeholder
-     */
-    public static function getMetaKeys($id = null) {
-        $data = apply_filters('seopress_api_meta_social_settings', [
+
+    public static function getMetaKeysFacebook(){
+        return  [
             [
                 'key'         => '_seopress_social_fb_title',
                 'type'        => 'input',
@@ -61,23 +49,28 @@ abstract class SocialSettings {
             [
                 'key'                => '_seopress_social_fb_img_height',
                 'type'               => 'hidden',
-            ],
+            ]
+        ];
+    }
+
+    public static function getMetaKeysTwitter(){
+        return [
             [
                 'key'         => '_seopress_social_twitter_title',
                 'type'        => 'input',
-                'placeholder' => __('Enter your Twitter title', 'wp-seopress'),
+                'placeholder' => __('Enter your X title', 'wp-seopress'),
                 'use_default' => '',
                 'default'     => '',
-                'label'       => __('Twitter Title', 'wp-seopress'),
+                'label'       => __('X Title', 'wp-seopress'),
                 'visible'     => true,
             ],
             [
                 'key'         => '_seopress_social_twitter_desc',
                 'type'        => 'textarea',
-                'placeholder' => __('Enter your Twitter description', 'wp-seopress'),
+                'placeholder' => __('Enter your X description', 'wp-seopress'),
                 'use_default' => '',
                 'default'     => '',
-                'label'       => __('Twitter description', 'wp-seopress'),
+                'label'       => __('X Description', 'wp-seopress'),
                 'visible'     => true,
             ],
             [
@@ -86,7 +79,7 @@ abstract class SocialSettings {
                 'placeholder'        => __('Select your default thumbnail', 'wp-seopress'),
                 'use_default'        => '',
                 'default'            => '',
-                'label'              => __('Twitter Thumbnail', 'wp-seopress'),
+                'label'              => __('X Thumbnail', 'wp-seopress'),
                 'visible'            => true,
                 'description'        => __('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress'),
             ],
@@ -102,8 +95,29 @@ abstract class SocialSettings {
                 'key'                => '_seopress_social_twitter_img_height',
                 'type'               => 'hidden',
             ],
-        ], $id);
+        ];
+    }
 
-        return $data;
+
+    /**
+     * @since 5.0.0
+     *
+     * @param int|null $id
+     *
+     * @return array[]
+     *
+     *    key: string post meta
+     *    use_default: default value need to use
+     *    default: default value
+     *    label: string label
+     *    placeholder
+     */
+    public static function getMetaKeys($id = null) {
+
+        $facebook = self::getMetaKeysFacebook();
+        $twitter = self::getMetaKeysTwitter();
+        $all = array_merge($facebook, $twitter);
+        return apply_filters('seopress_api_meta_social_settings', $all, $id);
+
     }
 }

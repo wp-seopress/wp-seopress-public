@@ -29,7 +29,8 @@ class SocialMeta
                 return "twitter";
         }
     }
-    protected function getKeySocial($meta){
+
+    public function getKeySocial($meta){
         switch ($meta) {
             case '_seopress_social_fb_title':
             case '_seopress_social_twitter_title':
@@ -51,6 +52,24 @@ class SocialMeta
             case '_seopress_social_twitter_img_height':
                 return "image_height";
         }
+    }
+
+    public function getFacebookHomeDescription(){
+        $pageId = get_option('page_for_posts');
+        $value = get_post_meta($pageId, '_seopress_social_fb_desc', true);
+        if ( empty($value)) {
+            return;
+        }
+
+        return $value;
+    }
+    public function getFacebookTaxonomyDescription($id){
+        $value = get_term_meta($id,'_seopress_social_fb_desc', true);
+        if (empty($value)) {
+            return;
+        }
+
+        return $value;
     }
 
     /**

@@ -391,7 +391,7 @@ class Document_Settings_Section {
             [
                 //'label' => __( 'Important Note', 'wp-seopress' ),
                 'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw'  => __('<p class="elementor-control-field-description"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. Twitter does the same if no Twitter cards tags are defined below.</p>', 'wp-seopress'),
+                'raw'  => __('<p class="elementor-control-field-description"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. X (ex-Twitter) does the same if no Twitter cards tags are defined below.</p>', 'wp-seopress'),
                 //'content_classes' => 'your-class',
             ]
         );
@@ -448,7 +448,7 @@ class Document_Settings_Section {
         $document->add_control(
             '_seopress_social_twitter_title',
             [
-                'label'       => __('Twitter Title', 'wp-seopress'),
+                'label'       => __('X Title', 'wp-seopress'),
                 'type'        => \Elementor\Controls_Manager::TEXT,
                 'label_block' => true,
                 'separator'   => 'none',
@@ -459,7 +459,7 @@ class Document_Settings_Section {
         $document->add_control(
             '_seopress_social_twitter_desc',
             [
-                'label'       => __('Twitter description', 'wp-seopress'),
+                'label'       => __('X Description', 'wp-seopress'),
                 'type'        => \Elementor\Controls_Manager::TEXTAREA,
                 'label_block' => true,
                 'separator'   => 'none',
@@ -470,7 +470,7 @@ class Document_Settings_Section {
         $document->add_control(
             '_seopress_social_twitter_img',
             [
-                'label'       => __('Twitter Thumbnail', 'wp-seopress'),
+                'label'       => __('X Thumbnail', 'wp-seopress'),
                 'type'        => \Elementor\Controls_Manager::MEDIA,
                 'label_block' => true,
                 'separator'   => 'none',
@@ -483,7 +483,7 @@ class Document_Settings_Section {
         $document->add_control(
             'social_preview_twitter',
             [
-                'label'       => __('Twitter Preview', 'wp-seopress'),
+                'label'       => __('X Preview', 'wp-seopress'),
                 'type'        => 'seopress-social-preview',
                 'label_block' => true,
                 'separator'   => 'none',

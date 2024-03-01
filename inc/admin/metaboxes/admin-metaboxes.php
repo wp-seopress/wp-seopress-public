@@ -116,6 +116,7 @@ function seopress_display_seo_metaboxe()
                 'i18n'                   => ['progress'  => __('Analysis in progress...', 'wp-seopress')],
                 'ajax_url'               => admin_url('admin-ajax.php'),
                 'get_preview_meta_title' => wp_create_nonce('get_preview_meta_title'),
+                'get_preview_meta_description' => wp_create_nonce('get_preview_meta_description'),
             ];
             wp_localize_script('seopress-cpt-counters-js', 'seopressAjaxRealPreview', $seopress_real_preview);
 
@@ -477,6 +478,7 @@ function seopress_display_ca_metaboxe()
             'i18n'                   => ['progress' => __('Analysis in progress...', 'wp-seopress')],
             'ajax_url'               => admin_url('admin-ajax.php'),
             'get_preview_meta_title' => wp_create_nonce('get_preview_meta_title'),
+            'get_preview_meta_description' => wp_create_nonce('get_preview_meta_description'),
         ];
         wp_localize_script('seopress-cpt-counters-js', 'seopressAjaxRealPreview', $seopress_real_preview);
 

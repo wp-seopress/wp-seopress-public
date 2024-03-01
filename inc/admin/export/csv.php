@@ -255,7 +255,6 @@ function seopress_metadata_export() {
         } else {
             $args = [
                 'taxonomy'   => $seopress_get_taxonomies,
-                'taxonomy'   => 'type',
                 'number'     => $increment,
                 'offset'     => $offset,
                 'order'      => 'DESC',

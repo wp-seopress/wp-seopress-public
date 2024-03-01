@@ -6,7 +6,7 @@ Tags: SEO, schema, xml sitemap, redirection, meta title, open graph, content ana
 Requires at least: 5.0+
 Tested up to: 6.4
 Requires PHP: 7.2
-Stable tag: 7.4
+Stable tag: 7.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +23,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 ✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 ✔ <strong>Content analysis to help you write content optimized for search engines with unlimited target keywords</strong>
 ✔ <strong><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import your post and term metadatas</a> from other plugins or CSV file in 1 click</strong>
-✔ <strong>Trusted by over 290,000 WordPress websites since 2017</strong>
+✔ <strong>Trusted by over 300,000 WordPress websites since 2017</strong>
 
 <a href="https://www.seopress.org/pricing/" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / unlimited sites</strong></a>
 
@@ -47,10 +47,10 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li><strong>Installation wizard</strong> to quickly setup your site</li>
 	<li><strong>Content analysis</strong> with unlimited keywords to help you write optimized content for search engines</li>
 	<li><strong>Mobile / Desktop Google Preview</strong> to see how your post will looks like in Google search results</li>
-	<li><strong>Facebook & Twitter Social Preview</strong> to see how your post will looks like on social media to increase conversions</li>
+	<li><strong>Facebook & X (ex-Twitter) Social Preview</strong> to see how your post will looks like on social media to increase conversions</li>
 	<li><strong>Titles</strong> (with <a href="https://www.seopress.org/support/guides/manage-titles-meta-descriptions/">dynamic variables</a>: custom fields, terms taxonomie...)</li>
 	<li><strong>Meta descriptions</strong> (with dynamic variables too)</li>
-	<li><a href="https://www.seopress.org/features/social-media/"><strong>Open Graph and Twitter Cards</strong></a> to improve social media sharing (Facebook, LinkedIn, Instagram, Twitter, Pinterest, WhatsApp...)</li>
+	<li><a href="https://www.seopress.org/features/social-media/"><strong>Open Graph and X (ex-Twitter) Cards</strong></a> to improve social media sharing (Facebook, LinkedIn, Instagram, X (ex-Twitter), Pinterest, WhatsApp...)</li>
 	<li><strong>Google Knowledge Graph</strong></li>
 	<li><a href="https://www.seopress.org/features/google-analytics/"><strong>Google Analytics</strong> and <strong>Matomo</strong></a> with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">GDPR compatibility</a>)</li>
 	<li><strong>Microsoft Clarity integration</strong>: to capture session recordings, get instant heatmaps and powerful Insights for Free. Know how people interact with your site to improve user experience and conversions</li>
@@ -157,7 +157,7 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 We provide deep integration with Elementor page builder. Directly from Elementor settings, you can:
 <ul>
 	<li>edit your SEO metadata (title, meta description, meta robots)</li>
-	<li>edit social meta (Facebook Open Graph and Twitter Cards)</li>
+	<li>edit social meta (Facebook Open Graph and X (ex-Twitter) Cards)</li>
 	<li>analyse your content to optimize it for search engines</li>
 	<li>apply FAQ schema on Toggle and / or Accordion Elementor widgets</li>
     <li>generate automagically meta title and description with AI (OpenAI integration - PRO required)</li>
@@ -366,7 +366,7 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 
 == Screenshots ==
 1. SEOPress metabox
-2. Facebook / Twitter social Preview
+2. Facebook / X (ex-Twitter) social Preview
 3. Content analysis metabox
 4. SEOPress Configuration wizard
 5. SEOPress Dashboard: welcome screen
@@ -379,21 +379,25 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 7.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-4/">Read the blog post update</a> =
-* NEW Add Shipping properties to Product schema (automatically added to your existing products schemas)
-* NEW Add 'Description', 'Email' and 'VAT ID' properties to Organization schema (SEO, Social Networks, Knowledge Graph to configure)
-* NEW Bulk action to generate alt text from media filename
-* NEW Export your 404 errors list to a CSV file (SEO, Tools, Redirections tab)
-* NEW 'seopress_export_404_query' hook to filter the 404 errors export query (https://www.seopress.org/support/hooks/filter-export-404-errors-query/)
-* INFO XML sitemaps no longer display terms without associated content
-* INFO Prevent browser to autocomplete some inputs
-* INFO We no longer ping Google for XML sitemaps as the service is deprecated since several months now
-* FIX PHP Warnings
-* FIX Backwards compatibility issue with WP < 5.9
-* FIX Fatal error on How-to schema in specific cases
-* FIX GA4 widget values
-* FIX Incorrect content analysis from universal SEO metabox in specific cases
-* FIX Deleting data from OG/Tw image fields for terms
-
+= 7.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-5/">Read the blog post update</a> =
+* NEW SEOPress REST API with context 🎉
+* NEW Custom table for our content analysis feature 🎉
+* NEW Course schema updated with new properties (PRO)
+* NEW Quickly block search results crawling with robots.txt file (PRO)
+* NEW Add VAT ID and Telephone fields to the installation wizard
+* INFO Rename Twitter to X
+* INFO Increase the default min height of our Universal SEO Metabox
+* INFO Disable search results indexing on first time configuration to prevent SPAM referer
+* FIX Migration tools from other SEO plugins in specific cases
+* FIX PHP Warning $seopress_redirections_enabled_regex
+* FIX Ecwid fatal errors
+* FIX Error when deleting content analysis scans
+* FIX Incorrect counters for meta description in SEO metabox
+* FIX Bricks compatibility issue on homepage with our universal SEO metabox
+* FIX A non-breaking space with the directive on RSS feeds (robots.txt tab)
+* FIX "seopress_ai_openai_alt_text" filter for AI/Alt text
+* FIX Deprecated mb_convert_encoding function with PHP >= 8.2
+* FIX A notification related to Google Search Console verification meta tag
+* FIX Invalid datetime value for "uploadDate" + timezone for Video schema
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

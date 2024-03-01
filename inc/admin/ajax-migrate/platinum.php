@@ -40,33 +40,33 @@ function seopress_platinum_seo_migration() {
                         if ('category' === $term->taxonomy) {
                             $tax = 'category';
                         }
-                        if ('' != get_term_meta($term->term_id, 'psp_' . $tax . '_seo_metas_' . $term->term_id, true) || '' != get_term_meta($term->$term_id, 'psp_' . $tax . '_social_metas_' . $term->term_id, true)) {
+                        if ('' != get_term_meta($term->term_id, 'psp_' . $tax . '_seo_metas_' . $term->term_id, true) || '' != get_term_meta($term->term_id, 'psp_' . $tax . '_social_metas_' . $term->term_id, true)) {
                             $term_settings        = get_term_meta($term->term_id, 'psp_' . $tax . '_seo_metas_' . $term->term_id, true);
                             $term_social_settings = get_term_meta($term->term_id, 'psp_' . $tax . '_social_metas_' . $term->term_id, true);
 
                             if ( ! empty($term_settings['title'])) { //Import title tag
-                                update_term_meta($term->term_id, '_seopress_titles_title', $term_settings['title']);
+                                update_term_meta($term->term_id, '_seopress_titles_title', esc_html($term_settings['title']));
                             }
                             if ( ! empty($term_settings['description'])) { //Import meta desc
-                                update_term_meta($term->term_id, '_seopress_titles_desc', $term_settings['description']);
+                                update_term_meta($term->term_id, '_seopress_titles_desc', esc_html($term_settings['description']));
                             }
                             if ( ! empty($term_social_settings['fb_title'])) { //Import Facebook Title
-                                update_term_meta($term->term_id, '_seopress_social_fb_title', $term_social_settings['fb_title']);
-                                update_term_meta($term->term_id, '_seopress_social_twitter_title', $term_social_settings['fb_title']);
+                                update_term_meta($term->term_id, '_seopress_social_fb_title', esc_html($term_social_settings['fb_title']));
+                                update_term_meta($term->term_id, '_seopress_social_twitter_title', esc_html($term_social_settings['fb_title']));
                             }
                             if ( ! empty($term_social_settings['fb_description'])) { //Import Facebook Desc
-                                update_term_meta($term->term_id, '_seopress_social_fb_desc', $term_social_settings['fb_description']);
-                                update_term_meta($term->term_id, '_seopress_social_twitter_desc', $term_social_settings['fb_description']);
+                                update_term_meta($term->term_id, '_seopress_social_fb_desc', esc_html($term_social_settings['fb_description']));
+                                update_term_meta($term->term_id, '_seopress_social_twitter_desc', esc_html($term_social_settings['fb_description']));
                             }
                             if ( ! empty($term_social_settings['fb_image'])) { //Import Facebook Image
-                                update_term_meta($term->term_id, '_seopress_social_fb_img', $term_social_settings['fb_image']);
-                                update_term_meta($term->term_id, '_seopress_social_twitter_img', $term_social_settings['fb_image']);
+                                update_term_meta($term->term_id, '_seopress_social_fb_img', esc_url($term_social_settings['fb_image']));
+                                update_term_meta($term->term_id, '_seopress_social_twitter_img', esc_url($term_social_settings['fb_image']));
                             }
                             if ( ! empty($term_settings['canonical_url'])) { //Import Canonical URL
-                                update_term_meta($term->term_id, '_seopress_robots_canonical', $term_settings['canonical_url']);
+                                update_term_meta($term->term_id, '_seopress_robots_canonical', esc_url($term_settings['canonical_url']));
                             }
                             if ( ! empty($term_settings['redirect_to_url'])) { //Import Redirect URL
-                                update_term_meta($term->term_id, '_seopress_redirections_value', $term_settings['redirect_to_url']);
+                                update_term_meta($term->term_id, '_seopress_redirections_value', esc_url($term_settings['redirect_to_url']));
                                 update_term_meta($term->term_id, '_seopress_redirections_enabled', 'yes');
                                 if ( ! empty($term_settings['redirect_status_code'])) {
                                     $status = $term_settings['redirect_status_code'];
@@ -111,31 +111,31 @@ function seopress_platinum_seo_migration() {
             if ($platinum_seo_query) {
                 foreach ($platinum_seo_query as $post) {
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_title', true)) { //Import title tag
-                        update_post_meta($post->ID, '_seopress_titles_title', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_title', true));
+                        update_post_meta($post->ID, '_seopress_titles_title', esc_html(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_title', true)));
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_description', true)) { //Import meta desc
-                        update_post_meta($post->ID, '_seopress_titles_desc', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_description', true));
+                        update_post_meta($post->ID, '_seopress_titles_desc', esc_html(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_description', true)));
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_title', true)) { //Import Facebook Title
-                        update_post_meta($post->ID, '_seopress_social_fb_title', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_title', true));
-                        update_post_meta($post->ID, '_seopress_social_twitter_title', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_title', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_title', esc_html(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_title', true)));
+                        update_post_meta($post->ID, '_seopress_social_twitter_title', esc_html(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_title', true)));
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_description', true)) { //Import Facebook Desc
-                        update_post_meta($post->ID, '_seopress_social_fb_desc', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_description', true));
-                        update_post_meta($post->ID, '_seopress_social_twitter_desc', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_description', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_desc', esc_html(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_description', true)));
+                        update_post_meta($post->ID, '_seopress_social_twitter_desc', esc_html(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_description', true)));
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_image', true)) { //Import Facebook Image
-                        update_post_meta($post->ID, '_seopress_social_fb_img', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_image', true));
-                        update_post_meta($post->ID, '_seopress_social_twitter_img', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_image', true));
+                        update_post_meta($post->ID, '_seopress_social_fb_img', esc_url(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_image', true)));
+                        update_post_meta($post->ID, '_seopress_social_twitter_img', esc_url(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_fb_image', true)));
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_keywords', true)) { //Import Target Keyword
-                        update_post_meta($post->ID, '_seopress_analysis_target_kw', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_keywords', true));
+                        update_post_meta($post->ID, '_seopress_analysis_target_kw', esc_html(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_keywords', true)));
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_canonical_url', true)) { //Import Canonical URL
-                        update_post_meta($post->ID, '_seopress_robots_canonical', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_canonical_url', true));
+                        update_post_meta($post->ID, '_seopress_robots_canonical', esc_url(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_canonical_url', true)));
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_redirect_to_url', true)) { //Import Redirect URL
-                        update_post_meta($post->ID, '_seopress_redirections_value', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_redirect_to_url', true));
+                        update_post_meta($post->ID, '_seopress_redirections_value', esc_url(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_redirect_to_url', true)));
                         update_post_meta($post->ID, '_seopress_redirections_enabled', 'yes'); //Enable the redirect
 
                         if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_redirect_status_code', true)) {
@@ -163,11 +163,11 @@ function seopress_platinum_seo_migration() {
                         update_post_meta($post->ID, '_seopress_robots_imageindex', 'yes');
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_keywords', true)) { //Import Target Keywords
-                        update_post_meta($post->ID, '_seopress_analysis_target_kw', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_keywords', true));
+                        update_post_meta($post->ID, '_seopress_analysis_target_kw', esc_html(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_keywords', true)));
                     }
                     if ('' != get_metadata('platinumseo', $post->ID, '_techblissonline_psp_preferred_term', true)) { //Import Primary category
                         if ('category' == get_metadata('platinumseo', $post->ID, '_techblissonline_psp_preferred_taxonomy', true) || 'product_cat' == get_metadata('platinumseo', $post->ID, '_techblissonline_psp_preferred_taxonomy', true)) {
-                            update_post_meta($post->ID, '_seopress_robots_primary_cat', get_metadata('platinumseo', $post->ID, '_techblissonline_psp_preferred_term', true));
+                            update_post_meta($post->ID, '_seopress_robots_primary_cat', absint(get_metadata('platinumseo', $post->ID, '_techblissonline_psp_preferred_term', true)));
                         }
                     }
                 }

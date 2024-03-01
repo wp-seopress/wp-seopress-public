@@ -230,7 +230,7 @@ function seopress_social_accounts_twitter_callback()
     $check   = isset($options['seopress_social_accounts_twitter']) ? $options['seopress_social_accounts_twitter'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="' . esc_html__('e.g. @my_twitter_account', 'wp-seopress') . '" aria-label="' . __('Twitter Page URL', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="' . esc_html__('e.g. @my_x_account', 'wp-seopress') . '" aria-label="' . __('X (ex-Twitter) Page URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }

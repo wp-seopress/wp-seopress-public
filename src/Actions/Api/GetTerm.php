@@ -43,14 +43,18 @@ class GetTerm implements ExecuteHooks
      * @return array
      */
     protected function getData($id, $taxonomy = 'category'){
-        $context = seopress_get_service('ContextPage')->buildContextWithCurrentId($id, ['type' => 'term','taxonomy' => $taxonomy])->getContext();
+        $context = seopress_get_service('ContextPage')->buildContextWithCurrentId($id, [
+            'type' => 'term',
+            'taxonomy' => $taxonomy
+        ])->getContext();
 
         $title = seopress_get_service('TitleMeta')->getValue($context);
+
         $description = seopress_get_service('DescriptionMeta')->getValue($context);
 
         $social = seopress_get_service('SocialMeta')->getValue($context);
         $robots = seopress_get_service('RobotMeta')->getValue($context);
-        $redirections = seopress_get_service('RedirectionMeta')->getValue($context);
+        $redirections = seopress_get_service('RedirectionMeta')->getValue($context, false);
 
         $canonical =  '';
         if(isset($robots['canonical'])){
@@ -98,7 +102,8 @@ class GetTerm implements ExecuteHooks
 
         $data = $this->getData($id, $taxonomy);
 
-        return new \WP_REST_Response($data);
+        wp_send_json_success($data);
+        return;
     }
 
 }

@@ -218,11 +218,7 @@ foreach ($postslist as $post) {
 				}
 
 				if ('' != $post_content) {
-					if (function_exists('mb_convert_encoding')) {
-						$dom->loadHTML(mb_convert_encoding($post_content, 'HTML-ENTITIES', 'UTF-8'));
-					} else {
-						$dom->loadHTML('<?xml encoding="utf-8" ?>' . $post_content);
-					}
+					$dom->loadHTML('<?xml encoding="utf-8" ?>' . $post_content);
 
 					$dom->preserveWhiteSpace = false;
 
