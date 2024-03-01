@@ -1,0 +1,19 @@
+{
+    "@context": "https://schema.org",
+    "@type": "[[type]]",
+    "name": "[[name]]",
+    "url": "[[url]]",
+    "alternateName": "[[alternate_name]]",
+    "description": "[[description]]",
+    "logo": "[[logo]]",
+    "sameAs": [
+        "[[account_facebook]]",
+        "[[account_twitter]]",
+        "[[account_pinterest]]",
+        "[[account_instagram]]",
+        "[[account_youtube]]",
+        "[[account_linkedin]]",
+        "[[account_extra]]"
+    ],
+    "vatID": "[[tax_id]]"
+}

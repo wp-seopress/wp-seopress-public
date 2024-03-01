@@ -57,7 +57,7 @@ $data_attr = seopress_metaboxes_init();
 
                         foreach($kwsCount as $kw => $item) {
 
-                            if(count($item['rows']) === 0){
+                            if(count($item['rows']) <= 1){
                                 continue;
                             }
                             $html .= '<li>
