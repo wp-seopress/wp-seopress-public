@@ -556,10 +556,7 @@ for (let i = 0; i < links.length; i++) {
             }
         }
 
-        // E-commerce
-        if (isset($seopress_google_analytics_click_event['purchase_tracking'])) {
-            $seopress_google_analytics_html .= $seopress_google_analytics_click_event['purchase_tracking'];
-        }
+        $seopress_google_analytics_html .= apply_filters('seopress_gtag_before_closing_script', $seopress_google_analytics_html);
 
         $seopress_google_analytics_html .= '</script>';
         $seopress_google_analytics_html .= "\n";

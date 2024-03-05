@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.4
 Requires PHP: 7.2
-Stable tag: 7.5.1
+Stable tag: 7.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -258,6 +258,12 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 7.5.2 =
+* INFO Improve compatibility with The Events Calendar plugin
+* INFO Improve compatibility with Polylang and our Breadcrumbs (PRO)
+* FIX GA4 purchases tracking (PRO)
+* FIX SEO score column in post type list
+
 = 7.5.1 =
 * FIX Warnings with REST API
 * FIX Keywords in permalink / Target keywords already use in Content Analysis

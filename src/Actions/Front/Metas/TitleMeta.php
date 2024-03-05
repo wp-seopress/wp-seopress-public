@@ -24,6 +24,10 @@ class TitleMeta implements ExecuteHooksFrontend {
     }
 
     public function preLoad(){
+        if ('1' !== seopress_get_toggle_option('titles')) {
+            return;
+        }
+
         if ((function_exists('is_wpforo_page') && is_wpforo_page()) || (class_exists('Ecwid_Store_Page') && \Ecwid_Store_Page::is_store_page())) {//disable on wpForo pages to avoid conflicts
             return;
         }
