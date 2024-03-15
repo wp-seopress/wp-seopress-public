@@ -108,7 +108,7 @@ if (is_plugin_active('woocommerce/woocommerce.php') && $path == 'product' ) {
 }
 
 // Polylang: remove hidden languages
-if (function_exists('get_languages_list') && is_plugin_active('polylang/polylang.php') || is_plugin_active('polylang-pro/polylang.php')) {
+if (function_exists('get_languages_list') && defined( 'POLYLANG_VERSION' ) ) {
 	$languages = PLL()->model->get_languages_list();
 	if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
 		$args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );
