@@ -9,7 +9,7 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_seopressor_migration() {
-    check_ajax_referer('seopress_seopressor_migrate_nonce', $_POST['_ajax_nonce'], true);
+    check_ajax_referer('seopress_seopressor_migrate_nonce', '_ajax_nonce', true);
 
     if (current_user_can(seopress_capability('manage_options', 'migration')) && is_admin()) {
         if (isset($_POST['offset']) && isset($_POST['offset'])) {

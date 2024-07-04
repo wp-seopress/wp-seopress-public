@@ -368,7 +368,7 @@ class I18nUniversalMetabox
                 ],
                 'schemas' => [
                     'title' => __("Structured Data Types (schemas)", "wp-seopress"),
-                    'no_schema' => __("No schemas found in the source code of this page.", "wp-seopress"),
+                    'no_schema' => __("No schemas found in the source code of this page. Get rich snippets in Google Search results and improve your visibility by adding structured data types (schemas) to your page.", "wp-seopress"),
                     'head' => __("We found these schemas in the source code of this page:", "wp-seopress"),
                     'duplicated' => __("duplicated schema - x", "wp-seopress"),
 

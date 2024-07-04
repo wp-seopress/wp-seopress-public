@@ -6,7 +6,7 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_do_real_preview()
 {
-    check_ajax_referer('seopress_real_preview_nonce', $_GET['_ajax_nonce'], true);
+    check_ajax_referer('seopress_real_preview_nonce', '_ajax_nonce', true);
 
     if (!current_user_can('edit_posts') || !is_admin()) {
         return;
@@ -87,12 +87,20 @@ add_action('wp_ajax_seopress_do_real_preview', 'seopress_do_real_preview');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_toggle_features()
 {
-    check_ajax_referer('seopress_toggle_features_nonce', $_POST['_ajax_nonce'], true);
+    check_ajax_referer('seopress_toggle_features_nonce', '_ajax_nonce', true);
 
     if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
         if (isset($_POST['feature']) && isset($_POST['feature_value'])) {
-            $seopress_toggle_options                    = get_option('seopress_toggle');
-            $seopress_toggle_options[$_POST['feature']] = esc_attr($_POST['feature_value']);
+            $seopress_toggle_options = get_option('seopress_toggle');
+            $feature = esc_attr($_POST['feature']);
+            $feature_value = esc_attr($_POST['feature_value']);
+
+            $seopress_toggle_options[$feature] = $feature_value;
+
+            //Flush permalinks for XML sitemaps
+            if ($feature_value === 'toggle-xml-sitemap') {
+                flush_rewrite_rules(false);
+            }
             update_option('seopress_toggle', $seopress_toggle_options, 'yes', false);
         }
         exit();
@@ -105,7 +113,7 @@ add_action('wp_ajax_seopress_toggle_features', 'seopress_toggle_features');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_display()
 {
-    check_ajax_referer('seopress_display_nonce', $_POST['_ajax_nonce'], true);
+    check_ajax_referer('seopress_display_nonce', '_ajax_nonce', true);
     if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
         //Notifications Center
         if (isset($_POST['notifications_center'])) {
@@ -153,11 +161,11 @@ add_action('wp_ajax_seopress_display', 'seopress_display');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_hide_notices()
 {
-    check_ajax_referer('seopress_hide_notices_nonce', $_POST['_ajax_nonce'], true);
+    check_ajax_referer('seopress_hide_notices_nonce', '_ajax_nonce', true);
 
     if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
         if (isset($_POST['notice']) && isset($_POST['notice_value'])) {
-            $seopress_notices_options = get_option('seopress_notices') ? get_option('seopress_notices') : [];
+            $seopress_notices_options = get_option('seopress_notices', []);
 
             $notice = esc_html($_POST['notice']);
             $notice_value = esc_html($_POST['notice_value']);

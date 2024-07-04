@@ -221,17 +221,17 @@ add_settings_field(
 );
 
 add_settings_field(
-    'seopress_google_analytics_cb_btn_sec_col', // ID
+    'seopress_google_analytics_cb_btn_sec_bg_hov', // ID
     '', // Title
-    'seopress_google_analytics_cb_btn_sec_col_callback', // Callback
+    'seopress_google_analytics_cb_btn_sec_bg_hov_callback', // Callback
     'seopress-settings-admin-google-analytics-gdpr', // Page
     'seopress_setting_section_google_analytics_gdpr' // Section
 );
 
 add_settings_field(
-    'seopress_google_analytics_cb_btn_sec_bg_hov', // ID
+    'seopress_google_analytics_cb_btn_sec_col', // ID
     '', // Title
-    'seopress_google_analytics_cb_btn_sec_bg_hov_callback', // Callback
+    'seopress_google_analytics_cb_btn_sec_col_callback', // Callback
     'seopress-settings-admin-google-analytics-gdpr', // Page
     'seopress_setting_section_google_analytics_gdpr' // Section
 );

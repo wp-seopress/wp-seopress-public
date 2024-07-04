@@ -70,12 +70,9 @@
 	  <key name="seopress_google_analytics_download_tracking"/>
 	  <key name="seopress_google_analytics_affiliate_tracking"/>
 	  <key name="seopress_google_analytics_ga4_property_id"/>
-	  <key name="seopress_google_analytics_auth_client_id"/>
-	  <key name="seopress_google_analytics_auth_secret_id"/>
 	  <key name="seopress_google_analytics_matomo_id"/>
 	  <key name="seopress_google_analytics_matomo_site_id"/>
 	  <key name="seopress_google_analytics_matomo_cross_domain_sites"/>
-	  <key name="seopress_google_analytics_matomo_widget_auth_token"/>
 	  <key name="seopress_google_analytics_clarity_project_id"/>
 	  <key name="seopress_google_analytics_opt_out_msg"/>
 	  <key name="seopress_google_analytics_opt_out_msg_ok"/>

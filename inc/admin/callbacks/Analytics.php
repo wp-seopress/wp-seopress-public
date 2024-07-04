@@ -489,21 +489,6 @@ esc_html($check)
 );
 }
 
-function seopress_google_analytics_cb_btn_sec_col_callback() {
-    $options = get_option('seopress_google_analytics_option_name');
-    $check   = isset($options['seopress_google_analytics_cb_btn_sec_col']) ? $options['seopress_google_analytics_cb_btn_sec_col'] : null; ?>
-
-<p class="description">
-    <?php _e('Text color: ', 'wp-seopress'); ?>
-</p>
-
-<?php
-    printf(
-'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_col]" aria-label="' . __('Change the color of the cookie bar secondary button hover background', 'wp-seopress') . '" value="%s" class="color-picker"/>',
-esc_html($check)
-);
-}
-
 function seopress_google_analytics_cb_btn_sec_bg_hov_callback() {
     $options = get_option('seopress_google_analytics_option_name');
     $check   = isset($options['seopress_google_analytics_cb_btn_sec_bg_hov']) ? $options['seopress_google_analytics_cb_btn_sec_bg_hov'] : null; ?>
@@ -515,6 +500,21 @@ function seopress_google_analytics_cb_btn_sec_bg_hov_callback() {
 <?php
     printf(
 '<input type="text" data-alpha="true" data-default-color="#222222" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_bg_hov]" aria-label="' . __('Change the color of the cookie bar secondary button', 'wp-seopress') . '" value="%s" class="color-picker"/>',
+esc_html($check)
+);
+}
+
+function seopress_google_analytics_cb_btn_sec_col_callback() {
+    $options = get_option('seopress_google_analytics_option_name');
+    $check   = isset($options['seopress_google_analytics_cb_btn_sec_col']) ? $options['seopress_google_analytics_cb_btn_sec_col'] : null; ?>
+
+<p class="description">
+    <?php _e('Text color: ', 'wp-seopress'); ?>
+</p>
+
+<?php
+    printf(
+'<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_cb_btn_sec_col]" aria-label="' . __('Change the color of the cookie bar secondary button hover background', 'wp-seopress') . '" value="%s" class="color-picker"/>',
 esc_html($check)
 );
 }

@@ -249,16 +249,23 @@ function seopress_check_ssl() {
 /**
  * Check if a string is base64 encoded
  *
- * @author Benjamin Denis
- *
- * @return boolean
- **/
+ * @param string $str The string to check
+ * @return bool Returns true if the string is base64 encoded, false otherwise
+ */
 function seopress_is_base64_string($str) {
-	$decoded = base64_decode($str, true);
-	if ($decoded === false) {
+    // Check if the string is empty or not a string
+    if (empty($str) || !is_string($str)) {
         return false;
-	}
-	return base64_encode($decoded) === $str;
+    }
+
+    // Decode the string and check if it decodes properly
+    $decoded = base64_decode($str, true);
+    if ($decoded === false) {
+        return false;
+    }
+
+    // Encode the decoded string and compare with the original string
+    return base64_encode($decoded) === $str;
 }
 
 /**

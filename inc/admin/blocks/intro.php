@@ -19,7 +19,7 @@
         <h1>
             <?php
                 /* translators: %s displays the current version number */
-                printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '7.6.1');
+                printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '7.7');
             ?>
         </h1>
         <p><?php _e('Your control center for SEO.', 'wp-seopress'); ?></p>

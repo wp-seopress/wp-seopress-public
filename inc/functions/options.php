@@ -232,7 +232,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
     }
 
     function seopress_cookies_user_consent() {
-        //check_ajax_referer( 'seopress_cookies_user_consent_nonce', $_GET['_ajax_nonce'], true );
+        //check_ajax_referer( 'seopress_cookies_user_consent_nonce', '_ajax_nonce', true );
         if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable()) {//no user consent required
             wp_send_json_success();
         } else {
@@ -318,6 +318,12 @@ if ('1' == seopress_get_toggle_option('xml-sitemap')) {
         require_once dirname(__FILE__) . '/options-sitemap.php'; //XML / HTML Sitemap
     }
 }
+
+//Robots
+if ('1' == seopress_get_toggle_option('xml-sitemap')) {
+    require_once dirname(__FILE__) . '/options-robots-txt.php'; //Robots.txt
+}
+
 if ('1' === seopress_get_toggle_option('advanced')) {
     //Remove comment author url
     if ('1' === seopress_get_service('AdvancedOption')->getAdvancedCommentsAuthorURLDisable()) {

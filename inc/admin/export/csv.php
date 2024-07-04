@@ -19,7 +19,7 @@ add_filter('seopress_metadata_query_args', function ($args, $seopress_get_post_t
 }, 10, 4);
 
 function seopress_metadata_export() {
-    check_ajax_referer('seopress_export_csv_metadata_nonce', $_POST['_ajax_nonce'], true);
+    check_ajax_referer('seopress_export_csv_metadata_nonce', '_ajax_nonce', true);
 
     if ( ! is_admin()) {
         wp_send_json_error();

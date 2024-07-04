@@ -62,7 +62,7 @@ class GetContent
             $analyzes['schemas']['desc'] = $desc;
         } else {
             $analyzes['schemas']['impact'] = 'medium';
-            $analyzes['schemas']['desc']   = '<p>' . __('No schemas found in the source code of this page.', 'wp-seopress') . '</p>';
+            $analyzes['schemas']['desc']   = '<p>' . __('No schemas found in the source code of this page. Get rich snippets in Google Search results and improve your visibility by adding structured data types (schemas) to your page.', 'wp-seopress') . '</p>';
         }
 
         return $analyzes;
@@ -269,7 +269,7 @@ class GetContent
      */
     protected function analyzeMetaTitle($analyzes, $data, $post)
     {
-        $seopress_titles_title     = get_post_meta($post->ID, '_seopress_titles_title', true);
+        $seopress_titles_title     = !empty($data['title']) ? $data['title'] : get_post_meta($post->ID, '_seopress_titles_title', true);
 
         if (! empty($seopress_titles_title)) {
             $desc = null;
@@ -316,7 +316,7 @@ class GetContent
      */
     protected function analyzeMetaDescription($analyzes, $data, $post)
     {
-        $seopress_titles_desc                   = get_post_meta($post->ID, '_seopress_titles_desc', true);
+        $seopress_titles_desc                   = !empty($data['description']) ? $data['description'] : get_post_meta($post->ID, '_seopress_titles_desc', true);
 
         if (! empty($seopress_titles_desc)) {
             $desc = null;

@@ -195,7 +195,7 @@ class AIO implements ExecuteHooksBackend {
      * @since 4.3.0
      */
     public function process() {
-        check_ajax_referer('seopress_aio_migrate_nonce', $_POST['_ajax_nonce'], true);
+        check_ajax_referer('seopress_aio_migrate_nonce', '_ajax_nonce', true);
         if ( ! is_admin()) {
             wp_send_json_error();
 

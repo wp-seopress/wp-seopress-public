@@ -70,7 +70,6 @@ class PagePreview implements ExecuteHooks
         $data = seopress_get_service('DomFilterContent')->getData($str, $id);
 
         if (defined('WP_DEBUG') && WP_DEBUG) {
-            $data['analyzed_content'] = seopress_get_service('DomAnalysis')->getPostContentAnalyze($id);
             $data['analyzed_content_id'] = $id;
         }
 

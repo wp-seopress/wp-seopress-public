@@ -333,7 +333,7 @@ function seopress_display_seo_metaboxe()
                 if (isset($_POST['seopress_redirections_type'])) {
                     $redirection_type = intval($_POST['seopress_redirections_type']);
 
-                    if (in_array($redirection_type, [301, 302, 307])) {
+                    if (in_array($redirection_type, [301, 302, 307, 410, 451])) {
                         update_post_meta($post_id, '_seopress_redirections_type', $redirection_type);
                     } else {
                         delete_post_meta($post_id, '_seopress_redirections_type');
@@ -440,7 +440,7 @@ function seopress_display_seo_metaboxe()
                     if (isset($_POST['seopress_redirections_type'])) {
                         $redirection_type = intval($_POST['seopress_redirections_type']);
 
-                        if (in_array($redirection_type, [301, 302, 307])) {
+                        if (in_array($redirection_type, [301, 302, 307, 410, 451])) {
                             $elementor['_seopress_redirections_type'] = $redirection_type;
                         }
                     }

@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.5
 Requires PHP: 7.2
-Stable tag: 7.6.1
+Stable tag: 7.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,7 +106,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 			<li>custom schema</li>
 		</ol>
 	<li><strong>Automatic Schemas</strong> with advanced conditions (AND, OR, Post types, taxonomies)</li>
-	<li><a href="https://www.seopress.org/features/breadcrumbs/" target="_blank"><strong>Breadcrumbs</strong></a> optimized with Schema.org, A11Y ready. Elementor users? <a href="https://www.youtube.com/watch?v=ID4xm1UVikc" target="_blank">Try our custom breadcrumbs widget!</a></li>
+	<li><a href="https://www.seopress.org/features/breadcrumbs/" target="_blank"><strong>Breadcrumbs</strong></a> optimized with Schema.org, A11Y ready.</li>
 	<li><a href="https://www.seopress.org/features/google-analytics/" target="_blank"><strong>Google Analytics Stats in Dashboard</strong></a> to quickly see your metrics without leaving your site</li>
 	<li><a href="https://www.seopress.org/features/local-seo/" target="_blank"><strong>Google Local Business</strong></a> to boost your local store</li>
 	<li><strong>Broken link checker (SEOPress BOT)</strong>: scan all your links in content to find errors (e.g. 404...)</li>
@@ -161,7 +161,7 @@ We provide deep integration with Elementor page builder UI, see below:
 <h3>SEOPress Insights: Off-site SEO plugin to track your rankings and backlinks in WordPress</h3>
 
 <ul>
-    <li><strong>Keyword rank tracker</strong>: 48 Google Search locations available</li>
+    <li><strong>Keyword rank tracker</strong>: 51 Google Search locations available</li>
     <li>Track <strong>50 keywords</strong> per site daily</li>
     <li>Track your <strong>competitors</strong>: who ranks first on your keywords</li>
     <li>Monitor and analyze your <strong>backlinks</strong> weekly</li>
@@ -187,6 +187,8 @@ We provide deep integration with Elementor page builder UI, see below:
 1. Upload 'wp-seopress' to the '/wp-content/plugins/' directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Click on SEOPress and apply settings.
+
+<a href="https://www.seopress.org/support/guides/get-started-seopress/" target="_blank">Requirements / Installation guide</a>
 
 == Frequently Asked Questions ==
 
@@ -258,27 +260,22 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 7.6.1 =
-* INFO Add prevention for intl PHP module (we strongly invite webmasters to contact their hosts if you see a missing PHP intl module from our notification center. This is required by both WordPress Core and SEOPress.)
-* FIX Some CSS in WP admin
 
-= 7.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-6/">Read the blog post update</a> =
-* NEW Import redirections from AIOSEO (PRO)
-* NEW Remove Emoji scripts for older browsers to improve crawling (SEO, Advanced, Advanced tab)
-* NEW Add technical requirements to the wizard
-* NEW Google Analytics consent mode v2 for our cookie banner (beta)
-* INFO Bump WordPress version to 6.5
-* INFO Improve UI for textarea using code
-* INFO Improve UI in XML sitemaps and Titles and metas global settings
-* INFO Add a new notification for WPML users to translate SEOPress global settings
-* INFO Strengthening security
-* INFO Improve compatibility with specific locales
-* INFO Improve compatibility with Polylang (thanks to @sebastienserre from PLL team)
-* INFO We no longer "Remove View details modal & update notification links" (White Label feature - PRO) for super admin and/or user roles with "update_plugins" capability
-* FIX Improve compatibility with HappyFiles plugin
-* FIX 'seopress_social_twitter_card_thumb' and 'seopress_social_og_thumb' filters for our REST API
-* FIX Deprecated: Automatic conversion of false to array
-* FIX "Object object" error for new post in SEO metabox
-* FIX PHP "Count" error with content analysis
+= 7.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-7/">Read the blog post update</a> =
+* NEW Add GPT-4-Turbo model to our OpenAI integration (PRO)
+* NEW Import post title / term name using our CSV import tool (PRO)
+* NEW Automatically add XML sitemap link to default WordPress robots.txt file (if robots.txt feature from SEOPress PRO is disabled)
+* INFO Refactoring code of our content analysis
+* INFO Add error handling for AI to better understand failed generation (SEO, PRO, AI tab, OpenAI logs section)
+* INFO Improve security by showing SEO metadata from published posts only for our REST API (thanks to Patchstack)
+* INFO Improve WPML compatibility with our content analysis to detect target keywords already used by language
+* FIX Improve detection of custom meta title / description with our content analysis
+* FIX 410/451 on new redirects (PRO)
+* FIX Show only public post types for the HTML sitemap block
+* FIX Prevent failed post update/publishing if IndexNow API key is incorrectly set (SEO, Instant Indexing, Settings tab)
+* FIX Prevent a fatal error in specific cases with the Matomo CRON task (PRO)
+* FIX chart.bundle.js error on SEO Dashboard page if the define SCRIPT_DEBUG is set to TRUE
+* FIX Deprecated Increment on non-alphanumeric string
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
+<a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

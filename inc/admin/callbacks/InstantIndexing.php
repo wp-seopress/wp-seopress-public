@@ -120,7 +120,7 @@ esc_html($check));
 
 <?php
 if (!empty($error)) { ?>
-    <span class="indexing-log indexing-failed"></span><?php echo $error; ?>
+    <code><?php echo $error; ?></code>
 <?php }
 if (!empty($bing_response['response'])) {
     switch ($bing_response['response']['code']) {

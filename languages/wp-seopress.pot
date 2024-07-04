@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.6.1\n"
+"Project-Id-Version: SEOPress 7.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-21T15:40:25+00:00\n"
+"POT-Creation-Date: 2024-04-24T08:38:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -499,7 +499,7 @@ msgstr ""
 #: inc/admin/admin-pages/Sitemaps.php:43
 #: inc/admin/admin-pages/Social.php:43
 #: inc/admin/admin-pages/Titles.php:54
-#: seopress-functions.php:794
+#: seopress-functions.php:801
 msgid "Save changes"
 msgstr ""
 
@@ -790,7 +790,7 @@ msgid "Launch our installation wizard to quickly and easily configure the basic 
 msgstr ""
 
 #: inc/admin/blocks/get-started.php:23
-msgid "Get started"
+msgid "Setup in 5 mins!"
 msgstr ""
 
 #: inc/admin/blocks/get-started.php:32
@@ -1378,7 +1378,7 @@ msgstr ""
 
 #: inc/admin/callbacks/Analytics.php:373
 #: inc/admin/callbacks/Analytics.php:442
-#: inc/admin/callbacks/Analytics.php:497
+#: inc/admin/callbacks/Analytics.php:512
 msgid "Text color: "
 msgstr ""
 
@@ -1407,7 +1407,7 @@ msgid "Change the color of the cookie bar button background"
 msgstr ""
 
 #: inc/admin/callbacks/Analytics.php:427
-#: inc/admin/callbacks/Analytics.php:512
+#: inc/admin/callbacks/Analytics.php:497
 msgid "Background color on hover: "
 msgstr ""
 
@@ -1441,11 +1441,11 @@ msgid "Change the color of the cookie bar secondary button background"
 msgstr ""
 
 #: inc/admin/callbacks/Analytics.php:502
-msgid "Change the color of the cookie bar secondary button hover background"
+msgid "Change the color of the cookie bar secondary button"
 msgstr ""
 
 #: inc/admin/callbacks/Analytics.php:517
-msgid "Change the color of the cookie bar secondary button"
+msgid "Change the color of the cookie bar secondary button hover background"
 msgstr ""
 
 #: inc/admin/callbacks/Analytics.php:532
@@ -1790,6 +1790,7 @@ msgid "URL received. IndexNow key validation pending."
 msgstr ""
 
 #: inc/admin/callbacks/InstantIndexing.php:134
+#: inc/functions/options-instant-indexing.php:213
 msgid "Bad request: Invalid format"
 msgstr ""
 
@@ -5028,11 +5029,11 @@ msgstr ""
 msgid "No API key defined from the settings tab"
 msgstr ""
 
-#: inc/functions/options-instant-indexing.php:211
+#: inc/functions/options-instant-indexing.php:220
 msgid "Bing API key is missing"
 msgstr ""
 
-#: inc/functions/options-instant-indexing.php:246
+#: inc/functions/options-instant-indexing.php:255
 msgid "Google API key is missing"
 msgstr ""
 
@@ -5060,29 +5061,29 @@ msgstr ""
 msgid "Page %d of %2$d"
 msgstr ""
 
-#: seopress-functions.php:438
+#: seopress-functions.php:445
 msgid "Custom Post Types"
 msgstr ""
 
-#: seopress-functions.php:442
+#: seopress-functions.php:449
 msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %s: "Custom Post Types" or "Custom Taxonomies", %s: "title" or "description"
-#: seopress-functions.php:488
+#: seopress-functions.php:495
 msgid "Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 
-#: seopress-functions.php:514
-#: seopress-functions.php:544
+#: seopress-functions.php:521
+#: seopress-functions.php:551
 msgid "WARNING"
 msgstr ""
 
-#: seopress-functions.php:515
+#: seopress-functions.php:522
 msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
 msgstr ""
 
-#: seopress-functions.php:545
+#: seopress-functions.php:552
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
@@ -5581,7 +5582,7 @@ msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:65
 #: src/Services/I18nUniversalMetabox.php:371
-msgid "No schemas found in the source code of this page."
+msgid "No schemas found in the source code of this page. Get rich snippets in Google Search results and improve your visibility by adding structured data types (schemas) to your page."
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:85

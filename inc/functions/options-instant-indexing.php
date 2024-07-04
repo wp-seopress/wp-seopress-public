@@ -160,13 +160,13 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/7.6.1/true';
+        $x_source_info = 'https://www.seopress.org/7.7/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/7.6.1/false';
+        $x_source_info = 'https://www.seopress.org/7.7/false';
     }
 
     //Bing API
@@ -183,27 +183,36 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
                 'urlList' => $urls
             ];
 
-            //Build the POST request
-            $args = [
-                'body'    => json_encode($body),
-                'timeout' => 30,
-                'headers' => [
-                    'Content-Type'  => 'application/json',
-                    'X-Source-Info' => $x_source_info
-                ],
-            ];
-            $args = apply_filters( 'seopress_instant_indexing_post_request_args', $args );
+            $body = json_encode($body);
 
-            //IndexNow (Bing)
-            $response = wp_remote_post( $bing_url, $args );
+            if ($body !== false) {
+                //Build the POST request
+                $args = [
+                    'body'    => $body,
+                    'timeout' => 30,
+                    'headers' => [
+                        'Content-Type'  => 'application/json',
+                        'X-Source-Info' => $x_source_info
+                    ],
+                ];
+                $args = apply_filters( 'seopress_instant_indexing_post_request_args', $args );
 
-            //Check the response is ok first
-            if (is_wp_error($response)) {
-                $message = $response->get_error_message();
-                $log['bing']['status'] = $message;
+                //IndexNow (Bing)
+                $response = wp_remote_post( $bing_url, $args );
+
+                //Check the response is ok first
+                if (is_wp_error($response)) {
+                    $message = $response->get_error_message();
+                    $log['bing']['status'] = $message;
+                }
+
+                $log['bing']['response'] = $response;
+            } else {
+                $log['bing']['response']['error'] = [
+                    'code' => 400,
+                    'message' => __('Bad request: Invalid format', 'wp-seopress')
+                ];
             }
-
-            $log['bing']['response'] = $response;
         }
     } elseif (!empty($engines['bing']) && $engines['bing'] === '1') {
         $log['bing']['response']['error'] = [

@@ -14,7 +14,22 @@ class Render implements ExecuteHooksFrontend {
      */
     public function hooks() {
         add_action('pre_get_posts', [$this, 'render'], 1);
+        add_filter( 'wp_sitemaps_enabled', [$this, 'sitemaps_enabled'] );
         add_action('template_redirect', [$this, 'sitemapShortcut'], 1);
+    }
+
+    /**
+     * @since 7.7.0
+     * @see @wp_sitemaps_enabled
+     *
+     * @return boolean
+     */
+    public function sitemaps_enabled() {
+        if ('1' === seopress_get_toggle_option('xml-sitemap')) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -114,14 +129,15 @@ class Render implements ExecuteHooksFrontend {
             return;
         }
         //Redirect sitemap.xml to sitemaps.xml
-        $get_current_url = get_home_url() . $_SERVER['REQUEST_URI'];
-        if (in_array($get_current_url, [
-                get_home_url() . '/sitemap.xml/',
-                get_home_url() . '/sitemap.xml',
-                get_home_url() . '/wp-sitemap.xml/',
-                get_home_url() . '/wp-sitemap.xml',
-                get_home_url() . '/sitemap_index.xml/',
-                get_home_url() . '/sitemap_index.xml',
+		$path = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+
+        if (in_array($path, [
+                '/sitemap.xml/',
+                '/sitemap.xml',
+                '/wp-sitemap.xml/',
+                '/wp-sitemap.xml',
+                '/sitemap_index.xml/',
+                '/sitemap_index.xml',
             ])) {
             wp_safe_redirect(get_home_url() . '/sitemaps.xml', 301);
             exit();

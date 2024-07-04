@@ -20,7 +20,7 @@
 
             <p class="seopress-card-actions">
                 <a href="<?php echo admin_url('admin.php?page=seopress-setup'); ?>" class="seopress-btn seopress-btn-primary">
-                    <?php _e('Get started', 'wp-seopress'); ?>
+                    <?php _e('Setup in 5 mins!', 'wp-seopress'); ?>
                 </a>
             </p>
         </div>

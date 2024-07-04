@@ -51,6 +51,8 @@ class CountTargetKeywordsUse implements ExecuteHooks
 
         $data = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($targetKeywords, $id);
 
+        $data = apply_filters('seopress_get_count_target_keywords', $data);
+
         return new \WP_REST_Response($data);
     }
 

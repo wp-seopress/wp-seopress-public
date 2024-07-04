@@ -48,6 +48,12 @@ class GetPost implements ExecuteHooks
      * @return array
      */
     protected function getData($id){
+        $post_status = get_post_status($id) ?? null;
+
+        if ($post_status !=='publish') {
+            return null;
+        }
+
         $context = seopress_get_service('ContextPage')->buildContextWithCurrentId($id)->getContext();
 
         $title = seopress_get_service('TitleMeta')->getValue($context);
