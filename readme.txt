@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.5
 Requires PHP: 7.2
-Stable tag: 7.6
+Stable tag: 7.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -258,6 +258,10 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 7.6.1 =
+* INFO Add prevention for intl PHP module (we strongly invite webmasters to contact their hosts if you see a missing PHP intl module from our notification center. This is required by both WordPress Core and SEOPress.)
+* FIX Some CSS in WP admin
+
 = 7.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-6/">Read the blog post update</a> =
 * NEW Import redirections from AIOSEO (PRO)
 * NEW Remove Emoji scripts for older browsers to improve crawling (SEO, Advanced, Advanced tab)

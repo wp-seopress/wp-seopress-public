@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.6\n"
+"Project-Id-Version: SEOPress 7.6.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-21T10:04:12+00:00\n"
+"POT-Creation-Date: 2024-03-21T15:40:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -499,7 +499,7 @@ msgstr ""
 #: inc/admin/admin-pages/Sitemaps.php:43
 #: inc/admin/admin-pages/Social.php:43
 #: inc/admin/admin-pages/Titles.php:54
-#: seopress-functions.php:790
+#: seopress-functions.php:794
 msgid "Save changes"
 msgstr ""
 
@@ -5060,29 +5060,29 @@ msgstr ""
 msgid "Page %d of %2$d"
 msgstr ""
 
-#: seopress-functions.php:434
+#: seopress-functions.php:438
 msgid "Custom Post Types"
 msgstr ""
 
-#: seopress-functions.php:438
+#: seopress-functions.php:442
 msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %s: "Custom Post Types" or "Custom Taxonomies", %s: "title" or "description"
-#: seopress-functions.php:484
+#: seopress-functions.php:488
 msgid "Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 
-#: seopress-functions.php:510
-#: seopress-functions.php:540
+#: seopress-functions.php:514
+#: seopress-functions.php:544
 msgid "WARNING"
 msgstr ""
 
-#: seopress-functions.php:511
+#: seopress-functions.php:515
 msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
 msgstr ""
 
-#: seopress-functions.php:541
+#: seopress-functions.php:545
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 

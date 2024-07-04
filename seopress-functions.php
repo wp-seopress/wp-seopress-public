@@ -373,6 +373,10 @@ function seopress_get_locale() {
  * @return string locale
  */
 function seopress_normalized_locale($current_locale) {
+    if (!function_exists('locale_get_primary_language')) {
+        return $current_locale;
+    }
+
     // Extract primary language and region
     $primary_language = locale_get_primary_language($current_locale);
     $region = locale_get_region($current_locale);
