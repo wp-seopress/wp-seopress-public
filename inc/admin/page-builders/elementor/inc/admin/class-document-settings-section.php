@@ -67,7 +67,9 @@ class Document_Settings_Section {
                 if ( ! empty($settings) && isset($settings['ui_theme']) && 'dark' == $settings['ui_theme']) {
                     wp_enqueue_style(
                         'sp-el-dark-mode-style',
-                        SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/dark-mode.css'
+                        SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/dark-mode.css',
+                        [],
+                        SEOPRESS_VERSION
                     );
                 }
             }
@@ -153,7 +155,7 @@ class Document_Settings_Section {
         $s_title = get_post_meta($post_id, '_seopress_titles_title', true);
         $s_desc  = get_post_meta($post_id, '_seopress_titles_desc', true);
 
-        $original_desc = substr(strip_tags(get_the_content(null, true, $post_id)), 0, 140);
+        $original_desc = substr(wp_strip_all_tags(get_the_content(null, true, $post_id)), 0, 140);
 
         $desc  = $s_desc ? $s_desc : $original_desc;
         $title = ! empty($s_title) ? $s_title : get_the_title($post_id);
@@ -319,7 +321,7 @@ class Document_Settings_Section {
                     '_seopress_robots_primary_cat',
                     [
                         'label'       => __('Select a primary category', 'wp-seopress'),
-                        'description' => __('Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress'),
+                        'description' => /* translators: category permalink structure */ wp_kses_post(sprintf(__('Set the category that gets used in the %s permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress'), '<code>%category%</code>')),
                         'type'        => \Elementor\Controls_Manager::SELECT,
                         'label_block' => true,
                         'separator'   => 'none',
@@ -372,14 +374,14 @@ class Document_Settings_Section {
         $twitter_image = get_post_meta($post_id, '_seopress_social_twitter_img', true);
 
         $default_preview_title = get_the_title($post_id);
-        $default_preview_desc  = substr(strip_tags(get_the_content(null, true, $post_id)), 0, 140);
+        $default_preview_desc  = substr(wp_strip_all_tags(get_the_content(null, true, $post_id)), 0, 140);
 
         $document->add_control(
             '_seopress_social_note',
             [
                 //'label' => __( 'Important Note', 'wp-seopress' ),
                 'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw'  => __('<p class="elementor-control-field-description"><span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q=' . get_permalink(get_the_id()) . '" target="_blank">Ask Facebook to update its cache</a></p>', 'wp-seopress'),
+                'raw'  => '<p class="elementor-control-field-description"><span class="dashicons dashicons-external"></span><a href="https://developers.facebook.com/tools/debug/sharing/?q=' . esc_url(get_permalink(get_the_id())) . '" target="_blank">'.__('Ask Facebook to update its cache', 'wp-seopress') . '</a></p>',
                 //'content_classes' => 'your-class',
             ]
         );
@@ -389,7 +391,7 @@ class Document_Settings_Section {
             [
                 //'label' => __( 'Important Note', 'wp-seopress' ),
                 'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw'  => __('<p class="elementor-control-field-description"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below.</p>', 'wp-seopress'),
+                'raw'  => '<p class="elementor-control-field-description">' . wp_kses_post(__('<strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below.', 'wp-seopress')) . '</p>',
                 //'content_classes' => 'your-class',
             ]
         );

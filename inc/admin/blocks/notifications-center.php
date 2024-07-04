@@ -13,15 +13,15 @@
                 if (!empty($args)) {
                     foreach($args as $arg) {
                         if (isset($arg['status']) && $arg['status'] === true) {
-                            echo seopress_get_service('Notifications')->renderNotification($arg);
+                            echo wp_kses_post(seopress_get_service('Notifications')->renderNotification($arg));
                         }
                     }
                 }
                 if ($total === 0) { ?>
                     <div class="seopress-notifications-none">
-                        <img src="<?php echo SEOPRESS_ASSETS_DIR . '/img/ico-notifications.svg'; ?>" width="56" height="56" alt=""/>
+                        <img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/ico-notifications.svg'); ?>" width="56" height="56" alt=""/>
                         <h3>
-                            <?php _e('You don‘t have any notifications yet!', 'wp-seopress'); ?>
+                            <?php esc_attr_e('You don‘t have any notifications yet!', 'wp-seopress'); ?>
                         </h3>
                     </div>
                 <?php }
@@ -29,8 +29,8 @@
         </div>
         <details class="seopress-notifications-hidden">
             <summary class="seopress-notifications-list-title">
-                <img src="<?php echo SEOPRESS_ASSETS_DIR; ?>/img/ico-notifications-hidden.svg" alt='' width='32' height='32' />
-                <h3 id="seopress-hidden-notifications"><?php _e('Hidden notifications','wp-seopress'); ?></h3>
+                <img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/ico-notifications-hidden.svg'); ?>" alt='' width='32' height='32' />
+                <h3 id="seopress-hidden-notifications"><?php esc_attr_e('Hidden notifications','wp-seopress'); ?></h3>
             </summary>
             <div class="seopress-notifications-list-content">
                 <?php
@@ -42,9 +42,9 @@
                             }
                         }
                         if (!empty($html)) {
-                            echo $html;
+                            echo wp_kses_post($html);
                         } else {
-                            echo '<p>' . __('You currently have no hidden notifications.', 'wp-seopress') . '</p>';
+                            echo '<p>' . esc_attr__('You currently have no hidden notifications.', 'wp-seopress') . '</p>';
                         }
                     }
                 ?>

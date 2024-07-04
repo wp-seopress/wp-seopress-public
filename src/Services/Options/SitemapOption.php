@@ -49,15 +49,6 @@ class SitemapOption {
     }
 
     /**
-     * @since 5.7.0
-     * @deprecated 6.6.0
-     * @return string|null
-     */
-    public function videoIsEnabled() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_video_enable');
-    }
-
-    /**
      * @since 4.3.0
      *
      * @return string|null

@@ -5,7 +5,7 @@ if ('' !== get_query_var('seopress_cpt')) {
 	$path = get_query_var('seopress_cpt');
 }
 
-$offset = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '.xml');
+$offset = basename(wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '.xml');
 $offset = preg_match_all('/\d+/', $offset, $matches);
 $offset = end($matches[0]);
 

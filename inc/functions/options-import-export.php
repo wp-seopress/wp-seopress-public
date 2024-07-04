@@ -24,7 +24,7 @@ function seopress_export_settings() {
     header('Content-Type: application/json; charset=utf-8');
     header('Content-Disposition: attachment; filename=seopress-settings-export-' . date('m-d-Y') . '.json');
     header('Expires: 0');
-    echo json_encode($settings);
+    echo wp_json_encode($settings);
     exit;
 }
 add_action('admin_init', 'seopress_export_settings');

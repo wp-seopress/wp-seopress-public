@@ -3550,12 +3550,25 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     background: #fff;
 }
 
+.seopress-img-placeholder img.seopress-img-x-preview {
+    max-width: 600px;
+    max-height: 314px;
+    min-width: 600px;
+    width: 600px;
+    height: 314px;
+}
+
 @media only screen and (max-width: 782px) {
 
     .seopress-img-placeholder,
-    .seopress-img-placeholder img {
+    .seopress-img-placeholder img,
+    .seopress-img-placeholder img.seopress-img-x-preview {
         max-width: 100%;
         min-width: inherit;
+        width: 100%;
+        height: inherit;
+        max-height: inherit;
+        object-fit: none;
     }
 }
 

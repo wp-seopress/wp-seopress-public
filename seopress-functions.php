@@ -180,13 +180,6 @@ function seopress_remove_metaboxes() {
 }
 
 /**
- * @deprecated 6.5.0
- */
-function seopress_titles_single_cpt_enable_option($cpt) {
-    return seopress_get_service('TitleOption')->getSingleCptEnable($cpt);
-}
-
-/**
  * Get all custom fields (limit: 250).
  *
  * @author Benjamin Denis
@@ -489,8 +482,8 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
         } else {
             $html .= '<div class="seopress-notice is-warning">
     <p>';
-            /* translators: %s: "Custom Post Types" or "Custom Taxonomies", %s: "title" or "description" */
-            $html .= sprintf(__('Some <strong>%s</strong> have no <strong>meta %s</strong> set! We strongly encourage you to add one by filling in the fields below.', 'wp-seopress'), $notice_i18n, $metadata);
+            /* translators: %1$s: "Custom Post Types" or "Custom Taxonomies", %2$s: "title" or "description" */
+            $html .= wp_kses_post(sprintf(__('Some <strong>%1$s</strong> have no <strong>meta %2$s</strong> set! We strongly encourage you to add one by filling in the fields below.', 'wp-seopress'), esc_attr($notice_i18n), esc_attr($metadata)));
             $html .= '</p>';
             $html .= $list;
             $html .= '</div>';
@@ -643,25 +636,6 @@ function seopress_remove_utf8_bom($text) {
     $text = preg_replace("/^$bom/", '', $text);
 
     return $text;
-}
-
-/**
- * Generate notification (Notifications Center).
- *
- * @since 3.8.2
- *
- * @param array $args
- *
- * @deprecated 6.7
- *
- * @return string HTML notification
- *
- * @author Benjamin
- */
-
- function seopress_notification($args) {
-    remove_all_actions( 'seopress_notifications_center_item' );
-    return;
 }
 
 /**

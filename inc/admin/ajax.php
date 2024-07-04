@@ -191,4 +191,3 @@ require_once __DIR__ . '/ajax-migrate/seo-ultimate.php';
 require_once __DIR__ . '/ajax-migrate/squirrly.php';
 require_once __DIR__ . '/ajax-migrate/seo-framework.php';
 require_once __DIR__ . '/ajax-migrate/yoast.php';
-require_once __DIR__ . '/export/csv.php';

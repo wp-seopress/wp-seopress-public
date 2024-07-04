@@ -38,8 +38,8 @@ class I18nUniversalMetabox
                     'title' => __("X Title", "wp-seopress"),
                     'description' => __("X Description", "wp-seopress"),
                     'image' => __("X Image", "wp-seopress"),
+                    /* translators: %s X tag, eg: twitter:title */
                     'missing' => __(
-                        /* translators: %s X tag, eg: twitter:title */
                         'Your %s is missing!',
                         "wp-seopress"
                     ),
@@ -55,8 +55,8 @@ class I18nUniversalMetabox
                     ),
                     'we_founded_tag' => __("We found a", "wp-seopress"),
                     'we_founded_tag_2' => __("tag in your source code.", "wp-seopress"),
+                    /* translators: %s X tag, eg: twitter:title */
                     'tag_empty' => __(
-                        /* translators: %s X tag, eg: twitter:title */
                         'Your %s tag is empty!',
                         "wp-seopress"
                     ),
@@ -68,8 +68,8 @@ class I18nUniversalMetabox
                     'image' => __("Image", "wp-seopress"),
                     'url' => __("URL", "wp-seopress"),
                     'site_name' => __("Site Name", "wp-seopress"),
+                    /* translators: %s Facebook tag, eg: og:title */
                     'missing' => __(
-                        /* translators: %s Facebook tag, eg: og:title */
                         'Your Open Graph %s is missing!',
                         "wp-seopress"
                     ),
@@ -93,8 +93,8 @@ class I18nUniversalMetabox
                     ),
                     'we_founded_tag' => __("We found an Open Graph", "wp-seopress"),
                     'we_founded_tag_2' => __("tag in your source code.", "wp-seopress"),
+                    /* translators: %s Facebook tag, eg: og:title */
                     'tag_empty' => __(
-                        /* translators: %s Facebook tag, eg: og:title */
                         'Your Open Graph %s tag is empty!',
                         "wp-seopress"
                     )
@@ -110,9 +110,9 @@ class I18nUniversalMetabox
                             "Target keywords were found in the Meta Title.",
                             "wp-seopress"
                         ),
+                        /* translators: %1$s target keyword %2$s number of times */
                         'meta_title_found_in' => __(
-                            /* translators: %s meta tag found %s times, eg: meta description found 1 time */
-                            '%s was found %s times.',
+                            '%1$s was found %2$s times.',
                             "wp-seopress"
                         ),
                         'empty_matches' => __(
@@ -133,8 +133,9 @@ class I18nUniversalMetabox
                             "Target keywords were found in the Meta description.",
                             "wp-seopress"
                         ),
+                        /* translators: %1$s target keyword %2$s number of times */
                         'meta_description_found_in' => __(
-                            '%s was found %s times.',
+                            '%1$s was found %2$s times.',
                             "wp-seopress"
                         ),
                         'no_meta_description_found' => __(
@@ -160,6 +161,7 @@ class I18nUniversalMetabox
                             "We found no meta robots on this page. It means, your page is index,follow. Search engines will index it, and follow links. ",
                             "wp-seopress"
                         ),
+                        /* translators: %s number of meta robots */
                         'founded_multiple_metas' => __(
                             'We found %s meta robots in your page. There is probably something wrong with your theme!',
                             "wp-seopress"
@@ -222,6 +224,7 @@ class I18nUniversalMetabox
                             "This page doesn't have any outbound links.",
                             "wp-seopress"
                         ),
+                        /* translators: %s number of outbound links */
                         'outbound_links_count' => __(
                             'We found %s outbound links in your page. Below, the list:',
                             "wp-seopress"
@@ -240,9 +243,9 @@ class I18nUniversalMetabox
                         'title' => __("Last modified date", "wp-seopress"),
                     ],
                     'headings' => [
+                        /* translators: %1$s heading name, eg: h2, %2$s heading number, eg: 2 */
                         'head' => __(
-                            /* translators: %s heading name, eg: h2, %s heading number, eg: 2 */
-                            'Target keywords were found in Heading %s (H%s).',
+                            'Target keywords were found in Heading %1$s (H%2$s).',
                             "wp-seopress"
                         ),
                         /* translators: %s heading number, eg: 2 */
@@ -252,23 +255,23 @@ class I18nUniversalMetabox
                             'No custom title is set for this post. If the global meta title suits you, you can ignore this recommendation.',
                             "wp-seopress"
                         ),
+                        /* translators: %1$s heading name, eg: h2, %2$s heading number, eg: 2 */
                         'no_heading_detail' =>__(
-                            /* translators: %s heading name, eg: h2, %s heading number, eg: 2 */
-                            'No Heading %s (H%s) found in your content. This is required for both SEO and Accessibility!',
+                            'No Heading %1$s (H%2$s) found in your content. This is required for both SEO and Accessibility!',
                             "wp-seopress"
                         ),
+                        /* translators: %1$s heading name, eg: h2, %2$s heading number, eg: 2 */
                         'no_target_keywords_detail' => __(
-                            /* translators: %s heading name, eg: h2, %s heading number, eg: 2 */
-                            'None of your target keywords were found in Heading %s (H%s).',
+                            'None of your target keywords were found in Heading %1$s (H%2$s).',
                             "wp-seopress"
                         ),
+                        /* translators: %1$s heading name found %2$s times, eg: H2 was found 2 times */
                         'match' => __(
-                            /* translators: %s heading name found %s times, eg: H2 was found 2 times */
-                            '%s was found %s times.',
+                            '%1$s was found %2$s times.',
                             "wp-seopress"
                         ),
+                        /* translators: %s number of times a heading is found, eg: 1 */
                         'count_h1' => __(
-                            /* translators: %s number of times a heading is found, eg: 1 */
                             'We found %s Heading 1 (H1) in your content.',
                             "wp-seopress"
                         ),
@@ -306,8 +309,8 @@ class I18nUniversalMetabox
                             "This page doesn't have any internal links from other content. Links from archive pages are not considered internal links due to lack of context.",
                             "wp-seopress"
                         ),
+                        /* translators: %s number of internal links */
                         'internal_links_count' => __(
-                            /* translators: %s number of internal links */
                             'We found %s internal links in your page. Below, the list:',
                             "wp-seopress"
                         ),
@@ -333,8 +336,8 @@ class I18nUniversalMetabox
                         'title' =>__("Keywords in permalink", "wp-seopress")
                     ],
                     'no_follow_links' => [
+                        /* translators: %s number of times a nofollow link is found, eg: 1 */
                         'founded' => __(
-                            /* translators: %s number of times a nofollow link is found, eg: 1 */
                             'We found %s links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:',
                             "wp-seopress"
                         ),
@@ -504,8 +507,8 @@ class I18nUniversalMetabox
             ],
             'layouts' => [
                 'meta_robot' => [
+                    /* translators: %s documentation URL */
                     'title' => __(
-                        /* translators: %s documentation URL */
                         "You cannot uncheck a parameter? This is normal, and it's most likely defined in the <a href='%s'>global settings of the plugin.</a>",
                         "wp-seopress"
                     ),
@@ -728,7 +731,7 @@ class I18nUniversalMetabox
                         "Writing content for your users is the most important thing! If it doesn‘t feel natural, your visitors will leave your site, Google will know it and your ranking will be affected.",
                         "wp-seopress"
                     ),
-                    'title_severity' => __('Degree of severity: %s', 'wp- seopress'),
+                    'title_severity' => /* translators: %s degree of severity, eg: low */ __('Degree of severity: %s', 'wp- seopress'),
                     'target_keywords' => __("Target keywords", "wp-seopress"),
                     'target_keywords_tooltip_description' => __(
                         "Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them",

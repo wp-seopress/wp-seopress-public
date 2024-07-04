@@ -302,14 +302,14 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                         <p>
                             <label for="seopress_robots_canonical_meta">
                                 <?php
-                                    _e('Canonical URL', 'wp-seopress');
+                                    esc_attr_e('Canonical URL', 'wp-seopress');
                                     echo seopress_tooltip(__('Canonical URL', 'wp-seopress'), __('A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. <br>For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. <br>Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color). The canonical can be in a different domain than a duplicate.', 'wp-seopress'), esc_html('<link rel="canonical" href="https://www.example.com/my-post-url/" />'));
                                 ?>
                             </label>
                             <input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical"
                                 class="components-text-control__input"
                                 placeholder="<?php esc_html_e('Default value: ', 'wp-seopress') . htmlspecialchars(urldecode(get_permalink())); ?>"
-                                aria-label="<?php _e('Canonical URL', 'wp-seopress'); ?>"
+                                aria-label="<?php esc_attr_e('Canonical URL', 'wp-seopress'); ?>"
                                 value="<?php echo $seopress_robots_canonical; ?>" />
                         </p>
 
@@ -318,7 +318,8 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                             <label for="seopress_robots_primary_cat"><?php _e('Select a primary category', 'wp-seopress'); ?></label>
                             <span class="description">
                                 <?php
-                                    _e('Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress');
+                                    /* translators: category permalink structure */
+                                    echo wp_kses_post(sprintf(__('Set the category that gets used in the %s permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress'), '<code>%category%</code>'));
                                 ?>
                             </span>
                         </p>
@@ -779,4 +780,4 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
 </tr>
 <?php } ?>
 <input type="hidden" id="seo_tabs" name="seo_tabs"
-    value="<?php echo htmlspecialchars(json_encode(array_keys($seo_tabs))); ?>">
+    value="<?php echo htmlspecialchars(wp_json_encode(array_keys($seo_tabs))); ?>">

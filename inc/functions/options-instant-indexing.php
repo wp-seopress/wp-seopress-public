@@ -54,7 +54,7 @@ function seopress_instant_indexing_api_key_txt() {
         header( 'Content-Type: text/plain' );
         header( 'X-Robots-Tag: noindex' );
         status_header( 200 );
-        esc_html_e($api_key);
+        echo esc_html($api_key);
 
         exit();
     }
@@ -160,13 +160,13 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/7.8/true';
+        $x_source_info = 'https://www.seopress.org/7.9/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/7.8/false';
+        $x_source_info = 'https://www.seopress.org/7.9/false';
     }
 
     //Bing API
@@ -183,7 +183,7 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
                 'urlList' => $urls
             ];
 
-            $body = json_encode($body);
+            $body = wp_json_encode($body);
 
             if ($body !== false) {
                 //Build the POST request

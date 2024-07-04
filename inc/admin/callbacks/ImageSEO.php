@@ -13,7 +13,7 @@ function seopress_advanced_advanced_attachments_callback() {
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Redirect attachment pages to post parent (or homepage if none)', 'wp-seopress'); ?>
+    <?php esc_attr_e('Redirect attachment pages to post parent (or homepage if none)', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_advanced_advanced_attachments'])) {
@@ -33,11 +33,11 @@ function seopress_advanced_advanced_attachments_file_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('Redirect attachment pages to their file URL (https://www.example.com/my-image-file.jpg)', 'wp-seopress'); ?>
+    <?php esc_attr_e('Redirect attachment pages to their file URL (https://www.example.com/my-image-file.jpg)', 'wp-seopress'); ?>
 </label>
 
 <p class="description">
-    <?php _e('If this option is checked, it will take precedence over the redirection of attachments to the post\'s parent.', 'wp-seopress'); ?>
+    <?php esc_attr_e('If this option is checked, it will take precedence over the redirection of attachments to the post\'s parent.', 'wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_advanced_advanced_attachments_file'])) {
@@ -57,11 +57,11 @@ function seopress_advanced_advanced_clean_filename_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When upload a media, remove accents, spaces, capital letters... and force UTF-8 encoding', 'wp-seopress'); ?>
+    <?php esc_attr_e('When upload a media, remove accents, spaces, capital letters... and force UTF-8 encoding', 'wp-seopress'); ?>
 </label>
 
 <p class="description">
-    <?php _e('e.g. <code>ExãMple 1 cópy!.jpg</code> => <code>example-1-copy.jpg</code>', 'wp-seopress'); ?>
+    <?php echo wp_kses_post(__('e.g. <code>ExãMple 1 cópy!.jpg</code> => <code>example-1-copy.jpg</code>', 'wp-seopress')); ?>
 </p>
 
 <?php if (isset($options['seopress_advanced_advanced_clean_filename'])) {
@@ -81,11 +81,11 @@ function seopress_advanced_advanced_image_auto_title_editor_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When uploading an image file, automatically set the title based on the filename', 'wp-seopress'); ?>
+    <?php esc_attr_e('When uploading an image file, automatically set the title based on the filename', 'wp-seopress'); ?>
 </label>
 
 <p class="description">
-    <?php _e('We use the product title for WooCommerce products.', 'wp-seopress'); ?>
+    <?php esc_attr_e('We use the product title for WooCommerce products.', 'wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_advanced_advanced_image_auto_title_editor'])) {
@@ -106,17 +106,17 @@ function seopress_advanced_advanced_image_auto_alt_editor_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When uploading an image file, automatically set the alternative text based on the filename', 'wp-seopress'); ?>
+    <?php esc_attr_e('When uploading an image file, automatically set the alternative text based on the filename', 'wp-seopress'); ?>
 </label>
 
 <?php
     if ( ! is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
         if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
         } else {
-            echo '<p class="seopress-help description"><a href="'.$docs['addons']['pro'].'" target="_blank">' . __('Our PRO version can optimize your image ALT texts for Search Engines using AI and Machine Learning.', 'wp-seopress') . '</a><span class="dashicons dashicons-external"></span></p>';
+            echo '<p class="seopress-help description"><a href="'.esc_url($docs['ai']['introduction']).'" target="_blank">' . esc_attr__('Our PRO version can optimize your image ALT texts for Search Engines using AI and Machine Learning.', 'wp-seopress') . '</a><span class="dashicons dashicons-external"></span></p>';
         }
     } else {
-        echo '<p class="seopress-help description"><a href="'.admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_ai').'">' . __('Use AI to automatically describe your image files.', 'wp-seopress') . '</a></p>';
+        echo '<p class="seopress-help description"><a href="'.esc_url(admin_url('admin.php?page=seopress-pro-page#tab=tab_seopress_ai')).'">' . esc_attr__('Use AI to automatically describe your image files.', 'wp-seopress') . '</a></p>';
     }
 
     if (isset($options['seopress_advanced_advanced_image_auto_alt_editor'])) {
@@ -137,11 +137,11 @@ function seopress_advanced_advanced_image_auto_alt_target_kw_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('Use the target keywords if not alternative text set for the image', 'wp-seopress'); ?>
+    <?php esc_attr_e('Use the target keywords if not alternative text set for the image', 'wp-seopress'); ?>
 </label>
 
 <p class="description">
-    <?php _e('This setting will be applied to images without any alt text only on frontend. This setting is retroactive. If you turn it off, alt texts that were previously empty will be empty again.', 'wp-seopress'); ?>
+    <?php esc_attr_e('This setting will be applied to images without any alt text only on frontend. This setting is retroactive. If you turn it off, alt texts that were previously empty will be empty again.', 'wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_advanced_advanced_image_auto_alt_target_kw'])) {
@@ -162,7 +162,7 @@ function seopress_advanced_advanced_image_auto_caption_editor_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When uploading an image file, automatically set the caption based on the filename', 'wp-seopress'); ?>
+    <?php esc_attr_e('When uploading an image file, automatically set the caption based on the filename', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_advanced_advanced_image_auto_caption_editor'])) {
@@ -181,7 +181,7 @@ function seopress_advanced_advanced_image_auto_desc_editor_callback() {
     <?php } ?>
     value="1"/>
 
-    <?php _e('When uploading an image file, automatically set the description based on the filename', 'wp-seopress'); ?>
+    <?php esc_attr_e('When uploading an image file, automatically set the description based on the filename', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_advanced_advanced_image_auto_desc_editor'])) {

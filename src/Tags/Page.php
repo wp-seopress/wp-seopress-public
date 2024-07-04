@@ -32,7 +32,8 @@ class Page implements GetTagValue {
                 $currentPage = 1;
             }
 
-            $value = sprintf(__('Page %d of %2$d', 'wp-seopress'), $currentPage, $wp_query->max_num_pages);
+            $value = /* translators: %1$d current page (e.g. 2) %2$d total number of pages (e.g. 30) */ sprintf(esc_attr__('Page %1$d of %2$d', 'wp-seopress'), esc_attr($currentPage), esc_attr($wp_query->max_num_pages));
+
             /**
              * @deprecated 4.4.0
              * Please use seopress_context_paged

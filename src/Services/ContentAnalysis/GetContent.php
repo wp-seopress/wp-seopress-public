@@ -141,6 +141,10 @@ class GetContent
         //H1
         $desc = '<h4>' . __('H1 (Heading 1)', 'wp-seopress') . '</h4>';
 
+        if(empty($data['h1']) && empty($data['h2']) && empty($data['h3'])){
+            $analyzes['headings']['impact'] = 'high';
+        }
+
         $h1Matches = [];
         if(!empty($data['h1'])){
             foreach ($data['h1'] as $key => $value) {
@@ -166,7 +170,7 @@ class GetContent
 
 
             foreach ($h1Matches as $key => $matches) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span>' . /* translators: %s target keyword, %d number of times the keyword was found  */ sprintf(esc_html__('%s was found %d times.', 'wp-seopress'), $key, $matches) . '</li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span>' . /* translators: %1$s target keyword, %2$d number of times the keyword was found */ sprintf(esc_html__('%1$s was found %2$d times.', 'wp-seopress'), $key, $matches) . '</li>';
 
             }
 
@@ -188,7 +192,7 @@ class GetContent
         } else {
             $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('None of your target keywords were found in Heading 1 (H1).', 'wp-seopress') . '</p>';
             if ('high' != $analyzes['headings']['impact']) {
-                $analyzes['headings']['impact'] = 'medium';
+                $analyzes['headings']['impact'] = 'high';
             }
         }
 
@@ -214,7 +218,7 @@ class GetContent
             $desc .= '<ul>';
 
             foreach ($h2Matches as $key => $matches) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span>' . sprintf(esc_html__('%s was found %d times.', 'wp-seopress'), $key, $matches) . '</li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span>' . /* translators: %1$s heading 2, %2$d number of times the heading 2 was found */ sprintf(esc_html__('%1$s was found %2$d times.', 'wp-seopress'), $key, $matches) . '</li>';
             }
             $desc .= '</ul>';
         } else {
@@ -246,12 +250,12 @@ class GetContent
             $desc .= '<ul>';
 
             foreach ($h3Matches as $key => $matches) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span>' . sprintf(esc_html__('%s was found %d times.', 'wp-seopress'), $key, $matches) . '</li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span>' . /* translators: %1$s heading 3, %2$d number of times the heading 3 was found */ sprintf(esc_html__('%1$s was found %2$d times.', 'wp-seopress'), $key, $matches) . '</li>';
             }
             $desc .= '</ul>';
         } else {
             $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('None of your target keywords were found in Heading 3 (H3).', 'wp-seopress') . '</p>';
-            if ('high' != $analyzes['headings']['impact']) {
+            if ('high' != $analyzes['headings']['impact'] && 'medium' != $analyzes['headings']['impact']) {
                 $analyzes['headings']['impact'] = 'low';
             }
         }
@@ -280,7 +284,7 @@ class GetContent
                 $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('Target keywords were found in the Meta Title.', 'wp-seopress') . '</p>';
                 $desc .= '<ul>';
                 foreach ($matches as $key => $value) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . sprintf(esc_html__('%s was found %d times.', 'wp-seopress'), $key, count($value)) . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . /* translators: %1$s target keyword, %2$d number of times the target keyword was found */ sprintf(esc_html__('%1$s was found %2$d times.', 'wp-seopress'), $key, count($value)) . '</li>';
                 }
                 $desc .= '</ul>';
                 $analyzes['meta_title']['impact'] = 'good';
@@ -327,7 +331,7 @@ class GetContent
                 $desc .= '<ul>';
 
                 foreach ($matches as $key => $value) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . sprintf(esc_html__('%s was found %d times.', 'wp-seopress'), $key, count($value)) . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . /* translators: %1$s target keyword, %2$d number of times the target keyword was found */ sprintf(esc_html__('%1$s was found %2$d times.', 'wp-seopress'), $key, count($value)) . '</li>';
                 }
                 $desc .= '</ul>';
                 $analyzes['meta_desc']['impact'] = 'good';
@@ -635,7 +639,7 @@ class GetContent
                 $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . /* translators: %s number of meta robots tags */ sprintf(esc_html__('We found %s meta robots in your page. There is probably something wrong with your theme!', 'wp-seopress'), $count_meta_robots) . '</p>';
             }
 
-            $encoded = json_encode($meta_robots);
+            $encoded = wp_json_encode($meta_robots);
 
             if (preg_match('/noindex/', $encoded)) {
                 $analyzes['robots']['impact'] = 'high';
@@ -682,7 +686,7 @@ class GetContent
         //Meta Google
         if (! empty($data['meta_google'])) {
             $meta_google = $data['meta_google'];
-            if (preg_match('/nositelinkssearchbox/', json_encode($meta_google))) {
+            if (preg_match('/nositelinkssearchbox/', wp_json_encode($meta_google))) {
                 if ('high' != $analyzes['robots']['impact']) {
                     $analyzes['robots']['impact'] = 'medium';
                 }

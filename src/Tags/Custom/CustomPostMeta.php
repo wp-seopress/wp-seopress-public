@@ -38,7 +38,10 @@ class CustomPostMeta extends AbstractCustomTagValue implements GetTagValue {
 
         $field = $matches['field'];
 
-        $value = esc_attr(get_post_meta($context['post']->ID, $field, true));
+        $length = 50;
+        $length = apply_filters('seopress_excerpt_length', $length);
+
+        $value = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_post_meta($context['post']->ID, $field, true), true))))), $length);
 
         return apply_filters('seopress_get_tag_' . $tag . '_value', $value, $context);
     }

@@ -7,9 +7,9 @@
         $class = '1' !== seopress_get_service('NoticeOption')->getNoticeTasks() ? 'is-active' : '';
     ?>
 
-    <div id="notice-tasks-alert" class="seopress-card <?php echo $class; ?>" style="display: none">
+    <div id="notice-tasks-alert" class="seopress-card <?php echo esc_attr($class); ?>" style="display: none">
         <div class="seopress-card-title">
-            <h2><?php _e('Get ready to improve your SEO', 'wp-seopress'); ?></h2>
+            <h2><?php esc_attr_e('Get ready to improve your SEO', 'wp-seopress'); ?></h2>
         </div>
         <div class="seopress-card-content">
             <?php
@@ -59,8 +59,8 @@
             <ul class="seopress-list-items" role="menu">
                 <?php foreach($tasks as $key => $task) { ?>
                     <li class="seopress-item has-action seopress-item-inner <?php if (empty($task['done'])) { echo 'is-active'; }; ?>">
-                        <a href="<?php echo $task['link']; ?>" class="seopress-item-inner check <?php echo $task['done']; ?>" data-index="<?php echo $key + 1; ?>">
-                            <?php echo $task['label']; ?>
+                        <a href="<?php echo esc_url($task['link']); ?>" class="seopress-item-inner check <?php echo esc_attr($task['done']); ?>" data-index="<?php echo esc_attr($key + 1); ?>">
+                            <?php echo esc_html($task['label']); ?>
                         </a>
                     </li>
                 <?php } ?>

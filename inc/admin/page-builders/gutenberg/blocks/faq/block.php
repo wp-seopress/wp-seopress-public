@@ -66,7 +66,7 @@ function seopress_block_faq_render_frontend( $attributes ){
 	<?php echo $listStyleTag; ?>
 		<?php
             foreach ($attributes['faqs'] as $faq) :
-                $i = rand();
+                $i = wp_rand();
                 if (empty($faq['question'])) {
                     continue;
                 }
@@ -139,7 +139,7 @@ function seopress_block_faq_render_frontend( $attributes ){
 				{
 				"@context": "https://schema.org",
 				"@type": "FAQPage",
-				"mainEntity": '. json_encode($entities) . '
+				"mainEntity": '. wp_json_encode($entities) . '
 				}
 			</script>';
 

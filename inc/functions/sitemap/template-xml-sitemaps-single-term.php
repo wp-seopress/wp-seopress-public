@@ -91,7 +91,7 @@ function seopress_xml_sitemap_single_term() {
 
     remove_all_filters('pre_get_posts');
 
-    $offset = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '.xml');
+    $offset = basename(wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '.xml');
     $offset = preg_match_all('/\d+/', $offset, $matches);
     $offset = end($matches[0]);
 

@@ -88,7 +88,7 @@ class JsonSchemaGenerator {
                 unset($data[$key]);
                 continue;
             }
-            $data[$key] = json_encode($data[$key]);
+            $data[$key] = wp_json_encode($data[$key]);
         }
 
         return apply_filters('seopress_json_schema_generator_get_jsons_encoded', $data);

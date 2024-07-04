@@ -135,15 +135,18 @@ class Render implements ExecuteHooksFrontend {
 
         //Redirect sitemap.xml to sitemaps.xml
 		$path = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+        $path = trim($path, '/');
 
-        if (in_array($path, [
-                '/sitemap.xml/',
-                '/sitemap.xml',
-                '/wp-sitemap.xml/',
-                '/wp-sitemap.xml',
-                '/sitemap_index.xml/',
-                '/sitemap_index.xml',
-            ])) {
+        $path_parts = explode('/', $path);
+        $last_part = end($path_parts);
+
+        $redirect_paths = [
+            'sitemap.xml',
+            'wp-sitemap.xml',
+            'sitemap_index.xml',
+        ];
+
+        if (in_array($last_part, $redirect_paths)) {
             wp_safe_redirect(get_home_url() . '/sitemaps.xml', 301);
             exit();
         }

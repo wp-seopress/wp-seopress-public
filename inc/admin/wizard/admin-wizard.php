@@ -837,7 +837,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 						<input type="text" id="alt_site_title" class="location-input" name="alt_site_title" placeholder="<?php esc_html_e('e.g. My alternative site title', 'wp-seopress'); ?>" value="<?php echo $alt_site_title; ?>" />
 					</p>
 
-					<p class="description"><?php printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the <a href="%s" target="_blank">content guidelines</a>.<span class="dashicons dashicons-external"></span>','wp-seopress'), $docs['titles']['alt_title']); ?></p>
+					<p class="description"><?php /* translators: %s documentation URL  */ printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the <a href="%s" target="_blank">content guidelines</a>.<span class="dashicons dashicons-external"></span>','wp-seopress'), $docs['titles']['alt_title']); ?></p>
 
 					<p>
 						<label for="knowledge_type"><?php esc_html_e('Person or organization', 'wp-seopress'); ?></label>
@@ -1020,7 +1020,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 						<label for="knowledge_extra"><?php esc_html_e('Additional accounts', 'wp-seopress'); ?></label>
 						<textarea id="knowledge_extra" class="location-input" name="knowledge_extra" rows="8"
 						placeholder="<?php esc_html_e('Enter 1 URL per line (e.g. https://example.com/my-profile)', 'wp-seopress'); ?>"
-						aria-label="<?php _e('Enter 1 URL per line (e.g. https://example.com/my-profile)', 'wp-seopress'); ?>"><?php esc_html_e($knowledge_extra); ?></textarea>
+						aria-label="<?php _e('Enter 1 URL per line (e.g. https://example.com/my-profile)', 'wp-seopress'); ?>"><?php echo esc_html($knowledge_extra); ?></textarea>
 					</p>
 
 					<p class="seopress-setup-actions step">
@@ -1494,6 +1494,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 							$category_base = '/' . get_option('category_base');
 						}
 
+                        /* translators: %s permalink category base  */
 						printf(__('Remove <strong>%s</strong> in your permalinks', 'wp-seopress'), $category_base); ?>
 							</label>
 						</li>
@@ -1519,11 +1520,12 @@ class SEOPRESS_Admin_Setup_Wizard {
 								$category_base = '/product-category/';
 							}
 
+                            /* translators: %s permalink category / product category base  */
 							printf(__('Remove <strong>%s</strong> in your permalinks', 'wp-seopress'), $category_base); ?>
 								</label>
 							</li>
 							<li class="description">
-								<?php printf(__('Shorten your URLs by removing %s and improve your SEO.', 'wp-seopress'), $category_base); ?>
+								<?php /* translators: %s permalink category / product category base  */ printf(__('Shorten your URLs by removing %s and improve your SEO.', 'wp-seopress'), $category_base); ?>
 							</li>
 						<?php } ?>
 					</ul>
@@ -1852,7 +1854,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 												</form>
 											</p>
 
-											<?php printf(__('I accept that SEOPress can store and use my email address in order to send me a newsletter. Read our <a href="%s" target="_blank" title="Open in a new window">privacy policy</a>.', 'wp-seopress'), esc_url('https://www.seopress.org/privacy-policy/')); ?>
+											<?php /* translators: %s URL of our privacy policy  */ printf(__('I accept that SEOPress can store and use my email address in order to send me a newsletter. Read our <a href="%s" target="_blank" title="Open in a new window">privacy policy</a>.', 'wp-seopress'), esc_url('https://www.seopress.org/privacy-policy/')); ?>
 										<?php } elseif (isset($_GET['sub']) && $_GET['sub'] ==='1') { ?>
 											<p style="font-size: 16px;font-weight: bold;"><?php _e('Thank you for your subscription!', 'wp-seopress'); ?></p>
 										<?php } ?>

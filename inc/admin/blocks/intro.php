@@ -8,17 +8,17 @@
 
 <div id="seopress-intro" class="seopress-intro">
     <div>
-        <img src="<?php echo SEOPRESS_ASSETS_DIR . '/img/logo-seopress-square-alt.svg'; ?>" width="72" height="72" alt=""/>
+        <img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/logo-seopress-square-alt.svg'); ?>" width="72" height="72" alt=""/>
     </div>
 
     <div>
         <h1>
             <?php
                 /* translators: %s displays the current version number */
-                printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '7.8');
+                printf(esc_attr__('Welcome to SEOPress %s!', 'wp-seopress'), '7.9');
             ?>
         </h1>
-        <p><?php _e('Your control center for SEO.', 'wp-seopress'); ?></p>
+        <p><?php esc_attr_e('Your control center for SEO.', 'wp-seopress'); ?></p>
     </div>
 </div>
 

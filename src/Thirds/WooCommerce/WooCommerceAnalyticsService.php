@@ -9,14 +9,14 @@ if (! defined('ABSPATH')) {
 class WooCommerceAnalyticsService
 {
     /**
-     * Function to convert an array to a JavaScript object using json_encode
+     * Function to convert an array to a JavaScript object using wp_json_encode
      *
      * @since 7.0.0
      *
      * @return void
      */
     public function arrayToJs($array) {
-        $jsonObject = json_encode($array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $jsonObject = wp_json_encode($array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         return substr($jsonObject, 1, -1); // Remove curly braces from the JSON
     }
 
@@ -114,7 +114,7 @@ class WooCommerceAnalyticsService
                         return;
                     }
 
-                    gtag('event', 'add_to_cart', {'items': [ " . json_encode($items_purchased) . ' ]});
+                    gtag('event', 'add_to_cart', {'items': [ " . wp_json_encode($items_purchased) . ' ]});
                 })
 
             });
@@ -218,7 +218,7 @@ class WooCommerceAnalyticsService
                             return;
                         }
 
-                        gtag('event', 'remove_from_cart', {'items': [ " . json_encode($items_purchased) . ' ]});
+                        gtag('event', 'remove_from_cart', {'items': [ " . wp_json_encode($items_purchased) . ' ]});
                     })
 
                 });
@@ -266,7 +266,7 @@ class WooCommerceAnalyticsService
                     return;
                 }
 
-                gtag('event', 'remove_from_cart', {'items': " . json_encode($final) . '});
+                gtag('event', 'remove_from_cart', {'items': " . wp_json_encode($final) . '});
             })
 
         });

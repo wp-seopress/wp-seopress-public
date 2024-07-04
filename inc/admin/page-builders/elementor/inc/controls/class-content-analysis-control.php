@@ -12,7 +12,9 @@ class Content_Analysis_Control extends \Elementor\Base_Control {
     public function enqueue() {
         wp_enqueue_style(
             'sp-el-content-analysis-style',
-            SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/content-analysis.css'
+            SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/content-analysis.css',
+            [],
+            SEOPRESS_VERSION
         );
 
         wp_enqueue_script(

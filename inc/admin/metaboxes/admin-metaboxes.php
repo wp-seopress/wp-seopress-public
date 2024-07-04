@@ -75,7 +75,7 @@ function seopress_display_seo_metaboxe()
         //init
         $disabled = [];
 
-        wp_enqueue_script('seopress-cpt-tabs', SEOPRESS_ASSETS_DIR . '/js/seopress-metabox' . $prefix . '.js', ['jquery-ui-tabs'], SEOPRESS_VERSION);
+        wp_enqueue_script('seopress-cpt-tabs', SEOPRESS_ASSETS_DIR . '/js/seopress-metabox' . $prefix . '.js', ['jquery-ui-tabs'], SEOPRESS_VERSION, true);
 
         if ('seopress_404' != $typenow) {
             wp_enqueue_script('jquery-ui-accordion');
@@ -86,7 +86,7 @@ function seopress_display_seo_metaboxe()
             wp_enqueue_style('seopress-tagify');
 
             //Register Google Snippet Preview / Content Analysis JS
-            wp_enqueue_script('seopress-cpt-counters', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion'], SEOPRESS_VERSION, true);
+            wp_enqueue_script('seopress-cpt-counters', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion'], SEOPRESS_VERSION, ['strategy' => 'defer', 'in_footer' => true]);
 
             //If Gutenberg ON
             if (function_exists('get_current_screen')) {
@@ -108,7 +108,7 @@ function seopress_display_seo_metaboxe()
                 }
             }
 
-            wp_enqueue_script('seopress-cpt-video-sitemap', SEOPRESS_ASSETS_DIR . '/js/seopress-sitemap-video' . $prefix . '.js', ['jquery', 'jquery-ui-accordion'], SEOPRESS_VERSION);
+            wp_enqueue_script('seopress-cpt-video-sitemap', SEOPRESS_ASSETS_DIR . '/js/seopress-sitemap-video' . $prefix . '.js', ['jquery', 'jquery-ui-accordion'], SEOPRESS_VERSION, true);
 
             $seopress_real_preview = [
                 'seopress_nonce'         => wp_create_nonce('seopress_real_preview_nonce'), // @deprecated 4.4.0
@@ -495,7 +495,7 @@ function seopress_display_ca_metaboxe()
         wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify' . $prefix . '.css', [], SEOPRESS_VERSION);
         wp_enqueue_style('seopress-tagify');
 
-        wp_enqueue_script('seopress-cpt-counters', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion', 'jquery-ui-autocomplete'], SEOPRESS_VERSION);
+        wp_enqueue_script('seopress-cpt-counters', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion', 'jquery-ui-autocomplete'], SEOPRESS_VERSION, ['strategy' => 'defer', 'in_footer' => true]);
         $seopress_real_preview = [
             'seopress_nonce'         => wp_create_nonce('seopress_real_preview_nonce'),
             'seopress_real_preview'  => admin_url('admin-ajax.php'),

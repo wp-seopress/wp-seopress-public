@@ -55,17 +55,19 @@ function seopress_image_seo_cleaning_filename($filename) {
  * @since 5.8.0
  *
  * @param string $post_ID
+ * @param boolean $bulk
  *
  * @return string $post_ID || void
  *
  * @author Benjamin
  */
 add_action('add_attachment', 'seopress_auto_image_attr');
-function seopress_auto_image_attr($post_ID) {
+function seopress_auto_image_attr($post_ID, $bulk = false) {
     if ('1' === seopress_get_service('AdvancedOption')->getImageAutoTitleEditor() ||
     '1' === seopress_get_service('AdvancedOption')->getImageAutoAltEditor() ||
     '1' === seopress_get_service('AdvancedOption')->getImageAutoCaptionEditor() ||
-    '1' === seopress_get_service('AdvancedOption')->getImageAutoDescriptionEditor()) {
+    '1' === seopress_get_service('AdvancedOption')->getImageAutoDescriptionEditor() ||
+    true === $bulk) {
 
         if (wp_attachment_is_image($post_ID)) {
 
@@ -105,7 +107,7 @@ function seopress_auto_image_attr($post_ID) {
             $img_attr_array = apply_filters('seopress_auto_image_attr', $img_attr_array);
 
             // Set the image Alt-Text
-            if ('1' === seopress_get_service('AdvancedOption')->getImageAutoAltEditor()) {
+            if ('1' === seopress_get_service('AdvancedOption')->getImageAutoAltEditor() || true === $bulk) {
                 update_post_meta($post_ID, '_wp_attachment_image_alt', $img_attr);
             }
 
@@ -501,7 +503,7 @@ function seopress_bulk_actions_alt_text_handler($redirect_to, $doaction, $post_i
         return $redirect_to;
     }
     foreach ($post_ids as $post_id) {
-        seopress_auto_image_attr($post_id);
+        seopress_auto_image_attr($post_id, true);
     }
     $redirect_to = add_query_arg('bulk_alt_text', count($post_ids), $redirect_to);
 

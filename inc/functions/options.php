@@ -181,7 +181,7 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
             $final[] = $items_purchased;
         }
 
-        $html = "<script>gtag('event', 'add_to_cart', {'items': " . json_encode($final) . ' });</script>';
+        $html = "<script>gtag('event', 'add_to_cart', {'items': " . wp_json_encode($final) . ' });</script>';
 
         $html = apply_filters('seopress_gtag_ec_add_to_cart_checkout_ev', $html);
 

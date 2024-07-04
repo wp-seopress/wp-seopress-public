@@ -20,6 +20,9 @@ class DescriptionMeta implements ExecuteHooksFrontend {
      * @return void
      */
     public function hooks() {
+        if (apply_filters('seopress_old_wp_head_description', true)) {
+            return;
+        }
         add_action('wp_head', [$this, 'preLoad'], 0);
     }
 
@@ -32,10 +35,6 @@ class DescriptionMeta implements ExecuteHooksFrontend {
     }
 
     public function render() {
-        if (apply_filters('seopress_old_wp_head_description', true)) {
-            return;
-        }
-
         $content = $this->getContent();
 
         if (empty($content)) {

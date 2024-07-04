@@ -105,7 +105,7 @@ abstract class RobotSettings {
                 'placeholder' => '',
                 'default'     => '',
                 'label'       => __('Select a primary category', 'wp-seopress'),
-                'description' => __('Set the category that gets used in the %category% permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress'),
+                'description' => /* translators: category permalink structure */ wp_kses_post(sprintf(__('Set thee category that gets used in the %s permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress'), '<code>%category%</code>')),
                 'options'     => self::getRobotPrimaryCats($id, $postType),
                 'visible'     => ('post' === $postType || 'product' === $postType),
             ],

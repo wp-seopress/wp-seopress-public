@@ -31,19 +31,19 @@ $data_attr = seopress_metaboxes_init();
         <div class="col-left">
             <p>
                 <label for="seopress_analysis_target_kw_meta"><?php _e('Target keywords', 'wp-seopress'); ?>
-                    <?php echo seopress_tooltip(__('Target keywords', 'wp-seopress'), __('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them', 'wp-seopress'), esc_html('my super keyword,another keyword,keyword')); ?>
+                    <?php echo seopress_tooltip(__('Target keywords', 'wp-seopress'), __('Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them.', 'wp-seopress'), esc_html('my super keyword,another keyword,keyword')); ?>
                 </label>
                 <input id="seopress_analysis_target_kw_meta" type="text" name="seopress_analysis_target_kw"
                     placeholder="<?php esc_html_e('Enter your target keywords', 'wp-seopress'); ?>"
-                    aria-label="<?php _e('Target keywords', 'wp-seopress'); ?>"
-                    value="<?php esc_attr_e($seopress_analysis_target_kw); ?>" />
+                    aria-label="<?php esc_attr_e('Target keywords', 'wp-seopress'); ?>"
+                    value="<?php echo esc_attr($seopress_analysis_target_kw); ?>" />
             </p>
 
             <button id="seopress_launch_analysis" type="button" class="<?php echo seopress_btn_secondary_classes(); ?>" data_id="<?php echo get_the_ID(); ?>" data_post_type="<?php echo get_current_screen()->post_type; ?>"><?php _e('Refresh analysis', 'wp-seopress'); ?></button>
 
             <?php do_action('seopress_ca_after_resfresh_analysis'); ?>
 
-            <p><span class="description"><?php _e('To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would.', 'wp-seopress'); ?></span></p>
+            <p><span class="description"><?php esc_attr_e('To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would.', 'wp-seopress'); ?></span></p>
         </div>
             <?php do_action('seopress_ca_before'); ?>
 

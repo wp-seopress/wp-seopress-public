@@ -66,3 +66,7 @@ body .elementor-control-field.seopress-content-analyses h4 {
 body .elementor-control-field.seopress-content-analyses .gr-analysis-title button:focus {
     color: #fff;
 }
+
+body .elementor-control-field .sp-tooltip .sp-tooltiptext {
+    color: #000;
+}

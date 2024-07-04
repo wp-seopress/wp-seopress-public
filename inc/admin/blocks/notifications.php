@@ -17,16 +17,16 @@ if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
 
     if ($total !== 0) {
 ?>
-    <div id="seopress-notifications" class="seopress-notifications seopress-card <?php echo $class; ?>" style="display: none">
+    <div id="seopress-notifications" class="seopress-notifications seopress-card <?php echo esc_attr($class); ?>" style="display: none">
         <div class="seopress-card-content">
             <p>
                 <?php
                     /* translators: %s number of notifications */
-                    printf(_n('You have %s notification. We strongly encourage you to resolve this issue to avoid any SEO damage.', 'You have %s notifications. We strongly encourage you to resolve these issues to avoid any SEO damage.', $total, 'wp-seopress'), '<span>'.$total.'</span>');
+                    printf(esc_attr(_n('You have %s notification. We strongly encourage you to resolve this issue to avoid any SEO damage.', 'You have %s notifications. We strongly encourage you to resolve these issues to avoid any SEO damage.', esc_attr($total), 'wp-seopress')), '<span>'.esc_attr($total).'</span>');
                 ?>
             </p>
             <button id="seopress-see-notifications" type="button" role="tab" aria-selected="true" data-panel="notifications" class="btn btnSecondary">
-                <?php _e('See all notifications', 'wp-seopress'); ?>
+                <?php esc_attr_e('See all notifications', 'wp-seopress'); ?>
             </button>
         </div>
     </div>

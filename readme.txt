@@ -5,8 +5,8 @@ Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.5
-Requires PHP: 7.2
-Stable tag: 7.8
+Requires PHP: 7.4
+Stable tag: 7.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 
 <ul>
 	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Use Artificial Intelligence (GPT 4 / Vision and GPT 3.5 Turbo) to generate SEO metadata and alternative texts for image files. Bulk actions supported.</li>
+    <li><a href="https://www.seopress.org/features/seo-alerts/" target="_blank">Receive SEO alerts to prevent breaking your SEO before it's too late</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/" target="_blank"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
 	<li><a href="https://www.seopress.org/features/sitemaps/" target="_blank"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results. YouTube videos are automatically added.</li>
 	<li>Internal linking suggestions</li>
@@ -261,27 +262,21 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 
 == Changelog ==
 
-= 7.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-8/">Read the blog post update</a> =
-
-* NEW SEO alerts by mail / Slack to get alerted of important SEO issues on your site before it's too late (PRO) 🎉
-* NEW GPT-4o for AI (PRO) 🎉
-* NEW Google Consent v2 for our cookie bar 🎉
-* NEW Allow users to choose the post thumbnail image size for LinkedIn (SEO, Social Networks, LinkedIn tab)
-* NEW Choose which post types and / or taxonomies to export metadata as CSV file (PRO)
-* NEW Validate your site for Baidu Webmaster tools (SEO, Advanced, Advanced tab, Search engines validation section)
-* NEW 'seopress_sitemaps_html_post_date_format' hook to filter the post date format in HTML sitemap (https://www.seopress.org/support/hooks/filter-the-post-date-format-in-html-sitemap/)
-* INFO Prevent other plugins to display notices in Wizard footer
-* INFO Users with edit_posts compatibility can now run AI bulk actions
-* INFO Improve security for contributors user role
-* INFO Simplifying the output of meta robots
-* FIX XML Sitemaps redirects from default ones if Enable XML Sitemap is unchecked
-* FIX Prevent a fatal error with the SEO metabox in rare cases
-* FIX Min height for textarea of the SEO metabox
-* FIX JS error with Elementor and our content analysis feature
-* FIX Undefined variable $cat in HTML sitemap
-* FIX PHP Warnings with %%_ct_your_custom_taxonomy%% dynamic if no terms associated to the post
-* FIX An issue with primary category equals to 0
-* FIX An issue with primary category in breadcrumbs in specific cases
+= 7.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-9/">Read the blog post update</a> =
+* NEW Allow to generate alternative text with AI directly from the media modal (PRO)
+* NEW Export slug changes to a CSV file (SEO, Tools, Redirections) - PRO
+* INFO Bump required PHP version to 7.4 (recommended 8.2+)
+* INFO We no longer use the first image of your post content for social media to improve performances
+* INFO Strengthened security
+* INFO Improve UX to generate alt text for media from filename
+* FIX Remove Home item from Breadcrumbs JSON-LD
+* FIX Redirection test link in specific cases
+* FIX Compatibility issue with WP Rocket in rare cases
+* FIX Headings analysis
+* FIX Social OG and X title on default archive pages if global settings are empty
+* FIX Redirect other XML sitemap URL with WordPress subdirectory setup
+* FIX Remove help links to SEOPress if White label is enabled
+* FIX Remove a deprecated function
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

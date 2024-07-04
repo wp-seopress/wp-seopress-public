@@ -11,7 +11,9 @@ class Text_Letter_Counter_Control extends \Elementor\Base_Data_Control {
 	public function enqueue() {
 		wp_enqueue_style(
 			'sp-el-text-letter-counter-style',
-			SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/text-letter-counter.css'
+			SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/text-letter-counter.css',
+            [],
+            SEOPRESS_VERSION
 		);
 
 		wp_enqueue_script(

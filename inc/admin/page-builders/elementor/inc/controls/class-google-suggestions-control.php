@@ -12,7 +12,9 @@ class Google_Suggestions_Control extends \Elementor\Base_Control {
     public function enqueue() {
         wp_enqueue_style(
             'sp-el-google-suggestions-style',
-            SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/google-suggestions.css'
+            SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/google-suggestions.css',
+            [],
+            SEOPRESS_VERSION
         );
 
         wp_enqueue_script(

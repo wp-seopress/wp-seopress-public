@@ -17,8 +17,8 @@ function seopress_xml_sitemap_general_enable_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Enable XML Sitemap', 'wp-seopress'); ?>
-    <?php echo seopress_tooltip_link($docs['sitemaps']['xml'], __('Guide to enable XML Sitemaps - new window', 'wp-seopress')); ?>
+    <?php esc_attr_e('Enable XML Sitemap', 'wp-seopress'); ?>
+    <?php echo wp_kses_post(seopress_tooltip_link(esc_url($docs['sitemaps']['xml']), esc_attr__('Guide to enable XML Sitemaps - new window', 'wp-seopress'))); ?>
 </label>
 
 
@@ -42,13 +42,13 @@ function seopress_xml_sitemap_img_enable_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Enable Image Sitemap (standard images, image galleries, featured image, WooCommerce product images)', 'wp-seopress'); ?>
-    <?php echo seopress_tooltip_link($docs['sitemaps']['image'], __('Guide to enable XML image sitemap - new window', 'wp-seopress')); ?>
+    <?php esc_attr_e('Enable Image Sitemap (standard images, image galleries, featured image, WooCommerce product images)', 'wp-seopress'); ?>
+    <?php echo wp_kses_post(seopress_tooltip_link(esc_url($docs['sitemaps']['image']), esc_attr__('Guide to enable XML image sitemap - new window', 'wp-seopress'))); ?>
 </label>
 
 
 <p class="description">
-    <?php _e('Images in XML sitemaps are visible only from the source code.', 'wp-seopress'); ?>
+    <?php esc_attr_e('Images in XML sitemaps are visible only from the source code.', 'wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_xml_sitemap_img_enable'])) {
@@ -69,11 +69,11 @@ function seopress_xml_sitemap_author_enable_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Enable Author Sitemap', 'wp-seopress'); ?>
+    <?php esc_attr_e('Enable Author Sitemap', 'wp-seopress'); ?>
 </label>
 
 <p class="description">
-    <?php _e('Make sure to enable author archive from SEO, titles and metas, archives tab.</a>', 'wp-seopress'); ?>
+    <?php esc_attr_e('Make sure to enable author archive from SEO, titles and metas, archives tab.', 'wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_xml_sitemap_author_enable'])) {
@@ -96,8 +96,8 @@ function seopress_xml_sitemap_html_enable_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Enable HTML Sitemap', 'wp-seopress'); ?>
-    <?php echo seopress_tooltip_link($docs['sitemaps']['html'], __('Guide to enable a HTML Sitemap - new window', 'wp-seopress')); ?>
+    <?php esc_attr_e('Enable HTML Sitemap', 'wp-seopress'); ?>
+    <?php echo wp_kses_post(seopress_tooltip_link(esc_url($docs['sitemaps']['html']), esc_attr__('Guide to enable a HTML Sitemap - new window', 'wp-seopress'))); ?>
 </label>
 
 
@@ -123,8 +123,8 @@ function seopress_xml_sitemap_post_types_list_callback()
     foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
         ?>
 <h3>
-    <?php echo $seopress_cpt_value->labels->name; ?>
-    <em><small>[<?php echo $seopress_cpt_value->name; ?>]</small></em>
+    <?php echo esc_html($seopress_cpt_value->labels->name); ?>
+    <em><small>[<?php echo esc_html($seopress_cpt_value->name); ?>]</small></em>
 </h3>
 
 <!--List all post types-->
@@ -136,21 +136,21 @@ function seopress_xml_sitemap_post_types_list_callback()
         ?>
 
     <label
-        for="seopress_xml_sitemap_post_types_list_include[<?php echo $seopress_cpt_key; ?>]">
+        for="seopress_xml_sitemap_post_types_list_include[<?php echo esc_attr($seopress_cpt_key); ?>]">
         <input
-            id="seopress_xml_sitemap_post_types_list_include[<?php echo $seopress_cpt_key; ?>]"
-            name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_post_types_list][<?php echo $seopress_cpt_key; ?>][include]"
+            id="seopress_xml_sitemap_post_types_list_include[<?php echo esc_attr($seopress_cpt_key); ?>]"
+            name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_post_types_list][<?php echo esc_attr($seopress_cpt_key); ?>][include]"
             type="checkbox" <?php if ('1' == $check) { ?>
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Include', 'wp-seopress'); ?>
+        <?php esc_attr_e('Include', 'wp-seopress'); ?>
     </label>
 
     <?php if ('attachment' == $seopress_cpt_value->name) { ?>
     <div class="seopress-notice is-warning is-inline">
         <p>
-            <?php _e('You should never include <strong>attachment</strong> post type in your sitemap. Be careful if you checked this.', 'wp-seopress'); ?>
+            <?php echo wp_kses_post(__('You should never include <strong>attachment</strong> post type in your sitemap. Be careful if you checked this.', 'wp-seopress')); ?>
         </p>
     </div>
     <?php } ?>
@@ -159,7 +159,7 @@ function seopress_xml_sitemap_post_types_list_callback()
         if (isset($options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include'])) {
             esc_attr($options['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include']);
         }
-        ?>
+    ?>
 </div>
 <?php
     }
@@ -179,8 +179,8 @@ function seopress_xml_sitemap_taxonomies_list_callback()
 
     foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) { ?>
 <h3>
-    <?php echo $seopress_tax_value->labels->name; ?>
-    <em><small>[<?php echo $seopress_tax_value->name; ?>]</small></em>
+    <?php echo esc_html($seopress_tax_value->labels->name); ?>
+    <em><small>[<?php echo esc_html($seopress_tax_value->name); ?>]</small></em>
 </h3>
 
 <!--List all taxonomies-->
@@ -191,15 +191,15 @@ function seopress_xml_sitemap_taxonomies_list_callback()
         $check = isset($options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_key]['include']); ?>
 
     <label
-        for="seopress_xml_sitemap_taxonomies_list_include[<?php echo $seopress_tax_key; ?>]">
+        for="seopress_xml_sitemap_taxonomies_list_include[<?php echo esc_attr($seopress_tax_key); ?>]">
         <input
-            id="seopress_xml_sitemap_taxonomies_list_include[<?php echo $seopress_tax_key; ?>]"
-            name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_taxonomies_list][<?php echo $seopress_tax_key; ?>][include]"
+            id="seopress_xml_sitemap_taxonomies_list_include[<?php echo esc_attr($seopress_tax_key); ?>]"
+            name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_taxonomies_list][<?php echo esc_attr($seopress_tax_key); ?>][include]"
             type="checkbox" <?php if ('1' == $check) { ?>
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Include', 'wp-seopress'); ?>
+        <?php esc_attr_e('Include', 'wp-seopress'); ?>
     </label>
 
     <?php if (isset($options['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_key]['include'])) {
@@ -217,7 +217,7 @@ function seopress_xml_sitemap_html_mapping_callback()
     $check   = isset($options['seopress_xml_sitemap_html_mapping']) ? $options['seopress_xml_sitemap_html_mapping'] : null;
 
     printf(
-        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_mapping]" placeholder="' . esc_html__('e.g. 2, 28, 68', 'wp-seopress') . '" aria-label="' . __('Enter a post, page or custom post type ID(s) to display the sitemap', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_mapping]" placeholder="' . esc_html__('e.g. 2, 28, 68', 'wp-seopress') . '" aria-label="' . esc_html__('Enter a post, page or custom post type ID(s) to display the sitemap', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -228,7 +228,7 @@ function seopress_xml_sitemap_html_exclude_callback()
     $check   = isset($options['seopress_xml_sitemap_html_exclude']) ? $options['seopress_xml_sitemap_html_exclude'] : null;
 
     printf(
-        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_exclude]" placeholder="' . esc_html__('e.g. 13, 8, 38', 'wp-seopress') . '" aria-label="' . __('Exclude some Posts, Pages, Custom Post Types or Terms IDs', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_xml_sitemap_option_name[seopress_xml_sitemap_html_exclude]" placeholder="' . esc_html__('e.g. 13, 8, 38', 'wp-seopress') . '" aria-label="' . esc_html__('Exclude some Posts, Pages, Custom Post Types or Terms IDs', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -243,12 +243,12 @@ function seopress_xml_sitemap_html_order_callback()
     <option <?php if ('DESC' == $selected) { ?>
         selected="selected"
         <?php } ?>
-        value="DESC"><?php _e('DESC (descending order from highest to lowest values (3, 2, 1; c, b, a))', 'wp-seopress'); ?>
+        value="DESC"><?php esc_attr_e('DESC (descending order from highest to lowest values (3, 2, 1; c, b, a))', 'wp-seopress'); ?>
     </option>
     <option <?php if ('ASC' == $selected) { ?>
         selected="selected"
         <?php } ?>
-        value="ASC"><?php _e('ASC (ascending order from lowest to highest values (1, 2, 3; a, b, c))', 'wp-seopress'); ?>
+        value="ASC"><?php esc_attr_e('ASC (ascending order from lowest to highest values (1, 2, 3; a, b, c))', 'wp-seopress'); ?>
     </option>
 </select>
 
@@ -268,27 +268,27 @@ function seopress_xml_sitemap_html_orderby_callback()
     <option <?php if ('date' == $selected) { ?>
         selected="selected"
         <?php } ?>
-        value="date"><?php _e('Default (date)', 'wp-seopress'); ?>
+        value="date"><?php esc_attr_e('Default (date)', 'wp-seopress'); ?>
     </option>
     <option <?php if ('title' == $selected) { ?>
         selected="selected"
         <?php } ?>
-        value="title"><?php _e('Post Title', 'wp-seopress'); ?>
+        value="title"><?php esc_attr_e('Post Title', 'wp-seopress'); ?>
     </option>
     <option <?php if ('modified' == $selected) { ?>
         selected="selected"
         <?php } ?>
-        value="modified"><?php _e('Modified date', 'wp-seopress'); ?>
+        value="modified"><?php esc_attr_e('Modified date', 'wp-seopress'); ?>
     </option>
     <option <?php if ('ID' == $selected) { ?>
         selected="selected"
         <?php } ?>
-        value="ID"><?php _e('Post ID', 'wp-seopress'); ?>
+        value="ID"><?php esc_attr_e('Post ID', 'wp-seopress'); ?>
     </option>
     <option <?php if ('menu_order' == $selected) { ?>
         selected="selected"
         <?php } ?>
-        value="menu_order"><?php _e('Menu order', 'wp-seopress'); ?>
+        value="menu_order"><?php esc_attr_e('Menu order', 'wp-seopress'); ?>
     </option>
 </select>
 
@@ -310,7 +310,7 @@ function seopress_xml_sitemap_html_date_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Disable date after each post, page, post type?', 'wp-seopress'); ?>
+    <?php esc_attr_e('Disable date after each post, page, post type?', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_xml_sitemap_html_date'])) {
@@ -331,7 +331,7 @@ function seopress_xml_sitemap_html_no_hierarchy_callback()
     checked="yes"
     <?php } ?>
     value="1"/>
-    <?php _e('Do not display posts and products by categories / product categories?', 'wp-seopress'); ?>
+    <?php esc_attr_e('Do not display posts and products by categories / product categories?', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_xml_sitemap_html_no_hierarchy'])) {

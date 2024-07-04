@@ -11,15 +11,15 @@ abstract class AbstractRepository
 
 	protected $table;
 
-    protected function getTableName(){
-        global $wpdb;
+	protected function getTableName(){
+		global $wpdb;
 
-        return "{$wpdb->prefix}{$this->table->getName()}";
-    }
+		return "{$wpdb->prefix}{$this->table->getName()}";
+	}
 
-    protected function getInsertInstruction(array $args): string
-    {
-        global $wpdb;
+	protected function getInsertInstruction(array $args): string
+	{
+		global $wpdb;
 
 		$authorizedValues = $this->getAuthorizedInsertValues();
 		$columns = $this->table->getColumns();
@@ -39,47 +39,44 @@ abstract class AbstractRepository
 			$data[] = $name;
 		}
 
-        return "
-            INSERT INTO {$this->getTableName()}
-            (
+		return "
+			INSERT INTO {$this->getTableName()}
+			(
 				" . implode(', ', $data) . "
-            ) VALUES
-        ";
-    }
+			) VALUES
+		";
+	}
 
-    protected function getUpdateInstruction(): string
-    {
-        global $wpdb;
+	protected function getUpdateInstruction(): string
+	{
+		global $wpdb;
 
-        return "
-            UPDATE {$this->getTableName()}
-        ";
-    }
+		return "
+			UPDATE {$this->getTableName()}
+		";
+	}
 
-    protected function getFormatValue($value){
-        if (is_string($value)) {
-            return "'" . addslashes($value) . "'";
-        } elseif (is_int($value)) {
-            return $value;
-        }
-        elseif ($value instanceof \DateTime){
-            return "'" . $value->format('Y-m-d H:i:s') . "'";
-        }
-        else if(is_array($value)){
-            if(empty($value)){
-                return "NULL";
-            }
-            else{
-                return "'" . addslashes(serialize($value)) . "'";
-            }
-        }
+	protected function getFormatValue($value) {
+		if (is_string($value)) {
+			return "'" . wp_slash(maybe_serialize($value)) . "'";
+		} elseif (is_int($value)) {
+			return maybe_serialize($value);
+		} elseif ($value instanceof \DateTime) {
+			return "'" . wp_slash(maybe_serialize($value->format('Y-m-d H:i:s'))) . "'";
+		} elseif (is_array($value)) {
+			if (empty($value)) {
+				return "NULL";
+			} else {
+				return "'" . wp_slash(maybe_serialize($value)) . "'";
+			}
+		}
 
-        return "NULL";
-    }
+		return "NULL";
+	}
 
-    public function getUpdateValues(array $args): string
-    {
-        global $wpdb;
+	public function getUpdateValues(array $args): string
+	{
+		global $wpdb;
 
 		$authorizedValues = $this->getAuthorizedUpdateValues();
 
@@ -89,20 +86,18 @@ abstract class AbstractRepository
 			}
 		}
 
-
-
-        return "
-            SET " . $this->constructSetClause($args) . "
-        ";
-    }
+		return "
+			SET " . $this->constructSetClause($args) . "
+		";
+	}
 
 	public function constructValuesClause(array $args): string {
 		$values = "(";
 
-        $authorizedValues = $this->getAuthorizedInsertValues();
+		$authorizedValues = $this->getAuthorizedInsertValues();
 
 		foreach ($args as $key => $value) {
-            if(!in_array($key, $authorizedValues)){
+			if(!in_array($key, $authorizedValues)){
 				unset($args[$key]);
 			}
 
@@ -119,7 +114,7 @@ abstract class AbstractRepository
 		$set = "";
 
 		foreach ($data as $key => $value) {
-            $value = $this->getFormatValue($value);
+			$value = $this->getFormatValue($value);
 
 			$set .= "{$key}=$value";
 			$set .= ",";
@@ -131,14 +126,14 @@ abstract class AbstractRepository
 	}
 
 
-    /**
-     * Get VALUES for INSERT INTO
-     *
-     * @param array $args
-     * @return string
-     */
-    protected function getInsertValuesInstruction($args): string
-    {
+	/**
+	 * Get VALUES for INSERT INTO
+	 *
+	 * @param array $args
+	 * @return string
+	 */
+	protected function getInsertValuesInstruction($args): string
+	{
 
 		$authorizedValues = $this->getAuthorizedInsertValues();
 
@@ -149,10 +144,10 @@ abstract class AbstractRepository
 			$name = $column->getName();
 
 			if(!in_array($name, $authorizedValues, true)){
-                continue;
+				continue;
 			}
 			if(!isset($args[$name])){
-                continue;
+				continue;
 			}
 
 			switch($name){
@@ -167,5 +162,5 @@ abstract class AbstractRepository
 		}
 
 		return $this->constructValuesClause($data);
-    }
+	}
 }

@@ -84,7 +84,6 @@ function seopress_get_docs_links()
 		'analytics' => [
 			'quick_start'       => 'https://www.seopress.org/support/guides/google-analytics/',
 			'connect'           => 'https://www.seopress.org/support/guides/connect-wordpress-site-google-analytics/',
-			'custom_dimensions' => 'https://www.seopress.org/support/guides/create-custom-dimension-google-analytics/',
 			'custom_tracking'   => 'https://www.seopress.org/support/hooks/add-custom-tracking-code-with-user-consent/',
 			'consent_msg'       => 'https://www.seopress.org/support/hooks/filter-user-consent-message/',
 			'gads'              => 'https://www.seopress.org/support/guides/how-to-find-your-google-ads-conversions-id/',
@@ -248,7 +247,6 @@ function seopress_get_docs_links()
 
 		$docs['analytics']['quick_start'] = 'https://www.seopress.org/fr/support/guides/debutez-avec-google-analytics/';
 		$docs['analytics']['connect'] = 'https://www.seopress.org/fr/support/guides/connectez-votre-site-wordpress-a-google-analytics/';
-		$docs['analytics']['custom_dimensions'] = 'https://www.seopress.org/fr/support/guides/creer-des-dimensions-personnalisees-dans-google-analytics/';
 		$docs['analytics']['custom_tracking'] = 'https://www.seopress.org/fr/support/hooks/ajouter-votre-code-de-suivi-personnalise-avec-le-consentement-utilisateur/';
 		$docs['analytics']['consent_msg'] = 'https://www.seopress.org/fr/support/hooks/filtrer-le-message-du-consentement-utilisateur/';
 		$docs['analytics']['gads'] = 'https://www.seopress.org/fr/support/guides/trouver-votre-id-de-conversion-google-ads/';

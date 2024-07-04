@@ -12,7 +12,9 @@ class Social_Preview_Control extends \Elementor\Base_Control {
     public function enqueue() {
         wp_enqueue_style(
             'sp-el-social-preview-style',
-            SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/social-preview.css'
+            SEOPRESS_ELEMENTOR_ADDON_URL . 'assets/css/social-preview.css',
+            [],
+            SEOPRESS_VERSION
         );
 
         wp_enqueue_script(

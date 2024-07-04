@@ -4,12 +4,12 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 7.8
+Version: 7.9
 Author URI: https://www.seopress.org/
 License: GPLv2 or later
 Text Domain: wp-seopress
 Domain Path: /languages
-Requires PHP: 7.2
+Requires PHP: 7.4
 Requires at least: 5.0
 */
 
@@ -61,7 +61,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '7.8');
+define('SEOPRESS_VERSION', '7.9');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -323,7 +323,7 @@ function seopress_add_admin_options_scripts($hook) {
 
 	//Tabs
 	if ('seopress-titles' === $_GET['page'] || 'seopress-xml-sitemap' === $_GET['page'] || 'seopress-social' === $_GET['page'] || 'seopress-google-analytics' === $_GET['page'] || 'seopress-advanced' === $_GET['page'] || 'seopress-import-export' === $_GET['page'] || 'seopress-instant-indexing' === $_GET['page'] || 'seopress-insights-settings' === $_GET['page']) {
-		wp_enqueue_script('seopress-admin-tabs', plugins_url('assets/js/seopress-tabs' . $prefix . '.js', __FILE__), ['jquery-ui-tabs'], SEOPRESS_VERSION);
+		wp_enqueue_script('seopress-admin-tabs', plugins_url('assets/js/seopress-tabs' . $prefix . '.js', __FILE__), ['jquery-ui-tabs'], SEOPRESS_VERSION, true);
 	}
 
 	if ('seopress-google-analytics' === $_GET['page']) {

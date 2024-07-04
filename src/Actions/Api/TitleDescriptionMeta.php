@@ -42,43 +42,11 @@ class TitleDescriptionMeta implements ExecuteHooks {
                     },
                 ],
             ],
-            'permission_callback' => function ($request) {
-                $nonce = $request->get_header('x-wp-nonce');
-
-                if ($nonce && wp_verify_nonce($nonce, 'wp_rest')) {
-                    if (current_user_can('edit_posts')) {
-                        return true;
-                    }
+            'permission_callback' => function() {
+                if (current_user_can('edit_posts')) {
+                    return true;
                 }
-
-                $authorization_header = $request->get_header('Authorization');
-
-                if (!$authorization_header) {
-                    return false;
-                }
-
-                $authorization_parts = explode(' ', $authorization_header);
-
-                if (count($authorization_parts) !== 2 || $authorization_parts[0] !== 'Basic') {
-                    return false;
-                }
-
-                $credentials = base64_decode($authorization_parts[1]);
-                list($username, $password) = explode(':', $credentials);
-
-                $wp_user = get_user_by('login', $username);
-
-                $user = wp_authenticate_application_password($wp_user, $username, $password);
-
-                if (is_wp_error($user)) {
-                    return false;
-                }
-
-                if (!user_can($user, 'edit_posts')) {
-                    return false;
-                }
-
-                return true;
+                return false;
             },
         ]);
     }

@@ -9,9 +9,9 @@
             $class = '1' !== seopress_get_service('AdvancedOption')->getAppearanceNews() ? 'is-active' : '';
         ?>
 
-        <div id="seopress-news-panel" class="seopress-card <?php echo $class; ?>" style="display: none">
+        <div id="seopress-news-panel" class="seopress-card <?php echo esc_attr($class); ?>" style="display: none">
             <div class="seopress-card-title">
-                <h2><?php _e('Latest News from SEOPress Blog', 'wp-seopress'); ?></h2>
+                <h2><?php esc_attr_e('Latest News from SEOPress Blog', 'wp-seopress'); ?></h2>
             </div>
             <div class="seopress-card-content">
                 <?php
@@ -44,36 +44,36 @@
                 <div class="seopress-articles">
                     <?php if (0 == $maxitems) { ?>
                         <p>
-                            <?php _e('No items', 'wp-seopress'); ?>
+                            <?php esc_attr_e('No items', 'wp-seopress'); ?>
                         </p>
                     <?php } else {
                         foreach ($rss_items as $item) {
                             $class = "seopress-article";
                             ?>
-                            <article class="<?php echo $class; ?>">
+                            <article class="<?php echo esc_attr($class); ?>">
                                 <div>
                                     <?php if ($enclosure = $item->get_enclosure()) {
                                         $img = $enclosure->get_link();
-                                        echo '<img src="' . $img . '" class="seopress-thumb" alt="'.sprintf(__('Post thumbnail of %s'), esc_html($item->get_title())).'" decoding="async" loading="lazy"/>';
+                                        echo '<img src="' . esc_url($img) . '" class="seopress-thumb" alt="'./* translators: %s blog post title */ sprintf(esc_attr__('Post thumbnail of %s', 'wp-seopress'), esc_html($item->get_title())).'" decoding="async" loading="lazy"/>';
                                     } ?>
 
                                     <p class="seopress-item-category">
                                         <?php foreach ($item->get_categories() as $category) {
-                                            echo $category->get_label();
+                                            echo esc_attr($category->get_label());
                                         } ?>
                                     </p>
 
                                     <h3 class="seopress-item-title">
-                                        <a href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
+                                        <a href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(esc_attr__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
                                             <?php echo esc_html($item->get_title()); ?>
                                         </a>
                                     </h3>
 
-                                    <p class="seopress-item-content"><?php echo $item->get_description(); ?></p>
+                                    <p class="seopress-item-content"><?php echo esc_html($item->get_description()); ?></p>
                                 </div>
                                 <div class="seopress-item-wrap-content">
-                                    <a class="btn btnSecondary" href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
-                                        <?php _e('Learn more', 'wp-seopress'); ?>
+                                    <a class="btn btnSecondary" href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(esc_attr__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
+                                        <?php esc_attr_e('Learn more', 'wp-seopress'); ?>
                                     </a>
                                 </div>
                             </article>

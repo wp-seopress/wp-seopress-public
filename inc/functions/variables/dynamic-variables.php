@@ -76,8 +76,8 @@ function seopress_get_dynamic_variables($variables, $post, $is_oembed){
         }
 
         if (get_query_var('paged') > 1) {
-            /* translators: %d current page (e.g. 2) %2$d total number of pages (e.g. 30) */
-            $seopress_context_paged = ' ' . $sep . ' ' . sprintf(__('Page %d of %2$d', 'wp-seopress'), $current_page, $wp_query->max_num_pages);
+            /* translators: %1$d current page (e.g. 2) %2$d total number of pages (e.g. 30) */
+            $seopress_context_paged = ' ' . $sep . ' ' . sprintf(esc_attr__('Page %1$d of %2$d', 'wp-seopress'), esc_attr($current_page), esc_attr($wp_query->max_num_pages));
         }
         $seopress_context_paged = apply_filters('seopress_context_paged', $seopress_context_paged);
     }

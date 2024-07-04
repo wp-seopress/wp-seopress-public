@@ -55,7 +55,7 @@ class FacebookImageOptionMeta {
         else if($strategy === 'id'){
             $id = $this->getAttachmentId();
 
-            $stop_attachment_url_to_postid = apply_filters( 'seopress_stop_attachment_url_to_postid', false );
+            $stop_attachment_url_to_postid = apply_filters( 'seopress_stop_attachment_url_to_postid', true );
 
             if((empty($id) || $id === null) && !$stop_attachment_url_to_postid){
                 return $this->getMetasBy('url');

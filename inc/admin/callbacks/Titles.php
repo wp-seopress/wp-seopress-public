@@ -10,11 +10,11 @@ function seopress_titles_sep_callback()
 
 <input type="text" id="seopress_titles_sep" name="seopress_titles_option_name[seopress_titles_sep]"
     placeholder="<?php esc_html_e('Enter your separator, e.g. "-"', 'wp-seopress'); ?>"
-    aria-label="<?php _e('Separator', 'wp-seopress'); ?>"
-    value="<?php esc_html_e($check); ?>" />
+    aria-label="<?php esc_attr_e('Separator', 'wp-seopress'); ?>"
+    value="<?php echo esc_html($check); ?>" />
 
 <p class="description">
-    <?php _e('Use this separator with %%sep%% in your title and meta description.', 'wp-seopress'); ?>
+    <?php esc_attr_e('Use this separator with %%sep%% in your title and meta description.', 'wp-seopress'); ?>
 </p>
 
 <?php
@@ -28,8 +28,8 @@ function seopress_titles_home_site_title_callback()
 <input type="text" id="seopress_titles_home_site_title"
     name="seopress_titles_option_name[seopress_titles_home_site_title]"
     placeholder="<?php esc_html_e('My awesome website', 'wp-seopress'); ?>"
-    aria-label="<?php _e('Site title', 'wp-seopress'); ?>"
-    value="<?php esc_html_e($check); ?>" />
+    aria-label="<?php esc_attr_e('Site title', 'wp-seopress'); ?>"
+    value="<?php echo esc_html($check); ?>" />
 
 <div class="wrap-sp-progress">
     <div class="sp-progress" style="margin:0">
@@ -39,24 +39,24 @@ function seopress_titles_home_site_title_callback()
     </div>
     <div class="wrap-seopress-counters">
         <div id="seopress_titles_title_counters"></div>
-        <?php _e(' (maximum recommended limit)', 'wp-seopress'); ?>
+        <?php esc_attr_e(' (maximum recommended limit)', 'wp-seopress'); ?>
     </div>
 </div>
 
 <div class="wrap-tags">
     <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title" data-tag="%%sitetitle%%">
         <span class="dashicons dashicons-plus-alt2"></span>
-        <?php _e('Site Title', 'wp-seopress'); ?>
+        <?php esc_attr_e('Site Title', 'wp-seopress'); ?>
     </button>
 
     <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-sep" data-tag="%%sep%%">
         <span class="dashicons dashicons-plus-alt2"></span>
-        <?php _e('Separator', 'wp-seopress'); ?>
+        <?php esc_attr_e('Separator', 'wp-seopress'); ?>
     </button>
 
     <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-desc" data-tag="%%tagline%%">
         <span class="dashicons dashicons-plus-alt2"></span>
-        <?php _e('Tagline', 'wp-seopress'); ?>
+        <?php esc_attr_e('Tagline', 'wp-seopress'); ?>
     </button>
 
     <?php echo seopress_render_dyn_variables('tag-title');
@@ -72,13 +72,13 @@ function seopress_titles_home_site_title_alt_callback()
 <input type="text" id="seopress_titles_home_site_title_alt"
     name="seopress_titles_option_name[seopress_titles_home_site_title_alt]"
     placeholder="<?php esc_html_e('My alternative site title', 'wp-seopress'); ?>"
-    aria-label="<?php _e('Alternative site title', 'wp-seopress'); ?>"
-    value="<?php esc_html_e($check); ?>" />
+    aria-label="<?php esc_attr_e('Alternative site title', 'wp-seopress'); ?>"
+    value="<?php echo esc_html($check); ?>" />
 
     <p class="description">
         <?php
             /* translators: %s documentation URL */
-            printf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the %1$s<a href="%2$s" target="_blank">content guidelines</a>.','wp-seopress'), ' <span class="dashicons dashicons-external"></span>', $docs['titles']['alt_title']); ?>
+            echo wp_kses_post(sprintf(__('The alternate name of the website (for example, if there\'s a commonly recognized acronym or shorter name for your site), if applicable. Make sure the name meets the %1$s<a href="%2$s" target="_blank">content guidelines</a>.','wp-seopress'), ' <span class="dashicons dashicons-external"></span>', esc_url($docs['titles']['alt_title']))); ?>
     </p>
 
     <?php
@@ -91,12 +91,12 @@ function seopress_titles_home_site_desc_callback()
 
     <textarea id="seopress_titles_home_site_desc" name="seopress_titles_option_name[seopress_titles_home_site_desc]"
         placeholder="<?php esc_html_e('This is a cool website about Wookiees', 'wp-seopress'); ?>"
-        aria-label="<?php _e('Meta description', 'wp-seopress'); ?>"><?php esc_html_e($check); ?></textarea>
+        aria-label="<?php esc_attr_e('Meta description', 'wp-seopress'); ?>"><?php echo esc_html($check); ?></textarea>
 
     <div class="wrap-tags">
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-meta-desc" data-tag="%%tagline%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Tagline', 'wp-seopress'); ?>
+            <?php esc_attr_e('Tagline', 'wp-seopress'); ?>
         </button>
 
         <?php echo seopress_render_dyn_variables('tag-description'); ?>
@@ -105,8 +105,8 @@ function seopress_titles_home_site_desc_callback()
     <?php if (get_option('page_for_posts')) { ?>
         <p>
             <a
-                href="<?php echo admin_url('post.php?post=' . get_option('page_for_posts') . '&action=edit'); ?>">
-                <?php _e('Looking to edit your blog page?', 'wp-seopress'); ?>
+                href="<?php echo esc_url(admin_url('post.php?post=' . get_option('page_for_posts')) . '&action=edit'); ?>">
+                <?php esc_attr_e('Looking to edit your blog page?', 'wp-seopress'); ?>
             </a>
         </p>
     <?php }
@@ -124,20 +124,21 @@ function seopress_titles_single_titles_callback()
     foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
         ?>
         <h3>
-            <?php echo $seopress_cpt_value->labels->name; ?>
+            <?php echo esc_attr($seopress_cpt_value->labels->name); ?>
             <em>
-                <small>[<?php echo $seopress_cpt_value->name; ?>]</small>
+                <small>[<?php echo esc_attr($seopress_cpt_value->name); ?>]</small>
             </em>
             <!--Single on/off CPT-->
             <div class="seopress_wrap_single_cpt">
 
-                <?php $options = get_option('seopress_titles_option_name');
-        $check             = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['enable']) ? $options['seopress_titles_single_titles'][$seopress_cpt_key]['enable'] : null; ?>
-
+                <?php
+                    $options = get_option('seopress_titles_option_name');
+                    $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['enable']) ? $options['seopress_titles_single_titles'][$seopress_cpt_key]['enable'] : null;
+                ?>
                 <input
-                    id="seopress_titles_single_cpt_enable[<?php echo $seopress_cpt_key; ?>]"
-                    data-id=<?php echo $seopress_cpt_key; ?>
-                name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo $seopress_cpt_key; ?>][enable]" class="toggle"
+                    id="seopress_titles_single_cpt_enable[<?php echo esc_attr($seopress_cpt_key); ?>]"
+                    data-id=<?php echo esc_attr($seopress_cpt_key); ?>
+                name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo esc_attr($seopress_cpt_key); ?>][enable]" class="toggle"
                 type="checkbox"
                 <?php if ('1' == $check) { ?>
                 checked="yes" data-toggle="0"
@@ -147,35 +148,35 @@ function seopress_titles_single_titles_callback()
                 value="1"/>
 
                 <label
-                    for="seopress_titles_single_cpt_enable[<?php echo $seopress_cpt_key; ?>]">
-                    <?php _e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
+                    for="seopress_titles_single_cpt_enable[<?php echo esc_attr($seopress_cpt_key); ?>]">
+                    <?php esc_attr_e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </label>
 
                 <?php if ('1' == $check) { ?>
                 <span id="titles-state-default" class="feature-state">
                     <span class="dashicons dashicons-arrow-left-alt"></span>
-                    <?php _e('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </span>
                 <span id="titles-state" class="feature-state feature-state-off">
                     <span class="dashicons dashicons-arrow-left-alt"></span>
-                    <?php _e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </span>
                 <?php } else { ?>
                 <span id="titles-state-default" class="feature-state">
                     <span class="dashicons dashicons-arrow-left-alt"></span>
-                    <?php _e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </span>
                 <span id="titles-state" class="feature-state feature-state-off">
                     <span class="dashicons dashicons-arrow-left-alt"></span>
-                    <?php _e('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 </span>
                 <?php }
 
-        $toggle_txt_on  = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress');
-        $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
+        $toggle_txt_on  = '<span class="dashicons dashicons-arrow-left-alt"></span>' . esc_attr__('Click to display any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress');
+        $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>' . esc_attr__('Click to hide any SEO metaboxes / columns / bulk actions for this post type', 'wp-seopress'); ?>
                 <script>
                     jQuery(document).ready(function($) {
-                        $('input[data-id=<?php echo $seopress_cpt_key; ?>]')
+                        $('input[data-id=<?php echo esc_attr($seopress_cpt_key); ?>]')
                             .on('click', function() {
                                 $(this).attr('data-toggle', $(this).attr('data-toggle') == '1' ? '0' : '1');
                                 if ($(this).attr('data-toggle') == '1') {
@@ -202,68 +203,58 @@ function seopress_titles_single_titles_callback()
         <!--Single Title CPT-->
         <div class="seopress_wrap_single_cpt">
             <p>
-                <?php _e('Title template', 'wp-seopress'); ?>
+                <?php esc_attr_e('Title template', 'wp-seopress'); ?>
             </p>
 
             <?php
          $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['title']) ? $options['seopress_titles_single_titles'][$seopress_cpt_key]['title'] : null; ?>
             <script>
-                jQuery(document).ready(function($) {
-                    $('#seopress-tag-single-title-<?php echo $seopress_cpt_key; ?>')
-                        .click(function() {
-                            $('#seopress_titles_single_titles_<?php echo $seopress_cpt_key; ?>')
-                                .val(sp_get_field_length($(
-                                    '#seopress_titles_single_titles_<?php echo $seopress_cpt_key; ?>'
-                                )) + $(
-                                    '#seopress-tag-single-title-<?php echo $seopress_cpt_key; ?>'
-                                ).attr('data-tag'));
-                        });
-                    $('#seopress-tag-sep-<?php echo $seopress_cpt_key; ?>')
-                        .click(function() {
-                            $('#seopress_titles_single_titles_<?php echo $seopress_cpt_key; ?>')
-                                .val(sp_get_field_length($(
-                                    '#seopress_titles_single_titles_<?php echo $seopress_cpt_key; ?>'
-                                )) + $(
-                                    '#seopress-tag-sep-<?php echo $seopress_cpt_key; ?>'
-                                ).attr('data-tag'));
-                        });
-                    $('#seopress-tag-single-sitetitle-<?php echo $seopress_cpt_key; ?>')
-                        .click(function() {
-                            $('#seopress_titles_single_titles_<?php echo $seopress_cpt_key; ?>')
-                                .val(sp_get_field_length($(
-                                    '#seopress_titles_single_titles_<?php echo $seopress_cpt_key; ?>'
-                                )) + $(
-                                    '#seopress-tag-single-sitetitle-<?php echo $seopress_cpt_key; ?>'
-                                ).attr('data-tag'));
-                        });
+            jQuery(document).ready(function($) {
+                var cptKey = '<?php echo esc_attr($seopress_cpt_key); ?>';
+
+                function updateTitle(inputSelector, tagSelector) {
+                    $(inputSelector).val(sp_get_field_length($(inputSelector)) + $(tagSelector).attr('data-tag'));
+                }
+
+                $('#seopress-tag-single-title-' + cptKey).click(function() {
+                    updateTitle('#seopress_titles_single_titles_' + cptKey, '#seopress-tag-single-title-' + cptKey);
                 });
+
+                $('#seopress-tag-sep-' + cptKey).click(function() {
+                    updateTitle('#seopress_titles_single_titles_' + cptKey, '#seopress-tag-sep-' + cptKey);
+                });
+
+                $('#seopress-tag-single-sitetitle-' + cptKey).click(function() {
+                    updateTitle('#seopress_titles_single_titles_' + cptKey, '#seopress-tag-single-sitetitle-' + cptKey);
+                });
+            });
             </script>
 
             <?php printf(
-            '<input type="text" id="seopress_titles_single_titles_' . $seopress_cpt_key . '" name="seopress_titles_option_name[seopress_titles_single_titles][' . $seopress_cpt_key . '][title]" value="%s"/>',
+            '<input type="text" id="seopress_titles_single_titles_' . esc_attr($seopress_cpt_key) . '" name="seopress_titles_option_name[seopress_titles_single_titles][' . esc_attr($seopress_cpt_key) . '][title]" value="%s"/>',
             esc_html($check)
         ); ?>
 
             <div class="wrap-tags">
                 <button type="button" class="btn btnSecondary tag-title"
-                    id="seopress-tag-single-title-<?php echo $seopress_cpt_key; ?>"
+                    id="seopress-tag-single-title-<?php echo esc_attr($seopress_cpt_key); ?>"
                     data-tag="%%post_title%%">
                     <span class="dashicons dashicons-plus-alt2"></span>
-                    <?php _e('Post Title', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Post Title', 'wp-seopress'); ?>
                 </button>
 
                 <button type="button" class="btn btnSecondary tag-title"
-                    id="seopress-tag-sep-<?php echo $seopress_cpt_key; ?>"
+                    id="seopress-tag-sep-<?php echo esc_attr($seopress_cpt_key); ?>"
                     data-tag="%%sep%%">
                     <span class="dashicons dashicons-plus-alt2"></span>
-                    <?php _e('Separator', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Separator', 'wp-seopress'); ?>
                 </button>
 
                 <button type="button" class="btn btnSecondary tag-title"
-                    id="seopress-tag-single-sitetitle-<?php echo $seopress_cpt_key; ?>"
+                    id="seopress-tag-single-sitetitle-<?php echo esc_attr($seopress_cpt_key); ?>"
                     data-tag="%%sitetitle%%">
                     <span class="dashicons dashicons-plus-alt2"></span>
-                    <?php _e('Site Title', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Site Title', 'wp-seopress'); ?>
                 </button>
 
                 <?php
@@ -273,7 +264,7 @@ function seopress_titles_single_titles_callback()
             <!--Single Meta Description CPT-->
             <div class="seopress_wrap_single_cpt">
                 <p>
-                    <?php _e('Meta description template', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Meta description template', 'wp-seopress'); ?>
                 </p>
 
                 <?php
@@ -281,13 +272,13 @@ function seopress_titles_single_titles_callback()
 
                 <script>
                     jQuery(document).ready(function($) {
-                        $('#seopress-tag-single-desc-<?php echo $seopress_cpt_key; ?>')
+                        $('#seopress-tag-single-desc-<?php echo esc_attr($seopress_cpt_key); ?>')
                             .click(function() {
-                                $('#seopress_titles_single_desc_<?php echo $seopress_cpt_key; ?>')
+                                $('#seopress_titles_single_desc_<?php echo esc_attr($seopress_cpt_key); ?>')
                                     .val(sp_get_field_length($(
-                                        '#seopress_titles_single_desc_<?php echo $seopress_cpt_key; ?>'
+                                        '#seopress_titles_single_desc_<?php echo esc_attr($seopress_cpt_key); ?>'
                                     )) + $(
-                                        '#seopress-tag-single-desc-<?php echo $seopress_cpt_key; ?>'
+                                        '#seopress-tag-single-desc-<?php echo esc_attr($seopress_cpt_key); ?>'
                                     ).attr('data-tag'));
                             });
                     });
@@ -299,10 +290,10 @@ function seopress_titles_single_titles_callback()
         ); ?>
                 <div class="wrap-tags">
                     <button type="button" class="btn btnSecondary tag-title"
-                        id="seopress-tag-single-desc-<?php echo $seopress_cpt_key; ?>"
+                        id="seopress-tag-single-desc-<?php echo esc_attr($seopress_cpt_key); ?>"
                         data-tag="%%post_excerpt%%">
                         <span class="dashicons dashicons-plus-alt2"></span>
-                        <?php _e('Post excerpt', 'wp-seopress'); ?>
+                        <?php esc_attr_e('Post excerpt', 'wp-seopress'); ?>
                     </button>
                     <?php
             echo seopress_render_dyn_variables('tag-description'); ?>
@@ -318,16 +309,16 @@ function seopress_titles_single_titles_callback()
         $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['noindex']); ?>
 
                 <label
-                    for="seopress_titles_single_cpt_noindex[<?php echo $seopress_cpt_key; ?>]">
+                    for="seopress_titles_single_cpt_noindex[<?php echo esc_attr($seopress_cpt_key); ?>]">
                     <input
-                        id="seopress_titles_single_cpt_noindex[<?php echo $seopress_cpt_key; ?>]"
-                        name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo $seopress_cpt_key; ?>][noindex]"
+                        id="seopress_titles_single_cpt_noindex[<?php echo esc_attr($seopress_cpt_key); ?>]"
+                        name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo esc_attr($seopress_cpt_key); ?>][noindex]"
                         type="checkbox" <?php if ('1' == $check) { ?>
                     checked="yes"
                     <?php } ?>
                     value="1"/>
 
-                    <?php _e('Do not display this single post type in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                    <?php echo wp_kses_post(__('Do not display this single post type in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
                 </label>
 
                 <?php $cpt_in_sitemap = seopress_get_service('SitemapOption')->getPostTypesList();
@@ -337,7 +328,7 @@ function seopress_titles_single_titles_callback()
                     <p>
                         <?php
                             /* translators: %s documentation URL */
-                            printf(__('This custom post type is <strong>NOT</strong> excluded from your XML sitemaps despite the fact that it is set to <strong>NOINDEX</strong>. We recommend that you <a href="%s">check this out here</a>.', 'wp-seopress'), admin_url('admin.php?page=seopress-xml-sitemap'));
+                            echo wp_kses_post(sprintf(__('This custom post type is <strong>NOT</strong> excluded from your XML sitemaps despite the fact that it is set to <strong>NOINDEX</strong>. We recommend that you <a href="%s">check this out here</a>.', 'wp-seopress'), admin_url('admin.php?page=seopress-xml-sitemap')));
                         ?>
                     </p>
                 </div>
@@ -358,16 +349,16 @@ function seopress_titles_single_titles_callback()
         $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['nofollow']); ?>
 
                 <label
-                    for="seopress_titles_single_cpt_nofollow[<?php echo $seopress_cpt_key; ?>]">
+                    for="seopress_titles_single_cpt_nofollow[<?php echo esc_attr($seopress_cpt_key); ?>]">
                     <input
-                        id="seopress_titles_single_cpt_nofollow[<?php echo $seopress_cpt_key; ?>]"
-                        name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo $seopress_cpt_key; ?>][nofollow]"
+                        id="seopress_titles_single_cpt_nofollow[<?php echo esc_attr($seopress_cpt_key); ?>]"
+                        name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo esc_attr($seopress_cpt_key); ?>][nofollow]"
                         type="checkbox" <?php if ('1' == $check) { ?>
                     checked="yes"
                     <?php } ?>
                     value="1"/>
 
-                    <?php _e('Do not follow links for this single post type <strong>(nofollow)</strong>', 'wp-seopress'); ?>
+                    <?php echo wp_kses_post(__('Do not follow links for this single post type <strong>(nofollow)</strong>', 'wp-seopress')); ?>
                 </label>
 
                 <?php if (isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['nofollow'])) {
@@ -384,20 +375,20 @@ function seopress_titles_single_titles_callback()
         $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['date']); ?>
 
                 <label
-                    for="seopress_titles_single_cpt_date[<?php echo $seopress_cpt_key; ?>]">
+                    for="seopress_titles_single_cpt_date[<?php echo esc_attr($seopress_cpt_key); ?>]">
                     <input
-                        id="seopress_titles_single_cpt_date[<?php echo $seopress_cpt_key; ?>]"
-                        name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo $seopress_cpt_key; ?>][date]"
+                        id="seopress_titles_single_cpt_date[<?php echo esc_attr($seopress_cpt_key); ?>]"
+                        name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo esc_attr($seopress_cpt_key); ?>][date]"
                         type="checkbox" <?php if ('1' == $check) { ?>
                     checked="yes"
                     <?php } ?>
                     value="1"/>
 
-                    <?php _e('Display date in Google search results by adding <code>article:published_time</code> and <code>article:modified_time</code> meta?', 'wp-seopress'); ?>
+                    <?php echo wp_kses_post(__('Display date in Google search results by adding <code>article:published_time</code> and <code>article:modified_time</code> meta?', 'wp-seopress')); ?>
                 </label>
 
                 <p class="description">
-                    <?php _e('Unchecking this doesn\'t prevent Google to display post date in search results.', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Unchecking this doesn\'t prevent Google to display post date in search results.', 'wp-seopress'); ?>
                 </p>
 
                 <?php if (isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['date'])) {
@@ -414,30 +405,29 @@ function seopress_titles_single_titles_callback()
         $check = isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs']); ?>
 
                 <label
-                    for="seopress_titles_single_cpt_thumb_gcs[<?php echo $seopress_cpt_key; ?>]">
+                    for="seopress_titles_single_cpt_thumb_gcs[<?php echo esc_attr($seopress_cpt_key); ?>]">
                     <input
-                        id="seopress_titles_single_cpt_thumb_gcs[<?php echo $seopress_cpt_key; ?>]"
-                        name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo $seopress_cpt_key; ?>][thumb_gcs]"
+                        id="seopress_titles_single_cpt_thumb_gcs[<?php echo esc_attr($seopress_cpt_key); ?>]"
+                        name="seopress_titles_option_name[seopress_titles_single_titles][<?php echo esc_attr($seopress_cpt_key); ?>][thumb_gcs]"
                         type="checkbox" <?php if ('1' == $check) { ?>
                     checked="yes"
                     <?php } ?>
                     value="1"/>
 
-                    <?php _e('Display post thumbnail in Google Custom Search results?', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Display post thumbnail in Google Custom Search results?', 'wp-seopress'); ?>
                 </label>
 
                 <p class="description">
                     <?php
                         /* translators: %s documentation URL */
-                        printf(__('This option does not apply to traditional search results. <a href="%s" target="_blank">Learn more</a>', 'wp-seopress'), $docs['titles']['thumbnail']);
+                        echo wp_kses_post(sprintf(__('This option does not apply to traditional search results. <a href="%s" target="_blank">Learn more</a>', 'wp-seopress'), esc_url($docs['titles']['thumbnail'])));
                     ?>
                     <span class="dashicons dashicons-external"></span>
                 </p>
 
                 <?php if (isset($options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs'])) {
-            esc_attr($options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs']);
-        } ?>
-
+                    esc_attr($options['seopress_titles_single_titles'][$seopress_cpt_key]['thumb_gcs']);
+                } ?>
             </div>
             <?php
         if (empty($options['seopress_titles_single_titles'][$seopress_cpt_key]['title'])) {
@@ -452,32 +442,32 @@ function seopress_titles_bp_groups_title_callback()
     if (is_plugin_active('buddypress/bp-loader.php') || is_plugin_active('buddyboss-platform/bp-loader.php')) {
         $options = get_option('seopress_titles_option_name'); ?>
             <h3>
-                <?php _e('BuddyPress groups', 'wp-seopress'); ?>
+                <?php esc_attr_e('BuddyPress groups', 'wp-seopress'); ?>
             </h3>
 
             <p>
-                <?php _e('Title template', 'wp-seopress'); ?>
+                <?php esc_attr_e('Title template', 'wp-seopress'); ?>
             </p>
 
             <?php $check = isset($options['seopress_titles_bp_groups_title']) ? $options['seopress_titles_bp_groups_title'] : null; ?>
 
             <input id="seopress_titles_bp_groups_title" type="text"
                 name="seopress_titles_option_name[seopress_titles_bp_groups_title]"
-                value="<?php esc_html_e($check); ?>" />
+                value="<?php echo esc_html($check); ?>" />
 
             <div class="wrap-tags">
                 <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-post-title-bd-groups" data-tag="%%post_title%%">
                     <span class="dashicons dashicons-plus-alt2"></span>
-                    <?php _e('Post Title', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Post Title', 'wp-seopress'); ?>
                 </button>
                 <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-bd-groups" data-tag="%%sep%%">
                     <span class="dashicons dashicons-plus-alt2"></span>
-                    <?php _e('Separator', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Separator', 'wp-seopress'); ?>
                 </button>
 
                 <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-bd-groups" data-tag="%%sitetitle%%">
                     <span class="dashicons dashicons-plus-alt2"></span>
-                    <?php _e('Site Title', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Site Title', 'wp-seopress'); ?>
                 </button>
 
                 <?php
@@ -490,14 +480,12 @@ function seopress_titles_bp_groups_desc_callback()
     if (is_plugin_active('buddypress/bp-loader.php') || is_plugin_active('buddyboss-platform/bp-loader.php')) {
         $options = get_option('seopress_titles_option_name'); ?>
                 <p>
-                    <?php _e('Meta description template', 'wp-seopress'); ?>
+                    <?php esc_attr_e('Meta description template', 'wp-seopress'); ?>
                 </p>
 
                 <?php $check = isset($options['seopress_titles_bp_groups_desc']) ? $options['seopress_titles_bp_groups_desc'] : null; ?>
 
-                <textarea
-                    name="seopress_titles_option_name[seopress_titles_bp_groups_desc]"><?php esc_html_e($check); ?></textarea>
-
+                <textarea name="seopress_titles_option_name[seopress_titles_bp_groups_desc]"><?php echo esc_html($check); ?></textarea>
                 <?php
     }
 }
@@ -516,7 +504,7 @@ function seopress_titles_bp_groups_noindex_callback()
                     <?php } ?>
                     value="1"/>
 
-                    <?php _e('Do not display BuddyPress groups in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                    <?php echo wp_kses_post(__('Do not display BuddyPress groups in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
                 </label>
 
                 <?php if (isset($options['seopress_titles_bp_groups_noindex'])) {
@@ -561,33 +549,32 @@ function seopress_titles_tax_titles_callback()
 
                     <label
                         for="seopress_titles_tax_titles_enable[<?php echo $seopress_tax_key; ?>]">
-                        <?php _e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
+                        <?php esc_attr_e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </label>
 
                     <?php
-        if ('1' == $check) { ?>
+                    if ('1' == $check) { ?>
                     <span id="titles-state-default" class="feature-state">
                         <span class="dashicons dashicons-arrow-left-alt"></span>
-                        <?php _e('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
+                        <?php esc_attr_e('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </span>
                     <span id="titles-state" class="feature-state feature-state-off">
                         <span class="dashicons dashicons-arrow-left-alt"></span>
-                        <?php _e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
+                        <?php esc_attr_e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </span>
                     <?php } else { ?>
                     <span id="titles-state-default" class="feature-state">
                         <span class="dashicons dashicons-arrow-left-alt"></span>
-                        <?php _e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
+                        <?php esc_attr_e('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </span>
                     <span id="titles-state" class="feature-state feature-state-off">
                         <span class="dashicons dashicons-arrow-left-alt"></span>
-                        <?php _e('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
+                        <?php esc_attr_e('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress'); ?>
                     </span>
                     <?php }
-
-        $toggle_txt_on  = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress');
-        $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>' . __('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress');
-?>
+                        $toggle_txt_on  = '<span class="dashicons dashicons-arrow-left-alt"></span>' . esc_attr__('Click to display any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress');
+                        $toggle_txt_off = '<span class="dashicons dashicons-arrow-left-alt"></span>' . esc_attr__('Click to hide any SEO metaboxes / bulk actions for this taxonomy', 'wp-seopress');
+                    ?>
                     <script>
                         jQuery(document).ready(function($) {
                             $(' input[data-id=<?php echo $seopress_tax_key; ?>]')
@@ -609,20 +596,20 @@ function seopress_titles_tax_titles_callback()
                     </script>
 
                     <?php if (isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['enable'])) {
-    esc_attr($options['seopress_titles_tax_titles'][$seopress_tax_key]['enable']);
-} ?>
+                        esc_attr($options['seopress_titles_tax_titles'][$seopress_tax_key]['enable']);
+                    } ?>
 
                     </div>
                 </h3>
 
                 <!--Tax Title-->
                 <?php
-            $check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['title']) ? $options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] : null;
-        ?>
+                    $check = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['title']) ? $options['seopress_titles_tax_titles'][$seopress_tax_key]['title'] : null;
+                ?>
 
                 <div class="seopress_wrap_tax">
                     <p>
-                        <?php _e('Title template', 'wp-seopress'); ?>
+                        <?php esc_attr_e('Title template', 'wp-seopress'); ?>
                     </p>
 
                     <script>
@@ -668,7 +655,7 @@ function seopress_titles_tax_titles_callback()
                             id="seopress-tag-tax-title-<?php echo $seopress_tax_key; ?>"
                             data-tag="%%_category_title%%" class="btn btnSecondary tag-title">
                             <span class="dashicons dashicons-plus-alt2"></span>
-                            <?php _e('Category Title', 'wp-seopress'); ?>
+                            <?php esc_attr_e('Category Title', 'wp-seopress'); ?>
                         </button>
                         <?php } elseif ('post_tag' == $seopress_tax_key) { ?>
                         <div class="wrap-tags">
@@ -676,7 +663,7 @@ function seopress_titles_tax_titles_callback()
                                 id="seopress-tag-tax-title-<?php echo $seopress_tax_key; ?>"
                                 data-tag="%%tag_title%%">
                                 <span class="dashicons dashicons-plus-alt2"></span>
-                                <?php _e('Tag Title', 'wp-seopress'); ?>
+                                <?php esc_attr_e('Tag Title', 'wp-seopress'); ?>
                             </button>
                             <?php } else { ?>
                             <div class="wrap-tags">
@@ -684,7 +671,7 @@ function seopress_titles_tax_titles_callback()
                                     id="seopress-tag-tax-title-<?php echo $seopress_tax_key; ?>"
                                     data-tag="%%term_title%%">
                                     <span class="dashicons dashicons-plus-alt2"></span>
-                                    <?php _e('Term Title', 'wp-seopress'); ?>
+                                    <?php esc_attr_e('Term Title', 'wp-seopress'); ?>
                                 </button>
                                 <?php } ?>
 
@@ -692,14 +679,14 @@ function seopress_titles_tax_titles_callback()
                                     id="seopress-tag-sep-<?php echo $seopress_tax_key; ?>"
                                     data-tag="%%sep%%">
                                     <span class="dashicons dashicons-plus-alt2"></span>
-                                    <?php _e('Separator', 'wp-seopress'); ?>
+                                    <?php esc_attr_e('Separator', 'wp-seopress'); ?>
                                 </button>
 
                                 <button type="button" class="btn btnSecondary tag-title"
                                     id="seopress-tag-tax-sitetitle-<?php echo $seopress_tax_key; ?>"
                                     data-tag="%%sitetitle%%">
                                     <span class="dashicons dashicons-plus-alt2"></span>
-                                    <?php _e('Site Title', 'wp-seopress'); ?>
+                                    <?php esc_attr_e('Site Title', 'wp-seopress'); ?>
                                 </button>
 
                                 <?php echo seopress_render_dyn_variables('tag-title'); ?>
@@ -710,7 +697,7 @@ function seopress_titles_tax_titles_callback()
                                 <?php $check2 = isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['description']) ? $options['seopress_titles_tax_titles'][$seopress_tax_key]['description'] : null; ?>
 
                                 <p>
-                                    <?php _e('Meta description template', 'wp-seopress'); ?>
+                                    <?php esc_attr_e('Meta description template', 'wp-seopress'); ?>
                                 </p>
 
                                 <script>
@@ -741,7 +728,7 @@ function seopress_titles_tax_titles_callback()
                                         id="seopress-tag-tax-desc-<?php echo $seopress_tax_key; ?>"
                                         data-tag="%%_category_description%%">
                                         <span class="dashicons dashicons-plus-alt2"></span>
-                                        <?php _e('Category Description', 'wp-seopress'); ?>
+                                        <?php esc_attr_e('Category Description', 'wp-seopress'); ?>
                                     </button>
                                     <?php } elseif ('post_tag' == $seopress_tax_key) { ?>
                                     <div class="wrap-tags">
@@ -749,7 +736,7 @@ function seopress_titles_tax_titles_callback()
                                             id="seopress-tag-tax-desc-<?php echo $seopress_tax_key; ?>"
                                             data-tag="%%tag_description%%">
                                             <span class="dashicons dashicons-plus-alt2"></span>
-                                            <?php _e('Tag Description', 'wp-seopress'); ?>
+                                            <?php esc_attr_e('Tag Description', 'wp-seopress'); ?>
                                         </button>
                                         <?php } else { ?>
                                         <div class="wrap-tags">
@@ -757,7 +744,7 @@ function seopress_titles_tax_titles_callback()
                                                 id="seopress-tag-tax-desc-<?php echo $seopress_tax_key; ?>"
                                                 data-tag="%%term_description%%">
                                                 <span class="dashicons dashicons-plus-alt2"></span>
-                                                <?php _e('Term Description', 'wp-seopress'); ?>
+                                                <?php esc_attr_e('Term Description', 'wp-seopress'); ?>
                                             </button>
                                             <?php } echo seopress_render_dyn_variables('tag-description'); ?>
                                         </div>
@@ -779,11 +766,11 @@ function seopress_titles_tax_titles_callback()
                                                 checked="yes"
                                                 <?php } ?>
                                                 value="1"/>
-                                                <?php _e('Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                                                <?php echo wp_kses_post(__('Do not display this taxonomy archive in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
                                                 <?php if ($seopress_tax_key ==='post_tag') { ?>
 													<div class="seopress-notice is-warning is-inline">
 														<p>
-															<?php _e('We do not recommend indexing <strong>tags</strong> which are, in the vast majority of cases, a source of duplicate content.', 'wp-seopress'); ?>
+															<?php echo wp_kses_post(__('We do not recommend indexing <strong>tags</strong> which are, in the vast majority of cases, a source of duplicate content.', 'wp-seopress')); ?>
 														</p>
 													</div>
 												<?php } ?>
@@ -794,7 +781,7 @@ function seopress_titles_tax_titles_callback()
         if ('1' == $check && isset($tax_in_sitemap[$seopress_tax_key]) && '1' === $tax_in_sitemap[$seopress_tax_key]['include']) { ?>
                                             <div class="seopress-notice is-error">
                                                 <p>
-                                                    <?php _e('This custom taxonomy is <strong>NOT</strong> excluded from your XML sitemaps despite the fact that it is set to <strong>NOINDEX</strong>. We recommend that you check this out.', 'wp-seopress'); ?>
+                                                    <?php echo wp_kses_post(__('This custom taxonomy is <strong>NOT</strong> excluded from your XML sitemaps despite the fact that it is set to <strong>NOINDEX</strong>. We recommend that you check this out.', 'wp-seopress')); ?>
                                                 </p>
                                             </div>
                                             <?php }
@@ -824,13 +811,12 @@ function seopress_titles_tax_titles_callback()
                                                 checked="yes"
                                                 <?php } ?>
                                                 value="1"/>
-                                                <?php _e('Do not follow links for this taxonomy archive <strong>(nofollow)</strong>', 'wp-seopress'); ?>
+                                                <?php echo wp_kses_post(__('Do not follow links for this taxonomy archive <strong>(nofollow)</strong>', 'wp-seopress')); ?>
                                             </label>
 
                                             <?php if (isset($options['seopress_titles_tax_titles'][$seopress_tax_key]['nofollow'])) {
-            esc_attr($options['seopress_titles_tax_titles'][$seopress_tax_key]['nofollow']);
-        } ?>
-
+                                                esc_attr($options['seopress_titles_tax_titles'][$seopress_tax_key]['nofollow']);
+                                            } ?>
                                         </div>
                                         <?php
     }
@@ -853,7 +839,7 @@ function seopress_titles_archives_titles_callback()
                                                 <span class="dashicons dashicons-external"></span>
                                                 <a href="<?php echo get_post_type_archive_link($seopress_cpt_value->name); ?>"
                                                     target="_blank">
-                                                    <?php _e('See archive', 'wp-seopress'); ?>
+                                                    <?php esc_attr_e('See archive', 'wp-seopress'); ?>
                                                 </a>
                                             </span>
                                             <?php } ?>
@@ -862,7 +848,7 @@ function seopress_titles_archives_titles_callback()
                                         <!--Archive Title CPT-->
                                         <div class="seopress_wrap_archive_cpt">
                                             <p>
-                                                <?php _e('Title template', 'wp-seopress'); ?>
+                                                <?php esc_attr_e('Title template', 'wp-seopress'); ?>
                                             </p>
 
                                             <script>
@@ -909,17 +895,17 @@ function seopress_titles_archives_titles_callback()
                                             <div class="wrap-tags"><button type="button" class="btn btnSecondary tag-title"
                                                     id="seopress-tag-archive-title-<?php echo $seopress_cpt_key; ?>"
                                                     data-tag="%%cpt_plural%%"><span
-                                                        class="dashicons dashicons-plus-alt2"></span><?php _e('Post Type Archive Name', 'wp-seopress'); ?></button>
+                                                        class="dashicons dashicons-plus-alt2"></span><?php esc_attr_e('Post Type Archive Name', 'wp-seopress'); ?></button>
 
                                                 <button type="button" class="btn btnSecondary tag-title"
                                                     id="seopress-tag-archive-sep-<?php echo $seopress_cpt_key; ?>"
                                                     data-tag="%%sep%%"><span
-                                                        class="dashicons dashicons-plus-alt2"></span><?php _e('Separator', 'wp-seopress'); ?></button>
+                                                        class="dashicons dashicons-plus-alt2"></span><?php esc_attr_e('Separator', 'wp-seopress'); ?></button>
 
                                                 <button type="button" class="btn btnSecondary tag-title"
                                                     id="seopress-tag-archive-sitetitle-<?php echo $seopress_cpt_key; ?>"
                                                     data-tag="%%sitetitle%%"><span
-                                                        class="dashicons dashicons-plus-alt2"></span><?php _e('Site Title', 'wp-seopress'); ?></button>
+                                                        class="dashicons dashicons-plus-alt2"></span><?php esc_attr_e('Site Title', 'wp-seopress'); ?></button>
 
                                                 <?php echo seopress_render_dyn_variables('tag-title'); ?>
 
@@ -929,7 +915,7 @@ function seopress_titles_archives_titles_callback()
                                             <div class="seopress_wrap_archive_cpt">
 
                                                 <p>
-                                                    <?php _e('Meta description template', 'wp-seopress'); ?>
+                                                    <?php esc_attr_e('Meta description template', 'wp-seopress'); ?>
                                                 </p>
 
                                                 <?php $check = isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['description']) ? $options['seopress_titles_archive_titles'][$seopress_cpt_key]['description'] : null; ?>
@@ -993,7 +979,7 @@ function seopress_titles_archives_titles_callback()
                                                         checked="yes"
                                                         <?php } ?>
                                                         value="1"/>
-                                                        <?php _e('Do not display this post type archive in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+                                                        <?php echo wp_kses_post(__('Do not display this post type archive in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
                                                     </label>
 
                                                     <?php if (isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex'])) {
@@ -1020,7 +1006,7 @@ function seopress_titles_archives_titles_callback()
                                                         checked="yes"
                                                         <?php } ?>
                                                         value="1"/>
-                                                        <?php _e('Do not follow links for this post type archive <strong>(nofollow)</strong>', 'wp-seopress'); ?>
+                                                        <?php echo wp_kses_post(__('Do not follow links for this post type archive <strong>(nofollow)</strong>', 'wp-seopress')); ?>
                                                     </label>
 
                                                     <?php if (isset($options['seopress_titles_archive_titles'][$seopress_cpt_key]['nofollow'])) {
@@ -1039,32 +1025,32 @@ function seopress_titles_archives_author_title_callback()
     ?>
 
     <h3>
-        <?php _e('Author archives', 'wp-seopress'); ?>
+        <?php esc_attr_e('Author archives', 'wp-seopress'); ?>
     </h3>
 
     <p>
-        <?php _e('Title template', 'wp-seopress'); ?>
+        <?php esc_attr_e('Title template', 'wp-seopress'); ?>
     </p>
 
     <?php $check = isset($options['seopress_titles_archives_author_title']) ? $options['seopress_titles_archives_author_title'] : null; ?>
 
     <input id="seopress_titles_archive_post_author" type="text"
         name="seopress_titles_option_name[seopress_titles_archives_author_title]"
-        value="<?php esc_html_e($check); ?>" />
+        value="<?php echo esc_html($check); ?>" />
 
     <div class="wrap-tags">
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-post-author" data-tag="%%post_author%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Post author', 'wp-seopress'); ?>
+            <?php esc_attr_e('Post author', 'wp-seopress'); ?>
         </button>
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-author" data-tag="%%sep%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Separator', 'wp-seopress'); ?>
+            <?php esc_attr_e('Separator', 'wp-seopress'); ?>
         </button>
 
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-author" data-tag="%%sitetitle%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Site Title', 'wp-seopress'); ?>
+            <?php esc_attr_e('Site Title', 'wp-seopress'); ?>
         </button>
 
         <?php
@@ -1075,17 +1061,17 @@ function seopress_titles_archives_author_desc_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
     <p>
-        <?php _e('Meta description template', 'wp-seopress'); ?>
+        <?php esc_attr_e('Meta description template', 'wp-seopress'); ?>
     </p>
 
     <?php $check = isset($options['seopress_titles_archives_author_desc']) ? $options['seopress_titles_archives_author_desc'] : null; ?>
 
-    <textarea id="seopress_titles_archive_author_desc" name="seopress_titles_option_name[seopress_titles_archives_author_desc]"><?php esc_html_e($check); ?></textarea>
+    <textarea id="seopress_titles_archive_author_desc" name="seopress_titles_option_name[seopress_titles_archives_author_desc]"><?php echo esc_html($check); ?></textarea>
 
     <div class="wrap-tags">
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-author-bio" data-tag="%%author_bio%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Author biography', 'wp-seopress'); ?>
+            <?php esc_attr_e('Author biography', 'wp-seopress'); ?>
         </button>
 
         <?php
@@ -1106,7 +1092,7 @@ function seopress_titles_archives_author_noindex_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+        <?php echo wp_kses_post(__('Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
     </label>
 
     <?php if (isset($options['seopress_titles_archives_author_noindex'])) {
@@ -1127,7 +1113,7 @@ function seopress_titles_archives_author_disable_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Disable author archives', 'wp-seopress'); ?>
+        <?php esc_attr_e('Disable author archives', 'wp-seopress'); ?>
     </label>
 
     <?php if (isset($options['seopress_titles_archives_author_disable'])) {
@@ -1139,31 +1125,31 @@ function seopress_titles_archives_date_title_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
     <h3>
-        <?php _e('Date archives', 'wp-seopress'); ?>
+        <?php esc_attr_e('Date archives', 'wp-seopress'); ?>
     </h3>
 
     <p>
-        <?php _e('Title template', 'wp-seopress'); ?>
+        <?php esc_attr_e('Title template', 'wp-seopress'); ?>
     </p>
 
     <?php $check = isset($options['seopress_titles_archives_date_title']) ? $options['seopress_titles_archives_date_title'] : null; ?>
 
     <input id="seopress_titles_archives_date_title" type="text"
         name="seopress_titles_option_name[seopress_titles_archives_date_title]"
-        value="<?php esc_html_e($check); ?>" />
+        value="<?php echo esc_html($check); ?>" />
 
     <div class="wrap-tags">
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-archive-date" data-tag="%%archive_date%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Date archives', 'wp-seopress'); ?>
+            <?php esc_attr_e('Date archives', 'wp-seopress'); ?>
         </button>
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-date" data-tag="%%sep%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Separator', 'wp-seopress'); ?>
+            <?php esc_attr_e('Separator', 'wp-seopress'); ?>
         </button>
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-date" data-tag="%%sitetitle%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Site Title', 'wp-seopress'); ?>
+            <?php esc_attr_e('Site Title', 'wp-seopress'); ?>
         </button>
         <?php
     echo seopress_render_dyn_variables('tag-title');
@@ -1174,13 +1160,13 @@ function seopress_titles_archives_date_desc_callback()
     $options = get_option('seopress_titles_option_name'); ?>
 
     <p>
-        <?php _e('Meta description template', 'wp-seopress'); ?>
+        <?php esc_attr_e('Meta description template', 'wp-seopress'); ?>
     </p>
 
     <?php $check = isset($options['seopress_titles_archives_date_desc']) ? $options['seopress_titles_archives_date_desc'] : null; ?>
 
     <textarea
-        name="seopress_titles_option_name[seopress_titles_archives_date_desc]"><?php esc_html_e($check); ?></textarea>
+        name="seopress_titles_option_name[seopress_titles_archives_date_desc]"><?php echo esc_html($check); ?></textarea>
 
     <?php
 }
@@ -1198,7 +1184,7 @@ function seopress_titles_archives_date_noindex_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Do not display date archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+        <?php echo wp_kses_post(__('Do not display date archives in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
     </label>
 
     <?php if (isset($options['seopress_titles_archives_date_noindex'])) {
@@ -1220,7 +1206,7 @@ function seopress_titles_archives_date_disable_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Disable date archives', 'wp-seopress'); ?>
+        <?php esc_attr_e('Disable date archives', 'wp-seopress'); ?>
     </label>
 
     <?php if (isset($options['seopress_titles_archives_date_disable'])) {
@@ -1232,33 +1218,33 @@ function seopress_titles_archives_search_title_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
     <h3>
-        <?php _e('Search archives', 'wp-seopress'); ?>
+        <?php esc_attr_e('Search archives', 'wp-seopress'); ?>
     </h3>
 
     <p>
-        <?php _e('Title template', 'wp-seopress'); ?>
+        <?php esc_attr_e('Title template', 'wp-seopress'); ?>
     </p>
 
     <?php $check = isset($options['seopress_titles_archives_search_title']) ? $options['seopress_titles_archives_search_title'] : null; ?>
 
     <input id="seopress_titles_archives_search_title" type="text"
         name="seopress_titles_option_name[seopress_titles_archives_search_title]"
-        value="<?php esc_html_e($check); ?>" />
+        value="<?php echo esc_html($check); ?>" />
 
     <div class="wrap-tags">
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-search-keywords" data-tag="%%search_keywords%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Search Keywords', 'wp-seopress'); ?>
+            <?php esc_attr_e('Search Keywords', 'wp-seopress'); ?>
         </button>
 
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-search" data-tag="%%sep%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Separator', 'wp-seopress'); ?>
+            <?php esc_attr_e('Separator', 'wp-seopress'); ?>
         </button>
 
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-search" data-tag="%%sitetitle%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Site Title', 'wp-seopress'); ?>
+            <?php esc_attr_e('Site Title', 'wp-seopress'); ?>
         </button>
         <?php
     echo seopress_render_dyn_variables('tag-title');
@@ -1268,13 +1254,13 @@ function seopress_titles_archives_search_desc_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
     <p>
-        <?php _e('Meta description template', 'wp-seopress'); ?>
+        <?php esc_attr_e('Meta description template', 'wp-seopress'); ?>
     </p>
 
     <?php $check = isset($options['seopress_titles_archives_search_desc']) ? $options['seopress_titles_archives_search_desc'] : null; ?>
 
     <textarea
-        name="seopress_titles_option_name[seopress_titles_archives_search_desc]"><?php esc_html_e($check); ?></textarea>
+        name="seopress_titles_option_name[seopress_titles_archives_search_desc]"><?php echo esc_html($check); ?></textarea>
 
     <?php
 }
@@ -1293,7 +1279,7 @@ function seopress_titles_archives_search_title_noindex_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Do not display search archives in search engine results <strong>(noindex)</strong>', 'wp-seopress'); ?>
+        <?php echo wp_kses_post(__('Do not display search archives in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
     </label>
 
     <?php if (isset($options['seopress_titles_archives_search_title_noindex'])) {
@@ -1305,27 +1291,27 @@ function seopress_titles_archives_404_title_callback()
 {
     $options = get_option('seopress_titles_option_name'); ?>
     <h3>
-        <?php _e('404 archives', 'wp-seopress'); ?>
+        <?php esc_attr_e('404 archives', 'wp-seopress'); ?>
     </h3>
 
     <p>
-        <?php _e('Title template', 'wp-seopress'); ?>
+        <?php esc_attr_e('Title template', 'wp-seopress'); ?>
     </p>
 
     <?php $check = isset($options['seopress_titles_archives_404_title']) ? $options['seopress_titles_archives_404_title'] : null; ?>
 
     <input id="seopress_titles_archives_404_title" type="text"
         name="seopress_titles_option_name[seopress_titles_archives_404_title]"
-        value="<?php esc_html_e($check); ?>" />
+        value="<?php echo esc_html($check); ?>" />
 
     <div class="wrap-tags">
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title-404" data-tag="%%sitetitle%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Site Title', 'wp-seopress'); ?>
+            <?php esc_attr_e('Site Title', 'wp-seopress'); ?>
         </button>
         <button type="button" class="btn btnSecondary tag-title" id="seopress-tag-sep-404" data-tag="%%sep%%">
             <span class="dashicons dashicons-plus-alt2"></span>
-            <?php _e('Separator', 'wp-seopress'); ?>
+            <?php esc_attr_e('Separator', 'wp-seopress'); ?>
         </button>
         <?php
     echo seopress_render_dyn_variables('tag-title');
@@ -1337,14 +1323,14 @@ function seopress_titles_archives_404_desc_callback()
 
     <p>
         <label for="seopress_titles_archives_404_desc">
-            <?php _e('Meta description template', 'wp-seopress'); ?>
+            <?php esc_attr_e('Meta description template', 'wp-seopress'); ?>
         </label>
     </p>
 
     <?php $check = isset($options['seopress_titles_archives_404_desc']) ? $options['seopress_titles_archives_404_desc'] : null; ?>
 
     <textarea id="seopress_titles_archives_404_desc"
-        name="seopress_titles_option_name[seopress_titles_archives_404_desc]"><?php esc_html_e($check); ?></textarea>
+        name="seopress_titles_option_name[seopress_titles_archives_404_desc]"><?php echo esc_html($check); ?></textarea>
 
     <?php
 }
@@ -1364,17 +1350,17 @@ function seopress_titles_noindex_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('noindex', 'wp-seopress'); ?>
+        <?php esc_attr_e('noindex', 'wp-seopress'); ?>
     </label>
 
     <p class="description">
-        <?php _e('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.', 'wp-seopress'); ?>
+        <?php esc_attr_e('Do not display all pages of the site in Google search results and do not display "Cached" links in search results.', 'wp-seopress'); ?>
     </p>
 
     <p class="description">
         <?php
             /* translators: %s documentation URL */
-            printf(__('Check also the <strong>"Search engine visibility"</strong> setting from the <a href="%s">WordPress Reading page</a>.', 'wp-seopress'), admin_url('options-reading.php'));
+            echo wp_kses_post(sprintf(__('Check also the <strong>"Search engine visibility"</strong> setting from the <a href="%s">WordPress Reading page</a>.', 'wp-seopress'), admin_url('options-reading.php')));
         ?>
     </p>
 
@@ -1396,11 +1382,11 @@ function seopress_titles_nofollow_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('nofollow', 'wp-seopress'); ?>
+        <?php esc_attr_e('nofollow', 'wp-seopress'); ?>
     </label>
 
     <p class="description">
-        <?php _e('Do not follow links for all pages.', 'wp-seopress'); ?>
+        <?php esc_attr_e('Do not follow links for all pages.', 'wp-seopress'); ?>
     </p>
 
     <?php if (isset($options['seopress_titles_nofollow'])) {
@@ -1421,11 +1407,11 @@ function seopress_titles_noimageindex_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('noimageindex', 'wp-seopress'); ?>
+        <?php esc_attr_e('noimageindex', 'wp-seopress'); ?>
     </label>
 
     <p class="description">
-        <?php _e('Do not index images from the entire site.', 'wp-seopress'); ?>
+        <?php esc_attr_e('Do not index images from the entire site.', 'wp-seopress'); ?>
     </p>
 
     <?php if (isset($options['seopress_titles_noimageindex'])) {
@@ -1446,11 +1432,11 @@ function seopress_titles_noarchive_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('noarchive', 'wp-seopress'); ?>
+        <?php esc_attr_e('noarchive', 'wp-seopress'); ?>
     </label>
 
     <p class="description">
-        <?php _e('Do not display a "Cached" link in the Google search results.', 'wp-seopress'); ?>
+        <?php esc_attr_e('Do not display a "Cached" link in the Google search results.', 'wp-seopress'); ?>
     </p>
 
     <?php if (isset($options['seopress_titles_noarchive'])) {
@@ -1471,11 +1457,11 @@ function seopress_titles_nosnippet_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('nosnippet', 'wp-seopress'); ?>
+        <?php esc_attr_e('nosnippet', 'wp-seopress'); ?>
     </label>
 
     <p class="description">
-        <?php _e('Do not display a description in the Google search results for all pages.', 'wp-seopress'); ?>
+        <?php esc_attr_e('Do not display a description in the Google search results for all pages.', 'wp-seopress'); ?>
     </p>
 
     <?php if (isset($options['seopress_titles_nosnippet'])) {
@@ -1496,11 +1482,11 @@ function seopress_titles_nositelinkssearchbox_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('nositelinkssearchbox', 'wp-seopress'); ?>
+        <?php esc_attr_e('nositelinkssearchbox', 'wp-seopress'); ?>
     </label>
 
     <p class="description">
-        <?php _e('Prevents Google to display a sitelinks searchbox in search results. Enable this option will remove the "Website" schema from your source code.', 'wp-seopress'); ?>
+        <?php esc_attr_e('Prevents Google to display a sitelinks searchbox in search results. Enable this option will remove the "Website" schema from your source code.', 'wp-seopress'); ?>
     </p>
 
     <?php if (isset($options['seopress_titles_nositelinkssearchbox'])) {
@@ -1521,7 +1507,7 @@ function seopress_titles_paged_rel_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Add rel next/prev link in head of paginated archive pages', 'wp-seopress'); ?>
+        <?php esc_attr_e('Add rel next/prev link in head of paginated archive pages', 'wp-seopress'); ?>
     </label>
 
     <?php if (isset($options['seopress_titles_paged_rel'])) {
@@ -1543,11 +1529,11 @@ function seopress_titles_paged_noindex_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Add a "noindex" meta robots for all paginated archive pages', 'wp-seopress'); ?>
+        <?php esc_attr_e('Add a "noindex" meta robots for all paginated archive pages', 'wp-seopress'); ?>
     </label>
 
     <p class="description">
-        <?php _e('e.g. https://example.com/category/my-category/page/2/', 'wp-seopress'); ?>
+        <?php esc_attr_e('e.g. https://example.com/category/my-category/page/2/', 'wp-seopress'); ?>
     </p>
 
     <?php if (isset($options['seopress_titles_paged_noindex'])) {
@@ -1568,11 +1554,11 @@ function seopress_titles_attachments_noindex_callback()
         checked="yes"
         <?php } ?>
         value="1"/>
-        <?php _e('Add a "noindex" meta robots for all attachment pages', 'wp-seopress'); ?>
+        <?php esc_attr_e('Add a "noindex" meta robots for all attachment pages', 'wp-seopress'); ?>
     </label>
 
     <p class="description">
-        <?php _e('e.g. https://example.com/my-media-attachment-page', 'wp-seopress'); ?>
+        <?php esc_attr_e('e.g. https://example.com/my-media-attachment-page', 'wp-seopress'); ?>
     </p>
 
     <?php if (isset($options['seopress_titles_attachments_noindex'])) {
