@@ -19,6 +19,7 @@ $plugin_settings_tabs    = [
                 'tab_seopress_social_accounts'  => __('Your social accounts', 'wp-seopress'),
                 'tab_seopress_social_facebook'  => __('Facebook (Open Graph)', 'wp-seopress'),
                 'tab_seopress_social_twitter'   => __('X Cards', 'wp-seopress'),
+                'tab_seopress_social_linkedin'   => __('LinkedIn', 'wp-seopress'),
             ];
 
 echo '<div class="nav-tab-wrapper">';
@@ -38,6 +39,9 @@ echo '</div>'; ?>
                 <div class="seopress-tab <?php if ('tab_seopress_social_twitter' == $current_tab) {
     echo 'active';
 } ?>" id="tab_seopress_social_twitter"><?php do_settings_sections('seopress-settings-admin-social-twitter'); ?></div>
+                <div class="seopress-tab <?php if ('tab_seopress_social_linkedin' == $current_tab) {
+    echo 'active';
+} ?>" id="tab_seopress_social_linkedin"><?php do_settings_sections('seopress-settings-admin-social-linkedin'); ?></div>
         </div>
 
         <?php sp_submit_button(__('Save changes', 'wp-seopress')); ?>

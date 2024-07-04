@@ -6,9 +6,7 @@
  *
  * @version     3.5.8
  */
-if ( ! defined('ABSPATH')) {
-	exit;
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 /**
  * SEOPRESS_Admin_Setup_Wizard class.
@@ -613,13 +611,15 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function seopress_setup_import_settings() {
 		?>
 		<div class="seopress-setup-content">
-			<h1><?php /* translators: %s default: SEOPress */ printf(esc_html__('Migrate your SEO metadata to %s!', 'wp-seopress'), $this->seo_title); ?></h1>
+			<h1><?php _e('Migration','wp-seopress'); ?></h1>
 
 			<?php $this->setup_wizard_sub_steps(); ?>
 
 			<div class="seopress-tab active">
 				<form method="post">
 					<?php wp_nonce_field('seopress-setup'); ?>
+
+                    <h2><?php /* translators: %s default: SEOPress */ printf(esc_html__('Migrate your SEO metadata to %s', 'wp-seopress'), $this->seo_title); ?></h2>
 
 					<p class="store-setup intro"><?php esc_html_e('The first step is to import your previous post and term metadata from other plugins to keep your SEO.', 'wp-seopress'); ?></p>
 
@@ -1786,6 +1786,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 				<div class="final">
 					<h1>🎉 <?php esc_html_e('Congratulations!', 'wp-seopress'); ?> 🎉</h2>
 					<h2><?php esc_html_e('Your site is now ready for search engines', 'wp-seopress'); ?></h2>
+                    <p><?php _e('We have automatically applied some SEO optimizations on your site to help you rank higher in search engines.','wp-seopress'); ?></p>
+                    <p><?php _e('Follow the next steps below to continue improving your SEO.','wp-seopress'); ?></p>
 				</div>
 
 				<ul class="seopress-wizard-next-steps">

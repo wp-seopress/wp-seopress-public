@@ -113,7 +113,7 @@ function seopress_titles_the_title() {
 
                 foreach ($matches2['1'] as $key => $value) {
                     $term = wp_get_post_terms($post->ID, $value);
-                    if ( ! is_wp_error($term)) {
+                    if ( ! is_wp_error($term) && isset($term[0])) {
                         $terms                                       = esc_attr($term[0]->name);
                         $seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
                     }
@@ -421,7 +421,7 @@ function seopress_titles_the_description_content() {
 
                 foreach ($matches2['1'] as $key => $value) {
                     $term = wp_get_post_terms($post->ID, $value);
-                    if ( ! is_wp_error($term)) {
+                    if ( ! is_wp_error($term) && isset($term[0])) {
                         $terms                                       = esc_attr($term[0]->name);
                         $seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
                     }
@@ -491,7 +491,7 @@ function seopress_titles_the_description_content() {
 
                 foreach ($matches2['1'] as $key => $value) {
                     $term = wp_get_post_terms($post->ID, $value);
-                    if ( ! is_wp_error($term)) {
+                    if ( ! is_wp_error($term) && isset($term[0])) {
                         $terms                                       = esc_attr($term[0]->name);
                         $seopress_titles_ct_template_replace_array[] = apply_filters('seopress_titles_custom_tax', $terms, $value);
                     }
@@ -913,6 +913,11 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
             array_unshift($seopress_comma_array, $seopress_titles_max_snippet);
         }
 
+        if ( ! in_array('noindex', $seopress_comma_array)) {
+            $seopress_titles_max_snippet = 'max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+            array_push($seopress_comma_array, $seopress_titles_max_snippet);
+        }
+
         //Default meta robots
         $seopress_titles_robots = '<meta name="robots" content="';
 
@@ -929,43 +934,6 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
         $seopress_titles_robots .= '">';
         $seopress_titles_robots .= "\n";
 
-        //new meta robots
-        if ( ! in_array('noindex', $seopress_comma_array)) {
-            $seopress_titles_max_snippet = 'max-snippet:-1, max-image-preview:large, max-video-preview:-1';
-            array_push($seopress_comma_array, $seopress_titles_max_snippet);
-
-            //Googlebot
-            $seopress_titles_robots .= '<meta name="googlebot" content="';
-
-            $seopress_comma_array = apply_filters('seopress_titles_robots_attrs', $seopress_comma_array);
-
-            $seopress_comma_count = count($seopress_comma_array);
-            for ($i = 0; $i < $seopress_comma_count; ++$i) {
-                $seopress_titles_robots .= $seopress_comma_array[$i];
-                if ($i < ($seopress_comma_count - 1)) {
-                    $seopress_titles_robots .= ', ';
-                }
-            }
-
-            $seopress_titles_robots .= '">';
-            $seopress_titles_robots .= "\n";
-
-            //Bingbot
-            $seopress_titles_robots .= '<meta name="bingbot" content="';
-
-            $seopress_comma_array = apply_filters('seopress_titles_robots_attrs', $seopress_comma_array);
-
-            $seopress_comma_count = count($seopress_comma_array);
-            for ($i = 0; $i < $seopress_comma_count; ++$i) {
-                $seopress_titles_robots .= $seopress_comma_array[$i];
-                if ($i < ($seopress_comma_count - 1)) {
-                    $seopress_titles_robots .= ', ';
-                }
-            }
-
-            $seopress_titles_robots .= '">';
-            $seopress_titles_robots .= "\n";
-        }
         //Hook on meta robots all - 'seopress_titles_robots'
         if (has_filter('seopress_titles_robots')) {
             $seopress_titles_robots = apply_filters('seopress_titles_robots', $seopress_titles_robots);

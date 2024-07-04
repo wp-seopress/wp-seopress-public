@@ -790,8 +790,8 @@ jQuery(document).ready(function (e) {
                     }
                 }
 
-                e("#seopress_cpt .google-snippet-preview .snippet-title").html(title),
-                    e("#seopress_cpt .google-snippet-preview .snippet-title-default").html(title),
+                e("#seopress_cpt .google-snippet-preview .snippet-title").text(title),
+                    e("#seopress_cpt .google-snippet-preview .snippet-title-default").text(title),
                     e("#seopress_titles_title_meta").attr("placeholder", title);
 
                 meta_desc = '';
@@ -802,21 +802,21 @@ jQuery(document).ready(function (e) {
                     meta_desc = s.data.meta_desc.substr(0, 160);
                 }
 
-                e("#seopress_cpt .google-snippet-preview .snippet-description").html(meta_desc),
-                    e("#seopress_cpt .google-snippet-preview .snippet-description-default").html(meta_desc),
+                e("#seopress_cpt .google-snippet-preview .snippet-description").text(meta_desc),
+                    e("#seopress_cpt .google-snippet-preview .snippet-description-default").text(meta_desc),
                     e("#seopress_titles_desc_meta").attr("placeholder", meta_desc);
 
                 // Facebook Preview
                 if (data_arr.og_title) {
                     e("#seopress_cpt #seopress_social_fb_title_meta").attr("placeholder", data_arr.og_title[0]),
-                        e("#seopress_cpt .facebook-snippet-preview .snippet-fb-title").html(data_arr.og_title[0]),
-                        e("#seopress_cpt .facebook-snippet-preview .snippet-fb-title-default").html(data_arr.og_title[0]);
+                        e("#seopress_cpt .facebook-snippet-preview .snippet-fb-title").text(data_arr.og_title[0]),
+                        e("#seopress_cpt .facebook-snippet-preview .snippet-fb-title-default").text(data_arr.og_title[0]);
                 }
 
                 if (data_arr.og_desc) {
                     e("#seopress_cpt #seopress_social_fb_desc_meta").attr("placeholder", data_arr.og_desc[0]),
-                        e("#seopress_cpt .facebook-snippet-preview .snippet-fb-description").html(data_arr.og_desc[0]),
-                        e("#seopress_cpt .facebook-snippet-preview .snippet-fb-description-default").html(data_arr.og_desc[0]);
+                        e("#seopress_cpt .facebook-snippet-preview .snippet-fb-description").text(data_arr.og_desc[0]),
+                        e("#seopress_cpt .facebook-snippet-preview .snippet-fb-description-default").text(data_arr.og_desc[0]);
                 }
 
                 if (data_arr.og_img) {
@@ -834,10 +834,10 @@ jQuery(document).ready(function (e) {
 
                 e(
                     "#seopress_cpt .facebook-snippet-preview .snippet-fb-url"
-                ).html(data_arr.og_url),
+                ).text(data_arr.og_url),
                     e(
                         "#seopress_cpt .facebook-snippet-preview .snippet-fb-site-name"
-                    ).html(data_arr.og_site_name);
+                    ).text(data_arr.og_site_name);
 
                 // Twitter Preview
                 if (data_arr.tw_title) {
@@ -847,10 +847,10 @@ jQuery(document).ready(function (e) {
                     ),
                         e(
                             "#seopress_cpt .twitter-snippet-preview .snippet-twitter-title"
-                        ).html(data_arr.tw_title[0]),
+                        ).text(data_arr.tw_title[0]),
                         e(
                             "#seopress_cpt .twitter-snippet-preview .snippet-twitter-title-default"
-                        ).html(data_arr.tw_title[0]);
+                        ).text(data_arr.tw_title[0]);
                 }
 
                 if (data_arr.tw_desc) {
@@ -860,10 +860,10 @@ jQuery(document).ready(function (e) {
                     ),
                         e(
                             "#seopress_cpt .twitter-snippet-preview .snippet-twitter-description"
-                        ).html(data_arr.tw_desc[0]),
+                        ).text(data_arr.tw_desc[0]),
                         e(
                             "#seopress_cpt .twitter-snippet-preview .snippet-twitter-description-default"
-                        ).html(data_arr.tw_desc[0]);
+                        ).text(data_arr.tw_desc[0]);
                 }
 
                 if (data_arr.tw_img) {
@@ -881,7 +881,7 @@ jQuery(document).ready(function (e) {
 
                 e(
                     "#seopress_cpt .twitter-snippet-preview .snippet-twitter-url"
-                ).html(data_arr.og_url),
+                ).text(data_arr.og_url),
                     e("#seopress_cpt #seopress_robots_canonical_meta").attr(
                         "placeholder",
                         data_arr.canonical

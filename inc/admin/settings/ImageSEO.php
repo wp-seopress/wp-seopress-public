@@ -7,7 +7,7 @@ add_settings_section(
     'seopress_setting_section_advanced_image', // ID
     '',
     //__("Image SEO","wp-seopress"), // Title
-    'print_section_info_advanced_image', // Callback
+    'seopress_print_section_info_advanced_image', // Callback
     'seopress-settings-admin-advanced-image' // Page
 );
 

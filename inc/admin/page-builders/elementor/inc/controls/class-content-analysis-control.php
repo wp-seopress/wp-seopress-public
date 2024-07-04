@@ -2,9 +2,7 @@
 
 namespace WPSeoPressElementorAddon\Controls;
 
-if ( ! defined('ABSPATH')) {
-    exit();
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 class Content_Analysis_Control extends \Elementor\Base_Control {
     public function get_type() {

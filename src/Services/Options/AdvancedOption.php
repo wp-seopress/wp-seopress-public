@@ -207,6 +207,13 @@ class AdvancedOption
     }
 
     /**
+     * @since 7.8.0
+     */
+    public function getAdvancedBaiduVerification(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_baidu');
+    }
+
+    /**
      * @since 6.5
      */
     public function getAdvancedTaxDescEditor(){

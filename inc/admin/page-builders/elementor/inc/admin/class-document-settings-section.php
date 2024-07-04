@@ -2,9 +2,7 @@
 
 namespace WPSeoPressElementorAddon\Admin;
 
-if ( ! defined('ABSPATH')) {
-    exit();
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 class Document_Settings_Section {
     use \WPSeoPressElementorAddon\Singleton;

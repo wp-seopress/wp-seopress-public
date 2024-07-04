@@ -1,6 +1,7 @@
 <?php
 namespace WPSeoPressElementorAddon;
 
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 trait Singleton {
 	/**
 	 * Instance of the object

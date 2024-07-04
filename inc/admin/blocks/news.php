@@ -1,9 +1,5 @@
 <?php
-    // To prevent calling the plugin directly
-    if ( ! function_exists('add_action')) {
-        echo 'Please don&rsquo;t call the plugin directly. Thanks :)';
-        exit;
-    }
+    defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
     if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
         //do nothing

@@ -76,6 +76,7 @@ function seopress_sanitize_options_fields($input){
         'seopress_advanced_advanced_bing',
         'seopress_advanced_advanced_pinterest',
         'seopress_advanced_advanced_yandex',
+        'seopress_advanced_advanced_baidu',
     ];
 
     $newOptions = ['seopress_social_facebook_img_attachment_id', 'seopress_social_facebook_img_height', 'seopress_social_facebook_img_width'];

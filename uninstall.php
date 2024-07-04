@@ -1,4 +1,6 @@
 <?php
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+
 /**
  * Uninstall SEOPress
  *
@@ -108,6 +110,7 @@ class SEOPRESS_Uninstall {
         wp_clear_scheduled_hook('seopress_404_email_alerts_cron');
         wp_clear_scheduled_hook('seopress_insights_gsc_cron');
         wp_clear_scheduled_hook('seopress_matomo_analytics_cron');
+        wp_clear_scheduled_hook('seopress_alerts_cron');
 
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_content_analysis");
 

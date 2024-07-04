@@ -119,6 +119,10 @@ textarea:focus {
     z-index: 10;
 }
 
+.seopress-setup .seopress-setup-footer .hidden {
+    display: none;
+}
+
 .admin_page_seopress_csv_importer.seopress-setup .seopress-setup-content {
     max-width: inherit;
     margin: 0 auto 20px;

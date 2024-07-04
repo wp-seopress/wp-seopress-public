@@ -1,8 +1,6 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_get_docs_links()
 {
@@ -175,6 +173,10 @@ function seopress_get_docs_links()
 		'rss' => [
 			'get_started' => 'https://www.seopress.org/support/guides/manage-your-wordpress-rss-feeds/',
 		],
+        'alerts' => [
+            'introduction' => 'https://www.seopress.org/features/seo-alerts/',
+			'slack_webhook' => 'https://www.seopress.org/support/guides/how-to-configure-seo-alerts-in-sack-with-seopress-pro/',
+        ],
 		'tools' => [
 			'csv_import' => 'https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/',
 			'csv_export' => 'https://www.seopress.org/support/guides/export-metadata-from-seopress-to-a-csv-file/',
@@ -320,8 +322,10 @@ function seopress_get_docs_links()
 
 		$docs['addons']['pro'] = 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-pro/';
 		$docs['addons']['insights'] = 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-insights/';
-
 		$docs['insights']['slack_webhook'] = 'https://www.seopress.org/fr/support/guides/configurer-les-notifications-slack-avec-seopress-insights/';
+
+		$docs['alerts']['introduction'] = 'https://www.seopress.org/fr/fonctionnalites/alertes-seo/';
+		$docs['alerts']['slack_webhook'] = 'https://www.seopress.org/fr/support/guides/configurer-alertes-seo-slack-seopress-pro/';
 
         $docs['integrations']['wpml']['translate'] = 'https://www.seopress.org/fr/support/guides/traduire-les-options-de-seopress-avec-wpml-polylang/';
 	}

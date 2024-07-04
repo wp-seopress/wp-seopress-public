@@ -1,10 +1,5 @@
-<?php
-	// To prevent calling the plugin directly
-	if (! function_exists('add_action')) {
-		echo 'Please don&rsquo;t call the plugin directly. Thanks :)';
-		exit;
-	}
-?>
+<?php defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)'); ?>
+
 <div id="seopress-page-list" class="seopress-page-list seopress-card">
 	<div class="seopress-card-title">
 		<h2><?php _e('SEO management', 'wp-seopress'); ?></h2>

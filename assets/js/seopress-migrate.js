@@ -193,6 +193,8 @@ jQuery(document).ready(function ($) {
             i18n = seopressAjaxMigrate.i18n.migration;
             if (id == "metadata") {
                 i18n = seopressAjaxMigrate.i18n.export;
+                var cptData = $("#seopress-export-csv-form .post-type-checkbox:checked").serializeArray();
+                var taxData = $("#seopress-export-csv-form .taxonomy-checkbox:checked").serializeArray();
             }
             $.ajax({
                 method: "POST",
@@ -202,10 +204,14 @@ jQuery(document).ready(function ($) {
                     offset: offset,
                     post_export: post_export,
                     term_export: term_export,
-                    _ajax_nonce: _ajax_nonce,
+                    cptData: cptData,
+                    taxData: taxData,
+                    _ajax_nonce: _ajax_nonce
                 },
                 success: function (data) {
-                    if ("done" == data.data.offset) {
+                    if (false === data.success) {
+                        window.location.reload(true);
+                    } else if ("done" === data.data.offset) {
                         $("#seopress-" + id + "-migrate").removeAttr(
                             "disabled"
                         );
@@ -225,7 +231,9 @@ jQuery(document).ready(function ($) {
                             _ajax_nonce,
                             id,
                             data.data.post_export,
-                            data.data.term_export
+                            data.data.term_export,
+                            data.data.cptData,
+                            data.data.taxData
                         );
                         if (data.data.total) {
                             progress = (data.data.count / data.data.total * 100).toFixed(2);

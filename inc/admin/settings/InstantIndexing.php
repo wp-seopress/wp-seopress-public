@@ -7,7 +7,7 @@ add_settings_section(
     'seopress_setting_section_instant_indexing', // ID
     '',
     //__("Instant Indexing","wp-seopress"), // Title
-    'print_section_instant_indexing_general', // Callback
+    'seopress_print_section_instant_indexing_general', // Callback
     'seopress-settings-admin-instant-indexing' // Page
 );
 
@@ -39,7 +39,7 @@ add_settings_section(
     'seopress_setting_section_instant_indexing_settings', // ID
     '',
     //__("Settings","wp-seopress"), // Title
-    'print_section_instant_indexing_settings', // Callback
+    'seopress_print_section_instant_indexing_settings', // Callback
     'seopress-settings-admin-instant-indexing-settings' // Page
 );
 

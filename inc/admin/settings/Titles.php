@@ -7,7 +7,7 @@ add_settings_section(
     'seopress_setting_section_titles_home', // ID
     '',
     //__("Home","wp-seopress"), // Title
-    'print_section_info_titles', // Callback
+    'seopress_print_section_info_titles', // Callback
     'seopress-settings-admin-titles-home' // Page
 );
 
@@ -48,7 +48,7 @@ add_settings_section(
     'seopress_setting_section_titles_single', // ID
     '',
     //__("Post Types","wp-seopress"), // Title
-    'print_section_info_single', // Callback
+    'seopress_print_section_info_single', // Callback
     'seopress-settings-admin-titles-single' // Page
 );
 
@@ -91,7 +91,7 @@ add_settings_section(
     'seopress_setting_section_titles_archives', // ID
     '',
     //__("Archives","wp-seopress"), // Title
-    'print_section_info_archives', // Callback
+    'seopress_print_section_info_archives', // Callback
     'seopress-settings-admin-titles-archives' // Page
 );
 
@@ -225,7 +225,7 @@ add_settings_section(
     'seopress_setting_section_titles_tax', // ID
     '',
     //__("Taxonomies","wp-seopress"), // Title
-    'print_section_info_tax', // Callback
+    'seopress_print_section_info_tax', // Callback
     'seopress-settings-admin-titles-tax' // Page
 );
 
@@ -242,7 +242,7 @@ add_settings_section(
     'seopress_setting_section_titles_advanced', // ID
     '',
     //__("Advanced","wp-seopress"), // Title
-    'print_section_info_advanced', // Callback
+    'seopress_print_section_info_advanced', // Callback
     'seopress-settings-admin-titles-advanced' // Page
 );
 

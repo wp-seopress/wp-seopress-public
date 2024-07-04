@@ -109,7 +109,7 @@ function seopress_oembed_thumbnail_hook($post)
     } elseif (get_post_thumbnail_id($post) !='') {
         $post_thumbnail_id 	=  get_post_thumbnail_id($post);
 
-        $img_size 			= 'full';
+        $img_size 			= seopress_get_service('SocialOption')->getSocialLIImgSize() ? esc_attr(seopress_get_service('SocialOption')->getSocialLIImgSize()) : 'full';
 
         $img_size 			= apply_filters('seopress_oembed_thumbnail_size', $img_size);
 

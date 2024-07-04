@@ -128,6 +128,11 @@ class Render implements ExecuteHooksFrontend {
         if ('1' !== seopress_get_toggle_option('xml-sitemap')) {
             return;
         }
+
+        if ('1' !== seopress_get_service('SitemapOption')->isEnabled()) {
+            return;
+        }
+
         //Redirect sitemap.xml to sitemaps.xml
 		$path = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
 

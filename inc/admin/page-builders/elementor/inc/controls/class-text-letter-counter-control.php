@@ -1,9 +1,7 @@
 <?php
 namespace WPSeoPressElementorAddon\Controls;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	die();
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 class Text_Letter_Counter_Control extends \Elementor\Base_Data_Control {
 	public function get_type() {

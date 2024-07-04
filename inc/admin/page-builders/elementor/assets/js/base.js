@@ -17,10 +17,10 @@ function googlePreview() {
             _ajax_nonce: seopressElementorBase.seopress_nonce
         },
         success: function (t) {
-            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title").html(t.data.title.value);
-            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title-default").html(t.data.title.value);
-            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description").html(t.data.description.value);
-            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description-default").html(t.data.description.value);
+            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title").text(t.data.title.value);
+            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title-default").text(t.data.title.value);
+            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description").text(t.data.description.value);
+            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description-default").text(t.data.description.value);
 
             const $metaTitle = jQuery("input[data-setting=_seopress_titles_title]");
             const $metaDesc = jQuery("textarea[data-setting=_seopress_titles_desc]");
@@ -109,8 +109,8 @@ function socialPreviewFillData(s) {
         jQuery('.snippet-fb-img img').attr('src', data_arr.og_img[0]);
     }
 
-    jQuery(".facebook-snippet-preview .snippet-fb-url").html(data_arr.og_url),
-        jQuery(".facebook-snippet-preview .snippet-fb-site-name").html(data_arr.og_site_name)
+    jQuery(".facebook-snippet-preview .snippet-fb-url").text(data_arr.og_url),
+        jQuery(".facebook-snippet-preview .snippet-fb-site-name").text(data_arr.og_site_name)
 
     // Twitter Preview
     if (data_arr.tw_title) {

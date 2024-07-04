@@ -1,8 +1,6 @@
 <?php
 
-if ( ! defined('ABSPATH')) {
-    exit;
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 use SEOPress\Core\Kernel;
 

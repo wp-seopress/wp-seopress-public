@@ -1,9 +1,7 @@
 <?php
 namespace WPSeoPressElementorAddon;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	die();
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 class Register_Controls {
 	use \WPSeoPressElementorAddon\Singleton;

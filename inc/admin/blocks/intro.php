@@ -1,9 +1,5 @@
 <?php
-    // To prevent calling the plugin directly
-    if ( ! function_exists('add_action')) {
-        echo 'Please don&rsquo;t call the plugin directly. Thanks :)';
-        exit;
-    }
+    defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
     if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
         //do nothing
@@ -19,7 +15,7 @@
         <h1>
             <?php
                 /* translators: %s displays the current version number */
-                printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '7.7.2');
+                printf(__('Welcome to SEOPress %s!', 'wp-seopress'), '7.8');
             ?>
         </h1>
         <p><?php _e('Your control center for SEO.', 'wp-seopress'); ?></p>

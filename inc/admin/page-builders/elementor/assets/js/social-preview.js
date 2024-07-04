@@ -101,7 +101,7 @@ var socialPreviewItemView = elementor.modules.controls.BaseData.extend({
                 value = $(this).attr("placeholder");
             }
 
-            $(".snippet-fb-title").html(value);
+            $(".snippet-fb-title").text(value);
         };
 
         const updateFbSnippetDesc = function () {
@@ -111,7 +111,7 @@ var socialPreviewItemView = elementor.modules.controls.BaseData.extend({
                 value = $(this).attr("placeholder");
             }
 
-            $(".snippet-fb-description-custom").html(value);
+            $(".snippet-fb-description-custom").text(value);
         };
 
         const updateTwSnippetTitle = function () {
@@ -121,7 +121,7 @@ var socialPreviewItemView = elementor.modules.controls.BaseData.extend({
                 value = $(this).attr("placeholder");
             }
 
-            $(".snippet-twitter-title").html(value);
+            $(".snippet-twitter-title").text(value);
         };
 
         const updateTwSnippetDesc = function () {
@@ -131,7 +131,7 @@ var socialPreviewItemView = elementor.modules.controls.BaseData.extend({
                 value = $(this).attr("placeholder");
             }
 
-            $(".snippet-twitter-description").html(value);
+            $(".snippet-twitter-description").text(value);
         };
 
         $(document).on(

@@ -1,9 +1,6 @@
 <?php
-    // To prevent calling the plugin directly
-    if ( ! function_exists('add_action')) {
-        echo 'Please don&rsquo;t call the plugin directly. Thanks :)';
-        exit;
-    }
+    defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+
     $docs = seopress_get_docs_links();
     $class = '1' !== seopress_get_service('NoticeOption')->getNoticeGetStarted() ? 'is-active' : '';
 
@@ -31,7 +28,7 @@
 
                 <h3><?php _e('Universal SEO Metabox', 'wp-seopress'); ?></h3>
 
-                <p><?php _e('Edit your SEO metadata (title, meta description, social tags, schemas, meta robots…) directly from your favorite theme or page builder.', 'wp-seopress'); ?></p>
+                <p><?php _e('Edit your SEO metadata (title, meta desc, meta robots…) directly from your favorite theme or page builder.', 'wp-seopress'); ?></p>
 
                 <p class="seopress-card-actions">
                     <a href="<?php echo $docs['universal']['introduction']; ?>" target="_blank" title="<?php _e('Universal SEO Metabox - new window', 'wp-seopress'); ?>">
@@ -55,15 +52,15 @@
             </div>
 
             <div class="seopress-new-feature">
-                <img src="<?php echo SEOPRESS_URL_ASSETS . '/img/ico-stars.svg'; ?>" alt="" width="56" height="56"/>
+                <img src="<?php echo SEOPRESS_URL_ASSETS . '/img/ico-seo-alerts.svg'; ?>" alt="" width="100" height="56"/>
 
-                <h3><?php _e('You like SEOPress?', 'wp-seopress'); ?></h3>
+                <h3><?php _e('SEO Alerts', 'wp-seopress'); ?></h3>
 
-                <p><?php _e('Please help us by rating us ★★★★★ on WordPress.org. Thank you!', 'wp-seopress'); ?></p>
+                <p><?php _e('Avoid breaking your SEO before it‘s too late by receiving email/Slack notifications twice a day.', 'wp-seopress'); ?></p>
 
                 <p class="seopress-card-actions">
-                    <a href="https://wordpress.org/support/plugin/wp-seopress/reviews/#new-post" target="_blank" title="<?php _e('SEOPress on WordPress plugins repository - new window', 'wp-seopress'); ?>">
-                        <?php _e('Yes sure!', 'wp-seopress'); ?>
+                    <a href="<?php echo $docs['alerts']['introduction']; ?>" target="_blank" title="<?php _e('SEO Alerts - new window', 'wp-seopress'); ?>">
+                        <?php _e('Learn more', 'wp-seopress'); ?>
                     </a>
                 </p>
             </div>

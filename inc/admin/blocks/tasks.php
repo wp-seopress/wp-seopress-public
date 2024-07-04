@@ -1,9 +1,6 @@
 <?php
-    // To prevent calling the plugin directly
-    if (! function_exists('add_action')) {
-        echo 'Please don&rsquo;t call the plugin directly. Thanks :)';
-        exit;
-    }
+    defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+
     if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
         //do nothing
     } else {
@@ -20,8 +17,6 @@
                  * Check if XML sitemaps feature is correctly enabled by the user
                  *
                  * @since 6.0
-                 * @author Benjamin
-                 *
                  */
                 function seopress_tasks_sitemaps() {
                     $options = get_option('seopress_xml_sitemap_option_name');
@@ -36,8 +31,6 @@
                  * Check if Social Networds feature is correctly enabled by the user
                  *
                  * @since 6.0
-                 * @author Benjamin
-                 *
                  */
                 function seopress_tasks_social_networks() {
                     if ('1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable() && ('1' === seopress_get_toggle_option('social'))) {

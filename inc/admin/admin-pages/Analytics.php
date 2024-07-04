@@ -22,7 +22,7 @@ settings_fields('seopress_google_analytics_option_group'); ?>
                 'tab_seopress_google_analytics_matomo'              => __('Matomo', 'wp-seopress'),
                 'tab_seopress_google_analytics_clarity'             => __('Clarity', 'wp-seopress'),
                 'tab_seopress_google_analytics_custom_dimensions'   => __('Advanced', 'wp-seopress'),
-                'tab_seopress_google_analytics_gdpr'                => __('Cookie bar / GDPR', 'wp-seopress'),
+                'tab_seopress_google_analytics_gdpr'                => __('Cookie bar / GDPR / Google Consent', 'wp-seopress'),
                 'tab_seopress_google_analytics_custom_tracking'     => __('Custom Tracking', 'wp-seopress'),
             ];
 

@@ -7,7 +7,7 @@ add_settings_section(
     'seopress_setting_section_social_knowledge', // ID
     '',
     //__("Knowledge graph","wp-seopress"), // Title
-    'print_section_info_social_knowledge', // Callback
+    'seopress_print_section_info_social_knowledge', // Callback
     'seopress-settings-admin-social-knowledge' // Page
 );
 
@@ -88,7 +88,7 @@ add_settings_section(
     'seopress_setting_section_social_accounts', // ID
     '',
     //__("Social","wp-seopress"), // Title
-    'print_section_info_social_accounts', // Callback
+    'seopress_print_section_info_social_accounts', // Callback
     'seopress-settings-admin-social-accounts' // Page
 );
 
@@ -153,7 +153,7 @@ add_settings_section(
     'seopress_setting_section_social_facebook', // ID
     '',
     //__("Facebook","wp-seopress"), // Title
-    'print_section_info_social_facebook', // Callback
+    'seopress_print_section_info_social_facebook', // Callback
     'seopress-settings-admin-social-facebook' // Page
 );
 
@@ -218,7 +218,7 @@ add_settings_section(
     'seopress_setting_section_social_twitter', // ID
     '',
     //__("X","wp-seopress"), // Title
-    'print_section_info_social_twitter', // Callback
+    'seopress_print_section_info_social_twitter', // Callback
     'seopress-settings-admin-social-twitter' // Page
 );
 
@@ -252,4 +252,21 @@ add_settings_field(
     'seopress_social_twitter_card_img_size_callback', // Callback
     'seopress-settings-admin-social-twitter', // Page
     'seopress_setting_section_social_twitter' // Section
+);
+
+//LinkedIn SECTION=================================================================================
+add_settings_section(
+    'seopress_setting_section_social_linkedin', // ID
+    '',
+    //__("LinkedIn","wp-seopress"), // Title
+    'seopress_print_section_info_social_linkedin', // Callback
+    'seopress-settings-admin-social-linkedin' // Page
+);
+
+add_settings_field(
+    'seopress_social_li_img_size', // ID
+    __('Post thumbnail image size', 'wp-seopress'), // Title
+    'seopress_social_li_img_size_callback', // Callback
+    'seopress-settings-admin-social-linkedin', // Page
+    'seopress_setting_section_social_linkedin' // Section
 );

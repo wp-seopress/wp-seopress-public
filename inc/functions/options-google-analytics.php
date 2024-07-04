@@ -3,6 +3,64 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 
 //Google Analytics
 //=================================================================================================
+function seopress_cookies_user_consent_scripts() {
+    if ('1' !== seopress_get_service('GoogleAnalyticsOption')->getEnableOption()) {
+        return;
+    }
+
+    if ('' === seopress_get_service('GoogleAnalyticsOption')->getGA4()) {
+        return;
+    }
+
+    if (isset($_COOKIE['seopress-user-consent-accept'])) {
+        return;
+    }
+
+    $js = "
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }";
+
+    // Default
+    $consent = "
+    gtag('consent', 'default', {
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500,
+      }); \n";
+
+    if (isset($_COOKIE['seopress-user-consent-close']) && '1' == $_COOKIE['seopress-user-consent-close']) {
+        $consent = "
+        gtag('consent', 'default', {
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500,
+          }); \n";
+    }
+
+    $consent = apply_filters( 'seopress_user_consent', $consent );
+
+    $js .= $consent;
+
+    $js .= "gtag('js', new Date()); \n";
+
+    //Measurement ID
+    if ('' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) {
+        $seopress_gtag_ga4 = "gtag('config', '" . seopress_get_service('GoogleAnalyticsOption')->getGA4() . "');";
+        $seopress_gtag_ga4 = apply_filters('seopress_gtag_ga4', $seopress_gtag_ga4);
+        $js .= $seopress_gtag_ga4;
+        $js .= "\n";
+    }
+
+    $js .=
+    "</script>";
+
+    echo $js;
+}
 
 function seopress_cookies_user_consent_html() {
     if (!empty(seopress_get_service('GoogleAnalyticsOption')->getOptOutMsg())) {
@@ -258,6 +316,7 @@ function seopress_cookies_user_consent_render() {
     add_action($hook, 'seopress_cookies_user_consent_html');
     add_action($hook, 'seopress_cookies_edit_choice_html');
     add_action($hook, 'seopress_cookies_user_consent_styles');
+    add_action('wp_head', 'seopress_cookies_user_consent_scripts');
 }
 
 if ('1' === seopress_get_service('GoogleAnalyticsOption')->getDisable()) {
@@ -294,275 +353,314 @@ function seopress_google_analytics_js($echo) {
         $seopress_google_analytics_event  = [];
 
         $seopress_google_analytics_html = "\n";
-        $seopress_google_analytics_html .=
-        "<script async src='https://www.googletagmanager.com/gtag/js?id=" . $tracking_id . "'></script>
-<script>
+
+        if (!isset($_COOKIE['seopress-user-consent-close'])) {
+            $seopress_google_analytics_html .=
+            "<script async src='https://www.googletagmanager.com/gtag/js?id=" . $tracking_id . "'></script>";
+        }
+
+        $seopress_google_analytics_html .= "<script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}";
 
-
         // Consent mode v2
-        $seopress_google_analytics_html .= "gtag('consent', 'default', {
-            'ad_storage': 'granted',
-            'ad_user_data': 'granted',
-            'ad_personalization': 'granted',
-            'analytics_storage': 'granted'
-        });";
+        $consent = "";
+
+        $update = (! empty( $_POST['consent'] ) && $_POST['consent'] === 'update') ? true : false;
+
+
+        if ($update === true) {
+            if (isset($_COOKIE['seopress-user-consent-accept']) && '1' == $_COOKIE['seopress-user-consent-accept']) {
+                $consent = "gtag('consent', 'update', {
+                    'ad_storage': 'granted',
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted',
+                    'analytics_storage': 'granted'
+                });";
+            }
+            if (isset($_COOKIE['seopress-user-consent-close']) && '1' == $_COOKIE['seopress-user-consent-close']) {
+                $consent = "gtag('consent', 'update', {
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied',
+                    'analytics_storage': 'denied'
+                });";
+            }
+        } elseif (isset($_COOKIE['seopress-user-consent-accept']) && '1' == $_COOKIE['seopress-user-consent-accept']) {
+            $consent = "
+            gtag('consent', 'default', {
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted',
+                'analytics_storage': 'granted',
+                'wait_for_update': 500,
+            }); \n";
+        }
+
+        $consent = apply_filters( 'seopress_user_consent', $consent );
+
+        $seopress_google_analytics_html .= $consent;
 
         $seopress_google_analytics_html .= "gtag('js', new Date());\n";
 
-        //Dimensions
-        $seopress_google_analytics_config['cd']['cd_hook'] = apply_filters('seopress_gtag_cd_hook_cf', isset($seopress_google_analytics_config['cd']['cd_hook']));
-        if ( ! has_filter('seopress_gtag_cd_hook_cf')) {
-            unset($seopress_google_analytics_config['cd']['cd_hook']);
-        }
+        $features = '';
 
-        $seopress_google_analytics_event['cd_hook'] = apply_filters('seopress_gtag_cd_hook_ev', isset($seopress_google_analytics_event['cd_hook']));
-        if ( ! has_filter('seopress_gtag_cd_hook_ev')) {
-            unset($seopress_google_analytics_config['cd']['cd_hook']);
-        }
-
-        $cdAuthorOption = seopress_get_service('GoogleAnalyticsOption')->getCdAuthor();
-        $cdCategoryOption = seopress_get_service('GoogleAnalyticsOption')->getCdCategory();
-        $cdTagOption = seopress_get_service('GoogleAnalyticsOption')->getCdTag();
-        $cdPostTypeOption = seopress_get_service('GoogleAnalyticsOption')->getCdPostType();
-        $cdLoggedInUserOption = seopress_get_service('GoogleAnalyticsOption')->getCdLoggedInUser();
-        if ((!empty($cdAuthorOption) && 'none' != $cdAuthorOption)
-                || (!empty($cdCategoryOption) && 'none' != $cdCategoryOption)
-                || (!empty($cdTagOption) && 'none' != $cdTagOption)
-                || (!empty($cdPostTypeOption) && 'none' != $cdPostTypeOption)
-                || (!empty($cdLoggedInUserOption) && 'none' != $cdLoggedInUserOption)
-                || ('' != isset($seopress_google_analytics_config['cd']['cd_hook']) && '' != isset($seopress_google_analytics_event['cd_hook']))
-            ) {
-            $seopress_google_analytics_config['cd']['cd_start'] = '{';
-        } else {
-            unset($seopress_google_analytics_config['cd']);
-        }
-
-        if (!empty($cdAuthorOption)) {
-            if ('none' != $cdAuthorOption) {
-                if (is_singular()) {
-                    $seopress_google_analytics_config['cd']['cd_author'] = "'" . $cdAuthorOption . "': 'cd_author',";
-
-                    $seopress_google_analytics_event['cd_author'] = "gtag('event', '" . __('Authors', 'wp-seopress') . "', {'cd_author': '" . get_the_author() . "', 'non_interaction': true});";
-
-                    $seopress_google_analytics_config['cd']['cd_author'] = apply_filters('seopress_gtag_cd_author_cf', $seopress_google_analytics_config['cd']['cd_author']);
-
-                    $seopress_google_analytics_event['cd_author'] = apply_filters('seopress_gtag_cd_author_ev', $seopress_google_analytics_event['cd_author']);
-                }
+        if (!isset($_COOKIE['seopress-user-consent-close'])) {
+            //Dimensions
+            $seopress_google_analytics_config['cd']['cd_hook'] = apply_filters('seopress_gtag_cd_hook_cf', isset($seopress_google_analytics_config['cd']['cd_hook']));
+            if ( ! has_filter('seopress_gtag_cd_hook_cf')) {
+                unset($seopress_google_analytics_config['cd']['cd_hook']);
             }
-        }
-        if (!empty($cdCategoryOption)) {
-            if ('none' != $cdCategoryOption) {
-                if (is_single() && has_category()) {
-                    $categories = get_the_category();
 
-                    if ( ! empty($categories)) {
-                        $get_first_category = esc_html($categories[0]->name);
+            $seopress_google_analytics_event['cd_hook'] = apply_filters('seopress_gtag_cd_hook_ev', isset($seopress_google_analytics_event['cd_hook']));
+            if ( ! has_filter('seopress_gtag_cd_hook_ev')) {
+                unset($seopress_google_analytics_config['cd']['cd_hook']);
+            }
+
+            $cdAuthorOption = seopress_get_service('GoogleAnalyticsOption')->getCdAuthor();
+            $cdCategoryOption = seopress_get_service('GoogleAnalyticsOption')->getCdCategory();
+            $cdTagOption = seopress_get_service('GoogleAnalyticsOption')->getCdTag();
+            $cdPostTypeOption = seopress_get_service('GoogleAnalyticsOption')->getCdPostType();
+            $cdLoggedInUserOption = seopress_get_service('GoogleAnalyticsOption')->getCdLoggedInUser();
+            if ((!empty($cdAuthorOption) && 'none' != $cdAuthorOption)
+                    || (!empty($cdCategoryOption) && 'none' != $cdCategoryOption)
+                    || (!empty($cdTagOption) && 'none' != $cdTagOption)
+                    || (!empty($cdPostTypeOption) && 'none' != $cdPostTypeOption)
+                    || (!empty($cdLoggedInUserOption) && 'none' != $cdLoggedInUserOption)
+                    || ('' != isset($seopress_google_analytics_config['cd']['cd_hook']) && '' != isset($seopress_google_analytics_event['cd_hook']))
+                ) {
+                $seopress_google_analytics_config['cd']['cd_start'] = '{';
+            } else {
+                unset($seopress_google_analytics_config['cd']);
+            }
+
+            if (!empty($cdAuthorOption)) {
+                if ('none' != $cdAuthorOption) {
+                    if (is_singular()) {
+                        $seopress_google_analytics_config['cd']['cd_author'] = "'" . $cdAuthorOption . "': 'cd_author',";
+
+                        $seopress_google_analytics_event['cd_author'] = "gtag('event', '" . __('Authors', 'wp-seopress') . "', {'cd_author': '" . get_the_author() . "', 'non_interaction': true});";
+
+                        $seopress_google_analytics_config['cd']['cd_author'] = apply_filters('seopress_gtag_cd_author_cf', $seopress_google_analytics_config['cd']['cd_author']);
+
+                        $seopress_google_analytics_event['cd_author'] = apply_filters('seopress_gtag_cd_author_ev', $seopress_google_analytics_event['cd_author']);
                     }
-
-                    $seopress_google_analytics_config['cd']['cd_categories'] = "'" . $cdCategoryOption . "': 'cd_categories',";
-
-                    $seopress_google_analytics_event['cd_categories'] = "gtag('event', '" . __('Categories', 'wp-seopress') . "', {'cd_categories': '" . $get_first_category . "', 'non_interaction': true});";
-
-                    $seopress_google_analytics_config['cd']['cd_categories'] = apply_filters('seopress_gtag_cd_categories_cf', $seopress_google_analytics_config['cd']['cd_categories']);
-
-                    $seopress_google_analytics_event['cd_categories'] = apply_filters('seopress_gtag_cd_categories_ev', $seopress_google_analytics_event['cd_categories']);
                 }
             }
-        }
+            if (!empty($cdCategoryOption)) {
+                if ('none' != $cdCategoryOption) {
+                    if (is_single() && has_category()) {
+                        $categories = get_the_category();
 
-        if (!empty($cdTagOption) && 'none' != $cdTagOption) {
-            if (is_single() && has_tag()) {
-                $tags = get_the_tags();
-                if ( ! empty($tags)) {
-                    $seopress_comma_count = count($tags);
-                    $get_tags             = '';
-                    foreach ($tags as $key => $value) {
-                        $get_tags .= esc_html($value->name);
-                        if ($key < $seopress_comma_count - 1) {
-                            $get_tags .= ', ';
+                        if ( ! empty($categories)) {
+                            $get_first_category = esc_html($categories[0]->name);
+                        }
+
+                        $seopress_google_analytics_config['cd']['cd_categories'] = "'" . $cdCategoryOption . "': 'cd_categories',";
+
+                        $seopress_google_analytics_event['cd_categories'] = "gtag('event', '" . __('Categories', 'wp-seopress') . "', {'cd_categories': '" . $get_first_category . "', 'non_interaction': true});";
+
+                        $seopress_google_analytics_config['cd']['cd_categories'] = apply_filters('seopress_gtag_cd_categories_cf', $seopress_google_analytics_config['cd']['cd_categories']);
+
+                        $seopress_google_analytics_event['cd_categories'] = apply_filters('seopress_gtag_cd_categories_ev', $seopress_google_analytics_event['cd_categories']);
+                    }
+                }
+            }
+
+            if (!empty($cdTagOption) && 'none' != $cdTagOption) {
+                if (is_single() && has_tag()) {
+                    $tags = get_the_tags();
+                    if ( ! empty($tags)) {
+                        $seopress_comma_count = count($tags);
+                        $get_tags             = '';
+                        foreach ($tags as $key => $value) {
+                            $get_tags .= esc_html($value->name);
+                            if ($key < $seopress_comma_count - 1) {
+                                $get_tags .= ', ';
+                            }
                         }
                     }
+
+                    $seopress_google_analytics_config['cd']['cd_tags'] = "'" . $cdTagOption . "': 'cd_tags',";
+
+                    $seopress_google_analytics_event['cd_tags'] = "gtag('event', '" . __('Tags', 'wp-seopress') . "', {'cd_tags': '" . $get_tags . "', 'non_interaction': true});";
+
+                    $seopress_google_analytics_config['cd']['cd_tags'] = apply_filters('seopress_gtag_cd_tags_cf', $seopress_google_analytics_config['cd']['cd_tags']);
+
+                    $seopress_google_analytics_event['cd_tags'] = apply_filters('seopress_gtag_cd_tags_ev', $seopress_google_analytics_event['cd_tags']);
                 }
-
-                $seopress_google_analytics_config['cd']['cd_tags'] = "'" . $cdTagOption . "': 'cd_tags',";
-
-                $seopress_google_analytics_event['cd_tags'] = "gtag('event', '" . __('Tags', 'wp-seopress') . "', {'cd_tags': '" . $get_tags . "', 'non_interaction': true});";
-
-                $seopress_google_analytics_config['cd']['cd_tags'] = apply_filters('seopress_gtag_cd_tags_cf', $seopress_google_analytics_config['cd']['cd_tags']);
-
-                $seopress_google_analytics_event['cd_tags'] = apply_filters('seopress_gtag_cd_tags_ev', $seopress_google_analytics_event['cd_tags']);
             }
-        }
 
-        if (!empty($cdPostTypeOption) && 'none' != $cdPostTypeOption) {
-            if (is_single()) {
-                $seopress_google_analytics_config['cd']['cd_cpt'] = "'" . $cdPostTypeOption . "': 'cd_cpt',";
+            if (!empty($cdPostTypeOption) && 'none' != $cdPostTypeOption) {
+                if (is_single()) {
+                    $seopress_google_analytics_config['cd']['cd_cpt'] = "'" . $cdPostTypeOption . "': 'cd_cpt',";
 
-                $seopress_google_analytics_event['cd_cpt'] = "gtag('event', '" . __('Post types', 'wp-seopress') . "', {'cd_cpt': '" . get_post_type() . "', 'non_interaction': true});";
+                    $seopress_google_analytics_event['cd_cpt'] = "gtag('event', '" . __('Post types', 'wp-seopress') . "', {'cd_cpt': '" . get_post_type() . "', 'non_interaction': true});";
 
-                $seopress_google_analytics_config['cd']['cd_cpt'] = apply_filters('seopress_gtag_cd_cpt_cf', $seopress_google_analytics_config['cd']['cd_cpt']);
+                    $seopress_google_analytics_config['cd']['cd_cpt'] = apply_filters('seopress_gtag_cd_cpt_cf', $seopress_google_analytics_config['cd']['cd_cpt']);
 
-                $seopress_google_analytics_event['cd_cpt'] = apply_filters('seopress_gtag_cd_cpt_ev', $seopress_google_analytics_event['cd_cpt']);
+                    $seopress_google_analytics_event['cd_cpt'] = apply_filters('seopress_gtag_cd_cpt_ev', $seopress_google_analytics_event['cd_cpt']);
+                }
             }
-        }
 
-        if (!empty($cdLoggedInUserOption) && 'none' != $cdLoggedInUserOption) {
-            if (wp_get_current_user()->ID) {
-                $seopress_google_analytics_config['cd']['cd_logged_in'] = "'" . $cdLoggedInUserOption . "': 'cd_logged_in',";
+            if (!empty($cdLoggedInUserOption) && 'none' != $cdLoggedInUserOption) {
+                if (wp_get_current_user()->ID) {
+                    $seopress_google_analytics_config['cd']['cd_logged_in'] = "'" . $cdLoggedInUserOption . "': 'cd_logged_in',";
 
-                $seopress_google_analytics_event['cd_logged_in'] = "gtag('event', '" . __('Connected users', 'wp-seopress') . "', {'cd_logged_in': '" . wp_get_current_user()->ID . "', 'non_interaction': true});";
+                    $seopress_google_analytics_event['cd_logged_in'] = "gtag('event', '" . __('Connected users', 'wp-seopress') . "', {'cd_logged_in': '" . wp_get_current_user()->ID . "', 'non_interaction': true});";
 
-                $seopress_google_analytics_config['cd']['cd_logged_in'] = apply_filters('seopress_gtag_cd_logged_in_cf', $seopress_google_analytics_config['cd']['cd_logged_in']);
+                    $seopress_google_analytics_config['cd']['cd_logged_in'] = apply_filters('seopress_gtag_cd_logged_in_cf', $seopress_google_analytics_config['cd']['cd_logged_in']);
 
-                $seopress_google_analytics_event['cd_logged_in'] = apply_filters('seopress_gtag_cd_logged_in_ev', $seopress_google_analytics_event['cd_logged_in']);
+                    $seopress_google_analytics_event['cd_logged_in'] = apply_filters('seopress_gtag_cd_logged_in_ev', $seopress_google_analytics_event['cd_logged_in']);
+                }
             }
-        }
 
-        if ( ! empty($seopress_google_analytics_config['cd']['cd_logged_in']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_cpt']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_tags']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_categories']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_author']) ||
-                ( ! empty($seopress_google_analytics_config['cd']['cd_hook']) && ! empty($seopress_google_analytics_event['cd_hook']))) {
-            $seopress_google_analytics_config['cd']['cd_end'] = '}, ';
-        } else {
-            $seopress_google_analytics_config['cd']['cd_start'] = '';
-        }
-
-        //External links
-        if (!empty(seopress_get_service('GoogleAnalyticsOption')->getLinkTrackingEnable())) {
-            $seopress_google_analytics_click_event['link_tracking'] =
-"window.addEventListener('load', function () {
-var links = document.querySelectorAll('a');
-for (let i = 0; i < links.length; i++) {
-    links[i].addEventListener('click', function(e) {
-        var n = this.href.includes('" . wp_parse_url(get_home_url(), PHP_URL_HOST) . "');
-        if (n == false) {
-            gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
-        }
-    });
-    }
-});
-";
-            $seopress_google_analytics_click_event['link_tracking'] = apply_filters('seopress_gtag_link_tracking_ev', $seopress_google_analytics_click_event['link_tracking']);
-            $seopress_google_analytics_html .= $seopress_google_analytics_click_event['link_tracking'];
-        }
-
-        //Downloads tracking
-        if (!empty(seopress_get_service('GoogleAnalyticsOption')->getDownloadTrackingEnable())) {
-            $downloadTrackingOption = seopress_get_service('GoogleAnalyticsOption')->getDownloadTracking();
-            if (!empty($downloadTrackingOption)) {
-                $seopress_google_analytics_click_event['download_tracking'] =
-"window.addEventListener('load', function () {
-	var donwload_links = document.querySelectorAll('a');
-	for (let j = 0; j < donwload_links.length; j++) {
-		donwload_links[j].addEventListener('click', function(e) {
-			var down = this.href.match(/.*\.(" . $downloadTrackingOption . ")(\?.*)?$/);
-			if (down != null) {
-				gtag('event', 'click', {'event_category': 'downloads','event_label' : this.href});
-			}
-		});
-		}
-	});
-";
-                $seopress_google_analytics_click_event['download_tracking'] = apply_filters('seopress_gtag_download_tracking_ev', $seopress_google_analytics_click_event['download_tracking']);
-                $seopress_google_analytics_html .= $seopress_google_analytics_click_event['download_tracking'];
+            if ( ! empty($seopress_google_analytics_config['cd']['cd_logged_in']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_cpt']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_tags']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_categories']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_author']) ||
+                    ( ! empty($seopress_google_analytics_config['cd']['cd_hook']) && ! empty($seopress_google_analytics_event['cd_hook']))) {
+                $seopress_google_analytics_config['cd']['cd_end'] = '}, ';
+            } else {
+                $seopress_google_analytics_config['cd']['cd_start'] = '';
             }
-        }
 
-        //Affiliate tracking
-        if (!empty(seopress_get_service('GoogleAnalyticsOption')->getAffiliateTrackingEnable())) {
-            $affiliateTrackingOption = seopress_get_service('GoogleAnalyticsOption')->getAffiliateTracking();
-            if (!empty($affiliateTrackingOption)) {
-                $seopress_google_analytics_click_event['outbound_tracking'] =
-"window.addEventListener('load', function () {
-	var outbound_links = document.querySelectorAll('a');
-	for (let k = 0; k < outbound_links.length; k++) {
-		outbound_links[k].addEventListener('click', function(e) {
-			var out = this.href.match(/(?:\/" . $affiliateTrackingOption . "\/)/gi);
-			if (out != null) {
-				gtag('event', 'click', {'event_category': 'outbound/affiliate','event_label' : this.href});
-			}
-		});
-		}
-	});";
-                $seopress_google_analytics_click_event['outbound_tracking'] = apply_filters('seopress_gtag_outbound_tracking_ev', $seopress_google_analytics_click_event['outbound_tracking']);
-                $seopress_google_analytics_html .= $seopress_google_analytics_click_event['outbound_tracking'];
-            }
-        }
-
-        //Phone tracking
-        if (!empty(seopress_get_service('GoogleAnalyticsOption')->getPhoneTracking())) {
-            $seopress_google_analytics_click_event['phone_tracking'] =
-"window.addEventListener('load', function () {
+            //External links
+            if (!empty(seopress_get_service('GoogleAnalyticsOption')->getLinkTrackingEnable())) {
+                $seopress_google_analytics_click_event['link_tracking'] =
+    "window.addEventListener('load', function () {
     var links = document.querySelectorAll('a');
     for (let i = 0; i < links.length; i++) {
         links[i].addEventListener('click', function(e) {
-            var n = this.href.includes('tel:');
-            if (n === true) {
-                gtag('event', 'click', {'event_category': 'phone','event_label' : this.href.slice(4)});
+            var n = this.href.includes('" . wp_parse_url(get_home_url(), PHP_URL_HOST) . "');
+            if (n == false) {
+                gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
             }
         });
-    }
-});";
-            $seopress_google_analytics_click_event['phone_tracking'] = apply_filters('seopress_gtag_phone_tracking_ev', $seopress_google_analytics_click_event['phone_tracking']);
-            $seopress_google_analytics_html .= $seopress_google_analytics_click_event['phone_tracking'];
         }
-
-        do_action('seopress_ga4_before_sending_data');
-
-        //Send data
-        $features = '';
-        if ( ! empty($seopress_google_analytics_config['cd']['cd_logged_in']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_cpt']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_tags']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_categories']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_author']) ||
-                ! empty($seopress_google_analytics_config['cd']['cd_hook'])) {
-            $seopress_google_analytics_config['cd']['cd_start'] = "'custom_map': {";
-        }
-        if ( ! empty($seopress_google_analytics_config)) {
-            if ( ! empty($seopress_google_analytics_config['cd']['cd_start'])) {
-                array_unshift($seopress_google_analytics_config['cd'], $seopress_google_analytics_config['cd']['cd_start']);
-                unset($seopress_google_analytics_config['cd']['cd_start']);
+    });
+    ";
+                $seopress_google_analytics_click_event['link_tracking'] = apply_filters('seopress_gtag_link_tracking_ev', $seopress_google_analytics_click_event['link_tracking']);
+                $seopress_google_analytics_html .= $seopress_google_analytics_click_event['link_tracking'];
             }
-            $features = ', {';
-            foreach ($seopress_google_analytics_config as $key => $feature) {
-                if ('cd' == $key) {
-                    foreach ($feature as $_key => $cd) {
-                        $features .= $cd;
-                    }
-                } else {
-                    $features .= $feature;
+
+            //Downloads tracking
+            if (!empty(seopress_get_service('GoogleAnalyticsOption')->getDownloadTrackingEnable())) {
+                $downloadTrackingOption = seopress_get_service('GoogleAnalyticsOption')->getDownloadTracking();
+                if (!empty($downloadTrackingOption)) {
+                    $seopress_google_analytics_click_event['download_tracking'] =
+    "window.addEventListener('load', function () {
+        var donwload_links = document.querySelectorAll('a');
+        for (let j = 0; j < donwload_links.length; j++) {
+            donwload_links[j].addEventListener('click', function(e) {
+                var down = this.href.match(/.*\.(" . $downloadTrackingOption . ")(\?.*)?$/);
+                if (down != null) {
+                    gtag('event', 'click', {'event_category': 'downloads','event_label' : this.href});
+                }
+            });
+            }
+        });
+    ";
+                    $seopress_google_analytics_click_event['download_tracking'] = apply_filters('seopress_gtag_download_tracking_ev', $seopress_google_analytics_click_event['download_tracking']);
+                    $seopress_google_analytics_html .= $seopress_google_analytics_click_event['download_tracking'];
                 }
             }
-            $features .= '}';
+
+            //Affiliate tracking
+            if (!empty(seopress_get_service('GoogleAnalyticsOption')->getAffiliateTrackingEnable())) {
+                $affiliateTrackingOption = seopress_get_service('GoogleAnalyticsOption')->getAffiliateTracking();
+                if (!empty($affiliateTrackingOption)) {
+                    $seopress_google_analytics_click_event['outbound_tracking'] =
+    "window.addEventListener('load', function () {
+        var outbound_links = document.querySelectorAll('a');
+        for (let k = 0; k < outbound_links.length; k++) {
+            outbound_links[k].addEventListener('click', function(e) {
+                var out = this.href.match(/(?:\/" . $affiliateTrackingOption . "\/)/gi);
+                if (out != null) {
+                    gtag('event', 'click', {'event_category': 'outbound/affiliate','event_label' : this.href});
+                }
+            });
+            }
+        });";
+                    $seopress_google_analytics_click_event['outbound_tracking'] = apply_filters('seopress_gtag_outbound_tracking_ev', $seopress_google_analytics_click_event['outbound_tracking']);
+                    $seopress_google_analytics_html .= $seopress_google_analytics_click_event['outbound_tracking'];
+                }
+            }
+
+            //Phone tracking
+            if (!empty(seopress_get_service('GoogleAnalyticsOption')->getPhoneTracking())) {
+                $seopress_google_analytics_click_event['phone_tracking'] =
+    "window.addEventListener('load', function () {
+        var links = document.querySelectorAll('a');
+        for (let i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function(e) {
+                var n = this.href.includes('tel:');
+                if (n === true) {
+                    gtag('event', 'click', {'event_category': 'phone','event_label' : this.href.slice(4)});
+                }
+            });
+        }
+    });";
+                $seopress_google_analytics_click_event['phone_tracking'] = apply_filters('seopress_gtag_phone_tracking_ev', $seopress_google_analytics_click_event['phone_tracking']);
+                $seopress_google_analytics_html .= $seopress_google_analytics_click_event['phone_tracking'];
+            }
+
+            do_action('seopress_ga4_before_sending_data');
+
+            //Send data
+            $features = '';
+            if ( ! empty($seopress_google_analytics_config['cd']['cd_logged_in']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_cpt']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_tags']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_categories']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_author']) ||
+                    ! empty($seopress_google_analytics_config['cd']['cd_hook'])) {
+                $seopress_google_analytics_config['cd']['cd_start'] = "'custom_map': {";
+            }
+            if ( ! empty($seopress_google_analytics_config)) {
+                if ( ! empty($seopress_google_analytics_config['cd']['cd_start'])) {
+                    array_unshift($seopress_google_analytics_config['cd'], $seopress_google_analytics_config['cd']['cd_start']);
+                    unset($seopress_google_analytics_config['cd']['cd_start']);
+                }
+                $features = ', {';
+                foreach ($seopress_google_analytics_config as $key => $feature) {
+                    if ('cd' == $key) {
+                        foreach ($feature as $_key => $cd) {
+                            $features .= $cd;
+                        }
+                    } else {
+                        $features .= $feature;
+                    }
+                }
+                $features .= '}';
+            }
         }
 
         //Measurement ID
         if ('' !== seopress_get_service('GoogleAnalyticsOption')->getGA4()) {
-            $seopress_gtag_ga4 = "gtag('config', '" . seopress_get_service('GoogleAnalyticsOption')->getGA4() . "' " . $features . ');';
+            $seopress_gtag_ga4 = "\n gtag('config', '" . seopress_get_service('GoogleAnalyticsOption')->getGA4() . "' " . $features . ');';
             $seopress_gtag_ga4 = apply_filters('seopress_gtag_ga4', $seopress_gtag_ga4);
             $seopress_google_analytics_html .= $seopress_gtag_ga4;
             $seopress_google_analytics_html .= "\n";
         }
 
         //Ads
-        $adsOptions = seopress_get_service('GoogleAnalyticsOption')->getAds();
-        if (!empty($adsOptions)) {
-            $seopress_gtag_ads = "gtag('config', '" . $adsOptions . "');";
-            $seopress_gtag_ads = apply_filters('seopress_gtag_ads', $seopress_gtag_ads);
-            $seopress_google_analytics_html .= $seopress_gtag_ads;
-            $seopress_google_analytics_html .= "\n";
-        }
-
-        $events = '';
-        if ( ! empty($seopress_google_analytics_event)) {
-            foreach ($seopress_google_analytics_event as $event) {
-                $seopress_google_analytics_html .= $event;
+        if (!isset($_COOKIE['seopress-user-consent-close'])) {
+            $adsOptions = seopress_get_service('GoogleAnalyticsOption')->getAds();
+            if (!empty($adsOptions)) {
+                $seopress_gtag_ads = "\n gtag('config', '" . $adsOptions . "');";
+                $seopress_gtag_ads = apply_filters('seopress_gtag_ads', $seopress_gtag_ads);
+                $seopress_google_analytics_html .= $seopress_gtag_ads;
                 $seopress_google_analytics_html .= "\n";
+            }
+
+            $events = '';
+            if ( ! empty($seopress_google_analytics_event)) {
+                foreach ($seopress_google_analytics_event as $event) {
+                    $seopress_google_analytics_html .= $event;
+                    $seopress_google_analytics_html .= "\n";
+                }
             }
         }
 

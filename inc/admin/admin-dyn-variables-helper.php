@@ -1,4 +1,5 @@
 <?php
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_get_dyn_variables()
 {

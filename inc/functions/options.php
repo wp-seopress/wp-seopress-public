@@ -232,7 +232,6 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
     }
 
     function seopress_cookies_user_consent() {
-        //check_ajax_referer( 'seopress_cookies_user_consent_nonce', '_ajax_nonce', true );
         if ('1' === seopress_get_service('GoogleAnalyticsOption')->getHalfDisable()) {//no user consent required
             wp_send_json_success();
         } else {
@@ -299,6 +298,17 @@ if ('1' == seopress_get_toggle_option('google-analytics')) {
     }
     add_action('wp_ajax_seopress_cookies_user_consent', 'seopress_cookies_user_consent');
     add_action('wp_ajax_nopriv_seopress_cookies_user_consent', 'seopress_cookies_user_consent');
+
+    function seopress_cookies_user_consent_close() {
+        include_once dirname(__FILE__) . '/options-google-analytics.php'; //Google Analytics
+
+        $data = [];
+        $data['gtag_consent_js'] = seopress_google_analytics_js(false);
+
+        wp_send_json_success($data);
+    }
+    add_action('wp_ajax_seopress_cookies_user_consent_close', 'seopress_cookies_user_consent_close');
+    add_action('wp_ajax_nopriv_seopress_cookies_user_consent_close', 'seopress_cookies_user_consent_close');
 }
 
 add_action('wp', 'seopress_load_redirections_options', 0);
@@ -380,7 +390,7 @@ if ('1' === seopress_get_toggle_option('advanced')) {
 
         if ($post) {
             $_seopress_robots_primary_cat = get_post_meta($post->ID, '_seopress_robots_primary_cat', true);
-            if (isset($_seopress_robots_primary_cat) && '' != $_seopress_robots_primary_cat && 'none' != $_seopress_robots_primary_cat) {
+            if (isset($_seopress_robots_primary_cat) && '' != $_seopress_robots_primary_cat && 'none' != $_seopress_robots_primary_cat && '0' != $_seopress_robots_primary_cat) {
                 if (null != $post->post_type && 'post' == $post->post_type) {
                     $primary_cat = get_category($_seopress_robots_primary_cat);
                 }
@@ -404,7 +414,7 @@ if ('1' === seopress_get_toggle_option('advanced')) {
         if ($post) {
             $_seopress_robots_primary_cat = get_post_meta($post->ID, '_seopress_robots_primary_cat', true);
 
-            if (isset($_seopress_robots_primary_cat) && '' != $_seopress_robots_primary_cat && 'none' != $_seopress_robots_primary_cat) {
+            if (isset($_seopress_robots_primary_cat) && '' != $_seopress_robots_primary_cat && 'none' != $_seopress_robots_primary_cat && '0' != $_seopress_robots_primary_cat) {
                 if (null != $post->post_type && 'product' == $post->post_type) {
                     $primary_cat = get_term($_seopress_robots_primary_cat, 'product_cat');
                 }

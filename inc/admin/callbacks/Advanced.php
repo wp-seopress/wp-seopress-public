@@ -488,6 +488,16 @@ esc_html($check)
 );
 }
 
+function seopress_advanced_advanced_baidu_callback() {
+	$options = get_option('seopress_advanced_option_name');
+	$check   = isset($options['seopress_advanced_advanced_baidu']) ? $options['seopress_advanced_advanced_baidu'] : null;
+
+	printf(
+'<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_baidu]" aria-label="' . __('Baidu site verification', 'wp-seopress') . '" placeholder="' . esc_html__('Enter Baidu meta value site verification', 'wp-seopress') . '" value="%s"/>',
+esc_html($check)
+);
+}
+
 function seopress_advanced_appearance_adminbar_callback() {
 	$options = get_option('seopress_advanced_option_name');
 

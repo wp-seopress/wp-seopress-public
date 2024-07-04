@@ -1,7 +1,5 @@
 <?php
-if ( ! defined('ABSPATH')) {
-	exit;
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Export SEOPress metadata to CSV
@@ -47,17 +45,34 @@ function seopress_metadata_export() {
         $term_export = esc_attr($_POST['term_export']);
     }
 
-    //Get post types
-    $seopress_get_post_types = [];
-    $postTypes = seopress_get_service('WordPressData')->getPostTypes();
-    foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
-        $seopress_get_post_types[] = $seopress_cpt_key;
+    $cpt_export = [];
+    if (isset($_POST['cptData'])) {
+        foreach ($_POST['cptData'] as $formData) {
+            if ($formData['name'] === 'post_types[]') {
+                $cpt_export[] = esc_attr($formData['value']);
+            }
+        }
     }
 
+    $tax_export = [];
+    if (isset($_POST['taxData'])) {
+        foreach ($_POST['taxData'] as $formData) {
+            if ($formData['name'] === 'taxonomies[]') {
+                $tax_export[] = esc_attr($formData['value']);
+            }
+        }
+    }
+
+    //Get post types
+    $seopress_get_post_types = isset($cpt_export) ? $cpt_export : [];
+
     //Get taxonomies
-    $seopress_get_taxonomies = [];
-    foreach (seopress_get_service('WordPressData')->getTaxonomies() as $seopress_tax_key => $seopress_tax_value) {
-        $seopress_get_taxonomies[] = $seopress_tax_key;
+    $seopress_get_taxonomies = isset($tax_export) ? $tax_export : [];
+
+    if (empty($seopress_get_post_types) && empty($seopress_get_taxonomies)) {
+        wp_send_json_error();
+
+        return;
     }
 
     global $wpdb;
@@ -66,18 +81,23 @@ function seopress_metadata_export() {
     //Count posts
     $count_items = 0;
     $i     = 1;
-    $sql   = '(';
-    $count = count($seopress_get_post_types);
-    foreach ($seopress_get_post_types as $cpt) {
-        $sql .= '(post_type = "' . $cpt . '")';
 
-        if ($i < $count) {
-            $sql .= ' OR ';
+    if (empty($seopress_get_post_types)) {
+        $sql = '((post_type = "post"))';
+    } else {
+        $sql   = '(';
+        $count = count($seopress_get_post_types);
+        foreach ($seopress_get_post_types as $cpt) {
+            $sql .= '(post_type = "' . $cpt . '")';
+
+            if ($i < $count) {
+                $sql .= ' OR ';
+            }
+
+            ++$i;
         }
-
-        ++$i;
+        $sql .= ')';
     }
-    $sql .= ')';
 
     $total_count_posts = (int) $wpdb->get_var("SELECT count(*)
     FROM {$wpdb->posts}
@@ -143,7 +163,7 @@ function seopress_metadata_export() {
 
     //Posts
     if ('done' != $post_export) {
-        if ($offset > $total_count_posts) {
+        if ($offset > $total_count_posts || empty($seopress_get_post_types)) {
             wp_reset_query();
             $count_items = $total_count_posts;
             //Reset offset once Posts export is done
@@ -247,7 +267,7 @@ function seopress_metadata_export() {
         }
     } elseif ('done' != $term_export) {
         //Terms
-        if ($offset > $total_count_terms) {
+        if ($offset > $total_count_terms || empty($seopress_get_taxonomies)) {
             $count_items = $total_count_terms + $total_count_posts;
             update_option('seopress_metadata_csv', $csv, false);
             $post_export = 'done';

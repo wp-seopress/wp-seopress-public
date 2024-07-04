@@ -386,4 +386,13 @@ class SocialOption
     public function getSocialTwitterImgDefault() {
         return $this->searchOptionByKey('seopress_social_twitter_card_img');
     }
+
+    /**
+     * @since 7.8.0
+     *
+     * @return string
+     */
+    public function getSocialLIImgSize() {
+        return $this->searchOptionByKey('seopress_social_li_img_size');
+    }
 }

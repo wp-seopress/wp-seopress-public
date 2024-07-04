@@ -7,7 +7,7 @@ add_settings_section(
     'seopress_setting_section_advanced_advanced', // ID
     '',
     //__("Advanced","wp-seopress"), // Title
-    'print_section_info_advanced_advanced', // Callback
+    'seopress_print_section_info_advanced_advanced', // Callback
     'seopress-settings-admin-advanced-advanced' // Page
 );
 
@@ -16,7 +16,7 @@ add_settings_section(
     'seopress_setting_section_advanced_advanced_crawling', // ID
     '',
     //__("Crawling Optimization","wp-seopress"), // Title
-    'print_section_info_advanced_advanced_crawling', // Callback
+    'seopress_print_section_info_advanced_advanced_crawling', // Callback
     'seopress-settings-admin-advanced-advanced' // Page
 );
 
@@ -161,7 +161,7 @@ add_settings_section(
     'seopress_setting_section_advanced_advanced_search_engines', // ID
     '',
     //__("Search engines validation","wp-seopress"), // Title
-    'print_section_info_advanced_advanced_search_engines', // Callback
+    'seopress_print_section_info_advanced_advanced_search_engines', // Callback
     'seopress-settings-admin-advanced-advanced' // Page
 );
 
@@ -197,12 +197,20 @@ add_settings_field(
     'seopress_setting_section_advanced_advanced_search_engines' // Section
 );
 
+add_settings_field(
+    'seopress_advanced_advanced_baidu', // ID
+    __('Baidu site verification', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_baidu_callback', // Callback
+    'seopress-settings-admin-advanced-advanced', // Page
+    'seopress_setting_section_advanced_advanced_search_engines' // Section
+);
+
 //Appearance SECTION=======================================================================
 add_settings_section(
     'seopress_setting_section_advanced_appearance', // ID
     '',
     //__("Appearance","wp-seopress"), // Title
-    'print_section_info_advanced_appearance', // Callback
+    'seopress_print_section_info_advanced_appearance', // Callback
     'seopress-settings-admin-advanced-appearance' // Page
 );
 
@@ -211,7 +219,7 @@ add_settings_section(
     'seopress_setting_section_advanced_appearance_metabox', // ID
     '',
     //__("Metaboxes","wp-seopress"), // Title
-    'print_section_info_advanced_appearance_metabox', // Callback
+    'seopress_print_section_info_advanced_appearance_metabox', // Callback
     'seopress-settings-admin-advanced-appearance' // Page
 );
 
@@ -260,7 +268,7 @@ add_settings_section(
     'seopress_setting_section_advanced_appearance_admin_bar', // ID
     '',
     //__("Admin bar","wp-seopress"), // Title
-    'print_section_info_advanced_appearance_admin_bar', // Callback
+    'seopress_print_section_info_advanced_appearance_admin_bar', // Callback
     'seopress-settings-admin-advanced-appearance' // Page
 );
 
@@ -285,7 +293,7 @@ add_settings_section(
     'seopress_setting_section_advanced_appearance_dashboard', // ID
     '',
     //__("Dashboard","wp-seopress"), // Title
-    'print_section_info_advanced_appearance_dashboard', // Callback
+    'seopress_print_section_info_advanced_appearance_dashboard', // Callback
     'seopress-settings-admin-advanced-appearance' // Page
 );
 
@@ -294,7 +302,7 @@ add_settings_section(
     'seopress_setting_section_advanced_appearance_col', // ID
     '',
     //__("Columns","wp-seopress"), // Title
-    'print_section_info_advanced_appearance_col', // Callback
+    'seopress_print_section_info_advanced_appearance_col', // Callback
     'seopress-settings-admin-advanced-appearance' // Page
 );
 
@@ -391,7 +399,7 @@ add_settings_section(
     'seopress_setting_section_advanced_appearance_misc', // ID
     '',
     //__("Misc","wp-seopress"), // Title
-    'print_section_info_advanced_appearance_misc', // Callback
+    'seopress_print_section_info_advanced_appearance_misc', // Callback
     'seopress-settings-admin-advanced-appearance' // Page
 );
 
@@ -408,7 +416,7 @@ add_settings_section(
     'seopress_setting_section_advanced_security', // ID
     '',
     //__("Security","wp-seopress"), // Title
-    'print_section_info_advanced_security', // Callback
+    'seopress_print_section_info_advanced_security', // Callback
     'seopress-settings-admin-advanced-security' // Page
 );
 
@@ -424,7 +432,7 @@ add_settings_section(
     'seopress_setting_section_advanced_security_roles', // ID
     '',
     //__("Security","wp-seopress"), // Title
-    'print_section_info_advanced_security_roles', // Callback
+    'seopress_print_section_info_advanced_security_roles', // Callback
     'seopress-settings-admin-advanced-security' // Page
 );
 

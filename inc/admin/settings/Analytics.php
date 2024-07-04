@@ -7,7 +7,7 @@ add_settings_section(
     'seopress_setting_section_google_analytics_enable', // ID
     '',
     //__("Google Analytics","wp-seopress"), // Title
-    'print_section_info_google_analytics_enable', // Callback
+    'seopress_print_section_info_google_analytics_enable', // Callback
     'seopress-settings-admin-google-analytics-enable' // Page
 );
 
@@ -40,7 +40,7 @@ add_settings_section(
     'seopress_setting_section_google_analytics_gdpr', // ID
     '',
     //__("Google Analytics","wp-seopress"), // Title
-    'print_section_info_google_analytics_gdpr', // Callback
+    'seopress_print_section_info_google_analytics_gdpr', // Callback
     'seopress-settings-admin-google-analytics-gdpr' // Page
 );
 
@@ -250,7 +250,7 @@ add_settings_section(
     'seopress_setting_section_google_analytics_custom_tracking', // ID
     '',
     //__("Google Analytics","wp-seopress"), // Title
-    'print_section_info_google_analytics_custom_tracking', // Callback
+    'seopress_print_section_info_google_analytics_custom_tracking', // Callback
     'seopress-settings-admin-google-analytics-custom-tracking' // Page
 );
 
@@ -284,7 +284,7 @@ add_settings_section(
     'seopress_setting_section_google_analytics_events', // ID
     '',
     //__("Google Analytics","wp-seopress"), // Title
-    'print_section_info_google_analytics_events', // Callback
+    'seopress_print_section_info_google_analytics_events', // Callback
     'seopress-settings-admin-google-analytics-events' // Page
 );
 
@@ -342,7 +342,7 @@ add_settings_section(
     'seopress_setting_section_google_analytics_custom_dimensions', // ID
     '',
     //__("Google Analytics","wp-seopress"), // Title
-    'print_section_info_google_analytics_custom_dimensions', // Callback
+    'seopress_print_section_info_google_analytics_custom_dimensions', // Callback
     'seopress-settings-admin-google-analytics-custom-dimensions' // Page
 );
 
@@ -392,7 +392,7 @@ add_settings_section(
     'seopress_setting_section_google_analytics_advanced', // ID
     '',
     //__("Advanced","wp-seopress"), // Title
-    'print_section_info_google_analytics_advanced', // Callback
+    'seopress_print_section_info_google_analytics_advanced', // Callback
     'seopress-settings-admin-google-analytics-advanced' // Page
 );
 
@@ -409,7 +409,7 @@ add_settings_section(
     'seopress_setting_section_google_analytics_matomo', // ID
     '',
     //__("Google Analytics","wp-seopress"), // Title
-    'print_section_info_google_analytics_matomo', // Callback
+    'seopress_print_section_info_google_analytics_matomo', // Callback
     'seopress-settings-admin-google-analytics-matomo' // Page
 );
 
@@ -521,7 +521,7 @@ add_settings_section(
     'seopress_setting_section_google_analytics_clarity', // ID
     '',
     //__("Microsoft Clarity","wp-seopress"), // Title
-    'print_section_info_google_analytics_clarity', // Callback
+    'seopress_print_section_info_google_analytics_clarity', // Callback
     'seopress-settings-admin-google-analytics-clarity' // Page
 );
 

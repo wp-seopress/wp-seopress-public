@@ -140,7 +140,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                     <?php do_action('seopress_titles_meta_desc_input_before', $pagenow); ?>
                                 </span>
                                 <textarea id="seopress_titles_desc_meta" rows="4" name="seopress_titles_desc"
-                                    class="components-text-control__input"
+                                    class="components-text-control__textarea"
                                     placeholder="<?php esc_html_e('Enter your meta description', 'wp-seopress'); ?>"
                                     aria-label="<?php esc_attr_e('Meta description', 'wp-seopress'); ?>"><?php echo esc_html($seopress_titles_desc); ?></textarea>
                             </p>
@@ -378,14 +378,14 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                     class="components-text-control__input"
                                     placeholder="<?php esc_html_e('Enter your Facebook title', 'wp-seopress'); ?>"
                                     aria-label="<?php _e('Facebook Title', 'wp-seopress'); ?>"
-                                    value="<?php echo $seopress_social_fb_title; ?>" />
+                                    value="<?php echo esc_html($seopress_social_fb_title); ?>" />
                             </p>
                             <p>
                                 <label for="seopress_social_fb_desc_meta"><?php _e('Facebook description', 'wp-seopress'); ?></label>
                                 <textarea id="seopress_social_fb_desc_meta" name="seopress_social_fb_desc"
-                                    class="components-text-control__input"
+                                    class="components-text-control__textarea"
                                     placeholder="<?php esc_html_e('Enter your Facebook description', 'wp-seopress'); ?>"
-                                    aria-label="<?php _e('Facebook description', 'wp-seopress'); ?>"><?php echo $seopress_social_fb_desc; ?></textarea>
+                                    aria-label="<?php _e('Facebook description', 'wp-seopress'); ?>"><?php echo esc_html($seopress_social_fb_desc); ?></textarea>
                             </p>
                             <p>
                                 <label for="seopress_social_fb_img_meta">
@@ -395,7 +395,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                     class="components-text-control__input seopress_social_fb_img_meta"
                                     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>"
                                     aria-label="<?php _e('Facebook Thumbnail', 'wp-seopress'); ?>"
-                                    value="<?php echo $seopress_social_fb_img; ?>" />
+                                    value="<?php echo esc_html($seopress_social_fb_img); ?>" />
                             </p>
                             <p class="description">
                                 <?php _e('Minimum size: 200x200px, ideal ratio 1.91:1, 8Mb max. (e.g. 1640x856px or 3280x1712px for retina screens)', 'wp-seopress'); ?>
@@ -498,21 +498,21 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                     class="components-text-control__input" name="seopress_social_twitter_title"
                                     placeholder="<?php esc_html_e('Enter your X title', 'wp-seopress'); ?>"
                                     aria-label="<?php _e('X Title', 'wp-seopress'); ?>"
-                                    value="<?php echo $seopress_social_twitter_title; ?>" />
+                                    value="<?php echo esc_html($seopress_social_twitter_title); ?>" />
                             </p>
                             <p>
                                 <label for="seopress_social_twitter_desc_meta"><?php _e('X Description', 'wp-seopress'); ?></label>
                                 <textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc"
-                                    class="components-text-control__input"
+                                    class="components-text-control__textarea"
                                     placeholder="<?php esc_html_e('Enter your X description', 'wp-seopress'); ?>"
-                                    aria-label="<?php _e('X description', 'wp-seopress'); ?>"><?php echo $seopress_social_twitter_desc; ?></textarea>
+                                    aria-label="<?php _e('X description', 'wp-seopress'); ?>"><?php echo esc_html($seopress_social_twitter_desc); ?></textarea>
                             </p>
                             <p>
                                 <label for="seopress_social_twitter_img_meta"><?php _e('X Thumbnail', 'wp-seopress'); ?></label>
                                 <input id="seopress_social_twitter_img_meta" type="text"
                                     class="components-text-control__input seopress_social_twitter_img_meta" name="seopress_social_twitter_img"
                                     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>"
-                                    value="<?php echo $seopress_social_twitter_img; ?>" />
+                                    value="<?php echo esc_html($seopress_social_twitter_img); ?>" />
                             </p>
                             <p class="description">
                                 <?php _e('Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 1:1 (2:1 with large card), 5Mb max.', 'wp-seopress'); ?>

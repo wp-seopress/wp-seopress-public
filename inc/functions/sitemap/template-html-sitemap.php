@@ -42,7 +42,7 @@ if (! empty($postslist)) {
             if ('1' !== seopress_get_service('SitemapOption')->getHtmlNoHierarchy()) {
                 if ($cpt_key === 'post' || $cpt_key === 'product') {
                     $tax = $cpt_key ==='product' ? $tax = $product_cat_slug  : $tax = 'category';
-                    if (!has_term($cat, $tax, $post)) {
+                    if (isset($cat) && !has_term($cat, $tax, $post)) {
                         continue;
                     }
                 }
@@ -55,7 +55,10 @@ if (! empty($postslist)) {
             if ('1' !== seopress_get_service('SitemapOption')->getHtmlDate()) {
                 $date = apply_filters('seopress_sitemaps_html_post_date', $date, $cpt_key);
                 if (true === $date) {
-                    $html .= ' - ' . get_the_date('j F Y', $post);
+                    $date_format = 'j F Y';
+                    $date_format = apply_filters( 'seopress_sitemaps_html_post_date_format', $date_format );
+
+                    $html .= ' - ' . get_the_date($date_format, $post);
                 }
             }
             $html .= '</li>';

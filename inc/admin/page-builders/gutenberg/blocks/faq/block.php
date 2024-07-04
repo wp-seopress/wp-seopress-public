@@ -1,8 +1,6 @@
 <?php
 
-if (! defined('ABSPATH')) {
-    die();
-}
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_block_faq_render_frontend( $attributes ){
     if (is_admin() || defined('REST_REQUEST')) {

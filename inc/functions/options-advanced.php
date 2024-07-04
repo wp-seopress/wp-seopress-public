@@ -182,6 +182,22 @@ function seopress_advanced_advanced_yandex_hook() {
 }
 add_action('wp_head', 'seopress_advanced_advanced_yandex_hook', 2);
 
+//Baidu site verification
+function seopress_advanced_advanced_baidu_hook() {
+    if (is_home() || is_front_page()) {
+        $contentBaidu = seopress_get_service('AdvancedOption')->getAdvancedBaiduVerification();
+
+        if(empty($contentBaidu)){
+            return;
+        }
+
+        $baidu = '<meta name="baidu-site-verification" content="' . $contentBaidu . '">';
+        $baidu .= "\n";
+        echo $baidu;
+    }
+}
+add_action('wp_head', 'seopress_advanced_advanced_baidu_hook', 2);
+
 //Automatic alt text based on target kw
 if (!empty(seopress_get_service('AdvancedOption')->getAdvancedImageAutoAltTargetKw())) {
     function seopress_auto_img_alt_thumb_target_kw($atts, $attachment) {

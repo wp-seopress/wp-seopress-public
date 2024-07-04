@@ -606,3 +606,36 @@ function seopress_social_twitter_card_img_size_callback()
         esc_attr($options['seopress_social_twitter_card_img_size']);
     }
 }
+
+function seopress_social_li_img_size_callback()
+{
+    $options = get_option('seopress_social_option_name');
+
+    $selected = isset($options['seopress_social_li_img_size']) ? $options['seopress_social_li_img_size'] : 'full'; ?>
+<?php
+    $img_sizes = [];
+    $img_sizes = get_intermediate_image_sizes();
+    $img_sizes[] = 'full';
+?>
+<select id="seopress_social_li_img_size" name="seopress_social_option_name[seopress_social_li_img_size]">
+    <?php
+        foreach($img_sizes as $size) {
+            ?>
+                <option <?php if ($size == $selected) { ?>
+                    selected="selected"
+                    <?php } ?>
+                    value="<?php echo esc_attr($size); ?>"><?php echo esc_html($size); ?>
+                </option>
+            <?php
+        }
+    ?>
+</select>
+
+<p class="description">
+    <?php _e('Default: "full"', 'wp-seopress'); ?>
+</p>
+
+<?php if (isset($options['seopress_social_li_img_size'])) {
+        esc_attr($options['seopress_social_li_img_size']);
+    }
+}

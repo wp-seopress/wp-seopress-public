@@ -1,6 +1,7 @@
 <?php
 namespace WPSeoPressElementorAddon\Admin;
 
+defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 class Seopress_Meta_Helper {
 
 	public static function get_meta_fields() {

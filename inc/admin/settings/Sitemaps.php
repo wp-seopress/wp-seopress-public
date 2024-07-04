@@ -7,7 +7,7 @@ add_settings_section(
     'seopress_setting_section_xml_sitemap_general', // ID
     '',
     //__("General","wp-seopress"), // Title
-    'print_section_info_xml_sitemap_general', // Callback
+    'seopress_print_section_info_xml_sitemap_general', // Callback
     'seopress-settings-admin-xml-sitemap-general' // Page
 );
 
@@ -49,7 +49,7 @@ add_settings_section(
     'seopress_setting_section_xml_sitemap_post_types', // ID
     '',
     //__("Post Types","wp-seopress"), // Title
-    'print_section_info_xml_sitemap_post_types', // Callback
+    'seopress_print_section_info_xml_sitemap_post_types', // Callback
     'seopress-settings-admin-xml-sitemap-post-types' // Page
 );
 
@@ -65,7 +65,7 @@ add_settings_section(
     'seopress_setting_section_xml_sitemap_taxonomies', // ID
     '',
     //__("Taxonomies","wp-seopress"), // Title
-    'print_section_info_xml_sitemap_taxonomies', // Callback
+    'seopress_print_section_info_xml_sitemap_taxonomies', // Callback
     'seopress-settings-admin-xml-sitemap-taxonomies' // Page
 );
 
@@ -81,7 +81,7 @@ add_settings_section(
     'seopress_setting_section_html_sitemap', // ID
     '',
     //__("HTML Sitemap","wp-seopress"), // Title
-    'print_section_info_html_sitemap', // Callback
+    'seopress_print_section_info_html_sitemap', // Callback
     'seopress-settings-admin-html-sitemap' // Page
 );
 

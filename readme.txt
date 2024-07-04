@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.5
 Requires PHP: 7.2
-Stable tag: 7.7.2
+Stable tag: 7.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -260,27 +260,28 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 7.7.2 =
-* FIX Do not output post excerpt / content if password protected post
 
-= 7.7.1 =
-* FIX Content analysis with accents
+= 7.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-8/">Read the blog post update</a> =
 
-= 7.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-7/">Read the blog post update</a> =
-* NEW Add GPT-4-Turbo model to our OpenAI integration (PRO)
-* NEW Import post title / term name using our CSV import tool (PRO)
-* NEW Automatically add XML sitemap link to default WordPress robots.txt file (if robots.txt feature from SEOPress PRO is disabled)
-* INFO Refactoring code of our content analysis
-* INFO Add error handling for AI to better understand failed generation (SEO, PRO, AI tab, OpenAI logs section)
-* INFO Improve security by showing SEO metadata from published posts only for our REST API (thanks to Patchstack)
-* INFO Improve WPML compatibility with our content analysis to detect target keywords already used by language
-* FIX Improve detection of custom meta title / description with our content analysis
-* FIX 410/451 on new redirects (PRO)
-* FIX Show only public post types for the HTML sitemap block
-* FIX Prevent failed post update/publishing if IndexNow API key is incorrectly set (SEO, Instant Indexing, Settings tab)
-* FIX Prevent a fatal error in specific cases with the Matomo CRON task (PRO)
-* FIX chart.bundle.js error on SEO Dashboard page if the define SCRIPT_DEBUG is set to TRUE
-* FIX Deprecated Increment on non-alphanumeric string
+* NEW SEO alerts by mail / Slack to get alerted of important SEO issues on your site before it's too late (PRO) 🎉
+* NEW GPT-4o for AI (PRO) 🎉
+* NEW Google Consent v2 for our cookie bar 🎉
+* NEW Allow users to choose the post thumbnail image size for LinkedIn (SEO, Social Networks, LinkedIn tab)
+* NEW Choose which post types and / or taxonomies to export metadata as CSV file (PRO)
+* NEW Validate your site for Baidu Webmaster tools (SEO, Advanced, Advanced tab, Search engines validation section)
+* NEW 'seopress_sitemaps_html_post_date_format' hook to filter the post date format in HTML sitemap (https://www.seopress.org/support/hooks/filter-the-post-date-format-in-html-sitemap/)
+* INFO Prevent other plugins to display notices in Wizard footer
+* INFO Users with edit_posts compatibility can now run AI bulk actions
+* INFO Improve security for contributors user role
+* INFO Simplifying the output of meta robots
+* FIX XML Sitemaps redirects from default ones if Enable XML Sitemap is unchecked
+* FIX Prevent a fatal error with the SEO metabox in rare cases
+* FIX Min height for textarea of the SEO metabox
+* FIX JS error with Elementor and our content analysis feature
+* FIX Undefined variable $cat in HTML sitemap
+* FIX PHP Warnings with %%_ct_your_custom_taxonomy%% dynamic if no terms associated to the post
+* FIX An issue with primary category equals to 0
+* FIX An issue with primary category in breadcrumbs in specific cases
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

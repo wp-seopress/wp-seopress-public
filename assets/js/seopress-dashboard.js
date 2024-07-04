@@ -64,6 +64,7 @@ jQuery(document).ready(function ($) {
         "local-business",
         "woocommerce",
         "edd",
+        "alerts",
         "dublin-core",
         "rich-snippets",
         "breadcrumbs",

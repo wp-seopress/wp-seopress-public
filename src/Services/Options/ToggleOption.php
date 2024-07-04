@@ -71,6 +71,15 @@ class ToggleOption {
     }
 
     /**
+     * @since 7.8.0
+     *
+     * @return string
+     */
+    public function getToggleAlerts(){
+        return $this->searchOptionByKey('alerts');
+    }
+
+    /**
      * @since 6.6.0
      *
      * @return string
