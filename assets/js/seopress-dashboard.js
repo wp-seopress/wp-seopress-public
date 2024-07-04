@@ -29,6 +29,7 @@ jQuery(document).ready(function ($) {
         "notice-insights",
         "notice-robots-txt",
         "notice-robots-txt-valid",
+        "notice-wpml-active",
     ]
     notices.forEach(function (item) {
         $('#' + item).on('click', function () {

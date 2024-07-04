@@ -113,6 +113,15 @@ class NoticeOption
     }
 
     /**
+     * @since 7.6.0
+     *
+     * @return string
+     */
+    public function getNoticeWPMLActive(){
+        return $this->searchOptionByKey('notice-wpml-active');
+    }
+
+    /**
      * @since 6.0.0
      *
      * @return string

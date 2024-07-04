@@ -27,6 +27,14 @@ add_settings_field(
     'seopress_setting_section_google_analytics_enable' // Section
 );
 
+add_settings_field(
+    'seopress_google_analytics_ads', // ID
+    __('Enable Google Ads', 'wp-seopress'), // Title
+    'seopress_google_analytics_ads_callback', // Callback
+    'seopress-settings-admin-google-analytics-enable', // Page
+    'seopress_setting_section_google_analytics_enable' // Section
+);
+
 //Cookie bar / GDPR SECTION================================================================
 add_settings_section(
     'seopress_setting_section_google_analytics_gdpr', // ID
@@ -234,24 +242,6 @@ add_settings_field(
     'seopress_google_analytics_cb_btn_sec_col_hov_callback', // Callback
     'seopress-settings-admin-google-analytics-gdpr', // Page
     'seopress_setting_section_google_analytics_gdpr' // Section
-);
-
-//Google Analytics Tracking SECTION========================================================
-
-add_settings_section(
-    'seopress_setting_section_google_analytics_features', // ID
-    '',
-    //__("Google Analytics","wp-seopress"), // Title
-    'print_section_info_google_analytics_features', // Callback
-    'seopress-settings-admin-google-analytics-features' // Page
-);
-
-add_settings_field(
-    'seopress_google_analytics_ads', // ID
-    __('Enable Google Ads', 'wp-seopress'), // Title
-    'seopress_google_analytics_ads_callback', // Callback
-    'seopress-settings-admin-google-analytics-features', // Page
-    'seopress_setting_section_google_analytics_features' // Section
 );
 
 //Google Analytics Custom Tracking SECTION=========================================================

@@ -368,6 +368,22 @@ function seopress_get_locale() {
 }
 
 /**
+ * Extract correct locale in ISO format from get_locale().
+ *
+ * @return string locale
+ */
+function seopress_normalized_locale($current_locale) {
+    // Extract primary language and region
+    $primary_language = locale_get_primary_language($current_locale);
+    $region = locale_get_region($current_locale);
+
+    // Check if region is available, if not, return only the primary language
+    $normalized_locale = $primary_language . ($region ? '_' . $region : '');
+
+    return $normalized_locale;
+}
+
+/**
  * Returns the language code by supporting multilingual plugins
  *
  * @since 6.8
@@ -378,7 +394,7 @@ function seopress_get_locale() {
  */
 function seopress_get_current_lang() {
     //Default
-    $lang = get_locale();
+    $lang = seopress_normalized_locale(get_locale());
 
     //Polylang
     if (function_exists('pll_current_language')) {

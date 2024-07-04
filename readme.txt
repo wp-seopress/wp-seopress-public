@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdu
 Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.2
-Stable tag: 7.5.2.1
+Stable tag: 7.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -258,47 +258,23 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 7.5.2.1 =
-* FIX GA4 script
-
-= 7.5.2 =
-* INFO Improve compatibility with The Events Calendar plugin
-* INFO Improve compatibility with Polylang and our Breadcrumbs (PRO)
-* FIX GA4 purchases tracking (PRO)
-* FIX SEO score column in post type list
-
-= 7.5.1 =
-* FIX Warnings with REST API
-* FIX Keywords in permalink / Target keywords already use in Content Analysis
-
-= 7.5.0.3 =
-* FIX Integration with AMP/MainWP
-
-= 7.5.0.2 =
-* FIX Fatal error
-
-= 7.5.0.1 =
-* FIX Fatal error
-
-= 7.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-5/">Read the blog post update</a> =
-* NEW SEOPress REST API with context 🎉
-* NEW Custom table for our content analysis feature 🎉
-* NEW Course schema updated with new properties (PRO)
-* NEW Quickly block search results crawling with robots.txt file (PRO)
-* NEW Add VAT ID and Telephone fields to the installation wizard
-* INFO Rename Twitter to X
-* INFO Increase the default min height of our Universal SEO Metabox
-* INFO Disable search results indexing on first time configuration to prevent SPAM referer
-* FIX Migration tools from other SEO plugins in specific cases
-* FIX PHP Warning $seopress_redirections_enabled_regex
-* FIX Ecwid fatal errors
-* FIX Error when deleting content analysis scans
-* FIX Incorrect counters for meta description in SEO metabox
-* FIX Bricks compatibility issue on homepage with our universal SEO metabox
-* FIX A non-breaking space with the directive on RSS feeds (robots.txt tab)
-* FIX "seopress_ai_openai_alt_text" filter for AI/Alt text
-* FIX Deprecated mb_convert_encoding function with PHP >= 8.2
-* FIX A notification related to Google Search Console verification meta tag
-* FIX Invalid datetime value for "uploadDate" + timezone for Video schema
+= 7.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-6/">Read the blog post update</a> =
+* NEW Import redirections from AIOSEO (PRO)
+* NEW Remove Emoji scripts for older browsers to improve crawling (SEO, Advanced, Advanced tab)
+* NEW Add technical requirements to the wizard
+* NEW Google Analytics consent mode v2 for our cookie banner (beta)
+* INFO Bump WordPress version to 6.5
+* INFO Improve UI for textarea using code
+* INFO Improve UI in XML sitemaps and Titles and metas global settings
+* INFO Add a new notification for WPML users to translate SEOPress global settings
+* INFO Strengthening security
+* INFO Improve compatibility with specific locales
+* INFO Improve compatibility with Polylang (thanks to @sebastienserre from PLL team)
+* INFO We no longer "Remove View details modal & update notification links" (White Label feature - PRO) for super admin and/or user roles with "update_plugins" capability
+* FIX Improve compatibility with HappyFiles plugin
+* FIX 'seopress_social_twitter_card_thumb' and 'seopress_social_og_thumb' filters for our REST API
+* FIX Deprecated: Automatic conversion of false to array
+* FIX "Object object" error for new post in SEO metabox
+* FIX PHP "Count" error with content analysis
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

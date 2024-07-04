@@ -66,7 +66,8 @@ function seopress_get_docs_links()
 			'thumbnail' => 'https://support.google.com/programmable-search/answer/1626955?hl=en',
 			'wrong_meta' => 'https://www.seopress.org/support/guides/google-uses-the-wrong-meta-title-meta-description-in-search-results/',
 			'alt_title' => 'https://developers.google.com/search/docs/appearance/site-names#content-guidelines',
-			'manage' => 'https://www.seopress.org/support/guides/manage-titles-meta-descriptions/'
+			'manage' => 'https://www.seopress.org/support/guides/manage-titles-meta-descriptions/',
+            'add_theme_support' => 'https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/'
 		],
 		'sitemaps' => [
 			'error' => [
@@ -189,7 +190,12 @@ function seopress_get_docs_links()
 		],
 		'insights' => [
 			'slack_webhook' => 'https://www.seopress.org/support/guides/how-to-setup-slack-notifications-with-seopress-insights/'
-		]
+        ],
+        'integrations' => [
+            'wpml' => [
+                'translate' => 'https://www.seopress.org/support/guides/translate-seopress-options-with-wpml-polylang/'
+            ]
+        ]
 	];
 
 	if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale()) {
@@ -226,6 +232,7 @@ function seopress_get_docs_links()
 		$docs['titles']['wrong_meta'] = 'https://www.seopress.org/fr/support/guides/google-utilise-une-balise-titre-meta-description-incorrecte-dans-les-resultats-de-recherche/';
 		$docs['titles']['alt_title'] = 'https://developers.google.com/search/docs/appearance/site-names#content-guidelines';
 		$docs['titles']['manage'] = 'https://www.seopress.org/fr/support/guides/gerez-vos-balises-titres-et-metas/';
+		$docs['titles']['add_theme_support'] = 'https://www.seopress.org/fr/support/guides/resoudre-add_theme_support-manquant-dans-votre-theme/';
 
 		$docs['sitemaps']['error']['blank'] = 'https://www.seopress.org/fr/support/guides/mon-plan-de-site-xml-retourne-une-page-blanche/';
 		$docs['sitemaps']['error']['404'] = 'https://www.seopress.org/fr/support/guides/plan-de-site-xml-retourne-erreur-404/';
@@ -315,6 +322,8 @@ function seopress_get_docs_links()
 		$docs['addons']['insights'] = 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-insights/';
 
 		$docs['insights']['slack_webhook'] = 'https://www.seopress.org/fr/support/guides/configurer-les-notifications-slack-avec-seopress-insights/';
+
+        $docs['integrations']['wpml']['translate'] = 'https://www.seopress.org/fr/support/guides/traduire-les-options-de-seopress-avec-wpml-polylang/';
 	}
 
 	$docs['external'] = [

@@ -101,7 +101,7 @@ add_action('wp_head', 'seopress_social_facebook_og_site_name_hook', 1);
 //OG Locale
 function seopress_social_facebook_og_locale_hook() {
     if ('1' === seopress_get_service('SocialOption')->getSocialFacebookOGEnable()) {
-        $seopress_social_og_locale = '<meta property="og:locale" content="' . get_locale() . '">';
+        $seopress_social_og_locale = '<meta property="og:locale" content="' . seopress_normalized_locale(get_locale()) . '">';
 
         include_once ABSPATH . 'wp-admin/includes/plugin.php';
 

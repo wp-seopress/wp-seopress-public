@@ -98,8 +98,8 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <input id="seopress_titles_title_meta" type="text" name="seopress_titles_title"
                                     class="components-text-control__input"
                                     placeholder="<?php esc_html_e('Enter your title', 'wp-seopress'); ?>"
-                                    aria-label="<?php _e('Title', 'wp-seopress'); ?>"
-                                    value="<?php echo $seopress_titles_title; ?>" />
+                                    aria-label="<?php esc_attr_e('Title', 'wp-seopress'); ?>"
+                                    value="<?php echo esc_html($seopress_titles_title); ?>" />
                             </p>
                             <div class="sp-progress">
                                 <div id="seopress_titles_title_counters_progress" class="sp-progress-bar"
@@ -142,7 +142,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
                                 <textarea id="seopress_titles_desc_meta" rows="4" name="seopress_titles_desc"
                                     class="components-text-control__input"
                                     placeholder="<?php esc_html_e('Enter your meta description', 'wp-seopress'); ?>"
-                                    aria-label="<?php _e('Meta description', 'wp-seopress'); ?>"><?php echo $seopress_titles_desc; ?></textarea>
+                                    aria-label="<?php esc_attr_e('Meta description', 'wp-seopress'); ?>"><?php echo esc_html($seopress_titles_desc); ?></textarea>
                             </p>
                             <div class="sp-progress">
                                 <div id="seopress_titles_desc_counters_progress" class="sp-progress-bar"

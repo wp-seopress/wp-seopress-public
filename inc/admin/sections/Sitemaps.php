@@ -169,6 +169,15 @@ function print_section_info_xml_sitemap_post_types()
     <?php _e('Include/Exclude Post Types.', 'wp-seopress'); ?>
 </p>
 
+<div class="seopress-notice">
+    <p>
+        <?php
+            /* translators: %1$s: <code>public => true</code>, %2$s: <code>show_ui => true</code>*/
+            printf(__('Only post types registered with the %1$s and %2$s arguments will be listed here.', 'wp-seopress'), '<code>public => true</code>', '<code>show_ui => true</code>');
+        ?>
+    </p>
+</div>
+
 <?php
 }
 
@@ -180,9 +189,20 @@ function print_section_info_xml_sitemap_taxonomies()
         <?php _e('Taxonomies', 'wp-seopress'); ?>
     </h2>
 </div>
+
 <p>
     <?php _e('Include/Exclude Taxonomies.', 'wp-seopress'); ?>
 </p>
+
+<div class="seopress-notice">
+    <p>
+        <?php
+            /* translators: %1$s: <code>public => true</code>, %2$s: <code>show_ui => true</code>*/
+            printf(__('Only taxonomies registered with the %1$s and %2$s arguments will be listed here.', 'wp-seopress'), '<code>public => true</code>', '<code>show_ui => true</code>');
+        ?>
+    </p>
+    <p><?php _e('Terms without any associated posts will not be listed in your XML sitemaps to prevent 404 errors.','wp-seopress'); ?></p>
+</div>
 
 <?php
 }

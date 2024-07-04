@@ -49,16 +49,16 @@ function seopress_display_seo_term_metaboxe() {
         //init
         $disabled = [];
 
-        wp_enqueue_script('seopress-cpt-tabs-js', SEOPRESS_ASSETS_DIR . '/js/seopress-metabox' . $prefix . '.js', ['jquery-ui-tabs'], SEOPRESS_VERSION);
+        wp_enqueue_script('seopress-cpt-tabs', SEOPRESS_ASSETS_DIR . '/js/seopress-metabox' . $prefix . '.js', ['jquery-ui-tabs'], SEOPRESS_VERSION);
 
         if ('seopress_404' != $typenow) {
             //Tagify
-            wp_enqueue_script('seopress-tagify-js', SEOPRESS_ASSETS_DIR . '/js/tagify' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, true);
+            wp_enqueue_script('seopress-tagify', SEOPRESS_ASSETS_DIR . '/js/tagify' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, true);
             wp_register_style('seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify' . $prefix . '.css', [], SEOPRESS_VERSION);
             wp_enqueue_style('seopress-tagify');
 
             //Register Google Snippet Preview / Content Analysis JS
-            wp_enqueue_script('seopress-cpt-counters-js', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion', 'jquery-ui-autocomplete'], SEOPRESS_VERSION);
+            wp_enqueue_script('seopress-cpt-counters', SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-accordion', 'jquery-ui-autocomplete'], SEOPRESS_VERSION);
 
             $seopress_real_preview = [
                 'seopress_nonce'         => wp_create_nonce('seopress_real_preview_nonce'),
@@ -68,9 +68,9 @@ function seopress_display_seo_term_metaboxe() {
                 'get_preview_meta_title' => wp_create_nonce('get_preview_meta_title'),
                 'get_preview_meta_description' => wp_create_nonce('get_preview_meta_description'),
             ];
-            wp_localize_script('seopress-cpt-counters-js', 'seopressAjaxRealPreview', $seopress_real_preview);
+            wp_localize_script('seopress-cpt-counters', 'seopressAjaxRealPreview', $seopress_real_preview);
 
-            wp_enqueue_script('seopress-media-uploader-js', SEOPRESS_ASSETS_DIR . '/js/seopress-media-uploader' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, false);
+            wp_enqueue_script('seopress-media-uploader', SEOPRESS_ASSETS_DIR . '/js/seopress-media-uploader' . $prefix . '.js', ['jquery'], SEOPRESS_VERSION, false);
             wp_enqueue_media();
         }
 
@@ -158,12 +158,12 @@ function seopress_display_seo_term_metaboxe() {
 
         if (in_array('title-tab', $seo_tabs)) {
             if (!empty($_POST['seopress_titles_title'])) {
-                update_term_meta($term_id, '_seopress_titles_title', esc_html($_POST['seopress_titles_title']));
+                update_term_meta($term_id, '_seopress_titles_title', sanitize_text_field($_POST['seopress_titles_title']));
             } else {
                 delete_term_meta($term_id, '_seopress_titles_title');
             }
             if (!empty($_POST['seopress_titles_desc'])) {
-                update_term_meta($term_id, '_seopress_titles_desc', esc_html($_POST['seopress_titles_desc']));
+                update_term_meta($term_id, '_seopress_titles_desc', sanitize_textarea_field($_POST['seopress_titles_desc']));
             } else {
                 delete_term_meta($term_id, '_seopress_titles_desc');
             }
@@ -195,7 +195,7 @@ function seopress_display_seo_term_metaboxe() {
                 delete_term_meta($term_id, '_seopress_robots_snippet', '');
             }
             if (!empty($_POST['seopress_robots_canonical'])) {
-                update_term_meta($term_id, '_seopress_robots_canonical', esc_html($_POST['seopress_robots_canonical']));
+                update_term_meta($term_id, '_seopress_robots_canonical', sanitize_url($_POST['seopress_robots_canonical']));
             } else {
                 delete_term_meta($term_id, '_seopress_robots_canonical');
             }
@@ -204,62 +204,91 @@ function seopress_display_seo_term_metaboxe() {
         if (in_array('social-tab', $seo_tabs)) {
             //Facebook
             if (!empty($_POST['seopress_social_fb_title'])) {
-                update_term_meta($term_id, '_seopress_social_fb_title', esc_html($_POST['seopress_social_fb_title']));
+                update_term_meta($term_id, '_seopress_social_fb_title', sanitize_text_field($_POST['seopress_social_fb_title']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_fb_title');
             }
             if (!empty($_POST['seopress_social_fb_desc'])) {
-                update_term_meta($term_id, '_seopress_social_fb_desc', esc_html($_POST['seopress_social_fb_desc']));
+                update_term_meta($term_id, '_seopress_social_fb_desc', sanitize_textarea_field($_POST['seopress_social_fb_desc']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_fb_desc');
             }
             if (!empty($_POST['seopress_social_fb_img'])) {
-                update_term_meta($term_id, '_seopress_social_fb_img', esc_html($_POST['seopress_social_fb_img']));
+                update_term_meta($term_id, '_seopress_social_fb_img', sanitize_url($_POST['seopress_social_fb_img']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_fb_img');
             }
             if (!empty($_POST['seopress_social_fb_img_attachment_id']) && !empty($_POST['seopress_social_fb_img'])) {
-                update_term_meta($term_id, '_seopress_social_fb_img_attachment_id', esc_html($_POST['seopress_social_fb_img_attachment_id']));
+                update_term_meta($term_id, '_seopress_social_fb_img_attachment_id', sanitize_text_field($_POST['seopress_social_fb_img_attachment_id']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_fb_img_attachment_id');
             }
             if (!empty($_POST['seopress_social_fb_img_width']) && !empty($_POST['seopress_social_fb_img'])) {
-                update_term_meta($term_id, '_seopress_social_fb_img_width', esc_html($_POST['seopress_social_fb_img_width']));
+                update_term_meta($term_id, '_seopress_social_fb_img_width', sanitize_text_field($_POST['seopress_social_fb_img_width']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_fb_img_width');
             }
             if (!empty($_POST['seopress_social_fb_img_height']) && !empty($_POST['seopress_social_fb_img'])) {
-                update_term_meta($term_id, '_seopress_social_fb_img_height', esc_html($_POST['seopress_social_fb_img_height']));
+                update_term_meta($term_id, '_seopress_social_fb_img_height', sanitize_text_field($_POST['seopress_social_fb_img_height']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_fb_img_height');
             }
 
             //Twitter
             if (!empty($_POST['seopress_social_twitter_title'])) {
-                update_term_meta($term_id, '_seopress_social_twitter_title', esc_html($_POST['seopress_social_twitter_title']));
+                update_term_meta($term_id, '_seopress_social_twitter_title', sanitize_text_field($_POST['seopress_social_twitter_title']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_twitter_title');
             }
             if (!empty($_POST['seopress_social_twitter_desc'])) {
-                update_term_meta($term_id, '_seopress_social_twitter_desc', esc_html($_POST['seopress_social_twitter_desc']));
+                update_term_meta($term_id, '_seopress_social_twitter_desc', sanitize_textarea_field($_POST['seopress_social_twitter_desc']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_twitter_desc');
             }
             if (!empty($_POST['seopress_social_twitter_img'])) {
-                update_term_meta($term_id, '_seopress_social_twitter_img', esc_html($_POST['seopress_social_twitter_img']));
+                update_term_meta($term_id, '_seopress_social_twitter_img', sanitize_url($_POST['seopress_social_twitter_img']));
             } else {
                 delete_term_meta($term_id, '_seopress_social_twitter_img');
+            }
+            if (!empty($_POST['seopress_social_twitter_img_attachment_id']) && !empty($_POST['seopress_social_twitter_img'])) {
+                update_term_meta($term_id, '_seopress_social_twitter_img_attachment_id', sanitize_text_field($_POST['seopress_social_twitter_img_attachment_id']));
+            } else {
+                delete_term_meta($term_id, '_seopress_social_twitter_img_attachment_id');
+            }
+            if (!empty($_POST['seopress_social_twitter_img_width']) && !empty($_POST['seopress_social_twitter_img'])) {
+                update_term_meta($term_id, '_seopress_social_twitter_img_width', sanitize_text_field($_POST['seopress_social_twitter_img_width']));
+            } else {
+                delete_term_meta($term_id, '_seopress_social_twitter_img_width');
+            }
+            if (!empty($_POST['seopress_social_twitter_img_height']) && !empty($_POST['seopress_social_twitter_img'])) {
+                update_term_meta($term_id, '_seopress_social_twitter_img_height', sanitize_text_field($_POST['seopress_social_twitter_img_height']));
+            } else {
+                delete_term_meta($term_id, '_seopress_social_twitter_img_height');
             }
         }
         if (in_array('redirect-tab', $seo_tabs)) {
             if (isset($_POST['seopress_redirections_type'])) {
-                update_term_meta($term_id, '_seopress_redirections_type', $_POST['seopress_redirections_type']);
+                $redirection_type = intval($_POST['seopress_redirections_type']);
+
+                if (in_array($redirection_type, [301, 302, 307])) {
+                    update_term_meta($term_id, '_seopress_redirections_type', $redirection_type);
+                } else {
+                    delete_term_meta($term_id, '_seopress_redirections_type');
+                }
             }
             if (isset($_POST['seopress_redirections_logged_status'])) {
-                update_term_meta($term_id, '_seopress_redirections_logged_status', $_POST['seopress_redirections_logged_status']);
+                $logged_status = sanitize_text_field($_POST['seopress_redirections_logged_status']);
+
+                $allowed_options = ['both', 'only_logged_in', 'only_not_logged_in'];
+
+                if (in_array($logged_status, $allowed_options, true)) {
+                    update_term_meta($term_id, '_seopress_redirections_logged_status', $logged_status);
+                } else {
+                    delete_term_meta($term_id, '_seopress_redirections_logged_status');
+                }
             }
             if (!empty($_POST['seopress_redirections_value'])) {
-                update_term_meta($term_id, '_seopress_redirections_value', esc_html($_POST['seopress_redirections_value']));
+                update_term_meta($term_id, '_seopress_redirections_value', sanitize_url($_POST['seopress_redirections_value']));
             } else {
                 delete_term_meta($term_id, '_seopress_redirections_value');
             }

@@ -3,7 +3,6 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 function seopress_sanitize_options_fields($input){
-
     $seopress_sanitize_fields = [
         'seopress_social_facebook_img_attachment_id',
         'seopress_social_facebook_img_attachment_width',
@@ -45,6 +44,7 @@ function seopress_sanitize_options_fields($input){
         'seopress_google_analytics_opt_out_msg_edit',
         'seopress_google_analytics_other_tracking',
         'seopress_google_analytics_other_tracking_body',
+        'seopress_google_analytics_other_tracking_footer',
         'seopress_google_analytics_ads',
         'seopress_google_analytics_matomo_id',
         'seopress_google_analytics_matomo_site_id',
@@ -86,13 +86,13 @@ function seopress_sanitize_options_fields($input){
     }
 
     foreach ($seopress_sanitize_fields as $value) {
-        if ( ! empty($input['seopress_google_analytics_matomo_widget_auth_token']) && 'seopress_google_analytics_matomo_widget_auth_token' == $value) {
+        if ( ! empty($input['seopress_google_analytics_matomo_widget_auth_token']) && 'seopress_google_analytics_matomo_widget_auth_token' === $value) {
             $options = get_option('seopress_google_analytics_option_name');
 
             $token = isset($options['seopress_google_analytics_matomo_widget_auth_token']) ? $options['seopress_google_analytics_matomo_widget_auth_token'] : null;
 
             $input[$value] = $input[$value] ==='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' ? $token : sanitize_text_field($input[$value]);
-        } elseif ( ! empty($input['seopress_google_analytics_opt_out_msg']) && 'seopress_google_analytics_opt_out_msg' == $value) {
+        } elseif ( ! empty($input['seopress_google_analytics_opt_out_msg']) && 'seopress_google_analytics_opt_out_msg' === $value) {
             $args = [
                     'strong' => [],
                     'em'     => [],
@@ -103,9 +103,14 @@ function seopress_sanitize_options_fields($input){
                     ],
             ];
             $input[$value] = wp_kses($input[$value], $args);
-        } elseif (( ! empty($input['seopress_google_analytics_other_tracking']) && 'seopress_google_analytics_other_tracking' == $value) || ( ! empty($input['seopress_google_analytics_other_tracking_body']) && 'seopress_google_analytics_other_tracking_body' == $value) || ( ! empty($input['seopress_google_analytics_other_tracking_footer']) && 'seopress_google_analytics_other_tracking_footer' == $value)) {
-            $input[$value] = $input[$value]; //No sanitization for this field
-        } elseif (( ! empty($input['seopress_instant_indexing_manual_batch']) && 'seopress_instant_indexing_manual_batch' == $value) || (!empty($input['seopress_social_accounts_extra']) && 'seopress_social_accounts_extra' == $value )) {
+        } elseif (( ! empty($input['seopress_google_analytics_other_tracking']) && 'seopress_google_analytics_other_tracking' === $value) || ( ! empty($input['seopress_google_analytics_other_tracking_body']) && 'seopress_google_analytics_other_tracking_body' === $value) || ( ! empty($input['seopress_google_analytics_other_tracking_footer']) && 'seopress_google_analytics_other_tracking_footer' === $value)) {
+            if (current_user_can('unfiltered_html')) {
+                $input[$value] = $input[$value]; //No sanitization for this field
+            } else {
+                $options = get_option('seopress_google_analytics_option_name');
+                $input[$value] = isset($options[$value]) ? $options[$value] : sanitize_textarea_field($input[$value]);
+            }
+        } elseif (( ! empty($input['seopress_instant_indexing_manual_batch']) && 'seopress_instant_indexing_manual_batch' === $value) || (!empty($input['seopress_social_accounts_extra']) && 'seopress_social_accounts_extra' === $value )) {
             $input[$value] = sanitize_textarea_field($input[$value]);
         } elseif (( ! empty ($input['seopress_social_accounts_facebook']) && 'seopress_social_accounts_facebook' === $value) || (! empty ($input['seopress_social_accounts_pinterest']) && 'seopress_social_accounts_pinterest' === $value) || (! empty ($input['seopress_social_accounts_instagram']) && 'seopress_social_accounts_instagram' === $value) || (! empty ($input['seopress_social_accounts_youtube']) && 'seopress_social_accounts_youtube' === $value) || (! empty ($input['seopress_social_accounts_linkedin']) && 'seopress_social_accounts_linkedin' === $value)) {
             $input[$value] = sanitize_url($input[$value]);

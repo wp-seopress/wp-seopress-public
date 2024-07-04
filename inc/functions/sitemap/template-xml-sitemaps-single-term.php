@@ -75,7 +75,7 @@ add_filter('seopress_sitemaps_term_single_url', function($url, $term) {
 
 // Polylang: remove hidden languages
 function seopress_pll_exclude_hidden_lang($args) {
-    if (function_exists('get_languages_list') && is_plugin_active('polylang/polylang.php') || is_plugin_active('polylang-pro/polylang.php')) {
+    if (function_exists('get_languages_list') && defined( 'POLYLANG_VERSION' )) {
         $languages = PLL()->model->get_languages_list();
         if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
             $args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );

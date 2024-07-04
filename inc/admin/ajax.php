@@ -157,8 +157,14 @@ function seopress_hide_notices()
 
     if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
         if (isset($_POST['notice']) && isset($_POST['notice_value'])) {
-            $seopress_notices_options                   = get_option('seopress_notices');
-            $seopress_notices_options[$_POST['notice']] = $_POST['notice_value'];
+            $seopress_notices_options = get_option('seopress_notices') ? get_option('seopress_notices') : [];
+
+            $notice = esc_html($_POST['notice']);
+            $notice_value = esc_html($_POST['notice_value']);
+
+            if ($notice !== false && $notice_value !== false) {
+                $seopress_notices_options[$notice] = $notice_value;
+            }
             update_option('seopress_notices', $seopress_notices_options, 'yes', false);
         }
         exit();

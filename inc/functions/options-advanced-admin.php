@@ -70,10 +70,11 @@ function seopress_auto_image_attr($post_ID) {
         if (wp_attachment_is_image($post_ID)) {
 
             $parent = get_post($post_ID)->post_parent ? get_post($post_ID)->post_parent : null;
-            $cpt = get_post_type($parent) ?  get_post_type($parent) : null;
+            $cpt = get_post_type($parent) ? get_post_type($parent) : null;
 
-            if (isset($cpt) && isset($parent) && $cpt === 'product') { //use the product title for WC products
-                $img_attr = get_post($parent)->post_title;
+            $img_attr = '';
+            if (isset($cpt) && isset($parent) && $cpt === 'product') {
+                $img_attr = get_post($parent)->post_title; // Use the product title for WooCommerce products
             } else {
                 $img_attr = get_post($post_ID)->post_title;
             }
@@ -87,7 +88,7 @@ function seopress_auto_image_attr($post_ID) {
             $img_attr = apply_filters('seopress_auto_image_title', $img_attr, $cpt, $parent, $post_ID);
 
             // Create an array with the image meta (Title, Caption, Description) to be updated
-            $img_attr_array = ['ID'=>$post_ID]; // Image (ID) to be updated
+            $img_attr_array = ['ID' => $post_ID]; // Image (ID) to be updated
 
             if ('1' === seopress_get_service('AdvancedOption')->getImageAutoTitleEditor()) {
                 $img_attr_array['post_title'] = $img_attr; // Set image Title
@@ -634,16 +635,16 @@ function seopress_bulk_quick_edit_save_post($post_id) {
         return;
     }
     if (isset($_REQUEST['seopress_title'])) {
-        update_post_meta($post_id, '_seopress_titles_title', esc_html($_REQUEST['seopress_title']));
+        update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($_REQUEST['seopress_title']));
     }
     if (isset($_REQUEST['seopress_desc'])) {
-        update_post_meta($post_id, '_seopress_titles_desc', esc_html($_REQUEST['seopress_desc']));
+        update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($_REQUEST['seopress_desc']));
     }
     if (isset($_REQUEST['seopress_tkw'])) {
-        update_post_meta($post_id, '_seopress_analysis_target_kw', esc_html($_REQUEST['seopress_tkw']));
+        update_post_meta($post_id, '_seopress_analysis_target_kw', sanitize_text_field($_REQUEST['seopress_tkw']));
     }
     if (isset($_REQUEST['seopress_canonical'])) {
-        update_post_meta($post_id, '_seopress_robots_canonical', esc_html($_REQUEST['seopress_canonical']));
+        update_post_meta($post_id, '_seopress_robots_canonical', sanitize_url($_REQUEST['seopress_canonical']));
     }
     if (seopress_get_service('AdvancedOption')->getAppearanceNoIndexCol() ==='1') {
         if (isset($_REQUEST['seopress_noindex'])) {
@@ -666,10 +667,10 @@ function seopress_bulk_quick_edit_save_post($post_id) {
 
         if (! empty($elementor)) {
             if (isset($_REQUEST['seopress_title'])) {
-                $elementor['_seopress_titles_title'] = esc_html($_REQUEST['seopress_title']);
+                $elementor['_seopress_titles_title'] = sanitize_text_field($_REQUEST['seopress_title']);
             }
             if (isset($_REQUEST['seopress_desc'])) {
-                $elementor['_seopress_titles_desc'] = esc_html($_REQUEST['seopress_desc']);
+                $elementor['_seopress_titles_desc'] = sanitize_textarea_field($_REQUEST['seopress_desc']);
             }
             if (isset($_REQUEST['seopress_noindex'])) {
                 $elementor['_seopress_robots_index'] = 'yes';
@@ -682,10 +683,10 @@ function seopress_bulk_quick_edit_save_post($post_id) {
                 $elementor['_seopress_robots_follow'] = '';
             }
             if (isset($_REQUEST['seopress_canonical'])) {
-                $elementor['_seopress_robots_canonical'] = esc_html($_REQUEST['seopress_canonical']);
+                $elementor['_seopress_robots_canonical'] = sanitize_url($_REQUEST['seopress_canonical']);
             }
             if (isset($_REQUEST['seopress_tkw'])) {
-                $elementor['_seopress_analysis_target_kw'] = esc_html($_REQUEST['seopress_tkw']);
+                $elementor['_seopress_analysis_target_kw'] = sanitize_text_field($_REQUEST['seopress_tkw']);
             }
             update_post_meta($post_id, '_elementor_page_settings', $elementor);
         }

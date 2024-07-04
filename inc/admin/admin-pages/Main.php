@@ -14,6 +14,7 @@ if (function_exists('seopress_admin_header')) {
     <!--Get started-->
     <?php
         include_once dirname(dirname(__FILE__)) . '/blocks/intro.php';
+        include_once dirname(dirname(__FILE__)) . '/blocks/notifications.php';
         include_once dirname(dirname(__FILE__)) . '/blocks/get-started.php';
         include_once dirname(dirname(__FILE__)) . '/blocks/features-list.php';
     ?>
@@ -22,7 +23,6 @@ if (function_exists('seopress_admin_header')) {
         <div class="seopress-dashboard-column">
             <?php
                 include_once dirname(dirname(__FILE__)) . '/blocks/tasks.php';
-                include_once dirname(dirname(__FILE__)) . '/blocks/notifications.php';
             ?>
         </div>
         <div class="seopress-dashboard-column">

@@ -11,12 +11,21 @@ add_settings_section(
     'seopress-settings-admin-advanced-advanced' // Page
 );
 
+//Crawling Optimization
+add_settings_section(
+    'seopress_setting_section_advanced_advanced_crawling', // ID
+    '',
+    //__("Crawling Optimization","wp-seopress"), // Title
+    'print_section_info_advanced_advanced_crawling', // Callback
+    'seopress-settings-admin-advanced-advanced' // Page
+);
+
 add_settings_field(
     'seopress_advanced_advanced_tax_desc_editor', // ID
     __('Add WP Editor to taxonomy description textarea', 'wp-seopress'), // Title
     'seopress_advanced_advanced_tax_desc_editor_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -24,7 +33,7 @@ add_settings_field(
     __('Remove /category/ in URL', 'wp-seopress'), // Title
     'seopress_advanced_advanced_category_url_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -32,7 +41,7 @@ add_settings_field(
     __('Remove /product-category/ in URL', 'wp-seopress'), // Title
     'seopress_advanced_advanced_product_cat_url_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -40,7 +49,7 @@ add_settings_field(
     __('Remove ?replytocom link to avoid duplicate content', 'wp-seopress'), // Title
     'seopress_advanced_advanced_replytocom_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -48,7 +57,7 @@ add_settings_field(
     __('Remove noreferrer link attribute in post content', 'wp-seopress'), // Title
     'seopress_advanced_advanced_noreferrer_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -56,7 +65,7 @@ add_settings_field(
     __('Remove WordPress generator meta tag', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_generator_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -64,7 +73,7 @@ add_settings_field(
     __('Remove hentry post class', 'wp-seopress'), // Title
     'seopress_advanced_advanced_hentry_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -72,7 +81,7 @@ add_settings_field(
     __('Remove author URL', 'wp-seopress'), // Title
     'seopress_advanced_advanced_comments_author_url_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -80,7 +89,7 @@ add_settings_field(
     __('Remove website field in comment form', 'wp-seopress'), // Title
     'seopress_advanced_advanced_comments_website_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -88,7 +97,7 @@ add_settings_field(
     __('Add "nofollow noopener noreferrer" rel attributes to the comments form link', 'wp-seopress'), // Title
     'seopress_advanced_advanced_comments_form_link_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -96,7 +105,7 @@ add_settings_field(
     __('Remove WordPress shortlink meta tag', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_shortlink_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -104,7 +113,7 @@ add_settings_field(
     __('Remove Windows Live Writer meta tag', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_wlw_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -112,7 +121,7 @@ add_settings_field(
     __('Remove RSD meta tag', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_rsd_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -120,7 +129,7 @@ add_settings_field(
     __('Remove oEmbed links', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_oembed_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -128,7 +137,7 @@ add_settings_field(
     __('Remove WordPress X-Pingback header', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_x_pingback_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
 add_settings_field(
@@ -136,7 +145,24 @@ add_settings_field(
     __('Remove WordPress X-Powered-By header', 'wp-seopress'), // Title
     'seopress_advanced_advanced_wp_x_powered_by_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_crawling' // Section
+);
+
+add_settings_field(
+    'seopress_advanced_advanced_emoji', // ID
+    __('Remove Emoji support', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_emoji_callback', // Callback
+    'seopress-settings-admin-advanced-advanced', // Page
+    'seopress_setting_section_advanced_advanced_crawling' // Section
+);
+
+//Search engines validation
+add_settings_section(
+    'seopress_setting_section_advanced_advanced_search_engines', // ID
+    '',
+    //__("Search engines validation","wp-seopress"), // Title
+    'print_section_info_advanced_advanced_search_engines', // Callback
+    'seopress-settings-admin-advanced-advanced' // Page
 );
 
 add_settings_field(
@@ -144,7 +170,7 @@ add_settings_field(
     __('Google site verification', 'wp-seopress'), // Title
     'seopress_advanced_advanced_google_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_search_engines' // Section
 );
 
 add_settings_field(
@@ -152,7 +178,7 @@ add_settings_field(
     __('Bing site verification', 'wp-seopress'), // Title
     'seopress_advanced_advanced_bing_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_search_engines' // Section
 );
 
 add_settings_field(
@@ -160,7 +186,7 @@ add_settings_field(
     __('Pinterest site verification', 'wp-seopress'), // Title
     'seopress_advanced_advanced_pinterest_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_search_engines' // Section
 );
 
 add_settings_field(
@@ -168,7 +194,7 @@ add_settings_field(
     __('Yandex site verification', 'wp-seopress'), // Title
     'seopress_advanced_advanced_yandex_callback', // Callback
     'seopress-settings-admin-advanced-advanced', // Page
-    'seopress_setting_section_advanced_advanced' // Section
+    'seopress_setting_section_advanced_advanced_search_engines' // Section
 );
 
 //Appearance SECTION=======================================================================

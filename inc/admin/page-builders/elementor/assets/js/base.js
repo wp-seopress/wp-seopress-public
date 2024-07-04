@@ -17,16 +17,16 @@ function googlePreview() {
             _ajax_nonce: seopressElementorBase.seopress_nonce
         },
         success: function (t) {
-            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title").html(t.data.title);
-            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title-default").html(t.data.title);
-            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description").html(t.data.meta_desc);
-            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description-default").html(t.data.meta_desc);
+            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title").html(t.data.title.value);
+            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-title-default").html(t.data.title.value);
+            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description").html(t.data.description.value);
+            jQuery(".elementor-control-field.google-snippet-box .google-snippet-preview .snippet-description-default").html(t.data.description.value);
 
             const $metaTitle = jQuery("input[data-setting=_seopress_titles_title]");
             const $metaDesc = jQuery("textarea[data-setting=_seopress_titles_desc]");
 
-            $metaTitle.attr('placeholder', t.data.title);
-            $metaDesc.attr('placeholder', t.data.meta_desc);
+            $metaTitle.attr('placeholder', t.data.title.value);
+            $metaDesc.attr('placeholder', t.data.description.value);
 
             if ($metaTitle.val() == '') {
                 elementor.modules.controls.Seopresstextlettercounter.prototype.countLength(false, $metaTitle);
@@ -58,15 +58,16 @@ function socialPreview() {
 }
 
 function socialPreviewFillData(s) {
-    typeof s.data.og_title === "undefined" ? og_title = "" : og_title = s.data.og_title.values;
-    typeof s.data.og_desc === "undefined" ? og_desc = "" : og_desc = s.data.og_desc.values;
-    typeof s.data.og_img === "undefined" ? og_img = "" : og_img = s.data.og_img.values;
-    typeof s.data.og_url === "undefined" ? og_url = "" : og_url = s.data.og_url.host;
-    typeof s.data.og_site_name === "undefined" ? og_site_name = "" : og_site_name = s.data.og_site_name.values;
-    typeof s.data.tw_title === "undefined" ? tw_title = "" : tw_title = s.data.tw_title.values;
-    typeof s.data.tw_desc === "undefined" ? tw_desc = "" : tw_desc = s.data.tw_desc.values;
-    typeof s.data.tw_img === "undefined" ? tw_img = "" : tw_img = s.data.tw_img.values;
-    typeof s.data.meta_robots === "undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots[0];
+    typeof s.data["og:title"] === "undefined" ? og_title = "" : og_title = s.data["og:title"].value;
+    typeof s.data["og:description"] === "undefined" ? og_desc = "" : og_desc = s.data["og:description"].value;
+    typeof s.data["og:image"] === "undefined" ? og_img = "" : og_img = s.data["og:image"].value;
+    typeof s.data["og:url"] === "undefined" ? og_url = "" : og_url = s.data["og:url"].value;
+    typeof s.data["og:site_name"] === "undefined" ? og_site_name = "" : og_site_name = s.data["og:site_name"].value;
+    typeof s.data["twitter:title"] === "undefined" ? tw_title = "" : tw_title = s.data["twitter:title"].value;
+    typeof s.data["twitter:description"] === "undefined" ? tw_desc = "" : tw_desc = s.data["twitter:description"].value;
+    typeof s.data["twitter:image"] === "undefined" ? tw_img = "" : tw_img = s.data["twitter:image"].value;
+    typeof s.data["canonical"] === "undefined" ? canonical = "" : canonical = s.data["canonical"].value;
+    typeof s.data.meta_robots === "undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots.value;
 
     var data_arr = {
         og_title: og_title,
@@ -76,7 +77,8 @@ function socialPreviewFillData(s) {
         og_site_name: og_site_name,
         tw_title: tw_title,
         tw_desc: tw_desc,
-        tw_img: tw_img
+        tw_img: tw_img,
+        canonical: canonical
     };
 
     for (var key in data_arr) {

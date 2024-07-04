@@ -172,6 +172,13 @@ class AdvancedOption
     }
 
     /**
+     * @since 7.6.0
+     */
+    public function getAdvancedEmoji(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_emoji');
+    }
+
+    /**
      * @since 5.4.0
      */
     public function getAdvancedGoogleVerification(){

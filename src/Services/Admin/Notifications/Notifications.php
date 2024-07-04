@@ -8,6 +8,8 @@ class Notifications {
     private $customOrder = ['high', 'medium', 'low', 'info'];
 
     public function generateAllNotifications() {
+        $docs = seopress_get_docs_links();
+
         $alerts_info = 0;
         $alerts_low = 0;
         $alerts_medium = 0;
@@ -201,12 +203,32 @@ class Notifications {
                         'high' => __('High impact', 'wp-seopress'),
                     ],
                     'link' => [
-                        'fr'       => 'https://www.seopress.org/fr/support/guides/resoudre-add_theme_support-manquant-dans-votre-theme/',
-                        'en'       => 'https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/',
+                        'en'       => $docs['titles']['add_theme_support'],
                         'title'    => __('Learn more', 'wp-seopress'),
                         'external' => true,
                     ],
                     'deleteable' => false,
+                    'status' => true,
+                ];
+            }
+        }
+
+        if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+            if (seopress_get_service('NoticeOption')->getNoticeWPMLActive() !== "1") {
+                $alerts_high++;
+                $args[] = [
+                    'id'     => 'notice-wpml-active',
+                    'title'  => __('WPML plugin has been detected!', 'wp-seopress'),
+                    'desc'   => __('SEOPress is fully compatible with WPML. If you are looking to translate SEOPress global settings, read our guide by clicking the link below.', 'wp-seopress'),
+                    'impact' => [
+                        'info' => __('Information', 'wp-seopress'),
+                    ],
+                    'link' => [
+                        'en'       => $docs['integrations']['wpml']['translate'],
+                        'title'    => __('Learn more', 'wp-seopress'),
+                        'external' => true,
+                    ],
+                    'deleteable' => true,
                     'status' => true,
                 ];
             }
@@ -443,8 +465,7 @@ class Notifications {
                     'high' => __('High impact', 'wp-seopress'),
                 ],
                 'link' => [
-                    'fr'       => 'https://www.seopress.org/fr/support/guides/debutez-seopress/',
-                    'en'       => 'https://www.seopress.org/support/guides/get-started-seopress/',
+                    'en'       => $docs['get_started']['installation']['link'],
                     'title'    => __('Learn more', 'wp-seopress'),
                     'external' => true,
                 ],
@@ -463,8 +484,7 @@ class Notifications {
                     'high' => __('High impact', 'wp-seopress'),
                 ],
                 'link' => [
-                    'fr'       => 'https://www.seopress.org/fr/support/guides/debutez-seopress/',
-                    'en'       => 'https://www.seopress.org/support/guides/get-started-seopress/',
+                    'en'       => $docs['get_started']['installation']['link'],
                     'title'    => __('Learn more', 'wp-seopress'),
                     'external' => true,
                 ],
@@ -483,8 +503,7 @@ class Notifications {
                     'high' => __('High impact', 'wp-seopress'),
                 ],
                 'link' => [
-                    'fr'       => 'https://www.seopress.org/fr/support/guides/debutez-seopress/',
-                    'en'       => 'https://www.seopress.org/support/guides/get-started-seopress/',
+                    'en'       => $docs['get_started']['installation']['link'],
                     'title'    => __('Learn more', 'wp-seopress'),
                     'external' => true,
                 ],
@@ -824,9 +843,7 @@ class Notifications {
         }
 
         $href = '';
-        if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale() && isset($link['fr'])) {
-            $href = ' href="' . $link['fr'] . '"';
-        } elseif (isset($link['en'])) {
+        if (isset($link['en'])) {
             $href = ' href="' . $link['en'] . '"';
         }
 

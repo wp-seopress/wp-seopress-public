@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 7.5.2.1
+Version: 7.6
 Author URI: https://www.seopress.org/
 License: GPLv2
 Text Domain: wp-seopress
@@ -59,7 +59,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '7.5.2.1');
+define('SEOPRESS_VERSION', '7.6');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -244,6 +244,12 @@ function seopress_add_admin_options_scripts($hook) {
 
 	}
 
+    // Dashboard
+    if ('seopress-option' === $_GET['page']) {
+        wp_register_style('seopress-admin-dashboard', plugins_url('assets/css/seopress-admin-dashboard' . $prefix . '.css', __FILE__), [], SEOPRESS_VERSION);
+	    wp_enqueue_style('seopress-admin-dashboard');
+    }
+
 	//Migration
 	if ('seopress-option' === $_GET['page'] || 'seopress-import-export' === $_GET['page']) {
 		wp_enqueue_script('seopress-migrate-ajax', plugins_url('assets/js/seopress-migrate' . $prefix . '.js', __FILE__), ['jquery'], SEOPRESS_VERSION, true);
@@ -315,7 +321,7 @@ function seopress_add_admin_options_scripts($hook) {
 
 	//Tabs
 	if ('seopress-titles' === $_GET['page'] || 'seopress-xml-sitemap' === $_GET['page'] || 'seopress-social' === $_GET['page'] || 'seopress-google-analytics' === $_GET['page'] || 'seopress-advanced' === $_GET['page'] || 'seopress-import-export' === $_GET['page'] || 'seopress-instant-indexing' === $_GET['page'] || 'seopress-insights-settings' === $_GET['page']) {
-		wp_enqueue_script('seopress-admin-tabs-js', plugins_url('assets/js/seopress-tabs' . $prefix . '.js', __FILE__), ['jquery-ui-tabs'], SEOPRESS_VERSION);
+		wp_enqueue_script('seopress-admin-tabs', plugins_url('assets/js/seopress-tabs' . $prefix . '.js', __FILE__), ['jquery-ui-tabs'], SEOPRESS_VERSION);
 	}
 
 	if ('seopress-google-analytics' === $_GET['page']) {
@@ -331,10 +337,22 @@ function seopress_add_admin_options_scripts($hook) {
 			'defaultLabel'     => __('Color value', 'wp-seopress'),
 		];
 		wp_localize_script('wp-color-picker-alpha', 'wpColorPickerL10n', $color_picker_strings);
+
+        $settings = wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
+
+        $initializeScript = sprintf(
+            'jQuery( function() { wp.codeEditor.initialize( "%s", %s ); } );',
+            '%s',
+            wp_json_encode( $settings )
+        );
+
+        wp_add_inline_script( 'code-editor', sprintf( $initializeScript, 'seopress_google_analytics_other_tracking' ) );
+        wp_add_inline_script( 'code-editor', sprintf( $initializeScript, 'seopress_google_analytics_other_tracking_body' ) );
+        wp_add_inline_script( 'code-editor', sprintf( $initializeScript, 'seopress_google_analytics_other_tracking_footer' ) );
 	}
 
 	if ('seopress-social' === $_GET['page']) {
-		wp_enqueue_script('seopress-media-uploader-js', plugins_url('assets/js/seopress-media-uploader' . $prefix . '.js', __FILE__), ['jquery'], SEOPRESS_VERSION, false);
+		wp_enqueue_script('seopress-media-uploader', plugins_url('assets/js/seopress-media-uploader' . $prefix . '.js', __FILE__), ['jquery'], SEOPRESS_VERSION, false);
 		wp_enqueue_media();
 	}
 
@@ -344,13 +362,23 @@ function seopress_add_admin_options_scripts($hook) {
 			'seopress_nonce'					=> wp_create_nonce('seopress_instant_indexing_post_nonce'),
 			'seopress_instant_indexing_post'	=> admin_url('admin-ajax.php'),
 		];
-		wp_localize_script('seopress-admin-tabs-js', 'seopressAjaxInstantIndexingPost', $seopress_instant_indexing_post);
+		wp_localize_script('seopress-admin-tabs', 'seopressAjaxInstantIndexingPost', $seopress_instant_indexing_post);
 
 		$seopress_instant_indexing_generate_api_key = [
 			'seopress_nonce'								=> wp_create_nonce('seopress_instant_indexing_generate_api_key_nonce'),
 			'seopress_instant_indexing_generate_api_key'	=> admin_url('admin-ajax.php'),
 		];
-		wp_localize_script('seopress-admin-tabs-js', 'seopressAjaxInstantIndexingApiKey', $seopress_instant_indexing_generate_api_key);
+		wp_localize_script('seopress-admin-tabs', 'seopressAjaxInstantIndexingApiKey', $seopress_instant_indexing_generate_api_key);
+
+        $settings = wp_enqueue_code_editor( [ 'type' => 'application/json' ] );
+
+        $initializeScript = sprintf(
+            'jQuery( function() { wp.codeEditor.initialize( "%s", %s ); } );',
+            '%s',
+            wp_json_encode( $settings )
+        );
+
+        wp_add_inline_script( 'code-editor', sprintf( $initializeScript, 'seopress_instant_indexing_google_api_key' ) );
 	}
 
 	//CSV Importer

@@ -13,7 +13,6 @@ function print_section_info_google_analytics_enable()
 
 <div class="seopress-sub-tabs">
     <a href="#seopress-analytics-general"><?php _e('General', 'wp-seopress'); ?></a> |
-    <a href="#seopress-analytics-tracking"><?php _e('Tracking', 'wp-seopress'); ?></a> |
     <a href="#seopress-analytics-events"><?php _e('Events', 'wp-seopress'); ?></a>
     <?php do_action('seopress_analytics_settings_section'); ?>
 </div>
@@ -41,21 +40,6 @@ function print_section_info_google_analytics_gdpr()
 
 <p>
     <?php _e('Works with <strong>Google Analytics</strong> and <strong>Matomo</strong>.', 'wp-seopress'); ?>
-</p>
-
-<?php
-}
-
-function print_section_info_google_analytics_features()
-{ ?>
-
-<hr>
-<h3 id="seopress-analytics-tracking">
-    <?php _e('Tracking', 'wp-seopress'); ?>
-</h3>
-
-<p>
-    <?php _e('Configure your Google Analytics tracking code.', 'wp-seopress'); ?>
 </p>
 
 <?php

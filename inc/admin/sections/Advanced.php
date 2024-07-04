@@ -10,9 +10,41 @@ function print_section_info_advanced_advanced()
         <?php _e('Advanced', 'wp-seopress'); ?>
     </h2>
 </div>
+
+<div class="seopress-sub-tabs">
+    <a href="#seopress-advanced-crawling"><?php _e('Crawling Optimization', 'wp-seopress'); ?></a> |
+    <a href="#seopress-advanced-search-engines"><?php _e('Search engines validation', 'wp-seopress'); ?></a>
+</div>
+
 <p>
     <?php _e('Advanced SEO options for advanced users.', 'wp-seopress'); ?>
 </p>
+
+<?php
+}
+
+function print_section_info_advanced_advanced_crawling()
+{ ?>
+<hr>
+
+<h3 id="seopress-advanced-crawling">
+    <?php _e('Crawling Optimization', 'wp-seopress'); ?>
+</h3>
+
+<p><?php _e('Clean your source code to improve performance and your crawl budget.','wp-seopress'); ?></p>
+
+<?php
+}
+
+function print_section_info_advanced_advanced_search_engines()
+{ ?>
+<hr>
+
+<h3 id="seopress-advanced-search-engines">
+    <?php _e('Search engines validation', 'wp-seopress'); ?>
+</h3>
+
+<p><?php _e('Easily validate your site with search engines webmaster tools.','wp-seopress'); ?></p>
 
 <?php
 }

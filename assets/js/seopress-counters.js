@@ -746,6 +746,9 @@ jQuery(document).ready(function (e) {
                 typeof s.data["twitter:image"] === "undefined"
                     ? tw_img = ""
                     : tw_img = s.data["twitter:image"].value
+                typeof s.data["canonical"] === "undefined"
+                    ? canonical = ""
+                    : canonical = s.data["canonical"].value
                 typeof s.data.meta_robots === "undefined"
                     ? meta_robots = ""
                     : meta_robots = s.data.meta_robots.value
@@ -759,6 +762,7 @@ jQuery(document).ready(function (e) {
                     tw_title: tw_title,
                     tw_desc: tw_desc,
                     tw_img: tw_img,
+                    canonical: canonical
                 };
 
 
@@ -778,7 +782,7 @@ jQuery(document).ready(function (e) {
                 // Google Preview
                 title = '';
                 if (s.data.title) {
-                    if(typeof s.data.title.value !== "undefined"){
+                    if (typeof s.data.title.value !== "undefined") {
                         title = s.data.title.value.substr(0, 60);
                     }
                     else {
@@ -794,7 +798,7 @@ jQuery(document).ready(function (e) {
                 if (s.data.description) {
                     meta_desc = s.data.description.value.substr(0, 160);
                 }
-                else if(typeof s.data.meta_desc !== "undefined"){
+                else if (typeof s.data.meta_desc !== "undefined") {
                     meta_desc = s.data.meta_desc.substr(0, 160);
                 }
 
@@ -880,7 +884,7 @@ jQuery(document).ready(function (e) {
                 ).html(data_arr.og_url),
                     e("#seopress_cpt #seopress_robots_canonical_meta").attr(
                         "placeholder",
-                        s.data.canonical
+                        data_arr.canonical
                     ),
                     e("#seopress-analysis-tabs").load(
                         " #seopress-analysis-tabs-1",

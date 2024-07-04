@@ -414,6 +414,30 @@ function seopress_advanced_advanced_wp_x_powered_by_callback() {
 	}
 }
 
+function seopress_advanced_advanced_emoji_callback() {
+	$options = get_option('seopress_advanced_option_name');
+
+	$check = isset($options['seopress_advanced_advanced_emoji']); ?>
+
+<label for="seopress_advanced_advanced_emoji">
+	<input id="seopress_advanced_advanced_emoji"
+		name="seopress_advanced_option_name[seopress_advanced_advanced_emoji]" type="checkbox" <?php if ('1' == $check) { ?>
+	checked="yes"
+	<?php } ?>
+	value="1"/>
+
+	<?php _e('Remove Emoji scripts in your source code to speed up your site performance', 'wp-seopress'); ?>
+</label>
+
+<p class="description">
+	<?php _e('Only older web browsers will not see your emojis.', 'wp-seopress'); ?>
+</p>
+
+<?php if (isset($options['seopress_advanced_advanced_emoji'])) {
+		esc_attr($options['seopress_advanced_advanced_emoji']);
+	}
+}
+
 function seopress_advanced_advanced_google_callback() {
 	$options = get_option('seopress_advanced_option_name');
 	$check   = isset($options['seopress_advanced_advanced_google']) ? $options['seopress_advanced_advanced_google'] : null;

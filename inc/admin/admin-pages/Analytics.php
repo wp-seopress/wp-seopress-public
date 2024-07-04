@@ -35,7 +35,6 @@ echo '</div>'; ?>
     echo 'active';
 } ?>" id="tab_seopress_google_analytics_enable">
             <?php do_settings_sections('seopress-settings-admin-google-analytics-enable'); ?>
-            <?php do_settings_sections('seopress-settings-admin-google-analytics-features'); ?>
             <?php do_settings_sections('seopress-settings-admin-google-analytics-events'); ?>
             <?php if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
                 do_settings_sections('seopress-settings-admin-google-analytics-ecommerce');

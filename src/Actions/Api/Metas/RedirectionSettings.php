@@ -98,14 +98,55 @@ class RedirectionSettings implements ExecuteHooks {
             //Elementor sync
             $elementor = get_post_meta($id, '_elementor_page_settings', true);
 
+            $dataKeysSave = ['_seopress_redirections_value', '_seopress_redirections_enabled', '_seopress_redirections_enabled_regex', '_seopress_redirections_logged_status', '_seopress_redirections_param', '_seopress_redirections_type'];
+
             foreach ($metas as $key => $value) {
                 if ( ! isset($params[$value['key']])) {
                     continue;
                 }
 
                 $item = $params[$value['key']];
-                if(in_array($value['type'], ['input', 'textarea'])){
-                    $item = esc_html($item);
+
+                if (!in_array($value['key'], $dataKeysSave)) {
+                    continue;
+                }
+
+                if ($value['key'] ==='_seopress_redirections_value') {
+                    $item = sanitize_url($item);
+                }
+
+                if ($value['key'] ==='_seopress_redirections_enabled' || $value['key'] ==='_seopress_redirections_enabled_regex') {
+                    $item = sanitize_text_field($item);
+                }
+
+                if ($value['key'] ==='_seopress_redirections_logged_status') {
+                    $logged_status = sanitize_text_field($item);
+
+                    $allowed_options = ['both', 'only_logged_in', 'only_not_logged_in'];
+
+                    if (in_array($logged_status, $allowed_options, true)) {
+                        $item = $logged_status;
+                    }
+                }
+
+                if ($value['key'] ==='_seopress_redirections_param') {
+                    $redirections_param = sanitize_text_field($item);
+
+                    $allowed_options = ['exact_match', 'without_param', 'with_ignored_param'];
+
+                    if (in_array($redirections_param, $allowed_options, true)) {
+                        $item = $redirections_param;
+                    }
+                }
+
+                if ($value['key'] ==='_seopress_redirections_type') {
+                    $redirection_type = intval($item);
+
+                    $allowed_options = [301, 302, 307];
+
+                    if (in_array($redirection_type, $allowed_options, true)) {
+                        $item = $redirection_type;
+                    }
                 }
 
                 if(!empty($item)){

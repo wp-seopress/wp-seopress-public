@@ -7,9 +7,11 @@ abstract class AbstractImageSpecification
 {
 
     public function applyFilter($value, $params){
-
-        if (has_filter('seopress_social_og_thumb')) {
-            $value['url'] = apply_filters('seopress_social_og_thumb', $value['url']);
+        if (has_filter('seopress_social_twitter_card_thumb')) {
+            $value['url'] = apply_filters('seopress_social_twitter_card_thumb', $value['url']);
+            if (preg_match('/content="([^"]+)"/', $value['url'], $matches)) {
+                $value['url'] = $matches[1];
+            }
         }
 
         $stop_attachment_url_to_postid = apply_filters( 'seopress_stop_attachment_url_to_postid', false );
@@ -54,11 +56,8 @@ abstract class AbstractImageSpecification
             }
         }
 
-
-
         return $value;
     }
-
 }
 
 

@@ -123,7 +123,7 @@ function seopress_block_faq_render_frontend( $attributes ){
                     <?php } ?>
                     <?php if (! empty($image_url)): ?>
                             <div class="wpseopress-faq-answer-image">
-                                <img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
+                                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
                             </div>
                         <?php endif; ?>
                         <?php if (! empty($faq['answer'])): ?>

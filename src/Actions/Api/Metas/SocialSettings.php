@@ -103,8 +103,12 @@ class SocialSettings implements ExecuteHooks {
                 }
 
                 $item = $params[$value['key']];
-                if(in_array($value['type'], ['input', 'textarea'])){
-                    $item = esc_html($item);
+                if(in_array($value['type'], ['input'])){
+                    $item = sanitize_text_field($item);
+                }
+
+                if(in_array($value['type'], ['textarea'])){
+                    $item = sanitize_textarea_field($item);
                 }
 
                 if(!empty($item)){

@@ -63,6 +63,22 @@ jQuery(document).ready(function ($) {
                         .find(".seopress-tab.active")
                         .removeClass("active");
                     $("#" + hash).addClass("active");
+
+                    if ($('#' + hash).find('.CodeMirror-wrap').length) {
+                        $('#' + hash).find('.CodeMirror-wrap').each(function () {
+                            // Check if CodeMirror is already attached to this textarea
+                            var textarea = $(this).prev('textarea').get(0); // Get the first matching textarea element
+                            $(this).remove();
+                            var settings = wp.codeEditor.defaultSettings ? _.clone(wp.codeEditor.defaultSettings) : {};
+
+                            settings.codemirror.mode = 'text/html';
+                            if (textarea.id === 'seopress_instant_indexing_google_api_key') {
+                                settings.codemirror.mode = 'application/json';
+                            }
+
+                            wp.codeEditor.initialize(textarea, settings);
+                        });
+                    }
                 });
         }
     });
@@ -323,10 +339,6 @@ jQuery(document).ready(function ($) {
         // Display character count on initial load
         updateCounters(initialMetaTitleVal);
     }
-
-
-
-
 
     //Instant Indexing: Display keywords counter
     if ($("#seopress_instant_indexing_manual_batch").length) {

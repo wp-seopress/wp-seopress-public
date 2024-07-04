@@ -41,7 +41,7 @@ class GetContent
      */
     protected function analyzeSchemas($analyzes, $data, $post)
     {
-        if (! empty($data['json_schemas']) || isset($data['json_schemas'])) {
+        if (isset($data['json_schemas']) && is_array($data['json_schemas']) && (!empty($data['json_schemas']) || isset($data['json_schemas']))) {
             $desc = '<p>' . __('We found these schemas in the source code of this page:', 'wp-seopress') . '</p>';
 
             $desc .= '<ul>';
@@ -157,7 +157,7 @@ class GetContent
         }
 
 
-        if (! empty($h1Matches)) {
+        if (isset($data['h1']) && is_array($data['h1']) && !empty($h1Matches)) {
             $totalH1 = count($data['h1']);
 
             $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('Target keywords were found in Heading 1 (H1).', 'wp-seopress') . '</p>';
@@ -178,11 +178,11 @@ class GetContent
 
                 $desc .= '<ul>';
                 foreach ($data['h1'] as $h1) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $h1 . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_html($h1) . '</li>';
                 }
                 $desc .= '</ul>';
             }
-        } elseif (isset($data['h1']) && count($data['h1']) === 0) {
+        } elseif (isset($data['h1']) && is_array($data['h1']) && count($data['h1']) === 0) {
             $desc .= '<p><span class="dashicons dashicons-no-alt"></span><strong>' . __('No Heading 1 (H1) found in your content. This is required for both SEO and Accessibility!', 'wp-seopress') . '</strong></p>';
             $analyzes['headings']['impact'] = 'high';
         } else {
@@ -367,7 +367,7 @@ class GetContent
         $desc = null;
         $desc .= '<h4>' . __('Open Graph Title', 'wp-seopress') . '</h4>';
 
-        if (! empty($data['og_title'])) {
+        if (isset($data['og_title']) && is_array($data['og_title']) && !empty($data['og_title'])) {
             $count = count($data['og_title']);
 
             $all_og_title = $data['og_title'];
@@ -386,7 +386,7 @@ class GetContent
             if (! empty($all_og_title)) {
                 $desc .= '<ul>';
                 foreach ($all_og_title as $og_title) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $og_title . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_html($og_title) . '</li>';
                 }
                 $desc .= '</ul>';
             }
@@ -398,7 +398,7 @@ class GetContent
         //og:description
         $desc .= '<h4>' . __('Open Graph Description', 'wp-seopress') . '</h4>';
 
-        if (! empty($data['og_description'])) {
+        if (isset($data['og_description']) && is_array($data['og_description']) && !empty($data['og_description'])) {
             $count = count($data['og_description']);
 
             $all_og_desc = $data['og_description'];
@@ -417,7 +417,7 @@ class GetContent
             if (! empty($all_og_desc)) {
                 $desc .= '<ul>';
                 foreach ($all_og_desc as $og_desc) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $og_desc . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_html($og_desc) . '</li>';
                 }
                 $desc .= '</ul>';
             }
@@ -429,7 +429,7 @@ class GetContent
         //og:image
         $desc .= '<h4>' . __('Open Graph Image', 'wp-seopress') . '</h4>';
 
-        if (! empty($data['og_image'])) {
+        if (isset($data['og_image']) && is_array($data['og_image']) && !empty($data['og_image'])) {
             $count = count($data['og_image']);
 
             $all_og_img = $data['og_image'];
@@ -447,7 +447,7 @@ class GetContent
             if (! empty($all_og_img)) {
                 $desc .= '<ul>';
                 foreach ($all_og_img as $og_img) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $og_img . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_url($og_img) . '</li>';
                 }
                 $desc .= '</ul>';
             }
@@ -459,7 +459,7 @@ class GetContent
         //og:url
         $desc .= '<h4>' . __('Open Graph URL', 'wp-seopress') . '</h4>';
 
-        if (! empty($data['og_url'])) {
+        if (isset($data['og_url']) && is_array($data['og_url']) && !empty($data['og_url'])) {
             $count = count($data['og_url']);
 
             $all_og_url = $data['og_url'];
@@ -478,7 +478,7 @@ class GetContent
             if (! empty($all_og_url)) {
                 $desc .= '<ul>';
                 foreach ($all_og_url as $og_url) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $og_url . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_url($og_url) . '</li>';
                 }
                 $desc .= '</ul>';
             }
@@ -490,7 +490,7 @@ class GetContent
         //og:site_name
         $desc .= '<h4>' . __('Open Graph Site Name', 'wp-seopress') . '</h4>';
 
-        if (! empty($data['og_site_name'])) {
+        if (isset($data['og_site_name']) && is_array($data['og_site_name']) && !empty($data['og_site_name'])) {
             $count = count($data['og_site_name']);
 
             $all_og_site_name = $data['og_site_name'];
@@ -509,7 +509,7 @@ class GetContent
             if (! empty($all_og_site_name)) {
                 $desc .= '<ul>';
                 foreach ($all_og_site_name as $og_site_name) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $og_site_name . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_html($og_site_name) . '</li>';
                 }
                 $desc .= '</ul>';
             }
@@ -521,7 +521,7 @@ class GetContent
         //twitter:title
         $desc .= '<h4>' . __('X (ex-Twitter) Title', 'wp-seopress') . '</h4>';
 
-        if (! empty($data['twitter_title'])) {
+        if (isset($data['twitter_title']) && is_array($data['twitter_title']) && !empty($data['twitter_title'])) {
             $count = count($data['twitter_title']);
 
             $all_tw_title = $data['twitter_title'];
@@ -540,7 +540,7 @@ class GetContent
             if (! empty($all_tw_title)) {
                 $desc .= '<ul>';
                 foreach ($all_tw_title as $tw_title) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $tw_title . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_html($tw_title) . '</li>';
                 }
                 $desc .= '</ul>';
             }
@@ -552,7 +552,7 @@ class GetContent
         //twitter:description
         $desc .= '<h4>' . __('X (ex-Twitter) Description', 'wp-seopress') . '</h4>';
 
-        if (! empty($data['twitter_description'])) {
+        if (isset($data['twitter_description']) && is_array($data['twitter_description']) && !empty($data['twitter_description'])) {
             $count = count($data['twitter_description']);
 
             $all_tw_desc = $data['twitter_description'];
@@ -571,7 +571,7 @@ class GetContent
             if (! empty($all_tw_desc)) {
                 $desc .= '<ul>';
                 foreach ($all_tw_desc as $tw_desc) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $tw_desc . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_html($tw_desc) . '</li>';
                 }
                 $desc .= '</ul>';
             }
@@ -583,7 +583,7 @@ class GetContent
         //twitter:image
         $desc .= '<h4>' . __('X (ex-Twitter) Image', 'wp-seopress') . '</h4>';
 
-        if (! empty($data['twitter_image'])) {
+        if (isset($data['twitter_image']) && is_array($data['twitter_image']) && !empty($data['twitter_image'])) {
             $count = count($data['twitter_image']);
 
             $all_tw_img = $data['twitter_image'];
@@ -601,7 +601,7 @@ class GetContent
             if (! empty($all_tw_img)) {
                 $desc .= '<ul>';
                 foreach ($all_tw_img as $tw_img) {
-                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . $tw_img . '</li>';
+                    $desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_url($tw_img) . '</li>';
                 }
                 $desc .= '</ul>';
             }
@@ -624,7 +624,7 @@ class GetContent
     protected function analyzeRobots($analyzes, $data, $post)
     {
         $desc = null;
-        if (! empty($data['meta_robots'])) {
+        if (isset($data['meta_robots']) && is_array($data['meta_robots']) && !empty($data['meta_robots'])) {
             $meta_robots = $data['meta_robots'];
 
             if (count($data['meta_robots']) > 1) {
@@ -733,7 +733,7 @@ class GetContent
                 if (! empty($withoutAlt)) {
                     $desc .= '<ul class="attachments">';
                     foreach ($withoutAlt as $img) {
-                        $desc .= '<li class="attachment"><figure><img src="' . $img . '"/><figcaption style="word-break: break-all;">'.$img.'</figcaption></figure></li>';
+                        $desc .= '<li class="attachment"><figure><img src="' . esc_url($img) . '"/><figcaption style="word-break: break-all;">'.esc_url($img).'</figcaption></figure></li>';
                     }
                     $desc .= '</ul>';
                 }
@@ -763,13 +763,13 @@ class GetContent
      */
     protected function analyzeNoFollowLinks($analyzes, $data, $post)
     {
-        if (! empty($data['links_no_follow'])) {
+        if (isset($data['links_no_follow']) && is_array($data['links_no_follow']) && !empty($data['links_no_follow'])) {
             $count = count($data['links_no_follow']);
 
             $desc = '<p>' . /* translators: %d number of nofollow links */ sprintf(esc_html__('We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:', 'wp-seopress'), $count) . '</p>';
             $desc .= '<ul>';
             foreach ($data['links_no_follow'] as $link) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . $link['url'] . '" target="_blank">' . $link['value'] . '</a><span class="dashicons dashicons-external"></span></li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank">' . esc_url($link['value']) . '</a><span class="dashicons dashicons-external"></span></li>';
             }
             $desc .= '</ul>';
             $analyzes['nofollow_links']['impact'] = 'good';
@@ -794,13 +794,13 @@ class GetContent
     protected function analyzeOutboundLinks($analyzes, $data, $post)
     {
         $desc = '<p>' . __('Internet is built on the principle of hyperlink. It is therefore perfectly normal to make links between different websites. However, avoid making links to low quality sites, SPAM... If you are not sure about the quality of a site, add the attribute "nofollow" to your link.') . '</p>';
-        if (! empty($data['outbound_links'])) {
+        if (isset($data['outbound_links']) && is_array($data['outbound_links']) && !empty($data['outbound_links'])) {
             $count = count($data['outbound_links']);
 
             $desc .= '<p>' . /* translators: %d number of outbound links */ sprintf(__('We found %s outbound links in your page. Below, the list:', 'wp-seopress'), $count) . '</p>';
             $desc .= '<ul>';
             foreach ($data['outbound_links'] as $link) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . $link['url'] . '" target="_blank">' . $link['value'] . '</a><span class="dashicons dashicons-external"></span></li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank">' . esc_url($link['value']) . '</a><span class="dashicons dashicons-external"></span></li>';
             }
             $desc .= '</ul>';
         } else {
@@ -823,15 +823,15 @@ class GetContent
     {
         $desc = '<p>' . __('Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.') . '</p>';
 
-        if (! empty($data['internal_links'])) {
+        if (isset($data['internal_links']) && is_array($data['internal_links']) && !empty($data['internal_links'])) {
             $count = count($data['internal_links']);
 
             $desc .= '<p>' . /* translators: %s internal links */ sprintf(__('We found %s internal links to this page.', 'wp-seopress'), $count) . '</p>';
 
             $desc .= '<ul>';
             foreach ($data['internal_links'] as $link) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . $link['url'] . '" target="_blank">' . $link['value'] . '</a>
-                <a class="nounderline" href="' . get_edit_post_link($link['id']) . '" title="' . /* translators: %s link to edit the post */ sprintf(__('edit %s', 'wp-seopress'), esc_html(get_the_title($link['id']))) . '"><span class="dashicons dashicons-edit-large"></span></a></li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank">' . esc_url($link['value']) . '</a>
+                <a class="nounderline" href="' . esc_url(get_edit_post_link($link['id'])) . '" title="' . /* translators: %s link to edit the post */ sprintf(__('edit %s', 'wp-seopress'), esc_html(get_the_title($link['id']))) . '"><span class="dashicons dashicons-edit-large"></span></a></li>';
             }
             $desc .= '</ul>';
         } else {
@@ -854,14 +854,14 @@ class GetContent
     {
         $desc = '<p>' . __('A canonical URL is required by search engines to handle duplicate content.') . '</p>';
 
-        if (! empty($data['canonical'])) {
+        if (isset($data['canonical']) && is_array($data['canonical']) && !empty($data['canonical'])) {
             $count = count($data['canonical']);
 
             $desc .= '<p>' . /* translators: %s number of canonical tags */ sprintf(_n('We found %s canonical URL in your source code. Below, the list:', 'We found %s canonical URLs in your source code. Below, the list:', $count, 'wp-seopress'), number_format_i18n($count)) . '</p>';
 
             $desc .= '<ul>';
             foreach ($data['canonical'] as $link) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . $link . '" target="_blank">' . $link . '</a><span class="dashicons dashicons-external"></span></li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link) . '" target="_blank">' . esc_url($link) . '</a><span class="dashicons dashicons-external"></span></li>';
             }
             $desc .= '</ul>';
 

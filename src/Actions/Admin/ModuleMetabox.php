@@ -85,11 +85,10 @@ class ModuleMetabox implements ExecuteHooks
             'without_classes_pos' => ['\SEOPress\Tags\Schema', '\SEOPressPro\Tags\Schema']
         ]);
 
-
         $getLocale = get_locale();
         if (!empty($getLocale)) {
-            $locale       = substr($getLocale, 0, 2);
-            $country_code = substr($getLocale, -2);
+            $locale = locale_get_primary_language(get_locale());
+            $country_code = locale_get_region(get_locale());
         } else {
             $locale       = 'en';
             $country_code = 'US';

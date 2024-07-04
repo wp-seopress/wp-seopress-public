@@ -119,7 +119,15 @@ class TitleDescriptionMeta implements ExecuteHooks {
                 delete_post_meta($id, $value);
                 continue;
             }
-            update_post_meta($id, $value, esc_html($params[$key]));
+
+            $sanitized_value = '';
+            if ($key === 'title') {
+                $sanitized_value = sanitize_text_field($params[$key]);
+            } elseif ($key === 'description') {
+                $sanitized_value = sanitize_textarea_field($params[$key]);
+            }
+
+            update_post_meta($id, $value, $sanitized_value);
         }
 
         return new \WP_REST_Response([

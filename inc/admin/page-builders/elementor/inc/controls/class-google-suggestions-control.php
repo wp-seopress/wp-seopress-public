@@ -26,8 +26,8 @@ class Google_Suggestions_Control extends \Elementor\Base_Control {
         );
 
         if ('' != get_locale()) {
-            $locale       = substr(get_locale(), 0, 2);
-            $country_code = substr(get_locale(), -2);
+            $locale = locale_get_primary_language(get_locale());
+            $country_code = locale_get_region(get_locale());
         } else {
             $locale       = 'en';
             $country_code = 'US';

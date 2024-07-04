@@ -118,7 +118,7 @@ class TargetKeywords implements ExecuteHooks
 
         try {
             $targetKeywords = implode(',',array_map('trim', explode(',',$params['_seopress_analysis_target_kw'])));
-            update_post_meta($id, '_seopress_analysis_target_kw', $targetKeywords);
+            update_post_meta($id, '_seopress_analysis_target_kw', sanitize_text_field($targetKeywords));
 
             return new \WP_REST_Response([
                 'code' => 'success',

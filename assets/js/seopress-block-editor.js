@@ -57,6 +57,7 @@ jQuery(document).ready(function ($) {
                     typeof s.data["twitter:title"] === "undefined" ? tw_title = "" : tw_title = s.data["twitter:title"].value;
                     typeof s.data["twitter:description"] === "undefined" ? tw_desc = "" : tw_desc = s.data["twitter:description"].value;
                     typeof s.data["twitter:image"] === "undefined" ? tw_img = "" : tw_img = s.data["twitter:image"].value;
+                    typeof s.data["canonical"] === "undefined" ? canonical = "" : canonical = s.data["canonical"].value;
                     typeof s.data.meta_robots === "undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots.value;
 
                     var data_arr = {
@@ -67,7 +68,8 @@ jQuery(document).ready(function ($) {
                         og_site_name: og_site_name,
                         tw_title: tw_title,
                         tw_desc: tw_desc,
-                        tw_img: tw_img
+                        tw_img: tw_img,
+                        canonical: canonical
                     };
 
                     // Meta Robots
@@ -82,12 +84,31 @@ jQuery(document).ready(function ($) {
                     }
 
                     // Google Preview
-                    $("#seopress_cpt .google-snippet-preview .snippet-title").html(s.data.title),
-                        $("#seopress_cpt .google-snippet-preview .snippet-title-default").html(s.data.title),
-                        $("#seopress_titles_title_meta").attr("placeholder", s.data.title),
-                        $("#seopress_cpt .google-snippet-preview .snippet-description").html(s.data.meta_desc),
-                        $("#seopress_cpt .google-snippet-preview .snippet-description-default").html(s.data.meta_desc),
-                        $("#seopress_titles_desc_meta").attr("placeholder", s.data.meta_desc)
+                    title = '';
+                    if (s.data.title) {
+                        if (typeof s.data.title.value !== "undefined") {
+                            title = s.data.title.value.substr(0, 60);
+                        }
+                        else {
+                            title = s.data.title.substr(0, 60);
+                        }
+                    }
+
+                    $("#seopress_cpt .google-snippet-preview .snippet-title").html(title),
+                        $("#seopress_cpt .google-snippet-preview .snippet-title-default").html(title),
+                        $("#seopress_titles_title_meta").attr("placeholder", title);
+
+                    meta_desc = '';
+                    if (s.data.description) {
+                        meta_desc = s.data.description.value.substr(0, 160);
+                    }
+                    else if (typeof s.data.meta_desc !== "undefined") {
+                        meta_desc = s.data.meta_desc.substr(0, 160);
+                    }
+
+                    $("#seopress_cpt .google-snippet-preview .snippet-description").html(meta_desc),
+                        $("#seopress_cpt .google-snippet-preview .snippet-description-default").html(meta_desc),
+                        $("#seopress_titles_desc_meta").attr("placeholder", meta_desc)
 
                     // Facebook Preview
                     if (data_arr.og_title) {
@@ -132,7 +153,7 @@ jQuery(document).ready(function ($) {
 
                     $("#seopress_cpt .twitter-snippet-preview .snippet-twitter-url").html(data_arr.og_url),
 
-                        $('#seopress_cpt #seopress_robots_canonical_meta').attr('placeholder', s.data.canonical),
+                        $('#seopress_cpt #seopress_robots_canonical_meta').attr('placeholder', data_arr.canonical),
 
                         $('#seopress-analysis-tabs').load(" #seopress-analysis-tabs-1", '', sp_ca_toggle),
                         $('#seopress-wrap-notice-target-kw').load(" #seopress-notice-target-kw", ''),
