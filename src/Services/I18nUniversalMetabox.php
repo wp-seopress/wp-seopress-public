@@ -46,17 +46,17 @@ class I18nUniversalMetabox
                     'we_founded' => __("We found", "wp-seopress"),
                     'we_founded_2' => __("in your content.", "wp-seopress"),
                     'help_twitter_title' =>  __(
-                        "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. X (ex-Twitter) will take the last twitter:title tag from your source code. Below, the list:",
+                        "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. X will take the last twitter:title tag from your source code. Below, the list:",
                         "wp-seopress"
                     ),
                     'help_twitter_description' => __(
-                        "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. X (ex-Twitter) will take the last twitter:description tag from your source code. Below, the list:",
+                        "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. X will take the last twitter:description tag from your source code. Below, the list:",
                         "wp-seopress"
                     ),
                     'we_founded_tag' => __("We found a", "wp-seopress"),
                     'we_founded_tag_2' => __("tag in your source code.", "wp-seopress"),
                     'tag_empty' => __(
-                        /* translators: %s Twitter tag, eg: twitter:title */
+                        /* translators: %s X tag, eg: twitter:title */
                         'Your %s tag is empty!',
                         "wp-seopress"
                     ),
@@ -770,7 +770,7 @@ class I18nUniversalMetabox
                 ],
                 'social' => [
                     'title' => __(
-                        "LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X (ex-Twitter) does the same if no Twitter cards tags are defined below.",
+                        "LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below.",
                         "wp-seopress"
                     ),
                     'facebook_title' => __(
@@ -778,7 +778,7 @@ class I18nUniversalMetabox
                         "wp-seopress"
                     ),
                     'twitter_title' => __(
-                        "Preview your Twitter Card using the official validator",
+                        "Preview your X Cards using the official validator",
                         "wp-seopress"
                     ),
                 ],
@@ -810,7 +810,7 @@ class I18nUniversalMetabox
                     "twitter" => [
                         "title" => __("X Preview", "wp-seopress"),
                         "description" => __(
-                            "This is what your post will look like in X (ex-Twitter). You have to publish your post to get the X Preview.",
+                            "This is what your post will look like in X. You have to publish your post to get the X Preview.",
                             "wp-seopress"
                         ),
                         "ratio" => __("Your image ratio is:", "wp-seopress"),
@@ -819,11 +819,11 @@ class I18nUniversalMetabox
                             "wp-seopress"
                         ),
                         "min_size" => __(
-                            "Minimun size for X (ex-Twitter) is <strong>144x144px</strong>. Please choose another image.",
+                            "Minimun size for X is <strong>144x144px</strong>. Please choose another image.",
                             "wp-seopress"
                         ),
                         "file_support" => __(
-                            "File type not supported by X (ex-Twitter). Please choose another image.",
+                            "File type not supported by X. Please choose another image.",
                             "wp-seopress"
                         ),
                         "error_image" => __(

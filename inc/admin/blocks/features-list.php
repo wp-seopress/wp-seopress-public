@@ -33,7 +33,7 @@
 			'social' => [
 				'svg'           => SEOPRESS_URL_ASSETS . '/img/ico-social-networks.svg',
 				'title'         => __('Social Networks', 'wp-seopress'),
-				'desc'          => __('Open Graph, Twitter Card, Google Knowledge Graph and more...', 'wp-seopress'),
+				'desc'          => __('Open Graph, X Cards, Google Knowledge Graph and more...', 'wp-seopress'),
 				'btn_primary'   => admin_url('admin.php?page=seopress-social'),
 				'help'          => $docs['social']['og'],
 				'filter'        => 'seopress_remove_feature_social',

@@ -19,7 +19,7 @@ class GetContent
         }
 
         foreach ($targetKeywords as $kw) {
-            if (preg_match_all('#\b(' . $kw . ')\b#iu', $content, $m)) {
+            if (preg_match_all('#\b(' . $kw . ')\b#iu', remove_accents($content), $m)) {
                 $data[$kw] = $m[0];
             }
         }
@@ -519,7 +519,7 @@ class GetContent
         }
 
         //twitter:title
-        $desc .= '<h4>' . __('X (ex-Twitter) Title', 'wp-seopress') . '</h4>';
+        $desc .= '<h4>' . __('X Title', 'wp-seopress') . '</h4>';
 
         if (isset($data['twitter_title']) && is_array($data['twitter_title']) && !empty($data['twitter_title'])) {
             $count = count($data['twitter_title']);
@@ -529,12 +529,12 @@ class GetContent
             if ($count > 1) {
                 $analyzes['social']['impact'] = 'high';
                 $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . /* translators: %d number of times a twitter:tile tag is found */ sprintf(esc_html__('We found %d twitter:title in your content.', 'wp-seopress'), $count) . '</p>';
-                $desc .= '<p>' . /* translators: %d number of TWITTER:TITLE tags */ __('You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. X (ex-Twitter) will take the last twitter:title tag from your source code. Below, the list:', 'wp-seopress') . '</p>';
+                $desc .= '<p>' . /* translators: %d number of TWITTER:TITLE tags */ __('You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. X will take the last twitter:title tag from your source code. Below, the list:', 'wp-seopress') . '</p>';
             } elseif (empty($all_tw_title[0])) { //If twitter:title empty
                 $analyzes['social']['impact'] = 'high';
-                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X (ex-Twitter) Title tag is empty!', 'wp-seopress') . '</p>';
+                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X Title tag is empty!', 'wp-seopress') . '</p>';
             } else {
-                $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('We found a X (ex-Twitter) Title tag in your source code.', 'wp-seopress') . '</p>';
+                $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('We found a X Title tag in your source code.', 'wp-seopress') . '</p>';
             }
 
             if (! empty($all_tw_title)) {
@@ -546,11 +546,11 @@ class GetContent
             }
         } else {
             $analyzes['social']['impact'] = 'high';
-            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X (ex-Twitter) Title is missing!', 'wp-seopress') . '</p>';
+            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X Title is missing!', 'wp-seopress') . '</p>';
         }
 
         //twitter:description
-        $desc .= '<h4>' . __('X (ex-Twitter) Description', 'wp-seopress') . '</h4>';
+        $desc .= '<h4>' . __('X Description', 'wp-seopress') . '</h4>';
 
         if (isset($data['twitter_description']) && is_array($data['twitter_description']) && !empty($data['twitter_description'])) {
             $count = count($data['twitter_description']);
@@ -560,12 +560,12 @@ class GetContent
             if ($count > 1) {
                 $analyzes['social']['impact'] = 'high';
                 $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . /* translators: %d number of TWITTER:DESCRIPTION tags */ sprintf(esc_html__('We found %d twitter:description in your content.', 'wp-seopress'), $count) . '</p>';
-                $desc .= '<p>' . __('You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. X (ex-Twitter) will take the last twitter:description tag from your source code. Below, the list:', 'wp-seopress') . '</p>';
+                $desc .= '<p>' . __('You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. X will take the last twitter:description tag from your source code. Below, the list:', 'wp-seopress') . '</p>';
             } elseif (empty($all_tw_desc[0])) { //If twitter:description empty
                 $analyzes['social']['impact'] = 'high';
-                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X (ex-Twitter) Description tag is empty!', 'wp-seopress') . '</p>';
+                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X Description tag is empty!', 'wp-seopress') . '</p>';
             } else {
-                $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('We found a X (ex-Twitter) Description tag in your source code.', 'wp-seopress') . '</p>';
+                $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('We found a X Description tag in your source code.', 'wp-seopress') . '</p>';
             }
 
             if (! empty($all_tw_desc)) {
@@ -577,11 +577,11 @@ class GetContent
             }
         } else {
             $analyzes['social']['impact'] = 'high';
-            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X (ex-Twitter) Description is missing!', 'wp-seopress') . '</p>';
+            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X Description is missing!', 'wp-seopress') . '</p>';
         }
 
         //twitter:image
-        $desc .= '<h4>' . __('X (ex-Twitter) Image', 'wp-seopress') . '</h4>';
+        $desc .= '<h4>' . __('X Image', 'wp-seopress') . '</h4>';
 
         if (isset($data['twitter_image']) && is_array($data['twitter_image']) && !empty($data['twitter_image'])) {
             $count = count($data['twitter_image']);
@@ -595,7 +595,7 @@ class GetContent
             //If twitter:image:src empty
             if ($count > 0 && empty($all_tw_img[0])) {
                 $analyzes['social']['impact'] = 'high';
-                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X (ex-Twitter) Image tag is empty!', 'wp-seopress') . '</p>';
+                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X Image tag is empty!', 'wp-seopress') . '</p>';
             }
 
             if (! empty($all_tw_img)) {
@@ -607,7 +607,7 @@ class GetContent
             }
         } else {
             $analyzes['social']['impact'] = 'high';
-            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X (ex-Twitter) Image is missing!', 'wp-seopress') . '</p>';
+            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Your X Image is missing!', 'wp-seopress') . '</p>';
         }
         $analyzes['social']['desc'] = $desc;
 

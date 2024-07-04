@@ -26,7 +26,7 @@ if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
             <p>
                 <?php
                     /* translators: %s number of notifications */
-                    printf(_n('You have %s notification. We strongly encourage you to resolve these issues to avoid any SEO damage.', 'You have %s notifications. We strongly encourage you to resolve these issues to avoid any SEO damage.', $total, 'wp-seopress'), '<span>'.$total.'</span>');
+                    printf(_n('You have %s notification. We strongly encourage you to resolve this issue to avoid any SEO damage.', 'You have %s notifications. We strongly encourage you to resolve these issues to avoid any SEO damage.', $total, 'wp-seopress'), '<span>'.$total.'</span>');
                 ?>
             </p>
             <button id="seopress-see-notifications" type="button" role="tab" aria-selected="true" data-panel="notifications" class="btn btnSecondary">

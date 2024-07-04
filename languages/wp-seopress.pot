@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.7\n"
+"Project-Id-Version: SEOPress 7.7.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-24T08:38:01+00:00\n"
+"POT-Creation-Date: 2024-05-08T08:09:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -588,8 +588,7 @@ msgid "Facebook (Open Graph)"
 msgstr ""
 
 #: inc/admin/admin-pages/Social.php:21
-#: inc/admin/sections/Social.php:101
-msgid "X (Twitter Card)"
+msgid "X Cards"
 msgstr ""
 
 #: inc/admin/admin-pages/Titles.php:22
@@ -753,7 +752,7 @@ msgid "Manage your XML - Image - Video - HTML Sitemap."
 msgstr ""
 
 #: inc/admin/blocks/features-list.php:36
-msgid "Open Graph, Twitter Card, Google Knowledge Graph and more..."
+msgid "Open Graph, X Cards, Google Knowledge Graph and more..."
 msgstr ""
 
 #: inc/admin/blocks/features-list.php:44
@@ -883,7 +882,7 @@ msgstr ""
 
 #. translators: %s number of notifications
 #: inc/admin/blocks/notifications.php:29
-msgid "You have %s notification. We strongly encourage you to resolve these issues to avoid any SEO damage."
+msgid "You have %s notification. We strongly encourage you to resolve this issue to avoid any SEO damage."
 msgid_plural "You have %s notifications. We strongly encourage you to resolve these issues to avoid any SEO damage."
 msgstr[0] ""
 msgstr[1] ""
@@ -2129,7 +2128,7 @@ msgid "e.g. @my_x_account"
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:233
-msgid "X (ex-Twitter) Page URL"
+msgid "X Page URL"
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:244
@@ -2261,16 +2260,16 @@ msgstr ""
 
 #: inc/admin/callbacks/Social.php:522
 #: inc/admin/settings/Social.php:227
-msgid "Enable Twitter Card"
+msgid "Enable X Cards"
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:543
-msgid "Use OG if no Twitter Cards"
+msgid "Use OG if no X Cards"
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:562
 #: inc/admin/settings/Social.php:243
-msgid "Default Twitter Image"
+msgid "Default X Image"
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:569
@@ -2980,7 +2979,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:362
 #: src/Services/I18nUniversalMetabox.php:772
-msgid "LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X (ex-Twitter) does the same if no Twitter cards tags are defined below."
+msgid "LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below."
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:371
@@ -3079,33 +3078,34 @@ msgid "By "
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:496
+#: inc/admin/metaboxes/admin-metaboxes-form.php:500
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:451
 #: src/Helpers/Metas/SocialSettings.php:64
+#: src/Services/ContentAnalysis/GetContent.php:522
 #: src/Services/I18nUniversalMetabox.php:38
 msgid "X Title"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:499
-msgid "Enter your Twitter title"
-msgstr ""
-
-#: inc/admin/metaboxes/admin-metaboxes-form.php:500
-msgid "Twitter Title"
+#: src/Helpers/Metas/SocialSettings.php:61
+msgid "Enter your X title"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:504
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:462
 #: src/Helpers/Metas/SocialSettings.php:73
+#: src/Services/ContentAnalysis/GetContent.php:553
 #: src/Services/I18nUniversalMetabox.php:39
 msgid "X Description"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:507
-msgid "Enter your Twitter description"
+#: src/Helpers/Metas/SocialSettings.php:70
+msgid "Enter your X description"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:508
-msgid "Twitter description"
+msgid "X description"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:511
@@ -3123,7 +3123,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:537
 #: src/Services/I18nUniversalMetabox.php:812
-msgid "This is what your post will look like in X (ex-Twitter). You have to publish your post to get the X Preview."
+msgid "This is what your post will look like in X. You have to publish your post to get the X Preview."
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:540
@@ -3132,11 +3132,11 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:545
 #: src/Services/I18nUniversalMetabox.php:825
-msgid "File type not supported by X (ex-Twitter). Please choose another image."
+msgid "File type not supported by X. Please choose another image."
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:549
-msgid "Minimum size for X (ex-Twitter) is <strong>144x144px</strong>. Please choose another image."
+msgid "Minimum size for X is <strong>144x144px</strong>. Please choose another image."
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:558
@@ -3281,7 +3281,7 @@ msgid "Facebook Open Graph tags (title, description and image thumbnail)"
 msgstr ""
 
 #: inc/admin/migrate/MigrationTools.php:22
-msgid "X (ex-Twitter) tags (title, description and image thumbnail)"
+msgid "X tags (title, description and image thumbnail)"
 msgstr ""
 
 #: inc/admin/migrate/MigrationTools.php:25
@@ -3371,7 +3371,7 @@ msgid "<p class=\"elementor-control-field-description\"><span class=\"dashicons 
 msgstr ""
 
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:394
-msgid "<p class=\"elementor-control-field-description\"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. X (ex-Twitter) does the same if no Twitter cards tags are defined below.</p>"
+msgid "<p class=\"elementor-control-field-description\"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below.</p>"
 msgstr ""
 
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:512
@@ -3831,7 +3831,7 @@ msgstr ""
 
 #: inc/admin/sections/Social.php:66
 #: inc/admin/sections/Social.php:106
-msgid "Manage Facebook Open Graph and Twitter Cards metas - new window"
+msgid "Manage Facebook Open Graph and X Cards metas - new window"
 msgstr ""
 
 #: inc/admin/sections/Social.php:71
@@ -3860,8 +3860,14 @@ msgstr ""
 msgid "Site icon from the Customizer"
 msgstr ""
 
+#: inc/admin/sections/Social.php:101
+#: inc/functions/options-google-analytics.php:31
+#: src/Services/I18nUniversalMetabox.php:25
+msgid "X"
+msgstr ""
+
 #: inc/admin/sections/Social.php:105
-msgid "Manage your Twitter Card."
+msgid "Manage your X Cards."
 msgstr ""
 
 #: inc/admin/sections/Social.php:111
@@ -3869,11 +3875,11 @@ msgid "We generate the <strong>twitter:image</strong> meta in this order:"
 msgstr ""
 
 #: inc/admin/sections/Social.php:116
-msgid "Custom X (ex-Twitter) image from SEO metabox"
+msgid "Custom X image from SEO metabox"
 msgstr ""
 
 #: inc/admin/sections/Social.php:125
-msgid "Global Twitter:image set in SEO > Social > Twitter Card"
+msgid "Global twitter:image set in SEO > Social > X Cards"
 msgstr ""
 
 #: inc/admin/sections/Titles.php:16
@@ -4302,7 +4308,8 @@ msgid "Contact option (only for Organizations)"
 msgstr ""
 
 #: inc/admin/settings/Social.php:105
-msgid "X (ex-Twitter) Username"
+#: inc/admin/wizard/admin-wizard.php:985
+msgid "X Username"
 msgstr ""
 
 #: inc/admin/settings/Social.php:145
@@ -4335,11 +4342,11 @@ msgid "Facebook App ID"
 msgstr ""
 
 #: inc/admin/settings/Social.php:235
-msgid "Use Open Graph if no Twitter Card is filled"
+msgid "Use Open Graph if no X Cards is filled"
 msgstr ""
 
 #: inc/admin/settings/Social.php:251
-msgid "Image size for Twitter Summary card"
+msgid "Image size for X Summary card"
 msgstr ""
 
 #: inc/admin/settings/Titles.php:299
@@ -4599,10 +4606,6 @@ msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:978
 msgid "Facebook page URL"
-msgstr ""
-
-#: inc/admin/wizard/admin-wizard.php:985
-msgid "X Username"
 msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:1083
@@ -4975,11 +4978,6 @@ msgstr ""
 msgid "By visiting our site, you agree to our privacy policy regarding cookies, tracking statistics, etc."
 msgstr ""
 
-#: inc/functions/options-google-analytics.php:31
-#: src/Services/I18nUniversalMetabox.php:25
-msgid "X"
-msgstr ""
-
 #: inc/functions/options-google-analytics.php:57
 msgid "Manage cookies"
 msgstr ""
@@ -5258,14 +5256,6 @@ msgstr ""
 
 #: src/Helpers/Metas/SocialSettings.php:37
 msgid "Facebook thumbnail"
-msgstr ""
-
-#: src/Helpers/Metas/SocialSettings.php:61
-msgid "Enter your X title"
-msgstr ""
-
-#: src/Helpers/Metas/SocialSettings.php:70
-msgid "Enter your X description"
 msgstr ""
 
 #: src/Helpers/OpeningHoursHelper.php:12
@@ -5850,10 +5840,6 @@ msgstr ""
 msgid "Your Open Graph Site Name is missing!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:522
-msgid "X (ex-Twitter) Title"
-msgstr ""
-
 #. translators: %d number of times a twitter:tile tag is found
 #: src/Services/ContentAnalysis/GetContent.php:531
 msgid "We found %d twitter:title in your content."
@@ -5862,23 +5848,19 @@ msgstr ""
 #. translators: %d number of TWITTER:TITLE tags
 #: src/Services/ContentAnalysis/GetContent.php:532
 #: src/Services/I18nUniversalMetabox.php:48
-msgid "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. X (ex-Twitter) will take the last twitter:title tag from your source code. Below, the list:"
+msgid "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. X will take the last twitter:title tag from your source code. Below, the list:"
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:535
-msgid "Your X (ex-Twitter) Title tag is empty!"
+msgid "Your X Title tag is empty!"
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:537
-msgid "We found a X (ex-Twitter) Title tag in your source code."
+msgid "We found a X Title tag in your source code."
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:549
-msgid "Your X (ex-Twitter) Title is missing!"
-msgstr ""
-
-#: src/Services/ContentAnalysis/GetContent.php:553
-msgid "X (ex-Twitter) Description"
+msgid "Your X Title is missing!"
 msgstr ""
 
 #. translators: %d number of TWITTER:DESCRIPTION tags
@@ -5889,23 +5871,24 @@ msgstr ""
 #. translators: %d number of TWITTER:DESCRIPTION tags
 #: src/Services/ContentAnalysis/GetContent.php:563
 #: src/Services/I18nUniversalMetabox.php:52
-msgid "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. X (ex-Twitter) will take the last twitter:description tag from your source code. Below, the list:"
+msgid "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. X will take the last twitter:description tag from your source code. Below, the list:"
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:566
-msgid "Your X (ex-Twitter) Description tag is empty!"
+msgid "Your X Description tag is empty!"
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:568
-msgid "We found a X (ex-Twitter) Description tag in your source code."
+msgid "We found a X Description tag in your source code."
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:580
-msgid "Your X (ex-Twitter) Description is missing!"
+msgid "Your X Description is missing!"
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:584
-msgid "X (ex-Twitter) Image"
+#: src/Services/I18nUniversalMetabox.php:40
+msgid "X Image"
 msgstr ""
 
 #. translators: %d number of TWITTER:IMAGE tags
@@ -5914,11 +5897,11 @@ msgid "We found %d twitter:image in your content."
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:598
-msgid "Your X (ex-Twitter) Image tag is empty!"
+msgid "Your X Image tag is empty!"
 msgstr ""
 
 #: src/Services/ContentAnalysis/GetContent.php:610
-msgid "Your X (ex-Twitter) Image is missing!"
+msgid "Your X Image is missing!"
 msgstr ""
 
 #. translators: %s number of meta robots tags
@@ -6120,10 +6103,6 @@ msgstr ""
 msgid "Loading your data"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:40
-msgid "X Image"
-msgstr ""
-
 #. translators: %s X tag, eg: twitter:title
 #: src/Services/I18nUniversalMetabox.php:41
 msgid "Your %s is missing!"
@@ -6148,7 +6127,7 @@ msgstr ""
 msgid "tag in your source code."
 msgstr ""
 
-#. translators: %s Twitter tag, eg: twitter:title
+#. translators: %s X tag, eg: twitter:title
 #: src/Services/I18nUniversalMetabox.php:58
 msgid "Your %s tag is empty!"
 msgstr ""
@@ -6870,7 +6849,7 @@ msgid "Add a schema"
 msgstr ""
 
 #: src/Services/I18nUniversalMetabox.php:780
-msgid "Preview your Twitter Card using the official validator"
+msgid "Preview your X Cards using the official validator"
 msgstr ""
 
 #: src/Services/I18nUniversalMetabox.php:792
@@ -6888,7 +6867,7 @@ msgid "Please choose an image"
 msgstr ""
 
 #: src/Services/I18nUniversalMetabox.php:821
-msgid "Minimun size for X (ex-Twitter) is <strong>144x144px</strong>. Please choose another image."
+msgid "Minimun size for X is <strong>144x144px</strong>. Please choose another image."
 msgstr ""
 
 #: src/Services/I18nUniversalMetabox.php:843
@@ -7044,7 +7023,7 @@ msgid "Facebook URL"
 msgstr ""
 
 #: src/Tags/Schema/SocialAccount/Twitter.php:15
-msgid "X (ex-Twitter) URL"
+msgid "X URL"
 msgstr ""
 
 #: src/Tags/SiteTagline.php:22

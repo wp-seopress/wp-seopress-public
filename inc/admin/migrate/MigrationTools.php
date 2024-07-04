@@ -19,7 +19,7 @@ function seopress_migration_tool($plugin, $name) {
                     <li>' . __('Meta description', 'wp-seopress') . '</li>
                     <li>' . __('Facebook Open Graph tags (title, description and image thumbnail)', 'wp-seopress') . '</li>';
     if ('premium-seo-pack' != $plugin) {
-        $html .= '<li>' . __('X (ex-Twitter) tags (title, description and image thumbnail)', 'wp-seopress') . '</li>';
+        $html .= '<li>' . __('X tags (title, description and image thumbnail)', 'wp-seopress') . '</li>';
     }
     if ('wp-meta-seo' != $plugin && 'seo-ultimate' != $plugin) {
         $html .= '<li>' . __('Meta Robots (noindex, nofollow...)', 'wp-seopress') . '</li>';

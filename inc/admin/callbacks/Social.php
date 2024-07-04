@@ -230,7 +230,7 @@ function seopress_social_accounts_twitter_callback()
     $check   = isset($options['seopress_social_accounts_twitter']) ? $options['seopress_social_accounts_twitter'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="' . esc_html__('e.g. @my_x_account', 'wp-seopress') . '" aria-label="' . __('X (ex-Twitter) Page URL', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_accounts_twitter]" placeholder="' . esc_html__('e.g. @my_x_account', 'wp-seopress') . '" aria-label="' . __('X Page URL', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
     );
 }
@@ -519,7 +519,7 @@ function seopress_social_twitter_card_callback()
     <?php } ?>
     value="1"/>
 
-    <?php _e('Enable Twitter Card', 'wp-seopress'); ?>
+    <?php _e('Enable X Cards', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_social_twitter_card'])) {
@@ -540,7 +540,7 @@ function seopress_social_twitter_card_og_callback()
     <?php } ?>
     value="1"/>
 
-    <?php _e('Use OG if no Twitter Cards', 'wp-seopress'); ?>
+    <?php _e('Use OG if no X Cards', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_social_twitter_card_og'])) {
@@ -559,7 +559,7 @@ function seopress_social_twitter_card_img_callback()
 <input id="seopress_social_twitter_img_meta" type="text"
     value="<?php echo $options_set; ?>"
     name="seopress_social_option_name[seopress_social_twitter_card_img]"
-    aria-label="<?php _e('Default Twitter Image', 'wp-seopress'); ?>"
+    aria-label="<?php _e('Default X Image', 'wp-seopress'); ?>"
     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>" />
 
 <input id="seopress_social_twitter_img_upload" class="btn btnSecondary" type="button" value="<?php _e('Upload an Image', 'wp-seopress'); ?>" />

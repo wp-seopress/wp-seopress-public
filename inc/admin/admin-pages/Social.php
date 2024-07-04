@@ -18,7 +18,7 @@ $plugin_settings_tabs    = [
                 'tab_seopress_social_knowledge' => __('Knowledge Graph', 'wp-seopress'),
                 'tab_seopress_social_accounts'  => __('Your social accounts', 'wp-seopress'),
                 'tab_seopress_social_facebook'  => __('Facebook (Open Graph)', 'wp-seopress'),
-                'tab_seopress_social_twitter'   => __('X (Twitter Card)', 'wp-seopress'),
+                'tab_seopress_social_twitter'   => __('X Cards', 'wp-seopress'),
             ];
 
 echo '<div class="nav-tab-wrapper">';

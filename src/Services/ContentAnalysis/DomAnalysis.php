@@ -10,7 +10,7 @@ class DomAnalysis
     {
         $data = [];
         foreach ($targetKeywords as $kw) {
-            if (preg_match_all('#\b(' . $kw . ')\b#iu', $content, $m)) {
+            if (preg_match_all('#\b(' . $kw . ')\b#iu', remove_accents($content), $m)) {
                 $data[$kw][] = $m[0];
             }
         }

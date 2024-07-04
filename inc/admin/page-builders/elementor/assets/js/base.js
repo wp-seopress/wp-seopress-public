@@ -180,7 +180,7 @@ function contentAnalysis() {
                 jQuery(".analysis-score p").addClass('loading')
         },
         success: function (s) {
-            typeof s.data.meta_robots === "undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots[0];
+            typeof s.data.meta_robots === "undefined" ? meta_robots = "" : meta_robots = s.data.meta_robots.value;
 
             // Meta Robots
             meta_robots = meta_robots.toString();

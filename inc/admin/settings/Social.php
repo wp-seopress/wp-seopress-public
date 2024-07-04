@@ -102,7 +102,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_accounts_twitter', // ID
-    __('X (ex-Twitter) Username', 'wp-seopress'), // Title
+    __('X Username', 'wp-seopress'), // Title
     'seopress_social_accounts_twitter_callback', // Callback
     'seopress-settings-admin-social-accounts', // Page
     'seopress_setting_section_social_accounts' // Section
@@ -217,14 +217,14 @@ add_settings_field(
 add_settings_section(
     'seopress_setting_section_social_twitter', // ID
     '',
-    //__("X (ex-Twitter)","wp-seopress"), // Title
+    //__("X","wp-seopress"), // Title
     'print_section_info_social_twitter', // Callback
     'seopress-settings-admin-social-twitter' // Page
 );
 
 add_settings_field(
     'seopress_social_twitter_card', // ID
-    __('Enable Twitter Card', 'wp-seopress'), // Title
+    __('Enable X Cards', 'wp-seopress'), // Title
     'seopress_social_twitter_card_callback', // Callback
     'seopress-settings-admin-social-twitter', // Page
     'seopress_setting_section_social_twitter' // Section
@@ -232,7 +232,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_twitter_card_og', // ID
-    __('Use Open Graph if no Twitter Card is filled', 'wp-seopress'), // Title
+    __('Use Open Graph if no X Cards is filled', 'wp-seopress'), // Title
     'seopress_social_twitter_card_og_callback', // Callback
     'seopress-settings-admin-social-twitter', // Page
     'seopress_setting_section_social_twitter' // Section
@@ -240,7 +240,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_twitter_card_img', // ID
-    __('Default Twitter Image', 'wp-seopress'), // Title
+    __('Default X Image', 'wp-seopress'), // Title
     'seopress_social_twitter_card_img_callback', // Callback
     'seopress-settings-admin-social-twitter', // Page
     'seopress_setting_section_social_twitter' // Section
@@ -248,7 +248,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_twitter_card_img_size', // ID
-    __('Image size for Twitter Summary card', 'wp-seopress'), // Title
+    __('Image size for X Summary card', 'wp-seopress'), // Title
     'seopress_social_twitter_card_img_size_callback', // Callback
     'seopress-settings-admin-social-twitter', // Page
     'seopress_setting_section_social_twitter' // Section

@@ -12,7 +12,7 @@ class Twitter implements GetTagValue {
     const NAME = 'social_account_twitter';
 
     public static function getDescription() {
-        return __('X (ex-Twitter) URL', 'wp-seopress');
+        return __('X URL', 'wp-seopress');
     }
 
     /**

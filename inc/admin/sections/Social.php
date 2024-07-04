@@ -63,7 +63,7 @@ function print_section_info_social_facebook()
 
 <p>
     <?php _e('Manage Open Graph data. These metatags will be used by Facebook, Pinterest, LinkedIn, WhatsApp... when a user shares a link on its own social network. Increase your click-through rate by providing relevant information such as an attractive image.', 'wp-seopress'); ?>
-    <?php echo seopress_tooltip_link($docs['social']['og'], __('Manage Facebook Open Graph and Twitter Cards metas - new window', 'wp-seopress')); ?>
+    <?php echo seopress_tooltip_link($docs['social']['og'], __('Manage Facebook Open Graph and X Cards metas - new window', 'wp-seopress')); ?>
 </p>
 
 <div class="seopress-notice">
@@ -98,12 +98,12 @@ function print_section_info_social_twitter()
     $docs  = seopress_get_docs_links(); ?>
 <div class="sp-section-header">
     <h2>
-        <?php _e('X (Twitter Card)', 'wp-seopress'); ?>
+        <?php _e('X', 'wp-seopress'); ?>
     </h2>
 </div>
 <p>
-    <?php _e('Manage your Twitter Card.', 'wp-seopress'); ?>
-    <?php echo seopress_tooltip_link($docs['social']['og'], __('Manage Facebook Open Graph and Twitter Cards metas - new window', 'wp-seopress')); ?>
+    <?php _e('Manage your X Cards.', 'wp-seopress'); ?>
+    <?php echo seopress_tooltip_link($docs['social']['og'], __('Manage Facebook Open Graph and X Cards metas - new window', 'wp-seopress')); ?>
 </p>
 
 <div class="seopress-notice">
@@ -113,7 +113,7 @@ function print_section_info_social_twitter()
 
     <ol>
         <li>
-            <?php _e('Custom X (ex-Twitter) image from SEO metabox', 'wp-seopress'); ?>
+            <?php _e('Custom X image from SEO metabox', 'wp-seopress'); ?>
         </li>
         <li>
             <?php _e('Post thumbnail / Product category thumbnail (Featured image)', 'wp-seopress'); ?>
@@ -122,7 +122,7 @@ function print_section_info_social_twitter()
             <?php _e('First image of your post content', 'wp-seopress'); ?>
         </li>
         <li>
-            <?php _e('Global Twitter:image set in SEO > Social > Twitter Card', 'wp-seopress'); ?>
+            <?php _e('Global twitter:image set in SEO > Social > X Cards', 'wp-seopress'); ?>
         </li>
     </ol>
 </div>

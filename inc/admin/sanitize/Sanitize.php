@@ -20,6 +20,7 @@ function seopress_sanitize_options_fields($input){
         'seopress_titles_archives_404_title',
         'seopress_titles_archives_404_desc',
         'seopress_xml_sitemap_html_exclude',
+        'seopress_xml_sitemap_html_mapping',
         'seopress_social_knowledge_name',
         'seopress_social_knowledge_img',
         'seopress_social_knowledge_desc',

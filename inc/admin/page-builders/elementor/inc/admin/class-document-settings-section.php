@@ -391,7 +391,7 @@ class Document_Settings_Section {
             [
                 //'label' => __( 'Important Note', 'wp-seopress' ),
                 'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw'  => __('<p class="elementor-control-field-description"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. X (ex-Twitter) does the same if no Twitter cards tags are defined below.</p>', 'wp-seopress'),
+                'raw'  => __('<p class="elementor-control-field-description"><strong>Did you know?</strong> LinkedIn, Instagram and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below.</p>', 'wp-seopress'),
                 //'content_classes' => 'your-class',
             ]
         );
