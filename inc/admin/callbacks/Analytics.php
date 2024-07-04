@@ -547,15 +547,15 @@ function seopress_google_analytics_roles_callback() {
         $check = isset($options['seopress_google_analytics_roles'][$key]); ?>
 
 <p>
-    <label for="seopress_google_analytics_roles_<?php echo $key; ?>">
+    <label for="seopress_google_analytics_roles_<?php echo esc_attr($key); ?>">
         <input
-            id="seopress_google_analytics_roles_<?php echo $key; ?>"
-            name="seopress_google_analytics_option_name[seopress_google_analytics_roles][<?php echo $key; ?>]"
+            id="seopress_google_analytics_roles_<?php echo esc_attr($key); ?>"
+            name="seopress_google_analytics_option_name[seopress_google_analytics_roles][<?php echo esc_attr($key); ?>]"
             type="checkbox" <?php if ('1' == $check) { ?>
         checked="yes"
         <?php } ?>
         value="1"/>
-        <strong><?php echo $value; ?></strong> (<em><?php echo translate_user_role($value,  'default'); ?></em>)
+        <strong><?php echo esc_html($value); ?></strong> (<em><?php echo esc_html(translate_user_role($value,  'default')); ?></em>)
     </label>
 </p>
 
@@ -588,9 +588,9 @@ esc_html($check)); ?>
 function seopress_google_analytics_other_tracking_callback() {
     if (current_user_can('unfiltered_html')) {
         $options = get_option('seopress_google_analytics_option_name');
-        $check   = isset($options['seopress_google_analytics_other_tracking']) ? esc_textarea($options['seopress_google_analytics_other_tracking']) : null;
+        $check   = isset($options['seopress_google_analytics_other_tracking']) ? $options['seopress_google_analytics_other_tracking'] : null;
 
-        printf('<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (head). Do NOT paste GA4 or Matomo codes here. They are automatically added to your source code.', 'wp-seopress') . '" aria-label="' . esc_attr__('Additional tracking code field', 'wp-seopress') . '">%s</textarea>', $check);
+        printf('<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (head). Do NOT paste GA4 or Matomo codes here. They are automatically added to your source code.', 'wp-seopress') . '" aria-label="' . esc_attr__('Additional tracking code field', 'wp-seopress') . '">%s</textarea>', esc_textarea($check));
         ?>
 
         <p class="description">
@@ -611,11 +611,11 @@ function seopress_google_analytics_other_tracking_body_callback() {
     $docs    = seopress_get_docs_links();
     if (current_user_can('unfiltered_html')) {
         $options = get_option('seopress_google_analytics_option_name');
-        $check   = isset($options['seopress_google_analytics_other_tracking_body']) ? esc_textarea($options['seopress_google_analytics_other_tracking_body']) : null;
+        $check   = isset($options['seopress_google_analytics_other_tracking_body']) ? $options['seopress_google_analytics_other_tracking_body'] : null;
 
         printf(
         '<textarea id="seopress_google_analytics_other_tracking_body" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_body]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (body)', 'wp-seopress') . '" aria-label="' . esc_attr__('Additional tracking code field added to body', 'wp-seopress') . '">%s</textarea>',
-        $check); ?>
+        esc_textarea($check)); ?>
         <p class="description"><?php esc_attr_e('This code will be added just after the opening body tag of your page.', 'wp-seopress'); ?></p>
 
         <p class="description"><?php echo wp_kses_post(__('You don‘t see your code? Make sure to call <code>wp_body_open();</code> just after the opening body tag in your theme.', 'wp-seopress')); ?></p>
@@ -631,7 +631,7 @@ function seopress_google_analytics_other_tracking_body_callback() {
 
 <p class="description">
     <a class="seopress-help"
-        href="<?php echo $docs['analytics']['gtm']; ?>"
+        href="<?php echo esc_url($docs['analytics']['gtm']); ?>"
         target="_blank">
         <?php esc_attr_e('Learn how to integrate Google Tag Manager', 'wp-seopress'); ?>
     </a>
@@ -644,11 +644,11 @@ function seopress_google_analytics_other_tracking_body_callback() {
 function seopress_google_analytics_other_tracking_footer_callback() {
     if (current_user_can('unfiltered_html')) {
         $options = get_option('seopress_google_analytics_option_name');
-        $check   = isset($options['seopress_google_analytics_other_tracking_footer']) ? esc_textarea($options['seopress_google_analytics_other_tracking_footer']) : null;
+        $check   = isset($options['seopress_google_analytics_other_tracking_footer']) ? $options['seopress_google_analytics_other_tracking_footer'] : null;
 
         printf(
         '<textarea id="seopress_google_analytics_other_tracking_footer" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_footer]" rows="16" placeholder="' . esc_html__('Paste your tracking code here (footer)', 'wp-seopress') . '" aria-label="' . esc_attr__('Additional tracking code field added to footer', 'wp-seopress') . '">%s</textarea>',
-        $check); ?>
+        esc_textarea($check)); ?>
 
         <p class="description">
             <?php esc_attr_e('This code will be added just after the closing body tag of your page.', 'wp-seopress'); ?>

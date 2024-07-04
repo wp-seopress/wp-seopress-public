@@ -99,7 +99,7 @@ function seopress_redirections_value() {
 		$seopress_redirections_value = html_entity_decode(esc_url(get_term_meta(get_queried_object_id(),'_seopress_redirections_value',true)));
 		return $seopress_redirections_value;
 	} else {
-		$seopress_redirections_value = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+		$seopress_redirections_value = basename(wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 		$seopress_redirections_query = new WP_Query( array(
 				'post_type' => 'seopress_404',
 				'posts_per_page' => '-1',

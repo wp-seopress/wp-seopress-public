@@ -51,7 +51,7 @@ function seopress_social_knowledge_img_callback()
     $check = isset($options['seopress_social_knowledge_img']); ?>
 
 <input id="seopress_social_knowledge_img_meta" type="text"
-    value="<?php echo $options_set; ?>"
+    value="<?php echo esc_attr($options_set); ?>"
     name="seopress_social_option_name[seopress_social_knowledge_img]"
     aria-label="<?php esc_attr_e('Your photo/organization logo', 'wp-seopress'); ?>"
     placeholder="<?php esc_html_e('Select your logo', 'wp-seopress'); ?>" />
@@ -392,8 +392,8 @@ function seopress_social_facebook_img_cpt_callback()
 
         if (! empty($post_types)) {
             foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) { ?>
-<h3><?php echo $seopress_cpt_value->labels->name; ?>
-    <em><small>[<?php echo $seopress_cpt_value->name; ?>]</small></em>
+<h3><?php echo esc_html($seopress_cpt_value->labels->name); ?>
+    <em><small>[<?php echo esc_html($seopress_cpt_value->name); ?>]</small></em>
 </h3>
 
 <?php if ('product' === $seopress_cpt_value->name && is_plugin_active('woocommerce/woocommerce.php')) { ?>
@@ -409,17 +409,17 @@ function seopress_social_facebook_img_cpt_callback()
 
 <p>
     <input
-        id="seopress_social_facebook_img_cpt_meta_<?php echo $seopress_cpt_key; ?>"
+        id="seopress_social_facebook_img_cpt_meta_<?php echo esc_attr($seopress_cpt_key); ?>"
         class="seopress_social_facebook_img_cpt_meta" type="text"
         value="<?php echo $options_set; ?>"
-        name="seopress_social_option_name[seopress_social_facebook_img_cpt][<?php echo $seopress_cpt_key; ?>][url]"
+        name="seopress_social_option_name[seopress_social_facebook_img_cpt][<?php echo esc_attr($seopress_cpt_key); ?>][url]"
         aria-label="<?php esc_attr_e('Select a default image', 'wp-seopress'); ?>"
         placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>" />
 
     <input
         id="seopress_social_facebook_img_upload"
         class="seopress_social_facebook_img_cpt seopress-btn-upload-media btn btnSecondary"
-        data-input-value="#seopress_social_facebook_img_cpt_meta_<?php echo $seopress_cpt_key; ?>"
+        data-input-value="#seopress_social_facebook_img_cpt_meta_<?php echo esc_attr($seopress_cpt_key); ?>"
         type="button"
         value="<?php esc_attr_e('Upload an Image', 'wp-seopress'); ?>" />
 
@@ -557,7 +557,7 @@ function seopress_social_twitter_card_img_callback()
     $check = isset($options['seopress_social_twitter_card_img']); ?>
 
 <input id="seopress_social_twitter_img_meta" type="text"
-    value="<?php echo $options_set; ?>"
+    value="<?php echo esc_attr($options_set); ?>"
     name="seopress_social_option_name[seopress_social_twitter_card_img]"
     aria-label="<?php esc_attr_e('Default X Image', 'wp-seopress'); ?>"
     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>" />
@@ -570,7 +570,7 @@ function seopress_social_twitter_card_img_callback()
 </p>
 
 <div id="seopress_social_twitter_img_placeholder_upload" class="seopress-img-placeholder" data_caption="<?php esc_attr_e('Click to select an image', 'wp-seopress'); ?>">
-    <img id="seopress_social_twitter_img_placeholder_src" class="seopress-img-x-preview" src="<?php echo $options_set; ?>" />
+    <img id="seopress_social_twitter_img_placeholder_src" class="seopress-img-x-preview" src="<?php echo esc_url($options_set); ?>" />
 </div>
 
 <?php if (isset($options['seopress_social_twitter_card_img'])) {

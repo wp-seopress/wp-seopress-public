@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 7.9.1\n"
+"Project-Id-Version: SEOPress 7.9.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-06-20T18:08:49+00:00\n"
+"POT-Creation-Date: 2024-06-28T12:32:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes.php:62
 #: inc/admin/metaboxes/admin-metaboxes.php:65
 #: inc/admin/page-builders/gutenberg/blocks.php:19
-#: inc/functions/options-advanced-admin.php:538
+#: inc/functions/options-advanced-admin.php:591
 #: src/Services/I18nUniversalMetabox.php:401
 msgid "SEO"
 msgstr ""
@@ -218,36 +218,36 @@ msgstr ""
 msgid "Hide Get started?"
 msgstr ""
 
-#: inc/admin/admin-bar/admin-header.php:157
+#: inc/admin/admin-bar/admin-header.php:155
 msgid "Hide Onboarding tasks?"
 msgstr ""
 
-#: inc/admin/admin-bar/admin-header.php:170
+#: inc/admin/admin-bar/admin-header.php:168
 msgid "Hide Site Overview?"
 msgstr ""
 
-#: inc/admin/admin-bar/admin-header.php:182
+#: inc/admin/admin-bar/admin-header.php:178
 msgid "Hide Notifications Center?"
 msgstr ""
 
-#: inc/admin/admin-bar/admin-header.php:195
+#: inc/admin/admin-bar/admin-header.php:189
 msgid "Hide SEOPress Insights?"
 msgstr ""
 
-#: inc/admin/admin-bar/admin-header.php:208
+#: inc/admin/admin-bar/admin-header.php:200
 msgid "Hide SEOPress PRO?"
 msgstr ""
 
-#: inc/admin/admin-bar/admin-header.php:219
+#: inc/admin/admin-bar/admin-header.php:211
 msgid "Hide SEO News?"
 msgstr ""
 
 #. translators: %d number of notifications
-#: inc/admin/admin-bar/admin-header.php:232
+#: inc/admin/admin-bar/admin-header.php:224
 msgid "Notifications <span>(%d)</span>"
 msgstr ""
 
-#: inc/admin/admin-bar/admin-header.php:233
+#: inc/admin/admin-bar/admin-header.php:225
 msgid "Show hidden"
 msgstr ""
 
@@ -539,7 +539,7 @@ msgstr ""
 
 #: inc/admin/admin-pages/InstantIndexing.php:25
 #: inc/admin/admin-pages/Tools.php:20
-#: inc/admin/admin-pages/Tools.php:40
+#: inc/admin/admin-pages/Tools.php:43
 #: inc/admin/sections/InstantIndexing.php:62
 #: seopress.php:472
 msgid "Settings"
@@ -605,94 +605,94 @@ msgid "Archives"
 msgstr ""
 
 #: inc/admin/admin-pages/Tools.php:21
-#: inc/admin/admin-pages/Tools.php:93
+#: inc/admin/admin-pages/Tools.php:95
 msgid "Plugins"
 msgstr ""
 
 #: inc/admin/admin-pages/Tools.php:22
-#: inc/admin/admin-pages/Tools.php:160
+#: inc/admin/admin-pages/Tools.php:158
 msgid "Reset"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:44
+#: inc/admin/admin-pages/Tools.php:48
 msgid "Export plugin settings"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:47
+#: inc/admin/admin-pages/Tools.php:51
 msgid "Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site."
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:55
+#: inc/admin/admin-pages/Tools.php:58
 msgid "Export"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:63
+#: inc/admin/admin-pages/Tools.php:67
 msgid "Import plugin settings"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:66
+#: inc/admin/admin-pages/Tools.php:70
 msgid "Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above."
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:78
+#: inc/admin/admin-pages/Tools.php:80
 msgid "Import"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:82
+#: inc/admin/admin-pages/Tools.php:84
 msgid "Import completed!"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:96
+#: inc/admin/admin-pages/Tools.php:99
 msgid "Import posts and terms metadata from"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:118
+#: inc/admin/admin-pages/Tools.php:119
 #: inc/admin/wizard/admin-wizard.php:738
 msgid "Select an option"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:126
+#: inc/admin/admin-pages/Tools.php:124
 #: inc/admin/wizard/admin-wizard.php:757
 msgid "You don't have to enable the selected SEO plugin to run the import."
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:139
+#: inc/admin/admin-pages/Tools.php:137
 msgid "Cleaning"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:144
+#: inc/admin/admin-pages/Tools.php:142
 msgid "Clean content scans"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:147
+#: inc/admin/admin-pages/Tools.php:145
 msgid "By clicking Delete content scans, all content analysis will be deleted from your database."
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:152
+#: inc/admin/admin-pages/Tools.php:150
 msgid "Delete content scans"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:165
+#: inc/admin/admin-pages/Tools.php:163
 msgid "Reset All Notices From Notifications Center"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:168
+#: inc/admin/admin-pages/Tools.php:166
 msgid "By clicking Reset Notices, all notices in the notifications center will be set to their initial status."
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:173
+#: inc/admin/admin-pages/Tools.php:171
 msgid "Reset notices"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:180
+#: inc/admin/admin-pages/Tools.php:178
 msgid "Reset All Settings"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:183
+#: inc/admin/admin-pages/Tools.php:181
 msgid "<strong>WARNING:</strong> Delete all options related to this plugin in your database."
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:189
+#: inc/admin/admin-pages/Tools.php:187
 msgid "Reset settings"
 msgstr ""
 
@@ -2391,7 +2391,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:145
 #: inc/admin/migrate/MigrationTools.php:19
 #: inc/admin/settings/Titles.php:40
-#: inc/functions/options-advanced-admin.php:549
+#: inc/functions/options-advanced-admin.php:602
 #: src/Helpers/ContentAnalysis.php:43
 #: src/Services/I18nUniversalMetabox.php:127
 #: src/Services/I18nUniversalMetabox.php:411
@@ -2751,7 +2751,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:34
 #: inc/admin/metaboxes/admin-metaboxes-content-analysis-form.php:38
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:594
-#: inc/functions/options-advanced-admin.php:558
+#: inc/functions/options-advanced-admin.php:611
 #: src/Services/I18nUniversalMetabox.php:736
 msgid "Target keywords"
 msgstr ""
@@ -2906,7 +2906,7 @@ msgid "You cannot uncheck a parameter? This is normal, and it‘s most likely de
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:259
-#: inc/functions/options-advanced-admin.php:575
+#: inc/functions/options-advanced-admin.php:628
 msgid "Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>"
 msgstr ""
 
@@ -2920,7 +2920,7 @@ msgid "By checking this option, you will add a meta robots tag with the value \"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:270
-#: inc/functions/options-advanced-admin.php:583
+#: inc/functions/options-advanced-admin.php:636
 msgid "Do not follow links for this page <strong>(nofollow)</strong>"
 msgstr ""
 
@@ -3178,7 +3178,7 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:611
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:524
-#: inc/functions/options-advanced-admin.php:591
+#: inc/functions/options-advanced-admin.php:644
 msgid "Enable redirection?"
 msgstr ""
 
@@ -4937,100 +4937,100 @@ msgid "Enable noindex"
 msgstr ""
 
 #. translators: %s number of posts set to noindex
-#: inc/functions/options-advanced-admin.php:244
+#: inc/functions/options-advanced-admin.php:246
 msgid "%s post to noindex."
 msgid_plural "%s posts to noindex."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:255
+#: inc/functions/options-advanced-admin.php:260
 msgid "Enable index"
 msgstr ""
 
 #. translators: %s number of posts set to index
-#: inc/functions/options-advanced-admin.php:281
+#: inc/functions/options-advanced-admin.php:289
 msgid "%s post to index."
 msgid_plural "%s posts to index."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:292
+#: inc/functions/options-advanced-admin.php:303
 msgid "Enable nofollow"
 msgstr ""
 
 #. translators: %s number of posts set to nofollow
-#: inc/functions/options-advanced-admin.php:318
+#: inc/functions/options-advanced-admin.php:332
 msgid "%s post to nofollow."
 msgid_plural "%s posts to nofollow."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:329
+#: inc/functions/options-advanced-admin.php:346
 msgid "Enable follow"
 msgstr ""
 
 #. translators: %s number of posts set to follow
-#: inc/functions/options-advanced-admin.php:355
+#: inc/functions/options-advanced-admin.php:375
 msgid "%s post to follow."
 msgid_plural "%s posts to follow."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:366
+#: inc/functions/options-advanced-admin.php:389
 msgid "Enable redirection"
 msgstr ""
 
 #. translators: %s number of redirections set to enabled
-#: inc/functions/options-advanced-admin.php:391
-msgid "%s redirections enabled."
+#: inc/functions/options-advanced-admin.php:417
+msgid "%s redirection enabled."
 msgid_plural "%s redirections enabled."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:402
+#: inc/functions/options-advanced-admin.php:431
 msgid "Disable redirection"
 msgstr ""
 
 #. translators: %s number of redirections set to disabled
-#: inc/functions/options-advanced-admin.php:426
+#: inc/functions/options-advanced-admin.php:458
 msgid "%s redirection disabled."
 msgid_plural "%s redirections disabled."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:437
+#: inc/functions/options-advanced-admin.php:472
 msgid "Add to instant indexing queue"
 msgstr ""
 
 #. translators: %s number of posts added to instant indexing queue
-#: inc/functions/options-advanced-admin.php:477
+#: inc/functions/options-advanced-admin.php:515
 msgid "%s post added to instant indexing queue."
 msgid_plural "%s posts added to instant indexing queue."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:495
+#: inc/functions/options-advanced-admin.php:536
 msgid "Generate alt text from filename"
 msgstr ""
 
 #. translators: %s number of media
-#: inc/functions/options-advanced-admin.php:518
+#: inc/functions/options-advanced-admin.php:563
 msgid "%s alternative text generated from filename."
 msgid_plural "%s alternative texts generated from filename."
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/functions/options-advanced-admin.php:541
+#: inc/functions/options-advanced-admin.php:594
 #: src/Actions/Admin/ManageColumn.php:67
 msgid "Title tag"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:566
+#: inc/functions/options-advanced-admin.php:619
 #: src/Actions/Admin/ManageColumn.php:79
 msgid "Canonical"
 msgstr ""
 
-#: inc/functions/options-advanced-admin.php:598
+#: inc/functions/options-advanced-admin.php:651
 msgid "New URL"
 msgstr ""
 

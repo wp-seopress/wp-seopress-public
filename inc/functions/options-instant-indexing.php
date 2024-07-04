@@ -160,13 +160,13 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/7.9.1/true';
+        $x_source_info = 'https://www.seopress.org/7.9.2/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/7.9.1/false';
+        $x_source_info = 'https://www.seopress.org/7.9.2/false';
     }
 
     //Bing API

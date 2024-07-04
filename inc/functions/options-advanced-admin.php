@@ -238,15 +238,20 @@ add_action('admin_notices', 'seopress_bulk_action_noindex_admin_notice');
 function seopress_bulk_action_noindex_admin_notice()
 {
     if (! empty($_REQUEST['bulk_noindex_posts'])) {
-        $noindex_count = intval($_REQUEST['bulk_noindex_posts']);
-        printf('<div id="message" class="updated fade"><p>' .
+        $count = intval($_REQUEST['bulk_noindex_posts']);
+        echo '<div id="message" class="updated fade"><p>';
+        echo esc_html(
+            sprintf(
                 /* translators: %s number of posts set to noindex */
                 _n(
                     '%s post to noindex.',
                     '%s posts to noindex.',
-                    $noindex_count,
+                    $count,
                     'wp-seopress'
-                ) . '</p></div>', $noindex_count);
+                ), number_format_i18n($count)
+            )
+        );
+        echo '</p></div>';
     }
 }
 
@@ -275,15 +280,21 @@ add_action('admin_notices', 'seopress_bulk_action_index_admin_notice');
 
 function seopress_bulk_action_index_admin_notice() {
     if (! empty($_REQUEST['bulk_index_posts'])) {
-        $index_count = intval($_REQUEST['bulk_index_posts']);
-        printf('<div id="message" class="updated fade"><p>' .
+        $count = intval($_REQUEST['bulk_index_posts']);
+
+        echo '<div id="message" class="updated fade"><p>';
+        echo esc_html(
+            sprintf(
                 /* translators: %s number of posts set to index */
                 _n(
                     '%s post to index.',
                     '%s posts to index.',
-                    $index_count,
+                    $count,
                     'wp-seopress'
-                ) . '</p></div>', $index_count);
+                ), number_format_i18n($count)
+            )
+        );
+        echo '</p></div>';
     }
 }
 
@@ -312,15 +323,21 @@ add_action('admin_notices', 'seopress_bulk_action_nofollow_admin_notice');
 
 function seopress_bulk_action_nofollow_admin_notice() {
     if (! empty($_REQUEST['bulk_nofollow_posts'])) {
-        $nofollow_count = intval($_REQUEST['bulk_nofollow_posts']);
-        printf('<div id="message" class="updated fade"><p>' .
-            /* translators: %s number of posts set to nofollow */
+        $count = intval($_REQUEST['bulk_nofollow_posts']);
+
+        echo '<div id="message" class="updated fade"><p>';
+        echo esc_html(
+            sprintf(
+                /* translators: %s number of posts set to nofollow */
                 _n(
                     '%s post to nofollow.',
                     '%s posts to nofollow.',
-                    $nofollow_count,
+                    $count,
                     'wp-seopress'
-                ) . '</p></div>', $nofollow_count);
+                ), number_format_i18n($count)
+            )
+        );
+        echo '</p></div>';
     }
 }
 
@@ -349,15 +366,21 @@ add_action('admin_notices', 'seopress_bulk_action_follow_admin_notice');
 
 function seopress_bulk_action_follow_admin_notice() {
     if (! empty($_REQUEST['bulk_follow_posts'])) {
-        $follow_count = intval($_REQUEST['bulk_follow_posts']);
-        printf('<div id="message" class="updated fade"><p>' .
+        $count = intval($_REQUEST['bulk_follow_posts']);
+
+        echo '<div id="message" class="updated fade"><p>';
+        echo esc_html(
+            sprintf(
                 /* translators: %s number of posts set to follow */
                 _n(
                     '%s post to follow.',
                     '%s posts to follow.',
-                    $follow_count,
+                    $count,
                     'wp-seopress'
-                ) . '</p></div>', $follow_count);
+                ), number_format_i18n($count)
+            )
+        );
+        echo '</p></div>';
     }
 }
 
@@ -385,15 +408,21 @@ add_action('admin_notices', 'seopress_bulk_action_redirect_enable_admin_notice')
 
 function seopress_bulk_action_redirect_enable_admin_notice() {
     if (! empty($_REQUEST['bulk_enable_redirects_posts'])) {
-        $enable_count = intval($_REQUEST['bulk_enable_redirects_posts']);
-        printf('<div id="message" class="updated fade"><p>' .
+        $count = intval($_REQUEST['bulk_enable_redirects_posts']);
+
+        echo '<div id="message" class="updated fade"><p>';
+        echo esc_html(
+            sprintf(
                 /* translators: %s number of redirections set to enabled */
                 _n(
+                    '%s redirection enabled.',
                     '%s redirections enabled.',
-                    '%s redirections enabled.',
-                    $enable_count,
+                    $count,
                     'wp-seopress'
-                ) . '</p></div>', $enable_count);
+                ), number_format_i18n($count)
+            )
+        );
+        echo '</p></div>';
     }
 }
 
@@ -420,15 +449,21 @@ function seopress_bulk_action_redirect_disable_handler($redirect_to, $doaction, 
 add_action('admin_notices', 'seopress_bulk_action_redirect_disable_admin_notice');
 function seopress_bulk_action_redirect_disable_admin_notice() {
     if (! empty($_REQUEST['bulk_disable_redirects_posts'])) {
-        $enable_count = intval($_REQUEST['bulk_disable_redirects_posts']);
-        printf('<div id="message" class="updated fade"><p>' .
+        $count = intval($_REQUEST['bulk_disable_redirects_posts']);
+
+        echo '<div id="message" class="updated fade"><p>';
+        echo esc_html(
+            sprintf(
                 /* translators: %s number of redirections set to disabled */
                 _n(
                     '%s redirection disabled.',
                     '%s redirections disabled.',
-                    $enable_count,
+                    $count,
                     'wp-seopress'
-                ) . '</p></div>', $enable_count);
+                ), number_format_i18n($count)
+            )
+        );
+        echo '</p></div>';
     }
 }
 
@@ -471,15 +506,21 @@ function seopress_bulk_action_add_instant_indexing_handler($redirect_to, $doacti
 add_action('admin_notices', 'seopress_bulk_action_add_instant_indexing_admin_notice');
 function seopress_bulk_action_add_instant_indexing_admin_notice() {
     if (! empty($_REQUEST['bulk_add_instant_indexing'])) {
-        $queue_count = intval($_REQUEST['bulk_add_instant_indexing']);
-        printf('<div id="message" class="updated fade"><p>' .
+        $count = intval($_REQUEST['bulk_add_instant_indexing']);
+
+        echo '<div id="message" class="updated fade"><p>';
+        echo esc_html(
+            sprintf(
                 /* translators: %s number of posts added to instant indexing queue */
                 _n(
                     '%s post added to instant indexing queue.',
                     '%s posts added to instant indexing queue.',
-                    $queue_count,
+                    $count,
                     'wp-seopress'
-                ) . '</p></div>', $queue_count);
+                ), number_format_i18n($count)
+            )
+        );
+        echo '</p></div>';
     }
 }
 
@@ -513,9 +554,21 @@ function seopress_bulk_actions_alt_text_handler($redirect_to, $doaction, $post_i
 add_action('admin_notices', 'seopress_bulk_actions_alt_text_notice');
 function seopress_bulk_actions_alt_text_notice() {
     if (! empty($_REQUEST['bulk_alt_text'])) {
-        $alt_text_count = intval($_REQUEST['bulk_alt_text']);
-        /* translators: %s number of media */
-        printf('<div id="message" class="updated fade"><p>' . _n('%s alternative text generated from filename.', '%s alternative texts generated from filename.', $alt_text_count, 'wp-seopress') . '</p></div>', $alt_text_count);
+        $count = intval($_REQUEST['bulk_alt_text']);
+
+        echo '<div id="message" class="updated fade"><p>';
+        echo esc_html(
+            sprintf(
+                /* translators: %s number of media */
+                _n(
+                    '%s alternative text generated from filename.',
+                    '%s alternative texts generated from filename.',
+                    $count,
+                    'wp-seopress'
+                ), number_format_i18n($count)
+            )
+        );
+        echo '</p></div>';
     }
 }
 
@@ -529,16 +582,16 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
     } ?>
 <div class="wp-clearfix"></div>
 <fieldset class="inline-edit-col-left">
-    <div class="inline-edit-col column-<?php echo $column_name; ?>">
+    <div class="inline-edit-col column-<?php echo esc_html($column_name); ?>">
 
         <?php
                 switch ($column_name) {
                 case 'seopress_title':
                 ?>
-        <h4><?php _e('SEO', 'wp-seopress'); ?>
+        <h4><?php esc_html_e('SEO', 'wp-seopress'); ?>
         </h4>
         <label class="inline-edit-group">
-            <span class="title"><?php _e('Title tag', 'wp-seopress'); ?></span>
+            <span class="title"><?php esc_html_e('Title tag', 'wp-seopress'); ?></span>
             <span class="input-text-wrap"><input type="text" name="seopress_title" /></span>
         </label>
         <?php
@@ -546,7 +599,7 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
                 case 'seopress_desc':
                 ?>
         <label class="inline-edit-group">
-            <span class="title"><?php _e('Meta description', 'wp-seopress'); ?></span>
+            <span class="title"><?php esc_html_e('Meta description', 'wp-seopress'); ?></span>
             <span class="input-text-wrap"><textarea cols="18" rows="1" name="seopress_desc" autocomplete="off"
                     role="combobox" aria-autocomplete="list" aria-expanded="false"></textarea></span>
         </label>
@@ -555,7 +608,7 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
                 case 'seopress_tkw':
                 ?>
         <label class="inline-edit-group">
-            <span class="title"><?php _e('Target keywords', 'wp-seopress'); ?></span>
+            <span class="title"><?php esc_html_e('Target keywords', 'wp-seopress'); ?></span>
             <span class="input-text-wrap"><input type="text" name="seopress_tkw" /></span>
         </label>
         <?php
@@ -563,7 +616,7 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
                 case 'seopress_canonical':
                 ?>
         <label class="inline-edit-group">
-            <span class="title"><?php _e('Canonical', 'wp-seopress'); ?></span>
+            <span class="title"><?php esc_html_e('Canonical', 'wp-seopress'); ?></span>
             <span class="input-text-wrap"><input type="text" name="seopress_canonical" /></span>
         </label>
         <?php
@@ -572,7 +625,7 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
                 ?>
         <label class="alignleft">
             <input type="checkbox" name="seopress_noindex" value="yes">
-            <span class="checkbox-title"><?php _e('Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>', 'wp-seopress'); ?></span>
+            <span class="checkbox-title"><?php echo wp_kses_post(__('Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>', 'wp-seopress')); ?></span>
         </label>
         <?php
                 break;
@@ -580,7 +633,7 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
                 ?>
         <label class="alignleft">
             <input type="checkbox" name="seopress_nofollow" value="yes">
-            <span class="checkbox-title"><?php _e('Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress'); ?></span>
+            <span class="checkbox-title"><?php echo wp_kses_post(__('Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress')); ?></span>
         </label>
         <?php
                 break;
@@ -588,23 +641,24 @@ function seopress_bulk_quick_edit_custom_box($column_name) {
                     ?>
         <label class="alignleft">
             <input type="checkbox" name="seopress_redirections_enabled" value="yes">
-            <span class="checkbox-title"><?php _e('Enable redirection?', 'wp-seopress'); ?></span>
+            <span class="checkbox-title"><?php echo wp_kses_post(__('Enable redirection?', 'wp-seopress')); ?></span>
         </label>
         <?php
                 break;
                 case 'seopress_redirect_url';
                 ?>
         <label class="inline-edit-group">
-            <span class="title"><?php _e('New URL', 'wp-seopress'); ?></span>
+            <span class="title"><?php echo wp_kses_post(__('New URL', 'wp-seopress')); ?></span>
             <span class="input-text-wrap">
                 <input type="text" name="seopress_redirections_value" />
             </span>
         </label>
         <?php
-                break;
-                default:
-                break;
-                } ?>
+            break;
+            default:
+            break;
+            }
+        ?>
     </div>
 </fieldset>
 <?php
@@ -732,7 +786,7 @@ if (seopress_get_service('AdvancedOption')->getAdvancedTaxDescEditor() ==='1' &&
             } ?>
 
 <tr class="form-field term-description-wrap">
-    <th scope="row"><label for="description"><?php _e('Description'); ?></label></th>
+    <th scope="row"><label for="description"><?php esc_html('Description', 'wp-seopress'); ?></label></th>
     <td>
         <?php
             $settings = [
@@ -740,7 +794,7 @@ if (seopress_get_service('AdvancedOption')->getAdvancedTaxDescEditor() ==='1' &&
                 'textarea_rows' => 10,
             ];
             wp_editor(htmlspecialchars_decode($tag->description), 'html-tag-description', $settings); ?>
-        <p class="description"><?php _e('The description is not prominent by default; however, some themes may show it.'); ?>
+        <p class="description"><?php esc_html('The description is not prominent by default; however, some themes may show it.', 'wp-seopress'); ?>
         </p>
     </td>
     <script type="text/javascript">

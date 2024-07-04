@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 7.9.1
+Stable tag: 7.9.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -261,6 +261,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 7.9.2 =
+* FIX OpenAI integration
+* FIX Product Global Identifiers type & Product Global Identifiers for variable products if WooCommerce feature is globally disabled
+* FIX Google News XML sitemap in specific cases
+
 = 7.9.1 =
 * FIX Improve security for Elementor users
 * FIX Missing text domain for i18n

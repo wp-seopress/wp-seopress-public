@@ -58,7 +58,7 @@ abstract class JsonSchemaValue implements GetJsonFromFile {
      * @return array|string
      */
     public function renderJson($data) {
-        return json_encode($data);
+        return wp_json_encode($data);
     }
 
     /**
