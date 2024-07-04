@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.5
 Requires PHP: 7.2
-Stable tag: 7.7.1
+Stable tag: 7.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -260,6 +260,8 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 7.7.2 =
+* FIX Do not output post excerpt / content if password protected post
 
 = 7.7.1 =
 * FIX Content analysis with accents

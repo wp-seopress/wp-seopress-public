@@ -145,9 +145,9 @@ function seopress_get_dynamic_variables($variables, $post, $is_oembed){
     }
 
     //Post Excerpt
-    if ('' != $seopress_excerpt) {
+    if ('' != $seopress_excerpt && true !== post_password_required($post->ID)) {
         $seopress_get_the_excerpt = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes($seopress_excerpt), true)))), $seopress_excerpt_length);
-    } elseif ('' != $post) {
+    } elseif ('' != $post && true !== post_password_required($post->ID)) {
         if ('' != get_post_field('post_content', $post->ID)) {
             $seopress_get_the_excerpt = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_post_field('post_content', $post->ID), true))))), $seopress_excerpt_length);
         } else {
@@ -158,7 +158,7 @@ function seopress_get_dynamic_variables($variables, $post, $is_oembed){
     }
 
     //Post Content
-    if ('' != $post) {
+    if ('' != $post && true !== post_password_required($post->ID)) {
         if ('' != get_post_field('post_content', $post->ID)) {
             $seopress_content = wp_trim_words(esc_attr(stripslashes_deep(wp_filter_nohtml_kses(wp_strip_all_tags(strip_shortcodes(get_post_field('post_content', $post->ID), true))))), $seopress_excerpt_length);
         } else {

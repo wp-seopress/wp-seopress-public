@@ -54,6 +54,10 @@ class GetPost implements ExecuteHooks
             return null;
         }
 
+        if (true === post_password_required($id)) {
+            return null;
+        }
+
         $context = seopress_get_service('ContextPage')->buildContextWithCurrentId($id)->getContext();
 
         $title = seopress_get_service('TitleMeta')->getValue($context);
