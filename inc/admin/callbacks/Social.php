@@ -519,7 +519,7 @@ function seopress_social_twitter_card_callback()
     <?php } ?>
     value="1"/>
 
-    <?php _e('Enable Twitter card', 'wp-seopress'); ?>
+    <?php _e('Enable Twitter Card', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_social_twitter_card'])) {

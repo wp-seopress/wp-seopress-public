@@ -98,11 +98,11 @@ function print_section_info_social_twitter()
     $docs  = seopress_get_docs_links(); ?>
 <div class="sp-section-header">
     <h2>
-        <?php _e('X (Twitter card)', 'wp-seopress'); ?>
+        <?php _e('X (Twitter Card)', 'wp-seopress'); ?>
     </h2>
 </div>
 <p>
-    <?php _e('Manage your Twitter card.', 'wp-seopress'); ?>
+    <?php _e('Manage your Twitter Card.', 'wp-seopress'); ?>
     <?php echo seopress_tooltip_link($docs['social']['og'], __('Manage Facebook Open Graph and Twitter Cards metas - new window', 'wp-seopress')); ?>
 </p>
 

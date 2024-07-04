@@ -778,7 +778,7 @@ class I18nUniversalMetabox
                         "wp-seopress"
                     ),
                     'twitter_title' => __(
-                        "Preview your Twitter card using the official validator",
+                        "Preview your Twitter Card using the official validator",
                         "wp-seopress"
                     ),
                 ],

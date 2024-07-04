@@ -556,7 +556,11 @@ for (let i = 0; i < links.length; i++) {
             }
         }
 
-        $seopress_google_analytics_html .= apply_filters('seopress_gtag_before_closing_script', $seopress_google_analytics_html);
+        $seopress_gtag_before_closing_script = '';
+        $seopress_gtag_before_closing_script = apply_filters('seopress_gtag_before_closing_script', $seopress_gtag_before_closing_script);
+        if(!empty($seopress_gtag_before_closing_script)) {
+            $seopress_google_analytics_html .= $seopress_gtag_before_closing_script;
+        }
 
         $seopress_google_analytics_html .= '</script>';
         $seopress_google_analytics_html .= "\n";
