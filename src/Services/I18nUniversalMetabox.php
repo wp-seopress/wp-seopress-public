@@ -303,7 +303,8 @@ class I18nUniversalMetabox
                     ],
                     'internal_links' => [
                         'description' => __(
-                            "Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors."
+                            "Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.",
+                            "wp-seopress"
                         ),
                         'no_internal_links' => __(
                             "This page doesn't have any internal links from other content. Links from archive pages are not considered internal links due to lack of context.",

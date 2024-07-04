@@ -44,11 +44,11 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-field facebook-snippet-box">
 				<div class="snippet-fb-img">
-					<img src="{{{data.image}}}">
+					<img src="<?php echo esc_url('{{{data.image}}}'); ?>">
 				</div>
 				<div class="facebook-snippet-text">
 					<div class="snippet-meta">
-						<div class="snippet-fb-url"><?php echo $site_url; ?></div>
+						<div class="snippet-fb-url"><?php echo esc_url($site_url); ?></div>
 						<div class="fb-sep">|</div>
 						<div class="fb-by"><?php _e('By', 'wp-seopress'); ?>&nbsp;</div>
 						<div class="snippet-fb-site-name"><?php echo get_bloginfo('name'); ?></div>
@@ -63,14 +63,14 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 			<label class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-field twitter-snippet-box">
 				<div class="snippet-twitter-img-default">
-					<img src="{{{data.image}}}">
+					<img src="<?php echo esc_url('{{{data.image}}}'); ?>">
 				</div>
 				<div class="twitter-snippet-text">
 					<div class="title-desc">
 						<div class="snippet-twitter-title">{{{data.title}}}</div>
 						<div class="snippet-twitter-description">{{{data.description}}}</div>
 						<div class="snippet-meta">
-							<div class="snippet-twitter-url"><?php echo $site_url; ?></div>
+							<div class="snippet-twitter-url"><?php echo esc_url($site_url); ?></div>
 						</div>
 					</div>
 				</div>
@@ -98,7 +98,7 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 
                         $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="26" width="26" alt="favicon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC"></div>';
                         if (get_site_icon_url(32)) {
-                            $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="26" src="' . get_site_icon_url(32) . '" width="26" alt="favicon"/></div>';
+                            $siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="26" src="' . esc_url(get_site_icon_url(32)) . '" width="26" alt="favicon"/></div>';
                         }
                     ?>
 					<div class="wrap-snippet">

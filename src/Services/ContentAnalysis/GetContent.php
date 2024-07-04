@@ -825,7 +825,7 @@ class GetContent
      */
     protected function analyzeInternalLinks($analyzes, $data, $post)
     {
-        $desc = '<p>' . __('Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.') . '</p>';
+        $desc = '<p>' . __('Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.', 'wp-seopress') . '</p>';
 
         if (isset($data['internal_links']) && is_array($data['internal_links']) && !empty($data['internal_links'])) {
             $count = count($data['internal_links']);
