@@ -76,7 +76,7 @@ function seopress_admin_header($context = "") {
 								<li class="seopress-item">
 									<?php if (!empty($value['link']) && $value['title'] && $value['desc'] && $value['ico']) { ?>
 										<a href="<?php echo esc_url($value['link']); ?>" class="seopress-item-inner has-action" aria-disabled="false" tabindex="0" role="menuitem" target="_blank" data-link-type="external">
-											<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/' . $value['ico'] . 'svg'); ?>" width="48" height="48" alt="" class="seopress-item-ico"/>
+											<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/' . $value['ico'] . '.svg'); ?>" width="48" height="48" alt="" class="seopress-item-ico"/>
 											<h3 class="seopress-item-title">
 												<?php echo esc_html($value['title']); ?>
 											</h3>

@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdu
 Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 7.9.2
+Stable tag: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -261,30 +261,28 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 7.9.2 =
-* FIX OpenAI integration
-* FIX Product Global Identifiers type & Product Global Identifiers for variable products if WooCommerce feature is globally disabled
-* FIX Google News XML sitemap in specific cases
-
-= 7.9.1 =
-* FIX Improve security for Elementor users
-* FIX Missing text domain for i18n
-
-= 7.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-7-9/">Read the blog post update</a> =
-* NEW Allow to generate alternative text with AI directly from the media modal (PRO)
-* NEW Export slug changes to a CSV file (SEO, Tools, Redirections) - PRO
-* INFO Bump required PHP version to 7.4 (recommended 8.2+)
-* INFO We no longer use the first image of your post content for social media to improve performances
+= 8.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-0/">Read the blog post update</a> =
+* NEW Support for WordPress 6.6
+* NEW Import your redirects from SmartCrawl plugin
+* NEW Add fediverse:creator tag to improve sharing on Mastodon
+* NEW Support secured authentification token in Matomo to get stats in dashboard
+* NEW Set a primary category directly from the Block Editor > Category panel
+* NEW 'seopress_schemas_website_html' hook to filter the HTML of the website schema (https://www.seopress.org/support/hooks/filter-website-schema/)
+* NEW 'seopress_social_fv_creator' hook to filter the HTML of the fediverse tag (https://www.seopress.org/support/hooks/filter-fediverse-creator-tag/)
+* INFO Improve compatibility with Bricks Builder: their CPT / Taxonomies are no longer listed from SEOPress settings
+* INFO Metaboxes now match admin color scheme
+* INFO Display a notice if the GA4 property ID to get stats in dashboard is equals to the GA4 measurement ID to avoide confusion
+* INFO Add a missing notice to Universal SEO metabox if you're editing your WC shop page
 * INFO Strengthened security
-* INFO Improve UX to generate alt text for media from filename
-* FIX Remove Home item from Breadcrumbs JSON-LD
-* FIX Redirection test link in specific cases
-* FIX Compatibility issue with WP Rocket in rare cases
-* FIX Headings analysis
-* FIX Social OG and X title on default archive pages if global settings are empty
-* FIX Redirect other XML sitemap URL with WordPress subdirectory setup
-* FIX Remove help links to SEOPress if White label is enabled
-* FIX Remove a deprecated function
+* FIX Duplicated hook name 'seopress_rgpd_full_message' / new hook created 'seopress_rgpd_edit_message' (https://www.seopress.org/support/hooks/filter-the-message-for-managing-the-choice-of-cookies/)
+* FIX Quick edit redirects for 410/451
+* FIX OG:image if not attachment ID set
+* FIX Instant Indexing in specific cases
+* FIX Fatal error on internal linking suggestions if $post is null
+* FIX Article automatic schema with additional social accounts
+* FIX "Read more" is not a descriptive link for our cookie bar
+* FIX Some PHP warnings with SEO Alerts feature
+* FIX Some translations
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

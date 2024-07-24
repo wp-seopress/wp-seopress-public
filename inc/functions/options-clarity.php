@@ -12,7 +12,7 @@ function seopress_clarity_js($echo) {
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=seopress";
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "'.seopress_get_service('GoogleAnalyticsOption')->getClarityProjectId().'");';
+        })(window, document, "clarity", "script", "'.sanitize_key(seopress_get_service('GoogleAnalyticsOption')->getClarityProjectId()).'");';
 		$js .= "</script>\n";
 
 		$js = apply_filters('seopress_clarity_tracking_js', $js);

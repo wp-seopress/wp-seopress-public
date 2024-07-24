@@ -786,7 +786,7 @@ if (seopress_get_service('AdvancedOption')->getAdvancedTaxDescEditor() ==='1' &&
             } ?>
 
 <tr class="form-field term-description-wrap">
-    <th scope="row"><label for="description"><?php esc_html('Description', 'wp-seopress'); ?></label></th>
+    <th scope="row"><label for="description"><?php esc_html_e('Description', 'wp-seopress'); ?></label></th>
     <td>
         <?php
             $settings = [
@@ -794,7 +794,7 @@ if (seopress_get_service('AdvancedOption')->getAdvancedTaxDescEditor() ==='1' &&
                 'textarea_rows' => 10,
             ];
             wp_editor(htmlspecialchars_decode($tag->description), 'html-tag-description', $settings); ?>
-        <p class="description"><?php esc_html('The description is not prominent by default; however, some themes may show it.', 'wp-seopress'); ?>
+        <p class="description"><?php esc_html_e('The description is not prominent by default; however, some themes may show it.', 'wp-seopress'); ?>
         </p>
     </td>
     <script type="text/javascript">

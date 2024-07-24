@@ -47,10 +47,10 @@ class Google_Suggestions_Control extends \Elementor\Base_Control {
         global $post;
 
         return [
-            'label'       => __('Google suggestions', 'wp-seopress'),
-            'tooltip'     => seopress_tooltip(__('Google suggestions', 'wp-seopress'), __('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.', 'wp-seopress'), esc_html('my super keyword,another keyword,keyword')),
-            'placeholder' => __('Get suggestions from Google', 'wp-seopress'),
-            'buttonLabel' => __('Get suggestions!', 'wp-seopress'),
+            'label'       => esc_html__('Google suggestions', 'wp-seopress'),
+            'tooltip'     => seopress_tooltip(esc_html__('Google suggestions', 'wp-seopress'), esc_html__('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.', 'wp-seopress'), esc_html('my super keyword,another keyword,keyword')),
+            'placeholder' => esc_html__('Get suggestions from Google', 'wp-seopress'),
+            'buttonLabel' => esc_html__('Get suggestions!', 'wp-seopress'),
         ];
     }
 

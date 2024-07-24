@@ -13,7 +13,7 @@ abstract class AbstractImageSpecification
             }
         }
 
-        $stop_attachment_url_to_postid = apply_filters( 'seopress_stop_attachment_url_to_postid', true );
+        $stop_attachment_url_to_postid = apply_filters( 'seopress_stop_attachment_url_to_postid', false );
         $context = $params['context'];
         $postId = null;
 

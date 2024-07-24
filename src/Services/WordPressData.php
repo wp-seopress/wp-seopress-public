@@ -34,7 +34,8 @@ class WordPressData
                 $post_types['customer_discount'],
                 $post_types['cuar_private_file'],
                 $post_types['cuar_private_page'],
-                $post_types['ct_template']
+                $post_types['ct_template'],
+                $post_types['bricks_template']
             );
         }
 
@@ -56,7 +57,9 @@ class WordPressData
 
         if ( ! $return_all ) {
             unset(
-                $taxonomies['seopress_bl_competitors']
+                $taxonomies['seopress_bl_competitors'],
+                $taxonomies['template_tag'],
+                $taxonomies['template_bundle']
             );
         }
 

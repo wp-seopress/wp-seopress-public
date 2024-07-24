@@ -9,7 +9,7 @@ if (function_exists('seopress_admin_header')) {
 }
 ?>
 <form method="post"
-    action="<?php echo admin_url('options.php'); ?>"
+    action="<?php echo esc_url(admin_url('options.php')); ?>"
     class="seopress-option">
     <?php
         $current_tab = '';
@@ -22,12 +22,12 @@ if (function_exists('seopress_admin_header')) {
         <?php
         $plugin_settings_tabs = [
             'tab_seopress_instant_indexing_general' => __('General', 'wp-seopress'),
-            'tab_seopress_instant_indexing_settings'    => __('Settings', 'wp-seopress')
+            'tab_seopress_instant_indexing_settings' => __('Settings', 'wp-seopress')
         ];
 
     echo '<div class="nav-tab-wrapper">';
     foreach ($plugin_settings_tabs as $tab_key => $tab_caption) {
-        echo '<a id="' . $tab_key . '-tab" class="nav-tab" href="?page=seopress-instant-indexing-page#tab=' . $tab_key . '">' . $tab_caption . '</a>';
+        echo '<a id="' . esc_attr($tab_key) . '-tab" class="nav-tab" href="?page=seopress-instant-indexing-page#tab=' . esc_attr($tab_key) . '">' . esc_html($tab_caption) . '</a>';
     }
     echo '</div>'; ?>
 
@@ -48,6 +48,6 @@ if (function_exists('seopress_admin_header')) {
     </div>
     <!--seopress-tabs-->
     <?php echo $this->seopress_feature_save(); ?>
-    <?php sp_submit_button(__('Save changes', 'wp-seopress')); ?>
+    <?php sp_submit_button(esc_html__('Save changes', 'wp-seopress')); ?>
 </form>
 <?php

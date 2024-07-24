@@ -82,14 +82,17 @@ class ContentAnalysisRepository extends AbstractRepository {
 
     public function analysisAlreadyExistForPostId($postId){
         global $wpdb;
-        $sql = "SELECT id
-            FROM {$this->getTableName()}
-            WHERE post_id = {$postId}";
+
+        $postId = absint($postId);
+
+        $tableName = esc_sql($this->getTableName());
+
+        $sql = $wpdb->prepare("SELECT id FROM {$tableName} WHERE post_id = %d", $postId);
 
         $result = $wpdb->get_results($sql);
+
         return !empty($result);
     }
-
 
     /**
      * @param array $data
@@ -109,6 +112,8 @@ class ContentAnalysisRepository extends AbstractRepository {
 
     public function updateContentAnalysis($postId, $data){
         global $wpdb;
+
+        $postId = absint($postId);
 
         $sql = $this->getUpdateInstruction($data);
 		$sql .= $this->getUpdateValues($data);

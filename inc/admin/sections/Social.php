@@ -153,3 +153,14 @@ function seopress_print_section_info_social_linkedin()
 
 <?php
 }
+
+function seopress_print_section_info_social_fediverse()
+{
+?>
+    <div class="sp-section-header">
+        <h2>
+            <?php esc_attr_e('Mastodon', 'wp-seopress'); ?>
+        </h2>
+    </div>
+<?php
+}

@@ -16,14 +16,14 @@ class RenderContentAnalysis {
                                 <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                                 <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                             </svg>';
-        $tooltip = seopress_tooltip(__('Content analysis', 'wp-seopress'), __('<strong>Should be improved:</strong> red or orange dots <br> <strong>Good:</strong> yellow or green dots', 'wp-seopress'), '');
+        $tooltip = seopress_tooltip(esc_html__('Content analysis', 'wp-seopress'), wp_kses_post(__('<strong>Should be improved:</strong> red or orange dots <br> <strong>Good:</strong> yellow or green dots', 'wp-seopress')), '');
 
         if ( ! empty($impact)) {
             if (in_array('medium', $impact) || in_array('high', $impact)) {
-                $score = false; ?><p class="notgood"><?php echo $svg; ?> <span><?php echo __('Should be improved', 'wp-seopress') . $tooltip; ?></span></p>
+                $score = false; ?><p class="notgood"><?php echo $svg; ?> <span><?php echo esc_html__('Should be improved', 'wp-seopress') . $tooltip; ?></span></p>
                         <?php
             } else {
-                $score = true; ?><p class="good"><?php echo $svg; ?> <span><?php echo __('Good', 'wp-seopress') . $tooltip; ?></span></p>
+                $score = true; ?><p class="good"><?php echo $svg; ?> <span><?php echo esc_html__('Good', 'wp-seopress') . $tooltip; ?></span></p>
                         <?php
             }
         } else {
@@ -35,7 +35,7 @@ class RenderContentAnalysis {
             update_post_meta(get_the_ID(), '_seopress_analysis_data', $analysis_data);
             delete_post_meta(get_the_ID(), '_seopress_content_analysis_api');
         } ?>
-                    <span><a href="#" id="expand-all"><?php echo __('Expand', 'wp-seopress'); ?></a> / <a href="#" id="close-all"><?php echo __('Close', 'wp-seopress'); ?></a></span>
+                    <span><a href="#" id="expand-all" class="components-button is-link"><?php esc_html_e('Expand', 'wp-seopress'); ?></a> / <a href="#" id="close-all"><?php esc_html_e('Close', 'wp-seopress'); ?></a></span>
                 </div><!-- .analysis-score -->
                 <?php
                 if ( ! empty($analyzes)) {
@@ -61,17 +61,17 @@ class RenderContentAnalysis {
                                     <h3>
                                         <button type="button" aria-expanded="false" class="btn-toggle">
                                             <?php if (isset($value['impact'])) { ?>
-                                                <span class="impact <?php echo $value['impact']; ?>" aria-hidden="true"></span>
-                                                <span class="screen-reader-text"><?php /* translators: %s impact of this analysis, eg: high */ printf(__('Degree of severity: %s','wp-seopress'), $value['impact']); ?></span>
+                                                <span class="impact <?php echo esc_attr($value['impact']); ?>" aria-hidden="true"></span>
+                                                <span class="screen-reader-text"><?php /* translators: %s impact of this analysis, eg: high */ printf(esc_html__('Degree of severity: %s','wp-seopress'), esc_html($value['impact'])); ?></span>
                                             <?php } ?>
                                             <span class="seopress-arrow" aria-hidden="true"></span>
-                                            <?php echo $value['title']; ?>
+                                            <?php echo esc_html($value['title']); ?>
                                         </button>
                                     </h3>
                                 </div>
                             <?php } ?>
                             <?php if (isset($value['desc'])) { ?>
-                                <div class="gr-analysis-content" aria-hidden="true"><?php echo $value['desc']; ?></div>
+                                <div class="gr-analysis-content" aria-hidden="true"><?php echo wp_kses_post($value['desc']); ?></div>
                             <?php } ?>
                         </div><!-- .gr-analysis -->
                     <?php

@@ -7,7 +7,7 @@ if (function_exists('seopress_admin_header')) {
     echo seopress_admin_header();
 } ?>
 <form method="post"
-    action="<?php echo admin_url('options.php'); ?>"
+    action="<?php echo esc_url(admin_url('options.php')); ?>"
     class="seopress-option">
     <?php
         echo $this->seopress_feature_title('google-analytics');
@@ -28,7 +28,7 @@ settings_fields('seopress_google_analytics_option_group'); ?>
 
 echo '<div class="nav-tab-wrapper">';
 foreach ($plugin_settings_tabs as $tab_key => $tab_caption) {
-    echo '<a id="' . $tab_key . '-tab" class="nav-tab" href="?page=seopress-google-analytics#tab=' . $tab_key . '">' . $tab_caption . '</a>';
+    echo '<a id="' . esc_attr($tab_key) . '-tab" class="nav-tab" href="?page=seopress-google-analytics#tab=' . esc_attr($tab_key) . '">' . esc_html($tab_caption) . '</a>';
 }
 echo '</div>'; ?>
         <div class="seopress-tab <?php if ('tab_seopress_google_analytics_enable' == $current_tab) {
@@ -66,6 +66,6 @@ echo '</div>'; ?>
         </div>
     </div>
 
-    <?php sp_submit_button(__('Save changes', 'wp-seopress')); ?>
+    <?php sp_submit_button(esc_html__('Save changes', 'wp-seopress')); ?>
 </form>
 <?php

@@ -404,14 +404,14 @@ function seopress_social_facebook_img_cpt_callback()
 
     $options = get_option('seopress_social_option_name');
 
-    $options_set = isset($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) ? esc_attr($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) : null;
+    $options_set = isset($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']) ? $options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url'] : '';
 ?>
 
 <p>
     <input
         id="seopress_social_facebook_img_cpt_meta_<?php echo esc_attr($seopress_cpt_key); ?>"
         class="seopress_social_facebook_img_cpt_meta" type="text"
-        value="<?php echo $options_set; ?>"
+        value="<?php echo esc_url($options_set); ?>"
         name="seopress_social_option_name[seopress_social_facebook_img_cpt][<?php echo esc_attr($seopress_cpt_key); ?>][url]"
         aria-label="<?php esc_attr_e('Select a default image', 'wp-seopress'); ?>"
         placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>" />
@@ -552,12 +552,11 @@ function seopress_social_twitter_card_img_callback()
 {
     $options = get_option('seopress_social_option_name');
 
-    $options_set = isset($options['seopress_social_twitter_card_img']) ? esc_attr($options['seopress_social_twitter_card_img']) : null;
-
-    $check = isset($options['seopress_social_twitter_card_img']); ?>
+    $options_set = isset($options['seopress_social_twitter_card_img']) ? $options['seopress_social_twitter_card_img'] : '';
+?>
 
 <input id="seopress_social_twitter_img_meta" type="text"
-    value="<?php echo esc_attr($options_set); ?>"
+    value="<?php echo esc_url($options_set); ?>"
     name="seopress_social_option_name[seopress_social_twitter_card_img]"
     aria-label="<?php esc_attr_e('Default X Image', 'wp-seopress'); ?>"
     placeholder="<?php esc_html_e('Select your default thumbnail', 'wp-seopress'); ?>" />
@@ -638,4 +637,26 @@ function seopress_social_li_img_size_callback()
 <?php if (isset($options['seopress_social_li_img_size'])) {
         esc_attr($options['seopress_social_li_img_size']);
     }
+}
+
+function seopress_social_fv_creator_callback()
+{
+    $options = get_option('seopress_social_option_name');
+    $check   = isset($options['seopress_social_fv_creator']) ? $options['seopress_social_fv_creator'] : null;
+
+    printf(
+        '<input type="text" name="seopress_social_option_name[seopress_social_fv_creator]" placeholder="' . esc_html__('Your fediverse account (Mastodon, Threads...), e.g. @Gargron@mastodon.social', 'wp-seopress') . '" aria-label="' . esc_attr__('Your fediverse account (Mastodon, Flipboard, Threads...)', 'wp-seopress') . '" value="%s"/>',
+        esc_html($check)
+    );
+    ?>
+
+    <p class="description">
+        <?php esc_attr_e('Improve the sharing of your posts on Mastodon.', 'wp-seopress'); ?>
+        <a href="https://blog.joinmastodon.org/2024/07/highlighting-journalism-on-mastodon/" target="_blank" class="seopress-help">
+            <?php esc_html_e('Learn more', 'wp-seopress-pro'); ?>
+        </a>
+        <span class="seopress-help dashicons dashicons-external"></span>
+    </p>
+
+    <?php
 }

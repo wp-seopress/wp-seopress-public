@@ -6,7 +6,7 @@ $this->options = get_option('seopress_xml_sitemap_option_name');
 if (function_exists('seopress_admin_header')) {
     echo seopress_admin_header();
 } ?>
-<form method="post" action="<?php echo admin_url('options.php'); ?>" class="seopress-option" name="seopress-flush">
+<form method="post" action="<?php echo esc_url(admin_url('options.php')); ?>" class="seopress-option" name="seopress-flush">
     <?php
         echo $this->seopress_feature_title('xml-sitemap');
 settings_fields('seopress_xml_sitemap_option_group'); ?>
@@ -23,7 +23,7 @@ $plugin_settings_tabs    = [
 
 echo '<div class="nav-tab-wrapper">';
 foreach ($plugin_settings_tabs as $tab_key => $tab_caption) {
-    echo '<a id="' . $tab_key . '-tab" class="nav-tab" href="?page=seopress-xml-sitemap#tab=' . $tab_key . '">' . $tab_caption . '</a>';
+    echo '<a id="' . esc_attr($tab_key) . '-tab" class="nav-tab" href="?page=seopress-xml-sitemap#tab=' . esc_attr($tab_key) . '">' . esc_html($tab_caption) . '</a>';
 }
 echo '</div>'; ?>
                 <div class="seopress-tab <?php if ('tab_seopress_xml_sitemap_general' == $current_tab) {
@@ -40,6 +40,6 @@ echo '</div>'; ?>
 } ?>" id="tab_seopress_html_sitemap"><?php do_settings_sections('seopress-settings-admin-html-sitemap'); ?></div>
         </div>
 
-        <?php sp_submit_button(__('Save changes', 'wp-seopress')); ?>
+        <?php sp_submit_button(esc_html__('Save changes', 'wp-seopress')); ?>
     </form>
 <?php

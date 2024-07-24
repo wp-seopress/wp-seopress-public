@@ -303,8 +303,7 @@ class I18nUniversalMetabox
                     ],
                     'internal_links' => [
                         'description' => __(
-                            "Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.",
-                            "wp-seopress"
+                            "Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors."
                         ),
                         'no_internal_links' => __(
                             "This page doesn't have any internal links from other content. Links from archive pages are not considered internal links due to lack of context.",
@@ -415,7 +414,9 @@ class I18nUniversalMetabox
                     'placeholder_description' => __('Enter your description', 'wp-seopress'),
                     'generate_ai' => __('Generate meta with AI', 'wp-seopress'),
                     'generate_ai_title' => __('Generate meta title with AI', 'wp-seopress'),
-                    'generate_ai_description' => __('Generate meta description with AI', 'wp-seopress')
+                    'generate_ai_description' => __('Generate meta description with AI', 'wp-seopress'),
+                    /* translators: %s Products archive meta settings page */
+                    'woocommerce_shop_page_notice' => __('This is your <strong>Shop page</strong>. Go to <a href="%s"><strong>SEO > Titles & Metas > Archives > Products</strong></a> to edit your title and meta description.', 'wp-seopress' ),
                 ],
                 'repeater_how_to' => [
                     'title_step' => __(
@@ -862,4 +863,3 @@ class I18nUniversalMetabox
 
     }
 }
-

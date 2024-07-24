@@ -19,7 +19,8 @@ class GetContent
         }
 
         foreach ($targetKeywords as $kw) {
-            if (preg_match_all('#\b(' . $kw . ')\b#iu', remove_accents($content), $m)) {
+            $kw = remove_accents(wp_specialchars_decode($kw));
+            if (preg_match_all('#\b(' . preg_quote($kw, '/') . ')\b#iu', remove_accents($content), $m)) {
                 $data[$kw] = $m[0];
             }
         }
@@ -61,8 +62,15 @@ class GetContent
             $desc .= '</ul>';
             $analyzes['schemas']['desc'] = $desc;
         } else {
+            $docs = seopress_get_docs_links();
             $analyzes['schemas']['impact'] = 'medium';
             $analyzes['schemas']['desc']   = '<p>' . __('No schemas found in the source code of this page. Get rich snippets in Google Search results and improve your visibility by adding structured data types (schemas) to your page.', 'wp-seopress') . '</p>';
+
+            if (!is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+                $analyzes['schemas']['desc']   .= '<p><a class="seopress-help" href="' . esc_url( $docs['schemas']['feature'] ) . '" target="_blank" class="components-button is-link">' . __('Get SEOPress PRO to add schemas now', 'wp-seopress') . '</a></p>';
+            } else {
+                $analyzes['schemas']['desc']   .= '<p><a class="seopress-help" href="' . esc_url( $docs['schemas']['ebook'] ) . '" target="_blank" class="components-button is-link">' . __('Learn more', 'wp-seopress') . '</a></p>';
+            }
         }
 
         return $analyzes;
@@ -773,7 +781,7 @@ class GetContent
             $desc = '<p>' . /* translators: %d number of nofollow links */ sprintf(esc_html__('We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:', 'wp-seopress'), $count) . '</p>';
             $desc .= '<ul>';
             foreach ($data['links_no_follow'] as $link) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank">' . esc_url($link['value']) . '</a><span class="dashicons dashicons-external"></span></li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank" class="components-button is-link">' . esc_url($link['value']) . '</a><span class="dashicons dashicons-external"></span></li>';
             }
             $desc .= '</ul>';
             $analyzes['nofollow_links']['impact'] = 'good';
@@ -804,7 +812,7 @@ class GetContent
             $desc .= '<p>' . /* translators: %d number of outbound links */ sprintf(__('We found %s outbound links in your page. Below, the list:', 'wp-seopress'), $count) . '</p>';
             $desc .= '<ul>';
             foreach ($data['outbound_links'] as $link) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank">' . esc_url($link['value']) . '</a><span class="dashicons dashicons-external"></span></li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank" class="components-button is-link">' . esc_url($link['value']) . '</a><span class="dashicons dashicons-external"></span></li>';
             }
             $desc .= '</ul>';
         } else {
@@ -827,14 +835,19 @@ class GetContent
     {
         $desc = '<p>' . __('Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.', 'wp-seopress') . '</p>';
 
-        if (isset($data['internal_links']) && is_array($data['internal_links']) && !empty($data['internal_links'])) {
+        //Bricks compatibility
+        $theme = wp_get_theme();
+		if (defined('BRICKS_DB_EDITOR_MODE') && ('bricks' == $theme->template || 'Bricks' == $theme->parent_theme)) {
+            $analyzes['internal_links']['impact'] = 'good';
+            $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('Unfortunately, this analysis can‘t work with Bricks Builder because of the way your content is stored in your database.', 'wp-seopress') . '</p>';
+        } elseif (isset($data['internal_links']) && is_array($data['internal_links']) && !empty($data['internal_links'])) {
             $count = count($data['internal_links']);
 
             $desc .= '<p>' . /* translators: %s internal links */ sprintf(__('We found %s internal links to this page.', 'wp-seopress'), $count) . '</p>';
 
             $desc .= '<ul>';
             foreach ($data['internal_links'] as $link) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank">' . esc_url($link['value']) . '</a>
+                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link['url']) . '" target="_blank" class="components-button is-link">' . esc_url($link['value']) . '</a>
                 <a class="nounderline" href="' . esc_url(get_edit_post_link($link['id'])) . '" title="' . /* translators: %s link to edit the post */ sprintf(__('edit %s', 'wp-seopress'), esc_html(get_the_title($link['id']))) . '"><span class="dashicons dashicons-edit-large"></span></a></li>';
             }
             $desc .= '</ul>';
@@ -865,7 +878,7 @@ class GetContent
 
             $desc .= '<ul>';
             foreach ($data['canonical'] as $link) {
-                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link) . '" target="_blank">' . esc_url($link) . '</a><span class="dashicons dashicons-external"></span></li>';
+                $desc .= '<li><span class="dashicons dashicons-minus"></span><a href="' . esc_url($link) . '" target="_blank" class="components-button is-link">' . esc_url($link) . '</a><span class="dashicons dashicons-external"></span></li>';
             }
             $desc .= '</ul>';
 
@@ -932,9 +945,10 @@ class GetContent
         //Outbound links
         $analyzes = $this->analyzeOutboundLinks($analyzes, $data, $post);
 
-        //internal links
+        //Internal links
         $analyzes = $this->analyzeInternalLinks($analyzes, $data, $post);
 
+        //Canonical URL
         $analyzes = $this->analyzeCanonical($analyzes, $data, $post);
 
         return $analyzes;

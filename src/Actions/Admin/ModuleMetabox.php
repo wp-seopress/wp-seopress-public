@@ -119,6 +119,7 @@ class ModuleMetabox implements ExecuteHooks
             'SITENAME'                => get_bloginfo('name'),
             'SITEURL'                 => site_url(),
             'ADMIN_URL_TITLES'        => admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_single'),
+            'ADMIN_URL_ARCHIVES_TITLES' => admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_archives'),
             'TAGS'                    => array_values($tags),
             'REST_URL'                => rest_url(),
             'NONCE'                   => wp_create_nonce('wp_rest'),

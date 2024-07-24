@@ -54,22 +54,22 @@ class Text_Letter_Counter_Control extends \Elementor\Base_Data_Control {
 				<div class="seopress_pixel"></div>
 				<strong>
 					<# if ( data.field_type === 'text' ) { #>
-						<?php _e(' / 568 pixels - ','wp-seopress'); ?>
+						<?php esc_html_e(' / 568 pixels - ','wp-seopress'); ?>
 					<# } else { #>
-						<?php _e(' / 940 pixels - ','wp-seopress'); ?>
+						<?php esc_html_e(' / 940 pixels - ','wp-seopress'); ?>
 					<# } #>
 				</strong>
 				<div class="seopress_counters"></div>
-				<?php _e(' (maximum recommended limit)','wp-seopress'); ?>
+				<?php esc_html_e(' (maximum recommended limit)','wp-seopress'); ?>
 			</div>
 
 			<div class="wrap-tags">
 				<# if ( data.field_type === 'text' ) { #>
-					<span class="seopress-tag-single-title tag-title" data-tag="%%post_title%%" ><span class="dashicons dashicons-plus-alt2"></span><?php _e( 'Post Title','wp-seopress' ); ?></span>
-					<span class="seopress-tag-single-sep tag-title" data-tag="%%sep%%"><span class="dashicons dashicons-plus-alt2"></span><?php _e( 'Separator','wp-seopress' ); ?></span>
-					<span class="seopress-tag-single-site-title tag-title" data-tag="%%sitetitle%%"><span class="dashicons dashicons-plus-alt2"></span><?php _e( 'Site Title','wp-seopress' ); ?></span>
+					<span class="seopress-tag-single-title tag-title" data-tag="%%post_title%%" ><span class="dashicons dashicons-plus-alt2"></span><?php esc_html_e( 'Post Title','wp-seopress' ); ?></span>
+					<span class="seopress-tag-single-sep tag-title" data-tag="%%sep%%"><span class="dashicons dashicons-plus-alt2"></span><?php esc_html_e( 'Separator','wp-seopress' ); ?></span>
+					<span class="seopress-tag-single-site-title tag-title" data-tag="%%sitetitle%%"><span class="dashicons dashicons-plus-alt2"></span><?php esc_html_e( 'Site Title','wp-seopress' ); ?></span>
 				<# } else { #>
-					<span class="seopress-tag-single-excerpt tag-title" data-tag="%%post_excerpt%%"><span class="dashicons dashicons-plus-alt2"></span><?php _e( 'Post Excerpt', 'wp-seopress' ); ?></span>
+					<span class="seopress-tag-single-excerpt tag-title" data-tag="%%post_excerpt%%"><span class="dashicons dashicons-plus-alt2"></span><?php esc_html_e( 'Post Excerpt', 'wp-seopress' ); ?></span>
 				<# } #>
 			</div>
 		</div>

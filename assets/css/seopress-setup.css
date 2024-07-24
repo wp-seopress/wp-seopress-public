@@ -156,7 +156,7 @@ table.seopress-importer-error-log-table {
 }
 
 .seopress-setup-content .final {
-    padding: 4rem;
+    padding: 2.5rem;
     text-align: center;
 }
 
@@ -172,13 +172,8 @@ table.seopress-importer-error-log-table {
     margin-top: 0;
 }
 
-.seopress-setup-content p {
-    font-size: var(--fontSize);
-}
-
 .seopress-setup-content p.intro {
     font-weight: bold;
-    font-size: 14px;
 }
 
 #seopress-tabs.wrap ul {
@@ -427,7 +422,7 @@ table.seopress-importer-error-log-table {
 }
 
 .seopress-wizard-next-steps .wrap-seopress-wizard-nl {
-    border: none;
+    margin: 1rem 0;
 }
 
 .seopress-wizard-next-steps .seopress-wizard-next-step-item:first-child {
@@ -482,13 +477,10 @@ table.seopress-importer-error-log-table {
 }
 
 .seopress-wizard-next-step-item .seopress-wizard-nl {
-    background-color: #f8f9fb;
-    padding: 3rem;
-    border-radius: 0.75rem;
+    padding: 20px;
     display: flex;
     align-items: center;
-    gap: 24px;
-    justify-content: center;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
@@ -544,6 +536,10 @@ table.seopress-importer-error-log-table {
     margin: 0 0 10px auto;
 }
 
+.seopress-wizard-nl-items {
+    gap: 1rem;
+}
+
 .seopress-setup-content .col {
     border-radius: 5px;
     border-width: 1px;
@@ -583,6 +579,10 @@ table.seopress-importer-error-log-table {
 }
 
 @media only screen and (max-width: 768px) {
+    .seopress-wizard-nl-items {
+        flex-wrap: wrap;
+    }
+
     .seopress-setup .seopress-setup-content {
         margin: 25px auto 24px;
     }
@@ -594,6 +594,7 @@ table.seopress-importer-error-log-table {
 
     .seopress-setup img {
         max-width: 100%;
+        height: auto;
     }
 
     .seopress-wizard-service-item {

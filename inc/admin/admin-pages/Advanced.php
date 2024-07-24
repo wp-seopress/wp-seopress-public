@@ -7,11 +7,12 @@ if (function_exists('seopress_admin_header')) {
     echo seopress_admin_header();
 } ?>
 <form method="post"
-    action="<?php echo admin_url('options.php'); ?>"
+    action="<?php echo esc_url(admin_url('options.php')); ?>"
     class="seopress-option">
     <?php
         echo $this->seopress_feature_title('advanced');
-settings_fields('seopress_advanced_option_group'); ?>
+        settings_fields('seopress_advanced_option_group');
+    ?>
 
     <div id="seopress-tabs" class="wrap">
         <?php
@@ -26,8 +27,8 @@ $plugin_settings_tabs    = [
         <div class="nav-tab-wrapper">
 
             <?php foreach ($plugin_settings_tabs as $tab_key => $tab_caption) { ?>
-            <a id="<?php echo $tab_key; ?>-tab" class="nav-tab"
-                href="?page=seopress-advanced#tab=<?php echo $tab_key; ?>"><?php echo $tab_caption; ?></a>
+            <a id="<?php echo esc_attr($tab_key); ?>-tab" class="nav-tab"
+                href="?page=seopress-advanced#tab=<?php echo esc_attr($tab_key); ?>"><?php echo esc_html($tab_caption); ?></a>
             <?php } ?>
 
         </div>
@@ -49,6 +50,6 @@ $plugin_settings_tabs    = [
         </div>
     </div>
 
-    <?php sp_submit_button(__('Save changes', 'wp-seopress')); ?>
+    <?php sp_submit_button(esc_html__('Save changes', 'wp-seopress')); ?>
 </form>
 <?php

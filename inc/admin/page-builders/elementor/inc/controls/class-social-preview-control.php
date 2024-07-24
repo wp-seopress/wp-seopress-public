@@ -50,8 +50,8 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 					<div class="snippet-meta">
 						<div class="snippet-fb-url"><?php echo esc_url($site_url); ?></div>
 						<div class="fb-sep">|</div>
-						<div class="fb-by"><?php _e('By', 'wp-seopress'); ?>&nbsp;</div>
-						<div class="snippet-fb-site-name"><?php echo get_bloginfo('name'); ?></div>
+						<div class="fb-by"><?php esc_html_e('By', 'wp-seopress'); ?>&nbsp;</div>
+						<div class="snippet-fb-site-name"><?php echo esc_html(get_bloginfo('name')); ?></div>
 					</div>
 					<div class="title-desc">
 						<div class="snippet-fb-title">{{{data.title}}}</div>
@@ -82,7 +82,7 @@ class Social_Preview_Control extends \Elementor\Base_Control {
 					<div class="wrap-toggle-preview">
 						<p>
 							<span class="dashicons dashicons-smartphone"></span>
-							<strong><?php _e('Mobile Preview', 'wp-seopress'); ?></strong>
+							<strong><?php esc_html_e('Mobile Preview', 'wp-seopress'); ?></strong>
 							<input type="checkbox" name="toggle-preview" id="toggle-preview" class="toggle" data-toggle="1">
 							<label for="toggle-preview"></label>
 						</p>

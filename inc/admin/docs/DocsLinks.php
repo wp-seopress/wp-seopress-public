@@ -148,6 +148,7 @@ function seopress_get_docs_links()
 			'dynamic' => 'https://www.seopress.org/support/guides/manage-titles-meta-descriptions/',
 			'variables' => 'https://www.seopress.org/support/hooks/filter-predefined-dynamic-variables-for-automatic-schemas/',
 			'custom_fields' => 'https://www.seopress.org/support/hooks/filter-custom-fields-list-in-schemas/',
+            'feature' => 'https://www.seopress.org/features/structured-data-types/',
 		],
 		'page_speed' => [
 			'cwv' => 'https://www.seopress.org/newsroom/featured-stories/core-web-vitals-and-wordpress-seo/',
@@ -293,6 +294,7 @@ function seopress_get_docs_links()
 		$docs['schemas']['dynamic'] = 'https://www.seopress.org/fr/support/guides/gerez-vos-balises-titres-et-metas/';
 		$docs['schemas']['variables'] = 'https://www.seopress.org/fr/support/hooks/filtrer-la-liste-des-variables-dynamiques-predefinies-pour-les-schemas-automatiques/';
 		$docs['schemas']['custom_fields'] = 'https://www.seopress.org/fr/support/hooks/filtrer-la-liste-des-champs-personnalises-dans-les-schemas/';
+		$docs['schemas']['feature'] = 'https://www.seopress.org/fr/fonctionnalites/types-de-donnees-structurees-google-schemas/';
 
 		$docs['page_speed']['cwv'] = 'https://www.seopress.org/fr/newsroom/reportage/les-core-web-vitals-et-leurs-effets-sur-le-seo-des-sites-wordpress/';
 		$docs['page_speed']['api'] = 'https://www.seopress.org/fr/support/guides/ajouter-cle-api-google-page-speed-insights-seopress/';

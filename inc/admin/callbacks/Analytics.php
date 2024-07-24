@@ -588,7 +588,7 @@ esc_html($check)); ?>
 function seopress_google_analytics_other_tracking_callback() {
     if (current_user_can('unfiltered_html')) {
         $options = get_option('seopress_google_analytics_option_name');
-        $check   = isset($options['seopress_google_analytics_other_tracking']) ? $options['seopress_google_analytics_other_tracking'] : null;
+        $check   = isset($options['seopress_google_analytics_other_tracking']) ? $options['seopress_google_analytics_other_tracking'] : '';
 
         printf('<textarea id="seopress_google_analytics_other_tracking" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (head). Do NOT paste GA4 or Matomo codes here. They are automatically added to your source code.', 'wp-seopress') . '" aria-label="' . esc_attr__('Additional tracking code field', 'wp-seopress') . '">%s</textarea>', esc_textarea($check));
         ?>
@@ -611,7 +611,7 @@ function seopress_google_analytics_other_tracking_body_callback() {
     $docs    = seopress_get_docs_links();
     if (current_user_can('unfiltered_html')) {
         $options = get_option('seopress_google_analytics_option_name');
-        $check   = isset($options['seopress_google_analytics_other_tracking_body']) ? $options['seopress_google_analytics_other_tracking_body'] : null;
+        $check   = isset($options['seopress_google_analytics_other_tracking_body']) ? $options['seopress_google_analytics_other_tracking_body'] : '';
 
         printf(
         '<textarea id="seopress_google_analytics_other_tracking_body" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_body]" rows="16" placeholder="' . esc_html__('Paste your tracking code here like Google Tag Manager (body)', 'wp-seopress') . '" aria-label="' . esc_attr__('Additional tracking code field added to body', 'wp-seopress') . '">%s</textarea>',
@@ -644,7 +644,7 @@ function seopress_google_analytics_other_tracking_body_callback() {
 function seopress_google_analytics_other_tracking_footer_callback() {
     if (current_user_can('unfiltered_html')) {
         $options = get_option('seopress_google_analytics_option_name');
-        $check   = isset($options['seopress_google_analytics_other_tracking_footer']) ? $options['seopress_google_analytics_other_tracking_footer'] : null;
+        $check   = isset($options['seopress_google_analytics_other_tracking_footer']) ? $options['seopress_google_analytics_other_tracking_footer'] : '';
 
         printf(
         '<textarea id="seopress_google_analytics_other_tracking_footer" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_footer]" rows="16" placeholder="' . esc_html__('Paste your tracking code here (footer)', 'wp-seopress') . '" aria-label="' . esc_attr__('Additional tracking code field added to footer', 'wp-seopress') . '">%s</textarea>',

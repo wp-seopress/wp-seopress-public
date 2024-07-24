@@ -1202,8 +1202,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 													id="seopress_titles_archive_cpt_noindex[<?php echo esc_html($seopress_cpt_key); ?>]"
 													name="seopress_titles_option_name[seopress_titles_archive_titles][<?php echo esc_html($seopress_cpt_key); ?>][noindex]"
 													type="checkbox" <?php if ('1' == $seopress_titles_archive_titles) {
-                                                        echo 'checked="yes"';
-                                                    } ?>
+														echo 'checked="yes"';
+													} ?>
 												value="1"/>
 												<?php echo wp_kses_post(__('Do not display this post type archive in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
 											</label>
@@ -1238,8 +1238,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 									id="seopress_titles_option_name[seopress_titles_archives_date_noindex]"
 									name="seopress_titles_option_name[seopress_titles_archives_date_noindex]"
 									type="checkbox" <?php if ('1' == $seopress_titles_archives_date_noindex) {
-                                        echo 'checked="yes"';
-                                    } ?>
+										echo 'checked="yes"';
+									} ?>
 								value="1"/>
 								<?php echo wp_kses_post(__('Do not display date archives in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
 							</label>
@@ -1253,8 +1253,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 									id="seopress_titles_option_name[seopress_titles_archives_search_title_noindex]"
 									name="seopress_titles_option_name[seopress_titles_archives_search_title_noindex]"
 									type="checkbox" <?php if ('1' == $seopress_titles_archives_search_title_noindex) {
-                                        echo 'checked="yes"';
-                                    } ?>
+										echo 'checked="yes"';
+									} ?>
 								value="1"/>
 								<?php echo wp_kses_post(__('Do not display search archives in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
 							</label>
@@ -1268,8 +1268,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 									id="seopress_titles_option_name[seopress_titles_archives_author_noindex]"
 									name="seopress_titles_option_name[seopress_titles_archives_author_noindex]"
 									type="checkbox" <?php if ('1' == $seopress_titles_archives_author_noindex) {
-                                        echo 'checked="yes"';
-                                    } ?>
+										echo 'checked="yes"';
+									} ?>
 								value="1"/>
 								<?php echo wp_kses_post(__('Do not display author archives in search engine results <strong>(noindex)</strong>', 'wp-seopress')); ?>
 							</label>
@@ -1817,48 +1817,94 @@ class SEOPRESS_Admin_Setup_Wizard {
 						$current_user = wp_get_current_user();
 						$user_email = $current_user->user_email ? esc_html( $current_user->user_email ) : '';
 						?>
-						<li class="seopress-wizard-next-step-item wrap-seopress-wizard-nl">
+						<li class="seopress-wizard-next-step-item wrap-seopress-wizard-nl seopress-d-flex">
 							<div class="seopress-wizard-next-step-description seopress-wizard-nl">
+                                <div class="seopress-d-flex seopress-space-between seopress-wizard-nl-items">
+                                    <div>
+                                        <img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/ico-newsletter.svg'); ?>" alt="" width="79" height="116" />
+                                    </div>
+                                    <div>
+                                        <p class="next-step-heading"><?php esc_html_e('Subscribe for free', 'wp-seopress'); ?></p>
+                                        <h3 class="next-step-description"><?php esc_html_e('SEO news in your inbox. Free.', 'wp-seopress'); ?></h3>
+                                        <?php $nl_pros = [
+                                            __('Be alerted to changes in <strong>Google’s algorithm</strong>', 'wp-seopress'),
+                                            __('The <strong>latest innovations</strong> of our products', 'wp-seopress'),
+                                            __('Improve your <strong>conversions and traffic</strong> with our new blog posts', 'wp-seopress')
+                                        ];
+                                        ?>
+                                        <ul class="next-step-extra-info">
+                                            <?php foreach($nl_pros as $value) { ?>
+                                                <li>
+                                                    <span class="dashicons dashicons-minus"></span>
+                                                    <?php echo wp_kses_post($value); ?>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </div>
 								<div class="col">
-									<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/ico-newsletter.svg'); ?>" alt="" width="79" height="116" />
+                                    <?php if (!isset($_GET['sub'])) { ?>
+                                        <p class="seopress-setup-actions step">
+                                            <form method="post">
+                                                <input type="text" id="seopress_nl" class="location-input" name="seopress_nl" placeholder="<?php esc_html_e('Enter your email address', 'wp-seopress'); ?>" value="<?php echo esc_html($user_email); ?>" />
+
+                                                <button id="seopress_nl_submit" type="submit" class="btnPrimary btn" value="<?php esc_attr_e('Subscribe', 'wp-seopress'); ?>" name="save_step">
+                                                    <?php esc_html_e('Subscribe', 'wp-seopress'); ?>
+                                                </button>
+                                                <?php wp_nonce_field('seopress-setup'); ?>
+                                            </form>
+                                        </p>
+
+                                        <?php /* translators: %s URL of our privacy policy  */ echo wp_kses_post(sprintf(__('I accept that SEOPress can store and use my email address in order to send me a newsletter. Read our <a href="%s" target="_blank" title="Open in a new window">privacy policy</a>.', 'wp-seopress'), esc_url('https://www.seopress.org/privacy-policy/'))); ?>
+                                    <?php } elseif (isset($_GET['sub']) && $_GET['sub'] ==='1') { ?>
+                                        <p style="font-size: 16px;font-weight: bold;"><?php esc_html_e('Thank you for your subscription!', 'wp-seopress'); ?></p>
+                                    <?php } ?>
 								</div>
+							</div>
+							<div class="seopress-wizard-next-step-description seopress-wizard-nl">
+                                <div class="seopress-d-flex seopress-space-between seopress-wizard-nl-items">
+                                    <div>
+                                        <img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/cover-seo-routine.jpg'); ?>" alt="" width="106" height="150" />
+                                    </div>
+                                    <div>
+                                        <p class="next-step-heading"><?php esc_html_e('Subscribe for free', 'wp-seopress'); ?></p>
+                                        <h3 class="next-step-description"><?php esc_html_e('SEO Success for WordPress with a Two-Hours-a-Week Routine. Free.', 'wp-seopress'); ?></h3>
+
+                                        <?php $nl_pros = [
+                                            __('Introducing your 2-hour-a-week SEO plan with SEOPress', 'wp-seopress'),
+                                            __('Week 1: 2 Hours to Check SEO Progress and Issues', 'wp-seopress'),
+                                            __('Week 2: 2 Hours to Create SEO Optimized Content', 'wp-seopress'),
+                                            __('Week 3: 2 Hours to do On-Page Optimizations', 'wp-seopress'),
+                                            __('Week 4: 2 Hours to do Off-Page Optimizations', 'wp-seopress')
+                                        ];
+                                        ?>
+                                        <ul class="next-step-extra-info">
+                                            <?php foreach($nl_pros as $value) { ?>
+                                                <li>
+                                                    <span class="dashicons dashicons-minus"></span>
+                                                    <?php echo wp_kses_post($value); ?>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </div>
 								<div class="col">
-									<h3 class="next-step-description"><?php esc_html_e('SEO news in your inbox. Free.', 'wp-seopress'); ?></h3>
+                                    <?php if (!isset($_GET['sub_routine'])) { ?>
+                                        <p class="seopress-setup-actions step">
+                                            <form method="post">
+                                                <input type="text" id="seopress_nl_routine" class="location-input" name="seopress_nl_routine" placeholder="<?php esc_html_e('Enter your email address', 'wp-seopress'); ?>" value="<?php echo esc_html($user_email); ?>" />
 
-									<ul class="next-step-extra-info">
-										<li>
-											<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#4e21e7" class="bi bi-check text-primary" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path></svg>
-											<?php echo wp_kses_post(__('Be alerted to changes in <strong>Google’s algorithm</strong>', 'wp-seopress')); ?>
-										</li>
-										<li>
-											<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#4e21e7" class="bi bi-check text-primary" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path></svg>
-											<?php echo wp_kses_post(__('The <strong>latest innovations</strong> of our products', 'wp-seopress')); ?>
-										</li>
-										<li>
-											<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#4e21e7" class="bi bi-check text-primary" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"></path></svg>
-											<?php echo wp_kses_post(__('Improve your <strong>conversions and traffic</strong> with our new blog posts', 'wp-seopress')); ?>
-										</li>
-									</ul>
-								</div>
-								<div class="col">
-									<div class="seopress-wizard-next-step-action">
-										<?php if (!isset($_GET['sub'])) { ?>
-											<p class="seopress-setup-actions step">
-												<form method="post">
-													<input type="text" id="seopress_nl" class="location-input" name="seopress_nl" placeholder="<?php esc_html_e('Enter your email address', 'wp-seopress'); ?>" value="<?php echo esc_html($user_email); ?>" />
+                                                <button id="seopress_nl_routine_submit" type="submit" class="btnPrimary btn" value="<?php esc_attr_e('Subscribe', 'wp-seopress'); ?>" name="save_step">
+                                                    <?php esc_html_e('Subscribe', 'wp-seopress'); ?>
+                                                </button>
+                                                <?php wp_nonce_field('seopress-setup'); ?>
+                                            </form>
+                                        </p>
 
-													<button id="seopress_nl_submit" type="submit" class="btnPrimary btn" value="<?php esc_attr_e('Subscribe', 'wp-seopress'); ?>" name="save_step">
-														<?php esc_html_e('Subscribe', 'wp-seopress'); ?>
-													</button>
-													<?php wp_nonce_field('seopress-setup'); ?>
-												</form>
-											</p>
-
-											<?php /* translators: %s URL of our privacy policy  */ echo wp_kses_post(sprintf(__('I accept that SEOPress can store and use my email address in order to send me a newsletter. Read our <a href="%s" target="_blank" title="Open in a new window">privacy policy</a>.', 'wp-seopress'), esc_url('https://www.seopress.org/privacy-policy/'))); ?>
-										<?php } elseif (isset($_GET['sub']) && $_GET['sub'] ==='1') { ?>
-											<p style="font-size: 16px;font-weight: bold;"><?php esc_html_e('Thank you for your subscription!', 'wp-seopress'); ?></p>
-										<?php } ?>
-									</div>
+                                        <?php /* translators: %s URL of our privacy policy  */ echo wp_kses_post(sprintf(__('I accept that SEOPress can store and use my email address in order to send me a newsletter. Read our <a href="%s" target="_blank" title="Open in a new window">privacy policy</a>.', 'wp-seopress'), esc_url('https://www.seopress.org/privacy-policy/')));
+                                    } elseif (isset($_GET['sub_routine']) && $_GET['sub_routine'] ==='1') { ?>
+                                        <p style="font-size: 16px;font-weight: bold;"><?php esc_html_e('Thank you for your subscription!', 'wp-seopress'); ?></p>
+                                    <?php } ?>
 								</div>
 							</div>
 						</li>
@@ -1903,8 +1949,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 		if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' !== seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
 
 			$endpoint_url = 'https://www.seopress.org/wizard-nl/';
+			$endpoint_url_routine = 'https://www.seopress.org/wizard-nl-routine/';
 
 			$email = isset($_POST['seopress_nl']) ? sanitize_text_field(wp_unslash($_POST['seopress_nl'])) : '';
+			$email_routine = isset($_POST['seopress_nl_routine']) ? sanitize_text_field(wp_unslash($_POST['seopress_nl_routine'])) : '';
 
 			if (!empty($email)) {
 
@@ -1918,9 +1966,27 @@ class SEOPRESS_Admin_Setup_Wizard {
 					)
 				);
 			}
+
+            if (!empty($email_routine)) {
+
+				$body = ['email' => $email_routine, 'lang' => seopress_get_locale()];
+
+				$response = wp_remote_post( $endpoint_url_routine, array(
+						'method' => 'POST',
+						'body' => $body,
+						'timeout' => 5,
+						'blocking' => true
+					)
+				);
+			}
 		}
-		wp_safe_redirect(esc_url_raw('admin.php?page=seopress-setup&step=ready&parent&sub=1'));
-		exit;
+        if (!empty($email_routine)) {
+		    wp_safe_redirect(esc_url_raw('admin.php?page=seopress-setup&step=ready&parent&sub_routine=1'));
+            exit;
+        } else {
+		    wp_safe_redirect(esc_url_raw('admin.php?page=seopress-setup&step=ready&parent&sub=1'));
+            exit;
+        }
 	}
 }
 

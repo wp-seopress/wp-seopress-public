@@ -37,6 +37,7 @@ function seopress_sanitize_options_fields($input){
         'seopress_social_facebook_link_ownership_id',
         'seopress_social_facebook_admin_id',
         'seopress_social_facebook_app_id',
+        'seopress_social_fv_creator',
         'seopress_google_analytics_ga4',
         'seopress_google_analytics_download_tracking',
         'seopress_google_analytics_opt_out_msg',

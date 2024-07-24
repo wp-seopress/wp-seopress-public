@@ -270,3 +270,20 @@ add_settings_field(
     'seopress-settings-admin-social-linkedin', // Page
     'seopress_setting_section_social_linkedin' // Section
 );
+
+//Fediverse SECTION================================================================================
+add_settings_section(
+    'seopress_setting_section_social_fediverse', // ID
+    '',
+    //__("Fediverse","wp-seopress"), // Title
+    'seopress_print_section_info_social_fediverse', // Callback
+    'seopress-settings-admin-social-fediverse' // Page
+);
+
+add_settings_field(
+    'seopress_social_fv_creator', // ID
+    __('Display Fediverse Creator tag', 'wp-seopress'), // Title
+    'seopress_social_fv_creator_callback', // Callback
+    'seopress-settings-admin-social-fediverse', // Page
+    'seopress_setting_section_social_fediverse' // Section
+);

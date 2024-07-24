@@ -75,7 +75,7 @@ function seopress_instant_indexing_google_action_callback() {
 function seopress_instant_indexing_manual_batch_callback() {
     require_once WP_PLUGIN_DIR . '/wp-seopress/vendor/autoload.php';
     $options    = get_option('seopress_instant_indexing_option_name');
-    $log        = get_option('seopress_instant_indexing_log_option_name');
+    $log        = is_array(get_option('seopress_instant_indexing_log_option_name')) ? get_option('seopress_instant_indexing_log_option_name') : null;
     $check      = isset($options['seopress_instant_indexing_manual_batch']) ? esc_attr($options['seopress_instant_indexing_manual_batch']) : null;
 
     //URLs

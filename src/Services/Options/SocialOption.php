@@ -395,4 +395,13 @@ class SocialOption
     public function getSocialLIImgSize() {
         return $this->searchOptionByKey('seopress_social_li_img_size');
     }
+
+    /**
+     * @since 8.0.0
+     *
+     * @return string
+     */
+    public function getSocialFvCreator() {
+        return $this->searchOptionByKey('seopress_social_fv_creator');
+    }
 }

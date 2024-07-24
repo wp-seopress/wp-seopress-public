@@ -136,8 +136,8 @@ class ManageColumn implements ExecuteHooksBackend
                 if (empty($title)) {
                     $title = $metaPostTitle;
                 }
-                printf('<div id="seopress_title-%s">%s</div>', esc_attr($post_id), $title);
-                printf('<div id="seopress_title_raw-%s" class="hidden">%s</div>', esc_attr($post_id), $metaPostTitle);
+                printf('<div id="seopress_title-%s">%s</div>', esc_attr($post_id), esc_html($title));
+                printf('<div id="seopress_title_raw-%s" class="hidden">%s</div>', esc_attr($post_id), esc_html($metaPostTitle));
                 break;
 
             case 'seopress_desc':
@@ -147,8 +147,8 @@ class ManageColumn implements ExecuteHooksBackend
                 if (empty($description)) {
                     $description = $metaDescription;
                 }
-                printf('<div id="seopress_desc-%s">%s</div>', esc_attr($post_id), $description);
-                printf('<div id="seopress_desc_raw-%s" class="hidden">%s</div>', esc_attr($post_id), $metaDescription);
+                printf('<div id="seopress_desc-%s">%s</div>', esc_attr($post_id), esc_html($description));
+                printf('<div id="seopress_desc_raw-%s" class="hidden">%s</div>', esc_attr($post_id), esc_html($metaDescription));
                 break;
 
             case 'seopress_redirect_enable':
@@ -170,13 +170,13 @@ class ManageColumn implements ExecuteHooksBackend
 
             case 'seopress_noindex':
                 if ('yes' == get_post_meta($post_id, '_seopress_robots_index', true)) {
-                    echo '<span class="dashicons dashicons-hidden"></span><span class="screen-reader-text">' . __('noindex is on!', 'wp-seopress') . '</span>';
+                    echo '<span class="dashicons dashicons-hidden"></span><span class="screen-reader-text">' . esc_html__('noindex is on!', 'wp-seopress') . '</span>';
                 }
                 break;
 
             case 'seopress_nofollow':
                 if ('yes' == get_post_meta($post_id, '_seopress_robots_follow', true)) {
-                    echo '<span class="dashicons dashicons-yes"></span><span class="screen-reader-text">' . __('nofollow is on!', 'wp-seopress') . '</span>';
+                    echo '<span class="dashicons dashicons-yes"></span><span class="screen-reader-text">' . esc_html__('nofollow is on!', 'wp-seopress') . '</span>';
                 }
                 break;
 
@@ -251,12 +251,12 @@ class ManageColumn implements ExecuteHooksBackend
                             echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
                             <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                             <circle id="bar" class="notgood" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 101.788px;"></circle>
-                        </svg><span class="screen-reader-text">' . __('Should be improved', 'wp-seopress') . '</span></p>';
+                        </svg><span class="screen-reader-text">' . esc_html__('Should be improved', 'wp-seopress') . '</span></p>';
                         } else {
                             echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
                             <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                             <circle id="bar" class="good" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-                        </svg><span class="screen-reader-text">' . __('Good', 'wp-seopress') . '</span></p>';
+                        </svg><span class="screen-reader-text">' . esc_html__('Good', 'wp-seopress') . '</span></p>';
                         }
                         echo '</div>';
                         return;
@@ -275,12 +275,12 @@ class ManageColumn implements ExecuteHooksBackend
                         echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                         <circle id="bar" class="good" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-                    </svg><span class="screen-reader-text">' . __('Good', 'wp-seopress') . '</span></p>';
+                    </svg><span class="screen-reader-text">' . esc_html__('Good', 'wp-seopress') . '</span></p>';
                     } else {
                         echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
                         <circle id="bar" class="notgood" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 101.788px;"></circle>
-                    </svg><span class="screen-reader-text">' . __('Should be improved', 'wp-seopress') . '</span></p>';
+                    </svg><span class="screen-reader-text">' . esc_html__('Should be improved', 'wp-seopress') . '</span></p>';
                     }
                     echo '</div>';
                 } else {
@@ -291,12 +291,12 @@ class ManageColumn implements ExecuteHooksBackend
                             echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
 							<circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
 							<circle id="bar" class="good" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-						</svg><span class="screen-reader-text">' . __('Good', 'wp-seopress') . '</span></p>';
+						</svg><span class="screen-reader-text">' . esc_html__('Good', 'wp-seopress') . '</span></p>';
                         } elseif (isset($ca[0]['score']) && '' == $ca[0]['score']) {
                             echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
 							<circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
 							<circle id="bar" class="notgood" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 101.788px;"></circle>
-						</svg><span class="screen-reader-text">' . __('Should be improved', 'wp-seopress') . '</span></p>';
+						</svg><span class="screen-reader-text">' . esc_html__('Should be improved', 'wp-seopress') . '</span></p>';
                         }
                         echo '</div>';
                     }
@@ -318,7 +318,7 @@ class ManageColumn implements ExecuteHooksBackend
     {
         switch ($column) {
             case 'seopress_alt_text':
-                echo get_post_meta($post_id, '_wp_attachment_image_alt', true);
+                echo esc_html(get_post_meta($post_id, '_wp_attachment_image_alt', true));
         }
     }
 
