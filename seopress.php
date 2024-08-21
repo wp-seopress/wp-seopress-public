@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 8.0
+Version: 8.0.1
 Author URI: https://www.seopress.org/
 License: GPLv2 or later
 Text Domain: wp-seopress
@@ -61,7 +61,7 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '8.0');
+define('SEOPRESS_VERSION', '8.0.1');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -100,11 +100,13 @@ function seopress_init($hook) {
 	global $typenow;
 	global $wp_version;
 
+    //Docs (must be loaded there)
+    require_once dirname(__FILE__) . '/inc/admin/docs/DocsLinks.php';
+
 	if (is_admin() || is_network_admin()) {
 		require_once dirname(__FILE__) . '/inc/admin/plugin-upgrader.php';
 		require_once dirname(__FILE__) . '/inc/admin/admin.php';
 		require_once dirname(__FILE__) . '/inc/admin/migrate/MigrationTools.php';
-		require_once dirname(__FILE__) . '/inc/admin/docs/DocsLinks.php';
 
 		if ('post-new.php' == $pagenow || 'post.php' == $pagenow) {
 			if ('seopress_schemas' != $typenow) {

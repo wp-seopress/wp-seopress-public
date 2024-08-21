@@ -758,7 +758,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 					<?php
 						foreach ($plugins as $plugin => $detail) {
-							echo seopress_migration_tool($plugin, $detail['name']);
+							echo wp_kses_post(seopress_migration_tool($plugin, $detail['name']));
 						}
 					?>
 

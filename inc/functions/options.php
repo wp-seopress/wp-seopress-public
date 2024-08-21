@@ -119,7 +119,7 @@ if ('1' == seopress_get_toggle_option('social')) {
         }
     }
 }
-if ('1' == seopress_get_toggle_option('google-analytics')) {
+if ('1' === seopress_get_toggle_option('google-analytics') && !isset($_GET['bricks'])) {
     //User Consent JS
     function seopress_google_analytics_cookies_js()
     {

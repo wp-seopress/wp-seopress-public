@@ -15,7 +15,7 @@
         <h1>
             <?php
                 /* translators: %s displays the current version number */
-                printf(esc_attr__('Welcome to SEOPress %s!', 'wp-seopress'), '8.0');
+                printf(esc_attr__('Welcome to SEOPress %s!', 'wp-seopress'), '8.0.1');
             ?>
         </h1>
         <p><?php esc_attr_e('Your control center for SEO.', 'wp-seopress'); ?></p>

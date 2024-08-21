@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 8.0\n"
+"Project-Id-Version: SEOPress 8.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-23T12:47:23+00:00\n"
+"POT-Creation-Date: 2024-07-29T13:01:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -541,7 +541,7 @@ msgstr ""
 #: inc/admin/admin-pages/Tools.php:20
 #: inc/admin/admin-pages/Tools.php:43
 #: inc/admin/sections/InstantIndexing.php:62
-#: seopress.php:472
+#: seopress.php:474
 msgid "Settings"
 msgstr ""
 
@@ -2312,7 +2312,7 @@ msgid "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:591
-#: seopress.php:336
+#: seopress.php:338
 msgid "Default"
 msgstr ""
 
@@ -4438,12 +4438,12 @@ msgid "noindex on attachment pages"
 msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:141
-#: seopress.php:317
+#: seopress.php:319
 msgid "Migration completed!"
 msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:142
-#: seopress.php:318
+#: seopress.php:320
 msgid "Export completed!"
 msgstr ""
 
@@ -5219,39 +5219,39 @@ msgstr ""
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
-#: seopress.php:222
+#: seopress.php:224
 msgid "has been successfully updated!"
 msgstr ""
 
-#: seopress.php:334
+#: seopress.php:336
 msgid "Clear"
 msgstr ""
 
-#: seopress.php:335
+#: seopress.php:337
 msgid "Clear color"
 msgstr ""
 
-#: seopress.php:337
+#: seopress.php:339
 msgid "Select default color"
 msgstr ""
 
-#: seopress.php:338
+#: seopress.php:340
 msgid "Select Color"
 msgstr ""
 
-#: seopress.php:339
+#: seopress.php:341
 msgid "Color value"
 msgstr ""
 
-#: seopress.php:473
+#: seopress.php:475
 msgid "Docs"
 msgstr ""
 
-#: seopress.php:474
+#: seopress.php:476
 msgid "Configuration Wizard"
 msgstr ""
 
-#: seopress.php:476
+#: seopress.php:478
 msgid "GO PRO!"
 msgstr ""
 

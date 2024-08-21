@@ -131,11 +131,8 @@ if ('1' === seopress_get_service('AdvancedOption')->getAdvancedEmoji()) {
 function seopress_advanced_advanced_google_hook() {
     if (is_home() || is_front_page()) {
         $optionGoogle = seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification();
-        if (!empty($optionGoogle)) {
-            $google = '<meta name="google-site-verification" content="' . $optionGoogle . '">';
-            $google .= "\n";
-            echo $google;
-        }
+        if (!empty($optionGoogle)) { ?><meta name="google-site-verification" content="<?php echo esc_attr($optionGoogle); ?>">
+<?php }
     }
 }
 add_action('wp_head', 'seopress_advanced_advanced_google_hook', 2);
@@ -144,11 +141,8 @@ add_action('wp_head', 'seopress_advanced_advanced_google_hook', 2);
 function seopress_advanced_advanced_bing_hook() {
     if (is_home() || is_front_page()) {
         $optionBing = seopress_get_service('AdvancedOption')->getAdvancedBingVerification();
-        if (!empty($optionBing)) {
-            $bing = '<meta name="msvalidate.01" content="' . $optionBing . '">';
-            $bing .= "\n";
-            echo $bing;
-        }
+        if (!empty($optionBing)) { ?><meta name="msvalidate.01" content="<?php echo esc_attr($optionBing); ?>">
+<?php }
     }
 }
 add_action('wp_head', 'seopress_advanced_advanced_bing_hook', 2);
@@ -157,11 +151,8 @@ add_action('wp_head', 'seopress_advanced_advanced_bing_hook', 2);
 function seopress_advanced_advanced_pinterest_hook() {
     if (is_home() || is_front_page()) {
         $optionPinterest =seopress_get_service('AdvancedOption')->getAdvancedPinterestVerification();
-        if (!empty($optionPinterest)) {
-            $pinterest = '<meta name="p:domain_verify" content="' . $optionPinterest . '">';
-            $pinterest .= "\n";
-            echo $pinterest;
-        }
+        if (!empty($optionPinterest)) { ?><meta name="p:domain_verify" content="<?php echo esc_attr($optionPinterest); ?>">
+<?php }
     }
 }
 add_action('wp_head', 'seopress_advanced_advanced_pinterest_hook', 2);
@@ -174,10 +165,8 @@ function seopress_advanced_advanced_yandex_hook() {
         if(empty($contentYandex)){
             return;
         }
-
-        $yandex = '<meta name="yandex-verification" content="' . $contentYandex . '">';
-        $yandex .= "\n";
-        echo $yandex;
+        ?><meta name="yandex-verification" content="<?php echo esc_attr($contentYandex); ?>">
+<?php
     }
 }
 add_action('wp_head', 'seopress_advanced_advanced_yandex_hook', 2);
@@ -189,11 +178,8 @@ function seopress_advanced_advanced_baidu_hook() {
 
         if(empty($contentBaidu)){
             return;
-        }
-
-        $baidu = '<meta name="baidu-site-verification" content="' . $contentBaidu . '">';
-        $baidu .= "\n";
-        echo $baidu;
+        } ?><meta name="baidu-site-verification" content="<?php echo esc_attr($contentBaidu); ?>">
+<?php
     }
 }
 add_action('wp_head', 'seopress_advanced_advanced_baidu_hook', 2);

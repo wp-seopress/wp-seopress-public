@@ -676,7 +676,7 @@ class Document_Settings_Section {
         );
 
         if (is_wp_error($post_id)) {
-            throw new \Exception($post_id->get_error_message());
+            throw new \Exception(esc_html($post_id->get_error_message()));
         }
     }
 

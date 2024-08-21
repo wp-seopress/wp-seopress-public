@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 8.0
+Stable tag: 8.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -261,6 +261,12 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.0.1 =
+* FIX Bricks compatibility with WPML
+* FIX Prevent a fatal error if both plugins are deactivated at same time
+* FIX Universal SEO metabox / Content Analysis
+* FIX An issue with Instant Indexing feature
+
 = 8.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-0/">Read the blog post update</a> =
 * NEW Support for WordPress 6.6
 * NEW Import your redirects from SmartCrawl plugin

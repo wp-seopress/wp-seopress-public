@@ -75,7 +75,7 @@ function seopress_instant_indexing_google_action_callback() {
 function seopress_instant_indexing_manual_batch_callback() {
     require_once WP_PLUGIN_DIR . '/wp-seopress/vendor/autoload.php';
     $options    = get_option('seopress_instant_indexing_option_name');
-    $log        = is_array(get_option('seopress_instant_indexing_log_option_name')) ? get_option('seopress_instant_indexing_log_option_name') : null;
+    $log        = get_option('seopress_instant_indexing_log_option_name');
     $check      = isset($options['seopress_instant_indexing_manual_batch']) ? esc_attr($options['seopress_instant_indexing_manual_batch']) : null;
 
     //URLs
@@ -86,10 +86,10 @@ function seopress_instant_indexing_manual_batch_callback() {
     $error       = isset($log['error']) ? $log['error'] : null;
 
     //Bing
-    $bing_response       = isset($log['bing']['response']) ? $log['bing']['response'] : null;
+    $bing_response       = isset($log['bing']['response']) && is_array($log['bing']['response']) ? $log['bing']['response'] : null;
 
     //Google
-    $google_response     = isset($log['google']['response']) ? $log['google']['response'] : null;
+    $google_response     = isset($log['google']['response']) &&  is_array($log['google']['response']) ? $log['google']['response'] : null;
 
     printf(
 '<textarea id="seopress_instant_indexing_manual_batch" name="seopress_instant_indexing_option_name[seopress_instant_indexing_manual_batch]" rows="20" placeholder="' . esc_html__('Enter one URL per line to submit them to search engines (max 100 URLs)', 'wp-seopress') . '" aria-label="' . esc_attr__('Enter one URL per line to submit them to search engines (max 100 URLs)', 'wp-seopress') . '">%s</textarea>',
@@ -119,10 +119,10 @@ esc_html($check));
 <p><em><?php echo esc_html($date); ?></em></p>
 
 <?php
-if (!empty($error)) { ?>
+if (isset($error) && !empty($error)) { ?>
     <code><?php echo esc_html($error); ?></code>
 <?php }
-if (!empty($bing_response['response'])) {
+if (isset($bing_response['response']) && is_array($bing_response['response']) && !empty($bing_response['response'])) {
     switch ($bing_response['response']['code']) {
         case 200:
             $msg = esc_attr__('URLs submitted successfully', 'wp-seopress');
@@ -157,7 +157,7 @@ if (!empty($bing_response['response'])) {
     </div>
 <?php }
 
-    if (is_array($google_response) && !empty($google_response)) { ?>
+    if (isset($google_response) && is_array($google_response) && !empty($google_response)) { ?>
         <div class="wrap-google-response">
             <h4><?php esc_attr_e('Google Response','wp-seopress'); ?></h4>
 
