@@ -702,6 +702,10 @@ function seopress_google_analytics_body_code($echo) {
         return;
     }
 
+    if ($seopress_html_body === 'none') {
+        return;
+    }
+
     $seopress_html_body = apply_filters('seopress_custom_body_tracking', $seopress_html_body);
     if (true == $echo) {
         echo "\n" . $seopress_html_body;
@@ -723,6 +727,10 @@ function seopress_google_analytics_footer_code($echo) {
         return;
     }
 
+    if ($seopress_html_footer === 'none') {
+        return;
+    }
+
     $seopress_html_footer = apply_filters('seopress_custom_footer_tracking', $seopress_html_footer);
     if (true == $echo) {
         echo "\n" . $seopress_html_footer;
@@ -741,6 +749,10 @@ function seopress_custom_tracking_footer_hook() {
 function seopress_google_analytics_head_code($echo) {
     $seopress_html_head = seopress_get_service('GoogleAnalyticsOption')->getOtherTracking();
     if (empty($seopress_html_head) || !$seopress_html_head) {
+        return;
+    }
+
+    if ($seopress_html_head === 'none') {
         return;
     }
 

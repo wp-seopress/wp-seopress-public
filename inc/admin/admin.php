@@ -18,6 +18,7 @@ class seopress_options
     {
         require_once dirname(__FILE__) . '/admin-dyn-variables-helper.php'; //Dynamic variables
 
+		add_action('plugins_loaded', [$this, 'init_wizard'], 1000);
         add_action('admin_menu', [$this, 'add_plugin_page'], 10);
         add_action('admin_init', [$this, 'set_default_values'], 10);
         add_action('admin_init', [$this, 'page_init']);
@@ -27,6 +28,19 @@ class seopress_options
         add_action('admin_init', [$this, 'load_callbacks'], 40);
         add_action('admin_init', [$this, 'pre_save_options'], 50);
     }
+
+	public function init_wizard() {
+		if ( ! empty($_GET['page'])) {
+			switch ($_GET['page']) {
+				case 'seopress-setup':
+					ob_start();
+					require_once dirname(__FILE__) . '/wizard/admin-wizard.php'; //Wizard
+					break;
+				default:
+					break;
+			}
+		}
+	}
 
     public function seopress_feature_save()
     {
@@ -112,7 +126,7 @@ class seopress_options
         if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel')) {
             $white_label_toggle = seopress_get_service('ToggleOption')->getToggleWhiteLabel();
             if ('1' === $white_label_toggle) {
-                if (method_exists('seopress_pro_get_service', 'getWhiteLabelHelpLinks') && '1' === seopress_pro_get_service('OptionPro')->getWhiteLabelHelpLinks()) {
+                if (function_exists('seopress_pro_get_service') && method_exists('seopress_pro_get_service', 'getWhiteLabelHelpLinks') && '1' === seopress_pro_get_service('OptionPro')->getWhiteLabelHelpLinks()) {
                     return;
                 }
             }
@@ -307,4 +321,3 @@ class seopress_options
 if (is_admin()) {
     $my_settings_page = new seopress_options();
 }
-

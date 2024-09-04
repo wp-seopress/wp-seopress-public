@@ -347,20 +347,6 @@ class AdvancedOption
     }
 
     /**
-     * @since 5.4.0
-     */
-    public function getAppearanceGenesisSeoMetaboxe(){
-        return $this->searchOptionByKey('seopress_advanced_appearance_genesis_seo_metaboxe');
-    }
-
-    /**
-     * @since 5.4.0
-     */
-    public function getAppearanceGenesisSeoMenu(){
-        return $this->searchOptionByKey('seopress_advanced_appearance_genesis_seo_menu');
-    }
-
-    /**
      * @since 6.6.0
      */
     public function getAppearanceAdminBar(){

@@ -67,7 +67,7 @@ textarea:focus {
     vertical-align: middle;
 }
 
-.seopress-setup-content {
+.seopress-styles .seopress-option.seopress-setup-content {
     width: 100%;
     padding: 25px 40px 40px;
 }
@@ -110,15 +110,6 @@ textarea:focus {
     padding: 0;
 }
 
-.seopress-setup .seopress-setup-footer {
-    padding: 20px 40px;
-    position: fixed;
-    width: auto;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
-}
-
 .seopress-setup .seopress-setup-footer .hidden {
     display: none;
 }
@@ -153,6 +144,10 @@ table.seopress-importer-error-log-table {
     color: var(--colorDark);
     clear: none;
     font-weight: 500;
+}
+
+.seopress-setup-content h2 {
+    margin: 0 0 10px;
 }
 
 .seopress-setup-content .final {
@@ -330,14 +325,6 @@ table.seopress-importer-error-log-table {
     position: relative;
 }
 
-.seopress-setup-footer-links {
-    font-size: 0.85em;
-    color: var(--color);
-    margin: 1.18em auto;
-    display: inline-block;
-    text-align: center;
-}
-
 .no_nav_menu .seopress-setup-steps {
     display: none;
 }
@@ -348,10 +335,6 @@ table.seopress-importer-error-log-table {
 
 .seopress-setup.no_nav_menu p.seopress-setup-actions {
     font-size: 18px;
-}
-
-.seopress-setup-sub-steps {
-    padding: 0;
 }
 
 .seopress-wizard-services {
@@ -456,6 +439,7 @@ table.seopress-importer-error-log-table {
     margin: 0;
     font-size: 16px;
     font-weight: 600;
+    line-height: 2;
 }
 
 .seopress-wizard-next-steps .seopress-wizard-additional-steps {
@@ -585,11 +569,6 @@ table.seopress-importer-error-log-table {
 
     .seopress-setup .seopress-setup-content {
         margin: 25px auto 24px;
-    }
-
-    .seopress-setup .seopress-setup-footer {
-        position: relative;
-        padding: 0 40px 10px;
     }
 
     .seopress-setup img {

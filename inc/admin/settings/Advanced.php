@@ -44,6 +44,8 @@ add_settings_field(
     'seopress_setting_section_advanced_advanced_crawling' // Section
 );
 
+do_action('seopress_settings_advanced_url_rewriting');
+
 add_settings_field(
     'seopress_advanced_advanced_replytocom', // ID
     __('Remove ?replytocom link to avoid duplicate content', 'wp-seopress'), // Title
@@ -255,14 +257,6 @@ add_settings_field(
     'seopress_setting_section_advanced_appearance_metabox' // Section
 );
 
-add_settings_field(
-    'seopress_advanced_appearance_genesis_seo_metaboxe', // ID
-    __('Hide Genesis SEO Metabox', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_genesis_seo_metaboxe_callback', // Callback
-    'seopress-settings-admin-advanced-appearance', // Page
-    'seopress_setting_section_advanced_appearance_metabox' // Section
-);
-
 //SEO Admin bar
 add_settings_section(
     'seopress_setting_section_advanced_appearance_admin_bar', // ID
@@ -392,23 +386,6 @@ add_settings_field(
     'seopress_advanced_appearance_score_col_callback', // Callback
     'seopress-settings-admin-advanced-appearance', // Page
     'seopress_setting_section_advanced_appearance_col' // Section
-);
-
-//Misc
-add_settings_section(
-    'seopress_setting_section_advanced_appearance_misc', // ID
-    '',
-    //__("Misc","wp-seopress"), // Title
-    'seopress_print_section_info_advanced_appearance_misc', // Callback
-    'seopress-settings-admin-advanced-appearance' // Page
-);
-
-add_settings_field(
-    'seopress_advanced_appearance_genesis_seo_menu', // ID
-    __('Hide Genesis SEO Settings link', 'wp-seopress'), // Title
-    'seopress_advanced_appearance_genesis_seo_menu_callback', // Callback
-    'seopress-settings-admin-advanced-appearance', // Page
-    'seopress_setting_section_advanced_appearance_misc' // Section
 );
 
 //Security SECTION=======================================================================

@@ -128,24 +128,6 @@ if (seopress_get_service('AdvancedOption')->getAppearanceCaMetaboxe()==='1') {
     add_action('init', 'seopress_advanced_appearance_ca_metaboxe_hook', 999);
 }
 
-//Remove Genesis SEO Metaboxe
-if ('1' === seopress_get_service('AdvancedOption')->getAppearanceGenesisSeoMetaboxe()) {
-    function seopress_advanced_appearance_genesis_seo_metaboxe_hook()
-    {
-        remove_action('admin_menu', 'genesis_add_inpost_seo_box');
-    }
-    add_action('init', 'seopress_advanced_appearance_genesis_seo_metaboxe_hook', 999);
-}
-
-//Remove Genesis SEO Menu Link
-if ('1' === seopress_get_service('AdvancedOption')->getAppearanceGenesisSeoMenu()) {
-    function seopress_advanced_appearance_genesis_seo_menu_hook()
-    {
-        remove_theme_support('genesis-seo-settings-menu');
-    }
-    add_action('init', 'seopress_advanced_appearance_genesis_seo_menu_hook', 999);
-}
-
 //Bulk actions
 $postTypes = seopress_get_service('WordPressData')->getPostTypes();
 

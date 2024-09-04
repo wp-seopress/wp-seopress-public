@@ -62,8 +62,7 @@ function seopress_print_section_info_advanced_appearance()
         <a href="#seopress-advanced-metaboxes"><?php esc_attr_e('Metaboxes', 'wp-seopress'); ?></a> |
         <a href="#seopress-advanced-adminbar"><?php esc_attr_e('Admin bar', 'wp-seopress'); ?></a> |
         <a href="#seopress-advanced-seo-dashboard"><?php esc_attr_e('SEO Dashboard', 'wp-seopress'); ?></a> |
-        <a href="#seopress-advanced-columns"><?php esc_attr_e('Columns', 'wp-seopress'); ?></a> |
-        <a href="#seopress-advanced-misc"><?php esc_attr_e('Misc', 'wp-seopress'); ?></a>
+        <a href="#seopress-advanced-columns"><?php esc_attr_e('Columns', 'wp-seopress'); ?></a>
     </div>
 
     <p>
@@ -177,17 +176,6 @@ function seopress_print_section_info_advanced_appearance_admin_bar()
     </h3>
 
     <p><?php esc_attr_e('The admin bar appears on the top of your pages when logged in to your WP admin.', 'wp-seopress'); ?></p>
-
-<?php
-}
-
-function seopress_print_section_info_advanced_appearance_misc()
-{ ?>
-    <hr>
-
-    <h3 id="seopress-advanced-misc">
-        <?php esc_attr_e('Misc', 'wp-seopress'); ?>
-    </h3>
 
 <?php
 }

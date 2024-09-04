@@ -142,7 +142,7 @@ function seopress_admin_bar_links() {
         'parent'	=> 'seopress',
         'id'		   => 'seopress_custom_sub_menu_wizard',
         'title'		=> __('Configuration wizard', 'wp-seopress'),
-        'href'		 => admin_url('admin.php?page=seopress-setup'),
+        'href'		 => admin_url('admin.php?page=seopress-setup&step=welcome&parent=welcome'),
     ]);
 }
 add_action('admin_bar_menu', 'seopress_admin_bar_links', 99);

@@ -129,9 +129,9 @@ class Notifications {
 				'info' => __('Wizard', 'wp-seopress'),
 			],
 			'link' => [
-				'en'       => admin_url('admin.php?page=seopress-setup'),
+				'en'       => admin_url('admin.php?page=seopress-setup&step=welcome&parent=welcome'),
 				'title'    => __('Start the wizard', 'wp-seopress'),
-				'external' => true,
+				'external' => false,
 			],
 			'deleteable' => true,
 			'status' => $status ? $status : false,
@@ -156,6 +156,30 @@ class Notifications {
 					'title'    => __('Fix this!', 'wp-seopress'),
 					'external' => false,
 				],
+				'deleteable' => true,
+				'status' => $status ? $status : false,
+			];
+		}
+
+		//LiteSpeed cache plugin
+		if (is_plugin_active('litespeed-cache/litespeed-cache.php')) {
+			$status = false;
+			if ('1' !== seopress_get_service('NoticeOption')->getNoticeLiteSpeedCache()) {
+				$alerts_medium++;
+				$status = true;
+			}
+			$args[] = [
+				'id'     => 'notice-litespeed-cache',
+				'title'  => __('Fix compatibility issues with LiteSpeed caching plugin', 'wp-seopress'),
+				'desc'   => __('Your site is using LiteSpeed caching plugin. If you encounter issues with some of the SEO features, like the universal SEO metabox, please read our guide to fix this.', 'wp-seopress'),
+				'impact' => [
+					'medium' => __('Medium impact', 'wp-seopress'),
+				],
+				'link' => [
+                    'en'       => $docs['integrations']['litespeed']['compatibility'],
+                    'title'    => __('Learn more', 'wp-seopress'),
+                    'external' => true,
+                ],
 				'deleteable' => true,
 				'status' => $status ? $status : false,
 			];

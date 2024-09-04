@@ -20,6 +20,7 @@ function seopress_primary_category_select( $echo = true, $with_description = tru
 	$cats = 'product' == $typenow && seopress_get_service('WooCommerceActivate')->isActive() ? get_the_terms( $post, 'product_cat' ) : get_categories();
 	$cats = apply_filters( 'seopress_primary_category_list', $cats );
 	$options = '';
+
 	if( ! empty( $cats ) ){
 		$options .= sprintf(
 			'<option value="none" %s>%s</option>',
@@ -152,7 +153,7 @@ function seopress_display_seo_metaboxe()
 							}
 						}
 					} else {
-						if ( 'post' == $typenow || 'product' == $typenow ) {
+						if ( 'post' === $typenow || 'product' === $typenow ) {
 							$seopress_robots_primary_cat = get_post_meta($post->ID, '_seopress_robots_primary_cat', true);
 							wp_enqueue_script( 'seopress-primary-category-classic', SEOPRESS_ASSETS_DIR . '/js/seopress-primary-category-classic.js', [], SEOPRESS_VERSION, true);
 							wp_localize_script( 'seopress-primary-category-classic', 'seopressPrimaryCategorySelectData', array(

@@ -877,46 +877,6 @@ function seopress_advanced_appearance_ca_metaboxe_callback() {
 	}
 }
 
-function seopress_advanced_appearance_genesis_seo_metaboxe_callback() {
-	$options = get_option('seopress_advanced_option_name');
-
-	$check = isset($options['seopress_advanced_appearance_genesis_seo_metaboxe']); ?>
-
-<label for="seopress_advanced_appearance_genesis_seo_metaboxe">
-	<input id="seopress_advanced_appearance_genesis_seo_metaboxe"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_genesis_seo_metaboxe]" type="checkbox" <?php if ('1' == $check) { ?>
-	checked="yes"
-	<?php } ?>
-	value="1"/>
-
-	<?php esc_attr_e('Remove Genesis SEO Metabox', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_genesis_seo_metaboxe'])) {
-		esc_attr($options['seopress_advanced_appearance_genesis_seo_metaboxe']);
-	}
-}
-
-function seopress_advanced_appearance_genesis_seo_menu_callback() {
-	$options = get_option('seopress_advanced_option_name');
-
-	$check = isset($options['seopress_advanced_appearance_genesis_seo_menu']); ?>
-
-<label for="seopress_advanced_appearance_genesis_seo_menu">
-	<input id="seopress_advanced_appearance_genesis_seo_menu"
-		name="seopress_advanced_option_name[seopress_advanced_appearance_genesis_seo_menu]" type="checkbox" <?php if ('1' == $check) { ?>
-	checked="yes"
-	<?php } ?>
-	value="1"/>
-
-	<?php esc_attr_e('Remove Genesis SEO link in WP Admin Menu', 'wp-seopress'); ?>
-</label>
-
-<?php if (isset($options['seopress_advanced_appearance_genesis_seo_menu'])) {
-		esc_attr($options['seopress_advanced_appearance_genesis_seo_menu']);
-	}
-}
-
 function seopress_advanced_security_metaboxe_role_callback() {
 	$docs  = seopress_get_docs_links();
 

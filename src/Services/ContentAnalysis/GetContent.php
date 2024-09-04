@@ -905,52 +905,73 @@ class GetContent
         return $analyzes;
     }
 
-    public function getAnalyzes($post)
+    public function getAnalyzes($post, $type ='')
     {
+        if ($post === null) {
+            return;
+        }
 
         $data = seopress_get_service('ContentAnalysisDatabase')->getData($post->ID);
+        $analyzes = ContentAnalysis::getData();
 
-        $analyzes               = ContentAnalysis::getData();
-
-        //Schemas
-        $analyzes = $this->analyzeSchemas($analyzes, $data, $post);
-
-        //Old post
-        $analyzes = $this->analyzeOldPost($analyzes, $data, $post);
-
-        //Keywords in permalink
-        $analyzes = $this->analyzeKeywordsPermalink($analyzes, $data, $post);
-
-        //Headings
-        $analyzes = $this->analyzeHeadings($analyzes, $data, $post);
-
-        //Meta Title
-        $analyzes = $this->analyzeMetaTitle($analyzes, $data, $post);
-
-        //Meta description
-        $analyzes = $this->analyzeMetaDescription($analyzes, $data, $post);
-
-        //Social tags
-        $analyzes = $this->analyzeSocialTags($analyzes, $data, $post);
-
-        //Robots
-        $analyzes = $this->analyzeRobots($analyzes, $data, $post);
-
-        //Img alt
-        $analyzes = $this->analyzeImgAlt($analyzes, $data, $post);
-
-        //Nofollow links
-        $analyzes = $this->analyzeNoFollowLinks($analyzes, $data, $post);
-
-        //Outbound links
-        $analyzes = $this->analyzeOutboundLinks($analyzes, $data, $post);
-
-        //Internal links
-        $analyzes = $this->analyzeInternalLinks($analyzes, $data, $post);
-
-        //Canonical URL
-        $analyzes = $this->analyzeCanonical($analyzes, $data, $post);
+        switch ($type) {
+            case 'schemas':
+                $analyzes = $this->analyzeSchemas($analyzes, $data, $post);
+                break;
+            case 'old_post':
+                $analyzes = $this->analyzeOldPost($analyzes, $data, $post);
+                break;
+            case 'keywords_permalink':
+                $analyzes = $this->analyzeKeywordsPermalink($analyzes, $data, $post);
+                break;
+            case 'headings':
+                $analyzes = $this->analyzeHeadings($analyzes, $data, $post);
+                break;
+            case 'meta_title':
+                $analyzes = $this->analyzeMetaTitle($analyzes, $data, $post);
+                break;
+            case 'meta_description':
+                $analyzes = $this->analyzeMetaDescription($analyzes, $data, $post);
+                break;
+            case 'social_tags':
+                $analyzes = $this->analyzeSocialTags($analyzes, $data, $post);
+                break;
+            case 'robots':
+                $analyzes = $this->analyzeRobots($analyzes, $data, $post);
+                break;
+            case 'img_alt':
+                $analyzes = $this->analyzeImgAlt($analyzes, $data, $post);
+                break;
+            case 'nofollow_links':
+                $analyzes = $this->analyzeNoFollowLinks($analyzes, $data, $post);
+                break;
+            case 'outbound_links':
+                $analyzes = $this->analyzeOutboundLinks($analyzes, $data, $post);
+                break;
+            case 'internal_links':
+                $analyzes = $this->analyzeInternalLinks($analyzes, $data, $post);
+                break;
+            case 'canonical_url':
+                $analyzes = $this->analyzeCanonical($analyzes, $data, $post);
+                break;
+            default:
+                $analyzes = $this->analyzeSchemas($analyzes, $data, $post);
+                $analyzes = $this->analyzeOldPost($analyzes, $data, $post);
+                $analyzes = $this->analyzeKeywordsPermalink($analyzes, $data, $post);
+                $analyzes = $this->analyzeHeadings($analyzes, $data, $post);
+                $analyzes = $this->analyzeMetaTitle($analyzes, $data, $post);
+                $analyzes = $this->analyzeMetaDescription($analyzes, $data, $post);
+                $analyzes = $this->analyzeSocialTags($analyzes, $data, $post);
+                $analyzes = $this->analyzeRobots($analyzes, $data, $post);
+                $analyzes = $this->analyzeImgAlt($analyzes, $data, $post);
+                $analyzes = $this->analyzeNoFollowLinks($analyzes, $data, $post);
+                $analyzes = $this->analyzeOutboundLinks($analyzes, $data, $post);
+                $analyzes = $this->analyzeInternalLinks($analyzes, $data, $post);
+                $analyzes = $this->analyzeCanonical($analyzes, $data, $post);
+                break;
+        }
 
         return $analyzes;
     }
+
 }

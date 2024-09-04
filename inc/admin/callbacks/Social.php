@@ -80,9 +80,13 @@ function seopress_social_knowledge_desc_callback()
     $check   = isset($options['seopress_social_knowledge_desc']) ? $options['seopress_social_knowledge_desc'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_desc]" placeholder="' . esc_html__('e.g. The example corporation is well-known for producing high-quality widgets', 'wp-seopress') . '" aria-label="' . esc_attr__('Description (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_desc]" placeholder="' . esc_html__('e.g. The example corporation is well-known for producing high-quality widgets', 'wp-seopress') . '" aria-label="' . esc_attr__('Description', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
-    );
+    ); ?>
+        <p class="description">
+            <?php esc_html_e('Only for Organizations', 'wp-seopress'); ?>
+        </p>
+    <?php
 }
 
 function seopress_social_knowledge_email_callback()
@@ -91,9 +95,13 @@ function seopress_social_knowledge_email_callback()
     $check   = isset($options['seopress_social_knowledge_email']) ? $options['seopress_social_knowledge_email'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_email]" placeholder="' . esc_html__('e.g. contact@example.com', 'wp-seopress') . '" aria-label="' . esc_attr__('Email (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_email]" placeholder="' . esc_html__('e.g. contact@example.com', 'wp-seopress') . '" aria-label="' . esc_attr__('Email', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
-    );
+    ); ?>
+        <p class="description">
+            <?php esc_html_e('Only for Organizations', 'wp-seopress'); ?>
+        </p>
+    <?php
 }
 
 function seopress_social_knowledge_phone_callback()
@@ -102,9 +110,13 @@ function seopress_social_knowledge_phone_callback()
     $check   = isset($options['seopress_social_knowledge_phone']) ? $options['seopress_social_knowledge_phone'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_phone]" placeholder="' . esc_html__('e.g. +33123456789 (internationalized version required)', 'wp-seopress') . '" aria-label="' . esc_attr__('Organization\'s phone number (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_phone]" placeholder="' . esc_html__('e.g. +33123456789 (internationalized version required)', 'wp-seopress') . '" aria-label="' . esc_attr__('Organization\'s phone number', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
-    );
+    ); ?>
+    <p class="description">
+        <?php esc_html_e('Only for Organizations', 'wp-seopress'); ?>
+    </p>
+<?php
 }
 
 function seopress_social_knowledge_contact_type_callback()
@@ -167,6 +179,10 @@ function seopress_social_knowledge_contact_type_callback()
     </option>
 </select>
 
+<p class="description">
+    <?php esc_html_e('Only for Organizations', 'wp-seopress'); ?>
+</p>
+
 <?php if (isset($options['seopress_social_knowledge_contact_type'])) {
         esc_attr($options['seopress_social_knowledge_contact_type']);
     }
@@ -197,6 +213,10 @@ function seopress_social_knowledge_contact_option_callback()
     </option>
 </select>
 
+<p class="description">
+    <?php esc_html_e('Only for Organizations', 'wp-seopress'); ?>
+</p>
+
 <?php if (isset($options['seopress_social_knowledge_contact_option'])) {
         esc_attr($options['seopress_social_knowledge_contact_option']);
     }
@@ -208,9 +228,13 @@ function seopress_social_knowledge_tax_id_callback()
     $check   = isset($options['seopress_social_knowledge_tax_id']) ? $options['seopress_social_knowledge_tax_id'] : null;
 
     printf(
-        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_tax_id]" placeholder="' . esc_html__('e.g. FR12345678901', 'wp-seopress') . '" aria-label="' . esc_attr__('VAT ID (only for Organizations)', 'wp-seopress') . '" value="%s"/>',
+        '<input type="text" name="seopress_social_option_name[seopress_social_knowledge_tax_id]" placeholder="' . esc_html__('e.g. FR12345678901', 'wp-seopress') . '" aria-label="' . esc_attr__('VAT ID', 'wp-seopress') . '" value="%s"/>',
         esc_html($check)
-    );
+    ); ?>
+    <p class="description">
+        <?php esc_html_e('Only for Organizations', 'wp-seopress'); ?>
+    </p>
+<?php
 }
 
 function seopress_social_accounts_facebook_callback()

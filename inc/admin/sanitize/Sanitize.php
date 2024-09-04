@@ -111,7 +111,7 @@ function seopress_sanitize_options_fields($input){
                 $input[$value] = $input[$value]; //No sanitization for this field
             } else {
                 $options = get_option('seopress_google_analytics_option_name');
-                $input[$value] = isset($options[$value]) ? $options[$value] : sanitize_textarea_field($input[$value]);
+                $input[$value] = isset($options[$value]) ? $options[$value] : '';
             }
         } elseif (( ! empty($input['seopress_instant_indexing_manual_batch']) && 'seopress_instant_indexing_manual_batch' === $value) || (!empty($input['seopress_social_accounts_extra']) && 'seopress_social_accounts_extra' === $value )) {
             $input[$value] = sanitize_textarea_field($input[$value]);

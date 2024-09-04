@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', e => {
     let primaryCategory = seopressPrimaryCategorySelectData.primaryCategory;
 
-    const categoriesMetabox = document.querySelector('#categorydiv');
+    const categoriesMetabox = document.querySelector('#product_catdiv') ? document.querySelector('#product_catdiv') : document.querySelector('#categorydiv');
     const seopressPrimaryCategorySelect = document.querySelector('#seopress_cpt #seopress_robots_primary_cat');
     if (!categoriesMetabox || !seopressPrimaryCategorySelect) return;
 

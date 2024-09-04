@@ -133,12 +133,12 @@ function seopress_print_section_info_social_linkedin()
         </h2>
     </div>
     <p>
-        <?php esc_attr_e('LinkedIn uses the oembed JSON link to generate the share of your post, by retrieving the post title, its content and its featured image.', 'wp-seopress'); ?>
+        <?php esc_attr_e('LinkedIn uses the oEmbed JSON link to generate the share of your post, by retrieving the post title, its content and its featured image.', 'wp-seopress'); ?>
     </p>
 
     <div class="seopress-notice">
         <p>
-            <?php echo wp_kses_post(__('We generate the <strong>thumbnail URL</strong> of the oembed JSON feed in this order:', 'wp-seopress')); ?>
+            <?php echo wp_kses_post(__('We generate the <strong>thumbnail URL</strong> of the oEmbed JSON feed in this order:', 'wp-seopress')); ?>
         </p>
 
         <ol>

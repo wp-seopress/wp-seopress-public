@@ -9,6 +9,7 @@ jQuery(document).ready(function ($) {
         "notice-wizard",
         "notice-insights-wizard",
         "notice-amp-analytics",
+        "notice-litespeed-cache",
         "notice-divide-comments",
         "notice-review",
         "notice-trailingslash",
@@ -22,8 +23,8 @@ jQuery(document).ready(function ($) {
         "notice-enfold",
         "notice-themes",
         "notice-page-builders",
-        "notice-go-pro",
-        "notice-go-insights",
+        "notice-ebooks",
+        "notice-integrations",
         "notice-noindex",
         "notice-tasks",
         "notice-insights",
@@ -163,13 +164,13 @@ jQuery(document).ready(function ($) {
         $('#notice-get-started-alert').toggleClass('is-active');
         $('#notice-get-started').attr('data-toggle', $('#notice-get-started').attr('data-toggle') == '1' ? '0' : '1');
     });
-    $('#notice-go-pro').on('click', function () {
-        $('#notice-go-pro-alert').toggleClass('is-active');
-        $('#notice-go-pro').attr('data-toggle', $('#notice-go-pro').attr('data-toggle') == '1' ? '0' : '1');
+    $('#notice-integrations').on('click', function () {
+        $('#seopress-integration-panel').toggleClass('is-active');
+        $('#notice-integrations').attr('data-toggle', $('#notice-integrations').attr('data-toggle') == '1' ? '0' : '1');
     });
-    $('#notice-go-insights').on('click', function () {
-        $('#notice-go-insights-alert').toggleClass('is-active');
-        $('#notice-go-insights').attr('data-toggle', $('#notice-go-insights').attr('data-toggle') == '1' ? '0' : '1');
+    $('#notice-ebooks').on('click', function () {
+        $('#seopress-ebook-panel').toggleClass('is-active');
+        $('#notice-ebooks').attr('data-toggle', $('#notice-ebooks').attr('data-toggle') == '1' ? '0' : '1');
     });
 });
 

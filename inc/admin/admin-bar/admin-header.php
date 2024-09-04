@@ -96,15 +96,26 @@ function seopress_admin_header($context = "") {
 						<p><?php esc_html_e('Quickly filter our documentation by a specific plugin.', 'wp-seopress'); ?></p>
 						<div class="seopress-products">
 							<a href="<?php echo esc_url($docs['support-free']); ?>" title="<?php esc_html_e('SEOPress Free documentation (new window)', 'wp-seopress'); ?>" target="_blank">
-								<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/support-seopress-free.svg'); ?>" width="291" height="81" alt="<?php esc_html_e('SEOPress Free','wp-seopress'); ?>"/>
+								<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/support-seopress-free.svg'); ?>" width="291" height="81" alt="SEOPress Free"/>
 							</a>
 							<a href="<?php echo esc_url($docs['support-pro']); ?>" title="<?php esc_html_e('SEOPress PRO documentation (new window)', 'wp-seopress'); ?>" target="_blank">
-								<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/support-seopress-pro.svg'); ?>" width="291" height="81" alt="<?php esc_html_e('SEOPress PRO','wp-seopress'); ?>"/>
+								<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/support-seopress-pro.svg'); ?>" width="291" height="81" alt="SEOPress PRO"/>
 							</a>
 							<a href="<?php echo esc_url($docs['support-insights']); ?>" title="<?php esc_html_e('SEOPress Insights documentation (new window)', 'wp-seopress'); ?>" target="_blank">
-								<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/support-seopress-insights.svg'); ?>" width="291" height="81" alt="<?php esc_html_e('SEOPress Insights','wp-seopress'); ?>"/>
+								<img src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/support-seopress-insights.svg'); ?>" width="291" height="81" alt="SEOPress Insights"/>
 							</a>
 						</div>
+					</div>
+
+					<div class="seopress-panel-section">
+						<h2><span class="dashicons dashicons-translation"></span><?php esc_html_e('Translations', 'wp-seopress'); ?></h2>
+						<p><?php esc_html_e('The plugin is translated into dozens of languages.', 'wp-seopress'); ?></p>
+						<p><?php echo wp_kses_post(sprintf(__('Go to <a href="%s">Updates</a> and click <strong>Update translations</strong> button to get the latest available translations for your language.', 'wp-seopress'), esc_url(admin_url('update-core.php')))); ?></p>
+                        <p><?php esc_html_e('Your translation is missing? Contribute to SEOPress now!', 'wp-seopress'); ?></p>
+						<a href="<?php echo esc_url($docs['i18n']); ?>" class="btn btnSecondary" title="<?php esc_html_e('Learn how to translate the plugin in your own language', 'wp-seopress'); ?>" target="_blank">
+							<?php esc_html_e('Translate SEOPress', 'wp-seopress'); ?>
+							<span class="dashicons dashicons-external"></span>
+						</a>
 					</div>
 
 					<div class="seopress-panel-section">
@@ -152,7 +163,7 @@ function seopress_admin_header($context = "") {
 						<?php if ('1' == $check) { echo 'checked="yes"';} ?>/>
 						<label for="notice-tasks"></label>
 						<label for="notice-tasks">
-							<?php esc_html_e('Hide Onboarding tasks?', 'wp-seopress'); ?>
+							<?php esc_html_e('Hide SEO Suite?', 'wp-seopress'); ?>
 						</label>
 					</p>
 
@@ -179,25 +190,25 @@ function seopress_admin_header($context = "") {
 						</label>
 					</p>
 
-					<?php $check = seopress_get_service('NoticeOption')->getNoticeGoInsights(); ?>
+					<?php $check = seopress_get_service('NoticeOption')->getNoticeEbooks(); ?>
 
 					<p>
-						<input id="notice-go-insights" class="toggle" data-toggle=<?php if ('1' == $check) { echo '1';} else {echo '0';} ?> data-notice=<?php if ('1' == $check) { echo '1';} else {echo '0';} ?> name="notice-go-insights" type="checkbox"
+						<input id="notice-ebooks" class="toggle" data-toggle=<?php if ('1' == $check) { echo '1';} else {echo '0';} ?> data-notice=<?php if ('1' == $check) { echo '1';} else {echo '0';} ?> name="notice-ebooks" type="checkbox"
 						<?php if ('1' == $check) { echo 'checked="yes"';} ?>/>
-						<label for="notice-go-insights"></label>
-						<label for="notice-go-insights">
-							<?php esc_html_e('Hide SEOPress Insights?', 'wp-seopress'); ?>
+						<label for="notice-ebooks"></label>
+						<label for="notice-ebooks">
+							<?php esc_html_e('Hide SEO Ebooks?', 'wp-seopress'); ?>
 						</label>
 					</p>
 
-					<?php $check = seopress_get_service('NoticeOption')->getNoticeGoPro(); ?>
+					<?php $check = seopress_get_service('NoticeOption')->getNoticeIntegrations(); ?>
 
 					<p>
-						<input id="notice-go-pro" class="toggle" data-toggle=<?php if ('1' == $check) { echo '1';} else {echo '0';} ?> data-notice=<?php if ('1' == $check) { echo '1';} else {echo '0';} ?> name="notice-go-pro" type="checkbox"
+						<input id="notice-integrations" class="toggle" data-toggle=<?php if ('1' == $check) { echo '1';} else {echo '0';} ?> data-notice=<?php if ('1' == $check) { echo '1';} else {echo '0';} ?> name="notice-integrations" type="checkbox"
 						<?php if ('1' == $check) { echo 'checked="yes"';} ?>/>
-						<label for="notice-go-pro"></label>
-						<label for="notice-go-pro">
-							<?php esc_html_e('Hide SEOPress PRO?', 'wp-seopress'); ?>
+						<label for="notice-integrations"></label>
+						<label for="notice-integrations">
+							<?php esc_html_e('Hide Integrations?', 'wp-seopress'); ?>
 						</label>
 					</p>
 

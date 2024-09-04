@@ -86,11 +86,8 @@
 }
 
 #seopress-admin-tabs.wrap {
-    background: #fff;
     display: block;
-    width: 64rem;
-    max-width: 100%;
-    margin: 0 auto;
+    width: 100%;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -230,7 +227,12 @@
 /* Default styles */
 .seopress-dashboard .seopress-option {
     background: url(../img/bg-dashboard.svg) no-repeat 100% 0%;
-    padding-top: 65px;
+    padding-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .seopress-dashboard h1 {
@@ -285,35 +287,67 @@
 }
 
 /* Intro */
+.seopress-intro {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.seopress-styles .seopress-intro h1 {
+    font-weight: 700;
+    font-size: 34px;
+    color: #0C082F;
+    line-height: 34px;
+}
+
 .seopress-intro p {
     font-weight: 600;
     font-size: 18px;
     color: var(--paragraphColor);
     line-height: 22px;
+    margin: 0;
+}
+
+/* Notifications */
+.seopress-notifications .seopress-card-content {
+    padding: 5px 5px 5px 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.seopress-notifications .seopress-card-content p {
+    font-weight: bold;
+}
+
+.seopress-notifications .seopress-card-content span {
+    font-weight: bold;
+    background: red;
+    color: #fff;
+    padding: 5px;
+    border-radius: 6px;
 }
 
 /* Get started */
 .seopress-get-started,
 .seopress-intro,
 .seopress-notifications {
-    margin: 30px auto;
     max-width: 75rem;
     width: 100%;
     border-radius: 0 0 4px 4px;
 }
 
 .seopress-get-started {
-    display: flex;
-    gap: 24px;
+    margin: 0;
 }
 
 .seopress-get-started .seopress-block-wizard {
     min-width: 277px;
-    background: linear-gradient(131.09deg, var(--primaryColor) 0%, #7F59FF 100%);
+    background: linear-gradient(97.43deg,#0C082F .92%,#2B1F99 100%);
     backdrop-filter: blur(12px);
     border-radius: 8px;
     color: #fff;
-    padding: 24px;
+    padding: 2rem;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
@@ -324,7 +358,7 @@
 
 .seopress-get-started .seopress-block-wizard::after {
     content: '';
-    background: url(../img/bg-dashboard-wizard.svg) 100% 100% no-repeat;
+    background: url(../img/bg-dashboard-wizard.svg) 100% 0% no-repeat;
     opacity: 0.1;
     position: absolute;
     right: 0;
@@ -332,6 +366,7 @@
     top: 0;
     width: 100%;
     height: 100%;
+    filter: invert(1);
     background-size: 300px 300px;
 }
 
@@ -339,9 +374,8 @@
     z-index: 2;
 }
 
-.seopress-get-started h3 {
+.seopress-get-started h2 {
     color: #fff;
-    margin: 16px 0;
 }
 
 .seopress-card-actions {
@@ -367,7 +401,7 @@
 .seopress-get-started .seopress-block-wizard .seopress-btn:hover {
     background: var(--backgroundPrimaryHover);
     color: var(--backgroundSecondary);
-    border: none;
+    border: 1px solid var(--backgroundPrimaryHover);
 }
 
 .seopress-new-feature p {
@@ -409,21 +443,22 @@
     position: relative;
     display: block;
     max-width: 75rem;
-    margin: 24px auto;
 }
 
 .seopress-page-list .seopress-card-content {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(calc(100% / 4), 1fr));
     display: grid;
-    padding: 40px;
-    gap: 24px;
+    padding: 2rem;
+    gap: 1rem;
 }
 
 .seopress-card {
     background: #fff;
     border-radius: 8px;
     position: relative;
-    margin-bottom: 24px;
+    width: 100%;
+    max-width: 75rem;
+    margin: 0 auto;
 }
 
 .seopress-option .seopress-card-actions a+button {
@@ -452,10 +487,10 @@
 }
 
 .seopress-card-title {
-    padding: 35px 40px 0;
+    padding: 2rem 2rem 0 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 }
 
 .seopress-card-title h2 {
@@ -463,16 +498,37 @@
 }
 
 .seopress-page-list .seopress-cart-list {
-    border: 1px solid #E6E6E8;
     display: flex;
     text-decoration: none;
     flex-direction: column;
     justify-content: space-between;
+    border: 1px solid var(--borderColor);
+    gap: 1rem;
     border-radius: 4px;
 }
 
 .seopress-cart-list .seopress-card-item {
-    padding: 16px;
+    padding: 1rem 1rem 0 1rem;
+}
+
+.seopress-cart-list .seopress-card-item .name {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.seopress-cart-list .seopress-card-name,
+.seopress-cart-list .seopress-card-header {
+    gap: 1rem;
+}
+
+.seopress-cart-list .seopress-card-item .name a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.seopress-cart-list .seopress-card-item .name a:hover {
+    text-decoration: underline;
 }
 
 .seopress-item-icons {
@@ -481,36 +537,138 @@
     align-items: flex-start;
 }
 
-.seopress-item-help {
-    width: 24px;
-    height: 24px;
-    background: #F4F4F4;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .seopress-item-footer {
     display: flex;
     align-items: center;
-    padding: 16px;
     justify-content: space-between;
-    border-top: 1px solid #E6E6E8;
-}
-
-.seopress-item-footer.is-seopress-feature-active {
-    background: rgba(230, 230, 232, 0.2);
-}
-
-/* Tasks */
-#notice-tasks-alert .seopress-card-content {
-    padding: 36px 40px 32px;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid var(--borderColor);
+    background: rgb(230 230 232 / .2);
 }
 
 /* Insights */
 #notice-insights-alert .seopress-card-content {
-    padding: 36px 40px 32px;
+    padding: 2rem;
+}
+
+/* Tasks */
+#notice-tasks-alert .seopress-card-content {
+    padding: 0 2rem 2rem 2rem;
+}
+
+#notice-tasks-alert .seopress-suite {
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
+    display: flex;
+}
+
+#notice-tasks-alert .seopress-suite .seopress-integration {
+    width: 100%;
+}
+
+#notice-tasks-alert .seopress-suite .seopress-wrap-details {
+    gap: 0.5rem;
+}
+#notice-tasks-alert .seopress-suite .upgrade a {
+    background: var(--backgroundSecondary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    transition: all 150ms linear;
+    gap: 0.2rem;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    font-weight: 600;
+}
+
+#notice-tasks-alert .seopress-suite .upgrade a:hover {
+    background: var(--backgroundSecondaryHover);
+}
+
+/* SEO Ebooks */
+#seopress-ebook-panel .seopress-card-content {
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.seo-ebooks {
+    display: flex;
+    gap: 2rem;
+}
+
+.seo-ebook {
+    display: flex;
+    gap: 1rem;
+    width: calc(100% / 3);
+    border: 1px solid var(--borderColor);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.seo-ebook .details {
+    flex-basis: 66.66%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.seo-ebook .cover {
+    flex-basis: 33.33%;
+}
+
+.seo-ebook img {
+    max-width: 100%;
+}
+
+/* Integrations */
+#seopress-integration-panel .seopress-card-content {
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.seopress-integrations {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(calc(100% / 5), 1fr));
+}
+
+.seopress-integration {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    border: 1px solid var(--borderColor);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    align-items: center;
+}
+
+.seo-ebook .name,
+.seopress-integration .name {
+    margin: 0 0 0.2rem 0;
+    font-size: 14px;
+}
+
+/* Status */
+.seopress-card .status {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.seopress-card .status .badge {
+    width: 6px;
+    height: 6px;
+    border-radius: 50px;
+    background-color: var(--backgroundPrimary);
+}
+
+.seopress-card .status .badge.status-inactive {
+    background: #CABCF8;
 }
 
 /* SEOPress columns */
@@ -519,73 +677,31 @@
     max-width: 75rem;
     margin: 0 auto;
     justify-content: space-between;
-    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
 }
 
 .seopress-dashboard-column {
     align-self: flex-start;
-    width: calc(50% - 12px);
     margin: 0;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-basis: calc(100% - 400px);
 }
 
-@media only screen and (max-width: 782px) {
-    .seopress-dashboard-columns {
-        max-width: 100%;
-        flex-direction: column;
-    }
-
-    .seopress-dashboard-column {
-        width: 100%;
-    }
+.seopress-dashboard-columns > .seopress-dashboard-column:first-child {
+    flex-basis: 400px;
+    flex-direction: column;
 }
 
-/* Upsell / Crossell */
-.seopress-crossell {
-    background: #fff url(../img/bg-seo-audit.svg) 100% 100% no-repeat;
+.seopress-dashboard-columns > .seopress-dashboard-column:only-child {
+    flex-basis: inherit;
+    flex-direction: inherit;
+    flex-wrap: inherit;
 }
 
-.seopress-upsell.seopress-upsell-pro {
-    background: #fff url(../img/bg-seopress-pro.svg) 100% 100% no-repeat;
-}
-
-.seopress-upsell.seopress-upsell-insights {
-    background: #fff url(../img/bg-seopress-insights.svg) 100% 100% no-repeat;
-}
-
-.seopress-upsell .seopress-card-title,
-.seopress-crossell .seopress-card-title {
-    display: block;
-}
-
-.seopress-upsell .seopress-card-title h2,
-.seopress-crossell .seopress-card-title h2 {
-    margin: 1em 0;
-}
-
-.seopress-upsell .seopress-card-content,
-.seopress-crossell .seopress-card-content {
-    padding: 0 40px 32px;
-}
-
-.seopress-upsell .seopress-btn-primary,
-.seopress-crossell .seopress-btn-primary {
-    display: inline-block;
-}
-
-.seopress-upsell.seopress-upsell-pro .seopress-btn-primary {
-    background: #334eff;
-    color: #fff;
-}
-
-.seopress-upsell.seopress-upsell-insights .seopress-btn-primary {
-    background: #EE485F;
-    color: #fff;
-}
-
-.seopress-crossell .seopress-btn-primary {
-    background: var(--backgroundPrimary);
-    color: #fff;
-}
 
 /* Newsroom */
 #seopress-news-panel {
@@ -635,7 +751,7 @@
 
 #seopress-news-panel .seopress-article::after {
     content: '';
-    background: #E6E6E8;
+    background: var(--borderColor);
     width: 1px;
     height: 100%;
     right: -23px;
@@ -649,6 +765,19 @@
 
 /* Responsive */
 @media only screen and (max-width: 782px) {
+    .seopress-dashboard-columns {
+        max-width: 100%;
+        flex-direction: column;
+        grid-template-columns: inherit;
+    }
+
+    .seopress-dashboard-columns > .seopress-dashboard-column:first-child {
+        flex-basis: inherit;
+    }
+
+    .seopress-dashboard-column {
+        width: 100%;
+    }
 
     .seopress-get-started,
     .seopress-intro,
@@ -667,5 +796,23 @@
         right: 0;
         bottom: -23px;
         top: inherit;
+    }
+
+    .seopress-page-list .seopress-card-content {
+        grid-template-columns: inherit;
+    }
+
+    .seopress-integrations {
+        display: flex;
+    }
+
+    .seo-ebooks,
+    .seopress-integrations {
+        flex-direction: column;
+    }
+
+    .seo-ebook,
+    .seopress-integration {
+        width: 100%;
     }
 }

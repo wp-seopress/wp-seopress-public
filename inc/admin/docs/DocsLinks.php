@@ -8,7 +8,9 @@ function seopress_get_docs_links()
 
 	$docs = [
 		'website'          => 'https://www.seopress.org/',
+        'pricing'          => 'https://www.seopress.org/pricing/',
 		'blog'             => 'https://www.seopress.org/newsroom/',
+		'contact'          => 'https://www.seopress.org/contact-us/',
 		'downloads'        => 'https://www.seopress.org/account/my-downloads/',
 		'support'          => 'https://www.seopress.org/support/',
 		'support-free'     => 'https://www.seopress.org/support/seopress-free/',
@@ -17,6 +19,7 @@ function seopress_get_docs_links()
 		'support-tickets'  => 'https://www.seopress.org/account/your-tickets/',
 		'guides'           => 'https://www.seopress.org/support/guides/',
 		'faq'              => 'https://www.seopress.org/support/faq/',
+        'i18n'             => 'https://www.seopress.org/support/guides/translate-seopress/',
 		'get_started'      => [
 			'installation'        => [
 				'ico' => 'ico-starter-guides',
@@ -194,15 +197,21 @@ function seopress_get_docs_links()
 			'slack_webhook' => 'https://www.seopress.org/support/guides/how-to-setup-slack-notifications-with-seopress-insights/'
         ],
         'integrations' => [
+            'all'     => 'https://www.seopress.org/integrations/',
             'wpml' => [
                 'translate' => 'https://www.seopress.org/support/guides/translate-seopress-options-with-wpml-polylang/'
+            ],
+            'litespeed' => [
+                'compatibility' => 'https://www.seopress.org/support/guides/fix-compatibility-issue-with-litespeed-caching-plugin/'
             ]
         ]
 	];
 
 	if (function_exists('seopress_get_locale') && 'fr' == seopress_get_locale()) {
 		$docs['website']       = 'https://www.seopress.org/fr/';
+		$docs['pricing']       = 'https://www.seopress.org/fr/tarifs/';
 		$docs['blog']          = 'https://www.seopress.org/fr/blog/';
+		$docs['contact']       = 'https://www.seopress.org/fr/contact/';
 		$docs['downloads']     = 'https://www.seopress.org/fr/mon-compte/mes-telechargements/';
 		$docs['support']       = 'https://www.seopress.org/fr/support/';
 		$docs['support-tickets']  = 'https://www.seopress.org/fr/mon-compte/vos-tickets/';
@@ -211,6 +220,7 @@ function seopress_get_docs_links()
 		$docs['support-insights'] = 'https://www.seopress.org/fr/support/seopress-insights/';
 		$docs['guides']           = 'https://www.seopress.org/fr/support/guides/';
 		$docs['faq']              = 'https://www.seopress.org/fr/support/faq/';
+		$docs['i18n']              = 'https://www.seopress.org/fr/support/guides/traduire-seopress-dans-votre-langue/';
 		$docs['get_started']['installation']['link'] = 'https://www.seopress.org/fr/support/guides/debutez-avec-seopress/';
 		$docs['get_started']['guides']['link'] = 'https://www.seopress.org/fr/support/guides/';
 		$docs['get_started']['ebooks']['link'] = 'https://www.seopress.org/fr/support/ebooks/';
@@ -327,7 +337,9 @@ function seopress_get_docs_links()
 		$docs['alerts']['introduction'] = 'https://www.seopress.org/fr/fonctionnalites/alertes-seo/';
 		$docs['alerts']['slack_webhook'] = 'https://www.seopress.org/fr/support/guides/configurer-alertes-seo-slack-seopress-pro/';
 
+        $docs['integrations']['all']  = 'https://www.seopress.org/fr/integrations/';
         $docs['integrations']['wpml']['translate'] = 'https://www.seopress.org/fr/support/guides/traduire-les-options-de-seopress-avec-wpml-polylang/';
+        $docs['integrations']['litespeed']['compatibility'] = 'https://www.seopress.org/fr/support/guides/corriger-le-probleme-de-compatibilite-extension-cache-litespeed/';
 	}
 
 	$docs['external'] = [

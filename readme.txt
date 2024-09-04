@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 8.0.1
+Stable tag: 8.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -261,34 +261,27 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 8.0.1 =
-* FIX Bricks compatibility with WPML
-* FIX Prevent a fatal error if both plugins are deactivated at same time
-* FIX Universal SEO metabox / Content Analysis
-* FIX An issue with Instant Indexing feature
+= 8.1.1 =
+* FIX Fatal error undefined function
 
-= 8.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-0/">Read the blog post update</a> =
-* NEW Support for WordPress 6.6
-* NEW Import your redirects from SmartCrawl plugin
-* NEW Add fediverse:creator tag to improve sharing on Mastodon
-* NEW Support secured authentification token in Matomo to get stats in dashboard
-* NEW Set a primary category directly from the Block Editor > Category panel
-* NEW 'seopress_schemas_website_html' hook to filter the HTML of the website schema (https://www.seopress.org/support/hooks/filter-website-schema/)
-* NEW 'seopress_social_fv_creator' hook to filter the HTML of the fediverse tag (https://www.seopress.org/support/hooks/filter-fediverse-creator-tag/)
-* INFO Improve compatibility with Bricks Builder: their CPT / Taxonomies are no longer listed from SEOPress settings
-* INFO Metaboxes now match admin color scheme
-* INFO Display a notice if the GA4 property ID to get stats in dashboard is equals to the GA4 measurement ID to avoide confusion
-* INFO Add a missing notice to Universal SEO metabox if you're editing your WC shop page
-* INFO Strengthened security
-* FIX Duplicated hook name 'seopress_rgpd_full_message' / new hook created 'seopress_rgpd_edit_message' (https://www.seopress.org/support/hooks/filter-the-message-for-managing-the-choice-of-cookies/)
-* FIX Quick edit redirects for 410/451
-* FIX OG:image if not attachment ID set
-* FIX Instant Indexing in specific cases
-* FIX Fatal error on internal linking suggestions if $post is null
-* FIX Article automatic schema with additional social accounts
-* FIX "Read more" is not a descriptive link for our cookie bar
-* FIX Some PHP warnings with SEO Alerts feature
-* FIX Some translations
+= 8.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-1/">Read the blog post update</a> =
+* NEW Enhanced SEOPress dashboard 🎉
+* NEW Better onboarding with our wizard Installation 🎉
+* NEW 'seopress_sitemaps_xml_news_name' hook to filter Google News name for XML News sitemap (https://www.seopress.org/support/hooks/filter-google-news-name-for-xml-news-sitemap/)
+* INFO Move Search rewrite URL setting to SEO, Advanced, Advanced tab (it's necessary to go this screen and save again the settings)
+* INFO Add a quick link to manage notifications in the email sent by our SEO alerts feature (PRO)
+* INFO Add support for EDD PRO to remove the meta generator
+* INFO Disable automatically the HTML microdata for breadcrumbs if JSON breadcrumbs is activated
+* INFO Add a notice if LiteSpeed caching plugin is enabled to fix potential compatibility issues
+* INFO CSV export tool: "post_type" and "taxonomy" columns added
+* FIX CSV import tool to prevent potential conflicts in specific cases
+* FIX Breadcrumbs schema.org/WebPage URL
+* FIX "Your GA4 property ID is incorrectly set!" notification
+* FIX An issue with custom tracking outputting "none" values in source code
+* FIX Fatal error for Matomo stats in dashboard on init if no data
+* FIX SEOPRESSMedia is not defined in Media Library when using the AI feature to generate alt text (PRO)
+* FIX Fatal error: Updating PRO with multisite setup
+* FIX Missing primary category select for WC products from the product categories metabox
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

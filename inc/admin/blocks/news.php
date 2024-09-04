@@ -11,7 +11,18 @@
 
 		<div id="seopress-news-panel" class="seopress-card <?php echo esc_attr($class); ?>" style="display: none">
 			<div class="seopress-card-title">
-				<h2><?php esc_attr_e('Latest News from SEOPress Blog', 'wp-seopress'); ?></h2>
+                <div class="seopress-d-flex seopress-space-between">
+                    <h2><?php esc_attr_e('Latest News from SEOPress Blog', 'wp-seopress'); ?></h2>
+					<div>
+						<a href="<?php echo esc_url($docs['blog']); ?>" class="seopress-help" target="_blank" title="<?php esc_attr_e('See all our blog posts - Open in a new tab', 'wp-seopress'); ?>">
+							<?php esc_attr_e('See all our blog posts', 'wp-seopress'); ?>
+						</a>
+						<span class="seopress-help dashicons dashicons-external"></span>
+					</div>
+				</div>
+				<div>
+					<p><?php esc_attr_e( 'The latest news about SEOPress, SEO and WordPress.', 'wp-seopress' ); ?></p>
+				</div>
 			</div>
 			<div class="seopress-card-content">
 				<?php
@@ -64,7 +75,7 @@
 									</p>
 
 									<h3 class="seopress-item-title">
-										<a href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(esc_attr__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
+										<a href="<?php echo esc_url($item->get_permalink() . '?utm_source=plugin&utm_medium=dashboard'); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(esc_attr__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
 											<?php echo esc_html($item->get_title()); ?>
 										</a>
 									</h3>
@@ -72,7 +83,7 @@
 									<p class="seopress-item-content"><?php echo esc_html($item->get_description()); ?></p>
 								</div>
 								<div class="seopress-item-wrap-content">
-									<a class="btn btnSecondary" href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(esc_attr__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
+									<a class="btn btnSecondary" href="<?php echo esc_url($item->get_permalink() . '?utm_source=plugin&utm_medium=dashboard'); ?>" target="_blank" title="<?php /* translators: %s blog post URL */ printf(esc_attr__('Learn more about %s in a new tab', 'wp-seopress'), esc_html($item->get_title())); ?>">
 										<?php esc_attr_e('Learn more', 'wp-seopress'); ?>
 									</a>
 								</div>

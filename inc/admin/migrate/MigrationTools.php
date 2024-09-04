@@ -5,7 +5,7 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 function seopress_migration_tool($plugin, $name) {
     $seo_title = 'SEOPress';
     if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
-        $seo_title = method_exists(seopress_pro_get_service('OptionPro'), 'getWhiteLabelListTitle') && seopress_pro_get_service('OptionPro')->getWhiteLabelListTitle() ? seopress_pro_get_service('OptionPro')->getWhiteLabelListTitle() : 'SEOPress';
+        $seo_title = function_exists('seopress_pro_get_service') && method_exists(seopress_pro_get_service('OptionPro'), 'getWhiteLabelListTitle') && seopress_pro_get_service('OptionPro')->getWhiteLabelListTitle() ? seopress_pro_get_service('OptionPro')->getWhiteLabelListTitle() : 'SEOPress';
     }
 
     $html = '<div id="' . $plugin . '-migration-tool" class="postbox section-tool">
