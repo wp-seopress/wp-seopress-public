@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdu
 Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.3
+Stable tag: 8.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -262,6 +262,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.3.1 =
+* FIX Prevent fatal error to set default values
+
 = 8.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-3/">Read the blog post update</a> =
 * NEW Site Audit #2 iteration 🎉 (PRO)
 - Improved CSV export functionality
