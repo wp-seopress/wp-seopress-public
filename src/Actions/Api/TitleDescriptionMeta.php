@@ -9,7 +9,13 @@ if ( ! defined('ABSPATH')) {
 use SEOPress\Core\Hooks\ExecuteHooks;
 
 class TitleDescriptionMeta implements ExecuteHooks {
+    /**
+     * @var int|null
+     */
+    private $current_user;
+
     public function hooks() {
+        $this->current_user = wp_get_current_user()->ID;
         add_action('rest_api_init', [$this, 'register']);
     }
 
@@ -29,7 +35,16 @@ class TitleDescriptionMeta implements ExecuteHooks {
                     },
                 ],
             ],
-            'permission_callback' => '__return_true',
+            'permission_callback' => function($request) {
+                $post_id = $request['id'];
+                $current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
+
+                if ( ! user_can( $current_user, 'edit_post', $post_id )) {
+                    return false;
+                }
+
+                return true;
+            },
         ]);
 
         register_rest_route('seopress/v1', '/posts/(?P<id>\d+)/title-description-metas', [
@@ -42,11 +57,9 @@ class TitleDescriptionMeta implements ExecuteHooks {
                     },
                 ],
             ],
-            'permission_callback' => function() {
-                if (current_user_can('edit_posts')) {
-                    return true;
-                }
-                return false;
+            'permission_callback' => function($request) {
+                $post_id = $request['id'];
+                return current_user_can('edit_post', $post_id);
             },
         ]);
     }

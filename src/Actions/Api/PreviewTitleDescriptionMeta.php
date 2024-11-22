@@ -9,7 +9,13 @@ if ( ! defined('ABSPATH')) {
 use SEOPress\Core\Hooks\ExecuteHooks;
 
 class PreviewTitleDescriptionMeta implements ExecuteHooks {
+    /**
+     * @var int|null
+     */
+    private $current_user;
+
     public function hooks() {
+        $this->current_user = wp_get_current_user()->ID;
         add_action('rest_api_init', [$this, 'register']);
     }
 
@@ -29,7 +35,15 @@ class PreviewTitleDescriptionMeta implements ExecuteHooks {
                     },
                 ],
             ],
-            'permission_callback' => '__return_true',
+            'permission_callback' => function($request) {
+                $post_id = $request['id'];
+
+                if ( ! user_can( $this->current_user, 'edit_post', $post_id )) {
+                    return false;
+                }
+
+                return true;
+            },
         ]);
     }
 

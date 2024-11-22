@@ -224,6 +224,22 @@
     border: 1px solid var(--colorAlert);
 }
 
+.seopress-option .btnPrimary[disabled],
+.seopress-styles .btnPrimary[disabled],
+.post-type-seopress_404 .btnPrimary[disabled],
+.post-type-seopress_schemas .btnPrimary[disabled],
+.seopress-option .btnSecondary[disabled],
+.seopress-styles .btnSecondary[disabled],
+.post-type-seopress_404 .btnSecondary[disabled],
+.post-type-seopress_schemas .btnSecondary[disabled],
+.seopress-option .btnTertiary[disabled],
+.seopress-styles .btnTertiary[disabled],
+.post-type-seopress_404 .btnTertiary[disabled],
+.post-type-seopress_schemas .btnTertiary[disabled] {
+    cursor: default;
+    background: var(--backgroundSecondaryHover);
+}
+
 #seopress-tabs.wrap .list-none {
     list-style: none;
     padding-left: 0;
@@ -981,7 +997,8 @@ body.seopress-white-label .seopress-option {
 }
 
 #seopress_cpt .impact,
-#seopress_content_analysis .gr-analysis-title .impact {
+#seopress_content_analysis .gr-analysis-title .impact,
+#seopress_site_audit_analysis .gr-analysis-title .impact {
     position: absolute;
     left: 10px;
     top: calc(50% - 5px);
@@ -993,28 +1010,33 @@ body.seopress-white-label .seopress-option {
     border: 1px solid #fff;
 }
 
-#seopress_content_analysis .gr-analysis .impact.good {
+#seopress_content_analysis .gr-analysis .impact.good,
+#seopress_site_audit_analysis .gr-analysis .impact.good {
     background: var(--colorSuccess);
     box-shadow: 0 0 5px var(--colorSuccess);
 }
 
-#seopress_content_analysis .gr-analysis .impact.low {
+#seopress_content_analysis .gr-analysis .impact.low,
+#seopress_site_audit_analysis .gr-analysis .impact.low {
     background: var(--colorWarning);
     box-shadow: 0 0 5px var(--colorWarning);
 }
 
-#seopress_content_analysis .gr-analysis .impact.medium {
+#seopress_content_analysis .gr-analysis .impact.medium,
+#seopress_site_audit_analysis .gr-analysis .impact.medium {
     background: var(--colorLowAlert);
     box-shadow: 0 0 5px var(--colorLowAlert);
 }
 
 #seopress_cpt .impact.high,
-#seopress_content_analysis .gr-analysis .impact.high {
+#seopress_content_analysis .gr-analysis .impact.high,
+#seopress_site_audit_analysis .gr-analysis .impact.high {
     background: var(--colorAlert);
     box-shadow: 0 0 5px var(--colorAlert);
 }
 
-#seopress_content_analysis .gr-analysis-content .impact.high {
+#seopress_content_analysis .gr-analysis-content .impact.high,
+#seopress_site_audit_analysis .gr-analysis-content .impact.high {
     background: var(--colorAlert);
     box-shadow: none;
     color: #fff;
@@ -1024,7 +1046,10 @@ body.seopress-white-label .seopress-option {
     font-weight: bold;
 }
 
-#seopress_cpt .impact.high {
+#seopress_cpt .impact.high,
+#seopress_site_audit_analysis .impact.low,
+#seopress_site_audit_analysis .impact.medium,
+#seopress_site_audit_analysis .impact.high {
     position: relative;
     top: calc(50% - 18px);
     display: inline-block;
@@ -1160,6 +1185,8 @@ body.seopress-white-label .seopress-option {
 
 #seopress_content_analysis .dashicons-no-alt,
 #seopress_content_analysis .dashicons-yes,
+#seopress_site_audit_analysis .dashicons-no-alt,
+#seopress_site_audit_analysis .dashicons-yes,
 #seopress_pro_cpt .dashicons-no-alt,
 #seopress_pro_cpt .dashicons-yes {
     color: #fff;
@@ -1169,6 +1196,7 @@ body.seopress-white-label .seopress-option {
 }
 
 #seopress_content_analysis .dashicons-no-alt,
+#seopress_site_audit_analysis .dashicons-no-alt,
 #seopress_pro_cpt .dashicons-no-alt {
     background: var(--colorAlert);
 }
@@ -2154,6 +2182,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 
 .wrap-seopress-tab-content .seopress-tools-card {
     padding: 16px 25px;
+    position: relative;
 }
 
 #seopress-tabs .seopress-tab {

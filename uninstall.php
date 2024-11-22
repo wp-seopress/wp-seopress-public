@@ -113,6 +113,7 @@ class SEOPRESS_Uninstall {
         wp_clear_scheduled_hook('seopress_alerts_cron');
 
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_content_analysis");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_seo_issues");
 
 	}
 }

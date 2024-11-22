@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 8.1.1
+Version: 8.2
 Author URI: https://www.seopress.org/
 License: GPLv2 or later
 Text Domain: wp-seopress
@@ -60,12 +60,17 @@ register_deactivation_hook(__FILE__, 'seopress_deactivation');
 
 // Redirect User After Plugin Activation
 function seopress_redirect_after_activation() {
+    // Do not redirect if WP is doing AJAX requests OR multisite page OR incorrect user permissions
+    if ( wp_doing_ajax() || is_network_admin() || ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
     // Check if the plugin was activated
     if (get_option('seopress_activated') === 'yes') {
         // Delete the activation flag
         delete_option('seopress_activated');
 
-        // If the wizard has already been completed, do not rediret the user
+        // If the wizard has already been completed, do not redirect the user
         $seopress_notices = get_option('seopress_notices', []);
         if (empty($seopress_notices) || !isset($seopress_notices['notice-wizard'])) {
             wp_safe_redirect( esc_url_raw(admin_url('admin.php?page=seopress-setup&step=welcome&parent=welcome')) );
@@ -78,7 +83,7 @@ add_action('admin_init', 'seopress_redirect_after_activation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '8.1.1');
+define('SEOPRESS_VERSION', '8.2');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));

@@ -152,6 +152,8 @@ if (function_exists('seopress_admin_header')) {
                 </div><!-- .inside -->
             </div><!-- .postbox -->
 
+            <?php do_action('seopress_tools_reset_seo_issues'); ?>
+
             <div class="postbox section-tool">
                 <div class="sp-section-header">
                     <h2>

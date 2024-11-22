@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: SEOPress 8.1.1\n"
+"Project-Id-Version: SEOPress 8.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-seopress\n"
 "Last-Translator: SEOPress <contact@seopress.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-09-04T12:59:34+00:00\n"
+"POT-Creation-Date: 2024-09-30T09:54:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wp-seopress\n"
@@ -510,7 +510,7 @@ msgstr ""
 #: inc/admin/admin-pages/Social.php:51
 #: inc/admin/admin-pages/Titles.php:54
 #: inc/admin/sections/InstantIndexing.php:26
-#: seopress-functions.php:773
+#: seopress-functions.php:745
 msgid "Save changes"
 msgstr ""
 
@@ -551,7 +551,7 @@ msgstr ""
 #: inc/admin/admin-pages/Tools.php:20
 #: inc/admin/admin-pages/Tools.php:43
 #: inc/admin/sections/InstantIndexing.php:62
-#: seopress.php:550
+#: seopress.php:555
 msgid "Settings"
 msgstr ""
 
@@ -624,7 +624,7 @@ msgid "Plugins"
 msgstr ""
 
 #: inc/admin/admin-pages/Tools.php:22
-#: inc/admin/admin-pages/Tools.php:158
+#: inc/admin/admin-pages/Tools.php:160
 msgid "Reset"
 msgstr ""
 
@@ -686,27 +686,27 @@ msgstr ""
 msgid "Delete content scans"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:163
+#: inc/admin/admin-pages/Tools.php:165
 msgid "Reset All Notices From Notifications Center"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:166
+#: inc/admin/admin-pages/Tools.php:168
 msgid "By clicking Reset Notices, all notices in the notifications center will be set to their initial status."
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:171
+#: inc/admin/admin-pages/Tools.php:173
 msgid "Reset notices"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:178
+#: inc/admin/admin-pages/Tools.php:180
 msgid "Reset All Settings"
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:181
+#: inc/admin/admin-pages/Tools.php:183
 msgid "<strong>WARNING:</strong> Delete all options related to this plugin in your database."
 msgstr ""
 
-#: inc/admin/admin-pages/Tools.php:187
+#: inc/admin/admin-pages/Tools.php:189
 msgid "Reset settings"
 msgstr ""
 
@@ -743,13 +743,13 @@ msgid "A redirect is active for this URL. Turn it off to get the Google preview 
 msgstr ""
 
 #: inc/admin/ajax.php:41
-#: src/Actions/Api/ContentAnalysis.php:80
+#: src/Actions/Api/ContentAnalysis.php:93
 #: src/Actions/Api/PagePreview.php:59
 msgid "To get your Google snippet preview, publish your post!"
 msgstr ""
 
 #: inc/admin/ajax.php:44
-#: src/Actions/Api/ContentAnalysis.php:83
+#: src/Actions/Api/ContentAnalysis.php:96
 #: src/Actions/Api/PagePreview.php:62
 msgid "Your site is protected by an authentication."
 msgstr ""
@@ -918,7 +918,7 @@ msgstr ""
 #: src/Services/Admin/Notifications/Notifications.php:502
 #: src/Services/Admin/Notifications/Notifications.php:521
 #: src/Services/Admin/Notifications/Notifications.php:540
-#: src/Services/ContentAnalysis/GetContent.php:72
+#: src/Services/ContentAnalysis/GetContent.php:100
 msgid "Learn more"
 msgstr ""
 
@@ -2339,7 +2339,7 @@ msgid "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 
 msgstr ""
 
 #: inc/admin/callbacks/Social.php:615
-#: seopress.php:413
+#: seopress.php:418
 msgid "Default"
 msgstr ""
 
@@ -3146,7 +3146,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:472
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:451
 #: src/Helpers/Metas/SocialSettings.php:64
-#: src/Services/ContentAnalysis/GetContent.php:534
+#: src/Services/ContentAnalysis/GetContent.php:820
 #: src/Services/I18nUniversalMetabox.php:38
 msgid "X Title"
 msgstr ""
@@ -3159,7 +3159,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:476
 #: inc/admin/page-builders/elementor/inc/admin/class-document-settings-section.php:462
 #: src/Helpers/Metas/SocialSettings.php:73
-#: src/Services/ContentAnalysis/GetContent.php:565
+#: src/Services/ContentAnalysis/GetContent.php:878
 #: src/Services/I18nUniversalMetabox.php:39
 msgid "X Description"
 msgstr ""
@@ -4571,7 +4571,7 @@ msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:465
 #: inc/admin/wizard/admin-wizard.php:472
-msgid "Please contact your host to increase this value to at least 50M."
+msgid "Please contact your host to increase this value to at least 24M."
 msgstr ""
 
 #: inc/admin/wizard/admin-wizard.php:471
@@ -5218,75 +5218,75 @@ msgstr ""
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: seopress-functions.php:436
+#: seopress-functions.php:415
 msgid "Custom Post Types"
 msgstr ""
 
-#: seopress-functions.php:440
+#: seopress-functions.php:419
 msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %1$s: "Custom Post Types" or "Custom Taxonomies", %2$s: "title" or "description"
-#: seopress-functions.php:486
+#: seopress-functions.php:465
 msgid "Some <strong>%1$s</strong> have no <strong>meta %2$s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 
-#: seopress-functions.php:512
-#: seopress-functions.php:542
+#: seopress-functions.php:490
+#: seopress-functions.php:519
 msgid "WARNING"
 msgstr ""
 
-#: seopress-functions.php:513
+#: seopress-functions.php:491
 msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
 msgstr ""
 
-#: seopress-functions.php:543
+#: seopress-functions.php:520
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
-#: seopress.php:231
+#: seopress.php:236
 msgid "has been successfully updated!"
 msgstr ""
 
-#: seopress.php:319
-#: seopress.php:394
+#: seopress.php:324
+#: seopress.php:399
 msgid "Migration completed!"
 msgstr ""
 
-#: seopress.php:320
-#: seopress.php:395
+#: seopress.php:325
+#: seopress.php:400
 msgid "Export completed!"
 msgstr ""
 
-#: seopress.php:411
+#: seopress.php:416
 msgid "Clear"
 msgstr ""
 
-#: seopress.php:412
+#: seopress.php:417
 msgid "Clear color"
 msgstr ""
 
-#: seopress.php:414
+#: seopress.php:419
 msgid "Select default color"
 msgstr ""
 
-#: seopress.php:415
+#: seopress.php:420
 msgid "Select Color"
 msgstr ""
 
-#: seopress.php:416
+#: seopress.php:421
 msgid "Color value"
 msgstr ""
 
-#: seopress.php:551
+#: seopress.php:556
 msgid "Docs"
 msgstr ""
 
-#: seopress.php:552
+#: seopress.php:557
 msgid "Configuration Wizard"
 msgstr ""
 
-#: seopress.php:554
+#: seopress.php:559
 msgid "GO PRO!"
 msgstr ""
 
@@ -5736,66 +5736,66 @@ msgstr ""
 msgid "Migrate your SEO metadata and redirects from other plugins"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:46
+#: src/Services/ContentAnalysis/GetContent.php:64
 #: src/Services/I18nUniversalMetabox.php:375
 msgid "We found these schemas in the source code of this page:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:54
+#: src/Services/ContentAnalysis/GetContent.php:74
 #: src/Services/I18nUniversalMetabox.php:370
 #: src/Services/I18nUniversalMetabox.php:376
 msgid "duplicated schema - x"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:57
+#: src/Services/ContentAnalysis/GetContent.php:77
 #: src/Services/I18nUniversalMetabox.php:31
 msgid "x"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:67
+#: src/Services/ContentAnalysis/GetContent.php:95
 #: src/Services/I18nUniversalMetabox.php:374
 msgid "No schemas found in the source code of this page. Get rich snippets in Google Search results and improve your visibility by adding structured data types (schemas) to your page."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:70
+#: src/Services/ContentAnalysis/GetContent.php:98
 msgid "Get SEOPress PRO to add schemas now"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:93
+#: src/Services/ContentAnalysis/GetContent.php:134
 #: src/Services/I18nUniversalMetabox.php:234
 msgid "This post is a little old!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:95
+#: src/Services/ContentAnalysis/GetContent.php:139
 #: src/Services/I18nUniversalMetabox.php:235
 msgid "The last modified date of this article is less than 1 year. Cool!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:97
+#: src/Services/ContentAnalysis/GetContent.php:141
 #: src/Services/I18nUniversalMetabox.php:239
 msgid "Search engines love fresh content. Update regularly your articles without entirely rewriting your content and give them a boost in search rankings. SEOPress takes care of the technical part."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:118
+#: src/Services/ContentAnalysis/GetContent.php:174
 #: src/Services/I18nUniversalMetabox.php:328
 msgid "Cool, one of your target keyword is used in your permalink."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:129
+#: src/Services/ContentAnalysis/GetContent.php:185
 #: src/Services/I18nUniversalMetabox.php:320
 msgid "This is your homepage. This check doesn't apply here because there is no slug."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:132
+#: src/Services/ContentAnalysis/GetContent.php:188
 #: src/Services/I18nUniversalMetabox.php:324
 msgid "You should add one of your target keyword in your permalink."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:150
+#: src/Services/ContentAnalysis/GetContent.php:219
 msgid "H1 (Heading 1)"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:175
+#: src/Services/ContentAnalysis/GetContent.php:247
 msgid "Target keywords were found in Heading 1 (H1)."
 msgstr ""
 
@@ -5803,442 +5803,442 @@ msgstr ""
 #. translators: %1$s heading 2, %2$d number of times the heading 2 was found
 #. translators: %1$s heading 3, %2$d number of times the heading 3 was found
 #. translators: %1$s target keyword, %2$d number of times the target keyword was found
-#: src/Services/ContentAnalysis/GetContent.php:181
-#: src/Services/ContentAnalysis/GetContent.php:229
-#: src/Services/ContentAnalysis/GetContent.php:261
-#: src/Services/ContentAnalysis/GetContent.php:295
-#: src/Services/ContentAnalysis/GetContent.php:342
+#: src/Services/ContentAnalysis/GetContent.php:253
+#: src/Services/ContentAnalysis/GetContent.php:320
+#: src/Services/ContentAnalysis/GetContent.php:363
+#: src/Services/ContentAnalysis/GetContent.php:410
+#: src/Services/ContentAnalysis/GetContent.php:483
 msgid "%1$s was found %2$d times."
 msgstr ""
 
 #. translators: %d number of headings 1
-#: src/Services/ContentAnalysis/GetContent.php:187
+#: src/Services/ContentAnalysis/GetContent.php:261
 msgid "We found %d Heading 1 (H1) in your content."
 msgstr ""
 
 #. translators: %d number of headings 1
-#: src/Services/ContentAnalysis/GetContent.php:188
+#: src/Services/ContentAnalysis/GetContent.php:262
 #: src/Services/I18nUniversalMetabox.php:278
 msgid "You should not use more than one H1 heading in your post content. The rule is simple: only one H1 for each web page. It is better for both SEO and accessibility. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:198
+#: src/Services/ContentAnalysis/GetContent.php:277
 msgid "No Heading 1 (H1) found in your content. This is required for both SEO and Accessibility!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:201
+#: src/Services/ContentAnalysis/GetContent.php:282
 msgid "None of your target keywords were found in Heading 1 (H1)."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:208
+#: src/Services/ContentAnalysis/GetContent.php:299
 msgid "H2 (Heading 2)"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:225
+#: src/Services/ContentAnalysis/GetContent.php:316
 msgid "Target keywords were found in Heading 2 (H2)."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:233
+#: src/Services/ContentAnalysis/GetContent.php:325
 msgid "None of your target keywords were found in Heading 2 (H2)."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:240
+#: src/Services/ContentAnalysis/GetContent.php:342
 msgid "H3 (Heading 3)"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:257
+#: src/Services/ContentAnalysis/GetContent.php:359
 msgid "Target keywords were found in Heading 3 (H3)."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:265
+#: src/Services/ContentAnalysis/GetContent.php:367
 msgid "None of your target keywords were found in Heading 3 (H3)."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:292
+#: src/Services/ContentAnalysis/GetContent.php:407
 #: src/Services/I18nUniversalMetabox.php:109
 msgid "Target keywords were found in the Meta Title."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:301
+#: src/Services/ContentAnalysis/GetContent.php:416
 #: src/Services/I18nUniversalMetabox.php:118
 msgid "None of your target keywords were found in the Meta Title."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:306
+#: src/Services/ContentAnalysis/GetContent.php:424
 #: src/Services/I18nUniversalMetabox.php:122
 msgid "Your custom title is too long."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:311
+#: src/Services/ContentAnalysis/GetContent.php:433
 msgid "The length of your title is correct"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:316
+#: src/Services/ContentAnalysis/GetContent.php:438
 #: src/Services/I18nUniversalMetabox.php:105
 #: src/Services/I18nUniversalMetabox.php:254
 msgid "No custom title is set for this post. If the global meta title suits you, you can ignore this recommendation."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:338
+#: src/Services/ContentAnalysis/GetContent.php:479
 #: src/Services/I18nUniversalMetabox.php:132
 msgid "Target keywords were found in the Meta description."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:348
+#: src/Services/ContentAnalysis/GetContent.php:489
 #: src/Services/I18nUniversalMetabox.php:141
 msgid "None of your target keywords were found in the Meta description."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:353
+#: src/Services/ContentAnalysis/GetContent.php:497
 #: src/Services/I18nUniversalMetabox.php:145
 msgid "You custom meta description is too long."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:358
+#: src/Services/ContentAnalysis/GetContent.php:506
 #: src/Services/I18nUniversalMetabox.php:149
 msgid "The length of your meta description is correct"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:363
+#: src/Services/ContentAnalysis/GetContent.php:511
 #: src/Services/I18nUniversalMetabox.php:128
 msgid "No custom meta description is set for this post. If the global meta description suits you, you can ignore this recommendation."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:380
+#: src/Services/ContentAnalysis/GetContent.php:546
 msgid "Open Graph Title"
 msgstr ""
 
 #. translators: %d number of OG:TITLE tags
-#: src/Services/ContentAnalysis/GetContent.php:389
+#: src/Services/ContentAnalysis/GetContent.php:555
 msgid "We found %d og:title in your content."
 msgstr ""
 
 #. translators: %d number of OG:TITLE tags
-#: src/Services/ContentAnalysis/GetContent.php:390
+#: src/Services/ContentAnalysis/GetContent.php:556
 #: src/Services/I18nUniversalMetabox.php:78
 msgid "You should not use more than one og:title in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:title tag from your source code. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:393
+#: src/Services/ContentAnalysis/GetContent.php:562
 msgid "Your Open Graph Title tag is empty!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:395
+#: src/Services/ContentAnalysis/GetContent.php:567
 msgid "We found an Open Graph Title tag in your source code."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:407
+#: src/Services/ContentAnalysis/GetContent.php:585
 msgid "Your Open Graph Title is missing!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:411
+#: src/Services/ContentAnalysis/GetContent.php:604
 msgid "Open Graph Description"
 msgstr ""
 
 #. translators: %d number of OG:DESCRIPTION tags
-#: src/Services/ContentAnalysis/GetContent.php:420
+#: src/Services/ContentAnalysis/GetContent.php:613
 msgid "We found %d og:description in your content."
 msgstr ""
 
 #. translators: %d number of OG:DESCRIPTION tags
-#: src/Services/ContentAnalysis/GetContent.php:421
+#: src/Services/ContentAnalysis/GetContent.php:614
 #: src/Services/I18nUniversalMetabox.php:82
 msgid "You should not use more than one og:description in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:description tag from your source code. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:424
+#: src/Services/ContentAnalysis/GetContent.php:620
 msgid "Your Open Graph Description tag is empty!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:426
+#: src/Services/ContentAnalysis/GetContent.php:625
 msgid "We found an Open Graph Description tag in your source code."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:438
+#: src/Services/ContentAnalysis/GetContent.php:643
 msgid "Your Open Graph Description is missing!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:442
+#: src/Services/ContentAnalysis/GetContent.php:663
 msgid "Open Graph Image"
 msgstr ""
 
 #. translators: %d number of OG:IMAGE tags
-#: src/Services/ContentAnalysis/GetContent.php:450
+#: src/Services/ContentAnalysis/GetContent.php:671
 msgid "We found %d og:image in your content."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:456
+#: src/Services/ContentAnalysis/GetContent.php:677
 msgid "Your Open Graph Image tag is empty!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:468
+#: src/Services/ContentAnalysis/GetContent.php:691
 msgid "Your Open Graph Image is missing!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:472
+#: src/Services/ContentAnalysis/GetContent.php:704
 msgid "Open Graph URL"
 msgstr ""
 
 #. translators: %d number of OG:URL tags
-#: src/Services/ContentAnalysis/GetContent.php:481
+#: src/Services/ContentAnalysis/GetContent.php:713
 msgid "We found %d og:url in your content."
 msgstr ""
 
 #. translators: %d number of OG:URL tags
-#: src/Services/ContentAnalysis/GetContent.php:482
+#: src/Services/ContentAnalysis/GetContent.php:714
 #: src/Services/I18nUniversalMetabox.php:86
 msgid "You should not use more than one og:url in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:url tag from your source code. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:485
+#: src/Services/ContentAnalysis/GetContent.php:720
 msgid "Your Open Graph URL tag is empty!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:487
+#: src/Services/ContentAnalysis/GetContent.php:725
 msgid "We found an Open Graph URL tag in your source code."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:499
+#: src/Services/ContentAnalysis/GetContent.php:743
 msgid "Your Open Graph URL is missing!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:503
+#: src/Services/ContentAnalysis/GetContent.php:762
 msgid "Open Graph Site Name"
 msgstr ""
 
 #. translators: %d number of OG:SITE_NAME tags
-#: src/Services/ContentAnalysis/GetContent.php:512
+#: src/Services/ContentAnalysis/GetContent.php:771
 msgid "We found %d og:site_name in your content."
 msgstr ""
 
 #. translators: %d number of OG:SITE_NAME tags
-#: src/Services/ContentAnalysis/GetContent.php:513
+#: src/Services/ContentAnalysis/GetContent.php:772
 #: src/Services/I18nUniversalMetabox.php:90
 msgid "You should not use more than one og:site_name in your post content to avoid conflicts when sharing on social networks. Facebook will take the last og:site_name tag from your source code. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:516
+#: src/Services/ContentAnalysis/GetContent.php:778
 msgid "Your Open Graph Site Name tag is empty!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:518
+#: src/Services/ContentAnalysis/GetContent.php:783
 msgid "We found an Open Graph Site Name tag in your source code."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:530
+#: src/Services/ContentAnalysis/GetContent.php:801
 msgid "Your Open Graph Site Name is missing!"
 msgstr ""
 
 #. translators: %d number of times a twitter:tile tag is found
-#: src/Services/ContentAnalysis/GetContent.php:543
+#: src/Services/ContentAnalysis/GetContent.php:829
 msgid "We found %d twitter:title in your content."
 msgstr ""
 
 #. translators: %d number of TWITTER:TITLE tags
-#: src/Services/ContentAnalysis/GetContent.php:544
+#: src/Services/ContentAnalysis/GetContent.php:830
 #: src/Services/I18nUniversalMetabox.php:48
 msgid "You should not use more than one twitter:title in your post content to avoid conflicts when sharing on social networks. X will take the last twitter:title tag from your source code. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:547
+#: src/Services/ContentAnalysis/GetContent.php:836
 msgid "Your X Title tag is empty!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:549
+#: src/Services/ContentAnalysis/GetContent.php:841
 msgid "We found a X Title tag in your source code."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:561
+#: src/Services/ContentAnalysis/GetContent.php:859
 msgid "Your X Title is missing!"
 msgstr ""
 
 #. translators: %d number of TWITTER:DESCRIPTION tags
-#: src/Services/ContentAnalysis/GetContent.php:574
+#: src/Services/ContentAnalysis/GetContent.php:887
 msgid "We found %d twitter:description in your content."
 msgstr ""
 
 #. translators: %d number of TWITTER:DESCRIPTION tags
-#: src/Services/ContentAnalysis/GetContent.php:575
+#: src/Services/ContentAnalysis/GetContent.php:888
 #: src/Services/I18nUniversalMetabox.php:52
 msgid "You should not use more than one twitter:description in your post content to avoid conflicts when sharing on social networks. X will take the last twitter:description tag from your source code. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:578
+#: src/Services/ContentAnalysis/GetContent.php:894
 msgid "Your X Description tag is empty!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:580
+#: src/Services/ContentAnalysis/GetContent.php:899
 msgid "We found a X Description tag in your source code."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:592
+#: src/Services/ContentAnalysis/GetContent.php:917
 msgid "Your X Description is missing!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:596
+#: src/Services/ContentAnalysis/GetContent.php:937
 #: src/Services/I18nUniversalMetabox.php:40
 msgid "X Image"
 msgstr ""
 
 #. translators: %d number of TWITTER:IMAGE tags
-#: src/Services/ContentAnalysis/GetContent.php:604
+#: src/Services/ContentAnalysis/GetContent.php:945
 msgid "We found %d twitter:image in your content."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:610
+#: src/Services/ContentAnalysis/GetContent.php:951
 msgid "Your X Image tag is empty!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:622
+#: src/Services/ContentAnalysis/GetContent.php:965
 msgid "Your X Image is missing!"
 msgstr ""
 
 #. translators: %s number of meta robots tags
 #. translators: %s number of meta robots
-#: src/Services/ContentAnalysis/GetContent.php:647
+#: src/Services/ContentAnalysis/GetContent.php:1003
 #: src/Services/I18nUniversalMetabox.php:165
 msgid "We found %s meta robots in your page. There is probably something wrong with your theme!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:654
+#: src/Services/ContentAnalysis/GetContent.php:1013
 msgid "<strong>noindex</strong> is on! Search engines can't index this page."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:656
+#: src/Services/ContentAnalysis/GetContent.php:1017
 msgid "<strong>noindex</strong> is off. Search engines will index this page."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:661
+#: src/Services/ContentAnalysis/GetContent.php:1022
 msgid "<strong>nofollow</strong> is on! Search engines can't follow your links on this page."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:663
+#: src/Services/ContentAnalysis/GetContent.php:1026
 msgid "<strong>nofollow</strong> is off. Search engines will follow links on this page."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:668
+#: src/Services/ContentAnalysis/GetContent.php:1031
 msgid "<strong>noimageindex</strong> is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed)."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:670
+#: src/Services/ContentAnalysis/GetContent.php:1035
 msgid "<strong>noimageindex</strong> is off. Google will index the images on this page."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:677
+#: src/Services/ContentAnalysis/GetContent.php:1042
 msgid "<strong>noarchive</strong> is on! Search engines will not cache your page."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:679
+#: src/Services/ContentAnalysis/GetContent.php:1046
 msgid "<strong>noarchive</strong> is off. Search engines will probably cache your page."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:686
+#: src/Services/ContentAnalysis/GetContent.php:1053
 msgid "<strong>nosnippet</strong> is on! Search engines will not display a snippet of this page in search results."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:688
+#: src/Services/ContentAnalysis/GetContent.php:1057
 msgid "<strong>nosnippet</strong> is off. Search engines will display a snippet of this page in search results."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:691
+#: src/Services/ContentAnalysis/GetContent.php:1060
 #: src/Services/I18nUniversalMetabox.php:160
 msgid "We found no meta robots on this page. It means, your page is index,follow. Search engines will index it, and follow links. "
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:701
+#: src/Services/ContentAnalysis/GetContent.php:1070
 msgid "<strong>nositelinkssearchbox</strong> is on! Google will not display a sitelinks searchbox in search results."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:703
-#: src/Services/ContentAnalysis/GetContent.php:707
+#: src/Services/ContentAnalysis/GetContent.php:1074
+#: src/Services/ContentAnalysis/GetContent.php:1077
 msgid "<strong>nositelinkssearchbox</strong> is off. Google will probably display a sitelinks searchbox in search results."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:742
+#: src/Services/ContentAnalysis/GetContent.php:1126
 #: src/Services/I18nUniversalMetabox.php:294
 msgid "No alternative text found for these images. Alt tags are important for both SEO and accessibility. Edit your images using the media library or your favorite page builder and fill in alternative text fields."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:753
+#: src/Services/ContentAnalysis/GetContent.php:1139
 #: src/Services/I18nUniversalMetabox.php:298
 msgid "Note that we scan all your source code, it means, some missing alternative texts of images might be located in your header, sidebar or footer."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:760
+#: src/Services/ContentAnalysis/GetContent.php:1149
 #: src/Services/I18nUniversalMetabox.php:290
 msgid "All alternative tags are filled in. Good work!"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:763
+#: src/Services/ContentAnalysis/GetContent.php:1152
 #: src/Services/I18nUniversalMetabox.php:286
 msgid "We could not find any image in your content. Content with media is a plus for your SEO."
 msgstr ""
 
 #. translators: %d number of nofollow links
-#: src/Services/ContentAnalysis/GetContent.php:781
+#: src/Services/ContentAnalysis/GetContent.php:1185
 msgid "We found %d links with nofollow attribute in your page. Do not overuse nofollow attribute in links. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:793
+#: src/Services/ContentAnalysis/GetContent.php:1202
 #: src/Services/I18nUniversalMetabox.php:344
 msgid "This page doesn't have any nofollow links."
 msgstr ""
 
 #. translators: %d number of outbound links
 #. translators: %s number of outbound links
-#: src/Services/ContentAnalysis/GetContent.php:812
+#: src/Services/ContentAnalysis/GetContent.php:1233
 #: src/Services/I18nUniversalMetabox.php:228
 msgid "We found %s outbound links in your page. Below, the list:"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:820
+#: src/Services/ContentAnalysis/GetContent.php:1243
 #: src/Services/I18nUniversalMetabox.php:223
 msgid "This page doesn't have any outbound links."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:836
+#: src/Services/ContentAnalysis/GetContent.php:1273
 #: src/Services/I18nUniversalMetabox.php:701
 msgid "Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:842
+#: src/Services/ContentAnalysis/GetContent.php:1279
 msgid "Unfortunately, this analysis can‘t work with Bricks Builder because of the way your content is stored in your database."
 msgstr ""
 
 #. translators: %s internal links
-#: src/Services/ContentAnalysis/GetContent.php:846
+#: src/Services/ContentAnalysis/GetContent.php:1283
 msgid "We found %s internal links to this page."
 msgstr ""
 
 #. translators: %s link to edit the post
-#: src/Services/ContentAnalysis/GetContent.php:851
+#: src/Services/ContentAnalysis/GetContent.php:1288
 msgid "edit %s"
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:856
+#: src/Services/ContentAnalysis/GetContent.php:1293
 #: src/Services/I18nUniversalMetabox.php:308
 msgid "This page doesn't have any internal links from other content. Links from archive pages are not considered internal links due to lack of context."
 msgstr ""
 
 #. translators: %s number of canonical tags
-#: src/Services/ContentAnalysis/GetContent.php:877
+#: src/Services/ContentAnalysis/GetContent.php:1328
 msgid "We found %s canonical URL in your source code. Below, the list:"
 msgid_plural "We found %s canonical URLs in your source code. Below, the list:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Services/ContentAnalysis/GetContent.php:887
+#: src/Services/ContentAnalysis/GetContent.php:1338
 #: src/Services/I18nUniversalMetabox.php:369
 msgid "You must fix this. Canonical URL duplication is bad for SEO."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:892
-#: src/Services/ContentAnalysis/GetContent.php:896
+#: src/Services/ContentAnalysis/GetContent.php:1345
+#: src/Services/ContentAnalysis/GetContent.php:1349
 #: src/Services/I18nUniversalMetabox.php:357
 msgid "This page doesn't have any canonical URL because your post is set to <strong>noindex</strong>. This is normal."
 msgstr ""
 
-#: src/Services/ContentAnalysis/GetContent.php:900
+#: src/Services/ContentAnalysis/GetContent.php:1353
 #: src/Services/I18nUniversalMetabox.php:361
 msgid "This page doesn't have any canonical URL."
 msgstr ""

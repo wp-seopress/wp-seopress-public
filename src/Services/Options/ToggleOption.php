@@ -80,6 +80,15 @@ class ToggleOption {
     }
 
     /**
+     * @since 8.2
+     *
+     * @return string
+     */
+    public function getToggleBot(){
+        return $this->searchOptionByKey('bot');
+    }
+
+    /**
      * @since 6.6.0
      *
      * @return string

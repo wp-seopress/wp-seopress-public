@@ -459,17 +459,17 @@ class SEOPRESS_Admin_Setup_Wizard {
 					$post_max_size = ini_get( 'post_max_size' ) ?? 1;
 					$memory_limit = ini_get( 'memory_limit' ) ?? 1;
 
-					if ( wp_convert_hr_to_bytes($upload_max_filesize) / 1024 / 1024 < 50 ) {
+					if ( wp_convert_hr_to_bytes($upload_max_filesize) / 1024 / 1024 < 24 ) {
 						$requirements[] = [
 							'title'  => __('PHP upload max filesize is too low.', 'wp-seopress'),
-							'desc'   => __('Please contact your host to increase this value to at least 50M.', 'wp-seopress')
+							'desc'   => __('Please contact your host to increase this value to at least 24M.', 'wp-seopress')
 						];
 					}
 
-					if ( wp_convert_hr_to_bytes($post_max_size) / 1024 / 1024 < 50 ) {
+					if ( wp_convert_hr_to_bytes($post_max_size) / 1024 / 1024 < 23 ) {
 						$requirements[] = [
 							'title'  => __('PHP post max size is too low.', 'wp-seopress'),
-							'desc'   => __('Please contact your host to increase this value to at least 50M.', 'wp-seopress')
+							'desc'   => __('Please contact your host to increase this value to at least 24M.', 'wp-seopress')
 						];
 					}
 
@@ -495,7 +495,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 				}
 			?>
 
-			<a href="<?php echo $this->get_next_step_link(); ?>" class="btnPrimary btn btnNext"><?php esc_html_e('Here we go!', 'wp-seopress'); ?></a>
+			<a href="<?php echo esc_url($this->get_next_step_link()); ?>" class="btnPrimary btn btnNext"><?php esc_html_e('Here we go!', 'wp-seopress'); ?></a>
 		</div>
 	</div>
 <?php

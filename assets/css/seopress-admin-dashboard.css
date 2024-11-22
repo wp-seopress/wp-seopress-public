@@ -1,12 +1,7 @@
 /* Dashboard */
-.sp-dashboard-card-highlight {
-    border: 1px dashed #c3c4c7;
-    margin: 20px 0;
-}
-
 .seopress-tab.inside,
 .seopress-summary-items .inside {
-    padding: 20px;
+    padding: 0 0 1rem 0;
 }
 
 #seopress-admin-tabs.seopress-ui-tabs {
@@ -550,7 +545,7 @@
 
 /* Insights */
 #notice-insights-alert .seopress-card-content {
-    padding: 2rem;
+    padding: 1rem 2rem 0;
 }
 
 /* Tasks */

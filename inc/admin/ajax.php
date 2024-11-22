@@ -64,7 +64,6 @@ function seopress_do_real_preview()
     ]);
     seopress_get_service('ContentAnalysisDatabase')->saveData($id, $data, $keywords);
 
-
     /**
      * We delete old values because we have a new structure
      *

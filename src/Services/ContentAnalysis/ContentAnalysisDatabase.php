@@ -43,7 +43,7 @@ class ContentAnalysisDatabase
             "analysis_date" => new \DateTime()
         ];
 
-        $alreadyExist = seopress_get_service('ContentAnalysisRepository')->analysisAlreadyExistForPostId($postId);;
+        $alreadyExist = seopress_get_service('ContentAnalysisRepository')->analysisAlreadyExistForPostId($postId);
 
         if($alreadyExist){
             seopress_get_service('ContentAnalysisRepository')->updateContentAnalysis($postId, $items);

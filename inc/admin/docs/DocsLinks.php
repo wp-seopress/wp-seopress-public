@@ -298,7 +298,7 @@ function seopress_get_docs_links()
 
 		$docs['woocommerce']['ebook'] = 'https://www.seopress.org/fr/support/ebooks/woocommerce-seo-guide-ultime/';
 
-		$docs['schemas']['ebook'] = 'https://www.seopress.org/fr/support/ebooks/types-de-donnees-structurees-de-google-schemas/';
+		$docs['schemas']['ebook'] = 'https://www.seopress.org/fr/support/ebooks/maitriser-les-types-de-donnees-structurees-de-google-schemas/';
 		$docs['schemas']['add'] = 'https://www.seopress.org/fr/support/tutoriels/comment-utiliser-les-schemas-dans-votre-site-wordpress-avec-seopress-pro-1/';
 		$docs['schemas']['faq_acf'] = 'https://www.seopress.org/fr/support/guides/creer-un-schema-faq-automatique-avec-les-champs-repeteurs-dacf/';
 		$docs['schemas']['dynamic'] = 'https://www.seopress.org/fr/support/guides/gerez-vos-balises-titres-et-metas/';

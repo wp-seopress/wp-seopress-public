@@ -113,7 +113,7 @@ class ModuleMetabox implements ExecuteHooks
 
 
         $args = array_merge([
-            'SEOPRESS_URL_PUBLIC'       => SEOPRESS_URL_PUBLIC,
+            'SEOPRESS_URL_PUBLIC'     => SEOPRESS_URL_PUBLIC,
             'SEOPRESS_URL_ASSETS'     => SEOPRESS_URL_ASSETS,
             'SEOPRESS_PRO_IS_ACTIVATED' => is_plugin_active('wp-seopress-pro/seopress-pro.php') ? true : false,
             'SITENAME'                => get_bloginfo('name'),

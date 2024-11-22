@@ -17,11 +17,10 @@ function seopress_get_service($service) {
 	return Kernel::getContainer()->getServiceByName($service);
 }
 
-/*
+/**
  * Get first key of an array if PHP < 7.3
  * @since 4.2.1
  * @return string
- * @author Benjamin
  */
 if ( ! function_exists('array_key_first')) {
 	function array_key_first(array $arr) {
@@ -33,11 +32,10 @@ if ( ! function_exists('array_key_first')) {
 	}
 }
 
-/*
+/**
  * Get last key of an array if PHP < 7.3
  * @since 4.2.1
  * @return string
- * @author Benjamin
  */
 if ( ! function_exists('array_key_last')) {
 	function array_key_last(array $arr) {
@@ -48,14 +46,14 @@ if ( ! function_exists('array_key_last')) {
 	}
 }
 
-/*
+/**
  * Remove WP default meta robots (added in WP 5.7)
  *
  * @since 4.4.0.7
  */
 remove_filter('wp_robots', 'wp_robots_max_image_preview_large');
 
-/*
+/**
  * Remove WC default meta robots (added in WP 5.7)
  *
  * @since 4.6
@@ -166,9 +164,8 @@ function seopress_remove_wpml_home_url_filter($home_url, $url, $path, $orig_sche
 	return $url;
 }
 
-/*
+/**
  * Remove third-parties metaboxes on our CPT
- * @author Benjamin Denis
  * @since 4.2
  */
 add_action('do_meta_boxes', 'seopress_remove_metaboxes', 10);
@@ -181,8 +178,6 @@ function seopress_remove_metaboxes() {
 
 /**
  * Get all custom fields (limit: 250).
- *
- * @author Benjamin Denis
  *
  * @return array custom field keys
  */
@@ -225,8 +220,6 @@ function seopress_get_custom_fields() {
 /**
  * Check SSL for schema.org.
  *
- * @author Benjamin Denis
- *
  * @return string correct protocol
  */
 function seopress_check_ssl() {
@@ -262,8 +255,6 @@ function seopress_is_base64_string($str) {
 /**
  * Get IP address.
  *
- * @author Benjamin Denis
- *
  * @return (string) $ip
  **/
 function seopress_get_ip_address() {
@@ -283,8 +274,6 @@ function seopress_get_ip_address() {
  *
  * @return array
  *
- * @author Benjamin
- *
  * @param mixed $url
  * @param mixed $allcaps
  * @param mixed $caps
@@ -297,8 +286,6 @@ function seopress_disable_qm($allcaps, $caps, $args) {
 }
 /**
  * Clear content for CA.
- *
- * @author Benjamin
  */
 function seopress_clean_content_analysis() {
 	if (!is_user_logged_in()) {
@@ -330,8 +317,6 @@ add_action('plugins_loaded', 'seopress_clean_content_analysis');
  *
  * @return bool true if absolute
  *
- * @author Benjamin
- *
  * @param mixed $url
  */
 function seopress_is_absolute($url) {
@@ -344,8 +329,6 @@ function seopress_is_absolute($url) {
  * Manage localized links.
  *
  * @return string locale for documentation links
- *
- * @author Benjamin
  */
 function seopress_get_locale() {
 	switch (get_user_locale(get_current_user_id())) {
@@ -391,8 +374,6 @@ function seopress_normalized_locale($current_locale) {
  * @since 6.8
  *
  * @return string language code
- *
- * @author Benjamin
  */
 function seopress_get_current_lang() {
 	//Default
@@ -421,8 +402,6 @@ function seopress_get_current_lang() {
  * @param bool   $notice
  *
  * @return string notice with list of empty cpt titles
- *
- * @author Benjamin
  */
 function seopress_get_empty_templates($type, $metadata, $notice = true) {
 	$cpt_titles_empty = [];
@@ -500,7 +479,6 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
  *
  * @return string $message
  *
- * @author Benjamin
  */
 function seopress_notice_permalinks() {
 	global $pagenow;
@@ -523,7 +501,6 @@ add_action('admin_notices', 'seopress_notice_permalinks');
  *
  * @return string $message
  *
- * @author Benjamin
  */
 function seopress_notice_no_rewrite_url() {
 	//Check we are on the Permalink settings page
@@ -556,8 +533,6 @@ add_action('admin_notices', 'seopress_notice_no_rewrite_url');
  * @param mixed  $tooltip_code
  *
  * @return string tooltip title, tooltip description, tooltip url
- *
- * @author Benjamin
  */
 function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
 	$html =
@@ -581,8 +556,6 @@ function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
  * @param mixed  $tooltip_desc
  *
  * @return string tooltip title, tooltip description, tooltip url
- *
- * @author Benjamin
  */
 function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc) {
 	$html =
@@ -605,8 +578,6 @@ function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc) {
  * @param mixed  $tooltip_desc
  *
  * @return string tooltip title, tooltip description, tooltip url
- *
- * @author Benjamin
  */
 function seopress_tooltip_link($tooltip_anchor, $tooltip_desc) {
 	$html = '<a href="' . $tooltip_anchor . '"
@@ -628,8 +599,6 @@ function seopress_tooltip_link($tooltip_anchor, $tooltip_desc) {
  * @param mixed $text
  *
  * @return mixed $text
- *
- * @author Benjamin
  */
 function seopress_remove_utf8_bom($text) {
 	$bom  = pack('H*', 'EFBBBF');
@@ -642,8 +611,6 @@ function seopress_remove_utf8_bom($text) {
  * Filter the capability to allow other roles to use the plugin.
  *
  * @since 3.8.2
- *
- * @author Julio Potier
  *
  * @return string
  *
@@ -664,8 +631,6 @@ function seopress_capability($cap, $context = '') {
  * Check if the page is one of ours.
  *
  * @since 3.8.2
- *
- * @author Julio Potier
  *
  * @return bool
  */
@@ -689,8 +654,6 @@ function is_seopress_page() {
  * Only add our notices on our pages.
  *
  * @since 3.8.2
- *
- * @author Julio Potier
  *
  * @return bool
  */
@@ -716,11 +679,24 @@ function seopress_remove_other_notices() {
 add_action('in_admin_header', 'seopress_remove_other_notices', 1000);//keep this value high to remove other notices
 
 /**
+ * Only add our notices on our pages.
+ *
+ * @since 8.2.0
+ *
+ * @return bool
+ */
+function seopress_remove_other_plugin_notices() {
+	if (is_seopress_page()) {
+		//SEOKEY plugin doesn't hook properly, we have to make a specific case
+		remove_all_filters('seokey_filter_admin_notices_launch', 10);
+	}
+}
+add_action('admin_init', 'seopress_remove_other_plugin_notices');
+
+/**
  * We replace the WP action by ours.
  *
  * @since 3.8.2
- *
- * @author Julio Potier
  *
  * @return bool
  */
@@ -732,8 +708,6 @@ function seopress_admin_notices() {
  * Check if a key exists in a multidimensional array.
  *
  * @since 3.8.2
- *
- * @author Benjamin Denis
  *
  * @return bool
  *
@@ -762,8 +736,6 @@ function seopress_if_key_exists(array $arr, $key) {
  *
  * @since 5.0
  *
- * @author Benjamin Denis
- *
  * @param mixed $value
  * @param mixed $classes
  * @param mixed $type
@@ -785,7 +757,6 @@ function sp_submit_button($value = '', $classes = 'btn btnPrimary', $type = 'sub
  *
  * @since 5.0
  *
- * @author Benjamin Denis
  * @return
  */
 function seopress_btn_secondary_classes() {
@@ -810,8 +781,6 @@ function seopress_btn_secondary_classes() {
  * @param string $feature
  *
  * @return string 1 if true
- *
- * @author Benjamin
  */
 function seopress_get_toggle_option($feature) {
 	$seopress_get_toggle_option = get_option('seopress_toggle');
@@ -825,11 +794,10 @@ function seopress_get_toggle_option($feature) {
 	}
 }
 
-/*
+/**
  * Disable Add to cart GA tracking code on archive page / related products for Elementor PRO to avoid a JS conflict
  * @since 5.3
  * @return empty string
- * @author Benjamin
  */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if (is_plugin_active('elementor-pro/elementor-pro.php')) {

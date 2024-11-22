@@ -34,6 +34,10 @@ class PreviewMetaTitle implements ExecuteHooksBackend {
         $homeId      = isset($_GET['home_id']) ? (int) $_GET['home_id'] : null;
         $termId      = isset($_GET['term_id']) ? (int) $_GET['term_id'] : null;
 
+        if ( !current_user_can('edit_post', $postId) ) {
+            return;
+        }
+
         $contextPage = seopress_get_service('ContextPage')->buildContextWithCurrentId((int) $_GET['post_id']);
         if ($postId) {
             $contextPage->setPostById((int) $_GET['post_id']);
