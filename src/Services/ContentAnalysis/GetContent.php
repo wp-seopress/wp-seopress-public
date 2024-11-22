@@ -106,7 +106,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['schemas']['impact'] ? $analyzes['schemas']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -144,7 +146,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['old_post']['impact'] ? $analyzes['old_post']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -195,7 +199,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['keywords_permalink']['impact'] ? $analyzes['keywords_permalink']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -290,7 +296,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['headings']['impact'] ? $analyzes['headings']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         //H2
@@ -333,7 +341,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['headings']['impact'] ? $analyzes['headings']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         //H3
@@ -376,7 +386,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['headings']['impact'] ? $analyzes['headings']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -696,7 +708,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['social']['impact'] ? $analyzes['social']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         //og:url
@@ -971,7 +985,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['social']['impact'] ? $analyzes['social']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -1082,7 +1098,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['robots']['impact'] ? $analyzes['robots']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -1157,7 +1175,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['img_alt']['impact'] ? $analyzes['img_alt']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -1205,7 +1225,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['nofollow_links']['impact'] ? $analyzes['nofollow_links']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -1249,7 +1271,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['outbound_links']['impact'] ? $analyzes['outbound_links']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -1299,7 +1323,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['internal_links']['impact'] ? $analyzes['internal_links']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;
@@ -1360,7 +1386,9 @@ class GetContent
         $issue['issue_priority'] = $analyzes['all_canonical']['impact'] ? $analyzes['all_canonical']['impact'] : 0;
 
         if ($this->seo_issues_database && method_exists($this->seo_issues_database, 'saveData')) {
-            $this->seo_issues_database->saveData($post->ID, $issue);
+            if (isset($issue['issue_name'])) {
+                $this->seo_issues_database->saveData($post->ID, $issue);
+            }
         }
 
         return $analyzes;

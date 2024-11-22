@@ -212,6 +212,15 @@ class NoticeOption
     }
 
     /**
+     * @since 8.3.0
+     *
+     * @return string
+     */
+    public function getNoticeXMLSitemaps(){
+        return $this->searchOptionByKey('notice-xml-sitemaps');
+    }
+
+    /**
      * @since 6.0.0
      *
      * @return string

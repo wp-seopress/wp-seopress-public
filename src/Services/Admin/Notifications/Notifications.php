@@ -21,6 +21,7 @@ class Notifications {
 		$alerts_low = 0;
 		$alerts_medium = 0;
 		$alerts_high = 0;
+        $theme = wp_get_theme();
 
 		$status = false;
 		if ('1' !== seopress_get_service('NoticeOption')->getNoticeReview()) {
@@ -44,7 +45,6 @@ class Notifications {
 		];
 
 		$status = false;
-		$theme                     = wp_get_theme();
 		if ('bricks' == $theme->template || 'Bricks' == $theme->parent_theme) {
 			$bricks_options = get_option('bricks_global_settings');
 			if (!empty($bricks_options)) {
@@ -85,6 +85,33 @@ class Notifications {
 						],
 						'link' => [
 							'en'       => admin_url('admin.php?page=bricks-settings'),
+							'title'    => __('Fix this!', 'wp-seopress'),
+							'external' => false,
+						],
+						'deleteable' => false,
+						'status' => $status ? $status : false,
+					];
+				}
+			}
+		}
+
+		$status = false;
+		if ('dt-the7' == $theme->template || 'dt-the7' == $theme->parent_theme) {
+			$the7_options = get_option('the7');
+			if (!empty($the7_options)) {
+                if (!empty($the7_options['the7_opengraph_tags']) && $the7_options['the7_opengraph_tags'] ==='1') {
+					$alerts_high++;
+					$status = true;
+
+					$args[] = [
+						'id'     => 'notice-dt-the7-og',
+						'title'  => __('The7 theme is not correctly setup for social sharing!', 'wp-seopress'),
+						'desc'   => __('You must disable "The7 OpenGraph tags" option from The7 advanced settings page to avoid any social sharing issues.', 'wp-seopress'),
+						'impact' => [
+							'high' => __('High impact', 'wp-seopress'),
+						],
+						'link' => [
+							'en'       => admin_url('admin.php?page=of-advanced-menu&tab=advanced-settings-tab&mark=the7_opengraph_tags#section-the7_opengraph_tags'),
 							'title'    => __('Fix this!', 'wp-seopress'),
 							'external' => false,
 						],
@@ -186,7 +213,6 @@ class Notifications {
 		}
 
 		//DIVI SEO options conflict
-		$theme = wp_get_theme();
 		if ('Divi' == $theme->template || 'Divi' == $theme->parent_theme) {
 			$divi_options = get_option('et_divi');
 			if (! empty($divi_options)) {
@@ -358,7 +384,6 @@ class Notifications {
 		//Enfold theme
 		$avia_options_enfold       = get_option('avia_options_enfold');
 		$avia_options_enfold_child = get_option('avia_options_enfold_child');
-		$theme                     = wp_get_theme();
 		$status = false;
 		if ('enfold' == $theme->template || 'enfold' == $theme->parent_theme) {
 			if ('plugin' != $avia_options_enfold['avia']['seo_robots'] || 'plugin' != $avia_options_enfold_child['avia']['seo_robots']) {
@@ -705,8 +730,12 @@ class Notifications {
 			];
 		}
 
+        $status = false;
 		if ('1' !== seopress_get_service('SitemapOption')->isEnabled()) {
-			$alerts_medium++;
+            if ('1' !== seopress_get_service('NoticeOption')->getNoticeXMLSitemaps()) {
+				$alerts_medium++;
+				$status = true;
+			}
 			$args[] = [
 				'id'     => 'notice-xml-sitemaps',
 				'title'  => __('You don\'t have an XML Sitemap!', 'wp-seopress'),
@@ -719,8 +748,8 @@ class Notifications {
 					'title'    => __('Fix this!', 'wp-seopress'),
 					'external' => false,
 				],
-				'deleteable' => false,
-				'status' => true,
+				'deleteable' => true,
+				'status' => $status ? $status : false,
 			];
 		}
 

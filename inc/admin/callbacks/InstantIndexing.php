@@ -92,7 +92,7 @@ function seopress_instant_indexing_manual_batch_callback() {
     $google_response     = isset($log['google']['response']) &&  is_array($log['google']['response']) ? $log['google']['response'] : null;
 
     printf(
-'<textarea id="seopress_instant_indexing_manual_batch" name="seopress_instant_indexing_option_name[seopress_instant_indexing_manual_batch]" rows="20" placeholder="' . esc_html__('Enter one URL per line to submit them to search engines (max 100 URLs)', 'wp-seopress') . '" aria-label="' . esc_attr__('Enter one URL per line to submit them to search engines (max 100 URLs)', 'wp-seopress') . '">%s</textarea>',
+'<textarea id="seopress_instant_indexing_manual_batch" name="seopress_instant_indexing_option_name[seopress_instant_indexing_manual_batch]" rows="35" placeholder="' . esc_html__('Enter one URL per line to submit them to search engines (max 100 URLs)', 'wp-seopress') . '" aria-label="' . esc_attr__('Enter one URL per line to submit them to search engines (max 100 URLs)', 'wp-seopress') . '">%s</textarea>',
 esc_html($check));
 ?>
 

@@ -60,6 +60,14 @@ add_settings_field(
 );
 
 add_settings_field(
+    'seopress_advanced_advanced_image_auto_alt_txt', // ID
+    __('Automatically set alt text on already inserted image', 'wp-seopress'), // Title
+    'seopress_advanced_advanced_image_auto_alt_txt_callback', // Callback
+    'seopress-settings-admin-advanced-image', // Page
+    'seopress_setting_section_advanced_image' // Section
+);
+
+add_settings_field(
     'seopress_advanced_advanced_image_auto_caption_editor', // ID
     __('Automatically set the image Caption', 'wp-seopress'), // Title
     'seopress_advanced_advanced_image_auto_caption_editor_callback', // Callback

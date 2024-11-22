@@ -410,6 +410,13 @@ class AdvancedOption
     }
 
     /**
+     * @since 8.3
+     */
+    public function getAdvancedImageAutoAltTxt(){
+        return $this->searchOptionByKey('seopress_advanced_advanced_image_auto_alt_txt');
+    }
+
+    /**
      * @since 5.8
      */
     public function getSecurityGaWidgetRole(){

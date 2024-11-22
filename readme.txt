@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 8.2
+Stable tag: 8.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 <ul>
 	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Use Artificial Intelligence (GPT 4 / Vision and GPT 3.5 Turbo) to generate SEO metadata and alternative texts for image files. Bulk actions supported.</strong></li>
 	<li><a href="https://www.seopress.org/features/site-audit/" target="_blank"><strong>Site Audit: Detect technical issues that could harm your site's SEO directly from your WordPress administration.</strong></li>
+    <li><a href="https://www.seopress.org/features/seo-alerts/" target="_blank">Receive SEO alerts to prevent breaking your SEO before it's too late</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/" target="_blank"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
 	<li><a href="https://www.seopress.org/features/sitemaps/" target="_blank"><strong>Video XML Sitemap</strong></a> to improve rankings in video search results. YouTube videos are automatically added.</li>
 	<li>Internal linking suggestions</li>
@@ -261,15 +262,28 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 8.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-2/">Read the blog post update</a> =
-* NEW Site Audit: Detect technical issues that could harm your site's SEO directly from your WordPress administration (https://www.seopress.org/features/site-audit/) 🎉
-* NEW Add a notice to the Block Editor on slug changes to quickly create a redirection to keep your SEO (PRO)
-* INFO Table of contents Block: allow "paragraph" / "div" for the title of the block
-* INFO Add notice to robots.txt settings tab if a physical file is already present on your server
-* INFO Support robots.txt file for WP multisite (subdirectories installation with custom domains)
-* INFO Strengthened security
-* FIX Wizard redirect when updating SEOPress PRO
-* FIX Internal links list in standard content analysis metabox
+= 8.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-3/">Read the blog post update</a> =
+* NEW Site Audit #2 iteration 🎉 (PRO)
+- Improved CSV export functionality
+- Option to select which post types to scan from the settings
+- Added an "Ignore" button for each issue
+- Receive an email alert when the site audit task is completed
+- Added site audit scan duration
+- Enhanced user interface
+- Improved column ordering and sorting
+- Enhanced the seopress_site_audit_query hook
+- Fix false positives
+* NEW Automatically set alt text on already inserted image (SEO, Advanced, Image SEO tab) 🎉
+* NEW "seopress_dashboard_site_overview_tabs" to filter the tabs of the Dashboard Site Overview block (https://www.seopress.org/support/hooks/filter-tabs-in-the-dashboard-site-overview-block/)
+* NEW Add new default WooCommerce rules button to robots.txt tab (PRO)
+* NEW 'seopress_instant_indexing_permalink' hook to filter URL sent automatically to IndexNow API (https://www.seopress.org/support/hooks/filter-post-object-sent-automatically-to-indexnow-api/)
+* NEW 'seopress_site_audit_after_processs' hook to run action after site audit is completed (https://www.seopress.org/support/hooks/run-action-after-site-audit-is-completed/)
+* INFO The notification “You don’t have an XML sitemap!” can now be ignored
+* INFO Improve compatibility with Malcare plugin
+* INFO Add a notice for The7 theme to invite users to disable SEO settings to avoid any compatibility issue
+* INFO Improve redirects import tool from a CSV file by cleaning original URL if first character is a slash
+* FIX Slug change notice with the Block Editor
+* FIX PHP Warning "new_url"
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

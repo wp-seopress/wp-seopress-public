@@ -333,6 +333,11 @@ body .seopress-option .CodeMirror-wrap {
     width: 100%;
 }
 
+body .seopress-option #seopress_instant_indexing_manual_batch {
+    max-width: 100%;
+    width: 100%;
+}
+
 #seopress-search {
     margin-right: 16px;
     max-width: 100%;
@@ -1986,6 +1991,10 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     max-width: 35rem;
 }
 
+#tab_seopress_instant_indexing_general .wrap-sp-progress {
+    max-width: 100%;
+}
+
 #seopress_cpt .wrap-seopress-counters,
 #seopress_pro_cpt .wrap-seopress-counters,
 .seopress-styles .wrap-seopress-counters,
@@ -2445,11 +2454,11 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 .seopress-notice {
     margin: 5px 0 35px 15px;
     position: relative;
-    top: 65px;
+    top: 85px;
     left: 25px;
     border-left: 4px solid var(--sp-wp-default-color);
     padding: 8px 12px;
-    width: calc(100% - 80px);
+    width: calc(100% - 60px);
     z-index: 10;
 }
 

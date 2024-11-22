@@ -149,6 +149,31 @@ function seopress_advanced_advanced_image_auto_alt_target_kw_callback() {
     }
 }
 
+function seopress_advanced_advanced_image_auto_alt_txt_callback() {
+    $options = get_option('seopress_advanced_option_name');
+
+    $check = isset($options['seopress_advanced_advanced_image_auto_alt_txt']); ?>
+
+<label for="seopress_advanced_advanced_image_auto_alt_txt">
+    <input id="seopress_advanced_advanced_image_auto_alt_txt"
+        name="seopress_advanced_option_name[seopress_advanced_advanced_image_auto_alt_txt]" type="checkbox"
+        <?php if ('1' == $check) { ?>
+    checked="yes"
+    <?php } ?>
+    value="1"/>
+
+    <?php esc_attr_e('Apply the alt text defined in your media library for already inserted images', 'wp-seopress'); ?>
+</label>
+
+<p class="description">
+    <?php esc_attr_e('By default, WordPress does not update image alt texts entered from the media library after they are inserted into the content of a post, page, or publication type. By checking this box, this will be done when the page loads on the fly as long as this option remains active.', 'wp-seopress'); ?>
+</p>
+
+<?php if (isset($options['seopress_advanced_advanced_image_auto_alt_txt'])) {
+        esc_attr($options['seopress_advanced_advanced_image_auto_alt_txt']);
+    }
+}
+
 function seopress_advanced_advanced_image_auto_caption_editor_callback() {
     $options = get_option('seopress_advanced_option_name');
 

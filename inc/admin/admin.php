@@ -180,7 +180,7 @@ class seopress_options
             return;
         }
 
-        //IndewNow======================================================================================
+        //IndewNow=================================================================================
         $seopress_instant_indexing_option_name = get_option('seopress_instant_indexing_option_name');
 
         //Init if option doesn't exist
@@ -197,6 +197,16 @@ class seopress_options
         //Check if the value is an array (important!)
         if (is_array($seopress_instant_indexing_option_name)) {
             add_option('seopress_instant_indexing_option_name', $seopress_instant_indexing_option_name);
+        }
+
+        //Advanced Settings========================================================================
+        $seopress_option_name = get_option('seopress_advanced_option_name', []);
+
+        $seopress_option_name['seopress_advanced_advanced_image_auto_alt_txt'] = '1';
+
+        //Check if the value is an array (important!)
+        if (is_array($seopress_option_name)) {
+            add_option('seopress_advanced_option_name', $seopress_option_name);
         }
     }
 

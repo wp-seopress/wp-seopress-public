@@ -254,3 +254,20 @@ if (!empty(seopress_get_service('AdvancedOption')->getAdvancedImageAutoAltTarget
     }
     add_filter('the_content', 'seopress_auto_img_alt_target_kw', 20);
 }
+
+//Automatically set alt text on already inserted image (WP 6.0 required)
+if (!empty(seopress_get_service('AdvancedOption')->getAdvancedImageAutoAltTxt())) {
+    function seopress_auto_img_alt_txt($filtered_image, $context, $attachment_id) {
+        if ($attachment_id) {
+            if (!preg_match('/<img[^>]+alt=(["\'])(.*?)\1/', $filtered_image) || preg_match('/<img[^>]+alt=(["\'])(\s*)\1/', $filtered_image)) {
+
+                $alt_text = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
+
+                $filtered_image = str_replace('<img', '<img alt="' . esc_attr($alt_text) . '"', $filtered_image);
+            }
+        }
+
+        return $filtered_image;
+    }
+    add_filter('wp_content_img_tag', 'seopress_auto_img_alt_txt', 10, 3);
+}

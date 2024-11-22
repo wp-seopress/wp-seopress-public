@@ -14,6 +14,7 @@ jQuery(document).ready(function ($) {
         "notice-review",
         "notice-trailingslash",
         "notice-posts-number",
+        "notice-xml-sitemaps",
         "notice-rss-use-excerpt",
         "notice-ga-ids",
         "notice-search-console",
