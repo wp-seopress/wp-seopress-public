@@ -677,7 +677,7 @@ function seopress_social_fv_creator_callback()
     <p class="description">
         <?php esc_attr_e('Improve the sharing of your posts on Mastodon.', 'wp-seopress'); ?>
         <a href="https://blog.joinmastodon.org/2024/07/highlighting-journalism-on-mastodon/" target="_blank" class="seopress-help">
-            <?php esc_html_e('Learn more', 'wp-seopress-pro'); ?>
+            <?php esc_html_e('Learn more', 'wp-seopress'); ?>
         </a>
         <span class="seopress-help dashicons dashicons-external"></span>
     </p>

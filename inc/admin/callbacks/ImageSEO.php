@@ -166,7 +166,7 @@ function seopress_advanced_advanced_image_auto_alt_txt_callback() {
 </label>
 
 <p class="description">
-    <?php esc_attr_e('By default, WordPress does not update image alt texts entered from the media library after they are inserted into the content of a post, page, or publication type. By checking this box, this will be done when the page loads on the fly as long as this option remains active.', 'wp-seopress'); ?>
+    <?php esc_attr_e('By default, WordPress does not update image alt texts entered from the media library after they are inserted into the content of a post, page, or post type. By checking this box, this will be done when the page loads on the fly as long as this option remains active.', 'wp-seopress'); ?>
 </p>
 
 <?php if (isset($options['seopress_advanced_advanced_image_auto_alt_txt'])) {

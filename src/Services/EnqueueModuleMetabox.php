@@ -26,6 +26,10 @@ class EnqueueModuleMetabox
             $response = false;
         }
 
+		if (isset($_GET['fb-edit'])) {
+            $response = false;
+        }
+
         if (isset($_GET['brickspreview'])) {
             $response = false;
         }

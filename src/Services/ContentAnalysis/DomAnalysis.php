@@ -136,7 +136,7 @@ class DomAnalysis
 
         //Old post
         $data['old_post'] = [
-            'value' => strtotime($post->post_modified) < strtotime('-365 days')
+            'value' => isset($post->post_modified) && strtotime($post->post_modified) < strtotime('-365 days')
         ];
 
         return $data;

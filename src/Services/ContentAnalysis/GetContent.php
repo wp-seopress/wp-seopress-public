@@ -1076,23 +1076,6 @@ class GetContent
             $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('We found no meta robots on this page. It means, your page is index,follow. Search engines will index it, and follow links. ', 'wp-seopress') . '</p>';
         }
 
-        //Meta Google
-        if (! empty($data['meta_google'])) {
-            $meta_google = $data['meta_google'];
-            if (preg_match('/nositelinkssearchbox/', wp_json_encode($meta_google))) {
-                if ('high' != $analyzes['robots']['impact']) {
-                    $analyzes['robots']['impact'] = 'medium';
-                }
-                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('<strong>nositelinkssearchbox</strong> is on! Google will not display a sitelinks searchbox in search results.', 'wp-seopress') . '</p>';
-
-                $issue['issue_name'] = 'meta_robots_nositelinkssearchbox';
-            } else {
-                $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>nositelinkssearchbox</strong> is off. Google will probably display a sitelinks searchbox in search results.', 'wp-seopress') . '</p>';
-            }
-        } else {
-            $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>nositelinkssearchbox</strong> is off. Google will probably display a sitelinks searchbox in search results.', 'wp-seopress') . '</p>';
-        }
-
         $analyzes['robots']['desc'] = $desc;
 
         $issue['issue_priority'] = $analyzes['robots']['impact'] ? $analyzes['robots']['impact'] : 0;
@@ -1248,7 +1231,7 @@ class GetContent
             $this->seo_issues_repository->deleteSEOIssue($post->ID, $issue['issue_type']);
         }
 
-        $desc = '<p>' . __('Internet is built on the principle of hyperlink. It is therefore perfectly normal to make links between different websites. However, avoid making links to low quality sites, SPAM... If you are not sure about the quality of a site, add the attribute "nofollow" to your link.') . '</p>';
+        $desc = '<p>' . __('Internet is built on the principle of hyperlink. It is therefore perfectly normal to make links between different websites. However, avoid making links to low quality sites, SPAM... If you are not sure about the quality of a site, add the attribute "nofollow" to your link.', 'wp-seopress') . '</p>';
         if (isset($data['outbound_links']) && is_array($data['outbound_links']) && !empty($data['outbound_links'])) {
             $count = count($data['outbound_links']);
 
@@ -1346,7 +1329,7 @@ class GetContent
             $this->seo_issues_repository->deleteSEOIssue($post->ID, $issue['issue_type']);
         }
 
-        $desc = '<p>' . __('A canonical URL is required by search engines to handle duplicate content.') . '</p>';
+        $desc = '<p>' . __('A canonical URL is required by search engines to handle duplicate content.', 'wp-seopress') . '</p>';
 
         if (isset($data['canonical']) && is_array($data['canonical']) && !empty($data['canonical'])) {
             $count = count($data['canonical']);

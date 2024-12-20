@@ -180,7 +180,7 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
 								<h3>
 									<?php
 								esc_html_e('Google Snippet Preview', 'wp-seopress');
-								echo seopress_tooltip(esc_html__('Snippet Preview', 'wp-seopress'), wp_kses_post(esc_html__('The Google preview is a simulation. <br>There is no reliable preview because it depends on the screen resolution, the device used, the expression sought, and Google. <br>There is not one snippet for one URL but several. <br>All the data in this overview comes directly from your source code. <br>This is what the crawlers will see.', 'wp-seopress')), null);
+								echo seopress_tooltip(esc_html__('Snippet Preview', 'wp-seopress'), wp_kses_post(__('The Google preview is a simulation. <br>There is no reliable preview because it depends on the screen resolution, the device used, the expression sought, and Google. <br>There is not one snippet for one URL but several. <br>All the data in this overview comes directly from your source code. <br>This is what the crawlers will see.', 'wp-seopress')), null);
 							?>
 								</h3>
 								<p><?php esc_html_e('This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview. Note that Google may optionally display an image of your article.', 'wp-seopress'); ?>

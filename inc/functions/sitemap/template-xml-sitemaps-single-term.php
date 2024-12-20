@@ -89,9 +89,14 @@ function seopress_xml_sitemap_single_term() {
         $path = get_query_var('seopress_cpt');
     }
 
+    $request_uri = '';
+    if (isset($_SERVER['REQUEST_URI'])) {
+        $request_uri = esc_url_raw(wp_unslash($_SERVER['REQUEST_URI']));
+    }
+
     remove_all_filters('pre_get_posts');
 
-    $offset = basename(wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '.xml');
+    $offset = basename(wp_parse_url($request_uri, PHP_URL_PATH), '.xml');
     $offset = preg_match_all('/\d+/', $offset, $matches);
     $offset = end($matches[0]);
 

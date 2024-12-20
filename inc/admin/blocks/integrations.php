@@ -14,9 +14,7 @@
 				<div class="seopress-d-flex seopress-space-between">
 					<h2><?php esc_attr_e('Integrations', 'wp-seopress'); ?></h2>
 					<div>
-						<a href="<?php echo esc_url($docs['integrations']['all']); ?>" class="seopress-help" target="_blank" title="<?php esc_attr_e('See all our integrations - Open in a new tab', 'wp-seopress'); ?>">
-							<?php esc_attr_e('See all our integrations', 'wp-seopress'); ?>
-						</a>
+						<a href="<?php echo esc_url($docs['integrations']['all']); ?>" class="seopress-help" target="_blank" title="<?php esc_attr_e('See all our integrations - Open in a new tab', 'wp-seopress'); ?>"><?php esc_attr_e('See all our integrations', 'wp-seopress'); ?></a>
 						<span class="seopress-help dashicons dashicons-external"></span>
 					</div>
 				</div>

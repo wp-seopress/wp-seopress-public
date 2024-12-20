@@ -5,7 +5,11 @@ if ('' !== get_query_var('seopress_cpt')) {
 	$path = get_query_var('seopress_cpt');
 }
 
-$offset = basename(wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '.xml');
+$request_uri = '';
+if (isset($_SERVER['REQUEST_URI'])) {
+	$request_uri = esc_url_raw(wp_unslash($_SERVER['REQUEST_URI']));
+}
+$offset = basename(wp_parse_url($request_uri, PHP_URL_PATH), '.xml');
 $offset = preg_match_all('/\d+/', $offset, $matches);
 $offset = end($matches[0]);
 
@@ -51,7 +55,13 @@ if (true == get_post_type_archive_link($path) && 0 == $offset) {
 							// Switch Language
 							do_action( 'wpml_switch_language', $language_infos['language_code']);
 
-							$archive_links[] = htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path))));
+							if (is_plugin_active('woocommerce/woocommerce.php') && $path === 'product' ) {
+								if ( function_exists( 'wc_get_page_id' ) ) {
+									$archive_links[] = htmlspecialchars(urldecode(user_trailingslashit(get_permalink(wc_get_page_id('shop')))));
+								}
+							} else {
+								$archive_links[] = htmlspecialchars(urldecode(user_trailingslashit(get_post_type_archive_link($path))));
+							}
 
 							// Restore language to the original
 							do_action( 'wpml_switch_language', $original_language);
@@ -98,7 +108,7 @@ if ('attachment' === $path) {
 	unset($args['post_status']);
 }
 
-if (is_plugin_active('woocommerce/woocommerce.php') && $path == 'product' ) {
+if (is_plugin_active('woocommerce/woocommerce.php') && $path === 'product' ) {
 	$args['tax_query'][] = [
 		'taxonomy' => 'product_visibility',
 		'field'    => 'slug',

@@ -302,7 +302,7 @@ function seopress_advanced_advanced_wp_wlw_callback() {
 	<?php esc_attr_e('Remove Windows Live Writer meta tag in source code', 'wp-seopress'); ?>
 </label>
 
-<pre><?php esc_attr_e('<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.example.com/wp-includes/wlwmanifest.xml" />'); ?></pre>
+<pre>&lt;link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.example.com/wp-includes/wlwmanifest.xml" /&gt;</pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_wlw'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_wlw']);
@@ -328,7 +328,7 @@ function seopress_advanced_advanced_wp_rsd_callback() {
 	<?php esc_attr_e('WordPress Site Health feature will return a HTTPS warning if you enable this option. This is a false positive of course.', 'wp-seopress'); ?>
 </p>
 
-<pre><?php esc_attr_e('<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.example.com/xmlrpc.php?rsd" />'); ?></pre>
+<pre>&lt;link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.example.com/xmlrpc.php?rsd" /&gt;</pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_rsd'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_rsd']);
@@ -354,9 +354,9 @@ function seopress_advanced_advanced_wp_oembed_callback() {
 	<?php esc_attr_e('This will prevent other blogs to embed one of your posts on their site.', 'wp-seopress'); ?>
 </p>
 
-<pre><?php esc_attr_e('<link rel="alternate" type="application/json+oembed" href="https://www.example.com/wp-json/oembed/1.0/embed?url=https://www.example.com/my-blog-post/" />'); ?></pre>
+<pre>&lt;link rel="alternate" type="application/json+oembed" href="https://www.example.com/wp-json/oembed/1.0/embed?url=https://www.example.com/my-blog-post/" /&gt;</pre>
 
-<pre><?php esc_attr_e('<link rel="alternate" type="text/xml+oembed" href="https://www.example.com/wp-json/oembed/1.0/embed?url=https://www.example.com/my-blog-post/&format=xml" />'); ?></pre>
+<pre>&lt;link rel="alternate" type="text/xml+oembed" href="https://www.example.com/wp-json/oembed/1.0/embed?url=https://www.example.com/my-blog-post/&format=xml" /&gt;</pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_oembed'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_oembed']);
@@ -382,7 +382,7 @@ function seopress_advanced_advanced_wp_x_pingback_callback() {
 	<?php esc_attr_e('This will disable pingbacks/trackbacks and increase security (DDOS).', 'wp-seopress'); ?>
 </p>
 
-<pre><?php esc_attr_e('X-Pingback: https://www.example.com/xmlrpc.php'); ?></pre>
+<pre>X-Pingback: https://www.example.com/xmlrpc.php</pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_x_pingback'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_x_pingback']);
@@ -408,7 +408,7 @@ function seopress_advanced_advanced_wp_x_powered_by_callback() {
 	<?php esc_attr_e('By default, WordPress uses this to display your PHP version.', 'wp-seopress'); ?>
 </p>
 
-<pre><?php esc_attr_e('X-Powered-By: PHP/8.1.9'); ?></pre>
+<pre>X-Powered-By: PHP/8.4</pre>
 
 <?php if (isset($options['seopress_advanced_advanced_wp_x_powered_by'])) {
 		esc_attr($options['seopress_advanced_advanced_wp_x_powered_by']);

@@ -26,7 +26,7 @@ function seopress_premium_seo_pack_migration() {
 
         if ($offset > $total_count_posts) {
             $count_items = $total_count_posts;
-            wp_reset_query();
+            wp_reset_postdata();
 
             $premium_query_terms = get_option('psp_taxonomy_seo');
 
@@ -61,7 +61,7 @@ function seopress_premium_seo_pack_migration() {
                 }
             }
             $offset = 'done';
-            wp_reset_query();
+            wp_reset_postdata();
         } else {
             $args = [
                 'posts_per_page' => $increment,

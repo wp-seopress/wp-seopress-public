@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wpseopress/faq-block-v2",
+  "title": "FAQ",
+  "description": "Allows to easily build FAQs",
+  "icon": "index-card",
+  "category": "wpseopress",
+  "textdomain": "wp-seopress",
+  "allowedBlocks": [
+    "core/details"
+  ],
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": true,
+    "background": {
+      "backgroundImage": true,
+      "backgroundSize": true
+    },
+    "className": true,
+    "color": {
+      "background": true,
+      "heading": false,
+      "link": true,
+      "text": true,
+      "gradients": true
+    },
+    "layout": true,
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "textAlign": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

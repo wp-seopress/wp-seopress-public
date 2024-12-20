@@ -24,7 +24,7 @@ class DomFilterContent
         $internalErrors          = libxml_use_internal_errors(true);
         $dom->preserveWhiteSpace = false;
 
-        $dom->loadHTML($str);
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $str);
 
         //Disable wptexturize
         add_filter('run_wptexturize', '__return_false');

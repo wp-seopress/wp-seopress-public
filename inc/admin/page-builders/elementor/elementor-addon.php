@@ -112,8 +112,8 @@ function seopress_elementor_tabs_seo_start() {
 
 function seopress_elementor_tabs_seo_end() {
 	$output  = \ob_get_clean();
-	$search  = '/(<div class="elementor-component-tab elementor-panel-navigation-tab" data-tab="global">.*<\/div>)/m';
-	$replace = '${1}<div id="seopress-seo-tab" class="elementor-panel-navigation-tab" data-tab="seo">SEO</div>';
+	$search  = '/(<(div|button) class="elementor-component-tab elementor-panel-navigation-tab" data-tab="global">.*<\/(div|button)>)/m';
+	$replace = '${1}<${2} id="seopress-seo-tab" class="elementor-component-tab elementor-panel-navigation-tab" data-tab="seo">SEO</${2}>';
 	echo \preg_replace(
 		$search,
 		$replace,

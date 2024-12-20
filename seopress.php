@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 8.3.1
+Version: 8.4
 Author URI: https://www.seopress.org/
 License: GPLv2 or later
 Text Domain: wp-seopress
@@ -83,7 +83,7 @@ add_action('admin_init', 'seopress_redirect_after_activation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '8.3.1');
+define('SEOPRESS_VERSION', '8.4');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -112,15 +112,15 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//SEOPRESS INIT = Admin + Core + API + Translation
+//SEOPRESS INIT = Admin + Core + API
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_init($hook) {
-	//i18n
-	load_plugin_textdomain('wp-seopress', false, dirname(plugin_basename(__FILE__)) . '/languages/');
-
 	global $pagenow;
 	global $typenow;
 	global $wp_version;
+
+	//i18n
+	load_plugin_textdomain('wp-seopress', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 
     //Docs (must be loaded there)
     require_once dirname(__FILE__) . '/inc/admin/docs/DocsLinks.php';
@@ -152,8 +152,8 @@ function seopress_init($hook) {
 
 	remove_action('wp_head', 'rel_canonical'); //remove default WordPress Canonical
 
-	//Elementor
-	if (did_action('elementor/loaded')) {
+	// Elementor
+	if (did_action('elementor/loaded') && apply_filters( 'seopress_elementor_integration_enabled', true ) === true) {
 		include_once dirname(__FILE__) . '/inc/admin/page-builders/elementor/elementor-addon.php';
 	}
 
@@ -168,6 +168,12 @@ function seopress_init($hook) {
 	}
 }
 add_action('plugins_loaded', 'seopress_init', 999);
+
+function seopress_init_i18n() {
+    //i18n
+    load_plugin_textdomain('wp-seopress', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+}
+add_action('init', 'seopress_init_i18n');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Loads dynamic variables for titles, metas, schemas...
@@ -424,15 +430,41 @@ function seopress_add_admin_options_scripts($hook) {
 
         $settings = wp_enqueue_code_editor( [ 'type' => 'text/html' ] );
 
-        $initializeScript = sprintf(
-            'jQuery( function() { wp.codeEditor.initialize( "%s", %s ); } );',
-            '%s',
-            wp_json_encode( $settings )
-        );
-
-        wp_add_inline_script( 'code-editor', sprintf( $initializeScript, 'seopress_google_analytics_other_tracking' ) );
-        wp_add_inline_script( 'code-editor', sprintf( $initializeScript, 'seopress_google_analytics_other_tracking_body' ) );
-        wp_add_inline_script( 'code-editor', sprintf( $initializeScript, 'seopress_google_analytics_other_tracking_footer' ) );
+		wp_add_inline_script(
+			'code-editor',
+			sprintf(
+				'jQuery(function($) {
+					// Function to initialize a single Code Editor
+					function initializeEditor(elementId, settings) {
+						var $textarea = $("#" + elementId);
+		
+						// Check if the editor is already initialized
+						if (!$textarea.data("codeMirrorInitialized")) {
+							wp.codeEditor.initialize(elementId, settings);
+							$textarea.data("codeMirrorInitialized", true); // Mark as initialized
+						}
+					}
+		
+					// Function to initialize all editors
+					function initializeEditors() {
+						initializeEditor("seopress_google_analytics_other_tracking", %s);
+						initializeEditor("seopress_google_analytics_other_tracking_body", %s);
+						initializeEditor("seopress_google_analytics_other_tracking_footer", %s);
+					}
+		
+					// Run initialization when the page loads
+					$(document).ready(function() {
+						initializeEditors();
+		
+						// Recheck visibility after a short delay for hidden elements (e.g., inside tabs)
+						setTimeout(initializeEditors, 100);
+					});
+				});',
+				wp_json_encode($settings),
+				wp_json_encode($settings),
+				wp_json_encode($settings)
+			)
+		);
 	}
 
 	if ('seopress-social' === $_GET['page']) {
@@ -456,13 +488,37 @@ function seopress_add_admin_options_scripts($hook) {
 
         $settings = wp_enqueue_code_editor( [ 'type' => 'application/json' ] );
 
-        $initializeScript = sprintf(
-            'jQuery( function() { wp.codeEditor.initialize( "%s", %s ); } );',
-            '%s',
-            wp_json_encode( $settings )
-        );
-
-        wp_add_inline_script( 'code-editor', sprintf( $initializeScript, 'seopress_instant_indexing_google_api_key' ) );
+		wp_add_inline_script(
+			'code-editor',
+			sprintf(
+				'jQuery(function($) {
+					// Function to initialize a single Code Editor
+					function initializeEditor(elementId, settings) {
+						var $textarea = $("#" + elementId);
+		
+						// Check if the editor is already initialized
+						if (!$textarea.data("codeMirrorInitialized")) {
+							wp.codeEditor.initialize(elementId, settings);
+							$textarea.data("codeMirrorInitialized", true); // Mark as initialized
+						}
+					}
+		
+					// Function to initialize all editors
+					function initializeEditors() {
+						initializeEditor("seopress_instant_indexing_google_api_key", %s);
+					}
+		
+					// Run initialization when the page loads
+					$(document).ready(function() {
+						initializeEditors();
+		
+						// Recheck visibility after a short delay for hidden elements (e.g., inside tabs)
+						setTimeout(initializeEditors, 100);
+					});
+				});',
+				wp_json_encode($settings)
+			)
+		);
 	}
 
 	//CSV Importer

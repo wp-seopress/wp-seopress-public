@@ -35,6 +35,7 @@ class TitleMeta implements ExecuteHooksFrontend {
         $priority = apply_filters( 'seopress_titles_the_title_priority', 10 );
         add_filter('pre_get_document_title', [$this, 'render'], $priority);
 
+        //Avoid TEC rewriting our title tag on Venue and Organizer pages
         if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
             if (
                 function_exists('tribe_is_event') && tribe_is_event() ||
@@ -49,6 +50,13 @@ class TitleMeta implements ExecuteHooksFrontend {
                 // function_exists('tribe_is_photo') && tribe_is_photo() && is_tax()
             ) {
                 add_filter('pre_get_document_title', 'seopress_titles_the_title', 20);
+            }
+        }
+
+        //Avoid Surecart rewriting our title tag
+        if (is_plugin_active('surecart/surecart.php')) {
+            if (is_singular( 'sc_product' )) {
+                add_filter('pre_get_document_title', 'seopress_titles_the_title', 214748364);
             }
         }
     }

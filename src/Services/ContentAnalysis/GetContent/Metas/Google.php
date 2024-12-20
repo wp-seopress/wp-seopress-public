@@ -12,7 +12,7 @@ class Google {
         foreach ($items as $key => $item) {
             $data[] = $item->nodeValue;
         }
-
+        
         return $data;
     }
 }

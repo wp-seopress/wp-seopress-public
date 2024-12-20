@@ -94,4 +94,34 @@ function seopress_register_blocks() {
         ]
     ]);
     wp_set_script_translations( 'wpseopress/sitemap', 'wp-seopress' );
+
+    // FAQ v2
+    register_block_type( SEOPRESS_PATH_PUBLIC . '/editor/blocks/faq-v2', [
+        'attributes' => array(
+            'printSchema' => array(
+                'type'    => 'boolean',
+                'default' => true,
+            ),
+            'schema' => array(
+                'type'    => 'object',
+                'default' => []
+            ),
+        ),
+    ] );
+    wp_set_script_translations( 'wpseopress/faq-block-v2', 'wp-seopress' );
+}
+
+
+add_filter( 'block_type_metadata', 'seopress_block_type_metadata' );
+/**
+ * Filters block metadata
+ * 
+ * @param   array  $metadata  Block metadata, as in block.json.
+ * @return  array  $metadata
+ */
+function seopress_block_type_metadata( $metadata ){
+    if ( isset( $metadata['name'] ) && 'core/details' === $metadata['name'] ) {
+        $metadata['supports']['anchor'] = true;
+    }
+    return $metadata;
 }

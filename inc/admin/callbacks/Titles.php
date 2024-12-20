@@ -1482,11 +1482,11 @@ function seopress_titles_nositelinkssearchbox_callback()
 		checked="yes"
 		<?php } ?>
 		value="1"/>
-		<?php esc_attr_e('nositelinkssearchbox', 'wp-seopress'); ?>
+		<?php esc_attr_e('Remove Website schema', 'wp-seopress'); ?>
 	</label>
 
 	<p class="description">
-		<?php esc_attr_e('Prevents Google to display a sitelinks searchbox in search results. Enable this option will remove the "Website" schema from your source code.', 'wp-seopress'); ?>
+		<?php esc_attr_e('Note that the alternative site title declared in the Titles and metas settings is used by this.', 'wp-seopress'); ?>
 	</p>
 
 	<?php if (isset($options['seopress_titles_nositelinkssearchbox'])) {

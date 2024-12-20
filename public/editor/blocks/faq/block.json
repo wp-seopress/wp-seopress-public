@@ -1,7 +1,7 @@
 {
   "apiVersion": 2,
   "name": "wpseopress/faq-block",
-  "title": "FAQ",
+  "title": "FAQ (legacy)",
   "description": "Allows to easily build FAQs",
   "icon": "index-card",
   "category": "wpseopress",

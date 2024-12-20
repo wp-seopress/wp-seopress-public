@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.3.1
+Stable tag: 8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -262,31 +262,36 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 8.3.1 =
-* FIX Prevent fatal error to set default values
-
-= 8.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-3/">Read the blog post update</a> =
-* NEW Site Audit #2 iteration 🎉 (PRO)
-- Improved CSV export functionality
-- Option to select which post types to scan from the settings
-- Added an "Ignore" button for each issue
-- Receive an email alert when the site audit task is completed
-- Added site audit scan duration
-- Enhanced user interface
-- Improved column ordering and sorting
-- Enhanced the seopress_site_audit_query hook
-- Fix false positives
-* NEW Automatically set alt text on already inserted image (SEO, Advanced, Image SEO tab) 🎉
-* NEW "seopress_dashboard_site_overview_tabs" to filter the tabs of the Dashboard Site Overview block (https://www.seopress.org/support/hooks/filter-tabs-in-the-dashboard-site-overview-block/)
-* NEW Add new default WooCommerce rules button to robots.txt tab (PRO)
-* NEW 'seopress_instant_indexing_permalink' hook to filter URL sent automatically to IndexNow API (https://www.seopress.org/support/hooks/filter-post-object-sent-automatically-to-indexnow-api/)
-* NEW 'seopress_site_audit_after_processs' hook to run action after site audit is completed (https://www.seopress.org/support/hooks/run-action-after-site-audit-is-completed/)
-* INFO The notification “You don’t have an XML sitemap!” can now be ignored
-* INFO Improve compatibility with Malcare plugin
-* INFO Add a notice for The7 theme to invite users to disable SEO settings to avoid any compatibility issue
-* INFO Improve redirects import tool from a CSV file by cleaning original URL if first character is a slash
-* FIX Slug change notice with the Block Editor
-* FIX PHP Warning "new_url"
+= 8.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-4/">Read the blog post update</a> =
+* NEW Site Audit #3: automatically fix missing alt text on images with AI (PRO)
+* NEW Add a button to block Claude bot in robots.txt (PRO)
+* NEW Table of Contents block for the Full Site Editing (PRO)
+* NEW FAQ Block using the detail block: better reliability and better user experience
+* NEW 'seopress_elementor_integration_enabled' hook to disable our Elementor integration (https://www.seopress.org/support/hooks/disable-seopress-elementor-integration/)
+* INFO Improve security
+* INFO Add all missing columns to CSV export redirects file
+* INFO Bring back the last modification date column in XML index sitemaps
+* INFO Add "Automatically set alt text on already inserted image" setting to the wizard installation
+* INFO Remove sitelinks searchbox in Google search results to follow their new guidelines
+* INFO Remove deprecated load_plugin_textdomain
+* INFO Improve our Elementor integration
+* INFO Update Google APIs
+* INFO Improve White Label for Dashboard by removing SEO Suite, Ebooks, and Latest News sections if the feature is enabled
+* INFO Admin bar: show a noindex notice if the current post/term is set to noindex (individually or globally)
+* INFO Improve license status display in the Dashboard
+* FIX WPML compatibility: WooCommerce Shop archive page URL in XML sitemaps
+* FIX Refresh textarea with tabs in backend
+* FIX PHP notices / warnings in specific cases
+* FIX Encoding with OpenAI integration
+* FIX Rendering dynamic variables for the Local Business schema (SEO, PRO, Local Business tab)
+* FIX Custom capability to export broken links as a CSV file
+* FIX Stop words for internal linking suggestions in other languages than English and French
+* FIX PHP Deprecated: strtotime(): Passing null to parameter #1 ($datetime)
+* FIX Deprecation warning for PluginPrePublishPanel with the Block Editor
+* FIX Permissions for Site Audit
+* FIX Google Preview encoding issue
+* FIX Compatibility with Avada Fusion Builder and our universal SEO metabox
+* FIX Compatibility with Surecart (universal SEO metabox is required to handle SEO metadata)
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

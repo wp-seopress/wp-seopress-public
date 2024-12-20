@@ -25,7 +25,7 @@ function seopress_smart_crawl_migration() {
         global $post;
 
         if ($offset > $total_count_posts) {
-            wp_reset_query();
+            wp_reset_postdata();
             $count_items = $total_count_posts;
 
             $smart_crawl_query_terms = get_option('wds_taxonomy_meta');
@@ -80,7 +80,7 @@ function seopress_smart_crawl_migration() {
                 }
             }
             $offset = 'done';
-            wp_reset_query();
+            wp_reset_postdata();
         } else {
             $args = [
                 'posts_per_page' => $increment,

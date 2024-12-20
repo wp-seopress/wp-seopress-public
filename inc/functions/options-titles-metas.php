@@ -327,6 +327,13 @@ if (apply_filters('seopress_old_pre_get_document_title', true)) {
             add_filter('pre_get_document_title', 'seopress_titles_the_title', 20);
         }
     }
+
+    //Avoid Surecart rewriting our title tag
+    if (is_plugin_active('surecart/surecart.php')) {
+        if (is_singular( 'sc_product' )) {
+            add_filter('pre_get_document_title', 'seopress_titles_the_title', 214748364);
+        }
+    }
 }
 
 //THE Meta Description
@@ -941,15 +948,6 @@ if ('0' != get_option('blog_public')) {// Discourage search engines from indexin
         echo $seopress_titles_robots;
     }
     add_action('wp_head', 'seopress_titles_advanced_robots_hook', 1);
-}
-
-//nositelinkssearchbox
-if (seopress_get_service('TitleOption')->getNoSiteLinksSearchBox() ==='1') {
-    function seopress_titles_nositelinkssearchbox_hook() {
-        echo '<meta name="google" content="nositelinkssearchbox">';
-        echo "\n";
-    }
-    add_action('wp_head', 'seopress_titles_nositelinkssearchbox_hook', 2);
 }
 
 //link rel prev/next

@@ -25,7 +25,7 @@ function seopress_seo_ultimate_migration() {
 
         if ($offset > $total_count_posts) {
             $offset = 'done';
-            wp_reset_query();
+            wp_reset_postdata();
         } else {
             $args = [
                 'posts_per_page' => $increment,

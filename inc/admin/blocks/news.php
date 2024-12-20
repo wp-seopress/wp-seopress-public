@@ -1,6 +1,12 @@
 <?php
 	defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
+	if (is_plugin_active('wp-seopress-pro/seopress-pro.php')) {
+        if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
+            return;
+        }
+    }
+	
 	if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
 		//do nothing
 	} else {

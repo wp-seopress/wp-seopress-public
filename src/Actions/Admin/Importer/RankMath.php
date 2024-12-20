@@ -30,7 +30,7 @@ class RankMath implements ExecuteHooksBackend {
      * @return string
      */
     protected function migrateTermQuery() {
-        wp_reset_query();
+        wp_reset_postdata();
 
         $args = [
             'hide_empty' => false,
@@ -51,7 +51,7 @@ class RankMath implements ExecuteHooksBackend {
             '_seopress_analysis_target_kw'       => 'rank_math_focus_keyword',
         ];
         if ( ! $rk_query_terms) {
-            wp_reset_query();
+            wp_reset_postdata();
 
             return 'done';
         }
@@ -85,7 +85,7 @@ class RankMath implements ExecuteHooksBackend {
             }
         }
 
-        wp_reset_query();
+        wp_reset_postdata();
 
         return 'done';
     }

@@ -696,7 +696,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$alt_site_title  = isset($seopress_titles_option['seopress_titles_home_site_title_alt']) ? $seopress_titles_option['seopress_titles_home_site_title_alt'] : null;
 		$knowledge_type  = isset($seopress_social_option['seopress_social_knowledge_type']) ? $seopress_social_option['seopress_social_knowledge_type'] : null;
 		$knowledge_name  = isset($seopress_social_option['seopress_social_knowledge_name']) ? $seopress_social_option['seopress_social_knowledge_name'] : null;
-		$knowledge_img   = isset($seopress_social_option['seopress_social_knowledge_img']) ? $seopress_social_option['seopress_social_knowledge_img'] : null;
+		$knowledge_img   = isset($seopress_social_option['seopress_social_knowledge_img']) ? $seopress_social_option['seopress_social_knowledge_img'] : '';
 		$knowledge_email = isset($seopress_social_option['seopress_social_knowledge_email']) ? $seopress_social_option['seopress_social_knowledge_email'] : $current_user_email;
 		$knowledge_phone = isset($seopress_social_option['seopress_social_knowledge_phone']) ? $seopress_social_option['seopress_social_knowledge_phone'] : null;
 		$knowledge_tax_id = isset($seopress_social_option['seopress_social_knowledge_tax_id']) ? $seopress_social_option['seopress_social_knowledge_tax_id'] : null;
@@ -845,12 +845,12 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function seopress_setup_social_accounts() {
 		$seopress_social_option = get_option('seopress_social_option_name');
 
-		$knowledge_fb    = isset($seopress_social_option['seopress_social_accounts_facebook']) ? $seopress_social_option['seopress_social_accounts_facebook'] : null;
-		$knowledge_tw    = isset($seopress_social_option['seopress_social_accounts_twitter']) ? $seopress_social_option['seopress_social_accounts_twitter'] : null;
-		$knowledge_pin   = isset($seopress_social_option['seopress_social_accounts_pinterest']) ? $seopress_social_option['seopress_social_accounts_pinterest'] : null;
-		$knowledge_insta = isset($seopress_social_option['seopress_social_accounts_instagram']) ? $seopress_social_option['seopress_social_accounts_instagram'] : null;
-		$knowledge_yt    = isset($seopress_social_option['seopress_social_accounts_youtube']) ? $seopress_social_option['seopress_social_accounts_youtube'] : null;
-		$knowledge_li    = isset($seopress_social_option['seopress_social_accounts_linkedin']) ? $seopress_social_option['seopress_social_accounts_linkedin'] : null;
+		$knowledge_fb    = isset($seopress_social_option['seopress_social_accounts_facebook']) ? $seopress_social_option['seopress_social_accounts_facebook'] : '';
+		$knowledge_tw    = isset($seopress_social_option['seopress_social_accounts_twitter']) ? $seopress_social_option['seopress_social_accounts_twitter'] : '';
+		$knowledge_pin   = isset($seopress_social_option['seopress_social_accounts_pinterest']) ? $seopress_social_option['seopress_social_accounts_pinterest'] : '';
+		$knowledge_insta = isset($seopress_social_option['seopress_social_accounts_instagram']) ? $seopress_social_option['seopress_social_accounts_instagram'] : '';
+		$knowledge_yt    = isset($seopress_social_option['seopress_social_accounts_youtube']) ? $seopress_social_option['seopress_social_accounts_youtube'] : '';
+		$knowledge_li    = isset($seopress_social_option['seopress_social_accounts_linkedin']) ? $seopress_social_option['seopress_social_accounts_linkedin'] : '';
 		$knowledge_extra = isset($seopress_social_option['seopress_social_accounts_extra']) ? $seopress_social_option['seopress_social_accounts_extra'] : null;
 		?>
 
@@ -1347,7 +1347,8 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_advanced_option         = get_option('seopress_advanced_option_name');
 		$attachments_file                 = isset($seopress_advanced_option['seopress_advanced_advanced_attachments_file']);
 		$category_url                     = isset($seopress_advanced_option['seopress_advanced_advanced_category_url']);
-		$product_category_url             = isset($seopress_advanced_option['seopress_advanced_advanced_product_cat_url']); ?>
+		$product_category_url             = isset($seopress_advanced_option['seopress_advanced_advanced_product_cat_url']);
+		$image_auto_alt_txt               = isset($seopress_advanced_option['seopress_advanced_advanced_image_auto_alt_txt']); ?>
 
 		<div class="seopress-setup-content seopress-option">
 
@@ -1373,6 +1374,19 @@ class SEOPRESS_Admin_Setup_Wizard {
 						</li>
 						<li class="description">
 							<?php /* translators: %s default: SEOPress */ printf(esc_html__('By default, %s redirects your Attachment pages to the parent post. Optimize this by redirecting the user directly to the URL of the media file.', 'wp-seopress'), esc_html($this->seo_title)); ?>
+						</li>
+
+						<!-- Automatically set alt text on already inserted image -->
+						<li class="seopress-wizard-service-item checkbox">
+							<label for="image_auto_alt_txt">
+								<input id="image_auto_alt_txt" class="location-input" name="image_auto_alt_txt" type="checkbox" <?php if ('1' == $image_auto_alt_txt) {
+							echo 'checked="yes"';
+						} ?> value="1"/>
+								<?php esc_html_e('Automatically set alt text on already inserted image', 'wp-seopress'); ?>
+							</label>
+						</li>
+						<li class="description">
+							<?php esc_html_e('By default, WordPress does not update image alt texts entered from the media library after they are inserted into the content of a post, page, or post type. By checking this box, this will be done when the page loads on the fly as long as this option remains active.', 'wp-seopress'); ?>
 						</li>
 
 						<!-- Remove /category/ in URLs -->
@@ -1449,6 +1463,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 
 		//Advanced
 		$seopress_advanced_option['seopress_advanced_advanced_attachments_file']    = isset($_POST['attachments_file']) ? esc_attr(wp_unslash($_POST['attachments_file'])) : null;
+		$seopress_advanced_option['seopress_advanced_advanced_image_auto_alt_txt']    = isset($_POST['image_auto_alt_txt']) ? esc_attr(wp_unslash($_POST['image_auto_alt_txt'])) : null;
 		$seopress_advanced_option['seopress_advanced_advanced_category_url']        = isset($_POST['category_url']) ? esc_attr(wp_unslash($_POST['category_url'])) : null;
 
 		if (is_plugin_active('woocommerce/woocommerce.php')) {
@@ -1568,13 +1583,13 @@ class SEOPRESS_Admin_Setup_Wizard {
 					<?php if (! is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
 						<div class="col col-pro">
 							<h2>
-								<img alt="<?php esc_html_e('SEOPress PRO logo','wp-seopress'); ?>" width="50" height="50" src="https://www.seopress.org/wp-content/uploads/2021/06/logo-seopress-pro.svg" />
+								<img alt="<?php esc_html_e('SEOPress PRO logo','wp-seopress'); ?>" width="50" height="50" src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/logo-seopress-pro.svg'); ?>" />
 								<a href="<?php echo esc_url($docs['addons']['pro']); ?>" target="_blank">
 									<?php esc_html_e('SEOPress PRO', 'wp-seopress'); ?>
 								</a>
 							</h2>
 
-							<img alt="" width="100%" style="max-width: 500px" src="https://www.seopress.org/wp-content/uploads/2021/06/seopress-pro-featured.png" />
+							<img alt="" width="100%" style="max-width: 500px" src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/seopress-pro-featured.png'); ?>" />
 
 							<h3><?php esc_html_e('Premium SEO features to increase your rankings', 'wp-seopress'); ?></h3>
 
@@ -1626,14 +1641,14 @@ class SEOPRESS_Admin_Setup_Wizard {
 					<?php if (! is_plugin_active('wp-seopress-insights/seopress-insights.php') && ! is_multisite()) { ?>
 						<div class="col col-insights">
 							<h2>
-								<img alt="<?php esc_html_e('SEOPress Insights logo','wp-seopress'); ?>" width="50" height="50" src="https://www.seopress.org/wp-content/uploads/2021/06/logo-seopress-insights.svg" />
+								<img alt="<?php esc_html_e('SEOPress Insights logo','wp-seopress'); ?>" width="50" height="50" src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/logo-seopress-insights.svg'); ?>" />
 
 								<a href="<?php echo esc_url($docs['addons']['insights']); ?>" target="_blank">
 									<?php esc_html_e('SEOPress Insights', 'wp-seopress'); ?>
 								</a>
 							</h2>
 
-							<img alt="" width="100%" style="max-width: 500px" src="https://www.seopress.org/wp-content/uploads/2021/06/seopress-insights-featured.png" />
+							<img alt="" width="100%" style="max-width: 500px" src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/seopress-insights-featured.png'); ?>" />
 
 							<h3><?php esc_html_e('Start monitoring your rankings and backlinks directly from your WordPress admin', 'wp-seopress'); ?></h3>
 

@@ -22,6 +22,7 @@ use Google\Auth\GetQuotaProjectInterface;
 use Google\Auth\HttpHandler\HttpClientCache;
 use Google\Auth\HttpHandler\HttpHandlerFactory;
 use Google\Auth\Iam;
+use Google\Auth\IamSignerTrait;
 use Google\Auth\ProjectIdProviderInterface;
 use Google\Auth\SignBlobInterface;
 use GuzzleHttp\Exception\ClientException;
@@ -60,6 +61,8 @@ class GCECredentials extends CredentialsLoader implements
     ProjectIdProviderInterface,
     GetQuotaProjectInterface
 {
+    use IamSignerTrait;
+
     // phpcs:disable
     const cacheKey = 'GOOGLE_AUTH_PHP_GCE';
     // phpcs:enable
@@ -93,9 +96,19 @@ class GCECredentials extends CredentialsLoader implements
     const PROJECT_ID_URI_PATH = 'v1/project/project-id';
 
     /**
+     * The metadata path of the project ID.
+     */
+    const UNIVERSE_DOMAIN_URI_PATH = 'v1/universe/universe_domain';
+
+    /**
      * The header whose presence indicates GCE presence.
      */
     const FLAVOR_HEADER = 'Metadata-Flavor';
+
+    /**
+     * The Linux file which contains the product name.
+     */
+    private const GKE_PRODUCT_NAME_FILE = '/sys/class/dmi/id/product_name';
 
     /**
      * Note: the explicit `timeout` and `tries` below is a workaround. The underlying
@@ -126,6 +139,8 @@ class GCECredentials extends CredentialsLoader implements
 
     /**
      * Result of fetchAuthToken.
+     *
+     * @var array<mixed>
      */
     protected $lastReceivedToken;
 
@@ -138,11 +153,6 @@ class GCECredentials extends CredentialsLoader implements
      * @var string|null
      */
     private $projectId;
-
-    /**
-     * @var Iam|null
-     */
-    private $iam;
 
     /**
      * @var string
@@ -165,21 +175,29 @@ class GCECredentials extends CredentialsLoader implements
     private $serviceAccountIdentity;
 
     /**
+     * @var string
+     */
+    private ?string $universeDomain;
+
+    /**
      * @param Iam $iam [optional] An IAM instance.
-     * @param string|array $scope [optional] the scope of the access request,
+     * @param string|string[] $scope [optional] the scope of the access request,
      *        expressed either as an array or as a space-delimited string.
      * @param string $targetAudience [optional] The audience for the ID token.
      * @param string $quotaProject [optional] Specifies a project to bill for access
      *   charges associated with the request.
      * @param string $serviceAccountIdentity [optional] Specify a service
      *   account identity name to use instead of "default".
+     * @param string $universeDomain [optional] Specify a universe domain to use
+     *   instead of fetching one from the metadata server.
      */
     public function __construct(
         Iam $iam = null,
         $scope = null,
         $targetAudience = null,
         $quotaProject = null,
-        $serviceAccountIdentity = null
+        $serviceAccountIdentity = null,
+        string $universeDomain = null
     ) {
         $this->iam = $iam;
 
@@ -207,6 +225,7 @@ class GCECredentials extends CredentialsLoader implements
         $this->tokenUri = $tokenUri;
         $this->quotaProject = $quotaProject;
         $this->serviceAccountIdentity = $serviceAccountIdentity;
+        $this->universeDomain = $universeDomain;
     }
 
     /**
@@ -290,6 +309,18 @@ class GCECredentials extends CredentialsLoader implements
     }
 
     /**
+     * The full uri for accessing the default universe domain.
+     *
+     * @return string
+     */
+    private static function getUniverseDomainUri()
+    {
+        $base = 'http://' . self::METADATA_IP . '/computeMetadata/';
+
+        return $base . self::UNIVERSE_DOMAIN_URI_PATH;
+    }
+
+    /**
      * Determines if this an App Engine Flexible instance, by accessing the
      * GAE_INSTANCE environment variable.
      *
@@ -297,7 +328,7 @@ class GCECredentials extends CredentialsLoader implements
      */
     public static function onAppEngineFlexible()
     {
-        return substr(getenv('GAE_INSTANCE'), 0, 4) === 'aef-';
+        return substr((string) getenv('GAE_INSTANCE'), 0, 4) === 'aef-';
     }
 
     /**
@@ -340,6 +371,22 @@ class GCECredentials extends CredentialsLoader implements
             } catch (ConnectException $e) {
             }
         }
+
+        if (PHP_OS === 'Windows') {
+            // @TODO: implement GCE residency detection on Windows
+            return false;
+        }
+
+        // Detect GCE residency on Linux
+        return self::detectResidencyLinux(self::GKE_PRODUCT_NAME_FILE);
+    }
+
+    private static function detectResidencyLinux(string $productNameFile): bool
+    {
+        if (file_exists($productNameFile)) {
+            $productName = trim((string) file_get_contents($productNameFile));
+            return 0 === strpos($productName, 'Google');
+        }
         return false;
     }
 
@@ -351,15 +398,14 @@ class GCECredentials extends CredentialsLoader implements
      *
      * @param callable $httpHandler callback which delivers psr7 request
      *
-     * @return array A set of auth related metadata, based on the token type.
+     * @return array<mixed> {
+     *     A set of auth related metadata, based on the token type.
      *
-     * Access tokens have the following keys:
-     *   - access_token (string)
-     *   - expires_in (int)
-     *   - token_type (string)
-     * ID tokens have the following keys:
-     *   - id_token (string)
-     *
+     *     @type string $access_token for access tokens
+     *     @type int    $expires_in   for access tokens
+     *     @type string $token_type   for access tokens
+     *     @type string $id_token     for ID tokens
+     * }
      * @throws \Exception
      */
     public function fetchAuthToken(callable $httpHandler = null)
@@ -372,13 +418,13 @@ class GCECredentials extends CredentialsLoader implements
             $this->hasCheckedOnGce = true;
         }
         if (!$this->isOnGce) {
-            return array();  // return an empty array with no access token
+            return [];  // return an empty array with no access token
         }
 
         $response = $this->getFromMetadata($httpHandler, $this->tokenUri);
 
         if ($this->targetAudience) {
-            return ['id_token' => $response];
+            return $this->lastReceivedToken = ['id_token' => $response];
         }
 
         if (null === $json = json_decode($response, true)) {
@@ -402,14 +448,18 @@ class GCECredentials extends CredentialsLoader implements
     }
 
     /**
-     * @return array|null
+     * @return array<mixed>|null
      */
     public function getLastReceivedToken()
     {
         if ($this->lastReceivedToken) {
+            if (array_key_exists('id_token', $this->lastReceivedToken)) {
+                return $this->lastReceivedToken;
+            }
+
             return [
                 'access_token' => $this->lastReceivedToken['access_token'],
-                'expires_at' => $this->lastReceivedToken['expires_at'],
+                'expires_at' => $this->lastReceivedToken['expires_at']
             ];
         }
 
@@ -451,41 +501,6 @@ class GCECredentials extends CredentialsLoader implements
     }
 
     /**
-     * Sign a string using the default service account private key.
-     *
-     * This implementation uses IAM's signBlob API.
-     *
-     * @see https://cloud.google.com/iam/credentials/reference/rest/v1/projects.serviceAccounts/signBlob SignBlob
-     *
-     * @param string $stringToSign The string to sign.
-     * @param bool $forceOpenSsl [optional] Does not apply to this credentials
-     *        type.
-     * @param string $accessToken The access token to use to sign the blob. If
-     *        provided, saves a call to the metadata server for a new access
-     *        token. **Defaults to** `null`.
-     * @return string
-     */
-    public function signBlob($stringToSign, $forceOpenSsl = false, $accessToken = null)
-    {
-        $httpHandler = HttpHandlerFactory::build(HttpClientCache::getHttpClient());
-
-        // Providing a signer is useful for testing, but it's undocumented
-        // because it's not something a user would generally need to do.
-        $signer = $this->iam ?: new Iam($httpHandler);
-
-        $email = $this->getClientName($httpHandler);
-
-        if (is_null($accessToken)) {
-            $previousToken = $this->getLastReceivedToken();
-            $accessToken = $previousToken
-                ? $previousToken['access_token']
-                : $this->fetchAuthToken($httpHandler)['access_token'];
-        }
-
-        return $signer->signBlob($email, $accessToken, $stringToSign);
-    }
-
-    /**
      * Fetch the default Project ID from compute engine.
      *
      * Returns null if called outside GCE.
@@ -516,6 +531,50 @@ class GCECredentials extends CredentialsLoader implements
     }
 
     /**
+     * Fetch the default universe domain from the metadata server.
+     *
+     * @param callable $httpHandler Callback which delivers psr7 request
+     * @return string
+     */
+    public function getUniverseDomain(callable $httpHandler = null): string
+    {
+        if (null !== $this->universeDomain) {
+            return $this->universeDomain;
+        }
+
+        $httpHandler = $httpHandler
+            ?: HttpHandlerFactory::build(HttpClientCache::getHttpClient());
+
+        if (!$this->hasCheckedOnGce) {
+            $this->isOnGce = self::onGce($httpHandler);
+            $this->hasCheckedOnGce = true;
+        }
+
+        try {
+            $this->universeDomain = $this->getFromMetadata(
+                $httpHandler,
+                self::getUniverseDomainUri()
+            );
+        } catch (ClientException $e) {
+            // If the metadata server exists, but returns a 404 for the universe domain, the auth
+            // libraries should safely assume this is an older metadata server running in GCU, and
+            // should return the default universe domain.
+            if (!$e->hasResponse() || 404 != $e->getResponse()->getStatusCode()) {
+                throw $e;
+            }
+            $this->universeDomain = self::DEFAULT_UNIVERSE_DOMAIN;
+        }
+
+        // We expect in some cases the metadata server will return an empty string for the universe
+        // domain. In this case, the auth library MUST return the default universe domain.
+        if ('' === $this->universeDomain) {
+            $this->universeDomain = self::DEFAULT_UNIVERSE_DOMAIN;
+        }
+
+        return $this->universeDomain;
+    }
+
+    /**
      * Fetch the value of a GCE metadata server URI.
      *
      * @param callable $httpHandler An HTTP Handler to deliver PSR7 requests.
@@ -543,5 +602,21 @@ class GCECredentials extends CredentialsLoader implements
     public function getQuotaProject()
     {
         return $this->quotaProject;
+    }
+
+    /**
+     * Set whether or not we've already checked the GCE environment.
+     *
+     * @param bool $isOnGce
+     *
+     * @return void
+     */
+    public function setIsOnGce($isOnGce)
+    {
+        // Implicitly set hasCheckedGce to true
+        $this->hasCheckedOnGce = true;
+
+        // Set isOnGce
+        $this->isOnGce = $isOnGce;
     }
 }

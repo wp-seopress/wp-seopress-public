@@ -21,21 +21,39 @@ function seopress_admin_bar_links() {
 
     $noindex = '';
     if ('1' !== seopress_get_service('AdvancedOption')->getAppearanceAdminBarNoIndex()) {
-        if ('1' === seopress_get_service('TitleOption')->getTitleNoIndex() || '1' != get_option('blog_public')) {
-            $noindex .= '<a class="wrap-seopress-noindex" href="' . admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_advanced') . '">';
+        $metarobots = false;
+    
+        if (get_post_meta(get_the_ID(), '_seopress_robots_index', true)) {
+            $metarobots = true;
+        } elseif (
+            seopress_get_service('TitleOption')->getSingleCptNoIndex() ||
+            seopress_get_service('TitleOption')->getTitleNoIndex() ||
+            true === post_password_required(get_the_ID())
+        ) {
+            $metarobots = true;
+        } elseif (
+            '1' === seopress_get_service('TitleOption')->getTitleNoIndex() ||
+            '1' !== get_option('blog_public')
+        ) {
+            $metarobots = true;
+        }
+    
+        if ($metarobots === true) {
+            $noindex = '<a class="wrap-seopress-noindex" href="' . admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_advanced') . '">';
             $noindex .= '<span class="ab-icon dashicons dashicons-hidden"></span>';
             $noindex .= __('noindex is on!', 'wp-seopress');
             $noindex .= '</a>';
         }
-        $noindex = apply_filters('seopress_adminbar_noindex', $noindex);
+    
+        $noindex = apply_filters('seopress_adminbar_noindex', $noindex ?? '');
     }
 
     // Adds a new top level admin bar link and a submenu to it
     $wp_admin_bar->add_menu([
         'parent'	=> false,
-        'id'		   => 'seopress',
+        'id'		=> 'seopress',
         'title'		=> $title . $noindex,
-        'href'		 => admin_url('admin.php?page=seopress-option'),
+        'href'		=> admin_url('admin.php?page=seopress-option'),
     ]);
 
     //noindex/nofollow per CPT

@@ -63,7 +63,7 @@ class I18nUniversalMetabox
 
                 ],
                 'open_graph' => [
-                    'title' => __("Open Graph"),
+                    'title' => __("Open Graph", "wp-seopress"),
                     'description' => __("Description", "wp-seopress"),
                     'image' => __("Image", "wp-seopress"),
                     'url' => __("URL", "wp-seopress"),
@@ -153,10 +153,6 @@ class I18nUniversalMetabox
                     ],
                     'meta_robots' => [
                         'title' => __("Meta robots", "wp-seopress"),
-                        'empty_meta_google' => __(
-                            "is off. Google will probably display a sitelinks searchbox in search results.",
-                            "wp-seopress"
-                        ),
                         'empty_metas' => __(
                             "We found no meta robots on this page. It means, your page is index,follow. Search engines will index it, and follow links. ",
                             "wp-seopress"
@@ -206,19 +202,12 @@ class I18nUniversalMetabox
                             "is off. Search engines will display a snippet of this page in search results.",
                             "wp-seopress"
                         ),
-                        'nositelinkssearchbox_on' => __(
-                            "is on! Google will not display a sitelinks searchbox in search results.",
-                            "wp-seopress"
-                        ),
-                        'nositelinkssearchbox_off' => __(
-                            "is off. Google will probably display a sitelinks searchbox in search results.",
-                            "wp-seopress"
-                        )
                     ],
                     'outbound_links' => [
                         'title' => __("Outbound Links", "wp-seopress"),
                         'description' => __(
-                            'Internet is built on the principle of hyperlink. It is therefore perfectly normal to make links between different websites. However, avoid making links to low quality sites, SPAM... If you are not sure about the quality of a site, add the attribute "nofollow" to your link.'
+                            'Internet is built on the principle of hyperlink. It is therefore perfectly normal to make links between different websites. However, avoid making links to low quality sites, SPAM... If you are not sure about the quality of a site, add the attribute "nofollow" to your link.',
+                            "wp-seopress"
                         ),
                         'no_outbound_links' => __(
                             "This page doesn't have any outbound links.",
@@ -303,7 +292,8 @@ class I18nUniversalMetabox
                     ],
                     'internal_links' => [
                         'description' => __(
-                            "Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors."
+                            "Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.",
+                            "wp-seopress"
                         ),
                         'no_internal_links' => __(
                             "This page doesn't have any internal links from other content. Links from archive pages are not considered internal links due to lack of context.",
@@ -733,7 +723,7 @@ class I18nUniversalMetabox
                         "Writing content for your users is the most important thing! If it doesn‘t feel natural, your visitors will leave your site, Google will know it and your ranking will be affected.",
                         "wp-seopress"
                     ),
-                    'title_severity' => /* translators: %s degree of severity, eg: low */ __('Degree of severity: %s', 'wp- seopress'),
+                    'title_severity' => /* translators: %s degree of severity, eg: low */ __('Degree of severity: %s', 'wp-seopress'),
                     'target_keywords' => __("Target keywords", "wp-seopress"),
                     'target_keywords_tooltip_description' => __(
                         "Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them",

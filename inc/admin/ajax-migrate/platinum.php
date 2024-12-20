@@ -25,7 +25,7 @@ function seopress_platinum_seo_migration() {
         global $post;
 
         if ($offset > $total_count_posts) {
-            wp_reset_query();
+            wp_reset_postdata();
             $count_items = $total_count_posts;
 
             $args = [
@@ -97,7 +97,7 @@ function seopress_platinum_seo_migration() {
                 }
             }
             $offset = 'done';
-            wp_reset_query();
+            wp_reset_postdata();
         } else {
             $args = [
                 'posts_per_page' => $increment,

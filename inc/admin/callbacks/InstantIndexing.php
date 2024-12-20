@@ -230,7 +230,7 @@ function seopress_instant_indexing_google_api_key_callback() {
 '<textarea id="seopress_instant_indexing_google_api_key" name="seopress_instant_indexing_option_name[seopress_instant_indexing_google_api_key]" rows="12" placeholder="' . esc_html__('Paste your Google JSON key file here', 'wp-seopress') . '" aria-label="' . esc_attr__('Paste your Google JSON key file here', 'wp-seopress') . '">%s</textarea>',
 esc_html($check)); ?>
 
-<p class="seopress-help description"><?php /* translators: %1$s documentation URL, %2$s documentation URL */ printf(esc_attr__('To use the <span class="dashicons dashicons-external"></span><a href="%1$s" target="_blank">Google Indexing API</a> and generate your JSON key file, please <span class="dashicons dashicons-external"></span><a href="%2$s" target="_blank">follow our guide.', 'wp-seopress'), esc_url($docs['indexing_api']['api']), esc_url($docs['indexing_api']['google'])); ?></p>
+<p class="seopress-help description"><?php /* translators: %1$s documentation URL, %2$s documentation URL */ printf(wp_kses_post(__('To use the <span class="dashicons dashicons-external"></span><a href="%1$s" target="_blank">Google Indexing API</a> and generate your JSON key file, please <span class="dashicons dashicons-external"></span><a href="%2$s" target="_blank">follow our guide.', 'wp-seopress')), esc_url($docs['indexing_api']['api']), esc_url($docs['indexing_api']['google'])); ?></p>
 
 <?php
 }
@@ -246,7 +246,7 @@ function seopress_instant_indexing_bing_api_key_callback() {
 
     <button type="button" class="seopress-instant-indexing-refresh-api-key btn btnSecondary"><?php esc_attr_e('Generate key','wp-seopress'); ?></button>
 
-    <p class="description"><?php esc_attr_e('The Bing Indexing API key is automatically generated. Click Generate key if you want to recreate it, or if it\'s missing.') ?></p>
+    <p class="description"><?php esc_attr_e('The Bing Indexing API key is automatically generated. Click Generate key if you want to recreate it, or if it\'s missing.', 'wp-seopress'); ?></p>
     <p class="description"><?php esc_attr_e('A key should look like this: ', 'wp-seopress'); ?><code>ZjA2NWI3ZWM3MmNhNDRkODliYmY0YjljMzg5YTk2NGE=</code></p>
 <?php
 }

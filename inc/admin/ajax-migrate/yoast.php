@@ -22,7 +22,7 @@ function seopress_yoast_migration() {
         global $post;
 
         if ($offset > $total_count_posts) {
-            wp_reset_query();
+            wp_reset_postdata();
 
             $yoast_query_terms = get_option('wpseo_taxonomy_meta');
 
@@ -63,7 +63,7 @@ function seopress_yoast_migration() {
                 }
             }
             $offset = 'done';
-            wp_reset_query();
+            wp_reset_postdata();
         } else {
             $args = [
                 'posts_per_page' => $increment,

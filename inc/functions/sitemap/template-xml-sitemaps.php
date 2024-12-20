@@ -124,7 +124,7 @@ function seopress_xml_sitemap_index() {
                         $paged ='';
                         $i     = '';
                         for ($i=0; $i < $max_loop; ++$i) {
-                            if (isset($offset) && absint($offset) && '' != $offset && 0 != $offset) {
+                            if (isset($paged) && absint($paged) && '' != $paged && 0 != $paged) {
                                 $offset = ((($i) * $max));
                             } else {
                                 $offset = 0;
@@ -136,6 +136,21 @@ function seopress_xml_sitemap_index() {
                                 $paged = 1;
                             }
 
+                            // Last modification date
+                            global $wpdb;
+                            $offset = absint($offset);
+
+                            $last_mod_date = $wpdb->get_var(
+                                $wpdb->prepare(
+                                    "SELECT post_modified_gmt FROM $wpdb->posts 
+                                    WHERE post_type = %s AND post_status = 'publish' 
+                                    ORDER BY post_modified_gmt DESC 
+                                    LIMIT 1 OFFSET %d",
+                                    $cpt_key,
+                                    $offset
+                                )
+                            );
+
                             $seopress_sitemaps .= "\n";
                             $seopress_sitemaps .= '<sitemap>';
                             $seopress_sitemaps .= "\n";
@@ -143,6 +158,14 @@ function seopress_xml_sitemap_index() {
                             $seopress_sitemaps .= $home_url . $cpt_key . '-sitemap' . $paged . '.xml';
                             $seopress_sitemaps .= '</loc>';
                             $seopress_sitemaps .= "\n";
+                            
+                            if ($last_mod_date) {
+                                $seopress_sitemaps .= '<lastmod>';
+                                $seopress_sitemaps .= esc_html(mysql2date('c', $last_mod_date));
+                                $seopress_sitemaps .= '</lastmod>';
+                                $seopress_sitemaps .= "\n";
+                            }
+                            
                             $seopress_sitemaps .= '</sitemap>';
                         }
                     }
@@ -203,12 +226,6 @@ function seopress_xml_sitemap_index() {
                         $paged ='';
                         $i     = '';
                         for ($i=0; $i < $max_loop; ++$i) {
-                            if (isset($offset) && absint($offset) && '' != $offset && 0 != $offset) {
-                                $offset = ((($i) * $max));
-                            } else {
-                                $offset = 0;
-                            }
-
                             if ($i >= 1 && $i <= $max_loop) {
                                 $paged = $i + 1;
                             } else {

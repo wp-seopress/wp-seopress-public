@@ -65,7 +65,7 @@ function seopress_google_analytics_hook_callback() {
 </select>
 
 <p class="description">
-    <?php echo wp_kses_post(__('Your theme must be compatible with <code>wp_body_open</code> hook introduced in WordPress 5.2 if "opening body tag" option selected.')); ?>
+    <?php echo wp_kses_post(__('Your theme must be compatible with <code>wp_body_open</code> hook introduced in WordPress 5.2 if "opening body tag" option selected.', 'wp-seopress')); ?>
 </p>
 
 <?php if (isset($options['seopress_google_analytics_hook'])) {
@@ -968,7 +968,7 @@ function seopress_google_analytics_matomo_id_callback() {
     $check = isset($options['seopress_google_analytics_matomo_id']) ? $options['seopress_google_analytics_matomo_id'] : null;
 
     printf('<input type="text" name="seopress_google_analytics_option_name[seopress_google_analytics_matomo_id]" placeholder="'
-        . esc_html__('Enter "example" if you Matomo account URL is "example.matomo.cloud"', ' wp-seopress')
+        . esc_html__('Enter "example" if you Matomo account URL is "example.matomo.cloud"', 'wp-seopress')
         . '" value="%s" aria-label="' . esc_attr__('Matomo URL (Cloud or Self-hosted)', 'wp-seopress') . '"/>', esc_html($check)); ?>
 
 <p class="description">

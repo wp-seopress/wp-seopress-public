@@ -110,7 +110,7 @@ function seopress_admin_header($context = "") {
 					<div class="seopress-panel-section">
 						<h2><span class="dashicons dashicons-translation"></span><?php esc_html_e('Translations', 'wp-seopress'); ?></h2>
 						<p><?php esc_html_e('The plugin is translated into dozens of languages.', 'wp-seopress'); ?></p>
-						<p><?php echo wp_kses_post(sprintf(__('Go to <a href="%s">Updates</a> and click <strong>Update translations</strong> button to get the latest available translations for your language.', 'wp-seopress'), esc_url(admin_url('update-core.php')))); ?></p>
+						<p><?php echo /* translators: %s: admin Updates URL */ wp_kses_post(sprintf(__('Go to <a href="%s">Updates</a> and click <strong>Update translations</strong> button to get the latest available translations for your language.', 'wp-seopress'), esc_url(admin_url('update-core.php')))); ?></p>
                         <p><?php esc_html_e('Your translation is missing? Contribute to SEOPress now!', 'wp-seopress'); ?></p>
 						<a href="<?php echo esc_url($docs['i18n']); ?>" class="btn btnSecondary" title="<?php esc_html_e('Learn how to translate the plugin in your own language', 'wp-seopress'); ?>" target="_blank">
 							<?php esc_html_e('Translate SEOPress', 'wp-seopress'); ?>

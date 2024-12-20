@@ -6,7 +6,6 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 //Website Schema.org in JSON-LD - Sitelinks
 if ('1' !== seopress_get_service('TitleOption')->getNoSiteLinksSearchBox()) {
 	function seopress_social_website_option() {
-		$target = get_home_url() . '/?s={search_term_string}';
 		$site_tile = !empty(seopress_get_service('TitleOption')->getHomeSiteTitle()) ? seopress_get_service('TitleOption')->getHomeSiteTitle() : get_bloginfo('name');
 		$alt_site_title = !empty(seopress_get_service('TitleOption')->getHomeSiteTitleAlt()) ? seopress_get_service('TitleOption')->getHomeSiteTitleAlt() : get_bloginfo('name');
 		$site_desc = !empty(seopress_get_service('TitleOption')->getHomeDescriptionTitle()) ? seopress_get_service('TitleOption')->getHomeDescriptionTitle() : get_bloginfo('description');
@@ -29,14 +28,6 @@ if ('1' !== seopress_get_service('TitleOption')->getNoSiteLinksSearchBox()) {
 			'alternateName' => esc_html($alt_site_title),
 			'description' => esc_html($site_desc),
 			'url' => get_home_url(),
-			'potentialAction' => [
-				'@type' => 'SearchAction',
-				'target' => [
-					'@type' => 'EntryPoint',
-					'urlTemplate' => $target
-				],
-				'query-input' => 'required name=search_term_string'
-			],
 		];
 
 		$website_schema = apply_filters( 'seopress_schemas_website', $website_schema );
