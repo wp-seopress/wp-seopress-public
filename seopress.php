@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 8.4
+Version: 8.4.1
 Author URI: https://www.seopress.org/
 License: GPLv2 or later
 Text Domain: wp-seopress
@@ -83,7 +83,7 @@ add_action('admin_init', 'seopress_redirect_after_activation');
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Define
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-define('SEOPRESS_VERSION', '8.4');
+define('SEOPRESS_VERSION', '8.4.1');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -94,7 +94,6 @@ define('SEOPRESS_TEMPLATE_JSON_SCHEMAS', SEOPRESS_TEMPLATE_DIR . '/json-schemas'
 define('SEOPRESS_PATH_PUBLIC',  SEOPRESS_PLUGIN_DIR_PATH. 'public');
 define('SEOPRESS_URL_PUBLIC', SEOPRESS_PLUGIN_DIR_URL . 'public');
 define('SEOPRESS_URL_ASSETS', SEOPRESS_PLUGIN_DIR_URL . 'assets');
-define('SEOPRESS_DIR_LANGUAGES', dirname(plugin_basename(__FILE__)) . '/languages/');
 
 use SEOPress\Core\Kernel;
 
@@ -118,9 +117,6 @@ function seopress_init($hook) {
 	global $pagenow;
 	global $typenow;
 	global $wp_version;
-
-	//i18n
-	load_plugin_textdomain('wp-seopress', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 
     //Docs (must be loaded there)
     require_once dirname(__FILE__) . '/inc/admin/docs/DocsLinks.php';

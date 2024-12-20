@@ -20,7 +20,7 @@ function seopress_admin_bar_links() {
     $title = apply_filters('seopress_adminbar_icon', $title);
 
     $noindex = '';
-    if ('1' !== seopress_get_service('AdvancedOption')->getAppearanceAdminBarNoIndex()) {
+    if ('1' !== seopress_get_service('AdvancedOption')->getAppearanceAdminBarNoIndex() && !is_admin()) {
         $metarobots = false;
     
         if (get_post_meta(get_the_ID(), '_seopress_robots_index', true)) {

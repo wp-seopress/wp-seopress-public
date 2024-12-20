@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.4
+Stable tag: 8.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank 
 == Description ==
 
 <h3>Best SEO plugin for WordPress fully integrated with all page builders and themes!</h3>
-<h3>Now with AI (GPT 4) to automagically generate meta title, description and alternative texts for images!</h3>
+<h3>Now with AI (GPT-4o, GPT-4 Turbo / Vision and GPT 3.5 Turbo) to automagically generate meta title, description and alternative texts for images!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -23,7 +23,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 ✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 ✔ <strong>Content analysis to help you write content optimized for search engines with unlimited target keywords</strong>
 ✔ <strong><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import your post and term metadatas</a> from other SEO plugins or CSV file in 1 click</strong>
-✔ <strong><a href="https://translate.wordpress.org/projects/wp-plugins/wp-seopress" target="_blank">Translated into 25 languages (and counting)</strong>
+✔ <strong><a href="https://translate.wordpress.org/projects/wp-plugins/wp-seopress" target="_blank">Translated into 26 languages (and counting)</strong>
 ✔ <strong>Trusted by over 300,000 WordPress websites since 2017</strong>
 
 <a href="https://www.seopress.org/pricing/" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / 5 sites</strong></a>
@@ -80,7 +80,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 [youtube https://youtu.be/zxGCY-bJYwE]
 
 <ul>
-	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Use Artificial Intelligence (GPT 4 / Vision and GPT 3.5 Turbo) to generate SEO metadata and alternative texts for image files. Bulk actions supported.</strong></li>
+	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Use Artificial Intelligence (GPT-4o, GPT-4 Turbo / Vision and GPT 3.5 Turbo) to generate SEO metadata and alternative texts for image files. Bulk actions supported.</strong></li>
 	<li><a href="https://www.seopress.org/features/site-audit/" target="_blank"><strong>Site Audit: Detect technical issues that could harm your site's SEO directly from your WordPress administration.</strong></li>
     <li><a href="https://www.seopress.org/features/seo-alerts/" target="_blank">Receive SEO alerts to prevent breaking your SEO before it's too late</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/" target="_blank"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
@@ -262,6 +262,10 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.4.1 =
+* FIX Admin bar: show a noindex notice if the current post/term is set to noindex
+* Chore: remove duplicate load_plugin_textdomain call
+
 = 8.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-4/">Read the blog post update</a> =
 * NEW Site Audit #3: automatically fix missing alt text on images with AI (PRO)
 * NEW Add a button to block Claude bot in robots.txt (PRO)
