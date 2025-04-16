@@ -17,7 +17,8 @@ function seopress_admin_bar_links() {
     global $wp_admin_bar;
 
     $notifications = seopress_get_service('Notifications')->getSeverityNotification('all');
-
+    $total = 0;
+    
     if (!empty($notifications['total'])) {
         $total = $notifications['total'];
     }
@@ -27,7 +28,7 @@ function seopress_admin_bar_links() {
     $title = apply_filters('seopress_adminbar_icon', $title);
     
     $counter = '';
-    if ('1' !== seopress_get_service('AdvancedOption')->getAppearanceAdminBarCounter()) {
+    if ('1' !== seopress_get_service('AdvancedOption')->getAppearanceAdminBarCounter() && $total > 0) {
         $counter = '<div class="wp-core-ui wp-ui-notification seopress-menu-notification-counter">' . $total . '</div>';
 
         $counter = apply_filters('seopress_adminbar_counter', $counter, $total);

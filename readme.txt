@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.7
+Stable tag: 8.7.0.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,6 +271,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.7.0.1 =
+* FIX Undefined variable in admin bar
+
 = 8.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-7/">Read the blog post update</a> =
 * NEW Migrate Yoast (Free version) global settings to SEOPress with our import tool 🎉
 * NEW Automatic Product schema updated to use native GTIN WooCommerce fields 🎉
