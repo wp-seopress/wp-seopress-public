@@ -59,6 +59,9 @@ function seopress_yoast_migration() {
                         if ('' != $term_value['wpseo_canonical']) { //Import Canonical URL
                             update_term_meta($term_id, '_seopress_robots_canonical', esc_url($term_value['wpseo_canonical']));
                         }
+                        if ('' != $term_value['wpseo_bctitle']) { //Import Breadcrumb Title
+                            update_term_meta($term_id, '_seopress_robots_breadcrumbs', esc_html($term_value['wpseo_bctitle']));
+                        }
                     }
                 }
             }
@@ -121,6 +124,9 @@ function seopress_yoast_migration() {
                     }
                     if ('' != get_post_meta($post->ID, '_yoast_wpseo_canonical', true)) { //Import Canonical URL
                         update_post_meta($post->ID, '_seopress_robots_canonical', esc_url(get_post_meta($post->ID, '_yoast_wpseo_canonical', true)));
+                    }
+                    if ('' != get_post_meta($post->ID, '_yoast_wpseo_bctitle', true)) { //Import Breadcrumb Title
+                        update_post_meta($post->ID, '_seopress_robots_breadcrumbs', esc_html(get_post_meta($post->ID, '_yoast_wpseo_bctitle', true)));
                     }
                     if ('' != get_post_meta($post->ID, '_yoast_wpseo_focuskw', true) || '' != get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', true)) { //Import Focus Keywords
                         $y_fkws_clean = []; //reset array

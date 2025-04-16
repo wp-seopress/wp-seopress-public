@@ -462,21 +462,21 @@ class SEOPRESS_Admin_Setup_Wizard {
 					if ( wp_convert_hr_to_bytes($upload_max_filesize) / 1024 / 1024 < 24 ) {
 						$requirements[] = [
 							'title'  => __('PHP upload max filesize is too low.', 'wp-seopress'),
-							'desc'   => __('Please contact your host to increase this value to at least 24M.', 'wp-seopress')
+							'desc'   => sprintf(__('Please contact your host to increase this value to at least <code>24M</code> (current value: <code>%dM</code>).', 'wp-seopress'), absint(wp_convert_hr_to_bytes($upload_max_filesize) / 1024 / 1024))
 						];
 					}
 
 					if ( wp_convert_hr_to_bytes($post_max_size) / 1024 / 1024 < 23 ) {
 						$requirements[] = [
 							'title'  => __('PHP post max size is too low.', 'wp-seopress'),
-							'desc'   => __('Please contact your host to increase this value to at least 24M.', 'wp-seopress')
+							'desc'   => sprintf(__('Please contact your host to increase this value to at least <code>24M</code> (current value: <code>%dM</code>).', 'wp-seopress'), absint(wp_convert_hr_to_bytes($post_max_size) / 1024 / 1024))
 						];
 					}
 
 					if ( wp_convert_hr_to_bytes($memory_limit) / 1024 / 1024 < 256 ) {
 						$requirements[] = [
 							'title'  => __('PHP memory limit is too low.', 'wp-seopress'),
-							'desc'   => __('Please contact your host to increase this value to at least 256M.', 'wp-seopress')
+							'desc'   => sprintf(__('Please contact your host to increase this value to at least <code>256M</code> (current value: <code>%dM</code>).', 'wp-seopress'), absint(wp_convert_hr_to_bytes($memory_limit) / 1024 / 1024))
 						];
 					}
 				}
@@ -488,7 +488,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 					<?php foreach($requirements as $key => $value) { ?>
 						<div class="seopress-notice is-warning">
 							<h4><?php echo esc_html($value['title']); ?></h4>
-							<p><?php echo esc_html($value['desc']); ?></p>
+							<p><?php echo wp_kses_post($value['desc']); ?></p>
 						</div>
 						<?php
 					}

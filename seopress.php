@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 8.5.0.2
+Version: 8.5.1
 Author URI: https://www.seopress.org/
 License: GPLv3 or later
 Text Domain: wp-seopress
@@ -35,7 +35,7 @@ defined('ABSPATH') or exit('Please don’t call the plugin directly. Thanks :)')
 /**
  * Define constants
  */
-define('SEOPRESS_VERSION', '8.5.0.2');
+define('SEOPRESS_VERSION', '8.5.1');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -178,6 +178,38 @@ function seopress_init() {
     include_once plugin_dir_path(__FILE__) . 'inc/functions/variables/dynamic-variables.php';
 }
 add_action('init', 'seopress_init');
+
+/**
+ * Update translations automatically during inline update
+ * @param object $upgrader
+ * @param array $hook_extra
+ * @return void
+ */
+function seopress_update_translations($upgrader, $hook_extra) {
+    // Check if it's a plugin update
+    if (
+        isset($hook_extra['type'], $hook_extra['action'], $hook_extra['plugins']) &&
+        'plugin' === $hook_extra['type'] &&
+        'update' === $hook_extra['action']
+    ) {
+        // List of plugins requiring translation updates
+        $plugins_to_update = [
+            'wp-seopress/seopress.php' => 'wp-seopress',
+            'wp-seopress-pro/seopress-pro.php' => 'wp-seopress-pro',
+            'wp-seopress-insights/seopress-insights.php' => 'wp-seopress-insights',
+        ];
+
+        foreach ($hook_extra['plugins'] as $plugin) {
+            if (array_key_exists($plugin, $plugins_to_update)) {
+                $plugin_slug = $plugins_to_update[$plugin];
+
+                // Trigger translation updates for the plugin
+                wp_download_language_pack($plugin_slug);
+            }
+        }
+    }
+}
+add_action('upgrader_process_complete', 'seopress_update_translations', 10, 2);
 
 /**
  * Render dynamic variables

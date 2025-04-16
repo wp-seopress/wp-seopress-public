@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.5.0.2
+Stable tag: 8.5.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,6 +271,16 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.5.1 =
+* NEW Update translations automatically during inline update
+* NEW Add PageSpeed Insights logs to the settings page
+* NEW Import Breadcrumb Title from Yoast SEO
+* INFO Improve requirement notices in wizard
+* INFO Remove title field in TOC block for more flexibility
+* FIX Table of Contents block warning
+* FIX Matomo / Google Analytics Dashboard widgets to improve performances
+* FIX Missing alt text column in media library
+
 = 8.5.0.2 =
 * FIX WP Editor term taxonomy description field
 * FIX AI from the SEO metabox not working (PRO)

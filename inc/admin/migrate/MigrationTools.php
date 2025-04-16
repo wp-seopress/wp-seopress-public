@@ -36,6 +36,9 @@ function seopress_migration_tool($plugin, $name) {
     if ('smart-crawl' == $plugin || 'rk' == $plugin || 'seo-framework' == $plugin || 'aio' == $plugin) {
         $html .= '<li>' . __('Redirect URL', 'wp-seopress') . '</li>';
     }
+    if ('yoast' == $plugin) {
+        $html .= '<li>' . __('Breadcrumb Title', 'wp-seopress') . '</li>';
+    }
     $html .= '</ul>
 
                 <div class="seopress-notice is-warning">

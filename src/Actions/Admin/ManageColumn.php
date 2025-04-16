@@ -33,7 +33,7 @@ class ManageColumn implements ExecuteHooksBackend
     {
         global $pagenow;
 
-        $isEditPage = in_array($pagenow, ['edit.php'], true);
+        $isEditPage = in_array($pagenow, ['edit.php', 'upload.php'], true);
         $isAdvancedEnabled = '1' === seopress_get_toggle_option('advanced');
 
         if (($isEditPage && $isAdvancedEnabled) || wp_doing_ajax()) {
