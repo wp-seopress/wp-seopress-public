@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.5.1
+Stable tag: 8.5.1.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,6 +271,10 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+
+= 8.5.1.1 =
+* FIX Revert translation update
+
 = 8.5.1 =
 * NEW Update translations automatically during inline update
 * NEW Add PageSpeed Insights logs to the settings page
@@ -280,36 +284,6 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * FIX Table of Contents block warning
 * FIX Matomo / Google Analytics Dashboard widgets to improve performances
 * FIX Missing alt text column in media library
-
-= 8.5.0.2 =
-* FIX WP Editor term taxonomy description field
-* FIX AI from the SEO metabox not working (PRO)
-
-= 8.5.0.1 =
-* FIX Compatibility with SEOPress PRO 8.5.0
-
-= 8.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-5/">Read the blog post update</a> =
-* NEW Huge performance improvements on backend / frontend 🎉
-* NEW Show the list of URLs using the same target keyword to quickly edit them from the Content Analysis metabox
-* NEW Toggle simple / default view on dashboard for SEO management section
-* NEW Japanese language added for the UI (PRO soon available)
-* NEW "seopress_seo_alerts_homepage_args" hook to filter the SEO alerts homepage args (https://www.seopress.org/support/hooks/filter-the-homepage-alert-arguments/)
-* NEW "seopress_seo_alerts_robots_args" hook to filter the SEO alerts robots args (https://www.seopress.org/support/hooks/filter-the-robots-alert-arguments/)
-* NEW "seopress_seo_alerts_sitemap_args" hook to filter the SEO alerts sitemap args (https://www.seopress.org/support/hooks/filter-the-xml-sitemap-alert-arguments/)
-* INFO Improve notification if a custom taxonomy is not excluded from the XML sitemap
-* INFO Improve robots.txt file editor UI
-* INFO Add a new wizard to migrate from other SEO plugins
-* INFO Important performance improvements
-* INFO Exclude post types with archive set to false from OG image global settings
-* INFO Remove site navigation element from structured data types (not used anymore by Google)
-* INFO Update GPL license to v3
-* INFO Exclude CPT from other plugins to Site Audit
-* FIX Remove useless notification if SEOPress PRO is not activated
-* FIX Exclude non public CPT from News XML sitemaps settings
-* FIX Compatibility issue with Final Tiles Grid Gallery - Image Gallery plugin
-* FIX Target keywords count
-* FIX Canonical URL for WPML if the post is not translated / duplicated with fallback to default language
-* FIX Missing posts in HTML sitemap in specific cases
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>
