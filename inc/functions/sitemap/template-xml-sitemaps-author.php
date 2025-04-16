@@ -35,8 +35,8 @@ function seopress_xml_sitemap_author() {
         'orderby'             => 'nicename',
         'order'               => 'ASC',
         'has_published_posts' => ['post'],
-            'blog_id'         => absint(get_current_blog_id()),
-            'lang'            => '',
+        'blog_id'         => absint(get_current_blog_id()),
+        'lang'            => '',
     ];
     $args = apply_filters('seopress_sitemaps_author_query', $args);
 

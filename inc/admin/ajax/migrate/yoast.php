@@ -130,9 +130,11 @@ function seopress_yoast_migration() {
 
                         $y_fkws = get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', false);
 
-                        foreach ($y_fkws as $value) {
-                            foreach (json_decode($value) as $key => $value) {
-                                $y_fkws_clean[] .= esc_html($value->keyword);
+                        if ( ! empty($y_fkws)) {
+                            foreach ($y_fkws as $value) {
+                                foreach (json_decode($value) as $key => $value) {
+                                    $y_fkws_clean[] .= esc_html($value->keyword);
+                                }
                             }
                         }
 

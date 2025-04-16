@@ -90,15 +90,6 @@ class NoticeOption
      *
      * @return string
      */
-    public function getNoticeInsightsWizard(){
-        return $this->searchOptionByKey('notice-insights-wizard');
-    }
-
-    /**
-     * @since 6.0.0
-     *
-     * @return string
-     */
     public function getNoticeAMPAnalytics(){
         return $this->searchOptionByKey('notice-amp-analytics');
     }

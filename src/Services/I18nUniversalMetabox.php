@@ -311,10 +311,6 @@ class I18nUniversalMetabox
                             "Cool, one of your target keyword is used in your permalink.",
                             "wp-seopress"
                         ),
-                        'description' => __(
-                            'Learn more about <a href="https://www.youtube.com/watch?v=Rk4qgQdp2UA" target="_blank">keywords stuffing</a>.',
-                            "wp-seopress"
-                        ),
                         'title' =>__("Keywords in permalink", "wp-seopress")
                     ],
                     'no_follow_links' => [

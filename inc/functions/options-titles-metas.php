@@ -546,7 +546,7 @@ function seopress_titles_the_description_content() {
 			}
 		}
 	} elseif (is_post_type_archive() && !is_search() && !is_tax() && seopress_get_service('TitleOption')->getArchivesCPTDesc()) { //IS POST TYPE ARCHIVE (!is_tax required for TEC, !is_search required for WC search box)
-		$seopress_titles_the_description = esc_attr(seopress_get_service('TitleOption')->getArchivesCPTDesc($post->ID));
+		$seopress_titles_the_description = esc_attr(seopress_get_service('TitleOption')->getArchivesCPTDesc());
 
 		$seopress_titles_description_template = str_replace($seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description);
 	} elseif ((is_tax() || is_category() || is_tag()) && seopress_get_service('TitleOption')->getTaxDesc()) { //IS TAX

@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.6
+Stable tag: 8.6.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,12 +271,18 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.6.1 =
+* FIX Complianz compatibility issue
+* FIX OpenAI language issue
+* FIX Yoast SEO migration issue with old focus keywords
+* FIX Post type archive metadata if no posts exist
+
 = 8.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-6/">Read the blog post update</a> =
 * NEW Update AI models (now available: GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo)
 * NEW Enhancements for Table of Contents block
 * NEW Wizard enhancements for a better user experience
-* NEW "seopress_titles_paged_rel" hook to filter the paged rel links in the head section (https://www.seopress.org/support/hooks/filter-rel-nextprev-link-in-head-of-paginated-archive-pages/)
-* INFO Remove noarchive meta robots tag as it's not longer supported by Google
+* NEW “seopress_titles_paged_rel” hook to filter the paged rel links in the head section (https://www.seopress.org/support/hooks/filter-rel-nextprev-link-in-head-of-paginated-archive-pages/)
+* INFO Remove noarchive meta robots tag as it’s not longer supported by Google
 * INFO Ask AI to respect the grammar and typing of the language
 * INFO Add error handling for Google Analytics stats in dashboard widget (SEO, Analytics, Google Analytics tab, Stats in dashboard section)
 * INFO Increase timeout for Page Speed Insights API (from 30 to 120 seconds)
@@ -290,7 +296,7 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 * FIX JS error attachment when using AI
 * FIX Incorrect meta title/desc counters between classic SEO metabox and Universal one
 * FIX Bricks builder compatibility issue with SEOPress PRO
-* FIX PHP Warning: Attempt to read property "display_name" Author on null in Breadcrumbs
+* FIX PHP Warning: Attempt to read property “display_name” Author on null in Breadcrumbs
 * FIX Internal linking suggestions JS error
 * FIX Google Analytics / Matomo widgets if no data
 * FIX Fatal error on plugin deactivation

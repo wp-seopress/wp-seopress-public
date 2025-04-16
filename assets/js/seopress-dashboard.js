@@ -7,7 +7,6 @@ jQuery(document).ready(function ($) {
         "notice-get-started",
         "notice-usm",
         "notice-wizard",
-        "notice-insights-wizard",
         "notice-amp-analytics",
         "notice-litespeed-cache",
         "notice-divide-comments",

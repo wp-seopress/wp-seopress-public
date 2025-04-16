@@ -6,8 +6,7 @@ jQuery(document).ready(function ($) {
         ["seopress_advanced_tab", "seopress_advanced_image"],
         ["seopress_google_analytics_enable", "seopress_google_analytics_enable"],
         ["seopress_tool_settings", "seopress_tool_settings"],
-        ["seopress_instant_indexing_general", "seopress_instant_indexing_general"],
-        ["seopress_insights_general", "seopress_insights_general"]
+        ["seopress_instant_indexing_general", "seopress_instant_indexing_general"]
     ];
 
     features.forEach(function (item) {

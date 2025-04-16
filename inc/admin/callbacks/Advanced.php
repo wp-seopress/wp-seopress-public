@@ -595,7 +595,7 @@ function seopress_advanced_appearance_adminbar_noindex_callback() {
 	<?php } ?>
 	value="1"/>
 
-	<?php esc_attr_e('Remove noindex item from Admin Bar in backend and frontend', 'wp-seopress'); ?>
+	<?php esc_attr_e('Remove noindex item from Admin Bar in frontend', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_advanced_appearance_adminbar_noindex'])) {

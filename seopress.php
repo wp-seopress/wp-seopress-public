@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 8.6
+Version: 8.6.1
 Author URI: https://www.seopress.org/
 License: GPLv3 or later
 Text Domain: wp-seopress
@@ -35,7 +35,7 @@ defined('ABSPATH') or exit('Please don’t call the plugin directly. Thanks :)')
 /**
  * Define constants
  */
-define('SEOPRESS_VERSION', '8.6');
+define('SEOPRESS_VERSION', '8.6.1');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -84,7 +84,7 @@ register_activation_hook(__FILE__, 'seopress_activation');
  * @return void
  */
 function seopress_deactivation() {
-	deactivate_plugins(['wp-seopress-pro/seopress-pro.php', 'wp-seopress-insights/seopress-insights.php']);
+	deactivate_plugins(['wp-seopress-pro/seopress-pro.php']);
 	delete_option('seopress_activated');
 	flush_rewrite_rules(false);
 	do_action('seopress_deactivation');
@@ -180,38 +180,6 @@ function seopress_init() {
 add_action('init', 'seopress_init');
 
 /**
- * Update translations automatically during inline update
- * @param object $upgrader
- * @param array $hook_extra
- * @return void
- */
-function seopress_update_translations($upgrader, $hook_extra) {
-    // Check if it's a plugin update
-    if (
-        isset($hook_extra['type'], $hook_extra['action'], $hook_extra['plugins']) &&
-        'plugin' === $hook_extra['type'] &&
-        'update' === $hook_extra['action']
-    ) {
-        // List of plugins requiring translation updates
-        $plugins_to_update = [
-            'wp-seopress/seopress.php' => 'wp-seopress',
-            'wp-seopress-pro/seopress-pro.php' => 'wp-seopress-pro',
-            'wp-seopress-insights/seopress-insights.php' => 'wp-seopress-insights',
-        ];
-
-        foreach ($hook_extra['plugins'] as $plugin) {
-            if (array_key_exists($plugin, $plugins_to_update)) {
-                $plugin_slug = $plugins_to_update[$plugin];
-
-                // Trigger translation updates for the plugin
-                wp_download_language_pack($plugin_slug);
-            }
-        }
-    }
-}
-//add_action('upgrader_process_complete', 'seopress_update_translations', 10, 2);
-
-/**
  * Render dynamic variables
  * @param array $variables
  * @param object $post
@@ -254,7 +222,7 @@ function seopress_add_admin_options_scripts($hook) {
     $pages_with_toggle_js = array_map(function($page) {
         return 'seopress-' . $page;
     }, [
-        'setup', 'option', 'network-option', 'titles', 'xml-sitemap', 'social', 'google-analytics', 'pro-page', 'instant-indexing', 'advanced', 'import-export', 'bot-batch', 'license', 'insights', 'insights-rankings', 'insights-backlinks', 'insights-competitors', 'insights-trends', 'insights-settings', 'insights-license'
+        'setup', 'option', 'network-option', 'titles', 'xml-sitemap', 'social', 'google-analytics', 'pro-page', 'instant-indexing', 'advanced', 'import-export', 'bot-batch', 'license'
     ]);
 
     if (in_array($page, $pages_with_toggle_js)) {
@@ -284,7 +252,7 @@ function seopress_add_admin_options_scripts($hook) {
     $pages_with_tabs = array_map(function($page) {
         return 'seopress-' . $page;
     }, [
-        'titles', 'xml-sitemap', 'social', 'google-analytics', 'advanced', 'import-export', 'instant-indexing', 'insights-settings'
+        'titles', 'xml-sitemap', 'social', 'google-analytics', 'advanced', 'import-export', 'instant-indexing'
     ]);
 
     if (in_array($page, $pages_with_tabs)) {
@@ -596,9 +564,9 @@ function seopress_plugin_action_links($links, $file) {
             array_unshift($links, $pro_link);
         }
 
-        // Remove "Deactivate" link if PRO or Insights plugins are active
-        $is_pro_or_insights_active = is_plugin_active('wp-seopress-pro/seopress-pro.php') || is_plugin_active('wp-seopress-insights/seopress-insights.php');
-        if ($is_pro_or_insights_active && isset($links['deactivate'])) {
+        // Remove "Deactivate" link if PRO plugins are active
+        $is_pro_active = is_plugin_active('wp-seopress-pro/seopress-pro.php');
+        if ($is_pro_active && isset($links['deactivate'])) {
             unset($links['deactivate']);
         }
 

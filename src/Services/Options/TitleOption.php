@@ -411,19 +411,9 @@ class TitleOption {
      *
      * @param int|null $currentCpt
      */
-    public function getArchivesCPTTitle($id = null) {
-        $arg = $id;
-
-        if (null === $id) {
-            global $post;
-            if ( ! isset($post)) {
-                return;
-            }
-
-            $arg = $post;
-        }
-
-        $currentCpt = get_post_type($arg);
+    public function getArchivesCPTTitle() {
+        $queried_object = get_queried_object();
+        $currentCpt = null !== $queried_object ? $queried_object->name : '';
 
         $option =  $this->searchOptionByKey('seopress_titles_archive_titles');
 
@@ -439,19 +429,9 @@ class TitleOption {
      *
      * @param int|null $currentCpt
      */
-    public function getArchivesCPTDesc($id = null) {
-        $arg = $id;
-
-        if (null === $id) {
-            global $post;
-            if ( ! isset($post)) {
-                return;
-            }
-
-            $arg = $post;
-        }
-
-        $currentCpt = get_post_type($arg);
+    public function getArchivesCPTDesc() {
+        $queried_object = get_queried_object();
+        $currentCpt = null !== $queried_object ? $queried_object->name : '';
 
         $option =  $this->searchOptionByKey('seopress_titles_archive_titles');
 
@@ -467,19 +447,9 @@ class TitleOption {
      *
      * @param int|null $currentCpt
      */
-    public function getArchivesCPTNoIndex($id = null) {
-        $arg = $id;
-
-        if (null === $id) {
-            global $post;
-            if ( ! isset($post)) {
-                return;
-            }
-
-            $arg = $post;
-        }
-
-        $currentCpt = get_post_type($arg);
+    public function getArchivesCPTNoIndex() {
+        $queried_object = get_queried_object();
+        $currentCpt = null !== $queried_object ? $queried_object->name : '';
 
         $option =  $this->searchOptionByKey('seopress_titles_archive_titles');
         if ( ! isset($option[$currentCpt]['noindex'])) {
@@ -494,19 +464,9 @@ class TitleOption {
      *
      * @param int|null $currentCpt
      */
-    public function getArchivesCPTNoFollow($id = null) {
-        $arg = $id;
-
-        if (null === $id) {
-            global $post;
-            if ( ! isset($post)) {
-                return;
-            }
-
-            $arg = $post;
-        }
-
-        $currentCpt = get_post_type($arg);
+    public function getArchivesCPTNoFollow() {
+        $queried_object = get_queried_object();
+        $currentCpt = null !== $queried_object ? $queried_object->name : '';
 
         $option =  $this->searchOptionByKey('seopress_titles_archive_titles');
         if ( ! isset($option[$currentCpt]['nofollow'])) {
