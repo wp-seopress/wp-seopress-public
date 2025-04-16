@@ -726,6 +726,7 @@ if (seopress_get_service('AdvancedOption')->getAdvancedTaxDescEditor() ==='1' &&
     function seopress_tax_desc_wp_editor_init()
     {
         global $pagenow;
+        
         if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) {
             remove_filter('pre_term_description', 'wp_filter_kses');
             remove_filter('term_description', 'wp_kses_data');
@@ -778,6 +779,7 @@ if (seopress_get_service('AdvancedOption')->getAdvancedTaxDescEditor() ==='1' &&
 <?php
         }
     }
+    $taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
     if (!empty($taxonomies)) {
         foreach ($taxonomies as $key => $value) {
             add_action($key . '_edit_form_fields', 'seopress_tax_desc_wp_editor', 9, 1);

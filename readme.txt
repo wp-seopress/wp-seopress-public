@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.5
+Stable tag: 8.5.0.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,6 +271,13 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.5.0.2 =
+* FIX WP Editor term taxonomy description field
+* FIX AI from the SEO metabox not working (PRO)
+
+= 8.5.0.1 =
+* FIX Compatibility with SEOPress PRO 8.5.0
+
 = 8.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-5/">Read the blog post update</a> =
 * NEW Huge performance improvements on backend / frontend 🎉
 * NEW Show the list of URLs using the same target keyword to quickly edit them from the Content Analysis metabox
