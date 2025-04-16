@@ -139,13 +139,13 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/8.7.0.1/true';
+        $x_source_info = 'https://www.seopress.org/8.7.0.2/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/8.7.0.1/false';
+        $x_source_info = 'https://www.seopress.org/8.7.0.2/false';
     }
 
     //Bing API
@@ -360,7 +360,7 @@ function seopress_instant_indexing_on_post_publish( $new_status, $old_status, $p
                 $post_types['bricks_template']
             );
 
-            if ( ! in_array( $post->post_type, $post_types, true ) ) {
+            if (! in_array( $post->post_type, array_keys($post_types) ) ) {
                 return;
             }
 

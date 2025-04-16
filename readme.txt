@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdu
 Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 8.7.0.1
+Stable tag: 8.7.0.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,28 +271,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 8.7.0.1 =
-* FIX Undefined variable in admin bar
-
-= 8.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-7/">Read the blog post update</a> =
-* NEW Migrate Yoast (Free version) global settings to SEOPress with our import tool 🎉
-* NEW Automatic Product schema updated to use native GTIN WooCommerce fields 🎉
-* NEW Composer for SEOPress PRO 🎉
-* NEW AI-powered alt text generation for images with missing alt attributes
-* NEW WP CLI command to generate alt text for missing ones only
-* NEW Notifications counter in WP admin bar
-* NEW 'seopress_adminbar_counter' hook to filter the notification counter (https://www.seopress.org/support/hooks/filter-the-admin-bar-counter/)
-* INFO Cleaning some CSS
-* INFO Video XML sitemaps performance optimization
-* INFO Automatically exclude some post types for Instant Indexing feature
-* INFO Automatically enable the 404 cleaning option on plugin activation (new site only)
-* INFO Improve support for PHP 8.4
-* FIX Regression with Wizard/Import tool
-* FIX Display settings from SEOPress admin bar
-* FIX False positive "Noindex" alert from WP admin bar
-* FIX Duplicated meta robots with ?replytocom parameter
-* FIX Improve UI
-* FIX i18n and wpml-config.xml file
+= 8.7.0.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-7/">Read the blog post update</a> =
+* INFO WP 6.8 compatibility
+* FIX Label "SEO notifications counter in admin bar"
+* FIX A regression for Automatic Instant Indexing with IndexNow
+* FIX Canonical check exclusion for XML sitemaps
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

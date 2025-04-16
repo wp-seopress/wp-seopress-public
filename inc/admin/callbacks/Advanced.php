@@ -531,7 +531,7 @@ function seopress_advanced_appearance_adminbar_counter_callback() {
 	<?php } ?>
 	value="1"/>
 
-	<?php esc_attr_e('Display the SEO notifications counter in the Admin Bar', 'wp-seopress'); ?>
+	<?php esc_attr_e('Remove the SEO notifications counter in the Admin Bar', 'wp-seopress'); ?>
 </label>
 
 <?php if (isset($options['seopress_advanced_appearance_adminbar_counter'])) {
