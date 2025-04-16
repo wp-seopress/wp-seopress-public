@@ -29,14 +29,15 @@ jQuery(document).ready(function ($) {
 		})
 		.trigger("change");
 	
-	 // Initially hide all migration tools
-	 $(".seopress-import-tools-wrapper .section-tool").hide();
+	// Initially hide all migration tools 
+	$(".seopress-import-tools-wrapper .section-tool").hide();
+	$(".seopress-import-tools-wrapper .section-tool.active").show();
 	
-	 // Show the selected migration tool when a radio button is checked or focused
-	 $(".seopress-import-tools-wrapper input[name='select-wizard-import']").on("change focus keydown click input", function (e) {
+	// Show the selected migration tool when a radio button is checked or focused
+	$(".seopress-import-tools-wrapper input[name='select-wizard-import']").on("change focus keydown click input", function (e) {
 		if (e.type === "change" || 
-		    (e.type === "keydown" && (e.key === "Enter" || e.key === " ")) || 
-		    e.type === "focus") {
+			(e.type === "keydown" && (e.key === "Enter" || e.key === " ")) || 
+			e.type === "focus") {
 			// Ensure the radio button is selected when focused
 			if (e.type === "focus") {
 				$(this).prop("checked", true).trigger("change");

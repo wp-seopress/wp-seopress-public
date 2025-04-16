@@ -626,7 +626,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 							<?php
 								foreach ($plugins as $plugin => $detail) {
 									?>
-									<div class="seopress-import-tool">
+									<div class="seopress-import-tool <?php if (!empty($active_seo_plugins) && in_array($detail['slug'], $active_seo_plugins['slug'])) { echo 'active'; } ?>">
 										<label for="<?php echo esc_attr($plugin); ?>-migration-tool" tabindex="0">
 											<input type="radio" id="<?php echo esc_attr($plugin); ?>-migration-tool" name="select-wizard-import" value="<?php echo esc_attr($plugin); ?>-migration-tool"
 											aria-describedby="<?php echo esc_attr($plugin); ?>-description"
@@ -651,7 +651,11 @@ class SEOPRESS_Admin_Setup_Wizard {
 						<div class="seopress-import-tools-details" aria-live="polite">
 							<?php
 								foreach ($plugins as $plugin => $detail) {
-									echo wp_kses_post(seopress_migration_tool($plugin, $detail['name']));
+									$checked = false;
+									if (!empty($active_seo_plugins) && in_array($detail['slug'], $active_seo_plugins['slug'])) {
+										$checked = true;
+									} 
+									echo wp_kses_post(seopress_migration_tool($plugin, $detail, $checked));
 								}
 							?>
 						</div>
@@ -1010,7 +1014,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 							$seopress_titles_single_titles = isset($seopress_titles_option['seopress_titles_single_titles'][$seopress_cpt_key]['noindex']); ?>
 
 							<h3><?php echo esc_html($seopress_cpt_value->labels->name); ?>
-								<em><small>[<?php echo esc_html($seopress_cpt_value->name); ?>]</small></em>
+								<code>[<?php echo esc_html($seopress_cpt_value->name); ?>]</code>
 							</h3>
 							<ul>
 								<li class="seopress-wizard-service-item">
@@ -1111,7 +1115,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 								foreach ($cpt as $seopress_cpt_key => $seopress_cpt_value) {
 									$seopress_titles_archive_titles = isset($seopress_titles_option['seopress_titles_archive_titles'][$seopress_cpt_key]['noindex']); ?>
 									<h3><?php echo esc_html($seopress_cpt_value->labels->name); ?>
-										<em><small>[<?php echo esc_html($seopress_cpt_value->name); ?>]</small></em>
+										<code>[<?php echo esc_html($seopress_cpt_value->name); ?>]</code>
 									</h3>
 
 									<ul>
@@ -1311,7 +1315,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 							$seopress_titles_tax_titles = isset($seopress_titles_option['seopress_titles_tax_titles'][$seopress_tax_key]['noindex']); ?>
 
 							<h3><?php echo esc_html($seopress_tax_value->labels->name); ?>
-								<em><small>[<?php echo esc_html($seopress_tax_value->name); ?>]</small></em>
+								<code>[<?php echo esc_html($seopress_tax_value->name); ?>]</code>
 							</h3>
 
 							<ul>

@@ -1,6 +1,7 @@
 <wpml-config>
   <admin-texts>
 	<key name="seopress_titles_option_name">
+	  <key name="seopress_titles_sep"/>
 	  <key name="seopress_titles_home_site_title"/>
 	  <key name="seopress_titles_home_site_title_alt"/>
 	  <key name="seopress_titles_home_site_desc"/>

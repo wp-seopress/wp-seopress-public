@@ -417,7 +417,7 @@ function seopress_social_facebook_img_cpt_callback()
         if (! empty($post_types)) {
             foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) { ?>
 <h3><?php echo esc_html($seopress_cpt_value->labels->name); ?>
-    <em><small>[<?php echo esc_html($seopress_cpt_value->name); ?>]</small></em>
+    <code>[<?php echo esc_html($seopress_cpt_value->name); ?>]</code>
 </h3>
 
 <?php if ('product' === $seopress_cpt_value->name && is_plugin_active('woocommerce/woocommerce.php')) { ?>

@@ -354,6 +354,13 @@ class AdvancedOption
     }
 
     /**
+     * @since 8.7.0
+     */
+    public function getAppearanceAdminBarCounter(){
+        return $this->searchOptionByKey('seopress_advanced_appearance_adminbar_counter');
+    }
+
+    /**
      * @since 6.6.0
      */
     public function getAppearanceHideSiteOverview(){

@@ -519,6 +519,26 @@ function seopress_advanced_appearance_adminbar_callback() {
 	}
 }
 
+function seopress_advanced_appearance_adminbar_counter_callback() {
+	$options = get_option('seopress_advanced_option_name');
+
+	$check = isset($options['seopress_advanced_appearance_adminbar_counter']); ?>
+
+<label for="seopress_advanced_appearance_adminbar_counter">
+	<input id="seopress_advanced_appearance_adminbar_counter"
+		name="seopress_advanced_option_name[seopress_advanced_appearance_adminbar_counter]" type="checkbox" <?php if ('1' == $check) { ?>
+	checked="yes"
+	<?php } ?>
+	value="1"/>
+
+	<?php esc_attr_e('Display the SEO notifications counter in the Admin Bar', 'wp-seopress'); ?>
+</label>
+
+<?php if (isset($options['seopress_advanced_appearance_adminbar_counter'])) {
+		esc_attr($options['seopress_advanced_appearance_adminbar_counter']);
+	}
+}
+
 function seopress_advanced_appearance_universal_metabox_disable_callback() {
 	$docs = function_exists('seopress_get_docs_links') ? seopress_get_docs_links() : '';
 	$options = get_option('seopress_advanced_option_name');

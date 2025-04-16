@@ -124,7 +124,7 @@ function seopress_xml_sitemap_post_types_list_callback()
         ?>
 <h3>
     <?php echo esc_html($seopress_cpt_value->labels->name); ?>
-    <em><small>[<?php echo esc_html($seopress_cpt_value->name); ?>]</small></em>
+    <code>[<?php echo esc_html($seopress_cpt_value->name); ?>]</code>
 </h3>
 
 <!--List all post types-->
@@ -180,7 +180,7 @@ function seopress_xml_sitemap_taxonomies_list_callback()
     foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) { ?>
 <h3>
     <?php echo esc_html($seopress_tax_value->labels->name); ?>
-    <em><small>[<?php echo esc_html($seopress_tax_value->name); ?>]</small></em>
+    <code>[<?php echo esc_html($seopress_tax_value->name); ?>]</code>
 </h3>
 
 <!--List all taxonomies-->

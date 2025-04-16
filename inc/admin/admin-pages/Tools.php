@@ -194,7 +194,7 @@ if (function_exists('seopress_admin_header')) {
                     <?php
                         foreach ($plugins as $plugin => $detail) {
                             ?>
-                            <div class="seopress-import-tool">
+                            <div class="seopress-import-tool <?php if (!empty($active_seo_plugins) && in_array($detail['slug'], $active_seo_plugins['slug'])) { echo 'active'; } ?>">
                                 <label for="<?php echo esc_attr($plugin); ?>-migration-tool" tabindex="0">
                                     <input type="radio" id="<?php echo esc_attr($plugin); ?>-migration-tool" name="select-wizard-import" value="<?php echo esc_attr($plugin); ?>-migration-tool"
                                     aria-describedby="<?php echo esc_attr($plugin); ?>-description"
@@ -219,7 +219,11 @@ if (function_exists('seopress_admin_header')) {
                 <div class="seopress-import-tools-details" aria-live="polite">
                     <?php
                         foreach ($plugins as $plugin => $detail) {
-                            echo wp_kses_post(seopress_migration_tool($plugin, $detail['name']));
+                            $checked = false;
+                            if (!empty($active_seo_plugins) && in_array($detail['slug'], $active_seo_plugins['slug'])) {
+                                $checked = true;
+                            } 
+                            echo wp_kses_post(seopress_migration_tool($plugin, $detail, $checked));
                         }
                     ?>
                 </div>

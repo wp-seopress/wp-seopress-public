@@ -302,6 +302,7 @@ class seopress_options
 	public function pre_save_options()
 	{
 		add_filter( 'pre_update_option_seopress_instant_indexing_option_name', [$this, 'pre_seopress_instant_indexing_option_name'], 10, 2 );
+		add_filter( 'pre_update_option_seopress_xml_sitemap_option_name', [$this, 'pre_seopress_xml_sitemap_option_name'], 10, 2 );
 	}
 
 	public function pre_seopress_instant_indexing_option_name( $new_value, $old_value )
@@ -312,6 +313,12 @@ class seopress_options
 			$options['seopress_instant_indexing_google_api_key'] = $new_value['seopress_instant_indexing_google_api_key'];
 			return $options;
 		}
+		return $new_value;
+	}
+
+	// Automatically flush permalinks after saving XML sitemaps global settings
+	public function pre_seopress_xml_sitemap_option_name($new_value, $old_value) {
+		flush_rewrite_rules(false);
 		return $new_value;
 	}
 }

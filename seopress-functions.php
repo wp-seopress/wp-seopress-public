@@ -772,22 +772,6 @@ function seopress_maybe_mangled_object_vars($data){
 }
 
 /**
- * Automatically flush permalinks after saving XML sitemaps global settings
- *
- * @param string $option
- * @param string $old_value
- * @param string $value
- *
- * @return void
- */
-add_action('update_option', 'seopress_auto_flush_permalinks', 10, 3);
-function seopress_auto_flush_permalinks($option, $old_value, $value) {
-	if ($option === 'seopress_xml_sitemap_option_name') {
-		flush_rewrite_rules(false);
-	}
-}
-
-/**
  * Generate dynamically the Instant Indexing API key
  *
  * @since 8.6.0

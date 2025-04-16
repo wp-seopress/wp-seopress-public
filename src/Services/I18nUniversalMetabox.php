@@ -695,7 +695,7 @@ class I18nUniversalMetabox
                     'title_severity' => /* translators: %s degree of severity, eg: low */ __('Degree of severity: %s', 'wp-seopress'),
                     'target_keywords' => __("Target keywords", "wp-seopress"),
                     'target_keywords_description' => __(
-                        "Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them",
+                        "Separate target keywords by pressing Enter.",
                         "wp-seopress"
                     ),
                     'target_keywords_multiple_usage' => __(

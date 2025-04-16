@@ -275,6 +275,14 @@ add_settings_field(
 );
 
 add_settings_field(
+    'seopress_advanced_appearance_adminbar_counter', // ID
+    __('SEO notifications counter in admin bar', 'wp-seopress'), // Title
+    'seopress_advanced_appearance_adminbar_counter_callback', // Callback
+    'seopress-settings-admin-advanced-appearance', // Page
+    'seopress_setting_section_advanced_appearance_admin_bar' // Section
+);
+
+add_settings_field(
     'seopress_advanced_appearance_adminbar_noindex', // ID
     __('Noindex in admin bar', 'wp-seopress'), // Title
     'seopress_advanced_appearance_adminbar_noindex_callback', // Callback

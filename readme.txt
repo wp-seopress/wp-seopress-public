@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.6.1
+Stable tag: 8.7
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,35 +271,25 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 8.6.1 =
-* FIX Complianz compatibility issue
-* FIX OpenAI language issue
-* FIX Yoast SEO migration issue with old focus keywords
-* FIX Post type archive metadata if no posts exist
-
-= 8.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-6/">Read the blog post update</a> =
-* NEW Update AI models (now available: GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo)
-* NEW Enhancements for Table of Contents block
-* NEW Wizard enhancements for a better user experience
-* NEW “seopress_titles_paged_rel” hook to filter the paged rel links in the head section (https://www.seopress.org/support/hooks/filter-rel-nextprev-link-in-head-of-paginated-archive-pages/)
-* INFO Remove noarchive meta robots tag as it’s not longer supported by Google
-* INFO Ask AI to respect the grammar and typing of the language
-* INFO Add error handling for Google Analytics stats in dashboard widget (SEO, Analytics, Google Analytics tab, Stats in dashboard section)
-* INFO Increase timeout for Page Speed Insights API (from 30 to 120 seconds)
-* FIX i18n POT file
-* FIX Default OG:IMAGE for Shop page
-* FIX Default settings for term taxonomies meta title / description
-* FIX No /product-category/ in URL when using WooCommerce and WPML Multilingual CMS + WooCommerce Multilingual & Multicurrency
-* FIX User meta tags for author
-* FIX AI: Alt text for images uploaded from Gravity Forms
-* FIX undefined $language with AI in specific cases
-* FIX JS error attachment when using AI
-* FIX Incorrect meta title/desc counters between classic SEO metabox and Universal one
-* FIX Bricks builder compatibility issue with SEOPress PRO
-* FIX PHP Warning: Attempt to read property “display_name” Author on null in Breadcrumbs
-* FIX Internal linking suggestions JS error
-* FIX Google Analytics / Matomo widgets if no data
-* FIX Fatal error on plugin deactivation
+= 8.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-7/">Read the blog post update</a> =
+* NEW Migrate Yoast (Free version) global settings to SEOPress with our import tool 🎉
+* NEW Automatic Product schema updated to use native GTIN WooCommerce fields 🎉
+* NEW Composer for SEOPress PRO 🎉
+* NEW AI-powered alt text generation for images with missing alt attributes
+* NEW WP CLI command to generate alt text for missing ones only
+* NEW Notifications counter in WP admin bar
+* NEW 'seopress_adminbar_counter' hook to filter the notification counter (https://www.seopress.org/support/hooks/filter-the-admin-bar-counter/)
+* INFO Cleaning some CSS
+* INFO Video XML sitemaps performance optimization
+* INFO Automatically exclude some post types for Instant Indexing feature
+* INFO Automatically enable the 404 cleaning option on plugin activation (new site only)
+* INFO Improve support for PHP 8.4
+* FIX Regression with Wizard/Import tool
+* FIX Display settings from SEOPress admin bar
+* FIX False positive "Noindex" alert from WP admin bar
+* FIX Duplicated meta robots with ?replytocom parameter
+* FIX Improve UI
+* FIX i18n and wpml-config.xml file
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

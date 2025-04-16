@@ -25,6 +25,23 @@
     display: inline-block;
 }
 
+#wpadminbar #wp-admin-bar-seopress .seopress-menu-notification-counter {
+    display: inline-block !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    border-radius: 10px !important;
+    margin: 7px 0 0 4px !important;
+    vertical-align: top !important;
+    font-size: 11px !important;
+    line-height: 1.7 !important;
+    text-align: center !important;
+}
+
+body:not(.wp-admin) #wpadminbar .wp-ui-notification.seopress-menu-notification-counter {
+    color: #fff;
+    background-color: #d63638;
+}
+
 #wpadminbar #wp-admin-bar-seopress .wrap-seopress-noindex .ab-icon::before {
     color: #eee;
     vertical-align: middle;

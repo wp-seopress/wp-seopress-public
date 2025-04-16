@@ -679,6 +679,9 @@ function seopress_titles_noindex_bypass() {
 			$seopress_titles_noindex = 'noindex';
 		} elseif (is_attachment() && seopress_get_service('TitleOption')->getAttachmentsNoIndex()) {
 			$seopress_titles_noindex = 'noindex';
+		} elseif(isset( $_GET['replytocom'] ) ) {
+			$seopress_titles_noindex = 'noindex';
+			remove_filter( 'wp_robots', 'wp_robots_no_robots' );
 		}
 	}
 
