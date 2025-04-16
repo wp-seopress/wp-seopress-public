@@ -31,8 +31,14 @@ class ManageColumn implements ExecuteHooksBackend
      */
     public function hooks()
     {
-        if ('1' == seopress_get_toggle_option('advanced')) {
-            add_action('init', [$this, 'setup'], 20); //priority is important for plugins compatibility like Toolset
+        global $pagenow;
+
+        $isEditPage = in_array($pagenow, ['edit.php'], true);
+        $isAdvancedEnabled = '1' === seopress_get_toggle_option('advanced');
+
+        if (($isEditPage && $isAdvancedEnabled) || wp_doing_ajax()) {
+            // Priority is important for plugins compatibility like Toolset
+            add_action('init', [$this, 'setup'], 20);
         }
     }
 

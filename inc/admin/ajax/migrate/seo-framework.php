@@ -2,9 +2,9 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//SEO Framework migration
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/* 
+* SEO Framework migration
+*/
 function seopress_seo_framework_migration() {
     check_ajax_referer('seopress_seo_framework_migrate_nonce', '_ajax_nonce', true);
 

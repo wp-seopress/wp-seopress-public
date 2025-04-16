@@ -10,7 +10,7 @@ if (function_exists('seopress_admin_header')) {
     action="<?php echo esc_url(admin_url('options.php')); ?>"
     class="seopress-option">
     <?php
-        echo $this->seopress_feature_title('titles');
+        echo $this->feature_title('titles');
 settings_fields('seopress_titles_option_group'); ?>
 
     <div id="seopress-tabs" class="wrap">

@@ -525,79 +525,70 @@ class SEOPRESS_Admin_Setup_Wizard {
 								'wordpress-seo-premium/wp-seo-premium.php',
 							],
 							'name' => 'Yoast SEO',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/yoast.png',
 						],
 						'aio'              => [
 							'slug' => [
 								'all-in-one-seo-pack/all_in_one_seo_pack.php',
 							],
 							'name' => 'All In One SEO',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/aio.svg',
 						],
 						'seo-framework'    => [
 							'slug' => [
 								'autodescription/autodescription.php',
 							],
 							'name' => 'The SEO Framework',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/seo-framework.svg',
 						],
 						'rk'               => [
 							'slug' => [
 								'seo-by-rank-math/rank-math.php',
 							],
 							'name' => 'Rank Math',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/rk.svg',
 						],
 						'squirrly'         => [
 							'slug' => [
 								'squirrly-seo/squirrly.php',
 							],
 							'name' => 'Squirrly SEO',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/squirrly.png',
 						],
 						'seo-ultimate'     => [
 							'slug' => [
 								'seo-ultimate/seo-ultimate.php',
 							],
 							'name' => 'SEO Ultimate',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/seo-ultimate.svg',
 						],
 						'wp-meta-seo'      => [
 							'slug' => [
 								'wp-meta-seo/wp-meta-seo.php',
 							],
 							'name' => 'WP Meta SEO',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/wp-meta-seo.png',
 						],
 						'premium-seo-pack' => [
 							'slug' => [
 								'premium-seo-pack/plugin.php',
 							],
 							'name' => 'Premium SEO Pack',
-						],
-						'wpseo'            => [
-							'slug' => [
-								'wpseo/wpseo.php',
-							],
-							'name' => 'wpSEO',
-						],
-						'platinum-seo'     => [
-							'slug' => [
-								'platinum-seo-pack/platinum-seo-pack.php',
-							],
-							'name' => 'Platinum SEO Pack'
-
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/premium-seo-pack.png',
 						],
 						'smart-crawl'      => [
 							'slug' => [
 								'smartcrawl-seo/wpmu-dev-seo.php',
 							],
 							'name' => 'SmartCrawl',
-						],
-						'seopressor'       => [
-							'slug' => [
-								'seo-pressor/seo-pressor.php',
-							],
-							'name' => 'SEOPressor',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/smart-crawl.png',
 						],
 						'slim-seo'         => [
 							'slug' => [
 								'slim-seo/slim-seo.php',
 							],
 							'name' => 'Slim SEO',
+							'img' => SEOPRESS_URL_ASSETS . '/img/import/slim-seo.svg',
 						],
 					];
 
@@ -627,34 +618,46 @@ class SEOPRESS_Admin_Setup_Wizard {
 						<?php
 					} ?>
 
-					<p>
-						<select id="select-wizard-import" name="select-wizard-import">
-							<option value="none"><?php esc_attr_e('Select an option', 'wp-seopress'); ?></option>
-
-						<?php
-							foreach ($plugins as $plugin => $detail) {
-								?>
-									<option
-									<?php
-										if (!empty($active_seo_plugins)) {
-											if (in_array($detail['slug'], $active_seo_plugins['slug'])) {
-												echo 'selected';
-											}
-										}
+					<fieldset class="seopress-import-tools-wrapper" role="group" aria-labelledby="import-tools-legend">
+						<div class="seopress-notice">
+							<legend id="import-tools-legend"><?php esc_attr_e('Select an SEO plugin to migrate from (you don\'t have to enable the selected one to run the import):', 'wp-seopress'); ?></legend>
+						</div>
+						<div class="seopress-import-tools" role="radiogroup" aria-labelledby="import-tools-legend">
+							<?php
+								foreach ($plugins as $plugin => $detail) {
 									?>
-									value="<?php echo esc_attr($plugin); ?>-migration-tool"><?php echo esc_html($detail['name']); ?></option>
-								<?php
-							} ?>
-						</select>
-					</p>
+									<div class="seopress-import-tool">
+										<label for="<?php echo esc_attr($plugin); ?>-migration-tool" tabindex="0">
+											<input type="radio" id="<?php echo esc_attr($plugin); ?>-migration-tool" name="select-wizard-import" value="<?php echo esc_attr($plugin); ?>-migration-tool"
+											aria-describedby="<?php echo esc_attr($plugin); ?>-description"
+											aria-label="<?php echo esc_attr(sprintf(__('Select %s for migration', 'wp-seopress'), $detail['name'])); ?>"
+											<?php
+												if (!empty($active_seo_plugins) && in_array($detail['slug'], $active_seo_plugins['slug'])) {
+													echo 'checked';
+												}
+											?>
+											/>
+											<?php if (!empty($detail['img'])): ?>
+												<img src="<?php echo esc_url($detail['img']); ?>" alt="<?php echo esc_attr($detail['name']); ?> logo">
+											<?php endif; ?>
+											<span><?php echo esc_html($detail['name']); ?></span>
+										</label>
+										<p id="<?php echo esc_attr($plugin); ?>-description" class="screen-reader-text"><?php echo wp_kses_post(sprintf(__('Import metadata from %s, including titles and meta descriptions.', 'wp-seopress'), esc_html($detail['name']))); ?></p>
+									</div>
+								<?php } 
+							?>
+						</div>
 
-					<p class="description"><?php esc_attr_e('You don\'t have to enable the selected SEO plugin to run the import.', 'wp-seopress'); ?></p>
+						<div class="seopress-import-tools-details" aria-live="polite">
+							<?php
+								foreach ($plugins as $plugin => $detail) {
+									echo wp_kses_post(seopress_migration_tool($plugin, $detail['name']));
+								}
+							?>
+						</div>
+					</fieldset>
 
-					<?php
-						foreach ($plugins as $plugin => $detail) {
-							echo wp_kses_post(seopress_migration_tool($plugin, $detail['name']));
-						}
-					?>
+					<hr>
 
 					<p class="store-setup"><?php esc_html_e('No data to migrate? Click "Next step" button!', 'wp-seopress'); ?></p>
 
@@ -1109,7 +1112,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 						<?php }
 
 						if (empty($cpt)) { ?>
-						<p><?php esc_html_e('You don‘t have any post type archives, you can continue to the next step.','wp-seopress'); ?></p>
+						<p><?php esc_html_e('You don’t have any post type archives, you can continue to the next step.','wp-seopress'); ?></p>
 						<?php }
 					}
 
@@ -1597,13 +1600,16 @@ class SEOPRESS_Admin_Setup_Wizard {
 								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Generate automatically <strong>SEO metadata using AI</strong>.', 'wp-seopress')); ?>
 							</p>
 							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Receive <strong>SEO alerts by email / Slack</strong>, twice a day, as long as the problem persists. Act before it‘s too late!', 'wp-seopress')); ?>
+								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Site Audit to find and fix SEO issues.', 'wp-seopress')); ?>
+							</p>
+							<p class="seopress-setup-actions step">
+								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Receive <strong>SEO alerts by email / Slack</strong>, twice a day, as long as the problem persists. Act before it’t too late!', 'wp-seopress')); ?>
 							</p>
 							<p class="seopress-setup-actions step">
 								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Connect your site with <strong>Google Search Console</strong> to get relevant data: clicks, positions, impressions and CTR.', 'wp-seopress')); ?>
 							</p>
 							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Improve your business\'s presence in <strong>local search results</strong>.', 'wp-seopress')); ?>
+								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Improve your business’s presence in <strong>local search results</strong>.', 'wp-seopress')); ?>
 							</p>
 							<p class="seopress-setup-actions step">
 								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Optimize your SEO from your favorite e-commerce plugin: <strong>WooCommerce or Easy Digital Downloads</strong>.', 'wp-seopress')); ?>

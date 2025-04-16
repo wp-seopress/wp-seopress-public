@@ -3,8 +3,6 @@
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 $data_attr = seopress_metaboxes_init();
-
-
 ?>
 
 <div id="seopress-ca-tabs" class="wrap-seopress-analysis"
@@ -52,19 +50,29 @@ $data_attr = seopress_metaboxes_init();
                     $html = '';
                     $i = 0;
                     $itemData = seopress_get_service('ContentAnalysisDatabase')->getData($post->ID , ["keywords"]);
+
                     if (isset($itemData['keywords']) && !empty($itemData['keywords'])) {
                         $kwsCount = seopress_get_service('CountTargetKeywordsUse')->getCountByKeywords($itemData['keywords'], $post->ID);
 
                         foreach($kwsCount as $kw => $item) {
-
                             if(count($item['rows']) <= 1){
                                 continue;
                             }
                             $html .= '<li>
                                     <span class="dashicons dashicons-minus"></span>
                                     <strong>' . $item['key'] . '</strong>
-                                    ' . /* translators: %d number of times the target keyword is used */ sprintf(_n('is already used %d time', 'is already used %d times', count($item['rows']), 'wp-seopress'), count($item['rows'])). '
+                                    ' . /* translators: %d number of times the target keyword is used */ sprintf(_n('is already used %d time', 'is already used %d times', count($item['rows']) - 1, 'wp-seopress'), count($item['rows']) - 1). '
                                 </li>';
+                            if (!empty($item['rows'])) {
+                                $html .= '<details><summary>' . __('(URL using this keyword)', 'wp-seopress') . '</summary><ul>';
+                                foreach($item['rows'] as $row) {
+                                    if ($row['post_id'] == $post->ID) {
+                                        continue;
+                                    }
+                                    $html .= '<li><span class="dashicons dashicons-edit-page"></span><a href="' . $row['edit_link'] . '">' . $row['title'] . '</a></li>';
+                                }
+                                $html .= '</ul></details>';
+                            }
                             $i++;
                         }
                     }

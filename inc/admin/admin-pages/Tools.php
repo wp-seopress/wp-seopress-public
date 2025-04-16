@@ -11,7 +11,7 @@ if (function_exists('seopress_admin_header')) {
 } ?>
 <div class="seopress-option">
     <?php
-        echo $this->seopress_feature_title(null);
+        echo $this->feature_title(null);
         $current_tab = '';
     ?>
     <div id="seopress-tabs" class="wrap">
@@ -100,32 +100,130 @@ if (function_exists('seopress_admin_header')) {
             </h3>
 
             <?php
-                $plugins = [
-                    'yoast'            => 'Yoast SEO',
-                    'aio'              => 'All In One SEO',
-                    'seo-framework'    => 'The SEO Framework',
-                    'rk'               => 'Rank Math',
-                    'squirrly'         => 'Squirrly SEO',
-                    'seo-ultimate'     => 'SEO Ultimate',
-                    'wp-meta-seo'      => 'WP Meta SEO',
-                    'premium-seo-pack' => 'Premium SEO Pack',
-                    'wpseo'            => 'wpSEO',
-                    'platinum-seo'     => 'Platinum SEO Pack',
-                    'smart-crawl'      => 'SmartCrawl',
-                    'seopressor'       => 'SEOPressor',
-                    'slim-seo'         => 'Slim SEO'
-                ];
+            $plugins = [
+                'yoast'            => [
+                    'slug' => [
+                        'wordpress-seo/wp-seo.php',
+                        'wordpress-seo-premium/wp-seo-premium.php',
+                    ],
+                    'name' => 'Yoast SEO',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/yoast.png',
+                ],
+                'aio'              => [
+                    'slug' => [
+                        'all-in-one-seo-pack/all_in_one_seo_pack.php',
+                    ],
+                    'name' => 'All In One SEO',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/aio.svg',
+                ],
+                'seo-framework'    => [
+                    'slug' => [
+                        'autodescription/autodescription.php',
+                    ],
+                    'name' => 'The SEO Framework',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/seo-framework.svg',
+                ],
+                'rk'               => [
+                    'slug' => [
+                        'seo-by-rank-math/rank-math.php',
+                    ],
+                    'name' => 'Rank Math',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/rk.svg',
+                ],
+                'squirrly'         => [
+                    'slug' => [
+                        'squirrly-seo/squirrly.php',
+                    ],
+                    'name' => 'Squirrly SEO',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/squirrly.png',
+                ],
+                'seo-ultimate'     => [
+                    'slug' => [
+                        'seo-ultimate/seo-ultimate.php',
+                    ],
+                    'name' => 'SEO Ultimate',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/seo-ultimate.svg',
+                ],
+                'wp-meta-seo'      => [
+                    'slug' => [
+                        'wp-meta-seo/wp-meta-seo.php',
+                    ],
+                    'name' => 'WP Meta SEO',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/wp-meta-seo.png',
+                ],
+                'premium-seo-pack' => [
+                    'slug' => [
+                        'premium-seo-pack/plugin.php',
+                    ],
+                    'name' => 'Premium SEO Pack',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/premium-seo-pack.png',
+                ],
+                'smart-crawl'      => [
+                    'slug' => [
+                        'smartcrawl-seo/wpmu-dev-seo.php',
+                    ],
+                    'name' => 'SmartCrawl',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/smart-crawl.png',
+                ],
+                'slim-seo'         => [
+                    'slug' => [
+                        'slim-seo/slim-seo.php',
+                    ],
+                    'name' => 'Slim SEO',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/slim-seo.svg',
+                ],
+            ];
 
-    echo '<p><select id="select-wizard-import" name="select-wizard-import"><option value="none">' . esc_html__('Select an option', 'wp-seopress') . '</option>';
+            $active_seo_plugins = [];
 
-    foreach ($plugins as $plugin => $name) {
-        echo '<option value="' . esc_attr($plugin) . '-migration-tool">' . esc_html($name) . '</option>';
-    }
-    echo '</select></p><p class="description">' . esc_html__('You don\'t have to enable the selected SEO plugin to run the import.', 'wp-seopress') . '</p>';
+            foreach ($plugins as $plugin => $detail) {
+                foreach($detail['slug'] as $key => $slug) {
+                    if (is_plugin_active($slug)) {
+                        $active_seo_plugins['name'][] = $detail['name'];
+                        $active_seo_plugins['slug'][] = $detail['slug'];
+                    }
+                }
+            }
 
-    foreach ($plugins as $plugin => $name) {
-        echo seopress_migration_tool($plugin, $name);
-    } ?>
+            ?>
+            <fieldset class="seopress-import-tools-wrapper" role="group" aria-labelledby="import-tools-legend">
+                <div class="seopress-notice">
+                    <legend id="import-tools-legend"><?php esc_attr_e('Select an SEO plugin to migrate from (you don\'t have to enable the selected one to run the import):', 'wp-seopress'); ?></legend>
+                </div>
+                <div class="seopress-import-tools" role="radiogroup" aria-labelledby="import-tools-legend">
+                    <?php
+                        foreach ($plugins as $plugin => $detail) {
+                            ?>
+                            <div class="seopress-import-tool">
+                                <label for="<?php echo esc_attr($plugin); ?>-migration-tool" tabindex="0">
+                                    <input type="radio" id="<?php echo esc_attr($plugin); ?>-migration-tool" name="select-wizard-import" value="<?php echo esc_attr($plugin); ?>-migration-tool"
+                                    aria-describedby="<?php echo esc_attr($plugin); ?>-description"
+                                    aria-label="<?php echo esc_attr(sprintf(__('Select %s for migration', 'wp-seopress'), $detail['name'])); ?>"
+                                    <?php
+                                        if (!empty($active_seo_plugins) && in_array($detail['slug'], $active_seo_plugins['slug'])) {
+                                            echo 'checked';
+                                        }
+                                    ?>
+                                    />
+                                    <?php if (!empty($detail['img'])): ?>
+                                        <img src="<?php echo esc_url($detail['img']); ?>" alt="<?php echo esc_attr($detail['name']); ?> logo">
+                                    <?php endif; ?>
+                                    <span><?php echo esc_html($detail['name']); ?></span>
+                                </label>
+                                <p id="<?php echo esc_attr($plugin); ?>-description" class="screen-reader-text"><?php echo wp_kses_post(sprintf(__('Import metadata from %s, including titles and meta descriptions.', 'wp-seopress'), esc_html($detail['name']))); ?></p>
+                            </div>
+                        <?php } 
+                    ?>
+                </div>
+
+                <div class="seopress-import-tools-details" aria-live="polite">
+                    <?php
+                        foreach ($plugins as $plugin => $detail) {
+                            echo wp_kses_post(seopress_migration_tool($plugin, $detail['name']));
+                        }
+                    ?>
+                </div>
+            </fieldset>
         </div>
        <?php do_action('seopress_tools_migration', $current_tab); ?>
         <div class="seopress-tab <?php if ('tab_seopress_tool_reset' == $current_tab) {

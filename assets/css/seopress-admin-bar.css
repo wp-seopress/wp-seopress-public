@@ -1,9 +1,6 @@
-#wpadminbar,
-.column-seopress_score {
+#wpadminbar {
     --colorAlert: #a00;
-    --colorWarning: #ffba00;
     --colorSuccess: #4ab866;
-    --colorLowAlert: #e39f48;
 }
 
 /* Adminbar */
@@ -16,7 +13,7 @@
     width: 28px;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress .wrap-seopress-noindex {
+#wpadminbar #wp-admin-bar-seopress .wrap-seopress-noindex {
     background: var(--colorAlert);
     color: #fff;
     padding: 0 8px;
@@ -24,26 +21,26 @@
     margin-left: 6px;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress>a {
+#wpadminbar #wp-admin-bar-seopress>a {
     display: inline-block;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress .wrap-seopress-noindex .ab-icon::before {
+#wpadminbar #wp-admin-bar-seopress .wrap-seopress-noindex .ab-icon::before {
     color: #eee;
     vertical-align: middle;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots {
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots {
     display: block;
     background: #23292d;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots a {
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots a {
     height: inherit;
     padding-bottom: 5px;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-seo {
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-seo {
     font-weight: bold;
     border-bottom: 1px solid currentColor;
     width: 100%;
@@ -51,23 +48,23 @@
     margin-bottom: 5px;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex,
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow {
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex,
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow {
     display: block;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex .ab-icon,
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow .ab-icon {
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex .ab-icon,
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow .ab-icon {
     float: none;
     vertical-align: middle;
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex .on::before,
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow .on::before {
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex .on::before,
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow .on::before {
     color: var(--colorAlert);
 }
 
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex .off::before,
-#wpadminbar #wp-toolbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow .off::before {
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-noindex .off::before,
+#wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots .wrap-seopress-cpt-nofollow .off::before {
     color: var(--colorSuccess);
 }

@@ -2099,6 +2099,16 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     margin-bottom: 30px;
 }
 
+/* Content Analysis */
+#seopress-notice-target-kw details {
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+#seopress-notice-target-kw details ul {
+    padding: 1rem 0;
+}
+
 /* Titles & metas */
 .seopress_wrap_single_cpt,
 .seopress_wrap_tax,
@@ -2809,6 +2819,64 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     display: flex;
     margin-top: 32px;
     flex-wrap: wrap;
+}
+
+/* Wizard */
+body.seopress-setup .seopress-import-tools,
+.seopress-option .seopress-import-tools {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    margin: 1rem 0;
+}
+body.seopress-setup .seopress-import-tool,
+.seopress-option .seopress-import-tool {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 1rem;
+    background: var(--backgroundSecondary);
+    font-weight: bold;
+    position: relative;
+    transition: all 150ms linear;
+    border: 3px solid transparent;
+}
+body.seopress-setup .seopress-import-tool:hover,
+.seopress-option .seopress-import-tool:hover,
+body.seopress-setup .seopress-import-tool:focus,
+.seopress-option .seopress-import-tool:focus,
+body.seopress-setup .seopress-import-tool:active,
+.seopress-option .seopress-import-tool:active,
+body.seopress-setup .seopress-import-tool.active,
+.seopress-option .seopress-import-tool.active {
+    border: 3px solid var(--backgroundPrimary);
+}
+body.seopress-setup .seopress-import-tool *,
+.seopress-option .seopress-import-tool * {
+    cursor: pointer;
+}
+body.seopress-setup .seopress-import-tool label,
+.seopress-option .seopress-import-tool label {
+    display: inline-grid;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+    width: 100%;
+    padding: 1rem 2rem;
+    justify-content: center;
+}
+body.seopress-setup .seopress-import-tool input[type="radio"],
+.seopress-option .seopress-import-tool input[type="radio"] {
+    text-indent: -9999px;
+    position: absolute;
+    opacity: 0;
+}
+body.seopress-setup .seopress-import-tool label img,
+.seopress-option .seopress-import-tool label img {
+    width: 50px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 0.5rem;
 }
 
 /* Quick tags */
@@ -3715,8 +3783,15 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     position: relative;
 }
 
-.seopress-activity-panel-tabs .btn:hover {
+.seopress-activity-panel-tabs .btn:hover,
+.seopress-activity-panel-tabs .btn:focus,
+.seopress-activity-panel-tabs .btn:active {
     background: var(--backgroundSecondaryHover);
+}
+
+.seopress-activity-panel-tabs .btn:focus,
+.seopress-activity-panel-tabs .btn:active {
+    outline: 1px solid var(--backgroundPrimary);
 }
 
 .seopress-activity-panel-tabs .btn.is-active {

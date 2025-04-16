@@ -14,7 +14,7 @@ if (function_exists('seopress_admin_header')) {
     <?php
         $current_tab = '';
 
-        echo $this->seopress_feature_title('instant-indexing');
+        echo $this->feature_title('instant-indexing');
         settings_fields('seopress_instant_indexing_option_group');
     ?>
 
@@ -47,7 +47,7 @@ if (function_exists('seopress_admin_header')) {
 
     </div>
     <!--seopress-tabs-->
-    <?php echo $this->seopress_feature_save(); ?>
+    <?php echo $this->feature_save(); ?>
     <?php sp_submit_button(esc_html__('Save changes', 'wp-seopress')); ?>
 </form>
 <?php

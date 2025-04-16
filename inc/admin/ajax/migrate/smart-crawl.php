@@ -2,12 +2,9 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/* SmartCrawl migration
-* @since 4.5
-* @author Benjamin Denis
+/* 
+* SmartCrawl migration
 */
-///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_smart_crawl_migration() {
     check_ajax_referer('seopress_smart_crawl_migrate_nonce', '_ajax_nonce', true);
 

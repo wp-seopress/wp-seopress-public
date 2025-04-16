@@ -8,8 +8,9 @@ use SEOPress\Models\AbstractRepository;
 
 class ContentAnalysisRepository extends AbstractRepository {
 
-
     public function __construct(){
+        $tables = seopress_get_service('TableList')->getTables();
+        seopress_get_service('TableManager')->createTablesIfNeeded($tables);
         $this->table = seopress_get_service('TableList')->getTableContentAnalysis();
     }
 
@@ -127,6 +128,7 @@ class ContentAnalysisRepository extends AbstractRepository {
     }
 
     public function getContentAnalysis($postId, $columns = ["*"]){
+
         global $wpdb;
         $strColumns = implode(', ', $columns);
         $sql = $wpdb->prepare(
@@ -137,7 +139,7 @@ class ContentAnalysisRepository extends AbstractRepository {
              LIMIT 1",
             $postId
         );
-
+        
         $result = $wpdb->get_results($sql, ARRAY_A);
 
         if(empty($result)){

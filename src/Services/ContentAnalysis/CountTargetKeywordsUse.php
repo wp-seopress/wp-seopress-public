@@ -34,17 +34,25 @@ class CountTargetKeywordsUse
 
         foreach ($targetKeywords as $key => $keyword) {
             $rows = $wpdb->get_results($wpdb->prepare($query, "%$keyword%"), ARRAY_A);
+
             $data[] = [
                 "key" => $keyword,
                 "rows" => array_values(array_filter(array_map(function($row) use ($keyword, $postId) {
+                    $post = get_post($postId);
+                    $post_type_object = get_post_type_object($post->post_type);
+
                     $values = array_map('trim', explode(',', $row['meta_value']));
 
                     if(!in_array($keyword, $values, true) || $postId === $row['post_id']){
                         return null;
                     }
 
-                    return $row['post_id'];
-                }, $rows)))
+                    return [
+                        'post_id' => absint($row['post_id']),
+                        'edit_link' => admin_url(sprintf($post_type_object->_edit_link . '&action=edit', absint($row['post_id']))),
+                        'title' => esc_html(get_the_title($row['post_id'])),
+                    ];
+                }, $rows))),
             ];
         }
 

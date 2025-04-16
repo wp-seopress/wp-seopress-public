@@ -175,6 +175,22 @@ jQuery(document).ready(function ($) {
     });
 });
 
+//Dashboard - Simple view
+jQuery(document).ready(function ($) {
+    $('.seopress-btn-view-switch').on('click', function () {
+        $('body').toggleClass('seopress-simple-view');
+        $.ajax({
+            method: 'POST',
+            url: seopressAjaxSwitchView.seopress_switch_view,
+            data: {
+                action: 'seopress_switch_view',
+                view: $('body').hasClass('seopress-simple-view') ? 'simple' : 'default',
+                _ajax_nonce: seopressAjaxSwitchView.seopress_nonce,
+            },            
+        });
+    });
+});
+
 //SEO Tools Tabs
 jQuery(document).ready(function ($) {
     var get_hash = window.location.hash;

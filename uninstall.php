@@ -101,6 +101,8 @@ class SEOPRESS_Uninstall {
 
         // Delete custom tables
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_significant_keywords");
+		$wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_content_analysis");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_seo_issues");
 
         // Clear CRON
         wp_clear_scheduled_hook('seopress_xml_sitemaps_ping_cron');
@@ -111,10 +113,6 @@ class SEOPRESS_Uninstall {
         wp_clear_scheduled_hook('seopress_insights_gsc_cron');
         wp_clear_scheduled_hook('seopress_matomo_analytics_cron');
         wp_clear_scheduled_hook('seopress_alerts_cron');
-
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_content_analysis");
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}seopress_seo_issues");
-
 	}
 }
 

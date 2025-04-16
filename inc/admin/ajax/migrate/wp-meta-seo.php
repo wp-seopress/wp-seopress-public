@@ -2,12 +2,9 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/* WP Meta SEO migration
-* @since 3.8.2
-* @author Benjamin Denis
+/* 
+* WP Meta SEO migration
 */
-///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_wp_meta_seo_migration() {
     check_ajax_referer('seopress_meta_seo_migrate_nonce', '_ajax_nonce', true);
 

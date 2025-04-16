@@ -2,10 +2,17 @@
 
 <div id="seopress-page-list" class="seopress-page-list seopress-card">
 	<div class="seopress-card-title">
-		<h2><?php esc_attr_e('SEO management', 'wp-seopress'); ?></h2>
-        <p>
-            <?php echo wp_kses_post(__('Quickly enable / disable SEO modules to fit your needs. Click the <strong>Manage settings</strong> button to configure it.', 'wp-seopress')); ?>
-        </p>
+		<div>
+			<h2><?php esc_attr_e('SEO management', 'wp-seopress'); ?></h2>
+			<p>
+				<?php echo wp_kses_post(__('Quickly enable / disable SEO modules to fit your needs. Click the <strong>Manage settings</strong> button to configure it.', 'wp-seopress')); ?>
+			</p>
+		</div>
+		<div>
+			<button type="button" class="seopress-btn-view-switch seopress-btn" title="<?php esc_attr_e('Toggle simple / default view', 'wp-seopress'); ?>">
+				<span class="dashicons dashicons-grid-view"></span>
+			</button>
+		</div>
 	</div>
 
 	<?php

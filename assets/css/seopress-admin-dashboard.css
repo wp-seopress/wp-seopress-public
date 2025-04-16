@@ -488,6 +488,10 @@
     flex-direction: column;
 }
 
+#seopress-page-list .seopress-card-title {
+    flex-direction: inherit;
+}
+
 .seopress-card-title h2 {
     margin: 0;
 }
@@ -541,6 +545,22 @@
     padding: 0.5rem 1rem;
     border-top: 1px solid var(--borderColor);
     background: rgb(230 230 232 / .2);
+}
+
+/* Dashboard - Simple view */
+
+.seopress-dashboard.seopress-simple-view .seopress-cart-list p,
+.seopress-dashboard.seopress-simple-view .seopress-cart-list .seopress-item-footer {
+    display: none;
+}
+
+.seopress-dashboard.seopress-simple-view .seopress-cart-list .seopress-card-item {
+    padding: 1rem;
+}
+
+.seopress-dashboard .seopress-btn-view-switch {
+    background: none;
+    cursor: pointer;
 }
 
 /* Insights */

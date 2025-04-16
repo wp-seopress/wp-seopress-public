@@ -33,8 +33,8 @@ if (function_exists('seopress_admin_header')) {
         include_once dirname(dirname(__FILE__)) . '/blocks/ebooks.php';
         include_once dirname(dirname(__FILE__)) . '/blocks/integrations.php';
         include_once dirname(dirname(__FILE__)) . '/blocks/news.php';
-        $this->seopress_feature_save();
+        $this->feature_save();
     ?>
 </div>
-<?php echo $this->seopress_feature_save(); ?>
+<?php echo $this->feature_save(); ?>
 <?php

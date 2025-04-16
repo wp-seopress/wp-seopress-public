@@ -323,10 +323,7 @@ class Notifications {
 			'seo-ultimate/seo-ultimate.php'                  => 'SEO Ultimate',
 			'wp-meta-seo/wp-meta-seo.php'                    => 'WP Meta SEO',
 			'premium-seo-pack/plugin.php'                    => 'Premium SEO Pack',
-			'wpseo/wpseo.php'                                => 'wpSEO',
-			'platinum-seo-pack/platinum-seo-pack.php'        => 'Platinum SEO Pack',
 			'smartcrawl-seo/wpmu-dev-seo.php'                => 'SmartCrawl',
-			'seo-pressor/seo-pressor.php'                    => 'SEOPressor',
 			'slim-seo/slim-seo.php'                          => 'Slim SEO'
 		];
 

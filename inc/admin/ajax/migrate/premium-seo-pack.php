@@ -2,12 +2,9 @@
 
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/* Premium SEO Pack migration
-* @since 3.8.7
-* @author Benjamin Denis
+/* 
+* Premium SEO Pack migration
 */
-///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_premium_seo_pack_migration() {
     check_ajax_referer('seopress_premium_seo_pack_migrate_nonce', '_ajax_nonce', true);
 

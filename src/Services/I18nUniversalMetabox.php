@@ -733,6 +733,7 @@ class I18nUniversalMetabox
                         'You should avoid using multiple times the same keyword for different pages. Try to consolidate your content into one single page.',
                         "wp-seopress"
                     ),
+                    'target_keywords_details' => __('(URL using this keyword)', 'wp-seopress'),
                     'target_keywords_placeholder' => __(
                         "Enter your target keywords",
                         "wp-seopress"

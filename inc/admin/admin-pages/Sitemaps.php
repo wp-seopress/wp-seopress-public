@@ -8,7 +8,7 @@ if (function_exists('seopress_admin_header')) {
 } ?>
 <form method="post" action="<?php echo esc_url(admin_url('options.php')); ?>" class="seopress-option" name="seopress-flush">
     <?php
-        echo $this->seopress_feature_title('xml-sitemap');
+        echo $this->feature_title('xml-sitemap');
 settings_fields('seopress_xml_sitemap_option_group'); ?>
 
     <div id="seopress-tabs" class="wrap">

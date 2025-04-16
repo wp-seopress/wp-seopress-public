@@ -6,9 +6,9 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.4.1
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 8.5
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank higher in search engines, fully white label. Now with AI.
 
@@ -104,7 +104,6 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 			<li>product</li>
 			<li>job</li>
 			<li>simple review</li>
-			<li>site navigation element</li>
 			<li>custom schema</li>
 		</ol>
 	<li><strong>Automatic Schemas</strong> with advanced conditions (AND, OR, Post types, taxonomies)</li>
@@ -196,7 +195,17 @@ We provide deep integration with Elementor page builder UI, see below:
 
 = Can I import my post and term metadata from other plugins? =
 
-You can import your metadata from <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/_faq">Yoast SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/_faq">All In One SEO (AIO SEO)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/_faq">The SEO Framework (TSF)</a>, <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/_faq">Squirrly</a> (post metas only, not terms), <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/_faq">Rank Math</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/_faq">SEO Ultimate (post metas only, not terms)</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/_faq">WP Meta SEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wpseo-to-seopress/_faq">wpSEO</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-platinum-seo-pack-to-seopress/_faq">Platinum SEO Pack</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/_faq">SmartCrawl</a>, <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seopressor-to-seopress/_faq">SEOPressor</a>, <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/_faq">Slim SEO</a> and <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
+You can import your metadata from:
+* <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/_faq">Yoast SEO</a>, 
+* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/_faq">All In One SEO (AIO SEO)</a>, 
+* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/_faq">The SEO Framework (TSF)</a>, 
+* <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/_faq">Squirrly</a> (post metas only, not terms), 
+* <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/_faq">Rank Math</a>, 
+* <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/_faq">SEO Ultimate (post metas only, not terms)</a>, 
+* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/_faq">WP Meta SEO</a>, 
+* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/_faq">SmartCrawl</a>, 
+* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/_faq">Slim SEO</a> 
+* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
 
 = How to use Google Tag Manager / other scripts with SEOPress? =
 
@@ -262,40 +271,28 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 8.4.1 =
-* FIX Admin bar: show a noindex notice if the current post/term is set to noindex
-* Chore: remove duplicate load_plugin_textdomain call
-
-= 8.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-4/">Read the blog post update</a> =
-* NEW Site Audit #3: automatically fix missing alt text on images with AI (PRO)
-* NEW Add a button to block Claude bot in robots.txt (PRO)
-* NEW Table of Contents block for the Full Site Editing (PRO)
-* NEW FAQ Block using the detail block: better reliability and better user experience
-* NEW 'seopress_elementor_integration_enabled' hook to disable our Elementor integration (https://www.seopress.org/support/hooks/disable-seopress-elementor-integration/)
-* INFO Improve security
-* INFO Add all missing columns to CSV export redirects file
-* INFO Bring back the last modification date column in XML index sitemaps
-* INFO Add "Automatically set alt text on already inserted image" setting to the wizard installation
-* INFO Remove sitelinks searchbox in Google search results to follow their new guidelines
-* INFO Remove deprecated load_plugin_textdomain
-* INFO Improve our Elementor integration
-* INFO Update Google APIs
-* INFO Improve White Label for Dashboard by removing SEO Suite, Ebooks, and Latest News sections if the feature is enabled
-* INFO Admin bar: show a noindex notice if the current post/term is set to noindex (individually or globally)
-* INFO Improve license status display in the Dashboard
-* FIX WPML compatibility: WooCommerce Shop archive page URL in XML sitemaps
-* FIX Refresh textarea with tabs in backend
-* FIX PHP notices / warnings in specific cases
-* FIX Encoding with OpenAI integration
-* FIX Rendering dynamic variables for the Local Business schema (SEO, PRO, Local Business tab)
-* FIX Custom capability to export broken links as a CSV file
-* FIX Stop words for internal linking suggestions in other languages than English and French
-* FIX PHP Deprecated: strtotime(): Passing null to parameter #1 ($datetime)
-* FIX Deprecation warning for PluginPrePublishPanel with the Block Editor
-* FIX Permissions for Site Audit
-* FIX Google Preview encoding issue
-* FIX Compatibility with Avada Fusion Builder and our universal SEO metabox
-* FIX Compatibility with Surecart (universal SEO metabox is required to handle SEO metadata)
+= 8.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-5/">Read the blog post update</a> =
+* NEW Huge performance improvements on backend / frontend 🎉
+* NEW Show the list of URLs using the same target keyword to quickly edit them from the Content Analysis metabox
+* NEW Toggle simple / default view on dashboard for SEO management section
+* NEW Japanese language added for the UI (PRO soon available)
+* NEW "seopress_seo_alerts_homepage_args" hook to filter the SEO alerts homepage args (https://www.seopress.org/support/hooks/filter-the-homepage-alert-arguments/)
+* NEW "seopress_seo_alerts_robots_args" hook to filter the SEO alerts robots args (https://www.seopress.org/support/hooks/filter-the-robots-alert-arguments/)
+* NEW "seopress_seo_alerts_sitemap_args" hook to filter the SEO alerts sitemap args (https://www.seopress.org/support/hooks/filter-the-xml-sitemap-alert-arguments/)
+* INFO Improve notification if a custom taxonomy is not excluded from the XML sitemap
+* INFO Improve robots.txt file editor UI
+* INFO Add a new wizard to migrate from other SEO plugins
+* INFO Important performance improvements
+* INFO Exclude post types with archive set to false from OG image global settings
+* INFO Remove site navigation element from structured data types (not used anymore by Google)
+* INFO Update GPL license to v3
+* INFO Exclude CPT from other plugins to Site Audit
+* FIX Remove useless notification if SEOPress PRO is not activated
+* FIX Exclude non public CPT from News XML sitemaps settings
+* FIX Compatibility issue with Final Tiles Grid Gallery - Image Gallery plugin
+* FIX Target keywords count
+* FIX Canonical URL for WPML if the post is not translated / duplicated with fallback to default language
+* FIX Missing posts in HTML sitemap in specific cases
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

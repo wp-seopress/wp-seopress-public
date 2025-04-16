@@ -410,7 +410,7 @@ function seopress_social_facebook_img_default_callback()
 
 function seopress_social_facebook_img_cpt_callback()
 {
-    $post_types = seopress_get_service('WordPressData')->getPostTypes();
+    $post_types = seopress_get_service('WordPressData')->getPostTypes(false, ['has_archive' => true]);
     if (! empty($post_types)) {
         unset($post_types['post'], $post_types['page']);
 
@@ -453,11 +453,13 @@ function seopress_social_facebook_img_cpt_callback()
                     esc_attr($options['seopress_social_facebook_img_cpt'][$seopress_cpt_key]['url']);
                 }
             }
-        } else { ?>
-<p>
-    <?php esc_attr_e('No custom post type to configure.', 'wp-seopress'); ?>
-</p>
-<?php }
+        }
+    }
+    else { ?>
+        <p>
+            <?php esc_attr_e('No custom post type to configure.', 'wp-seopress'); ?>
+        </p>
+        <?php
     }
 }
 

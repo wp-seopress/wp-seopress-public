@@ -95,7 +95,19 @@ if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
                             'orderby'          => $seopress_xml_sitemap_html_orderby_option,
                             'post_type'        => $cpt_key,
                             'post_status'      => 'publish',
-                            'meta_query'       => [['key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS']],
+                            'meta_query'       => [
+                                'relation' => 'OR',
+                                [
+                                    'key'     => '_seopress_robots_index',
+                                    'value'   => '',
+                                    'compare' => 'NOT EXISTS',
+                                ],
+                                [
+                                    'key'     => '_seopress_robots_index',
+                                    'value'   => 'yes',
+                                    'compare' => '!=',
+                                ],
+                            ],
                             'fields'           => 'ids',
                             'exclude'          => $seopress_xml_sitemap_html_exclude_option,
                             'suppress_filters' => false,
@@ -106,7 +118,19 @@ if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
                         $args_cat_query = [
                             'orderby'	         => 'name',
                             'order'		          => 'ASC',
-                            'meta_query'       => [['key' => '_seopress_robots_index', 'value' => 'yes', 'compare' => 'NOT EXISTS']],
+                            'meta_query'       => [
+                                'relation' => 'OR',
+                                [
+                                    'key'     => '_seopress_robots_index',
+                                    'value'   => '',
+                                    'compare' => 'NOT EXISTS',
+                                ],
+                                [
+                                    'key'     => '_seopress_robots_index',
+                                    'value'   => 'yes',
+                                    'compare' => '!=',
+                                ],
+                            ],
                             'exclude'          => $seopress_xml_sitemap_html_exclude_option,
                             'suppress_filters' => false,
                         ];

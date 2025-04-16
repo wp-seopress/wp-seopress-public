@@ -7,8 +7,6 @@ use SEOPress\Core\Kernel;
 /**
  * Get a service.
  *
- * @since 4.3.0
- *
  * @param string $service
  *
  * @return object
@@ -18,8 +16,20 @@ function seopress_get_service($service) {
 }
 
 /**
+ * Get last key of an array if PHP < 7.3
+ * @return string
+ */
+if ( ! function_exists('array_key_last')) {
+	function array_key_last(array $arr) {
+		end($arr);
+		$key = key($arr);
+
+		return $key;
+	}
+}
+
+/**
  * Get first key of an array if PHP < 7.3
- * @since 4.2.1
  * @return string
  */
 if ( ! function_exists('array_key_first')) {
@@ -33,32 +43,18 @@ if ( ! function_exists('array_key_first')) {
 }
 
 /**
- * Get last key of an array if PHP < 7.3
- * @since 4.2.1
- * @return string
+ * Remove default WordPress Canonical
  */
-if ( ! function_exists('array_key_last')) {
-	function array_key_last(array $arr) {
-		end($arr);
-		$key = key($arr);
-
-		return $key;
-	}
-}
+remove_action('wp_head', 'rel_canonical');
 
 /**
  * Remove WP default meta robots (added in WP 5.7)
- *
- * @since 4.4.0.7
  */
 remove_filter('wp_robots', 'wp_robots_max_image_preview_large');
 
 /**
  * Remove WC default meta robots (added in WP 5.7)
- *
- * @since 4.6
  * @todo use wp_robots API
- * @updated 5.8
  */
 function seopress_robots_wc_pages($robots) {
 	include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -93,38 +89,17 @@ function seopress_robots_wc_pages($robots) {
 add_filter('wp_robots', 'seopress_robots_wc_pages', 20);
 
 /**
- * Remove default WC meta robots.
- *
- * @since 3.8.1
+ * Remove default WC meta robots (useful for WooCommerce < 5.7).
  */
 function seopress_compatibility_woocommerce() {
-	if (function_exists('is_plugin_active')) {
-		if (is_plugin_active('woocommerce/woocommerce.php') && ! is_admin()) {
-			remove_action('wp_head', 'wc_page_noindex');
-		}
+	if (! is_admin() && function_exists('is_plugin_active') && is_plugin_active('woocommerce/woocommerce.php')) {
+		remove_action('wp_head', 'wc_page_noindex');
 	}
 }
 add_action('wp_head', 'seopress_compatibility_woocommerce', 0);
 
 /**
- * Remove Jetpack OpenGraph tags.
- *
- * @since 3.5.9
- */
-function seopress_compatibility_jetpack() {
-	if (function_exists('is_plugin_active')) {
-		if (is_plugin_active('jetpack/jetpack.php') && ! is_admin()) {
-			add_filter('jetpack_enable_open_graph', '__return_false');
-			add_filter('jetpack_disable_seo_tools', '__return_true');
-		}
-	}
-}
-add_action('wp_head', 'seopress_compatibility_jetpack', 0);
-
-/**
- * Remove Jetpack OpenGraph tags.
- *
- * @since 6.9
+ * Remove Elementor description meta tag.
  */
 function seopress_compatibility_hello_elementor() {
 	remove_action( 'wp_head', 'hello_elementor_add_description_meta_tag' );
@@ -134,26 +109,20 @@ add_action( 'after_setup_theme', 'seopress_compatibility_hello_elementor' );
 /**
  * Filter the xml sitemap URL used by SiteGround Optimizer for preheating.
  *
- * @since 6.6.0
- *
  * @param string $url URL to be preheated.
  */
-if (function_exists('is_plugin_active')) {
-	if (is_plugin_active('sg-cachepress/sg-cachepress.php')) {
-		function sp_sg_file_caching_preheat_xml($url) {
-			$url = get_home_url() . '/sitemaps.xml';
+if (function_exists('is_plugin_active') && is_plugin_active('sg-cachepress/sg-cachepress.php')) {
+	function sp_sg_file_caching_preheat_xml($url) {
+		$url = get_home_url() . '/sitemaps.xml';
 
-			return $url;
-		}
-		add_filter('sg_file_caching_preheat_xml', 'sp_sg_file_caching_preheat_xml');
+		return $url;
 	}
+	add_filter('sg_file_caching_preheat_xml', 'sp_sg_file_caching_preheat_xml');
 }
 
 /**
  * Remove WPML home url filter.
- *
- * @since 3.8.6
- *
+ * 
  * @param mixed $home_url
  * @param mixed $url
  * @param mixed $path
@@ -166,7 +135,6 @@ function seopress_remove_wpml_home_url_filter($home_url, $url, $path, $orig_sche
 
 /**
  * Remove third-parties metaboxes on our CPT
- * @since 4.2
  */
 add_action('do_meta_boxes', 'seopress_remove_metaboxes', 10);
 function seopress_remove_metaboxes() {
@@ -253,23 +221,6 @@ function seopress_is_base64_string($str) {
 }
 
 /**
- * Get IP address.
- *
- * @return (string) $ip
- **/
-function seopress_get_ip_address() {
-	foreach (['HTTP_CLIENT_IP', 'HTTP_CF_CONNECTING_IP', 'HTTP_VIA', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR'] as $key) {
-		if (true === array_key_exists($key, $_SERVER)) {
-			foreach (explode(',', $_SERVER[$key]) as $ip) {
-				$ip = trim($ip); // just to be safe
-
-				return apply_filters('seopress_404_ip', $ip ? $ip : '');
-			}
-		}
-	}
-}
-
-/**
  * Disable Query Monitor for CA.
  *
  * @return array
@@ -288,27 +239,30 @@ function seopress_disable_qm($allcaps, $caps, $args) {
  * Clear content for CA.
  */
 function seopress_clean_content_analysis() {
-	if (!is_user_logged_in()) {
-		return;
-	}
-	if (current_user_can('edit_posts')) {
-		if (isset($_GET['no_admin_bar']) && '1' === $_GET['no_admin_bar']) {
-			//Remove admin bar
-			add_filter('show_admin_bar', '__return_false');
+    // Check if 'no_admin_bar' is set and equals '1'; sanitize input
+    if (!isset($_GET['no_admin_bar']) || '1' !== sanitize_text_field($_GET['no_admin_bar'])) {
+        return;
+    }
 
-			//Disable Query Monitor
-			add_filter('user_has_cap', 'seopress_disable_qm', 10, 3);
+    // Check if the user is logged in and has the necessary capability
+    if (!is_user_logged_in() || !current_user_can('edit_posts')) {
+        return;
+    }
 
-			//Disable wptexturize
-			add_filter('run_wptexturize', '__return_false');
+    // Remove admin bar
+    add_filter('show_admin_bar', '__return_false');
 
-			//Remove Edit nofollow links from TablePress
-			add_filter( 'tablepress_edit_link_below_table', '__return_false');
+    // Disable Query Monitor
+    add_filter('user_has_cap', 'seopress_disable_qm', 10, 3);
 
-			//Allow user to run custom action to clean content
-			do_action('seopress_content_analysis_cleaning');
-		}
-	}
+    // Disable wptexturize
+    add_filter('run_wptexturize', '__return_false');
+
+    // Remove Edit nofollow links from TablePress
+    add_filter('tablepress_edit_link_below_table', '__return_false');
+
+    // Allow user to run custom action to clean content
+    do_action('seopress_content_analysis_cleaning');
 }
 add_action('plugins_loaded', 'seopress_clean_content_analysis');
 
@@ -371,8 +325,6 @@ function seopress_normalized_locale($current_locale) {
 /**
  * Returns the language code by supporting multilingual plugins
  *
- * @since 6.8
- *
  * @return string language code
  */
 function seopress_get_current_lang() {
@@ -394,8 +346,6 @@ function seopress_get_current_lang() {
 
 /**
  * Check empty global title template.
- *
- * @since 5.0
  *
  * @param string $type
  * @param string $metadata
@@ -473,60 +423,60 @@ function seopress_get_empty_templates($type, $metadata, $notice = true) {
 }
 
 /**
- * Generate Permalink notice to prevent users change the permastructure on a live site.
+ * Generate Permalink notice to prevent users from changing the permastructure on a live site.
  *
- * @since 6.5
- *
- * @return string $message
- *
+ * @return void
  */
 function seopress_notice_permalinks() {
-	global $pagenow;
-	if (isset($pagenow) && 'options-permalink.php' !== $pagenow) {
+	$pagenow = isset($GLOBALS['pagenow']) ? $GLOBALS['pagenow'] : '';
+
+	if ('options-permalink.php' !== $pagenow) {
 		return;
 	}
 
 	$class   = 'notice notice-warning';
-	$message = '<strong>' . __('WARNING', 'wp-seopress') . '</strong>';
-	$message .= '<p>' . __('Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO.', 'wp-seopress') . '</p>';
+	$message = sprintf(
+		'<p><strong>%s</strong></p><p>%s</p>',
+		__('WARNING', 'wp-seopress'),
+		__('Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO.', 'wp-seopress')
+	);
 
-	printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), wp_kses_post($message));
+	printf('<div class="%1$s">%2$s</div>', esc_attr($class), wp_kses_post($message));
 }
 add_action('admin_notices', 'seopress_notice_permalinks');
 
 /**
  * Generate a notice on permalink settings screen if URL rewriting is disabled.
  *
- * @since 6.5.0
- *
- * @return string $message
- *
+ * @return void
  */
 function seopress_notice_no_rewrite_url() {
-	//Check we are on the Permalink settings page
-	global $pagenow;
-	if (isset($pagenow) && 'options-permalink.php' !== $pagenow) {
+	$pagenow = isset($GLOBALS['pagenow']) ? $GLOBALS['pagenow'] : '';
+
+	// Check we are on the Permalink settings page
+	if ('options-permalink.php' !== $pagenow) {
 		return;
 	}
 
-	//Check permalink structure
+	// Check permalink structure
 	if ('' !== get_option('permalink_structure')) {
 		return;
 	}
 
-	//Display the notice
+	// Display the notice
 	$class   = 'notice notice-warning';
-	$message = '<strong>' . __('WARNING', 'wp-seopress') . '</strong>';
-	$message .= '<p>' . __('URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain).', 'wp-seopress') . '</p>';
+	$message = sprintf(
+		'<p><strong>%s</strong></p><p>%s</p>',
+		__('WARNING', 'wp-seopress'),
+		__('URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain).', 'wp-seopress')
+	);
 
-	printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), wp_kses_post($message));
+	printf('<div class="%1$s">%2$s</div>', esc_attr($class), wp_kses_post($message));
 }
 add_action('admin_notices', 'seopress_notice_no_rewrite_url');
 
 /**
  * Generate Tooltip.
- *
- * @since 3.8.2
  *
  * @param string $tooltip_title, $tooltip_desc, $tooltip_code
  * @param mixed  $tooltip_desc
@@ -549,8 +499,6 @@ function seopress_tooltip($tooltip_title, $tooltip_desc, $tooltip_code) {
 /**
  * Generate Tooltip (alternative version).
  *
- * @since 3.8.6
- *
  * @param string $tooltip_title, $tooltip_desc, $tooltip_code
  * @param mixed  $tooltip_anchor
  * @param mixed  $tooltip_desc
@@ -570,8 +518,6 @@ function seopress_tooltip_alt($tooltip_anchor, $tooltip_desc) {
 
 /**
  * Generate Tooltip link.
- *
- * @since 5.0
  *
  * @param string $tooltip_title, $tooltip_desc, $tooltip_code
  * @param mixed  $tooltip_anchor
@@ -594,8 +540,6 @@ function seopress_tooltip_link($tooltip_anchor, $tooltip_desc) {
 /**
  * Remove BOM.
  *
- * @since 3.8.2
- *
  * @param mixed $text
  *
  * @return mixed $text
@@ -609,8 +553,6 @@ function seopress_remove_utf8_bom($text) {
 
 /**
  * Filter the capability to allow other roles to use the plugin.
- *
- * @since 3.8.2
  *
  * @return string
  *
@@ -630,24 +572,28 @@ function seopress_capability($cap, $context = '') {
 /**
  * Check if the page is one of ours.
  *
- * @since 3.8.2
- *
  * @return bool
  */
 function is_seopress_page() {
-	if ( ! is_admin() && ( ! isset($_REQUEST['page']) || ! isset($_REQUEST['post_type']))) {
+	if (!is_admin()) {
 		return false;
 	}
 
-	if (isset($_REQUEST['page'])) {
-		return 0 === strpos($_REQUEST['page'], 'seopress');
-	} elseif (isset($_REQUEST['post_type'])) {
-		if (is_array($_REQUEST['post_type']) && !empty($_REQUEST['post_type'])) {
-			return 0 === strpos($_REQUEST['post_type'][0], 'seopress');
-		} else {
-			return 0 === strpos($_REQUEST['post_type'], 'seopress');
-		}
+	$page = $_REQUEST['page'] ?? null;
+	$post_type = $_REQUEST['post_type'] ?? null;
+
+	if ($page) {
+		return strpos($page, 'seopress') === 0;
 	}
+
+	if ($post_type) {
+		if (is_array($post_type) && !empty($post_type)) {
+			return strpos($post_type[0], 'seopress') === 0;
+		}
+		return strpos($post_type, 'seopress') === 0;
+	}
+
+	return false;
 }
 
 /**
@@ -676,7 +622,7 @@ function seopress_remove_other_notices() {
 		}
 	}
 }
-add_action('in_admin_header', 'seopress_remove_other_notices', 1000);//keep this value high to remove other notices
+add_action('in_admin_header', 'seopress_remove_other_notices', 1000); //keep this value high to remove other notices
 
 /**
  * Only add our notices on our pages.
@@ -807,8 +753,6 @@ if (is_plugin_active('elementor-pro/elementor-pro.php')) {
 	}
 }
 
-
-
 /**
  * Helper function needed for PHP 8.1 compatibility with "current" function
  * Get mangled object vars
@@ -829,7 +773,6 @@ function seopress_maybe_mangled_object_vars($data){
 
 /**
  * Automatically flush permalinks after saving XML sitemaps global settings
- * @since 6.0.0
  *
  * @param string $option
  * @param string $old_value
@@ -837,16 +780,9 @@ function seopress_maybe_mangled_object_vars($data){
  *
  * @return void
  */
-add_action('update_option', function( $option, $old_value, $value ) {
-	if ($option ==='seopress_xml_sitemap_option_name') {
-		set_transient('seopress_flush_rewrite_rules', 1);
-	}
-}, 10, 3);
-
-add_action('admin_init', 'seopress_auto_flush_rewrite_rules');
-function seopress_auto_flush_rewrite_rules() {
-	if (get_transient('seopress_flush_rewrite_rules')) {
+add_action('update_option', 'seopress_auto_flush_permalinks', 10, 3);
+function seopress_auto_flush_permalinks($option, $old_value, $value) {
+	if ($option === 'seopress_xml_sitemap_option_name') {
 		flush_rewrite_rules(false);
-		delete_transient('seopress_flush_rewrite_rules');
 	}
 }

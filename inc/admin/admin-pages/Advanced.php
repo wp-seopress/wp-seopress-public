@@ -10,7 +10,7 @@ if (function_exists('seopress_admin_header')) {
     action="<?php echo esc_url(admin_url('options.php')); ?>"
     class="seopress-option">
     <?php
-        echo $this->seopress_feature_title('advanced');
+        echo $this->feature_title('advanced');
         settings_fields('seopress_advanced_option_group');
     ?>
 

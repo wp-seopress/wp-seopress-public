@@ -3,6 +3,7 @@
 if ( ! defined('ABSPATH')) {
     exit;
 }
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if (is_plugin_active('wp-seopress-pro/seopress-pro.php') && defined('SEOPRESS_PRO_VERSION') && version_compare(SEOPRESS_PRO_VERSION, '5.4', '<')) { //Quick fix to prevent fatal error for SEOPress < 5.4
     //do nothing
 } else {
