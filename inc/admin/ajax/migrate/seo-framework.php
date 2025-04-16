@@ -49,9 +49,6 @@ function seopress_seo_framework_migration() {
                         if ( ! empty($term_settings['nofollow'])) { //Import Robots NoFollow
                             update_term_meta($term_id, '_seopress_robots_follow', 'yes');
                         }
-                        if ( ! empty($term_settings['noarchive'])) { //Import Robots NoArchive
-                            update_term_meta($term_id, '_seopress_robots_archive', 'yes');
-                        }
                     }
                 }
             }
@@ -98,9 +95,6 @@ function seopress_seo_framework_migration() {
                     }
                     if ('1' == get_post_meta($post->ID, '_genesis_nofollow', true)) { //Import Robots NoFollow
                         update_post_meta($post->ID, '_seopress_robots_follow', 'yes');
-                    }
-                    if ('1' == get_post_meta($post->ID, '_genesis_noarchive', true)) { //Import Robots NoArchive
-                        update_post_meta($post->ID, '_seopress_robots_archive', 'yes');
                     }
                     if ('' != get_post_meta($post->ID, '_genesis_canonical_uri', true)) { //Import Canonical URL
                         update_post_meta($post->ID, '_seopress_robots_canonical', esc_url(get_post_meta($post->ID, '_genesis_canonical_uri', true)));

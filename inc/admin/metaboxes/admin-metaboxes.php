@@ -200,14 +200,6 @@ function seopress_display_seo_metaboxe()
 			$seopress_robots_follow             = get_post_meta($post->ID, '_seopress_robots_follow', true);
 		}
 
-		$disabled['archive'] = '';
-		if (seopress_get_service('TitleOption')->getTitleNoArchive()) {
-			$seopress_robots_archive            = 'yes';
-			$disabled['archive']                = 'disabled';
-		} else {
-			$seopress_robots_archive            = get_post_meta($post->ID, '_seopress_robots_archive', true);
-		}
-
 		$disabled['snippet'] = '';
 		if (seopress_get_service('TitleOption')->getTitleNoSnippet()) {
 			$seopress_robots_snippet            = 'yes';
@@ -302,11 +294,6 @@ function seopress_display_seo_metaboxe()
 					update_post_meta($post_id, '_seopress_robots_imageindex', 'yes');
 				} else {
 					delete_post_meta($post_id, '_seopress_robots_imageindex');
-				}
-				if (isset($_POST['seopress_robots_archive'])) {
-					update_post_meta($post_id, '_seopress_robots_archive', 'yes');
-				} else {
-					delete_post_meta($post_id, '_seopress_robots_archive');
 				}
 				if (isset($_POST['seopress_robots_snippet'])) {
 					update_post_meta($post_id, '_seopress_robots_snippet', 'yes');
@@ -462,11 +449,6 @@ function seopress_display_seo_metaboxe()
 					} else {
 						$elementor['_seopress_robots_imageindex'] = '';
 					}
-					if (isset($_POST['seopress_robots_archive'])) {
-						$elementor['_seopress_robots_archive'] = 'yes';
-					} else {
-						$elementor['_seopress_robots_archive'] = '';
-					}
 					if (isset($_POST['seopress_robots_snippet'])) {
 						$elementor['_seopress_robots_snippet'] = 'yes';
 					} else {
@@ -584,12 +566,6 @@ function seopress_display_ca_metaboxe()
 			$seopress_robots_follow             = 'yes';
 		} else {
 			$seopress_robots_follow             = get_post_meta($post->ID, '_seopress_robots_follow', true);
-		}
-
-		if (seopress_get_service('TitleOption')->getTitleNoArchive()) {
-			$seopress_robots_archive            = 'yes';
-		} else {
-			$seopress_robots_archive            = get_post_meta($post->ID, '_seopress_robots_archive', true);
 		}
 
 		if (seopress_get_service('TitleOption')->getTitleNoSnippet()) {

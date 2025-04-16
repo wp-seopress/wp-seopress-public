@@ -141,9 +141,6 @@ function seopress_smart_crawl_migration() {
                         if ('' != $robots) {
                             $robots = explode(',', $robots);
 
-                            if (in_array('noarchive', $robots)) { //Import Robots NoArchive
-                                update_post_meta($post->ID, '_seopress_robots_archive', 'yes');
-                            }
                             if (in_array('nosnippet', $robots)) { //Import Robots NoSnippet
                                 update_post_meta($post->ID, '_seopress_robots_snippet', 'yes');
                             }

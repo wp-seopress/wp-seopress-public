@@ -198,7 +198,7 @@ if (function_exists('seopress_admin_header')) {
                                 <label for="<?php echo esc_attr($plugin); ?>-migration-tool" tabindex="0">
                                     <input type="radio" id="<?php echo esc_attr($plugin); ?>-migration-tool" name="select-wizard-import" value="<?php echo esc_attr($plugin); ?>-migration-tool"
                                     aria-describedby="<?php echo esc_attr($plugin); ?>-description"
-                                    aria-label="<?php echo esc_attr(sprintf(__('Select %s for migration', 'wp-seopress'), $detail['name'])); ?>"
+                                    aria-label="<?php echo /* translators: %s: "SEO plugin name" */ esc_attr(sprintf(__('Select %s for migration', 'wp-seopress'), $detail['name'])); ?>"
                                     <?php
                                         if (!empty($active_seo_plugins) && in_array($detail['slug'], $active_seo_plugins['slug'])) {
                                             echo 'checked';
@@ -210,7 +210,7 @@ if (function_exists('seopress_admin_header')) {
                                     <?php endif; ?>
                                     <span><?php echo esc_html($detail['name']); ?></span>
                                 </label>
-                                <p id="<?php echo esc_attr($plugin); ?>-description" class="screen-reader-text"><?php echo wp_kses_post(sprintf(__('Import metadata from %s, including titles and meta descriptions.', 'wp-seopress'), esc_html($detail['name']))); ?></p>
+                                <p id="<?php echo esc_attr($plugin); ?>-description" class="screen-reader-text"><?php echo /* translators: %s: "SEO plugin name" */ wp_kses_post(sprintf(__('Import metadata from %s, including titles and meta descriptions.', 'wp-seopress'), esc_html($detail['name']))); ?></p>
                             </div>
                         <?php } 
                     ?>

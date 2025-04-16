@@ -11,7 +11,7 @@ if (function_exists('seopress_admin_header')) {
     class="seopress-option">
     <?php
         echo $this->feature_title('titles');
-settings_fields('seopress_titles_option_group'); ?>
+        settings_fields('seopress_titles_option_group'); ?>
 
     <div id="seopress-tabs" class="wrap">
         <?php

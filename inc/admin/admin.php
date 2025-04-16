@@ -52,7 +52,6 @@ class seopress_options
 	{
 		add_action('admin_menu', [$this, 'init_wizard'], 5);
 		add_action('admin_menu', [$this, 'setup_admin_pages'], 10);
-		add_action('admin_init', [$this, 'set_default_values'], 10);
 		add_action('admin_init', [$this, 'page_init'], 10);
 		add_action('admin_init', [$this, 'feature_save'], 30);
 		add_action('admin_init', [$this, 'feature_title'], 20);
@@ -228,32 +227,6 @@ class seopress_options
 	private function load_admin_page($file_name)
 	{
 		require_once plugin_dir_path(__FILE__) . "/admin-pages/{$file_name}";
-	}
-
-	public function set_default_values()
-	{
-		if (defined('SEOPRESS_WPMAIN_VERSION')) {
-			return;
-		}
-
-		// IndewNow
-		$seopress_instant_indexing_option_name = get_option('seopress_instant_indexing_option_name');
-
-		// Init if option doesn't exist
-		if (false === $seopress_instant_indexing_option_name) {
-			$seopress_instant_indexing_option_name = [];
-
-			if ('1' == seopress_get_toggle_option('instant-indexing')) {
-				seopress_instant_indexing_generate_api_key_fn(true);
-			}
-
-			$seopress_instant_indexing_option_name['seopress_instant_indexing_automate_submission'] = '1';
-		}
-
-		// Check if the value is an array (important!)
-		if (is_array($seopress_instant_indexing_option_name)) {
-			add_option('seopress_instant_indexing_option_name', $seopress_instant_indexing_option_name);
-		}
 	}
 
 	public function page_init() {

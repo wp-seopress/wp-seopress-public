@@ -5,27 +5,6 @@ use SEOPress\Helpers\PagesAdmin;
 defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//Generate dynamically the Instant Indexing API key
-///////////////////////////////////////////////////////////////////////////////////////////////////
-function seopress_instant_indexing_generate_api_key_fn($init = false) {
-    $options            = get_option('seopress_instant_indexing_option_name') ? get_option('seopress_instant_indexing_option_name') : [];
-
-    $api_key = wp_generate_uuid4();
-    $api_key = preg_replace('[-]', '', $api_key);
-    $options['seopress_instant_indexing_bing_api_key'] = base64_encode($api_key);
-
-    if ($init === true) {
-        $options['seopress_instant_indexing_automate_submission'] = '1';
-    }
-
-    update_option('seopress_instant_indexing_option_name', $options);
-
-    if ($init === false) {
-        wp_send_json_success();
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 //Create the virtual Instant Indexing API key txt file
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function seopress_instant_indexing_api_key_txt() {
@@ -160,13 +139,13 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/8.5.1.1/true';
+        $x_source_info = 'https://www.seopress.org/8.6/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/8.5.1.1/false';
+        $x_source_info = 'https://www.seopress.org/8.6/false';
     }
 
     //Bing API

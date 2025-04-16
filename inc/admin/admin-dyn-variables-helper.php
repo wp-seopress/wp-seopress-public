@@ -4,7 +4,7 @@ defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks 
 function seopress_get_dyn_variables()
 {
     return apply_filters('seopress_get_dynamic_variables', [
-        '%%sep%%'                           => 'Separator',
+        '%%sep%%'                           => __('Separator', 'wp-seopress'),
         '%%sitetitle%%'                     => __('Site Title', 'wp-seopress'),
         '%%tagline%%'                       => __('Tagline', 'wp-seopress'),
         '%%post_title%%'                    => __('Post Title', 'wp-seopress'),

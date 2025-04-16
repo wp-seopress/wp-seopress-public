@@ -186,14 +186,6 @@ class I18nUniversalMetabox
                             "is off. Google will index the images on this page.",
                             "wp-seopress"
                         ),
-                        'noarchive_on' => __(
-                            "is on! Search engines will not cache your page.",
-                            "wp-seopress"
-                        ),
-                        'noarchive_off' => __(
-                            "is off. Search engines will probably cache your page.",
-                            "wp-seopress"
-                        ),
                         'nosnippet_on' => __(
                             "is on! Search engines will not display a snippet of this page in search results.",
                             "wp-seopress"
@@ -463,12 +455,6 @@ class I18nUniversalMetabox
             ],
             'google_preview' => [
                 'title'  => __('Google Snippet Preview', 'wp-seopress'),
-                'tooltip_title' => __('Snippet Preview', 'wp-seopress'),
-                'tooltip_description_1' => __('The Google preview is a simulation.', 'wp-seopress'),
-                'tooltip_description_2' => __('There is no reliable preview because it depends on the screen resolution, the device used, the expression sought, and Google.', 'wp-seopress'),
-                'tooltip_description_3' => __('There is not one snippet for one URL but several.', 'wp-seopress'),
-                'tooltip_description_4' => __('All the data in this overview comes directly from your source code.', 'wp-seopress'),
-                'tooltip_description_5' => __('This is what the crawlers will see.', 'wp-seopress'),
                 'description' => __(
                     "This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview. Note that Google may optionally display an image of your article.",
                     "wp-seopress"
@@ -525,15 +511,6 @@ class I18nUniversalMetabox
                     ),
                     'robots_follow_tooltip_description_2' => __(
                         'Search engines will not follow links from this URL.',
-                        'wp-seopress'
-                    ),
-                    'robots_archive_description' => __(
-                        "Do not display a 'Cached' link in the Google search results",
-                        "wp-seopress"
-                    ),
-                    'robots_archive_tooltip_title' => __('"noarchive" robots meta tag', 'wp-seopress'),
-                    'robots_archive_tooltip_description_1' => __(
-                        'By checking this option, you will add a meta robots tag with the value "noarchive".',
                         'wp-seopress'
                     ),
                     'robots_snippet_description' =>__(
@@ -719,13 +696,9 @@ class I18nUniversalMetabox
                         "Enter a few keywords for analysis to help you write optimized content.",
                         "wp-seopress"
                     ),
-                    'description_2' => __(
-                        "Writing content for your users is the most important thing! If it doesn‘t feel natural, your visitors will leave your site, Google will know it and your ranking will be affected.",
-                        "wp-seopress"
-                    ),
                     'title_severity' => /* translators: %s degree of severity, eg: low */ __('Degree of severity: %s', 'wp-seopress'),
                     'target_keywords' => __("Target keywords", "wp-seopress"),
-                    'target_keywords_tooltip_description' => __(
+                    'target_keywords_description' => __(
                         "Separate target keywords with commas. Do not use spaces after the commas, unless you want to include them",
                         "wp-seopress"
                     ),
@@ -744,7 +717,7 @@ class I18nUniversalMetabox
                         "wp-seopress"
                     ),
                     'google_suggestions' => __("Google suggestions", "wp-seopress"),
-                    'google_suggestions_tooltip_description' => __(
+                    'google_suggestions_description' => __(
                         "Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.",
                         "wp-seopress"
                     ),

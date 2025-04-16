@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 8.5.1.1
+Stable tag: 8.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank 
 == Description ==
 
 <h3>Best SEO plugin for WordPress fully integrated with all page builders and themes!</h3>
-<h3>Now with AI (GPT-4o, GPT-4 Turbo / Vision and GPT 3.5 Turbo) to automagically generate meta title, description and alternative texts for images!</h3>
+<h3>Now with AI ( GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo) to automagically generate meta title, description and alternative texts for images!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -44,7 +44,6 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 <h3>SEOPress Free Features</h3>
 
 <ul>
-    <li><a href="https://www.seopress.org/support/guides/google-indexing-api-with-seopress/"><strong>Google Indexing API and IndexNow API (Bing / Yandex)</strong></a> to quickly index its content in these search engines</li>
 	<li><strong>Installation wizard</strong> to quickly setup your site</li>
 	<li><strong>Content analysis</strong> with unlimited keywords to help you write optimized content for search engines</li>
 	<li><strong>Mobile / Desktop Google Preview</strong> to see how your post will looks like in Google search results</li>
@@ -56,7 +55,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li><a href="https://www.seopress.org/features/google-analytics/"><strong>Google Analytics</strong> and <strong>Matomo</strong></a> with downloads tracking, custom dimensions, ip anonymization, remarketing, demographics and interest reporting, cross-domain tracking...(<a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">GDPR compatibility</a>)</li>
 	<li><strong>Microsoft Clarity integration</strong>: to capture session recordings, get instant heatmaps and powerful Insights for Free. Know how people interact with your site to improve user experience and conversions</li>
     <li><strong>Custom Canonical URL</strong></li>
-	<li><a href="https://www.seopress.org/support/guides/manage-meta-robots/"><strong>Meta robots</strong></a> (noindex, nofollow, noimageindex, noarchive, nosnippet)</li>
+	<li><a href="https://www.seopress.org/support/guides/manage-meta-robots/"><strong>Meta robots</strong></a> (noindex, nofollow, noimageindex, nosnippet)</li>
 	<li>Build your <a href="https://www.seopress.org/features/sitemaps/"><strong>custom XML Sitemap</strong></a> to improve search indexing</li>
 	<li><strong>Image XML Sitemaps</strong> to improve search indexing for Google Images</li>
 	<li>Build your custom <strong>HTML Sitemap</strong> to enhanced navigation for visitors and improve search indexing</li>
@@ -69,6 +68,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 	<li>Redirect attachment pages to their file URL</li>
 	<li><a href="https://www.seopress.org/features/image-seo/" target="_blank"><strong>Image SEO</strong></a>: Automatically set the image title / alt / caption / description</li>
 	<li>Import / Export settings from site to site.</li>
+    <li><a href="https://www.seopress.org/support/guides/google-indexing-api-with-seopress/"><strong>Google Indexing API and IndexNow API (Bing / Yandex)</strong></a> to quickly index its content in these search engines</li>
 	<li><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import posts and terms metadata</a> from Yoast SEO, All In One SEO, SEO Framework, Rank Math, SEO Ultimate, WP Meta SEO, Premium SEO Pack, Squirrly and many other SEO plugins</li>
 	<li>...</li>
 </ul>
@@ -271,19 +271,29 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-
-= 8.5.1.1 =
-* FIX Revert translation update
-
-= 8.5.1 =
-* NEW Update translations automatically during inline update
-* NEW Add PageSpeed Insights logs to the settings page
-* NEW Import Breadcrumb Title from Yoast SEO
-* INFO Improve requirement notices in wizard
-* INFO Remove title field in TOC block for more flexibility
-* FIX Table of Contents block warning
-* FIX Matomo / Google Analytics Dashboard widgets to improve performances
-* FIX Missing alt text column in media library
+= 8.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-6/">Read the blog post update</a> =
+* NEW Update AI models (now available: GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo)
+* NEW Enhancements for Table of Contents block
+* NEW Wizard enhancements for a better user experience
+* NEW "seopress_titles_paged_rel" hook to filter the paged rel links in the head section (https://www.seopress.org/support/hooks/filter-rel-nextprev-link-in-head-of-paginated-archive-pages/)
+* INFO Remove noarchive meta robots tag as it's not longer supported by Google
+* INFO Ask AI to respect the grammar and typing of the language
+* INFO Add error handling for Google Analytics stats in dashboard widget (SEO, Analytics, Google Analytics tab, Stats in dashboard section)
+* INFO Increase timeout for Page Speed Insights API (from 30 to 120 seconds)
+* FIX i18n POT file
+* FIX Default OG:IMAGE for Shop page
+* FIX Default settings for term taxonomies meta title / description
+* FIX No /product-category/ in URL when using WooCommerce and WPML Multilingual CMS + WooCommerce Multilingual & Multicurrency
+* FIX User meta tags for author
+* FIX AI: Alt text for images uploaded from Gravity Forms
+* FIX undefined $language with AI in specific cases
+* FIX JS error attachment when using AI
+* FIX Incorrect meta title/desc counters between classic SEO metabox and Universal one
+* FIX Bricks builder compatibility issue with SEOPress PRO
+* FIX PHP Warning: Attempt to read property "display_name" Author on null in Breadcrumbs
+* FIX Internal linking suggestions JS error
+* FIX Google Analytics / Matomo widgets if no data
+* FIX Fatal error on plugin deactivation
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

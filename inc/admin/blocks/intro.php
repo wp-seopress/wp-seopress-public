@@ -22,7 +22,7 @@
                 }
 
 				/* translators: %1$s plugin name, default: SEOPress, %2$s displays the current version number */
-				printf(esc_html__('Welcome to %1$s %2$s!', 'wp-seopress'), esc_html($seo_title), '8.5.1.1');
+				printf(esc_html__('Welcome to %1$s %2$s!', 'wp-seopress'), esc_html($seo_title), '8.6');
 			?>
         </h1>
         <p><?php esc_attr_e('Your control center for SEO.', 'wp-seopress'); ?></p>

@@ -94,6 +94,7 @@ if (!empty(seopress_get_service('AdvancedOption')->getAdvancedRemoveProductCateg
     add_action('created_product_cat', 'flush_rewrite_rules');
     add_action('delete_product_cat', 'flush_rewrite_rules');
     add_action('edited_product_cat', 'flush_rewrite_rules');
+    add_action('edited_term_taxonomy', 'flush_rewrite_rules');
 
     add_filter('product_cat_rewrite_rules', 'seopress_filter_product_category_rewrite_rules');
     function seopress_filter_product_category_rewrite_rules($rules)

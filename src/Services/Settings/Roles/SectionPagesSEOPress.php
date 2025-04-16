@@ -33,22 +33,22 @@ class SectionPagesSEOPress {
 
             if ('titles-metas_editor' === $uniqueKey) { ?>
     <p class="description">
-        <?php _e('Check a user role to authorized it to edit a specific SEO page.', 'wp-seopress'); ?>
+        <?php esc_html_e('Check a user role to authorized it to edit a specific SEO page.', 'wp-seopress'); ?>
     </p>
     <?php } ?>
 
     <p>
         <label
-            for="seopress_advanced_security_metaboxe_role_pages_<?php echo $uniqueKey; ?>">
+            for="seopress_advanced_security_metaboxe_role_pages_<?php echo sanitize_key($uniqueKey); ?>">
             <input type="checkbox"
-                id="seopress_advanced_security_metaboxe_role_pages_<?php echo $uniqueKey; ?>"
+                id="seopress_advanced_security_metaboxe_role_pages_<?php echo sanitize_key($uniqueKey); ?>"
                 value="1"
-                name="seopress_advanced_option_name[<?php echo $nameKey; ?>][<?php echo $key; ?>]"
+                name="seopress_advanced_option_name[<?php echo sanitize_key($nameKey); ?>][<?php echo sanitize_key($key); ?>]"
                 <?php if (isset($dataOptions[$key])) {
                 checked($dataOptions[$key], '1');
             } ?>
             />
-            <strong><?php echo $value; ?></strong> (<em><?php echo translate_user_role($value,  'default'); ?></em>)
+            <strong><?php echo esc_html($value); ?></strong> (<em><?php echo esc_html(translate_user_role($value,  'default')); ?></em>)
         </label>
     </p>
     <?php

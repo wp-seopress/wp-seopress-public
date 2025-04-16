@@ -10,7 +10,7 @@ function seopress_export_settings() {
     if (empty($_POST['seopress_action']) || 'export_settings' != $_POST['seopress_action']) {
         return;
     }
-    if ( ! wp_verify_nonce($_POST['seopress_export_nonce'], 'seopress_export_nonce')) {
+    if (! isset($_POST['seopress_export_nonce']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['seopress_export_nonce'])), 'seopress_export_nonce')) {
         return;
     }
     if ( ! current_user_can(seopress_capability('manage_options', 'export_settings'))) {
@@ -22,7 +22,7 @@ function seopress_export_settings() {
     ignore_user_abort(true);
     nocache_headers();
     header('Content-Type: application/json; charset=utf-8');
-    header('Content-Disposition: attachment; filename=seopress-settings-export-' . date('m-d-Y') . '.json');
+    header('Content-Disposition: attachment; filename=seopress-settings-export-' . gmdate('m-d-Y') . '.json');
     header('Expires: 0');
     echo wp_json_encode($settings);
     exit;
@@ -34,7 +34,7 @@ function seopress_import_settings() {
     if (empty($_POST['seopress_action']) || 'import_settings' != $_POST['seopress_action']) {
         return;
     }
-    if ( ! wp_verify_nonce($_POST['seopress_import_nonce'], 'seopress_import_nonce')) {
+    if (! isset($_POST['seopress_import_nonce']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['seopress_import_nonce'])), 'seopress_import_nonce')) {
         return;
     }
     if ( ! current_user_can(seopress_capability('manage_options', 'import_settings'))) {
@@ -66,7 +66,7 @@ function seopress_clean_content_scans() {
     if (empty($_POST['seopress_action']) || 'clean_content_scans' != $_POST['seopress_action']) {
         return;
     }
-    if (!wp_verify_nonce($_POST['seopress_clean_content_scans_nonce'], 'seopress_clean_content_scans_nonce')) {
+    if (!isset($_POST['seopress_clean_content_scans_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['seopress_clean_content_scans_nonce'])), 'seopress_clean_content_scans_nonce')) {
         return;
     }
     if (!current_user_can(seopress_capability('manage_options', 'cleaning'))) {
@@ -101,7 +101,7 @@ function seopress_reset_notices_settings() {
     if (empty($_POST['seopress_action']) || 'reset_notices_settings' != $_POST['seopress_action']) {
         return;
     }
-    if ( ! wp_verify_nonce($_POST['seopress_reset_notices_nonce'], 'seopress_reset_notices_nonce')) {
+    if (!isset($_POST['seopress_reset_notices_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['seopress_reset_notices_nonce'])), 'seopress_reset_notices_nonce')) {
         return;
     }
     if ( ! current_user_can(seopress_capability('manage_options', 'reset_settings'))) {
@@ -122,7 +122,7 @@ function seopress_reset_settings() {
     if (empty($_POST['seopress_action']) || 'reset_settings' != $_POST['seopress_action']) {
         return;
     }
-    if ( ! wp_verify_nonce($_POST['seopress_reset_nonce'], 'seopress_reset_nonce')) {
+    if (!isset($_POST['seopress_reset_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['seopress_reset_nonce'])), 'seopress_reset_nonce')) {
         return;
     }
     if ( ! current_user_can(seopress_capability('manage_options', 'reset_settings'))) {

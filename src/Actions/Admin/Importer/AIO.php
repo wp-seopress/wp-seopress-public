@@ -155,17 +155,6 @@ class AIO implements ExecuteHooksBackend {
                 update_post_meta($post->ID, '_seopress_robots_snippet', 'yes');
             }
 
-            //Meta robots "noarchive"
-            $robots_noarchive = "SELECT p.robots_noarchive, p.post_id
-            FROM {$wpdb->prefix}aioseo_posts p
-            WHERE p.post_id = $post->ID";
-
-            $robots_noarchive = $wpdb->get_results($robots_noarchive, ARRAY_A);
-
-            if (! empty($robots_noarchive[0]['robots_noarchive']) && '1' === $robots_noarchive[0]['robots_noarchive']) {//Import Robots NoArchive
-                update_post_meta($post->ID, '_seopress_robots_archive', 'yes');
-            }
-
             //Target keywords
             $keyphrases = "SELECT p.keyphrases, p.post_id
             FROM {$wpdb->prefix}aioseo_posts p

@@ -16,8 +16,6 @@ class RobotMeta
                 return 'noindex';
             case '_seopress_robots_follow':
                 return 'nofollow';
-            case '_seopress_robots_archive':
-                return 'noarchive';
             case '_seopress_robots_snippet':
                 return 'nosnippet';
             case '_seopress_robots_imageindex':

@@ -94,7 +94,7 @@ add_settings_section(
 
 add_settings_field(
     'seopress_social_accounts_facebook', // ID
-    __('Facebook Page URL', 'wp-seopress'), // Title
+    '<img class="seopress-social-icon" src="' . esc_url(SEOPRESS_URL_ASSETS . '/img/social/facebook.svg') . '" alt="Facebook" width="24" height="24"> ' . __('Facebook page URL', 'wp-seopress'), // Title
     'seopress_social_accounts_facebook_callback', // Callback
     'seopress-settings-admin-social-accounts', // Page
     'seopress_setting_section_social_accounts' // Section
@@ -102,7 +102,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_accounts_twitter', // ID
-    __('X Username', 'wp-seopress'), // Title
+    '<img class="seopress-social-icon" src="' . esc_url(SEOPRESS_URL_ASSETS . '/img/social/x.svg') . '" alt="X" width="24" height="24"> ' . __('X Username', 'wp-seopress'), // Title
     'seopress_social_accounts_twitter_callback', // Callback
     'seopress-settings-admin-social-accounts', // Page
     'seopress_setting_section_social_accounts' // Section
@@ -110,7 +110,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_accounts_pinterest', // ID
-    __('Pinterest URL', 'wp-seopress'), // Title
+    '<img class="seopress-social-icon" src="' . esc_url(SEOPRESS_URL_ASSETS . '/img/social/pinterest.svg') . '" alt="Pinterest" width="24" height="24"> ' . __('Pinterest URL', 'wp-seopress'), // Title
     'seopress_social_accounts_pinterest_callback', // Callback
     'seopress-settings-admin-social-accounts', // Page
     'seopress_setting_section_social_accounts' // Section
@@ -118,7 +118,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_accounts_instagram', // ID
-    __('Instagram URL', 'wp-seopress'), // Title
+    '<img class="seopress-social-icon" src="' . esc_url(SEOPRESS_URL_ASSETS . '/img/social/instagram.svg') . '" alt="Instagram" width="24" height="24"> ' . __('Instagram URL', 'wp-seopress'), // Title
     'seopress_social_accounts_instagram_callback', // Callback
     'seopress-settings-admin-social-accounts', // Page
     'seopress_setting_section_social_accounts' // Section
@@ -126,7 +126,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_accounts_youtube', // ID
-    __('YouTube URL', 'wp-seopress'), // Title
+    '<img class="seopress-social-icon" src="' . esc_url(SEOPRESS_URL_ASSETS . '/img/social/youtube.svg') . '" alt="YouTube" width="24" height="24"> ' . __('YouTube URL', 'wp-seopress'), // Title
     'seopress_social_accounts_youtube_callback', // Callback
     'seopress-settings-admin-social-accounts', // Page
     'seopress_setting_section_social_accounts' // Section
@@ -134,7 +134,7 @@ add_settings_field(
 
 add_settings_field(
     'seopress_social_accounts_linkedin', // ID
-    __('LinkedIn URL', 'wp-seopress'), // Title
+    '<img class="seopress-social-icon" src="' . esc_url(SEOPRESS_URL_ASSETS . '/img/social/linkedin.svg') . '" alt="LinkedIn" width="24" height="24"> ' . __('LinkedIn URL', 'wp-seopress'), // Title
     'seopress_social_accounts_linkedin_callback', // Callback
     'seopress-settings-admin-social-accounts', // Page
     'seopress_setting_section_social_accounts' // Section

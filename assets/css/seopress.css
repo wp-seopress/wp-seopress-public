@@ -23,7 +23,8 @@
 #seopress_matomo_dashboard_widget,
 #seopress_ga_dashboard_widget,
 .column-seopress_score,
-.seopress-ui-datepicker {
+.seopress-ui-datepicker,
+.seopress-setup-content {
     --primaryColor: #4E21E7;
     --paragraphColor: #433F65;
     --fontSize: 13px;
@@ -458,6 +459,11 @@ body .seopress-option input[type="checkbox"]:active {
 
 .field-recommended {
     color: var(--colorWarning);
+}
+
+.seopress-social-icon {
+    vertical-align: middle;
+    margin-right: 0.5rem;
 }
 
 /* Table */
@@ -1085,6 +1091,7 @@ body.seopress-white-label .seopress-option {
 #seopress_cpt span.description~input,
 #seopress_content_analysis input~span.description,
 #seopress_content_analysis span.description~input,
+#seopress_content_analysis span.description~.tagify,
 #seopress_pro_cpt input~span.description,
 #seopress_pro_cpt span.description~input {
     margin-top: 5px;
@@ -2480,7 +2487,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 #seopress-integration-panel .seopress-notice {
     top: inherit;
     left: inherit;
-    margin: 5px 0 20px 0;
+    margin: 10px 0 20px 0;
     width: auto;
     border-bottom: 1px solid var(--borderColorLight);
 }

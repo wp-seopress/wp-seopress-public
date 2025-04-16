@@ -66,14 +66,6 @@ abstract class RobotSettings {
                 'visible'     => true,
             ],
             [
-                'key'         => '_seopress_robots_archive',
-                'type'        => 'checkbox',
-                'use_default' => $titleOptionService->getTitleNoArchive(),
-                'default'     => 'yes',
-                'label'       => __('Do not display a "Cached" link in the Google search results (noarchive)', 'wp-seopress'),
-                'visible'     => true,
-            ],
-            [
                 'key'         => '_seopress_robots_snippet',
                 'type'        => 'checkbox',
                 'use_default' => $titleOptionService->getTitleNoSnippet(),

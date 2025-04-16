@@ -93,14 +93,6 @@ function seopress_display_seo_term_metaboxe() {
             $seopress_robots_follow             = get_term_meta($term->term_id, '_seopress_robots_follow', true);
         }
 
-        $disabled['archive'] ='';
-        if (seopress_get_service('TitleOption')->getTitleNoArchive()) {
-            $seopress_robots_archive            = 'yes';
-            $disabled['archive']                = 'disabled';
-        } else {
-            $seopress_robots_archive            = get_term_meta($term->term_id, '_seopress_robots_archive', true);
-        }
-
         $disabled['snippet'] ='';
         if (seopress_get_service('TitleOption')->getTitleNoSnippet()) {
             $seopress_robots_snippet            = 'yes';
@@ -183,11 +175,6 @@ function seopress_display_seo_term_metaboxe() {
                 update_term_meta($term_id, '_seopress_robots_imageindex', 'yes');
             } else {
                 delete_term_meta($term_id, '_seopress_robots_imageindex', '');
-            }
-            if (isset($_POST['seopress_robots_archive'])) {
-                update_term_meta($term_id, '_seopress_robots_archive', 'yes');
-            } else {
-                delete_term_meta($term_id, '_seopress_robots_archive', '');
             }
             if (isset($_POST['seopress_robots_snippet'])) {
                 update_term_meta($term_id, '_seopress_robots_snippet', 'yes');

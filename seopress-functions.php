@@ -240,7 +240,7 @@ function seopress_disable_qm($allcaps, $caps, $args) {
  */
 function seopress_clean_content_analysis() {
     // Check if 'no_admin_bar' is set and equals '1'; sanitize input
-    if (!isset($_GET['no_admin_bar']) || '1' !== sanitize_text_field($_GET['no_admin_bar'])) {
+    if (!isset($_GET['no_admin_bar']) || '1' !== sanitize_text_field(wp_unslash($_GET['no_admin_bar']))) {
         return;
     }
 
@@ -579,8 +579,8 @@ function is_seopress_page() {
 		return false;
 	}
 
-	$page = $_REQUEST['page'] ?? null;
-	$post_type = $_REQUEST['post_type'] ?? null;
+	$page = isset($_REQUEST['page']) ? sanitize_text_field(wp_unslash($_REQUEST['page'])) : null;
+	$post_type = isset($_REQUEST['post_type']) ? sanitize_text_field(wp_unslash($_REQUEST['post_type'])) : null;
 
 	if ($page) {
 		return strpos($page, 'seopress') === 0;
@@ -785,4 +785,31 @@ function seopress_auto_flush_permalinks($option, $old_value, $value) {
 	if ($option === 'seopress_xml_sitemap_option_name') {
 		flush_rewrite_rules(false);
 	}
+}
+
+/**
+ * Generate dynamically the Instant Indexing API key
+ *
+ * @since 8.6.0
+ *
+ * @param bool $init
+ *
+ * @return void
+ */
+function seopress_instant_indexing_generate_api_key_fn($init = false) {
+    $options            = get_option('seopress_instant_indexing_option_name') ? get_option('seopress_instant_indexing_option_name') : [];
+
+    $api_key = wp_generate_uuid4();
+    $api_key = preg_replace('[-]', '', $api_key);
+    $options['seopress_instant_indexing_bing_api_key'] = base64_encode($api_key);
+
+    if ($init === true) {
+        $options['seopress_instant_indexing_automate_submission'] = '1';
+    }
+
+    update_option('seopress_instant_indexing_option_name', $options);
+
+    if ($init === false) {
+        wp_send_json_success();
+    }
 }

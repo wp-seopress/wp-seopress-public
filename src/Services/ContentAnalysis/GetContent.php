@@ -1051,17 +1051,6 @@ class GetContent
                 $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>noimageindex</strong> is off. Google will index the images on this page.', 'wp-seopress') . '</p>';
             }
 
-            if (preg_match('/noarchive/', $encoded)) {
-                if ('high' != $analyzes['robots']['impact']) {
-                    $analyzes['robots']['impact'] = 'medium';
-                }
-                $desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __('<strong>noarchive</strong> is on! Search engines will not cache your page.', 'wp-seopress') . '</p>';
-
-                $issue['issue_name'] = 'meta_robots_noarchive';
-            } else {
-                $desc .= '<p><span class="dashicons dashicons-yes"></span>' . __('<strong>noarchive</strong> is off. Search engines will probably cache your page.', 'wp-seopress') . '</p>';
-            }
-
             if (preg_match('/nosnippet/', $encoded)) {
                 if ('high' != $analyzes['robots']['impact']) {
                     $analyzes['robots']['impact'] = 'medium';

@@ -85,7 +85,7 @@ class RobotSettings implements ExecuteHooks
             //Elementor sync
             $elementor = get_post_meta($id, '_elementor_page_settings', true);
 
-            $dataKeysSave = ['_seopress_robots_index', '_seopress_robots_follow', '_seopress_robots_imageindex', '_seopress_robots_archive', '_seopress_robots_snippet', '_seopress_robots_canonical', '_seopress_robots_primary_cat', '_seopress_robots_breadcrumbs'];
+            $dataKeysSave = ['_seopress_robots_index', '_seopress_robots_follow', '_seopress_robots_imageindex', '_seopress_robots_snippet', '_seopress_robots_canonical', '_seopress_robots_primary_cat', '_seopress_robots_breadcrumbs'];
 
             foreach ($metas as $key => $value) {
                 if (! isset($params[$value['key']])) {
@@ -101,7 +101,7 @@ class RobotSettings implements ExecuteHooks
                     $item = sanitize_url($item);
                 }
 
-                if ($value['key'] ==='_seopress_robots_primary_cat' || $value['key'] ==='_seopress_robots_index' || $value['key'] ==='_seopress_robots_follow' || $value['key'] ==='_seopress_robots_imageindex' || $value['key'] ==='_seopress_robots_archive' || $value['key'] ==='_seopress_robots_snippet' || $value['key'] ==='_seopress_robots_breadcrumbs') {
+                if ($value['key'] ==='_seopress_robots_primary_cat' || $value['key'] ==='_seopress_robots_index' || $value['key'] ==='_seopress_robots_follow' || $value['key'] ==='_seopress_robots_imageindex' || $value['key'] ==='_seopress_robots_snippet' || $value['key'] ==='_seopress_robots_breadcrumbs') {
                     $item = sanitize_text_field($item);
                 }
 

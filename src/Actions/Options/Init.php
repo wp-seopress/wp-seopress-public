@@ -33,6 +33,36 @@ class Init implements ActivationHook
 
         //Advanced=================================================================================
         $this->setAdvancedOptions();
+
+        //Instant Indexing=================================================================================
+        $this->setInstantIndexingOptions();
+    }
+
+    /**
+     * @since 8.6.0
+     *
+     * @return void
+     */
+    protected function setInstantIndexingOptions() {
+        $instantIndexingOptions = get_option('seopress_instant_indexing_option_name');
+
+        //Init if option doesn't exist
+        if (false === $instantIndexingOptions) {
+            $instantIndexingOptions = [];
+
+            if ('1' === seopress_get_toggle_option('instant-indexing')) {
+				seopress_instant_indexing_generate_api_key_fn(true);
+			}
+        }
+
+        $instantIndexingOptions = [
+            'seopress_instant_indexing_automate_submission' => '1',
+        ];
+
+		// Check if the value is an array (important!)
+		if (is_array($instantIndexingOptions)) {
+			add_option('seopress_instant_indexing_option_name', $instantIndexingOptions);
+		}
     }
 
     /**
@@ -117,7 +147,7 @@ class Init implements ActivationHook
         $post_types = get_post_types($args, 'objects', 'and');
 
         foreach ($post_types as $seopress_cpt_key => $seopress_cpt_value) {
-            if ('post' == $seopress_cpt_key || 'page' == $seopress_cpt_key || 'product' == $seopress_cpt_key) {
+            if ('post' === $seopress_cpt_key || 'page' === $seopress_cpt_key || 'product' === $seopress_cpt_key) {
                 $sitemapOptions['seopress_xml_sitemap_post_types_list'][$seopress_cpt_key]['include'] = '1';
             }
         }
@@ -130,7 +160,7 @@ class Init implements ActivationHook
         $taxonomies = get_taxonomies($args, 'objects', 'and');
 
         foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
-            if ('category' == $seopress_tax_key || 'post_tag' == $seopress_tax_key) {
+            if ('category' === $seopress_tax_key) {
                 $sitemapOptions['seopress_xml_sitemap_taxonomies_list'][$seopress_tax_key]['include'] = '1';
             }
         }
@@ -215,24 +245,29 @@ class Init implements ActivationHook
 
         //Taxonomies
         $taxonomies = seopress_get_service('WordPressData')->getTaxonomies();
-        if (empty($taxonomies)) {
+        if (! empty($taxonomies)) {
             foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
                 //Title
-                if ('category' == $seopress_tax_key) {
+                if ('category' === $seopress_tax_key) {
                     $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = MetasDefaultValues::getTaxonomyCategoryValue();
-                } elseif ('post_tag' == $seopress_tax_key) {
+                } elseif ('post_tag' === $seopress_tax_key) {
                     $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = MetasDefaultValues::getTagTitleValue();
                 } else {
                     $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = MetasDefaultValues::getTermTitleValue();
                 }
 
                 //Desc
-                if ('category' == $seopress_tax_key) {
+                if ('category' === $seopress_tax_key) {
                     $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = MetasDefaultValues::getTaxonomyCategoryDescriptionValue();
-                } elseif ('post_tag' == $seopress_tax_key) {
+                } elseif ('post_tag' === $seopress_tax_key) {
                     $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = MetasDefaultValues::getTagDescriptionValue();
                 } else {
                     $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = MetasDefaultValues::getTermDescriptionValue();
+                }
+
+                //Noindex
+                if ('post_tag' === $seopress_tax_key) {
+                    $titleOptions['seopress_titles_tax_titles'][$seopress_tax_key]['noindex'] = '1';
                 }
             }
         }

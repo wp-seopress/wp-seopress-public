@@ -224,7 +224,6 @@ class Document_Settings_Section {
         $robots_index       = get_post_meta($post_id, '_seopress_robots_index', true);
         $robots_follow      = get_post_meta($post_id, '_seopress_robots_follow', true);
         $robots_imageindex  = get_post_meta($post_id, '_seopress_robots_imageindex', true);
-        $robots_archive     = get_post_meta($post_id, '_seopress_robots_archive', true);
         $robots_snippet     = get_post_meta($post_id, '_seopress_robots_snippet', true);
         $robots_canonical   = get_post_meta($post_id, '_seopress_robots_canonical', true);
         $robots_primary_cat = get_post_meta($post_id, '_seopress_robots_primary_cat', true);
@@ -260,17 +259,6 @@ class Document_Settings_Section {
                 'label_block' => true,
                 'separator'   => 'none',
                 'default'     => 'yes' === $robots_imageindex ? 'yes' : '',
-            ]
-        );
-
-        $document->add_control(
-            '_seopress_robots_archive',
-            [
-                'label'       => __('Don\'t display a "Cached" link in the Google search results (noarchive)', 'wp-seopress'),
-                'type'        => \Elementor\Controls_Manager::SWITCHER,
-                'label_block' => true,
-                'separator'   => 'none',
-                'default'     => 'yes' === $robots_archive ? 'yes' : '',
             ]
         );
 
@@ -583,7 +571,7 @@ class Document_Settings_Section {
             [
                 //'label' => __( 'Important Note', 'wp-seopress' ),
                 'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw'  => __('<p class="elementor-control-field-description">Enter a few keywords for analysis to help you write optimized content.</p><p class="elementor-control-field-description"><strong>Did you know?</strong> Writing content for your users is the most important thing! If it doesn‘t feel natural, your visitors will leave your site, Google will know it and your ranking will be affected.</p>', 'wp-seopress'),
+                'raw'  => '<p class="elementor-control-field-description">' . __('Enter a few keywords for analysis to help you write optimized content.', 'wp-seopress') . '</p>',
                 //'content_classes' => 'your-class',
             ]
         );
@@ -605,6 +593,7 @@ class Document_Settings_Section {
                 'seopress_google_suggest_kw',
                 [
                     'label'       => __('Google suggestions', 'wp-seopress'),
+                    'description' => __('Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.', 'wp-seopress'),
                     'type'        => 'seopress-google-suggestions',
                     'label_block' => true,
                     'separator'   => 'none',

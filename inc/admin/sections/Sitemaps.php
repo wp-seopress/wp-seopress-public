@@ -77,7 +77,7 @@ function seopress_print_section_info_xml_sitemap_general()
     </div>
 
     <?php if (isset($_SERVER['SERVER_SOFTWARE'])) {
-        $server_software = explode('/', esc_html(wp_unslash($_SERVER['SERVER_SOFTWARE'])));
+        $server_software = explode('/', sanitize_text_field(wp_unslash($_SERVER['SERVER_SOFTWARE'])));
         reset($server_software);
 
         if ('nginx' == current($server_software)) { //IF NGINX

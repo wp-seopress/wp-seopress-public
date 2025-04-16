@@ -180,7 +180,6 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
 								<h3>
 									<?php
 								esc_html_e('Google Snippet Preview', 'wp-seopress');
-								echo seopress_tooltip(esc_html__('Snippet Preview', 'wp-seopress'), wp_kses_post(__('The Google preview is a simulation. <br>There is no reliable preview because it depends on the screen resolution, the device used, the expression sought, and Google. <br>There is not one snippet for one URL but several. <br>All the data in this overview comes directly from your source code. <br>This is what the crawlers will see.', 'wp-seopress')), null);
 							?>
 								</h3>
 								<p><?php esc_html_e('This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview. Note that Google may optionally display an image of your article.', 'wp-seopress'); ?>
@@ -279,15 +278,6 @@ if ('term.php' == $pagenow || 'edit-tags.php' == $pagenow) { ?>
 								<?php echo esc_attr($disabled['imageindex']); ?>/>
 								<?php echo wp_kses_post(__('Do not index images for this page <strong>(noimageindex)</strong>', 'wp-seopress')); ?>
 								<?php echo seopress_tooltip(esc_html__('"noimageindex" robots meta tag', 'wp-seopress'), wp_kses_post(__('By checking this option, you will add a meta robots tag with the value "noimageindex". <br> Note that your images can always be indexed if they are linked from other pages.', 'wp-seopress')), esc_html('<meta name="robots" content="noimageindex" />')); ?>
-							</label>
-						</p>
-						<p>
-							<label for="seopress_robots_archive_meta">
-								<input type="checkbox" name="seopress_robots_archive" id="seopress_robots_archive_meta"
-									value="yes" <?php echo checked($seopress_robots_archive, 'yes', false); ?>
-								<?php echo esc_attr($disabled['archive']); ?>/>
-								<?php echo wp_kses_post(__('Do not display a "Cached" link in the Google search results <strong>(noarchive)</strong>', 'wp-seopress')); ?>
-								<?php echo seopress_tooltip(esc_html__('"noarchive" robots meta tag', 'wp-seopress'), wp_kses_post(__('By checking this option, you will add a meta robots tag with the value "noarchive".', 'wp-seopress')), esc_html('<meta name="robots" content="noarchive" />')); ?>
 							</label>
 						</p>
 						<p>
