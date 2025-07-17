@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 8.9
+Stable tag: 8.9.0.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,6 +271,11 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.9.0.1 =
+* FIX Undefined variables in XML sitemaps
+* FIX Incorrect last mod date with specific timezone for XML Index Sitemap
+* FIX CSS Z-index for chatbot
+
 = 8.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-9/">Read the blog post update</a> =
 * NEW Add our AI chatbot to our settings page to get help faster (PRO)
 * NEW Microsoft Clarity User Consent mode

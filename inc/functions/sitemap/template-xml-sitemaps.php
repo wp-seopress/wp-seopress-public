@@ -145,7 +145,7 @@ function seopress_xml_sitemap_index() {
                             if (false === $last_mod_date) {
                                 $last_mod_date = $wpdb->get_var(
                                     $wpdb->prepare(
-                                        "SELECT p.post_modified_gmt 
+                                        "SELECT p.post_modified 
                                         FROM $wpdb->posts p
                                         LEFT JOIN $wpdb->postmeta pm_canonical ON p.ID = pm_canonical.post_id AND pm_canonical.meta_key = '_seopress_robots_canonical'
                                         LEFT JOIN $wpdb->postmeta pm_noindex ON p.ID = pm_noindex.post_id AND pm_noindex.meta_key = '_seopress_robots_index'
@@ -153,10 +153,10 @@ function seopress_xml_sitemap_index() {
                                         AND p.post_status = 'publish'
                                         AND (pm_canonical.meta_value IS NULL OR pm_canonical.meta_value = %s)
                                         AND (pm_noindex.meta_value IS NULL OR pm_noindex.meta_value != 'yes')
-                                        ORDER BY p.post_modified_gmt DESC 
+                                        ORDER BY p.post_modified DESC 
                                         LIMIT 1 OFFSET %d",
                                         $cpt_key,
-                                        htmlspecialchars(urldecode(get_permalink($post->ID))),
+                                        htmlspecialchars(urldecode(get_permalink(get_the_ID()))),
                                         $offset
                                     )
                                 );
