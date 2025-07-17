@@ -146,4 +146,13 @@ class SitemapOption {
     public function getHtmlNoHierarchy() {
         return $this->searchOptionByKey('seopress_xml_sitemap_html_no_hierarchy');
     }
+
+    /**
+     * @since 8.9.0
+     *
+     * @return string|null  
+     */
+    public function getHtmlPostTypeArchive() {
+        return $this->searchOptionByKey('seopress_xml_sitemap_html_post_type_archive');
+    }
 }

@@ -36,7 +36,7 @@ function seopress_admin_bar_links() {
     $noindex = '';
 
     
-    if ('1' !== seopress_get_service('AdvancedOption')->getAppearanceAdminBarNoIndex() && !is_admin()) {
+    if ('1' !== seopress_get_service('AdvancedOption')->getAppearanceAdminBarNoIndex()) {
         $metarobots = false;
 
         // Get the object ID

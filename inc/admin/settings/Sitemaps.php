@@ -132,3 +132,11 @@ add_settings_field(
     'seopress-settings-admin-html-sitemap', // Page
     'seopress_setting_section_html_sitemap' // Section
 );
+
+add_settings_field(
+    'seopress_xml_sitemap_html_post_type_archive', // ID
+    __('Disable post type archive links', 'wp-seopress'), // Title
+    'seopress_xml_sitemap_html_post_type_archive_callback', // Callback
+    'seopress-settings-admin-html-sitemap', // Page
+    'seopress_setting_section_html_sitemap' // Section
+);

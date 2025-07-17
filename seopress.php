@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 8.8
+Version: 8.8.1
 Author URI: https://www.seopress.org/
 License: GPLv3 or later
 Text Domain: wp-seopress
@@ -35,7 +35,7 @@ defined('ABSPATH') or exit('Please don’t call the plugin directly. Thanks :)')
 /**
  * Define constants
  */
-define('SEOPRESS_VERSION', '8.8');
+define('SEOPRESS_VERSION', '8.8.1');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));

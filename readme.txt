@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 8.8
+Stable tag: 8.8.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,6 +271,12 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.8.1 =
+* INFO HTML Sitemap refactoring
+* INFO Improve "noindex" alert in WP admin bar
+* FIX Redirections REST API with the Editor and post meta (eg: ACF fields)
+* FIX PHP 8.4 compatibility issue with redirections CSV import tool
+
 = 8.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-8/">Read the blog post update</a> =
 * NEW Import global settings from Rank Math
 * NEW Quickly enable the universal SEO metabox from the SEO Dashboard

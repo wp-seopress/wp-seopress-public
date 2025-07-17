@@ -323,7 +323,10 @@ function seopress_load_redirections_options()
 if ('1' == seopress_get_toggle_option('xml-sitemap')) {
     add_action('init', 'seopress_load_sitemap', 999);
     function seopress_load_sitemap() {
-        require_once plugin_dir_path(__FILE__) . '/options-sitemap.php'; //XML / HTML Sitemap
+        if ('1' === seopress_get_service('SitemapOption')->getHtmlEnable()) {
+            $htmlSitemapService = new \SEOPress\Services\HTMLSitemap\HTMLSitemapService(seopress_get_service('SitemapOption'));
+            $htmlSitemapService->init();
+        }
     }
 }
 

@@ -80,6 +80,7 @@ function seopress_get_docs_links()
 			'xml'   => 'https://www.seopress.org/support/guides/enable-xml-sitemaps/',
 			'image' => 'https://www.seopress.org/support/guides/enable-xml-image-sitemaps/',
 			'video' => 'https://www.seopress.org/support/guides/enable-video-xml-sitemap/',
+			'hooks' => 'https://www.seopress.org/support/hooks/#topic-77',
 		],
 		'social' => [
 			'og' => 'https://www.seopress.org/support/guides/manage-facebook-open-graph-and-twitter-cards-metas/',
@@ -253,7 +254,8 @@ function seopress_get_docs_links()
 		$docs['sitemaps']['xml'] = 'https://www.seopress.org/fr/support/guides/activer-le-sitemap-xml/';
 		$docs['sitemaps']['image'] = 'https://www.seopress.org/fr/support/guides/activer-le-sitemap-xml-pour-images/';
 		$docs['sitemaps']['video'] = 'https://www.seopress.org/fr/support/guides/activer-le-sitemap-xml-pour-les-videos/';
-
+		$docs['sitemaps']['hooks'] = 'https://www.seopress.org/fr/support/hooks/#topic-69';
+		
 		$docs['social']['og'] = 'https://www.seopress.org/fr/support/guides/gerer-les-metas-facebook-open-graph-et-twitter-cards/';
 
 		$docs['analytics']['quick_start'] = 'https://www.seopress.org/fr/support/guides/debutez-avec-google-analytics/';
