@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 8.9.0.1
+Stable tag: 8.9.0.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -193,19 +193,25 @@ We provide deep integration with Elementor page builder UI, see below:
 
 == Frequently Asked Questions ==
 
-= Can I import my post and term metadata from other plugins? =
+= Can I import my post and term metadata, global settings, redirections from other plugins to SEOPress? =
 
-You can import your metadata from:
-* <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-yoast-seo-seopress/_faq">Yoast SEO</a>, 
-* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-all-in-one-seo-to-seopress/_faq">All In One SEO (AIO SEO)</a>, 
-* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadatas-from-the-seo-framework-to-seopress/_faq">The SEO Framework (TSF)</a>, 
-* <a href="https://www.seopress.org/support/guides/import-post-metadatas-from-squirrly-to-seopress/_faq">Squirrly</a> (post metas only, not terms), 
-* <a href="https://www.seopress.org/support/guides/import-post-terms-metadatas-rank-math-seo-seopress/_faq">Rank Math</a>, 
-* <a href="https://www.seopress.org/support/guides/import-post-metadata-from-seo-ultimate-to-seopress/_faq">SEO Ultimate (post metas only, not terms)</a>, 
-* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-wp-meta-seo-to-seopress/_faq">WP Meta SEO</a>, 
-* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-smartcrawl-to-seopress/_faq">SmartCrawl</a>, 
-* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-slim-seo-to-seopress/_faq">Slim SEO</a> 
-* <a href="https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-premium-seo-pack-to-seopress/_faq">Premium SEO Pack</a> in one click to SEOPress without losing traffic.
+Yes, with our <a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">import tool</a>: 
+
+We support these SEO plugins:
+- Yoast
+- AIOSEO
+- RankMath
+- The SEO Framework
+- Squirrly SEO
+- SEO Ultimate
+- WP Meta SEO
+- Premium SEO Pack
+- Slim SEO
+- SmartCrawl
+
+= Which themes and page builders are supported? =
+
+All. Period. And with our <a href="https://www.seopress.org/features/page-builders-integration/">universal SEO metabox</a>, it's super easy to edit your SEO right from your favorite editor.
 
 = How to use Google Tag Manager / other scripts with SEOPress? =
 
@@ -226,7 +232,7 @@ For PRO users: support by mail from their customer account.
 
 = Is SEOPress GDPR compliant? =
 
-Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-label/">about SEOPress and GDPR</a>
+Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">about SEOPress and GDPR</a>
 
 = Is SEOPress compatible with WordPress multisite? =
 
@@ -234,27 +240,32 @@ Yes!
 
 = Is white label a free feature? =
 
-Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-label/">about SEOPress and the White Label feature</a>
-
-= Is it compatible with the core XML sitemaps (WP 5.5+)? =
-
-Yes! We automatically disable the native WordPress XML sitemaps to avoid any SEO conflicts. Plus, our sitemaps are much more powerful!
+Yes! Learn more here <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">about SEOPress and the White Label feature</a>
 
 = My XML sitemap returns a 404 error =
 
-Read this <a href="https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/">post to solve this issue</a>
+Read this <a href="https://www.seopress.org/support/guides/xml-sitemap-returns-404-error/" target="_blank">post to solve this issue</a>
 
 = My XML sitemap returns a blank page =
 
-Read this <a href="https://www.seopress.org/support/guides/xml-sitemap-blank-page/">post to solve this issue</a>
+Read this <a href="https://www.seopress.org/support/guides/xml-sitemap-blank-page/" target="_blank">post to solve this issue</a>
 
 = I don't see the correct title! =
 
-You're theme is probably using a deprecated function to handle the title. <a href="https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/">Learn more here</a>
+Your theme is probably using a deprecated function to handle the title. <a href="https://www.seopress.org/support/guides/fixing-missing-add_theme_support-in-your-theme/" target="_blank">Learn more here</a>
+
+= Google displays the wrong title / meta description =
+
+Google does what it wants!
+More details on our <a href="https://www.seopress.org/support/guides/google-uses-the-wrong-meta-title-meta-description-in-search-results/" target="_blank">guide</a>. 
+
+= How can I report security bugs? =
+
+By using our contact form (select Misc as subject), or directly from <a href="https://patchstack.com/database/vdp/c8c461bf-80aa-4c9d-8792-2ee26edd1570">Patchstack</a>.
 
 = My question is not listed here! =
 
-<a href="https://www.seopress.org/support/faq/" target="_blank">Read our complete FAQ on our site</a>
+<a href="https://www.seopress.org/support/faq/" target="_blank">Read our complete FAQ on our site</a> or ask on our [support forum](https://wordpress.org/support/plugin/wp-seopress/).
 
 == Screenshots ==
 1. SEOPress metabox
@@ -271,6 +282,9 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
+= 8.9.0.2 =
+* FIX An issue with the universal SEO metabox
+
 = 8.9.0.1 =
 * FIX Undefined variables in XML sitemaps
 * FIX Incorrect last mod date with specific timezone for XML Index Sitemap
