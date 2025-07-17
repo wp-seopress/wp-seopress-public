@@ -299,9 +299,11 @@ if ('1' === seopress_get_toggle_option('google-analytics') && !isset($_GET['bric
 
     function seopress_cookies_user_consent_close() {
         require_once plugin_dir_path(__FILE__) . '/options-google-analytics.php'; //Google Analytics
+        require_once plugin_dir_path(__FILE__) . '/options-clarity.php'; //Clarity
 
         $data = [];
         $data['gtag_consent_js'] = seopress_google_analytics_js(false);
+        $data['clarity_consent_js'] = seopress_clarity_js(false);
 
         wp_send_json_success($data);
     }

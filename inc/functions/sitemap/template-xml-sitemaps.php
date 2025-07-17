@@ -140,16 +140,28 @@ function seopress_xml_sitemap_index() {
                             global $wpdb;
                             $offset = absint($offset);
 
-                            $last_mod_date = $wpdb->get_var(
-                                $wpdb->prepare(
-                                    "SELECT post_modified_gmt FROM $wpdb->posts 
-                                    WHERE post_type = %s AND post_status = 'publish' 
-                                    ORDER BY post_modified_gmt DESC 
-                                    LIMIT 1 OFFSET %d",
-                                    $cpt_key,
-                                    $offset
-                                )
-                            );
+                            $cache_key = 'seopress_sitemap_lastmod_' . $cpt_key . '_' . $offset;
+                            $last_mod_date = get_transient($cache_key);
+                            if (false === $last_mod_date) {
+                                $last_mod_date = $wpdb->get_var(
+                                    $wpdb->prepare(
+                                        "SELECT p.post_modified_gmt 
+                                        FROM $wpdb->posts p
+                                        LEFT JOIN $wpdb->postmeta pm_canonical ON p.ID = pm_canonical.post_id AND pm_canonical.meta_key = '_seopress_robots_canonical'
+                                        LEFT JOIN $wpdb->postmeta pm_noindex ON p.ID = pm_noindex.post_id AND pm_noindex.meta_key = '_seopress_robots_index'
+                                        WHERE p.post_type = %s 
+                                        AND p.post_status = 'publish'
+                                        AND (pm_canonical.meta_value IS NULL OR pm_canonical.meta_value = %s)
+                                        AND (pm_noindex.meta_value IS NULL OR pm_noindex.meta_value != 'yes')
+                                        ORDER BY p.post_modified_gmt DESC 
+                                        LIMIT 1 OFFSET %d",
+                                        $cpt_key,
+                                        htmlspecialchars(urldecode(get_permalink($post->ID))),
+                                        $offset
+                                    )
+                                );
+                                set_transient($cache_key, $last_mod_date, HOUR_IN_SECONDS);
+                            }
 
                             $seopress_sitemaps .= "\n";
                             $seopress_sitemaps .= '<sitemap>';

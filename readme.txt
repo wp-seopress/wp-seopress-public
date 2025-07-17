@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 8.8.1
+Stable tag: 8.9
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -271,31 +271,20 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 8.8.1 =
-* INFO HTML Sitemap refactoring
-* INFO Improve "noindex" alert in WP admin bar
-* FIX Redirections REST API with the Editor and post meta (eg: ACF fields)
-* FIX PHP 8.4 compatibility issue with redirections CSV import tool
-
-= 8.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-8/">Read the blog post update</a> =
-* NEW Import global settings from Rank Math
-* NEW Quickly enable the universal SEO metabox from the SEO Dashboard
-* NEW Add search field to dynamic variables dropdown list
-* NEW Add Redirections from the manager to our REST API
-* NEW Add Google Page Speed report to our REST API
-* NEW Add Google Analytics 4 stats to our REST API
-* NEW Add Matomo Analytics stats to our REST API
-* NEW Hook 'seopress_after_create_404' to run an action after a 404 error is logged (https://www.seopress.org/support/hooks/run-action-after-a-404-error-is-inserted/)
-* INFO Update Tagify library
-* INFO Automatically adds "@" for X account if missing when saving social settings
-* INFO Email template refactoring
-* INFO Site Audit: Content marked as noindex will not be analyzed by default (you can change this from SEO, Audit, Settings tab)
-* FIX the7 theme notification for OG tags
-* FIX Admin bar "noindex" context with Bricks
-* FIX Dismiss SEO notifications
-* FIX Enfold compatibility issue with our Notifications Center
-* FIX Product variable URL for product schema / Google Merchant Center
-* FIX FAQ block schema "answerCount" property
+= 8.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-9/">Read the blog post update</a> =
+* NEW Add our AI chatbot to our settings page to get help faster (PRO)
+* NEW Microsoft Clarity User Consent mode
+* NEW Replace the Referer column by Full Origin in our Redirect Manager: more useful, especially with multidomain/multilingual websites
+* NEW UI for automatic schemas
+* INFO Update Admin Columns PRO integration (minimum version 6.0 is now required). From version 7, the integration will be directly provided by ACP.
+* INFO Add caching to last modified date for XML Index sitemap
+* INFO UI - Add schema keys to automatic schemas (SEO, PRO, Schemas)
+* INFO NEW notice when using Google Indexing API
+* INFO WPML integration improved for automatic translations
+* INFO Image for the hiringOrganization sub-schema in the Job automatic schema is no longer required
+* FIX XML Index sitemap last modified date
+* FIX An issue with Admin Columns PRO
+* FIX A compatibility issue with WP 6.8 and our blocks causing performance issue when scrolling the post content from the Block Editor
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

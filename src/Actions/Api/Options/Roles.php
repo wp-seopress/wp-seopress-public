@@ -28,11 +28,12 @@ class Roles implements ExecuteHooks {
      */
     public function permissionCheck(\WP_REST_Request $request) {
         $nonce = $request->get_header('x-wp-nonce');
-        if ( ! wp_verify_nonce($nonce, 'wp_rest')) {
+        if ($nonce && !wp_verify_nonce($nonce, 'wp_rest')) {
             return false;
         }
 
-        if ( ! user_can( $this->current_user, 'manage_options' )) {
+        $current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
+        if ( ! user_can( $current_user, 'manage_options' )) {
             return false;
         }
 

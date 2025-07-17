@@ -106,8 +106,15 @@ esc_html($check));
     </div>
 </div>
 
+<div class="seopress-notice is-warning">
+    <p>
+        <?php
+            echo wp_kses_post(__('The Google Indexing API should only be used to crawl pages that contain structured data of type <code>JobPosting</code> or <code>BroadcastEvent</code> in a <code>VideoObject</code> element.', 'wp-seopress'));
+        ?>
+    </p>
+</div>
+
 <p>
-    <br>
     <button type="button" class="seopress-instant-indexing-batch btn btnPrimary">
         <?php esc_attr_e('Submit URLs to Google & Bing', 'wp-seopress'); ?>
     </button>

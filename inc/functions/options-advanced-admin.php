@@ -546,6 +546,10 @@ if ($pagenow === 'upload.php') {
 if ($pagenow === 'edit.php') {
     add_action('quick_edit_custom_box', 'seopress_bulk_quick_edit_custom_box', 10, 2);
     function seopress_bulk_quick_edit_custom_box($column_name) {
+        if (is_plugin_active('admin-columns-pro/admin-columns-pro.php')) {
+            return;
+        }
+
         static $printNonce = true;
         if ($printNonce) {
             $printNonce = false;

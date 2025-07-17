@@ -50,6 +50,7 @@ jQuery(document).ready(function ($) {
             success: function (data) {
                 if (data.data) {
                     $('head').append(data.data.gtag_consent_js);
+                    $('head').append(data.data.clarity_consent_js);
                 }
             },
         });
