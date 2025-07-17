@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 8.7.0.2
+Stable tag: 8.8
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,7 +24,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 ✔ <strong>Content analysis to help you write content optimized for search engines with unlimited target keywords</strong>
 ✔ <strong><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import your post and term metadatas</a> from other SEO plugins or CSV file in 1 click</strong>
 ✔ <strong><a href="https://translate.wordpress.org/projects/wp-plugins/wp-seopress" target="_blank">Translated into 26 languages (and counting)</strong>
-✔ <strong>Trusted by over 300,000 WordPress websites since 2017</strong>
+✔ <strong>Trusted by over 350,000 WordPress websites since 2017</strong>
 
 <a href="https://www.seopress.org/pricing/" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / 5 sites</strong></a>
 
@@ -271,11 +271,25 @@ You're theme is probably using a deprecated function to handle the title. <a hre
 12. Schema metabox
 
 == Changelog ==
-= 8.7.0.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-7/">Read the blog post update</a> =
-* INFO WP 6.8 compatibility
-* FIX Label "SEO notifications counter in admin bar"
-* FIX A regression for Automatic Instant Indexing with IndexNow
-* FIX Canonical check exclusion for XML sitemaps
+= 8.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-8/">Read the blog post update</a> =
+* NEW Import global settings from Rank Math
+* NEW Quickly enable the universal SEO metabox from the SEO Dashboard
+* NEW Add search field to dynamic variables dropdown list
+* NEW Add Redirections from the manager to our REST API
+* NEW Add Google Page Speed report to our REST API
+* NEW Add Google Analytics 4 stats to our REST API
+* NEW Add Matomo Analytics stats to our REST API
+* NEW Hook 'seopress_after_create_404' to run an action after a 404 error is logged (https://www.seopress.org/support/hooks/run-action-after-a-404-error-is-inserted/)
+* INFO Update Tagify library
+* INFO Automatically adds "@" for X account if missing when saving social settings
+* INFO Email template refactoring
+* INFO Site Audit: Content marked as noindex will not be analyzed by default (you can change this from SEO, Audit, Settings tab)
+* FIX the7 theme notification for OG tags
+* FIX Admin bar "noindex" context with Bricks
+* FIX Dismiss SEO notifications
+* FIX Enfold compatibility issue with our Notifications Center
+* FIX Product variable URL for product schema / Google Merchant Center
+* FIX FAQ block schema "answerCount" property
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

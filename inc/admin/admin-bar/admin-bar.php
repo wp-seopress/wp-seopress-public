@@ -40,15 +40,15 @@ function seopress_admin_bar_links() {
         $metarobots = false;
 
         // Get the object ID
-        $currentId = get_queried_object_id() ? get_queried_object_id() : get_the_ID();
-    
-        if (get_post_meta($currentId, '_seopress_robots_index', true)) {
+        $currentId = get_queried_object_id() ? get_queried_object_id() : null;
+
+        if (get_post_meta($currentId, '_seopress_robots_index', true) && is_singular()) {
             $metarobots = true;
-        } elseif (
+        } elseif (isset($currentId) && (
             seopress_get_service('TitleOption')->getSingleCptNoIndex($currentId) ||
             seopress_get_service('TitleOption')->getTitleNoIndex() ||
             true === post_password_required($currentId)
-        ) {
+        )) {
             $metarobots = true;
         } elseif (
             '1' === seopress_get_service('TitleOption')->getTitleNoIndex() ||

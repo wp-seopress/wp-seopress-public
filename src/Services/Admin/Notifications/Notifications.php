@@ -96,29 +96,39 @@ class Notifications {
 		}
 
 		$status = false;
-		if ('dt-the7' == $theme->template || 'dt-the7' == $theme->parent_theme) {
+		if ('dt-the7' === $theme->template || 'dt-the7' === $theme->parent_theme || 'The7' === $theme->template || 'The7' === $theme->parent_theme) {
 			$the7_options = get_option('the7');
-			if (!empty($the7_options)) {
-                if (!empty($the7_options['the7_opengraph_tags']) && $the7_options['the7_opengraph_tags'] ==='1') {
+			$dt_the7_child_options = get_option('dtthe7child');
+			
+			// Check if we're using a child theme
+			if ('The7' === $theme->parent_theme && 'dt-the7' === $theme->template && !empty($dt_the7_child_options)) {
+				if (!empty($dt_the7_child_options['the7_opengraph_tags']) && $dt_the7_child_options['the7_opengraph_tags'] === '1') {
 					$alerts_high++;
 					$status = true;
-
-					$args[] = [
-						'id'     => 'notice-dt-the7-og',
-						'title'  => __('The7 theme is not correctly setup for social sharing!', 'wp-seopress'),
-						'desc'   => __('You must disable "The7 OpenGraph tags" option from The7 advanced settings page to avoid any social sharing issues.', 'wp-seopress'),
-						'impact' => [
-							'high' => __('High impact', 'wp-seopress'),
-						],
-						'link' => [
-							'en'       => admin_url('admin.php?page=of-advanced-menu&tab=advanced-settings-tab&mark=the7_opengraph_tags#section-the7_opengraph_tags'),
-							'title'    => __('Fix this!', 'wp-seopress'),
-							'external' => false,
-						],
-						'deleteable' => false,
-						'status' => $status ? $status : false,
-					];
 				}
+			} 
+			// Check parent theme options
+			else if ('' === $theme->parent_theme && 'dt-the7' === $theme->template && !empty($the7_options) && !empty($the7_options['the7_opengraph_tags']) && $the7_options['the7_opengraph_tags'] === '1') {
+				$alerts_high++;
+				$status = true;
+			}
+
+			if ($status) {
+				$args[] = [
+					'id'     => 'notice-dt-the7-og',
+					'title'  => __('The7 theme is not correctly setup for social sharing!', 'wp-seopress'),
+					'desc'   => __('You must disable "The7 OpenGraph tags" option from The7 advanced settings page to avoid any social sharing issues.', 'wp-seopress'),
+					'impact' => [
+						'high' => __('High impact', 'wp-seopress'),
+					],
+					'link' => [
+						'en'       => admin_url('admin.php?page=of-advanced-menu&tab=advanced-settings-tab&mark=the7_opengraph_tags#section-the7_opengraph_tags'),
+						'title'    => __('Fix this!', 'wp-seopress'),
+						'external' => false,
+					],
+					'deleteable' => false,
+					'status' => $status,
+				];
 			}
 		}
 
@@ -339,7 +349,7 @@ class Notifications {
 						'high' => __('High impact', 'wp-seopress'),
 					],
 					'link' => [
-						'en'       => admin_url('admin.php?page=seopress-import-export'),
+						'en'       => admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_plugins'),
 						'title'    => __('Migrate!', 'wp-seopress'),
 						'external' => false,
 					],
@@ -383,7 +393,10 @@ class Notifications {
 		$avia_options_enfold_child = get_option('avia_options_enfold_child');
 		$status = false;
 		if ('enfold' == $theme->template || 'enfold' == $theme->parent_theme) {
-			if ('plugin' != $avia_options_enfold['avia']['seo_robots'] || 'plugin' != $avia_options_enfold_child['avia']['seo_robots']) {
+			if (
+				(isset($avia_options_enfold['avia']['seo_robots']) && 'plugin' != $avia_options_enfold['avia']['seo_robots']) || 
+				(isset($avia_options_enfold_child['avia']['seo_robots']) && 'plugin' != $avia_options_enfold_child['avia']['seo_robots'])
+			) {
 				if ('1' !== seopress_get_service('NoticeOption')->getNoticeEnfold()) {
 					$alerts_high++;
 					$status = true;
@@ -581,7 +594,7 @@ class Notifications {
 				$args[] = [
 					'id'     => 'notice-noindex',
 					'title'  => __('Your site is not visible to Search Engines!', 'wp-seopress'),
-					'desc'   => __('You have activated the blocking of the indexing of your site. If your site is under development, this is probably normal. Otherwise, check your settings. Delete this notification using the cross on the right if you are not concerned.', 'wp-seopress'),
+					'desc'   => __('You have activated the blocking of the indexing of your site. If your site is under development, this is probably normal. Otherwise, check your settings.', 'wp-seopress'),
 					'impact' => [
 						'high' => __('High impact', 'wp-seopress'),
 					],

@@ -67,7 +67,9 @@ function seopress_render_dyn_variables($classes)
 {
     $html = sprintf('<button type="button" class="'.seopress_btn_secondary_classes().' seopress-tag-single-all seopress-tag-dropdown %s"><span class="dashicons dashicons-arrow-down-alt2"></span></button>', $classes);
     if (! empty(seopress_get_dyn_variables())) {
-        $html .= '<div class="sp-wrap-tag-variables-list"><ul class="sp-tag-variables-list">';
+        $html .= '<div class="sp-wrap-tag-variables-list">';
+        $html .= '<ul class="sp-tag-variables-list">';
+        $html .= '<li class="sp-tag-variables-search"><input type="text" class="sp-tag-variables-search-input" placeholder="' . __('Search variables...', 'wp-seopress') . '" /></li>';
         foreach (seopress_get_dyn_variables() as $key => $value) {
             $html .= '<li data-value=' . $key . ' tabindex="0"><span>' . $value . '</span></li>';
         }

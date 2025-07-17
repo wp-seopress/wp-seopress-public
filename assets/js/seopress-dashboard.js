@@ -76,7 +76,8 @@ jQuery(document).ready(function ($) {
         "bot",
         "rewrite",
         "white-label",
-        "ai"
+        "ai",
+        "universal-metabox"
     ]
     features.forEach(function (item) {
         $('#toggle-' + item).on('click', function () {

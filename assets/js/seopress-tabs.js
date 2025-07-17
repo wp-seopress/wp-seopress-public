@@ -83,6 +83,9 @@ jQuery(document).ready(function ($) {
     });
 
     function sp_get_field_length(e) {
+        if (!e || !e.length) {
+            return '';
+        }
         if (e.val().length > 0) {
             meta = e.val() + " ";
         } else {
@@ -229,14 +232,14 @@ jQuery(document).ready(function ($) {
         const _self = $(this);
 
         function handleClickLi(current) {
-            if (_self.hasClass("tag-title")) {
+            if (_self.hasClass("tag-title") && input_title.length) {
                 input_title.val(
                     sp_get_field_length(input_title) +
                     $(current).attr("data-value")
                 );
                 input_title.trigger("paste");
             }
-            if (_self.hasClass("tag-description")) {
+            if (_self.hasClass("tag-description") && input_desc.length) {
                 input_desc.val(
                     sp_get_field_length(input_desc) +
                     $(current).attr("data-value")
@@ -245,27 +248,52 @@ jQuery(document).ready(function ($) {
             }
         }
 
-        $(this).on("click", function () {
-            $(this).next(".sp-wrap-tag-variables-list").toggleClass("open");
+        // Handle dropdown toggle
+        $(this).on("click", function (e) {
+            e.stopPropagation();
+            const dropdownList = $(this).next(".sp-wrap-tag-variables-list");
+            dropdownList.toggleClass("open");
 
-            $(this)
-                .next(".sp-wrap-tag-variables-list")
-                .find("li")
-                .on("click", function (e) {
-                    handleClickLi(this);
-                    e.stopImmediatePropagation();
-                })
-                .on("keyup", function (e) {
-                    if (e.keyCode === 13) {
-                        handleClickLi(this);
-                        e.stopImmediatePropagation();
+            // Add search functionality
+            const searchInput = dropdownList.find(".sp-tag-variables-search-input");
+            const listItems = dropdownList.find("li:not(.sp-tag-variables-search)");
+
+            // Set up search functionality
+            searchInput.off("input").on("input", function() {
+                const searchTerm = $(this).val().toLowerCase();
+                listItems.each(function() {
+                    const text = $(this).text().toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
                     }
                 });
+            });
+
+            // Set up click handlers for list items
+            listItems.off("click").on("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                handleClickLi(this);
+            });
+
+            // Set up keyboard handlers for list items
+            listItems.off("keyup").on("keyup", function (e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleClickLi(this);
+                }
+            });
 
             function closeItem(e) {
                 if (
                     $(e.target).hasClass("dashicons") ||
-                    $(e.target).hasClass("seopress-tag-single-all")
+                    $(e.target).hasClass("seopress-tag-single-all") ||
+                    $(e.target).hasClass("sp-tag-variables-search-input") ||
+                    $(e.target).closest(".sp-tag-variables-search").length ||
+                    $(e.target).closest("li").length
                 ) {
                     return;
                 }
@@ -281,10 +309,6 @@ jQuery(document).ready(function ($) {
             }
         });
     });
-
-
-
-
 
     if ($("#seopress_titles_home_site_title").length) {
         const $ = jQuery;

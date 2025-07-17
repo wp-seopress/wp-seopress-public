@@ -108,7 +108,7 @@ function seopress_sanitize_options_fields($input){
             $input[$value] = wp_kses($input[$value], $args);
         } elseif (( ! empty($input['seopress_google_analytics_other_tracking']) && 'seopress_google_analytics_other_tracking' === $value) || ( ! empty($input['seopress_google_analytics_other_tracking_body']) && 'seopress_google_analytics_other_tracking_body' === $value) || ( ! empty($input['seopress_google_analytics_other_tracking_footer']) && 'seopress_google_analytics_other_tracking_footer' === $value)) {
             if (current_user_can('unfiltered_html')) {
-                $input[$value] = $input[$value]; //No sanitization for this field
+                $input[$value] = $input[$value]; // No sanitization for this field
             } else {
                 $options = get_option('seopress_google_analytics_option_name');
                 $input[$value] = isset($options[$value]) ? $options[$value] : '';
@@ -119,6 +119,12 @@ function seopress_sanitize_options_fields($input){
             $input[$value] = sanitize_url($input[$value]);
         } elseif (( ! empty ($input['seopress_social_knowledge_email']) && 'seopress_social_knowledge_email' === $value)) {
             $input[$value] = sanitize_email($input[$value]);
+        } elseif (( ! empty ($input['seopress_social_accounts_twitter']) && 'seopress_social_accounts_twitter' === $value)) {
+            $input[$value] = sanitize_text_field($input[$value]);
+            // Ensure Twitter handle starts with @
+            if (strpos($input[$value], '@') !== 0) {
+                $input[$value] = '@' . ltrim($input[$value], '@');
+            }
         } elseif ( ! empty($input[$value])) {
             $input[$value] = sanitize_text_field($input[$value]);
         }

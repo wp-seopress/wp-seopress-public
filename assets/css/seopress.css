@@ -1096,6 +1096,10 @@ body.seopress-white-label .seopress-option {
     margin-top: 5px;
 }
 
+#seopress_content_analysis span.description~.tagify {
+    width: 100%;
+}
+
 #seopress_content_analysis .gr-analysis-title button {
     background: #fff;
     border: 0;
@@ -2339,7 +2343,6 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 }
 
 @media only screen and (max-width: 782px) {
-
     #seopress-content .feature-state,
     .seopress-option .feature-state {
         display: none;
@@ -2351,7 +2354,19 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 .seopress-option #tab_seopress_titles_tax h3 {
     margin: 2em 0 1em 0;
     border-top: 1px solid var(--borderColorLight);
-    padding: 1em 0 0 0;
+    top: 90px;
+    background: #fff;
+    padding: 1rem 0;
+    z-index: 10;
+    position: sticky;
+}
+
+@media only screen and (max-width: 782px) {
+    .seopress-option #tab_seopress_titles_single h3,
+    .seopress-option #tab_seopress_titles_archives h3,
+    .seopress-option #tab_seopress_titles_tax h3 {
+        top: 0;
+    }
 }
 
 .seopress-option #tab_seopress_titles_single h3:first-child,
@@ -2999,6 +3014,12 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     font-family: Menlo, Monaco, Andale Mono, Courier New, monospace;
     border-radius: 3px;
     font-size: 11px;
+}
+
+#seopress_cpt .sp-tag-variables-list li.sp-tag-variables-search::after,
+#seopress_pro_cpt .sp-tag-variables-list li.sp-tag-variables-search::after,
+#seopress-tabs.wrap .sp-tag-variables-list li.sp-tag-variables-search::after {
+    display: none;
 }
 
 #seopress_cpt .tag-title .dashicons,

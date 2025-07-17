@@ -31,18 +31,6 @@ function seopress_titles_home_site_title_callback()
 	aria-label="<?php esc_attr_e('Site title', 'wp-seopress'); ?>"
 	value="<?php echo esc_html($check); ?>" />
 
-<div class="wrap-sp-progress">
-	<div class="sp-progress" style="margin:0">
-		<div id="seopress_titles_title_counters_progress" class="sp-progress-bar"
-			role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="0"
-			aria-valuemax="100">1%</div>
-	</div>
-	<div class="wrap-seopress-counters">
-		<div id="seopress_titles_title_counters"></div>
-		<?php esc_attr_e(' (maximum recommended limit)', 'wp-seopress'); ?>
-	</div>
-</div>
-
 <div class="wrap-tags">
 	<button type="button" class="btn btnSecondary tag-title" id="seopress-tag-site-title" data-tag="%%sitetitle%%">
 		<span class="dashicons dashicons-plus-alt2"></span>

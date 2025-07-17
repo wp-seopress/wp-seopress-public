@@ -249,7 +249,7 @@ function seopress_social_facebook_og_author_hook() {
 			// article:tag
 			if (function_exists('get_the_tags')) {
 				$tags = get_the_tags();
-				if ( ! empty($tags)) {
+				if ( ! empty($tags) && !is_wp_error($tags)) {
 					$seopress_social_og_tag = '';
 					foreach ($tags as $tag) {
 						$seopress_social_og_tag .= '<meta property="article:tag" content="' . esc_attr($tag->name) . '">';

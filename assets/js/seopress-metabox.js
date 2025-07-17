@@ -191,27 +191,51 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        $(this).on("click", function () {
-            $(this).next(".sp-wrap-tag-variables-list").toggleClass("open");
+        $(this).on("click", function (e) {
+            e.stopPropagation();
+            const dropdownList = $(this).next(".sp-wrap-tag-variables-list");
+            dropdownList.toggleClass("open");
 
-            $(this)
-                .next(".sp-wrap-tag-variables-list")
-                .find("li")
-                .on("click", function (e) {
-                    handleClickLi(this);
-                    e.stopImmediatePropagation();
-                })
-                .on("keyup", function (e) {
-                    if (e.keyCode === 13) {
-                        handleClickLi(this);
-                        e.stopImmediatePropagation();
+            // Add search functionality
+            const searchInput = dropdownList.find(".sp-tag-variables-search-input");
+            const listItems = dropdownList.find("li:not(.sp-tag-variables-search)");
+
+            // Set up search functionality
+            searchInput.off("input").on("input", function() {
+                const searchTerm = $(this).val().toLowerCase();
+                listItems.each(function() {
+                    const text = $(this).text().toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
                     }
                 });
+            });
+
+            // Set up click handlers for list items
+            listItems.off("click").on("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                handleClickLi(this);
+            });
+
+            // Set up keyboard handlers for list items
+            listItems.off("keyup").on("keyup", function (e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleClickLi(this);
+                }
+            });
 
             function closeItem(e) {
                 if (
                     $(e.target).hasClass("dashicons") ||
-                    $(e.target).hasClass("seopress-tag-single-all")
+                    $(e.target).hasClass("seopress-tag-single-all") ||
+                    $(e.target).hasClass("sp-tag-variables-search-input") ||
+                    $(e.target).closest(".sp-tag-variables-search").length ||
+                    $(e.target).closest("li").length
                 ) {
                     return;
                 }

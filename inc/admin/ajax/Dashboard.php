@@ -10,17 +10,28 @@ function seopress_toggle_features()
 
     if (current_user_can(seopress_capability('manage_options', 'dashboard')) && is_admin()) {
         if (isset($_POST['feature']) && isset($_POST['feature_value'])) {
-            $seopress_toggle_options = get_option('seopress_toggle');
             $feature = esc_attr($_POST['feature']);
             $feature_value = esc_attr($_POST['feature_value']);
 
-            $seopress_toggle_options[$feature] = $feature_value;
+            if ($feature === 'toggle-universal-metabox') {
+                $seopress_advanced_option_name = get_option('seopress_advanced_option_name');
+                if ($_POST['feature_value'] === '1') {
+                    $seopress_advanced_option_name['seopress_advanced_appearance_universal_metabox_disable'] = '0';
+                } else {
+                    $seopress_advanced_option_name['seopress_advanced_appearance_universal_metabox_disable'] = '1';
+                }
+                update_option('seopress_advanced_option_name', $seopress_advanced_option_name, false);
+            } else {
+                $seopress_toggle_options = get_option('seopress_toggle');
+                $seopress_toggle_options[$feature] = $feature_value;
 
-            //Flush permalinks for XML sitemaps
-            if ($feature_value === 'toggle-xml-sitemap') {
-                flush_rewrite_rules(false);
+                //Flush permalinks for XML sitemaps
+                if ($feature_value === 'toggle-xml-sitemap') {
+                    flush_rewrite_rules(false);
+                }
+
+                update_option('seopress_toggle', $seopress_toggle_options, 'yes', false);
             }
-            update_option('seopress_toggle', $seopress_toggle_options, 'yes', false);
         }
         exit();
     }

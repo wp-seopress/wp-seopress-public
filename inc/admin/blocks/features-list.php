@@ -24,7 +24,6 @@
 				'title'         => __('Titles & Metas', 'wp-seopress'),
 				'desc'          => __('Manage all your titles & metas for post types, taxonomies, archives...', 'wp-seopress'),
 				'btn_primary'   => admin_url('admin.php?page=seopress-titles'),
-				'help'          => $docs['titles']['manage'],
 				'filter'        => 'seopress_remove_feature_titles',
 			],
 			'xml-sitemap' => [
@@ -32,7 +31,6 @@
 				'title'         => __('XML & HTML Sitemaps', 'wp-seopress'),
 				'desc'          => __('Manage your XML - Image - Video - HTML Sitemap.', 'wp-seopress'),
 				'btn_primary'   => admin_url('admin.php?page=seopress-xml-sitemap'),
-				'help'          => $docs['sitemaps']['xml'],
 				'filter'        => 'seopress_remove_feature_xml_sitemap',
 			],
 			'social' => [
@@ -40,7 +38,6 @@
 				'title'         => __('Social Networks', 'wp-seopress'),
 				'desc'          => __('Open Graph, X Cards, Google Knowledge Graph and more...', 'wp-seopress'),
 				'btn_primary'   => admin_url('admin.php?page=seopress-social'),
-				'help'          => $docs['social']['og'],
 				'filter'        => 'seopress_remove_feature_social',
 			],
 			'google-analytics' => [
@@ -48,7 +45,6 @@
 				'title'         => __('Analytics', 'wp-seopress'),
 				'desc'          => __('Track everything about your visitors with Google Analytics / Matomo / Microsoft Clarity.', 'wp-seopress'),
 				'btn_primary'   => admin_url('admin.php?page=seopress-google-analytics'),
-				'help'          => $docs['analytics']['quick_start'],
 				'filter'        => 'seopress_remove_feature_google_analytics',
 			],
 			'instant-indexing' => [
@@ -56,7 +52,6 @@
 				'title'         => __('Instant Indexing', 'wp-seopress'),
 				'desc'          => __('Ping Google & Bing to quickly index your content.', 'wp-seopress'),
 				'btn_primary'   => admin_url('admin.php?page=seopress-instant-indexing'),
-				'help'          => $docs['indexing_api']['google'],
 				'filter'        => 'seopress_remove_feature_instant_indexing',
 			],
 			'advanced' => [
@@ -64,7 +59,13 @@
 				'title'         => __('Image SEO & Advanced settings', 'wp-seopress'),
 				'desc'          => __('Optimize your images for SEO. Configure advanced settings.', 'wp-seopress'),
 				'btn_primary'   => admin_url('admin.php?page=seopress-advanced'),
-				'help'          => $docs['advanced']['imageseo'],
+				'filter'        => 'seopress_remove_feature_advanced',
+			],
+			'universal-metabox' => [
+				'svg'           => SEOPRESS_URL_ASSETS . '/img/ico-universal-metabox.svg',
+				'title'         => __('Universal SEO metabox', 'wp-seopress'),
+				'desc'          => __('Easily manage your SEO settings from your favorite page builder or editor.', 'wp-seopress'),
+				'btn_primary'   => admin_url('admin.php?page=seopress-advanced#tab=tab_seopress_advanced_appearance'),
 				'filter'        => 'seopress_remove_feature_advanced',
 			],
 		];
@@ -96,17 +97,31 @@
 						$desc             = isset($value['desc']) ? $value['desc'] : null;
 						$btn_primary      = isset($value['btn_primary']) ? $value['btn_primary'] : '';
 						$actions          = isset($value['actions']) ? $value['actions'] : '';
-						$help             = isset($value['help']) ? $value['help'] : null;
 						$toggle           = isset($value['toggle']) ? $value['toggle'] : true;
 
 						if (true === $toggle) {
 							$class = "";
-							if ('1' == seopress_get_toggle_option($key)) {
-								$seopress_get_toggle_option = '1';
-								$class = ' is-seopress-feature-active';
+
+							if ('universal-metabox' === $key) {
+								$toggle = get_option('seopress_advanced_option_name');
+								$toggle = $toggle['seopress_advanced_appearance_universal_metabox_disable'];
+
+								if ('1' === $toggle) {
+									$seopress_get_toggle_option = '0';
+								} else {
+									$seopress_get_toggle_option = '1';
+									$class = ' is-seopress-feature-active';
+								}
+
+								$toggle = true;
 							} else {
-								$seopress_get_toggle_option = '0';
-							}
+								if ('1' == seopress_get_toggle_option($key)) {
+									$seopress_get_toggle_option = '1';
+									$class = ' is-seopress-feature-active';
+								} else {
+									$seopress_get_toggle_option = '0';
+								}
+							}	
 						}
 					?>
 
