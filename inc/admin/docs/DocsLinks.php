@@ -245,8 +245,9 @@ function seopress_get_docs_links()
 		$docs['universal']['introduction'] = 'https://www.seopress.org/fr/fonctionnalites/integration-constructeurs-de-page/';
 
 		$docs['ai']['introduction'] = 'https://www.seopress.org/fr/fonctionnalites/openai/';
-		$docs['ai']['errors']['openai'] = 'https://www.seopress.org/fr/support/guides/generez-vos-metadonnees-seo-avec-openai/';
-		$docs['ai']['errors']['deepseek'] = 'https://www.seopress.org/fr/support/guides/generez-des-metadonnees-seo-avec-deepseek-ai/';
+		$docs['ai']['errors'] = 'https://www.seopress.org/fr/support/guides/generez-vos-metadonnees-seo-avec-openai/#erreurs-et-solutions';
+		$docs['ai']['openai']['errors'] = 'https://www.seopress.org/fr/support/guides/generez-vos-metadonnees-seo-avec-openai/';
+		$docs['ai']['deepseek']['errors'] = 'https://www.seopress.org/fr/support/guides/generez-des-metadonnees-seo-avec-deepseek-ai/';
 
 		$docs['titles']['thumbnail'] = 'https://support.google.com/programmable-search/answer/1626955?hl=fr';
 		$docs['titles']['wrong_meta'] = 'https://www.seopress.org/fr/support/guides/google-utilise-une-balise-titre-meta-description-incorrecte-dans-les-resultats-de-recherche/';

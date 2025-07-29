@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.0
+Stable tag: 9.0.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -310,6 +310,9 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.0.1 =
+* FIX i18n for French translations (missing links)
+
 = 9.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-0/">Read the blog post update</a> =
 * NEW DeepSeek integration (PRO)
 * NEW Disable AI Live Chat from Advanced settings (PRO)
