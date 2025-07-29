@@ -651,7 +651,7 @@ function seopress_google_analytics_other_tracking_footer_callback() {
         esc_textarea($check)); ?>
 
         <p class="description">
-            <?php esc_attr_e('This code will be added just after the closing body tag of your page.', 'wp-seopress'); ?>
+            <?php esc_attr_e('This code will be added just before the closing body tag of your page.', 'wp-seopress'); ?>
         </p>
     <?php } else { ?>
         <input type="hidden" name="seopress_google_analytics_option_name[seopress_google_analytics_other_tracking_footer]" value="none" />

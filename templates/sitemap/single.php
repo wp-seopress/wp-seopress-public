@@ -211,7 +211,7 @@ foreach ($postslist as $post) {
 				$dom            = new domDocument();
 				$internalErrors = libxml_use_internal_errors(true);
 
-				$run_shortcodes = apply_filters('seopress_sitemaps_single_shortcodes', true);
+				$run_shortcodes = apply_filters('seopress_sitemaps_single_shortcodes', false);
 
 				if (true === $run_shortcodes) {
 					//WP

@@ -202,36 +202,14 @@ class SEOPRESS_Admin_Setup_Wizard {
 				],
 				'parent' => 'advanced'
 			],
-		];
-		if (method_exists(seopress_get_service('ToggleOption'), 'getToggleWhiteLabel') && '1' === seopress_get_service('ToggleOption')->getToggleWhiteLabel()) {
-			//do nothing
-		} elseif (
-				(
-					! is_plugin_active('wp-seopress-insights/seopress-insights.php') && ! is_multisite()
-				)
-				||
-				! is_plugin_active('wp-seopress-pro/seopress-pro.php')
-			)
-		{
-			$default_steps['pro'] = [
+			'ready' => [
 				'breadcrumbs' => true,
-				'name'    => /* translators: %s default: SEOPress */ sprintf(__('Extend %s', 'wp-seopress'), $this->seo_title),
-				'view'    => [$this, 'seopress_setup_pro'],
-				'handler' => '',
+				'name'    => __('Ready!', 'wp-seopress'),
+				'view'    => [$this, 'seopress_setup_ready'],
+				'handler' => [$this, 'seopress_final_subscribe'],
 				'sub_steps' => [
-					'pro' => __('Go further!','wp-seopress'),
+					'ready' => __('Ready!', 'wp-seopress')
 				],
-				'parent' => 'pro'
-			];
-		}
-
-		$default_steps['ready']  = [
-			'breadcrumbs' => true,
-			'name'    => __('Ready!', 'wp-seopress'),
-			'view'    => [$this, 'seopress_setup_ready'],
-			'handler' => [$this, 'seopress_final_subscribe'],
-			'sub_steps' => [
-				'ready' => __('Ready!', 'wp-seopress')
 			]
 		];
 
@@ -311,12 +289,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 				'site' === $this->step ||
 				'indexing' === $this->step ||
 				'advanced' === $this->step ||
-				'pro' === $this->step
+				'ready' === $this->step
 				) {
 				$skip_link = esc_url($this->get_next_step_link());
-				if ('advanced' === $this->step && defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
-					$skip_link = esc_url_raw($this->get_next_step_link('pro'));
-				}
+				
 				?>
 			<a class="seopress-setup-footer-links" href="<?php echo esc_url($skip_link); ?>"><?php esc_html_e('Skip this step', 'wp-seopress'); ?></a>
 			<?php } ?>
@@ -1601,135 +1577,9 @@ class SEOPRESS_Admin_Setup_Wizard {
 		//Save options
 		update_option('seopress_advanced_option_name', $seopress_advanced_option, false);
 
-		if (defined('SEOPRESS_WL_ADMIN_HEADER') && SEOPRESS_WL_ADMIN_HEADER === false) {
-			wp_redirect(esc_url_raw($this->get_next_step_link('pro')));
-		} else {
-			wp_redirect(esc_url_raw($this->get_next_step_link()));
-		}
+		wp_redirect(esc_url_raw($this->get_next_step_link()));
 
 		exit;
-	}
-
-	/**
-	 *	Init "Step 5.0: PRO Step".
-	 */
-	public function seopress_setup_pro() {
-		$docs = seopress_get_docs_links(); ?>
-		<!-- SEOPress Insights -->
-		<div class="seopress-setup-content seopress-option">
-
-			<h1 class="seopress-setup-actions step">
-				<?php esc_html_e('Our Premium SEO plugins','wp-seopress'); ?>
-			</h1>
-
-			<?php $this->setup_wizard_sub_steps(); ?>
-
-			<div class="seopress-tab active">
-				<div class="cols">
-					<?php if (! is_plugin_active('wp-seopress-pro/seopress-pro.php')) { ?>
-						<div class="col col-pro">
-							<h2>
-								<img alt="<?php esc_html_e('SEOPress PRO logo','wp-seopress'); ?>" width="50" height="50" src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/logo-seopress-pro.svg'); ?>" />
-								<a href="<?php echo esc_url($docs['addons']['pro']); ?>" target="_blank">
-									<?php esc_html_e('SEOPress PRO', 'wp-seopress'); ?>
-								</a>
-							</h2>
-
-							<img alt="" width="100%" style="max-width: 500px" src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/seopress-pro-featured.png'); ?>" />
-
-							<h3><?php esc_html_e('Premium SEO features to increase your rankings', 'wp-seopress'); ?></h3>
-
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Generate automatically <strong>SEO metadata using AI</strong>.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Site Audit to find and fix SEO issues.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Receive <strong>SEO alerts by email / Slack</strong>, twice a day, as long as the problem persists. Act before it’t too late!', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Connect your site with <strong>Google Search Console</strong> to get relevant data: clicks, positions, impressions and CTR.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Improve your business’s presence in <strong>local search results</strong>.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Optimize your SEO from your favorite e-commerce plugin: <strong>WooCommerce or Easy Digital Downloads</strong>.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Add an infinity of <strong>Google structured data (schema)</strong> to your content to improve its visibility in search results.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Add your custom <strong>breadcrumbs</strong>.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Configure your <strong>robots.txt and .htaccess files</strong>.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Manage your <strong>redirections</strong>.', 'wp-seopress')); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('Observe the evolution of your site via <strong>Google Analytics stats</strong> (or Matomo) directly from your WordPress Dashboard.', 'wp-seopress')); ?>
-							</p>
-
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php echo wp_kses_post(__('And so many other features to increase your rankings, sales and productivity.', 'wp-seopress')); ?>
-							</p>
-
-							<p class="seopress-setup-actions step">
-								<a class="btn btnPrimary btnPro"
-									href="<?php echo esc_url($docs['addons']['pro']); ?>"
-									target="_blank">
-									<?php esc_html_e('Get SEOPress PRO', 'wp-seopress'); ?>
-								</a>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if (! is_plugin_active('wp-seopress-insights/seopress-insights.php') && ! is_multisite()) { ?>
-						<div class="col col-insights">
-							<h2>
-								<img alt="<?php esc_html_e('SEOPress Insights logo','wp-seopress'); ?>" width="50" height="50" src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/logo-seopress-insights.svg'); ?>" />
-
-								<a href="<?php echo esc_url($docs['addons']['insights']); ?>" target="_blank">
-									<?php esc_html_e('SEOPress Insights', 'wp-seopress'); ?>
-								</a>
-							</h2>
-
-							<img alt="" width="100%" style="max-width: 500px" src="<?php echo esc_url(SEOPRESS_ASSETS_DIR . '/img/seopress-insights-featured.png'); ?>" />
-
-							<h3><?php esc_html_e('Start monitoring your rankings and backlinks directly from your WordPress admin', 'wp-seopress'); ?></h3>
-
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php esc_html_e('Track your keyword positions from Google Search results daily.', 'wp-seopress'); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php esc_html_e('Track your competitors.', 'wp-seopress'); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php esc_html_e('Monitor and analyse your top 1,000 Backlinks weekly.', 'wp-seopress'); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php esc_html_e('Export your data to CSV, PDF, Excel.', 'wp-seopress'); ?>
-							</p>
-							<p class="seopress-setup-actions step">
-								<span class="dashicons dashicons-minus"></span><?php esc_html_e('Receive your rankings / backlinks in your inbox / Slack.', 'wp-seopress'); ?>
-							</p>
-
-							<p class="seopress-setup-actions step">
-								<a class="btn btnPrimary btnInsights"
-									href="<?php echo esc_url($docs['addons']['insights']); ?>"
-									target="_blank">
-									<?php esc_html_e('Get SEOPress Insights', 'wp-seopress'); ?>
-								</a>
-							</p>
-						</div>
-					<?php } ?>
-				</div>
-			</div>
-		</div>
-		<?php
 	}
 
 	/**

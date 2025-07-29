@@ -129,40 +129,50 @@ esc_html($check));
 if (isset($error) && !empty($error)) { ?>
     <code><?php echo esc_html($error); ?></code>
 <?php }
-if (isset($bing_response['response']) && is_array($bing_response['response']) && !empty($bing_response['response'])) {
-    switch ($bing_response['response']['code']) {
-        case 200:
-            $msg = esc_attr__('URLs submitted successfully', 'wp-seopress');
-            break;
-        case 202:
-            $msg = esc_attr__('URL received. IndexNow key validation pending.', 'wp-seopress');
-            break;
-        case 400:
-            $msg = esc_attr__('Bad request: Invalid format', 'wp-seopress');
-            break;
-        case 403:
-            $msg = esc_attr__('Forbidden: In case of key not valid (e.g. key not found, file found but key not in the file)', 'wp-seopress');
-            break;
-        case 422:
-            $msg = esc_attr__('Unprocessable Entity: In case of URLs don’t belong to the host or the key is not matching the schema in the protocol', 'wp-seopress');
-            break;
-        case 429:
-            $msg = esc_attr__('Too Many Requests (potential Spam)', 'wp-seopress');
-            break;
-        default:
-            $msg = esc_attr__('Something went wrong', 'wp-seopress');
-    } ?>
-    <div class="wrap-bing-response">
-        <h4><?php esc_attr_e('Bing Response','wp-seopress'); ?></h4>
-
-        <?php if ($bing_response['response']['code'] == 200 || $bing_response['response']['code'] == 202) { ?>
-            <span class="indexing-log indexing-done"></span>
-        <?php } else { ?>
-            <span class="indexing-log indexing-failed"></span>
-        <?php } ?>
-        <code><?php echo esc_html($msg); ?></code>
-    </div>
-<?php }
+if (isset($bing_response) && is_array($bing_response) && !empty($bing_response)) {
+    echo '<div class="wrap-bing-response">';
+    echo '<h4>' . esc_html__('Bing Response','wp-seopress') . '</h4>';
+    if (!empty($bing_response['error'])) {
+        // Error case
+        echo '<span class="indexing-log indexing-failed"></span>';
+        echo '<code>' . esc_html($bing_response['error']['code']) . ' - ' . esc_html($bing_response['error']['message']) . '</code>';
+    } else {
+        // Success or info case
+        $code = isset($bing_response['code']) ? $bing_response['code'] : null;
+        switch ($code) {
+            case 200:
+                $msg = esc_attr__('URLs submitted successfully', 'wp-seopress');
+                break;
+            case 202:
+                $msg = esc_attr__('URL received. IndexNow key validation pending.', 'wp-seopress');
+                break;
+            case 400:
+                $msg = esc_attr__('Bad request: Invalid format', 'wp-seopress');
+                break;
+            case 401:
+                $msg = esc_attr__('Bing API key is missing', 'wp-seopress');
+                break;
+            case 403:
+                $msg = esc_attr__('Forbidden: In case of key not valid (e.g. key not found, file found but key not in the file)', 'wp-seopress');
+                break;
+            case 422:
+                $msg = esc_attr__('Unprocessable Entity: In case of URLs don’t belong to the host or the key is not matching the schema in the protocol', 'wp-seopress');
+                break;
+            case 429:
+                $msg = esc_attr__('Too Many Requests (potential Spam)', 'wp-seopress');
+                break;
+            default:
+                $msg = esc_attr__('Something went wrong', 'wp-seopress');
+        }
+        if ($code == 200 || $code == 202) {
+            echo '<span class="indexing-log indexing-done"></span>';
+        } else {
+            echo '<span class="indexing-log indexing-failed"></span>';
+        }
+        echo '<code>' . esc_html($msg) . '</code>';
+    }
+    echo '</div>';
+}
 
     if (isset($google_response) && is_array($google_response) && !empty($google_response)) { ?>
         <div class="wrap-google-response">

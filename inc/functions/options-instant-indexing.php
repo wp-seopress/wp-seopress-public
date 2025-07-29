@@ -139,13 +139,13 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
     //Prepare the URLS
     if ($is_manual_submission === true) {
         $urls 	= preg_split('/\r\n|\r|\n/', $urls);
-        $x_source_info = 'https://www.seopress.org/8.9.0.2/true';
+        $x_source_info = 'https://www.seopress.org/9.0/true';
 
         $urls = array_slice($urls, 0, 100);
     } elseif ($is_manual_submission === false && !empty($permalink)) {
         $urls = null;
         $urls[] = $permalink;
-        $x_source_info = 'https://www.seopress.org/8.9.0.2/false';
+        $x_source_info = 'https://www.seopress.org/9.0/false';
     }
 
     //Bing API
@@ -179,24 +179,51 @@ function seopress_instant_indexing_fn($is_manual_submission = true, $permalink =
                 //IndexNow (Bing)
                 $response = wp_remote_post( $bing_url, $args );
 
-                //Check the response is ok first
+                // Standardize Bing response log
                 if (is_wp_error($response)) {
-                    $message = $response->get_error_message();
-                    $log['bing']['status'] = $message;
+                    $log['bing']['response'] = [
+                        'error' => [
+                            'code' => $response->get_error_code(),
+                            'message' => $response->get_error_message(),
+                        ]
+                    ];
+                } else {
+                    $code = wp_remote_retrieve_response_code($response);
+                    $body = wp_remote_retrieve_body($response);
+                    $log['bing']['response'] = [
+                        'code' => $code,
+                        'body' => $body,
+                    ];
+                    // If Bing returns an error in the body, try to parse and store it
+                    $json = json_decode($body, true);
+                    if (is_array($json) && isset($json['error'])) {
+                        $log['bing']['response']['error'] = $json['error'];
+                    } else {
+                        unset($log['bing']['response']['error']);
+                    }
                 }
-
-                $log['bing']['response'] = $response;
             } else {
-                $log['bing']['response']['error'] = [
-                    'code' => 400,
-                    'message' => __('Bad request: Invalid format', 'wp-seopress')
+                $log['bing']['response'] = [
+                    'error' => [
+                        'code' => 400,
+                        'message' => __('Bad request: Invalid format', 'wp-seopress')
+                    ]
                 ];
             }
+        } else {
+            $log['bing']['response'] = [
+                'error' => [
+                    'code' => 400,
+                    'message' => __('Bad request: Invalid key format', 'wp-seopress')
+                ]
+            ];
         }
     } elseif (!empty($engines['bing']) && $engines['bing'] === '1') {
-        $log['bing']['response']['error'] = [
-            'code' => 401,
-            'message' => __('Bing API key is missing', 'wp-seopress')
+        $log['bing']['response'] = [
+            'error' => [
+                'code' => 401,
+                'message' => __('Bing API key is missing', 'wp-seopress')
+            ]
         ];
     }
 

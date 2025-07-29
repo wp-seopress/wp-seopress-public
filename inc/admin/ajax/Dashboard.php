@@ -30,7 +30,7 @@ function seopress_toggle_features()
                     flush_rewrite_rules(false);
                 }
 
-                update_option('seopress_toggle', $seopress_toggle_options, 'yes', false);
+                update_option('seopress_toggle', $seopress_toggle_options, false);
             }
         }
         exit();
@@ -103,7 +103,7 @@ function seopress_hide_notices()
             if ($notice !== false && $notice_value !== false) {
                 $seopress_notices_options[$notice] = $notice_value;
             }
-            update_option('seopress_notices', $seopress_notices_options, 'yes', false);
+            update_option('seopress_notices', $seopress_notices_options, false);
         }
         exit();
     }

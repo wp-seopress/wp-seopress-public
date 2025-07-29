@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 8.9.0.2
+Stable tag: 9.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -213,6 +213,33 @@ We support these SEO plugins:
 
 All. Period. And with our <a href="https://www.seopress.org/features/page-builders-integration/">universal SEO metabox</a>, it's super easy to edit your SEO right from your favorite editor.
 
+= How many languages are available for our user interface? =
+
+🇺🇸 English (UK) (English (UK)) – professional translation
+🇫🇷 Français (French (France)) – professional translation
+🇪🇸 Español (Spanish (Spain)) – professional translation
+🇩🇪 Deutsch (German) – professional translation
+🇳🇱 Nederlands (Dutch) – professional translation
+🇷🇺 Русский (Russian) – professional translation
+🇯🇵 日本語 (Japanese) – professional translation
+🇮🇳 हिन्दी (Hindi) – professional translation
+🇨🇳 中文 (Chinese (China)) – professional translation
+🇧🇷 Português do Brasil (Portuguese (Brazil)) – professional translation
+🇵🇱 Polskie (Polish) – professional translation
+🇸🇪 Svenska (Swedish) – professional translation
+🇮🇹 Italiano (Italian) – professional translation
+🇨🇿 Čeština (Czech) – professional translation
+🇬🇷 Ελληνικά (Greek)
+🇧🇬 Български (Bulgarian)
+🇮🇩 Bahasa Indonesia (Indonesian)
+🇻🇳 Loki Web (Vietnamese)
+🇷🇴 Română (Romanian)
+🇰🇷한국인 (Korean)
+🇸🇦 العربية (Arabic)
+فارسی (Persian)
+Türkçe (Turkish)
+…
+
 = How to use Google Tag Manager / other scripts with SEOPress? =
 
 Go to SEO > Analytics > Custom Tracking tab. Paste GTM / custom tracking code to [HEAD] Add an additional tracking code / [BODY] Add an additional tracking code textarea fields. Save changes and clear your cache.
@@ -267,6 +294,7 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 
 <a href="https://www.seopress.org/support/faq/" target="_blank">Read our complete FAQ on our site</a> or ask on our [support forum](https://wordpress.org/support/plugin/wp-seopress/).
 
+
 == Screenshots ==
 1. SEOPress metabox
 2. Facebook / X (ex-Twitter) social Preview
@@ -282,28 +310,21 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 8.9.0.2 =
-* FIX An issue with the universal SEO metabox
-
-= 8.9.0.1 =
-* FIX Undefined variables in XML sitemaps
-* FIX Incorrect last mod date with specific timezone for XML Index Sitemap
-* FIX CSS Z-index for chatbot
-
-= 8.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-8-9/">Read the blog post update</a> =
-* NEW Add our AI chatbot to our settings page to get help faster (PRO)
-* NEW Microsoft Clarity User Consent mode
-* NEW Replace the Referer column by Full Origin in our Redirect Manager: more useful, especially with multidomain/multilingual websites
-* NEW UI for automatic schemas
-* INFO Update Admin Columns PRO integration (minimum version 6.0 is now required). From version 7, the integration will be directly provided by ACP.
-* INFO Add caching to last modified date for XML Index sitemap
-* INFO UI - Add schema keys to automatic schemas (SEO, PRO, Schemas)
-* INFO NEW notice when using Google Indexing API
-* INFO WPML integration improved for automatic translations
-* INFO Image for the hiringOrganization sub-schema in the Job automatic schema is no longer required
-* FIX XML Index sitemap last modified date
-* FIX An issue with Admin Columns PRO
-* FIX A compatibility issue with WP 6.8 and our blocks causing performance issue when scrolling the post content from the Block Editor
+= 9.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-0/">Read the blog post update</a> =
+* NEW DeepSeek integration (PRO)
+* NEW Disable AI Live Chat from Advanced settings (PRO)
+* INFO Enable "Remove ?replytocom link to avoid duplicate content" option by default on new installation
+* INFO Disable shortcode execution for XML image sitemaps by default for higher performance (https://www.seopress.org/support/hooks/enable-disable-execution-of-shortcodes-in-xml-image-sitemaps/)
+* INFO Updated ChartJS library
+* INFO Removed autoload on few SEOPress options for better performances
+* INFO Improved instant indexing log with IndexNow (Bing)
+* INFO Removed the upsell step from the installation wizard
+* FIX Import global settings from Rank Math
+* FIX Fatal error on WooCommerce < 9.1
+* FIX Import focus keywords from Yoast to SEOPress in specific cases
+* FIX Target keywords field (Tagify lib)
+* FIX Modal link height for Classic Editor
+* FIX Small UI issue for automatic product schema
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

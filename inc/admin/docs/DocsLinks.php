@@ -61,7 +61,13 @@ function seopress_get_docs_links()
 		],
 		'ai' => [
 			'introduction' => 'https://www.seopress.org/features/openai/',
-			'errors' => 'https://www.seopress.org/support/guides/generate-your-seo-metadata-with-openai/'
+			'errors' => 'https://www.seopress.org/support/guides/generate-your-seo-metadata-with-openai/',
+			'openai' => [
+				'errors' => 'https://www.seopress.org/support/guides/generate-your-seo-metadata-with-openai/',
+			],
+			'deepseek' => [
+				'errors' => 'https://www.seopress.org/support/guides/generate-seo-metadata-with-deepseek-ai/',
+			],
 		],
 		'titles' => [
 			'thumbnail' => 'https://support.google.com/programmable-search/answer/1626955?hl=en',
@@ -239,7 +245,8 @@ function seopress_get_docs_links()
 		$docs['universal']['introduction'] = 'https://www.seopress.org/fr/fonctionnalites/integration-constructeurs-de-page/';
 
 		$docs['ai']['introduction'] = 'https://www.seopress.org/fr/fonctionnalites/openai/';
-		$docs['ai']['errors'] = 'https://www.seopress.org/fr/support/guides/generez-vos-metadonnees-seo-avec-openai/';
+		$docs['ai']['errors']['openai'] = 'https://www.seopress.org/fr/support/guides/generez-vos-metadonnees-seo-avec-openai/';
+		$docs['ai']['errors']['deepseek'] = 'https://www.seopress.org/fr/support/guides/generez-des-metadonnees-seo-avec-deepseek-ai/';
 
 		$docs['titles']['thumbnail'] = 'https://support.google.com/programmable-search/answer/1626955?hl=fr';
 		$docs['titles']['wrong_meta'] = 'https://www.seopress.org/fr/support/guides/google-utilise-une-balise-titre-meta-description-incorrecte-dans-les-resultats-de-recherche/';

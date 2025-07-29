@@ -366,7 +366,7 @@ class RankMath implements ExecuteHooksBackend {
                 }
                 // Title separator
                 if ($key === 'title_separator') {
-                    $seopress_titles['seopress_titles_sep'] = esc_html($value);
+                    $seopress_titles['seopress_titles_sep'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Open Graph image
                 if ($key === 'open_graph_image' ) {
@@ -386,15 +386,15 @@ class RankMath implements ExecuteHooksBackend {
                 }
                 // Website name
                 if ($key === 'website_name') {
-                    $seopress_titles['seopress_titles_home_site_title'] = esc_html($value);
+                    $seopress_titles['seopress_titles_home_site_title'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Website alternate name
                 if ($key === 'website_alternate_name') {
-                    $seopress_titles['seopress_titles_home_site_title_alt'] = esc_html($value);
+                    $seopress_titles['seopress_titles_home_site_title_alt'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Knowledge graph name
                 if ($key === 'knowledgegraph_name') {
-                    $seopress_social['seopress_social_knowledge_name'] = esc_html($value);
+                    $seopress_social['seopress_social_knowledge_name'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Knowledge graph logo
                 if ($key === 'knowledgegraph_logo') {
@@ -448,11 +448,11 @@ class RankMath implements ExecuteHooksBackend {
                 }
                 // Author archive title
                 if ($key === 'author_archive_title') {
-                    $seopress_titles['seopress_titles_archives_author_title'] = esc_html($value);
+                    $seopress_titles['seopress_titles_archives_author_title'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Author archive description
                 if ($key === 'author_archive_description') {
-                    $seopress_titles['seopress_titles_archives_author_desc'] = esc_html($value);
+                    $seopress_titles['seopress_titles_archives_author_desc'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Disable date archives
                 if ($key === 'disable_date_archives') {
@@ -464,11 +464,11 @@ class RankMath implements ExecuteHooksBackend {
                 }
                 // Date archive title
                 if ($key === 'date_archive_title') {
-                    $seopress_titles['seopress_titles_archives_date_title'] = esc_html($value);
+                    $seopress_titles['seopress_titles_archives_date_title'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Date archive description
                 if ($key === 'date_archive_description') {
-                    $seopress_titles['seopress_titles_archives_date_desc'] = esc_html($value);
+                    $seopress_titles['seopress_titles_archives_date_desc'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Date archive noindex
                 if ($key === 'date_archive_robots' && $value === 'on') {
@@ -480,11 +480,11 @@ class RankMath implements ExecuteHooksBackend {
                 }
                 // 404 title
                 if ($key === '404_title') {
-                    $seopress_titles['seopress_titles_archives_404_title'] = esc_html($value);
+                    $seopress_titles['seopress_titles_archives_404_title'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Search title
                 if ($key === 'search_title') {
-                    $seopress_titles['seopress_titles_archives_search_title'] = esc_html($value);
+                    $seopress_titles['seopress_titles_archives_search_title'] = esc_html($this->tagsRankMath->replaceTags($value));
                 }
                 // Search noindex
                 if ($key === 'noindex_search') {
@@ -499,11 +499,11 @@ class RankMath implements ExecuteHooksBackend {
                 foreach ($postTypes as $seopress_cpt_key => $seopress_cpt_value) {
                     // Single title
                     if ( $key === 'pt_' . $seopress_cpt_key . '_title' ) {
-                        $seopress_titles['seopress_titles_single_titles'][$seopress_cpt_key]['title'] = esc_html($value);
+                        $seopress_titles['seopress_titles_single_titles'][$seopress_cpt_key]['title'] = esc_html($this->tagsRankMath->replaceTags($value));
                     }
                     // Single description
                     if ( $key === 'pt_' . $seopress_cpt_key . '_description' ) {
-                        $seopress_titles['seopress_titles_single_titles'][$seopress_cpt_key]['description'] = esc_html($value);
+                        $seopress_titles['seopress_titles_single_titles'][$seopress_cpt_key]['description'] = esc_html($this->tagsRankMath->replaceTags($value));
                     }
                     // Single noindex
                     if ( $key === 'pt_' . $seopress_cpt_key . '_custom_robots' && $value === 'on') {
@@ -529,11 +529,11 @@ class RankMath implements ExecuteHooksBackend {
                 foreach ($taxonomies as $seopress_tax_key => $seopress_tax_value) {
                     // Tax title
                     if ( $key === 'tax_' . $seopress_tax_key . '_title' ) {
-                        $seopress_titles['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = esc_html($value);
+                        $seopress_titles['seopress_titles_tax_titles'][$seopress_tax_key]['title'] = esc_html($this->tagsRankMath->replaceTags($value));
                     }
                     // Tax description
                     if ( $key === 'tax_' . $seopress_tax_key . '_description' ) {
-                        $seopress_titles['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = esc_html($value);
+                        $seopress_titles['seopress_titles_tax_titles'][$seopress_tax_key]['description'] = esc_html($this->tagsRankMath->replaceTags($value));
                     }
                     // Tax noindex
                     if ( $key === 'tax_' . $seopress_tax_key . '_custom_robots' && $value === 'on') {

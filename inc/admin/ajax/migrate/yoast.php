@@ -473,19 +473,29 @@ function seopress_yoast_migration() {
                     if ('' != get_post_meta($post->ID, '_yoast_wpseo_focuskw', true) || '' != get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', true)) { //Import Focus Keywords
                         $y_fkws_clean = []; //reset array
 
-                        $y_fkws = get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', false);
-
-                        if ( ! empty($y_fkws)) {
-                            foreach ($y_fkws as $value) {
-                                foreach (json_decode($value) as $key => $value) {
-                                    $y_fkws_clean[] .= esc_html($value->keyword);
+                        // Handle _yoast_wpseo_focuskeywords (JSON array or empty)
+                        $focuskeywords_meta = get_post_meta($post->ID, '_yoast_wpseo_focuskeywords', true);
+                        if (!empty($focuskeywords_meta) && is_string($focuskeywords_meta)) {
+                            $decoded = json_decode($focuskeywords_meta);
+                            if (is_array($decoded)) {
+                                foreach ($decoded as $decoded_kw) {
+                                    if (isset($decoded_kw->keyword) && $decoded_kw->keyword !== '') {
+                                        $y_fkws_clean[] = esc_html($decoded_kw->keyword);
+                                    }
                                 }
                             }
                         }
 
-                        $y_fkws_clean[] .= get_post_meta($post->ID, '_yoast_wpseo_focuskw', true);
+                        // Handle _yoast_wpseo_focuskw (string or empty)
+                        $focuskw = get_post_meta($post->ID, '_yoast_wpseo_focuskw', true);
+                        if (!empty($focuskw) && is_string($focuskw)) {
+                            $y_fkws_clean[] = esc_html($focuskw);
+                        }
 
-                        update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',', $y_fkws_clean));
+                        // Save if we have any keywords
+                        if (!empty($y_fkws_clean)) {
+                            update_post_meta($post->ID, '_seopress_analysis_target_kw', implode(',', $y_fkws_clean));
+                        }
                     }
 
                     //Primary category

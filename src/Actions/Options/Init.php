@@ -88,6 +88,7 @@ class Init implements ActivationHook
             'seopress_advanced_appearance_nofollow_col'    => '1',
             'seopress_advanced_appearance_universal_metabox_disable'    => '1',
             'seopress_advanced_advanced_image_auto_alt_txt'    => '1',
+            'seopress_advanced_advanced_replytocom'            => '1',
         ];
 
         //Check if the value is an array (important!)
