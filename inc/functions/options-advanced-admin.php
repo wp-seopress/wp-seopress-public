@@ -75,7 +75,7 @@ function seopress_auto_image_attr($post_ID, $bulk = false) {
             $cpt = get_post_type($parent) ? get_post_type($parent) : null;
 
             $img_attr = '';
-            if (isset($cpt) && isset($parent) && $cpt === 'product') {
+            if (isset($cpt) && isset($parent) && in_array($cpt, ['product', 'product_variation'])) {
                 $img_attr = get_post($parent)->post_title; // Use the product title for WooCommerce products
             } else {
                 $img_attr = get_post($post_ID)->post_title;

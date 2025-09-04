@@ -2911,6 +2911,10 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     display: flex;
 }
 
+.seopress-option .wrap-tags .section-title {
+    margin: 0.5rem 0 0.5rem 0;
+}
+
 .seopress-option .wrap-tags button {
     margin-bottom: 10px;
 }
@@ -3580,7 +3584,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     visibility: hidden;
-    z-index: 1;
+    z-index: 70;
 }
 
 .sp-components-snackbar__content {

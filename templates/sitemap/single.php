@@ -144,6 +144,8 @@ function seopress_sitemaps_primary_cat_hook($cats_0, $cats, $post) {
 
 			if (! is_wp_error($primary_cat) && null != $primary_cat) {
 				return $primary_cat;
+			} else {
+				return $cats_0;
 			}
 		} else {
 			//no primary cat

@@ -403,6 +403,8 @@ if ('1' === seopress_get_toggle_option('advanced')) {
                 }
                 if (! is_wp_error($primary_cat) && null != $primary_cat) {
                     return $primary_cat;
+                } else {
+                    return $cats_0;
                 }
             } else {
                 //no primary cat

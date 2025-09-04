@@ -493,6 +493,9 @@ function seopress_display_seo_metaboxe()
 					} else {
 						$elementor['_seopress_redirections_enabled'] = '';
 					}
+					if (isset($_POST['seopress_robots_breadcrumbs'])) {
+						$elementor['_seopress_robots_breadcrumbs'] = sanitize_text_field($_POST['seopress_robots_breadcrumbs']);
+					}
 					update_post_meta($post_id, '_elementor_page_settings', $elementor);
 				}
 			}

@@ -489,9 +489,9 @@ class RankMath implements ExecuteHooksBackend {
                 // Search noindex
                 if ($key === 'noindex_search') {
                     if ($value === 'on') {
-                        $seopress_titles['seopress_titles_archives_search_noindex'] = '1';
+                        $seopress_titles['seopress_titles_archives_search_title_noindex'] = '1';
                     } else {
-                        unset($seopress_titles['seopress_titles_archives_search_noindex']);
+                        unset($seopress_titles['seopress_titles_archives_search_title_noindex']);
                     }
                 }
                 // Import CPT settings

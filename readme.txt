@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.0.1
+Stable tag: 9.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank 
 == Description ==
 
 <h3>Best SEO plugin for WordPress fully integrated with all page builders and themes!</h3>
-<h3>Now with AI ( GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo) to automagically generate meta title, description and alternative texts for images!</h3>
+<h3>Now with AI ( GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo & DeepSeek) to automagically generate meta title, description and alternative texts for images!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -23,10 +23,10 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 ✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
 ✔ <strong>Content analysis to help you write content optimized for search engines with unlimited target keywords</strong>
 ✔ <strong><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import your post and term metadatas</a> from other SEO plugins or CSV file in 1 click</strong>
-✔ <strong><a href="https://translate.wordpress.org/projects/wp-plugins/wp-seopress" target="_blank">Translated into 26 languages (and counting)</strong>
+✔ <strong><a href="https://translate.wordpress.org/projects/wp-plugins/wp-seopress" target="_blank">Translated into 27 languages (and counting)</strong>
 ✔ <strong>Trusted by over 350,000 WordPress websites since 2017</strong>
 
-<a href="https://www.seopress.org/pricing/" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / 5 sites</strong></a>
+<a href="https://www.seopress.org/pricing/" target="_blank"><strong>Buy SEOPress PRO: only $49 / year / 1 site</strong></a>
 
 [youtube https://www.youtube.com/watch?v=4ysKFVr_nu0]
 
@@ -36,7 +36,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 
 <ul>
 	<li><a href="https://www.seopress.org/seopress-productivity/"><strong>Save time</strong></a>: you prefer to work with Excel or Google Spreadsheets? No problem, you can import / export your metadata from CSV files with SEOPress PRO in few clicks!</li>
-	<li><a href="https://www.seopress.org/pricing/"><strong>Save money</strong></a>: SEOPress PRO is available for $49 / year / 5 sites. Go unlimited sites for just $149 / year!</li>
+	<li><a href="https://www.seopress.org/pricing/"><strong>Save money</strong></a>: SEOPress PRO is available for $49 / year / 1 site. Go unlimited sites for just $149 / year!</li>
 	<li><a href="https://www.seopress.org/features/"><strong>All in one SEO plugin</strong></a>: comes with all the features you need to optimize the SEO of your WordPress site. No need to install additional extensions to manage redirects, schemas, XML sitemaps... You reduce the risk of conflicts and maintenance costs. You don't need a special feature? Deactivate it with one click without losing your configuration. Child's play !</li>
 	<li><strong>Easy AND ready to use</strong>: you doesn't need to know SEO or code to use SEOPress. Most of the parameters are automatically set. And thanks to our installation wizard, configuring SEOPress has never been easier. To go further, we provide many <a href="https://www.seopress.org/support/" target="_blank">free tutorials</a> and <a href="https://www.seopress.org/support/ebooks/" target="_blank">ebooks to learn SEO</a> in order to better understand how to position your content on search engines.</li>
 </ul>
@@ -310,24 +310,27 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.0.1 =
-* FIX i18n for French translations (missing links)
-
-= 9.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-0/">Read the blog post update</a> =
-* NEW DeepSeek integration (PRO)
-* NEW Disable AI Live Chat from Advanced settings (PRO)
-* INFO Enable "Remove ?replytocom link to avoid duplicate content" option by default on new installation
-* INFO Disable shortcode execution for XML image sitemaps by default for higher performance (https://www.seopress.org/support/hooks/enable-disable-execution-of-shortcodes-in-xml-image-sitemaps/)
-* INFO Updated ChartJS library
-* INFO Removed autoload on few SEOPress options for better performances
-* INFO Improved instant indexing log with IndexNow (Bing)
-* INFO Removed the upsell step from the installation wizard
-* FIX Import global settings from Rank Math
-* FIX Fatal error on WooCommerce < 9.1
-* FIX Import focus keywords from Yoast to SEOPress in specific cases
-* FIX Target keywords field (Tagify lib)
-* FIX Modal link height for Classic Editor
-* FIX Small UI issue for automatic product schema
+= 9.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-1/">Read the blog post update</a> =
+* NEW GPT-5 to generate meta title, description and alt text (PRO)
+* NEW Import global settings from AIOSEO plugin
+* NEW Instantly adds SEO-friendly alt text to your images at upload—automatically pulled from your WooCommerce product variation
+* NEW Add a Resume button to our Site Audit feature (PRO)
+* NEW Set a custom batch size for the Site Audit (PRO)
+* NEW Quickly block DeepSeek AI crawlers from the robots.txt file (PRO)
+* NEW Hook "seopress_watch_taxonomy_for_redirects" to filter taxonomies to watch for redirect suggestions https://www.seopress.org/support/hooks/filter-taxonomies-to-watch-for-automatic-redirections/
+* INFO Pass the Post ID to this filter: seopress_pro_video_sitemap_content (https://www.seopress.org/support/hooks/filter-content-used-to-find-new-video-for-xml-video-sitemap/)
+* INFO Remove IP address column in Redirect Manager
+* INFO Improve UX for Site Audit
+* INFO Improve UX/UI for robots.txt feature
+* FIX Unauthorized download issue (PRO)
+* FIX An issue with Rank Math importer
+* FIX CSS for AI Live Chat
+* FIX Allow zero (0) as a valid value for manual text fields in automatic schemas
+* FIX Custom breadcrumbs saving with Elementor/default WP editor
+* FIX ACF compatibility issue with CPT and our Redirect Manager
+* FIX Primary category in specific cases for singular XML sitemaps / archive pages
+* FIX Table of Contents block with synced patterns
+* FIX JSON FAQ schema with our FAQ block
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

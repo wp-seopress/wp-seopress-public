@@ -14,7 +14,6 @@ class Tags {
         '#post_title'                                       => 'post_title',
         '#author_first_name'                                => 'author_first_name',
         '#author_last_name'                                 => 'author_last_name',
-        '#author_last_name'                                 => 'author_last_name',
         '#author_name'                                      => 'post_author',
         '#taxonomy_title'                                   => 'term_title',
         '#current_date'                                     => 'currentdate',
@@ -31,6 +30,18 @@ class Tags {
         '#post_year'                                        => '',
         '#custom_field-'                                    => '_cf_',
         '#tax_name-'                                        => '_ct_',
+        '#categories'                                       => 'post_category',
+        '#taxonomy_description'                             => 'term_description',
+        '#search_term'                                      => 'search_keywords',
+        '#page_number'                                      => 'current_pagination',
+        '#archive_title'                                    => 'archive_title',
+        '#archive_date'                                     => 'archive_date',
+        '#woocommerce_price'                                => 'wc_single_price',
+        '#woocommerce_sku'                                  => 'wc_sku',
+        '#author_link'                                      => 'author_website',
+        '#author_bio'                                       => 'author_bio',
+        '#site_link'                                        => 'sitetitle',
+        '#post_link'                                        => 'post_url',
     ];
 
     /**
