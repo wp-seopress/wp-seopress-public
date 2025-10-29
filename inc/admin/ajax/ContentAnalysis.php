@@ -26,8 +26,6 @@ function seopress_do_real_preview()
         return;
     }
 
-    $linkPreview   = seopress_get_service('RequestPreview')->getLinkRequest($id, $taxname);
-
     $domResult  = seopress_get_service('RequestPreview')->getDomById($id, $taxname);
 
     if(!$domResult['success']){
@@ -52,6 +50,11 @@ function seopress_do_real_preview()
     $str = $domResult['body'];
 
     $data = seopress_get_service('DomFilterContent')->getData($str, $id);
+    
+    if (!empty($taxname)) {
+        wp_send_json_success($data);
+    }
+
     $data = seopress_get_service('DomAnalysis')->getDataAnalyze($data, [
         "id" => $id,
     ]);

@@ -34,9 +34,7 @@ function seopress_print_section_info_xml_sitemap_general()
 
     <p><?php esc_attr_e('This is the URL of your index sitemaps to submit to search engines:', 'wp-seopress'); ?></p>
 
-    <p>
-    <pre><span class="dashicons dashicons-external"></span><a href="<?php echo esc_url(get_option('home')); ?>/sitemaps.xml" target="_blank"><?php echo esc_url(get_option('home')); ?>/sitemaps.xml</a></pre>
-    </p>
+    <pre><span class="dashicons dashicons-external"></span><a href="<?php echo esc_url(get_option('home')); ?>/sitemaps.xml" target="_blank"><?php echo esc_url(get_option('home')); ?>/sitemaps.xml</a></pre>    
 
     <?php
     if (is_plugin_active('sg-cachepress/sg-cachepress.php')) { ?>

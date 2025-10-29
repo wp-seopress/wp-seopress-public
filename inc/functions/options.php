@@ -125,7 +125,7 @@ if ('1' === seopress_get_toggle_option('google-analytics') && !isset($_GET['bric
         wp_register_script('seopress-cookies', plugins_url('assets/js/seopress-cookies' . $prefix . '.js', dirname(dirname(__FILE__))), [], SEOPRESS_VERSION, true);
         wp_enqueue_script('seopress-cookies');
 
-        wp_enqueue_script('seopress-cookies-ajax', plugins_url('assets/js/seopress-cookies-ajax' . $prefix . '.js', dirname(dirname(__FILE__))), ['jquery', 'seopress-cookies'], SEOPRESS_VERSION, true);
+        wp_enqueue_script('seopress-cookies-ajax', plugins_url('assets/js/seopress-cookies-ajax' . $prefix . '.js', dirname(dirname(__FILE__))), ['seopress-cookies'], SEOPRESS_VERSION, true);
 
         $days = 30;
 

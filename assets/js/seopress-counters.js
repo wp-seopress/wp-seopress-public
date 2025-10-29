@@ -622,37 +622,39 @@ var input = document.querySelector(
     "input[id=seopress_analysis_target_kw_meta]"
 );
 
-var target_kw = new Tagify(input, {
-    originalInputValueFormat: (valuesArr) =>
-        valuesArr.map((item) => item.value).join(","),
-});
-
-function seopress_google_suggest(data) {
-    const $ = jQuery;
-
-    var raw_suggestions = String(data);
-    var suggestions_array = raw_suggestions.split(",");
-
-    var i;
-    for (i = 0; i < suggestions_array.length; i++) {
-        if (
-            suggestions_array[i] != null &&
-            suggestions_array[i] != undefined &&
-            suggestions_array[i] != "" &&
-            suggestions_array[i] != "[object Object]"
-        ) {
-            document.getElementById("seopress_suggestions").innerHTML +=
-                '<li><a href="#" class="sp-suggest-btn components-button is-secondary">' +
-                suggestions_array[i] +
-                "</a></li>";
-        }
-    }
-
-    $(".sp-suggest-btn").click(function (e) {
-        e.preventDefault();
-
-        target_kw.addTags($(this).text());
+if(input) {
+    var target_kw = new Tagify(input, {
+        originalInputValueFormat: (valuesArr) =>
+            valuesArr.map((item) => item.value).join(","),
     });
+
+    function seopress_google_suggest(data) {
+        const $ = jQuery;
+
+        var raw_suggestions = String(data);
+        var suggestions_array = raw_suggestions.split(",");
+
+        var i;
+        for (i = 0; i < suggestions_array.length; i++) {
+            if (
+                suggestions_array[i] != null &&
+                suggestions_array[i] != undefined &&
+                suggestions_array[i] != "" &&
+                suggestions_array[i] != "[object Object]"
+            ) {
+                document.getElementById("seopress_suggestions").innerHTML +=
+                    '<li><a href="#" class="sp-suggest-btn components-button is-secondary">' +
+                    suggestions_array[i] +
+                    "</a></li>";
+            }
+        }
+
+        $(".sp-suggest-btn").click(function (e) {
+            e.preventDefault();
+
+            target_kw.addTags($(this).text());
+        });
+    }
 }
 
 jQuery(document).ready(function (e) {

@@ -402,6 +402,13 @@ function gtag(){dataLayer.push(arguments);}";
         $seopress_google_analytics_html .= $consent;
 
         $seopress_google_analytics_html .= "gtag('js', new Date());\n";
+        
+        if(is_ssl()) {
+            // Set cookie domain to auto (prevent issues with subdomains)
+            $seopress_google_analytics_html .= "gtag('set', 'cookie_domain', 'auto');\n";
+            // Set cookie flags to SameSite=None;Secure (prevent issues with subdomains)
+            $seopress_google_analytics_html .= "gtag('set', 'cookie_flags', 'SameSite=None;Secure');\n";
+        }
 
         $features = '';
 

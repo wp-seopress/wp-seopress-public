@@ -72,6 +72,10 @@ function seopress_xml_sitemap_author_enable_callback()
     <?php esc_attr_e('Enable Author Sitemap', 'wp-seopress'); ?>
 </label>
 
+<?php if ('1' == $check) { ?>
+    <pre><span class="dashicons dashicons-external"></span><a href="<?php echo esc_url(get_option('home') . '/author.xml'); ?>" target="_blank"><?php echo esc_url(get_option('home') . '/author.xml'); ?></a></pre>
+<?php } ?>
+
 <p class="description">
     <?php esc_attr_e('Make sure to enable author archive from SEO, titles and metas, archives tab.', 'wp-seopress'); ?>
 </p>
@@ -357,8 +361,10 @@ function seopress_xml_sitemap_html_post_type_archive_callback()
 
 <p class="description">
     <?php 
-    // translator: %1$s is_archive, %2$s true
-    echo wp_kses_post(sprintf(esc_attr__('Only post types registered with the %1$s argument set to %2$s will be displayed.', 'wp-seopress'), '<code>is_archive</code>', '<code>true</code>')); ?>
+    echo wp_kses_post(
+        /* translators: %1$s is_archive, %2$s true */
+        sprintf(esc_attr__('Only post types registered with the %1$s argument set to %2$s will be displayed.', 'wp-seopress'), '<code>is_archive</code>', '<code>true</code>')
+    ); ?>
 </p>
 
 <?php if (isset($options['seopress_xml_sitemap_html_post_type_archive'])) {

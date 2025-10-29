@@ -423,14 +423,14 @@ class Notifications {
 			$alerts_high++;
 			$args[] = [
 				'id'     => 'notice-cpt-empty-title',
-				'title'  => __('Global meta title missing for several custom post types!', 'wp-seopress'),
+				'title'  => esc_html__('Global meta title missing for several custom post types!', 'wp-seopress'),
 				'desc'   => seopress_get_empty_templates('cpt', 'title', false),
 				'impact' => [
 					'high' => __('High impact', 'wp-seopress'),
 				],
 				'link' => [
 					'en'       => admin_url('admin.php?page=seopress-titles#tab=tab_seopress_titles_single'),
-					'title'    => __('Fix this!', 'wp-seopress'),
+					'title'    => esc_html__('Fix this!', 'wp-seopress'),
 					'external' => false,
 				],
 				'deleteable' => false,
@@ -899,19 +899,19 @@ class Notifications {
 			$class .= ' deleteable';
 		}
 
-		$html = '<div id="' . $id . '-alert" class="seopress-alert seopress-card">';
+		$html = '<div id="' . esc_attr($id) . '-alert" class="seopress-alert seopress-card">';
 
 		if ( ! empty($impact)) {
 			$html .= '<span class="seopress-impact seopress-impact-' . array_key_first($impact) . '"></span>';
-			$html .= '<span class="screen-reader-text">' . reset($impact) . '</span>';
+			$html .= '<span class="screen-reader-text">' . esc_html(reset($impact)) . '</span>';
 		}
 
-		$html .= '<h3 class="seopress-impact-title">' . $title . '</h3>';
+		$html .= '<h3 class="seopress-impact-title">' . esc_html($title) . '</h3>';
 
 		if (false === $wrap) {
-			$html .= $desc;
+			$html .= wp_kses_post($desc);
 		} else {
-			$html .= '<p>' . $desc . '</p>';
+			$html .= '<p>' . wp_kses_post($desc) . '</p>';
 		}
 
 		$href = '';
@@ -928,10 +928,10 @@ class Notifications {
 			$html .= '<p class="seopress-alert-actions">';
 
 			if ( ! empty($link)) {
-				$html .= '<a class="btn btnSecondary"' . $href . $target . '>' . $link['title'] . '</a>';
+				$html .= '<a class="btn btnSecondary"' . $href . $target . '>' . esc_html($link['title']) . '</a>';
 			}
 			if (true === $deleteable && $status === true) {
-				$html .= '<button id="' . $id . '" name="notice-title-tag" type="button" class="btn btnLink" data-notice="' . $id . '">' . __('Dismiss', 'wp-seopress') . '</button>';
+				$html .= '<button id="' . esc_attr($id) . '" name="notice-title-tag" type="button" class="btn btnLink" data-notice="' . esc_attr($id) . '">' . esc_html__('Dismiss', 'wp-seopress') . '</button>';
 			}
 
 			$html .= '</p>';
@@ -949,7 +949,7 @@ class Notifications {
             [
                 'done' => $run_migration,
                 'link' => admin_url('admin.php?page=seopress-import-export#tab=tab_seopress_tool_plugins'),
-                'label' => __('Migrate your SEO metadata and redirects from other plugins', 'wp-seopress'),
+                'label' => esc_html__('Migrate your SEO metadata and redirects from other plugins', 'wp-seopress'),
             ];
 
 		    array_unshift($tasks, $new_task);

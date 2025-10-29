@@ -65,6 +65,7 @@ jQuery(document).ready(function ($) {
 		"smart-crawl",
 		"slim-seo",
 		"metadata",
+		"siteseo",
 	];
 	seo_plugins.forEach(function (item) {
 		$("#seopress-" + item + "-migrate").on("click", function (e) {
@@ -166,6 +167,15 @@ jQuery(document).ready(function ($) {
 					action = "seopress_metadata_export";
 					_ajax_nonce =
 						seopressAjaxMigrate.seopress_metadata_csv
+							.seopress_nonce;
+					break;
+				case "seopress-siteseo-migrate":
+					url =
+						seopressAjaxMigrate.seopress_siteseo_migrate
+							.seopress_siteseo_migration;
+					action = "seopress_siteseo_migration";
+					_ajax_nonce =
+						seopressAjaxMigrate.seopress_siteseo_migrate
 							.seopress_nonce;
 					break;
 				default:

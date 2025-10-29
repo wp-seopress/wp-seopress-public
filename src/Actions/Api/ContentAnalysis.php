@@ -78,9 +78,9 @@ class ContentAnalysis implements ExecuteHooks
 
         $id   = (int) $request->get_param('id');
 
-        $linkPreview   = seopress_get_service('RequestPreview')->getLinkRequest($id);
+        $linkPreview = seopress_get_service('RequestPreview')->getLinkRequest($id);
 
-        $domResult  = seopress_get_service('RequestPreview')->getDomById($id);
+        $domResult = seopress_get_service('RequestPreview')->getDomById($id);
 
         if(!$domResult['success']){
             $defaultResponse = [

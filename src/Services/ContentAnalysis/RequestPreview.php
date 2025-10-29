@@ -9,28 +9,29 @@ class RequestPreview
     public function getLinkRequest($id, $taxname = null){
         $args = ['no_admin_bar' => 1];
 
-        //Useful for Page / Theme builders
+        // Useful for Page / Theme builders
         $args = apply_filters('seopress_real_preview_custom_args', $args);
 
-        //Oxygen / beTheme compatibility
-        $theme = wp_get_theme();
-        $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.get_post_type($id)) ? false : true;
-        if (
-            (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true)
-            ||
-            ('betheme' == $theme->template || 'Betheme' == $theme->parent_theme)
-        ) {
-            $link = get_permalink((int) $id);
-            $link = add_query_arg('no_admin_bar', 1, $link);
+        // Post type
+        if(empty($taxname)){
+            $theme = wp_get_theme();
+            //Oxygen / beTheme compatibility
+            $oxygen_metabox_enabled = get_option('oxygen_vsb_ignore_post_type_'.get_post_type($id)) ? false : true;
+            if (
+                (is_plugin_active('oxygen/functions.php') && function_exists('ct_template_output') && $oxygen_metabox_enabled === true)
+                ||
+                ('betheme' == $theme->template || 'Betheme' == $theme->parent_theme)
+            ) {
+                $link = get_permalink((int) $id);
+                $link = add_query_arg('no_admin_bar', 1, $link);
+            } else {
+                $link = add_query_arg('no_admin_bar', 1, get_preview_post_link((int) $id, $args));
+            }
         } else {
-            $link = add_query_arg('no_admin_bar', 1, get_preview_post_link((int) $id, $args));
-        }
-
-        if(!empty($taxname)){
+            // Taxonomy
             $link = get_term_link((int) $id, $taxname);
             $link = add_query_arg('no_admin_bar', 1, $link);
         }
-
 
         $link = apply_filters('seopress_get_dom_link', $link, $id);
 

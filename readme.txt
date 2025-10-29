@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.1
+Stable tag: 9.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank 
 == Description ==
 
 <h3>Best SEO plugin for WordPress fully integrated with all page builders and themes!</h3>
-<h3>Now with AI ( GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo & DeepSeek) to automagically generate meta title, description and alternative texts for images!</h3>
+<h3>Now with AI (GPT-5, GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo & DeepSeek AI) to automagically generate meta title, description and alternative texts for images!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -162,7 +162,7 @@ We provide deep integration with Elementor page builder UI, see below:
 <h3>SEOPress Insights: Off-site SEO plugin to track your rankings and backlinks in WordPress</h3>
 
 <ul>
-    <li><strong>Keyword rank tracker</strong>: 51 Google Search locations available</li>
+    <li><strong>Keyword rank tracker</strong>: 52 Google Search locations available</li>
     <li>Track <strong>50 keywords</strong> per site daily</li>
     <li>Track your <strong>competitors</strong>: who ranks first on your keywords</li>
     <li>Monitor and analyze your <strong>backlinks</strong> weekly</li>
@@ -206,6 +206,7 @@ We support these SEO plugins:
 - SEO Ultimate
 - WP Meta SEO
 - Premium SEO Pack
+- SiteSEO
 - Slim SEO
 - SmartCrawl
 
@@ -310,27 +311,16 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-1/">Read the blog post update</a> =
-* NEW GPT-5 to generate meta title, description and alt text (PRO)
-* NEW Import global settings from AIOSEO plugin
-* NEW Instantly adds SEO-friendly alt text to your images at upload—automatically pulled from your WooCommerce product variation
-* NEW Add a Resume button to our Site Audit feature (PRO)
-* NEW Set a custom batch size for the Site Audit (PRO)
-* NEW Quickly block DeepSeek AI crawlers from the robots.txt file (PRO)
-* NEW Hook "seopress_watch_taxonomy_for_redirects" to filter taxonomies to watch for redirect suggestions https://www.seopress.org/support/hooks/filter-taxonomies-to-watch-for-automatic-redirections/
-* INFO Pass the Post ID to this filter: seopress_pro_video_sitemap_content (https://www.seopress.org/support/hooks/filter-content-used-to-find-new-video-for-xml-video-sitemap/)
-* INFO Remove IP address column in Redirect Manager
-* INFO Improve UX for Site Audit
-* INFO Improve UX/UI for robots.txt feature
-* FIX Unauthorized download issue (PRO)
-* FIX An issue with Rank Math importer
-* FIX CSS for AI Live Chat
-* FIX Allow zero (0) as a valid value for manual text fields in automatic schemas
-* FIX Custom breadcrumbs saving with Elementor/default WP editor
-* FIX ACF compatibility issue with CPT and our Redirect Manager
-* FIX Primary category in specific cases for singular XML sitemaps / archive pages
-* FIX Table of Contents block with synced patterns
-* FIX JSON FAQ schema with our FAQ block
+= 9.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-2/">Read the blog post update</a> =
+* NEW Display format and Time separator for Local Business widget / Block (PRO) 🎉
+* NEW 'seopress_lb_widget_opening_hours_separator' and 'seopress_lb_block_opening_hours_separator' hook to filter the opening hours separator (PRO - https://www.seopress.org/support/hooks/filter-local-business-opening-hours-separator/)
+* NEW Migrate SEO metadata from SiteSEO (https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-siteseo-to-seopress/)
+* INFO Remove jQuery dependency for User Consent Cookie Bar
+* INFO Strengthened security
+* FIX Target keywords detection with dots
+* FIX GA4 cookie domain error in browser console
+* FIX Deprecated PHP errors when editing a term taxonomy
+* FIX Post language sent to AI with the universal SEO metabox
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

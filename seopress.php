@@ -4,7 +4,7 @@ Plugin Name: SEOPress
 Plugin URI: https://www.seopress.org/
 Description: One of the best SEO plugins for WordPress.
 Author: The SEO Guys at SEOPress
-Version: 9.1
+Version: 9.2
 Author URI: https://www.seopress.org/
 License: GPLv3 or later
 Text Domain: wp-seopress
@@ -35,7 +35,7 @@ defined('ABSPATH') or exit('Please don’t call the plugin directly. Thanks :)')
 /**
  * Define constants
  */
-define('SEOPRESS_VERSION', '9.1');
+define('SEOPRESS_VERSION', '9.2');
 define('SEOPRESS_AUTHOR', 'Benjamin Denis');
 define('SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
@@ -384,6 +384,10 @@ function seopress_add_admin_options_scripts($hook) {
 			'seopress_slim_seo_migrate'			=> [
 				'seopress_nonce' 						=> wp_create_nonce('seopress_slim_seo_migrate_nonce'),
 				'seopress_slim_seo_migration' 			=> admin_url('admin-ajax.php'),
+			],
+			'seopress_siteseo_migrate'			=> [
+				'seopress_nonce' 						=> wp_create_nonce('seopress_siteseo_migrate_nonce'),
+				'seopress_siteseo_migration' 			=> admin_url('admin-ajax.php'),
 			],
 			'seopress_metadata_csv'				=> [
 				'seopress_nonce' 						=> wp_create_nonce('seopress_export_csv_metadata_nonce'),

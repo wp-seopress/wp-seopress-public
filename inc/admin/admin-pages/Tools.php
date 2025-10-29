@@ -158,6 +158,13 @@ if (function_exists('seopress_admin_header')) {
                     'name' => 'Premium SEO Pack',
                     'img' => SEOPRESS_URL_ASSETS . '/img/import/premium-seo-pack.png',
                 ],
+                'siteseo'           => [
+                    'slug' => [
+                        'siteseo/siteseo.php',
+                    ],
+                    'name' => 'SiteSEO',
+                    'img' => SEOPRESS_URL_ASSETS . '/img/import/siteseo.png',
+                ],
                 'smart-crawl'      => [
                     'slug' => [
                         'smartcrawl-seo/wpmu-dev-seo.php',

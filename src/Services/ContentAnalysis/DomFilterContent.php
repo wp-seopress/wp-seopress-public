@@ -148,9 +148,21 @@ class DomFilterContent
             }
         }
 
-        $data["permalink"] = [
-            "value" => get_permalink($id)
+        $data['id'] = [
+            "value" => $id
         ];
+
+        $taxname = isset($_GET['tax_name']) ? sanitize_text_field(wp_unslash($_GET['tax_name'])) : null;
+        if (!empty($taxname)) {
+            $term = get_term($id, $taxname);
+            $data["permalink"] = [
+                "value" => esc_url( get_term_link( $term->slug, $taxname ) )
+            ];
+        } else {
+            $data["permalink"] = [
+                "value" => get_permalink($id)
+            ];
+        }
 
         $data['id_homepage'] = [
             "value" => get_option('page_on_front')

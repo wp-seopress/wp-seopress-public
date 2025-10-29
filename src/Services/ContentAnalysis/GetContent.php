@@ -31,8 +31,9 @@ class GetContent
 
         foreach ($targetKeywords as $kw) {
             $kw = remove_accents(wp_specialchars_decode($kw));
-            if (preg_match_all('#\b(' . preg_quote($kw, '/') . ')\b#iu', remove_accents($content), $m)) {
-                $data[$kw] = $m[0];
+
+            if (preg_match_all('@(?<![\w-])' . preg_quote($kw,'@') . '(?![\w-])@is', remove_accents($content), $matches)) {
+                $data[$kw][] = $matches[0];
             }
         }
 
