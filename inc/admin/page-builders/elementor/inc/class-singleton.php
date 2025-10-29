@@ -1,19 +1,29 @@
 <?php
+/**
+ * Singleton
+ *
+ * @package Elementor
+ */
+
 namespace WPSeoPressElementorAddon;
 
-defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
+
+/**
+ * Singleton
+ */
 trait Singleton {
 	/**
 	 * Instance of the object
 	 *
-	 * @var \Object
+	 * @var \Object Object.
 	 */
 	private static $instance = null;
 
 	/**
 	 * Setup singleton instanc
 	 *
-	 * @return  \Object
+	 * @return  \Object Object.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -26,7 +36,7 @@ trait Singleton {
 	/**
 	 * Private consturct
 	 *
-	 * @return  void
+	 * @return  void Void.
 	 */
 	private function __construct() {
 		if ( method_exists( $this, '_initialize' ) ) {

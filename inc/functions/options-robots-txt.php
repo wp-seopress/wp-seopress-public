@@ -1,25 +1,40 @@
 <?php
-defined('ABSPATH') or die('Please don&rsquo;t call the plugin directly. Thanks :)');
+/**
+ * Options Robots.txt
+ *
+ * @package Functions
+ */
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Robots.txt
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//Add our xml sitemaps to default WP robots.txt file
-function seopress_xml_sitemaps_robots_txt($output, $public) {
-    if (
-        (function_exists('seopress_get_toggle_option') && '1' === seopress_get_toggle_option('robots')) &&
-        (function_exists('seopress_pro_get_service') && method_exists(seopress_pro_get_service('OptionPro'), 'getRobotsTxtEnable') && '1' === seopress_pro_get_service('OptionPro')->getRobotsTxtEnable())
-    ){
-        return $output;
-    }
+defined( 'ABSPATH' ) || die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
-    if ($public === false) {
-        return $output;
-    }
+/**
+ * Add our xml sitemaps to default WP robots.txt file
+ *
+ * @param  string $output The output.
+ * @param  bool   $public   The public.
+ * @return string seopress_xml_sitemaps_robots_txt
+ */
+function seopress_xml_sitemaps_robots_txt( $output, $public ) {
+	/**
+	 * Check if the robots option is enabled.
+	 */
+	if (
+		( function_exists( 'seopress_get_toggle_option' ) && '1' === seopress_get_toggle_option( 'robots' ) ) &&
+		( function_exists( 'seopress_pro_get_service' ) && method_exists( seopress_pro_get_service( 'OptionPro' ), 'getRobotsTxtEnable' ) && '1' === seopress_pro_get_service( 'OptionPro' )->getRobotsTxtEnable() )
+	) {
+		return $output;
+	}
 
-    $output .= "\n";
-    $output .= 'Sitemap: ' . get_home_url() . '/sitemaps.xml';
+	/**
+	 * Check if the public is false.
+	 */
+	if ( true === $public ) {
+		return $output;
+	}
 
-    return $output;
-};
-add_filter('robots_txt', 'seopress_xml_sitemaps_robots_txt', 10, 2);
+	$output .= "\n";
+	$output .= 'Sitemap: ' . get_home_url() . '/sitemaps.xml';
+
+	return $output;
+}
+add_filter( 'robots_txt', 'seopress_xml_sitemaps_robots_txt', 10, 2 );

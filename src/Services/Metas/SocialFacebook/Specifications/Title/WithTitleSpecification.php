@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\SocialFacebook\Specifications\Title;
 
@@ -6,46 +6,52 @@ use SEOPress\Helpers\Metas\SocialSettings;
 use SEOPress\Services\Metas\Title\TitleMeta;
 use SEOPress\Services\Metas\SocialFacebook\Specifications\Title\AbstractTitleSpecification;
 
-class WithTitleSpecification extends AbstractTitleSpecification
-{
-    const NAME_SERVICE = 'WithTitleSocialFacebookSpecification';
+/**
+ * WithTitleSpecification
+ */
+class WithTitleSpecification extends AbstractTitleSpecification {
 
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
+	const NAME_SERVICE = 'WithTitleSocialFacebookSpecification';
 
-        $context = $params['context'];
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) {
 
-        $post = $params['post'];
+		$context = $params['context'];
 
-        $titleMeta = new TitleMeta();
-        return $this->applyFilter($titleMeta->getValue($params['context']));
+		$post = $params['post'];
 
-    }
+		$title_meta = new TitleMeta();
+		return $this->applyFilter( $title_meta->getValue( $params['context'] ) );
+	}
 
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'title' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $titleMeta = new TitleMeta();
-        $value = $titleMeta->getValue($params['context']);
-        return !empty($value);
-    }
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'title' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) {
+		$title_meta = new TitleMeta();
+		$value      = $title_meta->getValue( $params['context'] );
+		return ! empty( $value );
+	}
 }
-
-

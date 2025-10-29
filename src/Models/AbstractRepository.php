@@ -1,38 +1,54 @@
-<?php
+<?php // phpcs:ignore
+
 namespace SEOPress\Models;
 
 use SEOPress\Models\Table\Table;
 
-abstract class AbstractRepository
-{
+/**
+ * AbstractRepository
+ */
+abstract class AbstractRepository {
+
 	/**
+	 * The table property.
+	 *
 	 * @var Table
 	 */
-
 	protected $table;
 
-	protected function getTableName(){
+	/**
+	 * The getTableName function.
+	 *
+	 * @return string
+	 */
+	protected function getTableName() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		global $wpdb;
 
 		return "{$wpdb->prefix}{$this->table->getName()}";
 	}
 
-	protected function getInsertInstruction(array $args): string
-	{
+	/**
+	 * The getInsertInstruction function.
+	 *
+	 * @param array $args The arguments.
+	 *
+	 * @return string
+	 */
+	protected function getInsertInstruction( array $args ): string { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		global $wpdb;
 
-		$authorizedValues = $this->getAuthorizedInsertValues();
-		$columns = $this->table->getColumns();
+		$authorized_values = $this->getAuthorizedInsertValues();
+		$columns           = $this->table->getColumns();
 
-		$data = [];
-		foreach($columns as $column){
+		$data = array();
+		foreach ( $columns as $column ) {
 			$name = $column->getName();
 
-			if(!in_array($name, $authorizedValues)){
+			if ( ! in_array( $name, $authorized_values, true ) ) {
 				continue;
 			}
 
-			if(!isset($args[$name])){
+			if ( ! isset( $args[ $name ] ) ) {
 				continue;
 			}
 
@@ -42,13 +58,17 @@ abstract class AbstractRepository
 		return "
 			INSERT INTO {$this->getTableName()}
 			(
-				" . implode(', ', $data) . "
+				" . implode( ', ', $data ) . '
 			) VALUES
-		";
+		';
 	}
 
-	protected function getUpdateInstruction(): string
-	{
+	/**
+	 * The getUpdateInstruction function.
+	 *
+	 * @return string
+	 */
+	protected function getUpdateInstruction(): string { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		global $wpdb;
 
 		return "
@@ -56,71 +76,98 @@ abstract class AbstractRepository
 		";
 	}
 
-	protected function getFormatValue($value) {
-		if (is_string($value)) {
-			return "'" . wp_slash(maybe_serialize($value)) . "'";
-		} elseif (is_int($value)) {
-			return maybe_serialize($value);
-		} elseif ($value instanceof \DateTime) {
-			return "'" . wp_slash(maybe_serialize($value->format('Y-m-d H:i:s'))) . "'";
-		} elseif (is_array($value)) {
-			if (empty($value)) {
-				return "NULL";
+	/**
+	 * The getFormatValue function.
+	 *
+	 * @param mixed $value The value.
+	 *
+	 * @return string
+	 */
+	protected function getFormatValue( $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( is_string( $value ) ) {
+			return "'" . wp_slash( maybe_serialize( $value ) ) . "'";
+		} elseif ( is_int( $value ) ) {
+			return maybe_serialize( $value );
+		} elseif ( $value instanceof \DateTime ) {
+			return "'" . wp_slash( maybe_serialize( $value->format( 'Y-m-d H:i:s' ) ) ) . "'";
+		} elseif ( is_array( $value ) ) {
+			if ( empty( $value ) ) {
+				return 'NULL';
 			} else {
-				return "'" . wp_slash(maybe_serialize($value)) . "'";
+				return "'" . wp_slash( maybe_serialize( $value ) ) . "'";
 			}
 		}
 
-		return "NULL";
+		return 'NULL';
 	}
 
-	public function getUpdateValues(array $args): string
-	{
+	/**
+	 * The getUpdateValues function.
+	 *
+	 * @param array $args The arguments.
+	 *
+	 * @return string
+	 */
+	public function getUpdateValues( array $args ): string { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		global $wpdb;
 
-		$authorizedValues = $this->getAuthorizedUpdateValues();
+		$authorized_values = $this->getAuthorizedUpdateValues();
 
-		foreach($args as $key => $value){
-			if(!in_array($key, $authorizedValues)){
-				unset($args[$key]);
+		foreach ( $args as $key => $value ) {
+			if ( ! in_array( $key, $authorized_values, true ) ) {
+				unset( $args[ $key ] );
 			}
 		}
 
-		return "
-			SET " . $this->constructSetClause($args) . "
-		";
+		return '
+			SET ' . $this->constructSetClause( $args ) . '
+		';
 	}
 
-	public function constructValuesClause(array $args): string {
-		$values = "(";
+	/**
+	 * The constructValuesClause function.
+	 *
+	 * @param array $args The arguments.
+	 *
+	 * @return string
+	 */
+	public function constructValuesClause( array $args ): string { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$values = '(';
 
-		$authorizedValues = $this->getAuthorizedInsertValues();
+		$authorized_values = $this->getAuthorizedInsertValues();
 
-		foreach ($args as $key => $value) {
-			if(!in_array($key, $authorizedValues)){
-				unset($args[$key]);
+		foreach ( $args as $key => $value ) {
+			if ( ! in_array( $key, $authorized_values, true ) ) {
+				unset( $args[ $key ] );
 			}
 
-			$values .= $this->getFormatValue($value);
-			$values .= ",";
+			$values .= $this->getFormatValue( $value );
+			$values .= ',';
 		}
 
-		$values = rtrim($values, ",") . ")";
+		$values = rtrim( $values, ',' ) . ')';
 
 		return $values;
 	}
 
-	protected function constructSetClause(array $data): string {
-		$set = "";
+	/**
+	 * The constructSetClause function.
+	 *
+	 * @param array $data The data.
+	 *
+	 * @return string
+	 */
+	protected function constructSetClause( array $data ): string { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$set = '';
 
-		foreach ($data as $key => $value) {
-			$value = $this->getFormatValue($value);
+		foreach ( $data as $key => $value ) {
+			$value = $this->getFormatValue( $value );
 
 			$set .= "{$key}=$value";
-			$set .= ",";
+			$set .= ',';
 		}
 
-		$set = rtrim($set, ",");
+		$set = rtrim( $set, ',' );
 
 		return $set;
 	}
@@ -129,38 +176,37 @@ abstract class AbstractRepository
 	/**
 	 * Get VALUES for INSERT INTO
 	 *
-	 * @param array $args
+	 * @param array $args The arguments.
+	 *
 	 * @return string
 	 */
-	protected function getInsertValuesInstruction($args): string
-	{
+	protected function getInsertValuesInstruction( $args ): string { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 
-		$authorizedValues = $this->getAuthorizedInsertValues();
+		$authorized_values = $this->getAuthorizedInsertValues();
 
 		$columns = $this->table->getColumns();
 
-		$data = [];
-		foreach($columns as $column){
+		$data = array();
+		foreach ( $columns as $column ) {
 			$name = $column->getName();
 
-			if(!in_array($name, $authorizedValues, true)){
+			if ( ! in_array( $name, $authorized_values, true ) ) {
 				continue;
 			}
-			if(!isset($args[$name])){
+			if ( ! isset( $args[ $name ] ) ) {
 				continue;
 			}
 
-			switch($name){
+			switch ( $name ) {
 				case 'post_id':
-					$data[] = (int) $args[$name];
+					$data[] = (int) $args[ $name ];
 					break;
 				default:
-					$data[] = $args[$name];
+					$data[] = $args[ $name ];
 					break;
-
 			}
 		}
 
-		return $this->constructValuesClause($data);
+		return $this->constructValuesClause( $data );
 	}
 }

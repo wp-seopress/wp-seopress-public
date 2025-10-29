@@ -1,169 +1,193 @@
 <?php
+/**
+ * XML Sitemap single term template
+ *
+ * @package Sitemaps
+ */
 
-defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
-//XML
+// Headers.
+seopress_get_service( 'SitemapHeaders' )->printHeaders();
 
-//Headers
-seopress_get_service('SitemapHeaders')->printHeaders();
-
-//WPML - Home URL
-if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
-    add_filter('seopress_sitemaps_home_url', function($home_url) {
-        $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
-        return trailingslashit($home_url);
-    });
+// WPML - Home URL.
+if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+	add_filter(
+		'seopress_sitemaps_home_url',
+		function ( $home_url ) {
+			$home_url = apply_filters( 'wpml_home_url', get_option( 'home' ) );
+			return trailingslashit( $home_url );
+		}
+	);
 } else {
-    add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
+	add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
 }
 
-add_filter('seopress_sitemaps_single_term_query', function ($args) {
+add_filter(
+	'seopress_sitemaps_single_term_query',
+	function ( $args ) {
 
-    global $sitepress, $sitepress_settings;
+		global $sitepress, $sitepress_settings;
 
-    //If multidomain setup
-    if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
-        add_filter('terms_clauses', [$sitepress, 'terms_clauses'], 100, 4);
-    }
-    $sitepress_settings['auto_adjust_ids'] = 0;
-    remove_filter('terms_clauses', [$sitepress, 'terms_clauses']);
-    remove_filter('category_link', [$sitepress, 'category_link_adjust_id'], 1);
+		// If multidomain setup.
+		if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+			add_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ), 100, 4 );
+		}
+		$sitepress_settings['auto_adjust_ids'] = 0;
+		remove_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ) );
+		remove_filter( 'category_link', array( $sitepress, 'category_link_adjust_id' ), 1 );
 
-    return $args;
-});
+		return $args;
+	}
+);
 
-add_filter('seopress_sitemaps_term_single_url', function($url, $term) {
-    //Exclude custom canonical from sitemaps
-    if (get_term_meta($term->term_id, '_seopress_robots_canonical', true) && htmlspecialchars(urldecode(get_term_link( $term->term_id ))) !== get_term_meta($term->term_id, '_seopress_robots_canonical', true)) {
-        return null;
-    }
+add_filter(
+	'seopress_sitemaps_term_single_url',
+	function ( $url, $term ) {
+		// Exclude custom canonical from sitemaps.
+		if ( get_term_meta( $term->term_id, '_seopress_robots_canonical', true ) && htmlspecialchars( urldecode( get_term_link( $term->term_id ) ) ) !== get_term_meta( $term->term_id, '_seopress_robots_canonical', true ) ) {
+			return null;
+		}
 
-    //Exclude noindex
-    if (get_term_meta($term->term_id, '_seopress_robots_index', true)) {
-        return null;
-    }
+		// Exclude noindex.
+		if ( get_term_meta( $term->term_id, '_seopress_robots_index', true ) ) {
+			return null;
+		}
 
-    //Exclude hidden languages
-    //@credits WPML compatibility team
-    if (function_exists('icl_object_id') && defined('ICL_SITEPRESS_VERSION')) { //WPML
-        global $sitepress, $sitepress_settings;
+		// Exclude hidden languages.
+		// @credits WPML compatibility team.
+		if ( function_exists( 'icl_object_id' ) && defined( 'ICL_SITEPRESS_VERSION' ) ) { // WPML.
+			global $sitepress, $sitepress_settings;
 
-        // Check that at least ID is set in post object.
-        if ( ! isset( $term->term_id ) ) {
-            return $url;
-        }
+			// Check that at least ID is set in post object.
+			if ( ! isset( $term->term_id ) ) {
+				return $url;
+			}
 
-        // Get list of hidden languages.
-        $hidden_languages = $sitepress->get_setting( 'hidden_languages', array() );
+			// Get list of hidden languages.
+			$hidden_languages = $sitepress->get_setting( 'hidden_languages', array() );
 
-        // If there are no hidden languages return original URL.
-        if ( empty( $hidden_languages ) ) {
-            return $url;
-        }
+			// If there are no hidden languages return original URL.
+			if ( empty( $hidden_languages ) ) {
+				return $url;
+			}
 
-        // Get language information for post.
-        $language_info = $sitepress->term_translations()->get_element_lang_code( $term->term_id );
+			// Get language information for post.
+			$language_info = $sitepress->term_translations()->get_element_lang_code( $term->term_id );
 
-        // If language code is one of the hidden languages return null to skip the post.
-        if ( in_array( $language_info, $hidden_languages, true ) ) {
-            return null;
-        }
-    }
+			// If language code is one of the hidden languages return null to skip the post.
+			if ( in_array( $language_info, $hidden_languages, true ) ) {
+				return null;
+			}
+		}
 
-    return $url;
-}, 10, 2);
+		return $url;
+	},
+	10,
+	2
+);
 
-// Polylang: remove hidden languages
-function seopress_pll_exclude_hidden_lang($args) {
-    if (function_exists('get_languages_list') && defined( 'POLYLANG_VERSION' )) {
-        $languages = PLL()->model->get_languages_list();
-        if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
-            $args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );
-        }
-    }
-    return $args;
+/**
+ * Polylang: remove hidden languages
+ *
+ * @param array $args Arguments.
+ * @return array Arguments.
+ */
+function seopress_pll_exclude_hidden_lang( $args ) {
+	if ( function_exists( 'get_languages_list' ) && defined( 'POLYLANG_VERSION' ) ) {
+		$languages = PLL()->model->get_languages_list();
+		if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
+			$args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );
+		}
+	}
+	return $args;
 }
 
+/**
+ * XML Sitemap single term template
+ *
+ * @return string XML Sitemap single term template
+ */
 function seopress_xml_sitemap_single_term() {
-    if ('' !== get_query_var('seopress_cpt')) {
-        $path = get_query_var('seopress_cpt');
-    }
+	if ( '' !== get_query_var( 'seopress_cpt' ) ) {
+		$path = get_query_var( 'seopress_cpt' );
+	}
 
-    $request_uri = '';
-    if (isset($_SERVER['REQUEST_URI'])) {
-        $request_uri = esc_url_raw(wp_unslash($_SERVER['REQUEST_URI']));
-    }
+	$request_uri = '';
+	if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+		$request_uri = esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+	}
 
-    remove_all_filters('pre_get_posts');
+	remove_all_filters( 'pre_get_posts' );
 
-    $offset = basename(wp_parse_url($request_uri, PHP_URL_PATH), '.xml');
-    $offset = preg_match_all('/\d+/', $offset, $matches);
-    $offset = end($matches[0]);
+	$offset = basename( wp_parse_url( $request_uri, PHP_URL_PATH ), '.xml' );
+	$offset = preg_match_all( '/\d+/', $offset, $matches );
+	$offset = end( $matches[0] );
 
-    //Max posts per paginated sitemap
-    $max = 1000;
-    $max = apply_filters('seopress_sitemaps_max_terms_per_sitemap', $max);
+	// Max posts per paginated sitemap.
+	$max = 1000;
+	$max = apply_filters( 'seopress_sitemaps_max_terms_per_sitemap', $max );
 
-    if (isset($offset) && absint($offset) && '' != $offset && 0 != $offset) {
-        $offset = (($offset - 1) * $max);
-    } else {
-        $offset = 0;
-    }
+	if ( isset( $offset ) && absint( $offset ) && '' != $offset && 0 != $offset ) {
+		$offset = ( ( $offset - 1 ) * $max );
+	} else {
+		$offset = 0;
+	}
 
-    $home_url = home_url() . '/';
+	$home_url = home_url() . '/';
 
-    $home_url = apply_filters('seopress_sitemaps_home_url', $home_url);
+	$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
 
-    $seopress_sitemaps = '<?xml version="1.0" encoding="UTF-8"?>';
-    $seopress_sitemaps .= '<?xml-stylesheet type="text/xsl" href="' . $home_url . 'sitemaps_xsl.xsl"?>';
-    $seopress_sitemaps .= "\n";
-    $seopress_sitemaps .= apply_filters('seopress_sitemaps_urlset', '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+	$seopress_sitemaps  = '<?xml version="1.0" encoding="UTF-8"?>';
+	$seopress_sitemaps .= '<?xml-stylesheet type="text/xsl" href="' . $home_url . 'sitemaps_xsl.xsl"?>';
+	$seopress_sitemaps .= "\n";
+	$seopress_sitemaps .= apply_filters( 'seopress_sitemaps_urlset', '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' );
 
-    $args = [
-        'taxonomy'   => $path,
-        'offset'     => $offset,
-        'hide_empty' => true,
-        'number'     => 1000,
-        'lang'       => '',
-    ];
+	$args = array(
+		'taxonomy'   => $path,
+		'offset'     => $offset,
+		'hide_empty' => true,
+		'number'     => 1000,
+		'lang'       => '',
+	);
 
-    $args = seopress_pll_exclude_hidden_lang($args);
+	$args = seopress_pll_exclude_hidden_lang( $args );
 
-    $args = apply_filters('seopress_sitemaps_single_term_query', $args, $path);
+	$args = apply_filters( 'seopress_sitemaps_single_term_query', $args, $path );
 
-    $termslist = new WP_Term_Query($args);
+	$termslist = new WP_Term_Query( $args );
 
-    if (is_array($termslist->terms) && ! empty($termslist->terms)) {
-        foreach ($termslist->terms as $term) {
-            $seopress_sitemaps_url = '';
-            // array with all the information needed for a sitemap url
-            $seopress_url = [
-                'loc'    => htmlspecialchars(urldecode(esc_url(get_term_link($term)))),
-                'mod'    => '',
-                'images' => [],
-            ];
+	if ( is_array( $termslist->terms ) && ! empty( $termslist->terms ) ) {
+		foreach ( $termslist->terms as $term ) {
+			$seopress_sitemaps_url = '';
+			// Array with all the information needed for a sitemap url.
+			$seopress_url = array(
+				'loc'    => htmlspecialchars( urldecode( esc_url( get_term_link( $term ) ) ) ),
+				'mod'    => '',
+				'images' => array(),
+			);
 
-            $seopress_url = apply_filters( 'seopress_sitemaps_term_single_url', $seopress_url, $term );
+			$seopress_url = apply_filters( 'seopress_sitemaps_term_single_url', $seopress_url, $term );
 
-            if (!empty($seopress_url['loc'])) {
-                $seopress_sitemaps_url .= "\n";
-                $seopress_sitemaps_url .= '<url>';
-                $seopress_sitemaps_url .= "\n";
-                $seopress_sitemaps_url .= '<loc>';
-                $seopress_sitemaps_url .= $seopress_url['loc'];
-                $seopress_sitemaps_url .= '</loc>';
-                $seopress_sitemaps_url .= "\n";
-                $seopress_sitemaps_url .= '</url>';
+			if ( ! empty( $seopress_url['loc'] ) ) {
+				$seopress_sitemaps_url .= "\n";
+				$seopress_sitemaps_url .= '<url>';
+				$seopress_sitemaps_url .= "\n";
+				$seopress_sitemaps_url .= '<loc>';
+				$seopress_sitemaps_url .= $seopress_url['loc'];
+				$seopress_sitemaps_url .= '</loc>';
+				$seopress_sitemaps_url .= "\n";
+				$seopress_sitemaps_url .= '</url>';
 
-                $seopress_sitemaps .= apply_filters('seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url);
-            }
-        }
-    }
-    $seopress_sitemaps .= '</urlset>';
-    $seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= apply_filters( 'seopress_sitemaps_url', $seopress_sitemaps_url, $seopress_url );
+			}
+		}
+	}
+	$seopress_sitemaps .= '</urlset>';
+	$seopress_sitemaps .= "\n";
 
-    $seopress_sitemaps = apply_filters('seopress_sitemaps_xml_single_term', $seopress_sitemaps);
+	$seopress_sitemaps = apply_filters( 'seopress_sitemaps_xml_single_term', $seopress_sitemaps );
 
-    return $seopress_sitemaps;
+	return $seopress_sitemaps;
 }
 echo seopress_xml_sitemap_single_term();

@@ -1,21 +1,34 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\ContentAnalysis\GetContent\Twitter;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+/**
+ * Title
+ */
 class Title {
-    public function getDataByXPath($xpath, $options = []) {
-        $values = $xpath->query('//meta[@name="twitter:title"]/@content');
+	/**
+	 * The getDataByXPath function.
+	 *
+	 * @param object $xpath The xpath.
+	 * @param array  $options The options.
+	 *
+	 * @return array
+	 */
+	public function getDataByXPath( $xpath, $options = array() ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$values = $xpath->query( '//meta[@name="twitter:title"]/@content' );
 
-        $data = [];
-        if (empty($values)) {
-            return $data;
-        }
-        foreach ($values as $key => $item) {
-            $data[] = $item->nodeValue;
-        }
+		$data = array();
+		if ( empty( $values ) ) {
+			return $data;
+		}
+		foreach ( $values as $key => $item ) {
+			$data[] = $item->nodeValue; // phpcs:ignore -- TODO: check if property is outside this class before renaming.
+		}
 
-        return $data;
-    }
+		return $data;
+	}
 }

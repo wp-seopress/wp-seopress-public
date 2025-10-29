@@ -1,60 +1,69 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\SocialTwitter\Specifications\Image;
 
 use SEOPress\Helpers\Metas\SocialSettings;
 use SEOPress\Services\Metas\SocialTwitter\Specifications\Image\AbstractImageSpecification;
 
-class SingularSpecification extends AbstractImageSpecification
-{
-    const NAME_SERVICE = 'SingularImageSocialTwitterSpecification';
+/**
+ * SingularSpecification
+ */
+class SingularSpecification extends AbstractImageSpecification {
 
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
+	const NAME_SERVICE = 'SingularImageSocialTwitterSpecification';
 
-        $context = $params['context'];
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) {
 
-        $post = $params['post'];
-        $GLOBALS['post'] = $post;
+		$context = $params['context'];
 
-        $value = seopress_get_service('SocialOption')->getTwitterImagePostOption($post->ID);
+		$post            = $params['post'];
+		$GLOBALS['post'] = $post; // phpcs:ignore
 
-        return $this->applyFilter([
-            'url' => seopress_get_service('TagsToString')->replace($value, $context)
-        ], $params);
-    }
+		$value = seopress_get_service( 'SocialOption' )->getTwitterImagePostOption( $post->ID );
+
+		return $this->applyFilter(
+			array(
+				'url' => seopress_get_service( 'TagsToString' )->replace( $value, $context ),
+			),
+			$params
+		);
+	}
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'title' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $context = $params['context'];
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'title' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) {
+		$context = $params['context'];
 
-        if ($context['is_singular'] ) {
-            $post = $params['post'];
-            if(!empty(seopress_get_service('SocialOption')->getTwitterImagePostOption($post->ID))){
-                return true;
-            }
-        }
+		if ( $context['is_singular'] ) {
+			$post = $params['post'];
+			if ( ! empty( seopress_get_service( 'SocialOption' )->getTwitterImagePostOption( $post->ID ) ) ) {
+				return true;
+			}
+		}
 
-        return false;
-
-    }
+		return false;
+	}
 }
-
-

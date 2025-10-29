@@ -98,7 +98,7 @@ jQuery(document).ready(function ($) {
                 }
                 $(item + '_src').attr('src', attachment.url);
 
-                $(item + "_placeholder_src").attr('src', $(item + "_meta").val());
+                $(item + "_placeholder_src").attr('src', $(item + "_meta").val()).show();
             });
 
             // Open the uploader dialog

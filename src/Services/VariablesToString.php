@@ -1,106 +1,128 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services;
 
-if ( ! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
+/**
+ * VariablesToString
+ */
 class VariablesToString {
-    const REGEX = "#\[\[(.*?)\]\]#";
 
-    /**
-     * @since 4.5.0
-     *
-     * @param string $string
-     *
-     * @return array
-     */
-    public function getVariables($string) {
-        if ( ! is_string($string)) {
-            return [];
-        }
+	/**
+	 * The REGEX constant.
+	 *
+	 * @var string
+	 */
+	const REGEX = '#\[\[(.*?)\]\]#';
 
-        preg_match_all(self::REGEX, $string, $matches);
+	/**
+	 * The getVariables function.
+	 *
+	 * @since 4.5.0
+	 *
+	 * @param string $string The string.
+	 *
+	 * @return array
+	 */
+	public function getVariables( $string ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( ! is_string( $string ) ) {
+			return array();
+		}
 
-        return $matches;
-    }
+		preg_match_all( self::REGEX, $string, $matches );
 
-    /**
-     * @since 4.5.0
-     *
-     * @param function $variable
-     * @param array    $context
-     *
-     * @return void
-     */
-    public function getValueFromContext($variable, $context= []) {
-        if ( ! array_key_exists($variable, $context)) {
-            return '';
-        }
+		return $matches;
+	}
 
-        return $context[$variable];
-    }
+	/**
+	 * The getValueFromContext function.
+	 *
+	 * @since 4.5.0
+	 *
+	 * @param function $variable The variable.
+	 * @param array    $context The context.
+	 *
+	 * @return string
+	 */
+	public function getValueFromContext( $variable, $context = array() ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( ! array_key_exists( $variable, $context ) ) {
+			return '';
+		}
 
-    /**
-     * @since 4.5.0
-     *
-     * @param string $string
-     * @param mixed  $context
-     *
-     * @return string
-     */
-    public function replace($string, $context = []) {
-        $variables = $this->getVariables($string);
+		return $context[ $variable ];
+	}
 
-        if ( ! array_key_exists(1, $variables)) {
-            return $string;
-        }
+	/**
+	 * The replace function.
+	 *
+	 * @since 4.5.0
+	 *
+	 * @param string $string The string.
+	 * @param mixed  $context The context.
+	 *
+	 * @return string
+	 */
+	public function replace( $string, $context = array() ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$variables = $this->getVariables( $string );
 
-        foreach ($variables[1] as $key => $variable) {
-            $value  = $this->getValueFromContext($variable, $context);
+		if ( ! array_key_exists( 1, $variables ) ) {
+			return $string;
+		}
 
-            $string = str_replace($variables[0][$key], $value, $string);
-        }
+		foreach ( $variables[1] as $key => $variable ) {
+			$value = $this->getValueFromContext( $variable, $context );
 
-        return $string;
-    }
+			$string = str_replace( $variables[0][ $key ], $value, $string );
+		}
 
-    /**
-     * @since 4.5.0
-     *
-     * @param array $data
-     *
-     * @return array
-     */
-    protected function removeDataEmpty($data) {
-        return array_filter($data, function( $value ){
-            return "0" == $value || ! empty( $value );
-        });
-    }
+		return $string;
+	}
 
-    /**
-     * @since 4.5.0
-     *
-     * @param array $data
-     * @param array $context
-     * @param mixed $options
-     *
-     * @return array
-     */
-    public function replaceDataToString($data, $context = [], $options = []) {
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $data[$key] = $this->replaceDataToString($value, $context, $options);
-            } else {
-                $data[$key] = $this->replace($value, $context);
-            }
-        }
+	/**
+	 * The removeDataEmpty function.
+	 *
+	 * @since 4.5.0
+	 *
+	 * @param array $data The data.
+	 *
+	 * @return array
+	 */
+	protected function removeDataEmpty( $data ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return array_filter(
+			$data,
+			function ( $value ) {
+				return '0' === $value || ! empty( $value );
+			}
+		);
+	}
 
-        if (isset($options['remove_empty']) && $options['remove_empty']) {
-            $data = $this->removeDataEmpty($data);
-        }
+	/**
+	 * The replaceDataToString function.
+	 *
+	 * @since 4.5.0
+	 *
+	 * @param array $data The data.
+	 * @param array $context The context.
+	 * @param mixed $options The options.
+	 *
+	 * @return array
+	 */
+	public function replaceDataToString( $data, $context = array(), $options = array() ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		foreach ( $data as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$data[ $key ] = $this->replaceDataToString( $value, $context, $options );
+			} else {
+				$data[ $key ] = $this->replace( $value, $context );
+			}
+		}
 
-        return $data;
-    }
+		if ( isset( $options['remove_empty'] ) && $options['remove_empty'] ) {
+			$data = $this->removeDataEmpty( $data );
+		}
+
+		return $data;
+	}
 }

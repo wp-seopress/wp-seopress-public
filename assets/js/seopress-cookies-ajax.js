@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-    document.getElementById('seopress-user-consent-accept').addEventListener('click', function () {
+	const seopressUserConsentAcceptBtn = document.getElementById('seopress-user-consent-accept');
+	if (seopressUserConsentAcceptBtn) seopressUserConsentAcceptBtn.addEventListener('click', function () {
         document.querySelectorAll('.seopress-user-consent.seopress-user-message').forEach(function(element) {
             element.classList.add('seopress-user-consent-hide');
         });
@@ -48,10 +49,11 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => {
             console.error('Error:', error);
-        });
+	});
     });
     
-    document.getElementById('seopress-user-consent-close').addEventListener('click', function () {
+	const seopressUserConsentCloseBtn = document.getElementById('seopress-user-consent-close');
+	if (seopressUserConsentCloseBtn) seopressUserConsentCloseBtn.addEventListener('click', function () {
         document.querySelectorAll('.seopress-user-consent.seopress-user-message').forEach(function(element) {
             element.classList.add('seopress-user-consent-hide');
         });
@@ -83,15 +85,16 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => {
             console.error('Error:', error);
-        });
+	});
     });
     
-    document.getElementById('seopress-user-consent-edit').addEventListener('click', function () {
+	const seopressUserConsentEditBtn = document.getElementById('seopress-user-consent-edit');
+	if (seopressUserConsentEditBtn) seopressUserConsentEditBtn.addEventListener('click', function () {
         document.querySelectorAll('.seopress-user-consent.seopress-user-message').forEach(function(element) {
             element.classList.remove('seopress-user-consent-hide');
         });
         document.querySelectorAll('.seopress-user-consent-backdrop').forEach(function(element) {
             element.classList.remove('seopress-user-consent-hide');
         });
-    });
+	});
 });

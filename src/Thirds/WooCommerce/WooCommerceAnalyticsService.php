@@ -1,86 +1,83 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Thirds\WooCommerce;
 
-if (! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-class WooCommerceAnalyticsService
-{
-    /**
-     * Function to convert an array to a JavaScript object using wp_json_encode
-     *
-     * @since 7.0.0
-     *
-     * @return void
-     */
-    public function arrayToJs($array) {
-        $jsonObject = wp_json_encode($array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        return substr($jsonObject, 1, -1); // Remove curly braces from the JSON
-    }
+/**
+ * WooCommerce Analytics Service
+ */
+class WooCommerceAnalyticsService {
 
-    /**
-     * Get product categories
-     *
-     * @since 7.0.0
-     *
-     * @return $categoriesOut array
-     */
-    public function getProductCategories($product)
-    {
-        $categoriesOut = [];
+	/**
+	 * Function to convert an array to a JavaScript object using wp_json_encode
+	 *
+	 * @param array $array The array to convert.
+	 * @return string
+	 */
+	public function arrayToJs( $array ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		$json_object = wp_json_encode( $array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+		return substr( $json_object, 1, -1 ); // Remove curly braces from the JSON.
+	}
 
-        $categories = get_the_terms($product->get_id(), 'product_cat');
+	/**
+	 * Get product categories
+	 *
+	 * @param object $product The product object.
+	 * @return array
+	 */
+	public function getProductCategories( $product ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		$categories_out = array();
 
-        if ($categories && !is_wp_error($categories)) {
-            $i = 1;
-            foreach ($categories as $category) {
-                $cat_key = 'item_category_' . $i;
-                if ($i === 1) {
-                    $cat_key = 'item_category';
-                }
-                $categoriesOut[$cat_key] = esc_js($category->name);
-                $i++;
-            }
-        }
+		$categories = get_the_terms( $product->get_id(), 'product_cat' );
 
-        return $categoriesOut;
-    }
+		if ( $categories && ! is_wp_error( $categories ) ) {
+			$i = 1;
+			foreach ( $categories as $category ) {
+				$cat_key = 'item_category_' . $i;
+				if ( 1 === $i ) {
+					$cat_key = 'item_category';
+				}
+				$categories_out[ $cat_key ] = esc_js( $category->name );
+				++$i;
+			}
+		}
 
-    /**
-     * Get product SKU, fallback Post ID
-     *
-     * @since 7.0.0
-     *
-     * @return $sku float
-     */
-    public function getProductSku($product)
-    {
-        $sku = $product->get_sku() ? $product->get_sku() : $product->get_id();
+		return $categories_out;
+	}
 
-        return $sku;
-    }
+	/**
+	 * Get product SKU, fallback Post ID
+	 *
+	 * @param object $product The product object.
+	 * @return float
+	 */
+	public function getProductSku( $product ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		$sku = $product->get_sku() ? $product->get_sku() : $product->get_id();
 
-    /**
-     * @since 4.4.0
-     *
-     * @return void
-     */
-    public function addToCart()
-    {
-        // Get current product
-        global $product;
+		return $sku;
+	}
 
-        // Set data
-        $items_purchased['item_id']        = esc_js($this->getProductSku($product));
-        $items_purchased['item_name']      = esc_js($product->get_title());
-        $items_purchased['list_name'] = esc_js(get_the_title());
-        $items_purchased['quantity']  = (float) esc_js(1);
-        $items_purchased['price']     = (float) esc_js($product->get_price());
-        $items_purchased = array_merge($items_purchased, $this->getProductCategories($product));
+	/**
+	 * Add to cart
+	 *
+	 * @return void
+	 */
+	public function addToCart() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		// Get current product.
+		global $product;
 
-        $js = "
+		// Set data.
+		$items_purchased['item_id']   = esc_js( $this->getProductSku( $product ) );
+		$items_purchased['item_name'] = esc_js( $product->get_title() );
+		$items_purchased['list_name'] = esc_js( get_the_title() );
+		$items_purchased['quantity']  = (float) esc_js( 1 );
+		$items_purchased['price']     = (float) esc_js( $product->get_price() );
+		$items_purchased              = array_merge( $items_purchased, $this->getProductCategories( $product ) );
+
+		$js = "
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 function getParameterByName(name, url) {
@@ -114,28 +111,27 @@ class WooCommerceAnalyticsService
                         return;
                     }
 
-                    gtag('event', 'add_to_cart', {'items': [ " . wp_json_encode($items_purchased) . ' ]});
+                    gtag('event', 'add_to_cart', {'items': [ " . wp_json_encode( $items_purchased ) . ' ]});
                 })
 
             });
         </script>
         ';
-        $js = apply_filters('seopress_gtag_ec_add_to_cart_archive_ev', $js);
+		$js = apply_filters( 'seopress_gtag_ec_add_to_cart_archive_ev', $js );
 
-        echo $js;
-    }
+		echo $js;
+	}
 
-    /**
-     * @since 4.4.0
-     *
-     * @return void
-     */
-    public function singleAddToCart()
-    {
-        // Get current product
-        global $product;
+	/**
+	 * Single add to cart
+	 *
+	 * @return void
+	 */
+	public function singleAddToCart() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		// Get current product.
+		global $product;
 
-        $js = "
+		$js = "
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 document.addEventListener('click', function(event){
@@ -147,7 +143,7 @@ class WooCommerceAnalyticsService
                     const formProductVariation = document.querySelector('form[data-product_variations]')
                     const variationItem = document.querySelector('.variation_id')
 
-                    let price = " . (float) esc_js($product->get_price()) . "
+                    let price = " . (float) esc_js( $product->get_price() ) . "
                     if(formProductVariation && variationItem){
                         try{
                             const variations = JSON.parse(formProductVariation.dataset.product_variations)
@@ -164,53 +160,52 @@ class WooCommerceAnalyticsService
 
                     gtag('event', 'add_to_cart', {
                         'items': [ {
-                            'item_id':'" . esc_js($this->getProductSku($product)) . "',
-                            'item_name': '" . esc_js($product->get_title()) . "',
-                            'list_name': '" . esc_js(get_the_title()) . "',
+                            'item_id':'" . esc_js( $this->getProductSku( $product ) ) . "',
+                            'item_name': '" . esc_js( $product->get_title() ) . "',
+                            'list_name': '" . esc_js( get_the_title() ) . "',
                             'quantity': quantity,
                             'price': price,
-                            " . $this->arrayToJs($this->getProductCategories($product)) . "
+                            " . $this->arrayToJs( $this->getProductCategories( $product ) ) . '
                         }]
                     });
                 })
             });
         </script>
-        ";
+        ';
 
-        $js = apply_filters('seopress_gtag_ec_add_to_cart_single_ev', $js);
+		$js = apply_filters( 'seopress_gtag_ec_add_to_cart_single_ev', $js );
 
-        echo $js;
-    }
+		echo $js;
+	}
 
-    /**
-     * @since 4.4.0
-     *
-     * @param string $sprintf
-     * @param string $cart_item_key
-     *
-     * @return void
-     */
-    public function removeFromCart($sprintf, $cart_item_key)
-    {
-        // Extract cart and get current product data
-        global $woocommerce;
-        foreach ($woocommerce->cart->get_cart() as $key => $item) {
-            if ($key == $cart_item_key) {
-                $product                     = wc_get_product($item['product_id']);
-                $items_purchased['quantity'] = (float) $item['quantity'];
-            }
-        }
+	/**
+	 * Remove from cart
+	 *
+	 * @param string $sprintf The sprintf.
+	 * @param string $cart_item_key The cart item key.
+	 *
+	 * @return string
+	 */
+	public function removeFromCart( $sprintf, $cart_item_key ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		// Extract cart and get current product data.
+		global $woocommerce;
+		foreach ( $woocommerce->cart->get_cart() as $key => $item ) {
+			if ( $key === $cart_item_key ) {
+				$product                     = wc_get_product( $item['product_id'] );
+				$items_purchased['quantity'] = (float) $item['quantity'];
+			}
+		}
 
-        // Get current product
-        if ($product) {
-            // Set data
-            $items_purchased['item_id']        = esc_js($this->getProductSku($product));
-            $items_purchased['item_name']      = esc_js($product->get_title());
-            $items_purchased['list_name'] = esc_js(get_the_title());
-            $items_purchased['price']     = (float) esc_js($product->get_price());
-            $items_purchased = array_merge($items_purchased, $this->getProductCategories($product));
+		// Get current product.
+		if ( $product ) {
+			// Set data.
+			$items_purchased['item_id']   = esc_js( $this->getProductSku( $product ) );
+			$items_purchased['item_name'] = esc_js( $product->get_title() );
+			$items_purchased['list_name'] = esc_js( get_the_title() );
+			$items_purchased['price']     = (float) esc_js( $product->get_price() );
+			$items_purchased              = array_merge( $items_purchased, $this->getProductCategories( $product ) );
 
-            $sprintf .= "
+			$sprintf .= "
             <script>
                 document.addEventListener('DOMContentLoaded', function(){
                     document.addEventListener('click', function(event){
@@ -218,46 +213,45 @@ class WooCommerceAnalyticsService
                             return;
                         }
 
-                        gtag('event', 'remove_from_cart', {'items': [ " . wp_json_encode($items_purchased) . ' ]});
+                        gtag('event', 'remove_from_cart', {'items': [ " . wp_json_encode( $items_purchased ) . ' ]});
                     })
 
                 });
             </script>
             ';
-        }
+		}
 
-        $sprintf = apply_filters('seopress_gtag_ec_remove_from_cart_ev', $sprintf);
+		$sprintf = apply_filters( 'seopress_gtag_ec_remove_from_cart_ev', $sprintf );
 
-        return $sprintf;
-    }
+		return $sprintf;
+	}
 
-    /**
-     * @since 4.4.0
-     *
-     * @return void
-     */
-    public function updateCartOrCheckout()
-    {
-        // Extract cart
-        global $woocommerce;
-        foreach ($woocommerce->cart->get_cart() as $key => $item) {
-            $product = wc_get_product($item['product_id']);
-            // Get current product
-            if ($product) {
-                // Set data
-                $items_purchased['item_id']        = esc_js($this->getProductSku($product));
-                $items_purchased['item_name']      = esc_js($product->get_title());
-                $items_purchased['list_name'] = esc_js(get_the_title());
-                $items_purchased['quantity']  = (float) esc_js($item['quantity']);
-                $items_purchased['price']     = (float) esc_js($product->get_price());
+	/**
+	 * Update cart or checkout
+	 *
+	 * @return void
+	 */
+	public function updateCartOrCheckout() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		// Extract cart.
+		global $woocommerce;
+		foreach ( $woocommerce->cart->get_cart() as $key => $item ) {
+			$product = wc_get_product( $item['product_id'] );
+			// Get current product.
+			if ( $product ) {
+				// Set data.
+				$items_purchased['item_id']   = esc_js( $this->getProductSku( $product ) );
+				$items_purchased['item_name'] = esc_js( $product->get_title() );
+				$items_purchased['list_name'] = esc_js( get_the_title() );
+				$items_purchased['quantity']  = (float) esc_js( $item['quantity'] );
+				$items_purchased['price']     = (float) esc_js( $product->get_price() );
 
-                $items_purchased = array_merge($items_purchased, $this->getProductCategories($product));
-            }
+				$items_purchased = array_merge( $items_purchased, $this->getProductCategories( $product ) );
+			}
 
-            $final[] = $items_purchased;
-        }
+			$final[] = $items_purchased;
+		}
 
-        $js = "
+		$js = "
         <script>
         document.addEventListener('DOMContentLoaded', function(){
 
@@ -266,43 +260,42 @@ class WooCommerceAnalyticsService
                     return;
                 }
 
-                gtag('event', 'remove_from_cart', {'items': " . wp_json_encode($final) . '});
+                gtag('event', 'remove_from_cart', {'items': " . wp_json_encode( $final ) . '});
             })
 
         });
         </script>';
 
-        $js = apply_filters('seopress_gtag_ec_remove_from_cart_checkout_ev', $js, $final);
+		$js = apply_filters( 'seopress_gtag_ec_remove_from_cart_checkout_ev', $js, $final );
 
-        echo $js;
-    }
+		echo $js;
+	}
 
-    /**
-     * @since 7.0.0
-     *
-     */
-    public function singleViewItemsDetails() {
-        // Get current product
-        global $product;
+	/**
+	 * Single view items details
+	 */
+	public function singleViewItemsDetails() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		// Get current product.
+		global $product;
 
-        $js = "
+		$js = "
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 gtag('event', 'view_item', {
                     'items': [{
-                        'item_id': '" . esc_js($this->getProductSku($product)) . "',
-                        'item_name': '" . esc_js($product->get_title()) . "',
-                        'price': " . (float) esc_js($product->get_price()) . ",
+                        'item_id': '" . esc_js( $this->getProductSku( $product ) ) . "',
+                        'item_name': '" . esc_js( $product->get_title() ) . "',
+                        'price': " . (float) esc_js( $product->get_price() ) . ",
                         'quantity': 1,
-                        " . $this->arrayToJs($this->getProductCategories($product)) . "
+                        " . $this->arrayToJs( $this->getProductCategories( $product ) ) . '
                     }]
                 });
             });
         </script>
-        ";
+        ';
 
-        $js = apply_filters('seopress_gtag_ec_single_view_details_ev', $js);
+		$js = apply_filters( 'seopress_gtag_ec_single_view_details_ev', $js );
 
-        echo $js;
-    }
+		echo $js;
+	}
 }

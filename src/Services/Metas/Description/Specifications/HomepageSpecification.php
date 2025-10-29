@@ -1,60 +1,70 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\Description\Specifications;
 
+/**
+ * HomepageSpecification
+ */
+class HomepageSpecification {
 
-class HomepageSpecification
-{
+	/**
+	 * The name service.
+	 *
+	 * @var string
+	 */
+	const NAME_SERVICE = 'HomepageDescriptionSpecification';
 
-    const NAME_SERVICE = 'HomepageDescriptionSpecification';
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
-        $value   = seopress_get_service('TitleOption')->getHomeDescriptionTitle();
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$value = seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle();
 
-        if(empty($value) || !$value){
-            return "";
-        }
+		if ( empty( $value ) || ! $value ) {
+			return '';
+		}
 
-        $context = $params['context'];
+		$context = $params['context'];
 
-        return seopress_get_service('TagsToString')->replace($value, $context);
-    }
+		return seopress_get_service( 'TagsToString' )->replace( $value, $context );
+	}
 
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'description' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $descriptionValue = $params['description'];
-        $context = $params['context'];
-        $post = $params['post'];
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'description' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$description_value = $params['description'];
+		$context           = $params['context'];
+		$post              = $params['post'];
 
-        if ($context['is_front_page'] && $context['is_home'] && isset($post) && empty($descriptionValue)) { //HOMEPAGE
+		if ( $context['is_front_page'] && $context['is_home'] && isset( $post ) && empty( $description_value ) ) { // HOMEPAGE.
 
-            $value   = seopress_get_service('TitleOption')->getHomeDescriptionTitle();
-            if(!empty($value)){
-                return true;
-            }
-        }
+			$value = seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle();
+			if ( ! empty( $value ) ) {
+				return true;
+			}
+		}
 
-        return false;
-
-    }
+		return false;
+	}
 }
-
-

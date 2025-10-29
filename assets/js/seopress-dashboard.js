@@ -186,7 +186,7 @@ jQuery(document).ready(function ($) {
                 action: 'seopress_switch_view',
                 view: $('body').hasClass('seopress-simple-view') ? 'simple' : 'default',
                 _ajax_nonce: seopressAjaxSwitchView.seopress_nonce,
-            },            
+            },
         });
     });
 });
@@ -241,5 +241,28 @@ jQuery(document).ready(function ($) {
 
         $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");
         $('#' + hash).addClass("active");
+    });
+
+    // Copy sitemap URL to clipboard
+    $('#seopress-copy-sitemap-url').on('click', function(e) {
+        e.preventDefault();
+        const $input = $('#seopress-sitemap-url');
+        const $button = $(this);
+        const $icon = $button.find('.dashicons');
+        const $text = $button.find('.seopress-btn-text');
+        const originalText = $text.text();
+
+        navigator.clipboard.writeText($input.val()).then(function() {
+            // Update button state
+            $icon.removeClass('dashicons-clipboard').addClass('dashicons-yes');
+            $text.text('Copied!');
+
+            setTimeout(function() {
+                $icon.removeClass('dashicons-yes').addClass('dashicons-clipboard');
+                $text.text(originalText);
+            }, 2000);
+        }).catch(function(err) {
+            console.error('Failed to copy:', err);
+        });
     });
 });

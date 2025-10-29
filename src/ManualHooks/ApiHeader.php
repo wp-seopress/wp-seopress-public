@@ -1,29 +1,45 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\ManualHooks;
 
-if (! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
+/**
+ * ApiHeader
+ */
+class ApiHeader {
 
-class ApiHeader
-{
-    public function hooks()
-    {
-        add_filter('http_request_args', [$this, 'addHeaderRequest']);
-    }
+	/**
+	 * The ApiHeader hooks.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @return void
+	 */
+	public function hooks() {
+		add_filter( 'http_request_args', array( $this, 'addHeaderRequest' ) );
+	}
 
-    public function addHeaderRequest($arguments)
-    {
-        $body = $arguments['body'];
+	/**
+	 * The ApiHeader add header request.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param array $arguments The arguments.
+	 *
+	 * @return array
+	 */
+	public function addHeaderRequest( $arguments ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$body = $arguments['body'];
 
-        if (is_array($body)) {
-            $body = implode('', $body);
-        }
+		if ( is_array( $body ) ) {
+			$body = implode( '', $body );
+		}
 
-        $arguments['headers']['expect'] = !empty($body) && strlen($body) > 1048576 ? '100-Continue' : '';
+		$arguments['headers']['expect'] = ! empty( $body ) && strlen( $body ) > 1048576 ? '100-Continue' : '';
 
-        return $arguments;
-    }
+		return $arguments;
+	}
 }

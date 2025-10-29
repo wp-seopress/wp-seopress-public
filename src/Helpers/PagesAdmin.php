@@ -1,123 +1,202 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Helpers;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+/**
+ * PagesAdmin
+ */
 abstract class PagesAdmin {
-    const DASHBOARD        = 'dashboard';
+	/**
+	 * The dashboard constant.
+	 *
+	 * @var string
+	 */
+	const DASHBOARD = 'dashboard';
 
-    const XML_HTML_SITEMAP = 'xml_html_sitemap';
+	/**
+	 * The xml_html_sitemap constant.
+	 *
+	 * @var string
+	 */
+	const XML_HTML_SITEMAP = 'xml_html_sitemap';
 
-    const SOCIAL_NETWORKS  = 'social_networks';
+	/**
+	 * The social_networks constant.
+	 *
+	 * @var string
+	 */
+	const SOCIAL_NETWORKS = 'social_networks';
 
-    const TITLE_METAS      = 'titles_metas';
+	/**
+	 * The titles_metas constant.
+	 *
+	 * @var string
+	 */
+	const TITLE_METAS = 'titles_metas';
 
-    const ANALYTICS        = 'analytics';
+	/**
+	 * The analytics constant.
+	 *
+	 * @var string
+	 */
+	const ANALYTICS = 'analytics';
 
-    const ADVANCED         = 'advanced';
+	/**
+	 * The advanced constant.
+	 *
+	 * @var string
+	 */
+	const ADVANCED = 'advanced';
 
-    const TOOLS            = 'tools';
+	/**
+	 * The tools constant.
+	 *
+	 * @var string
+	 */
+	const TOOLS = 'tools';
 
-    const INSTANT_INDEXING = 'instant_indexing';
+	/**
+	 * The instant_indexing constant.
+	 *
+	 * @var string
+	 */
+	const INSTANT_INDEXING = 'instant_indexing';
 
-    const PRO              = 'pro';
+	/**
+	 * The pro constant.
+	 *
+	 * @var string
+	 */
+	const PRO = 'pro';
 
-    const SCHEMAS          = 'schemas';
+	/**
+	 * The schemas constant.
+	 *
+	 * @var string
+	 */
+	const SCHEMAS = 'schemas';
 
-    const BOT              = 'bot';
+	/**
+	 * The bot constant.
+	 *
+	 * @var string
+	 */
+	const BOT = 'bot';
 
-    const LICENSE          = 'license';
+	/**
+	 * The license constant.
+	 *
+	 * @var string
+	 */
+	const LICENSE = 'license';
 
-    public static function getPages() {
-        return apply_filters('seopress_pages_admin', [
-            self::DASHBOARD,
-            self::TITLE_METAS,
-            self::XML_HTML_SITEMAP,
-            self::SOCIAL_NETWORKS,
-            self::ANALYTICS,
-            self::ADVANCED,
-            self::TOOLS,
-            self::INSTANT_INDEXING,
-            self::PRO,
-            self::SCHEMAS,
-            self::BOT,
-            self::LICENSE,
-        ]);
-    }
+	/**
+	 * The get_pages function.
+	 *
+	 * @return array
+	 */
+	public static function getPages() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return apply_filters(
+			'seopress_pages_admin',
+			array(
+				self::DASHBOARD,
+				self::TITLE_METAS,
+				self::XML_HTML_SITEMAP,
+				self::SOCIAL_NETWORKS,
+				self::ANALYTICS,
+				self::ADVANCED,
+				self::TOOLS,
+				self::INSTANT_INDEXING,
+				self::PRO,
+				self::SCHEMAS,
+				self::BOT,
+				self::LICENSE,
+			)
+		);
+	}
 
-    /**
-     * @since 4.6.0
-     *
-     * @param string $page
-     *
-     * @return string
-     */
-    public static function getCapabilityByPage($page) {
-        switch ($page) {
-            case 'seopress-titles':
-                return self::TITLE_METAS;
-            case 'seopress-xml-sitemap':
-                return self::XML_HTML_SITEMAP;
-            case 'seopress-social':
-                return self::SOCIAL_NETWORKS;
-            case 'seopress-google-analytics':
-                return self::ANALYTICS;
-            case 'seopress-import-export':
-                return self::TOOLS;
-            case 'seopress-instant-indexing':
-                return self::INSTANT_INDEXING;
-            case 'seopress-pro-page':
-                return self::PRO;
-            case 'seopress-advanced':
-                return self::ADVANCED;
-            case 'seopress-bot-batch':
-                return self::BOT;
-            default:
-                return apply_filters('seopress_get_capability_by_page', null);
-        }
-    }
+	/**
+	 * The get_capability_by_page function.
+	 *
+	 * @param string $page The page.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @return string
+	 */
+	public static function getCapabilityByPage( $page ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		switch ( $page ) {
+			case 'seopress-titles':
+				return self::TITLE_METAS;
+			case 'seopress-xml-sitemap':
+				return self::XML_HTML_SITEMAP;
+			case 'seopress-social':
+				return self::SOCIAL_NETWORKS;
+			case 'seopress-google-analytics':
+				return self::ANALYTICS;
+			case 'seopress-import-export':
+				return self::TOOLS;
+			case 'seopress-instant-indexing':
+				return self::INSTANT_INDEXING;
+			case 'seopress-pro-page':
+				return self::PRO;
+			case 'seopress-advanced':
+				return self::ADVANCED;
+			case 'seopress-bot-batch':
+				return self::BOT;
+			default:
+				return apply_filters( 'seopress_get_capability_by_page', null );
+		}
+	}
 
-    /**
-     * @since 4.6.0
-     *
-     * @param string $capability
-     *
-     * @return string
-     */
-    public static function getPageByCapability($capability) {
-        switch ($capability) {
-            case self::TITLE_METAS:
-                return 'seopress-titles';
-            case self::XML_HTML_SITEMAP:
-                return 'seopress-xml-sitemap';
-            case self::SOCIAL_NETWORKS:
-                return 'seopress-social';
-            case self::ANALYTICS:
-                return 'seopress-google-analytics';
-            case self::TOOLS:
-                return 'seopress-import-export';
-            case self::INSTANT_INDEXING:
-                return 'seopress-instant-indexing';
-            case self::PRO:
-                return 'seopress-pro-page';
-            case self::ADVANCED:
-                return 'seopress-advanced';
-            case self::BOT:
-                return 'seopress-bot-batch';
-            default:
-                return apply_filters('seopress_get_page_by_capability', null);
-        }
-    }
+	/**
+	 * The get_page_by_capability function.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @param string $capability The capability.
+	 *
+	 * @return string
+	 */
+	public static function getPageByCapability( $capability ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		switch ( $capability ) {
+			case self::TITLE_METAS:
+				return 'seopress-titles';
+			case self::XML_HTML_SITEMAP:
+				return 'seopress-xml-sitemap';
+			case self::SOCIAL_NETWORKS:
+				return 'seopress-social';
+			case self::ANALYTICS:
+				return 'seopress-google-analytics';
+			case self::TOOLS:
+				return 'seopress-import-export';
+			case self::INSTANT_INDEXING:
+				return 'seopress-instant-indexing';
+			case self::PRO:
+				return 'seopress-pro-page';
+			case self::ADVANCED:
+				return 'seopress-advanced';
+			case self::BOT:
+				return 'seopress-bot-batch';
+			default:
+				return apply_filters( 'seopress_get_page_by_capability', null );
+		}
+	}
 
-    /**
-     * @since 4.6.0
-     *
-     * @param string $capability
-     *
-     * @return string
-     */
-    public static function getCustomCapability($capability) {
-        return sprintf('seopress_manage_%s', $capability);
-    }
+	/**
+	 * The get_custom_capability function.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @param string $capability The capability.
+	 *
+	 * @return string
+	 */
+	public static function getCustomCapability( $capability ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return sprintf( 'seopress_manage_%s', $capability );
+	}
 }

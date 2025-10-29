@@ -1,118 +1,144 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\ManualHooks\Thirds\WooCommerce;
 
 use SEOPress\Thirds\WooCommerce\WooCommerceAnalyticsService;
 
-if ( ! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
+/**
+ * WooCommerceAnalytics
+ */
 class WooCommerceAnalytics {
 
-    /**
-     * @var WooCommerceAnalyticsService
-     */
-    protected $wooCommerceAnalytics;
+	/**
+	 * The woocommerce_analytics property.
+	 *
+	 * @var WooCommerceAnalyticsService
+	 */
+	protected $woocommerce_analytics;
 
-    public function __construct() {
-        /**
-         * @var WooCommerceAnalyticsService
-         */
-        $this->wooCommerceAnalytics = seopress_get_service('WooCommerceAnalyticsService');
-    }
+	/**
+	 * The WooCommerceAnalytics constructor.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @return void
+	 */
+	public function __construct() {
+		/**
+		 * The WooCommerceAnalyticsService instance.
+		 *
+		 * @var WooCommerceAnalyticsService
+		 */
+		$this->woocommerce_analytics = seopress_get_service( 'WooCommerceAnalyticsService' );
+	}
 
-    /**
-     * @since 4.4.0
-     *
-     * @return void
-     */
-    public function hooks() {
-        if ( ! seopress_get_service('WooCommerceActivate')->isActive()) {
-            return;
-        }
+	/**
+	 * Registers hooks for WooCommerce Analytics.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @return void
+	 */
+	public function hooks() {
+		if ( ! seopress_get_service( 'WooCommerceActivate' )->isActive() ) {
+			return;
+		}
 
-        if ('1' !== seopress_get_toggle_option('google-analytics')) {
-            return;
-        }
+		if ( '1' !== seopress_get_toggle_option( 'google-analytics' ) ) {
+			return;
+		}
 
-        $addToCartOption = seopress_get_service('GoogleAnalyticsOption')->getAddToCart();
+		$add_to_cart_option = seopress_get_service( 'GoogleAnalyticsOption' )->getAddToCart();
 
-        if ($addToCartOption) {
-            // Listing page
-            add_action('woocommerce_after_shop_loop_item', [$this, 'addToCart']);
+		if ( $add_to_cart_option ) {
+			// Listing page.
+			add_action( 'woocommerce_after_shop_loop_item', array( $this, 'addToCart' ) );
 
-            //Single
-            add_action('woocommerce_after_add_to_cart_button', [$this, 'singleAddToCart']);
-        }
+			// Single.
+			add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'singleAddToCart' ) );
+		}
 
-        $removeFromCartOption = seopress_get_service('GoogleAnalyticsOption')->getRemoveFromCart();
+		$remove_from_cart_option = seopress_get_service( 'GoogleAnalyticsOption' )->getRemoveFromCart();
 
-        if ($removeFromCartOption) {
-            // Cart page
-            add_filter('woocommerce_cart_item_remove_link', [$this, 'removeFromCart'], 10, 2);
-        }
+		if ( $remove_from_cart_option ) {
+			// Cart page.
+			add_filter( 'woocommerce_cart_item_remove_link', array( $this, 'removeFromCart' ), 10, 2 );
+		}
 
-        if ($addToCartOption && $removeFromCartOption) {
-            // Before update
-            add_action('woocommerce_cart_actions', [$this, 'updateCartOrCheckout']);
-        }
+		if ( $add_to_cart_option && $remove_from_cart_option ) {
+			// Before update.
+			add_action( 'woocommerce_cart_actions', array( $this, 'updateCartOrCheckout' ) );
+		}
 
-        $getViewItemsDetails = seopress_get_service('GoogleAnalyticsOption')->getViewItemsDetails();
+		$get_view_items_details = seopress_get_service( 'GoogleAnalyticsOption' )->getViewItemsDetails();
 
-        if ($getViewItemsDetails) {
-            add_action('wp_head', [$this, 'singleViewItemsDetails']);
-        }
-    }
+		if ( $get_view_items_details ) {
+			add_action( 'wp_head', array( $this, 'singleViewItemsDetails' ) );
+		}
+	}
 
-    /**
-     * @since 4.4.0
-     *
-     * @return void
-     */
-    public function addToCart() {
-        $this->wooCommerceAnalytics->addToCart();
-    }
+	/**
+	 * Handles the add to cart event.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @return void
+	 */
+	public function addToCart() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->woocommerce_analytics->addToCart();
+	}
 
-    /**
-     * @since 4.4.0
-     *
-     * @return void
-     */
-    public function singleAddToCart() {
-        $this->wooCommerceAnalytics->singleAddToCart();
-    }
+	/**
+	 * Handles the single add to cart event.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @return void
+	 */
+	public function singleAddToCart() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->woocommerce_analytics->singleAddToCart();
+	}
 
-    /**
-     * @since 4.4.0
-     *
-     * @param string $sprintf
-     * @param string $cartKey
-     *
-     * @return void
-     */
-    public function removeFromCart($sprintf, $cartKey) {
-        return $this->wooCommerceAnalytics->removeFromCart($sprintf, $cartKey);
-    }
+	/**
+	 * Handles the remove from cart event.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param string $sprintf  The sprintf.
+	 * @param string $cart_key The cart key.
+	 *
+	 * @return string
+	 */
+	public function removeFromCart( $sprintf, $cart_key ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->woocommerce_analytics->removeFromCart( $sprintf, $cart_key );
+	}
 
-    /**
-     * @since 4.4.0
-     *
-     * @return void
-     */
-    public function updateCartOrCheckout() {
-        $this->wooCommerceAnalytics->updateCartOrCheckout();
-    }
+	/**
+	 * Handles the update cart or checkout event.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @return void
+	 */
+	public function updateCartOrCheckout() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->woocommerce_analytics->updateCartOrCheckout();
+	}
 
-    /**
-     * @since 7.0.0
-     *
-     * @return void
-     */
-    public function singleViewItemsDetails() {
-        if (!is_singular('product')) {
-            return;
-        }
-        $this->wooCommerceAnalytics->singleViewItemsDetails();
-    }
+	/**
+	 * Handles the single view items details event.
+	 *
+	 * @since 7.0.0
+	 *
+	 * @return void
+	 */
+	public function singleViewItemsDetails() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( ! is_singular( 'product' ) ) {
+			return;
+		}
+		$this->woocommerce_analytics->singleViewItemsDetails();
+	}
 }

@@ -1,57 +1,66 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\SocialTwitter\Specifications\Image;
 
 use SEOPress\Services\Metas\SocialTwitter\Specifications\Image\AbstractImageSpecification;
 
-class FeaturedImageSpecification extends AbstractImageSpecification
-{
-    const NAME_SERVICE = 'FeaturedImageSocialTwitterSpecification';
+/**
+ * FeaturedImageSpecification
+ */
+class FeaturedImageSpecification extends AbstractImageSpecification {
 
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
+	const NAME_SERVICE = 'FeaturedImageSocialTwitterSpecification';
 
-        $post = $params['post'];
-        $GLOBALS['post'] = $post;
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) {
 
-        return $this->applyFilter([
-            'url' =>  get_the_post_thumbnail_url($post->ID, 'large'),
-        ], $params);
+		$post            = $params['post'];
+		$GLOBALS['post'] = $post; // phpcs:ignore
 
-    }
+		return $this->applyFilter(
+			array(
+				'url' => get_the_post_thumbnail_url( $post->ID, 'large' ),
+			),
+			$params
+		);
+	}
 
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'title' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $context = $params['context'];
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'title' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) {
+		$context = $params['context'];
 
-        if ($context['is_singular'] ) {
-            $post = $params['post'];
+		if ( $context['is_singular'] ) {
+			$post = $params['post'];
 
-            if (has_post_thumbnail($post->ID)) {
-                return true;
-            }
-        }
+			if ( has_post_thumbnail( $post->ID ) ) {
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 }
-
-

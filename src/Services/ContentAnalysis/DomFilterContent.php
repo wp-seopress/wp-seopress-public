@@ -1,173 +1,179 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\ContentAnalysis;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-class DomFilterContent
-{
-    /**
-     * @param string $str
-     * @param mixed  $id
-     *
-     * @return array
-     */
-    public function getData($str, $id)
-    {
-        if (empty($str)) {
-            return [
-                'code' => 'no_data',
-            ];
-        }
+/**
+ * DomFilterContent
+ */
+class DomFilterContent {
 
-        $dom                     = new \DOMDocument();
-        $internalErrors          = libxml_use_internal_errors(true);
-        $dom->preserveWhiteSpace = false;
+	/**
+	 * The getData function.
+	 *
+	 * @param string $str The string.
+	 * @param mixed  $id The id.
+	 *
+	 * @return array
+	 */
+	public function getData( $str, $id ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( empty( $str ) ) {
+			return array(
+				'code' => 'no_data',
+			);
+		}
 
-        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $str);
+		$dom                     = new \DOMDocument();
+		$internal_errors         = libxml_use_internal_errors( true );
+		$dom->preserveWhiteSpace = false; //phpcs:ignore
 
-        //Disable wptexturize
-        add_filter('run_wptexturize', '__return_false');
+		$dom->loadHTML( '<?xml encoding="utf-8" ?>' . $str );
 
-        $xpath = new \DOMXPath($dom);
+		// Disable wptexturize.
+		add_filter( 'run_wptexturize', '__return_false' );
 
-        $data = [
-            'title' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Title',
-                'value' => '',
-            ],
-            'description' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Description',
-                'value' => '',
-            ],
-            'og:title' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Title',
-                'value' => '',
-            ],
-            'og:description' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Description',
-                'value' => '',
-            ],
-            'og:image' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Image',
-                'value' => '',
-            ],
-            'og:url' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Url',
-                'value' => '',
-            ],
-            'og:site_name' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Sitename',
-                'value' => '',
-            ],
-            'twitter:title' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Twitter\Title',
-                'value' => '',
-            ],
-            'twitter:description' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Twitter\Description',
-                'value' => '',
-            ],
-            'twitter:image' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Twitter\Image',
-                'value' => '',
-            ],
-            'twitter:image:src' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Twitter\ImageSrc',
-                'value' => '',
-            ],
-            'canonical' => [
-                'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Canonical',
-                'value' => '',
-            ],
-            'h1' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Hn',
-                'value'   => '',
-                'options' => [
-                    'hn' => 'h1',
-                ],
-            ],
-            'h2' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Hn',
-                'value'   => '',
-                'options' => [
-                    'hn' => 'h2',
-                ],
-            ],
-            'h3' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Hn',
-                'value'   => '',
-                'options' => [
-                    'hn' => 'h3',
-                ],
-            ],
-            'images' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Image',
-                'value'   => '',
-            ],
-            'meta_robots' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Metas\Robot',
-                'value'   => '',
-            ],
-            'meta_google' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Metas\Google',
-                'value'   => '',
-            ],
-            'links_no_follow' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\LinkNoFollow',
-                'value'   => '',
-            ],
-            'outbound_links' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\OutboundLinks',
-                'value'   => '',
-            ],
-            'internal_links' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\InternalLinks',
-                'value'   => '',
-                'options' => [
-                    'id' => $id,
-                ],
-            ],
-            'schemas' => [
-                'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Schema',
-                'value'   => '',
-            ],
-        ];
+		$xpath = new \DOMXPath( $dom );
 
-        $data = apply_filters('seopress_get_data_dom_filter_content', $data);
+		$data = array(
+			'title'               => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Title',
+				'value' => '',
+			),
+			'description'         => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Description',
+				'value' => '',
+			),
+			'og:title'            => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Title',
+				'value' => '',
+			),
+			'og:description'      => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Description',
+				'value' => '',
+			),
+			'og:image'            => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Image',
+				'value' => '',
+			),
+			'og:url'              => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Url',
+				'value' => '',
+			),
+			'og:site_name'        => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OG\Sitename',
+				'value' => '',
+			),
+			'twitter:title'       => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Twitter\Title',
+				'value' => '',
+			),
+			'twitter:description' => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Twitter\Description',
+				'value' => '',
+			),
+			'twitter:image'       => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Twitter\Image',
+				'value' => '',
+			),
+			'twitter:image:src'   => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Twitter\ImageSrc',
+				'value' => '',
+			),
+			'canonical'           => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Canonical',
+				'value' => '',
+			),
+			'h1'                  => array(
+				'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Hn',
+				'value'   => '',
+				'options' => array(
+					'hn' => 'h1',
+				),
+			),
+			'h2'                  => array(
+				'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Hn',
+				'value'   => '',
+				'options' => array(
+					'hn' => 'h2',
+				),
+			),
+			'h3'                  => array(
+				'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\Hn',
+				'value'   => '',
+				'options' => array(
+					'hn' => 'h3',
+				),
+			),
+			'images'              => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Image',
+				'value' => '',
+			),
+			'meta_robots'         => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Metas\Robot',
+				'value' => '',
+			),
+			'meta_google'         => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Metas\Google',
+				'value' => '',
+			),
+			'links_no_follow'     => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\LinkNoFollow',
+				'value' => '',
+			),
+			'outbound_links'      => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\OutboundLinks',
+				'value' => '',
+			),
+			'internal_links'      => array(
+				'class'   => '\SEOPress\Services\ContentAnalysis\GetContent\InternalLinks',
+				'value'   => '',
+				'options' => array(
+					'id' => $id,
+				),
+			),
+			'schemas'             => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Schema',
+				'value' => '',
+			),
+		);
 
-        foreach ($data as $key => $item) {
-            $class = new $item['class']();
+		$data = apply_filters( 'seopress_get_data_dom_filter_content', $data );
 
-            $options = isset($item['options']) ? $item['options'] : [];
+		foreach ( $data as $key => $item ) {
+			$class = new $item['class']();
 
-            if (method_exists($class, 'getDataByXPath')) {
-                $data[$key]['value'] = $class->getDataByXPath($xpath, $options);
-            } elseif (method_exists($class, 'getDataByDom')) {
-                $data[$key]['value'] = $class->getDataByDom($dom, $options);
-            }
-        }
+			$options = isset( $item['options'] ) ? $item['options'] : array();
 
-        $data['id'] = [
-            "value" => $id
-        ];
+			if ( method_exists( $class, 'getDataByXPath' ) ) {
+				$data[ $key ]['value'] = $class->getDataByXPath( $xpath, $options );
+			} elseif ( method_exists( $class, 'getDataByDom' ) ) {
+				$data[ $key ]['value'] = $class->getDataByDom( $dom, $options );
+			}
+		}
 
-        $taxname = isset($_GET['tax_name']) ? sanitize_text_field(wp_unslash($_GET['tax_name'])) : null;
-        if (!empty($taxname)) {
-            $term = get_term($id, $taxname);
-            $data["permalink"] = [
-                "value" => esc_url( get_term_link( $term->slug, $taxname ) )
-            ];
-        } else {
-            $data["permalink"] = [
-                "value" => get_permalink($id)
-            ];
-        }
+		$data['id'] = array(
+			'value' => $id,
+		);
 
-        $data['id_homepage'] = [
-            "value" => get_option('page_on_front')
-        ];
+		$taxname = isset( $_GET['tax_name'] ) ? sanitize_text_field( wp_unslash( $_GET['tax_name'] ) ) : null;
+		if ( ! empty( $taxname ) ) {
+			$term              = get_term( $id, $taxname );
+			$data['permalink'] = array(
+				'value' => esc_url( get_term_link( $term->slug, $taxname ) ),
+			);
+		} else {
+			$data['permalink'] = array(
+				'value' => get_permalink( $id ),
+			);
+		}
 
-        return $data;
-    }
+		$data['id_homepage'] = array(
+			'value' => get_option( 'page_on_front' ),
+		);
+
+		return $data;
+	}
 }

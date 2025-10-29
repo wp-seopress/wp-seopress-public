@@ -1,57 +1,63 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\SocialFacebook\Specifications\Description;
 
 use SEOPress\Helpers\Metas\SocialSettings;
 use SEOPress\Services\Metas\SocialFacebook\Specifications\Description\AbstractDescriptionSpecification;
 
-class SingularSpecification extends AbstractDescriptionSpecification
-{
-    const NAME_SERVICE = 'SingularDescriptionSocialFacebookSpecification';
+/**
+ * SingularSpecification
+ */
+class SingularSpecification extends AbstractDescriptionSpecification {
 
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
+	const NAME_SERVICE = 'SingularDescriptionSocialFacebookSpecification';
 
-        $context = $params['context'];
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) {
 
-        $post = $params['post'];
+		$context = $params['context'];
 
-        $value = seopress_get_service('SocialOption')->getFacebookDescriptionPostOption($post->ID);
+		$post = $params['post'];
 
-        return $this->applyFilter(seopress_get_service('TagsToString')->replace($value, $context));
-    }
+		$value = seopress_get_service( 'SocialOption' )->getFacebookDescriptionPostOption( $post->ID );
+
+		return $this->applyFilter( seopress_get_service( 'TagsToString' )->replace( $value, $context ) );
+	}
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'title' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $context = $params['context'];
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'title' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) {
+		$context = $params['context'];
 
-        if ($context['is_singular'] ) {
-            $post = $params['post'];
-            if(!empty(seopress_get_service('SocialOption')->getFacebookDescriptionPostOption($post->ID))){
-                return true;
-            }
-        }
+		if ( $context['is_singular'] ) {
+			$post = $params['post'];
+			if ( ! empty( seopress_get_service( 'SocialOption' )->getFacebookDescriptionPostOption( $post->ID ) ) ) {
+				return true;
+			}
+		}
 
-        return false;
-
-    }
+		return false;
+	}
 }
-
-

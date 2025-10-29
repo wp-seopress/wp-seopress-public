@@ -1,84 +1,106 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Actions\Api\Options;
 
-if ( ! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 use SEOPress\Core\Hooks\ExecuteHooks;
 
+/**
+ * Dashboard Settings
+ */
 class DashboardSettings implements ExecuteHooks {
-    /**
+	/**
 	 * Current user ID
 	 *
 	 * @var int
 	 */
-    private $current_user = '';
+	private $current_user = '';
 
-    public function hooks() {
-        $this->current_user = wp_get_current_user()->ID;
-        add_action('rest_api_init', [$this, 'register']);
-    }
+	/**
+	 * The Dashboard Settings hooks.
+	 *
+	 * @since 5.0.0
+	 */
+	public function hooks() {
+		$this->current_user = wp_get_current_user()->ID;
+		add_action( 'rest_api_init', array( $this, 'register' ) );
+	}
 
-    /**
-     * @since 5.5
-     *
-     * @return boolean
-     */
-    public function permissionCheck(\WP_REST_Request $request) {
-        $nonce = $request->get_header('x-wp-nonce');
-        if ($nonce && !wp_verify_nonce($nonce, 'wp_rest')) {
-            return false;
-        }
+	/**
+	 * The Dashboard Settings permission check.
+	 *
+	 * @param \WP_REST_Request $request The request.
+	 *
+	 * @since 5.5
+	 *
+	 * @return boolean
+	 */
+	public function permissionCheck( \WP_REST_Request $request ) {
+		$nonce = $request->get_header( 'x-wp-nonce' );
+		if ( $nonce && ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
+			return false;
+		}
 
-        $current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
-        if ( ! user_can( $current_user, 'manage_options' )) {
-            return false;
-        }
+		$current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
+		if ( ! user_can( $current_user, 'manage_options' ) ) {
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * @since 5.5
-     *
-     * @return void
-     */
-    public function register() {
-        register_rest_route('seopress/v1', '/options/dashboard-settings', [
-            'methods'             => 'GET',
-            'callback'            => [$this, 'processGet'],
-            'permission_callback' => [$this, 'permissionCheck'],
-        ]);
-    }
+	/**
+	 * The Dashboard Settings register.
+	 *
+	 * @since 5.5
+	 *
+	 * @return void
+	 */
+	public function register() {
+		register_rest_route(
+			'seopress/v1',
+			'/options/dashboard-settings',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'processGet' ),
+				'permission_callback' => array( $this, 'permissionCheck' ),
+			)
+		);
+	}
 
-    /**
-     * @since 5.5
-     */
-    public function processGet(\WP_REST_Request $request) {
-        $options  = get_option('seopress_dashboard_option_name');
-        $toggles  = get_option('seopress_toggle');
-        $notices  = get_option('seopress_notices');
+	/**
+	 * The Dashboard Settings process get.
+	 *
+	 * @param \WP_REST_Request $request The request.
+	 *
+	 * @since 5.5
+	 */
+	public function processGet( \WP_REST_Request $request ) {
+		$options = get_option( 'seopress_dashboard_option_name' );
+		$toggles = get_option( 'seopress_toggle' );
+		$notices = get_option( 'seopress_notices' );
 
-        if (empty($options) && empty($toggles) && empty($notices)) {
-            return;
-        }
+		if ( empty( $options ) && empty( $toggles ) && empty( $notices ) ) {
+			return;
+		}
 
-        $data = [];
+		$data = array();
 
-        foreach($options as $key => $value) {
-            $data[$key] = $value;
-        }
+		foreach ( $options as $key => $value ) {
+			$data[ $key ] = $value;
+		}
 
-        foreach($toggles as $key => $value) {
-            $data[$key] = $value;
-        }
+		foreach ( $toggles as $key => $value ) {
+			$data[ $key ] = $value;
+		}
 
-        foreach($notices as $key => $value) {
-            $data[$key] = $value;
-        }
+		foreach ( $notices as $key => $value ) {
+			$data[ $key ] = $value;
+		}
 
-        return new \WP_REST_Response($data);
-    }
+		return new \WP_REST_Response( $data );
+	}
 }

@@ -1,25 +1,40 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Helpers;
 
-if ( ! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
+/**
+ * CachedMemoizeFunctions
+ */
 abstract class CachedMemoizeFunctions {
-   protected static $cache = [];
+	/**
+	 * The cache.
+	 *
+	 * @var array
+	 */
+	protected static $cache = array();
 
-   public static function memoize($func){
-        $cache = &self::$cache;
-        return function() use ($func, &$cache){
-            $args = func_get_args();
-            $key = md5(serialize($args));
+	/**
+	 * The memoize function.
+	 *
+	 * @param callable $func The function.
+	 *
+	 * @return callable
+	 */
+	public static function memoize( $func ) {
+		$cache = &self::$cache;
+		return function () use ( $func, &$cache ) {
+			$args = func_get_args();
+			$key  = md5( serialize( $args ) ); // phpcs:ignore -- This is safe to use serialize.
 
-            if ( ! isset($cache[$key])) {
-                $cache[$key] = call_user_func_array($func, $args);
-            }
+			if ( ! isset( $cache[ $key ] ) ) {
+				$cache[ $key ] = call_user_func_array( $func, $args );
+			}
 
-            return $cache[$key];
-        };
-   }
+			return $cache[ $key ];
+		};
+	}
 }

@@ -1,201 +1,250 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Context;
 
-if ( ! defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ContextPage
-{
+/**
+ * ContextPage
+ */
+class ContextPage {
+
+	/**
+	 * The context.
+	 *
+	 * @var array
+	 */
 	protected $context;
 
-	protected function getEmptyContext(){
-		return  [
-			'post'           => null,
-			'product'        => null,
-			'term_id'        => null,
-			'is_singular'    => false,
-			'is_single'      => false,
+	/**
+	 * The getEmptyContext function.
+	 *
+	 * @return array
+	 */
+	protected function getEmptyContext() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return array(
+			'post'                 => null,
+			'product'              => null,
+			'term_id'              => null,
+			'is_singular'          => false,
+			'is_single'            => false,
 			'is_post_type_archive' => false,
-			'is_singular'      => false,
-			'is_home'        => false,
-			'is_front_page'  => false,
-			'is_product'     => false,
-			'is_archive'     => false,
-			'is_category'    => false,
-			'is_author'      => false,
-			'is_tax'         => false,
-			'is_tag'         => false,
-			'is_search'      => false,
-			'is_date'        => false,
-			'is_404'         => false,
-			'has_category'   => false,
-			'has_tag'        => false,
-			'paged'          => null,
-			'schemas_manual' => [],
-		];
+			'is_home'              => false,
+			'is_front_page'        => false,
+			'is_product'           => false,
+			'is_archive'           => false,
+			'is_category'          => false,
+			'is_author'            => false,
+			'is_tax'               => false,
+			'is_tag'               => false,
+			'is_search'            => false,
+			'is_date'              => false,
+			'is_404'               => false,
+			'has_category'         => false,
+			'has_tag'              => false,
+			'paged'                => null,
+			'schemas_manual'       => array(),
+		);
 	}
 
-	protected function buildTerm($id, $options){
-		$taxonomy = isset($options['taxonomy']) ? $options['taxonomy'] : 'category';
-		$term = get_term_by('id', $id, $taxonomy);
+	/**
+	 * The buildTerm function.
+	 *
+	 * @param int   $id The id.
+	 * @param array $options The options.
+	 */
+	protected function buildTerm( $id, $options ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$taxonomy = isset( $options['taxonomy'] ) ? $options['taxonomy'] : 'category';
+		$term     = get_term_by( 'id', $id, $taxonomy );
 
-		if ($term) {
-			$this->setIsCategory(true);
-			$this->setTermId($id);
+		if ( $term ) {
+			$this->setIsCategory( true );
+			$this->setTermId( $id );
 			$this->context['term'] = $term;
 		}
 	}
 
-	protected function buildIsHome(){
-		if( ! ( $this->context['is_404'] || $this->context['is_search'] || $this->context['is_front_page']  || $this->context['is_archive'] || $this->context['is_singular'] )){
+	/**
+	 * The buildIsHome function.
+	 */
+	protected function buildIsHome() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( ! ( $this->context['is_404'] || $this->context['is_search'] || $this->context['is_front_page'] || $this->context['is_archive'] || $this->context['is_singular'] ) ) {
 			$this->context['is_home'] = true;
 		}
 	}
 
-	protected function buildIsFrontPage($id){
-		$showOnFront = get_option( 'show_on_front' );
-		$pageOnFront = get_option( 'page_on_front' );
+	/**
+	 * The buildIsFrontPage function.
+	 *
+	 * @param int $id The id.
+	 */
+	protected function buildIsFrontPage( $id ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$show_on_front = get_option( 'show_on_front' );
+		$page_on_front = get_option( 'page_on_front' );
 
-		if ( 'posts' === $showOnFront && $id === $pageOnFront ) {
-			$this->setIsFrontPage(true);
+		if ( 'posts' === $show_on_front && $id === $page_on_front ) {
+			$this->setIsFrontPage( true );
 			return;
-		} elseif ( 'page' === $showOnFront && $id === $pageOnFront
+		} elseif ( 'page' === $show_on_front && $id === $page_on_front
 		) {
-			$this->setIsFrontPage(true);
+			$this->setIsFrontPage( true );
 			return;
 		}
 
-		$this->setIsFrontPage(false);
-
+		$this->setIsFrontPage( false );
 	}
 
-	protected function buildPost($id){
+	/**
+	 * The buildPost function.
+	 *
+	 * @param int $id The id.
+	 */
+	protected function buildPost( $id ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 
-		$isPostType = get_post_type($id);
+		$is_post_type = get_post_type( $id );
 
-		if ($isPostType) {
-			$this->setPostById((int) $id);
-			$terms = get_the_terms($id, 'post_tag');
+		if ( $is_post_type ) {
+			$this->setPostById( (int) $id );
+			$terms = get_the_terms( $id, 'post_tag' );
 
-			if ( ! empty($terms)) {
-				$this->setHasTag(true);
+			if ( ! empty( $terms ) ) {
+				$this->setHasTag( true );
 			}
 
-			$categories = get_the_terms($id, 'category');
-			if ( ! empty($categories)) {
-				$this->setHasCategory(true);
+			$categories = get_the_terms( $id, 'category' );
+			if ( ! empty( $categories ) ) {
+				$this->setHasCategory( true );
 			}
 
-			$this->setIsPostType($isPostType, true);
+			$this->setIsPostType( $is_post_type, true );
 
-			// TODO : Need better verification
-			$this->setIsSingle(true);
+			// TODO : Need better verification.
+			$this->setIsSingle( true );
 			$this->context['is_singular'] = true;
 		}
 
-		$this->buildIsFrontPage($id);
+		$this->buildIsFrontPage( $id );
 
-
-		$term = term_exists($id);
-		if (null !== $term) {
-			$this->setIsCategory(true);
-			$this->setTermId($id);
+		$term = term_exists( $id );
+		if ( null !== $term ) {
+			$this->setIsCategory( true );
+			$this->setTermId( $id );
 		}
-
 
 		$this->buildIsHome();
 	}
 
 	/**
+	 * The buildContextWithCurrentId function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param int   $id
-	 * @param array $options
+	 * @param int   $id The id.
+	 * @param array $options The options.
 	 *
-	 * @return void
+	 * @return $this
 	 */
-	public function buildContextWithCurrentId($id, $options = []) {
-		$typeBuild = isset($options['type']) ? $options['type'] : 'post';
+	public function buildContextWithCurrentId( $id, $options = array() ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$type_build = isset( $options['type'] ) ? $options['type'] : 'post';
 
 		$this->buildContextDefault();
 
-		switch($typeBuild) {
+		switch ( $type_build ) {
 			case 'post':
-				$this->buildPost($id);
+				$this->buildPost( $id );
 				break;
 			case 'term':
-				$this->buildTerm($id, $options);
+				$this->buildTerm( $id, $options );
 				break;
 		}
-
 
 		return $this;
 	}
 
 	/**
+	 * The buildContextDefault function.
+	 *
 	 * @since 4.4.0
 	 *
 	 * @return array
 	 */
-	public function buildContextDefault() {
+	public function buildContextDefault() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		global $post;
 		global $product;
 
 		$context = $this->getEmptyContext();
 
-		$context['post'] = $post;
+		$context['post']    = $post;
 		$context['product'] = $product;
-		$context['paged'] = get_query_var('paged');
+		$context['paged']   = get_query_var( 'paged' );
 
-		if (is_singular()) {
-			$schemasManual = get_post_meta($context['post']->ID, '_seopress_pro_schemas_manual', true);
-			if ( ! $schemasManual) {
-				$schemasManual = [];
+		if ( is_singular() ) {
+			$schemas_manual = get_post_meta( $context['post']->ID, '_seopress_pro_schemas_manual', true );
+			if ( ! $schemas_manual ) {
+				$schemas_manual = array();
 			}
-			$context       = array_replace($context, ['is_single' => true, 'schemas_manual' => $schemasManual]);
+			$context = array_replace(
+				$context,
+				array(
+					'is_single'      => true,
+					'schemas_manual' => $schemas_manual,
+				)
+			);
 		}
-		if (is_home()) {
-			$context = array_replace($context, ['is_home' => true]);
+		if ( is_home() ) {
+			$context = array_replace( $context, array( 'is_home' => true ) );
 		}
-		if (is_front_page()) {
-			$context = array_replace($context, ['is_front_page' => true]);
+		if ( is_front_page() ) {
+			$context = array_replace( $context, array( 'is_front_page' => true ) );
 		}
-		if (is_singular()) {
-			$context = array_replace($context, ['is_singular' => true]);
+		if ( is_singular() ) {
+			$context = array_replace( $context, array( 'is_singular' => true ) );
 		}
-		if (is_post_type_archive()) {
-			$context = array_replace($context, ['is_archive' => true, 'is_post_type_archive' => true]);
+		if ( is_post_type_archive() ) {
+			$context = array_replace(
+				$context,
+				array(
+					'is_archive'           => true,
+					'is_post_type_archive' => true,
+				)
+			);
 		}
-		if (is_tax() || is_category() || is_tag()) {
+		if ( is_tax() || is_category() || is_tag() ) {
 			$object = get_queried_object();
 
-			if($object !== null && property_exists($object, 'term_id')){
-				$context = array_replace($context, ['term_id' => $object->term_id, 'term' => $object ]);
+			if ( null !== $object && property_exists( $object, 'term_id' ) ) {
+				$context = array_replace(
+					$context,
+					array(
+						'term_id' => $object->term_id,
+						'term'    => $object,
+					)
+				);
 			}
-			$context = array_replace($context, ['is_category' => true]);
+			$context = array_replace( $context, array( 'is_category' => true ) );
 		}
-		if (is_tax()) {
-			$context = array_replace($context, ['is_tax' => true]);
+		if ( is_tax() ) {
+			$context = array_replace( $context, array( 'is_tax' => true ) );
 		}
-		if (is_tag()) {
-			$context = array_replace($context, ['is_tag' => true]);
+		if ( is_tag() ) {
+			$context = array_replace( $context, array( 'is_tag' => true ) );
 		}
-		if (is_author()) {
-			$context = array_replace($context, ['is_author' => true]);
+		if ( is_author() ) {
+			$context = array_replace( $context, array( 'is_author' => true ) );
 		}
-		if (is_404()) {
-			$context = array_replace($context, ['is_404' => true]);
+		if ( is_404() ) {
+			$context = array_replace( $context, array( 'is_404' => true ) );
 		}
-		if (is_search()) {
-			$context = array_replace($context, ['is_search' => true]);
+		if ( is_search() ) {
+			$context = array_replace( $context, array( 'is_search' => true ) );
 		}
-		if (has_category()) {
-			$context = array_replace($context, ['has_category' => true]);
+		if ( has_category() ) {
+			$context = array_replace( $context, array( 'has_category' => true ) );
 		}
-		if (has_tag()) {
-			$context = array_replace($context, ['has_tag' => true]);
+		if ( has_tag() ) {
+			$context = array_replace( $context, array( 'has_tag' => true ) );
 		}
 
 		$this->context = $context;
@@ -204,12 +253,14 @@ class ContextPage
 	}
 
 	/**
+	 * The getContext function.
+	 *
 	 * @since 4.4.0
 	 *
 	 * @return array
 	 */
-	public function getContext() {
-		if ($this->context) {
+	public function getContext() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( $this->context ) {
 			return $this->context;
 		}
 
@@ -219,13 +270,15 @@ class ContextPage
 	}
 
 	/**
+	 * The setContextBooleanByKey function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param string $key
-	 * @param bool   $value
+	 * @param string $key The key.
+	 * @param bool   $value The value.
 	 */
-	protected function setContextBooleanByKey($key, $value) {
-		$this->context[$key] = $value;
+	protected function setContextBooleanByKey( $key, $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->context[ $key ] = $value;
 
 		return $this;
 	}
@@ -233,101 +286,118 @@ class ContextPage
 
 
 	/**
+	 * The setTermId function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param string $value
+	 * @param string $value The value.
 	 */
-	public function setTermId($value) {
+	public function setTermId( $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		$this->context['term_id'] = $value;
 
 		return $this;
 	}
 
 	/**
+	 * The setIsSingle function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param string $value
+	 * @param string $value The value.
 	 */
-	public function setIsSingle($value) {
-		$this->setContextBooleanByKey('is_single', $value);
+	public function setIsSingle( $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->setContextBooleanByKey( 'is_single', $value );
 
 		return $this;
 	}
 
 	/**
+	 * The setHasTag function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param string $value
+	 * @param string $value The value.
 	 */
-	public function setHasTag($value) {
-		$this->setContextBooleanByKey('has_tag', $value);
+	public function setHasTag( $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->setContextBooleanByKey( 'has_tag', $value );
 
 		return $this;
 	}
 
 	/**
+	 * The setHasCategory function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param string $value
+	 * @param string $value The value.
 	 */
-	public function setHasCategory($value) {
-		$this->setContextBooleanByKey('has_category', $value);
+	public function setHasCategory( $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->setContextBooleanByKey( 'has_category', $value );
 
 		return $this;
 	}
 
 	/**
+	 * The setIsHome function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param string $value
+	 * @param string $value The value.
 	 */
-	public function setIsHome($value) {
-		$this->setContextBooleanByKey('is_home', $value);
+	public function setIsHome( $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->setContextBooleanByKey( 'is_home', $value );
 
 		return $this;
 	}
 
 	/**
+	 * The setIsFrontPage function.
 	 *
-	 * @param string $value
+	 * @param string $value The value.
 	 */
-	public function setIsFrontPage($value) {
-		$this->setContextBooleanByKey('is_front_page', $value);
+	public function setIsFrontPage( $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->setContextBooleanByKey( 'is_front_page', $value );
 
 		return $this;
 	}
 
 	/**
+	 * The setIsCategory function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param string $value
+	 * @param string $value The value.
 	 */
-	public function setIsCategory($value) {
-		$this->setContextBooleanByKey('is_category', $value);
+	public function setIsCategory( $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->setContextBooleanByKey( 'is_category', $value );
 
 		return $this;
 	}
 
 	/**
+	 * The setPostById function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param int $id
+	 * @param int $id The id.
 	 */
-	public function setPostById($id) {
-		$post                  = get_post($id);
+	public function setPostById( $id ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$post                  = get_post( $id );
 		$this->context['post'] = $post;
 
 		return $this;
 	}
 
 	/**
+	 * The setIsPostType function.
+	 *
 	 * @since 4.4.0
 	 *
-	 * @param string $postType
-	 * @param int    $value
+	 * @param string $post_type The post type.
+	 * @param int    $value The value.
 	 */
-	public function setIsPostType($postType, $value) {
-		$this->setContextBooleanByKey(sprintf('is_%s', $postType), $value);
+	public function setIsPostType( $post_type, $value ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$this->setContextBooleanByKey( sprintf( 'is_%s', $post_type ), $value );
 
 		return $this;
 	}

@@ -10,6 +10,16 @@
   "allowedBlocks": [
     "core/details"
   ],
+  "attributes": {
+    "schema": {
+      "type": "object",
+      "default": {}
+    },
+    "printSchema": {
+      "type": "boolean",
+      "default": true
+    }
+  },
   "supports": {
     "anchor": true,
     "html": false,

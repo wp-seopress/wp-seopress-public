@@ -1,11 +1,16 @@
 <?php
+/**
+ * Elementor Addon
+ *
+ * @package Elementor
+ */
 
-defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 /**
  * Autoloader
  *
- * @param   string $class
+ * @param   string $class Class.
  *
  * @return  boolean
  */
@@ -28,7 +33,7 @@ function wp_seopress_elementor_addon_autoloader( $class ) {
 			return;
 	}
 
-	$filename = dirname( __FILE__ ) . $dir . str_replace( '_', '-', str_replace( '\\', '/class-', $class ) ) . '.php';
+	$filename = __DIR__ . $dir . str_replace( '_', '-', str_replace( '\\', '/class-', $class ) ) . '.php';
 
 	if ( file_exists( $filename ) ) {
 		require_once $filename;
@@ -42,26 +47,28 @@ function wp_seopress_elementor_addon_autoloader( $class ) {
 }
 spl_autoload_register( 'wp_seopress_elementor_addon_autoloader' );
 
+/**
+ * WP SeoPress Elementor Addon
+ */
 final class WP_SeoPress_Elementor_Addon {
 	/**
 	 * Class instance
 	 *
-	 * @var \WP_SeoPress_Elementor_Addon
+	 * @var \WP_SeoPress_Elementor_Addon Instance.
 	 */
 	private static $instance = null;
 
 	/**
 	 * Load instance of the class
 	 *
-	 * @return  \WP_SeoPress_Elementor_Addon
+	 * @return  \WP_SeoPress_Elementor_Addon Instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
-			self::$instance = new static();
+			self::$instance = new self();
 			self::$instance->_constants();
 			self::$instance->_load_objects();
 		}
-
 
 		return self::$instance;
 	}
@@ -69,16 +76,15 @@ final class WP_SeoPress_Elementor_Addon {
 	/**
 	 * Constructor private
 	 *
-	 * @return  void
+	 * @return  void Void.
 	 */
 	private function __construct() {
-
 	}
 
 	/**
 	 * Define plugin constants
 	 *
-	 * @return  void
+	 * @return  void Void.
 	 */
 	private function _constants() {
 		if ( ! defined( 'SEOPRESS_ELEMENTOR_ADDON_DIR' ) ) {
@@ -93,7 +99,7 @@ final class WP_SeoPress_Elementor_Addon {
 	/**
 	 * Initiate classes
 	 *
-	 * @return  void
+	 * @return  void Void.
 	 */
 	private function _load_objects() {
 		if ( is_admin() ) {
@@ -106,10 +112,20 @@ final class WP_SeoPress_Elementor_Addon {
 
 WP_SeoPress_Elementor_Addon::get_instance();
 
+/**
+ * Seopress elementor tabs seo start
+ *
+ * @return  void Void.
+ */
 function seopress_elementor_tabs_seo_start() {
 	ob_start();
 }
 
+/**
+ * Seopress elementor tabs seo end
+ *
+ * @return  void Void.
+ */
 function seopress_elementor_tabs_seo_end() {
 	$output  = \ob_get_clean();
 	$search  = '/(<(div|button) class="elementor-component-tab elementor-panel-navigation-tab" data-tab="global">.*<\/(div|button)>)/m';

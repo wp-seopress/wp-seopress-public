@@ -1,29 +1,31 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Tags\Schema;
 
-if ( ! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 use SEOPress\Models\GetTagValue;
 
-class SocialPhoneNumber implements GetTagValue
-{
-    const NAME = 'social_phone_number';
+/**
+ * Schema Social Phone Number
+ */
+class SocialPhoneNumber implements GetTagValue {
 
-    /**
-     * @since 4.5.0
-     *
-     * @param array $args
-     *
-     * @return string
-     */
-    public function getValue($args = null) {
-        $context = isset($args[0]) ? $args[0] : null;
+	const NAME = 'social_phone_number';
 
-        $value   = seopress_get_service('SocialOption')->getSocialKnowledgePhone();
+	/**
+	 * Get value
+	 *
+	 * @param array $args context, tag.
+	 * @return string
+	 */
+	public function getValue( $args = null ) {
+		$context = isset( $args[0] ) ? $args[0] : null;
 
-        return apply_filters('seopress_get_tag_schema_social_phone_number', $value, $context);
-    }
+		$value = seopress_get_service( 'SocialOption' )->getSocialKnowledgePhone();
+
+		return apply_filters( 'seopress_get_tag_schema_social_phone_number', $value, $context );
+	}
 }

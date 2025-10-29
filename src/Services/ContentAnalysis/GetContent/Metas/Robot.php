@@ -1,18 +1,31 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\ContentAnalysis\GetContent\Metas;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+/**
+ * Robot
+ */
 class Robot {
-    public function getDataByXPath($xpath, $options = []) {
-        $items = $xpath->query('//meta[@name="robots"]/@content');
+	/**
+	 * The getDataByXPath function.
+	 *
+	 * @param object $xpath The xpath.
+	 * @param array  $options The options.
+	 *
+	 * @return array
+	 */
+	public function getDataByXPath( $xpath, $options = array() ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$items = $xpath->query( '//meta[@name="robots"]/@content' );
 
-        $data  = [];
-        foreach ($items as $key => $item) {
-            $data[] = $item->nodeValue;
-        }
+		$data = array();
+		foreach ( $items as $key => $item ) {
+			$data[] = $item->nodeValue; // phpcs:ignore -- TODO: check if property is outside this class before renaming.
+		}
 
-        return $data;
-    }
+		return $data;
+	}
 }

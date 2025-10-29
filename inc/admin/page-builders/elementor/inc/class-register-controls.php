@@ -1,8 +1,17 @@
 <?php
+/**
+ * Register Controls
+ *
+ * @package Elementor
+ */
+
 namespace WPSeoPressElementorAddon;
 
-defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
+/**
+ * Register Controls
+ */
 class Register_Controls {
 	use \WPSeoPressElementorAddon\Singleton;
 
@@ -12,11 +21,13 @@ class Register_Controls {
 	 * @return  void
 	 */
 	private function _initialize() {
-		add_action( 'elementor/controls/register', [ $this, 'register_controls' ] );
+		add_action( 'elementor/controls/register', array( $this, 'register_controls' ) );
 	}
 
 	/**
 	 * Register controls
+	 *
+	 * @param \Elementor\Controls_Manager $controls_manager Controls manager.
 	 *
 	 * @return  void
 	 */

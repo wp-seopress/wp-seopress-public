@@ -1,64 +1,79 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\SocialTwitter\Specifications\Image;
 
 use SEOPress\Services\Metas\SocialTwitter\Specifications\Image\AbstractImageSpecification;
 use SEOPress\Services\Metas\GetImageInContent;
 
-class InContentSpecification extends AbstractImageSpecification
-{
-    const NAME_SERVICE = 'InContentSocialTwitterSpecification';
+/**
+ * InContentSpecification
+ */
+class InContentSpecification extends AbstractImageSpecification {
 
-    protected function  getThumbnailInContent($postId) {
-        $manager = new GetImageInContent();
-        return $manager->getThumbnailInContentByPostId($postId);
-    }
+	const NAME_SERVICE = 'InContentSocialTwitterSpecification';
 
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
+	/**
+	 * The getThumbnailInContent function.
+	 *
+	 * @param int $post_id The post id.
+	 *
+	 * @return string
+	 */
+	protected function getThumbnailInContent( $post_id ) {
+		$manager = new GetImageInContent();
+		return $manager->getThumbnailInContentByPostId( $post_id );
+	}
 
-        $post = $params['post'];
-        $GLOBALS['post'] = $post;
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) {
 
-        return $this->applyFilter([
-            'url' =>  $this->getThumbnailInContent($post->ID),
-        ], $params);
+		$post            = $params['post'];
+		$GLOBALS['post'] = $post; // phpcs:ignore
 
-    }
+		return $this->applyFilter(
+			array(
+				'url' => $this->getThumbnailInContent( $post->ID ),
+			),
+			$params
+		);
+	}
 
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'title' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $context = $params['context'];
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'title' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) {
+		$context = $params['context'];
 
-        if ($context['is_singular'] ) {
-            $post = $params['post'];
+		if ( $context['is_singular'] ) {
+			$post = $params['post'];
 
-            if (!empty($this->getThumbnailInContent($post->ID))) {
+			if ( ! empty( $this->getThumbnailInContent( $post->ID ) ) ) {
+				return true;
+			}
+		}
 
-                return true;
-            }
-        }
-
-        return false;
-    }
+		return false;
+	}
 }
-
-

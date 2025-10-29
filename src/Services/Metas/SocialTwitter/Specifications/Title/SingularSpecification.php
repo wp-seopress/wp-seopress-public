@@ -1,57 +1,63 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\SocialTwitter\Specifications\Title;
 
 use SEOPress\Helpers\Metas\SocialSettings;
 use SEOPress\Services\Metas\SocialTwitter\Specifications\Title\AbstractTitleSpecification;
 
-class SingularSpecification extends AbstractTitleSpecification
-{
-    const NAME_SERVICE = 'SingularSocialTwitterSpecification';
+/**
+ * SingularSpecification
+ */
+class SingularSpecification extends AbstractTitleSpecification {
 
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
+	const NAME_SERVICE = 'SingularSocialTwitterSpecification';
 
-        $context = $params['context'];
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) {
 
-        $post = $params['post'];
+		$context = $params['context'];
 
-        $value = seopress_get_service('SocialOption')->getTwitterTitlePostOption($post->ID);
+		$post = $params['post'];
 
-        return $this->applyFilter(seopress_get_service('TagsToString')->replace($value, $context));
-    }
+		$value = seopress_get_service( 'SocialOption' )->getTwitterTitlePostOption( $post->ID );
+
+		return $this->applyFilter( seopress_get_service( 'TagsToString' )->replace( $value, $context ) );
+	}
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'title' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $context = $params['context'];
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'title' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) {
+		$context = $params['context'];
 
-        if ($context['is_singular'] ) {
-            $post = $params['post'];
-            if(!empty(seopress_get_service('SocialOption')->getTwitterTitlePostOption($post->ID))){
-                return true;
-            }
-        }
+		if ( $context['is_singular'] ) {
+			$post = $params['post'];
+			if ( ! empty( seopress_get_service( 'SocialOption' )->getTwitterTitlePostOption( $post->ID ) ) ) {
+				return true;
+			}
+		}
 
-        return false;
-
-    }
+		return false;
+	}
 }
-
-

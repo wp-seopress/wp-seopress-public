@@ -1,9 +1,19 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Core\Hooks;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+/**
+ * ExecuteHooks
+ */
 interface ExecuteHooks {
-    public function hooks();
+	/**
+	 * The hooks function.
+	 *
+	 * @return void
+	 */
+	public function hooks();
 }

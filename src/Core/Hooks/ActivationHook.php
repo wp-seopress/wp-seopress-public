@@ -1,9 +1,14 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Core\Hooks;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+/**
+ * ActivationHook
+ */
 interface ActivationHook {
-    public function activate();
+	public function activate(); // phpcs:ignore -- TODO: rename method.
 }

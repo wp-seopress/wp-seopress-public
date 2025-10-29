@@ -1,97 +1,114 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Actions\Api;
 
-if (! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 use SEOPress\Core\Hooks\ExecuteHooks;
 use SEOPress\ManualHooks\ApiHeader;
 
-class PagePreview implements ExecuteHooks
-{
-    /**
-     * @var int|null
-     */
-    private $current_user;
+/**
+ * Page Preview
+ */
+class PagePreview implements ExecuteHooks {
 
-    public function hooks()
-    {
-        $this->current_user = wp_get_current_user()->ID;
-        add_action('rest_api_init', [$this, 'register']);
-    }
+	/**
+	 * The current user.
+	 *
+	 * @var int|null
+	 */
+	private $current_user;
 
-    /**
-     * @since 5.0.0
-     *
-     * @return void
-     */
-    public function register()
-    {
-        register_rest_route('seopress/v1', '/posts/(?P<id>\d+)/page-preview', [
-            'methods'             => 'GET',
-            'callback'            => [$this, 'preview'],
-            'args'                => [
-                'id' => [
-                    'validate_callback' => function ($param, $request, $key) {
-                        return is_numeric($param);
-                    },
-                ],
-            ],
-            'permission_callback' => function($request) {
-                $post_id = $request['id'];
-                $current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
+	/**
+	 * The Page Preview hooks.
+	 *
+	 * @since 5.0.0
+	 */
+	public function hooks() {
+		$this->current_user = wp_get_current_user()->ID;
+		add_action( 'rest_api_init', array( $this, 'register' ) );
+	}
 
-                if ( ! user_can( $current_user, 'edit_post', $post_id )) {
-                    return false;
-                }
+	/**
+	 * The Page Preview register.
+	 *
+	 * @since 5.0.0
+	 *
+	 * @return void
+	 */
+	public function register() {
+		register_rest_route(
+			'seopress/v1',
+			'/posts/(?P<id>\d+)/page-preview',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'preview' ),
+				'args'                => array(
+					'id' => array(
+						'validate_callback' => function ( $param, $request, $key ) { // phpcs:ignore
+							return is_numeric( $param );
+						},
+					),
+				),
+				'permission_callback' => function ( $request ) {
+					$post_id      = $request['id'];
+					$current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
 
-                return true;
-            },
-        ]);
-    }
+					if ( ! user_can( $current_user, 'edit_post', $post_id ) ) {
+						return false;
+					}
 
-    /**
-     * @since 5.0.0
-     */
-    public function preview(\WP_REST_Request $request)
-    {
-        $apiHeader = new ApiHeader();
-        $apiHeader->hooks();
+					return true;
+				},
+			)
+		);
+	}
 
-        $id   = (int) $request->get_param('id');
-        $domResult  = seopress_get_service('RequestPreview')->getDomById($id);
+	/**
+	 * The Page Preview process preview.
+	 *
+	 * @param \WP_REST_Request $request The request.
+	 *
+	 * @since 5.0.0
+	 */
+	public function preview( \WP_REST_Request $request ) {
+		$api_header = new ApiHeader();
+		$api_header->hooks();
 
-        if (!$domResult['success']) {
-            $defaultResponse = [
-                'title' =>  '...',
-                'meta_desc' =>  '...',
-            ];
+		$id         = (int) $request->get_param( 'id' );
+		$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id );
 
-            switch($domResult['code']){
-                case 404:
-                    $defaultResponse['title'] = __('To get your Google snippet preview, publish your post!', 'wp-seopress');
-                    break;
-                case 401:
-                    $defaultResponse['title'] = __('Your site is protected by an authentication.', 'wp-seopress');
-                    break;
-            }
-            return new \WP_REST_Response($defaultResponse);
-        }
+		if ( ! $dom_result['success'] ) {
+			$default_response = array(
+				'title'     => '...',
+				'meta_desc' => '...',
+			);
 
-        $str = $domResult['body'];
+			switch ( $dom_result['code'] ) {
+				case 404:
+					$default_response['title'] = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
+					break;
+				case 401:
+					$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
+					break;
+			}
+			return new \WP_REST_Response( $default_response );
+		}
 
-        $data = seopress_get_service('DomFilterContent')->getData($str, $id);
+		$str = $dom_result['body'];
 
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            $data['analyzed_content_id'] = $id;
-        }
+		$data = seopress_get_service( 'DomFilterContent' )->getData( $str, $id );
 
-        $data['analysis_target_kw'] = [
-            'value' => array_filter(explode(',', strtolower(get_post_meta($id, '_seopress_analysis_target_kw', true))))
-        ];
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			$data['analyzed_content_id'] = $id;
+		}
 
-        return new \WP_REST_Response($data);
-    }
+		$data['analysis_target_kw'] = array(
+			'value' => array_filter( explode( ',', strtolower( get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ) ),
+		);
+
+		return new \WP_REST_Response( $data );
+	}
 }

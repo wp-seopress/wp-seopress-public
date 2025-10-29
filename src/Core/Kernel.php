@@ -1,8 +1,10 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Core;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 use SEOPress\Core\Container\ContainerSeopress;
 use SEOPress\Core\Hooks\ActivationHook;
@@ -11,148 +13,196 @@ use SEOPress\Core\Hooks\ExecuteHooks;
 use SEOPress\Core\Hooks\ExecuteHooksBackend;
 use SEOPress\Core\Hooks\ExecuteHooksFrontend;
 
+/**
+ * Kernel
+ */
 abstract class Kernel {
-    protected static $container = null;
+	/**
+	 * The container.
+	 *
+	 * @var ContainerSeopress
+	 */
+	protected static $container = null;
 
-    protected static $data = ['slug' => null, 'main_file' => null, 'file' => null, 'root' => null];
+	/**
+	 * The data.
+	 *
+	 * @var array
+	 */
+	protected static $data = array(
+		'slug'      => null,
+		'main_file' => null,
+		'file'      => null,
+		'root'      => null,
+	);
 
-    public static function setContainer(ManageContainer $container) {
-        self::$container = self::getDefaultContainer();
-    }
+	/**
+	 * The set container function.
+	 *
+	 * @param ManageContainer $container The container.
+	 *
+	 * @return void
+	 */
+	public static function setContainer( ManageContainer $container ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		self::$container = self::getDefaultContainer();
+	}
 
-    protected static function getDefaultContainer() {
-        return new ContainerSeopress();
-    }
+	/**
+	 * The get default container function.
+	 *
+	 * @return ContainerSeopress
+	 */
+	protected static function getDefaultContainer() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return new ContainerSeopress();
+	}
 
-    public static function getContainer() {
-        if (null === self::$container) {
-            self::$container = self::getDefaultContainer();
-        }
+	public static function getContainer() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( null === self::$container ) {
+			self::$container = self::getDefaultContainer();
+		}
 
-        return self::$container;
-    }
+		return self::$container;
+	}
 
-    public static function handleHooksPlugin() {
-        switch (current_filter()) {
-            case 'plugins_loaded':
-                foreach (self::getContainer()->getActions() as $key => $class) {
-                    try {
-                        if ( ! class_exists($class)) {
-                            continue;
-                        }
+	/**
+	 * The handle hooks plugin function.
+	 *
+	 * @return void
+	 */
+	public static function handleHooksPlugin() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		switch ( current_filter() ) {
+			case 'plugins_loaded':
+				foreach ( self::getContainer()->getActions() as $key => $class ) {
+					try {
+						if ( ! class_exists( $class ) ) {
+							continue;
+						}
 
-                        $class = new $class();
-                        switch (true) {
-                            case $class instanceof ExecuteHooksBackend:
-                                if (is_admin()) {
-                                    $class->hooks();
-                                }
-                                break;
+						$class = new $class();
+						switch ( true ) {
+							case $class instanceof ExecuteHooksBackend:
+								if ( is_admin() ) {
+									$class->hooks();
+								}
+								break;
 
-                            case $class instanceof ExecuteHooksFrontend:
-                                if ( ! is_admin()) {
-                                    $class->hooks();
-                                }
-                                break;
+							case $class instanceof ExecuteHooksFrontend:
+								if ( ! is_admin() ) {
+									$class->hooks();
+								}
+								break;
 
-                            case $class instanceof ExecuteHooks:
-                                $class->hooks();
-                                break;
-                        }
-                    } catch (\Exception $e) {
-                    }
-                }
-                break;
-            case 'activate_' . self::$data['slug'] . '/' . self::$data['main_file'] . '.php':
-                foreach (self::getContainer()->getActions() as $key => $class) {
-                    try {
-                        if ( ! class_exists($class)) {
-                            continue;
-                        }
-                        $class = new $class();
+							case $class instanceof ExecuteHooks:
+								$class->hooks();
+								break;
+						}
+					} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+						// Do nothing.
+					}
+				}
+				break;
+			case 'activate_' . self::$data['slug'] . '/' . self::$data['main_file'] . '.php':
+				foreach ( self::getContainer()->getActions() as $key => $class ) {
+					try {
+						if ( ! class_exists( $class ) ) {
+							continue;
+						}
+						$class = new $class();
 
-                        if ($class instanceof ActivationHook) {
-                            $class->activate();
-                        }
-                    } catch (\Exception $e) {
-                    }
-                }
-                break;
-            case 'deactivate_' . self::$data['slug'] . '/' . self::$data['main_file'] . '.php':
-                foreach (self::getContainer()->getActions() as $key => $class) {
-                    try {
-                        if ( ! class_exists($class)) {
-                            continue;
-                        }
-                        $class = new $class();
-                        if ($class instanceof DeactivationHook) {
-                            $class->deactivate();
-                        }
-                    } catch (\Exception $e) {
-                    }
-                }
-                break;
-        }
-    }
+						if ( $class instanceof ActivationHook ) {
+							$class->activate();
+						}
+					} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+						// Do nothing.
+					}
+				}
+				break;
+			case 'deactivate_' . self::$data['slug'] . '/' . self::$data['main_file'] . '.php':
+				foreach ( self::getContainer()->getActions() as $key => $class ) {
+					try {
+						if ( ! class_exists( $class ) ) {
+							continue;
+						}
+						$class = new $class();
+						if ( $class instanceof DeactivationHook ) {
+							$class->deactivate();
+						}
+					} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+						// Do nothing.
+					}
+				}
+				break;
+		}
+	}
 
-    /**
-     * @static
-     *
-     * @return void
-     */
-    public static function buildContainer() {
-        self::buildClasses(self::$data['root'] . '/src/Services', 'services', 'Services\\');
-        self::buildClasses(self::$data['root'] . '/src/Thirds', 'services', 'Thirds\\');
-        self::buildClasses(self::$data['root'] . '/src/Actions', 'actions', 'Actions\\');
-    }
+	/**
+	 * The build container function.
+	 *
+	 * @return void
+	 */
+	public static function buildContainer() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		self::buildClasses( self::$data['root'] . '/src/Services', 'services', 'Services\\' );
+		self::buildClasses( self::$data['root'] . '/src/Thirds', 'services', 'Thirds\\' );
+		self::buildClasses( self::$data['root'] . '/src/Actions', 'actions', 'Actions\\' );
+	}
 
-    /**
-     * @static
-     *
-     * @param string $path
-     * @param string $type
-     * @param string $namespace
-     *
-     * @return void
-     */
-    public static function buildClasses($path, $type, $namespace = '') {
-        try {
-            $files      = array_diff(scandir($path), ['..', '.']);
-            foreach ($files as $filename) {
-                $pathCheck = $path . '/' . $filename;
+	/**
+	 * The build classes function.
+	 *
+	 * @static
+	 *
+	 * @param string $path The path.
+	 * @param string $type The type.
+	 * @param string $namespace The namespace.
+	 *
+	 * @return void
+	 */
+	public static function buildClasses( $path, $type, $namespace = '' ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		try {
+			$files = array_diff( scandir( $path ), array( '..', '.' ) );
+			foreach ( $files as $filename ) {
+				$path_check = $path . '/' . $filename;
 
-                if (is_dir($pathCheck)) {
-                    self::buildClasses($pathCheck, $type, $namespace . $filename . '\\');
-                    continue;
-                }
+				if ( is_dir( $path_check ) ) {
+					self::buildClasses( $path_check, $type, $namespace . $filename . '\\' );
+					continue;
+				}
 
-                $pathinfo = pathinfo($filename);
-                if (isset($pathinfo['extension']) && 'php' !== $pathinfo['extension']) {
-                    continue;
-                }
+				$pathinfo = pathinfo( $filename );
+				if ( isset( $pathinfo['extension'] ) && 'php' !== $pathinfo['extension'] ) {
+					continue;
+				}
 
-                $data = '\\SEOPress\\' . $namespace . str_replace('.php', '', $filename);
+				$data = '\\SEOPress\\' . $namespace . str_replace( '.php', '', $filename );
 
-                switch ($type) {
-                    case 'services':
-                        self::getContainer()->setService($data);
-                        break;
-                    case 'actions':
-                        self::getContainer()->setAction($data);
-                        break;
-                }
-            }
-        } catch (\Exception $e) {
-        }
-    }
+				switch ( $type ) {
+					case 'services':
+						self::getContainer()->setService( $data );
+						break;
+					case 'actions':
+						self::getContainer()->setAction( $data );
+						break;
+				}
+			}
+		} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+			// Do nothing.
+		}
+	}
 
-    public static function execute($data) {
-        self::$data = array_merge(self::$data, $data);
+	/**
+	 * The execute function.
+	 *
+	 * @param array $data The data.
+	 *
+	 * @return void
+	 */
+	public static function execute( $data ) {
+		self::$data = array_merge( self::$data, $data );
 
-        self::buildContainer();
+		self::buildContainer();
 
-        add_action('plugins_loaded', [__CLASS__, 'handleHooksPlugin']);
-        register_activation_hook($data['file'], [__CLASS__, 'handleHooksPlugin']);
-        register_deactivation_hook($data['file'], [__CLASS__, 'handleHooksPlugin']);
-    }
+		add_action( 'plugins_loaded', array( __CLASS__, 'handleHooksPlugin' ) );
+		register_activation_hook( $data['file'], array( __CLASS__, 'handleHooksPlugin' ) );
+		register_deactivation_hook( $data['file'], array( __CLASS__, 'handleHooksPlugin' ) );
+	}
 }

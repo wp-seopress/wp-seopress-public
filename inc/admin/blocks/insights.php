@@ -1,4 +1,11 @@
 <?php
-    defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+/**
+ * Insights block.
+ *
+ * @package SEOPress
+ * @subpackage Blocks
+ */
 
-    do_action('seopress_dashboard_insights', $current_tab);
+defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
+
+do_action( 'seopress_dashboard_insights', $current_tab );

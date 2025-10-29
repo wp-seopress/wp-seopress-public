@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Models\Table;
 
@@ -6,21 +6,34 @@ defined( 'ABSPATH' ) || exit;
 
 use SEOPress\Models\Table\TableStructureInterface;
 
-class TableStructure implements TableStructureInterface{
+/**
+ * TableStructure
+ */
+class TableStructure implements TableStructureInterface {
 
-    protected $columns;
+	/**
+	 * The columns property.
+	 *
+	 * @var array
+	 */
+	protected $columns;
 
-    public function __construct($columns){
-        $this->columns = $columns;
-    }
+	/**
+	 * The __construct function.
+	 *
+	 * @param array $columns The columns.
+	 */
+	public function __construct( $columns ) {
+		$this->columns = $columns;
+	}
 
 
-    /**
-     * @return array
-     */
-	public function getColumns(){
-        return $this->columns;
-    }
-
-
+	/**
+	 * The getColumns function.
+	 *
+	 * @return array
+	 */
+	public function getColumns() {
+		return $this->columns;
+	}
 }

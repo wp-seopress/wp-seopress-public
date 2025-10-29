@@ -1,28 +1,37 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Tags;
 
-if ( ! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 use SEOPress\Models\GetTagValue;
 
+/**
+ * Site Title
+ */
 class SiteTitle implements GetTagValue {
-    const NAME = 'sitetitle';
+	const NAME = 'sitetitle';
 
-    const ALIAS = ['sitename'];
+	const ALIAS = array( 'sitename' );
 
-    /**
-     * 4.8.0.
-     *
-     * @return string
-     */
-    public static function getDescription() {
-        return __('Site Title', 'wp-seopress');
-    }
+	/**
+	 * Get description
+	 *
+	 * @return string
+	 */
+	public static function getDescription() {
+		return __( 'Site Title', 'wp-seopress' );
+	}
 
-    public function getValue($args = null) {
-        return get_bloginfo('name');
-    }
+	/**
+	 * Get value
+	 *
+	 * @param array $args context, tag.
+	 * @return string
+	 */
+	public function getValue( $args = null ) {
+		return get_bloginfo( 'name' );
+	}
 }

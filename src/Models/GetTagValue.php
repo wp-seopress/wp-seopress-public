@@ -1,11 +1,21 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Models;
 
-if ( ! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
+/**
+ * GetTagValue
+ */
 interface GetTagValue {
-    public function getValue($context = null);
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $context The context.
+	 *
+	 * @return string
+	 */
+	public function getValue( $context = null ); // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 }

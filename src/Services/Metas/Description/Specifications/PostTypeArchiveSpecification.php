@@ -1,61 +1,70 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\Description\Specifications;
 
-class PostTypeArchiveSpecification
-{
+/**
+ * PostTypeArchiveSpecification
+ */
+class PostTypeArchiveSpecification {
 
-    const NAME_SERVICE = 'PostTypeArchiveDescriptionSpecification';
+	/**
+	 * The name service.
+	 *
+	 * @var string
+	 */
+	const NAME_SERVICE = 'PostTypeArchiveDescriptionSpecification';
 
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
-        $context = $params['context'];
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$context = $params['context'];
 
-        $postType = isset($context['post']) ? $context['post']->post_type : null;
-        $value   = seopress_get_service('TitleOption')->getArchiveCptDescription($postType);
+		$post_type = isset( $context['post'] ) ? $context['post']->post_type : null;
+		$value     = seopress_get_service( 'TitleOption' )->getArchiveCptDescription( $post_type );
 
-        if(empty($value) || !$value){
-            return "";
-        }
+		if ( empty( $value ) || ! $value ) {
+			return '';
+		}
 
-        return seopress_get_service('TagsToString')->replace($value, $context);
-    }
+		return seopress_get_service( 'TagsToString' )->replace( $value, $context );
+	}
 
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'description' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $context = $params['context'];
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'description' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$context = $params['context'];
 
-        if ($context['is_post_type_archive'] && !$context['is_tax'])    {
-            $postType = isset($context['post']) ? $context['post']->post_type : null;
-            $value   = seopress_get_service('TitleOption')->getArchiveCptDescription($postType);
+		if ( $context['is_post_type_archive'] && ! $context['is_tax'] ) {
+			$post_type = isset( $context['post'] ) ? $context['post']->post_type : null;
+			$value     = seopress_get_service( 'TitleOption' )->getArchiveCptDescription( $post_type );
 
-            if(!empty($value)){
-                return true;
-            }
+			if ( ! empty( $value ) ) {
+				return true;
+			}
+		}
 
-        }
-
-        return false;
-
-    }
+		return false;
+	}
 }
-
-

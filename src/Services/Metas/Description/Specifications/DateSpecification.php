@@ -1,61 +1,71 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\Description\Specifications;
 
-
-class DateSpecification
-{
-
-    const NAME_SERVICE = 'DateDescriptionSpecification';
-
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
-        $value = seopress_get_service('TitleOption')->getArchivesDateDesc();
-
-        if(empty($value) || !$value){
-            return "";
-        }
-
-        $context = $params['context'];
-
-        return seopress_get_service('TagsToString')->replace($value, $context);
-    }
+/**
+ * DateSpecification
+ */
+class DateSpecification {
 
 
+	/**
+	 * The name service.
+	 *
+	 * @var string
+	 */
+	const NAME_SERVICE = 'DateDescriptionSpecification';
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'description' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $context = $params['context'];
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$value = seopress_get_service( 'TitleOption' )->getArchivesDateDesc();
 
-        if(!$context['is_date']){
-            return false;
-        }
+		if ( empty( $value ) || ! $value ) {
+			return '';
+		}
 
-        $value = seopress_get_service('TitleOption')->getArchivesDateDesc();
+		$context = $params['context'];
 
-        if(empty($value)){
-            return false;
-        }
+		return seopress_get_service( 'TagsToString' )->replace( $value, $context );
+	}
 
-        return true;
 
-    }
+
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'description' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$context = $params['context'];
+
+		if ( ! $context['is_date'] ) {
+			return false;
+		}
+
+		$value = seopress_get_service( 'TitleOption' )->getArchivesDateDesc();
+
+		if ( empty( $value ) ) {
+			return false;
+		}
+
+		return true;
+	}
 }
-
-

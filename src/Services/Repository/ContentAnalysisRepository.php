@@ -1,152 +1,189 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Repository;
 
-defined( 'ABSPATH' ) || exit;
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 use SEOPress\Models\AbstractRepository;
 
+/**
+ * ContentAnalysisRepository
+ */
 class ContentAnalysisRepository extends AbstractRepository {
 
-    public function __construct(){
-        $tables = seopress_get_service('TableList')->getTables();
-        seopress_get_service('TableManager')->createTablesIfNeeded($tables);
-        $this->table = seopress_get_service('TableList')->getTableContentAnalysis();
-    }
-
-	protected function getAuthorizedInsertValues(): array
-	{
-		return [
-			"post_id",
-            "title",
-            "description",
-            "og_title",
-            "og_description",
-            "og_image",
-            "og_url",
-            "og_site_name",
-            "twitter_title",
-            "twitter_description",
-            "twitter_image",
-            "twitter_image_src",
-            "canonical",
-            "h1",
-            "h2",
-            "h3",
-            "images",
-            "meta_robots",
-            "meta_google",
-            "outbound_links",
-            "internal_links",
-            "json_schemas",
-            "links_no_follow",
-            "keywords",
-            "data",
-            "score",
-            "permalink",
-            "analysis_date"
-		];
+	/**
+	 * The constructor.
+	 */
+	public function __construct() {
+		$tables = seopress_get_service( 'TableList' )->getTables();
+		seopress_get_service( 'TableManager' )->createTablesIfNeeded( $tables );
+		$this->table = seopress_get_service( 'TableList' )->getTableContentAnalysis();
 	}
 
-	protected function getAuthorizedUpdateValues(): array
-	{
-		return [
-            "title",
-            "description",
-            "og_title",
-            "og_description",
-            "og_image",
-            "og_url",
-            "og_site_name",
-            "twitter_title",
-            "twitter_description",
-            "twitter_image",
-            "twitter_image_src",
-            "canonical",
-            "h1",
-            "h2",
-            "h3",
-            "images",
-            "meta_robots",
-            "meta_google",
-            "outbound_links",
-            "internal_links",
-            "json_schemas",
-            "links_no_follow",
-            "keywords",
-            "data",
-            "score",
-            "permalink",
-            "analysis_date"
-		];
+	/**
+	 * The getAuthorizedInsertValues function.
+	 *
+	 * @return array
+	 */
+	protected function getAuthorizedInsertValues(): array {
+		return array(
+			'post_id',
+			'title',
+			'description',
+			'og_title',
+			'og_description',
+			'og_image',
+			'og_url',
+			'og_site_name',
+			'twitter_title',
+			'twitter_description',
+			'twitter_image',
+			'twitter_image_src',
+			'canonical',
+			'h1',
+			'h2',
+			'h3',
+			'images',
+			'meta_robots',
+			'meta_google',
+			'outbound_links',
+			'internal_links',
+			'json_schemas',
+			'links_no_follow',
+			'keywords',
+			'data',
+			'score',
+			'permalink',
+			'analysis_date',
+		);
 	}
 
-    public function analysisAlreadyExistForPostId($postId){
-        global $wpdb;
+	/**
+	 * The getAuthorizedUpdateValues function.
+	 *
+	 * @return array
+	 */
+	protected function getAuthorizedUpdateValues(): array {
+		return array(
+			'title',
+			'description',
+			'og_title',
+			'og_description',
+			'og_image',
+			'og_url',
+			'og_site_name',
+			'twitter_title',
+			'twitter_description',
+			'twitter_image',
+			'twitter_image_src',
+			'canonical',
+			'h1',
+			'h2',
+			'h3',
+			'images',
+			'meta_robots',
+			'meta_google',
+			'outbound_links',
+			'internal_links',
+			'json_schemas',
+			'links_no_follow',
+			'keywords',
+			'data',
+			'score',
+			'permalink',
+			'analysis_date',
+		);
+	}
 
-        $postId = absint($postId);
+	/**
+	 * The analysisAlreadyExistForPostId function.
+	 *
+	 * @param int $post_id The post id.
+	 *
+	 * @return bool
+	 */
+	public function analysisAlreadyExistForPostId( $post_id ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		global $wpdb;
 
-        $tableName = esc_sql($this->getTableName());
+		$post_id = absint( $post_id );
 
-        $sql = $wpdb->prepare("SELECT id FROM {$tableName} WHERE post_id = %d", $postId);
+		$table_name = esc_sql( $this->getTableName() );
 
-        $result = $wpdb->get_results($sql);
+		$sql = $wpdb->prepare( "SELECT id FROM {$table_name} WHERE post_id = %d", $post_id );
 
-        return !empty($result);
-    }
+		$result = $wpdb->get_results( $sql );
 
-    /**
-     * @param array $data
-     */
-    public function insertContentAnalysis($data){
+		return ! empty( $result );
+	}
 
-        global $wpdb;
-		$sql = $this->getInsertInstruction($data);
-		$sql .= $this->getInsertValuesInstruction($data);
+	/**
+	 * The insertContentAnalysis function.
+	 *
+	 * @param array $data The data.
+	 */
+	public function insertContentAnalysis( $data ) {
 
-        try {
-            return $wpdb->query($sql);
-        } catch (\Exception $e) {
-            return null;
-        }
-    }
+		global $wpdb;
+		$sql  = $this->getInsertInstruction( $data );
+		$sql .= $this->getInsertValuesInstruction( $data );
 
-    public function updateContentAnalysis($postId, $data){
-        global $wpdb;
+		try {
+			return $wpdb->query( $sql );
+		} catch ( \Exception $e ) {
+			return null;
+		}
+	}
 
-        $postId = absint($postId);
+	/**
+	 * The updateContentAnalysis function.
+	 *
+	 * @param int   $post_id The post id.
+	 * @param array $data The data.
+	 */
+	public function updateContentAnalysis( $post_id, $data ) {
+		global $wpdb;
 
-        $sql = $this->getUpdateInstruction($data);
-		$sql .= $this->getUpdateValues($data);
-        $sql .= " WHERE post_id = {$postId}";
+		$post_id = absint( $post_id );
 
-        try {
-            return $wpdb->query($sql);
-        } catch (\Exception $e) {
-            return null;
-        }
-    }
+		$sql  = $this->getUpdateInstruction( $data );
+		$sql .= $this->getUpdateValues( $data );
+		$sql .= " WHERE post_id = {$post_id}";
 
-    public function getContentAnalysis($postId, $columns = ["*"]){
+		try {
+			return $wpdb->query( $sql );
+		} catch ( \Exception $e ) {
+			return null;
+		}
+	}
 
-        global $wpdb;
-        $strColumns = implode(', ', $columns);
-        $sql = $wpdb->prepare(
-            "SELECT {$strColumns}
+	/**
+	 * The getContentAnalysis function.
+	 *
+	 * @param int   $post_id The post id.
+	 * @param array $columns The columns.
+	 *
+	 * @return array
+	 */
+	public function getContentAnalysis( $post_id, $columns = array( '*' ) ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+
+		global $wpdb;
+		$str_columns = implode( ', ', $columns );
+		$sql         = $wpdb->prepare(
+			"SELECT {$str_columns}
              FROM {$this->getTableName()}
              WHERE post_id = %d
              ORDER BY analysis_date DESC
              LIMIT 1",
-            $postId
-        );
-        
-        $result = $wpdb->get_results($sql, ARRAY_A);
+			$post_id
+		);
 
-        if(empty($result)){
-            return null;
-        }
+		$result = $wpdb->get_results( $sql, ARRAY_A );
 
-        return array_map("maybe_unserialize", $result[0]);
-    }
+		if ( empty( $result ) ) {
+			return null;
+		}
 
+		return array_map( 'maybe_unserialize', $result[0] );
+	}
 }

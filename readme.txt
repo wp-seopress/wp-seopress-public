@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.2
+Stable tag: 9.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,16 +311,27 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-2/">Read the blog post update</a> =
-* NEW Display format and Time separator for Local Business widget / Block (PRO) 🎉
-* NEW 'seopress_lb_widget_opening_hours_separator' and 'seopress_lb_block_opening_hours_separator' hook to filter the opening hours separator (PRO - https://www.seopress.org/support/hooks/filter-local-business-opening-hours-separator/)
-* NEW Migrate SEO metadata from SiteSEO (https://www.seopress.org/support/guides/import-post-and-terms-metadata-from-siteseo-to-seopress/)
-* INFO Remove jQuery dependency for User Consent Cookie Bar
-* INFO Strengthened security
-* FIX Target keywords detection with dots
-* FIX GA4 cookie domain error in browser console
-* FIX Deprecated PHP errors when editing a term taxonomy
-* FIX Post language sent to AI with the universal SEO metabox
+= 9.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-3/">Read the blog post update</a> =
+* NEW Significant performance improvements for XML sitemaps (800% faster)
+* NEW PHPCS/WPCS standards implemented for the free version
+* INFO 'seopress_sitemaps_cache_duration' hook to filter cache duration (https://www.seopress.org/support/hooks/filter-xml-sitemaps-cache-duration/)
+* INFO Enhanced default design for the cookie bar
+* INFO Changed the default value of the cookie bar’s close button to "Decline"
+* INFO Added support for user consent with Microsoft Clarity
+* INFO Block wizard is now hidden if it has already been run
+* INFO Added a notice to term taxonomy pages if global title and meta description settings are not defined
+* INFO Improve compatibility with the7 theme
+* FIX JavaScript error with the cookie bar
+* FIX Responsive UI issues
+* FIX Performance enhancements for the RSS feed in the SEO dashboard
+* FIX API request issue with WooCommerce and the Universal SEO metabox
+* FIX CSS issues in the notification center
+* FIX Display formatting for Google Search Console metrics
+* FIX Image previews for missing alt texts when using lazy loading or CDNs
+* FIX PHP errors when editing a custom term taxonomy
+* FIX SiteSEO import tool
+* FIX Incorrect Open Graph type tag for products
+* FIX UI consistency issues
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

@@ -1,48 +1,54 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\SocialTwitter\Specifications\Title;
 
 use SEOPress\Helpers\Metas\SocialSettings;
 use SEOPress\Services\Metas\SocialTwitter\Specifications\Title\AbstractTitleSpecification;
 
-class DefaultSocialTwitterSpecification extends AbstractTitleSpecification
-{
-
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
-
-        $context = $params['context'];
-        $post = $params['post'];
-
-        $value = get_the_title($post->ID);
-        return $this->applyFilter(seopress_get_service('TagsToString')->replace($value, $context));
-
-    }
+/**
+ * DefaultSocialTwitterSpecification
+ */
+class DefaultSocialTwitterSpecification extends AbstractTitleSpecification {
 
 
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) {
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'title' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $post = $params['post'];
+		$context = $params['context'];
+		$post    = $params['post'];
 
-        return !empty(get_the_title($post->ID));
-    }
+		$value = get_the_title( $post->ID );
+		return $this->applyFilter( seopress_get_service( 'TagsToString' )->replace( $value, $context ) );
+	}
+
+
+
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'title' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) {
+		$post = $params['post'];
+
+		return ! empty( get_the_title( $post->ID ) );
+	}
 }
-
-

@@ -1,42 +1,48 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Options;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 use SEOPress\Constants\Options;
 
-class DashboardOption
-{
-    /**
-     * @since 6.6.0
-     *
-     * @return array
-     */
-    public function getOption()
-    {
-        return get_option(Options::KEY_OPTION_DASHBOARD);
-    }
+/**
+ * DashboardOption
+ */
+class DashboardOption {
 
-    /**
-     * @since 6.6.0
-     *
-     * @param string $key
-     *
-     * @return mixed
-     */
-    public function searchOptionByKey($key)
-    {
-        $data = $this->getOption();
+	/**
+	 * The getOption function.
+	 *
+	 * @since 6.6.0
+	 *
+	 * @return array
+	 */
+	public function getOption() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return get_option( Options::KEY_OPTION_DASHBOARD );
+	}
 
-        if (empty($data)) {
-            return null;
-        }
+	/**
+	 * The searchOptionByKey function.
+	 *
+	 * @since 6.6.0
+	 *
+	 * @param string $key The key.
+	 *
+	 * @return mixed
+	 */
+	public function searchOptionByKey( $key ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$data = $this->getOption();
 
-        if (! isset($data[$key])) {
-            return null;
-        }
+		if ( empty( $data ) ) {
+			return null;
+		}
 
-        return $data[$key];
-    }
+		if ( ! isset( $data[ $key ] ) ) {
+			return null;
+		}
+
+		return $data[ $key ];
+	}
 }

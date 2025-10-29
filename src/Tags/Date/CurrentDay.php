@@ -1,21 +1,35 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Tags\Date;
 
-if ( ! defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 use SEOPress\Models\GetTagValue;
 
+/**
+ * Current Day
+ */
 class CurrentDay implements GetTagValue {
-    const NAME = 'currentday';
+	const NAME = 'currentday';
 
-    public static function getDescription() {
-        return __('Current Day', 'wp-seopress');
-    }
+	/**
+	 * Get description
+	 *
+	 * @return string
+	 */
+	public static function getDescription() {
+		return __( 'Current Day', 'wp-seopress' );
+	}
 
-    public function getValue($args = null) {
-        return date_i18n('j');
-    }
+	/**
+	 * Get value
+	 *
+	 * @param array $args context, tag.
+	 * @return string
+	 */
+	public function getValue( $args = null ) {
+		return date_i18n( 'j' );
+	}
 }

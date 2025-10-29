@@ -1,158 +1,194 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Options;
 
-defined('ABSPATH') or exit('Cheatin&#8217; uh?');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 use SEOPress\Constants\Options;
 
+/**
+ * SitemapOption
+ */
 class SitemapOption {
-    const NAME_SERVICE = 'SitemapOption';
 
-    /**
-     * @since 4.3.0
-     *
-     * @return array
-     */
-    public function getOption() {
-        return get_option(Options::KEY_OPTION_SITEMAP);
-    }
+	const NAME_SERVICE = 'SitemapOption';
 
-    /**
-     * @since 4.3.0
-     *
-     * @return string|nul
-     *
-     * @param string $key
-     */
-    protected function searchOptionByKey($key) {
-        $data = $this->getOption();
+	/**
+	 * The getOption function.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @return array
+	 */
+	public function getOption() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return get_option( Options::KEY_OPTION_SITEMAP );
+	}
 
-        if (empty($data)) {
-            return null;
-        }
+	/**
+	 * The searchOptionByKey function.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @return string|nul
+	 *
+	 * @param string $key The key.
+	 */
+	protected function searchOptionByKey( $key ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$data = $this->getOption();
 
-        if ( ! isset($data[$key])) {
-            return null;
-        }
+		if ( empty( $data ) ) {
+			return null;
+		}
 
-        return $data[$key];
-    }
+		if ( ! isset( $data[ $key ] ) ) {
+			return null;
+		}
 
-    /**
-     * @since 4.3.0
-     *
-     * @return string|null
-     */
-    public function isEnabled() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_general_enable');
-    }
+		return $data[ $key ];
+	}
 
-    /**
-     * @since 4.3.0
-     *
-     * @return string|null
-     */
-    public function getPostTypesList() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_post_types_list');
-    }
+	/**
+	 * The isEnabled function.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @return string|null
+	 */
+	public function isEnabled() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_general_enable' );
+	}
 
-    /**
-     * @since 4.3.0
-     *
-     * @return string|null
-     */
-    public function getTaxonomiesList() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_taxonomies_list');
-    }
+	/**
+	 * The getPostTypesList function.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @return string|null
+	 */
+	public function getPostTypesList() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_post_types_list' );
+	}
 
-    /**
-     * @since 4.3.0
-     *
-     * @return string|null
-     */
-    public function authorIsEnable() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_author_enable');
-    }
+	/**
+	 * The getTaxonomiesList function.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @return string|null
+	 */
+	public function getTaxonomiesList() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_taxonomies_list' );
+	}
 
-    /**
-     * @since 4.3.0
-     *
-     * @return string|null
-     */
-    public function imageIsEnable() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_img_enable');
-    }
+	/**
+	 * The authorIsEnable function.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @return string|null
+	 */
+	public function authorIsEnable() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_author_enable' );
+	}
 
-    /**
-     * @since 5.9.0
-     *
-     * @return string|null
-     */
-    public function getHtmlEnable() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_enable');
-    }
+	/**
+	 * The imageIsEnable function.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @return string|null
+	 */
+	public function imageIsEnable() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_img_enable' );
+	}
 
-    /**
-     * @since 5.9.0
-     *
-     * @return string|null
-     */
-    public function getHtmlMapping() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_mapping');
-    }
+	/**
+	 * The getHtmlEnable function.
+	 *
+	 * @since 5.9.0
+	 *
+	 * @return string|null
+	 */
+	public function getHtmlEnable() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_html_enable' );
+	}
 
-    /**
-     * @since 5.9.0
-     *
-     * @return string|null
-     */
-    public function getHtmlExclude() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_exclude');
-    }
+	/**
+	 * The getHtmlMapping function.
+	 *
+	 * @since 5.9.0
+	 *
+	 * @return string|null
+	 */
+	public function getHtmlMapping() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_html_mapping' );
+	}
 
-    /**
-     * @since 5.9.0
-     *
-     * @return string|null
-     */
-    public function getHtmlOrder() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_order');
-    }
+	/**
+	 * The getHtmlExclude function.
+	 *
+	 * @since 5.9.0
+	 *
+	 * @return string|null
+	 */
+	public function getHtmlExclude() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_html_exclude' );
+	}
 
-    /**
-     * @since 5.9.0
-     *
-     * @return string|null
-     */
-    public function getHtmlOrderBy() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_orderby');
-    }
+	/**
+	 * The getHtmlOrder function.
+	 *
+	 * @since 5.9.0
+	 *
+	 * @return string|null
+	 */
+	public function getHtmlOrder() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_html_order' );
+	}
 
-    /**
-     * @since 5.9.0
-     *
-     * @return string|null
-     */
-    public function getHtmlDate() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_date');
-    }
+	/**
+	 * The getHtmlOrderBy function.
+	 *
+	 * @since 5.9.0
+	 *
+	 * @return string|null
+	 */
+	public function getHtmlOrderBy() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_html_orderby' );
+	}
 
-    /**
-     * @since 7.3.0
-     *
-     * @return string|null
-     */
-    public function getHtmlNoHierarchy() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_no_hierarchy');
-    }
+	/**
+	 * The getHtmlDate function.
+	 *
+	 * @since 5.9.0
+	 *
+	 * @return string|null
+	 */
+	public function getHtmlDate() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_html_date' );
+	}
 
-    /**
-     * @since 8.9.0
-     *
-     * @return string|null  
-     */
-    public function getHtmlPostTypeArchive() {
-        return $this->searchOptionByKey('seopress_xml_sitemap_html_post_type_archive');
-    }
+	/**
+	 * The getHtmlNoHierarchy function.
+	 *
+	 * @since 7.3.0
+	 *
+	 * @return string|null
+	 */
+	public function getHtmlNoHierarchy() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_html_no_hierarchy' );
+	}
+
+	/**
+	 * The getHtmlPostTypeArchive function.
+	 *
+	 * @since 8.9.0
+	 *
+	 * @return string|null
+	 */
+	public function getHtmlPostTypeArchive() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_xml_sitemap_html_post_type_archive' );
+	}
 }

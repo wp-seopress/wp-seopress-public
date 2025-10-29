@@ -1,27 +1,39 @@
 <?php
-defined( 'ABSPATH' ) or die( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
+/**
+ * XML Sitemap XSL template
+ *
+ * @package Sitemaps
+ */
 
-//XML
+defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
-//Headers
-seopress_get_service('SitemapHeaders')->printHeaders();
+// Headers.
+seopress_get_service( 'SitemapHeaders' )->printHeaders();
 
-//WPML - Home URL
-if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
-    add_filter('seopress_sitemaps_home_url', function($home_url) {
-        $home_url = apply_filters( 'wpml_home_url', get_option( 'home' ));
-        return trailingslashit($home_url);
-    });
+// WPML - Home URL.
+if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+	add_filter(
+		'seopress_sitemaps_home_url',
+		function ( $home_url ) {
+			$home_url = apply_filters( 'wpml_home_url', get_option( 'home' ) );
+			return trailingslashit( $home_url );
+		}
+	);
 } else {
-    add_filter('wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5);
+	add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
 }
 
+/**
+ * XML Sitemap index XSL template
+ *
+ * @return string XML Sitemap index XSL template
+ */
 function seopress_xml_sitemap_index_xsl() {
-	$home_url = home_url().'/';
+	$home_url = home_url() . '/';
 
 	$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
 
-	$seopress_sitemaps_xsl ='<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"
+	$seopress_sitemaps_xsl     = '<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="2.0"
 				xmlns:html="http://www.w3.org/TR/REC-html40"
 				xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 				xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -29,15 +41,17 @@ function seopress_xml_sitemap_index_xsl() {
 	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
 	<xsl:template match="/">
 		<html xmlns="http://www.w3.org/1999/xhtml">';
-	$seopress_sitemaps_xsl .="\n";
-	$seopress_sitemaps_xsl .='<head>';
-	$seopress_sitemaps_xsl .="\n";
-	$seopress_sitemaps_xsl .='<title>XML Sitemaps</title>';
-	$seopress_sitemaps_xsl .='<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-	$seopress_sitemaps_xsl .="\n";
+	$seopress_sitemaps_xsl    .= "\n";
+	$seopress_sitemaps_xsl    .= '<head>';
+	$seopress_sitemaps_xsl    .= "\n";
+	$seopress_sitemaps_xsl    .= '<title>XML Sitemaps</title>';
+	$seopress_sitemaps_xsl    .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+	$seopress_sitemaps_xsl    .= "\n";
 	$seopress_sitemaps_xsl_css = '<style type="text/css">';
 
-	$seopress_sitemaps_xsl_css .= apply_filters('seopress_sitemaps_xsl_css', '
+	$seopress_sitemaps_xsl_css .= apply_filters(
+		'seopress_sitemaps_xsl_css',
+		'
 	* {
 		margin: 0;
 		padding: 0;
@@ -119,62 +133,63 @@ function seopress_xml_sitemap_index_xsl() {
 		width: 30%;
 	    display: inline-block;
 		padding: 0 10px;
-	}');
+	}'
+	);
 
 	$seopress_sitemaps_xsl_css .= '</style>';
 
-    $seopress_sitemaps_xsl .= $seopress_sitemaps_xsl_css;
-	$seopress_sitemaps_xsl .='</head>';
-	$seopress_sitemaps_xsl .='<body>';
-	$seopress_sitemaps_xsl .='<div id="main">';
-	$seopress_sitemaps_xsl .='<h1>'.__('XML Sitemaps','wp-seopress').'</h1>';
-	$seopress_sitemaps_xsl .='<p><a href="'.$home_url.'sitemaps.xml">Index sitemaps</a></p>';
-	$seopress_sitemaps_xsl .='<xsl:if test="sitemap:sitemapindex/sitemap:sitemap">';
-	$seopress_sitemaps_xsl .='<p>'. /* translators: %s number of xml sub-sitemaps */ sprintf(__('This XML Sitemap Index file contains %s sitemaps.','wp-seopress'),'<xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/>').'</p>';
-	$seopress_sitemaps_xsl .='</xsl:if>';
-	$seopress_sitemaps_xsl .='<xsl:if test="sitemap:urlset/sitemap:url">';
-	$seopress_sitemaps_xsl .='<p>'. /* translators: %s number of URLs in an xml sitemap */ sprintf(__('This XML Sitemap contains %s URL(s).','wp-seopress'),'<xsl:value-of select="count(sitemap:urlset/sitemap:url)"/>').'</p>';
-	$seopress_sitemaps_xsl .='</xsl:if>';
-	$seopress_sitemaps_xsl .='<div id="sitemaps">';
-	$seopress_sitemaps_xsl .='<div class="loc">';
-	$seopress_sitemaps_xsl .='URL';
-	$seopress_sitemaps_xsl .='</div>';
-	$seopress_sitemaps_xsl .='<div class="lastmod">';
-	$seopress_sitemaps_xsl .=__('Last update','wp-seopress');
-	$seopress_sitemaps_xsl .='</div>';
-	$seopress_sitemaps_xsl .='<ul>';
-	$seopress_sitemaps_xsl .='<xsl:for-each select="sitemap:sitemapindex/sitemap:sitemap">';
-    $seopress_sitemaps_xsl .='<li>';
-    $seopress_sitemaps_xsl .='<xsl:variable name="sitemap_loc"><xsl:value-of select="sitemap:loc"/></xsl:variable>';
-    $seopress_sitemaps_xsl .='<span class="item-loc"><a href="{$sitemap_loc}"><xsl:value-of select="sitemap:loc" /></a></span>';
-    $seopress_sitemaps_xsl .='<span class="item-lastmod"><xsl:value-of select="sitemap:lastmod" /></span>';
-    $seopress_sitemaps_xsl .='</li>';
-    $seopress_sitemaps_xsl .='</xsl:for-each>';
-    $seopress_sitemaps_xsl .='</ul>';
+	$seopress_sitemaps_xsl .= $seopress_sitemaps_xsl_css;
+	$seopress_sitemaps_xsl .= '</head>';
+	$seopress_sitemaps_xsl .= '<body>';
+	$seopress_sitemaps_xsl .= '<div id="main">';
+	$seopress_sitemaps_xsl .= '<h1>' . __( 'XML Sitemaps', 'wp-seopress' ) . '</h1>';
+	$seopress_sitemaps_xsl .= '<p><a href="' . $home_url . 'sitemaps.xml">Index sitemaps</a></p>';
+	$seopress_sitemaps_xsl .= '<xsl:if test="sitemap:sitemapindex/sitemap:sitemap">';
+	$seopress_sitemaps_xsl .= '<p>' . /* translators: %s number of xml sub-sitemaps */ sprintf( __( 'This XML Sitemap Index file contains %s sitemaps.', 'wp-seopress' ), '<xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/>' ) . '</p>';
+	$seopress_sitemaps_xsl .= '</xsl:if>';
+	$seopress_sitemaps_xsl .= '<xsl:if test="sitemap:urlset/sitemap:url">';
+	$seopress_sitemaps_xsl .= '<p>' . /* translators: %s number of URLs in an xml sitemap */ sprintf( __( 'This XML Sitemap contains %s URL(s).', 'wp-seopress' ), '<xsl:value-of select="count(sitemap:urlset/sitemap:url)"/>' ) . '</p>';
+	$seopress_sitemaps_xsl .= '</xsl:if>';
+	$seopress_sitemaps_xsl .= '<div id="sitemaps">';
+	$seopress_sitemaps_xsl .= '<div class="loc">';
+	$seopress_sitemaps_xsl .= 'URL';
+	$seopress_sitemaps_xsl .= '</div>';
+	$seopress_sitemaps_xsl .= '<div class="lastmod">';
+	$seopress_sitemaps_xsl .= __( 'Last update', 'wp-seopress' );
+	$seopress_sitemaps_xsl .= '</div>';
+	$seopress_sitemaps_xsl .= '<ul>';
+	$seopress_sitemaps_xsl .= '<xsl:for-each select="sitemap:sitemapindex/sitemap:sitemap">';
+	$seopress_sitemaps_xsl .= '<li>';
+	$seopress_sitemaps_xsl .= '<xsl:variable name="sitemap_loc"><xsl:value-of select="sitemap:loc"/></xsl:variable>';
+	$seopress_sitemaps_xsl .= '<span class="item-loc"><a href="{$sitemap_loc}"><xsl:value-of select="sitemap:loc" /></a></span>';
+	$seopress_sitemaps_xsl .= '<span class="item-lastmod"><xsl:value-of select="sitemap:lastmod" /></span>';
+	$seopress_sitemaps_xsl .= '</li>';
+	$seopress_sitemaps_xsl .= '</xsl:for-each>';
+	$seopress_sitemaps_xsl .= '</ul>';
 
-    $seopress_sitemaps_xsl .='<ul>';
-	$seopress_sitemaps_xsl .='<xsl:for-each select="sitemap:urlset/sitemap:url">';
-    $seopress_sitemaps_xsl .='<li>';
-    $seopress_sitemaps_xsl .='<xsl:variable name="url_loc"><xsl:value-of select="sitemap:loc"/></xsl:variable>';
-	$seopress_sitemaps_xsl .='<span class="item-loc"><a href="{$url_loc}"><xsl:value-of select="sitemap:loc" /></a></span>';
+	$seopress_sitemaps_xsl .= '<ul>';
+	$seopress_sitemaps_xsl .= '<xsl:for-each select="sitemap:urlset/sitemap:url">';
+	$seopress_sitemaps_xsl .= '<li>';
+	$seopress_sitemaps_xsl .= '<xsl:variable name="url_loc"><xsl:value-of select="sitemap:loc"/></xsl:variable>';
+	$seopress_sitemaps_xsl .= '<span class="item-loc"><a href="{$url_loc}"><xsl:value-of select="sitemap:loc" /></a></span>';
 
 	$seopress_sitemaps_xsl .= '<xsl:if test="sitemap:lastmod">';
-	$seopress_sitemaps_xsl .='<span class="item-lastmod"><xsl:value-of select="sitemap:lastmod" /></span>';
-	$seopress_sitemaps_xsl .='</xsl:if>';
-    $seopress_sitemaps_xsl .='</li>';
-    $seopress_sitemaps_xsl .='</xsl:for-each>';
-    $seopress_sitemaps_xsl .='</ul>';
+	$seopress_sitemaps_xsl .= '<span class="item-lastmod"><xsl:value-of select="sitemap:lastmod" /></span>';
+	$seopress_sitemaps_xsl .= '</xsl:if>';
+	$seopress_sitemaps_xsl .= '</li>';
+	$seopress_sitemaps_xsl .= '</xsl:for-each>';
+	$seopress_sitemaps_xsl .= '</ul>';
 
-    $seopress_sitemaps_xsl .='</div>';
-    $seopress_sitemaps_xsl .='</div>';
-	$seopress_sitemaps_xsl .='</body>';
-	$seopress_sitemaps_xsl .='</html>';
+	$seopress_sitemaps_xsl .= '</div>';
+	$seopress_sitemaps_xsl .= '</div>';
+	$seopress_sitemaps_xsl .= '</body>';
+	$seopress_sitemaps_xsl .= '</html>';
 
-	$seopress_sitemaps_xsl .='</xsl:template>';
+	$seopress_sitemaps_xsl .= '</xsl:template>';
 
-	$seopress_sitemaps_xsl .='</xsl:stylesheet>';
+	$seopress_sitemaps_xsl .= '</xsl:stylesheet>';
 
-    $seopress_sitemaps_xsl = apply_filters('seopress_sitemaps_xsl', $seopress_sitemaps_xsl);
+	$seopress_sitemaps_xsl = apply_filters( 'seopress_sitemaps_xsl', $seopress_sitemaps_xsl );
 
 	return $seopress_sitemaps_xsl;
 }

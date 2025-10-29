@@ -353,7 +353,7 @@
 
 .seopress-get-started .seopress-block-wizard::after {
     content: '';
-    background: url(../img/bg-dashboard-wizard.svg) 100% 0% no-repeat;
+    background: url(../img/bg-dashboard-wizard.svg) right center no-repeat;
     opacity: 0.1;
     position: absolute;
     right: 0;
@@ -362,7 +362,7 @@
     width: 100%;
     height: 100%;
     filter: invert(1);
-    background-size: 300px 300px;
+    background-size: contain;
 }
 
 .seopress-get-started .seopress-block-wizard>* {

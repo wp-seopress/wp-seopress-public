@@ -1,57 +1,66 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\Description\Specifications;
 
-class BlogPageSpecification
-{
+/**
+ * BlogPageSpecification
+ */
+class BlogPageSpecification {
 
-    const NAME_SERVICE = 'BlogPageDescriptionSpecification';
+	/**
+	 * The name service.
+	 *
+	 * @var string
+	 */
+	const NAME_SERVICE = 'BlogPageDescriptionSpecification';
 
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
-        $value = isset($params['description']) ? $params['description'] : '';
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$value = isset( $params['description'] ) ? $params['description'] : '';
 
-        if(empty($value) || !$value){
-            return "";
-        }
+		if ( empty( $value ) || ! $value ) {
+			return '';
+		}
 
-        $context = $params['context'];
+		$context = $params['context'];
 
-        return seopress_get_service('TagsToString')->replace($value, $context);
-    }
+		return seopress_get_service( 'TagsToString' )->replace( $value, $context );
+	}
 
 
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'description' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $descriptionValue = $params['description'];
-        $context = $params['context'];
-        $post = $params['post'];
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'description' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$description_value = $params['description'];
+		$context           = $params['context'];
+		$post              = $params['post'];
 
-        if ($context['is_home'] && !empty($descriptionValue)) {
-            return true;
+		if ( $context['is_home'] && ! empty( $description_value ) ) {
+			return true;
+		}
 
-        }
-
-        return false;
-
-    }
+		return false;
+	}
 }
-
-

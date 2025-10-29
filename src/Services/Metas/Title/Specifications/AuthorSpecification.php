@@ -1,58 +1,62 @@
-<?php
+<?php // phpcs:ignore
 
 namespace SEOPress\Services\Metas\Title\Specifications;
 
-
-class AuthorSpecification
-{
-
-    /**
-     * @param array $params [
-     *     'context' => array
-     *
-     * ]
-     * @return string
-     */
-    public function getValue($params) {
-        $value   = seopress_get_service('TitleOption')->getArchivesAuthorTitle();
-
-        if(empty($value) || !$value){
-            return "";
-        }
-
-        $context = $params['context'];
-
-        return seopress_get_service('TagsToString')->replace($value, $context);
-    }
+/**
+ * AuthorSpecification
+ */
+class AuthorSpecification {
 
 
+	/**
+	 * The getValue function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return string
+	 */
+	public function getValue( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$value = seopress_get_service( 'TitleOption' )->getArchivesAuthorTitle();
 
-    /**
-     *
-     * @param array $params [
-     *     'post' => \WP_Post
-     *     'title' => string
-     *     'context' => array
-     *
-     * ]
-     * @return boolean
-     */
-    public function isSatisfyBy($params)
-    {
-        $context = $params['context'];
-        $post = $params['post'];
+		if ( empty( $value ) || ! $value ) {
+			return '';
+		}
 
-        if ($context['is_author']) {
+		$context = $params['context'];
 
-            $value   = seopress_get_service('TitleOption')->getArchivesAuthorTitle();
-            if(!empty($value)){
-                return true;
-            }
-        }
+		return seopress_get_service( 'TagsToString' )->replace( $value, $context );
+	}
 
-        return false;
 
-    }
+
+	/**
+	 * The isSatisfyBy function.
+	 *
+	 * @param array $params The params.
+	 *
+	 * @example [
+	 *     'post' => \WP_Post
+	 *     'title' => string
+	 *     'context' => array
+	 *
+	 * ]
+	 * @return boolean
+	 */
+	public function isSatisfyBy( $params ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$context = $params['context'];
+		$post    = $params['post'];
+
+		if ( $context['is_author'] ) {
+			$value = seopress_get_service( 'TitleOption' )->getArchivesAuthorTitle();
+			if ( ! empty( $value ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
-
-

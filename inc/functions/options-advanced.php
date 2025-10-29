@@ -1,30 +1,47 @@
 <?php
+/**
+ * Options advanced
+ *
+ * @package Functions
+ */
 
-defined('ABSPATH') or exit('Please don&rsquo;t call the plugin directly. Thanks :)');
+defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
-//Attachments redirects
+/**
+ * Attachments redirects
+ *
+ * @return string $attachments
+ */
 function seopress_advanced_advanced_attachments_option() {
-	return seopress_get_service('AdvancedOption')->getAdvancedAttachments();
+	return seopress_get_service( 'AdvancedOption' )->getAdvancedAttachments();
 }
 
-function seopress_redirections_attachments(){
-	if (seopress_advanced_advanced_attachments_option() =='1') {
+/**
+ * Attachments redirects
+ *
+ * @return void
+ */
+function seopress_redirections_attachments() {
+	if ( seopress_advanced_advanced_attachments_option() === '1' ) {
 		global $post;
-		if ( is_attachment() && isset($post->post_parent) && is_numeric($post->post_parent) && ($post->post_parent != 0) ) {
-	    	wp_redirect( get_permalink( $post->post_parent ), 301 );
-	    	exit();
-		    wp_reset_postdata();
-		} elseif (is_attachment() && isset($post->post_parent) && is_numeric($post->post_parent) && ($post->post_parent == 0)) {
-			wp_redirect(get_home_url(), 302);
+		if ( is_attachment() && isset( $post->post_parent ) && is_numeric( $post->post_parent ) && 0 !== $post->post_parent ) {
+			wp_redirect( get_permalink( $post->post_parent ), 301 );
+			exit();
+		} elseif ( is_attachment() && isset( $post->post_parent ) && is_numeric( $post->post_parent ) && 0 === $post->post_parent ) {
+			wp_redirect( get_home_url(), 302 );
 			exit();
 		}
 	}
 }
 add_action( 'template_redirect', 'seopress_redirections_attachments', 2 );
 
-//Attachments redirects to file URL
-function seopress_redirections_attachments_file(){
-	if (seopress_get_service('AdvancedOption')->getAdvancedAttachmentsFile() ==='1') {
+/**
+ * Attachments redirects to file URL
+ *
+ * @return void
+ */
+function seopress_redirections_attachments_file() {
+	if ( seopress_get_service( 'AdvancedOption' )->getAdvancedAttachmentsFile() === '1' ) {
 		if ( is_attachment() ) {
 			wp_redirect( wp_get_attachment_url(), 301 );
 			exit();
@@ -33,241 +50,339 @@ function seopress_redirections_attachments_file(){
 }
 add_action( 'template_redirect', 'seopress_redirections_attachments_file', 1 );
 
-//Remove reply to com link
-if ('1' == seopress_get_service('AdvancedOption')->getAdvancedReplytocom()) {
-    add_filter('comment_reply_link', 'seopress_remove_reply_to_com');
-}
-function seopress_remove_reply_to_com($link) {
-    return preg_replace('/href=\'(.*(\?|&)replytocom=(\d+)#respond)/', 'href=\'#comment-$3', $link);
-}
-
-//Remove noreferrer on links
-if ('1' == seopress_get_service('AdvancedOption')->getAdvancedNoReferrer()) {
-    add_filter('the_content', 'seopress_remove_noreferrer', 999);
-}
-function seopress_remove_noreferrer($content) {
-    if (empty($content)) {
-        return $content;
-    }
-
-    $attrs = [
-        "noreferrer " => "",
-        " noreferrer" => ""
-    ];
-
-    $attrs = apply_filters( 'seopress_link_attrs', $attrs );
-
-    return strtr($content, $attrs);
+/**
+ * Remove reply to com link
+ *
+ * @return void
+ */
+if ( seopress_get_service( 'AdvancedOption' )->getAdvancedReplytocom() === '1' ) {
+	add_filter( 'comment_reply_link', 'seopress_remove_reply_to_com' );
 }
 
-//Remove WP meta generator
-if ('1' == seopress_get_service('AdvancedOption')->getAdvancedWPGenerator()) {
-    remove_action('wp_head', 'wp_generator');
+/**
+ * Remove reply to com link
+ *
+ * @param string $link Link.
+ *
+ * @return string $link
+ */
+function seopress_remove_reply_to_com( $link ) {
+	return preg_replace( '/href=\'(.*(\?|&)replytocom=(\d+)#respond)/', 'href=\'#comment-$3', $link );
 }
 
-//Remove hentry post class
-if ('1' == seopress_get_service('AdvancedOption')->getAdvancedHentry()) {
-    function seopress_advanced_advanced_hentry_hook($classes) {
-
-        $classes = array_diff($classes, ['hentry']);
-
-        return $classes;
-    }
-    add_filter('post_class', 'seopress_advanced_advanced_hentry_hook');
+/**
+ * Remove noreferrer on links
+ *
+ * @return void
+ */
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedNoReferrer() ) {
+	add_filter( 'the_content', 'seopress_remove_noreferrer', 999 );
 }
 
-//WordPress
-if ('1' == seopress_get_service('AdvancedOption')->getAdvancedWPShortlink()) {
-    remove_action('wp_head', 'wp_shortlink_wp_head');
+/**
+ * Remove noreferrer on links
+ *
+ * @param string $content Content.
+ *
+ * @return string $content
+ */
+function seopress_remove_noreferrer( $content ) {
+	if ( empty( $content ) ) {
+		return $content;
+	}
+
+	$attrs = array(
+		'noreferrer ' => '',
+		' noreferrer' => '',
+	);
+
+	$attrs = apply_filters( 'seopress_link_attrs', $attrs );
+
+	return strtr( $content, $attrs );
 }
 
-//WordPress WLWManifest
-if ('1' == seopress_get_service('AdvancedOption')->getAdvancedWPManifest()) {
-    remove_action('wp_head', 'wlwmanifest_link');
+/**
+ * Remove WP meta generator
+ *
+ * @return void
+ */
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedWPGenerator() ) {
+	remove_action( 'wp_head', 'wp_generator' );
 }
 
-//WordPress RSD
-if ('1' == seopress_get_service('AdvancedOption')->getAdvancedWPRSD()) {
-    remove_action('wp_head', 'rsd_link');
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedHentry() ) {
+	/**
+	 * Remove hentry post class
+	 *
+	 * @param array $classes Classes.
+	 *
+	 * @return array $classes
+	 */
+	function seopress_advanced_advanced_hentry_hook( $classes ) {
+
+		$classes = array_diff( $classes, array( 'hentry' ) );
+
+		return $classes;
+	}
+	add_filter( 'post_class', 'seopress_advanced_advanced_hentry_hook' );
 }
 
-//Disable X-Pingback header
-if ('1' === seopress_get_service('AdvancedOption')->getAdvancedOEmbed()) {
-    remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+// WordPress Shortlink.
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedWPShortlink() ) {
+	remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 }
 
-//Disable X-Pingback header
-if ('1' === seopress_get_service('AdvancedOption')->getAdvancedXPingback()) {
-    function seopress_advanced_advanced_x_pingback_hook() {
-        header_remove('X-Pingback');
-    }
-    add_action('wp', 'seopress_advanced_advanced_x_pingback_hook');
+// WordPress WLWManifest.
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedWPManifest() ) {
+	remove_action( 'wp_head', 'wlwmanifest_link' );
 }
 
-//Disable X-Powered-By header
-if ('1' === seopress_get_service('AdvancedOption')->getAdvancedXPoweredBy()) {
-    function seopress_advanced_advanced_x_powered_by_hook() {
-        header_remove('X-Powered-By');
-    }
-    add_action('wp', 'seopress_advanced_advanced_x_powered_by_hook');
+// WordPress RSD.
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedWPRSD() ) {
+	remove_action( 'wp_head', 'rsd_link' );
 }
 
-//Remove Emoji scripts
-if ('1' === seopress_get_service('AdvancedOption')->getAdvancedEmoji()) {
-    function seopress_advanced_advanced_emoji_hook() {
-        remove_action('wp_head', 'print_emoji_detection_script', 7);
-        remove_action('admin_print_scripts', 'print_emoji_detection_script');
-        remove_action('wp_print_styles', 'print_emoji_styles');
-        remove_action('admin_print_styles', 'print_emoji_styles');
-        remove_filter('the_content_feed', 'wp_staticize_emoji');
-        remove_filter('comment_text_rss', 'wp_staticize_emoji');
-        remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
-        add_filter('emoji_svg_url', '__return_false');
-    }
-    add_action('wp', 'seopress_advanced_advanced_emoji_hook');
+// Disable X-Pingback header.
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedOEmbed() ) {
+	remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 }
 
-//Google site verification
+// Disable X-Pingback header.
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedXPingback() ) {
+	/**
+	 * Remove X-Pingback header
+	 *
+	 * @return void
+	 */
+	function seopress_advanced_advanced_x_pingback_hook() {
+		header_remove( 'X-Pingback' );
+	}
+	add_action( 'wp', 'seopress_advanced_advanced_x_pingback_hook' );
+}
+
+// Disable X-Powered-By header.
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedXPoweredBy() ) {
+	/**
+	 * Remove X-Powered-By header
+	 *
+	 * @return void
+	 */
+	function seopress_advanced_advanced_x_powered_by_hook() {
+		header_remove( 'X-Powered-By' );
+	}
+	add_action( 'wp', 'seopress_advanced_advanced_x_powered_by_hook' );
+}
+
+if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedEmoji() ) {
+	/**
+	 * Remove Emoji scripts
+	 *
+	 * @return void
+	 */
+	function seopress_advanced_advanced_emoji_hook() {
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+		remove_action( 'admin_print_styles', 'print_emoji_styles' );
+		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+		add_filter( 'emoji_svg_url', '__return_false' );
+	}
+	add_action( 'wp', 'seopress_advanced_advanced_emoji_hook' );
+}
+
+/**
+ * Google site verification
+ *
+ * @return void
+ */
 function seopress_advanced_advanced_google_hook() {
-    if (is_home() || is_front_page()) {
-        $optionGoogle = seopress_get_service('AdvancedOption')->getAdvancedGoogleVerification();
-        if (!empty($optionGoogle)) { ?><meta name="google-site-verification" content="<?php echo esc_attr($optionGoogle); ?>">
-<?php }
-    }
+	if ( is_home() || is_front_page() ) {
+		$option_google = seopress_get_service( 'AdvancedOption' )->getAdvancedGoogleVerification();
+		if ( ! empty( $option_google ) ) {
+			?><meta name="google-site-verification" content="<?php echo esc_attr( $option_google ); ?>">
+			<?php
+		}
+	}
 }
-add_action('wp_head', 'seopress_advanced_advanced_google_hook', 2);
+add_action( 'wp_head', 'seopress_advanced_advanced_google_hook', 2 );
 
-//Bing site verification
+/**
+ * Bing site verification
+ *
+ * @return void
+ */
 function seopress_advanced_advanced_bing_hook() {
-    if (is_home() || is_front_page()) {
-        $optionBing = seopress_get_service('AdvancedOption')->getAdvancedBingVerification();
-        if (!empty($optionBing)) { ?><meta name="msvalidate.01" content="<?php echo esc_attr($optionBing); ?>">
-<?php }
-    }
+	if ( is_home() || is_front_page() ) {
+		$option_bing = seopress_get_service( 'AdvancedOption' )->getAdvancedBingVerification();
+		if ( ! empty( $option_bing ) ) {
+			?>
+		<meta name="msvalidate.01" content="<?php echo esc_attr( $option_bing ); ?>">
+			<?php
+		}
+	}
 }
-add_action('wp_head', 'seopress_advanced_advanced_bing_hook', 2);
+add_action( 'wp_head', 'seopress_advanced_advanced_bing_hook', 2 );
 
-//Pinterest site verification
+/**
+ * Pinterest site verification
+ *
+ * @return void
+ */
 function seopress_advanced_advanced_pinterest_hook() {
-    if (is_home() || is_front_page()) {
-        $optionPinterest =seopress_get_service('AdvancedOption')->getAdvancedPinterestVerification();
-        if (!empty($optionPinterest)) { ?><meta name="p:domain_verify" content="<?php echo esc_attr($optionPinterest); ?>">
-<?php }
-    }
+	if ( is_home() || is_front_page() ) {
+		$option_pinterest = seopress_get_service( 'AdvancedOption' )->getAdvancedPinterestVerification();
+		if ( ! empty( $option_pinterest ) ) {
+			?>
+		<meta name="p:domain_verify" content="<?php echo esc_attr( $option_pinterest ); ?>">
+			<?php
+		}
+	}
 }
-add_action('wp_head', 'seopress_advanced_advanced_pinterest_hook', 2);
+add_action( 'wp_head', 'seopress_advanced_advanced_pinterest_hook', 2 );
 
-//Yandex site verification
+/**
+ * Yandex site verification
+ *
+ * @return void
+ */
 function seopress_advanced_advanced_yandex_hook() {
-    if (is_home() || is_front_page()) {
-        $contentYandex = seopress_get_service('AdvancedOption')->getAdvancedYandexVerification();
+	if ( is_home() || is_front_page() ) {
+		$content_yandex = seopress_get_service( 'AdvancedOption' )->getAdvancedYandexVerification();
 
-        if(empty($contentYandex)){
-            return;
-        }
-        ?><meta name="yandex-verification" content="<?php echo esc_attr($contentYandex); ?>">
-<?php
-    }
+		if ( empty( $content_yandex ) ) {
+			return;
+		}
+		?>
+		<meta name="yandex-verification" content="<?php echo esc_attr( $content_yandex ); ?>">
+		<?php
+	}
 }
-add_action('wp_head', 'seopress_advanced_advanced_yandex_hook', 2);
+add_action( 'wp_head', 'seopress_advanced_advanced_yandex_hook', 2 );
 
-//Baidu site verification
+/**
+ * Baidu site verification
+ *
+ * @return void
+ */
 function seopress_advanced_advanced_baidu_hook() {
-    if (is_home() || is_front_page()) {
-        $contentBaidu = seopress_get_service('AdvancedOption')->getAdvancedBaiduVerification();
+	if ( is_home() || is_front_page() ) {
+		$content_baidu = seopress_get_service( 'AdvancedOption' )->getAdvancedBaiduVerification();
 
-        if(empty($contentBaidu)){
-            return;
-        } ?><meta name="baidu-site-verification" content="<?php echo esc_attr($contentBaidu); ?>">
-<?php
-    }
+		if ( empty( $content_baidu ) ) {
+			return;
+		}
+		?>
+		<meta name="baidu-site-verification" content="<?php echo esc_attr( $content_baidu ); ?>">
+		<?php
+	}
 }
-add_action('wp_head', 'seopress_advanced_advanced_baidu_hook', 2);
+add_action( 'wp_head', 'seopress_advanced_advanced_baidu_hook', 2 );
 
-//Automatic alt text based on target kw
-if (!empty(seopress_get_service('AdvancedOption')->getAdvancedImageAutoAltTargetKw())) {
-    function seopress_auto_img_alt_thumb_target_kw($atts, $attachment) {
-        if ( ! is_admin()) {
-            if (empty($atts['alt'])) {
-                if ('' != get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true)) {
-                    $atts['alt'] = esc_html(get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true));
+/**
+ * Automatic alt text based on target kw
+ *
+ * @return void
+ */
+if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedImageAutoAltTargetKw() ) ) {
+	/**
+	 * Automatic alt text based on target kw
+	 *
+	 * @param array $atts Atts.
+	 * @param array $attachment Attachment.
+	 *
+	 * @return array $atts
+	 */
+	function seopress_auto_img_alt_thumb_target_kw( $atts, $attachment ) {
+		if ( ! is_admin() ) {
+			if ( empty( $atts['alt'] ) ) {
+				if ( '' !== get_post_meta( get_the_ID(), '_seopress_analysis_target_kw', true ) ) {
+					$atts['alt'] = esc_html( get_post_meta( get_the_ID(), '_seopress_analysis_target_kw', true ) );
 
-                    $atts['alt'] = apply_filters('seopress_auto_image_alt_target_kw', $atts['alt']);
-                }
-            }
-        }
+					$atts['alt'] = apply_filters( 'seopress_auto_image_alt_target_kw', $atts['alt'] );
+				}
+			}
+		}
 
-        return $atts;
-    }
-    add_filter('wp_get_attachment_image_attributes', 'seopress_auto_img_alt_thumb_target_kw', 10, 2);
+		return $atts;
+	}
+	add_filter( 'wp_get_attachment_image_attributes', 'seopress_auto_img_alt_thumb_target_kw', 10, 2 );
 
-    /**
-     * Replace alt for content no use gutenberg.
-     *
-     * @since 4.4.0.5
-     *
-     * @param string $content
-     *
-     * @return void
-     */
-    function seopress_auto_img_alt_target_kw($content) {
-        if (empty($content)) {
-            return $content;
-        }
+	/**
+	 * Replace alt for content no use gutenberg.
+	 *
+	 * @since 4.4.0.5
+	 *
+	 * @param string $content Content.
+	 *
+	 * @return string $content
+	 */
+	function seopress_auto_img_alt_target_kw( $content ) {
+		if ( empty( $content ) ) {
+			return $content;
+		}
 
-        $target_keyword = get_post_meta(get_the_ID(), '_seopress_analysis_target_kw', true);
+		$target_keyword = get_post_meta( get_the_ID(), '_seopress_analysis_target_kw', true );
 
-        $target_keyword = apply_filters('seopress_auto_image_alt_target_kw', $target_keyword);
+		$target_keyword = apply_filters( 'seopress_auto_image_alt_target_kw', $target_keyword );
 
-        if (empty($target_keyword)) {
-            return $content;
-        }
+		if ( empty( $target_keyword ) ) {
+			return $content;
+		}
 
-        $regex = '#<img[^>]* alt=(?:\"|\')(?<alt>([^"]*))(?:\"|\')[^>]*>#mU';
+		$regex = '#<img[^>]* alt=(?:\"|\')(?<alt>([^"]*))(?:\"|\')[^>]*>#mU';
 
-        preg_match_all($regex, $content, $matches);
+		preg_match_all( $regex, $content, $matches );
 
-        $matchesTag = $matches[0];
-        $matchesAlt = $matches['alt'];
+		$matches_tag = $matches[0];
+		$matches_alt = $matches['alt'];
 
-        if (empty($matchesAlt)) {
-            return $content;
-        }
+		if ( empty( $matches_alt ) ) {
+			return $content;
+		}
 
-        $regexSrc = '#<img[^>]* src=(?:\"|\')(?<src>([^"]*))(?:\"|\')[^>]*>#mU';
+		$regex_src = '#<img[^>]* src=(?:\"|\')(?<src>([^"]*))(?:\"|\')[^>]*>#mU';
 
-        foreach ($matchesAlt as $key => $alt) {
-            if ( ! empty($alt)) {
-                continue;
-            }
-            $contentMatch = $matchesTag[$key];
-            preg_match($regexSrc, $contentMatch, $matchSrc);
+		foreach ( $matches_alt as $key => $alt ) {
+			if ( ! empty( $alt ) ) {
+				continue;
+			}
+			$content_match = $matches_tag[ $key ];
+			preg_match( $regex_src, $content_match, $match_src );
 
-            $contentToReplace  = str_replace('alt=""', 'alt="' . htmlspecialchars(esc_html($target_keyword)) . '"', $contentMatch);
+			$content_to_replace = str_replace( 'alt=""', 'alt="' . htmlspecialchars( esc_html( $target_keyword ) ) . '"', $content_match );
 
-            if ($contentMatch !== $contentToReplace) {
-                $content = str_replace($contentMatch, $contentToReplace, $content);
-            }
-        }
+			if ( $content_match !== $content_to_replace ) {
+				$content = str_replace( $content_match, $content_to_replace, $content );
+			}
+		}
 
-        return $content;
-    }
-    add_filter('the_content', 'seopress_auto_img_alt_target_kw', 20);
+		return $content;
+	}
+	add_filter( 'the_content', 'seopress_auto_img_alt_target_kw', 20 );
 }
 
-//Automatically set alt text on already inserted image (WP 6.0 required)
-if (!empty(seopress_get_service('AdvancedOption')->getAdvancedImageAutoAltTxt())) {
-    function seopress_auto_img_alt_txt($filtered_image, $context, $attachment_id) {
-        if ($attachment_id) {
-            if (!preg_match('/<img[^>]+alt=(["\'])(.*?)\1/', $filtered_image) || preg_match('/<img[^>]+alt=(["\'])(\s*)\1/', $filtered_image)) {
+if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedImageAutoAltTxt() ) ) {
+	/**
+	 * Automatically set alt text on already inserted image (WP 6.0 required)
+	 *
+	 * @param string $filtered_image Filtered image.
+	 * @param string $context Context.
+	 * @param string $attachment_id Attachment ID.
+	 *
+	 * @return string $filtered_image
+	 */
+	function seopress_auto_img_alt_txt( $filtered_image, $context, $attachment_id ) {
+		if ( $attachment_id ) {
+			if ( ! preg_match( '/<img[^>]+alt=(["\'])(.*?)\1/', $filtered_image ) || preg_match( '/<img[^>]+alt=(["\'])(\s*)\1/', $filtered_image ) ) {
+				$alt_text = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
 
-                $alt_text = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
+				$filtered_image = str_replace( '<img', '<img alt="' . esc_attr( $alt_text ) . '"', $filtered_image );
+			}
+		}
 
-                $filtered_image = str_replace('<img', '<img alt="' . esc_attr($alt_text) . '"', $filtered_image);
-            }
-        }
-
-        return $filtered_image;
-    }
-    add_filter('wp_content_img_tag', 'seopress_auto_img_alt_txt', 10, 3);
+		return $filtered_image;
+	}
+	add_filter( 'wp_content_img_tag', 'seopress_auto_img_alt_txt', 10, 3 );
 }
