@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.3
+Stable tag: 9.3.0.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,6 +311,10 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.3.0.1 =
+* FIX Social meta tags in specific cases
+* FIX Fatal error for SEOPress PRO
+
 = 9.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-3/">Read the blog post update</a> =
 * NEW Significant performance improvements for XML sitemaps (800% faster)
 * NEW PHPCS/WPCS standards implemented for the free version
@@ -332,6 +336,7 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 * FIX SiteSEO import tool
 * FIX Incorrect Open Graph type tag for products
 * FIX UI consistency issues
+* FIX Weglot compatibility issue with redirections
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

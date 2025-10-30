@@ -321,6 +321,7 @@ function seopress_social_fb_title_post_option() {
 	if ( '' !== $_seopress_social_fb_title ) {
 		return $_seopress_social_fb_title;
 	}
+	return '';
 }
 
 /**
@@ -334,6 +335,7 @@ function seopress_social_fb_title_term_option() {
 			return $_seopress_social_fb_title;
 		}
 	}
+	return '';
 }
 
 /**
@@ -345,6 +347,7 @@ function seopress_social_fb_title_home_option() {
 	if ( ! empty( $_seopress_social_fb_title ) ) {
 		return $_seopress_social_fb_title;
 	}
+	return '';
 }
 
 /**
@@ -449,6 +452,7 @@ function seopress_social_fb_desc_post_option() {
 	if ( '' !== $_seopress_social_fb_desc ) {
 		return $_seopress_social_fb_desc;
 	}
+	return '';
 }
 
 /**
@@ -462,6 +466,7 @@ function seopress_social_fb_desc_term_option() {
 			return $_seopress_social_fb_desc;
 		}
 	}
+	return '';
 }
 
 /**
@@ -473,6 +478,7 @@ function seopress_social_fb_desc_home_option() {
 	if ( ! empty( $_seopress_social_fb_desc ) ) {
 		return $_seopress_social_fb_desc;
 	}
+	return '';
 }
 
 /**
@@ -580,6 +586,7 @@ function seopress_social_fb_img_post_option() {
 	if ( '' !== $_seopress_social_fb_img ) {
 		return $_seopress_social_fb_img;
 	}
+	return '';
 }
 
 /**
@@ -593,6 +600,7 @@ function seopress_social_fb_img_term_option() {
 			return $_seopress_social_fb_img;
 		}
 	}
+	return '';
 }
 
 /**
@@ -608,6 +616,7 @@ function seopress_social_fb_img_product_cat_option() {
 			return $image;
 		}
 	}
+	return '';
 }
 
 /**
@@ -621,6 +630,7 @@ function seopress_social_fb_img_home_option() {
 	} elseif ( has_post_thumbnail( $page_id ) ) {
 		return get_the_post_thumbnail_url( $page_id );
 	}
+	return '';
 }
 
 /**
@@ -863,6 +873,7 @@ function seopress_social_twitter_title_post_option() {
 	if ( '' !== $_seopress_social_twitter_title ) {
 		return $_seopress_social_twitter_title;
 	}
+	return '';
 }
 
 /**
@@ -876,6 +887,7 @@ function seopress_social_twitter_title_term_option() {
 			return $_seopress_social_twitter_title;
 		}
 	}
+	return '';
 }
 
 /**
@@ -887,6 +899,7 @@ function seopress_social_twitter_title_home_option() {
 	if ( ! empty( $_seopress_social_twitter_title ) ) {
 		return $_seopress_social_twitter_title;
 	}
+	return '';
 }
 
 /**
@@ -992,6 +1005,7 @@ function seopress_social_twitter_desc_post_option() {
 	if ( '' !== $_seopress_social_twitter_desc ) {
 		return $_seopress_social_twitter_desc;
 	}
+	return '';
 }
 
 /**
@@ -1005,6 +1019,7 @@ function seopress_social_twitter_desc_term_option() {
 			return $_seopress_social_twitter_desc;
 		}
 	}
+	return '';
 }
 
 /**
@@ -1016,6 +1031,7 @@ function seopress_social_twitter_desc_home_option() {
 	if ( ! empty( $_seopress_social_twitter_desc ) ) {
 		return $_seopress_social_twitter_desc;
 	}
+	return '';
 }
 
 /**
@@ -1127,6 +1143,7 @@ function seopress_social_twitter_img_post_option() {
 	if ( '' !== $_seopress_social_twitter_img ) {
 		return $_seopress_social_twitter_img;
 	}
+	return '';
 }
 
 /**
@@ -1140,6 +1157,7 @@ function seopress_social_twitter_img_term_option() {
 			return $_seopress_social_twitter_img;
 		}
 	}
+	return '';
 }
 
 /**
@@ -1153,6 +1171,7 @@ function seopress_social_twitter_img_home_option() {
 	} elseif ( has_post_thumbnail( $page_id ) ) {
 		return get_the_post_thumbnail_url( $page_id );
 	}
+	return '';
 }
 
 /**
