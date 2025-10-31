@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.3.0.1
+Stable tag: 9.3.0.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,6 +311,9 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.3.0.2 =
+* FIX User consent with our cookie bar
+
 = 9.3.0.1 =
 * FIX Social meta tags in specific cases
 * FIX Fatal error for SEOPress PRO

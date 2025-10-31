@@ -34,17 +34,34 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data.data) {
+                // Helper function to execute scripts properly
+                const executeScript = (scriptContent, targetElement) => {
+                    if (!scriptContent) return;
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = scriptContent;
+                    const scripts = tempDiv.querySelectorAll('script');
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.textContent = oldScript.textContent;
+                        targetElement.appendChild(newScript);
+                    });
+                    // Also add any non-script content
+                    const nonScriptNodes = Array.from(tempDiv.childNodes).filter(node => node.nodeName !== 'SCRIPT');
+                    nonScriptNodes.forEach(node => targetElement.appendChild(node.cloneNode(true)));
+                };
+
                 const head = document.head;
-                if (data.data.gtag_js) head.insertAdjacentHTML('beforeend', data.data.gtag_js);
-                if (data.data.matomo_js) head.insertAdjacentHTML('beforeend', data.data.matomo_js);
-                if (data.data.clarity_js) head.insertAdjacentHTML('beforeend', data.data.clarity_js);
-                if (data.data.custom) head.insertAdjacentHTML('beforeend', data.data.custom);
-                if (data.data.head_js) head.insertAdjacentHTML('beforeend', data.data.head_js);
-                
                 const body = document.body;
-                if (data.data.body_js) body.insertAdjacentHTML('afterbegin', data.data.body_js);
-                if (data.data.matomo_body_js) body.insertAdjacentHTML('afterbegin', data.data.matomo_body_js);
-                if (data.data.footer_js) body.insertAdjacentHTML('beforeend', data.data.footer_js);
+
+                if (data.data.gtag_js) executeScript(data.data.gtag_js, head);
+                if (data.data.matomo_js) executeScript(data.data.matomo_js, head);
+                if (data.data.clarity_js) executeScript(data.data.clarity_js, head);
+                if (data.data.custom) executeScript(data.data.custom, head);
+                if (data.data.head_js) executeScript(data.data.head_js, head);
+                if (data.data.body_js) executeScript(data.data.body_js, body);
+                if (data.data.matomo_body_js) executeScript(data.data.matomo_body_js, body);
+                if (data.data.footer_js) executeScript(data.data.footer_js, body);
             }
         })
         .catch(error => {
@@ -78,9 +95,26 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data.data) {
+                // Helper function to execute scripts properly
+                const executeScript = (scriptContent, targetElement) => {
+                    if (!scriptContent) return;
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = scriptContent;
+                    const scripts = tempDiv.querySelectorAll('script');
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.textContent = oldScript.textContent;
+                        targetElement.appendChild(newScript);
+                    });
+                    // Also add any non-script content
+                    const nonScriptNodes = Array.from(tempDiv.childNodes).filter(node => node.nodeName !== 'SCRIPT');
+                    nonScriptNodes.forEach(node => targetElement.appendChild(node.cloneNode(true)));
+                };
+
                 const head = document.head;
-                if (data.data.gtag_consent_js) head.insertAdjacentHTML('beforeend', data.data.gtag_consent_js);
-                if (data.data.clarity_consent_js) head.insertAdjacentHTML('beforeend', data.data.clarity_consent_js);
+                if (data.data.gtag_consent_js) executeScript(data.data.gtag_consent_js, head);
+                if (data.data.clarity_consent_js) executeScript(data.data.clarity_consent_js, head);
             }
         })
         .catch(error => {
