@@ -1,12 +1,12 @@
-=== SEOPress - On-site SEO ===
+=== SEOPress - On-site SEO & Analytics ===
 Authors: rainbowgeek
-Contributors: seopress, rainbowgeek, gmulti, juliobox, maigret, mgris, vincentdubroeucq
+Contributors: seopress, rainbowgeek, gmulti, corsonr, juliobox, maigret, mgris, vincentdubroeucq
 Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.3.0.2
+Stable tag: 9.3.0.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,6 +311,9 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.3.0.3 =
+* FIX Force reload with our cookie bar
+
 = 9.3.0.2 =
 * FIX User consent with our cookie bar
 

@@ -1,20 +1,14 @@
 //User consent
 document.addEventListener('DOMContentLoaded', function () {
     if (Cookies.get('seopress-user-consent-close') == undefined && Cookies.get('seopress-user-consent-accept') == undefined) {
-        document.querySelectorAll('.seopress-user-consent.seopress-user-message').forEach(function(element) {
-            element.classList.remove('seopress-user-consent-hide');
-        });
-        document.querySelectorAll('.seopress-user-consent-backdrop').forEach(function(element) {
+        document.querySelectorAll('.seopress-user-consent.seopress-user-message, .seopress-user-consent-backdrop').forEach(function(element) {
             element.classList.remove('seopress-user-consent-hide');
         });
     }
     
 	const seopressUserConsentAcceptBtn = document.getElementById('seopress-user-consent-accept');
 	if (seopressUserConsentAcceptBtn) seopressUserConsentAcceptBtn.addEventListener('click', function () {
-        document.querySelectorAll('.seopress-user-consent.seopress-user-message').forEach(function(element) {
-            element.classList.add('seopress-user-consent-hide');
-        });
-        document.querySelectorAll('.seopress-user-consent-backdrop').forEach(function(element) {
+        document.querySelectorAll('.seopress-user-consent.seopress-user-message, .seopress-user-consent-backdrop').forEach(function(element) {
             element.classList.add('seopress-user-consent-hide');
         });
         Cookies.remove('seopress-user-consent-close');
@@ -71,10 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
 	const seopressUserConsentCloseBtn = document.getElementById('seopress-user-consent-close');
 	if (seopressUserConsentCloseBtn) seopressUserConsentCloseBtn.addEventListener('click', function () {
-        document.querySelectorAll('.seopress-user-consent.seopress-user-message').forEach(function(element) {
-            element.classList.add('seopress-user-consent-hide');
-        });
-        document.querySelectorAll('.seopress-user-consent-backdrop').forEach(function(element) {
+        document.querySelectorAll('.seopress-user-consent.seopress-user-message, .seopress-user-consent-backdrop').forEach(function(element) {
             element.classList.add('seopress-user-consent-hide');
         });
 
@@ -124,10 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
 	const seopressUserConsentEditBtn = document.getElementById('seopress-user-consent-edit');
 	if (seopressUserConsentEditBtn) seopressUserConsentEditBtn.addEventListener('click', function () {
-        document.querySelectorAll('.seopress-user-consent.seopress-user-message').forEach(function(element) {
-            element.classList.remove('seopress-user-consent-hide');
-        });
-        document.querySelectorAll('.seopress-user-consent-backdrop').forEach(function(element) {
+        document.querySelectorAll('.seopress-user-consent.seopress-user-message, .seopress-user-consent-backdrop').forEach(function(element) {
             element.classList.remove('seopress-user-consent-hide');
         });
 	});

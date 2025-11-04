@@ -2,6 +2,7 @@ Great people who contributed to this plugin:
 
 Developers:
 - Benjamin Denis: @wp_seopress
+- Rémi Corson: @corsonr
 - Thomas Deneulin: @tdeneulin
 - Julio Potier: @juliobox
 - Mickael Gris: @mgris
