@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.3.0.3
+Stable tag: 9.3.0.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,6 +311,10 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.3.0.4 =
+* FIX WSOD with CPT archive if a manual redirect is set
+* FIX Google Search Console metrics synchronization (PRO)
+
 = 9.3.0.3 =
 * FIX Force reload with our cookie bar
 

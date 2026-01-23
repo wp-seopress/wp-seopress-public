@@ -29,7 +29,7 @@ if ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && SEOPRESS_WL_ADMIN_HEADER === false
 		}
 
 			/* translators: %1$s plugin name, default: SEOPress, %2$s displays the current version number */
-			printf( esc_html__( 'Welcome to %1$s %2$s!', 'wp-seopress' ), esc_html( $seo_title ), '9.3.0.3' );
+			printf( esc_html__( 'Welcome to %1$s %2$s!', 'wp-seopress' ), esc_html( $seo_title ), '9.3.0.4' );
 		?>
 		</h1>
 		<p><?php esc_attr_e( 'Your control center for SEO.', 'wp-seopress' ); ?></p>

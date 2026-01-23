@@ -184,14 +184,14 @@ function seopress_redirections_hook() {
 	// Term.
 	if ( ( is_tax() || is_category() || is_tag() ) && seopress_redirections_term_enabled() === 'yes' ) {
 		if ( seopress_redirections_term_logged_status() === $meta_value_by_logged_in || seopress_redirections_term_logged_status() === 'both' || empty( seopress_redirections_term_logged_status() ) ) {
-			if ( seopress_redirections_term_type() && seopress_redirections_value() !== '' ) {
+			if ( seopress_redirections_term_type() && seopress_redirections_value() != '' ) {
 				wp_redirect( seopress_redirections_value(), seopress_redirections_term_type() );
 				exit();
 			}
 		}
 	} elseif ( seopress_redirections_enabled() === 'yes' ) { // Post.
 		if ( seopress_redirections_logged_status() === $meta_value_by_logged_in || seopress_redirections_logged_status() === 'both' || empty( seopress_redirections_logged_status() ) ) {
-			if ( seopress_redirections_type() && seopress_redirections_value() !== '' ) {
+			if ( seopress_redirections_type() && seopress_redirections_value() != '' ) {
 				wp_redirect( seopress_redirections_value(), seopress_redirections_type() );
 				exit();
 			}
