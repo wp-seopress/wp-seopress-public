@@ -1,5 +1,11 @@
 <?php // phpcs:ignore
-
+/**
+ * Render
+ *
+ * This file is used to render the XML sitemaps.
+ *
+ * @package Actions
+ */
 namespace SEOPress\Actions\Sitemap;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,6 +19,22 @@ use SEOPress\Core\Hooks\ExecuteHooksFrontend;
  */
 class Render implements ExecuteHooksFrontend {
 	/**
+	 * Default sitemap templates directory path
+	 *
+	 * @since 9.4.0
+	 * @var string
+	 */
+	const SITEMAP_TEMPLATE_DIR = 'inc/functions/sitemap/';
+
+	/**
+	 * PRO video sitemap templates directory path
+	 *
+	 * @since 9.4.0
+	 * @var string
+	 */
+	const PRO_VIDEO_TEMPLATE_DIR = 'inc/functions/video-sitemap/';
+
+	/**
 	 * The Render hooks.
 	 *
 	 * @since 4.3.0
@@ -21,19 +43,19 @@ class Render implements ExecuteHooksFrontend {
 	 */
 	public function hooks() {
 		add_action( 'pre_get_posts', array( $this, 'render' ), 1 );
-		add_filter( 'wp_sitemaps_enabled', array( $this, 'sitemaps_enabled' ) );
+		add_filter( 'wp_sitemaps_enabled', array( $this, 'disable_wordpress_core_sitemap' ) );
 		add_action( 'template_redirect', array( $this, 'sitemapShortcut' ), 1 );
 	}
 
 	/**
-	 * The sitemaps_enabled function.
+	 * The disable_wordpress_core_sitemap function.
 	 *
 	 * @since 7.7.0
 	 * @see @wp_sitemaps_enabled
 	 *
 	 * @return boolean
 	 */
-	public function sitemaps_enabled() {
+	public function disable_wordpress_core_sitemap() {
 		if ( '1' === seopress_get_toggle_option( 'xml-sitemap' ) ) {
 			return false;
 		}
@@ -79,6 +101,7 @@ class Render implements ExecuteHooksFrontend {
 	 * The render function.
 	 *
 	 * @since 4.3.0
+	 * @since 9.4.0 Refactored to use route mapping array instead of if-elseif chain
 	 * @see @pre_get_posts
 	 *
 	 * @param WP_Query $query The query object.
@@ -97,41 +120,85 @@ class Render implements ExecuteHooksFrontend {
 			return;
 		}
 
-		$filename = null;
-		if ( '1' === get_query_var( 'seopress_sitemap' ) ) {
-			$filename = 'template-xml-sitemaps.php';
-		} elseif ( '1' === get_query_var( 'seopress_sitemap_xsl' ) ) {
-			$filename = 'template-xml-sitemaps-xsl.php';
-		} elseif ( '1' === get_query_var( 'seopress_sitemap_video_xsl' ) ) {
-			$filename = 'template-xml-sitemaps-video-xsl.php';
-		} elseif ( '1' === get_query_var( 'seopress_author' ) ) {
-			$filename = 'template-xml-sitemaps-author.php';
-		} elseif ( '' !== get_query_var( 'seopress_cpt' ) ) {
-			if ( ! empty( seopress_get_service( 'SitemapOption' )->getPostTypesList() )
-				&& array_key_exists( get_query_var( 'seopress_cpt' ), seopress_get_service( 'SitemapOption' )->getPostTypesList() ) ) {
-				/*
-				 * @since 4.3.0
-				 */
-				seopress_get_service( 'SitemapRenderSingle' )->render();
-				exit();
-			} elseif ( ! empty( seopress_get_service( 'SitemapOption' )->getTaxonomiesList() )
-				&& array_key_exists( get_query_var( 'seopress_cpt' ), seopress_get_service( 'SitemapOption' )->getTaxonomiesList() ) ) {
-				$filename = 'template-xml-sitemaps-single-term.php';
-			} else {
-				global $wp_query;
-				$wp_query->set_404();
-				status_header( 404 );
+		// Route mapping: query_var => template_file.
+		// Templates are stored in the inc/functions/sitemap/ directory.
+		$routes = array(
+			'seopress_sitemap'           => 'template-xml-sitemaps.php',
+			'seopress_sitemap_xsl'       => 'template-xml-sitemaps-xsl.php',
+			'seopress_sitemap_video_xsl' => 'template-xml-sitemaps-video-xsl.php',
+			'seopress_author'            => 'template-xml-sitemaps-author.php',
+		);
+
+		// Check simple routes first.
+		foreach ( $routes as $query_var => $template ) {
+			if ( '1' === get_query_var( $query_var ) ) {
+				$this->render_template( $template );
 				return;
 			}
 		}
 
-		if ( 'template-xml-sitemaps-video-xsl.php' === $filename ) {
-			include SEOPRESS_PRO_PLUGIN_DIR_PATH . 'inc/functions/video-sitemap/' . $filename;
-			exit();
-		} elseif ( null !== $filename && file_exists( SEOPRESS_PLUGIN_DIR_PATH . 'inc/functions/sitemap/' . $filename ) ) {
-			include SEOPRESS_PLUGIN_DIR_PATH . 'inc/functions/sitemap/' . $filename;
+		// Handle complex seopress_cpt route (post types and taxonomies).
+		$cpt = get_query_var( 'seopress_cpt' );
+		if ( '' !== $cpt ) {
+			$this->render_cpt_sitemap( $cpt );
+		}
+	}
+
+	/**
+	 * Render a sitemap template file
+	 *
+	 * @since 9.4.0
+	 * @param string $filename Template filename.
+	 * @return void
+	 */
+	private function render_template( $filename ) {
+		// Map PRO templates to their specific directories.
+		$pro_templates = array(
+			'template-xml-sitemaps-video-xsl.php' => self::PRO_VIDEO_TEMPLATE_DIR,
+		);
+
+		// Determine the correct path.
+		if ( isset( $pro_templates[ $filename ] ) && defined( 'SEOPRESS_PRO_PLUGIN_DIR_PATH' ) ) {
+			// PRO template.
+			$filepath = SEOPRESS_PRO_PLUGIN_DIR_PATH . $pro_templates[ $filename ] . $filename;
+		} else {
+			// Standard template.
+			$filepath = SEOPRESS_PLUGIN_DIR_PATH . self::SITEMAP_TEMPLATE_DIR . $filename;
+		}
+
+		// Include template if it exists.
+		if ( file_exists( $filepath ) ) {
+			include $filepath;
 			exit();
 		}
+	}
+
+	/**
+	 * Render CPT or taxonomy sitemap
+	 *
+	 * @since 9.4.0
+	 * @param string $cpt The post type or taxonomy slug.
+	 * @return void
+	 */
+	private function render_cpt_sitemap( $cpt ) {
+		// Check if it's a post type.
+		$post_types = seopress_get_service( 'SitemapOption' )->getPostTypesList();
+		if ( ! empty( $post_types ) && array_key_exists( $cpt, $post_types ) ) {
+			seopress_get_service( 'SitemapRenderSingle' )->render();
+			exit();
+		}
+
+		// Check if it's a taxonomy.
+		$taxonomies = seopress_get_service( 'SitemapOption' )->getTaxonomiesList();
+		if ( ! empty( $taxonomies ) && array_key_exists( $cpt, $taxonomies ) ) {
+			$this->render_template( 'template-xml-sitemaps-single-term.php' );
+			return;
+		}
+
+		// Not found - return 404.
+		global $wp_query;
+		$wp_query->set_404();
+		status_header( 404 );
 	}
 
 	/**

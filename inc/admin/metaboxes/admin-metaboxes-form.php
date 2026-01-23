@@ -446,11 +446,11 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 											<?php esc_html_e( 'This is superior to 300KB. WhatsApp will not use your image.', 'wp-seopress' ); ?>
 										</p>
 									</div>
-									<div class="snippet-fb-img"><img src="" width="524" height="274" alt=""
+									<div class="snippet-fb-img"><img width="524" height="274" alt=""
 											aria-label="" /><span class="seopress_social_fb_img_upload"></span></div>
-									<div class="snippet-fb-img-custom" style="display:none"><img src="" width="524"
+									<div class="snippet-fb-img-custom" style="display:none"><img width="524"
 											height="274" alt="" aria-label="" /><span class="seopress_social_fb_img_upload"></span></div>
-									<div class="snippet-fb-img-default" style="display:none"><img src="" width="524"
+									<div class="snippet-fb-img-default" style="display:none"><img width="524"
 											height="274" alt="" aria-label="" /><span class="seopress_social_fb_img_upload"></span></div>
 									<div class="facebook-snippet-text">
 										<div class="snippet-meta">
@@ -558,12 +558,12 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 										<p class="notice notice-error"><?php esc_html_e( 'File URL is not valid.', 'wp-seopress' ); ?>
 										</p>
 									</div>
-									<div class="snippet-twitter-img"><img src="" width="524" height="274" alt=""
+									<div class="snippet-twitter-img"><img width="524" height="274" alt=""
 											aria-label="" /><span class="seopress_social_twitter_img_upload"></span></div>
-									<div class="snippet-twitter-img-custom" style="display:none"><img src="" width="600"
+									<div class="snippet-twitter-img-custom" style="display:none"><img width="600"
 											height="314" alt="" aria-label="" /><span class="seopress_social_twitter_img_upload"></span></div>
-									<div class="snippet-twitter-img-default" style="display:none"><img src=""
-											width="600" height="314" alt="" aria-label="" /><span class="seopress_social_twitter_img_upload"></span></div>
+									<div class="snippet-twitter-img-default" style="display:none"><img width="600"
+											height="314" alt="" aria-label="" /><span class="seopress_social_twitter_img_upload"></span></div>
 
 									<div class="twitter-snippet-text">
 										<div class="title-desc">

@@ -37,6 +37,35 @@ class Router implements ExecuteHooks {
 			return;
 		}
 
+		// Use the static method to register rules.
+		// This keeps the registration logic in one place.
+		$sitemap_options = get_option( 'seopress_xml_sitemap_option_name' );
+		$toggle_options  = get_option( 'seopress_toggle' );
+
+		self::registerRewriteRules( $sitemap_options, $toggle_options );
+	}
+
+	/**
+	 * Register sitemap rewrite rules
+	 *
+	 * This static method contains the actual rewrite rule registration logic.
+	 * It's called by both init() (during normal requests) and by the activation hook
+	 * (in seopress.php) to avoid code duplication.
+	 *
+	 * @since 9.4.0
+	 *
+	 * @param array $sitemap_options The sitemap options array.
+	 * @param array $toggle_options The toggle options array.
+	 * @return void
+	 */
+	public static function registerRewriteRules( $sitemap_options, $toggle_options ) {
+		$is_sitemap_enabled = isset( $sitemap_options['seopress_xml_sitemap_general_enable'] ) && '1' === $sitemap_options['seopress_xml_sitemap_general_enable'];
+		$is_toggle_enabled  = isset( $toggle_options['toggle-xml-sitemap'] ) && '1' === $toggle_options['toggle-xml-sitemap'];
+
+		if ( ! $is_sitemap_enabled || ! $is_toggle_enabled ) {
+			return;
+		}
+
 		// XML Index.
 		add_rewrite_rule( '^sitemaps.xml$', 'index.php?seopress_sitemap=1', 'top' );
 
@@ -49,7 +78,8 @@ class Router implements ExecuteHooks {
 		add_rewrite_rule( '([^/]+?)-sitemap([0-9]+)?\.xml$', 'index.php?seopress_cpt=$matches[1]&seopress_paged=$matches[2]', 'top' );
 
 		// XML Author.
-		if ( '1' === seopress_get_service( 'SitemapOption' )->authorIsEnable() ) {
+		$is_author_enabled = isset( $sitemap_options['seopress_xml_sitemap_author_enable'] ) && '1' === $sitemap_options['seopress_xml_sitemap_author_enable'];
+		if ( $is_author_enabled ) {
 			add_rewrite_rule( 'author.xml?$', 'index.php?seopress_author=1', 'top' );
 		}
 	}

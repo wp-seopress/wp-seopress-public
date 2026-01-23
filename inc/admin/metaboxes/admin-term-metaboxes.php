@@ -20,19 +20,33 @@ function seopress_display_seo_term_metaboxe() {
 	function seopress_display_seo_term_metaboxe_notices() {
 		$seopress_tax_key = get_current_screen()->taxonomy;
 
+		/**
+		 * If the taxonomy is not public, don't display the notices.
+		 */
+		if ( ! empty( $seopress_tax_key ) ) {
+			$taxonomy = get_taxonomy( $seopress_tax_key );
+			if ( ! empty( $taxonomy ) ) {
+				if ( ! $taxonomy->public ) {
+					return;
+				}
+			}
+		}
+
 		$options = get_option( 'seopress_titles_option_name' );
 
-		$check_missing_titles       = isset( $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['title'] ) ? $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['title'] : null;
-		$check_missing_descriptions = isset( $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['description'] ) ? $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['description'] : null;
+		$check_missing_titles_enabled       = isset( $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['enable'] ) ? $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['enable'] : false;
+		$check_missing_titles               = isset( $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['title'] ) ? $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['title'] : null;
+		$check_missing_descriptions_enabled = isset( $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['enable'] ) ? $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['enable'] : false;
+		$check_missing_descriptions         = isset( $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['description'] ) ? $options['seopress_titles_tax_titles'][ $seopress_tax_key ]['description'] : null;
 
-		if ( empty( $check_missing_titles ) || empty( $check_missing_descriptions ) ) {
+		if ( ( empty( $check_missing_titles ) && '1' !== $check_missing_titles_enabled ) || ( empty( $check_missing_descriptions ) && '1' !== $check_missing_descriptions_enabled ) ) {
 			echo '<div class="notice notice-warning">';
 			echo '<p><strong>' . esc_html__( 'WARNING', 'wp-seopress' ) . '</strong></p>';
 			echo '<ul>';
-			if ( empty( $check_missing_titles ) ) {
+			if ( empty( $check_missing_titles ) && '1' !== $check_missing_titles_enabled ) {
 				echo '<li>' . wp_kses_post( __( 'You have not set a <strong>global meta title</strong> for this taxonomy.', 'wp-seopress' ) ) . '</li>';
 			}
-			if ( empty( $check_missing_descriptions ) ) {
+			if ( empty( $check_missing_descriptions ) && '1' !== $check_missing_descriptions_enabled ) {
 				echo '<li>' . wp_kses_post( __( 'You have not set a <strong>global meta description</strong> for this taxonomy.', 'wp-seopress' ) ) . '</li>';
 			}
 			echo '</ul>';

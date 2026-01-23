@@ -1,5 +1,11 @@
 <?php // phpcs:ignore
-
+/**
+ * Default WPSitemap
+ *
+ * This file is used to remove the default WP XML sitemaps.
+ *
+ * @package Actions
+ */
 namespace SEOPress\Actions\Sitemap;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,7 +30,7 @@ class DefaultWPSitemap implements ExecuteHooks {
 		 * Remove default WP XML sitemaps.
 		 */
 		if ( '1' == seopress_get_toggle_option( 'xml-sitemap' ) ) { // phpcs:ignore -- TODO: null comparison check.
-				remove_action( 'init', 'wp_sitemaps_get_server' );
+			remove_action( 'init', 'wp_sitemaps_get_server' );
 		}
 	}
 }

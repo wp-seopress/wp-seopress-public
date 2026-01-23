@@ -181,6 +181,14 @@ function seopress_display_seo_metaboxe() {
 						if ( post_type_supports( get_post_type( $post ), 'custom-fields' ) ) {
 							wp_enqueue_script( 'seopress-pre-publish-checklist', SEOPRESS_URL_PUBLIC . '/editor/pre-publish-checklist/index.js', array(), SEOPRESS_VERSION, true );
 						}
+						// Only enqueue toolbar button if universal metabox is not disabled and enabled for this post type.
+						if (
+							! seopress_get_service( 'AdvancedOption' )->getDisableUniversalMetaboxGutenberg() &&
+							seopress_get_service( 'AdvancedOption' )->getAccessUniversalMetaboxGutenberg() &&
+							'1' !== seopress_get_service( 'TitleOption' )->getSingleCptEnable( $post->post_type )
+						) {
+							wp_enqueue_script( 'seopress-sidebar-panel', SEOPRESS_URL_PUBLIC . '/editor/sidebar-panel/index.js', array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-i18n' ), SEOPRESS_VERSION, true );
+						}
 						if ( version_compare( $wp_version, '5.8', '>=' ) ) {
 							global $pagenow;
 

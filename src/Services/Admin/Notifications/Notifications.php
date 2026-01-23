@@ -902,7 +902,7 @@ class Notifications {
 			$html .= '<span class="screen-reader-text">' . esc_html( reset( $impact ) ) . '</span>';
 		}
 
-		$html .= '<h3 class="seopress-impact-title">' . esc_html( $title ) . '</h3>';
+		$html .= '<h3 class="seopress-impact-title">' . wp_kses_post( $title ) . '</h3>';
 
 		if ( false === $wrap ) {
 			$html .= wp_kses_post( $desc );

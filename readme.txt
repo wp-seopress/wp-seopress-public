@@ -1,12 +1,12 @@
 === SEOPress - On-site SEO & Analytics ===
 Authors: rainbowgeek
-Contributors: seopress, rainbowgeek, gmulti, corsonr, juliobox, maigret, mgris, vincentdubroeucq
+Contributors: seopress, rainbowgeek, corsonr, gmulti, juliobox, maigret, mgris, vincentdubroeucq
 Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.3.0.4
+Stable tag: 9.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,42 +311,50 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.3.0.4 =
-* FIX WSOD with CPT archive if a manual redirect is set
-* FIX Google Search Console metrics synchronization (PRO)
-
-= 9.3.0.3 =
-* FIX Force reload with our cookie bar
-
-= 9.3.0.2 =
-* FIX User consent with our cookie bar
-
-= 9.3.0.1 =
-* FIX Social meta tags in specific cases
-* FIX Fatal error for SEOPress PRO
-
-= 9.3 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-3/">Read the blog post update</a> =
-* NEW Significant performance improvements for XML sitemaps (800% faster)
-* NEW PHPCS/WPCS standards implemented for the free version
-* INFO 'seopress_sitemaps_cache_duration' hook to filter cache duration (https://www.seopress.org/support/hooks/filter-xml-sitemaps-cache-duration/)
-* INFO Enhanced default design for the cookie bar
-* INFO Changed the default value of the cookie bar’s close button to "Decline"
-* INFO Added support for user consent with Microsoft Clarity
-* INFO Block wizard is now hidden if it has already been run
-* INFO Added a notice to term taxonomy pages if global title and meta description settings are not defined
-* INFO Improve compatibility with the7 theme
-* FIX JavaScript error with the cookie bar
-* FIX Responsive UI issues
-* FIX Performance enhancements for the RSS feed in the SEO dashboard
-* FIX API request issue with WooCommerce and the Universal SEO metabox
-* FIX CSS issues in the notification center
-* FIX Display formatting for Google Search Console metrics
-* FIX Image previews for missing alt texts when using lazy loading or CDNs
-* FIX PHP errors when editing a custom term taxonomy
-* FIX SiteSEO import tool
-* FIX Incorrect Open Graph type tag for products
-* FIX UI consistency issues
-* FIX Weglot compatibility issue with redirections
+= 9.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-4/">Read the blog post update</a> =
+* NEW Add universal metabox icon to the Block Editor
+* NEW Tested with WordPress 6.9
+* INFO New hook 'seopress_social_image_size' to allow user to filter the image size used for Open Graph tags and X Cards (https://www.seopress.org/support/hooks/filter-image-size-used-in-open-graph-and-x-card-tags/)
+* INFO Major improvements to user interface translations
+* INFO Disable SEO beacon on Elementor library pages
+* INFO Improve compatibility with Avada / Fusion Builder
+* INFO Added a notice explaining the removal of oEmbed links and its effect on sharing links on LinkedIn
+* INFO Minor user experience improvements
+* INFO Ongoing improvements to ensure our code remains fully compatible with PHPCS/WPCS standards
+* INFO Limit 404 errors to 1,000 posts max automatically
+* INFO Help beacon design improved
+* FIX Resolved compatibility issue causing duplicate OpenGraph tags with the Pinterest for WooCommerce plugin
+* FIX Fixed a compatibility issue with Polylang where translated post type archive links were missing from XML sitemaps
+* FIX Automatic flush permalinks for XML sitemaps
+* FIX White label / notification counter in admin bar
+* FIX Unsupported operand types prev next tags
+* FIX Properly encode ampersands in URLs within XML sitemaps
+* FIX Google Search Console synchronization
+* FIX Multiple issues with the cookie consent banner
+* FIX Corrected paths for social image previews
+* FIX Offset on null in options-titles-metas.php / options-social.php
+* FIX Notices about missing global title and meta description templates
+* FIX PHP warning/deprecated offset on null / ID on null / str_replace with null
+* FIX Incorrect meta title / desc if "show blog posts on homepage" set
+* FIX PHP errors with Rank Math import tool
+* FIX Link XML sitemap from robots.txt
+* FIX Warning for undefined 'include' key
+* FIX Arrow direction in overview tab (universal metabox)
+* FIX PHP notices about "Trying to get property of non-object" and "Call to a member function on null" in the seopress_404_map_meta_cap function
+* FIX Video Sitemap API endpoint now correctly returns an empty array when no videos are found
+* FIX Error on post editing with Elementor
+* FIX JS error Uncaught TypeError: Cannot read properties of undefined (reading 'length')
+* FIX Undefined var $final
+* FIX MainWP strrpos()
+* FIX Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "seopress_get_dynamic_variables" not found
+* FIX Removed duplicate PHP closing tag
+* FIX REST API dynamic vars for terms
+* FIX Warnings / deprecated on CSV metadata import
+* FIX CSS conflicts with jQuery on our metaboxes
+* FIX AI keys testing on local setup
+* FIX Resolved ERR_TOO_MANY_REDIRECTS issue occurring during CSV import redirects
+* FIX Updated the updater to prevent third-party plugins from altering the site URL
+* FIX Contributors.txt file
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

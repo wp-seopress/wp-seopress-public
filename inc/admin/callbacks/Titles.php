@@ -821,7 +821,7 @@ function seopress_titles_tax_titles_callback() {
 											<?php
 											$tax_in_sitemap = seopress_get_service( 'SitemapOption' )->getTaxonomiesList();
 
-											if ( '1' === $check && isset( $tax_in_sitemap[ $seopress_tax_key ] ) && '1' === $tax_in_sitemap[ $seopress_tax_key ]['include'] ) {
+											if ( '1' === $check && isset( $tax_in_sitemap[ $seopress_tax_key ]['include'] ) && '1' === $tax_in_sitemap[ $seopress_tax_key ]['include'] ) {
 												?>
 												<div class="seopress-notice is-error">
 													<p>
@@ -936,7 +936,7 @@ function seopress_titles_archives_titles_callback() {
 
 				<?php
 				printf(
-					'<input type="text" id="seopress_titles_archive_titles_' . esc_attr( $seopress_cpt_key ) . ' "name="seopress_titles_option_name[seopress_titles_archive_titles][' . esc_attr( $seopress_cpt_key ) . '][title]" value="%s" />',
+					'<input type="text" id="seopress_titles_archive_titles_' . esc_attr( $seopress_cpt_key ) . '" name="seopress_titles_option_name[seopress_titles_archive_titles][' . esc_attr( $seopress_cpt_key ) . '][title]" value="%s" />',
 					esc_html( $check )
 				);
 				?>

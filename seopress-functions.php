@@ -55,6 +55,11 @@ if ( ! function_exists( 'array_key_first' ) ) {
 }
 
 /**
+ * Remove Pinterest for WooCommerce OpenGraph tags.
+ */
+add_filter( 'pinterest_for_woocommerce_opengraph_tags', '__return_empty_array', 10, 2 );
+
+/**
  * Remove default WordPress Canonical
  */
 remove_action( 'wp_head', 'rel_canonical' );
@@ -138,11 +143,11 @@ if ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'sg-cachepress/s
 /**
  * Remove WPML home url filter.
  *
- * @param mixed $home_url
- * @param mixed $url
- * @param mixed $path
- * @param string $orig_scheme
- * @param int $blog_id
+ * @param string  $home_url Home URL.
+ * @param string  $url URL.
+ * @param string  $path Path.
+ * @param string  $orig_scheme Original scheme.
+ * @param integer $blog_id Blog ID.
  */
 function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_scheme, $blog_id ) {
 	return $url;
@@ -151,13 +156,18 @@ function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_sch
 /**
  * Remove third-parties metaboxes on our CPT
  */
-add_action( 'do_meta_boxes', 'seopress_remove_metaboxes', 10 );
 function seopress_remove_metaboxes() {
 	// Oxygen Builder.
 	remove_meta_box( 'ct_views_cpt', 'seopress_404', 'normal' );
 	remove_meta_box( 'ct_views_cpt', 'seopress_schemas', 'normal' );
 	remove_meta_box( 'ct_views_cpt', 'seopress_bot', 'normal' );
+
+	// Avada Builder.
+	remove_meta_box( 'seopress_cpt', 'fusion_element', 'normal' );
+	remove_meta_box( 'seopress_content_analysis', 'fusion_element', 'normal' );
+	remove_meta_box( 'seopress_pro_cpt', 'fusion_element', 'normal' );
 }
+add_action( 'do_meta_boxes', 'seopress_remove_metaboxes', 10 );
 
 /**
  * Get all custom fields (limit: 250).

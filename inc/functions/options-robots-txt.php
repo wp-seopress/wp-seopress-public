@@ -28,7 +28,7 @@ function seopress_xml_sitemaps_robots_txt( $output, $public ) {
 	/**
 	 * Check if the public is false.
 	 */
-	if ( true === $public ) {
+	if ( false === $public ) {
 		return $output;
 	}
 

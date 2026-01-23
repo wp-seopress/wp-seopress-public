@@ -427,6 +427,12 @@ function seopress_advanced_advanced_wp_oembed_callback() {
 	<?php esc_attr_e( 'This will prevent other blogs to embed one of your posts on their site.', 'wp-seopress' ); ?>
 </p>
 
+<div class="seopress-notice is-warning">
+	<p>
+		<?php echo wp_kses_post( __( 'If this checkbox is checked, <strong>LinkedIn</strong> will no longer be able to parse this JSON feed and use the post thumbnail when sharing links on LinkedIn. This has an impact on conversion.', 'wp-seopress' ) ); ?>
+	</p>
+</div>
+
 <pre>&lt;link rel="alternate" type="application/json+oembed" href="https://www.example.com/wp-json/oembed/1.0/embed?url=https://www.example.com/my-blog-post/" /&gt;</pre>
 
 <pre>&lt;link rel="alternate" type="text/xml+oembed" href="https://www.example.com/wp-json/oembed/1.0/embed?url=https://www.example.com/my-blog-post/&format=xml" /&gt;</pre>

@@ -29,6 +29,10 @@ class EnqueueModuleMetabox {
 			$response = false;
 		}
 
+		if ( isset( $_GET['post_type'] ) && 'elementor_library' === $_GET['post_type'] ) { // Elementor library page
+			$response = false;
+		}
+
 		if ( isset( $_GET['oxygen_iframe'] ) ) { // phpcs:ignore
 			$response = false;
 		}

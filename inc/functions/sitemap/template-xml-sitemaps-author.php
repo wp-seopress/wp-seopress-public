@@ -57,7 +57,7 @@ function seopress_xml_sitemap_author() {
 		$seopress_sitemaps_url = '';
 		// Array with all the information needed for a sitemap url.
 		$seopress_url           = array(
-			'loc'    => htmlspecialchars( urldecode( esc_url( get_author_posts_url( $author ) ) ) ),
+			'loc'    => esc_url( get_author_posts_url( $author ) ),
 			'mod'    => '',
 			'images' => array(),
 		);

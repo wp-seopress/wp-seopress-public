@@ -178,7 +178,7 @@ function seopress_xml_sitemap_index() {
 								) AS numbered_posts
 								WHERE (row_num - 1) %% %d = 0",
 								$cpt_key,
-								htmlspecialchars( urldecode( get_permalink( get_the_ID() ) ) ),
+								esc_url( get_permalink( get_the_ID() ) ),
 								$max
 							);
 

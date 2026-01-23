@@ -78,6 +78,66 @@ if ( get_post_type_archive_link( $path ) && 0 === $offset ) {
 			}
 		}
 
+		// Polylang support.
+		if ( function_exists( 'PLL' )
+			&& function_exists( 'pll_is_translated_post_type' )
+			&& pll_is_translated_post_type( $path )
+			&& ( is_plugin_active( 'polylang/polylang.php' ) || is_plugin_active( 'polylang-pro/polylang.php' ) )
+		) {
+			$languages = PLL()->model->get_languages_list();
+
+			if ( ! empty( $languages ) ) {
+				$base_archive = user_trailingslashit( get_post_type_archive_link( $path ) );
+
+				foreach ( $languages as $language ) {
+					if ( ! $language->active ) {
+						continue;
+					}
+
+					$localized_archive = '';
+
+					$previous_language_slug = '';
+					$previous_language_obj  = null;
+
+					if ( function_exists( 'pll_switch_language' ) ) {
+						$previous_language_slug = pll_current_language();
+						pll_switch_language( $language->slug );
+					} elseif ( isset( PLL()->curlang ) ) {
+						$previous_language_obj = PLL()->curlang;
+						PLL()->curlang         = $language;
+					}
+
+					if ( is_plugin_active( 'woocommerce/woocommerce.php' ) && 'product' === $path && function_exists( 'wc_get_page_id' ) ) {
+						$shop_id = wc_get_page_id( 'shop' );
+
+						if ( $shop_id && function_exists( 'pll_get_post' ) ) {
+							$translated_shop_id = pll_get_post( $shop_id, $language->slug );
+
+							if ( $translated_shop_id ) {
+								$localized_archive = get_permalink( $translated_shop_id );
+							}
+						}
+					} else {
+						$localized_archive = get_post_type_archive_link( $path );
+					}
+
+					if ( function_exists( 'pll_switch_language' ) ) {
+						if ( ! empty( $previous_language_slug ) ) {
+							pll_switch_language( $previous_language_slug );
+						}
+					} elseif ( null !== $previous_language_obj ) {
+						PLL()->curlang = $previous_language_obj;
+					}
+
+					if ( empty( $localized_archive ) || is_wp_error( $localized_archive ) ) {
+						continue;
+					}
+
+					$archive_links[] = htmlspecialchars( urldecode( user_trailingslashit( $localized_archive ) ) );
+				}
+			}
+		}
+
 		// array with all the information needed for a sitemap url.
 		$archive_links[] = htmlspecialchars( urldecode( user_trailingslashit( get_post_type_archive_link( $path ) ) ) );
 

@@ -2254,6 +2254,16 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     display: none;
 }
 
+#seopress-tabs .seopress-tab h3 {
+    scroll-margin-top: 116px;
+}
+
+@media only screen and (max-width: 782px) {
+    #seopress-tabs .seopress-tab h3 {
+        scroll-margin-top: 30px;
+    }
+}
+
 #seopress-tabs.full-width .seopress-tab {
     width: 100%;
 }

@@ -45,7 +45,7 @@ add_filter(
 	'seopress_sitemaps_term_single_url',
 	function ( $url, $term ) {
 		// Exclude custom canonical from sitemaps.
-		if ( get_term_meta( $term->term_id, '_seopress_robots_canonical', true ) && htmlspecialchars( urldecode( get_term_link( $term->term_id ) ) ) !== get_term_meta( $term->term_id, '_seopress_robots_canonical', true ) ) {
+		if ( get_term_meta( $term->term_id, '_seopress_robots_canonical', true ) && esc_url( get_term_link( $term->term_id ) ) !== get_term_meta( $term->term_id, '_seopress_robots_canonical', true ) ) {
 			return null;
 		}
 
@@ -162,7 +162,7 @@ function seopress_xml_sitemap_single_term() {
 			$seopress_sitemaps_url = '';
 			// Array with all the information needed for a sitemap url.
 			$seopress_url = array(
-				'loc'    => htmlspecialchars( urldecode( esc_url( get_term_link( $term ) ) ) ),
+				'loc'    => esc_url( get_term_link( $term ) ),
 				'mod'    => '',
 				'images' => array(),
 			);

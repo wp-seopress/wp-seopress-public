@@ -374,7 +374,8 @@ class SEOPressOptions {
 	 */
 	public function pre_save_options() {
 		add_filter( 'pre_update_option_seopress_instant_indexing_option_name', array( $this, 'pre_seopress_instant_indexing_option_name' ), 10, 2 );
-		add_filter( 'pre_update_option_seopress_xml_sitemap_option_name', array( $this, 'pre_seopress_xml_sitemap_option_name' ), 10, 2 );
+		// Use update_option hook instead of pre_update_option so the value is saved before flushing.
+		add_action( 'update_option_seopress_xml_sitemap_option_name', array( $this, 'after_seopress_xml_sitemap_option_name' ), 10, 3 );
 	}
 
 	/**
@@ -397,13 +398,32 @@ class SEOPressOptions {
 	/**
 	 * Flush rewrite rules after saving XML sitemaps global settings
 	 *
-	 * @param array $new_value New value.
-	 * @param array $old_value Old value.
-	 * @return array New value.
+	 * This runs AFTER the option is saved to the database.
+	 * We need to manually re-register the rewrite rules because flush_rewrite_rules()
+	 * uses the rules that were registered during init (with the OLD values).
+	 * The init hook won't run again until the next request.
+	 *
+	 * @param mixed  $old_value Old value.
+	 * @param mixed  $new_value New value.
+	 * @param string $option Option name.
+	 * @return void
 	 */
-	public function pre_seopress_xml_sitemap_option_name( $new_value, $old_value ) {
+	public function after_seopress_xml_sitemap_option_name( $old_value, $new_value, $option ) {
+		// The new value is already saved to the database at this point.
+		// We need to force WordPress to regenerate rewrite rules with the new settings.
+
+		// CRITICAL: Clear the in-memory rewrite rules that were registered during init with OLD values.
+		// Router::init() already ran during normal WordPress init and added rules based on old settings.
+		// We must clear these before flushing so they get regenerated with the new settings.
+		global $wp_rewrite;
+		$wp_rewrite->extra_rules_top = array(); // Clear custom rules added via add_rewrite_rule().
+
+		// Clear the rewrite rules from the database so they get regenerated.
+		delete_option( 'rewrite_rules' );
+
+		// Flush to regenerate and save all rewrite rules.
+		// This will call all init hooks (including Router::init()) to collect rules with NEW values.
 		flush_rewrite_rules( false );
-		return $new_value;
 	}
 }
 

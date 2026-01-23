@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.3.0.4
+ * Version: 9.4
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.3.0.4' );
+define( 'SEOPRESS_VERSION', '9.4' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -78,6 +78,13 @@ if ( file_exists( SEOPRESS_PLUGIN_DIR_PATH . 'vendor/autoload.php' ) ) {
  */
 function seopress_activation() {
 	add_option( 'seopress_activated', 'yes' );
+
+	// Register sitemap rewrite rules.
+	$sitemap_options = get_option( 'seopress_xml_sitemap_option_name' );
+	$toggle_options  = get_option( 'seopress_toggle' );
+
+	\SEOPress\Actions\Sitemap\Router::registerRewriteRules( $sitemap_options, $toggle_options );
+
 	flush_rewrite_rules( false );
 
 	do_action( 'seopress_activation' );
@@ -131,7 +138,7 @@ add_action( 'admin_init', 'seopress_redirect_after_activation' );
  * @param string $hook Hook.
  * @return void
  */
-function seopress_plugins_loaded( $hook ) {
+function seopress_plugins_loaded( $hook ) { // phpcs:ignore
 	global $pagenow, $typenow, $wp_version;
 
 	$plugin_dir = plugin_dir_path( __FILE__ );
@@ -201,6 +208,20 @@ function seopress_dyn_variables_init( $variables, $post = '', $is_oembed = false
 		return;
 	}
 
+	// Ensure the dynamic variables function is loaded.
+	// This handles cases where filters run before the init hook (e.g., early 404 pages from security plugins).
+	if ( ! function_exists( 'seopress_get_dynamic_variables' ) ) {
+		$dynamic_variables_file = plugin_dir_path( __FILE__ ) . 'inc/functions/variables/dynamic-variables.php';
+		if ( file_exists( $dynamic_variables_file ) ) {
+			include_once $dynamic_variables_file;
+		}
+	}
+
+	// If the function still doesn't exist, return null to avoid fatal errors.
+	if ( ! function_exists( 'seopress_get_dynamic_variables' ) ) {
+		return null;
+	}
+
 	// Use memoized function for dynamic variable retrieval.
 	return SEOPress\Helpers\CachedMemoizeFunctions::memoize( 'seopress_get_dynamic_variables' )( $variables, $post, $is_oembed );
 }
@@ -212,7 +233,7 @@ add_filter( 'seopress_dyn_variables_fn', 'seopress_dyn_variables_init', 10, 3 );
  * @param string $hook Hook.
  * @return void
  */
-function seopress_add_admin_options_scripts( $hook ) {
+function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 	$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 	// Register stylesheets.
@@ -376,7 +397,7 @@ function seopress_add_admin_options_scripts( $hook ) {
 		wp_add_inline_script(
 			'code-editor',
 			sprintf(
-				'jQuery(function($) { 
+				'jQuery(function($) {
             function initializeEditor(elementId, settings) {
                 var $textarea = $("#" + elementId);
                 if (!$textarea.data("codeMirrorInitialized")) {

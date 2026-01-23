@@ -1696,7 +1696,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 						</li>
 						<li>
 							<span class="dashicons dashicons-yes-alt"></span>
-							<?php echo wp_kses_post( __( '<strong>Open Graph / Twitter card</strong> is enabled to improve your social media sharing.', 'wp-seopress' ) ); ?>
+							<?php echo wp_kses_post( __( '<strong>Open Graph / X Cards</strong> is enabled to improve your social media sharing.', 'wp-seopress' ) ); ?>
 						</li>
 						<li>
 							<span class="dashicons dashicons-yes-alt"></span>

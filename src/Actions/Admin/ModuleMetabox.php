@@ -79,6 +79,49 @@ class ModuleMetabox implements ExecuteHooks {
 		if ( post_type_supports( get_post_type( $post ), 'custom-fields' ) ) {
 			wp_enqueue_script( 'seopress-pre-publish-checklist', SEOPRESS_URL_PUBLIC . '/editor/pre-publish-checklist/index.js', array(), SEOPRESS_VERSION, true );
 		}
+		if ( $is_gutenberg ) {
+			// Check if universal metabox is disabled.
+			if ( seopress_get_service( 'AdvancedOption' )->getDisableUniversalMetaboxGutenberg() ) {
+				return;
+			}
+
+			// Check if metabox is disabled for this post type.
+			if ( '1' === seopress_get_service( 'TitleOption' )->getSingleCptEnable( $post->post_type ) ) {
+				return;
+			}
+
+			wp_enqueue_script( 'seopress-sidebar-panel', SEOPRESS_URL_PUBLIC . '/editor/sidebar-panel/index.js', array( 'wp-plugins', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n' ), SEOPRESS_VERSION, true );
+
+			// Get score data for the current post.
+			$score       = seopress_get_service( 'ContentAnalysisDatabase' )->getData( $post->ID, array( 'score' ) );
+			$score_color = '#94a3b8'; // Default gray.
+
+			if ( ! empty( $score ) && is_array( $score ) ) {
+				// Flatten the score array.
+				$score_flat = array();
+				foreach ( $score as $item ) {
+					if ( is_array( $item ) ) {
+						$score_flat = array_merge( $score_flat, $item );
+					}
+				}
+
+				// Both 'high' and 'medium' mean "should be improved" (orange/yellow).
+				if ( in_array( 'high', $score_flat, true ) || in_array( 'medium', $score_flat, true ) ) {
+					$score_color = '#f59e0b'; // Orange - should be improved.
+				} else {
+					$score_color = '#16a34a'; // Green - good.
+				}
+			}
+
+			wp_localize_script(
+				'seopress-sidebar-panel',
+				'seopressScore',
+				array(
+					'color'    => $score_color,
+					'showText' => apply_filters( 'seopress_toolbar_button_show_text', true ),
+				)
+			);
+		}
 		$value = wp_create_nonce( 'seopress_rest' );
 
 		$tags = seopress_get_service( 'TagsToString' )->getTagsAvailable(

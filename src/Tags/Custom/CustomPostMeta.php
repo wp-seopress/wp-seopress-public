@@ -39,7 +39,8 @@ class CustomPostMeta extends AbstractCustomTagValue implements GetTagValue {
 			return $value;
 		}
 
-		if ( ! $context['post'] ) {
+		// Support both post and term contexts
+		if ( ! $context['post'] && ! $context['term_id'] ) {
 			return $value;
 		}
 		$regex = $this->buildRegex( self::CUSTOM_FORMAT );
@@ -55,7 +56,16 @@ class CustomPostMeta extends AbstractCustomTagValue implements GetTagValue {
 		$length = 50;
 		$length = apply_filters( 'seopress_excerpt_length', $length );
 
-		$value = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_post_meta( $context['post']->ID, $field, true ), true ) ) ) ) ), $length );
+		// Get meta value based on context type
+		if ( $context['post'] ) {
+			$raw_value = get_post_meta( $context['post']->ID, $field, true );
+		} elseif ( $context['term_id'] ) {
+			$raw_value = get_term_meta( $context['term_id'], $field, true );
+		} else {
+			$raw_value = '';
+		}
+
+		$value = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( $raw_value, true ) ) ) ) ), $length );
 
 		return apply_filters( 'seopress_get_tag_' . $tag . '_value', $value, $context );
 	}

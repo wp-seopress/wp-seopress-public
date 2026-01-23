@@ -720,7 +720,9 @@ class Document_Settings_Section {
 			$seo_data['settings'] = $settings;
 
 			$page_settings = get_metadata( 'post', $post_id, \Elementor\Core\Settings\Page\Manager::META_KEY, true );
-			$settings      = array_merge( $page_settings, $settings );
+			if ( is_array( $page_settings ) ) {
+				$settings = array_merge( $page_settings, $settings );
+			}
 
 			remove_action( 'seopress/page-builders/elementor/save_meta', array( $this, 'on_seopress_meta_save' ), 99 );
 			$page_settings_manager = \Elementor\Core\Settings\Manager::get_settings_managers( 'page' );

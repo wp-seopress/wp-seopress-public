@@ -365,7 +365,7 @@ function seopress_get_docs_links() {
 		'facebook'    => 'https://www.facebook.com/seopresspro/',
 		'facebook_gr' => 'https://www.facebook.com/groups/seopress/',
 		'youtube'     => 'https://www.youtube.com/seopress',
-		'twitter'     => 'https://twitter.com/wp_seopress',
+		'twitter'     => 'https://x.com/wp_seopress',
 	);
 
 	return $docs;

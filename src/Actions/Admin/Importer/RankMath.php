@@ -213,8 +213,9 @@ class RankMath implements ExecuteHooksBackend {
 						'default' => 'none',
 						'home'    => 'home',
 						'custom'  => 'custom',
+						'off'     => 'none',
 					);
-					$seopress_pro['seopress_404_redirect_home'] = esc_html( $type[ $value ] );
+					$seopress_pro['seopress_404_redirect_home'] = isset( $type[ $value ] ) ? esc_html( $type[ $value ] ) : 'none';
 				}
 				// 404 custom URL.
 				if ( 'redirections_custom_url' === $key ) {
@@ -468,9 +469,9 @@ class RankMath implements ExecuteHooksBackend {
 						unset( $seopress_titles['seopress_titles_archives_category_disable'] );
 					}
 				}
-				// Author archive title.
+				// Author archive noindex.
 				if ( 'author_custom_robots' === $key ) {
-					if ( 'on' === $value && in_array( 'noindex', $rank_math_titles['author_robots'], true ) ) {
+					if ( 'on' === $value && isset( $rank_math_titles['author_robots'] ) && is_array( $rank_math_titles['author_robots'] ) && in_array( 'noindex', $rank_math_titles['author_robots'], true ) ) {
 						$seopress_titles['seopress_titles_archives_author_noindex'] = '1';
 					} else {
 						unset( $seopress_titles['seopress_titles_archives_author_noindex'] );
