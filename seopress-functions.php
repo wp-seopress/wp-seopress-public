@@ -828,3 +828,40 @@ function seopress_instant_indexing_generate_api_key_fn( $init = false ) {
 		wp_send_json_success();
 	}
 }
+
+/**
+ * Regenerate SEO issues after content analysis is saved.
+ *
+ * This ensures the Site Audit admin page shows up-to-date issues
+ * when content analysis is refreshed from the frontend.
+ *
+ * @since 9.4.1
+ *
+ * @param int   $post_id  The post ID.
+ * @param array $items    The analysis data.
+ * @param array $keywords The keywords.
+ * @param array $data     The raw content analysis data.
+ */
+function seopress_regenerate_seo_issues_after_content_analysis( $post_id, $items, $keywords, $data ) {
+	// Only run if Pro version is active.
+	if ( ! function_exists( 'seopress_pro_get_service' ) ) {
+		return;
+	}
+
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return;
+	}
+
+	// Create a fresh instance to ensure Pro services are available in constructor.
+	// The singleton from the service container might have been instantiated before
+	// the Pro plugin loaded, causing the SEO issues repository/database to be null.
+	$get_content = new \SEOPress\Services\ContentAnalysis\GetContent();
+
+	// getAnalyzes() will:
+	// 1. Read fresh data from ContentAnalysisDatabase (which was just saved with fresh keywords)
+	// 2. Run all analyze* methods
+	// 3. Each method deletes old issues of that type and saves new ones.
+	$get_content->getAnalyzes( $post );
+}
+add_action( 'seopress_content_analysis_saved', 'seopress_regenerate_seo_issues_after_content_analysis', 10, 4 );

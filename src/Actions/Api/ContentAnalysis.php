@@ -156,11 +156,19 @@ class ContentAnalysis implements ExecuteHooks {
 
 		$data['link_preview'] = $link_preview;
 
-		$keywords = seopress_get_service( 'DomAnalysis' )->getKeywords(
-			array(
-				'id' => $id,
-			)
-		);
+		// Check if target_keywords was passed in the request (from frontend).
+		// If the parameter exists (even if empty), pass it to getKeywords to override DB lookup.
+		// null = parameter not provided, "" = parameter provided but empty (user cleared keywords).
+		$target_keywords_param = $request->get_param( 'target_keywords' );
+		$keywords_options      = array( 'id' => $id );
+
+		// Only add target_keywords to options if the parameter was explicitly provided in the request.
+		// This distinguishes between "not provided" (use DB) and "provided but empty" (use no keywords).
+		if ( null !== $target_keywords_param ) {
+			$keywords_options['target_keywords'] = $target_keywords_param;
+		}
+
+		$keywords = seopress_get_service( 'DomAnalysis' )->getKeywords( $keywords_options );
 
 		$post          = get_post( $id );
 		$score         = seopress_get_service( 'DomAnalysis' )->getScore( $post );

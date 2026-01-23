@@ -44,7 +44,19 @@ class DomAnalysis {
 	 * @return array
 	 */
 	public function getKeywords( $options ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$target_keywords = isset( $options['target_keywords'] ) && ! empty( $options['target_keywords'] ) ? $options['target_keywords'] : get_post_meta( $options['id'], '_seopress_analysis_target_kw', true );
+		// If target_keywords key exists in options, use it (even if empty).
+		// This allows the API to explicitly pass empty keywords when user clears them.
+		// Only fall back to database if the key doesn't exist at all.
+		if ( array_key_exists( 'target_keywords', $options ) ) {
+			$target_keywords = $options['target_keywords'];
+		} else {
+			$target_keywords = get_post_meta( $options['id'], '_seopress_analysis_target_kw', true );
+		}
+
+		// Handle null/empty values before processing.
+		if ( empty( $target_keywords ) ) {
+			$target_keywords = '';
+		}
 
 		$target_keywords = array_filter( explode( ',', remove_accents( strtolower( $target_keywords ) ) ) );
 

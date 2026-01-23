@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 5.0+
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.4
+Stable tag: 9.4.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,6 +311,11 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.4.1 =
+* FIX Site Audit / Content Analysis refresh issue with universal SEO metabox
+* FIX Shipping offers for product schema
+* FIX Resolved a fatal error that occurred with Breakdance when using the HTML sitemap
+
 = 9.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-4/">Read the blog post update</a> =
 * NEW Add universal metabox icon to the Block Editor
 * NEW Tested with WordPress 6.9

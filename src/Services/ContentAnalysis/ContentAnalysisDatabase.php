@@ -57,10 +57,23 @@ class ContentAnalysisDatabase {
 
 		if ( $already_exist ) {
 			seopress_get_service( 'ContentAnalysisRepository' )->updateContentAnalysis( $post_id, $items );
-			return;
+		} else {
+			seopress_get_service( 'ContentAnalysisRepository' )->insertContentAnalysis( $items );
 		}
 
-		seopress_get_service( 'ContentAnalysisRepository' )->insertContentAnalysis( $items );
+		/**
+		 * Fires after content analysis data has been saved to the database.
+		 *
+		 * This hook allows Pro version to regenerate SEO issues based on the new analysis.
+		 *
+		 * @since 9.4.1
+		 *
+		 * @param int   $post_id  The post ID that was analyzed.
+		 * @param array $items    The analysis data that was saved.
+		 * @param array $keywords The keywords used in the analysis.
+		 * @param array $data     The raw content analysis data.
+		 */
+		do_action( 'seopress_content_analysis_saved', $post_id, $items, $keywords, $data );
 	}
 
 	/**

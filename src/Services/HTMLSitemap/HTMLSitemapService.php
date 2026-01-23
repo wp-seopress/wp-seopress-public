@@ -46,8 +46,9 @@ class HTMLSitemapService {
 	 * @return void
 	 */
 	public function display() {
-		if ( '' !== $this->sitemap_option->getHtmlMapping() ) {
-			if ( is_page( explode( ',', $this->sitemap_option->getHtmlMapping() ) ) ) {
+		$html_mapping = $this->sitemap_option->getHtmlMapping();
+		if ( ! empty( $html_mapping ) ) {
+			if ( is_page( explode( ',', $html_mapping ) ) ) {
 				add_filter( 'the_content', array( $this, 'renderSitemap' ) );
 			}
 		}
