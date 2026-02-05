@@ -8,23 +8,27 @@
 defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 /**
- * Build Clarity Tracking Code
+ * Enqueue Clarity Tracking Code
  *
- * @param bool $output Output.
+ * Uses WordPress script enqueueing system with proper escaping for security.
  *
- * @return string $js
+ * @return void
  */
-function seopress_clarity_js( $output ) {
+function seopress_clarity_js() {
 	if ( seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() !== '' && seopress_get_service( 'GoogleAnalyticsOption' )->getClarityEnable() === '1' ) {
-		// Init.
-		$js  = "\n";
-		$js .= '<script>';
-		$js .= "\n";
-		$js .= '(function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=seopress";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "' . sanitize_key( seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() ) . '");';
+
+		// Sanitize and escape the Project ID.
+		$project_id = esc_js( sanitize_key( seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() ) );
+
+		// Build Clarity initialization script.
+		$clarity_init = sprintf(
+			'(function(c,l,a,r,i,t,y){
+				c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+				t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=seopress";
+				y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+			})(window, document, "clarity", "script", "%s");',
+			$project_id
+		);
 
 		// User consent - Required for EEA, UK, and Switzerland (effective Oct 31, 2025).
 		// Microsoft Clarity requires checking analytics_storage and ad_storage consent types.
@@ -79,29 +83,26 @@ function seopress_clarity_js( $output ) {
 		 */
 		$consent = apply_filters( 'seopress_clarity_user_consent', $consent );
 
-		$js .= $consent;
+		// Escape consent code for JavaScript context.
+		$consent = esc_js( $consent );
 
-		$js .= "</script>\n";
+		// Combine initialization and consent code.
+		$clarity_js = $clarity_init . $consent;
 
-		// Allow developers to modify the entire Clarity tracking code.
-		$js = apply_filters( 'seopress_clarity_tracking_js', $js );
+		/**
+		 * Filter the complete Clarity tracking code.
+		 *
+		 * Allows developers to modify the entire Clarity tracking JavaScript.
+		 *
+		 * @since 8.0.0
+		 *
+		 * @param string $clarity_js The complete Clarity JavaScript code.
+		 */
+		$clarity_js = apply_filters( 'seopress_clarity_tracking_js', $clarity_js );
 
-		if ( true === $output ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content is safely built with sanitized data
-			echo $js;
-		} else {
-			return $js;
-		}
+		// Enqueue script using WordPress standards.
+		wp_register_script( 'seopress-clarity', false, array(), SEOPRESS_VERSION, false );
+		wp_enqueue_script( 'seopress-clarity' );
+		wp_add_inline_script( 'seopress-clarity', $clarity_js, 'before' );
 	}
-}
-add_action( 'seopress_clarity_html', 'seopress_clarity_js', 10, 1 );
-
-/**
- * Clarity JS Arguments
- *
- * @return void
- */
-function seopress_clarity_js_arguments() {
-	$output = true;
-	do_action( 'seopress_clarity_html', $output );
 }

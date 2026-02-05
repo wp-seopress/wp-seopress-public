@@ -23,8 +23,12 @@ function seopress_oembed_title_hook( $post ) {
 	$variables = null;
 	$variables = apply_filters( 'seopress_dyn_variables_fn', $variables, $post, true );
 
-	$seopress_titles_template_variables_array = $variables['seopress_titles_template_variables_array'];
-	$seopress_titles_template_replace_array   = $variables['seopress_titles_template_replace_array'];
+	if ( ! is_array( $variables ) ) {
+		return '';
+	}
+
+	$seopress_titles_template_variables_array = $variables['seopress_titles_template_variables_array'] ?? array();
+	$seopress_titles_template_replace_array   = $variables['seopress_titles_template_replace_array'] ?? array();
 
 	// If OG title set.
 	if ( get_post_meta( $post->ID, '_seopress_social_fb_title', true ) !== '' ) {

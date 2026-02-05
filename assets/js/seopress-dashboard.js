@@ -71,6 +71,7 @@ jQuery(document).ready(function ($) {
         "breadcrumbs",
         "inspect-url",
         "robots",
+        "llms",
         "news",
         "404",
         "bot",

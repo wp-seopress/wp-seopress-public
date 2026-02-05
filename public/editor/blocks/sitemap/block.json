@@ -7,6 +7,11 @@
   "icon": "list-view",
   "category": "wpseopress",
   "textdomain": "wp-seopress",
+  "keywords": [
+    "sitemap",
+    "navigation",
+    "links"
+  ],
   "supports": {
     "html": false,
     "color": {

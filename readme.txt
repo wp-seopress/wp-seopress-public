@@ -3,10 +3,10 @@ Authors: rainbowgeek
 Contributors: seopress, rainbowgeek, corsonr, gmulti, juliobox, maigret, mgris, vincentdubroeucq
 Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
-Requires at least: 5.0+
+Requires at least: 6.2+
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.4.1
+Stable tag: 9.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank 
 == Description ==
 
 <h3>Best SEO plugin for WordPress fully integrated with all page builders and themes!</h3>
-<h3>Now with AI (GPT-5, GPT-4o Mini, GPT-4o, GPT-4, GPT-3.5-Turbo & DeepSeek AI) to automagically generate meta title, description and alternative texts for images!</h3>
+<h3>Now featuring advanced AI integration (OpenAI, Google Gemini, Claude Anthropic, MistralAI, and DeepSeek AI) to automatically generate meta titles, descriptions, Open Graph and X (Twitter) Card tags, as well as alternative text for images!</h3>
 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
@@ -80,7 +80,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 [youtube https://youtu.be/zxGCY-bJYwE]
 
 <ul>
-	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Use Artificial Intelligence (GPT-4o, GPT-4 Turbo / Vision and GPT 3.5 Turbo) to generate SEO metadata and alternative texts for image files. Bulk actions supported.</strong></li>
+	<li><a href="https://www.seopress.org/features/openai/" target="_blank"><strong>Harness Artificial Intelligence to automatically generate SEO metadata, social metadata and alternative text for images. Supports bulk operations.</strong></a></li>
 	<li><a href="https://www.seopress.org/features/site-audit/" target="_blank"><strong>Site Audit: Detect technical issues that could harm your site's SEO directly from your WordPress administration.</strong></li>
     <li><a href="https://www.seopress.org/features/seo-alerts/" target="_blank">Receive SEO alerts to prevent breaking your SEO before it's too late</a></li>
 	<li><a href="https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/" target="_blank"><strong>Import / export metadata</strong></a> (titles, open graph, robots...) from / to CSV file</li>
@@ -104,6 +104,7 @@ SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your tra
 			<li>product</li>
 			<li>job</li>
 			<li>simple review</li>
+			<li>profile page</li>
 			<li>custom schema</li>
 		</ol>
 	<li><strong>Automatic Schemas</strong> with advanced conditions (AND, OR, Post types, taxonomies)</li>
@@ -153,11 +154,7 @@ We support WooCommerce and Easy Digital Downloads for e-commerce sites.
 
 [youtube https://youtu.be/sf0ocG7vQMM]
 
-
-<h3>Elementor + SEOPress: perfect combo!</h3>
-We provide deep integration with Elementor page builder UI, see below:
-
-[youtube https://www.youtube.com/watch?v=oC5QZ0_TH_g]
+Elementor, Divi, Block Editor, Bricks, Oxygen, WP Bakery, WP Fusion, Breakdance, Avada Builder. We support all of them!
 
 <h3>SEOPress Insights: Off-site SEO plugin to track your rankings and backlinks in WordPress</h3>
 
@@ -311,55 +308,31 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.4.1 =
-* FIX Site Audit / Content Analysis refresh issue with universal SEO metabox
-* FIX Shipping offers for product schema
-* FIX Resolved a fatal error that occurred with Breakdance when using the HTML sitemap
-
-= 9.4 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-4/">Read the blog post update</a> =
-* NEW Add universal metabox icon to the Block Editor
-* NEW Tested with WordPress 6.9
-* INFO New hook 'seopress_social_image_size' to allow user to filter the image size used for Open Graph tags and X Cards (https://www.seopress.org/support/hooks/filter-image-size-used-in-open-graph-and-x-card-tags/)
-* INFO Major improvements to user interface translations
-* INFO Disable SEO beacon on Elementor library pages
-* INFO Improve compatibility with Avada / Fusion Builder
-* INFO Added a notice explaining the removal of oEmbed links and its effect on sharing links on LinkedIn
-* INFO Minor user experience improvements
-* INFO Ongoing improvements to ensure our code remains fully compatible with PHPCS/WPCS standards
-* INFO Limit 404 errors to 1,000 posts max automatically
-* INFO Help beacon design improved
-* FIX Resolved compatibility issue causing duplicate OpenGraph tags with the Pinterest for WooCommerce plugin
-* FIX Fixed a compatibility issue with Polylang where translated post type archive links were missing from XML sitemaps
-* FIX Automatic flush permalinks for XML sitemaps
-* FIX White label / notification counter in admin bar
-* FIX Unsupported operand types prev next tags
-* FIX Properly encode ampersands in URLs within XML sitemaps
-* FIX Google Search Console synchronization
-* FIX Multiple issues with the cookie consent banner
-* FIX Corrected paths for social image previews
-* FIX Offset on null in options-titles-metas.php / options-social.php
-* FIX Notices about missing global title and meta description templates
-* FIX PHP warning/deprecated offset on null / ID on null / str_replace with null
-* FIX Incorrect meta title / desc if "show blog posts on homepage" set
-* FIX PHP errors with Rank Math import tool
-* FIX Link XML sitemap from robots.txt
-* FIX Warning for undefined 'include' key
-* FIX Arrow direction in overview tab (universal metabox)
-* FIX PHP notices about "Trying to get property of non-object" and "Call to a member function on null" in the seopress_404_map_meta_cap function
-* FIX Video Sitemap API endpoint now correctly returns an empty array when no videos are found
-* FIX Error on post editing with Elementor
-* FIX JS error Uncaught TypeError: Cannot read properties of undefined (reading 'length')
-* FIX Undefined var $final
-* FIX MainWP strrpos()
-* FIX Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "seopress_get_dynamic_variables" not found
-* FIX Removed duplicate PHP closing tag
-* FIX REST API dynamic vars for terms
-* FIX Warnings / deprecated on CSV metadata import
-* FIX CSS conflicts with jQuery on our metaboxes
-* FIX AI keys testing on local setup
-* FIX Resolved ERR_TOO_MANY_REDIRECTS issue occurring during CSV import redirects
-* FIX Updated the updater to prevent third-party plugins from altering the site URL
-* FIX Contributors.txt file
+= 9.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-5/">Read the blog post update</a> =
+* NEW Raised the minimum required WordPress version to 6.2+
+* NEW AI providers: MistralAI, Claude and Google Gemini to generate SEO metadata and alternative texts automagically (PRO)
+* NEW Support for GPT 5.2 (PRO)
+* NEW Generate Open Graph and X (Twitter) cards automatically with AI
+* NEW llms.txt file to help AI understand your site (disclaimer: not yet officially supported by major search engines or AI platforms) (PRO)
+* NEW Added the ProfilePage structured data type. To enable it automatically, navigate to SEO > PRO > Structured Data Types tab. (PRO)
+* NEW 'seopress_pro_wc_schema_shipping_details_enabled' hook to enable/disable the shipping properties in product schema (https://www.seopress.org/support/hooks/filter-to-disable-woocommerce-shippingdetails-schema-generation/)
+* NEW 'seopress_pro_wc_schema_shipping_details' hook to filter the shipping properties in product schema (https://www.seopress.org/support/hooks/filter-the-shipping-properties-in-product-schema/)
+* INFO Elementor integration has been removed. We now recommend enabling our universal SEO metabox to manage all your SEO needs within this page builder.
+* INFO Switch universal metabox to WordPress bundled React
+* INFO Added additional keywords to our blocks to improve discoverability
+* INFO The export CSV tool now includes support for the "custom breadcrumbs" field
+* FIX Undefined $og_title variable
+* FIX An issue with GA4 stats in dashboard widget
+* FIX Improved error handling for GA4 statistics in the dashboard widget
+* FIX Improved MS Clarity script enqueuing
+* FIX Available post types and taxonomies listed in our settings
+* FIX Keywords in permalink for homepage
+* FIX A CSS conflict with our metaboxes when WooCommerce is enabled
+* FIX Warnings in plugin updater
+* FIX An issue with shipping zones in the product schema for WooCommerce
+* FIX A conflict with Admin Columns PRO 7.0
+* FIX PHP warning in Video schema duration parsing
+* FIX Issue with importing the primary category from Rank Math
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

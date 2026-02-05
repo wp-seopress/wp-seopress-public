@@ -1416,15 +1416,19 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 }
 
 #seopress_cpt #tabs-6 #wrap-videos .video .accordion-section-title {
-    border-left: none;
-    border-right: none;
+    border: none;
     font-size: 1em;
-    padding: 1em 1.4em;
+    padding: 1em 2.4em;
+    background: none;
+    border-radius: inherit;
+    margin: inherit;
+    font-family: var(--fontFamily);
 }
 
 #seopress_cpt #tabs-6 #wrap-videos .video:last-child .accordion-section-content,
 #seopress_cpt #tabs-6 #wrap-videos .video:last-child .accordion-section-title {
     border-bottom: 1px solid var(--borderColorLight);
+    font-family: var(--fontFamily);
 }
 
 #seopress_content_analysis .mandatory,
@@ -2577,6 +2581,49 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     width: fit-content;
 }
 
+/* Details/Summary accordion styling */
+details.seopress-notice {
+    cursor: default;
+}
+
+details.seopress-notice summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 4px 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+details.seopress-notice summary::-webkit-details-marker {
+    display: none;
+}
+
+details.seopress-notice summary::marker {
+    display: none;
+    content: "";
+}
+
+details.seopress-notice summary::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 6px solid var(--sp-wp-default-color);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+details[open].seopress-notice summary::before {
+    transform: rotate(90deg);
+}
+
+details.seopress-notice > *:not(summary) {
+    padding-left: 14px;
+}
+
 #seopress-tabs.wrap {
     margin: 30px 0 0 0;
 }
@@ -2945,6 +2992,51 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     height: auto;
     margin: 0 auto;
     border-radius: 0.5rem;
+}
+
+/* AI Providers */
+.seopress-option .seopress-ai-providers {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+.seopress-option .seopress-ai-provider {
+    display: flex;
+    align-items: stretch;
+    border-radius: 1rem;
+    background: var(--backgroundSecondary);
+    font-weight: bold;
+    position: relative;
+    transition: all 150ms linear;
+    border: 3px solid transparent;
+    min-height: 80px;
+}
+.seopress-option .seopress-ai-provider:hover,
+.seopress-option .seopress-ai-provider:focus,
+.seopress-option .seopress-ai-provider:active,
+.seopress-option .seopress-ai-provider.active {
+    border: 3px solid var(--backgroundPrimary);
+}
+.seopress-option .seopress-ai-provider * {
+    cursor: pointer;
+}
+.seopress-option .seopress-ai-provider label {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 1.5rem 1rem;
+}
+.seopress-option .seopress-ai-provider input[type="radio"] {
+    text-indent: -9999px;
+    position: absolute;
+    opacity: 0;
+}
+.seopress-option .seopress-ai-provider label img {
+    width: 100px;
+    height: auto;
+    margin: 0 auto;
 }
 
 /* Quick tags */

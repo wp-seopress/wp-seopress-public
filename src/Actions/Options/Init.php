@@ -206,7 +206,7 @@ class Init implements ActivationHook {
 			$toggle_options = array();
 		}
 
-		$toggle_options = array(
+		$default_toggle_options = array(
 			'toggle-titles'           => '1',
 			'toggle-xml-sitemap'      => '1',
 			'toggle-social'           => '1',
@@ -218,6 +218,7 @@ class Init implements ActivationHook {
 			'toggle-rich-snippets'    => '1',
 			'toggle-breadcrumbs'      => '1',
 			'toggle-robots'           => '1',
+			'toggle-llms'             => '1',
 			'toggle-404'              => '1',
 			'toggle-bot'              => '1',
 			'toggle-inspect-url'      => '1',
@@ -225,12 +226,15 @@ class Init implements ActivationHook {
 		);
 
 		if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-			$toggle_options['toggle-woocommerce'] = '1';
+			$default_toggle_options['toggle-woocommerce'] = '1';
 		}
+
+		// Merge with existing options to preserve user settings while adding new toggles
+		$toggle_options = array_merge( $default_toggle_options, (array) $toggle_options );
 
 		// Check if the value is an array (important!).
 		if ( is_array( $toggle_options ) ) {
-			add_option( 'seopress_toggle', $toggle_options );
+			update_option( 'seopress_toggle', $toggle_options );
 		}
 	}
 

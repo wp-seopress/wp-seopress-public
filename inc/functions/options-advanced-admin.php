@@ -870,37 +870,6 @@ function seopress_bulk_quick_edit_save_post( $post_id ) {
 			delete_post_meta( $post_id, '_seopress_robots_follow' );
 		}
 	}
-
-	// Elementor sync.
-	if ( did_action( 'elementor/loaded' ) ) {
-		$elementor = get_post_meta( $post_id, '_elementor_page_settings', true );
-
-		if ( ! empty( $elementor ) ) {
-			if ( isset( $_REQUEST['seopress_title'] ) ) {
-				$elementor['_seopress_titles_title'] = sanitize_text_field( wp_unslash( $_REQUEST['seopress_title'] ) );
-			}
-			if ( isset( $_REQUEST['seopress_desc'] ) ) {
-				$elementor['_seopress_titles_desc'] = sanitize_textarea_field( wp_unslash( $_REQUEST['seopress_desc'] ) );
-			}
-			if ( isset( $_REQUEST['seopress_noindex'] ) ) {
-				$elementor['_seopress_robots_index'] = 'yes';
-			} else {
-				$elementor['_seopress_robots_index'] = '';
-			}
-			if ( isset( $_REQUEST['seopress_nofollow'] ) ) {
-				$elementor['_seopress_robots_follow'] = 'yes';
-			} else {
-				$elementor['_seopress_robots_follow'] = '';
-			}
-			if ( isset( $_REQUEST['seopress_canonical'] ) ) {
-				$elementor['_seopress_robots_canonical'] = sanitize_url( wp_unslash( $_REQUEST['seopress_canonical'] ) );
-			}
-			if ( isset( $_REQUEST['seopress_tkw'] ) ) {
-				$elementor['_seopress_analysis_target_kw'] = sanitize_text_field( wp_unslash( $_REQUEST['seopress_tkw'] ) );
-			}
-			update_post_meta( $post_id, '_elementor_page_settings', $elementor );
-		}
-	}
 }
 
 // WP Editor on taxonomy description field.

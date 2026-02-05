@@ -23,8 +23,8 @@ class WordPressData {
 		global $wp_post_types;
 
 		$default_args = array(
-			'show_ui' => true,
-			'public'  => true,
+			'public'             => true,
+			'publicly_queryable' => true,
 		);
 
 		$args = wp_parse_args( $args, $default_args );
@@ -33,7 +33,7 @@ class WordPressData {
 			unset( $args['public'] );
 		}
 
-		$post_types = get_post_types( $args, 'objects', 'and' );
+		$post_types = get_post_types( $args, 'objects', 'or' );
 
 		if ( ! $return_all ) {
 			unset(
@@ -65,13 +65,13 @@ class WordPressData {
 	 */
 	public function getTaxonomies( $with_terms = false, $return_all = false ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		$args = array(
-			'show_ui' => true,
-			'public'  => true,
+			'public'             => true,
+			'publicly_queryable' => true,
 		);
 		$args = apply_filters( 'seopress_get_taxonomies_args', $args );
 
 		$output     = 'objects'; // or objects.
-		$operator   = 'and'; // 'and' or 'or'.
+		$operator   = 'or'; // 'and' or 'or'.
 		$taxonomies = get_taxonomies( $args, $output, $operator );
 
 		if ( ! $return_all ) {

@@ -75,11 +75,11 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 					if ( ! empty( $seo_tabs ) ) {
 						?>
 					<ul>
-									<?php
-									foreach ( $seo_tabs as $tab ) {
-										echo $tab;
-									}
-									?>
+						<?php
+						foreach ( $seo_tabs as $tab ) { // phpcs:ignore
+							echo $tab; // phpcs:ignore
+						}
+						?>
 					</ul>
 						<?php
 					}
@@ -93,12 +93,12 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 								if ( 'post-new.php' === $pagenow || 'post.php' === $pagenow ) {
 									if ( $post && absint( $shop_page_id ) === absint( $post->ID ) ) {
 										?>
-						<p class="notice notice-info">
+										<p class="notice notice-info">
 										<?php
 										/* translators: %s documentation URL */
 										echo wp_kses_post( sprintf( __( 'This is your <strong>Shop page</strong>. Go to <a href="%s"><strong>SEO > Titles & Metas > Archives > Products</strong></a> to edit your title and meta description.', 'wp-seopress' ), esc_url( admin_url( 'admin.php?page=seopress-titles#tab=tab_seopress_titles_archives' ) ) ) );
 										?>
-						</p>
+										</p>
 										<?php
 									}
 								}
@@ -111,7 +111,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									<label for="seopress_titles_title_meta">
 										<?php
 											esc_html_e( 'Title', 'wp-seopress' );
-											echo seopress_tooltip( esc_html__( 'Meta title', 'wp-seopress' ), esc_html__( 'Titles are critical to give users a quick insight into the content of a result and why it’s relevant to their query. It\'s often the primary piece of information used to decide which result to click on, so it\'s important to use high-quality titles on your web pages.', 'wp-seopress' ), esc_html( '<title>My super title</title>' ) );
+											echo seopress_tooltip( esc_html__( 'Meta title', 'wp-seopress' ), esc_html__( 'Titles are critical to give users a quick insight into the content of a result and why it’s relevant to their query. It\'s often the primary piece of information used to decide which result to click on, so it\'s important to use high-quality titles on your web pages.', 'wp-seopress' ), esc_html( '<title>My super title</title>' ) ); // phpcs:ignore
 										?>
 									</label>
 
@@ -149,14 +149,14 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 								<button type="button" class="<?php echo esc_attr( seopress_btn_secondary_classes() ); ?> tag-title" id="seopress-tag-single-sep" data-tag="%%sep%%"><span
 										class="dashicons dashicons-plus-alt2"></span><?php esc_html_e( 'Separator', 'wp-seopress' ); ?></button>
 
-								<?php echo seopress_render_dyn_variables( 'tag-title' ); ?>
+								<?php echo seopress_render_dyn_variables( 'tag-title' ); // phpcs:ignore ?>
 							</div>
 							<p>
 								<span class="seopress-d-flex seopress-mb-1">
 									<label for="seopress_titles_desc_meta">
 										<?php
 											esc_html_e( 'Meta description', 'wp-seopress' );
-											echo seopress_tooltip( esc_html__( 'Meta description', 'wp-seopress' ), wp_kses_post( __( 'A meta description tag should generally inform and interest users with a short, relevant summary of what a particular page is about. <br>They are like a pitch that convince the user that the page is exactly what they\'re looking for. <br>There\'s no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width.', 'wp-seopress' ) ), esc_html( '<meta name="description" content="my super meta description" />' ) );
+											echo seopress_tooltip( esc_html__( 'Meta description', 'wp-seopress' ), wp_kses_post( __( 'A meta description tag should generally inform and interest users with a short, relevant summary of what a particular page is about. <br>They are like a pitch that convince the user that the page is exactly what they\'re looking for. <br>There\'s no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width.', 'wp-seopress' ) ), esc_html( '<meta name="description" content="my super meta description" />' ) ); // phpcs:ignore
 										?>
 									</label>
 
@@ -189,7 +189,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 								</button>
 									<?php
 								}
-								echo seopress_render_dyn_variables( 'tag-description' );
+								echo seopress_render_dyn_variables( 'tag-description' ); // phpcs:ignore
 								?>
 							</div>
 						</div>
@@ -213,7 +213,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 										<span class="dashicons dashicons-smartphone"></span>
 										<?php esc_html_e( 'Mobile Preview', 'wp-seopress' ); ?>
 										<input type="checkbox" name="toggle-preview" id="toggle-preview" class="toggle"
-											data-toggle="<?php echo $toggle_preview; ?>">
+											data-toggle="<?php echo esc_attr( $toggle_preview ); ?>">
 										<label for="toggle-preview"></label>
 									</p>
 								</div>
@@ -346,28 +346,33 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 							?>
 					<div id="tabs-2">
 						<div class="box-left">
-							<p class="description-alt desc-fb">
+							<p class="description-alt desc-fb" style="display:flex;align-items:center;gap:8px;">
 								<svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true"
-									focusable="false">
+									focusable="false" style="flex-shrink:0;">
 									<path
 										d="M12 15.8c-3.7 0-6.8-3-6.8-6.8s3-6.8 6.8-6.8c3.7 0 6.8 3 6.8 6.8s-3.1 6.8-6.8 6.8zm0-12C9.1 3.8 6.8 6.1 6.8 9s2.4 5.2 5.2 5.2c2.9 0 5.2-2.4 5.2-5.2S14.9 3.8 12 3.8zM8 17.5h8V19H8zM10 20.5h4V22h-4z">
 									</path>
 								</svg>
-								<?php esc_html_e( 'LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below.', 'wp-seopress' ); ?>
-							</p>
-							<p class="seopress-d-flex seopress-space-between">
-								<span class="dashicons dashicons-facebook-alt"></span>
-
-								<span>
+								<span style="flex:1;">
+									<?php esc_html_e( 'LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below.', 'wp-seopress' ); ?>
 									<a href="<?php echo esc_url( 'https://developers.facebook.com/tools/debug/sharing/?q=' . get_permalink( get_the_id() ) ); ?>"
-										target="_blank" class="components-button is-compact is-tertiary">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M19.5 4.5h-7V6h4.44l-5.97 5.97 1.06 1.06L18 7.06v4.44h1.5v-7Zm-13 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3H17v3a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h3V5.5h-3Z"></path></svg>
+										target="_blank" class="components-button is-link is-compact" style="display:inline;white-space:nowrap;">
 										<?php esc_html_e( 'Ask Facebook to update its cache', 'wp-seopress' ); ?>
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" style="margin-left:4px;vertical-align:middle;"><path d="M19.5 4.5h-7V6h4.44l-5.97 5.97 1.06 1.06L18 7.06v4.44h1.5v-7Zm-13 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3H17v3a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h3V5.5h-3Z"></path></svg>
 									</a>
 								</span>
 							</p>
 							<p>
-								<label for="seopress_social_fb_title_meta"><?php esc_html_e( 'Facebook Title', 'wp-seopress' ); ?></label>
+								<span class="seopress-d-flex seopress-mb-1">
+									<label for="seopress_social_fb_title_meta">
+										<?php
+											esc_html_e( 'Facebook Title', 'wp-seopress' );
+											echo seopress_tooltip( esc_html__( 'Facebook Title', 'wp-seopress' ), esc_html__( 'The Facebook title for sharing. If empty, the meta title will be used.', 'wp-seopress' ), esc_html( '<meta property="og:title" content="Your title here" />' ) );
+										?>
+									</label>
+
+									<?php do_action( 'seopress_social_fb_title_input_before', $pagenow ); ?>
+								</span>
 								<input id="seopress_social_fb_title_meta" type="text" name="seopress_social_fb_title"
 									class="components-text-control__input"
 									placeholder="<?php esc_html_e( 'Enter your Facebook title', 'wp-seopress' ); ?>"
@@ -375,7 +380,16 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									value="<?php echo esc_html( $seopress_social_fb_title ); ?>" />
 							</p>
 							<p>
-								<label for="seopress_social_fb_desc_meta"><?php esc_html_e( 'Facebook description', 'wp-seopress' ); ?></label>
+								<span class="seopress-d-flex seopress-mb-1">
+									<label for="seopress_social_fb_desc_meta">
+										<?php
+											esc_html_e( 'Facebook description', 'wp-seopress' );
+											echo seopress_tooltip( esc_html__( 'Facebook description', 'wp-seopress' ), esc_html__( 'The Facebook description for sharing. If empty, the meta description will be used.', 'wp-seopress' ), esc_html( '<meta property="og:description" content="Your description here" />' ) );
+										?>
+									</label>
+
+									<?php do_action( 'seopress_social_fb_desc_input_before', $pagenow ); ?>
+								</span>
 								<textarea id="seopress_social_fb_desc_meta" name="seopress_social_fb_desc"
 									class="components-text-control__textarea"
 									placeholder="<?php esc_html_e( 'Enter your Facebook description', 'wp-seopress' ); ?>"
@@ -408,7 +422,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 						<div class="box-right">
 							<div class="facebook-snippet-preview">
 								<h3>
-									<?php esc_html_e( 'Facebook Preview', 'wp-seopress' ); ?>
+									<span class="dashicons dashicons-facebook-alt" style="margin-right:8px;"></span> - <?php esc_html_e( 'Facebook Preview', 'wp-seopress' ); ?>
 								</h3>
 								<?php if ( '1' == seopress_get_toggle_option( 'social' ) ) { // phpcs:ignore -- TODO: null comparison check. ?>
 								<p>
@@ -485,11 +499,17 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 						</div>
 						<div class="clear"></div>
 						<div class="box-left">
-							<p class="seopress-d-flex seopress-space-between">
-								<span class="dashicons dashicons-twitter"></span>
-							</p>
 							<p>
-								<label for="seopress_social_twitter_title_meta"><?php esc_html_e( 'X Title', 'wp-seopress' ); ?></label>
+								<span class="seopress-d-flex seopress-mb-1">
+									<label for="seopress_social_twitter_title_meta">
+										<?php
+											esc_html_e( 'X Title', 'wp-seopress' );
+											echo seopress_tooltip( esc_html__( 'X Title', 'wp-seopress' ), esc_html__( 'The X (Twitter) title for sharing. If empty, the meta title will be used.', 'wp-seopress' ), esc_html( '<meta name="twitter:title" content="Your title here" />' ) );
+										?>
+									</label>
+
+									<?php do_action( 'seopress_social_twitter_title_input_before', $pagenow ); ?>
+								</span>
 								<input id="seopress_social_twitter_title_meta" type="text"
 									class="components-text-control__input" name="seopress_social_twitter_title"
 									placeholder="<?php esc_html_e( 'Enter your X title', 'wp-seopress' ); ?>"
@@ -497,7 +517,16 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									value="<?php echo esc_html( $seopress_social_twitter_title ); ?>" />
 							</p>
 							<p>
-								<label for="seopress_social_twitter_desc_meta"><?php esc_html_e( 'X Description', 'wp-seopress' ); ?></label>
+								<span class="seopress-d-flex seopress-mb-1">
+									<label for="seopress_social_twitter_desc_meta">
+										<?php
+											esc_html_e( 'X Description', 'wp-seopress' );
+											echo seopress_tooltip( esc_html__( 'X Description', 'wp-seopress' ), esc_html__( 'The X (Twitter) description for sharing. If empty, the meta description will be used.', 'wp-seopress' ), esc_html( '<meta name="twitter:description" content="Your description here" />' ) );
+										?>
+									</label>
+
+									<?php do_action( 'seopress_social_twitter_desc_input_before', $pagenow ); ?>
+								</span>
 								<textarea id="seopress_social_twitter_desc_meta" name="seopress_social_twitter_desc"
 									class="components-text-control__textarea"
 									placeholder="<?php esc_html_e( 'Enter your X description', 'wp-seopress' ); ?>"
@@ -527,7 +556,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 						</div>
 						<div class="box-right">
 							<div class="twitter-snippet-preview">
-								<h3><?php esc_html_e( 'X Preview', 'wp-seopress' ); ?>
+								<h3><span class="dashicons dashicons-twitter" style="margin-right:8px;"></span> - <?php esc_html_e( 'X Preview', 'wp-seopress' ); ?>
 								</h3>
 								<?php if ( '1' == seopress_get_toggle_option( 'social' ) ) { // phpcs:ignore -- TODO: null comparison check. ?>
 								<p><?php esc_html_e( 'This is what your post will look like in X. You have to publish your post to get the X Preview.', 'wp-seopress' ); ?>

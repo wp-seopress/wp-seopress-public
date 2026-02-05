@@ -345,6 +345,34 @@ class Notifications {
 			}
 		}
 
+		$page_builder_plugins = array(
+			'elementor/elementor.php'                    => 'Elementor',
+			'elementor-pro/elementor-pro.php'            => 'Elementor Pro',
+			'beaver-builder-lite-version/fl-builder.php' => 'Beaver Builder',
+		);
+
+		foreach ( $page_builder_plugins as $key => $value ) {
+			if ( is_plugin_active( $key ) ) {
+				++$alerts_high;
+				$args[]             = array(
+					'id'         => 'notice-page-builder-plugins',
+					/* translators: %s name of a page builder plugin (e.g. Elementor) */
+					'title'      => sprintf( __( 'We noticed that you use <strong>%s</strong> page builder', 'wp-seopress' ), $value ),
+					'desc'       => __( 'Enable our page builder integration to unlock seamless SEO optimization directly within your favorite builder! No more back-and-forth between your page builder and the default WordPress editor.', 'wp-seopress' ),
+					'impact'     => array(
+						'info' => __( 'Wizard', 'wp-seopress' ),
+					),
+					'link'       => array(
+						'en'       => admin_url( 'admin.php?page=seopress-advanced#tab=tab_seopress_advanced_appearance' ),
+						'title'    => __( 'Activate it', 'wp-seopress' ),
+						'external' => false,
+					),
+					'deleteable' => false,
+					'status'     => true,
+				);
+			}
+		}
+
 		$indexing_plugins = array(
 			'indexnow/indexnow-url-submission.php'         => 'IndexNow',
 			'bing-webmaster-tools/bing-url-submission.php' => 'Bing Webmaster Url Submission',

@@ -391,20 +391,25 @@ class I18nUniversalMetabox {
 				'maximum_limit'                  => __( 'maximum limit', 'wp-seopress' ),
 				'maximum_recommended_limit'      => __( 'maximum recommended limit', 'wp-seopress' ),
 				'meta_title_description'         => array(
-					'title'                        => __( 'Title', 'wp-seopress' ),
-					'tooltip_title'                => __( 'Meta Title', 'wp-seopress' ),
-					'tooltip_description'          => __( "Titles are critical to give users a quick insight into the content of a result and why it’s relevant to their query. It's often the primary piece of information used to decide which result to click on, so it's important to use high-quality titles on your web pages.", 'wp-seopress' ),
-					'placeholder_title'            => __( 'Enter your title', 'wp-seopress' ),
-					'meta_description'             => __( 'Meta description', 'wp-seopress' ),
-					'tooltip_description_1'        => __( 'A meta description tag should generally inform and interest users with a short, relevant summary of what a particular page is about.', 'wp-seopress' ),
-					'tooltip_description_2'        => __( "They are like a pitch that convince the user that the page is exactly what they're looking for.", 'wp-seopress' ),
-					'tooltip_description_3'        => __( "There's no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width.", 'wp-seopress' ),
-					'placeholder_description'      => __( 'Enter your description', 'wp-seopress' ),
-					'generate_ai'                  => __( 'Generate meta with AI', 'wp-seopress' ),
-					'generate_ai_title'            => __( 'Generate meta title with AI', 'wp-seopress' ),
-					'generate_ai_description'      => __( 'Generate meta description with AI', 'wp-seopress' ),
+					'section_description'                => __( 'Customize how your page appears in search results. The title and meta description are used by search engines to display your page in search results.', 'wp-seopress' ),
+					'title'                              => __( 'Title', 'wp-seopress' ),
+					'tooltip_title'                      => __( 'Meta Title', 'wp-seopress' ),
+					'tooltip_description'                => __( "Titles are critical to give users a quick insight into the content of a result and why it's relevant to their query. It's often the primary piece of information used to decide which result to click on, so it's important to use high-quality titles on your web pages.", 'wp-seopress' ),
+					'placeholder_title'                  => __( 'Enter your title', 'wp-seopress' ),
+					'meta_description'                   => __( 'Meta description', 'wp-seopress' ),
+					'tooltip_description_1'              => __( 'A meta description tag should generally inform and interest users with a short, relevant summary of what a particular page is about.', 'wp-seopress' ),
+					'tooltip_description_2'              => __( "They are like a pitch that convince the user that the page is exactly what they're looking for.", 'wp-seopress' ),
+					'tooltip_description_3'              => __( "There's no limit on how long a meta description can be, but the search result snippets are truncated as needed, typically to fit the device width.", 'wp-seopress' ),
+					'placeholder_description'            => __( 'Enter your description', 'wp-seopress' ),
+					'generate_ai'                        => __( 'Generate meta with AI', 'wp-seopress' ),
+					'generate_ai_title'                  => __( 'Generate meta title with AI', 'wp-seopress' ),
+					'generate_ai_description'            => __( 'Generate meta description with AI', 'wp-seopress' ),
+					'generate_ai_facebook_title'         => __( 'Generate Facebook title with AI', 'wp-seopress' ),
+					'generate_ai_facebook_description'   => __( 'Generate Facebook description with AI', 'wp-seopress' ),
+					'generate_ai_twitter_title'          => __( 'Generate X title with AI', 'wp-seopress' ),
+					'generate_ai_twitter_description'    => __( 'Generate X description with AI', 'wp-seopress' ),
 					/* translators: %s Products archive meta settings page */
-					'woocommerce_shop_page_notice' => __( 'This is your <strong>Shop page</strong>. Go to <a href="%s"><strong>SEO > Titles & Metas > Archives > Products</strong></a> to edit your title and meta description.', 'wp-seopress' ),
+					'woocommerce_shop_page_notice'       => __( 'This is your <strong>Shop page</strong>. Go to <a href="%s"><strong>SEO > Titles & Metas > Archives > Products</strong></a> to edit your title and meta description.', 'wp-seopress' ),
 				),
 				'repeater_how_to'                => array(
 					'title_step'       => __(
@@ -744,8 +749,8 @@ class I18nUniversalMetabox {
 					'add'         => __( 'Add a schema', 'wp-seopress' ),
 				),
 				'social'           => array(
-					'title'          => __(
-						'LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below.',
+					'title'          => /* translators: %s post title */ __(
+						'LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below. <a href="https://developers.facebook.com/tools/debug/sharing/?q=%s" target="_blank">Ask Facebook to update its cache <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" style="vertical-align:middle;margin-right:4px;"><path d="M19.5 4.5h-7V6h4.44l-5.97 5.97 1.06 1.06L18 7.06v4.44h1.5v-7Zm-13 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3H17v3a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h3V5.5h-3Z"></path></svg></a>',
 						'wp-seopress'
 					),
 					'facebook_title' => __(

@@ -170,6 +170,16 @@ class RankMath implements ExecuteHooksBackend {
 					}
 				}
 			}
+
+			$rank_math_primary_product_cat = get_post_meta( $post->ID, 'rank_math_primary_product_cat', true );
+			if ( ! empty( $rank_math_primary_product_cat ) ) {
+				update_post_meta( $post->ID, '_seopress_robots_primary_cat', $rank_math_primary_product_cat );
+			}
+
+			$rank_math_primary_category = get_post_meta( $post->ID, 'rank_math_primary_category', true );
+			if ( ! empty( $rank_math_primary_category ) ) {
+				update_post_meta( $post->ID, '_seopress_robots_primary_cat', $rank_math_primary_category );
+			}
 		}
 
 		$offset += $increment;

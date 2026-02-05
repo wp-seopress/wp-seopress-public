@@ -66,7 +66,7 @@ class ModuleMetabox implements ExecuteHooks {
 			}
 		}
 
-		$dependencies = array( 'jquery-ui-datepicker' );
+		$dependencies = array( 'jquery-ui-datepicker', 'react', 'react-dom' );
 		if ( $is_gutenberg ) {
 			$dependencies = array_merge( $dependencies, array( 'wp-components', 'wp-edit-post', 'wp-plugins' ) );
 		}
@@ -164,6 +164,8 @@ class ModuleMetabox implements ExecuteHooks {
 			array(
 				'SEOPRESS_URL_PUBLIC'       => SEOPRESS_URL_PUBLIC,
 				'SEOPRESS_URL_ASSETS'       => SEOPRESS_URL_ASSETS,
+				'SEOPRESS_VERSION'          => SEOPRESS_VERSION,
+				'SEOPRESS_PRO_VERSION'      => defined( 'SEOPRESS_PRO_VERSION' ) ? SEOPRESS_PRO_VERSION : '0',
 				'SEOPRESS_PRO_IS_ACTIVATED' => is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ? true : false,
 				'SITENAME'                  => get_bloginfo( 'name' ),
 				'SITEURL'                   => site_url(),

@@ -4,19 +4,19 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.4.1
+ * Version: 9.5
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
  * Domain Path: /languages
  * Requires PHP: 7.4
- * Requires at least: 5.0
+ * Requires at least: 6.2
  *
  * @package SEOPress
  */
 
 /*
-	Copyright 2016 - 2025 - Benjamin Denis  (email : contact@seopress.org)
+	Copyright 2016 - 2026 - Benjamin Denis  (email : contact@seopress.org)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 3, as
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.4.1' );
+define( 'SEOPRESS_VERSION', '9.5' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -166,11 +166,6 @@ function seopress_plugins_loaded( $hook ) { // phpcs:ignore
 	require_once $plugin_dir . 'inc/functions/options.php';
 	require_once $plugin_dir . 'inc/admin/admin-bar/admin-bar.php';
 
-	// Load integrations conditionally.
-	if ( did_action( 'elementor/loaded' ) && apply_filters( 'seopress_elementor_integration_enabled', true ) ) {
-		include_once $plugin_dir . 'inc/admin/page-builders/elementor/elementor-addon.php';
-	}
-
 	if ( version_compare( $wp_version, '5.0', '>=' ) ) {
 		include_once $plugin_dir . 'inc/admin/page-builders/gutenberg/blocks.php';
 	}
@@ -205,7 +200,7 @@ add_action( 'init', 'seopress_init' );
  */
 function seopress_dyn_variables_init( $variables, $post = '', $is_oembed = false ) {
 	if ( wp_doing_ajax() ) {
-		return;
+		return array();
 	}
 
 	// Ensure the dynamic variables function is loaded.
@@ -217,9 +212,9 @@ function seopress_dyn_variables_init( $variables, $post = '', $is_oembed = false
 		}
 	}
 
-	// If the function still doesn't exist, return null to avoid fatal errors.
+	// If the function still doesn't exist, return empty array to avoid fatal errors.
 	if ( ! function_exists( 'seopress_get_dynamic_variables' ) ) {
-		return null;
+		return array();
 	}
 
 	// Use memoized function for dynamic variable retrieval.

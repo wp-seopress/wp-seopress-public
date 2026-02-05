@@ -33,7 +33,7 @@ if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getHalfDisable() |
 						add_action( 'wp_body_open', 'seopress_matomo_nojs', 960, 1 );
 					}
 					if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getClarityEnable() && '' !== seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() ) {
-						add_action( 'wp_head', 'seopress_clarity_js_arguments', 970, 1 );
+						add_action( 'wp_head', 'seopress_clarity_js', 970 );
 					}
 					add_action( 'wp_head', 'seopress_custom_tracking_head_hook', 980, 1 );
 					add_action( 'wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1 );
@@ -55,7 +55,7 @@ if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getHalfDisable() |
 					add_action( 'wp_body_open', 'seopress_matomo_nojs', 960, 1 );
 				}
 				if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getClarityEnable() && '' !== seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() ) {
-					add_action( 'wp_head', 'seopress_clarity_js_arguments', 970, 1 );
+					add_action( 'wp_head', 'seopress_clarity_js', 970 );
 				}
 				add_action( 'wp_head', 'seopress_custom_tracking_head_hook', 980, 1 ); // Oxygen: if prioriry >= 990, nothing will be outputed.
 				add_action( 'wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1 );
@@ -78,7 +78,7 @@ if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getHalfDisable() |
 			add_action( 'wp_body_open', 'seopress_matomo_nojs', 960, 1 );
 		}
 		if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getClarityEnable() && '' !== seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() ) {
-			add_action( 'wp_head', 'seopress_clarity_js_arguments', 970, 1 );
+			add_action( 'wp_head', 'seopress_clarity_js', 970 );
 		}
 		add_action( 'wp_head', 'seopress_custom_tracking_head_hook', 980, 1 );
 		add_action( 'wp_body_open', 'seopress_custom_tracking_body_hook', 1020, 1 );

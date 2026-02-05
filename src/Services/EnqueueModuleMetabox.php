@@ -19,6 +19,12 @@ class EnqueueModuleMetabox {
 	public function canEnqueue() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		$response = true;
 
+		// WordPress 6.2+ is required for the universal metabox (React 18 support).
+		global $wp_version;
+		if ( version_compare( $wp_version, '6.2', '<' ) ) {
+			return false;
+		}
+
 		global $pagenow;
 
 		if ( 'widgets.php' === $pagenow ) {
