@@ -11,13 +11,14 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 $this->options = get_option( 'seopress_google_analytics_option_name' );
 if ( function_exists( 'seopress_admin_header' ) ) {
 	echo seopress_admin_header();
-} ?>
+}
+?>
 <form method="post"
 	action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>"
 	class="seopress-option">
 	<?php
 		echo $this->feature_title( 'google-analytics' );
-	settings_fields( 'seopress_google_analytics_option_group' );
+		settings_fields( 'seopress_google_analytics_option_group' );
 	?>
 
 	<div id="seopress-tabs" class="wrap">
@@ -53,17 +54,26 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 				do_settings_sections( 'seopress-settings-admin-google-analytics-ecommerce' );
 				do_settings_sections( 'seopress-settings-admin-google-analytics-dashboard' );
 			}
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'analytics' );
+			}
 			?>
 		</div>
-		<div class="seopress-tab 
+		<div class="seopress-tab
 		<?php
 		if ( 'tab_seopress_google_analytics_custom_tracking' === $current_tab ) {
 			echo 'active';
 		}
 		?>
-		" id="tab_seopress_google_analytics_custom_tracking"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-custom-tracking' ); ?>
+		" id="tab_seopress_google_analytics_custom_tracking">
+			<?php do_settings_sections( 'seopress-settings-admin-google-analytics-custom-tracking' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'analytics' );
+			}
+			?>
 		</div>
-		<div class="seopress-tab 
+		<div class="seopress-tab
 		<?php
 		if ( 'tab_seopress_google_analytics_custom_dimensions' === $current_tab ) {
 			echo 'active';
@@ -72,34 +82,56 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 		" id="tab_seopress_google_analytics_custom_dimensions">
 			<?php do_settings_sections( 'seopress-settings-admin-google-analytics-custom-dimensions' ); ?>
 			<?php do_settings_sections( 'seopress-settings-admin-google-analytics-advanced' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'analytics' );
+			}
+			?>
 		</div>
-		<div class="seopress-tab 
+		<div class="seopress-tab
 		<?php
 		if ( 'tab_seopress_google_analytics_gdpr' === $current_tab ) {
 			echo 'active';
 		}
 		?>
-		" id="tab_seopress_google_analytics_gdpr"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-gdpr' ); ?>
+		" id="tab_seopress_google_analytics_gdpr">
+			<?php do_settings_sections( 'seopress-settings-admin-google-analytics-gdpr' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'analytics' );
+			}
+			?>
 		</div>
-		<div class="seopress-tab 
+		<div class="seopress-tab
 		<?php
 		if ( 'tab_seopress_google_analytics_matomo' === $current_tab ) {
 			echo 'active';
 		}
 		?>
-		" id="tab_seopress_google_analytics_matomo"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-matomo' ); ?>
-<?php do_settings_sections( 'seopress-settings-admin-google-analytics-matomo-widget' ); ?>
+		" id="tab_seopress_google_analytics_matomo">
+			<?php do_settings_sections( 'seopress-settings-admin-google-analytics-matomo' ); ?>
+			<?php do_settings_sections( 'seopress-settings-admin-google-analytics-matomo-widget' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'analytics' );
+			}
+			?>
 		</div>
-		<div class="seopress-tab 
+		<div class="seopress-tab
 		<?php
 		if ( 'tab_seopress_google_analytics_clarity' === $current_tab ) {
 			echo 'active';
 		}
 		?>
-		" id="tab_seopress_google_analytics_clarity"><?php do_settings_sections( 'seopress-settings-admin-google-analytics-clarity' ); ?>
+		" id="tab_seopress_google_analytics_clarity">
+			<?php do_settings_sections( 'seopress-settings-admin-google-analytics-clarity' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'analytics' );
+			}
+			?>
 		</div>
 	</div>
 
 	<?php sp_submit_button( esc_html__( 'Save changes', 'wp-seopress' ) ); ?>
 </form>
-<?php

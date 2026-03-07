@@ -612,6 +612,25 @@ function seopress_advanced_advanced_baidu_callback() {
 }
 
 /**
+ * Advanced facebook callback.
+ */
+function seopress_advanced_advanced_facebook_callback() {
+	$options = get_option( 'seopress_advanced_option_name' );
+	$check   = isset( $options['seopress_advanced_advanced_facebook'] ) ? $options['seopress_advanced_advanced_facebook'] : null;
+
+	printf(
+		'<input type="text" name="seopress_advanced_option_name[seopress_advanced_advanced_facebook]" aria-label="' . esc_attr__( 'Facebook domain verification', 'wp-seopress' ) . '" placeholder="' . esc_html__( 'Enter Facebook domain verification meta value', 'wp-seopress' ) . '" value="%s"/>',
+		esc_html( $check )
+	);
+	?>
+<p class="description">
+	<?php echo wp_kses_post( __( 'Verify your domain with <strong>Facebook Business Manager</strong> to unlock additional features.', 'wp-seopress' ) ); ?>
+</p>
+
+	<?php
+}
+
+/**
  * Advanced adminbar callback.
  */
 function seopress_advanced_appearance_adminbar_callback() {
@@ -1064,6 +1083,33 @@ function seopress_advanced_appearance_score_col_callback() {
 	<?php
 	if ( isset( $options['seopress_advanced_appearance_score_col'] ) ) {
 		esc_attr( $options['seopress_advanced_appearance_score_col'] );
+	}
+}
+
+/**
+ * Advanced schema col callback.
+ *
+ * @since 9.6
+ */
+function seopress_advanced_appearance_schema_col_callback() {
+	$options = get_option( 'seopress_advanced_option_name' );
+
+	$check = isset( $options['seopress_advanced_appearance_schema_col'] ) ? $options['seopress_advanced_appearance_schema_col'] : null;
+	?>
+
+<label for="seopress_advanced_appearance_schema_col">
+	<input id="seopress_advanced_appearance_schema_col"
+		name="seopress_advanced_option_name[seopress_advanced_appearance_schema_col]" type="checkbox" <?php if ( '1' === $check ) { ?>
+	checked="yes"
+	<?php } ?>
+	value="1"/>
+
+	<?php esc_attr_e( 'Display Schema column (manual schemas set on posts)', 'wp-seopress' ); ?>
+</label>
+
+	<?php
+	if ( isset( $options['seopress_advanced_appearance_schema_col'] ) ) {
+		esc_attr( $options['seopress_advanced_appearance_schema_col'] );
 	}
 }
 

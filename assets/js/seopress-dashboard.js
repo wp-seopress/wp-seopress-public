@@ -22,7 +22,6 @@ jQuery(document).ready(function ($) {
         "notice-title-tag",
         "notice-enfold",
         "notice-themes",
-        "notice-page-builders",
         "notice-ebooks",
         "notice-integrations",
         "notice-noindex",
@@ -31,6 +30,7 @@ jQuery(document).ready(function ($) {
         "notice-robots-txt",
         "notice-robots-txt-valid",
         "notice-wpml-active",
+        "notice-promotions",
     ]
     notices.forEach(function (item) {
         $('#' + item).on('click', function () {
@@ -173,6 +173,10 @@ jQuery(document).ready(function ($) {
     $('#notice-ebooks').on('click', function () {
         $('#seopress-ebook-panel').toggleClass('is-active');
         $('#notice-ebooks').attr('data-toggle', $('#notice-ebooks').attr('data-toggle') == '1' ? '0' : '1');
+    });
+    $('#notice-promotions').on('click', function () {
+        $('#seopress-promotions-panel').toggleClass('is-active');
+        $('#notice-promotions').attr('data-toggle', $('#notice-promotions').attr('data-toggle') == '1' ? '0' : '1');
     });
 });
 

@@ -27,7 +27,7 @@ class Single {
 	protected function hooksWPMLCompatibility() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
 			// If multidomain setup.
-			if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+			if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
 				// Home URL.
 				add_filter(
 					'seopress_sitemaps_home_url',
@@ -48,7 +48,7 @@ class Single {
 					remove_filter( 'category_link', array( $sitepress, 'category_link_adjust_id' ), 1 );
 
 					// If multidomain setup.
-					if ( 2 === apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+					if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
 						$args['suppress_filters'] = false;
 					}
 

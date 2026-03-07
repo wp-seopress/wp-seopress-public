@@ -309,4 +309,105 @@ class NoticeOption {
 	public function getNoticeInsights() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		return $this->searchOptionByKey( 'notice-insights' );
 	}
+
+	/**
+	 * The getNoticePromotions function.
+	 *
+	 * @since 9.6.0
+	 *
+	 * @return string
+	 */
+	public function getNoticePromotions() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'notice-promotions' );
+	}
+
+	/**
+	 * Check if a promotion is dismissed.
+	 *
+	 * @since 9.6.0
+	 *
+	 * @param string $promo_id The promotion ID.
+	 *
+	 * @return bool True if dismissed and not expired.
+	 */
+	public function getPromotionDismissed( $promo_id ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$data = $this->getOption();
+
+		if ( empty( $data ) ) {
+			return false;
+		}
+
+		$key = 'promo-' . $promo_id;
+
+		if ( ! isset( $data[ $key ] ) ) {
+			return false;
+		}
+
+		$dismissal = $data[ $key ];
+
+		// Check if dismiss_until has passed.
+		if ( isset( $dismissal['dismiss_until'] ) && is_numeric( $dismissal['dismiss_until'] ) ) {
+			if ( $dismissal['dismiss_until'] > 0 && time() >= (int) $dismissal['dismiss_until'] ) {
+				return false; // Dismissal has expired.
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Set a promotion as dismissed.
+	 *
+	 * @since 9.6.0
+	 *
+	 * @param string $promo_id The promotion ID.
+	 * @param int    $duration Duration in days (0 for permanent).
+	 *
+	 * @return bool True on success.
+	 */
+	public function setPromotionDismissed( $promo_id, $duration = 30 ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$data = $this->getOption();
+
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
+
+		$key = 'promo-' . $promo_id;
+
+		// Get existing count or start at 0.
+		$count = isset( $data[ $key ]['count'] ) ? (int) $data[ $key ]['count'] : 0;
+
+		$data[ $key ] = array(
+			'dismissed_at'  => time(),
+			'dismiss_until' => $duration > 0 ? time() + ( $duration * DAY_IN_SECONDS ) : 0,
+			'count'         => $count + 1,
+		);
+
+		return update_option( Options::KEY_OPTION_NOTICE, $data, false );
+	}
+
+	/**
+	 * Get the dismissal count for a promotion.
+	 *
+	 * @since 9.6.0
+	 *
+	 * @param string $promo_id The promotion ID.
+	 *
+	 * @return int The number of times dismissed.
+	 */
+	public function getPromotionDismissalCount( $promo_id ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$data = $this->getOption();
+
+		if ( empty( $data ) ) {
+			return 0;
+		}
+
+		$key = 'promo-' . $promo_id;
+
+		if ( ! isset( $data[ $key ] ) || ! isset( $data[ $key ]['count'] ) ) {
+			return 0;
+		}
+
+		return (int) $data[ $key ]['count'];
+	}
 }

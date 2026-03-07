@@ -328,6 +328,16 @@ function seopress_yoast_migration() {
 				if ( 'metadesc-archive-wpseo' === $key ) {
 					$seopress_titles['seopress_titles_archives_date_desc'] = esc_html( $value );
 				}
+				// Attachment redirect.
+				// Yoast redirects attachment URLs to the file itself by default when enabled.
+				if ( 'disable-attachment' === $key ) {
+					if ( true === $value ) {
+						$seopress_advanced['seopress_advanced_advanced_attachments_file'] = '1';
+						unset( $seopress_advanced['seopress_advanced_advanced_attachments'] );
+					} else {
+						unset( $seopress_advanced['seopress_advanced_advanced_attachments_file'] );
+					}
+				}
 				// Author.
 				if ( 'disable-author' === $key ) {
 					if ( true === $value ) {
@@ -359,11 +369,60 @@ function seopress_yoast_migration() {
 					$seopress_social['seopress_social_accounts_facebook'] = esc_url( $value );
 				}
 				if ( 'twitter_site' === $key ) {
-					$seopress_social['seopress_social_accounts_twitter'] = esc_html( $value );
+					// Twitter/X handle - don't add http:// prefix.
+					// Remove @ if present at the beginning.
+					$twitter_handle = ltrim( $value, '@' );
+					$seopress_social['seopress_social_accounts_twitter'] = esc_html( $twitter_handle );
 				}
-				if ( 'other_social_urls' === $key ) {
-					$accounts = implode( "\n", array_map( 'esc_url', $value ) );
-					$seopress_social['seopress_social_accounts_extra'] = esc_html( $accounts );
+				if ( 'other_social_urls' === $key && is_array( $value ) ) {
+					// Map domain patterns to SEOPress social account fields.
+					$social_networks = array(
+						'instagram.com'  => 'seopress_social_accounts_instagram',
+						'linkedin.com'   => 'seopress_social_accounts_linkedin',
+						'youtube.com'    => 'seopress_social_accounts_youtube',
+						'youtu.be'       => 'seopress_social_accounts_youtube',
+						'pinterest.com'  => 'seopress_social_accounts_pinterest',
+						'pinterest.fr'   => 'seopress_social_accounts_pinterest',
+						'twitter.com'    => 'seopress_social_accounts_twitter',
+						'x.com'          => 'seopress_social_accounts_twitter',
+					);
+
+					$extra_accounts = array();
+					foreach ( $value as $social_url ) {
+						if ( empty( $social_url ) ) {
+							continue;
+						}
+
+						$social_url_lower = strtolower( $social_url );
+						$matched          = false;
+
+						foreach ( $social_networks as $domain => $field ) {
+							if ( false !== strpos( $social_url_lower, $domain ) ) {
+								// Twitter/X: extract handle from URL.
+								if ( 'seopress_social_accounts_twitter' === $field ) {
+									if ( empty( $seopress_social[ $field ] ) ) {
+										$parsed = wp_parse_url( $social_url );
+										if ( ! empty( $parsed['path'] ) ) {
+											$seopress_social[ $field ] = esc_html( trim( $parsed['path'], '/' ) );
+										}
+									}
+								} else {
+									$seopress_social[ $field ] = esc_url( $social_url );
+								}
+								$matched = true;
+								break;
+							}
+						}
+
+						// Unknown network - add to extra accounts.
+						if ( ! $matched ) {
+							$extra_accounts[] = ( 0 === strpos( $social_url, '@' ) ) ? esc_html( $social_url ) : esc_url( $social_url );
+						}
+					}
+
+					if ( ! empty( $extra_accounts ) ) {
+						$seopress_social['seopress_social_accounts_extra'] = implode( "\n", $extra_accounts );
+					}
 				}
 				if ( 'pinterestverify' === $key ) {
 					$seopress_advanced['seopress_advanced_advanced_pinterest'] = esc_html( $value );

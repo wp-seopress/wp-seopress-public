@@ -1043,7 +1043,7 @@ if ( function_exists( 'seopress_titles_noindex_bypass' ) && '1' !== seopress_tit
 			echo $seopress_titles_canonical . "\n";
 		}
 		add_action( 'wp_head', 'seopress_titles_canonical_post_hook', 1 );
-	} elseif ( is_home() && '' !== get_post_meta( $page_id, '_seopress_robots_canonical', true ) ) { // BLOG PAGE.
+	} elseif ( is_home() && ! empty( get_post_meta( $page_id, '_seopress_robots_canonical', true ) ) ) { // BLOG PAGE.
 		/**
 		 * Canonical post hook.
 		 */
@@ -1094,7 +1094,9 @@ if ( function_exists( 'seopress_titles_noindex_bypass' ) && '1' !== seopress_tit
 				}
 			}
 
-			if ( is_search() ) {
+			if ( is_front_page() && ! is_paged() ) { // Front page with "Your latest posts" setting.
+				$seopress_titles_canonical = '<link rel="canonical" href="' . htmlspecialchars( urldecode( home_url( '/' ) ) ) . '">';
+			} elseif ( is_search() ) {
 				$seopress_titles_canonical = '<link rel="canonical" href="' . htmlspecialchars( urldecode( get_home_url() . '/search/' . get_search_query() ) ) . '">';
 			} elseif ( is_paged() && is_singular() ) {// Paginated pages.
 				$seopress_titles_canonical = '<link rel="canonical" href="' . htmlspecialchars( urldecode( get_permalink() ) ) . '">';

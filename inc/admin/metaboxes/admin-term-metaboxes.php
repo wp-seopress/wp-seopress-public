@@ -26,7 +26,7 @@ function seopress_display_seo_term_metaboxe() {
 		if ( ! empty( $seopress_tax_key ) ) {
 			$taxonomy = get_taxonomy( $seopress_tax_key );
 			if ( ! empty( $taxonomy ) ) {
-				if ( ! $taxonomy->public ) {
+				if ( ! $taxonomy->public || ! $taxonomy->publicly_queryable ) {
 					return;
 				}
 			}

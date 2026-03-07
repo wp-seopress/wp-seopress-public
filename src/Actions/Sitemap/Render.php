@@ -76,7 +76,7 @@ class Render implements ExecuteHooksFrontend {
 		}
 
 		// Check if WPML is not setup as multidomain.
-		if ( 2 !== apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+		if ( 2 != apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
 			add_filter(
 				'request',
 				function ( $q ) {

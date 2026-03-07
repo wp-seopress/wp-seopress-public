@@ -116,6 +116,15 @@ abstract class RobotSettings {
 					'options'     => self::getRobotPrimaryCats( $id, $post_type ),
 					'visible'     => ( 'post' === $post_type || 'product' === $post_type ),
 				),
+				array(
+					'key'         => '_seopress_robots_freeze_modified_date',
+					'type'        => 'checkbox',
+					'use_default' => false,
+					'default'     => '',
+					'label'       => __( 'Freeze the last modified date (recommended for minor updates)', 'wp-seopress' ),
+					'description' => __( 'Prevent the last modified date from being updated on save. Recommended for minor updates like typos or formatting.', 'wp-seopress' ),
+					'visible'     => true,
+				),
 			),
 			$id
 		);

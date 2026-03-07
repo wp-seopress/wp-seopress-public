@@ -264,6 +264,7 @@ function seopress_display_seo_metaboxe() {
 
 		$seopress_robots_canonical                 = get_post_meta( $post->ID, '_seopress_robots_canonical', true );
 		$seopress_robots_primary_cat               = get_post_meta( $post->ID, '_seopress_robots_primary_cat', true );
+		$seopress_robots_freeze_modified_date      = get_post_meta( $post->ID, '_seopress_robots_freeze_modified_date', true );
 		$seopress_social_fb_title                  = get_post_meta( $post->ID, '_seopress_social_fb_title', true );
 		$seopress_social_fb_desc                   = get_post_meta( $post->ID, '_seopress_social_fb_desc', true );
 		$seopress_social_fb_img                    = get_post_meta( $post->ID, '_seopress_social_fb_img', true );
@@ -360,6 +361,11 @@ function seopress_display_seo_metaboxe() {
 					update_post_meta( $post_id, '_seopress_robots_primary_cat', sanitize_text_field( $_POST['seopress_robots_primary_cat'] ) );
 				} else {
 					delete_post_meta( $post_id, '_seopress_robots_primary_cat' );
+				}
+				if ( isset( $_POST['seopress_robots_freeze_modified_date'] ) ) {
+					update_post_meta( $post_id, '_seopress_robots_freeze_modified_date', 'yes' );
+				} else {
+					delete_post_meta( $post_id, '_seopress_robots_freeze_modified_date' );
 				}
 			}
 			if ( in_array( 'social-tab', $seo_tabs, true ) ) {

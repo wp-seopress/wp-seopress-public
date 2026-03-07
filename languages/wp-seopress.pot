@@ -1,4 +1,4 @@
-# Copyright (C) 2025 The SEO Guys at SEOPress
+# Copyright (C) 2026 The SEO Guys at SEOPress
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""

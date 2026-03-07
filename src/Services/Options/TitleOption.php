@@ -661,7 +661,7 @@ class TitleOption {
 	 */
 	public function getTaxTitle() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		$queried_object = get_queried_object();
-		$current_tax    = null !== $queried_object ? $queried_object->taxonomy : '';
+		$current_tax    = $queried_object instanceof \WP_Term ? $queried_object->taxonomy : '';
 
 		$option = $this->searchOptionByKey( 'seopress_titles_tax_titles' );
 
@@ -681,7 +681,7 @@ class TitleOption {
 	 */
 	public function getTaxDesc() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		$queried_object = get_queried_object();
-		$current_tax    = null !== $queried_object ? $queried_object->taxonomy : '';
+		$current_tax    = $queried_object instanceof \WP_Term ? $queried_object->taxonomy : '';
 
 		$option = $this->searchOptionByKey( 'seopress_titles_tax_titles' );
 

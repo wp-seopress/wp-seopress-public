@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 6.2+
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.5
+Stable tag: 9.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -308,31 +308,24 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.5 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-5/">Read the blog post update</a> =
-* NEW Raised the minimum required WordPress version to 6.2+
-* NEW AI providers: MistralAI, Claude and Google Gemini to generate SEO metadata and alternative texts automagically (PRO)
-* NEW Support for GPT 5.2 (PRO)
-* NEW Generate Open Graph and X (Twitter) cards automatically with AI
-* NEW llms.txt file to help AI understand your site (disclaimer: not yet officially supported by major search engines or AI platforms) (PRO)
-* NEW Added the ProfilePage structured data type. To enable it automatically, navigate to SEO > PRO > Structured Data Types tab. (PRO)
-* NEW 'seopress_pro_wc_schema_shipping_details_enabled' hook to enable/disable the shipping properties in product schema (https://www.seopress.org/support/hooks/filter-to-disable-woocommerce-shippingdetails-schema-generation/)
-* NEW 'seopress_pro_wc_schema_shipping_details' hook to filter the shipping properties in product schema (https://www.seopress.org/support/hooks/filter-the-shipping-properties-in-product-schema/)
-* INFO Elementor integration has been removed. We now recommend enabling our universal SEO metabox to manage all your SEO needs within this page builder.
-* INFO Switch universal metabox to WordPress bundled React
-* INFO Added additional keywords to our blocks to improve discoverability
-* INFO The export CSV tool now includes support for the "custom breadcrumbs" field
-* FIX Undefined $og_title variable
-* FIX An issue with GA4 stats in dashboard widget
-* FIX Improved error handling for GA4 statistics in the dashboard widget
-* FIX Improved MS Clarity script enqueuing
-* FIX Available post types and taxonomies listed in our settings
-* FIX Keywords in permalink for homepage
-* FIX A CSS conflict with our metaboxes when WooCommerce is enabled
-* FIX Warnings in plugin updater
-* FIX An issue with shipping zones in the product schema for WooCommerce
-* FIX A conflict with Admin Columns PRO 7.0
-* FIX PHP warning in Video schema duration parsing
-* FIX Issue with importing the primary category from Rank Math
+= 9.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-6/">Read the blog post update</a> =
+* NEW Added option to freeze the post modification date, preventing WordPress from updating it when a post is saved 🎉
+* NEW Import global settings from SmartCrawl
+* NEW Ability to add your Facebook meta domain verification tag
+* NEW Add a schema column (SEO, Advanced, Appearance, Columns to activate it)
+* INFO Remove useless notifications
+* INFO Improved migration process from Yoast for greater accuracy and ease
+* INFO Remove deprecated AI models
+* INFO Flushing XML sitemaps enhanced
+* FIX Improved handling of taxonomy notice conditions
+* FIX An issue with WPML causing XML sitemap errors in multidomain environments
+* FIX An issue with WPML to translate the primary category ID
+* FIX Empty canonical URL on homepage with "Your latest posts" setting
+* FIX A compatibility issue with Elementor on save
+* FIX Resolved an issue where GPT5.2 Vision failed to generate alt text correctly
+* FIX A fatal error when user cancels the site audit
+* FIX PHP Warnings
+
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

@@ -111,6 +111,7 @@ class RobotSettings implements ExecuteHooks {
 				'_seopress_robots_canonical',
 				'_seopress_robots_primary_cat',
 				'_seopress_robots_breadcrumbs',
+				'_seopress_robots_freeze_modified_date',
 			);
 
 			foreach ( $metas as $key => $value ) {
@@ -134,6 +135,7 @@ class RobotSettings implements ExecuteHooks {
 					|| '_seopress_robots_imageindex' === $value['key']
 					|| '_seopress_robots_snippet' === $value['key']
 					|| '_seopress_robots_breadcrumbs' === $value['key']
+					|| '_seopress_robots_freeze_modified_date' === $value['key']
 				) {
 					$item = sanitize_text_field( $item );
 				}

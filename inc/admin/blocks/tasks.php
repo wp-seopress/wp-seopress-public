@@ -43,21 +43,24 @@ if ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && SEOPRESS_WL_ADMIN_HEADER === false
 		<?php
 			$products = array(
 				'wp-seopress/seopress.php'         => array(
-					'title' => 'SEOPress Free',
-					'logo'  => SEOPRESS_URL_ASSETS . '/img/logo-seopress-free.svg',
-					'url'   => $docs['pricing'],
+					'title'    => 'SEOPress Free',
+					'logo'     => SEOPRESS_URL_ASSETS . '/img/logo-seopress-free.svg',
+					'url'      => $docs['pricing'],
+					'cta_text' => __( 'Learn more', 'wp-seopress' ),
 				),
 				'wp-seopress-pro/seopress-pro.php' => array(
-					'title'  => 'SEOPress PRO',
-					'logo'   => SEOPRESS_URL_ASSETS . '/img/logo-seopress-pro.svg',
-					'url'    => $docs['addons']['pro'],
-					'status' => $status_pro,
+					'title'    => 'SEOPress PRO',
+					'logo'     => SEOPRESS_URL_ASSETS . '/img/logo-seopress-pro.svg',
+					'url'      => $docs['addons']['pro'],
+					'status'   => $status_pro,
+					'cta_text' => __( 'Get PRO', 'wp-seopress' ),
 				),
 				'wp-seopress-insights/seopress-insights.php' => array(
-					'title'  => 'SEOPress Insights',
-					'logo'   => SEOPRESS_URL_ASSETS . '/img/logo-seopress-insights.svg',
-					'url'    => $docs['addons']['insights'],
-					'status' => $status_insights,
+					'title'    => 'SEOPress Insights',
+					'logo'     => SEOPRESS_URL_ASSETS . '/img/logo-seopress-insights.svg',
+					'url'      => $docs['addons']['insights'],
+					'status'   => $status_insights,
+					'cta_text' => __( 'Get Insights', 'wp-seopress' ),
 				),
 			);
 			?>
@@ -101,14 +104,14 @@ if ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && SEOPRESS_WL_ADMIN_HEADER === false
 						<?php if ( true === $upgrade ) { ?>
 									<div class="status upgrade">
 										<a href="<?php echo esc_url( $url ); ?>" target="_blank">
-											<?php esc_html_e( 'Upgrade', 'wp-seopress' ); ?>
+											<?php echo esc_html( $product['cta_text'] ); ?>
 											<span class="seopress-help dashicons dashicons-external"></span>
 										</a>
 									</div>
 								<?php } elseif ( isset( $product['status'] ) && false === $product['status'] ) { ?>
 									<div class="status upgrade">
 										<a href="<?php echo esc_url( admin_url( 'admin.php?page=seopress-license' ) ); ?>">
-											<?php esc_html_e( 'Check license', 'wp-seopress' ); ?>
+											<?php esc_html_e( 'Activate', 'wp-seopress' ); ?>
 										</a>
 									</div>
 								<?php } ?>
@@ -119,6 +122,12 @@ if ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && SEOPRESS_WL_ADMIN_HEADER === false
 			}
 			?>
 			</div>
+			<?php if ( ! is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) : ?>
+			<div class="seopress-suite-promo">
+				<span class="dashicons dashicons-star-filled"></span>
+				<span class="promo-text"><?php esc_html_e( 'Unlock AI, redirections, schemas, and more.', 'wp-seopress' ); ?> <a href="<?php echo esc_url( $docs['addons']['pro'] ); ?>" target="_blank" class="promo-link"><?php esc_html_e( 'Get PRO', 'wp-seopress' ); ?></a></span>
+			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	<?php

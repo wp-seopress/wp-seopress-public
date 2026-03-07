@@ -11,11 +11,12 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 $this->options = get_option( 'seopress_xml_sitemap_option_name' );
 if ( function_exists( 'seopress_admin_header' ) ) {
 	echo seopress_admin_header();
-} ?>
+}
+?>
 <form method="post" action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>" class="seopress-option" name="seopress-flush">
 	<?php
 		echo $this->feature_title( 'xml-sitemap' );
-	settings_fields( 'seopress_xml_sitemap_option_group' );
+		settings_fields( 'seopress_xml_sitemap_option_group' );
 	?>
 
 	<div id="seopress-tabs" class="wrap">
@@ -40,30 +41,57 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 					echo 'active';
 				}
 				?>
-				" id="tab_seopress_xml_sitemap_general"><?php do_settings_sections( 'seopress-settings-admin-xml-sitemap-general' ); ?></div>
-				<div class="seopress-tab 
+				" id="tab_seopress_xml_sitemap_general">
+					<?php do_settings_sections( 'seopress-settings-admin-xml-sitemap-general' ); ?>
+					<?php
+					if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+						seopress_render_contextual_promotion( 'sitemaps' );
+					}
+					?>
+				</div>
+				<div class="seopress-tab
 				<?php
 				if ( 'tab_seopress_xml_sitemap_post_types' === $current_tab ) {
 					echo 'active';
 				}
 				?>
-				" id="tab_seopress_xml_sitemap_post_types"><?php do_settings_sections( 'seopress-settings-admin-xml-sitemap-post-types' ); ?></div>
-				<div class="seopress-tab 
+				" id="tab_seopress_xml_sitemap_post_types">
+					<?php do_settings_sections( 'seopress-settings-admin-xml-sitemap-post-types' ); ?>
+					<?php
+					if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+						seopress_render_contextual_promotion( 'sitemaps' );
+					}
+					?>
+				</div>
+				<div class="seopress-tab
 				<?php
 				if ( 'tab_seopress_xml_sitemap_taxonomies' === $current_tab ) {
 					echo 'active';
 				}
 				?>
-				" id="tab_seopress_xml_sitemap_taxonomies"><?php do_settings_sections( 'seopress-settings-admin-xml-sitemap-taxonomies' ); ?></div>
-				<div class="seopress-tab 
+				" id="tab_seopress_xml_sitemap_taxonomies">
+					<?php do_settings_sections( 'seopress-settings-admin-xml-sitemap-taxonomies' ); ?>
+					<?php
+					if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+						seopress_render_contextual_promotion( 'sitemaps' );
+					}
+					?>
+				</div>
+				<div class="seopress-tab
 				<?php
 				if ( 'tab_seopress_html_sitemap' === $current_tab ) {
 					echo 'active';
 				}
 				?>
-				" id="tab_seopress_html_sitemap"><?php do_settings_sections( 'seopress-settings-admin-html-sitemap' ); ?></div>
+				" id="tab_seopress_html_sitemap">
+					<?php do_settings_sections( 'seopress-settings-admin-html-sitemap' ); ?>
+					<?php
+					if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+						seopress_render_contextual_promotion( 'sitemaps' );
+					}
+					?>
+				</div>
 		</div>
 
 		<?php sp_submit_button( esc_html__( 'Save changes', 'wp-seopress' ) ); ?>
 	</form>
-<?php

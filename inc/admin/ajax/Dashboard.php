@@ -136,3 +136,58 @@ function seopress_switch_view() {
 	}
 }
 add_action( 'wp_ajax_seopress_switch_view', 'seopress_switch_view' );
+
+/**
+ * Dashboard dismiss promotion.
+ *
+ * @since 9.6.0
+ */
+function seopress_dismiss_promotion() {
+	check_ajax_referer( 'seopress_dismiss_promotion_nonce', '_ajax_nonce', true );
+
+	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) || ! is_admin() ) {
+		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-seopress' ) ) );
+	}
+
+	$promo_id = isset( $_POST['promo_id'] ) ? sanitize_text_field( wp_unslash( $_POST['promo_id'] ) ) : '';
+	$duration = isset( $_POST['duration'] ) ? absint( $_POST['duration'] ) : 30;
+
+	if ( empty( $promo_id ) ) {
+		wp_send_json_error( array( 'message' => __( 'Invalid promotion ID.', 'wp-seopress' ) ) );
+	}
+
+	// Use the PromotionService to dismiss the promotion.
+	$result = seopress_get_service( 'PromotionService' )->dismissPromotion( $promo_id, $duration );
+
+	if ( $result ) {
+		wp_send_json_success( array( 'message' => __( 'Promotion dismissed.', 'wp-seopress' ) ) );
+	} else {
+		wp_send_json_error( array( 'message' => __( 'Failed to dismiss promotion.', 'wp-seopress' ) ) );
+	}
+}
+add_action( 'wp_ajax_seopress_dismiss_promotion', 'seopress_dismiss_promotion' );
+
+/**
+ * Dashboard toggle promotions visibility.
+ *
+ * @since 9.6.0
+ */
+function seopress_toggle_promotions() {
+	check_ajax_referer( 'seopress_toggle_promotions_nonce', '_ajax_nonce', true );
+
+	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) || ! is_admin() ) {
+		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-seopress' ) ) );
+	}
+
+	$disable_all = isset( $_POST['disable_all'] ) && '1' === $_POST['disable_all'];
+
+	// Use the PromotionService to set the preference.
+	$result = seopress_get_service( 'PromotionService' )->setPreference( 'disable_all', $disable_all );
+
+	if ( $result ) {
+		wp_send_json_success();
+	} else {
+		wp_send_json_error();
+	}
+}
+add_action( 'wp_ajax_seopress_toggle_promotions', 'seopress_toggle_promotions' );

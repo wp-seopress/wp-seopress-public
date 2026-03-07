@@ -333,7 +333,7 @@ function seopress_social_fb_title_post_option() {
  */
 function seopress_social_fb_title_term_option() {
 	$queried_object = get_queried_object();
-	if ( null !== $queried_object ) {
+	if ( $queried_object instanceof WP_Term ) {
 		$_seopress_social_fb_title = get_term_meta( $queried_object->term_id, '_seopress_social_fb_title', true );
 		if ( '' !== $_seopress_social_fb_title ) {
 			return $_seopress_social_fb_title;
@@ -469,7 +469,7 @@ function seopress_social_fb_desc_post_option() {
  */
 function seopress_social_fb_desc_term_option() {
 	$queried_object = get_queried_object();
-	if ( null !== $queried_object ) {
+	if ( $queried_object instanceof WP_Term ) {
 		$_seopress_social_fb_desc = get_term_meta( $queried_object->term_id, '_seopress_social_fb_desc', true );
 		if ( '' !== $_seopress_social_fb_desc ) {
 			return $_seopress_social_fb_desc;
@@ -608,7 +608,7 @@ function seopress_social_fb_img_post_option() {
  */
 function seopress_social_fb_img_term_option() {
 	$queried_object = get_queried_object();
-	if ( null !== $queried_object ) {
+	if ( $queried_object instanceof WP_Term ) {
 		$_seopress_social_fb_img = get_term_meta( $queried_object->term_id, '_seopress_social_fb_img', true );
 		if ( '' !== $_seopress_social_fb_img ) {
 			return $_seopress_social_fb_img;
@@ -897,7 +897,7 @@ function seopress_social_twitter_title_post_option() {
  */
 function seopress_social_twitter_title_term_option() {
 	$queried_object = get_queried_object();
-	if ( null !== $queried_object ) {
+	if ( $queried_object instanceof WP_Term ) {
 		$_seopress_social_twitter_title = get_term_meta( $queried_object->term_id, '_seopress_social_twitter_title', true );
 		if ( '' !== $_seopress_social_twitter_title ) {
 			return $_seopress_social_twitter_title;
@@ -1034,7 +1034,7 @@ function seopress_social_twitter_desc_post_option() {
  */
 function seopress_social_twitter_desc_term_option() {
 	$queried_object = get_queried_object();
-	if ( null !== $queried_object ) {
+	if ( $queried_object instanceof WP_Term ) {
 		$_seopress_social_twitter_desc = get_term_meta( $queried_object->term_id, '_seopress_social_twitter_desc', true );
 		if ( '' !== $_seopress_social_twitter_desc ) {
 			return $_seopress_social_twitter_desc;
@@ -1176,7 +1176,7 @@ function seopress_social_twitter_img_post_option() {
  */
 function seopress_social_twitter_img_term_option() {
 	$queried_object = get_queried_object();
-	if ( null !== $queried_object ) {
+	if ( $queried_object instanceof WP_Term ) {
 		$_seopress_social_twitter_img = get_term_meta( $queried_object->term_id, '_seopress_social_twitter_img', true );
 		if ( '' !== $_seopress_social_twitter_img ) {
 			return $_seopress_social_twitter_img;

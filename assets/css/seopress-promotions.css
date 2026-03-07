@@ -1,0 +1,924 @@
+/**
+ * SEOPress Promotions Styles
+ *
+ * @package SEOPress
+ * @since 9.6.0
+ */
+
+/* ==========================================================================
+   Top Banner
+   ========================================================================== */
+
+/* Header wrapper - contains banner + header */
+/* Takes over fixed positioning from #seopress-header */
+.seopress-styles #seopress-header-wrapper {
+	position: fixed;
+	top: 32px;
+	left: 160px;
+	right: 0;
+	z-index: 110;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Override #seopress-header to be relative within wrapper */
+.seopress-styles #seopress-header-wrapper #seopress-header {
+	position: relative !important;
+	top: auto !important;
+	width: 100% !important;
+	z-index: auto;
+}
+
+/* Folded sidebar adjustment */
+.folded.seopress-styles #seopress-header-wrapper {
+	left: 36px;
+}
+
+/* Responsive - tablet */
+@media only screen and (max-width: 960px) {
+	.seopress-styles #seopress-header-wrapper {
+		left: 36px;
+	}
+}
+
+/* Responsive - mobile */
+@media only screen and (max-width: 782px) {
+	.seopress-styles #seopress-header-wrapper {
+		position: absolute;
+		top: 46px;
+		left: 0;
+		right: 0;
+	}
+}
+
+/* Adjust scroll margin when banner is present */
+.seopress-styles.has-promo-banner #seopress-tabs .seopress-tab h3 {
+	scroll-margin-top: 156px; /* 116px + ~40px banner height */
+}
+
+/* Push main content down to account for fixed header + banner */
+.seopress-styles.has-promo-banner #seopress-content,
+.seopress-styles.has-promo-banner .seopress-option {
+	margin-top: 36px; /* Height of the banner */
+}
+
+/* Adjust sliding panel position when banner is present */
+.seopress-styles.has-promo-banner .seopress-activity-panel-wrapper {
+	top: 141px;
+	height: calc(100vh - 128px); /* Adjust height accordingly */
+}
+
+/* Top banner - in normal flow above the header */
+.seopress-promo-banner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 6px 20px;
+	font-size: 13px;
+	margin: 0;
+	order: -1; /* Ensure banner is always first */
+	/* Background and text colors are set via inline styles from API */
+}
+
+.seopress-promo-banner * {
+	color: inherit;
+}
+
+.seopress-promo-banner .promo-content {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	flex: 1;
+}
+
+.seopress-promo-banner .promo-icon {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+}
+
+.seopress-promo-banner .promo-title {
+	font-size: 13px;
+	line-height: 1.4;
+	font-weight: 600;
+	color: inherit;
+}
+
+.seopress-promo-banner .promo-text {
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.4;
+	font-weight: 400;
+	opacity: 1 !important;
+	color: inherit;
+}
+
+.seopress-promo-banner .promo-cta {
+	margin-left: auto;
+	white-space: nowrap;
+}
+
+.seopress-promo-banner .promo-dismiss {
+	background: transparent;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	opacity: 0.8;
+	padding: 4px;
+	margin-left: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.2s ease;
+}
+
+.seopress-promo-banner .promo-dismiss:hover {
+	opacity: 1;
+}
+
+.seopress-promo-banner .promo-dismiss .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+}
+
+/* ==========================================================================
+   Dashboard Promotions Block (Recommended Partners Card)
+   ========================================================================== */
+
+#seopress-promotions-panel .seopress-card-content {
+	padding: 0 2rem 2rem 2rem;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+#seopress-promotions-panel .seopress-affiliates-list {
+	flex: 1;
+}
+
+.seopress-promo-card {
+	background: var(--backgroundSecondary, #f5f5f5);
+	border-radius: 12px;
+	padding: 24px;
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.seopress-promo-card .promo-card-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	flex: 1;
+	width: 100%;
+}
+
+.seopress-promo-card .promo-image {
+	flex-shrink: 0;
+	width: 80px;
+	height: 80px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.seopress-promo-card .promo-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.seopress-promo-card .promo-text {
+	flex: 1;
+	min-width: 0;
+}
+
+.seopress-promo-card .promo-icon {
+	width: 40px;
+	height: 40px;
+	min-width: 40px;
+	min-height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	background: rgba(255, 255, 255, 0.15);
+	border-radius: 8px;
+}
+
+.seopress-promo-card .promo-icon .dashicons {
+	width: 22px;
+	height: 22px;
+	font-size: 22px;
+	line-height: 1;
+	color: inherit;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.seopress-promo-card .promo-icon .dashicons:before {
+	line-height: 1;
+}
+
+.seopress-promo-card .promo-title {
+	margin: 0 0 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: inherit;
+}
+
+.seopress-promo-card .promo-body {
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.5;
+	color: inherit;
+	opacity: 0.9;
+	display: inline;
+}
+
+.seopress-promo-card .promo-action {
+	flex-shrink: 0;
+	margin-top: 16px;
+}
+
+.seopress-promo-card .promo-action .btn {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 6px;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
+}
+
+.seopress-promo-card .promo-action .btn:hover {
+	opacity: 0.9;
+}
+
+.seopress-promo-card .promo-dismiss {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: transparent;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	opacity: 0.6;
+	padding: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.2s ease;
+}
+
+.seopress-promo-card .promo-dismiss:hover {
+	opacity: 1;
+}
+
+/* Button styles within promo cards - inherit card's text color */
+.seopress-promo-card .btn.btnLink {
+	background: transparent;
+	border: none;
+	color: inherit;
+	text-decoration: underline;
+	padding: 8px 0;
+}
+
+.seopress-promo-card .btn.btnLink:hover {
+	border: none;
+	opacity: 0.8;
+}
+
+.seopress-promo-card .btn.btnSecondary {
+	background: transparent;
+	border: 2px solid currentColor;
+	color: inherit;
+}
+
+.seopress-promo-card .btn.btnSecondary:hover {
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.seopress-promo-card .btn.btnPrimary {
+	/* Primary uses the text color as background, inverted */
+	background: currentColor;
+	border: none;
+}
+
+.seopress-promo-card .btn.btnPrimary span {
+	/* Use mix-blend-mode for inverted text on currentColor background */
+	mix-blend-mode: difference;
+}
+
+/* ==========================================================================
+   Affiliates Section
+   ========================================================================== */
+
+.seopress-affiliates-section {
+	margin-top: 16px;
+	padding-top: 0;
+	border-top: none;
+}
+
+.seopress-affiliates-section .affiliates-title {
+	margin: 0 0 16px;
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--textSecondary, #666);
+}
+
+/* Affiliates list - vertical in card */
+.seopress-affiliates-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.seopress-affiliates-list .affiliate-card {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 12px 14px;
+	background: var(--backgroundTertiary, #fff);
+	border-radius: 8px;
+	border: 1px solid var(--borderColor, #e0e0e0);
+	flex-wrap: wrap;
+}
+
+.seopress-affiliates-list .affiliate-icon {
+	width: 36px;
+	height: 36px;
+	min-width: 36px;
+	min-height: 36px;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.seopress-affiliates-list .affiliate-icon .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+}
+
+.seopress-affiliates-list .affiliate-logo {
+	width: 36px;
+	height: 36px;
+	border-radius: 6px;
+	object-fit: contain;
+	flex-shrink: 0;
+}
+
+.seopress-affiliates-list .affiliate-info {
+	flex: 1;
+	min-width: 120px;
+}
+
+.seopress-affiliates-list .affiliate-name {
+	display: block;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--textPrimary, #333);
+}
+
+.seopress-affiliates-list .affiliate-desc {
+	margin: 4px 0 0;
+	font-size: 12px;
+	color: var(--textSecondary, #666);
+	line-height: 1.4;
+}
+
+.seopress-affiliates-list .btn {
+	flex-shrink: 0;
+	padding: 6px 12px;
+	font-size: 12px;
+}
+
+/* Legacy affiliates section */
+.seopress-affiliates-section .affiliates-list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.seopress-affiliates-section .affiliate-card {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	padding: 16px 20px;
+	background: var(--backgroundTertiary, #fff);
+	border-radius: 8px;
+	border: 1px solid var(--borderColor, #e0e0e0);
+}
+
+.seopress-affiliates-section .affiliate-logo {
+	width: 40px;
+	height: 40px;
+	border-radius: 4px;
+	object-fit: contain;
+	flex-shrink: 0;
+}
+
+.seopress-affiliates-section .affiliate-icon {
+	width: 40px;
+	height: 40px;
+	min-width: 40px;
+	min-height: 40px;
+	border-radius: 8px;
+	/* Background color is set via inline styles from API */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.seopress-affiliates-section .affiliate-icon .dashicons {
+	/* Color is set via inline styles from API */
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.seopress-affiliates-section .affiliate-icon .dashicons:before {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.seopress-affiliates-section .affiliate-info {
+	flex: 1;
+	min-width: 0;
+}
+
+.seopress-affiliates-section .affiliate-name {
+	display: block;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--textPrimary, #333);
+}
+
+.seopress-affiliates-section .affiliate-desc {
+	margin: 4px 0 0;
+	font-size: 12px;
+	color: var(--textSecondary, #666);
+	line-height: 1.4;
+}
+
+/* ==========================================================================
+   License Renewal Modal
+   ========================================================================== */
+
+.seopress-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.85);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 999999;
+	padding: 20px;
+}
+
+.seopress-modal-overlay.hidden {
+	display: none;
+}
+
+.seopress-modal {
+	background: #fff;
+	border-radius: 12px;
+	padding: 40px;
+	max-width: 440px;
+	width: 100%;
+	text-align: center;
+	box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+	animation: seopress-modal-in 0.2s ease-out;
+}
+
+@keyframes seopress-modal-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95) translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+}
+
+.seopress-modal .modal-icon {
+	width: 72px;
+	height: 72px;
+	margin: 0 auto 20px;
+	background: linear-gradient(135deg, #4E21E7 0%, #6B3CE7 100%);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.seopress-modal .modal-icon .dashicons {
+	font-size: 36px;
+	width: 36px;
+	height: 36px;
+	color: #fff;
+}
+
+.seopress-modal h2 {
+	margin: 0 0 12px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #0C082F;
+	line-height: 1.4;
+}
+
+.seopress-modal p {
+	margin: 0 0 24px;
+	font-size: 14px;
+	color: #646970;
+	line-height: 1.5;
+}
+
+.seopress-modal .modal-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+}
+
+.seopress-modal .modal-actions .btn {
+	padding: 12px 32px;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 6px;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	text-align: center;
+	display: inline-block;
+}
+
+.seopress-modal .modal-actions .btnPrimary {
+	background: #4E21E7;
+	color: #fff;
+	border: none;
+}
+
+.seopress-modal .modal-actions .btnPrimary:hover {
+	background: #3D15B7;
+}
+
+.seopress-modal .modal-actions .btnSecondary {
+	background: transparent;
+	color: #4E21E7;
+	border: 1px solid #4E21E7;
+}
+
+.seopress-modal .modal-actions .btnSecondary:hover {
+	background: rgba(78, 33, 231, 0.05);
+}
+
+/* ==========================================================================
+   Metabox Promo Banner
+   ========================================================================== */
+
+.seopress-metabox-promo-root {
+	margin: 0 0 16px 0;
+}
+
+.seopress-metabox-promo-banner {
+	/* Background and color are set dynamically via inline styles from API */
+	border-radius: 8px;
+}
+
+.seopress-metabox-promo-banner .promo-icon {
+	flex-shrink: 0;
+}
+
+.seopress-metabox-promo-banner .promo-icon .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+}
+
+.seopress-metabox-promo-banner .promo-content {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.seopress-metabox-promo-banner .promo-content strong {
+	font-weight: 600;
+}
+
+.seopress-metabox-promo-banner .promo-content span {
+	opacity: 0.9;
+}
+
+.seopress-metabox-promo-banner .promo-cta {
+	flex-shrink: 0;
+	background: rgba(255, 255, 255, 0.2);
+	color: #fff;
+	padding: 6px 12px;
+	border-radius: 4px;
+	font-size: 13px;
+	font-weight: 500;
+	text-decoration: none;
+	transition: background 0.2s ease;
+}
+
+.seopress-metabox-promo-banner .promo-cta:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.seopress-metabox-promo-banner .promo-dismiss {
+	flex-shrink: 0;
+	background: transparent;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	opacity: 0.7;
+	padding: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.2s ease;
+}
+
+.seopress-metabox-promo-banner .promo-dismiss:hover {
+	opacity: 1;
+}
+
+/* ==========================================================================
+   Contextual Ads
+   ========================================================================== */
+
+.seopress-contextual-promo {
+	background: linear-gradient(135deg, #f8f4ff 0%, #f0e8ff 100%);
+	border: 1px solid #e0d4ff;
+	border-radius: 8px;
+	padding: 14px 18px;
+	margin: 24px 0 0;
+	position: relative;
+}
+
+.seopress-contextual-promo .promo-content {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-right: 30px;
+}
+
+.seopress-contextual-promo .promo-icon {
+	flex-shrink: 0;
+	width: 36px;
+	height: 36px;
+	background: linear-gradient(135deg, #4E21E7 0%, #6B3CE7 100%);
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.seopress-contextual-promo .promo-icon .dashicons {
+	color: #fff;
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	margin: 0;
+}
+
+.seopress-contextual-promo .promo-text {
+	flex: 1;
+}
+
+.seopress-contextual-promo .promo-title {
+	margin: 0 0 2px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #333;
+}
+
+.seopress-contextual-promo .promo-body {
+	margin: 0;
+	font-size: 12px;
+	color: #666;
+}
+
+.seopress-contextual-promo .promo-cta {
+	flex-shrink: 0;
+}
+
+.seopress-contextual-promo .promo-cta.btn {
+	background: rgba(78, 33, 231, 0.08);
+	color: #4E21E7;
+	border: none;
+	padding: 8px 14px;
+	font-size: 12px;
+}
+
+.seopress-contextual-promo .promo-cta.btn:hover {
+	background: rgba(78, 33, 231, 0.15);
+}
+
+.seopress-contextual-promo .promo-dismiss {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: transparent;
+	border: none;
+	color: #999;
+	cursor: pointer;
+	padding: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.2s ease;
+}
+
+.seopress-contextual-promo .promo-dismiss:hover {
+	color: #666;
+}
+
+.seopress-contextual-promo .promo-dismiss .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+}
+
+/* ==========================================================================
+   Promo Modal (React wp-components)
+   ========================================================================== */
+
+.seopress-promo-modal-overlay {
+	background: rgba(0, 0, 0, 0.7) !important;
+}
+
+.seopress-promo-modal {
+	max-width: 480px !important;
+	border-radius: 16px !important;
+	overflow: hidden;
+}
+
+.seopress-promo-modal .components-modal__header {
+	display: none !important;
+}
+
+.seopress-promo-modal .components-modal__content {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.seopress-promo-modal-content {
+	padding: 40px;
+	text-align: center;
+}
+
+.seopress-promo-modal-icon {
+	width: 72px;
+	height: 72px;
+	margin: 0 auto 20px;
+	background: rgba(255, 255, 255, 0.15);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.seopress-promo-modal-icon .dashicons {
+	font-size: 32px;
+	width: 32px;
+	height: 32px;
+}
+
+.seopress-promo-modal-title {
+	margin: 0 0 12px !important;
+	font-size: 24px !important;
+	font-weight: 600 !important;
+	line-height: 1.3 !important;
+}
+
+.seopress-promo-modal-body {
+	margin: 0 0 28px !important;
+	font-size: 15px !important;
+	line-height: 1.6 !important;
+}
+
+.seopress-promo-modal-actions {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+}
+
+.seopress-promo-modal-cta {
+	display: inline-block;
+	padding: 14px 32px;
+	background: rgba(255, 255, 255, 0.2);
+	color: inherit !important;
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 8px;
+	text-decoration: none !important;
+	transition: background 0.2s ease;
+}
+
+.seopress-promo-modal-cta:hover {
+	background: rgba(255, 255, 255, 0.3);
+	color: inherit !important;
+}
+
+.seopress-promo-modal-dismiss {
+	background: transparent !important;
+	border: none !important;
+	font-size: 13px !important;
+	cursor: pointer;
+	text-decoration: underline !important;
+}
+
+.seopress-promo-modal-dismiss:hover {
+	opacity: 1 !important;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 782px) {
+	.seopress-styles.has-promo-banner #seopress-content, .seopress-styles.has-promo-banner .seopress-option {
+		margin-top: 95px;
+	}
+	/* Adjust sliding panel for mobile with banner */
+	.seopress-styles.has-promo-banner #seopress-activity-panel-help.seopress-activity-panel-wrapper,
+	.seopress-styles.has-promo-banner .seopress-activity-panel-wrapper {
+		top: 205px;
+	}
+
+	.seopress-promo-banner {
+		flex-wrap: wrap;
+		padding: 12px 16px;
+	}
+
+	.seopress-promo-banner .promo-content {
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.seopress-promo-banner .promo-cta {
+		margin-left: 0;
+		width: 100%;
+		text-align: center;
+		margin-top: 8px;
+	}
+
+	.seopress-promo-card .promo-action .btn {
+		width: 100%;
+		text-align: center;
+	}
+
+	.seopress-modal {
+		padding: 32px 24px;
+	}
+
+	.seopress-modal h2 {
+		font-size: 20px;
+	}
+
+	.seopress-metabox-promo-banner {
+		flex-wrap: wrap;
+	}
+
+	.seopress-metabox-promo-banner .promo-cta {
+		width: 100%;
+		text-align: center;
+		margin-top: 8px;
+	}
+
+	.seopress-contextual-promo .promo-content {
+		flex-direction: column;
+		align-items: flex-start;
+		padding-right: 30px;
+	}
+
+	.seopress-contextual-promo .promo-cta {
+		width: 100%;
+	}
+}

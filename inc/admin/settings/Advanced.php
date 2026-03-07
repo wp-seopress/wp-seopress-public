@@ -217,6 +217,14 @@ add_settings_field(
 	'seopress_setting_section_advanced_advanced_search_engines' // Section.
 );
 
+add_settings_field(
+	'seopress_advanced_advanced_facebook', // ID.
+	__( 'Facebook domain verification', 'wp-seopress' ), // Title.
+	'seopress_advanced_advanced_facebook_callback', // Callback.
+	'seopress-settings-admin-advanced-advanced', // Page.
+	'seopress_setting_section_advanced_advanced_search_engines' // Section.
+);
+
 // Appearance SECTION.
 add_settings_section(
 	'seopress_setting_section_advanced_appearance', // ID.
@@ -402,6 +410,14 @@ add_settings_field(
 	'seopress_advanced_appearance_score_col', // ID.
 	__( 'Show content analysis score column in post types', 'wp-seopress' ), // Title.
 	'seopress_advanced_appearance_score_col_callback', // Callback.
+	'seopress-settings-admin-advanced-appearance', // Page.
+	'seopress_setting_section_advanced_appearance_col' // Section.
+);
+
+add_settings_field(
+	'seopress_advanced_appearance_schema_col', // ID.
+	__( 'Show schema column in post types', 'wp-seopress' ), // Title.
+	'seopress_advanced_appearance_schema_col_callback', // Callback.
 	'seopress-settings-admin-advanced-appearance', // Page.
 	'seopress_setting_section_advanced_appearance_col' // Section.
 );

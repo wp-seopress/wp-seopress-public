@@ -412,17 +412,32 @@ class SEOPressOptions {
 		// The new value is already saved to the database at this point.
 		// We need to force WordPress to regenerate rewrite rules with the new settings.
 
-		// CRITICAL: Clear the in-memory rewrite rules that were registered during init with OLD values.
-		// Router::init() already ran during normal WordPress init and added rules based on old settings.
-		// We must clear these before flushing so they get regenerated with the new settings.
+		// Clear only SEOPress's own rewrite rules from the in-memory cache.
+		// We must NOT clear all rules as that would break other plugins' rewrite rules
+		// (REST API, custom post types, etc.).
 		global $wp_rewrite;
-		$wp_rewrite->extra_rules_top = array(); // Clear custom rules added via add_rewrite_rule().
+		if ( ! empty( $wp_rewrite->extra_rules_top ) ) {
+			foreach ( $wp_rewrite->extra_rules_top as $pattern => $query ) {
+				if ( false !== strpos( $query, 'seopress_' ) ) {
+					unset( $wp_rewrite->extra_rules_top[ $pattern ] );
+				}
+			}
+		}
+
+		// Re-register SEOPress sitemap rewrite rules with the NEW settings.
+		// flush_rewrite_rules() does not re-fire the init action, so we must
+		// manually re-register the rules before flushing.
+		$toggle_options = get_option( 'seopress_toggle' );
+		\SEOPress\Actions\Sitemap\Router::registerRewriteRules( $new_value, $toggle_options );
+
+		// Allow PRO and extensions to re-register their sitemap rewrite rules
+		// (e.g., news.xml, video*.xml) before the flush persists everything.
+		do_action( 'seopress_re_register_sitemap_rules', $new_value, $toggle_options );
 
 		// Clear the rewrite rules from the database so they get regenerated.
 		delete_option( 'rewrite_rules' );
 
 		// Flush to regenerate and save all rewrite rules.
-		// This will call all init hooks (including Router::init()) to collect rules with NEW values.
 		flush_rewrite_rules( false );
 	}
 }

@@ -51,7 +51,7 @@ if ( get_post_type_archive_link( $path ) && 0 === $offset ) {
 
 		// WPML Workaround.
 		if ( class_exists( 'SitePress' ) ) {
-			if ( 2 !== apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
+			if ( 2 != apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) {
 				$original_language = apply_filters( 'wpml_current_language', null );
 				$language_list     = apply_filters( 'wpml_active_languages', null, 'orderby=id&order=desc' );
 

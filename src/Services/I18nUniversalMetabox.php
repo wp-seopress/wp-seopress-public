@@ -815,21 +815,27 @@ class I18nUniversalMetabox {
 					),
 				),
 				'advanced'         => array(
-					'title'                           => __( 'Meta robots settings', 'wp-seopress' ),
-					'tooltip_canonical'               => __(
+					'title'                                          => __( 'Meta robots settings', 'wp-seopress' ),
+					'tooltip_canonical'                              => __(
 						'Canonical URL',
 						'wp-seopress'
 					),
-					'tooltip_canonical_description'   => __(
+					'tooltip_canonical_description'                  => __(
 						'A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site.',
 						'wp-seopress'
 					),
-					'tooltip_canonical_description_2' => __(
+					'tooltip_canonical_description_2'                => __(
 						'For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical.',
 						'wp-seopress'
 					),
-					'tooltip_canonical_description_3' => __(
+					'tooltip_canonical_description_3'                => __(
 						'Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color). The canonical can be in a different domain than a duplicate.',
+						'wp-seopress'
+					),
+					'freeze_modified_date_section'                   => __( 'Last modified date', 'wp-seopress' ),
+					'freeze_modified_date_tooltip_title'             => __( 'Freeze last modified date', 'wp-seopress' ),
+					'freeze_modified_date_tooltip_description'       => __(
+						'Enable this option to prevent the last modified date from being updated when you save this post. This is recommended for minor updates like fixing typos, formatting changes, or copyright updates that don\'t constitute significant content changes. Google recommends only updating the lastmod date for significant content updates.',
 						'wp-seopress'
 					),
 				),

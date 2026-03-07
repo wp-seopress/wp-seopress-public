@@ -23,9 +23,14 @@ function seopress_admin_header( $context = '' ) {
 	if ( ! empty( $notifications['total'] ) ) {
 		$total = $notifications['total'];
 	}
+
+	// Include top banner promotion file.
+	require_once dirname( __DIR__ ) . '/promotions/top-banner.php';
 	?>
 
-<div id="seopress-header" class="seopress-option">
+<div id="seopress-header-wrapper">
+	<?php seopress_render_top_banner(); ?>
+	<div id="seopress-header" class="seopress-option">
 	<div id="seopress-navbar">
 		<ul>
 			<li>
@@ -368,6 +373,38 @@ function seopress_admin_header( $context = '' ) {
 								<?php esc_html_e( 'Hide SEO News?', 'wp-seopress' ); ?>
 							</label>
 						</p>
+
+						<?php $check = seopress_get_service( 'NoticeOption' )->getNoticePromotions(); ?>
+
+						<p>
+							<input id="notice-promotions" class="toggle" data-toggle=
+								<?php
+								if ( '1' === $check ) {
+									echo '1';
+								} else {
+									echo '0';
+								}
+								?>
+								data-notice=
+								<?php
+								if ( '1' === $check ) {
+									echo '1';
+								} else {
+									echo '0';
+								}
+								?>
+								name="notice-promotions" type="checkbox"
+								<?php
+								if ( '1' === $check ) {
+									echo 'checked="yes"';
+								}
+								?>
+							/>
+							<label for="notice-promotions"></label>
+							<label for="notice-promotions">
+								<?php esc_html_e( 'Hide Promotions?', 'wp-seopress' ); ?>
+							</label>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -395,5 +432,6 @@ function seopress_admin_header( $context = '' ) {
 		</div>
 	</aside>
 </div>
+</div><!-- #seopress-header-wrapper -->
 	<?php
 }

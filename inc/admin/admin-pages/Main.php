@@ -25,17 +25,21 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 		require_once dirname( __DIR__ ) . '/blocks/notifications.php';
 	?>
 
-	<div class="seopress-dashboard-columns">
-		<div class="seopress-dashboard-column">
-			<?php
-				require_once dirname( __DIR__ ) . '/blocks/get-started.php';
-				require_once dirname( __DIR__ ) . '/blocks/tasks.php';
-			?>
-		</div>
+	<div class="seopress-dashboard-cards">
 		<?php
-			require_once dirname( __DIR__ ) . '/blocks/insights.php';
+			// Card 1: Wizard or SEO Checklist.
+			require_once dirname( __DIR__ ) . '/blocks/get-started.php';
+			// Card 2: SEOPress Suite.
+			require_once dirname( __DIR__ ) . '/blocks/tasks.php';
+			// Card 3: Recommended Partners (from promotions).
+			require_once dirname( __DIR__ ) . '/blocks/promotions.php';
 		?>
 	</div>
+
+	<?php
+		// Site Overview (PRO) - full width below the cards.
+		require_once dirname( __DIR__ ) . '/blocks/insights.php';
+	?>
 	<?php
 		require_once dirname( __DIR__ ) . '/blocks/features-list.php';
 		require_once dirname( __DIR__ ) . '/blocks/ebooks.php';

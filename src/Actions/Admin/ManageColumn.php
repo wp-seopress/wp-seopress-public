@@ -123,6 +123,9 @@ class ManageColumn implements ExecuteHooksBackend {
 		if ( seopress_get_service( 'AdvancedOption' )->getAppearanceScoreCol() === '1' ) {
 			$columns['seopress_score'] = __( 'Score', 'wp-seopress' );
 		}
+		if ( seopress_get_service( 'AdvancedOption' )->getAppearanceSchemaCol() === '1' ) {
+			$columns['seopress_schema'] = __( 'Schema', 'wp-seopress' );
+		}
 
 		return $columns;
 	}
@@ -340,6 +343,37 @@ class ManageColumn implements ExecuteHooksBackend {
 						echo '</div>';
 				}
 				break;
+
+			case 'seopress_schema':
+				$schema_types = array();
+
+				// Get manual schemas.
+				$manual_schemas = get_post_meta( $post_id, '_seopress_pro_schemas_manual', true );
+				if ( ! empty( $manual_schemas ) && is_array( $manual_schemas ) ) {
+					foreach ( $manual_schemas as $schema ) {
+						if ( ! empty( $schema['_seopress_pro_rich_snippets_type'] ) ) {
+							$schema_types[] = ucfirst( $schema['_seopress_pro_rich_snippets_type'] );
+						}
+					}
+				}
+
+				// Get automatic schemas (from PRO).
+				$automatic_schema_ids = $this->getAutomaticSchemasForPost( $post_id );
+				if ( ! empty( $automatic_schema_ids ) ) {
+					foreach ( $automatic_schema_ids as $schema_id ) {
+						$type = get_post_meta( $schema_id, '_seopress_pro_rich_snippets_type', true );
+						if ( ! empty( $type ) ) {
+							$schema_types[] = ucfirst( $type );
+						}
+					}
+				}
+
+				if ( ! empty( $schema_types ) ) {
+					echo '<div id="seopress_schema-' . esc_attr( $post_id ) . '">';
+					echo esc_html( implode( ', ', array_unique( $schema_types ) ) );
+					echo '</div>';
+				}
+				break;
 		}
 	}
 
@@ -440,5 +474,111 @@ class ManageColumn implements ExecuteHooksBackend {
 			$query->set( 'meta_key', '_wp_attachment_image_alt' );
 			$query->set( 'orderby', 'meta_value' );
 		}
+	}
+
+	/**
+	 * Get automatic schemas that apply to a specific post.
+	 *
+	 * @since 9.6
+	 *
+	 * @param int $post_id The post ID.
+	 *
+	 * @return array Array of schema post IDs that apply to this post.
+	 */
+	protected function getAutomaticSchemasForPost( $post_id ) {
+		// Check if the seopress_schemas post type exists (PRO feature).
+		if ( ! post_type_exists( 'seopress_schemas' ) ) {
+			return array();
+		}
+
+		// Check if schemas are disabled for this post.
+		$disable_all = get_post_meta( $post_id, '_seopress_pro_rich_snippets_disable_all', true );
+		if ( '1' === $disable_all ) {
+			return array();
+		}
+
+		$post      = get_post( $post_id );
+		$post_type = get_post_type( $post_id );
+		$terms     = array();
+
+		// Get post terms.
+		$taxonomies = get_object_taxonomies( $post_type );
+		if ( ! empty( $taxonomies ) ) {
+			$post_terms = wp_get_post_terms( $post_id, $taxonomies, array( 'fields' => 'ids' ) );
+			if ( ! is_wp_error( $post_terms ) ) {
+				$terms = array_flip( $post_terms );
+			}
+		}
+
+		// Get individually disabled schemas for this post.
+		$disabled_schemas = get_post_meta( $post_id, '_seopress_pro_rich_snippets_disable', true );
+		if ( ! is_array( $disabled_schemas ) ) {
+			$disabled_schemas = array();
+		}
+
+		// Query all automatic schemas.
+		$args = array(
+			'post_type'      => 'seopress_schemas',
+			'posts_per_page' => -1,
+			'fields'         => 'ids',
+		);
+
+		$schema_ids         = get_posts( $args );
+		$matching_schema_ids = array();
+
+		foreach ( $schema_ids as $schema_id ) {
+			// Skip if this schema is individually disabled for this post.
+			if ( isset( $disabled_schemas[ $schema_id ] ) && '1' === $disabled_schemas[ $schema_id ] ) {
+				continue;
+			}
+
+			$rules = get_post_meta( $schema_id, '_seopress_pro_rich_snippets_rules', true );
+
+			if ( ! is_array( $rules ) ) {
+				continue;
+			}
+
+			// Evaluate rules (OR groups).
+			foreach ( $rules as $or_group ) {
+				if ( ! is_array( $or_group ) ) {
+					continue;
+				}
+
+				$and_match_count = 0;
+				$and_total       = count( $or_group );
+
+				// Evaluate AND conditions within the OR group.
+				foreach ( $or_group as $condition ) {
+					if ( ! isset( $condition['filter'], $condition['cond'] ) ) {
+						continue;
+					}
+
+					$matches = false;
+
+					if ( 'post_type' === $condition['filter'] && isset( $condition['cpt'] ) ) {
+						$type_matches = ( $condition['cpt'] === $post_type );
+						$matches      = ( 'equal' === $condition['cond'] ) ? $type_matches : ! $type_matches;
+					} elseif ( 'taxonomy' === $condition['filter'] && isset( $condition['taxo'] ) ) {
+						$term_exists = isset( $terms[ (int) $condition['taxo'] ] );
+						$matches     = ( 'equal' === $condition['cond'] ) ? $term_exists : ! $term_exists;
+					} elseif ( 'postId' === $condition['filter'] && isset( $condition['postId'] ) ) {
+						$id_matches = ( (int) $condition['postId'] === $post_id );
+						$matches    = ( 'equal' === $condition['cond'] ) ? $id_matches : ! $id_matches;
+					}
+
+					if ( $matches ) {
+						++$and_match_count;
+					}
+				}
+
+				// If all AND conditions matched, this OR group passes.
+				if ( $and_match_count === $and_total && $and_total > 0 ) {
+					$matching_schema_ids[] = $schema_id;
+					break; // No need to check other OR groups.
+				}
+			}
+		}
+
+		return $matching_schema_ids;
 	}
 }

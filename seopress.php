@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.5
+ * Version: 9.6
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.5' );
+define( 'SEOPRESS_VERSION', '9.6' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -160,6 +160,9 @@ function seopress_plugins_loaded( $hook ) { // phpcs:ignore
 		if ( ! defined( 'SEOPRESS_WL_ADMIN_HEADER' ) || SEOPRESS_WL_ADMIN_HEADER !== false ) {
 			require_once $plugin_dir . 'inc/admin/admin-bar/admin-header.php';
 		}
+
+		// Load contextual ads.
+		require_once $plugin_dir . 'inc/admin/promotions/contextual-ads.php';
 	}
 
 	// Load options and admin bar.
@@ -293,6 +296,58 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 	if ( 'seopress-option' === $page ) {
 		wp_register_style( 'seopress-admin-dashboard', plugins_url( 'assets/css/seopress-admin-dashboard' . $prefix . '.css', __FILE__ ), array(), SEOPRESS_VERSION );
 		wp_enqueue_style( 'seopress-admin-dashboard' );
+	}
+
+	// Promotions CSS and JS on all SEOPress pages.
+	if ( strpos( $page, 'seopress' ) !== false ) {
+		wp_enqueue_style( 'seopress-promotions', plugins_url( 'assets/css/seopress-promotions.css', __FILE__ ), array(), SEOPRESS_VERSION );
+		wp_enqueue_script( 'seopress-promotions', plugins_url( 'assets/js/seopress-promotions.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
+
+		// Localize promotions script.
+		wp_localize_script(
+			'seopress-promotions',
+			'seopressPromotions',
+			array(
+				'dismiss_nonce'  => wp_create_nonce( 'seopress_dismiss_promotion_nonce' ),
+				'toggle_nonce'   => wp_create_nonce( 'seopress_toggle_promotions_nonce' ),
+				'ajaxurl'        => admin_url( 'admin-ajax.php' ),
+				'stats_endpoint' => \SEOPress\Constants\Promotions::getApiUrl() . '/stats',
+			)
+		);
+
+		// Promo Modal (React component using wp-components).
+		$modal_promotion = seopress_get_service( 'PromotionService' )->getPromotion( 'modal' );
+		if ( $modal_promotion ) {
+			wp_enqueue_script( 'wp-element' );
+			wp_enqueue_script( 'wp-components' );
+			wp_enqueue_style( 'wp-components' );
+			wp_enqueue_script(
+				'seopress-promo-modal',
+				plugins_url( 'assets/js/seopress-promo-modal.js', __FILE__ ),
+				array( 'wp-element', 'wp-components' ),
+				SEOPRESS_VERSION,
+				true
+			);
+
+			// Pass modal promotion data.
+			wp_localize_script(
+				'seopress-promo-modal',
+				'seopressPromoModal',
+				array(
+					'promotion' => array(
+						'id'               => $modal_promotion['id'] ?? '',
+						'title'            => $modal_promotion['content']['title'] ?? '',
+						'body'             => $modal_promotion['content']['body'] ?? '',
+						'cta_text'         => $modal_promotion['content']['cta_text'] ?? '',
+						'cta_url'          => $modal_promotion['content']['cta_url'] ?? '',
+						'icon'             => $modal_promotion['content']['icon'] ?? 'megaphone',
+						'styling'          => $modal_promotion['styling'] ?? array(),
+						'dismissible'      => $modal_promotion['dismissible'] ?? true,
+						'dismiss_duration' => $modal_promotion['dismiss_duration_days'] ?? 30,
+					),
+				)
+			);
+		}
 	}
 
 	// Load common migration scripts for multiple pages.
@@ -534,6 +589,27 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 add_action( 'admin_enqueue_scripts', 'seopress_add_admin_options_scripts', 10, 1 );
 
 /**
+ * Render license renewal modal on SEOPress admin pages.
+ *
+ * @since 9.6.0
+ *
+ * @return void
+ */
+function seopress_render_admin_promotions_modal() {
+	// Only on SEOPress pages.
+	$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+
+	if ( empty( $page ) || strpos( $page, 'seopress' ) === false ) {
+		return;
+	}
+
+	// Include and render license modal.
+	require_once SEOPRESS_PLUGIN_DIR_PATH . 'inc/admin/promotions/license-modal.php';
+	seopress_render_license_modal();
+}
+add_action( 'admin_footer', 'seopress_render_admin_promotions_modal' );
+
+/**
  * Admin bar CSS.
  *
  * @return void
@@ -620,6 +696,10 @@ function seopress_admin_body_class( $classes ) {
 
 	// Add white-label class if applicable.
 	if ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && SEOPRESS_WL_ADMIN_HEADER === false ) {
+		$classes .= ' seopress-white-label-noheader';
+	}
+
+	if ( '1' === seopress_get_toggle_option( 'white-label' ) ) {
 		$classes .= ' seopress-white-label';
 	}
 

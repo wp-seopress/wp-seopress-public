@@ -81,4 +81,13 @@ abstract class Options {
 	 * @var string
 	 */
 	const KEY_OPTION_ADVANCED = 'seopress_advanced_option_name';
+
+	/**
+	 * The key promotions preferences option.
+	 *
+	 * @since 9.6.0
+	 *
+	 * @var string
+	 */
+	const KEY_OPTION_PROMOTIONS_PREFERENCES = 'seopress_promotions_preferences';
 }

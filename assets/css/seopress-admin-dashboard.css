@@ -228,6 +228,21 @@
     gap: 2rem;
     justify-content: center;
     flex-direction: column;
+    min-height: auto;
+    overflow: visible;
+}
+
+/* Ensure content wrapper contains all floats/elements */
+#seopress-content {
+    overflow: visible;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure all children of seopress-option are flex items */
+.seopress-dashboard .seopress-option > * {
+    flex-shrink: 0;
 }
 
 .seopress-dashboard h1 {
@@ -353,7 +368,7 @@
 
 .seopress-get-started .seopress-block-wizard::after {
     content: '';
-    background: url(../img/bg-dashboard-wizard.svg) right center no-repeat;
+    background: url(../img/bg-dashboard-wizard.svg) right top no-repeat;
     opacity: 0.1;
     position: absolute;
     right: 0;
@@ -410,6 +425,230 @@
 .seopress-block-wizard .seopress-card-actions {
     width: 100%;
     text-align: center;
+}
+
+/* Wizard badge */
+.seopress-block-wizard .wizard-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.seopress-block-wizard h2 {
+    font-size: 22px;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.seopress-block-wizard .wizard-subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+}
+
+/* Wizard benefits list */
+.seopress-block-wizard .wizard-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+}
+
+.seopress-block-wizard .wizard-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.seopress-block-wizard .wizard-benefits li:last-child {
+    margin-bottom: 0;
+}
+
+.seopress-block-wizard .wizard-benefits .dashicons {
+    color: #7dd3a8;
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Wizard CTA button */
+.seopress-block-wizard .seopress-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.seopress-block-wizard .seopress-btn .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Wizard time indicator */
+.seopress-block-wizard .wizard-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.seopress-block-wizard .wizard-time .dashicons {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+/* SEO Checklist card (when wizard is completed) */
+.seopress-checklist .seopress-block-checklist {
+    min-width: 277px;
+    background: linear-gradient(97.43deg, #0C082F 0.92%, #2B1F99 100%);
+    backdrop-filter: blur(12px);
+    border-radius: 8px;
+    color: #fff;
+    padding: 2rem;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    flex-shrink: 3;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.seopress-checklist .seopress-block-checklist::after {
+    content: '';
+    background: url(../img/bg-dashboard-wizard.svg) right top no-repeat;
+    opacity: 0.1;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+    background-size: contain;
+}
+
+.seopress-checklist .seopress-block-checklist > * {
+    z-index: 2;
+    position: relative;
+}
+
+.seopress-checklist .seopress-block-checklist h2 {
+    color: #fff;
+    font-size: 22px;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+/* Checklist badge */
+.seopress-block-checklist .checklist-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    color: #fff;
+    width: fit-content;
+}
+
+.seopress-block-checklist .checklist-subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+    color: #fff;
+}
+
+/* Checklist items - styled for dark background */
+.seopress-checklist .seopress-checklist-items {
+    list-style: none;
+    margin: 0 0 24px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.seopress-checklist .seopress-checklist-items li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+}
+
+.seopress-checklist .seopress-checklist-items li .dashicons {
+    color: #7dd3a8;
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+/* Checklist CTA button */
+.seopress-checklist .seopress-card-actions {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.seopress-checklist .seopress-btn {
+    background: var(--backgroundSecondary);
+    color: var(--primaryColor);
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgba(186, 184, 207, 0.5);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 150ms linear;
+}
+
+.seopress-checklist .seopress-btn:hover {
+    background: var(--backgroundPrimaryHover);
+    color: var(--backgroundSecondary);
+    border: 1px solid var(--backgroundPrimaryHover);
+}
+
+.seopress-checklist .seopress-btn .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 .seopress-get-started .seopress-block-new-features {
@@ -563,47 +802,157 @@
     cursor: pointer;
 }
 
-/* Insights */
+/* Insights / Site Overview - full width */
+/* Make the column wrapper full-width when containing Site Overview */
+.seopress-option > .seopress-dashboard-column:has(#notice-insights-alert) {
+    flex-basis: 100%;
+    max-width: 75rem;
+    margin: 0 auto 0;
+    width: 100%;
+}
+
+#notice-insights-alert {
+    max-width: none;
+    margin: 0;
+    width: 100%;
+    clear: both;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+#notice-insights-alert.is-active {
+    display: flex !important;
+    flex-direction: column;
+}
+
 #notice-insights-alert .seopress-card-content {
     padding: 1rem 2rem 0;
 }
 
-/* Tasks */
+/* Tasks - card in grid */
 #notice-tasks-alert .seopress-card-content {
     padding: 0 2rem 2rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 #notice-tasks-alert .seopress-suite {
-    flex-wrap: wrap;
+    display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    display: flex;
 }
 
 #notice-tasks-alert .seopress-suite .seopress-integration {
     width: 100%;
+    align-items: flex-start;
+    padding: 10px 12px;
 }
 
-#notice-tasks-alert .seopress-suite .seopress-wrap-details {
-    gap: 0.5rem;
+#notice-tasks-alert .seopress-suite .seopress-integration > img {
+    margin-top: 2px;
 }
-#notice-tasks-alert .seopress-suite .upgrade a {
-    background: var(--backgroundSecondary);
-    padding: 0.2rem 0.6rem;
-    border-radius: 8px;
-    text-decoration: none;
-    color: inherit;
+
+#notice-tasks-alert .seopress-suite .seopress-integration .details {
+    flex: 1;
     display: flex;
-    transition: all 150ms linear;
-    gap: 0.2rem;
     align-items: center;
-    text-transform: uppercase;
-    font-size: 0.65rem;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+#notice-tasks-alert .seopress-suite .seopress-integration .details .name {
+    margin: 0;
+    font-size: 13px;
     font-weight: 600;
 }
 
+#notice-tasks-alert .seopress-suite .seopress-wrap-details {
+    gap: 10px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#notice-tasks-alert .seopress-suite .seopress-wrap-details .status {
+    font-size: 11px;
+}
+
+#notice-tasks-alert .seopress-suite .seopress-wrap-details .status .badge {
+    width: 6px;
+    height: 6px;
+}
+
+#notice-tasks-alert .seopress-suite .upgrade a {
+    background: rgba(78, 33, 231, 0.08);
+    padding: 4px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #4E21E7;
+    display: inline-flex;
+    transition: all 150ms linear;
+    gap: 3px;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+}
+
 #notice-tasks-alert .seopress-suite .upgrade a:hover {
-    background: var(--backgroundSecondaryHover);
+    background: rgba(78, 33, 231, 0.15);
+}
+
+#notice-tasks-alert .seopress-suite .upgrade a .dashicons {
+    font-size: 12px;
+    width: 12px;
+    height: 12px;
+}
+
+/* Suite promo */
+.seopress-suite-promo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #f8f4ff 0%, #f0e8ff 100%);
+    border: 1px solid #e8e0ff;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.4;
+}
+
+.seopress-suite-promo .dashicons {
+    color: #4E21E7;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.seopress-suite-promo .promo-link {
+    color: #4E21E7;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.seopress-suite-promo .promo-link:hover {
+    text-decoration: underline;
+}
+
+/* Suite responsive - narrow screens */
+@media only screen and (max-width: 600px) {
+    #notice-tasks-alert .seopress-suite .seopress-integration .details {
+        flex-wrap: wrap;
+    }
+
+    #notice-tasks-alert .seopress-suite .seopress-wrap-details {
+        width: 100%;
+        margin-top: 6px;
+    }
 }
 
 /* SEO Ebooks */
@@ -690,7 +1039,63 @@
     background: var(--colorAlert);
 }
 
-/* SEOPress columns */
+/* SEOPress Dashboard Cards - 3 column grid */
+.seopress-dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1rem;
+    max-width: 75rem;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    clear: both;
+    align-items: stretch;
+}
+
+.seopress-white-label .seopress-dashboard-cards {
+    grid-template-columns: inherit;
+}
+
+.seopress-dashboard-cards > .seopress-card,
+.seopress-dashboard-cards > .seopress-get-started,
+.seopress-dashboard-cards > .seopress-alert,
+.seopress-dashboard-cards > .seopress-checklist,
+.seopress-dashboard-cards > #notice-tasks-alert,
+.seopress-dashboard-cards > #seopress-promotions-panel {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    max-width: none;
+    width: auto;
+    height: 100%;
+}
+
+/* Card content should fill remaining space */
+.seopress-dashboard-cards > .seopress-card .seopress-card-content,
+.seopress-dashboard-cards > #notice-tasks-alert .seopress-card-content,
+.seopress-dashboard-cards > #seopress-promotions-panel .seopress-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Get Started card in grid - fill height */
+.seopress-dashboard-cards > .seopress-get-started .seopress-block-wizard {
+    height: 100%;
+    min-width: auto;
+}
+
+/* Checklist card in grid - fill height */
+.seopress-dashboard-cards > .seopress-checklist {
+    height: 100%;
+}
+
+.seopress-dashboard-cards > .seopress-checklist .seopress-block-checklist {
+    height: 100%;
+    min-width: auto;
+}
+
+/* Legacy columns - kept for backwards compatibility */
 .seopress-dashboard-columns {
     display: flex;
     max-width: 75rem;
@@ -782,8 +1187,19 @@
     content: none;
 }
 
-/* Responsive */
+/* Responsive - tablet */
+@media only screen and (max-width: 1100px) {
+    .seopress-dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Responsive - mobile */
 @media only screen and (max-width: 782px) {
+    .seopress-dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
     .seopress-dashboard-columns {
         max-width: 100%;
         flex-direction: column;

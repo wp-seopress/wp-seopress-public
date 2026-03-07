@@ -82,9 +82,6 @@ if ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && SEOPRESS_WL_ADMIN_HEADER === false
 					'elementor/elementor.php'            => array(
 						'title' => 'Elementor',
 					),
-					'elementor-pro/elementor-pro.php'    => array(
-						'title' => 'Elementor PRO',
-					),
 					'enfold'                             => array(
 						'title' => 'Enfold',
 					),

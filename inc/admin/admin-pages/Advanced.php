@@ -17,7 +17,8 @@ $this->options = get_option( 'seopress_advanced_option_name' );
  */
 if ( function_exists( 'seopress_admin_header' ) ) {
 	echo seopress_admin_header();
-} ?>
+}
+?>
 <form method="post"
 	action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>"
 	class="seopress-option">
@@ -50,7 +51,13 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 			echo ' active';
 		}
 		?>
-		" id="tab_seopress_advanced_image"><?php do_settings_sections( 'seopress-settings-admin-advanced-image' ); ?>
+		" id="tab_seopress_advanced_image">
+			<?php do_settings_sections( 'seopress-settings-admin-advanced-image' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'advanced' );
+			}
+			?>
 		</div>
 		<div class="seopress-tab
 		<?php
@@ -58,7 +65,13 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 			echo ' active';
 		}
 		?>
-		" id="tab_seopress_advanced_advanced"><?php do_settings_sections( 'seopress-settings-admin-advanced-advanced' ); ?>
+		" id="tab_seopress_advanced_advanced">
+			<?php do_settings_sections( 'seopress-settings-admin-advanced-advanced' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'advanced' );
+			}
+			?>
 		</div>
 		<div class="seopress-tab
 		<?php
@@ -66,7 +79,13 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 			echo ' active';
 		}
 		?>
-		" id="tab_seopress_advanced_appearance"><?php do_settings_sections( 'seopress-settings-admin-advanced-appearance' ); ?>
+		" id="tab_seopress_advanced_appearance">
+			<?php do_settings_sections( 'seopress-settings-admin-advanced-appearance' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'advanced' );
+			}
+			?>
 		</div>
 		<div class="seopress-tab
 		<?php
@@ -74,10 +93,15 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 			echo ' active';
 		}
 		?>
-		" id="tab_seopress_advanced_security"><?php do_settings_sections( 'seopress-settings-admin-advanced-security' ); ?>
+		" id="tab_seopress_advanced_security">
+			<?php do_settings_sections( 'seopress-settings-admin-advanced-security' ); ?>
+			<?php
+			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
+				seopress_render_contextual_promotion( 'advanced' );
+			}
+			?>
 		</div>
 	</div>
 
 	<?php sp_submit_button( esc_html__( 'Save changes', 'wp-seopress' ) ); ?>
 </form>
-<?php

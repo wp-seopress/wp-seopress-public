@@ -211,6 +211,74 @@ class ModuleMetabox implements ExecuteHooks {
 
 		wp_localize_script( 'seopress-metabox', 'SEOPRESS_DATA', $args );
 		wp_localize_script( 'seopress-metabox', 'SEOPRESS_I18N', seopress_get_service( 'I18nUniversalMetabox' )->getTranslations() );
+
+		// Enqueue metabox promotion banner if available.
+		$this->enqueueMetaboxPromo();
+	}
+
+	/**
+	 * Enqueue metabox promotion banner.
+	 *
+	 * @since 9.6.0
+	 *
+	 * @return void
+	 */
+	protected function enqueueMetaboxPromo() {
+		// White-label check.
+		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
+			if ( method_exists( seopress_get_service( 'ToggleOption' ), 'getToggleWhiteLabel' )
+				&& '1' === seopress_get_service( 'ToggleOption' )->getToggleWhiteLabel() ) {
+				return;
+			}
+		}
+
+		// Check for metabox promotion.
+		$promotion = seopress_get_service( 'PromotionService' )->getPromotion( 'metabox' );
+		if ( ! $promotion ) {
+			return;
+		}
+
+		// Enqueue the metabox promo script and styles.
+		wp_enqueue_style(
+			'seopress-promotions',
+			SEOPRESS_URL_ASSETS . '/css/seopress-promotions.css',
+			array(),
+			SEOPRESS_VERSION
+		);
+
+		wp_enqueue_script(
+			'seopress-metabox-promo',
+			SEOPRESS_URL_ASSETS . '/js/seopress-metabox-promo.js',
+			array( 'wp-element', 'seopress-metabox' ),
+			SEOPRESS_VERSION,
+			true
+		);
+
+		// Flatten promotion content for the banner.
+		$promo_data = array(
+			'id'               => $promotion['id'],
+			'title'            => $promotion['content']['title'] ?? '',
+			'body'             => $promotion['content']['body'] ?? '',
+			'cta_text'         => $promotion['content']['cta_text'] ?? '',
+			'cta_url'          => $promotion['content']['cta_url'] ?? '',
+			'icon'             => $promotion['content']['icon'] ?? 'star-filled',
+			'styling'          => $promotion['styling'] ?? array(),
+			'dismissible'      => $promotion['dismissible'] ?? true,
+			'dismiss_duration' => $promotion['dismiss_duration_days'] ?? 30,
+		);
+
+		wp_localize_script( 'seopress-metabox-promo', 'seopressMetaboxPromo', array( 'promotion' => $promo_data ) );
+
+		// Also localize the dismiss nonce for AJAX dismissal.
+		wp_localize_script(
+			'seopress-metabox-promo',
+			'seopressPromotions',
+			array(
+				'dismiss_nonce'  => wp_create_nonce( 'seopress_dismiss_promotion_nonce' ),
+				'ajaxurl'        => admin_url( 'admin-ajax.php' ),
+				'stats_endpoint' => \SEOPress\Constants\Promotions::getApiUrl() . '/stats',
+			)
+		);
 	}
 
 	/**

@@ -336,6 +336,20 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 							if ( ( 'post' === $typenow || 'product' === $typenow ) && ( 'post.php' === $pagenow || 'post-new.php' === $pagenow ) ) {
 								seopress_primary_category_select();
 							}
+							?>
+
+						<span class="sp-section"><?php esc_html_e( 'Last modified date', 'wp-seopress' ); ?></span>
+						<p>
+							<label for="seopress_robots_freeze_modified_date_meta">
+								<input type="checkbox" name="seopress_robots_freeze_modified_date" id="seopress_robots_freeze_modified_date_meta"
+									value="yes" <?php echo checked( $seopress_robots_freeze_modified_date, 'yes', false ); ?> />
+								<?php
+									echo wp_kses_post( __( 'Freeze the last modified date <strong>(recommended for minor updates)</strong>', 'wp-seopress' ) );
+									echo seopress_tooltip( esc_html__( 'Freeze last modified date', 'wp-seopress' ), wp_kses_post( __( 'Enable this option to prevent the last modified date from being updated when you save this post. <br>This is recommended for minor updates like fixing typos, formatting changes, or copyright updates that don\'t constitute significant content changes. <br>Google recommends only updating the lastmod date for significant content updates.', 'wp-seopress' ) ), '' );
+								?>
+							</label>
+						</p>
+							<?php
 
 							do_action( 'seopress_titles_title_tab_after', $pagenow, $data_attr );
 							?>

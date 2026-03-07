@@ -90,6 +90,7 @@ function seopress_sanitize_options_fields( $input ) {
 		'seopress_advanced_advanced_pinterest',
 		'seopress_advanced_advanced_yandex',
 		'seopress_advanced_advanced_baidu',
+		'seopress_advanced_advanced_facebook',
 	);
 
 	$new_options = array( 'seopress_social_facebook_img_attachment_id', 'seopress_social_facebook_img_height', 'seopress_social_facebook_img_width' );

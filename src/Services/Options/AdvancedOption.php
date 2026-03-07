@@ -257,6 +257,15 @@ class AdvancedOption {
 	}
 
 	/**
+	 * The getAdvancedFacebookVerification function.
+	 *
+	 * @since 9.5
+	 */
+	public function getAdvancedFacebookVerification() {
+		return $this->searchOptionByKey( 'seopress_advanced_advanced_facebook' );
+	}
+
+	/**
 	 * The getAdvancedTaxDescEditor function.
 	 *
 	 * @since 6.5
@@ -416,6 +425,15 @@ class AdvancedOption {
 	 */
 	public function getAppearanceScoreCol() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		return $this->searchOptionByKey( 'seopress_advanced_appearance_score_col' );
+	}
+
+	/**
+	 * The getAppearanceSchemaCol function.
+	 *
+	 * @since 9.6
+	 */
+	public function getAppearanceSchemaCol() {
+		return $this->searchOptionByKey( 'seopress_advanced_appearance_schema_col' );
 	}
 
 	/**

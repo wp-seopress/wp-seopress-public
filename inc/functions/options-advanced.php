@@ -281,6 +281,25 @@ function seopress_advanced_advanced_baidu_hook() {
 add_action( 'wp_head', 'seopress_advanced_advanced_baidu_hook', 2 );
 
 /**
+ * Facebook domain verification
+ *
+ * @return void
+ */
+function seopress_advanced_advanced_facebook_hook() {
+	if ( is_home() || is_front_page() ) {
+		$content_facebook = seopress_get_service( 'AdvancedOption' )->getAdvancedFacebookVerification();
+
+		if ( empty( $content_facebook ) ) {
+			return;
+		}
+		?>
+		<meta name="facebook-domain-verification" content="<?php echo esc_attr( $content_facebook ); ?>">
+		<?php
+	}
+}
+add_action( 'wp_head', 'seopress_advanced_advanced_facebook_hook', 2 );
+
+/**
  * Automatic alt text based on target kw
  *
  * @return void
