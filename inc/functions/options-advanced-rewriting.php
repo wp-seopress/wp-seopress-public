@@ -151,11 +151,17 @@ if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedRemoveProduct
 				array(
 					'taxonomy'   => 'product_cat',
 					'hide_empty' => false,
+					'lang'       => '',
 				)
 			);
 		}
 
 		if ( ! empty( $categories ) ) {
+			usort( $categories, function ( $a, $b ) {
+				return count( get_ancestors( $b->term_id, 'product_cat', 'taxonomy' ) )
+					 - count( get_ancestors( $a->term_id, 'product_cat', 'taxonomy' ) );
+			} );
+
 			$slugs = array_map(
 				function ( $category ) {
 					if ( is_object( $category ) && ! is_wp_error( $category ) ) {
@@ -164,6 +170,7 @@ if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedRemoveProduct
 								$category->term_id,
 								'product_cat',
 								array(
+									'format'    => 'slug',
 									'separator' => '/',
 									'link'      => false,
 								)
