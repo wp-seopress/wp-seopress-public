@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-31T07:55:18+00:00\n"
+"POT-Creation-Date: 2026-03-31T13:45:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-seopress\n"
@@ -2873,19 +2873,19 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: seopress.php:369
+#: seopress.php:378
 msgid "has been successfully updated!"
 msgstr ""
 
-#: seopress.php:460
+#: seopress.php:469
 msgid "Migration completed!"
 msgstr ""
 
-#: seopress.php:461
+#: seopress.php:470
 msgid "Export completed!"
 msgstr ""
 
-#: seopress.php:661
+#: seopress.php:670
 #: src/Actions/Admin/ModuleSettings.php:412
 #: app/react/admin/settings/pages/InstantIndexingPage.jsx:11
 #: app/react/admin/settings/pages/ToolsPage.jsx:31
@@ -2895,15 +2895,15 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: seopress.php:662
+#: seopress.php:671
 msgid "Configuration Wizard"
 msgstr ""
 
-#: seopress.php:663
+#: seopress.php:672
 msgid "Docs"
 msgstr ""
 
-#: seopress.php:667
+#: seopress.php:676
 msgid "GO PRO!"
 msgstr ""
 

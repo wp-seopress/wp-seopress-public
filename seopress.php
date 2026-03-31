@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.7
+ * Version: 9.7.1
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.7' );
+define( 'SEOPRESS_VERSION', '9.7.1' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -159,6 +159,15 @@ function seopress_plugins_loaded( $hook ) { // phpcs:ignore
 		// Load admin header unless explicitly disabled.
 		if ( ! defined( 'SEOPRESS_WL_ADMIN_HEADER' ) || SEOPRESS_WL_ADMIN_HEADER !== false ) {
 			require_once $plugin_dir . 'inc/admin/admin-bar/admin-header.php';
+		}
+
+		// Settings loading spinner - must always be available regardless of white label.
+		if ( ! function_exists( 'seopress_settings_skeleton' ) ) {
+			function seopress_settings_skeleton() {
+				?>
+				<div style="display:flex;justify-content:center;align-items:center;min-height:200px;padding:40px"><span class="spinner is-active" style="float:none"></span></div>
+				<?php
+			}
 		}
 
 		// Load contextual ads.
