@@ -49,6 +49,12 @@ class PreviewTitleDescriptionMeta implements ExecuteHooks {
 							return is_numeric( $param );
 						},
 					),
+					'title' => array(
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'description' => array(
+						'sanitize_callback' => 'sanitize_text_field',
+					),
 				),
 				'permission_callback' => function ( $request ) {
 					$post_id = $request['id'];

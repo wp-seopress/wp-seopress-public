@@ -435,3 +435,17 @@ function seopress_admin_header( $context = '' ) {
 </div><!-- #seopress-header-wrapper -->
 	<?php
 }
+
+/**
+ * Settings page loading indicator.
+ *
+ * Outputs the WordPress spinner shown inside the React mount point
+ * while JavaScript initialises.
+ *
+ * @return void
+ */
+function seopress_settings_skeleton() {
+	?>
+	<div style="display:flex;justify-content:center;align-items:center;min-height:200px;padding:40px"><span class="spinner is-active" style="float:none"></span></div>
+	<?php
+}

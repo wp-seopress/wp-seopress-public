@@ -36,6 +36,8 @@ class PreviewMetaTitle implements ExecuteHooksBackend {
 			return;
 		}
 
+		check_ajax_referer( 'get_preview_meta_title', 'nonce' );
+
 		$template = stripcslashes( $_GET['template'] ); // phpcs:ignore
 		$post_id  = isset( $_GET['post_id'] ) ? (int) $_GET['post_id'] : null;
 		$home_id  = isset( $_GET['home_id'] ) ? (int) $_GET['home_id'] : null;

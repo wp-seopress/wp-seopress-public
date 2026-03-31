@@ -26,6 +26,12 @@ class Schema {
 			$json = json_decode( $node->nodeValue, true ); // phpcs:ignore -- TODO: check if property is outside this class before renaming.
 			if ( isset( $json['@type'] ) ) {
 				$data[] = $json['@type'];
+			} elseif ( isset( $json['@graph'] ) && is_array( $json['@graph'] ) ) {
+				foreach ( $json['@graph'] as $item ) {
+					if ( isset( $item['@type'] ) ) {
+						$data[] = $item['@type'];
+					}
+				}
 			}
 		}
 

@@ -148,6 +148,14 @@ class FreezeModifiedDate implements ExecuteHooks {
 			}
 		}
 
+		// If a custom date is set, use it instead of original dates.
+		$custom_date = $this->getCustomDate( $post_id );
+		if ( $custom_date ) {
+			$data['post_modified']     = $custom_date;
+			$data['post_modified_gmt'] = get_gmt_from_date( $custom_date );
+			return $data;
+		}
+
 		// Preserve the original modified dates in the data being written to the DB.
 		$data['post_modified']     = $this->original_dates[ $post_id ]['post_modified'];
 		$data['post_modified_gmt'] = $this->original_dates[ $post_id ]['post_modified_gmt'];
@@ -158,7 +166,7 @@ class FreezeModifiedDate implements ExecuteHooks {
 	/**
 	 * Backup capture of original dates just before the database write.
 	 *
-	 * pre_post_update fires after wp_insert_post_data but immediately before
+	 * `pre_post_update` fires after `wp_insert_post_data` but immediately before
 	 * $wpdb->update(). If the dates were not captured by maybePreserveModifiedDate()
 	 * for any reason, this ensures we still have them before they are overwritten.
 	 *
@@ -237,7 +245,16 @@ class FreezeModifiedDate implements ExecuteHooks {
 			}
 		}
 
-		$frozen = $this->original_dates[ $post_id ];
+		// If a custom date is set, use it instead of frozen dates.
+		$custom_date = $this->getCustomDate( $post_id );
+		if ( $custom_date ) {
+			$frozen = array(
+				'post_modified'     => $custom_date,
+				'post_modified_gmt' => get_gmt_from_date( $custom_date ),
+			);
+		} else {
+			$frozen = $this->original_dates[ $post_id ];
+		}
 
 		global $wpdb;
 
@@ -311,9 +328,18 @@ class FreezeModifiedDate implements ExecuteHooks {
 			return;
 		}
 
-		global $wpdb;
+		// If a custom date is set, use it instead of frozen dates.
+		$custom_date = $this->getCustomDate( $product_id );
+		if ( $custom_date ) {
+			$frozen = array(
+				'post_modified'     => $custom_date,
+				'post_modified_gmt' => get_gmt_from_date( $custom_date ),
+			);
+		} else {
+			$frozen = $this->original_dates[ $product_id ];
+		}
 
-		$frozen = $this->original_dates[ $product_id ];
+		global $wpdb;
 
 		$wpdb->update(
 			$wpdb->posts,
@@ -340,6 +366,8 @@ class FreezeModifiedDate implements ExecuteHooks {
 	 * For block editor / REST API: reads from post meta, which was already
 	 * saved via the REST API before the post save.
 	 *
+	 * Falls back to the global setting when no per-post meta is set.
+	 *
 	 * @since 9.6
 	 *
 	 * @param int $post_id Post ID.
@@ -350,9 +378,50 @@ class FreezeModifiedDate implements ExecuteHooks {
 		$is_classic_editor = isset( $_POST['seopress_cpt_nonce'] );
 
 		if ( $is_classic_editor ) {
-			return ! empty( $_POST['seopress_robots_freeze_modified_date'] ) ? 'yes' : '';
+			$value = ! empty( $_POST['seopress_robots_freeze_modified_date'] ) ? 'yes' : '';
+		} else {
+			$value = get_post_meta( $post_id, '_seopress_robots_freeze_modified_date', true );
 		}
 
-		return get_post_meta( $post_id, '_seopress_robots_freeze_modified_date', true );
+		// If per-post is explicitly set, use it.
+		if ( 'yes' === $value ) {
+			return 'yes';
+		}
+
+		// Fall back to global setting.
+		if ( '1' === seopress_get_service( 'AdvancedOption' )->getAppearanceFreezeModifiedDate() ) {
+			return 'yes';
+		}
+
+		return '';
+	}
+
+	/**
+	 * Get the custom modified date for a post.
+	 *
+	 * @since 9.7
+	 *
+	 * @param int $post_id Post ID.
+	 *
+	 * @return string Custom date in Y-m-d H:i:s format, or empty string.
+	 */
+	private function getCustomDate( $post_id ) {
+		$is_classic = isset( $_POST['seopress_cpt_nonce'] );
+		$custom     = $is_classic
+			? ( ! empty( $_POST['seopress_robots_custom_modified_date'] ) ? sanitize_text_field( $_POST['seopress_robots_custom_modified_date'] ) : '' )
+			: get_post_meta( $post_id, '_seopress_robots_custom_modified_date', true );
+
+		if ( empty( $custom ) ) {
+			return '';
+		}
+
+		// Validate the date and normalize to Y-m-d H:i:s (site-local time).
+		$timestamp = strtotime( $custom );
+		if ( ! $timestamp ) {
+			return '';
+		}
+
+		// Use date() instead of gmdate() since post_modified stores site-local time.
+		return date( 'Y-m-d H:i:s', $timestamp );
 	}
 }

@@ -69,14 +69,18 @@ function seopress_do_real_preview() {
 		)
 	);
 
-	$post          = get_post( $id );
-	$score         = seopress_get_service( 'DomAnalysis' )->getScore( $post );
-	$data['score'] = $score;
-	$keywords      = seopress_get_service( 'DomAnalysis' )->getKeywords(
+	$keywords = seopress_get_service( 'DomAnalysis' )->getKeywords(
 		array(
 			'id' => $id,
 		)
 	);
+
+	// Save analysis data first so getScore() reads fresh values from the database.
+	seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
+
+	$post          = get_post( $id );
+	$score         = seopress_get_service( 'DomAnalysis' )->getScore( $post );
+	$data['score'] = $score;
 	seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
 
 	/**

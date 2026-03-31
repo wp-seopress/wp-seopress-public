@@ -59,6 +59,21 @@ function seopress_render_license_modal() {
 		return;
 	}
 
+	// Before showing the modal, re-verify with the EDD API (throttled to once per 24h).
+	// This prevents false positives when a customer renews but the weekly cron hasn't run yet.
+	$last_check = get_option( 'seopress_pro_license_last_check', 0 );
+	if ( is_numeric( $last_check ) && ( time() - $last_check ) > DAY_IN_SECONDS ) {
+		if ( function_exists( 'seopress_license_validation_cron' ) ) {
+			seopress_license_validation_cron();
+
+			// Re-read the status after the live check.
+			$license_status = get_option( 'seopress_pro_license_status' );
+			if ( 'valid' === $license_status ) {
+				return;
+			}
+		}
+	}
+
 	// Check if user has capability.
 	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) ) {
 		return;

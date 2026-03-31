@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 6.2+
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.6
+Stable tag: 9.7
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,7 +20,7 @@ SEOPress, a simple, fast and powerful all in one SEO plugin for WordPress. Rank 
 SEOPress is a powerful WordPress SEO plugin to optimize your SEO, boost your traffic, improve social sharing, build custom HTML and XML Sitemaps, create optimized breadcrumbs, add schemas / Google Structured data types, manage 301 redirections and so much more.<br>
 
 ✔ <strong><a href="https://www.seopress.org/features/page-builders-integration/" target="_blank">Universal SEO metabox</a>: edit all your SEO from any page builder / theme builder. No more back and forth between your editor and the WordPress administration</strong>
-✔ <strong>No advertising, no footprints, white label, in backend AND frontend</strong>
+✔ <strong>Privacy first: SEOPress is built with privacy by design, leaves no data footprints, and is fully white label. Your site and your users’ data always remain confidential.</strong>
 ✔ <strong>Content analysis to help you write content optimized for search engines with unlimited target keywords</strong>
 ✔ <strong><a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Import your post and term metadatas</a> from other SEO plugins or CSV file in 1 click</strong>
 ✔ <strong><a href="https://translate.wordpress.org/projects/wp-plugins/wp-seopress" target="_blank">Translated into 27 languages (and counting)</strong>
@@ -308,23 +308,69 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.6 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-6/">Read the blog post update</a> =
-* NEW Added option to freeze the post modification date, preventing WordPress from updating it when a post is saved 🎉
-* NEW Import global settings from SmartCrawl
-* NEW Ability to add your Facebook meta domain verification tag
-* NEW Add a schema column (SEO, Advanced, Appearance, Columns to activate it)
-* INFO Remove useless notifications
-* INFO Improved migration process from Yoast for greater accuracy and ease
-* INFO Remove deprecated AI models
-* INFO Flushing XML sitemaps enhanced
-* FIX Improved handling of taxonomy notice conditions
-* FIX An issue with WPML causing XML sitemap errors in multidomain environments
-* FIX An issue with WPML to translate the primary category ID
-* FIX Empty canonical URL on homepage with "Your latest posts" setting
-* FIX A compatibility issue with Elementor on save
-* FIX Resolved an issue where GPT5.2 Vision failed to generate alt text correctly
-* FIX A fatal error when user cancels the site audit
-* FIX PHP Warnings
+= 9.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-7/">Read the blog post update</a> =
+* NEW Brand new React-based settings UI for a faster and more modern administration experience (first iteration) 🎉
+* NEW Add Seznam.cz site verification support
+* NEW Add Person knowledge graph user ID field for more granular author attribution
+* NEW Detect transliterated keywords in permalink slugs for better multilingual support
+* NEW [PRO] Add WP-CLI license commands: activate, deactivate, status, update, reset
+* NEW [PRO] Rewrite PageSpeed tab to match pagespeed.web.dev with improved UI and print support
+* NEW [PRO] Add custom site URL field for Google Search Console
+* NEW [PRO] Add real-time validation for redirection URLs with loop detection
+* NEW [PRO] Add REST API endpoints for automatic schemas
+* NEW [PRO] Add REST API endpoint for SEO alerts
+* NEW [PRO] Add Bingbot crawl-delay quick-insert button in robots.txt editor
+* NEW [PRO] Add custom capabilities for Broken Links list
+* NEW [PRO] Add 'Add to category' bulk action for redirections
+* NEW [PRO] Add delete button for AI provider API keys
+* NEW [PRO] Auto-detect CSV separator for redirections import with confirmation modal
+* NEW [PRO] Include all public post types in llms.txt with {{latest_posts:X,(post_types)}} syntax
+* NEW [PRO] Enrich Author schema with social profiles and E-E-A-T linking
+* NEW [PRO] Exclude URLs from 404 log
+* INFO Prevent license modal reminder from showing unexpectedly
+* INFO Improved feature toggles reliability
+* INFO Improved freeze post date feature with real-time warning
+* INFO [PRO] Add deprecated label to FAQ, HowTo and Course schemas
+* INFO [PRO] Remove Elementor FAQ schema integration (deprecated by Google)
+* INFO [PRO] Remove retired GPT models
+* INFO [PRO] Optimize bulk deletion for redirections (50+ entries)
+* INFO [PRO] Refactor breadcrumb check
+* INFO [PRO] Update WP-CLI update logic
+* INFO [PRO] Improved CSV redirections import with row validation and post-import feedback
+* INFO [PRO] Invalidate EDD updater cache on license change
+* FIX Undo action with FAQ v2 block
+* FIX Use slugs instead of names in product_cat rewrite rules
+* FIX Fatal error if WC $product isn't set
+* FIX SEO score column showing stale data from previous analysis
+* FIX Facebook ID field not saving correctly
+* FIX Missing HTTP headers
+* FIX REST settings endpoints returning null on fresh installs
+* FIX Metabox preview failing with non-Latin slugs
+* FIX Duplicate archive links in XML sitemap with Polylang multi-domain
+* FIX Unsafe call_user_func_array with user-controlled input
+* FIX PHP 8.5 compatibility
+* FIX Custom schema detection in site audit
+* FIX getPostTypes() and getTaxonomies() operator from 'or' to 'and' for publicly_queryable filtering
+* FIX tagify.js.map missing from plugin package causing browser console 404 error
+* FIX Undefined variable $seopress_robots_freeze_modified_date warning
+* FIX SEO scores between content analysis metabox and post types column
+* FIX [PRO] Microsoft Clarity tracking code regression
+* FIX [PRO] AI hallucination when generating alt text
+* FIX [PRO] AI language not applied when generating alt texts
+* FIX [PRO] Site audit stuck after first batch
+* FIX [PRO] Site audit rescan resetting ignored issues
+* FIX [PRO] GA4 purchase filter breaking the filter chain
+* FIX [PRO] Unauthorized download error during plugin updates
+* FIX [PRO] Missing query string separator in regex redirects
+* FIX [PRO] Regex redirections blocked by 404 log entries
+* FIX [PRO] Video sitemap pagination and reduced regeneration aggressiveness
+* FIX [PRO] AI media meta generation with per field action support
+* FIX [PRO] Purge page cache after robots.txt settings are saved
+* FIX [PRO] PHP 8.5 compatibility
+* FIX [PRO] Undefined array key warnings
+* FIX [PRO] Elementor editor save/preview broken due to missing editor context exclusions
+* FIX [PRO] Matomo cron scheduling issue
+* SECURITY Hardened REST API and AJAX endpoint security
 
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

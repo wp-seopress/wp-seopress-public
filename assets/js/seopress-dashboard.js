@@ -97,10 +97,16 @@ jQuery(document).ready(function ($) {
                     _ajax_nonce: seopressAjaxToggleFeatures.seopress_nonce,
                 },
                 success: function () {
-                    window.history.pushState("", "", window.location.href + "&settings-updated=true");
-                    $('#seopress-notice-save').show();
-                    $('#seopress-notice-save').delay(3500).fadeOut();
-                    window.history.pushState("", "", window.location.href)
+                    // Use WP notices store on React settings pages, fall back to legacy snackbar.
+                    if (window.wp && window.wp.data && window.wp.data.dispatch('core/notices')) {
+                        window.wp.data.dispatch('core/notices').createSuccessNotice(
+                            seopressAjaxToggleFeatures.i18n?.saved || 'Settings saved successfully.',
+                            { type: 'snackbar', isDismissible: true, id: 'seopress-toggle-success' }
+                        );
+                    } else {
+                        $('#seopress-notice-save').show();
+                        $('#seopress-notice-save').delay(3500).fadeOut();
+                    }
                 },
             });
         });

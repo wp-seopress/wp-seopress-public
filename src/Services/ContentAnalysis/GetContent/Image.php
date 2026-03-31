@@ -159,7 +159,7 @@ class Image {
 
 		// Check for common image file extensions.
 		$image_extensions = array( 'jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'ico' );
-		$path_info        = pathinfo( wp_parse_url( $url, PHP_URL_PATH ) );
+		$path_info        = pathinfo( (string) wp_parse_url( $url, PHP_URL_PATH ) );
 		$extension        = isset( $path_info['extension'] ) ? strtolower( $path_info['extension'] ) : '';
 
 		// If no extension, it might still be a valid image URL (some CDNs don't use extensions).

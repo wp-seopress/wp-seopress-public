@@ -69,6 +69,10 @@ class WooCommerceAnalyticsService {
 		// Get current product.
 		global $product;
 
+		if ( ! $product instanceof \WC_Product ) {
+			return;
+		}
+
 		// Set data.
 		$items_purchased['item_id']   = esc_js( $this->getProductSku( $product ) );
 		$items_purchased['item_name'] = esc_js( $product->get_title() );
@@ -130,6 +134,10 @@ class WooCommerceAnalyticsService {
 	public function singleAddToCart() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
 		// Get current product.
 		global $product;
+
+		if ( ! $product instanceof \WC_Product ) {
+			return;
+		}
 
 		$js = "
         <script>
@@ -277,6 +285,10 @@ class WooCommerceAnalyticsService {
 	public function singleViewItemsDetails() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
 		// Get current product.
 		global $product;
+
+		if ( ! $product instanceof \WC_Product ) {
+			return;
+		}
 
 		$js = "
         <script>

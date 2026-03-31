@@ -59,6 +59,18 @@ class SocialOption {
 	}
 
 	/**
+	 * Get the WordPress user ID linked to the Person knowledge graph.
+	 *
+	 * @since 9.7
+	 *
+	 * @return int
+	 */
+	public function getSocialKnowledgeUserId() {
+		$id = $this->searchOptionByKey( 'seopress_social_knowledge_user_id' );
+		return ! empty( $id ) ? absint( $id ) : 0;
+	}
+
+	/**
 	 * The getSocialKnowledgeName function.
 	 *
 	 * @since 4.5.0

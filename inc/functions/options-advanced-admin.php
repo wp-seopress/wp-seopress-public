@@ -33,10 +33,10 @@ function seopress_image_seo_cleaning_filename( $filename ) {
 
 		$clean = apply_filters( 'seopress_image_seo_clean_output', $clean );
 
-		$friendly_filename = preg_replace( $char_not_clean, $clean, $filename );
+		$friendly_filename = (string) preg_replace( $char_not_clean, $clean, $filename );
 
 		// After replacement, we destroy the last residues.
-		$friendly_filename = preg_replace( '/\?/', '', $friendly_filename );
+		$friendly_filename = (string) preg_replace( '/\?/', '', $friendly_filename );
 
 		// Remove uppercase.
 		$friendly_filename = strtolower( $friendly_filename );
@@ -74,7 +74,7 @@ function seopress_auto_image_attr( $post_ID, $bulk = false ) {
 			}
 
 			// Sanitize the title: remove hyphens, underscores & extra spaces.
-			$img_attr = preg_replace( '%\s*[-_\s]+\s*%', ' ', $img_attr );
+			$img_attr = (string) preg_replace( '%\s*[-_\s]+\s*%', ' ', $img_attr );
 
 			// Lowercase attributes.
 			$img_attr = strtolower( $img_attr );

@@ -66,12 +66,13 @@ class ModuleMetabox implements ExecuteHooks {
 			}
 		}
 
-		$dependencies = array( 'jquery-ui-datepicker', 'react', 'react-dom' );
+		$dependencies = array( 'jquery-ui-datepicker', 'react', 'react-dom', 'wp-components' );
 		if ( $is_gutenberg ) {
-			$dependencies = array_merge( $dependencies, array( 'wp-components', 'wp-edit-post', 'wp-plugins' ) );
+			$dependencies = array_merge( $dependencies, array( 'wp-edit-post', 'wp-plugins' ) );
 		}
 
 		wp_enqueue_media();
+		wp_enqueue_style( 'wp-components' );
 		wp_enqueue_script( 'seopress-metabox', SEOPRESS_URL_PUBLIC . '/metaboxe.js', $dependencies, SEOPRESS_VERSION, true );
 
 		global $post;

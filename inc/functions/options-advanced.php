@@ -300,6 +300,27 @@ function seopress_advanced_advanced_facebook_hook() {
 add_action( 'wp_head', 'seopress_advanced_advanced_facebook_hook', 2 );
 
 /**
+ * Seznam.cz site verification
+ *
+ * @since 9.8
+ *
+ * @return void
+ */
+function seopress_advanced_advanced_seznam_hook() {
+	if ( is_home() || is_front_page() ) {
+		$content_seznam = seopress_get_service( 'AdvancedOption' )->getAdvancedSeznamVerification();
+
+		if ( empty( $content_seznam ) ) {
+			return;
+		}
+		?>
+		<meta name="seznam-wmt" content="<?php echo esc_attr( $content_seznam ); ?>">
+		<?php
+	}
+}
+add_action( 'wp_head', 'seopress_advanced_advanced_seznam_hook', 2 );
+
+/**
  * Automatic alt text based on target kw
  *
  * @return void

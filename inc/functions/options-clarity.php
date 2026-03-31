@@ -8,101 +8,99 @@
 defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 /**
- * Enqueue Clarity Tracking Code
+ * Build the raw Clarity JavaScript code (no script tags).
  *
- * Uses WordPress script enqueueing system with proper escaping for security.
- *
- * @return void
+ * @return string Raw JS code, or empty string if disabled.
  */
-function seopress_clarity_js() {
-	if ( seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() !== '' && seopress_get_service( 'GoogleAnalyticsOption' )->getClarityEnable() === '1' ) {
+function seopress_clarity_build_js() {
+	if ( seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() === '' || seopress_get_service( 'GoogleAnalyticsOption' )->getClarityEnable() !== '1' ) {
+		return '';
+	}
 
-		// Sanitize and escape the Project ID.
-		$project_id = esc_js( sanitize_key( seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() ) );
+	// Sanitize the Project ID (alphanumeric only, preserve case).
+	$project_id = preg_replace( '/[^a-zA-Z0-9]/', '', seopress_get_service( 'GoogleAnalyticsOption' )->getClarityProjectId() );
 
-		// Build Clarity initialization script.
-		$clarity_init = sprintf(
-			'(function(c,l,a,r,i,t,y){
-				c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-				t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=seopress";
-				y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-			})(window, document, "clarity", "script", "%s");',
-			$project_id
-		);
+	// Build Clarity initialization script.
+	$js = sprintf(
+		'(function(c,l,a,r,i,t,y){
+			c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+			t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=seopress";
+			y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+		})(window, document, "clarity", "script", "%s");',
+		$project_id
+	);
 
-		// User consent - Required for EEA, UK, and Switzerland (effective Oct 31, 2025).
-		// Microsoft Clarity requires checking analytics_storage and ad_storage consent types.
-		// Reference: https://learn.microsoft.com/en-us/clarity/setup-and-installation/consent-management#consent-type
-		//
-		// SEOPress cookie consent system grants BOTH analytics_storage AND ad_storage when user accepts.
-		// This aligns with Google Consent Mode v2 implementation in options-google-analytics.php.
-		$consent = '';
+	// User consent - Required for EEA, UK, and Switzerland (effective Oct 31, 2025).
+	// Microsoft Clarity requires checking analytics_storage and ad_storage consent types.
+	// Reference: https://learn.microsoft.com/en-us/clarity/setup-and-installation/consent-management#consent-type
+	//
+	// SEOPress cookie consent system grants BOTH analytics_storage AND ad_storage when user accepts.
+	// This aligns with Google Consent Mode v2 implementation in options-google-analytics.php.
+	$consent = '';
 
-		$update = ( ! empty( $_POST['consent'] ) && 'update' === $_POST['consent'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	$update = ( ! empty( $_POST['consent'] ) && 'update' === $_POST['consent'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
-		if ( true === $update ) {
-			if ( isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'] ) {
-				// User has granted consent.
-				// This means analytics_storage=granted AND ad_storage=granted per SEOPress consent model.
-				$consent = "window.clarity('consent');";
-			} elseif ( isset( $_COOKIE['seopress-user-consent-close'] ) && '1' === $_COOKIE['seopress-user-consent-close'] ) {
-				// User has declined consent.
-				// This means analytics_storage=denied AND ad_storage=denied per SEOPress consent model.
-				$consent = "window.clarity('consent', false);";
-			}
-		} elseif ( isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'] ) {
-			// User has previously granted consent.
-			// This means analytics_storage=granted AND ad_storage=granted per SEOPress consent model.
+	if ( true === $update ) {
+		if ( isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'] ) {
 			$consent = "window.clarity('consent');";
-		} else {
-			// Default to no consent if no cookie is set (GDPR-compliant).
-			// This means analytics_storage=denied AND ad_storage=denied per SEOPress consent model.
-			// This ensures compliance with Microsoft Clarity's requirements for EEA/UK/Swiss regions.
+		} elseif ( isset( $_COOKIE['seopress-user-consent-close'] ) && '1' === $_COOKIE['seopress-user-consent-close'] ) {
 			$consent = "window.clarity('consent', false);";
 		}
-
-		/**
-		 * Filter Clarity consent signal.
-		 *
-		 * Allows developers to customize consent behavior or integrate with third-party CMPs.
-		 * Microsoft Clarity requires consent for analytics_storage and ad_storage.
-		 *
-		 * @since 9.3.0
-		 *
-		 * @param string $consent The consent JavaScript code to send to Clarity.
-		 *
-		 * @example Integrate with Google Consent Mode:
-		 * add_filter(
-		 *      'seopress_clarity_user_consent',
-		 *      function( $consent ) {
-		 *         // Your custom consent logic here.
-		 *         // Note: Clarity requires analytics_storage and ad_storage consent.
-		 *         return "window.clarity('consent');";
-		 *      }
-		 * );
-		 */
-		$consent = apply_filters( 'seopress_clarity_user_consent', $consent );
-
-		// Escape consent code for JavaScript context.
-		$consent = esc_js( $consent );
-
-		// Combine initialization and consent code.
-		$clarity_js = $clarity_init . $consent;
-
-		/**
-		 * Filter the complete Clarity tracking code.
-		 *
-		 * Allows developers to modify the entire Clarity tracking JavaScript.
-		 *
-		 * @since 8.0.0
-		 *
-		 * @param string $clarity_js The complete Clarity JavaScript code.
-		 */
-		$clarity_js = apply_filters( 'seopress_clarity_tracking_js', $clarity_js );
-
-		// Enqueue script using WordPress standards.
-		wp_register_script( 'seopress-clarity', false, array(), SEOPRESS_VERSION, false );
-		wp_enqueue_script( 'seopress-clarity' );
-		wp_add_inline_script( 'seopress-clarity', $clarity_js, 'before' );
+	} elseif ( isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'] ) {
+		$consent = "window.clarity('consent');";
+	} else {
+		$consent = "window.clarity('consent', false);";
 	}
+
+	/**
+	 * Filter Clarity consent signal.
+	 *
+	 * @since 9.3.0
+	 *
+	 * @param string $consent The consent JavaScript code to send to Clarity.
+	 */
+	$consent = apply_filters( 'seopress_clarity_user_consent', $consent );
+
+	$js .= $consent;
+
+	return $js;
+}
+
+/**
+ * Output or return Clarity tracking code.
+ *
+ * When called with $output = true (default), prints the script via wp_print_inline_script_tag (wp_head).
+ * When called with $output = false, returns the code wrapped in script tags for AJAX injection.
+ *
+ * Note: wp_enqueue_script cannot be used here because this function is loaded during wp_head
+ * (via seopress_load_google_analytics_options at priority 0), which is after wp_enqueue_scripts
+ * has already fired. wp_print_inline_script_tag is the WordPress API for this situation (WP 5.7+).
+ *
+ * @param bool $output True to print inline script, false to return script tag string.
+ *
+ * @return string|void
+ */
+function seopress_clarity_js( $output = true ) {
+	$raw_js = seopress_clarity_build_js();
+
+	if ( '' === $raw_js ) {
+		return '';
+	}
+
+	/**
+	 * Filter the complete Clarity tracking code.
+	 *
+	 * @since 8.0.0
+	 *
+	 * @param string $raw_js The complete Clarity JavaScript code (no script tags).
+	 */
+	$raw_js = apply_filters( 'seopress_clarity_tracking_js', $raw_js );
+
+	if ( false === $output ) {
+		// Return script tag string for AJAX cookie consent injection.
+		return '<script>' . $raw_js . '</script>';
+	}
+
+	// Output inline script during wp_head using WordPress API (WP 5.7+).
+	wp_print_inline_script_tag( $raw_js );
 }

@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.6
+ * Version: 9.7
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.6' );
+define( 'SEOPRESS_VERSION', '9.7' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -165,8 +165,9 @@ function seopress_plugins_loaded( $hook ) { // phpcs:ignore
 		require_once $plugin_dir . 'inc/admin/promotions/contextual-ads.php';
 	}
 
-	// Load options and admin bar.
+	// Load options, sanitization and admin bar.
 	require_once $plugin_dir . 'inc/functions/options.php';
+	require_once $plugin_dir . 'inc/admin/sanitize/Sanitize.php';
 	require_once $plugin_dir . 'inc/admin/admin-bar/admin-bar.php';
 
 	if ( version_compare( $wp_version, '5.0', '>=' ) ) {
@@ -355,32 +356,6 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 		$scripts[] = 'seopress-migrate';
 	}
 
-	// Tabs script.
-	$pages_with_tabs = array_map(
-		/**
-		 * Get the page name.
-		 *
-		 * @param string $page
-		 * @return string
-		 */
-		function ( $page ) {
-			return 'seopress-' . $page;
-		},
-		array(
-			'titles',
-			'xml-sitemap',
-			'social',
-			'google-analytics',
-			'advanced',
-			'import-export',
-			'instant-indexing',
-		)
-	);
-
-	if ( in_array( $page, $pages_with_tabs, true ) ) {
-		$scripts[] = 'seopress-tabs';
-	}
-
 	// Load scripts conditionally.
 	foreach ( $scripts as $script ) {
 		wp_enqueue_script( $script, plugins_url( 'assets/js/' . $script . $prefix . '.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
@@ -424,52 +399,6 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 			);
 			wp_localize_script( 'seopress-dashboard', 'seopressAjaxDisplay', $seopress_display );
 		}
-	}
-
-	// Google Analytics color picker.
-	if ( 'seopress-google-analytics' === $page ) {
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'wp-color-picker-alpha', plugins_url( 'assets/js/wp-color-picker-alpha' . $prefix . '.js', __FILE__ ), array( 'wp-color-picker' ), SEOPRESS_VERSION, true );
-		wp_localize_script(
-			'wp-color-picker-alpha',
-			'wpColorPickerL10n',
-			array(
-				'clear'            => __( 'Clear', 'wp-seopress' ),
-				'clearAriaLabel'   => __( 'Clear color', 'wp-seopress' ),
-				'defaultString'    => __( 'Default', 'wp-seopress' ),
-				'defaultAriaLabel' => __( 'Select default color', 'wp-seopress' ),
-				'pick'             => __( 'Select Color', 'wp-seopress' ),
-				'defaultLabel'     => __( 'Color value', 'wp-seopress' ),
-			),
-		);
-
-		$settings = wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
-		wp_add_inline_script(
-			'code-editor',
-			sprintf(
-				'jQuery(function($) {
-            function initializeEditor(elementId, settings) {
-                var $textarea = $("#" + elementId);
-                if (!$textarea.data("codeMirrorInitialized")) {
-                    wp.codeEditor.initialize(elementId, settings);
-                    $textarea.data("codeMirrorInitialized", true);
-                }
-            }
-            function initializeEditors() {
-                initializeEditor("seopress_google_analytics_other_tracking", %s);
-                initializeEditor("seopress_google_analytics_other_tracking_body", %s);
-                initializeEditor("seopress_google_analytics_other_tracking_footer", %s);
-            }
-            $(document).ready(function() {
-                initializeEditors();
-                setTimeout(initializeEditors, 100);
-            });
-        });',
-				wp_json_encode( $settings ),
-				wp_json_encode( $settings ),
-				wp_json_encode( $settings )
-			)
-		);
 	}
 
 	// Localize migration data once for all migration pages.
@@ -563,7 +492,7 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 				'jQuery(function($) {
 			function initializeEditor(elementId, settings) {
 				var $textarea = $("#" + elementId);
-				if (!$textarea.data("codeMirrorInitialized")) {
+				if ($textarea.length && !$textarea.data("codeMirrorInitialized")) {
 					wp.codeEditor.initialize(elementId, settings);
 					$textarea.data("codeMirrorInitialized", true);
 				}

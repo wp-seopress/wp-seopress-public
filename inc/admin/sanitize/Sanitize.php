@@ -39,6 +39,7 @@ function seopress_sanitize_options_fields( $input ) {
 		'seopress_social_knowledge_email',
 		'seopress_social_knowledge_phone',
 		'seopress_social_knowledge_tax_id',
+		'seopress_social_knowledge_user_id',
 		'seopress_social_accounts_facebook',
 		'seopress_social_accounts_twitter',
 		'seopress_social_accounts_pinterest',
@@ -91,6 +92,7 @@ function seopress_sanitize_options_fields( $input ) {
 		'seopress_advanced_advanced_yandex',
 		'seopress_advanced_advanced_baidu',
 		'seopress_advanced_advanced_facebook',
+		'seopress_advanced_advanced_seznam',
 	);
 
 	$new_options = array( 'seopress_social_facebook_img_attachment_id', 'seopress_social_facebook_img_height', 'seopress_social_facebook_img_width' );
@@ -132,6 +134,8 @@ function seopress_sanitize_options_fields( $input ) {
 			$input[ $value ] = sanitize_url( $input[ $value ] );
 		} elseif ( ( ! empty( $input['seopress_social_knowledge_email'] ) && 'seopress_social_knowledge_email' === $value ) ) {
 			$input[ $value ] = sanitize_email( $input[ $value ] );
+		} elseif ( isset( $input['seopress_social_knowledge_user_id'] ) && 'seopress_social_knowledge_user_id' === $value ) {
+			$input[ $value ] = absint( $input[ $value ] );
 		} elseif ( ( ! empty( $input['seopress_social_accounts_twitter'] ) && 'seopress_social_accounts_twitter' === $value ) ) {
 			$input[ $value ] = sanitize_text_field( $input[ $value ] );
 			// Ensure Twitter handle starts with @.

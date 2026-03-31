@@ -39,11 +39,6 @@ class LicenseSettings implements ExecuteHooks {
 	 * @return boolean
 	 */
 	public function permissionCheck( \WP_REST_Request $request ) {
-		$nonce = $request->get_header( 'x-wp-nonce' );
-		if ( $nonce && ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
-			return false;
-		}
-
 		$current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
 		if ( ! user_can( $current_user, 'manage_options' ) ) {
 			return false;
@@ -82,7 +77,7 @@ class LicenseSettings implements ExecuteHooks {
 		$options = get_option( 'seopress_pro_license_key' );
 
 		if ( empty( $options ) ) {
-			return;
+			return new \WP_REST_Response( array() );
 		}
 
 		$data = array( 'license_key' => $options );

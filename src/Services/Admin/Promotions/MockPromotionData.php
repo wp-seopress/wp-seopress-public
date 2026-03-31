@@ -96,6 +96,10 @@ class MockPromotionData {
 	/**
 	 * Get mock affiliate partners.
 	 *
+	 * Fallback partners shown when the API returns no data.
+	 * No restrictive conditions here: this is a safety net that must always
+	 * produce at least one visible partner regardless of the site context.
+	 *
 	 * @since 9.6.0
 	 *
 	 * @return array
@@ -114,9 +118,7 @@ class MockPromotionData {
 					'Subscriber management',
 				),
 				'context'     => 'marketing',
-				'conditions'  => array(
-					'plugins_inactive' => array( 'mailerpress/mailerpress.php' ),
-				),
+				'conditions'  => array(),
 			),
 		);
 	}

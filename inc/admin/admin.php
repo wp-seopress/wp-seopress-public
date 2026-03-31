@@ -78,9 +78,8 @@ class SEOPressOptions {
 		add_action( 'admin_init', array( $this, 'page_init' ), 10 );
 		add_action( 'admin_init', array( $this, 'feature_save' ), 30 );
 		add_action( 'admin_init', array( $this, 'feature_title' ), 20 );
-		add_action( 'admin_init', array( $this, 'load_sections' ), 30 );
-		add_action( 'admin_init', array( $this, 'load_callbacks' ), 40 );
-		add_action( 'admin_init', array( $this, 'pre_save_options' ), 50 );
+		// Option save hooks (pre_update_option, update_option) are now in
+		// SEOPress\Actions\Options\OptionSaveHooks to work for both admin and REST.
 	}
 
 	/**
@@ -127,25 +126,26 @@ class SEOPressOptions {
 
 		$html = '<h1>' . $title;
 
+		// Always render toggle elements so SPA navigation can show/hide them.
+		$hidden = ( null === $feature ) ? ' style="display:none"' : '';
+
 		if ( null !== $feature ) {
-			if ( '1' == seopress_get_toggle_option( $feature ) ) { // phpcs:ignore -- TODO: null comparison check.
-				$toggle = '"1"';
-			} else {
-				$toggle = '"0"';
-			}
+			$toggle = ( '1' == seopress_get_toggle_option( $feature ) ) ? '"1"' : '"0"'; // phpcs:ignore -- TODO: null comparison check.
+			$html  .= '<input type="checkbox" name="toggle-' . $feature . '" id="toggle-' . $feature . '" class="toggle" data-toggle=' . $toggle . $hidden . '>';
+			$html  .= '<label for="toggle-' . $feature . '"' . $hidden . '></label>';
+		} else {
+			$html .= '<input type="checkbox" name="toggle-placeholder" id="toggle-placeholder" class="toggle" data-toggle="0"' . $hidden . '>';
+			$html .= '<label for="toggle-placeholder"' . $hidden . '></label>';
+		}
 
-			$html .= '<input type="checkbox" name="toggle-' . $feature . '" id="toggle-' . $feature . '" class="toggle" data-toggle=' . $toggle . '>';
-			$html .= '<label for="toggle-' . $feature . '"></label>';
+		$html .= $this->feature_save();
 
-			$html .= $this->feature_save();
-
-			if ( '1' == seopress_get_toggle_option( $feature ) ) { // phpcs:ignore -- TODO: null comparison check.
-				$html .= '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>' . __( 'Click to disable this feature', 'wp-seopress' ) . '</span>';
-				$html .= '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>' . __( 'Click to enable this feature', 'wp-seopress' ) . '</span>';
-			} else {
-				$html .= '<span id="titles-state-default" class="feature-state"><span class="dashicons dashicons-arrow-left-alt"></span>' . __( 'Click to enable this feature', 'wp-seopress' ) . '</span>';
-				$html .= '<span id="titles-state" class="feature-state feature-state-off"><span class="dashicons dashicons-arrow-left-alt"></span>' . __( 'Click to disable this feature', 'wp-seopress' ) . '</span>';
-			}
+		if ( null !== $feature && '1' == seopress_get_toggle_option( $feature ) ) { // phpcs:ignore -- TODO: null comparison check.
+			$html .= '<span id="titles-state-default" class="feature-state"' . $hidden . '><span class="dashicons dashicons-arrow-left-alt"></span>' . __( 'Click to disable this feature', 'wp-seopress' ) . '</span>';
+			$html .= '<span id="titles-state" class="feature-state feature-state-off"' . $hidden . '><span class="dashicons dashicons-arrow-left-alt"></span>' . __( 'Click to enable this feature', 'wp-seopress' ) . '</span>';
+		} else {
+			$html .= '<span id="titles-state-default" class="feature-state"' . $hidden . '><span class="dashicons dashicons-arrow-left-alt"></span>' . __( 'Click to enable this feature', 'wp-seopress' ) . '</span>';
+			$html .= '<span id="titles-state" class="feature-state feature-state-off"' . $hidden . '><span class="dashicons dashicons-arrow-left-alt"></span>' . __( 'Click to disable this feature', 'wp-seopress' ) . '</span>';
 		}
 
 		$html .= '</h1>';
@@ -308,23 +308,6 @@ class SEOPressOptions {
 		foreach ( $settings as [$group, $name] ) {
 			register_setting( $group, $name, array( $this, 'sanitize' ) );
 		}
-
-		// Array of files to include.
-		$setting_files = array(
-			'Titles.php',
-			'Sitemaps.php',
-			'Social.php',
-			'Analytics.php',
-			'ImageSEO.php',
-			'Advanced.php',
-			'InstantIndexing.php',
-		);
-
-		// Include files dynamically.
-		$settings_dir = plugin_dir_path( __FILE__ ) . 'settings/';
-		foreach ( $setting_files as $file ) {
-			require_once $settings_dir . $file;
-		}
 	}
 
 	/**
@@ -343,103 +326,6 @@ class SEOPressOptions {
 		return seopress_sanitize_options_fields( $input );
 	}
 
-	/**
-	 * Load sections
-	 */
-	public function load_sections() {
-		require_once plugin_dir_path( __FILE__ ) . '/sections/Titles.php';
-		require_once plugin_dir_path( __FILE__ ) . '/sections/Sitemaps.php';
-		require_once plugin_dir_path( __FILE__ ) . '/sections/Social.php';
-		require_once plugin_dir_path( __FILE__ ) . '/sections/Analytics.php';
-		require_once plugin_dir_path( __FILE__ ) . '/sections/ImageSEO.php';
-		require_once plugin_dir_path( __FILE__ ) . '/sections/Advanced.php';
-		require_once plugin_dir_path( __FILE__ ) . '/sections/InstantIndexing.php';
-	}
-
-	/**
-	 * Load callbacks
-	 */
-	public function load_callbacks() {
-		require_once plugin_dir_path( __FILE__ ) . '/callbacks/Titles.php';
-		require_once plugin_dir_path( __FILE__ ) . '/callbacks/Sitemaps.php';
-		require_once plugin_dir_path( __FILE__ ) . '/callbacks/Social.php';
-		require_once plugin_dir_path( __FILE__ ) . '/callbacks/Analytics.php';
-		require_once plugin_dir_path( __FILE__ ) . '/callbacks/ImageSEO.php';
-		require_once plugin_dir_path( __FILE__ ) . '/callbacks/Advanced.php';
-		require_once plugin_dir_path( __FILE__ ) . '/callbacks/InstantIndexing.php';
-	}
-
-	/**
-	 * Pre save options
-	 */
-	public function pre_save_options() {
-		add_filter( 'pre_update_option_seopress_instant_indexing_option_name', array( $this, 'pre_seopress_instant_indexing_option_name' ), 10, 2 );
-		// Use update_option hook instead of pre_update_option so the value is saved before flushing.
-		add_action( 'update_option_seopress_xml_sitemap_option_name', array( $this, 'after_seopress_xml_sitemap_option_name' ), 10, 3 );
-	}
-
-	/**
-	 * Preset Indexing options
-	 *
-	 * @param array $new_value New value.
-	 * @param array $old_value Old value.
-	 * @return array New value.
-	 */
-	public function pre_seopress_instant_indexing_option_name( $new_value, $old_value ) {
-		// If we are saving data from SEO, PRO, Google Search Console tab, we have to save all Indexing options!
-		if ( ! array_key_exists( 'seopress_instant_indexing_bing_api_key', $new_value ) ) {
-			$options = get_option( 'seopress_instant_indexing_option_name' );
-			$options['seopress_instant_indexing_google_api_key'] = $new_value['seopress_instant_indexing_google_api_key'];
-			return $options;
-		}
-		return $new_value;
-	}
-
-	/**
-	 * Flush rewrite rules after saving XML sitemaps global settings
-	 *
-	 * This runs AFTER the option is saved to the database.
-	 * We need to manually re-register the rewrite rules because flush_rewrite_rules()
-	 * uses the rules that were registered during init (with the OLD values).
-	 * The init hook won't run again until the next request.
-	 *
-	 * @param mixed  $old_value Old value.
-	 * @param mixed  $new_value New value.
-	 * @param string $option Option name.
-	 * @return void
-	 */
-	public function after_seopress_xml_sitemap_option_name( $old_value, $new_value, $option ) {
-		// The new value is already saved to the database at this point.
-		// We need to force WordPress to regenerate rewrite rules with the new settings.
-
-		// Clear only SEOPress's own rewrite rules from the in-memory cache.
-		// We must NOT clear all rules as that would break other plugins' rewrite rules
-		// (REST API, custom post types, etc.).
-		global $wp_rewrite;
-		if ( ! empty( $wp_rewrite->extra_rules_top ) ) {
-			foreach ( $wp_rewrite->extra_rules_top as $pattern => $query ) {
-				if ( false !== strpos( $query, 'seopress_' ) ) {
-					unset( $wp_rewrite->extra_rules_top[ $pattern ] );
-				}
-			}
-		}
-
-		// Re-register SEOPress sitemap rewrite rules with the NEW settings.
-		// flush_rewrite_rules() does not re-fire the init action, so we must
-		// manually re-register the rules before flushing.
-		$toggle_options = get_option( 'seopress_toggle' );
-		\SEOPress\Actions\Sitemap\Router::registerRewriteRules( $new_value, $toggle_options );
-
-		// Allow PRO and extensions to re-register their sitemap rewrite rules
-		// (e.g., news.xml, video*.xml) before the flush persists everything.
-		do_action( 'seopress_re_register_sitemap_rules', $new_value, $toggle_options );
-
-		// Clear the rewrite rules from the database so they get regenerated.
-		delete_option( 'rewrite_rules' );
-
-		// Flush to regenerate and save all rewrite rules.
-		flush_rewrite_rules( false );
-	}
 }
 
 /**

@@ -47,5 +47,41 @@
   },
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "viewScript": "file:./accordion.js"
+  "viewScript": "file:./accordion.js",
+  "attributes": {
+    "faqs": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object"
+      }
+    },
+    "listStyle": {
+      "type": "string",
+      "default": "none"
+    },
+    "titleWrapper": {
+      "type": "string",
+      "default": "h3"
+    },
+    "imageSize": {
+      "type": "string",
+      "default": "thumbnail"
+    },
+    "showFAQScheme": {
+      "type": "boolean",
+      "default": false
+    },
+    "showAccordion": {
+      "type": "boolean",
+      "default": false
+    },
+    "isProActive": {
+      "type": "boolean",
+      "default": false
+    },
+    "selectedImageId": {
+      "type": "number"
+    }
+  }
 }

@@ -94,7 +94,7 @@ class TargetKeywords implements ExecuteHooks {
 	 */
 	public function processGet( \WP_REST_Request $request ) {
 		$id              = $request->get_param( 'id' );
-		$target_keywords = array_filter( explode( ',', strtolower( get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ) );
+		$target_keywords = array_filter( explode( ',', strtolower( (string) get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ) );
 
 		$data = seopress_get_service( 'CountTargetKeywordsUse' )->getCountByKeywords( $target_keywords, $id );
 

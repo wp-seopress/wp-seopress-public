@@ -105,6 +105,30 @@ function seopress_get_contextual_promotion( $context ) {
 			'cta_text'    => __( 'Boost your store', 'wp-seopress' ),
 			'cta_url'     => $docs['addons']['pro'],
 		),
+		'social'          => array(
+			'id'          => 'ctx-social',
+			'icon'        => 'share',
+			'title'       => __( 'Enhanced Social Media Integration', 'wp-seopress' ),
+			'body'        => __( 'Unlock advanced Open Graph controls, social preview, and more with PRO.', 'wp-seopress' ),
+			'cta_text'    => __( 'Discover PRO', 'wp-seopress' ),
+			'cta_url'     => $docs['addons']['pro'],
+		),
+		'instant-indexing' => array(
+			'id'          => 'ctx-instant-indexing',
+			'icon'        => 'superhero',
+			'title'       => __( 'Instant Indexing for Google', 'wp-seopress' ),
+			'body'        => __( 'Automatically submit your pages to Google\'s Indexing API for faster crawling.', 'wp-seopress' ),
+			'cta_text'    => __( 'Learn more', 'wp-seopress' ),
+			'cta_url'     => $docs['addons']['pro'],
+		),
+		'tools'           => array(
+			'id'          => 'ctx-tools',
+			'icon'        => 'admin-tools',
+			'title'       => __( 'Advanced SEO Tools', 'wp-seopress' ),
+			'body'        => __( 'Unlock redirections, 404 monitoring, broken link checker, and htaccess editor with PRO.', 'wp-seopress' ),
+			'cta_text'    => __( 'Get PRO', 'wp-seopress' ),
+			'cta_url'     => $docs['addons']['pro'],
+		),
 	);
 
 	return isset( $promotions[ $context ] ) ? $promotions[ $context ] : null;

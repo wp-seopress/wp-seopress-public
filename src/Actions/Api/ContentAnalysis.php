@@ -170,6 +170,9 @@ class ContentAnalysis implements ExecuteHooks {
 
 		$keywords = seopress_get_service( 'DomAnalysis' )->getKeywords( $keywords_options );
 
+		// Save analysis data first so getScore() reads fresh values from the database.
+		seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
+
 		$post          = get_post( $id );
 		$score         = seopress_get_service( 'DomAnalysis' )->getScore( $post );
 		$data['score'] = $score;
@@ -189,9 +192,9 @@ class ContentAnalysis implements ExecuteHooks {
 	 */
 	public function save( \WP_REST_Request $request ) {
 		$id             = (int) $request->get_param( 'id' );
-		$score          = $request->get_param( 'score' );
-		$internal_links = $request->get_param( 'internal_links' );
-		$outbound_links = $request->get_param( 'outbound_links' );
+		$score          = sanitize_text_field( $request->get_param( 'score' ) );
+		$internal_links = map_deep( $request->get_param( 'internal_links' ), 'sanitize_text_field' );
+		$outbound_links = map_deep( $request->get_param( 'outbound_links' ), 'sanitize_text_field' );
 
 		$data = array(
 			'internal_links' => $internal_links,

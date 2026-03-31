@@ -339,6 +339,17 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 							?>
 
 						<span class="sp-section"><?php esc_html_e( 'Last modified date', 'wp-seopress' ); ?></span>
+						<p class="description">
+							<?php
+							$wp_date_format = get_option( 'date_format' );
+							$wp_time_format = get_option( 'time_format' );
+							printf(
+								/* translators: %s current post modified date */
+								esc_html__( 'Current modified date: %s', 'wp-seopress' ),
+								'<strong>' . esc_html( get_the_modified_date( $wp_date_format . ' ' . $wp_time_format, $post->ID ) ) . '</strong>'
+							);
+							?>
+						</p>
 						<p>
 							<label for="seopress_robots_freeze_modified_date_meta">
 								<input type="checkbox" name="seopress_robots_freeze_modified_date" id="seopress_robots_freeze_modified_date_meta"
@@ -348,6 +359,17 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									echo seopress_tooltip( esc_html__( 'Freeze last modified date', 'wp-seopress' ), wp_kses_post( __( 'Enable this option to prevent the last modified date from being updated when you save this post. <br>This is recommended for minor updates like fixing typos, formatting changes, or copyright updates that don\'t constitute significant content changes. <br>Google recommends only updating the lastmod date for significant content updates.', 'wp-seopress' ) ), '' );
 								?>
 							</label>
+						</p>
+						<p>
+							<label for="seopress_robots_custom_modified_date_meta">
+								<?php esc_attr_e( 'Set a custom last modified date', 'wp-seopress' ); ?>
+							</label>
+							<input type="text" name="seopress_robots_custom_modified_date"
+								id="seopress_robots_custom_modified_date_meta"
+								class="components-text-control__input"
+								placeholder="YYYY-MM-DD"
+								value="<?php echo esc_attr( $seopress_robots_custom_modified_date ); ?>" />
+							<span class="description"><?php esc_html_e( 'Override the last modified date with a custom value. Leave empty to use the current post modified date.', 'wp-seopress' ); ?></span>
 						</p>
 							<?php
 

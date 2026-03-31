@@ -79,7 +79,7 @@ function seopress_titles_the_title() {
 
 			$seopress_titles_title_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title );
 		}
-	} elseif ( is_singular() ) { // IS SINGULAR.
+	} elseif ( is_singular() && ! empty( $post ) ) { // IS SINGULAR.
 		// IS BUDDYPRESS ACTIVITY PAGE.
 		if ( function_exists( 'bp_is_current_component' ) && true === bp_is_current_component( 'activity' ) ) {
 			$post->ID = buddypress()->pages->activity->id;
@@ -414,7 +414,7 @@ function seopress_titles_the_description_content() {
 
 			$seopress_titles_description_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description );
 		}
-	} elseif ( is_singular() ) { // IS SINGLE.
+	} elseif ( is_singular() && ! empty( $post ) ) { // IS SINGLE.
 		if ( get_post_meta( $post->ID, '_seopress_titles_desc', true ) ) { // IS METABOXE.
 			$seopress_titles_the_description = esc_attr( get_post_meta( $post->ID, '_seopress_titles_desc', true ) );
 
@@ -1035,7 +1035,7 @@ if ( function_exists( 'seopress_titles_noindex_bypass' ) && '1' !== seopress_tit
 		 * Canonical post hook.
 		 */
 		function seopress_titles_canonical_post_hook() {
-			$seopress_titles_canonical = '<link rel="canonical" href="' . htmlspecialchars( urldecode( seopress_titles_canonical_post_option() ) ) . '">';
+			$seopress_titles_canonical = '<link rel="canonical" href="' . htmlspecialchars( urldecode( (string) seopress_titles_canonical_post_option() ) ) . '">';
 			// Hook on post canonical URL - 'seopress_titles_canonical'.
 			if ( has_filter( 'seopress_titles_canonical' ) ) {
 				$seopress_titles_canonical = apply_filters( 'seopress_titles_canonical', $seopress_titles_canonical );
@@ -1049,7 +1049,7 @@ if ( function_exists( 'seopress_titles_noindex_bypass' ) && '1' !== seopress_tit
 		 */
 		function seopress_titles_canonical_post_hook() {
 			$page_id                   = get_option( 'page_for_posts' );
-			$seopress_titles_canonical = '<link rel="canonical" href="' . htmlspecialchars( urldecode( get_post_meta( $page_id, '_seopress_robots_canonical', true ) ) ) . '">';
+			$seopress_titles_canonical = '<link rel="canonical" href="' . htmlspecialchars( urldecode( (string) get_post_meta( $page_id, '_seopress_robots_canonical', true ) ) ) . '">';
 			// Hook on post canonical URL - 'seopress_titles_canonical'.
 			if ( has_filter( 'seopress_titles_canonical' ) ) {
 				$seopress_titles_canonical = apply_filters( 'seopress_titles_canonical', $seopress_titles_canonical );

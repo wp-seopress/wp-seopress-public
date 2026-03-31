@@ -62,7 +62,11 @@ function seopress_import_settings() {
 		wp_die( esc_html__( 'Please upload a file to import', 'wp-seopress' ) );
 	}
 
-	$settings = (array) json_decode( seopress_remove_utf8_bom( file_get_contents( $import_file ) ), true );
+	$file_contents = file_get_contents( $import_file );
+	if ( false === $file_contents ) {
+		wp_die( esc_html__( 'Unable to read the import file', 'wp-seopress' ) );
+	}
+	$settings = (array) json_decode( seopress_remove_utf8_bom( $file_contents ), true );
 
 	seopress_get_service( 'ImportSettings' )->handle( $settings );
 

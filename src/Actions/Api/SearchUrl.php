@@ -45,6 +45,15 @@ class SearchUrl implements ExecuteHooks {
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'process' ),
 				'permission_callback' => '__return_true',
+				'args'                => array(
+					'url' => array(
+						'required'          => true,
+						'validate_callback' => function ( $param ) {
+							return is_string( $param ) && ! empty( $param );
+						},
+						'sanitize_callback' => 'esc_url_raw',
+					),
+				),
 			)
 		);
 	}

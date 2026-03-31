@@ -120,7 +120,7 @@ function seopress_xml_sitemap_single_term() {
 
 	remove_all_filters( 'pre_get_posts' );
 
-	$offset = basename( wp_parse_url( $request_uri, PHP_URL_PATH ), '.xml' );
+	$offset = basename( (string) wp_parse_url( $request_uri, PHP_URL_PATH ), '.xml' );
 	$offset = preg_match_all( '/\d+/', $offset, $matches );
 	$offset = end( $matches[0] );
 

@@ -199,6 +199,7 @@ function seopress_get_docs_links() {
 		'alerts'               => array(
 			'introduction'  => 'https://www.seopress.org/features/seo-alerts/',
 			'slack_webhook' => 'https://www.seopress.org/support/guides/how-to-configure-seo-alerts-in-sack-with-seopress-pro/',
+			'rest_api'      => 'https://www.seopress.org/support/guides/get-started-with-the-seopress-rest-api/#request-seo-alerts',
 		),
 		'tools'                => array(
 			'csv_import' => 'https://www.seopress.org/support/guides/import-metadata-from-a-csv-file-with-seopress-pro/',
@@ -360,6 +361,7 @@ function seopress_get_docs_links() {
 
 		$docs['alerts']['introduction']  = 'https://www.seopress.org/fr/fonctionnalites/alertes-seo/';
 		$docs['alerts']['slack_webhook'] = 'https://www.seopress.org/fr/support/guides/configurer-alertes-seo-slack-seopress-pro/';
+		$docs['alerts']['rest_api']      = 'https://www.seopress.org/fr/support/guides/debuter-avec-lapi-rest-seopress/#obtenir-les-alertes-seo';
 
 		$docs['integrations']['all']                        = 'https://www.seopress.org/fr/integrations/';
 		$docs['integrations']['wpml']['translate']          = 'https://www.seopress.org/fr/support/guides/traduire-les-options-de-seopress-avec-wpml-polylang/';

@@ -19,89 +19,10 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 	echo seopress_admin_header();
 }
 ?>
-<form method="post"
-	action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>"
-	class="seopress-option">
-	<?php
-		echo $this->feature_title( 'advanced' );
-		settings_fields( 'seopress_advanced_option_group' );
-	?>
+<div class="seopress-option seopress-php-header">
+	<?php echo $this->feature_title( 'advanced' ); ?>
+</div>
 
-	<div id="seopress-tabs" class="wrap">
-		<?php
-			$current_tab      = '';
-		$plugin_settings_tabs = array(
-			'tab_seopress_advanced_image'      => __( 'Image SEO', 'wp-seopress' ),
-			'tab_seopress_advanced_advanced'   => __( 'Advanced', 'wp-seopress' ),
-			'tab_seopress_advanced_appearance' => __( 'Appearance', 'wp-seopress' ),
-			'tab_seopress_advanced_security'   => __( 'Security', 'wp-seopress' ),
-		);
-		?>
-		<div class="nav-tab-wrapper">
-
-			<?php foreach ( $plugin_settings_tabs as $tab_key => $tab_caption ) { ?>
-			<a id="<?php echo esc_attr( $tab_key ); ?>-tab" class="nav-tab"
-				href="?page=seopress-advanced#tab=<?php echo esc_attr( $tab_key ); ?>"><?php echo esc_html( $tab_caption ); ?></a>
-			<?php } ?>
-
-		</div>
-		<div class="seopress-tab
-		<?php
-		if ( 'tab_seopress_advanced_image' === $current_tab ) {
-			echo ' active';
-		}
-		?>
-		" id="tab_seopress_advanced_image">
-			<?php do_settings_sections( 'seopress-settings-admin-advanced-image' ); ?>
-			<?php
-			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
-				seopress_render_contextual_promotion( 'advanced' );
-			}
-			?>
-		</div>
-		<div class="seopress-tab
-		<?php
-		if ( 'tab_seopress_advanced_advanced' === $current_tab ) {
-			echo ' active';
-		}
-		?>
-		" id="tab_seopress_advanced_advanced">
-			<?php do_settings_sections( 'seopress-settings-admin-advanced-advanced' ); ?>
-			<?php
-			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
-				seopress_render_contextual_promotion( 'advanced' );
-			}
-			?>
-		</div>
-		<div class="seopress-tab
-		<?php
-		if ( 'tab_seopress_advanced_appearance' === $current_tab ) {
-			echo ' active';
-		}
-		?>
-		" id="tab_seopress_advanced_appearance">
-			<?php do_settings_sections( 'seopress-settings-admin-advanced-appearance' ); ?>
-			<?php
-			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
-				seopress_render_contextual_promotion( 'advanced' );
-			}
-			?>
-		</div>
-		<div class="seopress-tab
-		<?php
-		if ( 'tab_seopress_advanced_security' === $current_tab ) {
-			echo ' active';
-		}
-		?>
-		" id="tab_seopress_advanced_security">
-			<?php do_settings_sections( 'seopress-settings-admin-advanced-security' ); ?>
-			<?php
-			if ( function_exists( 'seopress_render_contextual_promotion' ) ) {
-				seopress_render_contextual_promotion( 'advanced' );
-			}
-			?>
-		</div>
-	</div>
-
-	<?php sp_submit_button( esc_html__( 'Save changes', 'wp-seopress' ) ); ?>
-</form>
+<div id="seopress-admin-settings-root" class="seopress-option">
+	<?php seopress_settings_skeleton(); ?>
+</div>

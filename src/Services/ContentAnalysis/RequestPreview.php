@@ -93,6 +93,22 @@ class RequestPreview {
 
 		$link = $this->getLinkRequest( $id, $taxname );
 
+		// Re-encode the URL path to handle non-Latin characters (Korean, Japanese, etc.)
+		// that may be decoded to raw UTF-8 by get_permalink(), causing wp_remote_get() to fail.
+		$parsed = wp_parse_url( $link );
+		if ( isset( $parsed['path'] ) ) {
+			$segments      = explode( '/', $parsed['path'] );
+			$encoded_parts = array_map(
+				function ( $segment ) {
+					return rawurlencode( rawurldecode( $segment ) );
+				},
+				$segments
+			);
+			$encoded_path  = implode( '/', $encoded_parts );
+
+			$link = str_replace( $parsed['path'], $encoded_path, $link );
+		}
+
 		try {
 			$response = wp_remote_get( $link, $args );
 

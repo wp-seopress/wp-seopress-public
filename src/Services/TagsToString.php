@@ -62,6 +62,12 @@ class TagsToString {
 	 * @return mixed
 	 */
 	public function getValueFromTag( $tag, $context = [] ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		// Validate tag against the whitelist before dispatching.
+		$allowed_tags = array_keys( $this->getTagsAvailable() );
+		if ( ! in_array( $tag, $allowed_tags, true ) ) {
+			return '';
+		}
+
 		// 0 === 'context'
 		// 1 === 'tag'
 		return call_user_func_array(

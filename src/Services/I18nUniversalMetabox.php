@@ -833,6 +833,7 @@ class I18nUniversalMetabox {
 						'wp-seopress'
 					),
 					'freeze_modified_date_section'                   => __( 'Last modified date', 'wp-seopress' ),
+					'current_modified_date'                          => __( 'Current modified date:', 'wp-seopress' ),
 					'freeze_modified_date_tooltip_title'             => __( 'Freeze last modified date', 'wp-seopress' ),
 					'freeze_modified_date_tooltip_description'       => __(
 						'Enable this option to prevent the last modified date from being updated when you save this post. This is recommended for minor updates like fixing typos, formatting changes, or copyright updates that don\'t constitute significant content changes. Google recommends only updating the lastmod date for significant content updates.',

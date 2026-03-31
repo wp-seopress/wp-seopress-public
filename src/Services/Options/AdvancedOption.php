@@ -266,6 +266,15 @@ class AdvancedOption {
 	}
 
 	/**
+	 * The getAdvancedSeznamVerification function.
+	 *
+	 * @since 9.8
+	 */
+	public function getAdvancedSeznamVerification() {
+		return $this->searchOptionByKey( 'seopress_advanced_advanced_seznam' );
+	}
+
+	/**
 	 * The getAdvancedTaxDescEditor function.
 	 *
 	 * @since 6.5
@@ -432,8 +441,26 @@ class AdvancedOption {
 	 *
 	 * @since 9.6
 	 */
-	public function getAppearanceSchemaCol() {
+	public function getAppearanceSchemaCol() { // phpcs:ignore
 		return $this->searchOptionByKey( 'seopress_advanced_appearance_schema_col' );
+	}
+
+	/**
+	 * The getAppearanceFreezeModifiedDate function.
+	 *
+	 * @since 9.7
+	 */
+	public function getAppearanceFreezeModifiedDate() { // phpcs:ignore
+		return $this->searchOptionByKey( 'seopress_advanced_appearance_freeze_modified_date' );
+	}
+
+	/**
+	 * The getAppearanceFreezeModifiedDateCol function.
+	 *
+	 * @since 9.7
+	 */
+	public function getAppearanceFreezeModifiedDateCol() { // phpcs:ignore
+		return $this->searchOptionByKey( 'seopress_advanced_appearance_freeze_modified_date_col' );
 	}
 
 	/**

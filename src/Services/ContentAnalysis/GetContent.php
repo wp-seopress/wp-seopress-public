@@ -200,7 +200,23 @@ class GetContent {
 
 		$permalink = ! empty( $data['permalink'] ) && is_array( $data['permalink'] ) ? $data['permalink']['value'] : '';
 		$permalink = str_replace( '-', ' ', $permalink );
-		$matches   = $this->getMatches( $permalink, isset( $data['keywords'] ) ? $data['keywords'] : array() );
+		$keywords  = isset( $data['keywords'] ) ? $data['keywords'] : array();
+		$matches   = $this->getMatches( $permalink, $keywords );
+
+		// Fallback: try matching transliterated keywords against the permalink slug.
+		// Handles Cyrillic/non-Latin keywords with Latin slugs (e.g. via Cyr-To-Lat plugin).
+		if ( empty( $matches ) && ! empty( $keywords ) ) {
+			$transliterated_kw = array();
+			foreach ( $keywords as $kw ) {
+				$sanitized = sanitize_title( $kw );
+				if ( $sanitized !== $kw ) {
+					$transliterated_kw[] = $sanitized;
+				}
+			}
+			if ( ! empty( $transliterated_kw ) ) {
+				$matches = $this->getMatches( $permalink, $transliterated_kw );
+			}
+		}
 
 		if ( ! empty( $matches ) ) {
 			$desc  = '<p><span class="dashicons dashicons-yes"></span>' . __( 'Cool, one of your target keyword is used in your permalink.', 'wp-seopress' ) . '</p>';

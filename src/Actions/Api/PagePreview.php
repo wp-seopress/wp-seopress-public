@@ -106,7 +106,7 @@ class PagePreview implements ExecuteHooks {
 		}
 
 		$data['analysis_target_kw'] = array(
-			'value' => array_filter( explode( ',', strtolower( get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ) ),
+			'value' => array_filter( explode( ',', strtolower( (string) get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ) ),
 		);
 
 		return new \WP_REST_Response( $data );

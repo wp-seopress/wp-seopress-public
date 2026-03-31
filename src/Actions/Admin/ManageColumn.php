@@ -126,6 +126,9 @@ class ManageColumn implements ExecuteHooksBackend {
 		if ( seopress_get_service( 'AdvancedOption' )->getAppearanceSchemaCol() === '1' ) {
 			$columns['seopress_schema'] = __( 'Schema', 'wp-seopress' );
 		}
+		if ( seopress_get_service( 'AdvancedOption' )->getAppearanceFreezeModifiedDateCol() === '1' ) {
+			$columns['seopress_freeze_date'] = __( 'Freeze date', 'wp-seopress' );
+		}
 
 		return $columns;
 	}
@@ -341,6 +344,15 @@ class ManageColumn implements ExecuteHooksBackend {
 						</svg><span class="screen-reader-text">' . esc_html__( 'Should be improved', 'wp-seopress' ) . '</span></p>';
 					}
 						echo '</div>';
+				}
+				break;
+
+			case 'seopress_freeze_date':
+				$freeze = get_post_meta( $post_id, '_seopress_robots_freeze_modified_date', true );
+				$global = '1' === seopress_get_service( 'AdvancedOption' )->getAppearanceFreezeModifiedDate();
+				if ( 'yes' === $freeze || ( '' === $freeze && $global ) ) {
+					echo '<span class="dashicons dashicons-lock"></span>';
+					echo '<span class="screen-reader-text">' . esc_html__( 'Modified date is frozen', 'wp-seopress' ) . '</span>';
 				}
 				break;
 

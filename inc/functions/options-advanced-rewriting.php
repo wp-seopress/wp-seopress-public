@@ -82,7 +82,7 @@ if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedRemoveCategor
 		}
 
 		$category_base = apply_filters( 'seopress_remove_category_base', $category_base );
-		$category_base = ltrim( $category_base, '/' ) . '/';
+		$category_base = ltrim( (string) $category_base, '/' ) . '/';
 
 		return preg_replace( '`' . preg_quote( $category_base, '`' ) . '`u', '', $termlink, 1 );
 	}
@@ -151,11 +151,20 @@ if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedRemoveProduct
 				array(
 					'taxonomy'   => 'product_cat',
 					'hide_empty' => false,
+					'lang'       => '',
 				)
 			);
 		}
 
 		if ( ! empty( $categories ) ) {
+			usort(
+				$categories,
+				static function ( $a, $b ) {
+					return count( get_ancestors( $b->term_id, 'product_cat', 'taxonomy' ) )
+						- count( get_ancestors( $a->term_id, 'product_cat', 'taxonomy' ) );
+				}
+			);
+
 			$slugs = array_map(
 				function ( $category ) {
 					if ( is_object( $category ) && ! is_wp_error( $category ) ) {
@@ -164,6 +173,7 @@ if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedRemoveProduct
 								$category->term_id,
 								'product_cat',
 								array(
+									'format'    => 'slug',
 									'separator' => '/',
 									'link'      => false,
 								)
@@ -217,7 +227,7 @@ if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedRemoveProduct
 		}
 
 		$category_base = apply_filters( 'seopress_remove_product_category_base', $category_base );
-		$category_base = ltrim( $category_base, '/' ) . '/';
+		$category_base = ltrim( (string) $category_base, '/' ) . '/';
 
 		return preg_replace( '`' . preg_quote( $category_base, '`' ) . '`u', '', $termlink, 1 );
 	}
