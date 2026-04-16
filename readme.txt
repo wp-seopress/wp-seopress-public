@@ -6,7 +6,7 @@ Tags: SEO, google search console, xml sitemap, schema, ai
 Requires at least: 6.2+
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.7.2
+Stable tag: 9.7.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -308,6 +308,15 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.7.3 =
+* FIX Manual custom schema save
+* FIX Video sitemap performance
+* FIX GA4 auth button
+* FIX Mistral multimodal detection and update model list
+* FIX PHP templates warnings
+* FIX CPTs list
+* FIX Instant indexing generate key button
+
 = 9.7.2 =
 * FIX Toggle on PRO settings
 

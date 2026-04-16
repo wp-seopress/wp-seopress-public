@@ -151,13 +151,13 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	// Prepare the URLS.
 	if ( true === $is_manual_submission ) {
 		$urls          = preg_split( '/\r\n|\r|\n/', $urls );
-		$x_source_info = 'https://www.seopress.org/9.7.2/true';
+		$x_source_info = 'https://www.seopress.org/9.7.3/true';
 
 		$urls = array_slice( $urls, 0, 100 );
 	} elseif ( false === $is_manual_submission && ! empty( $permalink ) ) {
 		$urls          = null;
 		$urls[]        = $permalink;
-		$x_source_info = 'https://www.seopress.org/9.7.2/false';
+		$x_source_info = 'https://www.seopress.org/9.7.3/false';
 	}
 
 	// Bing API.
@@ -298,7 +298,9 @@ function seopress_instant_indexing_post() {
 		seopress_instant_indexing_fn();
 	}
 
-	wp_send_json_success();
+	wp_send_json_success( array(
+		'log' => get_option( 'seopress_instant_indexing_log_option_name', array() ),
+	) );
 }
 add_action( 'wp_ajax_seopress_instant_indexing_post', 'seopress_instant_indexing_post' );
 

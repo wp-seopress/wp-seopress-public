@@ -218,7 +218,59 @@ class ModuleSettings implements ExecuteHooks {
 		);
 
 		// Load translations for the React settings bundle.
-		wp_set_script_translations( 'seopress-admin-settings', 'wp-seopress', SEOPRESS_PLUGIN_DIR_PATH . 'languages' );
+		// Point to wp-content/languages/plugins/ where GlotPress language packs are stored.
+		wp_set_script_translations( 'seopress-admin-settings', 'wp-seopress', WP_LANG_DIR . '/plugins' );
+
+		// Merge translations from lazy-loaded webpack chunks into the main script.
+		// GlotPress generates a separate JSON per chunk, but wp_set_script_translations
+		// only loads the one matching the main bundle. This filter merges all of them.
+		add_filter(
+			'pre_load_script_translations',
+			function ( $translations, $file, $handle, $domain ) {
+				if ( 'seopress-admin-settings' !== $handle || 'wp-seopress' !== $domain ) {
+					return $translations;
+				}
+
+				$locale    = determine_locale();
+				$cache_key = 'seopress_i18n_merged_' . $locale;
+				$cached    = wp_cache_get( $cache_key, 'seopress' );
+
+				if ( false !== $cached ) {
+					return $cached;
+				}
+
+				$lang_dir = WP_LANG_DIR . '/plugins';
+				$merged   = array( 'locale_data' => array( 'messages' => array( '' => array() ) ) );
+
+				foreach ( glob( $lang_dir . '/wp-seopress-' . $locale . '-*.json' ) as $json_file ) {
+					$content = file_get_contents( $json_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+					if ( ! $content ) {
+						continue;
+					}
+					$data = json_decode( $content, true );
+					if ( ! isset( $data['locale_data']['messages'] ) ) {
+						continue;
+					}
+					foreach ( $data['locale_data']['messages'] as $key => $value ) {
+						if ( '' === $key ) {
+							if ( empty( $merged['locale_data']['messages'][''] ) ) {
+								$merged['locale_data']['messages'][''] = $value;
+							}
+							continue;
+						}
+						$merged['locale_data']['messages'][ $key ] = $value;
+					}
+				}
+
+				$result = wp_json_encode( $merged );
+
+				wp_cache_set( $cache_key, $result, 'seopress' );
+
+				return $result;
+			},
+			10,
+			4
+		);
 
 		// Get post types for the settings.
 		$post_types = $this->getPostTypes();
@@ -271,6 +323,9 @@ class ModuleSettings implements ExecuteHooks {
 				'IMAGE_SIZES'         => array_merge( get_intermediate_image_sizes(), array( 'full' ) ),
 			'USER_ROLES'          => $this->getUserRoles(),
 			'INDEXING_LOG'        => get_option( 'seopress_instant_indexing_log_option_name', array() ),
+			'INDEXING_NONCES'     => array(
+				'submit' => wp_create_nonce( 'seopress_instant_indexing_post_nonce' ),
+			),
 			'AJAX_URL'            => admin_url( 'admin-ajax.php' ),
 			'FEATURE_TOGGLES'     => $this->getFeatureToggles(),
 			'TOGGLE_NONCE'        => wp_create_nonce( 'seopress_toggle_features_nonce' ),
@@ -292,21 +347,30 @@ class ModuleSettings implements ExecuteHooks {
 	 * @return array
 	 */
 	private function getPostTypes() {
-		$post_types = get_post_types(
-			array(
-				'public'  => true,
-				'show_ui' => true,
-			),
-			'objects'
+		$args = array( 'public' => true );
+		$args = apply_filters( 'seopress_get_post_types_args', $args );
+
+		$post_types = get_post_types( $args, 'objects' );
+
+		// Filter to only include viewable post types (matches WordPressData service).
+		$post_types = array_filter( $post_types, 'is_post_type_viewable' );
+
+		unset(
+			$post_types['attachment'],
+			$post_types['seopress_rankings'],
+			$post_types['seopress_backlinks'],
+			$post_types['seopress_404'],
+			$post_types['elementor_library'],
+			$post_types['customer_discount'],
+			$post_types['cuar_private_file'],
+			$post_types['cuar_private_page'],
+			$post_types['ct_template'],
+			$post_types['bricks_template']
 		);
 
 		$result = array();
 
 		foreach ( $post_types as $post_type ) {
-			if ( 'attachment' === $post_type->name ) {
-				continue;
-			}
-
 			$result[] = array(
 				'name'        => $post_type->name,
 				'label'       => $post_type->label,

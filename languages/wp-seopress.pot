@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-31T14:23:22+00:00\n"
+"POT-Creation-Date: 2026-04-02T13:58:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-seopress\n"
@@ -111,8 +111,8 @@ msgstr ""
 #: inc/admin/blocks/features-list.php:60
 #: src/Actions/Admin/ModuleSettings.php:131
 #: app/react/admin/settings/pages/InstantIndexingPage.jsx:60
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:36
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:74
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Instant Indexing"
 msgstr ""
 
@@ -1605,8 +1605,8 @@ msgid "Content analysis"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-term-metaboxes.php:44
-#: seopress-functions.php:470
-#: seopress-functions.php:500
+#: seopress-functions.php:474
+#: seopress-functions.php:504
 msgid "WARNING"
 msgstr ""
 
@@ -1942,7 +1942,7 @@ msgstr ""
 #: app/react/admin/settings/pages/InstantIndexingPage.jsx:10
 #: app/react/admin/settings/pages/SitemapsPage.jsx:12
 #: public/admin/settings/57.3ab8d144d721e3bd195b.js:1
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "General"
 msgstr ""
 
@@ -2791,8 +2791,8 @@ msgid "Unable to read the import file"
 msgstr ""
 
 #: inc/functions/options-instant-indexing.php:132
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:130
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:176
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "No URLs to submit"
 msgstr ""
 
@@ -2853,23 +2853,23 @@ msgid "Custom Taxonomies"
 msgstr ""
 
 #. translators: %1$s: "Custom Post Types" or "Custom Taxonomies", %2$s: "title" or "description"
-#: seopress-functions.php:445
+#: seopress-functions.php:449
 msgid "Some <strong>%1$s</strong> have no <strong>meta %2$s</strong> set! We strongly encourage you to add one by filling in the fields below."
 msgstr ""
 
-#: seopress-functions.php:471
+#: seopress-functions.php:475
 msgid "Do NOT change your permalink structure on a production site. Changing URLs can severely damage your SEO."
 msgstr ""
 
-#: seopress-functions.php:501
+#: seopress-functions.php:505
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
-#: seopress-functions.php:721
+#: seopress-functions.php:725
 #: app/react/admin/settings/components/SettingsLayout/SaveBar.jsx:58
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:56
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:94
 #: public/admin/settings.js:2
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Save changes"
 msgstr ""
 
@@ -2886,12 +2886,12 @@ msgid "Export completed!"
 msgstr ""
 
 #: seopress.php:670
-#: src/Actions/Admin/ModuleSettings.php:412
+#: src/Actions/Admin/ModuleSettings.php:476
 #: app/react/admin/settings/pages/InstantIndexingPage.jsx:11
 #: app/react/admin/settings/pages/ToolsPage.jsx:31
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:54
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:92
 #: public/admin/settings/298.d867b2250b3a54e422e4.js:2
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Settings"
 msgstr ""
 
@@ -2971,13 +2971,13 @@ msgstr ""
 msgid "Modified date is frozen"
 msgstr ""
 
-#: src/Actions/Admin/ModuleSettings.php:413
+#: src/Actions/Admin/ModuleSettings.php:477
 #: app/react/admin/settings/pages/ToolsPage.jsx:32
 #: public/admin/settings/298.d867b2250b3a54e422e4.js:2
 msgid "Plugins"
 msgstr ""
 
-#: src/Actions/Admin/ModuleSettings.php:414
+#: src/Actions/Admin/ModuleSettings.php:478
 #: app/react/admin/settings/pages/ToolsPage.jsx:33
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:19
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:26
@@ -5617,7 +5617,7 @@ msgid "Discard changes"
 msgstr ""
 
 #: app/react/admin/settings/components/UrlCounter.jsx:22
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "URLs"
 msgstr ""
 
@@ -6533,10 +6533,10 @@ msgid "it to edit a specific settings page."
 msgstr ""
 
 #: app/react/admin/settings/tabs/analytics/AdvancedTab.jsx:8
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:142
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:188
 #: app/react/admin/settings/tabs/social/KnowledgeGraphTab.jsx:10
 #: app/react/admin/settings/tabs/social/KnowledgeGraphTab.jsx:30
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 #: public/admin/settings/423.8dd00e85459a8a01ac2b.js:1
 #: public/admin/settings/891.cf85e8ba7fd3f3e1d08a.js:1
 msgid "None"
@@ -7541,191 +7541,211 @@ msgstr ""
 msgid "Disable heatmaps & session recordings"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:30
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "Update URLs"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:31
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "Remove URLs"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:39
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "You can use the Indexing API to tell Google & Bing to update or remove pages from the Google / Bing index. The process can takes few minutes. You can submit your URLs in batches of 100 (max 200 request per day for Google)."
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:45
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "401 / 403 error?"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:52
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "How does this work?"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:54
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "Setup your Google / Bing API keys from the"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:54
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "tab"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:55
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "Enter your URLs"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:55
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "to index to the field below"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:57
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "Click"
-msgstr ""
-
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:57
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:101
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:61
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:95
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Submit URLs to Google & Bing"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:61
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "Select search engines"
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:62
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Submit URLs to Google"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:74
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
-msgid "Google action"
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:63
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Submit URLs to Bing"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:64
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Submit URLs"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:68
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Update URLs"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:69
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Remove URLs"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:77
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "You can use the Indexing API to tell Google & Bing to update or remove pages from the Google / Bing index. The process can takes few minutes. You can submit your URLs in batches of 100 (max 200 request per day for Google)."
 msgstr ""
 
 #: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:83
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "401 / 403 error?"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:90
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "How does this work?"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:92
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Setup your Google / Bing API keys from the"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:92
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "tab"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:93
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Enter your URLs"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:93
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "to index to the field below"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:95
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Click"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:99
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Select search engines"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:112
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Google action"
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:121
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Submit URLs for indexing"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:87
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:125
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Enter one URL per line to submit them to search engines (max 100 URLs)"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:95
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:133
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "The Google Indexing API should only be used to crawl pages that contain structured data of type"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:95
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:133
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "or"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:95
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:133
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "in a"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:95
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:133
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "element."
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:105
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:145
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
+msgid "Submitting..."
+msgstr ""
+
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:151
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Latest indexing request"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:109
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:155
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Date:"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:133
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:179
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Latest URLs submitted"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:14
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:24
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Edit your Instant Indexing settings for Google and Bing."
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:17
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:27
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Google Indexing API key"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:21
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:31
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Paste your Google JSON key file here"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:25
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:35
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "To use the"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:28
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:31
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:38
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:41
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Google Indexing API"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:34
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:44
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "and generate your JSON key file, please"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:37
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:40
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:47
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:50
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "follow our guide"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:47
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:57
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Bing Indexing API key"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:51
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:61
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Enter your Bing Instant Indexing API"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:54
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:68
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Generate key"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:57
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:71
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "The Bing Indexing API key is automatically generated. Click Generate key if you want to recreate it, or if it's missing."
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:60
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:74
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "A key should look like this:"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:64
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:78
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Automatic submission"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:66
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:80
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Enable automatic URL submission for IndexNow API"
 msgstr ""
 
-#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:69
-#: public/admin/settings/349.15147fd09b795fcf6125.js:1
+#: app/react/admin/settings/tabs/instant-indexing/SettingsTab.jsx:83
+#: public/admin/settings/349.af57beaa6b352799017f.js:2
 msgid "Notify search engines using IndexNow protocol (currently Bing and Yandex) whenever a post is created, updated or deleted."
 msgstr ""
 

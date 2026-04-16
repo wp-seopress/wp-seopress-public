@@ -398,7 +398,11 @@ function seopress_get_empty_templates( $type, $metadata, $notice = true ) {
 		$templates   = seopress_get_service( 'WordPressData' )->getTaxonomies();
 		$notice_i18n = __( 'Custom Taxonomies', 'wp-seopress' );
 	}
+	if ( ! is_array( $templates ) && ! is_object( $templates ) ) {
+		$templates = array();
+	}
 	foreach ( $templates as $key => $value ) {
+		$data    = '';
 		$options = get_option( 'seopress_titles_option_name' );
 
 		if ( ! empty( $options ) ) {
