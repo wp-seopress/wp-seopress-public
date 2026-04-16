@@ -151,13 +151,13 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	// Prepare the URLS.
 	if ( true === $is_manual_submission ) {
 		$urls          = preg_split( '/\r\n|\r|\n/', $urls );
-		$x_source_info = 'https://www.seopress.org/9.7.3/true';
+		$x_source_info = 'https://www.seopress.org/9.7.4/true';
 
 		$urls = array_slice( $urls, 0, 100 );
 	} elseif ( false === $is_manual_submission && ! empty( $permalink ) ) {
 		$urls          = null;
 		$urls[]        = $permalink;
-		$x_source_info = 'https://www.seopress.org/9.7.3/false';
+		$x_source_info = 'https://www.seopress.org/9.7.4/false';
 	}
 
 	// Bing API.
@@ -266,7 +266,26 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 				$results = $e->getMessage();
 			}
 
-			$log['google']['response'] = $results;
+			if ( is_array( $results ) ) {
+					$clean = array();
+					foreach ( $results as $key => $result ) {
+						if ( $result instanceof Google_Model ) {
+							$clean[ $key ] = json_decode( wp_json_encode( $result->toSimpleObject() ), true );
+						} elseif ( $result instanceof \Exception ) {
+							$clean[ $key ] = array(
+								'error' => array(
+									'code'    => $result->getCode(),
+									'message' => $result->getMessage(),
+								),
+							);
+						} else {
+							$clean[ $key ] = $result;
+						}
+					}
+					$log['google']['response'] = $clean;
+				} else {
+					$log['google']['response'] = $results;
+				}
 		} elseif ( '1' === $engines['google'] ) {
 			$log['google']['response']['error'] = array(
 				'code'    => 401,

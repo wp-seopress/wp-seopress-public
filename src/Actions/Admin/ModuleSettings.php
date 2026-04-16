@@ -327,6 +327,7 @@ class ModuleSettings implements ExecuteHooks {
 				'submit' => wp_create_nonce( 'seopress_instant_indexing_post_nonce' ),
 			),
 			'AJAX_URL'            => admin_url( 'admin-ajax.php' ),
+			'PANELS_STATE'              => 'titles' === $page_config['type'] ? $this->getPanelsState() : new \stdClass(),
 			'FEATURE_TOGGLES'     => $this->getFeatureToggles(),
 			'TOGGLE_NONCE'        => wp_create_nonce( 'seopress_toggle_features_nonce' ),
 			'MIGRATION_NONCES'    => $this->getMigrationNonces(),
@@ -539,6 +540,22 @@ class ModuleSettings implements ExecuteHooks {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Get current user's panels expand/collapse state.
+	 *
+	 * @return array
+	 */
+	private function getPanelsState() {
+		$user_id = get_current_user_id();
+		$state   = get_user_meta( $user_id, 'seopress_panels_state', true );
+
+		if ( ! is_array( $state ) ) {
+			$state = array();
+		}
+
+		return $state;
 	}
 
 }
