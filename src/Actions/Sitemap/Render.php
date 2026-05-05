@@ -181,16 +181,19 @@ class Render implements ExecuteHooksFrontend {
 	 * @return void
 	 */
 	private function render_cpt_sitemap( $cpt ) {
-		// Check if it's a post type.
+		// Check if it's a post type included in the sitemap.
+		// Unticking a CPT in the settings only unsets the 'include' flag, the key
+		// itself stays in the option array. We must check the flag, not just the key,
+		// otherwise per-CPT URLs (e.g. /post-sitemap.xml) keep responding after removal.
 		$post_types = seopress_get_service( 'SitemapOption' )->getPostTypesList();
-		if ( ! empty( $post_types ) && array_key_exists( $cpt, $post_types ) ) {
+		if ( ! empty( $post_types[ $cpt ]['include'] ) && '1' === $post_types[ $cpt ]['include'] ) {
 			seopress_get_service( 'SitemapRenderSingle' )->render();
 			exit();
 		}
 
-		// Check if it's a taxonomy.
+		// Check if it's a taxonomy included in the sitemap.
 		$taxonomies = seopress_get_service( 'SitemapOption' )->getTaxonomiesList();
-		if ( ! empty( $taxonomies ) && array_key_exists( $cpt, $taxonomies ) ) {
+		if ( ! empty( $taxonomies[ $cpt ]['include'] ) && '1' === $taxonomies[ $cpt ]['include'] ) {
 			$this->render_template( 'template-xml-sitemaps-single-term.php' );
 			return;
 		}

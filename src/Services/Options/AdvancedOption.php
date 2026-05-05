@@ -44,36 +44,12 @@ class AdvancedOption {
 	}
 
 	/**
-	 * The getAccessUniversalMetaboxGutenberg function.
-	 *
-	 * @return string
-	 */
-	public function getAccessUniversalMetaboxGutenberg() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'seopress_advanced_appearance_universal_metabox' );
-	}
-
-	/**
 	 * The getAppearanceNotification function.
 	 *
 	 * @return string
 	 */
 	public function getAppearanceNotification() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		return $this->searchOptionByKey( 'seopress_advanced_appearance_notifications' );
-	}
-
-	/**
-	 * The getDisableUniversalMetaboxGutenberg function.
-	 *
-	 * @return string
-	 */
-	public function getDisableUniversalMetaboxGutenberg() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$data = $this->getOption();
-
-		if ( ! isset( $data['seopress_advanced_appearance_universal_metabox_disable'] ) ) {
-			return true;
-		}
-
-		return '1' === $data['seopress_advanced_appearance_universal_metabox_disable'];
 	}
 
 	/**
@@ -322,10 +298,14 @@ class AdvancedOption {
 	/**
 	 * The getAppearanceMetaboxePosition function.
 	 *
-	 * @since 5.4
+	 * @since      5.4
+	 * @deprecated 9.8.0 The "Move SEO metabox's position" option was removed; always use default priority.
+	 * @todo       Remove after 2027-04-22 (kept for ~1 year to prevent fatal errors in older Pro releases calling this method).
+	 *
+	 * @return null
 	 */
 	public function getAppearanceMetaboxePosition() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'seopress_advanced_appearance_metaboxe_position' );
+		return null;
 	}
 
 	/**
@@ -418,14 +398,6 @@ class AdvancedOption {
 		return $this->searchOptionByKey( 'seopress_advanced_appearance_outbound_col' );
 	}
 
-	/**
-	 * The getAppearancePsCol function.
-	 *
-	 * @since 5.4
-	 */
-	public function getAppearancePsCol() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'seopress_advanced_appearance_ps_col' );
-	}
 
 	/**
 	 * The getAppearanceScoreCol function.
@@ -614,5 +586,41 @@ class AdvancedOption {
 	 */
 	public function getAdvancedCommentsFormLinkDisable() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		return $this->searchOptionByKey( 'seopress_advanced_advanced_comments_form_link' );
+	}
+
+	/**
+	 * The getAccessUniversalMetaboxGutenberg function.
+	 *
+	 * @deprecated 9.8.0 The Universal SEO metabox toggle was removed; the React metabox is always enabled.
+	 * @todo       Remove after 2027-04-22 (kept for ~1 year to prevent fatal errors in older Pro releases calling this method).
+	 *
+	 * @return null
+	 */
+	public function getAccessUniversalMetaboxGutenberg() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return null;
+	}
+
+	/**
+	 * The getDisableUniversalMetaboxGutenberg function.
+	 *
+	 * @deprecated 9.8.0 The Universal SEO metabox toggle was removed; the React metabox is always enabled.
+	 * @todo       Remove after 2027-04-22 (kept for ~1 year to prevent fatal errors in older Pro releases calling this method).
+	 *
+	 * @return null
+	 */
+	public function getDisableUniversalMetaboxGutenberg() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return null;
+	}
+
+	/**
+	 * The getAppearancePsCol function.
+	 *
+	 * @deprecated 9.8.0 The Google PageSpeed column was removed.
+	 * @todo       Remove after 2027-04-22 (kept for ~1 year to prevent fatal errors in older Pro releases calling this method).
+	 *
+	 * @return null
+	 */
+	public function getAppearancePsCol() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return null;
 	}
 }

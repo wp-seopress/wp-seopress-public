@@ -2,10 +2,24 @@
     "@context": "https://schema.org",
     "@type": "[[type]]",
     "name": "[[name]]",
+    "legalName": "[[legal_name]]",
     "url": "[[url]]",
     "alternateName": "[[alternate_name]]",
     "description": "[[description]]",
     "logo": "[[logo]]",
+    "foundingDate": "[[founding_date]]",
+    "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": "[[employees]]"
+    },
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "[[street]]",
+        "addressLocality": "[[locality]]",
+        "addressRegion": "[[region]]",
+        "postalCode": "[[postal_code]]",
+        "addressCountry": "[[country]]"
+    },
     "sameAs": [
         "[[account_facebook]]",
         "[[account_twitter]]",

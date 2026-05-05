@@ -784,19 +784,6 @@ function seopress_social_facebook_link_ownership_id_hook() {
 }
 add_action( 'wp_head', 'seopress_social_facebook_link_ownership_id_hook', 1 );
 
-/**
- * OG Facebook Admin ID
- */
-function seopress_social_facebook_admin_id_hook() {
-	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookAdminID() ) {
-		$seopress_social_admin_id = '<meta property="fb:admins" content="' . esc_attr( seopress_get_service( 'SocialOption' )->getSocialFacebookAdminID() ) . '">';
-
-		if ( ! is_404() ) {
-			echo $seopress_social_admin_id . "\n";
-		}
-	}
-}
-add_action( 'wp_head', 'seopress_social_facebook_admin_id_hook', 1 );
 
 /**
  * OG Facebook App ID
@@ -1249,21 +1236,3 @@ function seopress_social_twitter_img_hook() {
 }
 add_action( 'wp_head', 'seopress_social_twitter_img_hook', 1 );
 
-/**
- * Social Fv Creator Hook
- */
-function seopress_social_fv_creator_hook() {
-	if ( ! empty( seopress_get_service( 'SocialOption' )->getSocialFvCreator() ) ) {
-		$fv_creator = seopress_get_service( 'SocialOption' )->getSocialFvCreator() ?? '';
-
-		$seopress_social_fv_creator = '<meta name="fediverse:creator" content="' . esc_attr( $fv_creator ) . '" />';
-
-		$seopress_social_fv_creator = apply_filters( 'seopress_social_fv_creator', $seopress_social_fv_creator );
-
-		if ( is_singular() ) {
-			echo $seopress_social_fv_creator . "\n";
-		}
-	}
-}
-
-add_action( 'wp_head', 'seopress_social_fv_creator_hook', 1 );

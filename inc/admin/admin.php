@@ -317,12 +317,6 @@ class SEOPressOptions {
 	 * @return array Sanitized input.
 	 */
 	public function sanitize( $input ) {
-		if ( isset( $_POST['option_page'] ) && 'seopress_advanced_option_group' === $_POST['option_page'] ) {
-			if ( ! isset( $input['seopress_advanced_appearance_universal_metabox_disable'] ) ) {
-				$input['seopress_advanced_appearance_universal_metabox_disable'] = '';
-			}
-		}
-
 		return seopress_sanitize_options_fields( $input );
 	}
 

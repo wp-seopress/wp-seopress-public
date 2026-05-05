@@ -118,22 +118,16 @@ function seopress_display_seo_metaboxe() {
 	 * Init metaboxe
 	 */
 	function seopress_init_metabox() {
-		if ( seopress_get_service( 'AdvancedOption' )->getAppearanceMetaboxePosition() !== null ) {
-			$metaboxe_position = seopress_get_service( 'AdvancedOption' )->getAppearanceMetaboxePosition();
-		} else {
-			$metaboxe_position = 'default';
-		}
-
 		$seopress_get_post_types = seopress_get_service( 'WordPressData' )->getPostTypes();
 
 		$seopress_get_post_types = apply_filters( 'seopress_metaboxe_seo', $seopress_get_post_types );
 
 		if ( ! empty( $seopress_get_post_types ) && ! seopress_get_service( 'EnqueueModuleMetabox' )->canEnqueue() ) {
 			foreach ( $seopress_get_post_types as $key => $value ) {
-				add_meta_box( 'seopress_cpt', __( 'SEO', 'wp-seopress' ), 'seopress_cpt', $key, 'normal', $metaboxe_position );
+				add_meta_box( 'seopress_cpt', __( 'SEO', 'wp-seopress' ), 'seopress_cpt', $key, 'normal', 'default' );
 			}
 		}
-		add_meta_box( 'seopress_cpt', __( 'SEO', 'wp-seopress' ), 'seopress_cpt', 'seopress_404', 'normal', $metaboxe_position );
+		add_meta_box( 'seopress_cpt', __( 'SEO', 'wp-seopress' ), 'seopress_cpt', 'seopress_404', 'normal', 'default' );
 	}
 
 	/**
@@ -142,8 +136,6 @@ function seopress_display_seo_metaboxe() {
 	 * @param object $post Post object.
 	 */
 	function seopress_cpt( $post ) {
-		global $typenow;
-		global $wp_version;
 		$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_nonce_field( plugin_basename( __FILE__ ), 'seopress_cpt_nonce' );
 
@@ -152,80 +144,8 @@ function seopress_display_seo_metaboxe() {
 
 		wp_enqueue_script( 'seopress-cpt-tabs', SEOPRESS_ASSETS_DIR . '/js/seopress-metabox' . $prefix . '.js', [ 'jquery-ui-tabs' ], SEOPRESS_VERSION, true );
 
-		if ( 'seopress_404' !== $typenow ) {
-			wp_enqueue_script( 'jquery-ui-accordion' );
-
-			// Tagify.
-			wp_enqueue_script( 'seopress-tagify', SEOPRESS_ASSETS_DIR . '/js/tagify' . $prefix . '.js', [ 'jquery' ], SEOPRESS_VERSION, true );
-			wp_register_style( 'seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify' . $prefix . '.css', [], SEOPRESS_VERSION );
-			wp_enqueue_style( 'seopress-tagify' );
-
-			// Register Google Snippet Preview / Content Analysis JS.
-			wp_enqueue_script(
-				'seopress-cpt-counters',
-				SEOPRESS_ASSETS_DIR . '/js/seopress-counters' . $prefix . '.js',
-				array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-accordion' ),
-				SEOPRESS_VERSION,
-				array(
-					'strategy'  => 'defer',
-					'in_footer' => true,
-				)
-			);
-
-			// If Gutenberg ON.
-			if ( function_exists( 'get_current_screen' ) ) {
-				$get_current_screen = get_current_screen();
-				if ( isset( $get_current_screen->is_block_editor ) ) {
-					if ( $get_current_screen->is_block_editor ) {
-						wp_enqueue_script( 'seopress-block-editor', SEOPRESS_ASSETS_DIR . '/js/seopress-block-editor' . $prefix . '.js', array( 'jquery' ), SEOPRESS_VERSION, true );
-						if ( post_type_supports( get_post_type( $post ), 'custom-fields' ) ) {
-							wp_enqueue_script( 'seopress-pre-publish-checklist', SEOPRESS_URL_PUBLIC . '/editor/pre-publish-checklist/index.js', array(), SEOPRESS_VERSION, true );
-						}
-						// Only enqueue toolbar button if universal metabox is not disabled and enabled for this post type.
-						if (
-							! seopress_get_service( 'AdvancedOption' )->getDisableUniversalMetaboxGutenberg() &&
-							seopress_get_service( 'AdvancedOption' )->getAccessUniversalMetaboxGutenberg() &&
-							'1' !== seopress_get_service( 'TitleOption' )->getSingleCptEnable( $post->post_type )
-						) {
-							wp_enqueue_script( 'seopress-sidebar-panel', SEOPRESS_URL_PUBLIC . '/editor/sidebar-panel/index.js', array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-i18n' ), SEOPRESS_VERSION, true );
-						}
-						if ( version_compare( $wp_version, '5.8', '>=' ) ) {
-							global $pagenow;
-
-							if ( ( 'post' === $typenow || 'product' === $typenow ) && ( 'post.php' === $pagenow || 'post-new.php' === $pagenow ) ) {
-								wp_enqueue_script( 'seopress-primary-category', SEOPRESS_URL_PUBLIC . '/editor/primary-category-select/index.js', array( 'wp-hooks' ), SEOPRESS_VERSION, true );
-							}
-						}
-					} elseif ( 'post' === $typenow || 'product' === $typenow ) {
-							$seopress_robots_primary_cat = get_post_meta( $post->ID, '_seopress_robots_primary_cat', true );
-							wp_enqueue_script( 'seopress-primary-category-classic', SEOPRESS_ASSETS_DIR . '/js/seopress-primary-category-classic.js', array(), SEOPRESS_VERSION, true );
-							wp_localize_script(
-								'seopress-primary-category-classic',
-								'seopressPrimaryCategorySelectData',
-								array(
-									'selectHTML'      => seopress_primary_category_select( false, false ),
-									'primaryCategory' => $seopress_robots_primary_cat,
-								)
-							);
-					}
-				}
-			}
-
-			wp_enqueue_script( 'seopress-cpt-video-sitemap', SEOPRESS_ASSETS_DIR . '/js/seopress-sitemap-video' . $prefix . '.js', array( 'jquery', 'jquery-ui-accordion' ), SEOPRESS_VERSION, true );
-
-			$seopress_real_preview = array(
-				'seopress_nonce'               => wp_create_nonce( 'seopress_real_preview_nonce' ), // @deprecated 4.4.0
-				'seopress_real_preview'        => admin_url( 'admin-ajax.php' ), // @deprecated 4.4.0
-				'i18n'                         => array( 'progress' => __( 'Analysis in progress...', 'wp-seopress' ) ),
-				'ajax_url'                     => admin_url( 'admin-ajax.php' ),
-				'get_preview_meta_title'       => wp_create_nonce( 'get_preview_meta_title' ),
-				'get_preview_meta_description' => wp_create_nonce( 'get_preview_meta_description' ),
-			);
-			wp_localize_script( 'seopress-cpt-counters', 'seopressAjaxRealPreview', $seopress_real_preview );
-
-			wp_enqueue_script( 'seopress-media-uploader', SEOPRESS_ASSETS_DIR . '/js/seopress-media-uploader' . $prefix . '.js', array( 'jquery' ), SEOPRESS_VERSION, false );
-			wp_enqueue_media();
-		}
+		// Note: Classic metabox is now only used for seopress_404 post type.
+		// Universal metabox handles all other post types.
 
 		$seopress_titles_title = get_post_meta( $post->ID, '_seopress_titles_title', true );
 		$seopress_titles_desc  = get_post_meta( $post->ID, '_seopress_titles_desc', true );
@@ -505,19 +425,13 @@ function seopress_display_ca_metaboxe() {
 	 * Init CA metabox
 	 */
 	function seopress_init_ca_metabox() {
-		if ( seopress_get_service( 'AdvancedOption' )->getAppearanceMetaboxePosition() !== null ) {
-			$metaboxe_position = seopress_get_service( 'AdvancedOption' )->getAppearanceMetaboxePosition();
-		} else {
-			$metaboxe_position = 'default';
-		}
-
 		$seopress_get_post_types = seopress_get_service( 'WordPressData' )->getPostTypes();
 
 		$seopress_get_post_types = apply_filters( 'seopress_metaboxe_content_analysis', $seopress_get_post_types );
 
 		if ( ! empty( $seopress_get_post_types ) && ! seopress_get_service( 'EnqueueModuleMetabox' )->canEnqueue() ) {
 			foreach ( $seopress_get_post_types as $key => $value ) {
-				add_meta_box( 'seopress_content_analysis', __( 'Content analysis', 'wp-seopress' ), 'seopress_content_analysis', $key, 'normal', $metaboxe_position );
+				add_meta_box( 'seopress_content_analysis', __( 'Content analysis', 'wp-seopress' ), 'seopress_content_analysis', $key, 'normal', 'default' );
 			}
 		}
 	}
@@ -627,7 +541,6 @@ function seopress_display_ca_metaboxe() {
 if ( is_user_logged_in() ) {
 	if ( is_super_admin() ) {
 		echo seopress_display_seo_metaboxe();
-		echo seopress_display_ca_metaboxe();
 	} else {
 		global $wp_roles;
 		$user = wp_get_current_user();
@@ -644,17 +557,6 @@ if ( is_user_logged_in() ) {
 				}
 			} else {
 				echo seopress_display_seo_metaboxe();
-			}
-
-			// If current user role matchs values from Security settings then apply -- SEO Content Analysis.
-			if ( ! empty( seopress_get_service( 'AdvancedOption' )->getSecurityMetaboxRoleContentAnalysis() ) ) {
-				if ( array_key_exists( $seopress_user_role, seopress_get_service( 'AdvancedOption' )->getSecurityMetaboxRoleContentAnalysis() ) ) {
-					// Do nothing.
-				} else {
-					echo seopress_display_ca_metaboxe();
-				}
-			} else {
-				echo seopress_display_ca_metaboxe();
 			}
 		}
 	}

@@ -19,9 +19,9 @@ class EnqueueModuleMetabox {
 	public function canEnqueue() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		$response = true;
 
-		// WordPress 6.2+ is required for the universal metabox (React 18 support).
+		// WordPress 6.5+ is required for the universal metabox (stable ProgressBar in @wordpress/components).
 		global $wp_version;
-		if ( version_compare( $wp_version, '6.2', '<' ) ) {
+		if ( version_compare( $wp_version, '6.5', '<' ) ) {
 			return false;
 		}
 
@@ -65,22 +65,6 @@ class EnqueueModuleMetabox {
 
 		if ( get_the_ID() === (int) get_option( 'page_for_posts' ) ) {
 			$response = true;
-		}
-
-		if ( function_exists( 'get_current_screen' ) ) {
-			$current_screen = \get_current_screen();
-
-			if ( $current_screen && method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() === false ) {
-				$response = false;
-			}
-
-			if ( $current_screen && ! seopress_get_service( 'AdvancedOption' )->getAccessUniversalMetaboxGutenberg() && method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() !== false ) {
-				$response = false;
-			}
-		}
-
-		if ( seopress_get_service( 'AdvancedOption' )->getDisableUniversalMetaboxGutenberg() ) {
-			$response = false;
 		}
 
 		if ( ! current_user_can( 'edit_posts' ) ) {

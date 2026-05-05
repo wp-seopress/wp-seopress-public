@@ -78,6 +78,7 @@ jQuery(document).ready(function ($) {
         "rewrite",
         "white-label",
         "ai",
+        "agent-ready",
         "universal-metabox"
     ]
     features.forEach(function (item) {
@@ -210,27 +211,47 @@ jQuery(document).ready(function ($) {
     if (typeof sessionStorage != 'undefined') {
         var seopress_admin_tab_session_storage = sessionStorage.getItem("seopress_admin_tab");
 
-        if (clean_hash[1] == '1') { //Analytics Tab
-            $('#tab_seopress_analytics-tab').addClass("nav-tab-active");
-            $('#tab_seopress_analytics').addClass("active");
-        } else if (clean_hash[1] == '2') { //Matomo Tab
-            $('#tab_seopress_matomo-tab').addClass("nav-tab-active");
-            $('#tab_seopress_matomo').addClass("active");
-        } else if (clean_hash[1] == '3') { //Page Speed Tab
-            $('#tab_seopress_ps-tab').addClass("nav-tab-active");
-            $('#tab_seopress_ps_tools').addClass("active");
-        } else if (clean_hash[1] == '4') { //GSC Tab
-            $('#tab_seopress_gsc-tab').addClass("nav-tab-active");
-            $('#tab_seopress_gsc').addClass("active");
+        // Activate a tab only if its nav-tab is actually rendered, otherwise fall back to the first available tab.
+        function seopressActivateDashboardTab(tabKey) {
+            var $navTab = tabKey ? $('#' + tabKey + '-tab') : $();
+            if ($navTab.length) {
+                $('#seopress-admin-tabs').find('.nav-tab.nav-tab-active').removeClass("nav-tab-active");
+                $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");
+                $navTab.addClass("nav-tab-active");
+                $('#' + tabKey).addClass("active");
+                return true;
+            }
+            return false;
+        }
+
+        function seopressActivateDefaultDashboardTab() {
+            var $firstNavTab = $('#seopress-admin-tabs a.nav-tab').first();
+            if (!$firstNavTab.length) {
+                return;
+            }
+            var hrefParts = ($firstNavTab.attr('href') || '').split('#tab=');
+            var defaultTab = hrefParts[1] || $firstNavTab.attr('id').replace(/-tab$/, '');
+            seopressActivateDashboardTab(defaultTab);
+        }
+
+        var hashTabMap = {
+            '1': 'tab_seopress_analytics',
+            '2': 'tab_seopress_matomo',
+            '3': 'tab_seopress_ps',
+            '4': 'tab_seopress_gsc'
+        };
+
+        if (hashTabMap[clean_hash[1]]) {
+            if (!seopressActivateDashboardTab(hashTabMap[clean_hash[1]])) {
+                seopressActivateDefaultDashboardTab();
+            }
         } else if (seopress_admin_tab_session_storage) {
-            $('#seopress-admin-tabs').find('.nav-tab.nav-tab-active').removeClass("nav-tab-active");
-            $('#seopress-admin-tabs').find('.seopress-tab.active').removeClass("active");
-            $('#' + seopress_admin_tab_session_storage.split('#tab=') + '-tab').addClass("nav-tab-active");
-            $('#' + seopress_admin_tab_session_storage.split('#tab=')).addClass("active");
+            var sessionTab = seopress_admin_tab_session_storage.split('#tab=')[0];
+            if (!seopressActivateDashboardTab(sessionTab)) {
+                seopressActivateDefaultDashboardTab();
+            }
         } else {
-            //Default TAB
-            $('#seopress-admin-tabs a.nav-tab').first().addClass("nav-tab-active");
-            $('#seopress-admin-tabs .wrap-seopress-tab-content > div').first().addClass("active");
+            seopressActivateDefaultDashboardTab();
         }
     };
     $("#seopress-admin-tabs").find("a.nav-tab").click(function (e) {

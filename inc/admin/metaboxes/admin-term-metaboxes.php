@@ -63,24 +63,7 @@ function seopress_display_seo_term_metaboxe() {
 		$seopress_get_taxonomies = apply_filters( 'seopress_metaboxe_term_seo', $seopress_get_taxonomies );
 
 		if ( ! empty( $seopress_get_taxonomies ) ) {
-			if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAppearanceMetaboxePosition() ) ) {
-				switch ( seopress_get_service( 'AdvancedOption' )->getAppearanceMetaboxePosition() ) {
-					case 'high':
-						$priority = 1;
-						break;
-					case 'default':
-						$priority = 10;
-						break;
-					case 'low':
-						$priority = 100;
-						break;
-					default:
-						$priority = 10;
-						break;
-				}
-			} else {
-				$priority = 10;
-			}
+			$priority = 10;
 
 			$priority = apply_filters( 'seopress_metaboxe_term_seo_priority', $priority );
 

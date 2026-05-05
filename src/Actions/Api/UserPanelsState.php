@@ -46,7 +46,7 @@ class UserPanelsState implements ExecuteHooks {
 	 * @return bool
 	 */
 	public function permissionCheck( \WP_REST_Request $request ) {
-		return current_user_can( 'manage_options' );
+		return current_user_can( seopress_capability( 'manage_options', 'titles_metas' ) );
 	}
 
 	/**

@@ -3,10 +3,10 @@ Authors: rainbowgeek
 Contributors: seopress, rainbowgeek, corsonr, gmulti, juliobox, maigret, mgris, vincentdubroeucq
 Donate link: https://www.seopress.org/
 Tags: SEO, google search console, xml sitemap, schema, ai
-Requires at least: 6.2+
+Requires at least: 6.5
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.7.4
+Stable tag: 9.8
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -308,92 +308,62 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.7.4 =
-* INFO Add expand/collapse all buttons for Titles and metas settings
-* FIX AI: logs, Mistral, Gemini, UX
-* FIX Delete audit scans button
-* FIX Instant indexing / Google Search Console
-* FIX Add safeguard to getSocialKnowledgeUserId
-
-= 9.7.3 =
-* FIX Manual custom schema save
-* FIX Video sitemap performance
-* FIX GA4 auth button
-* FIX Mistral multimodal detection and update model list
-* FIX PHP templates warnings
-* FIX CPTs list
-* FIX Instant indexing generate key button
-
-= 9.7.2 =
-* FIX Toggle on PRO settings
-
-= 9.7.1 =
-* FIX Fatal error with White Label feature
-
-= 9.7 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-7/">Read the blog post update</a> =
-* NEW Brand new React-based settings UI for a faster and more modern administration experience (first iteration) 🎉
-* NEW Add Seznam.cz site verification support
-* NEW Add Person knowledge graph user ID field for more granular author attribution
-* NEW Detect transliterated keywords in permalink slugs for better multilingual support
-* NEW [PRO] Add WP-CLI license commands: activate, deactivate, status, update, reset
-* NEW [PRO] Rewrite PageSpeed tab to match pagespeed.web.dev with improved UI and print support
-* NEW [PRO] Add custom site URL field for Google Search Console
-* NEW [PRO] Add real-time validation for redirection URLs with loop detection
-* NEW [PRO] Add REST API endpoints for automatic schemas
-* NEW [PRO] Add REST API endpoint for SEO alerts
-* NEW [PRO] Add Bingbot crawl-delay quick-insert button in robots.txt editor
-* NEW [PRO] Add custom capabilities for Broken Links list
-* NEW [PRO] Add 'Add to category' bulk action for redirections
-* NEW [PRO] Add delete button for AI provider API keys
-* NEW [PRO] Auto-detect CSV separator for redirections import with confirmation modal
-* NEW [PRO] Include all public post types in llms.txt with {{latest_posts:X,(post_types)}} syntax
-* NEW [PRO] Enrich Author schema with social profiles and E-E-A-T linking
-* NEW [PRO] Exclude URLs from 404 log
-* INFO Prevent license modal reminder from showing unexpectedly
-* INFO Improved feature toggles reliability
-* INFO Improved freeze post date feature with real-time warning
-* INFO [PRO] Add deprecated label to FAQ, HowTo and Course schemas
-* INFO [PRO] Remove Elementor FAQ schema integration (deprecated by Google)
-* INFO [PRO] Remove retired GPT models
-* INFO [PRO] Optimize bulk deletion for redirections (50+ entries)
-* INFO [PRO] Refactor breadcrumb check
-* INFO [PRO] Update WP-CLI update logic
-* INFO [PRO] Improved CSV redirections import with row validation and post-import feedback
-* INFO [PRO] Invalidate EDD updater cache on license change
-* FIX Undo action with FAQ v2 block
-* FIX Use slugs instead of names in product_cat rewrite rules
-* FIX Fatal error if WC $product isn't set
-* FIX SEO score column showing stale data from previous analysis
-* FIX Facebook ID field not saving correctly
-* FIX Missing HTTP headers
-* FIX REST settings endpoints returning null on fresh installs
-* FIX Metabox preview failing with non-Latin slugs
-* FIX Duplicate archive links in XML sitemap with Polylang multi-domain
-* FIX Unsafe call_user_func_array with user-controlled input
-* FIX PHP 8.5 compatibility
-* FIX Custom schema detection in site audit
-* FIX getPostTypes() and getTaxonomies() operator from 'or' to 'and' for publicly_queryable filtering
-* FIX tagify.js.map missing from plugin package causing browser console 404 error
-* FIX Undefined variable $seopress_robots_freeze_modified_date warning
-* FIX SEO scores between content analysis metabox and post types column
-* FIX [PRO] Microsoft Clarity tracking code regression
-* FIX [PRO] AI hallucination when generating alt text
-* FIX [PRO] AI language not applied when generating alt texts
-* FIX [PRO] Site audit stuck after first batch
-* FIX [PRO] Site audit rescan resetting ignored issues
-* FIX [PRO] GA4 purchase filter breaking the filter chain
-* FIX [PRO] Unauthorized download error during plugin updates
-* FIX [PRO] Missing query string separator in regex redirects
-* FIX [PRO] Regex redirections blocked by 404 log entries
-* FIX [PRO] Video sitemap pagination and reduced regeneration aggressiveness
-* FIX [PRO] AI media meta generation with per field action support
-* FIX [PRO] Purge page cache after robots.txt settings are saved
-* FIX [PRO] PHP 8.5 compatibility
-* FIX [PRO] Undefined array key warnings
-* FIX [PRO] Elementor editor save/preview broken due to missing editor context exclusions
-* FIX [PRO] Matomo cron scheduling issue
-* SECURITY Hardened REST API and AJAX endpoint security
-
+= 9.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-8/">Read the blog post update</a> =
+* NEW Bumped the minimum WordPress version to 6.5; 6.8 or higher is strongly recommended for full feature support
+* NEW Command palette (Cmd/Ctrl+K) to search and jump to any setting, with quick actions and recent commands history 🎉
+* NEW Brand new React-based SEO metabox built on the WordPress Design System
+* NEW Agent Readiness toggle to prepare your site for AI agents
+* NEW Visual token editor for Dynamic Tag fields
+* NEW CPT icons and robots badges (noindex/nofollow) in Titles & Metas panel headers
+* NEW Autocomplete for posts/pages in HTML sitemap ID fields
+* NEW Extend Organization Knowledge Graph with address and legal fields
+* NEW Automatic sub-tab in the React universal metabox for Schemas
+* NEW [PRO] Brand new Site Audit screen (React + DataViews) with actionable overview, GSC-backed recommendations, and scan history with trends
+* NEW [PRO] Live scan progress with start/cancel and re-scan a single post from an issue row
+* NEW [PRO] One-click AI-generated alt texts for image issues in Site Audit
+* NEW [PRO] Bulk ignore, restore and CSV export from the issue details view
+* NEW [PRO] Redirections list and editor migrated to React + DataViews
+* NEW [PRO] URL tester modal and inline regex tester for redirections
+* NEW [PRO] Manage redirection categories from a dedicated React sidebar
+* NEW [PRO] Global default for Query Parameters mode in redirections
+* NEW [PRO] Brand new React schema editor with live JSON-LD preview, matching posts counter, validation, opening hours, templates and import/export
+* NEW [PRO] Schema Guide panel and contextual help in schema type selector
+* NEW [PRO] Broken Links migrated to React + DataViews with CRON-based batch scan
+* NEW [PRO] Agent Readiness feature
+* NEW [PRO] Live breadcrumbs preview in settings (multi-scenario, sticky)
+* NEW [PRO] Multilingual support for llms.txt dynamic placeholders, with TranslatePress compatibility
+* NEW [PRO] Add Gemini 3 Flash and Gemini 3.1 Pro AI models
+* NEW [PRO] Add unsubscribe link to email notifications
+* NEW [PRO] Site type wizard with deprecation notices and single-screen filter pills
+* NEW [PRO] Emit author sameAs in automatic Article schema
+* INFO Major performance improvements in the SEO metabox (lazy-loaded tabs, lighter dependencies)
+* INFO Faster XML sitemaps with improved caching
+* INFO Removed several legacy options to simplify the UI: Google PageSpeed column, Google Custom Search thumbnail, Fediverse Creator tag, SEO metabox position, Facebook Admin ID
+* INFO [PRO] Faster Site Audit thanks to composite database indexes
+* INFO [PRO] Removed Dublin Core, breadcrumbs separator and Storefront toggles (now always on)
+* FIX Dashboard falls back to the first available tab when the stored one is gone
+* FIX Per-CPT sitemap URLs are now properly gated on the include flag
+* FIX React settings bundle now loads correctly on network admin pages
+* FIX Honor custom capabilities filter on REST requests
+* FIX Restore Beacon help widget on the front-end
+* FIX Apply noindex to comment pagination pages
+* FIX User role list in the Security tab
+* FIX Show human-friendly messages for Bing and Google Instant Indexing responses
+* FIX Use WordPress site date/time format in the indexing log1
+* FIX [PRO] Share Google Search Console JSON key between Free and PRO
+* FIX [PRO] Only render GA4/Matomo content when their tab is visible
+* FIX [PRO] Honor "None" on Article post author field
+* FIX [PRO] Register pro-mu-settings REST route for network admin
+* FIX [PRO] Local Business schema outputs HH::00 when minutes are empty
+* FIX [PRO] Honor custom capability system in PRO settings access
+* FIX [PRO] Use 0 for Free Shipping shippingRate instead of min_amount
+* FIX [PRO] Correct Gemini 3 Flash model ID
+* FIX [PRO] Prevent fatal error in logs during PRO update
+* FIX [PRO] Test connection no longer shown multiple times
+* FIX [PRO] AI model detection
+* FIX [PRO] Restore Audit page tabs broken by the Broken Links migration
+* SECURITY Rate-limit destructive command endpoints
+* SECURITY Hardened REST API permission callbacks
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

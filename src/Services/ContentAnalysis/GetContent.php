@@ -118,7 +118,7 @@ class GetContent {
 			}
 		} else {
 			$docs                          = seopress_get_docs_links();
-			$analyzes['schemas']['impact'] = 'medium';
+			$analyzes['schemas']['impact'] = 'low';
 			$analyzes['schemas']['desc']   = '<p>' . __( 'No schemas found in the source code of this page. Get rich snippets in Google Search results and improve your visibility by adding structured data types (schemas) to your page.', 'wp-seopress' ) . '</p>';
 
 			if ( ! is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {

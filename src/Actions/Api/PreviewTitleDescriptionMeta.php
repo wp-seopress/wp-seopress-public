@@ -13,19 +13,11 @@ use SEOPress\Core\Hooks\ExecuteHooks;
  */
 class PreviewTitleDescriptionMeta implements ExecuteHooks {
 	/**
-	 * The current user.
-	 *
-	 * @var int|null
-	 */
-	private $current_user;
-
-	/**
 	 * The Preview Title Description Meta hooks.
 	 *
 	 * @since 4.7.0
 	 */
 	public function hooks() {
-		$this->current_user = wp_get_current_user()->ID;
 		add_action( 'rest_api_init', array( $this, 'register' ) );
 	}
 
@@ -57,13 +49,7 @@ class PreviewTitleDescriptionMeta implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					$post_id = $request['id'];
-
-					if ( ! user_can( $this->current_user, 'edit_post', $post_id ) ) {
-						return false;
-					}
-
-					return true;
+					return current_user_can( 'edit_post', (int) $request['id'] );
 				},
 			)
 		);

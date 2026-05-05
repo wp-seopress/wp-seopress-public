@@ -117,27 +117,6 @@ class Notifications {
 		}
 
 		$status = false;
-		if ( '1' !== seopress_get_service( 'NoticeOption' )->getNoticeUSM() && '1' !== seopress_get_service( 'AdvancedOption' )->getAccessUniversalMetaboxGutenberg() ) {
-			++$alerts_info;
-			$status = true;
-		}
-		$args[] = array(
-			'id'         => 'notice-usm',
-			'title'      => __( 'Enable our universal SEO metabox for the Block Editor', 'wp-seopress' ),
-			'desc'       => __( 'By default, our new SEO metabox is disabled for Gutenberg. Test it without further delay!', 'wp-seopress' ),
-			'impact'     => array(
-				'info' => __( 'Wizard', 'wp-seopress' ),
-			),
-			'link'       => array(
-				'en'       => admin_url( 'admin.php?page=seopress-advanced#tab=tab_seopress_advanced_appearance' ),
-				'title'    => __( 'Activate it', 'wp-seopress' ),
-				'external' => false,
-			),
-			'deleteable' => true,
-			'status'     => $status ? $status : false,
-		);
-
-		$status = false;
 		if ( '1' !== seopress_get_service( 'NoticeOption' )->getNoticeWizard() ) {
 			++$alerts_info;
 			$status = true;

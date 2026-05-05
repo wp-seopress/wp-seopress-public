@@ -35,7 +35,7 @@ function seopress_admin_header( $context = '' ) {
 		<ul>
 			<li>
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=seopress-option' ) ); ?>">
-					<?php esc_html_e( 'Home', 'wp-seopress' ); ?>
+					<?php esc_html_e( 'SEO', 'wp-seopress' ); ?>
 				</a>
 			</li>
 			<?php if ( get_admin_page_title() ) { ?>

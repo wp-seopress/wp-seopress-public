@@ -69,13 +69,6 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 				'btn_primary' => admin_url( 'admin.php?page=seopress-advanced' ),
 				'filter'      => 'seopress_remove_feature_advanced',
 			),
-			'universal-metabox' => array(
-				'svg'         => SEOPRESS_URL_ASSETS . '/img/ico-universal-metabox.svg',
-				'title'       => __( 'Universal SEO metabox', 'wp-seopress' ),
-				'desc'        => __( 'Easily manage your SEO settings from your favorite page builder or editor.', 'wp-seopress' ),
-				'btn_primary' => admin_url( 'admin.php?page=seopress-advanced#tab=tab_seopress_advanced_appearance' ),
-				'filter'      => 'seopress_remove_feature_advanced',
-			),
 		);
 
 		$features = apply_filters( 'seopress_features_list_before_tools', $features );
@@ -112,25 +105,9 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 						if ( true === $toggle ) {
 							$class = '';
 
-							if ( 'universal-metabox' === $key ) {
-								$advanced_options = get_option( 'seopress_advanced_option_name' );
-								$toggle_value     = '';
-
-								if ( is_array( $advanced_options ) && isset( $advanced_options['seopress_advanced_appearance_universal_metabox_disable'] ) ) {
-									$toggle_value = $advanced_options['seopress_advanced_appearance_universal_metabox_disable'];
-								}
-
-								if ( '1' === $toggle_value ) {
-									$seopress_get_toggle_option = '0';
-								} else {
-									$seopress_get_toggle_option = '1';
-									$class                      = ' is-seopress-feature-active';
-								}
-
-								$toggle = true;
-							} elseif ( '1' == seopress_get_toggle_option( $key ) ) { // phpcs:ignore -- TODO: null comparison check.
-									$seopress_get_toggle_option = '1';
-									$class                      = ' is-seopress-feature-active';
+							if ( '1' == seopress_get_toggle_option( $key ) ) { // phpcs:ignore -- TODO: null comparison check.
+								$seopress_get_toggle_option = '1';
+								$class                      = ' is-seopress-feature-active';
 							} else {
 								$seopress_get_toggle_option = '0';
 							}
@@ -148,9 +125,13 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 									</div>
 
 									<h3 class="name">
-										<a href="<?php echo esc_url( $btn_primary ); ?>">
+										<?php if ( $btn_primary ) { ?>
+											<a href="<?php echo esc_url( $btn_primary ); ?>">
 											<?php echo esc_html( $title ); ?>
-										</a>
+											</a>
+										<?php } else { ?>
+											<?php echo esc_html( $title ); ?>
+										<?php } ?>
 									</h3>
 								</div>
 
@@ -169,11 +150,13 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 							</div>
 							<p class="item-desc"><?php echo esc_html( $desc ); ?></p>
 						</div>
-						<div class="seopress-item-footer">
-							<a href="<?php echo esc_url( $btn_primary ); ?>" class="seopress-btn" title="<?php esc_attr_e( 'Manage settings', 'wp-seopress' ); ?>">
-								<?php esc_attr_e( 'Manage settings', 'wp-seopress' ); ?>
-							</a>
-						</div>
+						<?php if ( $btn_primary ) { ?>
+							<div class="seopress-item-footer">
+								<a href="<?php echo esc_url( $btn_primary ); ?>" class="seopress-btn" title="<?php esc_attr_e( 'Manage settings', 'wp-seopress' ); ?>">
+									<?php esc_attr_e( 'Manage settings', 'wp-seopress' ); ?>
+								</a>
+							</div>
+						<?php } ?>
 					</div>
 						<?php
 					}

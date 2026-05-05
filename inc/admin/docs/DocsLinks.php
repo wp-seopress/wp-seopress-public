@@ -82,7 +82,6 @@ function seopress_get_docs_links() {
 			),
 		),
 		'titles'               => array(
-			'thumbnail'         => 'https://support.google.com/programmable-search/answer/1626955?hl=en',
 			'wrong_meta'        => 'https://www.seopress.org/support/guides/google-uses-the-wrong-meta-title-meta-description-in-search-results/',
 			'alt_title'         => 'https://developers.google.com/search/docs/appearance/site-names#content-guidelines',
 			'manage'            => 'https://www.seopress.org/support/guides/manage-titles-meta-descriptions/',
@@ -264,7 +263,6 @@ function seopress_get_docs_links() {
 		$docs['ai']['deepseek']['errors'] = 'https://www.seopress.org/fr/support/guides/generez-des-metadonnees-seo-avec-deepseek-ai/';
 		$docs['ai']['llms']['file']       = 'https://www.seopress.org/fr/support/guides/editer-votre-fichier-llms-txt/';
 
-		$docs['titles']['thumbnail']         = 'https://support.google.com/programmable-search/answer/1626955?hl=fr';
 		$docs['titles']['wrong_meta']        = 'https://www.seopress.org/fr/support/guides/google-utilise-une-balise-titre-meta-description-incorrecte-dans-les-resultats-de-recherche/';
 		$docs['titles']['alt_title']         = 'https://developers.google.com/search/docs/appearance/site-names#content-guidelines';
 		$docs['titles']['manage']            = 'https://www.seopress.org/fr/support/guides/gerez-vos-balises-titres-et-metas/';

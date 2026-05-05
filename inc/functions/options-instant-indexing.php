@@ -151,13 +151,13 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	// Prepare the URLS.
 	if ( true === $is_manual_submission ) {
 		$urls          = preg_split( '/\r\n|\r|\n/', $urls );
-		$x_source_info = 'https://www.seopress.org/9.7.4/true';
+		$x_source_info = 'https://www.seopress.org/9.8/true';
 
 		$urls = array_slice( $urls, 0, 100 );
 	} elseif ( false === $is_manual_submission && ! empty( $permalink ) ) {
 		$urls          = null;
 		$urls[]        = $permalink;
-		$x_source_info = 'https://www.seopress.org/9.7.4/false';
+		$x_source_info = 'https://www.seopress.org/9.8/false';
 	}
 
 	// Bing API.
@@ -296,7 +296,7 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 
 	// Log URLs submitted.
 	$log['log']['urls'] = $urls;
-	$log['log']['date'] = current_time( 'F j, Y, g:i a' );
+	$log['log']['date'] = current_time( get_option( 'date_format' ) . ', ' . get_option( 'time_format' ) );
 
 	update_option( 'seopress_instant_indexing_log_option_name', $log, false );
 

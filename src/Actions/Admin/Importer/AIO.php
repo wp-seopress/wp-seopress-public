@@ -432,10 +432,6 @@ class AIO implements ExecuteHooksBackend {
 							// Advanced.
 							if ( 'advanced' === $__key && ! empty( $__value ) ) {
 								foreach ( $__value as $___key => $___value ) {
-									// Admin ID.
-									if ( 'adminId' === $___key && ! empty( $___value ) ) {
-										$seopress_social['seopress_social_facebook_admin_id'] = esc_html( $___value );
-									}
 									// App ID.
 									if ( 'appId' === $___key && ! empty( $___value ) ) {
 										$seopress_social['seopress_social_facebook_app_id'] = esc_html( $___value );
@@ -1002,14 +998,6 @@ class AIO implements ExecuteHooksBackend {
 													unset( $seopress_titles['seopress_titles_single_titles'][ $__key ]['date'] );
 												}
 											}
-											// Show Post Thumbnail in Search.
-											if ( 'showPostThumbnailInSearch' === $____key ) {
-												if ( true === $____value ) {
-													$seopress_titles['seopress_titles_single_titles'][ $__key ]['thumb_gcs'] = '1';
-												} elseif ( false === $____value ) {
-													unset( $seopress_titles['seopress_titles_single_titles'][ $__key ]['thumb_gcs'] );
-												}
-											}
 										}
 									}
 								}
@@ -1070,14 +1058,6 @@ class AIO implements ExecuteHooksBackend {
 													$seopress_titles['seopress_titles_archive_titles'][ $__key ]['date'] = '1';
 												} elseif ( false === $____value ) {
 													unset( $seopress_titles['seopress_titles_archive_titles'][ $__key ]['date'] );
-												}
-											}
-											// Show Post Thumbnail in Search.
-											if ( 'showPostThumbnailInSearch' === $____key ) {
-												if ( true === $____value ) {
-													$seopress_titles['seopress_titles_archive_titles'][ $__key ]['thumb_gcs'] = '1';
-												} elseif ( false === $____value ) {
-													unset( $seopress_titles['seopress_titles_archive_titles'][ $__key ]['thumb_gcs'] );
 												}
 											}
 										}

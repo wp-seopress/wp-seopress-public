@@ -236,6 +236,95 @@ class SocialOption {
 	}
 
 	/**
+	 * The getSocialKnowledgeLegalName function.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return string
+	 */
+	public function getSocialKnowledgeLegalName() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_social_knowledge_legal_name' );
+	}
+
+	/**
+	 * The getSocialKnowledgeFoundingDate function.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return string
+	 */
+	public function getSocialKnowledgeFoundingDate() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_social_knowledge_founding_date' );
+	}
+
+	/**
+	 * The getSocialKnowledgeEmployees function.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return string
+	 */
+	public function getSocialKnowledgeEmployees() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$value = $this->searchOptionByKey( 'seopress_social_knowledge_employees' );
+		return ! empty( $value ) ? (string) absint( $value ) : '';
+	}
+
+	/**
+	 * The getSocialKnowledgeStreet function.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return string
+	 */
+	public function getSocialKnowledgeStreet() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_social_knowledge_street' );
+	}
+
+	/**
+	 * The getSocialKnowledgeLocality function.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return string
+	 */
+	public function getSocialKnowledgeLocality() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_social_knowledge_locality' );
+	}
+
+	/**
+	 * The getSocialKnowledgeRegion function.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return string
+	 */
+	public function getSocialKnowledgeRegion() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_social_knowledge_region' );
+	}
+
+	/**
+	 * The getSocialKnowledgePostalCode function.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return string
+	 */
+	public function getSocialKnowledgePostalCode() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_social_knowledge_postal_code' );
+	}
+
+	/**
+	 * The getSocialKnowledgeCountry function.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return string
+	 */
+	public function getSocialKnowledgeCountry() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_social_knowledge_country' );
+	}
+
+	/**
 	 * The getSocialTwitterCard function.
 	 *
 	 * @since 5.9.0
@@ -356,16 +445,6 @@ class SocialOption {
 		return $this->searchOptionByKey( 'seopress_social_facebook_link_ownership_id' );
 	}
 
-	/**
-	 * The getSocialFacebookAdminID function.
-	 *
-	 * @since 6.5.0
-	 *
-	 * @return string
-	 */
-	public function getSocialFacebookAdminID() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'seopress_social_facebook_admin_id' );
-	}
 
 	/**
 	 * The getSocialFacebookAppID function.
@@ -529,13 +608,27 @@ class SocialOption {
 	}
 
 	/**
+	 * The getSocialFacebookAdminID function.
+	 *
+	 * @deprecated 9.8.0 The "Facebook Admin ID" option was removed.
+	 * @todo       Remove after 2027-04-22 (kept for ~1 year to prevent fatal errors in older Pro releases calling this method).
+	 *
+	 * @return null
+	 */
+	public function getSocialFacebookAdminID() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return null;
+	}
+
+	/**
 	 * The getSocialFvCreator function.
 	 *
-	 * @since 8.0.0
+	 * @deprecated 9.8.0 The "Fediverse Creator" tag was removed.
+	 * @todo       Remove after 2027-04-22 (kept for ~1 year to prevent fatal errors in older Pro releases calling this method).
 	 *
-	 * @return string
+	 * @return null
 	 */
 	public function getSocialFvCreator() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'seopress_social_fv_creator' );
+		return null;
 	}
+
 }

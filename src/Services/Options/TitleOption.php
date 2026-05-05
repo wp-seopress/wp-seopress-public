@@ -307,7 +307,7 @@ class TitleOption {
 
 		if ( null === $taxonomy ) {
 			$queried_object = get_queried_object();
-			$taxonomy       = null !== $queried_object ? $queried_object->taxonomy : '';
+			$taxonomy       = $queried_object instanceof \WP_Term ? $queried_object->taxonomy : '';
 		}
 
 		$option = $this->searchOptionByKey( 'seopress_titles_tax_titles' );
@@ -330,7 +330,7 @@ class TitleOption {
 
 		if ( null === $taxonomy ) {
 			$queried_object = get_queried_object();
-			$taxonomy       = null !== $queried_object ? $queried_object->taxonomy : '';
+			$taxonomy       = $queried_object instanceof \WP_Term ? $queried_object->taxonomy : '';
 		}
 
 		$option = $this->searchOptionByKey( 'seopress_titles_tax_titles' );
@@ -401,37 +401,6 @@ class TitleOption {
 		return $option[ $post_type ]['title'];
 	}
 
-	/**
-	 * The getSingleCptThumb function.
-	 *
-	 * @since 6.6.0
-	 *
-	 * @param int|null $id The ID.
-	 *
-	 * @return string
-	 */
-	public function getSingleCptThumb( $id = null ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$arg = $id;
-
-		if ( null === $id ) {
-			global $post;
-			if ( ! isset( $post ) ) {
-				return;
-			}
-
-			$arg = $post;
-		}
-
-		$current_cpt = get_post_type( $arg );
-
-		$option = $this->searchOptionByKey( 'seopress_titles_single_titles' );
-
-		if ( ! isset( $option[ $current_cpt ]['thumb_gcs'] ) ) {
-			return;
-		}
-
-		return $option[ $current_cpt ]['thumb_gcs'];
-	}
 
 	/**
 	 * The getSingleCptEnable function.
@@ -705,7 +674,7 @@ class TitleOption {
 		}
 
 		$queried_object = get_queried_object();
-		$current_tax    = null !== $queried_object ? $queried_object->taxonomy : '';
+		$current_tax    = $queried_object instanceof \WP_Term ? $queried_object->taxonomy : '';
 
 		if ( null === $queried_object ) {
 			global $tax;
@@ -714,7 +683,7 @@ class TitleOption {
 			}
 		}
 
-		if ( null !== $queried_object && 'yes' === get_term_meta( $queried_object->term_id, '_seopress_robots_index', true ) ) {
+		if ( $queried_object instanceof \WP_Term && 'yes' === get_term_meta( $queried_object->term_id, '_seopress_robots_index', true ) ) {
 			return get_term_meta( $queried_object->term_id, '_seopress_robots_index', true );
 		}
 
@@ -740,7 +709,7 @@ class TitleOption {
 		}
 
 		$queried_object = get_queried_object();
-		$current_tax    = null !== $queried_object ? $queried_object->taxonomy : '';
+		$current_tax    = $queried_object instanceof \WP_Term ? $queried_object->taxonomy : '';
 
 		if ( null === $queried_object ) {
 			global $tax;
@@ -749,7 +718,7 @@ class TitleOption {
 			}
 		}
 
-		if ( null !== $queried_object && 'yes' === get_term_meta( $queried_object->term_id, '_seopress_robots_follow', true ) ) {
+		if ( $queried_object instanceof \WP_Term && 'yes' === get_term_meta( $queried_object->term_id, '_seopress_robots_follow', true ) ) {
 			return get_term_meta( $queried_object->term_id, '_seopress_robots_follow', true );
 		}
 
@@ -893,5 +862,19 @@ class TitleOption {
 	 */
 	public function getPagedNoIndex() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		return $this->searchOptionByKey( 'seopress_titles_paged_noindex' );
+	}
+
+	/**
+	 * The getSingleCptThumb function.
+	 *
+	 * @param int|null $id Post ID (ignored).
+	 *
+	 * @deprecated 9.8.0 The "Google Custom Search thumbnail" option was removed.
+	 * @todo       Remove after 2027-04-22 (kept for ~1 year to prevent fatal errors in older Pro releases calling this method).
+	 *
+	 * @return null
+	 */
+	public function getSingleCptThumb( $id = null ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return null;
 	}
 }

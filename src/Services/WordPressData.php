@@ -52,6 +52,13 @@ class WordPressData {
 			);
 		}
 
+		$post_types = apply_filters_deprecated(
+			'seopress_get_post_types_args',
+			array( $post_types ),
+			'9.8.0',
+			'seopress_post_types'
+		);
+
 		$post_types = apply_filters( 'seopress_post_types', $post_types, $return_all, $args );
 
 		return $post_types;

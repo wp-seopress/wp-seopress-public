@@ -28,15 +28,39 @@ function seopress_toggle_features() {
 				}
 				update_option( 'seopress_advanced_option_name', $seopress_advanced_option_name, false );
 			} else {
-				$seopress_toggle_options             = get_option( 'seopress_toggle' );
+				$seopress_toggle_options = get_option( 'seopress_toggle', array() );
+				if ( ! is_array( $seopress_toggle_options ) ) {
+					$seopress_toggle_options = array();
+				}
 				$seopress_toggle_options[ $feature ] = $feature_value;
 
-				// Flush permalinks for XML sitemaps.
-				if ( 'toggle-xml-sitemap' === $feature_value ) {
+				update_option( 'seopress_toggle', $seopress_toggle_options, false );
+
+				// Flush permalinks when toggling features that register rewrite rules.
+				// flush_rewrite_rules() rebuilds the rules from $wp_rewrite->extra_rules_top,
+				// which was populated at init() based on the OLD toggle value. We must purge
+				// the stale rules and re-register them with the NEW value before flushing,
+				// otherwise the toggle has no effect until the next request triggers another flush.
+				if ( 'toggle-xml-sitemap' === $feature || 'toggle-news' === $feature ) {
+					global $wp_rewrite;
+
+					if ( ! empty( $wp_rewrite->extra_rules_top ) ) {
+						foreach ( $wp_rewrite->extra_rules_top as $pattern => $query ) {
+							if ( false !== strpos( $query, 'seopress_' ) ) {
+								unset( $wp_rewrite->extra_rules_top[ $pattern ] );
+							}
+						}
+					}
+
+					$sitemap_options = get_option( 'seopress_xml_sitemap_option_name' );
+					\SEOPress\Actions\Sitemap\Router::registerRewriteRules( $sitemap_options, $seopress_toggle_options );
+
+					// Let PRO and extensions re-register their sitemap rewrite rules (news, video, ...).
+					do_action( 'seopress_re_register_sitemap_rules', $sitemap_options, $seopress_toggle_options );
+
+					delete_option( 'rewrite_rules' );
 					flush_rewrite_rules( false );
 				}
-
-				update_option( 'seopress_toggle', $seopress_toggle_options, false );
 			}
 		}
 		exit();
@@ -52,7 +76,10 @@ function seopress_display() {
 	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
 		// Notifications Center.
 		if ( isset( $_POST['notifications_center'] ) ) {
-			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name' );
+			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name', array() );
+			if ( ! is_array( $seopress_advanced_option_name ) ) {
+				$seopress_advanced_option_name = array();
+			}
 
 			if ( '1' === $_POST['notifications_center'] ) {
 				$seopress_advanced_option_name['seopress_advanced_appearance_notifications'] = sanitize_text_field( wp_unslash( $_POST['notifications_center'] ) );
@@ -65,7 +92,10 @@ function seopress_display() {
 
 		// News Panel.
 		if ( isset( $_POST['news_center'] ) ) {
-			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name' );
+			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name', array() );
+			if ( ! is_array( $seopress_advanced_option_name ) ) {
+				$seopress_advanced_option_name = array();
+			}
 
 			if ( '1' === $_POST['news_center'] ) {
 				$seopress_advanced_option_name['seopress_advanced_appearance_news'] = sanitize_text_field( wp_unslash( $_POST['news_center'] ) );
@@ -77,7 +107,10 @@ function seopress_display() {
 		}
 		// Tools Panel.
 		if ( isset( $_POST['tools_center'] ) ) {
-			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name' );
+			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name', array() );
+			if ( ! is_array( $seopress_advanced_option_name ) ) {
+				$seopress_advanced_option_name = array();
+			}
 
 			if ( '1' === $_POST['tools_center'] ) {
 				$seopress_advanced_option_name['seopress_advanced_appearance_seo_tools'] = sanitize_text_field( wp_unslash( $_POST['tools_center'] ) );

@@ -62,6 +62,14 @@ class Organization extends JsonSchemaValue implements GetJsonData {
 					'account_linkedin'  => '%%social_account_linkedin%%',
 					'account_extra'     => '%%social_account_extra%%',
 					'tax_id'            => '%%social_knowledge_tax_id%%',
+					'legal_name'        => '%%social_knowledge_legal_name%%',
+					'founding_date'     => '%%social_knowledge_founding_date%%',
+					'employees'         => '%%social_knowledge_employees%%',
+					'street'            => '%%social_knowledge_street%%',
+					'locality'          => '%%social_knowledge_locality%%',
+					'region'            => '%%social_knowledge_region%%',
+					'postal_code'       => '%%social_knowledge_postal_code%%',
+					'country'           => '%%social_knowledge_country%%',
 				);
 				break;
 
@@ -74,16 +82,29 @@ class Organization extends JsonSchemaValue implements GetJsonData {
 
 		$type = seopress_get_service( 'SocialOption' )->getSocialKnowledgeType();
 
-		if ( 'Organization' === $type ) {
+		// All Organization subtypes share the same Knowledge Graph fields; only Person diverges.
+		$is_person = ( 'Person' === $type );
+
+		if ( ! $is_person ) {
 			// Use "contactPoint".
 			$schema = seopress_get_service( 'JsonSchemaGenerator' )->getJsonFromSchema( ContactPoint::NAME, $context, array( 'remove_empty' => true ) );
 			if ( count( $schema ) > 1 ) {
 				$data['contactPoint'][] = $schema;
 			}
-		} else { // Not Organization -> Like Is Person
-			// Remove "logo".
-			if ( array_key_exists( 'logo', $data ) ) {
-				unset( $data['logo'] );
+		} else {
+			// Remove Organization-specific keys.
+			$organization_only_keys = array(
+				'logo',
+				'legalName',
+				'foundingDate',
+				'numberOfEmployees',
+				'address',
+				'vatID',
+			);
+			foreach ( $organization_only_keys as $organization_only_key ) {
+				if ( array_key_exists( $organization_only_key, $data ) ) {
+					unset( $data[ $organization_only_key ] );
+				}
 			}
 		}
 
@@ -127,6 +148,28 @@ class Organization extends JsonSchemaValue implements GetJsonData {
 
 			if ( empty( $data['sameAs'] ) ) {
 				unset( $data['sameAs'] );
+			}
+		}
+
+		// Drop nested PostalAddress / QuantitativeValue blocks when they hold no real data.
+		foreach ( array( 'address', 'numberOfEmployees' ) as $nested_key ) {
+			if ( ! isset( $data[ $nested_key ] ) || ! is_array( $data[ $nested_key ] ) ) {
+				continue;
+			}
+
+			$has_value = false;
+			foreach ( $data[ $nested_key ] as $sub_key => $sub_value ) {
+				if ( '@type' === $sub_key ) {
+					continue;
+				}
+				if ( ! empty( $sub_value ) ) {
+					$has_value = true;
+					break;
+				}
+			}
+
+			if ( ! $has_value ) {
+				unset( $data[ $nested_key ] );
 			}
 		}
 

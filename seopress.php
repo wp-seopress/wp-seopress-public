@@ -4,13 +4,13 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.7.4
+ * Version: 9.8
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
  * Domain Path: /languages
  * Requires PHP: 7.4
- * Requires at least: 6.2
+ * Requires at least: 6.5
  *
  * @package SEOPress
  */
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.7.4' );
+define( 'SEOPRESS_VERSION', '9.8' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );

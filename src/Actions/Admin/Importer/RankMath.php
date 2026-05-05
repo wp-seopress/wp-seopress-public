@@ -455,10 +455,6 @@ class RankMath implements ExecuteHooksBackend {
 					$accounts = implode( "\n", array_map( 'esc_url', $accounts ) );
 					$seopress_social['seopress_social_accounts_extra'] = esc_html( $accounts );
 				}
-				// Facebook Admin ID.
-				if ( 'facebook_admin_id' === $key ) {
-					$seopress_social['seopress_social_facebook_admin_id'] = esc_html( $value );
-				}
 				// Facebook App ID.
 				if ( 'facebook_app_id' === $key ) {
 					$seopress_social['seopress_social_facebook_app_id'] = esc_html( $value );

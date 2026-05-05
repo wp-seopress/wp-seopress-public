@@ -39,6 +39,14 @@ function seopress_sanitize_options_fields( $input ) {
 		'seopress_social_knowledge_email',
 		'seopress_social_knowledge_phone',
 		'seopress_social_knowledge_tax_id',
+		'seopress_social_knowledge_legal_name',
+		'seopress_social_knowledge_founding_date',
+		'seopress_social_knowledge_employees',
+		'seopress_social_knowledge_street',
+		'seopress_social_knowledge_locality',
+		'seopress_social_knowledge_region',
+		'seopress_social_knowledge_postal_code',
+		'seopress_social_knowledge_country',
 		'seopress_social_knowledge_user_id',
 		'seopress_social_accounts_facebook',
 		'seopress_social_accounts_twitter',
@@ -48,9 +56,7 @@ function seopress_sanitize_options_fields( $input ) {
 		'seopress_social_accounts_linkedin',
 		'seopress_social_accounts_extra',
 		'seopress_social_facebook_link_ownership_id',
-		'seopress_social_facebook_admin_id',
 		'seopress_social_facebook_app_id',
-		'seopress_social_fv_creator',
 		'seopress_google_analytics_ga4',
 		'seopress_google_analytics_download_tracking',
 		'seopress_google_analytics_opt_out_msg',
@@ -136,6 +142,8 @@ function seopress_sanitize_options_fields( $input ) {
 			$input[ $value ] = sanitize_email( $input[ $value ] );
 		} elseif ( isset( $input['seopress_social_knowledge_user_id'] ) && 'seopress_social_knowledge_user_id' === $value ) {
 			$input[ $value ] = absint( $input[ $value ] );
+		} elseif ( isset( $input['seopress_social_knowledge_employees'] ) && 'seopress_social_knowledge_employees' === $value ) {
+			$input[ $value ] = '' !== $input[ $value ] ? absint( $input[ $value ] ) : '';
 		} elseif ( ( ! empty( $input['seopress_social_accounts_twitter'] ) && 'seopress_social_accounts_twitter' === $value ) ) {
 			$input[ $value ] = sanitize_text_field( $input[ $value ] );
 			// Ensure Twitter handle starts with @.

@@ -187,21 +187,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 				'name'        => __( 'Advanced options', 'wp-seopress' ),
 				'view'        => array( $this, 'seopress_setup_advanced' ),
 				'handler'     => array( $this, 'seopress_setup_advanced_save' ),
-				'sub_steps'   => array(
-					'advanced'  => __( 'Advanced', 'wp-seopress' ),
-					'universal' => __( 'Universal SEO metabox', 'wp-seopress' ),
-				),
 				'parent'      => 'advanced',
-			),
-			'universal'           => array(
-				'name'      => __( 'Advanced options', 'wp-seopress' ),
-				'view'      => array( $this, 'seopress_setup_universal' ),
-				'handler'   => array( $this, 'seopress_setup_universal_save' ),
-				'sub_steps' => array(
-					'advanced'  => __( 'Advanced', 'wp-seopress' ),
-					'universal' => __( 'Universal SEO metabox', 'wp-seopress' ),
-				),
-				'parent'    => 'advanced',
 			),
 			'ready'               => array(
 				'breadcrumbs' => true,
@@ -217,6 +203,22 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$this->steps  = apply_filters( 'seopress_setup_wizard_steps', $default_steps );
 		$this->step   = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : current( array_keys( $this->steps ) );
 		$this->parent = isset( $_GET['parent'] ) ? sanitize_key( $_GET['parent'] ) : current( array_keys( $this->steps ) );
+
+		// Handle "Not right now" dismissal from the welcome step: flag the wizard
+		// as already seen so the plugin does not redirect to it on next activation.
+		if ( isset( $_GET['seopress-action'] ) && 'dismiss-wizard' === $_GET['seopress-action'] ) {
+			check_admin_referer( 'seopress-dismiss-wizard' );
+
+			$seopress_notices = get_option( 'seopress_notices', array() );
+			if ( ! is_array( $seopress_notices ) ) {
+				$seopress_notices = array();
+			}
+			$seopress_notices['notice-wizard'] = '1';
+			update_option( 'seopress_notices', $seopress_notices, false );
+
+			wp_safe_redirect( esc_url_raw( admin_url( 'admin.php?page=seopress-option' ) ) );
+			exit;
+		}
 
 		if ( ! empty( $_POST['save_step'] ) && isset( $this->steps[ $this->step ]['handler'] ) ) {
 			call_user_func( $this->steps[ $this->step ]['handler'], $this );
@@ -277,9 +279,21 @@ class SEOPRESS_Admin_Setup_Wizard {
 	public function setup_wizard_footer() {
 		?>
 		<div class="seopress-setup-footer">
-			<?php if ( 'welcome' === $this->step ) { ?>
+			<?php
+			if ( 'welcome' === $this->step ) {
+				$dismiss_url = wp_nonce_url(
+					add_query_arg(
+						array(
+							'page'            => 'seopress-setup',
+							'seopress-action' => 'dismiss-wizard',
+						),
+						admin_url( 'admin.php' )
+					),
+					'seopress-dismiss-wizard'
+				);
+				?>
 			<a class="seopress-setup-footer-links"
-				href="<?php echo esc_url( admin_url( 'admin.php?page=seopress-option' ) ); ?>"><?php esc_html_e( 'Not right now', 'wp-seopress' ); ?></a>
+				href="<?php echo esc_url( $dismiss_url ); ?>"><?php esc_html_e( 'Not right now', 'wp-seopress' ); ?></a>
 				<?php
 			} elseif (
 				'import_settings' === $this->step ||
@@ -287,7 +301,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 				'indexing_post_types' === $this->step ||
 				'indexing_archives' === $this->step ||
 				'indexing_taxonomies' === $this->step ||
-				'universal' === $this->step ||
 				'site' === $this->step ||
 				'indexing' === $this->step ||
 				'advanced' === $this->step
@@ -1568,92 +1581,6 @@ class SEOPRESS_Admin_Setup_Wizard {
 		if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			$seopress_advanced_option['seopress_advanced_advanced_product_cat_url'] = isset( $_POST['product_category_url'] ) ? esc_attr( wp_unslash( $_POST['product_category_url'] ) ) : null;
 		}
-
-		// Save options.
-		update_option( 'seopress_advanced_option_name', $seopress_advanced_option, false );
-
-		wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
-
-		exit;
-	}
-
-	/**
-	 *  Init "Step 4.2: Advanced Step".
-	 */
-	public function seopress_setup_universal() {
-		$seopress_advanced_option = get_option( 'seopress_advanced_option_name' );
-		$universal_seo_metabox    = isset( $seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable'] ) ? $seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable'] : '';
-		?>
-
-		<div class="seopress-setup-content seopress-option">
-
-			<h1><?php esc_html_e( 'Advanced options', 'wp-seopress' ); ?></h1>
-
-			<?php $this->setup_wizard_sub_steps(); ?>
-
-			<div class="seopress-tab active">
-
-				<form method="post">
-					<h2>
-						<?php esc_html_e( 'Improve your workflow with the Universal SEO metabox', 'wp-seopress' ); ?>
-					</h2>
-
-					<p><?php esc_html_e( 'Edit your SEO metadata directly from your page or theme builder.', 'wp-seopress' ); ?></p>
-					<ul>
-						<!-- Universal SEO metabox overview -->
-						<?php if ( method_exists( seopress_get_service( 'ToggleOption' ), 'getToggleWhiteLabel' ) && '1' !== seopress_get_service( 'ToggleOption' )->getToggleWhiteLabel() ) { ?>
-							<li class="description">
-								<a class="wrap-yt-embed" href="https://www.youtube.com/watch?v=sf0ocG7vQMM" target="_blank" title="<?php esc_attr_e( 'Watch the universal SEO metabox overview video - Open in a new window', 'wp-seopress' ); ?>">
-									<img src="<?php echo esc_url( SEOPRESS_ASSETS_DIR . '/img/yt-universal-metabox.webp' ); ?>" alt="<?php esc_attr_e( 'Universal SEO metabox video thumbnail', 'wp-seopress' ); ?>" width="500" />
-								</a>
-							</li>
-						<?php } ?>
-
-						<!-- Universal SEO metabox for page builers -->
-						<li class="seopress-wizard-service-item">
-							<label for="universal_seo_metabox">
-								<input id="universal_seo_metabox" name="universal_seo_metabox" type="checkbox" class="location-input" 
-								<?php
-								if ( '1' !== $universal_seo_metabox ) {
-									echo 'checked="yes"';
-								}
-								?>
-						value="1"/>
-								<?php esc_html_e( 'Yes, please enable the universal SEO metabox!', 'wp-seopress' ); ?>
-							</label>
-						</li>
-						<li class="description">
-							<?php esc_html_e( 'You can change this setting at anytime from SEO, Advanced settings page, Appearance tab.', 'wp-seopress' ); ?>
-						</li>
-					</ul>
-
-					<p class="seopress-setup-actions step">
-						<button type="submit" class="btn btnPrimary btnNext"
-							value="<?php esc_attr_e( 'Save & Continue', 'wp-seopress' ); ?>"
-							name="save_step">
-							<?php esc_html_e( 'Save & Continue', 'wp-seopress' ); ?>
-						</button>
-
-						<?php wp_nonce_field( 'seopress-setup' ); ?>
-					</p>
-				</form>
-			</div>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Save step 4.2 settings.
-	 */
-	public function seopress_setup_universal_save() {
-		check_admin_referer( 'seopress-setup' );
-
-		// Get options.
-		$seopress_advanced_option = get_option( 'seopress_advanced_option_name' );
-
-		// Advanced.
-		$seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable'] = isset( $_POST['universal_seo_metabox'] ) ? '' : '1';
-		$seopress_advanced_option['seopress_advanced_appearance_universal_metabox']         = isset( $_POST['universal_seo_metabox'] ) ? '1' : '';
 
 		// Save options.
 		update_option( 'seopress_advanced_option_name', $seopress_advanced_option, false );

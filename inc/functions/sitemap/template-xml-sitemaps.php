@@ -184,8 +184,7 @@ function seopress_xml_sitemap_index() {
 
 							$all_lastmod_dates = $wpdb->get_col( $sql ); // phpcs:ignore
 
-							// Cache for 1 hour to match existing behavior.
-							$cache_duration = apply_filters( 'seopress_sitemaps_cache_duration', HOUR_IN_SECONDS );
+							$cache_duration = apply_filters( 'seopress_sitemaps_cache_duration', 12 * HOUR_IN_SECONDS );
 							set_transient( $cache_key_all, $all_lastmod_dates, $cache_duration );
 						}
 

@@ -1,7 +1,6 @@
 .seopress-option *,
 .seopress-styles *:not(.media-modal *),
 #seopress_cpt *,
-#seopress_content_analysis *,
 #seopress_pro_cpt * {
     box-sizing: border-box;
 }
@@ -18,7 +17,6 @@
 .post-type-seopress_bot #wpcontent,
 .post-type-seopress_schemas #wpcontent,
 #seopress_cpt,
-#seopress_content_analysis,
 #seopress_pro_cpt,
 #seopress_matomo_dashboard_widget,
 #seopress_ga_dashboard_widget,
@@ -317,8 +315,6 @@
 }
 
 /* Headings */
-#seopress_content_analysis input[type="text"],
-#seopress_content_analysis textarea,
 #seopress_cpt input[type="text"],
 #seopress_cpt textarea,
 #seopress_pro_cpt input[type="text"]:not(.hidden),
@@ -336,8 +332,7 @@
 }
 
 #seopress_pro_cpt label,
-#seopress_cpt label,
-#seopress_content_analysis label {
+#seopress_cpt label {
     margin-bottom: 8px;
     display: inline-block;
     width: 100%;
@@ -532,8 +527,7 @@ table.wp-list-table .manage_column.column-seopress_insights {
 .post-type-product table.fixed thead .column-seopress_redirect_enable,
 .post-type-product table.fixed thead .column-seopress_redirect_url,
 .post-type-product table.fixed thead .column-seopress_canonical,
-.post-type-product table.fixed thead .column-seopress_tkw,
-.post-type-product .fixed .column-seopress_ps {
+.post-type-product table.fixed thead .column-seopress_tkw {
     width: 6%;
 }
 
@@ -568,8 +562,7 @@ table.fixed thead .column-seopress_inbound {
     table.fixed thead .column-seopress_noindex,
     table.fixed thead .column-seopress_outbound,
     table.fixed thead .column-seopress_inbound,
-    table.fixed thead .column-seopress_score,
-    table.fixed thead .column-seopress_ps {
+    table.fixed thead .column-seopress_score {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -2117,7 +2110,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 }
 
 .seopress-styles .seopress-option {
-    padding: 84px 0px 0px 42px;
+    padding: 84px 0px 0px 22px;
     display: inline-block;
     width: calc(100% - 20px);
     will-change: auto;
@@ -2210,10 +2203,6 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 .seopress-styles .seopress-option .seopress-tab .submit {
     display: block;
     position: relative;
-}
-
-.seopress-styles #wpcontent {
-    padding-left: 0;
 }
 
 .seopress-styles pre:not(.CodeMirror-line, .CodeMirror-placeholder) {

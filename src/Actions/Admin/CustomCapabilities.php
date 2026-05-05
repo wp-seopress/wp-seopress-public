@@ -6,13 +6,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use SEOPress\Core\Hooks\ExecuteHooksBackend;
+use SEOPress\Core\Hooks\ExecuteHooks;
 use SEOPress\Helpers\PagesAdmin;
 
 /**
  * Custom capabilities
+ *
+ * Implements ExecuteHooks (not ExecuteHooksBackend) so that the
+ * `seopress_capability` filter is also registered on REST API and CLI
+ * requests, where `is_admin()` is false. Without this, REST permission
+ * callbacks calling `seopress_capability( 'manage_options', $context )`
+ * would fall through to the unfiltered `manage_options` cap and reject
+ * non-admin roles that legitimately have the custom seopress_manage_*
+ * caps. Admin-only side effects (option_page_capability_* save filters
+ * and the role-cap sync on init) stay gated behind is_admin() below.
  */
-class CustomCapabilities implements ExecuteHooksBackend {
+class CustomCapabilities implements ExecuteHooks {
 
 	/**
 	 * The CustomCapabilities hooks.
@@ -22,23 +31,35 @@ class CustomCapabilities implements ExecuteHooksBackend {
 	 * @return void
 	 */
 	public function hooks() {
-		if ( '1' === seopress_get_toggle_option( 'advanced' ) ) {
-			add_filter( 'seopress_capability', array( $this, 'custom' ), 9999, 2 );
-			add_filter( 'option_page_capability_seopress_titles_option_group', array( $this, 'capabilitySaveTitlesMetas' ) );
-			add_filter( 'option_page_capability_seopress_xml_sitemap_option_group', array( $this, 'capabilitySaveXmlSitemap' ) );
-			add_filter( 'option_page_capability_seopress_social_option_group', array( $this, 'capabilitySaveSocial' ) );
-			add_filter( 'option_page_capability_seopress_google_analytics_option_group', array( $this, 'capabilitySaveAnalytics' ) );
-			add_filter( 'option_page_capability_seopress_instant_indexing_option_group', array( $this, 'capabilitySaveInstantIndexing' ) );
-			add_filter( 'option_page_capability_seopress_advanced_option_group', array( $this, 'capabilitySaveAdvanced' ) );
-			add_filter( 'option_page_capability_seopress_tools_option_group', array( $this, 'capabilitySaveTools' ) );
-			add_filter( 'option_page_capability_seopress_import_export_option_group', array( $this, 'capabilitySaveImportExport' ) );
-
-			add_filter( 'option_page_capability_seopress_pro_mu_option_group', array( $this, 'capabilitySavePro' ) );
-			add_filter( 'option_page_capability_seopress_pro_option_group', array( $this, 'capabilitySavePro' ) );
-			add_filter( 'option_page_capability_seopress_bot_option_group', array( $this, 'capabilitySaveBot' ) );
-
-			add_action( 'init', array( $this, 'addCapabilities' ) );
+		if ( '1' !== seopress_get_toggle_option( 'advanced' ) ) {
+			return;
 		}
+
+		// Capability translation filter must be available on every request
+		// type (admin pages, REST API, frontend caps checks). The cost is
+		// negligible: a single add_filter() call per request.
+		add_filter( 'seopress_capability', array( $this, 'custom' ), 9999, 2 );
+
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		// Admin-only side effects: settings-API save capability remapping
+		// and one-shot role/capability synchronisation on init.
+		add_filter( 'option_page_capability_seopress_titles_option_group', array( $this, 'capabilitySaveTitlesMetas' ) );
+		add_filter( 'option_page_capability_seopress_xml_sitemap_option_group', array( $this, 'capabilitySaveXmlSitemap' ) );
+		add_filter( 'option_page_capability_seopress_social_option_group', array( $this, 'capabilitySaveSocial' ) );
+		add_filter( 'option_page_capability_seopress_google_analytics_option_group', array( $this, 'capabilitySaveAnalytics' ) );
+		add_filter( 'option_page_capability_seopress_instant_indexing_option_group', array( $this, 'capabilitySaveInstantIndexing' ) );
+		add_filter( 'option_page_capability_seopress_advanced_option_group', array( $this, 'capabilitySaveAdvanced' ) );
+		add_filter( 'option_page_capability_seopress_tools_option_group', array( $this, 'capabilitySaveTools' ) );
+		add_filter( 'option_page_capability_seopress_import_export_option_group', array( $this, 'capabilitySaveImportExport' ) );
+
+		add_filter( 'option_page_capability_seopress_pro_mu_option_group', array( $this, 'capabilitySavePro' ) );
+		add_filter( 'option_page_capability_seopress_pro_option_group', array( $this, 'capabilitySavePro' ) );
+		add_filter( 'option_page_capability_seopress_bot_option_group', array( $this, 'capabilitySaveBot' ) );
+
+		add_action( 'init', array( $this, 'addCapabilities' ) );
 	}
 
 	/**

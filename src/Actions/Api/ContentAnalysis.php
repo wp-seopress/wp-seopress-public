@@ -15,19 +15,11 @@ use SEOPress\ManualHooks\ApiHeader;
 class ContentAnalysis implements ExecuteHooks {
 
 	/**
-	 * The current user.
-	 *
-	 * @var int|null
-	 */
-	private $current_user;
-
-	/**
 	 * The Content Analysis hooks.
 	 *
 	 * @since 5.0.0
 	 */
 	public function hooks() {
-		$this->current_user = wp_get_current_user()->ID;
 		add_action( 'rest_api_init', array( $this, 'register' ) );
 	}
 
@@ -53,14 +45,7 @@ class ContentAnalysis implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					$post_id      = $request['id'];
-					$current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
-
-					if ( ! user_can( $current_user, 'edit_post', $post_id ) ) {
-						return false;
-					}
-
-					return true;
+					return current_user_can( 'edit_post', (int) $request['id'] );
 				},
 			)
 		);

@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use SEOPress\Core\Hooks\ExecuteHooks;
+use SEOPress\Helpers\PagesAdmin;
 
 /**
  * Module settings for React admin pages.
@@ -46,6 +47,10 @@ class ModuleSettings implements ExecuteHooks {
 		'seopress-import-export'   => array(
 			'type'   => 'tools',
 			'option' => 'seopress_import_export_option_name',
+		),
+		'seopress-network-option'  => array(
+			'type'   => 'network-admin',
+			'option' => 'seopress_pro_mu_option_name',
 		),
 	);
 
@@ -145,6 +150,13 @@ class ModuleSettings implements ExecuteHooks {
 				'label'   => __( 'Tools', 'wp-seopress' ),
 				'url'     => admin_url( 'admin.php?page=seopress-import-export' ),
 			),
+			array(
+				'slug'    => 'seopress-network-option',
+				'type'    => 'network-admin',
+				'feature' => null,
+				'label'   => __( 'SEO Network settings', 'wp-seopress' ),
+				'url'     => network_admin_url( 'admin.php?page=seopress-network-option' ),
+			),
 		);
 
 		return apply_filters( 'seopress_settings_all_pages', $pages );
@@ -176,8 +188,13 @@ class ModuleSettings implements ExecuteHooks {
 			return;
 		}
 
-		// Check user capabilities.
-		if ( ! current_user_can( 'manage_options' ) ) {
+		// Check user capabilities, respecting the custom capability system
+		// so that roles granted seopress_manage_* caps for the current page
+		// can load the React app instead of being silently denied.
+		$context    = PagesAdmin::getCapabilityByPage( $page_key );
+		$capability = seopress_capability( 'manage_options', $context );
+
+		if ( ! current_user_can( $capability ) ) {
 			return;
 		}
 
@@ -272,11 +289,9 @@ class ModuleSettings implements ExecuteHooks {
 			4
 		);
 
-		// Get post types for the settings.
-		$post_types = $this->getPostTypes();
-
-		// Get taxonomies for the settings.
-		$taxonomies = $this->getTaxonomies();
+		// Get post types and taxonomies from the WordPressData service for consistency.
+		$post_types = $this->formatPostTypes( seopress_get_service( 'WordPressData' )->getPostTypes() );
+		$taxonomies = $this->formatTaxonomies( seopress_get_service( 'WordPressData' )->getTaxonomies() );
 
 		// Get dynamic variables.
 		$dynamic_variables = function_exists( 'seopress_get_dyn_variables' )
@@ -308,6 +323,10 @@ class ModuleSettings implements ExecuteHooks {
 				'PAGE_TYPE'           => $page_config['type'],
 				'OPTION_NAME'         => $page_config['option'],
 				'DYNAMIC_VARIABLES'   => $dynamic_variables,
+				'PREVIEW_VALUES'        => array(
+					'%%sitetitle%%' => get_bloginfo( 'name' ),
+					'%%tagline%%'   => get_bloginfo( 'description' ),
+				),
 				'POST_TYPES'          => $post_types,
 				'TAXONOMIES'          => $taxonomies,
 				'SITEMAP_POST_TYPES'  => $sitemap_post_types,
@@ -334,9 +353,11 @@ class ModuleSettings implements ExecuteHooks {
 			'TOOLS_TABS'          => $this->getToolsTabs(),
 			'TOOLS_EXTRA_RESET_ACTIONS' => apply_filters( 'seopress_react_tools_reset_actions', array() ),
 			'IS_PRO_ACTIVE'       => is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ),
+			'IS_WOOCOMMERCE_ACTIVE' => is_plugin_active( 'woocommerce/woocommerce.php' ),
 			'PROMOTIONS'          => $this->getContextualPromotion( $page_config['type'] ),
 			'PROMO_NONCE'         => wp_create_nonce( 'seopress_dismiss_promotion_nonce' ),
 			'EXTRA_API_ENDPOINTS' => apply_filters( 'seopress_settings_api_endpoints', array() ),
+			'INITIAL_SETTINGS'    => $this->getInitialSettings( $page_config['option'] ),
 			)
 		);
 
@@ -347,35 +368,26 @@ class ModuleSettings implements ExecuteHooks {
 	 *
 	 * @return array
 	 */
-	private function getPostTypes() {
-		$args = array( 'public' => true );
-		$args = apply_filters( 'seopress_get_post_types_args', $args );
-
-		$post_types = get_post_types( $args, 'objects' );
-
-		// Filter to only include viewable post types (matches WordPressData service).
-		$post_types = array_filter( $post_types, 'is_post_type_viewable' );
-
-		unset(
-			$post_types['attachment'],
-			$post_types['seopress_rankings'],
-			$post_types['seopress_backlinks'],
-			$post_types['seopress_404'],
-			$post_types['elementor_library'],
-			$post_types['customer_discount'],
-			$post_types['cuar_private_file'],
-			$post_types['cuar_private_page'],
-			$post_types['ct_template'],
-			$post_types['bricks_template']
-		);
-
+	/**
+	 * Format post type objects into arrays for the React frontend.
+	 *
+	 * @param array $post_types Post type objects from WordPressData service.
+	 *
+	 * @return array
+	 */
+	private function formatPostTypes( $post_types ) {
 		$result = array();
+
+		if ( ! is_array( $post_types ) ) {
+			return $result;
+		}
 
 		foreach ( $post_types as $post_type ) {
 			$result[] = array(
 				'name'        => $post_type->name,
 				'label'       => $post_type->label,
 				'has_archive' => $post_type->has_archive,
+				'menu_icon'   => $post_type->menu_icon,
 			);
 		}
 
@@ -517,20 +529,40 @@ class ModuleSettings implements ExecuteHooks {
 	}
 
 	/**
+	 * Get initial settings for the current page to avoid an extra REST fetch.
+	 *
+	 * @param string $option_name The WordPress option name.
+	 *
+	 * @return array|object The option values, or empty object if none.
+	 */
+	private function getInitialSettings( $option_name ) {
+		$options = get_option( $option_name );
+
+		if ( empty( $options ) || ! is_array( $options ) ) {
+			return new \stdClass();
+		}
+
+		return $options;
+	}
+
+	/**
 	 * Get public taxonomies for settings.
 	 *
 	 * @return array
 	 */
-	private function getTaxonomies() {
-		// Match the WordPressData service: public OR publicly_queryable.
-		$args = array(
-			'public'             => true,
-			'publicly_queryable' => true,
-		);
-		$args       = apply_filters( 'seopress_get_taxonomies_args', $args );
-		$taxonomies = get_taxonomies( $args, 'objects', 'or' );
-
+	/**
+	 * Format taxonomy objects into arrays for the React frontend.
+	 *
+	 * @param array $taxonomies Taxonomy objects from WordPressData service.
+	 *
+	 * @return array
+	 */
+	private function formatTaxonomies( $taxonomies ) {
 		$result = array();
+
+		if ( ! is_array( $taxonomies ) ) {
+			return $result;
+		}
 
 		foreach ( $taxonomies as $taxonomy ) {
 			$result[] = array(

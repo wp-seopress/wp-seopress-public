@@ -39,6 +39,7 @@ class I18nUniversalMetabox {
 				'thumbnail'               => __( 'Thumbnail', 'wp-seopress' ),
 				'x'                       => __( 'x', 'wp-seopress' ),
 				'search_tag'              => __( 'Search a tag', 'wp-seopress' ),
+				'no_result'               => __( 'No result found.', 'wp-seopress' ),
 				'loading_data'            => __( 'Loading your data', 'wp-seopress' ),
 			),
 			'services'       => array(
@@ -382,6 +383,7 @@ class I18nUniversalMetabox {
 					'inspect_url'      => __( 'Inspect with Google', 'wp-seopress' ),
 					'internal_linking' => __( 'Internal Linking', 'wp-seopress' ),
 					'schema_manual'    => __( 'Manual', 'wp-seopress' ),
+					'schema_automatic' => __( 'Automatic', 'wp-seopress' ),
 				),
 			),
 			'seo_bar'        => array(
@@ -467,7 +469,7 @@ class I18nUniversalMetabox {
 			'google_preview' => array(
 				'title'        => __( 'Google Snippet Preview', 'wp-seopress' ),
 				'description'  => __(
-					'This is what your page will look like in Google search results. You have to publish your post to get the Google Snippet Preview. Note that Google may optionally display an image of your article.',
+					'How your page will look in Google search results once published.',
 					'wp-seopress'
 				),
 				'mobile_title' => __( 'Mobile Preview', 'wp-seopress' ),
@@ -495,7 +497,7 @@ class I18nUniversalMetabox {
 				),
 			),
 			'layouts'        => array(
-				'meta_robot'       => array(
+				'meta_robot'        => array(
 					/* translators: %s documentation URL */
 					'title'                                => __(
 						"You cannot uncheck a parameter? This is normal, and it's most likely defined in the <a href='%s'>global settings of the plugin.</a>",
@@ -544,7 +546,7 @@ class I18nUniversalMetabox {
 						'wp-seopress'
 					),
 				),
-				'inspect_url'      => array(
+				'inspect_url'       => array(
 					'description'                       => __(
 						'Inspect the current post URL with Google Search Console and get informations about your indexing, crawling, rich snippets and more.',
 						'wp-seopress'
@@ -667,14 +669,14 @@ class I18nUniversalMetabox {
 					),
 					'btn_full_report'                   => __( 'View Full Report', 'wp-seopress' ),
 				),
-				'video_sitemap'    => array(
+				'video_sitemap'     => array(
 					'btn_remove_video' => __(
 						'Remove video',
 						'wp-seopress'
 					),
 					'btn_add_video'    => __( 'Add video', 'wp-seopress' ),
 				),
-				'internal_linking' => array(
+				'internal_linking'  => array(
 					'matching'       => __( 'Matching word:', 'wp-seopress' ),
 					'description_1'  => __(
 						'Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.',
@@ -687,6 +689,10 @@ class I18nUniversalMetabox {
 					'no_suggestions' => __( 'No suggestion of internal links.', 'wp-seopress' ),
 					'copied'         => __(
 						'Link copied in the clipboard',
+						'wp-seopress'
+					),
+					'copy_failed'    => __(
+						'Unable to copy the link. Please copy it manually.',
 						'wp-seopress'
 					),
 					/* translators: %s post title */
@@ -702,7 +708,7 @@ class I18nUniversalMetabox {
 					/* translators: %s post title */
 					'edit_link_aria' => __( 'Edit %s link', 'wp-seopress' ),
 				),
-				'content_analysis' => array(
+				'content_analysis'  => array(
 					'description'                    => __(
 						'Enter a few keywords for analysis to help you write optimized content.',
 						'wp-seopress'
@@ -743,12 +749,23 @@ class I18nUniversalMetabox {
 					'already_used_singular'          => /* translators: %d number of times a target keyword is used, singular form only */ __( 'is already used %d time', 'wp-seopress' ),
 					'already_used_plural'            => /* translators: %d number of times a target keyword is used, plural form only */ __( 'is already used %d times', 'wp-seopress' ),
 				),
-				'schemas_manual'   => array(
+				'schemas_manual'    => array(
 					'description' => __( 'It is recommended to enter as many properties as possible to maximize the chances of getting a rich snippet in Google search results.', 'wp-seopress' ),
 					'remove'      => __( 'Delete schema', 'wp-seopress' ),
 					'add'         => __( 'Add a schema', 'wp-seopress' ),
 				),
-				'social'           => array(
+				'schemas_automatic' => array(
+					'description'    => __( 'These schemas are automatically applied to this post based on rules defined in your Schemas library. You can override values per post here, or disable individual schemas.', 'wp-seopress' ),
+					'count_singular' => /* translators: %s number of automatic schemas */ __( 'You have %s automatic schema:', 'wp-seopress' ),
+					'count_plural'   => /* translators: %s number of automatic schemas */ __( 'You have %s automatic schemas:', 'wp-seopress' ),
+					'disable_all'    => __( 'Disable all automatic schemas for this post', 'wp-seopress' ),
+					'disable_one'    => __( 'Disable this automatic schema for this post', 'wp-seopress' ),
+					'edit_schema'    => __( 'Edit', 'wp-seopress' ),
+					'no_overrides'   => __( 'This schema has no overridable fields. Mark fields as "Manual single" in the schema editor to expose them per post.', 'wp-seopress' ),
+					'empty_state'    => __( 'No automatic schemas match this post.', 'wp-seopress' ),
+					'type_label'     => __( 'Type:', 'wp-seopress' ),
+				),
+				'social'            => array(
 					'title'          => /* translators: %s post title */ __(
 						'LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below. <a href="https://developers.facebook.com/tools/debug/sharing/?q=%s" target="_blank">Ask Facebook to update its cache <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" style="vertical-align:middle;margin-right:4px;"><path d="M19.5 4.5h-7V6h4.44l-5.97 5.97 1.06 1.06L18 7.06v4.44h1.5v-7Zm-13 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3H17v3a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h3V5.5h-3Z"></path></svg></a>',
 						'wp-seopress'
@@ -762,7 +779,7 @@ class I18nUniversalMetabox {
 						'wp-seopress'
 					),
 				),
-				'social_preview'   => array(
+				'social_preview'    => array(
 					'facebook' => array(
 						'title'                 => __( 'Facebook Preview', 'wp-seopress' ),
 						'description'           => __(

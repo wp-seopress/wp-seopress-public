@@ -13,19 +13,11 @@ use SEOPress\Core\Hooks\ExecuteHooks;
  */
 class SitemapsSettings implements ExecuteHooks {
 	/**
-	 * Current user ID
-	 *
-	 * @var int
-	 */
-	private $current_user = '';
-
-	/**
 	 * The Sitemaps Settings hooks.
 	 *
 	 * @since 5.0.0
 	 */
 	public function hooks() {
-		$this->current_user = wp_get_current_user()->ID;
 		add_action( 'rest_api_init', array( $this, 'register' ) );
 	}
 
@@ -39,12 +31,7 @@ class SitemapsSettings implements ExecuteHooks {
 	 * @return boolean
 	 */
 	public function permissionCheck( \WP_REST_Request $request ) {
-		$current_user = $this->current_user ? $this->current_user : wp_get_current_user()->ID;
-		if ( ! user_can( $current_user, 'manage_options' ) ) {
-			return false;
-		}
-
-		return true;
+		return current_user_can( seopress_capability( 'manage_options', 'xml_html_sitemap' ) );
 	}
 
 	/**

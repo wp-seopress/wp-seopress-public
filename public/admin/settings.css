@@ -1,0 +1,1470 @@
+/**
+ * SEOPress React Settings Styles
+ * Matches existing PHP layout exactly
+ */
+
+/* Loading and Error States */
+.seopress-settings-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    padding: 40px;
+}
+
+.seopress-settings-loading .spinner {
+    float: none;
+}
+
+.seopress-settings-error {
+    padding: 20px;
+    background: #FEF7F1;
+    border-left: 4px solid #D63638;
+    margin: 20px 0;
+}
+
+/* Remove gap between title and content */
+#seopress-admin-settings-root.seopress-option {
+    padding-top: 20px !important;
+    margin-top: 0 !important;
+}
+
+/* Main Layout - Match PHP #seopress-tabs */
+.seopress-settings-layout {
+    margin: 0;
+}
+
+.seopress-settings-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Sidebar - Match PHP .nav-tab-wrapper */
+.seopress-sidebar {
+    margin: 0;
+    padding: 0;
+    line-height: inherit;
+    min-width: 180px;
+	max-width: 180px;
+	width: 180px;
+    z-index: 10;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 106px;
+    align-self: flex-start;
+}
+
+.seopress-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar tabs - Match PHP .nav-tab exactly */
+.seopress-sidebar-tab {
+    border: 0;
+    background: 0 0;
+    padding: 6px 30px 6px 10px;
+    transition: opacity 0.3s linear;
+    color: #0C082F !important; /* Override .seopress-option a color */
+    opacity: 0.5;
+    margin: 0;
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-weight: normal;
+    white-space: normal;
+    line-height: 1.5;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+}
+
+.seopress-sidebar-tab:hover {
+    opacity: 1;
+}
+
+.seopress-sidebar-tab.is-active {
+    opacity: 1;
+    font-weight: 600;
+    border-left-color: var(--backgroundPrimary, #4E21E7);
+}
+
+.seopress-sidebar-tab:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+/* Save Bar */
+.seopress-save-bar {
+    position: fixed;
+    bottom: 32px;
+    z-index: 100;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+    margin-left: 10px;
+}
+
+.seopress-save-bar.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.seopress-undo-button.components-button.is-tertiary {
+    color: #616161;
+    font-size: 12px;
+    height: auto;
+    padding: 6px 12px;
+    align-self: center;
+}
+
+.seopress-undo-button.components-button.is-tertiary:hover:not(:disabled) {
+    color: #1e1e1e;
+}
+
+/* Snackbar list - fixed to viewport bottom-right */
+.components-snackbar-list.seopress-snackbar-list {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 24px !important;
+    left: auto !important;
+    z-index: 100000 !important;
+    width: auto !important;
+}
+
+/* Hide the old PHP-based snackbar on React settings pages */
+#seopress-notice-save {
+    display: none !important;
+}
+
+.seopress-save-button.components-button.is-primary {
+    background: var(--backgroundPrimary, #4E21E7);
+    border-color: var(--backgroundPrimary, #4E21E7);
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 400;
+    height: auto;
+    border-radius: 4px;
+    line-height: 1.5;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.seopress-save-button.components-button.is-primary:hover:not(:disabled) {
+    background: var(--backgroundPrimaryHover, #3D1ABB);
+    border-color: var(--backgroundPrimaryHover, #3D1ABB);
+}
+
+.seopress-save-button.components-button.is-primary:focus:not(:disabled) {
+    box-shadow: 0 0 0 2px var(--backgroundPrimary, #4E21E7);
+}
+
+.seopress-save-button.components-button.is-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Content Area - Match PHP .seopress-tab */
+.seopress-settings-content {
+    padding: 2rem;
+    display: inline-block;
+    background: #fff;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Section Title - Match PHP version */
+.seopress-section-title {
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1D2327;
+}
+
+/* Info Box - Purple left border */
+.seopress-info-box {
+    border-left: 4px solid var(--backgroundPrimary, #4E21E7);
+    padding: 15px 20px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    color: #1D2327;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Description paragraph */
+.seopress-description {
+    color: #1D2327;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+}
+
+/* Help link */
+.seopress-help-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--backgroundPrimary, #4E21E7);
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.seopress-help-link:hover {
+    text-decoration: underline;
+}
+
+.seopress-help-link .dashicons {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+/* Tab Content */
+.seopress-tab-content {
+    max-width: 100%;
+}
+
+/* Subsection Titles */
+.seopress-subsection-title {
+    margin: 2rem 0 1rem 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #1D2327;
+}
+
+.seopress-subsection-title:first-child {
+    margin-top: 0;
+}
+
+/* Field Row - HORIZONTAL layout, NO BORDERS */
+.seopress-field-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px 0;
+    gap: 20px;
+}
+
+/* Field Label - BOLD */
+.seopress-field-label {
+    width: 240px;
+    min-width: 240px;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1D2327;
+    line-height: 1.6;
+    padding-top: 10px;
+}
+
+.seopress-field-control {
+    flex: 1;
+    min-width: 0;
+    max-width: 600px;
+}
+
+/* Buttons after inputs inside field controls */
+.seopress-field-control .btn {
+    margin-top: 8px;
+}
+
+/* Field Components */
+.seopress-field {
+    margin-bottom: 0;
+}
+
+/* Input Wrapper */
+.seopress-input-wrapper {
+    width: 100%;
+}
+
+/* Text/Textarea Inputs - Match PHP styling */
+.seopress-input,
+.seopress-field input[type="text"],
+.seopress-field textarea {
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 100%;
+    line-height: 1.5 !important; /* Override .seopress-option input line-height: 46px */
+    height: auto !important;
+    background-color: #fff;
+    color: #1D2327;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+.seopress-input:hover,
+.seopress-field input[type="text"]:hover,
+.seopress-field textarea:hover {
+    border-color: var(--backgroundPrimary, #4E21E7);
+}
+
+.seopress-input:focus,
+.seopress-field input[type="text"]:focus,
+.seopress-field textarea:focus {
+    border-color: var(--backgroundPrimary, #4E21E7);
+    box-shadow: 0 0 0 1px var(--backgroundPrimary, #4E21E7);
+    outline: none;
+}
+
+/* =============================================
+   Token Editor — visual contentEditable input
+   for dynamic variable templates
+   ============================================= */
+
+.seopress-token-editor-wrapper {
+    width: 100%;
+    max-width: 35rem;
+    position: relative;
+}
+
+.seopress-token-editor {
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 8px 30px 8px 12px;
+    font-size: 14px;
+    width: 100%;
+    min-height: 38px;
+    line-height: 2.2;
+    background-color: #fff;
+    color: #1D2327;
+    box-shadow: none;
+    box-sizing: border-box;
+    cursor: text;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.seopress-token-editor--multiline {
+    min-height: 80px;
+}
+
+.seopress-token-editor:hover {
+    border-color: var(--backgroundPrimary, #4E21E7);
+}
+
+.seopress-token-editor:focus {
+    border-color: var(--backgroundPrimary, #4E21E7);
+    box-shadow: 0 0 0 1px var(--backgroundPrimary, #4E21E7);
+    outline: none;
+}
+
+/* Placeholder via data-attribute + :empty pseudo-class */
+.seopress-token-editor:empty::before {
+    content: attr(data-placeholder);
+    color: #a7aaad;
+    pointer-events: none;
+    display: block;
+}
+
+/* Token pill — inline variable tag */
+.seopress-token {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    background: var(--backgroundSecondary, #F2EFFB);
+    color: var(--backgroundPrimary, #4E21E7);
+    border: 1px solid rgba(78, 33, 231, 0.2);
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin: 0 2px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+    vertical-align: baseline;
+    cursor: grab;
+    user-select: none;
+    white-space: nowrap;
+    transition: background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.seopress-token:hover {
+    background: rgba(78, 33, 231, 0.12);
+    border-color: rgba(78, 33, 231, 0.35);
+}
+
+/* Drag & drop states */
+.seopress-token--dragging {
+    opacity: 0.3;
+    cursor: grabbing;
+}
+
+.seopress-token--drop-before::before,
+.seopress-token--drop-after::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    width: 2px;
+    background: var(--backgroundPrimary, #4E21E7);
+    border-radius: 1px;
+}
+
+.seopress-token--drop-before::before {
+    left: -5px;
+}
+
+.seopress-token--drop-after::after {
+    right: -5px;
+}
+
+.seopress-token-label {
+    pointer-events: none;
+}
+
+/* CSS tooltip showing the %%var%% key on hover */
+.seopress-token::after {
+    content: attr(data-var);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background: #1e1e1e;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 400;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    line-height: 1.4;
+    white-space: nowrap;
+    border-radius: 3px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 10;
+}
+
+.seopress-token:hover::after {
+    opacity: 1;
+}
+
+/* Hide tooltip while dragging */
+.seopress-token--dragging::after {
+    display: none;
+}
+
+/* Token remove button */
+.seopress-token-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--backgroundPrimary, #4E21E7);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.15s ease, background 0.15s ease;
+    flex-shrink: 0;
+}
+
+.seopress-token-remove:hover {
+    opacity: 1;
+    background: rgba(78, 33, 231, 0.15);
+}
+
+.seopress-token-remove:focus {
+    outline: none;
+    opacity: 1;
+}
+
+/* Clear all button — positioned inside the editor wrapper */
+.seopress-token-clear-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0 0 1px 0;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #a7aaad;
+    font-size: 15px;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.seopress-token-clear-btn:hover {
+    color: var(--colorAlert, #eb0f00);
+    background: rgba(235, 15, 0, 0.08);
+}
+
+/* Preview line */
+.seopress-token-preview {
+    max-width: 35rem;
+    margin-top: 6px;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color, #757575);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.seopress-token-preview-label {
+    color: var(--color, #757575);
+    font-weight: 600;
+}
+
+.seopress-token-preview-text {
+    font-style: italic;
+}
+
+/* Quick-var chip — used state (still clickable, just visually dimmed) */
+.seopress-variable-chip--used {
+    opacity: 0.6;
+}
+
+.seopress-variable-chip--used .seopress-chip-icon {
+    color: var(--colorSuccess, #4ab866);
+}
+
+/* Dropdown — highlighted item (keyboard nav) */
+.seopress-variable-item--highlighted {
+    background: #F2EFFB !important;
+}
+
+/* Dropdown — "in use" badge */
+.seopress-variable-used-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--colorSuccess, #4ab866);
+    background: rgba(74, 184, 102, 0.1);
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+/* Field Error State */
+.seopress-field.has-error .seopress-input,
+.seopress-field.has-error input[type="text"],
+.seopress-field.has-error textarea {
+    border-color: #d63638;
+}
+
+.seopress-field.has-error .seopress-input:focus,
+.seopress-field.has-error input[type="text"]:focus,
+.seopress-field.has-error textarea:focus {
+    border-color: #d63638;
+    box-shadow: 0 0 0 1px #d63638;
+}
+
+.seopress-field-error {
+    color: #d63638;
+    font-size: 12px;
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+/* TextareaControl with error — style the WP component's help text */
+.seopress-textarea-field.has-error .components-base-control__help {
+    color: #d63638;
+}
+
+/* Field Help Text */
+.seopress-field-help {
+    color: #646970;
+    font-size: 13px;
+    margin: 8px 0 0 0;
+    font-style: normal;
+    line-height: 1.5;
+}
+
+/* Variable Chips - Match PHP + SITE TITLE, + SEPARATOR style */
+.seopress-variable-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.seopress-variable-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #E6E6E8;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1D2327;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.seopress-variable-chip:hover {
+    border-color: var(--backgroundPrimary, #4E21E7);
+    background: #F2EFFB;
+}
+
+.seopress-chip-icon {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--backgroundPrimary, #4E21E7);
+}
+
+.seopress-chip-label {
+    color: #1D2327;
+}
+
+/* More Variables Dropdown Button */
+.seopress-more-variables-wrapper {
+    position: relative;
+}
+
+.seopress-more-variables-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid #E6E6E8;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.seopress-more-variables-btn:hover {
+    border-color: var(--backgroundPrimary, #4E21E7);
+    background: #F2EFFB;
+}
+
+.seopress-more-variables-btn .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    color: #1D2327;
+}
+
+/* Variables Popover */
+.seopress-variables-popover {
+    z-index: 100001 !important;
+}
+
+.seopress-variables-popover .components-popover__content {
+    padding: 0;
+    min-width: 280px;
+    max-height: 300px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 3px 30px rgba(25, 30, 35, 0.1);
+}
+
+.seopress-variables-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.seopress-variables-search,
+.seopress-variables-search:focus,
+.seopress-variables-search:active {
+    padding: 10px 15px;
+    margin: 0;
+    border: none !important;
+    border-bottom: 1px solid #E6E6E8 !important;
+    border-radius: 0;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.seopress-variables-list ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-y: auto;
+    max-height: 250px;
+}
+
+.seopress-variables-list li {
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s ease;
+    position: relative;
+}
+
+.seopress-variables-list li::after {
+    content: "+";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #646970;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.seopress-variables-list li:hover::after {
+    opacity: 1;
+}
+
+.seopress-variables-list li:hover,
+.seopress-variables-list li:focus {
+    background: #F2EFFB;
+    outline: none;
+}
+
+.seopress-variables-list li code {
+    font-size: 12px;
+    color: var(--backgroundPrimary, #4E21E7);
+    background: transparent;
+    padding: 0;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.seopress-variables-list li span {
+    font-size: 12px;
+    color: #646970;
+}
+
+.seopress-variables-list li.seopress-no-results {
+    cursor: default;
+    color: #646970;
+    font-style: italic;
+}
+
+.seopress-variables-list li.seopress-no-results:hover {
+    background: transparent;
+}
+
+.seopress-variables-list li.seopress-no-results::after {
+    display: none;
+}
+
+/* Toggle rows - same padding on both columns so text lines up */
+.seopress-field-row:has(.seopress-toggle-field) .seopress-field-label {
+    padding-top: 0;
+}
+
+/* Toggle Control - reset WP component margins */
+.seopress-toggle-field .components-toggle-control,
+.seopress-toggle-field .components-base-control {
+    margin: 0;
+}
+
+/* Spacing between stacked toggle fields */
+.seopress-toggle-field + .seopress-toggle-field {
+    margin-top: 16px;
+}
+
+.seopress-toggle-field .components-base-control__field,
+.seopress-toggle-field .components-toggle-control,
+.seopress-toggle-field .components-base-control__field > label,
+.seopress-toggle-field .components-flex {
+    margin-bottom: 0;
+    align-items: flex-start !important;
+}
+
+.seopress-toggle-field .components-form-toggle {
+    flex-shrink: 0;
+}
+
+.seopress-toggle-field .components-form-toggle.is-checked .components-form-toggle__track {
+    background: var(--backgroundPrimary, #4E21E7);
+    border-color: var(--backgroundPrimary, #4E21E7);
+}
+
+.seopress-toggle-field .components-toggle-control__label {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* Toggle all panels button */
+.seopress-panels-toggle-all {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.seopress-panels-toggle-all .components-button.is-link {
+    color: var(--primaryColor, #4E21E7);
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.seopress-panels-toggle-all .components-button.is-link:hover {
+    text-decoration: underline;
+}
+
+/* Panel Accordion Styling - for Post Types/Taxonomies */
+.seopress-panel {
+    margin-bottom: 10px;
+    border: 1px solid #E6E6E8;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.seopress-panel .components-panel__body {
+    border: none;
+}
+
+.seopress-panel .components-panel__body-title {
+    border: none;
+}
+
+.seopress-panel .components-panel__body-title button {
+    font-weight: 500;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.seopress-panel .components-panel__body-title button:hover {
+    background: #F2EFFB;
+}
+
+.seopress-panel-content {
+    padding: 0 0 15px;
+}
+
+.seopress-panel-content .seopress-field-row {
+    padding: 15px 0;
+}
+
+.seopress-panel-content .seopress-field-row:first-child {
+    padding-top: 0;
+}
+
+/* Panel Header — Post Type Icon */
+.seopress-panel-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    color: var(--color, #757575);
+    font-size: 20px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.seopress-panel-icon--img {
+    opacity: 0.6;
+}
+
+/* Panel Header — Robots Badges */
+.seopress-robots-badges {
+    display: inline-flex;
+    gap: 6px;
+    margin-left: auto;
+    padding-left: 12px;
+    margin-right: 28px;
+}
+
+.seopress-robots-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.seopress-robots-badge--noindex {
+    background: rgba(235, 15, 0, 0.08);
+    color: var(--colorAlert, #eb0f00);
+}
+
+.seopress-robots-badge--nofollow {
+    background: rgba(227, 159, 72, 0.12);
+    color: var(--colorLowAlert, #e39f48);
+}
+
+/* Hide badges when panel is open (toggles already visible) */
+.seopress-panel.is-opened .seopress-robots-badges {
+    display: none;
+}
+
+/* Ensure panel header button aligns icon + title + badges */
+.seopress-panel .components-panel__body-title button {
+    display: flex;
+    align-items: center;
+}
+
+/* Reset .seopress-notice inside React layout (PHP default has top:85px, left:25px for classic view) */
+.seopress-settings-content .seopress-notice {
+    top: inherit;
+    left: inherit;
+    margin: 10px 0 20px 0;
+    width: auto;
+    border-bottom: 1px solid var(--borderColorLight, #E6E6E8);
+}
+
+/* SeopressNotice - brand color for info notices */
+.seopress-wp-notice.components-notice.is-info {
+    border-left-color: var(--backgroundPrimary, #4E21E7);
+}
+
+/* SeopressNotice - consistent spacing */
+.seopress-wp-notice.components-notice {
+    margin: 15px 0;
+}
+
+/* Reset child element margins inside notices to remove excess whitespace */
+.seopress-wp-notice.components-notice p {
+    margin: 0;
+}
+
+.seopress-wp-notice.components-notice p + p {
+    margin-top: 8px;
+}
+
+.seopress-wp-notice.components-notice h3 {
+    margin: 0 0 4px 0;
+}
+
+.seopress-wp-notice.components-notice ol,
+.seopress-wp-notice.components-notice ul {
+    margin: 8px 0;
+    padding-left: 1.5em;
+}
+
+.seopress-wp-notice.components-notice ol li,
+.seopress-wp-notice.components-notice ul li {
+    margin-bottom: 4px;
+}
+
+.seopress-wp-notice .components-notice__content > .components-panel__body {
+    margin-top: 0;
+}
+
+.seopress-wp-notice .components-notice__content > p + .components-panel__body {
+    margin-top: 16px;
+}
+
+/* Notice inside field controls - tighter margins */
+.seopress-field-control .seopress-wp-notice.components-notice {
+    margin: 10px 0;
+}
+
+/* Snackbar override - ensure consistent styling */
+.seopress-snackbar-list .components-snackbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Media Upload Field */
+.seopress-media-upload-wrapper {
+    width: 100%;
+}
+
+.seopress-media-upload-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.seopress-media-upload-preview {
+    margin-top: 10px;
+    max-width: 300px;
+}
+
+.seopress-media-upload-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid #E6E6E8;
+}
+
+/* Sitemap Post Type / Taxonomy Listing (non-accordion style) */
+.seopress_wrap_single_cpt,
+.seopress_wrap_single_tax {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.seopress_wrap_single_cpt:last-child,
+.seopress_wrap_single_tax:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.seopress_wrap_single_cpt h3,
+.seopress_wrap_single_tax h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #1D2327;
+}
+
+.seopress_wrap_single_cpt h3 code,
+.seopress_wrap_single_tax h3 code {
+    font-size: 12px;
+    font-weight: 400;
+    color: #646970;
+    background: #f0f0f1;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+/* Help icon (question mark) next to labels */
+.seopress-doc {
+    display: inline;
+    text-decoration: none;
+    color: #9ca0a4;
+    white-space: nowrap;
+}
+
+.seopress-doc:hover {
+    color: var(--backgroundPrimary, #4E21E7);
+}
+
+.seopress-doc .dashicons-editor-help {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+}
+
+/* URL Counter (progress bar) */
+.seopress-url-counter {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.seopress-url-counter-bar {
+    flex: 1;
+    height: 24px;
+    background: #f0f0f1;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.seopress-url-counter-fill {
+    height: 100%;
+    background: var(--backgroundPrimary, #4E21E7);
+    color: #fff;
+    font-size: 11px;
+    line-height: 24px;
+    text-align: center;
+    min-width: 30px;
+    transition: width 0.2s ease;
+    border-radius: 4px;
+}
+
+.seopress-url-counter-text {
+    white-space: nowrap;
+    font-size: 13px;
+    color: #1D2327;
+}
+
+/* Indexing Log */
+.seopress-indexing-log pre {
+    background: #f6f7f7;
+    padding: 10px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 12px;
+    max-height: 300px;
+}
+
+.seopress-indexing-urls {
+    margin: 5px 0 0 20px;
+    list-style: disc;
+}
+
+.seopress-indexing-urls li {
+    word-break: break-all;
+}
+
+/* Color Picker Field */
+.seopress-color-picker-wrapper {
+    margin-bottom: 10px;
+}
+
+.seopress-color-picker-wrapper .description {
+    margin-bottom: 5px;
+    font-style: italic;
+    color: #646970;
+}
+
+.seopress-color-picker-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.seopress-color-picker-swatch-wrap {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+}
+
+.seopress-color-picker-swatch {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.seopress-color-picker-native {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.seopress-color-picker-input {
+    width: 120px;
+    padding: 4px 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.seopress-color-picker-clear {
+    background: none;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: #646970;
+    font-size: 12px;
+}
+
+.seopress-color-picker-clear:hover {
+    color: #d63638;
+    border-color: #d63638;
+}
+
+/* Role Checkboxes */
+.seopress-role-checkboxes {
+    display: grid;
+    gap: 4px 16px;
+    margin: 8px 0 12px;
+}
+
+.seopress-role-checkboxes p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.seopress-role-checkbox label,
+.seopress-role-checkboxes label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.seopress-role-checkbox input[type="checkbox"],
+.seopress-role-checkboxes input[type="checkbox"] {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.seopress-security-page-roles {
+    margin-bottom: 16px;
+}
+
+.seopress-security-page-roles h4 {
+    margin: 12px 0 4px;
+}
+
+/* Cookie Bar Styling Sections */
+.seopress-cb-section {
+    margin-top: 20px;
+}
+
+.seopress-cb-section h2 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+}
+
+.seopress-cb-section > p {
+    margin: 0 0 15px 0;
+    color: #646970;
+}
+
+.seopress-cb-section hr {
+    margin: 25px 0 15px 0;
+    border: none;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Plugin Migration Cards Grid */
+.seopress-plugins-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.seopress-migration-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 12px;
+    background: #fff;
+    border: 1px solid #E6E6E8;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.seopress-migration-card:hover:not(:disabled) {
+    border-color: var(--backgroundPrimary, #4E21E7);
+    box-shadow: 0 1px 6px rgba(78, 33, 231, 0.1);
+}
+
+.seopress-migration-card.is-selected {
+    border-color: var(--backgroundPrimary, #4E21E7);
+    box-shadow: 0 0 0 1px var(--backgroundPrimary, #4E21E7);
+    background: #F9F7FF;
+}
+
+.seopress-migration-card:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.seopress-migration-card-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.seopress-migration-card-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1D2327;
+    line-height: 1.3;
+}
+
+.seopress-migration-details {
+    margin: 16px 0;
+    padding: 12px 16px;
+    background: #f6f7f7;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.seopress-migration-details p {
+    margin: 0 0 6px 0;
+}
+
+.seopress-migration-details ul {
+    margin: 0 0 0 20px;
+    padding: 0;
+    list-style: disc;
+}
+
+.seopress-migration-details li {
+    margin: 2px 0;
+    color: #1D2327;
+}
+
+.seopress-migration-action {
+    margin: 16px 0;
+}
+
+.seopress-migration-progress {
+    margin: 16px 0;
+    max-width: 500px;
+}
+
+/* Confirm Modal */
+.seopress-confirm-modal {
+    max-width: 480px !important;
+}
+
+.seopress-confirm-modal .components-modal__content {
+    padding: 24px;
+}
+
+.seopress-confirm-modal p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+.seopress-confirm-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.seopress-confirm-modal .seopress-confirm-modal-actions .components-button.is-secondary {
+    color: var(--backgroundPrimary, #4E21E7);
+    box-shadow: inset 0 0 0 1px var(--backgroundPrimary, #4E21E7) !important;
+}
+
+.seopress-confirm-modal .seopress-confirm-modal-actions .components-button.is-secondary:hover:not(:disabled) {
+    color: var(--backgroundPrimaryHover, #3D1ABB);
+    box-shadow: inset 0 0 0 1px var(--backgroundPrimaryHover, #3D1ABB) !important;
+}
+
+.seopress-confirm-modal-primary.components-button.is-primary {
+    background: var(--backgroundPrimary, #4E21E7);
+    border-color: var(--backgroundPrimary, #4E21E7);
+}
+
+.seopress-confirm-modal-primary.components-button.is-primary:hover:not(:disabled) {
+    background: var(--backgroundPrimaryHover, #3D1ABB);
+    border-color: var(--backgroundPrimaryHover, #3D1ABB);
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 782px) {
+    .seopress-settings-container {
+        display: block;
+    }
+
+    .seopress-sidebar {
+        width: 100%;
+        min-width: 100%;
+        min-height: auto;
+        margin-bottom: 20px;
+        position: static;
+    }
+
+    .seopress-sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .seopress-sidebar-tab {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        padding: 8px 12px;
+        width: auto;
+    }
+
+    .seopress-sidebar-tab.is-active {
+        border-left-color: transparent;
+        border-bottom-color: var(--backgroundPrimary, #4E21E7);
+    }
+
+    .seopress-save-bar {
+        padding: 0 10px;
+    }
+
+    .seopress-settings-content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .seopress-field-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .seopress-field-label {
+        width: 100%;
+        min-width: 100%;
+        padding-top: 0;
+    }
+
+    .seopress-field-control {
+        max-width: 100%;
+    }
+}
+
+/* ── Field highlight (triggered by the command palette) ── */
+
+.seopress-field-row.is-seopress-highlight {
+	position: relative;
+}
+
+/* Background fill — less vertical gap to avoid overlapping neighbours */
+.seopress-field-row.is-seopress-highlight::before {
+	content: "";
+	position: absolute;
+	inset: -8px -15px;
+	border-radius: 8px;
+	background: rgba( 78, 33, 231, 0.12 );
+	pointer-events: none;
+	animation: seopress-field-pulse 1s ease-in-out 3;
+}
+
+/* Border ring on top */
+.seopress-field-row.is-seopress-highlight::after {
+	content: "";
+	position: absolute;
+	inset: -8px -15px;
+	border-radius: 8px;
+	border: 2px solid var(--primaryColor, #4E21E7);
+	pointer-events: none;
+	animation: seopress-field-ring 1s ease-in-out 3;
+}
+
+@keyframes seopress-field-pulse {
+	0%, 100% { opacity: 0; }
+	50%      { opacity: 1; }
+}
+
+@keyframes seopress-field-ring {
+	0%, 100% { opacity: 0; }
+	50%      { opacity: 1; }
+}
+
