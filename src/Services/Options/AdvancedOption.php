@@ -445,6 +445,15 @@ class AdvancedOption {
 	}
 
 	/**
+	 * The getAppearanceUniversalMetaboxFrontendDisable function.
+	 *
+	 * @since 9.8.1
+	 */
+	public function getAppearanceUniversalMetaboxFrontendDisable() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_advanced_appearance_universal_metabox_disable_frontend' );
+	}
+
+	/**
 	 * The getAppearanceAdminBar function.
 	 *
 	 * @since 6.6
