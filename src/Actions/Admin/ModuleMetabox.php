@@ -26,19 +26,19 @@ class ModuleMetabox implements ExecuteHooks {
 		add_action( 'add_meta_boxes', array( $this, 'registerClassicOpenerMetabox' ) );
 
 		if ( current_user_can( seopress_capability( 'edit_posts' ) ) ) { // phpcs:ignore
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueueFrontend' ) );
+			// Priority 110 so the beacon survives builders that wipe the
+			// script queue mid-flight (Avada Live Builder clears it at 100).
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueueFrontend' ), 110 );
 		}
 	}
 
 	/**
-	 * Register a lightweight "opener" metabox shown in the normal
-	 * metabox area on the Classic Editor. Clicking the button dispatches
-	 * a CustomEvent that the React app listens for to open the full
-	 * universal metabox overlay — giving Classic users a familiar entry
-	 * point where they expect it, instead of hunting for the floating
-	 * beacon. Skipped on Gutenberg (which has its own sidebar panel) and
-	 * when the universal metabox can't be enqueued (legacy classic
-	 * metabox still handles that case).
+	 * Register the Classic Editor "SEO" metabox. The body provides the
+	 * mount node for the React universal metabox so it renders inline
+	 * where Classic users expect it, instead of hunting for the floating
+	 * beacon or opening a separate overlay. Skipped on Gutenberg (which
+	 * has its own sidebar panel) and when the universal metabox can't be
+	 * enqueued (legacy classic metabox still handles that case).
 	 *
 	 * @since 9.9.0
 	 *
@@ -74,7 +74,8 @@ class ModuleMetabox implements ExecuteHooks {
 	}
 
 	/**
-	 * Render the Classic Editor opener metabox body.
+	 * Render the Classic Editor metabox body — just the mount node
+	 * picked up by the React universal metabox to render inline.
 	 *
 	 * @since 9.9.0
 	 *
@@ -82,28 +83,7 @@ class ModuleMetabox implements ExecuteHooks {
 	 */
 	public function renderClassicOpenerMetabox() {
 		?>
-		<div class="seopress-metabox-opener">
-			<p>
-				<?php esc_html_e( 'Optimize this content for search engines: title, description, social, schemas, content analysis, etc.', 'wp-seopress' ); ?>
-			</p>
-			<button
-				type="button"
-				class="button"
-				id="seopress-metabox-opener-btn"
-			>
-				<?php esc_html_e( 'Open SEO editor', 'wp-seopress' ); ?>
-			</button>
-		</div>
-		<script>
-			(function () {
-				var btn = document.getElementById('seopress-metabox-opener-btn');
-				if (!btn || btn.dataset.seopressBound) { return; }
-				btn.dataset.seopressBound = '1';
-				btn.addEventListener('click', function () {
-					window.dispatchEvent(new CustomEvent('seopress:toggle-metabox'));
-				});
-			}());
-		</script>
+		<div id="seopress-js-module-seo-metabox-embed"></div>
 		<?php
 	}
 

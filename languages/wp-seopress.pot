@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-06T10:00:00+00:00\n"
+"POT-Creation-Date: 2026-05-06T14:13:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-seopress\n"
@@ -2875,14 +2875,6 @@ msgstr ""
 msgid "Modified date is frozen"
 msgstr ""
 
-#: src/Actions/Admin/ModuleMetabox.php:87
-msgid "Optimize this content for search engines: title, description, social, schemas, content analysis, etc."
-msgstr ""
-
-#: src/Actions/Admin/ModuleMetabox.php:94
-msgid "Open SEO editor"
-msgstr ""
-
 #: src/Actions/Admin/ModuleSettings.php:157
 msgid "SEO Network settings"
 msgstr ""
@@ -4891,7 +4883,7 @@ msgstr ""
 
 #: src/Services/ContentAnalysis/RenderContentAnalysis.php:55
 #: src/Services/I18nUniversalMetabox.php:32
-#: app/react/layout/Head/index.js:37
+#: app/react/layout/Head/index.js:39
 #: public/metaboxe.js:2
 msgid "Close"
 msgstr ""

@@ -43,10 +43,6 @@ class EnqueueModuleMetabox {
 			$response = false;
 		}
 
-		if ( isset( $_GET['fb-edit'] ) ) { // phpcs:ignore
-			$response = false;
-		}
-
 		if ( isset( $_GET['brickspreview'] ) ) { // phpcs:ignore
 			$response = false;
 		}
@@ -55,16 +51,17 @@ class EnqueueModuleMetabox {
 			$response = false;
 		}
 
-		// Avada / Fusion Builder Live (frontend iframe builder). The
-		// front-end iframe instantiates Fusion_App, so detecting the
-		// class outside wp-admin keeps the React beacon out of the
-		// builder regardless of which preview URL parameter Avada is
-		// using in the host's installed version.
-		if ( class_exists( 'Fusion_App' ) && ! is_admin() ) {
-			$response = false;
-		}
-
-		if ( isset( $_GET['fusion-edit'] ) || isset( $_GET['awb_studio'] ) || isset( $_GET['awb-studio-content'] ) ) { // phpcs:ignore
+		// Page builder preview iframes load editor scripts (Backbone /
+		// vendor globals) that conflict with the React beacon when both
+		// are enqueued in the same document. These query parameters are
+		// only set inside the preview frame, so suppressing here keeps
+		// the builder usable while leaving outer builder shells and
+		// regular frontend pages governed by the appearance toggle.
+		if (
+			isset( $_GET['builder_id'] )                                   // phpcs:ignore -- preview iframe
+			|| isset( $_GET['fbpreview'] )                                 // phpcs:ignore -- preview iframe (alt)
+			|| ( isset( $_GET['builder'] ) && 'true' === $_GET['builder'] ) // phpcs:ignore -- preview iframe
+		) {
 			$response = false;
 		}
 

@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.8.2
+Stable tag: 9.8.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,6 +311,13 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.8.3 =
+* NEW Render the universal SEO editor inline inside the Classic Editor "SEO" metabox (no more overlay button on Classic post edit screens)
+* FIX Avada Live Builder detection now uses URL-based signals so the React beacon is reliably suppressed inside the builder preview iframe
+* FIX Outer Avada shells, Avada Studio panes and regular frontend pages now properly respect the "Hide SEO beacon on frontend" option
+* FIX Social preview no longer overflows in narrow columns (Classic Editor) or stretches on wide screens
+* FIX Swallow AbortError noise from Google Preview, Content Analysis and Social fetches on tab switch / unmount
+
 = 9.8.2 =
 * FIX Restore the inline "primary category" dropdown in the WP Categories panel (Classic Editor and Block Editor sidebar), broken since 9.8
 * FIX FAQ v2 block crashing in the editor with "This block has encountered an error" due to invalid useSelect dependencies
