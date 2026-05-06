@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.8.1
+Stable tag: 9.8.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,6 +311,12 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.8.2 =
+* FIX Restore the inline "primary category" dropdown in the WP Categories panel (Classic Editor and Block Editor sidebar), broken since 9.8
+* FIX FAQ v2 block crashing in the editor with "This block has encountered an error" due to invalid useSelect dependencies
+* FIX Migrate the legacy "Disable the universal SEO metabox" preference (9.7.x) to the new 9.8.1 "Hide on the frontend" toggle so the setting is preserved on upgrade
+* FIX Rewire the dashboard tile for the universal metabox to the 9.8.1 frontend option so toggling it again controls the floating SEO beacon
+
 = 9.8.1 =
 * NEW Option in Advanced > Appearance > Metaboxes to hide the SEO beacon on the frontend
 * FIX Avada / Fusion Builder Live editor compatibility: do not mount the React beacon inside the builder iframe

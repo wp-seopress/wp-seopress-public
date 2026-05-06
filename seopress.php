@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.8.1
+ * Version: 9.8.2
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.8.1' );
+define( 'SEOPRESS_VERSION', '9.8.2' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -131,6 +131,61 @@ function seopress_redirect_after_activation() {
 	}
 }
 add_action( 'admin_init', 'seopress_redirect_after_activation' );
+
+/**
+ * Run one-shot data migrations when the stored DB version trails the code version.
+ *
+ * Hooked on admin_init so it runs once after the plugin is updated, on the first
+ * subsequent admin request. Each migration block must be idempotent and gated on
+ * version_compare( $stored, 'X.Y.Z', '<' ) so re-runs are no-ops.
+ *
+ * @return void
+ */
+function seopress_maybe_run_upgrades() {
+	$stored = get_option( 'seopress_db_version', '0' );
+
+	if ( version_compare( $stored, SEOPRESS_VERSION, '>=' ) ) {
+		return;
+	}
+
+	// 9.8.2 — restore the legacy "Disable the universal SEO metabox" preference into
+	// the new "Hide the SEO beacon on the frontend" toggle introduced in 9.8.1.
+	// The old admin-side disable cannot be recreated (universal metabox is always-on
+	// since 9.8.0), but the frontend beacon hide is the closest preserving mapping.
+	if ( version_compare( $stored, '9.8.2', '<' ) ) {
+		$advanced = get_option( 'seopress_advanced_option_name' );
+
+		if ( is_array( $advanced ) ) {
+			$changed = false;
+
+			$legacy_disable = isset( $advanced['seopress_advanced_appearance_universal_metabox_disable'] )
+				? $advanced['seopress_advanced_appearance_universal_metabox_disable']
+				: null;
+
+			$has_new_key = array_key_exists(
+				'seopress_advanced_appearance_universal_metabox_disable_frontend',
+				$advanced
+			);
+
+			if ( '1' === $legacy_disable && ! $has_new_key ) {
+				$advanced['seopress_advanced_appearance_universal_metabox_disable_frontend'] = '1';
+				$changed = true;
+			}
+
+			if ( array_key_exists( 'seopress_advanced_appearance_universal_metabox_disable', $advanced ) ) {
+				unset( $advanced['seopress_advanced_appearance_universal_metabox_disable'] );
+				$changed = true;
+			}
+
+			if ( $changed ) {
+				update_option( 'seopress_advanced_option_name', $advanced, false );
+			}
+		}
+	}
+
+	update_option( 'seopress_db_version', SEOPRESS_VERSION, false );
+}
+add_action( 'admin_init', 'seopress_maybe_run_upgrades' );
 
 /**
  * Loads the SEOPress admin + core + API

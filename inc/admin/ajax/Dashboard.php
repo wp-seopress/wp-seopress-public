@@ -20,12 +20,15 @@ function seopress_toggle_features() {
 			$feature_value = sanitize_text_field( wp_unslash( $_POST['feature_value'] ) );
 
 			if ( 'toggle-universal-metabox' === $feature ) {
+				// Since 9.8.0 the universal metabox is always-on; the only related
+				// surface that can still be toggled is the frontend SEO beacon.
+				// Tile ON ($feature_value === '1') = beacon visible on frontend
+				// (..._disable_frontend = '0'); tile OFF = beacon hidden ('1').
 				$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name' );
-				if ( '1' === $_POST['feature_value'] ) {
-					$seopress_advanced_option_name['seopress_advanced_appearance_universal_metabox_disable'] = '0';
-				} else {
-					$seopress_advanced_option_name['seopress_advanced_appearance_universal_metabox_disable'] = '1';
+				if ( ! is_array( $seopress_advanced_option_name ) ) {
+					$seopress_advanced_option_name = array();
 				}
+				$seopress_advanced_option_name['seopress_advanced_appearance_universal_metabox_disable_frontend'] = ( '1' === $feature_value ) ? '0' : '1';
 				update_option( 'seopress_advanced_option_name', $seopress_advanced_option_name, false );
 			} else {
 				$seopress_toggle_options = get_option( 'seopress_toggle', array() );

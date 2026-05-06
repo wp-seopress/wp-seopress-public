@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-06T08:04:26+00:00\n"
+"POT-Creation-Date: 2026-05-06T10:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-seopress\n"
@@ -39,8 +39,8 @@ msgstr ""
 #: inc/admin/admin-bar/admin-header.php:38
 #: inc/admin/admin.php:165
 #: inc/admin/metaboxes/admin-metaboxes-form.php:52
-#: inc/admin/metaboxes/admin-metaboxes.php:127
-#: inc/admin/metaboxes/admin-metaboxes.php:130
+#: inc/admin/metaboxes/admin-metaboxes.php:277
+#: inc/admin/metaboxes/admin-metaboxes.php:280
 #: inc/admin/page-builders/gutenberg/blocks.php:26
 #: inc/functions/options-advanced-admin.php:738
 #: src/Actions/Admin/ModuleMetabox.php:67
@@ -560,20 +560,20 @@ msgstr ""
 msgid "Your site is protected by an authentication."
 msgstr ""
 
-#: inc/admin/ajax/Dashboard.php:182
-#: inc/admin/ajax/Dashboard.php:212
+#: inc/admin/ajax/Dashboard.php:185
+#: inc/admin/ajax/Dashboard.php:215
 msgid "Permission denied."
 msgstr ""
 
-#: inc/admin/ajax/Dashboard.php:189
+#: inc/admin/ajax/Dashboard.php:192
 msgid "Invalid promotion ID."
 msgstr ""
 
-#: inc/admin/ajax/Dashboard.php:196
+#: inc/admin/ajax/Dashboard.php:199
 msgid "Promotion dismissed."
 msgstr ""
 
-#: inc/admin/ajax/Dashboard.php:198
+#: inc/admin/ajax/Dashboard.php:201
 msgid "Failed to dismiss promotion."
 msgstr ""
 
@@ -1499,7 +1499,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes.php:40
 #: inc/admin/wizard/admin-wizard.php:769
 #: src/Helpers/Metas/RobotSettings.php:32
-#: app/editor/primary-category-select/index.js:58
+#: app/editor/primary-category-select/index.js:62
 #: public/editor/primary-category-select/index.js:1
 msgid "None (will disable this feature)"
 msgstr ""
@@ -1511,17 +1511,17 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes.php:65
 #: src/Helpers/Metas/RobotSettings.php:114
-#: app/editor/primary-category-select/index.js:74
+#: app/editor/primary-category-select/index.js:77
 #: public/editor/primary-category-select/index.js:1
 msgid "Select a primary category"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes.php:434
+#: inc/admin/metaboxes/admin-metaboxes.php:584
 #: src/Services/ContentAnalysis/RenderContentAnalysis.php:31
 msgid "Content analysis"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes.php:466
+#: inc/admin/metaboxes/admin-metaboxes.php:616
 #: inc/admin/metaboxes/admin-term-metaboxes.php:114
 msgid "Analysis in progress..."
 msgstr ""
@@ -2777,19 +2777,19 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: seopress.php:378
+#: seopress.php:433
 msgid "has been successfully updated!"
 msgstr ""
 
-#: seopress.php:469
+#: seopress.php:524
 msgid "Migration completed!"
 msgstr ""
 
-#: seopress.php:470
+#: seopress.php:525
 msgid "Export completed!"
 msgstr ""
 
-#: seopress.php:670
+#: seopress.php:725
 #: src/Actions/Admin/ModuleSettings.php:489
 #: app/react/admin/settings/pages/InstantIndexingPage.jsx:11
 #: app/react/admin/settings/pages/ToolsPage.jsx:35
@@ -2799,15 +2799,15 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: seopress.php:671
+#: seopress.php:726
 msgid "Configuration Wizard"
 msgstr ""
 
-#: seopress.php:672
+#: seopress.php:727
 msgid "Docs"
 msgstr ""
 
-#: seopress.php:676
+#: seopress.php:731
 msgid "GO PRO!"
 msgstr ""
 

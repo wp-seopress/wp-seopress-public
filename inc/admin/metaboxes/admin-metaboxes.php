@@ -75,6 +75,156 @@ function seopress_primary_category_select( $echo = true, $with_description = tru
 }
 
 /**
+ * Register `_seopress_robots_primary_cat` as a REST-exposed post meta.
+ *
+ * Required so the Gutenberg primary category sidebar bundle can read and
+ * write the value through `select('core/editor').getEditedPostAttribute('meta')`
+ * and `dispatch('core/editor').editPost({ meta: ... })`. The same meta key
+ * is consumed by `seopress_titles_primary_cat_hook()` for `%category%`
+ * permalinks, by the React universal metabox's Advanced tab and by the
+ * Rank Math / Yoast / SEO Framework migrators, so we keep that single
+ * key as the source of truth.
+ *
+ * @since 9.8.x
+ *
+ * @return void
+ */
+function seopress_register_primary_category_post_meta() {
+	$post_types = array( 'post', 'product' );
+
+	foreach ( $post_types as $post_type ) {
+		if ( ! post_type_exists( $post_type ) ) {
+			continue;
+		}
+		register_post_meta(
+			$post_type,
+			'_seopress_robots_primary_cat',
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'default'       => '',
+				'auth_callback' => function ( $allowed, $meta_key, $object_id ) {
+					return current_user_can( 'edit_post', $object_id );
+				},
+			)
+		);
+	}
+}
+add_action( 'init', 'seopress_register_primary_category_post_meta', 11 );
+
+/**
+ * Inject the primary category dropdown into the WordPress Categories panel.
+ *
+ * Restores the inline UI removed alongside the legacy classic SEO metabox
+ * in 9.8: in the Block Editor the Gutenberg bundle hooks into the
+ * Categories sidebar panel via REST-exposed post meta; in the Classic
+ * Editor a small script appends the rendered `<select>` markup (plus a
+ * dedicated nonce) into the standard Categories metabox so the value
+ * ships with the post form. The data layer (post meta
+ * `_seopress_robots_primary_cat`) is unchanged and the React universal
+ * SEO metabox keeps its own primary category field as the consolidated
+ * power-user surface.
+ *
+ * @since 9.8.x
+ *
+ * @return void
+ */
+function seopress_enqueue_primary_category_injector() {
+	global $pagenow, $typenow, $post, $wp_version;
+
+	if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
+		return;
+	}
+
+	if ( ! in_array( $typenow, array( 'post', 'product' ), true ) ) {
+		return;
+	}
+
+	if ( ! function_exists( 'get_current_screen' ) ) {
+		return;
+	}
+
+	$screen          = get_current_screen();
+	$is_block_editor = $screen && method_exists( $screen, 'is_block_editor' ) && true === $screen->is_block_editor();
+
+	if ( $is_block_editor ) {
+		if ( version_compare( $wp_version, '5.8', '<' ) ) {
+			return;
+		}
+		wp_enqueue_script(
+			'seopress-primary-category',
+			SEOPRESS_URL_PUBLIC . '/editor/primary-category-select/index.js',
+			array( 'wp-hooks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-data' ),
+			SEOPRESS_VERSION,
+			true
+		);
+		return;
+	}
+
+	$primary_category_id = $post ? get_post_meta( $post->ID, '_seopress_robots_primary_cat', true ) : '';
+
+	wp_enqueue_script(
+		'seopress-primary-category-classic',
+		SEOPRESS_ASSETS_DIR . '/js/seopress-primary-category-classic.js',
+		array(),
+		SEOPRESS_VERSION,
+		true
+	);
+
+	$nonce_field = wp_nonce_field( 'seopress_save_primary_category', 'seopress_primary_category_nonce', true, false );
+
+	wp_localize_script(
+		'seopress-primary-category-classic',
+		'seopressPrimaryCategorySelectData',
+		array(
+			'selectHTML'      => seopress_primary_category_select( false, false ),
+			'nonceField'      => $nonce_field,
+			'primaryCategory' => $primary_category_id,
+		)
+	);
+}
+add_action( 'admin_enqueue_scripts', 'seopress_enqueue_primary_category_injector' );
+
+/**
+ * Save the primary category submitted from the Categories metabox in the
+ * Classic Editor. The dedicated nonce + capability check makes this
+ * handler self-contained, independent of the legacy SEO metabox save
+ * pipeline (which only runs when the universal metabox is suppressed).
+ *
+ * @since 9.8.x
+ *
+ * @param int     $post_id Post ID.
+ * @param WP_Post $post    Post object.
+ * @return void
+ */
+function seopress_save_primary_category_from_categories_metabox( $post_id, $post ) {
+	if ( ! isset( $_POST['seopress_primary_category_nonce'] ) ) {
+		return;
+	}
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['seopress_primary_category_nonce'] ) ), 'seopress_save_primary_category' ) ) {
+		return;
+	}
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+	if ( ! in_array( $post->post_type, array( 'post', 'product' ), true ) ) {
+		return;
+	}
+	if ( ! isset( $_POST['seopress_robots_primary_cat'] ) ) {
+		return;
+	}
+
+	$value = sanitize_text_field( wp_unslash( $_POST['seopress_robots_primary_cat'] ) );
+	if ( '' === $value || 'none' === $value ) {
+		delete_post_meta( $post_id, '_seopress_robots_primary_cat' );
+	} else {
+		update_post_meta( $post_id, '_seopress_robots_primary_cat', $value );
+	}
+}
+add_action( 'save_post', 'seopress_save_primary_category_from_categories_metabox', 10, 2 );
+
+/**
  * Metaboxes init
  *
  * @return array Data attributes.
