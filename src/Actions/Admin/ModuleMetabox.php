@@ -24,6 +24,7 @@ class ModuleMetabox implements ExecuteHooks {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'init', array( $this, 'enqueue' ) );
 		add_action( 'add_meta_boxes', array( $this, 'registerClassicOpenerMetabox' ) );
+		add_action( 'save_post', array( $this, 'saveClassicEditorMetaFallback' ), 10, 2 );
 
 		if ( current_user_can( seopress_capability( 'edit_posts' ) ) ) { // phpcs:ignore
 			// Priority 110 so the beacon survives builders that wipe the
@@ -61,14 +62,32 @@ class ModuleMetabox implements ExecuteHooks {
 			return;
 		}
 
+		/**
+		 * Filter the Classic Editor "SEO" metabox context.
+		 *
+		 * @since 9.8.0
+		 *
+		 * @param string $context Metabox context. Default 'normal'. Accepts 'normal', 'side', 'advanced'.
+		 */
+		$context = apply_filters( 'seopress_metabox_opener_context', 'normal' );
+
+		/**
+		 * Filter the Classic Editor "SEO" metabox priority.
+		 *
+		 * @since 9.8.0
+		 *
+		 * @param string $priority Metabox priority. Default 'default'. Accepts 'high', 'core', 'default', 'low'.
+		 */
+		$priority = apply_filters( 'seopress_metabox_opener_priority', 'default' );
+
 		foreach ( array_keys( $post_types ) as $post_type ) {
 			add_meta_box(
 				'seopress_metabox_opener',
 				__( 'SEO', 'wp-seopress' ),
 				array( $this, 'renderClassicOpenerMetabox' ),
 				$post_type,
-				'normal',
-				'high'
+				$context,
+				$priority
 			);
 		}
 	}
@@ -85,6 +104,182 @@ class ModuleMetabox implements ExecuteHooks {
 		?>
 		<div id="seopress-js-module-seo-metabox-embed"></div>
 		<?php
+	}
+
+	/**
+	 * Persist SEO meta from the Classic Editor post form when the React
+	 * metabox cannot reach the REST API. The React tabs render hidden
+	 * inputs (associated with `<form id="post">` via the HTML `form`
+	 * attribute) that mirror their Formik state, so a normal post save
+	 * still carries the values even if the REST PUTs to `/seopress/v1/...`
+	 * are blocked. Skipped during autosave/revision/REST and gated by a
+	 * dedicated nonce. The list of meta keys is filterable so the Pro
+	 * plugin can register its own.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @param int      $post_id The post ID.
+	 * @param \WP_Post $post    The post object.
+	 *
+	 * @return void
+	 */
+	public function saveClassicEditorMetaFallback( $post_id, $post ) {
+		if ( ! isset( $_POST['seopress_metabox_classic_fallback_nonce'] ) ) {
+			return;
+		}
+
+		$nonce = sanitize_text_field( wp_unslash( $_POST['seopress_metabox_classic_fallback_nonce'] ) );
+		if ( ! wp_verify_nonce( $nonce, 'seopress_metabox_classic_fallback' ) ) {
+			return;
+		}
+
+		if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
+		$meta_keys_map = $this->getClassicEditorFallbackMetaKeys();
+
+		foreach ( $meta_keys_map as $meta_key => $sanitizer ) {
+			if ( ! array_key_exists( $meta_key, $_POST ) ) {
+				continue;
+			}
+
+			$raw   = wp_unslash( $_POST[ $meta_key ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$value = $this->sanitizeFallbackValue( $raw, $sanitizer );
+
+			if ( null === $value || '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
+				delete_post_meta( $post_id, $meta_key );
+			} else {
+				update_post_meta( $post_id, $meta_key, $value );
+			}
+		}
+	}
+
+	/**
+	 * Return the meta keys map for the Classic Editor fallback. Each entry
+	 * maps a post_meta key to a sanitization spec accepted by
+	 * `sanitizeFallbackValue()` — either a callable or one of:
+	 * `'text'`, `'textarea'`, `'url'`, `'int'`, or
+	 * `array( 'json', $deep_callable )` for JSON-encoded structured fields.
+	 * Filterable via `seopress_metabox_classic_fallback_meta_keys` so the
+	 * Pro plugin (and integrators) can extend the list.
+	 *
+	 * @since 9.8.0
+	 *
+	 * @return array<string, mixed>
+	 */
+	protected function getClassicEditorFallbackMetaKeys() {
+		$keys = array(
+			// Title & description tab.
+			'_seopress_titles_title'               => 'text',
+			'_seopress_titles_desc'                => 'textarea',
+			// Advanced tab — robots/canonical/primary category.
+			'_seopress_robots_canonical'           => 'url',
+			'_seopress_robots_index'               => 'text',
+			'_seopress_robots_follow'              => 'text',
+			'_seopress_robots_imageindex'          => 'text',
+			'_seopress_robots_snippet'             => 'text',
+			'_seopress_robots_primary_cat'         => 'text',
+			'_seopress_robots_breadcrumbs'         => 'text',
+			// Redirections (per-post) tab.
+			'_seopress_redirections_value'         => 'url',
+			'_seopress_redirections_enabled'       => 'text',
+			'_seopress_redirections_enabled_regex' => 'text',
+			'_seopress_redirections_logged_status' => 'text',
+			'_seopress_redirections_param'         => 'text',
+			'_seopress_redirections_type'          => 'int',
+		);
+
+		// Social tab — per-platform keys, sanitizer derived from the field type.
+		if ( class_exists( '\SEOPress\Helpers\Metas\SocialSettings' ) ) {
+			$social_fields = array_merge(
+				\SEOPress\Helpers\Metas\SocialSettings::getMetaKeysFacebook(),
+				\SEOPress\Helpers\Metas\SocialSettings::getMetaKeysTwitter()
+			);
+			foreach ( $social_fields as $field ) {
+				if ( empty( $field['key'] ) ) {
+					continue;
+				}
+				$type = isset( $field['type'] ) ? $field['type'] : 'input';
+				switch ( $type ) {
+					case 'textarea':
+						$keys[ $field['key'] ] = 'textarea';
+						break;
+					case 'upload':
+						$keys[ $field['key'] ] = 'url';
+						break;
+					default:
+						$keys[ $field['key'] ] = 'text';
+				}
+			}
+		}
+
+		/**
+		 * Filter the meta keys persisted by the Classic Editor save_post
+		 * fallback. Pro / integrators add their own keys here. Each value
+		 * is either a string ('text', 'textarea', 'url', 'int'), a callable
+		 * applied to the raw $_POST value, or `array( 'json', $deep_cb )`
+		 * for JSON-encoded structured fields.
+		 *
+		 * @since 9.8.0
+		 *
+		 * @param array<string, mixed> $keys Meta key => sanitizer spec.
+		 */
+		return apply_filters( 'seopress_metabox_classic_fallback_meta_keys', $keys );
+	}
+
+	/**
+	 * Apply a sanitizer spec to a raw $_POST value. Returns null when the
+	 * value should be skipped (invalid JSON for json-typed entries).
+	 *
+	 * @since 9.8.0
+	 *
+	 * @param mixed $raw  Raw value from $_POST (already wp_unslash'd).
+	 * @param mixed $spec Sanitizer spec — see getClassicEditorFallbackMetaKeys().
+	 *
+	 * @return mixed
+	 */
+	protected function sanitizeFallbackValue( $raw, $spec ) {
+		if ( is_string( $spec ) ) {
+			switch ( $spec ) {
+				case 'textarea':
+					return is_scalar( $raw ) ? sanitize_textarea_field( (string) $raw ) : '';
+				case 'url':
+					return is_scalar( $raw ) ? sanitize_url( (string) $raw ) : '';
+				case 'int':
+					return is_scalar( $raw ) ? (int) $raw : 0;
+				case 'text':
+				default:
+					return is_scalar( $raw ) ? sanitize_text_field( (string) $raw ) : '';
+			}
+		}
+
+		// JSON-encoded structured fields: ['json', $deep_callable].
+		if ( is_array( $spec ) && isset( $spec[0] ) && 'json' === $spec[0] ) {
+			if ( ! is_string( $raw ) || '' === $raw ) {
+				return null;
+			}
+			$decoded = json_decode( $raw, true );
+			if ( null === $decoded && JSON_ERROR_NONE !== json_last_error() ) {
+				return null;
+			}
+			$callback = isset( $spec[1] ) && is_callable( $spec[1] ) ? $spec[1] : 'sanitize_text_field';
+			return is_array( $decoded ) ? map_deep( $decoded, $callback ) : $decoded;
+		}
+
+		if ( is_callable( $spec ) ) {
+			return call_user_func( $spec, $raw );
+		}
+
+		return is_scalar( $raw ) ? sanitize_text_field( (string) $raw ) : '';
 	}
 
 	/**
@@ -239,6 +434,11 @@ class ModuleMetabox implements ExecuteHooks {
 				'TAGS'                      => array_values( $tags ),
 				'REST_URL'                  => rest_url(),
 				'NONCE'                     => wp_create_nonce( 'wp_rest' ),
+				// Nonce verified by saveClassicEditorMetaFallback() — lets the
+				// Classic Editor post form rescue title/description writes when
+				// the REST API is blocked (security plugin, hardening filter,
+				// etc.) so the user does not silently lose their input.
+				'CLASSIC_FALLBACK_NONCE'    => wp_create_nonce( 'seopress_metabox_classic_fallback' ),
 				'POST_ID'                   => $post_id,
 				'POST_TYPE'                 => $post_type,
 				'IS_GUTENBERG'              => apply_filters( 'seopress_module_metabox_is_gutenberg', $is_gutenberg ),

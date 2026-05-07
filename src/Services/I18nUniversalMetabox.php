@@ -26,6 +26,7 @@ class I18nUniversalMetabox {
 				'pixels'                  => __( 'pixels', 'wp-seopress' ),
 				'save'                    => __( 'Save', 'wp-seopress' ),
 				'save_settings'           => __( 'Your settings have been saved.', 'wp-seopress' ),
+				'save_error'              => __( 'We could not save your settings. The REST API may be disabled or unreachable.', 'wp-seopress' ),
 				'yes'                     => __( 'Yes', 'wp-seopress' ),
 				'good'                    => __( 'Good', 'wp-seopress' ),
 				'expand'                  => __( 'Expand', 'wp-seopress' ),

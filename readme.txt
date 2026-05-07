@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.8.3
+Stable tag: 9.8.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -311,6 +311,14 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.8.4 =
+* NEW Save fallback when the REST API is blocked: SEO metabox sections now also persist on the regular post save through hidden inputs
+* NEW Explicit error toast on the SEO metabox sections when a save fails (instead of falsely showing a success message)
+* NEW [PRO] Save fallback extended to Pro sections for sites with REST blocked
+* NEW Filters `seopress_metabox_opener_context` and `seopress_metabox_opener_priority` to control where the Classic Editor "SEO" metabox is rendered
+* FIX Lower the Classic Editor "SEO" metabox priority from "high" to "default" so it no longer pushes other plugins' metaboxes down
+* FIX Keep visited tabs mounted in the SEO metabox so in-flight values are preserved when switching tabs (no more lost input when typing in Title and switching to Advanced)
+
 = 9.8.3 =
 * NEW Render the universal SEO editor inline inside the Classic Editor "SEO" metabox (no more overlay button on Classic post edit screens)
 * FIX Avada Live Builder detection now uses URL-based signals so the React beacon is reliably suppressed inside the builder preview iframe
