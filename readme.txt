@@ -1,4 +1,4 @@
-=== SEOPress – AI SEO Plugin: Schema, Sitemap, Redirects & Analytics ===
+=== SEOPress - AI SEO Plugin & On-site SEO ===
 Authors: rainbowgeek
 Contributors: seopress, rainbowgeek, corsonr, gmulti, juliobox, maigret, mgris, vincentdubroeucq
 Donate link: https://www.seopress.org/
@@ -6,11 +6,11 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.8.4
+Stable tag: 9.8.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-All-in-one WordPress SEO plugin: AI metadata, schema, XML sitemaps, redirections, GSC, llms.txt for AI agents. Privacy-first, white label.
+WordPress SEO plugin with AI SEO metadata, schema, XML sitemap, redirections & Search Console. Privacy-first, white-label SEO. Now AI-ready.
 
 == Description ==
 
@@ -311,6 +311,10 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.8.5 =
+* FIX Save target keywords with SEO metabox
+* FIX Hide SEO beacon with the Block Editor (use the SEO link from the top toolbar of the Editor to edit your SEO metadata)
+
 = 9.8.4 =
 * NEW Save fallback when the REST API is blocked: SEO metabox sections now also persist on the regular post save through hidden inputs
 * NEW Explicit error toast on the SEO metabox sections when a save fails (instead of falsely showing a success message)

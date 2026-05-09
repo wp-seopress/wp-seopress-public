@@ -78,8 +78,19 @@ class TargetKeywords implements ExecuteHooks {
 	 * @since 5.0.0
 	 */
 	public function processGet( \WP_REST_Request $request ) {
-		$id              = $request->get_param( 'id' );
-		$target_keywords = array_filter( explode( ',', strtolower( (string) get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ) );
+		$id = $request->get_param( 'id' );
+		// Preserve the user-entered casing — lower-casing here used to
+		// erase capitalization in the FormTokenField on every reload and
+		// caused Gutenberg to flag the post dirty after a sync because
+		// the REST-exposed post meta still held the original case.
+		$target_keywords = array_values(
+			array_filter(
+				array_map( 'trim', explode( ',', (string) get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ),
+				static function ( $token ) {
+					return '' !== $token;
+				}
+			)
+		);
 
 		$data = seopress_get_service( 'CountTargetKeywordsUse' )->getCountByKeywords( $target_keywords, $id );
 

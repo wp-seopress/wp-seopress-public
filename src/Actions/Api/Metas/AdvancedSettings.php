@@ -67,6 +67,43 @@ class AdvancedSettings implements ExecuteHooks {
 				'auth_callback' => array( $this, 'meta_auth' ),
 			)
 		);
+		// Exposed so Gutenberg's post save (REST POST/PUT to /wp/v2/<type>/<id>)
+		// persists the Content analysis tokens written into core/editor by the
+		// React metabox. Sanitizer mirrors TargetKeywords::processPut() so the
+		// value stored via this path matches the dedicated PUT endpoint and
+		// the Classic Editor save_post fallback.
+		register_post_meta(
+			'',
+			'_seopress_analysis_target_kw',
+			array(
+				'show_in_rest'      => true,
+				'single'            => true,
+				'type'              => 'string',
+				'auth_callback'     => array( $this, 'meta_auth' ),
+				'sanitize_callback' => array( $this, 'sanitize_target_keywords' ),
+			)
+		);
+	}
+
+	/**
+	 * Normalize a comma-separated target keywords string: trim each token,
+	 * drop empties, rejoin without surrounding spaces, then sanitize as text.
+	 *
+	 * @param mixed $value Raw value submitted via REST or update_post_meta.
+	 *
+	 * @return string
+	 */
+	public function sanitize_target_keywords( $value ) { // phpcs:ignore
+		if ( ! is_string( $value ) ) {
+			return '';
+		}
+		$parts = array_filter(
+			array_map( 'trim', explode( ',', $value ) ),
+			static function ( $token ) {
+				return '' !== $token;
+			}
+		);
+		return sanitize_text_field( implode( ',', $parts ) );
 	}
 
 	/**

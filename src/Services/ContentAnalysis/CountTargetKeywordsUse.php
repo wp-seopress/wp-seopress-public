@@ -47,18 +47,36 @@ class CountTargetKeywordsUse {
 		foreach ( $target_keywords as $key => $keyword ) {
 			$rows = $wpdb->get_results( $wpdb->prepare( $query, "%$keyword%" ), ARRAY_A ); // phpcs:ignore
 
+			$keyword_lower = function_exists( 'mb_strtolower' )
+				? mb_strtolower( $keyword )
+				: strtolower( $keyword );
+
 			$data[] = array(
 				'key'  => $keyword,
 				'rows' => array_values(
 					array_filter(
 						array_map(
-							function ( $row ) use ( $keyword, $post_id ) {
+							function ( $row ) use ( $keyword_lower, $post_id ) {
 								$post             = get_post( $post_id );
 								$post_type_object = get_post_type_object( $post->post_type );
 
-								$values = array_map( 'trim', explode( ',', $row['meta_value'] ) );
+								// Case-insensitive comparison: stored
+								// keywords keep their original casing
+								// (since the GET endpoint stopped lower-
+								// casing them), so match the way users
+								// expect — "WordPress" vs "wordpress"
+								// should still de-duplicate.
+								$values = array_map(
+									function ( $token ) {
+										$token = trim( $token );
+										return function_exists( 'mb_strtolower' )
+											? mb_strtolower( $token )
+											: strtolower( $token );
+									},
+									explode( ',', $row['meta_value'] )
+								);
 
-								if ( ! in_array( $keyword, $values, true ) || $post_id === $row['post_id'] ) {
+								if ( ! in_array( $keyword_lower, $values, true ) || $post_id === $row['post_id'] ) {
 									return null;
 								}
 

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-07T09:51:27+00:00\n"
+"POT-Creation-Date: 2026-05-09T12:34:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-seopress\n"
@@ -1064,7 +1064,7 @@ msgid "Mobile Preview"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:273
-#: src/Services/I18nUniversalMetabox.php:836
+#: src/Services/I18nUniversalMetabox.php:838
 msgid "Meta robots settings"
 msgstr ""
 
@@ -1135,7 +1135,7 @@ msgstr ""
 #: src/Helpers/ContentAnalysis.php:21
 #: src/Helpers/Metas/RobotSettings.php:105
 #: src/Services/I18nUniversalMetabox.php:342
-#: src/Services/I18nUniversalMetabox.php:837
+#: src/Services/I18nUniversalMetabox.php:839
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:35
 #: public/admin/settings/298.13c3af247755d6f227a5.js:1
 msgid "Canonical URL"
@@ -1153,7 +1153,7 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:341
 #: src/Helpers/ContentAnalysis.php:31
 #: src/Services/I18nUniversalMetabox.php:235
-#: src/Services/I18nUniversalMetabox.php:853
+#: src/Services/I18nUniversalMetabox.php:855
 msgid "Last modified date"
 msgstr ""
 
@@ -1167,7 +1167,7 @@ msgid "Freeze the last modified date <strong>(recommended for minor updates)</st
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:359
-#: src/Services/I18nUniversalMetabox.php:855
+#: src/Services/I18nUniversalMetabox.php:857
 msgid "Freeze last modified date"
 msgstr ""
 
@@ -1190,7 +1190,7 @@ msgid "LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata 
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:396
-#: src/Services/I18nUniversalMetabox.php:774
+#: src/Services/I18nUniversalMetabox.php:776
 msgid "Ask Facebook to update its cache"
 msgstr ""
 
@@ -1258,12 +1258,12 @@ msgid "Upload an Image"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:461
-#: src/Services/I18nUniversalMetabox.php:785
+#: src/Services/I18nUniversalMetabox.php:787
 msgid "Facebook Preview"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:465
-#: src/Services/I18nUniversalMetabox.php:786
+#: src/Services/I18nUniversalMetabox.php:788
 msgid "This is what your post will look like in Facebook. You have to publish your post to get the Facebook Preview."
 msgstr ""
 
@@ -1272,7 +1272,7 @@ msgid "The Social Networks feature is disabled. Still seing informations from th
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:474
-#: src/Services/I18nUniversalMetabox.php:798
+#: src/Services/I18nUniversalMetabox.php:800
 msgid "File type not supported by Facebook. Please choose another image."
 msgstr ""
 
@@ -1282,8 +1282,8 @@ msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:482
 #: inc/admin/metaboxes/admin-metaboxes-form.php:614
-#: src/Services/I18nUniversalMetabox.php:802
-#: src/Services/I18nUniversalMetabox.php:827
+#: src/Services/I18nUniversalMetabox.php:804
+#: src/Services/I18nUniversalMetabox.php:829
 msgid "File error. Please choose another image."
 msgstr ""
 
@@ -1293,7 +1293,7 @@ msgid "Your image ratio is: "
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:487
-#: src/Services/I18nUniversalMetabox.php:791
+#: src/Services/I18nUniversalMetabox.php:793
 msgid "The closer to 1.91 the better."
 msgstr ""
 
@@ -1303,12 +1303,12 @@ msgid "File URL is not valid."
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:495
-#: src/Services/I18nUniversalMetabox.php:792
+#: src/Services/I18nUniversalMetabox.php:794
 msgid "Your filesize is: "
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:496
-#: src/Services/I18nUniversalMetabox.php:793
+#: src/Services/I18nUniversalMetabox.php:795
 msgid "This is superior to 300KB. WhatsApp will not use your image."
 msgstr ""
 
@@ -1369,12 +1369,12 @@ msgid "Minimum size: 144x144px (300x157px with large card enabled), ideal ratio 
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:595
-#: src/Services/I18nUniversalMetabox.php:809
+#: src/Services/I18nUniversalMetabox.php:811
 msgid "X Preview"
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:598
-#: src/Services/I18nUniversalMetabox.php:810
+#: src/Services/I18nUniversalMetabox.php:812
 msgid "This is what your post will look like in X. You have to publish your post to get the X Preview."
 msgstr ""
 
@@ -1383,7 +1383,7 @@ msgid "The Social Networks feature is disabled. Still seing informations from th
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:606
-#: src/Services/I18nUniversalMetabox.php:823
+#: src/Services/I18nUniversalMetabox.php:825
 msgid "File type not supported by X. Please choose another image."
 msgstr ""
 
@@ -1392,7 +1392,7 @@ msgid "Minimum size for X is <strong>144x144px</strong>. Please choose another i
 msgstr ""
 
 #: inc/admin/metaboxes/admin-metaboxes-form.php:619
-#: src/Services/I18nUniversalMetabox.php:815
+#: src/Services/I18nUniversalMetabox.php:817
 msgid "The closer to 1 the better (with large card, 2 is better)."
 msgstr ""
 
@@ -2859,7 +2859,7 @@ msgstr ""
 #: src/Actions/Admin/ManageColumn.php:329
 #: src/Actions/Admin/ManageColumn.php:344
 #: src/Services/ContentAnalysis/RenderContentAnalysis.php:37
-#: src/Services/I18nUniversalMetabox.php:747
+#: src/Services/I18nUniversalMetabox.php:749
 msgid "Should be improved"
 msgstr ""
 
@@ -5687,138 +5687,146 @@ msgid "Refresh analysis"
 msgstr ""
 
 #: src/Services/I18nUniversalMetabox.php:733
+msgid "Save now"
+msgstr ""
+
+#: src/Services/I18nUniversalMetabox.php:734
+msgid "Saving…"
+msgstr ""
+
+#: src/Services/I18nUniversalMetabox.php:735
 msgid "To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:737
+#: src/Services/I18nUniversalMetabox.php:739
 msgid "Google suggestions"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:738
+#: src/Services/I18nUniversalMetabox.php:740
 msgid "Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:742
+#: src/Services/I18nUniversalMetabox.php:744
 msgid "Get suggestions from Google"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:746
+#: src/Services/I18nUniversalMetabox.php:748
 msgid "Get suggestions!"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:748
+#: src/Services/I18nUniversalMetabox.php:750
 msgid "The keyword:"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:749
+#: src/Services/I18nUniversalMetabox.php:751
 msgid "These keywords:"
 msgstr ""
 
 #. translators: %d number of times a target keyword is used, singular form only
-#: src/Services/I18nUniversalMetabox.php:750
+#: src/Services/I18nUniversalMetabox.php:752
 msgid "is already used %d time"
 msgstr ""
 
 #. translators: %d number of times a target keyword is used, plural form only
-#: src/Services/I18nUniversalMetabox.php:751
+#: src/Services/I18nUniversalMetabox.php:753
 msgid "is already used %d times"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:754
+#: src/Services/I18nUniversalMetabox.php:756
 msgid "It is recommended to enter as many properties as possible to maximize the chances of getting a rich snippet in Google search results."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:755
+#: src/Services/I18nUniversalMetabox.php:757
 msgid "Delete schema"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:756
+#: src/Services/I18nUniversalMetabox.php:758
 msgid "Add a schema"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:759
+#: src/Services/I18nUniversalMetabox.php:761
 msgid "These schemas are automatically applied to this post based on rules defined in your Schemas library. You can override values per post here, or disable individual schemas."
 msgstr ""
 
 #. translators: %s number of automatic schemas
-#: src/Services/I18nUniversalMetabox.php:760
+#: src/Services/I18nUniversalMetabox.php:762
 msgid "You have %s automatic schema:"
 msgstr ""
 
 #. translators: %s number of automatic schemas
-#: src/Services/I18nUniversalMetabox.php:761
+#: src/Services/I18nUniversalMetabox.php:763
 msgid "You have %s automatic schemas:"
 msgstr ""
 
 #. translators: %s number of automatic schemas
-#: src/Services/I18nUniversalMetabox.php:762
+#: src/Services/I18nUniversalMetabox.php:764
 msgid "Disable all automatic schemas for this post"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:763
+#: src/Services/I18nUniversalMetabox.php:765
 msgid "Disable this automatic schema for this post"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:764
+#: src/Services/I18nUniversalMetabox.php:766
 msgid "Edit"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:765
+#: src/Services/I18nUniversalMetabox.php:767
 msgid "This schema has no overridable fields. Mark fields as \"Manual single\" in the schema editor to expose them per post."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:766
+#: src/Services/I18nUniversalMetabox.php:768
 msgid "No automatic schemas match this post."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:767
+#: src/Services/I18nUniversalMetabox.php:769
 msgid "Type:"
 msgstr ""
 
 #. translators: %s post title
-#: src/Services/I18nUniversalMetabox.php:770
+#: src/Services/I18nUniversalMetabox.php:772
 msgid "LinkedIn, Instagram, WhatsApp and Pinterest use the same social metadata as Facebook. X does the same if no X Cards tags are defined below. <a href=\"https://developers.facebook.com/tools/debug/sharing/?q=%s\" target=\"_blank\">Ask Facebook to update its cache <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\" focusable=\"false\" style=\"vertical-align:middle;margin-right:4px;\"><path d=\"M19.5 4.5h-7V6h4.44l-5.97 5.97 1.06 1.06L18 7.06v4.44h1.5v-7Zm-13 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3H17v3a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h3V5.5h-3Z\"></path></svg></a>"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:778
+#: src/Services/I18nUniversalMetabox.php:780
 msgid "Preview your X Cards using the official validator"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:790
-#: src/Services/I18nUniversalMetabox.php:814
+#: src/Services/I18nUniversalMetabox.php:792
+#: src/Services/I18nUniversalMetabox.php:816
 msgid "Your image ratio is:"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:794
+#: src/Services/I18nUniversalMetabox.php:796
 msgid "Minimun size for Facebook is <strong>200x200px</strong>. Please choose another image."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:806
-#: src/Services/I18nUniversalMetabox.php:831
+#: src/Services/I18nUniversalMetabox.php:808
+#: src/Services/I18nUniversalMetabox.php:833
 msgid "Please choose an image"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:819
+#: src/Services/I18nUniversalMetabox.php:821
 msgid "Minimun size for X is <strong>144x144px</strong>. Please choose another image."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:841
+#: src/Services/I18nUniversalMetabox.php:843
 msgid "A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:845
+#: src/Services/I18nUniversalMetabox.php:847
 msgid "For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:849
+#: src/Services/I18nUniversalMetabox.php:851
 msgid "Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color). The canonical can be in a different domain than a duplicate."
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:854
+#: src/Services/I18nUniversalMetabox.php:856
 msgid "Current modified date:"
 msgstr ""
 
-#: src/Services/I18nUniversalMetabox.php:856
+#: src/Services/I18nUniversalMetabox.php:858
 msgid "Enable this option to prevent the last modified date from being updated when you save this post. This is recommended for minor updates like fixing typos, formatting changes, or copyright updates that don't constitute significant content changes. Google recommends only updating the lastmod date for significant content updates."
 msgstr ""
 
@@ -6324,17 +6332,17 @@ msgstr ""
 msgid "This content is set to noindex."
 msgstr ""
 
-#: app/editor/sidebar-panel/index.js:60
+#: app/editor/sidebar-panel/index.js:47
 #: public/editor/sidebar-panel/index.js:1
 msgid "Good SEO score"
 msgstr ""
 
-#: app/editor/sidebar-panel/index.js:62
+#: app/editor/sidebar-panel/index.js:49
 #: public/editor/sidebar-panel/index.js:1
 msgid "Has SEO issues"
 msgstr ""
 
-#: app/editor/sidebar-panel/index.js:64
+#: app/editor/sidebar-panel/index.js:51
 #: public/editor/sidebar-panel/index.js:1
 msgid "No score"
 msgstr ""

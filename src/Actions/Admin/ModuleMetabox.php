@@ -196,6 +196,21 @@ class ModuleMetabox implements ExecuteHooks {
 			'_seopress_redirections_logged_status' => 'text',
 			'_seopress_redirections_param'         => 'text',
 			'_seopress_redirections_type'          => 'int',
+			// Content analysis tab — comma-separated string mirroring the
+			// REST PUT normalization in
+			// SEOPress\Actions\Api\TargetKeywords::processPut().
+			'_seopress_analysis_target_kw'         => function ( $raw ) {
+				if ( ! is_string( $raw ) ) {
+					return '';
+				}
+				$parts = array_filter(
+					array_map( 'trim', explode( ',', $raw ) ),
+					static function ( $value ) {
+						return '' !== $value;
+					}
+				);
+				return sanitize_text_field( implode( ',', $parts ) );
+			},
 		);
 
 		// Social tab — per-platform keys, sanitizer derived from the field type.

@@ -730,6 +730,8 @@ class I18nUniversalMetabox {
 						'wp-seopress'
 					),
 					'btn_refresh_analysis'           => __( 'Refresh analysis', 'wp-seopress' ),
+					'target_keywords_save_now'       => __( 'Save now', 'wp-seopress' ),
+					'target_keywords_saving'         => __( 'Saving…', 'wp-seopress' ),
 					'help_target_keywords'           => __(
 						'To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would.',
 						'wp-seopress'
