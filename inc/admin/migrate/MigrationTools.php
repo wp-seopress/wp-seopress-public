@@ -27,7 +27,7 @@ function seopress_migration_tool( $plugin, $details, $checked ) {
                 <p>' . esc_html__( 'By clicking Migrate, we\'ll import:', 'wp-seopress' ) . '</p>
 
                 <ul>';
-	if ( 'yoast' === $plugin || 'rk' === $plugin || 'aio' === $plugin ) {
+	if ( 'yoast' === $plugin || 'rk' === $plugin || 'aio' === $plugin || 'surerank' === $plugin ) {
 		$html .= '<li>' . esc_html__( 'Global settings', 'wp-seopress' ) . '</li>';
 	}
 				$html .= '<li>' . esc_html__( 'Title tags', 'wp-seopress' ) . '</li>

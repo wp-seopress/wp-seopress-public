@@ -14,6 +14,8 @@ use SEOPress\Models\GetTagValue;
 class PostDate implements GetTagValue {
 	const NAME = 'schema_post_date';
 
+	const ALIAS = array( 'post_date_time', 'post_date_c', 'post_date_iso8601', 'post_date_formatted' );
+
 	/**
 	 * Get value
 	 *

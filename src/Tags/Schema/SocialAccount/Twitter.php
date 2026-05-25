@@ -35,7 +35,11 @@ class Twitter implements GetTagValue {
 
 		$value = seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter();
 		if ( ! empty( $value ) ) {
-			$value = sprintf( 'https://x.com/%s', $value );
+			// The stored value is normalized to "@handle" on save (Sanitize.php),
+			// but the X profile URL is "https://x.com/handle" with no @ after
+			// the slash. Strip a leading @ before composing the URL.
+			$handle = ltrim( trim( $value ), '@' );
+			$value  = sprintf( 'https://x.com/%s', $handle );
 		}
 
 		return apply_filters( 'seopress_get_tag_schema_social_account_twitter', $value, $context );

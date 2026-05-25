@@ -164,7 +164,7 @@ function seopress_render_pro_upsell( $feature_name, $feature_slug = '' ) {
 	</div>
 	<style>
 		.seopress-pro-upsell {
-			background: linear-gradient(135deg, #4E21E7 0%, #6B3CE7 100%);
+			background: linear-gradient(135deg, var(--wp-admin-theme-color) 0%, var(--wp-admin-theme-color-darker-20) 100%);
 			border-radius: 8px;
 			padding: 20px;
 			margin: 20px 0;
@@ -211,7 +211,7 @@ function seopress_render_pro_upsell( $feature_name, $feature_slug = '' ) {
 		.seopress-pro-upsell .upsell-cta {
 			flex-shrink: 0;
 			background: #fff;
-			color: #4E21E7;
+			color: var(--wp-admin-theme-color);
 			border: none;
 			padding: 10px 20px;
 			font-weight: 600;

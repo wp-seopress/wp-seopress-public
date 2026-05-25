@@ -151,7 +151,37 @@ function seopress_sanitize_options_fields( $input ) {
 				$input[ $value ] = '@' . ltrim( $input[ $value ], '@' );
 			}
 		} elseif ( ! empty( $input[ $value ] ) ) {
-			$input[ $value ] = sanitize_text_field( $input[ $value ] );
+			// Title/description templates and the separator carry user-meaningful
+			// whitespace (e.g. " - " around %%sep%%, leading/trailing spaces around
+			// tokens). sanitize_text_field() trims and collapses spaces, so it
+			// would silently rewrite the saved template. Strip tags + line breaks
+			// and keep the rest verbatim.
+			$preserve_whitespace_fields = array(
+				'seopress_titles_sep',
+				'seopress_titles_home_site_title',
+				'seopress_titles_home_site_title_alt',
+				'seopress_titles_home_site_desc',
+				'seopress_titles_archives_author_title',
+				'seopress_titles_archives_author_desc',
+				'seopress_titles_archives_date_title',
+				'seopress_titles_archives_date_desc',
+				'seopress_titles_archives_search_title',
+				'seopress_titles_archives_search_desc',
+				'seopress_titles_archives_404_title',
+				'seopress_titles_archives_404_desc',
+			);
+			if ( in_array( $value, $preserve_whitespace_fields, true ) ) {
+				// Mirror wp_strip_all_tags() (script/style block removal +
+				// strip_tags) without its trailing trim(), so user spaces
+				// around the separator and around tokens survive. Line breaks
+				// and control characters are dropped.
+				$stripped        = preg_replace( '@<(script|style)[^>]*?>.*?</\1>@si', '', (string) $input[ $value ] );
+				$stripped        = strip_tags( $stripped );
+				$stripped        = preg_replace( '/[\r\n\t]+/', '', $stripped );
+				$input[ $value ] = preg_replace( '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', $stripped );
+			} else {
+				$input[ $value ] = sanitize_text_field( $input[ $value ] );
+			}
 		}
 	}
 

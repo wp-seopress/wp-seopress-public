@@ -163,6 +163,19 @@ class ContentAnalysis implements ExecuteHooks {
 		$data['score'] = $score;
 		seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
 
+		/**
+		 * Filter the content-analysis REST response before it is returned
+		 * to the editor. Pro hooks into this to inject the per-(post, check)
+		 * seopress_seo_issues rows so the React panel can render its
+		 * ignore controls without an extra round trip.
+		 *
+		 * @since 9.9.0
+		 *
+		 * @param array $data The analysis payload.
+		 * @param int   $id   Post id being analyzed.
+		 */
+		$data = apply_filters( 'seopress_content_analysis_response', $data, $id );
+
 		return new \WP_REST_Response( $data );
 	}
 

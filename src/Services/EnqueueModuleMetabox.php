@@ -94,7 +94,7 @@ class EnqueueModuleMetabox {
 			$response = true;
 		}
 
-		if ( ! current_user_can( 'edit_posts' ) ) {
+		if ( ! current_user_can( $this->getCurrentEditCapability() ) ) {
 			$response = false;
 		}
 
@@ -108,29 +108,14 @@ class EnqueueModuleMetabox {
 		}
 
 		$settings_advanced = seopress_get_service( 'AdvancedOption' );
-		$roles_tabs        = array(
-			'GLOBAL'           => $settings_advanced->getSecurityMetaboxRole(),
-			'CONTENT_ANALYSIS' => $settings_advanced->getSecurityMetaboxRoleContentAnalysis(),
-		);
 
-		$user             = wp_get_current_user();
-		$roles            = (array) $user->roles;
-		$counter_can_edit = 0;
-
-		foreach ( $roles_tabs as $key => $role_tab ) {
-			if ( null === $role_tab ) {
-				continue;
-			}
-
-			$diff = array_diff( $roles, array_keys( $role_tab ) );
-			if ( count( $diff ) !== count( $roles ) ) {
-				++$counter_can_edit;
-			}
-		}
-
-		if ( $counter_can_edit >= 2 ) {
-			$response = false;
-		}
+		// The Advanced ▸ Security role restrictions ("SEO metaboxes" and
+		// "Content Analysis") are enforced inside the React universal
+		// metabox itself: ModuleMetabox localizes USER_ROLES and
+		// ROLES_BLOCKED (GLOBAL / CONTENT_ANALYSIS) so the blocked tabs are
+		// hidden client-side. We therefore never fall back to the legacy
+		// PHP metabox just because a role is checked here — the universal
+		// metabox stays loaded regardless of those checkboxes.
 
 		if ( isset( $_POST['can_enqueue_seopress_metabox'] ) && '1' !== $_POST['can_enqueue_seopress_metabox'] ) { // phpcs:ignore
 			$response = false;
@@ -146,5 +131,48 @@ class EnqueueModuleMetabox {
 		}
 
 		return apply_filters( 'seopress_can_enqueue_universal_metabox', $response );
+	}
+
+	/**
+	 * Resolve the capability required to edit the post type of the current
+	 * edit screen.
+	 *
+	 * The universal metabox was gated behind the generic `edit_posts`
+	 * capability, but post types declaring their own `capability_type`
+	 * (WooCommerce `product` -> `edit_products`, and any custom CPT) are
+	 * editable by roles that lack `edit_posts`. Those roles wrongly fell
+	 * back to the legacy classic metabox. We resolve the post type's
+	 * mapped `edit_posts` meta-cap instead, defaulting to the generic
+	 * `edit_posts` on term screens, the frontend or when the post type
+	 * can't be determined.
+	 *
+	 * @since 9.9.0
+	 *
+	 * @return string Capability slug.
+	 */
+	protected function getCurrentEditCapability() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$post_type = '';
+
+		if ( is_admin() ) {
+			if ( isset( $_GET['post_type'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$post_type = sanitize_key( wp_unslash( $_GET['post_type'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} elseif ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$post_type = (string) get_post_type( (int) $_GET['post'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} else {
+				global $typenow;
+				$post_type = is_string( $typenow ) ? $typenow : '';
+			}
+		}
+
+		if ( '' === $post_type ) {
+			return 'edit_posts';
+		}
+
+		$post_type_object = get_post_type_object( $post_type );
+		if ( null === $post_type_object || ! isset( $post_type_object->cap->edit_posts ) ) {
+			return 'edit_posts';
+		}
+
+		return $post_type_object->cap->edit_posts;
 	}
 }

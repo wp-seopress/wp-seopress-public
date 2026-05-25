@@ -28,7 +28,10 @@ $data_attr['data_tax'] = '';
 $data_attr['termId']   = '';
 
 if ( 'post-new.php' === $pagenow || 'post.php' === $pagenow ) {
-	$data_attr['current_id'] = get_the_id();
+	// Prefer the post object passed to the metabox callback over the global
+	// $post: page builders (e.g. Elementor Pro Theme Builder) can swap the
+	// global $post for one of their templates while the edit screen renders.
+	$data_attr['current_id'] = ( isset( $post ) && $post instanceof WP_Post ) ? $post->ID : get_the_id();
 	$data_attr['origin']     = 'post';
 	$data_attr['title']      = get_the_title( $data_attr['current_id'] );
 } elseif ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) {

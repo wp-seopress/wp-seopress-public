@@ -10,6 +10,100 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 /**
+ * Resolve dynamic-variable placeholders (%%_cf_*%%, %%_ct_*%%, %%_ucf_*%%)
+ * inside a title or description template against the given post.
+ *
+ * Mirrors the resolution that already runs inside the per-post-type and
+ * per-taxonomy branches of seopress_titles_the_title() and
+ * seopress_titles_the_description_content(), extracted so the homepage,
+ * static-homepage, blog-page and "your latest posts" branches can call
+ * the same logic without duplicating it. Without this, a template like
+ * %%_cf_metadata_title%% set on the **Home** Title field is left as a
+ * literal placeholder on a static homepage instead of being resolved
+ * against post meta.
+ *
+ * @since 9.8.x
+ *
+ * @param string $template       The template string to resolve (typically
+ *                               already passed through the basic-variable
+ *                               str_replace pipeline).
+ * @param int    $post_id        Post ID used to source post meta and
+ *                               post-attached terms. Pass 0 to skip CF/CT
+ *                               resolution; UCF still resolves against
+ *                               the current author.
+ * @param int    $excerpt_length Word limit applied to custom field values,
+ *                               matching the surrounding code.
+ * @return string Template with placeholders resolved.
+ */
+function seopress_resolve_dynamic_field_placeholders( $template, $post_id = 0, $excerpt_length = 30 ) {
+	if ( '' === $template || null === $template ) {
+		return (string) $template;
+	}
+
+	// Custom fields: %%_cf_<key>%% → post meta value.
+	if ( $post_id ) {
+		preg_match_all( '/%%_cf_(.*?)%%/', $template, $cf_matches );
+		if ( ! empty( $cf_matches[0] ) ) {
+			$cf_search  = array();
+			$cf_replace = array();
+			foreach ( $cf_matches[0] as $idx => $placeholder ) {
+				$key          = $cf_matches[1][ $idx ];
+				$cf_search[]  = $placeholder;
+				$value        = wp_trim_words(
+					esc_attr(
+						stripslashes_deep(
+							wp_filter_nohtml_kses(
+								wp_strip_all_tags(
+									strip_shortcodes( get_post_meta( $post_id, $key, true ), true )
+								)
+							)
+						)
+					),
+					$excerpt_length
+				);
+				$cf_replace[] = apply_filters( 'seopress_titles_custom_field', $value, $key );
+			}
+			$template = str_replace( $cf_search, $cf_replace, $template );
+		}
+
+		// Custom term taxonomies: %%_ct_<slug>%% → first attached term name.
+		preg_match_all( '/%%_ct_(.*?)%%/', $template, $ct_matches );
+		if ( ! empty( $ct_matches[0] ) ) {
+			$ct_search  = array();
+			$ct_replace = array();
+			foreach ( $ct_matches[0] as $idx => $placeholder ) {
+				$slug = $ct_matches[1][ $idx ];
+				$term = wp_get_post_terms( $post_id, $slug );
+				if ( is_wp_error( $term ) || empty( $term[0] ) ) {
+					continue;
+				}
+				$ct_search[]  = $placeholder;
+				$ct_replace[] = apply_filters( 'seopress_titles_custom_tax', esc_attr( $term[0]->name ), $slug );
+			}
+			if ( ! empty( $ct_search ) ) {
+				$template = str_replace( $ct_search, $ct_replace, $template );
+			}
+		}
+	}
+
+	// User meta: %%_ucf_<key>%% → user meta value of the current author.
+	preg_match_all( '/%%_ucf_(.*?)%%/', $template, $ucf_matches );
+	if ( ! empty( $ucf_matches[0] ) ) {
+		$ucf_search  = array();
+		$ucf_replace = array();
+		foreach ( $ucf_matches[0] as $idx => $placeholder ) {
+			$key           = $ucf_matches[1][ $idx ];
+			$ucf_search[]  = $placeholder;
+			$value         = esc_attr( get_user_meta( get_the_author_meta( 'ID' ), $key, true ) );
+			$ucf_replace[] = apply_filters( 'seopress_titles_user_meta', $value, $key );
+		}
+		$template = str_replace( $ucf_search, $ucf_replace, $template );
+	}
+
+	return $template;
+}
+
+/**
  * THE Title Tag
  *
  * @return string
@@ -51,18 +145,21 @@ function seopress_titles_the_title() {
 			$seopress_titles_the_title = esc_attr( seopress_get_service( 'TitleOption' )->getHomeSiteTitle() );
 
 			$seopress_titles_title_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title );
+			$seopress_titles_title_template = seopress_resolve_dynamic_field_placeholders( $seopress_titles_title_template, isset( $post ) && $post ? (int) $post->ID : 0, $seopress_excerpt_length );
 		}
 	} elseif ( is_front_page() && isset( $post ) && '' === get_post_meta( $post->ID, '_seopress_titles_title', true ) ) { // STATIC HOMEPAGE.
 		if ( '' !== seopress_get_service( 'TitleOption' )->getHomeSiteTitle() ) {
 			$seopress_titles_the_title = esc_attr( seopress_get_service( 'TitleOption' )->getHomeSiteTitle() );
 
 			$seopress_titles_title_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title );
+			$seopress_titles_title_template = seopress_resolve_dynamic_field_placeholders( $seopress_titles_title_template, isset( $post ) && $post ? (int) $post->ID : 0, $seopress_excerpt_length );
 		}
 	} elseif ( is_home() && ! empty( get_post_meta( $page_id, '_seopress_titles_title', true ) ) ) { // BLOG PAGE.
 		if ( get_post_meta( $page_id, '_seopress_titles_title', true ) ) { // IS METABOXE.
 			$seopress_titles_the_title = esc_attr( get_post_meta( $page_id, '_seopress_titles_title', true ) );
 
 			$seopress_titles_title_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title );
+			$seopress_titles_title_template = seopress_resolve_dynamic_field_placeholders( $seopress_titles_title_template, (int) $page_id, $seopress_excerpt_length );
 		}
 	} elseif ( is_home() && ( 'posts' === get_option( 'show_on_front' ) ) ) { // YOUR LATEST POSTS.
 		include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -72,6 +169,7 @@ function seopress_titles_the_title() {
 			$seopress_titles_the_title = esc_attr( seopress_get_service( 'TitleOption' )->getHomeSiteTitle() );
 
 			$seopress_titles_title_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_title );
+			$seopress_titles_title_template = seopress_resolve_dynamic_field_placeholders( $seopress_titles_title_template, isset( $post ) && $post ? (int) $post->ID : 0, $seopress_excerpt_length );
 		}
 	} elseif ( function_exists( 'bp_is_group' ) && bp_is_group() ) {
 		if ( '' !== seopress_get_service( 'TitleOption' )->getTitleBpGroups() ) {
@@ -388,12 +486,14 @@ function seopress_titles_the_description_content() {
 			$seopress_titles_the_description = esc_attr( seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle() );
 
 			$seopress_titles_description_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description );
+			$seopress_titles_description_template = seopress_resolve_dynamic_field_placeholders( $seopress_titles_description_template, isset( $post ) && $post ? (int) $post->ID : 0, $seopress_excerpt_length );
 		}
 	} elseif ( is_front_page() && isset( $post ) && '' === get_post_meta( $post->ID, '_seopress_titles_desc', true ) ) { // STATIC HOMEPAGE.
 		if ( '' !== seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle() && '' === get_post_meta( $post->ID, '_seopress_titles_desc', true ) ) { // IS GLOBAL.
 			$seopress_titles_the_description = esc_attr( seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle() );
 
 			$seopress_titles_description_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description );
+			$seopress_titles_description_template = seopress_resolve_dynamic_field_placeholders( $seopress_titles_description_template, isset( $post ) && $post ? (int) $post->ID : 0, $seopress_excerpt_length );
 		}
 	} elseif ( is_home() && ! empty( get_post_meta( $page_id, '_seopress_titles_desc', true ) ) ) { // BLOG PAGE.
 		if ( get_post_meta( $page_id, '_seopress_titles_desc', true ) ) {
@@ -401,12 +501,14 @@ function seopress_titles_the_description_content() {
 			$seopress_titles_the_description      = $seopress_titles_the_description_meta;
 
 			$seopress_titles_description_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description );
+			$seopress_titles_description_template = seopress_resolve_dynamic_field_placeholders( $seopress_titles_description_template, (int) $page_id, $seopress_excerpt_length );
 		}
 	} elseif ( is_home() && ( 'posts' === get_option( 'show_on_front' ) ) ) { // YOUR LATEST POSTS.
 		if ( '' !== seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle() ) { // IS GLOBAL.
 			$seopress_titles_the_description = esc_attr( seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle() );
 
 			$seopress_titles_description_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description );
+			$seopress_titles_description_template = seopress_resolve_dynamic_field_placeholders( $seopress_titles_description_template, isset( $post ) && $post ? (int) $post->ID : 0, $seopress_excerpt_length );
 		}
 	} elseif ( function_exists( 'bp_is_group' ) && bp_is_group() ) {
 		if ( '' !== seopress_get_service( 'TitleOption' )->getBpGroupsDesc() ) {

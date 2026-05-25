@@ -129,7 +129,7 @@ class Notifications {
 				'info' => __( 'Wizard', 'wp-seopress' ),
 			),
 			'link'       => array(
-				'en'       => admin_url( 'admin.php?page=seopress-setup&step=welcome&parent=welcome' ),
+				'en'       => admin_url( 'admin.php?page=seopress-setup' ),
 				'title'    => __( 'Start the wizard', 'wp-seopress' ),
 				'external' => false,
 			),
@@ -903,11 +903,11 @@ class Notifications {
 			$html .= '<p class="seopress-alert-actions">';
 
 			if ( ! empty( $link ) ) {
-				$html .= '<a class="btn btnSecondary"' . $href . $target . ' title="' . esc_attr( $link['title'] ) . '">' . esc_html( $link['title'] ) . '</a>';
+				$html .= '<a class="components-button is-secondary"' . $href . $target . ' title="' . esc_attr( $link['title'] ) . '">' . esc_html( $link['title'] ) . '</a>';
 			}
 			if ( true === $deleteable && true === $status ) {
 				$dismiss_text = __( 'Dismiss', 'wp-seopress' );
-				$html        .= '<button id="' . esc_attr( $id ) . '" name="notice-title-tag" type="button" class="btn btnLink" data-notice="' . esc_attr( $id ) . '" title="' . esc_attr( $dismiss_text ) . '">' . esc_html( $dismiss_text ) . '</button>';
+				$html        .= '<button id="' . esc_attr( $id ) . '" name="notice-title-tag" type="button" class="components-button is-tertiary" data-notice="' . esc_attr( $id ) . '" title="' . esc_attr( $dismiss_text ) . '">' . esc_html( $dismiss_text ) . '</button>';
 			}
 
 			$html .= '</p>';

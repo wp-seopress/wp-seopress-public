@@ -138,6 +138,10 @@ class DomFilterContent {
 				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Schema',
 				'value' => '',
 			),
+			'content_structure'   => array(
+				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\ContentStructure',
+				'value' => '',
+			),
 		);
 
 		$data = apply_filters( 'seopress_get_data_dom_filter_content', $data );

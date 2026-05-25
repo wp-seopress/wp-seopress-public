@@ -71,62 +71,16 @@ function seopress_toggle_features() {
 }
 add_action( 'wp_ajax_seopress_toggle_features', 'seopress_toggle_features' );
 
-/**
- * Dashboard Display Panel
+/*
+ * The dashboard "Display" panel toggles are now owned by the native React
+ * DisplayPanel and persisted through the
+ * /seopress/v1/dashboard/display-preference REST route (see
+ * SEOPress\Actions\Api\DashboardDisplayPreference). It writes the very
+ * same option keys the legacy wp_ajax_seopress_display handler used
+ * (seopress_advanced_appearance_notifications / _seo_tools), so existing
+ * user choices keep working untouched. The old AJAX handler and its jQuery
+ * caller have been removed.
  */
-function seopress_display() {
-	check_ajax_referer( 'seopress_display_nonce', '_ajax_nonce', true );
-	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
-		// Notifications Center.
-		if ( isset( $_POST['notifications_center'] ) ) {
-			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name', array() );
-			if ( ! is_array( $seopress_advanced_option_name ) ) {
-				$seopress_advanced_option_name = array();
-			}
-
-			if ( '1' === $_POST['notifications_center'] ) {
-				$seopress_advanced_option_name['seopress_advanced_appearance_notifications'] = sanitize_text_field( wp_unslash( $_POST['notifications_center'] ) );
-			} else {
-				unset( $seopress_advanced_option_name['seopress_advanced_appearance_notifications'] );
-			}
-
-			update_option( 'seopress_advanced_option_name', $seopress_advanced_option_name, false );
-		}
-
-		// News Panel.
-		if ( isset( $_POST['news_center'] ) ) {
-			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name', array() );
-			if ( ! is_array( $seopress_advanced_option_name ) ) {
-				$seopress_advanced_option_name = array();
-			}
-
-			if ( '1' === $_POST['news_center'] ) {
-				$seopress_advanced_option_name['seopress_advanced_appearance_news'] = sanitize_text_field( wp_unslash( $_POST['news_center'] ) );
-			} else {
-				unset( $seopress_advanced_option_name['seopress_advanced_appearance_news'] );
-			}
-
-			update_option( 'seopress_advanced_option_name', $seopress_advanced_option_name, false );
-		}
-		// Tools Panel.
-		if ( isset( $_POST['tools_center'] ) ) {
-			$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name', array() );
-			if ( ! is_array( $seopress_advanced_option_name ) ) {
-				$seopress_advanced_option_name = array();
-			}
-
-			if ( '1' === $_POST['tools_center'] ) {
-				$seopress_advanced_option_name['seopress_advanced_appearance_seo_tools'] = sanitize_text_field( wp_unslash( $_POST['tools_center'] ) );
-			} else {
-				unset( $seopress_advanced_option_name['seopress_advanced_appearance_seo_tools'] );
-			}
-
-			update_option( 'seopress_advanced_option_name', $seopress_advanced_option_name, false );
-		}
-		exit();
-	}
-}
-add_action( 'wp_ajax_seopress_display', 'seopress_display' );
 
 /**
  * Dashboard hide notices

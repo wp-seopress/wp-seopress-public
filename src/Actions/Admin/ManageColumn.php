@@ -64,7 +64,8 @@ class ManageColumn implements ExecuteHooksBackend {
 		}
 
 		foreach ( $list_post_types as $key => $value ) {
-			if ( null === seopress_get_service( 'TitleOption' )->getSingleCptEnable( $key ) && '' !== $key ) {
+			// Skip only when "Disable SEO metabox" is explicitly on; an empty stored value still means enabled.
+			if ( '1' !== seopress_get_service( 'TitleOption' )->getSingleCptEnable( $key ) && '' !== $key ) {
 				add_filter( 'manage_' . $key . '_posts_columns', array( $this, 'addColumn' ) );
 				add_action( 'manage_' . $key . '_posts_custom_column', array( $this, 'displayColumn' ), 10, 2 );
 				add_filter( 'manage_edit-' . $key . '_sortable_columns', array( $this, 'sortableColumn' ) );

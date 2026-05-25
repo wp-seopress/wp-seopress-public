@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.8.5
+ * Version: 9.9
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.8.5' );
+define( 'SEOPRESS_VERSION', '9.9' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -125,7 +125,7 @@ function seopress_redirect_after_activation() {
 		$seopress_notices = get_option( 'seopress_notices', array() );
 
 		if ( empty( $seopress_notices ) || ! isset( $seopress_notices['notice-wizard'] ) ) {
-			wp_safe_redirect( esc_url_raw( admin_url( 'admin.php?page=seopress-setup&step=welcome&parent=welcome' ) ) );
+			wp_safe_redirect( esc_url_raw( admin_url( 'admin.php?page=seopress-setup' ) ) );
 			exit();
 		}
 	}
@@ -299,8 +299,10 @@ add_filter( 'seopress_dyn_variables_fn', 'seopress_dyn_variables_init', 10, 3 );
 function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 	$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	// Register stylesheets.
-	wp_register_style( 'seopress-admin', plugins_url( 'assets/css/seopress' . $prefix . '.css', __FILE__ ), array(), SEOPRESS_VERSION );
+	// Register stylesheets. Depends on wp-components so that --wp-admin-theme-color
+	// (and its rgb / darker variants) are always available, even on PHP-rendered
+	// pages that don't load the React shell (wizard, dashboard, term metaboxes).
+	wp_register_style( 'seopress-admin', plugins_url( 'assets/css/seopress' . $prefix . '.css', __FILE__ ), array( 'wp-components' ), SEOPRESS_VERSION );
 	wp_enqueue_style( 'seopress-admin' );
 
 	// Early return if no page query var.
@@ -317,37 +319,11 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 		$scripts[] = 'seopress-network-tabs';
 	}
 
-	// Pages needing Toggle / Notices JS.
-	$pages_with_toggle_js = array_map(
-		/**
-		 * Get the page name.
-		 *
-		 * @param string $page
-		 * @return string
-		 */
-		function ( $page ) {
-			return 'seopress-' . $page;
-		},
-		array(
-			'setup',
-			'option',
-			'network-option',
-			'titles',
-			'xml-sitemap',
-			'social',
-			'google-analytics',
-			'pro-page',
-			'instant-indexing',
-			'advanced',
-			'import-export',
-			'bot-batch',
-			'license',
-		)
-	);
-
-	if ( in_array( $page, $pages_with_toggle_js, true ) ) {
-		$scripts[] = 'seopress-dashboard';
-	}
+	// The legacy assets/js/seopress-dashboard.js (jQuery) has been removed:
+	// every behaviour it carried (notices dismissal, activity panel, the
+	// SEO Tools tab navigation, the sitemap-URL copy button, feature/display
+	// toggles) is now owned by the native React admin header / dashboard /
+	// settings apps. No jQuery dashboard bundle is enqueued anymore.
 
 	// Setup Wizard page.
 	if ( 'seopress-setup' === $page ) {
@@ -355,12 +331,6 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 		wp_enqueue_script( 'seopress-migrate', plugins_url( 'assets/js/seopress-migrate' . $prefix . '.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
 		wp_enqueue_media();
 		wp_enqueue_script( 'seopress-media-uploader', plugins_url( 'assets/js/seopress-media-uploader' . $prefix . '.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
-	}
-
-	// Dashboard page styles.
-	if ( 'seopress-option' === $page ) {
-		wp_register_style( 'seopress-admin-dashboard', plugins_url( 'assets/css/seopress-admin-dashboard' . $prefix . '.css', __FILE__ ), array(), SEOPRESS_VERSION );
-		wp_enqueue_style( 'seopress-admin-dashboard' );
 	}
 
 	// Promotions CSS and JS on all SEOPress pages.
@@ -425,48 +395,15 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 		wp_enqueue_script( $script, plugins_url( 'assets/js/' . $script . $prefix . '.js', __FILE__ ), array( 'jquery' ), SEOPRESS_VERSION, true );
 	}
 
-	if ( in_array( $page, $pages_with_toggle_js, true ) ) {
-		// Features.
-		$seopress_toggle_features = array(
-			'seopress_nonce'           => wp_create_nonce( 'seopress_toggle_features_nonce' ),
-			'seopress_toggle_features' => admin_url( 'admin-ajax.php' ),
-			'i18n'                     => __( 'has been successfully updated!', 'wp-seopress' ),
-		);
-		wp_localize_script( 'seopress-dashboard', 'seopressAjaxToggleFeatures', $seopress_toggle_features );
+	// Notices dismissal + the "Display" panel are now native React
+	// (NotificationsPanel / DisplayPanel) and persist through their own
+	// payloads / REST routes, so the seopressAjaxHideNotices and
+	// seopressAjaxDisplay localizes that fed the removed jQuery bundle are
+	// gone.
 
-		// Notices.
-		$seopress_hide_notices = array(
-			'seopress_nonce'        => wp_create_nonce( 'seopress_hide_notices_nonce' ),
-			'seopress_hide_notices' => admin_url( 'admin-ajax.php' ),
-		);
-		wp_localize_script( 'seopress-dashboard', 'seopressAjaxHideNotices', $seopress_hide_notices );
-
-		if ( 'seopress-option' === $page ) {
-			// Simple View.
-			$seopress_switch_view = array(
-				'seopress_nonce'       => wp_create_nonce( 'seopress_switch_view_nonce' ),
-				'seopress_switch_view' => admin_url( 'admin-ajax.php' ),
-			);
-			wp_localize_script( 'seopress-dashboard', 'seopressAjaxSwitchView', $seopress_switch_view );
-
-			// News panel.
-			$seopress_news = array(
-				'seopress_nonce' => wp_create_nonce( 'seopress_news_nonce' ),
-				'seopress_news'  => admin_url( 'admin-ajax.php' ),
-			);
-			wp_localize_script( 'seopress-dashboard', 'seopressAjaxNews', $seopress_news );
-
-			// Display panel.
-			$seopress_display = array(
-				'seopress_nonce'   => wp_create_nonce( 'seopress_display_nonce' ),
-				'seopress_display' => admin_url( 'admin-ajax.php' ),
-			);
-			wp_localize_script( 'seopress-dashboard', 'seopressAjaxDisplay', $seopress_display );
-		}
-	}
-
-	// Localize migration data once for all migration pages.
-	if ( in_array( $page, array( 'seopress-option', 'seopress-import-export', 'seopress-setup' ), true ) ) {
+	// Localize migration data once for all migration pages (the React wizard
+	// passes its own nonces via SEOPRESS_WIZARD_DATA so it isn't listed here).
+	if ( in_array( $page, array( 'seopress-option', 'seopress-import-export' ), true ) ) {
 		$seopress_migrate = array(
 			'seopress_aio_migrate'              => array(
 				'seopress_nonce'         => wp_create_nonce( 'seopress_aio_migrate_nonce' ),
@@ -516,6 +453,10 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 				'seopress_nonce'             => wp_create_nonce( 'seopress_siteseo_migrate_nonce' ),
 				'seopress_siteseo_migration' => admin_url( 'admin-ajax.php' ),
 			),
+			'seopress_surerank_migrate'         => array(
+				'seopress_nonce'              => wp_create_nonce( 'seopress_surerank_migrate_nonce' ),
+				'seopress_surerank_migration' => admin_url( 'admin-ajax.php' ),
+			),
 			'seopress_metadata_csv'             => array(
 				'seopress_nonce'           => wp_create_nonce( 'seopress_export_csv_metadata_nonce' ),
 				'seopress_metadata_export' => admin_url( 'admin-ajax.php' ),
@@ -536,18 +477,9 @@ function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 
 	// Instant Indexing page.
 	if ( 'seopress-instant-indexing' === $page ) {
-		$seopress_instant_indexing_post = array(
-			'seopress_nonce'                 => wp_create_nonce( 'seopress_instant_indexing_post_nonce' ),
-			'seopress_instant_indexing_post' => admin_url( 'admin-ajax.php' ),
-		);
-		wp_localize_script( 'seopress-dashboard', 'seopressAjaxInstantIndexingPost', $seopress_instant_indexing_post );
-
-		$seopress_instant_indexing_generate_api_key = array(
-			'seopress_nonce'                             => wp_create_nonce( 'seopress_instant_indexing_generate_api_key_nonce' ),
-			'seopress_instant_indexing_generate_api_key' => admin_url( 'admin-ajax.php' ),
-		);
-		wp_localize_script( 'seopress-dashboard', 'seopressAjaxInstantIndexingApiKey', $seopress_instant_indexing_generate_api_key );
-
+		// The Instant Indexing AJAX bridges (seopressAjaxInstantIndexingPost
+		// / ...ApiKey) previously rode on the removed jQuery dashboard
+		// bundle; the page is now driven by the native React settings app.
 		$settings = wp_enqueue_code_editor( array( 'type' => 'application/json' ) );
 
 		wp_add_inline_script(
@@ -658,7 +590,6 @@ function seopress_admin_body_class( $classes ) {
 	// List of pages to apply classes.
 	$seopress_pages = array(
 		'seopress_csv_importer',
-		'seopress-setup',
 		'seopress-option',
 		'seopress-network-option',
 		'seopress-titles',
@@ -682,7 +613,7 @@ function seopress_admin_body_class( $classes ) {
 		// Additional class for specific pages.
 		if ( 'seopress-option' === $current_page ) {
 			$classes .= ' seopress-dashboard';
-		} elseif ( in_array( $current_page, array( 'seopress_csv_importer', 'seopress-setup' ), true ) ) {
+		} elseif ( 'seopress_csv_importer' === $current_page ) {
 			$classes .= ' seopress-setup';
 		}
 	}
@@ -723,7 +654,7 @@ function seopress_plugin_action_links( $links, $file ) {
 	if ( $file === $this_plugin ) {
 		// Define action links.
 		$settings_link = '<a href="' . admin_url( 'admin.php?page=seopress-option' ) . '">' . __( 'Settings', 'wp-seopress' ) . '</a>';
-		$wizard_link   = '<a href="' . admin_url( 'admin.php?page=seopress-setup&step=welcome&parent=welcome' ) . '">' . __( 'Configuration Wizard', 'wp-seopress' ) . '</a>';
+		$wizard_link   = '<a href="' . admin_url( 'admin.php?page=seopress-setup' ) . '">' . __( 'Configuration Wizard', 'wp-seopress' ) . '</a>';
 		$website_link  = '<a href="https://www.seopress.org/support/" target="_blank">' . __( 'Docs', 'wp-seopress' ) . '</a>';
 
 		// Add "GO PRO!" link for non-PRO users.

@@ -82,6 +82,26 @@ abstract class ContentAnalysis {
 				'impact' => 'good',
 				'desc'   => null,
 			),
+			'content_depth'      => array(
+				'title'  => __( 'Content depth', 'wp-seopress' ),
+				'impact' => 'good',
+				'desc'   => null,
+			),
+			'heading_hierarchy'  => array(
+				'title'  => __( 'Heading structure', 'wp-seopress' ),
+				'impact' => 'good',
+				'desc'   => null,
+			),
+			'content_media'      => array(
+				'title'  => __( 'Media in content', 'wp-seopress' ),
+				'impact' => 'good',
+				'desc'   => null,
+			),
+			'content_structure'  => array(
+				'title'  => __( 'Content readability', 'wp-seopress' ),
+				'impact' => 'good',
+				'desc'   => null,
+			),
 		);
 
 		return apply_filters( 'seopress_get_content_analysis_data', $data );

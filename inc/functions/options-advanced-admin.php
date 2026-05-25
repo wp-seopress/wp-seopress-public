@@ -154,7 +154,8 @@ if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
 	$post_types = seopress_get_service( 'WordPressData' )->getPostTypes();
 	if ( ! empty( $post_types ) ) {
 		foreach ( $post_types as $key => $value ) {
-			if ( null === seopress_get_service( 'TitleOption' )->getSingleCptEnable( $key ) && '' !== $key ) {
+			// Skip only when "Disable SEO metabox" is explicitly on; an empty stored value still means enabled.
+			if ( '1' !== seopress_get_service( 'TitleOption' )->getSingleCptEnable( $key ) && '' !== $key ) {
 				$post_type_actions = $common_actions + array(
 					'seopress_bulk_actions_redirect_enable' => 'seopress_bulk_action_redirect_enable_handler',
 					'seopress_bulk_actions_redirect_disable' => 'seopress_bulk_action_redirect_disable_handler',
@@ -169,7 +170,8 @@ if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
 	$taxonomies = seopress_get_service( 'WordPressData' )->getTaxonomies();
 	if ( ! empty( $taxonomies ) ) {
 		foreach ( $taxonomies as $key => $value ) {
-			if ( null === seopress_get_service( 'TitleOption' )->getTaxEnable( $key ) && '' !== $key ) {
+			// Skip only when "Disable SEO metabox" is explicitly on; an empty stored value still means enabled.
+			if ( '1' !== seopress_get_service( 'TitleOption' )->getTaxEnable( $key ) && '' !== $key ) {
 				add_bulk_action_filters( $key, $common_actions );
 			}
 		}

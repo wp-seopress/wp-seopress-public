@@ -22,7 +22,7 @@
 #seopress_ga_dashboard_widget,
 .column-seopress_score,
 .seopress-ui-datepicker {
-    --primaryColor: #4E21E7;
+    --primaryColor: var(--wp-admin-theme-color);
     --paragraphColor: #433F65;
     --fontSize: 13px;
     --fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -40,16 +40,22 @@
     --titleFontSize: 20px;
     --titleFontWeight: normal;
     --titleMargin: 10px 0;
-    --backgroundPrimary: #4E21E7;
-    --backgroundPrimaryHover: #3B11C8;
-    --backgroundSecondary: #F2EFFB;
+    --backgroundPrimary: var(--wp-admin-theme-color);
+    --backgroundPrimaryHover: var(--wp-admin-theme-color-darker-10);
+    --backgroundSecondary: rgba(var(--wp-admin-theme-color--rgb), 0.08);
     --backgroundSecondaryHover: #f0f0f0;
     --borderColor: #E6E6E8;
     --borderColorLight: #e0e0e0;
     --borderColorLight40: rgba(220, 220, 222, 0.4);
     --borderColorCard: #e2e4e7;
     --borderColorTab: #c3c4c7;
-    --sp-wp-default-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, var(--primaryColor)));
+    --sp-wp-default-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, var(--wp-admin-theme-color)));
+}
+
+.seopress-styles #wpbody {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTEyIiBoZWlnaHQ9IjE2MTMiIGZpbGw9Im5vbmUiPjxnIHN0cm9rZT0iI0JBQjhDRiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBjbGlwLXBhdGg9InVybCgjYSkiIG9wYWNpdHk9Ii40Ij48ZyBvcGFjaXR5PSIuNyIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOm92ZXJsYXkiPjxwYXRoIGQ9Ik0xMjAwLjM3IDUwNi4zOTdjODEuMjMgNTcuNDY3IDE5My42OCAzOC4xODQgMjUxLjE2LTQzLjA2OSA1Ny40OS04MS4yNTMgMzguMjUtMTkzLjcwOC00Mi45Ny0yNTEuMTc1LTgxLjIzLTU3LjQ2Ny0xOTMuNjgtMzguMTg1LTI1MS4xNiA0My4wNjgtNTcuNDkgODEuMjUzLTM4LjI1IDE5My43MDggNDIuOTcgMjUxLjE3NlpNNjI5LjMwOSAzNy45MjZjNTcuNTE4IDQwLjY5NSAxMzcuMTQ3IDI3LjA0IDE3Ny44NTYtMzAuNDk5IDQwLjcxLTU3LjUzOCAyNy4wODQtMTM3LjE3Mi0zMC40MzQtMTc3Ljg2Ny01Ny41MTgtNDAuNjk1LTEzNy4xNDctMjcuMDQtMTc3Ljg1NyAzMC40OTgtNDAuNzA5IDU3LjU0LTI3LjA4MyAxMzcuMTczIDMwLjQzNSAxNzcuODY4WiIvPjxwYXRoIGQ9Ik0zNDYuMTk5LTk2LjYxNEM0MjcuOTEzLTM4LjggNTQxLjA0LTU4LjE5OSA1OTguODc0LTEzOS45NDJjNTcuODM1LTgxLjc0MyAzOC40NzctMTk0Ljg3Ni00My4yMzctMjUyLjY5LTgxLjcxNC01Ny44MTQtMTk0Ljg0LTM4LjQxNS0yNTIuNjc1IDQzLjMyOC01Ny44MzQgODEuNzQzLTM4LjQ3NiAxOTQuODc2IDQzLjIzNyAyNTIuNjlabTQ0Mi40MzQgNjE2LjcyOWM1MS4wMjggMzYuMTAzIDEyMS42NzIgMjMuOTg5IDE1Ny43ODktMjcuMDU3IDM2LjExNi01MS4wNDcgMjQuMDI3LTEyMS42OTUtMjcuMDAxLTE1Ny43OTgtNTEuMDI4LTM2LjEwNC0xMjEuNjcyLTIzLjk5LTE1Ny43ODggMjcuMDU3LTM2LjExNiA1MS4wNDYtMjQuMDI4IDEyMS42OTUgMjcgMTU3Ljc5OFoiLz48cGF0aCBkPSJNODQ5LjcyNyAzNzQuNTAyYzEzLjUwMi0xLjIwOCAyNy40NTkgMi43NDYgMzguNjY1IDEyLjE0IDIyLjM4NiAxOC43NjIgMjUuMzE1IDUyLjEyNSA2LjU0NyA3NC41MTItMTguNzY3IDIyLjM5NS01Mi4xMjcgMjUuMzM1LTc0LjUwNSA2LjU3Mi0xMC40NTEtOC43NTktMTYuNjY0LTIwLjcwNi0xOC40MDUtMzMuMjMybTc2MS45MjEtMjU2LjM4OGM1Ni45OCA0MC4zMTYgMTM1Ljg3IDI2Ljc4OCAxNzYuMi0zMC4yMTQgNDAuMzMtNTcuMDAxIDI2LjgzLTEzNS44OTMtMzAuMTYtMTc2LjIwOC01Ni45OC00MC4zMTUtMTM1Ljg2LTI2Ljc4OC0xNzYuMTkgMzAuMjE0LTQwLjMzIDU3LjAwMi0yNi44MyAxMzUuODkzIDMwLjE1IDE3Ni4yMDhaIi8+PHBhdGggZD0iTTEwNzUuNTYgNjgyLjgwM2MxNzguNjIgMTI2LjM3MyA0MjUuOSA4My45NyA1NTIuMzItOTQuNzA5IDEyNi40Mi0xNzguNjggODQuMS00MjUuOTczLTk0LjUxLTU1Mi4zNDYtMTc4LjYyLTEyNi4zNzMtNDI1LjktODMuOTctNTUyLjMxNiA5NC43MDktMTI2LjQxOCAxNzguNjc5LTg0LjEwNCA0MjUuOTczIDk0LjUwNiA1NTIuMzQ2WiIvPjxwYXRoIGQ9Ik0xMDUxLjQzIDcxNi45MTFjMTk3LjQ1IDEzOS42OTYgNDcwLjggOTIuODIzIDYxMC41NC0xMDQuNjk0QzE4MDEuNzIgNDE0LjcgMTc1NC45NCAxNDEuMzM2IDE1NTcuNSAxLjY0Yy0xOTcuNDUtMTM5LjY5Ni00NzAuOC05Mi44MjMtNjEwLjU0MSAxMDQuNjk0LTEzOS43NDYgMTk3LjUxNi05Mi45NzIgNDcwLjg4MSAxMDQuNDcxIDYxMC41NzdaIi8+PHBhdGggZD0iTTg5My44ODIgOTM5LjU5MmMzMjAuMzg4IDIyNi42NzggNzYzLjkzOCAxNTAuNjE4IDk5MC42ODgtMTY5Ljg4MSAyMjYuNzYtMzIwLjUwMSAxNTAuODYtNzY0LjA3Ni0xNjkuNTItOTkwLjc1M0MxMzk0LjY2LTQ0Ny43MiA5NTEuMTE2LTM3MS42NjEgNzI0LjM1Ny01MS4xNjEgNDk3LjU5OCAyNjkuMzQgNTczLjQ5NyA3MTIuOTE1IDg5My44ODIgOTM5LjU5MloiLz48L2c+PHBhdGggZD0iTTg2OS43NjQtNTg1LjM1NCAxNTY4LjA4IDkzMi4xMU02ODEuNTUyLTI2OS44MzcgMjEzNi44NiAxMTk5Ljk1TTU2MC42OTMgOC4wNzEgMjI0Mi42MyA4MDIuMjczTTc3OC44OSA0NDEuNzNsMTA2NS4yNy0xNjcuNTYiLz48L2c+PGRlZnM+PGNsaXBQYXRoIGlkPSJhIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNzEzLjQ4MS05MzAgMjY2Ni4zMzYgNDUxLjY3NWwtODIxLjQ4MiAxMTYxLjA4TC0xMDggMjMxLjA3OXoiLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
 }
 
 .seopress-option .text-center,
@@ -57,8 +63,8 @@
     text-align: center;
 }
 
-.seopress-option a {
-    color: var(--primaryColor);
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) a {
+    color: var(--wp-admin-theme-color);
 }
 
 .seopress-d-flex {
@@ -106,7 +112,7 @@
 }
 
 /* Button */
-.seopress-option .btn,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btn,
 .seopress-styles .btn,
 .post-type-seopress_404 .btn,
 .post-type-seopress_schemas .btn {
@@ -129,108 +135,108 @@
     line-height: normal;
 }
 
-.seopress-option .btnPrimary,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnPrimary,
 .seopress-styles .btnPrimary,
 .post-type-seopress_404 .btnPrimary,
 .post-type-seopress_schemas .btnPrimary {
-    background: var(--backgroundPrimary);
+    background: var(--wp-admin-theme-color);
     color: #fff;
     text-decoration: none;
 }
 
-.seopress-option .btnPrimary:hover,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnPrimary:hover,
 .seopress-styles .btnPrimary:hover,
 .post-type-seopress_404 .btnPrimary:hover,
 .post-type-seopress_schemas .btnPrimary:hover {
-    background: var(--backgroundPrimaryHover);
+    background: var(--wp-admin-theme-color-darker-10);
     color: #fff;
 }
 
-.seopress-option .btnSecondary,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnSecondary,
 .seopress-styles .btnSecondary,
 .post-type-seopress_404 .btnSecondary,
 .post-type-seopress_schemas .btnSecondary {
-    background: var(--backgroundSecondary);
-    color: var(--primaryColor);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
+    color: var(--wp-admin-theme-color);
     padding: 9px 16px;
     border: none;
     font-weight: 600;
 }
 
-.seopress-option .btnSecondary,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnSecondary,
 .seopress-styles .btnSecondary {
-    background: var(--backgroundSecondary);
-    color: var(--primaryColor);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
+    color: var(--wp-admin-theme-color);
 }
 
-.seopress-option .btnSecondary:hover,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnSecondary:hover,
 .seopress-styles .btnSecondary:hover {
-    color: var(--backgroundSecondary);
-    background: var(--primaryColor);
+    color: #fff;
+    background: var(--wp-admin-theme-color);
 }
 
-.seopress-option .btnSecondary.is-deletable,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnSecondary.is-deletable,
 .seopress-styles .btnSecondary.is-deletable {
     border-color: var(--colorAlert);
     color: var(--colorAlert);
     box-shadow: var(--colorAlert) 0px 0px 0px 1px inset;
 }
 
-.seopress-option .btnTertiary,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnTertiary,
 .seopress-styles .btnTertiary,
 .post-type-seopress_404 .btnTertiary,
 .post-type-seopress_schemas .btnTertiary {
-    color: var(--primaryColor);
+    color: var(--wp-admin-theme-color);
     background: transparent;
-    border: 1px solid var(--primaryColor);
+    border: 1px solid var(--wp-admin-theme-color);
 }
 
-.seopress-option .btnTertiary:hover,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnTertiary:hover,
 .seopress-styles .btnTertiary:hover,
 .post-type-seopress_404 .btnTertiary:hover,
 .post-type-seopress_schemas .btnTertiary:hover {
-    border: 1px solid var(--backgroundPrimaryHover);
+    border: 1px solid var(--wp-admin-theme-color-darker-10);
 }
 
-.seopress-option .btnTertiary.is-deletable,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnTertiary.is-deletable,
 .seopress-styles .btnTertiary.is-deletable {
     color: var(--colorAlert);
     background: transparent;
     border: 1px solid var(--colorAlert);
 }
 
-.seopress-option .btnLink,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnLink,
 .seopress-styles .btnLink,
 .post-type-seopress_404 .btnLink,
 .post-type-seopress_schemas .btnLink {
-    color: var(--primaryColor);
+    color: var(--wp-admin-theme-color);
     border: 1px solid transparent;
 }
 
-.seopress-option .btnLink:hover,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnLink:hover,
 .seopress-styles .btnLink:hover {
-    border: 1px solid var(--primaryColor);
+    border: 1px solid var(--wp-admin-theme-color);
 }
 
-.seopress-option .btnLink.is-deletable,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnLink.is-deletable,
 .seopress-styles .btnLink.is-deletable {
     color: var(--colorAlert);
 }
 
-.seopress-option .btnLink.is-deletable:hover,
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnLink.is-deletable:hover,
 .seopress-styles .btnLink.is-deletable:hover {
     border: 1px solid var(--colorAlert);
 }
 
-.seopress-option .btnPrimary[disabled],
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnPrimary[disabled],
 .seopress-styles .btnPrimary[disabled],
 .post-type-seopress_404 .btnPrimary[disabled],
 .post-type-seopress_schemas .btnPrimary[disabled],
-.seopress-option .btnSecondary[disabled],
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnSecondary[disabled],
 .seopress-styles .btnSecondary[disabled],
 .post-type-seopress_404 .btnSecondary[disabled],
 .post-type-seopress_schemas .btnSecondary[disabled],
-.seopress-option .btnTertiary[disabled],
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .btnTertiary[disabled],
 .seopress-styles .btnTertiary[disabled],
 .post-type-seopress_404 .btnTertiary[disabled],
 .post-type-seopress_schemas .btnTertiary[disabled] {
@@ -252,7 +258,7 @@
     padding: 9px 12px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     font-size: var(--fontSize);
-    background: var(--backgroundSecondary);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
     border: 1px solid var(--borderColor);
     border-radius: 4px;
     color: var(--colorDark);
@@ -260,7 +266,7 @@
 }
 
 .seopress-sitemap-url-input:focus {
-    outline: 2px solid var(--primaryColor);
+    outline: 2px solid var(--wp-admin-theme-color);
     outline-offset: 0;
 }
 
@@ -277,10 +283,6 @@
     font-size: 18px;
     width: 18px;
     height: 18px;
-}
-
-#seopress-news-panel .seopress-item-inner .dashicons {
-    vertical-align: top;
 }
 
 .seopress-button {
@@ -342,11 +344,13 @@
     padding: 0;
 }
 
-/* Forms */
-body .seopress-option :not(.seopress-no-override) input[type="text"],
-body .seopress-option input[type="password"],
-body .seopress-option select,
-body .seopress-option textarea {
+/* Forms — scoped to legacy PHP-rendered admin pages only.
+ * The React settings root (#seopress-admin-settings-root) uses
+ * @wordpress/components and must keep the WP-native control look. */
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) :not(.seopress-no-override) input[type="text"],
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="password"],
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) select,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) textarea {
     max-width: 35rem;
     width: 100%;
     box-shadow: none;
@@ -369,7 +373,7 @@ body .seopress-option #seopress_instant_indexing_manual_batch {
     max-width: 100%;
 }
 
-body .seopress-option select {
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) select {
     min-height: 50px;
 }
 
@@ -377,45 +381,45 @@ body .seopress-option select {
     width: inherit;
 }
 
-body .seopress-option input[type="text"],
-body .seopress-option input[type="password"],
-body .seopress-option input[type="number"] {
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="text"],
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="password"],
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="number"] {
     line-height: 46px;
 }
 
-body .seopress-option input[type="text"]:hover,
-body .seopress-option input[type="password"]:hover,
-body .seopress-option input[type="number"]:hover,
-body .seopress-option select:hover,
-body .seopress-option textarea:hover {
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="text"]:hover,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="password"]:hover,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="number"]:hover,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) select:hover,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) textarea:hover {
     border-color: #787c82;
 }
 
-body .seopress-option input[type="text"]:focus,
-body .seopress-option input[type="password"]:focus,
-body .seopress-option input[type="number"]:focus,
-body .seopress-option textarea:focus,
-body .seopress-option select:focus,
-body .seopress-option input[type="text"]:active,
-body .seopress-option input[type="password"]:active,
-body .seopress-option input[type="number"]:active,
-body .seopress-option textarea:active,
-body .seopress-option select:active {
-    border-color: var(--primaryColor);
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="text"]:focus,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="password"]:focus,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="number"]:focus,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) textarea:focus,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) select:focus,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="text"]:active,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="password"]:active,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="number"]:active,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) textarea:active,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) select:active {
+    border-color: var(--wp-admin-theme-color);
     box-shadow: none;
 }
 
 @media only screen and (max-width: 1024px) {
 
-    body .seopress-option input[type="text"],
-    body .seopress-option input[type="password"],
-    body .seopress-option input[type="number"],
-    body .seopress-option textarea {
+    body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="text"],
+    body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="password"],
+    body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="number"],
+    body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) textarea {
         min-width: inherit;
         width: 100%;
     }
 
-    body .seopress-option .CodeMirror-wrap {
+    body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) .CodeMirror-wrap {
         max-width: 100%;
         width: calc(100% - 20px);
     }
@@ -423,7 +427,7 @@ body .seopress-option select:active {
 
 #seopress_cpt input[type="checkbox"],
 #seopress_pro_cpt input[type="checkbox"],
-body .seopress-option input[type="checkbox"] {
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="checkbox"] {
     font-family: var(--fontFamily);
     box-shadow: 0 0 0 transparent;
     transition: box-shadow 0.1s linear;
@@ -455,9 +459,9 @@ body .seopress-option input[type="checkbox"] {
 
 #seopress_cpt input[type="checkbox"]:checked::before,
 #seopress_pro_cpt input[type="checkbox"]:checked::before,
-body .seopress-option input[type="checkbox"]:checked::before {
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="checkbox"]:checked::before {
     content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
-    background: var(--backgroundPrimary);
+    background: var(--wp-admin-theme-color);
     margin: -1px;
     width: 20px;
     height: 20px;
@@ -467,9 +471,9 @@ body .seopress-option input[type="checkbox"]:checked::before {
 #seopress_cpt input[type="checkbox"]:active,
 #seopress_pro_cpt input[type="checkbox"]:focus,
 #seopress_pro_cpt input[type="checkbox"]:active,
-body .seopress-option input[type="checkbox"]:focus,
-body .seopress-option input[type="checkbox"]:active {
-    box-shadow: 0 0 0 2px var(--primaryColor);
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="checkbox"]:focus,
+body .seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) input[type="checkbox"]:active {
+    box-shadow: 0 0 0 2px var(--wp-admin-theme-color);
     border-color: transparent;
 }
 
@@ -2079,7 +2083,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    background-color: var(--backgroundPrimary);
+    background-color: var(--wp-admin-theme-color);
     transition: width 0.6s ease;
 }
 
@@ -2134,8 +2138,6 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 
 .seopress-styles .seopress-option h1 {
     font-size: var(--titleFontSize);
-    color: var(--titleColor);
-    font-weight: var(--titleFontWeight);
     margin: var(--titleMargin);
     display: flex;
 }
@@ -2205,19 +2207,6 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     position: relative;
 }
 
-.seopress-styles pre:not(.CodeMirror-line, .CodeMirror-placeholder) {
-    font-family: Menlo, Monaco, Andale Mono, Courier New, monospace;
-    padding: 10px;
-    display: inline-block;
-    background-color: var(--backgroundSecondaryHover);
-    border-radius: 3px;
-    color: var(--colorDark);
-    font-size: var(--fontSize);
-    word-break: break-all;
-    white-space: pre-line;
-    /* display: none; */
-}
-
 .seopress-option .seopress-settings {
     float: left;
     max-width: 750px;
@@ -2285,7 +2274,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     max-width: 100%;
 }
 
-.seopress-option textarea {
+.seopress-option:where(:not(#seopress-admin-settings-root):not(#seopress-admin-dashboard-root)) textarea {
     min-height: 100px;
 }
 
@@ -2432,11 +2421,6 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
     display: inline-block;
 }
 
-#seopress-content .feature-state-off,
-.seopress-option .feature-state-off {
-    display: none;
-}
-
 .seopress-option .postbox .inside li {
     list-style: square inside;
     padding-left: 5px;
@@ -2507,7 +2491,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 }
 
 .seopress-option .sp-section-header>.dashicons {
-    color: var(--primaryColor);
+    color: var(--wp-admin-theme-color);
     padding: 10px;
     border-radius: 6px;
     margin-right: 10px;
@@ -2532,7 +2516,6 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 #seopress_content_analysis .seopress-notice,
 #seopress-tabs .seopress-notice,
 #seopress_pro_cpt .seopress-notice,
-#seopress-integration-panel .seopress-notice,
 .seopress-setup .seopress-notice {
     top: inherit;
     left: inherit;
@@ -2616,8 +2599,7 @@ details.seopress-notice > *:not(summary) {
     margin: 30px 0 0 0;
 }
 
-#seopress-tabs.wrap ul,
-#seopress-notifications-center .seopress-alert ul {
+#seopress-tabs.wrap ul {
     list-style: square inside;
     padding-left: 5px;
     display: inline-block;
@@ -2749,62 +2731,16 @@ details.seopress-notice > *:not(summary) {
 }
 
 /* Notifications */
-#seopress-notifications.is-active,
-#seopress-news-panel.is-active,
-#notice-tasks-alert.is-active,
-#notice-insights-alert.is-active,
-#seopress-integration-panel.is-active,
-#seopress-ebook-panel.is-active,
-#seopress-promotions-panel.is-active {
+#notice-insights-alert.is-active {
     display: block !important;
 }
 
-#notice-get-started-alert.is-active {
-    display: flex !important;
-}
-
-#seopress-notifications-center .seopress-alert {
-    padding: 0 0 0 48px;
-    position: relative;
-    transition: all 150ms ease;
-    justify-content: space-between;
-    margin-bottom: 40px;
-}
-
-#seopress-notifications-center .seopress-alert:last-child {
-    margin-bottom: 0;
-    border-bottom: none;
-}
-
-#seopress-notifications-center .seopress-alert-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-#seopress-notifications-center .seopress-alert-actions .btn {
-    max-width: 100%;
-    min-width: 0;
-    flex: 0 1 auto;
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-#seopress-notifications-center .seopress-alert-actions .btn:only-child {
-    max-width: 400px;
-}
-
-#seopress-notifications-center .dashicons {
-    display: flex;
-    align-self: normal;
-    width: 30px;
-    height: 30px;
-    color: var(--colorIcon);
-    font-size: 30px;
-    margin: 0 0 10px 0;
-}
+/*
+ * The legacy #seopress-notifications-center has been replaced by the
+ * native React notifications panel; its scoped rules were dead and have
+ * been removed. The shared .seopress-alert / .seopress-impact rules below
+ * are still used (server-rendered notification HTML injected into React).
+ */
 
 #seopress-admin-tabs #tab_seopress_notifications.seopress-tab {
     background: 0 0;
@@ -2896,7 +2832,7 @@ details.seopress-notice > *:not(summary) {
 }
 
 .seopress-list-guides .seopress-item a {
-    background: var(--backgroundSecondary);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
     border-radius: 8px;
     padding: 24px;
     display: flex;
@@ -2909,7 +2845,7 @@ details.seopress-notice > *:not(summary) {
 }
 
 .seopress-list-guides .seopress-item a:hover {
-    background: var(--backgroundPrimary);
+    background: var(--wp-admin-theme-color);
 }
 
 .seopress-list-guides .seopress-item a:hover * {
@@ -2947,7 +2883,7 @@ details.seopress-notice > *:not(summary) {
     align-items: center;
     gap: 2rem;
     border-radius: 1rem;
-    background: var(--backgroundSecondary);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
     font-weight: bold;
     position: relative;
     transition: all 150ms linear;
@@ -2957,7 +2893,7 @@ details.seopress-notice > *:not(summary) {
 .seopress-option .seopress-import-tool:focus,
 .seopress-option .seopress-import-tool:active,
 .seopress-option .seopress-import-tool.active {
-    border: 3px solid var(--backgroundPrimary);
+    border: 3px solid var(--wp-admin-theme-color);
 }
 .seopress-option .seopress-import-tool * {
     cursor: pointer;
@@ -2983,50 +2919,6 @@ details.seopress-notice > *:not(summary) {
     border-radius: 0.5rem;
 }
 
-/* AI Providers */
-.seopress-option .seopress-ai-providers {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-}
-.seopress-option .seopress-ai-provider {
-    display: flex;
-    align-items: stretch;
-    border-radius: 1rem;
-    background: var(--backgroundSecondary);
-    font-weight: bold;
-    position: relative;
-    transition: all 150ms linear;
-    border: 3px solid transparent;
-    min-height: 80px;
-}
-.seopress-option .seopress-ai-provider:hover,
-.seopress-option .seopress-ai-provider:focus,
-.seopress-option .seopress-ai-provider:active,
-.seopress-option .seopress-ai-provider.active {
-    border: 3px solid var(--backgroundPrimary);
-}
-.seopress-option .seopress-ai-provider * {
-    cursor: pointer;
-}
-.seopress-option .seopress-ai-provider label {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    padding: 1.5rem 1rem;
-}
-.seopress-option .seopress-ai-provider input[type="radio"] {
-    text-indent: -9999px;
-    position: absolute;
-    opacity: 0;
-}
-.seopress-option .seopress-ai-provider label img {
-    width: 100px;
-    height: auto;
-    margin: 0 auto;
-}
 
 /* Quick tags */
 #seopress_cpt .tag-title,
@@ -3152,7 +3044,7 @@ details.seopress-notice > *:not(summary) {
 }
 
 #seopress-tabs.wrap .sp-tag-variables-list li:hover {
-    background: var(--backgroundPrimary);
+    background: var(--wp-admin-theme-color);
 }
 
 #seopress_cpt .sp-tag-variables-list li::after,
@@ -3184,7 +3076,7 @@ details.seopress-notice > *:not(summary) {
     width: 16px;
     font-size: 16px;
     margin-right: 5px;
-    color: var(--primaryColor);
+    color: var(--wp-admin-theme-color);
     vertical-align: middle;
 }
 
@@ -3236,7 +3128,7 @@ details.seopress-notice > *:not(summary) {
     display: inline-flex;
     text-transform: uppercase;
     align-items: center;
-    border-color: var(--primaryColor);
+    border-color: var(--wp-admin-theme-color);
     color: var(--colorDark);
 }
 
@@ -3257,8 +3149,8 @@ details.seopress-notice > *:not(summary) {
 #seopress_cpt .seopress-tag-dropdown:focus,
 #seopress-tabs .seopress-tag-dropdown:hover,
 #seopress-tabs .seopress-tag-dropdown:focus {
-    box-shadow: 0 0 var(--primaryColor);
-    background: var(--primaryColor);
+    box-shadow: 0 0 var(--wp-admin-theme-color);
+    background: var(--wp-admin-theme-color);
     color: #fff;
 }
 
@@ -3426,7 +3318,7 @@ details.seopress-notice > *:not(summary) {
 .seopress_wrap_single_cpt input.toggle[data-toggle="1"]+label:before,
 .seopress_wrap_tax input.toggle[data-toggle="1"]+label:before {
     width: 40px;
-    background: var(--backgroundPrimary);
+    background: var(--wp-admin-theme-color);
 }
 
 #seopress_cpt input.toggle[data-toggle="1"]+label:before {
@@ -3437,7 +3329,7 @@ details.seopress-notice > *:not(summary) {
 .seopress-option input.toggle[data-toggle="1"]+label:after,
 #seopress_cpt input.toggle[data-toggle="1"]+label:after {
     left: 20px;
-    box-shadow: inset 0 0 0 2px var(--backgroundPrimary), 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 0 2px var(--wp-admin-theme-color), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #seopress_cpt input.toggle[data-toggle="1"]+label:after {
@@ -3447,7 +3339,7 @@ details.seopress-notice > *:not(summary) {
 .seopress_wrap_single_cpt input.toggle[data-toggle="1"]+label:after,
 .seopress_wrap_tax input.toggle[data-toggle="1"]+label:after,
 #seopress_cpt input.toggle[data-toggle="1"]+label:after {
-    box-shadow: inset 0 0 0 1px var(--backgroundPrimary), 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 0 1px var(--wp-admin-theme-color), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #seopress_cpt input.toggle[data-toggle="1"]+label:after {
@@ -3673,7 +3565,7 @@ details.seopress-notice > *:not(summary) {
     outline: 0;
     font-weight: 600;
     position: relative;
-    border-left: 3px solid var(--backgroundPrimary);
+    border-left: 3px solid var(--wp-admin-theme-color);
 }
 
 #seopress-admin-tabs .nav-tab-active,
@@ -3681,7 +3573,7 @@ details.seopress-notice > *:not(summary) {
 #seopress-admin-tabs .nav-tab-active:focus:active,
 #seopress-admin-tabs .nav-tab-active:hover,
 #seopress-admin-tabs .nav-tab:focus {
-    border-bottom: 4px solid var(--backgroundPrimary);
+    border-bottom: 4px solid var(--wp-admin-theme-color);
     border-left: none;
 }
 
@@ -3774,7 +3666,7 @@ details.seopress-notice > *:not(summary) {
 }
 
 .seopress-img-placeholder:hover {
-    border-color: var(--backgroundPrimaryHover);
+    border-color: var(--wp-admin-theme-color-darker-10);
 }
 
 .seopress-img-placeholder::before {
@@ -3843,21 +3735,6 @@ details.seopress-notice > *:not(summary) {
 }
 
 /* Notifications */
-.seopress-notifications-center .seopress-notifications-none,
-.seopress-notifications .seopress-notifications-none {
-    background: rgba(242, 239, 251, 0.3);
-    border-radius: 8px;
-    display: flex;
-    margin: 24px 0;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 0;
-}
-
-.seopress-notifications-center .seopress-notifications-none {
-    margin: 0;
-}
-
 .seopress-alert .seopress-impact-title {
     font-weight: 600;
     font-size: 14px;
@@ -3870,7 +3747,7 @@ details.seopress-notice > *:not(summary) {
     width: 24px;
     height: 24px;
     display: block;
-    background: linear-gradient(180deg, rgba(161, 133, 255, 0.2) 0%, rgba(78, 33, 231, 0.2) 100%);
+    background: linear-gradient(180deg, rgba(161, 133, 255, 0.2) 0%, rgba(var(--wp-admin-theme-color--rgb), 0.2) 100%);
     border-radius: 50px;
     position: absolute;
     left: 0;
@@ -3883,7 +3760,7 @@ details.seopress-notice > *:not(summary) {
     width: 8px;
     height: 8px;
     display: block;
-    background: linear-gradient(180deg, #A185FF 0%, var(--primaryColor) 100%);
+    background: linear-gradient(180deg, #A185FF 0%, var(--wp-admin-theme-color) 100%);
     border-radius: 50px;
     top: calc(50% - 4px);
     left: calc(50% - 4px);
@@ -3915,12 +3792,12 @@ details.seopress-notice > *:not(summary) {
 
 .seopress-alert .seopress-btn {
     display: inline-block;
-    background: var(--backgroundSecondary);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
     padding: 9px 16px;
     font-weight: 600;
     font-size: 12px;
     line-height: 14px;
-    color: var(--primaryColor);
+    color: var(--wp-admin-theme-color);
     border: none;
 }
 
@@ -3936,7 +3813,7 @@ details.seopress-notice > *:not(summary) {
     justify-content: center;
     color: var(--color);
     height: 40px;
-    background: var(--backgroundSecondary);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
     width: 40px;
     border-radius: 5px;
     padding: 6px 10px;
@@ -3951,7 +3828,7 @@ details.seopress-notice > *:not(summary) {
 
 .seopress-activity-panel-tabs .btn:focus,
 .seopress-activity-panel-tabs .btn:active {
-    outline: 1px solid var(--backgroundPrimary);
+    outline: 1px solid var(--wp-admin-theme-color);
 }
 
 .seopress-activity-panel-tabs .btn.is-active {
@@ -4053,7 +3930,7 @@ details.seopress-notice > *:not(summary) {
 }
 
 .seopress-notifications-hidden {
-    border-top: 1px solid var(--backgroundSecondary);
+    border-top: 1px solid rgba(var(--wp-admin-theme-color--rgb), 0.08);
     margin-top: 32px;
     padding: 32px 0;
     position: relative;

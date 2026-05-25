@@ -420,9 +420,34 @@ class ModuleMetabox implements ExecuteHooks {
 		// In frontend singular context.
 		if ( is_singular() ) {
 			$post_id = get_the_ID();
-		} elseif ( isset( $post ) && $post instanceof \WP_Post ) {
-			// In admin context, use the global $post object.
-			$post_id = $post->ID;
+		} else {
+			// In admin, resolve the edited post from the request first.
+			// Page builders such as Elementor Pro Theme Builder can replace
+			// the global $post with one of their own templates
+			// (elementor_library) while a WooCommerce product / post edit
+			// screen is rendered. Relying on the global $post here would
+			// leak that template into the SEO preview (wrong title, meta
+			// description and ?elementor_library=... URL).
+			$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+			if ( $screen && 'post' === $screen->base ) {
+				if ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					$post_id = absint( wp_unslash( $_GET['post'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				} elseif ( isset( $_POST['post_ID'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					$post_id = absint( wp_unslash( $_POST['post_ID'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				}
+
+				// Only trust the request value if it points to a real post.
+				if ( $post_id && ! get_post( $post_id ) ) {
+					$post_id = null;
+				}
+			}
+
+			// Fall back to the global $post when the request did not give us
+			// a usable ID (new posts, other admin screens, etc.).
+			if ( ! $post_id && isset( $post ) && $post instanceof \WP_Post ) {
+				$post_id = $post->ID;
+			}
 		}
 
 		if ( $post_id ) {
@@ -456,6 +481,7 @@ class ModuleMetabox implements ExecuteHooks {
 				'CLASSIC_FALLBACK_NONCE'    => wp_create_nonce( 'seopress_metabox_classic_fallback' ),
 				'POST_ID'                   => $post_id,
 				'POST_TYPE'                 => $post_type,
+				'POST_URL'                  => $post_id ? get_permalink( $post_id ) : null,
 				'IS_GUTENBERG'              => apply_filters( 'seopress_module_metabox_is_gutenberg', $is_gutenberg ),
 				// Distinguishes the admin screens (where the Classic Editor
 				// "Open SEO editor" metabox button takes over the beacon's
@@ -476,6 +502,15 @@ class ModuleMetabox implements ExecuteHooks {
 				),
 				'OPTIONS'                   => array(
 					'AI' => seopress_get_service( 'ToggleOption' )->getToggleAi() === '1' ? true : false,
+				),
+				// Per-user capability flags. Nested so wp_localize_script
+				// does not cast their booleans to strings (it only stringifies
+				// top-level scalars), which would defeat strict equality in
+				// the React side.
+				'CAPABILITIES'              => array(
+					'IGNORE_ISSUES' => function_exists( 'seopress_capability' )
+						? current_user_can( seopress_capability( 'manage_options', 'bot' ) )
+						: current_user_can( 'manage_options' ),
 				),
 				'TABS'                      => array(
 					'SCHEMAS' => apply_filters( 'seopress_active_schemas_manual_universal_metabox', false ),
@@ -706,6 +741,11 @@ class ModuleMetabox implements ExecuteHooks {
 		if ( isset( $cached['permalink'] ) ) {
 			$data['link_preview'] = $cached['permalink'];
 		}
+
+		// Run the same filter the REST endpoint applies so Pro can attach
+		// the seopress_seo_issues map (used by the editor ignore controls).
+		// Keeps the cached snapshot and a live refresh in lockstep.
+		$data = apply_filters( 'seopress_content_analysis_response', $data, $post_id );
 
 		return ! empty( $data ) ? $data : null;
 	}

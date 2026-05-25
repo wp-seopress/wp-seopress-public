@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, corsonr, gmulti, juliobox, maigret, mgris, 
 Donate link: https://www.seopress.org/
 Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 9.8.5
+Stable tag: 9.9
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -170,6 +170,9 @@ Edit your SEO directly inside Gutenberg, Elementor, Divi, Bricks, Oxygen, Breakd
 	<li><strong>13+ new dev hooks in 9.8</strong>.</li>
 </ul>
 
+<h3>From the same team</h3>
+<a href="https://wordpress.org/plugins/mailerpress/">Try MailerPress, the best email marketing plugin for WordPress</a>
+
 == Installation ==
 
 1. Upload `wp-seopress` to `/wp-content/plugins/`, or install via **Plugins → Add New** in your WordPress admin.
@@ -311,97 +314,41 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.8.5 =
-* FIX Save target keywords with SEO metabox
-* FIX Hide SEO beacon with the Block Editor (use the SEO link from the top toolbar of the Editor to edit your SEO metadata)
-
-= 9.8.4 =
-* NEW Save fallback when the REST API is blocked: SEO metabox sections now also persist on the regular post save through hidden inputs
-* NEW Explicit error toast on the SEO metabox sections when a save fails (instead of falsely showing a success message)
-* NEW [PRO] Save fallback extended to Pro sections for sites with REST blocked
-* NEW Filters `seopress_metabox_opener_context` and `seopress_metabox_opener_priority` to control where the Classic Editor "SEO" metabox is rendered
-* FIX Lower the Classic Editor "SEO" metabox priority from "high" to "default" so it no longer pushes other plugins' metaboxes down
-* FIX Keep visited tabs mounted in the SEO metabox so in-flight values are preserved when switching tabs (no more lost input when typing in Title and switching to Advanced)
-
-= 9.8.3 =
-* NEW Render the universal SEO editor inline inside the Classic Editor "SEO" metabox (no more overlay button on Classic post edit screens)
-* FIX Avada Live Builder detection now uses URL-based signals so the React beacon is reliably suppressed inside the builder preview iframe
-* FIX Outer Avada shells, Avada Studio panes and regular frontend pages now properly respect the "Hide SEO beacon on frontend" option
-* FIX Social preview no longer overflows in narrow columns (Classic Editor) or stretches on wide screens
-* FIX Swallow AbortError noise from Google Preview, Content Analysis and Social fetches on tab switch / unmount
-
-= 9.8.2 =
-* FIX Restore the inline "primary category" dropdown in the WP Categories panel (Classic Editor and Block Editor sidebar), broken since 9.8
-* FIX FAQ v2 block crashing in the editor with "This block has encountered an error" due to invalid useSelect dependencies
-* FIX Migrate the legacy "Disable the universal SEO metabox" preference (9.7.x) to the new 9.8.1 "Hide on the frontend" toggle so the setting is preserved on upgrade
-* FIX Rewire the dashboard tile for the universal metabox to the 9.8.1 frontend option so toggling it again controls the floating SEO beacon
-
-= 9.8.1 =
-* NEW Option in Advanced > Appearance > Metaboxes to hide the SEO beacon on the frontend
-* FIX Avada / Fusion Builder Live editor compatibility: do not mount the React beacon inside the builder iframe
-* FIX Hide the React beacon on Avada's fusion_element layout CPT (mirrors the legacy metaboxes exclusion)
-* FIX Lower the Block Editor metabox z-index so the WP admin submenu stays clickable when the metabox is open
-* FIX Render saved target keywords as plain strings instead of [object Object] in the content analysis field
-* FIX [PRO] Align Agent Ready signals with Cloudflare's checker: Content-Signal in robots.txt, rel="alternate" markdown link, full MCP/A2A cards, agent-skills index, markdown negotiation on home/blog index
-* FIX [PRO] Preserve newlines when saving llms.txt content through the REST endpoint
-* FIX [PRO] Update Claude AI models to the current generation (Sonnet 4.6 / Haiku 4.5) after Anthropic retired the previous IDs
-
-= 9.8 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-8/">Read the blog post update</a> =
-* NEW Bumped the minimum WordPress version to 6.5; 6.8 or higher is strongly recommended for full feature support
-* NEW Command palette (Cmd/Ctrl+K) to search and jump to any setting, with quick actions and recent commands history 🎉
-* NEW Brand new React-based SEO metabox built on the WordPress Design System
-* NEW Agent Readiness toggle to prepare your site for AI agents
-* NEW Visual token editor for Dynamic Tag fields
-* NEW CPT icons and robots badges (noindex/nofollow) in Titles & Metas panel headers
-* NEW Autocomplete for posts/pages in HTML sitemap ID fields
-* NEW Extend Organization Knowledge Graph with address and legal fields
-* NEW Automatic sub-tab in the React universal metabox for Schemas
-* NEW [PRO] Brand new Site Audit screen (React + DataViews) with actionable overview, GSC-backed recommendations, and scan history with trends
-* NEW [PRO] Live scan progress with start/cancel and re-scan a single post from an issue row
-* NEW [PRO] One-click AI-generated alt texts for image issues in Site Audit
-* NEW [PRO] Bulk ignore, restore and CSV export from the issue details view
-* NEW [PRO] Redirections list and editor migrated to React + DataViews
-* NEW [PRO] URL tester modal and inline regex tester for redirections
-* NEW [PRO] Manage redirection categories from a dedicated React sidebar
-* NEW [PRO] Global default for Query Parameters mode in redirections
-* NEW [PRO] Brand new React schema editor with live JSON-LD preview, matching posts counter, validation, opening hours, templates and import/export
-* NEW [PRO] Schema Guide panel and contextual help in schema type selector
-* NEW [PRO] Broken Links migrated to React + DataViews with CRON-based batch scan
-* NEW [PRO] Agent Readiness feature
-* NEW [PRO] Live breadcrumbs preview in settings (multi-scenario, sticky)
-* NEW [PRO] Multilingual support for llms.txt dynamic placeholders, with TranslatePress compatibility
-* NEW [PRO] Add Gemini 3 Flash and Gemini 3.1 Pro AI models
-* NEW [PRO] Add unsubscribe link to email notifications
-* NEW [PRO] Site type wizard with deprecation notices and single-screen filter pills
-* NEW [PRO] Emit author sameAs in automatic Article schema
-* INFO Major performance improvements in the SEO metabox (lazy-loaded tabs, lighter dependencies)
-* INFO Faster XML sitemaps with improved caching
-* INFO Removed several legacy options to simplify the UI: Google PageSpeed column, Google Custom Search thumbnail, Fediverse Creator tag, SEO metabox position, Facebook Admin ID
-* INFO [PRO] Faster Site Audit thanks to composite database indexes
-* INFO [PRO] Removed Dublin Core, breadcrumbs separator and Storefront toggles (now always on)
-* FIX Dashboard falls back to the first available tab when the stored one is gone
-* FIX Per-CPT sitemap URLs are now properly gated on the include flag
-* FIX React settings bundle now loads correctly on network admin pages
-* FIX Honor custom capabilities filter on REST requests
-* FIX Restore Beacon help widget on the front-end
-* FIX Apply noindex to comment pagination pages
-* FIX User role list in the Security tab
-* FIX Show human-friendly messages for Bing and Google Instant Indexing responses
-* FIX Use WordPress site date/time format in the indexing log1
-* FIX [PRO] Share Google Search Console JSON key between Free and PRO
-* FIX [PRO] Only render GA4/Matomo content when their tab is visible
-* FIX [PRO] Honor "None" on Article post author field
-* FIX [PRO] Register pro-mu-settings REST route for network admin
-* FIX [PRO] Local Business schema outputs HH::00 when minutes are empty
-* FIX [PRO] Honor custom capability system in PRO settings access
-* FIX [PRO] Use 0 for Free Shipping shippingRate instead of min_amount
-* FIX [PRO] Correct Gemini 3 Flash model ID
-* FIX [PRO] Prevent fatal error in logs during PRO update
-* FIX [PRO] Test connection no longer shown multiple times
-* FIX [PRO] AI model detection
-* FIX [PRO] Restore Audit page tabs broken by the Broken Links migration
-* SECURITY Rate-limit destructive command endpoints
-* SECURITY Hardened REST API permission callbacks
+= 9.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-9/">Read the blog post update</a> =
+* NEW Brand new SEO dashboard and admin header: cleaner two-column layout, one-click module toggles, a guided "Get Started" with numbered steps, and quick access to Help, Display options and notifications (with counter badge) on every SEO page
+* NEW Setup wizard fully redesigned: faster, mobile-friendly, and easier to follow from start to finish
+* NEW Smarter SEO box: double-click your target keywords to edit them in place, Google keyword suggestions with autocomplete as you type, and clicking "Update" in the Block Editor now saves every section at once (Title, Description, Advanced, Social, Redirections, Content Analysis)
+* NEW Content Analysis: new content quality & structure checks to help you write better articles, plus the ability to hide an issue you don't want to fix on a given page
+* NEW One-click migration from SureRank, and a full migration from SmartCrawl (variables in your titles & descriptions are automatically translated)
+* NEW Tools redesigned: Reset page with confirmation prompts so nothing happens by accident, and Import / Export with a cleaner layout, "export everything" by default, and a Cancel button on CSV exports
+* NEW Appearance › Columns: live preview of your post lists with grouped checkboxes — see what you'll get before you save
+* NEW Category URL settings now read directly from your WordPress permalink settings (no risk of mismatch)
+* NEW Easier-to-remember date variables for schemas (ISO 8601 aliases)
+* NEW Big accessibility upgrade across the whole SEO admin (WCAG 2.1 AA / RGAA 4.1 compliant), and the admin now matches your WordPress color scheme automatically
+* NEW Cleaner dashboard: removed the Newsroom and SEO Ebooks sections
+* NEW [PRO] Site Overview now shows your Google Analytics 4 and Matomo stats directly on the SEO dashboard, with period & metric filters, an interactive chart, and a sync button
+* NEW [PRO] Video schema is auto-filled from the first YouTube video found in your post — no manual copy-paste
+* NEW [PRO] Redirections: Quick Edit, search results that stay when you go back, search by destination URL, and a dedicated 404 view with a "Delete 404s" shortcut
+* NEW [PRO] Friendlier empty states on Schemas and Broken Links screens (clear guidance when there's nothing yet)
+* NEW [PRO] Site Audit: detects the new content quality & structure issues
+* NEW [PRO] Better Search Console URL matching for multilingual sites (WPML / Polylang), 
+* NEW Developer filters: `seopress_search_console_match_url`, `seopress_search_console_match_post_id`, and `seopress_gtag_ec_item_id` to customize the product identifier sent to GA4
+* INFO Tested up to WordPress 7.0
+* FIX Google snippet preview now displays the correct title and description, and no longer shows the Elementor template instead of your actual post
+* FIX Internal Linking tab no longer crashes the whole SEO box, and the tag picker no longer scrolls uncontrollably when hovering the last item
+* FIX Title / meta description templates: spaces around variables are preserved on save, and custom field variables (%%_cf_*%%, %%_ct_*%%, %%_ucf_*%%) now work on the home page and blog page
+* FIX White-label "remove help links" setting is now respected in the new admin header
+* FIX SEOPress columns and bulk actions in your post lists are restored after toggling the metabox option (and no error when the bulk actions list is empty)
+* FIX Notifications counter and "hide notification" behavior now work as expected
+* FIX X (Twitter) handle is now cleaned up automatically in social tags
+* FIX [PRO] Custom automatic schemas created in the new editor are now correctly displayed on the front-end, and the Knowledge Graph logo appears in the JSON-LD preview
+* FIX [PRO] Redirections: URLs with accented / non-Latin characters are saved correctly, and sorting (hits, type, last hit…) + category counts now match what's shown in the list
+* FIX [PRO] OpenAI "Test connection" now works again after OpenAI retired the previous endpoint
+* FIX [PRO] AI metadata generation now uses the correct language per post on WPML / Polylang sites
+* FIX [PRO] Article schema: X handle and domain are normalized in `sameAs`
+* FIX [PRO] Breadcrumbs: display a name fallback when a crumb has no URL
+* FIX [PRO] Translations now load correctly when running WP-CLI commands or cron jobs
+* FIX [PRO] CSV export: cleaner error messages, no leftover data between exports
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

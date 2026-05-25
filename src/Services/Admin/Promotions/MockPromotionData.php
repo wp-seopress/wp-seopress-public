@@ -80,7 +80,7 @@ class MockPromotionData {
 					'icon'     => 'star-filled',
 				),
 				'styling'  => array(
-					'background_color' => '#4E21E7',
+					'background_color' => 'var(--wp-admin-theme-color)',
 					'text_color'       => '#FFFFFF',
 				),
 				'conditions' => array(

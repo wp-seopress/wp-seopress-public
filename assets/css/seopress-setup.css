@@ -58,8 +58,8 @@ input[type="checkbox"]:focus,
 input[type="radio"]:focus,
 select:focus,
 textarea:focus {
-    border-color: var(--backgroundPrimary);
-    box-shadow: 0 0 0 1px var(--backgroundPrimary);
+    border-color: var(--wp-admin-theme-color);
+    box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
     outline: 2px solid transparent;
 }
 
@@ -301,13 +301,13 @@ table.seopress-importer-error-log-table {
 }
 
 .seopress-setup-steps li.active .icon::after {
-    background: var(--backgroundPrimary);
+    background: var(--wp-admin-theme-color);
     color: #fff;
-    border: 1px solid var(--backgroundPrimary);
+    border: 1px solid var(--wp-admin-theme-color);
 }
 
 .seopress-setup-steps li.active {
-    color: var(--backgroundPrimary);
+    color: var(--wp-admin-theme-color);
     font-weight: 700;
     text-decoration: none;
     position: relative;
@@ -326,8 +326,8 @@ table.seopress-importer-error-log-table {
     content: "\f15e";
     font-family: "dashicons";
     color: #fff;
-    background: var(--backgroundPrimary);
-    border: 1px solid var(--backgroundPrimary);
+    background: var(--wp-admin-theme-color);
+    border: 1px solid var(--wp-admin-theme-color);
 }
 
 .seopress-setup .seopress-setup-actions {

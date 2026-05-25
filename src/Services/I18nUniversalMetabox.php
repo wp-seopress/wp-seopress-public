@@ -42,6 +42,7 @@ class I18nUniversalMetabox {
 				'search_tag'              => __( 'Search a tag', 'wp-seopress' ),
 				'no_result'               => __( 'No result found.', 'wp-seopress' ),
 				'loading_data'            => __( 'Loading your data', 'wp-seopress' ),
+				'tab_load_error'          => __( 'This section could not be loaded. Please reload the page and try again.', 'wp-seopress' ),
 			),
 			'services'       => array(
 				'social_meta_tags_title' => __( 'Social meta tags', 'wp-seopress' ),
@@ -720,6 +721,10 @@ class I18nUniversalMetabox {
 						'Separate target keywords by pressing Enter.',
 						'wp-seopress'
 					),
+					'target_keywords_edit_hint'      => __(
+						'Double-click a keyword to edit it.',
+						'wp-seopress'
+					),
 					'target_keywords_multiple_usage' => __(
 						'You should avoid using multiple times the same keyword for different pages. Try to consolidate your content into one single page.',
 						'wp-seopress'
@@ -736,37 +741,41 @@ class I18nUniversalMetabox {
 						'To get the most accurate analysis, save your post first. We analyze all of your source code as a search engine would.',
 						'wp-seopress'
 					),
-					'google_suggestions'             => __( 'Google suggestions', 'wp-seopress' ),
+					'google_suggestions'             => __( 'Get suggestions from Google', 'wp-seopress' ),
 					'google_suggestions_description' => __(
-						'Enter a keyword, or a phrase, to find the top 10 Google suggestions instantly. This is useful if you want to work with the long tail technique.',
+						'Start typing a keyword: Google\'s autocomplete suggestions appear in the dropdown. Pick one to add it to your target keywords.',
 						'wp-seopress'
 					),
-					'google_suggestions_placeholder' => __(
-						'Get suggestions from Google',
-						'wp-seopress'
-					),
-					'get_suggestions'                => __( 'Get suggestions!', 'wp-seopress' ),
 					'should_be_improved'             => __( 'Should be improved', 'wp-seopress' ),
 					'keyword_singular'               => __( 'The keyword:', 'wp-seopress' ),
 					'keyword_plural'                 => __( 'These keywords:', 'wp-seopress' ),
 					'already_used_singular'          => /* translators: %d number of times a target keyword is used, singular form only */ __( 'is already used %d time', 'wp-seopress' ),
 					'already_used_plural'            => /* translators: %d number of times a target keyword is used, plural form only */ __( 'is already used %d times', 'wp-seopress' ),
+					'btn_ignore_issue'               => __( 'Ignore for this page', 'wp-seopress' ),
+					'btn_restore_issue'              => __( 'Restore this check', 'wp-seopress' ),
+					'ignore_hint'                    => __( 'This check stops being verified on this page, future content of the same type included.', 'wp-seopress' ),
+					'ignored_badge'                  => __( 'Ignored', 'wp-seopress' ),
+					'show_ignored'                   => __( 'Show ignored', 'wp-seopress' ),
+					'ignored_count_singular'         => /* translators: %d number of ignored checks, singular */ __( '%d check ignored on this page', 'wp-seopress' ),
+					'ignored_count_plural'           => /* translators: %d number of ignored checks, plural */ __( '%d checks ignored on this page', 'wp-seopress' ),
 				),
 				'schemas_manual'    => array(
-					'description' => __( 'It is recommended to enter as many properties as possible to maximize the chances of getting a rich snippet in Google search results.', 'wp-seopress' ),
-					'remove'      => __( 'Delete schema', 'wp-seopress' ),
-					'add'         => __( 'Add a schema', 'wp-seopress' ),
+					'description'     => __( 'It is recommended to enter as many properties as possible to maximize the chances of getting a rich snippet in Google search results.', 'wp-seopress' ),
+					'remove'          => __( 'Delete schema', 'wp-seopress' ),
+					'add'             => __( 'Add a schema', 'wp-seopress' ),
+					'validate_schema' => __( 'Validate my schema', 'wp-seopress' ),
 				),
 				'schemas_automatic' => array(
-					'description'    => __( 'These schemas are automatically applied to this post based on rules defined in your Schemas library. You can override values per post here, or disable individual schemas.', 'wp-seopress' ),
-					'count_singular' => /* translators: %s number of automatic schemas */ __( 'You have %s automatic schema:', 'wp-seopress' ),
-					'count_plural'   => /* translators: %s number of automatic schemas */ __( 'You have %s automatic schemas:', 'wp-seopress' ),
-					'disable_all'    => __( 'Disable all automatic schemas for this post', 'wp-seopress' ),
-					'disable_one'    => __( 'Disable this automatic schema for this post', 'wp-seopress' ),
-					'edit_schema'    => __( 'Edit', 'wp-seopress' ),
-					'no_overrides'   => __( 'This schema has no overridable fields. Mark fields as "Manual single" in the schema editor to expose them per post.', 'wp-seopress' ),
-					'empty_state'    => __( 'No automatic schemas match this post.', 'wp-seopress' ),
-					'type_label'     => __( 'Type:', 'wp-seopress' ),
+					'description'     => __( 'These schemas are automatically applied to this post based on rules defined in your Schemas library. You can override values per post here, or disable individual schemas.', 'wp-seopress' ),
+					'count_singular'  => /* translators: %s number of automatic schemas */ __( 'You have %s automatic schema:', 'wp-seopress' ),
+					'count_plural'    => /* translators: %s number of automatic schemas */ __( 'You have %s automatic schemas:', 'wp-seopress' ),
+					'disable_all'     => __( 'Disable all automatic schemas for this post', 'wp-seopress' ),
+					'disable_one'     => __( 'Disable this automatic schema for this post', 'wp-seopress' ),
+					'edit_schema'     => __( 'Edit', 'wp-seopress' ),
+					'no_overrides'    => __( 'This schema has no overridable fields. Mark fields as "Manual single" in the schema editor to expose them per post.', 'wp-seopress' ),
+					'empty_state'     => __( 'No automatic schemas match this post.', 'wp-seopress' ),
+					'type_label'      => __( 'Type:', 'wp-seopress' ),
+					'validate_schema' => __( 'Validate my schema', 'wp-seopress' ),
 				),
 				'social'            => array(
 					'title'          => /* translators: %s post title */ __(

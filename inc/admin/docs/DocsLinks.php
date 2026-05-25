@@ -225,6 +225,12 @@ function seopress_get_docs_links() {
 				'compatibility' => 'https://www.seopress.org/support/guides/fix-compatibility-issue-with-litespeed-caching-plugin/',
 			),
 		),
+		'privacy'              => 'https://www.seopress.org/privacy-policy/',
+		'wizard'               => array(
+			'pro'         => 'https://www.seopress.org/seopress-pro/',
+			'ebook'       => 'https://www.seopress.org/support/ebooks/seo-success-for-wordpress-with-a-two-hours-a-week-routine/',
+			'video_id'    => '1nUkjCBpIts',
+		),
 	);
 
 	if ( function_exists( 'seopress_get_locale' ) && 'fr' === seopress_get_locale() ) {
@@ -364,6 +370,10 @@ function seopress_get_docs_links() {
 		$docs['integrations']['all']                        = 'https://www.seopress.org/fr/integrations/';
 		$docs['integrations']['wpml']['translate']          = 'https://www.seopress.org/fr/support/guides/traduire-les-options-de-seopress-avec-wpml-polylang/';
 		$docs['integrations']['litespeed']['compatibility'] = 'https://www.seopress.org/fr/support/guides/corriger-le-probleme-de-compatibilite-extension-cache-litespeed/';
+
+		$docs['privacy']           = 'https://www.seopress.org/fr/politique-de-confidentialite/';
+		$docs['wizard']['pro']     = 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-pro/';
+		$docs['wizard']['ebook']   = 'https://www.seopress.org/fr/support/ebooks/reussite-seo-pour-wordpress-avec-une-routine-de-deux-heures-par-semaine/';
 	}
 
 	$docs['external'] = array(

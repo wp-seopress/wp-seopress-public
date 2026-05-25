@@ -848,7 +848,20 @@ function seopress_social_twitter_card_creator_hook() {
 	$seopress_social_twitter_card_creator = '';
 
 	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCard() && get_the_author_meta( 'twitter' ) ) {
-		$seopress_social_twitter_card_creator .= '<meta name="twitter:creator" content="@' . esc_attr( get_the_author_meta( 'twitter' ) ) . '">';
+		// WordPress core does not constrain the format of the "twitter"/"x"
+		// user-meta field, so authors commonly paste a full profile URL
+		// instead of a bare handle. Extract the handle, then strip a
+		// leading @, before emitting "@handle" to avoid output like
+		// `@https://x.com/handle`.
+		$author_handle = (string) get_the_author_meta( 'twitter' );
+		if ( preg_match( '#(?:twitter|x)\.com/+@?([^/?\#\s]+)#i', $author_handle, $match ) ) {
+			$author_handle = $match[1];
+		}
+		$author_handle = ltrim( trim( $author_handle ), '@' );
+
+		if ( '' !== $author_handle ) {
+			$seopress_social_twitter_card_creator .= '<meta name="twitter:creator" content="@' . esc_attr( $author_handle ) . '">';
+		}
 	} elseif ( '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCard() && '' !== seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter() ) {
 		$seopress_social_twitter_card_creator .= '<meta name="twitter:creator" content="' . esc_attr( seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter() ) . '">';
 	}

@@ -66,20 +66,27 @@ class PagePreview implements ExecuteHooks {
 		$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id );
 
 		if ( ! $dom_result['success'] ) {
-			$default_response = array(
-				'title'     => '...',
-				'meta_desc' => '...',
-			);
+			$message = '';
 
 			switch ( $dom_result['code'] ) {
 				case 404:
-					$default_response['title'] = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
+					$message = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
 					break;
 				case 401:
-					$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
+					$message = __( 'Your site is protected by an authentication.', 'wp-seopress' );
 					break;
 			}
-			return new \WP_REST_Response( $default_response );
+
+			// Match the nested { value } shape returned on success
+			// (DomFilterContent) so consumers reading `title.value` /
+			// `description.value` (GooglePreview, field placeholders)
+			// surface the message instead of a blank preview.
+			return new \WP_REST_Response(
+				array(
+					'title'       => array( 'value' => $message ),
+					'description' => array( 'value' => '' ),
+				)
+			);
 		}
 
 		$str = $dom_result['body'];

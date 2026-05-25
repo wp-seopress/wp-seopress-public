@@ -499,15 +499,6 @@ class AdvancedOption {
 	}
 
 	/**
-	 * The getAppearanceNews function.
-	 *
-	 * @since 6.6
-	 */
-	public function getAppearanceNews() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'seopress_advanced_appearance_news' );
-	}
-
-	/**
 	 * The getAdvancedCleaningFileName function.
 	 *
 	 * @since 5.8

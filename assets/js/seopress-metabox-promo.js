@@ -51,8 +51,10 @@
 			}
 		};
 
-		const bgColor = promotion.styling?.background_color || '#4E21E7';
-		const textColor = promotion.styling?.text_color || '#FFFFFF';
+		// Colors follow the user's WP admin theme so the banner blends with the
+		// chrome; only the button variant comes from remote styling.
+		const bgColor = 'var(--wp-admin-theme-color)';
+		const textColor = '#FFFFFF';
 		const buttonStyle = promotion.styling?.button_style || 'primary';
 
 		// Button styles based on API setting

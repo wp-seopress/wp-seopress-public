@@ -1,0 +1,1000 @@
+/*
+ * SEOPress dashboard — React rewrite.
+ *
+ * The dashboard relies on @wordpress/components for everything that has a
+ * native equivalent (Card / CardHeader / CardBody, Panel / PanelBody,
+ * TabPanel, Button, ToggleControl, Notice, VisuallyHidden, Icon from
+ * @wordpress/icons). This stylesheet only adds:
+ *   1. layout glue (the 2-column grid + page-level centering),
+ *   2. brand surfaces the Figma asks for (Tasks gradient, lavender cards),
+ *   3. status dots + small chrome WP doesn't ship out of the box.
+ *
+ * Tokens
+ * ------
+ * Accent + variants follow the user's WP admin colour scheme via the
+ * `--wp-admin-theme-color*` CSS variables. Semantic colours come from
+ * SEOPress design tokens (`--colorSuccess`, `--colorWarning`, etc.) with
+ * hex fallbacks. Local tokens (--seopress-dashboard-*) are declared on
+ * `:root` so they can be overridden site-wide.
+ *
+ * A11y
+ * ----
+ * - Body / secondary text uses #595d62 → 7.04:1 on #fff (WCAG AAA).
+ * - Focus-visible: explicit 2px outline using the admin theme colour.
+ * - prefers-reduced-motion: all transitions/animations disabled.
+ * - Tap targets: ≥ 32px on desktop, ≥ 44px under 782px.
+ */
+
+:root {
+    --seopress-color-text: #1d2327;
+    --seopress-color-text-muted: #595d62; /* AAA-grade against #fff */
+    --seopress-color-border: #dcdcde;
+    --seopress-color-border-soft: #f0f0f1;
+    --seopress-color-surface-soft: #f6f7f7;
+    --seopress-color-lavender: #e4e8f6;
+    --seopress-radius-card: 8px;
+    --seopress-radius-pill: 999px;
+    --seopress-space-1: 4px;
+    --seopress-space-2: 8px;
+    --seopress-space-3: 12px;
+    --seopress-space-4: 16px;
+    --seopress-space-5: 24px;
+    --seopress-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --seopress-focus-ring: 0 0 0 2px var(--wp-admin-theme-color, #2271b1);
+    --seopress-transition: 0.15s ease-in-out;
+}
+
+/* ---------- Page-level layout ---------- */
+
+body.toplevel_page_seopress-option #wpfooter {
+    position: static;
+    clear: both;
+}
+
+/*
+ * The legacy `.seopress-styles .seopress-option` rule forces
+ * display: inline-block which defeats margin-auto centering. Force block
+ * flow here so the React dashboard frame stays centred at the Figma
+ * AdminMain width (1200px) inside #wpbody-content.
+ */
+body.toplevel_page_seopress-option #wpbody-content > #seopress-content.seopress-option {
+    display: block;
+    width: auto;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding-left: var(--seopress-space-5);
+    padding-right: var(--seopress-space-5);
+    float: none;
+}
+
+/* ---------- Dashboard layout ---------- */
+
+.seopress-dashboard-app {
+    margin-top: var(--seopress-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--seopress-space-4);
+}
+
+.seopress-dashboard__columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 296px;
+    gap: var(--seopress-space-4);
+    align-items: start;
+}
+
+.seopress-dashboard__main,
+.seopress-dashboard__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--seopress-space-4);
+    min-width: 0;
+}
+
+@media (max-width: 960px) {
+    .seopress-dashboard__columns {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ---------- Section / Card overrides ---------- */
+
+/*
+ * @wordpress/components Card already renders a white surface, border and
+ * radius. We just normalise spacing and add the soft shadow the Figma uses.
+ */
+/*
+ * WP Card draws its 1px border via box-shadow (box-shadow: 0 0 0 1px …).
+ * Re-declare that hairline first, THEN stack the elevation shadow, so the
+ * card keeps a visible outline instead of merging into its neighbours.
+ */
+.seopress-dashboard-section.components-card {
+    border-radius: var(--seopress-radius-card);
+    box-shadow: 0 0 0 1px var(--seopress-color-border),
+        var(--seopress-shadow-card);
+}
+
+/*
+ * Normalize card padding to the same value on all four sides. The
+ * @wordpress/components default is `16px 24px` (medium size), which leaves a
+ * visible asymmetry between vertical/horizontal whitespace. The more specific
+ * rules below (e.g. `__head { padding-bottom: 0 }`) and the mobile media
+ * query still win where they need to.
+ */
+.seopress-dashboard-section .components-card__header,
+.seopress-dashboard-section .components-card__body,
+.seopress-dashboard-section .components-card__footer {
+    padding: var(--seopress-space-5);
+}
+
+/*
+ * Tighter padding (16px) for the three filled / lavender cards — their
+ * content is denser (mini logos, status pills, CTA strips) and 24px makes
+ * them feel hollow next to the white sections.
+ */
+.seopress-dashboard-tasks .components-card__header,
+.seopress-dashboard-tasks .components-card__body,
+.seopress-dashboard-tasks .components-card__footer,
+.seopress-dashboard-integrations .components-card__header,
+.seopress-dashboard-integrations .components-card__body,
+.seopress-dashboard-integrations .components-card__footer,
+.seopress-dashboard-promotions .components-card__header,
+.seopress-dashboard-promotions .components-card__body,
+.seopress-dashboard-promotions .components-card__footer,
+.seopress-dashboard-section .seopress-dashboard-module.components-card .components-card__header,
+.seopress-dashboard-section .seopress-dashboard-module.components-card .components-card__body,
+.seopress-dashboard-section .seopress-dashboard-module.components-card .components-card__footer {
+    padding: var(--seopress-space-4);
+}
+
+.seopress-dashboard-module__icon {
+    margin-right: var(--seopress-space-2);
+}
+
+.seopress-dashboard-module .components-h-stack:has(> .components-form-toggle) {
+    gap: 0;
+    width: auto;
+}
+
+.seopress-dashboard-module .components-toggle-control__label {
+    flex: 0 0 auto;
+}
+
+.seopress-dashboard-section .components-card__header.seopress-dashboard-section__head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--seopress-space-1);
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.seopress-dashboard-section__heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--seopress-space-3);
+}
+
+.seopress-dashboard-section__title {
+    margin: 0;
+    color: var(--seopress-color-text);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.seopress-dashboard-section__subtitle {
+    margin: var(--seopress-space-1) 0 0 0;
+    color: var(--seopress-color-text-muted);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.seopress-dashboard-section__count {
+    color: var(--seopress-color-text-muted);
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.seopress-dashboard-section__count strong {
+    color: var(--seopress-color-text);
+    font-weight: 600;
+}
+
+/* ---------- Intro ---------- */
+
+.seopress-dashboard-intro {
+    display: flex;
+    align-items: center;
+    gap: var(--seopress-space-3);
+    margin: 0;
+}
+
+.seopress-dashboard-intro__logo {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    display: block;
+}
+
+.seopress-dashboard-intro__body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/*
+ * The global `.seopress-styles .seopress-option h1` rule (font-size:20px;
+ * margin:10px 0) outspecifies a single class, which forced an oversized
+ * title and a 10px top/bottom margin (the "too airy" gap to the tagline).
+ * Match its ancestor chain so the intro title stays compact and the whole
+ * block fits the 48px logo height.
+ */
+.seopress-styles .seopress-option .seopress-dashboard-intro__title {
+    margin: 0;
+    color: var(--seopress-color-text);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    display: flex;
+    align-items: baseline;
+    gap: var(--seopress-space-2);
+}
+
+.seopress-dashboard-intro__version {
+    color: var(--seopress-color-text-muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.seopress-dashboard-intro__tagline {
+    margin: 2px 0 0 0;
+    color: var(--seopress-color-text-muted);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* ---------- Get Started ---------- */
+
+.seopress-dashboard-get-started.components-card .components-card__body {
+    position: relative;
+}
+
+.seopress-dashboard-get-started__close.components-button.has-icon {
+    position: absolute;
+    top: var(--seopress-space-2);
+    right: var(--seopress-space-2);
+    color: var(--seopress-color-text-muted);
+}
+
+.seopress-dashboard-get-started__badge {
+    display: inline-block;
+    padding: 2px var(--seopress-space-2);
+    margin-bottom: var(--seopress-space-2);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
+    color: var(--wp-admin-theme-color);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.6;
+    border-radius: var(--seopress-radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/*
+ * Numbered "guided steps" list. The <ol>/<li> come from native VStack/
+ * HStack (as="ol"/"li"); we only reset the browser list chrome and style
+ * the step number badge — no native component ships a numbered pill.
+ */
+.seopress-dashboard-get-started__steps {
+    margin: var(--seopress-space-3) 0 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.seopress-dashboard-get-started__step-num {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.1);
+    color: var(--wp-admin-theme-color);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* ---------- Tasks ---------- */
+
+.seopress-dashboard-section.seopress-dashboard-tasks.components-card {
+    position: relative;
+    background: linear-gradient(137deg, #0d0934 1.2%, #2a1f95 99.5%);
+    /* Filled surface: drop the hairline, keep only the elevation shadow. */
+    box-shadow: var(--seopress-shadow-card);
+    color: #fff;
+    overflow: hidden;
+}
+
+.seopress-dashboard-tasks::after {
+    content: '';
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjU2IiBoZWlnaHQ9IjIxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTI4LjMzOSAxMzEuMTMyYTguNjQ3IDguNjQ3IDAgMCAxIDUuOTY1IDIuMTExbDU5LjcxMiA1OS43MjFhOC42NTMgOC42NTMgMCAwIDEtLjQxNyAxMS43ODQgOC42NTEgOC42NTEgMCAwIDEtMTEuNzgyLjQxN2wtNTkuNzEyLTU5LjcyMmE4LjY1MiA4LjY1MiAwIDAgMSAuNDE3LTExLjc4MyA4LjY0MSA4LjY0MSAwIDAgMSA1LjgxNy0yLjUyOFpNMjgzLjAzOSAxMTIuMDE3YTguNjQyIDguNjQyIDAgMCAxLTUuOTY0LTIuMTExbC01OS42MzQtNTkuNjQzYTguNjU0IDguNjU0IDAgMCAxIC40MTctMTEuNzgzIDguNjQ2IDguNjQ2IDAgMCAxIDExLjc4Mi0uNDE3bDU5LjYzMyA1OS42NDNhOC42NDggOC42NDggMCAwIDEtNi4yMzQgMTQuMzExWk0xNjIuNTM5LTI5LjM2NWwuMDA0LjAxMy4wOTQuMDk0YTc2LjMzIDc2LjMzIDAgMCAxIDYuMDQ3IDEwMS4wOGwtLjI3My4zNDkuMzEzLjMxMyA3My43NzggNzMuNzlhOC42ODggOC42ODggMCAwIDEtNi4yNjEgMTQuMzc0IDguNjg2IDguNjg2IDAgMCAxLTUuOTktMi4xMjFsLTczLjc4Ny03My43OTgtLjMxNC0uMzE0LS4zNDguMjc0YTc2LjMwOCA3Ni4zMDggMCAwIDEtODIuNTQ3IDcuNjA0QTc2LjMzNCA3Ni4zMzQgMCAwIDEgNDcuMTczLTIwLjUzOWE3Ni4yOTggNzYuMjk4IDAgMCAxIDExNS4zNjYtOC44MjZaTTY3LjMyMyA2Ni4wNzJhNTguNDgxIDU4LjQ4MSAwIDAgMCA2My43MzQgMTIuNjggNTguNDgzIDU4LjQ4MyAwIDAgMCAyNi4yNDctMjEuNTQzIDU4LjUwMiA1OC41MDIgMCAwIDAgMC02NC45OTUgNTguNDgyIDU4LjQ4MiAwIDAgMC02MC4wMzctMjQuODcyIDU4LjQ4MSA1OC40ODEgMCAwIDAtMjkuOTQ0IDE2LjAwOSA1OC41IDU4LjUgMCAwIDAgMCA4Mi43MjJaIiBzdHJva2U9IiMwQzA4MkYiLz48L3N2Zz4=) right top no-repeat;
+    background-size: contain;
+    opacity: 0.1;
+    filter: invert(1);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.seopress-dashboard-tasks .seopress-dashboard-section__title,
+.seopress-dashboard-tasks .components-card__header {
+    color: #fff;
+}
+
+.seopress-dashboard-tasks .seopress-dashboard-section__subtitle {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.seopress-dashboard-tasks__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--seopress-space-2);
+}
+
+.seopress-dashboard-tasks__item {
+    display: flex;
+    align-items: center;
+    gap: var(--seopress-space-3);
+    padding: var(--seopress-space-3);
+    border-radius: 6px;
+    background: #fff;
+    flex-wrap: wrap;
+}
+
+.seopress-dashboard-tasks__logo {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.seopress-dashboard-tasks__details {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.seopress-dashboard-tasks__name {
+    margin: 0 0 2px 0;
+    color: var(--seopress-color-text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.seopress-dashboard-tasks__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.seopress-dashboard-tasks__badge {
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c3c4c7;
+}
+
+.seopress-dashboard-tasks__status.is-active .seopress-dashboard-tasks__badge {
+    background: var(--colorSuccess, #4ab866);
+}
+
+.seopress-dashboard-tasks__status.is-expired .seopress-dashboard-tasks__badge {
+    background: var(--colorLowAlert, #e39f48);
+}
+
+.seopress-dashboard-tasks__label {
+    color: var(--seopress-color-text-muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.seopress-dashboard-tasks__actions {
+    flex: 0 0 auto;
+}
+
+.seopress-dashboard-tasks__promo {
+    display: flex;
+    align-items: center;
+    gap: var(--seopress-space-2);
+    margin-top: var(--seopress-space-3);
+    padding: 10px var(--seopress-space-3);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+}
+
+.seopress-dashboard-tasks__promo-icon {
+    flex: 0 0 auto;
+    color: #ffd166;
+}
+
+.seopress-dashboard-tasks__promo-text {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.seopress-dashboard-tasks__promo-link {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* ---------- Integrations + Promotions (lavender cards) ---------- */
+
+.seopress-dashboard-section.seopress-dashboard-promotions.components-card,
+.seopress-dashboard-section.seopress-dashboard-integrations.components-card {
+    background: var(--seopress-color-lavender);
+    /* Filled surface: drop the hairline, keep only the elevation shadow. */
+    box-shadow: var(--seopress-shadow-card);
+}
+
+.seopress-dashboard-promotions .components-card__body,
+.seopress-dashboard-integrations .components-card__body {
+    background: transparent;
+}
+
+.seopress-dashboard-integrations__all-link {
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.seopress-dashboard-integrations__list,
+.seopress-dashboard-promotions__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--seopress-space-2);
+}
+
+.seopress-dashboard-integrations__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--seopress-space-1);
+    padding: var(--seopress-space-3);
+    background: #fff;
+    border-radius: 4px;
+}
+
+.seopress-dashboard-integrations__name {
+    margin: 0;
+    color: var(--seopress-color-text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.seopress-dashboard-integrations__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.seopress-dashboard-integrations__badge {
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--colorSuccess, #4ab866);
+}
+
+.seopress-dashboard-integrations__label {
+    color: var(--seopress-color-text-muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.seopress-dashboard-integrations__empty {
+    padding: var(--seopress-space-4);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.04);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.seopress-dashboard-integrations__empty p {
+    margin: 0 0 var(--seopress-space-3) 0;
+    color: var(--seopress-color-text);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.seopress-dashboard-promotions__item {
+    display: flex;
+    align-items: center;
+    gap: var(--seopress-space-3);
+    padding: var(--seopress-space-3);
+    background: #fff;
+    border-radius: 4px;
+    flex-wrap: wrap;
+}
+
+.seopress-dashboard-promotions__icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    font-size: 18px;
+    background: var(--seopress-promo-icon-bg, var(--wp-admin-theme-color));
+    color: var(--seopress-promo-icon-fg, #fff);
+}
+
+.seopress-dashboard-promotions__logo {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+}
+
+.seopress-dashboard-promotions__info {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.seopress-dashboard-promotions__name {
+    display: block;
+    color: var(--seopress-color-text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.seopress-dashboard-promotions__desc {
+    margin: 2px 0 0 0;
+    color: var(--seopress-color-text-muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+/* ---------- Modules / FeaturesList ---------- */
+
+.seopress-dashboard-modules__error {
+    margin: 0 0 var(--seopress-space-4) 0;
+}
+
+.seopress-dashboard-modules__groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--seopress-space-3);
+}
+
+.seopress-dashboard-modules__group-head {
+    display: flex;
+    align-items: center;
+    padding: var(--seopress-space-2) var(--seopress-space-3);
+    background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
+    border-radius: 4px;
+}
+
+.seopress-dashboard-modules__group-label {
+    color: var(--wp-admin-theme-color);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.seopress-dashboard-modules__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--seopress-space-4);
+    margin-top: var(--seopress-space-4);
+}
+
+/*
+ * Module cards use native @wordpress/components only (Card / CardBody /
+ * Flex / HStack / VStack / Heading / Text / Button / ToggleControl). No
+ * custom card surface, typography or spacing is layered on top — the WP
+ * components ship their own. Only the grid above is layout glue.
+ *
+ * The lone exception: the per-feature icon is a remote SVG (no native WP
+ * component for that), so it gets a fixed 24px box that preserves the
+ * source ratio. Kept in CSS rather than inline per the no-inline rule.
+ */
+.seopress-dashboard-module__icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* ---------- Site overview ---------- */
+
+.seopress-dashboard-overview .components-card__header.seopress-dashboard-overview__head {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--seopress-space-3);
+}
+
+.seopress-dashboard-overview__title {
+    margin: 0;
+    color: var(--seopress-color-text);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/*
+ * TabPanel ships its own pill-style tab strip. We restyle it as an
+ * underline strip per the Figma — TabPanel already handles arrow-key
+ * navigation, aria-selected, aria-controls.
+ */
+.seopress-dashboard-overview__tabs .components-tab-panel__tabs {
+    gap: var(--seopress-space-1);
+    border-bottom: 1px solid var(--seopress-color-border);
+    overflow-x: auto;
+}
+
+.seopress-dashboard-overview__tabs .components-tab-panel__tabs-item {
+    margin: 0;
+    padding: var(--seopress-space-3) var(--seopress-space-4);
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    color: var(--seopress-color-text);
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: none;
+    transition: color var(--seopress-transition),
+        border-color var(--seopress-transition);
+}
+
+.seopress-dashboard-overview__tabs .components-tab-panel__tabs-item:hover {
+    color: var(--wp-admin-theme-color);
+}
+
+.seopress-dashboard-overview__tabs .components-tab-panel__tabs-item.is-active {
+    color: var(--wp-admin-theme-color);
+    border-bottom-color: var(--wp-admin-theme-color);
+    font-weight: 600;
+}
+
+.seopress-dashboard-overview__tabs .components-tab-panel__tabs-item.is-active::after {
+    content: none;
+}
+
+.seopress-dashboard-overview__details {
+    display: flex;
+    align-items: center;
+    gap: var(--seopress-space-3);
+    margin: var(--seopress-space-4) 0;
+}
+
+.seopress-dashboard-overview__description {
+    flex: 1 1 auto;
+    margin: 0;
+    color: var(--seopress-color-text);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.seopress-dashboard-overview__view {
+    flex: 0 0 auto;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.seopress-dashboard-overview__body {
+    min-height: 120px;
+}
+
+.seopress-dashboard-overview__placeholder {
+    margin: 0;
+    padding: var(--seopress-space-5);
+    background: var(--seopress-color-surface-soft);
+    border: 1px dashed var(--seopress-color-border);
+    border-radius: 4px;
+    color: var(--seopress-color-text-muted);
+    font-size: 13px;
+    line-height: 1.55;
+    text-align: center;
+}
+
+/* ---------- SEO Improvements ---------- */
+
+.seopress-dashboard-improvements .components-card__header.seopress-dashboard-improvements__head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--seopress-space-1);
+}
+
+.seopress-dashboard-improvements__title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--seopress-space-3);
+}
+
+.seopress-dashboard-improvements__title {
+    margin: 0;
+    color: var(--seopress-color-text);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.seopress-dashboard-improvements__count {
+    color: var(--seopress-color-text);
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.seopress-dashboard-improvements__count strong {
+    font-weight: 600;
+}
+
+.seopress-dashboard-improvements__count strong + * {
+    color: var(--seopress-color-text-muted);
+    margin-left: var(--seopress-space-1);
+}
+
+.seopress-dashboard-improvements__subtitle {
+    margin: var(--seopress-space-1) 0 0 0;
+    color: var(--seopress-color-text-muted);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+/*
+ * Panel/PanelBody styling — remove the default border/padding so each
+ * collapsible row looks like its own card. PanelBody handles the
+ * aria-expanded/aria-controls semantics for us.
+ */
+.seopress-dashboard-improvements__list.components-panel {
+    border: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--seopress-space-2);
+}
+
+.seopress-dashboard-improvements__list .components-panel__body {
+    border: 1px solid var(--seopress-color-border-soft) !important;
+    border-radius: 4px;
+    background: #fff;
+    transition: border-color var(--seopress-transition);
+}
+
+.seopress-dashboard-improvements__list .components-panel__body.is-opened {
+    border-color: var(--seopress-color-border);
+}
+
+.seopress-dashboard-improvements__list .components-panel__body-toggle {
+    padding: var(--seopress-space-3);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--seopress-color-text);
+}
+
+.seopress-improvements__title-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--seopress-space-2);
+}
+
+.seopress-improvements__title {
+    color: var(--seopress-color-text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/*
+ * Severity dot — kept visually identical to the notifications side
+ * panel (.seopress-alert .seopress-impact in assets/css/seopress.css):
+ * a 16px tinted bubble with a 6px gradient core, per severity. The
+ * notifications panel is the reference; this mirrors it 1:1.
+ */
+.seopress-improvements__dot {
+    position: relative;
+    display: inline-block;
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(
+        180deg,
+        rgba(161, 133, 255, 0.2) 0%,
+        rgba(var(--wp-admin-theme-color--rgb), 0.2) 100%
+    );
+}
+
+.seopress-improvements__dot::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 3px);
+    left: calc(50% - 3px);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(
+        180deg,
+        #a185ff 0%,
+        var(--wp-admin-theme-color) 100%
+    );
+}
+
+.seopress-improvements__dot.is-high {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 130, 205, 0.2) 0%,
+        rgba(255, 71, 71, 0.2) 100%
+    );
+}
+
+.seopress-improvements__dot.is-high::after {
+    background: linear-gradient(180deg, #ff82cd 0%, #ff4747 100%);
+}
+
+.seopress-improvements__dot.is-medium,
+.seopress-improvements__dot.is-low {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 197, 39, 0.2) 0%,
+        rgba(255, 156, 39, 0.2) 100%
+    );
+}
+
+.seopress-improvements__dot.is-medium::after,
+.seopress-improvements__dot.is-low::after {
+    background: linear-gradient(180deg, #ffc527 0%, #ff9c27 100%);
+}
+
+.seopress-improvements__desc {
+    margin: 0 0 var(--seopress-space-2) 0;
+    color: var(--seopress-color-text-muted);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.seopress-improvements__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--seopress-space-3);
+    flex-wrap: wrap;
+}
+
+.seopress-improvements__cta {
+    font-size: 13px;
+}
+
+.seopress-improvements__dismiss.components-button.is-link {
+    font-size: 13px;
+}
+
+.seopress-dashboard-improvements__more {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--seopress-space-3);
+}
+
+/* ---------- Focus management ---------- */
+
+/* Buttons: WP-standard box-shadow ring only. Others: offset outline.
+   Never stack both on one element (avoids the fuzzy double-ring halo).
+   Native form controls (input/textarea/select) are also excluded — they
+   already get their own focus ring via the wp-components stylesheet. */
+.seopress-dashboard-app :focus-visible:not(.components-button):not(input):not(textarea):not(select) {
+    outline: 2px solid var(--wp-admin-theme-color, #2271b1);
+    outline-offset: 2px;
+}
+
+.seopress-dashboard-app .components-button:focus-visible {
+    outline: none;
+    box-shadow: var(--seopress-focus-ring);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .seopress-dashboard-app *,
+    .seopress-dashboard-app *::before,
+    .seopress-dashboard-app *::after {
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1280px) {
+    .seopress-dashboard-modules__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 782px) {
+    body.toplevel_page_seopress-option #wpbody-content > #seopress-content.seopress-option {
+        padding-left: var(--seopress-space-4);
+        padding-right: var(--seopress-space-4);
+    }
+
+    .seopress-dashboard__columns {
+        gap: var(--seopress-space-3);
+    }
+
+    /* 44×44 tap target for interactive elements on touch. */
+    .seopress-dashboard-app .components-button,
+    .seopress-dashboard-app a.components-button {
+        min-height: 44px;
+    }
+
+    .seopress-dashboard-app .components-button.has-icon {
+        min-width: 44px;
+    }
+
+    .seopress-dashboard-tasks__item {
+        gap: var(--seopress-space-2);
+    }
+
+    .seopress-dashboard-tasks__actions {
+        flex: 1 0 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .seopress-dashboard-modules__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .seopress-dashboard-section .components-card__header,
+    .seopress-dashboard-section .components-card__body,
+    .seopress-dashboard-section .components-card__footer {
+        padding: var(--seopress-space-3);
+    }
+
+    .seopress-dashboard-section .components-card__header.seopress-dashboard-section__head {
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .seopress-dashboard-intro {
+        gap: var(--seopress-space-2);
+    }
+
+    .seopress-dashboard-intro__logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .seopress-dashboard-overview__head {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .seopress-dashboard-promotions__item,
+    .seopress-dashboard-tasks__item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+

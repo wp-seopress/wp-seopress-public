@@ -278,17 +278,6 @@ class NoticeOption {
 	}
 
 	/**
-	 * The getNoticeEbooks function.
-	 *
-	 * @since 6.0.0
-	 *
-	 * @return string
-	 */
-	public function getNoticeEbooks() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'notice-ebooks' );
-	}
-
-	/**
 	 * The getNoticeIntegrations function.
 	 *
 	 * @since 6.5.0
@@ -308,17 +297,6 @@ class NoticeOption {
 	 */
 	public function getNoticeInsights() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		return $this->searchOptionByKey( 'notice-insights' );
-	}
-
-	/**
-	 * The getNoticePromotions function.
-	 *
-	 * @since 9.6.0
-	 *
-	 * @return string
-	 */
-	public function getNoticePromotions() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'notice-promotions' );
 	}
 
 	/**
