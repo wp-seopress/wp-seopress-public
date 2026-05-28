@@ -189,6 +189,15 @@ if ( '1' == seopress_get_toggle_option( 'google-analytics' ) && ! isset( $_GET['
 	function seopress_after_update_cart() {
 		check_ajax_referer( 'seopress_analytics_nonce' );
 
+		// Bail when WooCommerce is unavailable: the AJAX hook is registered
+		// unconditionally but other carts (Fluent Cart, etc.) can fire the
+		// same jQuery events that trigger this endpoint client-side. Without
+		// this guard, $woocommerce is null and the get_cart() call below
+		// throws a fatal on the JSON response.
+		if ( ! function_exists( 'WC' ) || ! WC() || ! WC()->cart ) {
+			wp_send_json_success( '' );
+		}
+
 		$items_purchased = array();
 		$final           = array();
 

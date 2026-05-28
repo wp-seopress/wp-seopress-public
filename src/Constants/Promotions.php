@@ -89,6 +89,40 @@ abstract class Promotions {
 	const FALLBACK_TTL = 3600;
 
 	/**
+	 * Short TTL (seconds) for the negative cache written after a failed
+	 * remote fetch. Prevents every admin page load from re-issuing the
+	 * blocking HTTP request to the promotions API when it is slow / down.
+	 *
+	 * @since 9.9.0
+	 *
+	 * @var int
+	 */
+	const NEGATIVE_CACHE_TTL = 300;
+
+	/**
+	 * Transient key flagging a recently failed remote fetch. While this
+	 * key is set, getCachedData() short-circuits before calling
+	 * wp_remote_get() and serves the stored fallback / mock data.
+	 *
+	 * @since 9.9.0
+	 *
+	 * @var string
+	 */
+	const NEGATIVE_CACHE_KEY = 'seopress_promotions_fetch_failed';
+
+	/**
+	 * Timeout (seconds) for the synchronous remote fetch in
+	 * PromotionService::fetchFromRemote(). The call runs inside the
+	 * WP-Admin request that renders the SEO metabox, so this must stay
+	 * short — 3 s caps the worst-case TTFB added to post.php.
+	 *
+	 * @since 9.9.0
+	 *
+	 * @var int
+	 */
+	const REMOTE_FETCH_TIMEOUT = 3;
+
+	/**
 	 * The default dismiss duration in days.
 	 *
 	 * @since 9.6.0

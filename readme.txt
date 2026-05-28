@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 9.9
+Stable tag: 9.9.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -32,25 +32,27 @@ WordPress SEO plugin with AI SEO metadata, schema, XML sitemap, redirections & S
 
 <a href="https://www.seopress.org/features/" target="_blank">Features</a> | <a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Migrate</a> | <a href="https://www.seopress.org/wordpress-seo-plugins/pro/" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">White Label</a> | <a href="https://www.seopress.org/features/openai/" target="_blank">AI</a>
 
-<h3>What's new in SEOPress 9.8</h3>
+<h3>What's new in SEOPress 9.9</h3>
 
-A major release rebuilt on the **WordPress Design System** for a native, faster, more accessible experience.
+A major UX release: redesigned SEO dashboard, smarter SEO box, sharper Content Analysis and a fully accessible admin.
 
 <ul>
-	<li><strong>⌘ Command Palette (Cmd/Ctrl + K)</strong>: Search 240+ settings, jump anywhere, run quick actions, with recent commands history. The fastest SEO admin in WordPress.</li>
-	<li><strong>🤖 Agent Readiness</strong>: One toggle prepares your site for AI crawlers: plain-text versions, llms.txt, structured signals for ChatGPT, Claude, Perplexity and Gemini.</li>
-	<li><strong>🌐 Multilingual llms.txt</strong> with TranslatePress compatibility (PRO).</li>
-	<li><strong>✨ Brand new React SEO metabox</strong>: Rebuilt on WordPress DataViews. Lazy-loaded tabs, pre-hydrated previews, lighter JS bundle.</li>
-	<li><strong>🩺 Site Audit, reimagined</strong> (PRO): Workflow-based React + DataViews UI, Google Search Console-backed recommendations, scan history with trends, live progress, one-click AI alt text generation, bulk ignore/restore, CSV export.</li>
-	<li><strong>↪️ Redirections, reimagined</strong> (PRO): React + DataViews list, **URL tester modal**, inline regex tester, redirection categories, query parameter modes, loop detection.</li>
-	<li><strong>🧩 Schema editor, reimagined</strong> (PRO): Live JSON-LD preview, matching posts counter, real-time validation, Schema Guide panel, opening hours UI, templates, import/export.</li>
-	<li><strong>🔗 Broken Links</strong> (PRO): CRON-based batch scan, reliable on the largest sites.</li>
-	<li><strong>🧠 New AI models</strong> (PRO): Gemini 3 Flash and Gemini 3.1 Pro added.</li>
-	<li><strong>👤 Organization Knowledge Graph</strong> extended with address and legal fields.</li>
-	<li><strong>⚡ Performance</strong>: Faster XML sitemaps with improved caching, composite database indexes for big sites, removed styled-components / lodash / date-fns from the bundle.</li>
+	<li><strong>🧭 Brand new SEO dashboard &amp; admin header</strong>: Cleaner two-column layout, one-click module toggles, guided "Get Started" with numbered steps, and quick access to Help, Display options and notifications (with counter badge) on every SEO page.</li>
+	<li><strong>🪄 Setup wizard, fully redesigned</strong>: Faster, mobile-friendly, and easier to follow from start to finish.</li>
+	<li><strong>⚡ Smarter SEO box</strong>: Double-click target keywords to edit in place, Google keyword suggestions with autocomplete as you type, and a single "Update" in the Block Editor now saves every section at once (Title, Description, Advanced, Social, Redirections, Content Analysis).</li>
+	<li><strong>📝 Content Analysis</strong>: New content quality &amp; structure checks to help you write better articles, plus the ability to hide an issue you don't want to fix on a given page.</li>
+	<li><strong>🔄 One-click migration from SureRank</strong> and a full migration from SmartCrawl (variables in your titles &amp; descriptions are automatically translated).</li>
+	<li><strong>🛠️ Tools redesigned</strong>: Reset page with confirmation prompts so nothing happens by accident, and Import / Export with a cleaner layout, "export everything" by default, and a Cancel button on CSV exports.</li>
+	<li><strong>👁️ Appearance › Columns</strong>: Live preview of your post lists with grouped checkboxes — see what you'll get before you save.</li>
+	<li><strong>♿ Big accessibility upgrade</strong> across the whole SEO admin (WCAG 2.1 AA / RGAA 4.1 compliant), and the admin now matches your WordPress color scheme automatically.</li>
+	<li><strong>📊 Site Overview on the dashboard</strong> (PRO): Your Google Analytics 4 and Matomo stats directly on the SEO dashboard, with period &amp; metric filters, an interactive chart, and a sync button.</li>
+	<li><strong>🎬 Video schema auto-filled</strong> (PRO): Populated from the first YouTube video found in your post — no manual copy-paste.</li>
+	<li><strong>↪️ Redirections</strong> (PRO): Quick Edit, search results that stay when you go back, search by destination URL, and a dedicated 404 view with a "Delete 404s" shortcut.</li>
+	<li><strong>🩺 Site Audit</strong> (PRO): Detects the new content quality &amp; structure issues.</li>
+	<li><strong>🌍 Better Search Console URL matching</strong> (PRO) for multilingual sites (WPML / Polylang).</li>
 </ul>
 
-<a href="https://www.seopress.org/newsroom/product-news/seopress-9-8/" target="_blank"><strong>Read the full 9.8 release notes →</strong></a>
+<a href="https://www.seopress.org/newsroom/product-news/seopress-9-9/" target="_blank"><strong>Read the full 9.9 release notes →</strong></a>
 
 <h3>Why SEOPress is the best WordPress SEO plugin?</h3>
 
@@ -314,6 +316,19 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.9.1 =
+* NEW Option to hide the SEO score text ("Has SEO issues") in the block editor top bar (SEO, Advanced, Appearance tab)
+* INFO Better performance for SEO dashboard
+* FIX SEO metabox no longer freezes in specific cases
+* FIX Sitemap > Post Types picker now honors the shared CPT blocklist
+* FIX Snackbar is now visible above the metabox overlay, with proper icon spacing
+* FIX Error Snackbar now shows a warning icon instead of a green check
+* FIX Fatal error with GA4 and WooCommerce enabled
+* FIX Canonical URL: keep WPML translations on their own URL instead of pointing back to the source language
+* FIX [PRO] Local Business schema printing
+* FIX [PRO] Breadcrumbs JSON-LD: wrap URL-less intermediate ListItems in `item.Thing` so Google's Rich Results Test stays valid
+* FIX [PRO] AI: send a Referer header so Google Cloud URL key restrictions match
+
 = 9.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-9/">Read the blog post update</a> =
 * NEW Brand new SEO dashboard and admin header: cleaner two-column layout, one-click module toggles, a guided "Get Started" with numbered steps, and quick access to Help, Display options and notifications (with counter badge) on every SEO page
 * NEW Setup wizard fully redesigned: faster, mobile-friendly, and easier to follow from start to finish

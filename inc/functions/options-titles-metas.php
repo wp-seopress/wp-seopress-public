@@ -1172,8 +1172,13 @@ if ( function_exists( 'seopress_titles_noindex_bypass' ) && '1' !== seopress_tit
 				$post_type       = get_post_type( $post_ID );
 				$transl_status   = apply_filters( 'wpml_element_translation_type', null, $post_ID, $post_type );
 
-				// If the post is not translated, switch to the default language.
-				if ( 1 !== $transl_status ) {
+				// wpml_element_translation_type returns: 0 = no translation,
+				// 1 = original, 2 = translation. Only switch to the default
+				// language when the post has no translation at all. Switching
+				// for translations (2) makes get_permalink() return the
+				// default-language URL and breaks the canonical of translated
+				// posts.
+				if ( 0 === $transl_status ) {
 					$my_default_lang = apply_filters( 'wpml_default_language', null );
 					$my_current_lang = apply_filters( 'wpml_current_language', null );
 					do_action( 'wpml_switch_language', $my_default_lang );
@@ -1196,7 +1201,7 @@ if ( function_exists( 'seopress_titles_noindex_bypass' ) && '1' !== seopress_tit
 
 			// WPML: Then switch back to the current language.
 			if ( class_exists( 'SitePress' ) ) {
-				if ( 1 !== $transl_status ) {
+				if ( 0 === $transl_status ) {
 					do_action( 'wpml_switch_language', $my_current_lang );
 				}
 			}

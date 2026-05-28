@@ -472,6 +472,19 @@ class AdvancedOption {
 	}
 
 	/**
+	 * The getAppearanceAdminBarScoreText function.
+	 *
+	 * Returns '1' when the user opted to hide the score text label
+	 * ("Has SEO issues" / "Good SEO score") that the SEOPress button
+	 * injects in the Gutenberg top bar.
+	 *
+	 * @since 9.9
+	 */
+	public function getAppearanceAdminBarScoreText() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		return $this->searchOptionByKey( 'seopress_advanced_appearance_adminbar_score_text' );
+	}
+
+	/**
 	 * The getAppearanceHideSiteOverview function.
 	 *
 	 * @since 6.6

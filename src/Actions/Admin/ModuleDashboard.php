@@ -30,110 +30,86 @@ class ModuleDashboard implements ExecuteHooks {
 	/**
 	 * Register hooks.
 	 *
-	 * @return void
-	 */
-	public function hooks() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
-	}
-
-	/**
-	 * Enqueue the dashboard React bundle when on the dashboard page.
+	 * Since 9.9.1 the Dashboard is rendered through the unified Settings
+	 * React shell (ModuleSettings handles enqueue + localize). This module
+	 * keeps the data-building logic so ModuleSettings can call
+	 * getDashboardPayload(), plus the outdated-Pro notice surfaced inside
+	 * that payload when relevant.
 	 *
 	 * @return void
 	 */
-	public function enqueue() {
-		if ( ! $this->isDashboardPage() ) {
-			return;
+	public function hooks() {
+		// Intentionally no admin_enqueue_scripts hook: the unified Settings
+		// shell owns the Dashboard mount and enqueue (ModuleSettings).
+	}
+
+	/**
+	 * Build the localized payload consumed by the Dashboard React component.
+	 *
+	 * Public so ModuleSettings co-localizes the same payload onto the
+	 * unified Settings React bundle on every SEOPress admin page (the
+	 * Dashboard section is rendered through SPA navigation).
+	 *
+	 * @since 9.9.1
+	 *
+	 * @return array
+	 */
+	public function getDashboardPayload() {
+		return array(
+			'REST_URL'        => rest_url(),
+			'NONCE'           => wp_create_nonce( 'wp_rest' ),
+			'ADMIN_URL'       => admin_url(),
+			'ASSETS_URL'      => SEOPRESS_URL_PUBLIC,
+			'PLUGIN_URL'      => SEOPRESS_PLUGIN_DIR_URL,
+			'FEATURES'        => $this->getFeatures(),
+			'GROUPS'          => $this->getFeatureGroups(),
+			'INTRO'           => $this->getIntroPayload(),
+			'GET_STARTED'     => $this->getGetStartedPayload(),
+			'TASKS'           => $this->getTasksPayload(),
+			'INTEGRATIONS'    => $this->getIntegrationsPayload(),
+			'PROMOTIONS'      => $this->getPromotionsPayload(),
+			'OVERVIEW'        => $this->getOverviewPayload(),
+			'IMPROVEMENTS'    => $this->getImprovementsPayload(),
+			'HIDDEN_BLOCKS'   => $this->getHiddenBlocks(),
+			'OUTDATED_PRO'    => $this->getOutdatedProNotice(),
+		);
+	}
+
+	/**
+	 * Build an outdated-PRO notice payload when SEOPress PRO is active but
+	 * below the version that knows how to register Site overview tabs into
+	 * the unified Settings shell (9.9.1). Lets the Dashboard React render
+	 * a "please update PRO" banner so users understand why their Site
+	 * overview section is missing.
+	 *
+	 * @since 9.9.1
+	 *
+	 * @return array Empty array when no notice is needed.
+	 */
+	private function getOutdatedProNotice() {
+		if ( ! defined( 'SEOPRESS_PRO_VERSION' ) ) {
+			return array();
 		}
 
-		$capability = seopress_capability( 'manage_options', 'dashboard' );
-		if ( ! current_user_can( $capability ) ) {
-			return;
+		$pro_version = SEOPRESS_PRO_VERSION;
+		// Dev mode placeholder — never considered outdated.
+		if ( '{VERSION}' === $pro_version ) {
+			return array();
 		}
 
-		// WP core's wp-admin/css/forms.css ships globally-scoped rules on
-		// `input[type=checkbox]`, `select`, etc. that clash with the React
-		// dashboard's WP-components controls (the ToggleControl switch is
-		// backed by a checkbox underneath). The dashboard renders no native
-		// WP form controls of its own, so dropping the sheet is safe here.
-		// Note: `forms` is a registered dependency of the `wp-admin` style,
-		// so it would be re-printed via the dependency chain even after
-		// wp_dequeue_style(). Strip it from wp-admin's deps too, then drop
-		// it from the registry, on this page only.
-		add_action(
-			'admin_print_styles',
-			static function () {
-				global $wp_styles;
-				if ( isset( $wp_styles->registered['wp-admin'] ) ) {
-					$wp_styles->registered['wp-admin']->deps = array_values(
-						array_diff( $wp_styles->registered['wp-admin']->deps, array( 'forms' ) )
-					);
-				}
-				wp_dequeue_style( 'forms' );
-				wp_deregister_style( 'forms' );
-			},
-			0
-		);
-
-		$asset_file = SEOPRESS_PLUGIN_DIR_PATH . 'public/admin/dashboard.asset.php';
-		$asset      = file_exists( $asset_file ) ? require $asset_file : array(
-			'dependencies' => array( 'react', 'react-dom', 'wp-components', 'wp-api-fetch', 'wp-i18n', 'wp-element' ),
-			'version'      => SEOPRESS_VERSION,
-		);
-
-		wp_enqueue_style( 'wp-components' );
-
-		$css_file = SEOPRESS_PLUGIN_DIR_PATH . 'public/admin/dashboard.css';
-		if ( file_exists( $css_file ) ) {
-			// In dev SEOPRESS_VERSION is the literal `{VERSION}` placeholder so
-			// it never busts the browser cache between rebuilds. Hash the file
-			// content so any rebuild produces a new URL — stronger than
-			// filemtime because it survives filesystems that don't update mtime.
-			$css_version = SEOPRESS_VERSION;
-			if ( '{VERSION}' === $css_version || empty( $css_version ) ) {
-				$css_version = substr( md5_file( $css_file ), 0, 12 );
-			}
-
-			wp_enqueue_style(
-				'seopress-react-dashboard',
-				SEOPRESS_URL_PUBLIC . '/admin/dashboard.css',
-				array( 'wp-components' ),
-				$css_version
-			);
+		if ( version_compare( $pro_version, '9.9.1', '>=' ) ) {
+			return array();
 		}
 
-		wp_enqueue_script(
-			'seopress-react-dashboard',
-			SEOPRESS_URL_PUBLIC . '/admin/dashboard.js',
-			$asset['dependencies'],
-			$asset['version'],
-			true
-		);
-
-		wp_set_script_translations( 'seopress-react-dashboard', 'wp-seopress', WP_LANG_DIR . '/plugins' );
-
-		$features = $this->getFeatures();
-
-		wp_localize_script(
-			'seopress-react-dashboard',
-			'SEOPRESS_DASHBOARD_DATA',
-			array(
-				'REST_URL'      => rest_url(),
-				'NONCE'         => wp_create_nonce( 'wp_rest' ),
-				'ADMIN_URL'     => admin_url(),
-				'ASSETS_URL'    => SEOPRESS_URL_PUBLIC,
-				'PLUGIN_URL'    => SEOPRESS_PLUGIN_DIR_URL,
-				'FEATURES'      => $features,
-				'GROUPS'        => $this->getFeatureGroups(),
-				'INTRO'         => $this->getIntroPayload(),
-				'GET_STARTED'   => $this->getGetStartedPayload(),
-				'TASKS'         => $this->getTasksPayload(),
-				'INTEGRATIONS'  => $this->getIntegrationsPayload(),
-				'PROMOTIONS'    => $this->getPromotionsPayload(),
-				'OVERVIEW'      => $this->getOverviewPayload(),
-				'IMPROVEMENTS'  => $this->getImprovementsPayload(),
-				'HIDDEN_BLOCKS' => $this->getHiddenBlocks(),
-			)
+		return array(
+			'title'   => __( 'SEOPress PRO update available', 'wp-seopress' ),
+			'message' => sprintf(
+				/* translators: %s: current SEOPress PRO version. */
+				__( 'You are running SEOPress PRO %s. Please update to 9.9.1 or higher so the Site overview tabs (Google Analytics, Matomo, PageSpeed, Search Console) render correctly in this Dashboard.', 'wp-seopress' ),
+				esc_html( $pro_version )
+			),
+			'ctaUrl'   => admin_url( 'plugins.php' ),
+			'ctaLabel' => __( 'Go to Plugins', 'wp-seopress' ),
 		);
 	}
 

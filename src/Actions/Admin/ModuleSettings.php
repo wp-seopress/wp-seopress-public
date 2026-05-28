@@ -20,6 +20,10 @@ class ModuleSettings implements ExecuteHooks {
 	 * @var array
 	 */
 	private $supported_pages = array(
+		'seopress-option'          => array(
+			'type'   => 'dashboard',
+			'option' => null,
+		),
 		'seopress-titles'          => array(
 			'type'   => 'titles',
 			'option' => 'seopress_titles_option_name',
@@ -102,6 +106,13 @@ class ModuleSettings implements ExecuteHooks {
 	private function getAllPages() {
 		$pages = array(
 			array(
+				'slug'    => 'seopress-option',
+				'type'    => 'dashboard',
+				'feature' => null,
+				'label'   => __( 'Dashboard', 'wp-seopress' ),
+				'url'     => admin_url( 'admin.php?page=seopress-option' ),
+			),
+			array(
 				'slug'    => 'seopress-titles',
 				'type'    => 'titles',
 				'feature' => 'titles',
@@ -168,7 +179,10 @@ class ModuleSettings implements ExecuteHooks {
 	 * @return array
 	 */
 	private function getReactReadyPages() {
-		return apply_filters( 'seopress_settings_react_ready_pages', array( 'titles', 'sitemaps', 'social', 'analytics', 'instant-indexing', 'advanced', 'tools' ) );
+		return apply_filters(
+			'seopress_settings_react_ready_pages',
+			array( 'dashboard', 'titles', 'sitemaps', 'social', 'analytics', 'instant-indexing', 'advanced', 'tools' )
+		);
 	}
 
 	/**
@@ -255,6 +269,25 @@ class ModuleSettings implements ExecuteHooks {
 			$asset['version'],
 			true
 		);
+
+		// Backward-compat alias for SEOPress PRO < 9.9.1, which enqueues
+		// its dashboard bundle with a dependency on the legacy
+		// `seopress-react-dashboard` handle (the standalone Dashboard
+		// React app that no longer ships). Aliasing it to the unified
+		// Settings handle keeps PRO's bundle loading via the dependency
+		// chain on direct loads of seopress-option, so its Site overview
+		// tabs still register on that page. SPA-navigated entry into the
+		// Dashboard remains tab-less for those PRO sites — a notice in
+		// the Dashboard tells them to update.
+		if ( ! wp_script_is( 'seopress-react-dashboard', 'registered' ) ) {
+			wp_register_script(
+				'seopress-react-dashboard',
+				false,
+				array( 'seopress-admin-settings' ),
+				$asset['version'],
+				true
+			);
+		}
 
 		// Load translations for the React settings bundle.
 		// Point to wp-content/languages/plugins/ where GlotPress language packs are stored.
@@ -401,6 +434,19 @@ class ModuleSettings implements ExecuteHooks {
 			)
 		);
 
+		// Co-localize the Dashboard payload onto the Settings handle so
+		// the Dashboard section finds its data regardless of which page
+		// the user enters from. ModuleDashboard lives in src/Actions/
+		// (not the service container); instantiate it directly (zero-arg
+		// constructor) just to call the public payload builder.
+		if ( class_exists( '\\SEOPress\\Actions\\Admin\\ModuleDashboard' ) ) {
+			$dashboard_module = new ModuleDashboard();
+			wp_localize_script(
+				'seopress-admin-settings',
+				'SEOPRESS_DASHBOARD_DATA',
+				$dashboard_module->getDashboardPayload()
+			);
+		}
 	}
 
 	/**
@@ -437,29 +483,23 @@ class ModuleSettings implements ExecuteHooks {
 	/**
 	 * Get post types for sitemap settings (includes attachment).
 	 *
+	 * Reuses WordPressData::getPostTypes() so the shared blocklist
+	 * (bricks_template, elementor_library, ct_template, seopress_*, etc.)
+	 * and the `seopress_post_types` filter both apply — every other
+	 * settings screen already filters them out. Attachment is then
+	 * re-added explicitly because the Sitemap UI intentionally exposes it
+	 * (with a "You should never include attachment" warning notice) so
+	 * users can opt in; getPostTypes() strips it by default.
+	 *
 	 * @return array
 	 */
 	private function getSitemapPostTypes() {
-		$post_types = get_post_types(
-			array(
-				'public'  => true,
-				'show_ui' => true,
-			),
-			'objects'
-		);
+		$post_types = seopress_get_service( 'WordPressData' )->getPostTypes();
 
-		$post_types = array_filter( $post_types, 'is_post_type_viewable' );
-
-		// Remove attachment if already present (we add it explicitly below).
-		$post_types = array_filter(
-			$post_types,
-			function ( $pt ) {
-				return 'attachment' !== $pt->name;
-			}
-		);
-
-		// Add attachment post type (matching PHP sitemap callback behavior).
-		$post_types[] = get_post_type_object( 'attachment' );
+		$attachment = get_post_type_object( 'attachment' );
+		if ( $attachment ) {
+			$post_types['attachment'] = $attachment;
+		}
 
 		$result = array();
 

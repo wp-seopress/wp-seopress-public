@@ -261,8 +261,13 @@ class PromotionService {
 			return $cached;
 		}
 
-		// Try to fetch from remote API.
-		$fresh_data = $this->fetchFromRemote();
+		// Negative cache: a recent fetch failed, so don't re-issue the
+		// blocking HTTP request on every admin page load. Serve the
+		// stored fallback / mock data and let the next admin pageview
+		// after NEGATIVE_CACHE_TTL retry the remote API.
+		$fresh_data = false === get_transient( Promotions::NEGATIVE_CACHE_KEY )
+			? $this->fetchFromRemote()
+			: null;
 
 		if ( null !== $fresh_data ) {
 			self::$inMemoryCache = $fresh_data;
@@ -298,17 +303,19 @@ class PromotionService {
 		$response = wp_remote_get(
 			$api_url,
 			array(
-				'timeout' => 10,
+				'timeout' => Promotions::REMOTE_FETCH_TIMEOUT,
 				'headers' => $this->getRequestHeaders(),
 			)
 		);
 
 		if ( is_wp_error( $response ) ) {
+			set_transient( Promotions::NEGATIVE_CACHE_KEY, 1, Promotions::NEGATIVE_CACHE_TTL );
 			return null;
 		}
 
 		$status_code = wp_remote_retrieve_response_code( $response );
 		if ( 200 !== $status_code ) {
+			set_transient( Promotions::NEGATIVE_CACHE_KEY, 1, Promotions::NEGATIVE_CACHE_TTL );
 			return null;
 		}
 
@@ -316,8 +323,11 @@ class PromotionService {
 		$data = json_decode( $body, true );
 
 		if ( ! is_array( $data ) ) {
+			set_transient( Promotions::NEGATIVE_CACHE_KEY, 1, Promotions::NEGATIVE_CACHE_TTL );
 			return null;
 		}
+
+		delete_transient( Promotions::NEGATIVE_CACHE_KEY );
 
 		// Determine TTL from response or use default.
 		$ttl = isset( $data['cache_ttl'] ) ? (int) $data['cache_ttl'] : Promotions::DEFAULT_TTL;

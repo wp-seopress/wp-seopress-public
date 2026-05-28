@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-25T08:25:53+00:00\n"
+"POT-Creation-Date: 2026-05-28T12:58:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-seopress\n"
@@ -76,8 +76,8 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:146
 #: inc/admin/admin.php:191
-#: src/Actions/Admin/ModuleDashboard.php:704
-#: src/Actions/Admin/ModuleSettings.php:108
+#: src/Actions/Admin/ModuleDashboard.php:680
+#: src/Actions/Admin/ModuleSettings.php:119
 #: src/Services/I18nUniversalMetabox.php:373
 #: app/react/admin/settings/pages/TitlesPage.jsx:45
 #: public/admin/settings.js:1
@@ -86,14 +86,14 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:154
 #: inc/admin/admin.php:192
-#: src/Actions/Admin/ModuleSettings.php:115
+#: src/Actions/Admin/ModuleSettings.php:126
 msgid "XML - HTML Sitemap"
 msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:162
 #: inc/admin/admin.php:193
-#: src/Actions/Admin/ModuleDashboard.php:718
-#: src/Actions/Admin/ModuleSettings.php:122
+#: src/Actions/Admin/ModuleDashboard.php:694
+#: src/Actions/Admin/ModuleSettings.php:133
 #: app/react/admin/settings/pages/SocialPage.jsx:45
 #: public/admin/settings/876.f0b066b7926b8d974aa6.js:1
 msgid "Social Networks"
@@ -101,8 +101,8 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:170
 #: inc/admin/admin.php:194
-#: src/Actions/Admin/ModuleDashboard.php:725
-#: src/Actions/Admin/ModuleSettings.php:129
+#: src/Actions/Admin/ModuleDashboard.php:701
+#: src/Actions/Admin/ModuleSettings.php:140
 #: app/react/admin/settings/pages/AnalyticsPage.jsx:49
 #: public/admin/settings/891.d205e69f7f18d422483d.js:1
 msgid "Analytics"
@@ -110,8 +110,8 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:178
 #: inc/admin/admin.php:195
-#: src/Actions/Admin/ModuleDashboard.php:732
-#: src/Actions/Admin/ModuleSettings.php:136
+#: src/Actions/Admin/ModuleDashboard.php:708
+#: src/Actions/Admin/ModuleSettings.php:147
 #: app/react/admin/settings/pages/InstantIndexingPage.jsx:33
 #: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:212
 #: public/admin/settings/349.f35f7af78b003ac89fce.js:1
@@ -121,7 +121,7 @@ msgstr ""
 #: inc/admin/admin-bar/admin-bar.php:186
 #: inc/admin/admin.php:196
 #: inc/admin/metaboxes/admin-metaboxes-form.php:72
-#: src/Actions/Admin/ModuleSettings.php:143
+#: src/Actions/Admin/ModuleSettings.php:154
 #: src/Services/I18nUniversalMetabox.php:380
 #: app/react/admin/settings/pages/AdvancedSettingsPage.jsx:13
 #: app/react/admin/settings/pages/AdvancedSettingsPage.jsx:41
@@ -129,7 +129,7 @@ msgstr ""
 #: app/react/admin/settings/pages/TitlesPage.jsx:17
 #: app/react/admin/wizard/steps.js:33
 #: public/admin/settings.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 #: public/admin/settings/891.d205e69f7f18d422483d.js:1
 #: public/admin/wizard/index.js:1
 msgid "Advanced"
@@ -137,10 +137,10 @@ msgstr ""
 
 #: inc/admin/admin-bar/admin-bar.php:194
 #: inc/admin/admin.php:197
-#: src/Actions/Admin/ModuleDashboard.php:750
-#: src/Actions/Admin/ModuleSettings.php:150
+#: src/Actions/Admin/ModuleDashboard.php:726
+#: src/Actions/Admin/ModuleSettings.php:161
 #: app/react/admin/settings/pages/ToolsPage.jsx:60
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Tools"
 msgstr ""
 
@@ -369,7 +369,7 @@ msgstr ""
 
 #: inc/admin/admin-dyn-variables-helper.php:69
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:14
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Target keyword"
 msgstr ""
 
@@ -400,6 +400,7 @@ msgid "SEOPress Option Page"
 msgstr ""
 
 #: inc/admin/admin.php:190
+#: src/Actions/Admin/ModuleSettings.php:112
 msgid "Dashboard"
 msgstr ""
 
@@ -521,8 +522,8 @@ msgstr ""
 #: inc/admin/metaboxes/admin-metaboxes-form.php:127
 #: src/Services/I18nUniversalMetabox.php:34
 #: src/Services/I18nUniversalMetabox.php:399
-#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:129
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:138
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Title"
 msgstr ""
 
@@ -568,8 +569,8 @@ msgstr ""
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:29
 #: app/react/admin/wizard/import/tasks.js:6
 #: public/admin/settings.js:1
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 #: public/admin/wizard/index.js:2
 msgid "Meta description"
 msgstr ""
@@ -685,8 +686,8 @@ msgstr ""
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:23
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:44
 #: app/react/admin/wizard/import/tasks.js:10
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 #: public/admin/wizard/index.js:2
 msgid "Canonical URL"
 msgstr ""
@@ -1117,21 +1118,21 @@ msgstr ""
 #: inc/admin/migrate/MigrationTools.php:25
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:302
 #: app/react/admin/wizard/steps/ImportMetadataStep.jsx:141
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/wizard/index.js:8
 msgid "Import posts and terms (if available) metadata from %s"
 msgstr ""
 
 #: inc/admin/migrate/MigrationTools.php:27
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:305
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "By clicking Migrate, we'll import:"
 msgstr ""
 
 #: inc/admin/migrate/MigrationTools.php:31
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:24
 #: app/react/admin/wizard/import/tasks.js:4
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/wizard/index.js:2
 msgid "Global settings"
 msgstr ""
@@ -1139,7 +1140,7 @@ msgstr ""
 #: inc/admin/migrate/MigrationTools.php:33
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:28
 #: app/react/admin/wizard/import/tasks.js:5
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/wizard/index.js:2
 msgid "Title tags"
 msgstr ""
@@ -1147,7 +1148,7 @@ msgstr ""
 #: inc/admin/migrate/MigrationTools.php:35
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:30
 #: app/react/admin/wizard/import/tasks.js:7
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/wizard/index.js:2
 msgid "Facebook Open Graph tags (title, description and image thumbnail)"
 msgstr ""
@@ -1155,21 +1156,21 @@ msgstr ""
 #: inc/admin/migrate/MigrationTools.php:37
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:34
 #: app/react/admin/wizard/import/tasks.js:8
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/wizard/index.js:2
 msgid "X tags (title, description and image thumbnail)"
 msgstr ""
 
 #: inc/admin/migrate/MigrationTools.php:40
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:39
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Meta Robots (noindex, nofollow...)"
 msgstr ""
 
 #: inc/admin/migrate/MigrationTools.php:46
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:49
 #: app/react/admin/wizard/import/tasks.js:11
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/wizard/index.js:2
 msgid "Focus / target keywords"
 msgstr ""
@@ -1177,7 +1178,7 @@ msgstr ""
 #: inc/admin/migrate/MigrationTools.php:49
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:54
 #: app/react/admin/wizard/import/tasks.js:12
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/wizard/index.js:2
 msgid "Primary category"
 msgstr ""
@@ -1187,8 +1188,8 @@ msgstr ""
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:30
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:59
 #: app/react/admin/wizard/import/tasks.js:13
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 #: public/admin/wizard/index.js:2
 msgid "Redirect URL"
 msgstr ""
@@ -1196,7 +1197,7 @@ msgstr ""
 #: inc/admin/migrate/MigrationTools.php:55
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:64
 #: app/react/admin/wizard/import/tasks.js:14
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/wizard/index.js:2
 msgid "Breadcrumb Title"
 msgstr ""
@@ -1205,7 +1206,7 @@ msgstr ""
 #. translators: %1$s default: SEOPress, %2$s competitor SEO plugin name
 #: inc/admin/migrate/MigrationTools.php:61
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:323
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "<strong>WARNING:</strong> Migration will delete / update all <strong>%1$s posts and terms metadata</strong>, plus <strong>global settings</strong> (if applicable). Some dynamic variables will not be interpreted. We do <strong>NOT delete any %2$s data</strong>."
 msgstr ""
 
@@ -1228,7 +1229,7 @@ msgid "Add <code>rel=\"UGC\"</code> attribute"
 msgstr ""
 
 #: inc/admin/promotions/affiliates.php:59
-#: src/Actions/Admin/ModuleDashboard.php:471
+#: src/Actions/Admin/ModuleDashboard.php:447
 msgid "Recommended Partners"
 msgstr ""
 
@@ -1237,8 +1238,8 @@ msgstr ""
 #: inc/admin/promotions/contextual-ads.php:50
 #: inc/admin/promotions/contextual-ads.php:73
 #: inc/admin/promotions/contextual-ads.php:121
-#: src/Actions/Admin/ModuleDashboard.php:274
-#: src/Actions/Admin/ModuleDashboard.php:473
+#: src/Actions/Admin/ModuleDashboard.php:250
+#: src/Actions/Admin/ModuleDashboard.php:449
 #: src/Services/Admin/Notifications/Notifications.php:180
 #: src/Services/Admin/Notifications/Notifications.php:237
 #: src/Services/Admin/Notifications/Notifications.php:258
@@ -1322,8 +1323,8 @@ msgstr ""
 
 #: inc/admin/promotions/contextual-ads.php:89
 #: inc/admin/promotions/contextual-ads.php:129
-#: src/Actions/Admin/ModuleDashboard.php:283
-#: src/Actions/Admin/ModuleDashboard.php:334
+#: src/Actions/Admin/ModuleDashboard.php:259
+#: src/Actions/Admin/ModuleDashboard.php:310
 #: app/react/admin/settings/components/ContextualPromo.jsx:50
 #: app/react/admin/settings/components/ContextualPromo.jsx:80
 #: public/admin/settings.js:1
@@ -1398,9 +1399,9 @@ msgstr ""
 #: app/react/admin/dashboard/sections/Improvements.jsx:112
 #: app/react/admin/header/TopBanner.jsx:102
 #: app/react/admin/settings/components/ContextualPromo.jsx:204
-#: public/admin/dashboard.js:1
 #: public/admin/header.js:1
 #: public/admin/settings.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Dismiss"
 msgstr ""
 
@@ -1541,7 +1542,7 @@ msgstr[1] ""
 #: inc/functions/options-advanced-admin.php:743
 #: src/Actions/Admin/ManageColumn.php:95
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:12
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Title tag"
 msgstr ""
 
@@ -1554,7 +1555,7 @@ msgstr ""
 #: inc/functions/options-advanced-admin.php:768
 #: src/Actions/Admin/ManageColumn.php:107
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:23
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Canonical"
 msgstr ""
 
@@ -1732,14 +1733,14 @@ msgid "Export completed!"
 msgstr ""
 
 #: seopress.php:656
-#: src/Actions/Admin/ModuleSettings.php:530
+#: src/Actions/Admin/ModuleSettings.php:570
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:280
 #: app/react/admin/settings/pages/InstantIndexingPage.jsx:11
 #: app/react/admin/settings/pages/ToolsPage.jsx:35
 #: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:232
-#: public/admin/dashboard.js:1
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 #: public/admin/settings/349.f35f7af78b003ac89fce.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Settings"
 msgstr ""
 
@@ -1785,19 +1786,19 @@ msgstr ""
 
 #: src/Actions/Admin/ManageColumn.php:125
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:15
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Score"
 msgstr ""
 
 #: src/Actions/Admin/ManageColumn.php:128
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:38
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Schema"
 msgstr ""
 
 #: src/Actions/Admin/ManageColumn.php:131
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:39
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Freeze date"
 msgstr ""
 
@@ -1845,211 +1846,224 @@ msgstr ""
 msgid "Hide Integrations?"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:177
+#: src/Actions/Admin/ModuleDashboard.php:105
+msgid "SEOPress PRO update available"
+msgstr ""
+
+#. translators: %s: current SEOPress PRO version.
+#: src/Actions/Admin/ModuleDashboard.php:108
+msgid "You are running SEOPress PRO %s. Please update to 9.9.1 or higher so the Site overview tabs (Google Analytics, Matomo, PageSpeed, Search Console) render correctly in this Dashboard."
+msgstr ""
+
+#: src/Actions/Admin/ModuleDashboard.php:112
+msgid "Go to Plugins"
+msgstr ""
+
+#: src/Actions/Admin/ModuleDashboard.php:153
 #: app/react/admin/dashboard/sections/Intro.jsx:33
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Your control center for SEO."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:202
+#: src/Actions/Admin/ModuleDashboard.php:178
 msgid "SEO Tips"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:203
+#: src/Actions/Admin/ModuleDashboard.php:179
 #: app/editor/pre-publish-checklist/index.js:73
 #: public/editor/pre-publish-checklist/index.js:1
 msgid "SEO Checklist"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:204
-#: src/Actions/Admin/ModuleDashboard.php:623
+#: src/Actions/Admin/ModuleDashboard.php:180
+#: src/Actions/Admin/ModuleDashboard.php:599
 msgid "Quick reminders to boost your rankings."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:206
+#: src/Actions/Admin/ModuleDashboard.php:182
 msgid "Add meta descriptions to your posts"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:207
+#: src/Actions/Admin/ModuleDashboard.php:183
 msgid "Optimize images with alt text"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:208
+#: src/Actions/Admin/ModuleDashboard.php:184
 msgid "Submit your sitemap to Google"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:209
+#: src/Actions/Admin/ModuleDashboard.php:185
 msgid "Check for broken links"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:211
+#: src/Actions/Admin/ModuleDashboard.php:187
 msgid "Run Setup Wizard"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:216
+#: src/Actions/Admin/ModuleDashboard.php:192
 msgid "Quick Setup"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:217
+#: src/Actions/Admin/ModuleDashboard.php:193
 msgid "Rank Higher on Google"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:218
+#: src/Actions/Admin/ModuleDashboard.php:194
 msgid "Configure your SEO in minutes with our guided wizard."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:220
+#: src/Actions/Admin/ModuleDashboard.php:196
 msgid "Optimize titles & meta"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:221
+#: src/Actions/Admin/ModuleDashboard.php:197
 msgid "Generate XML sitemaps"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:222
+#: src/Actions/Admin/ModuleDashboard.php:198
 msgid "Connect to Google"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:224
+#: src/Actions/Admin/ModuleDashboard.php:200
 msgid "Start Setup Wizard"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:226
+#: src/Actions/Admin/ModuleDashboard.php:202
 msgid "Takes only 2 minutes"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:292
+#: src/Actions/Admin/ModuleDashboard.php:268
 msgid "Get Insights"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:302
+#: src/Actions/Admin/ModuleDashboard.php:278
 #: app/react/admin/dashboard/sections/Integrations.jsx:68
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Active"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:302
+#: src/Actions/Admin/ModuleDashboard.php:278
 msgid "Inactive"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:306
+#: src/Actions/Admin/ModuleDashboard.php:282
 msgid "License valid"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:309
+#: src/Actions/Admin/ModuleDashboard.php:285
 msgid "License invalid"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:329
+#: src/Actions/Admin/ModuleDashboard.php:305
 msgid "SEOPress Suite"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:330
+#: src/Actions/Admin/ModuleDashboard.php:306
 msgid "From on-site to off-site SEO, our SEO plugins cover all your needs to rank higher in search engines."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:333
+#: src/Actions/Admin/ModuleDashboard.php:309
 msgid "Unlock AI, redirections, schemas, and more."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:410
+#: src/Actions/Admin/ModuleDashboard.php:386
 msgid "Integrations"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:411
+#: src/Actions/Admin/ModuleDashboard.php:387
 msgid "You're using these plugins / themes on your site. We provide advanced integrations with them to improve your SEO."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:414
+#: src/Actions/Admin/ModuleDashboard.php:390
 msgid "See all"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:415
+#: src/Actions/Admin/ModuleDashboard.php:391
 msgid "Currently, no specific integration found for your site. Contact us if you have any doubts about the compatibility between your plugins/themes and our products."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:417
+#: src/Actions/Admin/ModuleDashboard.php:393
 msgid "Request an integration"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:472
+#: src/Actions/Admin/ModuleDashboard.php:448
 msgid "Trusted tools to enhance your website performance."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:490
+#: src/Actions/Admin/ModuleDashboard.php:466
 #: app/react/admin/dashboard/sections/SiteOverview.jsx:134
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Site overview"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:622
+#: src/Actions/Admin/ModuleDashboard.php:598
 #: app/react/admin/dashboard/sections/Improvements.jsx:221
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "SEO Improvements needed"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:642
+#: src/Actions/Admin/ModuleDashboard.php:618
 msgid "Content"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:646
+#: src/Actions/Admin/ModuleDashboard.php:622
 msgid "Technical"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:650
+#: src/Actions/Admin/ModuleDashboard.php:626
 msgid "Data & Tracking"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:705
+#: src/Actions/Admin/ModuleDashboard.php:681
 msgid "Manage all your titles & metas for post types, taxonomies, archives..."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:711
+#: src/Actions/Admin/ModuleDashboard.php:687
 msgid "XML & HTML Sitemaps"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:712
+#: src/Actions/Admin/ModuleDashboard.php:688
 msgid "Manage your XML - Image - Video - HTML Sitemap."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:719
+#: src/Actions/Admin/ModuleDashboard.php:695
 msgid "Open Graph, X Cards, Google Knowledge Graph and more..."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:726
+#: src/Actions/Admin/ModuleDashboard.php:702
 msgid "Track everything about your visitors with Google Analytics / Matomo / Microsoft Clarity."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:733
+#: src/Actions/Admin/ModuleDashboard.php:709
 msgid "Ping Google & Bing to quickly index your content."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:739
+#: src/Actions/Admin/ModuleDashboard.php:715
 msgid "Image SEO & Advanced settings"
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:740
+#: src/Actions/Admin/ModuleDashboard.php:716
 msgid "Optimize your images for SEO. Configure advanced settings."
 msgstr ""
 
-#: src/Actions/Admin/ModuleDashboard.php:751
+#: src/Actions/Admin/ModuleDashboard.php:727
 msgid "Import/Export plugin settings from site to site."
 msgstr ""
 
-#: src/Actions/Admin/ModuleSettings.php:157
+#: src/Actions/Admin/ModuleSettings.php:168
 msgid "SEO Network settings"
 msgstr ""
 
-#: src/Actions/Admin/ModuleSettings.php:531
+#: src/Actions/Admin/ModuleSettings.php:571
 #: app/react/admin/settings/pages/ToolsPage.jsx:36
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Plugins"
 msgstr ""
 
-#: src/Actions/Admin/ModuleSettings.php:532
+#: src/Actions/Admin/ModuleSettings.php:572
 #: app/react/admin/settings/pages/ToolsPage.jsx:37
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:33
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Reset"
 msgstr ""
 
@@ -2099,7 +2113,7 @@ msgstr ""
 
 #: src/Actions/Api/Options/ToolsSettings.php:133
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:180
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Settings imported successfully."
 msgstr ""
 
@@ -2707,7 +2721,7 @@ msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:272
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:15
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Redirect attachment pages"
 msgstr ""
 
@@ -2758,7 +2772,7 @@ msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:281
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:22
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Taxonomy description editor"
 msgstr ""
 
@@ -2792,6 +2806,7 @@ msgstr ""
 #: src/Data/CommandPaletteIndex.php:298
 #: src/Data/CommandPaletteIndex.php:299
 #: src/Data/CommandPaletteIndex.php:300
+#: src/Data/CommandPaletteIndex.php:301
 msgid "Advanced › Appearance"
 msgstr ""
 
@@ -2800,54 +2815,57 @@ msgid "Hide admin bar notifications counter"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:290
-msgid "Hide SEO beacon on frontend"
+msgid "Hide SEO score text in editor toolbar"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:291
-msgid "Content analysis metabox"
+msgid "Hide SEO beacon on frontend"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:292
-msgid "Show title column in post lists"
+msgid "Content analysis metabox"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:293
-msgid "Show meta description column"
+msgid "Show title column in post lists"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:294
-msgid "Show SEO score column"
+msgid "Show meta description column"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:295
-msgid "Show noindex column"
+msgid "Show SEO score column"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:296
-msgid "Show nofollow column"
+msgid "Show noindex column"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:297
-msgid "Show canonical column"
+msgid "Show nofollow column"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:298
-msgid "Show redirect column"
+msgid "Show canonical column"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:299
-msgid "Show target keywords column"
+msgid "Show redirect column"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:300
+msgid "Show target keywords column"
+msgstr ""
+
+#: src/Data/CommandPaletteIndex.php:301
 msgid "Freeze modified date option"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:303
+#: src/Data/CommandPaletteIndex.php:304
 msgid "Remove WP generator meta tag"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:303
 #: src/Data/CommandPaletteIndex.php:304
 #: src/Data/CommandPaletteIndex.php:305
 #: src/Data/CommandPaletteIndex.php:306
@@ -2868,119 +2886,120 @@ msgstr ""
 #: src/Data/CommandPaletteIndex.php:321
 #: src/Data/CommandPaletteIndex.php:322
 #: src/Data/CommandPaletteIndex.php:323
+#: src/Data/CommandPaletteIndex.php:324
 msgid "Advanced › Advanced"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:304
+#: src/Data/CommandPaletteIndex.php:305
 msgid "Remove shortlink tag"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:305
+#: src/Data/CommandPaletteIndex.php:306
 msgid "Remove Windows Live Writer tag"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:306
+#: src/Data/CommandPaletteIndex.php:307
 msgid "Remove RSD tag"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:307
+#: src/Data/CommandPaletteIndex.php:308
 msgid "Remove X-Pingback header"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:308
+#: src/Data/CommandPaletteIndex.php:309
 msgid "Disable oEmbed"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:309
+#: src/Data/CommandPaletteIndex.php:310
 msgid "Remove X-Powered-By header"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:310
+#: src/Data/CommandPaletteIndex.php:311
 msgid "Remove hentry microformat"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:311
+#: src/Data/CommandPaletteIndex.php:312
 msgid "Disable emoji scripts"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:312
+#: src/Data/CommandPaletteIndex.php:313
 msgid "Remove /category/ from URLs"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:313
+#: src/Data/CommandPaletteIndex.php:314
 msgid "Remove /product-category/ from URLs"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:314
+#: src/Data/CommandPaletteIndex.php:315
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:68
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove ?replytocom"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:315
+#: src/Data/CommandPaletteIndex.php:316
 msgid "Remove website field from comments"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:316
+#: src/Data/CommandPaletteIndex.php:317
 msgid "Add rel=\"noreferrer\" to comment links"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:317
+#: src/Data/CommandPaletteIndex.php:318
 msgid "Google Search Console verification"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:318
+#: src/Data/CommandPaletteIndex.php:319
 msgid "Bing Webmaster verification"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:319
+#: src/Data/CommandPaletteIndex.php:320
 msgid "Yandex verification"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:320
+#: src/Data/CommandPaletteIndex.php:321
 msgid "Baidu verification"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:321
+#: src/Data/CommandPaletteIndex.php:322
 msgid "Pinterest verification"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:322
+#: src/Data/CommandPaletteIndex.php:323
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:270
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Facebook domain verification"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:323
+#: src/Data/CommandPaletteIndex.php:324
 msgid "Seznam verification"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:335
+#: src/Data/CommandPaletteIndex.php:336
 msgid "Export settings (JSON)"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:335
 #: src/Data/CommandPaletteIndex.php:336
+#: src/Data/CommandPaletteIndex.php:337
 msgid "Tools › Settings"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:336
+#: src/Data/CommandPaletteIndex.php:337
 msgid "Import settings (JSON)"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:337
+#: src/Data/CommandPaletteIndex.php:338
 msgid "Import from Yoast / Rank Math / AIOSEO / SEOFramework"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:337
+#: src/Data/CommandPaletteIndex.php:338
 msgid "Tools › Plugins"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:338
+#: src/Data/CommandPaletteIndex.php:339
 msgid "Reset all SEOPress settings"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:338
+#: src/Data/CommandPaletteIndex.php:339
 msgid "Tools › Reset"
 msgstr ""
 
@@ -4402,7 +4421,7 @@ msgstr ""
 #: src/Services/I18nUniversalMetabox.php:374
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:86
 #: app/react/admin/wizard/steps/ReadyStep.jsx:75
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 #: public/admin/wizard/index.js:23
 msgid "Content Analysis"
 msgstr ""
@@ -5160,7 +5179,7 @@ msgstr ""
 
 #: src/Services/Settings/Roles/SectionPagesSEOPress.php:42
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:121
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Check a user role to authorized it to edit a specific SEO page."
 msgstr ""
 
@@ -5186,7 +5205,7 @@ msgstr ""
 
 #: src/Tags/AuthorUrl.php:23
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:103
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Author URL"
 msgstr ""
 
@@ -5446,7 +5465,7 @@ msgstr ""
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:30
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:46
 #: public/admin/settings.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 #: public/admin/wizard/index.js:14
 #: public/editor/blocks/faq/index.js:1
 msgid "Remove"
@@ -5762,86 +5781,86 @@ msgstr ""
 
 #. translators: %s: feature name.
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:54
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "%s enabled."
 msgstr ""
 
 #. translators: %s: feature name.
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:56
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "%s disabled."
 msgstr ""
 
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:65
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Unable to save your change. Please try again."
 msgstr ""
 
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:121
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "SEO modules"
 msgstr ""
 
 #. translators: 1: number enabled, 2: total.
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:128
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "%1$d of %2$d modules enabled"
 msgstr ""
 
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:138
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "enabled"
 msgstr ""
 
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:143
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Quickly enable or disable SEO modules to fit your needs."
 msgstr ""
 
 #. translators: %s name of the feature, eg: Titles and metas
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:249
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Toggle %s"
 msgstr ""
 
 #. translators: %s: feature name (e.g. "Titles & Metas").
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:276
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "%s settings"
 msgstr ""
 
 #: app/react/admin/dashboard/sections/Improvements.jsx:58
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Fix now"
 msgstr ""
 
 #. translators: 1: CTA label (e.g. "Fix now"), 2: notification title.
 #: app/react/admin/dashboard/sections/Improvements.jsx:62
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "%1$s: %2$s"
 msgstr ""
 
 #. translators: %s: notification title.
 #: app/react/admin/dashboard/sections/Improvements.jsx:70
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Dismiss: %s"
 msgstr ""
 
 #: app/react/admin/dashboard/sections/Improvements.jsx:225
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "issue"
 msgid_plural "issues"
 msgstr[0] ""
 msgstr[1] ""
 
 #: app/react/admin/dashboard/sections/Improvements.jsx:268
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Show fewer issues"
 msgstr ""
 
 #. translators: %d: number of remaining SEO issues.
 #: app/react/admin/dashboard/sections/Improvements.jsx:271
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Show %d more issue"
 msgid_plural "Show %d more issues"
 msgstr[0] ""
@@ -5849,17 +5868,17 @@ msgstr[1] ""
 
 #: app/react/admin/dashboard/sections/SiteOverview.jsx:82
 #: app/react/admin/dashboard/sections/SiteOverview.jsx:116
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "This tab is not available yet."
 msgstr ""
 
 #: app/react/admin/dashboard/sections/SiteOverview.jsx:90
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "View full report"
 msgstr ""
 
 #: app/react/admin/dashboard/sections/Tasks.jsx:117
-#: public/admin/dashboard.js:1
+#: public/admin/settings/482.598c65659d1dc3e08662.js:1
 msgid "Activate"
 msgstr ""
 
@@ -6027,43 +6046,43 @@ msgid_plural "Hidden notifications (%d)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/react/admin/settings/App.jsx:44
+#: app/react/admin/settings/App.jsx:45
 #: public/admin/settings.js:1
 msgid "Error loading settings. Please refresh the page."
 msgstr ""
 
-#: app/react/admin/settings/App.jsx:100
+#: app/react/admin/settings/App.jsx:107
 #: public/admin/settings.js:1
 msgid "Unsaved changes"
 msgstr ""
 
-#: app/react/admin/settings/App.jsx:106
+#: app/react/admin/settings/App.jsx:113
 #: public/admin/settings.js:1
 msgid "You have 1 unsaved change. Are you sure you want to leave?"
 msgstr ""
 
-#: app/react/admin/settings/App.jsx:107
+#: app/react/admin/settings/App.jsx:114
 #: app/react/admin/settings/components/SettingsLayout/SaveBar.jsx:88
 #: public/admin/settings.js:1
 msgid "You have"
 msgstr ""
 
-#: app/react/admin/settings/App.jsx:107
+#: app/react/admin/settings/App.jsx:114
 #: public/admin/settings.js:1
 msgid "unsaved changes. Are you sure you want to leave?"
 msgstr ""
 
-#: app/react/admin/settings/App.jsx:112
+#: app/react/admin/settings/App.jsx:119
 #: app/react/admin/settings/components/Fields/MediaUploadField.jsx:86
 #: app/react/admin/settings/components/SettingsLayout/SaveBar.jsx:93
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:360
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:133
 #: public/admin/settings.js:1
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Cancel"
 msgstr ""
 
-#: app/react/admin/settings/App.jsx:119
+#: app/react/admin/settings/App.jsx:126
 #: public/admin/settings.js:1
 msgid "Leave"
 msgstr ""
@@ -6183,7 +6202,7 @@ msgstr ""
 #: app/react/admin/settings/tabs/titles/PostTypesTab.jsx:95
 #: app/react/admin/settings/tabs/titles/TaxonomiesTab.jsx:120
 #: public/admin/settings.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "noindex"
 msgstr ""
 
@@ -6194,7 +6213,7 @@ msgstr ""
 #: app/react/admin/settings/tabs/titles/PostTypesTab.jsx:101
 #: app/react/admin/settings/tabs/titles/TaxonomiesTab.jsx:132
 #: public/admin/settings.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "nofollow"
 msgstr ""
 
@@ -6246,17 +6265,17 @@ msgid "Failed to save settings"
 msgstr ""
 
 #: app/react/admin/settings/pages/AdvancedSettingsPage.jsx:12
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Image SEO"
 msgstr ""
 
 #: app/react/admin/settings/pages/AdvancedSettingsPage.jsx:14
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Appearance"
 msgstr ""
 
 #: app/react/admin/settings/pages/AdvancedSettingsPage.jsx:15
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Security"
 msgstr ""
 
@@ -6362,7 +6381,7 @@ msgstr ""
 #: app/react/admin/settings/pages/SocialPage.jsx:17
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:170
 #: app/react/admin/wizard/steps/SiteSocialStep.jsx:82
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 #: public/admin/settings/876.f0b066b7926b8d974aa6.js:1
 #: public/admin/wizard/index.js:14
 msgid "LinkedIn"
@@ -6381,729 +6400,744 @@ msgid "Archives"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:15
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Advanced SEO options for advanced users."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:19
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Crawling Optimization"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:20
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Clean your source code to improve performance and your crawl budget."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:24
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Add TINYMCE editor to term description"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:32
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:48
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Strip"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:32
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "from category URLs"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:39
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:55
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Flush permalinks after changing this setting."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:48
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "from WooCommerce category URLs"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:60
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Make sure no two URLs collide after enabling this option to prevent conflicts."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:70
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove ?replytocom link in source code and replace it with a simple anchor"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:77
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove noreferrer"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:79
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove noreferrer link attribute in source code"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:82
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Useful for affiliate links (e.g. Amazon)."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:86
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "WP Generator meta tag"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:88
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove WordPress meta generator in source code"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:95
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove hentry"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:97
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove hentry post class to prevent Google from seeing this as structured data (schema)"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:105
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove comment author URL in comments if the website is filled from profile page"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:111
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Website field"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:113
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove website field from comment form to reduce spam"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:119
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Comment form links"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:121
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Prevent search engines to follow / index the link to the comments form"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:128
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "WP Shortlink"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:130
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove WordPress shortlink meta tag in source code"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:137
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Windows Live Writer"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:139
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove Windows Live Writer meta tag in source code"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:146
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "RSD"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:148
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove Really Simple Discovery meta tag in source code"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:152
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "WordPress Site Health feature will return a HTTPS warning if you enable this option. This is a false positive of course."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:158
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "oEmbed"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:160
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove oEmbed links in source code"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:164
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "This will prevent other blogs to embed one of your posts on their site."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:170
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "If this checkbox is checked,"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:170
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "will no longer be able to parse this JSON feed and use the post thumbnail when sharing links on LinkedIn. This has an impact on conversion."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:174
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "X-Pingback"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:176
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove X-Pingback from HTTP headers"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:180
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "This will disable pingbacks/trackbacks and increase security (DDOS)."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:186
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "X-Powered-By"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:188
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove X-Powered-By from HTTP headers"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:192
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "By default, WordPress uses this to display your PHP version."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:198
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Emoji"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:200
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove Emoji scripts in your source code to speed up your site performance"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:203
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Only older web browsers will not see your emojis."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:209
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Search engines validation"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:210
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Easily validate your site with search engines webmaster tools."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:212
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Google site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:216
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Enter Google meta value site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:219
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:232
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "If your site is already verified in"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:219
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Google Search Console"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:219
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:232
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid ", you can leave this field empty."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:225
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Bing site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:229
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Enter Bing meta value site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:232
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Bing Webmaster tools"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:238
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Pinterest site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:242
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Enter Pinterest meta value site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:246
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Yandex site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:250
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Enter Yandex meta value site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:254
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Baidu site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:258
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Enter Baidu meta value site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:262
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Seznam.cz site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:266
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Enter Seznam meta value site verification"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:274
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Enter Facebook domain verification meta value"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:277
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Verify your domain with"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:277
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Facebook Business Manager"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:277
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "to unlock additional features."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:285
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Modified Date"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:287
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Global freeze"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:289
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Freeze the last modified date for all posts by default"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:292
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "When enabled, the modified date will not be updated on save unless overridden per post."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:10
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "SEO content"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:12
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "SEO title"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:13
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Meta desc."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:14
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Keyword"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:15
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Content analysis score"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:15
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "\"Good\" or \"Should be improved\"."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:19
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Indexing & canonical"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:21
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "noindex status"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:22
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "nofollow status"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:27
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Redirections"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:29
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Redirection enabled"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:29
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Redirect on"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:34
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Links & schema"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:36
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Inbound links count"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:36
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Inbound"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:37
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Outbound links count"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:37
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Outbound"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:38
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Manual schemas set on posts."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:39
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Freeze modified date status"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:55
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Customize the plugin to fit your needs."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:59
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Metaboxes"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:60
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Edit your SEO metadata directly from your favorite page builder."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:75
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "SEO beacon on frontend"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:77
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Hide the SEO beacon on the frontend"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:80
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "By default, logged-in users with edit rights see a floating SEO beacon on singular pages. Enable this to hide it on the frontend (the metabox stays available in the editor)."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:86
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Admin bar"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:87
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "The admin bar appears on the top of your pages when logged in to your WP admin."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:89
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "SEO in admin bar"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:91
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove SEO from Admin Bar in backend and frontend"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:97
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Notifications counter"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:99
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove the SEO notifications counter in the Admin Bar"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:105
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Noindex in admin bar"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:107
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Remove noindex item from Admin Bar in frontend"
 msgstr ""
 
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:113
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
+msgid "SEO score in editor toolbar"
+msgstr ""
+
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:115
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
-msgid "SEO Dashboard"
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
+msgid "Remove the \"Has SEO issues\" / \"Good SEO score\" text from the Gutenberg top bar"
 msgstr ""
 
-#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:116
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
-msgid "Click the dedicated icon from the toolbar to customize the SEO dashboard."
-msgstr ""
-
-#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:123
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
-msgid "Columns"
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:118
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
+msgid "The score badge is shown next to the SEO icon in the Block Editor top bar. Enable this to hide the text label; the colored score dot on the icon stays."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:124
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
+msgid "SEO Dashboard"
+msgstr ""
+
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:125
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
+msgid "Click the dedicated icon from the toolbar to customize the SEO dashboard."
+msgstr ""
+
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:132
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
+msgid "Columns"
+msgstr ""
+
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:133
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Choose which SEO columns appear in your post & page lists."
 msgstr ""
 
-#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:127
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:136
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Preview"
 msgstr ""
 
-#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:130
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:139
 #: app/react/admin/settings/tabs/titles/ArchivesTab.jsx:159
 #: public/admin/settings.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Author"
 msgstr ""
 
-#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:131
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:140
 #: app/react/admin/settings/tabs/titles/ArchivesTab.jsx:218
 #: public/admin/settings.js:1
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Date"
 msgstr ""
 
-#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:136
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:145
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Search Console"
 msgstr ""
 
-#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:139
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: app/react/admin/settings/tabs/advanced/AppearanceTab.jsx:148
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "No SEO column selected."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:12
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Images can generate a lot of traffic to your site. Make sure to always add alternative texts, optimize their file size, filename etc."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:17
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Redirect attachment pages to post parent (or homepage if none)"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:23
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Redirect to file URL"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:25
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Redirect attachment pages to their file URL (https://www.example.com/my-image-file.jpg)"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:28
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "If this option is checked, it will take precedence over the redirection of attachments to the post's parent."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:32
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Cleaning media filename"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:34
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "When upload a media, remove accents, spaces, capital letters... and force UTF-8 encoding"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:41
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Image Title"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:43
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "When uploading an image file, automatically set the title based on the filename"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:46
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "We use the product title for WooCommerce products."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:50
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Image Alt text"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:52
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "When uploading an image file, automatically set the alternative text based on the filename"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:58
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Alt from target keywords"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:60
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Use the target keywords if not alternative text set for the image"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:63
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "This setting will be applied to images without any alt text only on frontend. This setting is retroactive. If you turn it off, alt texts that were previously empty will be empty again."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:67
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Alt on inserted images"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:69
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Apply the alt text defined in your media library for already inserted images"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:72
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "By default, WordPress does not update image alt texts entered from the media library after they are inserted into the content of a post, page, or post type. By checking this box, this will be done when the page loads on the fly as long as this option remains active."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:76
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Image Caption"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:78
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "When uploading an image file, automatically set the caption based on the filename"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:84
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Image Description"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/ImageSeoTab.jsx:86
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "When uploading an image file, automatically set the description based on the filename"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:55
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Control access to SEO settings and metaboxes by user roles."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:58
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "SEO metaboxes"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:61
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:89
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:117
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Check a user role to"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:61
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:89
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "PREVENT"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:61
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "it to edit a specific metabox."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:79
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:107
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "Hook to filter structured data types metabox call by post type"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:89
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "it to edit the Content Analysis metabox."
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:114
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "SEO settings pages"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:117
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "ALLOW"
 msgstr ""
 
 #: app/react/admin/settings/tabs/advanced/SecurityTab.jsx:117
-#: public/admin/settings/415.befcab86e25d6cb6123f.js:1
+#: public/admin/settings/415.e069170cd3a2e8a2146c.js:1
 msgid "it to edit a specific settings page."
 msgstr ""
 
@@ -9760,220 +9794,220 @@ msgid "Disable the SEO metabox for this taxonomy."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:277
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Migration from other SEO plugins"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:281
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Select an SEO plugin to migrate from. You don't need to have the selected plugin active to run the import - SEOPress reads directly from the database."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:285
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "SEO plugin to migrate from"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:338
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Migrating..."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:339
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:347
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Import from"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:352
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Are you sure you want to import SEO data from"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:353
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "? This will overwrite existing SEOPress metadata for migrated posts."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/PluginsTab.jsx:367
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Import"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:17
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:19
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:20
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Delete content scans"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:18
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Removes all content analysis results stored in the database."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:21
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:175
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:22
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Delete"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:23
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Content scans deleted."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:28
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:30
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:31
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Reset notifications"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:29
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Restore every notification in the notifications center to its initial state."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:32
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Are you sure? Dismissed notifications will reappear."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:34
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Notifications reset."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:39
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:41
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:42
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Reset all settings"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:40
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Removes every option this plugin has saved in your database. The site will fall back to the default configuration."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:43
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "This will erase ALL options related to this plugin from the database. This cannot be undone — make sure you have a backup."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:44
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Reset everything"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:45
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "All settings reset."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:82
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Action failed."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:103
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Working…"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:127
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "This action cannot be undone."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:128
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Make sure you have a recent database backup."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:157
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Maintenance"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:159
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Backup your database before any reset."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:160
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "These actions cannot be undone."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:172
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Removes the data managed by this extension."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:176
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Confirm"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/ResetTab.jsx:177
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Action completed successfully."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:128
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Export Settings"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:131
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:140
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Exporting..."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:140
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Export settings"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:146
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Settings exported successfully."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:154
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Import Settings"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:157
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Import the plugin settings from a .json file. This will overwrite your current settings."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:174
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Importing..."
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:174
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Import settings"
 msgstr ""
 
 #: app/react/admin/settings/tabs/tools/SettingsTab.jsx:185
-#: public/admin/settings/298.5e2aacb2666aa14bf39a.js:1
+#: public/admin/settings/298.3563e94057f880368862.js:1
 msgid "Reload page"
 msgstr ""
 

@@ -52,30 +52,48 @@ body.toplevel_page_seopress-option #wpfooter {
 }
 
 /*
- * The legacy `.seopress-styles .seopress-option` rule forces
- * display: inline-block which defeats margin-auto centering. Force block
- * flow here so the React dashboard frame stays centred at the Figma
- * AdminMain width (1200px) inside #wpbody-content.
+ * Neutralize the legacy `.seopress-styles .seopress-option` rule
+ * (padding: 84px 0px 0px 22px; display: inline-block;
+ * width: calc(100% - 20px)) ONLY when the wrapper actually hosts the
+ * Dashboard. Pre-9.9.1 the centering lived on this same wrapper but
+ * scoped to body.toplevel_page_seopress-option, which leaked into
+ * SPA-navigated Settings sections once the unified shell shipped (the
+ * body class doesn't change on pushState). :has() lets us scope by
+ * "the wrapper currently contains a .seopress-dashboard-app" instead,
+ * which is true precisely when the Dashboard section is on screen and
+ * goes away the instant React swaps in a Settings section.
  */
-body.toplevel_page_seopress-option #wpbody-content > #seopress-content.seopress-option {
+.seopress-styles .seopress-option:has(.seopress-dashboard-app) {
     display: block;
     width: auto;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
-    padding-left: var(--seopress-space-5);
-    padding-right: var(--seopress-space-5);
     float: none;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 /* ---------- Dashboard layout ---------- */
 
+/*
+ * Page-level centering lives on the Dashboard component itself, not on
+ * the outer #seopress-content wrapper. The unified Settings React shell
+ * (9.9.1+) mounts the same #seopress-content > #seopress-admin-settings-root
+ * regardless of which section is rendered, so a wrapper-level rule would
+ * keep centering Settings sections after a SPA navigation away from
+ * Dashboard. Scoping by .seopress-dashboard-app guarantees the 1200px
+ * frame applies only while the Dashboard section is on screen.
+ */
 .seopress-dashboard-app {
-    margin-top: var(--seopress-space-4);
     display: flex;
     flex-direction: column;
     gap: var(--seopress-space-4);
+    margin-top: var(--seopress-space-4);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    width: 100%;
+    padding-left: var(--seopress-space-5);
+    padding-right: var(--seopress-space-5);
+    box-sizing: border-box;
 }
 
 .seopress-dashboard__columns {
@@ -932,7 +950,10 @@ body.toplevel_page_seopress-option #wpbody-content > #seopress-content.seopress-
 }
 
 @media (max-width: 782px) {
-    body.toplevel_page_seopress-option #wpbody-content > #seopress-content.seopress-option {
+    /* Match the page-level centering scoping: target the Dashboard
+     * component itself instead of the body class, so SPA-navigated
+     * Settings sections aren't affected. */
+    .seopress-dashboard-app {
         padding-left: var(--seopress-space-4);
         padding-right: var(--seopress-space-4);
     }

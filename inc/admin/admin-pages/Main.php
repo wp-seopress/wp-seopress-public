@@ -20,13 +20,14 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 
 <div id="seopress-content" class="seopress-option">
 	<?php
-		// React dashboard root. The bundle (admin/dashboard.js) renders the
-		// full Intro / Notifications / Get Started / Tasks / Promotions /
-		// FeaturesList / Integrations stack. It must render BEFORE the PRO
-		// insights block below so the page header (Intro) and Notifications
-		// banner sit at the top of the page, matching the Figma layout.
+		// Unified Settings React shell. ModuleSettings enqueues
+		// admin/settings.js on seopress-option and the bundle reads
+		// PAGE_TYPE = 'dashboard' from the localized
+		// SEOPRESS_SETTINGS_DATA to render the Dashboard as one of
+		// its lazy sections.
 	?>
-	<div id="seopress-admin-dashboard-root"></div>
+	<div class="seopress-php-header"></div>
+	<div id="seopress-admin-settings-root"></div>
 	<?php
 		// "Settings saved" snackbar — must stay inside #seopress-content
 		// so it doesn't leave an orphan block in #wpbody-content after

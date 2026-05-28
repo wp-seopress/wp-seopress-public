@@ -61,9 +61,15 @@ class RequestPreview {
 	 */
 	public function getDomById( $id, $taxname = null ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 
+		// Loop-back HTTP request against the post's own preview URL. The
+		// admin request that fires this already holds one PHP-FPM worker;
+		// the loop-back holds a second one for the duration of the call.
+		// A 30 s ceiling means two open editors can saturate a small
+		// worker pool — capped at 10 s so the metabox can surface a
+		// degraded state instead of letting the Suspense fallback hang.
 		$args = array(
 			'redirection' => 2,
-			'timeout'     => 30,
+			'timeout'     => 10,
 			'sslverify'   => false,
 		);
 
