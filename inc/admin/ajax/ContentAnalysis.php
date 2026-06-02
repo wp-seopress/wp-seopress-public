@@ -48,6 +48,12 @@ function seopress_do_real_preview() {
 			case 401:
 				$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
 				break;
+			case 'blocked':
+				$default_response['title'] = __( 'Content analysis was blocked (HTTP 403/503). A CDN, firewall or security plugin is preventing your server from loading the preview.', 'wp-seopress' );
+				break;
+			case 'unreachable':
+				$default_response['title'] = __( 'Your site could not be reached for content analysis. Please check your server, DNS or firewall configuration.', 'wp-seopress' );
+				break;
 		}
 
 		wp_send_json_success( $default_response );

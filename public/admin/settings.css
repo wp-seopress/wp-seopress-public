@@ -277,6 +277,10 @@
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    word-break: normal;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
 }
 
 .seopress-token-editor--multiline {

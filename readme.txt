@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 9.9.1
+Stable tag: 9.9.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -316,6 +316,14 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 9.9.2 =
+* NEW AI content-quality checks (content depth, heading structure, media in content, readability) now show in the editor's Content Analysis tab, not just in the Site Audit
+* NEW "Test your URL" button is back in the Redirections metabox: check the destination's HTTP status and open it in a new tab
+* NEW [PRO] "Test URL" button in the Redirections editor, prefilled with the Origin URL
+* FIX Content Analysis performance issue with CDN/WAF
+* FIX Title / Description dynamic tag editor no longer breaks words in the middle in free text
+* FIX No more white screen when a file is momentarily unavailable during a plugin update
+
 = 9.9.1 =
 * NEW Option to hide the SEO score text ("Has SEO issues") in the block editor top bar (SEO, Advanced, Appearance tab)
 * INFO Better performance for SEO dashboard

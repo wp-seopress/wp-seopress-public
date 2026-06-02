@@ -337,6 +337,18 @@ class I18nUniversalMetabox {
 						),
 						'title'      => __( 'NoFollow Links', 'wp-seopress' ),
 					),
+					'content_depth'     => array(
+						'title' => __( 'Content depth', 'wp-seopress' ),
+					),
+					'heading_hierarchy' => array(
+						'title' => __( 'Heading structure', 'wp-seopress' ),
+					),
+					'content_media'     => array(
+						'title' => __( 'Media in content', 'wp-seopress' ),
+					),
+					'content_structure' => array(
+						'title' => __( 'Content readability', 'wp-seopress' ),
+					),
 
 				),
 				'canonical_url'          => array(

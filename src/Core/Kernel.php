@@ -96,8 +96,14 @@ abstract class Kernel {
 								$class->hooks();
 								break;
 						}
-					} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-						// Do nothing.
+					} catch ( \Throwable $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+						// Skip any class that cannot be loaded or instantiated.
+						// class_exists() autoloads the file, so a class whose
+						// parent interface/class is momentarily unavailable (an
+						// in-progress plugin update swapping files, a stale
+						// opcache, a partial deploy) throws \Error, not
+						// \Exception. Catching \Throwable keeps one broken class
+						// from white-screening the whole site during that window.
 					}
 				}
 				break;
@@ -112,8 +118,14 @@ abstract class Kernel {
 						if ( $class instanceof ActivationHook ) {
 							$class->activate();
 						}
-					} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-						// Do nothing.
+					} catch ( \Throwable $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+						// Skip any class that cannot be loaded or instantiated.
+						// class_exists() autoloads the file, so a class whose
+						// parent interface/class is momentarily unavailable (an
+						// in-progress plugin update swapping files, a stale
+						// opcache, a partial deploy) throws \Error, not
+						// \Exception. Catching \Throwable keeps one broken class
+						// from white-screening the whole site during that window.
 					}
 				}
 				break;
@@ -127,8 +139,14 @@ abstract class Kernel {
 						if ( $class instanceof DeactivationHook ) {
 							$class->deactivate();
 						}
-					} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-						// Do nothing.
+					} catch ( \Throwable $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+						// Skip any class that cannot be loaded or instantiated.
+						// class_exists() autoloads the file, so a class whose
+						// parent interface/class is momentarily unavailable (an
+						// in-progress plugin update swapping files, a stale
+						// opcache, a partial deploy) throws \Error, not
+						// \Exception. Catching \Throwable keeps one broken class
+						// from white-screening the whole site during that window.
 					}
 				}
 				break;
@@ -184,8 +202,10 @@ abstract class Kernel {
 						break;
 				}
 			}
-		} catch ( \Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-			// Do nothing.
+		} catch ( \Throwable $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+			// Keep building the container even if one file cannot be scanned
+			// or read (mid-update file swap, permissions): a single bad entry
+			// must not abort registration of every other class.
 		}
 	}
 

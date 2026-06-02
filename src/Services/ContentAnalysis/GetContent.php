@@ -1432,12 +1432,12 @@ class GetContent {
 
 		if ( $word_count < $min_words ) {
 			$analyzes['content_depth']['impact'] = 'medium';
-			$desc                               .= '<p><span class="dashicons dashicons-no-alt"></span>' . /* translators: %1$d current word count, %2$d recommended minimum word count */ sprintf( esc_html__( 'Your content is quite thin (%1$d words). Aim for at least %2$d words to cover the topic in depth.', 'wp-seopress' ), $word_count, $min_words ) . '</p>';
+			$desc                               .= '<p><span class="dashicons dashicons-no-alt sp-dashicons-not"></span>' . /* translators: %1$d current word count, %2$d recommended minimum word count */ sprintf( esc_html__( 'Your content is quite thin (%1$d words). Aim for at least %2$d words to cover the topic in depth.', 'wp-seopress' ), $word_count, $min_words ) . '</p>';
 
 			$issue['issue_name'] = 'content_too_thin';
 			$issue['issue_desc'] = array( $word_count );
 		} else {
-			$desc .= '<p><span class="dashicons dashicons-yes"></span>' . /* translators: %d word count */ sprintf( esc_html__( 'Your content has %d words. Good job!', 'wp-seopress' ), $word_count ) . '</p>';
+			$desc .= '<p><span class="dashicons dashicons-yes sp-dashicons-ok"></span>' . /* translators: %d word count */ sprintf( esc_html__( 'Your content has %d words. Good job!', 'wp-seopress' ), $word_count ) . '</p>';
 		}
 
 		$analyzes['content_depth']['desc'] = $desc;
@@ -1491,7 +1491,7 @@ class GetContent {
 
 		if ( ! empty( $skips ) ) {
 			$analyzes['heading_hierarchy']['impact'] = 'low';
-			$desc                                   .= '<p><span class="dashicons dashicons-no-alt"></span>' . __( 'Your heading levels are not sequential (a level is skipped). Don\'t jump from H2 to H4 without an H3 in between.', 'wp-seopress' ) . '</p>';
+			$desc                                   .= '<p><span class="dashicons dashicons-no-alt sp-dashicons-not"></span>' . __( 'Your heading levels are not sequential (a level is skipped). Don\'t jump from H2 to H4 without an H3 in between.', 'wp-seopress' ) . '</p>';
 			$desc                                   .= '<ul>';
 			foreach ( $skips as $skip ) {
 				$desc .= '<li><span class="dashicons dashicons-minus"></span>' . wp_kses_post( $skip ) . '</li>';
@@ -1509,7 +1509,7 @@ class GetContent {
 			$issue                                   = array();
 			$issue['issue_type']                     = 'heading_hierarchy';
 			$analyzes['heading_hierarchy']['impact'] = 'medium';
-			$desc                                   .= '<p><span class="dashicons dashicons-no-alt"></span>' . /* translators: %1$d word count, %2$d recommended minimum number of subheadings */ sprintf( esc_html__( 'Your content is long (%1$d words) but uses only %2$d subheadings. Break it into more sections with H2/H3 headings.', 'wp-seopress' ), $word_count, $subheadings ) . '</p>';
+			$desc                                   .= '<p><span class="dashicons dashicons-no-alt sp-dashicons-not"></span>' . /* translators: %1$d word count, %2$d recommended minimum number of subheadings */ sprintf( esc_html__( 'Your content is long (%1$d words) but uses only %2$d subheadings. Break it into more sections with H2/H3 headings.', 'wp-seopress' ), $word_count, $subheadings ) . '</p>';
 
 			$issue['issue_name']     = 'heading_hierarchy_too_few';
 			$issue['issue_desc']     = array( $subheadings );
@@ -1518,7 +1518,7 @@ class GetContent {
 		}
 
 		if ( 'good' === $analyzes['heading_hierarchy']['impact'] ) {
-			$desc .= '<p><span class="dashicons dashicons-yes"></span>' . __( 'Your heading structure looks coherent. Good job!', 'wp-seopress' ) . '</p>';
+			$desc .= '<p><span class="dashicons dashicons-yes sp-dashicons-ok"></span>' . __( 'Your heading structure looks coherent. Good job!', 'wp-seopress' ) . '</p>';
 		}
 
 		$analyzes['heading_hierarchy']['desc'] = $desc;
@@ -1553,12 +1553,12 @@ class GetContent {
 
 		if ( $word_count >= $long_content && 0 === $media ) {
 			$analyzes['content_media']['impact'] = 'medium';
-			$desc                               .= '<p><span class="dashicons dashicons-no-alt"></span>' . /* translators: %d word count */ sprintf( esc_html__( 'Your content is long (%d words) but does not contain any image or video. Add relevant media to enrich it.', 'wp-seopress' ), $word_count ) . '</p>';
+			$desc                               .= '<p><span class="dashicons dashicons-no-alt sp-dashicons-not"></span>' . /* translators: %d word count */ sprintf( esc_html__( 'Your content is long (%d words) but does not contain any image or video. Add relevant media to enrich it.', 'wp-seopress' ), $word_count ) . '</p>';
 
 			$issue['issue_name'] = 'content_media_missing';
 			$issue['issue_desc'] = array( $word_count );
 		} else {
-			$desc .= '<p><span class="dashicons dashicons-yes"></span>' . /* translators: %1$d number of images, %2$d number of videos */ sprintf( esc_html__( 'We found %1$d image(s) and %2$d video(s) in your content.', 'wp-seopress' ), $images, $videos ) . '</p>';
+			$desc .= '<p><span class="dashicons dashicons-yes sp-dashicons-ok"></span>' . /* translators: %1$d number of images, %2$d number of videos */ sprintf( esc_html__( 'We found %1$d image(s) and %2$d video(s) in your content.', 'wp-seopress' ), $images, $videos ) . '</p>';
 		}
 
 		$analyzes['content_media']['desc'] = $desc;
@@ -1604,12 +1604,12 @@ class GetContent {
 
 		if ( $word_count >= $long_content && $ratio > $words_per_section ) {
 			$analyzes['content_structure']['impact'] = 'low';
-			$desc                                   .= '<p><span class="dashicons dashicons-no-alt"></span>' . /* translators: %1$d average words per section, %2$d recommended maximum words per section */ sprintf( esc_html__( 'Your sections average %1$d words. Add more subheadings to keep sections under ~%2$d words.', 'wp-seopress' ), $ratio, $words_per_section ) . '</p>';
+			$desc                                   .= '<p><span class="dashicons dashicons-no-alt sp-dashicons-not"></span>' . /* translators: %1$d average words per section, %2$d recommended maximum words per section */ sprintf( esc_html__( 'Your sections average %1$d words. Add more subheadings to keep sections under ~%2$d words.', 'wp-seopress' ), $ratio, $words_per_section ) . '</p>';
 
 			$issue['issue_name'] = 'content_wall_of_text';
 			$issue['issue_desc'] = array( $ratio );
 		} else {
-			$desc .= '<p><span class="dashicons dashicons-yes"></span>' . __( 'Your content is well structured into sections. Good job!', 'wp-seopress' ) . '</p>';
+			$desc .= '<p><span class="dashicons dashicons-yes sp-dashicons-ok"></span>' . __( 'Your content is well structured into sections. Good job!', 'wp-seopress' ) . '</p>';
 		}
 
 		$analyzes['content_structure']['desc'] = $desc;

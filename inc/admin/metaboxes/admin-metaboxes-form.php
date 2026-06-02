@@ -790,37 +790,35 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 						<?php } ?>
 						<p>
 							<?php
-							if ( 'yes' === $seopress_redirections_enabled ) {
-								$status_code = array( '410', '451' );
-								if ( '' !== $seopress_redirections_value || in_array( $seopress_redirections_type, $status_code, true ) ) {
-									if ( 'post-new.php' === $pagenow || 'post.php' === $pagenow ) {
-										if ( 'seopress_404' === $typenow ) {
-											$parse_url = wp_parse_url( get_home_url() );
+							$status_code = array( '410', '451' );
+							if ( '' !== $seopress_redirections_value || in_array( $seopress_redirections_type, $status_code, true ) ) {
+								if ( 'post-new.php' === $pagenow || 'post.php' === $pagenow ) {
+									if ( 'seopress_404' === $typenow ) {
+										$parse_url = wp_parse_url( get_home_url() );
 
-											$home_url = get_home_url();
-											if ( ! empty( $parse_url['scheme'] ) && ! empty( $parse_url['host'] ) ) {
-												$home_url = $parse_url['scheme'] . '://' . $parse_url['host'];
-											}
-
-											$href = $home_url . '/' . get_the_title();
-										} else {
-											$href = get_the_permalink();
+										$home_url = get_home_url();
+										if ( ! empty( $parse_url['scheme'] ) && ! empty( $parse_url['host'] ) ) {
+											$home_url = $parse_url['scheme'] . '://' . $parse_url['host'];
 										}
-									} elseif ( 'term.php' === $pagenow ) {
-										$href = get_term_link( $term );
+
+										$href = $home_url . '/' . get_the_title();
 									} else {
 										$href = get_the_permalink();
 									}
-									if ( isset( $seopress_redirections_enabled_regex ) && 'yes' !== $seopress_redirections_enabled_regex ) {
-										?>
+								} elseif ( 'term.php' === $pagenow ) {
+									$href = get_term_link( $term );
+								} else {
+									$href = get_the_permalink();
+								}
+								if ( ! isset( $seopress_redirections_enabled_regex ) || 'yes' !== $seopress_redirections_enabled_regex ) {
+									?>
 							<a href="<?php echo esc_url( $href ); ?>"
 								id="seopress_redirections_value_default"
 								class="<?php echo esc_attr( seopress_btn_secondary_classes() ); ?>"
 								target="_blank">
 										<?php esc_html_e( 'Test your URL', 'wp-seopress' ); ?>
 							</a>
-										<?php
-									}
+									<?php
 								}
 							}
 

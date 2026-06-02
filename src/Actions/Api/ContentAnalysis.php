@@ -69,6 +69,29 @@ class ContentAnalysis implements ExecuteHooks {
 				},
 			)
 		);
+
+		// Analyze the rendered HTML captured by the browser. Same handler as the
+		// GET route, but the page source travels in the POST body so it survives
+		// hosts whose WAF challenges a server-side loop-back. Distinct path from
+		// the POST above (which saves the score).
+		register_rest_route(
+			'seopress/v1',
+			'/posts/(?P<id>\d+)/content-analysis/analyze',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get' ),
+				'args'                => array(
+					'id' => array(
+						'validate_callback' => function ( $param, $request, $key ) { // phpcs:ignore
+							return is_numeric( $param );
+						},
+					),
+				),
+				'permission_callback' => function ( $request ) {
+					return current_user_can( 'edit_post', (int) $request['id'] );
+				},
+			)
+		);
 	}
 
 	/**
@@ -86,27 +109,45 @@ class ContentAnalysis implements ExecuteHooks {
 
 		$link_preview = seopress_get_service( 'RequestPreview' )->getLinkRequest( $id );
 
-		$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id );
+		// Prefer the rendered HTML captured by the browser: it sees exactly what
+		// a crawler sees and passes any host-level WAF/CDN that would challenge a
+		// server-side loop-back. The DOM is only parsed for read-only extraction
+		// (never output or executed) and the caller already holds edit_post.
+		$html = $request->get_param( 'html' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- parsed read-only by DOMDocument, never echoed.
 
-		if ( ! $dom_result['success'] ) {
-			$default_response = array(
-				'title'     => '...',
-				'meta_desc' => '...',
-			);
+		if ( ! empty( $html ) ) {
+			$str = (string) $html;
+		} else {
+			// Fallback: server-side loop-back when the client cannot supply the
+			// HTML (JS disabled, fetch failed...).
+			$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id );
 
-			switch ( $dom_result['code'] ) {
-				case 404:
-					$default_response['title'] = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
-					break;
-				case 401:
-					$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
-					break;
+			if ( ! $dom_result['success'] ) {
+				$default_response = array(
+					'title'     => '...',
+					'meta_desc' => '...',
+				);
+
+				switch ( $dom_result['code'] ) {
+					case 404:
+						$default_response['title'] = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
+						break;
+					case 401:
+						$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
+						break;
+					case 'blocked':
+						$default_response['title'] = __( 'Content analysis was blocked (HTTP 403/503). A CDN, firewall or security plugin is preventing your server from loading the preview.', 'wp-seopress' );
+						break;
+					case 'unreachable':
+						$default_response['title'] = __( 'Your site could not be reached for content analysis. Please check your server, DNS or firewall configuration.', 'wp-seopress' );
+						break;
+				}
+
+				return new \WP_REST_Response( $default_response );
 			}
 
-			return new \WP_REST_Response( $default_response );
+			$str = $dom_result['body'];
 		}
-
-		$str = $dom_result['body'];
 
 		$data = seopress_get_service( 'DomFilterContent' )->getData( $str, $id );
 		$data = seopress_get_service( 'DomAnalysis' )->getDataAnalyze(
@@ -158,9 +199,32 @@ class ContentAnalysis implements ExecuteHooks {
 		// Save analysis data first so getScore() reads fresh values from the database.
 		seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
 
-		$post          = get_post( $id );
-		$score         = seopress_get_service( 'DomAnalysis' )->getScore( $post );
+		$post = get_post( $id );
+
+		// Run the analysis once and reuse it for both the score and the
+		// AI content-quality cards below, instead of running getScore()
+		// (which internally runs getAnalyzes() and then throws everything
+		// but the impacts away).
+		$analyzes      = seopress_get_service( 'GetContentAnalysis' )->getAnalyzes( $post );
+		$score         = array_unique( array_values( wp_list_pluck( $analyzes, 'impact' ) ) );
 		$data['score'] = $score;
+
+		// Surface the AI content-quality checks (content depth, heading
+		// structure, media in content, content readability) so the editor
+		// Content Analysis tab renders the exact same impact and
+		// description as the Site Audit. These are computed server-side
+		// but were never part of the REST payload, so the metabox could
+		// not display them.
+		foreach ( array( 'content_depth', 'heading_hierarchy', 'content_media', 'content_structure' ) as $check ) {
+			if ( ! isset( $analyzes[ $check ] ) ) {
+				continue;
+			}
+			$data[ $check ] = array(
+				'impact' => isset( $analyzes[ $check ]['impact'] ) ? $analyzes[ $check ]['impact'] : 'good',
+				'desc'   => isset( $analyzes[ $check ]['desc'] ) ? $analyzes[ $check ]['desc'] : '',
+			);
+		}
+
 		seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
 
 		/**

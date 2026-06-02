@@ -20,10 +20,13 @@ class Image {
 	 * @return array
 	 */
 	public function getDataByXPath( $xpath, $options ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$data = array();
-
 		$items = $xpath->query( '//img[not(ancestor::noscript)]' );
 
+		// First pass — attribute-only filtering (no network). Build the list of
+		// kept images and, separately, the remote URLs whose byte size still has
+		// to be verified to drop tracking pixels / spacers.
+		$data       = array();
+		$to_measure = array();
 		foreach ( $items as $key => $img ) {
 			// Get the actual image source, handling lazy loading and caching.
 			$img_src = $this->get_image_source( $img );
@@ -31,10 +34,8 @@ class Image {
 				continue;
 			}
 
-			$result = preg_match_all( '#\b(avatar)\b#iu', $img->getAttribute( 'class' ), $matches );
-
 			// Exclude avatars from analysis.
-			if ( $result ) {
+			if ( preg_match( '#\b(avatar)\b#iu', $img->getAttribute( 'class' ) ) ) {
 				continue;
 			}
 
@@ -45,23 +46,119 @@ class Image {
 				}
 			}
 
-			// Exclude images inferior to 100 bytes.
-			if ( ! function_exists( 'download_url' ) ) {
-				require_once ABSPATH . 'wp-admin/includes/file.php';
-			}
-			$downloaded_img = download_url( $img_src );
-			if ( false === is_wp_error( $downloaded_img ) ) {
-				if ( filesize( $downloaded_img ) < 100 ) {
+			// data: URIs carry their bytes inline — measure for free, no request.
+			if ( 0 === strpos( $img_src, 'data:' ) ) {
+				if ( strlen( $img_src ) < 100 ) {
 					continue;
 				}
-				wp_delete_file( $downloaded_img );
+			} elseif ( wp_http_validate_url( $img_src ) ) {
+				// The source HTML is supplied by the client, so only probe URLs
+				// that pass WordPress' SSRF guard (no private/reserved hosts, no
+				// unexpected ports). Anything else is kept without a size check
+				// rather than requested blindly.
+				$to_measure[ $key ] = $img_src;
 			}
 
-			$data[ $key ]['src'] = $img_src;
-			$data[ $key ]['alt'] = $img->getAttribute( 'alt' );
+			$data[ $key ] = array(
+				'src' => $img_src,
+				'alt' => $img->getAttribute( 'alt' ),
+			);
+		}
+
+		// Second pass — drop sub-100-byte tracking pixels / spacers.
+		//
+		// Previously every image was downloaded in full (download_url) just to
+		// read its size. On an image-heavy page that meant dozens of sequential
+		// HTTP GETs — several seconds — and, behind a host WAF, the site fetching
+		// its own images would hang or fail. Instead, measure all candidates at
+		// once with parallel HEAD requests and read Content-Length. Static images
+		// are served outside the PHP/WAF path, so this is fast and reliable, and
+		// anything we cannot measure is kept (matching the old "download failed
+		// -> keep" behaviour), so analysis results are preserved.
+		//
+		// Bound the number of outbound probes regardless of how many <img> tags
+		// the (client-supplied) source carries, so the analysis can never be
+		// turned into a request amplifier.
+		$max_checks = (int) apply_filters( 'seopress_content_analysis_image_size_checks', 100 );
+		if ( $max_checks > 0 && count( $to_measure ) > $max_checks ) {
+			$to_measure = array_slice( $to_measure, 0, $max_checks, true );
+		}
+
+		foreach ( $this->find_tiny_images( $to_measure ) as $key ) {
+			unset( $data[ $key ] );
 		}
 
 		return array_values( $data );
+	}
+
+	/**
+	 * Return the keys of the images confirmed to be smaller than 100 bytes.
+	 *
+	 * Uses one batch of parallel HEAD requests (Content-Length) rather than a
+	 * full download per image. Unknown / unreachable sizes are not reported, so
+	 * the caller keeps those images.
+	 *
+	 * @param array $urls Map of key => image URL.
+	 *
+	 * @return array List of keys whose image is under 100 bytes.
+	 */
+	private function find_tiny_images( $urls ) {
+		$tiny = array();
+		if ( empty( $urls ) ) {
+			return $tiny;
+		}
+
+		$requests_class = class_exists( '\WpOrg\Requests\Requests' )
+			? '\WpOrg\Requests\Requests'
+			: ( class_exists( '\Requests' ) ? '\Requests' : '' );
+
+		// No parallel transport available: skip the byte check rather than fall
+		// back to slow sequential downloads. 1px / noscript / data-URI tracking
+		// pixels are already excluded above.
+		if ( '' === $requests_class || ! method_exists( $requests_class, 'request_multiple' ) ) {
+			return $tiny;
+		}
+
+		$requests = array();
+		foreach ( $urls as $key => $url ) {
+			$requests[ $key ] = array(
+				'url'  => $url,
+				'type' => 'HEAD',
+			);
+		}
+
+		$request_options = array(
+			'timeout'         => 3,
+			'connect_timeout' => 3,
+			'verify'          => false,
+		);
+
+		try {
+			$responses = call_user_func( array( $requests_class, 'request_multiple' ), $requests, $request_options );
+		} catch ( \Throwable $e ) {
+			return $tiny;
+		}
+
+		if ( ! is_array( $responses ) ) {
+			return $tiny;
+		}
+
+		foreach ( $responses as $key => $response ) {
+			// A failed request (Exception object or unsuccessful response) means
+			// "unknown size" -> keep the image.
+			if ( ! is_object( $response ) || empty( $response->success ) ) {
+				continue;
+			}
+			if ( ! isset( $response->headers['content-length'] ) ) {
+				continue;
+			}
+			$length = (int) $response->headers['content-length'];
+			if ( $length > 0 && $length < 100 ) {
+				$tiny[] = $key;
+			}
+		}
+
+		return $tiny;
 	}
 
 	/**

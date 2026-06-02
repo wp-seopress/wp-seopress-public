@@ -37,6 +37,13 @@ class DomFilterContent {
 
 		$xpath = new \DOMXPath( $dom );
 
+		// Strip logged-in-only chrome (admin bar...) so the analysis reflects
+		// what a crawler sees. The fetched page may be authenticated (draft
+		// preview, or a WAF that only lets a logged-in browser through), in
+		// which case the admin bar and its many links/images would otherwise
+		// be counted as page content.
+		$this->removeChrome( $dom, $xpath );
+
 		$data = array(
 			'title'               => array(
 				'class' => '\SEOPress\Services\ContentAnalysis\GetContent\Title',
@@ -179,5 +186,57 @@ class DomFilterContent {
 		);
 
 		return $data;
+	}
+
+	/**
+	 * Remove logged-in-only chrome from the parsed document before analysis.
+	 *
+	 * The source HTML can be authenticated (a draft preview, or a host-level
+	 * WAF that only lets the logged-in browser through), so it may carry the
+	 * admin bar and similar overlays. Their markup — dozens of links and a few
+	 * images — is not page content and would skew the link/image counts, so it
+	 * is dropped here, in the single place every source flows through.
+	 *
+	 * @param \DOMDocument $dom   The loaded document.
+	 * @param \DOMXPath    $xpath An XPath bound to $dom.
+	 *
+	 * @return void
+	 */
+	private function removeChrome( $dom, $xpath ) { // phpcs:ignore -- $dom kept for signature symmetry/extensibility.
+		// Target by id only. WordPress also puts an "admin-bar" *class* on
+		// <body>, so a class-based match would wipe the whole page.
+		$selectors = array(
+			'//*[@id="wpadminbar"]',
+			'//*[@id="query-monitor-main"]',
+			'//*[@id="wp-toolbar"]',
+		);
+
+		/**
+		 * Filter the XPath selectors of nodes stripped before content analysis.
+		 *
+		 * @since 9.9.0
+		 *
+		 * @param array $selectors XPath queries of nodes to remove.
+		 */
+		$selectors = apply_filters( 'seopress_content_analysis_strip_selectors', $selectors );
+
+		foreach ( $selectors as $query ) {
+			$nodes = $xpath->query( $query );
+			if ( false === $nodes ) {
+				continue;
+			}
+
+			// Snapshot to a plain array: removing nodes mutates the live list.
+			$to_remove = array();
+			foreach ( $nodes as $node ) {
+				$to_remove[] = $node;
+			}
+
+			foreach ( $to_remove as $node ) {
+				if ( $node->parentNode ) {
+					$node->parentNode->removeChild( $node );
+				}
+			}
+		}
 	}
 }

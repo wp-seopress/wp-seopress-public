@@ -480,6 +480,16 @@ class ModuleMetabox implements ExecuteHooks {
 				'TAGS'                      => array_values( $tags ),
 				'REST_URL'                  => rest_url(),
 				'NONCE'                     => wp_create_nonce( 'wp_rest' ),
+				// admin-ajax transport for the metabox's own REST calls. Some
+				// hosts run a WAF that challenges the /wp-json path by rule
+				// (o2switch Tiger Protect, Sucuri...) while leaving
+				// admin-ajax.php alone, because blocking it would break core
+				// WordPress admin. The classic metabox fetched over admin-ajax
+				// before 9.8 and worked everywhere; the React fetcher routes
+				// SEOPress REST calls through MetaboxRestProxy to keep that
+				// reliability without any per-host configuration.
+				'ADMIN_AJAX_URL'            => admin_url( 'admin-ajax.php' ),
+				'AJAX_PROXY_NONCE'          => wp_create_nonce( 'seopress_metabox_proxy' ),
 				// Nonce verified by saveClassicEditorMetaFallback() — lets the
 				// Classic Editor post form rescue title/description writes when
 				// the REST API is blocked (security plugin, hardening filter,
@@ -488,6 +498,12 @@ class ModuleMetabox implements ExecuteHooks {
 				'POST_ID'                   => $post_id,
 				'POST_TYPE'                 => $post_type,
 				'POST_URL'                  => $post_id ? get_permalink( $post_id ) : null,
+				// Source the metabox fetches client-side to analyze. A published
+				// post is read logged-out from its permalink (POST_URL) for the
+				// true crawler view; a draft is read from the preview URL with
+				// the editor's session. POST_STATUS lets the client pick.
+				'POST_PREVIEW_URL'          => $post_id ? seopress_get_service( 'RequestPreview' )->getLinkRequest( $post_id ) : null,
+				'POST_STATUS'               => $post_id ? get_post_status( $post_id ) : null,
 				'IS_GUTENBERG'              => apply_filters( 'seopress_module_metabox_is_gutenberg', $is_gutenberg ),
 				// Distinguishes the admin screens (where the Classic Editor
 				// "Open SEO editor" metabox button takes over the beacon's

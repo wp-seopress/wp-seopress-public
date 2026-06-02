@@ -76,6 +76,117 @@ class RedirectionSettings implements ExecuteHooks {
 				},
 			)
 		);
+
+		register_rest_route(
+			'seopress/v1',
+			'/posts/(?P<id>\d+)/redirection-test',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'processTest' ),
+				'args'                => array(
+					'id' => array(
+						'validate_callback' => function ( $param, $request, $key ) { // phpcs:ignore
+							return is_numeric( $param );
+						},
+					),
+				),
+				'permission_callback' => function ( $request ) {
+					return current_user_can( 'edit_post', (int) $request['id'] );
+				},
+			)
+		);
+	}
+
+	/**
+	 * The Redirection Settings process test.
+	 *
+	 * Checks the saved destination URL of the redirection with a real HTTP
+	 * request and returns its status code (or the error when the host can't be
+	 * reached) so the user can tell a valid target from a dead one. Also
+	 * returns the source URL (the page that performs the redirect) so the UI
+	 * can offer an "open in a new tab" link for a real browser test.
+	 *
+	 * @param \WP_REST_Request $request The request.
+	 *
+	 * @since 9.9.0
+	 *
+	 * @return \WP_REST_Response
+	 */
+	public function processTest( \WP_REST_Request $request ) {
+		$id   = (int) $request->get_param( 'id' );
+		$post = get_post( $id );
+
+		if ( null === $post ) {
+			return new \WP_REST_Response(
+				array(
+					'code'    => 'error',
+					'message' => __( 'Redirection not found.', 'wp-seopress' ),
+				),
+				404
+			);
+		}
+
+		// The source URL is always rebuilt from the post itself (the site's own
+		// URL), never from the request body, to avoid any SSRF surface.
+		if ( 'seopress_404' === $post->post_type ) {
+			$parse_url = wp_parse_url( get_home_url() );
+			$home_url  = get_home_url();
+			if ( ! empty( $parse_url['scheme'] ) && ! empty( $parse_url['host'] ) ) {
+				$home_url = $parse_url['scheme'] . '://' . $parse_url['host'];
+			}
+			$source_url = $home_url . '/' . ltrim( $post->post_title, '/' );
+		} else {
+			$source_url = get_permalink( $id );
+		}
+
+		$response = array(
+			'code'       => 'success',
+			'source_url' => $source_url,
+		);
+
+		$type        = (string) get_post_meta( $id, '_seopress_redirections_type', true );
+		$destination = (string) get_post_meta( $id, '_seopress_redirections_value', true );
+
+		// 410 / 451 are terminal: there is no destination to reach.
+		if ( in_array( $type, array( '410', '451' ), true ) ) {
+			$response['terminal'] = $type;
+			return new \WP_REST_Response( $response );
+		}
+
+		if ( '' === $destination ) {
+			$response['error'] = __( 'No destination URL to test. Save your redirection first.', 'wp-seopress' );
+			return new \WP_REST_Response( $response );
+		}
+
+		// Resolve a relative destination against the site home URL.
+		$destination_url = $destination;
+		if ( ! preg_match( '#^https?://#i', $destination_url ) ) {
+			$destination_url = home_url( '/' . ltrim( $destination_url, '/' ) );
+		}
+		$response['destination_url'] = $destination_url;
+
+		// The destination is user-provided, so use the safe HTTP API (it blocks
+		// requests to private / loopback hosts). Redirects are followed so the
+		// reported status reflects where the target actually ends up.
+		$http = wp_safe_remote_get(
+			$destination_url,
+			array(
+				'timeout'   => 10,
+				'sslverify' => false,
+				'headers'   => array(
+					'Cache-Control' => 'no-cache',
+				),
+			)
+		);
+
+		if ( is_wp_error( $http ) ) {
+			$response['error'] = $http->get_error_message();
+			return new \WP_REST_Response( $response );
+		}
+
+		$response['status_code'] = (int) wp_remote_retrieve_response_code( $http );
+
+		return new \WP_REST_Response( $response );
 	}
 
 	/**
