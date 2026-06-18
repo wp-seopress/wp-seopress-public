@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,8 +9,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog\Formatter;
+namespace SEOPress\Vendor\Monolog\Formatter;
 
 /**
  * Formats data into an associative array of scalar values.
@@ -30,10 +30,8 @@ class ScalarFormatter extends NormalizerFormatter
         foreach ($record as $key => $value) {
             $result[$key] = $this->normalizeValue($value);
         }
-
         return $result;
     }
-
     /**
      * @param  mixed                      $value
      * @return scalar|null
@@ -41,11 +39,9 @@ class ScalarFormatter extends NormalizerFormatter
     protected function normalizeValue($value)
     {
         $normalized = $this->normalize($value);
-
         if (is_array($normalized)) {
-            return $this->toJson($normalized, true);
+            return $this->toJson($normalized, \true);
         }
-
         return $normalized;
     }
 }

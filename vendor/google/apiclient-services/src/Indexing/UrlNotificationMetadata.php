@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2014 Google Inc.
  *
@@ -14,63 +15,60 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+namespace SEOPress\Vendor\Google\Service\Indexing;
 
-namespace Google\Service\Indexing;
-
-class UrlNotificationMetadata extends \Google\Model
+class UrlNotificationMetadata extends \SEOPress\Vendor\Google\Model
 {
-  protected $latestRemoveType = UrlNotification::class;
-  protected $latestRemoveDataType = '';
-  protected $latestUpdateType = UrlNotification::class;
-  protected $latestUpdateDataType = '';
-  /**
-   * @var string
-   */
-  public $url;
-
-  /**
-   * @param UrlNotification
-   */
-  public function setLatestRemove(UrlNotification $latestRemove)
-  {
-    $this->latestRemove = $latestRemove;
-  }
-  /**
-   * @return UrlNotification
-   */
-  public function getLatestRemove()
-  {
-    return $this->latestRemove;
-  }
-  /**
-   * @param UrlNotification
-   */
-  public function setLatestUpdate(UrlNotification $latestUpdate)
-  {
-    $this->latestUpdate = $latestUpdate;
-  }
-  /**
-   * @return UrlNotification
-   */
-  public function getLatestUpdate()
-  {
-    return $this->latestUpdate;
-  }
-  /**
-   * @param string
-   */
-  public function setUrl($url)
-  {
-    $this->url = $url;
-  }
-  /**
-   * @return string
-   */
-  public function getUrl()
-  {
-    return $this->url;
-  }
+    protected $latestRemoveType = UrlNotification::class;
+    protected $latestRemoveDataType = '';
+    protected $latestUpdateType = UrlNotification::class;
+    protected $latestUpdateDataType = '';
+    /**
+     * @var string
+     */
+    public $url;
+    /**
+     * @param UrlNotification
+     */
+    public function setLatestRemove(UrlNotification $latestRemove)
+    {
+        $this->latestRemove = $latestRemove;
+    }
+    /**
+     * @return UrlNotification
+     */
+    public function getLatestRemove()
+    {
+        return $this->latestRemove;
+    }
+    /**
+     * @param UrlNotification
+     */
+    public function setLatestUpdate(UrlNotification $latestUpdate)
+    {
+        $this->latestUpdate = $latestUpdate;
+    }
+    /**
+     * @return UrlNotification
+     */
+    public function getLatestUpdate()
+    {
+        return $this->latestUpdate;
+    }
+    /**
+     * @param string
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 }
-
 // Adding a class alias for backwards compatibility with the previous class name.
-class_alias(UrlNotificationMetadata::class, 'Google_Service_Indexing_UrlNotificationMetadata');
+class_alias(UrlNotificationMetadata::class, 'SEOPress\Vendor\Google_Service_Indexing_UrlNotificationMetadata');

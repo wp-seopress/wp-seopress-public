@@ -1,9 +1,8 @@
 <?php
 
-namespace Psr\Log\Test;
+namespace SEOPress\Vendor\Psr\Log\Test;
 
-use Psr\Log\AbstractLogger;
-
+use SEOPress\Vendor\Psr\Log\AbstractLogger;
 /**
  * Used for testing purposes.
  *
@@ -60,29 +59,20 @@ class TestLogger extends AbstractLogger
      * @var array
      */
     public $records = [];
-
     public $recordsByLevel = [];
-
     /**
      * @inheritdoc
      */
     public function log($level, $message, array $context = [])
     {
-        $record = [
-            'level' => $level,
-            'message' => $message,
-            'context' => $context,
-        ];
-
+        $record = ['level' => $level, 'message' => $message, 'context' => $context];
         $this->recordsByLevel[$record['level']][] = $record;
         $this->records[] = $record;
     }
-
     public function hasRecords($level)
     {
         return isset($this->recordsByLevel[$level]);
     }
-
     public function hasRecord($record, $level)
     {
         if (is_string($record)) {
@@ -90,42 +80,38 @@ class TestLogger extends AbstractLogger
         }
         return $this->hasRecordThatPasses(function ($rec) use ($record) {
             if ($rec['message'] !== $record['message']) {
-                return false;
+                return \false;
             }
             if (isset($record['context']) && $rec['context'] !== $record['context']) {
-                return false;
+                return \false;
             }
-            return true;
+            return \true;
         }, $level);
     }
-
     public function hasRecordThatContains($message, $level)
     {
         return $this->hasRecordThatPasses(function ($rec) use ($message) {
-            return strpos($rec['message'], $message) !== false;
+            return strpos($rec['message'], $message) !== \false;
         }, $level);
     }
-
     public function hasRecordThatMatches($regex, $level)
     {
         return $this->hasRecordThatPasses(function ($rec) use ($regex) {
             return preg_match($regex, $rec['message']) > 0;
         }, $level);
     }
-
     public function hasRecordThatPasses(callable $predicate, $level)
     {
         if (!isset($this->recordsByLevel[$level])) {
-            return false;
+            return \false;
         }
         foreach ($this->recordsByLevel[$level] as $i => $rec) {
             if (call_user_func($predicate, $rec, $i)) {
-                return true;
+                return \true;
             }
         }
-        return false;
+        return \false;
     }
-
     public function __call($method, $args)
     {
         if (preg_match('/(.*)(Debug|Info|Notice|Warning|Error|Critical|Alert|Emergency)(.*)/', $method, $matches) > 0) {
@@ -138,7 +124,6 @@ class TestLogger extends AbstractLogger
         }
         throw new \BadMethodCallException('Call to undefined method ' . get_class($this) . '::' . $method . '()');
     }
-
     public function reset()
     {
         $this->records = [];

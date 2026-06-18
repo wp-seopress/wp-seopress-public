@@ -94,7 +94,7 @@ add_filter(
  * @return array Arguments.
  */
 function seopress_pll_exclude_hidden_lang( $args ) {
-	if ( function_exists( 'get_languages_list' ) && defined( 'POLYLANG_VERSION' ) ) {
+	if ( defined( 'POLYLANG_VERSION' ) && function_exists( 'PLL' ) && isset( PLL()->model ) ) {
 		$languages = PLL()->model->get_languages_list();
 		if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
 			$args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );

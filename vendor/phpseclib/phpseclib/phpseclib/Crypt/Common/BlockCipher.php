@@ -11,8 +11,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
-
-namespace phpseclib3\Crypt\Common;
+namespace SEOPress\Vendor\phpseclib3\Crypt\Common;
 
 /**
  * Base Class for all block cipher classes

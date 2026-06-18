@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wpseopress/preferred-source",
+  "title": "Google Preferred Sources",
+  "description": "Display a button inviting visitors to add your site as a preferred source on Google.",
+  "icon": "star-filled",
+  "category": "wpseopress",
+  "textdomain": "wp-seopress",
+  "keywords": [
+    "google",
+    "preferred source",
+    "top stories",
+    "follow",
+    "button"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "left",
+      "center",
+      "right"
+    ],
+    "color": {
+      "background": true,
+      "gradients": true,
+      "text": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

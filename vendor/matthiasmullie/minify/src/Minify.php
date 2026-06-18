@@ -9,13 +9,11 @@
  * @copyright Copyright (c) 2012, Matthias Mullie. All rights reserved
  * @license MIT License
  */
+namespace SEOPress\Vendor\MatthiasMullie\Minify;
 
-namespace MatthiasMullie\Minify;
-
-use MatthiasMullie\Minify\Exceptions\IOException;
-use MatthiasMullie\Minify\Exceptions\PatternMatchException;
-use Psr\Cache\CacheItemInterface;
-
+use SEOPress\Vendor\MatthiasMullie\Minify\Exceptions\IOException;
+use SEOPress\Vendor\MatthiasMullie\Minify\Exceptions\PatternMatchException;
+use SEOPress\Vendor\Psr\Cache\CacheItemInterface;
 /**
  * Abstract minifier class.
  *
@@ -33,14 +31,12 @@ abstract class Minify
      * @var string[]
      */
     protected $data = array();
-
     /**
      * Array of patterns to match.
      *
      * @var string[]
      */
     protected $patterns = array();
-
     /**
      * This array will hold content of strings and regular expressions that have
      * been extracted from the JS source code, so we can reliably match "code",
@@ -51,18 +47,16 @@ abstract class Minify
      * @var string[]
      */
     public $extracted = array();
-
     /**
      * Init the minify class - optionally, code may be passed along already.
      */
-    public function __construct(/* $data = null, ... */)
+    public function __construct()
     {
         // it's possible to add the source through the constructor as well ;)
         if (func_num_args()) {
             call_user_func_array(array($this, 'add'), func_get_args());
         }
     }
-
     /**
      * Add a file or straight-up code to be minified.
      *
@@ -70,39 +64,32 @@ abstract class Minify
      *
      * @return static
      */
-    public function add($data /* $data = null, ... */)
+    public function add($data)
     {
         // bogus "usage" of parameter $data: scrutinizer warns this variable is
         // not used (we're using func_get_args instead to support overloading),
         // but it still needs to be defined because it makes no sense to have
         // this function without argument :)
         $args = array($data) + func_get_args();
-
         // this method can be overloaded
         foreach ($args as $data) {
             if (is_array($data)) {
                 call_user_func_array(array($this, 'add'), $data);
                 continue;
             }
-
             // redefine var
             $data = (string) $data;
-
             // load data
             $value = $this->load($data);
-            $key = ($data != $value) ? $data : count($this->data);
-
+            $key = $data != $value ? $data : count($this->data);
             // replace CR linefeeds etc.
             // @see https://github.com/matthiasmullie/minify/pull/139
             $value = str_replace(array("\r\n", "\r"), "\n", $value);
-
             // store data
             $this->data[$key] = $value;
         }
-
         return $this;
     }
-
     /**
      * Add a file to be minified.
      *
@@ -112,35 +99,29 @@ abstract class Minify
      *
      * @throws IOException
      */
-    public function addFile($data /* $data = null, ... */)
+    public function addFile($data)
     {
         // bogus "usage" of parameter $data: scrutinizer warns this variable is
         // not used (we're using func_get_args instead to support overloading),
         // but it still needs to be defined because it makes no sense to have
         // this function without argument :)
         $args = array($data) + func_get_args();
-
         // this method can be overloaded
         foreach ($args as $path) {
             if (is_array($path)) {
                 call_user_func_array(array($this, 'addFile'), $path);
                 continue;
             }
-
             // redefine var
             $path = (string) $path;
-
             // check if we can read the file
             if (!$this->canImportFile($path)) {
                 throw new IOException('The file "' . $path . '" could not be opened for reading. Check if PHP has enough permissions.');
             }
-
             $this->add($path);
         }
-
         return $this;
     }
-
     /**
      * Minify the data & (optionally) saves it to a file.
      *
@@ -151,15 +132,12 @@ abstract class Minify
     public function minify($path = null)
     {
         $content = $this->execute($path);
-
         // save to path
         if ($path !== null) {
             $this->save($content, $path);
         }
-
         return $content;
     }
-
     /**
      * Minify & gzip the data & (optionally) saves it to a file.
      *
@@ -171,16 +149,13 @@ abstract class Minify
     public function gzip($path = null, $level = 9)
     {
         $content = $this->execute($path);
-        $content = gzencode($content, $level, FORCE_GZIP);
-
+        $content = gzencode($content, $level, \FORCE_GZIP);
         // save to path
         if ($path !== null) {
             $this->save($content, $path);
         }
-
         return $content;
     }
-
     /**
      * Minify the data & write it to a CacheItemInterface object.
      *
@@ -192,10 +167,8 @@ abstract class Minify
     {
         $content = $this->execute();
         $item->set($content);
-
         return $item;
     }
-
     /**
      * Minify the data.
      *
@@ -204,7 +177,6 @@ abstract class Minify
      * @return string The minified data
      */
     abstract public function execute($path = null);
-
     /**
      * Load data.
      *
@@ -217,16 +189,13 @@ abstract class Minify
         // check if the data is a file
         if ($this->canImportFile($data)) {
             $data = file_get_contents($data);
-
             // strip BOM, if any
-            if (substr($data, 0, 3) == "\xef\xbb\xbf") {
+            if (substr($data, 0, 3) == "﻿") {
                 $data = substr($data, 3);
             }
         }
-
         return $data;
     }
-
     /**
      * Save to file.
      *
@@ -238,12 +207,9 @@ abstract class Minify
     protected function save($content, $path)
     {
         $handler = $this->openFileForWriting($path);
-
         $this->writeToFile($handler, $content);
-
         @fclose($handler);
     }
-
     /**
      * Register a pattern to execute against the source content.
      *
@@ -257,10 +223,8 @@ abstract class Minify
     {
         // study the pattern, we'll execute it more than once
         $pattern .= 'S';
-
         $this->patterns[] = array($pattern, $replacement);
     }
-
     /**
      * Both JS and CSS use the same form of multi-line comment, so putting the common code here.
      */
@@ -289,17 +253,12 @@ abstract class Minify
                 $minifier->extracted[$placeholder] = $match[0];
             } else {
                 // Discard the comment but keep any single line feed
-                $placeholder = strncmp($match[0], "\n", 1) === 0 || substr($match[0], -1) === "\n"
-                    ? "\n"
-                    : '';
+                $placeholder = strncmp($match[0], "\n", 1) === 0 || substr($match[0], -1) === "\n" ? "\n" : '';
             }
-
             return $placeholder;
         };
-
         $this->registerPattern('/\n?\/\*(.*?)\*\/\n?/s', $callback);
     }
-
     /**
      * We can't "just" run some regular expressions against JavaScript: it's a
      * complex language. E.g. having an occurrence of // xyz would be a comment,
@@ -321,38 +280,31 @@ abstract class Minify
         $processedOffset = 0;
         $positions = array_fill(0, count($this->patterns), -1);
         $matches = array();
-
         while ($processedOffset < $contentLength) {
             // find first match for all patterns
             foreach ($this->patterns as $i => $pattern) {
                 list($pattern, $replacement) = $pattern;
-
                 // we can safely ignore patterns for positions we've unset earlier,
                 // because we know these won't show up anymore
-                if (array_key_exists($i, $positions) == false) {
+                if (array_key_exists($i, $positions) == \false) {
                     continue;
                 }
-
                 // no need to re-run matches that are still in the part of the
                 // content that hasn't been processed
                 if ($positions[$i] >= $processedOffset) {
                     continue;
                 }
-
                 $match = null;
-                $matchResult = preg_match($pattern, $content, $match, PREG_OFFSET_CAPTURE, $processedOffset);
+                $matchResult = preg_match($pattern, $content, $match, \PREG_OFFSET_CAPTURE, $processedOffset);
                 if ($matchResult) {
                     $matches[$i] = $match;
-
                     // we'll store the match position as well; that way, we
                     // don't have to redo all preg_matches after changing only
                     // the first (we'll still know where those others are)
                     $positions[$i] = $match[0][1];
                 } else {
-                    if ($matchResult === false) {
-                        throw PatternMatchException::fromLastError(
-                            "Failed to match pattern '$pattern' at $processedOffset"
-                        );
+                    if ($matchResult === \false) {
+                        throw PatternMatchException::fromLastError("Failed to match pattern '{$pattern}' at {$processedOffset}");
                     }
                     // if the pattern couldn't be matched, there's no point in
                     // executing it again in later runs on this same content;
@@ -360,24 +312,20 @@ abstract class Minify
                     unset($matches[$i], $positions[$i]);
                 }
             }
-
             // no more matches to find: everything's been processed, break out
             if (!$matches) {
                 // output the remaining content
                 $output .= substr($content, $processedOffset);
                 break;
             }
-
             // see which of the patterns actually found the first thing (we'll
             // only want to execute that one, since we're unsure if what the
             // other found was not inside what the first found)
             $matchOffset = min($positions);
             $firstPattern = array_search($matchOffset, $positions);
             $match = $matches[$firstPattern];
-
             // execute the pattern that matches earliest in the content string
             list(, $replacement) = $this->patterns[$firstPattern];
-
             // add the part of the input between $processedOffset and the first match;
             // that content wasn't matched by anything
             $output .= substr($content, $processedOffset, $matchOffset - $processedOffset);
@@ -386,10 +334,8 @@ abstract class Minify
             // advance $processedOffset past the match
             $processedOffset = $matchOffset + strlen($match[0][0]);
         }
-
         return $output;
     }
-
     /**
      * If $replacement is a callback, execute it, passing in the match data.
      * If it's a string, just pass it through.
@@ -408,10 +354,8 @@ abstract class Minify
         foreach ($match as &$matchItem) {
             $matchItem = $matchItem[0];
         }
-
         return $replacement($match);
     }
-
     /**
      * Strings are a pattern we need to match, in order to ignore potential
      * code-like content inside them, but we just want all of the string
@@ -441,14 +385,11 @@ abstract class Minify
                  */
                 return $match[0];
             }
-
             $count = count($minifier->extracted);
             $placeholder = $match[1] . $placeholderPrefix . $count . $match[1];
             $minifier->extracted[$placeholder] = $match[1] . $match[2] . $match[1];
-
             return $placeholder;
         };
-
         /*
          * Quantifier {0,65535} is used instead of *? to avoid exceeding
          * backtrack limit with large strings. 65535 is the maximum allowed
@@ -466,10 +407,8 @@ abstract class Minify
          * considered as escape-char (times 2) and to get it in the regex,
          * escaped (times 2)
          */
-
-        $this->registerPattern('/([' . $chars . '])(.{0,65535}?(?<!\\\\)(\\\\\\\\)*+)\\1/s', $callback);
+        $this->registerPattern('/([' . $chars . '])(.{0,65535}?(?<!\\\\)(\\\\\\\\)*+)\1/s', $callback);
     }
-
     /**
      * This method will restore all extracted data (strings, regexes) that were
      * replaced with placeholder text in extract*(). The original content was
@@ -485,14 +424,10 @@ abstract class Minify
             // nothing was extracted, nothing to restore
             return $content;
         }
-
         $content = strtr($content, $this->extracted);
-
         $this->extracted = array();
-
         return $content;
     }
-
     /**
      * Check if the path is a regular file and can be read.
      *
@@ -503,24 +438,15 @@ abstract class Minify
     protected function canImportFile($path)
     {
         $parsed = parse_url($path);
-        if (
-            // file is elsewhere
-            isset($parsed['host'])
-            // file responds to queries (may change, or need to bypass cache)
-            || isset($parsed['query'])
-        ) {
-            return false;
+        if (isset($parsed['host']) || isset($parsed['query'])) {
+            return \false;
         }
-
         try {
-            return strlen($path) < PHP_MAXPATHLEN && @is_file($path) && is_readable($path);
-        }
-        // catch openbasedir exceptions which are not caught by @ on is_file()
-        catch (\Exception $e) {
-            return false;
+            return strlen($path) < \PHP_MAXPATHLEN && @is_file($path) && is_readable($path);
+        } catch (\Exception $e) {
+            return \false;
         }
     }
-
     /**
      * Attempts to open file specified by $path for writing.
      *
@@ -532,13 +458,11 @@ abstract class Minify
      */
     protected function openFileForWriting($path)
     {
-        if ($path === '' || ($handler = @fopen($path, 'w')) === false) {
+        if ($path === '' || ($handler = @fopen($path, 'w')) === \false) {
             throw new IOException('The file "' . $path . '" could not be opened for writing. Check if PHP has enough permissions.');
         }
-
         return $handler;
     }
-
     /**
      * Attempts to write $content to the file specified by $handler. $path is used for printing exceptions.
      *
@@ -550,22 +474,16 @@ abstract class Minify
      */
     protected function writeToFile($handler, $content, $path = '')
     {
-        if (
-            !is_resource($handler)
-            || ($result = @fwrite($handler, $content)) === false
-            || ($result < strlen($content))
-        ) {
+        if (!is_resource($handler) || ($result = @fwrite($handler, $content)) === \false || $result < strlen($content)) {
             throw new IOException('The file "' . $path . '" could not be written to. Check your disk space and file permissions.');
         }
     }
-
     protected static function str_replace_first($search, $replace, $subject)
     {
         $pos = strpos($subject, $search);
-        if ($pos !== false) {
+        if ($pos !== \false) {
             return substr_replace($subject, $replace, $pos, strlen($search));
         }
-
         return $subject;
     }
 }

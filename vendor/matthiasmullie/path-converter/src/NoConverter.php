@@ -1,6 +1,6 @@
 <?php
 
-namespace MatthiasMullie\PathConverter;
+namespace SEOPress\Vendor\MatthiasMullie\PathConverter;
 
 /**
  * Don't convert paths.

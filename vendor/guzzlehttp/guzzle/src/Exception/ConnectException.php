@@ -1,10 +1,9 @@
 <?php
 
-namespace GuzzleHttp\Exception;
+namespace SEOPress\Vendor\GuzzleHttp\Exception;
 
-use Psr\Http\Client\NetworkExceptionInterface;
-use Psr\Http\Message\RequestInterface;
-
+use SEOPress\Vendor\Psr\Http\Client\NetworkExceptionInterface;
+use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * Exception thrown when a connection cannot be established.
  */
@@ -14,23 +13,16 @@ class ConnectException extends TransferException implements NetworkExceptionInte
      * @var RequestInterface
      */
     private $request;
-
     /**
      * @var array
      */
     private $handlerContext;
-
-    public function __construct(
-        string $message,
-        RequestInterface $request,
-        ?\Throwable $previous = null,
-        array $handlerContext = []
-    ) {
+    public function __construct(string $message, RequestInterface $request, ?\Throwable $previous = null, array $handlerContext = [])
+    {
         parent::__construct($message, 0, $previous);
         $this->request = $request;
         $this->handlerContext = $handlerContext;
     }
-
     /**
      * Get the request that caused the exception
      */
@@ -38,7 +30,6 @@ class ConnectException extends TransferException implements NetworkExceptionInte
     {
         return $this->request;
     }
-
     /**
      * Get contextual information about the error from the underlying handler.
      *

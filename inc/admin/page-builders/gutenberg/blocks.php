@@ -36,6 +36,7 @@ add_action( 'init', 'seopress_register_blocks', 10 );
 function seopress_register_blocks() {
 	require_once __DIR__ . '/blocks/faq/block.php';
 	require_once __DIR__ . '/blocks/sitemap/block.php';
+	require_once __DIR__ . '/blocks/preferred-source/block.php';
 
 	// FAQ Block.
 	register_block_type(
@@ -137,6 +138,37 @@ function seopress_register_blocks() {
 		)
 	);
 	wp_set_script_translations( 'wpseopress/faq-block-v2', 'wp-seopress' );
+
+	// Google Preferred Sources Block.
+	register_block_type(
+		SEOPRESS_PATH_PUBLIC . '/editor/blocks/preferred-source',
+		array(
+			'render_callback' => 'seopress_preferred_source_block',
+			'attributes'      => array(
+				'label'      => array(
+					'type'    => 'string',
+					'default' => '',
+				),
+				'domain'     => array(
+					'type'    => 'string',
+					'default' => '',
+				),
+				'showIcon'   => array(
+					'type'    => 'boolean',
+					'default' => true,
+				),
+				// Resolved server-side so the editor can render the button without a ServerSideRender round-trip.
+				'siteDomain' => array(
+					'type'    => 'string',
+					'default' => seopress_preferred_source_get_domain(),
+				),
+			),
+		)
+	);
+	wp_set_script_translations( 'wpseopress/preferred-source', 'wp-seopress' );
+
+	// Google Preferred Sources shortcode (shares the block renderer).
+	add_shortcode( 'seopress_preferred_source', 'seopress_preferred_source_shortcode' );
 }
 
 

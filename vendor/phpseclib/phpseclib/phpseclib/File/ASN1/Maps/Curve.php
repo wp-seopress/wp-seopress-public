@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * Curve
  *
@@ -22,15 +20,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class Curve
 {
-    const MAP = [
-        'type' => ASN1::TYPE_SEQUENCE,
-        'children' => [
-            'a' => FieldElement::MAP,
-            'b' => FieldElement::MAP,
-            'seed' => [
-                'type' => ASN1::TYPE_BIT_STRING,
-                'optional' => true
-            ]
-        ]
-    ];
+    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['a' => FieldElement::MAP, 'b' => FieldElement::MAP, 'seed' => ['type' => ASN1::TYPE_BIT_STRING, 'optional' => \true]]];
 }

@@ -15,28 +15,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-namespace Google\AccessToken;
+namespace SEOPress\Vendor\Google\AccessToken;
 
 use DateTime;
 use DomainException;
 use Exception;
-use ExpiredException;
-use Firebase\JWT\ExpiredException as ExpiredExceptionV3;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
-use Firebase\JWT\SignatureInvalidException;
-use Google\Auth\Cache\MemoryCacheItemPool;
-use Google\Exception as GoogleException;
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
+use SEOPress\Vendor\ExpiredException;
+use SEOPress\Vendor\Firebase\JWT\ExpiredException as ExpiredExceptionV3;
+use SEOPress\Vendor\Firebase\JWT\JWT;
+use SEOPress\Vendor\Firebase\JWT\Key;
+use SEOPress\Vendor\Firebase\JWT\SignatureInvalidException;
+use SEOPress\Vendor\Google\Auth\Cache\MemoryCacheItemPool;
+use SEOPress\Vendor\Google\Exception as GoogleException;
+use SEOPress\Vendor\GuzzleHttp\Client;
+use SEOPress\Vendor\GuzzleHttp\ClientInterface;
 use InvalidArgumentException;
 use LogicException;
-use phpseclib3\Crypt\AES;
-use phpseclib3\Crypt\PublicKeyLoader;
-use phpseclib3\Math\BigInteger;
-use Psr\Cache\CacheItemPoolInterface;
-
+use SEOPress\Vendor\phpseclib3\Crypt\AES;
+use SEOPress\Vendor\phpseclib3\Crypt\PublicKeyLoader;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
+use SEOPress\Vendor\Psr\Cache\CacheItemPoolInterface;
 /**
  * Wrapper around Google Access Tokens which provides convenience functions
  *
@@ -46,44 +44,34 @@ class Verify
     const FEDERATED_SIGNON_CERT_URL = 'https://www.googleapis.com/oauth2/v3/certs';
     const OAUTH2_ISSUER = 'accounts.google.com';
     const OAUTH2_ISSUER_HTTPS = 'https://accounts.google.com';
-
     /**
      * @var ClientInterface The http client
      */
     private $http;
-
     /**
      * @var CacheItemPoolInterface cache class
      */
     private $cache;
-
     /**
      * @var \Firebase\JWT\JWT
-    */
+     */
     public $jwt;
-
     /**
      * Instantiates the class, but does not initiate the login flow, leaving it
      * to the discretion of the caller.
      */
-    public function __construct(
-        ?ClientInterface $http = null,
-        ?CacheItemPoolInterface $cache = null,
-        $jwt = null
-    ) {
+    public function __construct(?ClientInterface $http = null, ?CacheItemPoolInterface $cache = null, $jwt = null)
+    {
         if (null === $http) {
             $http = new Client();
         }
-
         if (null === $cache) {
             $cache = new MemoryCacheItemPool();
         }
-
         $this->http = $http;
         $this->cache = $cache;
         $this->jwt = $jwt ?: $this->getJwtService();
     }
-
     /**
      * Verifies an id token and returns the authenticated apiLoginTicket.
      * Throws an exception if the id token is not valid.
@@ -99,10 +87,8 @@ class Verify
         if (empty($idToken)) {
             throw new LogicException('id_token cannot be null');
         }
-
         // set phpseclib constants if applicable
         $this->setPhpsecConstants();
-
         // Check signature
         $certs = $this->getFederatedSignOnCerts();
         foreach ($certs as $cert) {
@@ -116,40 +102,35 @@ class Verify
                     $args[] = ['RS256'];
                 }
                 $payload = \call_user_func_array([$this->jwt, 'decode'], $args);
-
                 if (property_exists($payload, 'aud')) {
                     if ($audience && $payload->aud != $audience) {
-                        return false;
+                        return \false;
                     }
                 }
-
                 // support HTTP and HTTPS issuers
                 // @see https://developers.google.com/identity/sign-in/web/backend-auth
                 $issuers = [self::OAUTH2_ISSUER, self::OAUTH2_ISSUER_HTTPS];
                 if (!isset($payload->iss) || !in_array($payload->iss, $issuers)) {
-                    return false;
+                    return \false;
                 }
-
                 return (array) $payload;
-            } catch (ExpiredException $e) { // @phpstan-ignore-line
-                return false;
+            } catch (ExpiredException $e) {
+                // @phpstan-ignore-line
+                return \false;
             } catch (ExpiredExceptionV3 $e) {
-                return false;
+                return \false;
             } catch (SignatureInvalidException $e) {
                 // continue
             } catch (DomainException $e) {
                 // continue
             }
         }
-
-        return false;
+        return \false;
     }
-
     private function getCache()
     {
         return $this->cache;
     }
-
     /**
      * Retrieve and cache a certificates file.
      *
@@ -162,30 +143,17 @@ class Verify
         // If we're retrieving a local file, just grab it.
         if (0 !== strpos($url, 'http')) {
             if (!$file = file_get_contents($url)) {
-                throw new GoogleException(
-                    "Failed to retrieve verification certificates: '" .
-                    $url . "'."
-                );
+                throw new GoogleException("Failed to retrieve verification certificates: '" . $url . "'.");
             }
-
-            return json_decode($file, true);
+            return json_decode($file, \true);
         }
-
         // @phpstan-ignore-next-line
         $response = $this->http->get($url);
-
         if ($response->getStatusCode() == 200) {
-            return json_decode((string) $response->getBody(), true);
+            return json_decode((string) $response->getBody(), \true);
         }
-        throw new GoogleException(
-            sprintf(
-                'Failed to retrieve verification certificates: "%s".',
-                $response->getBody()->getContents()
-            ),
-            $response->getStatusCode()
-        );
+        throw new GoogleException(sprintf('Failed to retrieve verification certificates: "%s".', $response->getBody()->getContents()), $response->getStatusCode());
     }
-
     // Gets federated sign-on certificates to use for verifying identity tokens.
     // Returns certs as array structure, where keys are key ids, and values
     // are PEM encoded certificates.
@@ -196,29 +164,19 @@ class Verify
             $cacheItem = $cache->getItem('federated_signon_certs_v3');
             $certs = $cacheItem->get();
         }
-
-
         if (!$certs) {
-            $certs = $this->retrieveCertsFromLocation(
-                self::FEDERATED_SIGNON_CERT_URL
-            );
-
+            $certs = $this->retrieveCertsFromLocation(self::FEDERATED_SIGNON_CERT_URL);
             if ($cache) {
                 $cacheItem->expiresAt(new DateTime('+1 hour'));
                 $cacheItem->set($certs);
                 $cache->save($cacheItem);
             }
         }
-
         if (!isset($certs['keys'])) {
-            throw new InvalidArgumentException(
-                'federated sign-on certs expects "keys" to be set'
-            );
+            throw new InvalidArgumentException('federated sign-on certs expects "keys" to be set');
         }
-
         return $certs['keys'];
     }
-
     private function getJwtService()
     {
         $jwt = new JWT();
@@ -227,21 +185,16 @@ class Verify
             // @see https://github.com/google/google-api-php-client/issues/827
             $jwt::$leeway = 1;
         }
-
         return $jwt;
     }
-
     private function getPublicKey($cert)
     {
         $modulus = new BigInteger($this->jwt->urlsafeB64Decode($cert['n']), 256);
         $exponent = new BigInteger($this->jwt->urlsafeB64Decode($cert['e']), 256);
         $component = ['n' => $modulus, 'e' => $exponent];
-
         $loader = PublicKeyLoader::load($component);
-
         return $loader->toString('PKCS8');
     }
-
     /**
      * phpseclib calls "phpinfo" by default, which requires special
      * whitelisting in the AppEngine VM environment. This function
@@ -252,12 +205,12 @@ class Verify
      */
     private function setPhpsecConstants()
     {
-        if (filter_var(getenv('GAE_VM'), FILTER_VALIDATE_BOOLEAN)) {
-            if (!defined('MATH_BIGINTEGER_OPENSSL_ENABLED')) {
-                define('MATH_BIGINTEGER_OPENSSL_ENABLED', true);
+        if (filter_var(getenv('GAE_VM'), \FILTER_VALIDATE_BOOLEAN)) {
+            if (!defined('SEOPress\Vendor\MATH_BIGINTEGER_OPENSSL_ENABLED')) {
+                define('SEOPress\Vendor\MATH_BIGINTEGER_OPENSSL_ENABLED', \true);
             }
-            if (!defined('CRYPT_RSA_MODE')) {
-                define('CRYPT_RSA_MODE', AES::ENGINE_OPENSSL);
+            if (!defined('SEOPress\Vendor\CRYPT_RSA_MODE')) {
+                define('SEOPress\Vendor\CRYPT_RSA_MODE', AES::ENGINE_OPENSSL);
             }
         }
     }

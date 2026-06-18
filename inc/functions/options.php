@@ -441,19 +441,9 @@ if ( '1' == seopress_get_toggle_option( 'advanced' ) ) { // phpcs:ignore -- TODO
 	 */
 	function seopress_load_advanced_admin_options() {
 		require_once plugin_dir_path( __FILE__ ) . '/options-advanced-admin.php'; // Advanced (admin).
-		// Admin bar.
-		if ( '1' === seopress_get_service( 'AdvancedOption' )->getAppearanceAdminBar() ) {
-			add_action( 'admin_bar_menu', 'seopress_advanced_appearance_adminbar_hook', 999 );
-
-			/**
-			 * Advanced appearance adminbar hook.
-			 *
-			 * @param WP_Admin_Bar $wp_admin_bar The admin bar.
-			 */
-			function seopress_advanced_appearance_adminbar_hook( $wp_admin_bar ) {
-				$wp_admin_bar->remove_node( 'seopress' );
-			}
-		}
+		// The "Remove SEOPress from admin bar" option is handled directly in
+		// seopress_admin_bar_links() so the critical noindex warning can still be
+		// displayed on its own when the rest of the menu is hidden.
 	}
 
 	// primary category.

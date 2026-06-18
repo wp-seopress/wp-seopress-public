@@ -14,13 +14,11 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\Formats\Keys;
 
-namespace phpseclib3\Crypt\EC\Formats\Keys;
-
-use phpseclib3\Crypt\EC\Curves\Ed25519;
-use phpseclib3\Exception\UnsupportedFormatException;
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\Ed25519;
+use SEOPress\Vendor\phpseclib3\Exception\UnsupportedFormatException;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * libsodium Key Handler
  *
@@ -29,13 +27,11 @@ use phpseclib3\Math\BigInteger;
 abstract class libsodium
 {
     use Common;
-
     /**
      * Is invisible flag
      *
      */
-    const IS_INVISIBLE = true;
-
+    const IS_INVISIBLE = \true;
     /**
      * Break a public or private key down into its constituent components
      *
@@ -63,7 +59,6 @@ abstract class libsodium
             default:
                 throw new \RuntimeException('libsodium keys need to either be 32 bytes long, 64 bytes long or 96 bytes long');
         }
-
         $curve = new Ed25519();
         $components = ['curve' => $curve];
         if (isset($private)) {
@@ -71,13 +66,9 @@ abstract class libsodium
             $components['dA'] = $arr['dA'];
             $components['secret'] = $arr['secret'];
         }
-        $components['QA'] = isset($public) ?
-            self::extractPoint($public, $curve) :
-            $curve->multiplyPoint($curve->getBasePoint(), $components['dA']);
-
+        $components['QA'] = isset($public) ? self::extractPoint($public, $curve) : $curve->multiplyPoint($curve->getBasePoint(), $components['dA']);
         return $components;
     }
-
     /**
      * Convert an EC public key to the appropriate format
      *
@@ -89,7 +80,6 @@ abstract class libsodium
     {
         return $curve->encodePoint($publicKey);
     }
-
     /**
      * Convert a private key to the appropriate format.
      *

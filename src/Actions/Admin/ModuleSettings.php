@@ -99,6 +99,44 @@ class ModuleSettings implements ExecuteHooks {
 	}
 
 	/**
+	 * Build the PRO license-activation notice payload consumed by the React
+	 * settings shell (LicenseNotice component).
+	 *
+	 * Replaces the legacy PHP admin_notices banner so the reminder uses the
+	 * native @wordpress/components Notice and renders on every settings page.
+	 * Returns an empty array when no notice should show: PRO inactive,
+	 * multisite, or an already-valid license.
+	 *
+	 * @return array
+	 */
+	private function getLicenseNotice() {
+		// Hide the reminder in debug/dev environments, matching the legacy
+		// behaviour of the PHP admin_notices banner.
+		if ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) {
+			return array();
+		}
+
+		if ( ! is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
+			return array();
+		}
+
+		if ( is_multisite() ) {
+			return array();
+		}
+
+		if ( 'valid' === get_option( 'seopress_pro_license_status' ) ) {
+			return array();
+		}
+
+		return array(
+			'title'    => __( 'Welcome to SEOPress PRO!', 'wp-seopress' ),
+			'message'  => __( 'Please activate your license to receive automatic updates and get premium support.', 'wp-seopress' ),
+			'ctaUrl'   => admin_url( 'admin.php?page=seopress-license' ),
+			'ctaLabel' => __( 'Activate License', 'wp-seopress' ),
+		);
+	}
+
+	/**
 	 * Get the navigation map of all SEOPress settings pages.
 	 *
 	 * @return array
@@ -368,6 +406,21 @@ class ModuleSettings implements ExecuteHooks {
 		// Get sitemap post types (includes attachment).
 		$sitemap_post_types = $this->getSitemapPostTypes();
 
+		// Static posts page (Settings → Reading). When a dedicated page is
+		// assigned, its SEO title/meta are edited on the page itself (via the
+		// metabox), not in this screen — WordPress treats it as a real page
+		// ( is_home() ), not as a post type archive. Surface a pointer in the
+		// Archives tab so users stop looking for it here.
+		$page_for_posts = (int) get_option( 'page_for_posts' );
+		$blog_page      = null;
+		if ( $page_for_posts > 0 && 'page' === get_post_type( $page_for_posts ) ) {
+			$blog_page = array(
+				'id'        => $page_for_posts,
+				'title'     => get_the_title( $page_for_posts ),
+				'edit_link' => get_edit_post_link( $page_for_posts, 'raw' ),
+			);
+		}
+
 		// Permalink rewrite bases used by the /category/ + /product-category/
 		// "strip" toggles in the Advanced tab. WP defaults to "category" when
 		// the option is empty; WooCommerce defaults to "product-category".
@@ -401,6 +454,7 @@ class ModuleSettings implements ExecuteHooks {
 				'POST_TYPES'          => $post_types,
 				'TAXONOMIES'          => $taxonomies,
 				'SITEMAP_POST_TYPES'  => $sitemap_post_types,
+				'BLOG_PAGE'             => $blog_page,
 				'FEATURE_ENABLED'     => true,
 				'ADMIN_URL'           => admin_url(),
 				'SITE_URL'            => get_option( 'home' ),
@@ -424,6 +478,7 @@ class ModuleSettings implements ExecuteHooks {
 			'TOOLS_TABS'          => $this->getToolsTabs(),
 			'TOOLS_EXTRA_RESET_ACTIONS' => apply_filters( 'seopress_react_tools_reset_actions', array() ),
 			'IS_PRO_ACTIVE'             => is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ),
+			'LICENSE_NOTICE'            => $this->getLicenseNotice(),
 			'IS_WOOCOMMERCE_ACTIVE'     => is_plugin_active( 'woocommerce/woocommerce.php' ),
 			'CATEGORY_BASE'             => $category_base,
 			'PRODUCT_CATEGORY_BASE'     => $product_category_base,
@@ -431,6 +486,11 @@ class ModuleSettings implements ExecuteHooks {
 			'PROMO_NONCE'         => wp_create_nonce( 'seopress_dismiss_promotion_nonce' ),
 			'EXTRA_API_ENDPOINTS' => apply_filters( 'seopress_settings_api_endpoints', array() ),
 			'INITIAL_SETTINGS'    => $this->getInitialSettings( $page_config['option'] ),
+			'REVIEW_PROMPT'       => array(
+				'show'       => \SEOPress\Actions\Api\ReviewPrompt::should_show(),
+				'reviewUrl'  => 'https://wordpress.org/support/plugin/wp-seopress/reviews/?filter=5#new-post',
+				'supportUrl' => 'https://www.seopress.org/support/',
+			),
 			)
 		);
 

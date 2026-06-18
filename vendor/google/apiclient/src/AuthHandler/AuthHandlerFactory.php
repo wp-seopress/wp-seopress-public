@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
@@ -14,12 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-namespace Google\AuthHandler;
+namespace SEOPress\Vendor\Google\AuthHandler;
 
 use Exception;
-use GuzzleHttp\ClientInterface;
-
+use SEOPress\Vendor\GuzzleHttp\ClientInterface;
 class AuthHandlerFactory
 {
     /**
@@ -31,12 +30,11 @@ class AuthHandlerFactory
     public static function build($cache = null, array $cacheConfig = [])
     {
         $guzzleVersion = null;
-        if (defined('\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
+        if (defined('SEOPress\Vendor\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
             $guzzleVersion = ClientInterface::MAJOR_VERSION;
-        } elseif (defined('\GuzzleHttp\ClientInterface::VERSION')) {
+        } elseif (defined('SEOPress\Vendor\GuzzleHttp\ClientInterface::VERSION')) {
             $guzzleVersion = (int) substr(ClientInterface::VERSION, 0, 1);
         }
-
         switch ($guzzleVersion) {
             case 6:
                 return new Guzzle6AuthHandler($cache, $cacheConfig);

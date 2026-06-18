@@ -121,17 +121,10 @@ class FreezeModifiedDate implements ExecuteHooks {
 
 		$freeze = $this->isFreezeEnabled( $post_id );
 
-		// In REST requests (Gutenberg Request 1), save pre-save dates to a transient.
-		// A subsequent metabox POST (Request 2) may need them if the user checked
-		// the freeze checkbox in the classic metabox.
-		if ( 'yes' !== $freeze && defined( 'REST_REQUEST' ) && REST_REQUEST ) {
-			set_transient(
-				self::TRANSIENT_PREFIX . $post_id,
-				$this->original_dates[ $post_id ],
-				30
-			);
-		}
-
+		// The cross-request transient (used to bridge Gutenberg's two-phase save
+		// to a later classic metabox POST) is written once, in maybeRestoreDate(),
+		// after the post and its meta are saved. Setting it here as well would
+		// duplicate that write on every REST save, so we only capture the dates.
 		if ( 'yes' !== $freeze ) {
 			return $data;
 		}
@@ -408,20 +401,22 @@ class FreezeModifiedDate implements ExecuteHooks {
 	private function getCustomDate( $post_id ) {
 		$is_classic = isset( $_POST['seopress_cpt_nonce'] );
 		$custom     = $is_classic
-			? ( ! empty( $_POST['seopress_robots_custom_modified_date'] ) ? sanitize_text_field( $_POST['seopress_robots_custom_modified_date'] ) : '' )
+			? ( ! empty( $_POST['seopress_robots_custom_modified_date'] ) ? sanitize_text_field( wp_unslash( $_POST['seopress_robots_custom_modified_date'] ) ) : '' )
 			: get_post_meta( $post_id, '_seopress_robots_custom_modified_date', true );
 
 		if ( empty( $custom ) ) {
 			return '';
 		}
 
-		// Validate the date and normalize to Y-m-d H:i:s (site-local time).
-		$timestamp = strtotime( $custom );
-		if ( ! $timestamp ) {
+		// Interpret the user-provided value in the site timezone, then normalize
+		// it to Y-m-d H:i:s. post_modified stores site-local time, and the caller
+		// converts it to GMT via get_gmt_from_date() (which also assumes
+		// site-local input), so both sides stay consistent.
+		$datetime = date_create( $custom, wp_timezone() );
+		if ( false === $datetime ) {
 			return '';
 		}
 
-		// Use date() instead of gmdate() since post_modified stores site-local time.
-		return date( 'Y-m-d H:i:s', $timestamp );
+		return $datetime->format( 'Y-m-d H:i:s' );
 	}
 }

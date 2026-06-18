@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2014 Google Inc.
  *
@@ -14,29 +15,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+namespace SEOPress\Vendor\Google\Service\Indexing;
 
-namespace Google\Service\Indexing;
-
-class PublishUrlNotificationResponse extends \Google\Model
+class PublishUrlNotificationResponse extends \SEOPress\Vendor\Google\Model
 {
-  protected $urlNotificationMetadataType = UrlNotificationMetadata::class;
-  protected $urlNotificationMetadataDataType = '';
-
-  /**
-   * @param UrlNotificationMetadata
-   */
-  public function setUrlNotificationMetadata(UrlNotificationMetadata $urlNotificationMetadata)
-  {
-    $this->urlNotificationMetadata = $urlNotificationMetadata;
-  }
-  /**
-   * @return UrlNotificationMetadata
-   */
-  public function getUrlNotificationMetadata()
-  {
-    return $this->urlNotificationMetadata;
-  }
+    protected $urlNotificationMetadataType = UrlNotificationMetadata::class;
+    protected $urlNotificationMetadataDataType = '';
+    /**
+     * @param UrlNotificationMetadata
+     */
+    public function setUrlNotificationMetadata(UrlNotificationMetadata $urlNotificationMetadata)
+    {
+        $this->urlNotificationMetadata = $urlNotificationMetadata;
+    }
+    /**
+     * @return UrlNotificationMetadata
+     */
+    public function getUrlNotificationMetadata()
+    {
+        return $this->urlNotificationMetadata;
+    }
 }
-
 // Adding a class alias for backwards compatibility with the previous class name.
-class_alias(PublishUrlNotificationResponse::class, 'Google_Service_Indexing_PublishUrlNotificationResponse');
+class_alias(PublishUrlNotificationResponse::class, 'SEOPress\Vendor\Google_Service_Indexing_PublishUrlNotificationResponse');

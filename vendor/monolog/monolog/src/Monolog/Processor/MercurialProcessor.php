@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,12 +9,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Processor;
 
-namespace Monolog\Processor;
-
-use Monolog\Logger;
-use Psr\Log\LogLevel;
-
+use SEOPress\Vendor\Monolog\Logger;
+use SEOPress\Vendor\Psr\Log\LogLevel;
 /**
  * Injects Hg branch and Hg revision number in all records
  *
@@ -28,7 +27,6 @@ class MercurialProcessor implements ProcessorInterface
     private $level;
     /** @var array{branch: string, revision: string}|array<never>|null */
     private static $cache = null;
-
     /**
      * @param int|string $level The minimum logging level at which this Processor will be triggered
      *
@@ -38,7 +36,6 @@ class MercurialProcessor implements ProcessorInterface
     {
         $this->level = Logger::toMonologLevel($level);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -48,12 +45,9 @@ class MercurialProcessor implements ProcessorInterface
         if ($record['level'] < $this->level) {
             return $record;
         }
-
         $record['extra']['hg'] = self::getMercurialInfo();
-
         return $record;
     }
-
     /**
      * @return array{branch: string, revision: string}|array<never>
      */
@@ -62,16 +56,10 @@ class MercurialProcessor implements ProcessorInterface
         if (self::$cache) {
             return self::$cache;
         }
-
         $result = explode(' ', trim((string) shell_exec('hg id -nb')));
-
         if (count($result) >= 3) {
-            return self::$cache = [
-                'branch' => $result[1],
-                'revision' => $result[2],
-            ];
+            return self::$cache = ['branch' => $result[1], 'revision' => $result[2]];
         }
-
         return self::$cache = [];
     }
 }

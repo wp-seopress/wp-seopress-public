@@ -12,14 +12,12 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\Common\Formats\Keys;
 
-namespace phpseclib3\Crypt\Common\Formats\Keys;
-
-use phpseclib3\Common\Functions\Strings;
-use phpseclib3\Crypt\AES;
-use phpseclib3\Crypt\Random;
-use phpseclib3\Exception\BadDecryptionException;
-
+use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Crypt\AES;
+use SEOPress\Vendor\phpseclib3\Crypt\Random;
+use SEOPress\Vendor\phpseclib3\Exception\BadDecryptionException;
 /**
  * OpenSSH Formatted RSA Key Handler
  *
@@ -33,14 +31,12 @@ abstract class OpenSSH
      * @var string
      */
     protected static $comment = 'phpseclib-generated-key';
-
     /**
      * Binary key flag
      *
      * @var bool
      */
-    protected static $binary = false;
-
+    protected static $binary = \false;
     /**
      * Sets the default comment
      *
@@ -50,7 +46,6 @@ abstract class OpenSSH
     {
         self::$comment = str_replace(["\r", "\n"], '', $comment);
     }
-
     /**
      * Break a public or private key down into its constituent components
      *
@@ -65,15 +60,13 @@ abstract class OpenSSH
         if (!Strings::is_stringable($key)) {
             throw new \UnexpectedValueException('Key should be a string - not a ' . gettype($key));
         }
-
         // key format is described here:
         // https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/PROTOCOL.key?annotate=HEAD
-
-        if (strpos($key, 'BEGIN OPENSSH PRIVATE KEY') !== false) {
+        if (strpos($key, 'BEGIN OPENSSH PRIVATE KEY') !== \false) {
             $key = preg_replace('#(?:^-.*?-[\r\n]*$)|\s#ms', '', $key);
             $key = Strings::base64_decode($key);
             $magic = Strings::shift($key, 15);
-            if ($magic != "openssh-key-v1\0") {
+            if ($magic != "openssh-key-v1\x00") {
                 throw new \RuntimeException('Expected openssh-key-v1');
             }
             list($ciphername, $kdfname, $kdfoptions, $numKeys) = Strings::unpackSSH2('sssN', $key);
@@ -99,7 +92,6 @@ abstract class OpenSSH
                 default:
                     throw new \RuntimeException('The only supported ciphers are: none, aes256-ctr (' . $ciphername . ' is being used)');
             }
-
             list($publicKey, $paddedKey) = Strings::unpackSSH2('ss', $key);
             list($type) = Strings::unpackSSH2('s', $publicKey);
             if (isset($crypto)) {
@@ -111,28 +103,24 @@ abstract class OpenSSH
                 if (isset($crypto)) {
                     throw new BadDecryptionException('Unable to decrypt key - please verify the password you are using');
                 }
-                throw new \RuntimeException("The two checkints do not match ($checkint1 vs. $checkint2)");
+                throw new \RuntimeException("The two checkints do not match ({$checkint1} vs. {$checkint2})");
             }
             self::checkType($type);
-
             return compact('type', 'publicKey', 'paddedKey');
         }
-
         $parts = preg_split("#[\t ]+#", $key, 3);
-
         if (!isset($parts[1])) {
             $key = base64_decode($parts[0]);
-            $comment = false;
+            $comment = \false;
         } else {
             $asciiType = $parts[0];
             self::checkType($parts[0]);
             $key = base64_decode($parts[1]);
-            $comment = isset($parts[2]) ? $parts[2] : false;
+            $comment = isset($parts[2]) ? $parts[2] : \false;
         }
-        if ($key === false) {
+        if ($key === \false) {
             throw new \UnexpectedValueException('Key should be a string - not a ' . gettype($key));
         }
-
         list($type) = Strings::unpackSSH2('s', $key);
         self::checkType($type);
         if (isset($asciiType) && $asciiType != $type) {
@@ -141,12 +129,9 @@ abstract class OpenSSH
         if (strlen($key) <= 4) {
             throw new \UnexpectedValueException('Key appears to be malformed');
         }
-
         $publicKey = $key;
-
         return compact('type', 'publicKey', 'comment');
     }
-
     /**
      * Toggle between binary and printable keys
      *
@@ -159,7 +144,6 @@ abstract class OpenSSH
     {
         self::$binary = $enabled;
     }
-
     /**
      * Checks to see if the type is valid
      *
@@ -168,10 +152,9 @@ abstract class OpenSSH
     private static function checkType($candidate)
     {
         if (!in_array($candidate, static::$types)) {
-            throw new \RuntimeException("The key type ($candidate) is not equal to: " . implode(',', static::$types));
+            throw new \RuntimeException("The key type ({$candidate}) is not equal to: " . implode(',', static::$types));
         }
     }
-
     /**
      * Wrap a private key appropriately
      *
@@ -184,23 +167,18 @@ abstract class OpenSSH
     protected static function wrapPrivateKey($publicKey, $privateKey, $password, $options)
     {
         list(, $checkint) = unpack('N', Random::string(4));
-
         $comment = isset($options['comment']) ? $options['comment'] : self::$comment;
-        $paddedKey = Strings::packSSH2('NN', $checkint, $checkint) .
-                     $privateKey .
-                     Strings::packSSH2('s', $comment);
-
+        $paddedKey = Strings::packSSH2('NN', $checkint, $checkint) . $privateKey . Strings::packSSH2('s', $comment);
         $usesEncryption = !empty($password) && is_string($password);
-
         /*
-           from http://tools.ietf.org/html/rfc4253#section-6 :
-
-           Note that the length of the concatenation of 'packet_length',
-           'padding_length', 'payload', and 'random padding' MUST be a multiple
-           of the cipher block size or 8, whichever is larger.
-         */
+          from http://tools.ietf.org/html/rfc4253#section-6 :
+        
+          Note that the length of the concatenation of 'packet_length',
+          'padding_length', 'payload', and 'random padding' MUST be a multiple
+          of the cipher block size or 8, whichever is larger.
+        */
         $blockSize = $usesEncryption ? 16 : 8;
-        $paddingLength = (($blockSize - 1) * strlen($paddedKey)) % $blockSize;
+        $paddingLength = ($blockSize - 1) * strlen($paddedKey) % $blockSize;
         for ($i = 1; $i <= $paddingLength; $i++) {
             $paddedKey .= chr($i);
         }
@@ -215,10 +193,7 @@ abstract class OpenSSH
             $paddedKey = $crypto->encrypt($paddedKey);
             $key = Strings::packSSH2('sssNss', 'aes256-ctr', 'bcrypt', $kdfoptions, 1, $publicKey, $paddedKey);
         }
-        $key = "openssh-key-v1\0$key";
-
-        return "-----BEGIN OPENSSH PRIVATE KEY-----\n" .
-               chunk_split(Strings::base64_encode($key), 70, "\n") .
-               "-----END OPENSSH PRIVATE KEY-----\n";
+        $key = "openssh-key-v1\x00{$key}";
+        return "-----BEGIN OPENSSH PRIVATE KEY-----\n" . chunk_split(Strings::base64_encode($key), 70, "\n") . "-----END OPENSSH PRIVATE KEY-----\n";
     }
 }

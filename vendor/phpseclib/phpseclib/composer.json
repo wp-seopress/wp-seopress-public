@@ -1,5 +1,5 @@
 {
-    "name": "phpseclib/phpseclib",
+    "name": "phpseclib\/phpseclib",
     "type": "library",
     "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
     "keywords": [
@@ -20,8 +20,8 @@
         "asn1",
         "asn.1",
         "BigInteger"
-        ],
-    "homepage": "http://phpseclib.sourceforge.net",
+    ],
+    "homepage": "http:\/\/phpseclib.sourceforge.net",
     "license": "MIT",
     "authors": [
         {
@@ -40,7 +40,7 @@
             "role": "Developer"
         },
         {
-            "name": "Hans-Jürgen Petrich",
+            "name": "Hans-J\u00fcrgen Petrich",
             "email": "petrich@tronic-media.com",
             "role": "Developer"
         },
@@ -52,14 +52,14 @@
     ],
     "require": {
         "php": ">=5.6.1",
-        "paragonie/constant_time_encoding": "^1|^2|^3",
-        "paragonie/random_compat": "^1.4|^2.0|^9.99.99"
+        "paragonie\/constant_time_encoding": "^1|^2|^3",
+        "paragonie\/random_compat": "^1.4|^2.0|^9.99.99"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit\/phpunit": "*"
     },
     "suggest": {
-        "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
+        "ext-libsodium": "SSH2\/SFTP can make use of some algorithms provided by the libsodium-php extension.",
         "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations.",
         "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
         "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
@@ -67,15 +67,15 @@
     },
     "autoload": {
         "files": [
-            "phpseclib/bootstrap.php"
+            "phpseclib\/bootstrap.php"
         ],
         "psr-4": {
-            "phpseclib3\\": "phpseclib/"
+            "SEOPress\\Vendor\\phpseclib3\\": "phpseclib\/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "phpseclib3\\Tests\\": "tests/"
+            "SEOPress\\Vendor\\phpseclib3\\Tests\\": "tests\/"
         }
     },
     "config": {

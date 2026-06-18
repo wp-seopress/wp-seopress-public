@@ -1,6 +1,6 @@
 <?php
 
-namespace Psr\Cache;
+namespace SEOPress\Vendor\Psr\Cache;
 
 /**
  * Exception interface for invalid cache arguments.

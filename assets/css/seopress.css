@@ -285,6 +285,13 @@
     height: 18px;
 }
 
+/* WordPress components (e.g. Button) handle their own icon spacing. Don't let
+   the trailing helper-icon left margin above leak into them, otherwise the
+   icon (and icon-only buttons) get pushed 4px to the right and misalign. */
+.seopress-option .seopress-variable-chips .components-button .dashicons {
+    margin-left: 0;
+}
+
 .seopress-button {
     text-transform: uppercase;
     background: #fff;
@@ -2114,7 +2121,7 @@ body #seopress_pro_cpt .seopress-ui-tabs .ui-tabs-nav li.ui-tabs-active {
 }
 
 .seopress-styles .seopress-option {
-    padding: 84px 0px 0px 22px;
+    padding: 84px 0px 0px 0px;
     display: inline-block;
     width: calc(100% - 20px);
     will-change: auto;

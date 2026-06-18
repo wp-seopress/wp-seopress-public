@@ -1,11 +1,10 @@
 <?php
 
-namespace Firebase\JWT;
+namespace SEOPress\Vendor\Firebase\JWT;
 
 use DomainException;
 use InvalidArgumentException;
 use UnexpectedValueException;
-
 /**
  * JSON Web Key implementation, based on this spec:
  * https://tools.ietf.org/html/draft-ietf-jose-json-web-key-41
@@ -21,22 +20,20 @@ use UnexpectedValueException;
 class JWK
 {
     private const OID = '1.2.840.10045.2.1';
-    private const ASN1_OBJECT_IDENTIFIER = 0x06;
-    private const ASN1_SEQUENCE = 0x10; // also defined in JWT
-    private const ASN1_BIT_STRING = 0x03;
+    private const ASN1_OBJECT_IDENTIFIER = 0x6;
+    private const ASN1_SEQUENCE = 0x10;
+    // also defined in JWT
+    private const ASN1_BIT_STRING = 0x3;
     private const EC_CURVES = [
-        'P-256' => '1.2.840.10045.3.1.7', // Len: 64
-        'secp256k1' => '1.3.132.0.10', // Len: 64
-        'P-384' => '1.3.132.0.34', // Len: 96
-        // 'P-521' => '1.3.132.0.35', // Len: 132 (not supported)
+        'P-256' => '1.2.840.10045.3.1.7',
+        // Len: 64
+        'secp256k1' => '1.3.132.0.10',
+        // Len: 64
+        'P-384' => '1.3.132.0.34',
     ];
-
     // For keys with "kty" equal to "OKP" (Octet Key Pair), the "crv" parameter must contain the key subtype.
     // This library supports the following subtypes:
-    private const OKP_SUBTYPES = [
-        'Ed25519' => true, // RFC 8037
-    ];
-
+    private const OKP_SUBTYPES = ['Ed25519' => \true];
     /**
      * Parse a set of JWK keys
      *
@@ -55,29 +52,23 @@ class JWK
     public static function parseKeySet(array $jwks, string $defaultAlg = null): array
     {
         $keys = [];
-
         if (!isset($jwks['keys'])) {
             throw new UnexpectedValueException('"keys" member must exist in the JWK Set');
         }
-
         if (empty($jwks['keys'])) {
             throw new InvalidArgumentException('JWK Set did not contain any keys');
         }
-
         foreach ($jwks['keys'] as $k => $v) {
             $kid = isset($v['kid']) ? $v['kid'] : $k;
             if ($key = self::parseKey($v, $defaultAlg)) {
                 $keys[(string) $kid] = $key;
             }
         }
-
         if (0 === \count($keys)) {
             throw new UnexpectedValueException('No supported algorithms found in JWK Set');
         }
-
         return $keys;
     }
-
     /**
      * Parse a JWK key
      *
@@ -98,11 +89,9 @@ class JWK
         if (empty($jwk)) {
             throw new InvalidArgumentException('JWK must not be empty');
         }
-
         if (!isset($jwk['kty'])) {
             throw new UnexpectedValueException('JWK must contain a "kty" parameter');
         }
-
         if (!isset($jwk['alg'])) {
             if (\is_null($defaultAlg)) {
                 // The "alg" parameter is optional in a KTY, but an algorithm is required
@@ -113,7 +102,6 @@ class JWK
             }
             $jwk['alg'] = $defaultAlg;
         }
-
         switch ($jwk['kty']) {
             case 'RSA':
                 if (!empty($jwk['d'])) {
@@ -122,13 +110,10 @@ class JWK
                 if (!isset($jwk['n']) || !isset($jwk['e'])) {
                     throw new UnexpectedValueException('RSA keys must contain values for both "n" and "e"');
                 }
-
                 $pem = self::createPemFromModulusAndExponent($jwk['n'], $jwk['e']);
                 $publicKey = \openssl_pkey_get_public($pem);
-                if (false === $publicKey) {
-                    throw new DomainException(
-                        'OpenSSL error: ' . \openssl_error_string()
-                    );
+                if (\false === $publicKey) {
+                    throw new DomainException('OpenSSL error: ' . \openssl_error_string());
                 }
                 return new Key($publicKey, $jwk['alg']);
             case 'EC':
@@ -136,19 +121,15 @@ class JWK
                     // The key is actually a private key
                     throw new UnexpectedValueException('Key data must be for a public key');
                 }
-
                 if (empty($jwk['crv'])) {
                     throw new UnexpectedValueException('crv not set');
                 }
-
                 if (!isset(self::EC_CURVES[$jwk['crv']])) {
                     throw new DomainException('Unrecognised or unsupported EC curve');
                 }
-
                 if (empty($jwk['x']) || empty($jwk['y'])) {
                     throw new UnexpectedValueException('x and y not set');
                 }
-
                 $publicKey = self::createPemFromCrvAndXYCoordinates($jwk['crv'], $jwk['x'], $jwk['y']);
                 return new Key($publicKey, $jwk['alg']);
             case 'OKP':
@@ -156,29 +137,23 @@ class JWK
                     // The key is actually a private key
                     throw new UnexpectedValueException('Key data must be for a public key');
                 }
-
                 if (!isset($jwk['crv'])) {
                     throw new UnexpectedValueException('crv not set');
                 }
-
                 if (empty(self::OKP_SUBTYPES[$jwk['crv']])) {
                     throw new DomainException('Unrecognised or unsupported OKP key subtype');
                 }
-
                 if (empty($jwk['x'])) {
                     throw new UnexpectedValueException('x not set');
                 }
-
                 // This library works internally with EdDSA keys (Ed25519) encoded in standard base64.
                 $publicKey = JWT::convertBase64urlToBase64($jwk['x']);
                 return new Key($publicKey, $jwk['alg']);
             default:
                 break;
         }
-
         return null;
     }
-
     /**
      * Converts the EC JWK values to pem format.
      *
@@ -190,34 +165,9 @@ class JWK
      */
     private static function createPemFromCrvAndXYCoordinates(string $crv, string $x, string $y): string
     {
-        $pem =
-            self::encodeDER(
-                self::ASN1_SEQUENCE,
-                self::encodeDER(
-                    self::ASN1_SEQUENCE,
-                    self::encodeDER(
-                        self::ASN1_OBJECT_IDENTIFIER,
-                        self::encodeOID(self::OID)
-                    )
-                    . self::encodeDER(
-                        self::ASN1_OBJECT_IDENTIFIER,
-                        self::encodeOID(self::EC_CURVES[$crv])
-                    )
-                ) .
-                self::encodeDER(
-                    self::ASN1_BIT_STRING,
-                    \chr(0x00) . \chr(0x04)
-                    . JWT::urlsafeB64Decode($x)
-                    . JWT::urlsafeB64Decode($y)
-                )
-            );
-
-        return sprintf(
-            "-----BEGIN PUBLIC KEY-----\n%s\n-----END PUBLIC KEY-----\n",
-            wordwrap(base64_encode($pem), 64, "\n", true)
-        );
+        $pem = self::encodeDER(self::ASN1_SEQUENCE, self::encodeDER(self::ASN1_SEQUENCE, self::encodeDER(self::ASN1_OBJECT_IDENTIFIER, self::encodeOID(self::OID)) . self::encodeDER(self::ASN1_OBJECT_IDENTIFIER, self::encodeOID(self::EC_CURVES[$crv]))) . self::encodeDER(self::ASN1_BIT_STRING, \chr(0x0) . \chr(0x4) . JWT::urlsafeB64Decode($x) . JWT::urlsafeB64Decode($y)));
+        return sprintf("-----BEGIN PUBLIC KEY-----\n%s\n-----END PUBLIC KEY-----\n", wordwrap(base64_encode($pem), 64, "\n", \true));
     }
-
     /**
      * Create a public key represented in PEM format from RSA modulus and exponent information
      *
@@ -228,41 +178,21 @@ class JWK
      *
      * @uses encodeLength
      */
-    private static function createPemFromModulusAndExponent(
-        string $n,
-        string $e
-    ): string {
+    private static function createPemFromModulusAndExponent(string $n, string $e): string
+    {
         $mod = JWT::urlsafeB64Decode($n);
         $exp = JWT::urlsafeB64Decode($e);
-
         $modulus = \pack('Ca*a*', 2, self::encodeLength(\strlen($mod)), $mod);
         $publicExponent = \pack('Ca*a*', 2, self::encodeLength(\strlen($exp)), $exp);
-
-        $rsaPublicKey = \pack(
-            'Ca*a*a*',
-            48,
-            self::encodeLength(\strlen($modulus) + \strlen($publicExponent)),
-            $modulus,
-            $publicExponent
-        );
-
+        $rsaPublicKey = \pack('Ca*a*a*', 48, self::encodeLength(\strlen($modulus) + \strlen($publicExponent)), $modulus, $publicExponent);
         // sequence(oid(1.2.840.113549.1.1.1), null)) = rsaEncryption.
-        $rsaOID = \pack('H*', '300d06092a864886f70d0101010500'); // hex version of MA0GCSqGSIb3DQEBAQUA
+        $rsaOID = \pack('H*', '300d06092a864886f70d0101010500');
+        // hex version of MA0GCSqGSIb3DQEBAQUA
         $rsaPublicKey = \chr(0) . $rsaPublicKey;
         $rsaPublicKey = \chr(3) . self::encodeLength(\strlen($rsaPublicKey)) . $rsaPublicKey;
-
-        $rsaPublicKey = \pack(
-            'Ca*a*',
-            48,
-            self::encodeLength(\strlen($rsaOID . $rsaPublicKey)),
-            $rsaOID . $rsaPublicKey
-        );
-
-        return "-----BEGIN PUBLIC KEY-----\r\n" .
-            \chunk_split(\base64_encode($rsaPublicKey), 64) .
-            '-----END PUBLIC KEY-----';
+        $rsaPublicKey = \pack('Ca*a*', 48, self::encodeLength(\strlen($rsaOID . $rsaPublicKey)), $rsaOID . $rsaPublicKey);
+        return "-----BEGIN PUBLIC KEY-----\r\n" . \chunk_split(\base64_encode($rsaPublicKey), 64) . '-----END PUBLIC KEY-----';
     }
-
     /**
      * DER-encode the length
      *
@@ -274,15 +204,12 @@ class JWK
      */
     private static function encodeLength(int $length): string
     {
-        if ($length <= 0x7F) {
+        if ($length <= 0x7f) {
             return \chr($length);
         }
-
         $temp = \ltrim(\pack('N', $length), \chr(0));
-
         return \pack('Ca*', 0x80 | \strlen($temp), $temp);
     }
-
     /**
      * Encodes a value into a DER object.
      * Also defined in Firebase\JWT\JWT
@@ -297,16 +224,12 @@ class JWK
         if ($type === self::ASN1_SEQUENCE) {
             $tag_header |= 0x20;
         }
-
         // Type
         $der = \chr($tag_header | $type);
-
         // Length
         $der .= \chr(\strlen($value));
-
         return $der . $value;
     }
-
     /**
      * Encodes a string into a DER-encoded OID.
      *
@@ -316,26 +239,22 @@ class JWK
     private static function encodeOID(string $oid): string
     {
         $octets = explode('.', $oid);
-
         // Get the first octet
         $first = (int) array_shift($octets);
         $second = (int) array_shift($octets);
         $oid = \chr($first * 40 + $second);
-
         // Iterate over subsequent octets
         foreach ($octets as $octet) {
             if ($octet == 0) {
-                $oid .= \chr(0x00);
+                $oid .= \chr(0x0);
                 continue;
             }
             $bin = '';
-
             while ($octet) {
-                $bin .= \chr(0x80 | ($octet & 0x7f));
+                $bin .= \chr(0x80 | $octet & 0x7f);
                 $octet >>= 7;
             }
             $bin[0] = $bin[0] & \chr(0x7f);
-
             // Convert to big endian if necessary
             if (pack('V', 65534) == pack('L', 65534)) {
                 $oid .= strrev($bin);
@@ -343,7 +262,6 @@ class JWK
                 $oid .= $bin;
             }
         }
-
         return $oid;
     }
 }

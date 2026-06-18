@@ -9,12 +9,13 @@
  * @copyright Copyright (c) 2012, Matthias Mullie. All rights reserved
  * @license MIT License
  */
-
-namespace MatthiasMullie\Minify\Exceptions;
+namespace SEOPress\Vendor\MatthiasMullie\Minify\Exceptions;
 
 /**
  * File Import Exception Class.
  *
  * @author Matthias Mullie <minify@mullie.eu>
  */
-class FileImportException extends BasicException {}
+class FileImportException extends BasicException
+{
+}

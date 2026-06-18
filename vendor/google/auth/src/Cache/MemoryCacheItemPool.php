@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2016 Google Inc.
  *
@@ -14,12 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+namespace SEOPress\Vendor\Google\Auth\Cache;
 
-namespace Google\Auth\Cache;
-
-use Psr\Cache\CacheItemInterface;
-use Psr\Cache\CacheItemPoolInterface;
-
+use SEOPress\Vendor\Psr\Cache\CacheItemInterface;
+use SEOPress\Vendor\Psr\Cache\CacheItemPoolInterface;
 /**
  * Simple in-memory cache implementation.
  */
@@ -29,12 +28,10 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      * @var CacheItemInterface[]
      */
     private $items;
-
     /**
      * @var CacheItemInterface[]
      */
     private $deferredItems;
-
     /**
      * {@inheritdoc}
      *
@@ -42,9 +39,9 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      */
     public function getItem($key): CacheItemInterface
     {
-        return current($this->getItems([$key]));  // @phpstan-ignore-line
+        return current($this->getItems([$key]));
+        // @phpstan-ignore-line
     }
-
     /**
      * {@inheritdoc}
      *
@@ -61,10 +58,8 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
         foreach ($keys as $key) {
             $items[$key] = $this->hasItem($key) ? clone $this->items[$key] : new $itemClass($key);
         }
-
         return $items;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -74,10 +69,8 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
     public function hasItem($key): bool
     {
         $this->isValidKey($key);
-
         return isset($this->items[$key]) && $this->items[$key]->isHit();
     }
-
     /**
      * {@inheritdoc}
      *
@@ -88,10 +81,8 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
     {
         $this->items = [];
         $this->deferredItems = [];
-
-        return true;
+        return \true;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -102,7 +93,6 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
     {
         return $this->deleteItems([$key]);
     }
-
     /**
      * {@inheritdoc}
      *
@@ -112,14 +102,11 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
     public function deleteItems(array $keys): bool
     {
         array_walk($keys, [$this, 'isValidKey']);
-
         foreach ($keys as $key) {
             unset($this->items[$key]);
         }
-
-        return true;
+        return \true;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -129,10 +116,8 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
     public function save(CacheItemInterface $item): bool
     {
         $this->items[$item->getKey()] = $item;
-
-        return true;
+        return \true;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -142,10 +127,8 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
     public function saveDeferred(CacheItemInterface $item): bool
     {
         $this->deferredItems[$item->getKey()] = $item;
-
-        return true;
+        return \true;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -157,12 +140,9 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
         foreach ($this->deferredItems as $item) {
             $this->save($item);
         }
-
         $this->deferredItems = [];
-
-        return true;
+        return \true;
     }
-
     /**
      * Determines if the provided key is valid.
      *
@@ -173,11 +153,9 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
     private function isValidKey($key)
     {
         $invalidCharacters = '{}()/\\\\@:';
-
-        if (!is_string($key) || preg_match("#[$invalidCharacters]#", $key)) {
-            throw new InvalidArgumentException('The provided key is not valid: ' . var_export($key, true));
+        if (!is_string($key) || preg_match("#[{$invalidCharacters}]#", $key)) {
+            throw new InvalidArgumentException('The provided key is not valid: ' . var_export($key, \true));
         }
-
-        return true;
+        return \true;
     }
 }

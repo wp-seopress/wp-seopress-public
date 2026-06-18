@@ -169,6 +169,25 @@ class SEOPRESS_Admin_Setup_Wizard {
 			exit;
 		}
 
+		// Handle "Activate Pro" from the welcome step: the free plugin redirected
+		// here on activation while Pro sits installed but inactive. Activate it,
+		// then return to the wizard, which now runs in Pro-aware mode (license CTA
+		// instead of the upsell promo).
+		if ( isset( $_GET['seopress-action'] ) && 'activate-pro' === $_GET['seopress-action'] ) {
+			check_admin_referer( 'seopress-activate-pro' );
+
+			if ( current_user_can( 'activate_plugins' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+				$pro_file = 'wp-seopress-pro/seopress-pro.php';
+				if ( file_exists( WP_PLUGIN_DIR . '/' . $pro_file ) && ! is_plugin_active( $pro_file ) ) {
+					activate_plugins( $pro_file );
+				}
+			}
+
+			wp_safe_redirect( esc_url_raw( admin_url( 'admin.php?page=seopress-setup' ) ) );
+			exit;
+		}
+
 		if ( ! empty( $_POST['save_step'] ) && isset( $this->steps[ $this->step ]['handler'] ) ) {
 			call_user_func( $this->steps[ $this->step ]['handler'], $this );
 		}
@@ -250,6 +269,17 @@ class SEOPRESS_Admin_Setup_Wizard {
 			'seopress-dismiss-wizard'
 		);
 
+		$pro_activate_url = wp_nonce_url(
+			add_query_arg(
+				array(
+					'page'            => 'seopress-setup',
+					'seopress-action' => 'activate-pro',
+				),
+				admin_url( 'admin.php' )
+			),
+			'seopress-activate-pro'
+		);
+
 		// admin_enqueue_scripts runs before setup_wizard() sets $this->step,
 		// so resolve them from $_GET here.
 		$step   = isset( $_GET['step'] ) ? sanitize_key( wp_unslash( $_GET['step'] ) ) : 'welcome';   // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -273,32 +303,34 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$dynamic_variables = function_exists( 'seopress_get_dyn_variables' ) ? seopress_get_dyn_variables() : array();
 
 		$wizard_data = array(
-			'ADMIN_URL'         => admin_url(),
-			'AJAX_URL'          => admin_url( 'admin-ajax.php' ),
-			'STEP'              => $step,
-			'PARENT'            => $parent,
-			'DISMISS_URL'       => $dismiss_url,
-			'PRO_URL'           => isset( $docs_links['wizard']['pro'] ) ? $docs_links['wizard']['pro'] : 'https://www.seopress.org/seopress-pro/',
-			'ASSETS_URL'        => SEOPRESS_URL_PUBLIC . '/admin/wizard',
-			'PLUGIN_URL'        => SEOPRESS_URL_ASSETS,
-			'SITEMAP_URL'       => admin_url( 'admin.php?page=seopress-xml-sitemap' ),
-			'PRIVACY_URL'       => isset( $docs_links['privacy'] ) ? $docs_links['privacy'] : 'https://www.seopress.org/privacy-policy/',
-			'USER_EMAIL'        => function_exists( 'wp_get_current_user' ) && wp_get_current_user() ? (string) wp_get_current_user()->user_email : '',
-			'SUB_ROUTINE'       => isset( $_GET['sub_routine'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['sub_routine'] ) ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			'FORM_ACTION'       => $form_action,
-			'NONCE'             => array(
+			'ADMIN_URL'              => admin_url(),
+			'AJAX_URL'               => admin_url( 'admin-ajax.php' ),
+			'STEP'                   => $step,
+			'PARENT'                 => $parent,
+			'DISMISS_URL'            => $dismiss_url,
+			'PRO_INSTALLED_INACTIVE' => $this->is_pro_installed_inactive(),
+			'PRO_ACTIVATE_URL'       => $pro_activate_url,
+			'PRO_URL'                => isset( $docs_links['wizard']['pro'] ) ? $docs_links['wizard']['pro'] : 'https://www.seopress.org/seopress-pro/',
+			'ASSETS_URL'             => SEOPRESS_URL_PUBLIC . '/admin/wizard',
+			'PLUGIN_URL'             => SEOPRESS_URL_ASSETS,
+			'SITEMAP_URL'            => admin_url( 'admin.php?page=seopress-xml-sitemap' ),
+			'PRIVACY_URL'            => isset( $docs_links['privacy'] ) ? $docs_links['privacy'] : 'https://www.seopress.org/privacy-policy/',
+			'USER_EMAIL'             => function_exists( 'wp_get_current_user' ) && wp_get_current_user() ? (string) wp_get_current_user()->user_email : '',
+			'SUB_ROUTINE'            => isset( $_GET['sub_routine'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['sub_routine'] ) ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'FORM_ACTION'            => $form_action,
+			'NONCE'                  => array(
 				'setup' => wp_create_nonce( 'seopress-setup' ),
 			),
-			'INITIAL_VALUES'    => $initial_values,
-			'INDEXING'          => $indexing_data,
-			'DOCS_LINKS'        => array(
+			'INITIAL_VALUES'         => $initial_values,
+			'INDEXING'               => $indexing_data,
+			'DOCS_LINKS'             => array(
 				'alt_title'    => isset( $docs_links['titles']['alt_title'] ) ? $docs_links['titles']['alt_title'] : '',
 				'pro'          => isset( $docs_links['wizard']['pro'] ) ? $docs_links['wizard']['pro'] : 'https://www.seopress.org/seopress-pro/',
 				'ebook'        => isset( $docs_links['wizard']['ebook'] ) ? $docs_links['wizard']['ebook'] : '',
 				'video_id'     => isset( $docs_links['wizard']['video_id'] ) ? $docs_links['wizard']['video_id'] : '1nUkjCBpIts',
 				'privacy'      => isset( $docs_links['privacy'] ) ? $docs_links['privacy'] : 'https://www.seopress.org/privacy-policy/',
 			),
-			'NEXT_STEP_URL'     => add_query_arg(
+			'NEXT_STEP_URL'          => add_query_arg(
 				array(
 					'page'   => 'seopress-setup',
 					'step'   => 'site',
@@ -306,10 +338,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 				),
 				admin_url( 'admin.php' )
 			),
-			'IMPORT'            => $this->get_import_data(),
-			'ADVANCED'          => $this->get_react_advanced_data(),
-			'DYNAMIC_VARIABLES' => $dynamic_variables,
-			'PREVIEW_VALUES'    => array(
+			'IMPORT'                 => $this->get_import_data(),
+			'ADVANCED'               => $this->get_react_advanced_data(),
+			'DYNAMIC_VARIABLES'      => $dynamic_variables,
+			'PREVIEW_VALUES'         => array(
 				'%%sitetitle%%' => get_bloginfo( 'name' ),
 				'%%tagline%%'   => get_bloginfo( 'description' ),
 			),
@@ -325,6 +357,25 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$wizard_data = apply_filters( 'seopress_wizard_data', $wizard_data );
 
 		wp_localize_script( 'seopress-wizard', 'SEOPRESS_WIZARD_DATA', $wizard_data );
+	}
+
+	/**
+	 * Whether SEOPress PRO is installed on this site but not currently active.
+	 *
+	 * Drives the welcome step: when true we surface a one-click activation CTA
+	 * instead of the "buy Pro" promo (the user already owns Pro, the free plugin
+	 * simply redirected here on activation before Pro could be enabled).
+	 *
+	 * @return bool
+	 */
+	private function is_pro_installed_inactive() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$pro_file = 'wp-seopress-pro/seopress-pro.php';
+
+		return file_exists( WP_PLUGIN_DIR . '/' . $pro_file ) && ! is_plugin_active( $pro_file );
 	}
 
 	/**

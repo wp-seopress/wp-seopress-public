@@ -1,11 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace SEOPress\Vendor\GuzzleHttp\Psr7;
 
-namespace GuzzleHttp\Psr7;
-
-use Psr\Http\Message\UriInterface;
-
+use SEOPress\Vendor\Psr\Http\Message\UriInterface;
 /**
  * Provides methods to normalize and compare URIs.
  *
@@ -18,21 +16,13 @@ final class UriNormalizer
     /**
      * Default normalizations which only include the ones that preserve semantics.
      */
-    public const PRESERVING_NORMALIZATIONS =
-        self::CAPITALIZE_PERCENT_ENCODING |
-        self::DECODE_UNRESERVED_CHARACTERS |
-        self::CONVERT_EMPTY_PATH |
-        self::REMOVE_DEFAULT_HOST |
-        self::REMOVE_DEFAULT_PORT |
-        self::REMOVE_DOT_SEGMENTS;
-
+    public const PRESERVING_NORMALIZATIONS = self::CAPITALIZE_PERCENT_ENCODING | self::DECODE_UNRESERVED_CHARACTERS | self::CONVERT_EMPTY_PATH | self::REMOVE_DEFAULT_HOST | self::REMOVE_DEFAULT_PORT | self::REMOVE_DOT_SEGMENTS;
     /**
      * All letters within a percent-encoding triplet (e.g., "%3A") are case-insensitive, and should be capitalized.
      *
      * Example: http://example.org/a%c2%b1b → http://example.org/a%C2%B1b
      */
     public const CAPITALIZE_PERCENT_ENCODING = 1;
-
     /**
      * Decodes percent-encoded octets of unreserved characters.
      *
@@ -43,14 +33,12 @@ final class UriNormalizer
      * Example: http://example.org/%7Eusern%61me/ → http://example.org/~username/
      */
     public const DECODE_UNRESERVED_CHARACTERS = 2;
-
     /**
      * Converts the empty path to "/" for http and https URIs.
      *
      * Example: http://example.org → http://example.org/
      */
     public const CONVERT_EMPTY_PATH = 4;
-
     /**
      * Removes the default host of the given URI scheme from the URI.
      *
@@ -63,14 +51,12 @@ final class UriNormalizer
      * Example: file://localhost/myfile → file:///myfile
      */
     public const REMOVE_DEFAULT_HOST = 8;
-
     /**
      * Removes the default port of the given URI scheme from the URI.
      *
      * Example: http://example.org:80/ → http://example.org/
      */
     public const REMOVE_DEFAULT_PORT = 16;
-
     /**
      * Removes unnecessary dot-segments.
      *
@@ -80,7 +66,6 @@ final class UriNormalizer
      * Example: http://example.org/../a/b/../c/./d.html → http://example.org/a/c/d.html
      */
     public const REMOVE_DOT_SEGMENTS = 32;
-
     /**
      * Paths which include two or more adjacent slashes are converted to one.
      *
@@ -91,7 +76,6 @@ final class UriNormalizer
      * Example: http://example.org//foo///bar.html → http://example.org/foo/bar.html
      */
     public const REMOVE_DUPLICATE_SLASHES = 64;
-
     /**
      * Sort query parameters with their values in alphabetical order.
      *
@@ -104,7 +88,6 @@ final class UriNormalizer
      * purpose is to be able to compare URIs in a reproducible way, not to have the params sorted perfectly.
      */
     public const SORT_QUERY_PARAMETERS = 128;
-
     /**
      * Returns a normalized URI.
      *
@@ -126,42 +109,31 @@ final class UriNormalizer
         if ($flags & self::CAPITALIZE_PERCENT_ENCODING) {
             $uri = self::capitalizePercentEncoding($uri);
         }
-
         if ($flags & self::DECODE_UNRESERVED_CHARACTERS) {
             $uri = self::decodeUnreservedCharacters($uri);
         }
-
-        if ($flags & self::CONVERT_EMPTY_PATH && $uri->getPath() === ''
-            && ($uri->getScheme() === 'http' || $uri->getScheme() === 'https')
-        ) {
+        if ($flags & self::CONVERT_EMPTY_PATH && $uri->getPath() === '' && ($uri->getScheme() === 'http' || $uri->getScheme() === 'https')) {
             $uri = $uri->withPath('/');
         }
-
         if ($flags & self::REMOVE_DEFAULT_HOST && $uri->getScheme() === 'file' && $uri->getHost() === 'localhost') {
             $uri = $uri->withHost('');
         }
-
         if ($flags & self::REMOVE_DEFAULT_PORT && $uri->getPort() !== null && Uri::isDefaultPort($uri)) {
             $uri = $uri->withPort(null);
         }
-
         if ($flags & self::REMOVE_DOT_SEGMENTS && !Uri::isRelativePathReference($uri)) {
             $uri = $uri->withPath(UriResolver::removeDotSegments($uri->getPath()));
         }
-
         if ($flags & self::REMOVE_DUPLICATE_SLASHES) {
             $uri = $uri->withPath(preg_replace('#//++#', '/', $uri->getPath()));
         }
-
         if ($flags & self::SORT_QUERY_PARAMETERS && $uri->getQuery() !== '') {
             $queryKeyValues = explode('&', $uri->getQuery());
             sort($queryKeyValues);
             $uri = $uri->withQuery(implode('&', $queryKeyValues));
         }
-
         return $uri;
     }
-
     /**
      * Whether two URIs can be considered equivalent.
      *
@@ -180,49 +152,33 @@ final class UriNormalizer
     {
         return (string) self::normalize($uri1, $normalizations) === (string) self::normalize($uri2, $normalizations);
     }
-
     private static function capitalizePercentEncoding(UriInterface $uri): UriInterface
     {
         $regex = '/(?:%[A-Fa-f0-9]{2})++/';
-
         $callback = function (array $match): string {
             return strtoupper($match[0]);
         };
-
-        return $uri
-            ->withPath(self::normalizePercentEncodingInComponent($uri->getPath(), $regex, $callback))
-            ->withQuery(self::normalizePercentEncodingInComponent($uri->getQuery(), $regex, $callback))
-            ->withFragment(self::normalizePercentEncodingInComponent($uri->getFragment(), $regex, $callback));
+        return $uri->withPath(self::normalizePercentEncodingInComponent($uri->getPath(), $regex, $callback))->withQuery(self::normalizePercentEncodingInComponent($uri->getQuery(), $regex, $callback))->withFragment(self::normalizePercentEncodingInComponent($uri->getFragment(), $regex, $callback));
     }
-
     private static function decodeUnreservedCharacters(UriInterface $uri): UriInterface
     {
         $regex = '/%(?:2D|2E|5F|7E|3[0-9]|[46][1-9A-F]|[57][0-9A])/i';
-
         $callback = function (array $match): string {
             return rawurldecode($match[0]);
         };
-
-        return $uri
-            ->withPath(self::normalizePercentEncodingInComponent($uri->getPath(), $regex, $callback))
-            ->withQuery(self::normalizePercentEncodingInComponent($uri->getQuery(), $regex, $callback))
-            ->withFragment(self::normalizePercentEncodingInComponent($uri->getFragment(), $regex, $callback));
+        return $uri->withPath(self::normalizePercentEncodingInComponent($uri->getPath(), $regex, $callback))->withQuery(self::normalizePercentEncodingInComponent($uri->getQuery(), $regex, $callback))->withFragment(self::normalizePercentEncodingInComponent($uri->getFragment(), $regex, $callback));
     }
-
     /**
      * @param callable(array): string $callback
      */
     private static function normalizePercentEncodingInComponent(string $component, string $regex, callable $callback): string
     {
         $normalized = preg_replace_callback($regex, $callback, $component);
-
         if ($normalized === null) {
             throw new \RuntimeException('Unable to normalize URI component percent-encoding');
         }
-
         return $normalized;
     }
-
     private function __construct()
     {
         // cannot be instantiated

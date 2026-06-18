@@ -12,12 +12,10 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\Formats\Signature;
 
-namespace phpseclib3\Crypt\EC\Formats\Signature;
-
-use phpseclib3\Common\Functions\Strings;
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * SSH2 Signature Handler
  *
@@ -34,12 +32,11 @@ abstract class SSH2
     public static function load($sig)
     {
         if (!is_string($sig)) {
-            return false;
+            return \false;
         }
-
         $result = Strings::unpackSSH2('ss', $sig);
-        if ($result === false) {
-            return false;
+        if ($result === \false) {
+            return \false;
         }
         list($type, $blob) = $result;
         switch ($type) {
@@ -49,20 +46,14 @@ abstract class SSH2
             case 'ecdsa-sha2-nistp521':
                 break;
             default:
-                return false;
+                return \false;
         }
-
         $result = Strings::unpackSSH2('ii', $blob);
-        if ($result === false) {
-            return false;
+        if ($result === \false) {
+            return \false;
         }
-
-        return [
-            'r' => $result[0],
-            's' => $result[1]
-        ];
+        return ['r' => $result[0], 's' => $result[1]];
     }
-
     /**
      * Returns a signature in the appropriate format
      *
@@ -84,11 +75,9 @@ abstract class SSH2
                 $curve = 'nistp521';
                 break;
             default:
-                return false;
+                return \false;
         }
-
         $blob = Strings::packSSH2('ii', $r, $s);
-
         return Strings::packSSH2('ss', 'ecdsa-sha2-' . $curve, $blob);
     }
 }

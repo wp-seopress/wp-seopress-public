@@ -10,8 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
-
-namespace phpseclib3\Crypt\Common\Traits;
+namespace SEOPress\Vendor\phpseclib3\Crypt\Common\Traits;
 
 /**
  * Password Protected Trait for Private Keys
@@ -25,8 +24,7 @@ trait PasswordProtected
      *
      * @var string|bool
      */
-    private $password = false;
-
+    private $password = \false;
     /**
      * Sets the password
      *
@@ -37,7 +35,7 @@ trait PasswordProtected
      * @see self::load()
      * @param string|bool $password
      */
-    public function withPassword($password = false)
+    public function withPassword($password = \false)
     {
         $new = clone $this;
         $new->password = $password;

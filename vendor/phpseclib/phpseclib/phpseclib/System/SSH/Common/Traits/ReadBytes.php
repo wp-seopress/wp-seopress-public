@@ -10,8 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
-
-namespace phpseclib3\System\SSH\Common\Traits;
+namespace SEOPress\Vendor\phpseclib3\System\SSH\Common\Traits;
 
 /**
  * ReadBytes trait
@@ -30,7 +29,7 @@ trait ReadBytes
     {
         $temp = fread($this->fsock, $length);
         if (strlen($temp) != $length) {
-            throw new \RuntimeException("Expected $length bytes; got " . strlen($temp));
+            throw new \RuntimeException("Expected {$length} bytes; got " . strlen($temp));
         }
         return $temp;
     }

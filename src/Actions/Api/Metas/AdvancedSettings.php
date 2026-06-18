@@ -20,6 +20,19 @@ class AdvancedSettings implements ExecuteHooks {
 	 */
 
 	/**
+	 * Meta keys registered as integers, collected by register_int_meta().
+	 *
+	 * Kept so the WP 7 REST compatibility shim (see
+	 * tolerate_empty_int_metas) can stay in sync automatically with every
+	 * key that goes through register_int_meta().
+	 *
+	 * @since 10.0.0
+	 *
+	 * @var string[]
+	 */
+	protected $int_meta_keys = array();
+
+	/**
 	 * The Advanced Settings register.
 	 *
 	 * Every meta key registered here is exposed to Gutenberg via the standard
@@ -30,6 +43,10 @@ class AdvancedSettings implements ExecuteHooks {
 	 * normalization already done by the corresponding dedicated PUT endpoint
 	 * (RobotSettings::processPut, SocialSettings::processPut, …) so both
 	 * paths converge on the same DB value.
+	 *
+	 * Integer keys go through a WP 7 REST compatibility shim
+	 * (tolerate_empty_int_metas) so a cleared/unset value sent as an empty
+	 * string no longer trips the stricter schema validation.
 	 *
 	 * @since 5.0.0
 	 *
@@ -89,6 +106,9 @@ class AdvancedSettings implements ExecuteHooks {
 				'sanitize_callback' => array( $this, 'sanitize_target_keywords' ),
 			)
 		);
+
+		// WP 7 compatibility: coerce empty integer metas before validation.
+		add_filter( 'rest_request_before_callbacks', array( $this, 'tolerate_empty_int_metas' ), 10, 3 );
 	}
 
 	/**
@@ -135,13 +155,18 @@ class AdvancedSettings implements ExecuteHooks {
 	}
 
 	/**
-	 * Register an integer meta key — value coerced to int via `absint`.
+	 * Register an integer meta key — a positive value is kept as an int,
+	 * anything else (0, empty string, …) normalizes to an empty string so the
+	 * stored value matches the "no value" state the dedicated PUT endpoints
+	 * produce when they delete the meta.
 	 *
 	 * @param string $key Meta key.
 	 *
 	 * @return void
 	 */
 	protected function register_int_meta( $key ) {
+		$this->int_meta_keys[] = $key;
+
 		register_post_meta(
 			'',
 			$key,
@@ -150,7 +175,7 @@ class AdvancedSettings implements ExecuteHooks {
 				'single'            => true,
 				'type'              => 'integer',
 				'auth_callback'     => array( $this, 'meta_auth' ),
-				'sanitize_callback' => 'absint',
+				'sanitize_callback' => array( $this, 'sanitize_int_meta' ),
 			)
 		);
 	}
@@ -174,6 +199,73 @@ class AdvancedSettings implements ExecuteHooks {
 			}
 		);
 		return sanitize_text_field( implode( ',', $parts ) );
+	}
+
+	/**
+	 * Sanitize an integer meta value.
+	 *
+	 * Positive values are kept as integers; everything else (0, an empty
+	 * string sent when an image is cleared, null) collapses to an empty
+	 * string so a cleared field reads back the same way as one the dedicated
+	 * PUT endpoint deleted.
+	 *
+	 * @since 10.0.0
+	 *
+	 * @param mixed $value Raw value submitted via REST or update_post_meta.
+	 *
+	 * @return int|string
+	 */
+	public function sanitize_int_meta( $value ) {
+		$int = absint( $value );
+
+		return $int > 0 ? $int : '';
+	}
+
+	/**
+	 * WordPress 7 tightened REST schema validation and runs it *before* the
+	 * registered `sanitize_callback`. An integer meta whose value arrives as
+	 * an empty string — a social image that was never set or has just been
+	 * cleared in the Block Editor — therefore fails the `integer` type check
+	 * and the whole post update/autosave is rejected with
+	 * "meta._seopress_social_fb_img_attachment_id is not of type integer."
+	 *
+	 * Coerce those empty strings to 0 on the incoming request, before the
+	 * controller validates the meta, so the update succeeds; the
+	 * `sanitize_callback` then stores it back as an empty string. Hooked on
+	 * `rest_request_before_callbacks` so it also covers the autosave route,
+	 * not just `/wp/v2/<type>/<id>` updates.
+	 *
+	 * @since 10.0.0
+	 *
+	 * @param \WP_REST_Response|\WP_Error|mixed $response The current response.
+	 * @param array                             $handler  The matched route handler.
+	 * @param \WP_REST_Request                  $request  The current request.
+	 *
+	 * @return \WP_REST_Response|\WP_Error|mixed
+	 */
+	public function tolerate_empty_int_metas( $response, $handler, $request ) { // phpcs:ignore -- $handler is required by the filter signature.
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$meta = $request['meta'];
+		if ( ! is_array( $meta ) ) {
+			return $response;
+		}
+
+		$changed = false;
+		foreach ( $this->int_meta_keys as $key ) {
+			if ( array_key_exists( $key, $meta ) && '' === $meta[ $key ] ) {
+				$meta[ $key ] = 0;
+				$changed      = true;
+			}
+		}
+
+		if ( $changed ) {
+			$request['meta'] = $meta;
+		}
+
+		return $response;
 	}
 
 	/**

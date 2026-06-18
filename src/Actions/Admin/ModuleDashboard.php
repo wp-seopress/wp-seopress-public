@@ -434,6 +434,7 @@ class ModuleDashboard implements ExecuteHooks {
 				'id'              => isset( $affiliate['id'] ) ? (string) $affiliate['id'] : '',
 				'name'            => isset( $affiliate['name'] ) ? (string) $affiliate['name'] : '',
 				'description'     => isset( $affiliate['description'] ) ? (string) $affiliate['description'] : '',
+				'ctaText'         => isset( $affiliate['cta_text'] ) ? (string) $affiliate['cta_text'] : '',
 				'url'             => isset( $affiliate['url'] ) ? (string) $affiliate['url'] : '',
 				'icon'            => isset( $affiliate['icon'] ) ? (string) $affiliate['icon'] : '',
 				'logoUrl'         => isset( $affiliate['logo_url'] ) ? (string) $affiliate['logo_url'] : '',

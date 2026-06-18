@@ -1,10 +1,9 @@
 <?php
 
-namespace Psr\Http\Client;
+namespace SEOPress\Vendor\Psr\Http\Client;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-
+use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
+use SEOPress\Vendor\Psr\Http\Message\ResponseInterface;
 interface ClientInterface
 {
     /**

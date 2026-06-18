@@ -10,13 +10,11 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\RSA\Formats\Keys;
 
-namespace phpseclib3\Crypt\RSA\Formats\Keys;
-
-use phpseclib3\Common\Functions\Strings;
-use phpseclib3\Crypt\Common\Formats\Keys\PuTTY as Progenitor;
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Crypt\Common\Formats\Keys\PuTTY as Progenitor;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * PuTTY Formatted RSA Key Handler
  *
@@ -29,15 +27,13 @@ abstract class PuTTY extends Progenitor
      *
      * @var string
      */
-    const PUBLIC_HANDLER = 'phpseclib3\Crypt\RSA\Formats\Keys\OpenSSH';
-
+    const PUBLIC_HANDLER = 'SEOPress\Vendor\phpseclib3\Crypt\RSA\Formats\Keys\OpenSSH';
     /**
      * Algorithm Identifier
      *
      * @var array
      */
     protected static $types = ['ssh-rsa'];
-
     /**
      * Break a public or private key down into its constituent components
      *
@@ -51,7 +47,6 @@ abstract class PuTTY extends Progenitor
         if (!isset($one)) {
             $one = new BigInteger(1);
         }
-
         $components = parent::load($key, $password);
         if (!isset($components['private'])) {
             return $components;
@@ -61,30 +56,24 @@ abstract class PuTTY extends Progenitor
         $public = $components['public'];
         $private = $components['private'];
         unset($components['public'], $components['private']);
-
-        $isPublicKey = false;
-
+        $isPublicKey = \false;
         $result = Strings::unpackSSH2('ii', $public);
-        if ($result === false) {
+        if ($result === \false) {
             throw new \UnexpectedValueException('Key appears to be malformed');
         }
         list($publicExponent, $modulus) = $result;
-
         $result = Strings::unpackSSH2('iiii', $private);
-        if ($result === false) {
+        if ($result === \false) {
             throw new \UnexpectedValueException('Key appears to be malformed');
         }
         $primes = $coefficients = [];
         list($privateExponent, $primes[1], $primes[2], $coefficients[2]) = $result;
-
         $temp = $primes[1]->subtract($one);
         $exponents = [1 => $publicExponent->modInverse($temp)];
         $temp = $primes[2]->subtract($one);
         $exponents[] = $publicExponent->modInverse($temp);
-
         return compact('publicExponent', 'modulus', 'privateExponent', 'primes', 'coefficients', 'exponents', 'comment', 'isPublicKey');
     }
-
     /**
      * Convert a private key to the appropriate format.
      *
@@ -103,13 +92,10 @@ abstract class PuTTY extends Progenitor
         if (count($primes) != 2) {
             throw new \InvalidArgumentException('PuTTY does not support multi-prime RSA keys');
         }
-
-        $public =  Strings::packSSH2('ii', $e, $n);
+        $public = Strings::packSSH2('ii', $e, $n);
         $private = Strings::packSSH2('iiii', $d, $primes[1], $primes[2], $coefficients[2]);
-
         return self::wrapPrivateKey($public, $private, 'ssh-rsa', $password, $options);
     }
-
     /**
      * Convert a public key to the appropriate format
      *

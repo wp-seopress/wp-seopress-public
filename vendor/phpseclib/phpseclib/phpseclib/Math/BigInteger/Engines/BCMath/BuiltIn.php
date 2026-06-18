@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+namespace SEOPress\Vendor\phpseclib3\Math\BigInteger\Engines\BCMath;
 
-namespace phpseclib3\Math\BigInteger\Engines\BCMath;
-
-use phpseclib3\Math\BigInteger\Engines\BCMath;
-
+use SEOPress\Vendor\phpseclib3\Math\BigInteger\Engines\BCMath;
 /**
  * Built-In BCMath Modular Exponentiation Engine
  *
@@ -34,7 +32,6 @@ abstract class BuiltIn extends BCMath
     {
         $temp = new BCMath();
         $temp->value = bcpowmod($x->value, $e->value, $n->value, 0);
-
         return $x->normalize($temp);
     }
 }

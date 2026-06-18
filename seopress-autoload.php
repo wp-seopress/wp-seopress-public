@@ -25,9 +25,12 @@ spl_autoload_register(
 		// with .php
 		$file = $base_dir . str_replace( '\\', '/', $relative_class ) . '.php';
 
-		// if the file exists, require it
+		// PHP re-invokes registered autoloaders every time class_exists()/defined()
+		// is called on a still-undefined class. The src/Thirds tree contains
+		// function-only files (no class declared) that would otherwise be
+		// require()'d twice and fatal on the second pass.
 		if ( file_exists( $file ) ) {
-			require $file;
+			require_once $file;
 		}
 	}
 );

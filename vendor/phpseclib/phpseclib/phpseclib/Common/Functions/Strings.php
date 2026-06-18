@@ -10,15 +10,13 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Common\Functions;
 
-namespace phpseclib3\Common\Functions;
-
-use ParagonIE\ConstantTime\Base64;
-use ParagonIE\ConstantTime\Base64UrlSafe;
-use ParagonIE\ConstantTime\Hex;
-use phpseclib3\Math\BigInteger;
-use phpseclib3\Math\Common\FiniteField;
-
+use SEOPress\Vendor\ParagonIE\ConstantTime\Base64;
+use SEOPress\Vendor\ParagonIE\ConstantTime\Base64UrlSafe;
+use SEOPress\Vendor\ParagonIE\ConstantTime\Hex;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
+use SEOPress\Vendor\phpseclib3\Math\Common\FiniteField;
 /**
  * Common String Functions
  *
@@ -41,7 +39,6 @@ abstract class Strings
         $string = substr($string, $index);
         return $substr;
     }
-
     /**
      * String Pop
      *
@@ -57,7 +54,6 @@ abstract class Strings
         $string = substr($string, 0, -$index);
         return $substr;
     }
-
     /**
      * Parse SSH2-style string
      *
@@ -104,7 +100,6 @@ abstract class Strings
                         throw new \LengthException('At least eight byte needs to be present for successful N / i / s / L decodes');
                     }
                     break;
-
                 default:
                     throw new \InvalidArgumentException('$format contains an invalid character');
             }
@@ -130,14 +125,14 @@ abstract class Strings
                     $upper = $unpacked['upper'];
                     $lower = $unpacked['lower'];
                     $temp = $upper ? 4294967296 * $upper : 0;
-                    $temp += $lower < 0 ? ($lower & 0x7FFFFFFFF) + 0x80000000 : $lower;
+                    $temp += $lower < 0 ? ($lower & 0x7ffffffff) + 0x80000000 : $lower;
                     // $temp = hexdec(bin2hex(self::shift($data, 8)));
                     $result[] = $temp;
                     continue 2;
             }
             list(, $length) = unpack('N', self::shift($data, 4));
             if (strlen($data) < $length) {
-                throw new \LengthException("$length bytes needed; " . strlen($data) . ' bytes available');
+                throw new \LengthException("{$length} bytes needed; " . strlen($data) . ' bytes available');
             }
             $temp = self::shift($data, $length);
             switch ($format[$i]) {
@@ -151,10 +146,8 @@ abstract class Strings
                     $result[] = explode(',', $temp);
             }
         }
-
         return $result;
     }
-
     /**
      * Create SSH2-style string
      *
@@ -182,7 +175,7 @@ abstract class Strings
                     if (!is_bool($element)) {
                         throw new \InvalidArgumentException('A boolean parameter was expected.');
                     }
-                    $result .= $element ? "\1" : "\0";
+                    $result .= $element ? "\x01" : "\x00";
                     break;
                 case 'Q':
                     if (!is_int($element) && !is_float($element)) {
@@ -210,7 +203,7 @@ abstract class Strings
                     if (!$element instanceof BigInteger && !$element instanceof FiniteField\Integer) {
                         throw new \InvalidArgumentException('A phpseclib3\Math\BigInteger or phpseclib3\Math\Common\FiniteField\Integer object was expected.');
                     }
-                    $element = $element->toBytes(true);
+                    $element = $element->toBytes(\true);
                     $result .= pack('Na*', strlen($element), $element);
                     break;
                 case 'L':
@@ -226,7 +219,6 @@ abstract class Strings
         }
         return $result;
     }
-
     /**
      * Expand a pack string
      *
@@ -237,16 +229,14 @@ abstract class Strings
      */
     private static function formatPack($format)
     {
-        $parts = preg_split('#(\d+)#', $format, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $parts = preg_split('#(\d+)#', $format, -1, \PREG_SPLIT_DELIM_CAPTURE);
         $format = '';
         for ($i = 1; $i < count($parts); $i += 2) {
             $format .= substr($parts[$i - 1], 0, -1) . str_repeat(substr($parts[$i - 1], -1), $parts[$i]);
         }
         $format .= $parts[$i - 1];
-
         return $format;
     }
-
     /**
      * Convert binary data into bits
      *
@@ -266,45 +256,37 @@ abstract class Strings
              return strlen($x) ? gmp_export(gmp_init($x, 2)) : gmp_init(0);
         }
         */
-
         if (preg_match('#[^01]#', $x)) {
             throw new \RuntimeException('The only valid characters are 0 and 1');
         }
-
         if (!defined('PHP_INT_MIN')) {
-            define('PHP_INT_MIN', ~PHP_INT_MAX);
+            define('PHP_INT_MIN', ~\PHP_INT_MAX);
         }
-
         $length = strlen($x);
         if (!$length) {
             return '';
         }
-        $block_size = PHP_INT_SIZE << 3;
-        $pad = $block_size - ($length % $block_size);
+        $block_size = \PHP_INT_SIZE << 3;
+        $pad = $block_size - $length % $block_size;
         if ($pad != $block_size) {
             $x = str_repeat('0', $pad) . $x;
         }
-
         $parts = str_split($x, $block_size);
         $str = '';
         foreach ($parts as $part) {
-            $xor = $part[0] == '1' ? PHP_INT_MIN : 0;
+            $xor = $part[0] == '1' ? \PHP_INT_MIN : 0;
             $part[0] = '0';
-            $str .= pack(
-                PHP_INT_SIZE == 4 ? 'N' : 'J',
-                $xor ^ eval('return 0b' . $part . ';')
-            );
+            $str .= pack(\PHP_INT_SIZE == 4 ? 'N' : 'J', $xor ^ eval('return 0b' . $part . ';'));
         }
-        return ltrim($str, "\0");
+        return ltrim($str, "\x00");
     }
-
     /**
      * Convert bits to binary data
      *
      * @param string $x
      * @return string
      */
-    public static function bin2bits($x, $trim = true)
+    public static function bin2bits($x, $trim = \true)
     {
         /*
         // the pure-PHP approach is slower than the GMP approach BUT
@@ -313,15 +295,13 @@ abstract class Strings
             return gmp_strval(gmp_import($x), 2);
         }
         */
-
         $len = strlen($x);
-        $mod = $len % PHP_INT_SIZE;
+        $mod = $len % \PHP_INT_SIZE;
         if ($mod) {
-            $x = str_pad($x, $len + PHP_INT_SIZE - $mod, "\0", STR_PAD_LEFT);
+            $x = str_pad($x, $len + \PHP_INT_SIZE - $mod, "\x00", \STR_PAD_LEFT);
         }
-
         $bits = '';
-        if (PHP_INT_SIZE == 4) {
+        if (\PHP_INT_SIZE == 4) {
             $digits = unpack('N*', $x);
             foreach ($digits as $digit) {
                 $bits .= sprintf('%032b', $digit);
@@ -332,10 +312,8 @@ abstract class Strings
                 $bits .= sprintf('%064b', $digit);
             }
         }
-
         return $trim ? ltrim($bits, '0') : $bits;
     }
-
     /**
      * Switch Endianness Bit Order
      *
@@ -347,25 +325,24 @@ abstract class Strings
         $r = '';
         for ($i = strlen($x) - 1; $i >= 0; $i--) {
             $b = ord($x[$i]);
-            if (PHP_INT_SIZE === 8) {
+            if (\PHP_INT_SIZE === 8) {
                 // 3 operations
                 // from http://graphics.stanford.edu/~seander/bithacks.html#ReverseByteWith64BitsDiv
-                $r .= chr((($b * 0x0202020202) & 0x010884422010) % 1023);
+                $r .= chr(($b * 0x202020202 & 0x10884422010) % 1023);
             } else {
                 // 7 operations
                 // from http://graphics.stanford.edu/~seander/bithacks.html#ReverseByteWith32Bits
-                $p1 = ($b * 0x0802) & 0x22110;
-                $p2 = ($b * 0x8020) & 0x88440;
+                $p1 = $b * 0x802 & 0x22110;
+                $p2 = $b * 0x8020 & 0x88440;
                 $temp = ($p1 | $p2) * 0x10101;
                 if (is_float($temp)) {
-                    $temp = (int) fmod($temp, 0x7FFFFFFF);
+                    $temp = (int) fmod($temp, 0x7fffffff);
                 }
-                $r .= chr(($temp >> 16) & 0xFF);
+                $r .= chr($temp >> 16 & 0xff);
             }
         }
         return $r;
     }
-
     /**
      * Increment the current string
      *
@@ -380,14 +357,13 @@ abstract class Strings
             $var = strrev($var);
             return $var;
         }
-
         for ($i = 4; $i <= strlen($var); $i += 4) {
             $temp = substr($var, -$i, 4);
             switch ($temp) {
-                case "\xFF\xFF\xFF\xFF":
+                case "\xff\xff\xff\xff":
                     $var = substr_replace($var, "\x00\x00\x00\x00", -$i, 4);
                     break;
-                case "\x7F\xFF\xFF\xFF":
+                case "\xff\xff\xff":
                     $var = substr_replace($var, "\x80\x00\x00\x00", -$i, 4);
                     return $var;
                 default:
@@ -396,20 +372,15 @@ abstract class Strings
                     return $var;
             }
         }
-
         $remainder = strlen($var) % 4;
-
         if ($remainder == 0) {
             return $var;
         }
-
-        $temp = unpack('Nnum', str_pad(substr($var, 0, $remainder), 4, "\0", STR_PAD_LEFT));
+        $temp = unpack('Nnum', str_pad(substr($var, 0, $remainder), 4, "\x00", \STR_PAD_LEFT));
         $temp = substr(pack('N', $temp['num'] + 1), -$remainder);
         $var = substr_replace($var, $temp, 0, $remainder);
-
         return $var;
     }
-
     /**
      * Find whether the type of a variable is string (or could be converted to one)
      *
@@ -419,9 +390,8 @@ abstract class Strings
      */
     public static function is_stringable($var)
     {
-        return is_string($var) || (is_object($var) && method_exists($var, '__toString'));
+        return is_string($var) || is_object($var) && method_exists($var, '__toString');
     }
-
     /**
      * Constant Time Base64-decoding
      *
@@ -433,11 +403,8 @@ abstract class Strings
      */
     public static function base64_decode($data)
     {
-        return function_exists('sodium_base642bin') ?
-            sodium_base642bin($data, SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING, '=') :
-            Base64::decode($data);
+        return function_exists('sodium_base642bin') ? sodium_base642bin($data, \SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING, '=') : Base64::decode($data);
     }
-
     /**
      * Constant Time Base64-decoding (URL safe)
      *
@@ -447,12 +414,8 @@ abstract class Strings
     public static function base64url_decode($data)
     {
         // return self::base64_decode(str_replace(['-', '_'], ['+', '/'], $data));
-
-        return function_exists('sodium_base642bin') ?
-            sodium_base642bin($data, SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING, '=') :
-            Base64UrlSafe::decode($data);
+        return function_exists('sodium_base642bin') ? sodium_base642bin($data, \SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING, '=') : Base64UrlSafe::decode($data);
     }
-
     /**
      * Constant Time Base64-encoding
      *
@@ -461,11 +424,8 @@ abstract class Strings
      */
     public static function base64_encode($data)
     {
-        return function_exists('sodium_bin2base64') ?
-            sodium_bin2base64($data, SODIUM_BASE64_VARIANT_ORIGINAL) :
-            Base64::encode($data);
+        return function_exists('sodium_bin2base64') ? sodium_bin2base64($data, \SODIUM_BASE64_VARIANT_ORIGINAL) : Base64::encode($data);
     }
-
     /**
      * Constant Time Base64-encoding (URL safe)
      *
@@ -475,12 +435,8 @@ abstract class Strings
     public static function base64url_encode($data)
     {
         // return str_replace(['+', '/'], ['-', '_'], self::base64_encode($data));
-
-        return function_exists('sodium_bin2base64') ?
-            sodium_bin2base64($data, SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING) :
-            Base64UrlSafe::encode($data);
+        return function_exists('sodium_bin2base64') ? sodium_bin2base64($data, \SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING) : Base64UrlSafe::encode($data);
     }
-
     /**
      * Constant Time Hex Decoder
      *
@@ -489,11 +445,8 @@ abstract class Strings
      */
     public static function hex2bin($data)
     {
-        return function_exists('sodium_hex2bin') ?
-            sodium_hex2bin($data) :
-            Hex::decode($data);
+        return function_exists('sodium_hex2bin') ? sodium_hex2bin($data) : Hex::decode($data);
     }
-
     /**
      * Constant Time Hex Encoder
      *
@@ -502,8 +455,6 @@ abstract class Strings
      */
     public static function bin2hex($data)
     {
-        return function_exists('sodium_bin2hex') ?
-            sodium_bin2hex($data) :
-            Hex::encode($data);
+        return function_exists('sodium_bin2hex') ? sodium_bin2hex($data) : Hex::encode($data);
     }
 }

@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * Characteristic_two
  *
@@ -22,15 +20,10 @@ use phpseclib3\File\ASN1;
  */
 abstract class Characteristic_two
 {
-    const MAP = [
-        'type' => ASN1::TYPE_SEQUENCE,
-        'children' => [
-            'm' => ['type' => ASN1::TYPE_INTEGER], // field size 2**m
-            'basis' => ['type' => ASN1::TYPE_OBJECT_IDENTIFIER],
-            'parameters' => [
-                'type' => ASN1::TYPE_ANY,
-                'optional' => true
-            ]
-        ]
-    ];
+    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => [
+        'm' => ['type' => ASN1::TYPE_INTEGER],
+        // field size 2**m
+        'basis' => ['type' => ASN1::TYPE_OBJECT_IDENTIFIER],
+        'parameters' => ['type' => ASN1::TYPE_ANY, 'optional' => \true],
+    ]];
 }

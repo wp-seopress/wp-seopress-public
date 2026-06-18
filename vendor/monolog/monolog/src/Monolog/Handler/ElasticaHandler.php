@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,16 +9,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Handler;
 
-namespace Monolog\Handler;
-
-use Elastica\Document;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\ElasticaFormatter;
-use Monolog\Logger;
-use Elastica\Client;
-use Elastica\Exception\ExceptionInterface;
-
+use SEOPress\Vendor\Elastica\Document;
+use SEOPress\Vendor\Monolog\Formatter\FormatterInterface;
+use SEOPress\Vendor\Monolog\Formatter\ElasticaFormatter;
+use SEOPress\Vendor\Monolog\Logger;
+use SEOPress\Vendor\Elastica\Client;
+use SEOPress\Vendor\Elastica\Exception\ExceptionInterface;
 /**
  * Elastic Search handler
  *
@@ -40,30 +39,26 @@ class ElasticaHandler extends AbstractProcessingHandler
      * @var Client
      */
     protected $client;
-
     /**
      * @var mixed[] Handler config options
      */
     protected $options = [];
-
     /**
      * @param Client  $client  Elastica Client object
      * @param mixed[] $options Handler configuration
      */
-    public function __construct(Client $client, array $options = [], $level = Logger::DEBUG, bool $bubble = true)
+    public function __construct(Client $client, array $options = [], $level = Logger::DEBUG, bool $bubble = \true)
     {
         parent::__construct($level, $bubble);
         $this->client = $client;
-        $this->options = array_merge(
-            [
-                'index'          => 'monolog',      // Elastic index name
-                'type'           => 'record',       // Elastic document type
-                'ignore_error'   => false,          // Suppress Elastica exceptions
-            ],
-            $options
-        );
+        $this->options = array_merge([
+            'index' => 'monolog',
+            // Elastic index name
+            'type' => 'record',
+            // Elastic document type
+            'ignore_error' => \false,
+        ], $options);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -71,7 +66,6 @@ class ElasticaHandler extends AbstractProcessingHandler
     {
         $this->bulkSend([$record['formatted']]);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -80,10 +74,8 @@ class ElasticaHandler extends AbstractProcessingHandler
         if ($formatter instanceof ElasticaFormatter) {
             return parent::setFormatter($formatter);
         }
-
         throw new \InvalidArgumentException('ElasticaHandler is only compatible with ElasticaFormatter');
     }
-
     /**
      * @return mixed[]
      */
@@ -91,7 +83,6 @@ class ElasticaHandler extends AbstractProcessingHandler
     {
         return $this->options;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -99,7 +90,6 @@ class ElasticaHandler extends AbstractProcessingHandler
     {
         return new ElasticaFormatter($this->options['index'], $this->options['type']);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -108,7 +98,6 @@ class ElasticaHandler extends AbstractProcessingHandler
         $documents = $this->getFormatter()->formatBatch($records);
         $this->bulkSend($documents);
     }
-
     /**
      * Use Elasticsearch bulk API to send list of documents
      *

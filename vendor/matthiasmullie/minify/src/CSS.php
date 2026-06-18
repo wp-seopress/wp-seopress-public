@@ -9,14 +9,12 @@
  * @copyright Copyright (c) 2012, Matthias Mullie. All rights reserved
  * @license MIT License
  */
+namespace SEOPress\Vendor\MatthiasMullie\Minify;
 
-namespace MatthiasMullie\Minify;
-
-use MatthiasMullie\Minify\Exceptions\FileImportException;
-use MatthiasMullie\Minify\Exceptions\PatternMatchException;
-use MatthiasMullie\PathConverter\Converter;
-use MatthiasMullie\PathConverter\ConverterInterface;
-
+use SEOPress\Vendor\MatthiasMullie\Minify\Exceptions\FileImportException;
+use SEOPress\Vendor\MatthiasMullie\Minify\Exceptions\PatternMatchException;
+use SEOPress\Vendor\MatthiasMullie\PathConverter\Converter;
+use SEOPress\Vendor\MatthiasMullie\PathConverter\ConverterInterface;
 /**
  * CSS minifier.
  *
@@ -33,27 +31,10 @@ class CSS extends Minify
      * @var int maximum inport size in kB
      */
     protected $maxImportSize = 5;
-
     /**
      * @var string[] valid import extensions
      */
-    protected $importExtensions = array(
-        'gif' => 'data:image/gif',
-        'png' => 'data:image/png',
-        'jpe' => 'data:image/jpeg',
-        'jpg' => 'data:image/jpeg',
-        'jpeg' => 'data:image/jpeg',
-        'svg' => 'data:image/svg+xml',
-        'woff' => 'data:application/x-font-woff',
-        'woff2' => 'data:application/x-font-woff2',
-        'avif' => 'data:image/avif',
-        'apng' => 'data:image/apng',
-        'webp' => 'data:image/webp',
-        'tif' => 'image/tiff',
-        'tiff' => 'image/tiff',
-        'xbm' => 'image/x-xbitmap',
-    );
-
+    protected $importExtensions = array('gif' => 'data:image/gif', 'png' => 'data:image/png', 'jpe' => 'data:image/jpeg', 'jpg' => 'data:image/jpeg', 'jpeg' => 'data:image/jpeg', 'svg' => 'data:image/svg+xml', 'woff' => 'data:application/x-font-woff', 'woff2' => 'data:application/x-font-woff2', 'avif' => 'data:image/avif', 'apng' => 'data:image/apng', 'webp' => 'data:image/webp', 'tif' => 'image/tiff', 'tiff' => 'image/tiff', 'xbm' => 'image/x-xbitmap');
     /**
      * Set the maximum size if files to be imported.
      *
@@ -68,7 +49,6 @@ class CSS extends Minify
     {
         $this->maxImportSize = $size;
     }
-
     /**
      * Set the type of extensions to be imported into the CSS (to save network
      * connections).
@@ -81,7 +61,6 @@ class CSS extends Minify
     {
         $this->importExtensions = $extensions;
     }
-
     /**
      * Move any import statements to the top.
      *
@@ -96,14 +75,11 @@ class CSS extends Minify
             foreach ($matches[0] as $import) {
                 $content = str_replace($import, '', $content);
             }
-
             // add to top
             $content = implode(';', $matches[2]) . ';' . trim($content, ';');
         }
-
         return $content;
     }
-
     /**
      * Combine CSS from import statements.
      *
@@ -157,7 +133,6 @@ class CSS extends Minify
             ;?
 
             /ix',
-
             // @import 'xxx'
             '/
 
@@ -190,56 +165,46 @@ class CSS extends Minify
 
             /ix',
         );
-
         // find all relative imports in css
         $matches = array();
         foreach ($importRegexes as $importRegex) {
-            if (preg_match_all($importRegex, $content, $regexMatches, PREG_SET_ORDER)) {
+            if (preg_match_all($importRegex, $content, $regexMatches, \PREG_SET_ORDER)) {
                 $matches = array_merge($matches, $regexMatches);
             }
         }
-
         $search = array();
         $replace = array();
-
         // loop the matches
         foreach ($matches as $match) {
             // get the path for the file that will be imported
             $importPath = dirname($source) . '/' . $match['path'];
-
             // only replace the import with the content if we can grab the
             // content of the file
             if (!$this->canImportByPath($match['path']) || !$this->canImportFile($importPath)) {
                 continue;
             }
-
             // check if current file was not imported previously in the same
             // import chain.
             if (in_array($importPath, $parents)) {
                 throw new FileImportException('Failed to import file "' . $importPath . '": circular reference detected.');
             }
-
             // grab referenced file & minify it (which may include importing
             // yet other @import statements recursively)
             $minifier = new self($importPath);
             $minifier->setMaxImportSize($this->maxImportSize);
             $minifier->setImportExtensions($this->importExtensions);
             $importContent = $minifier->execute($source, $parents);
-
             // check if this is only valid for certain media
             if (!empty($match['media'])) {
                 $importContent = '@media ' . $match['media'] . '{' . $importContent . '}';
             }
-
             // add to replacement array
             $search[] = $match[0];
             $replace[] = $importContent;
         }
-
         // replace the import statements
         return str_replace($search, $replace, $content);
     }
-
     /**
      * Import files into the CSS, base64-ized.
      *
@@ -253,42 +218,35 @@ class CSS extends Minify
      */
     protected function importFiles($source, $content)
     {
-        $regex = '/url\((["\']?)(.+?)\\1\)/i';
-        if ($this->importExtensions && preg_match_all($regex, $content, $matches, PREG_SET_ORDER)) {
+        $regex = '/url\((["\']?)(.+?)\1\)/i';
+        if ($this->importExtensions && preg_match_all($regex, $content, $matches, \PREG_SET_ORDER)) {
             $search = array();
             $replace = array();
-
             // loop the matches
             foreach ($matches as $match) {
                 $extension = substr(strrchr($match[2], '.'), 1);
                 if ($extension && !array_key_exists($extension, $this->importExtensions)) {
                     continue;
                 }
-
                 // get the path for the file that will be imported
                 $path = $match[2];
                 $path = dirname($source) . '/' . $path;
-
                 // only replace the import with the content if we're able to get
                 // the content of the file, and it's relatively small
                 if ($this->canImportFile($path) && $this->canImportBySize($path)) {
                     // grab content && base64-ize
                     $importContent = $this->load($path);
                     $importContent = base64_encode($importContent);
-
                     // build replacement
                     $search[] = $match[0];
                     $replace[] = 'url(' . $this->importExtensions[$extension] . ';base64,' . $importContent . ')';
                 }
             }
-
             // replace the import statements
             $content = str_replace($search, $replace, $content);
         }
-
         return $content;
     }
-
     /**
      * Minify the data.
      * Perform CSS optimizations.
@@ -303,7 +261,6 @@ class CSS extends Minify
     public function execute($path = null, $parents = array())
     {
         $content = '';
-
         // loop CSS data (raw data and files)
         foreach ($this->data as $source => $css) {
             /*
@@ -317,7 +274,6 @@ class CSS extends Minify
             $this->extractMath();
             $this->extractCustomProperties();
             $css = $this->replace($css);
-
             $css = $this->stripWhitespace($css);
             $css = $this->convertLegacyColors($css);
             $css = $this->cleanupModernColors($css);
@@ -325,15 +281,12 @@ class CSS extends Minify
             $css = $this->shortenZeroes($css);
             $css = $this->shortenFontWeights($css);
             $css = $this->stripEmptyTags($css);
-
             // restore the string we've extracted earlier
             $css = $this->restoreExtractedData($css);
-
             $source = is_int($source) ? '' : $source;
             $parents = $source ? array_merge($parents, array($source)) : $parents;
             $css = $this->combineImports($source, $css, $parents);
             $css = $this->importFiles($source, $css);
-
             /*
              * If we'll save to a new path, we'll have to fix the relative paths
              * to be relative no longer to the source file, but to the new path.
@@ -343,16 +296,12 @@ class CSS extends Minify
              */
             $converter = $this->getPathConverter($source, $path ?: $source);
             $css = $this->move($converter, $css);
-
             // combine css
             $content .= $css;
         }
-
         $content = $this->moveImportsToTop($content);
-
         return $content;
     }
-
     /**
      * Moving a css file should update all relative urls.
      * Relative references (e.g. ../images/image.gif) in a certain css file,
@@ -400,7 +349,6 @@ class CSS extends Minify
             \)
 
             /ix',
-
             // @import "xxx"
             '/
             # import statement
@@ -423,36 +371,29 @@ class CSS extends Minify
 
             /ix',
         );
-
         // find all relative urls in css
         $matches = array();
         foreach ($relativeRegexes as $relativeRegex) {
-            if (preg_match_all($relativeRegex, $content, $regexMatches, PREG_SET_ORDER)) {
+            if (preg_match_all($relativeRegex, $content, $regexMatches, \PREG_SET_ORDER)) {
                 $matches = array_merge($matches, $regexMatches);
             }
         }
-
         $search = array();
         $replace = array();
-
         // loop all urls
         foreach ($matches as $match) {
             // determine if it's a url() or an @import match
-            $type = (strpos($match[0], '@import') === 0 ? 'import' : 'url');
-
+            $type = strpos($match[0], '@import') === 0 ? 'import' : 'url';
             $url = $match['path'];
             if ($this->canImportByPath($url)) {
                 // attempting to interpret GET-params makes no sense, so let's discard them for awhile
                 $params = strrchr($url, '?');
                 $url = $params ? substr($url, 0, -strlen($params)) : $url;
-
                 // fix relative url
                 $url = $converter->convert($url);
-
                 // now that the path has been converted, re-apply GET-params
                 $url .= $params;
             }
-
             /*
              * Urls with control characters above 0x7e should be quoted.
              * According to Mozilla's parser, whitespace is only allowed at the
@@ -470,7 +411,6 @@ class CSS extends Minify
             if (preg_match('/[\s\)\'"#\x{7f}-\x{9f}]/u', $url)) {
                 $url = $match['quotes'] . $url . $match['quotes'];
             }
-
             // build replacement
             $search[] = $match[0];
             if ($type === 'url') {
@@ -479,11 +419,9 @@ class CSS extends Minify
                 $replace[] = '@import "' . $url . '"';
             }
         }
-
         // replace urls
         return str_replace($search, $replace, $content);
     }
-
     /**
      * Shorthand HEX color codes.
      * #FF0000FF -> #f00 -> red
@@ -496,15 +434,12 @@ class CSS extends Minify
     protected function shortenHexColors($content)
     {
         // shorten repeating patterns within HEX ..
-        $content = preg_replace('/(?<=[: ])#([0-9a-f])\\1([0-9a-f])\\2([0-9a-f])\\3(?:([0-9a-f])\\4)?(?=[; }])/i', '#$1$2$3$4', $content);
-
+        $content = preg_replace('/(?<=[: ])#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3(?:([0-9a-f])\4)?(?=[; }])/i', '#$1$2$3$4', $content);
         // remove alpha channel if it's pointless ..
         $content = preg_replace('/(?<=[: ])#([0-9a-f]{6})ff(?=[; }])/i', '#$1', $content);
         $content = preg_replace('/(?<=[: ])#([0-9a-f]{3})f(?=[; }])/i', '#$1', $content);
-
         // replace `transparent` with shortcut ..
         $content = preg_replace('/(?<=[: ])#[0-9a-f]{6}00(?=[; }])/i', '#fff0', $content);
-
         $colors = array(
             // make these more readable
             '#00f' => 'blue',
@@ -558,16 +493,10 @@ class CSS extends Minify
             // and also `transparent`
             'transparent' => '#fff0',
         );
-
-        return preg_replace_callback(
-            '/(?<=[: ])(' . implode('|', array_keys($colors)) . ')(?=[; }])/i',
-            function ($match) use ($colors) {
-                return $colors[strtolower($match[0])];
-            },
-            $content
-        );
+        return preg_replace_callback('/(?<=[: ])(' . implode('|', array_keys($colors)) . ')(?=[; }])/i', function ($match) use ($colors) {
+            return $colors[strtolower($match[0])];
+        }, $content);
     }
-
     /**
      * Convert RGB|HSL color codes.
      * rgb(255,0,0,.5) -> rgb(255 0 0 / .5).
@@ -584,25 +513,17 @@ class CSS extends Minify
           https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/rgb
           https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl
         */
-
         // convert legacy color syntax
         $content = preg_replace('/(rgb)a?\(\s*([0-9]{1,3}%?)\s*,\s*([0-9]{1,3}%?)\s*,\s*([0-9]{1,3}%?)\s*,\s*([0,1]?(?:\.[0-9]*)?)\s*\)/i', '$1($2 $3 $4 / $5)', $content);
         $content = preg_replace('/(rgb)a?\(\s*([0-9]{1,3}%?)\s*,\s*([0-9]{1,3}%?)\s*,\s*([0-9]{1,3}%?)\s*\)/i', '$1($2 $3 $4)', $content);
         $content = preg_replace('/(hsl)a?\(\s*([0-9]+(?:deg|grad|rad|turn)?)\s*,\s*([0-9]{1,3}%)\s*,\s*([0-9]{1,3}%)\s*,\s*([0,1]?(?:\.[0-9]*)?)\s*\)/i', '$1($2 $3 $4 / $5)', $content);
         $content = preg_replace('/(hsl)a?\(\s*([0-9]+(?:deg|grad|rad|turn)?)\s*,\s*([0-9]{1,3}%)\s*,\s*([0-9]{1,3}%)\s*\)/i', '$1($2 $3 $4)', $content);
-
         // convert `rgb` to `hex`
         $dec = '([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])';
-
-        return preg_replace_callback(
-            "/rgb\($dec $dec $dec\)/i",
-            function ($match) {
-                return sprintf('#%02x%02x%02x', $match[1], $match[2], $match[3]);
-            },
-            $content
-        );
+        return preg_replace_callback("/rgb\\({$dec} {$dec} {$dec}\\)/i", function ($match) {
+            return sprintf('#%02x%02x%02x', $match[1], $match[2], $match[3]);
+        }, $content);
     }
-
     /**
      * Cleanup RGB|HSL|HWB|LCH|LAB
      * rgb(255 0 0 / 1) -> rgb(255 0 0).
@@ -623,16 +544,12 @@ class CSS extends Minify
           https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklab
         */
         $tag = '(rgb|hsl|hwb|(?:(?:ok)?(?:lch|lab)))';
-
         // remove alpha channel if it's pointless ..
         $content = preg_replace('/' . $tag . '\(\s*([^\s)]+)\s+([^\s)]+)\s+([^\s)]+)\s+\/\s+1(?:(?:\.\d?)*|00%)?\s*\)/i', '$1($2 $3 $4)', $content);
-
         // replace `transparent` with shortcut ..
         $content = preg_replace('/' . $tag . '\(\s*[^\s)]+\s+[^\s)]+\s+[^\s)]+\s+\/\s+0(?:[\.0%]*)?\s*\)/i', '#fff0', $content);
-
         return $content;
     }
-
     /**
      * Shorten CSS font weights.
      *
@@ -642,18 +559,12 @@ class CSS extends Minify
      */
     protected function shortenFontWeights($content)
     {
-        $weights = array(
-            'normal' => 400,
-            'bold' => 700,
-        );
-
+        $weights = array('normal' => 400, 'bold' => 700);
         $callback = function ($match) use ($weights) {
             return $match[1] . $weights[$match[2]];
         };
-
         return preg_replace_callback('/(font-weight\s*:\s*)(' . implode('|', array_keys($weights)) . ')(?=[;}])/', $callback, $content);
     }
-
     /**
      * Shorthand 0 values to plain 0, instead of e.g. -0em.
      *
@@ -668,7 +579,6 @@ class CSS extends Minify
         // `10px * 0` is valid (equates to 0), and so is `10 * 0px`, but
         // `10 * 0` is invalid
         // we've extracted calcs earlier, so we don't need to worry about this
-
         // reusable bits of code throughout these regexes:
         // before & after are used to make sure we don't match lose unintended
         // 0-like values (e.g. in #000, or in http://url/1.0)
@@ -677,36 +587,30 @@ class CSS extends Minify
         $before = '(?<=[:(, ])';
         $after = '(?=[ ,);}])';
         $units = '(em|ex|%|px|cm|mm|in|pt|pc|ch|rem|vh|vw|vmin|vmax|vm)';
-
         // strip units after zeroes (0px -> 0)
         // NOTE: it should be safe to remove all units for a 0 value, but in
         // practice, Webkit (especially Safari) seems to stumble over at least
         // 0%, potentially other units as well. Only stripping 'px' for now.
         // @see https://github.com/matthiasmullie/minify/issues/60
-        $content = preg_replace('/' . $before . '(-?0*(\.0+)?)(?<=0)px' . $after . '/', '\\1', $content);
-
+        $content = preg_replace('/' . $before . '(-?0*(\.0+)?)(?<=0)px' . $after . '/', '\1', $content);
         // strip 0-digits (.0 -> 0)
-        $content = preg_replace('/' . $before . '\.0+' . $units . '?' . $after . '/', '0\\1', $content);
+        $content = preg_replace('/' . $before . '\.0+' . $units . '?' . $after . '/', '0\1', $content);
         // strip trailing 0: 50.10 -> 50.1, 50.10px -> 50.1px
-        $content = preg_replace('/' . $before . '(-?[0-9]+\.[0-9]+)0+' . $units . '?' . $after . '/', '\\1\\2', $content);
+        $content = preg_replace('/' . $before . '(-?[0-9]+\.[0-9]+)0+' . $units . '?' . $after . '/', '\1\2', $content);
         // strip trailing 0: 50.00 -> 50, 50.00px -> 50px
-        $content = preg_replace('/' . $before . '(-?[0-9]+)\.0+' . $units . '?' . $after . '/', '\\1\\2', $content);
+        $content = preg_replace('/' . $before . '(-?[0-9]+)\.0+' . $units . '?' . $after . '/', '\1\2', $content);
         // strip leading 0: 0.1 -> .1, 01.1 -> 1.1
-        $content = preg_replace('/' . $before . '(-?)0+([0-9]*\.[0-9]+)' . $units . '?' . $after . '/', '\\1\\2\\3', $content);
-
+        $content = preg_replace('/' . $before . '(-?)0+([0-9]*\.[0-9]+)' . $units . '?' . $after . '/', '\1\2\3', $content);
         // strip negative zeroes (-0 -> 0) & truncate zeroes (00 -> 0)
-        $content = preg_replace('/' . $before . '-?0+' . $units . '?' . $after . '/', '0\\1', $content);
-
+        $content = preg_replace('/' . $before . '-?0+' . $units . '?' . $after . '/', '0\1', $content);
         // IE doesn't seem to understand a unitless flex-basis value (correct -
         // it goes against the spec), so let's add it in again (make it `%`,
         // which is only 1 char: 0%, 0px, 0 anything, it's all just the same)
         // @see https://developer.mozilla.org/nl/docs/Web/CSS/flex
         $content = preg_replace('/flex:([0-9]+\s[0-9]+\s)0([;\}])/', 'flex:${1}0%${2}', $content);
         $content = preg_replace('/flex-basis:0([;\}])/', 'flex-basis:0%${1}', $content);
-
         return $content;
     }
-
     /**
      * Strip empty tags from source code.
      *
@@ -718,10 +622,8 @@ class CSS extends Minify
     {
         $content = preg_replace('/(?<=^)[^\{\};]+\{\s*\}/', '', $content);
         $content = preg_replace('/(?<=(\}|;))[^\{\};]+\{\s*\}/', '', $content);
-
         return $content;
     }
-
     /**
      * Strip comments from source code.
      */
@@ -729,7 +631,6 @@ class CSS extends Minify
     {
         $this->stripMultilineComments();
     }
-
     /**
      * Strip whitespace.
      *
@@ -744,30 +645,24 @@ class CSS extends Minify
         // remove leading & trailing whitespace
         $content = $this->pregReplace('/^\s*/m', '', $content);
         $content = $this->pregReplace('/\s*$/m', '', $content);
-
         // replace newlines with a single space
         $content = $this->pregReplace('/\s+/', ' ', $content);
-
         // remove whitespace around meta characters
         // inspired by stackoverflow.com/questions/15195750/minify-compress-css-with-regex
         $content = $this->pregReplace('/\s*([\*$~^|]?+=|[{};,>~]|!important\b)\s*/', '$1', $content);
         $content = $this->pregReplace('/([\[(:>\+])\s+/', '$1', $content);
         $content = $this->pregReplace('/\s+([\]\)>\+])/', '$1', $content);
         $content = $this->pregReplace('/\s+(:)(?![^\}]*\{)/', '$1', $content);
-
         // whitespace around + and - can only be stripped inside some pseudo-
         // classes, like `:nth-child(3+2n)`
         // not in things like `calc(3px + 2px)`, shorthands like `3px -2px`, or
         // selectors like `div.weird- p`
         $pseudos = array('nth-child', 'nth-last-child', 'nth-last-of-type', 'nth-of-type');
         $content = $this->pregReplace('/:(' . implode('|', $pseudos) . ')\(\s*([+-]?)\s*(.+?)\s*([+-]?)\s*(.*?)\s*\)/', ':$1($2$3$4$5)', $content);
-
         // remove semicolon/whitespace followed by closing bracket
         $content = str_replace(';}', '}', $content);
-
         return trim($content);
     }
-
     /**
      * Perform a preg_replace and check for errors.
      *
@@ -783,12 +678,10 @@ class CSS extends Minify
     {
         $result = preg_replace($pattern, $replacement, $subject);
         if ($result === null) {
-            throw PatternMatchException::fromLastError("Failed to replace with pattern '$pattern'");
+            throw PatternMatchException::fromLastError("Failed to replace with pattern '{$pattern}'");
         }
-
         return $result;
     }
-
     /**
      * Replace all occurrences of functions that may contain math, where
      * whitespace around operators needs to be preserved (e.g. calc, clamp).
@@ -797,7 +690,6 @@ class CSS extends Minify
     {
         $functions = array('calc', 'clamp', 'min', 'max');
         $pattern = '/\b(' . implode('|', $functions) . ')(\(.+?)(?=$|;|})/m';
-
         // PHP only supports $this inside anonymous functions since 5.4
         $minifier = $this;
         $callback = function ($match) use ($minifier, $pattern, &$callback) {
@@ -805,7 +697,6 @@ class CSS extends Minify
             $length = strlen($match[2]);
             $expr = '';
             $opened = 0;
-
             // the regular expression for extracting math has 1 significant problem:
             // it can't determine the correct closing parenthesis...
             // instead, it'll match a larger portion of code to where it's certain that
@@ -820,24 +711,19 @@ class CSS extends Minify
                     break;
                 }
             }
-
             // now that we've figured out where the calc() starts and ends, extract it
             $count = count($minifier->extracted);
             $placeholder = 'math(' . $count . ')';
             $minifier->extracted[$placeholder] = $function . '(' . trim(substr($expr, 1, -1)) . ')';
-
             // and since we've captured more code than required, we may have some leftover
             // calc() in here too - go recursive on the remaining but of code to go figure
             // that out and extract what is needed
             $rest = $minifier->str_replace_first($function . $expr, '', $match[0]);
             $rest = preg_replace_callback($pattern, $callback, $rest);
-
             return $placeholder . $rest;
         };
-
         $this->registerPattern($pattern, $callback);
     }
-
     /**
      * Replace custom properties, whose values may be used in scenarios where
      * we wouldn't want them to be minified (e.g. inside calc).
@@ -846,17 +732,12 @@ class CSS extends Minify
     {
         // PHP only supports $this inside anonymous functions since 5.4
         $minifier = $this;
-        $this->registerPattern(
-            '/(?<=^|[;}{])\s*(--[^:;{}"\'\s]+)\s*:([^;{}]+)/m',
-            function ($match) use ($minifier) {
-                $placeholder = '--custom-' . count($minifier->extracted) . ':0';
-                $minifier->extracted[$placeholder] = $match[1] . ':' . trim($match[2]);
-
-                return $placeholder;
-            }
-        );
+        $this->registerPattern('/(?<=^|[;}{])\s*(--[^:;{}"\'\s]+)\s*:([^;{}]+)/m', function ($match) use ($minifier) {
+            $placeholder = '--custom-' . count($minifier->extracted) . ':0';
+            $minifier->extracted[$placeholder] = $match[1] . ':' . trim($match[2]);
+            return $placeholder;
+        });
     }
-
     /**
      * Check if file is small enough to be imported.
      *
@@ -868,7 +749,6 @@ class CSS extends Minify
     {
         return ($size = @filesize($path)) && $size <= $this->maxImportSize * 1024;
     }
-
     /**
      * Check if file a file can be imported, going by the path.
      *
@@ -878,9 +758,8 @@ class CSS extends Minify
      */
     protected function canImportByPath($path)
     {
-        return preg_match('/^(data:|https?:|\\/)/', $path) === 0;
+        return preg_match('/^(data:|https?:|\/)/', $path) === 0;
     }
-
     /**
      * Return a converter to update relative paths to be relative to the new
      * destination.

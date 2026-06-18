@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,14 +9,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Handler;
 
-namespace Monolog\Handler;
-
-use Monolog\Logger;
-use Monolog\ResettableInterface;
-use Monolog\Formatter\FormatterInterface;
-use Psr\Log\LogLevel;
-
+use SEOPress\Vendor\Monolog\Logger;
+use SEOPress\Vendor\Monolog\ResettableInterface;
+use SEOPress\Vendor\Monolog\Formatter\FormatterInterface;
+use SEOPress\Vendor\Psr\Log\LogLevel;
 /**
  * Simple handler wrapper that filters records based on a list of levels
  *
@@ -31,7 +30,6 @@ use Psr\Log\LogLevel;
 class FilterHandler extends Handler implements ProcessableHandlerInterface, ResettableInterface, FormattableHandlerInterface
 {
     use ProcessableHandlerTrait;
-
     /**
      * Handler or factory callable($record, $this)
      *
@@ -39,7 +37,6 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
      * @phpstan-var callable(?Record, HandlerInterface): HandlerInterface|HandlerInterface
      */
     protected $handler;
-
     /**
      * Minimum level for logs that are passed to handler
      *
@@ -47,14 +44,12 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
      * @phpstan-var array<Level, int>
      */
     protected $acceptedLevels;
-
     /**
      * Whether the messages that are handled can bubble up the stack or not
      *
      * @var bool
      */
     protected $bubble;
-
     /**
      * @psalm-param HandlerInterface|callable(?Record, HandlerInterface): HandlerInterface $handler
      *
@@ -66,17 +61,15 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
      * @phpstan-param Level|LevelName|LogLevel::*|array<Level|LevelName|LogLevel::*> $minLevelOrList
      * @phpstan-param Level|LevelName|LogLevel::* $maxLevel
      */
-    public function __construct($handler, $minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY, bool $bubble = true)
+    public function __construct($handler, $minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY, bool $bubble = \true)
     {
-        $this->handler  = $handler;
-        $this->bubble   = $bubble;
+        $this->handler = $handler;
+        $this->bubble = $bubble;
         $this->setAcceptedLevels($minLevelOrList, $maxLevel);
-
         if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
-            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+            throw new \RuntimeException("The given handler (" . json_encode($this->handler) . ") is not a callable nor a Monolog\\Handler\\HandlerInterface object");
         }
     }
-
     /**
      * @phpstan-return array<int, Level>
      */
@@ -84,7 +77,6 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
     {
         return array_flip($this->acceptedLevels);
     }
-
     /**
      * @param int|string|array $minLevelOrList A list of levels to accept or a minimum level or level name if maxLevel is provided
      * @param int|string       $maxLevel       Maximum level or level name to accept, only used if $minLevelOrList is not an array
@@ -95,7 +87,7 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
     public function setAcceptedLevels($minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY): self
     {
         if (is_array($minLevelOrList)) {
-            $acceptedLevels = array_map('Monolog\Logger::toMonologLevel', $minLevelOrList);
+            $acceptedLevels = array_map('SEOPress\Vendor\Monolog\Logger::toMonologLevel', $minLevelOrList);
         } else {
             $minLevelOrList = Logger::toMonologLevel($minLevelOrList);
             $maxLevel = Logger::toMonologLevel($maxLevel);
@@ -104,10 +96,8 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
             }));
         }
         $this->acceptedLevels = array_flip($acceptedLevels);
-
         return $this;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -115,26 +105,21 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
     {
         return isset($this->acceptedLevels[$record['level']]);
     }
-
     /**
      * {@inheritDoc}
      */
     public function handle(array $record): bool
     {
         if (!$this->isHandling($record)) {
-            return false;
+            return \false;
         }
-
         if ($this->processors) {
             /** @var Record $record */
             $record = $this->processRecord($record);
         }
-
         $this->getHandler($record)->handle($record);
-
-        return false === $this->bubble;
+        return \false === $this->bubble;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -146,12 +131,10 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
                 $filtered[] = $record;
             }
         }
-
         if (count($filtered) > 0) {
             $this->getHandler($filtered[count($filtered) - 1])->handleBatch($filtered);
         }
     }
-
     /**
      * Return the nested handler
      *
@@ -169,10 +152,8 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
                 throw new \RuntimeException("The factory callable should return a HandlerInterface");
             }
         }
-
         return $this->handler;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -181,13 +162,10 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
         $handler = $this->getHandler();
         if ($handler instanceof FormattableHandlerInterface) {
             $handler->setFormatter($formatter);
-
             return $this;
         }
-
-        throw new \UnexpectedValueException('The nested handler of type '.get_class($handler).' does not support formatters.');
+        throw new \UnexpectedValueException('The nested handler of type ' . get_class($handler) . ' does not support formatters.');
     }
-
     /**
      * {@inheritDoc}
      */
@@ -197,14 +175,11 @@ class FilterHandler extends Handler implements ProcessableHandlerInterface, Rese
         if ($handler instanceof FormattableHandlerInterface) {
             return $handler->getFormatter();
         }
-
-        throw new \UnexpectedValueException('The nested handler of type '.get_class($handler).' does not support formatters.');
+        throw new \UnexpectedValueException('The nested handler of type ' . get_class($handler) . ' does not support formatters.');
     }
-
     public function reset()
     {
         $this->resetProcessors();
-
         if ($this->getHandler() instanceof ResettableInterface) {
             $this->getHandler()->reset();
         }

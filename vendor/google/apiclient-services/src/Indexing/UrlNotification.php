@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2014 Google Inc.
  *
@@ -14,67 +15,64 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+namespace SEOPress\Vendor\Google\Service\Indexing;
 
-namespace Google\Service\Indexing;
-
-class UrlNotification extends \Google\Model
+class UrlNotification extends \SEOPress\Vendor\Google\Model
 {
-  /**
-   * @var string
-   */
-  public $notifyTime;
-  /**
-   * @var string
-   */
-  public $type;
-  /**
-   * @var string
-   */
-  public $url;
-
-  /**
-   * @param string
-   */
-  public function setNotifyTime($notifyTime)
-  {
-    $this->notifyTime = $notifyTime;
-  }
-  /**
-   * @return string
-   */
-  public function getNotifyTime()
-  {
-    return $this->notifyTime;
-  }
-  /**
-   * @param string
-   */
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-  /**
-   * @return string
-   */
-  public function getType()
-  {
-    return $this->type;
-  }
-  /**
-   * @param string
-   */
-  public function setUrl($url)
-  {
-    $this->url = $url;
-  }
-  /**
-   * @return string
-   */
-  public function getUrl()
-  {
-    return $this->url;
-  }
+    /**
+     * @var string
+     */
+    public $notifyTime;
+    /**
+     * @var string
+     */
+    public $type;
+    /**
+     * @var string
+     */
+    public $url;
+    /**
+     * @param string
+     */
+    public function setNotifyTime($notifyTime)
+    {
+        $this->notifyTime = $notifyTime;
+    }
+    /**
+     * @return string
+     */
+    public function getNotifyTime()
+    {
+        return $this->notifyTime;
+    }
+    /**
+     * @param string
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+    /**
+     * @param string
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 }
-
 // Adding a class alias for backwards compatibility with the previous class name.
-class_alias(UrlNotification::class, 'Google_Service_Indexing_UrlNotification');
+class_alias(UrlNotification::class, 'SEOPress\Vendor\Google_Service_Indexing_UrlNotification');

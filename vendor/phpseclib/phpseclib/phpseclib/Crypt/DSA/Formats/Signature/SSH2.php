@@ -12,12 +12,10 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\DSA\Formats\Signature;
 
-namespace phpseclib3\Crypt\DSA\Formats\Signature;
-
-use phpseclib3\Common\Functions\Strings;
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * SSH2 Signature Handler
  *
@@ -34,24 +32,18 @@ abstract class SSH2
     public static function load($sig)
     {
         if (!is_string($sig)) {
-            return false;
+            return \false;
         }
-
         $result = Strings::unpackSSH2('ss', $sig);
-        if ($result === false) {
-            return false;
+        if ($result === \false) {
+            return \false;
         }
         list($type, $blob) = $result;
         if ($type != 'ssh-dss' || strlen($blob) != 40) {
-            return false;
+            return \false;
         }
-
-        return [
-            'r' => new BigInteger(substr($blob, 0, 20), 256),
-            's' => new BigInteger(substr($blob, 20), 256)
-        ];
+        return ['r' => new BigInteger(substr($blob, 0, 20), 256), 's' => new BigInteger(substr($blob, 20), 256)];
     }
-
     /**
      * Returns a signature in the appropriate format
      *
@@ -62,13 +54,8 @@ abstract class SSH2
     public static function save(BigInteger $r, BigInteger $s)
     {
         if ($r->getLength() > 160 || $s->getLength() > 160) {
-            return false;
+            return \false;
         }
-        return Strings::packSSH2(
-            'ss',
-            'ssh-dss',
-            str_pad($r->toBytes(), 20, "\0", STR_PAD_LEFT) .
-            str_pad($s->toBytes(), 20, "\0", STR_PAD_LEFT)
-        );
+        return Strings::packSSH2('ss', 'ssh-dss', str_pad($r->toBytes(), 20, "\x00", \STR_PAD_LEFT) . str_pad($s->toBytes(), 20, "\x00", \STR_PAD_LEFT));
     }
 }

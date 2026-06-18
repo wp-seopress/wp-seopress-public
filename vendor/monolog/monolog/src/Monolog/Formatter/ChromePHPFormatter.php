@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,11 +9,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Formatter;
 
-namespace Monolog\Formatter;
-
-use Monolog\Logger;
-
+use SEOPress\Vendor\Monolog\Logger;
 /**
  * Formats a log message according to the ChromePHP array format
  *
@@ -25,17 +24,7 @@ class ChromePHPFormatter implements FormatterInterface
      *
      * @var array<int, 'log'|'info'|'warn'|'error'>
      */
-    private $logLevels = [
-        Logger::DEBUG     => 'log',
-        Logger::INFO      => 'info',
-        Logger::NOTICE    => 'info',
-        Logger::WARNING   => 'warn',
-        Logger::ERROR     => 'error',
-        Logger::CRITICAL  => 'error',
-        Logger::ALERT     => 'error',
-        Logger::EMERGENCY => 'error',
-    ];
-
+    private $logLevels = [Logger::DEBUG => 'log', Logger::INFO => 'info', Logger::NOTICE => 'info', Logger::WARNING => 'warn', Logger::ERROR => 'error', Logger::CRITICAL => 'error', Logger::ALERT => 'error', Logger::EMERGENCY => 'error'];
     /**
      * {@inheritDoc}
      */
@@ -44,10 +33,9 @@ class ChromePHPFormatter implements FormatterInterface
         // Retrieve the line and file if set and remove them from the formatted extra
         $backtrace = 'unknown';
         if (isset($record['extra']['file'], $record['extra']['line'])) {
-            $backtrace = $record['extra']['file'].' : '.$record['extra']['line'];
+            $backtrace = $record['extra']['file'] . ' : ' . $record['extra']['line'];
             unset($record['extra']['file'], $record['extra']['line']);
         }
-
         $message = ['message' => $record['message']];
         if ($record['context']) {
             $message['context'] = $record['context'];
@@ -58,26 +46,17 @@ class ChromePHPFormatter implements FormatterInterface
         if (count($message) === 1) {
             $message = reset($message);
         }
-
-        return [
-            $record['channel'],
-            $message,
-            $backtrace,
-            $this->logLevels[$record['level']],
-        ];
+        return [$record['channel'], $message, $backtrace, $this->logLevels[$record['level']]];
     }
-
     /**
      * {@inheritDoc}
      */
     public function formatBatch(array $records)
     {
         $formatted = [];
-
         foreach ($records as $record) {
             $formatted[] = $this->format($record);
         }
-
         return $formatted;
     }
 }

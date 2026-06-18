@@ -14,11 +14,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\Formats\Signature;
 
-namespace phpseclib3\Crypt\EC\Formats\Signature;
-
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * ASN1 Signature Handler
  *
@@ -35,20 +33,16 @@ abstract class IEEE
     public static function load($sig)
     {
         if (!is_string($sig)) {
-            return false;
+            return \false;
         }
-
         $len = strlen($sig);
         if ($len & 1) {
-            return false;
+            return \false;
         }
-
         $r = new BigInteger(substr($sig, 0, $len >> 1), 256);
         $s = new BigInteger(substr($sig, $len >> 1), 256);
-
         return compact('r', 's');
     }
-
     /**
      * Returns a signature in the appropriate format
      *
@@ -63,6 +57,6 @@ abstract class IEEE
         $r = $r->toBytes();
         $s = $s->toBytes();
         $length = (int) ceil($length / 8);
-        return str_pad($r, $length, "\0", STR_PAD_LEFT) . str_pad($s, $length, "\0", STR_PAD_LEFT);
+        return str_pad($r, $length, "\x00", \STR_PAD_LEFT) . str_pad($s, $length, "\x00", \STR_PAD_LEFT);
     }
 }

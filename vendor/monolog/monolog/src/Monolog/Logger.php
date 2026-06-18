@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,17 +9,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog;
+namespace SEOPress\Vendor\Monolog;
 
 use DateTimeZone;
-use Monolog\Handler\HandlerInterface;
-use Psr\Log\LoggerInterface;
-use Psr\Log\InvalidArgumentException;
-use Psr\Log\LogLevel;
+use SEOPress\Vendor\Monolog\Handler\HandlerInterface;
+use SEOPress\Vendor\Psr\Log\LoggerInterface;
+use SEOPress\Vendor\Psr\Log\InvalidArgumentException;
+use SEOPress\Vendor\Psr\Log\LogLevel;
 use Throwable;
 use Stringable;
-
 /**
  * Monolog log channel
  *
@@ -37,19 +36,16 @@ class Logger implements LoggerInterface, ResettableInterface
      * Detailed debug information
      */
     public const DEBUG = 100;
-
     /**
      * Interesting events
      *
      * Examples: User logs in, SQL logs.
      */
     public const INFO = 200;
-
     /**
      * Uncommon events
      */
     public const NOTICE = 250;
-
     /**
      * Exceptional occurrences that are not errors
      *
@@ -57,19 +53,16 @@ class Logger implements LoggerInterface, ResettableInterface
      * undesirable things that are not necessarily wrong.
      */
     public const WARNING = 300;
-
     /**
      * Runtime errors
      */
     public const ERROR = 400;
-
     /**
      * Critical conditions
      *
      * Example: Application component unavailable, unexpected exception.
      */
     public const CRITICAL = 500;
-
     /**
      * Action must be taken immediately
      *
@@ -77,12 +70,10 @@ class Logger implements LoggerInterface, ResettableInterface
      * This should trigger the SMS alerts and wake you up.
      */
     public const ALERT = 550;
-
     /**
      * Urgent alert.
      */
     public const EMERGENCY = 600;
-
     /**
      * Monolog API version
      *
@@ -92,7 +83,6 @@ class Logger implements LoggerInterface, ResettableInterface
      * @var int
      */
     public const API = 2;
-
     /**
      * This is a static variable and not a constant to serve as an extension point for custom levels
      *
@@ -100,45 +90,23 @@ class Logger implements LoggerInterface, ResettableInterface
      *
      * @phpstan-var array<Level, LevelName> $levels Logging levels with the levels as key
      */
-    protected static $levels = [
-        self::DEBUG     => 'DEBUG',
-        self::INFO      => 'INFO',
-        self::NOTICE    => 'NOTICE',
-        self::WARNING   => 'WARNING',
-        self::ERROR     => 'ERROR',
-        self::CRITICAL  => 'CRITICAL',
-        self::ALERT     => 'ALERT',
-        self::EMERGENCY => 'EMERGENCY',
-    ];
-
+    protected static $levels = [self::DEBUG => 'DEBUG', self::INFO => 'INFO', self::NOTICE => 'NOTICE', self::WARNING => 'WARNING', self::ERROR => 'ERROR', self::CRITICAL => 'CRITICAL', self::ALERT => 'ALERT', self::EMERGENCY => 'EMERGENCY'];
     /**
      * Mapping between levels numbers defined in RFC 5424 and Monolog ones
      *
      * @phpstan-var array<int, Level> $rfc_5424_levels
      */
-    private const RFC_5424_LEVELS = [
-        7 => self::DEBUG,
-        6 => self::INFO,
-        5 => self::NOTICE,
-        4 => self::WARNING,
-        3 => self::ERROR,
-        2 => self::CRITICAL,
-        1 => self::ALERT,
-        0 => self::EMERGENCY,
-    ];
-
+    private const RFC_5424_LEVELS = [7 => self::DEBUG, 6 => self::INFO, 5 => self::NOTICE, 4 => self::WARNING, 3 => self::ERROR, 2 => self::CRITICAL, 1 => self::ALERT, 0 => self::EMERGENCY];
     /**
      * @var string
      */
     protected $name;
-
     /**
      * The handler stack
      *
      * @var HandlerInterface[]
      */
     protected $handlers;
-
     /**
      * Processors that will process all log records
      *
@@ -147,39 +115,32 @@ class Logger implements LoggerInterface, ResettableInterface
      * @var callable[]
      */
     protected $processors;
-
     /**
      * @var bool
      */
-    protected $microsecondTimestamps = true;
-
+    protected $microsecondTimestamps = \true;
     /**
      * @var DateTimeZone
      */
     protected $timezone;
-
     /**
      * @var callable|null
      */
     protected $exceptionHandler;
-
     /**
      * @var int Keeps track of depth to prevent infinite logging loops
      */
     private $logDepth = 0;
-
     /**
      * @var \WeakMap<\Fiber<mixed, mixed, mixed, mixed>, int> Keeps track of depth inside fibers to prevent infinite logging loops
      */
     private $fiberLogDepth;
-
     /**
      * @var bool Whether to detect infinite logging loops
      *
      * This can be disabled via {@see useLoggingLoopDetection} if you have async handlers that do not play well with this
      */
-    private $detectCycles = true;
-
+    private $detectCycles = \true;
     /**
      * @psalm-param array<callable(array): array> $processors
      *
@@ -194,7 +155,6 @@ class Logger implements LoggerInterface, ResettableInterface
         $this->setHandlers($handlers);
         $this->processors = $processors;
         $this->timezone = $timezone ?: new DateTimeZone(date_default_timezone_get() ?: 'UTC');
-
         if (\PHP_VERSION_ID >= 80100) {
             // Local variable for phpstan, see https://github.com/phpstan/phpstan/issues/6732#issuecomment-1111118412
             /** @var \WeakMap<\Fiber<mixed, mixed, mixed, mixed>, int> $fiberLogDepth */
@@ -202,12 +162,10 @@ class Logger implements LoggerInterface, ResettableInterface
             $this->fiberLogDepth = $fiberLogDepth;
         }
     }
-
     public function getName(): string
     {
         return $this->name;
     }
-
     /**
      * Return a new cloned instance with the name changed
      */
@@ -215,20 +173,16 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $new = clone $this;
         $new->name = $name;
-
         return $new;
     }
-
     /**
      * Pushes a handler on to the stack.
      */
     public function pushHandler(HandlerInterface $handler): self
     {
         array_unshift($this->handlers, $handler);
-
         return $this;
     }
-
     /**
      * Pops a handler from the stack
      *
@@ -239,10 +193,8 @@ class Logger implements LoggerInterface, ResettableInterface
         if (!$this->handlers) {
             throw new \LogicException('You tried to pop from an empty handler stack.');
         }
-
         return array_shift($this->handlers);
     }
-
     /**
      * Set handlers, replacing all existing ones.
      *
@@ -256,10 +208,8 @@ class Logger implements LoggerInterface, ResettableInterface
         foreach (array_reverse($handlers) as $handler) {
             $this->pushHandler($handler);
         }
-
         return $this;
     }
-
     /**
      * @return HandlerInterface[]
      */
@@ -267,17 +217,14 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         return $this->handlers;
     }
-
     /**
      * Adds a processor on to the stack.
      */
     public function pushProcessor(callable $callback): self
     {
         array_unshift($this->processors, $callback);
-
         return $this;
     }
-
     /**
      * Removes the processor on top of the stack and returns it.
      *
@@ -289,10 +236,8 @@ class Logger implements LoggerInterface, ResettableInterface
         if (!$this->processors) {
             throw new \LogicException('You tried to pop from an empty processor stack.');
         }
-
         return array_shift($this->processors);
     }
-
     /**
      * @return callable[]
      */
@@ -300,7 +245,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         return $this->processors;
     }
-
     /**
      * Control the use of microsecond resolution timestamps in the 'datetime'
      * member of new records.
@@ -315,17 +259,13 @@ class Logger implements LoggerInterface, ResettableInterface
     public function useMicrosecondTimestamps(bool $micro): self
     {
         $this->microsecondTimestamps = $micro;
-
         return $this;
     }
-
     public function useLoggingLoopDetection(bool $detectCycles): self
     {
         $this->detectCycles = $detectCycles;
-
         return $this;
     }
-
     /**
      * Adds a log record.
      *
@@ -342,7 +282,6 @@ class Logger implements LoggerInterface, ResettableInterface
         if (isset(self::RFC_5424_LEVELS[$level])) {
             $level = self::RFC_5424_LEVELS[$level];
         }
-
         if ($this->detectCycles) {
             if (\PHP_VERSION_ID >= 80100 && $fiber = \Fiber::getCurrent()) {
                 // @phpstan-ignore offsetAssign.dimType
@@ -354,56 +293,40 @@ class Logger implements LoggerInterface, ResettableInterface
         } else {
             $logDepth = 0;
         }
-
         if ($logDepth === 3) {
             $this->warning('A possible infinite logging loop was detected and aborted. It appears some of your handler code is triggering logging, see the previous log record for a hint as to what may be the cause.');
-            return false;
-        } elseif ($logDepth >= 5) { // log depth 4 is let through, so we can log the warning above
-            return false;
+            return \false;
+        } elseif ($logDepth >= 5) {
+            // log depth 4 is let through, so we can log the warning above
+            return \false;
         }
-
         try {
             $record = null;
-
             foreach ($this->handlers as $handler) {
                 if (null === $record) {
                     // skip creating the record as long as no handler is going to handle it
                     if (!$handler->isHandling(['level' => $level])) {
                         continue;
                     }
-
                     $levelName = static::getLevelName($level);
-
-                    $record = [
-                        'message' => $message,
-                        'context' => $context,
-                        'level' => $level,
-                        'level_name' => $levelName,
-                        'channel' => $this->name,
-                        'datetime' => $datetime ?? new DateTimeImmutable($this->microsecondTimestamps, $this->timezone),
-                        'extra' => [],
-                    ];
-
+                    $record = ['message' => $message, 'context' => $context, 'level' => $level, 'level_name' => $levelName, 'channel' => $this->name, 'datetime' => $datetime ?? new DateTimeImmutable($this->microsecondTimestamps, $this->timezone), 'extra' => []];
                     try {
                         foreach ($this->processors as $processor) {
                             $record = $processor($record);
                         }
                     } catch (Throwable $e) {
                         $this->handleException($e, $record);
-
-                        return true;
+                        return \true;
                     }
                 }
-
                 // once the record exists, send it to all handlers as long as the bubbling chain is not interrupted
                 try {
-                    if (true === $handler->handle($record)) {
+                    if (\true === $handler->handle($record)) {
                         break;
                     }
                 } catch (Throwable $e) {
                     $this->handleException($e, $record);
-
-                    return true;
+                    return \true;
                 }
             }
         } finally {
@@ -415,10 +338,8 @@ class Logger implements LoggerInterface, ResettableInterface
                 }
             }
         }
-
         return null !== $record;
     }
-
     /**
      * Ends a log cycle and frees all resources used by handlers.
      *
@@ -435,7 +356,6 @@ class Logger implements LoggerInterface, ResettableInterface
             $handler->close();
         }
     }
-
     /**
      * Ends a log cycle and resets all handlers and processors to their initial state.
      *
@@ -453,14 +373,12 @@ class Logger implements LoggerInterface, ResettableInterface
                 $handler->reset();
             }
         }
-
         foreach ($this->processors as $processor) {
             if ($processor instanceof ResettableInterface) {
                 $processor->reset();
             }
         }
     }
-
     /**
      * Gets all supported logging levels.
      *
@@ -471,7 +389,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         return array_flip(static::$levels);
     }
-
     /**
      * Gets the name of the logging level.
      *
@@ -483,12 +400,10 @@ class Logger implements LoggerInterface, ResettableInterface
     public static function getLevelName(int $level): string
     {
         if (!isset(static::$levels[$level])) {
-            throw new InvalidArgumentException('Level "'.$level.'" is not defined, use one of: '.implode(', ', array_keys(static::$levels)));
+            throw new InvalidArgumentException('Level "' . $level . '" is not defined, use one of: ' . implode(', ', array_keys(static::$levels)));
         }
-
         return static::$levels[$level];
     }
-
     /**
      * Converts PSR-3 levels to Monolog ones if necessary
      *
@@ -505,24 +420,19 @@ class Logger implements LoggerInterface, ResettableInterface
                 /** @phpstan-ignore-next-line */
                 return intval($level);
             }
-
             // Contains chars of all log levels and avoids using strtoupper() which may have
             // strange results depending on locale (for example, "i" will become "İ" in Turkish locale)
             $upper = strtr($level, 'abcdefgilmnortuwy', 'ABCDEFGILMNORTUWY');
-            if (defined(__CLASS__.'::'.$upper)) {
+            if (defined(__CLASS__ . '::' . $upper)) {
                 return constant(__CLASS__ . '::' . $upper);
             }
-
-            throw new InvalidArgumentException('Level "'.$level.'" is not defined, use one of: '.implode(', ', array_keys(static::$levels) + static::$levels));
+            throw new InvalidArgumentException('Level "' . $level . '" is not defined, use one of: ' . implode(', ', array_keys(static::$levels) + static::$levels));
         }
-
         if (!is_int($level)) {
-            throw new InvalidArgumentException('Level "'.var_export($level, true).'" is not defined, use one of: '.implode(', ', array_keys(static::$levels) + static::$levels));
+            throw new InvalidArgumentException('Level "' . var_export($level, \true) . '" is not defined, use one of: ' . implode(', ', array_keys(static::$levels) + static::$levels));
         }
-
         return $level;
     }
-
     /**
      * Checks whether the Logger has a handler that listens on the given level
      *
@@ -530,19 +440,14 @@ class Logger implements LoggerInterface, ResettableInterface
      */
     public function isHandling(int $level): bool
     {
-        $record = [
-            'level' => $level,
-        ];
-
+        $record = ['level' => $level];
         foreach ($this->handlers as $handler) {
             if ($handler->isHandling($record)) {
-                return true;
+                return \true;
             }
         }
-
-        return false;
+        return \false;
     }
-
     /**
      * Set a custom exception handler that will be called if adding a new record fails
      *
@@ -551,15 +456,12 @@ class Logger implements LoggerInterface, ResettableInterface
     public function setExceptionHandler(?callable $callback): self
     {
         $this->exceptionHandler = $callback;
-
         return $this;
     }
-
     public function getExceptionHandler(): ?callable
     {
         return $this->exceptionHandler;
     }
-
     /**
      * Adds a log record at an arbitrary level.
      *
@@ -576,16 +478,12 @@ class Logger implements LoggerInterface, ResettableInterface
         if (!is_int($level) && !is_string($level)) {
             throw new \InvalidArgumentException('$level is expected to be a string or int');
         }
-
         if (isset(self::RFC_5424_LEVELS[$level])) {
             $level = self::RFC_5424_LEVELS[$level];
         }
-
         $level = static::toMonologLevel($level);
-
         $this->addRecord($level, (string) $message, $context);
     }
-
     /**
      * Adds a log record at the DEBUG level.
      *
@@ -598,7 +496,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $this->addRecord(static::DEBUG, (string) $message, $context);
     }
-
     /**
      * Adds a log record at the INFO level.
      *
@@ -611,7 +508,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $this->addRecord(static::INFO, (string) $message, $context);
     }
-
     /**
      * Adds a log record at the NOTICE level.
      *
@@ -624,7 +520,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $this->addRecord(static::NOTICE, (string) $message, $context);
     }
-
     /**
      * Adds a log record at the WARNING level.
      *
@@ -637,7 +532,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $this->addRecord(static::WARNING, (string) $message, $context);
     }
-
     /**
      * Adds a log record at the ERROR level.
      *
@@ -650,7 +544,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $this->addRecord(static::ERROR, (string) $message, $context);
     }
-
     /**
      * Adds a log record at the CRITICAL level.
      *
@@ -663,7 +556,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $this->addRecord(static::CRITICAL, (string) $message, $context);
     }
-
     /**
      * Adds a log record at the ALERT level.
      *
@@ -676,7 +568,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $this->addRecord(static::ALERT, (string) $message, $context);
     }
-
     /**
      * Adds a log record at the EMERGENCY level.
      *
@@ -689,17 +580,14 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         $this->addRecord(static::EMERGENCY, (string) $message, $context);
     }
-
     /**
      * Sets the timezone to be used for the timestamp of log records.
      */
     public function setTimezone(DateTimeZone $tz): self
     {
         $this->timezone = $tz;
-
         return $this;
     }
-
     /**
      * Returns the timezone to be used for the timestamp of log records.
      */
@@ -707,7 +595,6 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         return $this->timezone;
     }
-
     /**
      * Delegates exception management to the custom exception handler,
      * or throws the exception if no custom handler is set.
@@ -720,27 +607,15 @@ class Logger implements LoggerInterface, ResettableInterface
         if (!$this->exceptionHandler) {
             throw $e;
         }
-
         ($this->exceptionHandler)($e, $record);
     }
-
     /**
      * @return array<string, mixed>
      */
     public function __serialize(): array
     {
-        return [
-            'name' => $this->name,
-            'handlers' => $this->handlers,
-            'processors' => $this->processors,
-            'microsecondTimestamps' => $this->microsecondTimestamps,
-            'timezone' => $this->timezone,
-            'exceptionHandler' => $this->exceptionHandler,
-            'logDepth' => $this->logDepth,
-            'detectCycles' => $this->detectCycles,
-        ];
+        return ['name' => $this->name, 'handlers' => $this->handlers, 'processors' => $this->processors, 'microsecondTimestamps' => $this->microsecondTimestamps, 'timezone' => $this->timezone, 'exceptionHandler' => $this->exceptionHandler, 'logDepth' => $this->logDepth, 'detectCycles' => $this->detectCycles];
     }
-
     /**
      * @param array<string, mixed> $data
      */
@@ -748,10 +623,9 @@ class Logger implements LoggerInterface, ResettableInterface
     {
         foreach (['name', 'handlers', 'processors', 'microsecondTimestamps', 'timezone', 'exceptionHandler', 'logDepth', 'detectCycles'] as $property) {
             if (isset($data[$property])) {
-                $this->$property = $data[$property];
+                $this->{$property} = $data[$property];
             }
         }
-
         if (\PHP_VERSION_ID >= 80100) {
             // Local variable for phpstan, see https://github.com/phpstan/phpstan/issues/6732#issuecomment-1111118412
             /** @var \WeakMap<\Fiber<mixed, mixed, mixed, mixed>, int> $fiberLogDepth */

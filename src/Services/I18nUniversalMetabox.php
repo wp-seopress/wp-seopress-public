@@ -776,6 +776,7 @@ class I18nUniversalMetabox {
 					'remove'          => __( 'Delete schema', 'wp-seopress' ),
 					'add'             => __( 'Add a schema', 'wp-seopress' ),
 					'validate_schema' => __( 'Validate my schema', 'wp-seopress' ),
+					'validate_schema_unpublished' => __( 'Publish this post first to validate its schema. Google can only test a live, public URL.', 'wp-seopress' ),
 				),
 				'schemas_automatic' => array(
 					'description'     => __( 'These schemas are automatically applied to this post based on rules defined in your Schemas library. You can override values per post here, or disable individual schemas.', 'wp-seopress' ),
@@ -788,6 +789,7 @@ class I18nUniversalMetabox {
 					'empty_state'     => __( 'No automatic schemas match this post.', 'wp-seopress' ),
 					'type_label'      => __( 'Type:', 'wp-seopress' ),
 					'validate_schema' => __( 'Validate my schema', 'wp-seopress' ),
+					'validate_schema_unpublished' => __( 'Publish this post first to validate its schema. Google can only test a live, public URL.', 'wp-seopress' ),
 				),
 				'social'            => array(
 					'title'          => /* translators: %s post title */ __(

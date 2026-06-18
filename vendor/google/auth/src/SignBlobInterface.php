@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2019 Google LLC
  *
@@ -14,8 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-namespace Google\Auth;
+namespace SEOPress\Vendor\Google\Auth;
 
 /**
  * Describes a class which supports signing arbitrary strings.
@@ -31,8 +31,7 @@ interface SignBlobInterface extends FetchAuthTokenInterface
      *        `false`.
      * @return string The resulting signature. Value should be base64-encoded.
      */
-    public function signBlob($stringToSign, $forceOpenssl = false);
-
+    public function signBlob($stringToSign, $forceOpenssl = \false);
     /**
      * Returns the current Client Name.
      *

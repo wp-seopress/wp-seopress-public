@@ -604,6 +604,45 @@ function seopress_capability( $cap, $context = '' ) {
 }
 
 /**
+ * Whether the WordPress Abilities API is available on this site.
+ *
+ * The server-side Abilities API ships with WordPress 6.9. We feature-detect it
+ * so SEOPress keeps working untouched on older WordPress versions.
+ *
+ * @since 9.9.0
+ *
+ * @return bool
+ */
+function seopress_abilities_api_available() {
+	return function_exists( 'wp_register_ability' ) && class_exists( 'WP_Ability' );
+}
+
+/**
+ * Whether the admin opted in to expose SEOPress abilities through the REST API.
+ *
+ * Disabled by default. When off, abilities are still callable in PHP/JS locally
+ * but are not exposed on the /wp-abilities/v1/ REST endpoint.
+ *
+ * @since 9.9.0
+ *
+ * @return bool
+ */
+function seopress_abilities_api_rest_enabled() {
+	$options = get_option( 'seopress_advanced_option_name' );
+
+	$enabled = is_array( $options ) && ! empty( $options['seopress_advanced_abilities_api_rest'] );
+
+	/**
+	 * Filter whether SEOPress abilities are exposed via the REST API.
+	 *
+	 * @since 9.9.0
+	 *
+	 * @param bool $enabled Whether REST exposure is enabled.
+	 */
+	return (bool) apply_filters( 'seopress_abilities_api_rest_enabled', $enabled );
+}
+
+/**
  * Check if the page is one of ours.
  *
  * @return bool
@@ -818,9 +857,14 @@ function seopress_maybe_mangled_object_vars( $data ) {
 function seopress_instant_indexing_generate_api_key_fn( $init = false ) {
 	$options = get_option( 'seopress_instant_indexing_option_name' ) ? get_option( 'seopress_instant_indexing_option_name' ) : array();
 
+	// Generate a 32-char hexadecimal key, which is a valid IndexNow key
+	// (8-128 chars from [A-Za-z0-9-]). It is stored as-is so the value shown in
+	// the settings matches the public verification .txt file. Legacy keys that
+	// were stored base64-encoded are still handled on read by
+	// seopress_instant_indexing_get_api_key().
 	$api_key = wp_generate_uuid4();
 	$api_key = preg_replace( '[-]', '', $api_key );
-	$options['seopress_instant_indexing_bing_api_key'] = base64_encode( $api_key );
+	$options['seopress_instant_indexing_bing_api_key'] = $api_key;
 
 	if ( true === $init ) {
 		$options['seopress_instant_indexing_automate_submission'] = '1';

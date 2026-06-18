@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * PostalAddress
  *
@@ -22,11 +20,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class PostalAddress
 {
-    const MAP = [
-        'type' => ASN1::TYPE_SEQUENCE,
-        'optional' => true,
-        'min' => 1,
-        'max' => -1,
-        'children' => DirectoryString::MAP
-    ];
+    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'optional' => \true, 'min' => 1, 'max' => -1, 'children' => DirectoryString::MAP];
 }

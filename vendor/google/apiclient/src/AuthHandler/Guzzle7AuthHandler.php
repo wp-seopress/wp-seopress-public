@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2020 Google LLC
  *
@@ -14,8 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-namespace Google\AuthHandler;
+namespace SEOPress\Vendor\Google\AuthHandler;
 
 /**
  * This supports Guzzle 7

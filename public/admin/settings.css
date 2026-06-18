@@ -29,9 +29,32 @@
     margin-top: 0 !important;
 }
 
+/* Separate the PRO license reminder from the settings content below it.
+ * The Dashboard already leaves a gap (its app sits right after the notice),
+ * so only space it when it precedes the settings layout. */
+.seopress-license-notice.components-notice:has(+ .seopress-settings-layout) {
+    margin-bottom: 20px;
+}
+
 /* Main Layout - Match PHP #seopress-tabs */
 .seopress-settings-layout {
     margin: 0;
+}
+
+/* "Rate this plugin" notice — sits above the settings content. */
+.seopress-review-prompt.components-notice {
+    margin: 0 0 16px;
+}
+
+.seopress-review-prompt__row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+}
+
+.seopress-review-prompt__text {
+    margin-right: 4px;
 }
 
 .seopress-settings-container {
@@ -110,7 +133,6 @@
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
     pointer-events: none;
-    margin-left: 10px;
 }
 
 .seopress-save-bar.is-visible {
@@ -269,7 +291,7 @@
     font-family: inherit;
     font-size: 13px;
     line-height: 2.2;
-    padding: 0 30px 0 8px;
+    padding: 3px 30px 0 8px;
     width: 100%;
     min-height: 40px;
     box-sizing: border-box;
@@ -629,6 +651,12 @@
     margin-top: 12px;
 }
 
+/* Result notice (success/error) shown right after an action row needs to
+ * breathe — otherwise it sits flush against the button. */
+.seopress-tools-actions + .components-notice {
+    margin-top: 12px;
+}
+
 .seopress-tools-progress {
     display: flex;
     align-items: center;
@@ -716,7 +744,11 @@
 
 .seopress-variables-popover .components-popover__content {
     padding: 0;
-    min-width: 280px;
+    /* Fixed 280px on desktop, but never wider than the viewport (minus a small
+       gutter) so the dropdown can't overflow off-screen on mobile. Combined
+       with the Popover `shift` prop, which slides it back into view. */
+    width: 280px;
+    max-width: calc(100vw - 24px);
     max-height: 300px;
     overflow: hidden;
     border-radius: 4px;
@@ -1450,8 +1482,28 @@
         border-bottom-color: var(--wp-admin-theme-color);
     }
 
+    /* On mobile, drop the fixed/floating button entirely: a fixed bottom bar
+       fights the browser UI and covers content on small screens. Render the
+       save button in normal flow at the bottom of the form instead. */
     .seopress-save-bar {
-        padding: 0 10px;
+        position: static;
+        transform: none;
+        opacity: 1;
+        pointer-events: auto;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        margin-top: 20px;
+        padding: 0;
+    }
+
+    /* Full-width "Save changes" button; hide "Undo changes" on mobile. */
+    .seopress-save-bar .components-button {
+        justify-content: center;
+    }
+
+    .seopress-save-bar .components-button.is-tertiary {
+        display: none;
     }
 
     .seopress-settings-content {
@@ -1621,5 +1673,246 @@
 .seopress-opening-hours-day__range .range-sep {
 	margin: 0 8px;
 	color: #646970;
+}
+
+/* ---------------------------------------------------------------------------
+ * Sitemap health check (Sitemaps → General)
+ * ------------------------------------------------------------------------- */
+.seopress-sitemap-test {
+	margin: 16px 0 24px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #fff;
+}
+
+.seopress-sitemap-test__header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 16px;
+}
+
+.seopress-sitemap-test__header strong {
+	font-size: 14px;
+}
+
+.seopress-sitemap-test__intro {
+	margin: 4px 0 0;
+	color: #646970;
+}
+
+.seopress-sitemap-test__header .components-button {
+	flex: 0 0 auto;
+}
+
+.seopress-sitemap-test__header .components-spinner {
+	margin: 0 6px 0 0;
+}
+
+.seopress-sitemap-test__error {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0 16px 16px;
+	padding: 10px 12px;
+	border-radius: 4px;
+	background: rgba(235, 15, 0, 0.08);
+	color: var(--colorAlert, #eb0f00);
+}
+
+.seopress-sitemap-test__result {
+	border-top: 1px solid #dcdcde;
+}
+
+.seopress-sitemap-test__summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 12px 16px;
+	border-left: 4px solid #dcdcde;
+}
+
+.seopress-sitemap-test__result.is-pass .seopress-sitemap-test__summary {
+	border-left-color: var(--colorSuccess, #4ab866);
+}
+
+.seopress-sitemap-test__result.is-warning .seopress-sitemap-test__summary {
+	border-left-color: var(--colorWarning, #ffba00);
+}
+
+.seopress-sitemap-test__result.is-error .seopress-sitemap-test__summary {
+	border-left-color: var(--colorAlert, #eb0f00);
+}
+
+.seopress-sitemap-test__headline {
+	font-weight: 600;
+}
+
+.seopress-sitemap-test__pills {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+
+.seopress-sitemap-test__pill {
+	padding: 2px 8px;
+	border-radius: 10px;
+	font-size: 12px;
+	background: #f0f0f1;
+	color: #1d2327;
+}
+
+.seopress-sitemap-test__pill.is-pass {
+	background: rgba(74, 184, 102, 0.12);
+	color: #1a7a37;
+}
+
+.seopress-sitemap-test__pill.is-warning {
+	background: rgba(255, 186, 0, 0.16);
+	color: #8a6400;
+}
+
+.seopress-sitemap-test__pill.is-error {
+	background: rgba(235, 15, 0, 0.1);
+	color: var(--colorAlert, #eb0f00);
+}
+
+.seopress-sitemap-test__checks {
+	margin: 0;
+	padding: 4px 16px 8px;
+	list-style: none;
+}
+
+.seopress-sitemap-test__check {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 8px 0;
+	border-top: 1px solid #f0f0f1;
+}
+
+.seopress-sitemap-test__check:first-child {
+	border-top: 0;
+}
+
+.seopress-sitemap-test__icon {
+	flex: 0 0 auto;
+	margin-top: 1px;
+}
+
+.seopress-sitemap-test__check.is-pass .seopress-sitemap-test__icon {
+	color: var(--colorSuccess, #4ab866);
+}
+
+.seopress-sitemap-test__check.is-warning .seopress-sitemap-test__icon {
+	color: var(--colorWarning, #ffba00);
+}
+
+.seopress-sitemap-test__check.is-error .seopress-sitemap-test__icon {
+	color: var(--colorAlert, #eb0f00);
+}
+
+.seopress-sitemap-test__check.is-info .seopress-sitemap-test__icon {
+	color: var(--wp-admin-theme-color, #2271b1);
+}
+
+.seopress-sitemap-test__check-body {
+	display: flex;
+	flex-direction: column;
+}
+
+.seopress-sitemap-test__check-label {
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.seopress-sitemap-test__check-message {
+	color: #646970;
+}
+
+.seopress-sitemap-test__meta {
+	margin: 0;
+	padding: 0 16px 14px;
+	color: #646970;
+	font-size: 12px;
+}
+
+/* Sitemap health check — one-click fixes */
+.seopress-sitemap-test__fix.components-button {
+	align-self: flex-start;
+	margin-top: 6px;
+	height: auto;
+	min-height: 0;
+	padding: 2px 10px;
+	font-size: 12px;
+}
+
+.seopress-sitemap-test__fix .components-spinner {
+	margin: 0 6px 0 0;
+}
+
+.seopress-sitemap-test__fixnotice {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0 16px 16px;
+	padding: 10px 12px;
+	border-radius: 4px;
+	background: rgba(74, 184, 102, 0.12);
+	color: #1a7a37;
+}
+
+.seopress-sitemap-test__fixnotice .dashicons {
+	color: var(--colorSuccess, #4ab866);
+}
+
+/*
+ * Robots.txt tab — quick-insert rule buttons, "Recommended" badges
+ * and info popovers. (PRO RobotsTab.jsx)
+ */
+.wrap-tags > .description {
+	margin-bottom: 12px;
+}
+
+.tag-section > .description {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+.tag-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.robots-btn-wrap {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.robots-recommended-badge {
+	display: inline-block;
+	margin-left: 8px;
+	padding: 1px 7px;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 1.4;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: #fff;
+	background: var(--colorSuccess, #4ab866);
+	border-radius: 9px;
+	vertical-align: middle;
+}
+
+.robots-tooltip {
+	width: 280px;
+	padding: 8px 12px;
+	font-size: 13px;
+	line-height: 1.5;
 }
 

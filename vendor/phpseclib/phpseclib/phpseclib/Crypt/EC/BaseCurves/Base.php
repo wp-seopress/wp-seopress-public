@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves;
 
-namespace phpseclib3\Crypt\EC\BaseCurves;
-
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * Base
  *
@@ -28,14 +26,12 @@ abstract class Base
      * @var BigInteger
      */
     protected $order;
-
     /**
      * Finite Field Integer factory
      *
      * @var FiniteField\Integer
      */
     protected $factory;
-
     /**
      * Returns a random integer
      *
@@ -45,7 +41,6 @@ abstract class Base
     {
         return $this->factory->randomInteger();
     }
-
     /**
      * Converts a BigInteger to a FiniteField\Integer integer
      *
@@ -55,7 +50,6 @@ abstract class Base
     {
         return $this->factory->newInteger($x);
     }
-
     /**
      * Returns the length, in bytes, of the modulo
      *
@@ -65,7 +59,6 @@ abstract class Base
     {
         return $this->factory->getLengthInBytes();
     }
-
     /**
      * Returns the length, in bits, of the modulo
      *
@@ -75,7 +68,6 @@ abstract class Base
     {
         return $this->factory->getLength();
     }
-
     /**
      * Multiply a point on the curve by a scalar
      *
@@ -89,20 +81,15 @@ abstract class Base
     public function multiplyPoint(array $p, BigInteger $d)
     {
         $alreadyInternal = isset($p[2]);
-        $r = $alreadyInternal ?
-            [[], $p] :
-            [[], $this->convertToInternal($p)];
-
+        $r = $alreadyInternal ? [[], $p] : [[], $this->convertToInternal($p)];
         $d = $d->toBits();
         for ($i = 0; $i < strlen($d); $i++) {
             $d_i = (int) $d[$i];
             $r[1 - $d_i] = $this->addPoint($r[0], $r[1]);
             $r[$d_i] = $this->doublePoint($r[$d_i]);
         }
-
         return $alreadyInternal ? $r[0] : $this->convertToAffine($r[0]);
     }
-
     /**
      * Creates a random scalar multiplier
      *
@@ -114,10 +101,8 @@ abstract class Base
         if (!isset($one)) {
             $one = new BigInteger(1);
         }
-
         return BigInteger::randomRange($one, $this->order->subtract($one));
     }
-
     /**
      * Performs range check
      */
@@ -127,7 +112,6 @@ abstract class Base
         if (!isset($zero)) {
             $zero = new BigInteger();
         }
-
         if (!isset($this->order)) {
             throw new \RuntimeException('setOrder needs to be called before this method');
         }
@@ -135,7 +119,6 @@ abstract class Base
             throw new \RangeException('x must be between 1 and the order of the curve');
         }
     }
-
     /**
      * Sets the Order
      */
@@ -143,7 +126,6 @@ abstract class Base
     {
         $this->order = $order;
     }
-
     /**
      * Returns the Order
      *
@@ -153,7 +135,6 @@ abstract class Base
     {
         return $this->order;
     }
-
     /**
      * Use a custom defined modular reduction function
      *
@@ -163,7 +144,6 @@ abstract class Base
     {
         $this->factory->setReduction($func);
     }
-
     /**
      * Returns the affine point
      *
@@ -173,7 +153,6 @@ abstract class Base
     {
         return $p;
     }
-
     /**
      * Converts an affine point to a jacobian coordinate
      *
@@ -183,7 +162,6 @@ abstract class Base
     {
         return $p;
     }
-
     /**
      * Negates a point
      *
@@ -191,16 +169,12 @@ abstract class Base
      */
     public function negatePoint(array $p)
     {
-        $temp = [
-            $p[0],
-            $p[1]->negate()
-        ];
+        $temp = [$p[0], $p[1]->negate()];
         if (isset($p[2])) {
             $temp[] = $p[2];
         }
         return $temp;
     }
-
     /**
      * Multiply and Add Points
      *

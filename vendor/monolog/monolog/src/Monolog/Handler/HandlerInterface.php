@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,8 +9,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog\Handler;
+namespace SEOPress\Vendor\Monolog\Handler;
 
 /**
  * Interface that all Monolog Handlers must implement
@@ -37,7 +37,6 @@ interface HandlerInterface
      * @phpstan-param array{level: Level} $record
      */
     public function isHandling(array $record): bool;
-
     /**
      * Handles a record.
      *
@@ -55,7 +54,6 @@ interface HandlerInterface
      * @phpstan-param Record $record
      */
     public function handle(array $record): bool;
-
     /**
      * Handles a set of records at once.
      *
@@ -64,7 +62,6 @@ interface HandlerInterface
      * @phpstan-param Record[] $records
      */
     public function handleBatch(array $records): void;
-
     /**
      * Closes the handler.
      *

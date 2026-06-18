@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2015 Google Inc.
  *
@@ -14,13 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+namespace SEOPress\Vendor\Google\Auth\Credentials;
 
-namespace Google\Auth\Credentials;
-
-use Google\Auth\CredentialsLoader;
-use Google\Auth\GetQuotaProjectInterface;
-use Google\Auth\OAuth2;
-
+use SEOPress\Vendor\Google\Auth\CredentialsLoader;
+use SEOPress\Vendor\Google\Auth\GetQuotaProjectInterface;
+use SEOPress\Vendor\Google\Auth\OAuth2;
 /**
  * Authenticates requests using User Refresh credentials.
  *
@@ -40,14 +39,12 @@ class UserRefreshCredentials extends CredentialsLoader implements GetQuotaProjec
      * @var OAuth2
      */
     protected $auth;
-
     /**
      * The quota project associated with the JSON credentials
      *
      * @var string
      */
     protected $quotaProject;
-
     /**
      * Create a new UserRefreshCredentials.
      *
@@ -56,46 +53,31 @@ class UserRefreshCredentials extends CredentialsLoader implements GetQuotaProjec
      * @param string|array<mixed> $jsonKey JSON credential file path or JSON credentials
      *   as an associative array
      */
-    public function __construct(
-        $scope,
-        $jsonKey
-    ) {
+    public function __construct($scope, $jsonKey)
+    {
         if (is_string($jsonKey)) {
             if (!file_exists($jsonKey)) {
                 throw new \InvalidArgumentException('file does not exist');
             }
             $json = file_get_contents($jsonKey);
-            if (!$jsonKey = json_decode((string) $json, true)) {
+            if (!$jsonKey = json_decode((string) $json, \true)) {
                 throw new \LogicException('invalid json for auth config');
             }
         }
         if (!array_key_exists('client_id', $jsonKey)) {
-            throw new \InvalidArgumentException(
-                'json key is missing the client_id field'
-            );
+            throw new \InvalidArgumentException('json key is missing the client_id field');
         }
         if (!array_key_exists('client_secret', $jsonKey)) {
-            throw new \InvalidArgumentException(
-                'json key is missing the client_secret field'
-            );
+            throw new \InvalidArgumentException('json key is missing the client_secret field');
         }
         if (!array_key_exists('refresh_token', $jsonKey)) {
-            throw new \InvalidArgumentException(
-                'json key is missing the refresh_token field'
-            );
+            throw new \InvalidArgumentException('json key is missing the refresh_token field');
         }
-        $this->auth = new OAuth2([
-            'clientId' => $jsonKey['client_id'],
-            'clientSecret' => $jsonKey['client_secret'],
-            'refresh_token' => $jsonKey['refresh_token'],
-            'scope' => $scope,
-            'tokenCredentialUri' => self::TOKEN_CREDENTIAL_URI,
-        ]);
+        $this->auth = new OAuth2(['clientId' => $jsonKey['client_id'], 'clientSecret' => $jsonKey['client_secret'], 'refresh_token' => $jsonKey['refresh_token'], 'scope' => $scope, 'tokenCredentialUri' => self::TOKEN_CREDENTIAL_URI]);
         if (array_key_exists('quota_project_id', $jsonKey)) {
             $this->quotaProject = (string) $jsonKey['quota_project_id'];
         }
     }
-
     /**
      * @param callable $httpHandler
      *
@@ -113,7 +95,6 @@ class UserRefreshCredentials extends CredentialsLoader implements GetQuotaProjec
     {
         return $this->auth->fetchAuthToken($httpHandler);
     }
-
     /**
      * @return string
      */
@@ -121,7 +102,6 @@ class UserRefreshCredentials extends CredentialsLoader implements GetQuotaProjec
     {
         return $this->auth->getClientId() . ':' . $this->auth->getCacheKey();
     }
-
     /**
      * @return array<mixed>
      */
@@ -129,7 +109,6 @@ class UserRefreshCredentials extends CredentialsLoader implements GetQuotaProjec
     {
         return $this->auth->getLastReceivedToken();
     }
-
     /**
      * Get the quota project used for this API request
      *
@@ -139,7 +118,6 @@ class UserRefreshCredentials extends CredentialsLoader implements GetQuotaProjec
     {
         return $this->quotaProject;
     }
-
     /**
      * Get the granted scopes (if they exist) for the last fetched token.
      *

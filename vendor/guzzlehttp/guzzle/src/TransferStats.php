@@ -1,11 +1,10 @@
 <?php
 
-namespace GuzzleHttp;
+namespace SEOPress\Vendor\GuzzleHttp;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\UriInterface;
-
+use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
+use SEOPress\Vendor\Psr\Http\Message\ResponseInterface;
+use SEOPress\Vendor\Psr\Http\Message\UriInterface;
 /**
  * Represents data at the point after it was transferred either successfully
  * or after a network error.
@@ -16,27 +15,22 @@ final class TransferStats
      * @var RequestInterface
      */
     private $request;
-
     /**
      * @var ResponseInterface|null
      */
     private $response;
-
     /**
      * @var float|null
      */
     private $transferTime;
-
     /**
      * @var array
      */
     private $handlerStats;
-
     /**
      * @var mixed|null
      */
     private $handlerErrorData;
-
     /**
      * @param RequestInterface       $request          Request that was sent.
      * @param ResponseInterface|null $response         Response received (if any)
@@ -44,25 +38,18 @@ final class TransferStats
      * @param mixed                  $handlerErrorData Handler error data.
      * @param array                  $handlerStats     Handler specific stats.
      */
-    public function __construct(
-        RequestInterface $request,
-        ?ResponseInterface $response = null,
-        ?float $transferTime = null,
-        $handlerErrorData = null,
-        array $handlerStats = []
-    ) {
+    public function __construct(RequestInterface $request, ?ResponseInterface $response = null, ?float $transferTime = null, $handlerErrorData = null, array $handlerStats = [])
+    {
         $this->request = $request;
         $this->response = $response;
         $this->transferTime = $transferTime;
         $this->handlerErrorData = $handlerErrorData;
         $this->handlerStats = $handlerStats;
     }
-
     public function getRequest(): RequestInterface
     {
         return $this->request;
     }
-
     /**
      * Returns the response that was received (if any).
      */
@@ -70,7 +57,6 @@ final class TransferStats
     {
         return $this->response;
     }
-
     /**
      * Returns true if a response was received.
      */
@@ -78,7 +64,6 @@ final class TransferStats
     {
         return $this->response !== null;
     }
-
     /**
      * Gets handler specific error data.
      *
@@ -92,7 +77,6 @@ final class TransferStats
     {
         return $this->handlerErrorData;
     }
-
     /**
      * Get the effective URI the request was sent to.
      */
@@ -100,7 +84,6 @@ final class TransferStats
     {
         return $this->request->getUri();
     }
-
     /**
      * Get the estimated time the request was being transferred by the handler.
      *
@@ -110,7 +93,6 @@ final class TransferStats
     {
         return $this->transferTime;
     }
-
     /**
      * Gets an array of all of the handler specific transfer data.
      */
@@ -118,7 +100,6 @@ final class TransferStats
     {
         return $this->handlerStats;
     }
-
     /**
      * Get a specific handler statistic from the handler by name.
      *

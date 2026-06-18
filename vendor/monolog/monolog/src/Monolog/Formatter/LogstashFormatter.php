@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,8 +9,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog\Formatter;
+namespace SEOPress\Vendor\Monolog\Formatter;
 
 /**
  * Serializes a log message to Logstash Event Format
@@ -25,22 +25,18 @@ class LogstashFormatter extends NormalizerFormatter
      * @var string the name of the system for the Logstash log message, used to fill the @source field
      */
     protected $systemName;
-
     /**
      * @var string an application name for the Logstash log message, used to fill the @type field
      */
     protected $applicationName;
-
     /**
      * @var string the key for 'extra' fields from the Monolog record
      */
     protected $extraKey;
-
     /**
      * @var string the key for 'context' fields from the Monolog record
      */
     protected $contextKey;
-
     /**
      * @param string      $applicationName The application that sends the data, used as the "type" field of logstash
      * @param string|null $systemName      The system/machine name, used as the "source" field of logstash, defaults to the hostname of the machine
@@ -51,28 +47,21 @@ class LogstashFormatter extends NormalizerFormatter
     {
         // logstash requires a ISO 8601 format date with optional millisecond precision.
         parent::__construct('Y-m-d\TH:i:s.uP');
-
         $this->systemName = $systemName === null ? (string) gethostname() : $systemName;
         $this->applicationName = $applicationName;
         $this->extraKey = $extraKey;
         $this->contextKey = $contextKey;
     }
-
     /**
      * {@inheritDoc}
      */
     public function format(array $record): string
     {
         $record = parent::format($record);
-
         if (empty($record['datetime'])) {
             $record['datetime'] = gmdate('c');
         }
-        $message = [
-            '@timestamp' => $record['datetime'],
-            '@version' => 1,
-            'host' => $this->systemName,
-        ];
+        $message = ['@timestamp' => $record['datetime'], '@version' => 1, 'host' => $this->systemName];
         if (isset($record['message'])) {
             $message['message'] = $record['message'];
         }
@@ -95,7 +84,6 @@ class LogstashFormatter extends NormalizerFormatter
         if (!empty($record['context'])) {
             $message[$this->contextKey] = $record['context'];
         }
-
         return $this->toJson($message) . "\n";
     }
 }

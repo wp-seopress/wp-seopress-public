@@ -51,6 +51,10 @@ class EnqueueModuleMetabox {
 			$response = false;
 		}
 
+		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['app_window'] ) { // phpcs:ignore
+			$response = false;
+		}
+
 		// Page builder preview iframes load editor scripts (Backbone /
 		// vendor globals) that conflict with the React beacon when both
 		// are enqueued in the same document. These query parameters are

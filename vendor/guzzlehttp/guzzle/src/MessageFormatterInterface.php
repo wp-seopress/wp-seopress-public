@@ -1,10 +1,9 @@
 <?php
 
-namespace GuzzleHttp;
+namespace SEOPress\Vendor\GuzzleHttp;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-
+use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
+use SEOPress\Vendor\Psr\Http\Message\ResponseInterface;
 interface MessageFormatterInterface
 {
     /**

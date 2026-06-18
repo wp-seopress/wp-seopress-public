@@ -10,8 +10,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
-
-namespace phpseclib3\Crypt\EC\Curves;
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\Curves;
 
 final class prime256v1 extends secp256r1
 {

@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,8 +9,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog\Handler;
+namespace SEOPress\Vendor\Monolog\Handler;
 
 /**
  * Base Handler class providing basic close() support as well as handleBatch
@@ -27,14 +27,12 @@ abstract class Handler implements HandlerInterface
             $this->handle($record);
         }
     }
-
     /**
      * {@inheritDoc}
      */
     public function close(): void
     {
     }
-
     public function __destruct()
     {
         try {
@@ -43,20 +41,16 @@ abstract class Handler implements HandlerInterface
             // do nothing
         }
     }
-
     public function __sleep()
     {
         $this->close();
-
         $reflClass = new \ReflectionClass($this);
-
         $keys = [];
         foreach ($reflClass->getProperties() as $reflProp) {
             if (!$reflProp->isStatic()) {
                 $keys[] = $reflProp->getName();
             }
         }
-
         return $keys;
     }
 }

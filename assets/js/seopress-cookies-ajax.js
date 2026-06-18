@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
+	// Notify third-party listeners (e.g. Google Tag Manager) of the consent decision.
+	const seopressNotifyConsent = function (consent) {
+		window.dataLayer = window.dataLayer || [];
+		window.dataLayer.push({ event: 'seopress_consent_updated', seopress_consent: consent });
+		document.dispatchEvent(new CustomEvent('seopress.consent', { detail: { consent: consent } }));
+	};
+
 	const seopressUserConsentAcceptBtn = document.getElementById('seopress-user-consent-accept');
 	if (seopressUserConsentAcceptBtn) seopressUserConsentAcceptBtn.addEventListener('click', function () {
         document.querySelectorAll('.seopress-user-consent.seopress-user-message, .seopress-user-consent-backdrop').forEach(function(element) {
@@ -13,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         Cookies.remove('seopress-user-consent-close');
         Cookies.set('seopress-user-consent-accept', '1', { expires: Number(seopressAjaxGAUserConsent.seopress_cookies_expiration_days) });
+
+        seopressNotifyConsent('accept');
 
         fetch(seopressAjaxGAUserConsent.seopress_cookies_user_consent, {
             method: 'POST',
@@ -71,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         Cookies.remove('seopress-user-consent-accept');
         Cookies.set('seopress-user-consent-close', '1', { expires: Number(seopressAjaxGAUserConsent.seopress_cookies_expiration_days) });
+
+        seopressNotifyConsent('decline');
 
         fetch(seopressAjaxGAUserConsent.seopress_cookies_user_consent, {
             method: 'POST',

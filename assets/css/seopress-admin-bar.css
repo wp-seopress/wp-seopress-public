@@ -47,6 +47,19 @@ body:not(.wp-admin) #wpadminbar .wp-ui-notification.seopress-menu-notification-c
     vertical-align: middle;
 }
 
+/* Standalone noindex alert (shown when the SEO admin bar menu is removed) */
+#wpadminbar #wp-admin-bar-seopress.seopress-adminbar-noindex-alert > .ab-item,
+#wpadminbar #wp-admin-bar-seopress.seopress-adminbar-noindex-alert > .ab-item:hover,
+#wpadminbar #wp-admin-bar-seopress.seopress-adminbar-noindex-alert > .ab-item:focus {
+    background: var(--colorAlert);
+    color: #fff;
+}
+
+#wpadminbar #wp-admin-bar-seopress.seopress-adminbar-noindex-alert > .ab-item .ab-icon::before {
+    color: #fff;
+    vertical-align: middle;
+}
+
 #wpadminbar #wp-admin-bar-seopress_custom_sub_menu_meta_robots {
     display: block;
     background: #23292d;

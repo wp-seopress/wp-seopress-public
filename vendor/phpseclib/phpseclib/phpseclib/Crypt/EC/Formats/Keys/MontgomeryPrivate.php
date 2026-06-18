@@ -17,15 +17,13 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\Formats\Keys;
 
-namespace phpseclib3\Crypt\EC\Formats\Keys;
-
-use phpseclib3\Crypt\EC\BaseCurves\Montgomery as MontgomeryCurve;
-use phpseclib3\Crypt\EC\Curves\Curve25519;
-use phpseclib3\Crypt\EC\Curves\Curve448;
-use phpseclib3\Exception\UnsupportedFormatException;
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Montgomery as MontgomeryCurve;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\Curve25519;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\Curve448;
+use SEOPress\Vendor\phpseclib3\Exception\UnsupportedFormatException;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * Montgomery Curve Private Key Handler
  *
@@ -37,8 +35,7 @@ abstract class MontgomeryPrivate
      * Is invisible flag
      *
      */
-    const IS_INVISIBLE = true;
-
+    const IS_INVISIBLE = \true;
     /**
      * Break a public or private key down into its constituent components
      *
@@ -58,16 +55,13 @@ abstract class MontgomeryPrivate
             default:
                 throw new \LengthException('The only supported lengths are 32 and 56');
         }
-
         $components = ['curve' => $curve];
         $components['dA'] = new BigInteger($key, 256);
         $curve->rangeCheck($components['dA']);
         // note that EC::getEncodedCoordinates does some additional "magic" (it does strrev on the result)
         $components['QA'] = $components['curve']->multiplyPoint($components['curve']->getBasePoint(), $components['dA']);
-
         return $components;
     }
-
     /**
      * Convert an EC public key to the appropriate format
      *
@@ -79,7 +73,6 @@ abstract class MontgomeryPrivate
     {
         return strrev($publicKey[0]->toBytes());
     }
-
     /**
      * Convert a private key to the appropriate format.
      *
@@ -95,7 +88,6 @@ abstract class MontgomeryPrivate
         if (!empty($password) && is_string($password)) {
             throw new UnsupportedFormatException('MontgomeryPrivate private keys do not support encryption');
         }
-
-        return str_pad($privateKey->toBytes(), $curve::SIZE, "\0", STR_PAD_RIGHT);
+        return str_pad($privateKey->toBytes(), $curve::SIZE, "\x00", \STR_PAD_RIGHT);
     }
 }

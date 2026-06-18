@@ -12,11 +12,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\Common\Formats\Signature;
 
-namespace phpseclib3\Crypt\Common\Formats\Signature;
-
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * Raw Signature Handler
  *
@@ -32,20 +30,15 @@ abstract class Raw
      */
     public static function load($sig)
     {
-        switch (true) {
+        switch (\true) {
             case !is_array($sig):
             case !isset($sig['r']) || !isset($sig['s']):
             case !$sig['r'] instanceof BigInteger:
             case !$sig['s'] instanceof BigInteger:
-                return false;
+                return \false;
         }
-
-        return [
-            'r' => $sig['r'],
-            's' => $sig['s']
-        ];
+        return ['r' => $sig['r'], 's' => $sig['s']];
     }
-
     /**
      * Returns a signature in the appropriate format
      *

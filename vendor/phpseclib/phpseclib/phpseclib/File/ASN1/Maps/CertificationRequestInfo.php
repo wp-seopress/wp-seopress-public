@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * CertificationRequestInfo
  *
@@ -22,20 +20,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class CertificationRequestInfo
 {
-    const MAP = [
-        'type' => ASN1::TYPE_SEQUENCE,
-        'children' => [
-            'version' => [
-                'type' => ASN1::TYPE_INTEGER,
-                'mapping' => ['v1']
-            ],
-            'subject' => Name::MAP,
-            'subjectPKInfo' => SubjectPublicKeyInfo::MAP,
-            'attributes' => [
-                'constant' => 0,
-                'optional' => true,
-                'implicit' => true
-            ] + Attributes::MAP,
-        ]
-    ];
+    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['version' => ['type' => ASN1::TYPE_INTEGER, 'mapping' => ['v1']], 'subject' => Name::MAP, 'subjectPKInfo' => SubjectPublicKeyInfo::MAP, 'attributes' => ['constant' => 0, 'optional' => \true, 'implicit' => \true] + Attributes::MAP]];
 }

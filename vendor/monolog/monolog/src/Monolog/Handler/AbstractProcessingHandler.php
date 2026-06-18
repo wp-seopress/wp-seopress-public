@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,8 +9,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog\Handler;
+namespace SEOPress\Vendor\Monolog\Handler;
 
 /**
  * Base Handler class providing the Handler structure, including processors and formatters
@@ -28,42 +28,34 @@ abstract class AbstractProcessingHandler extends AbstractHandler implements Proc
 {
     use ProcessableHandlerTrait;
     use FormattableHandlerTrait;
-
     /**
      * {@inheritDoc}
      */
     public function handle(array $record): bool
     {
         if (!$this->isHandling($record)) {
-            return false;
+            return \false;
         }
-
         if ($this->processors) {
             /** @var Record $record */
             $record = $this->processRecord($record);
         }
-
         $record['formatted'] = $this->getFormatter()->format($record);
-
         $this->write($record);
-
-        return false === $this->bubble;
+        return \false === $this->bubble;
     }
-
     /**
      * Writes the record down to the log of the implementing handler
      *
      * @phpstan-param FormattedRecord $record
      */
     abstract protected function write(array $record): void;
-
     /**
      * @return void
      */
     public function reset()
     {
         parent::reset();
-
         $this->resetProcessors();
     }
 }

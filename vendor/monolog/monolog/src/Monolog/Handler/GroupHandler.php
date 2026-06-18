@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,12 +9,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Handler;
 
-namespace Monolog\Handler;
-
-use Monolog\Formatter\FormatterInterface;
-use Monolog\ResettableInterface;
-
+use SEOPress\Vendor\Monolog\Formatter\FormatterInterface;
+use SEOPress\Vendor\Monolog\ResettableInterface;
 /**
  * Forwards records to multiple handlers
  *
@@ -24,28 +23,24 @@ use Monolog\ResettableInterface;
 class GroupHandler extends Handler implements ProcessableHandlerInterface, ResettableInterface
 {
     use ProcessableHandlerTrait;
-
     /** @var HandlerInterface[] */
     protected $handlers;
     /** @var bool */
     protected $bubble;
-
     /**
      * @param HandlerInterface[] $handlers Array of Handlers.
      * @param bool               $bubble   Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(array $handlers, bool $bubble = true)
+    public function __construct(array $handlers, bool $bubble = \true)
     {
         foreach ($handlers as $handler) {
             if (!$handler instanceof HandlerInterface) {
                 throw new \InvalidArgumentException('The first argument of the GroupHandler must be an array of HandlerInterface instances.');
             }
         }
-
         $this->handlers = $handlers;
         $this->bubble = $bubble;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -53,13 +48,11 @@ class GroupHandler extends Handler implements ProcessableHandlerInterface, Reset
     {
         foreach ($this->handlers as $handler) {
             if ($handler->isHandling($record)) {
-                return true;
+                return \true;
             }
         }
-
-        return false;
+        return \false;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -69,14 +62,11 @@ class GroupHandler extends Handler implements ProcessableHandlerInterface, Reset
             /** @var Record $record */
             $record = $this->processRecord($record);
         }
-
         foreach ($this->handlers as $handler) {
             $handler->handle($record);
         }
-
-        return false === $this->bubble;
+        return \false === $this->bubble;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -90,32 +80,26 @@ class GroupHandler extends Handler implements ProcessableHandlerInterface, Reset
             /** @var Record[] $records */
             $records = $processed;
         }
-
         foreach ($this->handlers as $handler) {
             $handler->handleBatch($records);
         }
     }
-
     public function reset()
     {
         $this->resetProcessors();
-
         foreach ($this->handlers as $handler) {
             if ($handler instanceof ResettableInterface) {
                 $handler->reset();
             }
         }
     }
-
     public function close(): void
     {
         parent::close();
-
         foreach ($this->handlers as $handler) {
             $handler->close();
         }
     }
-
     /**
      * {@inheritDoc}
      */
@@ -126,7 +110,6 @@ class GroupHandler extends Handler implements ProcessableHandlerInterface, Reset
                 $handler->setFormatter($formatter);
             }
         }
-
         return $this;
     }
 }

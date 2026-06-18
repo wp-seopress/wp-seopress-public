@@ -7,8 +7,7 @@
  *
  * @author Matthias Mullie <minify@mullie.eu>
  */
-
-namespace MatthiasMullie\Minify;
+namespace SEOPress\Vendor\MatthiasMullie\Minify;
 
 /**
  * Base Exception Class.
@@ -17,4 +16,6 @@ namespace MatthiasMullie\Minify;
  *
  * @author Matthias Mullie <minify@mullie.eu>
  */
-abstract class Exception extends \Exception {}
+abstract class Exception extends \Exception
+{
+}

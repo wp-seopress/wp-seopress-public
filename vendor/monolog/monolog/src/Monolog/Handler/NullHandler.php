@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,12 +9,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Handler;
 
-namespace Monolog\Handler;
-
-use Monolog\Logger;
-use Psr\Log\LogLevel;
-
+use SEOPress\Vendor\Monolog\Logger;
+use SEOPress\Vendor\Psr\Log\LogLevel;
 /**
  * Blackhole
  *
@@ -31,7 +30,6 @@ class NullHandler extends Handler
      * @var int
      */
     private $level;
-
     /**
      * @param string|int $level The minimum logging level at which this handler will be triggered
      *
@@ -41,7 +39,6 @@ class NullHandler extends Handler
     {
         $this->level = Logger::toMonologLevel($level);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -49,7 +46,6 @@ class NullHandler extends Handler
     {
         return $record['level'] >= $this->level;
     }
-
     /**
      * {@inheritDoc}
      */

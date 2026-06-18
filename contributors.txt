@@ -36,7 +36,7 @@ Integrations (https://www.seopress.org/integrations/):
 - The Elementor team
 - The Oxygen Team
 
-Translators:
+Translators (help us translate the plugin here: https://translate.wordpress.org/projects/wp-plugins/wp-seopress/):
 - 🇺🇸 English (UK) (English (UK)) - professional translation
 - 🇫🇷 Français (French (France)) - professional translation
 - 🇪🇸 Español (Spanish (Spain)) - professional translation

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2014 Google Inc.
  *
@@ -14,18 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+namespace SEOPress\Vendor\Google\Service;
 
-namespace Google\Service;
-
-use Google\Exception as GoogleException;
-
+use SEOPress\Vendor\Google\Exception as GoogleException;
 class Exception extends GoogleException
 {
     /**
      * Optional list of errors returned in a JSON body of an HTTP error response.
      */
     protected $errors = [];
-
     /**
      * Override default constructor to add the ability to set $errors and a retry
      * map.
@@ -36,21 +34,15 @@ class Exception extends GoogleException
      * @param array<array<string,string>>|null $errors List of errors returned in an HTTP
      * response or null.  Defaults to [].
      */
-    public function __construct(
-        $message,
-        $code = 0,
-        ?Exception $previous = null,
-        $errors = []
-    ) {
-        if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
+    public function __construct($message, $code = 0, ?Exception $previous = null, $errors = [])
+    {
+        if (version_compare(\PHP_VERSION, '5.3.0') >= 0) {
             parent::__construct($message, $code, $previous);
         } else {
             parent::__construct($message, $code);
         }
-
         $this->errors = $errors;
     }
-
     /**
      * An example of the possible errors returned.
      *

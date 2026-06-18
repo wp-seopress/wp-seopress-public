@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\Common\Traits;
 
-namespace phpseclib3\Crypt\Common\Traits;
-
-use phpseclib3\Crypt\Hash;
-
+use SEOPress\Vendor\phpseclib3\Crypt\Hash;
 /**
  * Fingerprint Trait for Private Keys
  *
@@ -36,12 +34,12 @@ trait Fingerprint
     public function getFingerprint($algorithm = 'md5')
     {
         $type = self::validatePlugin('Keys', 'OpenSSH', 'savePublicKey');
-        if ($type === false) {
-            return false;
+        if ($type === \false) {
+            return \false;
         }
-        $key = $this->toString('OpenSSH', ['binary' => true]);
-        if ($key === false) {
-            return false;
+        $key = $this->toString('OpenSSH', ['binary' => \true]);
+        if ($key === \false) {
+            return \false;
         }
         switch ($algorithm) {
             case 'sha256':
@@ -51,7 +49,7 @@ trait Fingerprint
             case 'md5':
                 return substr(chunk_split(md5($key), 2, ':'), 0, -1);
             default:
-                return false;
+                return \false;
         }
     }
 }

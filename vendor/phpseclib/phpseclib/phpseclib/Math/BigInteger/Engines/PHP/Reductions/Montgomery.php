@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+namespace SEOPress\Vendor\phpseclib3\Math\BigInteger\Engines\PHP\Reductions;
 
-namespace phpseclib3\Math\BigInteger\Engines\PHP\Reductions;
-
-use phpseclib3\Math\BigInteger\Engines\PHP\Montgomery as Progenitor;
-
+use SEOPress\Vendor\phpseclib3\Math\BigInteger\Engines\PHP\Montgomery as Progenitor;
 /**
  * PHP Montgomery Modular Exponentiation Engine
  *
@@ -36,11 +34,9 @@ abstract class Montgomery extends Progenitor
         $lhs->value = array_merge(self::array_repeat(0, count($n)), $x);
         $rhs = new $class();
         $rhs->value = $n;
-
         list(, $temp) = $lhs->divide($rhs);
         return $temp->value;
     }
-
     /**
      * Montgomery Multiply
      *
@@ -54,38 +50,27 @@ abstract class Montgomery extends Progenitor
      */
     protected static function reduce(array $x, array $n, $class)
     {
-        static $cache = [
-            self::VARIABLE => [],
-            self::DATA => []
-        ];
-
-        if (($key = array_search($n, $cache[self::VARIABLE])) === false) {
+        static $cache = [self::VARIABLE => [], self::DATA => []];
+        if (($key = array_search($n, $cache[self::VARIABLE])) === \false) {
             $key = count($cache[self::VARIABLE]);
             $cache[self::VARIABLE][] = $x;
             $cache[self::DATA][] = self::modInverse67108864($n, $class);
         }
-
         $k = count($n);
-
         $result = [self::VALUE => $x];
-
         for ($i = 0; $i < $k; ++$i) {
             $temp = $result[self::VALUE][$i] * $cache[self::DATA][$key];
-            $temp = $temp - $class::BASE_FULL * ($class::BASE === 26 ? intval($temp / 0x4000000) : ($temp >> 31));
+            $temp = $temp - $class::BASE_FULL * ($class::BASE === 26 ? intval($temp / 0x4000000) : $temp >> 31);
             $temp = $class::regularMultiply([$temp], $n);
             $temp = array_merge(self::array_repeat(0, $i), $temp);
-            $result = $class::addHelper($result[self::VALUE], false, $temp, false);
+            $result = $class::addHelper($result[self::VALUE], \false, $temp, \false);
         }
-
         $result[self::VALUE] = array_slice($result[self::VALUE], $k);
-
-        if (self::compareHelper($result, false, $n, false) >= 0) {
-            $result = $class::subtractHelper($result[self::VALUE], false, $n, false);
+        if (self::compareHelper($result, \false, $n, \false) >= 0) {
+            $result = $class::subtractHelper($result[self::VALUE], \false, $n, \false);
         }
-
         return $result[self::VALUE];
     }
-
     /**
      * Modular Inverse of a number mod 2**26 (eg. 67108864)
      *
@@ -111,16 +96,18 @@ abstract class Montgomery extends Progenitor
      * @param string $class
      * @return int
      */
-    protected static function modInverse67108864(array $x, $class) // 2**26 == 67,108,864
+    protected static function modInverse67108864(array $x, $class)
     {
         $x = -$x[0];
-        $result = $x & 0x3; // x**-1 mod 2**2
-        $result = ($result * (2 - $x * $result)) & 0xF; // x**-1 mod 2**4
-        $result = ($result * (2 - ($x & 0xFF) * $result))  & 0xFF; // x**-1 mod 2**8
-        $result = ($result * ((2 - ($x & 0xFFFF) * $result) & 0xFFFF)) & 0xFFFF; // x**-1 mod 2**16
-        $result = $class::BASE == 26 ?
-            fmod($result * (2 - fmod($x * $result, $class::BASE_FULL)), $class::BASE_FULL) : // x**-1 mod 2**26
-            ($result * (2 - ($x * $result) % $class::BASE_FULL)) % $class::BASE_FULL;
+        $result = $x & 0x3;
+        // x**-1 mod 2**2
+        $result = $result * (2 - $x * $result) & 0xf;
+        // x**-1 mod 2**4
+        $result = $result * (2 - ($x & 0xff) * $result) & 0xff;
+        // x**-1 mod 2**8
+        $result = $result * (2 - ($x & 0xffff) * $result & 0xffff) & 0xffff;
+        // x**-1 mod 2**16
+        $result = $class::BASE == 26 ? fmod($result * (2 - fmod($x * $result, $class::BASE_FULL)), $class::BASE_FULL) : $result * (2 - $x * $result % $class::BASE_FULL) % $class::BASE_FULL;
         return $result & $class::MAX_DIGIT;
     }
 }

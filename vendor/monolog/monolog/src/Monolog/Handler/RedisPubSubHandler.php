@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,13 +9,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Handler;
 
-namespace Monolog\Handler;
-
-use Monolog\Formatter\LineFormatter;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Logger;
-
+use SEOPress\Vendor\Monolog\Formatter\LineFormatter;
+use SEOPress\Vendor\Monolog\Formatter\FormatterInterface;
+use SEOPress\Vendor\Monolog\Logger;
 /**
  * Sends the message to a Redis Pub/Sub channel using PUBLISH
  *
@@ -32,23 +31,19 @@ class RedisPubSubHandler extends AbstractProcessingHandler
     private $redisClient;
     /** @var string */
     private $channelKey;
-
     /**
      * @param \Predis\Client<\Predis\Client>|\Redis $redis The redis instance
      * @param string                $key   The channel key to publish records to
      */
-    public function __construct($redis, string $key, $level = Logger::DEBUG, bool $bubble = true)
+    public function __construct($redis, string $key, $level = Logger::DEBUG, bool $bubble = \true)
     {
-        if (!(($redis instanceof \Predis\Client) || ($redis instanceof \Redis))) {
+        if (!($redis instanceof \SEOPress\Vendor\Predis\Client || $redis instanceof \Redis)) {
             throw new \InvalidArgumentException('Predis\Client or Redis instance required');
         }
-
         $this->redisClient = $redis;
         $this->channelKey = $key;
-
         parent::__construct($level, $bubble);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -56,7 +51,6 @@ class RedisPubSubHandler extends AbstractProcessingHandler
     {
         $this->redisClient->publish($this->channelKey, $record["formatted"]);
     }
-
     /**
      * {@inheritDoc}
      */

@@ -1,11 +1,10 @@
 <?php
 
-namespace GuzzleHttp\Handler;
+namespace SEOPress\Vendor\GuzzleHttp\Handler;
 
-use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\TransportSharing;
-use Psr\Http\Message\RequestInterface;
-
+use SEOPress\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use SEOPress\Vendor\GuzzleHttp\TransportSharing;
+use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * HTTP handler that uses cURL easy handles as a transport layer.
  *
@@ -21,12 +20,10 @@ class CurlHandler
      * @var CurlFactoryInterface
      */
     private $factory;
-
     /**
      * @var CurlShareHandleState|null
      */
     private $shareHandleState;
-
     /**
      * Accepts an associative array of options:
      *
@@ -40,33 +37,22 @@ class CurlHandler
         CurlShareHandleState::assertNoRequiredSharingCustomFactoryConflict($options, 'CurlHandler');
         $transportSharing = $options['transport_sharing'] ?? null;
         $sharingMode = CurlShareHandleState::normalizeMode($transportSharing, 'transport_sharing');
-
         if (\array_key_exists('handle_factory', $options) && $options['handle_factory'] !== null) {
             $this->shareHandleState = null;
             $this->factory = $options['handle_factory'];
-
             return;
         }
-
-        $this->shareHandleState = $sharingMode !== TransportSharing::NONE
-            ? CurlShareHandleState::fromOption($transportSharing)
-            : null;
-
-        $this->factory = $this->shareHandleState !== null
-            ? new CurlFactory(3, $this->shareHandleState->mode, $this->shareHandleState->handle)
-            : new CurlFactory(3);
+        $this->shareHandleState = $sharingMode !== TransportSharing::NONE ? CurlShareHandleState::fromOption($transportSharing) : null;
+        $this->factory = $this->shareHandleState !== null ? new CurlFactory(3, $this->shareHandleState->mode, $this->shareHandleState->handle) : new CurlFactory(3);
     }
-
     public function __invoke(RequestInterface $request, array $options): PromiseInterface
     {
         if (isset($options['delay'])) {
             \usleep($options['delay'] * 1000);
         }
-
         $easy = $this->factory->create($request, $options);
         \curl_exec($easy->handle);
         $easy->errno = \curl_errno($easy->handle);
-
         return CurlFactory::finish($this, $easy, $this->factory);
     }
 }

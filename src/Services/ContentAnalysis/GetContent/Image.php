@@ -128,9 +128,11 @@ class Image {
 		}
 
 		$request_options = array(
-			'timeout'         => 3,
-			'connect_timeout' => 3,
-			'verify'          => false,
+			'timeout'          => 3,
+			'connect_timeout'  => 3,
+			'verify'           => true,
+			'follow_redirects' => false,
+			'redirects'        => 0,
 		);
 
 		try {

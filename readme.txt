@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 9.9.2
+Stable tag: 10.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -32,27 +32,23 @@ WordPress SEO plugin with AI SEO metadata, schema, XML sitemap, redirections & S
 
 <a href="https://www.seopress.org/features/" target="_blank">Features</a> | <a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Migrate</a> | <a href="https://www.seopress.org/wordpress-seo-plugins/pro/" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">White Label</a> | <a href="https://www.seopress.org/features/openai/" target="_blank">AI</a>
 
-<h3>What's new in SEOPress 9.9</h3>
+<h3>What's new in SEOPress 10</h3>
 
-A major UX release: redesigned SEO dashboard, smarter SEO box, sharper Content Analysis and a fully accessible admin.
+Our biggest AI release yet: a brand new in-editor AI Assistant, your own AI credits, a smarter XML sitemap and a faster Redirections experience.
 
 <ul>
-	<li><strong>🧭 Brand new SEO dashboard &amp; admin header</strong>: Cleaner two-column layout, one-click module toggles, guided "Get Started" with numbered steps, and quick access to Help, Display options and notifications (with counter badge) on every SEO page.</li>
-	<li><strong>🪄 Setup wizard, fully redesigned</strong>: Faster, mobile-friendly, and easier to follow from start to finish.</li>
-	<li><strong>⚡ Smarter SEO box</strong>: Double-click target keywords to edit in place, Google keyword suggestions with autocomplete as you type, and a single "Update" in the Block Editor now saves every section at once (Title, Description, Advanced, Social, Redirections, Content Analysis).</li>
-	<li><strong>📝 Content Analysis</strong>: New content quality &amp; structure checks to help you write better articles, plus the ability to hide an issue you don't want to fix on a given page.</li>
-	<li><strong>🔄 One-click migration from SureRank</strong> and a full migration from SmartCrawl (variables in your titles &amp; descriptions are automatically translated).</li>
-	<li><strong>🛠️ Tools redesigned</strong>: Reset page with confirmation prompts so nothing happens by accident, and Import / Export with a cleaner layout, "export everything" by default, and a Cancel button on CSV exports.</li>
-	<li><strong>👁️ Appearance › Columns</strong>: Live preview of your post lists with grouped checkboxes — see what you'll get before you save.</li>
-	<li><strong>♿ Big accessibility upgrade</strong> across the whole SEO admin (WCAG 2.1 AA / RGAA 4.1 compliant), and the admin now matches your WordPress color scheme automatically.</li>
-	<li><strong>📊 Site Overview on the dashboard</strong> (PRO): Your Google Analytics 4 and Matomo stats directly on the SEO dashboard, with period &amp; metric filters, an interactive chart, and a sync button.</li>
-	<li><strong>🎬 Video schema auto-filled</strong> (PRO): Populated from the first YouTube video found in your post — no manual copy-paste.</li>
-	<li><strong>↪️ Redirections</strong> (PRO): Quick Edit, search results that stay when you go back, search by destination URL, and a dedicated 404 view with a "Delete 404s" shortcut.</li>
-	<li><strong>🩺 Site Audit</strong> (PRO): Detects the new content quality &amp; structure issues.</li>
-	<li><strong>🌍 Better Search Console URL matching</strong> (PRO) for multilingual sites (WPML / Polylang).</li>
+	<li><strong>🤖 Brand new AI Assistant</strong> (PRO): A full assistant right inside the Block Editor — chat, quick actions, generate complete articles with /write, copy results in one click, and keep persistent conversations.</li>
+	<li><strong>🔑 Your own AI, your way</strong> (PRO): Buy ready-to-use tokens from seopress.org, or connect your own OpenAI, Google Gemini or Anthropic Claude key — with WordPress Connectors (Abilities API) support on WordPress 7+ and credits you can top up directly.</li>
+	<li><strong>🖼️ Finer AI image metadata</strong> (PRO): Per-field toggles to choose exactly which AI-generated alt, caption and description are written on upload.</li>
+	<li><strong>🩺 XML Sitemap health check</strong>: A built-in tool that probes your sitemap index and sub-sitemaps, flags problems, reports coverage of optional content types, and offers one-click fixes.</li>
+	<li><strong>📰 Google Preferred Sources</strong>: A new block &amp; shortcode to add Google's "Preferred Sources" follow button anywhere in your content.</li>
+	<li><strong>⚡ Redirections &amp; 404s, faster</strong> (PRO): Moved to a snappy DataViews screen, with a dedicated Rank Math CSV importer and an "Add another" button after each redirect.</li>
+	<li><strong>🎬 Smarter Video sitemap</strong> (PRO): Now scans page builder content (Bricks and more) for YouTube embeds, with a keyless oEmbed fallback when the YouTube API quota is reached.</li>
+	<li><strong>🚦 robots.txt editor refined</strong> (PRO): Contextual guidance on quick-insert buttons, clearer "Recommended" labels, and native WordPress tooltips.</li>
+	<li><strong>🌍 Automatic language packs</strong>: Translations for your locale install on demand, no manual upload (Free and PRO).</li>
 </ul>
 
-<a href="https://www.seopress.org/newsroom/product-news/seopress-9-9/" target="_blank"><strong>Read the full 9.9 release notes →</strong></a>
+<a href="https://www.seopress.org/newsroom/product-news/seopress-10/" target="_blank"><strong>Read the full 10.0 release notes →</strong></a>
 
 <h3>Why SEOPress is the best WordPress SEO plugin?</h3>
 
@@ -316,62 +312,46 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 9.9.2 =
-* NEW AI content-quality checks (content depth, heading structure, media in content, readability) now show in the editor's Content Analysis tab, not just in the Site Audit
-* NEW "Test your URL" button is back in the Redirections metabox: check the destination's HTTP status and open it in a new tab
-* NEW [PRO] "Test URL" button in the Redirections editor, prefilled with the Origin URL
-* FIX Content Analysis performance issue with CDN/WAF
-* FIX Title / Description dynamic tag editor no longer breaks words in the middle in free text
-* FIX No more white screen when a file is momentarily unavailable during a plugin update
-
-= 9.9.1 =
-* NEW Option to hide the SEO score text ("Has SEO issues") in the block editor top bar (SEO, Advanced, Appearance tab)
-* INFO Better performance for SEO dashboard
-* FIX SEO metabox no longer freezes in specific cases
-* FIX Sitemap > Post Types picker now honors the shared CPT blocklist
-* FIX Snackbar is now visible above the metabox overlay, with proper icon spacing
-* FIX Error Snackbar now shows a warning icon instead of a green check
-* FIX Fatal error with GA4 and WooCommerce enabled
-* FIX Canonical URL: keep WPML translations on their own URL instead of pointing back to the source language
-* FIX [PRO] Local Business schema printing
-* FIX [PRO] Breadcrumbs JSON-LD: wrap URL-less intermediate ListItems in `item.Thing` so Google's Rich Results Test stays valid
-* FIX [PRO] AI: send a Referer header so Google Cloud URL key restrictions match
-
-= 9.9 <a href="https://www.seopress.org/newsroom/product-news/seopress-9-9/">Read the blog post update</a> =
-* NEW Brand new SEO dashboard and admin header: cleaner two-column layout, one-click module toggles, a guided "Get Started" with numbered steps, and quick access to Help, Display options and notifications (with counter badge) on every SEO page
-* NEW Setup wizard fully redesigned: faster, mobile-friendly, and easier to follow from start to finish
-* NEW Smarter SEO box: double-click your target keywords to edit them in place, Google keyword suggestions with autocomplete as you type, and clicking "Update" in the Block Editor now saves every section at once (Title, Description, Advanced, Social, Redirections, Content Analysis)
-* NEW Content Analysis: new content quality & structure checks to help you write better articles, plus the ability to hide an issue you don't want to fix on a given page
-* NEW One-click migration from SureRank, and a full migration from SmartCrawl (variables in your titles & descriptions are automatically translated)
-* NEW Tools redesigned: Reset page with confirmation prompts so nothing happens by accident, and Import / Export with a cleaner layout, "export everything" by default, and a Cancel button on CSV exports
-* NEW Appearance › Columns: live preview of your post lists with grouped checkboxes — see what you'll get before you save
-* NEW Category URL settings now read directly from your WordPress permalink settings (no risk of mismatch)
-* NEW Easier-to-remember date variables for schemas (ISO 8601 aliases)
-* NEW Big accessibility upgrade across the whole SEO admin (WCAG 2.1 AA / RGAA 4.1 compliant), and the admin now matches your WordPress color scheme automatically
-* NEW Cleaner dashboard: removed the Newsroom and SEO Ebooks sections
-* NEW [PRO] Site Overview now shows your Google Analytics 4 and Matomo stats directly on the SEO dashboard, with period & metric filters, an interactive chart, and a sync button
-* NEW [PRO] Video schema is auto-filled from the first YouTube video found in your post — no manual copy-paste
-* NEW [PRO] Redirections: Quick Edit, search results that stay when you go back, search by destination URL, and a dedicated 404 view with a "Delete 404s" shortcut
-* NEW [PRO] Friendlier empty states on Schemas and Broken Links screens (clear guidance when there's nothing yet)
-* NEW [PRO] Site Audit: detects the new content quality & structure issues
-* NEW [PRO] Better Search Console URL matching for multilingual sites (WPML / Polylang), 
-* NEW Developer filters: `seopress_search_console_match_url`, `seopress_search_console_match_post_id`, and `seopress_gtag_ec_item_id` to customize the product identifier sent to GA4
-* INFO Tested up to WordPress 7.0
-* FIX Google snippet preview now displays the correct title and description, and no longer shows the Elementor template instead of your actual post
-* FIX Internal Linking tab no longer crashes the whole SEO box, and the tag picker no longer scrolls uncontrollably when hovering the last item
-* FIX Title / meta description templates: spaces around variables are preserved on save, and custom field variables (%%_cf_*%%, %%_ct_*%%, %%_ucf_*%%) now work on the home page and blog page
-* FIX White-label "remove help links" setting is now respected in the new admin header
-* FIX SEOPress columns and bulk actions in your post lists are restored after toggling the metabox option (and no error when the bulk actions list is empty)
-* FIX Notifications counter and "hide notification" behavior now work as expected
-* FIX X (Twitter) handle is now cleaned up automatically in social tags
-* FIX [PRO] Custom automatic schemas created in the new editor are now correctly displayed on the front-end, and the Knowledge Graph logo appears in the JSON-LD preview
-* FIX [PRO] Redirections: URLs with accented / non-Latin characters are saved correctly, and sorting (hits, type, last hit…) + category counts now match what's shown in the list
-* FIX [PRO] OpenAI "Test connection" now works again after OpenAI retired the previous endpoint
-* FIX [PRO] AI metadata generation now uses the correct language per post on WPML / Polylang sites
-* FIX [PRO] Article schema: X handle and domain are normalized in `sameAs`
-* FIX [PRO] Breadcrumbs: display a name fallback when a crumb has no URL
-* FIX [PRO] Translations now load correctly when running WP-CLI commands or cron jobs
-* FIX [PRO] CSV export: cleaner error messages, no leftover data between exports
+= 10.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-10/">Read the blog post update</a> =
+* NEW [PRO] AI Assistant: a brand-new in-editor assistant available in the Block Editor — chat, quick actions, generate full articles with /write, copy results to the clipboard, and keep persistent conversations 🎉
+* NEW [PRO] SEOPress AI provider: purchase tokens from seopress.org and quickly get started using AI on your WordPress site - no-brainer! 🎉
+* NEW [PRO] Connect your own AI provider: OpenAI, Google Gemini, Anthropic Claude — plus WordPress Connectors (Abilities API) support on WordPress 7+, and manage/top up your AI credits directly 🎉
+* NEW [PRO] Per-field toggles to choose exactly which AI-generated image metadata (alt, caption, description) is written on upload
+* NEW XML Sitemap health check: a built-in tool that probes your sitemap index and the first sub-sitemap of each type, flags problems, reports coverage of optional content types, and offers one-click fixes (such as flushing permalinks)
+* NEW Google Preferred Sources block & shortcode to add Google's "Preferred Sources" follow button to your content
+* NEW [PRO] Redirections & 404s moved to a faster DataViews screen, with a dedicated Rank Math CSV redirections importer and an "Add another" button after creating a redirect
+* NEW [PRO] Video sitemap now scans page builder content (Bricks, etc.) for YouTube embeds, and auto-fill Video schema from YouTube falls back to a keyless oEmbed when the YouTube Data API quota is reached
+* NEW [PRO] robots.txt editor: contextual guidance on the quick-insert buttons, clearer "Recommended" labels, and native WordPress tooltips
+* NEW [PRO] SEO alerts now rely on the full XML sitemap diagnostic
+* NEW [PRO] Structured Data Types metabox is enabled by default on fresh installs
+* NEW Language packs install automatically on demand for your current locale (Free and PRO)
+* NEW Cookie consent now emits a dataLayer event and a DOM event when a visitor accepts or declines, so you can trigger your own scripts
+* NEW Notice in Titles & Metas pointing to your static posts page when one is set
+* NEW Tools: Import / Export reorganized into cards, with a clear warning that exported settings contain sensitive credentials
+* NEW Developer: headless Content Analysis REST endpoint (with rate limiting) and WordPress Abilities API support (WordPress 7+)
+* INFO Mobile-friendly admin: sticky save bar, responsive setup wizard, and various small-screen layout fixes
+* INFO Improved compatibility with Divi 5
+* FIX Security enhanced
+* FIX IndexNow: valid keys are no longer mistakenly base64-decoded
+* FIX XML sitemaps: non-existent custom post types/taxonomies are kept out of the sitemap index, and a per-type sitemap now returns a 404 when its type no longer exists
+* FIX XML sitemaps: hidden Polylang languages are now excluded
+* FIX Schemas: HTML entities (like &) are decoded before JSON-LD encoding to avoid double-encoding, and metabox schema fields bind by key instead of by position
+* FIX noindex warning now shows correctly in the admin bar even when the SEO menu is hidden
+* FIX Content Analysis no longer reports zero headings when the article sits outside <main>
+* FIX REST: empty integer metas are tolerated (WordPress 7 compatibility)
+* FIX "Get PRO" link is now readable on the dashboard card; license reminder rendering and spacing fixed
+* FIX FAQ block updated for the latest editor APIs (no more deprecation warnings); primary category picker is more stable
+* FIX Bundled Google SDK is scoped at build time to avoid namespace collisions with other plugins
+* FIX [PRO] WooCommerce Product schema: correct price & availability for out-of-stock and backorder variations, with an OutOfStock fallback only when the product is truly out of stock
+* FIX [PRO] Redirections: 404 hits counter starts at 1 on the first hit, and the "Test URL" button no longer duplicates the language prefix
+* FIX [PRO] Schemas: "manual value on each post" options restored in automatic schemas; saving no longer wipes schema data and the metabox Edit action routes to the React editor; Local Business opening-hours no longer triggers a PHP 8 warning
+* FIX [PRO] Video: non-video YouTube URLs are no longer sent to the YouTube Data API
+* FIX [PRO] llms.txt: post permalinks now resolve in their own language under WPML
+* FIX [PRO] Analytics degrades gracefully when another plugin loads a conflicting Google SDK
+* FIX [PRO] How-To block updated for the latest editor APIs
+* FIX [PRO] Table of Contents block is now detected inside template parts
+* FIX [PRO] Updater sends a neutral User-Agent for PRO update requests
+* FIX [PRO] Build: async chunk filenames are content-hashed to prevent stale-chunk crashes after updates
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

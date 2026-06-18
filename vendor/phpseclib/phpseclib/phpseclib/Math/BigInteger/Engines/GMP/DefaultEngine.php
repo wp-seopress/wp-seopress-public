@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+namespace SEOPress\Vendor\phpseclib3\Math\BigInteger\Engines\GMP;
 
-namespace phpseclib3\Math\BigInteger\Engines\GMP;
-
-use phpseclib3\Math\BigInteger\Engines\GMP;
-
+use SEOPress\Vendor\phpseclib3\Math\BigInteger\Engines\GMP;
 /**
  * GMP Modular Exponentiation Engine
  *
@@ -34,7 +32,6 @@ abstract class DefaultEngine extends GMP
     {
         $temp = new GMP();
         $temp->value = gmp_powm($x->value, $e->value, $n->value);
-
         return $x->normalize($temp);
     }
 }

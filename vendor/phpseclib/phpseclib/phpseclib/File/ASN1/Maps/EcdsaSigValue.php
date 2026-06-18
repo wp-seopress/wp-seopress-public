@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * EcdsaSigValue
  *
@@ -22,11 +20,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class EcdsaSigValue
 {
-    const MAP = [
-        'type' => ASN1::TYPE_SEQUENCE,
-        'children' => [
-            'r' => ['type' => ASN1::TYPE_INTEGER],
-            's' => ['type' => ASN1::TYPE_INTEGER]
-        ]
-    ];
+    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['r' => ['type' => ASN1::TYPE_INTEGER], 's' => ['type' => ASN1::TYPE_INTEGER]]];
 }

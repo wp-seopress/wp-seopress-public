@@ -185,15 +185,19 @@ class Render implements ExecuteHooksFrontend {
 		// Unticking a CPT in the settings only unsets the 'include' flag, the key
 		// itself stays in the option array. We must check the flag, not just the key,
 		// otherwise per-CPT URLs (e.g. /post-sitemap.xml) keep responding after removal.
+		// We also require the post type to still exist: a deleted CPT (e.g. removed
+		// from a page builder) keeps its 'include' = '1' entry, which would otherwise
+		// serve an empty 200 sitemap forever instead of a 404.
 		$post_types = seopress_get_service( 'SitemapOption' )->getPostTypesList();
-		if ( ! empty( $post_types[ $cpt ]['include'] ) && '1' === $post_types[ $cpt ]['include'] ) {
+		if ( post_type_exists( $cpt ) && ! empty( $post_types[ $cpt ]['include'] ) && '1' === $post_types[ $cpt ]['include'] ) {
 			seopress_get_service( 'SitemapRenderSingle' )->render();
 			exit();
 		}
 
-		// Check if it's a taxonomy included in the sitemap.
+		// Check if it's a taxonomy included in the sitemap. Same guard: a removed
+		// custom taxonomy keeps its 'include' flag, so require it to still exist.
 		$taxonomies = seopress_get_service( 'SitemapOption' )->getTaxonomiesList();
-		if ( ! empty( $taxonomies[ $cpt ]['include'] ) && '1' === $taxonomies[ $cpt ]['include'] ) {
+		if ( taxonomy_exists( $cpt ) && ! empty( $taxonomies[ $cpt ]['include'] ) && '1' === $taxonomies[ $cpt ]['include'] ) {
 			$this->render_template( 'template-xml-sitemaps-single-term.php' );
 			return;
 		}

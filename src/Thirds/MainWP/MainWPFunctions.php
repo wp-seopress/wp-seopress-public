@@ -104,7 +104,7 @@ if ( ! is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) || ! defined( 'SEO
 
 		// Check if the string is double-serialized (common MainWP issue).
 		if ( is_serialized( $value ) ) {
-			$unserialized = @unserialize( $value ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
+			$unserialized = @unserialize( $value, array( 'allowed_classes' => false ) ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
 			if ( false !== $unserialized ) {
 				return $unserialized;
 			}

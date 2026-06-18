@@ -8,22 +8,20 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\RSA;
 
-namespace phpseclib3\Crypt\RSA;
-
-use phpseclib3\Common\Functions\Strings;
-use phpseclib3\Crypt\Common;
-use phpseclib3\Crypt\Hash;
-use phpseclib3\Crypt\Random;
-use phpseclib3\Crypt\RSA;
-use phpseclib3\Crypt\RSA\Formats\Keys\PSS;
-use phpseclib3\Exception\BadConfigurationException;
-use phpseclib3\Exception\UnsupportedAlgorithmException;
-use phpseclib3\Exception\UnsupportedFormatException;
-use phpseclib3\File\ASN1;
-use phpseclib3\File\ASN1\Maps\DigestInfo;
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Crypt\Common;
+use SEOPress\Vendor\phpseclib3\Crypt\Hash;
+use SEOPress\Vendor\phpseclib3\Crypt\Random;
+use SEOPress\Vendor\phpseclib3\Crypt\RSA;
+use SEOPress\Vendor\phpseclib3\Crypt\RSA\Formats\Keys\PSS;
+use SEOPress\Vendor\phpseclib3\Exception\BadConfigurationException;
+use SEOPress\Vendor\phpseclib3\Exception\UnsupportedAlgorithmException;
+use SEOPress\Vendor\phpseclib3\Exception\UnsupportedFormatException;
+use SEOPress\Vendor\phpseclib3\File\ASN1;
+use SEOPress\Vendor\phpseclib3\File\ASN1\Maps\DigestInfo;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * Raw RSA Key Handler
  *
@@ -32,7 +30,6 @@ use phpseclib3\Math\BigInteger;
 final class PublicKey extends RSA implements Common\PublicKey
 {
     use Common\Traits\Fingerprint;
-
     /**
      * Exponentiate
      *
@@ -43,7 +40,6 @@ final class PublicKey extends RSA implements Common\PublicKey
     {
         return $x->modPow($this->exponent, $this->modulus);
     }
-
     /**
      * RSAVP1
      *
@@ -55,11 +51,10 @@ final class PublicKey extends RSA implements Common\PublicKey
     private function rsavp1($s)
     {
         if ($s->compare(self::$zero) < 0 || $s->compare($this->modulus) > 0) {
-            return false;
+            return \false;
         }
         return $this->exponentiate($s);
     }
-
     /**
      * RSASSA-PKCS1-V1_5-VERIFY
      *
@@ -73,53 +68,43 @@ final class PublicKey extends RSA implements Common\PublicKey
     private function rsassa_pkcs1_v1_5_verify($m, $s)
     {
         // Length checking
-
         if (strlen($s) != $this->k) {
-            return false;
+            return \false;
         }
-
         // RSA verification
-
         $s = $this->os2ip($s);
         $m2 = $this->rsavp1($s);
-        if ($m2 === false) {
-            return false;
+        if ($m2 === \false) {
+            return \false;
         }
         $em = $this->i2osp($m2, $this->k);
-        if ($em === false) {
-            return false;
+        if ($em === \false) {
+            return \false;
         }
-
         // EMSA-PKCS1-v1_5 encoding
-
-        $exception = false;
-
+        $exception = \false;
         // If the encoding operation outputs "intended encoded message length too short," output "RSA modulus
         // too short" and stop.
         try {
             $em2 = $this->emsa_pkcs1_v1_5_encode($m, $this->k);
             $r1 = hash_equals($em, $em2);
         } catch (\LengthException $e) {
-            $exception = true;
+            $exception = \true;
         }
-
         try {
             $em3 = $this->emsa_pkcs1_v1_5_encode_without_null($m, $this->k);
             $r2 = hash_equals($em, $em3);
         } catch (\LengthException $e) {
-            $exception = true;
+            $exception = \true;
         } catch (UnsupportedAlgorithmException $e) {
-            $r2 = false;
+            $r2 = \false;
         }
-
         if ($exception) {
             throw new \LengthException('RSA modulus too short');
         }
-
         // Compare
         return boolval($r1 | $r2);
     }
-
     /**
      * RSASSA-PKCS1-V1_5-VERIFY (relaxed matching)
      *
@@ -140,42 +125,36 @@ final class PublicKey extends RSA implements Common\PublicKey
     private function rsassa_pkcs1_v1_5_relaxed_verify($m, $s)
     {
         // Length checking
-
         if (strlen($s) != $this->k) {
-            return false;
+            return \false;
         }
-
         // RSA verification
-
         $s = $this->os2ip($s);
         $m2 = $this->rsavp1($s);
-        if ($m2 === false) {
-            return false;
+        if ($m2 === \false) {
+            return \false;
         }
         $em = $this->i2osp($m2, $this->k);
-        if ($em === false) {
-            return false;
+        if ($em === \false) {
+            return \false;
         }
-
-        if (Strings::shift($em, 2) != "\0\1") {
-            return false;
+        if (Strings::shift($em, 2) != "\x00\x01") {
+            return \false;
         }
-
-        $em = ltrim($em, "\xFF");
-        if (Strings::shift($em) != "\0") {
-            return false;
+        $em = ltrim($em, "\xff");
+        if (Strings::shift($em) != "\x00") {
+            return \false;
         }
-
         $decoded = ASN1::decodeBER($em);
         if (!is_array($decoded) || empty($decoded[0]) || strlen($em) > $decoded[0]['length']) {
-            return false;
+            return \false;
         }
-
         static $oids;
         if (!isset($oids)) {
             $oids = [
                 'md2' => '1.2.840.113549.2.2',
-                'md4' => '1.2.840.113549.2.4', // from PKCS1 v1.5
+                'md4' => '1.2.840.113549.2.4',
+                // from PKCS1 v1.5
                 'md5' => '1.2.840.113549.2.5',
                 'id-sha1' => '1.3.14.3.2.26',
                 'id-sha256' => '2.16.840.1.101.3.4.2.1',
@@ -188,31 +167,23 @@ final class PublicKey extends RSA implements Common\PublicKey
             ];
             ASN1::loadOIDs($oids);
         }
-
         $decoded = ASN1::asn1map($decoded[0], DigestInfo::MAP);
-        if (!isset($decoded) || $decoded === false) {
-            return false;
+        if (!isset($decoded) || $decoded === \false) {
+            return \false;
         }
-
         if (!isset($oids[$decoded['digestAlgorithm']['algorithm']])) {
-            return false;
+            return \false;
         }
-
         if (isset($decoded['digestAlgorithm']['parameters']) && $decoded['digestAlgorithm']['parameters'] !== ['null' => '']) {
-            return false;
+            return \false;
         }
-
         $hash = $decoded['digestAlgorithm']['algorithm'];
-        $hash = substr($hash, 0, 3) == 'id-' ?
-            substr($hash, 3) :
-            $hash;
+        $hash = substr($hash, 0, 3) == 'id-' ? substr($hash, 3) : $hash;
         $hash = new Hash($hash);
         $em = $hash->hash($m);
         $em2 = $decoded['digest'];
-
         return hash_equals($em, $em2);
     }
-
     /**
      * EMSA-PSS-VERIFY
      *
@@ -227,38 +198,35 @@ final class PublicKey extends RSA implements Common\PublicKey
     {
         // if $m is larger than two million terrabytes and you're using sha1, PKCS#1 suggests a "Label too long" error
         // be output.
-
-        $emLen = ($emBits + 7) >> 3; // ie. ceil($emBits / 8);
+        $emLen = $emBits + 7 >> 3;
+        // ie. ceil($emBits / 8);
         $sLen = $this->sLen !== null ? $this->sLen : $this->hLen;
-
         $mHash = $this->hash->hash($m);
         if ($emLen < $this->hLen + $sLen + 2) {
-            return false;
+            return \false;
         }
-
-        if ($em[strlen($em) - 1] != chr(0xBC)) {
-            return false;
+        if ($em[strlen($em) - 1] != chr(0xbc)) {
+            return \false;
         }
-
         $maskedDB = substr($em, 0, -$this->hLen - 1);
         $h = substr($em, -$this->hLen - 1, $this->hLen);
         $temp = chr(256 - (1 << ($emBits & 7)));
         if ((~$maskedDB[0] & $temp) != $temp) {
-            return false;
+            return \false;
         }
         $dbMask = $this->mgf1($h, $emLen - $this->hLen - 1);
         $db = $maskedDB ^ $dbMask;
         $db[0] = ~chr(256 - (1 << ($emBits & 7))) & $db[0];
         $temp = $emLen - $this->hLen - $sLen - 2;
         if (substr($db, 0, $temp) != str_repeat(chr(0), $temp) || ord($db[$temp]) != 1) {
-            return false;
+            return \false;
         }
-        $salt = substr($db, $temp + 1); // should be $sLen long
-        $m2 = "\0\0\0\0\0\0\0\0" . $mHash . $salt;
+        $salt = substr($db, $temp + 1);
+        // should be $sLen long
+        $m2 = "\x00\x00\x00\x00\x00\x00\x00\x00" . $mHash . $salt;
         $h2 = $this->hash->hash($m2);
         return hash_equals($h, $h2);
     }
-
     /**
      * RSASSA-PSS-VERIFY
      *
@@ -271,27 +239,20 @@ final class PublicKey extends RSA implements Common\PublicKey
     private function rsassa_pss_verify($m, $s)
     {
         // Length checking
-
         if (strlen($s) != $this->k) {
-            return false;
+            return \false;
         }
-
         // RSA verification
-
         $modBits = strlen($this->modulus->toBits());
-
         $s2 = $this->os2ip($s);
         $m2 = $this->rsavp1($s2);
         $em = $this->i2osp($m2, $this->k);
-        if ($em === false) {
-            return false;
+        if ($em === \false) {
+            return \false;
         }
-
         // EMSA-PSS verification
-
         return $this->emsa_pss_verify($m, $em, $modBits - 1);
     }
-
     /**
      * Verifies a signature
      *
@@ -302,49 +263,10 @@ final class PublicKey extends RSA implements Common\PublicKey
      */
     public function verify($message, $signature)
     {
-        /*
-        https://datatracker.ietf.org/doc/html/rfc4055#page-6 says the following:
-
-           There are two possible encodings for the AlgorithmIdentifier
-           parameters field associated with these object identifiers.  The two
-           alternatives arise from the loss of the OPTIONAL associated with the
-           algorithm identifier parameters when the 1988 syntax for
-           AlgorithmIdentifier was translated into the 1997 syntax.  Later the
-           OPTIONAL was recovered via a defect report, but by then many people
-           thought that algorithm parameters were mandatory.  Because of this
-           history some implementations encode parameters as a NULL element
-           while others omit them entirely.  The correct encoding is to omit the
-           parameters field; however, when RSASSA-PSS and RSAES-OAEP were
-           defined, it was done using the NULL parameters rather than absent
-           parameters.
-
-           All implementations MUST accept both NULL and absent parameters as
-           legal and equivalent encodings.
-
-        OpenSSL does NOT accept both - it REQUIRES NULL be present. phpseclib, however,
-        DOES accept both. at first, it didn't. at first, not knowing why some small number
-        of PKCS1 signatures ommitted NULL, i added the SIGNATURE_RELAXED_PKCS1 mode on
-        2015-08-26. https://phpseclib.com/docs/rsa#rsasignature_relaxed_pkcs1 talks more
-        about that mode. later, on 2021-04-05, there was CVE-2021-30130. consequently,
-        the SIGNATURE_PKCS1 mode was updated to accept either NULL or non-NULL.
-
-        because phpseclib accepts PKCS1 signatures that OpenSSL doesn't, OpenSSL isn't
-        used for PKCS1. if the OpenSSL extension is installed then it'll be used to perform
-        unpadded RSA (ie. modular exponentation), however, the actual PKCS1 construction
-        takes place in PHP code vs OpenSSL.
-
-        see https://security.stackexchange.com/questions/110330/encoding-of-optional-null-in-der
-        for an additional reference
-        */
-        if ($this->signaturePadding === self::SIGNATURE_PKCS1 && isset(self::$forcedEngine) && self::$forcedEngine !== 'PHP') {
-            throw new BadConfigurationException('Engine OpenSSL is forced but unavailable for RSA PKCS1 signature verification');
-        }
-
         $result = $this->handleOpenSSL('openssl_verify', $message, $signature);
         if ($result !== null) {
             return $result;
         }
-
         switch ($this->signaturePadding) {
             case self::SIGNATURE_RELAXED_PKCS1:
                 return $this->rsassa_pkcs1_v1_5_relaxed_verify($message, $signature);
@@ -355,7 +277,6 @@ final class PublicKey extends RSA implements Common\PublicKey
                 return $this->rsassa_pss_verify($message, $signature);
         }
     }
-
     /**
      * RSAES-PKCS1-V1_5-ENCRYPT
      *
@@ -366,18 +287,14 @@ final class PublicKey extends RSA implements Common\PublicKey
      * @throws \LengthException if strlen($m) > $this->k - 11
      * @return bool|string
      */
-    private function rsaes_pkcs1_v1_5_encrypt($m, $pkcs15_compat = false)
+    private function rsaes_pkcs1_v1_5_encrypt($m, $pkcs15_compat = \false)
     {
         $mLen = strlen($m);
-
         // Length checking
-
         if ($mLen > $this->k - 11) {
             throw new \LengthException('Message too long');
         }
-
         // EME-PKCS1-v1_5 encoding
-
         $psLen = $this->k - $mLen - 3;
         $ps = '';
         while (strlen($ps) != $psLen) {
@@ -387,17 +304,13 @@ final class PublicKey extends RSA implements Common\PublicKey
         }
         $type = 2;
         $em = chr(0) . chr($type) . $ps . chr(0) . $m;
-
         // RSA encryption
         $m = $this->os2ip($em);
         $c = $this->rsaep($m);
         $c = $this->i2osp($c, $this->k);
-
         // Output the ciphertext C
-
         return $c;
     }
-
     /**
      * RSAES-OAEP-ENCRYPT
      *
@@ -411,18 +324,13 @@ final class PublicKey extends RSA implements Common\PublicKey
     private function rsaes_oaep_encrypt($m)
     {
         $mLen = strlen($m);
-
         // Length checking
-
         // if $l is larger than two million terrabytes and you're using sha1, PKCS#1 suggests a "Label too long" error
         // be output.
-
         if ($mLen > $this->k - 2 * $this->hLen - 2) {
             throw new \LengthException('Message too long');
         }
-
         // EME-OAEP encoding
-
         $lHash = $this->hash->hash($this->label);
         $ps = str_repeat(chr(0), $this->k - $mLen - 2 * $this->hLen - 2);
         $db = $lHash . $ps . chr(1) . $m;
@@ -432,18 +340,13 @@ final class PublicKey extends RSA implements Common\PublicKey
         $seedMask = $this->mgf1($maskedDB, $this->hLen);
         $maskedSeed = $seed ^ $seedMask;
         $em = chr(0) . $maskedSeed . $maskedDB;
-
         // RSA encryption
-
         $m = $this->os2ip($em);
         $c = $this->rsaep($m);
         $c = $this->i2osp($c, $this->k);
-
         // Output the ciphertext C
-
         return $c;
     }
-
     /**
      * RSAEP
      *
@@ -459,7 +362,6 @@ final class PublicKey extends RSA implements Common\PublicKey
         }
         return $this->exponentiate($m);
     }
-
     /**
      * Raw Encryption / Decryption
      *
@@ -474,12 +376,10 @@ final class PublicKey extends RSA implements Common\PublicKey
         if (strlen($m) > $this->k) {
             throw new \LengthException('Message too long');
         }
-
         $temp = $this->os2ip($m);
         $temp = $this->rsaep($temp);
-        return  $this->i2osp($temp, $this->k);
+        return $this->i2osp($temp, $this->k);
     }
-
     /**
      * Encryption
      *
@@ -498,7 +398,6 @@ final class PublicKey extends RSA implements Common\PublicKey
         if ($result !== null) {
             return $result;
         }
-
         switch ($this->encryptionPadding) {
             case self::ENCRYPTION_NONE:
                 return $this->raw_encrypt($plaintext);
@@ -509,7 +408,6 @@ final class PublicKey extends RSA implements Common\PublicKey
                 return $this->rsaes_oaep_encrypt($plaintext);
         }
     }
-
     /**
      * Returns the public key
      *
@@ -524,22 +422,15 @@ final class PublicKey extends RSA implements Common\PublicKey
     public function toString($type, array $options = [])
     {
         $type = self::validatePlugin('Keys', $type, 'savePublicKey');
-
         if ($type == PSS::class) {
             if ($this->signaturePadding == self::SIGNATURE_PSS) {
-                $options += [
-                    'hash' => $this->hash->getHash(),
-                    'MGFHash' => $this->mgfHash->getHash(),
-                    'saltLength' => $this->getSaltLength()
-                ];
+                $options += ['hash' => $this->hash->getHash(), 'MGFHash' => $this->mgfHash->getHash(), 'saltLength' => $this->getSaltLength()];
             } else {
                 throw new UnsupportedFormatException('The PSS format can only be used when the signature method has been explicitly set to PSS');
             }
         }
-
         return $type::savePublicKey($this->modulus, $this->publicExponent, $options);
     }
-
     /**
      * Converts a public key to a private key
      *
@@ -552,11 +443,6 @@ final class PublicKey extends RSA implements Common\PublicKey
         $new->modulus = $this->modulus;
         $new->k = $this->k;
         $new->format = $this->format;
-        return $new
-            ->withHash($this->hash->getHash())
-            ->withMGFHash($this->mgfHash->getHash())
-            ->withSaltLength($this->sLen)
-            ->withLabel($this->label)
-            ->withPadding($this->signaturePadding | $this->encryptionPadding);
+        return $new->withHash($this->hash->getHash())->withMGFHash($this->mgfHash->getHash())->withSaltLength($this->sLen)->withLabel($this->label)->withPadding($this->signaturePadding | $this->encryptionPadding);
     }
 }

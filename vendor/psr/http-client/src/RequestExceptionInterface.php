@@ -1,9 +1,8 @@
 <?php
 
-namespace Psr\Http\Client;
+namespace SEOPress\Vendor\Psr\Http\Client;
 
-use Psr\Http\Message\RequestInterface;
-
+use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * Exception for when a request failed.
  *

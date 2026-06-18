@@ -112,9 +112,36 @@ class JsonSchemaGenerator {
 				unset( $data[ $key ] );
 				continue;
 			}
-			$data[ $key ] = wp_json_encode( $data[ $key ] );
+			$data[ $key ] = wp_json_encode( $this->decodeHtmlEntities( $data[ $key ] ) );
 		}
 
 		return apply_filters( 'seopress_json_schema_generator_get_jsons_encoded', $data );
+	}
+
+	/**
+	 * Recursively decode HTML entities in schema values before JSON-LD encoding.
+	 *
+	 * Variable-fed fields (e.g. %%sitetitle%% resolves via get_bloginfo('name'),
+	 * which WordPress stores entity-encoded) can carry entities like `&amp;`.
+	 * JSON-LD must not contain HTML entities: wp_json_encode() handles its own
+	 * escaping, so a Site Title such as "360 Automotive & Repair" should keep a
+	 * real `&` in the output instead of leaking as `&amp;`. Decoding here covers
+	 * every schema type and field in one place.
+	 *
+	 * @since 10.0.0
+	 *
+	 * @param mixed $value The schema value (array or scalar).
+	 * @return mixed
+	 */
+	private function decodeHtmlEntities( $value ) {
+		if ( is_array( $value ) ) {
+			return array_map( array( $this, 'decodeHtmlEntities' ), $value );
+		}
+
+		if ( is_string( $value ) ) {
+			return html_entity_decode( $value, ENT_QUOTES, 'UTF-8' );
+		}
+
+		return $value;
 	}
 }

@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 9.9.2
+ * Version: 10.0
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '9.9.2' );
+define( 'SEOPRESS_VERSION', '10.0' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -115,19 +115,27 @@ function seopress_redirect_after_activation() {
 		return;
 	}
 
-	// Check if the plugin was activated.
-	if ( get_option( 'seopress_activated' ) === 'yes' ) {
+	// Only act right after our own activation.
+	if ( 'yes' !== get_option( 'seopress_activated' ) ) {
+		return;
+	}
 
-		// Delete the activation flag.
-		delete_option( 'seopress_activated' );
+	// Consume the activation flag so this runs at most once.
+	delete_option( 'seopress_activated' );
 
-		// If the wizard has already been completed, do not redirect the user.
-		$seopress_notices = get_option( 'seopress_notices', array() );
+	// Never hijack a bulk activation: the user enabled several plugins at once
+	// (e.g. SEOPress + SEOPress PRO) and must stay on the plugins screen to
+	// manage the others rather than being whisked off to the wizard.
+	if ( isset( $_GET['activate-multi'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		return;
+	}
 
-		if ( empty( $seopress_notices ) || ! isset( $seopress_notices['notice-wizard'] ) ) {
-			wp_safe_redirect( esc_url_raw( admin_url( 'admin.php?page=seopress-setup' ) ) );
-			exit();
-		}
+	// If the wizard has already been completed, do not redirect the user.
+	$seopress_notices = get_option( 'seopress_notices', array() );
+
+	if ( empty( $seopress_notices ) || ! isset( $seopress_notices['notice-wizard'] ) ) {
+		wp_safe_redirect( esc_url_raw( admin_url( 'admin.php?page=seopress-setup' ) ) );
+		exit();
 	}
 }
 add_action( 'admin_init', 'seopress_redirect_after_activation' );
@@ -203,6 +211,9 @@ function seopress_plugins_loaded( $hook ) { // phpcs:ignore
 
 	if ( is_admin() || is_network_admin() ) {
 		require_once $plugin_dir . 'inc/admin/admin.php';
+
+		// Install the current locale's language pack on demand (activation / first SEOPress screen).
+		require_once $plugin_dir . 'inc/functions/language-packs.php';
 
 		// Load metaboxes only when editing posts or terms.
 		if ( in_array( $pagenow, array( 'post-new.php', 'post.php' ), true ) && 'seopress_schemas' !== $typenow ) {
@@ -541,15 +552,11 @@ add_action( 'admin_footer', 'seopress_render_admin_promotions_modal' );
  */
 function seopress_admin_bar_css() {
 	// Only run when the admin bar is showing and the user is logged in.
+	// The stylesheet is loaded in every case: when the SEO menu is removed, the
+	// admin bar can still display the standalone noindex warning, which needs it.
 	if ( is_user_logged_in() && is_admin_bar_showing() ) {
-		// Get the appearance setting only once.
-		$appearance_option = seopress_get_service( 'AdvancedOption' )->getAppearanceAdminBar();
-
-		// Enqueue the style only if the appearance option is not '1'.
-		if ( '1' !== $appearance_option ) {
-			$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			wp_enqueue_style( 'seopress-admin-bar', plugins_url( 'assets/css/seopress-admin-bar' . $prefix . '.css', __FILE__ ), array(), SEOPRESS_VERSION );
-		}
+		$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		wp_enqueue_style( 'seopress-admin-bar', plugins_url( 'assets/css/seopress-admin-bar' . $prefix . '.css', __FILE__ ), array(), SEOPRESS_VERSION );
 	}
 }
 add_action( 'init', 'seopress_admin_bar_css', 12 );

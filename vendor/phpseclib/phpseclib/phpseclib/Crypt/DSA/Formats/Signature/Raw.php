@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\DSA\Formats\Signature;
 
-namespace phpseclib3\Crypt\DSA\Formats\Signature;
-
-use phpseclib3\Crypt\Common\Formats\Signature\Raw as Progenitor;
-
+use SEOPress\Vendor\phpseclib3\Crypt\Common\Formats\Signature\Raw as Progenitor;
 /**
  * Raw DSA Signature Handler
  *

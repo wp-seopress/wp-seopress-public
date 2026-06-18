@@ -1,6 +1,6 @@
 <?php
 
-namespace Psr\Http\Message;
+namespace SEOPress\Vendor\Psr\Http\Message;
 
 interface ResponseFactoryInterface
 {

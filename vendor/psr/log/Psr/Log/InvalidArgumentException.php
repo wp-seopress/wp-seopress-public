@@ -1,6 +1,6 @@
 <?php
 
-namespace Psr\Log;
+namespace SEOPress\Vendor\Psr\Log;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {

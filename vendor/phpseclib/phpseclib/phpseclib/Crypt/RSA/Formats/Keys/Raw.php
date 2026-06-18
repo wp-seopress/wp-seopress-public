@@ -20,11 +20,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\RSA\Formats\Keys;
 
-namespace phpseclib3\Crypt\RSA\Formats\Keys;
-
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * Raw RSA Key Handler
  *
@@ -44,36 +42,27 @@ abstract class Raw
         if (!is_array($key)) {
             throw new \UnexpectedValueException('Key should be a array - not a ' . gettype($key));
         }
-
-        $key = array_change_key_case($key, CASE_LOWER);
-
-        $components = ['isPublicKey' => false];
-
+        $key = array_change_key_case($key, \CASE_LOWER);
+        $components = ['isPublicKey' => \false];
         foreach (['e', 'exponent', 'publicexponent', 0, 'privateexponent', 'd'] as $index) {
             if (isset($key[$index])) {
                 $components['publicExponent'] = $key[$index];
                 break;
             }
         }
-
         foreach (['n', 'modulo', 'modulus', 1] as $index) {
             if (isset($key[$index])) {
                 $components['modulus'] = $key[$index];
                 break;
             }
         }
-
         if (!isset($components['publicExponent']) || !isset($components['modulus'])) {
             throw new \UnexpectedValueException('Modulus / exponent not present');
         }
-
         if (isset($key['primes'])) {
             $components['primes'] = $key['primes'];
         } elseif (isset($key['p']) && isset($key['q'])) {
-            $indices = [
-                ['p', 'q'],
-                ['prime1', 'prime2']
-            ];
+            $indices = [['p', 'q'], ['prime1', 'prime2']];
             foreach ($indices as $index) {
                 list($i0, $i1) = $index;
                 if (isset($key[$i0]) && isset($key[$i1])) {
@@ -81,14 +70,10 @@ abstract class Raw
                 }
             }
         }
-
         if (isset($key['exponents'])) {
             $components['exponents'] = $key['exponents'];
         } else {
-            $indices = [
-                ['dp', 'dq'],
-                ['exponent1', 'exponent2']
-            ];
+            $indices = [['dp', 'dq'], ['exponent1', 'exponent2']];
             foreach ($indices as $index) {
                 list($i0, $i1) = $index;
                 if (isset($key[$i0]) && isset($key[$i1])) {
@@ -96,7 +81,6 @@ abstract class Raw
                 }
             }
         }
-
         if (isset($key['coefficients'])) {
             $components['coefficients'] = $key['coefficients'];
         } else {
@@ -106,12 +90,10 @@ abstract class Raw
                 }
             }
         }
-
         if (!isset($components['primes'])) {
-            $components['isPublicKey'] = true;
+            $components['isPublicKey'] = \true;
             return $components;
         }
-
         if (!isset($components['exponents'])) {
             $one = new BigInteger(1);
             $temp = $components['primes'][1]->subtract($one);
@@ -120,21 +102,17 @@ abstract class Raw
             $exponents[] = $components['publicExponent']->modInverse($temp);
             $components['exponents'] = $exponents;
         }
-
         if (!isset($components['coefficients'])) {
             $components['coefficients'] = [2 => $components['primes'][2]->modInverse($components['primes'][1])];
         }
-
         foreach (['privateexponent', 'd'] as $index) {
             if (isset($key[$index])) {
                 $components['privateExponent'] = $key[$index];
                 break;
             }
         }
-
         return $components;
     }
-
     /**
      * Convert a private key to the appropriate format.
      *
@@ -153,23 +131,14 @@ abstract class Raw
         if (!empty($password) && is_string($password)) {
             throw new UnsupportedFormatException('Raw private keys do not support encryption');
         }
-
-        return [
-            'e' => clone $e,
-            'n' => clone $n,
-            'd' => clone $d,
-            'primes' => array_map(function ($var) {
-                return clone $var;
-            }, $primes),
-            'exponents' => array_map(function ($var) {
-                return clone $var;
-            }, $exponents),
-            'coefficients' => array_map(function ($var) {
-                return clone $var;
-            }, $coefficients)
-        ];
+        return ['e' => clone $e, 'n' => clone $n, 'd' => clone $d, 'primes' => array_map(function ($var) {
+            return clone $var;
+        }, $primes), 'exponents' => array_map(function ($var) {
+            return clone $var;
+        }, $exponents), 'coefficients' => array_map(function ($var) {
+            return clone $var;
+        }, $coefficients)];
     }
-
     /**
      * Convert a public key to the appropriate format
      *

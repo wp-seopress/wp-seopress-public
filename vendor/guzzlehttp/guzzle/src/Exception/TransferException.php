@@ -1,6 +1,6 @@
 <?php
 
-namespace GuzzleHttp\Exception;
+namespace SEOPress\Vendor\GuzzleHttp\Exception;
 
 class TransferException extends \RuntimeException implements GuzzleException
 {

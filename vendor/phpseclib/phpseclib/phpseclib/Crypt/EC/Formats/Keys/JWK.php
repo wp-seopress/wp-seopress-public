@@ -10,21 +10,19 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\Formats\Keys;
 
-namespace phpseclib3\Crypt\EC\Formats\Keys;
-
-use phpseclib3\Common\Functions\Strings;
-use phpseclib3\Crypt\Common\Formats\Keys\JWK as Progenitor;
-use phpseclib3\Crypt\EC\BaseCurves\Base as BaseCurve;
-use phpseclib3\Crypt\EC\BaseCurves\TwistedEdwards as TwistedEdwardsCurve;
-use phpseclib3\Crypt\EC\Curves\Ed25519;
-use phpseclib3\Crypt\EC\Curves\secp256k1;
-use phpseclib3\Crypt\EC\Curves\secp256r1;
-use phpseclib3\Crypt\EC\Curves\secp384r1;
-use phpseclib3\Crypt\EC\Curves\secp521r1;
-use phpseclib3\Exception\UnsupportedCurveException;
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Crypt\Common\Formats\Keys\JWK as Progenitor;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Base as BaseCurve;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedEdwards as TwistedEdwardsCurve;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\Ed25519;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\secp256k1;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\secp256r1;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\secp384r1;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\secp521r1;
+use SEOPress\Vendor\phpseclib3\Exception\UnsupportedCurveException;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * JWK Formatted EC Handler
  *
@@ -33,7 +31,6 @@ use phpseclib3\Math\BigInteger;
 abstract class JWK extends Progenitor
 {
     use Common;
-
     /**
      * Break a public or private key down into its constituent components
      *
@@ -44,7 +41,6 @@ abstract class JWK extends Progenitor
     public static function load($key, $password = '')
     {
         $key = parent::load($key, $password);
-
         switch ($key->kty) {
             case 'EC':
                 switch ($key->crv) {
@@ -69,10 +65,8 @@ abstract class JWK extends Progenitor
             default:
                 throw new \Exception('Only EC and OKP JWK keys are supported');
         }
-
         $curve = '\phpseclib3\Crypt\EC\Curves\\' . str_replace('P-', 'nistp', $key->crv);
         $curve = new $curve();
-
         if ($curve instanceof TwistedEdwardsCurve) {
             $QA = self::extractPoint(Strings::base64url_decode($key->x), $curve);
             if (!isset($key->d)) {
@@ -81,27 +75,17 @@ abstract class JWK extends Progenitor
             $arr = $curve->extractSecret(Strings::base64url_decode($key->d));
             return compact('curve', 'QA') + $arr;
         }
-
-        $QA = [
-            $curve->convertInteger(new BigInteger(Strings::base64url_decode($key->x), 256)),
-            $curve->convertInteger(new BigInteger(Strings::base64url_decode($key->y), 256))
-        ];
-
+        $QA = [$curve->convertInteger(new BigInteger(Strings::base64url_decode($key->x), 256)), $curve->convertInteger(new BigInteger(Strings::base64url_decode($key->y), 256))];
         if (!$curve->verifyPoint($QA)) {
             throw new \RuntimeException('Unable to verify that point exists on curve');
         }
-
         if (!isset($key->d)) {
             return compact('curve', 'QA');
         }
-
         $dA = new BigInteger(Strings::base64url_decode($key->d), 256);
-
         $curve->rangeCheck($dA);
-
         return compact('curve', 'dA', 'QA');
     }
-
     /**
      * Returns the alias that corresponds to a curve
      *
@@ -109,7 +93,7 @@ abstract class JWK extends Progenitor
      */
     private static function getAlias(BaseCurve $curve)
     {
-        switch (true) {
+        switch (\true) {
             case $curve instanceof secp256r1:
                 return 'P-256';
             case $curve instanceof secp384r1:
@@ -119,14 +103,10 @@ abstract class JWK extends Progenitor
             case $curve instanceof secp256k1:
                 return 'secp256k1';
         }
-
         $reflect = new \ReflectionClass($curve);
-        $curveName = $reflect->isFinal() ?
-            $reflect->getParentClass()->getShortName() :
-            $reflect->getShortName();
-        throw new UnsupportedCurveException("$curveName is not a supported curve");
+        $curveName = $reflect->isFinal() ? $reflect->getParentClass()->getShortName() : $reflect->getShortName();
+        throw new UnsupportedCurveException("{$curveName} is not a supported curve");
     }
-
     /**
      * Return the array superstructure for an EC public key
      *
@@ -137,21 +117,10 @@ abstract class JWK extends Progenitor
     private static function savePublicKeyHelper(BaseCurve $curve, array $publicKey)
     {
         if ($curve instanceof TwistedEdwardsCurve) {
-            return [
-                'kty' => 'OKP',
-                'crv' => $curve instanceof Ed25519 ? 'Ed25519' : 'Ed448',
-                'x' => Strings::base64url_encode($curve->encodePoint($publicKey))
-            ];
+            return ['kty' => 'OKP', 'crv' => $curve instanceof Ed25519 ? 'Ed25519' : 'Ed448', 'x' => Strings::base64url_encode($curve->encodePoint($publicKey))];
         }
-
-        return [
-            'kty' => 'EC',
-            'crv' => self::getAlias($curve),
-            'x' => Strings::base64url_encode($publicKey[0]->toBytes()),
-            'y' => Strings::base64url_encode($publicKey[1]->toBytes())
-        ];
+        return ['kty' => 'EC', 'crv' => self::getAlias($curve), 'x' => Strings::base64url_encode($publicKey[0]->toBytes()), 'y' => Strings::base64url_encode($publicKey[1]->toBytes())];
     }
-
     /**
      * Convert an EC public key to the appropriate format
      *
@@ -163,10 +132,8 @@ abstract class JWK extends Progenitor
     public static function savePublicKey(BaseCurve $curve, array $publicKey, array $options = [])
     {
         $key = self::savePublicKeyHelper($curve, $publicKey);
-
         return self::wrapKey($key, $options);
     }
-
     /**
      * Convert a private key to the appropriate format.
      *
@@ -183,7 +150,6 @@ abstract class JWK extends Progenitor
         $key = self::savePublicKeyHelper($curve, $publicKey);
         $key['d'] = $curve instanceof TwistedEdwardsCurve ? $secret : $privateKey->toBytes();
         $key['d'] = Strings::base64url_encode($key['d']);
-
         return self::wrapKey($key, $options);
     }
 }

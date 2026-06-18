@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * BasicConstraints
  *
@@ -22,18 +20,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class BasicConstraints
 {
-    const MAP = [
-        'type' => ASN1::TYPE_SEQUENCE,
-        'children' => [
-            'cA' => [
-                'type' => ASN1::TYPE_BOOLEAN,
-                'optional' => true,
-                'default' => false
-            ],
-            'pathLenConstraint' => [
-                'type' => ASN1::TYPE_INTEGER,
-                'optional' => true
-            ]
-        ]
-    ];
+    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['cA' => ['type' => ASN1::TYPE_BOOLEAN, 'optional' => \true, 'default' => \false], 'pathLenConstraint' => ['type' => ASN1::TYPE_INTEGER, 'optional' => \true]]];
 }

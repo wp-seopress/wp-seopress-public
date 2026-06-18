@@ -25,12 +25,10 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://pear.php.net/package/Math_BigInteger
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves;
 
-namespace phpseclib3\Crypt\EC\BaseCurves;
-
-use phpseclib3\Math\BigInteger;
-use phpseclib3\Math\PrimeField;
-
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
+use SEOPress\Vendor\phpseclib3\Math\PrimeField;
 /**
  * Curves over y^2 = x^3 + b
  *
@@ -44,18 +42,15 @@ class KoblitzPrime extends Prime
      * @var list<array{a: BigInteger, b: BigInteger}>
      */
     protected $basis;
-
     /**
      * Beta
      *
      * @var PrimeField\Integer
      */
     protected $beta;
-
     // don't overwrite setCoefficients() with one that only accepts one parameter so that
     // one might be able to switch between KoblitzPrime and Prime more easily (for benchmarking
     // purposes).
-
     /**
      * Multiply and Add Points
      *
@@ -73,115 +68,81 @@ class KoblitzPrime extends Prime
             $two = new BigInteger(2);
             $one = new BigInteger(1);
         }
-
         if (!isset($this->beta)) {
             // get roots
             $inv = $this->one->divide($this->two)->negate();
             $s = $this->three->negate()->squareRoot()->multiply($inv);
-            $betas = [
-                $inv->add($s),
-                $inv->subtract($s)
-            ];
+            $betas = [$inv->add($s), $inv->subtract($s)];
             $this->beta = $betas[0]->compare($betas[1]) < 0 ? $betas[0] : $betas[1];
             //echo strtoupper($this->beta->toHex(true)) . "\n"; exit;
         }
-
         if (!isset($this->basis)) {
             $factory = new PrimeField($this->order);
             $tempOne = $factory->newInteger($one);
             $tempTwo = $factory->newInteger($two);
             $tempThree = $factory->newInteger(new BigInteger(3));
-
             $inv = $tempOne->divide($tempTwo)->negate();
             $s = $tempThree->negate()->squareRoot()->multiply($inv);
-
-            $lambdas = [
-                $inv->add($s),
-                $inv->subtract($s)
-            ];
-
+            $lambdas = [$inv->add($s), $inv->subtract($s)];
             $lhs = $this->multiplyPoint($this->p, $lambdas[0])[0];
             $rhs = $this->p[0]->multiply($this->beta);
             $lambda = $lhs->equals($rhs) ? $lambdas[0] : $lambdas[1];
-
             $this->basis = static::extendedGCD($lambda->toBigInteger(), $this->order);
             ///*
             foreach ($this->basis as $basis) {
-                echo strtoupper($basis['a']->toHex(true)) . "\n";
-                echo strtoupper($basis['b']->toHex(true)) . "\n\n";
+                echo strtoupper($basis['a']->toHex(\true)) . "\n";
+                echo strtoupper($basis['b']->toHex(\true)) . "\n\n";
             }
             exit;
             //*/
         }
-
         $npoints = $nscalars = [];
         for ($i = 0; $i < count($points); $i++) {
             $p = $points[$i];
             $k = $scalars[$i]->toBigInteger();
-
             // begin split
             list($v1, $v2) = $this->basis;
-
             $c1 = $v2['b']->multiply($k);
             list($c1, $r) = $c1->divide($this->order);
             if ($this->order->compare($r->multiply($two)) <= 0) {
                 $c1 = $c1->add($one);
             }
-
             $c2 = $v1['b']->negate()->multiply($k);
             list($c2, $r) = $c2->divide($this->order);
             if ($this->order->compare($r->multiply($two)) <= 0) {
                 $c2 = $c2->add($one);
             }
-
             $p1 = $c1->multiply($v1['a']);
             $p2 = $c2->multiply($v2['a']);
             $q1 = $c1->multiply($v1['b']);
             $q2 = $c2->multiply($v2['b']);
-
             $k1 = $k->subtract($p1)->subtract($p2);
             $k2 = $q1->add($q2)->negate();
             // end split
-
-            $beta = [
-                $p[0]->multiply($this->beta),
-                $p[1],
-                clone $this->one
-            ];
-
+            $beta = [$p[0]->multiply($this->beta), $p[1], clone $this->one];
             if (isset($p['naf'])) {
                 $beta['naf'] = array_map(function ($p) {
-                    return [
-                        $p[0]->multiply($this->beta),
-                        $p[1],
-                        clone $this->one
-                    ];
+                    return [$p[0]->multiply($this->beta), $p[1], clone $this->one];
                 }, $p['naf']);
                 $beta['nafwidth'] = $p['nafwidth'];
             }
-
             if ($k1->isNegative()) {
                 $k1 = $k1->negate();
                 $p = $this->negatePoint($p);
             }
-
             if ($k2->isNegative()) {
                 $k2 = $k2->negate();
                 $beta = $this->negatePoint($beta);
             }
-
             $pos = 2 * $i;
             $npoints[$pos] = $p;
             $nscalars[$pos] = $this->factory->newInteger($k1);
-
             $pos++;
             $npoints[$pos] = $beta;
             $nscalars[$pos] = $this->factory->newInteger($k2);
         }
-
         return parent::multiplyAddPoints($npoints, $nscalars);
     }
-
     /**
      * Returns the numerator and denominator of the slope
      *
@@ -193,7 +154,6 @@ class KoblitzPrime extends Prime
         $denominator = $this->two->multiply($p[1]);
         return [$numerator, $denominator];
     }
-
     /**
      * Doubles a jacobian coordinate on the curve
      *
@@ -212,13 +172,10 @@ class KoblitzPrime extends Prime
         $e = $this->three->multiply($a);
         $f = $e->multiply($e);
         $x3 = $f->subtract($this->two->multiply($d));
-        $y3 = $e->multiply($d->subtract($x3))->subtract(
-            $this->eight->multiply($c)
-        );
+        $y3 = $e->multiply($d->subtract($x3))->subtract($this->eight->multiply($c));
         $z3 = $this->two->multiply($y1)->multiply($z1);
         return [$x3, $y3, $z3];
     }
-
     /**
      * Doubles a "fresh" jacobian coordinate on the curve
      *
@@ -242,7 +199,6 @@ class KoblitzPrime extends Prime
         $z3 = $this->two->multiply($y1);
         return [$x3, $y3, $z3];
     }
-
     /**
      * Tests whether or not the x / y values satisfy the equation
      *
@@ -254,10 +210,8 @@ class KoblitzPrime extends Prime
         $lhs = $y->multiply($y);
         $temp = $x->multiply($x)->multiply($x);
         $rhs = $temp->add($this->b);
-
         return $lhs->equals($rhs);
     }
-
     /**
      * Calculates the parameters needed from the Euclidean algorithm as discussed at
      * http://diamond.boisestate.edu/~liljanab/MATH308/GuideToECC.pdf#page=148
@@ -270,48 +224,37 @@ class KoblitzPrime extends Prime
     {
         $one = new BigInteger(1);
         $zero = new BigInteger();
-
         $a = clone $one;
         $b = clone $zero;
         $c = clone $zero;
         $d = clone $one;
-
         $stop = $v->bitwise_rightShift($v->getLength() >> 1);
-
         $a1 = clone $zero;
         $b1 = clone $zero;
         $a2 = clone $zero;
         $b2 = clone $zero;
-
         $postGreatestIndex = 0;
-
         while (!$v->equals($zero)) {
             list($q) = $u->divide($v);
-
             $temp = $u;
             $u = $v;
             $v = $temp->subtract($v->multiply($q));
-
             $temp = $a;
             $a = $c;
             $c = $temp->subtract($a->multiply($q));
-
             $temp = $b;
             $b = $d;
             $d = $temp->subtract($b->multiply($q));
-
             if ($v->compare($stop) > 0) {
                 $a0 = $v;
                 $b0 = $c;
             } else {
                 $postGreatestIndex++;
             }
-
             if ($postGreatestIndex == 1) {
                 $a1 = $v;
                 $b1 = $c->negate();
             }
-
             if ($postGreatestIndex == 2) {
                 $rhs = $a0->multiply($a0)->add($b0->multiply($b0));
                 $lhs = $v->multiply($v)->add($b->multiply($b));
@@ -322,14 +265,9 @@ class KoblitzPrime extends Prime
                     $a2 = $v;
                     $b2 = $c->negate();
                 }
-
                 break;
             }
         }
-
-        return [
-            ['a' => $a1, 'b' => $b1],
-            ['a' => $a2, 'b' => $b2]
-        ];
+        return [['a' => $a1, 'b' => $b1], ['a' => $a2, 'b' => $b2]];
     }
 }

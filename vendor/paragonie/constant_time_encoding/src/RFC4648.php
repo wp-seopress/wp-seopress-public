@@ -1,9 +1,9 @@
 <?php
-declare(strict_types=1);
-namespace ParagonIE\ConstantTime;
+
+declare (strict_types=1);
+namespace SEOPress\Vendor\ParagonIE\ConstantTime;
 
 use TypeError;
-
 /**
  *  Copyright (c) 2016 - 2022 Paragon Initiative Enterprises.
  *  Copyright (c) 2014 Steve "Sc00bz" Thomas (steve at tobtu dot com)
@@ -26,7 +26,6 @@ use TypeError;
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-
 /**
  * Class RFC4648
  *
@@ -49,10 +48,10 @@ abstract class RFC4648
     public static function base64Encode(
         #[\SensitiveParameter]
         string $str
-    ): string {
+    ): string
+    {
         return Base64::encode($str);
     }
-
     /**
      * RFC 4648 Base64 decoding
      *
@@ -66,10 +65,10 @@ abstract class RFC4648
     public static function base64Decode(
         #[\SensitiveParameter]
         string $str
-    ): string {
-        return Base64::decode($str, true);
+    ): string
+    {
+        return Base64::decode($str, \true);
     }
-
     /**
      * RFC 4648 Base64 (URL Safe) encoding
      *
@@ -83,10 +82,10 @@ abstract class RFC4648
     public static function base64UrlSafeEncode(
         #[\SensitiveParameter]
         string $str
-    ): string {
+    ): string
+    {
         return Base64UrlSafe::encode($str);
     }
-
     /**
      * RFC 4648 Base64 (URL Safe) decoding
      *
@@ -100,10 +99,10 @@ abstract class RFC4648
     public static function base64UrlSafeDecode(
         #[\SensitiveParameter]
         string $str
-    ): string {
-        return Base64UrlSafe::decode($str, true);
+    ): string
+    {
+        return Base64UrlSafe::decode($str, \true);
     }
-
     /**
      * RFC 4648 Base32 encoding
      *
@@ -117,10 +116,10 @@ abstract class RFC4648
     public static function base32Encode(
         #[\SensitiveParameter]
         string $str
-    ): string {
+    ): string
+    {
         return Base32::encodeUpper($str);
     }
-
     /**
      * RFC 4648 Base32 encoding
      *
@@ -134,10 +133,10 @@ abstract class RFC4648
     public static function base32Decode(
         #[\SensitiveParameter]
         string $str
-    ): string {
-        return Base32::decodeUpper($str, true);
+    ): string
+    {
+        return Base32::decodeUpper($str, \true);
     }
-
     /**
      * RFC 4648 Base32-Hex encoding
      *
@@ -151,10 +150,10 @@ abstract class RFC4648
     public static function base32HexEncode(
         #[\SensitiveParameter]
         string $str
-    ): string {
+    ): string
+    {
         return Base32::encodeUpper($str);
     }
-
     /**
      * RFC 4648 Base32-Hex decoding
      *
@@ -168,10 +167,10 @@ abstract class RFC4648
     public static function base32HexDecode(
         #[\SensitiveParameter]
         string $str
-    ): string {
-        return Base32::decodeUpper($str, true);
+    ): string
+    {
+        return Base32::decodeUpper($str, \true);
     }
-
     /**
      * RFC 4648 Base16 decoding
      *
@@ -185,10 +184,10 @@ abstract class RFC4648
     public static function base16Encode(
         #[\SensitiveParameter]
         string $str
-    ): string {
+    ): string
+    {
         return Hex::encodeUpper($str);
     }
-
     /**
      * RFC 4648 Base16 decoding
      *
@@ -200,7 +199,8 @@ abstract class RFC4648
     public static function base16Decode(
         #[\SensitiveParameter]
         string $str
-    ): string {
-        return Hex::decode($str, true);
+    ): string
+    {
+        return Hex::decode($str, \true);
     }
 }

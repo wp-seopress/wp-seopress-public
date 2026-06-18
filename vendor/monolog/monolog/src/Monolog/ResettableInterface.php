@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,8 +9,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog;
+namespace SEOPress\Vendor\Monolog;
 
 /**
  * Handler or Processor implementing this interface will be reset when Logger::reset() is called.

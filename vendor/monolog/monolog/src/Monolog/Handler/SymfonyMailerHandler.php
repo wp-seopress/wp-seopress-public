@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,17 +9,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Handler;
 
-namespace Monolog\Handler;
-
-use Monolog\Logger;
-use Monolog\Utils;
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\LineFormatter;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mailer\Transport\TransportInterface;
-use Symfony\Component\Mime\Email;
-
+use SEOPress\Vendor\Monolog\Logger;
+use SEOPress\Vendor\Monolog\Utils;
+use SEOPress\Vendor\Monolog\Formatter\FormatterInterface;
+use SEOPress\Vendor\Monolog\Formatter\LineFormatter;
+use SEOPress\Vendor\Symfony\Component\Mailer\MailerInterface;
+use SEOPress\Vendor\Symfony\Component\Mailer\Transport\TransportInterface;
+use SEOPress\Vendor\Symfony\Component\Mime\Email;
 /**
  * SymfonyMailerHandler uses Symfony's Mailer component to send the emails
  *
@@ -32,21 +31,18 @@ class SymfonyMailerHandler extends MailHandler
     protected $mailer;
     /** @var Email|callable(string, Record[]): Email */
     private $emailTemplate;
-
     /**
      * @psalm-param Email|callable(string, Record[]): Email $email
      *
      * @param MailerInterface|TransportInterface $mailer The mailer to use
      * @param callable|Email                     $email  An email template, the subject/body will be replaced
      */
-    public function __construct($mailer, $email, $level = Logger::ERROR, bool $bubble = true)
+    public function __construct($mailer, $email, $level = Logger::ERROR, bool $bubble = \true)
     {
         parent::__construct($level, $bubble);
-
         $this->mailer = $mailer;
         $this->emailTemplate = $email;
     }
-
     /**
      * {@inheritDoc}
      */
@@ -54,7 +50,6 @@ class SymfonyMailerHandler extends MailHandler
     {
         $this->mailer->send($this->buildMessage($content, $records));
     }
-
     /**
      * Gets the formatter for the Swift_Message subject.
      *
@@ -64,7 +59,6 @@ class SymfonyMailerHandler extends MailHandler
     {
         return new LineFormatter($format);
     }
-
     /**
      * Creates instance of Email to be sent
      *
@@ -81,31 +75,25 @@ class SymfonyMailerHandler extends MailHandler
         } elseif (is_callable($this->emailTemplate)) {
             $message = ($this->emailTemplate)($content, $records);
         }
-
         if (!$message instanceof Email) {
             $record = reset($records);
             throw new \InvalidArgumentException('Could not resolve message as instance of Email or a callable returning it' . ($record ? Utils::getRecordMessageForException($record) : ''));
         }
-
         if ($records) {
             $subjectFormatter = $this->getSubjectFormatter($message->getSubject());
             $message->subject($subjectFormatter->format($this->getHighestRecord($records)));
         }
-
         if ($this->isHtmlBody($content)) {
-            if (null !== ($charset = $message->getHtmlCharset())) {
+            if (null !== $charset = $message->getHtmlCharset()) {
                 $message->html($content, $charset);
             } else {
                 $message->html($content);
             }
+        } else if (null !== $charset = $message->getTextCharset()) {
+            $message->text($content, $charset);
         } else {
-            if (null !== ($charset = $message->getTextCharset())) {
-                $message->text($content, $charset);
-            } else {
-                $message->text($content);
-            }
+            $message->text($content);
         }
-
         return $message->date(new \DateTimeImmutable());
     }
 }

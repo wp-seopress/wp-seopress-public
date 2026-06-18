@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2011 Google Inc.
  *
@@ -14,14 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+namespace SEOPress\Vendor\Google;
 
-namespace Google;
-
-use Google\Exception as GoogleException;
+use SEOPress\Vendor\Google\Exception as GoogleException;
 use ReflectionObject;
 use ReflectionProperty;
 use stdClass;
-
 /**
  * This class defines attributes, valid values, and usage which is generated
  * from a given json schema.
@@ -39,7 +38,6 @@ class Model implements \ArrayAccess
     protected $internal_gapi_mappings = [];
     protected $modelData = [];
     protected $processed = [];
-
     /**
      * Polymorphic - accepts a variable number of arguments dependent
      * on the type of the model subclass.
@@ -53,7 +51,6 @@ class Model implements \ArrayAccess
         }
         $this->gapiInit();
     }
-
     /**
      * Getter that handles passthrough access to the data array, and lazy object creation.
      * @param string $key Property name.
@@ -71,12 +68,10 @@ class Model implements \ArrayAccess
             } else {
                 $val = null;
             }
-
             if ($this->isAssociativeArray($val)) {
                 if ($keyDataType && 'map' == $keyDataType) {
                     foreach ($val as $arrayKey => $arrayItem) {
-                        $this->modelData[$key][$arrayKey] =
-                            new $keyType($arrayItem);
+                        $this->modelData[$key][$arrayKey] = new $keyType($arrayItem);
                     }
                 } else {
                     $this->modelData[$key] = new $keyType($val);
@@ -88,12 +83,10 @@ class Model implements \ArrayAccess
                 }
                 $this->modelData[$key] = $arrayObject;
             }
-            $this->processed[$key] = true;
+            $this->processed[$key] = \true;
         }
-
         return isset($this->modelData[$key]) ? $this->modelData[$key] : null;
     }
-
     /**
      * Initialize this object's properties from an array.
      *
@@ -107,7 +100,7 @@ class Model implements \ArrayAccess
             if ($keyType = $this->keyType($key)) {
                 $dataType = $this->dataType($key);
                 if ($dataType == 'array' || $dataType == 'map') {
-                    $this->$key = [];
+                    $this->{$key} = [];
                     foreach ($val as $itemKey => $itemVal) {
                         if ($itemVal instanceof $keyType) {
                             $this->{$key}[$itemKey] = $itemVal;
@@ -116,23 +109,22 @@ class Model implements \ArrayAccess
                         }
                     }
                 } elseif ($val instanceof $keyType) {
-                    $this->$key = $val;
+                    $this->{$key} = $val;
                 } else {
-                    $this->$key = new $keyType($val);
+                    $this->{$key} = new $keyType($val);
                 }
                 unset($array[$key]);
             } elseif (property_exists($this, $key)) {
-                $this->$key = $val;
+                $this->{$key} = $val;
                 unset($array[$key]);
             } elseif (property_exists($this, $camelKey = $this->camelCase($key))) {
                 // This checks if property exists as camelCase, leaving it in array as snake_case
                 // in case of backwards compatibility issues.
-                $this->$camelKey = $val;
+                $this->{$camelKey} = $val;
             }
         }
         $this->modelData = $array;
     }
-
     /**
      * Blank initialiser to be used in subclasses to do  post-construction initialisation - this
      * avoids the need for subclasses to have to implement the variadics handling in their
@@ -142,7 +134,6 @@ class Model implements \ArrayAccess
     {
         return;
     }
-
     /**
      * Create a simplified object suitable for straightforward
      * conversion to JSON. This is relatively expensive
@@ -152,30 +143,26 @@ class Model implements \ArrayAccess
     public function toSimpleObject()
     {
         $object = new stdClass();
-
         // Process all other data.
         foreach ($this->modelData as $key => $val) {
             $result = $this->getSimpleValue($val);
             if ($result !== null) {
-                $object->$key = $this->nullPlaceholderCheck($result);
+                $object->{$key} = $this->nullPlaceholderCheck($result);
             }
         }
-
         // Process all public properties.
         $reflect = new ReflectionObject($this);
         $props = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
         foreach ($props as $member) {
             $name = $member->getName();
-            $result = $this->getSimpleValue($this->$name);
+            $result = $this->getSimpleValue($this->{$name});
             if ($result !== null) {
                 $name = $this->getMappedName($name);
-                $object->$name = $this->nullPlaceholderCheck($result);
+                $object->{$name} = $this->nullPlaceholderCheck($result);
             }
         }
-
         return $object;
     }
-
     /**
      * Handle different types of values, primarily
      * other objects and map and array data types.
@@ -197,7 +184,6 @@ class Model implements \ArrayAccess
         }
         return $value;
     }
-
     /**
      * Check whether the value is the null placeholder and return true null.
      */
@@ -208,7 +194,6 @@ class Model implements \ArrayAccess
         }
         return $value;
     }
-
     /**
      * If there is an internal name mapping, use that.
      */
@@ -219,7 +204,6 @@ class Model implements \ArrayAccess
         }
         return $key;
     }
-
     /**
      * Returns true only if the array is associative.
      * @param array $array
@@ -228,17 +212,16 @@ class Model implements \ArrayAccess
     protected function isAssociativeArray($array)
     {
         if (!is_array($array)) {
-            return false;
+            return \false;
         }
         $keys = array_keys($array);
         foreach ($keys as $key) {
             if (is_string($key)) {
-                return true;
+                return \true;
             }
         }
-        return false;
+        return \false;
     }
-
     /**
      * Verify if $obj is an array.
      * @throws \Google\Exception Thrown if $obj isn't an array.
@@ -248,81 +231,66 @@ class Model implements \ArrayAccess
     public function assertIsArray($obj, $method)
     {
         if ($obj && !is_array($obj)) {
-            throw new GoogleException(
-                "Incorrect parameter type passed to $method(). Expected an array."
-            );
+            throw new GoogleException("Incorrect parameter type passed to {$method}(). Expected an array.");
         }
     }
-
     /** @return bool */
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        return isset($this->$offset) || isset($this->modelData[$offset]);
+        return isset($this->{$offset}) || isset($this->modelData[$offset]);
     }
-
     /** @return mixed */
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        return isset($this->$offset) ?
-        $this->$offset :
-        $this->__get($offset);
+        return isset($this->{$offset}) ? $this->{$offset} : $this->__get($offset);
     }
-
     /** @return void */
     #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (property_exists($this, $offset)) {
-            $this->$offset = $value;
+            $this->{$offset} = $value;
         } else {
             $this->modelData[$offset] = $value;
-            $this->processed[$offset] = true;
+            $this->processed[$offset] = \true;
         }
     }
-
     /** @return void */
     #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->modelData[$offset]);
     }
-
     protected function keyType($key)
     {
         $keyType = $key . "Type";
-
         // ensure keyType is a valid class
-        if (property_exists($this, $keyType) && $this->$keyType !== null && class_exists($this->$keyType)) {
-            return $this->$keyType;
+        if (property_exists($this, $keyType) && $this->{$keyType} !== null && class_exists($this->{$keyType})) {
+            return $this->{$keyType};
         }
     }
-
     protected function dataType($key)
     {
         $dataType = $key . "DataType";
-
         if (property_exists($this, $dataType)) {
-            return $this->$dataType;
+            return $this->{$dataType};
         }
     }
-
     public function __isset($key)
     {
         return isset($this->modelData[$key]);
     }
-
     public function __unset($key)
     {
         unset($this->modelData[$key]);
     }
-
     /**
-   * Convert a string to camelCase
-   * @param  string $value
-   * @return string
-   */
+     * Convert a string to camelCase
+     * @param  string $value
+     * @return string
+     */
     private function camelCase($value)
     {
         $value = ucwords(str_replace(['-', '_'], ' ', $value));

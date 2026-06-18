@@ -1,9 +1,8 @@
 <?php
 
-namespace GuzzleHttp\Cookie;
+namespace SEOPress\Vendor\GuzzleHttp\Cookie;
 
-use GuzzleHttp\Utils;
-
+use SEOPress\Vendor\GuzzleHttp\Utils;
 /**
  * Persists non-session cookies using a JSON formatted file
  */
@@ -13,12 +12,10 @@ class FileCookieJar extends CookieJar
      * @var string filename
      */
     private $filename;
-
     /**
      * @var bool Control whether to persist session cookies or not.
      */
     private $storeSessionCookies;
-
     /**
      * Create a new FileCookieJar object
      *
@@ -28,17 +25,15 @@ class FileCookieJar extends CookieJar
      *
      * @throws \RuntimeException if the file cannot be found or created
      */
-    public function __construct(string $cookieFile, bool $storeSessionCookies = false)
+    public function __construct(string $cookieFile, bool $storeSessionCookies = \false)
     {
         parent::__construct();
         $this->filename = $cookieFile;
         $this->storeSessionCookies = $storeSessionCookies;
-
         if (\file_exists($cookieFile)) {
             $this->load($cookieFile);
         }
     }
-
     /**
      * Saves the file when shutting down
      */
@@ -46,7 +41,6 @@ class FileCookieJar extends CookieJar
     {
         $this->save($this->filename);
     }
-
     /**
      * Saves the cookies to a file.
      *
@@ -63,13 +57,11 @@ class FileCookieJar extends CookieJar
                 $json[] = $cookie->toArray();
             }
         }
-
         $jsonStr = Utils::jsonEncode($json);
-        if (false === \file_put_contents($filename, $jsonStr, \LOCK_EX)) {
+        if (\false === \file_put_contents($filename, $jsonStr, \LOCK_EX)) {
             throw new \RuntimeException("Unable to save file {$filename}");
         }
     }
-
     /**
      * Load cookies from a JSON formatted file.
      *
@@ -82,14 +74,13 @@ class FileCookieJar extends CookieJar
     public function load(string $filename): void
     {
         $json = \file_get_contents($filename);
-        if (false === $json) {
+        if (\false === $json) {
             throw new \RuntimeException("Unable to load file {$filename}");
         }
         if ($json === '') {
             return;
         }
-
-        $data = Utils::jsonDecode($json, true);
+        $data = Utils::jsonDecode($json, \true);
         if (\is_array($data)) {
             foreach ($data as $cookie) {
                 $this->setCookie(new SetCookie($cookie));

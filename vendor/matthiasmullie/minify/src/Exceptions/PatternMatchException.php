@@ -9,8 +9,7 @@
  * @copyright Copyright (c) 2012, Matthias Mullie. All rights reserved
  * @license MIT License
  */
-
-namespace MatthiasMullie\Minify\Exceptions;
+namespace SEOPress\Vendor\MatthiasMullie\Minify\Exceptions;
 
 /**
  * Pattern Match Exception Class.
@@ -27,10 +26,9 @@ class PatternMatchException extends BasicException
     public static function fromLastError($msg)
     {
         $msg .= ': Error ' . preg_last_error();
-        if (PHP_MAJOR_VERSION >= 8) {
+        if (\PHP_MAJOR_VERSION >= 8) {
             $msg .= ' - ' . preg_last_error_msg();
         }
-
         return new PatternMatchException($msg);
     }
 }

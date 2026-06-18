@@ -1,6 +1,6 @@
 <?php
 
-namespace GuzzleHttp\Exception;
+namespace SEOPress\Vendor\GuzzleHttp\Exception;
 
 final class InvalidArgumentException extends \InvalidArgumentException implements GuzzleException
 {

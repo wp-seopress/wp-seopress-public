@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,12 +9,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog\Formatter;
+namespace SEOPress\Vendor\Monolog\Formatter;
 
 use DateTimeInterface;
-use Monolog\LogRecord;
-
+use SEOPress\Vendor\Monolog\LogRecord;
 /**
  * Encodes message information into JSON in a format compatible with Cloud logging.
  *
@@ -30,11 +29,8 @@ final class GoogleCloudLoggingFormatter extends JsonFormatter
         // Re-key level for GCP logging
         $record['severity'] = $record['level_name'];
         $record['time'] = $record['datetime']->format(DateTimeInterface::RFC3339_EXTENDED);
-
         // Remove keys that are not used by GCP
         unset($record['level'], $record['level_name'], $record['datetime']);
-
         return parent::format($record);
     }
 }
-

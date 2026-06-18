@@ -9,14 +9,14 @@
  * @copyright Copyright (c) 2012, Matthias Mullie. All rights reserved
  * @license MIT License
  */
+namespace SEOPress\Vendor\MatthiasMullie\Minify\Exceptions;
 
-namespace MatthiasMullie\Minify\Exceptions;
-
-use MatthiasMullie\Minify\Exception;
-
+use SEOPress\Vendor\MatthiasMullie\Minify\Exception;
 /**
  * Basic Exception Class.
  *
  * @author Matthias Mullie <minify@mullie.eu>
  */
-abstract class BasicException extends Exception {}
+abstract class BasicException extends Exception
+{
+}

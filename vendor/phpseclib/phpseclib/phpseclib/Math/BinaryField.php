@@ -11,13 +11,11 @@
  * @copyright 2017 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  */
+namespace SEOPress\Vendor\phpseclib3\Math;
 
-namespace phpseclib3\Math;
-
-use phpseclib3\Common\Functions\Strings;
-use phpseclib3\Math\BinaryField\Integer;
-use phpseclib3\Math\Common\FiniteField;
-
+use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Math\BinaryField\Integer;
+use SEOPress\Vendor\phpseclib3\Math\Common\FiniteField;
 /**
  * Binary Finite Fields
  *
@@ -31,17 +29,14 @@ class BinaryField extends FiniteField
      * @var int
      */
     private static $instanceCounter = 0;
-
     /**
      * Keeps track of current instance
      *
      * @var int
      */
     protected $instanceID;
-
     /** @var BigInteger */
     private $randomMax;
-
     /**
      * Default constructor
      */
@@ -62,32 +57,29 @@ class BinaryField extends FiniteField
             $val[$index] = '1';
         }
         $modulo = static::base2ToBase256(strrev($val));
-
         $mStart = 2 * $m - 2;
         $t = ceil($m / 8);
-        $finalMask = chr((1 << ($m % 8)) - 1);
-        if ($finalMask == "\0") {
-            $finalMask = "\xFF";
+        $finalMask = chr((1 << $m % 8) - 1);
+        if ($finalMask == "\x00") {
+            $finalMask = "\xff";
         }
         $bitLen = $mStart + 1;
         $pad = ceil($bitLen / 8);
         $h = $bitLen & 7;
         $h = $h ? 8 - $h : 0;
-
         $r = rtrim(substr($val, 0, -1), '0');
         $u = [static::base2ToBase256(strrev($r))];
         for ($i = 1; $i < 8; $i++) {
             $u[] = static::base2ToBase256(strrev(str_repeat('0', $i) . $r));
         }
-
         // implements algorithm 2.40 (in section 2.3.5) in "Guide to Elliptic Curve Cryptography"
         // with W = 8
         $reduce = function ($c) use ($u, $mStart, $m, $t, $finalMask, $pad, $h) {
-            $c = str_pad($c, $pad, "\0", STR_PAD_LEFT);
+            $c = str_pad($c, $pad, "\x00", \STR_PAD_LEFT);
             for ($i = $mStart; $i >= $m;) {
                 $g = $h >> 3;
                 $mask = $h & 7;
-                $mask = $mask ? 1 << (7 - $mask) : 0x80;
+                $mask = $mask ? 1 << 7 - $mask : 0x80;
                 for (; $mask > 0; $mask >>= 1, $i--, $h++) {
                     if (ord($c[$g]) & $mask) {
                         $temp = $i - $m;
@@ -96,7 +88,7 @@ class BinaryField extends FiniteField
                         $t1 = $j ? substr($c, 0, -$j) : $c;
                         $length = strlen($t1);
                         if ($length) {
-                            $t2 = str_pad($u[$k], $length, "\0", STR_PAD_LEFT);
+                            $t2 = str_pad($u[$k], $length, "\x00", \STR_PAD_LEFT);
                             $temp = $t1 ^ $t2;
                             $c = $j ? substr_replace($c, $temp, 0, $length) : $temp;
                         }
@@ -107,16 +99,13 @@ class BinaryField extends FiniteField
             if (strlen($c) == $t) {
                 $c[0] = $c[0] & $finalMask;
             }
-            return ltrim($c, "\0");
+            return ltrim($c, "\x00");
         };
-
         $this->instanceID = self::$instanceCounter++;
         Integer::setModulo($this->instanceID, $modulo);
         Integer::setRecurringModuloFunction($this->instanceID, $reduce);
-
         $this->randomMax = new BigInteger($modulo, 2);
     }
-
     /**
      * Returns an instance of a dynamically generated PrimeFieldInteger class
      *
@@ -127,7 +116,6 @@ class BinaryField extends FiniteField
     {
         return new Integer($this->instanceID, $num instanceof BigInteger ? $num->toBytes() : $num);
     }
-
     /**
      * Returns an integer on the finite field between one and the prime modulo
      *
@@ -139,10 +127,8 @@ class BinaryField extends FiniteField
         if (!isset($one)) {
             $one = new BigInteger(1);
         }
-
         return new Integer($this->instanceID, BigInteger::randomRange($one, $this->randomMax)->toBytes());
     }
-
     /**
      * Returns the length of the modulo in bytes
      *
@@ -152,7 +138,6 @@ class BinaryField extends FiniteField
     {
         return strlen(Integer::getModulo($this->instanceID));
     }
-
     /**
      * Returns the length of the modulo in bits
      *
@@ -162,7 +147,6 @@ class BinaryField extends FiniteField
     {
         return strlen(Integer::getModulo($this->instanceID)) << 3;
     }
-
     /**
      * Converts a base-2 string to a base-256 string
      *
@@ -173,19 +157,16 @@ class BinaryField extends FiniteField
     public static function base2ToBase256($x, $size = null)
     {
         $str = Strings::bits2bin($x);
-
         $pad = strlen($x) >> 3;
         if (strlen($x) & 3) {
             $pad++;
         }
-        $str = str_pad($str, $pad, "\0", STR_PAD_LEFT);
+        $str = str_pad($str, $pad, "\x00", \STR_PAD_LEFT);
         if (isset($size)) {
-            $str = str_pad($str, $size, "\0", STR_PAD_LEFT);
+            $str = str_pad($str, $size, "\x00", \STR_PAD_LEFT);
         }
-
         return $str;
     }
-
     /**
      * Converts a base-256 string to a base-2 string
      *
@@ -197,7 +178,6 @@ class BinaryField extends FiniteField
         if (function_exists('gmp_import')) {
             return gmp_strval(gmp_import($x), 2);
         }
-
         return Strings::bin2bits($x);
     }
 }

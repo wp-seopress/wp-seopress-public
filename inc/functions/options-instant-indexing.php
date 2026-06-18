@@ -10,6 +10,44 @@ use SEOPress\Helpers\PagesAdmin;
 defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 /**
+ * Resolve the usable IndexNow / Bing API key from the stored value.
+ *
+ * Auto-generated keys used to be stored base64-encoded, while keys entered
+ * manually (or imported from another plugin) are stored as-is. A valid
+ * IndexNow key (8-128 chars from [A-Za-z0-9-]) can itself be a valid base64
+ * string, so the stored value must NOT be blindly base64_decode()'d: doing so
+ * turns a valid key into binary data and IndexNow replies with a 422 error.
+ *
+ * @param string $stored_key The raw value stored in the options.
+ * @return string The usable IndexNow key, or an empty string if none is valid.
+ */
+function seopress_instant_indexing_get_api_key( $stored_key ) {
+	$stored_key = is_string( $stored_key ) ? trim( $stored_key ) : '';
+
+	if ( '' === $stored_key ) {
+		return '';
+	}
+
+	// A key already in the IndexNow format is used verbatim. This covers keys
+	// entered manually by the user (e.g. a 32-char hexadecimal key), which can
+	// coincidentally also be valid base64 and must not be decoded.
+	if ( 1 === preg_match( '/^[A-Za-z0-9-]{8,128}$/', $stored_key ) ) {
+		return $stored_key;
+	}
+
+	// Legacy: auto-generated keys were stored base64-encoded. Decode them only
+	// when the result is itself a valid IndexNow key.
+	if ( seopress_is_base64_string( $stored_key ) ) {
+		$decoded = base64_decode( $stored_key, true );
+		if ( false !== $decoded && 1 === preg_match( '/^[A-Za-z0-9-]{8,128}$/', $decoded ) ) {
+			return $decoded;
+		}
+	}
+
+	return '';
+}
+
+/**
  * Create the virtual Instant Indexing API key txt file
  *
  * @return void
@@ -20,18 +58,18 @@ function seopress_instant_indexing_api_key_txt() {
 		return;
 	}
 
-	$options = get_option( 'seopress_instant_indexing_option_name' );
-	$api_key = isset( $options['seopress_instant_indexing_bing_api_key'] ) ? esc_attr( $options['seopress_instant_indexing_bing_api_key'] ) : null;
+	$options    = get_option( 'seopress_instant_indexing_option_name' );
+	$stored_key = isset( $options['seopress_instant_indexing_bing_api_key'] ) ? $options['seopress_instant_indexing_bing_api_key'] : null;
 
-	if ( null === $api_key ) {
+	if ( null === $stored_key ) {
 		return;
 	}
 
-	if ( seopress_is_base64_string( $api_key ) === false ) {
+	$api_key = seopress_instant_indexing_get_api_key( $stored_key );
+
+	if ( '' === $api_key ) {
 		return;
 	}
-
-	$api_key = base64_decode( $api_key );
 
 	global $wp;
 	$current_url = home_url( $wp->request );
@@ -120,7 +158,7 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	$actions        = isset( $options['seopress_instant_indexing_google_action'] ) ? esc_attr( $options['seopress_instant_indexing_google_action'] ) : 'URL_UPDATED';
 	$urls           = isset( $options['seopress_instant_indexing_manual_batch'] ) ? esc_attr( $options['seopress_instant_indexing_manual_batch'] ) : '';
 	$google_api_key = isset( $options['seopress_instant_indexing_google_api_key'] ) ? $options['seopress_instant_indexing_google_api_key'] : '';
-	$bing_api_key   = isset( $options['seopress_instant_indexing_bing_api_key'] ) ? esc_attr( $options['seopress_instant_indexing_bing_api_key'] ) : '';
+	$bing_api_key   = isset( $options['seopress_instant_indexing_bing_api_key'] ) ? $options['seopress_instant_indexing_bing_api_key'] : '';
 	$bing_url       = 'https://api.indexnow.org/indexnow/';
 	$google_url     = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
 
@@ -151,20 +189,20 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	// Prepare the URLS.
 	if ( true === $is_manual_submission ) {
 		$urls          = preg_split( '/\r\n|\r|\n/', $urls );
-		$x_source_info = 'https://www.seopress.org/9.9.2/true';
+		$x_source_info = 'https://www.seopress.org/10.0/true';
 
 		$urls = array_slice( $urls, 0, 100 );
 	} elseif ( false === $is_manual_submission && ! empty( $permalink ) ) {
 		$urls          = null;
 		$urls[]        = $permalink;
-		$x_source_info = 'https://www.seopress.org/9.9.2/false';
+		$x_source_info = 'https://www.seopress.org/10.0/false';
 	}
 
 	// Bing API.
 	if ( isset( $bing_api_key ) && ! empty( $bing_api_key ) && ! empty( $engines['bing'] ) && '1' === $engines['bing'] ) {
-		if ( seopress_is_base64_string( $bing_api_key ) === true ) {
-			$bing_api_key = base64_decode( $bing_api_key );
+		$bing_api_key = seopress_instant_indexing_get_api_key( $bing_api_key );
 
+		if ( '' !== $bing_api_key ) {
 			$host = wp_parse_url( get_home_url(), PHP_URL_HOST );
 
 			$body = array(
@@ -243,17 +281,17 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	if ( true === $is_manual_submission ) {
 		if ( isset( $google_api_key ) && ! empty( $google_api_key ) && '1' === $engines['google'] ) {
 			try {
-				$client = new Google_Client();
+				$client = new \SEOPress\Vendor\Google\Client();
 
 				$client->setAuthConfig( json_decode( $google_api_key, true ) );
-				$client->setScopes( Google_Service_Indexing::INDEXING );
+				$client->setScopes( \SEOPress\Vendor\Google\Service\Indexing::INDEXING );
 
 				$client->setUseBatch( true );
 
-				$service = new Google_Service_Indexing( $client );
+				$service = new \SEOPress\Vendor\Google\Service\Indexing( $client );
 				$batch   = $service->createBatch();
 
-				$post_body = new Google_Service_Indexing_UrlNotification();
+				$post_body = new \SEOPress\Vendor\Google\Service\Indexing\UrlNotification();
 
 				foreach ( $urls as $url ) {
 					$post_body->setUrl( $url );

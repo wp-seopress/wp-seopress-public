@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2014 Google Inc.
  *
@@ -14,12 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+namespace SEOPress\Vendor\Google\Task;
 
-namespace Google\Task;
-
-use Google\Service\Exception as GoogleServiceException;
-use Google\Task\Exception as GoogleTaskException;
-
+use SEOPress\Vendor\Google\Service\Exception as GoogleServiceException;
+use SEOPress\Vendor\Google\Task\Exception as GoogleTaskException;
 /**
  * A task runner with exponential backoff support.
  *
@@ -30,49 +29,40 @@ class Runner
     const TASK_RETRY_NEVER = 0;
     const TASK_RETRY_ONCE = 1;
     const TASK_RETRY_ALWAYS = -1;
-
     /**
      * @var integer $maxDelay The max time (in seconds) to wait before a retry.
      */
     private $maxDelay = 60;
-
     /**
      * @var integer $delay The previous delay from which the next is calculated.
      */
     private $delay = 1;
-
     /**
      * @var integer $factor The base number for the exponential back off.
      */
     private $factor = 2;
-
     /**
      * @var float $jitter A random number between -$jitter and $jitter will be
      * added to $factor on each iteration to allow for a better distribution of
      * retries.
      */
     private $jitter = 0.5;
-
     /**
      * @var integer $attempts The number of attempts that have been tried so far.
      */
     private $attempts = 0;
-
     /**
      * @var integer $maxAttempts The max number of attempts allowed.
      */
     private $maxAttempts = 1;
-
     /**
      * @var callable $action The task to run and possibly retry.
      */
     private $action;
-
     /**
      * @var array $arguments The task arguments.
      */
     private $arguments;
-
     /**
      * @var array $retryMap Map of errors with retry counts.
      */
@@ -81,14 +71,18 @@ class Runner
         '503' => self::TASK_RETRY_ALWAYS,
         'rateLimitExceeded' => self::TASK_RETRY_ALWAYS,
         'userRateLimitExceeded' => self::TASK_RETRY_ALWAYS,
-        6  => self::TASK_RETRY_ALWAYS,  // CURLE_COULDNT_RESOLVE_HOST
-        7  => self::TASK_RETRY_ALWAYS,  // CURLE_COULDNT_CONNECT
-        28 => self::TASK_RETRY_ALWAYS,  // CURLE_OPERATION_TIMEOUTED
-        35 => self::TASK_RETRY_ALWAYS,  // CURLE_SSL_CONNECT_ERROR
-        52 => self::TASK_RETRY_ALWAYS,  // CURLE_GOT_NOTHING
-        'lighthouseError' => self::TASK_RETRY_NEVER
+        6 => self::TASK_RETRY_ALWAYS,
+        // CURLE_COULDNT_RESOLVE_HOST
+        7 => self::TASK_RETRY_ALWAYS,
+        // CURLE_COULDNT_CONNECT
+        28 => self::TASK_RETRY_ALWAYS,
+        // CURLE_OPERATION_TIMEOUTED
+        35 => self::TASK_RETRY_ALWAYS,
+        // CURLE_SSL_CONNECT_ERROR
+        52 => self::TASK_RETRY_ALWAYS,
+        // CURLE_GOT_NOTHING
+        'lighthouseError' => self::TASK_RETRY_NEVER,
     ];
-
     /**
      * Creates a new task runner with exponential backoff support.
      *
@@ -99,71 +93,44 @@ class Runner
      * @throws \Google\Task\Exception when misconfigured
      */
     // @phpstan-ignore-next-line
-    public function __construct(
-        $config,
-        $name,
-        $action,
-        array $arguments = []
-    ) {
+    public function __construct($config, $name, $action, array $arguments = [])
+    {
         if (isset($config['initial_delay'])) {
             if ($config['initial_delay'] < 0) {
-                throw new GoogleTaskException(
-                    'Task configuration `initial_delay` must not be negative.'
-                );
+                throw new GoogleTaskException('Task configuration `initial_delay` must not be negative.');
             }
-
             $this->delay = $config['initial_delay'];
         }
-
         if (isset($config['max_delay'])) {
             if ($config['max_delay'] <= 0) {
-                throw new GoogleTaskException(
-                    'Task configuration `max_delay` must be greater than 0.'
-                );
+                throw new GoogleTaskException('Task configuration `max_delay` must be greater than 0.');
             }
-
             $this->maxDelay = $config['max_delay'];
         }
-
         if (isset($config['factor'])) {
             if ($config['factor'] <= 0) {
-                throw new GoogleTaskException(
-                    'Task configuration `factor` must be greater than 0.'
-                );
+                throw new GoogleTaskException('Task configuration `factor` must be greater than 0.');
             }
-
             $this->factor = $config['factor'];
         }
-
         if (isset($config['jitter'])) {
             if ($config['jitter'] <= 0) {
-                throw new GoogleTaskException(
-                    'Task configuration `jitter` must be greater than 0.'
-                );
+                throw new GoogleTaskException('Task configuration `jitter` must be greater than 0.');
             }
-
             $this->jitter = $config['jitter'];
         }
-
         if (isset($config['retries'])) {
             if ($config['retries'] < 0) {
-                throw new GoogleTaskException(
-                    'Task configuration `retries` must not be negative.'
-                );
+                throw new GoogleTaskException('Task configuration `retries` must not be negative.');
             }
             $this->maxAttempts += $config['retries'];
         }
-
         if (!is_callable($action)) {
-            throw new GoogleTaskException(
-                'Task argument `$action` must be a valid callable.'
-            );
+            throw new GoogleTaskException('Task argument `$action` must be a valid callable.');
         }
-
         $this->action = $action;
         $this->arguments = $arguments;
     }
-
     /**
      * Checks if a retry can be attempted.
      *
@@ -173,7 +140,6 @@ class Runner
     {
         return $this->attempts < $this->maxAttempts;
     }
-
     /**
      * Runs the task and (if applicable) automatically retries when errors occur.
      *
@@ -186,25 +152,16 @@ class Runner
             try {
                 return call_user_func_array($this->action, $this->arguments);
             } catch (GoogleServiceException $exception) {
-                $allowedRetries = $this->allowedRetries(
-                    $exception->getCode(),
-                    $exception->getErrors()
-                );
-
+                $allowedRetries = $this->allowedRetries($exception->getCode(), $exception->getErrors());
                 if (!$this->canAttempt() || !$allowedRetries) {
                     throw $exception;
                 }
-
                 if ($allowedRetries > 0) {
-                    $this->maxAttempts = min(
-                        $this->maxAttempts,
-                        $this->attempts + $allowedRetries
-                    );
+                    $this->maxAttempts = min($this->maxAttempts, $this->attempts + $allowedRetries);
                 }
             }
         }
     }
-
     /**
      * Runs a task once, if possible. This is useful for bypassing the `run()`
      * loop.
@@ -217,28 +174,22 @@ class Runner
     public function attempt()
     {
         if (!$this->canAttempt()) {
-            return false;
+            return \false;
         }
-
         if ($this->attempts > 0) {
             $this->backOff();
         }
-
         $this->attempts++;
-
-        return true;
+        return \true;
     }
-
     /**
      * Sleeps in accordance to the backoff configurations.
      */
     private function backOff()
     {
         $delay = $this->getDelay();
-
         usleep((int) ($delay * 1000000));
     }
-
     /**
      * Gets the delay (in seconds) for the current backoff period.
      *
@@ -248,10 +199,8 @@ class Runner
     {
         $jitter = $this->getJitter();
         $factor = $this->attempts > 1 ? $this->factor + $jitter : 1 + abs($jitter);
-
         return $this->delay = min($this->maxDelay, $this->delay * $factor);
     }
-
     /**
      * Gets the current jitter (random number between -$this->jitter and
      * $this->jitter).
@@ -262,7 +211,6 @@ class Runner
     {
         return $this->jitter * 2 * mt_rand() / mt_getrandmax() - $this->jitter;
     }
-
     /**
      * Gets the number of times the associated task can be retried.
      *
@@ -275,17 +223,11 @@ class Runner
         if (isset($this->retryMap[$code])) {
             return $this->retryMap[$code];
         }
-
-        if (
-            !empty($errors) &&
-            isset($errors[0]['reason'], $this->retryMap[$errors[0]['reason']])
-        ) {
+        if (!empty($errors) && isset($errors[0]['reason'], $this->retryMap[$errors[0]['reason']])) {
             return $this->retryMap[$errors[0]['reason']];
         }
-
         return 0;
     }
-
     public function setRetryMap($retryMap)
     {
         $this->retryMap = $retryMap;

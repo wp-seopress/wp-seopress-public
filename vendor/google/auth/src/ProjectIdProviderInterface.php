@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2020 Google LLC
  *
@@ -14,8 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-namespace Google\Auth;
+namespace SEOPress\Vendor\Google\Auth;
 
 /**
  * Describes a Credentials object which supports fetching the project ID.

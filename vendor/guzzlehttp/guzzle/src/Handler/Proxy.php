@@ -1,11 +1,10 @@
 <?php
 
-namespace GuzzleHttp\Handler;
+namespace SEOPress\Vendor\GuzzleHttp\Handler;
 
-use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\RequestOptions;
-use Psr\Http\Message\RequestInterface;
-
+use SEOPress\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use SEOPress\Vendor\GuzzleHttp\RequestOptions;
+use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * Provides basic proxies for handlers.
  *
@@ -28,7 +27,6 @@ class Proxy
             return empty($options[RequestOptions::SYNCHRONOUS]) ? $default($request, $options) : $sync($request, $options);
         };
     }
-
     /**
      * Sends streaming requests to a streaming compatible handler while sending
      * all other requests to a default handler.

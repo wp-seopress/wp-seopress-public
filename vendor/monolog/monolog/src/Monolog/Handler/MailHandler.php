@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,12 +9,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Handler;
 
-namespace Monolog\Handler;
-
-use Monolog\Formatter\FormatterInterface;
-use Monolog\Formatter\HtmlFormatter;
-
+use SEOPress\Vendor\Monolog\Formatter\FormatterInterface;
+use SEOPress\Vendor\Monolog\Formatter\HtmlFormatter;
 /**
  * Base class for all mail handlers
  *
@@ -29,7 +28,6 @@ abstract class MailHandler extends AbstractProcessingHandler
     public function handleBatch(array $records): void
     {
         $messages = [];
-
         foreach ($records as $record) {
             if ($record['level'] < $this->level) {
                 continue;
@@ -38,12 +36,10 @@ abstract class MailHandler extends AbstractProcessingHandler
             $message = $this->processRecord($record);
             $messages[] = $message;
         }
-
         if (!empty($messages)) {
             $this->send((string) $this->getFormatter()->formatBatch($messages), $messages);
         }
     }
-
     /**
      * Send a mail with the given content
      *
@@ -53,7 +49,6 @@ abstract class MailHandler extends AbstractProcessingHandler
      * @phpstan-param Record[] $records
      */
     abstract protected function send(string $content, array $records): void;
-
     /**
      * {@inheritDoc}
      */
@@ -61,7 +56,6 @@ abstract class MailHandler extends AbstractProcessingHandler
     {
         $this->send((string) $record['formatted'], [$record]);
     }
-
     /**
      * @phpstan-param non-empty-array<Record> $records
      * @phpstan-return Record
@@ -74,15 +68,12 @@ abstract class MailHandler extends AbstractProcessingHandler
                 $highestRecord = $record;
             }
         }
-
         return $highestRecord;
     }
-
     protected function isHtmlBody(string $body): bool
     {
         return ($body[0] ?? null) === '<';
     }
-
     /**
      * Gets the default formatter.
      *

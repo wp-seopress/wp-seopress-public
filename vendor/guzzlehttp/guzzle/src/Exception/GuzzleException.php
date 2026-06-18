@@ -1,9 +1,8 @@
 <?php
 
-namespace GuzzleHttp\Exception;
+namespace SEOPress\Vendor\GuzzleHttp\Exception;
 
-use Psr\Http\Client\ClientExceptionInterface;
-
+use SEOPress\Vendor\Psr\Http\Client\ClientExceptionInterface;
 interface GuzzleException extends ClientExceptionInterface
 {
 }

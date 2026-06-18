@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,11 +9,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Processor;
 
-namespace Monolog\Processor;
-
-use Monolog\ResettableInterface;
-
+use SEOPress\Vendor\Monolog\ResettableInterface;
 /**
  * Adds a unique identifier into records
  *
@@ -22,36 +21,29 @@ class UidProcessor implements ProcessorInterface, ResettableInterface
 {
     /** @var string */
     private $uid;
-
     public function __construct(int $length = 7)
     {
         if ($length > 32 || $length < 1) {
             throw new \InvalidArgumentException('The uid length must be an integer between 1 and 32');
         }
-
         $this->uid = $this->generateUid($length);
     }
-
     /**
      * {@inheritDoc}
      */
     public function __invoke(array $record): array
     {
         $record['extra']['uid'] = $this->uid;
-
         return $record;
     }
-
     public function getUid(): string
     {
         return $this->uid;
     }
-
     public function reset()
     {
         $this->uid = $this->generateUid(strlen($this->uid));
     }
-
     private function generateUid(int $length): string
     {
         return substr(bin2hex(random_bytes((int) ceil($length / 2))), 0, $length);

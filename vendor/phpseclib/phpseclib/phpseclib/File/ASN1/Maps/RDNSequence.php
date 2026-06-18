@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * RDNSequence
  *
@@ -33,6 +31,6 @@ abstract class RDNSequence
         // RDNSequence does not define a min or a max, which means it doesn't have one
         'min' => 0,
         'max' => -1,
-        'children' => RelativeDistinguishedName::MAP
+        'children' => RelativeDistinguishedName::MAP,
     ];
 }

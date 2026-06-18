@@ -15,27 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+namespace SEOPress\Vendor\Google\Auth\Credentials;
 
-namespace Google\Auth\Credentials;
-
-use Google\Auth\CredentialsLoader;
-use Google\Auth\IamSignerTrait;
-use Google\Auth\SignBlobInterface;
-
+use SEOPress\Vendor\Google\Auth\CredentialsLoader;
+use SEOPress\Vendor\Google\Auth\IamSignerTrait;
+use SEOPress\Vendor\Google\Auth\SignBlobInterface;
 class ImpersonatedServiceAccountCredentials extends CredentialsLoader implements SignBlobInterface
 {
     use IamSignerTrait;
-
     /**
      * @var string
      */
     protected $impersonatedServiceAccountName;
-
     /**
      * @var UserRefreshCredentials
      */
     protected $sourceCredentials;
-
     /**
      * Instantiate an instance of ImpersonatedServiceAccountCredentials from a credentials file that
      * has be created with the --impersonated-service-account flag.
@@ -45,38 +40,26 @@ class ImpersonatedServiceAccountCredentials extends CredentialsLoader implements
      * @param string|array<mixed> $jsonKey JSON credential file path or JSON credentials
      *                                     as an associative array.
      */
-    public function __construct(
-        $scope,
-        $jsonKey
-    ) {
+    public function __construct($scope, $jsonKey)
+    {
         if (is_string($jsonKey)) {
             if (!file_exists($jsonKey)) {
                 throw new \InvalidArgumentException('file does not exist');
             }
             $json = file_get_contents($jsonKey);
-            if (!$jsonKey = json_decode((string) $json, true)) {
+            if (!$jsonKey = json_decode((string) $json, \true)) {
                 throw new \LogicException('invalid json for auth config');
             }
         }
         if (!array_key_exists('service_account_impersonation_url', $jsonKey)) {
-            throw new \LogicException(
-                'json key is missing the service_account_impersonation_url field'
-            );
+            throw new \LogicException('json key is missing the service_account_impersonation_url field');
         }
         if (!array_key_exists('source_credentials', $jsonKey)) {
             throw new \LogicException('json key is missing the source_credentials field');
         }
-
-        $this->impersonatedServiceAccountName = $this->getImpersonatedServiceAccountNameFromUrl(
-            $jsonKey['service_account_impersonation_url']
-        );
-
-        $this->sourceCredentials = new UserRefreshCredentials(
-            $scope,
-            $jsonKey['source_credentials']
-        );
+        $this->impersonatedServiceAccountName = $this->getImpersonatedServiceAccountNameFromUrl($jsonKey['service_account_impersonation_url']);
+        $this->sourceCredentials = new UserRefreshCredentials($scope, $jsonKey['source_credentials']);
     }
-
     /**
      * Helper function for extracting the Server Account Name from the URL saved in the account
      * credentials file.
@@ -84,15 +67,13 @@ class ImpersonatedServiceAccountCredentials extends CredentialsLoader implements
      * @param $serviceAccountImpersonationUrl string URL from "service_account_impersonation_url"
      * @return string Service account email or ID.
      */
-    private function getImpersonatedServiceAccountNameFromUrl(
-        string $serviceAccountImpersonationUrl
-    ): string {
+    private function getImpersonatedServiceAccountNameFromUrl(string $serviceAccountImpersonationUrl): string
+    {
         $fields = explode('/', $serviceAccountImpersonationUrl);
         $lastField = end($fields);
         $splitter = explode(':', $lastField);
         return $splitter[0];
     }
-
     /**
      * Get the client name from the keyfile
      *
@@ -105,7 +86,6 @@ class ImpersonatedServiceAccountCredentials extends CredentialsLoader implements
     {
         return $this->impersonatedServiceAccountName;
     }
-
     /**
      * @param callable $httpHandler
      *
@@ -123,7 +103,6 @@ class ImpersonatedServiceAccountCredentials extends CredentialsLoader implements
     {
         return $this->sourceCredentials->fetchAuthToken($httpHandler);
     }
-
     /**
      * @return string
      */
@@ -131,7 +110,6 @@ class ImpersonatedServiceAccountCredentials extends CredentialsLoader implements
     {
         return $this->sourceCredentials->getCacheKey();
     }
-
     /**
      * @return array<mixed>
      */

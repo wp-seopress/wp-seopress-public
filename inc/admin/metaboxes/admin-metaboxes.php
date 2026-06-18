@@ -442,7 +442,7 @@ function seopress_display_seo_metaboxe() {
 					delete_post_meta( $post_id, '_seopress_robots_freeze_modified_date' );
 				}
 				if ( ! empty( $_POST['seopress_robots_custom_modified_date'] ) ) {
-					update_post_meta( $post_id, '_seopress_robots_custom_modified_date', sanitize_text_field( $_POST['seopress_robots_custom_modified_date'] ) );
+					update_post_meta( $post_id, '_seopress_robots_custom_modified_date', sanitize_text_field( wp_unslash( $_POST['seopress_robots_custom_modified_date'] ) ) );
 				} else {
 					delete_post_meta( $post_id, '_seopress_robots_custom_modified_date' );
 				}

@@ -452,10 +452,27 @@ body.toplevel_page_seopress-option #wpfooter {
     line-height: 1.55;
 }
 
-.seopress-dashboard-tasks__promo-link {
-    color: #fff;
+/* Scoped + raised specificity so it wins over @wordpress/components'
+   `.components-external-link` (which paints the link in --wp-admin-theme-color
+   blue, invisible on this dark indigo card). Gold matches the promo star. */
+.seopress-dashboard-tasks__promo .seopress-dashboard-tasks__promo-link,
+.seopress-dashboard-tasks__promo .seopress-dashboard-tasks__promo-link:visited,
+.seopress-dashboard-tasks__promo .seopress-dashboard-tasks__promo-link:active {
+    color: #ffd166;
     font-weight: 600;
     text-decoration: underline;
+}
+
+.seopress-dashboard-tasks__promo .seopress-dashboard-tasks__promo-link:hover {
+    color: #ffdd8a;
+    text-decoration: underline;
+}
+
+.seopress-dashboard-tasks__promo .seopress-dashboard-tasks__promo-link:focus {
+    color: #ffdd8a;
+    box-shadow: none;
+    outline: 1px dotted #ffd166;
+    outline-offset: 2px;
 }
 
 /* ---------- Integrations + Promotions (lavender cards) ---------- */

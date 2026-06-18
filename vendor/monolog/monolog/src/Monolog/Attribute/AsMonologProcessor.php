@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,8 +9,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog\Attribute;
+namespace SEOPress\Vendor\Monolog\Attribute;
 
 /**
  * A reusable attribute to help configure a class or a method as a processor.
@@ -28,19 +28,15 @@ class AsMonologProcessor
     public $handler = null;
     /** @var string|null */
     public $method = null;
-    
     /**
      * @param string|null $channel  The logging channel the processor should be pushed to.
      * @param string|null $handler  The handler the processor should be pushed to.
      * @param string|null $method   The method that processes the records (if the attribute is used at the class level).
      */
-    public function __construct(
-        ?string $channel = null,
-        ?string $handler = null,
-        ?string $method = null
-    ) {
+    public function __construct(?string $channel = null, ?string $handler = null, ?string $method = null)
+    {
         $this->channel = $channel;
         $this->handler = $handler;
         $this->method = $method;
     }
-} 
+}

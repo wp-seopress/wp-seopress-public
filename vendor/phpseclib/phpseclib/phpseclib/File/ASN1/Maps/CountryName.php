@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * CountryName
  *
@@ -28,9 +26,6 @@ abstract class CountryName
         // (if constant is present) \phpseclib3\File\ASN1::CLASS_CONTEXT_SPECIFIC
         'class' => ASN1::CLASS_APPLICATION,
         'cast' => 1,
-        'children' => [
-            'x121-dcc-code' => ['type' => ASN1::TYPE_NUMERIC_STRING],
-            'iso-3166-alpha2-code' => ['type' => ASN1::TYPE_PRINTABLE_STRING]
-        ]
+        'children' => ['x121-dcc-code' => ['type' => ASN1::TYPE_NUMERIC_STRING], 'iso-3166-alpha2-code' => ['type' => ASN1::TYPE_PRINTABLE_STRING]],
     ];
 }

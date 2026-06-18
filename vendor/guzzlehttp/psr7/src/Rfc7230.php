@@ -1,8 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
-namespace GuzzleHttp\Psr7;
+declare (strict_types=1);
+namespace SEOPress\Vendor\GuzzleHttp\Psr7;
 
 /**
  * @internal
@@ -18,9 +17,8 @@ final class Rfc7230
      *
      * @license https://github.com/amphp/http/blob/v1.0.1/LICENSE
      */
-    public const HEADER_REGEX = "(^([^()<>@,;:\\\"/[\]?={}\x01-\x20\x7F]++):[ \t]*+((?:[ \t]*+[\x21-\x7E\x80-\xFF]++)*+)[ \t]*+\r?\n)m";
+    public const HEADER_REGEX = "(^([^()<>@,;:\\\"/[\\]?={}\x01- ]++):[ \t]*+((?:[ \t]*+[!-~\x80-\xff]++)*+)[ \t]*+\r?\n)m";
     public const HEADER_FOLD_REGEX = "(\r?\n[ \t]++)";
-
     /**
      * @return array{0: string, 1: int|null}|null
      */
@@ -29,78 +27,62 @@ final class Rfc7230
         if ($authority === '') {
             return null;
         }
-
         $host = $authority;
         $port = null;
-
         if ($authority[0] === '[') {
             $closingBracket = strpos($authority, ']');
-            if ($closingBracket === false) {
+            if ($closingBracket === \false) {
                 return null;
             }
-
             $host = substr($authority, 0, $closingBracket + 1);
             $remainder = substr($authority, $closingBracket + 1);
             if ($remainder !== '') {
                 if ($remainder[0] !== ':') {
                     return null;
                 }
-
                 $port = self::parseAuthorityPort(substr($remainder, 1));
                 if ($port === null) {
                     return null;
                 }
             }
-        } elseif (false !== ($colon = strpos($authority, ':'))) {
+        } elseif (\false !== $colon = strpos($authority, ':')) {
             $host = substr($authority, 0, $colon);
             $port = self::parseAuthorityPort(substr($authority, $colon + 1));
             if ($port === null) {
                 return null;
             }
         }
-
         if ($host === '' || !self::isValidHostHeaderHost($host)) {
             return null;
         }
-
         return [$host, $port];
     }
-
     private static function isValidHostHeaderHost(string $host): bool
     {
         if (preg_match('/[\x00-\x20\x7F\/\?#@\\\\]/', $host)) {
-            return false;
+            return \false;
         }
-
-        if (strpos($host, '[') !== false || strpos($host, ']') !== false) {
+        if (strpos($host, '[') !== \false || strpos($host, ']') !== \false) {
             if ($host[0] !== '[' || substr($host, -1) !== ']') {
-                return false;
+                return \false;
             }
-
             $address = substr($host, 1, -1);
-
-            return filter_var($address, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV6) !== false
-                || preg_match('/^v[0-9a-f]+\.['.Rfc3986::CHAR_UNRESERVED.Rfc3986::CHAR_SUB_DELIMS.':]+$/iD', $address) === 1;
+            return filter_var($address, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV6) !== \false || preg_match('/^v[0-9a-f]+\.[' . Rfc3986::CHAR_UNRESERVED . Rfc3986::CHAR_SUB_DELIMS . ':]+$/iD', $address) === 1;
         }
-
-        return strpos($host, ':') === false;
+        return strpos($host, ':') === \false;
     }
-
     private static function parseAuthorityPort(string $port): ?int
     {
         if ($port === '' || !ctype_digit($port)) {
             return null;
         }
-
         $normalized = ltrim($port, '0');
         if ($normalized === '') {
             return 0;
         }
-
-        if (strlen($normalized) > 5 || (int) $normalized > 0xFFFF) {
+        if (strlen($normalized) > 5 || (int) $normalized > 0xffff) {
             return null;
         }
-
         return (int) $normalized;
     }
 }

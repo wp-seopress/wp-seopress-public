@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * PublicKeyInfo
  *
@@ -25,11 +23,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class PublicKeyInfo
 {
-    const MAP = [
-        'type' => ASN1::TYPE_SEQUENCE,
-        'children' => [
-            'publicKeyAlgorithm' => AlgorithmIdentifier::MAP,
-            'publicKey' => ['type' => ASN1::TYPE_BIT_STRING]
-        ]
-    ];
+    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['publicKeyAlgorithm' => AlgorithmIdentifier::MAP, 'publicKey' => ['type' => ASN1::TYPE_BIT_STRING]]];
 }

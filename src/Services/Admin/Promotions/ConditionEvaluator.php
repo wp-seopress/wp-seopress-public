@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SEOPress\Helpers\InstallDate;
+
 /**
  * ConditionEvaluator
  *
@@ -232,21 +234,10 @@ class ConditionEvaluator {
 	 * @return bool
 	 */
 	protected function checkInstallAge( $days ): bool {
-		$install_date = get_option( 'seopress_activated' );
-
-		if ( ! $install_date ) {
-			// If no install date, assume it's new.
-			return 0 === $days;
-		}
-
-		$install_timestamp = strtotime( $install_date );
-		if ( ! $install_timestamp ) {
-			return true;
-		}
-
-		$days_installed = ( time() - $install_timestamp ) / DAY_IN_SECONDS;
-
-		return $days_installed >= $days;
+		// Use the shared persistent install timestamp. `seopress_activated` is a
+		// one-shot activation flag (deleted on the first admin load), not a
+		// reliable install date, so it can't gate "show after N days".
+		return InstallDate::daysSince() >= (int) $days;
 	}
 
 	/**

@@ -1,11 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace SEOPress\Vendor\GuzzleHttp\Psr7;
 
-namespace GuzzleHttp\Psr7;
-
-use Psr\Http\Message\StreamInterface;
-
+use SEOPress\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Uses PHP's zlib.inflate filter to inflate zlib (HTTP deflate, RFC1950) or gzipped (RFC1952) content.
  *
@@ -20,10 +18,8 @@ use Psr\Http\Message\StreamInterface;
 final class InflateStream implements StreamInterface
 {
     use StreamDecoratorTrait;
-
     /** @var StreamInterface */
     private $stream;
-
     public function __construct(StreamInterface $stream)
     {
         $resource = StreamWrapper::getResource($stream);
@@ -31,7 +27,7 @@ final class InflateStream implements StreamInterface
         // See https://www.zlib.net/manual.html#Advanced definition of inflateInit2
         // "Add 32 to windowBits to enable zlib and gzip decoding with automatic header detection"
         // Default window size is 15.
-        stream_filter_append($resource, 'zlib.inflate', STREAM_FILTER_READ, ['window' => 15 + 32]);
+        stream_filter_append($resource, 'zlib.inflate', \STREAM_FILTER_READ, ['window' => 15 + 32]);
         $this->stream = $stream->isSeekable() ? new Stream($resource) : new NoSeekStream(new Stream($resource));
     }
 }

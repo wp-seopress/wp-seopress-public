@@ -1,6 +1,7 @@
 <?php
-declare(strict_types=1);
-namespace ParagonIE\ConstantTime;
+
+declare (strict_types=1);
+namespace SEOPress\Vendor\ParagonIE\ConstantTime;
 
 use TypeError;
 use function function_exists;
@@ -8,7 +9,6 @@ use function mb_strlen;
 use function mb_substr;
 use function strlen;
 use function substr;
-
 /**
  *  Copyright (c) 2016 - 2022 Paragon Initiative Enterprises.
  *  Copyright (c) 2014 Steve "Sc00bz" Thomas (steve at tobtu dot com)
@@ -31,7 +31,6 @@ use function substr;
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-
 /**
  * Class Binary
  *
@@ -53,7 +52,8 @@ abstract class Binary
     public static function safeStrlen(
         #[\SensitiveParameter]
         string $str
-    ): int {
+    ): int
+    {
         if (function_exists('mb_strlen')) {
             // mb_strlen in PHP 7.x can return false.
             /** @psalm-suppress RedundantCast */
@@ -62,7 +62,6 @@ abstract class Binary
             return strlen($str);
         }
     }
-
     /**
      * Safe substring
      *
@@ -81,7 +80,8 @@ abstract class Binary
         string $str,
         int $start = 0,
         $length = null
-    ): string {
+    ): string
+    {
         if ($length === 0) {
             return '';
         }

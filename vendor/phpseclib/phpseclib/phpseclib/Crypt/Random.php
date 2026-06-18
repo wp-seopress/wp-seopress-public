@@ -19,8 +19,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
-
-namespace phpseclib3\Crypt;
+namespace SEOPress\Vendor\phpseclib3\Crypt;
 
 /**
  * Pure-PHP Random Number Generator
@@ -45,7 +44,6 @@ abstract class Random
         if (!$length) {
             return '';
         }
-
         try {
             return random_bytes($length);
         } catch (\Exception $e) {
@@ -59,7 +57,6 @@ abstract class Random
             // the PHP implementation.
         }
         // at this point we have no choice but to use a pure-PHP CSPRNG
-
         // cascade entropy across multiple PHP instances by fixing the session and collecting all
         // environmental variables, including the previous session data and the current session
         // data.
@@ -77,55 +74,39 @@ abstract class Random
         // a hash of the session data before that). certainly an attacker should be assumed to have
         // full control over his own http requests. he, however, is not going to have control over
         // everyone's http requests.
-        static $crypto = false, $v;
-        if ($crypto === false) {
+        static $crypto = \false, $v;
+        if ($crypto === \false) {
             // save old session data
             $old_session_id = session_id();
             $old_use_cookies = ini_get('session.use_cookies');
             $old_session_cache_limiter = session_cache_limiter();
-            $_OLD_SESSION = isset($_SESSION) ? $_SESSION : false;
+            $_OLD_SESSION = isset($_SESSION) ? $_SESSION : \false;
             if ($old_session_id != '') {
                 session_write_close();
             }
-
             session_id(1);
             ini_set('session.use_cookies', 0);
             session_cache_limiter('');
             session_start();
-
-            $v = (isset($_SERVER) ? self::safe_serialize($_SERVER) : '') .
-                 (isset($_POST) ? self::safe_serialize($_POST) : '') .
-                 (isset($_GET) ? self::safe_serialize($_GET) : '') .
-                 (isset($_COOKIE) ? self::safe_serialize($_COOKIE) : '') .
-                 // as of PHP 8.1 $GLOBALS can't be accessed by reference, which eliminates
-                 // the need for phpseclib_safe_serialize. see https://wiki.php.net/rfc/restrict_globals_usage
-                 // for more info
-                 (version_compare(PHP_VERSION, '8.1.0', '>=') ? serialize($GLOBALS) : self::safe_serialize($GLOBALS)) .
-                 self::safe_serialize($_SESSION) .
-                 self::safe_serialize($_OLD_SESSION);
-            $v = $seed = $_SESSION['seed'] = sha1($v, true);
+            $v = (isset($_SERVER) ? self::safe_serialize($_SERVER) : '') . (isset($_POST) ? self::safe_serialize($_POST) : '') . (isset($_GET) ? self::safe_serialize($_GET) : '') . (isset($_COOKIE) ? self::safe_serialize($_COOKIE) : '') . (version_compare(\PHP_VERSION, '8.1.0', '>=') ? serialize($GLOBALS) : self::safe_serialize($GLOBALS)) . self::safe_serialize($_SESSION) . self::safe_serialize($_OLD_SESSION);
+            $v = $seed = $_SESSION['seed'] = sha1($v, \true);
             if (!isset($_SESSION['count'])) {
                 $_SESSION['count'] = 0;
             }
             $_SESSION['count']++;
-
             session_write_close();
-
             // restore old session data
             if ($old_session_id != '') {
                 session_id($old_session_id);
                 session_start();
                 ini_set('session.use_cookies', $old_use_cookies);
                 session_cache_limiter($old_session_cache_limiter);
+            } else if ($_OLD_SESSION !== \false) {
+                $_SESSION = $_OLD_SESSION;
+                unset($_OLD_SESSION);
             } else {
-                if ($_OLD_SESSION !== false) {
-                    $_SESSION = $_OLD_SESSION;
-                    unset($_OLD_SESSION);
-                } else {
-                    unset($_SESSION);
-                }
+                unset($_SESSION);
             }
-
             // in SSH2 a shared secret and an exchange hash are generated through the key exchange process.
             // the IV client to server is the hash of that "nonce" with the letter A and for the encryption key it's the letter C.
             // if the hash doesn't produce enough a key or an IV that's long enough concat successive hashes of the
@@ -134,42 +115,38 @@ abstract class Random
             // http://tools.ietf.org/html/rfc4253#section-7.2
             //
             // see the is_string($crypto) part for an example of how to expand the keys
-            $key = sha1($seed . 'A', true);
-            $iv = sha1($seed . 'C', true);
-
+            $key = sha1($seed . 'A', \true);
+            $iv = sha1($seed . 'C', \true);
             // ciphers are used as per the nist.gov link below. also, see this link:
             //
             // http://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator#Designs_based_on_cryptographic_primitives
-            switch (true) {
-                case class_exists('\phpseclib3\Crypt\AES'):
+            switch (\true) {
+                case class_exists('SEOPress\Vendor\phpseclib3\Crypt\AES'):
                     $crypto = new AES('ctr');
                     break;
-                case class_exists('\phpseclib3\Crypt\Twofish'):
+                case class_exists('SEOPress\Vendor\phpseclib3\Crypt\Twofish'):
                     $crypto = new Twofish('ctr');
                     break;
-                case class_exists('\phpseclib3\Crypt\Blowfish'):
+                case class_exists('SEOPress\Vendor\phpseclib3\Crypt\Blowfish'):
                     $crypto = new Blowfish('ctr');
                     break;
-                case class_exists('\phpseclib3\Crypt\TripleDES'):
+                case class_exists('SEOPress\Vendor\phpseclib3\Crypt\TripleDES'):
                     $crypto = new TripleDES('ctr');
                     break;
-                case class_exists('\phpseclib3\Crypt\DES'):
+                case class_exists('SEOPress\Vendor\phpseclib3\Crypt\DES'):
                     $crypto = new DES('ctr');
                     break;
-                case class_exists('\phpseclib3\Crypt\RC4'):
+                case class_exists('SEOPress\Vendor\phpseclib3\Crypt\RC4'):
                     $crypto = new RC4();
                     break;
                 default:
                     throw new \RuntimeException(__CLASS__ . ' requires at least one symmetric cipher be loaded');
             }
-
             $crypto->setKey(substr($key, 0, $crypto->getKeyLength() >> 3));
             $crypto->setIV(substr($iv, 0, $crypto->getBlockLength() >> 3));
             $crypto->enableContinuousBuffer();
         }
-
         //return $crypto->encrypt(str_repeat("\0", $length));
-
         // the following is based off of ANSI X9.31:
         //
         // http://csrc.nist.gov/groups/STM/cavp/documents/rng/931rngext.pdf
@@ -180,15 +157,16 @@ abstract class Random
         // (do a search for "ANS X9.31 A.2.4")
         $result = '';
         while (strlen($result) < $length) {
-            $i = $crypto->encrypt(microtime()); // strlen(microtime()) == 21
-            $r = $crypto->encrypt($i ^ $v); // strlen($v) == 20
-            $v = $crypto->encrypt($r ^ $i); // strlen($r) == 20
+            $i = $crypto->encrypt(microtime());
+            // strlen(microtime()) == 21
+            $r = $crypto->encrypt($i ^ $v);
+            // strlen($v) == 20
+            $v = $crypto->encrypt($r ^ $i);
+            // strlen($r) == 20
             $result .= $r;
         }
-
         return substr($result, 0, $length);
     }
-
     /**
      * Safely serialize variables
      *
@@ -209,7 +187,7 @@ abstract class Random
             return '';
         }
         $safearr = [];
-        $arr['__phpseclib_marker'] = true;
+        $arr['__phpseclib_marker'] = \true;
         foreach (array_keys($arr) as $key) {
             // do not recurse on the '__phpseclib_marker' key itself, for smaller memory usage
             if ($key !== '__phpseclib_marker') {

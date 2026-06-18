@@ -10,20 +10,18 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\EC\Formats\Keys;
 
-namespace phpseclib3\Crypt\EC\Formats\Keys;
-
-use phpseclib3\Common\Functions\Strings;
-use phpseclib3\Crypt\EC\BaseCurves\Base as BaseCurve;
-use phpseclib3\Crypt\EC\BaseCurves\Binary as BinaryCurve;
-use phpseclib3\Crypt\EC\BaseCurves\Montgomery;
-use phpseclib3\Crypt\EC\BaseCurves\Prime as PrimeCurve;
-use phpseclib3\Crypt\EC\BaseCurves\TwistedEdwards as TwistedEdwardsCurve;
-use phpseclib3\Exception\UnsupportedCurveException;
-use phpseclib3\File\ASN1;
-use phpseclib3\File\ASN1\Maps;
-use phpseclib3\Math\BigInteger;
-
+use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Base as BaseCurve;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Binary as BinaryCurve;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Montgomery;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Prime as PrimeCurve;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedEdwards as TwistedEdwardsCurve;
+use SEOPress\Vendor\phpseclib3\Exception\UnsupportedCurveException;
+use SEOPress\Vendor\phpseclib3\File\ASN1;
+use SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * Generic EC Key Parsing Helper functions
  *
@@ -37,21 +35,18 @@ trait Common
      * @var array
      */
     private static $curveOIDs = [];
-
     /**
      * Child OIDs loaded
      *
      * @var bool
      */
-    protected static $childOIDsLoaded = false;
-
+    protected static $childOIDsLoaded = \false;
     /**
      * Use Named Curves
      *
      * @var bool
      */
-    private static $useNamedCurves = true;
-
+    private static $useNamedCurves = \true;
     /**
      * Initialize static variables
      */
@@ -65,37 +60,55 @@ trait Common
             // brainpool*r* curves are regular prime finite field curves
             // brainpool*t* curves are twisted versions of the brainpool*r* curves
             self::$curveOIDs = [
-                'prime192v1' => '1.2.840.10045.3.1.1', // J.5.1, example 1 (aka secp192r1)
-                'prime192v2' => '1.2.840.10045.3.1.2', // J.5.1, example 2
-                'prime192v3' => '1.2.840.10045.3.1.3', // J.5.1, example 3
-                'prime239v1' => '1.2.840.10045.3.1.4', // J.5.2, example 1
-                'prime239v2' => '1.2.840.10045.3.1.5', // J.5.2, example 2
-                'prime239v3' => '1.2.840.10045.3.1.6', // J.5.2, example 3
-                'prime256v1' => '1.2.840.10045.3.1.7', // J.5.3, example 1 (aka secp256r1)
-
+                'prime192v1' => '1.2.840.10045.3.1.1',
+                // J.5.1, example 1 (aka secp192r1)
+                'prime192v2' => '1.2.840.10045.3.1.2',
+                // J.5.1, example 2
+                'prime192v3' => '1.2.840.10045.3.1.3',
+                // J.5.1, example 3
+                'prime239v1' => '1.2.840.10045.3.1.4',
+                // J.5.2, example 1
+                'prime239v2' => '1.2.840.10045.3.1.5',
+                // J.5.2, example 2
+                'prime239v3' => '1.2.840.10045.3.1.6',
+                // J.5.2, example 3
+                'prime256v1' => '1.2.840.10045.3.1.7',
+                // J.5.3, example 1 (aka secp256r1)
                 // https://tools.ietf.org/html/rfc5656#section-10
-                'nistp256' => '1.2.840.10045.3.1.7', // aka secp256r1
-                'nistp384' => '1.3.132.0.34', // aka secp384r1
-                'nistp521' => '1.3.132.0.35', // aka secp521r1
-
-                'nistk163' => '1.3.132.0.1', // aka sect163k1
-                'nistp192' => '1.2.840.10045.3.1.1', // aka secp192r1
-                'nistp224' => '1.3.132.0.33', // aka secp224r1
-                'nistk233' => '1.3.132.0.26', // aka sect233k1
-                'nistb233' => '1.3.132.0.27', // aka sect233r1
-                'nistk283' => '1.3.132.0.16', // aka sect283k1
-                'nistk409' => '1.3.132.0.36', // aka sect409k1
-                'nistb409' => '1.3.132.0.37', // aka sect409r1
-                'nistt571' => '1.3.132.0.38', // aka sect571k1
-
+                'nistp256' => '1.2.840.10045.3.1.7',
+                // aka secp256r1
+                'nistp384' => '1.3.132.0.34',
+                // aka secp384r1
+                'nistp521' => '1.3.132.0.35',
+                // aka secp521r1
+                'nistk163' => '1.3.132.0.1',
+                // aka sect163k1
+                'nistp192' => '1.2.840.10045.3.1.1',
+                // aka secp192r1
+                'nistp224' => '1.3.132.0.33',
+                // aka secp224r1
+                'nistk233' => '1.3.132.0.26',
+                // aka sect233k1
+                'nistb233' => '1.3.132.0.27',
+                // aka sect233r1
+                'nistk283' => '1.3.132.0.16',
+                // aka sect283k1
+                'nistk409' => '1.3.132.0.36',
+                // aka sect409k1
+                'nistb409' => '1.3.132.0.37',
+                // aka sect409r1
+                'nistt571' => '1.3.132.0.38',
+                // aka sect571k1
                 // from https://tools.ietf.org/html/rfc5915
-                'secp192r1' => '1.2.840.10045.3.1.1', // aka prime192v1
+                'secp192r1' => '1.2.840.10045.3.1.1',
+                // aka prime192v1
                 'sect163k1' => '1.3.132.0.1',
                 'sect163r2' => '1.3.132.0.15',
                 'secp224r1' => '1.3.132.0.33',
                 'sect233k1' => '1.3.132.0.26',
                 'sect233r1' => '1.3.132.0.27',
-                'secp256r1' => '1.2.840.10045.3.1.7', // aka prime256v1
+                'secp256r1' => '1.2.840.10045.3.1.7',
+                // aka prime256v1
                 'sect283k1' => '1.3.132.0.16',
                 'sect283r1' => '1.3.132.0.17',
                 'secp384r1' => '1.3.132.0.34',
@@ -115,7 +128,6 @@ trait Common
                 'secp192k1' => '1.3.132.0.31',
                 'secp224k1' => '1.3.132.0.32',
                 'secp256k1' => '1.3.132.0.10',
-
                 'sect113r1' => '1.3.132.0.4',
                 'sect113r2' => '1.3.132.0.5',
                 'sect131r1' => '1.3.132.0.22',
@@ -124,7 +136,6 @@ trait Common
                 'sect193r1' => '1.3.132.0.24',
                 'sect193r2' => '1.3.132.0.25',
                 'sect239k1' => '1.3.132.0.3',
-
                 // from http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.202.2977&rep=rep1&type=pdf#page=36
                 /*
                 'c2pnb163v1' => '1.2.840.10045.3.0.1', // J.4.1, example 1
@@ -148,7 +159,6 @@ trait Common
                 'c2pnb368w1' => '1.2.840.10045.3.0.19', // J.4.9, example 1
                 'c2tnb431r1' => '1.2.840.10045.3.0.20', // J.4.10, example 1
                 */
-
                 // http://www.ecc-brainpool.org/download/Domain-parameters.pdf
                 // https://tools.ietf.org/html/rfc5639
                 'brainpoolP160r1' => '1.3.36.3.3.2.8.1.1.1',
@@ -164,20 +174,21 @@ trait Common
                 'brainpoolP384r1' => '1.3.36.3.3.2.8.1.1.11',
                 'brainpoolP384t1' => '1.3.36.3.3.2.8.1.1.12',
                 'brainpoolP512r1' => '1.3.36.3.3.2.8.1.1.13',
-                'brainpoolP512t1' => '1.3.36.3.3.2.8.1.1.14'
+                'brainpoolP512t1' => '1.3.36.3.3.2.8.1.1.14',
             ];
             ASN1::loadOIDs([
                 'prime-field' => '1.2.840.10045.1.1',
                 'characteristic-two-field' => '1.2.840.10045.1.2',
                 'characteristic-two-basis' => '1.2.840.10045.1.2.3',
                 // per http://www.secg.org/SEC1-Ver-1.0.pdf#page=84, gnBasis "not used here"
-                'gnBasis' => '1.2.840.10045.1.2.3.1', // NULL
-                'tpBasis' => '1.2.840.10045.1.2.3.2', // Trinomial
-                'ppBasis' => '1.2.840.10045.1.2.3.3'  // Pentanomial
+                'gnBasis' => '1.2.840.10045.1.2.3.1',
+                // NULL
+                'tpBasis' => '1.2.840.10045.1.2.3.2',
+                // Trinomial
+                'ppBasis' => '1.2.840.10045.1.2.3.3',
             ] + self::$curveOIDs);
         }
     }
-
     /**
      * Explicitly set the curve
      *
@@ -190,7 +201,6 @@ trait Common
     {
         self::$implicitCurve = $curve;
     }
-
     /**
      * Returns an instance of \phpseclib3\Crypt\EC\BaseCurves\Base based
      * on the curve parameters
@@ -222,11 +232,8 @@ trait Common
                 case 'prime-field':
                     $curve = new PrimeCurve();
                     $curve->setModulo($data['fieldID']['parameters']);
-                    $curve->setCoefficients(
-                        new BigInteger($data['curve']['a'], 256),
-                        new BigInteger($data['curve']['b'], 256)
-                    );
-                    $point = self::extractPoint("\0" . $data['base'], $curve);
+                    $curve->setCoefficients(new BigInteger($data['curve']['a'], 256), new BigInteger($data['curve']['b'], 256));
+                    $point = self::extractPoint("\x00" . $data['base'], $curve);
                     $curve->setBasePoint(...$point);
                     $curve->setOrder($data['order']);
                     return $curve;
@@ -249,11 +256,8 @@ trait Common
                     $modulo[] = 0;
                     $curve->setModulo(...$modulo);
                     $len = ceil($modulo[0] / 8);
-                    $curve->setCoefficients(
-                        Strings::bin2hex($data['curve']['a']),
-                        Strings::bin2hex($data['curve']['b'])
-                    );
-                    $point = self::extractPoint("\0" . $data['base'], $curve);
+                    $curve->setCoefficients(Strings::bin2hex($data['curve']['a']), Strings::bin2hex($data['curve']['b']));
+                    $point = self::extractPoint("\x00" . $data['base'], $curve);
                     $curve->setBasePoint(...$point);
                     $curve->setOrder($data['order']);
                     return $curve;
@@ -263,7 +267,6 @@ trait Common
         }
         throw new \RuntimeException('No valid parameters are present');
     }
-
     /**
      * Extract points from a string
      *
@@ -285,7 +288,7 @@ trait Common
             $y = $str;
             $y = strrev($y);
             $sign = (bool) (ord($y[0]) & 0x80);
-            $y[0] = $y[0] & chr(0x7F);
+            $y[0] = $y[0] & chr(0x7f);
             $y = new BigInteger($y, 256);
             if ($y->compare($curve->getModulo()) >= 0) {
                 throw new \RuntimeException('The Y coordinate should not be >= the modulo');
@@ -296,45 +299,35 @@ trait Common
             }
             return $point;
         }
-
         // the first byte of a bit string represents the number of bits in the last byte that are to be ignored but,
         // currently, bit strings wanting a non-zero amount of bits trimmed are not supported
-        if (($val = Strings::shift($str)) != "\0") {
+        if (($val = Strings::shift($str)) != "\x00") {
             throw new \UnexpectedValueException('extractPoint expects the first byte to be null - not ' . Strings::bin2hex($val));
         }
-        if ($str == "\0") {
+        if ($str == "\x00") {
             return [];
         }
-
         $keylen = strlen($str);
         $order = $curve->getLengthInBytes();
         // point compression is being used
         if ($keylen == $order + 1) {
             return $curve->derivePoint($str);
         }
-
         // point compression is not being used
         if ($keylen == 2 * $order + 1) {
             preg_match("#(.)(.{{$order}})(.{{$order}})#s", $str, $matches);
             list(, $w, $x, $y) = $matches;
-            if ($w != "\4") {
+            if ($w != "\x04") {
                 throw new \UnexpectedValueException('The first byte of an uncompressed point should be 04 - not ' . Strings::bin2hex($val));
             }
-            $point = [
-                $curve->convertInteger(new BigInteger($x, 256)),
-                $curve->convertInteger(new BigInteger($y, 256))
-            ];
-
+            $point = [$curve->convertInteger(new BigInteger($x, 256)), $curve->convertInteger(new BigInteger($y, 256))];
             if (!$curve->verifyPoint($point)) {
                 throw new \RuntimeException('Unable to verify that point exists on curve');
             }
-
             return $point;
         }
-
         throw new \UnexpectedValueException('The string representation of the points is not of an appropriate length');
     }
-
     /**
      * Encode Parameters
      *
@@ -344,10 +337,9 @@ trait Common
      * @param array $options optional
      * @return string|false
      */
-    private static function encodeParameters(BaseCurve $curve, $returnArray = false, array $options = [])
+    private static function encodeParameters(BaseCurve $curve, $returnArray = \false, array $options = [])
     {
         $useNamedCurves = isset($options['namedCurve']) ? $options['namedCurve'] : self::$useNamedCurves;
-
         $reflect = new \ReflectionClass($curve);
         $name = $reflect->getShortName();
         if ($useNamedCurves) {
@@ -356,9 +348,7 @@ trait Common
                     $reflect = $reflect->getParentClass();
                     $name = $reflect->getShortName();
                 }
-                return $returnArray ?
-                    ['namedCurve' => $name] :
-                    ASN1::encodeDER(['namedCurve' => $name], Maps\ECParameters::MAP);
+                return $returnArray ? ['namedCurve' => $name] : ASN1::encodeDER(['namedCurve' => $name], Maps\ECParameters::MAP);
             }
             foreach (new \DirectoryIterator(__DIR__ . '/../../Curves/') as $file) {
                 if ($file->getExtension() != 'php') {
@@ -385,7 +375,6 @@ trait Common
                         if ($candidate->getB()->toBytes() != $curve->getB()->toBytes()) {
                             break;
                         }
-
                         list($candidateX, $candidateY) = $candidate->getBasePoint();
                         list($curveX, $curveY) = $curve->getBasePoint();
                         if ($candidateX->toBytes() != $curveX->toBytes()) {
@@ -394,10 +383,7 @@ trait Common
                         if ($candidateY->toBytes() != $curveY->toBytes()) {
                             break;
                         }
-
-                        return $returnArray ?
-                            ['namedCurve' => $testName] :
-                            ASN1::encodeDER(['namedCurve' => $testName], Maps\ECParameters::MAP);
+                        return $returnArray ? ['namedCurve' => $testName] : ASN1::encodeDER(['namedCurve' => $testName], Maps\ECParameters::MAP);
                     case 'Binary':
                         if (!$candidate instanceof BinaryCurve) {
                             break;
@@ -411,7 +397,6 @@ trait Common
                         if ($candidate->getB()->toBytes() != $curve->getB()->toBytes()) {
                             break;
                         }
-
                         list($candidateX, $candidateY) = $candidate->getBasePoint();
                         list($curveX, $curveY) = $curve->getBasePoint();
                         if ($candidateX->toBytes() != $curveX->toBytes()) {
@@ -420,14 +405,10 @@ trait Common
                         if ($candidateY->toBytes() != $curveY->toBytes()) {
                             break;
                         }
-
-                        return $returnArray ?
-                            ['namedCurve' => $testName] :
-                            ASN1::encodeDER(['namedCurve' => $testName], Maps\ECParameters::MAP);
+                        return $returnArray ? ['namedCurve' => $testName] : ASN1::encodeDER(['namedCurve' => $testName], Maps\ECParameters::MAP);
                 }
             }
         }
-
         $order = $curve->getOrder();
         // we could try to calculate the order thusly:
         // https://crypto.stackexchange.com/a/27914/4520
@@ -438,7 +419,6 @@ trait Common
         $point = $curve->getBasePoint();
         $x = $point[0]->toBytes();
         $y = $point[1]->toBytes();
-
         if ($curve instanceof PrimeCurve) {
             /*
              * valid versions are:
@@ -452,29 +432,15 @@ trait Common
              */
             // other (optional) parameters can be calculated using the methods discused at
             // https://crypto.stackexchange.com/q/28947/4520
-            $data = [
-                'version' => 'ecdpVer1',
-                'fieldID' => [
-                    'fieldType' => 'prime-field',
-                    'parameters' => $curve->getModulo()
-                ],
-                'curve' => [
-                    'a' => $curve->getA()->toBytes(),
-                    'b' => $curve->getB()->toBytes()
-                ],
-                'base' => "\4" . $x . $y,
-                'order' => $order
-            ];
-
-            return $returnArray ?
-                ['specifiedCurve' => $data] :
-                ASN1::encodeDER(['specifiedCurve' => $data], Maps\ECParameters::MAP);
+            $data = ['version' => 'ecdpVer1', 'fieldID' => ['fieldType' => 'prime-field', 'parameters' => $curve->getModulo()], 'curve' => ['a' => $curve->getA()->toBytes(), 'b' => $curve->getB()->toBytes()], 'base' => "\x04" . $x . $y, 'order' => $order];
+            return $returnArray ? ['specifiedCurve' => $data] : ASN1::encodeDER(['specifiedCurve' => $data], Maps\ECParameters::MAP);
         }
         if ($curve instanceof BinaryCurve) {
             $modulo = $curve->getModulo();
             $basis = count($modulo);
             $m = array_shift($modulo);
-            array_pop($modulo); // the last parameter should always be 0
+            array_pop($modulo);
+            // the last parameter should always be 0
             //rsort($modulo);
             switch ($basis) {
                 case 3:
@@ -484,50 +450,25 @@ trait Common
                 case 5:
                     $basis = 'ppBasis';
                     // these should be in strictly ascending order (hence the commented out rsort above)
-                    $modulo = [
-                        'k1' => new BigInteger($modulo[2]),
-                        'k2' => new BigInteger($modulo[1]),
-                        'k3' => new BigInteger($modulo[0])
-                    ];
+                    $modulo = ['k1' => new BigInteger($modulo[2]), 'k2' => new BigInteger($modulo[1]), 'k3' => new BigInteger($modulo[0])];
                     $modulo = ASN1::encodeDER($modulo, Maps\Pentanomial::MAP);
                     $modulo = new ASN1\Element($modulo);
             }
-            $params = ASN1::encodeDER([
-                'm' => new BigInteger($m),
-                'basis' => $basis,
-                'parameters' => $modulo
-            ], Maps\Characteristic_two::MAP);
+            $params = ASN1::encodeDER(['m' => new BigInteger($m), 'basis' => $basis, 'parameters' => $modulo], Maps\Characteristic_two::MAP);
             $params = new ASN1\Element($params);
-            $a = ltrim($curve->getA()->toBytes(), "\0");
+            $a = ltrim($curve->getA()->toBytes(), "\x00");
             if (!strlen($a)) {
-                $a = "\0";
+                $a = "\x00";
             }
-            $b = ltrim($curve->getB()->toBytes(), "\0");
+            $b = ltrim($curve->getB()->toBytes(), "\x00");
             if (!strlen($b)) {
-                $b = "\0";
+                $b = "\x00";
             }
-            $data = [
-                'version' => 'ecdpVer1',
-                'fieldID' => [
-                    'fieldType' => 'characteristic-two-field',
-                    'parameters' => $params
-                ],
-                'curve' => [
-                    'a' => $a,
-                    'b' => $b
-                ],
-                'base' => "\4" . $x . $y,
-                'order' => $order
-            ];
-
-            return $returnArray ?
-                ['specifiedCurve' => $data] :
-                ASN1::encodeDER(['specifiedCurve' => $data], Maps\ECParameters::MAP);
+            $data = ['version' => 'ecdpVer1', 'fieldID' => ['fieldType' => 'characteristic-two-field', 'parameters' => $params], 'curve' => ['a' => $a, 'b' => $b], 'base' => "\x04" . $x . $y, 'order' => $order];
+            return $returnArray ? ['specifiedCurve' => $data] : ASN1::encodeDER(['specifiedCurve' => $data], Maps\ECParameters::MAP);
         }
-
         throw new UnsupportedCurveException('Curve cannot be serialized');
     }
-
     /**
      * Use Specified Curve
      *
@@ -536,9 +477,8 @@ trait Common
      */
     public static function useSpecifiedCurve()
     {
-        self::$useNamedCurves = false;
+        self::$useNamedCurves = \false;
     }
-
     /**
      * Use Named Curve
      *
@@ -548,6 +488,6 @@ trait Common
      */
     public static function useNamedCurve()
     {
-        self::$useNamedCurves = true;
+        self::$useNamedCurves = \true;
     }
 }

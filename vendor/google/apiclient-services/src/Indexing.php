@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2014 Google Inc.
  *
@@ -14,11 +15,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+namespace SEOPress\Vendor\Google\Service;
 
-namespace Google\Service;
-
-use Google\Client;
-
+use SEOPress\Vendor\Google\Client;
 /**
  * Service definition for Indexing (v3).
  *
@@ -32,57 +31,30 @@ use Google\Client;
  *
  * @author Google, Inc.
  */
-class Indexing extends \Google\Service
+class Indexing extends \SEOPress\Vendor\Google\Service
 {
-  /** Submit data to Google for indexing. */
-  const INDEXING =
-      "https://www.googleapis.com/auth/indexing";
-
-  public $urlNotifications;
-  public $rootUrlTemplate;
-
-  /**
-   * Constructs the internal representation of the Indexing service.
-   *
-   * @param Client|array $clientOrConfig The client used to deliver requests, or a
-   *                                     config array to pass to a new Client instance.
-   * @param string $rootUrl The root URL used for requests to the service.
-   */
-  public function __construct($clientOrConfig = [], $rootUrl = null)
-  {
-    parent::__construct($clientOrConfig);
-    $this->rootUrl = $rootUrl ?: 'https://indexing.googleapis.com/';
-    $this->rootUrlTemplate = $rootUrl ?: 'https://indexing.UNIVERSE_DOMAIN/';
-    $this->servicePath = '';
-    $this->batchPath = 'batch';
-    $this->version = 'v3';
-    $this->serviceName = 'indexing';
-
-    $this->urlNotifications = new Indexing\Resource\UrlNotifications(
-        $this,
-        $this->serviceName,
-        'urlNotifications',
-        [
-          'methods' => [
-            'getMetadata' => [
-              'path' => 'v3/urlNotifications/metadata',
-              'httpMethod' => 'GET',
-              'parameters' => [
-                'url' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-              ],
-            ],'publish' => [
-              'path' => 'v3/urlNotifications:publish',
-              'httpMethod' => 'POST',
-              'parameters' => [],
-            ],
-          ]
-        ]
-    );
-  }
+    /** Submit data to Google for indexing. */
+    const INDEXING = "https://www.googleapis.com/auth/indexing";
+    public $urlNotifications;
+    public $rootUrlTemplate;
+    /**
+     * Constructs the internal representation of the Indexing service.
+     *
+     * @param Client|array $clientOrConfig The client used to deliver requests, or a
+     *                                     config array to pass to a new Client instance.
+     * @param string $rootUrl The root URL used for requests to the service.
+     */
+    public function __construct($clientOrConfig = [], $rootUrl = null)
+    {
+        parent::__construct($clientOrConfig);
+        $this->rootUrl = $rootUrl ?: 'https://indexing.googleapis.com/';
+        $this->rootUrlTemplate = $rootUrl ?: 'https://indexing.UNIVERSE_DOMAIN/';
+        $this->servicePath = '';
+        $this->batchPath = 'batch';
+        $this->version = 'v3';
+        $this->serviceName = 'indexing';
+        $this->urlNotifications = new Indexing\Resource\UrlNotifications($this, $this->serviceName, 'urlNotifications', ['methods' => ['getMetadata' => ['path' => 'v3/urlNotifications/metadata', 'httpMethod' => 'GET', 'parameters' => ['url' => ['location' => 'query', 'type' => 'string']]], 'publish' => ['path' => 'v3/urlNotifications:publish', 'httpMethod' => 'POST', 'parameters' => []]]]);
+    }
 }
-
 // Adding a class alias for backwards compatibility with the previous class name.
-class_alias(Indexing::class, 'Google_Service_Indexing');
+class_alias(Indexing::class, 'SEOPress\Vendor\Google_Service_Indexing');

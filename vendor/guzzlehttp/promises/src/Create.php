@@ -1,8 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
-namespace GuzzleHttp\Promise;
+declare (strict_types=1);
+namespace SEOPress\Vendor\GuzzleHttp\Promise;
 
 final class Create
 {
@@ -16,20 +15,16 @@ final class Create
         if ($value instanceof PromiseInterface) {
             return $value;
         }
-
         // Return a Guzzle promise that shadows the given promise.
         if (is_object($value) && method_exists($value, 'then')) {
             $wfn = method_exists($value, 'wait') ? [$value, 'wait'] : null;
             $cfn = method_exists($value, 'cancel') ? [$value, 'cancel'] : null;
             $promise = new Promise($wfn, $cfn);
             $value->then([$promise, 'resolve'], [$promise, 'reject']);
-
             return $promise;
         }
-
         return new FulfilledPromise($value);
     }
-
     /**
      * Creates a rejected promise for a reason if the reason is not a promise.
      * If the provided reason is a promise, then it is returned as-is.
@@ -41,10 +36,8 @@ final class Create
         if ($reason instanceof PromiseInterface) {
             return $reason;
         }
-
         return new RejectedPromise($reason);
     }
-
     /**
      * Create an exception for a rejected promise value.
      *
@@ -55,10 +48,8 @@ final class Create
         if ($reason instanceof \Throwable) {
             return $reason;
         }
-
         return new RejectionException($reason);
     }
-
     /**
      * Returns an iterator for the given value.
      *
@@ -69,21 +60,12 @@ final class Create
         if ($value instanceof \Iterator) {
             return $value;
         }
-
         if (is_array($value)) {
             return new \ArrayIterator($value);
         }
-
         if (!is_iterable($value)) {
-            \trigger_deprecation(
-                'guzzlehttp/promises',
-                '2.5',
-                'Passing a non-iterable to %s::%s() is deprecated; guzzlehttp/promises 3.0 will require an iterable.',
-                __CLASS__,
-                __FUNCTION__
-            );
+            \SEOPress\Vendor\trigger_deprecation('guzzlehttp/promises', '2.5', 'Passing a non-iterable to %s::%s() is deprecated; guzzlehttp/promises 3.0 will require an iterable.', __CLASS__, __FUNCTION__);
         }
-
         return new \ArrayIterator([$value]);
     }
 }

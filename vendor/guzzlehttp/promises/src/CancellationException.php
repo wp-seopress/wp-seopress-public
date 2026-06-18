@@ -1,8 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
-namespace GuzzleHttp\Promise;
+declare (strict_types=1);
+namespace SEOPress\Vendor\GuzzleHttp\Promise;
 
 /**
  * Exception that is set as the reason for a promise that has been cancelled.

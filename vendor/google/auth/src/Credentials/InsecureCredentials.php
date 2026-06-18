@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2018 Google Inc.
  *
@@ -14,11 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+namespace SEOPress\Vendor\Google\Auth\Credentials;
 
-namespace Google\Auth\Credentials;
-
-use Google\Auth\FetchAuthTokenInterface;
-
+use SEOPress\Vendor\Google\Auth\FetchAuthTokenInterface;
 /**
  * Provides a set of credentials that will always return an empty access token.
  * This is useful for APIs which do not require authentication, for local
@@ -29,10 +28,7 @@ class InsecureCredentials implements FetchAuthTokenInterface
     /**
      * @var array{access_token:string}
      */
-    private $token = [
-        'access_token' => ''
-    ];
-
+    private $token = ['access_token' => ''];
     /**
      * Fetches the auth token. In this case it returns an empty string.
      *
@@ -43,7 +39,6 @@ class InsecureCredentials implements FetchAuthTokenInterface
     {
         return $this->token;
     }
-
     /**
      * Returns the cache key. In this case it returns a null value, disabling
      * caching.
@@ -54,7 +49,6 @@ class InsecureCredentials implements FetchAuthTokenInterface
     {
         return null;
     }
-
     /**
      * Fetches the last received token. In this case, it returns the same empty string
      * auth token.

@@ -1,9 +1,8 @@
 <?php
 
-namespace GuzzleHttp;
+namespace SEOPress\Vendor\GuzzleHttp;
 
-use Psr\Http\Message\MessageInterface;
-
+use SEOPress\Vendor\Psr\Http\Message\MessageInterface;
 interface BodySummarizerInterface
 {
     /**

@@ -1,5 +1,7 @@
 <?php
 
+namespace SEOPress\Vendor;
+
 /*
  * This file is part of the Symfony package.
  *
@@ -8,8 +10,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-#[Attribute(Attribute::TARGET_CLASS)]
+#[\Attribute(\Attribute::TARGET_CLASS)]
 final class Attribute
 {
     public const TARGET_CLASS = 1;
@@ -20,12 +21,19 @@ final class Attribute
     public const TARGET_PARAMETER = 32;
     public const TARGET_ALL = 63;
     public const IS_REPEATABLE = 64;
-
     /** @var int */
     public $flags;
-
     public function __construct(int $flags = self::TARGET_ALL)
     {
         $this->flags = $flags;
     }
 }
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+\class_alias('SEOPress\Vendor\Attribute', 'Attribute', \false);

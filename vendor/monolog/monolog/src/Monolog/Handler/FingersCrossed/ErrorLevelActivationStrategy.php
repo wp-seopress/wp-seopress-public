@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,12 +9,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace SEOPress\Vendor\Monolog\Handler\FingersCrossed;
 
-namespace Monolog\Handler\FingersCrossed;
-
-use Monolog\Logger;
-use Psr\Log\LogLevel;
-
+use SEOPress\Vendor\Monolog\Logger;
+use SEOPress\Vendor\Psr\Log\LogLevel;
 /**
  * Error level based activation strategy.
  *
@@ -28,7 +27,6 @@ class ErrorLevelActivationStrategy implements ActivationStrategyInterface
      * @var Level
      */
     private $actionLevel;
-
     /**
      * @param int|string $actionLevel Level or name or value
      *
@@ -38,7 +36,6 @@ class ErrorLevelActivationStrategy implements ActivationStrategyInterface
     {
         $this->actionLevel = Logger::toMonologLevel($actionLevel);
     }
-
     public function isHandlerActivated(array $record): bool
     {
         return $record['level'] >= $this->actionLevel;

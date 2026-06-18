@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * PBES2params
  *
@@ -24,11 +22,5 @@ use phpseclib3\File\ASN1;
  */
 abstract class PBES2params
 {
-    const MAP = [
-        'type' => ASN1::TYPE_SEQUENCE,
-        'children' => [
-            'keyDerivationFunc' => AlgorithmIdentifier::MAP,
-            'encryptionScheme' => AlgorithmIdentifier::MAP
-        ]
-    ];
+    const MAP = ['type' => ASN1::TYPE_SEQUENCE, 'children' => ['keyDerivationFunc' => AlgorithmIdentifier::MAP, 'encryptionScheme' => AlgorithmIdentifier::MAP]];
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
@@ -14,14 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-namespace Google\Auth\HttpHandler;
+namespace SEOPress\Vendor\Google\Auth\HttpHandler;
 
-use GuzzleHttp\BodySummarizer;
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
-
+use SEOPress\Vendor\GuzzleHttp\BodySummarizer;
+use SEOPress\Vendor\GuzzleHttp\Client;
+use SEOPress\Vendor\GuzzleHttp\ClientInterface;
+use SEOPress\Vendor\GuzzleHttp\HandlerStack;
+use SEOPress\Vendor\GuzzleHttp\Middleware;
 class HttpHandlerFactory
 {
     /**
@@ -44,14 +44,12 @@ class HttpHandlerFactory
             }
             $client = new Client(['handler' => $stack]);
         }
-
         $version = null;
-        if (defined('GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
+        if (defined('SEOPress\Vendor\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
             $version = ClientInterface::MAJOR_VERSION;
-        } elseif (defined('GuzzleHttp\ClientInterface::VERSION')) {
+        } elseif (defined('SEOPress\Vendor\GuzzleHttp\ClientInterface::VERSION')) {
             $version = (int) substr(ClientInterface::VERSION, 0, 1);
         }
-
         switch ($version) {
             case 6:
                 return new Guzzle6HttpHandler($client);

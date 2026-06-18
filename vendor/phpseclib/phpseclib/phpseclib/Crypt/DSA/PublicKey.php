@@ -8,14 +8,12 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\Crypt\DSA;
 
-namespace phpseclib3\Crypt\DSA;
-
-use phpseclib3\Crypt\Common;
-use phpseclib3\Crypt\DSA;
-use phpseclib3\Crypt\DSA\Formats\Signature\ASN1 as ASN1Signature;
-use phpseclib3\Exception\BadConfigurationException;
-
+use SEOPress\Vendor\phpseclib3\Crypt\Common;
+use SEOPress\Vendor\phpseclib3\Crypt\DSA;
+use SEOPress\Vendor\phpseclib3\Crypt\DSA\Formats\Signature\ASN1 as ASN1Signature;
+use SEOPress\Vendor\phpseclib3\Exception\BadConfigurationException;
 /**
  * DSA Public Key
  *
@@ -24,7 +22,6 @@ use phpseclib3\Exception\BadConfigurationException;
 final class PublicKey extends DSA implements Common\PublicKey
 {
     use Common\Traits\Fingerprint;
-
     /**
      * Verify a signature
      *
@@ -38,26 +35,20 @@ final class PublicKey extends DSA implements Common\PublicKey
         if (self::$forcedEngine === 'libsodium') {
             throw new BadConfigurationException('Engine libsodium is forced but unsupported for DSA');
         }
-
         if (self::$forcedEngine === 'OpenSSL' && !function_exists('openssl_get_md_methods')) {
             throw new BadConfigurationException('Engine OpenSSL is forced but unsupported for DSA');
         }
-
         $format = $this->sigFormat;
-
         $params = $format::load($signature);
-        if ($params === false || count($params) != 2) {
-            return false;
+        if ($params === \false || count($params) != 2) {
+            return \false;
         }
         $r = $params['r'];
         $s = $params['s'];
-
         if (function_exists('openssl_get_md_methods') && self::$forcedEngine !== 'PHP') {
             if (in_array($this->hash->getHash(), openssl_get_md_methods())) {
                 $sig = $format != 'ASN1' ? ASN1Signature::save($r, $s) : $signature;
-
                 $result = openssl_verify($message, $sig, $this->toString('PKCS8'), $this->hash->getHash());
-
                 if ($result != -1) {
                     return (bool) $result;
                 }
@@ -65,12 +56,10 @@ final class PublicKey extends DSA implements Common\PublicKey
                 throw new BadConfigurationException('Engine OpenSSL is forced but unsupported for DSA / ' . $this->hash->getHash());
             }
         }
-
         $q_1 = $this->q->subtract(self::$one);
         if (!$r->between(self::$one, $q_1) || !$s->between(self::$one, $q_1)) {
-            return false;
+            return \false;
         }
-
         $w = $s->modInverse($this->q);
         $h = $this->hash->hash($message);
         $h = $this->bits2int($h);
@@ -80,10 +69,8 @@ final class PublicKey extends DSA implements Common\PublicKey
         $v2 = $this->y->powMod($u2, $this->p);
         list(, $v) = $v1->multiply($v2)->divide($this->p);
         list(, $v) = $v->divide($this->q);
-
         return $v->equals($r);
     }
-
     /**
      * Returns the public key
      *
@@ -94,7 +81,6 @@ final class PublicKey extends DSA implements Common\PublicKey
     public function toString($type, array $options = [])
     {
         $type = self::validatePlugin('Keys', $type, 'savePublicKey');
-
         return $type::savePublicKey($this->p, $this->q, $this->g, $this->y, $options);
     }
 }

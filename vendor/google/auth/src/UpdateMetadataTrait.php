@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright 2023 Google LLC
  *
@@ -14,8 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-namespace Google\Auth;
+namespace SEOPress\Vendor\Google\Auth;
 
 /**
  * Provides shared methods for updating request metadata (request headers).
@@ -36,7 +36,6 @@ trait UpdateMetadataTrait
     {
         return [$this, 'updateMetadata'];
     }
-
     /**
      * Updates metadata with the authorization token.
      *
@@ -45,11 +44,8 @@ trait UpdateMetadataTrait
      * @param callable $httpHandler callback which delivers psr7 request
      * @return array<mixed> updated metadata hashmap
      */
-    public function updateMetadata(
-        $metadata,
-        $authUri = null,
-        callable $httpHandler = null
-    ) {
+    public function updateMetadata($metadata, $authUri = null, callable $httpHandler = null)
+    {
         if (isset($metadata[self::AUTH_METADATA_KEY])) {
             // Auth metadata has already been set
             return $metadata;

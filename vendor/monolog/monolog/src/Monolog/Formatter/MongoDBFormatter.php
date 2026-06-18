@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
 
+declare (strict_types=1);
 /*
  * This file is part of the Monolog package.
  *
@@ -8,13 +9,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Monolog\Formatter;
+namespace SEOPress\Vendor\Monolog\Formatter;
 
 use MongoDB\BSON\Type;
 use MongoDB\BSON\UTCDateTime;
-use Monolog\Utils;
-
+use SEOPress\Vendor\Monolog\Utils;
 /**
  * Formats a record for use with the MongoDBHandler.
  *
@@ -26,17 +25,15 @@ class MongoDBFormatter implements FormatterInterface
     private $exceptionTraceAsString;
     /** @var int */
     private $maxNestingLevel;
-
     /**
      * @param int  $maxNestingLevel        0 means infinite nesting, the $record itself is level 1, $record['context'] is 2
      * @param bool $exceptionTraceAsString set to false to log exception traces as a sub documents instead of strings
      */
-    public function __construct(int $maxNestingLevel = 3, bool $exceptionTraceAsString = true)
+    public function __construct(int $maxNestingLevel = 3, bool $exceptionTraceAsString = \true)
     {
         $this->maxNestingLevel = max($maxNestingLevel, 0);
         $this->exceptionTraceAsString = $exceptionTraceAsString;
     }
-
     /**
      * {@inheritDoc}
      *
@@ -46,10 +43,8 @@ class MongoDBFormatter implements FormatterInterface
     {
         /** @var mixed[] $res */
         $res = $this->formatArray($record);
-
         return $res;
     }
-
     /**
      * {@inheritDoc}
      *
@@ -61,10 +56,8 @@ class MongoDBFormatter implements FormatterInterface
         foreach ($records as $key => $record) {
             $formatted[$key] = $this->format($record);
         }
-
         return $formatted;
     }
-
     /**
      * @param  mixed[]        $array
      * @return mixed[]|string Array except when max nesting level is reached then a string "[...]"
@@ -74,7 +67,6 @@ class MongoDBFormatter implements FormatterInterface
         if ($this->maxNestingLevel > 0 && $nestingLevel > $this->maxNestingLevel) {
             return '[...]';
         }
-
         foreach ($array as $name => $value) {
             if ($value instanceof \DateTimeInterface) {
                 $array[$name] = $this->formatDate($value, $nestingLevel + 1);
@@ -86,10 +78,8 @@ class MongoDBFormatter implements FormatterInterface
                 $array[$name] = $this->formatObject($value, $nestingLevel + 1);
             }
         }
-
         return $array;
     }
-
     /**
      * @param  mixed          $value
      * @return mixed[]|string
@@ -98,33 +88,23 @@ class MongoDBFormatter implements FormatterInterface
     {
         $objectVars = get_object_vars($value);
         $objectVars['class'] = Utils::getClass($value);
-
         return $this->formatArray($objectVars, $nestingLevel);
     }
-
     /**
      * @return mixed[]|string
      */
     protected function formatException(\Throwable $exception, int $nestingLevel)
     {
-        $formattedException = [
-            'class' => Utils::getClass($exception),
-            'message' => $exception->getMessage(),
-            'code' => (int) $exception->getCode(),
-            'file' => $exception->getFile() . ':' . $exception->getLine(),
-        ];
-
-        if ($this->exceptionTraceAsString === true) {
+        $formattedException = ['class' => Utils::getClass($exception), 'message' => $exception->getMessage(), 'code' => (int) $exception->getCode(), 'file' => $exception->getFile() . ':' . $exception->getLine()];
+        if ($this->exceptionTraceAsString === \true) {
             $formattedException['trace'] = $exception->getTraceAsString();
         } else {
             $formattedException['trace'] = $exception->getTrace();
         }
-
         return $this->formatArray($formattedException, $nestingLevel);
     }
-
     protected function formatDate(\DateTimeInterface $value, int $nestingLevel): UTCDateTime
     {
-        return new UTCDateTime((int) floor(((float) $value->format('U.u')) * 1000));
+        return new UTCDateTime((int) floor((float) $value->format('U.u') * 1000));
     }
 }

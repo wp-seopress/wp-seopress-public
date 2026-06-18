@@ -121,7 +121,7 @@ function seopress_block_faq_render_frontend( $attributes ) {
 						<div id="wpseopress-faq-title-<?php echo $i; ?>" class="wpseopress-wrap-faq-question">
 							<button class="wpseopress-accordion-button" type="button" aria-expanded="false" aria-controls="wpseopress-faq-answer-<?php echo $i; ?>">
 					<?php } ?>
-					<?php echo $title_tag . $faq['question'] . $title_close_tag; ?>
+					<?php echo $title_tag . wp_kses_post( $faq['question'] ) . $title_close_tag; ?>
 					<?php if ( $accordion ) { ?>
 							</button>
 						</div>
@@ -138,7 +138,7 @@ function seopress_block_faq_render_frontend( $attributes ) {
 							</div>
 						<?php endif; ?>
 					<?php if ( ! empty( $faq['answer'] ) ) : ?>
-							<p class="wpseopress-faq-answer-desc"><?php echo $faq['answer']; ?></p>
+							<p class="wpseopress-faq-answer-desc"><?php echo wp_kses_post( $faq['answer'] ); ?></p>
 						<?php endif; ?>
 					</div>
 				<?php

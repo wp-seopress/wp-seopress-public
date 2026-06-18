@@ -32,12 +32,19 @@ class ContentStructure {
 
 		// Restrict the scan to the main content area when the theme exposes
 		// one, so headings from the header/footer/sidebar don't pollute the
-		// hierarchy analysis. Fall back to the whole document otherwise.
+		// hierarchy analysis.
+		//
+		// We only adopt a scope that actually contains subheadings (h2-h6).
+		// Some themes and page builders expose a <main>/<article>/[role=main]
+		// wrapper that does not hold the article body, which previously made
+		// the scan report zero headings even though the page was full of them.
+		// When no scoped container holds subheadings, fall back to the whole
+		// document so the outline is never falsely empty.
 		$scopes = array( '//main', '//article', '//*[@role="main"]' );
 		$prefix = '';
 		foreach ( $scopes as $scope ) {
-			$nodes = $xpath->query( $scope );
-			if ( $nodes && $nodes->length > 0 ) {
+			$probe = $xpath->query( $scope . '//h2|' . $scope . '//h3|' . $scope . '//h4|' . $scope . '//h5|' . $scope . '//h6' );
+			if ( $probe && $probe->length > 0 ) {
 				$prefix = $scope;
 				break;
 			}

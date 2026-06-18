@@ -16,16 +16,30 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 function seopress_do_real_preview() {
 	check_ajax_referer( 'seopress_real_preview_nonce', '_ajax_nonce', true );
 
-	if ( ! current_user_can( 'edit_posts' ) || ! is_admin() ) {
+	if ( ! is_admin() || ! isset( $_GET['post_id'] ) ) {
 		return;
 	}
 
-	if ( ! isset( $_GET['post_id'] ) ) {
+	$id      = absint( $_GET['post_id'] );
+	$taxname = isset( $_GET['tax_name'] ) ? sanitize_key( $_GET['tax_name'] ) : null;
+
+	if ( ! $id ) {
 		return;
 	}
 
-	$id      = $_GET['post_id'];
-	$taxname = isset( $_GET['tax_name'] ) ? $_GET['tax_name'] : null;
+	// Object-level capability check. The generic edit_posts cap is not enough:
+	// the caller must be allowed to edit the specific object being analysed,
+	// otherwise a low-privileged user could mutate analysis metadata for posts
+	// or terms they do not own. For a taxonomy preview, $id is a term ID, so we
+	// gate on the taxonomy's own edit_terms capability instead.
+	if ( ! empty( $taxname ) ) {
+		$taxonomy = get_taxonomy( $taxname );
+		if ( ! $taxonomy || ! current_user_can( $taxonomy->cap->edit_terms ) ) {
+			return;
+		}
+	} elseif ( ! current_user_can( 'edit_post', $id ) ) {
+		return;
+	}
 
 	if ( 'yes' === get_post_meta( $id, '_seopress_redirections_enabled', true ) ) {
 		$data['title'] = __( 'A redirect is active for this URL. Turn it off to get the Google preview and content analysis.', 'wp-seopress' );

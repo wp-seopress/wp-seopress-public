@@ -15,20 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-namespace Google\Auth;
+namespace SEOPress\Vendor\Google\Auth;
 
 use Exception;
-use Google\Auth\HttpHandler\HttpClientCache;
-use Google\Auth\HttpHandler\HttpHandlerFactory;
-
+use SEOPress\Vendor\Google\Auth\HttpHandler\HttpClientCache;
+use SEOPress\Vendor\Google\Auth\HttpHandler\HttpHandlerFactory;
 trait IamSignerTrait
 {
     /**
      * @var Iam|null
      */
     private $iam;
-
     /**
      * Sign a string using the default service account private key.
      *
@@ -45,28 +42,20 @@ trait IamSignerTrait
      * @return string
      * @throws Exception
      */
-    public function signBlob($stringToSign, $forceOpenSsl = false, $accessToken = null)
+    public function signBlob($stringToSign, $forceOpenSsl = \false, $accessToken = null)
     {
         $httpHandler = HttpHandlerFactory::build(HttpClientCache::getHttpClient());
-
         // Providing a signer is useful for testing, but it's undocumented
         // because it's not something a user would generally need to do.
         $signer = $this->iam;
         if (!$signer) {
-            $signer = $this instanceof GetUniverseDomainInterface
-                ? new Iam($httpHandler, $this->getUniverseDomain())
-                : new Iam($httpHandler);
+            $signer = $this instanceof GetUniverseDomainInterface ? new Iam($httpHandler, $this->getUniverseDomain()) : new Iam($httpHandler);
         }
-
         $email = $this->getClientName($httpHandler);
-
         if (is_null($accessToken)) {
             $previousToken = $this->getLastReceivedToken();
-            $accessToken = $previousToken
-                ? $previousToken['access_token']
-                : $this->fetchAuthToken($httpHandler)['access_token'];
+            $accessToken = $previousToken ? $previousToken['access_token'] : $this->fetchAuthToken($httpHandler)['access_token'];
         }
-
         return $signer->signBlob($email, $accessToken, $stringToSign);
     }
 }

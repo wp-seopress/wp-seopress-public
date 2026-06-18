@@ -1,6 +1,6 @@
 <?php
 
-namespace GuzzleHttp\Cookie;
+namespace SEOPress\Vendor\GuzzleHttp\Cookie;
 
 /**
  * Persists cookies in the client session
@@ -11,12 +11,10 @@ class SessionCookieJar extends CookieJar
      * @var string session key
      */
     private $sessionKey;
-
     /**
      * @var bool Control whether to persist session cookies or not.
      */
     private $storeSessionCookies;
-
     /**
      * Create a new SessionCookieJar object
      *
@@ -25,14 +23,13 @@ class SessionCookieJar extends CookieJar
      * @param bool   $storeSessionCookies Set to true to store session cookies
      *                                    in the cookie jar.
      */
-    public function __construct(string $sessionKey, bool $storeSessionCookies = false)
+    public function __construct(string $sessionKey, bool $storeSessionCookies = \false)
     {
         parent::__construct();
         $this->sessionKey = $sessionKey;
         $this->storeSessionCookies = $storeSessionCookies;
         $this->load();
     }
-
     /**
      * Saves cookies to session when shutting down
      */
@@ -40,7 +37,6 @@ class SessionCookieJar extends CookieJar
     {
         $this->save();
     }
-
     /**
      * Save cookies to the client session
      */
@@ -53,15 +49,12 @@ class SessionCookieJar extends CookieJar
                 $json[] = $cookie->toArray();
             }
         }
-
         $json = \json_encode($json);
-        if (false === $json) {
+        if (\false === $json) {
             throw new \RuntimeException('Unable to encode cookie data');
         }
-
         $_SESSION[$this->sessionKey] = $json;
     }
-
     /**
      * Load the contents of the client session into the data array
      */
@@ -70,19 +63,16 @@ class SessionCookieJar extends CookieJar
         if (!isset($_SESSION[$this->sessionKey])) {
             return;
         }
-
         $json = $_SESSION[$this->sessionKey];
         if (!\is_string($json)) {
             throw new \RuntimeException('Invalid cookie data');
         }
-
-        $data = \json_decode($json, true);
+        $data = \json_decode($json, \true);
         if (\is_array($data)) {
             foreach ($data as $cookie) {
                 if (!\is_array($cookie)) {
                     throw new \RuntimeException('Invalid cookie data');
                 }
-
                 $this->setCookie(new SetCookie($cookie));
             }
         } elseif (\is_scalar($data) && \strlen((string) $data)) {

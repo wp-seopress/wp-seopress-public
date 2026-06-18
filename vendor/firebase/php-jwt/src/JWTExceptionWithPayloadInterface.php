@@ -1,5 +1,6 @@
 <?php
-namespace Firebase\JWT;
+
+namespace SEOPress\Vendor\Firebase\JWT;
 
 interface JWTExceptionWithPayloadInterface
 {
@@ -9,7 +10,6 @@ interface JWTExceptionWithPayloadInterface
      * @return object
      */
     public function getPayload(): object;
-
     /**
      * Get the payload that caused this exception.
      *

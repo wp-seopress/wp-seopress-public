@@ -10,11 +10,9 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  */
+namespace SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
 
-namespace phpseclib3\File\ASN1\Maps;
-
-use phpseclib3\File\ASN1;
-
+use SEOPress\Vendor\phpseclib3\File\ASN1;
 /**
  * BuiltInDomainDefinedAttributes
  *
@@ -25,7 +23,8 @@ abstract class BuiltInDomainDefinedAttributes
     const MAP = [
         'type' => ASN1::TYPE_SEQUENCE,
         'min' => 1,
-        'max' => 4, // ub-domain-defined-attributes
-        'children' => BuiltInDomainDefinedAttribute::MAP
+        'max' => 4,
+        // ub-domain-defined-attributes
+        'children' => BuiltInDomainDefinedAttribute::MAP,
     ];
 }

@@ -1,10 +1,9 @@
 <?php
 
-namespace GuzzleHttp\Cookie;
+namespace SEOPress\Vendor\GuzzleHttp\Cookie;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-
+use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
+use SEOPress\Vendor\Psr\Http\Message\ResponseInterface;
 /**
  * Stores HTTP cookies.
  *
@@ -30,7 +29,6 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
      * @return RequestInterface returns the modified request.
      */
     public function withCookieHeader(RequestInterface $request): RequestInterface;
-
     /**
      * Extract cookies from an HTTP response and store them in the CookieJar.
      *
@@ -38,7 +36,6 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
      * @param ResponseInterface $response Response that was received
      */
     public function extractCookies(RequestInterface $request, ResponseInterface $response): void;
-
     /**
      * Sets a cookie in the cookie jar.
      *
@@ -47,7 +44,6 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
      * @return bool Returns true on success or false on failure
      */
     public function setCookie(SetCookie $cookie): bool;
-
     /**
      * Remove cookies currently held in the cookie jar.
      *
@@ -63,7 +59,6 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
      * @param string|null $name   Clears cookies matching a domain, path, and name
      */
     public function clear(?string $domain = null, ?string $path = null, ?string $name = null): void;
-
     /**
      * Discard all sessions cookies.
      *
@@ -72,7 +67,6 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
      * to RFC 2965.
      */
     public function clearSessionCookies(): void;
-
     /**
      * Converts the cookie jar to an array.
      */
