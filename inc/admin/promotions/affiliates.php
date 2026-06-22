@@ -88,6 +88,7 @@ function seopress_render_affiliates( $context = '' ) {
 
 					<a href="<?php echo esc_url( $affiliate['url'] ); ?>"
 					   class="btn btnSecondary affiliate-cta"
+					   data-promo-id="<?php echo esc_attr( isset( $affiliate['id'] ) ? $affiliate['id'] : '' ); ?>"
 					   target="_blank"
 					   rel="noopener noreferrer">
 						<?php esc_html_e( 'Learn more', 'wp-seopress' ); ?>
@@ -250,6 +251,7 @@ function seopress_render_affiliate_inline( $affiliate_id ) {
 		<?php endif; ?>
 		<a href="<?php echo esc_url( $affiliate['url'] ); ?>"
 		   class="affiliate-link"
+		   data-promo-id="<?php echo esc_attr( isset( $affiliate['id'] ) ? $affiliate['id'] : '' ); ?>"
 		   target="_blank"
 		   rel="noopener noreferrer">
 			<?php esc_html_e( 'Learn more', 'wp-seopress' ); ?>

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-18T12:20:18+00:00\n"
+"POT-Creation-Date: 2026-06-22T14:33:11+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-seopress\n"
@@ -1258,8 +1258,8 @@ msgstr ""
 msgid "Recommended Partners"
 msgstr ""
 
-#: inc/admin/promotions/affiliates.php:93
-#: inc/admin/promotions/affiliates.php:255
+#: inc/admin/promotions/affiliates.php:94
+#: inc/admin/promotions/affiliates.php:257
 #: inc/admin/promotions/contextual-ads.php:50
 #: inc/admin/promotions/contextual-ads.php:73
 #: inc/admin/promotions/contextual-ads.php:121
@@ -1282,7 +1282,7 @@ msgid "Learn more"
 msgstr ""
 
 #. translators: %s: Partner name
-#: inc/admin/promotions/affiliates.php:245
+#: inc/admin/promotions/affiliates.php:246
 msgid "Recommended: %s"
 msgstr ""
 
@@ -1742,7 +1742,7 @@ msgstr ""
 msgid "URL rewriting is NOT enabled on your site. Select a permalink structure that is optimized for SEO (NOT Plain)."
 msgstr ""
 
-#: seopress-functions.php:764
+#: seopress-functions.php:769
 #: app/react/admin/settings/components/SettingsLayout/SaveBar.jsx:68
 #: app/react/admin/settings/tabs/instant-indexing/GeneralTab.jsx:234
 #: public/admin/settings.js:1
@@ -1750,17 +1750,17 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: seopress.php:476
+#: seopress.php:507
 #: app/react/admin/wizard/steps/ImportMetadataStep.jsx:233
 #: public/admin/wizard/index.js:14
 msgid "Migration completed!"
 msgstr ""
 
-#: seopress.php:477
+#: seopress.php:508
 msgid "Export completed!"
 msgstr ""
 
-#: seopress.php:663
+#: seopress.php:694
 #: src/Actions/Admin/ModuleSettings.php:630
 #: app/react/admin/dashboard/sections/FeaturesList.jsx:280
 #: app/react/admin/settings/pages/InstantIndexingPage.jsx:11
@@ -1772,15 +1772,15 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: seopress.php:664
+#: seopress.php:695
 msgid "Configuration Wizard"
 msgstr ""
 
-#: seopress.php:665
+#: seopress.php:696
 msgid "Docs"
 msgstr ""
 
-#: seopress.php:669
+#: seopress.php:700
 msgid "GO PRO!"
 msgstr ""
 

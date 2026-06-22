@@ -33,6 +33,9 @@
 			// Track CTA clicks.
 			$(document).on('click', '.promo-cta', this.handleCtaClick);
 
+			// Track affiliate partner link clicks (their own markup).
+			$(document).on('click', '.affiliate-cta, .affiliate-link', this.handleAffiliateClick);
+
 			// Toggle all promotions.
 			$(document).on('change', '#seopress-toggle-promotions', this.handleToggleAll);
 
@@ -123,6 +126,26 @@
 			var $link = $(this);
 			var $promo = $link.closest('.seopress-promo-banner, .seopress-promo-card, .seopress-metabox-promo-banner, .seopress-contextual-promo');
 			var promoId = $promo.data('promo-id');
+
+			if (!promoId) {
+				return; // Let click proceed normally.
+			}
+
+			// Track click stat (fire and forget - don't block navigation).
+			SEOPressPromotions.trackStat(promoId, 'click');
+		},
+
+		/**
+		 * Handle affiliate partner link click - track before navigating.
+		 *
+		 * Affiliate cards use their own markup (.affiliate-cta / .affiliate-link
+		 * with the promo id on the link itself), so they are tracked here instead
+		 * of the contextual promo CTA handler.
+		 *
+		 * @param {Event} e Click event.
+		 */
+		handleAffiliateClick: function(e) {
+			var promoId = $(this).data('promo-id');
 
 			if (!promoId) {
 				return; // Let click proceed normally.

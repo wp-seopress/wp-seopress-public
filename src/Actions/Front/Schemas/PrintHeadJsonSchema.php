@@ -47,7 +47,17 @@ class PrintHeadJsonSchema implements ExecuteHooksFrontend {
 			return;
 		}
 
-		if ( 'none' === seopress_get_service( 'SocialOption' )->getSocialKnowledgeType() ) {
+		/**
+		 * Check if a Knowledge Graph type is set.
+		 *
+		 * The settings page stores an empty string for "None", while the setup
+		 * wizard and older installs use the literal "none". Treat both (and an
+		 * unset option) as "feature disabled" so no schema is printed.
+		 *
+		 * @since 5.3
+		 */
+		$knowledge_type = seopress_get_service( 'SocialOption' )->getSocialKnowledgeType();
+		if ( empty( $knowledge_type ) || 'none' === $knowledge_type ) {
 			return;
 		}
 

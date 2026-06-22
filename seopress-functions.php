@@ -683,12 +683,17 @@ function seopress_remove_other_notices() {
 		remove_all_actions( 'user_admin_notices' );
 		remove_all_actions( 'all_admin_notices' );
 		add_action( 'admin_notices', 'seopress_admin_notices' );
-		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
+		// Guard on the constant, not only is_plugin_active(): a plugin can be
+		// listed as active while its main file did not finish loading (it
+		// crashed on init, or the active_plugins state is stale within the
+		// request), in which case its version constant is undefined and
+		// version_compare() would fatal on PHP 8+.
+		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) && defined( 'SEOPRESS_PRO_VERSION' ) ) {
 			if ( version_compare( SEOPRESS_PRO_VERSION, '6.4', '>=' ) ) {
 				add_action( 'admin_notices', 'seopress_pro_admin_notices' );
 			}
 		}
-		if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) ) {
+		if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) && defined( 'SEOPRESS_INSIGHTS_VERSION' ) ) {
 			if ( version_compare( SEOPRESS_INSIGHTS_VERSION, '1.8.1', '>=' ) ) {
 				add_action( 'admin_notices', 'seopress_insights_notices' );
 			}

@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 10.0
+Stable tag: 10.0.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -312,6 +312,15 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 10.0.1 =
+* INFO Performance: the admin stylesheet now loads only on the screens that actually use it (SEOPress pages, post & term editors and list tables, dashboard widgets) instead of on every wp-admin page (Free and PRO)
+* FIX Schemas: selecting "None" as the Knowledge Graph type no longer outputs an Organization schema on the homepage
+* FIX [PRO] Video: render-time YouTube auto-fill is now disabled by default to stop exhausting the shared YouTube Data API quota; the Video schema falls back to manual entry and the Video sitemap (which fetches at save time) is unaffected
+* FIX [PRO] Video sitemap: "Scan all posts" now processes every post in each batch instead of only the first one
+* FIX [PRO] Google Analytics: GA4 dashboards no longer return blank or all-zero stats
+* FIX [PRO] Breadcrumbs: custom HTML in the homepage label (SVG icons, spans)
+* FIX [PRO] Redirections: the "All redirections" count in the categories sidebar now matches the number of items in the list
+
 = 10.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-10/">Read the blog post update</a> =
 * NEW [PRO] AI Assistant: a brand-new in-editor assistant available in the Block Editor — chat, quick actions, generate full articles with /write, copy results to the clipboard, and keep persistent conversations 🎉
 * NEW [PRO] SEOPress AI provider: purchase tokens from seopress.org and quickly get started using AI on your WordPress site - no-brainer! 🎉

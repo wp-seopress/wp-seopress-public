@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 10.0
+ * Version: 10.0.1
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '10.0' );
+define( 'SEOPRESS_VERSION', '10.0.1' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -310,11 +310,42 @@ add_filter( 'seopress_dyn_variables_fn', 'seopress_dyn_variables_init', 10, 3 );
 function seopress_add_admin_options_scripts( $hook ) { // phpcs:ignore
 	$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	// Register stylesheets. Depends on wp-components so that --wp-admin-theme-color
-	// (and its rgb / darker variants) are always available, even on PHP-rendered
-	// pages that don't load the React shell (wizard, dashboard, term metaboxes).
+	// Register the admin stylesheet. Depends on wp-components so that
+	// --wp-admin-theme-color (and its rgb / darker variants) are available
+	// wherever it loads, including PHP-rendered pages that don't load the
+	// React shell (wizard, term metaboxes).
 	wp_register_style( 'seopress-admin', plugins_url( 'assets/css/seopress' . $prefix . '.css', __FILE__ ), array( 'wp-components' ), SEOPRESS_VERSION );
-	wp_enqueue_style( 'seopress-admin' );
+
+	// Scope the admin stylesheet to the screens that actually use it instead of
+	// loading it on every wp-admin page: SEOPress's own pages (free + Pro all
+	// carry "seopress" in their page slug), the SEO metabox / primary category /
+	// keyword inputs on the post & term editors, the SEO columns, quick-edit and
+	// bulk-action notices on the post/term list tables, and the WP Dashboard
+	// (the Pro Google Analytics / Matomo widgets reuse this file's
+	// .seopress-summary-item-data and .wrap-chart-stat rules). It is not needed
+	// on unrelated screens (Plugins, Users, Settings, other plugins' pages…).
+	$current_page     = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$is_seopress_page = '' !== $current_page && false !== strpos( $current_page, 'seopress' );
+	$css_hooks        = array( 'index.php', 'post.php', 'post-new.php', 'edit.php', 'edit-tags.php', 'term.php' );
+
+	/**
+	 * Filter whether the SEOPress admin stylesheet should load on the current screen.
+	 * Lets add-ons force-load it on extra screens they render SEOPress markup on.
+	 *
+	 * @param bool   $needs_style  Whether to enqueue the stylesheet.
+	 * @param string $hook         Current admin page hook suffix.
+	 * @param string $current_page The `page` query var, if any.
+	 */
+	$needs_admin_style = (bool) apply_filters(
+		'seopress_enqueue_admin_style',
+		$is_seopress_page || in_array( $hook, $css_hooks, true ),
+		$hook,
+		$current_page
+	);
+
+	if ( $needs_admin_style ) {
+		wp_enqueue_style( 'seopress-admin' );
+	}
 
 	// Early return if no page query var.
 	if ( ! isset( $_GET['page'] ) ) {
